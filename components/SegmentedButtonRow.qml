@@ -16,7 +16,7 @@ Item {
 	property alias model: buttonRepeater.model
 	property int currentIndex
 
-	signal buttonClicked(buttonIndex: int)
+	signal buttonClicked(int buttonIndex)
 
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
@@ -47,17 +47,11 @@ Item {
 
 					width: root.width / buttonRepeater.count
 					height: parent ? parent.height : 0
-					color: modelData.enabled === false && model.index !== root.currentIndex
-						   ? Theme.color_background_disabled
-						   : ((mouseArea.pressed || model.index === root.currentIndex)
-							  ? Theme.color_ok
-							  : Theme.color_darkOk)
+					color: modelData.enabled === false && model.index !== root.currentIndex ? Theme.color_background_disabled : ((mouseArea.pressed || model.index === root.currentIndex) ? Theme.color_ok : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
 					border.color: (modelData.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
 					radius: Theme.geometry_button_radius
-					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
-							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
-							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
+					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left : model.index === (buttonRepeater.count - 1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right : VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
 				}
 				contentItem: Label {
 					anchors.centerIn: mouseArea
@@ -65,18 +59,14 @@ Item {
 					horizontalAlignment: Text.AlignHCenter
 					verticalAlignment: Text.AlignVCenter
 					x: Theme.geometry_tabBar_horizontalMargin
-					width: parent.width - 2*x
+					width: parent.width - 2 * x
 					elide: Text.ElideRight
 					text: modelData.value
-					color: modelData.enabled === false && model.index !== root.currentIndex
-						   ? Theme.color_font_disabled
-						   : (mouseArea.pressed || model.index === root.currentIndex
-							  ? Theme.color_button_down_text
-							  : Theme.color_font_primary)
+					color: modelData.enabled === false && model.index !== root.currentIndex ? Theme.color_font_disabled : (mouseArea.pressed || model.index === root.currentIndex ? Theme.color_button_down_text : Theme.color_font_primary)
 				}
 				onClicked: {
-					root.buttonClicked(model.index)
-					root.currentIndex = model.index
+					root.buttonClicked(model.index);
+					root.currentIndex = model.index;
 				}
 			}
 		}

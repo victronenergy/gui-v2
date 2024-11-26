@@ -24,8 +24,5 @@ Page {
 	// On startup, the Settings page incorrectly has an 'x' value of 0 for about half a second (Qt bug).
 	// If we use 'visible: Global.mainView && Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)', we
 	// briefly see the Settings page displayed on top of the Brief page.
-	visible: Global.mainView &&
-			 ((view && view.moving && Global.mainView.swipeView)
-			 ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
-			 : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
+	visible: Global.mainView && ((view && view.moving && Global.mainView.swipeView) ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin) : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
 }

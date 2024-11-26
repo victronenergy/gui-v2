@@ -18,14 +18,14 @@ Item {
 
 	function _numberOfDigits(n) {
 		if (n < 1) {
-			return 0
+			return 0;
 		}
-		let count = 0
+		let count = 0;
 		while (n !== 0) {
-			n = Math.floor(n / 10)
-			count += 1
+			n = Math.floor(n / 10);
+			count += 1;
 		}
-		return count
+		return count;
 	}
 
 	function _fitChartToMaxYield() {
@@ -35,45 +35,43 @@ Item {
 
 		// maxForDigit is the yield rounded up to the digit for the nearest place value.
 		// E.g. maximumYield=0.7 -> maxForDigit=1, 8.5 -> 10, 23.8 -> 100, 175.5 -> 1000
-		let maxForDigit = Math.pow(10, _numberOfDigits(yieldModel.maximumYield))
-		let tickCount = 0
-		let maxTickValue = 0
-
+		let maxForDigit = Math.pow(10, _numberOfDigits(yieldModel.maximumYield));
+		let tickCount = 0;
+		let maxTickValue = 0;
 		if (yieldModel.maximumYield > 1) {
 			if (yieldModel.maximumYield < maxForDigit * 0.15) {
 				// ticks = [1.5, 1, 0.5, 0] or equivalent.
-				maxTickValue = maxForDigit * 0.15
-				tickCount = 4
+				maxTickValue = maxForDigit * 0.15;
+				tickCount = 4;
 			} else if (yieldModel.maximumYield < maxForDigit * 0.25) {
 				// ticks = [2.5, 2, 1.5, 1, 0.5, 0] or equivalent.
-				maxTickValue = maxForDigit * 0.25
-				tickCount = 6
+				maxTickValue = maxForDigit * 0.25;
+				tickCount = 6;
 			} else if (yieldModel.maximumYield < maxForDigit * 0.5) {
 				// ticks = [5, 4, 3, 2, 1, 0] or equivalent.
-				maxTickValue = maxForDigit * 0.5
-				tickCount = 6
+				maxTickValue = maxForDigit * 0.5;
+				tickCount = 6;
 			} else if (yieldModel.maximumYield < maxForDigit * 0.75) {
 				// ticks = [7.5, 5, 2.5, 0] or equivalent.
-				maxTickValue = maxForDigit * 0.75
-				tickCount = 4
+				maxTickValue = maxForDigit * 0.75;
+				tickCount = 4;
 			}
 		}
 		if (tickCount === 0) {
 			// ticks = [10, 7.5, 5, 2.5, 0] or equivalent.
-			maxTickValue = maxForDigit
-			tickCount = 5
+			maxTickValue = maxForDigit;
+			tickCount = 5;
 		}
-
-		_maxTickValue = maxTickValue
-		_tickCount = tickCount
+		_maxTickValue = maxTickValue;
+		_tickCount = tickCount;
 
 		// Now update the bar heights. Do this imperatively instead of via a height binding in the
 		// bar, so that the bar height is only changed after all relevant values are updated, else
 		// the bar may jump in height multiple times before settling in place.
 		for (let i = 0; i < barRepeater.count; ++i) {
-			const bar = barRepeater.itemAt(i)
+			const bar = barRepeater.itemAt(i);
 			if (bar) {
-				bar.updateHeight()
+				bar.updateHeight();
 			}
 		}
 	}
@@ -141,9 +139,7 @@ Item {
 					}
 					width: Theme.geometry_solarChart_tickLabel_width
 					horizontalAlignment: Text.AlignRight
-					text: root._maxTickValue === 0
-						  ? (model.index === gridLinesRepeater.count - 1 ? "0" : "")
-						  : root._maxTickValue - (modelData * (root._maxTickValue / (root._tickCount - 1)))
+					text: root._maxTickValue === 0 ? (model.index === gridLinesRepeater.count - 1 ? "0" : "") : root._maxTickValue - (modelData * (root._maxTickValue / (root._tickCount - 1)))
 					color: Theme.color_font_secondary
 				}
 			}
@@ -162,9 +158,7 @@ Item {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry_solarChart_bottomMargin
 		}
-		spacing: barRepeater.count >= 30 ? Theme.geometry_solarChart_bar_spacing_thirtyDays
-			   : barRepeater.count >= 14 ? Theme.geometry_solarChart_bar_spacing_fourteenDays
-			   : Theme.geometry_solarChart_bar_spacing_sevenDays
+		spacing: barRepeater.count >= 30 ? Theme.geometry_solarChart_bar_spacing_thirtyDays : barRepeater.count >= 14 ? Theme.geometry_solarChart_bar_spacing_fourteenDays : Theme.geometry_solarChart_bar_spacing_sevenDays
 
 		Repeater {
 			id: barRepeater
@@ -183,15 +177,16 @@ Item {
 				property alias coloredBar: coloredBar
 
 				function updateHeight() {
-					coloredBar.height = (model.yieldKwh || 0) * (gridLinesColumn.height / root._maxTickValue)
+					coloredBar.height = (model.yieldKwh || 0) * (gridLinesColumn.height / root._maxTickValue);
 				}
 
 				width: (barRow.width - (barRow.spacing * (barRepeater.count - 1))) / barRepeater.count
 				height: parent.height
 
 				onClicked: {
-					Global.dialogLayer.open(dailyHistoryDialogComponent,
-						{day:  yieldModel.dayRange[0] + model.index})
+					Global.dialogLayer.open(dailyHistoryDialogComponent, {
+							day: yieldModel.dayRange[0] + model.index
+						});
 				}
 
 				Rectangle {
@@ -224,13 +219,13 @@ Item {
 			solarHistory: root.solarHistory
 			minimumDay: yieldModel.dayRange[0]
 			maximumDay: yieldModel.dayRange[1] - 1
-			highlightBarForDay: function(day) {
-				const container = barRepeater.itemAt(day - yieldModel.dayRange[0])
+			highlightBarForDay: function (day) {
+				const container = barRepeater.itemAt(day - yieldModel.dayRange[0]);
 				if (!container) {
-					console.warn("highlightBarSource() failed, no repeater item at day:", day, "dayRange:", root.dayRange)
-					return null
+					console.warn("highlightBarSource() failed, no repeater item at day:", day, "dayRange:", root.dayRange);
+					return null;
 				}
-				return container.coloredBar
+				return container.coloredBar;
 			}
 		}
 	}

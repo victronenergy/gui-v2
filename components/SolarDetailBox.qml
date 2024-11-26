@@ -21,9 +21,9 @@ Rectangle {
 
 	function _formatTime(minutes) {
 		if (isNaN(minutes)) {
-			return "--"
+			return "--";
 		} else {
-			return Math.floor(minutes / 60) + ":" + Utils.pad(minutes % 60, 2)
+			return Math.floor(minutes / 60) + ":" + Utils.pad(minutes % 60, 2);
 		}
 	}
 
@@ -52,26 +52,22 @@ Rectangle {
 			width: parent.width
 
 			Repeater {
-				model: [
-					{
+				model: [{
 						//% "Min Voltage"
 						"title": qsTrId("charger_history_box_min_voltage"),
 						"value": root.minBatteryVoltage,
 						"unit": VenusOS.Units_Volt_DC
-					},
-					{
+					}, {
 						//% "Max Voltage"
 						"title": qsTrId("charger_history_box_max_voltage"),
 						"value": root.maxBatteryVoltage,
 						"unit": VenusOS.Units_Volt_DC
-					},
-					{
+					}, {
 						//% "Max Current"
 						"title": qsTrId("charger_history_box_max_current"),
 						"value": root.maxBatteryCurrent,
 						"unit": VenusOS.Units_Amp
-					},
-				]
+					},]
 				delegate: Column {
 					width: parent.width / 3
 
@@ -129,26 +125,22 @@ Rectangle {
 			width: parent.width
 
 			Repeater {
-				model: [
-					{
+				model: [{
 						//: Battery: time spent in 'Bulk' mode
 						//% "Bulk"
 						"title": qsTrId("charger_history_box_bulk"),
 						"text": root._formatTime(root.timeInBulk)
-					},
-					{
+					}, {
 						//: Battery: time spent in 'Absorption' mode
 						//% "Abs"
 						"title": qsTrId("charger_history_box_abs"),
 						"text": root._formatTime(root.timeInAbsorption)
-					},
-					{
+					}, {
 						//: Battery: time spent in 'Float' mode
 						//% "Float"
 						"title": qsTrId("charger_history_box_float"),
 						"text": root._formatTime(root.timeInFloat)
-					},
-				]
+					},]
 				delegate: Column {
 					width: parent.width / 3
 

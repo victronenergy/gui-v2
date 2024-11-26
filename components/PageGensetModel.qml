@@ -17,9 +17,7 @@ ObjectModel {
 	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
 	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
 	// (or GensetService=com.victronenergy.dcgenset.* if this is a dcgenset)
-	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
-			? generatorWithGensetService
-			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
+	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource ? generatorWithGensetService : BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
 	property string generatorWithGensetService
 
 	property Instantiator generatorObjects: Instantiator {
@@ -27,18 +25,15 @@ ObjectModel {
 		delegate: VeQuickItem {
 			uid: model.device.serviceUid + "/GensetService"
 			onValueChanged: {
-				if ( (isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset."))
-						|| (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset.")) ) {
-						root.generatorWithGensetService = model.device.serviceUid
+				if ((isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset.")) || (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset."))) {
+					root.generatorWithGensetService = model.device.serviceUid;
 				}
 			}
 		}
 	}
 
 	readonly property bool dcGenset: serviceType === "dcgenset"
-	readonly property int nrOfPhases: phases.isValid ? phases.value
-												   : dcGenset ? 0
-															  : 3
+	readonly property int nrOfPhases: phases.isValid ? phases.value : dcGenset ? 0 : 3
 	readonly property VeQuickItem phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
@@ -117,14 +112,14 @@ ObjectModel {
 		//% "Genset error codes"
 		text: qsTrId("ac-in-genset_error")
 		secondaryText: {
-			let errorCodes = ""
+			let errorCodes = "";
 			for (let i = 0; i < errorModel.count; ++i) {
-				const errorCode = errorModel.get(i).errorCode
+				const errorCode = errorModel.get(i).errorCode;
 				if (errorCode) {
-					errorCodes += (errorCodes.length ? " " : "") + errorCode
+					errorCodes += (errorCodes.length ? " " : "") + errorCode;
 				}
 			}
-			return errorCodes.length ? errorCodes : CommonWords.none_errors
+			return errorCodes.length ? errorCodes : CommonWords.none_errors;
 		}
 
 		allowed: defaultAllowed && _dataItem.isValid
@@ -153,16 +148,20 @@ ObjectModel {
 
 			model: root.nrOfPhases
 			delegate: ListQuantityGroup {
-				text: phaseRepeater.count === 1
-						//% "AC"
-					  ? qsTrId("ac-in-genset_ac")
-					  : CommonWords.ac_phase_x.arg(model.index + 1)
+				text: phaseRepeater.count === 1 ?
+				//% "AC"
+				qsTrId("ac-in-genset_ac") : CommonWords.ac_phase_x.arg(model.index + 1)
 
-				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
-				]
+				textModel: [{
+						value: phaseVoltage.value,
+						unit: VenusOS.Units_Volt_AC
+					}, {
+						value: phaseCurrent.value,
+						unit: VenusOS.Units_Amp
+					}, {
+						value: phasePower.value,
+						unit: VenusOS.Units_Watt
+					},]
 
 				VeQuickItem {
 					id: phaseVoltage
@@ -196,7 +195,9 @@ ObjectModel {
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
-			Global.pageManager.pushPage(engineComponent, {"title": text})
+			Global.pageManager.pushPage(engineComponent, {
+					"title": text
+				});
 		}
 
 		Component {
@@ -288,20 +289,21 @@ ObjectModel {
 	ListNavigationItem {
 		//% "Run time and service"
 		text: qsTrId("page_settings_generator_run_time_and_service")
-		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-											   {
-												   title: text,
-												   settingsBindPrefix: root.settingsBindPrefix,
-												   startStopBindPrefix: root.startStopBindPrefix,
-												   gensetBindPrefix: root.bindPrefix
-											   })
+		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml", {
+				title: text,
+				settingsBindPrefix: root.settingsBindPrefix,
+				startStopBindPrefix: root.startStopBindPrefix,
+				gensetBindPrefix: root.bindPrefix
+			})
 	}
 
 	ListNavigationItem {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
 		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
-		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+		onClicked: Global.pageManager.pushPage(settingsComponent, {
+				"title": text
+			})
 
 		VeQuickItem {
 			id: chargeVoltage
@@ -377,19 +379,25 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+	ListNavigationItem {
+		// to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
 		text: CommonWords.settings
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml", {
+					title: text,
+					settingsBindPrefix: root.settingsBindPrefix,
+					startStopBindPrefix: root.startStopBindPrefix
+				});
 		}
 	}
 
 	ListNavigationItem {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml", {
+					"title": text,
+					"bindPrefix": root.bindPrefix
+				});
 		}
 	}
 }

@@ -17,7 +17,7 @@ ShapePath {
 	property alias direction: arc.direction
 	property alias useLargeArc: arc.useLargeArc
 
-	readonly property real _reducedRadius: radius - strokeWidth/2
+	readonly property real _reducedRadius: radius - strokeWidth / 2
 
 	readonly property var _startOffsets: [Math.cos(_startAngleRadians), Math.sin(_startAngleRadians)]
 	readonly property var _endOffsets: [Math.cos(_endAngleRadians), Math.sin(_endAngleRadians)]

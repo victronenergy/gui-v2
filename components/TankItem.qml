@@ -69,14 +69,12 @@ Rectangle {
 			bottomMargin: Theme.geometry_levelsPage_panel_spacing
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: parent.width - 2*Theme.geometry_levelsPage_panel_horizontalMargin
+		width: parent.width - 2 * Theme.geometry_levelsPage_panel_horizontalMargin
 		horizontalAlignment: Text.AlignHCenter
 		fontSizeMode: Text.HorizontalFit
 		font.pixelSize: Theme.font_size_caption
 		color: Theme.color_font_secondary
 		opacity: isNaN(root.totalCapacity) && isNaN(root.totalRemaining) ? 0.0 : 1.0
-		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit,
-										   root.totalCapacity,
-										   root.totalRemaining)
+		text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit, root.totalCapacity, root.totalRemaining)
 	}
 }

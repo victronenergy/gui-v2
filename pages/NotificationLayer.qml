@@ -13,20 +13,24 @@ Item {
 	anchors.bottomMargin: Qt.inputMethod && Qt.inputMethod.visible ? Qt.inputMethod.keyboardRectangle.height : 0
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
-		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
-		toastItemsModel.append(toast)
-		return toast
+		var toast = toaster.createObject(root, {
+				"category": category,
+				"text": text,
+				autoCloseInterval: autoCloseInterval
+			});
+		toastItemsModel.append(toast);
+		return toast;
 	}
 
 	function deleteNotification(toast) {
 		for (let i = 0; i < toastItemsModel.count; ++i) {
 			if (toastItemsModel.get(i) === toast) {
-				toastItemsModel.remove(i, 1)
-				toast.destroy(1000)
-				return true
+				toastItemsModel.remove(i, 1);
+				toast.destroy(1000);
+				return true;
 			}
 		}
-		return false
+		return false;
 	}
 
 	ListView {
@@ -57,5 +61,4 @@ Item {
 			onDismissed: root.deleteNotification(toast)
 		}
 	}
-
 }

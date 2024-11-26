@@ -12,9 +12,9 @@ DcDevice {
 	onValidChanged: {
 		if (!!Global.dcLoads) {
 			if (valid) {
-				Global.dcLoads.model.addDevice(dcLoad)
+				Global.dcLoads.model.addDevice(dcLoad);
 			} else {
-				Global.dcLoads.model.removeDevice(dcLoad.serviceUid)
+				Global.dcLoads.model.removeDevice(dcLoad.serviceUid);
 			}
 		}
 	}

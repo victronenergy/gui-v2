@@ -13,14 +13,14 @@ Item {
 	anchors.fill: parent
 
 	function open(dialogComponent, properties) {
-		currentDialog = dialogComponent.createObject(root, properties)
-		currentDialog.closed.connect(function() {
-			if (currentDialog) {
-				currentDialog.destroy()
-				currentDialog = null
-			}
-		})
-		currentDialog.open()
+		currentDialog = dialogComponent.createObject(root, properties);
+		currentDialog.closed.connect(function () {
+				if (currentDialog) {
+					currentDialog.destroy();
+					currentDialog = null;
+				}
+			});
+		currentDialog.open();
 	}
 
 	Connections {
@@ -31,16 +31,16 @@ Item {
 			// e.g. when an alarm is received, which pops existing
 			// pages on the page stack and opens Notificationgs page.
 			if (currentDialog) {
-				currentDialog.destroy()
-				currentDialog = null
+				currentDialog.destroy();
+				currentDialog = null;
 			}
 		}
 		function onScreenIsBlankedChanged() {
 			// If the screen blanker blanks the screen, we should
 			// close the dialog.
 			if (Global.mainView.screenIsBlanked && currentDialog) {
-				currentDialog.destroy()
-				currentDialog = null
+				currentDialog.destroy();
+				currentDialog = null;
 			}
 		}
 	}
@@ -59,12 +59,13 @@ Item {
 			icon.color: Theme.color_blue
 			Timer {
 				running: true
-				interval: 10*1000
+				interval: 10 * 1000
 				onTriggered: BackendConnection.reloadPage()
 			}
 		}
 	}
 
 	property bool _needPageReload: Global.needPageReload
-	on_NeedPageReloadChanged: if (_needPageReload) open(_firmwareVersionRestartDialog)
+	on_NeedPageReloadChanged: if (_needPageReload)
+		open(_firmwareVersionRestartDialog)
 }

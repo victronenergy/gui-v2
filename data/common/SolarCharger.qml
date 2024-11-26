@@ -11,7 +11,8 @@ Device {
 
 	readonly property int state: _state.isValid ? _state.value : -1
 	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
-	readonly property ListModel trackers: ListModel {}
+	readonly property ListModel trackers: ListModel {
+	}
 	readonly property real power: _totalPower.isValid ? _totalPower.value : NaN
 	readonly property alias history: _history
 
@@ -26,20 +27,20 @@ Device {
 	// For the per-day error history, use dailyHistory(day).errorModel
 	readonly property alias errorModel: _history.errorModel
 
-	signal yieldUpdatedForDay(day: int, yieldKwh: real)
+	signal yieldUpdatedForDay(int day, real yieldKwh)
 
 	function dailyHistory(day) {
-		return _history.dailyHistory(day)
+		return _history.dailyHistory(day);
 	}
 
 	function dailyTrackerHistory(day, trackerIndex) {
-		return _history.dailyTrackerHistory(day, trackerIndex)
+		return _history.dailyTrackerHistory(day, trackerIndex);
 	}
 
 	function trackerName(trackerIndex, format) {
-		const tracker = _trackerObjects.objectAt(trackerIndex)
-		const trackerName = tracker ? tracker.name || "" : ""
-		return Global.solarChargers.formatTrackerName(trackerName, trackerIndex, trackers.count, solarCharger.name, format)
+		const tracker = _trackerObjects.objectAt(trackerIndex);
+		const trackerName = tracker ? tracker.name || "" : "";
+		return Global.solarChargers.formatTrackerName(trackerName, trackerIndex, trackers.count, solarCharger.name, format);
 	}
 
 	//--- internal members below ---
@@ -99,15 +100,12 @@ Device {
 			readonly property string name: _name.value || ""
 
 			readonly property VeQuickItem _voltage: VeQuickItem {
-				uid: solarCharger.trackers.count <= 1
-					 ? solarCharger.serviceUid + "/Pv/V"
-					 : solarCharger.serviceUid + "/Pv/" + model.index + "/V"
+				uid: solarCharger.trackers.count <= 1 ? solarCharger.serviceUid + "/Pv/V" : solarCharger.serviceUid + "/Pv/" + model.index + "/V"
 			}
 
 			readonly property VeQuickItem _power: VeQuickItem {
-				uid: solarCharger.trackers.count === 1
-					 ? ""   // only 1 tracker, use solarCharger.power instead (i.e. same as /Yield/Power)
-					 : solarCharger.serviceUid + "/Pv/" + model.index + "/P"
+				uid: solarCharger.trackers.count === 1 ? ""   // only 1 tracker, use solarCharger.power instead (i.e. same as /Yield/Power)
+				 : solarCharger.serviceUid + "/Pv/" + model.index + "/P"
 			}
 
 			readonly property VeQuickItem _name: VeQuickItem {
@@ -115,23 +113,25 @@ Device {
 			}
 		}
 
-		onObjectAdded: function(index, object) {
-			let insertionIndex = solarCharger.trackers.count
+		onObjectAdded: function (index, object) {
+			let insertionIndex = solarCharger.trackers.count;
 			for (let i = 0; i < solarCharger.trackers.count; ++i) {
-				const sortIndex = solarCharger.trackers.get(i).solarTracker.modelIndex
+				const sortIndex = solarCharger.trackers.get(i).solarTracker.modelIndex;
 				if (index < sortIndex) {
-					insertionIndex = i
-					break
+					insertionIndex = i;
+					break;
 				}
 			}
-			solarCharger.trackers.insert(insertionIndex, {"solarTracker": object})
+			solarCharger.trackers.insert(insertionIndex, {
+					"solarTracker": object
+				});
 		}
 
-		onObjectRemoved: function(index, object) {
+		onObjectRemoved: function (index, object) {
 			for (let i = 0; i < solarCharger.trackers.count; ++i) {
 				if (solarCharger.trackers.get(i).solarTracker.serviceUid === object.serviceUid) {
-					solarCharger.trackers.remove(i)
-					break
+					solarCharger.trackers.remove(i);
+					break;
 				}
 			}
 		}
@@ -140,9 +140,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.solarChargers) {
 			if (valid) {
-				Global.solarChargers.addCharger(solarCharger)
+				Global.solarChargers.addCharger(solarCharger);
 			} else {
-				Global.solarChargers.removeCharger(solarCharger)
+				Global.solarChargers.removeCharger(solarCharger);
 			}
 		}
 	}

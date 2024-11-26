@@ -26,7 +26,7 @@ ObjectModel {
 			source: BackendConnection.demoImageFileName
 			onStatusChanged: {
 				if (status === Image.Ready) {
-					console.log("Loaded demo image:", source)
+					console.log("Loaded demo image:", source);
 				}
 			}
 		}
@@ -46,20 +46,19 @@ ObjectModel {
 
 	Component.onCompleted: {
 		if (showLevelsPage) {
-			insert(2, levelsPage.createObject(parent))
+			insert(2, levelsPage.createObject(parent));
 		}
-		_completed = true
+		_completed = true;
 	}
 
 	onShowLevelsPageChanged: {
 		if (!_completed) {
-			return
+			return;
 		}
-
 		if (showLevelsPage) {
-			root.view.insertItem(2, levelsPage.createObject(parent))
+			root.view.insertItem(2, levelsPage.createObject(parent));
 		} else {
-			root.view.removeItem(view.itemAt(2))
+			root.view.removeItem(view.itemAt(2));
 		}
 	}
 }

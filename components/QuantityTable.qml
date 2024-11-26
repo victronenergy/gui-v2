@@ -92,9 +92,7 @@ Column {
 
 			width: parent.width
 			height: valueRow.height
-			color: model.index % 2 === 0
-				   ? Theme.color_quantityTable_row_alternateBackground
-				   : Theme.color_quantityTable_row_background
+			color: model.index % 2 === 0 ? Theme.color_quantityTable_row_alternateBackground : Theme.color_quantityTable_row_background
 
 			Row {
 				id: valueRow

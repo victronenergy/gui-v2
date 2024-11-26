@@ -16,7 +16,7 @@ Item {
 	property alias secondaryColor: animatedRect.color
 	property alias animating: slidingAnimation.running
 
-	signal animationFinished()
+	signal animationFinished
 
 	width: parent.width
 	height: parent.height
@@ -36,7 +36,7 @@ Item {
 
 		ScriptAction {
 			script: {
-				root.animationFinished()
+				root.animationFinished();
 			}
 		}
 	}

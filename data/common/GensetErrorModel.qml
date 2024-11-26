@@ -15,19 +15,23 @@ ListModel {
 		model: 8
 		delegate: VeQuickItem {
 			uid: uidPrefix + "/Error/" + index + "/Id"
-			onValueChanged: { // eg. "dse:w-4097"
-				root._errorChanged(index, value)
+			onValueChanged: {
+				// eg. "dse:w-4097"
+				root._errorChanged(index, value);
 			}
 		}
 	}
 
 	function _errorChanged(errorNumber, errorCode) { // 'errorCode' is eg. "dse:w-4097"
-		if (root.count === 0) { // initialize ListModel
+		if (root.count === 0) {
+			// initialize ListModel
 			for (let i = 0; i < instantiator.model; ++i) {
-				root.append({"errorNumber": i, "errorCode": ""})
+				root.append({
+						"errorNumber": i,
+						"errorCode": ""
+					});
 			}
 		}
-
-		root.setProperty(errorNumber, "errorCode", errorCode === undefined ? "" : errorCode)
+		root.setProperty(errorNumber, "errorCode", errorCode === undefined ? "" : errorCode);
 	}
 }

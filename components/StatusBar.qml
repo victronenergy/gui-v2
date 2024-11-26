@@ -20,8 +20,8 @@ Rectangle {
 
 	property bool animationEnabled
 
-	signal leftButtonClicked()
-	signal rightButtonClicked()
+	signal leftButtonClicked
+	signal rightButtonClicked
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
@@ -41,7 +41,7 @@ Rectangle {
 		}
 	}
 
-	component StatusBarButton : Button {
+	component StatusBarButton: Button {
 		radius: 0
 		width: parent.height
 		height: parent.height
@@ -57,7 +57,7 @@ Rectangle {
 		}
 	}
 
-	component NotificationButton : Button {
+	component NotificationButton: Button {
 		readonly property bool animating: animator.running
 
 		leftPadding: Theme.geometry_silenceAlarmButton_horizontalPadding
@@ -76,7 +76,6 @@ Rectangle {
 		}
 	}
 
-
 	StatusBarButton {
 		id: leftButton
 
@@ -85,15 +84,9 @@ Rectangle {
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
-					 ? "qrc:/images/icon_controls_off_32.svg"
-					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
-					   ? "qrc:/images/icon_controls_on_32.svg"
-					   : "qrc:/images/icon_back_32.svg"
+		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg" : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg" : "qrc:/images/icon_back_32.svg"
 
-		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+		enabled: !!Global.pageManager && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive && root.leftButton != VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -120,24 +113,24 @@ Rectangle {
 			color: Theme.color_font_primary
 			source: {
 				if (!signalStrength.isValid) {
-					return ""
+					return "";
 				} else if (signalStrength.value > 75) {
-					return "qrc:/images/icon_WiFi_4_32.svg"
+					return "qrc:/images/icon_WiFi_4_32.svg";
 				} else if (signalStrength.value > 50) {
-					return "qrc:/images/icon_WiFi_3_32.svg"
+					return "qrc:/images/icon_WiFi_3_32.svg";
 				} else if (signalStrength.value > 25) {
-					return "qrc:/images/icon_WiFi_2_32.svg"
+					return "qrc:/images/icon_WiFi_2_32.svg";
 				} else if (signalStrength.value > 0) {
-					return "qrc:/images/icon_WiFi_1_32.svg"
+					return "qrc:/images/icon_WiFi_1_32.svg";
 				} else {
-					return "qrc:/images/icon_WiFi_noconnection_32.svg"
+					return "qrc:/images/icon_WiFi_noconnection_32.svg";
 				}
 			}
 
 			VeQuickItem {
 				id: signalStrength
 
-				uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/SignalStrength"
+				uid: Global.venusPlatform.serviceUid + "/Network/Wifi/SignalStrength"
 			}
 		}
 
@@ -196,19 +189,9 @@ Rectangle {
 		}
 
 		StatusBarButton {
-			enabled: !!Global.pageManager
-					&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-					&& root.rightButton != VenusOS.StatusBar_RightButton_None
+			enabled: !!Global.pageManager && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive && root.rightButton != VenusOS.StatusBar_RightButton_None
 
-			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
-					? "qrc:/images/icon_sidepanel_on_32.svg"
-					: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
-						? "qrc:/images/icon_sidepanel_off_32.svg"
-						: root.rightButton === VenusOS.StatusBar_RightButton_Add
-						  ? "qrc:/images/icon_plus.svg"
-						  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
-							? "qrc:/images/icon_refresh_32.svg"
-							: ""
+			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive ? "qrc:/images/icon_sidepanel_on_32.svg" : root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive ? "qrc:/images/icon_sidepanel_off_32.svg" : root.rightButton === VenusOS.StatusBar_RightButton_Add ? "qrc:/images/icon_plus.svg" : root.rightButton === VenusOS.StatusBar_RightButton_Refresh ? "qrc:/images/icon_refresh_32.svg" : ""
 
 			onClicked: root.rightButtonClicked()
 		}
@@ -216,8 +199,7 @@ Rectangle {
 		StatusBarButton {
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
-			enabled: !!Global.pageManager
-					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			enabled: !!Global.pageManager && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			onClicked: Global.screenBlanker.setDisplayOff()
 		}
 	}

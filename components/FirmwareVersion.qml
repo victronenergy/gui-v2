@@ -4,7 +4,6 @@
 */
 
 pragma Singleton
-
 import QtQml
 
 QtObject {
@@ -12,24 +11,24 @@ QtObject {
 
 	function versionFormat(connection, processName) {
 		if (connection === "VE.Bus") {
-			return "vebus"
+			return "vebus";
 		} else if (processName === "can-bus-bms") {
-			return "can-bus-bms"
+			return "can-bus-bms";
 		} else {
 			// VE.Direct/VE.Can/Generic version format
-			return undefined
+			return undefined;
 		}
 	}
 
 	function versionText(version, format) {
 		if (version === undefined || version === null) {
-			return "--"
+			return "--";
 		}
 		if (version === 0xFFFFFF) {
-			return "--"
+			return "--";
 		}
 		if (format === "can-bus-bms") {
-			return "v%1.%2".arg(version >> 8).arg(version & 0xFF)
+			return "v%1.%2".arg(version >> 8).arg(version & 0xFF);
 		}
 
 		// 0x00000A => v0.0A
@@ -43,32 +42,30 @@ QtObject {
 
 		// Return the version as-is, if the version is already a string. This
 		// means the driver already knows the best formatting.
-		if (typeof(version) === "string") {
-			return version
+		if (typeof (version) === "string") {
+			return version;
 		}
 
 		// Since string is already handled up above, this handles cases
 		// where firmware is has a decimal point.
 		if (!Number.isInteger(version)) {
-			const versionString = version.toString()
-			return versionString.startsWith("v") ? version : "v" + version
+			const versionString = version.toString();
+			return versionString.startsWith("v") ? version : "v" + version;
 		}
-
-		let hexString = version.toString(16).toUpperCase()
+		let hexString = version.toString(16).toUpperCase();
 		if (format === "vebus") {
-			return "v" + hexString
+			return "v" + hexString;
 		}
 
 		// Add leading zeros to get a string at least 3 characters long
-		if (version < 0x100){
-			hexString = "00".concat(hexString).slice(-3)
+		if (version < 0x100) {
+			hexString = "00".concat(hexString).slice(-3);
 		}
 		// Insert points and remove trailing zeros in 3 byte version
-		hexString = hexString
-			.replace(/(.{1,2})(?=(.{2})+$)/g, "$1.") // Insert points
-			.replace(/(\..{2})\.(00|FF)$/, "$1") // Remove trailing "00" or "FF" in 3 byte version
-			.replace(/(\..{2})\.(.{2})$/, format === "venus" ? "$1~$2" : "$1-beta-$2") // Add beta separator
+		hexString = hexString.replace(/(.{1,2})(?=(.{2})+$)/g, "$1.") // Insert points
+		.replace(/(\..{2})\.(00|FF)$/, "$1") // Remove trailing "00" or "FF" in 3 byte version
+		.replace(/(\..{2})\.(.{2})$/, format === "venus" ? "$1~$2" : "$1-beta-$2"); // Add beta separator
 
-		return "v" + hexString
+		return "v" + hexString;
 	}
 }

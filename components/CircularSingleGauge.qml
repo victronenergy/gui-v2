@@ -29,7 +29,7 @@ Item {
 		// Antialiasing without requiring multisample framebuffers.
 		layer.enabled: true
 		layer.smooth: true
-		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
+		layer.textureSize: Qt.size(antialiased.width * 2, antialiased.height * 2)
 
 		// The single circular gauge is always the battery gauge :. shiny.
 		ShinyProgressArc {
@@ -38,11 +38,11 @@ Item {
 			width: gauges.width
 			height: width
 			anchors.centerIn: parent
-			radius: width/2
+			radius: width / 2
 			startAngle: 0
 			endAngle: 359 // "Note that a single PathArc cannot be used to specify a circle."
-			progressColor: Theme.color_darkOk,Theme.statusColorValue(gauges.status)
-			remainderColor: Theme.color_darkOk,Theme.statusColorValue(gauges.status, true)
+			progressColor: Theme.color_darkOk, Theme.statusColorValue(gauges.status)
+			remainderColor: Theme.color_darkOk, Theme.statusColorValue(gauges.status, true)
 			strokeWidth: Theme.geometry_circularSingularGauge_strokeWidth
 		}
 	}
@@ -73,7 +73,7 @@ Item {
 				color: Theme.color_font_primary
 
 				// Keep the name bounding box inside the circle to avoid truncation
-				width: Math.min(implicitWidth, 0.7*gauges.width - icon.width - parent.spacing)
+				width: Math.min(implicitWidth, 0.7 * gauges.width - icon.width - parent.spacing)
 				elide: Text.ElideRight
 			}
 		}

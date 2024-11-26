@@ -24,9 +24,9 @@ Device {
 		case VenusOS.Generators_State_WarmUp:
 		case VenusOS.Generators_State_CoolDown:
 		case VenusOS.Generators_State_Stopping:
-			return true
+			return true;
 		default:
-			return false
+			return false;
 		}
 	}
 
@@ -57,15 +57,15 @@ Device {
 	}
 
 	function start(durationSecs) {
-		_manualStartTimer.setValue(durationSecs)
-		_manualStart.setValue(1)
+		_manualStartTimer.setValue(durationSecs);
+		_manualStart.setValue(1);
 	}
 
 	function stop() {
-		_manualStart.setValue(0)
+		_manualStart.setValue(0);
 	}
 
 	function setAutoStart(auto) {
-		_autoStart.setValue(auto ? 1 : 0)
+		_autoStart.setValue(auto ? 1 : 0);
 	}
 }

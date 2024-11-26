@@ -19,18 +19,18 @@ Rectangle {
 
 	onAllPagesLoadedChanged: {
 		if (!showSplashAnimation) {
-			hideSplashView()
+			hideSplashView();
 		}
 	}
 
 	function hideSplashView() {
-		Global.splashScreenVisible = false
+		Global.splashScreenVisible = false;
 		// reset the state variables we animated.
-		logoIcon.opacity = 1.0
-		logoText.opacity = 1.0
-		extraInfoColumn.nextOpacity = 1.0
-		loadingProgress.opacity = 1.0
-		loadingProgress.visible = true
+		logoIcon.opacity = 1.0;
+		logoText.opacity = 1.0;
+		extraInfoColumn.nextOpacity = 1.0;
+		loadingProgress.opacity = 1.0;
+		loadingProgress.visible = true;
 	}
 
 	OpacityAnimator on opacity {
@@ -41,7 +41,7 @@ Rectangle {
 		duration: Theme.animation_splash_fade_duration
 		onRunningChanged: {
 			if (!running) {
-				root.hideSplashView()
+				root.hideSplashView();
 			}
 		}
 	}
@@ -59,18 +59,11 @@ Rectangle {
 		paused: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
 		onPausedChanged: {
 			if (paused) {
-				fadeOutAnim.start()
+				fadeOutAnim.start();
 			}
 		}
 
-		source: !root.showSplashAnimation ? ""
-			: Theme.colorScheme === Theme.Light
-				? Theme.screenSize === Theme.SevenInch
-				  ? "qrc:/images/gauge_intro_7_matte_white.gif"
-				  : "qrc:/images/gauge_intro_5_matte_white.gif"
-				: Theme.screenSize === Theme.SevenInch
-				  ? "qrc:/images/gauge_intro_7_matte_black.gif"
-				  : "qrc:/images/gauge_intro_5_matte_black.gif"
+		source: !root.showSplashAnimation ? "" : Theme.colorScheme === Theme.Light ? Theme.screenSize === Theme.SevenInch ? "qrc:/images/gauge_intro_7_matte_white.gif" : "qrc:/images/gauge_intro_5_matte_white.gif" : Theme.screenSize === Theme.SevenInch ? "qrc:/images/gauge_intro_7_matte_black.gif" : "qrc:/images/gauge_intro_5_matte_black.gif"
 	}
 
 	CP.ColorImage {
@@ -81,9 +74,7 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: Theme.screenSize === Theme.FiveInch
-				? "qrc:/images/splash-logo-icon-5inch.svg"
-				: "qrc:/images/splash-logo-icon-7inch.svg"
+		source: Theme.screenSize === Theme.FiveInch ? "qrc:/images/splash-logo-icon-5inch.svg" : "qrc:/images/splash-logo-icon-7inch.svg"
 		color: Theme.color_splash_logo
 
 		OpacityAnimator on opacity {
@@ -103,9 +94,7 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: Theme.screenSize === Theme.FiveInch
-				? "qrc:/images/splash-logo-text-5inch.svg"
-				: "qrc:/images/splash-logo-text-7inch.svg"
+		source: Theme.screenSize === Theme.FiveInch ? "qrc:/images/splash-logo-text-5inch.svg" : "qrc:/images/splash-logo-text-7inch.svg"
 		color: Theme.color_splash_logo
 
 		OpacityAnimator on opacity {
@@ -117,9 +106,9 @@ Rectangle {
 
 			onRunningChanged: {
 				if (running) {
-					logoIconFadeOutAnim.running = true
+					logoIconFadeOutAnim.running = true;
 				} else if (BackendConnection.state === BackendConnection.Ready) {
-					animatedLogo.playing = true
+					animatedLogo.playing = true;
 				}
 			}
 		}
@@ -208,8 +197,11 @@ Rectangle {
 				}
 			}
 			transitions: Transition {
-				from: ""; to: "alarm"
-				NumberAnimation { properties: "opacity,height" }
+				from: ""
+				to: "alarm"
+				NumberAnimation {
+					properties: "opacity,height"
+				}
 			}
 
 			CP.ColorImage {
@@ -226,21 +218,19 @@ Rectangle {
 			font.pixelSize: Theme.font_splashView_progressText_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
-			text: "[" + BackendConnection.state + "] "
-				  //% "Unable to connect"
-				+ (BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect")
-				  //% "Disconnected, attempting to reconnect"
-				: BackendConnection.state === BackendConnection.Reconnecting ? qsTrId("splash_view_reconnecting")
-				: BackendConnection.state === BackendConnection.Disconnected ? CommonWords.disconnected
-				  //% "Connecting"
-				: BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting")
-				  //% "Connected, awaiting broker messages"
-				: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
-				  //% "Connected, receiving broker messages"
-				: BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing")
-				  //% "Connected, loading user interface"
-				: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
-				: CommonWords.idle)
+			text: "[" + BackendConnection.state + "] " +
+			//% "Unable to connect"
+			(BackendConnection.state === BackendConnection.Failed ? qsTrId("splash_view_unable_to_connect") :
+				//% "Disconnected, attempting to reconnect"
+				BackendConnection.state === BackendConnection.Reconnecting ? qsTrId("splash_view_reconnecting") : BackendConnection.state === BackendConnection.Disconnected ? CommonWords.disconnected :
+				//% "Connecting"
+				BackendConnection.state === BackendConnection.Connecting ? qsTrId("splash_view_connecting") :
+				//% "Connected, awaiting broker messages"
+				BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected") :
+				//% "Connected, receiving broker messages"
+				BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing") :
+				//% "Connected, loading user interface"
+				BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready") : CommonWords.idle)
 		}
 
 		Label {
@@ -251,27 +241,25 @@ Rectangle {
 			font.pixelSize: Theme.font_splashView_progressText_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
-			text: (BackendConnection.mqttClientError !== BackendConnection.MqttClient_NoError
-				  ? "[" + BackendConnection.mqttClientError + "] " : "")
-				  //% "Invalid protocol version"
-				+ (BackendConnection.mqttClientError === BackendConnection.MqttClient_InvalidProtocolVersion ? qsTrId("splash_view_invalid_protocol_version")
-				  //% "Client ID rejected"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_IdRejected ? qsTrId("splash_view_client_id_rejected")
-				   //% "Broker service not available"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_ServerUnavailable ? qsTrId("splash_view_server_unavailable")
-				  //% "Bad username or password"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_BadUsernameOrPassword ? qsTrId("splash_view_bad_username_or_password")
-				  //% "Client not authorized"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_NotAuthorized ? qsTrId("splash_view_not_authorized")
-				  //% "Transport connection error"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_TransportInvalid ? qsTrId("splash_view_transport_invalid")
-				  //% "Protocol violation error"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_ProtocolViolation ? qsTrId("splash_view_protocol_violation")
-				  //% "Unknown error"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_UnknownError ? qsTrId("splash_view_unknown_error")
-				  //% "MQTT protocol level 5 error"
-				: BackendConnection.mqttClientError === BackendConnection.MqttClient_Mqtt5SpecificError ? qsTrId("splash_view_mqtt5_error")
-				: "")
+			text: (BackendConnection.mqttClientError !== BackendConnection.MqttClient_NoError ? "[" + BackendConnection.mqttClientError + "] " : "") +
+			//% "Invalid protocol version"
+			(BackendConnection.mqttClientError === BackendConnection.MqttClient_InvalidProtocolVersion ? qsTrId("splash_view_invalid_protocol_version") :
+				//% "Client ID rejected"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_IdRejected ? qsTrId("splash_view_client_id_rejected") :
+				//% "Broker service not available"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_ServerUnavailable ? qsTrId("splash_view_server_unavailable") :
+				//% "Bad username or password"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_BadUsernameOrPassword ? qsTrId("splash_view_bad_username_or_password") :
+				//% "Client not authorized"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_NotAuthorized ? qsTrId("splash_view_not_authorized") :
+				//% "Transport connection error"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_TransportInvalid ? qsTrId("splash_view_transport_invalid") :
+				//% "Protocol violation error"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_ProtocolViolation ? qsTrId("splash_view_protocol_violation") :
+				//% "Unknown error"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_UnknownError ? qsTrId("splash_view_unknown_error") :
+				//% "MQTT protocol level 5 error"
+				BackendConnection.mqttClientError === BackendConnection.MqttClient_Mqtt5SpecificError ? qsTrId("splash_view_mqtt5_error") : "")
 		}
 	}
 
@@ -286,7 +274,7 @@ Rectangle {
 		onLoaded: {
 			// If the welcome screen is shown, force the splash animation to be shown even on wasm
 			// so that there is a nicer transition from the welcome to the main screen.
-			root.showSplashAnimation = true
+			root.showSplashAnimation = true;
 		}
 	}
 }

@@ -72,29 +72,38 @@ Item {
 			id: shineBar
 
 			height: parent.height
-			width: 10*control.strokeWidth // this defines the length of the shine effect, basically, as it will be half this width.
-			x: (parent.width-width)/2
+			width: 10 * control.strokeWidth // this defines the length of the shine effect, basically, as it will be half this width.
+			x: (parent.width - width) / 2
 
 			Rectangle {
 				id: shineRect
 
 				// the length of the shine.
-				width: parent.width/2
+				width: parent.width / 2
 
 				// raise up and allow enough overlap to ensure that there are no pixels "missed" during the rotation.
 				height: width
-				y: -height/3
+				y: -height / 3
 
 				// the highlight position of the shine must line up with the horizontal centre of the parent to ensure that it is always perpendicular to the arc direction as it rotates.
-				x: (parent.width-width)/2 - (width*Theme.geometry_briefPage_centerGauge_shine_highlightPosition)/2
+				x: (parent.width - width) / 2 - (width * Theme.geometry_briefPage_centerGauge_shine_highlightPosition) / 2
 
 				opacity: 1.0
 
 				gradient: Gradient {
 					orientation: Gradient.Horizontal
-					GradientStop { position: 0; color: "transparent" }
-					GradientStop { position: Theme.geometry_briefPage_centerGauge_shine_highlightPosition; color: Theme.color_briefPage_circularGauge_shine }
-					GradientStop { position: 1.0; color: "transparent" }
+					GradientStop {
+						position: 0
+						color: "transparent"
+					}
+					GradientStop {
+						position: Theme.geometry_briefPage_centerGauge_shine_highlightPosition
+						color: Theme.color_briefPage_circularGauge_shine
+					}
+					GradientStop {
+						position: 1.0
+						color: "transparent"
+					}
 				}
 			}
 
@@ -107,7 +116,7 @@ Item {
 						target: shineBar
 						from: 0.0
 						to: 0.998
-						duration: 2*Theme.animation_page_fade_duration
+						duration: 2 * Theme.animation_page_fade_duration
 					}
 					OpacityAnimator {
 						id: brightPauseAnimator // effectively a pause animation, but need it to be an animator...
@@ -135,16 +144,18 @@ Item {
 					RotationAnimator {
 						id: rotationAnimator
 						target: shineBar
-						easing { type: Easing.InOutCubic }
+						easing {
+							type: Easing.InOutCubic
+						}
 						from: -2 // avoid overspill from the trailing edge.
-						to:   349 // avoid overspill from the leading edge.
+						to: 349 // avoid overspill from the leading edge.
 						duration: Theme.animation_briefPage_centerGauge_shine_duration
 					}
 					RotationAnimator {
 						id: pauseAnimator // effectively a pause animation, but need it to be an animator...
 						target: shineBar
 						from: 349
-						to:   350
+						to: 350
 						duration: Theme.animation_briefPage_centerGauge_shine_duration * Theme.animation_briefPage_centerGauge_shine_pauseRatio
 					}
 				}

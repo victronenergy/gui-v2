@@ -33,27 +33,34 @@ SwipeViewPage {
 			horizontalCenter: parent.horizontalCenter
 		}
 
-		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode))
-				 ? 1.0
-				 : 0.0
+		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)) ? 1.0 : 0.0
 
 		Behavior on opacity {
 			enabled: root.isCurrentPage
-			OpacityAnimator { duration: Theme.animation_page_idleOpacity_duration }
+			OpacityAnimator {
+				duration: Theme.animation_page_idleOpacity_duration
+			}
 		}
 
 		Behavior on anchors.topMargin {
 			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 
 		model: [
 			//% "Tanks"
-			{ value: qsTrId("levels_page_tanks"), enabled: Global.tanks.totalTankCount > 0 },
+			{
+				value: qsTrId("levels_page_tanks"),
+				enabled: Global.tanks.totalTankCount > 0
+			},
 			//% "Environment"
-			{ value: qsTrId("levels_page_environment"), enabled: Global.environmentInputs.model.count > 0 }
-		]
+			{
+				value: qsTrId("levels_page_environment"),
+				enabled: Global.environmentInputs.model.count > 0
+			}]
 
 		// Prefer a tab that is enabled.
 		currentIndex: model[0].enabled || !model[1].enabled ? 0 : 1
@@ -64,34 +71,35 @@ SwipeViewPage {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-					   ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
-					   : Theme.geometry_levelsPage_gaugesView_compact_topMargin
+			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin : Theme.geometry_levelsPage_gaugesView_compact_topMargin
 			bottom: parent.bottom
-			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-						  ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
-						  : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
+			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
 		}
-		x: contentWidth > width
-				? Theme.geometry_levelsPage_gaugesView_horizontalMargin
-				: parent.width/2 - contentWidth / 2
+		x: contentWidth > width ? Theme.geometry_levelsPage_gaugesView_horizontalMargin : parent.width / 2 - contentWidth / 2
 		width: parent.width
-		rightMargin: contentWidth > width
-					 ? 2*Theme.geometry_levelsPage_gaugesView_horizontalMargin
-					 : 0
+		rightMargin: contentWidth > width ? 2 * Theme.geometry_levelsPage_gaugesView_horizontalMargin : 0
 		animationEnabled: root.animationEnabled
 
 		Behavior on x {
 			enabled: root.isCurrentPage && tanksTab.animateModelChanges
-			NumberAnimation { duration: Theme.animation_levelsPage_tanks_modelChangeResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_levelsPage_tanks_modelChangeResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 		Behavior on anchors.topMargin {
 			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 		Behavior on anchors.bottomMargin {
 			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 
 		visible: tabBar.currentIndex === 0
@@ -102,13 +110,9 @@ SwipeViewPage {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-					   ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
-					   : Theme.geometry_levelsPage_gaugesView_compact_topMargin
+			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin : Theme.geometry_levelsPage_gaugesView_compact_topMargin
 			bottom: parent.bottom
-			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-						  ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
-						  : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
+			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
 			left: parent.left
 			right: parent.right
 		}
@@ -116,11 +120,17 @@ SwipeViewPage {
 
 		Behavior on anchors.topMargin {
 			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 		Behavior on anchors.bottomMargin {
 			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
 
 		visible: tabBar.currentIndex === 1

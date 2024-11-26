@@ -18,9 +18,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.motorDrives) {
 			if (valid) {
-				Global.motorDrives.model.addDevice(motorDrive)
+				Global.motorDrives.model.addDevice(motorDrive);
 			} else {
-				Global.motorDrives.model.removeDevice(motorDrive.serviceUid)
+				Global.motorDrives.model.removeDevice(motorDrive.serviceUid);
 			}
 		}
 	}

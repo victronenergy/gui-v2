@@ -29,9 +29,9 @@ Item {
 	onPhaseModelPropertyChanged: {
 		placeholderModel.clear();
 		if (phaseModelProperty.length > 0) {
-			let itemProperties = {}
-			itemProperties[phaseModelProperty] = NaN
-			placeholderModel.append(itemProperties)
+			let itemProperties = {};
+			itemProperties[phaseModelProperty] = NaN;
+			placeholderModel.append(itemProperties);
 		}
 	}
 
@@ -51,8 +51,7 @@ Item {
 			height: root.height
 
 			// ignore noise values (close to zero)
-			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
-					: model[root.phaseModelProperty]
+			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0 : model[root.phaseModelProperty]
 			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
 
 			SideGauge {
@@ -60,12 +59,12 @@ Item {
 				animationEnabled: root.animationEnabled
 				width: Theme.geometry_briefPage_edgeGauge_width
 				height: root.height
-				x: (model.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing))
-					// If showing multiple gauges on the right edge, shift them towards the left
-					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
+				x: (model.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing)) -
+				// If showing multiple gauges on the right edge, shift them towards the left
+				(gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType
-				progressColor: Theme.color_darkOk,gaugeDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-				remainderColor: Theme.color_darkOk,gaugeDelegate.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
+				progressColor: Theme.color_darkOk, gaugeDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
+				remainderColor: Theme.color_darkOk, gaugeDelegate.feedingToGrid ? Theme.color_darkGreen : Theme.statusColorValue(valueStatus, true)
 				direction: root.direction
 				startAngle: root.startAngle
 				endAngle: root.endAngle
@@ -94,9 +93,7 @@ Item {
 				// When feeding in to grid, use an absolute value for the gauge. This effectively
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
-				value: root.visible
-					   ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.modelValue) : gaugeDelegate.modelValue)
-					   : root.minimumValue
+				value: root.visible ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.modelValue) : gaugeDelegate.modelValue) : root.minimumValue
 				minimumValue: 0
 				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))
 			}

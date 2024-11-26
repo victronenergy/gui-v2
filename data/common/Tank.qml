@@ -50,52 +50,51 @@ Device {
 	function _updateModel() {
 		if (valid && type >= 0) {
 			if (_tankModel && _tankModel.type !== type) {
-				_tankModel.removeDevice(tank.serviceUid)
+				_tankModel.removeDevice(tank.serviceUid);
 			}
-			_tankModel = Global.tanks.tankModel(type)
-			_tankModel.addDevice(tank)
+			_tankModel = Global.tanks.tankModel(type);
+			_tankModel.addDevice(tank);
 		} else {
 			if (_tankModel) {
-				_tankModel.removeDevice(tank.serviceUid)
+				_tankModel.removeDevice(tank.serviceUid);
 			}
-			_tankModel = null
+			_tankModel = null;
 		}
 	}
 
 	function _updateMeasurements() {
-		let remainingValue = _remaining.isValid ? _remaining.value : NaN
-		let levelValue = _level.isValid ? _level.value : NaN   // 0 - 100
-		let capacityValue = _capacity.isValid ? _capacity.value : NaN
+		let remainingValue = _remaining.isValid ? _remaining.value : NaN;
+		let levelValue = _level.isValid ? _level.value : NaN;   // 0 - 100
+		let capacityValue = _capacity.isValid ? _capacity.value : NaN;
 
 		// If there is no /Level, calculate it from other values.
 		if (isNaN(levelValue) && !isNaN(capacityValue) && !isNaN(remainingValue)) {
 			if (capacityValue > 0) {
-				levelValue = remainingValue / capacityValue * 100
+				levelValue = remainingValue / capacityValue * 100;
 			}
 		}
 
 		// If there is no /Remaining, calculate from other values.
 		if (isNaN(remainingValue) && !isNaN(levelValue) && !isNaN(capacityValue)) {
-			remainingValue = capacityValue * (levelValue / 100)
+			remainingValue = capacityValue * (levelValue / 100);
 		}
-
-		capacity = capacityValue
-		remaining = remainingValue
-		level = levelValue
+		capacity = capacityValue;
+		remaining = remainingValue;
+		level = levelValue;
 		if (tank.type >= 0 && !!Global.tanks) {
-			Global.tanks.updateTankModelTotals(tank.type)
+			Global.tanks.updateTankModelTotals(tank.type);
 		}
 	}
 
 	name: {
 		if (customName.length > 0) {
-			return customName
+			return customName;
 		} else if (type >= 0 && deviceInstance >= 0) {
 			//: Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)
 			//% "%1 tank (%2)"
-			return qsTrId("tank_description").arg(Gauges.tankProperties(type).name).arg(deviceInstance)
+			return qsTrId("tank_description").arg(Gauges.tankProperties(type).name).arg(deviceInstance);
 		} else {
-			return productName
+			return productName;
 		}
 	}
 }

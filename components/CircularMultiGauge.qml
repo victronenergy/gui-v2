@@ -28,7 +28,7 @@ Item {
 		// Antialiasing without requiring multisample framebuffers.
 		layer.enabled: true
 		layer.smooth: true
-		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
+		layer.textureSize: Qt.size(antialiased.width * 2, antialiased.height * 2)
 
 		Repeater {
 			id: arcRepeater
@@ -37,22 +37,23 @@ Item {
 				id: loader
 				property int gaugeStatus: Theme.getValueStatus(model.level, model.valueType)
 				property real level: model.level // always draw the tank level (percentage).
-				width: parent.width - (index*_stepSize)
+				width: parent.width - (index * _stepSize)
 				height: width
 				anchors.centerIn: parent
 				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
-				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
+				onStatusChanged: if (status === Loader.Error)
+					console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
 				Component {
 					id: shinyProgressArc
 					ShinyProgressArc {
-						radius: width/2
+						radius: width / 2
 						startAngle: 0
 						endAngle: 270
 						value: loader.level
-						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Theme.color_darkOk, Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.color_darkOk, Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 						shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
@@ -62,12 +63,12 @@ Item {
 				Component {
 					id: progressArc
 					ProgressArc {
-						radius: width/2
+						radius: width / 2
 						startAngle: 0
 						endAngle: 270
 						value: loader.level
-						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Theme.color_darkOk, Theme.statusColorValue(loader.gaugeStatus)
+						remainderColor: Theme.color_darkOk, Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 					}
@@ -80,7 +81,7 @@ Item {
 		id: textCol
 
 		anchors.top: parent.top
-		anchors.topMargin: strokeWidth/2
+		anchors.topMargin: strokeWidth / 2
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
 		anchors.leftMargin: Theme.geometry_circularMultiGauge_label_leftMargin
@@ -91,7 +92,7 @@ Item {
 			model: gauges.model
 			delegate: Row {
 				anchors.verticalCenter: textCol.top
-				anchors.verticalCenterOffset: index * _stepSize/2
+				anchors.verticalCenterOffset: index * _stepSize / 2
 				anchors.right: parent.right
 				anchors.rightMargin: Math.max(0, Theme.geometry_circularMultiGauge_icons_maxWidth - iconImage.width)
 				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
@@ -109,8 +110,7 @@ Item {
 					// on the multi-gauge overlap with the labels on the top-left gauge.
 					//
 					// Increase the space for the two top-most labels or if there are less left gauges.
-					width: textCol.width - valueLabel.width - iconImage.width
-						+ (model.index < 2 || gauges.leftGaugeCount < 3 ? Theme.geometry_circularMultiGauge_label_extraWidth : 0)
+					width: textCol.width - valueLabel.width - iconImage.width + (model.index < 2 || gauges.leftGaugeCount < 3 ? Theme.geometry_circularMultiGauge_label_extraWidth : 0)
 					elide: Text.ElideRight
 				}
 
@@ -136,11 +136,11 @@ Item {
 							quantity: Units.getDisplayText(unit, value)
 							unit: {
 								if (Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage) {
-									return VenusOS.Units_Percentage
+									return VenusOS.Units_Percentage;
 								} else if (model.tankType === VenusOS.Tank_Type_Battery) {
-									return VenusOS.Units_Percentage
+									return VenusOS.Units_Percentage;
 								} else {
-									return Global.systemSettings.volumeUnit
+									return Global.systemSettings.volumeUnit;
 								}
 							}
 						}

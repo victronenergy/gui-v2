@@ -19,14 +19,14 @@ ListModel {
 		onValueChanged: update()
 	}
 
-	property VeQuickItem scanItem: VeQuickItem{
-		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
+	property VeQuickItem scanItem: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Network/Wifi/Scan"
 	}
 
 	function update() {
 		if (!isValid || !scanItem.isValid) {
-			model.clear()
-			return
+			model.clear();
+			return;
 		}
 
 		/*
@@ -46,34 +46,30 @@ ListModel {
 				"Nameservers": ["193.12.34.56", "193.12.34.57"]
 			}
 		*/
-		const wifis = JSON.parse(servicesItem.value)["wifi"]
-
-		const services = Object.values(wifis)
-		  .filter((object) => object && typeof object === "object")
-		  .map((object) => object["Service"])
+		const wifis = JSON.parse(servicesItem.value)["wifi"];
+		const services = Object.values(wifis).filter(object => object && typeof object === "object").map(object => object["Service"]);
 
 		// Remove networks that have been dropped
 		for (var i = 0; i < model.count; i++) {
 			if (services.indexOf(model.get(i).service) == -1) {
-				model.remove(i)
+				model.remove(i);
 			}
 		}
-
-		i = 0
+		i = 0;
 		for (const [network, details] of Object.entries(wifis)) {
-			let found = false
+			let found = false;
 			for (let j = 0; j < model.count; j++) {
-				let service = details["Service"]
+				let service = details["Service"];
 				// Update existing networks
 				if (service && service === model.get(j).service) {
-					found = true
+					found = true;
 					model.set(i, {
-						"network": network,
-						"service": details["Service"],
-						"state": details["State"],
-						"favorite": details["Favorite"] === "yes"
-					})
-					break
+							"network": network,
+							"service": details["Service"],
+							"state": details["State"],
+							"favorite": details["Favorite"] === "yes"
+						});
+					break;
 				}
 			}
 
@@ -81,14 +77,13 @@ ListModel {
 			if (!found) {
 				// Services are sorted by favorite and signal strength, try to maintain order
 				model.insert(i, {
-					"network": network,
-					"service": details["Service"],
-					"state": details["State"],
-					"favorite": details["Favorite"] === "yes"
-				})
+						"network": network,
+						"service": details["Service"],
+						"state": details["State"],
+						"favorite": details["Favorite"] === "yes"
+					});
 			}
-			i++
+			i++;
 		}
 	}
 }
-

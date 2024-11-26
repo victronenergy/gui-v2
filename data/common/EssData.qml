@@ -10,31 +10,30 @@ QtObject {
 	id: root
 
 	readonly property int state: _getState()
-	onStateChanged: if (!!Global.ess) Global.ess.state = state
+	onStateChanged: if (!!Global.ess)
+		Global.ess.state = state
 
 	function _getState() {
-		let hub4Mode = veHub4Mode.value
-		let currentState = veBatteryLifeState.value
+		let hub4Mode = veHub4Mode.value;
+		let currentState = veBatteryLifeState.value;
 		if (!Global.ess || hub4Mode === undefined || currentState === undefined) {
-			return -1
+			return -1;
 		}
-
-		let essState = VenusOS.Ess_State_OptimizedWithBatteryLife
+		let essState = VenusOS.Ess_State_OptimizedWithBatteryLife;
 		if (hub4Mode === VenusOS.Ess_Hub4ModeState_Disabled) {
-			essState = VenusOS.Ess_State_ExternalControl
+			essState = VenusOS.Ess_State_ExternalControl;
 		} else if (Global.ess.isBatteryLifeActive(currentState)) {
-			essState = VenusOS.Ess_State_OptimizedWithBatteryLife
+			essState = VenusOS.Ess_State_OptimizedWithBatteryLife;
 		} else if (_isBatterySocGuardActive(currentState)) {
-			essState = VenusOS.Ess_State_OptimizedWithoutBatteryLife
+			essState = VenusOS.Ess_State_OptimizedWithoutBatteryLife;
 		} else if (currentState === VenusOS.Ess_BatteryLifeState_KeepCharged) {
-			essState = VenusOS.Ess_State_KeepBatteriesCharged
+			essState = VenusOS.Ess_State_KeepBatteriesCharged;
 		}
-		return essState
+		return essState;
 	}
 
 	function _isBatterySocGuardActive(essState) {
-		return essState >= VenusOS.Ess_BatteryLifeState_SocGuardDefault
-				&& essState <= VenusOS.Ess_BatteryLifeState_SocGuardLowSocCharge
+		return essState >= VenusOS.Ess_BatteryLifeState_SocGuardDefault && essState <= VenusOS.Ess_BatteryLifeState_SocGuardLowSocCharge;
 	}
 
 	property Connections essConn: Connections {
@@ -43,41 +42,41 @@ QtObject {
 		function onSetStateRequested(essState) {
 			// Hub 4 mode
 			if (essState === VenusOS.Ess_State_ExternalControl && veHub4Mode.value !== VenusOS.Ess_Hub4ModeState_Disabled) {
-				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_Disabled)
+				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_Disabled);
 			} else if (essState !== VenusOS.Ess_State_ExternalControl && veHub4Mode.value === VenusOS.Ess_Hub4ModeState_Disabled) {
-				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_PhaseCompensation)
+				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_PhaseCompensation);
 			}
 
 			// BatteryLife state
-			let batteryLifeState = null
+			let batteryLifeState = null;
 			switch (essState) {
 			case VenusOS.Ess_State_OptimizedWithBatteryLife:
 				if (!!Global.ess && !Global.ess.isBatteryLifeActive(veBatteryLifeState.value)) {
-					batteryLifeState = VenusOS.Ess_BatteryLifeState_Restart
+					batteryLifeState = VenusOS.Ess_BatteryLifeState_Restart;
 				}
-				break
+				break;
 			case VenusOS.Ess_State_OptimizedWithoutBatteryLife:
 				if (!_isBatterySocGuardActive(veBatteryLifeState.value)) {
-					batteryLifeState = VenusOS.Ess_BatteryLifeState_SocGuardDefault
+					batteryLifeState = VenusOS.Ess_BatteryLifeState_SocGuardDefault;
 				}
-				break
+				break;
 			case VenusOS.Ess_State_KeepBatteriesCharged:
-				batteryLifeState = VenusOS.Ess_BatteryLifeState_KeepCharged
-				break
+				batteryLifeState = VenusOS.Ess_BatteryLifeState_KeepCharged;
+				break;
 			case VenusOS.Ess_State_ExternalControl:
-				batteryLifeState = VenusOS.Ess_BatteryLifeState_Disabled
-				break
+				batteryLifeState = VenusOS.Ess_BatteryLifeState_Disabled;
+				break;
 			default:
-				console.warn("Unrecognised ESS state:", essState)
-				break
+				console.warn("Unrecognised ESS state:", essState);
+				break;
 			}
 			if (batteryLifeState !== null) {
-				veBatteryLifeState.setValue(batteryLifeState)
+				veBatteryLifeState.setValue(batteryLifeState);
 			}
 		}
 
 		function onSetMinimumStateOfChargeRequested(soc) {
-			veMinimumSocLimit.setValue(soc)
+			veMinimumSocLimit.setValue(soc);
 		}
 	}
 
@@ -98,11 +97,11 @@ QtObject {
 	}
 
 	Component.onCompleted: {
-		Global.ess.minimumStateOfCharge = Qt.binding(function() {
-			return veMinimumSocLimit.value || 0
-		})
-		Global.ess.stateOfChargeLimit = Qt.binding(function() {
-			return veSocLimit.value || 0
-		})
+		Global.ess.minimumStateOfCharge = Qt.binding(function () {
+				return veMinimumSocLimit.value || 0;
+			});
+		Global.ess.stateOfChargeLimit = Qt.binding(function () {
+				return veSocLimit.value || 0;
+			});
 	}
 }

@@ -23,19 +23,16 @@ FontMetrics {
 	function columnWidth(unit) {
 		if (!!firstColumnWidth) {
 			if (unit === VenusOS.Units_None) {
-				return firstColumnWidth
+				return firstColumnWidth;
 			}
-			return (availableWidth - firstColumnWidth) / (count - 1)
+			return (availableWidth - firstColumnWidth) / (count - 1);
 		}
-
 		if (equalWidthColumns) {
-			return availableWidth / count
+			return availableWidth / count;
 		}
 
 		// Give the unit symbol some extra space on the column.
-		const maxTextWidth = unit === VenusOS.Units_Energy_KiloWattHour
-						   ? advanceWidth("9999kWH")
-						   : advanceWidth("9999W")
-		return maxTextWidth + spacing
+		const maxTextWidth = unit === VenusOS.Units_Energy_KiloWattHour ? advanceWidth("9999kWH") : advanceWidth("9999W");
+		return maxTextWidth + spacing;
 	}
 }

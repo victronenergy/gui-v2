@@ -16,9 +16,7 @@ Flickable {
 	width: parent.width
 	height: parent.height
 	contentWidth: contentRow.width
-	leftMargin: levelsRepeater.count > 3
-			? Theme.geometry_levelsPage_environment_horizontalMargin
-			: (width - contentRow.width) / 2
+	leftMargin: levelsRepeater.count > 3 ? Theme.geometry_levelsPage_environment_horizontalMargin : (width - contentRow.width) / 2
 	rightMargin: Theme.geometry_levelsPage_environment_horizontalMargin
 	boundsBehavior: Flickable.StopAtBounds
 	contentX: -leftMargin   // shouldn't be needed, but initial value may be incorrect due to delegate resizing

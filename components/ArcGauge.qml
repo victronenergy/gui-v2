@@ -32,12 +32,12 @@ Item {
 		// Antialiasing without requiring multisample framebuffers.
 		layer.enabled: true
 		layer.smooth: true
-		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
+		layer.textureSize: Qt.size(antialiased.width * 2, antialiased.height * 2)
 
 		ProgressArc {
 			id: arc
 
-			width: radius*2
+			width: radius * 2
 			height: width
 			x: ((gauge.width - width) / 2) + gauge.arcHorizontalCenterOffset
 			y: ((gauge.height - height) / 2) + gauge.arcVerticalCenterOffset

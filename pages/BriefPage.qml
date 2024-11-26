@@ -23,10 +23,10 @@ SwipeViewPage {
 	property bool _readyToInit: state === "" && !Global.splashScreenVisible
 	on_ReadyToInitChanged: {
 		if (_readyToInit) {
-			_readyToInit = false    // break the binding
-			state = "initialized"
+			_readyToInit = false;    // break the binding
+			state = "initialized";
 			if (showSidePanel) {
-				state = "panelOpening"
+				state = "panelOpening";
 			}
 		}
 	}
@@ -35,9 +35,9 @@ SwipeViewPage {
 	property bool showSidePanel
 	onShowSidePanelChanged: {
 		if (showSidePanel && state === "initialized") {
-			state = "panelOpening"
+			state = "panelOpening";
 		} else if (!showSidePanel && state === "panelOpened") {
-			state = "initialized"
+			state = "initialized";
 		}
 	}
 
@@ -46,7 +46,7 @@ SwipeViewPage {
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
 
 	function _gaugeHeight(gaugeCount) {
-		return Theme.geometry_briefPage_largeEdgeGauge_height / gaugeCount
+		return Theme.geometry_briefPage_largeEdgeGauge_height / gaugeCount;
 	}
 
 	/*
@@ -60,93 +60,91 @@ SwipeViewPage {
 	function _sideGaugeParameters(baseAngle, activeGaugeCount, activeGaugeIndex, isMultiPhase) {
 		// Start/end angles are those for the large single-gauge case if there is only one gauge,
 		// otherwise this angle is split into equal segments for each active gauge (minus spacing).
-		let maxSideAngle
-		let baseAngleOffset
+		let maxSideAngle;
+		let baseAngleOffset;
 		if (activeGaugeCount === 1) {
-			maxSideAngle = Theme.geometry_briefPage_largeEdgeGauge_maxAngle
-			baseAngleOffset = 0
+			maxSideAngle = Theme.geometry_briefPage_largeEdgeGauge_maxAngle;
+			baseAngleOffset = 0;
 		} else {
-			const totalSpacingAngle = Theme.geometry_briefPage_edgeGauge_spacingAngle * (activeGaugeCount - 1)
-			maxSideAngle = (Theme.geometry_briefPage_largeEdgeGauge_maxAngle - totalSpacingAngle) / activeGaugeCount
-			baseAngleOffset = Theme.geometry_briefPage_edgeGauge_spacingAngle * activeGaugeIndex
+			const totalSpacingAngle = Theme.geometry_briefPage_edgeGauge_spacingAngle * (activeGaugeCount - 1);
+			maxSideAngle = (Theme.geometry_briefPage_largeEdgeGauge_maxAngle - totalSpacingAngle) / activeGaugeCount;
+			baseAngleOffset = Theme.geometry_briefPage_edgeGauge_spacingAngle * activeGaugeIndex;
 		}
-		const gaugeStartAngle = baseAngle + (activeGaugeIndex * maxSideAngle) + baseAngleOffset
-		const gaugeEndAngle = gaugeStartAngle + maxSideAngle
-
-		let angleOffset = 0
-		let phaseLabelHorizontalMargin = 0
+		const gaugeStartAngle = baseAngle + (activeGaugeIndex * maxSideAngle) + baseAngleOffset;
+		const gaugeEndAngle = gaugeStartAngle + maxSideAngle;
+		let angleOffset = 0;
+		let phaseLabelHorizontalMargin = 0;
 		if (isMultiPhase) {
 			// If this is a multi-phase gauge, SideMultiGauge will be used instead of SideGauge.
 			// Since SideMultiGauge shows 1,2,3 labels beneath the gauges, provide an angleOffset
 			// for adjusting the arc angle to make room for the labels. Also provide the edge margin
 			// to horizontally align each gauge label with its gauge.
-			angleOffset = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_angleOffset_one_gauge
-					: activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_angleOffset_two_gauge
-					: Theme.geometry_briefPage_edgeGauge_angleOffset_three_gauge
-			phaseLabelHorizontalMargin = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_one_gauge
-					: activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_two_gauge
-					: Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_three_gauge
+			angleOffset = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_angleOffset_one_gauge : activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_angleOffset_two_gauge : Theme.geometry_briefPage_edgeGauge_angleOffset_three_gauge;
+			phaseLabelHorizontalMargin = activeGaugeCount === 1 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_one_gauge : activeGaugeCount === 2 ? Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_two_gauge : Theme.geometry_briefPage_edgeGauge_phaseLabel_horizontalMargin_three_gauge;
 		}
-
 		return {
 			start: gaugeStartAngle,
 			end: gaugeEndAngle,
 			angleOffset: angleOffset,
 			phaseLabelHorizontalMargin: phaseLabelHorizontalMargin,
 			activeGaugeCount: activeGaugeCount
-		}
+		};
 	}
 
 	function _leftGaugeParameters(gauge, isMultiPhase = false) {
 		// Store _leftGaugeCount in a temporary var, as it may change value unexpectedly during the
 		// function call if it is updated via its property binding.
-		const activeGaugeCount = _leftGaugeCount
-		const gaugeHeight = _gaugeHeight(activeGaugeCount)
+		const activeGaugeCount = _leftGaugeCount;
+		const gaugeHeight = _gaugeHeight(activeGaugeCount);
 
 		// In a clockwise direction, the gauges start from the solar gauge and go upwards to the AC
 		// input gauge.
-		const baseAngle = 270 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
-		let gaugeIndex = 0  // solar yield gauge has index=0
+		const baseAngle = 270 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2);
+		let gaugeIndex = 0;  // solar yield gauge has index=0
 		if (gauge === dcInputGauge) {
-			gaugeIndex = solarYieldGauge.active ? 1 : 0
+			gaugeIndex = solarYieldGauge.active ? 1 : 0;
 		} else if (gauge === acInputGauge) {
-			gaugeIndex = (solarYieldGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0)
+			gaugeIndex = (solarYieldGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0);
 		}
-		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase)
+		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase);
 
 		// Add y offset if gauge is aligned to the top or bottom.
-		let arcVerticalCenterOffset = 0
+		let arcVerticalCenterOffset = 0;
 		if (activeGaugeCount === 2) {
-			arcVerticalCenterOffset = gaugeIndex === 0 ? -(gaugeHeight / 2) : gaugeHeight / 2
+			arcVerticalCenterOffset = gaugeIndex === 0 ? -(gaugeHeight / 2) : gaugeHeight / 2;
 		} else if (activeGaugeCount === 3) {
 			// The second (center) gauge does not need an offset, as it will be vertically centered.
 			if (gaugeIndex === 0) {
-				arcVerticalCenterOffset = -gaugeHeight
+				arcVerticalCenterOffset = -gaugeHeight;
 			} else if (gaugeIndex === 2) {
-				arcVerticalCenterOffset = gaugeHeight
+				arcVerticalCenterOffset = gaugeHeight;
 			}
 		}
-		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
+		return Object.assign(params, {
+				arcVerticalCenterOffset: arcVerticalCenterOffset
+			});
 	}
 
 	function _rightGaugeParameters(gauge, isMultiPhase = false) {
 		// Store _rightGaugeCount in a temporary var, as it may change value unexpectedly during the
 		// function call if it is updated via its property binding.
-		const activeGaugeCount = _rightGaugeCount
-		const gaugeHeight = _gaugeHeight(activeGaugeCount)
+		const activeGaugeCount = _rightGaugeCount;
+		const gaugeHeight = _gaugeHeight(activeGaugeCount);
 
 		// In a clockwise direction, the gauges start from the AC load gauge and go downwards to the
 		// DC load gauge.
-		const baseAngle = 90 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2)
-		const gaugeIndex = gauge === acLoadGauge ? 0 : 1
-		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase)
+		const baseAngle = 90 - (Theme.geometry_briefPage_largeEdgeGauge_maxAngle / 2);
+		const gaugeIndex = gauge === acLoadGauge ? 0 : 1;
+		const params = _sideGaugeParameters(baseAngle, activeGaugeCount, gaugeIndex, isMultiPhase);
 
 		// Add y offset if gauge is aligned to the top or bottom.
-		let arcVerticalCenterOffset = 0
+		let arcVerticalCenterOffset = 0;
 		if (activeGaugeCount === 2) {
-			arcVerticalCenterOffset = gaugeIndex === 0 ? gaugeHeight / 2 : -(gaugeHeight / 2)
+			arcVerticalCenterOffset = gaugeIndex === 0 ? gaugeHeight / 2 : -(gaugeHeight / 2);
 		}
-		return Object.assign(params, { arcVerticalCenterOffset: arcVerticalCenterOffset })
+		return Object.assign(params, {
+				arcVerticalCenterOffset: arcVerticalCenterOffset
+			});
 	}
 
 	//% "Brief"
@@ -156,9 +154,7 @@ SwipeViewPage {
 	backgroundColor: Theme.color_briefPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	topRightButton: sidePanel.active && state !== "panelOpening"
-			? VenusOS.StatusBar_RightButton_SidePanelActive
-			: VenusOS.StatusBar_RightButton_SidePanelInactive
+	topRightButton: sidePanel.active && state !== "panelOpening" ? VenusOS.StatusBar_RightButton_SidePanelActive : VenusOS.StatusBar_RightButton_SidePanelInactive
 
 	Loader {
 		id: mainGauge
@@ -166,9 +162,10 @@ SwipeViewPage {
 		y: (root._unexpandedHeight - height) / 2
 		width: Theme.geometry_mainGauge_size
 		height: width
-		x: sidePanel.x/2 - width/2
+		x: sidePanel.x / 2 - width / 2
 		sourceComponent: Global.tanks.totalTankCount === 0 ? singleGauge : multiGauge
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
+		onStatusChanged: if (status === Loader.Error)
+			console.warn("Unable to load main gauge")
 	}
 
 	Component {
@@ -269,7 +266,8 @@ SwipeViewPage {
 					quantityLabel.acInputMode: true
 				}
 			}
-			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
+			onStatusChanged: if (status === Loader.Error)
+				console.warn("Unable to load AC input edge")
 		}
 
 		Loader {
@@ -296,11 +294,10 @@ SwipeViewPage {
 
 				ArcGaugeQuantityRow {
 					id: dcInGaugeQuantity
-					alignment: gaugeParams.activeGaugeCount === 2
-							// DC input gauge is the second (bottom) gauge, so label aligns to the
-							// top, or is the first (top) gauge, so label aligns to the bottom.
-							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
-							: Qt.AlignLeft| Qt.AlignVCenter
+					alignment: gaugeParams.activeGaugeCount === 2 ?
+					// DC input gauge is the second (bottom) gauge, so label aligns to the
+					// top, or is the first (top) gauge, so label aligns to the bottom.
+					Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom) : Qt.AlignLeft | Qt.AlignVCenter
 					icon.source: root._dcInputIconSource
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
@@ -313,7 +310,8 @@ SwipeViewPage {
 					maximumValue: Global.dcInputs.maximumPower
 				}
 			}
-			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC input edge")
+			onStatusChanged: if (status === Loader.Error)
+				console.warn("Unable to load DC input edge")
 		}
 
 		Loader {
@@ -346,7 +344,8 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.system.solar
 				}
 			}
-			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load solar yield gauge")
+			onStatusChanged: if (status === Loader.Error)
+				console.warn("Unable to load solar yield gauge")
 		}
 	}
 
@@ -394,7 +393,8 @@ SwipeViewPage {
 					quantityLabel.dataObject: Global.system.load.ac
 				}
 			}
-			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
+			onStatusChanged: if (status === Loader.Error)
+				console.warn("Unable to load AC load edge")
 		}
 
 		Loader {
@@ -433,7 +433,8 @@ SwipeViewPage {
 					maximumValue: Global.system.dc.maximumPower
 				}
 			}
-			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")
+			onStatusChanged: if (status === Loader.Error)
+				console.warn("Unable to load DC load gauge")
 		}
 	}
 
@@ -472,7 +473,7 @@ SwipeViewPage {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			root.showSidePanel = !root.showSidePanel
+			root.showSidePanel = !root.showSidePanel;
 		}
 	}
 
@@ -483,8 +484,8 @@ SwipeViewPage {
 		onOverLimitChanged: {
 			if (overLimit) {
 				//% "System load high, closing the side panel to reduce CPU load"
-				Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("nav_brief_close_side_panel_high_cpu"))
-				root.state = "initialized"
+				Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("nav_brief_close_side_panel_high_cpu"));
+				root.state = "initialized";
 			}
 		}
 	}
@@ -513,7 +514,9 @@ SwipeViewPage {
 				_gaugeArcOpacity: 0
 				_gaugeLabelOpacity: 1
 			}
-			StateChangeScript { script: sidePanel.active = true }
+			StateChangeScript {
+				script: sidePanel.active = true
+			}
 		},
 		State {
 			name: "panelOpened"
@@ -562,7 +565,9 @@ SwipeViewPage {
 					duration: Theme.animation_briefPage_sidePanel_slide_duration
 					easing.type: Easing.InQuad
 				}
-				ScriptAction { script: root.state = "panelOpened" }
+				ScriptAction {
+					script: root.state = "panelOpened"
+				}
 			}
 		},
 		Transition {
@@ -581,7 +586,9 @@ SwipeViewPage {
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: Theme.animation_briefPage_edgeGauge_fade_duration
 				}
-				ScriptAction { script: sidePanel.active = false }
+				ScriptAction {
+					script: sidePanel.active = false
+				}
 			}
 		}
 	]

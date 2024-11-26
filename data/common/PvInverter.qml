@@ -21,11 +21,11 @@ Device {
 		function updateCount(maxPhaseCount) {
 			// pvinverter services do not have /NumberOfPhases, so manually update the phase model
 			// count when phase measurements are detected.
-			phaseCount = Math.max(count, maxPhaseCount)
+			phaseCount = Math.max(count, maxPhaseCount);
 		}
 
 		function getPhase(index) {
-			return _phases.objectAt(index)
+			return _phases.objectAt(index);
 		}
 
 		readonly property Instantiator _phases: Instantiator {
@@ -42,22 +42,26 @@ Device {
 
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid)
+						phases.updateCount(index + 1)
 					onValueChanged: phases.setValue(index, PhaseModel.EnergyRole, value)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid)
+						phases.updateCount(index + 1)
 					onValueChanged: phases.setValue(index, PhaseModel.PowerRole, value)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
 					uid: phaseUid + "/Current"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid)
+						phases.updateCount(index + 1)
 					onValueChanged: phases.setValue(index, PhaseModel.CurrentRole, value)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
 					uid: phaseUid + "/Voltage"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid)
+						phases.updateCount(index + 1)
 					onValueChanged: phases.setValue(index, PhaseModel.VoltageRole, value)
 				}
 			}
@@ -91,9 +95,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.pvInverters) {
 			if (valid) {
-				Global.pvInverters.addInverter(pvInverter)
+				Global.pvInverters.addInverter(pvInverter);
 			} else {
-				Global.pvInverters.removeInverter(pvInverter)
+				Global.pvInverters.removeInverter(pvInverter);
 			}
 		}
 	}

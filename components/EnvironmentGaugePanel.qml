@@ -19,9 +19,7 @@ Rectangle {
 	property var humidityGaugeGradient
 
 	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
-	readonly property int _gaugeWidth: _twoGauges
-			? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
-			: Theme.geometry_levelsPage_environment_gauge_width
+	readonly property int _gaugeWidth: _twoGauges ? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2 : Theme.geometry_levelsPage_environment_gauge_width
 
 	border.color: Theme.color_levelsPage_panel_border_color
 	border.width: Theme.geometry_levelsPage_panel_border_width
@@ -30,7 +28,10 @@ Rectangle {
 
 	Behavior on height {
 		enabled: root.animationEnabled
-		NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
+		NumberAnimation {
+			duration: Theme.animation_page_idleResize_duration
+			easing.type: Easing.InOutQuad
+		}
 	}
 
 	GaugeHeader {
@@ -41,7 +42,7 @@ Rectangle {
 	EnvironmentGauge {
 		id: tempGauge
 
-		x: humidityGaugeLoader.active ? 0 : parent.width/2 - width/2
+		x: humidityGaugeLoader.active ? 0 : parent.width / 2 - width / 2
 		anchors {
 			top: header.bottom
 			bottom: parent.bottom
@@ -93,6 +94,7 @@ Rectangle {
 			highlightedValueColor: Theme.color_green
 			gradient: root.humidityGaugeGradient
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load himidity environment gauge:", errorString())
+		onStatusChanged: if (status === Loader.Error)
+			console.warn("Unable to load himidity environment gauge:", errorString())
 	}
 }

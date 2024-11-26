@@ -15,11 +15,12 @@ QtObject {
 	readonly property string text: flags.length > 0 ? qsTrId("ess_flags").arg(flags.join(" ")) : ""
 
 	readonly property var flags: {
-		var r = []
-		for (var i=0; i<flagItems.length; i++) {
-			if (flagItems[i].value) r.push('#' + (i+1).toString(16))
+		var r = [];
+		for (var i = 0; i < flagItems.length; i++) {
+			if (flagItems[i].value)
+				r.push('#' + (i + 1).toString(16));
 		}
-		return r
+		return r;
 	}
 
 	readonly property alias lowSoc: _lowSoc
@@ -32,27 +33,47 @@ QtObject {
 
 	// Flags to monitor
 	readonly property list<VeQuickItem> flagItems: [
-		VeQuickItem { id: _lowSoc;					uid: serviceUid + "/SystemState/LowSoc" },
-		VeQuickItem { id: _batteryLife;				uid: serviceUid + "/SystemState/BatteryLife" },
-		VeQuickItem { id: _chargeDisabled;			uid: serviceUid + "/SystemState/ChargeDisabled" },
-		VeQuickItem { id: _dischargeDisabled;		uid: serviceUid + "/SystemState/DischargeDisabled" },
-		VeQuickItem { id: _slowCharge;				uid: serviceUid + "/SystemState/SlowCharge" },
-		VeQuickItem { id: _userChargeLimited;		uid: serviceUid + "/SystemState/UserChargeLimited" },
-		VeQuickItem { id: _userDischargeLimited;	uid: serviceUid + "/SystemState/UserDischargeLimited" }
+		VeQuickItem {
+			id: _lowSoc
+			uid: serviceUid + "/SystemState/LowSoc"
+		},
+		VeQuickItem {
+			id: _batteryLife
+			uid: serviceUid + "/SystemState/BatteryLife"
+		},
+		VeQuickItem {
+			id: _chargeDisabled
+			uid: serviceUid + "/SystemState/ChargeDisabled"
+		},
+		VeQuickItem {
+			id: _dischargeDisabled
+			uid: serviceUid + "/SystemState/DischargeDisabled"
+		},
+		VeQuickItem {
+			id: _slowCharge
+			uid: serviceUid + "/SystemState/SlowCharge"
+		},
+		VeQuickItem {
+			id: _userChargeLimited
+			uid: serviceUid + "/SystemState/UserChargeLimited"
+		},
+		VeQuickItem {
+			id: _userDischargeLimited
+			uid: serviceUid + "/SystemState/UserDischargeLimited"
+		}
 	]
 
 	function descriptionText() { // not used yet, will be needed for the new battery charging/discharge design
 		if (chargeDisabled.value && dischargeDisabled.value) {
 			//% "ESS %1 Charge/Discharge Disabled"
-			return qsTrId("systemreason_charge_discharge_disabled").arg(flags.join(" "))
+			return qsTrId("systemreason_charge_discharge_disabled").arg(flags.join(" "));
 		} else if (chargeDisabled.value) {
 			//% "ESS %1 Charge Disabled"
-			return qsTrId("systemreason_charge_disabled").arg(flags.join(" "))
+			return qsTrId("systemreason_charge_disabled").arg(flags.join(" "));
 		} else if (dischargeDisabled.value) {
 			//% "ESS %1 Discharge Disabled"
-			return qsTrId("systemreason_discharge_disabled").arg(flags.join(" "))
+			return qsTrId("systemreason_discharge_disabled").arg(flags.join(" "));
 		}
-
-		return ""
+		return "";
 	}
 }

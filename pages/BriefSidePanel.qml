@@ -13,12 +13,8 @@ ColumnLayout {
 	property bool animationEnabled
 	property string dcInputIconSource
 
-	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
-			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
-			: null
-	readonly property AcInput nonGeneratorInput: Global.acInputs.input1?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
-			: Global.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
-			: null
+	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1 : Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2 : null
+	readonly property AcInput nonGeneratorInput: Global.acInputs.input1?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1 : Global.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2 : null
 
 	BriefSidePanelWidget {
 		//% "Solar yield"
@@ -27,7 +23,8 @@ ColumnLayout {
 		loadersActive: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count === 0
 		visible: Global.solarChargers.model.count || Global.pvInverters.model.count
 		quantityLabel.dataObject: Global.system.solar
-		sideComponent: SolarYieldGraph {}
+		sideComponent: SolarYieldGraph {
+		}
 	}
 
 	// In most cases there is only 1 generator, so don't worry about other ones here.
@@ -78,23 +75,24 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		id: acInputWidget
 
-		 title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
-		 icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
-		 quantityLabel.dataObject: nonGeneratorInput
-		 quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		 quantityLabel.acInputMode: true
-		 loadersActive: nonGeneratorInput && nonGeneratorInput.operational
-		 visible: loadersActive
+		title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
+		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
+		quantityLabel.dataObject: nonGeneratorInput
+		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.acInputMode: true
+		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
+		visible: loadersActive
 
-		 AcInputDirectionIcon {
-			 id: acInputDirectionIcon
-			 parent: acInputWidget.quantityLabel
-			 anchors.verticalCenter: parent.verticalCenter
-			 input: nonGeneratorInput
-		 }
+		AcInputDirectionIcon {
+			id: acInputDirectionIcon
+			parent: acInputWidget.quantityLabel
+			anchors.verticalCenter: parent.verticalCenter
+			input: nonGeneratorInput
+		}
 
-		 sideComponent: LoadGraph {
-				/*
+		sideComponent: LoadGraph {
+
+			/*
 			This graph shows the current/amps that is imported/exported by the AC input. On a
 			multi-phase system, the graph shows the average current per phase.
 
@@ -140,9 +138,9 @@ exported power v  0.4 |   /
 			function scaleHistoricalData(prevMin, prevMax, newMin, newMax) {
 				for (let i = 0; i < model.length; ++i) {
 					// Scale each amps value in the model from the old range to the new range.
-					const averagePhaseCurrentAsRatio = model[i]
-					const currentInAmps = Units.scaleNumber(averagePhaseCurrentAsRatio, 0, 1, prevMin, prevMax)
-					model[i] = Units.scaleNumber(currentInAmps, prevMin, prevMax, newMin, newMax)
+					const averagePhaseCurrentAsRatio = model[i];
+					const currentInAmps = Units.scaleNumber(averagePhaseCurrentAsRatio, 0, 1, prevMin, prevMax);
+					model[i] = Units.scaleNumber(currentInAmps, prevMin, prevMax, newMin, newMax);
 				}
 			}
 
@@ -158,18 +156,17 @@ exported power v  0.4 |   /
 			threshold: isNaN(acInputGraphRange.maximumAboveZeroMidPoint) ? 0 : 0.5
 
 			onNextValueRequested: {
-				const graphMin = acInputGraphRange.minimumCurrent || 0
-				const graphMax = acInputGraphRange.maximumCurrent || 0
-
+				const graphMin = acInputGraphRange.minimumCurrent || 0;
+				const graphMax = acInputGraphRange.maximumCurrent || 0;
 				if (_prevGraphMin !== graphMin || _prevGraphMax !== graphMax) {
 					// don't scale historical data if the prevMin=prevMax=0 i.e. uninitialized.
 					if (_prevGraphMin !== 0 || _prevGraphMax !== 0) {
-						scaleHistoricalData(_prevGraphMin, _prevGraphMax, graphMin, graphMax)
+						scaleHistoricalData(_prevGraphMin, _prevGraphMax, graphMin, graphMax);
 					}
-					_prevGraphMin = graphMin
-					_prevGraphMax = graphMax
+					_prevGraphMin = graphMin;
+					_prevGraphMax = graphMax;
 				}
-				addValue(acInputGraphRange.averagePhaseCurrentAsRatio)
+				addValue(acInputGraphRange.averagePhaseCurrentAsRatio);
 			}
 
 			AcPhasesCurrentRange {
@@ -178,18 +175,11 @@ exported power v  0.4 |   /
 				// If the graph values may go below zero (i.e. it shows both import and export
 				// values) then use a min/max range that allows the mid-point to be zero. To do
 				// this, find the maximum range to be shown above or below the mid-point.
-				readonly property real maximumAboveZeroMidPoint: nonGeneratorInput.inputInfo.minimumCurrent < 0
-						&& nonGeneratorInput.inputInfo.maximumCurrent > 0
-					? Math.max(Math.abs(nonGeneratorInput.inputInfo.minimumCurrent), nonGeneratorInput.inputInfo.maximumCurrent)
-					: NaN
+				readonly property real maximumAboveZeroMidPoint: nonGeneratorInput.inputInfo.minimumCurrent < 0 && nonGeneratorInput.inputInfo.maximumCurrent > 0 ? Math.max(Math.abs(nonGeneratorInput.inputInfo.minimumCurrent), nonGeneratorInput.inputInfo.maximumCurrent) : NaN
 
 				phaseModel: root.visible ? nonGeneratorInput.phases : null
-				minimumCurrent: isNaN(maximumAboveZeroMidPoint)
-								? nonGeneratorInput.inputInfo.minimumCurrent
-								: -maximumAboveZeroMidPoint
-				maximumCurrent: isNaN(maximumAboveZeroMidPoint)
-								? nonGeneratorInput.inputInfo.maximumCurrent
-								: maximumAboveZeroMidPoint
+				minimumCurrent: isNaN(maximumAboveZeroMidPoint) ? nonGeneratorInput.inputInfo.minimumCurrent : -maximumAboveZeroMidPoint
+				maximumCurrent: isNaN(maximumAboveZeroMidPoint) ? nonGeneratorInput.inputInfo.maximumCurrent : maximumAboveZeroMidPoint
 			}
 		}
 
@@ -207,10 +197,9 @@ exported power v  0.4 |   /
 	}
 
 	BriefSidePanelWidget {
-		title: Global.dcInputs.model.count === 1
-				? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType)
-				  //% "DC input"
-				: qsTrId("brief_dc_input")
+		title: Global.dcInputs.model.count === 1 ? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType) :
+		//% "DC input"
+		qsTrId("brief_dc_input")
 		icon.source: root.dcInputIconSource
 		loadersActive: Global.dcInputs.model.count > 0
 		visible: loadersActive
@@ -240,7 +229,7 @@ exported power v  0.4 |   /
 		}
 
 		Component {
-			id : prettyGaugeDcInput
+			id: prettyGaugeDcInput
 			BarGauge {
 				orientation: Qt.Horizontal
 				value: dcInputRange.valueAsRatio
@@ -308,7 +297,7 @@ exported power v  0.4 |   /
 		}
 
 		Component {
-			id : prettyGaugeDcLoad
+			id: prettyGaugeDcLoad
 			BarGauge {
 				orientation: Qt.Horizontal
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage

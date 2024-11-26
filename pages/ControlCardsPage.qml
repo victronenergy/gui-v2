@@ -10,9 +10,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property int cardWidth: cardsView.count > 2
-			? Theme.geometry_controlCard_minimumWidth
-			: Theme.geometry_controlCard_maximumWidth
+	property int cardWidth: cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
 	width: parent.width
@@ -123,7 +121,9 @@ Page {
 					model: manualRelays
 				}
 
-				ManualRelayModel { id: manualRelays }
+				ManualRelayModel {
+					id: manualRelays
+				}
 			}
 		}
 	}

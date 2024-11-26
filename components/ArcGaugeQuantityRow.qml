@@ -16,14 +16,8 @@ Row {
 
 	// Use x/y bindings as the layout sometimes did not update dynamically when multiple anchor
 	// bindings were used instead.
-	x: root.alignment & Qt.AlignLeft
-	   ? Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin
-	   : parent.width - width - Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin
-	y: alignment & Qt.AlignVCenter
-	   ? parent.height/2 - height/2
-	   : alignment & Qt.AlignBottom
-		 ? parent.height - height - Theme.geometry_briefPage_edgeGauge_quantityLabel_bottomMargin
-		 : Theme.geometry_briefPage_edgeGauge_quantityLabel_topMargin    // root.alignment & Qt.AlignTop
+	x: root.alignment & Qt.AlignLeft ? Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin : parent.width - width - Theme.geometry_briefPage_edgeGauge_quantityLabel_horizontalMargin
+	y: alignment & Qt.AlignVCenter ? parent.height / 2 - height / 2 : alignment & Qt.AlignBottom ? parent.height - height - Theme.geometry_briefPage_edgeGauge_quantityLabel_bottomMargin : Theme.geometry_briefPage_edgeGauge_quantityLabel_topMargin    // root.alignment & Qt.AlignTop
 
 	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight

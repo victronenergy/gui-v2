@@ -28,9 +28,9 @@ Device {
 
 	onValidChanged: {
 		if (valid) {
-			Global.environmentInputs.addInput(input)
+			Global.environmentInputs.addInput(input);
 		} else {
-			Global.environmentInputs.removeInput(input)
+			Global.environmentInputs.removeInput(input);
 		}
 	}
 }

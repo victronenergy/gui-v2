@@ -16,7 +16,5 @@ Button {
 	display: C.AbstractButton.TextUnderIcon
 	radius: 0
 
-	color: down
-		   ? Theme.color_navigationBar_button_on
-		   : Theme.color_navigationBar_button_off
+	color: down ? Theme.color_navigationBar_button_on : Theme.color_navigationBar_button_off
 }

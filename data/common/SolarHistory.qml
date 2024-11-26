@@ -19,20 +19,20 @@ QtObject {
 		uidPrefix: root.bindPrefix + "/History/Overall"
 	}
 
-	signal yieldUpdatedForDay(day: int, yieldKwh: real)
+	signal yieldUpdatedForDay(int day, real yieldKwh)
 
 	function dailyHistory(day) {
-		return _historyObjects.dailyHistory(day)
+		return _historyObjects.dailyHistory(day);
 	}
 
 	function dailyTrackerHistory(day, trackerIndex) {
-		return _historyObjects.dailyTrackerHistory(day, trackerIndex)
+		return _historyObjects.dailyTrackerHistory(day, trackerIndex);
 	}
 
 	function trackerName(trackerIndex, format) {
-		const nameObject = _trackerNames.objectAt(trackerIndex)
-		const name = nameObject ? nameObject.value || "" : ""
-		return Global.solarChargers.formatTrackerName(name, trackerIndex, trackerCount, deviceName, format)
+		const nameObject = _trackerNames.objectAt(trackerIndex);
+		const name = nameObject ? nameObject.value || "" : "";
+		return Global.solarChargers.formatTrackerName(name, trackerIndex, trackerCount, deviceName, format);
 	}
 
 	readonly property Instantiator _trackerNames: Instantiator {
@@ -44,16 +44,16 @@ QtObject {
 
 	readonly property Instantiator _historyObjects: Instantiator {
 		function dailyHistory(day) {
-			return objectAt(day)
+			return objectAt(day);
 		}
 
 		function dailyTrackerHistory(day, trackerIndex) {
-			let overallDailyHistory = objectAt(day)
+			let overallDailyHistory = objectAt(day);
 			if (!overallDailyHistory) {
 				// History is not yet available for this day
-				return null
+				return null;
 			}
-			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex)
+			return overallDailyHistory.trackerHistoryObjects.objectAt(trackerIndex);
 		}
 
 		model: undefined    // ensure delegates are not created before history model is set
@@ -78,14 +78,14 @@ QtObject {
 
 			onYieldKwhChanged: {
 				if (_completed) {
-					root.yieldUpdatedForDay(model.index, yieldKwh)
+					root.yieldUpdatedForDay(model.index, yieldKwh);
 				}
 			}
 
 			Component.onCompleted: {
-				_completed = true
+				_completed = true;
 				if (!isNaN(yieldKwh)) {
-					root.yieldUpdatedForDay(model.index, yieldKwh)
+					root.yieldUpdatedForDay(model.index, yieldKwh);
 				}
 			}
 		}
@@ -95,9 +95,8 @@ QtObject {
 		uid: root.bindPrefix + "/History/Overall/DaysAvailable"
 		onValueChanged: {
 			if (value !== undefined) {
-				_historyObjects.model = value
+				_historyObjects.model = value;
 			}
 		}
 	}
-
 }

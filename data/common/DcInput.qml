@@ -26,16 +26,16 @@ DcDevice {
 	onValidChanged: {
 		if (!!Global.dcInputs) {
 			if (valid) {
-				Global.dcInputs.addInput(input)
+				Global.dcInputs.addInput(input);
 			} else {
-				Global.dcInputs.removeInput(input)
+				Global.dcInputs.removeInput(input);
 			}
 		}
 	}
 
 	function _updateTotals() {
 		if (_completed && !!Global.dcInputs) {
-			Qt.callLater(Global.dcInputs.updateTotals)
+			Qt.callLater(Global.dcInputs.updateTotals);
 		}
 	}
 
@@ -44,6 +44,6 @@ DcDevice {
 	onPowerChanged: _updateTotals()
 
 	Component.onCompleted: {
-		_completed = true
+		_completed = true;
 	}
 }

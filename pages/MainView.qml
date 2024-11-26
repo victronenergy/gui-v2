@@ -12,10 +12,7 @@ Item {
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	property PageManager pageManager
 	property bool controlsActive
-	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
-			   : !!pageStack.currentItem ? pageStack.currentItem
-			   : !!swipeView ? swipeView.currentItem
-			   : null
+	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item : !!pageStack.currentItem ? pageStack.currentItem : !!swipeView ? swipeView.currentItem : null
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -23,9 +20,7 @@ Item {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: BackendConnection.applicationVisible
-			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
-			&& !Global.splashScreenVisible
+	property bool allowPageAnimations: BackendConnection.applicationVisible && !pageStack.busy && (!swipeView || !swipeView.flicking) && !Global.splashScreenVisible
 
 	readonly property bool screenIsBlanked: !!Global.screenBlanker && Global.screenBlanker.blanked
 
@@ -34,31 +29,28 @@ Item {
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
-			_loadUi()
+			_loadUi();
 		}
 	}
 
 	function loadStartPage() {
-		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
+		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls);
 	}
 
 	function clearUi() {
-		swipeViewLoader.active = false
-		pageStack.clear()
-		_loadedPages = 0
+		swipeViewLoader.active = false;
+		pageStack.clear();
+		_loadedPages = 0;
 	}
 
 	function _loadUi() {
-		console.warn("Data sources ready, loading pages")
-		swipeViewLoader.active = true
+		console.warn("Data sources ready, loading pages");
+		swipeViewLoader.active = true;
 	}
 
 	// Revert to the start page when the application is inactive.
 	Timer {
-		running: !!Global.systemSettings
-				 && Global.systemSettings.startPageConfiguration.hasStartPage
-				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
-				 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+		running: !!Global.systemSettings && Global.systemSettings.startPageConfiguration.hasStartPage && Global.systemSettings.startPageConfiguration.startPageTimeout > 0 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
 		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
 		onTriggered: root.loadStartPage()
 	}
@@ -69,9 +61,9 @@ Item {
 		enabled: !!Global.systemSettings && Global.systemSettings.startPageConfiguration.autoSelect
 		function onApplicationActiveChanged() {
 			if (!Global.applicationActive) {
-				const mainPageName = root.pageManager.navBar.getCurrentPage()
-				const mainPage = swipeView.getCurrentPage()
-				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
+				const mainPageName = root.pageManager.navBar.getCurrentPage();
+				const mainPage = swipeView.getCurrentPage();
+				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls);
 			}
 		}
 	}
@@ -98,10 +90,10 @@ Item {
 			// If there is an alarm, the notifications page will be shown; otherwise, show the
 			// application start page, if set.
 			if (!Global.notifications.alarm) {
-				root.loadStartPage()
+				root.loadStartPage();
 			}
 			// Notify that the UI is ready to be displayed.
-			Global.allPagesLoaded = true
+			Global.allPagesLoaded = true;
 		}
 	}
 
@@ -112,7 +104,8 @@ Item {
 
 			property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
 
-			onReadyChanged: if (ready) ready = true // remove binding
+			onReadyChanged: if (ready)
+				ready = true // remove binding
 			anchors.fill: parent
 			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 			contentChildren: swipePageModel.children
@@ -127,11 +120,13 @@ Item {
 	Loader {
 		id: controlCardsLoader
 
-		onActiveChanged: if (active) active = true // remove binding
+		onActiveChanged: if (active)
+			active = true // remove binding
 
 		z: 1
 		opacity: 0.0
-		sourceComponent: ControlCardsPage { }
+		sourceComponent: ControlCardsPage {
+		}
 		active: root.controlsActive
 		enabled: root.controlsActive || controlsOutAnimation.running
 
@@ -241,7 +236,8 @@ Item {
 		opacity: 0
 		model: swipeView ? swipeView.contentModel : null
 
-		onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+		onCurrentIndexChanged: if (swipeView)
+			swipeView.setCurrentIndex(currentIndex)
 
 		Component.onCompleted: pageManager.navBar = navBar
 
@@ -252,8 +248,8 @@ Item {
 			// not run (skipping the splash screen causes the animations to
 			// start before the parent is visible).
 			onStopped: {
-				navBar.y = yAnimator.to
-				navBar.opacity = opacityAnimator.to
+				navBar.y = yAnimator.to;
+				navBar.opacity = opacityAnimator.to;
 			}
 
 			PauseAnimation {
@@ -280,8 +276,7 @@ Item {
 		SequentialAnimation {
 			id: animateNavBarIn
 
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
+			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
 
 			YAnimator {
 				target: navBar
@@ -293,7 +288,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
+						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode;
 					}
 				}
 			}
@@ -307,7 +302,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
+						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive;
 					}
 				}
 			}
@@ -316,8 +311,7 @@ Item {
 		SequentialAnimation {
 			id: animateNavBarOut
 
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
+			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
 
 			OpacityAnimator {
 				target: navBar
@@ -329,7 +323,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
+						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen;
 					}
 				}
 			}
@@ -343,7 +337,7 @@ Item {
 			ScriptAction {
 				script: {
 					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
+						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle;
 					}
 				}
 			}
@@ -368,11 +362,11 @@ Item {
 
 		title: !!root.currentPage ? root.currentPage.title || "" : ""
 		leftButton: {
-			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
+			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None;
 			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.depth > 0) {
-				return VenusOS.StatusBar_LeftButton_Back
+				return VenusOS.StatusBar_LeftButton_Back;
 			}
-			return customButton
+			return customButton;
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
@@ -381,16 +375,16 @@ Item {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				root.controlsActive = true
-				break
+				root.controlsActive = true;
+				break;
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.controlsActive = false
+				root.controlsActive = false;
 				break;
 			case VenusOS.StatusBar_LeftButton_Back:
-				pageManager.popPage()
-				break
+				pageManager.popPage();
+				break;
 			default:
-				break
+				break;
 			}
 		}
 

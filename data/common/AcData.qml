@@ -16,10 +16,7 @@ QtObject {
 	readonly property real frequency: _frequency.isValid ? _frequency.value : NaN
 
 	// If the power is not reported, calculate the apparent power
-	readonly property real power: _reportedPower.isValid ? _reportedPower.value
-			 : _apparentPower.isValid ? _apparentPower.value
-			 : _voltage.isValid && _current.isValid ? _voltage.value * _current.value
-			 : NaN
+	readonly property real power: _reportedPower.isValid ? _reportedPower.value : _apparentPower.isValid ? _apparentPower.value : _voltage.isValid && _current.isValid ? _voltage.value * _current.value : NaN
 	readonly property int powerUnit: _reportedPower.isValid ? VenusOS.Units_Watt : VenusOS.Units_VoltAmpere
 
 	property VeQuickItem _voltage: VeQuickItem {

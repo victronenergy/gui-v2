@@ -18,9 +18,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.acSystemDevices) {
 			if (valid) {
-				Global.acSystemDevices.model.addDevice(acSystemDevice)
+				Global.acSystemDevices.model.addDevice(acSystemDevice);
 			} else {
-				Global.acSystemDevices.model.removeDevice(acSystemDevice.serviceUid)
+				Global.acSystemDevices.model.removeDevice(acSystemDevice.serviceUid);
 			}
 		}
 	}

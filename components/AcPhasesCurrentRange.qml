@@ -14,7 +14,9 @@ QtObject {
 	readonly property real averagePhaseCurrentAsRatio: _valueRange.valueAsRatio
 	property alias phaseModel: _phaseObjects.model
 
-	readonly property ValueRange _valueRange: ValueRange { id: _valueRange }
+	readonly property ValueRange _valueRange: ValueRange {
+		id: _valueRange
+	}
 
 	// Sum the phase currents and use this as the value within the range. This is not a technically
 	// perfect representation of the AC input/load, as voltage may differ per phase, but it's close.
@@ -29,14 +31,14 @@ QtObject {
 
 			function _update() {
 				if (!root || root._phaseObjects.count === 0) {
-					return
+					return;
 				}
-				let total = 0
+				let total = 0;
 				for (let i = 0; i < root._phaseObjects.count; ++i) {
-					const c = i === index ? current : root._phaseObjects.objectAt(i).current
-					total += (c || 0)
+					const c = i === index ? current : root._phaseObjects.objectAt(i).current;
+					total += (c || 0);
 				}
-				_valueRange.value = total / root._phaseObjects.count
+				_valueRange.value = total / root._phaseObjects.count;
 			}
 		}
 	}

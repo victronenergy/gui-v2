@@ -25,7 +25,7 @@ Rectangle {
 		id: titleLabel
 
 		x: Theme.geometry_levelsPage_panel_horizontalMargin
-		width: parent.width - 2*x
+		width: parent.width - 2 * x
 		anchors.verticalCenter: parent.verticalCenter
 		horizontalAlignment: Text.AlignHCenter
 

@@ -22,13 +22,13 @@ Item {
 	property bool zeroCentered
 	property alias active: graphAnimation.running
 
-	signal nextValueRequested()
+	signal nextValueRequested
 
 	function addValue(value) {
-		model.push(value)
-		model.shift()
-		orangePath.model = []
-		orangePath.model = root.model
+		model.push(value);
+		model.shift();
+		orangePath.model = [];
+		orangePath.model = root.model;
 	}
 
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
@@ -64,10 +64,18 @@ Item {
 			strokeColor: aboveThresholdFillColor
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
-				x1: 0; y1: 0
-				x2: 0; y2: height
-				GradientStop { position: 0; color: aboveThresholdFillColor }
-				GradientStop { position: 1; color: "transparent" }
+				x1: 0
+				y1: 0
+				x2: 0
+				y2: height
+				GradientStop {
+					position: 0
+					color: aboveThresholdFillColor
+				}
+				GradientStop {
+					position: 1
+					color: "transparent"
+				}
 			}
 		}
 	}
@@ -82,20 +90,28 @@ Item {
 			id: bluePath
 			model: orangePath.model
 			strokeColor: belowThresholdFillColor
-			height: root.height + 2*strokeWidth
-			width: parent.width + 2*strokeWidth
+			height: root.height + 2 * strokeWidth
+			width: parent.width + 2 * strokeWidth
 			anchors.bottom: parent.bottom
 			zeroCentered: root.zeroCentered
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
-				x1: 0; y1: 0
-				x2: 0; y2: height
-				GradientStop { position: 0; color: bluePath.zeroCentered ? "transparent" : belowThresholdFillColor }
+				x1: 0
+				y1: 0
+				x2: 0
+				y2: height
+				GradientStop {
+					position: 0
+					color: bluePath.zeroCentered ? "transparent" : belowThresholdFillColor
+				}
 				GradientStop {
 					position: 1 - threshold + (dottedLine.height / height)
 					color: bluePath.zeroCentered ? Qt.rgba(belowThresholdFillColor.r, belowThresholdFillColor.g, belowThresholdFillColor.b, belowThresholdFillColor.a * 0.5) : belowThresholdFillColor
 				}
-				GradientStop { position: 1; color: bluePath.zeroCentered ? belowThresholdFillColor : "transparent" }
+				GradientStop {
+					position: 1
+					color: bluePath.zeroCentered ? belowThresholdFillColor : "transparent"
+				}
 			}
 		}
 		Row {
@@ -115,20 +131,27 @@ Item {
 			}
 		}
 	}
-	Rectangle { // the graph fades out on the sides
+	Rectangle {
+		// the graph fades out on the sides
 		anchors.fill: parent
 		gradient: Gradient {
 			orientation: Gradient.Horizontal
-			GradientStop { position: 0; color: horizontalGradientColor1 }
 			GradientStop {
-				position: Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
+				position: 0
+				color: horizontalGradientColor1
+			}
+			GradientStop {
+				position: Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width / width
 				color: horizontalGradientColor2
 			}
 			GradientStop {
-				position: 1 - Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
+				position: 1 - Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width / width
 				color: horizontalGradientColor2
 			}
-			GradientStop { position: 1; color: horizontalGradientColor1 }
+			GradientStop {
+				position: 1
+				color: horizontalGradientColor1
+			}
 		}
 	}
 	Component.onCompleted: model = Array(Theme.animation_loadGraph_model_length).fill(initialModelValue)

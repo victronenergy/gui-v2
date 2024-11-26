@@ -35,32 +35,21 @@ Flow {
 			id: phaseDelegate
 
 			// ignore noise values (close to zero)
-			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
-					: model[root.phaseModelProperty]
+			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0 : model[root.phaseModelProperty]
 			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
-			readonly property int valueStatus: feedingToGrid ? Theme.Ok
-					: root.phaseModelProperty ? Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
-					: Theme.Ok
+			readonly property int valueStatus: feedingToGrid ? Theme.Ok : root.phaseModelProperty ? Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType) : Theme.Ok
 			readonly property bool criticalOrWarning: valueStatus === Theme.Critical || valueStatus === Theme.Warning
-			readonly property color textColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green
-					: criticalOrWarning ? Theme.statusColorValue(valueStatus)
-					: Theme.color_font_primary
+			readonly property color textColor: Theme.color_darkOk, feedingToGrid ? Theme.color_green : criticalOrWarning ? Theme.statusColorValue(valueStatus) : Theme.color_font_primary
 
-			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S
-				   ? parent.width / 3
-				   : parent.width
-			height: root.widgetSize <= VenusOS.OverviewWidget_Size_S
-					? quantityLabel.y + quantityLabel.height
-					: phaseLabel.height
+			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S ? parent.width / 3 : parent.width
+			height: root.widgetSize <= VenusOS.OverviewWidget_Size_S ? quantityLabel.y + quantityLabel.height : phaseLabel.height
 
 			Label {
 				id: phaseLabel
 
 				text: model.name + ":"
 				color: quantityLabel.unitColor
-				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L
-						? Theme.font_size_body1
-						: Theme.font_overviewPage_phase_pixelSize
+				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L ? Theme.font_size_body1 : Theme.font_overviewPage_phase_pixelSize
 			}
 
 			ElectricalQuantityLabel {
@@ -71,15 +60,11 @@ Flow {
 				// For size XS / S: QuantityLabel is below phaseLabel.
 				// For size M+: QuantityLabel is on the right.
 				x: root.widgetSize <= VenusOS.OverviewWidget_Size_S ? 0 : parent.width - width
-				y: root.widgetSize <= VenusOS.OverviewWidget_Size_S
-						? phaseLabel.height + Theme.geometry_three_phase_column_spacing
-						: 0
+				y: root.widgetSize <= VenusOS.OverviewWidget_Size_S ? phaseLabel.height + Theme.geometry_three_phase_column_spacing : 0
 				dataObject: model
 				font.pixelSize: phaseLabel.font.pixelSize
 				valueColor: phaseDelegate.textColor
-				unitColor: valueColor == Theme.color_font_primary
-						   ? Theme.color_font_secondary
-						   : phaseDelegate.textColor
+				unitColor: valueColor == Theme.color_font_primary ? Theme.color_font_secondary : phaseDelegate.textColor
 			}
 
 			ValueRange {

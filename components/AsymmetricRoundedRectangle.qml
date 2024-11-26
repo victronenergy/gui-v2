@@ -50,10 +50,7 @@ Item {
 		}
 
 		visible: root.roundedSide !== VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
-		clip: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
-			  || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
-			  || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top
-			  || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Bottom
+		clip: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Top || root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Bottom
 
 		Rectangle {
 			id: roundedRect

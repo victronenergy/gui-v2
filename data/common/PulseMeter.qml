@@ -18,9 +18,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.pulseMeters) {
 			if (valid) {
-				Global.pulseMeters.model.addDevice(pulseMeter)
+				Global.pulseMeters.model.addDevice(pulseMeter);
 			} else {
-				Global.pulseMeters.model.removeDevice(pulseMeter.serviceUid)
+				Global.pulseMeters.model.removeDevice(pulseMeter.serviceUid);
 			}
 		}
 	}

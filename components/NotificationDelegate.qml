@@ -40,13 +40,8 @@ Rectangle {
 		CP.ColorImage {
 			id: icon
 			anchors.centerIn: parent
-			color: root.notification.type === VenusOS.Notification_Info
-				   ? (root.notification.active ? Theme.color_ok : Theme.color_darkOk)
-				   : root.notification.type === VenusOS.Notification_Warning
-					 ? (root.notification.active ? Theme.color_warning : Theme.color_darkWarning)
-					 : (root.notification.active ? Theme.color_critical : Theme.color_darkCritical)
-			source: root.notification.type === VenusOS.Notification_Info
-					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+			color: root.notification.type === VenusOS.Notification_Info ? (root.notification.active ? Theme.color_ok : Theme.color_darkOk) : root.notification.type === VenusOS.Notification_Warning ? (root.notification.active ? Theme.color_warning : Theme.color_darkWarning) : (root.notification.active ? Theme.color_critical : Theme.color_darkCritical)
+			source: root.notification.type === VenusOS.Notification_Info ? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
 	}
 

@@ -21,7 +21,8 @@ Device {
 
 	readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/Ac/Out/NominalInverterPower"
-		onValueChanged: if (!!Global.inverterChargers) Global.inverterChargers.refreshNominalInverterPower()
+		onValueChanged: if (!!Global.inverterChargers)
+			Global.inverterChargers.refreshNominalInverterPower()
 	}
 
 	readonly property VeQuickItem _mode: VeQuickItem {

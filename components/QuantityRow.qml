@@ -28,10 +28,10 @@ Row {
 		delegate: Row {
 			id: quantityDelegate
 
-			 // Visibility is determined by optional 'visible' property.
+			// Visibility is determined by optional 'visible' property.
 			readonly property bool showValue: modelData.visible !== false
 			readonly property var dataValue: modelData.value
-			readonly property bool isStringValue: typeof(dataValue) === 'string'
+			readonly property bool isStringValue: typeof (dataValue) === 'string'
 
 			height: root.height
 
@@ -39,9 +39,7 @@ Row {
 				anchors.verticalCenter: parent.verticalCenter
 				width: Theme.geometry_listItem_separator_width + (Theme.geometry_listItem_content_spacing / 2)
 				height: textLabel.height
-				visible: root._showSeparators
-						&& quantityDelegate.showValue
-						&& (model.index !== 0 || root.showFirstSeparator)
+				visible: root._showSeparators && quantityDelegate.showValue && (model.index !== 0 || root.showFirstSeparator)
 
 				Rectangle {
 					anchors.horizontalCenter: parent.horizontalCenter

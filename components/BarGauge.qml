@@ -41,5 +41,4 @@ BarGaugeBase {
 		source: sourceItem
 		z: 3
 	}
-
 }

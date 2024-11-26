@@ -6,7 +6,8 @@
 import QtQuick
 import Victron.VenusOS
 
-Rectangle {  // Use an opaque background so that page disappears behind nav bar when scrolled
+Rectangle {
+	// Use an opaque background so that page disappears behind nav bar when scrolled
 	id: root
 
 	required property var model
@@ -17,30 +18,30 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 	function setCurrentPage(pageName) {
 		for (let i = 0; i < model.count; ++i) {
-			const url = model.get(i).url
+			const url = model.get(i).url;
 			if (url.endsWith("/" + pageName)) {
-				_currentIndex = i
-				return true
+				_currentIndex = i;
+				return true;
 			}
 		}
-		console.warn("setCurrentPage(): cannot find page", pageName)
-		return false
+		console.warn("setCurrentPage(): cannot find page", pageName);
+		return false;
 	}
 
 	function setCurrentIndex(index) {
 		if (index === _currentIndex) {
-			return
+			return;
 		}
 		if (index < 0 || index >= model.count) {
-			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count)
-			return
+			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count);
+			return;
 		}
-		_currentIndex = index
+		_currentIndex = index;
 	}
 
 	function getCurrentPage() {
-		const url = model.get(currentIndex).url
-		return url.substring(url.lastIndexOf("/") + 1)
+		const url = model.get(currentIndex).url;
+		return url.substring(url.lastIndexOf("/") + 1);
 	}
 
 	width: parent.width
@@ -48,7 +49,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 	Row {
 		x: Theme.geometry_page_content_horizontalMargin
-		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
+		width: parent.width - 2 * Theme.geometry_page_content_horizontalMargin
 		height: parent.height
 		spacing: (width - (buttonRepeater.count * Theme.geometry_navigationBar_button_width)) / Math.max(buttonRepeater.count - 1, 1)
 
@@ -82,9 +83,7 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 					height: width
 					radius: Theme.geometry_notificationsPage_delegate_marker_radius
 					color: Theme.color_critical
-					visible: _modelData.url.endsWith("NotificationsPage.qml")
-							 && !!Global.notifications
-							 && Global.notifications.alert
+					visible: _modelData.url.endsWith("NotificationsPage.qml") && !!Global.notifications && Global.notifications.alert
 				}
 			}
 		}

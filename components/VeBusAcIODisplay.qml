@@ -12,8 +12,7 @@ Loader {
 	property string serviceUid
 
 	width: parent ? parent.width : 0
-	sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut
-				   : numberOfPhases.value === 3 ? threePhaseTables : null
+	sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut : numberOfPhases.value === 3 ? threePhaseTables : null
 
 	VeQuickItem {
 		id: numberOfPhases
@@ -26,12 +25,16 @@ Loader {
 		Column {
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_in
-				data: AcPhase { serviceUid: root.serviceUid + "/Ac/ActiveIn/L1" }
+				data: AcPhase {
+					serviceUid: root.serviceUid + "/Ac/ActiveIn/L1"
+				}
 			}
 
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_out
-				data: AcPhase { serviceUid: root.serviceUid + "/Ac/Out/L1" }
+				data: AcPhase {
+					serviceUid: root.serviceUid + "/Ac/Out/L1"
+				}
 			}
 		}
 	}

@@ -4,7 +4,6 @@
 */
 
 pragma Singleton
-
 import QtQml
 
 QtObject {
@@ -110,7 +109,7 @@ QtObject {
 	readonly property string closed_status: qsTrId("common_words_closed_status")
 
 	//% "Connected"
-	readonly property string connected: qsTrId("common_words_connected");
+	readonly property string connected: qsTrId("common_words_connected")
 
 	//: Electric current, as measured in Amps
 	//% "Current"
@@ -317,26 +316,26 @@ QtObject {
 	readonly property string not_connected: qsTrId("common_words_not_connected")
 
 	//% "Off"
-	readonly property string off: qsTrId("common_words_off");
+	readonly property string off: qsTrId("common_words_off")
 
 	//% "Offline"
-	readonly property string offline: qsTrId("common_words_offline");
+	readonly property string offline: qsTrId("common_words_offline")
 
 	//% "OK"
-	readonly property string ok: qsTrId("common_words_ok");
+	readonly property string ok: qsTrId("common_words_ok")
 
 	//% "On"
-	readonly property string on: qsTrId("common_words_on");
+	readonly property string on: qsTrId("common_words_on")
 
 	//% "Online"
-	readonly property string online: qsTrId("common_words_online");
+	readonly property string online: qsTrId("common_words_online")
 
 	//: Status is 'open'
 	//% "Open"
-	readonly property string open_status: qsTrId("common_words_open_status");
+	readonly property string open_status: qsTrId("common_words_open_status")
 
 	//% "Open circuit"
-	readonly property string open_circuit: qsTrId("common_words_open_circuit");
+	readonly property string open_circuit: qsTrId("common_words_open_circuit")
 
 	//% "Overall history"
 	readonly property string overall_history: qsTrId("common_words_overall_history")
@@ -368,7 +367,7 @@ QtObject {
 	readonly property string press_to_scan: qsTrId("common_words_press_to_scan")
 
 	//% "Product page"
-	readonly property string product_page: qsTrId("common_words_product_page");
+	readonly property string product_page: qsTrId("common_words_product_page")
 
 	//% "PV Inverter"
 	readonly property string pv_inverter: qsTrId("common_words_pv_inverter")
@@ -410,7 +409,7 @@ QtObject {
 	readonly property string setup: qsTrId("common_words_setup")
 
 	//% "Signal strength"
-	readonly property string signal_strength: qsTrId("common_words_signal_strength");
+	readonly property string signal_strength: qsTrId("common_words_signal_strength")
 
 	//: State of charge (as a percentage). %1 = the SOC value
 	//% "SOC %1"
@@ -517,55 +516,54 @@ QtObject {
 	readonly property string zero_feed_in_power_limit: qsTrId("common_words_zero_feed_in_power_limit")
 
 	function acInput(index) {
-			   //% "AC Input 1"
-		return index === 0 ? qsTrId("common_words_ac_input_1")
-			   //% "AC Input 2"
-			 : index === 1 ? qsTrId("common_words_ac_input_2")
-			   //% "AC Input"
-			 : qsTrId("common_words_ac_input")
+		//% "AC Input 1"
+		return index === 0 ? qsTrId("common_words_ac_input_1") :
+		//% "AC Input 2"
+		index === 1 ? qsTrId("common_words_ac_input_2") :
+		//% "AC Input"
+		qsTrId("common_words_ac_input");
 	}
 
 	function onOrOff(value) {
 		if (value === 0 || value === false) {
-			return off
+			return off;
 		} else if (value === 1 || value === true) {
-			return on
+			return on;
 		} else {
-			return unknown_status
+			return unknown_status;
 		}
 	}
 
 	function yesOrNo(value) {
-		return value === 1 || value === true ? yes : no
+		return value === 1 || value === true ? yes : no;
 	}
 
 	function enabledOrDisabled(value) {
-		return value === 1 || value === true ? enabled : disabled
+		return value === 1 || value === true ? enabled : disabled;
 	}
 
 	function activeOrInactive(value) {
-		return value === 1 || value === true ? active_status : inactive_status
+		return value === 1 || value === true ? active_status : inactive_status;
 	}
 
 	function formatError(text, value) {
 		//: %1 = error number, %2 = text description of this error
 		//% "#%1 %2"
-		return qsTrId("common_words_format_error").arg(value).arg(text)
+		return qsTrId("common_words_format_error").arg(value).arg(text);
 	}
 
 	function lastErrorName(errorIndex) {
 		//: Details of last error
 		//% "Last error"
-		return errorIndex === 0 ? qsTrId("common_words_last_error")
-			  //: Details of 2nd last error
-			  //% "2nd last error"
-			: errorIndex === 1 ? qsTrId("common_words_2nd_last_error")
-			  //: Details of 3rd last error
-			  //% "3rd last error"
-			: errorIndex === 2 ? qsTrId("common_words_3rd_last_error")
-			  //: Details of 4th last error
-			  //% "4th last error"
-			: errorIndex === 3 ? qsTrId("common_words_4th_last_error")
-			: ""
+		return errorIndex === 0 ? qsTrId("common_words_last_error") :
+		//: Details of 2nd last error
+		//% "2nd last error"
+		errorIndex === 1 ? qsTrId("common_words_2nd_last_error") :
+		//: Details of 3rd last error
+		//% "3rd last error"
+		errorIndex === 2 ? qsTrId("common_words_3rd_last_error") :
+		//: Details of 4th last error
+		//% "4th last error"
+		errorIndex === 3 ? qsTrId("common_words_4th_last_error") : "";
 	}
 }

@@ -51,7 +51,7 @@ Item {
 			orientation: Qt.Vertical
 			label.font.pixelSize: Theme.font_size_h2
 			from: 1
-			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
+			to: root.year, root.month, ClockTime.daysInMonth(root.month, root.year)
 			label.text: Utils.pad(value, 2)
 		}
 	}

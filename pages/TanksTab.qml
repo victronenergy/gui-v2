@@ -26,37 +26,35 @@ ListView {
 	property int _spacing: Gauges.spacing(_tankItemCount)
 
 	function _updateLayout(initialLayout) {
-		let i = 0
+		let i = 0;
 		for (i = Global.tanks.tankTypes.length - 1; i >= 0; --i) {
 			if (Global.tanks.tankModel(Global.tanks.tankTypes[i]).count > 0) {
-				_lastVisibleTankType = Global.tanks.tankTypes[i]
-				break
+				_lastVisibleTankType = Global.tanks.tankTypes[i];
+				break;
 			}
 		}
-
 		if (Global.tanks.totalTankCount < Theme.geometry_levelsPage_tankMergeThreshold) {
 			// There is no more than one tank per type, so merging is not required
-			_tankItemCount = Global.tanks.totalTankCount
-			_mergedTankTypes = []
+			_tankItemCount = Global.tanks.totalTankCount;
+			_mergedTankTypes = [];
 		} else {
-			let tankItemCountIfMerged = Global.tanks.totalTankCount
-			let mergedTankTypes = []
+			let tankItemCountIfMerged = Global.tanks.totalTankCount;
+			let mergedTankTypes = [];
 			for (i = 0; i < Global.tanks.tankTypes.length; ++i) {
-				const tankModel = Global.tanks.tankModel(Global.tanks.tankTypes[i])
+				const tankModel = Global.tanks.tankModel(Global.tanks.tankTypes[i]);
 				if (tankModel.count > 1) {
-					tankItemCountIfMerged = tankItemCountIfMerged - tankModel.count + 1
-					mergedTankTypes.push(Global.tanks.tankTypes[i])
+					tankItemCountIfMerged = tankItemCountIfMerged - tankModel.count + 1;
+					mergedTankTypes.push(Global.tanks.tankTypes[i]);
 					if (tankItemCountIfMerged < Theme.geometry_levelsPage_tankMergeThreshold) {
-						break
+						break;
 					}
 				}
 			}
-			_tankItemCount = tankItemCountIfMerged
-			_mergedTankTypes = mergedTankTypes
+			_tankItemCount = tankItemCountIfMerged;
+			_mergedTankTypes = mergedTankTypes;
 		}
-
 		if (!initialLayout) {
-			animateModelChanges = true
+			animateModelChanges = true;
 		}
 	}
 
@@ -79,9 +77,7 @@ ListView {
 		Repeater {
 			id: gaugeRepeater
 
-			model: tankTypeDelegate.tankModel.count > 0
-				   ? (tankTypeDelegate.mergeTanks ? 1 : tankTypeDelegate.tankModel)
-				   : null
+			model: tankTypeDelegate.tankModel.count > 0 ? (tankTypeDelegate.mergeTanks ? 1 : tankTypeDelegate.tankModel) : null
 
 			delegate: Item {
 				// Add spacing between this tank and the next (if there is more than one of this type)
@@ -111,9 +107,9 @@ ListView {
 						enabled: tankTypeDelegate.mergeTanks
 						radius: gaugeGroup.radius
 						onClicked: {
-							expandedTanksLoader.tankModel = tankTypeDelegate.tankModel
-							expandedTanksLoader.active = true
-							expandedTanksLoader.item.active = true
+							expandedTanksLoader.tankModel = tankTypeDelegate.tankModel;
+							expandedTanksLoader.active = true;
+							expandedTanksLoader.item.active = true;
 						}
 					}
 				}
@@ -122,13 +118,13 @@ ListView {
 	}
 
 	Component.onCompleted: {
-		_updateLayout(true)
+		_updateLayout(true);
 	}
 
 	Connections {
 		target: Global.tanks
 		function onTotalTankCountChanged() {
-			Qt.callLater(_updateLayout)
+			Qt.callLater(_updateLayout);
 		}
 	}
 
@@ -144,6 +140,7 @@ ListView {
 			tankModel: expandedTanksLoader.tankModel
 			animationEnabled: root.animationEnabled
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load expanded tanks view:", errorString())
+		onStatusChanged: if (status === Loader.Error)
+			console.warn("Unable to load expanded tanks view:", errorString())
 	}
 }

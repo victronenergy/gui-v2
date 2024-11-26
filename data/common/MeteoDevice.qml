@@ -18,9 +18,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.meteoDevices) {
 			if (valid) {
-				Global.meteoDevices.model.addDevice(meteoDevice)
+				Global.meteoDevices.model.addDevice(meteoDevice);
 			} else {
-				Global.meteoDevices.model.removeDevice(meteoDevice.serviceUid)
+				Global.meteoDevices.model.removeDevice(meteoDevice.serviceUid);
 			}
 		}
 	}

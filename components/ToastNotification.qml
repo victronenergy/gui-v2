@@ -21,27 +21,29 @@ Item {
 
 	function close(immediately) {
 		if (_closed) {
-			return
+			return;
 		}
-		_closed = true
+		_closed = true;
 		if (immediately) {
-			dismissed()
+			dismissed();
 		} else {
-			dismiss.dismissClicked = true
+			dismiss.dismissClicked = true;
 		}
 	}
 
-	signal dismissed()
+	signal dismissed
 
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: Math.max(Theme.geometry_toastNotification_minHeight,
-			label.implicitHeight + 2*Theme.geometry_toastNotification_label_padding)
+	implicitHeight: Math.max(Theme.geometry_toastNotification_minHeight, label.implicitHeight + 2 * Theme.geometry_toastNotification_label_padding)
 
-	Behavior on opacity { OpacityAnimator { duration: Theme.animation_toastNotification_fade_duration } }
-	opacity: dismiss.dismissClicked ? 0.0
-		: dismiss.dismissAvailable  ? 1.0
-		: 0.0
-	onOpacityChanged: if (dismiss.dismissClicked && opacity === 0.0) root.dismissed()
+	Behavior on opacity {
+		OpacityAnimator {
+			duration: Theme.animation_toastNotification_fade_duration
+		}
+	}
+	opacity: dismiss.dismissClicked ? 0.0 : dismiss.dismissAvailable ? 1.0 : 0.0
+	onOpacityChanged: if (dismiss.dismissClicked && opacity === 0.0)
+		root.dismissed()
 	Component.onCompleted: dismiss.dismissAvailable = true // ensures fade-in as well as fade-out transition.
 
 	Rectangle {
@@ -49,9 +51,7 @@ Item {
 		anchors.fill: parent
 
 		radius: Theme.geometry_toastNotification_radius
-		color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
-			 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
-			 : Theme.color_toastNotification_background_informative
+		color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error : Theme.color_toastNotification_background_informative
 
 		AsymmetricRoundedRectangle {
 			id: highlight
@@ -66,18 +66,14 @@ Item {
 			radius: parent.radius
 			flat: true
 
-			color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
-				 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
-				 : Theme.color_toastNotification_highlight_informative
+			color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error : Theme.color_toastNotification_highlight_informative
 
 			CP.IconImage {
 				id: icon
 				anchors.centerIn: parent
 
 				color: Theme.color_toastNotification_foreground
-				source: root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
-					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
-					  : "qrc:/images/icon_info_32.svg"
+				source: root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg" : root.category === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg" : "qrc:/images/icon_info_32.svg"
 			}
 		}
 
@@ -129,7 +125,7 @@ Item {
 		onTriggered: root.dismissed()
 		onIntervalChanged: {
 			if (interval !== 0) {
-				start()
+				start();
 			}
 		}
 	}

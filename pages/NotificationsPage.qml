@@ -25,8 +25,8 @@ SwipeViewPage {
 
 			function _scrollToTop() {
 				// Scroll to the top of both lists.
-				activeNotificationsView.positionViewAtBeginning()
-				notificationsView.positionViewAtBeginning()
+				activeNotificationsView.positionViewAtBeginning();
+				notificationsView.positionViewAtBeginning();
 			}
 
 			width: parent.width
@@ -39,16 +39,17 @@ SwipeViewPage {
 				property int prevCount: -1
 
 				onCountChanged: {
-					if (count < prevCount && count !== 0) { // don't fade/resize for the last remaining notification
+					if (count < prevCount && count !== 0) {
+						// don't fade/resize for the last remaining notification
 						// When the item 'remove' transition is triggered, also animate the
 						// shrinking of the list, otherwise the header size jumps abrumptly.
-						animateHeightChanges = true
+						animateHeightChanges = true;
 					} else if (count > prevCount) {
 						// When a new notification is added, scroll to the top of the list header
 						// so that the user can see it.
-						Qt.callLater(headerItem._scrollToTop)
+						Qt.callLater(headerItem._scrollToTop);
 					}
-					prevCount = count
+					prevCount = count;
 				}
 
 				// Only item removals are animated. Animating additions is less straightforward as
@@ -56,13 +57,23 @@ SwipeViewPage {
 				// list will be scrolled to the top as soon as a new notification appears anyway.
 				remove: Transition {
 					enabled: root.isCurrentPage
-					NumberAnimation { property: "opacity"; to: 0; duration: Theme.animation_notificationsPage_delegate_opacity_duration }
+					NumberAnimation {
+						property: "opacity"
+						to: 0
+						duration: Theme.animation_notificationsPage_delegate_opacity_duration
+					}
 				}
 				removeDisplaced: Transition {
 					enabled: root.isCurrentPage
 					SequentialAnimation {
-						PauseAnimation { duration: Theme.animation_notificationsPage_delegate_opacity_duration }
-						NumberAnimation { property: "y"; duration: Theme.animation_notificationsPage_delegate_displaced_duration; easing.type: Easing.InOutQuad }
+						PauseAnimation {
+							duration: Theme.animation_notificationsPage_delegate_opacity_duration
+						}
+						NumberAnimation {
+							property: "y"
+							duration: Theme.animation_notificationsPage_delegate_displaced_duration
+							easing.type: Easing.InOutQuad
+						}
 					}
 				}
 
@@ -79,9 +90,17 @@ SwipeViewPage {
 					enabled: activeNotificationsView.animateHeightChanges && root.isCurrentPage
 
 					SequentialAnimation {
-						PauseAnimation { duration: Theme.animation_notificationsPage_delegate_opacity_duration }
-						NumberAnimation { property: "height"; duration: Theme.animation_notificationsPage_delegate_displaced_duration; easing.type: Easing.InOutQuad }
-						ScriptAction { script: activeNotificationsView.animateHeightChanges = false }
+						PauseAnimation {
+							duration: Theme.animation_notificationsPage_delegate_opacity_duration
+						}
+						NumberAnimation {
+							property: "height"
+							duration: Theme.animation_notificationsPage_delegate_displaced_duration
+							easing.type: Easing.InOutQuad
+						}
+						ScriptAction {
+							script: activeNotificationsView.animateHeightChanges = false
+						}
 					}
 				}
 
@@ -99,9 +118,9 @@ SwipeViewPage {
 						radius: activeDelegate.radius
 
 						onReleased: {
-							activeDelegate.notification.setAcknowledged(true)
+							activeDelegate.notification.setAcknowledged(true);
 							if (activeDelegate.notification.active) {
-								activeDelegate.color = Theme.color_background_secondary
+								activeDelegate.color = Theme.color_background_secondary;
 							}
 						}
 					}
@@ -117,7 +136,7 @@ SwipeViewPage {
 
 				onVisibleChanged: {
 					if (visible) {
-						Qt.callLater(headerItem._scrollToTop)
+						Qt.callLater(headerItem._scrollToTop);
 					}
 				}
 
@@ -158,6 +177,7 @@ SwipeViewPage {
 		// Main list contains the historical notifications (inactive and acknowledged).
 		model: Global.notifications.historicalModel
 		spacing: Theme.geometry_gradientList_spacing
-		delegate: NotificationDelegate {}
+		delegate: NotificationDelegate {
+		}
 	}
 }

@@ -69,8 +69,7 @@ MouseArea {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_solarHistoryErrorView_iconBackground_width
-					+ Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+			leftMargin: Theme.geometry_solarHistoryErrorView_iconBackground_width + Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
 		}
@@ -117,27 +116,26 @@ MouseArea {
 					color: Theme.color_solarHistoryErrorView_secondaryText
 					//: Details of last error
 					//% "Last"
-					text: model.index === 0 ? qsTrId("charger_history_errors_last")
-						  //: Details of 2nd last error
-						  //% "2nd last"
-						: model.index === 1 ? qsTrId("charger_history_errors_2nd_last")
-						  //: Details of 3rd last error
-						  //% "3rd last"
-						: model.index === 2 ? qsTrId("charger_history_errors_3rd_last")
-						  //: Details of 4th last error
-						  //% "4th last"
-						: model.index === 3 ? qsTrId("charger_history_errors_4th_last")
-						: ""
+					text: model.index === 0 ? qsTrId("charger_history_errors_last") :
+					//: Details of 2nd last error
+					//% "2nd last"
+					model.index === 1 ? qsTrId("charger_history_errors_2nd_last") :
+					//: Details of 3rd last error
+					//% "3rd last"
+					model.index === 2 ? qsTrId("charger_history_errors_3rd_last") :
+					//: Details of 4th last error
+					//% "4th last"
+					model.index === 3 ? qsTrId("charger_history_errors_4th_last") : ""
 
 					onImplicitWidthChanged: {
-						let maxTitleWidth = 0
+						let maxTitleWidth = 0;
 						for (let i = 0; i < errorRepeater.count; ++i) {
-							const item = errorRepeater.itemAt(i)
+							const item = errorRepeater.itemAt(i);
 							if (item) {
-								maxTitleWidth = Math.max(maxTitleWidth, item.titleImplicitWidth)
+								maxTitleWidth = Math.max(maxTitleWidth, item.titleImplicitWidth);
 							}
 						}
-						root._maxErrorTitleWidth = maxTitleWidth
+						root._maxErrorTitleWidth = maxTitleWidth;
 					}
 				}
 

@@ -23,9 +23,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.digitalInputs) {
 			if (valid) {
-				Global.digitalInputs.model.addDevice(input)
+				Global.digitalInputs.model.addDevice(input);
 			} else {
-				Global.digitalInputs.model.removeDevice(input.serviceUid)
+				Global.digitalInputs.model.removeDevice(input.serviceUid);
 			}
 		}
 	}

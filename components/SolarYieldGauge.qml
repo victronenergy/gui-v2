@@ -28,7 +28,7 @@ Item {
 		delegate: SideGauge {
 			animationEnabled: root.animationEnabled
 			width: Theme.geometry_briefPage_edgeGauge_width
-			x: index*strokeWidth
+			x: index * strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height
 			direction: root.direction
@@ -61,19 +61,18 @@ Item {
 		repeat: true
 		interval: 30 * 1000
 		onTriggered: {
-			_activeSamples.push(Global.system.solar.power)
+			_activeSamples.push(Global.system.solar.power);
 			if (_activeSamples.length < 10) {
-				return
+				return;
 			}
-			const averagePower = _activeSamples.reduce((accumulator, currentValue) => accumulator + currentValue) / _activeSamples.length
-			let newAverages = sampledAverages
-			newAverages.unshift(averagePower)
+			const averagePower = _activeSamples.reduce((accumulator, currentValue) => accumulator + currentValue) / _activeSamples.length;
+			let newAverages = sampledAverages;
+			newAverages.unshift(averagePower);
 			if (newAverages.length >= Theme.geometry_briefPage_solarHistoryGauge_maximumGaugeCount) {
-				newAverages.pop()
+				newAverages.pop();
 			}
-			_activeSamples = []
-			sampledAverages = newAverages
+			_activeSamples = [];
+			sampledAverages = newAverages;
 		}
 	}
 }
-

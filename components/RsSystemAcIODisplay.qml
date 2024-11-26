@@ -12,8 +12,7 @@ Loader {
 	property string serviceUid
 
 	width: parent ? parent.width : 0
-	sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut
-				   : numberOfPhases.value === 3 ? threePhaseTables : null
+	sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut : numberOfPhases.value === 3 ? threePhaseTables : null
 
 	VeQuickItem {
 		id: numberOfPhases
@@ -24,22 +23,33 @@ Loader {
 		id: singlePhaseAcInOut
 
 		Column {
-			readonly property string singlePhaseName: acOutL3.isValid ? "L3"
-					: acOutL2.isValid ? "L2"
-					: "L1"  // i.e. if _phase.value === 0 || !_phase.isValid
+			readonly property string singlePhaseName: acOutL3.isValid ? "L3" : acOutL2.isValid ? "L2" : "L1"  // i.e. if _phase.value === 0 || !_phase.isValid
 
-			VeQuickItem { id: acOutL1; uid: root.serviceUid + "/Ac/Out/L1/P" }
-			VeQuickItem { id: acOutL2; uid: root.serviceUid + "/Ac/Out/L2/P" }
-			VeQuickItem { id: acOutL3; uid: root.serviceUid + "/Ac/Out/L3/P" }
+			VeQuickItem {
+				id: acOutL1
+				uid: root.serviceUid + "/Ac/Out/L1/P"
+			}
+			VeQuickItem {
+				id: acOutL2
+				uid: root.serviceUid + "/Ac/Out/L2/P"
+			}
+			VeQuickItem {
+				id: acOutL3
+				uid: root.serviceUid + "/Ac/Out/L3/P"
+			}
 
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_in
-				data: AcPhase { serviceUid: root.serviceUid + "/Ac/In/1/" + singlePhaseName }
+				data: AcPhase {
+					serviceUid: root.serviceUid + "/Ac/In/1/" + singlePhaseName
+				}
 			}
 
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_out
-				data: AcPhase { serviceUid: root.serviceUid + "/Ac/Out/" + singlePhaseName }
+				data: AcPhase {
+					serviceUid: root.serviceUid + "/Ac/Out/" + singlePhaseName
+				}
 			}
 		}
 	}

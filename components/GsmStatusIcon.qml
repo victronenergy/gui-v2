@@ -15,21 +15,21 @@ Row {
 
 	function getScaledStrength(strength) {
 		if (strength <= 3) {
-			return 0
+			return 0;
 		}
 		if (strength <= 9) {
-			return 1
+			return 1;
 		}
 		if (strength <= 14) {
-			return 2
+			return 2;
 		}
 		if (strength <= 19) {
-			return 3
+			return 3;
 		}
 		if (strength <= 31) {
-			return 4
+			return 4;
 		}
-		return 0
+		return 0;
 	}
 
 	visible: simStatus.isValid
@@ -72,8 +72,7 @@ Row {
 				height: (index + 1) * Theme.geometry_settings_gsmModem_signalStrengthBars_bar_incremental_height
 				width: Theme.geometry_settings_gsmModem_signalStrengthBars_bar_width
 				radius: width / 2
-				color: getScaledStrength(strength.value) >= (index + 1) ?
-						   Theme.color_settings_gsmModem_signalStrength_active : Theme.color_settings_gsmModem_signalStrength_inactive
+				color: getScaledStrength(strength.value) >= (index + 1) ? Theme.color_settings_gsmModem_signalStrength_active : Theme.color_settings_gsmModem_signalStrength_inactive
 			}
 		}
 	}

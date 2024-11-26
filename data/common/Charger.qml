@@ -18,9 +18,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.chargers) {
 			if (valid) {
-				Global.chargers.model.addDevice(charger)
+				Global.chargers.model.addDevice(charger);
 			} else {
-				Global.chargers.model.removeDevice(charger.serviceUid)
+				Global.chargers.model.removeDevice(charger.serviceUid);
 			}
 		}
 	}

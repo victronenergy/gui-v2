@@ -32,10 +32,9 @@ QtObject {
 
 		onValueChanged: {
 			if (uid === "" || !isValid) {
-				return
+				return;
 			}
-
-			let msg = ""
+			let msg = "";
 			switch (value) {
 			case FirmwareUpdater.Idle: // fall through
 			case FirmwareUpdater.UpdateFileNotFound:
@@ -45,51 +44,50 @@ QtObject {
 				// set while waiting on the backend to supply the actual value.
 				// So, wait asynchronously for a valid value to be provided.
 				if (updateCheckTimer.running) {
-					updateCheckTimer.stop()
-					updateCheckTimer.interval = 500
-					updateCheckTimer.start()
+					updateCheckTimer.stop();
+					updateCheckTimer.interval = 500;
+					updateCheckTimer.start();
 				}
-				break
+				break;
 			case FirmwareUpdater.ErrorDuringChecking:
 				//% "Error while checking for firmware updates"
-				msg = qsTrId("settings_firmware_error_during_checking_for_updates")
-				break
+				msg = qsTrId("settings_firmware_error_during_checking_for_updates");
+				break;
 			case FirmwareUpdater.Checking:
-				break
+				break;
 			case FirmwareUpdater.DownloadingAndInstalling:
 				if (_onlineVersion.isValid) {
 					//: %1 = firmware version
 					//% "Downloading and installing firmware %1..."
-					msg = qsTrId("settings_firmware_downloading_and_installing").arg(_onlineVersion.value)
+					msg = qsTrId("settings_firmware_downloading_and_installing").arg(_onlineVersion.value);
 				} else if (_offlineVersion.isValid) {
 					//: %1 = firmware version
 					//% "Installing %1..."
-					msg = qsTrId("settings_firmware_installing").arg(_offlineVersion.value)
+					msg = qsTrId("settings_firmware_installing").arg(_offlineVersion.value);
 				} else {
 					//% "Installing firmware..."
-					msg = qsTrId("settings_firmware_installing_firmware")
+					msg = qsTrId("settings_firmware_installing_firmware");
 				}
-				break
+				break;
 			case FirmwareUpdater.ErrorDuringUpdating:
 				//% "Error during firmware installation"
-				msg = qsTrId("settings_firmware_error_during_installation")
-				break
+				msg = qsTrId("settings_firmware_error_during_installation");
+				break;
 			case FirmwareUpdater.Rebooting:
 				//% "Firmware installed, device rebooting"
-				msg = qsTrId("settings_firmware_installed_rebooting")
+				msg = qsTrId("settings_firmware_installed_rebooting");
 				// Note: for WebAssembly, don't yet reload the page.
 				// If we did the reload now, we would still get the wrong blob.
 				// Instead, wait for the device to reboot (i.e. requires
 				// a full disconnect/reconnect cycle) then react to the
 				// updated build version we receive (reload the page).
-				break
+				break;
 			default:
-				break
+				break;
 			}
-
 			if (msg) {
 				// TODO confirm whether we need to show "icon-firmwareupdate-active" instead of the normal notification icon
-				Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+				Global.showToastNotification(VenusOS.Notification_Info, msg, 10000);
 			}
 		}
 	}
@@ -102,8 +100,8 @@ QtObject {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
 		onIsValidChanged: {
 			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
-				updateCheckTimer.stop()
-				Qt.callLater(root._finishUpdateCheck)
+				updateCheckTimer.stop();
+				Qt.callLater(root._finishUpdateCheck);
 			}
 		}
 	}
@@ -119,8 +117,8 @@ QtObject {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
 		onIsValidChanged: {
 			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
-				updateCheckTimer.stop()
-				Qt.callLater(root._finishUpdateCheck)
+				updateCheckTimer.stop();
+				Qt.callLater(root._finishUpdateCheck);
 			}
 		}
 	}
@@ -133,13 +131,11 @@ QtObject {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 		onValueChanged: {
 			if (Qt.platform.os == "wasm" && value != null && value.length > 0) {
-				if (Global.firmwareInstalledBuild.length > 0 &&
-						Global.firmwareInstalledBuild != value) {
-					console.warn("Firmware update detected, reloading page in 10 seconds"
-						+ " (" + Global.firmwareInstalledBuild + " != " + value + ")")
-					Global.firmwareInstalledBuildUpdated = true
+				if (Global.firmwareInstalledBuild.length > 0 && Global.firmwareInstalledBuild != value) {
+					console.warn("Firmware update detected, reloading page in 10 seconds" + " (" + Global.firmwareInstalledBuild + " != " + value + ")");
+					Global.firmwareInstalledBuildUpdated = true;
 				}
-				Global.firmwareInstalledBuild = value
+				Global.firmwareInstalledBuild = value;
 			}
 		}
 
@@ -155,40 +151,40 @@ QtObject {
 	}
 
 	function checkForUpdate(updateType) {
-		_updateType = updateType
-		updateCheckTimer.interval = 8000 // give up after 8 seconds
-		updateCheckTimer.start()
+		_updateType = updateType;
+		updateCheckTimer.interval = 8000; // give up after 8 seconds
+		updateCheckTimer.start();
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
-			_onlineCheckUpdate.setValue(1)
+			_onlineCheckUpdate.setValue(1);
 		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
-			_offlineCheckUpdate.setValue(1)
+			_offlineCheckUpdate.setValue(1);
 		} else {
-			console.warn("checkForUpdate(): unknown firmware update type:", updateType)
+			console.warn("checkForUpdate(): unknown firmware update type:", updateType);
 		}
 	}
 
 	function installUpdate(updateType) {
-		_updateType = updateType
+		_updateType = updateType;
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
-			_onlineInstallUpdate.setValue(1)
+			_onlineInstallUpdate.setValue(1);
 		} else if (updateType === VenusOS.Firmware_UpdateType_Offline) {
-			_offlineInstallUpdate.setValue(1)
+			_offlineInstallUpdate.setValue(1);
 		} else {
-			console.warn("installUpdate(): unknown firmware update type:", updateType)
+			console.warn("installUpdate(): unknown firmware update type:", updateType);
 		}
 	}
 
 	function _finishUpdateCheck() {
-		let msg = ""
+		let msg = "";
 		if (_updateType === VenusOS.Firmware_UpdateType_Online && onlineAvailableVersion.length === 0) {
 			//% "No newer version available"
-			msg = qsTrId("settings_firmware_no_newer_version_available")
+			msg = qsTrId("settings_firmware_no_newer_version_available");
 		} else if (_updateType === VenusOS.Firmware_UpdateType_Offline && offlineAvailableVersion.length === 0) {
 			//% "No firmware found"
-			msg = qsTrId("settings_firmware_no_firmware_found")
+			msg = qsTrId("settings_firmware_no_firmware_found");
 		}
 		if (msg) {
-			Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+			Global.showToastNotification(VenusOS.Notification_Info, msg, 10000);
 		}
 	}
 }

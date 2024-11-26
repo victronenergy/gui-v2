@@ -50,14 +50,14 @@ TankItem {
 				active: root.mergeTanks || (tankIndex === root.groupIndex)
 				width: {
 					if (active) {
-						const availableSpace = root.width - 2*Theme.geometry_levelsPage_subgauges_horizontalMargin
+						const availableSpace = root.width - 2 * Theme.geometry_levelsPage_subgauges_horizontalMargin;
 						if (root.mergeTanks) {
-							return (availableSpace - (gaugeTanks.count - 1) * subgauges.spacing)/gaugeTanks.count
+							return (availableSpace - (gaugeTanks.count - 1) * subgauges.spacing) / gaugeTanks.count;
 						} else {
-							return availableSpace
+							return availableSpace;
 						}
 					} else {
-						return 0
+						return 0;
 					}
 				}
 				height: subgauges.height
@@ -68,7 +68,8 @@ TankItem {
 					value: tankGaugeLoader.tankLevel / 100
 					isGrouped: root.mergeTanks
 				}
-				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load tank levels gauge:", errorString())
+				onStatusChanged: if (status === Loader.Error)
+					console.warn("Unable to load tank levels gauge:", errorString())
 			}
 		}
 	}

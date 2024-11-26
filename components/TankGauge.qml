@@ -20,7 +20,7 @@ ClippingBarGauge {
 		width: parent.width
 		height: 2
 		color: root.surfaceColor
-		y: parent.height/4
+		y: parent.height / 4
 		z: 5
 	}
 
@@ -28,7 +28,7 @@ ClippingBarGauge {
 		width: parent.width
 		height: 2
 		color: root.surfaceColor
-		y: 2*parent.height/4
+		y: 2 * parent.height / 4
 		z: 5
 	}
 
@@ -36,7 +36,7 @@ ClippingBarGauge {
 		width: parent.width
 		height: 2
 		color: root.surfaceColor
-		y: 3*parent.height/4
+		y: 3 * parent.height / 4
 		z: 5
 	}
 
@@ -45,13 +45,8 @@ ClippingBarGauge {
 		y: (root.height / 4 / 2) - (height / 2)
 		z: 5
 
-		visible: !root.isGrouped
-				 && ((root.valueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
-					 || (root.valueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
-		color: root.valueType === VenusOS.Gauges_ValueType_FallingPercentage
-			   ? Theme.color_levelsPage_fallingGauge_alarmIcon
-			   : Theme.color_levelsPage_risingGauge_alarmIcon
-		source: expanded ? "qrc:/images/icon_warning_32.svg"
-						 : "qrc:/images/icon_warning_24.svg"
+		visible: !root.isGrouped && ((root.valueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05) || (root.valueType === VenusOS.Gauges_ValueType_RisingPercentage && value >= 0.95))
+		color: root.valueType === VenusOS.Gauges_ValueType_FallingPercentage ? Theme.color_levelsPage_fallingGauge_alarmIcon : Theme.color_levelsPage_risingGauge_alarmIcon
+		source: expanded ? "qrc:/images/icon_warning_32.svg" : "qrc:/images/icon_warning_24.svg"
 	}
 }

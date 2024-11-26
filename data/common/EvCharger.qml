@@ -24,11 +24,11 @@ Device {
 		property int count: _nrOfPhases.isValid ? _nrOfPhases.value : 0
 
 		function updateCount(maxPhaseCount) {
-			count = Math.max(count, maxPhaseCount)
+			count = Math.max(count, maxPhaseCount);
 		}
 
 		function get(index) {
-			return _phases.objectAt(index)
+			return _phases.objectAt(index);
 		}
 
 		readonly property Instantiator _phases: Instantiator {
@@ -40,12 +40,13 @@ Device {
 				readonly property real power: _power.isValid ? _power.value : NaN
 
 				function updatePhaseCount(phaseCount) {
-					evCharger.count = Math.max(evCharger.count, phaseCount)
+					evCharger.count = Math.max(evCharger.count, phaseCount);
 				}
 
 				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: if (isValid && !_nrOfPhases.isValid) phases.updateCount(index + 1)
+					onIsValidChanged: if (isValid && !_nrOfPhases.isValid)
+						phases.updateCount(index + 1)
 				}
 			}
 		}
@@ -97,9 +98,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.evChargers) {
 			if (valid) {
-				Global.evChargers.addCharger(evCharger)
+				Global.evChargers.addCharger(evCharger);
 			} else {
-				Global.evChargers.removeCharger(evCharger)
+				Global.evChargers.removeCharger(evCharger);
 			}
 		}
 	}

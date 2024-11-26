@@ -25,8 +25,8 @@ Rectangle {
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	readonly property int valueStatus: Theme.getValueStatus(_value * 100, valueType)
 	property alias foregroundParent: fgRect.parent
-	property color foregroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus)
-	property color backgroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus, true)
+	property color foregroundColor: Theme.color_darkOk, Theme.statusColorValue(valueStatus)
+	property color backgroundColor: Theme.color_darkOk, Theme.statusColorValue(valueStatus, true)
 	property color surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 	property real value: 0.0
 	property int orientation: Qt.Vertical
@@ -39,15 +39,12 @@ Rectangle {
 
 	readonly property bool _isVertical: orientation === Qt.Vertical
 	readonly property bool _valueNaN: isNaN(value)
-	readonly property real _value: _valueNaN ? 0
-		: value > 1.0 ? 1.0
-		: value < 0.0 ? 0.0
-		: value
+	readonly property real _value: _valueNaN ? 0 : value > 1.0 ? 1.0 : value < 0.0 ? 0.0 : value
 
 	Rectangle {
 		id: fgRect
-		x: _isVert && _useSmallerRadius ? (bgRect.width - width)/2 : 0
-		y: _isVert ? _bgHeight - _fgSize : (_useSmallerRadius ? (bgRect.height - height)/2 : 0)
+		x: _isVert && _useSmallerRadius ? (bgRect.width - width) / 2 : 0
+		y: _isVert ? _bgHeight - _fgSize : (_useSmallerRadius ? (bgRect.height - height) / 2 : 0)
 		width: _isVert ? (_useSmallerRadius ? height : _bgWidth) : _fgSize
 		height: _isVert ? _fgSize : (_useSmallerRadius ? width : _bgHeight)
 		color: bgRect.foregroundColor
@@ -55,7 +52,7 @@ Rectangle {
 
 		property bool _isVert: bgRect._isVertical
 		property bool _useSmallerRadius: _smallerRadius < bgRect.radius
-		property real _smallerRadius: _isVert ? height/2 : width/2
+		property real _smallerRadius: _isVert ? height / 2 : width / 2
 		property real _bgHeight: bgRect.height
 		property real _bgWidth: bgRect.width
 		property real _fgSize: _isVert ? _bgHeight * bgRect._value : _bgWidth * bgRect._value

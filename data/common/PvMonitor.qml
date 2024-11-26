@@ -16,42 +16,37 @@ Instantiator {
 	// AC power is the total power from Ac/PvOnGrid/L*/Power, Ac/PvOnGenset/L*/Power
 	// and Ac/PvOnOutput/L*/Power.
 	function updateAcTotals() {
-		let _totalPower = NaN
-		let _totalCurrent = NaN
-
+		let _totalPower = NaN;
+		let _totalCurrent = NaN;
 		for (let i = 0; i < count; ++i) {
-			const acPv = objectAt(i)
+			const acPv = objectAt(i);
 			if (!!acPv) {
 				for (let j = 0; j < acPv.pvPhases.count; ++j) {
-					const phase = acPv.pvPhases.objectAt(j)
+					const phase = acPv.pvPhases.objectAt(j);
 					if (!phase) {
-						continue
+						continue;
 					}
-					_totalPower = Units.sumRealNumbers(_totalPower, phase.power)
-					_totalCurrent = Units.sumRealNumbers(_totalCurrent, phase.current)
+					_totalPower = Units.sumRealNumbers(_totalPower, phase.power);
+					_totalCurrent = Units.sumRealNumbers(_totalCurrent, phase.current);
 				}
 			}
 		}
-		root.totalPower = _totalPower
-		root.totalCurrent = _totalCurrent
+		root.totalPower = _totalPower;
+		root.totalCurrent = _totalCurrent;
 	}
 
 	function _updateMaximumPhaseCount() {
-		let _maxPhaseCount = 0
+		let _maxPhaseCount = 0;
 		for (let i = 0; i < count; ++i) {
-			const acPvDelegate = root.objectAt(i)
+			const acPvDelegate = root.objectAt(i);
 			if (!!acPvDelegate) {
-				_maxPhaseCount = Math.max(_maxPhaseCount, acPvDelegate.phaseCount)
+				_maxPhaseCount = Math.max(_maxPhaseCount, acPvDelegate.phaseCount);
 			}
 		}
-		root.maxPhaseCount = _maxPhaseCount
+		root.maxPhaseCount = _maxPhaseCount;
 	}
 
-	model: [
-		Global.system.serviceUid + "/Ac/PvOnGrid",
-		Global.system.serviceUid + "/Ac/PvOnGenset",
-		Global.system.serviceUid + "/Ac/PvOnOutput"
-	]
+	model: [Global.system.serviceUid + "/Ac/PvOnGrid", Global.system.serviceUid + "/Ac/PvOnGenset", Global.system.serviceUid + "/Ac/PvOnOutput"]
 
 	delegate: QtObject {
 		id: acPvDelegate
@@ -62,10 +57,10 @@ Instantiator {
 		readonly property VeQuickItem vePhaseCount: VeQuickItem {
 			uid: acPvDelegate.serviceUid + "/NumberOfPhases"
 			onValueChanged: {
-				const phaseCount = value === undefined ? 0 : value
+				const phaseCount = value === undefined ? 0 : value;
 				if (pvPhases.count !== phaseCount) {
-					pvPhases.model = phaseCount
-					Qt.callLater(root._updateMaximumPhaseCount)
+					pvPhases.model = phaseCount;
+					Qt.callLater(root._updateMaximumPhaseCount);
 				}
 			}
 		}
@@ -83,15 +78,15 @@ Instantiator {
 				readonly property VeQuickItem vePower: VeQuickItem {
 					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Power"
 					onValueChanged: {
-						phase.power = value === undefined ? NaN : value
-						Qt.callLater(root.updateAcTotals)
+						phase.power = value === undefined ? NaN : value;
+						Qt.callLater(root.updateAcTotals);
 					}
 				}
 				readonly property VeQuickItem veCurrent: VeQuickItem {
 					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Current"
 					onValueChanged: {
-						phase.current = value === undefined ? NaN : value
-						Qt.callLater(root.updateAcTotals)
+						phase.current = value === undefined ? NaN : value;
+						Qt.callLater(root.updateAcTotals);
 					}
 				}
 			}

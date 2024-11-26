@@ -21,13 +21,13 @@ ListItemButton {
 	function _currentLimitNotAdjustableText() {
 		if (serviceType !== "acsystem") {
 			if (dmc.isValid) {
-				return CommonWords.noAdjustableByDmc
+				return CommonWords.noAdjustableByDmc;
 			} else if (bmsMode.isValid) {
-				return CommonWords.noAdjustableByBms
+				return CommonWords.noAdjustableByBms;
 			}
 		}
 		//% "This current limit is fixed in the system configuration. It cannot be adjusted."
-		return qsTrId("rs_current_limit_not_adjustable")
+		return qsTrId("rs_current_limit_not_adjustable");
 	}
 
 	text: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
@@ -40,11 +40,12 @@ ListItemButton {
 
 	onClicked: {
 		if (!limitAdjustable) {
-			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText(),
-										 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			return
+			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText(), Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration);
+			return;
 		}
-		Global.dialogLayer.open(currentLimitDialogComponent, { value: currentLimitItem.value })
+		Global.dialogLayer.open(currentLimitDialogComponent, {
+				value: currentLimitItem.value
+			});
 	}
 
 	VeQuickItem {

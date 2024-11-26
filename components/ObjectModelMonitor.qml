@@ -13,22 +13,22 @@ Instantiator {
 
 	function _hasVisibleItem() {
 		for (let i = 0; i < count; ++i) {
-			const obj = objectAt(i)
+			const obj = objectAt(i);
 			if (!!obj && obj.visible) {
-				return true
+				return true;
 			}
 		}
-		return false
+		return false;
 	}
 
 	delegate: Connections {
 		target: modelData
 		function onVisibleChanged() {
-			root.hasVisibleItem = !!modelData && (modelData.visible || root._hasVisibleItem())
+			root.hasVisibleItem = !!modelData && (modelData.visible || root._hasVisibleItem());
 		}
 	}
 
 	Component.onCompleted: {
-		root.hasVisibleItem = root._hasVisibleItem()
+		root.hasVisibleItem = root._hasVisibleItem();
 	}
 }

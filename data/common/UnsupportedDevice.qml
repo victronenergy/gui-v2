@@ -12,9 +12,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.unsupportedDevices) {
 			if (valid) {
-				Global.unsupportedDevices.model.addDevice(unsupportedDevice)
+				Global.unsupportedDevices.model.addDevice(unsupportedDevice);
 			} else {
-				Global.unsupportedDevices.model.removeDevice(unsupportedDevice.serviceUid)
+				Global.unsupportedDevices.model.removeDevice(unsupportedDevice.serviceUid);
 			}
 		}
 	}

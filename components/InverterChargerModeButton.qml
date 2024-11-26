@@ -16,9 +16,7 @@ ListItemButton {
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool modeAdjustable: modeIsAdjustable.value !== 0
 
-	text: serviceType !== "inverter" || isInverterChargerItem.value === 1
-			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
-			: Global.inverterChargers.inverterModeToText(modeItem.value)
+	text: serviceType !== "inverter" || isInverterChargerItem.value === 1 ? Global.inverterChargers.inverterChargerModeToText(modeItem.value) : Global.inverterChargers.inverterModeToText(modeItem.value)
 
 	// TODO need to show a different indicator (like in settings pages) when a control is disabled
 	// due to reduced user access level. This is different from when the control is disabled due to
@@ -29,20 +27,18 @@ ListItemButton {
 	onClicked: {
 		if (!modeAdjustable) {
 			if (dmc.isValid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
+				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc, Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration);
 			} else if (bmsMode.isValid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
+				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms, Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration);
 			} else {
 				//% "The mode is fixed in the system configuration. It cannot be adjusted."
-				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("inverter_mode_not_adjustable"),
-											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
+				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("inverter_mode_not_adjustable"), Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration);
 			}
-			return
+			return;
 		}
-
-		Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
+		Global.dialogLayer.open(modeDialogComponent, {
+				mode: modeItem.value
+			});
 	}
 
 	VeQuickItem {

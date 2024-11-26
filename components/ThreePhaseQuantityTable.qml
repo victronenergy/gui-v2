@@ -14,36 +14,40 @@ QuantityTable {
 	property string labelText
 	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
-	valueForModelIndex: function(phaseIndex, column) {
+	valueForModelIndex: function (phaseIndex, column) {
 		if (column === 0) {
-			return "L%1".arg(phaseIndex + 1)
+			return "L%1".arg(phaseIndex + 1);
 		}
-
-		const phase = phases.objectAt(phaseIndex)
+		const phase = phases.objectAt(phaseIndex);
 		if (phase) {
-			switch(column) {
+			switch (column) {
 			case 1:
-				return phase.power
+				return phase.power;
 			case 2:
-				return phase.voltage
+				return phase.voltage;
 			case 3:
-				return phase.current
+				return phase.current;
 			case 4:
-				return phase.frequency
+				return phase.frequency;
 			}
 		}
-		return NaN
+		return NaN;
 	}
 
-	metrics.availableWidth: width - 2*Theme.geometry_listItem_content_horizontalMargin
+	metrics.availableWidth: width - 2 * Theme.geometry_listItem_content_horizontalMargin
 	metrics.firstColumnWidth: Theme.geometry_vebusDeviceListPage_quantityTable_firstColumn_width
-	units: [
-		{ unit: VenusOS.Units_None },
-		{ unit: VenusOS.Units_Watt },
-		{ unit: VenusOS.Units_Volt_AC, precision: root.voltPrecision },
-		{ unit: VenusOS.Units_Amp },
-		{ unit: VenusOS.Units_Hertz }
-	]
+	units: [{
+			unit: VenusOS.Units_None
+		}, {
+			unit: VenusOS.Units_Watt
+		}, {
+			unit: VenusOS.Units_Volt_AC,
+			precision: root.voltPrecision
+		}, {
+			unit: VenusOS.Units_Amp
+		}, {
+			unit: VenusOS.Units_Hertz
+		}]
 	labelHorizontalAlignment: Qt.AlignRight
 	headerComponent: AsymmetricRoundedRectangle {
 		layer.enabled: false // if 'layer.enabled' is true, any child text looks rough on wasm builds

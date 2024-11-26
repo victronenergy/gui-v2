@@ -26,18 +26,17 @@ Item {
 		color: Theme.color_font_primary
 		source: {
 			if (!root.generator || root.generator.state === VenusOS.Generators_RunningBy_NotRunning) {
-				return ""
+				return "";
 			}
 			if (root.generator.runningBy === VenusOS.Generators_RunningBy_Manual) {
 				if (root.generator.manualStartTimer > 0) {
-					return "qrc:/images/icon_manualstart_timer_24.svg"
+					return "qrc:/images/icon_manualstart_timer_24.svg";
 				} else {
-					return "qrc:/images/icon_manualstart_24.svg"
+					return "qrc:/images/icon_manualstart_24.svg";
 				}
 			}
-			return "qrc:/images/icon_autostart_24.svg"
+			return "qrc:/images/icon_autostart_24.svg";
 		}
-
 	}
 
 	Label {
@@ -52,8 +51,6 @@ Item {
 
 		// When generator runtime < 60 it has second precision, otherwise when >= 60, it is only
 		// updated every minute. So, show mm:ss when < 60, and hh:mm when >= 60.
-		text: root.generator && root.generator.state !== VenusOS.Generators_State_Stopped && root.generator.runtime !== 0
-				? Utils.formatGeneratorRuntime(root.generator.runtime)
-				: "--:--"
+		text: root.generator && root.generator.state !== VenusOS.Generators_State_Stopped && root.generator.runtime !== 0 ? Utils.formatGeneratorRuntime(root.generator.runtime) : "--:--"
 	}
 }

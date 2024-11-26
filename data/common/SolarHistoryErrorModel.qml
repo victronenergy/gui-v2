@@ -33,31 +33,34 @@ ListModel {
 
 	function _errorChanged(errorNumber, errorCode) {
 		if (errorCode === 0) {
-			_removeError(errorNumber)
+			_removeError(errorNumber);
 		} else {
-			_addError(errorNumber, errorCode)
+			_addError(errorNumber, errorCode);
 		}
 	}
 
 	function _addError(errorNumber, errorCode) {
 		// Add in sorted order, by errorNumber (lowest first)
-		let insertionIndex = count
+		let insertionIndex = count;
 		for (let i = 0; i < count; ++i) {
-			const data = get(i)
+			const data = get(i);
 			if (data.errorNumber > errorNumber) {
-				insertionIndex = i
-				break
+				insertionIndex = i;
+				break;
 			}
 		}
-		insert(insertionIndex, {"errorNumber": errorNumber, "errorCode": errorCode, })
+		insert(insertionIndex, {
+				"errorNumber": errorNumber,
+				"errorCode": errorCode
+			});
 	}
 
 	function _removeError(errorNumber) {
 		for (let i = 0; i < count; ++i) {
-			const data = get(i)
+			const data = get(i);
 			if (data.errorNumber === errorNumber) {
-				remove(i)
-				break
+				remove(i);
+				break;
 			}
 		}
 	}

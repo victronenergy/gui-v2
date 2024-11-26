@@ -23,29 +23,27 @@ Item {
 	property real initialCacheBuffer
 
 	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
-		return false
+		return false;
 	}
 
 	function setFlickable(newFlickable) {
 		// Restore the old flickable's original property values.
 		if (focusedFlickable) {
-			focusedFlickable.bottomMargin = initialBottomMargin
-			focusedFlickable.cacheBuffer = initialCacheBuffer
-			focusedFlickable = null
+			focusedFlickable.bottomMargin = initialBottomMargin;
+			focusedFlickable.cacheBuffer = initialCacheBuffer;
+			focusedFlickable = null;
 		}
 		if (!newFlickable) {
-			return
+			return;
 		}
-
-		initialBottomMargin = newFlickable.bottomMargin
-		initialCacheBuffer = newFlickable.cacheBuffer
+		initialBottomMargin = newFlickable.bottomMargin;
+		initialCacheBuffer = newFlickable.cacheBuffer;
 
 		// Increase the cache buffer, otherwise the contentY jumps when changing focus between two
 		// text fields that are far apart.
-		newFlickable.bottomMargin = 0
-		newFlickable.cacheBuffer = newFlickable.height * 2
-
-		focusedFlickable = newFlickable
+		newFlickable.bottomMargin = 0;
+		newFlickable.cacheBuffer = newFlickable.height * 2;
+		focusedFlickable = newFlickable;
 	}
 
 	function updateFocusItem(textField, textFieldContainer, flickable) {
@@ -66,31 +64,28 @@ Item {
 		// then the lower text field would no longer be visible, due to the shortened bottomMargin.
 		//
 		if (!textField || !textFieldContainer || !flickable) {
-			console.warn("onAboutToFocusTextField(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
-			return
+			console.warn("onAboutToFocusTextField(): invalid item/container/flickable:", textField, textFieldContainer, flickable);
+			return;
 		}
-
-		scrollAnimation.stop()
+		scrollAnimation.stop();
 		if (flickable != root.focusedFlickable) {
-			root.setFlickable(flickable)
+			root.setFlickable(flickable);
 		}
 
 		// Find the position of the text field container within the flickable content item.
-		const textContainerContentY = textFieldContainer.mapToItem(flickable.contentItem, 0, 0).y
-
+		const textContainerContentY = textFieldContainer.mapToItem(flickable.contentItem, 0, 0).y;
 		if (textContainerContentY + flickable.height > flickable.contentHeight) {
 			// Find the distance that would be scrolled to place the text container at the top
 			// of the content view.
-			const jumpDistance = textFieldContainer.mapToItem(flickable, 0, 0).y
+			const jumpDistance = textFieldContainer.mapToItem(flickable, 0, 0).y;
 
 			// Set the bottomMargin to increase the scrollable height of the flickable. The
 			// bottomMargin is never decreased, even if a shorter margin is sufficient.
-			flickable.bottomMargin = Math.max(jumpDistance, flickable.bottomMargin)
+			flickable.bottomMargin = Math.max(jumpDistance, flickable.bottomMargin);
 		}
-
-		scrollAnimation.target = flickable
-		scrollAnimation.to = textContainerContentY
-		scrollAnimation.start()
+		scrollAnimation.target = flickable;
+		scrollAnimation.to = textContainerContentY;
+		scrollAnimation.start();
 	}
 
 	Connections {
@@ -108,9 +103,9 @@ Item {
 		// flickable. Instead, record the parameters and call updateFocusItem() when the item
 		// actually receives the focus (i.e. after the mouse is released).
 		function onAboutToFocusTextField(textField, textFieldContainer, flickable) {
-			focusListener.textField = textField
-			focusListener.textFieldContainer = textFieldContainer
-			focusListener.flickable = flickable
+			focusListener.textField = textField;
+			focusListener.textFieldContainer = textFieldContainer;
+			focusListener.flickable = flickable;
 		}
 	}
 
@@ -119,7 +114,7 @@ Item {
 
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem && Global.main.activeFocusItem === focusListener.textField) {
-				updateFocusItem(focusListener.textField, focusListener.textFieldContainer, focusListener.flickable)
+				updateFocusItem(focusListener.textField, focusListener.textFieldContainer, focusListener.flickable);
 			}
 		}
 	}
@@ -135,7 +130,7 @@ Item {
 		function onVisibleChanged() {
 			// When the flickable disappears (e.g. when its parent page is popped) then restore its
 			// original property values and stop tracking it.
-			root.setFlickable(null)
+			root.setFlickable(null);
 		}
 	}
 }

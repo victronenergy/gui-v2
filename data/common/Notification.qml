@@ -9,8 +9,7 @@ import Victron.VenusOS
 BaseNotification {
 	id: notification
 
-	readonly property string serviceUid: notificationId < 0 ? ""
-			: Global.notifications.serviceUid + "/" + notificationId
+	readonly property string serviceUid: notificationId < 0 ? "" : Global.notifications.serviceUid + "/" + notificationId
 
 	property var _currentModel
 	property date _invalidDate
@@ -47,47 +46,44 @@ BaseNotification {
 		target: Global.notifications
 		function onAcknowledgeNotification(notificationId) {
 			if (notificationId === notification.notificationId) {
-				_acknowledged.setValue(1)
+				_acknowledged.setValue(1);
 			}
 		}
 	}
 
-	readonly property bool _canInitialize: _acknowledged.value !== undefined
-			   && _active.value !== undefined
-			   && _type.value !== undefined
-			   && _dateTime.value !== undefined
+	readonly property bool _canInitialize: _acknowledged.value !== undefined && _active.value !== undefined && _type.value !== undefined && _dateTime.value !== undefined
 	on_CanInitializeChanged: _init()
 
 	readonly property bool _isHistorical: !active && acknowledged
 	on_IsHistoricalChanged: {
 		if (!!_currentModel) {
-			const newModel = _targetModel()
+			const newModel = _targetModel();
 			if (newModel !== _currentModel) {
-				_currentModel.removeNotification(notificationId)
-				newModel.insertByDate(notification)
-				_currentModel = newModel
+				_currentModel.removeNotification(notificationId);
+				newModel.insertByDate(notification);
+				_currentModel = newModel;
 			}
 		}
 	}
 
 	function setAcknowledged(ack) {
-		 _acknowledged.setValue(ack ? 1 : 0)
+		_acknowledged.setValue(ack ? 1 : 0);
 	}
 
 	function _init() {
 		if (!!_currentModel || !_canInitialize) {
-			return
+			return;
 		}
-		const model = _targetModel()
-		model.insertByDate(notification)
-		_currentModel = model
+		const model = _targetModel();
+		model.insertByDate(notification);
+		_currentModel = model;
 	}
 
 	function _targetModel() {
 		if (_isHistorical) {
-			return Global.notifications.historicalModel
+			return Global.notifications.historicalModel;
 		} else {
-			return Global.notifications.activeModel
+			return Global.notifications.activeModel;
 		}
 	}
 
@@ -101,7 +97,7 @@ BaseNotification {
 
 	Component.onDestruction: {
 		if (_currentModel) {
-			_currentModel.removeNotification(notificationId)
+			_currentModel.removeNotification(notificationId);
 		}
 	}
 }
