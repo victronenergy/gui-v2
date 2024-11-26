@@ -287,7 +287,7 @@ Page {
 				Page {
 					GradientListView {
 						model: 5
-						delegate: ChargeScheduleItem {
+						delegate: ListChargeSchedule {
 							scheduleNumber: modelData
 						}
 					}

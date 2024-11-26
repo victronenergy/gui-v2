@@ -333,7 +333,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/settings/ListActiveAcInput.qml
     components/settings/ListAlarmLevelRadioButtonGroup.qml
-    components/settings/ChargeScheduleItem.qml
+    components/settings/ListChargeSchedule.qml
     components/settings/FirmwareCheckListButton.qml
     components/settings/InverterAcOutQuantityGroup.qml
     components/settings/Led.qml
