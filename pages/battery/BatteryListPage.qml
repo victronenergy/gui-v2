@@ -133,7 +133,6 @@ Page {
 						&& ["vebus","genset","battery"].indexOf(batteryDelegate.serviceType) >= 0
 				onClicked: {
 					// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
-					let deviceIndex
 					if (batteryDelegate.serviceType === "vebus") {
 						Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
 							"bindPrefix": batteryDelegate.device.serviceUid
@@ -144,14 +143,9 @@ Page {
 							"bindPrefix": batteryDelegate.device.serviceUid
 						})
 					} else {
-						deviceIndex = Global.batteries.model.indexOf(batteryDelegate.device.serviceUid)
-						if (deviceIndex >= 0) {
-							const batteryDevice = Global.batteries.model.deviceAt(deviceIndex)
-							Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
-								"title": Qt.binding(function() { return batteryDevice.name }),
-								"battery": batteryDevice,
-							})
-						}
+						Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
+							"bindPrefix": batteryDelegate.device.serviceUid,
+						})
 					}
 				}
 			}

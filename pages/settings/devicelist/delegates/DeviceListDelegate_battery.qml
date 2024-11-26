@@ -28,9 +28,8 @@ DeviceListDelegate {
 		   : _defaultModel
 
 	onClicked: {
-		const battery = sourceModel.deviceAt(sourceModel.indexOf(root.device.serviceUid))
 		Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-				{ battery: battery })
+				{ bindPrefix: root.device.serviceUid })
 	}
 
 	VeQuickItem {
