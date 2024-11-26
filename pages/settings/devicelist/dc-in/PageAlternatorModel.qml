@@ -27,7 +27,7 @@ ObjectModel {
 		bindPrefix: root.bindPrefix
 	}
 
-	ListTemperatureItem {
+	ListTemperature {
 		//% "Alternator Temperature"
 		text: qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
@@ -93,7 +93,7 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListTemperatureItem {
+	ListTemperature {
 		//% "Engine Temperature"
 		text: qsTrId("engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"

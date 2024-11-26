@@ -228,7 +228,7 @@ ObjectModel {
 							unit: VenusOS.Units_Kilopascal
 						}
 
-						ListTemperatureItem {
+						ListTemperature {
 							//% "Oil temperature"
 							text: qsTrId("ac-in-genset_oil_temperature")
 							allowed: defaultAllowed && dataItem.isValid
@@ -236,7 +236,7 @@ ObjectModel {
 							precision: 0
 						}
 
-						ListTemperatureItem {
+						ListTemperature {
 							//% "Coolant temperature"
 							text: qsTrId("ac-in-genset_coolant_temperature")
 							allowed: defaultAllowed && dataItem.isValid
@@ -244,21 +244,21 @@ ObjectModel {
 							precision: 0
 						}
 
-						ListTemperatureItem {
+						ListTemperature {
 							//% "Exhaust temperature"
 							text: qsTrId("ac-in-genset_exhaust_temperature")
 							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
 						}
 
-						ListTemperatureItem {
+						ListTemperature {
 							//% "Winding temperature"
 							text: qsTrId("ac-in-genset_winding_temperature")
 							allowed: defaultAllowed && dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
-						ListTemperatureItem {
+						ListTemperature {
 							//% "Heatsink temperature"
 							text: qsTrId("genset_heatsink_temperature")
 							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"

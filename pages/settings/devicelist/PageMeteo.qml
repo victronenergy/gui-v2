@@ -35,7 +35,7 @@ Page {
 				precision: 1
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
 				allowed: dataItem.isValid
@@ -43,7 +43,7 @@ Page {
 				precision: 1
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: sensor2.dataItem.isValid
 					//% "External temperature (1)"
 					? qsTrId("page_meteo_external_temperature_1")
@@ -54,7 +54,7 @@ Page {
 				precision: 1
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				id: sensor2
 
 				dataItem.uid: bindPrefix + "/ExternalTemperature2"

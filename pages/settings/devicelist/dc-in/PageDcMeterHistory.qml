@@ -82,13 +82,13 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.minimum_temperature
 				allowed: defaultAllowed && showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
 			}
 
-			ListTemperatureItem {
+			ListTemperature {
 				text: CommonWords.maximum_temperature
 				allowed: defaultAllowed && showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"

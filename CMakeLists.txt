@@ -324,7 +324,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListSpinBox.qml
     components/listitems/ListSwitch.qml
     components/listitems/ListSwitchForced.qml
-    components/listitems/ListTemperatureItem.qml
+    components/listitems/ListTemperature.qml
     components/listitems/ListTextField.qml
     components/listitems/ListTextGroup.qml
     components/listitems/ListTextItem.qml
