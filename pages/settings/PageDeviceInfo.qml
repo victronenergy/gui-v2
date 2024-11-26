@@ -69,7 +69,7 @@ Page {
 				dataItem.invalidate: false
 			}
 
-			ListFirmwareVersionItem {
+			ListFirmwareVersion {
 				bindPrefix: root.bindPrefix
 				dataItem.invalidate: false
 			}

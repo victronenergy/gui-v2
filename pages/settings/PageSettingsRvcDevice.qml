@@ -38,7 +38,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Nad"
 			}
 
-			ListFirmwareVersionItem {
+			ListFirmwareVersion {
 				bindPrefix: root.bindPrefix
 			}
 

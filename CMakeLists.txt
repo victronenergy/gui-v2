@@ -342,7 +342,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListClearHistoryButton.qml
     components/settings/ListDcInputQuantityGroup.qml
     components/settings/ListDcOutputQuantityGroup.qml
-    components/settings/ListFirmwareVersionItem.qml
+    components/settings/ListFirmwareVersion.qml
     components/settings/ListGeneratorError.qml
     components/settings/ListRelayState.qml
     components/settings/ListResetHistoryLabel.qml
