@@ -14,7 +14,7 @@ Page {
 
 		model: ObjectModel {
 
-			FirmwareCheckListButton {
+			ListFirmwareCheckButton {
 				//% "Check for updates on SD/USB"
 				text: qsTrId("settings_firmware_check_for_updates_on_sd_usb")
 				updateType: VenusOS.Firmware_UpdateType_Offline
