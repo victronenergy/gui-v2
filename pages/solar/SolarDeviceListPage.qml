@@ -56,7 +56,7 @@ Page {
 
 					Repeater {
 						model: solarCharger.trackers
-						delegate: ListQuantityGroupNavigationItem {
+						delegate: ListQuantityGroupNavigation {
 							readonly property real yieldToday: {
 								const historyToday = solarCharger.trackers.count > 1
 										? solarCharger.dailyTrackerHistory(0, model.index)
@@ -84,7 +84,7 @@ Page {
 			Component {
 				id: pvInverterRowComponent
 
-				ListQuantityGroupNavigationItem {
+				ListQuantityGroupNavigation {
 					readonly property QtObject pvInverter: {
 						let pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
 						return Global.pvInverters.model.deviceAt(pvInverterIndex)

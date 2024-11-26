@@ -72,7 +72,7 @@ OverviewWidget {
 				}
 
 				model: root.inputs
-				delegate: ListQuantityGroupNavigationItem {
+				delegate: ListQuantityGroupNavigation {
 					text: model.device.name
 					quantityModel: [
 						{ value: model.device.voltage, unit: VenusOS.Units_Volt_DC },

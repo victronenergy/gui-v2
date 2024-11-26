@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListQuantityGroupNavigationItem {
+ListQuantityGroupNavigation {
 	id: root
 
 	property BaseDevice device
