@@ -213,7 +213,9 @@ set (VENUS_QML_MODULE_SOURCES
     components/GsmStatusIcon.qml
     components/IconButton.qml
     components/InputPanel.qml
+    components/InverterAcOutSettings.qml
     components/InverterChargerModeButton.qml
+    components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/NavBar.qml
@@ -234,6 +236,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/RsSystemAcIODisplay.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
+    components/SettingsRangeSlider.qml
+    components/SettingsSlider.qml
     components/ShinyProgressArc.qml
     components/SideGauge.qml
     components/SideMultiGauge.qml
@@ -253,6 +257,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/TankItem.qml
     components/TankGauge.qml
     components/TankGaugeGroup.qml
+    components/TemperatureRelaySettings.qml
     components/ThreePhaseBarGauge.qml
     components/ThreePhaseDisplay.qml
     components/ThreePhaseIOTable.qml
@@ -302,58 +307,53 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/SolarDailyHistoryDialog.qml
     components/dialogs/TimeSelectorDialog.qml
 
-    components/listitems/ListAlarm.qml
-    components/listitems/ListButton.qml
-    components/listitems/ListDateSelector.qml
-    components/listitems/ListIntField.qml
-    components/listitems/ListIpAddressField.qml
-    components/listitems/ListItem.qml
-    components/listitems/ListItemBackground.qml
-    components/listitems/PrimaryListLabel.qml
-    components/listitems/ListNavigation.qml
-    components/listitems/ListPortField.qml
-    components/listitems/ListRadioButton.qml
-    components/listitems/ListRadioButtonGroup.qml
-    components/listitems/ListQuantityField.qml
-    components/listitems/ListQuantityGroup.qml
-    components/listitems/ListQuantityGroupNavigation.qml
-    components/listitems/ListQuantity.qml
-    components/listitems/ListRangeSlider.qml
-    components/listitems/SectionHeader.qml
-    components/listitems/ListSlider.qml
-    components/listitems/ListSpinBox.qml
-    components/listitems/ListSwitch.qml
-    components/listitems/ListSwitchForced.qml
-    components/listitems/ListTemperature.qml
-    components/listitems/ListTextField.qml
-    components/listitems/ListTextGroup.qml
-    components/listitems/ListText.qml
-    components/listitems/SecondaryListLabel.qml
-    components/listitems/ListTimeSelector.qml
+    components/listitems/ListAcInError.qml
+    components/listitems/ListActiveAcInput.qml
+    components/listitems/ListAlarmLevelRadioButtonGroup.qml
+    components/listitems/ListAlarmState.qml
+    components/listitems/ListChargeSchedule.qml
+    components/listitems/ListClearHistoryButton.qml
+    components/listitems/ListDcInputQuantityGroup.qml
+    components/listitems/ListDcOutputQuantityGroup.qml
+    components/listitems/ListFirmwareCheckButton.qml
+    components/listitems/ListFirmwareVersion.qml
+    components/listitems/ListGeneratorError.qml
+    components/listitems/ListMqttAccessSwitch.qml
+    components/listitems/ListMountStateButton.qml
+    components/listitems/ListPvInverterPositionRadioButtonGroup.qml
+    components/listitems/ListRelayState.qml
+    components/listitems/ListResetHistory.qml
+    components/listitems/ListTemperatureRelay.qml
+    components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
-    components/settings/ListActiveAcInput.qml
-    components/settings/ListAlarmLevelRadioButtonGroup.qml
-    components/settings/ListChargeSchedule.qml
-    components/settings/ListFirmwareCheckButton.qml
-    components/settings/InverterAcOutSettings.qml
-    components/settings/Led.qml
-    components/settings/ListAcInError.qml
-    components/settings/ListAlarmState.qml
-    components/settings/ListClearHistoryButton.qml
-    components/settings/ListDcInputQuantityGroup.qml
-    components/settings/ListDcOutputQuantityGroup.qml
-    components/settings/ListFirmwareVersion.qml
-    components/settings/ListGeneratorError.qml
-    components/settings/ListRelayState.qml
-    components/settings/ListResetHistory.qml
-    components/settings/ListMqttAccessSwitch.qml
-    components/settings/ListMountStateButton.qml
-    components/settings/ListPvInverterPositionRadioButtonGroup.qml
-    components/settings/SettingsRangeSlider.qml
-    components/settings/SettingsSlider.qml
-    components/settings/ListTemperatureRelay.qml
-    components/settings/TemperatureRelaySettings.qml
-    components/settings/ListVolumeUnitRadioButtonGroup.qml
+    components/listitems/core/ListAlarm.qml
+    components/listitems/core/ListButton.qml
+    components/listitems/core/ListDateSelector.qml
+    components/listitems/core/ListIntField.qml
+    components/listitems/core/ListIpAddressField.qml
+    components/listitems/core/ListItem.qml
+    components/listitems/core/ListItemBackground.qml
+    components/listitems/core/ListNavigation.qml
+    components/listitems/core/ListPortField.qml
+    components/listitems/core/ListQuantityField.qml
+    components/listitems/core/ListQuantityGroup.qml
+    components/listitems/core/ListQuantityGroupNavigation.qml
+    components/listitems/core/ListQuantity.qml
+    components/listitems/core/ListRadioButton.qml
+    components/listitems/core/ListRadioButtonGroup.qml
+    components/listitems/core/ListRangeSlider.qml
+    components/listitems/core/ListSlider.qml
+    components/listitems/core/ListSpinBox.qml
+    components/listitems/core/ListSwitch.qml
+    components/listitems/core/ListSwitchForced.qml
+    components/listitems/core/ListTemperature.qml
+    components/listitems/core/ListText.qml
+    components/listitems/core/ListTextField.qml
+    components/listitems/core/ListTextGroup.qml
+    components/listitems/core/ListTimeSelector.qml
+    components/listitems/core/PrimaryListLabel.qml
+    components/listitems/core/SecondaryListLabel.qml
+    components/listitems/core/SectionHeader.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
