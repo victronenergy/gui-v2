@@ -348,7 +348,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListResetHistory.qml
     components/settings/ListMqttAccessSwitch.qml
     components/settings/ListMountStateButton.qml
-    components/settings/PvInverterPositionRadioButtonGroup.qml
+    components/settings/ListPvInverterPositionRadioButtonGroup.qml
     components/settings/SettingsRangeSlider.qml
     components/settings/SettingsSlider.qml
     components/settings/TemperatureRelayNavigationItem.qml
