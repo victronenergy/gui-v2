@@ -21,7 +21,7 @@ Page {
 				Repeater {
 					model: VeBusAcSensorModel { }
 
-					ListTextItem {
+					ListText {
 						//% "AC sensor %1 %2"
 						text: qsTrId("vebus_device_ac_sensor_x_y").arg(root.index).arg(displayText)
 						dataItem.uid: bindPrefix + pathSuffix

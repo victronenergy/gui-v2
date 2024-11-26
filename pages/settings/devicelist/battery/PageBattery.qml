@@ -29,7 +29,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.battery.serviceUid + "/State"
 				allowed: defaultAllowed && dataItem.isValid
@@ -77,14 +77,14 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
 				allowed: defaultAllowed && dataItem.isValid
 				secondaryText: BmsError.description(dataItem.value)
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Battery bank error"
 				text: qsTrId("battery_bank_error")
 				dataItem.uid: root.battery.serviceUid + "/ErrorCode"
@@ -142,7 +142,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTextItem {
+			ListText {
 				id: nrOfBmses
 				//% "Number of BMSes"
 				text: qsTrId("devicelist_battery_number_of_bmses")
@@ -234,7 +234,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Time-to-go"
 				text: qsTrId("battery_time_to_go")
 				dataItem.uid: root.battery.serviceUid + "/TimeToGo"

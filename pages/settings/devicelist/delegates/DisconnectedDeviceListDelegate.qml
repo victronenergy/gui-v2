@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListTextItem {
+ListText {
 	property string cachedDeviceName
 
 	text: cachedDeviceName

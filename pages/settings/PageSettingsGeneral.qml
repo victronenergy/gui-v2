@@ -250,14 +250,14 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
 				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
 				allowed: defaultAllowed && remoteSupportOnOff.checked
 			}
 
-			ListTextItem {
+			ListText {
 				id: remotePort
 
 				//% "Remote support IP and port"

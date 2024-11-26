@@ -212,7 +212,7 @@ Page {
 				onClicked: systemReset.setValue(1)
 			}
 
-			ListTextItem {
+			ListText {
 				//% "AC input 1 ignored"
 				text: qsTrId("vebus_device_ac_input_1_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
@@ -220,7 +220,7 @@ Page {
 				allowed: dataItem.isValid && isMulti
 			}
 
-			ListTextItem {
+			ListText {
 				//% "AC input 2 ignored"
 				text: qsTrId("vebus_device_ac_input_2_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
@@ -262,7 +262,7 @@ Page {
 									Repeater {
 										model: 18
 
-										ListTextItem {
+										ListText {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
 											dataItem.uid: root.veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"

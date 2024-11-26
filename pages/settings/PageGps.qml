@@ -36,7 +36,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				text: CommonWords.status
 				secondaryText: {
 					if (connected.isValid && connected.value) {
@@ -52,21 +52,21 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Latitude"
 				text: qsTrId("settings_gps_latitude")
 				dataItem.uid: bindPrefix + "/Position/Latitude"
 				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Longitude"
 				text: qsTrId("settings_gps_longitude")
 				dataItem.uid: bindPrefix + "/Position/Longitude"
 				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.speed
 				dataItem.uid: bindPrefix + "/Speed"
 				secondaryText: {
@@ -93,20 +93,20 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
 				dataItem.uid: bindPrefix + "/Course"
 				secondaryText: dataItem.isValid ? "%1°".arg(Units.formatNumber(dataItem.value, 1)) : ""
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
 				dataItem.uid: bindPrefix + "/Altitude"
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Number of satellites"
 				text: qsTrId("settings_gps_num_satellites")
 				dataItem.uid: bindPrefix + "/NrOfSatellites"

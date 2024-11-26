@@ -16,7 +16,7 @@ Page {
 		id: chargerListView
 
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				id: networkModeEnabled
 				//% "Networked"
 				text: qsTrId("charger_networked")
@@ -25,13 +25,13 @@ Page {
 				secondaryText: dataItem.isValid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.network_status
 				secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkStatus"
 			}
 
-			ListTextItem {
+			ListText {
 				id: networkModeMode
 				//% "Mode setting"
 				text: qsTrId("charger_mode_setting")
@@ -72,7 +72,7 @@ Page {
 				allowed: dataItem.isValid && networkModeEnabled.dataItem.value
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Master setting"
 				text: qsTrId("charger_master_setting")
 				secondaryText: {
@@ -108,13 +108,13 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.charge_current
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
 				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
-			ListTextItem {
+			ListText {
 				id: bmsControlled
 				//% "BMS controlled"
 				text: qsTrId("charger_network_bms_controlled")

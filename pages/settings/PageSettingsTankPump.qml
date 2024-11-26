@@ -42,7 +42,7 @@ Page {
 	ObjectModel {
 		id: startStopModel
 
-		ListTextItem {
+		ListText {
 			//% "Pump state"
 			text: qsTrId("settings_pump_state")
 			dataItem.uid: root.pumpBindPrefix + "/State"

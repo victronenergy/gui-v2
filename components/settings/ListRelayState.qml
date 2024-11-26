@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListTextItem {
+ListText {
 	//% "Relay state"
 	text: qsTrId("list_relay_state")
 	allowed: defaultAllowed && dataItem.isValid

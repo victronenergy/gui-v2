@@ -45,7 +45,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"

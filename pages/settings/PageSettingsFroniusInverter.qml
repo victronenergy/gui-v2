@@ -30,7 +30,7 @@ Page {
 				dataItem.uid: bindPrefix + "/Position"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.phase
 				//% "Multiphase"
 				secondaryText: qsTrId("page_settings_fronius_inverter_multiphase")

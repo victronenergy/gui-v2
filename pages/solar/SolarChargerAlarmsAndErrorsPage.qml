@@ -69,7 +69,7 @@ Page {
 				text: qsTrId("charger_alarms_header_active_errors")
 			}
 
-			ListTextItem {
+			ListText {
 				allowed: root.solarCharger.errorCode > 0
 				text: ChargerError.description(root.solarCharger.errorCode)
 			}

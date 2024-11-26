@@ -82,7 +82,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				//% "Date/Time UTC"
 				text: qsTrId("settings_tz_date_time_utc")
 				secondaryText: ClockTime.currentDateTimeUtc

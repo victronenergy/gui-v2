@@ -17,7 +17,7 @@ Page {
 		id: settingsListView
 
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
 				dataItem.uid: root.bindPrefix + "/Mgmt/Connection"
@@ -44,7 +44,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Product"
 				text: qsTrId("settings_deviceinfo_product")
 				dataItem.uid: root.bindPrefix + "/ProductName"
@@ -61,7 +61,7 @@ Page {
 				placeholderText: CommonWords.custom_name
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
 				secondaryText: Utils.toHexFormat(dataItem.value)
@@ -74,7 +74,7 @@ Page {
 				dataItem.invalidate: false
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Hardware version"
 				text: qsTrId("settings_deviceinfo_hardware_version")
 				dataItem.uid: root.bindPrefix + "/HardwareVersion"
@@ -82,20 +82,20 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.vrm_instance
 				dataItem.uid: root.bindPrefix + "/DeviceInstance"
 				dataItem.invalidate: false
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.serial_number
 				dataItem.uid: root.bindPrefix + "/Serial"
 				dataItem.invalidate: false
 				allowed: dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
 				dataItem.uid: root.bindPrefix + "/DeviceName"

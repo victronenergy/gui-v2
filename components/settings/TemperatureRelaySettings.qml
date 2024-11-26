@@ -30,7 +30,7 @@ Column {
 		uid: Global.system.serviceUid + "/Relay/1/State"
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Condition %1"
 		text: qsTrId("settings_relay_condition").arg(root.relayNumber + 1)
 		secondaryText: root.relayActivateOnTemperature

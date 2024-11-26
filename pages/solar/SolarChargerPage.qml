@@ -119,7 +119,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListTextItem {
+			ListText {
 				text: loadQuantityItem.text
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
 				allowed: defaultAllowed && dataItem.isValid && !loadQuantityItem.visible

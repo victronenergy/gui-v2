@@ -32,7 +32,7 @@ ObjectModel {
 	// data for that phase.
 	readonly property bool phaseCountKnown: phase.isValid || nrOfPhases.isValid
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
 		allowed: defaultAllowed && dataItem.isValid
@@ -108,13 +108,13 @@ ObjectModel {
 		}
 	}
 
-	ListTextItem {
+	ListText {
 		text: CommonWords.zero_feed_in_power_limit
 		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
 		allowed: dataItem.isValid
 	}
 
-	ListTextItem {
+	ListText {
 		//% "Phase Sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
 		dataItem.uid: root.bindPrefix + "/PhaseSequence"
@@ -163,7 +163,7 @@ ObjectModel {
 				Component {
 					id: dataManagerVersionComponent
 
-					ListTextItem {
+					ListText {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"

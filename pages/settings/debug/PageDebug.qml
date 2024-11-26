@@ -99,7 +99,7 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
 			}*/
 
-			ListTextItem {
+			ListText {
 				//% "Application version"
 				text: qsTrId("settings_page_debug_application_version")
 				secondaryText: Theme.applicationVersion

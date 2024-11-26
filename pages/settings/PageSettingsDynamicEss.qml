@@ -21,7 +21,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.status
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/Active"
 				secondaryText: {

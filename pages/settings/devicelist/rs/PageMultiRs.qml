@@ -40,7 +40,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/State"
@@ -95,7 +95,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText

@@ -57,7 +57,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
 				dataItem.uid: root.serviceUid + "/State"

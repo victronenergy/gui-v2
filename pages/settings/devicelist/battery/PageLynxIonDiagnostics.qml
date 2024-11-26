@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListTextItem {
+			ListText {
 				//% "Shutdowns due error"
 				text: qsTrId("lynxiondiagnostics_shutdowns_due_error")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/ShutDownsDueError"

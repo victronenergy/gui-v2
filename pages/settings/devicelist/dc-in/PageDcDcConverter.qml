@@ -36,13 +36,13 @@ Page {
 				unit: Global.systemSettings.temperatureUnit
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			ListTextItem {
+			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
 				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText

@@ -26,7 +26,7 @@ Page {
 			}
 		}
 
-		delegate: ListTextItem {
+		delegate: ListText {
 			id: menu
 
 			readonly property int devIndex: model.id

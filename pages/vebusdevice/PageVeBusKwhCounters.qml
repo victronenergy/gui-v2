@@ -15,7 +15,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListTextItem {
+			ListText {
 				//% "VE.Bus Quirks"
 				text: qsTrId("vebus_quirks")
 				dataItem.uid: service + "/Quirks"
@@ -40,7 +40,7 @@ Page {
 				Repeater {
 					model: VeBusDeviceKwhCountersModel { }
 
-					ListTextItem {
+					ListText {
 
 						property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataItem.value)
 

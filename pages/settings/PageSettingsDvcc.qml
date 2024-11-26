@@ -98,7 +98,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
 				dataItem.uid: Global.system.serviceUid + "/AutoSelectedTemperatureService"
@@ -177,7 +177,7 @@ Page {
 				}
 			}
 
-			ListTextItem {
+			ListText {
 				id: bmsName
 
 				readonly property string serviceUid: BackendConnection.serviceUidFromName(bmsService.value || "", bmsInstance.value || 0)

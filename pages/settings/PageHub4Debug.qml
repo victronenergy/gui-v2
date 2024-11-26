@@ -39,7 +39,7 @@ Page {
 				]
 			}
 
-			ListTextItem {
+			ListText {
 				//% "AC-In setpoint"
 				text: qsTrId("settings_ess_debug_ac_in_setpoint")
 				dataItem.uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
