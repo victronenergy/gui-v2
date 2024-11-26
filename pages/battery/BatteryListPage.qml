@@ -135,14 +135,9 @@ Page {
 					// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
 					let deviceIndex
 					if (batteryDelegate.serviceType === "vebus") {
-						deviceIndex = Global.inverterChargers.veBusDevices.indexOf(batteryDelegate.device.serviceUid)
-						if (deviceIndex >= 0) {
-							const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
-							Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
-								"title": Qt.binding(function() { return veBusDevice.name }),
-								"veBusDevice": veBusDevice
-							})
-						}
+						Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
+							"bindPrefix": batteryDelegate.device.serviceUid
+						})
 					} else if (batteryDelegate.serviceType === "genset") {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
 							"title": genericDevice.customName,

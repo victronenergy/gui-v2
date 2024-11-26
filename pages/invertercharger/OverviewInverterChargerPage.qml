@@ -166,13 +166,7 @@ Page {
 					if (root.serviceType === "inverter") {
 						Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml", { bindPrefix: root.serviceUid })
 					} else if (root.serviceType === "vebus") {
-						const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(root.serviceUid)
-						const device = deviceIndex >= 0 ? Global.inverterChargers.veBusDevices.deviceAt(deviceIndex) : null
-						if (device) {
-							Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice: device })
-						} else {
-							console.warn("Cannot find vebus object for service:", root.serviceUid)
-						}
+						Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { bindPrefix: root.serviceUid })
 					} else if (root.serviceType === "acsystem") {
 						Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml", { bindPrefix: root.serviceUid })
 					} else {

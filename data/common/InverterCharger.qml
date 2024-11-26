@@ -13,8 +13,6 @@ Device {
 	readonly property int mode: _mode.isValid ? _mode.value : -1
 	readonly property real nominalInverterPower: _nominalInverterPower.isValid ? _nominalInverterPower.value : NaN
 
-	readonly property int numberOfAcInputs: _numberOfAcInputs.isValid ? _numberOfAcInputs.value : NaN
-
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/State"
 	}
@@ -26,9 +24,5 @@ Device {
 
 	readonly property VeQuickItem _mode: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/Mode"
-	}
-
-	readonly property VeQuickItem _numberOfAcInputs: VeQuickItem {
-		uid: inverterCharger.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 }

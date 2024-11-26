@@ -34,20 +34,15 @@ AcWidget {
 			Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
 					{ "bindPrefix": inputServiceUid })
 		} else if (root.inputInfo.serviceType === "vebus") {
-			const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(inputServiceUid)
-			if (deviceIndex >= 0) {
-				const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
-				Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
-					"veBusDevice": veBusDevice
-				})
-			}
-			return
+			Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
+				"bindPrefix": inputServiceUid
+			})
+		} else {
+			// Assume this is on a grid/genset service
+			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+				"bindPrefix": inputServiceUid
+			})
 		}
-
-		// Assume this is on a grid/genset service
-		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-			"bindPrefix": inputServiceUid
-		})
 	}
 
 	Loader {

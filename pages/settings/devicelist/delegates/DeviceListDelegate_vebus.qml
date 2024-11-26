@@ -15,8 +15,7 @@ DeviceListDelegate {
 	secondaryText: Global.system.systemStateToText(state.value)
 
 	onClicked: {
-		const veBusDevice = sourceModel.deviceAt(sourceModel.indexOf(root.device.serviceUid))
-		Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { veBusDevice : veBusDevice })
+		Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { bindPrefix: root.device.serviceUid })
 	}
 
 	VeQuickItem {

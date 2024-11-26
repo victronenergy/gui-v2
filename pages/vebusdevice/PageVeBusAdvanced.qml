@@ -10,12 +10,16 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var veBusDevice
-	readonly property bool isMulti: veBusDevice.numberOfAcInputs > 0
+	required property string bindPrefix
+	readonly property bool isMulti: numberOfAcInputs.isValid && numberOfAcInputs.value > 0
 	property bool startManualEq: false
 	readonly property bool isEssOrHub4: systemType.value === "ESS" || systemType.value === 'Hub-4'
 	property int forceEqCmd: 1
 
+	VeQuickItem {
+		id: numberOfAcInputs
+		uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
+	}
 
 	VeQuickItem {
 		id: systemType
@@ -24,12 +28,12 @@ Page {
 
 	VeQuickItem {
 		id: setChargerState
-		uid: root.veBusDevice.serviceUid + "/VebusSetChargeState"
+		uid: root.bindPrefix + "/VebusSetChargeState"
 	}
 
 	VeQuickItem {
 		id: vebusSubState
-		uid: root.veBusDevice.serviceUid + "/VebusChargeState"
+		uid: root.bindPrefix + "/VebusChargeState"
 		onValueChanged: {
 			if (value === VenusOS.VeBusDevice_ChargeState_Equalize) {
 				startManualEq = false
@@ -39,23 +43,23 @@ Page {
 
 	VeQuickItem {
 		id: redetectSystem
-		uid: root.veBusDevice.serviceUid + "/RedetectSystem"
+		uid: root.bindPrefix + "/RedetectSystem"
 	}
 
 	VeQuickItem {
 		id: systemReset
-		uid: root.veBusDevice.serviceUid + "/SystemReset"
+		uid: root.bindPrefix + "/SystemReset"
 	}
 
 	VeQuickItem {
 		id: firmwareVersion
-		uid: root.veBusDevice.serviceUid + "/FirmwareVersion"
+		uid: root.bindPrefix + "/FirmwareVersion"
 	}
 
 	VeQuickItem {
 		id: masterHasNetworkQuality
 
-		uid: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
+		uid: root.bindPrefix + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
 	}
 
 	Timer {
@@ -216,7 +220,7 @@ Page {
 				//% "AC input 1 ignored"
 				text: qsTrId("vebus_device_ac_input_1_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
-				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn1"
+				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn1"
 				allowed: dataItem.isValid && isMulti
 			}
 
@@ -224,14 +228,14 @@ Page {
 				//% "AC input 2 ignored"
 				text: qsTrId("vebus_device_ac_input_2_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
-				dataItem.uid: root.veBusDevice.serviceUid + "/Ac/State/IgnoreAcIn2"
+				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn2"
 				allowed: dataItem.isValid && isMulti
 			}
 
 			ListRadioButtonGroup {
 				//% "ESS Relay test"
 				text: qsTrId("vebus_device_ess_relay_test")
-				dataItem.uid: root.veBusDevice.serviceUid + "/Devices/0/ExtendStatus/WaitingForRelayTest"
+				dataItem.uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 				enabled: false
 				allowed: dataItem.isValid && isEssOrHub4 && isMulti
 				optionModel: [
@@ -265,7 +269,7 @@ Page {
 										ListText {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
-											dataItem.uid: root.veBusDevice.serviceUid + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
+											dataItem.uid: root.bindPrefix + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
 											allowed: dataItem.isValid
 										}
 									}
