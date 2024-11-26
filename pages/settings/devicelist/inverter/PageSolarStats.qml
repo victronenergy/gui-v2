@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListQuantityItem {
+			ListQuantity {
 				//% "Maximum PV voltage"
 				text: qsTrId("inverter_maximum_pv_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
@@ -21,7 +21,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Maximum battery voltage"
 				text: qsTrId("inverter_maximum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
@@ -29,7 +29,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Minimum battery voltage"
 				text: qsTrId("inverter_minimum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"

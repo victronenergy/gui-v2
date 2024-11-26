@@ -57,7 +57,7 @@ Page {
 				decimals: 1
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Sensor voltage"
 				text: qsTrId("temperature_sensor_voltage")
 				allowed: defaultAllowed && dataItem.isValid

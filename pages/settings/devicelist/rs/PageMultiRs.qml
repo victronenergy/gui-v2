@@ -46,7 +46,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.state_of_charge
 				dataItem.uid: root.bindPrefix + "/Soc"
 				unit: VenusOS.Units_Percentage
@@ -79,7 +79,7 @@ Page {
 						: null
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("settings_multirs_total_yield")
 				allowed: root.trackerCount > 0
@@ -87,7 +87,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "System yield"
 				text: qsTrId("settings_multirs_system_yield")
 				allowed: root.trackerCount > 0
@@ -210,7 +210,7 @@ Page {
 		Column {
 			width: parent ? parent.width : 0
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Total PV Power"
 				text: qsTrId("settings_multirs_total_pv_power")
 				dataItem.uid: root.bindPrefix + "/Yield/Power"

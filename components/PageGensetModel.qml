@@ -205,14 +205,14 @@ ObjectModel {
 			Page {
 				GradientListView {
 					model: ObjectModel {
-						ListQuantityItem {
+						ListQuantity {
 							//% "Speed"
 							text: qsTrId("ac-in-genset_speed")
 							dataItem.uid: root.bindPrefix + "/Engine/Speed"
 							unit: VenusOS.Units_RevolutionsPerMinute
 						}
 
-						ListQuantityItem {
+						ListQuantity {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
 							dataItem.uid: root.bindPrefix + "/Engine/Load"
@@ -220,7 +220,7 @@ ObjectModel {
 							unit: VenusOS.Units_Percentage
 						}
 
-						ListQuantityItem {
+						ListQuantity {
 							//% "Oil pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
@@ -265,7 +265,7 @@ ObjectModel {
 							allowed: defaultAllowed && dataItem.isValid
 						}
 
-						ListQuantityItem {
+						ListQuantity {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataItem.uid: root.bindPrefix + "/StarterVoltage"

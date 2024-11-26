@@ -81,7 +81,7 @@ Page {
 				}
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("inverter_total_yield")
 				allowed: defaultAllowed && dataItem.isValid
@@ -89,7 +89,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "System yield"
 				text: qsTrId("inverter_system_yield")
 				allowed: defaultAllowed && dataItem.isValid
@@ -97,7 +97,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.state_of_charge
 				allowed: defaultAllowed && root.isInverterCharger
 				unit: VenusOS.Units_Percentage

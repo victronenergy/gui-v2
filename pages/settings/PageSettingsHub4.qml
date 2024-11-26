@@ -126,7 +126,7 @@ Page {
 			}
 		}
 
-		ListQuantityItem {
+		ListQuantity {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			allowed: defaultAllowed

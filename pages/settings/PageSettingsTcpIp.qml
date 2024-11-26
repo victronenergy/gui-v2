@@ -199,7 +199,7 @@ Page {
 			}
 		}
 
-		ListQuantityItem {
+		ListQuantity {
 			text: CommonWords.signal_strength
 			value: service.strength
 			unit: VenusOS.Units_Percentage

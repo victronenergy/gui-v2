@@ -97,7 +97,7 @@ ObjectModel {
 
 		Repeater {
 			model: root.phaseNumbers
-			delegate: ListQuantityItem {
+			delegate: ListQuantity {
 				//: %1 = phase number (1-3)
 				//% "Energy L%1"
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)

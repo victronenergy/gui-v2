@@ -26,14 +26,14 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.maximum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
 				allowed: defaultAllowed && dataItem.isValid
@@ -66,7 +66,7 @@ Page {
 				allowed: defaultAllowed && root.showStarterVoltage
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Minimum aux voltage"
 				text: qsTrId("dcmeter_history_minimum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
@@ -74,7 +74,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Maximum aux voltage"
 				text: qsTrId("dcmeter_history_maximum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
@@ -94,7 +94,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Produced energy"
 				text: qsTrId("dcmeter_history_produced_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyOut"
@@ -102,7 +102,7 @@ Page {
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Consumed energy"
 				text: qsTrId("dcmeter_history_consumed_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyIn"

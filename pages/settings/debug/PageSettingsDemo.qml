@@ -134,7 +134,7 @@ Page {
 				textModel: ["204.07V", "4.7A", "950W"]
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: "Quantity"
 				value: 33.5
 				unit: VenusOS.Units_Temperature_Celsius

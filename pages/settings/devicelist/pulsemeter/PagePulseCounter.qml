@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListQuantityItem {
+			ListQuantity {
 				//% "Aggregate"
 				text: qsTrId("pulsecounter_aggregate")
 				dataItem.uid: bindPrefix + "/Aggregate"
