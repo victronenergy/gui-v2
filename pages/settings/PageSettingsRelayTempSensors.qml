@@ -32,7 +32,7 @@ Page {
 	GradientListView {
 		model: services
 
-		delegate: TemperatureRelayNavigationItem {
+		delegate: ListTemperatureRelay {
 			id: relayDelegate
 
 			function getIdFromService(service) {
