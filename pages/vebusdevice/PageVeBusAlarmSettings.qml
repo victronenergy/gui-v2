@@ -22,7 +22,7 @@ Page {
 
 	GradientListView {
 		model: VeBusDeviceAlarmSettingsModel { id: alarmSettingsModel }
-		delegate: AlarmLevelRadioButtonGroup {
+		delegate: ListAlarmLevelRadioButtonGroup {
 			text: alarmSettingsModel.displayTexts[model.index]
 			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus" + model.pathSuffix
 			allowed: model.multiPhaseOnly ? isMulti : true
