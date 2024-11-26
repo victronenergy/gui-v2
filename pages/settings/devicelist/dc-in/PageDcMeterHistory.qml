@@ -110,7 +110,7 @@ Page {
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
-			ListResetHistoryLabel {
+			ListResetHistory {
 				visible: !clearHistory.visible
 			}
 
