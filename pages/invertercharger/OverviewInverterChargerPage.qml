@@ -95,7 +95,7 @@ Page {
 
 				Component {
 					id: inverterAcOutQuantityGroup
-					InverterAcOutQuantityGroup {
+					InverterAcOutSettings {
 						bindPrefix: root.serviceUid
 					}
 				}
