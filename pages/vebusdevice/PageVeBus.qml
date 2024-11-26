@@ -16,12 +16,6 @@ Page {
 	title: veBusDevice.name
 
 	VeQuickItem {
-		id: _numberOfPhases
-
-		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
-	}
-
-	VeQuickItem {
 		id: bmsMode
 
 		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
@@ -37,12 +31,6 @@ Page {
 		id: bmsExpected
 
 		uid: veBusDevice.serviceUid + "/Bms/BmsExpected"
-	}
-
-	VeQuickItem {
-		id: dmc
-
-		uid: root.veBusDevice.serviceUid + "/Devices/Dmc/Version"
 	}
 
 	VeQuickItem {
