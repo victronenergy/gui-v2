@@ -9,34 +9,44 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var veBusDevice
-	readonly property bool isMulti: veBusDevice.numberOfAcInputs > 0
+	required property string bindPrefix
+	readonly property bool isMulti: numberOfAcInputs.isValid && numberOfAcInputs.value > 0
 	readonly property bool chargeInProcess: preferRenewableEnergy.value === 0
 
 	title: veBusDevice.name
 
+	Device {
+		id: veBusDevice
+		serviceUid: root.bindPrefix
+	}
+
+	VeQuickItem {
+		id: numberOfAcInputs
+		uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
+	}
+
 	VeQuickItem {
 		id: bmsMode
 
-		uid: veBusDevice.serviceUid + "/Devices/Bms/Version"
+		uid: root.bindPrefix + "/Devices/Bms/Version"
 	}
 
 	VeQuickItem {
 		id: bmsType
 
-		uid: veBusDevice.serviceUid + "/Bms/BmsType"
+		uid: root.bindPrefix + "/Bms/BmsType"
 	}
 
 	VeQuickItem {
 		id: bmsExpected
 
-		uid: veBusDevice.serviceUid + "/Bms/BmsExpected"
+		uid: root.bindPrefix + "/Bms/BmsExpected"
 	}
 
 	VeQuickItem {
 		id: mkVersion
 
-		uid: root.veBusDevice.serviceUid + "/Interfaces/Mk2/Version"
+		uid: root.bindPrefix + "/Interfaces/Mk2/Version"
 	}
 
 	VeQuickItem {
@@ -48,12 +58,12 @@ Page {
 	VeQuickItem {
 		id: preferRenewableEnergy
 
-		uid: root.veBusDevice.serviceUid + "/Dc/0/PreferRenewableEnergy"
+		uid: root.bindPrefix + "/Dc/0/PreferRenewableEnergy"
 	}
 
 	VeQuickItem {
 		id: firmwareVersion
-		uid: root.veBusDevice.serviceUid + "/FirmwareVersion"
+		uid: root.bindPrefix + "/FirmwareVersion"
 	}
 
 	GradientListView {
@@ -66,7 +76,7 @@ Page {
 				content.children: [
 					InverterChargerModeButton {
 						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
-						serviceUid: root.veBusDevice.serviceUid
+						serviceUid: root.bindPrefix
 					}
 				]
 			}
@@ -106,7 +116,7 @@ Page {
 
 				Repeater {
 					model: AcInputSettingsModel {
-						serviceUid: root.veBusDevice.serviceUid
+						serviceUid: root.bindPrefix
 					}
 					delegate: ListItem {
 						id: currentLimitListButton
@@ -115,7 +125,7 @@ Page {
 						content.children: [
 							CurrentLimitButton {
 								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
-								serviceUid: root.veBusDevice.serviceUid
+								serviceUid: root.bindPrefix
 								inputNumber: modelData.inputNumber
 								inputType: modelData.inputType
 							}
@@ -202,44 +212,44 @@ Page {
 			}
 
 			ListQuantity {
-				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
+				dataItem.uid: root.bindPrefix + "/Dc/0/Voltage"
 				//% "DC Voltage"
 				text: qsTrId("vebus_device_page_dc_voltage")
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
-				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Current"
+				dataItem.uid: root.bindPrefix + "/Dc/0/Current"
 				//% "DC Current"
 				text: qsTrId("vebus_device_page_dc_current")
 				unit: VenusOS.Units_Amp
 			}
 
 			ListQuantity {
-				dataItem.uid: veBusDevice.serviceUid + "/Soc"
+				dataItem.uid: root.bindPrefix + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage
 			}
 
 			ListTemperature {
 				allowed: defaultAllowed && dataItem.isValid && root.isMulti
-				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Temperature"
+				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
 			}
 
 			ListActiveAcInput {
-				bindPrefix: root.veBusDevice.serviceUid
+				bindPrefix: root.bindPrefix
 			}
 
 			VeBusAcIODisplay {
-				serviceUid: root.veBusDevice.serviceUid
+				serviceUid: root.bindPrefix
 			}
 
 			ListNavigation {
 				//% "Advanced"
 				text: qsTrId("vebus_device_page_advanced")
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",
-													   { "veBusDevice": root.veBusDevice,
+													   { "bindPrefix": root.bindPrefix,
 														   "title": text
 													   })
 			}
@@ -248,8 +258,7 @@ Page {
 				text: CommonWords.alarm_status
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarms.qml",
 													   {
-														   "bindPrefix": root.veBusDevice.serviceUid,
-														   "veBusDevice": root.veBusDevice,
+														   "bindPrefix": root.bindPrefix,
 														   "isMulti": root.isMulti
 													   })
 			}
@@ -282,7 +291,7 @@ Page {
 				allowed: bmsExpected.value === 1
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
 														   "title": text,
-														   "bindPrefix": root.veBusDevice.serviceUid
+														   "bindPrefix": root.bindPrefix
 													   })
 			}
 
@@ -291,7 +300,7 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
 														   "title": text,
-														   "bindPrefix": root.veBusDevice.serviceUid + "/AcSensor"
+														   "bindPrefix": root.bindPrefix + "/AcSensor"
 													   }
 													   )
 			}
@@ -301,7 +310,7 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_Service
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDebug.qml", {
 														   "title": text,
-														   "bindPrefix": root.veBusDevice.serviceUid
+														   "bindPrefix": root.bindPrefix
 													   }
 													   )
 			}
@@ -310,7 +319,7 @@ Page {
 				text: CommonWords.device_info_title
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDeviceInfo.qml", {
 														   "title": text,
-														   "bindPrefix": root.veBusDevice.serviceUid
+														   "bindPrefix": root.bindPrefix
 													   }
 													   )
 			}

@@ -17,7 +17,7 @@ Page {
 	VeQuickItem {
 		id: phases
 
-		uid: veBusDevice.serviceUid + "/Ac/NumberOfPhases"
+		uid: root.bindPrefix + "/Ac/NumberOfPhases"
 	}
 
 	title: CommonWords.alarm_status
@@ -27,7 +27,7 @@ Page {
 
 			ListText {
 				text: CommonWords.vebus_error
-				dataItem.uid: veBusDevice.serviceUid + "/VebusError"
+				dataItem.uid: root.bindPrefix + "/VebusError"
 			}
 
 			Column {
@@ -46,7 +46,7 @@ Page {
 						required property bool showOnlyIfMulti
 
 						text: alarmStatusModel.displayTexts[index]
-						bindPrefix: veBusDevice.serviceUid
+						bindPrefix: root.bindPrefix
 						numOfPhases: root.numberOfPhases
 						multiPhase: alarmDelegate.multiPhase
 						alarmSuffix: pathSuffix
@@ -60,7 +60,7 @@ Page {
 				//% "VE.Bus Error 8 / 11 report"
 				text: qsTrId("vebus_device_error_8_11_report")
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusError11View.qml", {
-								bindPrefix: veBusDevice.serviceUid,
+								bindPrefix: root.bindPrefix,
 								title: text
 				})
 			}

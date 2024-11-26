@@ -17,15 +17,10 @@ OverviewWidget {
 
 			// Show the vebus page if the battery is from a vebus service.
 			if (BackendConnection.serviceTypeFromUid(batteryUids[0]) === "vebus") {
-				const deviceIndex = Global.inverterChargers.veBusDevices.indexOf(batteryUids[0])
-				if (deviceIndex >= 0) {
-					const veBusDevice = Global.inverterChargers.veBusDevices.deviceAt(deviceIndex)
-					Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
-						"title": veBusDevice.name,
-						"veBusDevice": veBusDevice
-					})
-					return
-				}
+				Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
+					"bindPrefix": batteryUids[0],
+				})
+				return
 			}
 
 			// Assume this is a battery service
