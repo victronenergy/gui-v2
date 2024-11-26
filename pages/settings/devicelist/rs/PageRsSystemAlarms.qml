@@ -55,7 +55,7 @@ Page {
 	ObjectModel {
 		id: noAlarmsModel
 
-		ListLabel {
+		PrimaryListLabel {
 			//% "No system alarms"
 			text: qsTrId("rs_no_system_alarms")
 		}

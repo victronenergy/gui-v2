@@ -11,7 +11,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListLabel {
+			PrimaryListLabel {
 				//% "Note that these features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
 				text: qsTrId("settings_large_features_not_offically_supported")
 			}
@@ -25,7 +25,7 @@ Page {
 				allowed: dataItem.isValid
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "Access Signal K at http://venus.local:3000 and via VRM."
 				text: qsTrId("settings_large_access_signal_k")
 				allowed: signalk.checked

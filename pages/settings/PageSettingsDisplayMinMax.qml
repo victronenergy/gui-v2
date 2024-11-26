@@ -17,7 +17,7 @@ Page {
 				text: qsTrId("settings_minmax_autorange")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 				bottomContentChildren: [
-					ListLabel {
+					PrimaryListLabel {
 						topPadding: 0
 						bottomPadding: 0
 						color: Theme.color_font_secondary

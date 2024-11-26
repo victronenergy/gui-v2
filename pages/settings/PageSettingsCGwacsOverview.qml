@@ -30,7 +30,7 @@ Page {
 		id: energyMeterList
 		model: deviceIds.value ? deviceIds.value.split(',') : []
 
-		header: ListLabel {
+		header: PrimaryListLabel {
 			allowed: energyMeterList.count === 0
 			//% "No energy meters found\n\n"
 			//% "Note that this menu only shows Carlo Gavazzi meters connected over RS485. "

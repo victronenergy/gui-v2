@@ -79,7 +79,7 @@ Page {
 
 				Page {
 					GradientListView {
-						header: ListLabel {
+						header: PrimaryListLabel {
 							//% "No information available, see previous page for Distributor status."
 							text: qsTrId("lynxdistributor_no_information_available")
 							allowed: !distributorDelegate.connected

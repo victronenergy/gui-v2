@@ -120,7 +120,7 @@ Page {
 				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				text: qsTr("Set the switch in an unlocked position to modify the settings.")
 				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24 && em24Locked()
 			}

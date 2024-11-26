@@ -51,7 +51,7 @@ Page {
 				}
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "Access Node-RED at https://venus.local:1881 and via VRM."
 				text: qsTrId("settings_large_access_node_red")
 				allowed: nodered.currentValue > 0

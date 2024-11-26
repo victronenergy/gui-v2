@@ -40,7 +40,7 @@ Page {
 	GradientListView {
 		id: batteryListView
 
-		header: ListLabel {
+		header: PrimaryListLabel {
 			//% "Use this menu to define the battery data shown when clicking the Battery icon on the Overview page. The same selection is also visible on the VRM Portal."
 			text: qsTrId("settings_batteries_intro")
 		}

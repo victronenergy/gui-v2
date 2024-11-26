@@ -65,7 +65,7 @@ Page {
 				allowed: scanItem.isValid && accessPoint.isValid
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				allowed: settingsListView.count === 0
 				text: wifiModel.isValid
 						//% "No access points"

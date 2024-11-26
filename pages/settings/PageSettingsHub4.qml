@@ -17,7 +17,7 @@ Page {
 	Component {
 		id: noEssHeader
 
-		ListLabel {
+		PrimaryListLabel {
 			//% "No ESS Assistant found"
 			text: qsTrId("settings_ess_no_ess_assistant")
 		}
@@ -26,7 +26,7 @@ Page {
 	Component {
 		id: hasAcSystem
 
-		ListLabel {
+		PrimaryListLabel {
 			//% "For Multi-RS and HS19 devices, ESS settings are available on the RS System product page."
 			text: qsTrId("settings_ess_rs_information")
 		}

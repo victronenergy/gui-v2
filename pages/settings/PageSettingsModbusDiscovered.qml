@@ -25,7 +25,7 @@ Page {
 
 	GradientListView {
 		id: listView
-		header: ListLabel {
+		header: PrimaryListLabel {
 			horizontalAlignment: Text.AlignHCenter
 			allowed: listView.count === 0
 			//% "No Modbus devices discovered"

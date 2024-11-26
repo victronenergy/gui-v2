@@ -16,7 +16,7 @@ Page {
 
 		model: Global.inverterChargers.rsAlarms
 
-		header: ListLabel {
+		header: PrimaryListLabel {
 			function updateVisibility() {
 				for (let i = 0; i < settingsListView.count; ++i) {
 					const listItem = settingsListView.itemAtIndex(i)

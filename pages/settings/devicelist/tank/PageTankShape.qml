@@ -72,7 +72,7 @@ Page {
 	GradientListView {
 		id: pointsListView
 
-		header: ListLabel {
+		header: PrimaryListLabel {
 			//% "No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied."
 			text: qsTrId("devicelist_tankshape_empty")
 			allowed: pointsListView.count === 0

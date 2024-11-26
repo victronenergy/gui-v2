@@ -47,7 +47,7 @@ ObjectModel {
 		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Enabled" : ""
 	}
 
-	ListLabel {
+	PrimaryListLabel {
 		allowed: root.gensetEnabled.value === 0
 		//% "This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to \"Connected genset helper relay\"."
 		text: qsTrId("genset_controller_requires_helper_relay")
@@ -357,7 +357,7 @@ ObjectModel {
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 							allowed: defaultAllowed && dataItem.isValid
-							bottomContentChildren: ListLabel {
+							bottomContentChildren: PrimaryListLabel {
 								//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
 								text: qsTrId("genset_bms_control_enabled_automatically")
 								allowed: bmsControlled.dataItem.value === 1

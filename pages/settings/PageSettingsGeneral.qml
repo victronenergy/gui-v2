@@ -371,7 +371,7 @@ Page {
 					//% "Boat/Motorhome demo 2"
 					{ display: qsTrId("page_settings_demo_2"), value: 3 },
 				]
-				ListLabel {
+				PrimaryListLabel {
 					id: demoModeCaption
 
 					anchors {

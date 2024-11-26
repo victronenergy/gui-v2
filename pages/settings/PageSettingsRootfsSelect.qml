@@ -46,7 +46,7 @@ Page {
 		id: settingsListView
 
 		model: ObjectModel {
-			ListLabel {
+			PrimaryListLabel {
 				//% "This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed."
 				text: qsTrId("settings_firmware_version_switch_option")
 			}

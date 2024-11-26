@@ -24,7 +24,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/CustomName"
 			}
 
-			ListLabel {
+			PrimaryListLabel {
 				//% "Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information."
 				text: qsTrId("settings_vecan_instance_zero_warning")
 			}

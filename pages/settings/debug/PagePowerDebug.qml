@@ -76,7 +76,7 @@ Page {
 		ObjectModel {
 			id: invalidModel
 
-			ListLabel {
+			PrimaryListLabel {
 				text: "This page is not supported via MQTT. View this on the device instead."
 			}
 		}
