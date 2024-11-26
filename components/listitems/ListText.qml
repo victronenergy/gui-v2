@@ -14,7 +14,7 @@ ListItem {
 	property alias secondaryLabel: secondaryLabel
 
 	content.children: [
-		ListTextItemSecondaryLabel {
+		SecondaryListLabel {
 			id: secondaryLabel
 			text: dataItem.isValid ? dataItem.value : ""
 			width: Math.min(implicitWidth, root.maximumContentWidth)
