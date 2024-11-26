@@ -41,12 +41,8 @@ Page {
 				}
 			}
 
-			ListSecurityWarningSwitch {
+			ListMqttAccessSwitch {
 				id: mqtt
-
-				//% "MQTT Access"
-				text: qsTrId("settings_services_mqtt_access")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
 			}
 
 			Column {
