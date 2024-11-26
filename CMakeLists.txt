@@ -335,7 +335,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/settings/ListAlarmLevelRadioButtonGroup.qml
     components/settings/ListChargeSchedule.qml
     components/settings/ListFirmwareCheckButton.qml
-    components/settings/InverterAcOutQuantityGroup.qml
+    components/settings/InverterAcOutSettings.qml
     components/settings/Led.qml
     components/settings/ListAcInError.qml
     components/settings/ListAlarmState.qml

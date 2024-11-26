@@ -39,7 +39,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/State"
 			}
 
-			InverterAcOutQuantityGroup {
+			InverterAcOutSettings {
 				bindPrefix: root.bindPrefix
 			}
 
