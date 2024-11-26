@@ -22,7 +22,7 @@ Page {
 			]
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: model.device.name
 			secondaryText: Global.system.systemStateToText(model.device.state)
 

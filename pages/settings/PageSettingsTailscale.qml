@@ -237,7 +237,7 @@ Page {
 				onClicked: commandItem.setValue('logout')
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Local network access"
 				text: qsTrId("settings_tailscale_local_network_access")
 				secondaryText: getLocalNetworkAccess()
@@ -295,7 +295,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Advanced"
 				text: qsTrId("settings_tailscale_advanced")
 				onClicked: {

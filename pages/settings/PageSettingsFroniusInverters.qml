@@ -19,7 +19,7 @@ Page {
 				   VeQItemTableModel.AddNonLeaves |
 				   VeQItemTableModel.DontAddItem
 		}
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: menu
 
 			property string inverterPath: model.uid

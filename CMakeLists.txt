@@ -310,7 +310,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListItem.qml
     components/listitems/ListItemBackground.qml
     components/listitems/PrimaryListLabel.qml
-    components/listitems/ListNavigationItem.qml
+    components/listitems/ListNavigation.qml
     components/listitems/ListPortField.qml
     components/listitems/ListRadioButton.qml
     components/listitems/ListRadioButtonGroup.qml

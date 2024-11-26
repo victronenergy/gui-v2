@@ -56,7 +56,7 @@ Page {
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
 				allowed: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)

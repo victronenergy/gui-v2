@@ -20,7 +20,7 @@ Page {
 				unit: Global.systemSettings.volumeUnit
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
@@ -28,7 +28,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

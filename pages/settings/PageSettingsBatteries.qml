@@ -45,7 +45,7 @@ Page {
 			text: qsTrId("settings_batteries_intro")
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: batteryMenuItem
 
 			readonly property string configId: modelData.replace(/\./g, "_")

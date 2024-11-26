@@ -142,7 +142,7 @@ Page {
 				]
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.current_transformers
 				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
@@ -151,7 +151,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Devices"
 				text: qsTrId("ac-in-setup_devices")
 				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee

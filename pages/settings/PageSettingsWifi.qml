@@ -75,7 +75,7 @@ Page {
 			}
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: delagate
 
 			//% "[Hidden]"

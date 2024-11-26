@@ -19,7 +19,7 @@ Page {
 				Repeater {
 					model: 4
 
-					ListNavigationItem {
+					ListNavigation {
 						text: CommonWords.ac_sensor_x.arg(index)
 						onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensor.qml", {
 									   "title": CommonWords.ac_sensor_x.arg(index),

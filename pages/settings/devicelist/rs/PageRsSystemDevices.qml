@@ -46,7 +46,7 @@ Page {
 			id: rsDeviceModel
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			id: rsDeviceDelegate
 
 			required property BaseDevice device

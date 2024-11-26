@@ -121,7 +121,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Relay/0/State"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				property SolarHistory solarHistory
 
 				text: CommonWords.daily_history
@@ -156,7 +156,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.overall_history
 				allowed: root.isInverterCharger
 				onClicked: {
@@ -165,7 +165,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_status
 				allowed: root.isInverterCharger
 				onClicked: {
@@ -174,7 +174,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_setup
 				allowed: root.isInverterCharger
 				onClicked: {
@@ -183,7 +183,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

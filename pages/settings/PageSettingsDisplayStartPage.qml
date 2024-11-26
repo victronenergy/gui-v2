@@ -31,7 +31,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListNavigationItem {
+			ListNavigation {
 				id: startPageNavigation
 				//% "Start page"
 				text: qsTrId("settings_startpage_name")

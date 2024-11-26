@@ -55,7 +55,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
 				allowed: enableModbusTcp.checked

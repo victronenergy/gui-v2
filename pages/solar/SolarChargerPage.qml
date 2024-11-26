@@ -134,7 +134,7 @@ Page {
 				enabled: false
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				// This is the number of active alarms, plus the active error (if present).
 				readonly property int itemCount: (lowBatteryAlarm.isValid && lowBatteryAlarm.value !== 0 ? 1 : 0)
 						+ (highBatteryAlarm.isValid && highBatteryAlarm.value !== 0 ? 1 : 0)
@@ -179,7 +179,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.history
 				allowed: root.solarCharger.history.valid
 				onClicked: {
@@ -191,7 +191,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Networked operation"
 				text: qsTrId("charger_networked_operation")
 				onClicked: {
@@ -200,7 +200,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

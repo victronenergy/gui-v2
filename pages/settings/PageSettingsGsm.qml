@@ -147,7 +147,7 @@ Page {
 				allowed: status.dataItem.value === 1
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"

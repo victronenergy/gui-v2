@@ -15,7 +15,7 @@ Page {
 	GradientListView {
 		id: alarmListView
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			readonly property string modulePath: model.uid.slice(0, -3)
 
 			text: moduleRoot.value || ""

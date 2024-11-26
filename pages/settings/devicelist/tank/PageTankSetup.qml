@@ -94,7 +94,7 @@ Page {
 
 			VolumeUnitRadioButtonGroup {}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Custom shape"
 				text: qsTrId("devicelist_tanksetup_custom_shape")
 				allowed: shape.seen
@@ -126,7 +126,7 @@ Page {
 				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, 1) + (rawUnit.value || "") : "--"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.low_level_alarm
 				allowed: low.seen
 
@@ -141,7 +141,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.high_level_alarm
 				allowed: high.seen
 

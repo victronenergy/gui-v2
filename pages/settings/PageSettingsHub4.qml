@@ -235,7 +235,7 @@ Page {
 			stepSize: 10
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
 			allowed: defaultAllowed && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
@@ -246,7 +246,7 @@ Page {
 			}
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
 			allowed: defaultAllowed && essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
@@ -255,7 +255,7 @@ Page {
 			}
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			//% "Scheduled charge levels"
 			text: qsTrId("settings_ess_scheduled_charge_levels")
 			secondaryText: scheduleSoc.isValid
@@ -295,7 +295,7 @@ Page {
 			}
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
 			allowed: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
@@ -311,7 +311,7 @@ Page {
 			}
 		}
 
-		ListNavigationItem {
+		ListNavigation {
 			text: CommonWords.debug
 			allowed: defaultAllowed
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled

@@ -28,7 +28,7 @@ Page {
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
 				onClicked: {
@@ -36,7 +36,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
 				onClicked: {
@@ -44,7 +44,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
 				onClicked: {

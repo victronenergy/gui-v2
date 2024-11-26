@@ -142,7 +142,7 @@ Page {
 				]
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				id: settingsMenu
 
 				text: CommonWords.settings
@@ -153,7 +153,7 @@ Page {
 				allowed: productId.value === ProductInfo.ProductId_MeteoSensor_Imt
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

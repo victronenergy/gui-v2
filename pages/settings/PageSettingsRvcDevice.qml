@@ -60,7 +60,7 @@ Page {
 				allowed: root.isLocalSender
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "Configuration"
 				text: qsTrId("settings_rvc_configuration")
 				allowed: root.isLocalSender && userHasWriteAccess

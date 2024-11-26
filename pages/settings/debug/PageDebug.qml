@@ -67,34 +67,34 @@ Page {
 				onClicked: Global.pauseElectronAnimations = !Global.pauseElectronAnimations
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "Power"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "System data"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "Test"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: "Values"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
 			}
 
 			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
-			/*ListNavigationItem {
+			/*ListNavigation {
 				text: "glibc memory"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
 			}*/
 
 			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
-			/*ListNavigationItem {
+			/*ListNavigation {
 				text: "Qt memory"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
 			}*/

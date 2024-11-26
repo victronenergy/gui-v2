@@ -76,7 +76,7 @@ Page {
 				serviceUid: root.bindPrefix
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "System alarms"
 				text: qsTrId("rssystem_system_alarms")
 				onClicked: {
@@ -85,7 +85,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				text: CommonWords.alarm_setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
@@ -93,7 +93,7 @@ Page {
 				}
 			}
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "RS devices"
 				text: qsTrId("settings_rs_devices")
 				onClicked: {

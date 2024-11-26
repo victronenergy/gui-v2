@@ -29,7 +29,7 @@ PageDeviceInfo {
 			}
 
 			// TODO: this crashes when running with '--mock'
-			ListNavigationItem {
+			ListNavigation {
 				//% "Serial numbers"
 				text: qsTrId("vebus_device_serial_numbers")
 				onClicked: {

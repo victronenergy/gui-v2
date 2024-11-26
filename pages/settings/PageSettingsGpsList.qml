@@ -41,7 +41,7 @@ Page {
 				 ? mqttGpsModel
 				 : mockGpsModelComponent.createObject(root)
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: (productName.isValid && vrmInstance.isValid)
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
 				  : "--"
@@ -62,7 +62,7 @@ Page {
 			}
 		}
 
-		footer: ListNavigationItem {
+		footer: ListNavigation {
 			//% "GPS Settings"
 			text: qsTrId("settings_gps_settings")
 			onClicked: {

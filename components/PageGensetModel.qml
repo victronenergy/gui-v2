@@ -113,7 +113,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		//% "Genset error codes"
 		text: qsTrId("ac-in-genset_error")
 		secondaryText: {
@@ -192,7 +192,7 @@ ObjectModel {
 		allowed: defaultAllowed && root.dcGenset
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
@@ -285,7 +285,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		//% "Run time and service"
 		text: qsTrId("page_settings_generator_run_time_and_service")
 		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
@@ -297,7 +297,7 @@ ObjectModel {
 											   })
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
 		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
@@ -377,7 +377,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+	ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
 		text: CommonWords.settings
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
@@ -385,7 +385,7 @@ ObjectModel {
 		}
 	}
 
-	ListNavigationItem {
+	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",

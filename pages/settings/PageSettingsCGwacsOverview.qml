@@ -39,7 +39,7 @@ Page {
 			text: qsTrId("settings_cgwacs_no_energy_meters")
 		}
 
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			readonly property string devicePath: Global.systemSettings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)

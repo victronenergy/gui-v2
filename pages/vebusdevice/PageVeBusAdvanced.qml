@@ -243,7 +243,7 @@ Page {
 			}
 
 
-			ListNavigationItem {
+			ListNavigation {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service

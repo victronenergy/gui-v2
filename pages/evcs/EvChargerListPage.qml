@@ -46,7 +46,7 @@ Page {
 		}
 
 		model: Global.evChargers.model
-		delegate: ListNavigationItem {
+		delegate: ListNavigation {
 			text: model.device.name
 			secondaryText: {
 				const statusText = Global.evChargers.chargerStatusToText(model.device.status)
