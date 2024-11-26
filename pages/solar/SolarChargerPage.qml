@@ -109,7 +109,7 @@ Page {
 			/* Only available on 15A chargers */
 			/* If load is on and current present, show current.
 			 * Otherwise show the state of the load output. */
-			ListQuantityItem {
+			ListQuantity {
 				id: loadQuantityItem
 
 				//% "Load"

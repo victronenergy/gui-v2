@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListQuantityItem {
+ListQuantity {
 	id: root
 
 	dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)

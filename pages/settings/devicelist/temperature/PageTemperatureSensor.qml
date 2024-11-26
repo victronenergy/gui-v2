@@ -55,7 +55,7 @@ Page {
 				precision: 0
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Humidity"
 				text: qsTrId("temperature_humidity")
 				dataItem.uid: bindPrefix + "/Humidity"
@@ -63,7 +63,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Pressure"
 				text: qsTrId("temperature_pressure")
 				dataItem.uid: bindPrefix + "/Pressure"

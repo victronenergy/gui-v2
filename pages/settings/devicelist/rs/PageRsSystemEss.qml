@@ -47,7 +47,7 @@ Page {
 				}
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Active SOC limit"
 				text: qsTrId("settings_rs_active_soc_limit")
 				allowed: defaultAllowed

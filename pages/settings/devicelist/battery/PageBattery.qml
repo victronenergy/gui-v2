@@ -122,7 +122,7 @@ Page {
 				]
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
 				dataItem.uid: root.battery.serviceUid + "/Capacity"
@@ -130,7 +130,7 @@ Page {
 				unit: VenusOS.Units_AmpHour
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				readonly property VeQuickItem _n2kDeviceInstance: VeQuickItem {
 					uid: battery.serviceUid + "/N2kDeviceInstance"
 				}
@@ -150,13 +150,13 @@ Page {
 				allowed: defaultAllowed && root.isParallelBms
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.state_of_charge
 				value: root.battery.stateOfCharge
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "State of health"
 				text: qsTrId("battery_state_of_health")
 				dataItem.uid: root.battery.serviceUid + "/Soh"
@@ -178,7 +178,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Starter voltage"
 				text: qsTrId("battery_starter_voltage")
 				dataItem.uid: root.battery.serviceUid + "/Dc/1/Voltage"
@@ -186,7 +186,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Bus voltage"
 				text: qsTrId("battery_bus_voltage")
 				dataItem.uid: root.battery.serviceUid + "/BusVoltage"
@@ -194,7 +194,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Top section voltage"
 				text: qsTrId("battery_top_section_voltage")
 				allowed: midVoltage.isValid
@@ -202,7 +202,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Bottom section voltage"
 				text: qsTrId("battery_bottom_section_voltage")
 				value: midVoltage.value === undefined ? NaN : midVoltage.value
@@ -210,7 +210,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Mid-point deviation"
 				text: qsTrId("battery_mid_point_deviation")
 				dataItem.uid: root.battery.serviceUid + "/Dc/0/MidVoltageDeviation"
@@ -218,7 +218,7 @@ Page {
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Consumed AmpHours"
 				text: qsTrId("battery_consumed_amphours")
 				dataItem.uid: root.battery.serviceUid + "/ConsumedAmphours"
@@ -226,7 +226,7 @@ Page {
 				unit: VenusOS.Units_AmpHour
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Bus voltage"
 				text: qsTrId("battery_buss_voltage")
 				dataItem.uid: root.battery.serviceUid + "/BussVoltage"

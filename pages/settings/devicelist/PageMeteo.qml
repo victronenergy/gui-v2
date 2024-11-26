@@ -25,7 +25,7 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
-			ListQuantityItem {
+			ListQuantity {
 				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1)
 				//% "Irradiance"
 				text: qsTrId("page_meteo_irradiance")
@@ -64,7 +64,7 @@ Page {
 				precision: 1
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
@@ -73,7 +73,7 @@ Page {
 				precision: 1
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: bindPrefix + "/WindDirection"
 				//% "Wind direction"
 				text: qsTrId("page_meteo_wind_direction")
@@ -81,7 +81,7 @@ Page {
 				unit: VenusOS.Units_CardinalDirection
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: bindPrefix + "/InstallationPower"
 				//% "Installation Power"
 				text: qsTrId("page_meteo_installation_power")
@@ -90,7 +90,7 @@ Page {
 				precision: 1
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: bindPrefix + "/TodaysYield"
 				//% "Today's yield"
 				text: qsTrId("page_meteo_daily_yield")

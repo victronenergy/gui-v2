@@ -13,7 +13,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListQuantityItem {
+			ListQuantity {
 				//% "Motor RPM"
 				text: qsTrId("devicelist_motordrive_motorrpm")
 				dataItem.uid: root.bindPrefix + "/Motor/RPM"
@@ -28,21 +28,21 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.power_watts
 				dataItem.uid: root.bindPrefix + "/Dc/0/Power"
 				unit: VenusOS.Units_Watt
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.voltage
 				dataItem.uid: root.bindPrefix + "/Dc/0/Voltage"
 				unit: VenusOS.Units_Volt_DC
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.current_amps
 				dataItem.uid: root.bindPrefix + "/Dc/0/Current"
 				unit: VenusOS.Units_Amp

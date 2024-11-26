@@ -14,7 +14,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListQuantityItem {
+			ListQuantity {
 				//% "Deepest discharge"
 				text: qsTrId("batteryalarms_deepest_discharge")
 				allowed: defaultAllowed && root.history.allowsDeepestDischarge
@@ -22,7 +22,7 @@ Page {
 				value: allowed ? root.history.deepestDischarge.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Last discharge"
 				text: qsTrId("batteryhistory_last_discharge")
 				allowed: defaultAllowed && root.history.allowsLastDischarge
@@ -30,7 +30,7 @@ Page {
 				value: allowed ? root.history.lastDischarge.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Average discharge"
 				text: qsTrId("batteryhistory_average_discharge")
 				allowed: defaultAllowed && root.history.allowsAverageDischarge
@@ -52,7 +52,7 @@ Page {
 				secondaryText: allowed ? root.history.fullDischarges.value : ""
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Cumulative Ah drawn"
 				text: qsTrId("batteryhistory_cumulative_ah_drawn")
 				allowed: defaultAllowed && root.history.allowsTotalAhDrawn
@@ -60,21 +60,21 @@ Page {
 				value: allowed ? root.history.totalAhDrawn.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.minimum_voltage
 				allowed: defaultAllowed && root.history.allowsMinimumVoltage
 				unit: VenusOS.Units_Volt_DC
 				value: allowed ? root.history.minimumVoltage.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				text: CommonWords.maximum_voltage
 				allowed: defaultAllowed && root.history.allowsMaximumVoltage
 				unit: VenusOS.Units_Volt_DC
 				value: allowed ? root.history.maximumVoltage.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Minimum cell voltage"
 				text: qsTrId("batteryhistory_minimum_cell_voltage")
 				allowed: defaultAllowed && root.history.allowsMinimumCellVoltage
@@ -83,7 +83,7 @@ Page {
 				precision: 3
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Maximum cell voltage"
 				text: qsTrId("batteryhistory_maximum_cell_voltage")
 				allowed: defaultAllowed && root.history.allowsMaximumCellVoltage
@@ -132,7 +132,7 @@ Page {
 				secondaryText: allowed ? root.history.highStarterVoltageAlarms.value : ""
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Minimum starter battery voltage"
 				text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
 				allowed: defaultAllowed && root.history.allowsMinimumStarterVoltage
@@ -140,7 +140,7 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Maximum starter battery voltage"
 				text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
 				allowed: defaultAllowed && root.history.allowsMaximumStarterVoltage
@@ -160,7 +160,7 @@ Page {
 				value: allowed ? root.history.maximumTemperature.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Discharged energy"
 				text: qsTrId("batteryhistory_discharged_energy")
 				allowed: defaultAllowed && root.history.allowsDischargedEnergy
@@ -168,7 +168,7 @@ Page {
 				value: allowed ? root.history.dischargedEnergy.value : NaN
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Charged energy"
 				text: qsTrId("batteryhistory_charged_energy")
 				allowed: defaultAllowed && root.history.allowsChargedEnergy

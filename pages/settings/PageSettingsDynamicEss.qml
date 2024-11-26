@@ -37,7 +37,7 @@ Page {
 				}
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Target SOC"
 				text: qsTrId("settings_ess_target_soc")
 				allowed: dEssMode.dataItem.value === 1

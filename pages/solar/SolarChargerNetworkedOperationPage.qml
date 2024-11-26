@@ -100,7 +100,7 @@ Page {
 				allowed: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"

@@ -76,7 +76,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "AC current"
 				text: qsTrId("settings_accharger_current")
 				unit: VenusOS.Units_Amp

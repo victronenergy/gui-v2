@@ -213,21 +213,21 @@ Page {
 				}
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Voltage"
 				//% "DC Voltage"
 				text: qsTrId("vebus_device_page_dc_voltage")
 				unit: VenusOS.Units_Volt_DC
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: veBusDevice.serviceUid + "/Dc/0/Current"
 				//% "DC Current"
 				text: qsTrId("vebus_device_page_dc_current")
 				unit: VenusOS.Units_Amp
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				dataItem.uid: veBusDevice.serviceUid + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage

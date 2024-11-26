@@ -62,7 +62,7 @@ ObjectModel {
 		secondaryText: dataItem.isValid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
 	}
 
-	ListQuantityItem {
+	ListQuantity {
 		//% "Field drive"
 		text: qsTrId("alternator_wakespeed_field_drive")
 		dataItem.uid: root.bindPrefix + "/FieldDrive"
@@ -70,7 +70,7 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListQuantityItem {
+	ListQuantity {
 		//% "Utilization"
 		text: qsTrId("alternator_wakespeed_utilization")
 		dataItem.uid: root.bindPrefix + "/Utilization"
@@ -78,14 +78,14 @@ ObjectModel {
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListQuantityItem {
+	ListQuantity {
 		text: CommonWords.speed
 		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
 		allowed: defaultAllowed && dataItem.isValid
 	}
 
-	ListQuantityItem {
+	ListQuantity {
 		//% "Engine speed"
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
@@ -124,7 +124,7 @@ ObjectModel {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Charged Ah"
 				text: qsTrId("alternator_wakespeed_charged_ah")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"

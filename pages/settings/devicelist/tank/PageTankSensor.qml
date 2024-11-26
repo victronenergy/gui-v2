@@ -19,14 +19,14 @@ Page {
 				secondaryText: Global.tanks.statusToText(dataItem.value)
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Level"
 				text: qsTrId("devicelist_tanksensor_level")
 				dataItem.uid: root.bindPrefix + "/Level"
 				unit: VenusOS.Units_Percentage
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Remaining"
 				text: qsTrId("devicelist_tanksensor_remaining")
 				dataItem.uid: root.bindPrefix + "/Remaining"
@@ -41,7 +41,7 @@ Page {
 				allowed: defaultAllowed && dataItem.isValid
 			}
 
-			ListQuantityItem {
+			ListQuantity {
 				//% "Sensor battery"
 				text: qsTrId("devicelist_tanksensor_sensor_battery")
 				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
