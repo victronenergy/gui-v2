@@ -187,11 +187,6 @@
       <source>Display &amp; Language</source>
       <translation>Дисплей і мова</translation>
     </message>
-    <message id="settings_vrm_online_portal">
-      <location filename="../../pages/SettingsPage.qml" line="64"/>
-      <source>VRM online portal</source>
-      <translation>Онлайн-портал VRM</translation>
-    </message>
     <message id="common_words_ess">
       <location filename="../../components/CommonWords.qml" line="171"/>
       <source>ESS</source>
@@ -1257,32 +1252,32 @@
       <translation>порт TCP</translation>
     </message>
     <message id="page_settings_fronius_inverter_multiphase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="36"/>
       <source>Multiphase</source>
       <translation>Багатофазний</translation>
     </message>
     <message id="page_settings_fronius_inverter_l1">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="40"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
       <source>L1</source>
       <translation>L1</translation>
     </message>
     <message id="page_settings_fronius_inverter_l2">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="48"/>
       <source>L2</source>
       <translation>L2</translation>
     </message>
     <message id="page_settings_fronius_inverter_l3">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="50"/>
       <source>L3</source>
       <translation>L3</translation>
     </message>
     <message id="page_settings_fronius_inverter_split_phase">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="52"/>
       <source>Split-phase (L1+L2)</source>
       <translation>Спліт фаза (L1+L2)</translation>
     </message>
     <message id="page_settings_fronius_inverter_show">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="59"/>
       <source>Show</source>
       <translation>Показати</translation>
     </message>
@@ -2988,13 +2983,13 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Увімкнути візуалізатор частоти кадрів</translation>
     </message>
     <message id="devicelist_unsupported">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="209"/>
+      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml" line="14"/>
       <source>Unsupported</source>
       <extracomment>Device is not supported</extracomment>
       <translation>Не підтримується</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="233"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="59"/>
       <source>Remove disconnected devices</source>
       <translation>Видалити від’єднані пристрої</translation>
     </message>
@@ -4176,34 +4171,44 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Інвертувати логіку тривоги</translation>
     </message>
     <message id="page_meteo_irradiance">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="27"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="31"/>
       <source>Irradiance</source>
       <translation>Опромінення</translation>
     </message>
     <message id="page_meteo_cell_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="40"/>
       <source>Cell temperature</source>
       <translation>Температура комірки</translation>
     </message>
     <message id="page_meteo_external_temperature_1">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="49"/>
       <source>External temperature (1)</source>
       <translation>Зовнішня температура (1)</translation>
     </message>
     <message id="page_meteo_external_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="46"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
       <source>External temperature</source>
       <translation>Зовнішня температура</translation>
     </message>
     <message id="page_meteo_external_temperature_2">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="62"/>
       <source>External temperature (2)</source>
       <translation>Зовнішня температура (2)</translation>
     </message>
     <message id="page_meteo_wind_speed">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="64"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="70"/>
       <source>Wind speed</source>
       <translation>Швидкість вітру</translation>
+    </message>
+    <message id="page_meteo_battery_voltage">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="106"/>
+      <source>Sensor battery</source>
+      <translation type="unfinished">Батарея датчика</translation>
+    </message>
+    <message id="meteo_sensor_battery_status_low">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="127"/>
+      <source>Low</source>
+      <translation type="unfinished">Низький</translation>
     </message>
     <message id="page_meteo_settings_auto_detect">
       <location filename="../../pages/settings/devicelist/PageMeteoSettings.qml" line="17"/>
@@ -8282,7 +8287,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Далі</translation>
     </message>
     <message id="devicelist_solarcharger_error">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_solarcharger.qml" line="15"/>
       <source>Error: #%1</source>
       <oldsource>Error: %1</oldsource>
       <extracomment>%1 = error number</extracomment>
@@ -8581,38 +8586,108 @@ With streamlined navigation and a fresh look, everything you love is now even ea
     <message id="settings_page_run_time_and_service_time_to_service">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Runtime until service</source>
-      <translation/>
+      <translation>Робота до обслуговування</translation>
     </message>
     <message id="batteryalarms_high_current">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
       <source>High current</source>
-      <translation/>
+      <translation>Високий струм</translation>
     </message>
     <message id="batteryalarms_bms_cable">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="169"/>
       <source>BMS cable fault</source>
-      <translation/>
+      <translation>Несправність кабелю BMS</translation>
     </message>
     <message id="batteryalarms_contactor">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="176"/>
       <source>Bad contactor</source>
-      <translation/>
+      <translation>Несправний контактор</translation>
     </message>
     <message id="lynxionsystem_cells_per_battery">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="43"/>
       <source>Cells per battery</source>
-      <translation/>
+      <translation>Елементи на батарею</translation>
     </message>
     <message id="alternator_wakespeed_utilization">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="75"/>
       <source>Utilization</source>
-      <translation/>
+      <translation>Утилізація</translation>
     </message>
     <message id="controlcard_evcs_title">
       <location filename="../../pages/controlcards/EVCSCard.qml" line="24"/>
       <source>EVCS (%1)</source>
       <extracomment>%1 = the EVCS name</extracomment>
-      <translation/>
+      <translation>EVCS (%1)</translation>
+    </message>
+    <message id="page_meteo_wind_direction">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="79"/>
+      <source>Wind direction</source>
+      <translation>Напрямок вітру</translation>
+    </message>
+    <message id="page_meteo_installation_power">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="87"/>
+      <source>Installation Power</source>
+      <translation>Потужність установки</translation>
+    </message>
+    <message id="page_meteo_daily_yield">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="96"/>
+      <source>Today's yield</source>
+      <translation>Сьогоднішня врожайність</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Power limiting</source>
+      <translation>Обмеження потужності</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_power_limiting_label">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="75"/>
+      <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
+      <translation>Цей фотоелектричний інвертор має підтримку обмеження потужності. Вимкніть це налаштування, якщо воно заважає нормальній роботі.</translation>
+    </message>
+    <message id="settings_vrm_portal_mode">
+      <location filename="../../pages/SettingsPage.qml" line="64"/>
+      <source>VRM Portal mode</source>
+      <translation>Режим порталу VRM</translation>
+    </message>
+    <message id="direction_north">
+      <location filename="../../src/units.cpp" line="445"/>
+      <source>N</source>
+      <translation>N</translation>
+    </message>
+    <message id="direction_northeast">
+      <location filename="../../src/units.cpp" line="447"/>
+      <source>NE</source>
+      <translation>NE</translation>
+    </message>
+    <message id="direction_east">
+      <location filename="../../src/units.cpp" line="449"/>
+      <source>E</source>
+      <translation>E</translation>
+    </message>
+    <message id="direction_southeast">
+      <location filename="../../src/units.cpp" line="451"/>
+      <source>SE</source>
+      <translation>SE</translation>
+    </message>
+    <message id="direction_south">
+      <location filename="../../src/units.cpp" line="453"/>
+      <source>S</source>
+      <translation>S</translation>
+    </message>
+    <message id="direction_southwest">
+      <location filename="../../src/units.cpp" line="455"/>
+      <source>SW</source>
+      <translation>SW</translation>
+    </message>
+    <message id="direction_west">
+      <location filename="../../src/units.cpp" line="457"/>
+      <source>W</source>
+      <translation>W</translation>
+    </message>
+    <message id="direction_northwest">
+      <location filename="../../src/units.cpp" line="459"/>
+      <source>NW</source>
+      <translation>NW</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
