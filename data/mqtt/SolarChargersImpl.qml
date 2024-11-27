@@ -16,7 +16,18 @@ QtObject {
 		}
 
 		delegate: SolarCharger {
+			id: solarCharger
 			serviceUid: model.uid
+
+			onValidChanged: {
+				if (!!Global.solarChargers) {
+					if (valid) {
+						Global.solarChargers.addCharger(solarCharger)
+					} else {
+						Global.solarChargers.removeCharger(solarCharger)
+					}
+				}
+			}
 		}
 	}
 
@@ -27,7 +38,18 @@ QtObject {
 		}
 
 		delegate: SolarCharger {
+			id: multiRsSolarCharger
 			serviceUid: model.uid
+
+			onValidChanged: {
+				if (!!Global.solarChargers) {
+					if (valid) {
+						Global.solarChargers.addCharger(multiRsSolarCharger)
+					} else {
+						Global.solarChargers.removeCharger(multiRsSolarCharger)
+					}
+				}
+			}
 		}
 	}
 }

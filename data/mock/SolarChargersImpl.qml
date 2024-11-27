@@ -175,6 +175,16 @@ QtObject {
 				_errorCode.setValue(Math.random() < 0.4 ? Math.floor(Math.random() * 30) : 0)
 				root.setRandomErrors(serviceUid + "/History/Overall")
 			}
+
+			onValidChanged: {
+				if (!!Global.solarChargers) {
+					if (valid) {
+						Global.solarChargers.addCharger(solarCharger)
+					} else {
+						Global.solarChargers.removeCharger(solarCharger)
+					}
+				}
+			}
 		}
 	}
 

@@ -136,14 +136,4 @@ Device {
 			}
 		}
 	}
-
-	onValidChanged: {
-		if (!!Global.solarChargers) {
-			if (valid) {
-				Global.solarChargers.addCharger(solarCharger)
-			} else {
-				Global.solarChargers.removeCharger(solarCharger)
-			}
-		}
-	}
 }
