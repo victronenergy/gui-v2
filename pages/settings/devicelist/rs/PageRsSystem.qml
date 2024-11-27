@@ -14,6 +14,11 @@ Page {
 
 	title: acSystemDevice.name
 
+	/* TODO - resolving page title via:
+			title: device.name
+			Device { id: device; serviceUid: root.bindPrefix }
+		doesn't work here. #1695 */
+
 	VeQuickItem {
 		id: numberOfPhases
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"

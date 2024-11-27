@@ -15,6 +15,6 @@ DeviceListDelegate {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageUnsupportedDevice.qml",
-				{ bindPrefix : root.device.serviceUid })
+				{ "title": text, bindPrefix : root.device.serviceUid })
 	}
 }
