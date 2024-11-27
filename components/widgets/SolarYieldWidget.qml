@@ -13,7 +13,7 @@ OverviewWidget {
 		const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
 		if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml",
-					{ "solarCharger": Global.solarChargers.model.deviceAt(0) })
+					{ "bindPrefix": Global.solarChargers.model.firstObject.serviceUid })
 		} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
 					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })

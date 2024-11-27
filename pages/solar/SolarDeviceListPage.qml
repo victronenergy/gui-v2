@@ -74,7 +74,7 @@ Page {
 							tableMode: true
 
 							onClicked: {
-								Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "solarCharger": solarCharger })
+								Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { "bindPrefix": solarCharger.serviceUid })
 							}
 						}
 					}

@@ -22,8 +22,7 @@ DeviceListDelegate {
 	quantityModel: errorCode.isValid && errorCode.value > 0 ? _errorModel : _powerModel
 
 	onClicked: {
-		const solarCharger = sourceModel.deviceAt(sourceModel.indexOf(root.device.serviceUid))
-		Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { solarCharger : solarCharger })
+		Global.pageManager.pushPage("/pages/solar/SolarChargerPage.qml", { bindPrefix : root.device.serviceUid })
 	}
 
 	VeQuickItem {

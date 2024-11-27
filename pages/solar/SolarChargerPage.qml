@@ -9,7 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property SolarCharger solarCharger
+	required property string bindPrefix
+	readonly property SolarCharger solarCharger: Global.solarChargers.model.deviceAt(Global.solarChargers.model.indexOf(bindPrefix))
 	readonly property QtObject singleTracker: solarCharger.trackers.count === 1 ? solarCharger.trackers.get(0).solarTracker : null
 
 	title: solarCharger.name
