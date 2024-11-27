@@ -12,7 +12,7 @@ OverviewWidget {
 	onClicked: {
 		if (Global.evChargers.model.count === 1) {
 			Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
-					{ "evCharger": Global.evChargers.model.deviceAt(0) })
+					{ bindPrefix: Global.evChargers.model.firstObject.serviceUid })
 		} else {
 			Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
 		}
