@@ -11,6 +11,11 @@ Page {
 
 	property string bindPrefix
 
+	/* TODO - resolving page title via:
+			title: device.name
+			Device { id: device; serviceUid: root.bindPrefix }
+		doesn't work here. #1695 */
+
 	GradientListView {
 		model: ObjectModel {
 			ListTextItem {

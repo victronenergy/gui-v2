@@ -22,7 +22,7 @@ DeviceListDelegate {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/temperature/PageTemperatureSensor.qml",
-				{ bindPrefix : root.device.serviceUid })
+				{ "title": text, bindPrefix : root.device.serviceUid })
 	}
 
 	VeQuickItem {

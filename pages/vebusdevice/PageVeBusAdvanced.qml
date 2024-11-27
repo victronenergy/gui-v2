@@ -248,7 +248,7 @@ Page {
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
 				allowed: defaultAllowed && masterHasNetworkQuality.isValid
-				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage)
+				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": text})
 
 				Component {
 					id: vebusDiagnosticsPage
