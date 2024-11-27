@@ -24,8 +24,7 @@ DeviceListDelegate {
 	}
 
 	onClicked: {
-		const evCharger = sourceModel.deviceAt(sourceModel.indexOf(root.device.serviceUid))
-		Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { evCharger : evCharger })
+		Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { bindPrefix : root.device.serviceUid })
 	}
 
 	VeQuickItem {

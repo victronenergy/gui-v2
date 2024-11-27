@@ -9,8 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var evCharger
-
+	required property string bindPrefix
+	readonly property var evCharger: Global.evChargers.model.deviceAt(Global.evChargers.model.indexOf(bindPrefix))
 	readonly property bool energyMeterMode: !chargeMode.dataItem.isValid
 
 	title: evCharger.name
@@ -138,7 +138,7 @@ Page {
 								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
 					} else {
 						Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
-								{ "title": text, "evCharger": root.evCharger })
+								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
 					}
 				}
 

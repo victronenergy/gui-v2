@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
-	property var evCharger
+	required property string bindPrefix
 
 	GradientListView {
 		model: ObjectModel {
@@ -28,19 +28,19 @@ Page {
 						value: VenusOS.Evcs_Position_ACOutput
 					}
 				]
-				dataItem.uid: root.evCharger.serviceUid + "/Position"
+				dataItem.uid: root.bindPrefix + "/Position"
 			}
 
 			ListSwitch {
 				//% "Autostart"
 				text: qsTrId("evcs_autostart")
-				dataItem.uid: root.evCharger.serviceUid + "/AutoStart"
+				dataItem.uid: root.bindPrefix + "/AutoStart"
 			}
 
 			ListSwitch {
 				//% "Lock charger display"
 				text: qsTrId("evcs_lock_charger_display")
-				dataItem.uid: root.evCharger.serviceUid + "/EnableDisplay"
+				dataItem.uid: root.bindPrefix + "/EnableDisplay"
 				invertSourceValue: true
 				allowed: defaultAllowed && dataItem.isValid
 			}
