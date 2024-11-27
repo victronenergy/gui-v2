@@ -20,7 +20,7 @@ ListButton {
 	property real value: !dataItem.isValid ? 0 : dataItem.value
 
 	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
-	enabled: dataItem.uid === "" || dataItem.isValid
+	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: Global.dialogLayer.open(timeSelectorComponent, {hour: hour, minute: minute})
 
