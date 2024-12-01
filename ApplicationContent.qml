@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
 Item {
@@ -150,6 +151,10 @@ Item {
 		id: keyboardHandlerLoader
 
 		asynchronous: true
+
+		// Allow VKB to appear above modal dialogs
+		parent: QtQuickControls.Overlay.overlay
+		z: 1
 
 		// Force InputPanel to load in desktop build
 		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
