@@ -13,6 +13,7 @@ T.Dialog {
 	property string secondaryTitle
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property alias canAccept: doneButton.enabled
+	readonly property real centeredY: (parent.height - height) / 2
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -32,7 +33,9 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
-	anchors.centerIn: parent
+	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
+	x: (parent.width - width) / 2
+	y: centeredY
 
 	/*
 	If you specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
