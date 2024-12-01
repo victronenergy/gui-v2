@@ -150,10 +150,9 @@ Item {
 		id: keyboardHandlerLoader
 
 		asynchronous: true
-		active: Global.isGxDevice
-			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
-		source: Global.isGxDevice
-				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
-				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
+
+		// Force InputPanel to load in desktop build
+		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 	}
+
 }
