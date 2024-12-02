@@ -20,7 +20,7 @@ QtObject {
 	}
 
 	property Component pulseMeterComponent: Component {
-		PulseMeter {
+		Device {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("PulseMeter %1".arg(deviceInstance))

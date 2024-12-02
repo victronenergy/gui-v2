@@ -22,7 +22,6 @@ QtObject {
 	property var generators: GeneratorsImpl { }
 	property var inverterChargers: InverterChargersImpl {}
 	property var notifications: NotificationsImpl {}
-	property var pulseMeters: PulseMetersImpl { }
 	property var pvInverters: PvInvertersImpl { }
 	property var solarChargers: SolarChargersImpl { }
 	property var systemSettings: SystemSettingsImpl { }

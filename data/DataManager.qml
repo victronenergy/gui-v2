@@ -26,7 +26,6 @@ Item {
 			&& !!Global.inverterChargers
 			&& !!Global.acSystemDevices
 			&& !!Global.notifications
-			&& !!Global.pulseMeters
 			&& !!Global.pvInverters
 			&& !!Global.solarChargers
 			&& !!Global.system
@@ -110,7 +109,6 @@ Item {
 	InverterChargers {}
 	AcSystemDevices {}
 	Notifications {}
-	PulseMeters {}
 	PvInverters {}
 	SolarChargers {}
 	System {}
