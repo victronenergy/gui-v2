@@ -390,7 +390,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/Generators.qml
     data/InverterChargers.qml
     data/ManualRelayModel.qml
-    data/MeteoDevices.qml
     data/MotorDrives.qml
     data/Notifications.qml
     data/PulseMeters.qml
@@ -424,7 +423,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/GensetErrorModel.qml
     data/common/Inverter.qml
     data/common/InverterCharger.qml
-    data/common/MeteoDevice.qml
     data/common/MotorDrive.qml
     data/common/Notification.qml
     data/common/PulseMeter.qml
@@ -807,7 +805,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/EssImpl.qml
     data/dbus/EvChargersImpl.qml
     data/dbus/GeneratorsImpl.qml
-    data/dbus/MeteoDevicesImpl.qml
     data/dbus/MotorDrivesImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PulseMetersImpl.qml
@@ -934,7 +931,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/EssImpl.qml
     data/mqtt/EvChargersImpl.qml
     data/mqtt/GeneratorsImpl.qml
-    data/mqtt/MeteoDevicesImpl.qml
     data/mqtt/MotorDrivesImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
