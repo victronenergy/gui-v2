@@ -24,7 +24,6 @@ Item {
 			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverterChargers
-			&& !!Global.motorDrives
 			&& !!Global.acSystemDevices
 			&& !!Global.notifications
 			&& !!Global.pulseMeters
@@ -109,7 +108,6 @@ Item {
 	EvChargers {}
 	Generators {}
 	InverterChargers {}
-	MotorDrives {}
 	AcSystemDevices {}
 	Notifications {}
 	PulseMeters {}

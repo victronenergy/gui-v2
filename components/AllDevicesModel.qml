@@ -21,7 +21,7 @@ AggregateDeviceModel {
 		Global.inverterChargers.veBusDevices,
 		Global.inverterChargers.inverterDevices,
 		meteoDeviceModel,
-		Global.motorDrives.model,
+		motorDriveDeviceModel,
 		Global.pulseMeters.model,
 		Global.pvInverters.model,
 		Global.solarChargers.model,
@@ -58,5 +58,10 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel meteoDeviceModel: ServiceDeviceModel {
 		serviceType: "meteo"
 		modelId: "meteo"
+	}
+
+	readonly property ServiceDeviceModel motorDriveDeviceModel: ServiceDeviceModel {
+		serviceType: "motordrive"
+		modelId: "motordrive"
 	}
 }
