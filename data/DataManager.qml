@@ -24,7 +24,6 @@ Item {
 			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverterChargers
-			&& !!Global.meteoDevices
 			&& !!Global.motorDrives
 			&& !!Global.acSystemDevices
 			&& !!Global.notifications
@@ -110,7 +109,6 @@ Item {
 	EvChargers {}
 	Generators {}
 	InverterChargers {}
-	MeteoDevices {}
 	MotorDrives {}
 	AcSystemDevices {}
 	Notifications {}

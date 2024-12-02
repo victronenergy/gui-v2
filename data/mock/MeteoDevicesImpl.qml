@@ -20,11 +20,11 @@ QtObject {
 	}
 
 	property Component meteoComponent: Component {
-		MeteoDevice {
+		Device {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Meteo %1".arg(deviceInstance))
-				_irradiance.setValue(Math.random() * 100)
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Irradiance", Math.random() * 100)
 			}
 		}
 	}
