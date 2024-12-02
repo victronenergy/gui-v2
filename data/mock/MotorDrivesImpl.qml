@@ -20,11 +20,11 @@ QtObject {
 	}
 
 	property Component motorDriveComponent: Component {
-		MotorDrive {
+		Device {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Motor Drive %1".arg(deviceInstance))
-				_motorRpm.setValue(Math.floor(Math.random() * 50))
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/RPM", Math.floor(Math.random() * 50))
 			}
 		}
 	}
