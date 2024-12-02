@@ -108,17 +108,17 @@
       <translation>أدنى حالة للشحن</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="46"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="46"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="175"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="175"/>
       <source>Enter password</source>
       <translation>إدخال كلمة المرور</translation>
     </message>
     <message id="settings_firmware_press_to_check">
-      <location filename="../../components/settings/FirmwareCheckListButton.qml" line="18"/>
+      <location filename="../../components/listitems/ListFirmwareCheckButton.qml" line="18"/>
       <source>Press to check</source>
       <translation>اضغط للتحقق</translation>
     </message>
@@ -404,17 +404,17 @@
       <translation>اسم الجهاز</translation>
     </message>
     <message id="settings_remote_switch_control_disabled">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="17"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="17"/>
       <source>Remote switch control disabled</source>
       <translation>مفتاح التحكم عن بعد تم تعطيله</translation>
     </message>
     <message id="settings_generator_in_fault_condition">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="19"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="19"/>
       <source>Generator in fault condition</source>
       <translation>المولد في حالة الخلل</translation>
     </message>
     <message id="settings_generator_not_detected">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="21"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="21"/>
       <source>Generator not detected at AC input</source>
       <translation>المولد غير مكتشف في دخل التيار المتردد</translation>
     </message>
@@ -2283,7 +2283,7 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation>نمط المسار التجميعي بروتوكول التحكم في الإرسال</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="76"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>ناقل شبكة التحكم في النطاق عبر بروتوكول التحكم في نقل البيانات/ بروتوكول الإنترنت (معالجة الأخطاء)</translation>
     </message>
@@ -2835,13 +2835,13 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation>مخطط</translation>
     </message>
     <message id="listitems_alarm_level_warning">
-      <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="21"/>
       <source>Warning</source>
       <extracomment>Voltage alarm is at "Warning" level</extracomment>
       <translation>تحذير</translation>
     </message>
     <message id="listitems_alarm_level_alarm">
-      <location filename="../../components/listitems/ListAlarm.qml" line="25"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="25"/>
       <source>Alarm</source>
       <extracomment>Voltage alarm is at "Alarm" level</extracomment>
       <translation type="unfinished">إنذار</translation>
@@ -3733,7 +3733,7 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="dc_output">
-      <location filename="../../components/settings/ListDcOutputQuantityGroup.qml" line="16"/>
+      <location filename="../../components/listitems/ListDcOutputQuantityGroup.qml" line="16"/>
       <source>Output</source>
       <extracomment>DC output measurement values</extracomment>
       <translation>مخرج</translation>
@@ -4053,13 +4053,13 @@ Documentation على  https://ve3.nl/vol</translation>
       <translation type="unfinished">التحكم بنظام إدارة البطارية</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
-      <location filename="../../components/settings/ListAcInError.qml" line="23"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="23"/>
       <source>Front selector locked (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>قفل أداة التحديد الأمامية (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_no_error">
-      <location filename="../../components/settings/ListAcInError.qml" line="27"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="27"/>
       <source>No error (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>لا يوجد خطأ (%1)</translation>
@@ -4556,12 +4556,12 @@ Do you want to continue?</source>
       <translation>خطأ VE.Bus تقرير 8 / 11</translation>
     </message>
     <message id="alarm_level_alarm_only">
-      <location filename="../../components/settings/AlarmLevelRadioButtonGroup.qml" line="13"/>
+      <location filename="../../components/listitems/ListAlarmLevelRadioButtonGroup.qml" line="13"/>
       <source>Alarm only</source>
       <translation>منبه فقط</translation>
     </message>
     <message id="alarm_level_alarms_and_warnings">
-      <location filename="../../components/settings/AlarmLevelRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListAlarmLevelRadioButtonGroup.qml" line="15"/>
       <source>Alarms &amp; warnings</source>
       <translation>إنذارات وتنبيهات</translation>
     </message>
@@ -4683,7 +4683,7 @@ Do you want to continue?</source>
       <translation>الطور</translation>
     </message>
     <message id="vebus_device_active_ac_input">
-      <location filename="../../components/settings/ActiveAcInputTextItem.qml" line="21"/>
+      <location filename="../../components/listitems/ListActiveAcInput.qml" line="21"/>
       <source>Active AC Input</source>
       <translation>دخل التيار المتردد نشط</translation>
     </message>
@@ -5152,7 +5152,7 @@ Do you want to continue?</source>
       <translation>خارج الخط</translation>
     </message>
     <message id="listitems_alarm_level_ok">
-      <location filename="../../components/listitems/ListAlarm.qml" line="17"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="17"/>
       <source>OK</source>
       <extracomment>Voltage alarm is at "OK" level</extracomment>
       <translation>صحيح</translation>
@@ -5600,7 +5600,7 @@ Do you want to continue?</source>
       <translation>ماء غير معالج</translation>
     </message>
     <message id="settings_radio_button_group_no_access">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="62"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="62"/>
       <source>Setting locked for access level</source>
       <translation>قفل الإعداد لمستوى الوصول</translation>
     </message>
@@ -5648,92 +5648,92 @@ Do you want to continue?</source>
       <translation>%1ساعة %2دقيقة مضت</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="17"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="17"/>
       <source>Every day</source>
       <translation>كل يوم</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekdays">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="19"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="19"/>
       <source>Weekdays</source>
       <translation>أيام الأسبوع</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekends">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="21"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="21"/>
       <source>Weekends</source>
       <translation>نهاية الأسبوع</translation>
     </message>
     <message id="cgwacs_battery_schedule_monday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="25"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="25"/>
       <source>Monday</source>
       <translation>الاثنين</translation>
     </message>
     <message id="cgwacs_battery_schedule_tuesday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="27"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="27"/>
       <source>Tuesday</source>
       <translation>الثلاثاء</translation>
     </message>
     <message id="cgwacs_battery_schedule_wednesday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="29"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="29"/>
       <source>Wednesday</source>
       <translation>الأربعاء</translation>
     </message>
     <message id="cgwacs_battery_schedule_thursday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="31"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="31"/>
       <source>Thursday</source>
       <translation>الخميس</translation>
     </message>
     <message id="cgwacs_battery_schedule_friday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="33"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="33"/>
       <source>Friday</source>
       <translation>الجمعة</translation>
     </message>
     <message id="cgwacs_battery_schedule_saturday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="35"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="35"/>
       <source>Saturday</source>
       <translation>السبت</translation>
     </message>
     <message id="cgwacs_battery_schedule_sunday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="37"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="37"/>
       <source>Sunday</source>
       <translation>الأحد</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_no_soc">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="70"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="70"/>
       <source>%1 %2 (%3)</source>
       <translation>%1 %2 (%3)</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_soc">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="73"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="73"/>
       <source>%1 %2 (%3 or %4%)</source>
       <translation>%1 %2 (%3 أو %4%</translation>
     </message>
     <message id="cgwacs_battery_schedule_name">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="79"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="79"/>
       <source>Schedule %1</source>
       <translation>جدول %1</translation>
     </message>
     <message id="cgwacs_battery_schedule_day">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="127"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="127"/>
       <source>Day</source>
       <translation>اليوم</translation>
     </message>
     <message id="cgwacs_battery_schedule_day_not_set">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="131"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="131"/>
       <source>Not set</source>
       <translation>لم يتم الضبط</translation>
     </message>
     <message id="cgwacs_battery_schedule_soc_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="154"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="154"/>
       <source>SOC limit</source>
       <translation>حد الـ SOC</translation>
     </message>
     <message id="cgwacs_battery_schedule_self_consumption_above_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="165"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="165"/>
       <source>Self-consumption above limit</source>
       <translation>الاستهلاك الذاتي زائد عن الحد</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="170"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="170"/>
       <source>PV</source>
       <translation type="unfinished">جهاز ضوئي</translation>
     </message>
@@ -5743,173 +5743,173 @@ Do you want to continue?</source>
       <translation>جهاز ضوئي</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv_and_battery">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="172"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="172"/>
       <source>PV &amp; Battery</source>
       <translation>الخلايا الكهروضوئية والبطارية</translation>
     </message>
     <message id="settings_firmware_checking">
-      <location filename="../../components/settings/FirmwareCheckListButton.qml" line="16"/>
+      <location filename="../../components/listitems/ListFirmwareCheckButton.qml" line="16"/>
       <source>Checking...</source>
       <translation>تدقيق...</translation>
     </message>
     <message id="list_alarm_state">
-      <location filename="../../components/settings/ListAlarmState.qml" line="11"/>
+      <location filename="../../components/listitems/ListAlarmState.qml" line="11"/>
       <source>Alarm state</source>
       <translation>حالة المنبه</translation>
     </message>
     <message id="devicelist_battery_alarm_state">
-      <location filename="../../components/settings/ListAlarmState.qml" line="19"/>
+      <location filename="../../components/listitems/ListAlarmState.qml" line="19"/>
       <source>Alarm</source>
       <extracomment>Alarm state is active</extracomment>
       <translation type="unfinished">إنذار</translation>
     </message>
     <message id="clear_history_button_clear_history">
-      <location filename="../../components/settings/ListClearHistoryButton.qml" line="15"/>
+      <location filename="../../components/listitems/ListClearHistoryButton.qml" line="15"/>
       <source>Clear History</source>
       <translation>محو التاريخ</translation>
     </message>
     <message id="clear_history_button_clearing">
-      <location filename="../../components/settings/ListClearHistoryButton.qml" line="19"/>
+      <location filename="../../components/listitems/ListClearHistoryButton.qml" line="19"/>
       <source>Clearing</source>
       <translation>جاري المحو</translation>
     </message>
     <message id="settings_dvcc_switch_forced_on">
-      <location filename="../../components/listitems/ListSwitchForced.qml" line="19"/>
+      <location filename="../../components/listitems/core/ListSwitchForced.qml" line="19"/>
       <source>Forced on</source>
       <translation>الإلزام بالتشغيل</translation>
     </message>
     <message id="settings_dvcc_switch_forced_off">
-      <location filename="../../components/listitems/ListSwitchForced.qml" line="22"/>
+      <location filename="../../components/listitems/core/ListSwitchForced.qml" line="22"/>
       <source>Forced off</source>
       <translation>الإلزام بالتعطيل</translation>
     </message>
     <message id="list_relay_state">
-      <location filename="../../components/settings/ListRelayState.qml" line="11"/>
+      <location filename="../../components/listitems/ListRelayState.qml" line="11"/>
       <source>Relay state</source>
       <translation>حالة المرحل</translation>
     </message>
     <message id="batteryhistory_reset_history_on_the_monitor_itself">
-      <location filename="../../components/settings/ListResetHistoryLabel.qml" line="29"/>
+      <location filename="../../components/listitems/ListResetHistory.qml" line="29"/>
       <source>Reset history on the monitor itself</source>
       <translation>إعادة ضبط التاريخ على الشاشة ذاتها</translation>
     </message>
     <message id="components_mount_state_press_to_eject">
-      <location filename="../../components/settings/MountStateListButton.qml" line="17"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="17"/>
       <source>Press to eject</source>
       <translation>اضغط للإخراج</translation>
     </message>
     <message id="components_mount_state_ejecting">
-      <location filename="../../components/settings/MountStateListButton.qml" line="21"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="21"/>
       <source>Ejecting, please wait</source>
       <translation>يتم الإخراج، من فضلك انتظر</translation>
     </message>
     <message id="components_mount_state_no_storage_found">
-      <location filename="../../components/settings/MountStateListButton.qml" line="24"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="24"/>
       <source>No storage found</source>
       <translation>تخزين غير موجود</translation>
     </message>
     <message id="components_mount_state_microsd_usb">
-      <location filename="../../components/settings/MountStateListButton.qml" line="29"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="29"/>
       <source>microSD / USB</source>
       <translation>مايكرو إس دي / تخزين يو إس بي</translation>
     </message>
     <message id="settings_relay_title_type_only">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="28"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="28"/>
       <source>%1 temperature sensor</source>
       <extracomment>%1 = temperature sensor type</extracomment>
       <translation>%1 مستشعر الحرارة</translation>
     </message>
     <message id="settings_relay_title_type_and_number">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="32"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="32"/>
       <source>%1 temperature sensor (%2)</source>
       <extracomment>%1 = temperature sensor type, %2 = input number of the sensor</extracomment>
       <translation>%1 حساس درجة الحرارة (%2)</translation>
     </message>
     <message id="settings_relay_title_number_only">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="41"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="41"/>
       <source>Temperature sensor (%1)</source>
       <extracomment>%1 = input number of the sensor</extracomment>
       <translation>حساس درجة الحرارة (%1)</translation>
     </message>
     <message id="settings_relay_no_actions">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="52"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="52"/>
       <source>No actions</source>
       <translation>لا توجد أي إجراءات:</translation>
     </message>
     <message id="settings_relay_c0_desc">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="57"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="57"/>
       <source>C1: %1, %2</source>
       <extracomment>%1 = Relay 1 activation value, %2 = Relay 1 deactivation value</extracomment>
       <translation>C1: %1, %2</translation>
     </message>
     <message id="settings_relay_c1_desc">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="62"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="62"/>
       <source>C2: %1, %2</source>
       <extracomment>%1 = Relay 2 activation value, %2 = Relay 2 deactivation value</extracomment>
       <translation>C2: %1, %2</translation>
     </message>
     <message id="settings_relay_equal_values_warning">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="23"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="23"/>
       <source>Warning: Activation and deactivation temperatures are set to the same value. This will lead the condition to be ignored.</source>
       <translation>تحذير: تم ضبط درجات حرارة التنشيط وإيقاف التنشيط على القيمة ذاتها. سيؤدي ذلك إلى تجاهل الحالة.</translation>
     </message>
     <message id="settings_relay_condition">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="35"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="35"/>
       <source>Condition %1</source>
       <translation>الحالة %1</translation>
     </message>
     <message id="settings_relay_function_disabled">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="41"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="41"/>
       <source>Function disabled</source>
       <translation>تم تعطيل الوظيفة</translation>
     </message>
     <message id="settings_relay_none">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="52"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="52"/>
       <source>None (Disable)</source>
       <translation>لا شيء (تعطيل)</translation>
     </message>
     <message id="settings_relay1">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="54"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="54"/>
       <source>Relay 1</source>
       <translation>مرحل 1</translation>
     </message>
     <message id="settings_relay2">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="56"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="56"/>
       <source>Relay 2</source>
       <translation>مرحل 2</translation>
     </message>
     <message id="settings_relay_invalid_temp_config_warning">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="61"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="61"/>
       <source>Warning: The above selected relay is not configured for temperature, this condition will be ignored.</source>
       <translation>تحذير: المرحل المحدد أعلاه لم يتم تكوينه على درجة الحرارة، وسوف يتم تجاهل هذا الشرط.</translation>
     </message>
     <message id="settings_relay_activation_value">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="70"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="70"/>
       <source>Activation value</source>
       <translation>قيمة التفعيل</translation>
     </message>
     <message id="components_volumeunit_title">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="11"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="11"/>
       <source>Volume unit</source>
       <translation>وحدة الحجم</translation>
     </message>
     <message id="components_volumeunit_cubic_meters">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="15"/>
       <source>Cubic meters</source>
       <translation>متر مكعب</translation>
     </message>
     <message id="components_volumeunit_liters">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="17"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="17"/>
       <source>Liters</source>
       <translation>لتر</translation>
     </message>
     <message id="components_volumeunit_gallons_us">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="19"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="19"/>
       <source>Gallons (US)</source>
       <translation>غالون (أمريكي)</translation>
     </message>
     <message id="components_volumeunit_gallons_imperial">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="21"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="21"/>
       <source>Gallons (Imperial)</source>
       <translation>غالون (بريطاني)</translation>
     </message>
@@ -7064,13 +7064,13 @@ Do you want to continue?</source>
       <translation>نمط محول التردد</translation>
     </message>
     <message id="inverter_ac-out_num">
-      <location filename="../../components/settings/InverterAcOutQuantityGroup.qml" line="45"/>
+      <location filename="../../components/InverterAcOutSettings.qml" line="45"/>
       <source>AC Out L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>مخرج التيار المناوب يسار%1</translation>
     </message>
     <message id="dc_input">
-      <location filename="../../components/settings/ListDcInputQuantityGroup.qml" line="16"/>
+      <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
       <extracomment>DC input measurement values</extracomment>
       <translation>مدخل</translation>
@@ -7496,7 +7496,7 @@ See documentation for further information.</oldsource>
       <translation>بروتوكول</translation>
     </message>
     <message id="port_field_title">
-      <location filename="../../components/listitems/ListPortField.qml" line="13"/>
+      <location filename="../../components/listitems/core/ListPortField.qml" line="13"/>
       <source>Port</source>
       <translation>المنفذ</translation>
     </message>
@@ -7786,7 +7786,7 @@ See documentation for further information.</oldsource>
       <translation>يؤدي تغيير هذا الإعداد إلى "للقراءة فقط" أو "إيقاف" إلى حظر وصولك إليه.</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="48"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
       <source>MQTT Access</source>
       <translation>الوصول لـMQTT</translation>
     </message>
@@ -7796,23 +7796,23 @@ See documentation for further information.</oldsource>
       <translation>«%1» ليس رقماً.</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="160"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="160"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>تأكيد</translation>
     </message>
     <message id="number_field_input_too_long">
-      <location filename="../../components/listitems/ListIntField.qml" line="21"/>
+      <location filename="../../components/listitems/core/ListIntField.qml" line="21"/>
       <source>Use a number with %1 digits or less.</source>
       <translation>استخدم رقماً بـ %1 أرقام أو أقل.</translation>
     </message>
     <message id="ip_address_input_not_valid">
-      <location filename="../../components/listitems/ListIpAddressField.qml" line="34"/>
+      <location filename="../../components/listitems/core/ListIpAddressField.qml" line="34"/>
       <source>'%1' is not a valid IP address.</source>
       <translation>إن «%1» عنوان بروتوكول إنترنت غير صالح.</translation>
     </message>
     <message id="port_input_not_valid">
-      <location filename="../../components/listitems/ListPortField.qml" line="26"/>
+      <location filename="../../components/listitems/core/ListPortField.qml" line="26"/>
       <source>'%1' is not a valid port number. Use a number between 0-65535.</source>
       <translation>إن «%1» رقم منفذ غير صالح. استخدم رقماً بين 0-65535.</translation>
     </message>
@@ -7884,7 +7884,7 @@ See documentation for further information.</oldsource>
       <translation>حالة الشحن 1%</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
       <translation>يجب تكوين ملف أمني أولا قبل تشغيل خدمات الشبكات، انظر «الإعدادات» - «العام».</translation>
     </message>
@@ -8074,7 +8074,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>خرج التيار المتردد فقط</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="23"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="23"/>
       <source>Monthly</source>
       <translation>شهري</translation>
     </message>
@@ -8171,7 +8171,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>لا يمكن تبديل نسخة البرنامج الثابت دون تحديد "ملف تعريف أمن الشبكة" في "الإعدادات / عام".</translation>
     </message>
     <message id="cgwacs_battery_schedule_duration">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="143"/>
       <source>Duration</source>
       <oldsource>Duration (hh:mm)</oldsource>
       <translation>المدة</translation>
@@ -8371,7 +8371,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>بدأ التشغيل تلقائيا• %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="89"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="89"/>
       <source>Deactivation value</source>
       <oldsource>Deativation value</oldsource>
       <translation>قيمة إلغاء التفعيل</translation>
