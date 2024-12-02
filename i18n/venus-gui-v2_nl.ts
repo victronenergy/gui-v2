@@ -108,17 +108,17 @@
       <translation>Minimum laadtoestand</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="46"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="46"/>
       <source>Unknown</source>
       <translation type="unfinished">Onbekend</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="175"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="175"/>
       <source>Enter password</source>
       <translation>Geef wachtwoord</translation>
     </message>
     <message id="settings_firmware_press_to_check">
-      <location filename="../../components/settings/FirmwareCheckListButton.qml" line="18"/>
+      <location filename="../../components/listitems/ListFirmwareCheckButton.qml" line="18"/>
       <source>Press to check</source>
       <translation>Drukken om te controleren</translation>
     </message>
@@ -404,17 +404,17 @@
       <translation>Apparaatnaam</translation>
     </message>
     <message id="settings_remote_switch_control_disabled">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="17"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="17"/>
       <source>Remote switch control disabled</source>
       <translation>Afstandsbediening uitgeschakeld</translation>
     </message>
     <message id="settings_generator_in_fault_condition">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="19"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="19"/>
       <source>Generator in fault condition</source>
       <translation>Aggregaat in storing</translation>
     </message>
     <message id="settings_generator_not_detected">
-      <location filename="../../components/settings/ListGeneratorError.qml" line="21"/>
+      <location filename="../../components/listitems/ListGeneratorError.qml" line="21"/>
       <source>Generator not detected at AC input</source>
       <translation>Aggregaat niet gedetecteerd bij AC ingang</translation>
     </message>
@@ -2284,7 +2284,7 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Modbus TCP</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsServices.qml" line="76"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus over TCP/IP (Debug)</translation>
     </message>
@@ -2836,13 +2836,13 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation>Kaart</translation>
     </message>
     <message id="listitems_alarm_level_warning">
-      <location filename="../../components/listitems/ListAlarm.qml" line="21"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="21"/>
       <source>Warning</source>
       <extracomment>Voltage alarm is at "Warning" level</extracomment>
       <translation>Waarschuwing</translation>
     </message>
     <message id="listitems_alarm_level_alarm">
-      <location filename="../../components/listitems/ListAlarm.qml" line="25"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="25"/>
       <source>Alarm</source>
       <extracomment>Voltage alarm is at "Alarm" level</extracomment>
       <translation type="unfinished">Alarm</translation>
@@ -3730,7 +3730,7 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation type="unfinished">Onbekend</translation>
     </message>
     <message id="dc_output">
-      <location filename="../../components/settings/ListDcOutputQuantityGroup.qml" line="16"/>
+      <location filename="../../components/listitems/ListDcOutputQuantityGroup.qml" line="16"/>
       <source>Output</source>
       <extracomment>DC output measurement values</extracomment>
       <translation>Uitgang</translation>
@@ -4050,13 +4050,13 @@ Documentatie op https://ve3.nl/vol</translation>
       <translation type="unfinished">BMS-besturing</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
-      <location filename="../../components/settings/ListAcInError.qml" line="23"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="23"/>
       <source>Front selector locked (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>Keuze schakelaar vergrendeld (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_no_error">
-      <location filename="../../components/settings/ListAcInError.qml" line="27"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="27"/>
       <source>No error (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>Geen fout (%1)</translation>
@@ -4550,12 +4550,12 @@ Do you want to continue?</source>
       <translation>VE.Busfout 8 / 11 rapport</translation>
     </message>
     <message id="alarm_level_alarm_only">
-      <location filename="../../components/settings/AlarmLevelRadioButtonGroup.qml" line="13"/>
+      <location filename="../../components/listitems/ListAlarmLevelRadioButtonGroup.qml" line="13"/>
       <source>Alarm only</source>
       <translation>Alleen alarm</translation>
     </message>
     <message id="alarm_level_alarms_and_warnings">
-      <location filename="../../components/settings/AlarmLevelRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListAlarmLevelRadioButtonGroup.qml" line="15"/>
       <source>Alarms &amp; warnings</source>
       <translation>Alarmen en meldingen</translation>
     </message>
@@ -4677,7 +4677,7 @@ Do you want to continue?</source>
       <translation>Fase</translation>
     </message>
     <message id="vebus_device_active_ac_input">
-      <location filename="../../components/settings/ActiveAcInputTextItem.qml" line="21"/>
+      <location filename="../../components/listitems/ListActiveAcInput.qml" line="21"/>
       <source>Active AC Input</source>
       <translation>Actieve AC ingang</translation>
     </message>
@@ -5146,7 +5146,7 @@ Do you want to continue?</source>
       <translation>Offline</translation>
     </message>
     <message id="listitems_alarm_level_ok">
-      <location filename="../../components/listitems/ListAlarm.qml" line="17"/>
+      <location filename="../../components/listitems/core/ListAlarm.qml" line="17"/>
       <source>OK</source>
       <extracomment>Voltage alarm is at "OK" level</extracomment>
       <translation>OK</translation>
@@ -5594,7 +5594,7 @@ Do you want to continue?</source>
       <translation>Vuil water</translation>
     </message>
     <message id="settings_radio_button_group_no_access">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="62"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="62"/>
       <source>Setting locked for access level</source>
       <translation>Vergrendeld instellen voor toegangsniveau</translation>
     </message>
@@ -5642,92 +5642,92 @@ Do you want to continue?</source>
       <translation>%1u %2m geleden</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="17"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="17"/>
       <source>Every day</source>
       <translation>Elke dag</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekdays">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="19"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="19"/>
       <source>Weekdays</source>
       <translation>Weekdagen</translation>
     </message>
     <message id="cgwacs_battery_schedule_weekends">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="21"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="21"/>
       <source>Weekends</source>
       <translation>Weekends</translation>
     </message>
     <message id="cgwacs_battery_schedule_monday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="25"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="25"/>
       <source>Monday</source>
       <translation>Maandag</translation>
     </message>
     <message id="cgwacs_battery_schedule_tuesday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="27"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="27"/>
       <source>Tuesday</source>
       <translation>Dinsdag</translation>
     </message>
     <message id="cgwacs_battery_schedule_wednesday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="29"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="29"/>
       <source>Wednesday</source>
       <translation>Woensdag</translation>
     </message>
     <message id="cgwacs_battery_schedule_thursday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="31"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="31"/>
       <source>Thursday</source>
       <translation>Donderdag</translation>
     </message>
     <message id="cgwacs_battery_schedule_friday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="33"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="33"/>
       <source>Friday</source>
       <translation>Vrijdag</translation>
     </message>
     <message id="cgwacs_battery_schedule_saturday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="35"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="35"/>
       <source>Saturday</source>
       <translation>Zaterdag</translation>
     </message>
     <message id="cgwacs_battery_schedule_sunday">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="37"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="37"/>
       <source>Sunday</source>
       <translation>Zondag</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_no_soc">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="70"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="70"/>
       <source>%1 %2 (%3)</source>
       <translation>%1 %2 (%3)</translation>
     </message>
     <message id="cgwacs_battery_schedule_format_soc">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="73"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="73"/>
       <source>%1 %2 (%3 or %4%)</source>
       <translation>%1 %2 (%3 of %4%)</translation>
     </message>
     <message id="cgwacs_battery_schedule_name">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="79"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="79"/>
       <source>Schedule %1</source>
       <translation>Schema %1</translation>
     </message>
     <message id="cgwacs_battery_schedule_day">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="127"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="127"/>
       <source>Day</source>
       <translation>Dag</translation>
     </message>
     <message id="cgwacs_battery_schedule_day_not_set">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="131"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="131"/>
       <source>Not set</source>
       <translation>Niet ingesteld</translation>
     </message>
     <message id="cgwacs_battery_schedule_soc_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="154"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="154"/>
       <source>SOC limit</source>
       <translation>Laadtoestand limiet</translation>
     </message>
     <message id="cgwacs_battery_schedule_self_consumption_above_limit">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="165"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="165"/>
       <source>Self-consumption above limit</source>
       <translation>Eigen verbruik boven limiet</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="170"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="170"/>
       <source>PV</source>
       <translation type="unfinished">Zonnepaneel</translation>
     </message>
@@ -5737,173 +5737,173 @@ Do you want to continue?</source>
       <translation>Zonnepaneel</translation>
     </message>
     <message id="cgwacs_battery_schedule_pv_and_battery">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="172"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="172"/>
       <source>PV &amp; Battery</source>
       <translation>Zonnepaneel &amp; Accu</translation>
     </message>
     <message id="settings_firmware_checking">
-      <location filename="../../components/settings/FirmwareCheckListButton.qml" line="16"/>
+      <location filename="../../components/listitems/ListFirmwareCheckButton.qml" line="16"/>
       <source>Checking...</source>
       <translation>Controleren...</translation>
     </message>
     <message id="list_alarm_state">
-      <location filename="../../components/settings/ListAlarmState.qml" line="11"/>
+      <location filename="../../components/listitems/ListAlarmState.qml" line="11"/>
       <source>Alarm state</source>
       <translation>Alarmtoestand</translation>
     </message>
     <message id="devicelist_battery_alarm_state">
-      <location filename="../../components/settings/ListAlarmState.qml" line="19"/>
+      <location filename="../../components/listitems/ListAlarmState.qml" line="19"/>
       <source>Alarm</source>
       <extracomment>Alarm state is active</extracomment>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="clear_history_button_clear_history">
-      <location filename="../../components/settings/ListClearHistoryButton.qml" line="15"/>
+      <location filename="../../components/listitems/ListClearHistoryButton.qml" line="15"/>
       <source>Clear History</source>
       <translation>Geschiedenis wissen</translation>
     </message>
     <message id="clear_history_button_clearing">
-      <location filename="../../components/settings/ListClearHistoryButton.qml" line="19"/>
+      <location filename="../../components/listitems/ListClearHistoryButton.qml" line="19"/>
       <source>Clearing</source>
       <translation>Wordt gewist</translation>
     </message>
     <message id="settings_dvcc_switch_forced_on">
-      <location filename="../../components/listitems/ListSwitchForced.qml" line="19"/>
+      <location filename="../../components/listitems/core/ListSwitchForced.qml" line="19"/>
       <source>Forced on</source>
       <translation>Geforceerd ingeschakeld</translation>
     </message>
     <message id="settings_dvcc_switch_forced_off">
-      <location filename="../../components/listitems/ListSwitchForced.qml" line="22"/>
+      <location filename="../../components/listitems/core/ListSwitchForced.qml" line="22"/>
       <source>Forced off</source>
       <translation>Geforceerd uitgeschakeld</translation>
     </message>
     <message id="list_relay_state">
-      <location filename="../../components/settings/ListRelayState.qml" line="11"/>
+      <location filename="../../components/listitems/ListRelayState.qml" line="11"/>
       <source>Relay state</source>
       <translation>Relaistoestand</translation>
     </message>
     <message id="batteryhistory_reset_history_on_the_monitor_itself">
-      <location filename="../../components/settings/ListResetHistoryLabel.qml" line="29"/>
+      <location filename="../../components/listitems/ListResetHistory.qml" line="29"/>
       <source>Reset history on the monitor itself</source>
       <translation>Geschiedenis resetten op de monitor zelf</translation>
     </message>
     <message id="components_mount_state_press_to_eject">
-      <location filename="../../components/settings/MountStateListButton.qml" line="17"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="17"/>
       <source>Press to eject</source>
       <translation>Klik om uit te werpen</translation>
     </message>
     <message id="components_mount_state_ejecting">
-      <location filename="../../components/settings/MountStateListButton.qml" line="21"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="21"/>
       <source>Ejecting, please wait</source>
       <translation>Bezig met uitwerpen, even geduld</translation>
     </message>
     <message id="components_mount_state_no_storage_found">
-      <location filename="../../components/settings/MountStateListButton.qml" line="24"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="24"/>
       <source>No storage found</source>
       <translation>Geen opslag gevonden</translation>
     </message>
     <message id="components_mount_state_microsd_usb">
-      <location filename="../../components/settings/MountStateListButton.qml" line="29"/>
+      <location filename="../../components/listitems/ListMountStateButton.qml" line="29"/>
       <source>microSD / USB</source>
       <translation>microSD / USB</translation>
     </message>
     <message id="settings_relay_title_type_only">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="28"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="28"/>
       <source>%1 temperature sensor</source>
       <extracomment>%1 = temperature sensor type</extracomment>
       <translation>%1 temperatuursensor</translation>
     </message>
     <message id="settings_relay_title_type_and_number">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="32"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="32"/>
       <source>%1 temperature sensor (%2)</source>
       <extracomment>%1 = temperature sensor type, %2 = input number of the sensor</extracomment>
       <translation>%1 temperatuursensor (%2)</translation>
     </message>
     <message id="settings_relay_title_number_only">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="41"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="41"/>
       <source>Temperature sensor (%1)</source>
       <extracomment>%1 = input number of the sensor</extracomment>
       <translation>Temperatuursensor (%1)</translation>
     </message>
     <message id="settings_relay_no_actions">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="52"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="52"/>
       <source>No actions</source>
       <translation>Geen acties</translation>
     </message>
     <message id="settings_relay_c0_desc">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="57"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="57"/>
       <source>C1: %1, %2</source>
       <extracomment>%1 = Relay 1 activation value, %2 = Relay 1 deactivation value</extracomment>
       <translation>C1: %1, %2</translation>
     </message>
     <message id="settings_relay_c1_desc">
-      <location filename="../../components/settings/TemperatureRelayNavigationItem.qml" line="62"/>
+      <location filename="../../components/listitems/ListTemperatureRelay.qml" line="62"/>
       <source>C2: %1, %2</source>
       <extracomment>%1 = Relay 2 activation value, %2 = Relay 2 deactivation value</extracomment>
       <translation>C1: %1, %2</translation>
     </message>
     <message id="settings_relay_equal_values_warning">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="23"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="23"/>
       <source>Warning: Activation and deactivation temperatures are set to the same value. This will lead the condition to be ignored.</source>
       <translation>Waarschuwing: De activerings- en deactiveringstemperaturen zijn ingesteld op dezelfde waarde. Hierdoor wordt de voorwaarde genegeerd.</translation>
     </message>
     <message id="settings_relay_condition">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="35"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="35"/>
       <source>Condition %1</source>
       <translation>Voorwaarde %1</translation>
     </message>
     <message id="settings_relay_function_disabled">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="41"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="41"/>
       <source>Function disabled</source>
       <translation>Functie uitgeschakeld</translation>
     </message>
     <message id="settings_relay_none">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="52"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="52"/>
       <source>None (Disable)</source>
       <translation>Geen (Uit)</translation>
     </message>
     <message id="settings_relay1">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="54"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="54"/>
       <source>Relay 1</source>
       <translation>Relais 1</translation>
     </message>
     <message id="settings_relay2">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="56"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="56"/>
       <source>Relay 2</source>
       <translation>Relais 2</translation>
     </message>
     <message id="settings_relay_invalid_temp_config_warning">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="61"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="61"/>
       <source>Warning: The above selected relay is not configured for temperature, this condition will be ignored.</source>
       <translation>Waarschuwing: Het bovenstaande relais is niet voor temperatuur ingesteld, de  toestand wordt genegeerd.</translation>
     </message>
     <message id="settings_relay_activation_value">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="70"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="70"/>
       <source>Activation value</source>
       <translation>Inschakel waarde</translation>
     </message>
     <message id="components_volumeunit_title">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="11"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="11"/>
       <source>Volume unit</source>
       <translation>Volume eenheid</translation>
     </message>
     <message id="components_volumeunit_cubic_meters">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="15"/>
       <source>Cubic meters</source>
       <translation>Kubieke meter</translation>
     </message>
     <message id="components_volumeunit_liters">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="17"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="17"/>
       <source>Liters</source>
       <translation>Liters (L)</translation>
     </message>
     <message id="components_volumeunit_gallons_us">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="19"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="19"/>
       <source>Gallons (US)</source>
       <translation>Gallons (VS)</translation>
     </message>
     <message id="components_volumeunit_gallons_imperial">
-      <location filename="../../components/settings/VolumeUnitRadioButtonGroup.qml" line="21"/>
+      <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="21"/>
       <source>Gallons (Imperial)</source>
       <translation>Gallons (Imperiaal)</translation>
     </message>
@@ -7058,13 +7058,13 @@ Do you want to continue?</source>
       <translation>Omvormermodus</translation>
     </message>
     <message id="inverter_ac-out_num">
-      <location filename="../../components/settings/InverterAcOutQuantityGroup.qml" line="45"/>
+      <location filename="../../components/InverterAcOutSettings.qml" line="45"/>
       <source>AC Out L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>AC OUT L%1</translation>
     </message>
     <message id="dc_input">
-      <location filename="../../components/settings/ListDcInputQuantityGroup.qml" line="16"/>
+      <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
       <extracomment>DC input measurement values</extracomment>
       <translation>Ingang</translation>
@@ -7490,7 +7490,7 @@ See documentation for further information.</oldsource>
       <translation>Protocol</translation>
     </message>
     <message id="port_field_title">
-      <location filename="../../components/listitems/ListPortField.qml" line="13"/>
+      <location filename="../../components/listitems/core/ListPortField.qml" line="13"/>
       <source>Port</source>
       <translation>Poort</translation>
     </message>
@@ -7787,7 +7787,7 @@ See documentation for further information.</oldsource>
       <translation>Als je deze instelling wijzigt naar Alleen-lezen of Uit, word je geblokkeerd.</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../pages/settings/PageSettingsServices.qml" line="48"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
       <source>MQTT Access</source>
       <translation>MQTT toegang</translation>
     </message>
@@ -7797,23 +7797,23 @@ See documentation for further information.</oldsource>
       <translation>'%1' is geen getal.</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/listitems/ListRadioButtonGroup.qml" line="160"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="160"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Bevestigen</translation>
     </message>
     <message id="number_field_input_too_long">
-      <location filename="../../components/listitems/ListIntField.qml" line="21"/>
+      <location filename="../../components/listitems/core/ListIntField.qml" line="21"/>
       <source>Use a number with %1 digits or less.</source>
       <translation>Gebruik een getal met %1 cijfers of minder.</translation>
     </message>
     <message id="ip_address_input_not_valid">
-      <location filename="../../components/listitems/ListIpAddressField.qml" line="34"/>
+      <location filename="../../components/listitems/core/ListIpAddressField.qml" line="34"/>
       <source>'%1' is not a valid IP address.</source>
       <translation>'%1' is geen geldig IP-adres.</translation>
     </message>
     <message id="port_input_not_valid">
-      <location filename="../../components/listitems/ListPortField.qml" line="26"/>
+      <location filename="../../components/listitems/core/ListPortField.qml" line="26"/>
       <source>'%1' is not a valid port number. Use a number between 0-65535.</source>
       <translation>'%1' is geen geldig poortnummer. Gebruik een getal tussen 0-65535.</translation>
     </message>
@@ -7885,7 +7885,7 @@ See documentation for further information.</oldsource>
       <translation>Laadtoestand %1</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/settings/ListSecurityWarningSwitch.qml" line="15"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
       <translation>Er moet een beveiligingsprofiel worden ingesteld voordat de netwerkdiensten kunnen worden ingeschakeld, zie Instellingen - Algemeen</translation>
     </message>
@@ -8083,7 +8083,7 @@ Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgek
       <translation>Alleen AC uitgang</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="23"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="23"/>
       <source>Monthly</source>
       <translation>Maandelijks</translation>
     </message>
@@ -8180,7 +8180,7 @@ Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgek
       <translation>De firmwareversie kan niet worden gewijzigd als "Netwerkbeveiligingsprofiel" in "Instellingen / Algemeen" niet is geselecteerd.</translation>
     </message>
     <message id="cgwacs_battery_schedule_duration">
-      <location filename="../../components/settings/ChargeScheduleItem.qml" line="143"/>
+      <location filename="../../components/listitems/ListChargeSchedule.qml" line="143"/>
       <source>Duration</source>
       <oldsource>Duration (hh:mm)</oldsource>
       <translation>Duur</translation>
@@ -8382,7 +8382,7 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <translation>Automatisch gestart • %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
-      <location filename="../../components/settings/TemperatureRelaySettings.qml" line="89"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="89"/>
       <source>Deactivation value</source>
       <oldsource>Deativation value</oldsource>
       <translation>Uitschakel waarde</translation>
