@@ -11,6 +11,10 @@ Page {
 
 	property string bindPrefix
 
+	readonly property bool isModeOptimized: [
+		VenusOS.Ess_State_OptimizedWithBatteryLife,
+		VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essMode.dataItem.value)
+
 	VeQuickItem {
 		id: dEssModeItem
 
@@ -54,6 +58,38 @@ Page {
 					&& essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
 				dataItem.uid: root.bindPrefix + "/Ess/ActiveSocLimit"
 				unit: VenusOS.Units_Percentage
+			}
+
+			ListNavigation {
+				//% "Scheduled charge levels"
+				text: qsTrId("settings_rs_scheduled_charge_levels")
+				secondaryText: scheduleSoc.isValid
+						  //% "Active (%1)"
+						? qsTrId("scheduled_charge_active").arg(Units.getCombinedDisplayText(VenusOS.Units_Percentage, scheduleSoc.value))
+						  //% "Inactive"
+						: qsTrId("scheduled_charge_inactive")
+				allowed: defaultAllowed && root.isModeOptimized
+				onClicked: {
+					Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
+				}
+
+				VeQuickItem {
+					id: scheduleSoc
+					uid: Global.system.serviceUid + "/Control/ScheduledSoc"
+				}
+
+				Component {
+					id: scheduledChargeComponent
+
+					Page {
+						GradientListView {
+							model: 5
+							delegate: ListChargeSchedule {
+								scheduleNumber: modelData
+							}
+						}
+					}
+				}
 			}
 
 			ListNavigation {
