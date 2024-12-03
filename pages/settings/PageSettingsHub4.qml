@@ -324,7 +324,7 @@ Page {
 	}
 
 	GradientListView {
-		header: root._valid ? null : (Global.acSystemDevices.model.count > 0 ? hasAcSystem : noEssHeader)
+		header: root._valid ? null : (Global.inverterChargers.acSystemDevices.count > 0 ? hasAcSystem : noEssHeader)
 		model: root._valid ? essSettings : null
 	}
 

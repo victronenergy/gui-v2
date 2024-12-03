@@ -377,7 +377,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/WindWidget.qml
 
     data/AcInputs.qml
-    data/AcSystemDevices.qml
     data/Chargers.qml
     data/Batteries.qml
     data/DataManager.qml
@@ -404,7 +403,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettings.qml
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
-    data/common/AcSystemDevice.qml
     data/common/AcInput.qml
     data/common/Battery.qml
     data/common/Charger.qml
@@ -787,7 +785,6 @@ endif()
 
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
-    data/dbus/AcSystemDevicesImpl.qml
     data/dbus/BatteriesImpl.qml
     data/dbus/ChargersImpl.qml
     data/dbus/DBusDataManager.qml
@@ -911,7 +908,6 @@ endif()
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
-    data/mqtt/AcSystemDevicesImpl.qml
     data/mqtt/BatteriesImpl.qml
     data/mqtt/ChargersImpl.qml
     data/mqtt/DcInputsImpl.qml

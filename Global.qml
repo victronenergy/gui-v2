@@ -29,7 +29,6 @@ QtObject {
 
 	// data sources
 	property var acInputs
-	property var acSystemDevices
 	property var chargers
 	property var batteries
 	property var dcInputs
@@ -103,7 +102,6 @@ QtObject {
 		notificationLayer = null
 
 		acInputs = null
-		acSystemDevices = null
 		chargers = null
 		batteries = null
 		dcInputs = null

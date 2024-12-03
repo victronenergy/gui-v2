@@ -20,7 +20,7 @@ Item {
 	}
 
 	property Component acSystemDeviceComponent: Component {
-		AcSystemDevice {
+		Device {
 			id: acSystem
 
 			function addRsService(serviceName, deviceInstanceNum) {

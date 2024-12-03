@@ -16,9 +16,9 @@ Page {
 		model: AggregateDeviceModel {
 			sourceModels: [
 				Global.inverterChargers.veBusDevices,
+				Global.inverterChargers.acSystemDevices,
 				Global.inverterChargers.inverterDevices,
 				Global.chargers.model,
-				Global.acSystemDevices.model
 			]
 		}
 

@@ -13,7 +13,7 @@ OverviewWidget {
 		if ((Global.inverterChargers.veBusDevices.count
 				+ Global.inverterChargers.inverterDevices.count
 				+ Global.chargers.model.count
-				+ Global.acSystemDevices.model.count) > 1) {
+				+ Global.inverterChargers.acSystemDevices.count) > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
