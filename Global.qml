@@ -46,7 +46,6 @@ QtObject {
 	property var system
 	property var systemSettings
 	property var tanks
-	property var unsupportedDevices
 
 	property var venusPlatform
 	property bool splashScreenVisible: true
@@ -121,7 +120,6 @@ QtObject {
 		system = null
 		systemSettings = null
 		tanks = null
-		unsupportedDevices = null
 		venusPlatform = null
 
 		// The last thing we do is set the splash screen visible.

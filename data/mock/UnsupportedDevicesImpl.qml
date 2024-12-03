@@ -20,7 +20,7 @@ QtObject {
 	}
 
 	property Component unsupportedComponent: Component {
-		UnsupportedDevice {
+		Device {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Unsupported %1".arg(deviceInstance))

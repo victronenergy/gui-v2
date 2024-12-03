@@ -398,7 +398,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/SystemLoad.qml
     data/SystemSettings.qml
     data/Tanks.qml
-    data/UnsupportedDevices.qml
     data/VenusPlatform.qml
 
     data/common/AcData.qml
@@ -432,7 +431,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SystemBattery.qml
     data/common/Tank.qml
     data/common/TankModel.qml
-    data/common/UnsupportedDevice.qml
 
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
@@ -805,7 +803,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/SolarChargersImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
-    data/dbus/UnsupportedDevicesImpl.qml
     data/dbus/InverterChargersImpl.qml
 )
 
@@ -930,7 +927,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/SolarChargersImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
-    data/mqtt/UnsupportedDevicesImpl.qml
     data/mqtt/InverterChargersImpl.qml
 )
 

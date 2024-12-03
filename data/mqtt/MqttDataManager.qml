@@ -26,5 +26,4 @@ QtObject {
 	property var solarChargers: SolarChargersImpl { }
 	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { }
-	property var unsupportedDevices: UnsupportedDevicesImpl { }
 }
