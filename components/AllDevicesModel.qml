@@ -35,22 +35,22 @@ AggregateDeviceModel {
 
 	].concat(Global.tanks.allTankModels)
 
-	readonly property AcInDeviceModel gridDeviceModel: AcInDeviceModel {
+	readonly property ServiceDeviceModel gridDeviceModel: ServiceDeviceModel {
 		serviceType: "grid"
 		modelId: "grid"
 	}
 
-	readonly property AcInDeviceModel gensetDeviceModel: AcInDeviceModel {
+	readonly property ServiceDeviceModel gensetDeviceModel: ServiceDeviceModel {
 		serviceType: "genset"
 		modelId: "genset"
 	}
 
-	readonly property AcInDeviceModel acLoadDeviceModel: AcInDeviceModel {
+	readonly property ServiceDeviceModel acLoadDeviceModel: ServiceDeviceModel {
 		serviceType: "acload"
 		modelId: "acload"
 	}
 
-	readonly property AcInDeviceModel heatPumpDeviceModel: AcInDeviceModel {
+	readonly property ServiceDeviceModel heatPumpDeviceModel: ServiceDeviceModel {
 		serviceType: "heatpump"
 		modelId: "heatpump"
 	}
