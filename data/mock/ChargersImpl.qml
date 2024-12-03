@@ -20,7 +20,7 @@ Item {
 	}
 
 	property Component chargerComponent: Component {
-		Charger {
+		Device {
 			id: charger
 
 			property int inputCount: 1 + Math.floor(Math.random() * 2)
@@ -39,6 +39,14 @@ Item {
 						charger.setMockValue("/Dc/%1/Current".arg(i+1), Math.random() * 10)
 					}
 					charger.setMockValue("/Ac/In/L1/I", Math.random() * 10)
+				}
+			}
+
+			onValidChanged: {
+				if (valid) {
+					Global.inverterChargers.chargerDevices.addDevice(charger)
+				} else {
+					Global.inverterChargers.chargerDevices.removeDevice(charger.serviceUid)
 				}
 			}
 

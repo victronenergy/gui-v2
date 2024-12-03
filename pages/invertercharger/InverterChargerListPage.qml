@@ -18,13 +18,13 @@ Page {
 				Global.inverterChargers.veBusDevices,
 				Global.inverterChargers.acSystemDevices,
 				Global.inverterChargers.inverterDevices,
-				Global.chargers.model,
+				Global.inverterChargers.chargerDevices,
 			]
 		}
 
 		delegate: ListNavigation {
 			text: model.device.name
-			secondaryText: Global.system.systemStateToText(model.device.state)
+			secondaryText: Global.system.systemStateToText(stateItem.value)
 
 			onClicked: {
 				// Show page for chargers
@@ -36,6 +36,11 @@ Page {
 					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
 							{ "serviceUid": model.device.serviceUid, "title": model.device.name })
 				}
+			}
+
+			VeQuickItem {
+				id: stateItem
+				uid: model.device.serviceUid + "/State"
 			}
 		}
 	}

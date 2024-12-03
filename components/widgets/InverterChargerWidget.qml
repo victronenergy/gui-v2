@@ -12,13 +12,13 @@ OverviewWidget {
 	onClicked: {
 		if ((Global.inverterChargers.veBusDevices.count
 				+ Global.inverterChargers.inverterDevices.count
-				+ Global.chargers.model.count
+				+ Global.inverterChargers.chargerDevices.count
 				+ Global.inverterChargers.acSystemDevices.count) > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
-			if (Global.chargers.model.count) {
-				const charger = Global.chargers.model.firstObject
+			if (Global.inverterChargers.chargerDevices.count) {
+				const charger = Global.inverterChargers.chargerDevices.firstObject
 				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
 						{ "bindPrefix": charger.serviceUid, "title": charger.name })
 			} else {
@@ -34,7 +34,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: !!Global.inverterChargers.firstObject || Global.chargers.model.count
+	enabled: !!Global.inverterChargers.firstObject || Global.inverterChargers.chargerDevices.count
 	quantityLabel.visible: false
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 	extraContentChildren: [
