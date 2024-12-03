@@ -71,4 +71,25 @@ QtObject {
 			}
 		}
 	}
+
+	property Instantiator chargerObjects: Instantiator {
+		model: VeQItemTableModel {
+			uids: ["mqtt/charger"]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+
+		delegate: Device {
+			id: chargerDevice
+
+			serviceUid: model.uid
+
+			onValidChanged: {
+				if (valid) {
+					Global.inverterChargers.chargerDevices.addDevice(chargerDevice)
+				} else {
+					Global.inverterChargers.chargerDevices.removeDevice(chargerDevice.serviceUid)
+				}
+			}
+		}
+	}
 }

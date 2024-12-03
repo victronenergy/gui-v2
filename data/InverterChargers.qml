@@ -42,6 +42,12 @@ QtObject {
 		}
 	}
 
+	// Devices from com.victronenergy.charger
+	property DeviceModel chargerDevices: DeviceModel {
+		modelId: "chargerDevices"
+		sortBy: BaseDeviceModel.SortByDeviceInstance
+	}
+
 	property real totalNominalInverterPower: NaN
 
 	readonly property var rsAlarms: [
