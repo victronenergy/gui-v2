@@ -31,7 +31,6 @@ Item {
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
-			&& !!Global.unsupportedDevices
 			&& !!Global.venusPlatform
 
 	readonly property bool _shouldInitialize: _dataObjectsReady
@@ -114,7 +113,6 @@ Item {
 	System {}
 	SystemSettings {}
 	Tanks {}
-	UnsupportedDevices {}
 	VenusPlatform {}
 
 	Loader {
