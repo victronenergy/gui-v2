@@ -22,26 +22,6 @@ Page {
 				text: qsTrId("settings_deviceinfo_connection")
 				dataItem.uid: root.bindPrefix + "/Mgmt/Connection"
 				dataItem.invalidate: false
-				secondaryLabel.rightPadding: connectedIcon.visible ? connectedIcon.width + Theme.geometry_listItem_content_spacing : 0
-
-				CP.ColorImage {
-					id: connectedIcon
-
-					anchors {
-						right: parent.right
-						rightMargin: Theme.geometry_listItem_content_horizontalMargin
-						verticalCenter: parent.primaryLabel.verticalCenter
-					}
-					color: Theme.color_green
-					source: "qrc:/images/icon_checkmark_32.svg"
-					visible: connectedDataItem.value === 1
-				}
-
-				VeQuickItem {
-					id: connectedDataItem
-
-					uid: root.bindPrefix + "/Connected"
-				}
 			}
 
 			ListText {
