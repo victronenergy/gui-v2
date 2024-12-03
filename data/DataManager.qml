@@ -24,7 +24,6 @@ Item {
 			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverterChargers
-			&& !!Global.acSystemDevices
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.solarChargers
@@ -106,7 +105,6 @@ Item {
 	EvChargers {}
 	Generators {}
 	InverterChargers {}
-	AcSystemDevices {}
 	Notifications {}
 	PvInverters {}
 	SolarChargers {}

@@ -10,7 +10,6 @@ AggregateDeviceModel {
 	id: aggregateModel
 
 	sourceModels: [
-		Global.acSystemDevices.model,
 		Global.batteries.model,
 		Global.chargers.model,
 		Global.dcInputs.model,
@@ -19,6 +18,7 @@ AggregateDeviceModel {
 		Global.environmentInputs.model,
 		Global.evChargers.model,
 		Global.inverterChargers.veBusDevices,
+		Global.inverterChargers.acSystemDevices,
 		Global.inverterChargers.inverterDevices,
 		meteoDeviceModel,
 		motorDriveDeviceModel,
