@@ -26,4 +26,9 @@ DeviceListDelegate {
 		id: statusCode
 		uid: root.device.serviceUid + "/StatusCode"
 	}
+
+	VeQuickItem {
+		id: power
+		uid: root.device.serviceUid + "/Ac/Power"
+	}
 }
