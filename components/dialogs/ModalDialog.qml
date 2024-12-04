@@ -250,5 +250,18 @@ T.Dialog {
 			]
 		}
 	}
+
+	MouseArea {
+		// placed behind the contentItem
+		parent: contentItem.parent
+		anchors.fill: parent
+		z: -1
+		enabled: !!stateManager.inputItem
+		onClicked: focusScope.focus = true
+
+		FocusScope {
+			id: focusScope
+		}
+	}
 }
 
