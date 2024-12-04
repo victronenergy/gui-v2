@@ -11,8 +11,8 @@ Page {
 	id: root
 
 	property int cardWidth: cardsView.count > 2
-			? Theme.geometry_controlCard_minimumWidth
-			: Theme.geometry_controlCard_maximumWidth
+							? Theme.geometry_controlCard_minimumWidth
+							: Theme.geometry_controlCard_maximumWidth
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
 	width: parent.width
@@ -28,14 +28,13 @@ Page {
 		ModalDialog {
 			id: customDialog
 
-			property real dialogYDelta
-
 			contentItem: MouseArea {
+
 				anchors {
-					top: parent.top
+					top: parent.top // (you can click on the header)
 					left: parent.left
 					right: parent.right
-					bottom: parent.footer.top
+					bottom: parent.footer.top // (but not the footer as it has buttons)
 				}
 
 				// Remove focus when the user clicks outside of the text fields.
@@ -45,63 +44,102 @@ Page {
 					id: focusScope
 					anchors.fill: parent
 
+					readonly property Item inputItem: customDialog.visible && Qt.inputMethod.visible ?
+														  (Window.activeFocusItem as TextField ??
+														   Window.activeFocusItem as TextInput ??
+														   // Window.activeFocusItem as TextArea ?? // not used
+														   Window.activeFocusItem as TextEdit) : null
+
+					// vkbTopPos is const - it will always be the same value when the keyboard is open;
+					// - we only need this value when the keyboard is open (inputItem is not null)
+					readonly property real vkbTopPos: Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
+
+					property bool componentComplete: false
+					property real targetDialogY: 0
+
+					Component.onCompleted: componentComplete = true
+
+					onInputItemChanged: {
+
+						if(!componentComplete || !inputItem) {
+
+							focusScope.state = "default"
+							return
+						}
+
+						focusScope.state = "interrupted"
+
+						const currentDialogOffset = customDialog.y - customDialog.centeredY // 0 or negative
+						const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
+
+						if (inputItemBottomPos > focusScope.vkbTopPos) {
+
+							focusScope.targetDialogY = customDialog.centeredY + (focusScope.vkbTopPos - inputItemBottomPos)
+							focusScope.targetDialogY -= column.spacing
+
+						} else {
+
+							focusScope.targetDialogY = customDialog.centeredY
+						}
+
+						focusScope.state = "focused"
+					}
+
 					Column {
+						id: column
 						anchors.centerIn: parent
 						spacing: 2
 
 						Repeater {
-							model: 5
+							model: 7
 
 							delegate: TextField {
-								id: dialogTextField
+								required property int index
 								width: 400
-								text: "Text field " + (model.index)
-
-								// When the text field receives active focus, slide the dialog
-								// upwards if necessary, to ensure the focused field is not hidden
-								// beneath the VKB.
-								// When the text field loses active focus, restore the original
-								// dialog position.
-								onActiveFocusChanged: {
-									if (activeFocus) {
-										const textFieldBottomPos = dialogTextField.mapToItem(Global.mainView, 0, implicitHeight).y
-										const vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
-										if (textFieldBottomPos > vkbTopPos) {
-											// Need to move the dialog upwards to see the whole text field
-											customDialog.dialogYDelta = vkbTopPos - textFieldBottomPos
-										} else {
-											// Text field is already visible, no need to move the dialog upwards
-											customDialog.dialogYDelta = 0
-										}
-									}
-									focusScope.state = activeFocus ? "focused" : ""
-								}
+								text: `Text field ${index}`
+								objectName: text
 							}
 						}
 					}
 
+					state: "default"
+
 					states: [
 						State {
-							name: "focused"
+							name: "default"
 							PropertyChanges {
-								target: customDialog
-								y: customDialog.centeredY + customDialog.dialogYDelta
-								explicit: true
+								// reset to the "default" binding explicity
+								// so we can get the transition
+								customDialog.y: customDialog.centeredY
+							}
+						},
+						State {
+							name: "interrupted"
+							// no PropertyChanges, interrupts any Transitions, does not change any properties
+							// due to the restoreEntryValues of the focused state being false
+						},
+						State {
+							name: "focused"
+
+							PropertyChanges {
+								// the object.property we want to change to the given value
+								customDialog.y: focusScope.targetDialogY
+								restoreEntryValues: false
 							}
 						}
 					]
 
 					transitions: [
 						Transition {
+							to: "*"
 							NumberAnimation {
 								target: customDialog
-								properties: "y"
+								property: "y"
 								duration: Theme.animation_inputPanel_slide_duration
 								easing.type: Easing.InOutQuad
 							}
 						}
 					]
-
 				}
 			}
 		}
