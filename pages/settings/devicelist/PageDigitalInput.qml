@@ -12,10 +12,12 @@ Page {
 
 	property string bindPrefix
 
-	/* TODO - resolving page title via:
-			title: device.name
-			Device { id: device; serviceUid: root.bindPrefix }
-		doesn't work here. #1695 */
+	title: Global.digitalInputs.inputTypeToText(inputType.value)
+
+	VeQuickItem {
+		id: inputType
+		uid: root.bindPrefix + "/Type"
+	}
 
 	GradientListView {
 		model: ObjectModel {

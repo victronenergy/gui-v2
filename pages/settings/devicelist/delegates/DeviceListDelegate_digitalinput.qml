@@ -9,6 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
+	text: Global.digitalInputs.inputTypeToText(type.value)
 	secondaryText: Global.digitalInputs.inputStateToText(state.value)
 
 	onClicked: {
@@ -19,5 +20,10 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: state
 		uid: root.device.serviceUid + "/State"
+	}
+
+	VeQuickItem {
+		id: type
+		uid: root.device.serviceUid + "/Type"
 	}
 }
