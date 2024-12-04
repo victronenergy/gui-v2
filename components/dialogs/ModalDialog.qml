@@ -3,6 +3,7 @@
 ** See LICENSE.txt for license information.
 */
 
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Victron.VenusOS
@@ -22,14 +23,14 @@ T.Dialog {
 
 	readonly property alias acceptButton: doneButton
 	property string acceptText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_SetAndCancel
-			  //% "Set"
-			? qsTrId("modaldialog_set")
-			: CommonWords.ok
+	//% "Set"
+								? qsTrId("modaldialog_set")
+								: CommonWords.ok
 
 	readonly property alias rejectButton: rejectButton
 	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
-			? ""
-			: rejectTextCancel
+								? ""
+								: rejectTextCancel
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
@@ -173,5 +174,95 @@ T.Dialog {
 			}
 		}
 	}
+
+	component StateManager: QtObject {
+		id: stateManager
+
+		readonly property Item inputItem: root.visible && Qt.inputMethod.visible ?
+											  (root.contentItem.Window.activeFocusItem as TextField ??
+											   root.contentItem.Window.activeFocusItem as TextInput ??
+											   // root.contentItem.Window.activeFocusItem as TextArea ?? // not used
+											   root.contentItem.Window.activeFocusItem as TextEdit) : null
+
+		// vkbTopPos is const - it will always be the same value when the keyboard is open;
+		// - we only need this value when the keyboard is open (inputItem is not null)
+		readonly property real vkbTopPos: Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
+
+		property bool componentComplete: false
+		property real targetDialogY: 0
+
+		Component.onCompleted: componentComplete = true
+
+		onInputItemChanged: {
+			if(!componentComplete || !inputItem) {
+				dialogStateGroup.state = "default"
+				return
+			}
+
+			dialogStateGroup.state = "interrupted"
+
+			const currentDialogOffset = root.y - root.centeredY // 0 or negative
+			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
+
+			if (inputItemBottomPos > vkbTopPos) {
+
+				targetDialogY = customDialog.centeredY + (vkbTopPos - inputItemBottomPos)
+
+			} else {
+
+				targetDialogY = customDialog.centeredY
+			}
+
+			dialogStateGroup.state = "focused"
+		}
+
+		property StateGroup dialogStateGroup: StateGroup {
+			id: dialogStateGroup
+
+			state: "default"
+
+			states: [
+				State {
+					name: "default"
+					PropertyChanges {
+						// reset to the "default" binding explicity
+						// so we can get the transition
+						// NOTE: Qt6 grouped syntax causes a crash so we use the legacy Qt5 syntax
+						target: root
+						y: root.centeredY
+					}
+				},
+				State {
+					name: "interrupted"
+					// no PropertyChanges, interrupts any Transitions, does not change any properties
+					// due to the restoreEntryValues of the focused state being false
+				},
+				State {
+					name: "focused"
+
+					PropertyChanges {
+						// the object.property we want to change to the given value
+						target: root
+						y: stateManager.targetDialogY
+						restoreEntryValues: false
+					}
+				}
+			]
+
+			transitions: [
+				Transition {
+					to: "*"
+					NumberAnimation {
+						target: root
+						property: "y"
+						duration: Theme.animation_inputPanel_slide_duration
+						easing.type: Easing.InOutQuad
+					}
+				}
+			]
+		}
+	}
+
+	property StateManager _stateManager: StateManager {}
 }
 
