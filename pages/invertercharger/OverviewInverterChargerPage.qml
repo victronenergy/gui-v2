@@ -163,15 +163,18 @@ Page {
 			ListNavigation {
 				text: CommonWords.product_page
 				onClicked: {
+					let pageUrl = ""
 					if (root.serviceType === "inverter") {
-						Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml", { bindPrefix: root.serviceUid })
+						pageUrl = "/pages/settings/devicelist/inverter/PageInverter.qml"
 					} else if (root.serviceType === "vebus") {
-						Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", { bindPrefix: root.serviceUid })
+						pageUrl = "/pages/vebusdevice/PageVeBus.qml"
 					} else if (root.serviceType === "acsystem") {
-						Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml", { bindPrefix: root.serviceUid })
+						pageUrl = "/pages/settings/devicelist/rs/PageRsSystem.qml"
 					} else {
 						console.warn("Unsupported service:", root.serviceUid)
+						return
 					}
+					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.serviceUid })
 				}
 			}
 		}
