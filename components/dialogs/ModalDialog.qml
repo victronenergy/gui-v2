@@ -3,7 +3,6 @@
 ** See LICENSE.txt for license information.
 */
 
-pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Victron.VenusOS
@@ -175,7 +174,7 @@ T.Dialog {
 		}
 	}
 
-	component StateManager: QtObject {
+	property QtObject _stateManager: QtObject {
 		id: stateManager
 
 		readonly property Item inputItem: root.visible && Qt.inputMethod.visible ?
@@ -204,20 +203,16 @@ T.Dialog {
 			const currentDialogOffset = root.y - root.centeredY // 0 or negative
 			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
 
+			targetDialogY = customDialog.centeredY
+
 			if (inputItemBottomPos > vkbTopPos) {
-
-				targetDialogY = customDialog.centeredY + (vkbTopPos - inputItemBottomPos)
-
-			} else {
-
-				targetDialogY = customDialog.centeredY
+				targetDialogY += (vkbTopPos - inputItemBottomPos)
 			}
 
 			dialogStateGroup.state = "focused"
 		}
 
 		property StateGroup dialogStateGroup: StateGroup {
-			id: dialogStateGroup
 
 			state: "default"
 
@@ -225,11 +220,9 @@ T.Dialog {
 				State {
 					name: "default"
 					PropertyChanges {
-						// reset to the "default" binding explicity
+						// reset to the "default" binding explicitly
 						// so we can get the transition
-						// NOTE: Qt6 grouped syntax causes a crash so we use the legacy Qt5 syntax
-						target: root
-						y: root.centeredY
+						root.y: root.centeredY
 					}
 				},
 				State {
@@ -241,9 +234,7 @@ T.Dialog {
 					name: "focused"
 
 					PropertyChanges {
-						// the object.property we want to change to the given value
-						target: root
-						y: stateManager.targetDialogY
+						root.y: stateManager.targetDialogY
 						restoreEntryValues: false
 					}
 				}
@@ -262,7 +253,5 @@ T.Dialog {
 			]
 		}
 	}
-
-	property StateManager _stateManager: StateManager {}
 }
 
