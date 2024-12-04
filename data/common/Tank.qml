@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Gauges
 
 Device {
 	id: tank
@@ -87,15 +86,10 @@ Device {
 		}
 	}
 
-	name: {
-		if (customName.length > 0) {
-			return customName
-		} else if (type >= 0 && deviceInstance >= 0) {
-			//: Tank desription. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)
-			//% "%1 tank (%2)"
-			return qsTrId("tank_description").arg(Gauges.tankProperties(type).name).arg(deviceInstance)
-		} else {
-			return productName
-		}
+	name: _description.description
+
+	readonly property TankDescription _description: TankDescription {
+		id: tankDescription
+		device: tank
 	}
 }
