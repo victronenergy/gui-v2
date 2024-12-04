@@ -426,6 +426,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarTrackerDailyHistory.qml
     data/common/SystemBattery.qml
     data/common/Tank.qml
+    data/common/TankDescription.qml
     data/common/TankModel.qml
 
     pages/BriefSidePanel.qml
