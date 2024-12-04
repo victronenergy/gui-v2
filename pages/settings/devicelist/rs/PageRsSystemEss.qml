@@ -39,6 +39,7 @@ Page {
 				//% "Minimum SOC (unless grid fails)"
 				text: qsTrId("settings_rs_ess_min_soc")
 				button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
+				allowed: defaultAllowed && root.isModeOptimized
 				onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 				Component {
