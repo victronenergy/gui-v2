@@ -17,23 +17,24 @@ CT.SpinBox {
 	id: root
 
 	property alias label: primaryLabel
-	property string secondaryText
+	property alias secondaryText: secondaryLabel.text
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
 	property int _originalStepSize
+	property alias suffix: suffixLabel.text
 
 	signal maxValueReached()
 	signal minValueReached()
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-		orientation === Qt.Horizontal
-			? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry_spinBox_spacing) + leftPadding + rightPadding
-			: valueColumn.width + leftPadding + rightPadding)
+							orientation === Qt.Horizontal
+							? valueColumn.width + up.indicator.width + down.indicator.width + (2 * Theme.geometry_spinBox_spacing) + leftPadding + rightPadding
+							: valueColumn.width + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-		orientation === Qt.Horizontal
-			? Math.max(valueColumn.height, up.indicator.height, down.indicator.height) + topPadding + bottomPadding
-			: valueColumn.height + up.indicator.height + down.indicator.height + (2 * Theme.geometry_spinBox_spacing) + topPadding + bottomPadding)
+							 orientation === Qt.Horizontal
+							 ? Math.max(valueColumn.height, up.indicator.height, down.indicator.height) + topPadding + bottomPadding
+							 : valueColumn.height + up.indicator.height + down.indicator.height + (2 * Theme.geometry_spinBox_spacing) + topPadding + bottomPadding)
 
 	spacing: Theme.geometry_spinBox_spacing
 	onValueModified: {
@@ -45,29 +46,52 @@ CT.SpinBox {
 	}
 
 	contentItem: Item {
+
+		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
+		// so that it can call the valueFromText() function
+		readonly property alias text: primaryLabel.text
+
 		Column {
 			id: valueColumn
 
-			width: Math.max(primaryLabel.implicitWidth, secondaryLabel.implicitWidth)
+			width: Math.max(primaryRow.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
 
-			Label {
-				id: primaryLabel
+			Row {
+				id: primaryRow
 
-				width: parent.width
-				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
-				font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
+				anchors.horizontalCenter: parent.horizontalCenter
+
+				TextInput {
+					id: primaryLabel
+
+					text: root.textFromValue(root.value, root.locale)
+					color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
+					font.family: Global.fontFamily
+					font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
+					horizontalAlignment: Qt.AlignHCenter
+					verticalAlignment: Qt.AlignVCenter
+
+					readOnly: !root.editable
+					validator: root.validator
+					inputMethodHints: root.inputMethodHints
+				}
+
+				Label {
+					id: suffixLabel
+
+					visible: text.length
+					color: primaryLabel.color
+					font: primaryLabel.font
+					horizontalAlignment: primaryLabel.horizontalAlignment
+					verticalAlignment: primaryLabel.verticalAlignment
+				}
 			}
 
 			Label {
 				id: secondaryLabel
 
-				width: primaryLabel.width
 				height: text.length ? implicitHeight : 0
-				text: root.secondaryText
 				color: Theme.color_font_secondary
 				font.pixelSize: Theme.font_size_caption
 				horizontalAlignment: Qt.AlignHCenter
