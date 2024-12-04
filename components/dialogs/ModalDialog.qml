@@ -187,13 +187,10 @@ T.Dialog {
 		// - we only need this value when the keyboard is open (inputItem is not null)
 		readonly property real vkbTopPos: Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
 
-		property bool componentComplete: false
 		property real targetDialogY: 0
 
-		Component.onCompleted: componentComplete = true
-
 		onInputItemChanged: {
-			if(!componentComplete || !inputItem) {
+			if(!inputItem) {
 				dialogStateGroup.state = "default"
 				return
 			}
