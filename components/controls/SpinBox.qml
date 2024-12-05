@@ -85,7 +85,7 @@ CT.SpinBox {
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
 		radius: Theme.geometry_spinBox_indicator_radius
-		color: root.enabled
+		color: enabled
 			   ? (root.up.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled
 
@@ -106,7 +106,7 @@ CT.SpinBox {
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
 		radius: Theme.geometry_spinBox_indicator_radius
-		color: root.enabled
+		color: enabled
 			   ? (root.down.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled
 		Image {
