@@ -31,7 +31,7 @@ OverviewWidget {
 		}
 	}
 
-	readonly property var batteryData: Global.batteries.system
+	readonly property var batteryData: Global.system.battery
 
 	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
 	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
@@ -173,7 +173,7 @@ OverviewWidget {
 				color: Theme.color_font_secondary
 			}
 			Label {
-				text: Global.batteries.timeToGoText(Global.batteries.system.timeToGo, VenusOS.Battery_TimeToGo_ShortFormat)
+				text: Global.batteries.timeToGoText(Global.system.battery.timeToGo, VenusOS.Battery_TimeToGo_ShortFormat)
 				color: Theme.color_font_primary
 				width: parent.width
 				elide: Text.ElideRight

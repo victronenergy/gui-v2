@@ -461,11 +461,11 @@ QtObject {
 		uid: Global.system.serviceUid + "/Dc/InverterCharger/Power"
 	}
 
-	readonly property int batteryMode: Global.batteries.system.mode
+	readonly property int batteryMode: Global.system.battery.mode
 	onBatteryModeChanged: {
 		// Positive power when battery is charging, negative power when battery is discharging
 		const randomPower = Math.round(100 + (Math.random() * 600))
-		const batteryMode = Global.batteries.system.mode
+		const batteryMode = Global.system.battery.mode
 		const power = batteryMode === VenusOS.Battery_Mode_Charging ? randomPower
 				: batteryMode === VenusOS.Battery_Mode_Discharging ? randomPower * -1
 				: 0 // Battery_Mode_Idle
