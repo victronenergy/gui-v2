@@ -17,11 +17,12 @@ CT.SpinBox {
 	id: root
 
 	property alias label: primaryLabel
-	property string secondaryText
+	property alias secondaryText: secondaryLabel.text
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
 	property int _originalStepSize
+	property alias suffix: suffixLabel.text
 
 	signal maxValueReached()
 	signal minValueReached()
@@ -45,29 +46,77 @@ CT.SpinBox {
 	}
 
 	contentItem: Item {
+
+		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
+		// so that it can call the valueFromText() function
+		readonly property alias text: primaryLabel.text
+
 		Column {
 			id: valueColumn
 
-			width: Math.max(primaryLabel.implicitWidth, secondaryLabel.implicitWidth)
+			width: Math.max(primaryTextInput.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
 
-			Label {
-				id: primaryLabel
+			Item  {
+				id: primaryTextInput
 
-				width: parent.width
-				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
-				font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
+				width: primaryRow.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
+				height: primaryRow.implicitHeight
+
+				anchors.horizontalCenter: parent.horizontalCenter
+
+				Rectangle {
+					anchors.fill: parent
+
+					visible: root.editable
+
+					color: "transparent"
+					border.color: Theme.color_blue
+					border.width: Theme.geometry_button_border_width
+					radius: Theme.geometry_button_radius
+				}
+
+				Row {
+					id: primaryRow
+
+					anchors.centerIn: parent
+
+					TextInput {
+						id: primaryLabel
+
+						text: root.textFromValue(root.value, root.locale)
+						color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
+						font.family: Global.fontFamily
+						font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
+						horizontalAlignment: Qt.AlignHCenter
+						verticalAlignment: Qt.AlignVCenter
+
+						selectedTextColor: Theme.color_white
+						selectionColor : Theme.color_blue
+
+						readOnly: !root.editable
+						selectByMouse: !readOnly
+						validator: root.validator
+						inputMethodHints: root.inputMethodHints
+					}
+
+					Label {
+						id: suffixLabel
+
+						visible: text.length
+						color: primaryLabel.color
+						font: primaryLabel.font
+						horizontalAlignment: primaryLabel.horizontalAlignment
+						verticalAlignment: primaryLabel.verticalAlignment
+					}
+
+				}
 			}
 
 			Label {
 				id: secondaryLabel
 
-				width: primaryLabel.width
 				height: text.length ? implicitHeight : 0
-				text: root.secondaryText
 				color: Theme.color_font_secondary
 				font.pixelSize: Theme.font_size_caption
 				horizontalAlignment: Qt.AlignHCenter
