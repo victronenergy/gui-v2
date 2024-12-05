@@ -191,7 +191,7 @@ SwipeViewPage {
 
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
-			readonly property var battery: Global.batteries.system
+			readonly property var battery: Global.system.battery
 
 			name: properties.name
 			icon.source: battery.icon

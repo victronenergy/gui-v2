@@ -24,7 +24,8 @@ QtObject {
 			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",
 			"/Dc/0/Voltage": 26.4,
 			"/Dc/0/Temperature": 23.3,
-			"/DeviceInstance": 0,
+			"/Dc/0/Power": 750,
+			"/DeviceInstance": 1,
 			"/Diagnostics/LastErrors/1/Error": 32,
 			"/Diagnostics/LastErrors/1/Time": 1710467492,
 			"/Diagnostics/LastErrors/2/Error": 32,
@@ -98,7 +99,9 @@ QtObject {
 			"/Settings/RestoreDefaults": 0,
 			"/Soc": 95.234,
 			"/SystemSwitch": 1,
-			"/TimeToGo": (24 * 60 * 60) + 190 * 60 // 1d 3h 10m
+			"/TimeToGo": (24 * 60 * 60) + 190 * 60, // 1d 3h 10m
+			"/Settings/HasSettings": 1,
+			"/Settings/Battery/PeukertExponent": 1.03999999,
 		}
 		for (var propName in props) {
 			Global.mockDataSimulator.setMockValue(battery.serviceUid + propName, props[propName])
@@ -115,12 +118,11 @@ QtObject {
 				id: dummyBatteryServiceName,
 				instance: dummyBattery.deviceInstance,
 				name: dummyBattery.name,
-				power: dummyBattery.power,
-				soc: dummyBattery.stateOfCharge,
-				state: dummyBattery.state,
-				temperature: dummyBattery.temperature,
-				timetogo: dummyBattery.timeToGo,
-				voltage: dummyBattery.voltage,
+				power: dummyBattery._power.value,
+				soc: dummyBattery._stateOfCharge.value,
+				temperature: dummyBattery._temperature.value,
+				timetogo: dummyBattery._timeToGo.value,
+				voltage: dummyBattery._voltage.value,
 			},
 			{
 				// Starter battery, which does not have an instance number
@@ -133,25 +135,45 @@ QtObject {
 		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
 	}
 
-	property Battery dummyBattery: Battery {
+	function updateSystemBattery(path, value) {
+		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + path, value)
+		root.updateBatteriesList()
+	}
+
+	readonly property Device dummyBattery: Device {
 		serviceUid: "mock/com.victronenergy.battery.ttyUSB1"
 
-		readonly property VeQuickItem hasSettings: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Settings/HasSettings"
-			Component.onCompleted: setValue(1)
+		// This is used as the system battery, so copy the values over when they change.
+		readonly property VeQuickItem _stateOfCharge: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Soc"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/Soc", value)
+		}
+		readonly property VeQuickItem _voltage: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Dc/0/Voltage"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/Voltage", value)
+		}
+		readonly property VeQuickItem _power: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Dc/0/Power"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/Power", value)
+		}
+		readonly property VeQuickItem _current: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Dc/0/Current"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/Current", value)
 		}
 
-		readonly property VeQuickItem peukertExponent: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Settings/Battery/PeukertExponent"
-			Component.onCompleted: setValue(1.03999999)
+		readonly property VeQuickItem _temperature: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/Dc/0/Temperature"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/Temperature", value)
+		}
+
+		readonly property VeQuickItem _timeToGo: VeQuickItem {
+			uid: dummyBattery.serviceUid + "/TimeToGo"
+			onValueChanged: root.updateSystemBattery("/Dc/Battery/TimeToGo", value)
 		}
 
 		Component.onCompleted: {
 			_deviceInstance.setValue(1)
 			root.initLynxBattery(dummyBattery)
-
-			Global.batteries.system = dummyBattery
-			Global.batteries.addBattery(dummyBattery)
 			root.updateBatteriesList()
 		}
 	}
@@ -179,7 +201,7 @@ QtObject {
 			if (!Global.mockDataSimulator.timersActive) {
 				return
 			}
-			var newSoc = Global.batteries.system.stateOfCharge + stepSize
+			var newSoc = dummyBattery._stateOfCharge.value + stepSize
 			if (newSoc >= 0 && newSoc <= 100) {
 				dummyBattery._stateOfCharge.setValue(newSoc)
 			} else if (newSoc > 100) {
@@ -187,7 +209,7 @@ QtObject {
 				stop()
 				chargeRestartTimer.start()
 			} else if (newSoc < 0) {
-				dummyBattery._stateOfCharge.setValue(0);
+				dummyBattery._stateOfCharge.setValue(0)
 				stop()
 				chargeRestartTimer.start()
 			}
@@ -197,8 +219,8 @@ QtObject {
 			const power = stepSize > 0 ? randomPower
 					: stepSize < 0 ? randomPower * -1
 					: 0
-			Global.batteries.system._power.setValue(power)
-			Global.batteries.system._current.setValue(power * 0.1)
+			dummyBattery._power.setValue(power)
+			dummyBattery._current.setValue(power * 0.1)
 			root.updateBatteriesList()
 		}
 	}

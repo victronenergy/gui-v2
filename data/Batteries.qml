@@ -13,8 +13,6 @@ QtObject {
 		modelId: "batteries"
 	}
 
-	property var system: SystemBattery {}
-
 	function addBattery(battery) {
 		model.addDevice(battery)
 	}
