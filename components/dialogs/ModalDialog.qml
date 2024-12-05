@@ -200,7 +200,7 @@ T.Dialog {
 			const currentDialogOffset = root.y - root.centeredY // 0 or negative
 			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
 
-			targetDialogY = customDialog.centeredY
+			targetDialogY = root.centeredY
 
 			if (inputItemBottomPos > vkbTopPos) {
 				targetDialogY += (vkbTopPos - inputItemBottomPos)
