@@ -54,41 +54,62 @@ CT.SpinBox {
 		Column {
 			id: valueColumn
 
-			width: Math.max(primaryRow.implicitWidth, secondaryLabel.implicitWidth)
+			width: Math.max(primaryTextInput.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
 
-			Row {
-				id: primaryRow
+			Item  {
+				id: primaryTextInput
+
+				width: primaryRow.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
+				height: primaryRow.implicitHeight
 
 				anchors.horizontalCenter: parent.horizontalCenter
 
-				TextInput {
-					id: primaryLabel
+				Rectangle {
+					anchors.fill: parent
 
-					text: root.textFromValue(root.value, root.locale)
-					color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
-					font.family: Global.fontFamily
-					font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
-					horizontalAlignment: Qt.AlignHCenter
-					verticalAlignment: Qt.AlignVCenter
+					visible: root.editable
 
-					selectedTextColor: Theme.color_white
-					selectionColor : Theme.color_blue
-
-					readOnly: !root.editable
-					selectByMouse: !readOnly
-					validator: root.validator
-					inputMethodHints: root.inputMethodHints
+					color: "transparent"
+					border.color: Theme.color_blue
+					border.width: Theme.geometry_button_border_width
+					radius: Theme.geometry_button_radius
 				}
 
-				Label {
-					id: suffixLabel
+				Row {
+					id: primaryRow
 
-					visible: text.length
-					color: primaryLabel.color
-					font: primaryLabel.font
-					horizontalAlignment: primaryLabel.horizontalAlignment
-					verticalAlignment: primaryLabel.verticalAlignment
+					anchors.centerIn: parent
+
+					TextInput {
+						id: primaryLabel
+
+						text: root.textFromValue(root.value, root.locale)
+						color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
+						font.family: Global.fontFamily
+						font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
+						horizontalAlignment: Qt.AlignHCenter
+						verticalAlignment: Qt.AlignVCenter
+
+						selectedTextColor: Theme.color_white
+						selectionColor : Theme.color_blue
+
+						readOnly: !root.editable
+						selectByMouse: !readOnly
+						validator: root.validator
+						inputMethodHints: root.inputMethodHints
+					}
+
+					Label {
+						id: suffixLabel
+
+						visible: text.length
+						color: primaryLabel.color
+						font: primaryLabel.font
+						horizontalAlignment: primaryLabel.horizontalAlignment
+						verticalAlignment: primaryLabel.verticalAlignment
+					}
+
 				}
 			}
 
