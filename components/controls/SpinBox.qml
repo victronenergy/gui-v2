@@ -72,6 +72,9 @@ CT.SpinBox {
 					horizontalAlignment: Qt.AlignHCenter
 					verticalAlignment: Qt.AlignVCenter
 
+					selectedTextColor: Theme.color_white
+					selectionColor : Theme.color_blue
+
 					readOnly: !root.editable
 					validator: root.validator
 					inputMethodHints: root.inputMethodHints

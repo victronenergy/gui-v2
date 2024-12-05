@@ -26,6 +26,9 @@ CT.TextField {
 	verticalAlignment: Text.AlignVCenter
 	color: Theme.color_font_primary
 
+	selectedTextColor: Theme.color_white
+	selectionColor : Theme.color_blue
+
 	background: Rectangle {
 		color: "transparent"
 		border.color: root.borderColor
