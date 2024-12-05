@@ -56,15 +56,20 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
+				editable: true
 				indicatorImplicitWidth: root.decimals > 0
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				textFromValue: function(value, locale) {
-					return Units.formatNumber(value / root._multiplier(), root.decimals) + root.suffix
+					return Units.formatNumber(value / root._multiplier(), root.decimals)
+				}
+				valueFromText: function(text, locale) {
+					return Number.fromLocaleString(locale, text) * root._multiplier()
 				}
 				from: Math.max(Global.int32Min, root.from * root._multiplier())
 				to: Math.min(Global.int32Max, root.to * root._multiplier())
 				stepSize: root.stepSize * root._multiplier()
+				suffix: root.suffix
 
 				onValueChanged: {
 					if (_initialized) {
@@ -77,6 +82,15 @@ ModalDialog {
 				Component.onCompleted: {
 					spinBox.value = Math.round(root.value * root._multiplier())
 					_initialized = true
+				}
+
+				validator: DoubleValidator {
+					// text editing needs validating in the non-multiplied range
+					// this stops you entering a value outside this range
+					bottom: Math.min(root.from, root.to)
+					top:  Math.max(root.from, root.to)
+					decimals: root.decimals
+					notation: DoubleValidator.StandardNotation
 				}
 			}
 
