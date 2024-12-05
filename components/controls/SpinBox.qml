@@ -76,6 +76,7 @@ CT.SpinBox {
 					selectionColor : Theme.color_blue
 
 					readOnly: !root.editable
+					selectByMouse: !readOnly
 					validator: root.validator
 					inputMethodHints: root.inputMethodHints
 				}
