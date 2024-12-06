@@ -10,7 +10,7 @@ AggregateDeviceModel {
 	id: aggregateModel
 
 	sourceModels: [
-		Global.batteries.model,
+		batteryModel,
 		Global.dcInputs.model,
 		Global.dcLoads.model,
 		Global.digitalInputs.model,
@@ -34,6 +34,11 @@ AggregateDeviceModel {
 		heatPumpDeviceModel
 
 	].concat(Global.tanks.allTankModels)
+
+	readonly property ServiceDeviceModel batteryModel: ServiceDeviceModel {
+		serviceType: "battery"
+		modelId: "battery"
+	}
 
 	readonly property ServiceDeviceModel gridDeviceModel: ServiceDeviceModel {
 		serviceType: "grid"
