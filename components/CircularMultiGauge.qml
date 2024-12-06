@@ -155,4 +155,45 @@ Item {
 			}
 		}
 	}
+
+	Item {
+		id: centerLabelColumn
+		anchors.centerIn: parent
+		width: Math.max(centerLabelIcon.width + centerLabel.width, centerQuantity.width)
+		height: centerLabelIcon.height + centerQuantity.height
+		visible: arcRepeater.count <= 3 && !isNaN(Global.batteries.system.stateOfCharge)
+
+		CP.ColorImage {
+			id: centerLabelIcon
+			anchors.right: centerLabel.left
+			color: Theme.color_font_primary
+			source: Global.batteries.system.icon
+		}
+		Label {
+			id: centerLabel
+			anchors {
+				// usually, center the label over the quantity, except when the quantity only has 1 digit - then take icon width into account.
+				horizontalCenterOffset: centerQuantity.valueText.length <= 1 ? centerLabelIcon.width/2 : 0
+				horizontalCenter: centerQuantity.horizontalCenter
+				verticalCenter: centerLabelIcon.verticalCenter
+			}
+			font.pixelSize: Theme.font_size_body2
+			color: Theme.color_font_primary
+			text: CommonWords.battery
+			width: Math.min(implicitWidth, centerQuantity.width)
+			elide: Text.ElideRight
+		}
+		QuantityLabel {
+			id: centerQuantity
+			anchors {
+				top: centerLabelIcon.bottom
+				horizontalCenter: parent.horizontalCenter
+			}
+			font.pixelSize: arcRepeater.count <= 2 ? Theme.font_briefPage_battery_percentage_pixelSize + 4 // larger font size if we have more space.
+				: valueText.length < 3 ? Theme.font_briefPage_battery_percentage_pixelSize // default font size.
+				: Theme.font_briefPage_battery_percentage_pixelSize - 8 // 5-inch "100%" fits with this font size with 3 gauges.
+			unit: VenusOS.Units_Percentage
+			value: Global.batteries.system.stateOfCharge
+		}
+	}
 }
