@@ -323,6 +323,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
+    components/listitems/ListEvChargerPositionRadioButtonGroup.qml
     components/listitems/ListRelayState.qml
     components/listitems/ListResetHistory.qml
     components/listitems/ListTemperatureRelay.qml
