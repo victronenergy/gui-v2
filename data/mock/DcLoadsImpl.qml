@@ -64,16 +64,16 @@ QtObject {
 	}
 
 	property Timer updateDcValues: Timer {
-		running: Global.mockDataSimulator.timersActive
-		interval: 1000
+		running: Global.mockDataSimulator.timersActive && !!(Global.allDevicesModel?.combinedDcLoadsModel)
+		interval: 500
 		repeat: true
-		triggeredOnStart: true
 
 		onTriggered: {
 			let totalPower = NaN
-			for (let i = 0; i < Global.dcLoads.model.count; ++i) {
-				const dcLoad = Global.dcLoads.model.deviceAt(i)
-				totalPower = Units.sumRealNumbers(totalPower, dcLoad.power)
+			for (let i = 0; i < Global.allDevicesModel.combinedDcLoadsModel.count; ++i) {
+				const dcLoad = Global.allDevicesModel.combinedDcLoadsModel.deviceAt(i)
+				const power = Global.mockDataSimulator.mockValue(dcLoad.serviceUid + "/Dc/0/Power")
+				totalPower = Units.sumRealNumbers(totalPower, power)
 			}
 
 			Global.mockDataSimulator.setMockValue("com.victronenergy.system/Dc/System/Power", totalPower)
@@ -83,7 +83,7 @@ QtObject {
 	}
 
 	property Component dcLoadComponent: Component {
-		DcLoad {
+		Device {
 			id: dcLoad
 
 			property string serviceType
