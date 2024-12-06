@@ -376,6 +376,14 @@ public:
 	};
 	Q_ENUM(BriefView_Unit)
 
+	enum BriefView_CenterValue_DisplayOption {
+		BriefView_CenterValue_NotDisplayed = 0,
+		BriefView_CenterValue_SingleGaugeOnly = 1,
+		BriefView_CenterValue_SingleOrDoubleGauge = 2,
+		BriefView_CenterValue_SingleDoubleOrTripleGauge = 3
+	};
+	Q_ENUM(BriefView_CenterValue_DisplayOption)
+
 	enum Tank_Type {
 		// These values align with tank types from dbus
 		// see: https://github.com/victronenergy/venus/wiki/dbus#tank-levels

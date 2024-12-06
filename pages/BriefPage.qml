@@ -193,8 +193,6 @@ SwipeViewPage {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
 			readonly property var battery: Global.system.battery
 
-			name: properties.name
-			icon.source: battery.icon
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
 			voltage: battery.voltage
 			current: battery.current
