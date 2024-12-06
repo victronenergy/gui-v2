@@ -30,24 +30,7 @@ DeviceModel {
 		}
 	}
 
-	readonly property Loader modelLoader: Loader {
-		sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? _mqttModelComponent
-			 : _dbusOrMockModelComponent
-	}
-
-	readonly property Component _dbusOrMockModelComponent: Component {
-		VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^%1/com\.victronenergy\.%2\.".arg(BackendConnection.uidPrefix()).arg(root.serviceType)
-			model: Global.dataServiceModel
-		}
-	}
-
-	readonly property Component _mqttModelComponent: Component {
-		VeQItemTableModel {
-			uids: [ "mqtt/" + root.serviceType ]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
+	readonly property ServiceModelLoader modelLoader: ServiceModelLoader {
+		serviceType: root.serviceType
 	}
 }

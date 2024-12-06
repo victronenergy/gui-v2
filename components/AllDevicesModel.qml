@@ -12,7 +12,7 @@ AggregateDeviceModel {
 	sourceModels: [
 		batteryDevices,
 		Global.dcInputs.model,
-		Global.dcLoads.model,
+		combinedDcLoadsModel,
 		digitalInputDevices,
 		Global.environmentInputs.model,
 		Global.evChargers.model,
@@ -38,6 +38,11 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel batteryDevices: ServiceDeviceModel {
 		serviceType: "battery"
 		modelId: "battery"
+	}
+
+	readonly property MultiServiceDeviceModel combinedDcLoadsModel: MultiServiceDeviceModel {
+		serviceTypes: ["dcload", "dcsystem", "dcdc"]
+		modelId: "combinedDcloads"
 	}
 
 	readonly property ServiceDeviceModel digitalInputDevices: ServiceDeviceModel {
