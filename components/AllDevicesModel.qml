@@ -10,77 +10,77 @@ AggregateDeviceModel {
 	id: aggregateModel
 
 	sourceModels: [
-		batteryModel,
+		batteryDevices,
 		Global.dcInputs.model,
 		Global.dcLoads.model,
-		digitalinputModel,
+		digitalInputDevices,
 		Global.environmentInputs.model,
 		Global.evChargers.model,
 		Global.inverterChargers.veBusDevices,
 		Global.inverterChargers.acSystemDevices,
 		Global.inverterChargers.inverterDevices,
 		Global.inverterChargers.chargerDevices,
-		meteoDeviceModel,
-		motorDriveDeviceModel,
-		pulseMeterDeviceModel,
+		meteoDevices,
+		motorDriveDevices,
+		pulseMeterDevices,
 		Global.pvInverters.model,
 		Global.solarChargers.model,
-		unsupportedDeviceModel,
+		unsupportedDevices,
 
 		// AC input models
-		gridDeviceModel,
-		gensetDeviceModel,
-		acLoadDeviceModel,
-		heatPumpDeviceModel
+		gridDevices,
+		gensetDevices,
+		acLoadDevices,
+		heatPumpDevices
 
 	].concat(Global.tanks.allTankModels)
 
-	readonly property ServiceDeviceModel batteryModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel batteryDevices: ServiceDeviceModel {
 		serviceType: "battery"
 		modelId: "battery"
 	}
 
-	readonly property ServiceDeviceModel digitalinputModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel digitalInputDevices: ServiceDeviceModel {
 		serviceType: "digitalinput"
 		modelId: "digitalinput"
 	}
 
-	readonly property ServiceDeviceModel gridDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel gridDevices: ServiceDeviceModel {
 		serviceType: "grid"
 		modelId: "grid"
 	}
 
-	readonly property ServiceDeviceModel gensetDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel gensetDevices: ServiceDeviceModel {
 		serviceType: "genset"
 		modelId: "genset"
 	}
 
-	readonly property ServiceDeviceModel acLoadDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel acLoadDevices: ServiceDeviceModel {
 		serviceType: "acload"
 		modelId: "acload"
 	}
 
-	readonly property ServiceDeviceModel heatPumpDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel heatPumpDevices: ServiceDeviceModel {
 		serviceType: "heatpump"
 		modelId: "heatpump"
 	}
 
-	readonly property ServiceDeviceModel meteoDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel meteoDevices: ServiceDeviceModel {
 		serviceType: "meteo"
 		modelId: "meteo"
 	}
 
-	readonly property ServiceDeviceModel motorDriveDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel motorDriveDevices: ServiceDeviceModel {
 		serviceType: "motordrive"
 		modelId: "motordrive"
 	}
 
-	readonly property ServiceDeviceModel pulseMeterDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel pulseMeterDevices: ServiceDeviceModel {
 		serviceType: "pulsemeter"
 		modelId: "pulsemeter"
 	}
 
-	readonly property ServiceDeviceModel unsupportedDeviceModel: ServiceDeviceModel {
+	readonly property ServiceDeviceModel unsupportedDevices: ServiceDeviceModel {
 		serviceType: "unsupported"
 		modelId: "unsupported"
 	}
