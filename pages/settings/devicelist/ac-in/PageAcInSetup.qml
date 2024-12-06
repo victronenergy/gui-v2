@@ -94,6 +94,11 @@ Page {
 				allowed: role.currentValue === "pvinverter"
 			}
 
+			ListEvChargerPositionRadioButtonGroup {
+				dataItem.uid: root.bindPrefix + "/Position"
+				allowed: role.currentValue === "evcharger"
+			}
+
 			/* EM24 settings */
 
 			ListRadioButtonGroup {

@@ -14,20 +14,7 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListRadioButtonGroup {
-				//: EVCS AC input/output position
-				//% "Position"
-				text: qsTrId("evcs_ac_position")
-				optionModel: [
-					{
-						display: CommonWords.acInput(),
-						value: VenusOS.Evcs_Position_ACInput
-					},
-					{
-						display: CommonWords.ac_output,
-						value: VenusOS.Evcs_Position_ACOutput
-					}
-				]
+			ListEvChargerPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
 			}
 
