@@ -24,15 +24,15 @@ OverviewWidget {
 	title: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
 	type: VenusOS.OverviewWidget_Type_DcLoads
-	enabled: Global.dcLoads.model.count > 0
+	enabled: Global.allDevicesModel.combinedDcLoadsModel.count > 0
 
 	quantityLabel.dataObject: Global.system.dc
 
 	onClicked: {
-		if (Global.dcLoads.model.count > 1) {
+		if (Global.allDevicesModel.combinedDcLoadsModel.count > 1) {
 			Global.pageManager.pushPage(deviceListPageComponent, { "title": root.title })
 		} else {
-			root._showSettingsPage(Global.dcLoads.model.firstObject)
+			root._showSettingsPage(Global.allDevicesModel.combinedDcLoadsModel.firstObject)
 		}
 	}
 
@@ -41,7 +41,7 @@ OverviewWidget {
 
 		Page {
 			GradientListView {
-				model: Global.dcLoads.model
+				model: Global.allDevicesModel.combinedDcLoadsModel
 
 				delegate: ListTextGroup {
 					id: deviceDelegate
@@ -50,10 +50,15 @@ OverviewWidget {
 
 					text: device.name
 					textModel: [
-						Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, device.voltage),
-						Units.getCombinedDisplayText(VenusOS.Units_Amp, device.current),
-						Units.getCombinedDisplayText(VenusOS.Units_Watt, device.power),
+						Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, dcDevice.voltage),
+						Units.getCombinedDisplayText(VenusOS.Units_Amp, dcDevice.current),
+						Units.getCombinedDisplayText(VenusOS.Units_Watt, dcDevice.power),
 					]
+
+					DcDevice {
+						id: dcDevice
+						serviceUid: deviceDelegate.device.serviceUid
+					}
 
 					ListPressArea {
 						id: delegatePressArea
