@@ -52,7 +52,7 @@ QtVirtualKeyboard.InputPanel {
 
 	states: State {
 		name: "visible"
-		when: Qt.inputMethod.visible
+		when: Qt.inputMethod.visible && !!root.focusedFlickable
 
 		PropertyChanges {
 			target: root.focusedFlickable
