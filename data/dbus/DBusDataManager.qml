@@ -10,7 +10,6 @@ import Victron.Dbus
 QtObject {
 	id: root
 
-	property var batteries: BatteriesImpl { }
 	property var dcInputs: DcInputsImpl { }
 	property var dcLoads: DcLoadsImpl { }
 	property var digitalInputs: DigitalInputsImpl {}
