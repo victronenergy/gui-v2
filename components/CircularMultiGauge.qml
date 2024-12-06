@@ -155,4 +155,10 @@ Item {
 			}
 		}
 	}
+
+	CenterValueDisplay {
+		anchors.centerIn: parent
+		maximumWidth: gauges.width - (gaugeCount*gauges._stepSize)
+		gaugeCount: arcRepeater.count
+	}
 }

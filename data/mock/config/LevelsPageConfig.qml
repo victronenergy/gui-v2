@@ -164,6 +164,11 @@ QtObject {
 				{ type: VenusOS.Tank_Type_FreshWater, level: 75, capacity: 20 },
 			]
 		},
+		{
+			name: "No tanks",
+			tanks: [
+			]
+		},
 	]
 
 	property var environmentConfigs: [

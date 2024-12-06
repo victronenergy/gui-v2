@@ -5,6 +5,7 @@
     "geometry_page_content_horizontalMargin": 40,
     "geometry_page_content_verticalMargin": 40,
 
+    "geometry_icon_size_small": 24,
     "geometry_icon_size_medium": 32,
 
     "geometry_flickable_maximumFlickVelocity": 2500,
