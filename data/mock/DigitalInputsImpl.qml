@@ -23,7 +23,7 @@ QtObject {
 	}
 
 	property Component inputComponent: Component {
-		DigitalInput {
+		Device {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Digital input %1".arg(deviceInstance))

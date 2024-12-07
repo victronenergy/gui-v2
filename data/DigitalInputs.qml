@@ -9,10 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property DeviceModel model: DeviceModel {
-		modelId: "digitalInputs"
-	}
-
 	function inputTypeToText(type) {
 		switch (type) {
 		case VenusOS.DigitalInput_Type_Disabled:

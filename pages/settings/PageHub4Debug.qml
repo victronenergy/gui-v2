@@ -9,10 +9,15 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string batteryService: Global.batteries.model.firstObject ? Global.batteries.model.firstObject.serviceUid : null
+	readonly property string batteryUid: batteryModel.firstObject?.serviceUid ?? ""
 
 	//% "Grid Setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
+
+	ServiceDeviceModel {
+		id: batteryModel
+		serviceType: "battery"
+	}
 
 	GradientListView {
 		model: ObjectModel {
@@ -58,12 +63,12 @@ Page {
 
 				VeQuickItem {
 					id: batteryCurrent
-					uid: root.batteryService + "/Dc/0/Current"
+					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Current" : ""
 				}
 
 				VeQuickItem {
 					id: batteryVoltage
-					uid: root.batteryService + "/Dc/0/Voltage"
+					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Voltage" : ""
 				}
 			}
 
@@ -79,12 +84,12 @@ Page {
 
 				VeQuickItem {
 					id: batteryChargeCurrent
-					uid: root.batteryService + "/Info/MaxChargeCurrent"
+					uid: root.batteryUid ? root.batteryUid + "/Info/MaxChargeCurrent" : ""
 				}
 
 				VeQuickItem {
 					id: batteryDischargeCurrent
-					uid: root.batteryService + "/Info/MaxDischargeCurrent"
+					uid: root.batteryUid ? root.batteryUid + "/Info/MaxDischargeCurrent" : ""
 				}
 			}
 

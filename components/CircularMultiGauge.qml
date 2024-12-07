@@ -55,7 +55,7 @@ Item {
 						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
-						shineAnimationEnabled: Global.batteries.system.mode === VenusOS.Battery_Mode_Charging
+						shineAnimationEnabled: Global.system.battery.mode === VenusOS.Battery_Mode_Charging
 					}
 				}
 

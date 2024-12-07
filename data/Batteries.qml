@@ -9,24 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property DeviceModel model: DeviceModel {
-		modelId: "batteries"
-	}
-
-	property var system: SystemBattery {}
-
-	function addBattery(battery) {
-		model.addDevice(battery)
-	}
-
-	function removeBattery(battery) {
-		model.removeDevice(battery.serviceUid)
-	}
-
-	function reset() {
-		model.clear()
-	}
-
 	function timeToGoText(timeToGo, format) {
 		if ((timeToGo || 0) <= 0) {
 			return ""

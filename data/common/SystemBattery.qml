@@ -7,8 +7,9 @@ import QtQuick
 import Victron.VenusOS
 
 QtObject {
-	id: battery
+	id: root
 
+	required property string systemServiceUid
 	readonly property real stateOfCharge: _stateOfCharge.isValid ? _stateOfCharge.value : NaN
 	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
 	readonly property real power: _power.isValid ? _power.value : NaN
@@ -19,26 +20,26 @@ QtObject {
 	readonly property int mode: !!Global.batteries ? Global.batteries.batteryMode(power) : -1
 
 	readonly property VeQuickItem _stateOfCharge: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+		uid: root.systemServiceUid + "/Dc/Battery/Soc"
 	}
 
 	readonly property VeQuickItem _voltage: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/Voltage"
+		uid: root.systemServiceUid + "/Dc/Battery/Voltage"
 	}
 
 	readonly property VeQuickItem _power: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/Power"
+		uid: root.systemServiceUid + "/Dc/Battery/Power"
 	}
 
 	readonly property VeQuickItem _current: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/Current"
+		uid: root.systemServiceUid + "/Dc/Battery/Current"
 	}
 
 	readonly property VeQuickItem _temperature: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/Temperature"
+		uid: root.systemServiceUid + "/Dc/Battery/Temperature"
 	}
 
 	readonly property VeQuickItem _timeToGo: VeQuickItem {
-		uid: Global.system.serviceUid + "/Dc/Battery/TimeToGo"
+		uid: root.systemServiceUid + "/Dc/Battery/TimeToGo"
 	}
 }

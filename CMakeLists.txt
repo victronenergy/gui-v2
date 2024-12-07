@@ -219,6 +219,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
+    components/MultiServiceDeviceModel.qml
     components/NavBar.qml
     components/NavButton.qml
     components/NotificationDelegate.qml
@@ -238,6 +239,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
+    components/ServiceModelLoader.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
     components/ShinyProgressArc.qml
@@ -380,7 +382,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/Batteries.qml
     data/DataManager.qml
     data/DcInputs.qml
-    data/DcLoads.qml
     data/DigitalInputs.qml
     data/EnvironmentInputs.qml
     data/Ess.qml
@@ -403,11 +404,8 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
     data/common/AcInput.qml
-    data/common/Battery.qml
     data/common/DcDevice.qml
     data/common/DcInput.qml
-    data/common/DcLoad.qml
-    data/common/DigitalInput.qml
     data/common/DeviceModel.qml
     data/common/EnvironmentInput.qml
     data/common/EssData.qml
@@ -783,11 +781,8 @@ endif()
 
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
-    data/dbus/BatteriesImpl.qml
     data/dbus/DBusDataManager.qml
     data/dbus/DcInputsImpl.qml
-    data/dbus/DcLoadsImpl.qml
-    data/dbus/DigitalInputsImpl.qml
     data/dbus/EnvironmentInputsImpl.qml
     data/dbus/EssImpl.qml
     data/dbus/EvChargersImpl.qml
@@ -905,10 +900,7 @@ endif()
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
-    data/mqtt/BatteriesImpl.qml
     data/mqtt/DcInputsImpl.qml
-    data/mqtt/DcLoadsImpl.qml
-    data/mqtt/DigitalInputsImpl.qml
     data/mqtt/EnvironmentInputsImpl.qml
     data/mqtt/EssImpl.qml
     data/mqtt/EvChargersImpl.qml

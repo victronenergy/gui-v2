@@ -16,7 +16,6 @@ Item {
 			&& !!Global.acInputs
 			&& !!Global.batteries
 			&& !!Global.dcInputs
-			&& !!Global.dcLoads
 			&& !!Global.digitalInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
@@ -96,7 +95,6 @@ Item {
 	AcInputs {}
 	Batteries {}
 	DcInputs {}
-	DcLoads {}
 	DigitalInputs {}
 	EnvironmentInputs {}
 	Ess {}
