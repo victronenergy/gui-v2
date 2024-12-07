@@ -379,7 +379,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/WindWidget.qml
 
     data/AcInputs.qml
-    data/Batteries.qml
     data/DataManager.qml
     data/DcInputs.qml
     data/EnvironmentInputs.qml

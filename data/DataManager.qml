@@ -14,7 +14,6 @@ Item {
 
 	readonly property bool _dataObjectsReady: !!Global.acInputs
 			&& !!Global.acInputs
-			&& !!Global.batteries
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
@@ -92,7 +91,6 @@ Item {
 
 	// Global data types
 	AcInputs {}
-	Batteries {}
 	DcInputs {}
 	EnvironmentInputs {}
 	Ess {}

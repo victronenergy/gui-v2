@@ -104,10 +104,10 @@ Page {
 						color: Theme.color_listItem_secondaryText
 						visible: !isNaN(batteryDelegate.device.power)
 						text: {
-							const modeText = Global.batteries.modeToText(batteryDelegate.device.mode)
+							const modeText = VenusOS.battery_modeToText(batteryDelegate.device.mode)
 							if (batteryDelegate.device.mode === VenusOS.Battery_Mode_Discharging
 									&& batteryDelegate.device.timetogo > 0) {
-								return modeText + " - " + Global.batteries.timeToGoText(batteryDelegate.device.timetogo, VenusOS.Battery_TimeToGo_LongFormat)
+								return modeText + " - " + Utils.formatBatteryTimeToGo(batteryDelegate.device.timetogo, VenusOS.Battery_TimeToGo_LongFormat)
 							} else {
 								return modeText
 							}
@@ -231,7 +231,7 @@ Page {
 		property real temperature: NaN
 		property int timetogo: 0
 		property real voltage: NaN
-		readonly property int mode: Global.batteries.batteryMode(power)
+		readonly property int mode: VenusOS.battery_modeFromPower(power)
 
 		name: customName
 	}

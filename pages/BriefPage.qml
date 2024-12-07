@@ -199,7 +199,7 @@ SwipeViewPage {
 			voltage: battery.voltage
 			current: battery.current
 			status: Theme.getValueStatus(value, properties.valueType)
-			caption: Global.batteries.timeToGoText(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
+			caption: Utils.formatBatteryTimeToGo(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
 		}
