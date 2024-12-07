@@ -135,6 +135,16 @@ function formatGeneratorRuntime(seconds) {
 			: formatAsHHMM(seconds)
 }
 
+function formatBatteryTimeToGo(seconds) {
+	if (seconds == 0) {
+		return ""
+	}
+	const text = secondsToString(seconds)
+	//: %1 = time remaining, e.g. '3h 2m'
+	//% "%1 to go"
+	return qsTrId("utils_format_time_to_go").arg(text)
+}
+
 function reactToSignalOnce(sig, slot) {
 	var f = function() {
 		slot.apply(this, arguments)

@@ -213,6 +213,7 @@ QtObject {
 				stop()
 				chargeRestartTimer.start()
 			}
+			dummyBattery._timeToGo.setValue(60 * 60 * 3 * (newSoc / 100))
 
 			// Positive power when battery is charging, negative power when battery is discharging
 			const randomPower = Math.round(100 + (Math.random() * 300))

@@ -166,14 +166,14 @@ OverviewWidget {
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
 			Label {
-				text: Global.batteries.modeToText(batteryData.mode)
+				text: VenusOS.battery_modeToText(batteryData.mode)
 				font.pixelSize: Theme.font_size_body1
 				width: parent.width
 				elide: Text.ElideRight
 				color: Theme.color_font_secondary
 			}
 			Label {
-				text: Global.batteries.timeToGoText(Global.system.battery.timeToGo, VenusOS.Battery_TimeToGo_ShortFormat)
+				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
 				color: Theme.color_font_primary
 				width: parent.width
 				elide: Text.ElideRight

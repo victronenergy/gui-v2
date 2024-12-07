@@ -222,12 +222,6 @@ public:
 	};
 	Q_ENUM(Battery_State)
 
-	enum Battery_TimeToGo_Format {
-		Battery_TimeToGo_ShortFormat,
-		Battery_TimeToGo_LongFormat
-	};
-	Q_ENUM(Battery_TimeToGo_Format)
-
 	enum Battery_Balancer_Status {
 		Battery_Balancer_Unknown = 0,
 		Battery_Balancer_Balanced,
@@ -735,6 +729,9 @@ public:
 		StartPage_Type_BatteryList
 	};
 	Q_ENUM(StartPage_Type)
+
+	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
+	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 
 	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
 	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;

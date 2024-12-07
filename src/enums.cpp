@@ -17,6 +17,38 @@ Enums::~Enums()
 {
 }
 
+QString Enums::battery_modeToText(Battery_Mode mode) const
+{
+	switch (mode) {
+	case Battery_Mode_Idle:
+		//: Battery mode
+		//% "Idle"
+		return qtTrId("battery_mode_idle");
+	case Battery_Mode_Charging:
+		//: Battery mode
+		//% "Charging"
+		return qtTrId("battery_mode_charging");
+	case Battery_Mode_Discharging:
+		//: Battery mode
+		//% "Discharging"
+		return qtTrId("battery_mode_discharging");
+	default:
+		return QString();
+	}
+}
+
+Enums::Battery_Mode Enums::battery_modeFromPower(qreal power) const
+{
+	if (qIsNaN(power) || power == 0) {
+		return Battery_Mode_Idle;
+	} else if (power > 0) {
+		return Battery_Mode_Charging;
+	} else {
+		return Battery_Mode_Discharging;
+	}
+}
+
+
 QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 {
 	switch (type) {
