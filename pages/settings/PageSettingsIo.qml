@@ -79,7 +79,7 @@ Page {
 							VenusOS.DigitalInput_Type_CO2Alarm,
 							VenusOS.DigitalInput_Type_Generator,
 							VenusOS.DigitalInput_Type_TouchInputControl
-						].map(function(v) { return { value: v, display: Global.digitalInputs.inputTypeToText(v)} } )
+						].map(function(v) { return { value: v, display: VenusOS.digitalInput_typeToText(v)} } )
 
 						GradientListView {
 							model: digitalModel

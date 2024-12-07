@@ -208,7 +208,7 @@ exported power v  0.4 |   /
 
 	BriefSidePanelWidget {
 		title: Global.dcInputs.model.count === 1
-				? Global.dcInputs.inputTypeToText(Global.dcInputs.model.firstObject.inputType)
+				? VenusOS.digitalInput_typeToText(Global.dcInputs.model.firstObject.inputType)
 				  //% "DC input"
 				: qsTrId("brief_dc_input")
 		icon.source: root.dcInputIconSource

@@ -22,7 +22,7 @@ ObjectModel {
 	}
 
 	ListDcOutputQuantityGroup {
-		text: Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
+		text: VenusOS.digitalInput_typeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
 		bindPrefix: root.bindPrefix
 	}
 

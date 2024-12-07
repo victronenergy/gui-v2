@@ -735,6 +735,9 @@ public:
 		StartPage_Type_BatteryList
 	};
 	Q_ENUM(StartPage_Type)
+
+	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
+	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;
 };
 
 }
