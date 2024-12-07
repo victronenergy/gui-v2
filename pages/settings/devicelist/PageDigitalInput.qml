@@ -24,7 +24,7 @@ Page {
 			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.bindPrefix + "/State"
-				secondaryText: Global.digitalInputs.inputStateToText(dataItem.value)
+				secondaryText: VenusOS.digitalInput_stateToText(dataItem.value)
 			}
 
 			ListNavigation {

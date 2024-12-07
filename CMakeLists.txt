@@ -382,7 +382,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/Batteries.qml
     data/DataManager.qml
     data/DcInputs.qml
-    data/DigitalInputs.qml
     data/EnvironmentInputs.qml
     data/Ess.qml
     data/EvChargers.qml

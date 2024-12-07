@@ -9,8 +9,8 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	text: Global.digitalInputs.inputTypeToText(type.value)
-	secondaryText: Global.digitalInputs.inputStateToText(state.value)
+	text: VenusOS.digitalInput_typeToText(type.value)
+	secondaryText: VenusOS.digitalInput_stateToText(state.value)
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageDigitalInput.qml",

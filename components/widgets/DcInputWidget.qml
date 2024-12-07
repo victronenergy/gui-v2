@@ -25,7 +25,7 @@ OverviewWidget {
 	}
 
 	title: !inputs.firstObject ? ""
-		   : Global.dcInputs.inputTypeToText(Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode))
+		   : VenusOS.digitalInput_typeToText(Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode))
 	quantityLabel.dataObject: QtObject {
 		property real power: NaN
 		property real current: NaN
