@@ -36,7 +36,7 @@ ObjectModel {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
 		allowed: defaultAllowed && dataItem.isValid
-		secondaryText: Global.pvInverters.statusCodeToText(dataItem.value)
+		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
 	}
 
 	ListAcInError {
