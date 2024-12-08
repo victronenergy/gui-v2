@@ -735,6 +735,8 @@ public:
 
 	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
 	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;
+
+	Q_INVOKABLE QString pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) const;
 };
 
 }

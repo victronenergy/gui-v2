@@ -146,5 +146,50 @@ QString Enums::digitalInput_stateToText(DigitalInput_State state) const
 	}
 }
 
+QString Enums::pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) const
+{
+	switch (statusCode) {
+	case PvInverter_StatusCode_Startup0:
+	case PvInverter_StatusCode_Startup1:
+	case PvInverter_StatusCode_Startup2:
+	case PvInverter_StatusCode_Startup3:
+	case PvInverter_StatusCode_Startup4:
+	case PvInverter_StatusCode_Startup5:
+	case PvInverter_StatusCode_Startup6:
+		//: PV inverter status code
+		//: Status = "start up". %1 = the startup status number
+		//% "Startup (%1)"
+		return qtTrId("pvinverter_statusCode_startup").arg(statusCode);
+	case PvInverter_StatusCode_Running:
+		//: PV inverter status code
+		//: "Running"
+		return qtTrId("pvinverter_statusCode_running");
+	case PvInverter_StatusCode_Standby:
+		//: PV inverter status code
+		//: "Standby"
+		return qtTrId("pvinverter_statusCode_standby");
+	case PvInverter_StatusCode_BootLoading:
+		//: PV inverter status code
+		//: "Standby"
+		return qtTrId("pvinverter_statusCode_standby");
+		//% "Boot loading"
+		return qtTrId("pvinverters_statusCode_boot_loading");
+	case PvInverter_StatusCode_Error:
+		//: PV inverter status code
+		//: "Error"
+		return qtTrId("pvinverter_statusCode_error");
+	case PvInverter_StatusCode_RunningMPPT:
+		//: PV inverter status code
+		//% "Running (MPPT)"
+		return qtTrId("pvinverter_statusCode_running_mppt");
+	case PvInverter_StatusCode_RunningThrottled:
+		//: PV inverter status code
+		//% "Running (Throttled)"
+		return qtTrId("pvinverter_running_throttled");
+	default:
+		return QString();
+	}
+}
+
 }
 }

@@ -24,7 +24,7 @@ Page {
 					model: [
 						{
 							title: root.pvInverter.statusCode >= 0 ? CommonWords.status : "",
-							text: Global.pvInverters.statusCodeToText(root.pvInverter.statusCode),
+							text: VenusOS.pvInverter_statusCodeToText(root.pvInverter.statusCode),
 							unit: VenusOS.Units_None,
 						},
 						{
