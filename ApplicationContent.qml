@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
 Item {
@@ -150,10 +151,13 @@ Item {
 		id: keyboardHandlerLoader
 
 		asynchronous: true
-		active: Global.isGxDevice
-			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
-		source: Global.isGxDevice
-				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
-				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
+		source: "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
+		// active: Global.isGxDevice
+		//     || (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
+		// source: Global.isGxDevice
+		//         ? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
+		//         : "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
+		parent: QtQuickControls.Overlay.overlay
+		z: 1
 	}
 }

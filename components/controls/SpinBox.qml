@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
+import QtQuick.Layouts
 import Victron.VenusOS
 
 // SpinBox uses a binding to increase 'stepSize' when the user holds a button down for a while. This allows the spin box to quickly change arbitrarily large values.
@@ -17,11 +18,12 @@ CT.SpinBox {
 	id: root
 
 	property alias label: primaryLabel
-	property string secondaryText
+	property alias secondaryText: secondaryLabel.text
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property int _scalingFactor: 1
 	property int _originalStepSize
+	property alias suffix: suffixLabel.text
 
 	signal maxValueReached()
 	signal minValueReached()
@@ -42,32 +44,82 @@ CT.SpinBox {
 		} else if (value === from) {
 			root.minValueReached()
 		}
+		// close the Virtual Keyboard on Return/Enter pressed
+		root.focus = false
 	}
 
 	contentItem: Item {
+
+		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
+		// so that it can call the valueFromText() function
+		readonly property alias text: primaryLabel.text
+
 		Column {
 			id: valueColumn
 
-			width: Math.max(primaryLabel.implicitWidth, secondaryLabel.implicitWidth)
+			width: Math.max(primaryTextInput.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
 
-			Label {
-				id: primaryLabel
+			Item  {
+				id: primaryTextInput
 
-				width: parent.width
-				text: root.textFromValue(root.value, root.locale)
-				color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
-				font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
+				width: primaryRowLayout.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
+				height: primaryRowLayout.height
+
+				anchors.horizontalCenter: parent.horizontalCenter
+
+				Rectangle {
+					anchors.fill: parent
+
+					visible: root.editable
+
+					color: "transparent"
+					border.color: Theme.color_blue
+					border.width: Theme.geometry_button_border_width
+					radius: Theme.geometry_button_radius
+				}
+
+				RowLayout {
+					id: primaryRowLayout
+
+					anchors.centerIn: parent
+
+					TextInput {
+						id: primaryLabel
+
+						text: root.textFromValue(root.value, root.locale)
+						color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
+						font.family: Global.fontFamily
+						font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
+						horizontalAlignment: Qt.AlignHCenter
+						verticalAlignment: Qt.AlignVCenter
+
+						selectedTextColor: Theme.color_white
+						selectionColor : Theme.color_blue
+
+						readOnly: !root.editable
+						selectByMouse: !readOnly
+						validator: root.validator
+						inputMethodHints: root.inputMethodHints
+					}
+
+					Label {
+						id: suffixLabel
+
+						visible: text.length
+						color: primaryLabel.color
+						font: primaryLabel.font
+						horizontalAlignment: primaryLabel.horizontalAlignment
+						verticalAlignment: primaryLabel.verticalAlignment
+					}
+
+				}
 			}
 
 			Label {
 				id: secondaryLabel
 
-				width: primaryLabel.width
 				height: text.length ? implicitHeight : 0
-				text: root.secondaryText
 				color: Theme.color_font_secondary
 				font.pixelSize: Theme.font_size_caption
 				horizontalAlignment: Qt.AlignHCenter
@@ -114,6 +166,24 @@ CT.SpinBox {
 			source: 'qrc:/images/icon_minus.svg'
 			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
 		}
+	}
+
+	validator: DoubleValidator {
+		locale: root.locale.name
+		bottom: Math.min(root.from, root.to)
+		top:  Math.max(root.from, root.to)
+		notation: DoubleValidator.StandardNotation
+	}
+
+	textFromValue: function(value, locale) {
+		return Units.formatNumber(value)
+	}
+	valueFromText: function(text, locale) {
+		// close the Virtual Keyboard on Return/Enter pressed
+		// even if the value hasn't actually changed e.g. in the case
+		// the value is about to be set out of range.
+		root.focus = false
+		return Number.fromLocaleString(locale, text)
 	}
 
 	Timer {
