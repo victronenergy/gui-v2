@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
+import QtQuick.Layouts
 import Victron.VenusOS
 
 // SpinBox uses a binding to increase 'stepSize' when the user holds a button down for a while. This allows the spin box to quickly change arbitrarily large values.
@@ -62,8 +63,8 @@ CT.SpinBox {
 			Item  {
 				id: primaryTextInput
 
-				width: primaryRow.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
-				height: primaryRow.implicitHeight
+				width: primaryRowLayout.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
+				height: primaryRowLayout.height
 
 				anchors.horizontalCenter: parent.horizontalCenter
 
@@ -78,8 +79,8 @@ CT.SpinBox {
 					radius: Theme.geometry_button_radius
 				}
 
-				Row {
-					id: primaryRow
+				RowLayout {
+					id: primaryRowLayout
 
 					anchors.centerIn: parent
 
