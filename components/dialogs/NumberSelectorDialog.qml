@@ -87,6 +87,7 @@ ModalDialog {
 				validator: DoubleValidator {
 					// text editing needs validating in the non-multiplied range
 					// this stops you entering a value outside this range
+					locale: root.locale.name
 					bottom: Math.min(root.from, root.to)
 					top:  Math.max(root.from, root.to)
 					decimals: root.decimals

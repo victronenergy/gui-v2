@@ -167,6 +167,13 @@ CT.SpinBox {
 		}
 	}
 
+	validator: DoubleValidator {
+		locale: root.locale.name
+		bottom: Math.min(root.from, root.to)
+		top:  Math.max(root.from, root.to)
+		notation: DoubleValidator.StandardNotation
+	}
+
 	Timer {
 		id: pressTimer
 
