@@ -43,6 +43,8 @@ CT.SpinBox {
 		} else if (value === from) {
 			root.minValueReached()
 		}
+		// close the Virtual Keyboard on Enter pressed
+		root.focus = false
 	}
 
 	contentItem: Item {
