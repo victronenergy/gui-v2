@@ -70,8 +70,8 @@ QtObject {
 
 		onTriggered: {
 			let totalPower = NaN
-			for (let i = 0; i < Global.allDevicesModel.combinedDcLoadsModel.count; ++i) {
-				const dcLoad = Global.allDevicesModel.combinedDcLoadsModel.deviceAt(i)
+			for (let i = 0; i < Global.allDevicesModel.combinedDcLoadDevices.count; ++i) {
+				const dcLoad = Global.allDevicesModel.combinedDcLoadDevices.deviceAt(i)
 				const power = Global.mockDataSimulator.mockValue(dcLoad.serviceUid + "/Dc/0/Power")
 				totalPower = Units.sumRealNumbers(totalPower, power)
 			}
