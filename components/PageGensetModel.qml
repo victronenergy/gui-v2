@@ -82,10 +82,13 @@ ObjectModel {
 	ListText {
 		//% "Control status"
 		text: qsTrId("ac-in-genset_auto_control_status")
-		secondaryText: activeCondition.isValid ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value) : "--"
+		secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
+						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
+						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
 
 		VeQuickItem {
 			id: activeCondition
+			readonly property bool isAutoStarted: isValid && Global.generators.isAutoStarted(value)
 			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
 		}
 

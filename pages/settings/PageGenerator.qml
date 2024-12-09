@@ -79,9 +79,9 @@ Page {
 
 			text: CommonWords.state
 			allowed: root.startStopBindPrefix === root.generator0ServiceUid
-			secondaryText: activeCondition.isAutoStarted
+			secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
 						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
-						   : Global.generators.stateText(generatorState.value)
+						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
 
 			VeQuickItem {
 				id: activeCondition
