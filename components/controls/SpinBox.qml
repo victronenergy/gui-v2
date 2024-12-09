@@ -43,7 +43,7 @@ CT.SpinBox {
 		} else if (value === from) {
 			root.minValueReached()
 		}
-		// close the Virtual Keyboard on Enter pressed
+		// close the Virtual Keyboard on Return/Enter pressed
 		root.focus = false
 	}
 
@@ -172,6 +172,17 @@ CT.SpinBox {
 		bottom: Math.min(root.from, root.to)
 		top:  Math.max(root.from, root.to)
 		notation: DoubleValidator.StandardNotation
+	}
+
+	textFromValue: function(value, locale) {
+		return Units.formatNumber(value)
+	}
+	valueFromText: function(text, locale) {
+		// close the Virtual Keyboard on Return/Enter pressed
+		// even if the value hasn't actually changed e.g. in the case
+		// the value is about to be set out of range.
+		root.focus = false
+		return Number.fromLocaleString(locale, text)
 	}
 
 	Timer {

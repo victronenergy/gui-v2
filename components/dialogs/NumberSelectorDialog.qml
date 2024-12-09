@@ -64,6 +64,10 @@ ModalDialog {
 					return Units.formatNumber(value / root._multiplier(), root.decimals)
 				}
 				valueFromText: function(text, locale) {
+					// close the Virtual Keyboard on Return/Enter pressed
+					// even if the value hasn't actually changed e.g. in the case
+					// the value is about to be set out of range.
+					spinBox.focus = false
 					return Number.fromLocaleString(locale, text) * root._multiplier()
 				}
 				from: Math.max(Global.int32Min, root.from * root._multiplier())
