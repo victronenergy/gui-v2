@@ -191,5 +191,37 @@ QString Enums::pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) con
 	}
 }
 
+QString Enums::solarCharger_stateToText(SolarCharger_State state) const
+{
+	switch (state) {
+	case SolarCharger_State_Off:
+		//% "Off"
+		return qtTrId("solarchargers_state_off");
+	case SolarCharger_State_Fault:
+		//% "Fault"
+		return qtTrId("solarchargers_state_fault");
+	case SolarCharger_State_Bulk:
+		//% "Bulk"
+		return qtTrId("solarchargers_state_bulk");
+	case SolarCharger_State_Absorption:
+		//% "Absorption"
+		return qtTrId("solarchargers_state_absorption");
+	case SolarCharger_State_Float:
+		//% "Float"
+		return qtTrId("solarchargers_state_float");
+	case SolarCharger_State_Storage:
+		//% "Storage"
+		return qtTrId("solarchargers_state_storage");
+	case SolarCharger_State_Equalize:
+		//% "Equalize"
+		return qtTrId("solarchargers_state_equalize");
+	case SolarCharger_State_ExternalControl:
+		//% "External control"
+		return qtTrId("solarchargers_state_external control");
+	default:
+		return QString();
+	}
+}
+
 }
 }
