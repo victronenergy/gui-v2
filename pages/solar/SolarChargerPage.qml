@@ -26,7 +26,7 @@ Page {
 					model: [
 						{
 							title: CommonWords.state,
-							text: Global.solarChargers.chargerStateToText(root.solarCharger.state),
+							text: VenusOS.solarCharger_stateToText(root.solarCharger.state),
 							unit: VenusOS.Units_None,
 						},
 						{
