@@ -12,8 +12,6 @@ import Victron.Gauges
 Item {
 	id: gauges
 
-	property alias icon: icon
-	property alias name: nameLabel.text
 	property alias voltage: voltageLabel.value
 	property alias current: currentLabel.value
 	property alias value: arc.value
@@ -49,43 +47,22 @@ Item {
 
 	Column {
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_briefPage_centerGauge_centerText_topMargin
+			top: centerValue.isTemperature ? undefined : parent.top
+			topMargin: centerValue.isTemperature ? undefined : Theme.geometry_briefPage_centerGauge_centerText_topMargin
+			verticalCenter: centerValue.isTemperature ? parent.verticalCenter : undefined
 			horizontalCenter: parent.horizontalCenter
 		}
 		spacing: Theme.geometry_briefPage_centerGauge_centerTextSpacing
 
-		Row {
+		CenterValueDisplay {
+			id: centerValue
 			anchors.horizontalCenter: parent.horizontalCenter
-			spacing: 6
-
-			CP.ColorImage {
-				id: icon
-
-				color: Theme.color_font_primary
-			}
-
-			Label {
-				id: nameLabel
-
-				anchors.verticalCenter: icon.verticalCenter
-				font.pixelSize: Theme.font_size_body2
-				color: Theme.color_font_primary
-
-				// Keep the name bounding box inside the circle to avoid truncation
-				width: Math.min(implicitWidth, 0.7*gauges.width - icon.width - parent.spacing)
-				elide: Text.ElideRight
-			}
-		}
-
-		QuantityLabel {
-			anchors.horizontalCenter: parent.horizontalCenter
-			font.pixelSize: Theme.font_briefPage_battery_percentage_pixelSize
-			unit: VenusOS.Units_Percentage
-			value: gauges.value
+			maximumWidth: 0.7*gauges.width - icon.width
+			gaugeCount: 1
 		}
 
 		Row {
+			visible: !centerValue.isTemperature
 			topPadding: Theme.geometry_briefPage_centerGauge_centerText_topPadding
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: Theme.geometry_briefPage_centerGauge_centerText_horizontalSpacing
@@ -111,6 +88,7 @@ Item {
 		Label {
 			id: captionLabel
 
+			visible: !centerValue.isTemperature
 			anchors.horizontalCenter: parent.horizontalCenter
 			font.pixelSize: Theme.font_briefPage_battery_timeToGo_pixelSize
 			color: Theme.color_briefPage_battery_value_text_color

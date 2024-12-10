@@ -72,8 +72,8 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Brief view levels"
-				text: qsTrId("settings_brief_view_levels")
+				//% "Brief view settings"
+				text: qsTrId("settings_brief_view_settings")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
 				}
@@ -169,7 +169,7 @@ Page {
 
 			ListNavigation {
 				//% "Start page"
-				text: qsTrId("settings_brief_view_start_page")
+				text: qsTrId("settings_display_start_page")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayStartPage.qml", {"title": text})
 				}
