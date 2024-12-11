@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Controls as C
 import QtQuick.Templates as CT
 import QtQuick.Controls.impl as CP
+import QtQuick.Layouts
 import Victron.VenusOS
 
 // SpinBox uses a binding to increase 'stepSize' when the user holds a button down for a while. This allows the spin box to quickly change arbitrarily large values.
@@ -60,10 +61,16 @@ CT.SpinBox {
 			Item  {
 				id: primaryTextInput
 
-				width: primaryRow.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
-				height: primaryRow.implicitHeight
+				width: primaryRowLayout.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
+				height: primaryRowLayout.height
 
 				anchors.horizontalCenter: parent.horizontalCenter
+
+				MouseArea {
+					anchors.fill: parent
+					enabled: root.editable
+					onClicked: primaryLabel.forceActiveFocus()
+				}
 
 				Rectangle {
 					anchors.fill: parent
@@ -76,8 +83,8 @@ CT.SpinBox {
 					radius: Theme.geometry_button_radius
 				}
 
-				Row {
-					id: primaryRow
+				RowLayout {
+					id: primaryRowLayout
 
 					anchors.centerIn: parent
 
@@ -98,6 +105,11 @@ CT.SpinBox {
 						selectByMouse: !readOnly
 						validator: root.validator
 						inputMethodHints: root.inputMethodHints
+
+						onAccepted: {
+							// Note that the text may at this time represent a value out of SpinBox to/from range.
+							primaryLabel.focus = false
+						}
 					}
 
 					Label {
@@ -163,6 +175,27 @@ CT.SpinBox {
 			source: 'qrc:/images/icon_minus.svg'
 			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
 		}
+	}
+
+	textFromValue: function(value, locale) {
+		return Units.formatNumber(value)
+	}
+	valueFromText: function(text, locale) {
+		let value = Number.fromLocaleString(locale, text)
+		if(isNaN(value)) {
+			// don't change the current value
+			value = root.value
+		}
+		// need to set spinBox.value to a different temporary valid value
+		// to illicit a value change so it always updates the displayText properly
+		// in all cases, to something that is valid
+		if(value <= root.from) {
+			root.value = root.to
+		} else {
+			// if the value is >= to or any other value above from, set it to from
+			root.value = root.from
+		}
+		return value
 	}
 
 	Timer {
