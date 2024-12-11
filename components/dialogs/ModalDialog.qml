@@ -252,16 +252,12 @@ T.Dialog {
 	}
 
 	MouseArea {
-		// placed behind the contentItem
+		// placed behind the background, contentItem, header and footer
 		parent: contentItem.parent
 		anchors.fill: parent
 		z: -1
 		enabled: !!stateManager.inputItem
-		onClicked: focusScope.focus = true
-
-		FocusScope {
-			id: focusScope
-		}
+		onClicked: focus = true
 	}
 }
 
