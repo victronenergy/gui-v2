@@ -9,6 +9,13 @@ import Victron.VenusOS
 Page {
 	id: root
 
+    readonly property bool troubleshootEnabled: troubleshootEnabledItem.isValid ? troubleshootEnabledItem.value : false
+
+	VeQuickItem {
+		id: troubleshootEnabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/Troubleshoot/Enabled"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			PrimaryListLabel {
@@ -23,6 +30,7 @@ Page {
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 				allowed: dataItem.isValid
+				enabled: !root.troubleshootEnabled && userHasWriteAccess
 			}
 
 			PrimaryListLabel {

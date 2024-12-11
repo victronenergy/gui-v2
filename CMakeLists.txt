@@ -516,6 +516,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
     pages/settings/PageSettingsWifi.qml
+    pages/settings/PageSettingsSupportAndTroubleshoot.qml
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
     pages/settings/debug/HubData.qml
@@ -1238,4 +1239,3 @@ add_custom_target(
     DEPENDS "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
 )
 add_dependencies(${PROJECT_NAME} theme_parser)
-

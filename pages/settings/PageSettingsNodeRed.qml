@@ -9,6 +9,13 @@ import Victron.VenusOS
 Page {
 	id: root
 
+    readonly property bool troubleshootEnabled: troubleshootEnabledItem.isValid ? troubleshootEnabledItem.value : false
+
+	VeQuickItem {
+		id: troubleshootEnabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/Troubleshoot/Enabled"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
@@ -17,6 +24,7 @@ Page {
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				allowed: dataItem.isValid
+				enabled: !root.troubleshootEnabled && userHasWriteAccess
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
 					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },
