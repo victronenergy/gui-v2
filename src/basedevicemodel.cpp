@@ -30,8 +30,8 @@ void BaseDevice::setServiceUid(const QString &serviceUid)
 	// Service uids should not change during the lifetime of an object, as this affects the ability
 	// of device models to consistently identify devices by serviceUid. Allow this behavior but
 	// show a warning.
-	if (!m_serviceUid.isEmpty()) {
-		qmlInfo(this) << "Deprecated behavior! Device serviceUid already set to " << m_serviceUid << ", should not be changed again to" << serviceUid;
+	if (!m_serviceUid.isEmpty() && m_serviceUid != serviceUid) {
+		qmlInfo(this) << "Deprecated behavior! Device serviceUid already set to " << m_serviceUid << ", should not be changed again to " << serviceUid;
 	}
 
 	if (m_serviceUid != serviceUid) {
