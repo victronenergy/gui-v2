@@ -72,7 +72,7 @@ QtObject {
 
 	function deviceModelsForClass(deviceClass) {
 		if (deviceClass === "com.victronenergy.battery") {
-			return [batteries.model]
+			return [allDevicesModel.batteryDevices]
 		} else if (deviceClass === "com.victronenergy.solarcharger" || deviceClass === "solarcharger") {
 			return [solarChargers.model]
 		} else if (deviceClass === "analog") {
@@ -98,7 +98,6 @@ QtObject {
 		notificationLayer = null
 
 		acInputs = null
-		batteries = null
 		dcInputs = null
 		environmentInputs = null
 		ess = null
