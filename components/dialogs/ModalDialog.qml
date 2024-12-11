@@ -13,6 +13,7 @@ T.Dialog {
 	property string secondaryTitle
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property alias canAccept: doneButton.enabled
+	readonly property real centeredY: (parent.height - height) / 2
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -32,7 +33,9 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
-	anchors.centerIn: parent
+	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
+	x: (parent.width - width) / 2
+	y: centeredY
 
 	/*
 	If you specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
@@ -169,6 +172,92 @@ T.Dialog {
 				root.accept()
 			}
 		}
+	}
+
+	property QtObject _stateManager: QtObject {
+		id: stateManager
+
+		readonly property Item inputItem: root.visible && Qt.inputMethod.visible ?
+											  (root.contentItem.Window.activeFocusItem as TextField ??
+											   root.contentItem.Window.activeFocusItem as TextInput ??
+											   // root.contentItem.Window.activeFocusItem as TextArea ?? // not used
+											   root.contentItem.Window.activeFocusItem as TextEdit) : null
+
+		// vkbTopPos is const - it will always be the same value when the keyboard is open;
+		// - we only need this value when the keyboard is open (inputItem is not null)
+		readonly property real vkbTopPos: Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
+
+		property real targetDialogY: 0
+
+		onInputItemChanged: {
+			if(!inputItem) {
+				dialogStateGroup.state = "default"
+				return
+			}
+
+			dialogStateGroup.state = "interrupted"
+
+			const currentDialogOffset = root.y - root.centeredY // 0 or negative
+			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
+
+			targetDialogY = root.centeredY
+
+			if (inputItemBottomPos > vkbTopPos) {
+				targetDialogY += (vkbTopPos - inputItemBottomPos)
+			}
+
+			dialogStateGroup.state = "focused"
+		}
+
+		property StateGroup dialogStateGroup: StateGroup {
+
+			state: "default"
+
+			states: [
+				State {
+					name: "default"
+					PropertyChanges {
+						// reset to the "default" binding explicitly
+						// so we can get the transition
+						root.y: root.centeredY
+					}
+				},
+				State {
+					name: "interrupted"
+					// no PropertyChanges, interrupts any Transitions, does not change any properties
+					// due to the restoreEntryValues of the focused state being false
+				},
+				State {
+					name: "focused"
+
+					PropertyChanges {
+						root.y: stateManager.targetDialogY
+						restoreEntryValues: false
+					}
+				}
+			]
+
+			transitions: [
+				Transition {
+					to: "*"
+					NumberAnimation {
+						target: root
+						property: "y"
+						duration: Theme.animation_inputPanel_slide_duration
+						easing.type: Easing.InOutQuad
+					}
+				}
+			]
+		}
+	}
+
+	MouseArea {
+		// placed behind the background, contentItem, header and footer
+		parent: contentItem.parent
+		anchors.fill: parent
+		z: -1
+		enabled: !!stateManager.inputItem
+		onClicked: focus = true
 	}
 }
 
