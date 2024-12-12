@@ -43,6 +43,7 @@ QtObject {
 	property var pvInverters
 	property var solarDevices
 	property var system
+	property var switches
 	property var systemSettings
 	property var tanks
 

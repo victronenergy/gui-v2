@@ -25,6 +25,7 @@ Item {
 			&& !!Global.solarDevices
 			&& !!Global.system
 			&& !!Global.systemSettings
+			&& !!Global.switches
 			&& !!Global.tanks
 			&& !!Global.venusPlatform
 
@@ -100,6 +101,7 @@ Item {
 	Notifications {}
 	PvInverters {}
 	SolarDevices {}
+	Switches {}
 	System {}
 	SystemSettings {}
 	Tanks {}
