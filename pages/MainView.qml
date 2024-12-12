@@ -97,7 +97,9 @@ Item {
 		onLoaded: {
 			// If there is an alarm, the notifications page will be shown; otherwise, show the
 			// application start page, if set.
-			if (!Global.notifications.alarm) {
+			if (Global.notifications.alarm) {
+				Global.notificationLayer.popAndGoToNotifications()
+			} else {
 				root.loadStartPage()
 			}
 			// Notify that the UI is ready to be displayed.
