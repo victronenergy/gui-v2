@@ -23,6 +23,8 @@ SwipeViewPage {
 	GradientListView {
 		id: settingsListView
 
+		clip: true
+
 		model: [
 			{
 				//% "Device list"
