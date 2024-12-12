@@ -395,6 +395,7 @@ SwipeViewPage {
 	navButtonIcon: "qrc:/images/overview.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topAuxButton: VenusOS.StatusBar_AuxButton_AuxInactive
 	fullScreenWhenIdle: true
 
 	Component {
