@@ -15,6 +15,7 @@ SwipeViewPage {
 	navButtonIcon: "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topAuxButton: VenusOS.StatusBar_AuxButton_AuxInactive
 
 	GradientListView {
 		id: notificationsView

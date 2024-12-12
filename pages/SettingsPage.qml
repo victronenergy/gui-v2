@@ -19,6 +19,7 @@ SwipeViewPage {
 	navButtonIcon: "qrc:/images/settings.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+	topAuxButton: VenusOS.StatusBar_AuxButton_AuxInactive
 
 	GradientListView {
 		id: settingsListView
