@@ -39,10 +39,12 @@ QtObject {
 	property var pvInverters
 	property var solarDevices
 	property var system
+	property var switches
 	property var systemSettings
 	property var tanks
 
 	property var venusPlatform
+	property bool auxDevicePresent: !!switches ? Global.switches.model.count > 0 : false
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
 	property bool allPagesLoaded

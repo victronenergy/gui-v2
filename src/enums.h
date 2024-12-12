@@ -43,6 +43,14 @@ public:
 	};
 	Q_ENUM(Gauges_ValueType)
 
+    enum StatusBar_AuxButton {
+		StatusBar_AuxButton_None,
+		StatusBar_AuxButton_AuxDisabled,
+		StatusBar_AuxButton_AuxInactive,
+		StatusBar_AuxButton_AuxActive,
+    };
+    Q_ENUM(StatusBar_AuxButton)
+
 	enum StatusBar_LeftButton {
 		StatusBar_LeftButton_None,
 		StatusBar_LeftButton_ControlsInactive,
@@ -432,6 +440,35 @@ public:
 		Switch_ForcedOn = 3
 	};
 	Q_ENUM(Switch_ForcedMode)
+
+	enum Switch_Function {
+		Switch_Function_Momentary = 0,
+		Switch_Function_Latching,
+		Switch_Function_Dimmable,
+	};
+	Q_ENUM(Switch_Function)
+
+	enum Switch_ModuleState {
+		Switch_ModuleState_Connected = 0x100,
+		Switch_ModuleState_Over_Temperature,
+		Switch_ModuleState_Temperature_Warning,
+		Switch_ModuleState_Channel_Fault,
+		Switch_ModuleState_Channel_Tripped,
+		Switch_ModuleState_Under_Voltage,
+	};
+	Q_ENUM(Switch_ModuleState)
+
+	enum Switch_Status {
+		Switch_Status_Off,
+		Switch_Status_Input_Active,
+		Switch_Status_Tripped,
+		Switch_Status_Over_Temperature = 0x04,
+		Switch_Status_Active =0x08,
+		Switch_Status_On = 0x09,  //inputActive + active
+		Switch_Status_Short_Fault = 0x10,
+		Switch_Status_Disabled = 0x20
+	};
+	Q_ENUM(Switch_Status)
 
 	enum Notification_Type {
 		Notification_Warning,

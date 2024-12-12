@@ -20,6 +20,7 @@ FocusScope {
 
 
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
+	property int topAuxButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
 	property var tryPop // optional function: returns whether the page can be poppped

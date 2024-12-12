@@ -15,6 +15,7 @@ Page {
 			: Theme.geometry_controlCard_maximumWidth
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
+	topAuxButton: VenusOS.StatusBar_AuxButton_None
 	width: parent.width
 	anchors {
 		top: parent.top
