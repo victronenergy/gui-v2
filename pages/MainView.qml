@@ -12,7 +12,9 @@ Item {
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	property PageManager pageManager
 	property bool controlsActive
-	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
+	property bool auxActive
+	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item			   
+			   : auxActive && auxCardsLoader.status === Loader.Ready ? auxCardsLoader.item
 			   : !!pageStack.currentItem ? pageStack.currentItem
 			   : !!swipeView ? swipeView.currentItem
 			   : null
@@ -93,7 +95,7 @@ Item {
 		active: false
 		asynchronous: true
 		sourceComponent: swipeViewComponent
-		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running && !(root.auxActive && !auxInAnimation.running && !auxOutAnimation.running))
 		onLoaded: {
 			// If there is an alarm, the notifications page will be shown; otherwise, show the
 			// application start page, if set.
@@ -123,7 +125,120 @@ Item {
 		id: swipePageModel
 		view: swipeView
 	}
+	Loader {
+		id: auxCardsLoader
 
+		onActiveChanged: if (active) active = true // remove binding
+
+		z: 1
+		opacity: 0.0
+		sourceComponent: AuxPage {
+			width: root.width
+
+		}
+		active: root.auxActive
+		enabled: root.auxActive || auxOutAnimation.running
+
+		anchors {
+			// top: statusBar.bottom
+			// left: parent.left
+			// right: parent.right
+			// bottom: parent.bottom
+			top: statusBar.bottom
+			left: root.left
+			right: root.right
+			bottom: root.bottom
+		}
+
+		SequentialAnimation {
+			id: auxInAnimation
+			running: root.auxActive
+
+			ParallelAnimation {
+				YAnimator {
+					target: auxCardsLoader
+					from: statusBar.height - Theme.geometry_controlCards_slide_distance
+					to: statusBar.height
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.OutSine
+				}
+				OpacityAnimator {
+					target: auxCardsLoader
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.OutSine
+				}
+				OpacityAnimator {
+					target: swipeView
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.OutSine
+				}
+				OpacityAnimator {
+					target: navBar
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.OutSine
+				}
+				ColorAnimation {
+					target: statusBar
+					property: "color"
+					from: root.backgroundColor
+					to: Theme.color_page_background
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.OutSine
+				}
+			}
+		}
+
+		SequentialAnimation {
+		id: auxOutAnimation
+
+		running: auxCardsLoader.active && !root.auxActive
+
+		ParallelAnimation {
+			YAnimator {
+				target: auxCardsLoader
+				from: statusBar.height
+				to: statusBar.height - Theme.geometry_controlCards_slide_distance
+				duration: Theme.animation_controlCards_slide_duration
+				easing.type: Easing.InSine
+			}
+			OpacityAnimator {
+				target: auxCardsLoader
+				from: 1.0
+				to: 0.0
+				duration: Theme.animation_controlCards_slide_duration
+				easing.type: Easing.InSine
+			}
+			OpacityAnimator {
+				target: swipeView
+				from: 0.0
+				to: 1.0
+				duration: Theme.animation_controlCards_slide_duration
+				easing.type: Easing.InSine
+			}
+			OpacityAnimator {
+				target: navBar
+				from: 0.0
+				to: 1.0
+				duration: Theme.animation_controlCards_slide_duration
+				easing.type: Easing.InSine
+			}
+			ColorAnimation {
+				target: statusBar
+				property: "color"
+				from: Theme.color_page_background
+				to: root.backgroundColor
+				duration: Theme.animation_controlCards_slide_duration
+				easing.type: Easing.InSine
+				}
+			}
+		}
+	}
 	Loader {
 		id: controlCardsLoader
 
@@ -375,6 +490,16 @@ Item {
 			}
 			return customButton
 		}
+		auxButton: {
+			if (Global.auxDevicePresent) {
+				if (!!root.currentPage) {
+					return root.currentPage.topAuxButton
+				} else {
+					return VenusOS.StatusBar_AuxButton_AuxInactive
+				}
+			}
+			return VenusOS.StatusBar_AuxButton_None
+		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
 		color: root.backgroundColor
@@ -397,6 +522,19 @@ Item {
 
 		onPopToPage: function(toPage) {
 			pageManager.popPage(toPage)
+		}
+
+		onAuxButtonClicked: {
+		switch (auxButton) {
+			case VenusOS.StatusBar_AuxButton_AuxInactive:
+				root.auxActive = true
+				break
+			case VenusOS.StatusBar_AuxButton_AuxActive:
+				root.auxActive = false
+				break;
+			default:
+				break
+			}
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
