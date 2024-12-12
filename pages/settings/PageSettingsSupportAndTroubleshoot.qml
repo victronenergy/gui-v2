@@ -198,42 +198,42 @@ Page {
 
 		model: ObjectModel {
 
-			ListNavigationItem {
+			ListNavigation {
 				//% ""
 				text: "Customization checks"
                 secondaryText: getSystemState()
                 secondaryLabel.color: fsModifiedState === 0 && systemHooksState === 0 ? Theme.color_font_primary : Theme.color_red
 				onClicked: {
-					Global.pageManager.pushPage(systemIntegrityListItem, {"title": text})
+					Global.pageManager.pushPage(systemIntegrityList, {"title": text})
 				}
 
 				Component {
-					id: systemIntegrityListItem
+					id: systemIntegrityList
 
 					Page {
 						GradientListView {
 							model: ObjectModel {
 
-                                ListLabel {
+                                PrimaryListLabel {
                                     //% ""
                                     text: "Customization checks"
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "System state"
                                     secondaryText: getSystemState()
                                     secondaryLabel.color: fsModifiedState === 0 && systemHooksState === 0 ? Theme.color_green : Theme.color_red
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% "Device model"
                                     text: "Device model"
                                     secondaryText: modelItem.value
                                     secondaryLabel.color: modelItem.value.indexOf("Raspberry") === -1 ? Theme.color_green : Theme.color_red
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% "HQ serial number"
                                     text: "HQ serial number"
                                     //% ""
@@ -244,7 +244,7 @@ Page {
                                     allowed: defaultAllowed && hqSerialNumberItem.value != ""
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "Data partition free space"
                                     secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
@@ -258,47 +258,47 @@ Page {
                                     }
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "Modifications loaded at boot"
                                     secondaryText: getSystemHooksState()
                                     secondaryLabel.color: systemHooksState === 0 ? Theme.color_green : systemHooksState < 4 ? Theme.color_orange : Theme.color_red
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "Firmware integrity"
                                     secondaryText: getFsModifiedState()
                                     secondaryLabel.color: fsModifiedState === 0 ? Theme.color_green : Theme.color_red
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "Latest firmware version installed?"
                                     secondaryText: getFirmwareState()
                                     secondaryLabel.color: getFirmwareState(false) ? Theme.color_green : Theme.color_red
                                     }
 
-                                ListTextItem {
+                                ListText {
                                     // text: CommonWords.firmware_version
                                     text: "Installed firmware version"
                                     secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
                                     dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     // text: qsTrId("settings_build_date_time")
                                     text: "Installed build date/time"
                                     dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "Installed image type"
                                     secondaryText: signalKItem.isValid || nodeRedItem.isValid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
                                 }
 
-                                ListTextItem {
+                                ListText {
                                     //% ""
                                     text: "User SSH key present"
                                     secondaryText: systemIntegritySshKeyForRootPresentItem.value === 1 ? "Yes" : "No"
@@ -306,7 +306,7 @@ Page {
 
 
 
-                                ListLabel {
+                                PrimaryListLabel {
                                     text: "Tools to normalize the system"
                                 }
 
@@ -325,7 +325,7 @@ Page {
                                     dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
 
                                     bottomContentChildren: [
-                                        ListLabel {
+                                        PrimaryListLabel {
                                             width: Math.min(implicitWidth, disableAllModifications.maximumContentWidth)
                                             topPadding: 0
                                             bottomPadding: 0
@@ -456,7 +456,7 @@ Page {
 
                                 }
 
-                                ListNavigationItem {
+                                ListNavigation {
                                     //% ""
                                     text: qsTrId("Firmware: Online update")
                                     onClicked: {
@@ -464,7 +464,7 @@ Page {
                                     }
                                 }
 
-                                ListNavigationItem {
+                                ListNavigation {
                                     //% ""
                                     text: qsTrId("Firmware: Install from SD/USB")
                                     onClicked: {
@@ -488,15 +488,15 @@ Page {
                 }
             }
 
-            ListNavigationItem {
+            ListNavigation {
                 //% ""
                 text: "Useful links"
                 onClicked: {
-                    Global.pageManager.pushPage(usefulLinksListItem, {"title": text})
+                    Global.pageManager.pushPage(usefulLinksList, {"title": text})
                 }
 
                 Component {
-                    id: usefulLinksListItem
+                    id: usefulLinksList
 
                     Page {
                         GradientListView {
