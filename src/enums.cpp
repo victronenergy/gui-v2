@@ -156,27 +156,24 @@ QString Enums::pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) con
 	case PvInverter_StatusCode_Startup4:
 	case PvInverter_StatusCode_Startup5:
 	case PvInverter_StatusCode_Startup6:
-		//: PV inverter status code
-		//: Status = "start up". %1 = the startup status number
+		//: PV inverter status code. %1 = the startup status number
 		//% "Startup (%1)"
 		return qtTrId("pvinverter_statusCode_startup").arg(statusCode);
 	case PvInverter_StatusCode_Running:
 		//: PV inverter status code
-		//: "Running"
+		//% "Running"
 		return qtTrId("pvinverter_statusCode_running");
 	case PvInverter_StatusCode_Standby:
 		//: PV inverter status code
-		//: "Standby"
+		//% "Standby"
 		return qtTrId("pvinverter_statusCode_standby");
 	case PvInverter_StatusCode_BootLoading:
 		//: PV inverter status code
-		//: "Standby"
-		return qtTrId("pvinverter_statusCode_standby");
 		//% "Boot loading"
 		return qtTrId("pvinverters_statusCode_boot_loading");
 	case PvInverter_StatusCode_Error:
 		//: PV inverter status code
-		//: "Error"
+		//% "Error"
 		return qtTrId("pvinverter_statusCode_error");
 	case PvInverter_StatusCode_RunningMPPT:
 		//: PV inverter status code
