@@ -26,6 +26,7 @@ AggregateDeviceModel {
 		motorDriveDevices,
 		pulseMeterDevices,
 		solarChargerDevices,
+		switchDevices,
 		Global.pvInverters.model,
 		unsupportedDevices,
 
@@ -95,6 +96,11 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel solarChargerDevices: ServiceDeviceModel {
 		serviceType: "solarcharger"
 		modelId: "solarcharger"
+	}
+
+	readonly property ServiceDeviceModel switchDevices: ServiceDeviceModel {
+		serviceType: "switch"
+		modelId: "switch"
 	}
 
 	readonly property ServiceDeviceModel unsupportedDevices: ServiceDeviceModel {

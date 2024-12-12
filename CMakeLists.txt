@@ -403,6 +403,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/PvInverters.qml
     data/SolarDevices.qml
     data/StartPageConfiguration.qml
+    data/Switches.qml
     data/System.qml
     data/SystemLoad.qml
     data/SystemSettings.qml
@@ -873,6 +874,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/PulseMetersImpl.qml
     data/mock/PvInvertersImpl.qml
     data/mock/SolarDevicesImpl.qml
+    data/mock/SwitchesImpl.qml
     data/mock/SystemImpl.qml
     data/mock/SystemSettingsImpl.qml
     data/mock/TanksImpl.qml
