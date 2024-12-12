@@ -61,6 +61,25 @@ TestCase {
 		expect(VenusOS.Units_CardinalDirection, 23.6, "24", "° direction_northeast")
 	}
 
+	function test_powerFactor() {
+		expect(VenusOS.Units_PowerFactor, NaN, "--", "")
+		expect(VenusOS.Units_PowerFactor, -1234, "-1234", "")
+		expect(VenusOS.Units_PowerFactor, -100, "-100.0", "")
+		expect(VenusOS.Units_PowerFactor, -15.55, "-15.55", "")
+		expect(VenusOS.Units_PowerFactor, -1, "-1.000", "")
+		expect(VenusOS.Units_PowerFactor, -0.255, "-0.255", "")
+		expect(VenusOS.Units_PowerFactor, -0.25, "-0.250", "")
+		expect(VenusOS.Units_PowerFactor, -0.1, "-0.100", "")
+		expect(VenusOS.Units_PowerFactor, 0, "0.000", "")
+		expect(VenusOS.Units_PowerFactor, 0.1, "0.100", "")
+		expect(VenusOS.Units_PowerFactor, 0.25, "0.250", "")
+		expect(VenusOS.Units_PowerFactor, 0.255, "0.255", "")
+		expect(VenusOS.Units_PowerFactor, 1, "1.000", "")
+		expect(VenusOS.Units_PowerFactor, 15.55, "15.55", "")
+		expect(VenusOS.Units_PowerFactor, 100, "100.0", "")
+		expect(VenusOS.Units_PowerFactor, 1234, "1234", "")
+	}
+
 	function test_precisionZero() {
 		var units = [VenusOS.Units_Volume_Liter,
 					 VenusOS.Units_Volume_GallonImperial,
