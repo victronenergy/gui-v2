@@ -191,8 +191,6 @@ T.Dialog {
 				return
 			}
 
-			dialogStateGroup.state = "interrupted"
-
 			const currentDialogOffset = root.y - root.centeredY // 0 or negative
 			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
 
@@ -201,6 +199,8 @@ T.Dialog {
 			let vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
 
 			if (inputItemBottomPos > vkbTopPos) {
+				// Note: moving the Dialog while in "focused" state will change to
+				// the new location immediately without any animation.
 				targetDialogY += (vkbTopPos - inputItemBottomPos)
 			}
 
@@ -221,16 +221,9 @@ T.Dialog {
 					}
 				},
 				State {
-					name: "interrupted"
-					// no PropertyChanges, interrupts any Transitions, does not change any properties
-					// due to the restoreEntryValues of the focused state being false
-				},
-				State {
 					name: "focused"
-
 					PropertyChanges {
 						root.y: stateManager.targetDialogY
-						restoreEntryValues: false
 					}
 				}
 			]
