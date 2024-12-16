@@ -183,10 +183,6 @@ T.Dialog {
 											   // root.contentItem.Window.activeFocusItem as TextArea ?? // not used
 											   root.contentItem.Window.activeFocusItem as TextEdit) : null
 
-		// vkbTopPos is const - it will always be the same value when the keyboard is open;
-		// - we only need this value when the keyboard is open (inputItem is not null)
-		readonly property real vkbTopPos: Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
-
 		property real targetDialogY: 0
 
 		onInputItemChanged: {
@@ -201,6 +197,8 @@ T.Dialog {
 			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
 
 			targetDialogY = root.centeredY
+
+			let vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
 
 			if (inputItemBottomPos > vkbTopPos) {
 				targetDialogY += (vkbTopPos - inputItemBottomPos)
