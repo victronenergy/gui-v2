@@ -63,7 +63,6 @@ CT.SpinBox {
 
 				width: primaryRowLayout.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
 				height: primaryRowLayout.height
-
 				anchors.horizontalCenter: parent.horizontalCenter
 
 				MouseArea {
@@ -74,9 +73,7 @@ CT.SpinBox {
 
 				Rectangle {
 					anchors.fill: parent
-
 					visible: root.editable
-
 					color: "transparent"
 					border.color: Theme.color_blue
 					border.width: Theme.geometry_button_border_width
@@ -97,10 +94,8 @@ CT.SpinBox {
 						font.pixelSize: root.secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
 						horizontalAlignment: Qt.AlignHCenter
 						verticalAlignment: Qt.AlignVCenter
-
 						selectedTextColor: Theme.color_white
 						selectionColor : Theme.color_blue
-
 						readOnly: !root.editable
 						selectByMouse: !readOnly
 						validator: root.validator
