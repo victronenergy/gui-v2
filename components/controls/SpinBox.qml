@@ -181,7 +181,7 @@ CT.SpinBox {
 		return Units.formatNumber(value)
 	}
 	valueFromText: function(text, locale) {
-		let value = Number.fromLocaleString(locale, text)
+		let value = Units.formattedNumberToReal(text)
 		if(isNaN(value)) {
 			// don't change the current value
 			value = root.value

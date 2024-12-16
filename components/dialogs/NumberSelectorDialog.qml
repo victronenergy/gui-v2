@@ -64,7 +64,7 @@ ModalDialog {
 					return Units.formatNumber(value / root._multiplier(), root.decimals)
 				}
 				valueFromText: function(text, locale) {
-					let value = Number.fromLocaleString(locale, text) * root._multiplier()
+					let value = Units.formattedNumberToReal(text) * root._multiplier()
 					if(isNaN(value)) {
 						// don't change the current value
 						value = spinBox.value
