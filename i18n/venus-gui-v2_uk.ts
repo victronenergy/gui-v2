@@ -20,7 +20,7 @@
       <translation>Потужність</translation>
     </message>
     <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="199"/>
+      <location filename="../../src/enums.cpp" line="196"/>
       <source>Off</source>
       <translation>Вимкнено</translation>
     </message>
@@ -65,6 +65,11 @@
       <location filename="../../components/CommonWords.qml" line="146"/>
       <source>Disconnected</source>
       <translation type="unfinished">Відключено</translation>
+    </message>
+    <message id="common_words_error">
+      <location filename="../../components/CommonWords.qml" line="159"/>
+      <source>Error</source>
+      <translation type="unfinished">Помилка</translation>
     </message>
     <message id="common_words_generator">
       <location filename="../../components/CommonWords.qml" line="177"/>
@@ -175,37 +180,37 @@
       <translation>Немає поточних тривог</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="108"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="34"/>
+      <location filename="../../pages/SettingsPage.qml" line="36"/>
       <source>General</source>
       <translation>Головне</translation>
     </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="39"/>
+      <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>Firmware</source>
       <translation>Прошивка</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="44"/>
+      <location filename="../../pages/SettingsPage.qml" line="46"/>
       <source>Date &amp; Time</source>
       <translation>Дата, час</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="49"/>
+      <location filename="../../pages/SettingsPage.qml" line="51"/>
       <source>System setup</source>
       <translation>Налаштування системи</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="54"/>
+      <location filename="../../pages/SettingsPage.qml" line="56"/>
       <source>DVCC</source>
       <translation>DVCC (розподілене керування напругою і струмом)</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="61"/>
       <source>Display &amp; Language</source>
       <translation>Дисплей і мова</translation>
     </message>
@@ -215,12 +220,12 @@
       <translation>ESS (система збереження енергії)</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="73"/>
+      <location filename="../../pages/SettingsPage.qml" line="75"/>
       <source>Energy meters</source>
       <translation>Лічильники ел.енерг.</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="80"/>
       <source>PV inverters</source>
       <translation>PV інвертори</translation>
     </message>
@@ -230,42 +235,42 @@
       <translation>Локальна мережа Ethernet</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="95"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="98"/>
+      <location filename="../../pages/SettingsPage.qml" line="100"/>
       <source>GSM modem</source>
       <translation>GSM модем</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="103"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>GPS</source>
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="114"/>
+      <location filename="../../pages/SettingsPage.qml" line="116"/>
       <source>Generator start/stop</source>
       <translation>Пуск/зупинка генератора</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="120"/>
+      <location filename="../../pages/SettingsPage.qml" line="122"/>
       <source>Tank pump</source>
       <translation>Насос ємності</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="130"/>
+      <location filename="../../pages/SettingsPage.qml" line="132"/>
       <source>Services</source>
       <translation>Служби</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="135"/>
+      <location filename="../../pages/SettingsPage.qml" line="137"/>
       <source>I/O</source>
       <translation>I/O (ввід-вивід)</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="140"/>
+      <location filename="../../pages/SettingsPage.qml" line="142"/>
       <source>Venus OS Large features</source>
       <translation>Функції Великої Venus OS</translation>
     </message>
@@ -1480,7 +1485,7 @@
       <translation>Час закінчення тихих годин</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="290"/>
+      <location filename="../../components/PageGensetModel.qml" line="293"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
       <source>Run time and service</source>
       <translation>Час роботи та обслуговування</translation>
@@ -1943,21 +1948,14 @@ Use unless prohibited by the utility provider.</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Вимкнено</translation>
     </message>
-    <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="166"/>
-      <source/>
-      <extracomment>PV inverter status code "Running"</extracomment>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="170"/>
-      <location filename="../../src/enums.cpp" line="174"/>
-      <source/>
-      <extracomment>PV inverter status code "Standby"</extracomment>
-      <translation type="unfinished"/>
+    <message id="digitalinputs_state_running">
+      <location filename="../../src/enums.cpp" line="139"/>
+      <source>Running</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Працює</translation>
     </message>
     <message id="solarchargers_state_external control">
-      <location filename="../../src/enums.cpp" line="220"/>
+      <location filename="../../src/enums.cpp" line="217"/>
       <source>External control</source>
       <translation type="unfinished">Зовнішнє керування</translation>
     </message>
@@ -4067,52 +4065,52 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">Пристрої</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="158"/>
+      <location filename="../../components/PageGensetModel.qml" line="161"/>
       <source>AC</source>
       <translation>AC</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="197"/>
+      <location filename="../../components/PageGensetModel.qml" line="200"/>
       <source>Engine</source>
       <translation>Двигун</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="210"/>
+      <location filename="../../components/PageGensetModel.qml" line="213"/>
       <source>Speed</source>
       <translation type="unfinished">Швидкість</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="217"/>
+      <location filename="../../components/PageGensetModel.qml" line="220"/>
       <source>Load</source>
       <translation type="unfinished">Спожив.</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="241"/>
+      <location filename="../../components/PageGensetModel.qml" line="244"/>
       <source>Coolant temperature</source>
       <translation>Температура теплоносія</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="249"/>
+      <location filename="../../components/PageGensetModel.qml" line="252"/>
       <source>Exhaust temperature</source>
       <translation>Температура вихлопу</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="256"/>
+      <location filename="../../components/PageGensetModel.qml" line="259"/>
       <source>Winding temperature</source>
       <translation>Температура обмотки</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="270"/>
+      <location filename="../../components/PageGensetModel.qml" line="273"/>
       <source>Starter battery voltage</source>
       <translation>Напруга стартерної батареї</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="278"/>
+      <location filename="../../components/PageGensetModel.qml" line="281"/>
       <source>Number of starts</source>
       <translation>Кількість стартів</translation>
     </message>
     <message id="genset_bms_control">
-      <location filename="../../components/PageGensetModel.qml" line="369"/>
+      <location filename="../../components/PageGensetModel.qml" line="372"/>
       <source>BMS control</source>
       <translation type="unfinished">Керування BMS</translation>
     </message>
@@ -5054,9 +5052,10 @@ Do you want to continue?</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Енергія</translation>
     </message>
-    <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="159"/>
+    <message id="pvinverter_statusCode_error">
+      <location filename="../../src/enums.cpp" line="177"/>
       <source>Error</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Помилка</translation>
     </message>
     <message id="common_words_error_colon">
@@ -5303,10 +5302,10 @@ Do you want to continue?</source>
       <source>Remove</source>
       <translation>Видалити</translation>
     </message>
-    <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="139"/>
+    <message id="pvinverter_statusCode_running">
+      <location filename="../../src/enums.cpp" line="165"/>
       <source>Running</source>
-      <extracomment>Digital input state</extracomment>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Працює</translation>
     </message>
     <message id="common_words_scanning">
@@ -5334,9 +5333,10 @@ Do you want to continue?</source>
       <source>Signal strength</source>
       <translation>Рівень сигналу</translation>
     </message>
-    <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+    <message id="pvinverter_statusCode_standby">
+      <location filename="../../src/enums.cpp" line="169"/>
       <source>Standby</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Режим очікування</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
@@ -5370,9 +5370,9 @@ Do you want to continue?</source>
       <translation>Стан</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="162"/>
+      <location filename="../../src/enums.cpp" line="161"/>
       <source>Startup (%1)</source>
-      <extracomment>PV inverter status code Status = "start up". %1 = the startup status number</extracomment>
+      <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>Запуск (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
@@ -6033,7 +6033,7 @@ Do you want to continue?</source>
       <translation type="unfinished">год</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="205"/>
+      <location filename="../../src/enums.cpp" line="202"/>
       <source>Bulk</source>
       <translation>Основний</translation>
     </message>
@@ -6044,7 +6044,7 @@ Do you want to continue?</source>
       <translation>Погл.</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="211"/>
+      <location filename="../../src/enums.cpp" line="208"/>
       <source>Float</source>
       <translation>Плаваючий</translation>
     </message>
@@ -6463,24 +6463,19 @@ Do you want to continue?</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="176"/>
+      <location filename="../../src/enums.cpp" line="173"/>
       <source>Boot loading</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Завантаження</translation>
     </message>
-    <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="180"/>
-      <source/>
-      <extracomment>PV inverter status code "Error"</extracomment>
-      <translation type="unfinished"/>
-    </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="184"/>
+      <location filename="../../src/enums.cpp" line="181"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Запуск (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="188"/>
+      <location filename="../../src/enums.cpp" line="185"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Працює (придушений)</translation>
@@ -6492,22 +6487,22 @@ Do you want to continue?</source>
       <translation>Реле %1</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="202"/>
+      <location filename="../../src/enums.cpp" line="199"/>
       <source>Fault</source>
       <translation>Несправність</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="208"/>
+      <location filename="../../src/enums.cpp" line="205"/>
       <source>Absorption</source>
       <translation>Поглинання</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="214"/>
+      <location filename="../../src/enums.cpp" line="211"/>
       <source>Storage</source>
       <translation>Зберігання</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="217"/>
+      <location filename="../../src/enums.cpp" line="214"/>
       <source>Equalize</source>
       <translation>Вирівнювання</translation>
     </message>
@@ -6716,7 +6711,7 @@ Do you want to continue?</source>
       <translation>Версія програми</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="233"/>
+      <location filename="../../components/PageGensetModel.qml" line="236"/>
       <source>Oil temperature</source>
       <translation>Температура масла</translation>
     </message>
@@ -6977,18 +6972,18 @@ Do you want to continue?</source>
       <translation>Стан системи</translation>
     </message>
     <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="29"/>
+      <location filename="../../pages/SettingsPage.qml" line="31"/>
       <source>Device list</source>
       <oldsource>Device List</oldsource>
       <translation>Список пристроїв</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <location filename="../../pages/SettingsPage.qml" line="90"/>
       <source>Ethernet</source>
       <translation type="unfinished">Локальна мережа Ethernet</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="146"/>
+      <location filename="../../pages/SettingsPage.qml" line="148"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>Екземпляри пристроїв VRM</translation>
@@ -7101,6 +7096,11 @@ Do you want to continue?</source>
       <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Settings</source>
       <translation type="unfinished">Налаштування</translation>
+    </message>
+    <message id="common_words_standby">
+      <location filename="../../components/CommonWords.qml" line="424"/>
+      <source>Standby</source>
+      <translation type="unfinished">Режим очікування</translation>
     </message>
     <message id="common_words_startup_status">
       <location filename="../../components/CommonWords.qml" line="449"/>
@@ -7569,7 +7569,7 @@ See documentation for further information.</oldsource>
       <translation>Обмеження системного струму експорту AC</translation>
     </message>
     <message id="settings_modbus_tcp_udp_devices">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="85"/>
       <source>Modbus TCP/UDP devices</source>
       <translation>Пристрої Modbus TCP/UDP</translation>
     </message>
@@ -7680,17 +7680,17 @@ See documentation for further information.</oldsource>
       <translation>Стан керування</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="107"/>
+      <location filename="../../components/PageGensetModel.qml" line="110"/>
       <source>Genset status</source>
       <translation>Стан генератора</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="185"/>
+      <location filename="../../components/PageGensetModel.qml" line="188"/>
       <source>Remote start mode</source>
       <translation>Режим дистанційного запуску</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="225"/>
+      <location filename="../../components/PageGensetModel.qml" line="228"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>Тиск оливи</translation>
@@ -7748,7 +7748,7 @@ See documentation for further information.</oldsource>
       <translation>Підтвердження сповіщення</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="100"/>
+      <location filename="../../components/PageGensetModel.qml" line="103"/>
       <source>Control error code</source>
       <translation>Код помилки керування</translation>
     </message>
@@ -7951,37 +7951,37 @@ See documentation for further information.</oldsource>
       <translation>Поточний час виконання</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="118"/>
+      <location filename="../../components/PageGensetModel.qml" line="121"/>
       <source>Genset error codes</source>
       <translation>Коди помилок генераторної установки</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="263"/>
+      <location filename="../../components/PageGensetModel.qml" line="266"/>
       <source>Heatsink temperature</source>
       <translation>Температура радіатора</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <location filename="../../components/PageGensetModel.qml" line="332"/>
       <source>Charge voltage</source>
       <translation type="unfinished">Напруга заряджання</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="340"/>
+      <location filename="../../components/PageGensetModel.qml" line="343"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Напруга заряду наразі контролюється системою BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="346"/>
+      <location filename="../../components/PageGensetModel.qml" line="349"/>
       <source>Charge current limit</source>
       <translation>Обмеження зарядного струму</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="356"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>BMS Controlled</source>
       <translation>Під керуванням BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="362"/>
+      <location filename="../../components/PageGensetModel.qml" line="365"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Керування BMS вмикається автоматично за наявності BMS. Скиньте, якщо змінилася конфігурація системи або якщо відсутня BMS.</translation>
     </message>
@@ -8231,7 +8231,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Запуск і зупинка генератора на основі налаштованих умов автозапуску.</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="302"/>
+      <location filename="../../components/PageGensetModel.qml" line="305"/>
       <source>DC genset settings</source>
       <translation>Налаштування генераторної установки постійного струму</translation>
     </message>
@@ -8766,7 +8766,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Цей фотоелектричний інвертор має підтримку обмеження потужності. Вимкніть це налаштування, якщо воно заважає нормальній роботі.</translation>
     </message>
     <message id="settings_vrm_portal_mode">
-      <location filename="../../pages/SettingsPage.qml" line="64"/>
+      <location filename="../../pages/SettingsPage.qml" line="66"/>
       <source>VRM Portal mode</source>
       <translation>Режим порталу VRM</translation>
     </message>

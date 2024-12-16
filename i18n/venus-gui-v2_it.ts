@@ -20,7 +20,7 @@
       <translation>Potenza</translation>
     </message>
     <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="199"/>
+      <location filename="../../src/enums.cpp" line="196"/>
       <source>Off</source>
       <translation>Spento</translation>
     </message>
@@ -65,6 +65,11 @@
       <location filename="../../components/CommonWords.qml" line="146"/>
       <source>Disconnected</source>
       <translation type="unfinished">Disconnesso</translation>
+    </message>
+    <message id="common_words_error">
+      <location filename="../../components/CommonWords.qml" line="159"/>
+      <source>Error</source>
+      <translation type="unfinished">Errore</translation>
     </message>
     <message id="common_words_generator">
       <location filename="../../components/CommonWords.qml" line="177"/>
@@ -175,37 +180,37 @@
       <translation>Non sono presenti avvisi</translation>
     </message>
     <message id="settings_bluetooth">
-      <location filename="../../pages/SettingsPage.qml" line="108"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="34"/>
+      <location filename="../../pages/SettingsPage.qml" line="36"/>
       <source>General</source>
       <translation>Generale</translation>
     </message>
     <message id="settings_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="39"/>
+      <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>Firmware</source>
       <translation>Firmware</translation>
     </message>
     <message id="settings_date_and_time">
-      <location filename="../../pages/SettingsPage.qml" line="44"/>
+      <location filename="../../pages/SettingsPage.qml" line="46"/>
       <source>Date &amp; Time</source>
       <translation>Data e ora</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="49"/>
+      <location filename="../../pages/SettingsPage.qml" line="51"/>
       <source>System setup</source>
       <translation>Configurazione sistema</translation>
     </message>
     <message id="settings_system_dvcc">
-      <location filename="../../pages/SettingsPage.qml" line="54"/>
+      <location filename="../../pages/SettingsPage.qml" line="56"/>
       <source>DVCC</source>
       <translation>DVCC</translation>
     </message>
     <message id="settings_display_and_language">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="61"/>
       <source>Display &amp; Language</source>
       <translation>Display e lingua</translation>
     </message>
@@ -215,12 +220,12 @@
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/SettingsPage.qml" line="73"/>
+      <location filename="../../pages/SettingsPage.qml" line="75"/>
       <source>Energy meters</source>
       <translation>Contatori di energia</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="80"/>
       <source>PV inverters</source>
       <translation>Inverter FV</translation>
     </message>
@@ -230,42 +235,42 @@
       <translation>Ethernet</translation>
     </message>
     <message id="settings_wifi">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="95"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_gsm_modem">
-      <location filename="../../pages/SettingsPage.qml" line="98"/>
+      <location filename="../../pages/SettingsPage.qml" line="100"/>
       <source>GSM modem</source>
       <translation>Modem GSM</translation>
     </message>
     <message id="settings_gps">
-      <location filename="../../pages/SettingsPage.qml" line="103"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>GPS</source>
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/SettingsPage.qml" line="114"/>
+      <location filename="../../pages/SettingsPage.qml" line="116"/>
       <source>Generator start/stop</source>
       <translation>Avvio/arresto generatore</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/SettingsPage.qml" line="120"/>
+      <location filename="../../pages/SettingsPage.qml" line="122"/>
       <source>Tank pump</source>
       <translation>Pompa del serbatoio</translation>
     </message>
     <message id="settings_services">
-      <location filename="../../pages/SettingsPage.qml" line="130"/>
+      <location filename="../../pages/SettingsPage.qml" line="132"/>
       <source>Services</source>
       <translation>Servizi</translation>
     </message>
     <message id="settings_io">
-      <location filename="../../pages/SettingsPage.qml" line="135"/>
+      <location filename="../../pages/SettingsPage.qml" line="137"/>
       <source>I/O</source>
       <translation>I/O</translation>
     </message>
     <message id="settings_venus_os_large_features">
-      <location filename="../../pages/SettingsPage.qml" line="140"/>
+      <location filename="../../pages/SettingsPage.qml" line="142"/>
       <source>Venus OS Large features</source>
       <translation>Caratteristiche Venus OS Large</translation>
     </message>
@@ -1480,7 +1485,7 @@
       <translation>Fine ore di silenzio</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="290"/>
+      <location filename="../../components/PageGensetModel.qml" line="293"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
       <source>Run time and service</source>
       <translation>Tempo di funzionamento e servizio</translation>
@@ -1943,21 +1948,14 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Spento</translation>
     </message>
-    <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="166"/>
-      <source/>
-      <extracomment>PV inverter status code "Running"</extracomment>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="170"/>
-      <location filename="../../src/enums.cpp" line="174"/>
-      <source/>
-      <extracomment>PV inverter status code "Standby"</extracomment>
-      <translation type="unfinished"/>
+    <message id="digitalinputs_state_running">
+      <location filename="../../src/enums.cpp" line="139"/>
+      <source>Running</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">In funzionamento</translation>
     </message>
     <message id="solarchargers_state_external control">
-      <location filename="../../src/enums.cpp" line="220"/>
+      <location filename="../../src/enums.cpp" line="217"/>
       <source>External control</source>
       <translation type="unfinished">Controllo esterno</translation>
     </message>
@@ -4066,52 +4064,52 @@ Documentazione disponibile su https://ve3.nl/vol</translation>
       <translation type="unfinished">Dispositivi</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="158"/>
+      <location filename="../../components/PageGensetModel.qml" line="161"/>
       <source>AC</source>
       <translation>CA</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="197"/>
+      <location filename="../../components/PageGensetModel.qml" line="200"/>
       <source>Engine</source>
       <translation>Motore</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="210"/>
+      <location filename="../../components/PageGensetModel.qml" line="213"/>
       <source>Speed</source>
       <translation type="unfinished">Velocità</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="217"/>
+      <location filename="../../components/PageGensetModel.qml" line="220"/>
       <source>Load</source>
       <translation type="unfinished">Carico</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="241"/>
+      <location filename="../../components/PageGensetModel.qml" line="244"/>
       <source>Coolant temperature</source>
       <translation>Temperatura di raffreddamento</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="249"/>
+      <location filename="../../components/PageGensetModel.qml" line="252"/>
       <source>Exhaust temperature</source>
       <translation>Temperatura di scarico</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="256"/>
+      <location filename="../../components/PageGensetModel.qml" line="259"/>
       <source>Winding temperature</source>
       <translation>Temperatura di avvolgimento</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="270"/>
+      <location filename="../../components/PageGensetModel.qml" line="273"/>
       <source>Starter battery voltage</source>
       <translation>Tensione batteria di avviamento</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="278"/>
+      <location filename="../../components/PageGensetModel.qml" line="281"/>
       <source>Number of starts</source>
       <translation>Numero di avvii</translation>
     </message>
     <message id="genset_bms_control">
-      <location filename="../../components/PageGensetModel.qml" line="369"/>
+      <location filename="../../components/PageGensetModel.qml" line="372"/>
       <source>BMS control</source>
       <translation type="unfinished">Controllo BMS</translation>
     </message>
@@ -5051,9 +5049,10 @@ Si desidera continuare?</translation>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Energia</translation>
     </message>
-    <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="159"/>
+    <message id="pvinverter_statusCode_error">
+      <location filename="../../src/enums.cpp" line="177"/>
       <source>Error</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Errore</translation>
     </message>
     <message id="common_words_error_colon">
@@ -5300,10 +5299,10 @@ Si desidera continuare?</translation>
       <source>Remove</source>
       <translation>Rimuovi</translation>
     </message>
-    <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="139"/>
+    <message id="pvinverter_statusCode_running">
+      <location filename="../../src/enums.cpp" line="165"/>
       <source>Running</source>
-      <extracomment>Digital input state</extracomment>
+      <extracomment>PV inverter status code</extracomment>
       <translation>In funzionamento</translation>
     </message>
     <message id="common_words_scanning">
@@ -5331,9 +5330,10 @@ Si desidera continuare?</translation>
       <source>Signal strength</source>
       <translation>Forza del segnale</translation>
     </message>
-    <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+    <message id="pvinverter_statusCode_standby">
+      <location filename="../../src/enums.cpp" line="169"/>
       <source>Standby</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
@@ -5367,9 +5367,9 @@ Si desidera continuare?</translation>
       <translation>Stato</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="162"/>
+      <location filename="../../src/enums.cpp" line="161"/>
       <source>Startup (%1)</source>
-      <extracomment>PV inverter status code Status = "start up". %1 = the startup status number</extracomment>
+      <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>Avvio (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
@@ -6030,7 +6030,7 @@ Si desidera continuare?</translation>
       <translation type="unfinished">h</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="205"/>
+      <location filename="../../src/enums.cpp" line="202"/>
       <source>Bulk</source>
       <translation>Prima fase</translation>
     </message>
@@ -6041,7 +6041,7 @@ Si desidera continuare?</translation>
       <translation>Assorbimento</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="211"/>
+      <location filename="../../src/enums.cpp" line="208"/>
       <source>Float</source>
       <translation>Mantenimento</translation>
     </message>
@@ -6460,24 +6460,19 @@ Si desidera continuare?</translation>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="176"/>
+      <location filename="../../src/enums.cpp" line="173"/>
       <source>Boot loading</source>
+      <extracomment>PV inverter status code</extracomment>
       <translation>Caricamento avvio</translation>
     </message>
-    <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="180"/>
-      <source/>
-      <extracomment>PV inverter status code "Error"</extracomment>
-      <translation type="unfinished"/>
-    </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="184"/>
+      <location filename="../../src/enums.cpp" line="181"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>In funzionamento (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="188"/>
+      <location filename="../../src/enums.cpp" line="185"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>In funzionamento (Throttled)</translation>
@@ -6489,22 +6484,22 @@ Si desidera continuare?</translation>
       <translation>Relè %1</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="202"/>
+      <location filename="../../src/enums.cpp" line="199"/>
       <source>Fault</source>
       <translation>Errore</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="208"/>
+      <location filename="../../src/enums.cpp" line="205"/>
       <source>Absorption</source>
       <translation>Assorbimento</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="214"/>
+      <location filename="../../src/enums.cpp" line="211"/>
       <source>Storage</source>
       <translation>Accumulo</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="217"/>
+      <location filename="../../src/enums.cpp" line="214"/>
       <source>Equalize</source>
       <translation>Equalizza</translation>
     </message>
@@ -6713,7 +6708,7 @@ Si desidera continuare?</translation>
       <translation>Versione dell'applicazione</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="233"/>
+      <location filename="../../components/PageGensetModel.qml" line="236"/>
       <source>Oil temperature</source>
       <translation>Temperatura dell'olio</translation>
     </message>
@@ -6974,18 +6969,18 @@ Si desidera continuare?</translation>
       <translation>Stato del sistema</translation>
     </message>
     <message id="settings_device_list">
-      <location filename="../../pages/SettingsPage.qml" line="29"/>
+      <location filename="../../pages/SettingsPage.qml" line="31"/>
       <source>Device list</source>
       <oldsource>Device List</oldsource>
       <translation>Elenco dispositivi</translation>
     </message>
     <message id="settings_ethernet">
-      <location filename="../../pages/SettingsPage.qml" line="88"/>
+      <location filename="../../pages/SettingsPage.qml" line="90"/>
       <source>Ethernet</source>
       <translation type="unfinished">Ethernet</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/SettingsPage.qml" line="146"/>
+      <location filename="../../pages/SettingsPage.qml" line="148"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>Istanze dispositivo VRM</translation>
@@ -7098,6 +7093,11 @@ Si desidera continuare?</translation>
       <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Settings</source>
       <translation type="unfinished">Impostazioni</translation>
+    </message>
+    <message id="common_words_standby">
+      <location filename="../../components/CommonWords.qml" line="424"/>
+      <source>Standby</source>
+      <translation type="unfinished">Standby</translation>
     </message>
     <message id="common_words_startup_status">
       <location filename="../../components/CommonWords.qml" line="449"/>
@@ -7566,7 +7566,7 @@ See documentation for further information.</oldsource>
       <translation>Limitazione della corrente di esportazione CA del sistema</translation>
     </message>
     <message id="settings_modbus_tcp_udp_devices">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="85"/>
       <source>Modbus TCP/UDP devices</source>
       <translation>Dispositivi Modbus TCP/UDP</translation>
     </message>
@@ -7677,17 +7677,17 @@ See documentation for further information.</oldsource>
       <translation>Stato del controllo</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="107"/>
+      <location filename="../../components/PageGensetModel.qml" line="110"/>
       <source>Genset status</source>
       <translation>Stato del generatore</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="185"/>
+      <location filename="../../components/PageGensetModel.qml" line="188"/>
       <source>Remote start mode</source>
       <translation>Modalità avvio remoto</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="225"/>
+      <location filename="../../components/PageGensetModel.qml" line="228"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>Pressione dell'olio</translation>
@@ -7745,7 +7745,7 @@ See documentation for further information.</oldsource>
       <translation>Riconoscere gli avvisi</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="100"/>
+      <location filename="../../components/PageGensetModel.qml" line="103"/>
       <source>Control error code</source>
       <translation>Codice errore del controllo</translation>
     </message>
@@ -7947,37 +7947,37 @@ See documentation for further information.</oldsource>
       <translation>Tempo di funzionamento attuale</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="118"/>
+      <location filename="../../components/PageGensetModel.qml" line="121"/>
       <source>Genset error codes</source>
       <translation>Codici errore del generatore</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="263"/>
+      <location filename="../../components/PageGensetModel.qml" line="266"/>
       <source>Heatsink temperature</source>
       <translation>Temperatura del dissipatore</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <location filename="../../components/PageGensetModel.qml" line="332"/>
       <source>Charge voltage</source>
       <translation type="unfinished">Tensione di carica</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="340"/>
+      <location filename="../../components/PageGensetModel.qml" line="343"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>La tensione di carica è attualmente controllata dal BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="346"/>
+      <location filename="../../components/PageGensetModel.qml" line="349"/>
       <source>Charge current limit</source>
       <translation>Limite corrente di carica</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="356"/>
+      <location filename="../../components/PageGensetModel.qml" line="359"/>
       <source>BMS Controlled</source>
       <translation>Controllato dal BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="362"/>
+      <location filename="../../components/PageGensetModel.qml" line="365"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Il controllo del BMS è automaticamente attivo quando è presente un BMS. Ripristinarlo se è cambiata la configurazione del sistema o se non sono presenti BMS.</translation>
     </message>
@@ -8227,7 +8227,7 @@ Dopo aver aggiunto/attivato una nuova rete, è necessario approvarla una volta n
       <translation>Avviare e arrestare il generatore in base alle condizioni di avvio automatico configurate.</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="302"/>
+      <location filename="../../components/PageGensetModel.qml" line="305"/>
       <source>DC genset settings</source>
       <translation>Impostazioni del generatore CC</translation>
     </message>
@@ -8759,7 +8759,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Questo inverter fotovoltaico supporta la limitazione della potenza. Disattivare questa impostazione se interferisce con il normale funzionamento.</translation>
     </message>
     <message id="settings_vrm_portal_mode">
-      <location filename="../../pages/SettingsPage.qml" line="64"/>
+      <location filename="../../pages/SettingsPage.qml" line="66"/>
       <source>VRM Portal mode</source>
       <translation>Modalità portale VRM</translation>
     </message>
