@@ -222,6 +222,11 @@ void BackendConnection::openUrl(const QString &url)
 	emscripten_run_script(ba.constData());
 }
 
+void BackendConnection::hitWatchdog()
+{
+	emscripten_run_script("watchdogHit = true"); // 'watchdogHit' is defined in index.html, which checks it periodically and reloads the page if not hit regularly.
+}
+
 #else
 
 void BackendConnection::onNetworkConfigChanged(const QVariant var) { Q_UNUSED(var); }

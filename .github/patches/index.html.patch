@@ -1,6 +1,5 @@
-diff -u index.html venus-gui-v2.html
---- index.html	2024-05-16 22:12:44.106129598 +0300
-+++ venus-gui-v2.html	2024-07-05 12:44:44.396192697 +0200
+--- venus-gui-v2.html	2024-12-19 11:52:03.677046276 +1000
++++ index.html	2024-12-19 13:54:58.232268241 +1000
 @@ -12,15 +12,18 @@
      <title>venus-gui-v2</title>
      <style>
@@ -63,3 +62,26 @@ diff -u index.html venus-gui-v2.html
                      qt: {
                          onLoaded: () => showUi(screen),
                          onExit: exitData =>
+@@ -70,5 +99,22 @@
+     </script>
+     <script src="venus-gui-v2.js"></script>
+     <script type="text/javascript" src="qtloader.js"></script>
++    <script type="text/javascript">
++        var watchdogHit = false // this gets set to 'true' by a timer via BackendConnection::hitWatchdog()
++        console.log("starting watchdog timer")
++        setTimeout(function(){ // wait 2 minutes for the page to load, then set a 10 second watchdog timer
++            checkWatchdog()
++            setInterval(checkWatchdog, 10000)
++        }, 120000)
++
++        function checkWatchdog()
++        {
++            if (!watchdogHit) {
++                console.error("Watchdog timer expired - reloading page")
++                location.reload()
++            }
++            watchdogHit = false
++        }
++    </script>
+   </body>
+ </html>
