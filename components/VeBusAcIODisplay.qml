@@ -12,12 +12,18 @@ Loader {
 	property string serviceUid
 
 	width: parent ? parent.width : 0
-	sourceComponent: numberOfPhases.value === 1 ? singlePhaseAcInOut
+	sourceComponent: numberOfAcInputs.value === 0 ? null
+				   : numberOfPhases.value === 1 ? singlePhaseAcInOut
 				   : numberOfPhases.value === 3 ? threePhaseTables : null
 
 	VeQuickItem {
 		id: numberOfPhases
 		uid: root.serviceUid + "/Ac/NumberOfPhases"
+	}
+
+	VeQuickItem {
+		id: numberOfAcInputs
+		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
 	Component {
