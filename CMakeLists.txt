@@ -361,6 +361,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/core/PrimaryListLabel.qml
     components/listitems/core/SecondaryListLabel.qml
     components/listitems/core/SectionHeader.qml
+    components/listitems/core/SettingsListHeader.qml
+    components/listitems/core/SettingsListNavigation.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
@@ -466,12 +468,14 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageGps.qml
     pages/settings/PageHub4Debug.qml
     pages/settings/PageRelayGenerator.qml
+    pages/settings/PageSettingsAccessAndSecurity.qml
     pages/settings/PageSettingsBatteries.qml
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsCanbus.qml
+    pages/settings/PageSettingsConnectivity.qml
     pages/settings/PageSettingsDisplay.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
@@ -518,7 +522,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsTcpIp.qml
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
-    pages/settings/PageSettingsWifi.qml
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
     pages/settings/debug/HubData.qml
@@ -1031,6 +1034,13 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
+        images/icon_connectivity_32.png
+        images/icon_debug_32.png
+        images/icon_devices_32.png
+        images/icon_general_32.png
+        images/icon_integration_32.png
+        images/icon_system_32.png
+        images/icon_vrm_32.png
         images/brief.svg
         images/cloud.svg
         images/consumption.svg

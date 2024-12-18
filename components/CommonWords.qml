@@ -136,6 +136,9 @@ QtObject {
 	//% "Device"
 	readonly property string device_info_title: qsTrId("common_words_device")
 
+	//% "Devices"
+	readonly property string devices: qsTrId("common_words_devices")
+
 	//% "Disabled"
 	readonly property string disabled: qsTrId("common_words_disabled")
 
