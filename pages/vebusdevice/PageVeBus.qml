@@ -226,6 +226,7 @@ Page {
 			}
 
 			ListQuantity {
+				allowed: defaultAllowed && root.isMulti
 				dataItem.uid: root.bindPrefix + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage
@@ -238,6 +239,7 @@ Page {
 			}
 
 			ListActiveAcInput {
+				allowed: defaultAllowed && root.isMulti
 				bindPrefix: root.bindPrefix
 			}
 

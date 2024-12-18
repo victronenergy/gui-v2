@@ -116,6 +116,7 @@ Page {
 					return qsTrId("vebus_device_press_to_start")
 				}
 				enabled: !isNaN(setChargerState.value) && !isNaN(vebusSubState.value) && !startTimer.running && !interruptTimer.running
+				allowed: defaultAllowed && root.isMulti
 
 				onClicked: {
 					if (firmwareVersion.value < 0x400) {
