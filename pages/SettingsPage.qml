@@ -10,6 +10,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 SwipeViewPage {
 	id: root
@@ -27,14 +28,26 @@ SwipeViewPage {
 
 		model: [
 			{
-				//% "Device list"
-				text: qsTrId("settings_device_list"),
+				text: CommonWords.devices,
+				//% "All connected devices"
+				secondaryText: qsTrId("settings_all_connected_devices"),
 				page: "/pages/settings/devicelist/DeviceListPage.qml",
+				icon: "qrc:/images/icon_devices_32.png"
 			},
 			{
 				//% "General"
 				text: qsTrId("settings_general"),
-				page: "/pages/settings/PageSettingsGeneral.qml"
+				//% "Access control, Display, Language"
+				secondaryText: qsTrId("settings_access_control_display_language"),
+				page: "/pages/settings/PageSettingsGeneral.qml",
+				icon: "qrc:/images/icon_devices_32.svg"
+			},
+			{
+				//% "Connectivity"
+				text: qsTrId("settings_connectivity"),
+				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
+				secondaryText: qsTrId("settings_ethernet_wifi_bluetooth_vecan"),
+				page: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
 			},
 			{
 				//% "Firmware"
@@ -156,10 +169,40 @@ SwipeViewPage {
 		]
 
 		delegate: ListNavigation {
-			text: modelData.text
+			height: 64
 			showAccessLevel: modelData.showAccessLevel || VenusOS.User_AccessType_User
 			allowed: defaultAllowed && (modelData.allowed === undefined || modelData.allowed === true)
 			onClicked: Global.pageManager.pushPage(modelData.page, {"title": modelData.text})
+
+			CP.ColorImage {
+				id: icon
+
+				anchors {
+					left: parent.left
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
+					verticalCenter: parent.verticalCenter
+				}
+				source: modelData.icon || ""
+			}
+
+			Column {
+				anchors {
+					left: icon.right
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
+					verticalCenter: parent.verticalCenter
+				}
+				Label {
+					font.pixelSize: Theme.font_size_body1
+					wrapMode: Text.Wrap
+					text: modelData.text
+				}
+				Label {
+					font.pixelSize: Theme.font_size_body1
+					wrapMode: Text.Wrap
+					color: Theme.color_font_secondary
+					text: modelData.secondaryText || ""
+				}
+			}
 		}
 	}
 

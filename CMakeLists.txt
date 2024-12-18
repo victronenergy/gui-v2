@@ -469,6 +469,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsCanbus.qml
+    pages/settings/PageSettingsConnectivity.qml
     pages/settings/PageSettingsDisplay.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
@@ -1028,6 +1029,13 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
+        images/icon_connectivity_32.svg
+        images/icon_debug_32.svg
+        images/icon_devices_32.png
+        images/icon_general_32.png
+        images/icon_integration_32.png
+        images/icon_system_32.png
+        images/icon_vrm_32.svg
         images/brief.svg
         images/cloud.svg
         images/consumption.svg
