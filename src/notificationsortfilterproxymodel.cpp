@@ -27,11 +27,15 @@ bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QMo
 
 bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-	// sort by date
+	// sort by type, then by date
+	const int leftType = left.data(AllNotificationsModel::NotificationRoles::Type).toInt();
+	const int rightType = right.data(AllNotificationsModel::NotificationRoles::Type).toInt();
+
 	const QDateTime &leftDateTime =  left.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
 	const QDateTime &rightDateTime = right.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
 
-	return leftDateTime > rightDateTime;
+	return leftType < rightType &&
+		   leftDateTime > rightDateTime;
 }
 
 bool NotificationSortFilterProxyModel::acknowledged() const
