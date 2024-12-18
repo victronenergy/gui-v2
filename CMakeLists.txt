@@ -680,6 +680,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/notificationsmodel.cpp
     src/allnotificationsmodel.h
     src/allnotificationsmodel.cpp
+    src/notificationsortfilterproxymodel.h
+    src/notificationsortfilterproxymodel.cpp
     src/clocktime.h
     src/clocktime.cpp
     src/cpuinfo.h
