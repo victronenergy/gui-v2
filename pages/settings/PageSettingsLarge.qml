@@ -9,11 +9,18 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool allModificationsDisabled: allModificationsDisabledItem.isValid && allModificationsDisabledItem.value === 1
+
+	VeQuickItem {
+		id: allModificationsDisabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			PrimaryListLabel {
 				//% "Note that these features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
-				text: qsTrId("settings_large_features_not_offically_supported")
+				text: qsTrId("settings_large_features_not_offically_supported") + (root.allModificationsDisabled ? "\n\nVenus OS Large features are disabled, since \"Disable all modifications\" under \"Settings -> Support & Troubleshoot -> Customization checks\" is enabled." : "")
 			}
 
 			ListSwitch {
@@ -23,6 +30,7 @@ Page {
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 				allowed: dataItem.isValid
+				enabled: userHasWriteAccess && !root.allModificationsDisabled
 			}
 
 			PrimaryListLabel {

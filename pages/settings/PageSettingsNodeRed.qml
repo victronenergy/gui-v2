@@ -9,14 +9,27 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool allModificationsDisabled: allModificationsDisabledItem.isValid && allModificationsDisabledItem.value === 1
+
+	VeQuickItem {
+		id: allModificationsDisabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/SystemIntegrity/AllModificationsDisabled"
+	}
+
 	GradientListView {
 		model: ObjectModel {
+			PrimaryListLabel {
+				text: "Venus OS Large features are disabled, since \"Disable all modifications\" under \"Settings -> Support & Troubleshoot -> Customization checks\" is enabled."
+				allowed: root.allModificationsDisabled
+			}
+
 			ListRadioButtonGroup {
 				id: nodered
 
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				allowed: dataItem.isValid
+				enabled: userHasWriteAccess && !root.allModificationsDisabled
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
 					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },

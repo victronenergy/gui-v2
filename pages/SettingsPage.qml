@@ -149,6 +149,10 @@ SwipeViewPage {
 				page: "/pages/settings/PageVrmDeviceInstances.qml",
 			},
 			{
+				text: "Support & Troubleshoot",
+				page: "/pages/settings/PageSettingsSupportAndTroubleshoot.qml"
+			},
+			{
 				text: "Debug",
 				page: "/pages/settings/debug/PageDebug.qml",
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
