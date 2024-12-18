@@ -49,12 +49,15 @@ ObjectModel {
 		Repeater {
 			model: root.phaseNumbers
 			delegate: ListQuantityGroup {
-				allowed: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid || phasePower.isValid)
+				allowed: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid ||
+												  phasePower.isValid || phasePowerFactor.isValid)
 				text: CommonWords.ac_phase_x.arg(modelData)
 				textModel: [
 					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
 					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
 					{ value: phasePower.value, unit: VenusOS.Units_Watt },
+					{ value: phasePowerFactor.value, unit: VenusOS.Units_PowerFactor,
+						visible: phasePowerFactor.isValid },
 				]
 
 				VeQuickItem {
@@ -68,6 +71,10 @@ ObjectModel {
 				VeQuickItem {
 					id: phasePower
 					uid: root.bindPrefix + "/Ac/L" + modelData + "/Power"
+				}
+				VeQuickItem {
+					id: phasePowerFactor
+					uid: root.bindPrefix + "/Ac/L" + modelData + "/PowerFactor"
 				}
 			}
 		}

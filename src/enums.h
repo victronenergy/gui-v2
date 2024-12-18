@@ -84,6 +84,7 @@ public:
 		Units_Hectopascal,
 		Units_Kilopascal,
 		Units_CardinalDirection,
+		Units_PowerFactor
 	};
 	Q_ENUM(Units_Type)
 

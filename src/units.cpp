@@ -82,6 +82,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
 	case VenusOS::Enums::Units_Energy_KiloWattHour:  return 3;
+	case VenusOS::Enums::Units_PowerFactor:          return 3;
 	case VenusOS::Enums::Units_Volume_CubicMeter:    return 3;
 	case VenusOS::Enums::Units_Volt_DC:              return 2;
 	case VenusOS::Enums::Units_Volt_AC:                // fall through
@@ -154,6 +155,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("kPa");
 	case VenusOS::Enums::Units_CardinalDirection:
 		return DegreesSymbol;
+	case VenusOS::Enums::Units_PowerFactor:
+		return QString();
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
@@ -202,6 +205,7 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Hectopascal:
 	case VenusOS::Enums::Units_Kilopascal:
 	case VenusOS::Enums::Units_CardinalDirection:
+	case VenusOS::Enums::Units_PowerFactor:
 	default:
 		return false;
 	}
