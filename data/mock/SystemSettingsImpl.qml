@@ -96,6 +96,10 @@ QtObject {
 		setMockSettingValue("SystemSetup/BatteryService", "default")
 		setMockSettingValue("Alarm/System/GridLost", 1)
 
+		setMockSettingValue("Gui/BriefView/CenterValueDisplay", VenusOS.BriefView_CenterValue_SingleGaugeOnly)
+		setMockSettingValue("Gui/BriefView/CenterValueLabelDisplay", VenusOS.BriefView_CenterValue_SingleGaugeOnly)
+		setMockSettingValue("Gui/BriefView/CenterValueDevice", "mock/com.victronenergy.battery.ttyUSB1")
+
 		setMockSettingValue("System/TimeZone", "Europe/Berlin")
 
 		setMockSettingValue("Services/Bol", 1)
