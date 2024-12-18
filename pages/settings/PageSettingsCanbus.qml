@@ -117,8 +117,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Devices"
-				text: qsTrId("settings_devices")
+				text: CommonWords.devices
 				allowed: root._isVecan || root._isRvc
 				onClicked: {
 					if (root._isVecan) {
