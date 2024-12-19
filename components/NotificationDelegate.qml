@@ -19,6 +19,8 @@ Rectangle {
 	required property string deviceName
 	required property string value
 
+	required property var model
+
 	width: parent ? parent.width : 0
 	height: textColumn.height
 	radius: Theme.geometry_listItem_radius
