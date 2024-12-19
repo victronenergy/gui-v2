@@ -88,22 +88,16 @@ SwipeViewPage {
 				width: parent.width
 				interactive: false  // this list cannot be scrolled separately to the main list
 				spacing: Theme.geometry_gradientList_spacing
-				model: Global.notifications.activeModel
+				model: Global.notifications.unacknowledgedModel
 				delegate: NotificationDelegate {
 					id: activeDelegate
 
 					// When the delegate is clicked, acknowledge it.
 					PressArea {
 						anchors.fill: parent
-						enabled: !activeDelegate.notification.acknowledged
+						enabled: !activeDelegate.acknowledged
 						radius: activeDelegate.radius
-
-						onReleased: {
-							activeDelegate.notification.setAcknowledged(true)
-							if (activeDelegate.notification.active) {
-								activeDelegate.color = Theme.color_background_secondary
-							}
-						}
+						onReleased: activeDelegate.model.acknowledged = true
 					}
 				}
 			}
@@ -156,7 +150,7 @@ SwipeViewPage {
 		}
 
 		// Main list contains the historical notifications (inactive and acknowledged).
-		model: Global.notifications.historicalModel
+		model: Global.notifications.acknowledgedModel
 		spacing: Theme.geometry_gradientList_spacing
 		delegate: NotificationDelegate {}
 	}
