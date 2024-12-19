@@ -203,6 +203,14 @@ Page {
 				uid: root.bindPrefix + "/Channel/%1/Dimming".arg(root.currentChannel)
 
 			}
+			VeQuickItem {
+				id: fuseMin
+				uid: root.bindPrefix + "/MinFuse"
+			}
+			VeQuickItem {
+				id: fuseMax
+				uid: root.bindPrefix + "/MaxFuse"
+			}
 			GradientListView {
 				model: ObjectModel {
 					// ListText {
@@ -255,12 +263,44 @@ Page {
 					}
 
 					ListQuantityField{
+						id:fuseListField
 						text: "Fuse rating"
-						dataItem.uid: root.bindPrefix + "/Channel/%1/Fuse".arg(root.currentChannel)
-							  enabled: userHasWriteAccess
+						enabled: userHasWriteAccess
 						allowed: dataItem.isValid
 						unit: VenusOS.Units_Amp
-						decimals: 0
+						decimals: 1
+						dataItem.uid: root.bindPrefix + "/Channel/%1/Fuse".arg(root.currentChannel)
+
+						Timer {
+							id: validationTimer
+							interval: 2000
+							repeat: false
+							onTriggered: {
+								fuseListField.textField.text = Units.formatNumber(fuseListField.dataItem.value, fuseListField.decimals)
+							}
+						}
+						validateInput: function() {
+							const numberValue = Units.formattedNumberToReal(textField.text)
+							if (isNaN(numberValue)) {
+								return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+							}
+
+							// In case the user has entered a number with a greater precision than what is supported,
+							// adjust the precision of the displayed number.
+							const formattedNumber = Units.formatNumber(numberValue, fuseListField.decimals)
+							//% "Minimum value is %1"
+							if ((fuseMin.isValid) && (numberValue < fuseMin.value)) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Minimum value is %1".arg(fuseMin.value), formattedNumber)
+							//% "Maximum value is %1"
+							if ((fuseMax.isValid) && (numberValue > fuseMax.value)) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Maximum value is %1".arg(fuseMax.value), formattedNumber)
+							return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
+						}
+						saveInput: function(){
+							if (dataItem.uid) {
+							console.log("saveInput - ",textField.text)
+							dataItem.setValue(Units.formattedNumberToReal(textField.text))
+							validationTimer.start();
+							}
+						}
 					}
 				}
 			}
