@@ -11,30 +11,8 @@ ObjectModel {
 
 	property string bindPrefix
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
-	property string startStopBindPrefix: startStop1Uid
+	property string startStopBindPrefix: _startStop1Finder.startStop1Uid
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(bindPrefix)
-
-	// On D-Bus, the startstop1 generator is at com.victronenergy.generator.startstop1.
-	// On MQTT, the startstop1 generator is the one with GensetService=com.victronenergy.genset.*
-	// (or GensetService=com.victronenergy.dcgenset.* if this is a dcgenset)
-	readonly property string startStop1Uid: BackendConnection.type === BackendConnection.MqttSource
-			? generatorWithGensetService
-			: BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
-	property string generatorWithGensetService
-
-	property Instantiator generatorObjects: Instantiator {
-		model: BackendConnection.type === BackendConnection.MqttSource ? Global.generators.model : null
-		delegate: VeQuickItem {
-			uid: model.device.serviceUid + "/GensetService"
-			onValueChanged: {
-				if ( (isValid && root.dcGenset && value.startsWith("com.victronenergy.dcgenset."))
-						|| (isValid && !root.dcGenset && value.startsWith("com.victronenergy.genset.")) ) {
-						root.generatorWithGensetService = model.device.serviceUid
-				}
-			}
-		}
-	}
-
 	readonly property bool dcGenset: serviceType === "dcgenset"
 	readonly property int nrOfPhases: phases.isValid ? phases.value
 												   : dcGenset ? 0
@@ -45,6 +23,10 @@ ObjectModel {
 
 	readonly property VeQuickItem gensetEnabled: VeQuickItem {
 		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Enabled" : ""
+	}
+
+	readonly property GensetStartStop1Finder _startStop1Finder: GensetStartStop1Finder {
+		gensetServiceUid: root.bindPrefix
 	}
 
 	PrimaryListLabel {

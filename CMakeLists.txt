@@ -207,6 +207,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/GaugeModel.qml
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
+    components/GensetStartStop1Finder.qml
     components/EvChargerStatusModel.qml
     components/FlatListItemSeparator.qml
     components/GeneratorIconLabel.qml
