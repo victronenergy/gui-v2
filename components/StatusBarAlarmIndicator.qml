@@ -11,7 +11,7 @@ Rectangle {
 	width: parent.width
 	height: 5
 	color: Theme.color_critical
-	opacity: Global.notifications.alarm ? 1 : 0
+	opacity: Global.notifications.unacknowledgedAlarms.count > 0 ? 1 : 0
 
 	Behavior on opacity {
 		OpacityAnimator {
