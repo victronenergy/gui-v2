@@ -99,7 +99,7 @@ SwipeViewPage {
 						radius: activeDelegate.radius
 
 						onReleased: {
-							activeDelegate.notification.setAcknowledged(true)
+							activeDelegate.model.acknowledged = true
 							if (activeDelegate.notification.active) {
 								activeDelegate.color = Theme.color_background_secondary
 							}
