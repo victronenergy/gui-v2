@@ -50,7 +50,6 @@ QVariant NotificationsModel::data(const QModelIndex &index, int role) const
 		return m_data.at(row).get()->deviceName();
 	case Value:
 		return m_data.at(row).get()->value();
-
 	default:
 		return QVariant();
 
@@ -80,9 +79,15 @@ bool NotificationsModel::setData(const QModelIndex &index, const QVariant &value
 		}
 	}
 	case NotificationRoles::Acknowledged:
+	{
 		m_data.at(row).get()->setAcknowledged(value.toBool());
+		return true;
+	}
 	case NotificationRoles::Active:
+	{
 		m_data.at(row).get()->setActive(value.toBool());
+		return true;
+	}
 	case NotificationRoles::Type:
 	{
 		bool intOK = false;
@@ -95,13 +100,25 @@ bool NotificationsModel::setData(const QModelIndex &index, const QVariant &value
 		}
 	}
 	case NotificationRoles::DateTime:
+	{
 		m_data.at(row).get()->setDateTime(value.toDateTime());
+		return true;
+	}
 	case NotificationRoles::Description:
+	{
 		m_data.at(row).get()->setDescription(value.toString());
+		return true;
+	}
 	case NotificationRoles::DeviceName:
+	{
 		m_data.at(row).get()->setDeviceName(value.toString());
+		return true;
+	}
 	case NotificationRoles::Value:
+	{
 		m_data.at(row).get()->setValue(value.toString());
+		return true;
+	}
 	default:
 		return false;
 	}
