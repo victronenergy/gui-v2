@@ -139,7 +139,6 @@ Page {
 						})
 					} else if (batteryDelegate.serviceType === "genset") {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-							"title": genericDevice.customName,
 							"bindPrefix": batteryDelegate.device.serviceUid
 						})
 					} else {
@@ -148,11 +147,6 @@ Page {
 						})
 					}
 				}
-			}
-
-			Device {
-				id: genericDevice
-				serviceUid: batteryDelegate.device.instance >= 0 ? batteryDelegate.device.serviceUid : ""
 			}
 		}
 	}

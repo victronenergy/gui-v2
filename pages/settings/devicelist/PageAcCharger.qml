@@ -11,6 +11,13 @@ Page {
 
 	property string bindPrefix
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	GradientListView {
 		model: ObjectModel {
 			ListSwitch {

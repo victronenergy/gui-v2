@@ -13,10 +13,10 @@ OverviewWidget {
 	function _showSettingsPage(device) {
 		if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
-					{ "title": device.name, "bindPrefix": device.serviceUid })
+					{ "bindPrefix": device.serviceUid })
 		} else {
 			  Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-					{ "title": device.name, "bindPrefix": device.serviceUid })
+					{ "bindPrefix": device.serviceUid })
 		}
 	}
 

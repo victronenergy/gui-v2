@@ -13,6 +13,13 @@ Page {
 	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value >= 2 && !_phase.isValid
 	readonly property int trackerCount: numberOfTrackers.value || 0
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	VeQuickItem {
 		id: numberOfPhases
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
