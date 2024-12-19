@@ -21,12 +21,16 @@ QtObject {
 		// whether active or not
 		// all types
 		acknowledged: false
+		sortByType: true
+		sortByTime: true
 	}
 	readonly property NotificationSortFilterProxyModel newHistoricalModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
 		// all types
 		acknowledged: true
 		active: false
+		sortByType: true
+		sortByTime: true
 	}
 	readonly property NotificationSortFilterProxyModel activeAlarms: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel

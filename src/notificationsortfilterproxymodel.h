@@ -23,6 +23,8 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged RESET resetAcknowledged NOTIFY acknowledgedChanged FINAL)
 	Q_PROPERTY(bool active READ active WRITE setActive RESET resetActive NOTIFY activeChanged FINAL)
 	Q_PROPERTY(int type READ type WRITE setType RESET resetType NOTIFY typeChanged FINAL)
+	Q_PROPERTY(bool sortByType READ sortByType WRITE setSortByType NOTIFY sortByTypeChanged FINAL)
+	Q_PROPERTY(bool sortByTime READ sortByTime WRITE setSortByTime NOTIFY sortByTimeChanged FINAL)
 
 public:
 	explicit NotificationSortFilterProxyModel(QObject *parent = 0);
@@ -39,10 +41,17 @@ public:
 	void setType(int type);
 	void resetType();
 
+	bool sortByType() const;
+	void setSortByType(bool sortByType);
+	bool sortByTime() const;
+	void setSortByTime(bool sortByTime);
+
 signals:
 	void acknowledgedChanged();
 	void activeChanged();
 	void typeChanged();
+	void sortByTypeChanged();
+	void sortByTimeChanged();
 
 protected:
 	virtual bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const;
@@ -57,6 +66,8 @@ private:
 
 	int m_type = -1;
 	bool m_filterOnType = false;
+	bool m_sortByType = false;
+	bool m_sortByTime = true;
 };
 
 } /* VenusOS */

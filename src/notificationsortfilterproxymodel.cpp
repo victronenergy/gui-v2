@@ -34,8 +34,16 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &left, const Q
 	const QDateTime &leftDateTime =  left.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
 	const QDateTime &rightDateTime = right.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
 
-	return leftType < rightType &&
-		   leftDateTime > rightDateTime;
+	if(m_sortByType && m_sortByTime) {
+		return leftType < rightType && leftDateTime > rightDateTime;
+	}
+	if(m_sortByTime) {
+		return leftDateTime > rightDateTime;
+	}
+	if(m_sortByType) {
+		return leftType < rightType;
+	}
+	return true;
 }
 
 bool NotificationSortFilterProxyModel::acknowledged() const
@@ -104,5 +112,35 @@ void NotificationSortFilterProxyModel::resetType()
 {
 	setType(-1);
 	m_filterOnType = false;
+	invalidateFilter();
+}
+
+bool NotificationSortFilterProxyModel::sortByType() const
+{
+	return m_sortByType;
+}
+
+void NotificationSortFilterProxyModel::setSortByType(bool sortByType)
+{
+	if (m_sortByType == sortByType) {
+		return;
+	}
+	m_sortByType = sortByType;
+	emit sortByTypeChanged();
+	invalidateFilter();
+}
+
+bool NotificationSortFilterProxyModel::sortByTime() const
+{
+	return m_sortByTime;
+}
+
+void NotificationSortFilterProxyModel::setSortByTime(bool sortByTime)
+{
+	if (m_sortByTime == sortByTime) {
+		return;
+	}
+	m_sortByTime = sortByTime;
+	emit sortByTimeChanged();
 	invalidateFilter();
 }
