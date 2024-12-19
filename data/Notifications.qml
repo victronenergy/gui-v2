@@ -13,35 +13,29 @@ QtObject {
 
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {}
 
+	function _notificationSortFunction(leftNotification: var, rightNotification: var) : bool {
+		return leftNotification.type < rightNotification.type &&
+				leftNotification.dateTime > rightNotification.dateTime
+	}
 	readonly property NotificationSortFilterProxyModel unacknowledgedModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		// whether active or not
-		// all types
-		acknowledged: false
-		sortByType: false
-		sortByTime: true
+		filterFunction: (notification) => { return notification.active || !notification.acknowledged }
+		sortFunction: root._notificationSortFunction
 	}
 	readonly property NotificationSortFilterProxyModel acknowledgedModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		// whether active or not
-		// all types
-		acknowledged: true
-		sortByType: false
-		sortByTime: true
+		filterFunction: (notification) => { return !notification.active && notification.acknowledged }
+		sortFunction: root._notificationSortFunction
 	}
 	readonly property NotificationSortFilterProxyModel unacknowledgedAlarmsModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		// whether active or not
-		acknowledged: false
-		// only alarms
-		type: VenusOS.Notification_Alarm
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && !notification.acknowledged }
+		sortFunction: root._notificationSortFunction
 	}
 	readonly property NotificationSortFilterProxyModel activeAlarmsModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		active: true
-		// whether unacknowledged or not
-		// only alarms
-		type: VenusOS.Notification_Alarm
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && notification.active }
+		sortFunction: root._notificationSortFunction
 	}
 
 	readonly property bool alarm: !!_alarm.value

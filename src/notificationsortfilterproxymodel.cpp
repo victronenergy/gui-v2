@@ -3,13 +3,25 @@
 ** See LICENSE.txt for license information.
 */
 
-#include "notificationsortfilterproxymodel.h"
-#include "notificationsmodel.h"
+#include <QQmlContext>
 
-using namespace Victron::VenusOS;
+#include "notificationsortfilterproxymodel.h"
+
+namespace Victron {
+
+namespace VenusOS {
+
+class NotificationSortFilterProxyModelPrivate
+{
+public:
+	QJSEngine *m_engine = nullptr;
+	QJSValue m_filterFunction;
+	QJSValue m_sortFunction;
+};
 
 NotificationSortFilterProxyModel::NotificationSortFilterProxyModel(QObject *parent) :
-	QSortFilterProxyModel(parent)
+	QSortFilterProxyModel(parent),
+	d(new NotificationSortFilterProxyModelPrivate())
 {
 	setSortCaseSensitivity(Qt::CaseInsensitive);
 	setFilterCaseSensitivity(Qt::CaseInsensitive);
@@ -22,6 +34,11 @@ NotificationSortFilterProxyModel::NotificationSortFilterProxyModel(QObject *pare
 	connect(this, &QSortFilterProxyModel::layoutChanged, this, &NotificationSortFilterProxyModel::countChanged);
 }
 
+NotificationSortFilterProxyModel::~NotificationSortFilterProxyModel()
+{
+	delete d;
+}
+
 int NotificationSortFilterProxyModel::count(const QModelIndex &parent) const
 {
 	return rowCount(parent);
@@ -29,128 +46,97 @@ int NotificationSortFilterProxyModel::count(const QModelIndex &parent) const
 
 bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
-	const QModelIndex &index = sourceModel()->index(sourceRow, 0, sourceParent);
-	return (m_filterOnAcknowledged ? index.data(NotificationsModel::NotificationRoles::Acknowledged).toBool() == m_acknowledged : true) &&
-		   (m_filterOnActive ? index.data(NotificationsModel::NotificationRoles::Active).toBool() == m_active : true) &&
-		   (m_filterOnType ? index.data(NotificationsModel::NotificationRoles::Type).toInt() == m_type : true);
-}
-
-bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
-	// sort by type, then by date
-	const int leftType = left.data(NotificationsModel::NotificationRoles::Type).toInt();
-	const int rightType = right.data(NotificationsModel::NotificationRoles::Type).toInt();
-
-	const QDateTime &leftDateTime =  left.data(NotificationsModel::NotificationRoles::DateTime).toDateTime();
-	const QDateTime &rightDateTime = right.data(NotificationsModel::NotificationRoles::DateTime).toDateTime();
-
-	if(m_sortByType && m_sortByTime) {
-		return leftType < rightType && leftDateTime > rightDateTime;
+	Q_UNUSED(sourceParent)
+	if (!d->m_engine) {
+		d->m_engine = getJSEngine();
+		if (!d->m_engine)
+			qWarning() << "NotificationSortFilterProxyModel can't filter without a JavaScript engine";
 	}
-	if(m_sortByTime) {
-		return leftDateTime > rightDateTime;
-	}
-	if(m_sortByType) {
-		return leftType < rightType;
+	if (d->m_engine && d->m_filterFunction.isCallable()) {
+		const QVariantMap notification = get(sourceRow);
+		QJSValueList args = { d->m_engine->toScriptValue(notification) };
+		return d->m_filterFunction.call(args).toBool();
 	}
 	return true;
 }
 
-bool NotificationSortFilterProxyModel::acknowledged() const
+bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const
 {
-	return m_acknowledged;
-}
-
-void NotificationSortFilterProxyModel::setAcknowledged(bool acknowledged)
-{
-	m_filterOnAcknowledged = true;
-	if(m_acknowledged == acknowledged) {
-		return;
+	if (!d->m_engine) {
+		d->m_engine = getJSEngine();
+		if (!d->m_engine)
+			qWarning() << "NotificationSortFilterProxyModel can't sort without a JavaScript engine";
 	}
-	m_acknowledged = acknowledged;
-	emit acknowledgedChanged();
-	invalidate();
-}
-
-void NotificationSortFilterProxyModel::resetAcknowledged()
-{
-	setAcknowledged(false);
-	m_filterOnAcknowledged = false;
-	invalidate();
-}
-
-bool NotificationSortFilterProxyModel::active() const
-{
-	return m_active;
-}
-
-void NotificationSortFilterProxyModel::setActive(bool active)
-{
-	m_filterOnActive = true;
-	if (m_active == active) {
-		return;
+	if (d->m_engine && d->m_sortFunction.isCallable()) {
+		const QVariantMap left = get(sourceLeft.row());
+		const QVariantMap right = get(sourceRight.row());
+		QJSValueList args = { d->m_engine->toScriptValue(left), d->m_engine->toScriptValue(right) };
+		return d->m_sortFunction.call(args).toBool();
 	}
-	m_active = active;
-	emit activeChanged();
-	invalidate();
+	return QSortFilterProxyModel::lessThan(sourceLeft, sourceRight);
 }
 
-void NotificationSortFilterProxyModel::resetActive()
+QJSEngine * NotificationSortFilterProxyModel::getJSEngine() const
 {
-	setActive(false);
-	m_filterOnActive = false;
-	invalidate();
+	QQmlContext *context = QQmlEngine::contextForObject(this);
+	return context ? reinterpret_cast<QJSEngine*>(context->engine()) : nullptr;
 }
 
-int NotificationSortFilterProxyModel::type() const
+QJSValue NotificationSortFilterProxyModel::filterFunction() const
 {
-	return m_type;
+	return d->m_filterFunction;
 }
 
-void NotificationSortFilterProxyModel::setType(int type)
+void NotificationSortFilterProxyModel::setFilterFunction(const QJSValue &callback)
 {
-	m_filterOnType = true;
-	if (m_type == type) {
-		return;
+	if (!callback.isCallable() && !callback.isNull() && !callback.isUndefined()) {
+		qWarning() << "NotificationSortFilterProxyModel::setFilterFunction: The filterFunction property of NotificationSortFilterProxyModel needs to be either callable, or undefined/null to clear it.";
 	}
-	m_type = type;
-	emit typeChanged();
-	invalidate();
-}
-
-void NotificationSortFilterProxyModel::resetType()
-{
-	setType(-1);
-	m_filterOnType = false;
-	invalidate();
-}
-
-bool NotificationSortFilterProxyModel::sortByType() const
-{
-	return m_sortByType;
-}
-
-void NotificationSortFilterProxyModel::setSortByType(bool sortByType)
-{
-	if (m_sortByType == sortByType) {
-		return;
+	if (!callback.equals(d->m_filterFunction)) {
+		d->m_filterFunction = callback;
+		emit filterFunctionChanged();
+		invalidateFilter();
 	}
-	m_sortByType = sortByType;
-	emit sortByTypeChanged();
-	invalidate();
 }
 
-bool NotificationSortFilterProxyModel::sortByTime() const
+QJSValue NotificationSortFilterProxyModel::sortFunction() const
 {
-	return m_sortByTime;
+	return d->m_sortFunction;
 }
 
-void NotificationSortFilterProxyModel::setSortByTime(bool sortByTime)
+void NotificationSortFilterProxyModel::setSortFunction(const QJSValue &callback)
 {
-	if (m_sortByTime == sortByTime) {
-		return;
+	if (!callback.isCallable() && !callback.isNull() && !callback.isUndefined()) {
+		qWarning() << "NotificationSortFilterProxyModel::setSortFunction: The sortFunction property of NotificationSortFilterProxyModel needs to be either callable, or undefined/null to clear it.";
 	}
-	m_sortByTime = sortByTime;
-	emit sortByTimeChanged();
-	invalidate();
+	if (!callback.equals(d->m_sortFunction)) {
+		d->m_sortFunction = callback;
+		emit sortFunctionChanged();
+		invalidate();
+		sort(0);
+	}
 }
+
+QVariantMap NotificationSortFilterProxyModel::get(int index) const
+{
+	if(!this->sourceModel()) {
+		return QVariantMap();
+	}
+
+	if (index < 0 || index >= this->sourceModel()->rowCount()) {
+		qWarning() << "NotificationSortFilterProxyModel::get(index): invalid index:" << index;
+		return QVariantMap();
+	}
+
+	QVariantMap map;
+
+	QHash<int, QByteArray> roles = this->sourceModel()->roleNames();
+	for (auto it = roles.begin(); it != roles.end(); ++it) {
+		map.insert(QLatin1String(it.value()), this->sourceModel()->data(this->sourceModel()->index(index, 0), it.key()));
+	}
+	return map;
+}
+
+} /* VenusOS */
+
+} /* Victron */

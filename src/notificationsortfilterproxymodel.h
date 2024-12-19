@@ -7,7 +7,7 @@
 #define NOTIFICATIONSORTFILTERPROXYMODEL_H
 
 #include <QObject>
-#include <qqmlintegration.h>
+#include <QQmlEngine>
 #include <QSortFilterProxyModel>
 #include <QDateTime>
 
@@ -15,63 +15,41 @@ namespace Victron {
 
 namespace VenusOS {
 
+class NotificationSortFilterProxyModelPrivate;
+
 class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
 	QML_ELEMENT
 
 	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
-	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged RESET resetAcknowledged NOTIFY acknowledgedChanged FINAL)
-	Q_PROPERTY(bool active READ active WRITE setActive RESET resetActive NOTIFY activeChanged FINAL)
-	Q_PROPERTY(int type READ type WRITE setType RESET resetType NOTIFY typeChanged FINAL)
-	Q_PROPERTY(bool sortByType READ sortByType WRITE setSortByType NOTIFY sortByTypeChanged FINAL)
-	Q_PROPERTY(bool sortByTime READ sortByTime WRITE setSortByTime NOTIFY sortByTimeChanged FINAL)
+	Q_PROPERTY(QJSValue filterFunction READ filterFunction WRITE setFilterFunction NOTIFY filterFunctionChanged FINAL)
+	Q_PROPERTY(QJSValue sortFunction READ sortFunction WRITE setSortFunction NOTIFY sortFunctionChanged FINAL)
 
 public:
-	explicit NotificationSortFilterProxyModel(QObject *parent = 0);
+	explicit NotificationSortFilterProxyModel(QObject *parent = nullptr);
+	~NotificationSortFilterProxyModel();
 
 	int count(const QModelIndex& parent = QModelIndex()) const;
+	QJSValue filterFunction() const;
+	void setFilterFunction(const QJSValue &callback);
 
-	bool acknowledged() const;
-	void setAcknowledged(bool acknowledged);
-	void resetAcknowledged();
-
-	bool active() const;
-	void setActive(bool active);
-	void resetActive();
-
-	int type() const;
-	void setType(int type);
-	void resetType();
-
-	bool sortByType() const;
-	void setSortByType(bool sortByType);
-	bool sortByTime() const;
-	void setSortByTime(bool sortByTime);
+	QJSValue sortFunction() const;
+	void setSortFunction(const QJSValue &callback);
 
 signals:
 	void countChanged();
-	void acknowledgedChanged();
-	void activeChanged();
-	void typeChanged();
-	void sortByTypeChanged();
-	void sortByTimeChanged();
+	void filterFunctionChanged();
+	void sortFunctionChanged();
 
 protected:
-	virtual bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const;
-	bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+	bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const override;
+	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 
 private:
-	bool m_acknowledged = false;
-	bool m_filterOnAcknowledged = false;
-
-	bool m_active = false;
-	bool m_filterOnActive = false;
-
-	int m_type = -1;
-	bool m_filterOnType = false;
-	bool m_sortByType = false;
-	bool m_sortByTime = true;
+	NotificationSortFilterProxyModelPrivate *d = nullptr;
+	QVariantMap get(int index) const;
+	QJSEngine *getJSEngine() const;
 };
 
 } /* VenusOS */
