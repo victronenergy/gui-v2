@@ -24,7 +24,7 @@ Rectangle {
 	width: parent ? parent.width : 0
 	height: textColumn.height
 	radius: Theme.geometry_listItem_radius
-	color: /*acknowledged && active ? Theme.color_background_secondary :*/ Theme.color_background_secondary
+	color: Theme.color_background_secondary
 
 	Rectangle {
 		anchors {

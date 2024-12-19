@@ -97,13 +97,7 @@ SwipeViewPage {
 						anchors.fill: parent
 						enabled: !activeDelegate.acknowledged
 						radius: activeDelegate.radius
-
-						onReleased: {
-							activeDelegate.model.acknowledged = true
-							if (activeDelegate.notification.active) {
-								activeDelegate.color = Theme.color_background_secondary
-							}
-						}
+						onReleased: activeDelegate.model.acknowledged = true
 					}
 				}
 			}
