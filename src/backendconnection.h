@@ -139,6 +139,9 @@ public:
 	// Move this to some mock data manager when available
 	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant mockValue(const QString &uid) const;
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	Q_INVOKABLE void hitWatchdog();
+#endif
 
 Q_SIGNALS:
 	void stateChanged();

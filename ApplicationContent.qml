@@ -156,4 +156,12 @@ Item {
 				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
 	}
+
+	// Sometimes, the wasm code may crash. Use a watchdog to detect this and reload the page when necessary.
+	Timer {
+		running: Qt.platform.os === "wasm" && BackendConnection.state === BackendConnection.Ready
+		repeat: true
+		interval: 1000
+		onTriggered: BackendConnection.hitWatchdog()
+	}
 }
