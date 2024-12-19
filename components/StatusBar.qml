@@ -192,7 +192,7 @@ Rectangle {
 			anchors.verticalCenter: parent.verticalCenter
 			color: Theme.color_font_primary
 			source: "qrc:/images/notifications.svg"
-			visible: Global.notifications.activeAlarms.count > 0
+			visible: Global.notifications.activeAlarmsModel.count > 0
 		}
 	}
 
