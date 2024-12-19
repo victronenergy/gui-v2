@@ -13,6 +13,13 @@ Page {
 	property string serviceUid
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.serviceUid
+	}
+
 	VeQuickItem {
 		id: dcCurrent
 

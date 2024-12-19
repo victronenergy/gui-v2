@@ -20,12 +20,12 @@ OverviewWidget {
 			if (Global.inverterChargers.chargerDevices.count) {
 				const charger = Global.inverterChargers.chargerDevices.firstObject
 				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
-						{ "bindPrefix": charger.serviceUid, "title": charger.name })
+						{ "bindPrefix": charger.serviceUid })
 			} else {
 				// Show page for inverter, vebus and acsystem services
 				const device = Global.inverterChargers.firstObject
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-						{ "serviceUid": device.serviceUid, "title": device.name })
+						{ "serviceUid": device.serviceUid })
 			}
 		}
 	}

@@ -23,7 +23,7 @@ DeviceListDelegate {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSensor.qml",
-				{ "title": text, bindPrefix : root.device.serviceUid })
+				{ bindPrefix : root.device.serviceUid })
 	}
 
 	VeQuickItem {

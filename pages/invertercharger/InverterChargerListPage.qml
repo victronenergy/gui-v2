@@ -30,11 +30,11 @@ Page {
 				// Show page for chargers
 				if (model.device.serviceUid.indexOf('charger') >= 0) {
 					Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
-							{ "bindPrefix": model.device.serviceUid, "title": model.device.name })
+							{ "bindPrefix": model.device.serviceUid })
 				} else {
 					// Show page for inverter, vebus and acsystem services
 					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-							{ "serviceUid": model.device.serviceUid, "title": model.device.name })
+							{ "serviceUid": model.device.serviceUid })
 				}
 			}
 

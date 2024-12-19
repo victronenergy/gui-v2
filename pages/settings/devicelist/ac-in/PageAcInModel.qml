@@ -145,7 +145,7 @@ ObjectModel {
 	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage(deviceInfoComponent, { "title": text })
+			Global.pageManager.pushPage(deviceInfoComponent)
 		}
 
 		Component {

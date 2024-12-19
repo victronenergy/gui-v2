@@ -17,7 +17,7 @@ DeviceListDelegate {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-				{ "title": text, bindPrefix : root.device.serviceUid })
+				{ bindPrefix : root.device.serviceUid })
 	}
 
 	VeQuickItem {

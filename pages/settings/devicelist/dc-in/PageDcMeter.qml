@@ -11,6 +11,13 @@ Page {
 
 	property alias bindPrefix: dcMeterMode.bindPrefix
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	GradientListView {
 		model: PageDcMeterModel {
 			id: dcMeterMode

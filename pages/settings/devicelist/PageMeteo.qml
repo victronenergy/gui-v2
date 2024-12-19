@@ -12,6 +12,13 @@ Page {
 	property string bindPrefix
 	readonly property string settingsPrefix: Global.systemSettings.serviceUid + "/Settings/Service/meteo/" + deviceInstance.value
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	VeQuickItem {
 		id: deviceInstance
 		uid: bindPrefix + "/DeviceInstance"

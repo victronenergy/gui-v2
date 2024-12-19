@@ -19,6 +19,13 @@ Page {
 		}
 	}
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	VeQuickItem {
 		id: productIdDataItem
 

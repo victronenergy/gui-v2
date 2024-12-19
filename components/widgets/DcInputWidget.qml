@@ -36,7 +36,6 @@ OverviewWidget {
 	onClicked: {
 		if (root.inputs.count === 1) {
 			Global.pageManager.pushPage(root.detailUrl, {
-				"title": root.inputs.firstObject.name,
 				"bindPrefix": root.inputs.firstObject.serviceUid
 			})
 		} else {
@@ -83,7 +82,6 @@ OverviewWidget {
 
 					onClicked: {
 						Global.pageManager.pushPage(root.detailUrl, {
-							"title": model.device.name,
 							"bindPrefix": model.device.serviceUid
 						})
 					}
