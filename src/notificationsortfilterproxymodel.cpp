@@ -15,6 +15,16 @@ NotificationSortFilterProxyModel::NotificationSortFilterProxyModel(QObject *pare
 	setFilterCaseSensitivity(Qt::CaseInsensitive);
 
 	sort(0, Qt::AscendingOrder);
+
+	connect(this, &QSortFilterProxyModel::rowsInserted,  this, &NotificationSortFilterProxyModel::countChanged);
+	connect(this, &QSortFilterProxyModel::rowsRemoved,   this, &NotificationSortFilterProxyModel::countChanged);
+	connect(this, &QSortFilterProxyModel::modelReset,    this, &NotificationSortFilterProxyModel::countChanged);
+	connect(this, &QSortFilterProxyModel::layoutChanged, this, &NotificationSortFilterProxyModel::countChanged);
+}
+
+int NotificationSortFilterProxyModel::count(const QModelIndex &parent) const
+{
+	return rowCount(parent);
 }
 
 bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const

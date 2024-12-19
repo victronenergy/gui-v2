@@ -20,6 +20,7 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 	Q_OBJECT
 	QML_ELEMENT
 
+	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
 	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged RESET resetAcknowledged NOTIFY acknowledgedChanged FINAL)
 	Q_PROPERTY(bool active READ active WRITE setActive RESET resetActive NOTIFY activeChanged FINAL)
 	Q_PROPERTY(int type READ type WRITE setType RESET resetType NOTIFY typeChanged FINAL)
@@ -28,6 +29,8 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 
 public:
 	explicit NotificationSortFilterProxyModel(QObject *parent = 0);
+
+	int count(const QModelIndex& parent = QModelIndex()) const;
 
 	bool acknowledged() const;
 	void setAcknowledged(bool acknowledged);
@@ -47,6 +50,7 @@ public:
 	void setSortByTime(bool sortByTime);
 
 signals:
+	void countChanged();
 	void acknowledgedChanged();
 	void activeChanged();
 	void typeChanged();
