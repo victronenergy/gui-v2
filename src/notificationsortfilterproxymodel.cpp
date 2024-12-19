@@ -69,14 +69,14 @@ void NotificationSortFilterProxyModel::setAcknowledged(bool acknowledged)
 	}
 	m_acknowledged = acknowledged;
 	emit acknowledgedChanged();
-	invalidateFilter();
+	invalidate();
 }
 
 void NotificationSortFilterProxyModel::resetAcknowledged()
 {
 	setAcknowledged(false);
 	m_filterOnAcknowledged = false;
-	invalidateFilter();
+	invalidate();
 }
 
 bool NotificationSortFilterProxyModel::active() const
@@ -92,14 +92,14 @@ void NotificationSortFilterProxyModel::setActive(bool active)
 	}
 	m_active = active;
 	emit activeChanged();
-	invalidateFilter();
+	invalidate();
 }
 
 void NotificationSortFilterProxyModel::resetActive()
 {
 	setActive(false);
 	m_filterOnActive = false;
-	invalidateFilter();
+	invalidate();
 }
 
 int NotificationSortFilterProxyModel::type() const
@@ -115,14 +115,14 @@ void NotificationSortFilterProxyModel::setType(int type)
 	}
 	m_type = type;
 	emit typeChanged();
-	invalidateFilter();
+	invalidate();
 }
 
 void NotificationSortFilterProxyModel::resetType()
 {
 	setType(-1);
 	m_filterOnType = false;
-	invalidateFilter();
+	invalidate();
 }
 
 bool NotificationSortFilterProxyModel::sortByType() const
@@ -137,7 +137,7 @@ void NotificationSortFilterProxyModel::setSortByType(bool sortByType)
 	}
 	m_sortByType = sortByType;
 	emit sortByTypeChanged();
-	invalidateFilter();
+	invalidate();
 }
 
 bool NotificationSortFilterProxyModel::sortByTime() const
@@ -152,5 +152,5 @@ void NotificationSortFilterProxyModel::setSortByTime(bool sortByTime)
 	}
 	m_sortByTime = sortByTime;
 	emit sortByTimeChanged();
-	invalidateFilter();
+	invalidate();
 }
