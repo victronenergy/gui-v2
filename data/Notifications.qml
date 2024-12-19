@@ -36,6 +36,13 @@ QtObject {
 		// only alarms
 		type: VenusOS.Notification_Alarm
 	}
+	readonly property NotificationSortFilterProxyModel activeAlarms: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		active: true
+		// whether unacknowledged or not
+		// only alarms
+		type: VenusOS.Notification_Alarm
+	}
 
 	readonly property bool alarm: !!_alarm.value
 	readonly property bool alert: !!_alert.value
