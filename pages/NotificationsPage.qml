@@ -95,7 +95,7 @@ SwipeViewPage {
 					// When the delegate is clicked, acknowledge it.
 					PressArea {
 						anchors.fill: parent
-						enabled: !activeDelegate.notification.acknowledged
+						enabled: !activeDelegate.acknowledged
 						radius: activeDelegate.radius
 
 						onReleased: {

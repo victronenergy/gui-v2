@@ -64,8 +64,6 @@ signals:
 	void valueChanged();
 
 private:
-	friend class NotificationsModel;
-
 	int m_notificationId = -1;
 	bool m_acknowledged = false;
 	bool m_active = false;
