@@ -57,7 +57,7 @@ Page {
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageMultiRs.qml",
-						{ "title": text, "bindPrefix": device.serviceUid })
+						{ "bindPrefix": device.serviceUid })
 			}
 		}
 	}
