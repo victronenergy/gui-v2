@@ -4,7 +4,7 @@
 */
 
 #include "notificationsortfilterproxymodel.h"
-#include "allnotificationsmodel.h"
+#include "notificationsmodel.h"
 
 using namespace Victron::VenusOS;
 
@@ -20,19 +20,19 @@ NotificationSortFilterProxyModel::NotificationSortFilterProxyModel(QObject *pare
 bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	const QModelIndex &index = sourceModel()->index(sourceRow, 0, sourceParent);
-	return (m_filterOnAcknowledged ? index.data(AllNotificationsModel::NotificationRoles::Acknowledged).toBool() == m_acknowledged : true) &&
-		   (m_filterOnActive ? index.data(AllNotificationsModel::NotificationRoles::Active).toBool() == m_active : true) &&
-		   (m_filterOnType ? index.data(AllNotificationsModel::NotificationRoles::Type).toInt() == m_type : true);
+	return (m_filterOnAcknowledged ? index.data(NotificationsModel::NotificationRoles::Acknowledged).toBool() == m_acknowledged : true) &&
+		   (m_filterOnActive ? index.data(NotificationsModel::NotificationRoles::Active).toBool() == m_active : true) &&
+		   (m_filterOnType ? index.data(NotificationsModel::NotificationRoles::Type).toInt() == m_type : true);
 }
 
 bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
 	// sort by type, then by date
-	const int leftType = left.data(AllNotificationsModel::NotificationRoles::Type).toInt();
-	const int rightType = right.data(AllNotificationsModel::NotificationRoles::Type).toInt();
+	const int leftType = left.data(NotificationsModel::NotificationRoles::Type).toInt();
+	const int rightType = right.data(NotificationsModel::NotificationRoles::Type).toInt();
 
-	const QDateTime &leftDateTime =  left.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
-	const QDateTime &rightDateTime = right.data(AllNotificationsModel::NotificationRoles::DateTime).toDateTime();
+	const QDateTime &leftDateTime =  left.data(NotificationsModel::NotificationRoles::DateTime).toDateTime();
+	const QDateTime &rightDateTime = right.data(NotificationsModel::NotificationRoles::DateTime).toDateTime();
 
 	if(m_sortByType && m_sortByTime) {
 		return leftType < rightType && leftDateTime > rightDateTime;

@@ -11,12 +11,9 @@ QtObject {
 
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
-	readonly property NotificationsModel activeModel: NotificationsModel {}
-	readonly property NotificationsModel historicalModel: NotificationsModel {}
+	readonly property NotificationsModel allNotificationsModel: NotificationsModel {}
 
-	readonly property AllNotificationsModel allNotificationsModel: AllNotificationsModel {}
-
-	readonly property NotificationSortFilterProxyModel newActiveModel: NotificationSortFilterProxyModel {
+	readonly property NotificationSortFilterProxyModel activeModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
 		// whether active or not
 		// all types
@@ -24,7 +21,7 @@ QtObject {
 		sortByType: true
 		sortByTime: true
 	}
-	readonly property NotificationSortFilterProxyModel newHistoricalModel: NotificationSortFilterProxyModel {
+	readonly property NotificationSortFilterProxyModel historicalModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
 		// all types
 		acknowledged: true
@@ -63,8 +60,7 @@ QtObject {
 	signal acknowledgeNotification(notificationId: int)
 
 	function reset() {
-		activeModel.reset()
-		historicalModel.reset()
+		allNotificationsModel.reset()
 	}
 
 	function acknowledgeAll() {

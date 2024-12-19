@@ -12,7 +12,6 @@ BaseNotification {
 	readonly property string serviceUid: notificationId < 0 ? ""
 			: Global.notifications.serviceUid + "/" + notificationId
 
-	property var _currentModel
 	property date _invalidDate
 
 	readonly property VeQuickItem _acknowledged: VeQuickItem {
@@ -58,37 +57,16 @@ BaseNotification {
 			   && _dateTime.value !== undefined
 	on_CanInitializeChanged: _init()
 
-	readonly property bool _isHistorical: !active && acknowledged
-	on_IsHistoricalChanged: {
-		if (!!_currentModel) {
-			const newModel = _targetModel()
-			if (newModel !== _currentModel) {
-				_currentModel.removeNotification(notificationId)
-				newModel.insertByDate(notification)
-				_currentModel = newModel
-			}
-		}
-	}
-
 	function setAcknowledged(ack) {
 		 _acknowledged.setValue(ack ? 1 : 0)
 	}
 
 	function _init() {
-		if (!!_currentModel || !_canInitialize) {
+		if (!Global.notifications.allNotificationsModel || !_canInitialize) {
 			return
 		}
-		const model = _targetModel()
-		model.insertByDate(notification)
-		_currentModel = model
-	}
-
-	function _targetModel() {
-		if (_isHistorical) {
-			return Global.notifications.historicalModel
-		} else {
-			return Global.notifications.activeModel
-		}
+		// insert into the allNotificationsModel
+		Global.notifications.allNotificationsModel.insertNotification(notification)
 	}
 
 	acknowledged: !!_acknowledged.value
@@ -100,8 +78,7 @@ BaseNotification {
 	value: _value.value || ""
 
 	Component.onDestruction: {
-		if (_currentModel) {
-			_currentModel.removeNotification(notificationId)
-		}
+		// remove from the allNotificationsModel
+		Global.notifications.allNotificationsModel.removeNotification(notification)
 	}
 }
