@@ -18,39 +18,22 @@ QtObject {
 		// whether active or not
 		// all types
 		acknowledged: false
-		sortByType: true
+		sortByType: false
 		sortByTime: true
 	}
 	readonly property NotificationSortFilterProxyModel historicalModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
+		// whether active or not
 		// all types
 		acknowledged: true
-		active: false
-		sortByType: true
+		sortByType: false
 		sortByTime: true
-	}
-	readonly property NotificationSortFilterProxyModel activeAlarms: NotificationSortFilterProxyModel {
-		sourceModel: allNotificationsModel
-		active: true
-		// whether acknowledged or not
-		type: VenusOS.Notification_Alarm
 	}
 	readonly property NotificationSortFilterProxyModel unacknowledgedAlarms: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		acknowledged: false
 		// whether active or not
-		type: VenusOS.Notification_Alarm
-	}
-	readonly property NotificationSortFilterProxyModel activeUnacknowledgedAlarms: NotificationSortFilterProxyModel {
-		sourceModel: allNotificationsModel
-		active: true
 		acknowledged: false
-		type: VenusOS.Notification_Alarm
-	}
-	readonly property NotificationSortFilterProxyModel inactiveAcknowledgedAlarms: NotificationSortFilterProxyModel {
-		sourceModel: allNotificationsModel
-		active: false
-		acknowledged: true
+		// only alarms
 		type: VenusOS.Notification_Alarm
 	}
 
