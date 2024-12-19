@@ -43,9 +43,9 @@ ListModel {
 										 ? _customName.value
 										 : customGp
 										   //% "%2|Ch %1"
-										   ? qsTrId("Switches_InGroupDefaultName").arg(index).arg(shortDevName)
-										   //% "Ch %1"
-										   : qsTrId("Switches_NonGroupDefaultName").arg(index)
+										   ? qsTrId("Switches_InGroupDefaultName").arg(index + 1).arg(shortDevName)
+										   //% "Channel %1"
+										   : qsTrId("Switches_NonGroupDefaultName").arg(index + 1)
 					onNameChanged: {
 						if (_store !== null){
 							_store = updateList(switchuid, _store, groupName, name)

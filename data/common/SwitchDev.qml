@@ -9,6 +9,9 @@ import Victron.VenusOS
 
 Device {
 	id: switchDev
+	//% "%1 %2"
+	property string _instProductName: (_deviceInstance.isValid && _productName.isValid) ? qsTrId("switchDev_InstProductName").arg (_productName.value).arg(_deviceInstance.value) : productName.value
+	name: _customName.value || _instProductName || ""
 
 	readonly property int state: _state.isValid ? _state.value : -1
 
