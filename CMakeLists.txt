@@ -469,6 +469,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageHub4Debug.qml
     pages/settings/PageRelayGenerator.qml
     pages/settings/PageSettingsAccessAndSecurity.qml
+    pages/settings/PageSettingsAlarmsAndFeedback.qml
     pages/settings/PageSettingsBatteries.qml
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
