@@ -45,6 +45,7 @@ Page {
 			ListNavigation {
 				//% "Display & Appearance"
 				text: qsTrId("pagesettingsgeneral_display_and_appearance")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
 			}
 
 			ListNavigation {
