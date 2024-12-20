@@ -51,6 +51,7 @@ Page {
 			ListNavigation {
 				//% "Alarms & Feedback"
 				text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
 			}
 
 			SettingsListHeader { }
@@ -236,25 +237,6 @@ Page {
 						footer.opacity: footer.enabled ? 1 : 0
 					}
 				}
-			}
-
-			ListSwitch {
-				//% "Audible alarm"
-				text: qsTrId("settings_audible_alarm")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-				allowed: defaultAllowed && buzzerStateDataItem.isValid
-
-				VeQuickItem {
-					id: buzzerStateDataItem
-					uid: Global.system.serviceUid + "/Buzzer/State"
-				}
-			}
-
-			ListSwitch {
-				//% "Enable status LEDs"
-				text: qsTrId("settings_enable_status_leds")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/LEDs/Enable"
-				allowed: defaultAllowed && dataItem.isValid
 			}
 
 			ListRadioButtonGroup {
