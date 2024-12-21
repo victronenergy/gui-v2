@@ -19,6 +19,16 @@ Page {
 				text: qsTrId("pagesettingsconnectivity_ethernet")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": text})
 			}
+
+			ListNavigation {
+				//% "Wi-Fi"
+				text: qsTrId("pagesettingsconnectivity_wifi")
+				secondaryText: wifiModel.connectedNetworkName
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text})
+				WifiModel {
+					id: wifiModel
+				}
+			}
 		}
 	}
 }
