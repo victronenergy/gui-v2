@@ -138,6 +138,7 @@ Page {
 			ListNavigation {
 				//% "Display Units"
 				text: qsTrId("pagesettingsgeneral_display_units")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
 			}
 
 			SettingsListHeader { }
