@@ -132,73 +132,88 @@ Page {
 		id: connectedModel
 
 		ListText {
-			//% "Name"
-			text: qsTrId("settings_tcpip_name")
-			secondaryText: !root._wifi
-					 //% "Wired"
-					? qsTrId("settings_tcpip_wired")
-					 //% "[Hidden]"
-					: root.network || qsTrId("settings_tcpip_hidden")
-			allowed: root._wifi
+			text: CommonWords.state
+			secondaryText: Utils.connmanServiceState(service.state)
 		}
 
-		ListTextField {
-			text: CommonWords.password
-			textField.maximumLength: 63
-			allowed: root.ready && root._wifi && root._disconnected
-					 && !service.favorite && service.secured
+		// TODO: Report MAC address (BSSID) of Wi-Fi networks (see Venus issue #364)
+		ListText {
+			//% "MAC address"
+			text: qsTrId("settings_tcpip_mac_address")
+			secondaryText: service.macAddress
+			allowed: !root._wifi
+		}
+
+		ListRadioButtonGroup {
+			id: method
+
+			//% "IP configuration"
+			text: qsTrId("settings_tcpip_ip_config")
 			writeAccessLevel: VenusOS.User_AccessType_User
-			saveInput: function() {
-				var obj = {
-					Service: service.service,
-					Action: "connect",
-					Passphrase: textField.text
+			optionModel: [
+				//% "Automatic"
+				{ display: qsTrId("settings_tcpip_auto"), value: "dhcp" },
+				//% "Manual"
+				{ display: qsTrId("settings_tcpip_manual"), value: "manual" },
+				//% "Off"
+				{ display: qsTrId("settings_tcpip_off"), value: "off", readOnly: true },
+				//% "Fixed"
+				{ display: qsTrId("settings_tcpip_fixed"), value: "fixed", readOnly: true },
+			]
+			currentIndex: {
+				for (let i = 0; i < optionModel.length; ++i) {
+					if (optionModel[i].value === service.method_) {
+						return i
+					}
 				}
-				var json = JSON.stringify(obj);
-				setValueItem.setValue(json)
+				return -1
+			}
+
+			enabled: userHasReadAccess
+			allowed: defaultAllowed
+
+			onOptionClicked: function(index) {
+				setServiceProperty("Method", optionModel[index].value)
 			}
 		}
 
-		ListButton {
-			//% "Connect to network?"
-			text: qsTrId("settings_tcpip_connect_to_network")
-			//% "Connect"
-			button.text: qsTrId("settings_tcpip_connect")
-			allowed: root.ready && root._wifi && root._disconnected
-					 && (service.favorite || !service.secured)
-			writeAccessLevel: VenusOS.User_AccessType_User
-			onClicked: performAction("connect")
+		ListIpAddressField {
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.ipAddress
+			saveInput: function() { setServiceProperty("Address", textField.text) }
 		}
 
-		ListButton {
-			id: forgetNetworkButton
-
-			//% "Forget network?"
-			text: qsTrId("settings_tcpip_forget_network")
-			//% "Forget"
-			button.text: qsTrId("settings_tcpip_forget")
-			allowed: root.ready && root._wifi && service.favorite
-			writeAccessLevel: VenusOS.User_AccessType_User
-			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)
-
-			Component {
-				id: forgetNetworkDialogComponent
-
-				ModalWarningDialog {
-					dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-					title: forgetNetworkButton.text
-					//% "Are you sure that you want to forget this network?"
-					description: qsTrId("settings_tcpip_forget_confirm")
-					onAccepted: performAction("remove")
-				}
-			}
+		ListIpAddressField {
+			//% "Netmask"
+			text: qsTrId("settings_tcpip_netmask")
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.netmask
+			saveInput: function() { setServiceProperty("Netmask", textField.text) }
 		}
 
-		ListQuantity {
-			text: CommonWords.signal_strength
-			value: service.strength
-			unit: VenusOS.Units_Percentage
-			allowed: root._wifi
+		ListIpAddressField {
+			//% "Gateway"
+			text: qsTrId("settings_tcpip_gateway")
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.gateway
+			saveInput: function() { setServiceProperty("Gateway", textField.text) }
+		}
+
+		ListIpAddressField {
+			//% "DNS server"
+			text: qsTrId("settings_tcpip_dns_server")
+			enabled: method.userHasWriteAccess && service.manual
+			textField.text: service.nameserver
+			saveInput: function() { setServiceProperty("Nameserver", textField.text) }
+		}
+
+		ListText {
+			id: linklocal
+
+			//% "Link-local IP address"
+			text: qsTrId("settings_tcpip_link_local")
+			allowed: !root._wifi
+			dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 		}
 	}
 }

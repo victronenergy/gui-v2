@@ -484,6 +484,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsDisplayStartPage.qml
     pages/settings/PageSettingsDvcc.qml
     pages/settings/PageSettingsDynamicEss.qml
+    pages/settings/PageSettingsEthernet.qml
     pages/settings/PageSettingsFirmware.qml
     pages/settings/PageSettingsFirmwareOffline.qml
     pages/settings/PageSettingsFirmwareOnline.qml

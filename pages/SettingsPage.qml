@@ -49,7 +49,7 @@ SwipeViewPage {
 				text: qsTrId("settings_connectivity")
 				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
 				secondaryText: qsTrId("settings_ethernet_wifi_bluetooth_vecan")
-				pageSource: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
+				pageSource: "/pages/settings/PageSettingsConnectivity.qml"
 				iconSource: "qrc:/images/icon_connectivity_32.png"
 			}
 
