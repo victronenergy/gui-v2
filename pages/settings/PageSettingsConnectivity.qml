@@ -29,6 +29,17 @@ Page {
 					id: wifiModel
 				}
 			}
+
+			ListNavigation {
+				//% "Bluetooth"
+				text: qsTrId("pagesettingsconnectivity_bluetooth")
+				allowed: hasBluetoothSupport.value
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+			}
 		}
+	}
+	VeQuickItem {
+		id: hasBluetoothSupport
+		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
 	}
 }
