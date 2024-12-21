@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
@@ -35,6 +34,18 @@ Page {
 				text: qsTrId("pagesettingsconnectivity_bluetooth")
 				allowed: hasBluetoothSupport.value
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Mobile Network"
+				text: qsTrId("pagesettingsconnectivity_mobile_network")
+				secondaryText: dataItem.isValid ? dataItem.value + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
+
+				VeQuickItem {
+					id: dataItem
+					uid: BackendConnection.serviceUidForType("modem") + "/NetworkName"
+				}
 			}
 		}
 	}
