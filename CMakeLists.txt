@@ -477,7 +477,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsConnectivity.qml
-    pages/settings/PageSettingsDisplay.qml
     pages/settings/PageSettingsDisplayAndAppearance.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
