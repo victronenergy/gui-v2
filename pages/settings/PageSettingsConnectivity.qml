@@ -47,6 +47,12 @@ Page {
 					uid: BackendConnection.serviceUidForType("modem") + "/NetworkName"
 				}
 			}
+
+			ListNavigation {
+				//% "GPS"
+				text: qsTrId("settings_gps")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGpsList.qml", {"title": text})
+			}
 		}
 	}
 	VeQuickItem {
