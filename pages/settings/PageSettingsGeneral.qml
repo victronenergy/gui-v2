@@ -131,6 +131,7 @@ Page {
 			ListNavigation {
 				//% "Date & Time"
 				text: qsTrId("pagesettingsgeneral_date_and_time")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
 			}
 
 
