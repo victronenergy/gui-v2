@@ -1,0 +1,65 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+#ifndef NOTIFICATIONSORTFILTERPROXYMODEL_H
+#define NOTIFICATIONSORTFILTERPROXYMODEL_H
+
+#include <QObject>
+#include <QQmlEngine>
+#include <QSortFilterProxyModel>
+#include <QDateTime>
+#include "enums.h"
+
+namespace Victron {
+
+namespace VenusOS {
+
+class NotificationSortFilterProxyModelPrivate;
+
+class NotificationSortFilterProxyModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+
+	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
+	Q_PROPERTY(Enums::Notification_Type highestPriorityType READ highestPriorityType NOTIFY highestPriorityTypeChanged FINAL)
+	Q_PROPERTY(QJSValue filterFunction READ filterFunction WRITE setFilterFunction NOTIFY filterFunctionChanged FINAL)
+	Q_PROPERTY(QJSValue sortFunction READ sortFunction WRITE setSortFunction NOTIFY sortFunctionChanged FINAL)
+
+public:
+	explicit NotificationSortFilterProxyModel(QObject *parent = nullptr);
+	~NotificationSortFilterProxyModel();
+
+	int count() const;
+	Enums::Notification_Type highestPriorityType() const;
+	QJSValue filterFunction() const;
+	void setFilterFunction(const QJSValue &callback);
+
+	QJSValue sortFunction() const;
+	void setSortFunction(const QJSValue &callback);
+
+signals:
+	void countChanged();
+	void highestPriorityTypeChanged();
+	void filterFunctionChanged();
+	void sortFunctionChanged();
+
+protected:
+	bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const override;
+	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
+
+private:
+	void updateStats();
+	NotificationSortFilterProxyModelPrivate *d = nullptr;
+	QVariantMap get(int index) const;
+	QJSEngine *getJSEngine() const;
+	int m_count = 0;
+	Enums::Notification_Type m_highestPriorityType = Enums::Notification_Type::Notification_Info;
+};
+
+} /* VenusOS */
+
+} /* Victron */
+#endif // NOTIFICATIONSORTFILTERPROXYMODEL_H

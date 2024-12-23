@@ -11,8 +11,28 @@ QtObject {
 
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
-	property NotificationsModel activeModel: NotificationsModel {}
-	property NotificationsModel historicalModel: NotificationsModel {}
+	readonly property NotificationsModel allNotificationsModel: NotificationsModel {}
+
+	function _notificationSortFunction(leftNotification: var, rightNotification: var) : bool {
+		return leftNotification.type < rightNotification.type &&
+				leftNotification.dateTime > rightNotification.dateTime
+	}
+	readonly property NotificationSortFilterProxyModel unacknowledgedModel: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.active || !notification.acknowledged }
+		sortFunction: root._notificationSortFunction
+	}
+	readonly property NotificationSortFilterProxyModel acknowledgedModel: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return !notification.active && notification.acknowledged }
+		sortFunction: root._notificationSortFunction
+	}
+	readonly property NotificationSortFilterProxyModel activeAlarmsAndWarningsModel: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return (notification.type === VenusOS.Notification_Alarm ||
+													notification.type === VenusOS.Notification_Warning) && notification.active }
+		sortFunction: root._notificationSortFunction
+	}
 
 	readonly property bool alarm: !!_alarm.value
 	readonly property bool alert: !!_alert.value
@@ -20,8 +40,7 @@ QtObject {
 	signal acknowledgeNotification(notificationId: int)
 
 	function reset() {
-		activeModel.reset()
-		historicalModel.reset()
+		allNotificationsModel.reset()
 	}
 
 	function acknowledgeAll() {
