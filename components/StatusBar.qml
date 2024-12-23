@@ -272,5 +272,5 @@ Rectangle {
 		}
 	}
 
-	StatusBarAlarmIndicator { }
+	StatusBarNotificationIndicator { }
 }
