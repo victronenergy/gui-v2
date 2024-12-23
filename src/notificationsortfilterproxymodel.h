@@ -10,6 +10,7 @@
 #include <QQmlEngine>
 #include <QSortFilterProxyModel>
 #include <QDateTime>
+#include "enums.h"
 
 namespace Victron {
 
@@ -23,6 +24,7 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 	QML_ELEMENT
 
 	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
+	Q_PROPERTY(Enums::Notification_Type highestPriorityType READ highestPriorityType NOTIFY highestPriorityTypeChanged FINAL)
 	Q_PROPERTY(QJSValue filterFunction READ filterFunction WRITE setFilterFunction NOTIFY filterFunctionChanged FINAL)
 	Q_PROPERTY(QJSValue sortFunction READ sortFunction WRITE setSortFunction NOTIFY sortFunctionChanged FINAL)
 
@@ -30,7 +32,8 @@ public:
 	explicit NotificationSortFilterProxyModel(QObject *parent = nullptr);
 	~NotificationSortFilterProxyModel();
 
-	int count(const QModelIndex& parent = QModelIndex()) const;
+	int count() const;
+	Enums::Notification_Type highestPriorityType() const;
 	QJSValue filterFunction() const;
 	void setFilterFunction(const QJSValue &callback);
 
@@ -39,6 +42,7 @@ public:
 
 signals:
 	void countChanged();
+	void highestPriorityTypeChanged();
 	void filterFunctionChanged();
 	void sortFunctionChanged();
 
@@ -47,9 +51,12 @@ protected:
 	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 
 private:
+	void updateStats();
 	NotificationSortFilterProxyModelPrivate *d = nullptr;
 	QVariantMap get(int index) const;
 	QJSEngine *getJSEngine() const;
+	int m_count = 0;
+	Enums::Notification_Type m_highestPriorityType = Enums::Notification_Type::Notification_Info;
 };
 
 } /* VenusOS */

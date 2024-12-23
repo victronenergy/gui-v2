@@ -6,6 +6,7 @@
 #include <QQmlContext>
 
 #include "notificationsortfilterproxymodel.h"
+#include "notificationsmodel.h"
 
 namespace Victron {
 
@@ -28,10 +29,12 @@ NotificationSortFilterProxyModel::NotificationSortFilterProxyModel(QObject *pare
 
 	sort(0, Qt::AscendingOrder);
 
-	connect(this, &QSortFilterProxyModel::rowsInserted,  this, &NotificationSortFilterProxyModel::countChanged);
-	connect(this, &QSortFilterProxyModel::rowsRemoved,   this, &NotificationSortFilterProxyModel::countChanged);
-	connect(this, &QSortFilterProxyModel::modelReset,    this, &NotificationSortFilterProxyModel::countChanged);
-	connect(this, &QSortFilterProxyModel::layoutChanged, this, &NotificationSortFilterProxyModel::countChanged);
+	connect(this, &QSortFilterProxyModel::rowsInserted,  this, &NotificationSortFilterProxyModel::updateStats);
+	connect(this, &QSortFilterProxyModel::rowsRemoved,   this, &NotificationSortFilterProxyModel::updateStats);
+	connect(this, &QSortFilterProxyModel::modelReset,    this, &NotificationSortFilterProxyModel::updateStats);
+	connect(this, &QSortFilterProxyModel::layoutChanged, this, &NotificationSortFilterProxyModel::updateStats);
+
+	updateStats();
 }
 
 NotificationSortFilterProxyModel::~NotificationSortFilterProxyModel()
@@ -39,9 +42,14 @@ NotificationSortFilterProxyModel::~NotificationSortFilterProxyModel()
 	delete d;
 }
 
-int NotificationSortFilterProxyModel::count(const QModelIndex &parent) const
+int NotificationSortFilterProxyModel::count() const
 {
-	return rowCount(parent);
+	return m_count;
+}
+
+Enums::Notification_Type NotificationSortFilterProxyModel::highestPriorityType() const
+{
+	return m_highestPriorityType;
 }
 
 bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
@@ -74,6 +82,37 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, c
 		return d->m_sortFunction.call(args).toBool();
 	}
 	return QSortFilterProxyModel::lessThan(sourceLeft, sourceRight);
+}
+
+void NotificationSortFilterProxyModel::updateStats()
+{
+	// Note: the integer value of Enums::Notification_Type has no significance
+	Enums::Notification_Type highestPriorityType = Enums::Notification_Type::Notification_Info;
+	int count = rowCount();
+
+	for(int row = 0; row < rowCount(); row++) {
+		bool intOK = false;
+		Enums::Notification_Type type = static_cast<Enums::Notification_Type>(data(index(row, 0), NotificationsModel::NotificationRoles::Type).toInt(&intOK));
+		if(intOK) {
+			if(type == Enums::Notification_Type::Notification_Alarm) {
+				highestPriorityType = Enums::Notification_Type::Notification_Alarm;
+				break;
+			}
+			if(type == Enums::Notification_Type::Notification_Warning && highestPriorityType == Enums::Notification_Type::Notification_Info) {
+				highestPriorityType = Enums::Notification_Type::Notification_Warning;
+			}
+		}
+	}
+
+	if(highestPriorityType != m_highestPriorityType) {
+		m_highestPriorityType = highestPriorityType;
+		emit highestPriorityTypeChanged();
+	}
+
+	if(m_count != count) {
+		m_count = count;
+		emit countChanged();
+	}
 }
 
 QJSEngine * NotificationSortFilterProxyModel::getJSEngine() const
