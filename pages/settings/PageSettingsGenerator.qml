@@ -84,21 +84,33 @@ Page {
 			}
 
 			ListSwitch {
+				id: generatorACInputSwitch
+
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
+				property ToastNotification toast: null
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
 				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
-				enabled: dataItem.isValid && (generatorIsSet || checked)
+				content.enabled: dataItem.isValid && (generatorIsSet || checked)
+
+				Connections {
+					target: generatorACInputSwitch.toast
+					function onDismissed() {
+						generatorACInputSwitch.toast = null
+					}
+				}
+
 				onClicked: {
 					if (!checked) {
+						generatorACInputSwitch.toast?.close(true)
 						if (!generatorIsSet) {
 							//% "None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality."
-							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
-																	   Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
+							generatorACInputSwitch.toast = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
+																						Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
 						} else {
 							//% "An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page."
-							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
-																	   Theme.animation_generator_detectGeneratorSet_toastNotification_autoClose_duration)
+							generatorACInputSwitch.toast = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
+																						Theme.animation_generator_detectGeneratorSet_toastNotification_autoClose_duration)
 						}
 					}
 				}
@@ -124,7 +136,7 @@ Page {
 					if (!checked) {
 						//% "An alarm will be triggered when autostart function is left disabled for more than 10 minutes"
 						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
-								qsTrId("page_settings_generator_alarm_info"), 12000)
+																	   qsTrId("page_settings_generator_alarm_info"), 12000)
 					}
 				}
 			}
@@ -155,4 +167,3 @@ Page {
 		}
 	}
 }
-
