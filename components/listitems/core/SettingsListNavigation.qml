@@ -11,7 +11,7 @@ ListNavigation {
 	id: root
 
 	property string pageSource: ""
-	property alias iconSource: icon.source
+	property string iconSource: ""
 	property alias text: primary.text
 	property alias secondaryText: secondary.text
 
@@ -26,13 +26,13 @@ ListNavigation {
 			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		source: root.iconSource
 		color: Theme.color_font_primary
+		source: root.iconSource
 	}
 
 	Column {
 		anchors {
-			left: icon.right
+			left: iconSource ? icon.right : parent.left
 			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}

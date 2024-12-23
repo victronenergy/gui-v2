@@ -81,7 +81,7 @@ SwipeViewPage {
 				text: qsTrId("settings_system_setup")
 				//% "AC/DC system, ESS, DVCC, Battery..."
 				secondaryText: qsTrId("settings_acdcsystem_ess_dvcc_battery")
-				pageSource: ""
+				pageSource: "/pages/settings/PageSettingsSystem.qml"
 				iconSource: "qrc:/images/icon_system_32.png"
 			}
 
