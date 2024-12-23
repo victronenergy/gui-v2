@@ -16,6 +16,7 @@ ControlCard {
 	title.text: CommonWords.generator
 	status.text: root.generator.stateText
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
+	visible: root.generator.startstop1Enabled
 
 	GeneratorIconLabel {
 		id: timerDisplay
