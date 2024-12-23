@@ -10,8 +10,12 @@ Rectangle {
 
 	width: parent.width
 	height: 5
-	color: Theme.color_critical
-	opacity: Global.notifications.unacknowledgedAlarmsModel.count > 0 ? 1 : 0
+	color: Global.notifications.unacknowledgedModel.highestPriorityType === VenusOS.Notification_Alarm
+		   ? Theme.color_critical
+		   : Global.notifications.unacknowledgedModel.highestPriorityType === VenusOS.Notification_Warning
+			 ? Theme.color_warning
+			 : Theme.color_ok
+	opacity: Global.notifications.unacknowledgedModel.count > 0 ? 1 : 0
 
 	Behavior on opacity {
 		OpacityAnimator {
