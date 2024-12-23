@@ -53,6 +53,18 @@ Page {
 				text: qsTrId("settings_gps")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGpsList.qml", {"title": text})
 			}
+
+			ListNavigation {
+				//% "BMS-Can"
+				text: qsTrId("settings_bms_can")
+				onClicked: console.log("TODO - find out what goes on this page")
+			}
+
+			ListNavigation {
+				//% "VE.Can"
+				text: qsTrId("settings_ve_can")
+				onClicked: console.log("TODO - find out what goes on this page")
+			}
 		}
 	}
 	VeQuickItem {

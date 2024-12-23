@@ -58,7 +58,7 @@ SwipeViewPage {
 				text: qsTrId("settings_vrm")
 				//% "Remote monitoring portal"
 				secondaryText: qsTrId("settings_remote_monitoring_portal")
-				pageSource: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
+				pageSource: "/pages/settings/PageSettingsLogger.qml"
 				iconSource: "qrc:/images/icon_vrm_32.png"
 			}
 
@@ -72,7 +72,7 @@ SwipeViewPage {
 				text: qsTrId("settings_integrations")
 				//% "I/O, Sensors, Tanks, PV Inverters, Modbus, MQTT..."
 				secondaryText: qsTrId("settings_io_sensors_tanks_pvinverters_modbus_mqtt")
-				pageSource: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
+				pageSource: ""
 				iconSource: "qrc:/images/icon_integration_32.png"
 			}
 
@@ -81,7 +81,7 @@ SwipeViewPage {
 				text: qsTrId("settings_system_setup")
 				//% "AC/DC system, ESS, DVCC, Battery..."
 				secondaryText: qsTrId("settings_acdcsystem_ess_dvcc_battery")
-				pageSource: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
+				pageSource: ""
 				iconSource: "qrc:/images/icon_system_32.png"
 			}
 
@@ -90,7 +90,7 @@ SwipeViewPage {
 				text: qsTrId("settings_debug_and_develop")
 				//% "Profiling tools, debug statistics, app version..."
 				secondaryText: qsTrId("settings_profilingtools_debugstatistics_appversion")
-				pageSource: "/pages/settings/PageSettingsPageSettingsConnectivity.qml"
+				pageSource: ""
 				iconSource: "qrc:/images/icon_debug_32.png"
 			}
 		}
