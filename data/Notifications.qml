@@ -32,9 +32,10 @@ QtObject {
 		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && !notification.acknowledged }
 		sortFunction: root._notificationSortFunction
 	}
-	readonly property NotificationSortFilterProxyModel activeAlarmsModel: NotificationSortFilterProxyModel {
+	readonly property NotificationSortFilterProxyModel activeAlarmsAndWarningsModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && notification.active }
+		filterFunction: (notification) => { return (notification.type === VenusOS.Notification_Alarm ||
+													notification.type === VenusOS.Notification_Warning) && notification.active }
 		sortFunction: root._notificationSortFunction
 	}
 
