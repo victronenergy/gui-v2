@@ -16,6 +16,7 @@ ControlCard {
 	title.text: CommonWords.generator
 	status.text: root.generator.stateText
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
+	visible: root.generator.startstop1Enabled
 
 	GeneratorIconLabel {
 		id: timerDisplay
@@ -90,7 +91,7 @@ ControlCard {
 				//% "Disable autostart?"
 				title: qsTrId("controlcard_generator_disableautostartdialog_title")
 
-				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
+				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions.\nIf the generator is currently running due to a autostart condition, disabling autostart will also stop it immediately.
 				description: qsTrId("controlcard_generator_disableautostartdialog_description")
 
 				onAccepted: {
