@@ -16,6 +16,7 @@ Rectangle {
 			 ? Theme.color_warning
 			 : Theme.color_ok
 	opacity: Global.notifications.unacknowledgedModel.count > 0 ? 1 : 0
+	visible: opacity > 0
 
 	Behavior on opacity {
 		OpacityAnimator {
