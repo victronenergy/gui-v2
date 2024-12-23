@@ -63,6 +63,18 @@ Page {
 				pageSource: "/pages/settings/PageSettingsAcSystem.qml"
 			}
 
+			SettingsListNavigation {
+				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess
+				//% "Energy Storage System"
+				secondaryText: qsTrId("pagesettingssystem_energy_storage_System")
+				pageSource: "/pages/settings/PageSettingsHub4.qml"
+
+				VeQuickItem {
+					id: systemType
+					uid: Global.system.serviceUid + "/SystemType"
+				}
+			}
+
 
 
 
