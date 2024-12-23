@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
 Item {
@@ -155,6 +156,8 @@ Item {
 		source: Global.isGxDevice
 				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
+		parent: QtQuickControls.Overlay.overlay
+		z: 1
 	}
 
 	// Sometimes, the wasm code may crash. Use a watchdog to detect this and reload the page when necessary.
