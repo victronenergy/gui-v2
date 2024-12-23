@@ -56,15 +56,25 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
+				editable: true
 				indicatorImplicitWidth: root.decimals > 0
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				textFromValue: function(value, locale) {
-					return Units.formatNumber(value / root._multiplier(), root.decimals) + root.suffix
+					return Units.formatNumber(value / root._multiplier(), root.decimals)
+				}
+				valueFromText: function(text, locale) {
+					let value = Units.formattedNumberToReal(text) * root._multiplier()
+					if (isNaN(value)) {
+						// don't change the current value
+						value = spinBox.value
+					}
+					return value
 				}
 				from: Math.max(Global.int32Min, root.from * root._multiplier())
 				to: Math.min(Global.int32Max, root.to * root._multiplier())
 				stepSize: root.stepSize * root._multiplier()
+				suffix: root.suffix
 
 				onValueChanged: {
 					if (_initialized) {
