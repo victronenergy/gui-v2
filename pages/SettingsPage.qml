@@ -72,7 +72,7 @@ SwipeViewPage {
 				text: qsTrId("settings_integrations")
 				//% "I/O, Sensors, Tanks, PV Inverters, Modbus, MQTT..."
 				secondaryText: qsTrId("settings_io_sensors_tanks_pvinverters_modbus_mqtt")
-				pageSource: ""
+				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
 				iconSource: "qrc:/images/icon_integration_32.png"
 			}
 
