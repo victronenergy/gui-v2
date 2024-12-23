@@ -56,15 +56,34 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
+				editable: true
 				indicatorImplicitWidth: root.decimals > 0
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				textFromValue: function(value, locale) {
-					return Units.formatNumber(value / root._multiplier(), root.decimals) + root.suffix
+					return Units.formatNumber(value / root._multiplier(), root.decimals)
+				}
+				valueFromText: function(text, locale) {
+					let value = Units.formattedNumberToReal(text) * root._multiplier()
+					if (isNaN(value)) {
+						// don't change the current value
+						value = spinBox.value
+					}
+					// need to set spinBox.value to a different temporary valid value
+					// to illicit a value change so it always updates the displayText properly
+					// in all cases, to something that is valid
+					if (value <= spinBox.from) {
+						spinBox.value = spinBox.to
+					} else {
+						// if the value is >= to or any other value above from, set it to from
+						spinBox.value = spinBox.from
+					}
+					return value
 				}
 				from: Math.max(Global.int32Min, root.from * root._multiplier())
 				to: Math.min(Global.int32Max, root.to * root._multiplier())
 				stepSize: root.stepSize * root._multiplier()
+				suffix: root.suffix
 
 				onValueChanged: {
 					if (_initialized) {
