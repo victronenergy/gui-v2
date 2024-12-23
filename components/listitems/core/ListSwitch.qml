@@ -64,7 +64,11 @@ ListItem {
 			bottomMargin: root.spacing
 		}
 
-		onClicked: root._setChecked(!switchItem.checked)
+		onClicked: if(content.enabled) {
+					   root._setChecked(!switchItem.checked)
+				   } else {
+					   root.clicked()
+				   }
 	}
 
 	VeQuickItem {
