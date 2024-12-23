@@ -500,6 +500,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsHub4.qml
     pages/settings/PageSettingsHub4Feedin.qml
     pages/settings/PageSettingsHub4Peakshaving.qml
+    pages/settings/PageSettingsIntegrations.qml
     pages/settings/PageSettingsIo.qml
     pages/settings/PageSettingsLarge.qml
     pages/settings/PageSettingsLogger.qml
@@ -1091,6 +1092,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_manualstart_timer_24.svg
         images/icon_minus.svg
         images/icon_plus.svg
+        images/icon_plus_32.svg
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg

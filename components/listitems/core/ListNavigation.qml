@@ -12,6 +12,7 @@ ListItem {
 
 	property alias secondaryText: secondaryLabel.text
 	property alias secondaryLabel: secondaryLabel
+	property alias icon: icon
 
 	signal clicked()
 
