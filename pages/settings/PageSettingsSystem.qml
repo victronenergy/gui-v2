@@ -82,6 +82,13 @@ Page {
 				pageSource: "/pages/settings/PageSettingsBatteries.qml"
 			}
 
+			SettingsListNavigation {
+				//% "DVCC"
+				text: qsTrId("settings_system_dvcc")
+				//% "Distributed Voltage and Current Control (DVCC)"
+				secondaryText: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
+				pageSource: "/pages/settings/PageSettingsDvcc.qml"
+			}
 
 
 
