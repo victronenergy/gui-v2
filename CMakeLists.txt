@@ -472,6 +472,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsAcSystem.qml
     pages/settings/PageSettingsAlarmsAndFeedback.qml
     pages/settings/PageSettingsBatteries.qml
+    pages/settings/PageSettingsBatteryMeasurements.qml
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
     pages/settings/PageSettingsCGwacs.qml
