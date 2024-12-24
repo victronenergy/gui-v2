@@ -47,6 +47,9 @@ QtObject {
 	//% "Alarm"
 	readonly property string alarm: qsTrId("common_words_alarm")
 
+	//% "Batteries"
+	readonly property string batteries: qsTrId("common_words_batteries")
+
 	//: Alarm configuration when 'overload' state is triggered
 	//% "Overload"
 	readonly property string alarm_setting_overload: qsTrId("common_words_alarm_setting_overload")

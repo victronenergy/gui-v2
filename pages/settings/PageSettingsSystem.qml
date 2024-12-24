@@ -75,60 +75,26 @@ Page {
 				}
 			}
 
-
-
-
-
-
-
-
-
-			ListRadioButtonGroup {
-				id: batteryMonitorRadioButtons
-
-				//% "Battery monitor"
-				text: qsTrId("settings_system_battery_monitor")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryService"
-				//% "Unavailable monitor, set another"
-				defaultSecondaryText: qsTrId("settings_system_unavailable_monitor")
-
-				VeQuickItem {
-					id: availableBatteryServices
-
-					uid: Global.system.serviceUid + "/AvailableBatteryServices"
-					onValueChanged: {
-						if (value === undefined) {
-							return
-						}
-						const modelArray = Utils.jsonSettingsToModel(value)
-						if (modelArray) {
-							batteryMonitorRadioButtons.optionModel = modelArray
-						} else {
-							console.warn("Unable to parse data from", source)
-						}
-					}
-				}
+			SettingsListNavigation {
+				text: CommonWords.batteries
+				//% "Batteries and Battery Management Systems (BMS)"
+				secondaryText: qsTrId("pagesettingssystem_batteries_and_bms")
+				pageSource: "/pages/settings/PageSettingsBatteries.qml"
 			}
 
-			ListText {
-				//% "Auto-selected"
-				text: qsTrId("settings_system_auto_selected")
-				dataItem.uid: Global.system.serviceUid + "/AutoSelectedBatteryService"
-				allowed: batteryMonitorRadioButtons.optionModel !== undefined
-					&& batteryMonitorRadioButtons.currentIndex >= 0
-					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
-			}
+
+
+
+
+
+
+
+
 
 			ListSwitch {
 				//% "Has DC system"
 				text: qsTrId("settings_system_has_dc_system")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
-			}
-
-			ListNavigation {
-				//% "Battery measurements"
-				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
 			ListNavigation {
