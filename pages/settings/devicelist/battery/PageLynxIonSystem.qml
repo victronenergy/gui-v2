@@ -21,8 +21,7 @@ Page {
 			}
 
 			ListText {
-				//% "Batteries"
-				text: qsTrId("lynxionsystem_batteries")
+				text: CommonWords.batteries
 				dataItem.uid: root.bindPrefix + "/System/NrOfBatteries"
 			}
 
