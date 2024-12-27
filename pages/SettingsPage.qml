@@ -90,7 +90,7 @@ SwipeViewPage {
 				text: qsTrId("settings_debug_and_develop")
 				//% "Profiling tools, debug statistics, app version..."
 				secondaryText: qsTrId("settings_profilingtools_debugstatistics_appversion")
-				pageSource: ""
+				pageSource: "/pages/settings/debug/PageDebug.qml"
 				iconSource: "qrc:/images/icon_debug_32.png"
 			}
 		}
