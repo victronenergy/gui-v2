@@ -65,6 +65,12 @@ Page {
 				text: qsTrId("settings_energy_meters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
 			}
+
+			ListNavigation {
+				//% "PV inverters"
+				text: qsTrId("settings_pv_inverters")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
+			}
 		}
 
 		footer: ListButton {
