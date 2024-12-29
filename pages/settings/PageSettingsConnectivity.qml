@@ -65,6 +65,21 @@ Page {
 				text: qsTrId("settings_ve_can")
 				onClicked: console.log("TODO - find out what goes on this page")
 			}
+
+			ListNavigation {
+				//% "Tailscale (remote VPN access)"
+				text: qsTrId("settings_services_tailscale_remote_vpn_access")
+				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
+				}
+				allowed: tailscale.isValid
+
+				VeQuickItem {
+					id: tailscale
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
+				}
+			}
 		}
 	}
 	VeQuickItem {
