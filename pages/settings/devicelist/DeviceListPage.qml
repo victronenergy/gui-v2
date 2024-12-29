@@ -68,6 +68,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Tank pump"
+				text: qsTrId("settings_tank_pump")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Energy meters"
 				text: qsTrId("settings_energy_meters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
