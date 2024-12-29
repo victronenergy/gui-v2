@@ -61,6 +61,13 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Generator start/stop"
+				text: qsTrId("settings_generator_start_stop")
+				allowed: defaultAllowed && relay0.isValid
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Energy meters"
 				text: qsTrId("settings_energy_meters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
@@ -82,5 +89,10 @@ Page {
 				Global.allDevicesModel.removeDisconnectedDevices()
 			}
 		}
+	}
+
+	VeQuickItem {
+		id: relay0
+		uid: Global.system.serviceUid + "/Relay/0/State"
 	}
 }
