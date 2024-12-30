@@ -9,110 +9,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string network: "Wired"
-	property string tech: "ethernet"
-
-	property alias service: service.service
-	readonly property bool ready: root.service.length > 0
-
-	readonly property bool _wifi: tech === "wifi"
-	readonly property bool _disconnected: service.state === "idle" || service.state === "failure"
-
-	function performAction(action) {
-		setServiceProperty("Action", action)
-	}
-
-	function setServiceProperty(item, value) {
-		var obj = { Service: service.service };
-		obj[item] = value
-		setValueItem.setValue(JSON.stringify(obj))
-	}
-
-	function setAgent(action) {
-		setValueItem.setValue(JSON.stringify({Agent: action}))
-	}
-
-	VeQuickItem {
-		id: service
-
-		uid: Global.venusPlatform.serviceUid + "/Network/Services"
-
-		property string service
-		property string state
-		property string method_
-		property string macAddress
-		property string ipAddress
-		property string netmask
-		property string gateway
-		property string nameserver
-		property string strength
-		readonly property bool manual: method_ === "manual"
-		property bool secured
-		property bool favorite
-		property bool completed
-
-		// Only handle changed value after component completion because otherwise <network> may not be set correctly.
-		onValueChanged: if (completed) parseJson()
-		Component.onCompleted: {
-			completed = true
-			parseJson()
-			if (root._wifi) {
-				setAgent("on")
-			}
-		}
-
-		Component.onDestruction: {
-			if (root._wifi)
-				setAgent("off")
-		}
-
-		function parseJson() {
-			if (!isValid || typeof value !== "string") {
-				return
-			}
-
-			const services = JSON.parse(value)
-
-			let details
-
-			// Find the network service using service identifier
-			if (root.service.length > 0) {
-				for (const [network, networkDetails] of Object.entries(services[tech])) {
-					if (root.service === networkDetails["Service"]) {
-						root.network = network // SSID name may have been updated
-						details = networkDetails
-						break
-					}
-				}
-			} else if (network.length > 0) {
-				// If not available use the network name instead (in Ethernet case "Wired")
-				details = network && services[tech][network] ? services[tech][network] : undefined
-			}
-
-			if (details) {
-				root.service = details["Service"]
-				state = details["State"]
-				method_ = details["Method"]
-				ipAddress = details["Address"]
-				macAddress = details["Mac"]
-				netmask = details["Netmask"]
-				gateway = details["Gateway"]
-				nameserver = details["Nameservers"][0] || ""
-				strength = details["Strength"] || ""
-				secured = details["Secured"] === "yes"
-				favorite = details["Favorite"] === "yes"
-			}
-		}
-	}
-
-	VeQuickItem {
-		id: setValueItem
-		uid: Global.venusPlatform.serviceUid + "/Network/SetValue"
-	}
-
 	GradientListView {
 		id: settingsListView
-		model: root.ready ? connectedModel : disconnectedModel
+		model: networkServices.ready ? connectedModel : disconnectedModel
 	}
 
 	ObjectModel {
@@ -120,7 +19,7 @@ Page {
 
 		ListText {
 			text: CommonWords.state
-			secondaryText: root._wifi
+			secondaryText: networkServices.wifi
 					 //% "Connection lost"
 					? qsTrId("settings_tcpip_connection_lost")
 					 //% "Unplugged"
@@ -133,15 +32,15 @@ Page {
 
 		ListText {
 			text: CommonWords.state
-			secondaryText: Utils.connmanServiceState(service.state)
+			secondaryText: Utils.connmanServiceState(networkServices.state)
 		}
 
 		// TODO: Report MAC address (BSSID) of Wi-Fi networks (see Venus issue #364)
 		ListText {
 			//% "MAC address"
 			text: qsTrId("settings_tcpip_mac_address")
-			secondaryText: service.macAddress
-			allowed: !root._wifi
+			secondaryText: networkServices.macAddress
+			allowed: !networkServices.wifi
 		}
 
 		ListRadioButtonGroup {
@@ -162,7 +61,7 @@ Page {
 			]
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
-					if (optionModel[i].value === service.method_) {
+					if (optionModel[i].value === networkServices.method_) {
 						return i
 					}
 				}
@@ -173,38 +72,38 @@ Page {
 			allowed: defaultAllowed
 
 			onOptionClicked: function(index) {
-				setServiceProperty("Method", optionModel[index].value)
+				networkServices.setServiceProperty("Method", optionModel[index].value)
 			}
 		}
 
 		ListIpAddressField {
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.ipAddress
-			saveInput: function() { setServiceProperty("Address", textField.text) }
+			enabled: method.userHasWriteAccess && networkServices.manual
+			textField.text: networkServices.ipAddress
+			saveInput: function() { networkServices.setServiceProperty("Address", textField.text) }
 		}
 
 		ListIpAddressField {
 			//% "Netmask"
 			text: qsTrId("settings_tcpip_netmask")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.netmask
-			saveInput: function() { setServiceProperty("Netmask", textField.text) }
+			enabled: method.userHasWriteAccess && networkServices.manual
+			textField.text: networkServices.netmask
+			saveInput: function() { networkServices.setServiceProperty("Netmask", textField.text) }
 		}
 
 		ListIpAddressField {
 			//% "Gateway"
 			text: qsTrId("settings_tcpip_gateway")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.gateway
-			saveInput: function() { setServiceProperty("Gateway", textField.text) }
+			enabled: method.userHasWriteAccess && networkServices.manual
+			textField.text: networkServices.gateway
+			saveInput: function() { networkServices.setServiceProperty("Gateway", textField.text) }
 		}
 
 		ListIpAddressField {
 			//% "DNS server"
 			text: qsTrId("settings_tcpip_dns_server")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.nameserver
-			saveInput: function() { setServiceProperty("Nameserver", textField.text) }
+			enabled: method.userHasWriteAccess && networkServices.manual
+			textField.text: networkServices.nameserver
+			saveInput: function() { networkServices.setServiceProperty("Nameserver", textField.text) }
 		}
 
 		ListText {
@@ -212,8 +111,12 @@ Page {
 
 			//% "Link-local IP address"
 			text: qsTrId("settings_tcpip_link_local")
-			allowed: !root._wifi
+			allowed: !networkServices.wifi
 			dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 		}
+	}
+
+	NetworkServices {
+		id: networkServices
 	}
 }
