@@ -93,7 +93,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Digital I/O" // TODO - should this be renamed 'Digital Inputs'? What digital outputs are there?
+				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
 				allowed: defaultAllowed && digitalModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
