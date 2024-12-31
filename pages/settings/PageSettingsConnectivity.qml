@@ -67,16 +67,36 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGpsList.qml", {"title": text})
 			}
 
-			ListNavigation {
-				//% "BMS-Can"
-				text: qsTrId("settings_bms_can")
-				onClicked: console.log("TODO - find out what goes on this page")
-			}
+			Column {
+				width: parent ? parent.width : 0
 
-			ListNavigation {
-				//% "VE.Can"
-				text: qsTrId("settings_ve_can")
-				onClicked: console.log("TODO - find out what goes on this page")
+				Repeater {
+					model: canInterfaces.value || []
+					delegate: ListNavigation {
+						text: modelData["name"] || ""
+						secondaryText: canbusProfile.profileText
+						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text, canbusProfile: canbusProfile })
+
+						Component {
+							id: canBusComponent
+
+							PageSettingsCanbus { }
+						}
+
+						CanbusProfile {
+							id: canbusProfile
+
+							gateway: modelData["interface"]
+							canConfig: modelData["config"]
+						}
+					}
+				}
+
+				VeQuickItem {
+					id: canInterfaces
+					uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
+					// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
+				}
 			}
 		}
 	}
