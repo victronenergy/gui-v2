@@ -9,11 +9,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string gateway
-	property int canConfig
-
-	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + gateway
-	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + gateway
+	required property CanbusProfile canbusProfile
+	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + canbusProfile.gateway
+	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + canbusProfile.gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
 	readonly property bool _isRvc: rvcSameUniqueNameUsed.isValid
@@ -21,99 +19,28 @@ Page {
 
 	CanbusServiceFinder {
 		id: canbusService
-		gateway: root.gateway
+		gateway: canbusProfile.gateway
 	}
 
 	VeQuickItem {
 		id: vecanSameUniqueNameUsed
-		uid: canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed"
+		uid: canbusService.vecanServiceUid ? canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed" : ""
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
 	VeQuickItem {
 		id: rvcSameUniqueNameUsed
-		uid: canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed"
+		uid: canbusService.rvcServiceUid ? canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed" : ""
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
 	GradientListView {
 		model: ObjectModel {
 			ListRadioButtonGroup {
-				function isReadOnly(profile) {
-					switch (root.canConfig) {
-					case VenusOS.CanBusConfig_ForcedVeCan:
-						return profile !== VenusOS.CanBusProfile_Vecan
-					case VenusOS.CanBusConfig_ForcedCanBusBms:
-						return profile !== VenusOS.CanBusProfile_CanBms500
-					// The classic CAN busses don't support CAN fd / CAN XL frames like the HV CAN bus uses.
-					// All other protocols are supported.
-					case VenusOS.CanBusConfig_AnyBus:
-						return profile === VenusOS.CanBusProfile_HighVoltage
-					// These interfaces support all profiles
-					case VenusOS.CanBusConfig_AnyBusAndHv:
-					default:
-						return false
-					}
-				}
-
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
-				optionModel: [
-					{
-						//% "Disabled"
-						display: qsTrId("settings_disabled"),
-						value: VenusOS.CanBusProfile_Disabled
-					},
-					{
-						//% "VE.Can & Lynx Ion BMS (250 kbit/s)"
-						display: qsTrId("settings_canbus_vecan_lynx_ion_bms"),
-						value: VenusOS.CanBusProfile_Vecan,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_Vecan)
-					},
-					{
-						//% "VE.Can & CAN-bus BMS (250 kbit/s)"
-						display: qsTrId("settings_canbus_vecan_and_can_bus_bms"),
-						value: VenusOS.CanBusProfile_VecanAndCanBms,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_VecanAndCanBms)
-					},
-					{
-						//% "CAN-bus BMS LV (500 kbit/s)"
-						display: qsTrId("settings_canbus_bms"),
-						value: VenusOS.CanBusProfile_CanBms500,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_CanBms500)
-					},
-					{
-						//% "CAN-bus BMS HV (500 kbit/s)"
-						display: qsTrId("settings_canbus_high_voltage"),
-						value: VenusOS.CanBusProfile_HighVoltage,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_HighVoltage)
-					},
-					{
-						//% "Oceanvolt (250 kbit/s)"
-						display: qsTrId("settings_oceanvolt"),
-						value: VenusOS.CanBusProfile_Oceanvolt,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_Oceanvolt)
-					},
-					{
-						//% "RV-C (250 kbit/s)"
-						display: qsTrId("settings_rvc"),
-						value: VenusOS.CanBusProfile_RvC,
-						readOnly: isReadOnly(VenusOS.CanBusProfile_RvC)
-					},
-					{
-						//% "Up, but no services (250 kbit/s)"
-						display: qsTrId("settings_up_bu_no_services"),
-						value: VenusOS.CanBusProfile_None250,
-						readOnly: true
-					},
-					{
-						//% "Up, but no services (500 kbit/s)"
-						display: qsTrId("settings_up_but_no_services_500"),
-						value: VenusOS.CanBusProfile_None500,
-						readOnly: true
-					}
-				]
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + canbusProfile.gateway + "/Profile"
+				optionModel: canbusProfile.optionModel
 			}
 
 			ListNavigation {
@@ -234,7 +161,7 @@ Page {
 				text: CommonWords.network_status
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
-						{ gateway: root.gateway, title: root.title })
+						{ gateway: canbusProfile.gateway, title: root.title })
 				}
 			}
 		}
