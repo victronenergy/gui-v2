@@ -90,14 +90,6 @@ Page {
 				pageSource: "/pages/settings/PageSettingsDvcc.qml"
 			}
 
-
-
-
-
-
-
-
-
 			ListSwitch {
 				//% "Has DC system"
 				text: qsTrId("settings_system_has_dc_system")
