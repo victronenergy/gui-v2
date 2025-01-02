@@ -30,6 +30,12 @@ Page {
 				}
 			}
 
+			ListText {
+				//% "Application version"
+				text: qsTrId("settings_page_debug_application_version")
+				secondaryText: Theme.applicationVersion
+			}
+
 			ListButton {
 				id: quitSwitch
 
@@ -40,6 +46,21 @@ Page {
 				button.text: qsTrId("settings_page_debug_quit")
 
 				onClicked: Qt.quit()
+			}
+
+			ListNavigation {
+				text: "Power"
+				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
+			}
+
+			ListNavigation {
+				text: "System data"
+				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
+			}
+
+			ListNavigation {
+				text: "Values"
+				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
 			}
 
 			SwitchItem {
@@ -65,23 +86,8 @@ Page {
 			}
 
 			ListNavigation {
-				text: "Power"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
-			}
-
-			ListNavigation {
-				text: "System data"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
-			}
-
-			ListNavigation {
 				text: "Test"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
-			}
-
-			ListNavigation {
-				text: "Values"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
 			}
 
 			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
@@ -96,10 +102,38 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
 			}*/
 
-			ListText {
-				//% "Application version"
-				text: qsTrId("settings_page_debug_application_version")
-				secondaryText: Theme.applicationVersion
+			ListRadioButtonGroup {
+				//% "Demo mode"
+				text: qsTrId("settings_demo_mode")
+				height: implicitHeight + demoModeCaption.height
+				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+				popDestination: undefined // don't pop page automatically.
+				updateDataOnClick: false // handle option clicked manually.
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					//% "ESS demo"
+					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
+					//% "Boat/Motorhome demo 1"
+					{ display: qsTrId("page_settings_demo_1"), value: 2 },
+					//% "Boat/Motorhome demo 2"
+					{ display: qsTrId("page_settings_demo_2"), value: 3 },
+				]
+
+				PrimaryListLabel {
+					id: demoModeCaption
+
+					anchors {
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry_listItem_content_verticalMargin
+					}
+					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
+					text: qsTrId("settings_demo_mode_caption")
+				}
+				onOptionClicked: function(index) {
+					Qt.callLater(Global.main.rebuildUi)
+					dataItem.setValue(index)
+				}
 			}
 		}
 	}
