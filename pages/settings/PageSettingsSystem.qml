@@ -83,8 +83,8 @@ Page {
 			}
 
 			SettingsListNavigation {
-				//% "DVCC"
-				text: qsTrId("settings_system_dvcc")
+				//% "Charge Control"
+				text: qsTrId("settings_system_charge_control")
 				//% "Distributed Voltage and Current Control (DVCC)"
 				secondaryText: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
 				pageSource: "/pages/settings/PageSettingsDvcc.qml"
