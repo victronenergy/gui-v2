@@ -68,29 +68,168 @@ Page {
 		id: settingsListView
 
 		boundsBehavior: Flickable.DragOverBounds
-
 		model: ObjectModel {
+			SettingsListHeader {
+				//% "System"
+				text: qsTrId("pagesettingsgeneral_system")
+			}
+
+			ListNavigation {
+				//% "Firmware"
+				text: qsTrId("pagesettingsgeneral_firmware")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFirmware.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Access & Security"
+				text: qsTrId("pagesettingsgeneral_access_and_security")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAccessAndSecurity.qml", {"title": text})
+			}
+
+			SettingsListHeader {
+				//% "Preferences"
+				text: qsTrId("pagesettingsgeneral_preferences")
+			}
+
+			ListNavigation {
+				//% "Display & Appearance"
+				text: qsTrId("pagesettingsgeneral_display_and_appearance")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Alarms & Feedback"
+				text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
+			}
+
+			SettingsListHeader { }
+
 			ListRadioButtonGroup {
-				//% "Access level"
-				text: qsTrId("settings_access_level")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
+				//% "Language"
+				text: qsTrId("settings_language")
+
 				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "User"
-					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, promptPassword: true },
-					//% "User & Installer"
-					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, promptPassword: true },
-					//% "Superuser"
-					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
-					//% "Service"
-					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
-				]
-				validatePassword: (index, password) => {
-					if ((index === 0 || index === 1) && password === "ZZZ") {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+				optionModel: languageModel
+				currentIndex: optionModel.currentIndex
+				secondaryText: optionModel.currentDisplayText
+				popDestination: undefined // don't pop page automatically.
+				updateCurrentIndexOnClick: false // don't update the radio button selection automatically.
+
+				onOptionClicked: function(index) {
+					// The SystemSettings data point listener will set the Language.
+					// It may take a few seconds for the backend to deliver the value
+					// change to that other data point.  So, display a message to the user.
+					Global.dialogLayer.open(changingLanguageDialog)
+					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
+				}
+
+				LanguageModel {
+					id: languageModel
+				}
+
+				Instantiator {
+					model: languageModel
+					delegate: FontLoader {
+						source: model.fontFileUrl
+						onStatusChanged: {
+							if (status === FontLoader.Ready) {
+								languageModel.setFontFamily(source, name)
+							}
+						}
 					}
-					//% "Incorrect password"
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
+				}
+
+				VeQuickItem {
+					id: languageDataItem
+					uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
+					onValueChanged: {
+						if (value !== undefined) {
+							languageModel.currentLanguage = Language.fromCode(value)
+						}
+					}
+				}
+
+				Component {
+					id: changingLanguageDialog
+
+					ModalWarningDialog {
+						id: dlg
+						property bool languageChangeFailed
+						property bool languageChangeSucceeded
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+						//% "Changing language"
+						title: qsTrId("settings_language_changing_language")
+						description: dlg.languageChangeFailed
+							  //% "Failed to change language!"
+							? qsTrId("settings_language_change_failed")
+							: dlg.languageChangeSucceeded
+							  //% "Successfully changed language!"
+							? qsTrId("settings_language_change_succeeded")
+							  //% "Please wait while the language is changed."
+							: qsTrId("settings_language_please_wait")
+						Connections {
+							target: Language
+							function onLanguageChangeFailed() { dlg.languageChangeFailed = true; dlg.languageChangeSucceeded = false }
+							function onCurrentLanguageChanged() { if (!dlg.languageChangeFailed) { dlg.languageChangeSucceeded = true } }
+						}
+					}
+				}
+			}
+
+			ListNavigation {
+				//% "Date & Time"
+				text: qsTrId("pagesettingsgeneral_date_and_time")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
+			}
+
+
+			ListNavigation {
+				//% "Display Units"
+				text: qsTrId("pagesettingsgeneral_display_units")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+			}
+
+			SettingsListHeader { }
+
+			ListButton {
+				text: CommonWords.reboot
+				//% "Reboot now"
+				button.text: qsTrId("settings_reboot_now")
+				writeAccessLevel: VenusOS.User_AccessType_User
+				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
+
+				Component {
+					id: confirmRebootDialogComponent
+
+					ModalWarningDialog {
+						//% "Press 'OK' to reboot"
+						title: qsTrId("press_ok_to_reboot")
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						onClosed: {
+							if (result === T.Dialog.Accepted) {
+								Global.venusPlatform.reboot()
+								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
+							}
+						}
+					}
+				}
+
+				Component {
+					id: rebootingDialogComponent
+
+					ModalWarningDialog {
+						title: BackendConnection.type === BackendConnection.DBusSource
+							//% "Rebooting..."
+							? qsTrId("dialoglayer_rebooting")
+							//% "Device has been rebooted."
+							: qsTrId("dialoglayer_rebooted")
+
+						// On device, dialog cannot be dismissed; just wait until device is rebooted.
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+						footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
+						footer.opacity: footer.enabled ? 1 : 0
+					}
 				}
 			}
 
@@ -210,180 +349,6 @@ Page {
 								? Theme.geometry_modalDialog_height
 								: Theme.geometry_modalDialog_height_small
 					}
-				}
-			}
-			ListTextField {
-				//% "Root password"
-				text: qsTrId("settings_root_password")
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				//% "Enter password"
-				placeholderText: qsTrId("settings_root_enter_password")
-				textField.echoMode: TextInput.Password
-				saveInput: function() {
-					if (secondaryText.length < 8) {
-						//% "Password needs to be at least 8 characters long"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_too_short_password"), 5000)
-					} else {
-						var object = {"SetRootPassword": secondaryText}
-						var json = JSON.stringify(object)
-						securityApi.setValue(json)
-						//% "Root password changed to %1"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_password_changed_to").arg(secondaryText), 5000)
-					}
-				}
-			}
-
-			ListSwitch {
-				id: sshOnLan
-
-				//% "SSH on LAN"
-				text: qsTrId("settings_ssh_on_lan")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SSHLocal"
-				showAccessLevel: VenusOS.User_AccessType_SuperUser
-			}
-
-			ListSwitch {
-				id: remoteSupportOnOff
-
-				//% "Remote support"
-				text: qsTrId("settings_remote_support")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
-			}
-
-			ListText {
-				//% "Remote support tunnel"
-				text: qsTrId("settings_remote_support_tunnel")
-				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
-				allowed: defaultAllowed && remoteSupportOnOff.checked
-			}
-
-			ListText {
-				id: remotePort
-
-				//% "Remote support IP and port"
-				text: qsTrId("settings_remote_ip_and_support")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
-				allowed: defaultAllowed && remoteSupportOnOff.checked
-			}
-
-			ListButton {
-				//% "Logout"
-				text: qsTrId("settings_logout")
-				//% "Log out now"
-				button.text: qsTrId("settings_logout_now")
-
-				// Cannot log out from GX devices, VRM or Unsecured profile with no password
-				allowed: Qt.platform.os === "wasm" && !BackendConnection.vrm
-						 && securityProfile.dataItem.value !== VenusOS.Security_Profile_Unsecured
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(logoutDialogComponent)
-
-				Component {
-					id: logoutDialogComponent
-					ModalWarningDialog {
-						//% "Log out?"
-						title: qsTrId("settings_logout_dialog_title")
-						//% "This will disconnect all local network connections."
-						description: qsTrId("settings_logout_dialog_description")
-						//% "Log out"
-						acceptText: qsTrId("settings_logout_dialog_accept_text")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						height: Theme.geometry_modalDialog_height_small
-						onAccepted: BackendConnection.logout()
-					}
-				}
-			}
-
-			ListButton {
-				text: CommonWords.reboot
-				//% "Reboot now"
-				button.text: qsTrId("settings_reboot_now")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
-
-				Component {
-					id: confirmRebootDialogComponent
-
-					ModalWarningDialog {
-						//% "Press 'OK' to reboot"
-						title: qsTrId("press_ok_to_reboot")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
-							}
-						}
-					}
-				}
-
-				Component {
-					id: rebootingDialogComponent
-
-					ModalWarningDialog {
-						title: BackendConnection.type === BackendConnection.DBusSource
-							//% "Rebooting..."
-							? qsTrId("dialoglayer_rebooting")
-							//% "Device has been rebooted."
-							: qsTrId("dialoglayer_rebooted")
-
-						// On device, dialog cannot be dismissed; just wait until device is rebooted.
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-						footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-						footer.opacity: footer.enabled ? 1 : 0
-					}
-				}
-			}
-
-			ListSwitch {
-				//% "Audible alarm"
-				text: qsTrId("settings_audible_alarm")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-				allowed: defaultAllowed && buzzerStateDataItem.isValid
-
-				VeQuickItem {
-					id: buzzerStateDataItem
-					uid: Global.system.serviceUid + "/Buzzer/State"
-				}
-			}
-
-			ListSwitch {
-				//% "Enable status LEDs"
-				text: qsTrId("settings_enable_status_leds")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/LEDs/Enable"
-				allowed: defaultAllowed && dataItem.isValid
-			}
-
-			ListRadioButtonGroup {
-				//% "Demo mode"
-				text: qsTrId("settings_demo_mode")
-				height: implicitHeight + demoModeCaption.height
-				primaryLabel.anchors.verticalCenterOffset: -(demoModeCaption.height / 2)
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
-				popDestination: undefined // don't pop page automatically.
-				updateDataOnClick: false // handle option clicked manually.
-				optionModel: [
-					{ display: CommonWords.disabled, value: 0 },
-					//% "ESS demo"
-					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
-					//% "Boat/Motorhome demo 1"
-					{ display: qsTrId("page_settings_demo_1"), value: 2 },
-					//% "Boat/Motorhome demo 2"
-					{ display: qsTrId("page_settings_demo_2"), value: 3 },
-				]
-				PrimaryListLabel {
-					id: demoModeCaption
-
-					anchors {
-						bottom: parent.bottom
-						bottomMargin: Theme.geometry_listItem_content_verticalMargin
-					}
-					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
-					text: qsTrId("settings_demo_mode_caption")
-				}
-				onOptionClicked: function(index) {
-					Qt.callLater(Global.main.rebuildUi)
-					dataItem.setValue(index)
 				}
 			}
 		}

@@ -11,39 +11,6 @@ Page {
 
 	GradientListView {
 		model: ObjectModel {
-			ListNavigation {
-				//% "Modbus TCP"
-				text: qsTrId("settings_services_modbus_tcp")
-				secondaryText: modbus.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				showAccessLevel: VenusOS.User_AccessType_Installer
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", { title: text })
-				}
-
-				VeQuickItem {
-					id: modbus
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
-				}
-			}
-
-			ListNavigation {
-				//% "Tailscale (remote VPN access)"
-				text: qsTrId("settings_services_tailscale_remote_vpn_access")
-				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
-				}
-				allowed: tailscale.isValid
-
-				VeQuickItem {
-					id: tailscale
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
-				}
-			}
-
-			ListMqttAccessSwitch {
-				id: mqtt
-			}
 
 			Column {
 				width: parent ? parent.width : 0

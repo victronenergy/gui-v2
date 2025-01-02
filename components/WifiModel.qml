@@ -10,6 +10,16 @@ ListModel {
 	id: model
 
 	readonly property bool isValid: servicesItem.isValid && scanItem.isValid
+	readonly property string connectedNetworkName: {
+		for (let i = 0; i < count; ++i) {
+			let network = get(i)
+			if (["ready", "online"].indexOf(network.state) !== -1) {
+				return network.network
+			}
+		}
+		//% "Disconnected | AP Off"
+		return qsTrId("wifimodel_disconnected_ap_off")
+	}
 
 	property VeQuickItem servicesItem: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Network/Services"
@@ -21,6 +31,7 @@ ListModel {
 
 	property VeQuickItem scanItem: VeQuickItem{
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
+		onValueChanged: update()
 	}
 
 	function update() {
@@ -90,5 +101,7 @@ ListModel {
 			i++
 		}
 	}
+
+	onIsValidChanged: update()
 }
 

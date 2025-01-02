@@ -132,11 +132,6 @@ Page {
 		id: connectedModel
 
 		ListText {
-			text: CommonWords.state
-			secondaryText: Utils.connmanServiceState(service.state)
-		}
-
-		ListText {
 			//% "Name"
 			text: qsTrId("settings_tcpip_name")
 			secondaryText: !root._wifi
@@ -204,86 +199,6 @@ Page {
 			value: service.strength
 			unit: VenusOS.Units_Percentage
 			allowed: root._wifi
-		}
-
-		// TODO: Report MAC address (BSSID) of Wi-Fi networks (see Venus issue #364)
-		ListText {
-			//% "MAC address"
-			text: qsTrId("settings_tcpip_mac_address")
-			secondaryText: service.macAddress
-			allowed: !root._wifi
-		}
-
-		ListRadioButtonGroup {
-			id: method
-
-			//% "IP configuration"
-			text: qsTrId("settings_tcpip_ip_config")
-			writeAccessLevel: VenusOS.User_AccessType_User
-			optionModel: [
-				//% "Automatic"
-				{ display: qsTrId("settings_tcpip_auto"), value: "dhcp" },
-				//% "Manual"
-				{ display: qsTrId("settings_tcpip_manual"), value: "manual" },
-				//% "Off"
-				{ display: qsTrId("settings_tcpip_off"), value: "off", readOnly: true },
-				//% "Fixed"
-				{ display: qsTrId("settings_tcpip_fixed"), value: "fixed", readOnly: true },
-			]
-			currentIndex: {
-				for (let i = 0; i < optionModel.length; ++i) {
-					if (optionModel[i].value === service.method_) {
-						return i
-					}
-				}
-				return -1
-			}
-
-			enabled: userHasReadAccess
-			allowed: defaultAllowed
-
-			onOptionClicked: function(index) {
-				setServiceProperty("Method", optionModel[index].value)
-			}
-		}
-
-		ListIpAddressField {
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.ipAddress
-			saveInput: function() { setServiceProperty("Address", textField.text) }
-		}
-
-		ListIpAddressField {
-			//% "Netmask"
-			text: qsTrId("settings_tcpip_netmask")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.netmask
-			saveInput: function() { setServiceProperty("Netmask", textField.text) }
-		}
-
-		ListIpAddressField {
-			//% "Gateway"
-			text: qsTrId("settings_tcpip_gateway")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.gateway
-			saveInput: function() { setServiceProperty("Gateway", textField.text) }
-		}
-
-		ListIpAddressField {
-			//% "DNS server"
-			text: qsTrId("settings_tcpip_dns_server")
-			enabled: method.userHasWriteAccess && service.manual
-			textField.text: service.nameserver
-			saveInput: function() { setServiceProperty("Nameserver", textField.text) }
-		}
-
-		ListText {
-			id: linklocal
-
-			//% "Link-local IP address"
-			text: qsTrId("settings_tcpip_link_local")
-			allowed: !root._wifi
-			dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 		}
 	}
 }
