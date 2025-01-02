@@ -14,6 +14,27 @@ Page {
 
 		model: ObjectModel {
 			ListRadioButtonGroup {
+				text: CommonWords.temperature
+				optionModel: [
+					//% "Celsius"
+					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
+					//% "Fahrenheit"
+					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
+				]
+				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+
+				onOptionClicked: function(index) {
+					Global.systemSettings.setTemperatureUnit(optionModel[index].value)
+				}
+			}
+
+			ListVolumeUnitRadioButtonGroup {
+				//: Title for a list of units of volume (e.g. cubic meters, liters, gallons)
+				//% "Volume"
+				text: qsTrId("components_volumeunit_volume")
+			}
+
+			ListRadioButtonGroup {
 				//% "Electrical power display"
 				text: qsTrId("settings_units_energy")
 
@@ -33,27 +54,6 @@ Page {
 				onOptionClicked: function(index) {
 					Global.systemSettings.setElectricalQuantity(optionModel[index].value)
 				}
-			}
-
-			ListRadioButtonGroup {
-				text: CommonWords.temperature
-				optionModel: [
-					//% "Celsius"
-					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
-					//% "Fahrenheit"
-					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
-				]
-				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
-
-				onOptionClicked: function(index) {
-					Global.systemSettings.setTemperatureUnit(optionModel[index].value)
-				}
-			}
-
-			ListVolumeUnitRadioButtonGroup {
-				//: Title for a list of units of volume (e.g. cubic meters, liters, gallons)
-				//% "Volume"
-				text: qsTrId("components_volumeunit_volume")
 			}
 		}
 	}
