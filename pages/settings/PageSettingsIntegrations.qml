@@ -48,6 +48,11 @@ Page {
 				}
 			}
 
+			SettingsListHeader {
+				//% "Physical I/O"
+				text: qsTrId("pagesettingsintegrations_physical_io")
+			}
+
 			ListNavigation {
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
