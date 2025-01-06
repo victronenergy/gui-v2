@@ -77,10 +77,10 @@ ObjectModel {
 				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 
 				//% "Disable autostart?"
-				title: qsTrId("controlcard_generator_disableautostartdialog_title")
+				title: qsTrId("ac-in-genset_disableautostartdialog_title")
 
-				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
-				description: qsTrId("controlcard_generator_disableautostartdialog_description")
+				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions.\nIf the generator is currently running due to a autostart condition, disabling autostart will also stop it immediately."
+				description: qsTrId("ac-in-genset_disableautostartdialog_description")
 
 				onAccepted: {
 					autostartSwitch.dataItem.setValue(false)
