@@ -14,6 +14,7 @@ Device {
 	readonly property int manualStartTimer: _manualStartTimer.isValid ? _manualStartTimer.value : 0
 	readonly property int runtime: _runtime.value || 0
 	readonly property int runningBy: _runningBy.isValid ? _runningBy.value : 0
+	readonly property bool enabled: _enabled.value === 1
 
 	readonly property string runningByText: Global.generators.runningByText(runningBy)
 	readonly property string stateText: Global.generators.stateText(state)
@@ -54,6 +55,10 @@ Device {
 
 	readonly property VeQuickItem _autoStart: VeQuickItem {
 		uid: serviceUid + "/AutoStartEnabled"
+	}
+
+	readonly property VeQuickItem _enabled: VeQuickItem {
+		uid: serviceUid + "/Enabled"
 	}
 
 	function start(durationSecs) {
