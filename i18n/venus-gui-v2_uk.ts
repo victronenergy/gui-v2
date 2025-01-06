@@ -299,14 +299,8 @@
       <source>Manual Start</source>
       <translation>Ручний запуск</translation>
     </message>
-    <message id="evcs_ac_position">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="20"/>
-      <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
-      <translation type="unfinished">Позиція</translation>
-    </message>
     <message id="evcs_autostart">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="36"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="23"/>
       <source>Autostart</source>
       <translation>Автозапуск</translation>
     </message>
@@ -1799,7 +1793,7 @@ Use unless prohibited by the utility provider.</source>
     <message id="settings_ess_above_minimum_soc_only">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
       <source>Above minimum SOC only</source>
-      <translation>Більше мінімуму Тільки для SoC</translation>
+      <translation>Тільки для SoC вище мінімального</translation>
     </message>
     <message id="settings_ess_always">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="60"/>
@@ -2715,12 +2709,12 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Пристрій перезавантажено.</translation>
     </message>
     <message id="settings_accharger_low_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="96"/>
       <source>Low battery voltage alarm</source>
       <translation>Тривога низької напруги батареї</translation>
     </message>
     <message id="settings_accharger_high_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="105"/>
       <source>High battery voltage alarm</source>
       <translation>Тривога через високу напругу батареї</translation>
     </message>
@@ -2873,7 +2867,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">%1 Історія</translation>
     </message>
     <message id="settings_multirs_history_name">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="114"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="121"/>
       <source>%1 History</source>
       <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
       <translation>%1 Історія</translation>
@@ -2975,7 +2969,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Увімкнути заряджання</translation>
     </message>
     <message id="evcs_lock_charger_display">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="42"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="29"/>
       <source>Lock charger display</source>
       <translation>Блокування дисплея зарядного</translation>
     </message>
@@ -3297,7 +3291,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">Натисніть , щоб знайти</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="203"/>
       <source>Press to redetect</source>
       <translation>Натисніть , щоб знайти</translation>
     </message>
@@ -3906,7 +3900,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">Батарея датчика</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="85"/>
       <source>Sensor battery</source>
       <translation>Батарея датчика</translation>
     </message>
@@ -4034,33 +4028,33 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Заблоковано</translation>
     </message>
     <message id="ac-in-setup_phase_configuration">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="101"/>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="132"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
       <source>Phase configuration</source>
       <translation>Фазова конфігурація</translation>
     </message>
     <message id="ac-in-setup_switch_position">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="117"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="122"/>
       <source>Switch position</source>
       <translation>Положення перемикача</translation>
     </message>
     <message id="ac-in-setup_single_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="142"/>
       <source>Single phase</source>
       <translation type="unfinished">Однофазний</translation>
     </message>
     <message id="ac-in-setup_two_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="144"/>
       <source>2-phase</source>
       <translation>2-фазний</translation>
     </message>
     <message id="ac-in-setup_three_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="146"/>
       <source>3-phase</source>
       <translation>3-фазний</translation>
     </message>
     <message id="ac-in-setup_devices">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="156"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="161"/>
       <source>Devices</source>
       <translation type="unfinished">Пристрої</translation>
     </message>
@@ -4127,35 +4121,35 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Немає помилки (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="85"/>
       <source>AC Totals</source>
       <translation>Усього AC</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="110"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Енергія L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="126"/>
       <source>Phase Sequence</source>
       <translation>Послідовність фаз</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="125"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="132"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="128"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="175"/>
       <source>Data manager version</source>
       <translation>Версія диспетчера даних</translation>
     </message>
@@ -4205,7 +4199,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Цей параметр вимкнено, якщо підключено VE.Bus BMS.</translation>
     </message>
     <message id="settings_multirs_ac_in_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="165"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC вхід %1</translation>
@@ -4236,42 +4230,42 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Інвертувати логіку тривоги</translation>
     </message>
     <message id="page_meteo_irradiance">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="38"/>
       <source>Irradiance</source>
       <translation>Опромінення</translation>
     </message>
     <message id="page_meteo_cell_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="40"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="47"/>
       <source>Cell temperature</source>
       <translation>Температура комірки</translation>
     </message>
     <message id="page_meteo_external_temperature_1">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="56"/>
       <source>External temperature (1)</source>
       <translation>Зовнішня температура (1)</translation>
     </message>
     <message id="page_meteo_external_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="58"/>
       <source>External temperature</source>
       <translation>Зовнішня температура</translation>
     </message>
     <message id="page_meteo_external_temperature_2">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="69"/>
       <source>External temperature (2)</source>
       <translation>Зовнішня температура (2)</translation>
     </message>
     <message id="page_meteo_wind_speed">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="77"/>
       <source>Wind speed</source>
       <translation>Швидкість вітру</translation>
     </message>
     <message id="page_meteo_battery_voltage">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="113"/>
       <source>Sensor battery</source>
       <translation type="unfinished">Батарея датчика</translation>
     </message>
     <message id="meteo_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="134"/>
       <source>Low</source>
       <translation type="unfinished">Низький</translation>
     </message>
@@ -4291,7 +4285,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Зовнішній датчик температури</translation>
     </message>
     <message id="pulsecounter_aggregate">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="25"/>
       <source>Aggregate</source>
       <translation>Агрегація</translation>
     </message>
@@ -4306,32 +4300,32 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Скинути лічильник</translation>
     </message>
     <message id="temperature_short_circuited">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="45"/>
       <source>Short circuited</source>
       <translation type="unfinished">Коротке замикання</translation>
     </message>
     <message id="temperature_reverse_polarity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="48"/>
       <source>Reverse polarity</source>
       <translation type="unfinished">Зворотня полярність</translation>
     </message>
     <message id="temperature_sensor_battery_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="51"/>
       <source>Sensor battery low</source>
       <translation>Батарея датчика розряджена</translation>
     </message>
     <message id="temperature_humidity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="67"/>
       <source>Humidity</source>
       <translation>Вологість</translation>
     </message>
     <message id="temperature_pressure">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
       <source>Pressure</source>
       <translation>Тиск</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="106"/>
       <source>Low</source>
       <translation type="unfinished">Низький</translation>
     </message>
@@ -4351,7 +4345,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>Напруга датчика</translation>
     </message>
     <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="215"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
       <source>Total PV Power</source>
       <translation>Загальна PV потужність</translation>
     </message>
@@ -4398,7 +4392,7 @@ NOTE: The update might temporarily stop the system.</source>
       <translation>Заряджання батареї до 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="250"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
       <source>Advanced</source>
       <translation type="unfinished">Розширено</translation>
     </message>
@@ -4467,17 +4461,17 @@ Do you want to continue?</source>
       <translation>Налаштування сигналу тривоги</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="278"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>VE.Bus BMS автоматично вимикає систему, коли це потрібно для захисту батареї. А отже, керування системою за допомогою Color Control неможливе.</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>Встановлено BMS-асистент, налаштований на VE.Bus BMS, але VE.Bus BMS не знайдено!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="290"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -4493,7 +4487,7 @@ Do you want to continue?</source>
     </message>
     <message id="vebus_device_interrupt_equalization">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="150"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="151"/>
       <source>Interrupt equalization</source>
       <translation>Зупинка вирівнювання</translation>
     </message>
@@ -4523,72 +4517,72 @@ Do you want to continue?</source>
       <translation>Натисніть, щоб перервати</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="155"/>
       <source>Interrupt and restart absorption</source>
       <translation>Перервати і перезапустити поглинання</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="161"/>
       <source>Interrupt and go to float</source>
       <translation>Перервати і перейти до підтримання заряду</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="166"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="167"/>
       <source>Interrupt</source>
       <translation>Перервати</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="172"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="173"/>
       <source>Do not interrupt</source>
       <translation>Не переривати</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="197"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Redetect VE.Bus system</source>
       <translation>Повторно виявити систему VE.Bus</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="200"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="201"/>
       <source>Redetecting...</source>
       <translation>Повторне виявлення...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="209"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Restart VE.Bus system</source>
       <translation>Перезапустити систему VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="213"/>
       <source>Restarting...</source>
       <translation>Перезапуск...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="214"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="215"/>
       <source>Press to restart</source>
       <translation>Натисніть для перезапуску</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="221"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
       <source>AC input 1 ignored</source>
       <translation>Вхід AC 1 ігнорується</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="230"/>
       <source>AC input 2 ignored</source>
       <translation>Вхід AC 2 ігнорується</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="237"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>ESS Relay test</source>
       <translation>Тестування реле ESS</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
       <source>Completed</source>
       <translation type="unfinished">Завершено</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="245"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
       <source>Pending</source>
       <translation type="unfinished">Очікується...</translation>
     </message>
@@ -4603,12 +4597,12 @@ Do you want to continue?</source>
       <translation>Очікується...</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="253"/>
       <source>VE.Bus diagnostics</source>
       <translation>Діагностика VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="271"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="272"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Лічильник якості мережі Фаза L%1, пристрій %2 (%3)</translation>
     </message>
@@ -5813,7 +5807,7 @@ Do you want to continue?</source>
       <translation type="unfinished">PV</translation>
     </message>
     <message id="settings_multirs_pv">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
       <source>PV</source>
       <translation>PV</translation>
     </message>
@@ -7006,19 +7000,19 @@ Do you want to continue?</source>
       <translation>Тривоги та помилки</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="123"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
       <translation>Ця функція потребує прошивки версії 400 або новішої. Зверніться до інсталятора, щоб оновити ваш Multi/Quattro.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="130"/>
       <source>Charger not ready, equalization cannot be started</source>
       <oldsource>Charger not ready, equalization cannot be started.</oldsource>
       <translation>Зарядний пристрій не готовий, вирівнювання не може бути запущено</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="134"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
       <translation>Вирівнювання не може спрацювати під час стану об'ємного заряду</translation>
@@ -7281,17 +7275,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Сонячна</translation>
     </message>
     <message id="devicelist_motordrive_motorrpm">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
       <translation>Оберти двигуна</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="33"/>
       <source>Motor Temperature</source>
       <translation>Температура двигуна</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
       <source>Controller Temperature</source>
       <translation>Температура Контролера</translation>
     </message>
@@ -7362,12 +7356,12 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Висока напруга виходу AC</translation>
     </message>
     <message id="settings_multirs_total_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="91"/>
       <source>Total yield</source>
       <translation>Загальний вихід</translation>
     </message>
     <message id="settings_multirs_system_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="99"/>
       <source>System yield</source>
       <translation>Вихід системи</translation>
     </message>
@@ -7434,7 +7428,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
     <message id="settings_ess_use_this_option_for_systems_no_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="56"/>
       <source>Use this option in systems that do not perform peak shaving.</source>
-      <translation>Використовуйте цю опцію в пристроях, які не підтримують пікове гоління.</translation>
+      <translation>Використовуйте цю опцію в пристроях, які не підтримують пікові обмеження.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
@@ -7444,7 +7438,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
 The peak shaving threshold is set using the AC input current limit setting.
 
 See documentation for further information.</oldsource>
-      <translation>Використовуйте цю опцію для пікового гоління.</translation>
+      <translation>Використовуйте цю опцію для обмеження піків.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
@@ -7454,7 +7448,7 @@ See documentation for further information.</oldsource>
     <message id="settings_ess_use_this_option_for_peak_shaving_with_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="76"/>
       <source>The peak shaving thresholds for import and export can be changed on this screen. See documentation for further information.</source>
-      <translation>На цьому екрані можна змінити пікові пороги гоління для імпорту та експорту. Докладнішу інформацію див. у документації.</translation>
+      <translation>На цьому екрані можна змінити обмеження піків для імпорту та експорту. Докладнішу інформацію див. у документації.</translation>
     </message>
     <message id="settings_ess_limit_system_ac_import_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="86"/>
@@ -7522,13 +7516,13 @@ See documentation for further information.</oldsource>
       <translation>Цільовий SOC</translation>
     </message>
     <message id="settings_multirs_ac_out_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="179"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC вихід %1</translation>
     </message>
     <message id="settings_multirs_trackers">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="229"/>
       <source>Trackers</source>
       <translation>Трекер</translation>
     </message>
@@ -7644,13 +7638,13 @@ See documentation for further information.</oldsource>
       <translation>Пристроїв Modbus не виявлено</translation>
     </message>
     <message id="settings_accharger_battery">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="61"/>
       <source>Battery %1</source>
       <extracomment>%1 = battery number</extracomment>
       <translation>Батарея %1</translation>
     </message>
     <message id="settings_accharger_current">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="88"/>
       <source>AC current</source>
       <translation>AC струм</translation>
     </message>
@@ -8741,17 +8735,17 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>EVCS (%1)</translation>
     </message>
     <message id="page_meteo_wind_direction">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="86"/>
       <source>Wind direction</source>
       <translation>Напрямок вітру</translation>
     </message>
     <message id="page_meteo_installation_power">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="94"/>
       <source>Installation Power</source>
       <translation>Потужність установки</translation>
     </message>
     <message id="page_meteo_daily_yield">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="103"/>
       <source>Today's yield</source>
       <translation>Сьогоднішня врожайність</translation>
     </message>
@@ -8771,44 +8765,60 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Режим порталу VRM</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="445"/>
+      <location filename="../../src/units.cpp" line="449"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="447"/>
+      <location filename="../../src/units.cpp" line="451"/>
       <source>NE</source>
       <translation>NE</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="449"/>
+      <location filename="../../src/units.cpp" line="453"/>
       <source>E</source>
       <translation>E</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>SW</source>
       <translation>SW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="461"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="463"/>
       <source>NW</source>
       <translation>NW</translation>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="217"/>
+      <source>Managed battery controls all Multis and Quattros</source>
+      <translation/>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices_label">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="230"/>
+      <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
+      <translation/>
+    </message>
+    <message id="evcs_ac_position">
+      <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
+      <source>Position</source>
+      <extracomment>EVCS AC input/output position</extracomment>
+      <translation type="unfinished">Позиція</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
@@ -10348,7 +10358,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
   <context>
     <name>PageAcInSetup</name>
     <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="129"/>
       <source>Set the switch in an unlocked position to modify the settings.</source>
       <translation>Щоб змінити налаштування, встановіть перемикач у розблоковане положення.</translation>
     </message>

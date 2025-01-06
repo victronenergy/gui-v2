@@ -299,14 +299,8 @@
       <source>Manual Start</source>
       <translation>เริ่มด้วยตัวเอง</translation>
     </message>
-    <message id="evcs_ac_position">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="20"/>
-      <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
-      <translation type="unfinished">ตำแหน่ง</translation>
-    </message>
     <message id="evcs_autostart">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="36"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="23"/>
       <source>Autostart</source>
       <translation>เริ่มอัตโนมัติ</translation>
     </message>
@@ -2715,12 +2709,12 @@ Documentation at https://ve3.nl/vol</source>
       <translation>อุปกรณ์ได้รับการรีบูตแล้ว</translation>
     </message>
     <message id="settings_accharger_low_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="96"/>
       <source>Low battery voltage alarm</source>
       <translation>สัญญาณเตือนแรงดันแบตเตอรี่ต่ำ</translation>
     </message>
     <message id="settings_accharger_high_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="105"/>
       <source>High battery voltage alarm</source>
       <translation>สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
@@ -2873,7 +2867,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">%1 ประวัติศาสตร์</translation>
     </message>
     <message id="settings_multirs_history_name">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="114"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="121"/>
       <source>%1 History</source>
       <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
       <translation>%1 ประวัติศาสตร์</translation>
@@ -2975,7 +2969,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>เปิดใช้งานการชาร์จ</translation>
     </message>
     <message id="evcs_lock_charger_display">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="42"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="29"/>
       <source>Lock charger display</source>
       <translation>ล็อคจอแสดงผลเครื่องชาร์จ</translation>
     </message>
@@ -3297,7 +3291,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">กดเพื่อตรวจหาอีกครั้ง</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="203"/>
       <source>Press to redetect</source>
       <translation>กดเพื่อตรวจหาอีกครั้ง</translation>
     </message>
@@ -3904,7 +3898,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation type="unfinished">แบตเตอรี่เซนเซอร์</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="85"/>
       <source>Sensor battery</source>
       <translation>แบตเตอรี่เซนเซอร์</translation>
     </message>
@@ -4032,33 +4026,33 @@ Documentation at https://ve3.nl/vol</source>
       <translation>ถูกล็อค</translation>
     </message>
     <message id="ac-in-setup_phase_configuration">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="101"/>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="132"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
       <source>Phase configuration</source>
       <translation>การกำหนดค่าเฟส</translation>
     </message>
     <message id="ac-in-setup_switch_position">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="117"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="122"/>
       <source>Switch position</source>
       <translation>สลับตำแหน่ง</translation>
     </message>
     <message id="ac-in-setup_single_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="142"/>
       <source>Single phase</source>
       <translation type="unfinished">เฟสเดียว</translation>
     </message>
     <message id="ac-in-setup_two_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="144"/>
       <source>2-phase</source>
       <translation>2 เฟส</translation>
     </message>
     <message id="ac-in-setup_three_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="146"/>
       <source>3-phase</source>
       <translation>3 เฟส</translation>
     </message>
     <message id="ac-in-setup_devices">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="156"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="161"/>
       <source>Devices</source>
       <translation type="unfinished">อุปกรณ์</translation>
     </message>
@@ -4125,35 +4119,35 @@ Documentation at https://ve3.nl/vol</source>
       <translation>ไม่มีข้อผิดพลาด (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="85"/>
       <source>AC Totals</source>
       <translation>AC Totals</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="110"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>พลังงาน L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="126"/>
       <source>Phase Sequence</source>
       <translation>ลำดับเฟส</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="125"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="132"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="128"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="175"/>
       <source>Data manager version</source>
       <translation>เวอร์ชันตัวจัดการข้อมูล</translation>
     </message>
@@ -4203,7 +4197,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>การตั้งค่านี้ถูกปิดใช้งานเมื่อมีการเชื่อมต่อ VE.Bus BMS</translation>
     </message>
     <message id="settings_multirs_ac_in_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="165"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>ไฟฟ้ากระแสสลับใน %1</translation>
@@ -4234,42 +4228,42 @@ Documentation at https://ve3.nl/vol</source>
       <translation>สลับตรรกะการเตือน</translation>
     </message>
     <message id="page_meteo_irradiance">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="38"/>
       <source>Irradiance</source>
       <translation>รังสี</translation>
     </message>
     <message id="page_meteo_cell_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="40"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="47"/>
       <source>Cell temperature</source>
       <translation>อุณหภูมิเซลล์</translation>
     </message>
     <message id="page_meteo_external_temperature_1">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="56"/>
       <source>External temperature (1)</source>
       <translation>อุณหภูมิภายนอก (1)</translation>
     </message>
     <message id="page_meteo_external_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="58"/>
       <source>External temperature</source>
       <translation>อุณหภูมิภายนอก</translation>
     </message>
     <message id="page_meteo_external_temperature_2">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="69"/>
       <source>External temperature (2)</source>
       <translation>อุณหภูมิภายนอก (2)</translation>
     </message>
     <message id="page_meteo_wind_speed">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="77"/>
       <source>Wind speed</source>
       <translation>ความเร็วลม</translation>
     </message>
     <message id="page_meteo_battery_voltage">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="113"/>
       <source>Sensor battery</source>
       <translation type="unfinished">แบตเตอรี่เซนเซอร์</translation>
     </message>
     <message id="meteo_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="134"/>
       <source>Low</source>
       <translation type="unfinished">ต่ำ</translation>
     </message>
@@ -4289,7 +4283,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>เซ็นเซอร์อุณหภูมิภายนอก</translation>
     </message>
     <message id="pulsecounter_aggregate">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="25"/>
       <source>Aggregate</source>
       <translation>รวม</translation>
     </message>
@@ -4304,32 +4298,32 @@ Documentation at https://ve3.nl/vol</source>
       <translation>รีเซ็ตตัวนับ</translation>
     </message>
     <message id="temperature_short_circuited">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="45"/>
       <source>Short circuited</source>
       <translation type="unfinished">ลัดวงจร</translation>
     </message>
     <message id="temperature_reverse_polarity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="48"/>
       <source>Reverse polarity</source>
       <translation type="unfinished">ขั้วย้อนกลับ</translation>
     </message>
     <message id="temperature_sensor_battery_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="51"/>
       <source>Sensor battery low</source>
       <translation>เซ็นเซอร์แบตเตอรี่ต่ำ</translation>
     </message>
     <message id="temperature_humidity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="67"/>
       <source>Humidity</source>
       <translation>ความชื้น</translation>
     </message>
     <message id="temperature_pressure">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
       <source>Pressure</source>
       <translation>ความกดดัน</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="106"/>
       <source>Low</source>
       <translation type="unfinished">ต่ำ</translation>
     </message>
@@ -4349,7 +4343,7 @@ Documentation at https://ve3.nl/vol</source>
       <translation>แรงดันเซ็นเซอร์</translation>
     </message>
     <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="215"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
       <source>Total PV Power</source>
       <translation>พลัง PV ทั้งหมด</translation>
     </message>
@@ -4396,7 +4390,7 @@ NOTE: The update might temporarily stop the system.</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="250"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
       <source>Advanced</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
@@ -4465,17 +4459,17 @@ Do you want to continue?</source>
       <translation>ตั้งปลุก</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="278"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>VE.Bus BMS จะปิดระบบโดยอัตโนมัติเมื่อจำเป็นเพื่อปกป้องแบตเตอรี่ จึงไม่สามารถควบคุมระบบของตัวควบคุมได้</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>มีการติดตั้งผู้ช่วย BMS ที่ได้รับการกำหนดค่าสำหรับ VE.Bus BMS แต่ไม่พบ VE.Bus BMS!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="290"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -4491,7 +4485,7 @@ Do you want to continue?</source>
     </message>
     <message id="vebus_device_interrupt_equalization">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="150"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="151"/>
       <source>Interrupt equalization</source>
       <translation>ขัดจังหวะอีควอไลเซอร์</translation>
     </message>
@@ -4521,72 +4515,72 @@ Do you want to continue?</source>
       <translation>กดเพื่อขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="155"/>
       <source>Interrupt and restart absorption</source>
       <translation>แทรกแซงและเริ่มการดูดซึมใหม่</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="161"/>
       <source>Interrupt and go to float</source>
       <translation>แทรกแซงแล้วลอย</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="166"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="167"/>
       <source>Interrupt</source>
       <translation>ขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="172"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="173"/>
       <source>Do not interrupt</source>
       <translation>อย่าขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="197"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Redetect VE.Bus system</source>
       <translation>ตรวจสอบระบบ VE.Bus อีกครั้ง</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="200"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="201"/>
       <source>Redetecting...</source>
       <translation>กำลังตรวจหาซ้ำ...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="209"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Restart VE.Bus system</source>
       <translation>รีสตาร์ทระบบ VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="213"/>
       <source>Restarting...</source>
       <translation>กำลังรีสตาร์ท...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="214"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="215"/>
       <source>Press to restart</source>
       <translation>กดเพื่อเริ่มต้นใหม่</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="221"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
       <source>AC input 1 ignored</source>
       <translation>อินพุต AC 1 ถูกละเว้น</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="230"/>
       <source>AC input 2 ignored</source>
       <translation>อินพุต AC 2 ถูกละเว้น</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="237"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>ESS Relay test</source>
       <translation>การทดสอบรีเลย์ ESS</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
       <source>Completed</source>
       <translation type="unfinished">สมบูรณ์</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="245"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
       <source>Pending</source>
       <translation type="unfinished">รอดำเนินการ</translation>
     </message>
@@ -4601,12 +4595,12 @@ Do you want to continue?</source>
       <translation>รอดำเนินการ</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="253"/>
       <source>VE.Bus diagnostics</source>
       <translation>การวินิจฉัย VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="271"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="272"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>ตัวนับคุณภาพเครือข่ายเฟส L%1 อุปกรณ์ %2 (%3)</translation>
     </message>
@@ -5811,7 +5805,7 @@ Do you want to continue?</source>
       <translation type="unfinished">PV</translation>
     </message>
     <message id="settings_multirs_pv">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
       <source>PV</source>
       <translation>PV</translation>
     </message>
@@ -7004,19 +6998,19 @@ Do you want to continue?</source>
       <translation>สัญญาณเตือนและข้อผิดพลาด</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="123"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
       <translation>คุณสมบัตินี้ต้องใช้เฟิร์มแวร์เวอร์ชัน 400 ขึ้นไป ติดต่อผู้ติดตั้งเพื่ออัปเดต Multi/Quattro ของคุณ</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="130"/>
       <source>Charger not ready, equalization cannot be started</source>
       <oldsource>Charger not ready, equalization cannot be started.</oldsource>
       <translation>ที่ชาร์จไม่พร้อม ไม่สามารถเริ่มการปรับสมดุลได้</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="134"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
       <translation>ไม่สามารถทริกเกอร์การปรับสมดุลระหว่างสถานะการชาร์จจำนวนมาก</translation>
@@ -7279,17 +7273,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>แสงอาทิตย์</translation>
     </message>
     <message id="devicelist_motordrive_motorrpm">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
       <translation>มอเตอร์ RPM</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="33"/>
       <source>Motor Temperature</source>
       <translation>อุณหภูมิมอเตอร์</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
       <source>Controller Temperature</source>
       <translation>อุณหภูมิตัวควบคุม</translation>
     </message>
@@ -7360,12 +7354,12 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>ไฟฟ้ากระแสสลับออกสูง</translation>
     </message>
     <message id="settings_multirs_total_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="91"/>
       <source>Total yield</source>
       <translation>ผลตอบแทนรวม</translation>
     </message>
     <message id="settings_multirs_system_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="99"/>
       <source>System yield</source>
       <translation>ผลตอบแทนของระบบ</translation>
     </message>
@@ -7520,13 +7514,13 @@ See documentation for further information.</oldsource>
       <translation>เป้าหมาย SOC</translation>
     </message>
     <message id="settings_multirs_ac_out_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="179"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>ไฟฟ้ากระแสสลับออก %1</translation>
     </message>
     <message id="settings_multirs_trackers">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="229"/>
       <source>Trackers</source>
       <translation>ตัวติดตาม</translation>
     </message>
@@ -7642,13 +7636,13 @@ See documentation for further information.</oldsource>
       <translation>ไม่พบอุปกรณ์ Modbus</translation>
     </message>
     <message id="settings_accharger_battery">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="61"/>
       <source>Battery %1</source>
       <extracomment>%1 = battery number</extracomment>
       <translation>แบตเตอรี่ %1</translation>
     </message>
     <message id="settings_accharger_current">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="88"/>
       <source>AC current</source>
       <translation>กระแสสลับ</translation>
     </message>
@@ -8737,17 +8731,17 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>อีซีเอส (%1)</translation>
     </message>
     <message id="page_meteo_wind_direction">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="86"/>
       <source>Wind direction</source>
       <translation>ทิศทางลม</translation>
     </message>
     <message id="page_meteo_installation_power">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="94"/>
       <source>Installation Power</source>
       <translation>การติดตั้งไฟฟ้า</translation>
     </message>
     <message id="page_meteo_daily_yield">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="103"/>
       <source>Today's yield</source>
       <translation>ผลผลิตวันนี้</translation>
     </message>
@@ -8767,44 +8761,60 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>โหมดพอร์ทัล VRM</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="445"/>
+      <location filename="../../src/units.cpp" line="449"/>
       <source>N</source>
       <translation>เอ็น</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="447"/>
+      <location filename="../../src/units.cpp" line="451"/>
       <source>NE</source>
       <translation>เน</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="449"/>
+      <location filename="../../src/units.cpp" line="453"/>
       <source>E</source>
       <translation>อี</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>SE</source>
       <translation>เอสอี</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>S</source>
       <translation>ส</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>SW</source>
       <translation>สว.</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="461"/>
       <source>W</source>
       <translation>ว.</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="463"/>
       <source>NW</source>
       <translation>ตะวันตกเฉียงเหนือ</translation>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="217"/>
+      <source>Managed battery controls all Multis and Quattros</source>
+      <translation/>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices_label">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="230"/>
+      <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
+      <translation/>
+    </message>
+    <message id="evcs_ac_position">
+      <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
+      <source>Position</source>
+      <extracomment>EVCS AC input/output position</extracomment>
+      <translation type="unfinished">ตำแหน่ง</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
@@ -10344,7 +10354,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
   <context>
     <name>PageAcInSetup</name>
     <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="129"/>
       <source>Set the switch in an unlocked position to modify the settings.</source>
       <translation>ตั้งสวิตช์ในตำแหน่งปลดล็อคเพื่อแก้ไขการตั้งค่า</translation>
     </message>
