@@ -54,10 +54,39 @@ ObjectModel {
 	}
 
 	ListSwitch {
+		id: autostartSwitch
 		//% "Auto start functionality"
 		text: qsTrId("ac-in-genset_auto_start_functionality")
 		allowed: root.gensetEnabled.value === 1
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
+		updateDataOnClick: false
+
+		onClicked: {
+			if (!checked) {
+				autostartSwitch.dataItem.setValue(true)
+			} else {
+				// check if they really want to disable
+				Global.dialogLayer.open(confirmationDialogComponent)
+			}
+		}
+
+		Component {
+			id: confirmationDialogComponent
+
+			ModalWarningDialog {
+				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+
+				//% "Disable autostart?"
+				title: qsTrId("controlcard_generator_disableautostartdialog_title")
+
+				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
+				description: qsTrId("controlcard_generator_disableautostartdialog_description")
+
+				onAccepted: {
+					autostartSwitch.dataItem.setValue(false)
+				}
+			}
+		}
 	}
 
 	ListItem {
