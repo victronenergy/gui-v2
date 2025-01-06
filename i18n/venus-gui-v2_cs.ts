@@ -299,14 +299,8 @@
       <source>Manual Start</source>
       <translation>MANUÁLNÍ SPUŠTĚNÍ</translation>
     </message>
-    <message id="evcs_ac_position">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="20"/>
-      <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
-      <translation type="unfinished">Pozice</translation>
-    </message>
     <message id="evcs_autostart">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="36"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="23"/>
       <source>Autostart</source>
       <translation>Automatické spuštění</translation>
     </message>
@@ -2715,12 +2709,12 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Zařízení bylo restartováno.</translation>
     </message>
     <message id="settings_accharger_low_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="96"/>
       <source>Low battery voltage alarm</source>
       <translation>Alarm nízkého napětí baterie</translation>
     </message>
     <message id="settings_accharger_high_battery_voltage_alarm">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="105"/>
       <source>High battery voltage alarm</source>
       <translation>Alarm vysokého napětí baterie</translation>
     </message>
@@ -2873,7 +2867,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation type="unfinished">%1 Historie</translation>
     </message>
     <message id="settings_multirs_history_name">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="114"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="121"/>
       <source>%1 History</source>
       <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
       <translation>%1 Historie</translation>
@@ -2975,7 +2969,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Povolit nabíjení</translation>
     </message>
     <message id="evcs_lock_charger_display">
-      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="42"/>
+      <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="29"/>
       <source>Lock charger display</source>
       <translation>Zámek displeje nabíječky</translation>
     </message>
@@ -3297,7 +3291,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation type="unfinished">Stisknout</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="203"/>
       <source>Press to redetect</source>
       <translation>Stisknout</translation>
     </message>
@@ -3906,7 +3900,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation type="unfinished">Bateriový senzor</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="85"/>
       <source>Sensor battery</source>
       <translation>Bateriový senzor</translation>
     </message>
@@ -4034,33 +4028,33 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Uzamčeno</translation>
     </message>
     <message id="ac-in-setup_phase_configuration">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="101"/>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="132"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
       <source>Phase configuration</source>
       <translation>Nastavení fáze</translation>
     </message>
     <message id="ac-in-setup_switch_position">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="117"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="122"/>
       <source>Switch position</source>
       <translation>Poloha spínače</translation>
     </message>
     <message id="ac-in-setup_single_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="142"/>
       <source>Single phase</source>
       <translation type="unfinished">Jedna fáze</translation>
     </message>
     <message id="ac-in-setup_two_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="144"/>
       <source>2-phase</source>
       <translation>2 fáze</translation>
     </message>
     <message id="ac-in-setup_three_phase">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="141"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="146"/>
       <source>3-phase</source>
       <translation>3 fáze</translation>
     </message>
     <message id="ac-in-setup_devices">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="156"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="161"/>
       <source>Devices</source>
       <translation type="unfinished">Zařízení</translation>
     </message>
@@ -4127,35 +4121,35 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Žádná chyba (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="85"/>
       <source>AC Totals</source>
       <translation>AC celkem</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="103"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="110"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Energie L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="126"/>
       <source>Phase Sequence</source>
       <translation>Fázová sekvence</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="125"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="132"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="128"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="175"/>
       <source>Data manager version</source>
       <translation>Verze správce dat</translation>
     </message>
@@ -4205,7 +4199,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Toto nastavení je zakázáno, pokud je připojena sběrnicová jednotka BMS VE.Bus.</translation>
     </message>
     <message id="settings_multirs_ac_in_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="165"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC v %1</translation>
@@ -4236,42 +4230,42 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Invert. logiku alarmu</translation>
     </message>
     <message id="page_meteo_irradiance">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="38"/>
       <source>Irradiance</source>
       <translation>Ozáření</translation>
     </message>
     <message id="page_meteo_cell_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="40"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="47"/>
       <source>Cell temperature</source>
       <translation>Teplota článku</translation>
     </message>
     <message id="page_meteo_external_temperature_1">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="56"/>
       <source>External temperature (1)</source>
       <translation>Vnější teplota (1)</translation>
     </message>
     <message id="page_meteo_external_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="58"/>
       <source>External temperature</source>
       <translation>Vnější teplota</translation>
     </message>
     <message id="page_meteo_external_temperature_2">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="69"/>
       <source>External temperature (2)</source>
       <translation>Vnější teplota (2)</translation>
     </message>
     <message id="page_meteo_wind_speed">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="77"/>
       <source>Wind speed</source>
       <translation>Rychlost větru</translation>
     </message>
     <message id="page_meteo_battery_voltage">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="113"/>
       <source>Sensor battery</source>
       <translation type="unfinished">Bateriový senzor</translation>
     </message>
     <message id="meteo_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="127"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="134"/>
       <source>Low</source>
       <translation type="unfinished">Nízko</translation>
     </message>
@@ -4291,7 +4285,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Externí teplotní čidlo</translation>
     </message>
     <message id="pulsecounter_aggregate">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounter.qml" line="25"/>
       <source>Aggregate</source>
       <translation>Sdružený</translation>
     </message>
@@ -4306,32 +4300,32 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Reset počítání</translation>
     </message>
     <message id="temperature_short_circuited">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="45"/>
       <source>Short circuited</source>
       <translation type="unfinished">Zkrat</translation>
     </message>
     <message id="temperature_reverse_polarity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="48"/>
       <source>Reverse polarity</source>
       <translation type="unfinished">Obrácená polarita</translation>
     </message>
     <message id="temperature_sensor_battery_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="51"/>
       <source>Sensor battery low</source>
       <translation>Nízký stav baterie snímače</translation>
     </message>
     <message id="temperature_humidity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="67"/>
       <source>Humidity</source>
       <translation>Vlhkost</translation>
     </message>
     <message id="temperature_pressure">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
       <source>Pressure</source>
       <translation>Tlak</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="106"/>
       <source>Low</source>
       <translation type="unfinished">Nízko</translation>
     </message>
@@ -4351,7 +4345,7 @@ Dokumentaci najdete na stránce https://ve3.nl/vol.</translation>
       <translation>Napětí snímače</translation>
     </message>
     <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="215"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
       <source>Total PV Power</source>
       <translation>Celkový FV výkon</translation>
     </message>
@@ -4398,7 +4392,7 @@ POZNÁMKA: Aktualizace může dočasně zastavit systém.</translation>
       <translation>Nabíjení baterie na 100 %</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="250"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
       <source>Advanced</source>
       <translation type="unfinished">Pokročilé</translation>
     </message>
@@ -4467,17 +4461,17 @@ Chcete pokračovat?</translation>
       <translation>Nastavení alarmu</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="278"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>VE.Bus BMS automaticky vypne systém, pokud je nutné ochránit baterii. Řízení systému z Color Control není proto možné.</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>BMS assistent je nainstalován a nakonfigurován for VE.Bus BMS, ale VE.Bus BMS není nalezeno!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="290"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -4493,7 +4487,7 @@ Chcete pokračovat?</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="150"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="151"/>
       <source>Interrupt equalization</source>
       <translation>Přerušit vyrovnávání</translation>
     </message>
@@ -4523,72 +4517,72 @@ Chcete pokračovat?</translation>
       <translation>Stiskněte pro přerušení</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="155"/>
       <source>Interrupt and restart absorption</source>
       <translation>Přerušit a restartovat absorpční nabíjení</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="161"/>
       <source>Interrupt and go to float</source>
       <translation>Přerušit a přejít do režimu plovoucího nabíjení</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="166"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="167"/>
       <source>Interrupt</source>
       <translation>Přerušit</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="172"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="173"/>
       <source>Do not interrupt</source>
       <translation>Nepřerušovat</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="197"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="198"/>
       <source>Redetect VE.Bus system</source>
       <translation>RedetekceVE.Bus systému</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="200"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="201"/>
       <source>Redetecting...</source>
       <translation>Opakování detekce...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="209"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Restart VE.Bus system</source>
       <translation>Restartujte systém VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="213"/>
       <source>Restarting...</source>
       <translation>Restartuji...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="214"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="215"/>
       <source>Press to restart</source>
       <translation>Stisknutím tlačítka restartujte</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="221"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
       <source>AC input 1 ignored</source>
       <translation>AC vstup 1 ignorován</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="230"/>
       <source>AC input 2 ignored</source>
       <translation>AC vstup 2 ignorován</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="237"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>ESS Relay test</source>
       <translation>Kontrola ESS relé</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
       <source>Completed</source>
       <translation type="unfinished">Hotovo</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="245"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
       <source>Pending</source>
       <translation type="unfinished">Čekající</translation>
     </message>
@@ -4603,12 +4597,12 @@ Chcete pokračovat?</translation>
       <translation>Čekající</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="253"/>
       <source>VE.Bus diagnostics</source>
       <translation>Diagnostika VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="271"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="272"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Čítač kvality sítě Fáze L%1, zařízení %2 (%3)</translation>
     </message>
@@ -5813,7 +5807,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">FV</translation>
     </message>
     <message id="settings_multirs_pv">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
       <source>PV</source>
       <translation>FV</translation>
     </message>
@@ -7006,19 +7000,19 @@ Chcete pokračovat?</translation>
       <translation>Alarmy a chyby</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="123"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
       <translation>Tato funkce vyžaduje firmware verze 400 nebo vyšší. Pro aktualizaci zařízení Multi/Quattro se obraťte na svého instalatéra.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="129"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="130"/>
       <source>Charger not ready, equalization cannot be started</source>
       <oldsource>Charger not ready, equalization cannot be started.</oldsource>
       <translation>Nabíječka není připravena, vyrovnávání nelze spustit</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="134"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
       <translation>Vyrovnání nelze spustit během stavu hromadného nabíjení</translation>
@@ -7281,17 +7275,17 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Solární energie</translation>
     </message>
     <message id="devicelist_motordrive_motorrpm">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
       <translation>Otáčky motoru</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="33"/>
       <source>Motor Temperature</source>
       <translation>Teplota motoru</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
       <source>Controller Temperature</source>
       <translation>Teplota ovladače</translation>
     </message>
@@ -7362,12 +7356,12 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Vysoké VÝSTUPNÍ AC napětí</translation>
     </message>
     <message id="settings_multirs_total_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="91"/>
       <source>Total yield</source>
       <translation>Celkový výnos</translation>
     </message>
     <message id="settings_multirs_system_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="99"/>
       <source>System yield</source>
       <translation>Systémový výnos</translation>
     </message>
@@ -7522,13 +7516,13 @@ See documentation for further information.</oldsource>
       <translation>Cílová SOC</translation>
     </message>
     <message id="settings_multirs_ac_out_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="179"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC out %1</translation>
     </message>
     <message id="settings_multirs_trackers">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="229"/>
       <source>Trackers</source>
       <translation>Sledovač</translation>
     </message>
@@ -7644,13 +7638,13 @@ See documentation for further information.</oldsource>
       <translation>Nebyla nalezena žádná zařízení Modbus</translation>
     </message>
     <message id="settings_accharger_battery">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="61"/>
       <source>Battery %1</source>
       <extracomment>%1 = battery number</extracomment>
       <translation>Baterie %1</translation>
     </message>
     <message id="settings_accharger_current">
-      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="88"/>
       <source>AC current</source>
       <translation>Střídavý proud</translation>
     </message>
@@ -8741,17 +8735,17 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation>EVCS (%1)</translation>
     </message>
     <message id="page_meteo_wind_direction">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="86"/>
       <source>Wind direction</source>
       <translation>Směr větru</translation>
     </message>
     <message id="page_meteo_installation_power">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="94"/>
       <source>Installation Power</source>
       <translation>Instalace Power</translation>
     </message>
     <message id="page_meteo_daily_yield">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="103"/>
       <source>Today's yield</source>
       <translation>Dnešní výnos</translation>
     </message>
@@ -8771,44 +8765,60 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation>Režim portálu VRM</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="445"/>
+      <location filename="../../src/units.cpp" line="449"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="447"/>
+      <location filename="../../src/units.cpp" line="451"/>
       <source>NE</source>
       <translation>NE</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="449"/>
+      <location filename="../../src/units.cpp" line="453"/>
       <source>E</source>
       <translation>E</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>SW</source>
       <translation>SW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="461"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="463"/>
       <source>NW</source>
       <translation>NW</translation>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="217"/>
+      <source>Managed battery controls all Multis and Quattros</source>
+      <translation/>
+    </message>
+    <message id="settings_dvcc_control_all_vebus_devices_label">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="230"/>
+      <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
+      <translation/>
+    </message>
+    <message id="evcs_ac_position">
+      <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
+      <source>Position</source>
+      <extracomment>EVCS AC input/output position</extracomment>
+      <translation type="unfinished">Pozice</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="77"/>
@@ -10348,7 +10358,7 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
   <context>
     <name>PageAcInSetup</name>
     <message>
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="129"/>
       <source>Set the switch in an unlocked position to modify the settings.</source>
       <translation>Chcete-li změnit nastavení, nastavte přepínač do odemčené polohy.</translation>
     </message>
