@@ -63,11 +63,8 @@ OverviewWidget {
 					ListPressArea {
 						id: delegatePressArea
 
+						anchors.fill: parent.backgroundRect
 						radius: backgroundRect.radius
-						anchors {
-							fill: parent
-							bottomMargin: deviceDelegate.spacing
-						}
 						onClicked: root._showSettingsPage(device)
 					}
 
