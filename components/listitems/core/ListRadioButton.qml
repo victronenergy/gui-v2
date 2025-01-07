@@ -30,12 +30,8 @@ ListItem {
 	ListPressArea {
 		id: pressArea
 
+		anchors.fill: parent.backgroundRect
 		radius: backgroundRect.radius
-		anchors {
-			fill: parent
-			bottomMargin: root.spacing
-		}
-
 		onClicked: root.clicked()
 	}
 }

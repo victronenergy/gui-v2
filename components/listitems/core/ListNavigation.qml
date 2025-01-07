@@ -27,7 +27,7 @@ ListItem {
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_listItem_secondaryText
 			wrapMode: Text.Wrap
-			width: Math.min(implicitWidth, root.maximumContentWidth - icon.width - parent.spacing)
+			width: Math.min(implicitWidth, root.maximumContentWidth - icon.width - root.content.spacing)
 			horizontalAlignment: Text.AlignRight
 		},
 
@@ -45,11 +45,8 @@ ListItem {
 	ListPressArea {
 		id: pressArea
 
+		anchors.fill: parent.backgroundRect
 		radius: backgroundRect.radius
-		anchors {
-			fill: parent
-			bottomMargin: root.spacing
-		}
 		onClicked: root.clicked()
 	}
 }

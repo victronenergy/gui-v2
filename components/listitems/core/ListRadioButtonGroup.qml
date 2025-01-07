@@ -116,7 +116,6 @@ ListNavigation {
 					C.ButtonGroup.group: radioButtonGroup
 
 					bottomContent.z: model.index === optionsListView.currentIndex ? 1 : -1
-					bottomContentMargin: Theme.geometry_radioButton_bottomContentMargin
 					bottomContentChildren: Loader {
 						id: bottomContentLoader
 

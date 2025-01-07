@@ -24,11 +24,8 @@ Page {
 				}
 
 				ListPressArea {
+					anchors.fill: switchItem.backgroundRect
 					radius: switchItem.backgroundRect.radius
-					anchors {
-						fill: parent
-						bottomMargin: switchItem.spacing
-					}
 					onClicked: switchItem.clicked()
 				}
 			}

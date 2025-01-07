@@ -17,8 +17,6 @@ Item {
 	property bool down
 	property bool flat
 	property alias backgroundRect: backgroundRect
-	property int spacing: Theme.geometry_gradientList_spacing
-	property int bottomContentMargin: Theme.geometry_listItem_content_spacing
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 

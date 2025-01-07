@@ -43,7 +43,7 @@ ListItem {
 			anchors.verticalCenter: switchItem.verticalCenter
 			color: Theme.color_font_secondary
 			font.pixelSize: Theme.font_size_body2
-			width: Math.min(implicitWidth, root.maximumContentWidth - switchItem.width - parent.spacing)
+			width: Math.min(implicitWidth, root.maximumContentWidth - switchItem.width - root.content.spacing)
 			wrapMode: Text.Wrap
 		},
 		Switch {
@@ -58,12 +58,8 @@ ListItem {
 	ListPressArea {
 		id: pressArea
 
+		anchors.fill: parent.backgroundRect
 		radius: backgroundRect.radius
-		anchors {
-			fill: parent
-			bottomMargin: root.spacing
-		}
-
 		onClicked: root._setChecked(!switchItem.checked)
 	}
 
