@@ -37,7 +37,7 @@ ListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180
-			color: root.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			visible: root.enabled
 		}
 	]
