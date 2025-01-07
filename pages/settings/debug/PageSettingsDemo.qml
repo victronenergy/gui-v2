@@ -272,20 +272,47 @@ Page {
 				id: customListItem
 				text: "Custom bottom content item"
 
+				content.children: [
+					Rectangle {
+						anchors.verticalCenter: parent.verticalCenter
+						width: 100
+						height: 100
+						radius: width / 2
+						color: "orange"
+
+						MouseArea {
+							anchors.fill: parent
+							onClicked: {
+								customListItem.bottomContentSizeMode = customListItem.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Compact
+										? VenusOS.ListItem_BottomContentSizeMode_Stretch
+										: VenusOS.ListItem_BottomContentSizeMode_Compact
+							}
+						}
+					}
+				]
+
 				bottomContentChildren: [
 					PrimaryListLabel {
-						width: Math.min(implicitWidth, customListItem.maximumContentWidth)
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						text: "Custom text label"
+						color: Theme.color_listItem_secondaryText
+						font.pixelSize: Theme.font_size_body1
+						text: "This can wrap next to the content item, or be placed below the content item and stretch to the full item size. Click the orange button to toggle this size mode."
 					}
 				]
 			}
 
 			ListText {
-				text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum occaecat cupidatat"
-				secondaryText: "Occaecat cupidatat"
+				text: "Primary text is long, maybe long enough to span multiple lines"
+				secondaryText: "Short secondary text"
+			}
+
+			ListText {
+				text: "Short primary text"
+				secondaryText: "Secondary text is long, maybe long enough to span multiple lines"
+			}
+
+			ListText {
+				text: "Both primary and secondary text are quite long"
+				secondaryText: "Both primary and secondary text are quite long"
 			}
 
 			ListItem {

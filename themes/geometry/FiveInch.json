@@ -36,7 +36,6 @@
     "geometry_radioButton_indicator_width": 24,
     "geometry_radioButton_indicator_dot_width": 16,
     "geometry_radioButton_border_width": 2,
-    "geometry_radioButton_bottomContentMargin": 6,
 
     "geometry_scrollBar_bar_width": 8,
     "geometry_scrollBar_bar_radius": 8,

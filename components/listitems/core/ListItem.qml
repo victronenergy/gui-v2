@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Item {
@@ -28,16 +29,15 @@ Item {
 
 	readonly property bool defaultAllowed: userHasReadAccess
 	readonly property alias primaryLabel: primaryLabel
-	readonly property int defaultImplicitHeight: {
-		const bottomHeight = bottomContent.height > 0 ? bottomContent.height + bottomContentMargin : 0
-		const labelHeight = primaryLabel.implicitHeight + Theme.geometry_listItem_content_verticalMargin*2
-		return Math.max(flat ? Theme.geometry_listItem_flat_height : Theme.geometry_listItem_height,
-						Math.max(content.height, labelHeight) + bottomHeight)
-	}
 
+	readonly property int defaultImplicitHeight: contentLayout.height + Theme.geometry_gradientList_spacing
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
 	property bool allowed: defaultAllowed
+
+	property int bottomContentSizeMode: content.height > primaryLabel.height
+				? VenusOS.ListItem_BottomContentSizeMode_Compact
+				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
 	visible: allowed
 	implicitHeight: allowed ? defaultImplicitHeight : 0
@@ -47,7 +47,7 @@ Item {
 		id: backgroundRect
 
 		z: -2
-		height: root.height - root.spacing
+		height: root.height - Theme.geometry_gradientList_spacing
 		color: Theme.color_listItem_background
 		visible: !root.flat
 		// TODO how to indicate read-only setting?
@@ -69,39 +69,46 @@ Item {
 		}
 	}
 
-	Label {
-		id: primaryLabel
+	GridLayout {
+		id: contentLayout
 
-		anchors {
-			left: parent.left
-			leftMargin: root.leftPadding
-			verticalCenter: parent.verticalCenter
-			verticalCenterOffset: -root.spacing/2
-				- (bottomContent.height > 0
-						? bottomContent.height/2 + bottomContentMargin/2
-						: 0)
-		}
-		font.pixelSize: flat ? Theme.font_size_body1 : Theme.font_size_body2
-		wrapMode: Text.Wrap
-		width: root.availableWidth - content.width - Theme.geometry_listItem_content_spacing
-	}
-
-	Row {
-		id: content
-
-		anchors {
-			right: parent.right
-			rightMargin: root.rightPadding
-			verticalCenter: primaryLabel.verticalCenter
-		}
-		spacing: Theme.geometry_listItem_content_spacing
-		width: Math.min(implicitWidth, root.maximumContentWidth)
-	}
-
-	Column {
-		id: bottomContent
-		y: Math.max(primaryLabel.y + primaryLabel.height + bottomContentMargin,
-			content.y + content.height + bottomContentMargin)
 		width: parent.width
+		columns: 2
+		columnSpacing: Theme.geometry_listItem_content_spacing
+		rowSpacing: 0
+
+		Label {
+			id: primaryLabel
+
+			Layout.topMargin: Theme.geometry_listItem_content_verticalMargin
+			Layout.leftMargin: root.leftPadding
+			Layout.fillWidth: true
+			Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+			font.pixelSize: flat ? Theme.font_size_body1 : Theme.font_size_body2
+			wrapMode: Text.Wrap
+			width: root.availableWidth - content.width - Theme.geometry_listItem_content_spacing
+		}
+
+		Row {
+			id: content
+
+			// The topMargin ensures the content is vertically aligned with primaryLabel when the
+			// content height is small and there is no bottom content.
+			Layout.topMargin: height <= primaryLabel.height ? Theme.geometry_listItem_content_verticalMargin : 0
+			Layout.rightMargin: root.rightPadding
+			Layout.maximumWidth: root.maximumContentWidth
+			Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+			Layout.rowSpan: root.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Stretch ? 1 : 2
+			spacing: Theme.geometry_listItem_content_spacing
+		}
+
+		Column {
+			id: bottomContent
+
+			Layout.fillWidth: true
+			Layout.columnSpan: root.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Stretch ? 2 : 1
+			Layout.topMargin: height > 0 ? Theme.geometry_listItem_content_verticalMargin / 2 : 0
+			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+		}
 	}
 }

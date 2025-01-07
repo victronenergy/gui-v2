@@ -731,6 +731,12 @@ public:
 	};
 	Q_ENUM(StartPage_Type)
 
+	enum ListItem_BottomContentSizeMode {
+		ListItem_BottomContentSizeMode_Stretch,
+		ListItem_BottomContentSizeMode_Compact
+	};
+	Q_ENUM(ListItem_BottomContentSizeMode)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 
