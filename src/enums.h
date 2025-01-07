@@ -737,6 +737,12 @@ public:
 	};
 	Q_ENUM(ListItem_BottomContentSizeMode)
 
+	enum ListLink_Mode {
+		ListLink_Mode_LinkButton,
+		ListLink_Mode_QRCode
+	};
+	Q_ENUM(ListLink_Mode)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 

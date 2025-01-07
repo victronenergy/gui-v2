@@ -322,6 +322,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareVersion.qml
     components/listitems/ListGeneratorError.qml
+    components/listitems/ListLink.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
@@ -1049,6 +1050,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_hydraulic_oil_24.svg
         images/icon_lng_24.svg
         images/icon_lpg_24.svg
+        images/icon_open_link_32.svg
         images/icon_to_grid.svg
         images/fueltank.svg
         images/gauge_intro_5_matte_black.gif

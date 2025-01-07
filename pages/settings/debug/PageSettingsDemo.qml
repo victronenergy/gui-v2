@@ -327,6 +327,11 @@ Page {
 					}
 				]
 			}
+
+			ListLink {
+				text: "Victron Energy"
+				url: "https://www.victronenergy.com"
+			}
 		}
 	}
 

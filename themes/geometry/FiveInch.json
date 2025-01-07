@@ -58,6 +58,8 @@
     "geometry_listItem_textField_minimumWidth": 200,
     "geometry_listItem_textField_maximumWidth": 376,
 
+    "geometry_listLink_qrCodeSize": 96,
+
     "geometry_slider_groove_height": 8,
     "geometry_slider_groove_radius": 8,
 
