@@ -24,6 +24,7 @@ Item {
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
+	readonly property bool effectiveVisible: preferredVisible && userHasReadAccess
 
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
@@ -34,8 +35,8 @@ Item {
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
-	visible: preferredVisible && userHasReadAccess
-	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
+	visible: effectiveVisible
+	implicitHeight: effectiveVisible ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
