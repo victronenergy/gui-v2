@@ -12,7 +12,7 @@ Page {
 
 	property string bindPrefix
 
-	title: Global.digitalInputs.inputTypeToText(inputType.value)
+	title: VenusOS.digitalInput_typeToText(inputType.value)
 
 	VeQuickItem {
 		id: inputType
