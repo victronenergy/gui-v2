@@ -48,6 +48,39 @@ Enums::Battery_Mode Enums::battery_modeFromPower(qreal power) const
 	}
 }
 
+QString Enums::dcInput_typeToText(DcInputs_InputType type) const
+{
+	switch (type) {
+	case DcInputs_InputType_AcCharger:
+		//% "AC charger"
+		return qtTrId("dcInputs_ac_charger");
+	case DcInputs_InputType_Alternator:
+		//% "Alternator"
+		return qtTrId("dcInputs_alternator");
+	case DcInputs_InputType_DcCharger:
+		//% "DC charger"
+		return qtTrId("dcInputs_dccharger");
+	case DcInputs_InputType_DcGenerator:
+		//% "DC generator"
+		return qtTrId("dcInputs_dc_generator");
+	case DcInputs_InputType_DcSystem:
+		//% "DC system"
+		return qtTrId("dcInputs_dc_system");
+	case DcInputs_InputType_FuelCell:
+		//% "Fuel cell"
+		return qtTrId("dcInputs_fuelcell");
+	case DcInputs_InputType_ShaftGenerator:
+		//% "Shaft generator"
+		return qtTrId("dcInputs_shaft_generator");
+	case DcInputs_InputType_WaterGenerator:
+		//% "Water generator"
+		return qtTrId("dcInputs_water_generator");
+	case DcInputs_InputType_Wind:
+		//% "Wind charger"
+		return qtTrId("dcInputs_wind_charger");
+	}
+	return QString();
+}
 
 QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 {

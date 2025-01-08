@@ -734,6 +734,8 @@ public:
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 
+	Q_INVOKABLE QString dcInput_typeToText(DcInputs_InputType type) const;
+
 	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
 	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;
 
