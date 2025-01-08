@@ -24,6 +24,11 @@ Page {
 				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
 			}
 
+			ListNavigation {
+				text: "AllowedItemModel"
+				onClicked: Global.pageManager.pushPage(allowedItemDemoComponent)
+			}
+
 			ListSwitch {
 				text: "Switch"
 				property bool value
@@ -343,6 +348,61 @@ Page {
 				model: ObjectModel {
 					ListItem {
 						text: "New page item"
+					}
+				}
+			}
+		}
+	}
+
+	Component {
+		id: allowedItemDemoComponent
+
+		Page {
+			component AllowedItemSwitch : ListSwitch {
+				allowed: true
+				checked: allowed
+				onClicked: allowed = !allowed
+			}
+
+			GradientListView {
+				header: PrimaryListLabel {
+					text: "AllowedItemModel filters out any non-allowed items from the model.\nFor example, click a switch below to set allowed=false and remove it from the model."
+				}
+				footer: Column {
+					width: parent.width
+					PrimaryListLabel {
+						horizontalAlignment: Text.AlignHCenter
+						text: "%1 items in source model, %2 items in allowed (visible) model"
+								.arg(allowedItemModel.sourceModel.length)
+								.arg(allowedItemModel.count)
+					}
+					ListItemButton {
+						anchors.horizontalCenter: parent.horizontalCenter
+						text: "Reset 'allowed' values"
+						onClicked: {
+							toggle1.allowed = true
+							toggle2.allowed = true
+							toggle3.allowed = true
+						}
+					}
+				}
+
+				model: AllowedItemModel {
+					id: allowedItemModel
+
+					AllowedItemSwitch {
+						id: toggle1
+						text: "Toggle A"
+					}
+
+					AllowedItemSwitch {
+						id: toggle2
+						text: "Toggle B"
+					}
+
+					AllowedItemSwitch {
+						id: toggle3
+						text: "Toggle C"
 					}
 				}
 			}
