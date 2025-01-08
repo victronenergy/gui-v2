@@ -28,14 +28,22 @@ Item {
 	readonly property alias primaryLabel: primaryLabel
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
-	property bool preferredVisible: true
-
 	property int bottomContentSizeMode: content.height > primaryLabel.height
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
-	visible: preferredVisible && userHasReadAccess
-	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
+	// Set preferredVisible=false if the item should not be shown (e.g. if it would display invalid
+	// data).
+	property bool preferredVisible: true
+
+	// True if the item should be made visible. This is used by VisibleItemModel to filter out
+	// non-valid items. (We do not want to include 'visible' in this check, as that value is
+	// affected by the parent's visible value, causing the item to be unnecessarily filtered in and
+	// out of a VisibleItemModel whenever a parent page is shown/hidden.)
+	readonly property bool effectiveVisible: preferredVisible && userHasReadAccess
+
+	visible: effectiveVisible
+	implicitHeight: effectiveVisible ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
