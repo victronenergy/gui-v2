@@ -33,6 +33,7 @@ QtObject {
 				_customName.setValue("Start/Stop generator")
 				_state.setValue(VenusOS.Generators_State_Running)
 				_runningBy.setValue(VenusOS.Generators_RunningBy_Soc)
+				Global.mockDataSimulator.setMockValue(generator.serviceUid + "/Enabled", 1)
 				setAutoStart(true)
 			}
 
