@@ -303,6 +303,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/GeneratorDialog.qml
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
+    components/dialogs/GeneratorDisableAutoStartDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
     components/dialogs/InverterChargerEssModeDialog.qml
     components/dialogs/ModalDialog.qml
