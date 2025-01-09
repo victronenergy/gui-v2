@@ -85,18 +85,8 @@ ControlCard {
 		Component {
 			id: confirmationDialogComponent
 
-			ModalWarningDialog {
-				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-
-				//% "Disable autostart?"
-				title: qsTrId("controlcard_generator_disableautostartdialog_title")
-
-				//% "Autostart will be disabled and the generator won't automatically start based on the configured conditions.\nIf the generator is currently running due to a autostart condition, disabling autostart will also stop it immediately."
-				description: qsTrId("controlcard_generator_disableautostartdialog_description")
-
-				onAccepted: {
-					root.generator.setAutoStart(false)
-				}
+			GeneratorDisableAutoStartDialog {
+				onAccepted: root.generator.setAutoStart(false)
 			}
 		}
 	}
