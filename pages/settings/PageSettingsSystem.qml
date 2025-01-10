@@ -91,8 +91,6 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Has DC system"
-				text: qsTrId("settings_system_has_dc_system")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
 				height: Theme.geometry_settingsListNavigation_height
 
