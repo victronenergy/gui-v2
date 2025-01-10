@@ -86,7 +86,7 @@ Page {
 			}
 
 			ListNavigation {
-				text: "Test"
+				text: "UI Library"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
 			}
 
