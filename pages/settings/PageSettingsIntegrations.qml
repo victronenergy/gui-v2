@@ -145,12 +145,22 @@ Page {
 				}
 			}
 
+			SettingsListHeader {
+				//% "Server Applications"
+				text: qsTrId("pagesettingsintegrations_server_applications")
+			}
+
 			ListMqttAccessSwitch { }
 
 			ListNavigation {
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": text}) // TODO - is this correct?
+			}
+
+			SettingsListHeader {
+				//% "Venus OS Large Features"
+				text: qsTrId("pagesettingsintegrations_venus_os_large_features")
 			}
 
 			PrimaryListLabel {
