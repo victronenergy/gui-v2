@@ -72,6 +72,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	m_roleNames[FontFamilyRole] = "fontFamily";
 
 	addLanguage("English", "en", QLocale::English);
+	addLanguage("Afrikaans", "af", QLocale::Afrikaans);
 	addLanguage("Čeština", "cs", QLocale::Czech);
 	addLanguage("Dansk", "da", QLocale::Danish);
 	addLanguage("Deutsch", "de", QLocale::German);
