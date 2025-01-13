@@ -11,7 +11,7 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  QT_VERSION: 6.6.1
+  QT_VERSION: 6.6.3
 
 jobs:
   build:
