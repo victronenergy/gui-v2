@@ -148,7 +148,7 @@ QtVirtualKeyboard.InputPanel {
 		// turn off the Virtual Keyboard Text Selection Handles as they don't position properly
 		// under certain circumstances: see https://bugreports.qt.io/browse/QTBUG-114551
 		VirtualKeyboardSettings.inputMethodHints = Qt.ImhNoTextHandles
-		VirtualKeyboardSettings.activeLocales = ["en_US", "cs_CZ", "da_DK", "de_DE", "es_ES", "fr_FR", "it_IT", "nl_NL", "pl_PL", "ru_RU", "ro_RO", "sv_SE", "th_TH", "tr_TR", "uk_UA", "zh_CN", "ar_AR"]
+		VirtualKeyboardSettings.activeLocales = ["en_US", "af_ZA", "cs_CZ", "da_DK", "de_DE", "es_ES", "fr_FR", "it_IT", "nl_NL", "pl_PL", "ru_RU", "ro_RO", "sv_SE", "th_TH", "tr_TR", "uk_UA", "zh_CN", "ar_AR"]
 		_setVkbLocale()
 	}
 }

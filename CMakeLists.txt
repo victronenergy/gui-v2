@@ -1134,7 +1134,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         themes/typography/TypographyDesign.json
 )
 
-list(APPEND TS_CODES "ar" "cs" "da" "de" "es" "fr" "it" "nl" "pl" "ro" "ru" "sv" "th" "tr" "uk" "zh_CN")
+list(APPEND TS_CODES "af" "ar" "cs" "da" "de" "es" "fr" "it" "nl" "pl" "ro" "ru" "sv" "th" "tr" "uk" "zh_CN")
 list(APPEND TS_FILES ${TS_CODES})
 list(TRANSFORM TS_FILES PREPEND "i18n/${PROJECT_NAME}_")
 list(TRANSFORM TS_FILES APPEND ".ts")
