@@ -12,7 +12,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				id: remotePort

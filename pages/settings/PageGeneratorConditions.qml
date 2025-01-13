@@ -33,7 +33,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListRadioButtonGroup {
 				id: monitorService

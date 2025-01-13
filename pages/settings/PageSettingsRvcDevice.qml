@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				text: CommonWords.model_name

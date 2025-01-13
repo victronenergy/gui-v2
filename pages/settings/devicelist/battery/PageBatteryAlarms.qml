@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListAlarm {
 				text: CommonWords.low_battery_voltage
 				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"

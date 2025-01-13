@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListText {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")

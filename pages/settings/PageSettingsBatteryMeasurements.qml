@@ -81,7 +81,7 @@ Page {
 
 				Page {
 					GradientListView {
-						model: ObjectModel {
+						model: VisibleItemModel {
 							ListText {
 								text: root._visibleText
 								//% "Active battery monitor"

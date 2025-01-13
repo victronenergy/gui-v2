@@ -14,7 +14,7 @@ Page {
 	title: pvInverter.name
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListItemBackground {
 				height: phaseTable.y + phaseTable.height
 

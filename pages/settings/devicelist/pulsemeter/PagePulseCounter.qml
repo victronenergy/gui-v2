@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListQuantity {
 				//% "Aggregate"
 				text: qsTrId("pulsecounter_aggregate")

@@ -30,7 +30,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: disabledModel
 
 		PrimaryListLabel {
@@ -39,7 +39,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: startStopModel
 
 		ListText {

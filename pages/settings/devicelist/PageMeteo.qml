@@ -30,7 +30,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListQuantity {
 				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1)
