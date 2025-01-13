@@ -30,6 +30,10 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 		return Unit::Celsius;
 	case Victron::VenusOS::Enums::Units_Temperature_Fahrenheit:
 		return Unit::Fahrenheit;
+	case Victron::VenusOS::Enums::Units_Altitude_Meter:
+		return Unit::Meter;
+	case Victron::VenusOS::Enums::Units_Altitude_Foot:
+		return Unit::Foot;
 	default:
 		return Unit::Default;
 	}
@@ -97,6 +101,8 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
 	case VenusOS::Enums::Units_RevolutionsPerMinute:   // fall through
 	case VenusOS::Enums::Units_CardinalDirection:      // fall through
+	case VenusOS::Enums::Units_Altitude_Meter:         // fall through
+	case VenusOS::Enums::Units_Altitude_Foot:          // fall through
 		return 0;
 	default:
 		// VoltAmpere
@@ -157,6 +163,10 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return DegreesSymbol;
 	case VenusOS::Enums::Units_PowerFactor:
 		return QString();
+	case VenusOS::Enums::Units_Altitude_Meter:
+		return QStringLiteral("m");
+	case VenusOS::Enums::Units_Altitude_Foot:
+		return QStringLiteral("ft");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();

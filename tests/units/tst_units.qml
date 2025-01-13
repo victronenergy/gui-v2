@@ -89,6 +89,8 @@ TestCase {
 					 VenusOS.Units_Temperature_Celsius,
 					 VenusOS.Units_Temperature_Fahrenheit,
 					 VenusOS.Units_Temperature_Kelvin,
+					 VenusOS.Units_Altitude_Meter,
+					 VenusOS.Units_Altitude_Foot,
 					 VenusOS.Units_RevolutionsPerMinute]
 
 		for (const unit of units) {
