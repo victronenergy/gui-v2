@@ -18,7 +18,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			PrimaryListLabel {
 				//% "VE.Bus Error 11 reporting requires minimum VE.Bus firmware version 454."

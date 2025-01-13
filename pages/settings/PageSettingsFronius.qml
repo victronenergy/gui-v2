@@ -24,7 +24,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListNavigation {
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")

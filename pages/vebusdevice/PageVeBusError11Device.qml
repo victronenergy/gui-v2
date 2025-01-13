@@ -26,7 +26,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				//% "Last VE.Bus Error 11 report #%1"

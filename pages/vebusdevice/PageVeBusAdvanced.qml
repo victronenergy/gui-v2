@@ -78,7 +78,7 @@ Page {
 
 	GradientListView {
 		id:  gradientListView
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListButton {
 				property bool interrupt: vebusSubState.value === VenusOS.VeBusDevice_ChargeState_Equalize
@@ -260,7 +260,7 @@ Page {
 
 					Page {
 						GradientListView {
-							model: ObjectModel {
+							model: VisibleItemModel {
 								Column {
 									width: parent ? parent.width : 0
 

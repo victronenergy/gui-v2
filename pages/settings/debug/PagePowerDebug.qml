@@ -73,7 +73,7 @@ Page {
 		// in a D-Bus format.
 		model: BackendConnection.type === BackendConnection.MqttSource ? invalidModel : validModel
 
-		ObjectModel {
+		VisibleItemModel {
 			id: invalidModel
 
 			PrimaryListLabel {
@@ -81,7 +81,7 @@ Page {
 			}
 		}
 
-		ObjectModel {
+		VisibleItemModel {
 			id: validModel
 
 			ListTextGroup {

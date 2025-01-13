@@ -45,7 +45,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: startStopModel
 
 		ListSwitch {

@@ -13,7 +13,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			PrimaryListLabel {
 				text: "This page demonstrates the components that can be used to build settings pages."
 			}
@@ -345,7 +345,7 @@ Page {
 
 		Page {
 			GradientListView {
-				model: ObjectModel {
+				model: VisibleItemModel {
 					ListItem {
 						text: "New page item"
 					}

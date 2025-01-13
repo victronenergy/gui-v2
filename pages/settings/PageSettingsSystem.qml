@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListRadioButtonGroup {
 				id: systemNameRadioButtons

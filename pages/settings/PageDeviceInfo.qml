@@ -16,7 +16,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListText {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
