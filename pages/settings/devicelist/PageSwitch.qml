@@ -30,7 +30,9 @@ Page {
 
 			property VeQuickItem functionItem: VeQuickItem {
 				uid: model.uid + "/Function"
-
+				onIsValidChanged:{
+					if (!isValid) Global.pageManager.popAllPages()
+				}
 			}
 			property VeQuickItem statusItem: VeQuickItem {
 				uid: model.uid + "/Status"

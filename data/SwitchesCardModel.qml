@@ -21,7 +21,7 @@ ListModel {
 			property SwitchDev device: Global.switches.model.deviceAt(index)
 			property string devName: device ? device.name : ""
 			onDevNameChanged:{
-				if (devName.length>22) shortDevName = devName.substring(0,12) +"..." + devName.substring(devName.length - 7,devName.length)
+				if (devName.length>22) shortDevName = devName.substring(0,11) +"..." + devName.substring(devName.length - 8,devName.length)
 				else shortDevName = devName
 			}
 			property string shortDevName
