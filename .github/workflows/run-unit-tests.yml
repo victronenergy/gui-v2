@@ -32,7 +32,7 @@ jobs:
       run: |
        sudo apt-get update -yq &&
        sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
-                                wget lsb libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
+                                wget libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
                                 ninja-build dos2unix libegl1 libxcb-cursor0
        sudo snap install yq
 
