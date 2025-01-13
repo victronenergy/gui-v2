@@ -120,7 +120,7 @@ ObjectModel {
 	ListGeneratorError {
 		//% "Control error code"
 		text: qsTrId("ac-in-genset_control_error_code")
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 	}
 
@@ -149,7 +149,7 @@ ObjectModel {
 			return errorCodes.length ? errorCodes : CommonWords.none_errors
 		}
 
-		allowed: defaultAllowed && _dataItem.isValid
+		allowed: _dataItem.isValid
 		enabled: secondaryText !== CommonWords.none_errors
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
@@ -211,7 +211,7 @@ ObjectModel {
 
 	ListDcOutputQuantityGroup {
 		bindPrefix: root.bindPrefix
-		allowed: defaultAllowed && root.dcGenset
+		allowed: root.dcGenset
 	}
 
 	ListNavigation {
@@ -238,7 +238,7 @@ ObjectModel {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
 							dataItem.uid: root.bindPrefix + "/Engine/Load"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							unit: VenusOS.Units_Percentage
 						}
 
@@ -246,14 +246,14 @@ ObjectModel {
 							//% "Oil pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							unit: VenusOS.Units_Kilopascal
 						}
 
 						ListTemperature {
 							//% "Oil temperature"
 							text: qsTrId("ac-in-genset_oil_temperature")
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
 							precision: 0
 						}
@@ -261,7 +261,7 @@ ObjectModel {
 						ListTemperature {
 							//% "Coolant temperature"
 							text: qsTrId("ac-in-genset_coolant_temperature")
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
 							precision: 0
 						}
@@ -269,14 +269,14 @@ ObjectModel {
 						ListTemperature {
 							//% "Exhaust temperature"
 							text: qsTrId("ac-in-genset_exhaust_temperature")
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
 						}
 
 						ListTemperature {
 							//% "Winding temperature"
 							text: qsTrId("ac-in-genset_winding_temperature")
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
@@ -284,14 +284,14 @@ ObjectModel {
 							//% "Heatsink temperature"
 							text: qsTrId("genset_heatsink_temperature")
 							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 						}
 
 						ListQuantity {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataItem.uid: root.bindPrefix + "/StarterVoltage"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							unit: VenusOS.Units_Volt_DC
 						}
 
@@ -299,7 +299,7 @@ ObjectModel {
 							//% "Number of starts"
 							text: qsTrId("ac-in-genset_number_of_starts")
 							dataItem.uid: root.bindPrefix + "/Engine/Starts"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 						}
 					}
 				}
@@ -322,7 +322,7 @@ ObjectModel {
 	ListNavigation {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
-		allowed: defaultAllowed && (chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid)
+		allowed: chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid
 		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
 		VeQuickItem {
@@ -353,14 +353,14 @@ ObjectModel {
 							decimals: 1
 							stepSize: 0.1
 							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							enabled: bmsControlled.dataItem.value === 0
 						}
 
 						ListText {
 							//% "The charge voltage is currently controlled by the BMS."
 							text: qsTrId("genset_charge_voltage_controlled_by_bms")
-							allowed: defaultAllowed && bmsControlled.dataItem.value === 1
+							allowed: bmsControlled.dataItem.value === 1
 						}
 
 						ListSpinBox {
@@ -368,7 +368,7 @@ ObjectModel {
 							text: qsTrId("genset_charge_current_limit")
 							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
 							suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 						}
 
 						ListText {
@@ -378,7 +378,7 @@ ObjectModel {
 							text: qsTrId("genset_bms_controlled")
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 							bottomContentChildren: PrimaryListLabel {
 								//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
 								text: qsTrId("genset_bms_control_enabled_automatically")
@@ -390,7 +390,7 @@ ObjectModel {
 							//% "BMS control"
 							text: qsTrId("genset_bms_control")
 							secondaryText: CommonWords.press_to_reset
-							visible: defaultAllowed && bmsControlled.dataItem.value === 1
+							allowed: bmsControlled.dataItem.value === 1
 							onClicked: bmsControlled.dataItem.setValue(0)
 						}
 					}

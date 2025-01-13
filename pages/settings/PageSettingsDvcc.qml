@@ -39,7 +39,7 @@ Page {
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
 				checked: maxChargeVoltage.dataItem.isValid && maxChargeVoltage.dataItem.value > 0
-				allowed: defaultAllowed && commonSettings.dvccActive
+				allowed: commonSettings.dvccActive
 				onClicked: {
 					maxChargeVoltage.dataItem.setValue(maxChargeVoltage.dataItem.value === 0.0 ? 55.0 : 0.0)
 				}
@@ -50,7 +50,7 @@ Page {
 
 				//% "Maximum charge voltage"
 				text: qsTrId("settings_dvcc_max_charge_voltage")
-				allowed: defaultAllowed && maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
+				allowed: maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
@@ -61,7 +61,7 @@ Page {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
-				allowed: defaultAllowed && commonSettings.dvccActive
+				allowed: commonSettings.dvccActive
 			}
 
 			ListSwitchForced {
@@ -70,7 +70,7 @@ Page {
 				//% "STS - Shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
-				allowed: defaultAllowed && commonSettings.dvccActive
+				allowed: commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
@@ -80,7 +80,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
-				allowed: defaultAllowed && commonSettings.dvccActive && sharedTempSense.checked
+				allowed: commonSettings.dvccActive && sharedTempSense.checked
 
 				VeQuickItem {
 					uid: Global.system.serviceUid + "/AvailableTemperatureServices"
@@ -102,8 +102,7 @@ Page {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
 				dataItem.uid: Global.system.serviceUid + "/AutoSelectedTemperatureService"
-				allowed: defaultAllowed
-					&& sharedTempSense.checked
+				allowed: sharedTempSense.checked
 					&& commonSettings.dvccActive
 					&& temperatureServiceRadioButtons.secondaryText === "default"
 			}
@@ -114,14 +113,14 @@ Page {
 				//% "SCS - Shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
-				allowed: defaultAllowed && commonSettings.dvccActive
+				allowed: commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
 				dataItem.uid: Global.system.serviceUid + "/Control/BatteryCurrentSense"
-				allowed: defaultAllowed && commonSettings.dvccActive && sharedCurrentSense.checked
+				allowed: commonSettings.dvccActive && sharedCurrentSense.checked
 				enabled: false
 
 				optionModel: [
@@ -154,7 +153,7 @@ Page {
 				//: Shown when BMS instance is invalid
 				//% "Unavailable, set another"
 				defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
-				allowed: defaultAllowed && commonSettings.dvccActive
+				allowed: commonSettings.dvccActive
 						 // Only show if there are valid services published on /AvailableBmsServices or a valid active BMS service selected
 						 && (bmsOptions.optionModel.length > 2 || bmsService.isValid)
 
@@ -184,7 +183,7 @@ Page {
 
 				//% "Auto selected"
 				text: qsTrId("settings_dvcc_auto_selected")
-				allowed: defaultAllowed && bmsOptions.allowed && bmsOptions.currentValue === -1
+				allowed: bmsOptions.allowed && bmsOptions.currentValue === -1
 				secondaryText: bmsService.isValid
 							   ? bmsProductName.value || bmsCustomName.value || ""
 								 //: Indicates no option is selected
@@ -216,7 +215,7 @@ Page {
 				//% "Managed battery controls all Multis and Quattros"
 				text: qsTrId("settings_dvcc_control_all_vebus_devices")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
-				allowed: defaultAllowed && commonSettings.dvccActive &&
+				allowed: commonSettings.dvccActive &&
 						 nrVebusDevices.isValid && nrVebusDevices.value > 1
 
 				bottomContentChildren: [

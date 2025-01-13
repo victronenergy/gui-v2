@@ -251,7 +251,7 @@ Page {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
 				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
-				allowed: defaultAllowed && remoteSupportOnOff.checked
+				allowed: remoteSupportOnOff.checked
 			}
 
 			ListText {
@@ -260,7 +260,7 @@ Page {
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
-				allowed: defaultAllowed && remoteSupportOnOff.checked
+				allowed: remoteSupportOnOff.checked
 			}
 
 			ListButton {

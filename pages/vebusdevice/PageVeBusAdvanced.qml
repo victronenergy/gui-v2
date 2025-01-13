@@ -116,7 +116,7 @@ Page {
 					return qsTrId("vebus_device_press_to_start")
 				}
 				enabled: !isNaN(setChargerState.value) && !isNaN(vebusSubState.value) && !startTimer.running && !interruptTimer.running
-				allowed: defaultAllowed && root.isMulti
+				allowed: root.isMulti
 
 				onClicked: {
 					if (firmwareVersion.value < 0x400) {
@@ -252,7 +252,7 @@ Page {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				allowed: defaultAllowed && masterHasNetworkQuality.isValid
+				allowed: masterHasNetworkQuality.isValid
 				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": text})
 
 				Component {

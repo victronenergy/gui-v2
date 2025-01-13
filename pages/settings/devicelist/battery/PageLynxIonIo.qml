@@ -36,7 +36,7 @@ Page {
 				//% "External relay"
 				text: qsTrId("lynxionio_external_relay")
 				dataItem.uid: root.bindPrefix + "/Io/ExternalRelay"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 
@@ -44,7 +44,7 @@ Page {
 				//% "Programmable Contact"
 				text: qsTrId("lynxionio_programmable_contact")
 				dataItem.uid: root.bindPrefix + "/Io/ProgrammableContact"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 		}

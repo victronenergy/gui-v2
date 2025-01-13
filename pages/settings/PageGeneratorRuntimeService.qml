@@ -139,7 +139,7 @@ Page {
 				//% "Accumulated running time since last test run"
 				text: qsTrId("settings_page_run_time_and_service_accumulated_running_time")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				allowed: defaultAllowed && nextTestRun.allowed
+				allowed: nextTestRun.allowed
 				secondaryText: Utils.secondsToString(dataItem.value, false)
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
 			}
@@ -149,7 +149,7 @@ Page {
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
 				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListIntField {

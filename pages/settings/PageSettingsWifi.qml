@@ -28,7 +28,7 @@ Page {
 				//% "Create access point"
 				text: qsTrId("settings_wifi_create_ap")
 				checked: accessPoint.value === 1
-				allowed: defaultAllowed && accessPoint.isValid
+				allowed: accessPoint.isValid
 				onClicked: {
 					if (checked) {
 						Global.dialogLayer.open(confirmApDialogComponent)

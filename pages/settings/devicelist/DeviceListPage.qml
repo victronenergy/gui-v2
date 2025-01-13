@@ -69,7 +69,7 @@ Page {
 			ListNavigation {
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop")
-				allowed: defaultAllowed && relay0.isValid
+				allowed: relay0.isValid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
 
 				VeQuickItem {

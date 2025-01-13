@@ -68,7 +68,7 @@ ControlCard {
 			to: root.evCharger.maxCurrent
 			stepSize: 1
 			dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
-			allowed: defaultAllowed && dataItem.isValid
+			allowed: dataItem.isValid
 			enabled: modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
@@ -80,7 +80,7 @@ ControlCard {
 			text: CommonWords.charging
 			flat: true
 			dataItem.uid: root.evCharger.serviceUid + "/StartStop"
-			allowed: defaultAllowed && dataItem.isValid
+			allowed: dataItem.isValid
 		}
 	}
 

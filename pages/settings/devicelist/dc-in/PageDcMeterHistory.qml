@@ -29,48 +29,48 @@ Page {
 			ListQuantity {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
 				text: CommonWords.maximum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListText {
 				text: CommonWords.low_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				text: CommonWords.high_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				//% "Low aux voltage alarms"
 				text: qsTrId("dcmeter_history_low_aux_voltage_alarms")
 				dataItem.uid: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
-				allowed: defaultAllowed && root.showStarterVoltage
+				allowed: root.showStarterVoltage
 			}
 
 			ListText {
 				//% "High aux voltage alarms"
 				text: qsTrId("dcmeter_history_high_aux_voltage_alarms")
 				dataItem.uid: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""
-				allowed: defaultAllowed && root.showStarterVoltage
+				allowed: root.showStarterVoltage
 			}
 
 			ListQuantity {
 				//% "Minimum aux voltage"
 				text: qsTrId("dcmeter_history_minimum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
-				allowed: defaultAllowed && root.showStarterVoltage
+				allowed: root.showStarterVoltage
 				unit: VenusOS.Units_Volt_DC
 			}
 
@@ -78,19 +78,19 @@ Page {
 				//% "Maximum aux voltage"
 				text: qsTrId("dcmeter_history_maximum_aux_voltage")
 				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
-				allowed: defaultAllowed && root.showStarterVoltage
+				allowed: root.showStarterVoltage
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTemperature {
 				text: CommonWords.minimum_temperature
-				allowed: defaultAllowed && showTemperature
+				allowed: showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
 			}
 
 			ListTemperature {
 				text: CommonWords.maximum_temperature
-				allowed: defaultAllowed && showTemperature
+				allowed: showTemperature
 				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
 			}
 
@@ -98,7 +98,7 @@ Page {
 				//% "Produced energy"
 				text: qsTrId("dcmeter_history_produced_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyOut"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
@@ -106,7 +106,7 @@ Page {
 				//% "Consumed energy"
 				text: qsTrId("dcmeter_history_consumed_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyIn"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 

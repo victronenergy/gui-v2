@@ -122,7 +122,7 @@ Page {
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
-				allowed: defaultAllowed && securityProfile.value !== VenusOS.Security_Profile_Secured
+				allowed: securityProfile.value !== VenusOS.Security_Profile_Secured
 
 				VeQuickItem {
 					id: securityProfile

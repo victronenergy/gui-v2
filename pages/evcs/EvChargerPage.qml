@@ -108,7 +108,7 @@ Page {
 				//% "Charge mode"
 				text: qsTrId("evcs_charge_mode")
 				dataItem.uid: root.evCharger.serviceUid + "/Mode"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				optionModel: Global.evChargers.modeOptionModel
 			}
 
@@ -118,7 +118,7 @@ Page {
 				from: 0
 				to: root.evCharger.maxCurrent
 				dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				enabled: chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 			}
 
@@ -126,7 +126,7 @@ Page {
 				//% "Enable charging"
 				text: qsTrId("evcs_enable_charging")
 				dataItem.uid: root.evCharger.serviceUid + "/StartStop"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListNavigation {

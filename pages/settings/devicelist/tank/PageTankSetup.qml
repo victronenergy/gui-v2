@@ -31,7 +31,7 @@ Page {
 				//% "Sensor type"
 				text: qsTrId("devicelist_tanksetup_sensor_type")
 				dataItem.uid: root.bindPrefix + "/SenseType"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.voltage, value: 1 },
 					{ display: CommonWords.current_amps, value: 2 },
@@ -44,7 +44,7 @@ Page {
 				//% "Standard"
 				text: qsTrId("devicelist_tanksetup_standard")
 				dataItem.uid: root.bindPrefix + "/Standard"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				optionModel: [
 					//% "European (0 to 180 Ohm)"
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
@@ -87,7 +87,7 @@ Page {
 			ListSpinBox {
 				//% "Butane ratio"
 				text: qsTrId("devicelist_tanksetup_butane_ratio")
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/ButaneRatio"
 				suffix: "%"
 			}
@@ -114,7 +114,7 @@ Page {
 				//% "Averaging time"
 				text: qsTrId("devicelist_tanksetup_averaging_time")
 				dataItem.uid: root.bindPrefix + "/FilterLength"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				suffix: "s"
 			}
 
@@ -122,7 +122,7 @@ Page {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, 1) + (rawUnit.value || "") : "--"
 			}
 

@@ -233,7 +233,7 @@ Page {
 				//% "Log out now"
 				button.text: qsTrId("settings_tailscale_logout_button")
 				showAccessLevel: VenusOS.User_AccessType_Installer
-				allowed: defaultAllowed && root.tailscaleConnected
+				allowed: root.tailscaleConnected
 				onClicked: commandItem.setValue('logout')
 			}
 

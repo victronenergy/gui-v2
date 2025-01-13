@@ -84,7 +84,7 @@ Page {
 			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("inverter_total_yield")
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
@@ -92,14 +92,14 @@ Page {
 			ListQuantity {
 				//% "System yield"
 				text: qsTrId("inverter_system_yield")
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
 
 			ListQuantity {
 				text: CommonWords.state_of_charge
-				allowed: defaultAllowed && root.isInverterCharger
+				allowed: root.isInverterCharger
 				unit: VenusOS.Units_Percentage
 				dataItem.uid: root.bindPrefix + "/Soc"
 			}
@@ -107,13 +107,13 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				allowed: defaultAllowed && root.isInverterCharger
+				allowed: root.isInverterCharger
 				secondaryText: ChargerError.description(dataItem.value)
 			}
 

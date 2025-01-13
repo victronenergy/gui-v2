@@ -56,7 +56,7 @@ Page {
 			ListNavigation {
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
-				allowed: defaultAllowed && analogModel.rowCount > 0
+				allowed: analogModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": text})
 
 				VeQItemTableModel {
@@ -100,7 +100,7 @@ Page {
 			ListNavigation {
 				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
-				allowed: defaultAllowed && digitalModel.rowCount > 0
+				allowed: digitalModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 
 				VeQItemSortTableModel {

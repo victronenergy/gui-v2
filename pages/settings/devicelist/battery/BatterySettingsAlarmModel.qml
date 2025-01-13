@@ -18,7 +18,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowSocClear"
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -30,7 +30,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowVoltageClear"
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -42,7 +42,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighVoltage"
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -54,7 +54,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltageClear"
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -66,7 +66,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltage"
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -80,7 +80,7 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 
 	ListRangeSlider {
@@ -94,6 +94,6 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		allowed: defaultAllowed && firstDataItem.isValid && secondDataItem.isValid
+		allowed: firstDataItem.isValid && secondDataItem.isValid
 	}
 }

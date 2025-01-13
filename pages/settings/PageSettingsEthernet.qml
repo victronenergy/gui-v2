@@ -67,9 +67,7 @@ Page {
 				}
 				return -1
 			}
-
 			enabled: userHasReadAccess
-			allowed: defaultAllowed
 
 			onOptionClicked: function(index) {
 				networkServices.setServiceProperty("Method", optionModel[index].value)

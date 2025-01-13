@@ -117,13 +117,13 @@ Page {
 				text: qsTrId("charger_load")
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/I"
 				unit: VenusOS.Units_Amp
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				text: loadQuantityItem.text
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
-				allowed: defaultAllowed && dataItem.isValid && !loadQuantityItem.visible
+				allowed: dataItem.isValid && !loadQuantityItem.visible
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 

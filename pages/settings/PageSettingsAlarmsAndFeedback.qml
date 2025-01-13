@@ -17,7 +17,7 @@ Page {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-				allowed: defaultAllowed && buzzerStateDataItem.isValid
+				allowed: buzzerStateDataItem.isValid
 
 				VeQuickItem {
 					id: buzzerStateDataItem
@@ -29,7 +29,7 @@ Page {
 				//% "Enable status LEDs"
 				text: qsTrId("settings_enable_status_leds")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/LEDs/Enable"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}

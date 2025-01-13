@@ -30,7 +30,7 @@ Page {
 				//% "Low voltage"
 				text: qsTrId("dcmeter_alarms_low_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -39,7 +39,7 @@ Page {
 				//% "High voltage"
 				text: qsTrId("dcmeter_alarms_high_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -48,7 +48,7 @@ Page {
 				//% "Low aux voltage"
 				text: qsTrId("dcmeter_alarms_low_aux_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowStarterVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -57,7 +57,7 @@ Page {
 				//% "High aux voltage"
 				text: qsTrId("dcmeter_alarms_high_aux_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighStarterVoltage"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -65,7 +65,7 @@ Page {
 
 				text: CommonWords.low_temperature
 				dataItem.uid: root.bindPrefix + "/Alarms/LowTemperature"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -73,7 +73,7 @@ Page {
 
 				text: CommonWords.high_temperature
 				dataItem.uid: root.bindPrefix + "/Alarms/HighTemperature"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}
