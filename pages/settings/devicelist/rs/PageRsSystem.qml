@@ -94,6 +94,14 @@ Page {
 			}
 
 			ListNavigation {
+				text: CommonWords.ess
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+
+			ListNavigation {
 				//% "RS devices"
 				text: qsTrId("settings_rs_devices")
 				onClicked: {
