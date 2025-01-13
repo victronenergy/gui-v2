@@ -105,7 +105,7 @@ Page {
 								}
 							}
 							// First 4 fuses are always visible; last 4 only shown if status is valid.
-							allowed: model.index < 4 ? defaultAllowed : defaultAllowed && fuseStatus >= 0
+							allowed: model.index < 4 ? true : fuseStatus >= 0
 						}
 					}
 				}

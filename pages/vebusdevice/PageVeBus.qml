@@ -226,20 +226,20 @@ Page {
 			}
 
 			ListQuantity {
-				allowed: defaultAllowed && root.isMulti
+				allowed: root.isMulti
 				dataItem.uid: root.bindPrefix + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage
 			}
 
 			ListTemperature {
-				allowed: defaultAllowed && dataItem.isValid && root.isMulti
+				allowed: dataItem.isValid && root.isMulti
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
 			}
 
 			ListActiveAcInput {
-				allowed: defaultAllowed && root.isMulti
+				allowed: root.isMulti
 				bindPrefix: root.bindPrefix
 			}
 

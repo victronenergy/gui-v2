@@ -141,7 +141,7 @@ Page {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
 				dataItem.uid: settingsBindPrefix + "/QuietHours/StartTime"
-				allowed: defaultAllowed && quietHours.checked
+				allowed: quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -149,7 +149,7 @@ Page {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
 				dataItem.uid: settingsBindPrefix + "/QuietHours/EndTime"
-				allowed: defaultAllowed && quietHours.checked
+				allowed: quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 		}

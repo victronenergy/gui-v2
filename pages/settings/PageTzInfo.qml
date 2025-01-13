@@ -92,7 +92,7 @@ Page {
 				// Qt for WebAssembly doesn't support timezones,
 				// so we can't display the device-local date/time,
 				// as we don't know what it is.  Just hide the setting.
-				allowed: defaultAllowed && Qt.platform.os != "wasm"
+				allowed: Qt.platform.os != "wasm"
 
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")

@@ -16,7 +16,7 @@ ObjectModel {
 		dataItem.uid: root.bindPrefix + "/Mode"
 		valueTrue: 1
 		valueFalse: 4
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListDcInputQuantityGroup {
@@ -31,13 +31,13 @@ ObjectModel {
 		//% "Alternator Temperature"
 		text: qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListText {
 		text: CommonWords.state
 		secondaryText: Global.system.systemStateToText(dataItem.value)
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 		dataItem.uid: root.bindPrefix + "/State"
 	}
 
@@ -45,20 +45,20 @@ ObjectModel {
 		text: CommonWords.network_status
 		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 	}
 
 	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error/0/Id"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 		secondaryText: dataItem.isValid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
 	}
 
@@ -67,7 +67,7 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_field_drive")
 		dataItem.uid: root.bindPrefix + "/FieldDrive"
 		unit: VenusOS.Units_Percentage
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListQuantity {
@@ -75,14 +75,14 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_utilization")
 		dataItem.uid: root.bindPrefix + "/Utilization"
 		unit: VenusOS.Units_Percentage
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListQuantity {
 		text: CommonWords.speed
 		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListQuantity {
@@ -90,14 +90,14 @@ ObjectModel {
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListTemperature {
 		//% "Engine Temperature"
 		text: qsTrId("engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListNavigation {
@@ -121,7 +121,7 @@ ObjectModel {
 				text: qsTrId("alternator_wakespeed_operation_time")
 				secondaryText: Utils.secondsToString(dataItem.value, true)
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -130,35 +130,35 @@ ObjectModel {
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
 				unit: VenusOS.Units_AmpHour
 				precision: 0
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				//% "Cycles started"
 				text: qsTrId("alternator_wakespeed_cycles_started")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				//% "Cycles completed"
 				text: qsTrId("alternator_wakespeed_cycles_completed")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				//% "Number of power-ups"
 				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
 				//% "Number of deep discharges"
 				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 

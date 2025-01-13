@@ -31,13 +31,13 @@ Page {
 					//% "48 Volt"
 					{ display: qsTrId("batterysettingsbattery_48_volt"), value: 48 },
 				]
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListSpinBox {
 				//% "Capacity"
 				text: qsTrId("batterysettingsbattery_capacity")
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				enabled: !root.locked
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/Capacity"
 				suffix: "Ah"
@@ -46,7 +46,7 @@ Page {
 			ListSpinBox {
 				//% "Charged voltage"
 				text: qsTrId("batterysettingsbattery_charged_voltage")
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				enabled: !root.locked
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargedVoltage"
 				suffix: "V"
@@ -58,7 +58,7 @@ Page {
 				//% "Tail current"
 				text: qsTrId("batterysettingsbattery_tail_current")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/TailCurrent"
 				suffix: "%"
 				decimals: 1
@@ -69,7 +69,7 @@ Page {
 				//% "Charged detection time"
 				text: qsTrId("batterysettingsbattery_charged_detection_time")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargedDetectionTime"
 				suffix: "min"
 			}
@@ -78,7 +78,7 @@ Page {
 				//% "Peukert exponent"
 				text: qsTrId("batterysettingsbattery_peukert_exponent")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/PeukertExponent"
 				decimals: 2
 				stepSize: 0.01
@@ -88,7 +88,7 @@ Page {
 				//% "Charge efficiency factor"
 				text: qsTrId("batterysettingsbattery_charge_efficiency_factor")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/ChargeEfficiency"
 				suffix: "%"
 			}
@@ -97,7 +97,7 @@ Page {
 				//% "Current threshold"
 				text: qsTrId("batterysettingsbattery_current_threshold")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentThreshold"
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				decimals: 2
@@ -108,7 +108,7 @@ Page {
 				//% "Time-to-go averaging period"
 				text: qsTrId("batterysettingsbattery_time_to_go_averaging_period")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/TTGAveragingPeriod"
 				suffix: "min"
 			}
@@ -128,7 +128,7 @@ Page {
 				//% "Time-to-go discharge floor"
 				text: qsTrId("batterysettingsbattery_time_to_go_discharge_floor")
 				enabled: !root.locked
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/DischargeFloor"
 				suffix: "%"
 			}
@@ -137,7 +137,7 @@ Page {
 				//% "Current offset"
 				text: qsTrId("batterysettingsbattery_current_offset")
 				dataItem.uid: root.bindPrefix + "/Settings/Battery/CurrentOffset"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListButton {

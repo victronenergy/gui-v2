@@ -75,7 +75,7 @@ Page {
 				text: qsTrId("settings_page_debug_display_cpu_usage")
 				checked: Global.displayCpuUsage
 				onClicked: Global.displayCpuUsage = !Global.displayCpuUsage
-				allowed: defaultAllowed && Qt.platform.os === "linux"
+				allowed: Qt.platform.os === "linux"
 			}
 
 			SwitchItem {

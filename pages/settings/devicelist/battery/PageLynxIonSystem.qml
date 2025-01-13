@@ -17,7 +17,7 @@ Page {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListText {
@@ -93,7 +93,7 @@ Page {
 				//% "Balancing"
 				text: qsTrId("lynxionsystem_balancing")
 				dataItem.uid: root.bindPrefix + "/Balancing"
-				allowed: defaultAllowed && dataItem.seen
+				allowed: dataItem.seen
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 
@@ -101,7 +101,7 @@ Page {
 				//% "Balancer status"
 				text: qsTrId("lynxionsystem_balancer_status")
 				dataItem.uid: root.bindPrefix + "/Balancer/Status"
-				allowed: defaultAllowed && dataItem.seen
+				allowed: dataItem.seen
 				secondaryText: {
 					switch (dataItem.value) {
 					case VenusOS.Battery_Balancer_Balanced:

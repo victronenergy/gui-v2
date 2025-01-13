@@ -35,7 +35,7 @@ ObjectModel {
 	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
 	}
 
@@ -174,7 +174,7 @@ ObjectModel {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-						allowed: defaultAllowed && dataItem.isValid
+						allowed: dataItem.isValid
 					}
 				}
 			}

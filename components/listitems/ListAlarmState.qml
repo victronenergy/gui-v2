@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListText {
 	//% "Alarm state"
 	text: qsTrId("list_alarm_state")
-	allowed: defaultAllowed && dataItem.isValid
+	allowed: dataItem.isValid
 	secondaryText: {
 		if (dataItem.value === 0) {
 			return CommonWords.ok

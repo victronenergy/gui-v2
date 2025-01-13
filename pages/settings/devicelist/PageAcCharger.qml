@@ -25,7 +25,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				valueTrue: 1
 				valueFalse: 4
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -38,7 +38,7 @@ Page {
 			ListSpinBox {
 				text: CommonWords.input_current_limit
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				stepSize: 0.1
@@ -80,7 +80,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -88,7 +88,7 @@ Page {
 				text: qsTrId("settings_accharger_current")
 				unit: VenusOS.Units_Amp
 				dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListAlarm {

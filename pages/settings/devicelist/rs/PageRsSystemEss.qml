@@ -39,7 +39,7 @@ Page {
 				//% "Minimum SOC (unless grid fails)"
 				text: qsTrId("settings_rs_ess_min_soc")
 				button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
-				allowed: defaultAllowed && root.isModeOptimized
+				allowed: root.isModeOptimized
 				onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 				Component {
@@ -55,8 +55,7 @@ Page {
 			ListQuantity {
 				//% "Active SOC limit"
 				text: qsTrId("settings_rs_active_soc_limit")
-				allowed: defaultAllowed
-					&& essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
+				allowed: essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
 				dataItem.uid: root.bindPrefix + "/Ess/ActiveSocLimit"
 				unit: VenusOS.Units_Percentage
 			}
@@ -69,7 +68,7 @@ Page {
 						? qsTrId("scheduled_charge_active").arg(Units.getCombinedDisplayText(VenusOS.Units_Percentage, scheduleSoc.value))
 						  //% "Inactive"
 						: qsTrId("scheduled_charge_inactive")
-				allowed: defaultAllowed && root.isModeOptimized
+				allowed: root.isModeOptimized
 				onClicked: {
 					Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
 				}

@@ -18,7 +18,7 @@ Page {
 				text: qsTrId("inverter_maximum_pv_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
 				unit: VenusOS.Units_Volt_DC
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -26,7 +26,7 @@ Page {
 				text: qsTrId("inverter_maximum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
 				unit: VenusOS.Units_Volt_DC
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -34,7 +34,7 @@ Page {
 				text: qsTrId("inverter_minimum_battery_voltage")
 				dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
 				unit: VenusOS.Units_Volt_DC
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			Column {

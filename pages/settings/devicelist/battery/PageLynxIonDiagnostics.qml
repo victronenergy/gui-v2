@@ -17,7 +17,7 @@ Page {
 				//% "Shutdowns due error"
 				text: qsTrId("lynxiondiagnostics_shutdowns_due_error")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/ShutDownsDueError"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			Column {

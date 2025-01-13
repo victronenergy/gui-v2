@@ -29,7 +29,7 @@ ObjectModel {
 	ListTemperature {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListQuantity {
@@ -37,7 +37,7 @@ ObjectModel {
 		text: qsTrId("dcmeter_aux_voltage")
 		dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
 		unit: VenusOS.Units_Volt_DC
-		allowed: defaultAllowed && dataItem.isValid
+		allowed: dataItem.isValid
 	}
 
 	ListRelayState {

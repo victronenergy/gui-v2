@@ -111,7 +111,7 @@ Page {
 
 				//% "Sensor battery"
 				text: qsTrId("page_meteo_battery_voltage")
-				allowed: defaultAllowed && batteryVoltage.isValid
+				allowed: batteryVoltage.isValid
 
 				content.children: [
 					QuantityLabel {

@@ -32,20 +32,20 @@ Page {
 				//% "Charger instance"
 				text: qsTrId("settings_rvc_charger_instance")
 				dataItem.uid: root.bindPrefix + "/ChargerInstance"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListSpinBox {
 				//% "Inverter instance"
 				text: qsTrId("settings_rvc_inverter_instance")
 				dataItem.uid: root.bindPrefix + "/InverterInstance"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 
 			ListRadioButtonGroup {
 				text: root._lineInstanceName(line2.dataItem.isValid ? "1" : "")
 				dataItem.uid: root.bindPrefix + "/Line/0/Instance"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -57,7 +57,7 @@ Page {
 
 				text: root._lineInstanceName("2")
 				dataItem.uid: root.bindPrefix + "/Line/1/Instance"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -80,7 +80,7 @@ Page {
 								  //% "DC source instance"
 								: qsTrId("settings_rvc_dc_source_instance")
 							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Instance"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 						}
 
 						ListSpinBox {
@@ -91,7 +91,7 @@ Page {
 								  //% "DC source priority"
 								: qsTrId("settings_rvc_dc_source_priority")
 							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Priority"
-							allowed: defaultAllowed && dataItem.isValid
+							allowed: dataItem.isValid
 						}
 					}
 				}
@@ -101,7 +101,7 @@ Page {
 				//% "Tank instance"
 				text: qsTrId("settings_rvc_tank_instance")
 				dataItem.uid: root.bindPrefix + "/TankInstance"
-				allowed: defaultAllowed && dataItem.isValid
+				allowed: dataItem.isValid
 			}
 		}
 	}

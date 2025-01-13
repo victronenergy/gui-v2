@@ -21,7 +21,7 @@ Page {
 					{ value: details.minVoltageCellId.value, visible: details.minVoltageCellId.isValid },
 					{ value: details.minCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
-				allowed: defaultAllowed && details.allowsLowestCellVoltage
+				allowed: details.allowsLowestCellVoltage
 			}
 
 			ListQuantityGroup {
@@ -31,7 +31,7 @@ Page {
 					{ value: details.maxVoltageCellId.value, visible: details.maxVoltageCellId.isValid },
 					{ value: details.maxCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
-				allowed: defaultAllowed && details.allowsHighestCellVoltage
+				allowed: details.allowsHighestCellVoltage
 			}
 
 			ListQuantityGroup {
@@ -46,7 +46,7 @@ Page {
 						unit: Global.systemSettings.temperatureUnit
 					}
 				]
-				allowed: defaultAllowed && details.allowsMinimumCellTemperature
+				allowed: details.allowsMinimumCellTemperature
 			}
 
 			ListQuantityGroup {
@@ -61,7 +61,7 @@ Page {
 						unit: Global.systemSettings.temperatureUnit
 					}
 				]
-				allowed: defaultAllowed && details.allowsMaximumCellTemperature
+				allowed: details.allowsMaximumCellTemperature
 			}
 
 			ListTextGroup {
@@ -75,14 +75,14 @@ Page {
 					//% "%1 offline"
 					details.modulesOffline.isValid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
 				]
-				allowed: defaultAllowed && details.allowsBatteryModules
+				allowed: details.allowsBatteryModules
 			}
 
 			ListTextGroup {
 				//% "Number of modules blocking charge / discharge"
 				text: qsTrId("batterydetails_number_of_modules_blocking_charge_discharge")
 				textModel: [ details.nrOfModulesBlockingCharge.value, details.nrOfModulesBlockingDischarge.value ]
-				allowed: defaultAllowed && details.allowsNumberOfModulesBlockingChargeDischarge
+				allowed: details.allowsNumberOfModulesBlockingChargeDischarge
 			}
 
 			ListQuantityGroup {
@@ -92,14 +92,14 @@ Page {
 					{ value: details.installedCapacity.value, unit: VenusOS.Units_AmpHour },
 					{ value: details.capacity.value, unit: VenusOS.Units_AmpHour }
 				]
-				allowed: defaultAllowed && details.allowsCapacity
+				allowed: details.allowsCapacity
 			}
 
 			ListTextGroup {
 				//% "Connection information"
 				text: qsTrId("batterydetails_connection_information")
 				textModel: [ details.connectionInformation.value ]
-				allowed: defaultAllowed && details.connectionInformation.isValid
+				allowed: details.connectionInformation.isValid
 			}
 		}
 	}
