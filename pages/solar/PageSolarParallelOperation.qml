@@ -15,7 +15,7 @@ Page {
 	GradientListView {
 		id: chargerListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListText {
 				id: networkModeEnabled
 				//% "Networked"

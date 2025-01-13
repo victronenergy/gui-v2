@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			Column {
 				width: parent ? parent.width : 0
 

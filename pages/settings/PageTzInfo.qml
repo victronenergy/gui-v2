@@ -80,7 +80,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				//% "Date/Time UTC"

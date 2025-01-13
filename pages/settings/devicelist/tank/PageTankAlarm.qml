@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListSwitch {
 				//% "Enable alarm"
 				text: qsTrId("devicelist_tankalarm_enable_alarm")

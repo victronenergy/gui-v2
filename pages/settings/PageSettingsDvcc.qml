@@ -13,7 +13,7 @@ Page {
 	GradientListView {
 		id: dvccSettings
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			PrimaryListLabel {
 				//% "<b>CAUTION:</b> Read the manual before adjusting."
 				text: qsTrId("settings_dvcc_instructions")

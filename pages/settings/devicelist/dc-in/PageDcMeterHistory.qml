@@ -25,7 +25,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListQuantity {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"

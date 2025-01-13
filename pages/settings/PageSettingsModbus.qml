@@ -26,7 +26,7 @@ Page {
 
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListSwitch {
 				text: CommonWords.automatic_scanning
 				dataItem.uid: root.settings + "/AutoScan"

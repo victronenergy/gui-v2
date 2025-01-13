@@ -74,7 +74,7 @@ Page {
 		model: _isModelSupported() ? supportedProductModel : unsupportedProductModel
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: unsupportedProductModel
 
 		PrimaryListLabel {
@@ -102,7 +102,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: supportedProductModel
 
 		ListText {

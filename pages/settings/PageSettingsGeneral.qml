@@ -13,7 +13,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			SettingsListHeader {
 				//% "System"
 				text: qsTrId("pagesettingsgeneral_system")
