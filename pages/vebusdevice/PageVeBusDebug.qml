@@ -36,7 +36,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListNavigation {
 				text: CommonWords.ac_sensors

@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListText {
 				//% "Shutdowns due error"
 				text: qsTrId("lynxiondiagnostics_shutdowns_due_error")

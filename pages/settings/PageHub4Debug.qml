@@ -20,7 +20,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListSpinBox {
 				id: gridSetpoint
 

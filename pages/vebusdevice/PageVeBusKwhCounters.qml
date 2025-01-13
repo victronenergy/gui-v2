@@ -13,7 +13,7 @@ Page {
 	property var service
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				//% "VE.Bus Quirks"

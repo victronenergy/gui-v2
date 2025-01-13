@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListQuantity {
 				//% "Maximum PV voltage"
 				text: qsTrId("inverter_maximum_pv_voltage")

@@ -13,7 +13,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListSpinBox {
 				//% "Capacity"
 				text: qsTrId("devicelist_tanksetup_capacity")

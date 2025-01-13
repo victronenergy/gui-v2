@@ -36,7 +36,7 @@ Page {
 		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
 		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			Loader {
 				active: systemType.value === "ESS" || systemType.value === "Hub-4"
 				width: active ? root.cardWidth : -cardsView.spacing

@@ -41,7 +41,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListText {
 				//% "Total run time"

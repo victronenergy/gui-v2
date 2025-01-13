@@ -25,7 +25,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListItem {
 				id: modeListButton
 

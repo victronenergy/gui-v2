@@ -39,7 +39,7 @@ Page {
 			//% "No Modbus devices saved"
 			text: qsTrId("settings_modbus_no_devices_saved")
 		}
-		model: ObjectModel {
+		model: VisibleItemModel {
 			Column {
 				width: parent ? parent.width : 0
 
