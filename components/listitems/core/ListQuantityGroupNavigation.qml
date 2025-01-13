@@ -12,7 +12,7 @@ ListNavigation {
 	property alias quantityModel: quantityRow.model
 	property alias tableMode: quantityRow.tableMode
 
-	primaryLabel.width: availableWidth - quantityRow.width - Theme.geometry_listItem_content_horizontalMargin
+	primaryLabel.rightPadding: quantityRow.width
 
 	QuantityRow {
 		id: quantityRow
