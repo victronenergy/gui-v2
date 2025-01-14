@@ -263,6 +263,8 @@
     "geometry_overviewPage_widget_solar_graph_bar_width": 8,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 8,
+    "geometry_overviewPage_batterywidget_renewable_icon_right_margin": 8,
+    "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 3,
 
     "geometry_three_phase_column_spacing": 0,
     "geometry_three_phase_gauge_spacing": 4,

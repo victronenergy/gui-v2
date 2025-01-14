@@ -165,6 +165,9 @@ Page {
 						//% "The system will return to normal operation, prioritizing renewable energy.\nDo you want to continue?"
 						readonly property string returnToNormal: qsTrId("vebus_device_return_to_normal_operation")
 
+						//% "Charge battery"
+						title: qsTrId("page_vebus_charge_battery")
+
 						GradientListView {
 
 							Timer {
