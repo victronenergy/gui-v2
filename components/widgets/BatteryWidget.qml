@@ -5,9 +5,14 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 OverviewWidget {
 	id: root
+
+	readonly property bool preferRenewable: preferRenewableEnergy.isValid
+	readonly property bool preferRenewableOverride: preferRenewableEnergy.value === 0 || preferRenewableEnergy.value === 2
+	readonly property bool preferRenewableOverrideGenset: remoteGeneratorSelected.value === 1 || Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Generator
 
 	onClicked: {
 		// If com.victronenergy.system/Batteries has only one battery, then show the device
@@ -62,6 +67,18 @@ OverviewWidget {
 	VeQuickItem {
 		id: batteries
 		uid: Global.system.serviceUid + "/Batteries"
+	}
+
+	VeQuickItem {
+		id: preferRenewableEnergy
+
+		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Dc/0/PreferRenewableEnergy" : ""
+	}
+
+	VeQuickItem {
+		id: remoteGeneratorSelected
+
+		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/RemoteGeneratorSelected" : ""
 	}
 
 	title: CommonWords.battery
@@ -174,11 +191,29 @@ OverviewWidget {
 			}
 			Label {
 				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
+				visible: Global.system.battery.timeToGo
 				color: Theme.color_font_primary
 				width: parent.width
 				elide: Text.ElideRight
 				font.pixelSize: Theme.font_overviewPage_battery_timeToGo_pixelSize
 			}
+		},
+
+		CP.ColorImage {
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				bottom: batteryVoltageDisplay.top
+				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
+			}
+			fillMode: Image.PreserveAspectFit
+			color: Theme.color_font_primary
+			visible: root.preferRenewableOverride
+			source: root.preferRenewableOverrideGenset
+					? "qrc:/images/icon_charging_generator.svg"
+					: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+					  ? "qrc:/images/icon_charging_shore.svg"
+					  : "qrc:/images/icon_charging_grid.svg"
 		},
 
 		QuantityLabel {
@@ -208,6 +243,20 @@ OverviewWidget {
 			value: batteryData.current
 			unit: VenusOS.Units_Amp
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
+		},
+
+		CP.ColorImage {
+			anchors {
+				bottom: batteryPowerDisplay.top
+				bottomMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_bottom_margin
+				right: parent.right
+				rightMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_right_margin
+			}
+
+			fillMode: Image.PreserveAspectFit
+			color: Theme.color_font_primary
+			visible: root.preferRenewable
+			source: "qrc:/images/icon_charging_renewables.svg"
 		},
 
 		QuantityLabel {

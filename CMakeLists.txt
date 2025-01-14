@@ -1058,6 +1058,10 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/ess.svg
         images/freshWater.svg
         images/icon_black_water_24.svg
+        images/icon_charging_generator.svg
+        images/icon_charging_grid.svg
+        images/icon_charging_renewables.svg
+        images/icon_charging_shore.svg
         images/icon_CL_24.svg
         images/icon_fresh_water_24.svg
         images/icon_raw_water_24.svg
