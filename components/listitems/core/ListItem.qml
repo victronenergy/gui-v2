@@ -26,8 +26,6 @@ Item {
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
 
 	readonly property alias primaryLabel: primaryLabel
-
-	readonly property int defaultImplicitHeight: contentLayout.height + Theme.geometry_gradientList_spacing
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
 	property bool preferredVisible: true
@@ -37,7 +35,7 @@ Item {
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
 	visible: preferredVisible && userHasReadAccess
-	implicitHeight: preferredVisible && userHasReadAccess ? defaultImplicitHeight : 0
+	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
