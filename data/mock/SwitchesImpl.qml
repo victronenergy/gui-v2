@@ -93,7 +93,7 @@ Item {
 					switchDev.setMockValue("/Channel/%1/Status".arg(i), 0)
 					//optional
 					if (i != 0) switchDev.setMockValue("/Channel/%1/Dimming".arg(i), 50)
-					if (i != 2) switchDev.setMockValue("/Channel/%1/Setting/FuseRating".arg(i), 5)
+					if (i != 2) switchDev.setMockValue("/Channel/%1/FuseRating".arg(i), 5)
 					if (i != 1) switchDev.setMockValue("/Channel/%1/Temperature".arg(i), 0)
 					if (i != 1) switchDev.setMockValue("/Channel/%1/Voltage".arg(i), 0)
 					if (i != 1) switchDev.setMockValue("/Channel/%1/Current".arg(i), 0)
