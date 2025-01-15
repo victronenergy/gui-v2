@@ -49,7 +49,7 @@ Page {
 				property string shortText: isValid ? value.length > 25 ? value.substring(0,25)  + "...": value : ""
 			}
 			property VeQuickItem fuseItem: VeQuickItem {
-				uid: model.uid + "/Fuse"
+				uid: model.uid + "/Settings/FuseRating"
 
 			}
 			property VeQuickItem groupNameItem: VeQuickItem {
@@ -205,27 +205,8 @@ Page {
 				uid: root.bindPrefix + "/Channel/%1/Dimming".arg(root.currentChannel)
 
 			}
-			VeQuickItem {
-				id: fuseMin
-				uid: root.bindPrefix + "/MinFuse"
-			}
-			VeQuickItem {
-				id: fuseMax
-				uid: root.bindPrefix + "/MaxFuse"
-			}
 			GradientListView {
 				model: ObjectModel {
-					// ListText {
-					//     text: CommonWords.state
-					//     dataItem.uid: root.bindPrefix + "/Channel/%1/State".arg(root.currentChannel)
-					//     secondaryText: dimmingItem.isValid ?
-					//                        dimmingItem.value +"%" : Global.switches.switchStateToText(dataItem.value)
-					// }
-					// ListText {
-					//     text: CommonWords.status
-					//     dataItem.uid: root.bindPrefix + "/Channel/%1/Status".arg(root.currentChannel)
-					//     secondaryText: Global.switches.switchStatusToText(dataItem.value)
-					// }
 					ListTextField {
 						//% "Name"
 						text: qsTrId("settings_deviceinfo_name")
@@ -271,7 +252,7 @@ Page {
 						allowed: dataItem.isValid
 						unit: VenusOS.Units_Amp
 						decimals: 1
-						dataItem.uid: root.bindPrefix + "/Channel/%1/Fuse".arg(root.currentChannel)
+						dataItem.uid: root.bindPrefix + "/Channel/%1/Setting/FuseRating".arg(root.currentChannel)
 
 						Timer {
 							id: validationTimer
@@ -291,9 +272,9 @@ Page {
 							// adjust the precision of the displayed number.
 							const formattedNumber = Units.formatNumber(numberValue, fuseListField.decimals)
 							//% "Minimum value is %1"
-							if ((fuseMin.isValid) && (numberValue < fuseMin.value)) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Minimum value is %1".arg(fuseMin.value), formattedNumber)
+							if (numberValue < dataItem.min) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Minimum value is %1".arg(dataItem.min), formattedNumber)
 							//% "Maximum value is %1"
-							if ((fuseMax.isValid) && (numberValue > fuseMax.value)) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Maximum value is %1".arg(fuseMax.value), formattedNumber)
+							if (numberValue > dataItem.max) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Maximum value is %1".arg(dataItem.max), formattedNumber)
 							return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
 						}
 						saveInput: function(){
