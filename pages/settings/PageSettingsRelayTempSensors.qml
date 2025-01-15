@@ -87,7 +87,7 @@ Page {
 							   ? tempRelayModel
 							   : disabledModel
 
-						ObjectModel {
+						AllowedItemModel {
 							id: tempRelayModel
 
 							ListSwitch {
@@ -113,7 +113,7 @@ Page {
 							}
 						}
 
-						ObjectModel {
+						AllowedItemModel {
 							id: disabledModel
 
 							PrimaryListLabel {

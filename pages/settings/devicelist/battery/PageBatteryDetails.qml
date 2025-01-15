@@ -13,7 +13,7 @@ Page {
 	property BatteryDetails details
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListQuantityGroup {
 				//% "Lowest cell voltage"
 				text: qsTrId("batterydetails_lowest_cell_voltage")

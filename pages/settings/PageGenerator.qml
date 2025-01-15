@@ -45,7 +45,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: startStopModel
 
 		ListSwitch {

@@ -46,7 +46,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				text: CommonWords.state
 				secondaryText: Global.system.systemStateToText(dataItem.value)

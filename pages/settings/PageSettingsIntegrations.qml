@@ -12,7 +12,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListNavigation {
 				text: CommonWords.add_device
 				icon.source: "qrc:/images/icon_plus_32.svg"

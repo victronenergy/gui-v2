@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				//% "System Switch"
 				text: qsTrId("lynxionio_system_switch")

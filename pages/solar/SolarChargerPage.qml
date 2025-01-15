@@ -16,7 +16,7 @@ Page {
 	title: solarCharger.name
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListItemBackground {
 				height: trackerTable.y + trackerTable.height
 

@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				//% "Unsupported device found"
 				text: qsTrId("devicelist_unsupporteddevices_found")

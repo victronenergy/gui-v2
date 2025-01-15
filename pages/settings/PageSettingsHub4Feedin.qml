@@ -12,7 +12,7 @@ Page {
 	property int hub4Mode
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSwitch {
 				id: acFeedin
 

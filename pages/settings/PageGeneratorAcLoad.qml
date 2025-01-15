@@ -30,7 +30,7 @@ Page {
 
 	GradientListView {
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListSwitch {
 				id: enableSwitch

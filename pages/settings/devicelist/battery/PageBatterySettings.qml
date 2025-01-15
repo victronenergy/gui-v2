@@ -32,7 +32,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListNavigation {
 				//% "Battery bank"
 				text: qsTrId("batterysettings_battery_bank")

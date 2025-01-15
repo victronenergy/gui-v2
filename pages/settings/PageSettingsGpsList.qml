@@ -74,7 +74,7 @@ Page {
 
 				Page {
 					GradientListView {
-						model: ObjectModel {
+						model: AllowedItemModel {
 							ListRadioButtonGroup {
 								//: Format of reported GPS data
 								//% "Format"

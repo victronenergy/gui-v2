@@ -18,7 +18,7 @@ Page {
 	]
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				//% "Wind speed sensor"
 				text: qsTrId("page_meteo_settings_wind_speed_sensor")

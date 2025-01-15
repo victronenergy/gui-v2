@@ -13,7 +13,7 @@ Page {
 	required property BatteryHistory history
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListQuantity {
 				//% "Deepest discharge"
 				text: qsTrId("batteryalarms_deepest_discharge")

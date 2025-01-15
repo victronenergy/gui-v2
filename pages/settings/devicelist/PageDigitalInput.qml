@@ -20,7 +20,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.bindPrefix + "/State"
@@ -40,7 +40,7 @@ Page {
 						readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + (deviceInstance.value || 0)
 
 						GradientListView {
-							model: ObjectModel {
+							model: AllowedItemModel {
 								ListSwitch {
 									id: alarmSwitch
 									//% "Enable alarm"

@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSwitch {
 				//: Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.
 				//% "Auto-ranging"

@@ -30,7 +30,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListNavigation {
 				id: startPageNavigation
 				//% "Start page"
@@ -99,7 +99,7 @@ Page {
 
 		Page {
 			GradientListView {
-				model: ObjectModel {
+				model: AllowedItemModel {
 					ListSwitch {
 						id: startPageMode
 						text: CommonWords.auto

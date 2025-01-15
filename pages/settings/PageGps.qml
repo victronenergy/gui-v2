@@ -35,7 +35,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				text: CommonWords.status
 				secondaryText: {

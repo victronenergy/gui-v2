@@ -16,7 +16,7 @@ Page {
 	title: evCharger.name
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListItemBackground {
 				height: phaseTable.y + phaseTable.height
 

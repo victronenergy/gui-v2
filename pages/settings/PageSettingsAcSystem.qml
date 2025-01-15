@@ -34,7 +34,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				id: acInput1
 

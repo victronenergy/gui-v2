@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			component SwitchItem : ListItem {
 				id: switchItem

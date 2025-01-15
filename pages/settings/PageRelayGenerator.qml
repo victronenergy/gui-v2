@@ -16,7 +16,7 @@ PageGenerator {
 
 	model: !relayFunction.isValid || relayFunction.value === 1 ? startStopModel : disabledModel
 
-	ObjectModel {
+	AllowedItemModel {
 		id: disabledModel
 
 		ListItem {

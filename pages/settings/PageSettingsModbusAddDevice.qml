@@ -21,7 +21,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListRadioButtonGroup {
 				id: protocol

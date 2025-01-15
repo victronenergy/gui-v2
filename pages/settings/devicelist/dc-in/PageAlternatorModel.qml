@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ObjectModel {
+AllowedItemModel {
 	id: root
 
 	property string bindPrefix
@@ -113,7 +113,7 @@ ObjectModel {
 			model: overallHistoryModel
 		}
 
-		ObjectModel {
+		AllowedItemModel {
 			id: overallHistoryModel
 
 			ListText {

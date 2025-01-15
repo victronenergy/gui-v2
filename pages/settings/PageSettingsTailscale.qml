@@ -161,7 +161,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListSwitch {
 				id: switchTailscaleEnabled
@@ -250,7 +250,7 @@ Page {
 
 					Page {
 						GradientListView {
-							model: ObjectModel {
+							model: AllowedItemModel {
 								ListSwitch {
 									//% "Access local ethernet network"
 									text: qsTrId("settings_tailscale_local_network_access_ethernet")
@@ -307,7 +307,7 @@ Page {
 
 					Page {
 						GradientListView {
-							model: ObjectModel {
+							model: AllowedItemModel {
 								ListTextField {
 									//% "Custom \"tailscale up\" arguments"
 									text: qsTrId("settings_tailscale_advanced_custom_tailscale_up_arguments")

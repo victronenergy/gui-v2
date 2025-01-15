@@ -30,7 +30,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: disabledModel
 
 		PrimaryListLabel {
@@ -39,7 +39,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: startStopModel
 
 		ListText {

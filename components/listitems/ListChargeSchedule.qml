@@ -108,7 +108,7 @@ ListNavigation {
 			id: scheduledOptionsPage
 
 			GradientListView {
-				model: ObjectModel {
+				model: AllowedItemModel {
 					ListSwitch {
 						id: itemEnabled
 

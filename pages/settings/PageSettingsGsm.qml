@@ -32,7 +32,7 @@ Page {
 
 		model: simStatus.isValid ? modemConnected : notConnected
 
-		ObjectModel {
+		AllowedItemModel {
 			id: notConnected
 
 			ListItem {
@@ -41,7 +41,7 @@ Page {
 			}
 		}
 
-		ObjectModel {
+		AllowedItemModel {
 			id: modemConnected
 
 			ListText {
@@ -160,7 +160,7 @@ Page {
 
 						GradientListView {
 
-							model: ObjectModel {
+							model: AllowedItemModel {
 
 								ListSwitch {
 									id: useDefaultApn

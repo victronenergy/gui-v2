@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				//% "Synchronize VE.Bus SOC with battery"
 				text: qsTrId("settings_system_status_sync_vebus_soc_with_battery")

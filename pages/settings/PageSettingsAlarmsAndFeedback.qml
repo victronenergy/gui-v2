@@ -12,7 +12,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSwitch {
 				//% "Audible alarm"
 				text: qsTrId("settings_audible_alarm")

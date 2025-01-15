@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListQuantity {
 				//% "Motor RPM"
 				text: qsTrId("devicelist_motordrive_motorrpm")

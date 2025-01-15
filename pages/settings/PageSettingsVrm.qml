@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListNavigation {
 				//% "VRM Portal mode"
 				text: qsTrId("settings_vrm_portal_mode")

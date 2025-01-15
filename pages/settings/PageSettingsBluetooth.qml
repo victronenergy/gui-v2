@@ -11,7 +11,7 @@ Page {
 
 	GradientListView {
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListSwitch {
 				id: bluetoothEnabled

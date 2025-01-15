@@ -18,7 +18,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				//% "Nominal Voltage"
 				text: qsTrId("batterysettingsbattery_nominal_voltage")

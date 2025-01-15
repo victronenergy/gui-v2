@@ -35,7 +35,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")

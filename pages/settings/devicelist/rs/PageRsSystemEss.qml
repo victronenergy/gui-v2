@@ -27,7 +27,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				id: essMode
 				text: CommonWords.mode

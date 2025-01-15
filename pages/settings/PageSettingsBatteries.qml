@@ -14,7 +14,7 @@ Page {
 	title: CommonWords.batteries
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				id: batteryMonitorRadioButtons
 

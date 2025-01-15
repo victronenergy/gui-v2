@@ -29,7 +29,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				text: CommonWords.ac_input_role
 				optionModel: Global.acInputs.roles.map(function(role) {

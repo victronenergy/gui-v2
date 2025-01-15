@@ -43,7 +43,7 @@ Item {
 		spacing: Theme.geometry_toastNotification_bottomMargin
 		layoutDirection: Qt.RightToLeft     // layout from bottom to top
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 			id: toastItemsModel
 		}
 	}

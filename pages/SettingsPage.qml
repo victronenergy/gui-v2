@@ -24,7 +24,7 @@ SwipeViewPage {
 		id: settingsListView
 
 		clip: true
-		model: ObjectModel {
+		model: AllowedItemModel {
 			SettingsListNavigation {
 				text: CommonWords.devices
 				//% "All connected devices"

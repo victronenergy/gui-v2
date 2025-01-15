@@ -23,7 +23,7 @@ Page {
 	title: CommonWords.alarm_status
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListText {
 				text: CommonWords.vebus_error

@@ -12,7 +12,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListFirmwareCheckButton {
 				//% "Check for updates on SD/USB"

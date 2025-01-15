@@ -13,7 +13,7 @@ Page {
 	property int index
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			Column {
 				width: parent ? parent.width : 0

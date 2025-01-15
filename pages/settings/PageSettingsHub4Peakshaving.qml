@@ -42,7 +42,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				//% "Peak shaving"
 				text: qsTrId("settings_ess_peak_shaving")

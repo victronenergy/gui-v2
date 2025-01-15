@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ObjectModel {
+AllowedItemModel {
 	id: root
 
 	property string bindPrefix
@@ -226,7 +226,7 @@ ObjectModel {
 
 			Page {
 				GradientListView {
-					model: ObjectModel {
+					model: AllowedItemModel {
 						ListQuantity {
 							//% "Speed"
 							text: qsTrId("ac-in-genset_speed")
@@ -345,7 +345,7 @@ ObjectModel {
 
 			Page {
 				GradientListView {
-					model: ObjectModel {
+					model: AllowedItemModel {
 						ListSpinBox {
 							//% "Charge voltage"
 							text: qsTrId("genset_charge_voltage")

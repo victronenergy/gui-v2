@@ -67,7 +67,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListItem {
 				id: modeListButton
 
@@ -174,7 +174,7 @@ Page {
 								onTriggered: Global.pageManager.popPage()
 							}
 
-							model: ObjectModel {
+							model: AllowedItemModel {
 								ListItem {
 									text: {
 										var message = ""

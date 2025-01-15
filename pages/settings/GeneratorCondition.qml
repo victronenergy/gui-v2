@@ -56,7 +56,7 @@ ListNavigation {
 
 			GradientListView {
 
-				model: ObjectModel {
+				model: AllowedItemModel {
 
 					ListSwitch {
 						text: root.enableDescription

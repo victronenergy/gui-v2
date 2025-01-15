@@ -32,7 +32,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: essSettings
 
 		ListRadioButtonGroup {

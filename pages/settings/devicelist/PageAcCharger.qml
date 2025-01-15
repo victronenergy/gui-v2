@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSwitch {
 				text: CommonWords.switch_mode
 				dataItem.uid: root.bindPrefix + "/Mode"

@@ -14,7 +14,7 @@ Page {
 		model: networkServices.ready ? connectedModel : disconnectedModel
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: disconnectedModel
 
 		ListText {
@@ -27,7 +27,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: connectedModel
 
 		ListText {

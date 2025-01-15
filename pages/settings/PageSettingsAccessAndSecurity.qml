@@ -67,7 +67,7 @@ Page {
 		id: settingsListView
 
 		boundsBehavior: Flickable.DragOverBounds
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListRadioButtonGroup {
 				//% "Access level"
 				text: qsTrId("settings_access_level")

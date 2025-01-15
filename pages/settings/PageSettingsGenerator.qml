@@ -22,7 +22,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 
 			ListNavigation {
 				//% "Conditions"
@@ -50,7 +50,7 @@ Page {
 						GradientListView {
 							id: settingsListView
 
-							model: ObjectModel {
+							model: AllowedItemModel {
 								ListSpinBox {
 									//% "Warm-up time"
 									text: qsTrId("page_settings_generator_warm_up_time")

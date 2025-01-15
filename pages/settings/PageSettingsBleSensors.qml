@@ -33,7 +33,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable

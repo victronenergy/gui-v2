@@ -17,7 +17,7 @@ Page {
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: validAlarmsModel
 
 		VeBusAlarm {
@@ -52,7 +52,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	AllowedItemModel {
 		id: noAlarmsModel
 
 		PrimaryListLabel {

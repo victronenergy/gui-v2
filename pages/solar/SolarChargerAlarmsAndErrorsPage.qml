@@ -15,7 +15,7 @@ Page {
 	GradientListView {
 		id: chargerListView
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 			PrimaryListLabel {
 				allowed: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0

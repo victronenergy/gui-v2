@@ -13,7 +13,7 @@ Page {
 	property int bmsType
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListText {
 				text: CommonWords.allow_to_charge
 				secondaryText: CommonWords.yesOrNo(dataItem.value)

@@ -93,7 +93,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListTextGroup {
 				id: stateGroup
 

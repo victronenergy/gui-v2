@@ -12,7 +12,7 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListItem {
 				//% "Status LEDs"
 				text: qsTrId("batterydiagnostics_status_leds")

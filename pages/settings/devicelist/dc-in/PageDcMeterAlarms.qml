@@ -23,7 +23,7 @@ Page {
 					 && !highTemp.visible
 		}
 
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListAlarm {
 				id: lowVoltage
 

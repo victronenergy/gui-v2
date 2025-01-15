@@ -27,7 +27,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: AllowedItemModel {
 			ListSpinBox {
 				//% "Charger instance"
 				text: qsTrId("settings_rvc_charger_instance")
