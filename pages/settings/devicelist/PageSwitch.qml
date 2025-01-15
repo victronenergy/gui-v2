@@ -49,7 +49,7 @@ Page {
 				property string shortText: isValid ? value.length > 25 ? value.substring(0,25)  + "...": value : ""
 			}
 			property VeQuickItem fuseItem: VeQuickItem {
-				uid: model.uid + "/Settings/FuseRating"
+				uid: model.uid + "/FuseRating"
 
 			}
 			property VeQuickItem groupNameItem: VeQuickItem {
@@ -252,7 +252,7 @@ Page {
 						allowed: dataItem.isValid
 						unit: VenusOS.Units_Amp
 						decimals: 1
-						dataItem.uid: root.bindPrefix + "/Channel/%1/Setting/FuseRating".arg(root.currentChannel)
+						dataItem.uid: root.bindPrefix + "/Channel/%1/FuseRating".arg(root.currentChannel)
 
 						Timer {
 							id: validationTimer
