@@ -27,7 +27,7 @@ Page {
 		id: listView
 		header: PrimaryListLabel {
 			horizontalAlignment: Text.AlignHCenter
-			allowed: listView.count === 0
+			preferredVisible: listView.count === 0
 			//% "No Modbus devices discovered"
 			text: qsTrId("settings_modbus_no_devices_discovered")
 		}

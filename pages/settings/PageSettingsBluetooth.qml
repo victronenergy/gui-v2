@@ -23,7 +23,7 @@ Page {
 			ListTextField {
 				//% "Pincode"
 				text: qsTrId("settings_pincode")
-				allowed: bluetoothEnabled.checked
+				preferredVisible: bluetoothEnabled.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Ble/Service/Pincode"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 6

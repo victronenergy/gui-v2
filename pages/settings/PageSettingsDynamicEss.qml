@@ -40,7 +40,7 @@ Page {
 			ListQuantity {
 				//% "Target SOC"
 				text: qsTrId("settings_ess_target_soc")
-				allowed: dEssMode.dataItem.value === 1
+				preferredVisible: dEssMode.dataItem.value === 1
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/TargetSoc"
 				unit: VenusOS.Units_Percentage
 			}

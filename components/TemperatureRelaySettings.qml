@@ -59,7 +59,7 @@ Column {
 		PrimaryListLabel {
 			//% "Warning: The above selected relay is not configured for temperature, this condition will be ignored."
 			text: qsTrId("settings_relay_invalid_temp_config_warning")
-			allowed: root.hasInvalidRelayTempConfig
+			preferredVisible: root.hasInvalidRelayTempConfig
 		}
 	}
 

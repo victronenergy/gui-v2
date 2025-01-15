@@ -93,7 +93,7 @@ Page {
 
 				//% "A new MK3 version is available.\nNOTE: The update might temporarily stop the system."
 				text: qsTrId("vebus_mk3_new_version_available")
-				allowed: mkVersion.value === 1170212 && mk3Update.value === 0
+				preferredVisible: mkVersion.value === 1170212 && mk3Update.value === 0
 			}
 
 			ListButton {
@@ -101,7 +101,7 @@ Page {
 				text: qsTrId("vebus_device_update_the_mk3")
 				//% "Press to update"
 				secondaryText: qsTrId("vebus_device_press_to_update")
-				allowed: mk3firmware.visible
+				preferredVisible: mk3firmware.visible
 				onClicked: {
 					//% "Updating the MK3, values will reappear after the update is complete"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_updating_the_mk3"), 10000)
@@ -139,7 +139,7 @@ Page {
 				text: qsTrId("vebus_device_charging_to_100")
 				//% "In progress"
 				secondaryText: qsTrId("vebus_device_in_progress")
-				allowed: preferRenewableEnergy.value === 2
+				preferredVisible: preferRenewableEnergy.value === 2
 			}
 
 			ListNavigation {
@@ -155,7 +155,7 @@ Page {
 								 :
 								   //% "Charge the battery to 100%"
 								   qsTrId("vebus_device_charge_the_battery_to_100")
-				allowed: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
+				preferredVisible: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
 				onClicked: Global.pageManager.pushPage(newPageComponent)
 
 				Component {
@@ -226,20 +226,20 @@ Page {
 			}
 
 			ListQuantity {
-				allowed: root.isMulti
+				preferredVisible: root.isMulti
 				dataItem.uid: root.bindPrefix + "/Soc"
 				text: CommonWords.state_of_charge
 				unit:VenusOS.Units_Percentage
 			}
 
 			ListTemperature {
-				allowed: dataItem.isValid && root.isMulti
+				preferredVisible: dataItem.isValid && root.isMulti
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
 			}
 
 			ListActiveAcInput {
-				allowed: root.isMulti
+				preferredVisible: root.isMulti
 				bindPrefix: root.bindPrefix
 			}
 
@@ -278,19 +278,19 @@ Page {
 			PrimaryListLabel {
 				//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible."
 				text: qsTrId("vebus_device_bms_message")
-				allowed: bmsMode.isValid
+				preferredVisible: bmsMode.isValid
 			}
 
 			PrimaryListLabel {
 				//% "A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!"
 				text: qsTrId("vebus_device_bms_not_found")
-				allowed: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
+				preferredVisible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
 			}
 
 			ListNavigation {
 				//% "VE.Bus BMS"
 				text: qsTrId("vebus_device_vebus_bms")
-				allowed: bmsExpected.value === 1
+				preferredVisible: bmsExpected.value === 1
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
 														   "title": text,
 														   "bindPrefix": root.bindPrefix

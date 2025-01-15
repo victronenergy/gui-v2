@@ -109,7 +109,7 @@ ListNavigation {
 						  ? modelData.fontFamily || Global.fontFamily
 						  : model.fontFamily || Global.fontFamily
 
-					allowed: (userHasWriteAccess && enabled) || checked
+					preferredVisible: (userHasWriteAccess && enabled) || checked
 					checked: optionsListView.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
@@ -147,7 +147,7 @@ ListNavigation {
 								color: Theme.color_font_secondary
 								text: bottomContentLoader.caption
 								font.pixelSize: Theme.font_size_caption
-								allowed: bottomContentLoader.caption.length > 0
+								preferredVisible: bottomContentLoader.caption.length > 0
 							}
 
 							ListTextField {
@@ -178,7 +178,7 @@ ListNavigation {
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
 								backgroundRect.color: "transparent"
-								allowed: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
+								preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 								validateInput: function() {
 									// Validate the password on Enter/Return, or when "Confirm" is
 									// clicked. Ignore validation requests when the field does not
@@ -193,7 +193,7 @@ ListNavigation {
 									return root.validatePassword(model.index, textField.text)
 								}
 								saveInput: function() {
-									if (allowed) {
+									if (preferredVisible) {
 										radioButton.select()
 									}
 								}

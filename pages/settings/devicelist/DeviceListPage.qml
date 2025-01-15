@@ -22,7 +22,7 @@ Page {
 
 			readonly property bool _loadCustomDelegate: connected && !!device
 
-			// Only set width; height is sized to the loaded item, in case allowed=false and the
+			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
 			// item should not be visible.
 			width: parent ? parent.width : 0
 
@@ -60,7 +60,7 @@ Page {
 				//% "Remove disconnected devices"
 				text: qsTrId("devicelist_remove_disconnected_devices")
 				secondaryText: CommonWords.remove
-				allowed: Global.allDevicesModel.disconnectedDeviceCount > 0
+				preferredVisible: Global.allDevicesModel.disconnectedDeviceCount > 0
 				onClicked: {
 					Global.allDevicesModel.removeDisconnectedDevices()
 				}
@@ -69,7 +69,7 @@ Page {
 			ListNavigation {
 				//% "Generator start/stop"
 				text: qsTrId("settings_generator_start_stop")
-				allowed: relay0.isValid
+				preferredVisible: relay0.isValid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
 
 				VeQuickItem {

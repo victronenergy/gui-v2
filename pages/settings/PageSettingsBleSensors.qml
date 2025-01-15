@@ -45,19 +45,19 @@ Page {
 				//% "Continuous scanning"
 				text: qsTrId("settings_continuous_scan")
 				dataItem.uid: root.bleServiceUid + "/ContinuousScan"
-				allowed: enable.checked
+				preferredVisible: enable.checked
 			}
 
 			PrimaryListLabel {
 				//% "Continuous scanning may interfere with Wi-Fi operation."
 				text: qsTrId("settings_continuous_scan_may_interfere")
-				allowed: contScan.checked
+				preferredVisible: contScan.checked
 			}
 
 			ListNavigation {
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
-				allowed: enable.checked
+				preferredVisible: enable.checked
 				onClicked: Global.pageManager.pushPage(bluetoothAdaptersComponent, {"title": text})
 
 				Component {

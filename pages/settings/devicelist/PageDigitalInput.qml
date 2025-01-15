@@ -58,7 +58,7 @@ Page {
 									//% "Invert alarm logic"
 									text: qsTrId("digitalinput_invert_alarm_logic")
 									dataItem.uid: settingsBindPrefix + "/InvertAlarm"
-									allowed: alarmSwitch.checked
+									preferredVisible: alarmSwitch.checked
 								}
 							}
 						}

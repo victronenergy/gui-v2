@@ -16,7 +16,7 @@ Page {
 
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
 					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },
@@ -30,7 +30,7 @@ Page {
 				//% "Node-RED factory reset"
 				text: qsTrId("page_settings_nodered_factory_reset")
 				secondaryText: CommonWords.press_to_reset
-				allowed: true
+				preferredVisible: true
 				onClicked: Global.dialogLayer.open(factoryResetConfirmationDialogComponent)
 
 				VeQuickItem {
@@ -54,7 +54,7 @@ Page {
 			PrimaryListLabel {
 				//% "Access Node-RED at https://venus.local:1881 and via VRM."
 				text: qsTrId("settings_large_access_node_red")
-				allowed: nodered.currentValue > 0
+				preferredVisible: nodered.currentValue > 0
 			}
 		}
 	}

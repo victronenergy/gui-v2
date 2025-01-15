@@ -64,7 +64,7 @@ Page {
 			ListQuantityGroup {
 				//% "PV"
 				text: qsTrId("inverter_pv")
-				allowed: pvV.isValid || pvYield.isValid
+				preferredVisible: pvV.isValid || pvYield.isValid
 				textModel: [
 					{ value: pvV.value, unit: VenusOS.Units_Volt_DC },
 					{ value: pvYield.value, unit: VenusOS.Units_Watt },
@@ -84,7 +84,7 @@ Page {
 			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("inverter_total_yield")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
@@ -92,14 +92,14 @@ Page {
 			ListQuantity {
 				//% "System yield"
 				text: qsTrId("inverter_system_yield")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
 
 			ListQuantity {
 				text: CommonWords.state_of_charge
-				allowed: root.isInverterCharger
+				preferredVisible: root.isInverterCharger
 				unit: VenusOS.Units_Percentage
 				dataItem.uid: root.bindPrefix + "/Soc"
 			}
@@ -107,13 +107,13 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				allowed: root.isInverterCharger
+				preferredVisible: root.isInverterCharger
 				secondaryText: ChargerError.description(dataItem.value)
 			}
 
@@ -125,7 +125,7 @@ Page {
 				property SolarHistory solarHistory
 
 				text: CommonWords.daily_history
-				allowed: (numberOfTrackers.value || 0) > 0
+				preferredVisible: (numberOfTrackers.value || 0) > 0
 				onClicked: {
 					if (!solarHistory) {
 						solarHistory = solarHistoryComponent.createObject(root)
@@ -158,7 +158,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.overall_history
-				allowed: root.isInverterCharger
+				preferredVisible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -167,7 +167,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.alarm_status
-				allowed: root.isInverterCharger
+				preferredVisible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -176,7 +176,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.alarm_setup
-				allowed: root.isInverterCharger
+				preferredVisible: root.isInverterCharger
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })

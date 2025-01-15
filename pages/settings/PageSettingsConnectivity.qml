@@ -33,7 +33,7 @@ Page {
 			ListNavigation {
 				//% "Bluetooth"
 				text: qsTrId("pagesettingsconnectivity_bluetooth")
-				allowed: networkServices.hasBluetoothSupport
+				preferredVisible: networkServices.hasBluetoothSupport
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
 			}
 
@@ -53,7 +53,7 @@ Page {
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
 				}
-				allowed: tailscale.isValid
+				preferredVisible: tailscale.isValid
 
 				VeQuickItem {
 					id: tailscale

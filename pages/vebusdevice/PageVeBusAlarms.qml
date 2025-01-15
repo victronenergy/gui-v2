@@ -51,7 +51,7 @@ Page {
 						multiPhase: alarmDelegate.multiPhase
 						alarmSuffix: pathSuffix
 						errorItem: alarmDelegate.errorItem
-						allowed: !showOnlyIfMulti || root.isMulti
+						preferredVisible: !showOnlyIfMulti || root.isMulti
 					}
 				}
 			}

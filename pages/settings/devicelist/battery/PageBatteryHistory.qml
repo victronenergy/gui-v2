@@ -17,163 +17,163 @@ Page {
 			ListQuantity {
 				//% "Deepest discharge"
 				text: qsTrId("batteryalarms_deepest_discharge")
-				allowed: root.history.allowsDeepestDischarge
+				preferredVisible: root.history.allowsDeepestDischarge
 				unit: VenusOS.Units_AmpHour
-				value: allowed ? root.history.deepestDischarge.value : NaN
+				value: preferredVisible ? root.history.deepestDischarge.value : NaN
 			}
 
 			ListQuantity {
 				//% "Last discharge"
 				text: qsTrId("batteryhistory_last_discharge")
-				allowed: root.history.allowsLastDischarge
+				preferredVisible: root.history.allowsLastDischarge
 				unit: VenusOS.Units_AmpHour
-				value: allowed ? root.history.lastDischarge.value : NaN
+				value: preferredVisible ? root.history.lastDischarge.value : NaN
 			}
 
 			ListQuantity {
 				//% "Average discharge"
 				text: qsTrId("batteryhistory_average_discharge")
-				allowed: root.history.allowsAverageDischarge
+				preferredVisible: root.history.allowsAverageDischarge
 				unit: VenusOS.Units_AmpHour
-				value: allowed ? root.history.averageDischarge.value : NaN
+				value: preferredVisible ? root.history.averageDischarge.value : NaN
 			}
 
 			ListText {
 				//% "Total charge cycles"
 				text: qsTrId("batteryhistory_total_charge_cycles")
-				allowed: root.history.allowsChargeCycles
-				secondaryText: allowed ? root.history.chargeCycles.value : ""
+				preferredVisible: root.history.allowsChargeCycles
+				secondaryText: preferredVisible ? root.history.chargeCycles.value : ""
 			}
 
 			ListText {
 				//% "Number of full discharges"
 				text: qsTrId("batteryhistory_number_of_full_discharges")
-				allowed: root.history.allowsFullDischarges
-				secondaryText: allowed ? root.history.fullDischarges.value : ""
+				preferredVisible: root.history.allowsFullDischarges
+				secondaryText: preferredVisible ? root.history.fullDischarges.value : ""
 			}
 
 			ListQuantity {
 				//% "Cumulative Ah drawn"
 				text: qsTrId("batteryhistory_cumulative_ah_drawn")
-				allowed: root.history.allowsTotalAhDrawn
+				preferredVisible: root.history.allowsTotalAhDrawn
 				unit: VenusOS.Units_AmpHour
-				value: allowed ? root.history.totalAhDrawn.value : NaN
+				value: preferredVisible ? root.history.totalAhDrawn.value : NaN
 			}
 
 			ListQuantity {
 				text: CommonWords.minimum_voltage
-				allowed: root.history.allowsMinimumVoltage
+				preferredVisible: root.history.allowsMinimumVoltage
 				unit: VenusOS.Units_Volt_DC
-				value: allowed ? root.history.minimumVoltage.value : NaN
+				value: preferredVisible ? root.history.minimumVoltage.value : NaN
 			}
 
 			ListQuantity {
 				text: CommonWords.maximum_voltage
-				allowed: root.history.allowsMaximumVoltage
+				preferredVisible: root.history.allowsMaximumVoltage
 				unit: VenusOS.Units_Volt_DC
-				value: allowed ? root.history.maximumVoltage.value : NaN
+				value: preferredVisible ? root.history.maximumVoltage.value : NaN
 			}
 
 			ListQuantity {
 				//% "Minimum cell voltage"
 				text: qsTrId("batteryhistory_minimum_cell_voltage")
-				allowed: root.history.allowsMinimumCellVoltage
+				preferredVisible: root.history.allowsMinimumCellVoltage
 				unit: VenusOS.Units_Volt_DC
-				value: allowed ? root.history.minimumCellVoltage.value : NaN
+				value: preferredVisible ? root.history.minimumCellVoltage.value : NaN
 				precision: 3
 			}
 
 			ListQuantity {
 				//% "Maximum cell voltage"
 				text: qsTrId("batteryhistory_maximum_cell_voltage")
-				allowed: root.history.allowsMaximumCellVoltage
+				preferredVisible: root.history.allowsMaximumCellVoltage
 				unit: VenusOS.Units_Volt_DC
-				value: allowed ? root.history.maximumCellVoltage.value : NaN
+				value: preferredVisible ? root.history.maximumCellVoltage.value : NaN
 				precision: 3
 			}
 
 			ListText {
 				//% "Time since last full charge"
 				text: qsTrId("batteryhistory_time_since_last_full_charge")
-				allowed: root.history.allowsTimeSinceLastFullCharge
-				secondaryText: allowed ? Utils.secondsToString(root.history.timeSinceLastFullCharge.value) : ""
+				preferredVisible: root.history.allowsTimeSinceLastFullCharge
+				secondaryText: preferredVisible ? Utils.secondsToString(root.history.timeSinceLastFullCharge.value) : ""
 			}
 
 			ListText {
 				//% "Synchronisation count"
 				text: qsTrId("batteryhistory_synchronisation_count")
-				allowed: root.history.allowsAutomaticSyncs
-				secondaryText: allowed ? root.history.automaticSyncs.value : ""
+				preferredVisible: root.history.allowsAutomaticSyncs
+				secondaryText: preferredVisible ? root.history.automaticSyncs.value : ""
 			}
 
 			ListText {
 				text: CommonWords.low_voltage_alarms
-				allowed: root.history.allowsLowVoltageAlarms
-				secondaryText: allowed ? root.history.lowVoltageAlarms.value : ""
+				preferredVisible: root.history.allowsLowVoltageAlarms
+				secondaryText: preferredVisible ? root.history.lowVoltageAlarms.value : ""
 			}
 
 			ListText {
 				text: CommonWords.high_voltage_alarms
-				allowed: root.history.allowsHighVoltageAlarms
-				secondaryText: allowed ? root.history.highVoltageAlarms.value : ""
+				preferredVisible: root.history.allowsHighVoltageAlarms
+				secondaryText: preferredVisible ? root.history.highVoltageAlarms.value : ""
 			}
 
 			ListText {
 				//% "Low starter battery voltage alarms"
 				text: qsTrId("batteryhistory_low_starter_bat_voltage_alarms")
-				allowed: root.history.allowsLowStarterVoltageAlarms
-				secondaryText: allowed ? root.history.lowStarterVoltageAlarms.value : ""
+				preferredVisible: root.history.allowsLowStarterVoltageAlarms
+				secondaryText: preferredVisible ? root.history.lowStarterVoltageAlarms.value : ""
 			}
 
 			ListText {
 				//% "High starter battery voltage alarms"
 				text: qsTrId("batteryhistory_high_starter_bat_voltage_alarms")
-				allowed: root.history.allowsHighStarterVoltageAlarms
-				secondaryText: allowed ? root.history.highStarterVoltageAlarms.value : ""
+				preferredVisible: root.history.allowsHighStarterVoltageAlarms
+				secondaryText: preferredVisible ? root.history.highStarterVoltageAlarms.value : ""
 			}
 
 			ListQuantity {
 				//% "Minimum starter battery voltage"
 				text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
-				allowed: root.history.allowsMinimumStarterVoltage
-				value: allowed ? root.history.minimumStarterVoltage.value : NaN
+				preferredVisible: root.history.allowsMinimumStarterVoltage
+				value: preferredVisible ? root.history.minimumStarterVoltage.value : NaN
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
 				//% "Maximum starter battery voltage"
 				text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
-				allowed: root.history.allowsMaximumStarterVoltage
-				value: allowed ? root.history.maximumStarterVoltage.value : NaN
+				preferredVisible: root.history.allowsMaximumStarterVoltage
+				value: preferredVisible ? root.history.maximumStarterVoltage.value : NaN
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTemperature {
 				text: CommonWords.minimum_temperature
-				allowed: root.history.allowsMinimumTemperature
-				value: allowed ? root.history.minimumTemperature.value : NaN
+				preferredVisible: root.history.allowsMinimumTemperature
+				value: preferredVisible ? root.history.minimumTemperature.value : NaN
 			}
 
 			ListTemperature {
 				text: CommonWords.maximum_temperature
-				allowed: root.history.allowsMaximumTemperature
-				value: allowed ? root.history.maximumTemperature.value : NaN
+				preferredVisible: root.history.allowsMaximumTemperature
+				value: preferredVisible ? root.history.maximumTemperature.value : NaN
 			}
 
 			ListQuantity {
 				//% "Discharged energy"
 				text: qsTrId("batteryhistory_discharged_energy")
-				allowed: root.history.allowsDischargedEnergy
+				preferredVisible: root.history.allowsDischargedEnergy
 				unit: VenusOS.Units_Energy_KiloWattHour
-				value: allowed ? root.history.dischargedEnergy.value : NaN
+				value: preferredVisible ? root.history.dischargedEnergy.value : NaN
 			}
 
 			ListQuantity {
 				//% "Charged energy"
 				text: qsTrId("batteryhistory_charged_energy")
-				allowed: root.history.allowsChargedEnergy
+				preferredVisible: root.history.allowsChargedEnergy
 				unit: VenusOS.Units_Energy_KiloWattHour
-				value: allowed ? root.history.chargedEnergy.value : NaN
+				value: preferredVisible ? root.history.chargedEnergy.value : NaN
 			}
 
 			ListResetHistory {

@@ -17,7 +17,7 @@ Page {
 
 		model: ObjectModel {
 			PrimaryListLabel {
-				allowed: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
+				preferredVisible: lowBatteryAlarm.visible || highBatteryAlarm.visible || highTemperatureAlarm.visible || shortCircuitAlarm.visible
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
@@ -30,7 +30,7 @@ Page {
 				//% "Low battery voltage alarm"
 				text: qsTrId("charger_alarms_low_battery_voltage_alarm")
 				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -39,7 +39,7 @@ Page {
 				//% "High battery voltage alarm"
 				text: qsTrId("charger_alarms_high_battery_voltage_alarm")
 				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -48,7 +48,7 @@ Page {
 				//% "High temperature alarm"
 				text: qsTrId("charger_alarms_high_temperature_alarm")
 				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/HighTemperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -57,11 +57,11 @@ Page {
 				//% "Short circuit alarm"
 				text: qsTrId("charger_alarms_short_circuit_alarm")
 				dataItem.uid: root.solarCharger.serviceUid + "/Alarms/ShortCircuit"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			PrimaryListLabel {
-				allowed: root.solarCharger.errorCode > 0
+				preferredVisible: root.solarCharger.errorCode > 0
 				leftPadding: 0
 				color: Theme.color_listItem_secondaryText
 				font.pixelSize: Theme.font_size_caption
@@ -70,7 +70,7 @@ Page {
 			}
 
 			ListText {
-				allowed: root.solarCharger.errorCode > 0
+				preferredVisible: root.solarCharger.errorCode > 0
 				text: ChargerError.description(root.solarCharger.errorCode)
 			}
 		}

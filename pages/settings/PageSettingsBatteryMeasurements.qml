@@ -86,12 +86,12 @@ Page {
 								text: root._visibleText
 								//% "Active battery monitor"
 								secondaryText: qsTrId("settings_batteries_active_battery_monitor")
-								allowed: batteryMenuItem.activeBattery
+								preferredVisible: batteryMenuItem.activeBattery
 							}
 
 							ListSwitch {
 								text: root._visibleText
-								allowed: !batteryMenuItem.activeBattery
+								preferredVisible: !batteryMenuItem.activeBattery
 								dataItem.uid: batteryEnabled.uid
 							}
 
@@ -101,7 +101,7 @@ Page {
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								allowed: dataItem.isValid
+								preferredVisible: dataItem.isValid
 								textField.maximumLength: 32
 							}
 						}

@@ -67,7 +67,7 @@ ListNavigation {
 						id: startValue
 
 						text: startValueDescription
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -80,7 +80,7 @@ ListNavigation {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -93,7 +93,7 @@ ListNavigation {
 						id: startTime
 
 						text: startTimeDescription
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
 					}
@@ -102,7 +102,7 @@ ListNavigation {
 						id: stopValue
 
 						text: stopValueDescription
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -115,7 +115,7 @@ ListNavigation {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
@@ -128,7 +128,7 @@ ListNavigation {
 						id: stopTime
 
 						text: stopTimeDescription
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
 					}
@@ -137,7 +137,7 @@ ListNavigation {
 						//% "Skip generator warm-up"
 						text: qsTrId("settings_generator_condition_skip_warmup")
 						dataItem.uid: bindPrefix + "/SkipWarmup"
-						allowed: root.supportsWarmup
+						preferredVisible: root.supportsWarmup
 					}
 				}
 			}

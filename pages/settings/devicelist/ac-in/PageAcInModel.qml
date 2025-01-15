@@ -35,7 +35,7 @@ ObjectModel {
 	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
-		allowed: dataItem.isValid
+		preferredVisible: dataItem.isValid
 		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
 	}
 
@@ -49,7 +49,7 @@ ObjectModel {
 		Repeater {
 			model: root.phaseNumbers
 			delegate: ListQuantityGroup {
-				allowed: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid ||
+				preferredVisible: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid ||
 												  phasePower.isValid || phasePowerFactor.isValid)
 				text: CommonWords.ac_phase_x.arg(modelData)
 				textModel: [
@@ -110,7 +110,7 @@ ObjectModel {
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
 				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
 				unit: VenusOS.Units_Energy_KiloWattHour
-				allowed: root.phaseCountKnown || dataItem.isValid
+				preferredVisible: root.phaseCountKnown || dataItem.isValid
 			}
 		}
 	}
@@ -118,14 +118,14 @@ ObjectModel {
 	ListText {
 		text: CommonWords.zero_feed_in_power_limit
 		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
-		allowed: dataItem.isValid
+		preferredVisible: dataItem.isValid
 	}
 
 	ListText {
 		//% "Phase Sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
 		dataItem.uid: root.bindPrefix + "/PhaseSequence"
-		allowed: dataItem.isValid
+		preferredVisible: dataItem.isValid
 		secondaryText: dataItem.value === 1
 				  //: Phase sequence L1-L3-L2
 				  //% "L1-L3-L2"
@@ -137,7 +137,7 @@ ObjectModel {
 
 	ListNavigation {
 		text: CommonWords.setup
-		allowed: allowedRoles.isValid
+		preferredVisible: allowedRoles.isValid
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
@@ -174,7 +174,7 @@ ObjectModel {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-						allowed: dataItem.isValid
+						preferredVisible: dataItem.isValid
 					}
 				}
 			}

@@ -33,7 +33,7 @@ ListNavigation {
 	//% "Phase L%1, device %2 (%3)"
 	text: qsTrId("vebus_device_phase_x_device_x_index_x").arg((_index % 3) + 1).arg(Math.floor(_index / 3) + 1).arg(_index)
 	secondaryText: counter.text + " " + code.text
-	allowed: code.isValid
+	preferredVisible: code.isValid
 	onClicked:  Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusError11Device.qml", {
 												bindPrefix: devPrefix,
 												title: text

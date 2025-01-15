@@ -34,7 +34,7 @@ Page {
 			PrimaryListLabel {
 				//% "No errors reported"
 				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
-				allowed: enableModbusTcp.checked
+				preferredVisible: enableModbusTcp.checked
 				horizontalAlignment: Text.AlignHCenter
 			}
 
@@ -42,13 +42,13 @@ Page {
 				//% "Time of last error"
 				text: qsTrId("settings_modbus_time_of_last_error")
 				secondaryText: timestamp.isValid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
-				allowed: enableModbusTcp.checked && lastError.isValid
+				preferredVisible: enableModbusTcp.checked && lastError.isValid
 			}
 
 			ListButton {
 				text: CommonWords.clear_error_action
 				secondaryText: CommonWords.press_to_clear
-				allowed: enableModbusTcp.checked && lastError.isValid
+				preferredVisible: enableModbusTcp.checked && lastError.isValid
 				onClicked: {
 					lastError.setValue(undefined)
 					timestamp.setValue(undefined)
@@ -58,7 +58,7 @@ Page {
 			ListNavigation {
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
-				allowed: enableModbusTcp.checked
+				preferredVisible: enableModbusTcp.checked
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
 			}
 		}

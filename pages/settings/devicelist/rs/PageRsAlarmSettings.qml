@@ -21,22 +21,22 @@ Page {
 				for (let i = 0; i < settingsListView.count; ++i) {
 					const listItem = settingsListView.itemAtIndex(i)
 					if (listItem && listItem.visible) {
-						allowed = false
+						preferredVisible = false
 						return
 					}
 				}
-				allowed = true
+				preferredVisible = true
 			}
 
 			//% "No alarms to be configured"
 			text: qsTrId("rs_alarm_no_alarms_to_be_configured")
-			allowed: false
+			preferredVisible: false
 		}
 
 		delegate: ListAlarmLevelRadioButtonGroup {
 			text: modelData.text
 			dataItem.uid: root.bindPrefix + modelData.pathSuffix
-			allowed: dataItem.isValid
+			preferredVisible: dataItem.isValid
 			onVisibleChanged: settingsListView.headerItem.updateVisibility()
 		}
 	}

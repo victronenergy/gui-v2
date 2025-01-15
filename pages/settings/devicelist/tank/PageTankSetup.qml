@@ -31,7 +31,7 @@ Page {
 				//% "Sensor type"
 				text: qsTrId("devicelist_tanksetup_sensor_type")
 				dataItem.uid: root.bindPrefix + "/SenseType"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.voltage, value: 1 },
 					{ display: CommonWords.current_amps, value: 2 },
@@ -44,7 +44,7 @@ Page {
 				//% "Standard"
 				text: qsTrId("devicelist_tanksetup_standard")
 				dataItem.uid: root.bindPrefix + "/Standard"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				optionModel: [
 					//% "European (0 to 180 Ohm)"
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
@@ -58,7 +58,7 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when empty"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
-				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
 				decimals: 3
@@ -68,7 +68,7 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when full"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_full")
-				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
 				decimals: 3
@@ -87,7 +87,7 @@ Page {
 			ListSpinBox {
 				//% "Butane ratio"
 				text: qsTrId("devicelist_tanksetup_butane_ratio")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/ButaneRatio"
 				suffix: "%"
 			}
@@ -97,7 +97,7 @@ Page {
 			ListNavigation {
 				//% "Custom shape"
 				text: qsTrId("devicelist_tanksetup_custom_shape")
-				allowed: shape.seen
+				preferredVisible: shape.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankShape.qml",
@@ -114,7 +114,7 @@ Page {
 				//% "Averaging time"
 				text: qsTrId("devicelist_tanksetup_averaging_time")
 				dataItem.uid: root.bindPrefix + "/FilterLength"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				suffix: "s"
 			}
 
@@ -122,13 +122,13 @@ Page {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, 1) + (rawUnit.value || "") : "--"
 			}
 
 			ListNavigation {
 				text: CommonWords.low_level_alarm
-				allowed: low.seen
+				preferredVisible: low.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
@@ -143,7 +143,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.high_level_alarm
-				allowed: high.seen
+				preferredVisible: high.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",

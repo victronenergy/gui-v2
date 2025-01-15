@@ -39,7 +39,7 @@ Page {
 			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
-				allowed: hasBluetoothSupport.value
+				preferredVisible: hasBluetoothSupport.value
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 
 				VeQuickItem {
@@ -56,7 +56,7 @@ Page {
 			ListNavigation {
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
-				allowed: analogModel.rowCount > 0
+				preferredVisible: analogModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": text})
 
 				VeQItemTableModel {
@@ -89,7 +89,7 @@ Page {
 				//% "Relays"
 				text: qsTrId("pagesettingsintegrations_relays")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": text})
-				allowed: relay0.isValid
+				preferredVisible: relay0.isValid
 
 				VeQuickItem {
 					id: relay0
@@ -100,7 +100,7 @@ Page {
 			ListNavigation {
 				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
-				allowed: digitalModel.rowCount > 0
+				preferredVisible: digitalModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 
 				VeQItemSortTableModel {
@@ -174,19 +174,19 @@ Page {
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			PrimaryListLabel {
 				//% "Access Signal K at http://venus.local:3000 and via VRM."
 				text: qsTrId("settings_large_access_signal_k")
-				allowed: signalk.checked
+				preferredVisible: signalk.checked
 			}
 
 			ListNavigation {
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				allowed: nodeRedModeItem.isValid
+				preferredVisible: nodeRedModeItem.isValid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": text })
 
 				VeQuickItem {

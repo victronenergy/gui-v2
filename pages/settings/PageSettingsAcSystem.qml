@@ -93,7 +93,7 @@ Page {
 					? qsTrId("settings_system_monitor_for_grid_failure")
 					  //% "Monitor for shore disconnect"
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
-				allowed: root._isGrid || root._isShore
+				preferredVisible: root._isGrid || root._isShore
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },

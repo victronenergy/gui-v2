@@ -46,7 +46,7 @@ Page {
 			ListText {
 				//% "Total run time"
 				text: qsTrId("page_settings_run_time_and_service_total_run_time")
-				allowed: gensetOperatingHours.isValid
+				preferredVisible: gensetOperatingHours.isValid
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
 			}
 
@@ -58,7 +58,7 @@ Page {
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60) + "h"
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				enabled: userHasWriteAccess && state.value === 0
-				allowed: dataItem.isValid && gensetBindPrefix === ""
+				preferredVisible: dataItem.isValid && gensetBindPrefix === ""
 				maximumLength: 6
 				saveInput: function() {
 					dataItem.setValue(accumulatedTotalItem.value - parseInt(textField.text, 10) * 60 * 60)
@@ -116,10 +116,10 @@ Page {
 				text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
 				secondaryText: ""
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
-				allowed: dataItem.isValid && dataItem.value > 0
+				preferredVisible: dataItem.isValid && dataItem.value > 0
 
 				Timer {
-					running: parent.allowed && root.animationEnabled
+					running: parent.preferredVisible && root.animationEnabled
 					repeat: true
 					interval: 1000
 					onTriggered: {
@@ -139,7 +139,7 @@ Page {
 				//% "Accumulated running time since last test run"
 				text: qsTrId("settings_page_run_time_and_service_accumulated_running_time")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				allowed: nextTestRun.allowed
+				preferredVisible: nextTestRun.preferredVisible
 				secondaryText: Utils.secondsToString(dataItem.value, false)
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
 			}
@@ -149,7 +149,7 @@ Page {
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
 				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListIntField {
@@ -177,7 +177,7 @@ Page {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
 				button.text: CommonWords.press_to_reset
-				allowed: serviceReset.isValid
+				preferredVisible: serviceReset.isValid
 				onClicked: {
 					serviceReset.setValue(1)
 					//% "The service timer has been reset"

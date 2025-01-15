@@ -39,7 +39,7 @@ Page {
 				//% "Minimum SOC (unless grid fails)"
 				text: qsTrId("settings_rs_ess_min_soc")
 				button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
-				allowed: root.isModeOptimized
+				preferredVisible: root.isModeOptimized
 				onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 				Component {
@@ -55,7 +55,7 @@ Page {
 			ListQuantity {
 				//% "Active SOC limit"
 				text: qsTrId("settings_rs_active_soc_limit")
-				allowed: essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
+				preferredVisible: essMode.dataItem.value === VenusOS.Ess_State_OptimizedWithBatteryLife
 				dataItem.uid: root.bindPrefix + "/Ess/ActiveSocLimit"
 				unit: VenusOS.Units_Percentage
 			}
@@ -68,7 +68,7 @@ Page {
 						? qsTrId("scheduled_charge_active").arg(Units.getCombinedDisplayText(VenusOS.Units_Percentage, scheduleSoc.value))
 						  //% "Inactive"
 						: qsTrId("scheduled_charge_inactive")
-				allowed: root.isModeOptimized
+				preferredVisible: root.isModeOptimized
 				onClicked: {
 					Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
 				}
@@ -95,7 +95,7 @@ Page {
 			ListNavigation {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
-				allowed: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
+				preferredVisible: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
 							{ title: text })

@@ -35,7 +35,7 @@ Page {
 
 			//% "Distributor %1"
 			text: qsTrId("batterylynxdistibutor_distributor").arg(distributor)
-			allowed: status.isValid && status.value !== 0
+			preferredVisible: status.isValid && status.value !== 0
 			secondaryText: {
 				if (!status.isValid) {
 					return "--"
@@ -82,7 +82,7 @@ Page {
 						header: PrimaryListLabel {
 							//% "No information available, see previous page for Distributor status."
 							text: qsTrId("lynxdistributor_no_information_available")
-							allowed: !distributorDelegate.connected
+							preferredVisible: !distributorDelegate.connected
 						}
 						model: distributorDelegate.connected ? distributorDelegate.fuseInfoList : 0
 						delegate: ListText {
@@ -105,7 +105,7 @@ Page {
 								}
 							}
 							// First 4 fuses are always visible; last 4 only shown if status is valid.
-							allowed: model.index < 4 ? true : fuseStatus >= 0
+							preferredVisible: model.index < 4 ? true : fuseStatus >= 0
 						}
 					}
 				}

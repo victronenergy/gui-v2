@@ -9,5 +9,5 @@ import Victron.VenusOS
 DeviceListDelegate {
 	// multi devices are not shown in the Device List; they are shown as part of the
 	// "Devices" list in the acsystem page (PageRsSystem) instead.
-	allowed: false
+	preferredVisible: false
 }

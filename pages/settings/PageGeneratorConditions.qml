@@ -43,7 +43,7 @@ Page {
 				//% "Unavailable monitor, set another"
 				defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_monitor_set_another")
 				dataItem.uid: bindPrefix + "/BatteryService"
-				allowed: dataItem.value !== "default"
+				preferredVisible: dataItem.value !== "default"
 
 				VeQuickItem {
 					id: availableBatteryServices

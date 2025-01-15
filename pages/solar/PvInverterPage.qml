@@ -88,7 +88,7 @@ Page {
 			ListText {
 				text: CommonWords.zero_feed_in_power_limit
 				dataItem.uid: root.pvInverter.serviceUid + "/Ac/PowerLimit"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAcInError {

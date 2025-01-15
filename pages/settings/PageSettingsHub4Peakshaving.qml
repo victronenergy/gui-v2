@@ -97,7 +97,7 @@ Page {
 
 				bottomContentChildren: [
 					PrimaryListLabel {
-						allowed: !maxSystemAcInputCurrentSwitch.enabled
+						preferredVisible: !maxSystemAcInputCurrentSwitch.enabled
 						topPadding: 0
 						bottomPadding: 0
 						color: Theme.color_font_secondary
@@ -111,7 +111,7 @@ Page {
 				//% "Maximum system import current (per phase)"
 				text: qsTrId("settings_ess_max_system_import_current")
 				enabled: userHasWriteAccess
-				allowed: maxSystemAcInputCurrentSwitch.enabled && maxSystemAcInputCurrentSwitch.checked
+				preferredVisible: maxSystemAcInputCurrentSwitch.enabled && maxSystemAcInputCurrentSwitch.checked
 				dataItem.uid: systemAcInputLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				decimals: 0
@@ -138,7 +138,7 @@ Page {
 
 				bottomContentChildren: [
 					PrimaryListLabel {
-						allowed: !maxSystemAcExportCurrentSwitch.enabled
+						preferredVisible: !maxSystemAcExportCurrentSwitch.enabled
 						topPadding: 0
 						bottomPadding: 0
 						color: Theme.color_font_secondary
@@ -152,7 +152,7 @@ Page {
 				//% "Maximum system export current (per phase)"
 				text: qsTrId("settings_ess_max_system_export_current")
 				enabled: userHasWriteAccess
-				allowed: maxSystemAcExportCurrentSwitch.enabled && maxSystemAcExportCurrentSwitch.checked
+				preferredVisible: maxSystemAcExportCurrentSwitch.enabled && maxSystemAcExportCurrentSwitch.checked
 				dataItem.uid: systemAcExportLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				decimals: 0

@@ -19,7 +19,7 @@ Page {
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
-				allowed: Qt.platform.os != "wasm" && dataItem.isValid && dataItem.max === 1
+				preferredVisible: Qt.platform.os != "wasm" && dataItem.isValid && dataItem.max === 1
 			}
 
 			ListSlider {
@@ -27,7 +27,7 @@ Page {
 				text: qsTrId("settings_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: !autoBrightness.checked && Qt.platform.os != "wasm"
+				preferredVisible: !autoBrightness.checked && Qt.platform.os != "wasm"
 			}
 
 			ListRadioButtonGroup {
@@ -50,7 +50,7 @@ Page {
 					//% "Never"
 					{ display: qsTrId("settings_displayoff_never"), value: 0 },
 				]
-				allowed: Qt.platform.os != "wasm"
+				preferredVisible: Qt.platform.os != "wasm"
 			}
 
 			ListRadioButtonGroup {

@@ -172,7 +172,7 @@ Page {
 
 			PrimaryListLabel {
 				text: root.serviceState
-				allowed: root.tailscaleEnabled && root.serviceState !== ""
+				preferredVisible: root.tailscaleEnabled && root.serviceState !== ""
 				horizontalAlignment: Text.AlignHCenter
 				onLinkActivated: (linkText) => {
 					BackendConnection.openUrl(linkText)
@@ -217,14 +217,14 @@ Page {
 				//% "IPv4"
 				text: qsTrId("settings_tailscale_ipv4")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv4"
-				allowed: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
+				preferredVisible: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
 			}
 
 			ListText {
 				//% "IPv6"
 				text: qsTrId("settings_tailscale_ipv6")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv6"
-				allowed: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
+				preferredVisible: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
 			}
 
 			ListButton {
@@ -233,7 +233,7 @@ Page {
 				//% "Log out now"
 				button.text: qsTrId("settings_tailscale_logout_button")
 				showAccessLevel: VenusOS.User_AccessType_Installer
-				allowed: root.tailscaleConnected
+				preferredVisible: root.tailscaleConnected
 				onClicked: commandItem.setValue('logout')
 			}
 

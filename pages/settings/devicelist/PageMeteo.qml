@@ -45,7 +45,7 @@ Page {
 			ListTemperature {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/CellTemperature"
 				precision: 1
 			}
@@ -56,7 +56,7 @@ Page {
 					? qsTrId("page_meteo_external_temperature_1")
 					//% "External temperature"
 					: qsTrId("page_meteo_external_temperature")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/ExternalTemperature"
 				precision: 1
 			}
@@ -67,7 +67,7 @@ Page {
 				dataItem.uid: bindPrefix + "/ExternalTemperature2"
 				//% "External temperature (2)"
 				text: qsTrId("page_meteo_external_temperature_2")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				precision: 1
 			}
 
@@ -75,7 +75,7 @@ Page {
 				dataItem.uid: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Speed_MetresPerSecond
 				precision: 1
 			}
@@ -84,7 +84,7 @@ Page {
 				dataItem.uid: bindPrefix + "/WindDirection"
 				//% "Wind direction"
 				text: qsTrId("page_meteo_wind_direction")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_CardinalDirection
 			}
 
@@ -92,7 +92,7 @@ Page {
 				dataItem.uid: bindPrefix + "/InstallationPower"
 				//% "Installation Power"
 				text: qsTrId("page_meteo_installation_power")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Watt
 				precision: 1
 			}
@@ -101,7 +101,7 @@ Page {
 				dataItem.uid: bindPrefix + "/TodaysYield"
 				//% "Today's yield"
 				text: qsTrId("page_meteo_daily_yield")
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				precision: 1
 			}
@@ -111,7 +111,7 @@ Page {
 
 				//% "Sensor battery"
 				text: qsTrId("page_meteo_battery_voltage")
-				allowed: batteryVoltage.isValid
+				preferredVisible: batteryVoltage.isValid
 
 				content.children: [
 					QuantityLabel {
@@ -157,7 +157,7 @@ Page {
 														   "title": CommonWords.settings,
 														   meteoSettingsPrefix: root.settingsPrefix
 													   })
-				allowed: productId.value === ProductInfo.ProductId_MeteoSensor_Imt
+				preferredVisible: productId.value === ProductInfo.ProductId_MeteoSensor_Imt
 			}
 
 			ListNavigation {

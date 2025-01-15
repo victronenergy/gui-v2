@@ -86,7 +86,7 @@ ControlCard {
 		ListItem {
 			text: CommonWords.ess
 			flat: true
-			allowed: essModeItem.isValid
+			preferredVisible: essModeItem.isValid
 			content.children: [
 				ListItemButton {
 					font.pixelSize: Theme.font_size_body1
@@ -103,7 +103,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("controlcard_inverter_charger_ess_minimum_soc")
 			flat: true
-			allowed: essMinSocItem.isValid && [
+			preferredVisible: essMinSocItem.isValid && [
 				VenusOS.Ess_State_OptimizedWithBatteryLife,
 				VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essModeItem.value)
 			button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)

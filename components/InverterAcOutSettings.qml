@@ -27,7 +27,7 @@ Column {
 
 	ListQuantityGroup {
 		text: CommonWords.ac_out
-		allowed: !root.isInverterCharger
+		preferredVisible: !root.isInverterCharger
 		textModel: [
 			{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt_AC },
 			{ value: inverterData.phase1.current, unit: VenusOS.Units_Amp },
@@ -43,7 +43,7 @@ Column {
 		//: %1 = phase number (1-3)
 		//% "AC Out L%1"
 		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.isValid ? acPhaseNumber.value + 1 : 1)
-		allowed: root.isInverterCharger
+		preferredVisible: root.isInverterCharger
 		textModel: [
 			{ value: acPhase.voltage, unit: VenusOS.Units_Volt_AC },
 			{ value: acPhase.current, unit: VenusOS.Units_Amp },
