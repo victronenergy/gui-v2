@@ -24,7 +24,7 @@ Page {
 			property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.Switch_Function_Dimmable
 			property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
 			property string status: Global.switches.switchStatusToText(statusItem.value)
-			property bool displayPercentage : isDimming && statusItem.value === VenusOS.Switch_Status_On
+			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.Switch_Status_On) || (statusItem.value === VenusOS.Switch_Status_Active))
 			property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
 			//property string groupText: groupNameItem.value.length>18 ? groupNameItem.value.substring(0,15)+"...": groupNameItem.value!=="" ? groupNameItem.value : "--"
 
