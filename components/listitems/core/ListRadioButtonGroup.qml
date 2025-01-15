@@ -141,6 +141,7 @@ ListNavigation {
 							}
 
 							width: parent.width
+							spacing: Theme.geometry_gradientList_spacing
 
 							PrimaryListLabel {
 								topPadding: 0

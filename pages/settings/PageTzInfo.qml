@@ -151,17 +151,22 @@ Page {
 						GradientListView {
 							id: tzListView
 
-							header: ListSwitch {
-								text: "UTC"
-								writeAccessLevel: VenusOS.User_AccessType_User
-								checked: tzData.city === text
-								onClicked: {
-									if (!checked) {
-										tzData.saveTimeZone("", text)
-										popTimer.start()
-									}
-								}
+							header: Column {
+								width: parent.width
+								bottomPadding: Theme.geometry_gradientList_spacing
 
+								ListSwitch {
+									text: "UTC"
+									writeAccessLevel: VenusOS.User_AccessType_User
+									checked: tzData.city === text
+									onClicked: {
+										if (!checked) {
+											tzData.saveTimeZone("", text)
+											popTimer.start()
+										}
+									}
+
+								}
 								Timer {
 									id: popTimer
 
@@ -169,6 +174,7 @@ Page {
 									onTriggered: if (!!Global.pageManager) Global.pageManager.popPage(root)
 								}
 							}
+
 							model: root._timeZoneModels
 
 							delegate: ListRadioButtonGroup {

@@ -62,11 +62,16 @@ Page {
 			}
 		}
 
-		footer: ListNavigation {
-			//% "GPS Settings"
-			text: qsTrId("settings_gps_settings")
-			onClicked: {
-				Global.pageManager.pushPage(gpsFormatSettingsComponent, {"title": text})
+		footer: Column {
+			width: parent.width
+			topPadding: Theme.geometry_gradientList_spacing
+
+			ListNavigation {
+				//% "GPS Settings"
+				text: qsTrId("settings_gps_settings")
+				onClicked: {
+					Global.pageManager.pushPage(gpsFormatSettingsComponent, {"title": text})
+				}
 			}
 
 			Component {

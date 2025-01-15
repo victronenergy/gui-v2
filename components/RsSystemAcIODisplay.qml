@@ -28,6 +28,8 @@ Loader {
 					: acOutL2.isValid ? "L2"
 					: "L1"  // i.e. if _phase.value === 0 || !_phase.isValid
 
+			spacing: Theme.geometry_gradientList_spacing
+
 			VeQuickItem { id: acOutL1; uid: root.serviceUid + "/Ac/Out/L1/P" }
 			VeQuickItem { id: acOutL2; uid: root.serviceUid + "/Ac/Out/L2/P" }
 			VeQuickItem { id: acOutL3; uid: root.serviceUid + "/Ac/Out/L3/P" }

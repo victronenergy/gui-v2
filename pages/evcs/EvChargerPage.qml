@@ -98,11 +98,6 @@ Page {
 				}
 			}
 
-			Item {
-				width: 1
-				height: Theme.geometry_gradientList_spacing
-			}
-
 			ListRadioButtonGroup {
 				id: chargeMode
 				//% "Charge mode"

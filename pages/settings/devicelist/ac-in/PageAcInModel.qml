@@ -45,6 +45,7 @@ ObjectModel {
 
 	Column {
 		width: parent ? parent.width : 0
+		spacing: Theme.geometry_gradientList_spacing
 
 		Repeater {
 			model: root.phaseNumbers
@@ -101,6 +102,7 @@ ObjectModel {
 
 	Column {
 		width: parent ? parent.width : 0
+		spacing: Theme.geometry_gradientList_spacing
 
 		Repeater {
 			model: root.phaseNumbers

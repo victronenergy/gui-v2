@@ -73,6 +73,7 @@ Page {
 						}
 
 						width: parent ? parent.width : 0
+						spacing: Theme.geometry_gradientList_spacing
 
 						SectionHeader {
 							text: {

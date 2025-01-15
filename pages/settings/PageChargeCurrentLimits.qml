@@ -33,6 +33,7 @@ Page {
 
 	GradientListView {
 		header: DvccCommonSettings {
+			bottomPadding: Theme.geometry_gradientList_spacing
 			width: parent.width
 		}
 

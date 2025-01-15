@@ -21,6 +21,6 @@ ListNavigation {
 			right: parent.right
 			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
 		}
-		height: parent.height - Theme.geometry_gradientList_spacing
+		height: parent.height
 	}
 }

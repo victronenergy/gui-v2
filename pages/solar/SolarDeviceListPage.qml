@@ -53,6 +53,7 @@ Page {
 					readonly property QtObject solarCharger: Global.solarChargers.model.deviceAt(model.index)
 
 					width: parent.width
+					spacing: Theme.geometry_gradientList_spacing
 
 					Repeater {
 						model: solarCharger.trackers

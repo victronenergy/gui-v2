@@ -35,14 +35,14 @@ Item {
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
 	visible: preferredVisible && userHasReadAccess
-	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
+	implicitHeight: preferredVisible && userHasReadAccess ? contentLayout.height : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
 		id: backgroundRect
 
 		z: -2
-		height: root.height - Theme.geometry_gradientList_spacing
+		height: root.height
 		color: Theme.color_listItem_background
 		visible: !root.flat
 		// TODO how to indicate read-only setting?

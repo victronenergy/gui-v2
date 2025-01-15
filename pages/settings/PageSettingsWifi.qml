@@ -24,6 +24,8 @@ Page {
 
 		header: Column {
 			width: parent.width
+			spacing: Theme.geometry_gradientList_spacing
+
 			ListSwitch {
 				//% "Create access point"
 				text: qsTrId("settings_wifi_create_ap")

@@ -12,6 +12,8 @@ Column {
 	property int cycle
 	property string bindPrefix
 
+	spacing: Theme.geometry_gradientList_spacing
+
 	PrimaryListLabel {
 		text: cycle == 0
 				//% "Active cycle"
