@@ -62,6 +62,7 @@ Page {
 				preferredVisible: restrictFeedIn.visible && restrictFeedIn.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+				from: 0
 				to: 300000
 				stepSize: 100
 			}
