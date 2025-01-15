@@ -62,6 +62,6 @@ Page {
 	}
 
 	GradientListView {
-		model: phaseRotationAlarm.allowed || temperatureAlarm.allowed || overloadAlarm.allowed ? validAlarmsModel : noAlarmsModel
+		model: phaseRotationAlarm.preferredVisible || temperatureAlarm.preferredVisible || overloadAlarm.preferredVisible ? validAlarmsModel : noAlarmsModel
 	}
 }

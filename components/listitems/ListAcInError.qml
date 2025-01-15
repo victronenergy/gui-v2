@@ -29,7 +29,7 @@ ListText {
 		}
 		return ""
 	}
-	allowed: productId.value === ProductInfo.ProductId_PvInverter_Fronius
+	preferredVisible: productId.value === ProductInfo.ProductId_PvInverter_Fronius
 			|| productId.value === ProductInfo.ProductId_EnergyMeter_CarloGavazzi
 
 

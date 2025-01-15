@@ -116,7 +116,7 @@ Page {
 					return qsTrId("vebus_device_press_to_start")
 				}
 				enabled: !isNaN(setChargerState.value) && !isNaN(vebusSubState.value) && !startTimer.running && !interruptTimer.running
-				allowed: root.isMulti
+				preferredVisible: root.isMulti
 
 				onClicked: {
 					if (firmwareVersion.value < 0x400) {
@@ -176,7 +176,7 @@ Page {
 					}
 				]
 				currentIndex: 1 // float state is always selected
-				allowed: false
+				preferredVisible: false
 				onOptionClicked: function(index) {
 					const localValue = optionModel[index].value
 					if (localValue !== VenusOS.VeBusDevice_ChargeState_InitializingCharger) {
@@ -222,7 +222,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_1_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn1"
-				allowed: dataItem.isValid && isMulti
+				preferredVisible: dataItem.isValid && isMulti
 			}
 
 			ListText {
@@ -230,7 +230,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_2_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn2"
-				allowed: dataItem.isValid && isMulti
+				preferredVisible: dataItem.isValid && isMulti
 			}
 
 			ListRadioButtonGroup {
@@ -238,7 +238,7 @@ Page {
 				text: qsTrId("vebus_device_ess_relay_test")
 				dataItem.uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 				enabled: false
-				allowed: dataItem.isValid && isEssOrHub4 && isMulti
+				preferredVisible: dataItem.isValid && isEssOrHub4 && isMulti
 				optionModel: [
 					//% "Completed"
 					{ display: qsTrId("vebus_device_ess_relay_test_completed"), value: 0 },
@@ -252,7 +252,7 @@ Page {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				allowed: masterHasNetworkQuality.isValid
+				preferredVisible: masterHasNetworkQuality.isValid
 				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": text})
 
 				Component {
@@ -271,7 +271,7 @@ Page {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
 											dataItem.uid: root.bindPrefix + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
-											allowed: dataItem.isValid
+											preferredVisible: dataItem.isValid
 										}
 									}
 								}

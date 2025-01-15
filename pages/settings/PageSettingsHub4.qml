@@ -57,7 +57,7 @@ Page {
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
 				{ display: qsTrId("settings_ess_external_meter"), value: 0 },
@@ -70,7 +70,7 @@ Page {
 			//% "Self-consumption from battery"
 			text: qsTrId("settings_ess_self_consumption_battery")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryUse"
-			allowed: withoutGridMeter.currentIndex === 0 && hasAcOutSystemItem.value === 1
+			preferredVisible: withoutGridMeter.currentIndex === 0 && hasAcOutSystemItem.value === 1
 			optionModel: [
 				//% "All system loads"
 				{ display: qsTrId("settings_ess_all_system_loads"), value: 0 },
@@ -83,7 +83,7 @@ Page {
 			//% "Multiphase regulation"
 			text: qsTrId("settings_ess_multiphase_regulation")
 			dataItem.uid: essMode.uid
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				 && batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			defaultSecondaryText: ""
 			optionModel: [
@@ -110,7 +110,7 @@ Page {
 			//% "Minimum SOC (unless grid fails)"
 			text: qsTrId("settings_ess_min_soc")
 			button.text: Global.ess.minimumStateOfCharge + "%"
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
@@ -127,7 +127,7 @@ Page {
 		ListQuantity {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			value: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0)
 			unit: VenusOS.Units_Percentage
@@ -139,7 +139,7 @@ Page {
 			//% "Battery life state"
 			text: qsTrId("settings_ess_batteryLife_state")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			enabled: false
 			optionModel: [
@@ -164,7 +164,7 @@ Page {
 			//% "Limit charge power"
 			text: qsTrId("settings_ess_limit_charge_power")
 			checked: maxChargePower.dataItem.value >= 0
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& !(maxChargeCurrentControl.isValid && maxChargeCurrentControl.value)
 
 			onClicked: {
@@ -181,7 +181,7 @@ Page {
 
 			//% "Maximum charge power"
 			text: qsTrId("settings_ess_max_charge_power")
-			allowed: maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
+			preferredVisible: maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			from: 0
@@ -195,7 +195,7 @@ Page {
 			//% "Limit inverter power"
 			text: qsTrId("settings_ess_limit_inverter_power")
 			checked: maxDischargePower.dataItem.value >= 0
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
@@ -212,7 +212,7 @@ Page {
 
 			//% "Maximum inverter power"
 			text: qsTrId("settings_ess_max_inverter_power")
-			allowed: maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
+			preferredVisible: maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			from: 0
@@ -223,7 +223,7 @@ Page {
 		ListSpinBox {
 			//% "Grid setpoint"
 			text: qsTrId("settings_ess_grid_setpoint")
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			stepSize: 10
@@ -232,7 +232,7 @@ Page {
 		ListNavigation {
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
@@ -243,7 +243,7 @@ Page {
 		ListNavigation {
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Peakshaving.qml", { title: text })
 			}
@@ -257,7 +257,7 @@ Page {
 					? qsTrId("settings_ess_active").arg(scheduleSoc.text)
 					  //% "Inactive"
 					: qsTrId("settings_ess_inactive")
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
@@ -291,7 +291,7 @@ Page {
 		ListNavigation {
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
-			allowed: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
+			preferredVisible: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
 					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
@@ -306,7 +306,7 @@ Page {
 
 		ListNavigation {
 			text: CommonWords.debug
-			allowed: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 
 			onClicked: {

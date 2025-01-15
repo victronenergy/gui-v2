@@ -35,7 +35,7 @@ Page {
 	GradientListView {
 		header: PrimaryListLabel {
 			horizontalAlignment: Text.AlignHCenter
-			allowed: !_devices.value
+			preferredVisible: !_devices.value
 			//% "No Modbus devices saved"
 			text: qsTrId("settings_modbus_no_devices_saved")
 		}

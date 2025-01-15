@@ -45,7 +45,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.devices
-				allowed: root._isVecan || root._isRvc
+				preferredVisible: root._isVecan || root._isRvc
 				onClicked: {
 					if (root._isVecan) {
 						Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevices.qml",
@@ -61,17 +61,17 @@ Page {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
 				dataItem.uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
-				allowed: root._isVecan
+				preferredVisible: root._isVecan
 			}
 
 			ListSpinBox {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
-				allowed: root._isVecan || root._isRvc
+				preferredVisible: root._isVecan || root._isRvc
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 
 				bottomContentChildren: PrimaryListLabel {
-					allowed: text.length > 0
+					preferredVisible: text.length > 0
 					color: Theme.color_font_secondary
 					text: root._isVecan
 						//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
@@ -102,7 +102,7 @@ Page {
 
 				//% "Check Unique id numbers"
 				text: qsTrId("settings_canbus_unique_id_choose")
-				allowed: root._isVecan || root._isRvc
+				preferredVisible: root._isVecan || root._isRvc
 				button.text: timer.running
 					? Utils.secondsToString(timer.remainingTime)
 					  //% "Press to check"
@@ -120,7 +120,7 @@ Page {
 						bottomPadding: 0
 						//% "There is another device connected with this unique number, please select a new number."
 						text: qsTrId("settings_canbus_unique_id_conflict")
-						allowed: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
+						preferredVisible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
 					},
 					PrimaryListLabel {
 						id: uniqueIdOkLabel
@@ -128,7 +128,7 @@ Page {
 						bottomPadding: 0
 						//% "OK: No other device is connected with this unique number."
 						text: qsTrId("settings_canbus_unique_id_ok")
-						allowed: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
+						preferredVisible: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
 					}
 				]
 

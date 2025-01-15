@@ -151,7 +151,7 @@ SwipeViewPage {
 
 				text: CommonWords.history
 				anchors.top: activeNotificationsView.count ? activeNotificationsView.bottom : noCurrentAlerts.bottom
-				allowed: notificationsView.count !== 0
+				preferredVisible: notificationsView.count !== 0
 			}
 		}
 

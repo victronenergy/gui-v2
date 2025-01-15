@@ -25,7 +25,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				valueTrue: 1
 				valueFalse: 4
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -38,7 +38,7 @@ Page {
 			ListSpinBox {
 				text: CommonWords.input_current_limit
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				stepSize: 0.1
@@ -80,7 +80,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -88,14 +88,14 @@ Page {
 				text: qsTrId("settings_accharger_current")
 				unit: VenusOS.Units_Amp
 				dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
 				//% "Low battery voltage alarm"
 				text: qsTrId("settings_accharger_low_battery_voltage_alarm")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -104,7 +104,7 @@ Page {
 				//% "High battery voltage alarm"
 				text: qsTrId("settings_accharger_high_battery_voltage_alarm")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListText {

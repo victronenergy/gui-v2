@@ -52,7 +52,7 @@ Page {
 				//% "Image type"
 				text: qsTrId("settings_firmware_image_type")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
-				allowed: largeImageSupport.value === 1
+				preferredVisible: largeImageSupport.value === 1
 				optionModel: [
 					//% "Normal"
 					{ display: qsTrId("settings_firmware_normal"), value: FirmwareUpdater.ImageTypeNormal },
@@ -96,7 +96,7 @@ Page {
 
 				enabled: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
 				}
@@ -111,7 +111,7 @@ Page {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
-				allowed: installUpdate.allowed
+				preferredVisible: installUpdate.preferredVisible
 					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}

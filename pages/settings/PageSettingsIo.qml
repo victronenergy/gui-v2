@@ -30,7 +30,7 @@ Page {
 			ListNavigation {
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
-				allowed: analogModel.rowCount > 0
+				preferredVisible: analogModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage(analogInputsComponent, {"title": text})
 				}
@@ -58,7 +58,7 @@ Page {
 			ListNavigation {
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
-				allowed: digitalModel.rowCount > 0
+				preferredVisible: digitalModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 				}

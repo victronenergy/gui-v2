@@ -31,7 +31,7 @@ Page {
 				text: qsTrId("vebus_device_bms_error")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: bindPrefix + "/Bms/Error"
-				allowed: dataItem.value === VenusOS.VeBusDevice_Bms_Type_VeBus
+				preferredVisible: dataItem.value === VenusOS.VeBusDevice_Bms_Type_VeBus
 			}
 		}
 	}

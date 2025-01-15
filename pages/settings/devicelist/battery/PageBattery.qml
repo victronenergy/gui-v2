@@ -25,7 +25,7 @@ Page {
 			ListRadioButtonGroup {
 				text: CommonWords.switch_mode
 				dataItem.uid: root.bindPrefix + "/Mode"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.off, value: 4, readOnly: true },
 					{ display: CommonWords.standby, value: 0xfc },
@@ -36,7 +36,7 @@ Page {
 			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.bindPrefix + "/State"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				secondaryText: {
 					if (!dataItem.isValid) {
 						return ""
@@ -84,7 +84,7 @@ Page {
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				secondaryText: BmsError.description(dataItem.value)
 			}
 
@@ -92,7 +92,7 @@ Page {
 				//% "Battery bank error"
 				text: qsTrId("battery_bank_error")
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				allowed: errorComm.isValid || errorVoltage.isValid || errorNrOfBatteries.isValid || errorInvalidConfig.isValid
+				preferredVisible: errorComm.isValid || errorVoltage.isValid || errorNrOfBatteries.isValid || errorInvalidConfig.isValid
 				secondaryText: {
 					if (errorComm.isValid && errorComm.value) {
 						//% "Communication error"
@@ -145,7 +145,7 @@ Page {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
-				allowed: root.isParallelBms
+				preferredVisible: root.isParallelBms
 				unit: VenusOS.Units_AmpHour
 			}
 
@@ -157,7 +157,7 @@ Page {
 				//% "System voltage"
 				text: qsTrId("devicelist_battery_system_voltage")
 				dataItem.uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.lynxparallel" + _n2kDeviceInstance.value, _n2kDeviceInstance.value) + "/Dc/0/Voltage"
-				allowed: !root.isParallelBms && batteryState.value === VenusOS.Battery_State_Pending
+				preferredVisible: !root.isParallelBms && batteryState.value === VenusOS.Battery_State_Pending
 				unit: VenusOS.Units_Volt_DC
 
 				VeQuickItem {
@@ -171,7 +171,7 @@ Page {
 				//% "Number of BMSes"
 				text: qsTrId("devicelist_battery_number_of_bmses")
 				dataItem.uid: root.bindPrefix + "/NumberOfBmses"
-				allowed: root.isParallelBms
+				preferredVisible: root.isParallelBms
 			}
 
 			ListQuantity {
@@ -184,14 +184,14 @@ Page {
 				//% "State of health"
 				text: qsTrId("battery_state_of_health")
 				dataItem.uid: root.bindPrefix + "/Soh"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
 
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
 
@@ -199,14 +199,14 @@ Page {
 				//% "Air temperature"
 				text: qsTrId("battery_air_temp")
 				dataItem.uid: root.bindPrefix + "/AirTemperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListQuantity {
 				//% "Starter voltage"
 				text: qsTrId("battery_starter_voltage")
 				dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
@@ -214,14 +214,14 @@ Page {
 				//% "Bus voltage"
 				text: qsTrId("battery_bus_voltage")
 				dataItem.uid: root.bindPrefix + "/BusVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
 				//% "Top section voltage"
 				text: qsTrId("battery_top_section_voltage")
-				allowed: midVoltage.isValid
+				preferredVisible: midVoltage.isValid
 				value: midVoltage.isValid && batteryVoltage.isValid ? batteryVoltage.value - midVoltage.value : NaN
 				unit: VenusOS.Units_Volt_DC
 			}
@@ -230,7 +230,7 @@ Page {
 				//% "Bottom section voltage"
 				text: qsTrId("battery_bottom_section_voltage")
 				value: midVoltage.value === undefined ? NaN : midVoltage.value
-				allowed: midVoltage.isValid
+				preferredVisible: midVoltage.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
@@ -238,7 +238,7 @@ Page {
 				//% "Mid-point deviation"
 				text: qsTrId("battery_mid_point_deviation")
 				dataItem.uid: root.bindPrefix + "/Dc/0/MidVoltageDeviation"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Percentage
 			}
 
@@ -246,7 +246,7 @@ Page {
 				//% "Consumed AmpHours"
 				text: qsTrId("battery_consumed_amphours")
 				dataItem.uid: root.bindPrefix + "/ConsumedAmphours"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_AmpHour
 			}
 
@@ -254,7 +254,7 @@ Page {
 				//% "Bus voltage"
 				text: qsTrId("battery_buss_voltage")
 				dataItem.uid: root.bindPrefix + "/BussVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Volt_DC
 			}
 
@@ -262,7 +262,7 @@ Page {
 				//% "Time-to-go"
 				text: qsTrId("battery_time_to_go")
 				dataItem.uid: root.bindPrefix + "/TimeToGo"
-				allowed: dataItem.seen
+				preferredVisible: dataItem.seen
 				secondaryText: Utils.secondsToString(dataItem.value)
 			}
 
@@ -277,7 +277,7 @@ Page {
 			ListNavigation {
 				//% "Details"
 				text: qsTrId("battery_details")
-				allowed: batteryDetails.hasAllowedItem
+				preferredVisible: batteryDetails.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "details": batteryDetails })
@@ -291,7 +291,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.alarms
-				allowed: !root.isParallelBms
+				preferredVisible: !root.isParallelBms
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -301,7 +301,7 @@ Page {
 			ListNavigation {
 				//% "Module level alarms"
 				text: qsTrId("battery_module_level_alarms")
-				allowed: moduleAlarmModel.rowCount > 0
+				preferredVisible: moduleAlarmModel.rowCount > 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, alarmModel: moduleAlarmModel })
@@ -310,7 +310,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.history
-				allowed: !isFiamm48TL && batteryHistory.hasAllowedItem
+				preferredVisible: !isFiamm48TL && batteryHistory.hasAllowedItem
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "history": batteryHistory })
@@ -324,7 +324,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.settings
-				allowed: hasSettings.value === 1
+				preferredVisible: hasSettings.value === 1
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettings.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -336,7 +336,7 @@ Page {
 
 				//% "Diagnostics"
 				text: qsTrId("battery_settings_diagnostics")
-				allowed: lastError.isValid
+				preferredVisible: lastError.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -350,7 +350,7 @@ Page {
 
 			ListNavigation {
 				text: lynxIonDiagnostics.text
-				allowed: isFiamm48TL
+				preferredVisible: isFiamm48TL
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/Page48TlDiagnostics.qml",
@@ -361,7 +361,7 @@ Page {
 			ListNavigation {
 				//% "Fuses"
 				text: qsTrId("battery_settings_fuses")
-				allowed: nrOfDistributors.isValid && nrOfDistributors.value > 0
+				preferredVisible: nrOfDistributors.isValid && nrOfDistributors.value > 0
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
@@ -377,7 +377,7 @@ Page {
 			ListNavigation {
 				//% "IO"
 				text: qsTrId("battery_settings_io")
-				allowed: allowToCharge.isValid
+				preferredVisible: allowToCharge.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonIo.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -392,7 +392,7 @@ Page {
 			ListNavigation {
 				//% "System"
 				text: qsTrId("battery_settings_system")
-				allowed: nrOfBatteries.isValid
+				preferredVisible: nrOfBatteries.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -415,7 +415,7 @@ Page {
 			ListNavigation {
 				//% "Parameters"
 				text: qsTrId("battery_settings_parameters")
-				allowed: cvl.isValid || ccl.isValid || dcl.isValid
+				preferredVisible: cvl.isValid || ccl.isValid || dcl.isValid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryParameters.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -443,7 +443,7 @@ Page {
 				//% "Press to redetect"
 				secondaryText: qsTrId("battery_press_to_redetect")
 				enabled: redetect.value === 0
-				allowed: redetect.isValid
+				preferredVisible: redetect.isValid
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					redetect.setValue(1)

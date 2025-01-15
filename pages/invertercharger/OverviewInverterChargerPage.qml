@@ -124,7 +124,7 @@ Page {
 
 			ListActiveAcInput {
 				bindPrefix: root.serviceUid
-				allowed: root.serviceType !== "inverter"
+				preferredVisible: root.serviceType !== "inverter"
 			}
 
 			ListQuantityGroup {
@@ -160,7 +160,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.ess
-				allowed: root.serviceType === "acsystem"
+				preferredVisible: root.serviceType === "acsystem"
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
 							{ "title": text, "bindPrefix": root.serviceUid })

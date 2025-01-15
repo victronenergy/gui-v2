@@ -53,7 +53,7 @@ Page {
 			ListPortField {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
-				allowed: dataItem.value !== 80
+				preferredVisible: dataItem.value !== 80
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/PortNumber"
 			}
 

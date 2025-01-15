@@ -302,7 +302,7 @@ Page {
 
 			textField.inputMethodHints: Qt.ImhDigitsOnly
 			textField.text: model.vrmInstance
-			allowed: model.deviceClass.length > 0 && model.vrmInstance >= 0
+			preferredVisible: model.deviceClass.length > 0 && model.vrmInstance >= 0
 			validateInput: function() {
 				const newVrmInstance = parseInt(textField.text)
 				if (isNaN(newVrmInstance)) {

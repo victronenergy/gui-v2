@@ -59,7 +59,7 @@ Page {
 				//% "Start when power is higher than"
 				text: qsTrId("start_when_power_is_higher_than")
 				onMinValueReached: minValueWarning()
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StartValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
@@ -70,7 +70,7 @@ Page {
 				id: quietHoursStartValue
 				text: CommonWords.start_value_during_quiet_hours
 				onMinValueReached: minValueWarning()
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
@@ -80,7 +80,7 @@ Page {
 			ListSpinBox {
 				id: startTime
 				text: CommonWords.start_after_the_condition_is_reached_for
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StartTimer"
 				suffix: "s"
 				stepSize: 1
@@ -91,7 +91,7 @@ Page {
 				//% "Stop when power is lower than"
 				text: qsTrId("stop_when_power_is_lower_than")
 				onMaxValueReached: maxValueWarning()
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StopValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
@@ -103,7 +103,7 @@ Page {
 				id: quietHoursStopValue
 				text: CommonWords.stop_value_during_quiet_hours
 				onMaxValueReached: maxValueWarning()
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
@@ -114,7 +114,7 @@ Page {
 			ListSpinBox {
 				id: stopTime
 				text: CommonWords.stop_after_the_condition_is_reached_for
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				dataItem.uid: bindPrefix + "/StopTimer"
 				suffix: "s"
 				stepSize: 1

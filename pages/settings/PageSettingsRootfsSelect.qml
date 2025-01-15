@@ -61,7 +61,7 @@ Page {
 					 //% "Press to boot"
 				   ? qsTrId("settings_firmware_press_to_boot")
 				   : CommonWords.disabled
-				allowed: root._switchingEnabled
+				preferredVisible: root._switchingEnabled
 
 				onClicked: {
 					if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
@@ -93,13 +93,13 @@ Page {
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
 				secondaryText: CommonWords.running_status
-				allowed: currentVersionItem.isValid && root._switchingEnabled
+				preferredVisible: currentVersionItem.isValid && root._switchingEnabled
 			}
 
 			ListText {
 				//% "Backup firmware not available"
 				text: qsTrId("settings_firmware_backup_not_available")
-				allowed: !currentVersion.visible && !backupVersion.visible && !root._rebooting
+				preferredVisible: !currentVersion.visible && !backupVersion.visible && !root._rebooting
 			}
 		}
 	}

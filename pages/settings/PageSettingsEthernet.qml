@@ -40,7 +40,7 @@ Page {
 			//% "MAC address"
 			text: qsTrId("settings_tcpip_mac_address")
 			secondaryText: networkServices.macAddress
-			allowed: !networkServices.wifi
+			preferredVisible: !networkServices.wifi
 		}
 
 		ListRadioButtonGroup {
@@ -109,7 +109,7 @@ Page {
 
 			//% "Link-local IP address"
 			text: qsTrId("settings_tcpip_link_local")
-			allowed: !networkServices.wifi
+			preferredVisible: !networkServices.wifi
 			dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 		}
 	}

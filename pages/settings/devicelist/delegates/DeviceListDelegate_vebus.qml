@@ -11,7 +11,7 @@ DeviceListDelegate {
 
 	// vebus devices may also show up as AC inputs or batteries, so ensure they do not
 	// appear multiple times in the list.
-	allowed: sourceModel === Global.inverterChargers.veBusDevices
+	preferredVisible: sourceModel === Global.inverterChargers.veBusDevices
 	secondaryText: Global.system.systemStateToText(state.value)
 
 	onClicked: {

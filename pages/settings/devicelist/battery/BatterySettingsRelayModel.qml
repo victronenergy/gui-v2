@@ -36,20 +36,20 @@ ObjectModel {
 			//% "Always open (don't use the relay)"
 			{ display: qsTrId("batterysettingrelay_always_open_dont_use_the_relay"), value: 3 },
 		]
-		allowed: dataItem.isValid
+		preferredVisible: dataItem.isValid
 	}
 
 	ListSwitch {
 		text: CommonWords.state
 		dataItem.uid: root.bindPrefix + "/Relay/0/State"
 		enabled: mode.dataItem.isValid && mode.dataItem.value === 2
-		allowed: dataItem.isValid
+		preferredVisible: dataItem.isValid
 	}
 
 	PrimaryListLabel {
 		//% "Note that changing the Low state-of-charge setting also changes the Time-to-go discharge floor setting in the battery menu."
 		text: qsTrId("batterysettingrelay_low_state_of_charge_setting_note")
-		allowed: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
+		preferredVisible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
 
 		VeQuickItem {
 			id: dischargeFloorLinkedToRelay
@@ -66,7 +66,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -78,7 +78,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -90,7 +90,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -102,7 +102,7 @@ ObjectModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -114,14 +114,14 @@ ObjectModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListSwitch {
 		//% "Fuse blown"
 		text: qsTrId("batterysettingrelay_fuse_blown")
 		dataItem.uid: root.bindPrefix + "/Settings/Relay/FuseBlown"
-		allowed: dataItem.isValid && showSetting(0)
+		preferredVisible: dataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -135,7 +135,7 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -149,6 +149,6 @@ ObjectModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		allowed: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
 	}
 }

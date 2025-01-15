@@ -251,7 +251,7 @@ Page {
 				//% "Remote support tunnel"
 				text: qsTrId("settings_remote_support_tunnel")
 				secondaryText: remotePort.secondaryText.length > 0 ? CommonWords.online : CommonWords.offline
-				allowed: remoteSupportOnOff.checked
+				preferredVisible: remoteSupportOnOff.checked
 			}
 
 			ListText {
@@ -260,7 +260,7 @@ Page {
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
-				allowed: remoteSupportOnOff.checked
+				preferredVisible: remoteSupportOnOff.checked
 			}
 
 			ListButton {
@@ -270,7 +270,7 @@ Page {
 				button.text: qsTrId("settings_logout_now")
 
 				// Cannot log out from GX devices, VRM or Unsecured profile with no password
-				allowed: Qt.platform.os === "wasm" && !BackendConnection.vrm
+				preferredVisible: Qt.platform.os === "wasm" && !BackendConnection.vrm
 						 && securityProfile.dataItem.value !== VenusOS.Security_Profile_Unsecured
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: Global.dialogLayer.open(logoutDialogComponent)

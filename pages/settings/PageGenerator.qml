@@ -52,12 +52,12 @@ Page {
 			//% "Autostart functionality"
 			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
 			dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 		}
 
 		ListItem {
 			text: CommonWords.manual_control
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 			content.children: [
 				GeneratorManualControlButton {
 					generatorUid: root.startStopBindPrefix
@@ -71,14 +71,14 @@ Page {
 			text: qsTrId("settings_page_relay_generator_run_time")
 			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
 			dataItem.uid: root.startStopBindPrefix + "/Runtime"
-			allowed: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
+			preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 		}
 
 		ListText {
 			id: state
 
 			text: CommonWords.state
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 			secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
 						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
 						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
@@ -93,7 +93,7 @@ Page {
 		}
 
 		ListGeneratorError {
-			allowed: root.startStopBindPrefix === root.generator0ServiceUid
+			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 			dataItem.uid: root.startStopBindPrefix + "/Error"
 		}
 

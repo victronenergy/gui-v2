@@ -39,7 +39,7 @@ Page {
 
 				enabled: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+				preferredVisible: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Offline)
 				}
@@ -49,7 +49,7 @@ Page {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"
-				allowed: installUpdate.allowed
+				preferredVisible: installUpdate.preferredVisible
 					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 

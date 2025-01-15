@@ -62,7 +62,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListActiveAcInput {
@@ -89,7 +89,7 @@ Page {
 			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("settings_multirs_total_yield")
-				allowed: root.trackerCount > 0
+				preferredVisible: root.trackerCount > 0
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
@@ -97,7 +97,7 @@ Page {
 			ListQuantity {
 				//% "System yield"
 				text: qsTrId("settings_multirs_system_yield")
-				allowed: root.trackerCount > 0
+				preferredVisible: root.trackerCount > 0
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
@@ -114,7 +114,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.daily_history
-				allowed: root.trackerCount > 0
+				preferredVisible: root.trackerCount > 0
 				onClicked: {
 					//: Multi RS historic PV data information. %1 = Multi RS name
 					//% "%1 History"
@@ -133,7 +133,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.overall_history
-				allowed: root.trackerCount > 0
+				preferredVisible: root.trackerCount > 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })

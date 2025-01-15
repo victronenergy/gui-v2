@@ -21,7 +21,7 @@ Page {
 				//% "Networked"
 				text: qsTrId("charger_networked")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 				secondaryText: dataItem.isValid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
 			}
 
@@ -69,7 +69,7 @@ Page {
 					}
 				}
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				allowed: dataItem.isValid && networkModeEnabled.dataItem.value
+				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value
 			}
 
 			ListText {
@@ -97,21 +97,21 @@ Page {
 					}
 				}
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
-				allowed: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
+				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
 			ListQuantity {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
-				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
+				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListText {
 				text: CommonWords.charge_current
 				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
-				allowed: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
+				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
 			ListText {
@@ -120,14 +120,14 @@ Page {
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: root.solarCharger.serviceUid + "/Settings/BmsPresent"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListButton {
 				//% "BMS control"
 				text: qsTrId("charger_network_bms_control")
 				button.text: CommonWords.reset
-				allowed: bmsControlled.dataItem.value === 1
+				preferredVisible: bmsControlled.dataItem.value === 1
 				onClicked: {
 					bmsControlled.dataItem.setValue(0)
 				}
@@ -141,7 +141,7 @@ Page {
 				font.pixelSize: Theme.font_size_caption
 				color: Theme.color_font_secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
-				allowed: bmsControlled.dataItem.value === 1
+				preferredVisible: bmsControlled.dataItem.value === 1
 
 				CP.IconImage {
 					id: infoIcon

@@ -91,12 +91,12 @@ Page {
 
 			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
-				allowed: role.currentValue === "pvinverter"
+				preferredVisible: role.currentValue === "pvinverter"
 			}
 
 			ListEvChargerPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
-				allowed: role.currentValue === "evcharger"
+				preferredVisible: role.currentValue === "evcharger"
 			}
 
 			/* EM24 settings */
@@ -104,7 +104,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
+				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				enabled: !em24Locked()
 				optionModel: [
@@ -120,14 +120,14 @@ Page {
 				id: em24SwitchPos
 				//% "Switch position"
 				text: qsTrId("ac-in-setup_switch_position")
-				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
+				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/SwitchPos"
 				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
 			}
 
 			PrimaryListLabel {
 				text: qsTr("Set the switch in an unlocked position to modify the settings.")
-				allowed: productId.value == ProductInfo.ProductId_EnergyMeter_Em24 && em24Locked()
+				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24 && em24Locked()
 			}
 
 			/* Smappee settings */
@@ -135,7 +135,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Phase configuration"
 				text: qsTrId("ac-in-setup_phase_configuration")
-				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
+				preferredVisible: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
 				optionModel: [
 					//% "Single phase"
@@ -149,7 +149,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.current_transformers
-				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
+				preferredVisible: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
@@ -159,7 +159,7 @@ Page {
 			ListNavigation {
 				//% "Devices"
 				text: qsTrId("ac-in-setup_devices")
-				allowed: productId.value == ProductInfo.ProductId_PowerBox_Smappee
+				preferredVisible: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml",
 							{ "bindPrefix": root.bindPrefix })

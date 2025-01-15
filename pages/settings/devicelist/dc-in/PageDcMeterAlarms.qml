@@ -15,7 +15,7 @@ Page {
 		header: PrimaryListLabel {
 			//% "No alarms"
 			text: qsTrId("dcmeter_alarms_no_alarms")
-			allowed: !lowVoltage.visible
+			preferredVisible: !lowVoltage.visible
 					 && !highVoltage.visible
 					 && !lowAuxVoltage.visible
 					 && !highAuxVoltage.visible
@@ -30,7 +30,7 @@ Page {
 				//% "Low voltage"
 				text: qsTrId("dcmeter_alarms_low_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -39,7 +39,7 @@ Page {
 				//% "High voltage"
 				text: qsTrId("dcmeter_alarms_high_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -48,7 +48,7 @@ Page {
 				//% "Low aux voltage"
 				text: qsTrId("dcmeter_alarms_low_aux_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowStarterVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -57,7 +57,7 @@ Page {
 				//% "High aux voltage"
 				text: qsTrId("dcmeter_alarms_high_aux_voltage")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighStarterVoltage"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -65,7 +65,7 @@ Page {
 
 				text: CommonWords.low_temperature
 				dataItem.uid: root.bindPrefix + "/Alarms/LowTemperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
@@ -73,7 +73,7 @@ Page {
 
 				text: CommonWords.high_temperature
 				dataItem.uid: root.bindPrefix + "/Alarms/HighTemperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 		}
 	}

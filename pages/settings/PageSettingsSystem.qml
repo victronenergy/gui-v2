@@ -49,7 +49,7 @@ Page {
 				//% "Enter name"
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				allowed: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
+				preferredVisible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 

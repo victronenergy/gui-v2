@@ -117,13 +117,13 @@ Page {
 				text: qsTrId("charger_load")
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/I"
 				unit: VenusOS.Units_Amp
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListText {
 				text: loadQuantityItem.text
 				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
-				allowed: dataItem.isValid && !loadQuantityItem.visible
+				preferredVisible: dataItem.isValid && !loadQuantityItem.visible
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
@@ -131,7 +131,7 @@ Page {
 				text: CommonWords.relay
 				checked: root.solarCharger.relayOn
 				secondaryText: CommonWords.onOrOff(root.solarCharger.relayOn)
-				allowed: root.solarCharger.relayValid
+				preferredVisible: root.solarCharger.relayValid
 				enabled: false
 			}
 
@@ -182,7 +182,7 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.history
-				allowed: root.solarCharger.history.valid
+				preferredVisible: root.solarCharger.history.valid
 				onClicked: {
 					//: Solar charger historic data information. %1 = charger name
 					//% "%1 History"

@@ -92,12 +92,12 @@ Page {
 				// Qt for WebAssembly doesn't support timezones,
 				// so we can't display the device-local date/time,
 				// as we don't know what it is.  Just hide the setting.
-				allowed: Qt.platform.os != "wasm"
+				preferredVisible: Qt.platform.os != "wasm"
 
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: allowed && Global.systemSettings.time.isValid
+				enabled: preferredVisible && Global.systemSettings.time.isValid
 
 				content.children: Row {
 					spacing: Theme.geometry_listItem_content_spacing

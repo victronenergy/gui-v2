@@ -126,7 +126,7 @@ ListNavigation {
 						//% "Day"
 						text: qsTrId("cgwacs_battery_schedule_day")
 						dataItem.uid: root._scheduleSource + "/Day"
-						allowed: itemEnabled.checked
+						preferredVisible: itemEnabled.checked
 						//% "Not set"
 						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
 						optionModel: root._dayModel
@@ -135,7 +135,7 @@ ListNavigation {
 					ListTimeSelector {
 						text: CommonWords.start_time
 						dataItem.uid: root._scheduleSource + "/Start"
-						allowed: itemEnabled.checked
+						preferredVisible: itemEnabled.checked
 					}
 
 					ListTimeSelector {
@@ -143,7 +143,7 @@ ListNavigation {
 						text: qsTrId("cgwacs_battery_schedule_duration")
 						button.text: dataItem.value > 0 ? Utils.secondsToString(dataItem.value) : "--"
 						dataItem.uid: root._scheduleSource + "/Duration"
-						allowed: itemEnabled.checked
+						preferredVisible: itemEnabled.checked
 						maximumHour: 9999
 					}
 
@@ -152,7 +152,7 @@ ListNavigation {
 
 						//% "SOC limit"
 						text: qsTrId("cgwacs_battery_schedule_soc_limit")
-						allowed: itemEnabled.checked
+						preferredVisible: itemEnabled.checked
 						dataItem.uid: root._scheduleSource + "/Soc"
 						suffix: "%"
 						from: 5
@@ -164,7 +164,7 @@ ListNavigation {
 						//% "Self-consumption above limit"
 						text: qsTrId("cgwacs_battery_schedule_self_consumption_above_limit")
 						dataItem.uid: root._scheduleSource + "/AllowDischarge"
-						allowed: itemEnabled.checked && socLimit.value < 100
+						preferredVisible: itemEnabled.checked && socLimit.value < 100
 						optionModel: [
 							//% "PV"
 							{ display: qsTrId("cgwacs_battery_schedule_pv"), value: 0 },

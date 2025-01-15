@@ -57,13 +57,13 @@ Page {
 
 				text: CommonWords.vrm_instance
 				dataItem.uid: root.bindPrefix + "/VrmInstance"
-				allowed: root.isLocalSender
+				preferredVisible: root.isLocalSender
 			}
 
 			ListNavigation {
 				//% "Configuration"
 				text: qsTrId("settings_rvc_configuration")
-				allowed: root.isLocalSender && userHasWriteAccess
+				preferredVisible: root.isLocalSender && userHasWriteAccess
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",

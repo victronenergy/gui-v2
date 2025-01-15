@@ -45,7 +45,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.temperature
 				dataItem.uid: root.bindPrefix + "/Temperature"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListQuantity {
@@ -53,19 +53,19 @@ Page {
 				text: qsTrId("devicelist_tanksensor_sensor_battery")
 				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
 				unit: VenusOS.Units_Volt_DC
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.low_level_alarm
 				dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListAlarm {
 				text: CommonWords.high_level_alarm
 				dataItem.uid: root.bindPrefix + "/Alarms/High/State"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListNavigation {

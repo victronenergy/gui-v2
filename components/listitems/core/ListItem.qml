@@ -30,14 +30,14 @@ Item {
 	readonly property int defaultImplicitHeight: contentLayout.height + Theme.geometry_gradientList_spacing
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
-	property bool allowed: true
+	property bool preferredVisible: true
 
 	property int bottomContentSizeMode: content.height > primaryLabel.height
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
-	visible: allowed && userHasReadAccess
-	implicitHeight: allowed && userHasReadAccess ? defaultImplicitHeight : 0
+	visible: preferredVisible && userHasReadAccess
+	implicitHeight: preferredVisible && userHasReadAccess ? defaultImplicitHeight : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {

@@ -17,7 +17,7 @@ Page {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
-				allowed: dataItem.isValid
+				preferredVisible: dataItem.isValid
 			}
 
 			ListText {
@@ -50,7 +50,7 @@ Page {
 					{ value: minCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 					{ value: maxCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
 				]
-				allowed: minCellVoltage.isValid && maxCellVoltage.isValid
+				preferredVisible: minCellVoltage.isValid && maxCellVoltage.isValid
 
 				VeQuickItem {
 					id: minCellVoltage
@@ -76,7 +76,7 @@ Page {
 						unit: Global.systemSettings.temperatureUnit
 					}
 				]
-				allowed: minCellTemperature.isValid && maxCellTemperature.isValid
+				preferredVisible: minCellTemperature.isValid && maxCellTemperature.isValid
 
 				VeQuickItem {
 					id: minCellTemperature
@@ -93,7 +93,7 @@ Page {
 				//% "Balancing"
 				text: qsTrId("lynxionsystem_balancing")
 				dataItem.uid: root.bindPrefix + "/Balancing"
-				allowed: dataItem.seen
+				preferredVisible: dataItem.seen
 				secondaryText: CommonWords.activeOrInactive(dataItem.value)
 			}
 
@@ -101,7 +101,7 @@ Page {
 				//% "Balancer status"
 				text: qsTrId("lynxionsystem_balancer_status")
 				dataItem.uid: root.bindPrefix + "/Balancer/Status"
-				allowed: dataItem.seen
+				preferredVisible: dataItem.seen
 				secondaryText: {
 					switch (dataItem.value) {
 					case VenusOS.Battery_Balancer_Balanced:

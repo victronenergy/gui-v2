@@ -46,7 +46,7 @@ Page {
 				//% "Auto-selected"
 				text: qsTrId("settings_system_auto_selected")
 				dataItem.uid: Global.system.serviceUid + "/AutoSelectedBatteryService"
-				allowed: batteryMonitorRadioButtons.optionModel !== undefined
+				preferredVisible: batteryMonitorRadioButtons.optionModel !== undefined
 					&& batteryMonitorRadioButtons.currentIndex >= 0
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
 			}

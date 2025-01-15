@@ -34,13 +34,13 @@ Page {
 				text: CommonWords.phase
 				//% "Multiphase"
 				secondaryText: qsTrId("page_settings_fronius_inverter_multiphase")
-				allowed: phaseCount > 1
+				preferredVisible: phaseCount > 1
 			}
 
 			ListRadioButtonGroup {
 				text: CommonWords.phase
 				dataItem.uid: bindPrefix + "/Phase"
-				allowed: phaseCount === 1
+				preferredVisible: phaseCount === 1
 				optionModel: [
 					//% "L1"
 					{ display: qsTrId("page_settings_fronius_inverter_l1"), value: 1 },
@@ -64,7 +64,7 @@ Page {
 				//% "Power limiting"
 				text: qsTrId("page_settings_fronius_inverter_power_limiting")
 				dataItem.uid: bindPrefix + "/EnableLimiter"
-				allowed: isActive.dataItem.value === 1 && limiterSupportedItem.value === 1
+				preferredVisible: isActive.dataItem.value === 1 && limiterSupportedItem.value === 1
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 }

@@ -139,13 +139,13 @@ Page {
 					? qsTrId("settings_tcpip_wired")
 					 //% "[Hidden]"
 					: root.network || qsTrId("settings_tcpip_hidden")
-			allowed: root._wifi
+			preferredVisible: root._wifi
 		}
 
 		ListTextField {
 			text: CommonWords.password
 			textField.maximumLength: 63
-			allowed: root.ready && root._wifi && root._disconnected
+			preferredVisible: root.ready && root._wifi && root._disconnected
 					 && !service.favorite && service.secured
 			writeAccessLevel: VenusOS.User_AccessType_User
 			saveInput: function() {
@@ -164,7 +164,7 @@ Page {
 			text: qsTrId("settings_tcpip_connect_to_network")
 			//% "Connect"
 			button.text: qsTrId("settings_tcpip_connect")
-			allowed: root.ready && root._wifi && root._disconnected
+			preferredVisible: root.ready && root._wifi && root._disconnected
 					 && (service.favorite || !service.secured)
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: performAction("connect")
@@ -177,7 +177,7 @@ Page {
 			text: qsTrId("settings_tcpip_forget_network")
 			//% "Forget"
 			button.text: qsTrId("settings_tcpip_forget")
-			allowed: root.ready && root._wifi && service.favorite
+			preferredVisible: root.ready && root._wifi && service.favorite
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)
 
@@ -198,7 +198,7 @@ Page {
 			text: CommonWords.signal_strength
 			value: service.strength
 			unit: VenusOS.Units_Percentage
-			allowed: root._wifi
+			preferredVisible: root._wifi
 		}
 	}
 }
