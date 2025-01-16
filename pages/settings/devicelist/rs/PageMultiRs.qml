@@ -116,11 +116,8 @@ Page {
 				text: CommonWords.daily_history
 				preferredVisible: root.trackerCount > 0
 				onClicked: {
-					//: Multi RS historic PV data information. %1 = Multi RS name
-					//% "%1 History"
-					const title = qsTrId("settings_multirs_history_name").arg(root.title)
 					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "title": title, "solarHistory": solarHistory })
+							{ "solarHistory": solarHistory })
 				}
 
 				SolarHistory {
