@@ -30,7 +30,7 @@ Page {
 		model: BackendConnection.type === BackendConnection.MqttSource ? mqttGpsModel : dbusOrMockGpsModel
 		delegate: ListNavigation {
 			text: (productName.isValid && vrmInstance.isValid)
-				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
+				  ? `${productName.value} [${vrmInstance.value}]`
 				  : "--"
 
 			onClicked: {
