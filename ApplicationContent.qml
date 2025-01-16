@@ -15,13 +15,6 @@ Item {
 
 	property var _inputComponent
 
-	readonly property bool _goToNotifications: Global.allPagesLoaded && Global.notifications.alarm
-	on_GoToNotificationsChanged: {
-		if (_goToNotifications) {
-			notificationLayer.popAndGoToNotifications()
-		}
-	}
-
 	PageManager {
 		id: pageManager
 		Component.onCompleted: Global.pageManager = pageManager
