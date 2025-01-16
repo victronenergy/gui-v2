@@ -279,4 +279,6 @@ Rectangle {
 			onClicked: Global.screenBlanker.setDisplayOff()
 		}
 	}
+
+	StatusBarNotificationIndicator { }
 }
