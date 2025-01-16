@@ -187,6 +187,13 @@ Rectangle {
 			height: Theme.geometry_status_bar_gsmModem_icon_height
 			anchors.verticalCenter: parent.verticalCenter
 		}
+
+		CP.IconImage {
+			anchors.verticalCenter: parent.verticalCenter
+			color: Theme.color_font_primary
+			source: "qrc:/images/notifications.svg"
+			visible: Global.notifications?.showNotificationBell ?? false
+		}
 	}
 
 	Row {
