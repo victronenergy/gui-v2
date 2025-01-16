@@ -61,8 +61,8 @@ Page {
 				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
-				decimals: 3
-				stepSize: 0.005
+				decimals: rawUnit.displayDecimals
+				stepSize: rawUnit.stepSize
 			}
 
 			ListSpinBox {
@@ -71,8 +71,8 @@ Page {
 				allowed: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
-				decimals: 3
-				stepSize: 0.005
+				decimals: rawUnit.displayDecimals
+				stepSize: rawUnit.stepSize
 			}
 
 			ListRadioButtonGroup {
@@ -160,6 +160,27 @@ Page {
 
 	VeQuickItem {
 		id: rawUnit
+
+		// The possible values here are not well defined. The doco says: "can be V, and probably also mA and R or O."
+		// At least one installation uses "cm".
+		readonly property int displayDecimals: {
+			switch (value) {
+			case "cm":
+				return 1
+			default:
+				return 3
+			}
+		}
+
+		readonly property real stepSize: {
+			switch (value) {
+			case "cm":
+				return 0.1
+			default:
+				return 0.005
+			}
+		}
+
 		uid: root.bindPrefix + "/RawUnit"
 	}
 }
