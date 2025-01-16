@@ -84,9 +84,10 @@ Page {
 			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
 
 			CP.ColorImage {
+				parent: delagate.primaryLabel
 				anchors {
-					left: delagate.primaryLabel.left
-					verticalCenter: delagate.primaryLabel.verticalCenter
+					left: parent.left
+					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"
 				color: Theme.color_green
