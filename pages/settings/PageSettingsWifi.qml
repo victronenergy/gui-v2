@@ -76,7 +76,7 @@ Page {
 		}
 
 		delegate: ListNavigation {
-			id: delagate
+			id: accessPointDelegate
 
 			//% "[Hidden]"
 			text: model.network ? model.network : qsTrId("settings_tcpip_hidden")
@@ -84,7 +84,7 @@ Page {
 			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
 
 			CP.ColorImage {
-				parent: delagate.primaryLabel
+				parent: accessPointDelegate.primaryLabel
 				anchors {
 					left: parent.left
 					verticalCenter: parent.verticalCenter
@@ -100,7 +100,7 @@ Page {
 				id: wifiPointComponent
 
 				PageSettingsTcpIp {
-					title: delagate.text
+					title: accessPointDelegate.text
 					service: model.service
 					network: model.network
 					tech: "wifi"
