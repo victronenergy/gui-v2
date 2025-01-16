@@ -290,6 +290,8 @@ QtObject {
 		setMockFroniusValue("ScanProgress", 0)
 
 		// GPS settings
+		setMockGpsValue("/ProductName", "GPS device")
+		setMockGpsValue("/DeviceInstance", 0)
 		setMockGpsValue("/Position/Latitude", -25.734968)
 		setMockGpsValue("/Position/Longitude", 134.489563)
 		setMockGpsValue("/Speed", 100)
