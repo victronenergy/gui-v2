@@ -10,13 +10,13 @@ Page {
 	id: root
 
 	VeQItemSortTableModel {
-		id: dbusGpsModel
+		id: dbusOrMockGpsModel
 
 		dynamicSortFilter: true
 		filterFlags: VeQItemSortTableModel.FilterOffline
 		filterRole: VeQItemTableModel.IdRole
 		filterRegExp: "^com\.victronenergy\.gps"
-		model: BackendConnection.type === BackendConnection.DBusSource ? Global.dataServiceModel : null
+		model: BackendConnection.type !== BackendConnection.MqttSource ? Global.dataServiceModel : null
 	}
 
 	VeQItemTableModel {
@@ -26,21 +26,8 @@ Page {
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
-	Component {
-		id: mockGpsModelComponent
-
-		ListModel {
-			ListElement { uid: "mock/com.victronenergy.gps" }
-		}
-	}
-
 	GradientListView {
-		model: BackendConnection.type === BackendConnection.DBusSource
-			   ? dbusGpsModel
-			   : BackendConnection.type === BackendConnection.MqttSource
-				 ? mqttGpsModel
-				 : mockGpsModelComponent.createObject(root)
-
+		model: BackendConnection.type === BackendConnection.MqttSource ? mqttGpsModel : dbusOrMockGpsModel
 		delegate: ListNavigation {
 			text: (productName.isValid && vrmInstance.isValid)
 				  ? "%1 [2]".arg(productName.value).arg(vrmInstance.value)
