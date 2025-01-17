@@ -54,15 +54,23 @@
          async function init()
          {
              const spinner = document.querySelector('#qtspinner');
-@@ -46,6 +74,7 @@
+@@ -41,11 +69,15 @@
+                 ui.style.display = 'block';
+             }
+
++            const searchParams = new URLSearchParams(window.location.search);
++            const mqtt = searchParams.get('mqtt') || (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt';
++
+             try {
+                 showUi(spinner);
                  status.innerHTML = 'Loading...';
- 
+
                  const instance = await qtLoad({
-+                    arguments: ['--mqtt', (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'],
++                    arguments: ['--mqtt', mqtt],
                      qt: {
                          onLoaded: () => showUi(screen),
                          onExit: exitData =>
-@@ -70,5 +99,22 @@
+@@ -70,5 +102,22 @@
      </script>
      <script src="venus-gui-v2.js"></script>
      <script type="text/javascript" src="qtloader.js"></script>
