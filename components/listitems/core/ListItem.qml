@@ -14,8 +14,8 @@ Item {
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
-	property bool down
-	property bool flat
+	property bool down: pressArea.containsPress
+	property bool flat: false
 	property alias backgroundRect: backgroundRect
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
@@ -34,9 +34,22 @@ Item {
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
+	signal clicked()
+
 	visible: preferredVisible && userHasReadAccess
 	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
+
+	ListPressArea {
+		id: pressArea
+
+		// this is the added one Mike!!
+		// Note: this doesn't fill the root - its height is less the gradient list spacing
+
+		anchors.fill: backgroundRect
+		radius: backgroundRect.radius
+		onClicked: root.clicked() // hmm but do we want this or not?
+	}
 
 	ListItemBackground {
 		id: backgroundRect

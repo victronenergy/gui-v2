@@ -15,17 +15,10 @@ Page {
 			component SwitchItem : ListItem {
 				id: switchItem
 
-				signal clicked
 				property alias checked: childSwitch.checked
 
 				content.children: Switch {
 					id: childSwitch
-					onClicked: switchItem.clicked()
-				}
-
-				ListPressArea {
-					anchors.fill: switchItem.backgroundRect
-					radius: switchItem.backgroundRect.radius
 					onClicked: switchItem.clicked()
 				}
 			}

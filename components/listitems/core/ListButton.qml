@@ -13,8 +13,6 @@ ListItem {
 	readonly property alias button: button
 	property alias secondaryText: button.text
 
-	signal clicked()
-
 	enabled: userHasWriteAccess
 
 	content.children: [

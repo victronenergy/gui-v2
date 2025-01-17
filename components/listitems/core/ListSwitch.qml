@@ -19,22 +19,6 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	signal clicked()
-
-	function _setChecked(c) {
-		if (updateDataOnClick) {
-			if (root.dataItem.uid.length > 0) {
-				if (invertSourceValue) {
-					dataItem.setValue(c ? valueFalse : valueTrue)
-				} else {
-					dataItem.setValue(c ? valueTrue : valueFalse)
-				}
-			}
-		}
-		clicked()
-	}
-
-	down: pressArea.containsPress
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	content.children: [
@@ -51,16 +35,20 @@ ListItem {
 
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
-			onClicked: root._setChecked(!checked)
+			onClicked: root.clicked()
 		}
 	]
 
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent.backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root._setChecked(!switchItem.checked)
+	onClicked: {
+		if (updateDataOnClick) {
+			if (root.dataItem.uid.length > 0) {
+				if (invertSourceValue) {
+					dataItem.setValue(c ? valueFalse : valueTrue)
+				} else {
+					dataItem.setValue(c ? valueTrue : valueFalse)
+				}
+			}
+		}
 	}
 
 	VeQuickItem {
