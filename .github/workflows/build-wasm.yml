@@ -1,128 +1,81 @@
 name: build-wasm
 run-name: ${{ github.actor }} is building wasm file
+
 on:
   push:
     paths-ignore:
       - '**/README.md'
+
 jobs:
   build-wasm-file:
-    env:
-      EMSCRIPTEN: 3.1.37
-      QT_VERSION: 6.6.3
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-    - name: Checkout repository and submodules
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: Check for a cached version
-      uses: actions/cache@v4
-      id: cached_qt_emscripten
-      with:
-        path: |
-          /opt/hostedtoolcache
-        # Adding version as cache key
-        key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}-libegl1
-    - name: Install dependencies
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      run: |
-       sudo apt-get update -yq &&
-       sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
-                                wget libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
-                                ninja-build dos2unix libegl1
-       sudo snap install yq
-    - name: Install libraries needed for building the wasm
-      run: |
-        sudo apt-get update -yq &&
-        sudo apt-get install -y libegl1
-    - name: Set up Python 3.x
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
-    - name: Install Qt ${{env.QT_VERSION}} linux desktop
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      uses: jurplel/install-qt-action@v3
-      with:
-        aqtversion: '==3.1.*'
-        version: "${{env.QT_VERSION}}"
-        host: 'linux'
-        target: 'desktop'
-        arch: 'gcc_64'
-        modules: 'qtwebsockets qtshadertools'
-        dir: '/opt/hostedtoolcache'
-    - name: Install QT ${{env.QT_VERSION}} linux wasm and cmake
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      uses: jurplel/install-qt-action@v3
-      with:
-        aqtversion: '==3.1.*'
-        version: "${{env.QT_VERSION}}"
-        host: 'linux'
-        target: 'desktop'
-        arch: 'wasm_singlethread'
-        modules: 'qtwebsockets qtshadertools'
-        tools: 'tools_cmake'
-        dir: '/opt/hostedtoolcache'
-    - name: patch Qt ${{env.QT_VERSION}}
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      run: |
-        echo patch Qt
-        ./.github/patches/qt-fixes.sh
-        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
-        dos2unix ${QTDIR}/plugins/platforms/{qtloader.js,wasm_shell.html}
-    - name: Install emscripten ${{env.EMSCRIPTEN}}
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      run: |
-        echo installing emscripten ${EMSCRIPTEN}
-        cd /opt/hostedtoolcache/
-        git clone https://github.com/emscripten-core/emsdk.git
-        cd emsdk
-        ./emsdk install ${EMSCRIPTEN}
-        ./emsdk activate ${EMSCRIPTEN}
-    - name: Install QtMQTT
-      if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-      run: |
-        echo installing QtMQTT
-        source "/opt/hostedtoolcache/emsdk/emsdk_env.sh"
-        git clone https://github.com/qt/qtmqtt.git
-        cd qtmqtt
-        git checkout $QT_VERSION
-        mkdir build-qtmqtt && cd build-qtmqtt
-        export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
-        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
-        ${QTDIR}/bin/qt-configure-module ..
-        cmake --build .
-        cmake --install . --prefix ${QTDIR} --verbose
-    - name: Build webassembly GUI
-      run: |
-        source "/opt/hostedtoolcache/emsdk/emsdk_env.sh"
-        export QTDIR=/opt/hostedtoolcache/Qt/$QT_VERSION/wasm_singlethread
-        export PATH=$PATH:/opt/hostedtoolcache/Qt/Tools/CMake/bin
-        mkdir build-wasm && cd build-wasm
-        ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
-        cmake --build .
-        cd -
-    - name: Patch and pack webassembly files
-      run: |
-        mkdir -p artifacts/wasm
-        mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
-        mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
-        grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
-        sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
-        cp .github/patches/Makefile artifacts/wasm/
-        cp LICENSE.txt artifacts/wasm/
-        cd artifacts
-        zip -r ../venus-webassembly.zip wasm
-    - name: Upload wasm files
-      uses: actions/upload-artifact@v4
-      with:
-        name: venus-webassembly
-        path: artifacts
-        retention-days: 5
-    - name: Release tagged wasm files
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        files: venus-webassembly.zip
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up environment variables from "scripts/.env" file
+        run: |
+          if [ -f "scripts/.env" ]; then
+              export $(grep -v '^#' "scripts/.env" | xargs)
+          else
+              echo "## scripts/.env file not found!"
+              exit 1
+          fi
+          echo "EMSCRIPTEN=$EMSCRIPTEN" >> $GITHUB_ENV
+          echo "QT_VERSION=$QT_VERSION" >> $GITHUB_ENV
+          echo "OUTPUTDIR=$OUTPUTDIR" >> $GITHUB_ENV
+
+      - name: Show fetched environment variables
+        run: |
+          echo "Loaded environment variables from \"scripts/.env\" file:"
+          echo "EMSCRIPTEN: ${{ env.EMSCRIPTEN }}"
+          echo "QT_VERSION: ${{ env.QT_VERSION }}"
+          echo "OUTPUTDIR: ${{ env.OUTPUTDIR }}"
+
+      - name: Check for a cached version
+        uses: actions/cache@v4
+        id: cached_qt_emscripten
+        with:
+          path: |
+            ${{ env.OUTPUTDIR }}
+          # Adding version as cache key
+          key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}-libegl1
+
+      - name: Install requirements
+        if: steps.cached_qt_emscripten.outputs.cache-hit != true
+        run: |
+          bash scripts/build-wasm-install-requirements.sh
+
+      - name: Install libraries needed for building the wasm
+        if: steps.cached_qt_emscripten.outputs.cache-hit == true
+        run: |
+          sudo apt-get update -yq
+          sudo apt-get install -y libegl1
+
+      - name: Build WebAssembly
+        run: |
+          bash scripts/build-wasm.sh
+
+      - name: Upload ZIP file
+        uses: actions/upload-artifact@v4
+        with:
+          name: venus-webassembly
+          path: build-wasm
+          retention-days: 5
+
+      - name: ZIP wasm files for release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cd build-wasm
+          zip -r ../venus-webassembly.zip wasm
+
+      - name: Release tagged wasm files
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: venus-webassembly.zip
