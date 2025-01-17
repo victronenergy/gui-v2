@@ -127,7 +127,7 @@ Page {
 						dataItem.uid: root.bindPrefix + "/CustomName"
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						allowed: dataItem.isValid
+						preferredVisible : dataItem.isValid
 						placeholderText: CommonWords.custom_name
 					}
 
@@ -215,7 +215,7 @@ Page {
 						dataItem.uid: root.bindPrefix + "/Channel/%1/CustomName".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						allowed: dataItem.isValid
+						preferredVisible : dataItem.isValid
 						placeholderText: CommonWords.custom_name
 					}
 					ListTextField {
@@ -224,7 +224,7 @@ Page {
 						dataItem.uid: root.bindPrefix + "/Channel/%1/GroupName".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						allowed: dataItem.isValid
+						preferredVisible : dataItem.isValid
 						placeholderText: "Group name" // CommonWords.group_name
 					}
 					ListRadioButtonGroup {
@@ -233,7 +233,7 @@ Page {
 						text: qsTrId("Function")
 						dataItem.uid: root.bindPrefix + "/Channel/%1/Function".arg(root.currentChannel)
 						enabled: userHasWriteAccess
-						allowed: defaultAllowed && dataItem.isValid
+						preferredVisible : dataItem.isValid
 						optionModel: validFunctionsItem.options
 					}
 
@@ -241,7 +241,7 @@ Page {
 						id:fuseListField
 						text: "Fuse rating"
 						enabled: userHasWriteAccess
-						allowed: dataItem.isValid
+						preferredVisible : dataItem.isValid
 						unit: VenusOS.Units_Amp
 						decimals: 1
 						dataItem.uid: root.bindPrefix + "/Channel/%1/FuseRating".arg(root.currentChannel)
