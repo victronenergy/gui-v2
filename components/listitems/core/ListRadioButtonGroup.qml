@@ -177,7 +177,7 @@ ListNavigation {
 								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
 								enabled: radioButton.enabled
-								backgroundRect.color: "transparent"
+								flat: true
 								preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 								validateInput: function() {
 									// Validate the password on Enter/Return, or when "Confirm" is
