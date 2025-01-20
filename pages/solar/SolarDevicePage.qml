@@ -107,26 +107,6 @@ Page {
 				]
 			}
 
-			/* Only available on 15A chargers */
-			/* If load is on and current present, show current.
-			 * Otherwise show the state of the load output. */
-			ListQuantity {
-				id: loadQuantityItem
-
-				//% "Load"
-				text: qsTrId("charger_load")
-				dataItem.uid: root.solarCharger.serviceUid + "/Load/I"
-				unit: VenusOS.Units_Amp
-				preferredVisible: dataItem.isValid
-			}
-
-			ListText {
-				text: loadQuantityItem.text
-				dataItem.uid: root.solarCharger.serviceUid + "/Load/State"
-				preferredVisible: dataItem.isValid && !loadQuantityItem.visible
-				secondaryText: CommonWords.yesOrNo(dataItem.value)
-			}
-
 			ListSwitch {
 				text: CommonWords.relay
 				checked: root.solarCharger.relayOn
@@ -135,49 +115,10 @@ Page {
 				enabled: false
 			}
 
-			ListNavigation {
-				// This is the number of active alarms, plus the active error (if present).
-				readonly property int itemCount: (lowBatteryAlarm.isValid && lowBatteryAlarm.value !== 0 ? 1 : 0)
-						+ (highBatteryAlarm.isValid && highBatteryAlarm.value !== 0 ? 1 : 0)
-						+ (highTemperatureAlarm.isValid && highTemperatureAlarm.value !== 0 ? 1 : 0)
-						+ (shortCircuitAlarm.isValid && shortCircuitAlarm.value !== 0 ? 1 : 0)
-						+ (root.solarCharger.errorCode > 0 ? 1 : 0)
-
-				//% "Alarms & Errors"
-				text: qsTrId("charger_alarms_alarms_and_errors")
-				secondaryText: enabled
-					? (itemCount > 0
-						  //: Shows number of items found. %1 = number of items
-						  //% "%1 found"
-						? qsTrId("charger_history_found_with_count").arg(itemCount)
-						: "")
-					: CommonWords.none_errors
-				secondaryLabel.color: itemCount ? Theme.color_critical : Theme.color_font_secondary
-
-				// Only enable if there is content on the alarms/errors page.
-				enabled: itemCount > 0 || root.solarCharger.errorModel.count
-
-				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerAlarmsAndErrorsPage.qml",
-							{ "title": text, "solarCharger": root.solarCharger })
-				}
-
-				VeQuickItem {
-					id: lowBatteryAlarm
-					uid: root.solarCharger.serviceUid + "/Alarms/LowVoltage"
-				}
-				VeQuickItem {
-					id: highBatteryAlarm
-					uid: root.solarCharger.serviceUid + "/Alarms/HighVoltage"
-				}
-				VeQuickItem {
-					id: highTemperatureAlarm
-					uid: root.solarCharger.serviceUid + "/Alarms/HighTemperature"
-				}
-				VeQuickItem {
-					id: shortCircuitAlarm
-					uid: root.solarCharger.serviceUid + "/Alarms/ShortCircuit"
-				}
+			ListText {
+				text: CommonWords.error
+				dataItem.uid: root.solarCharger.serviceUid + "/ErrorCode"
+				secondaryText: ChargerError.description(dataItem.value)
 			}
 
 			ListNavigation {
@@ -190,16 +131,31 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Networked operation"
-				text: qsTrId("charger_networked_operation")
+				id: productPageLink
+
+				readonly property string pageUrl: {
+					const serviceType = BackendConnection.serviceTypeFromUid(root.solarCharger.serviceUid)
+					if (serviceType === "solarcharger") {
+						return "/pages/solar/PageSolarCharger.qml"
+					} else if (serviceType === "multi") {
+						return "/pages/settings/devicelist/rs/PageMultiRs.qml"
+					} else if (serviceType === "inverter") {
+						return "/pages/settings/devicelist/inverter/PageInverter.qml"
+					} else {
+						return ""
+					}
+				}
+
+				text: CommonWords.product_page
+				preferredVisible: pageUrl.length > 0
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
-							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
+					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.solarCharger.serviceUid })
 				}
 			}
 
 			ListNavigation {
 				text: CommonWords.device_info_title
+				preferredVisible: productPageLink.pageUrl.length === 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })

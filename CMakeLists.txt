@@ -638,8 +638,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/PageSolarCharger.qml
     pages/solar/PageSolarParallelOperation.qml
     pages/solar/PvInverterPage.qml
-    pages/solar/SolarChargerAlarmsAndErrorsPage.qml
-    pages/solar/SolarChargerPage.qml
+    pages/solar/SolarDevicePage.qml
     pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarHistoryPage.qml
     pages/vebusdevice/PageAcSensor.qml
