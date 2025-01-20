@@ -37,37 +37,9 @@ ControlCard {
 
 		delegate: SwitchDelegate{
 			serviceUid: model.uid
-			//deviceName: model.deviceName
-			//channelIndex: model.channelIndex
-			//customGroup: model.customGp
 			title: model.name
 			width: switchesView.width / switchCol
 			height: switchesView.height/4
 		}
 	}
-
-	// Column {
-	// 	id: switchesView
-	// 		top: root.title.bottom
-	// 		topMargin: Theme.geometry_controlCard_status_bottomMargin
-	// 		left: parent.left
-	// 		leftMargin: Theme.geometry_controlCard_contentMargins
-	// 		right: parent.right
-	// 		rightMargin: Theme.geometry_controlCard_contentMargins
-	// 		bottom: parent.bottom
-	// 	}
-
-	// 	Repeater {
-	// 		model: root.model
-	// 		delegate: SwitchDelegate{
-	// 			serviceUid: model.uid
-	// 			//deviceName: model.deviceName
-	// 			//channelIndex: model.channelIndex
-	// 			//customGroup: model.customGp
-	// 			title: model.name
-	// 			width: switchesView.width
-	// 			height: switchesView.height/4
-	// 		}
-	// 	}
-	// }
 }

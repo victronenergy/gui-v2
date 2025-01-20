@@ -140,8 +140,8 @@ Item {
 				Text {
 					id: momentaryText
 					color: Theme.color_font_primary
-					visible: switchData._state.value
-					text: switchData._state.value ? CommonWords.on : CommonWords.off
+					//% "Press"
+					text: switchData._state.value ? CommonWords.on : qsTrId("Switches_Press")
 					font.pixelSize: parent.height * 0.6
 					anchors.centerIn: parent
 				}
