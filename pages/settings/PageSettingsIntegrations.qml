@@ -169,7 +169,7 @@ Page {
 			PrimaryListLabel {
 				//% "Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
 				text: qsTrId("settings_large_features_not_offically_supported")
-				visible: osLargeFeatures.visible
+				preferredVisible: osLargeFeatures.visible
 			}
 
 			ListSwitch {

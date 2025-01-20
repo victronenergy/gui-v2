@@ -92,6 +92,7 @@ SwipeViewPage {
 				secondaryText: qsTrId("settings_profilingtools_debugstatistics_appversion")
 				pageSource: "/pages/settings/debug/PageDebug.qml"
 				iconSource: "qrc:/images/icon_debug_32.png"
+				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 		}
 	}
