@@ -1,0 +1,4 @@
+.env    text=lf
+*.qml   text=crlf
+*.sh    text=lf
+*       text=auto
