@@ -159,13 +159,17 @@ Page {
 			}
 
 			SettingsListHeader {
+				id: osLargeFeatures
+
 				//% "Venus OS Large Features"
 				text: qsTrId("pagesettingsintegrations_venus_os_large_features")
+				visible: signalk.preferredVisible || nodeRed.preferredVisible
 			}
 
 			PrimaryListLabel {
 				//% "Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.\n\nDocumentation at https://ve3.nl/vol"
 				text: qsTrId("settings_large_features_not_offically_supported")
+				visible: osLargeFeatures.visible
 			}
 
 			ListSwitch {
@@ -184,6 +188,8 @@ Page {
 			}
 
 			ListNavigation {
+				id: nodeRed
+
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
 				preferredVisible: nodeRedModeItem.isValid
