@@ -176,7 +176,8 @@ Page {
 				text: "Overview"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						//width: (overviewList.width - (Theme.geometry_page_content_horizontalMargin * 2)) / 5
+						width: 110
 						Text {
 							text: batteryCellVoltageSum != "--" ? batteryCellVoltageSum + "V" : "--"
 							color: Theme.color_font_primary
@@ -191,7 +192,8 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						//width: (overviewList.width - (Theme.geometry_page_content_horizontalMargin * 2)) / 5
+						width: 110
 						Text {
 							text: batteryCellVoltageDiff != "--" ? batteryCellVoltageDiff + "V" : "--"
 							color: Theme.color_font_primary
@@ -206,7 +208,8 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						//width: (overviewList.width - (Theme.geometry_page_content_horizontalMargin * 2)) / 5
+						width: 110
 						Text {
 							text: batteryMaxCellVoltage != "--" ? batteryMaxCellVoltage + "V" : "--"
 							color: Theme.color_font_primary
@@ -221,7 +224,8 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						//width: (overviewList.width - (Theme.geometry_page_content_horizontalMargin * 2)) / 5
+						width: 110
 						Text {
 							text: batteryMinCellVoltage != "--" ? batteryMinCellVoltage + "V" : "--"
 							color: Theme.color_font_primary
@@ -243,7 +247,7 @@ Page {
 				text: "Cells 1-4"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_1 != "--" ? batteryVoltagesCell_1 + "V" : "--"
 							color: cellTextColor1
@@ -258,7 +262,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_2 != "--" ? batteryVoltagesCell_2 + "V" : "--"
 							color: cellTextColor2
@@ -273,7 +277,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_3 != "--" ? batteryVoltagesCell_3 + "V" : "--"
 							color: cellTextColor3
@@ -288,7 +292,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_4 != "--" ? batteryVoltagesCell_4 + "V" : "--"
 							color: cellTextColor4
@@ -310,7 +314,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_5 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_5 != "--" ? batteryVoltagesCell_5 + "V" : "--"
 							color: cellTextColor5
@@ -325,7 +329,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_6 != "--" ? batteryVoltagesCell_6 + "V" : "--"
 							color: cellTextColor6
@@ -340,7 +344,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_7 != "--" ? batteryVoltagesCell_7 + "V" : "--"
 							color: cellTextColor7
@@ -355,7 +359,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_8 != "--" ? batteryVoltagesCell_8 + "V" : "--"
 							color: cellTextColor8
@@ -377,7 +381,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_9 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_9 != "--" ? batteryVoltagesCell_9 + "V" : "--"
 							color: cellTextColor9
@@ -392,7 +396,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_10 != "--" ? batteryVoltagesCell_10 + "V" : "--"
 							color: cellTextColor10
@@ -407,7 +411,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_11 != "--" ? batteryVoltagesCell_11 + "V" : "--"
 							color: cellTextColor11
@@ -422,7 +426,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_12 != "--" ? batteryVoltagesCell_12 + "V" : "--"
 							color: cellTextColor12
@@ -444,7 +448,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_13 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_13 != "--" ? batteryVoltagesCell_13 + "V" : "--"
 							color: cellTextColor13
@@ -459,7 +463,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_14 != "--" ? batteryVoltagesCell_14 + "V" : "--"
 							color: cellTextColor14
@@ -474,7 +478,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_15 != "--" ? batteryVoltagesCell_15 + "V" : "--"
 							color: cellTextColor15
@@ -489,7 +493,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_16 != "--" ? batteryVoltagesCell_16 + "V" : "--"
 							color: cellTextColor16
@@ -511,7 +515,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_17 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_17 != "--" ? batteryVoltagesCell_17 + "V" : "--"
 							color: cellTextColor17
@@ -526,7 +530,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_18 != "--" ? batteryVoltagesCell_18 + "V" : "--"
 							color: cellTextColor18
@@ -541,7 +545,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_19 != "--" ? batteryVoltagesCell_19 + "V" : "--"
 							color: cellTextColor19
@@ -556,7 +560,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_20 != "--" ? batteryVoltagesCell_20 + "V" : "--"
 							color: cellTextColor20
@@ -578,7 +582,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_21 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_21 != "--" ? batteryVoltagesCell_21 + "V" : "--"
 							color: cellTextColor21
@@ -593,7 +597,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_22 != "--" ? batteryVoltagesCell_22 + "V" : "--"
 							color: cellTextColor22
@@ -608,7 +612,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_23 != "--" ? batteryVoltagesCell_23 + "V" : "--"
 							color: cellTextColor23
@@ -623,7 +627,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_24 != "--" ? batteryVoltagesCell_24 + "V" : "--"
 							color: cellTextColor24
@@ -645,7 +649,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_25 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_25 != "--" ? batteryVoltagesCell_25 + "V" : "--"
 							color: cellTextColor25
@@ -660,7 +664,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_26 != "--" ? batteryVoltagesCell_26 + "V" : "--"
 							color: cellTextColor26
@@ -675,7 +679,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_27 != "--" ? batteryVoltagesCell_27 + "V" : "--"
 							color: cellTextColor27
@@ -690,7 +694,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_28 != "--" ? batteryVoltagesCell_28 + "V" : "--"
 							color: cellTextColor28
@@ -712,7 +716,7 @@ Page {
 				preferredVisible: batteryVoltagesCell_29 != "--"
 				content.children: [
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_29 != "--" ? batteryVoltagesCell_29 + "V" : "--"
 							color: cellTextColor29
@@ -727,7 +731,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_30 != "--" ? batteryVoltagesCell_30 + "V" : "--"
 							color: cellTextColor30
@@ -742,7 +746,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_31 != "--" ? batteryVoltagesCell_31 + "V" : "--"
 							color: cellTextColor31
@@ -757,7 +761,7 @@ Page {
 						}
 					},
 					Column {
-						width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
+						width: 110
 						Text {
 							text: batteryVoltagesCell_32 != "--" ? batteryVoltagesCell_32 + "V" : "--"
 							color: cellTextColor32
@@ -777,44 +781,3 @@ Page {
 		}
 	}
 }
-
-
-/*
-
-Component {
-    id: cellColumn
-    Column {
-        property alias cellNumber: cellNumber.text
-        property alias cellVoltage: cellVoltage.text
-        property alias cellColor: cellVoltage.color
-
-        width: ( parent.width - Theme.geometry_page_content_horizontalMargin ) / 4
-        Text {
-            id: cellVoltage
-            font.pixelSize: 22
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        Text {
-            id: cellNumber
-            color: Theme.color_font_secondary
-            font.pixelSize: 16
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-    }
-}
-
-ListModel {
-    id: cellModel
-    // Add ListElements for each cell with properties: number, voltage, color
-}
-
-Repeater {
-    model: cellModel
-    delegate: cellColumn {
-        cellNumber: "Cell " + model.number
-        cellVoltage: model.voltage != "--" ? model.voltage + "V" : "--"
-        cellColor: model.color
-    }
-}
-
-*/
