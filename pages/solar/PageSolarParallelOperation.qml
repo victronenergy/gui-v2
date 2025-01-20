@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
-	property var solarCharger
+	required property string bindPrefix
 
 	GradientListView {
 		id: chargerListView
@@ -20,7 +20,7 @@ Page {
 				id: networkModeEnabled
 				//% "Networked"
 				text: qsTrId("charger_networked")
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
 				preferredVisible: dataItem.isValid
 				secondaryText: dataItem.isValid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
 			}
@@ -28,7 +28,7 @@ Page {
 			ListText {
 				text: CommonWords.network_status
 				secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkStatus"
+				dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
 			}
 
 			ListText {
@@ -68,7 +68,7 @@ Page {
 						return ""
 					}
 				}
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
 				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value
 			}
 
@@ -96,21 +96,21 @@ Page {
 						return ""
 					}
 				}
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/NetworkMode"
+				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
 				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
 			ListQuantity {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeVoltage"
+				dataItem.uid: root.bindPrefix + "/Link/ChargeVoltage"
 				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListText {
 				text: CommonWords.charge_current
-				dataItem.uid: root.solarCharger.serviceUid + "/Link/ChargeCurrent"
+				dataItem.uid: root.bindPrefix + "/Link/ChargeCurrent"
 				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
@@ -119,7 +119,7 @@ Page {
 				//% "BMS controlled"
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
-				dataItem.uid: root.solarCharger.serviceUid + "/Settings/BmsPresent"
+				dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 				preferredVisible: dataItem.isValid
 			}
 

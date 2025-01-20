@@ -193,8 +193,8 @@ Page {
 				//% "Networked operation"
 				text: qsTrId("charger_networked_operation")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarChargerNetworkedOperationPage.qml",
-							{ "title": text, "solarCharger": root.solarCharger })
+					Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
+							{ "title": text, "bindPrefix": root.solarCharger.serviceUid })
 				}
 			}
 

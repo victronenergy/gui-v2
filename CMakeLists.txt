@@ -635,9 +635,9 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/tz/TzIndianData.qml
     pages/settings/tz/TzPacificData.qml
     pages/battery/BatteryListPage.qml
+    pages/solar/PageSolarParallelOperation.qml
     pages/solar/PvInverterPage.qml
     pages/solar/SolarChargerAlarmsAndErrorsPage.qml
-    pages/solar/SolarChargerNetworkedOperationPage.qml
     pages/solar/SolarChargerPage.qml
     pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarHistoryPage.qml
