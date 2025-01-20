@@ -923,17 +923,17 @@
       <translation type="unfinished">Никогда</translation>
     </message>
     <message id="settings_1_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="101"/>
       <source>1 min</source>
       <translation>1 минута</translation>
     </message>
     <message id="settings_10_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="105"/>
       <source>10 min</source>
       <translation>10 минут</translation>
     </message>
     <message id="settings_30_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="109"/>
       <source>30 min</source>
       <translation>30 минут</translation>
     </message>
@@ -1046,58 +1046,58 @@
       <translation>Используемый датчик</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS-общее значение тока</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>SCS status</source>
       <translation>Статус SCS</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
       <source>Disabled (external control)</source>
       <translation>Отключено (Внешнее управление)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
       <source>Disabled (no chargers)</source>
       <translation>Отключено (без зарядных устройств)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
       <source>Disabled (no battery monitor)</source>
       <translation>Отключено (нет монитора батареи)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
       <source>Automatic selection</source>
       <translation>Автоматический выбор</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="146"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
       <source>No BMS control</source>
       <translation>BMS управление отсутствует</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Controlling BMS</source>
       <translation>Управляющая система BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="156"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>Недоступно, выберите другой вариант</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
       <source>Auto selected</source>
       <translation>Автоматический выбор</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="192"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">Нет</translation>
@@ -1439,7 +1439,7 @@
       <translation>Окончание тихих часов</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="312"/>
+      <location filename="../../components/PageGensetModel.qml" line="294"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
       <source>Run time and service</source>
       <translation>Время работы и обслуживание</translation>
@@ -1475,57 +1475,57 @@
       <translation>Сброс таймера обслуживания</translation>
     </message>
     <message id="settings_gps_settings">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="54"/>
       <source>GPS Settings</source>
       <translation>Настройки GPS</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="68"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>yyyy-mm-dd</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="73"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" E</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="76"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="79"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Единица скорости</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="90"/>
       <source>Kilometers per hour</source>
       <translation>Километры в час</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="92"/>
       <source>Meters per second</source>
       <translation>Метры в секунду</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="94"/>
       <source>Miles per hour</source>
       <translation>Мили в час</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="96"/>
       <source>Knots</source>
       <translation>Узлы</translation>
     </message>
@@ -1677,17 +1677,17 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
       <translation>Многофазное регулирование</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="91"/>
       <source>Total of all phases</source>
       <translation>Общее всех фаз</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Individual phase</source>
       <translation>Отдельная фаза</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1696,7 +1696,7 @@ CAUTION: Use only if required by the utility provider.</source>
 ВНИМАНИЕ: Используйте только в том случае, если этого требует поставщик коммунальных услуг.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1705,32 +1705,32 @@ Use unless prohibited by the utility provider.</source>
 Используйте, если это не запрещено поставщиком коммунальных услуг.</translation>
     </message>
     <message id="settings_ess_battery_life_sustain">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="155"/>
       <source>Sustain</source>
       <translation type="unfinished">Удержание</translation>
     </message>
     <message id="settings_ess_battery_life_recharge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="161"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="157"/>
       <source>Recharge</source>
       <translation type="unfinished">Зарядка</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="260"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
       <source>Scheduled charge levels</source>
       <translation type="unfinished">Запланированные уровни заряда</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="257"/>
       <source>Active (%1)</source>
       <translation type="unfinished">Активно (%1)</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
       <source>Inactive</source>
       <translation type="unfinished">Неактивно</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="293"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
@@ -1745,7 +1745,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Действующее ограничение состояния заряда батареи</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="251"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="245"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Ограничение пиковой нагрузки</translation>
@@ -1761,12 +1761,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Всегда</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="151"/>
       <source>Discharge disabled</source>
       <translation>Разряд отключен</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="153"/>
       <source>Slow charge</source>
       <translation>Медленный заряд</translation>
     </message>
@@ -1781,32 +1781,32 @@ Use unless prohibited by the utility provider.</source>
       <translation>Зарядка</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="169"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="165"/>
       <source>Limit charge power</source>
       <translation>Ограничение мощности заряда</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="183"/>
       <source>Maximum charge power</source>
       <translation>Максимальная мощность заряда</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="201"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="196"/>
       <source>Limit inverter power</source>
       <translation>Ограничение мощности инвертора</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="214"/>
       <source>Maximum inverter power</source>
       <translation>Максимальная мощность инвертора</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="225"/>
       <source>Grid setpoint</source>
       <translation>Точка установки сети</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
       <source>Grid feed-in</source>
       <translation>Подача сети</translation>
     </message>
@@ -1821,12 +1821,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Фотоэлектрический генератор постоянного тока - чрезмерная подача</translation>
     </message>
     <message id="settings_ess_limit_system_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4Feedin.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsHub4Feedin.qml" line="45"/>
       <source>Limit system feed-in</source>
       <translation>Система ограничения подачи</translation>
     </message>
     <message id="settings_ess_max_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4Feedin.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsHub4Feedin.qml" line="61"/>
       <source>Maximum feed-in</source>
       <translation>Максимальная подача</translation>
     </message>
@@ -1893,12 +1893,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Сигнализация CO2</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="175"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="179"/>
       <source>Signal K</source>
       <translation>Сервер Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="188"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="194"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation>Сервер Node-RED</translation>
@@ -1920,199 +1920,199 @@ Use unless prohibited by the utility provider.</source>
       <translation>ID портала VRM</translation>
     </message>
     <message id="settings_log_interval">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="98"/>
       <source>Log interval</source>
       <translation>Интервал логов</translation>
     </message>
     <message id="settings_5_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="103"/>
       <source>5 min</source>
       <translation>5 минут</translation>
     </message>
     <message id="settings_15_min">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="101"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="107"/>
       <source>15 min</source>
       <translation>15 минут</translation>
     </message>
     <message id="settings_1_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="111"/>
       <source>1 hour</source>
       <translation>1 час</translation>
     </message>
     <message id="settings_2_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="113"/>
       <source>2 hours</source>
       <translation>2 часа</translation>
     </message>
     <message id="settings_4_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="115"/>
       <source>4 hours</source>
       <translation>4 часов</translation>
     </message>
     <message id="settings_12_hr">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="117"/>
       <source>12 hours</source>
       <translation>12 часов</translation>
     </message>
     <message id="settings_1_day">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="119"/>
       <source>1 day</source>
       <translation>1 день</translation>
     </message>
     <message id="settings_https_enabled">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="129"/>
       <source>Use secure connection (HTTPS)</source>
       <translation>Используйте защищенное соединение (HTTPS)</translation>
     </message>
     <message id="settings_last_contact">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="135"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="141"/>
       <source>Last contact</source>
       <translation>Последний контакт</translation>
     </message>
     <message id="settings_connection_error_150">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="197"/>
       <source>#150 Unexpected response text</source>
       <translation>#150 Неожиданный текст ответа</translation>
     </message>
     <message id="settings_connection_error_151">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="200"/>
       <source>#151 Unexpected HTTP response</source>
       <translation>#151 Неожиданный HTTP-ответ</translation>
     </message>
     <message id="settings_connection_error_152">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="203"/>
       <source>#152 Connection timeout</source>
       <translation>#152 Таймаут соединения</translation>
     </message>
     <message id="settings_connection_error_153">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="200"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="206"/>
       <source>#153 Connection error</source>
       <translation>#153 Ошибка подключения</translation>
     </message>
     <message id="settings_connection_error_154">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="203"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="209"/>
       <source>#154 DNS failure</source>
       <translation>#154 Сбой DNS</translation>
     </message>
     <message id="settings_connection_error_155">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="212"/>
       <source>#155 Routing error</source>
       <translation>#155 Ошибка маршрутизации</translation>
     </message>
     <message id="settings_connection_error_156">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="209"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="215"/>
       <source>#156 VRM unavailable</source>
       <translation>#156 VRM недоступен</translation>
     </message>
     <message id="settings_connection_error_157">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="212"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="218"/>
       <source>#159 Unknown error</source>
       <translation>#159 Неизвестная ошибка</translation>
     </message>
     <message id="settings_vrm_error_message">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="235"/>
       <source>Error message: 
 %1</source>
       <translation>Сообщение об ошибке:
 %1</translation>
     </message>
     <message id="settings_no_contact_reboot">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="254"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="260"/>
       <source>Reboot device when no contact</source>
       <translation>Перезагрузка устройства если нет контакта</translation>
     </message>
     <message id="settings_vrm_no_contact_reset_delay">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="270"/>
       <source>No contact reset delay (hh:mm)</source>
       <translation>Нет задержки сброса контакта (чч:мм)</translation>
     </message>
     <message id="settings_vrm_storage_location">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="276"/>
       <source>Storage location</source>
       <translation>Где хранится</translation>
     </message>
     <message id="settings_vrm_no_buffer_active">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="272"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="278"/>
       <source>No buffer active</source>
       <translation>Нет активного буфера</translation>
     </message>
     <message id="settings_vrm_internal_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="281"/>
       <source>Internal storage</source>
       <translation>Внутренний накопитель</translation>
     </message>
     <message id="settings_vrm_transferring">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="277"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="283"/>
       <source>Transferring</source>
       <translation>Передача</translation>
     </message>
     <message id="settings_vrm_external_storage">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="285"/>
       <source>External storage</source>
       <translation>Внешнее накопитель</translation>
     </message>
     <message id="settings_vrm_unknown_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="288"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="294"/>
       <source>Unknown error</source>
       <translation type="unfinished">Неизвестная ошибка</translation>
     </message>
     <message id="settings_vrm_no_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="291"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="297"/>
       <source>No Error</source>
       <translation>Без ошибок</translation>
     </message>
     <message id="settings_vrm_no_space_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="293"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="299"/>
       <source>No space left on storage</source>
       <translation>Места на устройстве хранения не осталось</translation>
     </message>
     <message id="settings_vrm_io_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="301"/>
       <source>IO error</source>
       <translation>Ошибка ввода/вывода</translation>
     </message>
     <message id="settings_vrm_mount_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="297"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="303"/>
       <source>Mount error</source>
       <translation>Ошибка монтирования</translation>
     </message>
     <message id="settings_vrm_storage_contains_firmware_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="299"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="305"/>
       <source>Contains firmware image. Not using.</source>
       <translation>Содержит файл прошивки. Не используется.</translation>
     </message>
     <message id="settings_vrm_storage_not_writable_error">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="307"/>
       <source>SD card / USB stick not writable</source>
       <translation>SD карта / USB флешка без возможности записи</translation>
     </message>
     <message id="settings_vrm_free_disk_space">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="316"/>
       <source>Free disk space</source>
       <translation>Свободное место на диске</translation>
     </message>
     <message id="settings_vrm_byte">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="319"/>
       <source>byte</source>
       <translation>байт</translation>
     </message>
     <message id="settings_vrm_bytes">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="315"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="321"/>
       <source>bytes</source>
       <translation>байт</translation>
     </message>
     <message id="settings_vrm_stored_records">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="323"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="329"/>
       <source>Stored records</source>
       <translation>Сохраненные записи</translation>
     </message>
     <message id="settings_vrm_records_count">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="326"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="332"/>
       <source>%1 records</source>
       <translation>%1 запись</translation>
     </message>
     <message id="settings_vrm_oldest_record_age">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="334"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="340"/>
       <source>Oldest record age</source>
       <translation>Самая ранняя дата записи</translation>
     </message>
@@ -2455,22 +2455,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>Зафиксировано</translation>
     </message>
     <message id="settings_tcpip_netmask">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="85"/>
       <source>Netmask</source>
       <translation>Маска сети</translation>
     </message>
     <message id="settings_tcpip_gateway">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="93"/>
       <source>Gateway</source>
       <translation>Шлюз</translation>
     </message>
     <message id="settings_tcpip_dns_server">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="101"/>
       <source>DNS server</source>
       <translation>DNS сервер</translation>
     </message>
     <message id="settings_tcpip_link_local">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="111"/>
       <source>Link-local IP address</source>
       <translation>Локальный IP-адрес</translation>
     </message>
@@ -2772,20 +2772,8 @@ Use unless prohibited by the utility provider.</source>
       <extracomment>Shows number of items found. %1 = number of items</extracomment>
       <translation>%1 найден</translation>
     </message>
-    <message id="charger_history_name">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="189"/>
-      <source>%1 History</source>
-      <extracomment>Solar charger historic data information. %1 = charger name</extracomment>
-      <translation type="unfinished">%1 История</translation>
-    </message>
-    <message id="settings_multirs_history_name">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="121"/>
-      <source>%1 History</source>
-      <extracomment>Multi RS historic PV data information. %1 = Multi RS name</extracomment>
-      <translation>%1 История</translation>
-    </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="197"/>
+      <location filename="../../pages/solar/SolarChargerPage.qml" line="194"/>
       <source>Networked operation</source>
       <translation>Работа по сети</translation>
     </message>
@@ -3971,52 +3959,52 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Устройства</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="180"/>
+      <location filename="../../components/PageGensetModel.qml" line="162"/>
       <source>AC</source>
       <translation>Переменный ток</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="219"/>
+      <location filename="../../components/PageGensetModel.qml" line="201"/>
       <source>Engine</source>
       <translation>Двигатель</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="232"/>
+      <location filename="../../components/PageGensetModel.qml" line="214"/>
       <source>Speed</source>
       <translation type="unfinished">Скорость</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="239"/>
+      <location filename="../../components/PageGensetModel.qml" line="221"/>
       <source>Load</source>
       <translation type="unfinished">Нагрузка</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="263"/>
+      <location filename="../../components/PageGensetModel.qml" line="245"/>
       <source>Coolant temperature</source>
       <translation>Температура хладагента</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="271"/>
+      <location filename="../../components/PageGensetModel.qml" line="253"/>
       <source>Exhaust temperature</source>
       <translation>Температура выхлопа</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="278"/>
+      <location filename="../../components/PageGensetModel.qml" line="260"/>
       <source>Winding temperature</source>
       <translation>Температура обмотки</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="292"/>
+      <location filename="../../components/PageGensetModel.qml" line="274"/>
       <source>Starter battery voltage</source>
       <translation>Напряжение стартерной батареи</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="300"/>
+      <location filename="../../components/PageGensetModel.qml" line="282"/>
       <source>Number of starts</source>
       <translation>Количество стартов</translation>
     </message>
     <message id="genset_bms_control">
-      <location filename="../../components/PageGensetModel.qml" line="391"/>
+      <location filename="../../components/PageGensetModel.qml" line="373"/>
       <source>BMS control</source>
       <translation type="unfinished">BMS управление</translation>
     </message>
@@ -4111,7 +4099,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Эта настройка отключена, если подключена система VE.Bus BMS.</translation>
     </message>
     <message id="settings_multirs_ac_in_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="172"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="169"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC в %1</translation>
@@ -4257,7 +4245,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Датчик напряжения</translation>
     </message>
     <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="219"/>
       <source>Total PV Power</source>
       <translation>Общая фотоэлектрическая мощность</translation>
     </message>
@@ -5027,7 +5015,7 @@ Do you want to continue?</source>
       <translation>без нагрузки</translation>
     </message>
     <message id="scheduled_charge_inactive">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="71"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="70"/>
       <source>Inactive</source>
       <translation>Неактивно</translation>
     </message>
@@ -5719,7 +5707,7 @@ Do you want to continue?</source>
       <translation type="unfinished">фотоэлектрический</translation>
     </message>
     <message id="settings_multirs_pv">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="202"/>
       <source>PV</source>
       <translation>фотоэлектрический</translation>
     </message>
@@ -6535,7 +6523,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
     <message id="settings_rs_ess_dess">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="97"/>
       <source>Dynamic ESS</source>
       <translation>Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
@@ -6638,7 +6626,7 @@ Do you want to continue?</source>
       <translation>Версия приложения</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="255"/>
+      <location filename="../../components/PageGensetModel.qml" line="237"/>
       <source>Oil temperature</source>
       <translation>Температура масла</translation>
     </message>
@@ -6839,23 +6827,23 @@ Do you want to continue?</source>
       <translation>Только критические нагрузки</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="111"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation type="unfinished">Минимум SOC разряда (без неисправности сети)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="129"/>
       <source>Active SOC limit</source>
       <translation type="unfinished">Действующее ограничение состояния заряда батареи</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="140"/>
       <source>Battery life state</source>
       <oldsource>BatteryLife state</oldsource>
       <translation>Срок службы батареи</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="186"/>
       <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
       <translation>Доступ к сигналу K на сайте http://venus.local:3000 и через VRM.</translation>
@@ -6879,7 +6867,7 @@ Do you want to continue?</source>
       <translation>Состояние системы</translation>
     </message>
     <message id="settings_vrm_device_instances">
-      <location filename="../../pages/settings/PageSettingsVrm.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="92"/>
       <source>VRM device instances</source>
       <oldsource>VRM Device Instances</oldsource>
       <translation>Экземпляры устройств VRM</translation>
@@ -7418,18 +7406,18 @@ See documentation for further information.</oldsource>
       <translation>Целевой SOC</translation>
     </message>
     <message id="settings_multirs_ac_out_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="179"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="176"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>Выход переменного тока %1</translation>
     </message>
     <message id="settings_multirs_trackers">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="229"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="226"/>
       <source>Trackers</source>
       <translation>Счетчик</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="106"/>
       <source>RS devices</source>
       <translation>Устройства RS</translation>
     </message>
@@ -7556,43 +7544,43 @@ See documentation for further information.</oldsource>
       <translation>На генераторной установке отключена функция дистанционного запуска. Теперь GX не сможет запустить или остановить генераторную установку. Включите ее на панели управления генераторной установки.</translation>
     </message>
     <message id="ac-in-genset_auto_start_functionality">
-      <location filename="../../components/PageGensetModel.qml" line="59"/>
+      <location filename="../../components/PageGensetModel.qml" line="41"/>
       <source>Auto start functionality</source>
       <translation>Функция автозапуска</translation>
     </message>
     <message id="settings_page_genset_generator_run_time">
-      <location filename="../../components/PageGensetModel.qml" line="95"/>
+      <location filename="../../components/PageGensetModel.qml" line="77"/>
       <source>Current run time</source>
       <translation type="unfinished">Текущее время работы</translation>
     </message>
     <message id="ac-in-genset_auto_control_status">
-      <location filename="../../components/PageGensetModel.qml" line="103"/>
+      <location filename="../../components/PageGensetModel.qml" line="85"/>
       <source>Control status</source>
       <translation>Состояние управления</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="129"/>
+      <location filename="../../components/PageGensetModel.qml" line="111"/>
       <source>Genset status</source>
       <translation>Состояние генераторной установки</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="207"/>
+      <location filename="../../components/PageGensetModel.qml" line="189"/>
       <source>Remote start mode</source>
       <translation>Режим дистанционного запуска</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="247"/>
+      <location filename="../../components/PageGensetModel.qml" line="229"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>Давление масла</translation>
     </message>
     <message id="settings_rs_scheduled_charge_levels">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="65"/>
       <source>Scheduled charge levels</source>
       <translation>Запланированные уровни заряда</translation>
     </message>
     <message id="scheduled_charge_active">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="68"/>
       <source>Active (%1)</source>
       <translation>Активно (%1)</translation>
     </message>
@@ -7639,7 +7627,7 @@ See documentation for further information.</oldsource>
       <translation>Подтверждение предупреждений</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="122"/>
+      <location filename="../../components/PageGensetModel.qml" line="104"/>
       <source>Control error code</source>
       <translation>Код ошибки управления</translation>
     </message>
@@ -7847,37 +7835,37 @@ See documentation for further information.</oldsource>
       <translation>Текущее время работы</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="140"/>
+      <location filename="../../components/PageGensetModel.qml" line="122"/>
       <source>Genset error codes</source>
       <translation>Коды ошибок генераторной установки</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="285"/>
+      <location filename="../../components/PageGensetModel.qml" line="267"/>
       <source>Heatsink temperature</source>
       <translation>Температура радиатора</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="351"/>
+      <location filename="../../components/PageGensetModel.qml" line="333"/>
       <source>Charge voltage</source>
       <translation type="unfinished">Напряжение заряда</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="362"/>
+      <location filename="../../components/PageGensetModel.qml" line="344"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>В настоящее время напряжение заряда контролируется системой BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="368"/>
+      <location filename="../../components/PageGensetModel.qml" line="350"/>
       <source>Charge current limit</source>
       <translation>Ограничение тока заряда</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="378"/>
+      <location filename="../../components/PageGensetModel.qml" line="360"/>
       <source>BMS Controlled</source>
       <translation>Контролируется BMS</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="384"/>
+      <location filename="../../components/PageGensetModel.qml" line="366"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Управление BMS включается автоматически при наличии BMS. Сбросьте настройку, если конфигурация системы изменилась или если BMS отсутствует.</translation>
     </message>
@@ -8055,7 +8043,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Пользовательский URL-адрес сервера (Headscale)</translation>
     </message>
     <message id="genset_controller_requires_helper_relay">
-      <location filename="../../components/PageGensetModel.qml" line="53"/>
+      <location filename="../../components/PageGensetModel.qml" line="35"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
       <translation>Для управления этой генераторной установкой требуется вспомогательное реле, но вспомогательное реле не настроено. Пожалуйста, настройте реле 1 в разделе Настройки → Реле на "Подключенное вспомогательное реле генераторной установки".</translation>
     </message>
@@ -8132,7 +8120,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Запуск и остановка генератора на основе настроенных условий автозапуска.</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="324"/>
+      <location filename="../../components/PageGensetModel.qml" line="306"/>
       <source>DC genset settings</source>
       <translation>Настройки генераторной установки постоянного тока</translation>
     </message>
@@ -8375,27 +8363,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Вы уверены, что хотите сбросить Node-RED к заводским настройкам? Это приведет к удалению всех ваших потоков.</translation>
     </message>
     <message id="settings_connection_status">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="179"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="185"/>
       <source>Connection status</source>
       <translation>Состояние соединения</translation>
     </message>
     <message id="settings_connection_error_https_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="226"/>
       <source>Connection status (HTTPS channel)</source>
       <translation>Состояние соединения (канал HTTPS)</translation>
     </message>
     <message id="settings_connection_error_http_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="228"/>
       <source>Connection status (HTTP channel)</source>
       <translation>Состояние соединения (канал HTTP)</translation>
     </message>
     <message id="settings_connection_error_realtime_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="246"/>
       <source>Connection status (MQTT Real-time channel)</source>
       <translation>Состояние соединения (канал реального времени MQTT)</translation>
     </message>
     <message id="settings_connection_error_rpc_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="247"/>
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="253"/>
       <source>Connection status (MQTT RPC channel)</source>
       <translation>Состояние соединения (канал MQTT RPC)</translation>
     </message>
@@ -8666,11 +8654,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
       <translation>Этот фотоэлектрический инвертор поддерживает ограничение мощности. Отключите эту настройку, если она мешает нормальной работе.</translation>
     </message>
-    <message id="settings_vrm_portal_mode">
-      <location filename="../../pages/settings/PageSettingsVrm.qml" line="16"/>
-      <source>VRM Portal mode</source>
-      <translation>Режим портала VRM</translation>
-    </message>
     <message id="direction_north">
       <location filename="../../src/units.cpp" line="449"/>
       <source>N</source>
@@ -8712,12 +8695,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>NW</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>Управляемая батарея управляет всеми Multis и Quattros</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="229"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>Если эта функция включена, управляемый аккумулятор контролирует все Multis и Quattros. Если отключено, управляется только устройство на встроенном порту. Дополнительные сведения см. в документации.</translation>
     </message>
@@ -8802,12 +8785,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Сервер Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="165"/>
       <source>Venus OS Large Features</source>
       <translation>Функции устройства Venus OS Large</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="171"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
 Documentation at https://ve3.nl/vol</source>
