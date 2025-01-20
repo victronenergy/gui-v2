@@ -114,7 +114,11 @@ jobs:
         sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
         cp .github/patches/Makefile artifacts/wasm/
         cp LICENSE.txt artifacts/wasm/
-        cd artifacts
+        cd artifacts/wasm
+        gzip -k venus-gui-v2.wasm
+        sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
+        rm venus-gui-v2.wasm
+        cd ..
         zip -r ../venus-webassembly.zip wasm
     - name: Upload wasm files
       uses: actions/upload-artifact@v4

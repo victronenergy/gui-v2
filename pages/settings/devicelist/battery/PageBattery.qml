@@ -142,6 +142,13 @@ Page {
 			}
 
 			ListQuantity {
+				text: "Current (last 5 minutes avg.)"
+				dataItem.uid: root.bindPrefix + "/CurrentAvg"
+				preferredVisible: dataItem.isValid
+				unit: VenusOS.Units_Amp
+			}
+
+			ListQuantity {
 				//% "Total Capacity"
 				text: qsTrId("devicelist_battery_total_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
@@ -191,6 +198,13 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+				preferredVisible: dataItem.isValid
+				unit: Global.systemSettings.temperatureUnit
+			}
+
+			ListTemperature {
+				text: "MOSFET Temperature"
+				dataItem.uid: root.bindPrefix + "/System/MOSTemperature"
 				preferredVisible: dataItem.isValid
 				unit: Global.systemSettings.temperatureUnit
 			}
@@ -266,6 +280,54 @@ Page {
 				secondaryText: Utils.secondsToString(dataItem.value)
 			}
 
+			ListText {
+				//% "Time-to-SoC 0%"
+				text: "Time-to-SoC 0%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/0"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListText {
+				//% "Time-to-SoC 10%"
+				text: "Time-to-SoC 10%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/10"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListText {
+				//% "Time-to-SoC 20%"
+				text: "Time-to-SoC 20%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/20"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListText {
+				//% "Time-to-SoC 80%"
+				text: "Time-to-SoC 80%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/80"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListText {
+				//% "Time-to-SoC 90%"
+				text: "Time-to-SoC 90%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/90"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
+			ListText {
+				//% "Time-to-SoC 100%"
+				text: "Time-to-SoC 100%"
+				preferredVisible: dataItem.seen
+				dataItem.uid: root.bindPrefix + "/TimeToSoC/100"
+				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+			}
+
 			ListRelayState {
 				dataItem.uid: root.bindPrefix + "/Relay/0/State"
 			}
@@ -286,6 +348,20 @@ Page {
 				BatteryDetails {
 					id: batteryDetails
 					bindPrefix: root.bindPrefix
+				}
+			}
+
+			ListNavigation {
+				text: "Cell Voltages"
+				preferredVisible: cell3Voltage.isValid
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryCellVoltages.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+
+				VeQuickItem {
+					id: cell3Voltage
+					uid: root.bindPrefix + "/Voltages/Cell3"
 				}
 			}
 
