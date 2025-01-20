@@ -58,7 +58,7 @@ SwipeViewPage {
 				text: qsTrId("settings_vrm")
 				//% "Remote monitoring portal"
 				secondaryText: qsTrId("settings_remote_monitoring_portal")
-				pageSource: "/pages/settings/PageSettingsVrm.qml"
+				pageSource: "/pages/settings/PageSettingsLogger.qml"
 				iconSource: "qrc:/images/icon_vrm_32.png"
 			}
 

@@ -87,6 +87,12 @@ Page {
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
 			}
 
+			ListNavigation {
+				//% "VRM device instances"
+				text: qsTrId("settings_vrm_device_instances")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageVrmDeviceInstances.qml", {"title": text })
+			}
+
 			ListRadioButtonGroup {
 				//% "Log interval"
 				text: qsTrId("settings_log_interval")
