@@ -55,6 +55,47 @@ Page {
 					Global.systemSettings.setElectricalQuantity(optionModel[index].value)
 				}
 			}
+
+			SettingsListHeader {
+				//: GPS units
+				//% "GPS"
+				text: qsTrId("settings_units_gps")
+			}
+
+			ListRadioButtonGroup {
+				//: Format of reported GPS data
+				//% "Format"
+				text: qsTrId("settings_gps_format")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+				optionModel: [
+					//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
+					//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
+					{ display: qsTrId("settings_gps_format_dms_example"), value: VenusOS.GpsData_Format_DegreesMinutesSeconds },
+					//: Example of GPS data in the 'Decimal Degrees' format
+					//% "52.34489, 5.22008"
+					{ display: qsTrId("settings_gps_format_dd_example"), value: VenusOS.GpsData_Format_DecimalDegrees },
+					//: Example of GPS data in the 'Degrees Minutes' format
+					//% "52° 20.693 N, 5° 13.205 E"
+					{ display: qsTrId("settings_gps_format_dm_example"), value: VenusOS.GpsData_Format_DegreesMinutes },
+				]
+			}
+
+			ListRadioButtonGroup {
+				//: Speed unit for reported GPS data
+				//% "Speed Unit"
+				text: qsTrId("settings_gps_speed_unit")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+				optionModel: [
+					//% "Kilometers per hour"
+					{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },
+					//% "Meters per second"
+					{ display: qsTrId("settings_gps_format_ms"), value: "m/s" },
+					//% "Miles per hour"
+					{ display: qsTrId("settings_gps_format_mph"), value: "mph" },
+					//% "Knots"
+					{ display: qsTrId("settings_gps_format_kt"), value: "kt" },
+				]
+			}
 		}
 	}
 }

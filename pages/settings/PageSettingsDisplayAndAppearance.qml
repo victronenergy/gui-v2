@@ -72,6 +72,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Data units"
+				text: qsTrId("pagesettingsgeneral_data_units")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Brief view levels"
 				text: qsTrId("settings_brief_view_levels")
 				onClicked: {
