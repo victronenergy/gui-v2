@@ -134,13 +134,6 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
 			}
 
-
-			ListNavigation {
-				//% "Display Units"
-				text: qsTrId("pagesettingsgeneral_display_units")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
-			}
-
 			SettingsListHeader { }
 
 			ListButton {
