@@ -28,6 +28,7 @@ Item {
 	readonly property int availableWidth: width - leftPadding - rightPadding - content.spacing
 	property int maximumContentWidth: availableWidth * 0.7
 	property bool preferredVisible: true
+	property bool editable: userHasWriteAccess
 
 	property int bottomContentSizeMode: content.height > primaryLabel.height
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
@@ -35,20 +36,22 @@ Item {
 
 	signal clicked()
 
+	// I'n not entirely sure of doing this - it seems like a massive change for little gain:
+	// and actually removes the ability to use onClicked "naturally" like everything else that has it.
+	// There are 355 matches - this will  be a big change - and most of them don’t have any special enabled logic
+	// (they are always clickable) so aren’t really worthy of changing onClicked to a function override.
+	function clickHandler() {
+		//console.log("ListItem function clickHandler()")
+	}
+
 	visible: preferredVisible && userHasReadAccess
 	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
 
-	ListPressArea {
-		id: pressArea
-
-		// this is the added one Mike!!
-		// Note: this doesn't fill the root - its height is less the gradient list spacing
-
-		anchors.fill: backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root.clicked() // hmm but do we want this or not?
-	}
+	// NOTE: pressArea and backgroundRect both manage their z order manually:
+	// the backgroundRect is forcibly behind the pressArea
+	// We declare them in their effective declarative z-order to avoid at least
+	// visual confusion when reading the code.
 
 	ListItemBackground {
 		id: backgroundRect
@@ -73,6 +76,20 @@ Item {
 				height: parent.height
 				color: backgroundRect.color
 			}
+		}
+	}
+
+	ListPressArea {
+		id: pressArea
+
+		// Note: this doesn't fill the root - its height is less the gradient list spacing
+
+		anchors.fill: backgroundRect
+		radius: backgroundRect.radius
+		onClicked: {
+			// TODO: decide which one of these we want
+			root.clickHandler?.()
+			root.clicked()
 		}
 	}
 

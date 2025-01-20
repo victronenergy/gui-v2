@@ -412,4 +412,197 @@ Item {
 			color: root.backgroundColor
 		}
 	}
+
+	Column {
+		width: parent.width
+
+		spacing: 0
+
+		/* options:
+
+			- updateDataOnClick: false
+				defer the data setting - that means you have to
+				handle onClicked here... (but the clicked signal will correcly NOT emit if
+				the inner switch is not enabled.
+				We might want a popup to confirm the setting via the dataItem.setValue() mechanism or
+				some other externally settable property
+
+			- checkable: false (default)
+				this ensurse that the check box checked state (asynchronously) follows backend data ONLY and does not self-check.
+
+			- checked: if you want to bind the internal Switch's checked state to some external binding
+				rather than the internal default (VEQuickItem) one (this does happen).
+				NOTE: checked could update asynchronously or not at all.
+				NOTE: do not handle onCheckedChanged unless there is a really good reason to do so.
+
+			- editable: defaults to userHasWriteAccess, but may be overridden to be more or less constrained.
+				NOTE: userHasWriteAccess (and enabled) must still be true for editable to have any effect.
+				NOTE: if updating external data, onClicked: if(editable) { ... } is required to adhere to the editable rules
+				since onClicked will always be emitted, even if editable is false.
+
+			- onClicked: always emitted!
+				Handle if you want to do a deferred confirm / update sequence.
+				use in conjunction with updateDataOnClick: false
+				You would not normally want to handle onClicked if updateDataOnClick is true.
+				To prevent this we would use an overridden function call instead but I'm not convinced.
+		*/
+
+		ListSwitch {
+			id: readonlyListSwitch
+
+			// example of how to show "why you can't check this switch"
+
+			property ToastNotification toast: null
+
+			Connections {
+				target: readonlyListSwitch.toast
+				function onDismissed() {
+					readonlyListSwitch.toast = null
+				}
+			}
+
+			objectName: "ReadonlyListSwitch"
+			text: "Readonly ListSwitch"
+			editable: false // override default userHasWriteAccess binding due to "some external condition"
+			//backendValue: true
+			onClicked: {
+
+				console.log("Readonly ListSwitch external onClicked handler")
+
+				if(!editable) {
+
+					toast?.close()
+
+					if(checked) {
+						toast = Global.showToastNotification(VenusOS.Notification_Warning, `you can't un-check ${text}!`,
+															 Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
+					} else {
+						toast = Global.showToastNotification(VenusOS.Notification_Warning, `you can't check ${text}!`,
+															 Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
+					}
+				}
+			}
+		}
+
+		ListSwitch {
+			id: editableListSwitch
+
+			// example of how to have a ListSwitch automatically change a backend value
+
+			property ToastNotification toast: null
+
+			Connections {
+				target: editableListSwitch.toast
+				function onDismissed() {
+					editableListSwitch.toast = null
+				}
+			}
+			objectName: "EditablListSwitch"
+			text: "Editable ListSwitch"
+			// internal data is changed by default (normally depending on userHasWriteAccess)
+			updateDataOnClick: true
+			// dataItem.uid: <something valid>
+			editable: true // overwrite editable for this example
+
+			onClicked: {
+				// superflouous click handler! We don't need this!
+				console.log("Editable ListSwitch external onClicked handler")
+			}
+
+			// for information only (because checked changing could be asynchronous)
+			onCheckedChanged: {
+				toast?.close()
+				toast = Global.showToastNotification(VenusOS.Notification_Info, `You changed the state to ${checked ? "CHECKED" : "UNCHECKED"}!`,
+													 Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
+			}
+		}
+
+		ListSwitch {
+			id: deferredListSwitch
+
+			// example of how we can defer the setting to a confirmation dialog
+
+			objectName: "DeferredListSwitch"
+
+			text: "Defer data setting"
+
+			//dataItem.uid: "some/test/path"
+			updateDataOnClick: false
+			editable: true
+
+			onClicked: {
+				console.log("Deferring data setting")
+				Global.dialogLayer.open(testConfirmDialog)
+			}
+		}
+
+		Component {
+			id: testConfirmDialog
+
+			ModalWarningDialog {
+				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+				title: "Are you sure?"
+				description: "Please confirm the desired change"
+
+				onAccepted: {
+					console.log("Test Confirmation Accepted")
+					//deferredListSwitch.dataItem.setData(...)
+					// Qt 6.8 will demand pragma ComponentBehavior: Bound for this
+					deferredListSwitch.backendValue = !deferredListSwitch.backendValue
+				}
+			}
+		}
+
+		ListSwitch {
+			id: stupidUseCase
+
+			// a scenario where the internal Switch is enabled and updateOnClick, but we also
+			// so something in contradiction - like try and defer...
+
+			objectName: "StupidListSwitch"
+
+			text: "Incorrect Defer data setting"
+
+			//dataItem.uid: "some/test/path"
+			updateDataOnClick: true
+			editable: true
+
+			onClicked: {
+				console.log("Yeah, just don't do this... the data may be already changing asynchronously")
+				// is this the ONLY reason to consider the clickHandler functions?
+			}
+
+			function clickHandler() {
+				console.log("This click handler overrides the ListSwitch and ListItem's clickHandler()")
+			}
+		}
+
+		ListSwitch {
+			id: externalBindingSwitch
+
+			text: "External checked binding"
+
+			property bool externalValue: false
+
+			updateDataOnClick: false
+			editable: true // else it is not permitted to make changes (internally)
+			checkable: false
+			checked: externalValue
+
+			// we still have to check editable externally though to be strict.
+
+			//onClicked: if(editable) timer.restart()
+
+			function clickHandler() {
+				if(editable) timer.restart()
+			}
+
+			Timer {
+				id: timer
+				repeat: false
+				interval: 500
+				onTriggered: externalBindingSwitch.externalValue = !externalBindingSwitch.externalValue
+			}
+		}
+	}
 }

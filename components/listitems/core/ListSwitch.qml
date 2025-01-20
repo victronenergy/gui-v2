@@ -19,7 +19,7 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	property bool backendValue: false
 
 	content.children: [
 		Label {
@@ -33,22 +33,50 @@ ListItem {
 		Switch {
 			id: switchItem
 
-			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
+			checked: root.backendValue //invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
-			onClicked: root.clicked()
+			enabled: root.enabled &&
+					 root.editable &&
+					 root.userHasWriteAccess &&
+					 (dataItem.uid === "" || dataItem.isValid)
+
+			onClicked: {
+				// to ensure that all click handling goes through the ListSwitch (when enabled)
+				//console.log("Internal Switch signal clicked", root.objectName)
+
+				// TODO: decide which one of these we want
+				root.clickHandler?.()
+				root.clicked()
+			}
 		}
 	]
 
 	onClicked: {
-		if (updateDataOnClick) {
-			if (root.dataItem.uid.length > 0) {
-				if (invertSourceValue) {
-					dataItem.setValue(c ? valueFalse : valueTrue)
-				} else {
-					dataItem.setValue(c ? valueTrue : valueFalse)
-				}
-			}
+
+		if(switchItem.enabled && updateDataOnClick) {
+
+			//console.log("ListSwitch internal (guarded) onClicked handler", root.objectName)
+
+			// if (root.dataItem.uid.length > 0) {
+			//     // (dataItem might not be valid until the first write)
+			//     if (invertSourceValue) {
+			//         dataItem.setValue(c ? valueFalse : valueTrue)
+			//     } else {
+			//         dataItem.setValue(c ? valueTrue : valueFalse)
+			//     }
+			// }
+
+			timer.restart()
 		}
+
+		// else strictly don't do anything here
+	}
+
+	Timer {
+		id: timer
+		repeat: false
+		interval: 250 // mock a DBUS round-trip delay
+		onTriggered: root.backendValue = !root.backendValue
 	}
 
 	VeQuickItem {
