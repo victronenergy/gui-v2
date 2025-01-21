@@ -369,9 +369,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
     components/widgets/AcLoadsWidget.qml
-    components/widgets/AlternatorWidget.qml
     components/widgets/BatteryWidget.qml
-    components/widgets/DcGeneratorWidget.qml
     components/widgets/DcInputWidget.qml
     components/widgets/DcLoadsWidget.qml
     components/widgets/EssentialLoadsWidget.qml
@@ -383,7 +381,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/widgets/WidgetConnectorAnchor.qml
     components/widgets/WidgetConnectorPath.qml
     components/widgets/WidgetHeader.qml
-    components/widgets/WindWidget.qml
 
     data/AcInputs.qml
     data/DataManager.qml

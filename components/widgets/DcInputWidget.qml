@@ -10,7 +10,12 @@ OverviewWidget {
 	id: root
 
 	property DeviceModel inputs: DeviceModel {}
-	property string detailUrl: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
+	readonly property int inputType: !!inputs.firstObject
+			? Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode)
+			: -1
+	readonly property string detailUrl: inputType === VenusOS.DcInputs_InputType_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+			: inputType === VenusOS.DcInputs_InputType_DcGenerator ? "/pages/settings/devicelist/PageGenset.qml"
+			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
 	function _refreshTotalPower() {
 		let totalPower = NaN
@@ -24,13 +29,12 @@ OverviewWidget {
 		quantityLabel.dataObject.current = totalCurrent
 	}
 
-	title: !inputs.firstObject ? ""
-		   : VenusOS.dcInput_typeToText(Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode))
+	title: VenusOS.dcInput_typeToText(inputType)
 	quantityLabel.dataObject: QtObject {
 		property real power: NaN
 		property real current: NaN
 	}
-	icon.source: "qrc:/images/icon_dc_24.svg"
+	icon.source: Global.dcInputs.inputTypeIcon(inputType)
 	enabled: true
 
 	onClicked: {
