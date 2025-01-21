@@ -30,7 +30,7 @@ Page {
 			}
 
 			ListSpinBox {
-				//% "Device Instance"
+				//% "VE.Can Device Instance"
 				text: qsTrId("settings_vecan_device_instance")
 				dataItem.uid: root.bindPrefix + "/DeviceInstance"
 			}
