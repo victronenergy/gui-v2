@@ -37,7 +37,6 @@ QtObject {
 	property var inverterChargers
 	property var notifications
 	property var pvInverters
-	property var solarChargers
 	property var solarDevices
 	property var system
 	property var systemSettings
@@ -75,7 +74,7 @@ QtObject {
 		if (deviceClass === "com.victronenergy.battery") {
 			return [allDevicesModel.batteryDevices]
 		} else if (deviceClass === "com.victronenergy.solarcharger" || deviceClass === "solarcharger") {
-			return [solarChargers.model]
+			return [solarDevices.model]
 		} else if (deviceClass === "analog") {
 			return Global.tanks.allTankModels.concat([Global.environmentInputs.model])
 		}
@@ -107,7 +106,6 @@ QtObject {
 		inverterChargers = null
 		notifications = null
 		pvInverters = null
-		solarChargers = null
 		solarDevices = null
 		system = null
 		systemSettings = null

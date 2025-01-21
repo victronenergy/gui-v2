@@ -130,13 +130,12 @@ QtObject {
 	//--- PV data ---
 
 	function _updatePvTotals() {
-		let i
 		let phaseIndex
 		if (pvInverters.count) {
 			let phaseCount = 0
 			let phasePowers = []
 			let phaseCurrents = []
-			for (i = 0; i < pvInverters.count; ++i) {
+			for (let i = 0; i < pvInverters.count; ++i) {
 				const inverter = pvInverters.objectAt(i)
 				if (inverter) {
 					phaseCount = Math.max(phaseCount, inverter.phases.count)
@@ -167,9 +166,9 @@ QtObject {
 		}
 
 		let dcPower = NaN
-		if (solarChargers.model.count) {
-			for (i = 0; i < solarChargers.model.count; ++i) {
-				const charger = solarChargers.model.deviceAt(i)
+		if (solarDevices.model.count) {
+			for (let i = 0; i < solarDevices.model.count; ++i) {
+				const charger = solarDevices.model.deviceAt(i)
 				if (charger) {
 					dcPower = Units.sumRealNumbers(dcPower, charger.power)
 				}
@@ -179,11 +178,10 @@ QtObject {
 		root.setMockValue("/Dc/Pv/Current", dcPower * 0.01)
 	}
 
-	property Instantiator solarChargers: Instantiator {
-		model: Global.solarChargers.model
+	property Instantiator solarDevices: Instantiator {
+		model: Global.solarDevices.model
 		delegate: QtObject {
 			readonly property real power: modelData.power
-			readonly property var phases: modelData.phases
 			onPowerChanged: Qt.callLater(root._updatePvTotals)
 		}
 		onCountChanged: Qt.callLater(root._updatePvTotals)

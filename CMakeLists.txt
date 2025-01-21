@@ -394,7 +394,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/ManualRelayModel.qml
     data/Notifications.qml
     data/PvInverters.qml
-    data/SolarChargers.qml
     data/SolarDevices.qml
     data/StartPageConfiguration.qml
     data/System.qml
@@ -421,7 +420,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/Notification.qml
     data/common/PvInverter.qml
     data/common/PvMonitor.qml
-    data/common/SolarCharger.qml
     data/common/SolarDailyHistory.qml
     data/common/SolarDevice.qml
     data/common/SolarHistory.qml
@@ -802,7 +800,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/GeneratorsImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PvInvertersImpl.qml
-    data/dbus/SolarChargersImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/InverterChargersImpl.qml
@@ -850,7 +847,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/NotificationsImpl.qml
     data/mock/PulseMetersImpl.qml
     data/mock/PvInvertersImpl.qml
-    data/mock/SolarChargersImpl.qml
+    data/mock/SolarDevicesImpl.qml
     data/mock/SystemImpl.qml
     data/mock/SystemSettingsImpl.qml
     data/mock/TanksImpl.qml
@@ -921,7 +918,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
     data/mqtt/PvInvertersImpl.qml
-    data/mqtt/SolarChargersImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/InverterChargersImpl.qml

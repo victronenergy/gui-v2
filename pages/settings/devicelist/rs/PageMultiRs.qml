@@ -238,7 +238,7 @@ Page {
 						valueForModelIndex: function(trackerIndex, column) {
 							const tracker = trackerObjects.objectAt(trackerIndex)
 							if (column === 0) {
-								return Global.solarChargers.formatTrackerName(tracker.name,
+								return Global.solarDevices.formatTrackerName(tracker.name,
 										trackerIndex, root.trackerCount, root.title,
 										VenusOS.TrackerName_NoDevicePrefix)
 							} else if (column === 1) {

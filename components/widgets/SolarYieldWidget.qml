@@ -10,10 +10,10 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		const singleDeviceOnly = (Global.solarChargers.model.count + Global.pvInverters.model.count) === 1
-		if (singleDeviceOnly && Global.solarChargers.model.count === 1) {
+		const singleDeviceOnly = (Global.solarDevices.model.count + Global.pvInverters.model.count) === 1
+		if (singleDeviceOnly && Global.solarDevices.model.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml",
-					{ "bindPrefix": Global.solarChargers.model.firstObject.serviceUid })
+					{ "solarDevice": Global.solarDevices.model.firstObject })
 		} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
 					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
@@ -53,7 +53,7 @@ OverviewWidget {
 			}
 			active: root.size >= VenusOS.OverviewWidget_Size_L
 			sourceComponent: {
-				if (Global.pvInverters.model.count === 1 && Global.solarChargers.model.count === 0) {
+				if (Global.pvInverters.model.count === 1 && Global.solarDevices.model.count === 0) {
 					return phaseComponent
 				} else if (Global.pvInverters.model.count === 0) {
 					return historyComponent

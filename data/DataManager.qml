@@ -22,7 +22,6 @@ Item {
 			&& !!Global.inverterChargers
 			&& !!Global.notifications
 			&& !!Global.pvInverters
-			&& !!Global.solarChargers
 			&& !!Global.solarDevices
 			&& !!Global.system
 			&& !!Global.systemSettings
@@ -100,7 +99,6 @@ Item {
 	InverterChargers {}
 	Notifications {}
 	PvInverters {}
-	SolarChargers {}
 	SolarDevices {}
 	System {}
 	SystemSettings {}

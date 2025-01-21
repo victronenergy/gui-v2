@@ -34,7 +34,7 @@ Device {
 	function trackerName(trackerIndex, format) {
 		const tracker = _trackerObjects.objectAt(trackerIndex)
 		const trackerName = tracker ? tracker.name || "" : ""
-		return Global.solarChargers.formatTrackerName(trackerName, trackerIndex, trackers.count, root.name, format)
+		return Global.solarDevices.formatTrackerName(trackerName, trackerIndex, trackers.count, root.name, format)
 	}
 
 	//--- internal members below ---
