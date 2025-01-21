@@ -23,6 +23,7 @@ Item {
 			&& !!Global.notifications
 			&& !!Global.pvInverters
 			&& !!Global.solarChargers
+			&& !!Global.solarDevices
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.tanks
@@ -100,6 +101,7 @@ Item {
 	Notifications {}
 	PvInverters {}
 	SolarChargers {}
+	SolarDevices {}
 	System {}
 	SystemSettings {}
 	Tanks {}

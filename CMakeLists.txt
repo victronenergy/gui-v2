@@ -238,6 +238,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
     components/RsSystemAcIODisplay.qml
+    components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
@@ -394,6 +395,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/Notifications.qml
     data/PvInverters.qml
     data/SolarChargers.qml
+    data/SolarDevices.qml
     data/StartPageConfiguration.qml
     data/System.qml
     data/SystemLoad.qml
@@ -421,6 +423,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/PvMonitor.qml
     data/common/SolarCharger.qml
     data/common/SolarDailyHistory.qml
+    data/common/SolarDevice.qml
     data/common/SolarHistory.qml
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTrackerDailyHistory.qml

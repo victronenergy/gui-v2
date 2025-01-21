@@ -400,6 +400,14 @@ QtObject {
 		Inverter {
 			id: inverter
 
+			function setMockValue(path, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
+			}
+
+			function mockValue(path) {
+				return Global.mockDataSimulator.mockValue(serviceUid + path)
+			}
+
 			property Timer _trackerUpdates: Timer {
 				running: Global.mockDataSimulator.timersActive
 				repeat: true
@@ -410,6 +418,13 @@ QtObject {
 					acOutL1._reportedPower.setValue(Math.random() * 100)
 					dcVoltage.setValue(Math.random() * 10)
 					dcCurrent.setValue(Math.random())
+
+					if (nrOfTrackers.isValid) {
+						setMockValue("/Pv/V", Math.random() * 0.5)
+						setMockValue("/Yield/Power", 100 + (Math.random() * 100))
+						setMockValue(mockValue("/Yield/System") + (Math.random() * 100))
+						setMockValue(mockValue("/Yield/User") + (Math.random() * 100))
+					}
 				}
 			}
 
@@ -429,11 +444,15 @@ QtObject {
 				uid: inverter.serviceUid + "/IsInverterCharger"
 			}
 
+			property VeQuickItem nrOfTrackers: VeQuickItem {
+				uid: inverter.serviceUid + "/NrOfTrackers"
+			}
+
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Phoenix Inverter 12V 250VA 230V")
 				_customName.setValue("My Inverter " + deviceInstance)
-				_state.setValue(Math.floor(Math.random() * VenusOS.System_State_FaultCondition))
+				_state.setValue(Math.floor(Math.random() * VenusOS.System_State_PassThrough))
 				mode.setValue(VenusOS.Inverter_Mode_Off)
 			}
 		}
@@ -450,6 +469,11 @@ QtObject {
 			if (i == 0) {
 				inverterObj.isInverterCharger.setValue(1)
 				inverterObj._customName.setValue("Inverter with IsInverterCharger=1")
+			} else if (i == 1) {
+				inverterObj.nrOfTrackers.setValue(1)
+				inverterObj._customName.setValue("Inverter with solar")
+				inverterObj.setMockValue("/History/Overall/DaysAvailable", 1)
+				inverterObj.setMockValue("/History/Daily/0/Yield", Math.random())
 			}
 			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
 		}
