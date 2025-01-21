@@ -20,21 +20,21 @@ Page {
 		// row instead of a row containing the quantity measurements.
 		// If there are only PV chargers or only PV inverters, only the ListView headerItem is
 		// required, and no additional header is needed.
-		readonly property int extraHeaderCount: Global.solarChargers.model.count > 0 && Global.pvInverters.model.count > 0 ? 1 : 0
+		readonly property int extraHeaderCount: Global.solarDevices.model.count > 0 && Global.pvInverters.model.count > 0 ? 1 : 0
 
 		header: listHeaderComponent
-		model: Global.solarChargers.model.count + Global.pvInverters.model.count + extraHeaderCount
+		model: Global.solarDevices.model.count + Global.pvInverters.model.count + extraHeaderCount
 
 		delegate: Loader {
 			width: parent ? parent.width : 0
 			height: Math.max(item ? item.implicitHeight : 0, Theme.geometry_listItem_height)
 			sourceComponent: {
-				if (Global.solarChargers.model.count > 0
+				if (Global.solarDevices.model.count > 0
 						&& Global.pvInverters.model.count > 0
-						&& model.index === Global.solarChargers.model.count) {
+						&& model.index === Global.solarDevices.model.count) {
 					return listHeaderComponent
 				}
-				if (model.index < Global.solarChargers.model.count) {
+				if (model.index < Global.solarDevices.model.count) {
 					return solarChargerRowComponent
 				}
 				return pvInverterRowComponent
@@ -50,21 +50,21 @@ Page {
 				id: solarChargerRowComponent
 
 				Column {
-					readonly property QtObject solarCharger: Global.solarChargers.model.deviceAt(model.index)
+					readonly property QtObject solarDevice: Global.solarDevices.model.deviceAt(model.index)
 
 					width: parent.width
 
 					Repeater {
-						model: solarCharger.trackers
+						model: solarDevice.trackers
 						delegate: ListQuantityGroupNavigation {
 							readonly property real yieldToday: {
-								const historyToday = solarCharger.trackers.count > 1
-										? solarCharger.dailyTrackerHistory(0, model.index)
-										: solarCharger.dailyHistory(0)
+								const historyToday = solarDevice.trackers.count > 1
+										? solarDevice.dailyTrackerHistory(0, model.index)
+										: solarDevice.dailyHistory(0)
 								return historyToday ? historyToday.yieldKwh : NaN
 							}
 
-							text: solarCharger.trackerName(model.index, VenusOS.TrackerName_WithDevicePrefix)
+							text: solarDevice.trackerName(model.index, VenusOS.TrackerName_WithDevicePrefix)
 							quantityModel: [
 								{ value: yieldToday, unit: VenusOS.Units_Energy_KiloWattHour },
 								{ value: modelData.voltage, unit: VenusOS.Units_Volt_DC },
@@ -74,7 +74,7 @@ Page {
 							tableMode: true
 
 							onClicked: {
-								Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml", { "bindPrefix": solarCharger.serviceUid })
+								Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml", { "solarDevice": solarDevice })
 							}
 						}
 					}
@@ -86,7 +86,7 @@ Page {
 
 				ListQuantityGroupNavigation {
 					readonly property QtObject pvInverter: {
-						let pvInverterIndex = model.index - Global.solarChargers.model.count - chargerListView.extraHeaderCount
+						let pvInverterIndex = model.index - Global.solarDevices.model.count - chargerListView.extraHeaderCount
 						return Global.pvInverters.model.deviceAt(pvInverterIndex)
 					}
 
@@ -111,7 +111,7 @@ Page {
 		id: listHeaderComponent
 
 		QuantityGroupListHeader {
-			property bool chargerMode: Global.solarChargers.model.count > 0
+			property bool chargerMode: Global.solarDevices.model.count > 0
 
 			firstColumnText: chargerMode
 					//% "PV Charger"

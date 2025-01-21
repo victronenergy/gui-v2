@@ -23,8 +23,8 @@ AggregateDeviceModel {
 		meteoDevices,
 		motorDriveDevices,
 		pulseMeterDevices,
+		solarChargerDevices,
 		Global.pvInverters.model,
-		Global.solarChargers.model,
 		unsupportedDevices,
 
 		// AC input models
@@ -83,6 +83,11 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel pulseMeterDevices: ServiceDeviceModel {
 		serviceType: "pulsemeter"
 		modelId: "pulsemeter"
+	}
+
+	readonly property ServiceDeviceModel solarChargerDevices: ServiceDeviceModel {
+		serviceType: "solarcharger"
+		modelId: "solarcharger"
 	}
 
 	readonly property ServiceDeviceModel unsupportedDevices: ServiceDeviceModel {

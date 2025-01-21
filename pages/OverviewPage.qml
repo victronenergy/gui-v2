@@ -42,7 +42,7 @@ SwipeViewPage {
 			+ (Global.system.showInputLoads ? 1 : 0)
 			+ (Global.system.hasAcOutSystem ? 1 : 0)
 			+ (Global.allDevicesModel.combinedDcLoadDevices.count === 0 || isNaN(Global.system.dc.power) ? 0 : 1)
-			+ (Global.solarChargers.model.count === 0 ? 0 : 1)
+			+ (Global.solarDevices.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 			+ Global.evChargers.acInputPositionCount
 			+ Global.evChargers.acOutputPositionCount
@@ -292,7 +292,7 @@ SwipeViewPage {
 		}
 
 		// Add solar widget
-		if (Global.solarChargers.model.count > 0 || Global.pvInverters.model.count > 0) {
+		if (Global.solarDevices.model.count > 0 || Global.pvInverters.model.count > 0) {
 			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
@@ -527,7 +527,7 @@ SwipeViewPage {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: defaultVisible && Global.solarChargers.model.count > 0
+				visible: defaultVisible && Global.solarDevices.model.count > 0
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
@@ -621,7 +621,7 @@ SwipeViewPage {
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
-			visible: Global.dcInputs.model.count > 0 || Global.solarChargers.model.count > 0
+			visible: Global.dcInputs.model.count > 0 || Global.solarDevices.model.count > 0
 		}
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Top

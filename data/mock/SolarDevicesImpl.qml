@@ -12,7 +12,7 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		Global.solarChargers.reset()
+		Global.solarDevices.model.clear()
 
 		// Add 4 chargers, each with an increasing number of trackers (max 4 trackers)
 		const chargerCount = 4
@@ -25,14 +25,18 @@ QtObject {
 			// MPPT chargers connected via VE.CAN only have 2 days of history; add a charger that
 			// simulates this.
 			const historyDaysAvailable = i === 0 ? 2 : 31
-			Global.mockDataSimulator.setMockValue(chargerObj.serviceUid + "/History/Overall/DaysAvailable", historyDaysAvailable)
+			chargerObj.setMockValue("/History/Overall/DaysAvailable", historyDaysAvailable)
 			chargerObj.initTrackers(i + 1)
 		}
 	}
 
 	property Component chargerComponent: Component {
-		SolarCharger {
+		SolarDevice {
 			id: solarCharger
+
+			function setMockValue(path, value) {
+				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
+			}
 
 			function randomizeMeasurments() {
 				/*
@@ -62,14 +66,14 @@ QtObject {
 						totalPower += p
 					}
 				} else {
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/V", 90 + (Math.random() * 10))
+					setMockValue("/Pv/V", 90 + (Math.random() * 10))
 					totalPower = Math.random() * 100
 				}
-				Global.mockDataSimulator.setMockValue(serviceUid + "/Yield/Power", totalPower)
+				setMockValue("/Yield/Power", totalPower)
 			}
 
 			function initTrackers(trackerCount) {
-				Global.mockDataSimulator.setMockValue(serviceUid + "/NrOfTrackers", trackerCount)
+				setMockValue("/NrOfTrackers", trackerCount)
 				let trackerIndex = 0
 
 				// Sometimes trackers have names. If available, they should show up in the UI.
@@ -77,7 +81,7 @@ QtObject {
 					const charCode = 'A'.charCodeAt(0)
 					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
 						const nextTrackerName = "Tracker %1".arg(String.fromCharCode(charCode + trackerIndex))
-						Global.mockDataSimulator.setMockValue(serviceUid + "/Pv/" + trackerIndex + "/Name", nextTrackerName)
+						setMockValue("/Pv/" + trackerIndex + "/Name", nextTrackerName)
 					}
 				}
 
@@ -171,19 +175,9 @@ QtObject {
 				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("SmartSolar Charger MPPT 100/50")
 				_customName.setValue("My Solar Charger " + deviceInstance)
-				_state.setValue(VenusOS.SolarCharger_State_ExternalControl)
-				_errorCode.setValue(Math.random() < 0.4 ? Math.floor(Math.random() * 30) : 0)
+				setMockValue("/State", VenusOS.SolarCharger_State_ExternalControl)
+				setMockValue("/ErrorCode", Math.random() < 0.4 ? Math.floor(Math.random() * 30) : 0)
 				root.setRandomErrors(serviceUid + "/History/Overall")
-			}
-
-			onValidChanged: {
-				if (!!Global.solarChargers) {
-					if (valid) {
-						Global.solarChargers.addCharger(solarCharger)
-					} else {
-						Global.solarChargers.removeCharger(solarCharger)
-					}
-				}
 			}
 		}
 	}
@@ -199,7 +193,7 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetSolarRequested(config) {
-			Global.solarChargers.reset()
+			Global.solarDevices.model.clear()
 
 			if (config && config.chargers) {
 				for (let i = 0; i < config.chargers.length; ++i) {                    

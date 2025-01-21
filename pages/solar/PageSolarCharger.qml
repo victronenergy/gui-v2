@@ -11,7 +11,7 @@ Page {
 
 	required property string bindPrefix
 	readonly property int trackerCount: nrOfTrackers.isValid ? nrOfTrackers.value : 1
-	readonly property SolarCharger solarCharger: Global.solarChargers.model.deviceAt(Global.solarChargers.model.indexOf(bindPrefix))
+	readonly property SolarDevice solarDevice: Global.solarDevices.model.deviceAt(Global.solarDevices.model.indexOf(bindPrefix))
 
 	function _isModelSupported() {
 		if (!device.productId || !firmwareVersion.isValid) {
@@ -161,9 +161,9 @@ Page {
 				{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 			]
 			valueForModelIndex: function(trackerIndex, column) {
-				const tracker = root.solarCharger.trackers.get(trackerIndex).solarTracker
+				const tracker = root.solarDevice.trackers.get(trackerIndex).solarTracker
 				if (column === 0) {
-					return Global.solarChargers.formatTrackerName(tracker.name, trackerIndex, root.trackerCount, root.solarCharger.name, VenusOS.TrackerName_NoDevicePrefix)
+					return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.trackerCount, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
 				} else if (column === 1) {
 					return tracker.voltage
 				} else if (column === 2) {
