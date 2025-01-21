@@ -38,6 +38,7 @@ QtObject {
 	property var notifications
 	property var pvInverters
 	property var solarChargers
+	property var solarDevices
 	property var system
 	property var systemSettings
 	property var tanks
@@ -107,6 +108,7 @@ QtObject {
 		notifications = null
 		pvInverters = null
 		solarChargers = null
+		solarDevices = null
 		system = null
 		systemSettings = null
 		tanks = null
