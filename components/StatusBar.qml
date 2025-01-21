@@ -15,6 +15,7 @@ Rectangle {
 	property string title
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
+	property int auxButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
 	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
 	readonly property bool notificationButtonVisible: alertButton.enabled || alertButton.animating || alarmButton.enabled || alarmButton.animating
@@ -24,6 +25,7 @@ Rectangle {
 	signal leftButtonClicked()
 	signal rightButtonClicked()
 	signal popToPage(toPage: Page)
+	signal auxButtonClicked()
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
@@ -100,6 +102,29 @@ Rectangle {
 		onClicked: root.leftButtonClicked()
 	}
 
+	StatusBarButton {
+		id: auxButton
+				anchors {
+			left: leftButton.right
+			leftMargin: Theme.geometry_statusBar_horizontalMargin
+			verticalCenter: parent.verticalCenter
+		}
+		icon.source: root.auxButton === VenusOS.StatusBar_AuxButton_AuxInactive
+					 ? "qrc:/images/icon_auxpage_off_32.svg"
+					 : "qrc:/images/icon_auxpage_on_32.svg"
+		color: root.auxButton === VenusOS.StatusBar_AuxButton_AuxDisabled
+			   ? Theme.color_darkBlue
+			   : root.auxButton === VenusOS.StatusBar_AuxButton_AuxActive
+				 ? Theme.color_ok
+				 : Theme.color_button_down
+
+		enabled: !!Global.pageManager
+				 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 && root.auxButton != VenusOS.StatusBar_AuxButton_None
+
+		onClicked: root.auxButtonClicked()
+	}
+
 	Breadcrumbs {
 		id: breadcrumbs
 
@@ -137,7 +162,6 @@ Rectangle {
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
 	}
-
 
 	Label {
 		id: clockLabel

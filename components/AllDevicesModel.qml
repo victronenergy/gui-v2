@@ -24,6 +24,7 @@ AggregateDeviceModel {
 		motorDriveDevices,
 		pulseMeterDevices,
 		Global.pvInverters.model,
+		Global.switches.model,
 		Global.solarChargers.model,
 		unsupportedDevices,
 
