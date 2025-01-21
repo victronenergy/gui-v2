@@ -222,25 +222,19 @@ SwipeViewPage {
 			widget = acInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Alternator:
-			widget = alternatorComponent.createObject(root, args)
-			break
 		case VenusOS.OverviewWidget_Type_DcGenerator:
-			widget = dcGeneratorComponent.createObject(root, args)
+		case VenusOS.OverviewWidget_Type_FuelCell:
+		case VenusOS.OverviewWidget_Type_Wind:
+			widget = dcInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_DcLoads:
 			widget = dcLoadsComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_FuelCell:
-			widget = dcInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_Solar:
 			widget = solarComponent.createObject(root, args)
-			break
-		case VenusOS.OverviewWidget_Type_Wind:
-			widget = windComponent.createObject(root, args)
 			break
 		default:
 			console.warn('Cannot create widget of unsupported type:', type)
@@ -430,38 +424,6 @@ SwipeViewPage {
 	}
 
 	Component {
-		id: dcGeneratorComponent
-
-		DcGeneratorWidget {
-			id: dcGeneratorWidget
-
-			expanded: root._expandLayout
-			animateGeometry: root._animateGeometry
-			animationEnabled: root.animationEnabled
-			connectors: [ dcGeneratorConnector ]
-
-			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
-				visible: dcGeneratorConnector.visible
-			}
-
-			WidgetConnector {
-				id: dcGeneratorConnector
-
-				parent: root
-				startWidget: dcGeneratorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(dcGeneratorConnector)
-			}
-		}
-	}
-
-	Component {
 		id: dcInputComponent
 
 		DcInputWidget {
@@ -489,70 +451,6 @@ SwipeViewPage {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(dcInputConnector)
-			}
-		}
-	}
-
-	Component {
-		id: alternatorComponent
-
-		AlternatorWidget {
-			id: alternatorWidget
-
-			expanded: root._expandLayout
-			animateGeometry: root._animateGeometry
-			animationEnabled: root.animationEnabled
-			connectors: [ alternatorConnector ]
-
-			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
-				visible: alternatorConnector.visible
-			}
-
-			WidgetConnector {
-				id: alternatorConnector
-
-				parent: root
-				startWidget: alternatorWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(alternatorConnector)
-			}
-		}
-	}
-
-	Component {
-		id: windComponent
-
-		WindWidget {
-			id: windWidget
-
-			expanded: root._expandLayout
-			animateGeometry: root._animateGeometry
-			animationEnabled: root.animationEnabled
-			connectors: [ windConnector ]
-
-			WidgetConnectorAnchor {
-				location: VenusOS.WidgetConnector_Location_Right
-				visible: windConnector.visible
-			}
-
-			WidgetConnector {
-				id: windConnector
-
-				parent: root
-				startWidget: windWidget
-				startLocation: VenusOS.WidgetConnector_Location_Right
-				endWidget: batteryWidget
-				endLocation: VenusOS.WidgetConnector_Location_Left
-				expanded: root._expandLayout
-				animateGeometry: root._animateGeometry
-				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(windConnector)
 			}
 		}
 	}

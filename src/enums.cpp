@@ -76,8 +76,8 @@ QString Enums::dcInput_typeToText(DcInputs_InputType type) const
 		//% "Water generator"
 		return qtTrId("dcInputs_water_generator");
 	case DcInputs_InputType_Wind:
-		//% "Wind charger"
-		return qtTrId("dcInputs_wind_charger");
+		//% "Wind"
+		return qtTrId("dcInputs_wind");
 	}
 	return QString();
 }
