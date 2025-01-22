@@ -19,9 +19,14 @@ ModalDialog {
 
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property bool showInverterModesOnly: serviceType === "inverter" && isInverterChargerItem.value !== 1
+	readonly property bool isMulti: root.serviceType === "inverter" ? isInverterChargerItem.value === 1
+			: root.serviceType === "vebus" ? numberOfAcInputs.value !== 0
+			: root.serviceType === "acsystem" ? true
+			: false     // unsupported service
+	readonly property bool vebusInverterOnlyModel: serviceType === "vebus" && numberOfAcInputs.value === 0 // for a vebus inverter-only model, such as a "Phoenix Inverter Compact 12/1200"
 
-	title: showInverterModesOnly
-			 //% "Inverter mode"
+	title: showInverterModesOnly || vebusInverterOnlyModel
+			//% "Inverter mode"
 		   ? qsTrId("controlcard_inverter_mode")
 			 //% "Inverter / Charger mode"
 		   : qsTrId("controlcard_inverter_charger_mode")
@@ -38,11 +43,6 @@ ModalDialog {
 		Repeater {
 			id: repeater
 
-			readonly property bool isMulti: root.serviceType === "inverter" ? isInverterChargerItem.value === 1
-					: root.serviceType === "vebus" ? numberOfAcInputs.value !== 0
-					: root.serviceType === "acsystem" ? true
-					: false     // unsupported service
-
 			// Options for inverter services
 			readonly property var inverterModel: [
 				{ value: VenusOS.Inverter_Mode_On },
@@ -52,10 +52,10 @@ ModalDialog {
 
 			// Options for vebus and acsystem services
 			readonly property var inverterChargerModel: [
-				{ value: VenusOS.InverterCharger_Mode_On, enabled: true },
-				{ value: VenusOS.InverterCharger_Mode_ChargerOnly, enabled: isMulti },
-				{ value: VenusOS.InverterCharger_Mode_InverterOnly, enabled: isMulti },
-				{ value: VenusOS.InverterCharger_Mode_Off, enabled: true },
+				{ value: VenusOS.InverterCharger_Mode_On },
+				{ value: VenusOS.InverterCharger_Mode_ChargerOnly, visible: isMulti },
+				{ value: VenusOS.InverterCharger_Mode_InverterOnly, visible: isMulti },
+				{ value: VenusOS.InverterCharger_Mode_Off },
 				{
 					value: VenusOS.InverterCharger_Mode_Passthrough,
 					visible: root.serviceType === "acsystem",
