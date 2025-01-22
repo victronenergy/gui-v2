@@ -86,7 +86,7 @@ Page {
 				text: qsTrId("settings_ess_limit_system_ac_import_current")
 				checkable: true
 				checked: systemAcInputLimit.value >= 0
-				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
+				editable: withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
 				onClicked: {
 					if (checked && systemAcInputLimit.value < 0) {
 						systemAcInputLimit.setValue(40)
@@ -127,7 +127,7 @@ Page {
 				text: qsTrId("settings_ess_limit_system_ac_export_current")
 				checkable: true
 				checked: systemAcExportLimit.value >= 0
-				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0
+				editable: withoutGridMeterItem.value === 0
 				onClicked: {
 					if (checked && systemAcExportLimit.value < 0) {
 						systemAcExportLimit.setValue(40)
