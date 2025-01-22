@@ -105,9 +105,8 @@ Page {
 
 				VeQItemSortTableModel {
 					id: digitalModel
-					filterRegExp: "/[1-9]$"
 					model: VeQItemTableModel {
-						uids: [ Global.systemSettings.serviceUid + "/Settings/DigitalInput" ]
+						uids: [ BackendConnection.serviceUidForType("digitalinputs") + "/Devices" ]
 						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 					}
 				}
@@ -132,13 +131,15 @@ Page {
 
 						GradientListView {
 							model: digitalModel
-
 							delegate: ListRadioButtonGroup {
-								//: %1 = number of the digital input
-								//% "Digital input %1"
-								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
+								text: buttonLabel.value || ""
 								dataItem.uid: model.uid + "/Type"
 								optionModel: delegateOptionModel
+
+								VeQuickItem {
+									id: buttonLabel
+									uid: model.uid + "/Label"
+								}
 							}
 						}
 					}
