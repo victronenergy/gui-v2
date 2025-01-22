@@ -14,9 +14,10 @@ ControlCard {
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool vebusInverterOnlyModel: serviceType === "vebus" && numberOfAcInputs.value === 0 // for a vebus inverter-only model, such as a "Phoenix Inverter Compact 12/1200"
 
 	icon.source: "qrc:/images/inverter_charger.svg"
-	title.text: serviceType === "inverter"
+	title.text: (serviceType === "inverter" && isInverterChargerItem.value !== 1 ) || vebusInverterOnlyModel
 		  //: %1 = the inverter name
 		  //% "Inverter (%1)"
 		? qsTrId("controlcard_inverter").arg(name)
@@ -39,6 +40,16 @@ ControlCard {
 	VeQuickItem {
 		id: essMinSocItem
 		uid: root.serviceUid + "/Settings/Ess/MinimumSocLimit"
+	}
+
+	VeQuickItem {
+		id: isInverterChargerItem
+		uid: root.serviceUid + "/IsInverterCharger"
+	}
+
+	VeQuickItem {
+		id: numberOfAcInputs
+		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
 	Column {
