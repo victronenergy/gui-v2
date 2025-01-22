@@ -38,7 +38,7 @@ ListItem {
 			enabled: root.enabled &&
 					 root.editable &&
 					 root.userHasWriteAccess &&
-					 (dataItem.uid === "" || dataItem.isValid)
+					 (root.dataItem.uid === "" || root.dataItem.isValid)
 
 			onClicked: {
 				// to ensure that all click handling goes through the ListSwitch (when enabled)
