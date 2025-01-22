@@ -36,7 +36,7 @@ Item {
 
 	signal clicked()
 
-	// I'n not entirely sure of doing this - it seems like a massive change for little gain:
+	// I'm not entirely sure of doing this - it seems like a massive change for little gain:
 	// and actually removes the ability to use onClicked "naturally" like everything else that has it.
 	// There are 355 matches - this will  be a big change - and most of them don’t have any special enabled logic
 	// (they are always clickable) so aren’t really worthy of changing onClicked to a function override.
