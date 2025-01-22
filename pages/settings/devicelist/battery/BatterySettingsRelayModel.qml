@@ -42,7 +42,7 @@ ObjectModel {
 	ListSwitch {
 		text: CommonWords.state
 		dataItem.uid: root.bindPrefix + "/Relay/0/State"
-		enabled: mode.dataItem.isValid && mode.dataItem.value === 2
+		editable: mode.dataItem.isValid && mode.dataItem.value === 2
 		preferredVisible: dataItem.isValid
 	}
 

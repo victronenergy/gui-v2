@@ -254,14 +254,14 @@ Page {
 								ListSwitch {
 									//% "Access local ethernet network"
 									text: qsTrId("settings_tailscale_local_network_access_ethernet")
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									editable: !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalEthernet"
 								}
 
 								ListSwitch {
 									//% "Access local WiFi network"
 									text: qsTrId("settings_tailscale_local_network_access_wifi")
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									editable: !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalWifi"
 								}
 

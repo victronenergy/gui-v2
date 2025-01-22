@@ -12,7 +12,7 @@ ListSwitch {
 	readonly property bool _forced: dataItem.value === VenusOS.Switch_ForcedOff || dataItem.value === VenusOS.Switch_ForcedOn
 
 	checked: dataItem.value === 1 || dataItem.value === VenusOS.Switch_ForcedOn
-	enabled: dataItem.isValid && userHasWriteAccess && !_forced
+	editable: !_forced
 
 	secondaryText: _forced && checked
 		  //% "Forced on"
