@@ -12,10 +12,11 @@ Page {
 	property string bindPrefix
 	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value >= 2 && !_phase.isValid
 	readonly property int trackerCount: numberOfTrackers.value || 0
+	readonly property alias solarDevice: device
 
 	title: device.name
 
-	Device {
+	SolarDevice {
 		id: device
 		serviceUid: root.bindPrefix
 	}
@@ -117,14 +118,7 @@ Page {
 				preferredVisible: root.trackerCount > 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "solarHistory": solarHistory })
-				}
-
-				SolarHistory {
-					id: solarHistory
-					bindPrefix: root.bindPrefix
-					deviceName: root.title
-					trackerCount: root.trackerCount
+							{ "solarHistory": root.device.history })
 				}
 			}
 
@@ -253,16 +247,11 @@ Page {
 						Instantiator {
 							id: trackerObjects
 							model: root.trackerCount
-							delegate: QtObject {
+							delegate: SolarTracker {
 								required property int index
-								readonly property real power: _power.isValid ? _power.value : NaN
-								readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
-								readonly property real current: !_power.isValid || !_voltage.isValid || voltage === 0 ? NaN : power / voltage
-								readonly property string name: _name.value || ""
 
-								readonly property VeQuickItem _voltage: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/V" }
-								readonly property VeQuickItem _power: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/P" }
-								readonly property VeQuickItem _name: VeQuickItem { uid: root.bindPrefix + "/Pv/" + index + "/Name" }
+								device: root.solarDevice
+								trackerIndex: index
 							}
 						}
 					}
