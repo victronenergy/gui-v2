@@ -46,6 +46,10 @@ CT.SpinBox {
 		}
 	}
 
+	onValueChanged: primaryTextInput.updateText()
+
+	Component.onCompleted: primaryTextInput.updateText()
+
 	contentItem: Item {
 
 		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
@@ -118,13 +122,10 @@ CT.SpinBox {
 							primaryTextInput.focus = false
 						}
 
-						Connections {
-							target: root
-							function onValueChanged() {
-								// Update the displayed text when the initial value is set or when
-								// the up/down buttons are pressed.
-								primaryTextInput.text = root.textFromValue(root.value, root.locale)
-							}
+						function updateText() {
+							// Update the displayed text when the initial value is set or when
+							// the up/down buttons are pressed.
+							primaryTextInput.text = root.textFromValue(root.value, root.locale)
 						}
 					}
 
@@ -202,6 +203,7 @@ CT.SpinBox {
 			// don't change the current value
 			value = root.value
 		}
+
 		return value
 	}
 
