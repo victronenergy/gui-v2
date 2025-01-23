@@ -29,7 +29,7 @@ Item {
 		height: Theme.geometry_timeSelector_spinBox_height
 		from: 0
 		to: root.maximumHour
-		label.text: Utils.pad(value, 2)
+		textInput.text: Utils.pad(value, 2)
 		//% "hr"
 		secondaryText: qsTrId("timeselector_hr")
 	}
@@ -57,7 +57,7 @@ Item {
 		height: Theme.geometry_timeSelector_spinBox_height
 		from: 0
 		to: root.maximumMinute
-		label.text: Utils.pad(value, 2)
+		textInput.text: Utils.pad(value, 2)
 		//% "min"
 		secondaryText: qsTrId("timeselector_min")
 	}

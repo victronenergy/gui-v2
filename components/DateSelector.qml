@@ -27,10 +27,10 @@ Item {
 			anchors.verticalCenter: parent.verticalCenter
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
-			label.font.pixelSize: Theme.font_size_h2
+			textInput.font.pixelSize: Theme.font_size_h2
 			from: 1970
 			to: 2100
-			label.text: value
+			textInput.text: value
 		}
 
 		SpinBox {
@@ -38,10 +38,10 @@ Item {
 			anchors.verticalCenter: parent.verticalCenter
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
-			label.font.pixelSize: Theme.font_size_h2
+			textInput.font.pixelSize: Theme.font_size_h2
 			from: 1
 			to: 12
-			label.text: Utils.pad(value, 2)
+			textInput.text: Utils.pad(value, 2)
 		}
 
 		SpinBox {
@@ -49,10 +49,10 @@ Item {
 			anchors.verticalCenter: parent.verticalCenter
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
-			label.font.pixelSize: Theme.font_size_h2
+			textInput.font.pixelSize: Theme.font_size_h2
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
-			label.text: Utils.pad(value, 2)
+			textInput.text: Utils.pad(value, 2)
 		}
 	}
 }
