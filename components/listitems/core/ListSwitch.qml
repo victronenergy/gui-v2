@@ -14,7 +14,7 @@ ListItem {
 	property alias checkable: switchItem.checkable
 	property alias secondaryText: secondaryLabel.text
 	property bool updateDataOnClick: true
-	property bool invertSourceValue
+	property bool invertSourceValue: false
 
 	property int valueTrue: 1
 	property int valueFalse: 0
@@ -58,11 +58,15 @@ ListItem {
 			//console.log("ListSwitch internal (guarded) onClicked handler", root.objectName)
 
 			// if (root.dataItem.uid.length > 0) {
-			//     // (dataItem might not be valid until the first write)
+			//     // Note: this logic only holds so long as checkable is false so we can use
+			//     // the current unmodified checked state at the point of onClicked.
+			//     // (dataItem might not be valid until the first write so we can't simply use
+			//     // the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
+			//
 			//     if (invertSourceValue) {
-			//         dataItem.setValue(c ? valueFalse : valueTrue)
+			//         dataItem.setValue(switchItem.checked ? valueTrue : valueFalse)
 			//     } else {
-			//         dataItem.setValue(c ? valueTrue : valueFalse)
+			//         dataItem.setValue(switchItem.checked ? valueFalse : valueTrue)
 			//     }
 			// }
 
