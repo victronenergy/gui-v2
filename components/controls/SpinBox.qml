@@ -17,7 +17,7 @@ import Victron.VenusOS
 CT.SpinBox {
 	id: root
 
-	property alias label: primaryLabel
+	property alias textInput: primaryTextInput
 	property alias secondaryText: secondaryLabel.text
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
@@ -50,16 +50,16 @@ CT.SpinBox {
 
 		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
 		// so that it can call the valueFromText() function
-		readonly property alias text: primaryLabel.text
+		readonly property alias text: primaryTextInput.text
 
 		Column {
 			id: valueColumn
 
-			width: Math.max(primaryTextInput.implicitWidth, secondaryLabel.implicitWidth)
+			width: Math.max(primaryTextInputItem.implicitWidth, secondaryLabel.implicitWidth)
 			anchors.centerIn: parent
 
 			Item  {
-				id: primaryTextInput
+				id: primaryTextInputItem
 
 				width: primaryRowLayout.implicitWidth + Theme.geometry_textField_horizontalMargin * 2
 				height: primaryRowLayout.height
@@ -68,7 +68,7 @@ CT.SpinBox {
 				MouseArea {
 					anchors.fill: parent
 					enabled: root.editable
-					onClicked: primaryLabel.forceActiveFocus()
+					onClicked: primaryTextInput.forceActiveFocus()
 				}
 
 				Rectangle {
@@ -86,7 +86,7 @@ CT.SpinBox {
 					anchors.centerIn: parent
 
 					TextInput {
-						id: primaryLabel
+						id: primaryTextInput
 
 						color: root.enabled ? Theme.color_font_primary : Theme.color_background_disabled
 						font.family: Global.fontFamily
@@ -115,7 +115,7 @@ CT.SpinBox {
 							// user entering an out-of-range value on consecutive attempts.
 							text = root.textFromValue(v, root.locale)
 							root.value = v
-							primaryLabel.focus = false
+							primaryTextInput.focus = false
 						}
 
 						Connections {
@@ -123,7 +123,7 @@ CT.SpinBox {
 							function onValueChanged() {
 								// Update the displayed text when the initial value is set or when
 								// the up/down buttons are pressed.
-								primaryLabel.text = root.textFromValue(root.value, root.locale)
+								primaryTextInput.text = root.textFromValue(root.value, root.locale)
 							}
 						}
 					}
@@ -132,10 +132,10 @@ CT.SpinBox {
 						id: suffixLabel
 
 						visible: text.length
-						color: primaryLabel.color
-						font: primaryLabel.font
-						horizontalAlignment: primaryLabel.horizontalAlignment
-						verticalAlignment: primaryLabel.verticalAlignment
+						color: primaryTextInput.color
+						font: primaryTextInput.font
+						horizontalAlignment: primaryTextInput.horizontalAlignment
+						verticalAlignment: primaryTextInput.verticalAlignment
 					}
 
 				}
