@@ -161,7 +161,7 @@ Page {
 				{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 			]
 			valueForModelIndex: function(trackerIndex, column) {
-				const tracker = root.solarDevice.trackers.get(trackerIndex).solarTracker
+				const tracker = trackerObjects.objectAt(trackerIndex)
 				if (column === 0) {
 					return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.trackerCount, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
 				} else if (column === 1) {
@@ -170,6 +170,17 @@ Page {
 					return tracker.current
 				} else if (column === 3) {
 					return tracker.power
+				}
+			}
+
+			Instantiator {
+				id: trackerObjects
+				model: root.solarDevice.trackerCount
+				delegate: SolarTracker {
+					required property int index
+
+					device: root.solarDevice
+					trackerIndex: index
 				}
 			}
 		}
