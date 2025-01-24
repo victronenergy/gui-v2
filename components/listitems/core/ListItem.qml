@@ -80,7 +80,12 @@ Item {
 		radius: backgroundRect.radius
 		onClicked: {
 			if(Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite) {
-				root.clicked()
+				if(!root.userHasWriteAccess) {
+					//% "Setting \"%1\" is locked for access level"
+					Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
+				} else {
+					root.clicked()
+				}
 			} else {
 				Global.dialogLayer.open(readOnlyAccessWarningDialog)
 			}
