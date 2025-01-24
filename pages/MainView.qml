@@ -447,6 +447,15 @@ Item {
 		model: ObjectModel {
 
 			ListSwitch {
+				text: "Dark Mode"
+				// editable if userHasWriteAccess
+				//editable: false
+				updateDataOnClick: true
+				invertSourceValue: true
+				dataItem.uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ColorScheme"
+			}
+
+			ListSwitch {
 				id: readonlyListSwitch
 
 				// example of how to show "why you can't check this switch"
@@ -463,7 +472,6 @@ Item {
 				objectName: "ReadonlyListSwitch"
 				text: "Readonly ListSwitch"
 				editable: false // override default userHasWriteAccess binding due to "some external condition"
-				//backendValue: true
 				onClicked: {
 
 					console.log("Readonly ListSwitch external onClicked handler")
@@ -500,7 +508,8 @@ Item {
 				text: "Editable ListSwitch"
 				// internal data is changed by default (normally depending on userHasWriteAccess)
 				updateDataOnClick: true
-				// dataItem.uid: <something valid>
+				invertSourceValue: true
+				dataItem.uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ColorScheme"
 				editable: true // overwrite editable for this example
 
 				onClicked: {
@@ -525,7 +534,8 @@ Item {
 
 				text: "Defer data setting"
 
-				//dataItem.uid: "some/test/path"
+				invertSourceValue: true
+				dataItem.uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ColorScheme"
 				updateDataOnClick: false
 				editable: true
 
@@ -546,7 +556,7 @@ Item {
 							console.log("Test Confirmation Accepted")
 							//deferredListSwitch.dataItem.setData(...)
 							// Qt 6.8 will demand pragma ComponentBehavior: Bound for this
-							deferredListSwitch.backendValue = !deferredListSwitch.backendValue
+							deferredListSwitch.dataItem.setValue(deferredListSwitch.checked ? Theme.Light : Theme.Dark)
 						}
 					}
 				}
@@ -562,7 +572,8 @@ Item {
 
 				text: "Incorrect Defer data setting"
 
-				//dataItem.uid: "some/test/path"
+				invertSourceValue: true
+				dataItem.uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ColorScheme"
 				updateDataOnClick: true
 				editable: true
 

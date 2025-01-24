@@ -19,8 +19,6 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	property bool backendValue: false
-
 	content.children: [
 		Label {
 			id: secondaryLabel
@@ -33,7 +31,7 @@ ListItem {
 		Switch {
 			id: switchItem
 
-			checked: root.backendValue //invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
+			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
 			enabled: root.enabled &&
 					 root.editable &&
@@ -50,30 +48,19 @@ ListItem {
 
 			//console.log("ListSwitch internal (guarded) onClicked handler", root.objectName)
 
-			// if (root.dataItem.uid.length > 0) {
-			//     // Note: this logic only holds so long as checkable is false so we can use
-			//     // the current unmodified checked state at the point of onClicked.
-			//     // (dataItem might not be valid until the first write so we can't simply use
-			//     // the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
-			//
-			//     if (invertSourceValue) {
-			//         dataItem.setValue(switchItem.checked ? valueTrue : valueFalse)
-			//     } else {
-			//         dataItem.setValue(switchItem.checked ? valueFalse : valueTrue)
-			//     }
-			// }
+			if (root.dataItem.uid.length > 0) {
+				// Note: this logic only holds so long as checkable is false so we can use
+				// the current unmodified checked state at the point of onClicked.
+				// (dataItem might not be valid until the first write so we can't simply use
+				// the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
 
-			timer.restart()
+				if (invertSourceValue) {
+					dataItem.setValue(switchItem.checked ? valueTrue : valueFalse)
+				} else {
+					dataItem.setValue(switchItem.checked ? valueFalse : valueTrue)
+				}
+			}
 		}
-
-		// else strictly don't do anything here
-	}
-
-	Timer {
-		id: timer
-		repeat: false
-		interval: 250 // mock a DBUS round-trip delay
-		onTriggered: root.backendValue = !root.backendValue
 	}
 
 	VeQuickItem {
