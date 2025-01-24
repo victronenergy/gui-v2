@@ -36,14 +36,6 @@ Item {
 
 	signal clicked()
 
-	// I'm not entirely sure of doing this - it seems like a massive change for little gain:
-	// and actually removes the ability to use onClicked "naturally" like everything else that has it.
-	// There are 355 matches - this will  be a big change - and most of them don’t have any special enabled logic
-	// (they are always clickable) so aren’t really worthy of changing onClicked to a function override.
-	function clickHandler() {
-		//console.log("ListItem function clickHandler()")
-	}
-
 	visible: preferredVisible && userHasReadAccess
 	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
@@ -86,11 +78,7 @@ Item {
 
 		anchors.fill: backgroundRect
 		radius: backgroundRect.radius
-		onClicked: {
-			// TODO: decide which one of these we want
-			root.clickHandler?.()
-			root.clicked()
-		}
+		onClicked: root.clicked()
 	}
 
 	GridLayout {

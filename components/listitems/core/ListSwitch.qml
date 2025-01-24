@@ -40,14 +40,7 @@ ListItem {
 					 root.userHasWriteAccess &&
 					 (root.dataItem.uid === "" || root.dataItem.isValid)
 
-			onClicked: {
-				// to ensure that all click handling goes through the ListSwitch (when enabled)
-				//console.log("Internal Switch signal clicked", root.objectName)
-
-				// TODO: decide which one of these we want
-				root.clickHandler?.()
-				root.clicked()
-			}
+			onClicked: root.clicked()
 		}
 	]
 

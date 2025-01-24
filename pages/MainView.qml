@@ -570,10 +570,6 @@ Item {
 					console.log("Yeah, just don't do this... the data may be already changing asynchronously")
 					// is this the ONLY reason to consider the clickHandler functions?
 				}
-
-				function clickHandler() {
-					console.log("This click handler overrides the ListSwitch and ListItem's clickHandler()")
-				}
 			}
 
 			ListSwitch {
@@ -590,11 +586,7 @@ Item {
 
 				// we still have to check editable externally though to be strict.
 
-				//onClicked: if(editable) timer.restart()
-
-				function clickHandler() {
-					if(editable) timer.restart()
-				}
+				onClicked: if(editable) timer.restart()
 
 				Timer {
 					id: timer
