@@ -87,7 +87,7 @@ Page {
 				checkable: true
 				checked: systemAcInputLimit.value >= 0
 				editable: withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
-				onClicked: {
+				onCheckedChanged: {
 					if (checked && systemAcInputLimit.value < 0) {
 						systemAcInputLimit.setValue(40)
 					} else if (!checked && systemAcInputLimit.value >= 0) {
@@ -128,7 +128,7 @@ Page {
 				checkable: true
 				checked: systemAcExportLimit.value >= 0
 				editable: withoutGridMeterItem.value === 0
-				onClicked: {
+				onCheckedChanged: {
 					if (checked && systemAcExportLimit.value < 0) {
 						systemAcExportLimit.setValue(40)
 					} else if (!checked && systemAcExportLimit.value >= 0) {

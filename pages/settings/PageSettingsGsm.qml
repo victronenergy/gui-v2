@@ -168,7 +168,7 @@ Page {
 									text: qsTrId("page_settings_gsm_use_default_apn")
 									checked: apnSetting.value === ""
 									checkable: true
-									onClicked: {
+									onCheckedChanged: {
 										if (apnSetting.isValid && checked) {
 											apnSetting.setValue("")
 										}
@@ -194,7 +194,7 @@ Page {
 				text: qsTrId("page_settings_gsm_use_authentication")
 				checked: authUser.value !== "" && authPass.value !== ""
 				checkable: true
-				onClicked: {
+				onCheckedChanged: {
 					if (!checked) {
 						authUser.dataItem.setValue("")
 						authPass.dataItem.setValue("")
