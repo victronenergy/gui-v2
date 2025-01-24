@@ -115,7 +115,16 @@ QtObject {
 	}
 
 	property VeQuickItem accessLevel: VeQuickItem {
-		 uid: root.serviceUid + "/Settings/System/AccessLevel"
+		uid: root.serviceUid + "/Settings/System/AccessLevel"
+	}
+
+	// TODO: decide what access mode should be used by default
+	// TODO: decide if this should also take the accessLevel into account
+	readonly property int accessMode: accessModeValue.value ?? VenusOS.User_AccessType_ReadWrite
+
+	property VeQuickItem accessModeValue: VeQuickItem {
+		// TODO: confirm the uid for accessModeValue
+		uid: root.serviceUid + "TODO"
 	}
 
 	property VeQuickItem colorScheme: VeQuickItem {

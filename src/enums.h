@@ -114,6 +114,12 @@ public:
 	};
 	Q_ENUM(User_AccessType)
 
+	enum User_AccessMode {
+		User_AccessType_ReadWrite,
+		User_AccessType_ReadOnly
+	};
+	Q_ENUM(User_AccessMode)
+
 	enum OverviewWidget_Type {
 		OverviewWidget_Type_Unknown,
 		OverviewWidget_Type_AcInputPriority,

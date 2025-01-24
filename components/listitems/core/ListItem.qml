@@ -78,7 +78,25 @@ Item {
 
 		anchors.fill: backgroundRect
 		radius: backgroundRect.radius
-		onClicked: root.clicked()
+		onClicked: {
+			if(Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite) {
+				root.clicked()
+			} else {
+				Global.dialogLayer.open(readOnlyAccessWarningDialog)
+			}
+		}
+	}
+
+	Component {
+		id: readOnlyAccessWarningDialog
+
+		ModalWarningDialog {
+			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+			//% "UI is in Read-Only Mode"
+			title: qsTrId("listItem-readOnly-mode-dialog-title")
+			//% "You do not have sufficient access to make changes."
+			description: qsTrId("listItem-readOnly-mode-dialog-description")
+		}
 	}
 
 	GridLayout {
