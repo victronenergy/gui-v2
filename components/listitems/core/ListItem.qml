@@ -14,7 +14,7 @@ Item {
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
-	property bool down: pressArea.containsPress
+	readonly property alias down: pressArea.containsPress
 	property bool flat: false
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
