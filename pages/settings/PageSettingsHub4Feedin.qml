@@ -44,11 +44,11 @@ Page {
 				//% "Limit system feed-in"
 				text: qsTrId("settings_ess_limit_system_feed_in")
 				preferredVisible: acFeedin.checked || feedInDc.checked
-				checked: maxFeedInPower.value >= 0
+				checked: maxFeedInPower.dataItem.value >= 0
 				onClicked: {
-					if (maxFeedInPower.value < 0) {
+					if (maxFeedInPower.dataItem.value < 0) {
 						maxFeedInPower.dataItem.setValue(1000)
-					} else if (maxFeedInPower.value >= 0) {
+					} else if (maxFeedInPower.dataItem.value >= 0) {
 						maxFeedInPower.dataItem.setValue(-1)
 					}
 				}
