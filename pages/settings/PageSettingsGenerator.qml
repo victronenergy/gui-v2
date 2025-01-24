@@ -16,7 +16,7 @@ Page {
 	VeQuickItem {
 		id: capabilities
 
-		uid: startStopBindPrefix + "/Capabilities"
+		uid: root.startStopBindPrefix + "/Capabilities"
 	}
 
 	GradientListView {
@@ -33,7 +33,7 @@ Page {
 			ListSpinBox {
 				//% "Minimum run time"
 				text: qsTrId("page_settings_generator_minimum_run_time")
-				dataItem.uid: settingsBindPrefix + "/MinimumRuntime"
+				dataItem.uid: root.settingsBindPrefix + "/MinimumRuntime"
 				suffix: "m"
 				decimals: 0
 			}
@@ -41,7 +41,7 @@ Page {
 			ListNavigation {
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
-				preferredVisible: capabilities.value & warmupCapability
+				preferredVisible: capabilities.value & root.warmupCapability
 				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
 
 				Component {
@@ -54,7 +54,7 @@ Page {
 								ListSpinBox {
 									//% "Warm-up time"
 									text: qsTrId("page_settings_generator_warm_up_time")
-									dataItem.uid: settingsBindPrefix + "/WarmUpTime"
+									dataItem.uid: root.settingsBindPrefix + "/WarmUpTime"
 									suffix: "s"
 									decimals: 0
 									stepSize: 10
@@ -63,7 +63,7 @@ Page {
 								ListSpinBox {
 									//% "Cool-down time"
 									text: qsTrId("page_settings_generator_cool_down_time")
-									dataItem.uid: settingsBindPrefix + "/CoolDownTime"
+									dataItem.uid: root.settingsBindPrefix + "/CoolDownTime"
 									suffix: "s"
 									decimals: 0
 									stepSize: 10
@@ -72,7 +72,7 @@ Page {
 								ListSpinBox {
 									//% "Generator stop time"
 									text: qsTrId("page_settings_generator_stop_time")
-									dataItem.uid: settingsBindPrefix + "/GeneratorStopTime"
+									dataItem.uid: root.settingsBindPrefix + "/GeneratorStopTime"
 									suffix: "s"
 									decimals: 0
 									stepSize: 1
@@ -87,7 +87,7 @@ Page {
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
-				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
+				dataItem.uid: root.settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
 				editable: generatorIsSet || checked
 				onClicked: {
 					if (!checked) {
@@ -119,7 +119,7 @@ Page {
 			ListSwitch {
 				//% "Alarm when generator is not in autostart mode"
 				text: qsTrId("page_settings_generator_alarm_when_not_in_auto_start")
-				dataItem.uid: settingsBindPrefix + "/Alarms/AutoStartDisabled"
+				dataItem.uid: root.settingsBindPrefix + "/Alarms/AutoStartDisabled"
 				onClicked: {
 					if (!checked) {
 						//% "An alarm will be triggered when autostart function is left disabled for more than 10 minutes"
@@ -133,14 +133,14 @@ Page {
 				id: quietHours
 
 				text: CommonWords.quiet_hours
-				dataItem.uid: settingsBindPrefix + "/QuietHours/Enabled"
+				dataItem.uid: root.settingsBindPrefix + "/QuietHours/Enabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListTimeSelector {
 				//% "Quiet hours start time"
 				text: qsTrId("page_settings_generator_quiet_hours_start_time")
-				dataItem.uid: settingsBindPrefix + "/QuietHours/StartTime"
+				dataItem.uid: root.settingsBindPrefix + "/QuietHours/StartTime"
 				preferredVisible: quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
@@ -148,7 +148,7 @@ Page {
 			ListTimeSelector {
 				//% "Quiet hours end time"
 				text: qsTrId("page_settings_generator_quiet_hours_end_time")
-				dataItem.uid: settingsBindPrefix + "/QuietHours/EndTime"
+				dataItem.uid: root.settingsBindPrefix + "/QuietHours/EndTime"
 				preferredVisible: quietHours.checked
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
