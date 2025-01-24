@@ -38,7 +38,7 @@ ListItem {
 			enabled: root.enabled &&
 					 root.editable &&
 					 root.userHasWriteAccess &&
-					 (root.dataItem.uid === "" || root.dataItem.isValid)
+					 (dataItem.uid === "" || dataItem.isValid)
 
 			onClicked: root.clicked()
 		}
