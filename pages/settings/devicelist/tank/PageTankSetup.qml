@@ -123,7 +123,7 @@ Page {
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"
 				preferredVisible: dataItem.isValid
-				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, 1) + (rawUnit.value || "") : "--"
+				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, rawUnit.displayDecimals) + (rawUnit.value || "") : "--"
 			}
 
 			ListNavigation {
