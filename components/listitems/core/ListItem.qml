@@ -14,6 +14,7 @@ Item {
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
+	property alias caption: caption
 	property bool down
 	property bool flat
 	property alias backgroundRect: backgroundRect
@@ -104,6 +105,13 @@ Item {
 			Layout.columnSpan: root.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Stretch ? 2 : 1
 			Layout.topMargin: height > 0 ? Theme.geometry_listItem_content_verticalMargin / 2 : 0
 			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+
+			PrimaryListLabel {
+				id: caption
+
+				width: Math.min(caption.implicitWidth, root.width - root.leftPadding - root.rightPadding)
+				preferredVisible: text !== ""
+			}
 		}
 	}
 }
