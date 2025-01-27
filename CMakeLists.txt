@@ -75,10 +75,10 @@ if (${LOAD_QML_FROM_FILESYSTEM})
 endif()
 
 set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
-message("*** Qt6Mqtt_DIR: ${Qt6Mqtt_DIR} CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 find_package(Qt6 COMPONENTS Core Gui Qml Quick Svg Xml LinguistTools ShaderTools REQUIRED)
 
 
+message("*** find_package Qt6 Mqtt: Qt6Mqtt_DIR: ${Qt6Mqtt_DIR} CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 find_package(Qt6 COMPONENTS Mqtt REQUIRED HINTS ${Qt6Mqtt_DIR})
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
