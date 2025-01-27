@@ -1213,7 +1213,7 @@ add_link_options(
     $<$<CONFIG:MINSIZEREL>:-s>  # strip the binary for MinSizeRel builds
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
