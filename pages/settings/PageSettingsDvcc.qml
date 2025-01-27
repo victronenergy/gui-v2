@@ -217,19 +217,10 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
 				preferredVisible: commonSettings.dvccActive &&
 						 nrVebusDevices.isValid && nrVebusDevices.value > 1
-
-				bottomContentChildren: [
-					PrimaryListLabel {
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "When enabled, the managed battery controls all Multis and Quattros. "
-						//% "When disabled, only the device on the built-in port is controlled. "
-						//% "See documentation for further information."
-						text: qsTrId("settings_dvcc_control_all_vebus_devices_label")
-					}
-				]
-
+				//% "When enabled, the managed battery controls all Multis and Quattros. "
+				//% "When disabled, only the device on the built-in port is controlled. "
+				//% "See documentation for further information."
+				caption: qsTrId("settings_dvcc_control_all_vebus_devices_label")
 				VeQuickItem {
 					id: nrVebusDevices
 					uid: Global.system.serviceUid + "/Devices/NumberOfVebusDevices"

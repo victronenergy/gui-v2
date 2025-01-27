@@ -14,6 +14,7 @@ Item {
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
+	property string caption
 	property bool down
 	property bool flat
 	property alias backgroundRect: backgroundRect
@@ -112,6 +113,18 @@ Item {
 			Layout.columnSpan: root.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Stretch ? 2 : 1
 			Layout.topMargin: height > 0 ? Theme.geometry_listItem_content_verticalMargin / 2 : 0
 			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+
+			Label {
+				width: parent.width
+				visible: text !== ""
+				topPadding: 0
+				bottomPadding: 0
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				rightPadding: Theme.geometry_listItem_content_horizontalMargin
+				wrapMode: Text.Wrap
+				color: Theme.color_font_secondary
+				text: root.caption
+			}
 		}
 	}
 }
