@@ -130,7 +130,7 @@
       <translation>Ukendt fejl</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="104"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="115"/>
       <source>Minimum SOC</source>
       <translation>Minimum SOC:</translation>
     </message>
@@ -960,7 +960,7 @@
       <translation>Lys</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>Brief view levels</source>
       <translation>Korte visningsniveauer</translation>
     </message>
@@ -1359,7 +1359,7 @@
       <translation>Fjern support IP og port</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
       <source>Reboot now</source>
       <translation>Genstart nu</translation>
     </message>
@@ -1474,58 +1474,59 @@
       <source>Reset service timer</source>
       <translation>Nulstil servicetimer</translation>
     </message>
-    <message id="settings_gps_settings">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="54"/>
-      <source>GPS Settings</source>
-      <translation>GPS indstillinger</translation>
+    <message id="settings_units_gps">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <source>GPS</source>
+      <extracomment>GPS units</extracomment>
+      <translation type="unfinished">GPS</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>Format</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" E</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Hastigheds enhed</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
       <source>Kilometers per hour</source>
       <translation>Kilometer i timen</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
       <source>Meters per second</source>
       <translation>Meter pr. sekund</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
       <source>Miles per hour</source>
       <translation>Miles per hour</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
       <source>Knots</source>
       <translation>Knob</translation>
     </message>
@@ -2351,7 +2352,7 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation type="unfinished">BMS styring</translation>
     </message>
     <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="128"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="128"/>
       <source>BMS control</source>
       <oldsource>BMS Control</oldsource>
       <translation>BMS styring</translation>
@@ -2655,12 +2656,12 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Fjerde sidste fejl</translation>
     </message>
     <message id="charger_networked">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="22"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="22"/>
       <source>Networked</source>
       <translation>Netværket</translation>
     </message>
     <message id="charger_mode_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="37"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="37"/>
       <source>Mode setting</source>
       <translation>Tilstandsvælger</translation>
     </message>
@@ -2671,52 +2672,52 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Standalone</translation>
     </message>
     <message id="charger_standalone">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="45"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="45"/>
       <source>Standalone</source>
       <translation type="unfinished">Standalone</translation>
     </message>
     <message id="charger_charge">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="48"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="48"/>
       <source>Charge</source>
       <translation>Oplad</translation>
     </message>
     <message id="charger_external_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="51"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="51"/>
       <source>External control</source>
       <translation type="unfinished">Ekstern styring</translation>
     </message>
     <message id="charger_charge_hub_1">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="54"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="54"/>
       <source>Charge &amp; HUB-1</source>
       <translation>Charge &amp; HUB-1</translation>
     </message>
     <message id="charger_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="57"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="57"/>
       <source>BMS</source>
       <translation>BMS</translation>
     </message>
     <message id="charger_charge_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="60"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="60"/>
       <source>Charge &amp; BMS</source>
       <translation>Oplad &amp; BMS</translation>
     </message>
     <message id="charger_ext_control_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="63"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="63"/>
       <source>Ext. Control &amp; BMS</source>
       <translation>Ext. styring &amp; BMS</translation>
     </message>
     <message id="charger_charge_hub_1_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="66"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="66"/>
       <source>Charge, Hub-1 &amp; BMS</source>
       <translation>Oplad, Hub-1 &amp; BMS</translation>
     </message>
     <message id="charger_master_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="77"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="77"/>
       <source>Master setting</source>
       <translation>Master indstilling</translation>
     </message>
     <message id="charger_slave">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="85"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="85"/>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
@@ -2727,22 +2728,22 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Slave</translation>
     </message>
     <message id="charger_group_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="88"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="88"/>
       <source>Group master</source>
       <translation>Gruppe Master</translation>
     </message>
     <message id="charger_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="91"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="91"/>
       <source>Charge master</source>
       <translation>Lade master</translation>
     </message>
     <message id="charger_group_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="94"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="94"/>
       <source>Group &amp; Charge master</source>
       <translation>Gruppe &amp; lade master</translation>
     </message>
     <message id="charger_charge_voltage">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="105"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="105"/>
       <source>Charge voltage</source>
       <translation>Lade volt</translation>
     </message>
@@ -2752,28 +2753,17 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Nulstil</translation>
     </message>
     <message id="charger_network_bms_control_info">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>BMS-kontrol aktiveres automatisk, når BMS er til stede. Nulstil, hvis systemkonfigurationen ændres, eller hvis der ikke er nogen BMS til stede.</translation>
     </message>
-    <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="51"/>
-      <source>Total PV Power</source>
-      <translation type="unfinished">Total PV power</translation>
-    </message>
-    <message id="charger_load">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="117"/>
+    <message id="solarcharger_load">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="231"/>
       <source>Load</source>
       <translation>Indlæs</translation>
     </message>
-    <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="152"/>
-      <source>%1 found</source>
-      <extracomment>Shows number of items found. %1 = number of items</extracomment>
-      <translation>%1 fundet</translation>
-    </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="194"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="295"/>
       <source>Networked operation</source>
       <translation>Netværks tilstand</translation>
     </message>
@@ -4291,7 +4281,7 @@ BEMÆRK: Opdateringen kan stoppe systemet midlertidigt.</translation>
       <translation>Opladning af batteriet til 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="255"/>
       <source>Advanced</source>
       <translation type="unfinished">Avanceret</translation>
     </message>
@@ -4324,14 +4314,14 @@ Do you want to continue?</source>
 Ønsker du at fortsætte?</translation>
     </message>
     <message id="vebus_device_use_shore_power">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="184"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="187"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
       <translation>Landstrøm vil blive brugt, når den er tilgængelig, og indstillingen "Solar &amp; wind priority" vil blive ignoreret.
 Ønsker du at fortsætte?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="189"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="192"/>
       <source>Shore power will be used to complete a full battery charge for one time.
 After the charging process is complete, the system will return to normal operation, prioritizing solar and wind energy.
 Do you want to continue?</source>
@@ -4340,12 +4330,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
 Ønsker du at fortsætte?</translation>
     </message>
     <message id="vebus_device_page_dc_voltage">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="217"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="220"/>
       <source>DC Voltage</source>
       <translation>Jævnspænding</translation>
     </message>
     <message id="vebus_device_page_dc_current">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="224"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="227"/>
       <source>DC Current</source>
       <translation>DC Strøm</translation>
     </message>
@@ -4360,17 +4350,17 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Alarm opsætning</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="283"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>En VE.Bus BMS slukker automatisk systemet hvis nødvendigt for at beskytte batteriet. Styring af systemet fra en Color Control er derfor ikke muligt,</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="289"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>EN BMS assistent er installeret til VE.Bus BMS, men der er ikke fundet en VE.Bus BMS!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="295"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -5404,7 +5394,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Generatoren vil fortsætte med at køre, hvis en autostart-betingelse er opfyldt.</translation>
     </message>
     <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="27"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="32"/>
       <source>Inverter / Charger mode</source>
       <translation>Inverter/oplader-tilstand</translation>
     </message>
@@ -6141,8 +6131,8 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <extracomment>Abbreviation of Electric Vehicle Charging Station</extracomment>
       <translation>EVCS</translation>
     </message>
-    <message id="overview_widget_wind_title">
-      <location filename="../../components/widgets/WindWidget.qml" line="13"/>
+    <message id="dcInputs_wind">
+      <location filename="../../src/enums.cpp" line="80"/>
       <source>Wind</source>
       <translation>Vind</translation>
     </message>
@@ -6227,11 +6217,6 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <location filename="../../src/enums.cpp" line="77"/>
       <source>Water generator</source>
       <translation>Vandturbine</translation>
-    </message>
-    <message id="dcInputs_wind_charger">
-      <location filename="../../src/enums.cpp" line="80"/>
-      <source>Wind charger</source>
-      <translation>Vindmølle</translation>
     </message>
     <message id="digitalinputs_type_disabled">
       <location filename="../../src/enums.cpp" line="90"/>
@@ -6560,18 +6545,8 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Inverter only</source>
       <translation>Kun inverter</translation>
     </message>
-    <message id="charger_alarms_low_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="31"/>
-      <source>Low battery voltage alarm</source>
-      <translation type="unfinished">Lav batteri volt alarm</translation>
-    </message>
-    <message id="charger_alarms_high_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="40"/>
-      <source>High battery voltage alarm</source>
-      <translation type="unfinished">Høj batteri volt alarm</translation>
-    </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="330"/>
       <source>Short circuit alarm</source>
       <translation>Kortslutnings alarm</translation>
     </message>
@@ -6597,7 +6572,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Deaktiverer du autostart?</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="25"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="26"/>
       <source>Inverter / Charger (%1)</source>
       <oldsource>Inverter / Charger</oldsource>
       <extracomment>%1 = the inverter/charger name</extracomment>
@@ -6699,17 +6674,17 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Kontinuerlig scanning kan forstyrre Wi-Fi-funktionen.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimum og maksimum måleområde</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Start page</source>
       <translation type="unfinished">Startside</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>Restarting application...</source>
       <translation>Genstarter applikationen...</translation>
     </message>
@@ -6779,7 +6754,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Udvikle (Victron internt)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="175"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="168"/>
       <source>Rebooting...</source>
       <translation>Genstarter...</translation>
     </message>
@@ -6872,21 +6847,15 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>VRM-enhedsinstanser</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="328"/>
       <source>High temperature alarm</source>
       <translation>Høj temperatur alarm</translation>
     </message>
     <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="120"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="120"/>
       <source>BMS controlled</source>
       <oldsource>BMS Controlled</oldsource>
       <translation>BMS kontrolleret</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="147"/>
-      <source>Alarms &amp; Errors</source>
-      <oldsource>Alarms and Errors</oldsource>
-      <translation>Alarmer og fejl</translation>
     </message>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
@@ -7060,7 +7029,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>%1 %2</translation>
     </message>
     <message id="controlcard_inverter_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="25"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="30"/>
       <source>Inverter mode</source>
       <translation>Inverter-tilstand</translation>
     </message>
@@ -7087,7 +7056,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Siden genindlæses automatisk om ti sekunder for at indlæse den nyeste version.</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="22"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>Inverter (%1)</translation>
@@ -8161,12 +8130,12 @@ Når du har tilføjet/aktiveret et nyt netværk, skal du godkende det i Tailscal
       <translation>Generatoren kører, indtil den stoppes manuelt, medmindre der er aktiveret autostartbetingelser, som holder den kørende.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
       <source>Classic UI</source>
       <translation>Klassisk brugergrænseflade</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>New UI</source>
       <translation>Ny brugergrænseflade</translation>
     </message>
@@ -8303,11 +8272,6 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <extracomment>%1 = error number</extracomment>
       <translation>Fejl: #%1</translation>
     </message>
-    <message id="charger_alarms_header_active_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
-      <source>Active Error</source>
-      <translation>Aktiv Fejl</translation>
-    </message>
     <message id="page_settings_run_time_and_service_generator_total_run_time">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
       <source>Generator total run time (hours)</source>
@@ -8319,35 +8283,35 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <translation>Startside</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
       <source>User interface</source>
       <translation>Brugergrænseflade</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
       <source>User interface (Remote Console)</source>
       <translation>Brugergrænseflade (fjernkonsol)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 opdateret</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Brugergrænsefladen skifter til %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 er indstillet til %2</translation>
     </message>
     <message id="press_ok_to_reboot">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="151"/>
       <source>Press 'OK' to reboot</source>
       <translation>Tryk på 'OK' for at genstarte</translation>
     </message>
@@ -8723,13 +8687,8 @@ Med strømlinet navigation og et nyt look er alt det, du elsker, nu endnu letter
       <source>Alarms &amp; Feedback</source>
       <translation>Alarmer og feedback</translation>
     </message>
-    <message id="pagesettingsgeneral_display_units">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="140"/>
-      <source>Display Units</source>
-      <translation>Visning af enheder</translation>
-    </message>
     <message id="dialoglayer_rebooted">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="170"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">Enheden er blevet genstartet.</translation>
     </message>
@@ -8940,6 +8899,64 @@ Hvis generatoren i øjeblikket kører på grund af en autostart-tilstand, vil de
       <source>Open link</source>
       <translation>Åbn link</translation>
     </message>
+    <message id="pagesettingsgeneral_data_units">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Data units</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
+      <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_70_15">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
+      <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_version">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
+      <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_pv">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="124"/>
+      <source>PV</source>
+      <extracomment>PV power for solar charger</extracomment>
+      <translation type="unfinished">PV</translation>
+    </message>
+    <message id="solarcharger_total_power">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="147"/>
+      <source>Total PV power</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_total_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="209"/>
+      <source>Total yield</source>
+      <extracomment>Solar charger total yield</extracomment>
+      <translation type="unfinished">Total produktion</translation>
+    </message>
+    <message id="solarcharger_system_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="218"/>
+      <source>System yield</source>
+      <extracomment>Solar charger system yield</extracomment>
+      <translation type="unfinished">Systemets produktion</translation>
+    </message>
+    <message id="charger_alarms_low_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="324"/>
+      <source>Low battery voltage alarm</source>
+      <translation type="unfinished">Lav batteri volt alarm</translation>
+    </message>
+    <message id="charger_alarms_high_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="326"/>
+      <source>High battery voltage alarm</source>
+      <translation type="unfinished">Høj batteri volt alarm</translation>
+    </message>
+    <message id="page_vebus_charge_battery">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="169"/>
+      <source>Charge battery</source>
+      <translation/>
+    </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
       <source>Position</source>
@@ -8972,7 +8989,7 @@ Hvis generatoren i øjeblikket kører på grund af en autostart-tilstand, vil de
       <translation type="unfinished">DC forbrug</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="394"/>
+      <location filename="../../pages/OverviewPage.qml" line="388"/>
       <source>Overview</source>
       <translation type="unfinished">Oversigt</translation>
     </message>
@@ -8995,6 +9012,11 @@ Hvis generatoren i øjeblikket kører på grund af en autostart-tilstand, vil de
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
       <source>System yield</source>
       <translation type="unfinished">Systemets produktion</translation>
+    </message>
+    <message id="charger_total_pv_power">
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="55"/>
+      <source>Total PV Power</source>
+      <translation type="unfinished">Total PV power</translation>
     </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
