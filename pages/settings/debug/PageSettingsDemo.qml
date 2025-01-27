@@ -295,14 +295,7 @@ Page {
 						}
 					}
 				]
-
-				bottomContentChildren: [
-					PrimaryListLabel {
-						color: Theme.color_listItem_secondaryText
-						font.pixelSize: Theme.font_size_body1
-						text: "This can wrap next to the content item, or be placed below the content item and stretch to the full item size. Click the orange button to toggle this size mode."
-					}
-				]
+				caption: "This can wrap next to the content item, or be placed below the content item and stretch to the full item size. Click the orange button to toggle this size mode."
 			}
 
 			ListText {

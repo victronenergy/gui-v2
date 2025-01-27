@@ -16,15 +16,8 @@ Page {
 				//% "Auto-ranging"
 				text: qsTrId("settings_minmax_autorange")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
-				bottomContentChildren: [
-					PrimaryListLabel {
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
-						text: qsTrId("settings_minmax_autorange_desc")
-					}
-				]
+				//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
+				caption: qsTrId("settings_minmax_autorange_desc")
 			}
 
 			ListButton {

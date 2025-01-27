@@ -69,12 +69,8 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 }
 				]
-				bottomContentChildren: [
-					PrimaryListLabel {
-						//% "This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation."
-						text: qsTrId("page_settings_fronius_inverter_power_limiting_label")
-					}
-				]
+				//% "This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation."
+				caption: qsTrId("page_settings_fronius_inverter_power_limiting_label")
 			}
 		}
 	}

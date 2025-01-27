@@ -11,10 +11,6 @@ ListItem {
 	id: root
 
 	property string url
-	property string caption: root.mode === VenusOS.ListLink_Mode_LinkButton ? ""
-		  //: %1 = url text
-		  //% "Scan the QR code with your portable device.<br />Or insert the link: %1"
-		: qsTrId("listlink_scan_qr_code").arg(formattedUrl)
 	readonly property string formattedUrl: "<font color=\"%1\">%2</font>".arg(Theme.color_font_primary).arg(url)
 
 	readonly property int mode: Qt.platform.os == "wasm" ? VenusOS.ListLink_Mode_LinkButton : VenusOS.ListLink_Mode_QRCode
@@ -56,15 +52,10 @@ ListItem {
 		}
 	]
 
-	bottomContentChildren: [
-		PrimaryListLabel {
-			font.pixelSize: Theme.font_size_body1
-			horizontalAlignment: Text.AlignLeft
-			color: Theme.color_listItem_secondaryText
-			text: root.caption
-			visible: root.mode === VenusOS.ListLink_Mode_QRCode
-		}
-	]
+	caption: root.mode === VenusOS.ListLink_Mode_LinkButton ? ""
+		  //: %1 = url text
+		  //% "Scan the QR code with your portable device.<br />Or insert the link: %1"
+		: qsTrId("listlink_scan_qr_code").arg(formattedUrl)
 
 	ListPressArea {
 		id: pressArea

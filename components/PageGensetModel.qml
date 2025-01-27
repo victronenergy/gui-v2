@@ -361,11 +361,8 @@ VisibleItemModel {
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 							preferredVisible: dataItem.isValid
-							bottomContentChildren: PrimaryListLabel {
-								//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
-								text: qsTrId("genset_bms_control_enabled_automatically")
-								preferredVisible: bmsControlled.dataItem.value === 1
-							}
+							//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
+							caption: bmsControlled.dataItem.value === 1 ? qsTrId("genset_bms_control_enabled_automatically") : ""
 						}
 
 						ListButton {

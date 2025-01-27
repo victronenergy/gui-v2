@@ -94,17 +94,10 @@ Page {
 						systemAcInputLimit.setValue(-1)
 					}
 				}
-
-				bottomContentChildren: [
-					PrimaryListLabel {
-						preferredVisible: !maxSystemAcInputCurrentSwitch.enabled
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed."
-						text: qsTrId("settings_ess_limit_ac_import_restrictions")
-					}
-				]
+				caption: maxSystemAcInputCurrentSwitch.enabled
+							  ? ""
+								//% "To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed."
+							  : qsTrId("settings_ess_limit_ac_import_restrictions")
 			}
 
 			ListSpinBox {
@@ -135,17 +128,10 @@ Page {
 						systemAcExportLimit.setValue(-1)
 					}
 				}
-
-				bottomContentChildren: [
-					PrimaryListLabel {
-						preferredVisible: !maxSystemAcExportCurrentSwitch.enabled
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "Grid metering must be set to External meter to use this feature."
-						text: qsTrId("settings_ess_limit_ac_export_restrictions")
-					}
-				]
+				caption: maxSystemAcExportCurrentSwitch.enabled
+							  ? ""
+								//% "Grid metering must be set to External meter to use this feature."
+							  : qsTrId("settings_ess_limit_ac_export_restrictions")
 			}
 
 			ListSpinBox {
