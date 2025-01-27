@@ -130,7 +130,7 @@
       <translation>Erreur inconnue</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="104"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="115"/>
       <source>Minimum SOC</source>
       <translation>SOC minimum</translation>
     </message>
@@ -960,7 +960,7 @@
       <translation>Clair</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>Brief view levels</source>
       <translation>Niveaux sur la page "En bref"</translation>
     </message>
@@ -1359,7 +1359,7 @@
       <translation>IP et port de support à distance</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
       <source>Reboot now</source>
       <translation>Redémarrer maintenant</translation>
     </message>
@@ -1474,58 +1474,59 @@
       <source>Reset service timer</source>
       <translation>Réinitialisation du compteur horaire de service</translation>
     </message>
-    <message id="settings_gps_settings">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="54"/>
-      <source>GPS Settings</source>
-      <translation>Paramètres GPS</translation>
+    <message id="settings_units_gps">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <source>GPS</source>
+      <extracomment>GPS units</extracomment>
+      <translation type="unfinished">GPS</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>Format</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" E</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Unité de vitesse</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
       <source>Kilometers per hour</source>
       <translation>Kilomètres par heure</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
       <source>Meters per second</source>
       <translation>Mètres par seconde</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
       <source>Miles per hour</source>
       <translation>Miles par heure</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
       <source>Knots</source>
       <translation>Nœuds</translation>
     </message>
@@ -2351,7 +2352,7 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation type="unfinished">Contrôle BMS</translation>
     </message>
     <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="128"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="128"/>
       <source>BMS control</source>
       <oldsource>BMS Control</oldsource>
       <translation>Contrôle BMS</translation>
@@ -2655,12 +2656,12 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>4e dernière erreur</translation>
     </message>
     <message id="charger_networked">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="22"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="22"/>
       <source>Networked</source>
       <translation>Mis en réseau</translation>
     </message>
     <message id="charger_mode_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="37"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="37"/>
       <source>Mode setting</source>
       <translation>Configuration Mode</translation>
     </message>
@@ -2671,52 +2672,52 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Indépendant</translation>
     </message>
     <message id="charger_standalone">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="45"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="45"/>
       <source>Standalone</source>
       <translation type="unfinished">Indépendant</translation>
     </message>
     <message id="charger_charge">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="48"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="48"/>
       <source>Charge</source>
       <translation>Charge</translation>
     </message>
     <message id="charger_external_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="51"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="51"/>
       <source>External control</source>
       <translation type="unfinished">Contrôle externe</translation>
     </message>
     <message id="charger_charge_hub_1">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="54"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="54"/>
       <source>Charge &amp; HUB-1</source>
       <translation>Charge et HUB-1</translation>
     </message>
     <message id="charger_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="57"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="57"/>
       <source>BMS</source>
       <translation>BMS</translation>
     </message>
     <message id="charger_charge_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="60"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="60"/>
       <source>Charge &amp; BMS</source>
       <translation>Charge &amp; BMS</translation>
     </message>
     <message id="charger_ext_control_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="63"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="63"/>
       <source>Ext. Control &amp; BMS</source>
       <translation>Contrôle ext. &amp; BMS</translation>
     </message>
     <message id="charger_charge_hub_1_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="66"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="66"/>
       <source>Charge, Hub-1 &amp; BMS</source>
       <translation>Charge, Hub-1 &amp; BMS</translation>
     </message>
     <message id="charger_master_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="77"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="77"/>
       <source>Master setting</source>
       <translation>Configuration Maître</translation>
     </message>
     <message id="charger_slave">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="85"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="85"/>
       <source>Slave</source>
       <translation type="unfinished">Esclave</translation>
     </message>
@@ -2727,22 +2728,22 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Esclave</translation>
     </message>
     <message id="charger_group_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="88"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="88"/>
       <source>Group master</source>
       <translation>Maître du groupe</translation>
     </message>
     <message id="charger_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="91"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="91"/>
       <source>Charge master</source>
       <translation>Maître de la charge</translation>
     </message>
     <message id="charger_group_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="94"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="94"/>
       <source>Group &amp; Charge master</source>
       <translation>Maître du groupe et de la charge</translation>
     </message>
     <message id="charger_charge_voltage">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="105"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="105"/>
       <source>Charge voltage</source>
       <translation>Tension de charge</translation>
     </message>
@@ -2752,28 +2753,17 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Réinitialiser</translation>
     </message>
     <message id="charger_network_bms_control_info">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>Le contrôle du BMS est activé automatiquement lorsque le BMS est présent. Réinitialiser si la configuration du système a changé ou si aucun BMS n'est présent.</translation>
     </message>
-    <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="51"/>
-      <source>Total PV Power</source>
-      <translation type="unfinished">Puissance PV totale</translation>
-    </message>
-    <message id="charger_load">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="117"/>
+    <message id="solarcharger_load">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="231"/>
       <source>Load</source>
       <translation>Charge</translation>
     </message>
-    <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="152"/>
-      <source>%1 found</source>
-      <extracomment>Shows number of items found. %1 = number of items</extracomment>
-      <translation>%1 trouvé</translation>
-    </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="194"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="295"/>
       <source>Networked operation</source>
       <translation>Fonctionnement en réseau</translation>
     </message>
@@ -4291,7 +4281,7 @@ NOTE : La mise à jour peut arrêter temporairement le système.</translation>
       <translation>Chargement de la batterie à 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="255"/>
       <source>Advanced</source>
       <translation type="unfinished">Avancé</translation>
     </message>
@@ -4324,14 +4314,14 @@ Do you want to continue?</source>
 Voulez-vous continuer ?</translation>
     </message>
     <message id="vebus_device_use_shore_power">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="184"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="187"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
       <translation>L'alimentation à quai sera utilisée lorsqu'elle est disponible et l'option "Priorité au solaire et à l'éolien" sera ignorée.
 Voulez-vous continuer ?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="189"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="192"/>
       <source>Shore power will be used to complete a full battery charge for one time.
 After the charging process is complete, the system will return to normal operation, prioritizing solar and wind energy.
 Do you want to continue?</source>
@@ -4340,12 +4330,12 @@ Une fois le processus de charge terminé, le système reviendra à un fonctionne
 Voulez-vous continuer ?</translation>
     </message>
     <message id="vebus_device_page_dc_voltage">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="217"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="220"/>
       <source>DC Voltage</source>
       <translation>Tension CC</translation>
     </message>
     <message id="vebus_device_page_dc_current">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="224"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="227"/>
       <source>DC Current</source>
       <translation>Courant CC</translation>
     </message>
@@ -4360,17 +4350,17 @@ Voulez-vous continuer ?</translation>
       <translation>Configuration de l'alarme</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="283"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>Un BMS de VE.Bus éteindra automatiquement le système s'il faut protéger la batterie. Le contrôle du système depuis le Color Control sera donc impossible.</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="289"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>Un assistant BMS est installé, configuré pour un BMS de VE.Bus, mais ce dernier est introuvable!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="295"/>
       <source>VE.Bus BMS</source>
       <translation>BMS VE.Bus</translation>
     </message>
@@ -5404,7 +5394,7 @@ Voulez-vous continuer ?</translation>
       <translation>Le générateur continuera à fonctionner si une condition de démarrage automatique est remplie.</translation>
     </message>
     <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="27"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="32"/>
       <source>Inverter / Charger mode</source>
       <translation>Mode Onduleur / Chargeur</translation>
     </message>
@@ -6141,8 +6131,8 @@ Voulez-vous continuer ?</translation>
       <extracomment>Abbreviation of Electric Vehicle Charging Station</extracomment>
       <translation>Chargeur VE</translation>
     </message>
-    <message id="overview_widget_wind_title">
-      <location filename="../../components/widgets/WindWidget.qml" line="13"/>
+    <message id="dcInputs_wind">
+      <location filename="../../src/enums.cpp" line="80"/>
       <source>Wind</source>
       <translation>Eolien</translation>
     </message>
@@ -6227,11 +6217,6 @@ Voulez-vous continuer ?</translation>
       <location filename="../../src/enums.cpp" line="77"/>
       <source>Water generator</source>
       <translation>Turbine à eau</translation>
-    </message>
-    <message id="dcInputs_wind_charger">
-      <location filename="../../src/enums.cpp" line="80"/>
-      <source>Wind charger</source>
-      <translation>Eolienne</translation>
     </message>
     <message id="digitalinputs_type_disabled">
       <location filename="../../src/enums.cpp" line="90"/>
@@ -6560,18 +6545,8 @@ Voulez-vous continuer ?</translation>
       <source>Inverter only</source>
       <translation>Onduleur uniquement</translation>
     </message>
-    <message id="charger_alarms_low_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="31"/>
-      <source>Low battery voltage alarm</source>
-      <translation type="unfinished">Alarme de tension de batterie faible</translation>
-    </message>
-    <message id="charger_alarms_high_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="40"/>
-      <source>High battery voltage alarm</source>
-      <translation type="unfinished">Alarme de tension de batterie élevée</translation>
-    </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="330"/>
       <source>Short circuit alarm</source>
       <translation>Alarme de court-circuit</translation>
     </message>
@@ -6597,7 +6572,7 @@ Voulez-vous continuer ?</translation>
       <translation>Désactiver le démarrage automatique ?</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="25"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="26"/>
       <source>Inverter / Charger (%1)</source>
       <oldsource>Inverter / Charger</oldsource>
       <extracomment>%1 = the inverter/charger name</extracomment>
@@ -6699,17 +6674,17 @@ Voulez-vous continuer ?</translation>
       <translation>Le balayage continu peut interférer avec le fonctionnement du Wi-Fi.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Plages minimales et maximales de la jauge</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Start page</source>
       <translation type="unfinished">Page d'accueil</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>Restarting application...</source>
       <translation>Redémarrage de l'application...</translation>
     </message>
@@ -6779,7 +6754,7 @@ Voulez-vous continuer ?</translation>
       <translation>Développer (Victron interne)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="175"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="168"/>
       <source>Rebooting...</source>
       <translation>Redémarrage en cours...</translation>
     </message>
@@ -6872,21 +6847,15 @@ Voulez-vous continuer ?</translation>
       <translation>Instances du dispositif VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="328"/>
       <source>High temperature alarm</source>
       <translation>Alarme de température élevée</translation>
     </message>
     <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="120"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="120"/>
       <source>BMS controlled</source>
       <oldsource>BMS Controlled</oldsource>
       <translation>Contrôlé par BMS</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="147"/>
-      <source>Alarms &amp; Errors</source>
-      <oldsource>Alarms and Errors</oldsource>
-      <translation>Alarmes et erreurs</translation>
     </message>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
@@ -7060,7 +7029,7 @@ Voulez-vous continuer ?</translation>
       <translation>%1 %2</translation>
     </message>
     <message id="controlcard_inverter_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="25"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="30"/>
       <source>Inverter mode</source>
       <translation>Mode onduleur</translation>
     </message>
@@ -7087,7 +7056,7 @@ Voulez-vous continuer ?</translation>
       <translation>La page sera automatiquement rechargée dans dix secondes pour afficher la dernière version.</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="22"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>Onduleur (%1)</translation>
@@ -8160,12 +8129,12 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
       <translation>Le générateur fonctionnera jusqu'à ce qu'il soit arrêté manuellement, à moins que des conditions de démarrage automatique soient activées pour le maintenir en marche.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
       <source>Classic UI</source>
       <translation>Interface classique</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>New UI</source>
       <translation>Nouvelle interface</translation>
     </message>
@@ -8302,11 +8271,6 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <extracomment>%1 = error number</extracomment>
       <translation>Erreur : #%1</translation>
     </message>
-    <message id="charger_alarms_header_active_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
-      <source>Active Error</source>
-      <translation>Erreur active</translation>
-    </message>
     <message id="page_settings_run_time_and_service_generator_total_run_time">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
       <source>Generator total run time (hours)</source>
@@ -8318,35 +8282,35 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <translation>Page d'accueil</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
       <source>User interface</source>
       <translation>Interface utilisateur</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
       <source>User interface (Remote Console)</source>
       <translation>Interface utilisateur (console à distance)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 mis à jour</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>L'interface utilisateur passe à %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 est réglé sur %2</translation>
     </message>
     <message id="press_ok_to_reboot">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="151"/>
       <source>Press 'OK' to reboot</source>
       <translation>Appuyez sur "OK" pour redémarrer</translation>
     </message>
@@ -8722,13 +8686,8 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <source>Alarms &amp; Feedback</source>
       <translation>Alarmes et retour d'information</translation>
     </message>
-    <message id="pagesettingsgeneral_display_units">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="140"/>
-      <source>Display Units</source>
-      <translation>Unités d'affichage</translation>
-    </message>
     <message id="dialoglayer_rebooted">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="170"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">L'appareil a été redémarré.</translation>
     </message>
@@ -8939,6 +8898,64 @@ Si le générateur est en cours de fonctionnement en raison d'une condition de d
       <source>Open link</source>
       <translation>Ouvrir le lien</translation>
     </message>
+    <message id="pagesettingsgeneral_data_units">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Data units</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
+      <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_70_15">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
+      <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_version">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
+      <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_pv">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="124"/>
+      <source>PV</source>
+      <extracomment>PV power for solar charger</extracomment>
+      <translation type="unfinished">PV</translation>
+    </message>
+    <message id="solarcharger_total_power">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="147"/>
+      <source>Total PV power</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_total_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="209"/>
+      <source>Total yield</source>
+      <extracomment>Solar charger total yield</extracomment>
+      <translation type="unfinished">Production totale</translation>
+    </message>
+    <message id="solarcharger_system_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="218"/>
+      <source>System yield</source>
+      <extracomment>Solar charger system yield</extracomment>
+      <translation type="unfinished">Champ système</translation>
+    </message>
+    <message id="charger_alarms_low_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="324"/>
+      <source>Low battery voltage alarm</source>
+      <translation type="unfinished">Alarme de tension de batterie faible</translation>
+    </message>
+    <message id="charger_alarms_high_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="326"/>
+      <source>High battery voltage alarm</source>
+      <translation type="unfinished">Alarme de tension de batterie élevée</translation>
+    </message>
+    <message id="page_vebus_charge_battery">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="169"/>
+      <source>Charge battery</source>
+      <translation/>
+    </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
       <source>Position</source>
@@ -8971,7 +8988,7 @@ Si le générateur est en cours de fonctionnement en raison d'une condition de d
       <translation type="unfinished">Charges DC</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="394"/>
+      <location filename="../../pages/OverviewPage.qml" line="388"/>
       <source>Overview</source>
       <translation type="unfinished">Vue d'ensemble</translation>
     </message>
@@ -8994,6 +9011,11 @@ Si le générateur est en cours de fonctionnement en raison d'une condition de d
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
       <source>System yield</source>
       <translation type="unfinished">Champ système</translation>
+    </message>
+    <message id="charger_total_pv_power">
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="55"/>
+      <source>Total PV Power</source>
+      <translation type="unfinished">Puissance PV totale</translation>
     </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>

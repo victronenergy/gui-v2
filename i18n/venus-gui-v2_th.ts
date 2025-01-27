@@ -130,7 +130,7 @@
       <translation>ข้อผิดพลาดที่ไม่รู้จัก</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="104"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="115"/>
       <source>Minimum SOC</source>
       <translation>SOC ขั้นต่ำ</translation>
     </message>
@@ -960,7 +960,7 @@
       <translation>แสงสว่าง</translation>
     </message>
     <message id="settings_brief_view_levels">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>Brief view levels</source>
       <translation>ระดับมุมมองสั้นๆ</translation>
     </message>
@@ -1359,7 +1359,7 @@
       <translation>รองรับ IP และพอร์ตระยะไกล</translation>
     </message>
     <message id="settings_reboot_now">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
       <source>Reboot now</source>
       <translation>รีบูทเดี๋ยวนี้</translation>
     </message>
@@ -1474,58 +1474,59 @@
       <source>Reset service timer</source>
       <translation>รีเซ็ตตัวจับเวลาบริการ</translation>
     </message>
-    <message id="settings_gps_settings">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="54"/>
-      <source>GPS Settings</source>
-      <translation>การตั้งค่า GPS</translation>
+    <message id="settings_units_gps">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <source>GPS</source>
+      <extracomment>GPS units</extracomment>
+      <translation type="unfinished">จีพีเอส</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>รูปแบบ</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" E</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>หน่วยความเร็ว</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
       <source>Kilometers per hour</source>
       <translation>กิโลเมตรต่อชั่วโมง</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
       <source>Meters per second</source>
       <translation>เมตรต่อวินาที</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
       <source>Miles per hour</source>
       <translation>ไมล์ต่อชั่วโมง</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsGpsList.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
       <source>Knots</source>
       <translation>นอต</translation>
     </message>
@@ -2351,7 +2352,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">ตัวควบคุม BMS</translation>
     </message>
     <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="128"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="128"/>
       <source>BMS control</source>
       <oldsource>BMS Control</oldsource>
       <translation>ตัวควบคุม BMS</translation>
@@ -2655,12 +2656,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>ผิดพลาดครั้งที่ 4</translation>
     </message>
     <message id="charger_networked">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="22"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="22"/>
       <source>Networked</source>
       <translation>เครือข่าย</translation>
     </message>
     <message id="charger_mode_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="37"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="37"/>
       <source>Mode setting</source>
       <translation>การตั้งค่าโหมด</translation>
     </message>
@@ -2671,52 +2672,52 @@ Use unless prohibited by the utility provider.</source>
       <translation>สแตนด์อโลน</translation>
     </message>
     <message id="charger_standalone">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="45"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="45"/>
       <source>Standalone</source>
       <translation type="unfinished">สแตนด์อโลน</translation>
     </message>
     <message id="charger_charge">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="48"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="48"/>
       <source>Charge</source>
       <translation>โหลด</translation>
     </message>
     <message id="charger_external_control">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="51"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="51"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="charger_charge_hub_1">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="54"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="54"/>
       <source>Charge &amp; HUB-1</source>
       <translation>การชาร์จ &amp; HUB-1</translation>
     </message>
     <message id="charger_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="57"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="57"/>
       <source>BMS</source>
       <translation>BMS</translation>
     </message>
     <message id="charger_charge_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="60"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="60"/>
       <source>Charge &amp; BMS</source>
       <translation>การชาร์จ &amp; BMS</translation>
     </message>
     <message id="charger_ext_control_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="63"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="63"/>
       <source>Ext. Control &amp; BMS</source>
       <translation>ต่อ การควบคุม &amp; BMS</translation>
     </message>
     <message id="charger_charge_hub_1_bms">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="66"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="66"/>
       <source>Charge, Hub-1 &amp; BMS</source>
       <translation>การชาร์จ, Hub-1 &amp; BMS</translation>
     </message>
     <message id="charger_master_setting">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="77"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="77"/>
       <source>Master setting</source>
       <translation>การตั้งค่าหลัก</translation>
     </message>
     <message id="charger_slave">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="85"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="85"/>
       <source>Slave</source>
       <translation type="unfinished">ตัวรอง</translation>
     </message>
@@ -2727,22 +2728,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>ตัวรอง</translation>
     </message>
     <message id="charger_group_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="88"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="88"/>
       <source>Group master</source>
       <translation>กลุ่มตัวหลัก</translation>
     </message>
     <message id="charger_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="91"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="91"/>
       <source>Charge master</source>
       <translation>ชาร์จตัวหลัก</translation>
     </message>
     <message id="charger_group_charge_master">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="94"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="94"/>
       <source>Group &amp; Charge master</source>
       <translation>หัวหน้ากลุ่ม &amp; การชาร์จ</translation>
     </message>
     <message id="charger_charge_voltage">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="105"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="105"/>
       <source>Charge voltage</source>
       <translation>แรงดันไฟชาร์จ</translation>
     </message>
@@ -2752,28 +2753,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>รีเซ็ต</translation>
     </message>
     <message id="charger_network_bms_control_info">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="140"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="140"/>
       <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
       <translation>การควบคุม BMS จะถูกเปิดใช้งานโดยอัตโนมัติเมื่อมี BMS รีเซ็ตหากการกำหนดค่าระบบเปลี่ยนแปลงหรือหากไม่มี BMS</translation>
     </message>
-    <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="51"/>
-      <source>Total PV Power</source>
-      <translation type="unfinished">พลัง PV ทั้งหมด</translation>
-    </message>
-    <message id="charger_load">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="117"/>
+    <message id="solarcharger_load">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="231"/>
       <source>Load</source>
       <translation>โหลด</translation>
     </message>
-    <message id="charger_history_found_with_count">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="152"/>
-      <source>%1 found</source>
-      <extracomment>Shows number of items found. %1 = number of items</extracomment>
-      <translation>พบ %1</translation>
-    </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="194"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="295"/>
       <source>Networked operation</source>
       <translation>การทำงานแบบเครือข่าย</translation>
     </message>
@@ -4290,7 +4280,7 @@ NOTE: The update might temporarily stop the system.</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="255"/>
       <source>Advanced</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
@@ -4323,14 +4313,14 @@ Do you want to continue?</source>
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="vebus_device_use_shore_power">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="184"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="187"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
       <translation>ไฟฟ้าริมฝั่งจะถูกใช้เมื่อมี และตัวเลือก "ลำดับความสำคัญของแสงอาทิตย์และลม" จะถูกละเว้น
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="189"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="192"/>
       <source>Shore power will be used to complete a full battery charge for one time.
 After the charging process is complete, the system will return to normal operation, prioritizing solar and wind energy.
 Do you want to continue?</source>
@@ -4339,12 +4329,12 @@ Do you want to continue?</source>
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="vebus_device_page_dc_voltage">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="217"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="220"/>
       <source>DC Voltage</source>
       <translation>แรงดันไฟตรง</translation>
     </message>
     <message id="vebus_device_page_dc_current">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="224"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="227"/>
       <source>DC Current</source>
       <translation>กระแสตรง</translation>
     </message>
@@ -4359,17 +4349,17 @@ Do you want to continue?</source>
       <translation>ตั้งปลุก</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="280"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="283"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>VE.Bus BMS จะปิดระบบโดยอัตโนมัติเมื่อจำเป็นเพื่อปกป้องแบตเตอรี่ จึงไม่สามารถควบคุมระบบของตัวควบคุมได้</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="286"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="289"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>มีการติดตั้งผู้ช่วย BMS ที่ได้รับการกำหนดค่าสำหรับ VE.Bus BMS แต่ไม่พบ VE.Bus BMS!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="292"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="295"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -5403,7 +5393,7 @@ Do you want to continue?</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานต่อไปหากตรงตามเงื่อนไขการสตาร์ทอัตโนมัติ</translation>
     </message>
     <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="27"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="32"/>
       <source>Inverter / Charger mode</source>
       <translation>โหมดอินเวอร์เตอร์/เครื่องชาร์จ</translation>
     </message>
@@ -6140,8 +6130,8 @@ Do you want to continue?</source>
       <extracomment>Abbreviation of Electric Vehicle Charging Station</extracomment>
       <translation>อีวีซีเอส</translation>
     </message>
-    <message id="overview_widget_wind_title">
-      <location filename="../../components/widgets/WindWidget.qml" line="13"/>
+    <message id="dcInputs_wind">
+      <location filename="../../src/enums.cpp" line="80"/>
       <source>Wind</source>
       <translation>ลม</translation>
     </message>
@@ -6226,11 +6216,6 @@ Do you want to continue?</source>
       <location filename="../../src/enums.cpp" line="77"/>
       <source>Water generator</source>
       <translation>เครื่องกำเนิดน้ำ</translation>
-    </message>
-    <message id="dcInputs_wind_charger">
-      <location filename="../../src/enums.cpp" line="80"/>
-      <source>Wind charger</source>
-      <translation>ที่ชาร์จลม</translation>
     </message>
     <message id="digitalinputs_type_disabled">
       <location filename="../../src/enums.cpp" line="90"/>
@@ -6559,18 +6544,8 @@ Do you want to continue?</source>
       <source>Inverter only</source>
       <translation>อินเวอร์เตอร์เท่านั้น</translation>
     </message>
-    <message id="charger_alarms_low_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="31"/>
-      <source>Low battery voltage alarm</source>
-      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่ต่ำ</translation>
-    </message>
-    <message id="charger_alarms_high_battery_voltage_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="40"/>
-      <source>High battery voltage alarm</source>
-      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
-    </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="58"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="330"/>
       <source>Short circuit alarm</source>
       <translation>สัญญาณเตือนไฟฟ้าลัดวงจร</translation>
     </message>
@@ -6596,7 +6571,7 @@ Do you want to continue?</source>
       <translation>ปิดการใช้งานการเริ่มอัตโนมัติ?</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="25"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="26"/>
       <source>Inverter / Charger (%1)</source>
       <oldsource>Inverter / Charger</oldsource>
       <extracomment>%1 = the inverter/charger name</extracomment>
@@ -6698,17 +6673,17 @@ Do you want to continue?</source>
       <translation>การสแกนอย่างต่อเนื่องอาจรบกวนการทำงานของ Wi-Fi</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>ช่วงเกจขั้นต่ำและสูงสุด</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Start page</source>
       <translation type="unfinished">หน้าแรก</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>Restarting application...</source>
       <translation>กำลังรีสตาร์ทแอปพลิเคชัน...</translation>
     </message>
@@ -6778,7 +6753,7 @@ Do you want to continue?</source>
       <translation>พัฒนา (Victron ภายใน)</translation>
     </message>
     <message id="dialoglayer_rebooting">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="175"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="168"/>
       <source>Rebooting...</source>
       <translation>กำลังรีบูต...</translation>
     </message>
@@ -6871,21 +6846,15 @@ Do you want to continue?</source>
       <translation>อินสแตนซ์อุปกรณ์ VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="49"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="328"/>
       <source>High temperature alarm</source>
       <translation>สัญญาณเตือนอุณหภูมิสูง</translation>
     </message>
     <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/SolarChargerNetworkedOperationPage.qml" line="120"/>
+      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="120"/>
       <source>BMS controlled</source>
       <oldsource>BMS Controlled</oldsource>
       <translation>ควบคุม BMS</translation>
-    </message>
-    <message id="charger_alarms_alarms_and_errors">
-      <location filename="../../pages/solar/SolarChargerPage.qml" line="147"/>
-      <source>Alarms &amp; Errors</source>
-      <oldsource>Alarms and Errors</oldsource>
-      <translation>สัญญาณเตือนและข้อผิดพลาด</translation>
     </message>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="124"/>
@@ -7059,7 +7028,7 @@ Do you want to continue?</source>
       <translation>%1 %2</translation>
     </message>
     <message id="controlcard_inverter_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="25"/>
+      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="30"/>
       <source>Inverter mode</source>
       <translation>โหมดอินเวอร์เตอร์</translation>
     </message>
@@ -7086,7 +7055,7 @@ Do you want to continue?</source>
       <translation>หน้าจะโหลดซ้ำโดยอัตโนมัติในสิบวินาทีเพื่อโหลดเวอร์ชันล่าสุด</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="22"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>อินเวอร์เตอร์ (%1)</translation>
@@ -8159,12 +8128,12 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานจนกว่าจะหยุดด้วยตนเอง เว้นแต่จะมีการเปิดใช้งานเงื่อนไขการสตาร์ทอัตโนมัติเพื่อให้เครื่องทำงานได้ต่อไป</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
       <source>Classic UI</source>
       <translation>UI แบบคลาสสิก</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>New UI</source>
       <translation>UI ใหม่</translation>
     </message>
@@ -8301,11 +8270,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <extracomment>%1 = error number</extracomment>
       <translation>ข้อผิดพลาด: #%1</translation>
     </message>
-    <message id="charger_alarms_header_active_errors">
-      <location filename="../../pages/solar/SolarChargerAlarmsAndErrorsPage.qml" line="69"/>
-      <source>Active Error</source>
-      <translation>ข้อผิดพลาดที่ใช้งานอยู่</translation>
-    </message>
     <message id="page_settings_run_time_and_service_generator_total_run_time">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
       <source>Generator total run time (hours)</source>
@@ -8317,35 +8281,35 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>หน้าแรก</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
       <source>User interface</source>
       <translation>อินเทอร์เฟซผู้ใช้</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
       <source>User interface (Remote Console)</source>
       <translation>อินเทอร์เฟซผู้ใช้ (คอนโซลระยะไกล)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 อัปเดตแล้ว</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>อินเทอร์เฟซผู้ใช้จะสลับไปที่ %1</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 ถูกตั้งค่าเป็น %2</translation>
     </message>
     <message id="press_ok_to_reboot">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="151"/>
       <source>Press 'OK' to reboot</source>
       <translation>กด 'ตกลง' เพื่อรีบูต</translation>
     </message>
@@ -8720,13 +8684,8 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Alarms &amp; Feedback</source>
       <translation>สัญญาณเตือนและการตอบรับ</translation>
     </message>
-    <message id="pagesettingsgeneral_display_units">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="140"/>
-      <source>Display Units</source>
-      <translation>หน่วยแสดงผล</translation>
-    </message>
     <message id="dialoglayer_rebooted">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="170"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">อุปกรณ์ได้รับการรีบูตแล้ว</translation>
     </message>
@@ -8937,6 +8896,64 @@ If the generator is currently running due to a autostart condition, disabling au
       <source>Open link</source>
       <translation>เปิดลิงค์</translation>
     </message>
+    <message id="pagesettingsgeneral_data_units">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Data units</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
+      <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_70_15">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
+      <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_not_supported_reason_version">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
+      <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_pv">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="124"/>
+      <source>PV</source>
+      <extracomment>PV power for solar charger</extracomment>
+      <translation type="unfinished">PV</translation>
+    </message>
+    <message id="solarcharger_total_power">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="147"/>
+      <source>Total PV power</source>
+      <translation/>
+    </message>
+    <message id="solarcharger_total_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="209"/>
+      <source>Total yield</source>
+      <extracomment>Solar charger total yield</extracomment>
+      <translation type="unfinished">ผลตอบแทนรวม</translation>
+    </message>
+    <message id="solarcharger_system_yield">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="218"/>
+      <source>System yield</source>
+      <extracomment>Solar charger system yield</extracomment>
+      <translation type="unfinished">ผลตอบแทนของระบบ</translation>
+    </message>
+    <message id="charger_alarms_low_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="324"/>
+      <source>Low battery voltage alarm</source>
+      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่ต่ำ</translation>
+    </message>
+    <message id="charger_alarms_high_battery_voltage_alarm">
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="326"/>
+      <source>High battery voltage alarm</source>
+      <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
+    </message>
+    <message id="page_vebus_charge_battery">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="169"/>
+      <source>Charge battery</source>
+      <translation/>
+    </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
       <source>Position</source>
@@ -8969,7 +8986,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="394"/>
+      <location filename="../../pages/OverviewPage.qml" line="388"/>
       <source>Overview</source>
       <translation type="unfinished">ภาพรวม</translation>
     </message>
@@ -8992,6 +9009,11 @@ If the generator is currently running due to a autostart condition, disabling au
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
       <source>System yield</source>
       <translation type="unfinished">ผลตอบแทนของระบบ</translation>
+    </message>
+    <message id="charger_total_pv_power">
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="55"/>
+      <source>Total PV Power</source>
+      <translation type="unfinished">พลัง PV ทั้งหมด</translation>
     </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
