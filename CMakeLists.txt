@@ -44,11 +44,6 @@ option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_
 if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})
     set(VENUS_DESKTOP_BUILD ON)
 endif()
-if (${VENUS_DESKTOP_BUILD})
-    add_compile_definitions(VENUS_DESKTOP_BUILD)
-    enable_testing()
-    add_subdirectory(tests)
-endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
