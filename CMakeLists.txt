@@ -733,7 +733,7 @@ list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
 
 target_include_directories(VenusQMLModule PRIVATE src/veutil/inc/veutil/qt)
 
-target_link_libraries(VenusQMLModule PRIVATE
+target_link_libraries(VenusQMLModule
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -783,9 +783,9 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     )
 endif()
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    target_link_libraries(VenusQMLModule PRIVATE Qt6::WebSockets)
+    target_link_libraries(VenusQMLModule Qt6::WebSockets)
 else()
-    target_link_libraries(VenusQMLModule PRIVATE Qt6::DBus)
+    target_link_libraries(VenusQMLModule Qt6::DBus)
 endif()
 # end VENUS_QML_MODULE
 
@@ -1213,7 +1213,7 @@ add_link_options(
     $<$<CONFIG:MINSIZEREL>:-s>  # strip the binary for MinSizeRel builds
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(${PROJECT_NAME}
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -1230,11 +1230,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    target_link_libraries(${PROJECT_NAME} PRIVATE
+    target_link_libraries(${PROJECT_NAME}
         Qt6::WebSockets
     )
 else()
-    target_link_libraries(${PROJECT_NAME} PRIVATE
+    target_link_libraries(${PROJECT_NAME}
         Qt6::DBus
     )
 endif()
