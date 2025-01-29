@@ -76,18 +76,28 @@ Item {
 
 		// Note: this doesn't fill the root - its height is less the gradient list spacing
 
+		property ToastNotification toast: null
+
 		anchors.fill: backgroundRect
 		radius: backgroundRect.radius
 		onClicked: {
 			if(Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite) {
 				if(!root.userHasWriteAccess) {
+					pressArea.toast?.close(true) // close immediately
 					//% "Setting \"%1\" is locked for access level"
-					Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
+					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
 				} else {
 					root.clicked()
 				}
 			} else {
 				Global.dialogLayer.open(readOnlyAccessWarningDialog)
+			}
+		}
+
+		Connections {
+			target: pressArea.toast
+			function onDismissed() {
+				pressArea.toast = null
 			}
 		}
 	}

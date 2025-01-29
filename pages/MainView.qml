@@ -462,13 +462,6 @@ Item {
 
 				property ToastNotification toast: null
 
-				Connections {
-					target: readonlyListSwitch.toast
-					function onDismissed() {
-						readonlyListSwitch.toast = null
-					}
-				}
-
 				objectName: "ReadonlyListSwitch"
 				text: "Readonly ListSwitch"
 				editable: false // override default userHasWriteAccess binding due to "some external condition"
@@ -478,7 +471,7 @@ Item {
 
 					if(!editable) {
 
-						toast?.close()
+						toast?.close(true) // close immediately
 
 						if(checked) {
 							toast = Global.showToastNotification(VenusOS.Notification_Warning, `you can't un-check ${text}!`,
@@ -487,6 +480,13 @@ Item {
 							toast = Global.showToastNotification(VenusOS.Notification_Warning, `you can't check ${text}!`,
 																 Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
 						}
+					}
+				}
+
+				Connections {
+					target: readonlyListSwitch.toast
+					function onDismissed() {
+						readonlyListSwitch.toast = null
 					}
 				}
 			}
@@ -498,12 +498,6 @@ Item {
 
 				property ToastNotification toast: null
 
-				Connections {
-					target: editableListSwitch.toast
-					function onDismissed() {
-						editableListSwitch.toast = null
-					}
-				}
 				objectName: "EditablListSwitch"
 				text: "Editable ListSwitch"
 				// internal data is changed by default (normally depending on userHasWriteAccess)
@@ -519,9 +513,16 @@ Item {
 
 				// for information only (because checked changing could be asynchronous)
 				onCheckedChanged: {
-					toast?.close()
+					toast?.close(true) // close immediately
 					toast = Global.showToastNotification(VenusOS.Notification_Info, `You changed the state to ${checked ? "CHECKED" : "UNCHECKED"}!`,
 														 Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
+				}
+
+				Connections {
+					target: editableListSwitch.toast
+					function onDismissed() {
+						editableListSwitch.toast = null
+					}
 				}
 			}
 

@@ -84,22 +84,34 @@ Page {
 			}
 
 			ListSwitch {
+				id: generatorACListSwitch
+
 				property bool generatorIsSet: acIn1Source.value === 2 || acIn2Source.value === 2
+				property ToastNotification toast: null
+
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
 				dataItem.uid: root.settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
 				editable: generatorIsSet || checked
 				onClicked: {
 					if (!checked) {
+						generatorACListSwitch.toast?.close(true) // close immediately
 						if (!generatorIsSet) {
 							//% "None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality."
-							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
+							generatorACListSwitch.toast = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_not_set"),
 																	   Theme.animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration)
 						} else {
 							//% "An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page."
-							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
+							generatorACListSwitch.toast = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_generator_detect_generator_set"),
 																	   Theme.animation_generator_detectGeneratorSet_toastNotification_autoClose_duration)
 						}
+					}
+				}
+
+				Connections {
+					target: generatorACListSwitch.toast
+					function onDismissed() {
+						generatorACListSwitch.toast = null
 					}
 				}
 
