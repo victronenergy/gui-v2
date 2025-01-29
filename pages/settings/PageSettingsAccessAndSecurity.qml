@@ -267,7 +267,7 @@ Page {
 				//% "Logout"
 				text: qsTrId("settings_logout")
 				//% "Log out now"
-				button.text: qsTrId("settings_logout_now")
+				secondaryText: qsTrId("settings_logout_now")
 
 				// Cannot log out from GX devices, VRM or Unsecured profile with no password
 				preferredVisible: Qt.platform.os === "wasm" && !BackendConnection.vrm

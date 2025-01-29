@@ -19,7 +19,7 @@ ListButton {
 	// total value, in seconds (data value is assumed to be in seconds)
 	property real value: !dataItem.isValid ? 0 : dataItem.value
 
-	button.text: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
+	secondaryText: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: Global.dialogLayer.open(timeSelectorComponent, {hour: hour, minute: minute})

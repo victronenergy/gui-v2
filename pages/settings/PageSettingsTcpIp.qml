@@ -163,7 +163,7 @@ Page {
 			//% "Connect to network?"
 			text: qsTrId("settings_tcpip_connect_to_network")
 			//% "Connect"
-			button.text: qsTrId("settings_tcpip_connect")
+			secondaryText: qsTrId("settings_tcpip_connect")
 			preferredVisible: root.ready && root._wifi && root._disconnected
 					 && (service.favorite || !service.secured)
 			writeAccessLevel: VenusOS.User_AccessType_User
@@ -176,7 +176,7 @@ Page {
 			//% "Forget network?"
 			text: qsTrId("settings_tcpip_forget_network")
 			//% "Forget"
-			button.text: qsTrId("settings_tcpip_forget")
+			secondaryText: qsTrId("settings_tcpip_forget")
 			preferredVisible: root.ready && root._wifi && service.favorite
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(forgetNetworkDialogComponent)

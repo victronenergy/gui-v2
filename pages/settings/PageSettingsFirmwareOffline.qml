@@ -25,7 +25,7 @@ Page {
 
 				//% "Firmware found"
 				text: qsTrId("settings_firmware_found")
-				button.text: {
+				secondaryText: {
 					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						//: %1 = firmware version
 						//% "Installing %1"

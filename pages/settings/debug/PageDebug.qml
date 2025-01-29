@@ -36,7 +36,7 @@ Page {
 				text: qsTrId("settings_page_debug_quit_application")
 
 				//% "Quit"
-				button.text: qsTrId("settings_page_debug_quit")
+				secondaryText: qsTrId("settings_page_debug_quit")
 
 				onClicked: Qt.quit()
 			}

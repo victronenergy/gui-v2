@@ -126,7 +126,7 @@ Page {
 			ListButton {
 				//% "BMS control"
 				text: qsTrId("charger_network_bms_control")
-				button.text: CommonWords.reset
+				secondaryText: CommonWords.reset
 				preferredVisible: bmsControlled.dataItem.value === 1
 				onClicked: {
 					bmsControlled.dataItem.setValue(0)
