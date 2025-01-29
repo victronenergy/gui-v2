@@ -60,7 +60,11 @@ ListItem {
 
 		anchors.fill: parent.backgroundRect
 		radius: backgroundRect.radius
-		onClicked: root._setChecked(!switchItem.checked)
+		onClicked: if(content.enabled) {
+					   root._setChecked(!switchItem.checked)
+				   } else {
+					   root.clicked()
+				   }
 	}
 
 	VeQuickItem {
