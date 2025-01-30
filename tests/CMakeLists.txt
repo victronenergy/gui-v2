@@ -15,9 +15,9 @@ if (${VENUS_DESKTOP_BUILD})
     enable_testing()
 endif()
 
-
 add_subdirectory(firmwareversion)
 add_subdirectory(units)
 add_subdirectory(screenblanker)
 add_subdirectory(backendconnection)
 add_subdirectory(visibleitemmodel)
+add_subdirectory(quantityobjectmodel)

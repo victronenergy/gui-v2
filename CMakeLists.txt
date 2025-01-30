@@ -703,6 +703,10 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/productinfo.h
     src/quantityinfo.h
     src/quantityinfo.cpp
+    src/quantityobject.h
+    src/quantityobject.cpp
+    src/quantityobjectmodel.h
+    src/quantityobjectmodel.cpp
     src/qrangemodel_p.h
     src/qrangemodel.h
     src/qrangemodel.cpp
