@@ -424,6 +424,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarDevice.qml
     data/common/SolarHistory.qml
     data/common/SolarHistoryErrorModel.qml
+    data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
     data/common/SystemBattery.qml
     data/common/Tank.qml
@@ -640,8 +641,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/PageSolarParallelOperation.qml
     pages/solar/PvInverterPage.qml
     pages/solar/SolarDevicePage.qml
-    pages/solar/SolarDeviceListPage.qml
     pages/solar/SolarHistoryPage.qml
+    pages/solar/SolarInputListPage.qml
     pages/vebusdevice/PageAcSensor.qml
     pages/vebusdevice/PageAcSensors.qml
     pages/vebusdevice/PageVeBusAdvanced.qml
@@ -704,6 +705,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/units.cpp
     src/screenblanker.h
     src/screenblanker.cpp
+    src/solarinputmodel.h
+    src/solarinputmodel.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )

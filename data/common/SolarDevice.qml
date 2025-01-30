@@ -13,13 +13,17 @@ import Victron.VenusOS
 Device {
 	id: root
 
-	readonly property ListModel trackers: ListModel {}
 	readonly property real power: _totalPower.isValid ? _totalPower.value : NaN
 	readonly property alias history: _history
+
+	// For solarcharger services, assume trackerCount=1 if /NrOfTrackers is not set.
+	readonly property int trackerCount: _nrOfTrackers.isValid ? _nrOfTrackers.value : (_isSolarCharger ? 1 : 0)
 
 	// This is the overall error history.
 	// For the per-day error history, use dailyHistory(day).errorModel
 	readonly property alias errorModel: _history.errorModel
+
+	readonly property bool _isSolarCharger: BackendConnection.serviceTypeFromUid(serviceUid) === "solarcharger"
 
 	signal yieldUpdatedForDay(day: int, yieldKwh: real)
 
@@ -31,16 +35,14 @@ Device {
 		return _history.dailyTrackerHistory(day, trackerIndex)
 	}
 
-	function trackerName(trackerIndex, format) {
-		const tracker = _trackerObjects.objectAt(trackerIndex)
-		const trackerName = tracker ? tracker.name || "" : ""
-		return Global.solarDevices.formatTrackerName(trackerName, trackerIndex, trackers.count, root.name, format)
-	}
-
 	//--- internal members below ---
 
 	readonly property VeQuickItem _totalPower: VeQuickItem {
 		uid: root.serviceUid + "/Yield/Power"
+	}
+
+	readonly property VeQuickItem _nrOfTrackers: VeQuickItem {
+		uid: root.serviceUid + "/NrOfTrackers"
 	}
 
 	//--- history ---
@@ -49,62 +51,6 @@ Device {
 		id: _history
 		bindPrefix: root.serviceUid
 		deviceName: root.name
-		trackerCount: root.trackers.count
-	}
-
-	//--- Solar trackers ---
-
-	readonly property VeQuickItem _trackerCount: VeQuickItem {
-		uid: root.serviceUid + "/NrOfTrackers"
-	}
-
-	readonly property Instantiator _trackerObjects: Instantiator {
-		model: _trackerCount.value || 1     // there is always at least one tracker, even if NrOfTrackers is not set
-		delegate: QtObject {
-			id: tracker
-
-			readonly property int modelIndex: model.index
-			readonly property real power: root.trackers.count <= 1 ? root.power : _power.value || 0
-			readonly property real voltage: _voltage.value || 0
-			readonly property real current: isNaN(power) || isNaN(voltage) || voltage === 0 ? NaN : power / voltage
-			readonly property string name: _name.value || ""
-
-			readonly property VeQuickItem _voltage: VeQuickItem {
-				uid: root.trackers.count <= 1
-					 ? root.serviceUid + "/Pv/V"
-					 : root.serviceUid + "/Pv/" + model.index + "/V"
-			}
-
-			readonly property VeQuickItem _power: VeQuickItem {
-				uid: root.trackers.count === 1
-					 ? ""   // only 1 tracker, use root.power instead (i.e. same as /Yield/Power)
-					 : root.serviceUid + "/Pv/" + model.index + "/P"
-			}
-
-			readonly property VeQuickItem _name: VeQuickItem {
-				uid: root.serviceUid + "/Pv/" + model.index + "/Name"
-			}
-		}
-
-		onObjectAdded: function(index, object) {
-			let insertionIndex = root.trackers.count
-			for (let i = 0; i < root.trackers.count; ++i) {
-				const sortIndex = root.trackers.get(i).solarTracker.modelIndex
-				if (index < sortIndex) {
-					insertionIndex = i
-					break
-				}
-			}
-			root.trackers.insert(insertionIndex, {"solarTracker": object})
-		}
-
-		onObjectRemoved: function(index, object) {
-			for (let i = 0; i < root.trackers.count; ++i) {
-				if (root.trackers.get(i).solarTracker.serviceUid === object.serviceUid) {
-					root.trackers.remove(i)
-					break
-				}
-			}
-		}
+		trackerCount: root.trackerCount
 	}
 }

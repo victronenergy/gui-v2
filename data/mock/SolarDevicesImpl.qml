@@ -38,6 +38,10 @@ QtObject {
 				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
 			}
 
+			function mockValue(path) {
+				return Global.mockDataSimulator.mockValue(serviceUid + path)
+			}
+
 			function randomizeMeasurments() {
 				/*
 				1) a solar charger with one tracker has 3 paths:
@@ -57,8 +61,9 @@ QtObject {
 				*/
 
 				let totalPower = 0
-				if (_trackerCount.value > 1) {
-					for (let i = 0; i < _trackerCount.value; ++i) {
+				const trackerCount = mockValue("/NrOfTrackers")
+				if (trackerCount > 1) {
+					for (let i = 0; i < trackerCount; ++i) {
 						const p = Math.random() * 100
 						const trackerUid = serviceUid + "/Pv/" + i
 						Global.mockDataSimulator.setMockValue(trackerUid + "/V", 90 + (Math.random() * 10))

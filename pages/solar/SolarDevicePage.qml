@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	required property SolarDevice solarDevice
-	readonly property QtObject singleTracker: solarDevice.trackers.count === 1 ? solarDevice.trackers.get(0).solarTracker : null
+	readonly property SolarTracker singleTracker: trackerObjects.count === 1 ? trackerObjects.objectAt(0) : null
 
 	title: solarDevice.name
 
@@ -24,6 +24,8 @@ Page {
 			ListItemBackground {
 				height: trackerTable.y + trackerTable.height
 
+				// When there is only one tracker, this table shows the overall voltage and current.
+				// Otherwise, the voltage and current are shown per-tracker in the tracker table.
 				QuantityTableSummary {
 					id: trackerSummary
 
@@ -40,12 +42,12 @@ Page {
 						},
 						{
 							title: root.singleTracker ? CommonWords.voltage : "",
-							value: root.singleTracker ? root.singleTracker.voltage : NaN,
+							value: root.singleTracker?.voltage ?? NaN,
 							unit: root.singleTracker ? VenusOS.Units_Volt_DC : VenusOS.Units_None,
 						},
 						{
 							title: root.singleTracker ? CommonWords.current_amps : "",
-							value: root.singleTracker ? root.singleTracker.current : NaN,
+							value: root.singleTracker?.current ?? NaN,
 							unit: root.singleTracker ? VenusOS.Units_Amp : VenusOS.Units_None
 						},
 						{
@@ -63,9 +65,9 @@ Page {
 					id: trackerTable
 
 					anchors.top: trackerSummary.bottom
-					visible: root.solarDevice.trackers.count > 1
+					visible: root.solarDevice.trackerCount > 1
 
-					rowCount: root.solarDevice.trackers.count
+					rowCount: root.solarDevice.trackerCount
 					units: [
 						{ title: CommonWords.tracker, unit: VenusOS.Units_None },
 						{ title: trackerSummary.model[1].title, unit: VenusOS.Units_Energy_KiloWattHour },
@@ -74,9 +76,9 @@ Page {
 						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
 					valueForModelIndex: function(trackerIndex, column) {
-						const tracker = root.solarDevice.trackers.get(trackerIndex).solarTracker
+						const tracker = trackerObjects.objectAt(trackerIndex)
 						if (column === 0) {
-							return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.solarDevice.trackers.count, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
+							return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.solarDevice.trackerCount, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
 						} else if (column === 1) {
 							// Today's yield for this tracker
 							const history = root.solarDevice.dailyTrackerHistory(0, trackerIndex)
@@ -87,6 +89,18 @@ Page {
 							return tracker.current
 						} else if (column === 4) {
 							return tracker.power
+						}
+					}
+
+					Instantiator {
+						id: trackerObjects
+
+						model: root.solarDevice.trackerCount
+						delegate: SolarTracker {
+							required property int index
+
+							device: root.solarDevice
+							trackerIndex: index
 						}
 					}
 				}
