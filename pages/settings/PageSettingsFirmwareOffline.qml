@@ -54,7 +54,7 @@ Page {
 			}
 
 			ListMountStateButton {
-				button.enabled: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
+				editable: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
 			}
 		}
 	}

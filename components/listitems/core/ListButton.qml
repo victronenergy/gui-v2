@@ -10,17 +10,16 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
-	readonly property alias button: button
 	property alias secondaryText: button.text
-
-	enabled: userHasWriteAccess
 
 	content.children: [
 		ListItemButton {
 			id: button
 
 			width: Math.min(implicitWidth, root.maximumContentWidth)
-			enabled: root.enabled
+			enabled: root.enabled &&
+					 root.editable &&
+					 root.userHasWriteAccess
 
 			onClicked: root.clicked()
 		}
