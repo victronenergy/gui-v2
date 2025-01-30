@@ -82,16 +82,18 @@ Item {
 		radius: backgroundRect.radius
 		effectEnabled: root.editable
 		onClicked: {
-			if(Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite) {
-				if(!root.userHasWriteAccess) {
-					pressArea.toast?.close(true) // close immediately
-					//% "Setting \"%1\" is locked for access level"
-					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
-				} else if(root.editable) {
-					root.clicked()
+			if(root.editable) {
+				if(Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite) {
+					if(!root.userHasWriteAccess) {
+						pressArea.toast?.close(true) // close immediately
+						//% "Setting \"%1\" is locked for access level"
+						pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
+					} else {
+						root.clicked()
+					}
+				} else {
+					Global.dialogLayer.open(readOnlyAccessWarningDialog)
 				}
-			} else {
-				Global.dialogLayer.open(readOnlyAccessWarningDialog)
 			}
 		}
 

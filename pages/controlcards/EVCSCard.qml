@@ -45,9 +45,10 @@ ControlCard {
 
 			text: CommonWords.mode
 			flat: true
-			enabled: root.userHasWriteAccess && modeItem.isValid
+			editable: root.userHasWriteAccess && modeItem.isValid
 
 			content.children: ListItemButton {
+				enabled: modeListItem.editable
 				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
 				text: Global.evChargers.chargerModeToText(modeItem.value)
 				onClicked: Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
