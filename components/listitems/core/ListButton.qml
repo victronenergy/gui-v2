@@ -13,16 +13,14 @@ ListItem {
 	readonly property alias button: button
 	property alias secondaryText: button.text
 
-	signal clicked()
-
-	enabled: userHasWriteAccess
+	editable: true
 
 	content.children: [
 		ListItemButton {
 			id: button
 
 			width: Math.min(implicitWidth, root.maximumContentWidth)
-			enabled: root.enabled
+			enabled: root.clickable
 
 			onClicked: root.clicked()
 		}

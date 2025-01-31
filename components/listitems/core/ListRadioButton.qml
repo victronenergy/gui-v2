@@ -13,9 +13,6 @@ ListItem {
 	property alias checked: radioButton.checked
 	property alias radioButton: radioButton
 
-	signal clicked()
-
-	down: pressArea.containsPress || radioButton.down
 	enabled: userHasWriteAccess
 
 	content.children: [
@@ -26,12 +23,4 @@ ListItem {
 			onClicked: root.clicked()
 		}
 	]
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent.backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root.clicked()
-	}
 }

@@ -19,7 +19,7 @@ ListItem {
 
 	readonly property int mode: Qt.platform.os == "wasm" ? VenusOS.ListLink_Mode_LinkButton : VenusOS.ListLink_Mode_QRCode
 
-	down: pressArea.containsPress
+	editable: mode === VenusOS.ListLink_Mode_LinkButton
 
 	content.children: [
 		SecondaryListLabel {
@@ -37,7 +37,7 @@ ListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "qrc:/images/icon_open_link_32.svg"
 			rotation: 180
-			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 		},
 
 		Item {
@@ -66,14 +66,5 @@ ListItem {
 		}
 	]
 
-	ListPressArea {
-		id: pressArea
-
-		enabled: root.mode === VenusOS.ListLink_Mode_LinkButton
-		radius: backgroundRect.radius
-		anchors.fill: root.backgroundRect
-		onClicked: {
-			BackendConnection.openUrl(root.url)
-		}
-	}
+	onClicked: BackendConnection.openUrl(root.url)
 }
