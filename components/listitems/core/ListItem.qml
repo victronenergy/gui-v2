@@ -10,6 +10,45 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	/* ListItem Visual and Behavioural Rules
+	   -------------------------------------
+
+		ListItem provices its own clicked() signal which is emitted by its own ListPressArea.
+		All ListItems and its derivatives are therefore potentially clickable by default and
+		must follow these rules consistently:
+
+		- ListItems shall NEVER have enabled: false; it should always be true.
+		- ListItems may set editable: true (false by default)
+		- ListItems should set showAccessLevel and/or writeAccessLevel where necessary
+		- ListItems should always activate the default action for the child item when clicked() emitted
+
+		- The internal ListPressArea shall always be clickable, however whether it goes on to
+		  emit ListItem's own clicked() signal depends on the following logic:
+
+		if editable: true
+
+			if the system is readonly:
+
+				Show a toast saying system is readonly
+				No clicked() signal is emitted on the ListItem
+				The ListPressArea press effect DOES occur
+
+			else if userHasWriteAccess is false:
+
+				Show toast saying you can’t edit it
+				Mo clicked() signal is emitted on the ListItem
+				The ListPressArea press effect DOES occur
+
+			else
+				emit ListItem clicked()
+				The ListPressArea press effect DOES occur
+
+		else // editable: false
+
+			No clicked() signal is emitted on the ListItem
+			The  ListPressArea press effect DOES NOT occur
+	*/
+
 	property alias text: primaryLabel.text
 	property alias content: content
 	property alias bottomContent: bottomContent
