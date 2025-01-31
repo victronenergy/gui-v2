@@ -402,6 +402,21 @@ Item {
 		Component.onCompleted: pageManager.statusBar = statusBar
 	}
 
+	Rectangle {
+		anchors.fill: parent
+
+		color: Theme.color_page_background
+	}
+
+	GradientListView {
+
+		model: ObjectModel {
+			ListItem {
+				text: "ListItem"
+			}
+		}
+	}
+
 	Loader {
 		active: Global.displayCpuUsage
 		anchors {
