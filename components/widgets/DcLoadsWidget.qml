@@ -55,17 +55,11 @@ OverviewWidget {
 						Units.getCombinedDisplayText(VenusOS.Units_Watt, dcDevice.power),
 					]
 
+					onClicked: root._showSettingsPage(device)
+
 					DcDevice {
 						id: dcDevice
 						serviceUid: deviceDelegate.device.serviceUid
-					}
-
-					ListPressArea {
-						id: delegatePressArea
-
-						anchors.fill: parent.backgroundRect
-						radius: backgroundRect.radius
-						onClicked: root._showSettingsPage(device)
 					}
 
 					CP.ColorImage {
