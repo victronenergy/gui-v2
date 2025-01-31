@@ -53,8 +53,8 @@ Item {
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
-	property bool down
-	property bool flat
+	readonly property alias down: pressArea.containsPress
+	property bool flat: false
 	property alias backgroundRect: backgroundRect
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
@@ -73,9 +73,22 @@ Item {
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
+	property bool editable: false
+	readonly property bool clickable: enabled &&
+									  editable &&
+									  (Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite ?? false) &&
+									  userHasWriteAccess
+
+	signal clicked()
+
 	visible: preferredVisible && userHasReadAccess
 	implicitHeight: preferredVisible && userHasReadAccess ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
 	implicitWidth: parent ? parent.width : 0
+
+	// NOTE: pressArea and backgroundRect both manage their z order manually:
+	// the backgroundRect is forcibly behind the pressArea
+	// We declare them in their effective declarative z-order to avoid at least
+	// visual confusion when reading the code.
 
 	ListItemBackground {
 		id: backgroundRect
@@ -99,6 +112,40 @@ Item {
 				width: Theme.geometry_listItem_radius
 				height: parent.height
 				color: backgroundRect.color
+			}
+		}
+	}
+
+	ListPressArea {
+		id: pressArea
+
+		property ToastNotification toast: null
+
+		// Note: this doesn't fill the root - its height is less the gradient list spacing
+
+		anchors.fill: backgroundRect
+		radius: backgroundRect.radius
+		effectEnabled: root.editable
+		onClicked: {
+			if(root.editable) {
+				if((Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadOnly ?? false)) {
+					pressArea.toast?.close(true) // close immediately
+					//% "UI is in Read-Only Mode"
+					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem-readOnly-mode"))
+				} else if(!root.userHasWriteAccess) {
+					pressArea.toast?.close(true) // close immediately
+					//% "Setting \"%1\" is locked for access level"
+					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access").arg(root.text))
+				} else {
+					root.clicked()
+				}
+			}
+		}
+
+		Connections {
+			target: pressArea.toast
+			function onDismissed() {
+				pressArea.toast = null
 			}
 		}
 	}
