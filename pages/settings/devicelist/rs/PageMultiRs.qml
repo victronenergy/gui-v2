@@ -200,11 +200,11 @@ Page {
 
 			//% "PV"
 			text: qsTrId("settings_multirs_pv")
-			textModel: [
-				{ value: pvVoltage.value, unit: VenusOS.Units_Volt_DC },
-				{ value: pvCurrent, unit: VenusOS.Units_Amp, visible: pvVoltage.isValid },
-				{ value: pvTotalPower.value, unit: VenusOS.Units_Watt },
-			]
+			model: QuantityObjectModel {
+				QuantityObject { object: pvVoltage; unit: VenusOS.Units_Volt_DC }
+				QuantityObject { object: pcCurrent; unit: VenusOS.Units_Amp }
+				QuantityObject { object: pvTotalPower; unit: VenusOS.Units_Watt }
+			}
 		}
 	}
 

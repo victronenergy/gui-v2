@@ -62,29 +62,39 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Soc"
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
+				id: flagsGroup
+
+				readonly property string sustain: "Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataItem.value).number
+				readonly property string lowSoc: "Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataItem.value).number
+
 				text: "Flags"
-				textModel: [
-					"Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataItem.value).number,
-					"Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataItem.value).number
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: flagsGroup; key: "sustain" }
+					QuantityObject { object: flagsGroup; lowSoc: "lowSoc" }
+				}
 			}
 
 			ListQuantityGroup {
 				text: "AC power setpoint"
-				textModel: [
-					{ value: remoteSetpointL1.value, unit: VenusOS.Units_Watt },
-					{ value: remoteSetpointL2.value, unit: VenusOS.Units_Watt },
-					{ value: remoteSetpointL3.value, unit: VenusOS.Units_Watt }
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: remoteSetpointL1; unit: VenusOS.Units_Watt }
+					QuantityObject { object: remoteSetpointL2; unit: VenusOS.Units_Watt }
+					QuantityObject { object: remoteSetpointL3; unit: VenusOS.Units_Watt }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
+				id: limitsGroup
+
+				readonly property string charge: "Charge: " + Units.getDisplayText(VenusOS.Units_None, maxChargePower.value).number
+				readonly property string discharge: "Discharge: " + Units.getDisplayText(VenusOS.Units_None, maxDischargePower.value).number
+
 				text: "Limits"
-				textModel: [
-					"Charge: " + Units.getDisplayText(VenusOS.Units_None, maxChargePower.value).number,
-					"Discharge: " + Units.getDisplayText(VenusOS.Units_None, maxDischargePower.value).number
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: limitsGroup; key: "charge" }
+					QuantityObject { object: limitsGroup; key: "discharge" }
+				}
 			}
 
 			ListSwitch {

@@ -52,13 +52,12 @@ VisibleItemModel {
 				preferredVisible: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid ||
 												  phasePower.isValid || phasePowerFactor.isValid)
 				text: CommonWords.ac_phase_x.arg(modelData)
-				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
-					{ value: phasePowerFactor.value, unit: VenusOS.Units_PowerFactor,
-						visible: phasePowerFactor.isValid },
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC }
+					QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp }
+					QuantityObject { object: phasePower; unit: VenusOS.Units_Watt }
+					QuantityObject { object: phasePowerFactor; unit: VenusOS.Units_PowerFactor }
+				}
 
 				VeQuickItem {
 					id: phaseVoltage
@@ -83,10 +82,10 @@ VisibleItemModel {
 	ListQuantityGroup {
 		//% "AC Totals"
 		text: qsTrId("ac-in-modeldefault_ac_totals")
-		textModel: [
-			{ value: totalPower.value, unit: VenusOS.Units_Watt },
-			{ value: totalEnergy.value, unit: VenusOS.Units_Energy_KiloWattHour },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: totalPower; unit: VenusOS.Units_Watt }
+			QuantityObject { object: totalEnergy; unit: VenusOS.Units_Energy_KiloWattHour }
+		}
 
 		VeQuickItem {
 			id: totalPower

@@ -59,10 +59,10 @@ Page {
 						//: %1 = battery number
 						//% "Battery %1"
 						text: qsTrId("settings_accharger_battery").arg(model.index + 1)
-						textModel: [
-							{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-							{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-						]
+						model: QuantityObjectModel {
+							QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+							QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+						}
 
 						VeQuickItem {
 							id: dcVoltage

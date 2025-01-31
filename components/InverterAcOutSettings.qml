@@ -28,11 +28,11 @@ Column {
 	ListQuantityGroup {
 		text: CommonWords.ac_out
 		preferredVisible: !root.isInverterCharger
-		textModel: [
-			{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt_AC },
-			{ value: inverterData.phase1.current, unit: VenusOS.Units_Amp },
-			{ value: inverterData.phase1.power, unit: VenusOS.Units_Watt },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: inverterData.phase1; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+			QuantityObject { object: inverterData.phase1; key: "current"; unit: VenusOS.Units_Amp }
+			QuantityObject { object: inverterData.phase1; key: "power"; unit: VenusOS.Units_Watt }
+		}
 	}
 
 	ListQuantityGroup {
@@ -44,12 +44,12 @@ Column {
 		//% "AC Out L%1"
 		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.isValid ? acPhaseNumber.value + 1 : 1)
 		preferredVisible: root.isInverterCharger
-		textModel: [
-			{ value: acPhase.voltage, unit: VenusOS.Units_Volt_AC },
-			{ value: acPhase.current, unit: VenusOS.Units_Amp },
-			{ value: acPhase.power, unit: VenusOS.Units_Watt },
-			{ value: acPhase.frequency, unit: VenusOS.Units_Hertz },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: acPhase; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+			QuantityObject { object: acPhase; key: "current"; unit: VenusOS.Units_Amp }
+			QuantityObject { object: acPhase; key: "power"; unit: VenusOS.Units_Watt }
+			QuantityObject { object: acPhase; key: "frequency"; unit: VenusOS.Units_Hertz }
+		}
 
 		VeQuickItem {
 			id: acPhaseNumber

@@ -43,17 +43,17 @@ OverviewWidget {
 			GradientListView {
 				model: Global.allDevicesModel.combinedDcLoadDevices
 
-				delegate: ListTextGroup {
+				delegate: ListQuantityGroup {
 					id: deviceDelegate
 
 					required property var device
 
 					text: device.name
-					textModel: [
-						Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, dcDevice.voltage),
-						Units.getCombinedDisplayText(VenusOS.Units_Amp, dcDevice.current),
-						Units.getCombinedDisplayText(VenusOS.Units_Watt, dcDevice.power),
-					]
+					model: QuantityObjectModel {
+						QuantityObject { object: dcDevice; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: dcDevice; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: dcDevice; key: "power"; unit: VenusOS.Units_Watt }
+					}
 
 					DcDevice {
 						id: dcDevice

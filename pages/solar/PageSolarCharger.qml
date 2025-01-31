@@ -125,11 +125,11 @@ Page {
 			preferredVisible: root.trackerCount < 2
 
 			// PV voltage and current are not visible in parallel mode
-			textModel: [
-				{ value: pvVoltage.value, unit: VenusOS.Units_Volt_DC, visible: pvVoltage.isValid },
-				{ value: pvCurrent, unit: VenusOS.Units_Amp, visible: !isNaN(pvCurrent) },
-				{ value: pvTotalPower.value, unit: VenusOS.Units_Watt },
-			]
+			model: QuantityObjectModel {
+				QuantityObject { object: pvVoltage; unit: VenusOS.Units_Volt_DC }
+				QuantityObject { object: pcCurrent; unit: VenusOS.Units_Amp }
+				QuantityObject { object: pvTotalPower; unit: VenusOS.Units_Watt }
+			}
 
 			VeQuickItem {
 				id: pvVoltage
@@ -176,13 +176,13 @@ Page {
 
 		ListQuantityGroup {
 			text: CommonWords.battery
-			textModel: [
-				{ value: batteryVoltage.value, unit: VenusOS.Units_Volt_DC, },
-				{ value: batteryCurrent.value, unit: VenusOS.Units_Amp },
+			model: QuantityObjectModel {
+				QuantityObject { object: batteryVoltage; unit: VenusOS.Units_Volt_DC }
+				QuantityObject { object: batteryCurrent; unit: VenusOS.Units_Amp }
 
 				// Only available on CANbus chargers
-				{ value: batteryTemperature.value, unit: Global.systemSettings.temperatureUnit, visible: batteryTemperature.isValid }
-			]
+				QuantityObject { object: batteryTemperature; unit: VenusOS.Units_Watt }
+			}
 
 			VeQuickItem {
 				id: batteryVoltage

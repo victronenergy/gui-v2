@@ -35,20 +35,22 @@ Page {
 						qsTrId("lynxiondiagnostics_4th_last_error"),
 					]
 
-					delegate: ListTextGroup {
+					delegate: ListQuantityGroup {
 						text: modelData
-						textModel: [
-							error.isValid ? BmsError.description(error.value) : error.invalidText,
-							errorTimestamp.isValid ? Qt.formatDateTime(new Date(errorTimestamp.value * 1000), "yyyy-MM-dd hh:mm") : "--"
-						]
+						model: QuantityObjectModel {
+							QuantityObject { object: error; key: "textValue" }
+							QuantityObject { object: errorTimestamp; key: "textValue" }
+						}
 
 						VeQuickItem {
 							id: error
+							readonly property string textValue: isValid ? BmsError.description(value) : invalidText
 							uid: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Error"
 						}
 
 						VeQuickItem {
 							id: errorTimestamp
+							readonly property string textValue: isValid ? Qt.formatDateTime(new Date(value * 1000), "yyyy-MM-dd hh:mm") : "--"
 							uid: root.bindPrefix + "/Diagnostics/LastErrors/" + (model.index + 1) + "/Time"
 						}
 					}

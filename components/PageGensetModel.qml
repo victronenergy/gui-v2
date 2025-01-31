@@ -161,12 +161,11 @@ VisibleItemModel {
 						//% "AC"
 					  ? qsTrId("ac-in-genset_ac")
 					  : CommonWords.ac_phase_x.arg(model.index + 1)
-
-				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC }
+					QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp }
+					QuantityObject { object: phasePower; unit: VenusOS.Units_Watt }
+				}
 
 				VeQuickItem {
 					id: phaseVoltage

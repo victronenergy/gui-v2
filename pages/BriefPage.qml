@@ -10,6 +10,17 @@ import Victron.Gauges
 SwipeViewPage {
 	id: root
 
+
+	Timer {
+		running: true
+		interval: 500
+		onTriggered: {
+			Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml")
+		}
+
+	}
+
+
 	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
 	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0

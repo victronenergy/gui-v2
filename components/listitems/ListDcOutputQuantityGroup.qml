@@ -14,11 +14,11 @@ ListQuantityGroup {
 	//: DC output measurement values
 	//% "Output"
 	text: qsTrId("dc_output")
-	textModel: [
-		{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-		{ value: dcCurrent.value, unit: VenusOS.Units_Amp, visible: dcCurrent.isValid },
-		{ value: dcPower.value, unit: VenusOS.Units_Watt, visible: dcPower.isValid },
-	]
+	model: QuantityObjectModel {
+		QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+		QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+		QuantityObject { object: dcPower; unit: VenusOS.Units_Watt }
+	}
 
 	VeQuickItem {
 		id: dcVoltage

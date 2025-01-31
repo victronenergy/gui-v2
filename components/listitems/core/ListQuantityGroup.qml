@@ -9,9 +9,8 @@ import Victron.VenusOS
 ListItem {
 	id: root
 
-	property alias textModel: quantityRow.model
+	property alias model: quantityRow.model
 
-	content.spacing: 0
 	content.children: [
 		QuantityRow {
 			id: quantityRow
