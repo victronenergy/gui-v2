@@ -413,6 +413,35 @@ Item {
 		model: ObjectModel {
 			ListItem {
 				text: "ListItem"
+				editable: true
+				onClicked: console.log("ListItem clicked")
+			}
+			ListRadioButton {
+				text: "RadioButton"
+				editable: true
+			}
+			ListSwitch {
+				text: "Dark Mode"
+				updateDataOnClick: true
+				invertSourceValue: true
+				dataItem.uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ColorScheme"
+			}
+			ListSwitch {
+				text: "Try to Switch me"
+				dataItem.uid: "invalid path"
+				onClicked: if(!dataItem.isValid) console.log("ListSwitch dataItem invalid")
+			}
+			ListLink {
+				url: Qt.url("https://www.qt.io")
+			}
+			ListButton {
+				text: "ListButton"
+				secondaryText: "Press me"
+				onClicked: console.log("ListButton clicked")
+			}
+			ListNavigation {
+				text: "ListNavigation"
+				onClicked: console.log("ListNavigation clicked")
 			}
 		}
 	}
