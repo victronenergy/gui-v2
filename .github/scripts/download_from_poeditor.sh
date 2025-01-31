@@ -4,7 +4,7 @@
 # from POEditor, making sure that the release uses the
 # most up to date translations. It is typically called from the GitHub
 # action, via the cmake build system, and only running on tagged releases.
-# 
+#
 # example usage: cmake /path/to/CMakeLists.txt; make download_translations
 # example usage: download_from_poeditor.sh uk /path/to/gui-v2/i18n/venus-gui-v2_uk.ts
 
