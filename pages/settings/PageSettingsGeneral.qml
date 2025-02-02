@@ -176,6 +176,35 @@ Page {
 					}
 				}
 			}
+
+			SettingsListHeader { }
+
+			ListNavigation {
+				//% "Useful Links"
+				text: qsTrId("pagesettingsgeneral_useful_links")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsUsefulLinks.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Modification checks"
+				text: qsTrId("pagesettingsgeneral_modification_checks")
+				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+					//% "Unmodified"
+					? qsTrId("pagesettingsmodificationchecks_unmodified")
+					//% "Modified"
+					:  qsTrId("pagesettingsmodificationchecks_modified")
+				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
+
+				VeQuickItem {
+					id: fsModifiedStateItem
+					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
+				}
+				VeQuickItem {
+					id: systemHooksStateItem
+					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
+				}
+			}
 		}
 	}
 }

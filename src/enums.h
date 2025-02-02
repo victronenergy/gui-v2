@@ -743,6 +743,16 @@ public:
 	};
 	Q_ENUM(ListLink_Mode)
 
+	enum ModificationChecks_SystemHooksState {
+		ModificationChecks_SystemHooksState_NonePresent      = 0,
+		ModificationChecks_SystemHooksState_RcLocalDisabled  = 1,
+		ModificationChecks_SystemHooksState_RcSLocalDisabled = 2,
+		ModificationChecks_SystemHooksState_RcLocal          = 4,
+		ModificationChecks_SystemHooksState_RcSLocal         = 8,
+		ModificationChecks_SystemHooksState_HookLoadedAtBoot = 16
+	};
+	Q_ENUM(ModificationChecks_SystemHooksState)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 

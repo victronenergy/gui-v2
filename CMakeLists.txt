@@ -514,6 +514,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusDiscovered.qml
     pages/settings/PageSettingsModbusTcp.qml
     pages/settings/PageSettingsModbusTcpServices.qml
+    pages/settings/PageSettingsModificationChecks.qml
     pages/settings/PageSettingsNodeRed.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml
@@ -526,6 +527,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsTailscale.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
+    pages/settings/PageSettingsUsefulLinks.qml
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
     pages/settings/PageSettingsWifi.qml
@@ -1279,4 +1281,3 @@ add_custom_target(
     DEPENDS "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
 )
 add_dependencies(${PROJECT_NAME} theme_parser)
-
