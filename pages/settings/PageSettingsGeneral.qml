@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Templates as T
 
 Page {
 	id: root
@@ -136,46 +135,7 @@ Page {
 
 			SettingsListHeader { }
 
-			ListButton {
-				text: CommonWords.reboot
-				//% "Reboot now"
-				button.text: qsTrId("settings_reboot_now")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
-
-				Component {
-					id: confirmRebootDialogComponent
-
-					ModalWarningDialog {
-						//% "Press 'OK' to reboot"
-						title: qsTrId("press_ok_to_reboot")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
-							}
-						}
-					}
-				}
-
-				Component {
-					id: rebootingDialogComponent
-
-					ModalWarningDialog {
-						title: BackendConnection.type === BackendConnection.DBusSource
-							//% "Rebooting..."
-							? qsTrId("dialoglayer_rebooting")
-							//% "Device has been rebooted."
-							: qsTrId("dialoglayer_rebooted")
-
-						// On device, dialog cannot be dismissed; just wait until device is rebooted.
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-						footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-						footer.opacity: footer.enabled ? 1 : 0
-					}
-				}
-			}
+			ListRebootButton { }
 
 			SettingsListHeader { }
 

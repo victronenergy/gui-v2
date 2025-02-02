@@ -334,47 +334,13 @@ Page {
 				}
 			}
 
-			ListButton {
+			ListRebootButton {
 				//% "Reboot now to apply changes"
 				text: qsTrId("pagesettingsmodificationchecks_reboot_now_to_apply_changes")
-				//% "Reboot now"
-				button.text: qsTrId("settings_reboot_now")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				preferredVisible: systemHooksState >= 1 && systemHooksState <= 4
-				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
-
-				Component {
-					id: confirmRebootDialogComponent
-
-					ModalWarningDialog {
-						//% "Press 'OK' to reboot"
-						title: qsTrId("press_ok_to_reboot")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
-							}
-						}
-					}
-				}
-
-				Component {
-					id: rebootingDialogComponent
-
-					ModalWarningDialog {
-						title: BackendConnection.type === BackendConnection.DBusSource
-							//% "Rebooting..."
-							? qsTrId("dialoglayer_rebooting")
-							//% "Device has been rebooted."
-							: qsTrId("dialoglayer_rebooted")
-
-						// On device, dialog cannot be dismissed; just wait until device is rebooted.
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-						footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-						footer.opacity: footer.enabled ? 1 : 0
-					}
-				}
+				// Show button if
+				// - Switch is enabled and custom-rc is not present, but rc.local or rcS.local are present
+				// - Switch is disabled and custom-rc is present
+				preferredVisible: (enableAllModifications.checked && !(systemHooksState & 16) && ((systemHooksState & 4) || (systemHooksState & 8))) || (!enableAllModifications.checked && (systemHooksState & 16))
 			}
 
 			SettingsListHeader {
