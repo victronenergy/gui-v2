@@ -9,6 +9,13 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool allModificationsEnabled: allModificationsEnabledItem.isValid && allModificationsEnabledItem.value === 1
+
+	VeQuickItem {
+		id: allModificationsEnabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/ModificationChecks/AllModificationsEnabled"
+	}
+
 	GradientListView {
 		id: settingsListView
 
@@ -172,12 +179,19 @@ Page {
 				preferredVisible: osLargeFeatures.visible
 			}
 
+			PrimaryListLabel {
+				//% "These features are disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
+				text: qsTrId("settings_large_features_currently_disabled")
+				preferredVisible: osLargeFeatures.visible && !root.allModificationsEnabled
+			}
+
 			ListSwitch {
 				id: signalk
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				enabled: userHasWriteAccess && root.allModificationsEnabled
 				preferredVisible: dataItem.isValid
 			}
 
