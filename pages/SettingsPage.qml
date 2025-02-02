@@ -38,7 +38,7 @@ SwipeViewPage {
 			SettingsListNavigation {
 				//% "General"
 				text: qsTrId("settings_general")
-				//% "Access control, Display, Language"
+				//% "Access control, Display, Language, Support"
 				secondaryText: qsTrId("settings_access_control_display_language")
 				pageSource: "/pages/settings/PageSettingsGeneral.qml"
 				iconSource: "qrc:/images/icon_general_32.png"

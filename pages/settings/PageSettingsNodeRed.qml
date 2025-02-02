@@ -9,13 +9,27 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool allModificationsEnabled: allModificationsEnabledItem.isValid && allModificationsEnabledItem.value === 1
+
+	VeQuickItem {
+		id: allModificationsEnabledItem
+		uid: Global.systemSettings.serviceUid + "/Settings/System/ModificationChecks/AllModificationsEnabled"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
+			PrimaryListLabel {
+				//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
+				text: qsTrId("settings_large_features_currently_disabled")
+				preferredVisible: !root.allModificationsEnabled
+			}
+
 			ListRadioButtonGroup {
 				id: nodered
 
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+				enabled: userHasWriteAccess && root.allModificationsEnabled
 				preferredVisible: dataItem.isValid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
