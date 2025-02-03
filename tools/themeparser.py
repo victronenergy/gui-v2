@@ -200,6 +200,9 @@ class JsonThemeParser:
     def parse_theme_subdir(self, theme_subdir):
         unparsed_properties = {}
         for filename in os.listdir(theme_subdir):
+            # skip hidden files
+            if filename.startswith("."):
+                continue
             json_info = JsonFileInfo.from_json_filename(filename)
             with open(os.path.join(theme_subdir, filename)) as f:
                 # Step 1: parse theme properties that have simple values
@@ -252,7 +255,9 @@ class JsonThemeParser:
 def generate_theme_code(themes_dir, output_header_name):
     parser = JsonThemeParser()
     for subdir in os.listdir(themes_dir):
-        parser.parse_theme_subdir(os.path.join(themes_dir, subdir))
+        # skip hidden files which might be considered folders
+        if not subdir.startswith("."):
+            parser.parse_theme_subdir(os.path.join(themes_dir, subdir))
 
     theme_properties = parser.sorted_theme_properties()
     property_declarations = [theme_property.property_declaration() for theme_property in theme_properties]
