@@ -2480,11 +2480,6 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
       <translation>Vorsicht, bei ESS-Systemen sowie bei Systemen mit einer verwalteten Batterie muss die CAN-Bus-Geräteinstanz auf 0 konfiguriert bleiben. Weitere Informationen finden Sie im GX-Handbuch.</translation>
     </message>
-    <message id="settings_vecan_device_instance">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
-      <source>Device Instance</source>
-      <translation>Geräteinstanz</translation>
-    </message>
     <message id="settings_vecan_nad">
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="45"/>
       <source>Network Address</source>
@@ -2494,11 +2489,6 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
       <source>VE.CAN devices</source>
       <translation>VE.CAN-Geräte</translation>
-    </message>
-    <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="29"/>
-      <source>Device# %1</source>
-      <translation>Gerät# %1</translation>
     </message>
     <message id="settings_wifi_no_access_points">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="72"/>
@@ -8714,7 +8704,7 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
     <message id="pagesettingsintegrations_physical_io">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
       <source>Physical I/O</source>
-      <translation>Physikalische E/A</translation>
+      <translation>Physische E/A</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="58"/>
@@ -8796,7 +8786,7 @@ Dokumentation unter https://ve3.nl/vol</translation>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="89"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
-      <translation>Verteilte Spannungs- und Stromregelung (DVCC)</translation>
+      <translation>Distributed Voltage and Current Control (DVCC)</translation>
     </message>
     <message id="settings_system_calculated_estimate_of_dc_consumption">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
@@ -8827,7 +8817,7 @@ Dokumentation unter https://ve3.nl/vol</translation>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
       <location filename="../../pages/SettingsPage.qml" line="51"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
-      <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
+      <translation>Ethernet, WiFi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
       <location filename="../../pages/SettingsPage.qml" line="58"/>
@@ -8901,22 +8891,22 @@ Wenn der Generator derzeit aufgrund einer Autostart-Bedingung läuft, wird er du
     <message id="pagesettingsgeneral_data_units">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
       <source>Data units</source>
-      <translation/>
+      <translation>Dateneinheiten</translation>
     </message>
     <message id="solarcharger_not_supported">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
       <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
-      <translation/>
+      <translation>Leider ist das angeschlossene MPPT Solarladegerät nicht kompatibel.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_70_15">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
       <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
-      <translation/>
+      <translation>Der 70/15 muss aus dem Jahr/Woche 1308 oder später sein. MPPT 70/15, die aktuell aus unserem Lager versandt werden, sind kompatibel.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_version">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
       <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
-      <translation/>
+      <translation>Die Firmware-Version im MPPT-Solarladegerät muss v1.09 oder höher sein. Wenden Sie sich für Update-Anweisungen und -Dateien an den Victron-Service.</translation>
     </message>
     <message id="solarcharger_pv">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="124"/>
@@ -8927,7 +8917,7 @@ Wenn der Generator derzeit aufgrund einer Autostart-Bedingung läuft, wird er du
     <message id="solarcharger_total_power">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="147"/>
       <source>Total PV power</source>
-      <translation/>
+      <translation>Gesamte PV-Leistung</translation>
     </message>
     <message id="solarcharger_total_yield">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="209"/>
@@ -8954,6 +8944,18 @@ Wenn der Generator derzeit aufgrund einer Autostart-Bedingung läuft, wird er du
     <message id="page_vebus_charge_battery">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="169"/>
       <source>Charge battery</source>
+      <translation>Batterie laden</translation>
+    </message>
+    <message id="settings_vecan_device_instance">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
+      <source>VE.Can Device Instance</source>
+      <oldsource>Device Instance</oldsource>
+      <translation/>
+    </message>
+    <message id="settings_vecan_device_number">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="29"/>
+      <source>VE.Can Instance# %1</source>
+      <oldsource>Device# %1</oldsource>
       <translation/>
     </message>
     <message id="evcs_ac_position">

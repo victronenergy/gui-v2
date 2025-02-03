@@ -2480,11 +2480,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
       <translation>请注意，对于ESS系统以及带有管理电池的系统而言，CAN总线设备实例必须始终配置为0。详见GX手册。</translation>
     </message>
-    <message id="settings_vecan_device_instance">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
-      <source>Device Instance</source>
-      <translation>设备实例</translation>
-    </message>
     <message id="settings_vecan_nad">
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="45"/>
       <source>Network Address</source>
@@ -2494,11 +2489,6 @@ Use unless prohibited by the utility provider.</source>
       <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
       <source>VE.CAN devices</source>
       <translation>VE.CAN 设备</translation>
-    </message>
-    <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="29"/>
-      <source>Device# %1</source>
-      <translation>设备# %1</translation>
     </message>
     <message id="settings_wifi_no_access_points">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="72"/>
@@ -8952,6 +8942,18 @@ If the generator is currently running due to a autostart condition, disabling au
     <message id="page_vebus_charge_battery">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="169"/>
       <source>Charge battery</source>
+      <translation/>
+    </message>
+    <message id="settings_vecan_device_instance">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
+      <source>VE.Can Device Instance</source>
+      <oldsource>Device Instance</oldsource>
+      <translation/>
+    </message>
+    <message id="settings_vecan_device_number">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="29"/>
+      <source>VE.Can Instance# %1</source>
+      <oldsource>Device# %1</oldsource>
       <translation/>
     </message>
     <message id="evcs_ac_position">
