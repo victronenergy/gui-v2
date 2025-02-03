@@ -14,7 +14,7 @@ ListItem {
 	property alias secondaryLabel: secondaryLabel
 	property alias icon: icon
 
-	editable: true
+	interactive: true
 
 	content.children: [
 		Label {

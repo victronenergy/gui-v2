@@ -13,7 +13,7 @@ ListItem {
 	readonly property alias button: button
 	property alias secondaryText: button.text
 
-	editable: true
+	interactive: true
 
 	content.children: [
 		ListItemButton {

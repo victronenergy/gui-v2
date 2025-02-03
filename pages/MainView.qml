@@ -413,12 +413,12 @@ Item {
 		model: ObjectModel {
 			ListItem {
 				text: "ListItem"
-				editable: true
+				interactive: true
 				onClicked: console.log("ListItem clicked")
 			}
 			ListRadioButton {
 				text: "RadioButton"
-				editable: true
+				interactive: true
 			}
 			ListSwitch {
 				text: "Dark Mode"

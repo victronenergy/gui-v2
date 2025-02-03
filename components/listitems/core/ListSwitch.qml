@@ -19,7 +19,7 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	editable: true
+	interactive: true
 
 	content.children: [
 		Label {

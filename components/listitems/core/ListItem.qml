@@ -18,14 +18,14 @@ Item {
 		must follow these rules consistently:
 
 		- ListItems shall NEVER have enabled: false; it should always be true.
-		- ListItems may set editable: true (false by default)
+		- ListItems may set interactive: true (false by default)
 		- ListItems should set showAccessLevel and/or writeAccessLevel where necessary
 		- ListItems should always activate the default action for the child item when clicked() emitted
 
 		- The internal ListPressArea shall always be clickable, however whether it goes on to
 		  emit ListItem's own clicked() signal depends on the following logic:
 
-		if editable: true
+		if interactive: true
 
 			if the system is readonly:
 
@@ -43,7 +43,7 @@ Item {
 				emit ListItem clicked()
 				The ListPressArea press effect DOES occur
 
-		else // editable: false
+		else // interactive: false
 
 			No clicked() signal is emitted on the ListItem
 			The  ListPressArea press effect DOES NOT occur
@@ -73,9 +73,9 @@ Item {
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
-	property bool editable: false
+	property bool interactive: false
 	readonly property bool clickable: enabled &&
-									  editable &&
+									  interactive &&
 									  (Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadWrite ?? false) &&
 									  userHasWriteAccess
 
@@ -125,9 +125,9 @@ Item {
 
 		anchors.fill: backgroundRect
 		radius: backgroundRect.radius
-		effectEnabled: root.editable
+		effectEnabled: root.interactive
 		onClicked: {
-			if(root.editable) {
+			if(root.interactive) {
 				if((Global.systemSettings?.accessMode === VenusOS.User_AccessType_ReadOnly ?? false)) {
 					pressArea.toast?.close(true) // close immediately
 					//% "UI is in Read-Only Mode"

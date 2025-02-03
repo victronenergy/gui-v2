@@ -19,7 +19,7 @@ ListItem {
 
 	readonly property int mode: Qt.platform.os == "wasm" ? VenusOS.ListLink_Mode_LinkButton : VenusOS.ListLink_Mode_QRCode
 
-	editable: mode === VenusOS.ListLink_Mode_LinkButton
+	interactive: mode === VenusOS.ListLink_Mode_LinkButton
 
 	content.children: [
 		SecondaryListLabel {
