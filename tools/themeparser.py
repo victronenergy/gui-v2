@@ -252,7 +252,9 @@ class JsonThemeParser:
 def generate_theme_code(themes_dir, output_header_name):
     parser = JsonThemeParser()
     for subdir in os.listdir(themes_dir):
-        parser.parse_theme_subdir(os.path.join(themes_dir, subdir))
+        # skip hidden files that could wrongly be identified as folders
+        if not subdir.startswith("."):
+            parser.parse_theme_subdir(os.path.join(themes_dir, subdir))
 
     theme_properties = parser.sorted_theme_properties()
     property_declarations = [theme_property.property_declaration() for theme_property in theme_properties]
