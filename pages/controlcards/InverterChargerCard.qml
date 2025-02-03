@@ -94,20 +94,17 @@ ControlCard {
 
 		FlatListItemSeparator {}
 
-		ListItem {
+		ListButton {
+			id: essStateButton
 			text: CommonWords.ess
 			flat: true
 			preferredVisible: essModeItem.isValid
-			content.children: [
-				ListItemButton {
-					font.pixelSize: Theme.font_size_body1
-					text: Global.ess.essStateToButtonText(essModeItem.value)
-					enabled: userHasWriteAccess
-					onClicked: {
-						Global.dialogLayer.open(essModeDialogComponent, { essMode: essModeItem.value })
-					}
-				}
-			]
+			secondaryText: Global.ess.essStateToButtonText(essModeItem.value)
+			// change the font size for the child button
+			button.font.pixelSize: Theme.font_size_body1
+			onClicked: {
+				Global.dialogLayer.open(essModeDialogComponent, { essMode: essModeItem.value })
+			}
 		}
 
 		ListButton {
