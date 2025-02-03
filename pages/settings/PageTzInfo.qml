@@ -97,16 +97,18 @@ Page {
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				enabled: preferredVisible && Global.systemSettings.time.isValid
+				interactive: Global.systemSettings.time.isValid
 
 				content.children: Row {
 					spacing: Theme.geometry_listItem_content_spacing
 					ListItemButton {
 						text: ClockTime.currentDate
+						enabled: timeZoneButton.clickable
 						onClicked: root._openDateSelector()
 					}
 					ListItemButton {
 						text: ClockTime.currentTime
+						enabled: timeZoneButton.clickable
 						onClicked: root._openTimeSelector()
 					}
 				}
