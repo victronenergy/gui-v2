@@ -64,7 +64,7 @@ ControlCard {
 			stepSize: 1
 			dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
 			preferredVisible: dataItem.isValid
-			enabled: modeItem.value === VenusOS.Evcs_Mode_Manual
+			interactive: dataItem.isValid && modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		FlatListItemSeparator {

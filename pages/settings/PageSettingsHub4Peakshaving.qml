@@ -110,7 +110,6 @@ Page {
 			ListSpinBox {
 				//% "Maximum system import current (per phase)"
 				text: qsTrId("settings_ess_max_system_import_current")
-				enabled: userHasWriteAccess
 				preferredVisible: maxSystemAcInputCurrentSwitch.enabled && maxSystemAcInputCurrentSwitch.checked
 				dataItem.uid: systemAcInputLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
@@ -151,7 +150,6 @@ Page {
 			ListSpinBox {
 				//% "Maximum system export current (per phase)"
 				text: qsTrId("settings_ess_max_system_export_current")
-				enabled: userHasWriteAccess
 				preferredVisible: maxSystemAcExportCurrentSwitch.enabled && maxSystemAcExportCurrentSwitch.checked
 				dataItem.uid: systemAcExportLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)

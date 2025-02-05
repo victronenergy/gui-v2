@@ -449,6 +449,17 @@ Item {
 				text: "ListNavigation"
 				onClicked: console.log("ListNavigation clicked")
 			}
+			ListSpinBox {
+				text: "ListSpinBox"
+				from: 0
+				to: 10
+			}
+			ListSpinBox {
+				text: "ListSpinBox - non-interactive"
+				from: 0
+				to: 10
+				interactive: false
+			}
 		}
 	}
 
