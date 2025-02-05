@@ -145,7 +145,7 @@ Page {
 				text: qsTrId("batterysettingsbattery_synchronise_state_of_charge_to_100%")
 				//% "Press to sync"
 				secondaryText: qsTrId("batterysettingsbattery_press_to_sync")
-				enabled: !root.locked
+				interactive: !root.locked
 				onClicked: sync.setValue(1)
 				preferredVisible: sync.isValid
 

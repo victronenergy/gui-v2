@@ -37,7 +37,7 @@ Page {
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
@@ -54,7 +54,7 @@ Page {
 			}
 
 			ListMountStateButton {
-				button.enabled: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
+				interactive: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
 			}
 		}
 	}

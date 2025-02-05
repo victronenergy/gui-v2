@@ -442,7 +442,7 @@ Page {
 				text: qsTrId("battery_redetect_battery")
 				//% "Press to redetect"
 				secondaryText: qsTrId("battery_press_to_redetect")
-				enabled: redetect.value === 0
+				interactive: redetect.value === 0
 				preferredVisible: redetect.isValid
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {

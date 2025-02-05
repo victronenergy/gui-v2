@@ -115,7 +115,10 @@ Page {
 					//% "Press to start"
 					return qsTrId("vebus_device_press_to_start")
 				}
-				enabled: !isNaN(setChargerState.value) && !isNaN(vebusSubState.value) && !startTimer.running && !interruptTimer.running
+				interactive: !isNaN(setChargerState.value) &&
+							 !isNaN(vebusSubState.value) &&
+							 !startTimer.running &&
+							 !interruptTimer.running
 				preferredVisible: root.isMulti
 
 				onClicked: {

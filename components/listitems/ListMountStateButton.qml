@@ -28,7 +28,7 @@ ListButton {
 	//% "microSD / USB"
 	text: qsTrId("components_mount_state_microsd_usb")
 	secondaryText: _mountStateToText(mountState.value)
-	button.enabled: mounted
+	interactive: mounted
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: mountState.setValue(VenusOS.Storage_UnmountRequested)

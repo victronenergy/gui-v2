@@ -94,7 +94,7 @@ Page {
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
