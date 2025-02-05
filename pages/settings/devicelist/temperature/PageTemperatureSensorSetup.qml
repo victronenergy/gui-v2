@@ -22,7 +22,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListRadioButtonGroup {
 				text: CommonWords.type
 				dataItem.uid: bindPrefix + "/TemperatureType"

@@ -13,7 +13,7 @@ Page {
 	required property string bindPrefix
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListEvChargerPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
 			}

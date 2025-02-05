@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListText {
 				text: CommonWords.status
 				dataItem.uid: root.bindPrefix + "/Status"

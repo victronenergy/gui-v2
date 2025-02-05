@@ -22,7 +22,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListSwitch {
 				id: enableModbusTcp
 

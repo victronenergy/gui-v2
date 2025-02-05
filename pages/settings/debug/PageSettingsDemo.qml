@@ -13,7 +13,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: ObjectModel {
+		model: VisibleItemModel {
 			PrimaryListLabel {
 				text: "This page demonstrates the components that can be used to build settings pages."
 			}
@@ -22,6 +22,11 @@ Page {
 				text: "Page launch"
 				secondaryText: "Secondary text"
 				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
+			}
+
+			ListNavigation {
+				text: "VisibleItemModel demo"
+				onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: text })
 			}
 
 			ListSwitch {
@@ -340,9 +345,64 @@ Page {
 
 		Page {
 			GradientListView {
-				model: ObjectModel {
+				model: VisibleItemModel {
 					ListItem {
 						text: "New page item"
+					}
+				}
+			}
+		}
+	}
+
+	Component {
+		id: visibleItemDemoComponent
+
+		Page {
+			component VisibleModelSwitch : ListSwitch {
+				preferredVisible: true
+				checked: preferredVisible
+				onClicked: preferredVisible = !preferredVisible
+			}
+
+			GradientListView {
+				header: PrimaryListLabel {
+					text: "VisibleItemModel filters out any non-visible items from the model.\nFor example, click a switch below to set preferredVisible=false and remove it from the model."
+				}
+				footer: Column {
+					width: parent.width
+					PrimaryListLabel {
+						horizontalAlignment: Text.AlignHCenter
+						text: "%1 items in source model, %2 items in visible model"
+								.arg(visibleItemModel.sourceModel.length)
+								.arg(visibleItemModel.count)
+					}
+					ListItemButton {
+						anchors.horizontalCenter: parent.horizontalCenter
+						text: "Reset 'preferredVisible' values"
+						onClicked: {
+							toggle1.preferredVisible = true
+							toggle2.preferredVisible = true
+							toggle3.preferredVisible = true
+						}
+					}
+				}
+
+				model: VisibleItemModel {
+					id: visibleItemModel
+
+					VisibleModelSwitch {
+						id: toggle1
+						text: "Toggle A"
+					}
+
+					VisibleModelSwitch {
+						id: toggle2
+						text: "Toggle B"
+					}
+
+					VisibleModelSwitch {
+						id: toggle3
+						text: "Toggle C"
 					}
 				}
 			}

@@ -22,7 +22,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListTextGroup {
 				text: "PV On ACIn1"
 				textModel: [

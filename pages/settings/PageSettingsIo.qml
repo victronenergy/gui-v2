@@ -25,7 +25,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 
 			ListNavigation {
 				//% "Analog inputs"

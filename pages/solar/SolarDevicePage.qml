@@ -20,7 +20,7 @@ Page {
 	}
 
 	GradientListView {
-		model: ObjectModel {
+		model: VisibleItemModel {
 			ListItemBackground {
 				height: trackerTable.y + trackerTable.height
 

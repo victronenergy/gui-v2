@@ -32,7 +32,7 @@ Page {
 		}
 	}
 
-	ObjectModel {
+	VisibleItemModel {
 		id: essSettings
 
 		ListRadioButtonGroup {
