@@ -15,7 +15,8 @@ Item {
 	property alias icon: icon
 	property alias name: nameLabel.text
 	property alias voltage: voltageLabel.value
-	property alias current: currentLabel.value
+	property real current: NaN
+	property real power: NaN
 	property alias value: arc.value
 	property int status
 	property alias caption: captionLabel.text
@@ -101,10 +102,13 @@ Item {
 			QuantityLabel {
 				id: currentLabel
 
+				readonly property bool unitAmps: (Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && !isNaN(gauges.current))
+						|| (!isNaN(gauges.current) && isNaN(gauges.power))
 				valueColor: Theme.color_briefPage_battery_value_text_color
 				unitColor: Theme.color_briefPage_battery_unit_text_color
 				font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
-				unit: VenusOS.Units_Amp
+				value: currentLabel.unitAmps ? gauges.current : gauges.power
+				unit: currentLabel.unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 			}
 		}
 
