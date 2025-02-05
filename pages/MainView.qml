@@ -439,6 +439,12 @@ Item {
 				secondaryText: "Press me"
 				onClicked: console.log("ListButton clicked")
 			}
+			ListButton {
+				text: "ListButton"
+				secondaryText: "Can't press me"
+				interactive: false
+				onClicked: console.log("ListButton can't be clicked")
+			}
 			ListNavigation {
 				text: "ListNavigation"
 				onClicked: console.log("ListNavigation clicked")
