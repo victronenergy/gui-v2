@@ -53,16 +53,13 @@ Page {
 						return qsTrId("settings_startpage_none")
 					}
 				}
-				bottomContentChildren: [
-					PrimaryListLabel {
-						width: Math.min(implicitWidth, startPageNavigation.width)
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "Go to this page when the application starts."
-						text: qsTrId("settings_startpage_description")
-					}
-				]
+
+				caption.topPadding: 0
+				caption.bottomPadding: 0
+				caption.color: Theme.color_font_secondary
+				//% "Go to this page when the application starts."
+				caption.text: qsTrId("settings_startpage_description")
+
 				onClicked: {
 					Global.pageManager.pushPage(startPageOptionsComponent, { title: text })
 				}
@@ -74,16 +71,11 @@ Page {
 				text: qsTrId("settings_startpage_timeout")
 				optionModel: root._timeoutOptions()
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
-				bottomContentChildren: [
-					PrimaryListLabel {
-						width: Math.min(implicitWidth, startPageTimeout.width)
-						topPadding: 0
-						bottomPadding: 0
-						color: Theme.color_font_secondary
-						//% "Revert to the start page when the application is inactive."
-						text: qsTrId("settings_startpage_timeout_description")
-					}
-				]
+				caption.topPadding: 0
+				caption.bottomPadding: 0
+				caption.color: Theme.color_font_secondary
+				//% "Revert to the start page when the application is inactive."
+				caption.text: qsTrId("settings_startpage_timeout_description")
 			}
 		}
 	}
@@ -105,16 +97,11 @@ Page {
 						text: CommonWords.auto
 						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
 						invertSourceValue: true
-						bottomContentChildren: [
-							PrimaryListLabel {
-								width: Math.min(implicitWidth, startPageMode.width)
-								topPadding: 0
-								bottomPadding: 0
-								color: Theme.color_font_secondary
-								//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
-								text: qsTrId("settings_startpage_auto_description")
-							}
-						]
+						caption.topPadding: 0
+						caption.bottomPadding: 0
+						caption.color: Theme.color_font_secondary
+						//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
+						caption.text: qsTrId("settings_startpage_auto_description")
 						onClicked: {
 							popTimer.stop()
 							if (checked) {
