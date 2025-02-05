@@ -13,9 +13,9 @@ Device {
 	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
 
 	readonly property real energy: _energy.isValid ? _energy.value : NaN
-	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+	readonly property real current: _validSinglePhase ? _validSinglePhase.current : NaN
+	readonly property real voltage: _validSinglePhase ? _validSinglePhase.voltage : NaN
 
 	readonly property PhaseModel phases: PhaseModel {
 		function updateCount(maxPhaseCount) {
@@ -39,6 +39,7 @@ Device {
 				readonly property real power: _phasePower.isValid ? _phasePower.value : NaN
 				readonly property real current: _phaseCurrent.isValid ? _phaseCurrent.value : NaN
 				readonly property real voltage: _phaseVoltage.isValid ? _phaseVoltage.value : NaN
+				readonly property bool isValid: _phaseCurrent.isValid && _phaseVoltage.isValid
 
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
@@ -80,12 +81,21 @@ Device {
 		uid: pvInverter.serviceUid + "/Ac/Power"
 	}
 
-	readonly property VeQuickItem _current: VeQuickItem {
-		uid: pvInverter.serviceUid + "/Ac/Current"
-	}
-
-	readonly property VeQuickItem _voltage: VeQuickItem {
-		uid: pvInverter.serviceUid + "/Ac/Voltage"
+	readonly property var _validSinglePhase: {
+		let validPhase = null
+		for (let i = 0; i < pvInverter.phases.count; ++i) {
+			let p = pvInverter.phases.getPhase(i)
+			if (p && p.isValid) {
+				if (validPhase != null) {
+					// multiple valid phases, cannot sum current/voltage
+					return null
+				} else {
+					// have at least one valid phase.
+					validPhase = p
+				}
+			}
+		}
+		return validPhase
 	}
 
 	onValidChanged: {
