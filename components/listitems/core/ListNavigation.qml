@@ -11,7 +11,6 @@ ListItem {
 	id: root
 
 	property alias secondaryText: secondaryLabel.text
-	property alias secondaryLabel: secondaryLabel
 	property alias icon: icon
 
 	interactive: true
@@ -36,7 +35,7 @@ ListItem {
 			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180
 			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			visible: root.enabled
+			visible: root.interactive
 		}
 	]
 }

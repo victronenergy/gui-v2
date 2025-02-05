@@ -132,7 +132,7 @@ ObjectModel {
 		}
 
 		preferredVisible: _dataItem.isValid
-		enabled: secondaryText !== CommonWords.none_errors
+		interactive: secondaryText !== CommonWords.none_errors
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
 
