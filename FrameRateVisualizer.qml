@@ -54,7 +54,7 @@ Loader {
 					margins: fpsRow.height
 				}
 				text: FrameRateModel.frameRate
-				color: "white"
+				color: Theme.color_font_primary
 			}
 		}
 	}
