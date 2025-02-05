@@ -1,16 +1,22 @@
 #!/bin/bash
 
-BUILD_FILE=".github/workflows/build-wasm.yml"
-if [ ! -f ${BUILD_FILE} ]; then
-  echo "## Unable to locate ${BUILD_FILE} (pwd: ${PWD})"
-  exit 1
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." &> /dev/null && pwd )"
+# Load environment variables from .env file
+if [ -f "${BASE_DIR}/scripts/.env" ]; then
+    export $(grep -v '^#' "${BASE_DIR}/scripts/.env" | xargs)
+else
+    echo "## ${BASE_DIR}/scripts/.env file not found!"
+    exit 1
 fi
 
-# Read the QT version info from the build file
-QT_VERSION=$(yq '.jobs.build-wasm-file.env.QT_VERSION' ${BUILD_FILE})
+arch=$(dpkg --print-architecture)
+if [ "${arch}" == "arm64" ]; then
+  gcc_folder="gcc_arm64"
+else
+  gcc_folder="gcc_64"
+fi
 
-# The directory is taken from the sixth step:
-DIR=$(yq ".jobs.build-wasm-file.steps[5].with.dir" ${BUILD_FILE})/Qt # eg. DIR=/opt/hostedtoolcache/Qt
+DIR=${OUTPUTDIR}/Qt
 
 echo "### Using QT_VERSION: ${QT_VERSION}, dir: ${DIR}"
 
@@ -23,13 +29,13 @@ patch ${DIR}/${QT_VERSION}/wasm_singlethread/lib/cmake/Qt6/Qt6Dependencies.cmake
 +++ Qt6Dependencies.cmake       2023-08-28 07:29:08.806970500 +0000
 @@ -1,8 +1,8 @@
  set(Qt6_FOUND FALSE)
- 
+
  set(__qt_platform_requires_host_info_package \"TRUE\")
 -set(__qt_platform_initial_qt_host_path \"/Users/qt/work/install\")
 -set(__qt_platform_initial_qt_host_path_cmake_dir \"/Users/qt/work/install/lib/cmake\")
-+set(__qt_platform_initial_qt_host_path \"${DIR}/${QT_VERSION}/gcc_64\")
-+set(__qt_platform_initial_qt_host_path_cmake_dir \"${DIR}/${QT_VERSION}/gcc_64/lib/cmake\")
- 
++set(__qt_platform_initial_qt_host_path \"${DIR}/${QT_VERSION}/${gcc_folder}\")
++set(__qt_platform_initial_qt_host_path_cmake_dir \"${DIR}/${QT_VERSION}/${gcc_folder}/lib/cmake\")
+
  _qt_internal_setup_qt_host_path(
      \"\${__qt_platform_requires_host_info_package}\"
 "
@@ -45,7 +51,7 @@ patch ${DIR}/${QT_VERSION}/wasm_singlethread/lib/cmake/Qt6BuildInternals/QtBuild
 -    set(qtbi_orig_prefix \"C:/Qt/Qt-${QT_VERSION}\")
 -    set(qtbi_orig_staging_prefix \"/Users/qt/work/install/target\")
 +    set(qtbi_orig_prefix \"${DIR}\")
-+    set(qtbi_orig_staging_prefix \"${DIR}/${QT_VERSION}/wasm_singlethread\")
++    set(qtbi_orig_staging_prefix \"${DIR}/${QT_VERSION}/${gcc_folder}\")
      qt_internal_new_prefix(qtbi_new_prefix
          \"\${QT_BUILD_INTERNALS_RELOCATABLE_INSTALL_PREFIX}\"
          \"\${qtbi_orig_prefix}\")
