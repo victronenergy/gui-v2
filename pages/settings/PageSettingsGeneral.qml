@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Templates as T
 
 Page {
 	id: root
@@ -136,44 +135,34 @@ Page {
 
 			SettingsListHeader { }
 
-			ListButton {
-				text: CommonWords.reboot
-				//% "Reboot now"
-				button.text: qsTrId("settings_reboot_now")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
+			ListRebootButton { }
 
-				Component {
-					id: confirmRebootDialogComponent
+			SettingsListHeader { }
 
-					ModalWarningDialog {
-						//% "Press 'OK' to reboot"
-						title: qsTrId("press_ok_to_reboot")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
-							}
-						}
-					}
+			ListNavigation {
+				//% "Useful Links"
+				text: qsTrId("pagesettingsgeneral_useful_links")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsUsefulLinks.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Modification checks"
+				text: qsTrId("pagesettingsgeneral_modification_checks")
+				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && systemHooksStateItem.value < 16
+					//% "Unmodified"
+					? qsTrId("pagesettingsmodificationchecks_unmodified")
+					//% "Modified"
+					:  qsTrId("pagesettingsmodificationchecks_modified")
+				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && systemHooksStateItem.value < 16 ? Theme.color_font_primary : Theme.color_red
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
+
+				VeQuickItem {
+					id: fsModifiedStateItem
+					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
 				}
-
-				Component {
-					id: rebootingDialogComponent
-
-					ModalWarningDialog {
-						title: BackendConnection.type === BackendConnection.DBusSource
-							//% "Rebooting..."
-							? qsTrId("dialoglayer_rebooting")
-							//% "Device has been rebooted."
-							: qsTrId("dialoglayer_rebooted")
-
-						// On device, dialog cannot be dismissed; just wait until device is rebooted.
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-						footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-						footer.opacity: footer.enabled ? 1 : 0
-					}
+				VeQuickItem {
+					id: systemHooksStateItem
+					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
 				}
 			}
 		}
