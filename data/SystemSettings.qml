@@ -18,6 +18,7 @@ QtObject {
 	property int temperatureUnit: VenusOS.Units_None
 	property string temperatureUnitSuffix
 	property int volumeUnit: VenusOS.Units_None
+	property int altitudeUnit: VenusOS.Units_None
 	readonly property StartPageConfiguration startPageConfiguration: StartPageConfiguration {
 		systemSettingsUid: root.serviceUid
 	}
@@ -75,8 +76,27 @@ QtObject {
 		}
 	}
 
+	function setAltitudeUnit(value) {
+		switch (value) {
+			case VenusOS.Units_Altitude_Meter:
+				_altitudeUnit.setValue(_altitudeeUnit.ve_meter)
+				break
+			case VenusOS.Units_Altitude_Foot:
+				_altitudeUnit.setValue(_altitudeUnit.ve_foot)
+				break
+			default:
+				// Other units are not supported
+				console.warn("setAltitudeUnit() unknown value:", value)
+				break
+		}
+	}
+
 	function convertFromCelsius(celsius_value) {
 		return Units.convert(celsius_value, VenusOS.Units_Temperature_Celsius, temperatureUnit)
+	}
+
+	function convertFromMeter(meter_value) {
+		return Units.convert(meter_value, VenusOS.Units_Altitude_Meter, altitudeUnit)
 	}
 
 	function networkStatusToText(status) {
@@ -261,6 +281,30 @@ QtObject {
 				console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
 				root.temperatureUnitSuffix = "°C"
+				break
+			}
+		}
+	}
+
+	property VeQuickItem _altitudeUnit: VeQuickItem {
+		readonly property string ve_meter: "meter"
+		readonly property string ve_foot: "foot"
+
+		uid: root.serviceUid + "/Settings/System/Units/Altitude"
+		onValueChanged: {
+			switch (value) {
+			case ve_meter:
+				root.altitudeUnit = VenusOS.Units_Altitude_Meter
+				root.altitudeUnitSuffix = "m"
+				break
+			case ve_foot:
+				root.altitudeUnit = VenusOS.Units_Altitude_Foot
+				root.altitudeUnitSuffix = "ft"
+				break
+			default:
+				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to meter")
+				root.altitudeUnit = VenusOS.Units_Altitude_Meter
+				root.altitudeUnitSuffix = "m"
 				break
 			}
 		}
