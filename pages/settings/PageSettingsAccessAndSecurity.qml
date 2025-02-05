@@ -202,6 +202,12 @@ Page {
 							// This guards the wasm version to trigger a reload even if the reply isn't received.
 							BackendConnection.securityProtocolChanged()
 							Global.pageManager.popPage()
+							if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
+								Global.showToastNotification(VenusOS.Notification_Info,
+															 //% "Page will automatically reload in 5 seconds"
+															 qsTrId("access_and_security_page_will_reload"),
+															 3000)
+							}
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured

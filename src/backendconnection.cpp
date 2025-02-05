@@ -199,6 +199,9 @@ void BackendConnection::onReloadPageTimerExpired()
 // that fails and still triggers a reload (albeit a bit later).
 void BackendConnection::securityProtocolChanged()
 {
+	if (isVrm()) {
+		return;
+	}
 	QTimer *timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, &BackendConnection::onReloadPageTimerExpired);
 	connect(timer, &QTimer::timeout, timer, &QObject::deleteLater);
