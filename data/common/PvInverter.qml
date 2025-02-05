@@ -13,9 +13,9 @@ Device {
 	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
 
 	readonly property real energy: _energy.isValid ? _energy.value : NaN
-	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+	readonly property real current: pvInverter.phases.singlePhaseCurrent
+	readonly property real voltage: pvInverter.phases.singlePhaseVoltage
 
 	readonly property PhaseModel phases: PhaseModel {
 		function updateCount(maxPhaseCount) {
@@ -31,6 +31,7 @@ Device {
 		readonly property Instantiator _phases: Instantiator {
 			model: 3
 			delegate: QtObject {
+				id: phaseObject
 				required property int index
 				readonly property string phaseUid: pvInverter.serviceUid + "/Ac/L" + (index + 1)
 
@@ -40,24 +41,32 @@ Device {
 				readonly property real current: _phaseCurrent.isValid ? _phaseCurrent.value : NaN
 				readonly property real voltage: _phaseVoltage.isValid ? _phaseVoltage.value : NaN
 
+				function _updatePhaseModel(valid, index, role) {
+					if (valid) {
+						pvInverter.phases.updateCount(index + 1)
+					} else {
+						pvInverter.phases.setValue(index, role, NaN)
+					}
+				}
+
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.EnergyRole)
 					onValueChanged: phases.setValue(index, PhaseModel.EnergyRole, value)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.PowerRole)
 					onValueChanged: phases.setValue(index, PhaseModel.PowerRole, value)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
 					uid: phaseUid + "/Current"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.CurrentRole)
 					onValueChanged: phases.setValue(index, PhaseModel.CurrentRole, value)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
 					uid: phaseUid + "/Voltage"
-					onIsValidChanged: if (isValid) phases.updateCount(index + 1)
+					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.VoltageRole)
 					onValueChanged: phases.setValue(index, PhaseModel.VoltageRole, value)
 				}
 			}
@@ -78,14 +87,6 @@ Device {
 
 	readonly property VeQuickItem _power: VeQuickItem {
 		uid: pvInverter.serviceUid + "/Ac/Power"
-	}
-
-	readonly property VeQuickItem _current: VeQuickItem {
-		uid: pvInverter.serviceUid + "/Ac/Current"
-	}
-
-	readonly property VeQuickItem _voltage: VeQuickItem {
-		uid: pvInverter.serviceUid + "/Ac/Voltage"
 	}
 
 	onValidChanged: {

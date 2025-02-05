@@ -19,6 +19,8 @@ class PhaseModel : public QAbstractListModel
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 	Q_PROPERTY(int phaseCount READ phaseCount WRITE setPhaseCount NOTIFY phaseCountChanged)
 	Q_PROPERTY(bool l2AndL1OutSummed READ l2AndL1OutSummed WRITE setL2AndL1OutSummed NOTIFY l2AndL1OutSummedChanged)
+	Q_PROPERTY(qreal singlePhaseCurrent READ singlePhaseCurrent NOTIFY singlePhaseCurrentChanged)
+	Q_PROPERTY(qreal singlePhaseVoltage READ singlePhaseVoltage NOTIFY singlePhaseVoltageChanged)
 
 public:
 	enum Role {
@@ -42,6 +44,9 @@ public:
 	bool l2AndL1OutSummed() const;
 	void setL2AndL1OutSummed(bool l2AndL1OutSummed);
 
+	qreal singlePhaseCurrent() const;
+	qreal singlePhaseVoltage() const;
+
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
@@ -52,11 +57,14 @@ Q_SIGNALS:
 	void countChanged();
 	void phaseCountChanged();
 	void l2AndL1OutSummedChanged();
+	void singlePhaseCurrentChanged();
+	void singlePhaseVoltageChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
 
 private:
+	void updateSinglePhaseData();
 	struct Phase {
 		qreal power = qQNaN();
 		qreal current = qQNaN();
@@ -71,6 +79,8 @@ private:
 	int m_phaseCount = 0;
 	int m_modelCount = 0;
 	bool m_l2AndL1OutSummed = false;
+	qreal m_singlePhaseCurrent = qQNaN();
+	qreal m_singlePhaseVoltage = qQNaN();
 };
 
 } /* VenusOS */

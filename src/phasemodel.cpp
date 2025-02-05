@@ -45,6 +45,62 @@ void PhaseModel::setL2AndL1OutSummed(bool l2AndL1OutSummed)
 	}
 }
 
+qreal PhaseModel::singlePhaseCurrent() const
+{
+	return m_singlePhaseCurrent;
+}
+
+qreal PhaseModel::singlePhaseVoltage() const
+{
+	return m_singlePhaseVoltage;
+}
+
+// If we have ONLY a single phase with valid data,
+// expose its current+voltage via separate properties.
+void PhaseModel::updateSinglePhaseData()
+{
+	qreal current = qQNaN();
+	qreal voltage = qQNaN();
+	for (const Phase &phase : std::as_const(m_phases)) {
+		if (!qIsNaN(phase.current) || !qIsNaN(phase.voltage)) {
+			// have valid current and/or voltage data for this phase.
+			if (qIsNaN(current) && qIsNaN(voltage)) {
+				// we found a phase with valid data, and no prior
+				// phases had valid data.  Possibly expose this
+				// phase's data as the singlePhase data properties
+				// (unless we later find another phase also with data).
+				current = phase.current;
+				voltage = phase.voltage;
+			} else {
+				// we already found a phase with valid data,
+				// so we do NOT have valid single-phase data
+				// (as we cannot sum multiple phases of current/voltage).
+				current = qQNaN();
+				voltage = qQNaN();
+				break;
+			}
+		}
+	}
+
+	if (qIsNaN(current) || qIsNaN(voltage)) {
+		if (!qIsNaN(m_singlePhaseCurrent) || !qIsNaN(m_singlePhaseVoltage)) {
+			m_singlePhaseCurrent = qQNaN();
+			m_singlePhaseVoltage = qQNaN();
+			emit singlePhaseCurrentChanged();
+			emit singlePhaseVoltageChanged();
+		}
+	} else {
+		if (m_singlePhaseCurrent != current) {
+			m_singlePhaseCurrent = current;
+			emit singlePhaseCurrentChanged();
+		}
+		if (m_singlePhaseVoltage != voltage) {
+			m_singlePhaseVoltage = voltage;
+			emit singlePhaseVoltageChanged();
+		}
+	}
+}
+
 void PhaseModel::setValue(int index, Role role, const qreal value)
 {
 	if (index < 0) {
@@ -64,10 +120,12 @@ void PhaseModel::setValue(int index, Role role, const qreal value)
 		break;
 	case CurrentRole:
 		phase.current = value;
+		updateSinglePhaseData();
 		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { CurrentRole });
 		break;
 	case VoltageRole:
 		phase.voltage = value;
+		updateSinglePhaseData();
 		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { VoltageRole });
 		break;
 	case EnergyRole:
