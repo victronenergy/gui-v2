@@ -198,6 +198,7 @@ SwipeViewPage {
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
 			voltage: battery.voltage
 			current: battery.current
+			power: battery.power
 			status: Theme.getValueStatus(value, properties.valueType)
 			caption: Utils.formatBatteryTimeToGo(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
