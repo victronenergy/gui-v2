@@ -11,7 +11,7 @@ ListButton {
 
 	property int updateType
 
-	button.text: Global.firmwareUpdate.state === FirmwareUpdater.Checking
+	secondaryText: Global.firmwareUpdate.state === FirmwareUpdater.Checking
 			 //% "Checking..."
 		   ? qsTrId("settings_firmware_checking")
 			 //% "Press to check"

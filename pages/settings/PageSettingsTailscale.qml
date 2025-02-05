@@ -231,7 +231,7 @@ Page {
 				//% "Logout from Tailscale account"
 				text: qsTrId("settings_tailscale_logout")
 				//% "Log out now"
-				button.text: qsTrId("settings_tailscale_logout_button")
+				secondaryText: qsTrId("settings_tailscale_logout_button")
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				preferredVisible: root.tailscaleConnected
 				onClicked: commandItem.setValue('logout')

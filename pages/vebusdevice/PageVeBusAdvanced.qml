@@ -102,7 +102,7 @@ Page {
 					  ? qsTrId("vebus_device_interrupt_equalization")
 						//% "Equalization"
 					  : qsTrId("vebus_device_equalization")
-				button.text: {
+				secondaryText: {
 					if (interruptTimer.running)
 						//% "Interrupting..."
 						return qsTrId("vebus_device_interrupting")
@@ -196,7 +196,7 @@ Page {
 			ListButton {
 				//% "Redetect VE.Bus system"
 				text: qsTrId("vebus_device_redectect_vebus_system")
-				button.text: redetectSystem.value === 1
+				secondaryText: redetectSystem.value === 1
 								//% "Redetecting..."
 							 ? qsTrId("vebus_device_redetecting")
 								//% "Press to redetect"
@@ -208,7 +208,7 @@ Page {
 			ListButton {
 				//% "Restart VE.Bus system"
 				text: qsTrId("vebus_device_restart_vebus_system")
-				button.text: systemReset.value === 1
+				secondaryText: systemReset.value === 1
 								//% "Restarting..."
 							 ? qsTrId("vebus_device_restarting")
 								//% "Press to restart"

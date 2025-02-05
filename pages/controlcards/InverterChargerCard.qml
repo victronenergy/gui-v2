@@ -114,7 +114,7 @@ ControlCard {
 			preferredVisible: essMinSocItem.isValid && [
 				VenusOS.Ess_State_OptimizedWithBatteryLife,
 				VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essModeItem.value)
-			button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
+			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)
 			onClicked: Global.dialogLayer.open(essMinSocDialogComponent)
 		}
 	}
