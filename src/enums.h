@@ -269,6 +269,7 @@ public:
 		Generators_State_WarmUp = 2,
 		Generators_State_CoolDown = 3,
 		Generators_State_Stopping = 4,
+		Generators_State_StoppedByTankLevel = 5,
 		Generators_State_Error = 10
 	};
 	Q_ENUM(Generators_State)
