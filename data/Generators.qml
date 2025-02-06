@@ -32,6 +32,7 @@ QtObject {
 		case VenusOS.Generators_State_CoolDown:
 		case VenusOS.Generators_State_Stopping:
 		case VenusOS.Generators_State_Error:
+		case VenusOS.Generators_State_StoppedByTankLevel:
 			return stateText(state)
 		}
 
@@ -55,6 +56,9 @@ QtObject {
 			return qsTrId("page_generator_stopping")
 		case VenusOS.Generators_State_Error:
 			return CommonWords.error
+		case VenusOS.Generators_State_StoppedByTankLevel:
+			//% "Stopped by tank level"
+			return qsTrId("page_generator_stopped_by_tank_level")
 		default:
 			return "--"
 		}
