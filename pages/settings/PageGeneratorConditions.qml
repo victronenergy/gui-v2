@@ -154,6 +154,20 @@ Page {
 				bindPrefix: root.bindPrefix + "/InverterOverload"
 			}
 
+			GeneratorCondition {
+				//% "Tank level"
+				text: qsTrId("page_generator_conditions_tank_level")
+
+				//% "Stop on tank level"
+				enableDescription: qsTrId("page_generator_conditions_stop_on_tank_level")
+				showTankServices: true
+				startStopBindPrefix: root.startStopBindPrefix
+
+				bindPrefix: root.bindPrefix + "/TankLevel"
+				decimals: 0
+				unit: "%"
+			}
+
 			ListNavigation {
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
