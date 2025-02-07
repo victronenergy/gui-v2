@@ -92,7 +92,7 @@ ModalDialog {
 
 			ListRadioButton {
 				flat: true
-				enabled: modelData.enabled !== false
+				interactive: modelData.enabled !== false
 				visible: modelData.visible !== false
 				checked: modelData.value === root.mode
 				text: root.showInverterModesOnly
