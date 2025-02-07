@@ -132,7 +132,7 @@ VisibleItemModel {
 		}
 
 		preferredVisible: _dataItem.isValid
-		enabled: secondaryText !== CommonWords.none_errors
+		interactive: secondaryText !== CommonWords.none_errors
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
 
@@ -336,7 +336,7 @@ VisibleItemModel {
 							stepSize: 0.1
 							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
 							preferredVisible: dataItem.isValid
-							enabled: bmsControlled.dataItem.value === 0
+							interactive: dataItem.isValid && bmsControlled.dataItem.value === 0
 						}
 
 						ListText {
