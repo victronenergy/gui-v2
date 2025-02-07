@@ -77,7 +77,7 @@ Page {
 
 				//% "Update available"
 				text: qsTrId("settings_firmware_update_available")
-				button.text: {
+				secondaryText: {
 					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						if (progress.value) {
 							//: Firmware update progress. %1 = firmware version, %2 = current update progress
@@ -94,7 +94,7 @@ Page {
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {

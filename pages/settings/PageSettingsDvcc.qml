@@ -121,7 +121,7 @@ Page {
 				text: qsTrId("settings_dvcc_scs_status")
 				dataItem.uid: Global.system.serviceUid + "/Control/BatteryCurrentSense"
 				preferredVisible: commonSettings.dvccActive && sharedCurrentSense.checked
-				enabled: false
+				interactive: false
 
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },

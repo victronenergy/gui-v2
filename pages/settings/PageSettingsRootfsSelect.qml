@@ -57,7 +57,7 @@ Page {
 				//: %1 = backup version, %2 = backup version build number
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_backup_version").arg(backupVersionItem.value).arg(backupBuildItem.value)
-				button.text: root._autoUpdateDisabled
+				secondaryText: root._autoUpdateDisabled
 					 //% "Press to boot"
 				   ? qsTrId("settings_firmware_press_to_boot")
 				   : CommonWords.disabled

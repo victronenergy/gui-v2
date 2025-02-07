@@ -57,7 +57,7 @@ Page {
 				text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60) + "h"
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
-				enabled: userHasWriteAccess && state.value === 0
+				interactive: dataItem.isValid && state.value === 0
 				preferredVisible: dataItem.isValid && gensetBindPrefix === ""
 				maximumLength: 6
 				saveInput: function() {
@@ -88,7 +88,7 @@ Page {
 			ListButton {
 				//% "Reset daily run time counters"
 				text: qsTrId("page_settings_run_time_and_service_reset_daily_run_time_counters")
-				button.text: CommonWords.press_to_reset
+				secondaryText: CommonWords.press_to_reset
 				onClicked: {
 					if (state.value === 0) {
 						var now = new Date()
@@ -176,7 +176,7 @@ Page {
 			ListButton {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
-				button.text: CommonWords.press_to_reset
+				secondaryText: CommonWords.press_to_reset
 				preferredVisible: serviceReset.isValid
 				onClicked: {
 					serviceReset.setValue(1)

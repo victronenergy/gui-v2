@@ -31,7 +31,7 @@ Page {
 				return model.value !== undefined ? model.value : "--"
 			}
 
-			enabled: subModel.rowCount > 0
+			interactive: subModel.rowCount > 0
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml",

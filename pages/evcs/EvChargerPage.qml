@@ -119,7 +119,7 @@ Page {
 				to: root.evCharger.maxCurrent
 				dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
 				preferredVisible: dataItem.isValid
-				enabled: chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
+				interactive: dataItem.isValid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 			}
 
 			ListSwitch {

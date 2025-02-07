@@ -24,7 +24,7 @@ Page {
 			ListRadioButtonGroup {
 				text: "Power Type"
 				dataItem.uid: service + "/Ac/PowerMeasurementType"
-				enabled: false
+				interactive: false
 				optionModel: [
 					{ display: "Apparent power, phase masters", value: 0 },
 					{ display: "Real power, phase master, no snapshot", value: 1 },

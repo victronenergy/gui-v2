@@ -106,7 +106,7 @@ Page {
 				text: qsTrId("ac-in-setup_phase_configuration")
 				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
-				enabled: !em24Locked()
+				interactive: dataItem.isValid && !em24Locked()
 				optionModel: [
 					{ display: "3P.n", value: 0 },
 					{ display: "3P.1", value: 1 },

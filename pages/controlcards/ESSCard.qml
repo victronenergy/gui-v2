@@ -49,7 +49,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("ess_card_minimum_soc")
 			flat: true
-			button.text: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.ess.minimumStateOfCharge)
+			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.ess.minimumStateOfCharge)
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 			Component {

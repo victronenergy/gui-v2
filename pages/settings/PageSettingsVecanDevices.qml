@@ -34,20 +34,11 @@ Page {
 				anchors.verticalCenter: parent.verticalCenter
 				source: "qrc:/images/icon_arrow_32.svg"
 				rotation: 180
-				color: listDelegate.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+				color: listDelegate.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			}
 
-			ListPressArea {
-				id: mouseArea
-
-				parent: listDelegate.backgroundRect
-				radius: listDelegate.backgroundRect.radius
-				anchors.fill: parent
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
-						{ bindPrefix: model.uid, title: text })
-				}
-			}
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
+												   { bindPrefix: model.uid, title: text })
 
 			VeQuickItem {
 				id: modelName

@@ -25,7 +25,7 @@ Page {
 
 				//% "Firmware found"
 				text: qsTrId("settings_firmware_found")
-				button.text: {
+				secondaryText: {
 					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						//: %1 = firmware version
 						//% "Installing %1"
@@ -37,7 +37,7 @@ Page {
 					}
 				}
 
-				enabled: !Global.firmwareUpdate.busy
+				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: !!Global.firmwareUpdate.offlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
 				onClicked: {
@@ -54,7 +54,7 @@ Page {
 			}
 
 			ListMountStateButton {
-				button.enabled: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
+				interactive: mounted && Global.firmwareUpdate.state !== FirmwareUpdater.DownloadingAndInstalling
 			}
 		}
 	}
