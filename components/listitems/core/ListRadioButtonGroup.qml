@@ -52,15 +52,11 @@ ListNavigation {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
-	enabled: userHasReadAccess && (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: {
-		if (userHasWriteAccess) {
-			Global.pageManager.pushPage(optionsPageComponent, { title: text })
-		} else {
-			//% "Setting locked for access level"
-			Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_radio_button_group_no_access"))
-		}
+		// onClicked is not emitted if interactive: false
+		Global.pageManager.pushPage(optionsPageComponent, { title: text })
 	}
 
 	VeQuickItem {
@@ -102,14 +98,14 @@ ListNavigation {
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
-					enabled: (Array.isArray(root.optionModel)
+					interactive: (Array.isArray(root.optionModel)
 						  ? !modelData.readOnly
 						  : !model.readOnly)
 					primaryLabel.font.family: Array.isArray(root.optionModel)
 						  ? modelData.fontFamily || Global.fontFamily
 						  : model.fontFamily || Global.fontFamily
 
-					preferredVisible: (userHasWriteAccess && enabled) || checked
+					preferredVisible: (userHasWriteAccess && interactive) || checked
 					checked: optionsListView.currentIndex === model.index
 					showAccessLevel: root.showAccessLevel
 					writeAccessLevel: root.writeAccessLevel
@@ -176,7 +172,7 @@ ListNavigation {
 								flickable: optionsListView
 								primaryLabel.color: Theme.color_font_secondary
 								textField.echoMode: TextInput.Password
-								enabled: radioButton.enabled
+								interactive: radioButton.interactive
 								backgroundRect.color: "transparent"
 								preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 								validateInput: function() {

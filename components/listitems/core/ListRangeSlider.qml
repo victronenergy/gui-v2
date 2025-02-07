@@ -19,15 +19,15 @@ ListItem {
 	property var toSourceValue: undefined
 	property var fromSourceValue: undefined
 
-	enabled: userHasWriteAccess
-			 && (firstDataItem.uid === "" || firstDataItem.isValid)
-			 && (secondDataItem.uid === "" || secondDataItem.isValid)
+	interactive: (firstDataItem.uid === "" || firstDataItem.isValid) &&
+				 (secondDataItem.uid === "" || secondDataItem.isValid)
 
 	rightPadding: 0
 	content.children: [
 		SettingsRangeSlider {
 			id: slider
 
+			enabled: root.clickable
 			width: Theme.geometry_listItem_slider_width
 			first.value: {
 				const v = isNaN(firstDataItem.value) ? 0 : firstDataItem.value
