@@ -37,7 +37,7 @@ ListButton {
 		id: timer
 		interval: 2000
 	}
-	enabled: userHasWriteAccess && !timer.running
+	interactive: !timer.running
 
 	onClicked: {
 		/*

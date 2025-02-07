@@ -11,12 +11,12 @@ ListButton {
 
 	property int updateType
 
-	button.text: Global.firmwareUpdate.state === FirmwareUpdater.Checking
+	secondaryText: Global.firmwareUpdate.state === FirmwareUpdater.Checking
 			 //% "Checking..."
 		   ? qsTrId("settings_firmware_checking")
 			 //% "Press to check"
 		   : qsTrId("settings_firmware_press_to_check")
-	enabled: userHasWriteAccess && !Global.firmwareUpdate.busy
+	interactive: !Global.firmwareUpdate.busy
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: {
