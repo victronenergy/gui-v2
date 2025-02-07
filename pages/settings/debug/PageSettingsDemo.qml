@@ -172,7 +172,7 @@ Page {
 
 			ListButton {
 				text: "Button"
-				button.text: "Click this"
+				secondaryText: "Click this"
 				onClicked: console.log("Button was clicked")
 			}
 

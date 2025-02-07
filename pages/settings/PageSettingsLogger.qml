@@ -285,7 +285,7 @@ Page {
 					{ display: qsTrId("settings_vrm_external_storage"), value: 2 },
 				]
 				dataItem.uid: root.loggerServiceUid + "/Buffer/Location"
-				enabled: dataItem.value !== undefined
+				interactive: dataItem.value !== undefined
 			}
 
 			ListRadioButtonGroup {
@@ -306,7 +306,7 @@ Page {
 					//% "SD card / USB stick not writable"
 					{ display: qsTrId("settings_vrm_storage_not_writable_error"), value: 5 },
 				]
-				enabled: false
+				interactive: false
 				dataItem.uid: root.loggerServiceUid + "/Buffer/ErrorState"
 				preferredVisible: !!dataItem.value
 			}

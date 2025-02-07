@@ -13,7 +13,7 @@ ListButton {
 
 	text: CommonWords.reboot
 	//% "Reboot now"
-	button.text: qsTrId("reboot_button_reboot_now")
+	secondaryText: qsTrId("reboot_button_reboot_now")
 	writeAccessLevel: VenusOS.User_AccessType_User
 	onClicked: Global.dialogLayer.open(confirmRebootDialogComponent)
 

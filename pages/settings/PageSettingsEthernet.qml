@@ -67,7 +67,7 @@ Page {
 				}
 				return -1
 			}
-			enabled: userHasReadAccess
+			interactive: userHasReadAccess
 
 			onOptionClicked: function(index) {
 				networkServices.setServiceProperty("Method", optionModel[index].value)
@@ -83,7 +83,7 @@ Page {
 		ListIpAddressField {
 			//% "Netmask"
 			text: qsTrId("settings_tcpip_netmask")
-			enabled: method.userHasWriteAccess && networkServices.manual
+			interactive: method.userHasWriteAccess && networkServices.manual
 			textField.text: networkServices.netmask
 			saveInput: function() { networkServices.setServiceProperty("Netmask", textField.text) }
 		}
@@ -91,7 +91,7 @@ Page {
 		ListIpAddressField {
 			//% "Gateway"
 			text: qsTrId("settings_tcpip_gateway")
-			enabled: method.userHasWriteAccess && networkServices.manual
+			interactive: method.userHasWriteAccess && networkServices.manual
 			textField.text: networkServices.gateway
 			saveInput: function() { networkServices.setServiceProperty("Gateway", textField.text) }
 		}
@@ -99,7 +99,7 @@ Page {
 		ListIpAddressField {
 			//% "DNS server"
 			text: qsTrId("settings_tcpip_dns_server")
-			enabled: method.userHasWriteAccess && networkServices.manual
+			interactive: method.userHasWriteAccess && networkServices.manual
 			textField.text: networkServices.nameserver
 			saveInput: function() { networkServices.setServiceProperty("Nameserver", textField.text) }
 		}

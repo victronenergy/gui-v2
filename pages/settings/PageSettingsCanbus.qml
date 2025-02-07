@@ -97,7 +97,7 @@ Page {
 				//% "Check Unique id numbers"
 				text: qsTrId("settings_canbus_unique_id_choose")
 				preferredVisible: root._isVecan || root._isRvc
-				button.text: timer.running
+				secondaryText: timer.running
 					? Utils.secondsToString(timer.remainingTime)
 					  //% "Press to check"
 					: qsTrId("settings_canbus_unique_id_press_to_check")

@@ -102,7 +102,7 @@ Page {
 					  ? qsTrId("vebus_device_interrupt_equalization")
 						//% "Equalization"
 					  : qsTrId("vebus_device_equalization")
-				button.text: {
+				secondaryText: {
 					if (interruptTimer.running)
 						//% "Interrupting..."
 						return qsTrId("vebus_device_interrupting")
@@ -115,7 +115,10 @@ Page {
 					//% "Press to start"
 					return qsTrId("vebus_device_press_to_start")
 				}
-				enabled: !isNaN(setChargerState.value) && !isNaN(vebusSubState.value) && !startTimer.running && !interruptTimer.running
+				interactive: !isNaN(setChargerState.value) &&
+							 !isNaN(vebusSubState.value) &&
+							 !startTimer.running &&
+							 !interruptTimer.running
 				preferredVisible: root.isMulti
 
 				onClicked: {
@@ -196,7 +199,7 @@ Page {
 			ListButton {
 				//% "Redetect VE.Bus system"
 				text: qsTrId("vebus_device_redectect_vebus_system")
-				button.text: redetectSystem.value === 1
+				secondaryText: redetectSystem.value === 1
 								//% "Redetecting..."
 							 ? qsTrId("vebus_device_redetecting")
 								//% "Press to redetect"
@@ -208,7 +211,7 @@ Page {
 			ListButton {
 				//% "Restart VE.Bus system"
 				text: qsTrId("vebus_device_restart_vebus_system")
-				button.text: systemReset.value === 1
+				secondaryText: systemReset.value === 1
 								//% "Restarting..."
 							 ? qsTrId("vebus_device_restarting")
 								//% "Press to restart"
@@ -237,7 +240,7 @@ Page {
 				//% "ESS Relay test"
 				text: qsTrId("vebus_device_ess_relay_test")
 				dataItem.uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
-				enabled: false
+				interactive: false
 				preferredVisible: dataItem.isValid && isEssOrHub4 && isMulti
 				optionModel: [
 					//% "Completed"

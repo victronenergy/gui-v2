@@ -25,7 +25,7 @@ Page {
 				text: qsTrId("run_interval")
 				dataItem.uid: bindPrefix + "/TestRun/Interval"
 				//% "%1 day(s)"
-				button.text: qsTrId("page_generator_test_run_days").arg(value)
+				secondaryText: qsTrId("page_generator_test_run_days").arg(value)
 				stepSize: 1
 				from: 1
 				to: 30

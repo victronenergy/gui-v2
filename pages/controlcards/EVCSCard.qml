@@ -40,22 +40,17 @@ ControlCard {
 			right: parent.right
 		}
 
-		ListItem {
-			id: modeListItem
-
+		ListButton {
+			id: modeListButton
 			text: CommonWords.mode
+			secondaryText: Global.evChargers.chargerModeToText(modeItem.value)
 			flat: true
-			enabled: root.userHasWriteAccess && modeItem.isValid
-
-			content.children: ListItemButton {
-				width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-				text: Global.evChargers.chargerModeToText(modeItem.value)
-				onClicked: Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
-			}
+			interactive: modeItem.isValid
+			onClicked: Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
 		}
 
 		FlatListItemSeparator {
-			visible: modeListItem.visible
+			visible: modeListButton.visible
 		}
 
 		ListSpinBox {
@@ -69,7 +64,7 @@ ControlCard {
 			stepSize: 1
 			dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
 			preferredVisible: dataItem.isValid
-			enabled: modeItem.value === VenusOS.Evcs_Mode_Manual
+			interactive: dataItem.isValid && modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		FlatListItemSeparator {

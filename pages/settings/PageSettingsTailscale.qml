@@ -207,7 +207,7 @@ Page {
 				text: qsTrId("settings_tailscale_machinename")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/MachineName"
 				placeholderText: "--"
-				enabled: !root.tailscaleEnabled && userHasWriteAccess
+				interactive: dataItem.isValid && !root.tailscaleEnabled
 				validateInput: function() {
 					return _checkAndCleanup(textField.text, "0-9a-z-")
 				}
@@ -231,7 +231,7 @@ Page {
 				//% "Logout from Tailscale account"
 				text: qsTrId("settings_tailscale_logout")
 				//% "Log out now"
-				button.text: qsTrId("settings_tailscale_logout_button")
+				secondaryText: qsTrId("settings_tailscale_logout_button")
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				preferredVisible: root.tailscaleConnected
 				onClicked: commandItem.setValue('logout')
@@ -254,14 +254,14 @@ Page {
 								ListSwitch {
 									//% "Access local ethernet network"
 									text: qsTrId("settings_tailscale_local_network_access_ethernet")
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									interactive: dataItem.isValid && !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalEthernet"
 								}
 
 								ListSwitch {
 									//% "Access local WiFi network"
 									text: qsTrId("settings_tailscale_local_network_access_wifi")
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									interactive: dataItem.isValid && !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalWifi"
 								}
 
@@ -271,7 +271,7 @@ Page {
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomNetworks"
 									//% "Example: 192.168.1.0/24"
 									placeholderText: qsTrId("settings_tailscale_local_network_access_custom_networks_placeholder")
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									interactive: dataItem.isValid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9./,")
 									}
@@ -313,7 +313,7 @@ Page {
 									text: qsTrId("settings_tailscale_advanced_custom_tailscale_up_arguments")
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomArguments"
 									placeholderText: "--"
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									interactive: dataItem.isValid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9a-z-_=+:., ")
 									}
@@ -324,7 +324,7 @@ Page {
 									text: qsTrId("settings_tailscale_advanced_custom_server_url")
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomServerUrl"
 									placeholderText: "--"
-									enabled: !root.tailscaleEnabled && userHasWriteAccess
+									interactive: dataItem.isValid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9a-z-:/.")
 									}

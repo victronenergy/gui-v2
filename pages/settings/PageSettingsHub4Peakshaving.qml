@@ -46,7 +46,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Peak shaving"
 				text: qsTrId("settings_ess_peak_shaving")
-				enabled: !(stateItem.value === VenusOS.Ess_BatteryLifeState_KeepCharged && withoutGridMeterItem.value === 1)
+				interactive: !(stateItem.value === VenusOS.Ess_BatteryLifeState_KeepCharged && withoutGridMeterItem.value === 1)
 				optionModel: [
 					{
 						//% "Above minimum SOC only"
@@ -86,7 +86,7 @@ Page {
 				text: qsTrId("settings_ess_limit_system_ac_import_current")
 				checkable: true
 				checked: systemAcInputLimit.value >= 0
-				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
+				interactive: withoutGridMeterItem.value === 0 && overruledShoreLimit.seen
 				onCheckedChanged: {
 					if (checked && systemAcInputLimit.value < 0) {
 						systemAcInputLimit.setValue(40)
@@ -103,7 +103,6 @@ Page {
 			ListSpinBox {
 				//% "Maximum system import current (per phase)"
 				text: qsTrId("settings_ess_max_system_import_current")
-				enabled: userHasWriteAccess
 				preferredVisible: maxSystemAcInputCurrentSwitch.enabled && maxSystemAcInputCurrentSwitch.checked
 				dataItem.uid: systemAcInputLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
@@ -120,7 +119,7 @@ Page {
 				text: qsTrId("settings_ess_limit_system_ac_export_current")
 				checkable: true
 				checked: systemAcExportLimit.value >= 0
-				enabled: userHasWriteAccess && withoutGridMeterItem.value === 0
+				interactive: withoutGridMeterItem.value === 0
 				onCheckedChanged: {
 					if (checked && systemAcExportLimit.value < 0) {
 						systemAcExportLimit.setValue(40)
@@ -137,7 +136,6 @@ Page {
 			ListSpinBox {
 				//% "Maximum system export current (per phase)"
 				text: qsTrId("settings_ess_max_system_export_current")
-				enabled: userHasWriteAccess
 				preferredVisible: maxSystemAcExportCurrentSwitch.enabled && maxSystemAcExportCurrentSwitch.checked
 				dataItem.uid: systemAcExportLimit.uid
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
