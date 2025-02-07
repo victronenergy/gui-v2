@@ -24,8 +24,8 @@ ListButton {
 	signal minValueReached()
 	signal selectorAccepted(newValue: var)
 
-	button.text: value === undefined ? "--" : Units.formatNumber(value, decimals) + root.suffix
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	secondaryText: value === undefined ? "--" : Units.formatNumber(value, decimals) + root.suffix
+	interactive: (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: Global.dialogLayer.open(numberSelectorComponent, {value: value})
 

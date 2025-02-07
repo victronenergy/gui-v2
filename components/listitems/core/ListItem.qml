@@ -7,6 +7,45 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
+/* ListItem Visual and Behavioural Rules
+   -------------------------------------
+
+	ListItem provides its own clicked() signal which is emitted by its own ListPressArea.
+	All ListItems and its derivatives are therefore potentially clickable by default and
+	must follow these rules consistently:
+
+	- ListItems shall NEVER have enabled: false; it should always be true.
+	- ListItems may set interactive: true (false by default)
+	- ListItems should set showAccessLevel and/or writeAccessLevel where necessary
+	- ListItems should always activate the default action for the child item when clicked() emitted
+
+	- The internal ListPressArea shall always be clickable, however whether it goes on to
+	  emit ListItem's own clicked() signal depends on the following logic:
+
+	if interactive: true
+
+		if the system is readonly:
+
+			Show a toast saying system is readonly
+			No clicked() signal is emitted on the ListItem
+			The ListPressArea press effect DOES occur
+
+		else if userHasWriteAccess is false:
+
+			Show toast saying you can’t edit it
+			Mo clicked() signal is emitted on the ListItem
+			The ListPressArea press effect DOES occur
+
+		else
+			emit ListItem clicked()
+			The ListPressArea press effect DOES occur
+
+	else // interactive: false
+
+		No clicked() signal is emitted on the ListItem
+		The  ListPressArea press effect DOES NOT occur
+*/
+
 Item {
 	id: root
 
@@ -15,8 +54,8 @@ Item {
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children
 	property string caption
-	property bool down
-	property bool flat
+	readonly property alias down: pressArea.containsPress
+	property bool flat: false
 	property alias backgroundRect: backgroundRect
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
@@ -42,6 +81,9 @@ Item {
 	// affected by the parent's visible value, causing the item to be unnecessarily filtered in and
 	// out of a VisibleItemModel whenever a parent page is shown/hidden.)
 	readonly property bool effectiveVisible: preferredVisible && userHasReadAccess
+	property bool interactive: false
+	readonly property bool clickable: enabled && interactive && userHasWriteAccess
+	signal clicked()
 
 	visible: effectiveVisible
 	implicitHeight: effectiveVisible ? (contentLayout.height + Theme.geometry_gradientList_spacing) : 0
@@ -69,6 +111,36 @@ Item {
 				width: Theme.geometry_listItem_radius
 				height: parent.height
 				color: backgroundRect.color
+			}
+		}
+	}
+
+	ListPressArea {
+		id: pressArea
+
+		property ToastNotification toast: null
+
+		// Note: this doesn't fill the root - its height is less the gradient list spacing
+
+		anchors.fill: backgroundRect
+		radius: backgroundRect.radius
+		effectEnabled: root.interactive
+		onClicked: {
+			if (root.interactive) {
+				if (!root.userHasWriteAccess) {
+					pressArea.toast?.close(true) // close immediately
+					//% "Setting locked for access level"
+					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
+				} else {
+					root.clicked()
+				}
+			}
+		}
+
+		Connections {
+			target: pressArea.toast
+			function onDismissed() {
+				pressArea.toast = null
 			}
 		}
 	}

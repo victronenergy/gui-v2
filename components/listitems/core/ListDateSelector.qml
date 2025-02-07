@@ -14,7 +14,7 @@ ListButton {
 	// data value is assumed to be in seconds
 	property var date: dataItem.isValid ? new Date(dataItem.value * 1000) : null
 
-	button.text: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
+	secondaryText: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
 	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
 
 	onClicked: Global.dialogLayer.open(dateSelectorComponent, {

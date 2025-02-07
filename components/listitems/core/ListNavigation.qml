@@ -14,10 +14,7 @@ ListItem {
 	property alias secondaryLabel: secondaryLabel
 	property alias icon: icon
 
-	signal clicked()
-
-	down: pressArea.containsPress
-	enabled: userHasReadAccess
+	interactive: true
 
 	content.children: [
 		Label {
@@ -38,16 +35,8 @@ ListItem {
 			anchors.verticalCenter: parent.verticalCenter
 			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180
-			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			visible: root.enabled
+			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+			visible: root.interactive
 		}
 	]
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent.backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root.clicked()
-	}
 }

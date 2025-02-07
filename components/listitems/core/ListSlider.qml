@@ -12,13 +12,14 @@ ListItem {
 	readonly property alias dataItem: slider.dataItem
 	readonly property alias slider: slider
 
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.isValid)
 
 	rightPadding: 0
 	content.children: [
 		SettingsSlider {
 			id: slider
 
+			enabled: root.clickable
 			width: Theme.geometry_listItem_slider_width
 		}
 	]

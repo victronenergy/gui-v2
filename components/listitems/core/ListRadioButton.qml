@@ -13,25 +13,15 @@ ListItem {
 	property alias checked: radioButton.checked
 	property alias radioButton: radioButton
 
-	signal clicked()
-
-	down: pressArea.containsPress || radioButton.down
-	enabled: userHasWriteAccess
+	interactive: true
 
 	content.children: [
 		RadioButton {
 			id: radioButton
 
 			checkable: false
+			enabled: root.clickable
 			onClicked: root.clicked()
 		}
 	]
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent.backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root.clicked()
-	}
 }

@@ -19,23 +19,7 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	signal clicked()
-
-	function _setChecked(c) {
-		if (updateDataOnClick) {
-			if (root.dataItem.uid.length > 0) {
-				if (invertSourceValue) {
-					dataItem.setValue(c ? valueFalse : valueTrue)
-				} else {
-					dataItem.setValue(c ? valueTrue : valueFalse)
-				}
-			}
-		}
-		clicked()
-	}
-
-	down: pressArea.containsPress
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.isValid)
 
 	content.children: [
 		Label {
@@ -49,18 +33,28 @@ ListItem {
 		Switch {
 			id: switchItem
 
+			enabled: root.clickable
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
-			onClicked: root._setChecked(!checked)
+			onClicked: root.clicked()
 		}
 	]
 
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent.backgroundRect
-		radius: backgroundRect.radius
-		onClicked: root._setChecked(!switchItem.checked)
+	onClicked: {
+		if (switchItem.enabled && updateDataOnClick) {
+			if (root.dataItem.uid.length > 0) {
+				// Note: this logic only holds so long as checkable is false so we can use
+				// the current unmodified checked state at the point of onClicked.
+				// (dataItem might not be valid until the first write so we can't simply use
+				// the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
+				// Note that an malformed uid will result in it being empty when inspected.
+				if (invertSourceValue) {
+					dataItem.setValue(switchItem.checked ? valueTrue : valueFalse)
+				} else {
+					dataItem.setValue(switchItem.checked ? valueFalse : valueTrue)
+				}
+			}
+		}
 	}
 
 	VeQuickItem {

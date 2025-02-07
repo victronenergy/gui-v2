@@ -37,6 +37,10 @@ ListItem {
 	signal editingFinished()
 	signal accepted()
 
+	interactive: (dataItem.uid === "" || dataItem.isValid)
+
+	onClicked: forceActiveFocus()
+
 	function forceActiveFocus() {
 		_aboutToFocus()
 		textField.forceActiveFocus()
@@ -117,6 +121,7 @@ ListItem {
 		property bool _showErrorHighlight
 		property bool _validateBeforeSaving
 
+		enabled: root.clickable
 		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
