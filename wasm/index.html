@@ -74,7 +74,7 @@
                 status.innerHTML = 'Loading...';
 
                 const instance = await qtLoad({
-                    arguments: ['--mqtt', (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'],
+                    arguments: ['--mqtt', (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'], // delete this line to run wasm builds on the desktop
                     qt: {
                         onLoaded: () => showUi(screen),
                         onExit: exitData =>
@@ -86,7 +86,7 @@
                                 exitData.text !== undefined ? ` (${exitData.text})` : '';
                             showUi(spinner);
                         },
-                        entryFunction: window.venus_gui_v2_entry,
+                        entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L114
                         containerElements: [screen],
                     }
                 });
