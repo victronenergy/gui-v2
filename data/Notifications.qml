@@ -128,8 +128,8 @@ QtObject {
 	}
 
 	readonly property NotificationData alarms: NotificationData {
-		activeCount: !!numberOfActiveAlarms.value
-		unsilencedCount: !!numberOfUnsilencedAlarms.value
+		activeCount: numberOfActiveAlarms.isValid ? numberOfActiveAlarms.value : 0
+		unsilencedCount: numberOfUnsilencedAlarms.isValid ? numberOfUnsilencedAlarms.value : 0
 
 		VeQuickItem {
 			id: numberOfActiveAlarms
@@ -145,8 +145,8 @@ QtObject {
 	}
 
 	readonly property NotificationData warnings: NotificationData {
-		activeCount: !!numberOfActiveWarnings.value
-		unsilencedCount: !!numberOfUnsilencedWarnings.value
+		activeCount: numberOfActiveWarnings.isValid ? numberOfActiveWarnings.value : 0
+		unsilencedCount: numberOfUnsilencedWarnings.isValid ? numberOfUnsilencedWarnings.value : 0
 
 		VeQuickItem {
 			id: numberOfActiveWarnings
@@ -162,8 +162,8 @@ QtObject {
 	}
 
 	readonly property NotificationData informations: NotificationData {
-		activeCount: !!numberOfActiveInformations.value
-		unsilencedCount: !!numberOfUnsilencedInformations.value
+		activeCount: numberOfActiveInformations.isValid ? numberOfActiveInformations.value : 0
+		unsilencedCount: numberOfUnsilencedInformations.isValid ? numberOfUnsilencedInformations.value : 0
 
 		VeQuickItem {
 			id: numberOfActiveInformations
