@@ -94,8 +94,8 @@ Rectangle {
 					   : "qrc:/images/icon_back_32.svg"
 
 		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+				 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 && root.leftButton != VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -189,10 +189,26 @@ Rectangle {
 		}
 
 		CP.IconImage {
+			id: notificationIcon
+
+			readonly property color iconColor: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Alarm
+											   ? Theme.color_critical
+											   : Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Warning
+												 ? Theme.color_warning : notificationIcon.color
+
+			// Latch the color so it doesn't change while fading out
+			onIconColorChanged: color = iconColor
+
 			anchors.verticalCenter: parent.verticalCenter
-			color: Theme.color_font_primary
-			source: "qrc:/images/notifications.svg"
-			visible: Global.notifications?.showNotificationBell ?? false
+			source: "qrc:/images/icon_warning_32.svg"
+			opacity: Global.notifications?.statusBarNotifcationIconVisible ? 1 : 0
+			visible: opacity > 0
+
+			Behavior on opacity {
+				OpacityAnimator {
+					duration: Theme.animation_page_fade_duration
+				}
+			}
 		}
 	}
 
@@ -279,6 +295,4 @@ Rectangle {
 			onClicked: Global.screenBlanker.setDisplayOff()
 		}
 	}
-
-	StatusBarNotificationIndicator { }
 }

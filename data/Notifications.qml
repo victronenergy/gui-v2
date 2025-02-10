@@ -111,20 +111,12 @@ QtObject {
 													   warnings.hasUnsilenced ||
 													   informations.hasUnsilenced
 
-	readonly property int highestPriortyUnsilenced: alarms.hasUnsilenced ? VenusOS.Notification_Alarm :
-																		   warnings.hasUnsilenced ? VenusOS.Notification_Warning :
-																									informations.hasUnsilenced ? VenusOS.Notification_Info
-																															   : -1
+	readonly property int statusBarNotifcationIconPriority: alarms.hasUnsilenced ? VenusOS.Notification_Alarm :
+																				   warnings.hasUnsilenced ? VenusOS.Notification_Warning : -1
 
-	readonly property bool showNotificationBar: alarms.hasUnsilenced ||
-												warnings.hasUnsilenced ||
-												(informations.hasUnsilenced && informations.hasActive)
+	readonly property bool statusBarNotifcationIconVisible: (alarms.hasActive || !alarms.hasActive && alarms.hasUnsilenced) ||
+															(warnings.hasActive || !warnings.hasActive && warnings.hasUnsilenced)
 
-	readonly property bool showNotificationBell: (alarms.hasActive ||
-												  !alarms.hasActive && alarms.hasUnsilenced) ||
-												 (warnings.hasActive ||
-												  !warnings.hasActive && warnings.hasUnsilenced) ||
-												 (informations.hasActive && informations.hasUnsilenced)
 	component NotificationData: QtObject {
 		property int activeCount: 0
 		property int unsilencedCount: 0
