@@ -224,6 +224,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
+    components/NotificationCounter.qml
     components/NotificationDelegate.qml
     components/ObjectAcConnection.qml
     components/ObjectModelMonitor.qml
