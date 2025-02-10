@@ -22,6 +22,9 @@ ListNavigation {
 	//% "Use %1 value to start/stop"
 	property string enableDescription: qsTrId("generator_condition_use_value_to_start_stop").arg(name)
 
+	//% "Prevent start until %1 is higher than"
+	property string preventStartValueDescription: qsTrId("generator_condition_prevent_start_value").arg(name)
+
 	//% "Start when %1 is higher than"
 	readonly property string startValueDescriptionHigher: qsTrId("generator_condition_start_when_property_is_higher_than").arg(root.name)
 
@@ -162,6 +165,19 @@ ListNavigation {
 						preferredVisible: dataItem.isValid
 						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
+					}
+
+					ListSpinBox {
+						id: preventStartValue
+
+						text: preventStartValueDescription
+						preferredVisible: dataItem.isValid
+						dataItem.uid: bindPrefix + "/PreventStartValue"
+						suffix: root.unit
+						decimals: root.decimals
+						stepSize: root.stepSize
+						from: stopValue.dataItem.isValid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
+						to: stopValue.dataItem.isValid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
 					}
 
 					ListSwitch {
