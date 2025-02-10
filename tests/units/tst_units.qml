@@ -111,8 +111,8 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				if (unit === VenusOS.Units_Volume_Liter) {
-					expect(unit, 12345, "12", "㎘")
-					expect(unit, 123456789, "123457", "㎘")
+					expect(unit, 12345, "12", "k" + unitString)
+					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123", "M" + unitString)
