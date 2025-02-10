@@ -62,6 +62,8 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 			// and other awkward syntax to access model properties.
 			model: root.model ? root.model.count : null
 			delegate: NavButton {
+				id: navButton
+
 				readonly property var _modelData: root.model.get(index)
 				height: root.height
 				width: Theme.geometry_navigationBar_button_width
@@ -73,18 +75,50 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 				onClicked: root._currentIndex = model.index
 
 				Rectangle {
+					id: notificationCount
+
+					visible: navButton._modelData.url.endsWith("NotificationsPage.qml")
+							 && (Global.notifications?.hasUnsilencedNotifications ?? false)
+
+					z: 1 // to get it on top of the IconLabel
 					anchors {
 						top: parent.top
-						topMargin: Theme.geometry_navigationBar_notifications_redDot_topMargin
+						topMargin: 6 // Theme.geometry_navigationBar_notifications_redDot_topMargin
 						horizontalCenter: parent.horizontalCenter
-						horizontalCenterOffset: Theme.geometry_navigationBar_notifications_redDot_horizontalCenterOffset
+						horizontalCenterOffset: 9 //Theme.geometry_navigationBar_notifications_redDot_horizontalCenterOffset
 					}
-					width: Theme.geometry_notificationsPage_delegate_marker_width
+					width: 20 // Theme.geometry_notificationsPage_delegate_marker_width
 					height: width
-					radius: Theme.geometry_notificationsPage_delegate_marker_radius
-					color: Theme.color_critical
-					visible: _modelData.url.endsWith("NotificationsPage.qml")
-							 && (Global.notifications?.hasUnsilencedNotifications ?? false)
+					radius: width / 2 //Theme.geometry_notificationsPage_delegate_marker_radius
+					color: "transparent"
+					border {
+						// TODO: instead of following the color here, this ring should
+						// be built into a separate bell icon so we only need to worry about the red dot.
+						color: root.color
+						width: 2
+					}
+
+					Rectangle {
+						anchors {
+							fill: parent
+							margins: 2 // inside the outer ring
+						}
+						radius: width / 2
+						color: Theme.color_critical
+					}
+
+					Text {
+						anchors.centerIn: parent
+						// always white over a red background
+						color: Theme.color_white
+						font.pixelSize: 9 // Theme.font_size_body1
+						font.weight: Font.Bold
+						horizontalAlignment: Text.AlignHCenter
+						verticalAlignment: Text.AlignVCenter
+						// Two digits maximum
+						text: Global.notifications?.unsilencedNotificationCount > 9
+							  ? "9+" : Global.notifications?.unsilencedNotificationCount
+					}
 				}
 			}
 		}
