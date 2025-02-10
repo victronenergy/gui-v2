@@ -17,12 +17,13 @@ QtObject {
 		switch (val) {
 		//channel status
 		case VenusOS.Switch_Status_Active:
-			//% "Active"
-			return qsTrId("switchDev_active")
+			return CommonWords.active_status
 		case VenusOS.Switch_Status_Disabled:
 			return CommonWords.disabled
 		case VenusOS.Switch_Status_Input_Active:
-			return CommonWords.active_status
+			//% "Powered"
+			return qsTrId("Switch_Input_Active")
+
 		case VenusOS.Switch_Status_Off:
 			return CommonWords.off
 		case VenusOS.Switch_Status_On:
@@ -118,6 +119,9 @@ QtObject {
 		case VenusOS.Switch_Function_Dimmable:
 			//% "Dimmable"
 			return qsTrId("Switches_Dimmable")
+		case VenusOS.Switch_Function_Slave:
+			//% "Slave"
+			return qsTrId("Switches_Slave")
 		default:
 			//% "Undefined"
 			return qsTrId("Switches_Undefined")
