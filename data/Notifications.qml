@@ -103,6 +103,14 @@ QtObject {
 		uid: root.serviceUid + "/SilenceAll"
 	}
 
+	readonly property int activeNotificationCount: alarms.activeCount +
+												   warnings.activeCount +
+												   informations.activeCount
+
+	readonly property int unsilencedNotificationCount: alarms.unsilencedCount +
+													   warnings.unsilencedCount +
+													   informations.unsilencedCount
+
 	readonly property bool hasActiveNotifications: alarms.hasActive ||
 												   warnings.hasActive ||
 												   informations.hasActive
