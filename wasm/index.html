@@ -86,7 +86,7 @@
                                 exitData.text !== undefined ? ` (${exitData.text})` : '';
                             showUi(spinner);
                         },
-                        entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L114
+                        entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L113
                         containerElements: [screen],
                     }
                 });
@@ -101,7 +101,7 @@
     <script type="text/javascript">
         var watchdogHit = false // this gets set to 'true' by a timer via BackendConnection::hitWatchdog()
         console.log("starting watchdog timer")
-        setTimeout(function(){ // wait 2 minutes for the page to load, then set a 10 second watchdog timer
+        setTimeout(function() { // wait 2 minutes for the page to load, then set a 10 second watchdog timer
             checkWatchdog()
             setInterval(checkWatchdog, 10000)
         }, 120000)
