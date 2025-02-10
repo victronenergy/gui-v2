@@ -65,7 +65,7 @@ void NotificationsModel::insert(const int index, BaseNotification* notification)
 	if (index < 0 || index > m_data.count() || notification == nullptr) {
 		return;
 	}
-	emit beginInsertRows(QModelIndex(), index, index);
+	beginInsertRows(QModelIndex(), index, index);
 	m_data.insert(index, notification);
 
 	connect(notification, &BaseNotification::notificationIdChanged, this, &NotificationsModel::notificationIdChangedHandler);
@@ -77,8 +77,9 @@ void NotificationsModel::insert(const int index, BaseNotification* notification)
 	connect(notification, &BaseNotification::deviceNameChanged,     this, &NotificationsModel::deviceNameChangedHandler);
 	connect(notification, &BaseNotification::valueChanged,          this, &NotificationsModel::valueChangedHandler);
 
-	emit endInsertRows();
-	emit countChanged(static_cast<int>(m_data.count()));
+	endInsertRows();
+	emit countChanged();
+	emit notificationInserted(notification);
 }
 
 void NotificationsModel::insertNotification(BaseNotification *newNotification)
@@ -86,11 +87,24 @@ void NotificationsModel::insertNotification(BaseNotification *newNotification)
 	insert(count(), newNotification);
 }
 
+void NotificationsModel::removeNotification(BaseNotification *notification)
+{
+	for (int i = 0; i < m_data.size(); ++i) {
+		const BaseNotification *existingNotification = m_data.at(i);
+		if (existingNotification == notification) {
+			emit notificationRemoved(notification);
+			remove(i);
+			break;
+		}
+	}
+}
+
 void NotificationsModel::removeNotification(int notificationId)
 {
 	for (int i = 0; i < m_data.size(); ++i) {
 		const BaseNotification *notification = m_data.at(i);
 		if (notification && notification->notificationId() == notificationId) {
+			emit notificationRemoved(notification);
 			remove(i);
 			break;
 		}
@@ -106,7 +120,7 @@ void NotificationsModel::remove(int index)
 	const BaseNotification *notification = m_data.at(index);
 	if (notification) {
 
-		emit beginRemoveRows(QModelIndex(), index, index);
+		beginRemoveRows(QModelIndex(), index, index);
 
 		disconnect(notification, &BaseNotification::notificationIdChanged, this, &NotificationsModel::notificationIdChangedHandler);
 		disconnect(notification, &BaseNotification::silencedChanged,       this, &NotificationsModel::silencedChangedHandler);
@@ -119,8 +133,8 @@ void NotificationsModel::remove(int index)
 
 		m_data.removeAt(index);
 
-		emit endRemoveRows();
-		emit countChanged(static_cast<int>(m_data.count()));
+		endRemoveRows();
+		emit countChanged();
 	}
 }
 
@@ -129,7 +143,7 @@ void NotificationsModel::reset()
 	beginResetModel();
 	m_data.clear();
 	endResetModel();
-	emit countChanged(static_cast<int>(m_data.count()));
+	emit countChanged();
 }
 
 int NotificationsModel::rowCount(const QModelIndex &) const

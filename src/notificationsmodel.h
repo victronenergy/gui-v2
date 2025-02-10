@@ -43,6 +43,7 @@ public:
 
 	//Q_INVOKABLE void insertByDate(Victron::VenusOS::BaseNotification *notification);
 	Q_INVOKABLE void insertNotification(Victron::VenusOS::BaseNotification *notification);
+	Q_INVOKABLE void removeNotification(Victron::VenusOS::BaseNotification *notification);
 	Q_INVOKABLE void removeNotification(int notificationId);
 	Q_INVOKABLE void reset();
 
@@ -50,7 +51,9 @@ public:
 	void remove(int index);
 
 signals:
-	void countChanged(int);
+	void countChanged();
+	void notificationInserted(const Victron::VenusOS::BaseNotification* notification);
+	void notificationRemoved(const Victron::VenusOS::BaseNotification* notification);
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
