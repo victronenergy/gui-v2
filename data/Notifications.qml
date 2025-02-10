@@ -61,6 +61,15 @@ QtObject {
 				toastedNotif.toast = null
 			}
 		}
+
+		property Connections _notificationConnection: Connections {
+			target: toastedNotif.notification
+			function onSilencedChanged() {
+				if(toastedNotif.notification.silenced) {
+					close()
+				}
+			}
+		}
 	}
 
 	property ToastedNotification _toastedNotification: ToastedNotification {
