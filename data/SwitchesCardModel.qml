@@ -65,8 +65,27 @@ ListModel {
 						property bool valueValid: isValid &&  value!==""
 					}
 
+					readonly property VeQuickItem _Function: VeQuickItem {
+						uid: model.uid + "/Function"
+						property bool valueValid: isValid &&  ((value==VenusOS.Switch_Function_Momentary)
+													|| (value==VenusOS.Switch_Function_Latching)
+													|| (value==VenusOS.Switch_Function_Dimmable))
+						onValueValidChanged: {
+							if (status === Component.Ready){
+								if (valueValid){
+									_store = updateList(switchuid, _store, groupName, name )
+								}else{
+									removeFromList()
+									_store = null
+								}
+							}
+						}
+					}
+
 					Component.onCompleted: {
-						_store = updateList(switchuid, groupName, groupName, name )
+						if (_Function.valueValid){
+							_store = updateList(switchuid, groupName, groupName, name )
+						}
 					}
 
 					function removeFromList(){

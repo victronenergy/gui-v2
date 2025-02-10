@@ -59,11 +59,6 @@ Page {
 		}
 	}
 
-	property VeQItemTableModel channelModel: VeQItemTableModel {
-		uids:  bindPrefix + "/Channel"
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-	}
-
 	GradientListView {
 		id: switchTopLevelList
 		model: ObjectModel {
@@ -201,9 +196,16 @@ Page {
 		Page {
 			title: device.name
 			VeQuickItem {
-				id: dimmingItem
-				uid: root.bindPrefix + "/Channel/%1/Dimming".arg(root.currentChannel)
-
+				id: validFunctionsItem
+				uid: root.bindPrefix + "/Channel/%1/ValidFunctions".arg(root.currentChannel)
+				property var options: null
+				onValueChanged:{
+					var op = [];
+					for (var i=0;i<8;i++){
+						if (value & (1<<i)) op.push({ display: Global.switches.switchFunctionToText(i), value: i});
+					}
+					options = op;
+				}
 			}
 			GradientListView {
 				model: ObjectModel {
@@ -232,17 +234,7 @@ Page {
 						dataItem.uid: root.bindPrefix + "/Channel/%1/Function".arg(root.currentChannel)
 						enabled: userHasWriteAccess
 						allowed: defaultAllowed && dataItem.isValid
-
-						optionModel: dimmingItem.isValid
-							? [
-								{ display: Global.switches.switchFunctionToText(VenusOS.Switch_Function_Momentary), value: VenusOS.Switch_Function_Momentary },
-								{ display: Global.switches.switchFunctionToText(VenusOS.Switch_Function_Latching), value: VenusOS.Switch_Function_Latching },
-								{ display: Global.switches.switchFunctionToText(VenusOS.Switch_Function_Dimmable), value: VenusOS.Switch_Function_Dimmable },
-							]
-							: [
-							   { display: Global.switches.switchFunctionToText(VenusOS.Switch_Function_Momentary), value: VenusOS.Switch_Function_Momentary },
-							   { display: Global.switches.switchFunctionToText(VenusOS.Switch_Function_Latching), value: VenusOS.Switch_Function_Latching },
-							]
+						optionModel: validFunctionsItem.options
 					}
 
 					ListQuantityField{

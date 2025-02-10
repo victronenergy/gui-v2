@@ -64,7 +64,9 @@ Item {
 
 			Rectangle {
 				id: statusRect
-				visible: !((switchData._status.value === VenusOS.Switch_Status_Off) || (switchData._status.value === VenusOS.Switch_Status_On))
+				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
+					|| (switchData._status.value === VenusOS.Switch_Status_On)
+					|| (switchData._status.value === VenusOS.Switch_Status_Input_Active))
 				width: 100
 				height: 25
 				radius: height/2

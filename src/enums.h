@@ -445,6 +445,7 @@ public:
 		Switch_Function_Momentary = 0,
 		Switch_Function_Latching,
 		Switch_Function_Dimmable,
+		Switch_Function_Slave = 5
 	};
 	Q_ENUM(Switch_Function)
 
