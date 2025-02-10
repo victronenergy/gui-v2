@@ -153,11 +153,8 @@ QtObject {
 	}
 
 	function removeLastNotification() {
-		const notif = notifications[notifications.length - 1]
+		let notif = notifications.pop()
 		const notificationId = notif.notificationId
-
-		notifications.splice(notifications.length - 1, 1)
-
 		updateNotifications()
 
 		return notificationId
