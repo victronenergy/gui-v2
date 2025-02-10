@@ -308,8 +308,10 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		// Litre scaling is special, only kilo range scaling is supported
 		if (unit == VenusOS::Enums::Units_Volume_Liter) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
-				// \u2113 = l, \u3398 = kl
-				quantity.unit = QStringLiteral("\u3398");
+				// \u2113 = litres symbol.
+				// we don't use \u3398 (kilolitres symbol)
+				// as it isn't available in the required font.
+				quantity.unit = QStringLiteral("k\u2113");
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
 				scaledValue = scaledValue / 1000.0;
 			}
