@@ -65,7 +65,10 @@ QtObject {
 		property Connections _notificationConnection: Connections {
 			target: toastedNotif.notification
 			function onSilencedChanged() {
-				if(toastedNotif.notification.silenced) {
+				// the connection might still fire if the notification object is
+				// destined for garbage collection and hasn't yet been destroyed
+				// so we must check for null here.
+				if(toastedNotif.notification?.silenced) {
 					close()
 				}
 			}
