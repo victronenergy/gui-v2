@@ -109,6 +109,8 @@ jobs:
         mkdir -p artifacts/wasm
         mv build-wasm/venus-gui-v2.{html,js,wasm} build-wasm/qtloader.js images/victronenergy.svg artifacts/wasm/
         mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
+        grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
+        sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
         cp .github/patches/Makefile artifacts/wasm/
         cp LICENSE.txt artifacts/wasm/
         cd artifacts
