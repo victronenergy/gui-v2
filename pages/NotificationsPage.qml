@@ -19,6 +19,10 @@ SwipeViewPage {
 	GradientListView {
 		id: notificationsView
 
+		// prevent the nav bar buttons from clicking the notifications when it is shown
+		// over the top of the notificationsView
+		clip: true
+
 		// Header contains the top list of active and/or unsilenced notifications.
 		header: Item {
 			id: headerItem
