@@ -16,7 +16,7 @@ ListItemButton {
 	property int _generatorStateBeforeDialogOpen: -1
 
 	flat: true
-	enabled: _state.value !== VenusOS.Generators_State_Error
+	enabled: _state.value !== VenusOS.Generators_State_Error && _state.value !== VenusOS.Generators_State_StoppedByTankLevel
 			&& Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen
