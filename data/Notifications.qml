@@ -11,7 +11,61 @@ QtObject {
 
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
-	readonly property NotificationsModel allNotificationsModel: NotificationsModel {}
+	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
+		onNotificationInserted: (notification) => toastedNotification.onNotificationInserted(notification)
+		onNotificationRemoved: (notification) => toastedNotification.onNotificationRemoved(notification)
+	}
+
+	component ToastedNotification : QtObject {
+		id: toastedNotif
+
+		property ToastNotification toast: null
+		property BaseNotification notification: null
+
+		function onNotificationInserted(notif: BaseNotification) {
+			toastedNotif.checkAndRemoveExistingToast(notif)
+			if(!toastedNotif.toast) {
+				let createdToast = Global.notificationLayer?.showToastNotification(notif.type, "")
+				if(createdToast) {
+					createdToast.text = Qt.binding(function() { return `${notif.deviceName}\n${notif.description}`})
+					toastedNotif.toast = createdToast
+					toastedNotif.notification = notif
+				}
+			}
+		}
+
+		function onNotificationRemoved(notif: BaseNotification) {
+			if(toastedNotif.notification === notif) {
+				close()
+			}
+			// else the toast was already closed (or never created)
+		}
+
+		function close() {
+			toastedNotif.toast?.close(true)
+			toastedNotif.toast = null
+			toastedNotif.notification = null
+		}
+
+		function checkAndRemoveExistingToast(notif: BaseNotification) {
+			if(toast && (notif.type === VenusOS.Notification_Alarm ||
+						 (notif.type === VenusOS.Notification_Warning && toast.category !== VenusOS.Notification_Alarm) ||
+						 toast.category === VenusOS.Notification_Info)) {
+				close()
+			}
+		}
+
+		property Connections _toastConnection: Connections {
+			target: toastedNotif.toast
+			function onDismissed() {
+				toastedNotif.toast = null
+			}
+		}
+	}
+
+	property ToastedNotification _toastedNotification: ToastedNotification {
+		id: toastedNotification
+	}
 
 	function _notificationSortFunction(leftNotification: var, rightNotification: var) : bool {
 		return leftNotification.type < rightNotification.type &&

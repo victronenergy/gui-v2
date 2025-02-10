@@ -156,6 +156,7 @@ QtObject {
 		let notif = notifications.pop()
 		const notificationId = notif.notificationId
 		updateNotifications()
+		notif.destroy() // cleaned up sometime between the end of this function and the next frame
 
 		return notificationId
 	}
