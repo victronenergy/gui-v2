@@ -66,7 +66,8 @@ Item {
 				id: statusRect
 				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
 					|| (switchData._status.value === VenusOS.Switch_Status_On)
-					|| (switchData._status.value === VenusOS.Switch_Status_Input_Active))
+					|| (switchData._status.value === VenusOS.Switch_Status_Input_Active)
+					|| ((switchData._status.value === VenusOS.Switch_Status_Active) && (switchData._function.value === VenusOS.Switch_Function_Dimmable)))
 				width: 100
 				height: 25
 				radius: height/2
