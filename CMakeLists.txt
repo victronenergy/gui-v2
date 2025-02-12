@@ -360,7 +360,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/core/ListTemperature.qml
     components/listitems/core/ListText.qml
     components/listitems/core/ListTextField.qml
-    components/listitems/core/ListTextGroup.qml
     components/listitems/core/ListTimeSelector.qml
     components/listitems/core/PrimaryListLabel.qml
     components/listitems/core/SecondaryListLabel.qml

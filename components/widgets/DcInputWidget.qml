@@ -77,12 +77,12 @@ OverviewWidget {
 				model: root.inputs
 				delegate: ListQuantityGroupNavigation {
 					text: model.device.name
-					quantityModel: [
-						{ value: model.device.voltage, unit: VenusOS.Units_Volt_DC },
-						{ value: model.device.current, unit: VenusOS.Units_Amp },
-						{ value: model.device.power, unit: VenusOS.Units_Watt },
-					]
 					tableMode: true
+					quantityModel: QuantityObjectModel {
+						QuantityObject { object: model.device; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: model.device; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: model.device; key: "power"; unit: VenusOS.Units_Watt }
+					}
 
 					onClicked: {
 						Global.pageManager.pushPage(root.detailUrl, {

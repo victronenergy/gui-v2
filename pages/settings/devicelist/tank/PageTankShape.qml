@@ -78,31 +78,42 @@ Page {
 			preferredVisible: pointsListView.count === 0
 		}
 
-		delegate: ListTextGroup {
-			id: quantityGroup
+		delegate: ListItem {
+			id: pointDelegate
+
+			required property int index
+			required property var modelData
+			readonly property real sensorLevel: modelData[0]
+			readonly property real volume: modelData[1]
 
 			//: %1 = the point number
 			//% "Point %1"
-			text: qsTrId("devicelist_tankshape_point").arg(model.index + 1)
-			textModel: modelData.map(function(v) { return v + "%" })
+			text: qsTrId("devicelist_tankshape_point").arg(index + 1)
+			content.children: [
+				QuantityRow {
+					model: QuantityObjectModel {
+						QuantityObject { object: pointDelegate; key: "sensorLevel"; unit: VenusOS.Units_Percentage }
+						QuantityObject { object: pointDelegate; key: "volume"; unit: VenusOS.Units_Percentage }
+					}
+				},
 
-			CP.ColorImage {
-				parent: quantityGroup.content
-				anchors.verticalCenter: parent ? parent.verticalCenter : undefined
-				source: "qrc:/images/icon_minus.svg"
-				color: Theme.color_ok
-				visible: root._canEditPoints
+				CP.ColorImage {
+					anchors.verticalCenter: parent.verticalCenter
+					source: "qrc:/images/icon_minus.svg"
+					color: Theme.color_ok
+					visible: root._canEditPoints
 
-				MouseArea {
-					anchors.fill: parent
-					onClicked: {
-						let pointList = pointsListView.model
-						pointList.splice(model.index, 1)
-						points.savePoints(pointList)
-						pointsListView.model = pointList
+					MouseArea {
+						anchors.fill: parent
+						onClicked: {
+							let pointList = pointsListView.model
+							pointList.splice(model.index, 1)
+							points.savePoints(pointList)
+							pointsListView.model = pointList
+						}
 					}
 				}
-			}
+			]
 		}
 	}
 

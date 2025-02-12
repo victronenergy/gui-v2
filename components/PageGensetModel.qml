@@ -158,28 +158,32 @@ VisibleItemModel {
 
 			model: root.nrOfPhases
 			delegate: ListQuantityGroup {
+				id: phaseDelegate
+
+				required property int index
+				readonly property string bindPrefix: `${root.bindPrefix}/Ac/L${index + 1}`
+
 				text: phaseRepeater.count === 1
 						//% "AC"
 					  ? qsTrId("ac-in-genset_ac")
-					  : CommonWords.ac_phase_x.arg(model.index + 1)
-
-				textModel: [
-					{ value: phaseVoltage.value, unit: VenusOS.Units_Volt_AC },
-					{ value: phaseCurrent.value, unit: VenusOS.Units_Amp },
-					{ value: phasePower.value, unit: VenusOS.Units_Watt },
-				]
+					  : CommonWords.ac_phase_x.arg(index + 1)
+				model: QuantityObjectModel {
+					QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC }
+					QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp }
+					QuantityObject { object: phasePower; unit: VenusOS.Units_Watt }
+				}
 
 				VeQuickItem {
 					id: phaseVoltage
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Voltage"
+					uid: phaseDelegate.bindPrefix + "/Voltage"
 				}
 				VeQuickItem {
 					id: phaseCurrent
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Current"
+					uid: phaseDelegate.bindPrefix + "/Current"
 				}
 				VeQuickItem {
 					id: phasePower
-					uid: root.bindPrefix + "/Ac/L" + (model.index + 1) + "/Power"
+					uid: phaseDelegate.bindPrefix + "/Power"
 				}
 			}
 		}

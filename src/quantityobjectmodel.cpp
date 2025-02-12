@@ -160,10 +160,12 @@ int QuantityObjectModel::validObjectsInsertionIndex(QuantityObject *object) cons
 
 void QuantityObjectModel::clearValidObjects()
 {
-	beginResetModel();
-	m_validObjects.clear();
-	endResetModel();
-	emit countChanged();
+	if (m_validObjects.count()) {
+		beginResetModel();
+		m_validObjects.clear();
+		endResetModel();
+		emit countChanged();
+	}
 }
 
 void QuantityObjectModel::objects_append(QQmlListProperty<QuantityObject> *prop, QuantityObject *object)

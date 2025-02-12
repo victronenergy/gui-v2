@@ -108,10 +108,10 @@ Page {
 
 			ListQuantityGroup {
 				text: CommonWords.battery
-				textModel: [
-					{ value: batteryVoltage.value, unit: VenusOS.Units_Volt_DC, },
-					{ value: batteryCurrent.value, unit: VenusOS.Units_Amp },
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: batteryVoltage; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: batteryCurrent; unit: VenusOS.Units_Amp }
+				}
 
 				VeQuickItem {
 					id: batteryVoltage

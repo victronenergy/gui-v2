@@ -9,9 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	quantityModel: [
-		{ value: aggregate.value, unit: Global.systemSettings.volumeUnit }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: aggregate; unit: Global.systemSettings.volumeUnit }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounter.qml",

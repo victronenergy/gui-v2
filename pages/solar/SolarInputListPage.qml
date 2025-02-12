@@ -17,6 +17,8 @@ Page {
 			id: solarInputModel
 		}
 		delegate: ListQuantityGroupNavigation {
+			id: solarInputDelegate
+
 			required property int index
 			required property string serviceUid
 			required property string name
@@ -29,12 +31,12 @@ Page {
 
 			text: name
 			tableMode: true
-			quantityModel: [
-				{ value: serviceType === "pvinverter" ? energy : todaysYield, unit: VenusOS.Units_Energy_KiloWattHour },
-				{ value: voltage, unit: VenusOS.Units_Volt_DC },
-				{ value: current, unit: VenusOS.Units_Amp },
-				{ value: power, unit: VenusOS.Units_Watt },
-			]
+			quantityModel: QuantityObjectModel {
+				QuantityObject { object: solarInputDelegate; key: solarInputDelegate.serviceType === "pvinverter" ? "energy" : "todaysYield"; unit: VenusOS.Units_Energy_KiloWattHour }
+				QuantityObject { object: solarInputDelegate; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+				QuantityObject { object: solarInputDelegate; key: "current"; unit: VenusOS.Units_Amp }
+				QuantityObject { object: solarInputDelegate; key: "power"; unit: VenusOS.Units_Watt }
+			}
 
 			onClicked: {
 				if (serviceType === "pvinverter") {

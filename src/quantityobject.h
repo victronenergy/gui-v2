@@ -26,8 +26,8 @@ namespace VenusOS {
 		property real power: 536
 	}
 
-	QuantityObject { object: dataObject; key: "voltage"; unit: VenusOS.Units_Volt_DC }
-	QuantityObject { object: dataObject; key: "power"; unit: VenusOS.Units_Watt }
+	QuantityObject { object: dataObject; key: "voltage"; unit: VenusOS.Units_Volt_DC }  // numberValue = 0.14
+	QuantityObject { object: dataObject; key: "power"; unit: VenusOS.Units_Watt }   // numberValue = 536
   */
 class QuantityObject : public QObject
 {

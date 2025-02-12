@@ -46,10 +46,10 @@ Page {
 			ListQuantityGroup {
 				//% "Min/max cell voltage"
 				text: qsTrId("lynxionsystem_min_max_cell_voltage")
-				textModel: [
-					{ value: minCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
-					{ value: maxCellVoltage.value, unit: VenusOS.Units_Volt_DC, precision: 3 },
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+				}
 				preferredVisible: minCellVoltage.isValid && maxCellVoltage.isValid
 
 				VeQuickItem {
@@ -66,25 +66,21 @@ Page {
 			ListQuantityGroup {
 				//% "Min/max cell temperature"
 				text: qsTrId("lynxionsystem_min_max_cell_temperature")
-				textModel: [
-					{
-						value: Global.systemSettings.convertFromCelsius(minCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit
-					},
-					{
-						value: Global.systemSettings.convertFromCelsius(maxCellTemperature.value),
-						unit: Global.systemSettings.temperatureUnit
-					}
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: minCellTemperature; key: "convertedValue"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: maxCellTemperature; key: "convertedValue"; unit: Global.systemSettings.temperatureUnit }
+				}
 				preferredVisible: minCellTemperature.isValid && maxCellTemperature.isValid
 
 				VeQuickItem {
 					id: minCellTemperature
+					readonly property real convertedValue: Global.systemSettings.convertFromCelsius(value)
 					uid: root.bindPrefix + "/System/MinCellTemperature"
 				}
 
 				VeQuickItem {
 					id: maxCellTemperature
+					readonly property real convertedValue: Global.systemSettings.convertFromCelsius(value)
 					uid: root.bindPrefix + "/System/MaxCellTemperature"
 				}
 			}

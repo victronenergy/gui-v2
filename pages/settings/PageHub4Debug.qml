@@ -50,66 +50,71 @@ Page {
 				dataItem.uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				text: CommonWords.battery
-				textModel: [
-					//: Battery current, in amps
-					//% "Current: %1"
-					qsTrId("settings_ess_debug_battery_current").arg(batteryCurrent.value || "--"),
-					//: Battery voltage, in volts
-					//% "Voltage: %1"
-					qsTrId("settings_ess_debug_battery_voltage").arg(batteryVoltage.value || "--"),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: batteryCurrent; key: "summary" }
+					QuantityObject { object: batteryVoltage; key: "summary" }
+				}
 
 				VeQuickItem {
 					id: batteryCurrent
+					readonly property string summary: "Current: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Current" : ""
 				}
 
 				VeQuickItem {
 					id: batteryVoltage
+					readonly property string summary: "Voltage: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Voltage" : ""
 				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				//% "Limits (I)"
 				text: qsTrId("settings_ess_debug_limits_i")
-				textModel: [
-					//% "Charge: %1"
-					qsTrId("settings_ess_debug_battery_charge").arg(batteryChargeCurrent.value || "--"),
-					//% "Discharge: %1"
-					qsTrId("settings_ess_debug_battery_discharge").arg(batteryDischargeCurrent.value || "--"),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: batteryChargeCurrent; key: "summary" }
+					QuantityObject { object: batteryDischargeCurrent; key: "summary" }
+				}
 
 				VeQuickItem {
 					id: batteryChargeCurrent
+					readonly property string summary: "Charge: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Info/MaxChargeCurrent" : ""
 				}
 
 				VeQuickItem {
 					id: batteryDischargeCurrent
+					readonly property string summary: "Discharge: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
+
 					uid: root.batteryUid ? root.batteryUid + "/Info/MaxDischargeCurrent" : ""
 				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				//% "Limits (P)"
 				text: qsTrId("settings_ess_debug_limits_p")
-				textModel: [
-					//% "Charge: %1"
-					qsTrId("settings_ess_debug_battery_charge").arg(batteryChargePower.value || "--"),
-					//% "Discharge: %1"
-					qsTrId("settings_ess_debug_battery_discharge").arg(batteryDischargePower.value || "--"),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: batteryChargePower; key: "summary" }
+					QuantityObject { object: batteryDischargePower; key: "summary" }
+				}
 
 				VeQuickItem {
 					id: batteryChargePower
+					readonly property string summary: "Charge: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
 					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 				}
 
 				VeQuickItem {
 					id: batteryDischargePower
+					readonly property string summary: "Discharge: %1"
+						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
 					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 				}
 			}

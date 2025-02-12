@@ -38,48 +38,33 @@ Page {
 			}
 			const stats = json[0]
 
-			stateGroup.visible = stats.linkinfo !== undefined
+			stateGroup.preferredVisible = stats.linkinfo !== undefined
 			if (stats.linkinfo) {
+				stateData.state = stats.linkinfo.info_data.state
 				if (stats.linkinfo.info_data.berr_counter !== undefined) {
-					stateGroup.textModel = [
-						stats.linkinfo.info_data.state,
-						"TEC: " + stats.linkinfo.info_data.berr_counter.tx,
-						"REC: " + stats.linkinfo.info_data.berr_counter.rx,
-					]
+					stateData.tec = "TEC: " + stats.linkinfo.info_data.berr_counter.tx
+					stateData.rec = "REC: " + stats.linkinfo.info_data.berr_counter.rx
 				} else {
-					stateGroup.textModel = [
-						stats.linkinfo.info_data.state,
-						"TEC: N/A",
-						"REC: N/A"
-					]
+					stateData.tec = "TEC: N/A"
+					stateData.rec = "REC: N/A"
 				}
 
-				busOffCounters.visible = stats.linkinfo.info_xstats !== undefined
+				busOffCountersData.hasData = stats.linkinfo.info_xstats !== undefined
 				if (stats.linkinfo.info_xstats) {
-					busOffCounters.textModel = [
-						"Bus off: " + stats.linkinfo.info_xstats.bus_off,
-						"Err passive: " + stats.linkinfo.info_xstats.error_passive,
-						"Bus warn: " + stats.linkinfo.info_xstats.error_warning,
-					]
+					busOffCountersData.busOff = "Bus off: " + stats.linkinfo.info_xstats.bus_off
+					busOffCountersData.errPassive = "Err passive: " + stats.linkinfo.info_xstats.error_passive
+					busOffCountersData.busWarn = "Bus warn: " + stats.linkinfo.info_xstats.error_warning
 				}
 			}
 
-			rxGroup.textModel = [
-				"packets: " + stats.stats64.rx.packets,
-				"dropped: " + stats.stats64.rx.dropped + _percentage(stats.stats64.rx.dropped, stats.stats64.rx.packets)
-			]
-			rxErrorGroup.textModel = [
-				"overruns: " + stats.stats64.rx.over_errors + _percentage(stats.stats64.rx.over_errors, stats.stats64.rx.packets),
-				"errors: " + stats.stats64.rx.errors + _percentage(stats.stats64.rx.errors, stats.stats64.rx.packets)
-			]
+			rxGroupData.packets = "packets: " + stats.stats64.rx.packets
+			rxGroupData.dropped = "dropped: " + stats.stats64.rx.dropped + _percentage(stats.stats64.rx.dropped, stats.stats64.rx.packets)
+			rxGroupData.overruns = "overruns: " + stats.stats64.rx.over_errors + _percentage(stats.stats64.rx.over_errors, stats.stats64.rx.packets),
+			rxGroupData.errors = "errors: " + stats.stats64.rx.errors + _percentage(stats.stats64.rx.errors, stats.stats64.rx.packets)
 
-			txGroup.textModel = [
-				"packets: " + stats.stats64.tx.packets,
-				"dropped: " + stats.stats64.tx.dropped + _percentage(stats.stats64.tx.dropped, stats.stats64.tx.packets)
-			]
-			txErrorGroup.textModel = [
-				"errors: " + stats.stats64.tx.errors + _percentage(stats.stats64.tx.errors, stats.stats64.tx.packets)
-			]
+			txGroupData.packets = "packets: " + stats.stats64.tx.packets
+			txGroupData.dropped = "dropped: " + stats.stats64.tx.dropped + _percentage(stats.stats64.tx.dropped, stats.stats64.tx.packets)
+			txGroupData.errors = "errors: " + stats.stats64.tx.errors + _percentage(stats.stats64.tx.errors, stats.stats64.tx.packets)
 		}
 	}
 
@@ -92,34 +77,105 @@ Page {
 		onTriggered: canStats.getValue(true)
 	}
 
+	QtObject {
+		id: stateData
+		property string state
+		property string tec
+		property string rec
+	}
+
+	QtObject {
+		id: busOffCountersData
+		property bool hasData
+		property string busOff
+		property string errPassive
+		property string busWarn
+	}
+
+	QtObject {
+		id: rxGroupData
+		property string packets
+		property string dropped
+		property string overruns
+		property string errors
+	}
+
+	QtObject {
+		id: txGroupData
+		property string packets
+		property string dropped
+		property string errors
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
-			ListTextGroup {
+			ListItem {
 				id: stateGroup
 
 				//% "State"
 				text: qsTrId("settings_state")
-				bottomContentChildren: ListTextGroup {
-					id: busOffCounters
-				}
+				content.children: [
+					Column {
+						QuantityRow {
+							model: QuantityObjectModel {
+								QuantityObject { object: stateData; key: "state" }
+								QuantityObject { object: stateData; key: "tec" }
+								QuantityObject { object: stateData; key: "rec" }
+							}
+						}
+						QuantityRow {
+							visible: busOffCountersData.hasData
+							model: QuantityObjectModel {
+								QuantityObject { object: busOffCountersData; key: "busOff" }
+								QuantityObject { object: busOffCountersData; key: "errPassive" }
+								QuantityObject { object: busOffCountersData; key: "busWarn" }
+							}
+						}
+					}
+				]
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				id: rxGroup
 
 				text: "RX"
-				bottomContentChildren: ListTextGroup {
-					id: rxErrorGroup
-				}
+				content.children: [
+					Column {
+						QuantityRow {
+							model: QuantityObjectModel {
+								QuantityObject { object: rxGroupData; key: "packets" }
+								QuantityObject { object: rxGroupData; key: "dropped" }
+							}
+						}
+						QuantityRow {
+							model: QuantityObjectModel {
+								QuantityObject { object: rxGroupData; key: "overruns" }
+								QuantityObject { object: rxGroupData; key: "errors" }
+							}
+						}
+					}
+				]
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				id: txGroup
 
 				text: "TX"
-				bottomContentChildren: ListTextGroup {
-					id: txErrorGroup
-				}
+				content.children: [
+					Column {
+						QuantityRow {
+							model: QuantityObjectModel {
+								QuantityObject { object: txGroupData; key: "packets" }
+								QuantityObject { object: txGroupData; key: "dropped" }
+							}
+						}
+						QuantityRow {
+							model: QuantityObjectModel {
+								QuantityObject { object: txGroupData; key: "errors" }
+							}
+						}
+					}
+				]
 			}
 		}
 	}

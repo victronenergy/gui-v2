@@ -9,74 +9,65 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	function _formatValue(value, unit) {
-		return (value == null ? "--" : Units.formatNumber(value, 2)) + " " + unit
-	}
-
-	function _formatPowerValue(value) {
-		return _formatValue(value, "W")
-	}
-
 	HubData {
 		id: data
 	}
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListTextGroup {
+			ListQuantityGroup {
 				text: "PV On ACIn1"
-				textModel: [
-					_formatPowerValue(data.pvOnAcIn1.power),
-					_formatPowerValue(data.pvOnAcIn1.powerL1.value),
-					_formatPowerValue(data.pvOnAcIn1.powerL2.value),
-					_formatPowerValue(data.pvOnAcIn1.powerL3.value),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: data.pvOnAcIn1; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn1.powerL1; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn1.powerL2; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn1.powerL3; unit: VenusOS.Units_Watt }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				text: "PV On ACIn2"
-				textModel: [
-					_formatPowerValue(data.pvOnAcIn2.power),
-					_formatPowerValue(data.pvOnAcIn2.powerL1.value),
-					_formatPowerValue(data.pvOnAcIn2.powerL2.value),
-					_formatPowerValue(data.pvOnAcIn2.powerL3.value),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: data.pvOnAcIn2; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn2.powerL1; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn2.powerL2; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcIn2.powerL3; unit: VenusOS.Units_Watt }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				text: "PV On AC Out"
-				textModel: [
-					_formatPowerValue(data.pvOnAcOut.power),
-					_formatPowerValue(data.pvOnAcOut.powerL1.value),
-					_formatPowerValue(data.pvOnAcOut.powerL2.value),
-					_formatPowerValue(data.pvOnAcOut.powerL3.value),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: data.pvOnAcOut; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcOut.powerL1; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcOut.powerL2; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.pvOnAcOut.powerL3; unit: VenusOS.Units_Watt }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				text: "AC loads"
-				textModel: [
-					_formatPowerValue(data.acLoad.power),
-					_formatPowerValue(data.acLoad.powerL1.value),
-					_formatPowerValue(data.acLoad.powerL2.value),
-					_formatPowerValue(data.acLoad.powerL3.value),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: data.acLoad; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.acLoad.powerL1; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.acLoad.powerL2; unit: VenusOS.Units_Watt }
+					QuantityObject { object: data.acLoad.powerL3; unit: VenusOS.Units_Watt }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantityGroup {
 				text: "Battery"
-				textModel: [
-					_formatPowerValue(Global.system.battery.power),
-					_formatValue(Global.system.battery.voltage, "V"),
-					_formatValue(Global.system.battery.current, "A"),
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: Global.system.battery; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: Global.system.battery; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: Global.system.battery; key: "current"; unit: VenusOS.Units_Amp }
+				}
 			}
 
-			ListTextGroup {
+			ListQuantity {
 				text: "PV Charger"
-				textModel: [
-					_formatPowerValue(data.pvCharger.power.value),
-				]
+				value: data.pvCharger.power.value
+				unit: VenusOS.Units_Watt
 			}
 		}
 	}

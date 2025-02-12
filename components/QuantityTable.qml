@@ -6,6 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
+// TODO change this to use QuantityObjectModel for the model
 Column {
 	id: root
 

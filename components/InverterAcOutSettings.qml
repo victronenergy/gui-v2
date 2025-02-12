@@ -11,6 +11,9 @@ Column {
 
 	property string bindPrefix
 	readonly property bool isInverterCharger: isInverterChargerItem.value === 1
+	readonly property AcPhase acPhase: acPhaseNumber.value === 2 ? inverterData.phase3
+			: acPhaseNumber.value === 1 ? inverterData.phase2
+			: inverterData.phase1
 
 	width: parent ? parent.width : 0
 	spacing: Theme.geometry_gradientList_spacing
@@ -29,28 +32,24 @@ Column {
 	ListQuantityGroup {
 		text: CommonWords.ac_out
 		preferredVisible: !root.isInverterCharger
-		textModel: [
-			{ value: inverterData.phase1.voltage, unit: VenusOS.Units_Volt_AC },
-			{ value: inverterData.phase1.current, unit: VenusOS.Units_Amp },
-			{ value: inverterData.phase1.power, unit: VenusOS.Units_Watt },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: inverterData.phase1; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+			QuantityObject { object: inverterData.phase1; key: "current"; unit: VenusOS.Units_Amp }
+			QuantityObject { object: inverterData.phase1; key: "power"; unit: VenusOS.Units_Watt }
+		}
 	}
 
 	ListQuantityGroup {
-		readonly property AcPhase acPhase: acPhaseNumber.value === 2 ? inverterData.phase3
-				: acPhaseNumber.value === 1 ? inverterData.phase2
-				: inverterData.phase1
-
 		//: %1 = phase number (1-3)
 		//% "AC Out L%1"
 		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.isValid ? acPhaseNumber.value + 1 : 1)
 		preferredVisible: root.isInverterCharger
-		textModel: [
-			{ value: acPhase.voltage, unit: VenusOS.Units_Volt_AC },
-			{ value: acPhase.current, unit: VenusOS.Units_Amp },
-			{ value: acPhase.power, unit: VenusOS.Units_Watt },
-			{ value: acPhase.frequency, unit: VenusOS.Units_Hertz },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: root.acPhase; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+			QuantityObject { object: root.acPhase; key: "current"; unit: VenusOS.Units_Amp }
+			QuantityObject { object: root.acPhase; key: "power"; unit: VenusOS.Units_Watt }
+			QuantityObject { object: root.acPhase; key: "frequency"; unit: VenusOS.Units_Hertz }
+		}
 
 		VeQuickItem {
 			id: acPhaseNumber

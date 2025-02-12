@@ -72,16 +72,13 @@ Page {
 			}
 		}
 
-		delegate: ListTextGroup {
-			readonly property string dcCurrentText: !dcCurrent.isValid ? "--"
-				: Units.formatNumber(dcCurrent.value, 3) + Units.defaultUnitString(VenusOS.Units_Amp)
-			//% "Max: %1"
-			readonly property string maxValueText: !maxValue.isValid ? "--"
-				: qsTrId("settings_dvcc_max").arg(Units.formatNumber(maxValue.value, 3))
-
+		delegate: ListQuantityGroup {
 			width: parent.width
 			text: "[" + (n2kDeviceInstance.value || 0) + "] " + (customName.value || productName.value || "")
-			textModel: [ dcCurrentText, maxValueText ]
+			model: QuantityObjectModel {
+				QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+				QuantityObject { object: maxValue.isValid ? maxValue : null; key: "summary" }
+			}
 
 			VeQuickItem {
 				id: n2kDeviceInstance
@@ -95,6 +92,10 @@ Page {
 
 			VeQuickItem {
 				id: maxValue
+
+				//% "Max: %1"
+				readonly property string summary: isValid ? qsTrId("settings_dvcc_max").arg(Units.formatNumber(value, 3)) : ""
+
 				uid: buddy.uid + "/Link/ChargeCurrent"
 			}
 

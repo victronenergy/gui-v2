@@ -9,11 +9,12 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	quantityModel: [
-		{ unit: VenusOS.Units_Volt_DC, value: voltage.value },
-		{ unit: VenusOS.Units_Amp, value: current.value },
-		{ unit: VenusOS.Units_Watt, value: power.value }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: voltage; unit: VenusOS.Units_Volt_DC }
+		QuantityObject { object: current; unit: VenusOS.Units_Amp }
+		QuantityObject { object: power; unit: VenusOS.Units_Watt }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",

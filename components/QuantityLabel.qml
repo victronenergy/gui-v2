@@ -11,15 +11,17 @@ Item {
 
 	property alias value: quantityInfo.value
 	property alias unit: quantityInfo.unitType
+	readonly property alias quantityInfo: quantityInfo
 	property alias font: unitLabel.font
 	property alias valueColor: valueLabel.color
 	property alias unitColor: unitLabel.color
-	readonly property alias valueText: valueLabel.text
+	property alias valueText: valueLabel.text
 	readonly property alias unitText: unitLabel.text
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
 	property alias formatHints: quantityInfo.formatHints
 	property alias leftPadding: digitRow.leftPadding
+	property alias rightPadding: digitRow.rightPadding
 
 	implicitWidth: digitRow.width
 	implicitHeight: digitRow.height
