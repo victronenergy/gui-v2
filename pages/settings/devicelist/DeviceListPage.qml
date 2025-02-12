@@ -97,12 +97,6 @@ Page {
 				text: qsTrId("settings_tank_pump")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
 			}
-
-			ListNavigation {
-				//% "PV inverters"
-				text: qsTrId("settings_pv_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
-			}
 		}
 	}
 
