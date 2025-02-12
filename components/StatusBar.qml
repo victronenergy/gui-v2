@@ -194,13 +194,17 @@ Rectangle {
 			readonly property color iconColor: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Alarm
 											   ? Theme.color_critical
 											   : Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Warning
-												 ? Theme.color_warning : notificationIcon.color
+												 ? Theme.color_warning :
+												   Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
 
-			// Latch the color so it doesn't change while fading out
-			onIconColorChanged: color = iconColor
+			// Latch the color and the icon so it doesn't change while fading out
+			onIconColorChanged: {
+				color = iconColor
+				source = Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ?
+							"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+			}
 
 			anchors.verticalCenter: parent.verticalCenter
-			source: "qrc:/images/icon_warning_32.svg"
 			opacity: Global.notifications?.statusBarNotifcationIconVisible ? 1 : 0
 			visible: opacity > 0
 
