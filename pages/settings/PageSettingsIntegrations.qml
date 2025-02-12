@@ -38,6 +38,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Energy meters via RS485"
+				text: qsTrId("pagesettingsintegrations_energy_meters")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Modbus Devices"
 				text: qsTrId("pagesettingsintegrations_modbus_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbus.qml", {"title": text})
