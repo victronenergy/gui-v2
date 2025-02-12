@@ -9,9 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	quantityModel: [
-		{ unit: VenusOS.Units_RevolutionsPerMinute, value: motorRpm.value }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: motorRpm; unit: VenusOS.Units_RevolutionsPerMinute }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageMotorDrive.qml",

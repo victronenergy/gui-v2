@@ -46,17 +46,16 @@ Page {
 		}
 
 		model: Global.evChargers.model
-		delegate: ListNavigation {
+		delegate: ListQuantityGroupNavigation {
+			id: evChargerDelegate
+
+			readonly property string statusText: Global.evChargers.chargerStatusToText(model.device.status)
+
 			text: model.device.name
-			secondaryText: {
-				const statusText = Global.evChargers.chargerStatusToText(model.device.status)
-				if (model.device.status === VenusOS.Evcs_Status_Charging) {
-					const quantity = Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour,
-							model.device.energy,
-							Units.defaultUnitPrecision(VenusOS.Units_Energy_KiloWattHour))
-					return quantity.number + quantity.unit + " | " + statusText
-				}
-				return statusText
+			quantityModel: QuantityObjectModel {
+				// Energy is only shown when charging.
+				QuantityObject { object: model.device.status === VenusOS.Evcs_Status_Charging ? model.device : null; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+				QuantityObject { object: evChargerDelegate; key: "statusText" }
 			}
 
 			onClicked: Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { bindPrefix: model.device.serviceUid })

@@ -134,11 +134,6 @@ Page {
 				dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
 			}
 
-			ListTextGroup {
-				text: "Multiple texts"
-				textModel: ["204.07V", "4.7A", "950W"]
-			}
-
 			ListQuantity {
 				text: "Quantity"
 				value: 33.5
@@ -146,11 +141,35 @@ Page {
 			}
 
 			ListQuantityGroup {
-				text: "Multiple quantities"
-				textModel: [
-					{ value: 5.1, unit: VenusOS.Units_Volt_DC },
-					{ value: 48, unit: VenusOS.Units_Watt }
-				]
+				text: "Multiple quantities or text"
+
+				model: QuantityObjectModel {
+					QuantityObject { object: customDataObject; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: customDataObject; key: "current"; unit: VenusOS.Units_Amp }
+					QuantityObject { object: customDataObject; key: "name" }
+
+					// This does not specify a "key", as the default key is "value", which is appropriate for VeQuickItem.
+					QuantityObject { object: batterySoc; unit: VenusOS.Units_Percentage }
+				}
+
+				QtObject {
+					id: customDataObject
+					property real voltage: 0.345
+					property real current: NaN
+					property string name: "Foo"
+				}
+
+				Timer {
+					running: root.isCurrentPage
+					interval: 3000
+					repeat: true
+					onTriggered: customDataObject.voltage = Math.random()
+				}
+
+				VeQuickItem {
+					id: batterySoc
+					uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+				}
 			}
 
 			ListSlider {

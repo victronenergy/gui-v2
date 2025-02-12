@@ -10,12 +10,12 @@ DeviceListDelegate {
 	id: root
 
 	secondaryText: statusCode.isValid ? "" : CommonWords.not_connected
-	quantityModel: statusCode.isValid
-		? [
-			  { unit: VenusOS.Units_None, value: Global.acInputs.gensetStatusCodeToText(statusCode.value) },
-			  { value: power.value, unit: VenusOS.Units_Watt },
-		  ]
-		: null
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: statusCode.isValid ? statusCode : null; key: "statusText" }
+		QuantityObject { object: statusCode.isValid ? power : null; unit: VenusOS.Units_Watt }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml",
@@ -24,6 +24,7 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: statusCode
+		readonly property string statusText: Global.acInputs.gensetStatusCodeToText(value)
 		uid: root.device.serviceUid + "/StatusCode"
 	}
 

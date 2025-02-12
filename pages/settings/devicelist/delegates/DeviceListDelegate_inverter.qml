@@ -9,9 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	quantityModel: [
-		{ value: inverter.currentPhase.power, unit: inverter.currentPhase.powerUnit }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: inverter.currentPhase; key: "power"; unit: inverter.currentPhase.powerUnit }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml",

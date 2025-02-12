@@ -43,31 +43,23 @@ OverviewWidget {
 			GradientListView {
 				model: Global.allDevicesModel.combinedDcLoadDevices
 
-				delegate: ListTextGroup {
+				delegate: ListQuantityGroupNavigation {
 					id: deviceDelegate
 
 					required property var device
 
 					text: device.name
-					textModel: [
-						Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, dcDevice.voltage),
-						Units.getCombinedDisplayText(VenusOS.Units_Amp, dcDevice.current),
-						Units.getCombinedDisplayText(VenusOS.Units_Watt, dcDevice.power),
-					]
+					quantityModel: QuantityObjectModel {
+						QuantityObject { object: dcDevice; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: dcDevice; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: dcDevice; key: "power"; unit: VenusOS.Units_Watt }
+					}
 
 					onClicked: root._showSettingsPage(device)
 
 					DcDevice {
 						id: dcDevice
 						serviceUid: deviceDelegate.device.serviceUid
-					}
-
-					CP.ColorImage {
-						parent: deviceDelegate.content
-						anchors.verticalCenter: parent.verticalCenter
-						source: "qrc:/images/icon_arrow_32.svg"
-						rotation: 180
-						color: delegatePressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 					}
 				}
 			}

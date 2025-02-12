@@ -9,16 +9,12 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property var _temperatureAndHumidityModel: [
-		{ unit: Global.systemSettings.temperatureUnit, value: temperature.value },
-		{ unit: VenusOS.Units_Percentage, value: humidity.value },
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
 
-	readonly property var _temperatureModel: [
-		{ unit: Global.systemSettings.temperatureUnit, value: temperature.value },
-	]
-
-	quantityModel: humidity.isValid ? _temperatureAndHumidityModel : _temperatureModel
+		QuantityObject { object: temperature; unit: Global.systemSettings.temperatureUnit }
+		QuantityObject { object: humidity; unit: VenusOS.Units_Percentage }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/temperature/PageTemperatureSensor.qml",

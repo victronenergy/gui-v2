@@ -88,6 +88,7 @@ QtObject {
 				_productId.setValue(45058) // dummy value so that ProductId is not invalid, so PageAcIn.qml will show some content
 				_allowedRoles.setValue(Global.acInputs.roles.map((roleInfo) => { return roleInfo.role }))
 				_role.setValue("pvinverter")
+				Global.mockDataSimulator.setMockValue(serviceUid + "/Connected", 1)
 			}
 		}
 	}

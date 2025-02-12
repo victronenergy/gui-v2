@@ -9,9 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	quantityModel: [
-		{ value: irradiance.value, unit: VenusOS.Units_WattsPerSquareMeter }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: irradiance; unit: VenusOS.Units_WattsPerSquareMeter }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageMeteo.qml",

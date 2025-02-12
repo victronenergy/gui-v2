@@ -130,32 +130,20 @@ Page {
 
 			ListQuantityGroup {
 				text: CommonWords.dc
+				model: QuantityObjectModel {
+					// Power is only shown for non-inverter services.
+					QuantityObject { object: root.serviceType !== "inverter" ? dcPower : null; unit: VenusOS.Units_Watt }
 
-				readonly property var _socModel: [
-					{ value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--") },
-				]
+					QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
 
-				readonly property var _inverterModel: [
-					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-					{ value: dcCurrent.value, unit: VenusOS.Units_Amp }
-				]
+					// SOC is shown for non-inverter services, or inverter services with IsInverterCharger=1.
+					QuantityObject { object: root.serviceType !== "inverter" || isInverterChargerItem.value === 1 ? socObject : null }
+				}
 
-				readonly property var _inverterChargerModel: [
-					{ value: dcPower.value, unit: VenusOS.Units_Watt },
-					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-				].concat(_socModel)
-
-				textModel: {
-					if (root.serviceType === "inverter") {
-						if (isInverterChargerItem.value === 1) {
-							return _inverterModel.concat(_socModel)
-						} else {
-							return _inverterModel
-						}
-					} else {
-						return _inverterChargerModel
-					}
+				QtObject {
+					id: socObject
+					readonly property string value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--")
 				}
 			}
 

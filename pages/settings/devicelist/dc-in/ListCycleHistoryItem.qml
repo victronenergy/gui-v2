@@ -63,12 +63,17 @@ Column {
 	}
 
 	ListQuantityGroup {
+		id: chargeMaintainGroup
+
+		readonly property real chargeTotal1: Units.sumRealNumbersList([bulkCharge.value, absorptionCharge.value])
+		readonly property real chargeTotal2: Units.sumRealNumbersList([reconditionCharge.value, floatCharge.value, storageCharge.value])
+
 		//% "Charge / maintain (Ah)"
 		text: qsTrId("cycle_history_charge_maintain_ah")
-		textModel: [
-			{ value: Units.sumRealNumbersList([bulkCharge.value, absorptionCharge.value]), precision: 0, unit: VenusOS.Units_AmpHour },
-			{ value: Units.sumRealNumbersList([reconditionCharge.value, floatCharge.value, storageCharge.value]), precision: 0, unit: VenusOS.Units_AmpHour },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal1"; unit: VenusOS.Units_AmpHour; precision: 0 }
+			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal2"; unit: VenusOS.Units_AmpHour; precision: 0 }
+		}
 
 		VeQuickItem { id: bulkCharge; uid: root.bindPrefix + "/BulkCharge" }
 		VeQuickItem { id: absorptionCharge; uid: root.bindPrefix + "/AbsorptionCharge" }
@@ -81,10 +86,10 @@ Column {
 		//% "Battery (V<sub>start</sub>/V<sub>end</sub>)"
 		text: qsTrId("cycle_history_battery_voltage")
 		primaryLabel.textFormat: Text.RichText
-		textModel: [
-			{ value: startVoltage.value, unit: VenusOS.Units_Volt_DC },
-			{ value: endVoltage.value, unit: VenusOS.Units_Volt_DC },
-		]
+		model: QuantityObjectModel {
+			QuantityObject { object: startVoltage; unit: VenusOS.Units_Volt_DC }
+			QuantityObject { object: endVoltage; unit: VenusOS.Units_Volt_DC }
+		}
 
 		VeQuickItem { id: startVoltage; uid: root.bindPrefix + "/StartVoltage" }
 		VeQuickItem { id: endVoltage; uid: root.bindPrefix + "/EndVoltage" }

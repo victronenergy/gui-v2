@@ -15,11 +15,13 @@ ListQuantityGroup {
 	//% "Input"
 	text: qsTrId("dc_input")
 	preferredVisible: inVoltage.isValid || inPower.isValid
-	textModel: [
-		{ value: inVoltage.value, unit: VenusOS.Units_Volt_DC, visible: inVoltage.isValid },
-		{ value: inCurrent.value, unit: VenusOS.Units_Amp, visible: inCurrent.isValid },
-		{ value: inPower.value, unit: VenusOS.Units_Watt, visible: inPower.isValid },
-	]
+	model: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: inVoltage; unit: VenusOS.Units_Volt_DC }
+		QuantityObject { object: inCurrent; unit: VenusOS.Units_Amp }
+		QuantityObject { object: inPower; unit: VenusOS.Units_Watt }
+	}
 
 	VeQuickItem {
 		id: inVoltage

@@ -57,22 +57,27 @@ Page {
 				Repeater {
 					model: nrOfOutputs.value || 1
 					delegate: ListQuantityGroup {
+						id: phaseDelegate
+
+						required property int index
+						readonly property string bindPrefix: `${root.bindPrefix}/Dc/${index}`
+
 						//: %1 = battery number
 						//% "Battery %1"
-						text: qsTrId("settings_accharger_battery").arg(model.index + 1)
-						textModel: [
-							{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-							{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-						]
+						text: qsTrId("settings_accharger_battery").arg(index + 1)
+						model: QuantityObjectModel {
+							QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+							QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+						}
 
 						VeQuickItem {
 							id: dcVoltage
-							uid: root.bindPrefix + "/Dc/%1/Voltage".arg(model.index)
+							uid: phaseDelegate.bindPrefix + "/Voltage"
 						}
 
 						VeQuickItem {
 							id: dcCurrent
-							uid: root.bindPrefix + "/Dc/%1/Current".arg(model.index)
+							uid: phaseDelegate.bindPrefix + "/Current"
 						}
 					}
 				}

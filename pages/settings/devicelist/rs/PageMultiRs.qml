@@ -190,16 +190,20 @@ Page {
 		id: singleTrackerComponent
 
 		ListQuantityGroup {
+			id: singleTrackerQuantities
+
 			readonly property real pvCurrent: (pvVoltage.value || 0) === 0 || !pvTotalPower.isValid ? NaN
 					: pvTotalPower.value / pvVoltage.value
 
 			//% "PV"
 			text: qsTrId("settings_multirs_pv")
-			textModel: [
-				{ value: pvVoltage.value, unit: VenusOS.Units_Volt_DC },
-				{ value: pvCurrent, unit: VenusOS.Units_Amp, visible: pvVoltage.isValid },
-				{ value: pvTotalPower.value, unit: VenusOS.Units_Watt },
-			]
+			model: QuantityObjectModel {
+				filterType: QuantityObjectModel.HasValue
+
+				QuantityObject { object: pvVoltage; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
+				QuantityObject { object: singleTrackerQuantities; key: "pvCurrent"; unit: VenusOS.Units_Amp }
+				QuantityObject { object: pvTotalPower; unit: VenusOS.Units_Watt; defaultValue: "--" }
+			}
 		}
 	}
 

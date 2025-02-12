@@ -9,24 +9,12 @@ import Victron.VenusOS
 ListQuantityGroup {
 	property var data
 
-	textModel: [
-		{
-			value: data.power,
-			unit: VenusOS.Units_Watt
-		},
-		{
-			value: data.voltage,
-			unit: VenusOS.Units_Volt_AC
-		},
-		{
-			value: data.current,
-			unit: VenusOS.Units_Amp
-		},
-		{
-			value: data.frequency,
-			unit: VenusOS.Units_Hertz
-		}
-	]
+	model: QuantityObjectModel {
+		QuantityObject { object: data; key: "power"; unit: VenusOS.Units_Watt }
+		QuantityObject { object: data; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+		QuantityObject { object: data; key: "current"; unit: VenusOS.Units_Amp }
+		QuantityObject { object: data; key: "frequency"; unit: VenusOS.Units_Hertz }
+	}
 
 	maximumContentWidth: availableWidth
 }

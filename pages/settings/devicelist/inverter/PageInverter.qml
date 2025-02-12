@@ -45,10 +45,10 @@ Page {
 
 			ListQuantityGroup {
 				text: CommonWords.dc
-				textModel: [
-					{ value: dcVoltage.value, unit: VenusOS.Units_Volt_DC },
-					{ value: dcCurrent.value, unit: VenusOS.Units_Amp },
-				]
+				model: QuantityObjectModel {
+					QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+				}
 
 				VeQuickItem {
 					id: dcVoltage
@@ -64,11 +64,11 @@ Page {
 			ListQuantityGroup {
 				//% "PV"
 				text: qsTrId("inverter_pv")
-				preferredVisible: pvV.isValid || pvYield.isValid
-				textModel: [
-					{ value: pvV.value, unit: VenusOS.Units_Volt_DC },
-					{ value: pvYield.value, unit: VenusOS.Units_Watt },
-				]
+				preferredVisible: pvV.isValid || pvYieldPower.isValid
+				model: QuantityObjectModel {
+					QuantityObject { object: pvV; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: pvYieldPower; unit: VenusOS.Units_Watt }
+				}
 
 				VeQuickItem {
 					id: pvV
@@ -76,7 +76,7 @@ Page {
 				}
 
 				VeQuickItem {
-					id: pvYield
+					id: pvYieldPower
 					uid: root.bindPrefix + "/Yield/Power"
 				}
 			}

@@ -9,18 +9,15 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property var _powerModel: [ { unit: VenusOS.Units_Watt, value: power.value } ]
-	readonly property var _statusModel: [ { unit: VenusOS.Units_None, value: Global.evChargers.chargerStatusToText(status.value) } ]
-	readonly property var _modeModel: [ { unit: VenusOS.Units_None, value: Global.evChargers.chargerModeToText(mode.value) } ]
+	readonly property bool _showPower: !mode.isValid || status.value === VenusOS.Evcs_Status_Charging
+	readonly property bool _showStatus: !_showPower && status.isValid
 
-	quantityModel: {
-		let secondaryInfo = []
-		if (!mode.isValid || status.value === VenusOS.Evcs_Status_Charging) {
-			secondaryInfo = [ { unit: VenusOS.Units_Watt, value: power.value } ]
-		} else if (status.isValid) {
-			secondaryInfo = [ { unit: VenusOS.Units_None, value: Global.evChargers.chargerStatusToText(status.value) } ]
-		}
-		return mode.isValid ? _modeModel.concat(secondaryInfo) : secondaryInfo
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: mode.isValid ? mode : null; key: "modeText" }
+		QuantityObject { object: root._showPower ? power : null; unit: VenusOS.Units_Watt }
+		QuantityObject { object: root._showStatus ? status : null; key: "statusText" }
 	}
 
 	onClicked: {
@@ -29,11 +26,13 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: mode
+		readonly property string modeText: Global.evChargers.chargerModeToText(value)
 		uid: root.device.serviceUid + "/Mode"
 	}
 
 	VeQuickItem {
 		id: status
+		readonly property string statusText: Global.evChargers.chargerStatusToText(value)
 		uid: root.device.serviceUid + "/Status"
 	}
 

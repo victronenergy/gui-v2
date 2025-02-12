@@ -6,6 +6,8 @@
 import QtQuick
 import Victron.VenusOS
 
+// TODO replace this with a QuantityObjectModel, since it filters out non-valid values; the model
+// count can be used instead of hasAllowedItem.
 QtObject {
 	id: root
 

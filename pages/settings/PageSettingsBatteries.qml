@@ -88,19 +88,19 @@ Page {
 								QuantityRow {
 									id: measurementsRow
 
+									readonly property real temperature: Global.systemSettings.convertFromCelsius(batteryDelegate.device.temperature)
+
 									height: nameLabel.height
 									showFirstSeparator: true    // otherwise this row does not align with the battery name
+									tableMode: true
+									model: QuantityObjectModel {
+										filterType: QuantityObjectModel.HasValue
 
-									model: [
-										{ value: batteryDelegate.device.voltage, unit: VenusOS.Units_Volt_DC },
-										{ value: batteryDelegate.device.current, unit: VenusOS.Units_Amp, visible: !isNaN(batteryDelegate.device.current) },
-										{ value: batteryDelegate.device.power, unit: VenusOS.Units_Watt, visible: !isNaN(batteryDelegate.device.power) },
-										{
-											value: Global.systemSettings.convertFromCelsius(batteryDelegate.device.temperature),
-											unit: Global.systemSettings.temperatureUnit,
-											visible: !isNaN(batteryDelegate.device.temperature)
-										}
-									]
+										QuantityObject { object: batteryDelegate.device; key: "voltage"; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
+										QuantityObject { object: batteryDelegate.device; key: "current"; unit: VenusOS.Units_Amp }
+										QuantityObject { object: batteryDelegate.device; key: "power"; unit: VenusOS.Units_Watt }
+										QuantityObject { object: measurementsRow; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+									}
 
 									// Show additional separator at the end, to balance with the first separator.
 									Rectangle {

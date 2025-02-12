@@ -10,7 +10,10 @@ DeviceListDelegate {
 	id: root
 
 	secondaryText: connected.value === 1 ? "" : CommonWords.not_connected
-	quantityModel: connected.value === 1 ? [ { value: totalPower.value, unit: VenusOS.Units_Watt } ] : null
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
+		QuantityObject { object: connected.value === 1 ? totalPower : null; unit: VenusOS.Units_Watt }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml",

@@ -9,17 +9,14 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property var _errorModel: [
-		//: %1 = error number
-		//% "Error: #%1"
-		{ unit: VenusOS.Units_None, value: qsTrId("devicelist_solarcharger_error").arg(errorCode.value) }
-	]
+	readonly property bool _hasError: errorCode.isValid && errorCode.value > 0
 
-	readonly property var _powerModel: [
-		{ value: power.value, unit: VenusOS.Units_Watt }
-	]
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
 
-	quantityModel: errorCode.isValid && errorCode.value > 0 ? _errorModel : _powerModel
+		QuantityObject { object: root._hasError ? errorCode : null; key: "errorText" }
+		QuantityObject { object: root._hasError ? null : power; unit: VenusOS.Units_Watt }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/solar/PageSolarCharger.qml", { bindPrefix : root.device.serviceUid })
@@ -32,6 +29,9 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: errorCode
+		//: %1 = error number
+		//% "Error: #%1"
+		readonly property string errorText: qsTrId("devicelist_solarcharger_error").arg(value)
 		uid: root.device.serviceUid + "/ErrorCode"
 	}
 }

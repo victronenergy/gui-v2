@@ -11,25 +11,33 @@ DeviceListDelegate {
 
 	readonly property bool isParallelBms: numberOfBmses.isValid
 
-	readonly property var _pendingModel: [
-		{ unit: VenusOS.Units_None, value: CommonWords.pending },
-		{ unit: VenusOS.Units_Volt_DC, value: voltage.value },
-		{ unit: VenusOS.Units_Percentage, value: soc.value },
-	]
-
-	readonly property var _defaultModel: [
-		{ unit: VenusOS.Units_Percentage, value: soc.value },
-		{ unit: VenusOS.Units_Volt_DC, value: voltage.value },
-		{ unit: VenusOS.Units_Amp, value: current.value },
-	]
-
 	quantityModel: !root.isParallelBms && state.isValid && state.value === VenusOS.Battery_State_Pending
-		   ? _pendingModel
-		   : _defaultModel
+		   ? pendingModel
+		   : defaultModel
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
 				{ bindPrefix: root.device.serviceUid })
+	}
+
+	QuantityObjectModel {
+		id: pendingModel
+
+		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: CommonWords; key: "pending" }
+		QuantityObject { object: voltage; unit: VenusOS.Units_Volt_DC }
+		QuantityObject { object: soc; unit: VenusOS.Units_Percentage }
+	}
+
+	QuantityObjectModel {
+		id: defaultModel
+
+		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: soc; unit: VenusOS.Units_Percentage }
+		QuantityObject { object: voltage; unit: VenusOS.Units_Volt_DC }
+		QuantityObject { object: current; unit: VenusOS.Units_Amp }
 	}
 
 	VeQuickItem {

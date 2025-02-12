@@ -10,7 +10,6 @@ ListItem {
 	id: root
 
 	property string bindPrefix
-	property alias textModel: repeater.model
 	property int numOfPhases: 1
 	property bool multiPhase: numOfPhases > 1
 	property bool errorItem: false
