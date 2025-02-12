@@ -80,9 +80,9 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Generator start/stop"
-				text: qsTrId("settings_generator_start_stop")
-				preferredVisible: relay0.isValid
+				//% "Genset"
+				text: qsTrId("devicelistpage_genset")
+				preferredVisible: relay0.isValid && relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
 
 				VeQuickItem {
@@ -92,15 +92,10 @@ Page {
 			}
 
 			ListNavigation {
+				preferredVisible: relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
-			}
-
-			ListNavigation {
-				//% "Energy meters"
-				text: qsTrId("settings_energy_meters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
 			}
 
 			ListNavigation {
@@ -109,5 +104,10 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
 			}
 		}
+	}
+
+	VeQuickItem {
+		id: relayFunction
+		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 	}
 }
