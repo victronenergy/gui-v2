@@ -70,16 +70,6 @@ Page {
 			topPadding: Theme.geometry_gradientList_spacing
 			spacing: Theme.geometry_gradientList_spacing
 
-			ListButton {
-				//% "Remove disconnected devices"
-				text: qsTrId("devicelist_remove_disconnected_devices")
-				secondaryText: CommonWords.remove
-				preferredVisible: Global.allDevicesModel.disconnectedDeviceCount > 0
-				onClicked: {
-					Global.allDevicesModel.removeDisconnectedDevices()
-				}
-			}
-
 			ListNavigation {
 				//% "Genset"
 				text: qsTrId("devicelistpage_genset")
@@ -97,6 +87,16 @@ Page {
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
+			}
+
+			ListButton {
+				//% "Remove disconnected devices"
+				text: qsTrId("devicelist_remove_disconnected_devices")
+				secondaryText: CommonWords.remove
+				preferredVisible: Global.allDevicesModel.disconnectedDeviceCount > 0
+				onClicked: {
+					Global.allDevicesModel.removeDisconnectedDevices()
+				}
 			}
 		}
 	}
