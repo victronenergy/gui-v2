@@ -98,8 +98,8 @@ Page {
 				property int pendingProfile
 				property string pendingPassword
 
-				//% "Network security profile"
-				text: qsTrId("settings_network_security_profile")
+				//% "Local network security profile"
+				text: qsTrId("settings_local_network_security_profile")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
 				updateDataOnClick: false // handle option clicked manually.
 				popDestination: undefined
