@@ -12,7 +12,6 @@ Label {
 		leftMargin: Theme.geometry_listItem_content_horizontalMargin
 	}
 	topPadding: Theme.geometry_settingsListHeader_verticalPadding
-	bottomPadding: Theme.geometry_settingsListHeader_verticalPadding
 	width: Math.max(implicitWidth, 1)
 	font.pixelSize: Theme.font_size_body1
 	wrapMode: Text.Wrap

@@ -53,8 +53,8 @@ Page {
 
 			Column {
 				spacing: Theme.geometry_gradientList_spacing
-				bottomPadding: Theme.geometry_gradientList_spacing
 				width: parent ? parent.width : 0
+
 				Repeater {
 					model: batteryModel
 					width: parent.width

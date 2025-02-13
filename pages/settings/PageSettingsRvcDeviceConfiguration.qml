@@ -71,6 +71,7 @@ Page {
 					model: 3
 					delegate: Column {
 						width: parent ? parent.width : 0
+						spacing: Theme.geometry_gradientList_spacing
 
 						ListSpinBox {
 							text: root._hasMultipleDcSources
