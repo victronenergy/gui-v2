@@ -113,6 +113,7 @@ Page {
 				Note that gui-v1 instead shows a single current limit based on Ac/ActiveIn/CurrentLimit, which is deprecated in the dbus doco. */
 			Column {
 				width: parent ? parent.width : 0
+				spacing: Theme.geometry_gradientList_spacing
 
 				Repeater {
 					model: AcInputSettingsModel {

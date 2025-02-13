@@ -95,6 +95,10 @@ ListNavigation {
 						popTimer.restartIfNeeded()
 					}
 
+					// TODO this is a hack to cancel out the GradientListView spacing, to avoid
+					// showing extra spacing between items if an item is not visible. See #1907.
+					height: effectiveVisible ? implicitHeight : -Theme.geometry_gradientList_spacing
+
 					text: Array.isArray(root.optionModel)
 						  ? modelData.display || ""
 						  : model.display || ""
@@ -137,6 +141,7 @@ ListNavigation {
 							}
 
 							width: parent.width
+							spacing: Theme.geometry_gradientList_spacing
 
 							PrimaryListLabel {
 								topPadding: 0

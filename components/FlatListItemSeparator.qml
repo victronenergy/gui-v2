@@ -7,10 +7,8 @@ import QtQuick
 import Victron.VenusOS
 
 Item {
-	// ListItem has built-in spacing below each item (Theme.geometry_gradientList_spacing), so add
-	// this spacing below each separator to balance out the space between successful flat ListItems.
 	implicitWidth: parent ? parent.width : 0
-	implicitHeight: bar.height + Theme.geometry_gradientList_spacing
+	implicitHeight: bar.height
 
 	SeparatorBar {
 		id: bar

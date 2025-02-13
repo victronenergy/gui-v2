@@ -47,19 +47,24 @@ Page {
 			}
 		}
 
-		footer: ListRadioButtonGroup {
-			//: Show percentage values in Brief view
-			//% "Brief view unit"
-			text: qsTrId("settings_briefview_unit")
-			optionModel: [
-				//% "No labels"
-				{ display: qsTrId("settings_briefview_unit_none"), value: VenusOS.BriefView_Unit_None },
-				//% "Show tank volumes"
-				{ display: qsTrId("settings_briefview_unit_absolute"), value: VenusOS.BriefView_Unit_Absolute },
-				//% "Show percentages"
-				{ display: qsTrId("settings_briefview_unit_percentages"), value: VenusOS.BriefView_Unit_Percentage },
-			]
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+		footer: Column {
+			width: parent.width
+			topPadding: Theme.geometry_gradientList_spacing
+
+			ListRadioButtonGroup {
+				//: Show percentage values in Brief view
+				//% "Brief view unit"
+				text: qsTrId("settings_briefview_unit")
+				optionModel: [
+					//% "No labels"
+					{ display: qsTrId("settings_briefview_unit_none"), value: VenusOS.BriefView_Unit_None },
+					//% "Show tank volumes"
+					{ display: qsTrId("settings_briefview_unit_absolute"), value: VenusOS.BriefView_Unit_Absolute },
+					//% "Show percentages"
+					{ display: qsTrId("settings_briefview_unit_percentages"), value: VenusOS.BriefView_Unit_Percentage },
+				]
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+			}
 		}
 	}
 }

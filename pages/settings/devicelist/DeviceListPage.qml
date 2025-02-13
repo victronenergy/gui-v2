@@ -10,6 +10,8 @@ Page {
 	id: root
 
 	GradientListView {
+		id: deviceListView
+
 		model: Global.allDevicesModel
 
 		delegate: Loader {
@@ -56,6 +58,9 @@ Page {
 
 		footer: Column {
 			width: parent.width
+			topPadding: Theme.geometry_gradientList_spacing
+			spacing: Theme.geometry_gradientList_spacing
+
 			ListButton {
 				//% "Remove disconnected devices"
 				text: qsTrId("devicelist_remove_disconnected_devices")

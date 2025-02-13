@@ -13,6 +13,7 @@ Column {
 	readonly property bool isInverterCharger: isInverterChargerItem.value === 1
 
 	width: parent ? parent.width : 0
+	spacing: Theme.geometry_gradientList_spacing
 
 	VeQuickItem {
 		id: isInverterChargerItem

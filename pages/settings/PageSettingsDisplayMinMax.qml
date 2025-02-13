@@ -53,6 +53,7 @@ Page {
 
 			Column {
 				width: parent ? parent.width : 0
+				spacing: Theme.geometry_gradientList_spacing
 
 				Repeater {
 					id: acInputsRepeater
@@ -66,8 +67,9 @@ Page {
 						}
 
 						width: parent ? parent.width : 0
+						spacing: Theme.geometry_gradientList_spacing
 
-						SectionHeader {
+						SettingsListHeader {
 							text: {
 								const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
@@ -99,7 +101,7 @@ Page {
 				}
 			}
 
-			SectionHeader {
+			SettingsListHeader {
 				//% "DC input"
 				text: qsTrId("settings_minmax_dc_input")
 			}
@@ -111,7 +113,7 @@ Page {
 				unit: VenusOS.Units_Watt
 			}
 
-			SectionHeader {
+			SettingsListHeader {
 				//% "AC output"
 				text: qsTrId("settings_minmax_acout_max_power")
 			}
@@ -140,7 +142,7 @@ Page {
 				unit: VenusOS.Units_Amp
 			}
 
-			SectionHeader {
+			SettingsListHeader {
 				//% "DC output"
 				text: qsTrId("settings_minmax_dc_out")
 			}
@@ -152,7 +154,7 @@ Page {
 				unit: VenusOS.Units_Watt
 			}
 
-			SectionHeader {
+			SettingsListHeader {
 				//% "Solar"
 				text: qsTrId("settings_minmax_solar")
 			}

@@ -106,11 +106,6 @@ Page {
 				}
 			}
 
-			Item {
-				width: 1
-				height: Theme.geometry_gradientList_spacing
-			}
-
 			ListQuantityGroup {
 				text: CommonWords.battery
 				textModel: [

@@ -76,11 +76,6 @@ Page {
 				}
 			}
 
-			Item {
-				width: 1
-				height: Theme.geometry_gradientList_spacing
-			}
-
 			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.pvInverter.serviceUid + "/Position"
 			}

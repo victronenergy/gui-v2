@@ -400,7 +400,7 @@
     "geometry_settings_breadcrumb_height": 38,
     "geometry_settings_breadcrumb_horizontalMargin": 15,
     "geometry_settings_breadcrumb_topMargin": 9,
-    "geometry_settingsListHeader_verticalPadding": 7,
+    "geometry_settingsListHeader_verticalPadding": 8,
     "geometry_settingsListNavigation_height": 64,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,

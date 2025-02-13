@@ -69,10 +69,7 @@ Page {
 				QuantityTable {
 					id: phaseTable
 
-					anchors {
-						top: chargerSummary.bottom
-						topMargin: Theme.geometry_gradientList_spacing
-					}
+					anchors.top: chargerSummary.bottom
 					visible: root.evCharger.phases.count > 1
 					metrics.equalWidthColumns: true
 					headerVisible: false
@@ -96,11 +93,6 @@ Page {
 						}
 					}
 				}
-			}
-
-			Item {
-				width: 1
-				height: Theme.geometry_gradientList_spacing
 			}
 
 			ListRadioButtonGroup {

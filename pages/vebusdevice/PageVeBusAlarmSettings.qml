@@ -27,13 +27,18 @@ Page {
 			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus" + model.pathSuffix
 			preferredVisible: model.multiPhaseOnly ? isMulti : true
 		}
-		footer: ListRadioButtonGroup {
-			text: CommonWords.vebus_error
-			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus/VeBusError"
-			optionModel: [
-				{ display: CommonWords.disabled, value: 0 },
-				{ display: CommonWords.enabled, value: 2 }
-			]
+		footer: Column {
+			width: parent.width
+			topPadding: Theme.geometry_gradientList_spacing
+
+			ListRadioButtonGroup {
+				text: CommonWords.vebus_error
+				dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus/VeBusError"
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					{ display: CommonWords.enabled, value: 2 }
+				]
+			}
 		}
 	}
 }
