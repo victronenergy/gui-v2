@@ -215,24 +215,6 @@ Rectangle {
 	}
 
 	NotificationButton {
-		id: alertButton
-
-		anchors {
-			right: rightSideRow.right
-			verticalCenter: parent.verticalCenter
-		}
-		enabled: notificationButtonsEnabled &&
-				 ((Global.notifications?.hasActiveNotifications ?? false) ||
-				  (Global.notifications?.hasUnsilencedNotifications ?? false)) &&
-				 !alarmButton.enabled
-		backgroundColor: Theme.color_warning
-
-		//% "Acknowledge alerts"
-		text: qsTrId("notifications_acknowledge_alerts")
-		onClicked: Global.notifications.silenceAll()
-	}
-
-	NotificationButton {
 		id: alarmButton
 
 		anchors {
