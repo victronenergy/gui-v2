@@ -191,28 +191,16 @@ Rectangle {
 		CP.IconImage {
 			id: notificationIcon
 
-			readonly property color iconColor: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Alarm
-											   ? Theme.color_critical
-											   : Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Warning
-												 ? Theme.color_warning :
-												   Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
-
-			// Latch the color and the icon so it doesn't change while fading out
-			onIconColorChanged: {
-				color = iconColor
-				source = Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ?
-							"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
-			}
-
 			anchors.verticalCenter: parent.verticalCenter
-			opacity: Global.notifications?.statusBarNotifcationIconVisible ? 1 : 0
-			visible: opacity > 0
+			visible: Global.notifications?.statusBarNotifcationIconVisible ? 1 : 0
+			color: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Alarm
+				   ? Theme.color_critical
+				   : Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Warning
+					 ? Theme.color_warning :
+					   Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
+			source: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ?
+						"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 
-			Behavior on opacity {
-				OpacityAnimator {
-					duration: Theme.animation_page_fade_duration
-				}
-			}
 		}
 	}
 
