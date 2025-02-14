@@ -113,6 +113,7 @@ Page {
 
 		delegate: ClassAndVrmInstance {
 			uid: model.uid + "/ClassAndVrmInstance"
+			customNameUid: model.uid + "/CustomName"
 
 			onVrmInstanceChanged: {
 				const modelIndex = classAndVrmInstanceModel.findByUid(uid)

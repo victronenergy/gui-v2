@@ -12,9 +12,10 @@ QtObject {
 	property string deviceClass
 	property int vrmInstance: -1
 	property alias uid: dataItem.uid
+	property string customNameUid
 
 	property BaseDevice device
-	readonly property string name: device ? device.name : ""
+	readonly property string name: _customName.value || device?.name || ""
 
 	function setVrmInstance(newInstance) {
 		dataItem.setValue(deviceClass + ":" + newInstance)
@@ -38,5 +39,9 @@ QtObject {
 				}
 			}
 		}
+	}
+
+	readonly property VeQuickItem _customName: VeQuickItem {
+		uid: root.customNameUid
 	}
 }
