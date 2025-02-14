@@ -147,6 +147,14 @@ QHash<int, QByteArray> AggregateDeviceModel::roleNames() const
 	return m_roleNames;
 }
 
+BaseDevice *AggregateDeviceModel::deviceAt(int index) const
+{
+	if (index < 0 || index >= m_deviceInfos.count()) {
+		return nullptr;
+	}
+	return m_deviceInfos.at(index).device;
+}
+
 void AggregateDeviceModel::removeDisconnectedDevices()
 {
 	if (m_disconnectedDeviceCount == 0) {

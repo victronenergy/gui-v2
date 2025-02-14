@@ -13,7 +13,7 @@ QtObject {
 	property int vrmInstance: -1
 	property alias uid: dataItem.uid
 
-	property var device
+	property BaseDevice device
 	readonly property string name: device ? device.name : ""
 
 	function setVrmInstance(newInstance) {

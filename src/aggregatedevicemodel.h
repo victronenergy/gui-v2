@@ -43,6 +43,7 @@ public:
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
+	Q_INVOKABLE BaseDevice *deviceAt(int index) const;
 	Q_INVOKABLE void removeDisconnectedDevices();
 
 signals:
