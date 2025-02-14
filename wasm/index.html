@@ -100,6 +100,7 @@
     <script type="text/javascript" src="qtloader.js"></script>
     <script type="text/javascript">
         var watchdogHit = false // this gets set to 'true' by a timer via BackendConnection::hitWatchdog()
+        var reloadTriggered = false // this gets set to 'true' if reload() is called to prevent multiple reload calls
         console.log("starting watchdog timer")
         setTimeout(function() { // wait 2 minutes for the page to load, then set a 10 second watchdog timer
             checkWatchdog()
@@ -108,9 +109,10 @@
 
         function checkWatchdog()
         {
-            if (!watchdogHit) {
+            if (!watchdogHit && !reloadTriggered) {
                 console.error("Watchdog timer expired - reloading page")
-                location.reload()
+                reload()
+                reloadTriggered = true
             }
             watchdogHit = false
         }
