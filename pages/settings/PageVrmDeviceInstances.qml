@@ -15,10 +15,7 @@ import Victron.VenusOS
 //
 // VRM instances must be unique among devices with the same type (device class). If the user tries
 // to use an existing instance for that type, a dialog will appear to prompt an instance swap.
-//
-// Device classes may be short ('solarcharger') or long ('com.victronenergy.solarcharger'),
-// regardless of whether the app is running on dbus or mqtt. They may or may not map directly to
-// mqtt entries; e.g. the 'analog' device class refers to both tanks and temperature devices.
+// Device classes should correspond to a known service type, such as "solarcharger" or "tank".
 //
 // Changing a VRM instance number will cause that number to be set as the device instance on reboot;
 // until then, the VRM instance can be changed freely by the user without being applied to the
@@ -63,13 +60,14 @@ Page {
 	}
 
 	function _findDeviceObject(deviceClass, deviceInstance) {
-		const deviceModels = Global.deviceModelsForClass(deviceClass)
-		if (deviceModels.length === 0) {
+		if (deviceInstance < 0) {
 			return null
 		}
-		for (let i = 0; i < deviceModels.length; ++i) {
-			const device = deviceModels[i].deviceForDeviceInstance(deviceInstance)
-			if (device) {
+
+		for (let i = 0; i < Global.allDevicesModel.count; ++i) {
+			const device = Global.allDevicesModel.deviceAt(i)
+			if (device.deviceInstance === deviceInstance
+					&& BackendConnection.serviceTypeFromUid(device.serviceUid) === deviceClass) {
 				return device
 			}
 		}
@@ -114,55 +112,14 @@ Page {
 		}
 
 		delegate: ClassAndVrmInstance {
-			id: classAndVrmInstance
-
 			uid: model.uid + "/ClassAndVrmInstance"
 
-			function _resetDevice(deviceId) {
-				const deviceInstance = Utils.deviceInstanceForDeviceId(deviceId)
-				if (deviceInstance < 0) {
-					console.warn("No device instance found for device:", deviceId)
-					return
-				}
-				// First, try to match with an existing device from the Global data models.
-				device = root._findDeviceObject(deviceClass, deviceInstance)
-				if (device) {
-					return
-				}
-				if (BackendConnection.type === BackendConnection.DBusSource) {
-					// If in dbus mode, try to match against the root dbus service uids, which are
-					// named "com.victronenergy.*". This should find a match.
-					const serviceUidPrefix = deviceClass.startsWith("com.victronenergy.")
-							? deviceClass
-							: "com.victronenergy." + deviceClass
-					device = dbusServiceModel.findDeviceByPrefixAndDeviceInstance(serviceUidPrefix, deviceInstance)
-					if (!device) {
-						console.warn("Failed to find service for device class", deviceClass,
-								"with device instance:", deviceInstance)
-					}
-				} else if (BackendConnection.type === BackendConnection.MqttSource) {
-					// If in mqtt mode, try to match against mqtt/<device-class>/<instance>, where
-					// <device-class> should not contain a com.victronenergy prefix. This may or may
-					// not find a match, as some device classes do not map directly to services.
-					const serviceType = deviceClass.startsWith("com.victronenergy.")
-							? deviceClass.substring("com.victronenergy.".length)
-							: deviceClass
-					device = deviceComponent.createObject(classAndVrmInstance, { serviceUid: "mqtt/" + serviceType + "/" + deviceInstance })
-				}
-			}
-
 			onVrmInstanceChanged: {
-				const deviceId = model.uid.substring(model.uid.lastIndexOf('/') + 1)
-				if (!deviceId) {
-					console.warn("Malformed device id!", deviceId)
-					return
-				}
 				const modelIndex = classAndVrmInstanceModel.findByUid(uid)
 				if (modelIndex >= 0) {
 					classAndVrmInstanceModel.set(modelIndex, { deviceClass: deviceClass, vrmInstance: vrmInstance })
 					classAndVrmInstanceModel.updateSortOrder(modelIndex)
 				}
-				Utils.updateOrInitDeviceVrmInstance(deviceId, vrmInstance)
 
 				// Try to find/create a Device in order to fetch the device name. Once initialized,
 				// it can remain the same, since the device is determined by the 'real' device
@@ -170,7 +127,10 @@ Page {
 				if (vrmInstance < 0) {
 					device = null
 				} else if (!device) {
-					_resetDevice(deviceId)
+					device = root._findDeviceObject(deviceClass, vrmInstance)
+					if (!device) {
+						console.warn("Failed to find service for device class", deviceClass, "with device instance:", vrmInstance)
+					}
 				}
 			}
 
@@ -328,41 +288,6 @@ Page {
 		}
 	}
 
-	// A list of Device objects, matched to each service in the list of root dbus services. Not
-	// needed for mqtt, where 'mqtt/service-type/device-instance' can be used to find the service.
-	ListModel {
-		id: dbusServiceModel
-
-		function findDeviceByPrefixAndDeviceInstance(serviceUidPrefix, deviceInstance) {
-			for (let i = 0; i < count; ++i) {
-				const data = get(i)
-				if (data.serviceUid.startsWith(serviceUidPrefix)
-						&& data.device.deviceInstance === deviceInstance) {
-					return data.device
-				}
-			}
-			return null
-		}
-
-		property var _deviceBuilder: Instantiator {
-			model: BackendConnection.type === BackendConnection.DBusSource ? Global.dataServiceModel : null
-			delegate: Device {
-				serviceUid: model.uid
-			}
-			onObjectAdded: function(index, object) {
-				dbusServiceModel.append({ serviceUid: object.serviceUid, device: object })
-			}
-			onObjectRemoved: function(index, object) {
-				for (let i = 0; i < dbusServiceModel.count; ++i) {
-					if (dbusServiceModel.get(i).serviceUid === object.serviceUid) {
-						dbusServiceModel.remove(i)
-						break
-					}
-				}
-			}
-		}
-	}
-
 	Component {
 		id: swapDialogComponent
 
@@ -433,10 +358,5 @@ Page {
 				Global.pageManager.popPage()
 			}
 		}
-	}
-
-	Component {
-		id: deviceComponent
-		Device {}
 	}
 }

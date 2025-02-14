@@ -70,17 +70,6 @@ QtObject {
 		return null
 	}
 
-	function deviceModelsForClass(deviceClass) {
-		if (deviceClass === "com.victronenergy.battery") {
-			return [allDevicesModel.batteryDevices]
-		} else if (deviceClass === "com.victronenergy.solarcharger" || deviceClass === "solarcharger") {
-			return [solarDevices.model]
-		} else if (deviceClass === "analog") {
-			return Global.tanks.allTankModels.concat([Global.environmentInputs.model])
-		}
-		return []
-	}
-
 	function reset() {
 		// unload the gui.
 		dataManagerLoaded = false
