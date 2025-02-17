@@ -141,7 +141,7 @@ Page {
 		}
 
 		onObjectRemoved: (index, object) => {
-			solarInputModel.removeAt(solarInputModel.indexOf(device.serviceUid))
+			solarInputModel.removeAt(solarInputModel.indexOf(object.device.serviceUid))
 		}
 	}
 }
