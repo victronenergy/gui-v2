@@ -182,6 +182,7 @@ QtObject {
 				_customName.setValue("My Solar Charger " + deviceInstance)
 				setMockValue("/State", VenusOS.SolarCharger_State_ExternalControl)
 				setMockValue("/ErrorCode", Math.random() < 0.4 ? Math.floor(Math.random() * 30) : 0)
+				setMockValue("/History/Overall/DaysAvailable", 31)
 				root.setRandomErrors(serviceUid + "/History/Overall")
 			}
 		}
