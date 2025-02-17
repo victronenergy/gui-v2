@@ -15,21 +15,15 @@ Instantiator {
 
 	// AC power is the total power from Ac/PvOnGrid/L*/Power, Ac/PvOnGenset/L*/Power
 	// and Ac/PvOnOutput/L*/Power.
-	function updateAcTotals() {
+	function _updateAcTotals() {
 		let _totalPower = NaN
 		let _totalCurrent = NaN
 
 		for (let i = 0; i < count; ++i) {
 			const acPv = objectAt(i)
 			if (!!acPv) {
-				for (let j = 0; j < acPv.pvPhases.count; ++j) {
-					const phase = acPv.pvPhases.objectAt(j)
-					if (!phase) {
-						continue
-					}
-					_totalPower = Units.sumRealNumbers(_totalPower, phase.power)
-					_totalCurrent = Units.sumRealNumbers(_totalCurrent, phase.current)
-				}
+				_totalPower = Units.sumRealNumbers(_totalPower, acPv.power)
+				_totalCurrent = Units.sumRealNumbers(_totalCurrent, acPv.current)
 			}
 		}
 		root.totalPower = _totalPower
@@ -53,48 +47,13 @@ Instantiator {
 		Global.system.serviceUid + "/Ac/PvOnOutput"
 	]
 
-	delegate: QtObject {
-		id: acPvDelegate
+	delegate: ObjectAcConnection {
+		required property string modelData
 
-		readonly property string serviceUid: modelData
-		readonly property int phaseCount: vePhaseCount.value || 0
+		bindPrefix: modelData
 
-		readonly property VeQuickItem vePhaseCount: VeQuickItem {
-			uid: acPvDelegate.serviceUid + "/NumberOfPhases"
-			onValueChanged: {
-				const phaseCount = value === undefined ? 0 : value
-				if (pvPhases.count !== phaseCount) {
-					pvPhases.model = phaseCount
-					Qt.callLater(root._updateMaximumPhaseCount)
-				}
-			}
-		}
-
-		// Each Ac/PvOnX uid has 1-3 phases with power and current, e.g. Ac/PvOnGrid/L1/Power,
-		// Ac/PvOnGrid/L1/Current
-		property var pvPhases: Instantiator {
-			model: null
-			delegate: QtObject {
-				id: phase
-
-				property real power: NaN
-				property real current: NaN
-
-				readonly property VeQuickItem vePower: VeQuickItem {
-					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Power"
-					onValueChanged: {
-						phase.power = value === undefined ? NaN : value
-						Qt.callLater(root.updateAcTotals)
-					}
-				}
-				readonly property VeQuickItem veCurrent: VeQuickItem {
-					uid: acPvDelegate.serviceUid + "/L" + (model.index + 1) + "/Current"
-					onValueChanged: {
-						phase.current = value === undefined ? NaN : value
-						Qt.callLater(root.updateAcTotals)
-					}
-				}
-			}
-		}
+		onPhaseCountChanged: Qt.callLater(root._updateMaximumPhaseCount)
+		onPowerChanged: Qt.callLater(root._updateAcTotals)
+		onCurrentChanged: Qt.callLater(root._updateAcTotals)
 	}
 }
