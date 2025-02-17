@@ -180,8 +180,7 @@ Page {
 			}
 
 			PrimaryListLabel {
-				//% "These features are disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
-				text: qsTrId("settings_large_features_currently_disabled")
+				text: CommonWords.all_modifications_disabled
 				preferredVisible: osLargeFeatures.visible && !root.allModificationsEnabled
 			}
 
