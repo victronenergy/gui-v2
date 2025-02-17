@@ -52,5 +52,8 @@ Device {
 		bindPrefix: root.serviceUid
 		deviceName: root.name
 		trackerCount: root.trackerCount
+		onYieldUpdatedForDay: (day, yieldKwh) => {
+			root.yieldUpdatedForDay(day, yieldKwh)
+		}
 	}
 }
