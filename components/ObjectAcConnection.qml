@@ -12,6 +12,7 @@ QtObject {
 	property string bindPrefix
 	property string powerKey: "Power"
 	property string currentKey: "Current"
+	readonly property alias phaseCount: _phases.phaseCount
 
 	readonly property VeQuickItem powerL1: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L1/" + root.powerKey : ""
@@ -53,6 +54,7 @@ QtObject {
 	readonly property real current: _phaseCount.value === 1 && _currentL1.isValid ? _currentL1.value : NaN
 
 	readonly property PhaseModel phases: PhaseModel {
+		id: _phases
 		l2AndL1OutSummed: root.l2AndL1OutSummed
 		phaseCount: _phaseCount.value || 0
 	}
