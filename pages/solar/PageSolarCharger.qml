@@ -79,7 +79,7 @@ Page {
 
 		PrimaryListLabel {
 			text: {
-				//% "Unfortunately the connected MPPT Solar Charger is not compatible.";
+				//% "Unfortunately the connected MPPT Solar Charger is not compatible."
 				const unsupported = qsTrId("solarcharger_not_supported")
 				let reason = ""
 				if (device.productId === 0x300) { // MPPT 70/15
