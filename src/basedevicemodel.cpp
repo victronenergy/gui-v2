@@ -35,7 +35,7 @@ void BaseDevice::setServiceUid(const QString &serviceUid)
 	}
 
 	if (m_serviceUid != serviceUid) {
-		maybeEmitValidChanged([=]() {
+		maybeEmitValidChanged([serviceUid, this]() {
 			m_serviceUid = serviceUid;
 			emit serviceUidChanged();
 		});
@@ -50,7 +50,7 @@ int BaseDevice::deviceInstance() const
 void BaseDevice::setDeviceInstance(int deviceInstance)
 {
 	if (m_deviceInstance != deviceInstance) {
-		maybeEmitValidChanged([=]() {
+		maybeEmitValidChanged([deviceInstance, this]() {
 			m_deviceInstance = deviceInstance;
 			emit deviceInstanceChanged();
 		});
@@ -78,7 +78,7 @@ QString BaseDevice::productName() const
 void BaseDevice::setProductName(const QString &productName)
 {
 	if (m_productName != productName) {
-		maybeEmitValidChanged([=]() {
+		maybeEmitValidChanged([productName, this]() {
 			m_productName = productName;
 			emit productNameChanged();
 		});
@@ -93,7 +93,7 @@ QString BaseDevice::customName() const
 void BaseDevice::setCustomName(const QString &customName)
 {
 	if (m_customName != customName) {
-		maybeEmitValidChanged([=]() {
+		maybeEmitValidChanged([customName, this]() {
 			m_customName = customName;
 			emit customNameChanged();
 		});
