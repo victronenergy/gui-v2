@@ -522,6 +522,9 @@ QtObject {
 	//% "Zero feed-in power limit"
 	readonly property string zero_feed_in_power_limit: qsTrId("common_words_zero_feed_in_power_limit")
 
+	//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
+	readonly property string all_modifications_disabled: qsTrId("common_words_large_features_currently_disabled")
+
 	function acInput(index) {
 			   //% "AC Input 1"
 		return index === 0 ? qsTrId("common_words_ac_input_1")

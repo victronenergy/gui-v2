@@ -19,8 +19,7 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			PrimaryListLabel {
-				//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
-				text: qsTrId("settings_large_features_currently_disabled")
+				text: CommonWords.all_modifications_disabled
 				preferredVisible: !root.allModificationsEnabled
 			}
 
