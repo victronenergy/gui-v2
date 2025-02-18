@@ -173,6 +173,13 @@ SwipeViewPage {
 		x: sidePanel.x/2 - width/2
 		sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
+
+		BriefCenterDisplay {
+			anchors.centerIn: parent
+			visible: gaugeModel.count <= 3
+			showAllDetails: gaugeModel.count === 0
+			smallTextMode: gaugeModel.count === 3
+		}
 	}
 
 	Component {
@@ -194,14 +201,8 @@ SwipeViewPage {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
 			readonly property var battery: Global.system.battery
 
-			name: properties.name
-			icon.source: battery.icon
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
-			voltage: battery.voltage
-			current: battery.current
-			power: battery.power
 			status: Theme.getValueStatus(value, properties.valueType)
-			caption: Utils.formatBatteryTimeToGo(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
 		}
