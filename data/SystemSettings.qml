@@ -130,41 +130,27 @@ QtObject {
 	}
 
 	property QtObject briefView: QtObject {
-		property QtObject centralGauges: QtObject {
-			property var value: []
 
-			function setValue(gaugeTypesArray) {
-				if (gaugeTypesArray.length !== _savedLevels.count) {
-					console.warn("Cannot change central gauges, got gauge array length",
-							gaugeTypesArray.length, "expected", _savedLevels.count)
-					return
-				}
-				for (let i = 0; i < _savedLevels.count; ++i) {
-					const obj = _savedLevels.objectAt(i)
-					if (obj.value !== gaugeTypesArray[i]) {
-						obj.setValue(gaugeTypesArray[i])
-					}
-				}
-			}
+		property QtObject centralGauges: QtObject {
+			property var preferredOrder: []
 
 			function _refresh() {
 				let levels = []
-				for (let i = 0; i < _savedLevels.count; ++i) {
+				for (let i = 0; i < Theme.geometry_briefPage_centerGauge_maximumGaugeCount; ++i) {
 					const obj = _savedLevels.objectAt(i)
-					levels.push(obj && obj.value !== undefined ? obj.value : VenusOS.Tank_Type_Battery)
+					levels.push(obj && obj.isValid ? obj.value : VenusOS.Tank_Type_None)
 				}
-				value = levels
+				preferredOrder = levels
 			}
 
 			property Instantiator _savedLevels: Instantiator {
-				model: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
+				model: VeQItemTableModel {
+					uids: [ root.serviceUid + "/Settings/Gui/BriefView/Level" ]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
 				delegate: VeQuickItem {
-					uid: root.serviceUid + "/Settings/Gui/BriefView/Level/" + model.index
-					onValueChanged: {
-						if (value !== undefined) {
-							Qt.callLater(briefView.centralGauges._refresh)
-						}
-					}
+					uid: model.uid
+					onValueChanged: Qt.callLater(root.briefView.centralGauges._refresh)
 				}
 			}
 		}
