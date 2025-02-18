@@ -1193,7 +1193,7 @@ foreach(code IN LISTS TS_CODES)
     set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${code}.ts)
     set(new_target ${PROJECT_NAME}_${code})
     add_custom_target( ${new_target}
-        COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/download_from_poeditor.sh ${code} ${output_file}"
+        COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/download_from_poeditor.sh ${code} ${output_file}"
     )
     list(APPEND TS_TARGETS ${new_target})
 endforeach()
@@ -1203,7 +1203,7 @@ add_custom_target(download_translations
 )
 
 add_custom_target(upload_translations
-    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
     DEPENDS ${PROJECT_NAME}
 )
 
