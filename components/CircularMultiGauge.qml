@@ -40,7 +40,6 @@ Item {
 				width: parent.width - (index*_stepSize)
 				height: width
 				anchors.centerIn: parent
-				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
 				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
 
@@ -94,7 +93,6 @@ Item {
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
 				anchors.rightMargin: Math.max(0, Theme.geometry_circularMultiGauge_icons_maxWidth - iconImage.width)
-				visible: model.index < Theme.geometry_briefPage_centerGauge_maximumGaugeCount
 				height: iconImage.height
 
 				Label {

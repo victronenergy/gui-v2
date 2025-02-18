@@ -10,17 +10,21 @@ import Victron.Gauges
 Page {
 	id: root
 
-	property var _gaugeOptionsModel: Gauges.briefCentralGauges.map(function(gaugeType) {
-		const name = Gauges.tankProperties(gaugeType).name || ""
-		return { display: name, value: gaugeType }
-	})
+	readonly property var _gaugeOptionsModel: {
+		const validGaugeOptions = Gauges.briefCentralGauges.map(function(gaugeType) {
+			const name = Gauges.tankProperties(gaugeType).name || ""
+			return { display: name, value: gaugeType }
+		})
+		//% "None"
+		return [ { display: qsTrId("settings_briefview_level_none"), value: VenusOS.Tank_Type_None } ].concat(validGaugeOptions)
+	}
 
 	// Use this intermediate model that is built when the page loads, to avoid changing the model
 	// while the radio button group sub-page is shown, as that causes the group options to be rebuilt.
 	property var _gaugesModel
 	onIsCurrentPageChanged: {
 		if (isCurrentPage) {
-			_gaugesModel = Global.systemSettings.briefView.centralGauges.value || []
+			_gaugesModel = Global.systemSettings.briefView.centralGauges.preferredOrder
 		}
 	}
 
@@ -28,28 +32,19 @@ Page {
 		model: root._gaugesModel
 
 		delegate: ListRadioButtonGroup {
+			required property int index
+
 			//: Level number
 			//% "Level %1"
-			text: qsTrId("settings_briefview_level").arg(model.index + 1)
+			text: qsTrId("settings_briefview_level").arg(index + 1)
 			optionModel: root._gaugeOptionsModel
-			currentIndex: {
-				const savedGaugePrefs = Global.systemSettings.briefView.centralGauges.value || []
-				const preferredGaugeForLevel = savedGaugePrefs[model.index]
-				return Gauges.briefCentralGauges.indexOf(preferredGaugeForLevel)
-			}
-
-			onOptionClicked: function(index) {
-				let savedGaugePrefs = Global.systemSettings.briefView.centralGauges.value
-				if (savedGaugePrefs.length) {
-					savedGaugePrefs[model.index] = optionModel[index].value
-					Global.systemSettings.briefView.centralGauges.setValue(savedGaugePrefs)
-				}
-			}
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Level/" + index
 		}
 
 		footer: Column {
-			width: parent.width
 			topPadding: Theme.geometry_gradientList_spacing
+			width: parent.width
+			spacing: Theme.geometry_gradientList_spacing
 
 			ListRadioButtonGroup {
 				//: Show percentage values in Brief view
