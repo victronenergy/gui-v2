@@ -89,11 +89,29 @@ Page {
 							return
 						}
 						const modelArray = Utils.jsonSettingsToModel(value)
-						if (modelArray) {
-							temperatureServiceRadioButtons.optionModel = modelArray
-						} else {
-							console.warn("Unable to parse data from", uid)
+						let serviceUids = []
+						for (let i = 0; i < modelArray.length; ++i) {
+							const serviceId = modelArray[i].value
+							if (serviceId.startsWith("com.victronenergy.")) {
+								const firstIndexOfSlash = serviceId.indexOf('/')
+								const secondIndexOfSlash = serviceId.indexOf('/', firstIndexOfSlash + 1)
+								const deviceInstanceSubstring = serviceId.substring(firstIndexOfSlash + 1, secondIndexOfSlash)
+								serviceUids.push({
+									optionIndex: i,
+									serviceUid: BackendConnection.serviceUidFromName(serviceId.substr(0, firstIndexOfSlash), parseInt(deviceInstanceSubstring))
+								})
+							}
 						}
+						temperatureServiceRadioButtons.optionModel = modelArray
+						temperatureServiceInstantiator.model = serviceUids
+					}
+				}
+
+				Instantiator {
+					id: temperatureServiceInstantiator
+					delegate: Device {
+						serviceUid: modelData.serviceUid
+						onNameChanged: temperatureServiceRadioButtons.optionModel[modelData.optionIndex].display = name
 					}
 				}
 			}
