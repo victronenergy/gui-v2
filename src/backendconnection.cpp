@@ -261,7 +261,7 @@ void BackendConnection::initMqttConnection(const QString &address)
 			producer->continueConnect();
 		}
 	});
-	connect(mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [&mqttProducer, this] {
+	connect(mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [mqttProducer, this] {
 		setState(mqttProducer->connectionState());
 	});
 	connect(mqttProducer, &VeQItemMqttProducer::errorChanged,
