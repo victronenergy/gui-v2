@@ -160,6 +160,10 @@ SwipeViewPage {
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
+	GaugeModel {
+		id: gaugeModel
+	}
+
 	Loader {
 		id: mainGauge
 
@@ -167,7 +171,7 @@ SwipeViewPage {
 		width: Theme.geometry_mainGauge_size
 		height: width
 		x: sidePanel.x/2 - width/2
-		sourceComponent: Global.tanks.totalTankCount === 0 ? singleGauge : multiGauge
+		sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
 	}
 
@@ -175,10 +179,7 @@ SwipeViewPage {
 		id: multiGauge
 
 		CircularMultiGauge {
-			model: GaugeModel {
-				sourceModel: Gauges.briefCentralGauges
-				maximumGaugeCount: Theme.geometry_briefPage_centerGauge_maximumGaugeCount
-			}
+			model: gaugeModel
 			animationEnabled: root.animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin

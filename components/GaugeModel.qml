@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 import Victron.Gauges
 
 /*
@@ -15,72 +14,69 @@ import Victron.Gauges
 ListModel {
 	id: root
 
-	property alias sourceModel: _gaugeObjects.model
-	property int maximumGaugeCount
+	function gaugesToDisplay() {
+		let gaugeTypes = []
+		const preferredGaugeTypes = Global.systemSettings.briefView.centralGauges.preferredOrder
 
-	function addGauge(gauge) {
-		const sortedGaugeTypes = Global.systemSettings.briefView.centralGauges.value || []
-
-		if (count === maximumGaugeCount) {
-			// Try removing a gauge that is not a preferred gauge, to make space for the new one
-			let removeIndex = -1
-			for (let i = 0; i < count; ++i) {
-				if (sortedGaugeTypes.indexOf(get(i).tankType) < 0) {
-					removeIndex = i
-					break
+		for (let i = 0; i < preferredGaugeTypes.length; ++i) {
+			if (gaugeTypes.indexOf(preferredGaugeTypes[i]) >= 0) {
+				// Do not show more than one gauge for the same tank type.
+				continue
+			} else if (preferredGaugeTypes[i] === VenusOS.Tank_Type_Battery) {
+				// Assume battery is always available.
+				gaugeTypes.push(VenusOS.Tank_Type_Battery)
+			} else if (preferredGaugeTypes[i] !== VenusOS.Tank_Type_None) {
+				// If there is a tank of this type, then add the type to the displayed gauges. If
+				// not, add another tank that is available on the system. Otherwise, if the user has
+				// not selected any preferred tanks, but does not have any of the tanks from the
+				// default preferences, then the center display would not show any tanks at all.
+				const preferredTankModel = Global.tanks.tankModel(preferredGaugeTypes[i])
+				if (preferredTankModel.count > 0) {
+					gaugeTypes.push(preferredGaugeTypes[i])
+				} else {
+					for (const tankModel of Global.tanks.allTankModels) {
+						if (tankModel.count > 0 && gaugeTypes.indexOf(tankModel.type) < 0) {
+							gaugeTypes.push(tankModel.type)
+							break
+						}
+					}
 				}
 			}
-			if (removeIndex >= 0) {
-				remove(removeIndex)
-			} else {
-				// Have reached limit for number of gauges to display
-				return
-			}
 		}
-
-		const value = Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage || gauge.isBattery ? gauge.tankLevel : gauge.tankRemaining
-
-		insert(_insertionIndex(gauge.tankType, sortedGaugeTypes),
-			   Object.assign({}, Gauges.tankProperties(gauge.tankType), { tankType: gauge.tankType, level: gauge.tankLevel, value: value }))
+		return gaugeTypes
 	}
 
-	function findGauge(gauge) {
-		for (let i = 0; i < count; ++i) {
-			if (get(i).tankType === gauge.tankType) {
-				return i
+	// Rebuild the gauge model, based on the preferred gauges and the tanks available.
+	function _reset() {
+		const gaugeTypes = gaugesToDisplay()
+		if (gaugeTypes != _gaugeObjects.model) {
+			_gaugeObjects.model = []
+
+			// Clear the model and add default values for each gauge.
+			clear()
+			for (let i = 0; i < gaugeTypes.length; ++i) {
+				append(Object.assign({}, Gauges.tankProperties(gaugeTypes[i]), { tankType: gaugeTypes[i], level: 0, value: 0 }))
 			}
+			_gaugeObjects.model = gaugeTypes
 		}
-		return -1
 	}
 
-	function updateGauge(gauge) {
-		const gaugeIndex = findGauge(gauge)
-		if (gaugeIndex >= 0) {
+	function _updateGauge(gaugeIndex, gauge) {
+		if (gaugeIndex >= 0 && gaugeIndex < count) {
 			const value = Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage || gauge.isBattery ? gauge.tankLevel : gauge.tankRemaining
 			set(gaugeIndex, { name: gauge.tankName, icon: gauge.tankIcon, level: gauge.tankLevel, value: value })
 		}
 	}
 
-	function _insertionIndex(tankType, sortedGaugeTypes) {
-		const preferredSortIndex = sortedGaugeTypes.indexOf(tankType)
-		if (preferredSortIndex < 0) {
-			// If no preference, just add gauge to end
-			return count
-		}
-		for (let i = 0; i < count; ++i) {
-			const sortIndex = sortedGaugeTypes.indexOf(get(i).tankType)
-			if (sortIndex < 0 || preferredSortIndex < sortIndex) {
-				return i
-			}
-		}
-		return count
-	}
-
 	property Instantiator _gaugeObjects: Instantiator {
 		id: _gaugeObjects
 
+		model: null
 		delegate: QtObject {
 			id: gaugeObject
+
+			required property int modelData
+			required property int index
 
 			readonly property int tankType: modelData
 			readonly property bool isBattery: tankType === VenusOS.Tank_Type_Battery
@@ -97,29 +93,10 @@ ListModel {
 
 			readonly property var _tankProperties: Gauges.tankProperties(tankType)
 
-			property Connections _tankModelConn: Connections {
-				target: gaugeObject.tankModel
-
-				function onCountChanged() {
-					gaugeObject.refresh()
-				}
-			}
-
-			function refresh() {
-				const gaugeIndex = root.findGauge(gaugeObject)
-				if (isBattery) {
-					if (gaugeIndex < 0) {
-						root.addGauge(gaugeObject)
-					}
-				} else if (gaugeIndex >= 0 && tankModel.count === 0) {
-					root.remove(gaugeIndex)
-				} else if (gaugeIndex < 0 && tankModel.count > 0) {
-					root.addGauge(gaugeObject)
-				}
-			}
-
 			function _updateGaugeModel() {
-				root.updateGauge(gaugeObject)
+				if (root) { // may be null if this object has been destroyed after the Qt.callLater() call
+					root._updateGauge(index, gaugeObject)
+				}
 			}
 
 			// If tank data changes, update the model at the end of the event loop to avoid
@@ -127,12 +104,6 @@ ListModel {
 			onTankNameChanged: Qt.callLater(_updateGaugeModel)
 			onTankIconChanged: Qt.callLater(_updateGaugeModel)
 			onTankLevelChanged: Qt.callLater(_updateGaugeModel)
-
-			Component.onCompleted: {
-				if (isBattery || tankModel.count > 0) {
-					root.addGauge(gaugeObject)
-				}
-			}
 
 			property Connections _unitConn: Connections {
 				target: Global.systemSettings.briefView.unit
@@ -144,14 +115,21 @@ ListModel {
 		}
 	}
 
+	property Connections _tankCountConn: Connections {
+		target: Global.tanks
+
+		function onTotalTankCountChanged() {
+			Qt.callLater(root._reset)
+		}
+	}
+
 	property Connections _centralGaugesConn: Connections {
 		target: Global.systemSettings.briefView.centralGauges
 
-		function onValueChanged() {
-			root.clear()
-			for (let i = 0; i < _gaugeObjects.count; ++i) {
-				_gaugeObjects.objectAt(i).refresh()
-			}
+		function onPreferredOrderChanged() {
+			Qt.callLater(root._reset)
 		}
 	}
+
+	Component.onCompleted: Qt.callLater(root._reset)
 }

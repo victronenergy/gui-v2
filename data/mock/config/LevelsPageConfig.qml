@@ -31,6 +31,10 @@ QtObject {
 			]
 		},
 		{
+			name: "No tanks",
+			tanks: [ ],
+		},
+		{
 			name: "1 tank",
 			tanks: [
 				{ type: VenusOS.Tank_Type_Fuel, level: 46.34, capacity: 1 },
