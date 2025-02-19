@@ -747,6 +747,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
+    src/qmlobject.h
+    src/qmlobject.cpp
     src/quantityinfo.h
     src/quantityinfo.cpp
     src/quantityobject.h
