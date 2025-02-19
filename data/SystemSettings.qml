@@ -79,7 +79,7 @@ QtObject {
 	function setAltitudeUnit(value) {
 		switch (value) {
 			case VenusOS.Units_Altitude_Meter:
-				_altitudeUnit.setValue(_altitudeeUnit.ve_meter)
+				_altitudeUnit.setValue(_altitudeUnit.ve_meter)
 				break
 			case VenusOS.Units_Altitude_Foot:
 				_altitudeUnit.setValue(_altitudeUnit.ve_foot)
