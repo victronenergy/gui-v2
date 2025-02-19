@@ -238,6 +238,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityRow.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
+    components/RadioButtonListPage.qml
     components/RsSystemAcIODisplay.qml
     components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
