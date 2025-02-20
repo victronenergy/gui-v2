@@ -461,10 +461,10 @@ public:
 
 	enum Switch_Status {
 		Switch_Status_Off,
-		Switch_Status_Input_Active,
+		Switch_Status_Powered,
 		Switch_Status_Tripped,
 		Switch_Status_Over_Temperature = 0x04,
-		Switch_Status_Active =0x08,
+		Switch_Status_Output_Fault =0x08,
 		Switch_Status_On = 0x09,  //inputActive + active
 		Switch_Status_Short_Fault = 0x10,
 		Switch_Status_Disabled = 0x20

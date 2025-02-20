@@ -59,7 +59,7 @@ Item {
 						uid: switchDev.serviceUid + "/Channel/%1/State".arg(index)
 						onValueChanged: {
 							if (value){
-								var statusData = [VenusOS.Switch_Status_Active,VenusOS.Switch_Status_Disabled,VenusOS.Switch_Status_Input_Active,
+								var statusData = [VenusOS.Switch_Status_Output_Fault,VenusOS.Switch_Status_Disabled,VenusOS.Switch_Status_Powered,
 												  VenusOS.Switch_Status_On,VenusOS.Switch_Status_Over_Temperature,
 												  VenusOS.Switch_Status_Short_Fault,VenusOS.Switch_Status_Tripped]
 								if (index === 0 ){

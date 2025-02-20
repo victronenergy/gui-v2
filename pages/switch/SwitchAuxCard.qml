@@ -39,7 +39,7 @@ ControlCard {
 			serviceUid: model.uid
 			title: model.name
 			width: switchesView.width / switchCol
-			height: switchesView.height/4
+			showSeparator: index < root.model.count -1
 		}
 	}
 }

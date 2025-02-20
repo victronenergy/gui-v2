@@ -24,12 +24,13 @@ Page {
 			property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.Switch_Function_Dimmable
 			property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
 			property string status: Global.switches.switchStatusToText(statusItem.value)
-			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.Switch_Status_On) || (statusItem.value === VenusOS.Switch_Status_Active))
+			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.Switch_Status_On) || (statusItem.value === VenusOS.Switch_Status_Output_Fault))
 			property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
 			//property string groupText: groupNameItem.value.length>18 ? groupNameItem.value.substring(0,15)+"...": groupNameItem.value!=="" ? groupNameItem.value : "--"
 
 			property VeQuickItem functionItem: VeQuickItem {
 				uid: model.uid + "/Function"
+				property string statusText: Global.switches.switchFunctionToText(value, (value === VenusOS.Switch_Function_Slave ) ? index : null)
 				onIsValidChanged:{
 					if (!isValid) Global.pageManager.popAllPages()
 				}
@@ -85,11 +86,12 @@ Page {
 								   ?[
 										{ value: info.currentItem.value, unit: VenusOS.Units_Amp },
 										{ value: info.combinedStatus},
-										{ value: Global.switches.switchFunctionToText(info.functionItem.value)},
+										{ value: info.functionItem.statusText},
 									]
 									:[
+										//% "%1 of Ch %2"
 										{ value: info.combinedStatus},
-										{ value: Global.switches.switchFunctionToText(info.functionItem.value)},
+										{ value: info.functionItem.statusText},
 									]
 
 					}
@@ -148,12 +150,12 @@ Page {
 										width: Math.min(implicitWidth, listQuantityNavigation.maximumContentWidth - icon.width - parent.spacing)
 										model: info.fuseItem.isValid ? [
 											{ value: info.groupNameItem.shortText},
-											{ value: Global.switches.switchFunctionToText(info.functionItem.value)},
+											{ value: info.functionItem.statusText},
 											{ value: info.fuseItem.value, unit: VenusOS.Units_Amp }
 										]
 										:[
 											{ value: info.groupNameItem.shortText},
-											{ value: Global.switches.switchFunctionToText(info.functionItem.value)},
+											{ value: info.functionItem.statusText}
 										]
 
 									},

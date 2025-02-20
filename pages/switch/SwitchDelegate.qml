@@ -14,6 +14,7 @@ Item {
 	property color disabledColor: Theme.color_button_down
 	property alias serviceUid: switchData.serviceUid
 	property alias title : titleText.text
+	property bool showSeparator: true
 
 
 	property QtObject switchData: QtObject {
@@ -43,19 +44,21 @@ Item {
 	}
 
 	id: root
-	height: 90
+	height: mainItem.contentHeight
 	visible: switchData._status.isValid
 	Column {
+		id: mainItem
 		Row {
 			id:header
-			height: 30
-			width: root.width
+			height: 33
+			width: root.width * 0.98
 			Item {
+			anchors.bottom: statusRect.bottom
 				width: parent.width - statusRect.width
-				height: titleText.contentHeight
+				height: 25
 				Text{
 					id:titleText
-					verticalAlignment: Text.AlignTop
+					verticalAlignment: Text.AlignVCenter
 					font.pixelSize: height
 					color: Theme.color_font_primary
 					elide: Text.ElideRight
@@ -66,15 +69,16 @@ Item {
 				id: statusRect
 				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
 					|| (switchData._status.value === VenusOS.Switch_Status_On)
-					|| (switchData._status.value === VenusOS.Switch_Status_Input_Active)
-					|| ((switchData._status.value === VenusOS.Switch_Status_Active) && (switchData._function.value === VenusOS.Switch_Function_Dimmable)))
-				width: 100
+					|| (switchData._status.value === VenusOS.Switch_Status_Powered)
+					|| ((switchData._status.value === VenusOS.Switch_Status_Output_Fault) && (switchData._function.value === VenusOS.Switch_Function_Dimmable)))
+				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
 				height: 25
 				radius: height/2
-				color: Global.switches.switchStatusToColor(switchData._status.value)
+				color: Global.switches.switchStatusToColor(switchData._status.value, false)
 				Text {
+					id: childText
 					anchors.centerIn: parent
-					color: Qt.colorEqual(statusRect.color,"WHITE") ? "BLACK": "WHITE"
+					color: Global.switches.switchStatusToColor(switchData._status.value,true)//Qt.colorEqual(statusRect.color,"WHITE") ? "BLACK": "WHITE"
 					text: Global.switches.switchStatusToText(switchData._status.value)
 				}
 			}
@@ -87,9 +91,9 @@ Item {
 				//top:header.bottom
 				horizontalCenter: parent.horizontalCenter
 			}
-			width: parent.width * 0.9
-			height:50
-			radius: 18
+			width: parent.width * 0.98
+			height:53
+			radius: 10
 
 			DimmingSlider{
 				id: dimmingSwitch
@@ -118,7 +122,7 @@ Item {
 					id: dimText
 					color: Theme.color_font_primary
 					text: switchData._state.value ? CommonWords.on : CommonWords.off
-					font.pixelSize: parent.height * 0.6
+					font.pixelSize: parent.height * 0.5
 					z: border.z + 1
 					anchors.centerIn: parent
 				}
@@ -145,7 +149,7 @@ Item {
 					color: Theme.color_font_primary
 					//% "Press"
 					text: switchData._state.value ? CommonWords.on : qsTrId("Switches_Press")
-					font.pixelSize: parent.height * 0.6
+					font.pixelSize: parent.height * 0.5
 					anchors.centerIn: parent
 				}
 			}
@@ -200,7 +204,7 @@ Item {
 							id: offText
 							color: Theme.color_font_primary
 							text: CommonWords.off
-							font.pixelSize: parent.height * 0.6
+							font.pixelSize: parent.height * 0.5
 							anchors.centerIn: parent
 						}
 					}
@@ -215,7 +219,7 @@ Item {
 							id: onText
 							color: Theme.color_font_primary
 							text: CommonWords.on
-							font.pixelSize: parent.height * 0.6
+							font.pixelSize: parent.height * 0.5
 							anchors.centerIn: parent
 						}
 					}
@@ -229,5 +233,20 @@ Item {
 				}
 			}
 		}
+		Item {
+			visible: showSeparator
+			height: showSeparator ? 14 : 0
+			width: parent.width
+		}
+		Rectangle {
+			visible: showSeparator
+			height: showSeparator ? 2 : 0
+			anchors{
+				horizontalCenter: parent.horizontalCenter
+			}
+			width: parent.width
+			color: Theme.color_card_separator
+		}
 	}
+
 }
