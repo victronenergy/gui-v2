@@ -16,11 +16,12 @@ QtObject {
 	function switchStatusToText(val) {
 		switch (val) {
 		//channel status
-		case VenusOS.Switch_Status_Active:
-			return CommonWords.active_status
+		case VenusOS.Switch_Status_Output_Fault:
+			//% "Output fault"
+			return qsTrId("Switch_Output_Fault")
 		case VenusOS.Switch_Status_Disabled:
 			return CommonWords.disabled
-		case VenusOS.Switch_Status_Input_Active:
+		case VenusOS.Switch_Status_Powered:
 			//% "Powered"
 			return qsTrId("Switch_Input_Active")
 
@@ -57,43 +58,62 @@ QtObject {
 			//% "Under voltage"
 			return qsTrId("Switches_under_voltage")
 		default:
-			return ""
+			return val
 		}
 	}
-	function switchStatusToColor(val) {
+	function switchStatusToColor(val,text) {
+		var switchRedStatus = "#600000"
+		var switchRedText = "#FF8080"
+		var switchGreenStatus = "#006000"
+		var switchGreenText = "#80FF80"
+		var switchYellowStatus = "#705000"
+		var switchYellowText = "#e0e050"
+
 		switch (val) {
 		//channel status
 
 
 		case VenusOS.Switch_Status_Disabled:
 		case VenusOS.Switch_Status_Off:
-			return "WHITE"
+			if (text) return "WHITE"
+			else return "GREY"
 
-		case VenusOS.Switch_Status_Input_Active:
+
+		case VenusOS.Switch_Status_Powered:
 		case VenusOS.Switch_Status_On:
-		case VenusOS.Switch_Status_Active:
-			return  "GREEN"
+			if (text) return switchGreenText
+				else return switchGreenStatus
+
+		case VenusOS.Switch_Status_Output_Fault:
+			if (text) return switchYellowText
+				else return switchYellowStatus
 
 		case VenusOS.Switch_Status_Over_Temperature:
 		case VenusOS.Switch_Status_Short_Fault:
 		case VenusOS.Switch_Status_Tripped:
-			return "RED"
+
+			if (text) return switchRedText
+				else return switchRedStatus
 
 		//module state
 		case VenusOS.Switch_ModuleState_Channel_Fault:
 		case VenusOS.Switch_ModuleState_Channel_Tripped:
 		case VenusOS.Switch_ModuleState_Over_Temperature:
-			return "RED"
+			if (text) return switchRedText
+				else return switchRedStatus
 
 		case VenusOS.Switch_ModuleState_Connected:
-			return "GREEN"
+			if (text) return switchGreenStatus
+				else return switchGreenText
 
 		case VenusOS.Switch_ModuleState_Temperature_Warning:
 		case VenusOS.Switch_ModuleState_Under_Voltage:
-			return "YELLOW"
+			if (text) return switchYellowText
+				else return switchYellowStatus
 
 		default:
-			return "RED"
+			if (text) return switchRedText
+				else return switchRedStatus
 		}
 	}
 
@@ -108,7 +128,7 @@ QtObject {
 		}
 	}
 
-	function switchFunctionToText(val){
+	function switchFunctionToText(val,channel){
 		switch (val) {
 		case VenusOS.Switch_Function_Momentary:
 			//% "Momentary"
@@ -120,8 +140,10 @@ QtObject {
 			//% "Dimmable"
 			return qsTrId("Switches_Dimmable")
 		case VenusOS.Switch_Function_Slave:
+			//% "Slave of %1"
+			if (channel) return qsTrId("Switches_SlaveOf").arg(channel)
 			//% "Slave"
-			return qsTrId("Switches_Slave")
+			 else return qsTrId("Switches_Slave")
 		default:
 			//% "Undefined"
 			return qsTrId("Switches_Undefined")

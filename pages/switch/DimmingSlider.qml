@@ -118,7 +118,7 @@ T.Slider {
 		Text{
 			x: parent.width / 2
 			y: (parent.height - height) / 2
-			color: backgroundRect.color
+			color: "lightgrey"
 			font.pixelSize: 30
 			text:"..."
 			rotation : 90
