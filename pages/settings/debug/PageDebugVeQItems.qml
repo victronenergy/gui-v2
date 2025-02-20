@@ -25,7 +25,7 @@ Page {
 		delegate: ListNavigation {
 			text: model.id
 			secondaryText: {
-				if (enabled) {
+				if (interactive) {
 					return ""
 				}
 				return model.value !== undefined ? model.value : "--"

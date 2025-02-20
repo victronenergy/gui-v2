@@ -154,6 +154,7 @@ Page {
 					//% "Modified"
 					:  qsTrId("pagesettingsmodificationchecks_modified")
 				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
+				preferredVisible: fsModifiedStateItem.isValid && systemHooksStateItem.isValid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
 
 				VeQuickItem {
