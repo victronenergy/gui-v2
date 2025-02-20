@@ -81,12 +81,9 @@ QtObject {
 
 		case VenusOS.Switch_Status_Powered:
 		case VenusOS.Switch_Status_On:
+		case VenusOS.Switch_Status_Output_Fault:
 			if (text) return switchGreenText
 				else return switchGreenStatus
-
-		case VenusOS.Switch_Status_Output_Fault:
-			if (text) return switchYellowText
-				else return switchYellowStatus
 
 		case VenusOS.Switch_Status_Over_Temperature:
 		case VenusOS.Switch_Status_Short_Fault:
