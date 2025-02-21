@@ -24,11 +24,7 @@ Page {
 
 			readonly property bool _loadCustomDelegate: connected && !!device
 
-			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
-			// item should not be visible.
-			width: parent ? parent.width : 0
-
-			on_LoadCustomDelegateChanged: {
+			function _resetSource() {
 				let delegateUri
 				if (_loadCustomDelegate) {
 					const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
@@ -47,6 +43,10 @@ Page {
 				}
 			}
 
+			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
+			// item should not be visible.
+			width: parent ? parent.width : 0
+
 			onStatusChanged: {
 				if (status === Loader.Error) {
 					console.log("Failed to load Device List delegate for '%1' service from file: %2"
@@ -54,6 +54,9 @@ Page {
 						.arg(source))
 				}
 			}
+
+			on_LoadCustomDelegateChanged: _resetSource()
+			Component.onCompleted: _resetSource()
 		}
 
 		footer: Column {
