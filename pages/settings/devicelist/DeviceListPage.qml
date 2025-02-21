@@ -23,29 +23,35 @@ Page {
 			required property string cachedDeviceName
 
 			readonly property bool _loadCustomDelegate: connected && !!device
+			property bool _usingCustomDelegate
 
-			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
-			// item should not be visible.
-			width: parent ? parent.width : 0
-
-			on_LoadCustomDelegateChanged: {
-				let delegateUri
+			function _resetSource() {
 				if (_loadCustomDelegate) {
 					const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
 					if (!serviceType) {
 						console.warn("DeviceList: cannot load delegate, cannot read service type from serviceUid:", device.serviceUid)
 						return
 					}
-					setSource("delegates/DeviceListDelegate_%1.qml".arg(serviceType), {
-						device: Qt.binding(function() { return delegateLoader.device }),
-						sourceModel: Qt.binding(function() { return delegateLoader.sourceModel }),
-					})
+					if (!source || !_usingCustomDelegate) {
+						setSource("delegates/DeviceListDelegate_%1.qml".arg(serviceType), {
+							device: Qt.binding(function() { return delegateLoader.device }),
+							sourceModel: Qt.binding(function() { return delegateLoader.sourceModel }),
+						})
+						_usingCustomDelegate = true
+					}
 				} else {
-					setSource("delegates/DisconnectedDeviceListDelegate.qml", {
-						cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
-					})
+					if (!source || _usingCustomDelegate) {
+						setSource("delegates/DisconnectedDeviceListDelegate.qml", {
+							cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
+						})
+						_usingCustomDelegate = false
+					}
 				}
 			}
+
+			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
+			// item should not be visible.
+			width: parent ? parent.width : 0
 
 			onStatusChanged: {
 				if (status === Loader.Error) {
@@ -54,6 +60,9 @@ Page {
 						.arg(source))
 				}
 			}
+
+			on_LoadCustomDelegateChanged: _resetSource()
+			Component.onCompleted: _resetSource()
 		}
 
 		footer: Column {
