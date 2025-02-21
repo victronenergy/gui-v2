@@ -83,6 +83,7 @@ Page {
 				preferredVisible: commonSettings.dvccActive && sharedTempSense.checked
 
 				VeQuickItem {
+					id: available
 					uid: Global.system.serviceUid + "/AvailableTemperatureServices"
 					onValueChanged: {
 						if (value === undefined) {
@@ -90,9 +91,48 @@ Page {
 						}
 						const modelArray = Utils.jsonSettingsToModel(value)
 						if (modelArray) {
-							temperatureServiceRadioButtons.optionModel = modelArray
+							temperatureServiceInstantiator.displays = modelArray.map(function(d) { return d.display; })
+							temperatureServiceInstantiator.values = modelArray.map(function(d) { return d.value; })
+							temperatureServiceInstantiator.model = modelArray.length
 						} else {
 							console.warn("Unable to parse data from", uid)
+						}
+					}
+				}
+
+				// For each available temperature service, return its custom name (if given)
+				// otherwise fall back to its product name, i.e. return Device.name
+				Instantiator {
+					id: temperatureServiceInstantiator
+					property list<string> values
+					property list<string> displays
+					property var outputModel: []
+					function updateOptionModel() {
+						Qt.callLater(function() {
+							temperatureServiceRadioButtons.optionModel = outputModel
+						})
+					}
+					delegate: QtObject {
+						id: tempSensorData
+						required property int index
+						property string value: temperatureServiceInstantiator.values[index]
+						property string display: temperatureServiceInstantiator.displays[index]
+						property Device tempSensor: Device {
+							property int firstIndexOfSlash: tempSensorData.value.indexOf('/')
+							property int secondIndexOfSlash: tempSensorData.value.indexOf('/', firstIndexOfSlash)
+							property string deviceInstanceSubstring: tempSensorData.value.substr(firstIndexOfSlash, secondIndexOfSlash - firstIndexOfSlash + 1)
+							serviceUid: tempSensorData.value.indexOf("com.victronenergy") < 0 ? ""
+								: BackendConnection.serviceUidFromName(tempSensorData.value, deviceInstanceSubstring)
+						}
+
+						Component.onCompleted: {
+							Qt.callLater(function() {
+								temperatureServiceInstantiator.outputModel.push({
+									display: tempSensorData.tempSensor.name.length ? tempSensorData.tempSensor.name : tempSensorData.display,
+									value: tempSensorData.value
+								})
+								temperatureServiceInstantiator.updateOptionModel()
+							})
 						}
 					}
 				}
