@@ -62,6 +62,8 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 			// and other awkward syntax to access model properties.
 			model: root.model ? root.model.count : null
 			delegate: NavButton {
+				id: navButton
+
 				readonly property var _modelData: root.model.get(index)
 				height: root.height
 				width: Theme.geometry_navigationBar_button_width
@@ -72,20 +74,20 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 				backgroundColor: "transparent"
 				onClicked: root._currentIndex = model.index
 
-				Rectangle {
+				Loader {
+					z: 1 // to get it on top of the IconLabel
 					anchors {
 						top: parent.top
-						topMargin: Theme.geometry_navigationBar_notifications_redDot_topMargin
-						horizontalCenter: parent.horizontalCenter
-						horizontalCenterOffset: Theme.geometry_navigationBar_notifications_redDot_horizontalCenterOffset
+						topMargin: 6
+						left: parent.horizontalCenter
 					}
-					width: Theme.geometry_notificationsPage_delegate_marker_width
-					height: width
-					radius: Theme.geometry_notificationsPage_delegate_marker_radius
-					color: Theme.color_critical
-					visible: _modelData.url.endsWith("NotificationsPage.qml")
-							 && !!Global.notifications
-							 && Global.notifications.alert
+					sourceComponent: NotificationCounter {
+						count: Global.notifications?.unsilencedNotificationCount ?? 0
+						// this will require pragma ComponentBehavior: Bound
+						borderColor: root.color
+					}
+					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
+							&& (Global.notifications?.hasUnsilencedNotifications ?? false)
 				}
 			}
 		}

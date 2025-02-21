@@ -10,13 +10,12 @@ BaseNotification {
 	id: notification
 
 	readonly property string serviceUid: notificationId < 0 ? ""
-			: Global.notifications.serviceUid + "/" + notificationId
+															: Global.notifications.serviceUid + "/" + notificationId
 
-	property var _currentModel
 	property date _invalidDate
 
-	readonly property VeQuickItem _acknowledged: VeQuickItem {
-		uid: notification.serviceUid ? notification.serviceUid + "/Acknowledged" : ""
+	readonly property VeQuickItem _silenced: VeQuickItem {
+		uid: notification.serviceUid ? notification.serviceUid + "/Silenced" : ""
 	}
 
 	readonly property VeQuickItem _active: VeQuickItem {
@@ -43,55 +42,31 @@ BaseNotification {
 		uid: notification.serviceUid ? notification.serviceUid + "/Value" : ""
 	}
 
-	readonly property Connections _ackConn: Connections {
-		target: Global.notifications
-		function onAcknowledgeNotification(notificationId) {
-			if (notificationId === notification.notificationId) {
-				_acknowledged.setValue(1)
-			}
-		}
-	}
-
-	readonly property bool _canInitialize: _acknowledged.value !== undefined
-			   && _active.value !== undefined
-			   && _type.value !== undefined
-			   && _dateTime.value !== undefined
+	readonly property bool _canInitialize: _silenced.value !== undefined
+										   && _active.value !== undefined
+										   && _type.value !== undefined
+										   && _dateTime.value !== undefined
 	on_CanInitializeChanged: _init()
 
-	readonly property bool _isHistorical: !active && acknowledged
-	on_IsHistoricalChanged: {
-		if (!!_currentModel) {
-			const newModel = _targetModel()
-			if (newModel !== _currentModel) {
-				_currentModel.removeNotification(notificationId)
-				newModel.insertByDate(notification)
-				_currentModel = newModel
-			}
-		}
+	function updateSilenced(silenced: bool) {
+		_silenced.setValue(silenced ? 1 : 0)
 	}
 
-	function setAcknowledged(ack) {
-		 _acknowledged.setValue(ack ? 1 : 0)
+	function updateActive(active: bool) {
+		_active.setValue(active ? 1 : 0)
 	}
 
 	function _init() {
-		if (!!_currentModel || !_canInitialize) {
+		if (!Global.notifications.allNotificationsModel || !_canInitialize) {
 			return
 		}
-		const model = _targetModel()
-		model.insertByDate(notification)
-		_currentModel = model
+		// insert into the allNotificationsModel
+		Global.notifications.allNotificationsModel.insertNotification(notification)
 	}
 
-	function _targetModel() {
-		if (_isHistorical) {
-			return Global.notifications.historicalModel
-		} else {
-			return Global.notifications.activeModel
-		}
-	}
-
-	acknowledged: !!_acknowledged.value
+	// These properties should not be written to; use updateSilenced() and updateActive() functions
+	// to maintain data sync and not break bindings.
+	silenced: !!_silenced.value
 	active: !!_active.value
 	type: _type.isValid ? parseInt(_type.value) : -1
 	dateTime: _dateTime.isValid ? new Date(_dateTime.value * 1000) : _invalidDate
@@ -100,8 +75,7 @@ BaseNotification {
 	value: _value.value || ""
 
 	Component.onDestruction: {
-		if (_currentModel) {
-			_currentModel.removeNotification(notificationId)
-		}
+		// remove from the allNotificationsModel
+		Global.notifications.allNotificationsModel.removeNotification(notification)
 	}
 }

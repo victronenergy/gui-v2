@@ -16,7 +16,7 @@ QtObject {
 
 	readonly property var dummyNotifications: [
 		{
-			acknowledged: 0,
+			silenced: 0,
 			active: 0,
 			type: VenusOS.Notification_Warning,
 			dateTime: root.date1dAgo,
@@ -25,7 +25,7 @@ QtObject {
 			value: "15%",
 		},
 		{
-			acknowledged: 0,
+			silenced: 0,
 			active: 0,
 			type: VenusOS.Notification_Info,
 			dateTime: root.date26MinutesAgo,
@@ -33,7 +33,7 @@ QtObject {
 			description: "Software update available"
 		},
 		{
-			acknowledged: 0,
+			silenced: 0,
 			active: 0,
 			type: VenusOS.Notification_Info,
 			dateTime: root.date2h10mAgo,
@@ -49,10 +49,10 @@ QtObject {
 		target: Global.mockDataSimulator
 		function onAddDummyNotification(isAlarm) {
 			const notifType = isAlarm
-					? VenusOS.Notification_Alarm
-					: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
+							? VenusOS.Notification_Alarm
+							: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
 			const props = {
-				acknowledged: 0,
+				silenced: 0,
 				active: 1,
 				type: notifType,
 				dateTime: new Date(),
@@ -66,27 +66,21 @@ QtObject {
 
 	property Component notifComponent: Component {
 		Notification {
-			onActiveChanged: root._updateAlarmsAndAlerts()
+			id: notification
+			onActiveChanged: root.updateNotifications()
+			onSilencedChanged: root.updateNotifications()
 
 			property Timer inactiveTimer: Timer {
 				running: Global.mockDataSimulator.timersActive
 				interval: 10000 * Math.random()
-				onTriggered: parent._active.setValue(0)
+				onTriggered: notification.updateActive(false)
 			}
 		}
 	}
 
-	property var notifications: []
+	property list<Notification> notifications: []
 
 	readonly property int maxNotificationCount: 20
-
-	property VeQuickItem _alarm: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/Alarm"
-	}
-
-	property VeQuickItem _alert: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/Alert"
-	}
 
 	property VeQuickItem _numberOfNotifications: VeQuickItem {
 		uid: Global.notifications.serviceUid + "/NumberOfNotifications"
@@ -96,16 +90,46 @@ QtObject {
 		uid: Global.notifications.serviceUid + "/NumberOfActiveNotifications"
 	}
 
-	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
+	property VeQuickItem _numberOfActiveAlarms: VeQuickItem {
+		// including both silenced or unsilenced alarms
+		uid: Global.notifications.serviceUid + "/NumberOfActiveAlarms"
+	}
+
+	property VeQuickItem _numberOfActiveWarnings: VeQuickItem {
+		// including both silenced or unsilenced warnings
+		uid: Global.notifications.serviceUid + "/NumberOfActiveWarnings"
+	}
+
+	property VeQuickItem _numberOfActiveInformations: VeQuickItem {
+		// including both silenced or unsilenced informations
+		uid: Global.notifications.serviceUid + "/NumberOfActiveInformations"
+	}
+
+	property VeQuickItem _numberOfUnsilencedAlarms: VeQuickItem {
+		// including both active or inactive alarms
+		uid: Global.notifications.serviceUid + "/NumberOfUnsilencedAlarms"
+	}
+
+	property VeQuickItem _numberOfUnsilencedWarnings: VeQuickItem {
+		// including both active or inactive warnings
+		uid: Global.notifications.serviceUid + "/NumberOfUnsilencedWarnings"
+	}
+
+	property VeQuickItem _numberOfUnsilencedInformations: VeQuickItem {
+		// including both active or inactive informations
+		uid: Global.notifications.serviceUid + "/NumberOfUnsilencedInformations"
+	}
+
+	readonly property VeQuickItem _silenceAll: VeQuickItem {
+		uid: Global.notifications.serviceUid + "/SilenceAll"
 		onValueChanged: {
-			for (let i = 0 ; i < notifications.length; ++i) {
-				const notif = notifications[i]
-				notif.setAcknowledged(true)
+			if(!isNaN(value) && value === 1) {
+				for (let i = 0 ; i < notifications.length; ++i) {
+					const notif = notifications[i]
+					notif.updateSilenced(true)
+				}
+				_silenceAll.setValue(0)
 			}
-			_acknowledgeAll.setValue(0)
-			_alert.setValue(0)
-			_alarm.setValue(0)
 		}
 	}
 
@@ -122,59 +146,61 @@ QtObject {
 			const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
 			notif["_" + p].setValue(value)
 		}
-		if (params['type'] === VenusOS.Notification_Alarm) {
-			_alarm.setValue(1)
-		}
-		if (!!params['active']) {
-			_numberOfActiveNotifications.setValue((_numberOfActiveNotifications.value || 0) + 1)
-			_alert.setValue(1)
-		}
+
 		notifications.push(notif)
-		_numberOfNotifications.setValue(notifications.length)
+
+		updateNotifications()
 	}
 
 	function removeLastNotification() {
-		const notif = notifications[notifications.length - 1]
+		let notif = notifications.pop()
 		const notificationId = notif.notificationId
-		if (notif.active) {
-			_numberOfActiveNotifications.setValue(Math.max(0, _numberOfActiveNotifications.value - 1))
-		}
-		updateAlarm()
-		updateAlert()
-		notifications.splice(notifications.length - 1, 1)
+		updateNotifications()
+		notif.destroy() // cleaned up sometime between the end of this function and the next frame
+
 		return notificationId
 	}
 
-	function _updateAlarmsAndAlerts() {
-		updateAlarm()
-		updateAlert()
-	}
-
-	function updateAlarm() {
+	function updateNotifications() {
 		let activeCount = 0
-		let hasAlarm = false
+		let activeAlarmCount = 0
+		let activeWarningCount = 0
+		let activeInformationCount = 0
+		let unsilencedAlarmCount = 0
+		let unsilencedWarningCount = 0
+		let unsilencedInformationCount = 0
+
 		for (let i = 0 ; i < notifications.length; ++i) {
 			const notif = notifications[i]
 			if (notif.active) {
 				activeCount++
-				if (!hasAlarm && notif.type === VenusOS.Notification_Alarm && !notif.acknowledged) {
-					hasAlarm = true
+
+				if (notif.type === VenusOS.Notification_Alarm) {
+					activeAlarmCount++
+				} else if(notif.type === VenusOS.Notification_Warning) {
+					activeWarningCount++
+				} else if(notif.type === VenusOS.Notification_Info) {
+					activeInformationCount++
+				}
+			}
+			if (!notif.silenced) {
+				if (notif.type === VenusOS.Notification_Alarm) {
+					unsilencedAlarmCount++
+				} else if (notif.type === VenusOS.Notification_Warning) {
+					unsilencedWarningCount++
+				} else if (notif.type === VenusOS.Notification_Info) {
+					unsilencedInformationCount++
 				}
 			}
 		}
 		_numberOfActiveNotifications.setValue(activeCount)
-		_alarm.setValue(hasAlarm)
-	}
-
-	function updateAlert() {
-		for (let i = 0 ; i < notifications.length; ++i) {
-			const notif = notifications[i]
-			if (!notif.acknowledged) {
-				_alert.setValue(1)
-				return
-			}
-		}
-		_alert.setValue(0)
+		_numberOfNotifications.setValue(notifications.length)
+		_numberOfActiveAlarms.setValue(activeAlarmCount)
+		_numberOfUnsilencedAlarms.setValue(unsilencedAlarmCount)
+		_numberOfActiveWarnings.setValue(activeWarningCount)
+		_numberOfUnsilencedWarnings.setValue(unsilencedWarningCount)
+		_numberOfActiveInformations.setValue(activeInformationCount)
+		_numberOfUnsilencedInformations.setValue(unsilencedInformationCount)
 	}
 
 	function populate() {

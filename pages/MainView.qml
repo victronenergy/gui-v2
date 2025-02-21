@@ -95,9 +95,11 @@ Item {
 		sourceComponent: swipeViewComponent
 		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 		onLoaded: {
-			// If there is an alarm, the notifications page will be shown; otherwise, show the
+			// If there is an active alarm, the notifications page will be shown; otherwise, show the
 			// application start page, if set.
-			if (!Global.notifications.alarm) {
+			if (Global.notifications?.alarms.hasActive ?? false) {
+				Global.notificationLayer.popAndGoToNotifications()
+			} else {
 				root.loadStartPage()
 			}
 			// Notify that the UI is ready to be displayed.

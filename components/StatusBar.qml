@@ -17,7 +17,7 @@ Rectangle {
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
 	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
-	readonly property bool notificationButtonVisible: alertButton.enabled || alertButton.animating || alarmButton.enabled || alarmButton.animating
+	readonly property bool notificationButtonVisible: alarmButton.enabled || alarmButton.animating
 
 	property bool animationEnabled
 
@@ -94,8 +94,8 @@ Rectangle {
 					   : "qrc:/images/icon_back_32.svg"
 
 		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+				 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 && root.leftButton != VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -137,7 +137,6 @@ Rectangle {
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
 	}
-
 
 	Label {
 		id: clockLabel
@@ -188,6 +187,21 @@ Rectangle {
 			height: Theme.geometry_status_bar_gsmModem_icon_height
 			anchors.verticalCenter: parent.verticalCenter
 		}
+
+		CP.IconImage {
+			id: notificationIcon
+
+			anchors.verticalCenter: parent.verticalCenter
+			visible: Global.notifications?.statusBarNotifcationIconVisible ? 1 : 0
+			color: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Alarm
+				   ? Theme.color_critical
+				   : Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Warning
+					 ? Theme.color_warning :
+					   Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
+			source: Global.notifications?.statusBarNotifcationIconPriority === VenusOS.Notification_Info ?
+						"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+
+		}
 	}
 
 	Row {
@@ -201,32 +215,20 @@ Rectangle {
 	}
 
 	NotificationButton {
-		id: alertButton
-
-		anchors {
-			right: rightSideRow.right
-			verticalCenter: parent.verticalCenter
-		}
-		enabled: notificationButtonsEnabled && !!Global.notifications && Global.notifications.alert && !alarmButton.enabled
-		backgroundColor: Theme.color_warning
-		//% "Acknowledge alerts"
-		text: qsTrId("notifications_acknowledge_alerts")
-		onClicked: Global.notifications.acknowledgeAll()
-	}
-
-	NotificationButton {
 		id: alarmButton
 
 		anchors {
 			right: rightSideRow.right
 			verticalCenter: parent.verticalCenter
 		}
-		enabled: notificationButtonsEnabled && !!Global.notifications && Global.notifications.alarm
+		enabled: notificationButtonsEnabled && (Global.notifications?.hasUnsilencedNotifications ?? false)
 		backgroundColor: Theme.color_critical_background
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
+
 		//% "Silence alarm"
 		text: qsTrId("notifications_silence_alarm")
-		onClicked: Global.notifications.acknowledgeAll()
+
+		onClicked: Global.notifications.silenceAll()
 	}
 
 	Row {
@@ -240,19 +242,19 @@ Rectangle {
 
 		StatusBarButton {
 			enabled: !!Global.pageManager
-					&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-					&& root.rightButton != VenusOS.StatusBar_RightButton_None
+					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+					 && root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
 
 			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
-					? "qrc:/images/icon_sidepanel_on_32.svg"
-					: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
-						? "qrc:/images/icon_sidepanel_off_32.svg"
-						: root.rightButton === VenusOS.StatusBar_RightButton_Add
-						  ? "qrc:/images/icon_plus.svg"
-						  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
-							? "qrc:/images/icon_refresh_32.svg"
-							: ""
+						 ? "qrc:/images/icon_sidepanel_on_32.svg"
+						 : root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
+						   ? "qrc:/images/icon_sidepanel_off_32.svg"
+						   : root.rightButton === VenusOS.StatusBar_RightButton_Add
+							 ? "qrc:/images/icon_plus.svg"
+							 : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
+							   ? "qrc:/images/icon_refresh_32.svg"
+							   : ""
 
 			onClicked: root.rightButtonClicked()
 		}
