@@ -1,6 +1,8 @@
 {
-    "font_briefPage_battery_percentage_minimumPixelSize": "font_size_h4",
+    "font_briefPage_battery_percentage_minimumPixelSize": "font_size_h5",
     "font_briefPage_battery_percentage_maximumPixelSize": "font_size_h5",
+    "font_briefPage_battery_temperature_minimumPixelSize": "font_size_h4",
+    "font_briefPage_battery_temperature_maximumPixelSize": "font_size_h5",
     "font_briefPage_battery_timeToGo_pixelSize": "font_size_body2",
     "font_briefPage_battery_voltage_pixelSize": "font_size_h1",
     "font_briefPage_quantityLabel_size": "font_size_h2",
