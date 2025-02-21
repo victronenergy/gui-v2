@@ -17,7 +17,7 @@ Rectangle {
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
 	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
-	readonly property bool notificationButtonVisible: alertButton.enabled || alertButton.animating || alarmButton.enabled || alarmButton.animating
+	readonly property bool notificationButtonVisible: alarmButton.enabled || alarmButton.animating
 
 	property bool animationEnabled
 
@@ -221,9 +221,7 @@ Rectangle {
 			right: rightSideRow.right
 			verticalCenter: parent.verticalCenter
 		}
-		enabled: notificationButtonsEnabled &&
-				 ((Global.notifications?.alarms.hasUnsilenced ?? false) ||
-				  (Global.notifications?.alarms.hasActive ?? false))
+		enabled: notificationButtonsEnabled && (Global.notifications?.hasUnsilencedNotifications ?? false)
 		backgroundColor: Theme.color_critical_background
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 
