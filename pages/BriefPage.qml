@@ -173,13 +173,6 @@ SwipeViewPage {
 		x: sidePanel.x/2 - width/2
 		sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
-
-		BriefCenterDisplay {
-			anchors.centerIn: parent
-			visible: gaugeModel.count <= 3
-			showAllDetails: gaugeModel.count === 0
-			smallTextMode: gaugeModel.count === 3
-		}
 	}
 
 	Component {
@@ -191,6 +184,14 @@ SwipeViewPage {
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
 			leftGaugeCount: root._leftGaugeCount
+
+			BriefCenterDisplay {
+				anchors.centerIn: parent
+				width: parent.width
+				visible: gaugeModel.count <= 3
+				showFullDetails: gaugeModel.count === 1
+				smallTextMode: gaugeModel.count === 3
+			}
 		}
 	}
 
@@ -205,6 +206,12 @@ SwipeViewPage {
 			status: Theme.getValueStatus(value, properties.valueType)
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
+
+			BriefCenterDisplay {
+				anchors.centerIn: parent
+				width: parent.width
+				showFullDetails: true
+			}
 		}
 	}
 

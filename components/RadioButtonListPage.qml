@@ -11,6 +11,7 @@ Page {
 	id: root
 
 	required property var optionModel
+	readonly property alias optionView: optionsListView
 
 	property int currentIndex
 	property bool updateCurrentIndexOnClick: true

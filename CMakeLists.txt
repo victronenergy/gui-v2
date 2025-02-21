@@ -322,6 +322,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListActiveAcInput.qml
     components/listitems/ListAlarmLevelRadioButtonGroup.qml
     components/listitems/ListAlarmState.qml
+    components/listitems/ListBriefCenterDetails.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
