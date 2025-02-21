@@ -185,7 +185,7 @@ Page {
 				text: qsTrId("settings_dvcc_auto_selected")
 				preferredVisible: bmsOptions.preferredVisible && bmsOptions.currentValue === -1
 				secondaryText: bmsService.isValid
-							   ? bmsProductName.value || bmsCustomName.value || ""
+							   ? bmsCustomName.value || bmsProductName.value || ""
 								 //: Indicates no option is selected
 								 //% "None"
 							   : qsTrId("settings_dvcc_auto_selected_none")
