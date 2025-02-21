@@ -393,7 +393,8 @@ public:
 		Tank_Type_HydraulicOil,
 		Tank_Type_RawWater,
 
-		// Added for convenience as battery is combined with tanks on Brief page
+		// Added for convenience as these options are combined with the tanks on Brief page gauges
+		Tank_Type_None = 999,
 		Tank_Type_Battery = 1000
 	};
 	Q_ENUM(Tank_Type)
