@@ -24,13 +24,7 @@ Page {
 
 		delegate: ListNavigation {
 			text: model.id
-			secondaryText: {
-				if (interactive) {
-					return ""
-				}
-				return model.value !== undefined ? model.value : "--"
-			}
-
+			secondaryText: interactive ? "" : (model.value ?? "--")
 			interactive: subModel.rowCount > 0
 
 			onClicked: {
