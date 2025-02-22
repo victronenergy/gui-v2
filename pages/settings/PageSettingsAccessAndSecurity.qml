@@ -202,6 +202,15 @@ Page {
 							// This guards the wasm version to trigger a reload even if the reply isn't received.
 							BackendConnection.securityProtocolChanged()
 							Global.pageManager.popPage()
+							if (Qt.platform.os === "wasm") {
+								Global.showToastNotification(VenusOS.Notification_Info,
+															 BackendConnection.vrm
+																 //% "Closing due to security protocol change, you will need to relaunch remote console via VRM"
+																 ? qsTrId("access_and_security_closing_remote_console")
+																 //% "Page will automatically reload in 5 seconds"
+																 : qsTrId("access_and_security_page_will_reload"),
+															 3000)
+							}
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
