@@ -503,7 +503,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsFroniusShowIpAddresses.qml
     pages/settings/PageSettingsGeneral.qml
     pages/settings/PageSettingsGenerator.qml
-    pages/settings/PageSettingsGpsList.qml
     pages/settings/PageSettingsGsm.qml
     pages/settings/PageSettingsHub4.qml
     pages/settings/PageSettingsHub4Feedin.qml
@@ -593,6 +592,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_evcharger.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_fuelcell.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_genset.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_gps.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_grid.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_heatpump.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_inverter.qml
