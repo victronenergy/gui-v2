@@ -12,12 +12,19 @@ Page {
 	property string bindPrefix: Global.systemSettings.serviceUid + "/Settings/Fronius"
 
 	GradientListView {
+		id: inverterListView
+
 		model: VeQItemTableModel {
 			uids: [bindPrefix + "/Inverters"]
 
 			flags: VeQItemTableModel.AddChildren |
 				   VeQItemTableModel.AddNonLeaves |
 				   VeQItemTableModel.DontAddItem
+		}
+		header: PrimaryListLabel {
+			//% "Add a PV inverter by using the “Find PV Inverter” function or by entering an IP address manually on the previous page."
+			text: qsTrId("page_setting_fronius_inverters_add_a_pv_inverter")
+			preferredVisible: inverterListView.count === 0
 		}
 		delegate: ListNavigation {
 			id: menu
