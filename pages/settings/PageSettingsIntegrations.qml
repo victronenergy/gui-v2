@@ -20,6 +20,9 @@ Page {
 		id: settingsListView
 
 		model: VisibleItemModel {
+			/*
+			  The intention here was to provide a wizard helping to find the right setup process – As we are not there yet, let’s hide it for now
+
 			ListNavigation {
 				text: CommonWords.add_device
 				icon.source: "qrc:/images/icon_plus_32.svg"
@@ -30,6 +33,7 @@ Page {
 			}
 
 			SettingsListHeader { }
+			*/
 
 			ListNavigation {
 				//% "PV Inverters"
