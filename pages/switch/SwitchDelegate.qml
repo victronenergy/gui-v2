@@ -67,25 +67,19 @@ Item {
 
 			Rectangle {
 				id: statusRect
-				property bool showPercentage: (switchData._function.value === VenusOS.Switch_Function_Dimmable)
-												&& ((switchData._status.value === VenusOS.Switch_Status_On)
-												|| (switchData._status.value === VenusOS.Switch_Status_Output_Fault))
 				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
-					|| (switchData._status.value === VenusOS.Switch_Status_Powered))
+					|| (switchData._status.value === VenusOS.Switch_Status_On)
+					|| (switchData._status.value === VenusOS.Switch_Status_Powered)
+					|| ((switchData._status.value === VenusOS.Switch_Status_Output_Fault) && (switchData._function.value === VenusOS.Switch_Function_Dimmable)))
 				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
 				height: 25
 				radius: height/2
-				color: showPercentage
-						? Global.switches.switchStatusToColor(VenusOS.Switch_Status_On, false)
-						: Global.switches.switchStatusToColor(switchData._status.value, false)
+				color: Global.switches.switchStatusToColor(switchData._status.value, false)
 				Text {
 					id: childText
 					anchors.centerIn: parent
-					color: statusRect.showPercentage
-							 ? Global.switches.switchStatusToColor(VenusOS.Switch_Status_On, true)
-							 : Global.switches.switchStatusToColor(switchData._status.value,true)
-					text: statusRect.showPercentage
-							? switchData._dimming.value + "%" :Global.switches.switchStatusToText(switchData._status.value)
+					color: Global.switches.switchStatusToColor(switchData._status.value,true)//Qt.colorEqual(statusRect.color,"WHITE") ? "BLACK": "WHITE"
+					text: Global.switches.switchStatusToText(switchData._status.value)
 				}
 			}
 		}
