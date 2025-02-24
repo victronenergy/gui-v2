@@ -20,6 +20,7 @@ AggregateDeviceModel {
 		Global.inverterChargers.acSystemDevices,
 		Global.inverterChargers.inverterDevices,
 		Global.inverterChargers.chargerDevices,
+		gpsDevices,
 		meteoDevices,
 		motorDriveDevices,
 		pulseMeterDevices,
@@ -34,6 +35,11 @@ AggregateDeviceModel {
 		heatPumpDevices
 
 	].concat(Global.tanks.allTankModels)
+
+	readonly property ServiceDeviceModel acLoadDevices: ServiceDeviceModel {
+		serviceType: "acload"
+		modelId: "acload"
+	}
 
 	readonly property ServiceDeviceModel batteryDevices: ServiceDeviceModel {
 		serviceType: "battery"
@@ -50,6 +56,11 @@ AggregateDeviceModel {
 		modelId: "digitalinput"
 	}
 
+	readonly property ServiceDeviceModel gpsDevices: ServiceDeviceModel {
+		serviceType: "gps"
+		modelId: "gps"
+	}
+
 	readonly property ServiceDeviceModel gridDevices: ServiceDeviceModel {
 		serviceType: "grid"
 		modelId: "grid"
@@ -58,11 +69,6 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel gensetDevices: ServiceDeviceModel {
 		serviceType: "genset"
 		modelId: "genset"
-	}
-
-	readonly property ServiceDeviceModel acLoadDevices: ServiceDeviceModel {
-		serviceType: "acload"
-		modelId: "acload"
 	}
 
 	readonly property ServiceDeviceModel heatPumpDevices: ServiceDeviceModel {

@@ -52,7 +52,7 @@ Page {
 			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
-				preferredVisible: hasBluetoothSupport.value
+				preferredVisible: !!hasBluetoothSupport.value
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 
 				VeQuickItem {
