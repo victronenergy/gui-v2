@@ -172,7 +172,14 @@ Page {
 			ListNavigation {
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
+				secondaryText: modbusServerEnabled.value ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": text}) // TODO - is this correct?
+
+				VeQuickItem {
+					id: modbusServerEnabled
+
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				}
 			}
 
 			SettingsListHeader {
