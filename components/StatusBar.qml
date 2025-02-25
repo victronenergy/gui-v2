@@ -8,11 +8,12 @@ import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-Rectangle {
+FocusScope {
 	id: root
 
 	required property PageStack pageStack
 	property string title
+	property alias backgroundColor: backgroundRect.color
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
@@ -28,6 +29,11 @@ Rectangle {
 	width: parent.width
 	height: Theme.geometry_statusBar_height
 	opacity: 0
+
+	Rectangle {
+		id: backgroundRect
+		anchors.fill: parent
+	}
 
 	SequentialAnimation {
 		running: !Global.splashScreenVisible && animationEnabled

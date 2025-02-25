@@ -6,12 +6,13 @@
 import QtQuick
 import Victron.VenusOS
 
-Rectangle {  // Use an opaque background so that page disappears behind nav bar when scrolled
+FocusScope {
 	id: root
 
 	required property var model
 	readonly property int currentIndex: _currentIndex
 	readonly property string activeButtonText: model ? model.get(currentIndex).navButtonText : ""
+	property alias backgroundColor: backgroundRect.color
 
 	// External components should not write to these properties.
 	property int _currentIndex
@@ -46,6 +47,12 @@ Rectangle {  // Use an opaque background so that page disappears behind nav bar 
 
 	width: parent.width
 	height: Theme.geometry_navigationBar_height
+
+	// Add an opaque background so that page disappears behind nav bar when scrolled
+	Rectangle {
+		id: backgroundRect
+		anchors.fill: parent
+	}
 
 	Row {
 		x: Theme.geometry_page_content_horizontalMargin
