@@ -7,6 +7,11 @@ import QtQuick
 import Victron.VenusOS
 
 Label {
+	// These mimic the same properties from ListItem, so that the item can be
+	// marked as hidden by VisibleItemModel.
+	readonly property bool effectiveVisible: preferredVisible
+	property bool preferredVisible: true
+
 	anchors {
 		left: parent ? parent.left : undefined
 		leftMargin: Theme.geometry_listItem_content_horizontalMargin
