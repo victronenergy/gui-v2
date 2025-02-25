@@ -8,6 +8,7 @@
 
 #include <private/qqmlobjectmodel_p.h>
 #include <qqmlintegration.h>
+#include <QQuickItem>
 
 class VisibleItemModelPrivate;
 
