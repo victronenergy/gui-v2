@@ -47,7 +47,7 @@ QtObject {
 			//% "Channel Tripped"
 			return qsTrId("Switches_Channel_Trippped")
 		case VenusOS.Switch_ModuleState_Connected:
-			return CommonWords.connected
+			return CommonWords.running_status
 		case VenusOS.Switch_ModuleState_Over_Temperature:
 			//% "Over temperature"
 			return qsTrId("Switches_Over_temperature")

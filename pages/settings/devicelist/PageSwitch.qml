@@ -65,9 +65,19 @@ Page {
 		model: ObjectModel {
 
 			ListText {
-				text: CommonWords.state
+				//% "Module state"
+				text: qsTrId("settings_module_state")
 				dataItem.uid: root.bindPrefix + "/State"
 				secondaryText: Global.switches.switchStatusToText(dataItem.value)
+			}
+			ListQuantity {
+				//% "Module Voltage"
+				text: qsTrId("settings_module_voltage")
+				dataItem.uid: root.bindPrefix + "/ModuleVoltage"
+				unit: VenusOS.Units_Volt_DC
+				precision: 1
+				valueColor: Theme.color_quantityTable_quantityValue
+				unitColor: Theme.color_quantityTable_quantityUnit
 			}
 			Column {
 				width: parent ? parent.width : 0
