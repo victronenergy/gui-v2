@@ -177,7 +177,7 @@ Item {
 				}
 				ColorAnimation {
 					target: statusBar
-					property: "color"
+					property: "backgroundColor"
 					from: root.backgroundColor
 					to: Theme.color_page_background
 					duration: Theme.animation_controlCards_slide_duration
@@ -222,7 +222,7 @@ Item {
 				}
 				ColorAnimation {
 					target: statusBar
-					property: "color"
+					property: "backgroundColor"
 					from: Theme.color_page_background
 					to: root.backgroundColor
 					duration: Theme.animation_controlCards_slide_duration
@@ -237,7 +237,7 @@ Item {
 
 		x: swipeViewLoader.x
 		y: root.height + 4  // nudge below the visible area for wasm
-		color: root.backgroundColor
+		backgroundColor: root.backgroundColor
 		opacity: 0
 		model: swipeView ? swipeView.contentModel : null
 
@@ -377,7 +377,7 @@ Item {
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
-		color: root.backgroundColor
+		backgroundColor: root.backgroundColor
 
 		onLeftButtonClicked: {
 			switch (leftButton) {
