@@ -80,8 +80,9 @@ Page {
 				dataItem.uid: root.pvInverter.serviceUid + "/Position"
 			}
 
-			ListText {
-				text: CommonWords.zero_feed_in_power_limit
+			ListQuantity {
+				text: CommonWords.dynamic_power_limit
+				unit: VenusOS.Units_Watt
 				dataItem.uid: root.pvInverter.serviceUid + "/Ac/PowerLimit"
 				preferredVisible: dataItem.isValid
 			}

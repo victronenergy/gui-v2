@@ -519,8 +519,8 @@ QtObject {
 	//% "Yield Today"
 	readonly property string yield_today: qsTrId("common_words_yield_today")
 
-	//% "Zero feed-in power limit"
-	readonly property string zero_feed_in_power_limit: qsTrId("common_words_zero_feed_in_power_limit")
+	//% "Dynamic power limit"
+	readonly property string dynamic_power_limit: qsTrId("common_words_dynamic_power_limit")
 
 	//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
 	readonly property string all_modifications_disabled: qsTrId("common_words_large_features_currently_disabled")
