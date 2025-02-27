@@ -84,7 +84,6 @@ FocusScope {
 		}
 	}
 
-
 	StatusBarButton {
 		id: leftButton
 
@@ -99,11 +98,12 @@ FocusScope {
 					   ? "qrc:/images/icon_controls_on_32.svg"
 					   : "qrc:/images/icon_back_32.svg"
 
-		enabled: !!Global.pageManager
-				&& Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				&& root.leftButton != VenusOS.StatusBar_LeftButton_None
+		enabled: root.leftButton != VenusOS.StatusBar_LeftButton_None
+		focus: enabled
 
 		onClicked: root.leftButtonClicked()
+
+		KeyNavigation.right: breadcrumbs
 	}
 
 	Breadcrumbs {
@@ -142,6 +142,8 @@ FocusScope {
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
+
+		KeyNavigation.right: alertButton.enabled ? alertButton : alarmButton
 	}
 
 
@@ -259,11 +261,13 @@ FocusScope {
 						  : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
 							? "qrc:/images/icon_refresh_32.svg"
 							: ""
-
+			KeyNavigation.left: alertButton.enabled ? alertButton : alarmButton
+			KeyNavigation.right: sleepButton
 			onClicked: root.rightButtonClicked()
 		}
 
 		StatusBarButton {
+			id: sleepButton
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
 			enabled: !!Global.pageManager

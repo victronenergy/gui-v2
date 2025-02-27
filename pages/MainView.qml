@@ -42,6 +42,10 @@ FocusScope {
 		}
 	}
 
+	readonly property Item _focusTarget: controlCardsLoader.enabled ? controlCardsLoader
+			: pageStack.depth > 0 && !pageStack.animating ? pageStack
+			: swipeViewAndNavBarContainer
+
 	function loadStartPage() {
 		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
 	}
@@ -81,6 +85,8 @@ FocusScope {
 	}
 
 	FocusScope {
+		id: swipeViewAndNavBarContainer
+
 		// Anchor this to the PageStack's left side, so that this view slides out of view when
 		// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
 		// itself is part of the stack.
@@ -90,7 +96,9 @@ FocusScope {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		focus: true
+		focus: root._focusTarget === swipeViewAndNavBarContainer
+
+		KeyNavigation.up: statusBar
 
 		Loader {
 			id: swipeViewLoader
@@ -115,6 +123,8 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
+			KeyNavigation.down: navBar
+
 			Component {
 				id: swipeViewComponent
 				SwipeView {
@@ -124,6 +134,7 @@ FocusScope {
 
 					onReadyChanged: if (ready) ready = true // remove binding
 					anchors.fill: parent
+					focus: true
 					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 					contentChildren: swipePageModel.children
 				}
@@ -149,6 +160,7 @@ FocusScope {
 			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
 			Component.onCompleted: pageManager.navBar = navBar
+			KeyNavigation.up: swipeViewLoader
 		}
 	}
 
@@ -163,17 +175,13 @@ FocusScope {
 		}
 		x: width
 		width: Theme.geometry_screen_width
+		focus: root._focusTarget === pageStack
+
+		KeyNavigation.up: statusBar
 	}
 
 	Loader {
 		id: controlCardsLoader
-
-		onActiveChanged: if (active) active = true // remove binding
-
-		opacity: 0.0
-		sourceComponent: ControlCardsPage { }
-		active: root.controlsActive
-		enabled: root.controlsActive || controlsOutAnimation.running
 
 		anchors {
 			top: statusBar.bottom
@@ -181,6 +189,16 @@ FocusScope {
 			right: parent.right
 			bottom: parent.bottom
 		}
+
+		opacity: 0.0
+		sourceComponent: ControlCardsPage { }
+		active: root.controlsActive
+		enabled: root.controlsActive || controlsOutAnimation.running
+		focus: root._focusTarget === controlCardsLoader
+
+		onActiveChanged: if (active) active = true // remove binding
+
+		KeyNavigation.up: statusBar
 
 		SequentialAnimation {
 			id: controlsInAnimation
@@ -267,6 +285,11 @@ FocusScope {
 					to: root.backgroundColor
 					duration: Theme.animation_controlCards_slide_duration
 					easing.type: Easing.InSine
+				}
+				PropertyAction {
+					target: statusBar
+					property: "focus"
+					value: true
 				}
 			}
 		}
@@ -413,6 +436,9 @@ FocusScope {
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
+		KeyNavigation.down: controlCardsLoader.enabled ? controlCardsLoader
+				: pageStack.depth > 0 ? pageStack
+				: swipeViewAndNavBarContainer
 	}
 
 	Loader {
