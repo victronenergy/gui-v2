@@ -735,6 +735,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/keyeventfilter.h
+    src/keyeventfilter.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h

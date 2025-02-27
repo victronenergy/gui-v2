@@ -69,8 +69,7 @@ Item {
 		anchors.fill: parent
 
 		onPressed: function(mouse) {
-			Global.applicationActive = true
-			appIdleTimer.restart()
+			Global.main.ensureApplicationActive()
 
 			if (Global.isGxDevice && !touchEnabled.value) {
 				//% "Touch input disabled"
@@ -81,24 +80,18 @@ Item {
 
 			// block touch during navigation bar fadeout
 			mouse.accepted = mainView.navBarAnimatingOut
-			if (pageManager.idleModeTimer.running) {
-				pageManager.idleModeTimer.restart()
-			}
-			if (pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle) {
+
+			// Exit idle mode if needed, and consume the event so that this does not trigger a press
+			// event on the page in the process of exiting idle mode.
+			if (pageManager.ensureInteractive()) {
 				mouse.accepted = true
-				pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 			}
+
+			// Consume the event if the press event closes the VKB.
 			if (keyboardHandlerLoader.item && keyboardHandlerLoader.item.acceptMouseEvent(idleModeMouseArea, mouse.x, mouse.y)) {
 				mouse.accepted = true
 			}
 		}
-	}
-
-	Timer {
-		id: appIdleTimer
-		running: true
-		interval: 60000
-		onTriggered: Global.applicationActive = false
 	}
 
 	// We rely on the implicit Z ordering, so dialog/notification layers be declared after the other views.
@@ -154,5 +147,19 @@ Item {
 		repeat: true
 		interval: 1000
 		onTriggered: BackendConnection.hitWatchdog()
+	}
+
+	KeyEventFilter {
+		// When the UI is inactive, consume key events so that they are not processed by the UI.
+		consumeKeyEvents: !Global.applicationActive
+			|| (pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
+				&& pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
+		window: root.Window.window
+
+		onKeyPressed: {
+			// When any key is pressed, bring the application out of inactive mode.
+			Global.main.ensureApplicationActive()
+			pageManager.ensureInteractive()
+		}
 	}
 }
