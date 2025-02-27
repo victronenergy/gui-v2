@@ -20,6 +20,7 @@ QtObject {
 			//% "Output fault"
 			return qsTrId("Switch_Output_Fault")
 		case VenusOS.Switch_Status_Disabled:
+		case VenusOS.Switch_Status_TripLowVoltage:
 			return CommonWords.disabled
 		case VenusOS.Switch_Status_Powered:
 			//% "Powered"
@@ -72,12 +73,9 @@ QtObject {
 		switch (val) {
 		//channel status
 
-
-		case VenusOS.Switch_Status_Disabled:
 		case VenusOS.Switch_Status_Off:
 			if (text) return "WHITE"
 			else return "GREY"
-
 
 		case VenusOS.Switch_Status_Powered:
 		case VenusOS.Switch_Status_On:
@@ -88,6 +86,8 @@ QtObject {
 			if (text) return switchYellowText
 				else return switchYellowStatus
 
+		case VenusOS.Switch_Status_Disabled:
+		case VenusOS.Switch_Status_TripLowVoltage:
 		case VenusOS.Switch_Status_Over_Temperature:
 		case VenusOS.Switch_Status_Short_Fault:
 		case VenusOS.Switch_Status_Tripped:

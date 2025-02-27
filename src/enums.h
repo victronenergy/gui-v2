@@ -467,7 +467,8 @@ public:
 		Switch_Status_Output_Fault =0x08,
 		Switch_Status_On = 0x09,  //inputActive + active
 		Switch_Status_Short_Fault = 0x10,
-		Switch_Status_Disabled = 0x20
+		Switch_Status_Disabled = 0x20,
+		Switch_Status_TripLowVoltage = 0x22
 	};
 	Q_ENUM(Switch_Status)
 

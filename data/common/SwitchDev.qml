@@ -18,8 +18,9 @@ Device {
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: switchDev.serviceUid + "/State"
 	}
-	property VeQItemTableModel channels: VeQItemTableModel {
-		uids:  switchDev.serviceUid + "/Channel"
+	property VeQItemTableModel switchableOutputs
+	: VeQItemTableModel {
+		uids:  switchDev.serviceUid + "/SwitchableOutput"
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 

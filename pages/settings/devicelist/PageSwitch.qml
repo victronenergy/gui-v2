@@ -11,13 +11,14 @@ Page {
 	id: root
 	property SwitchDev device
 	readonly property string bindPrefix: device.serviceUid
+	readonly property string bindPrefixSwitches:bindPrefix + "/SwitchableOutput"
 	property int currentChannel
 	title: device.name
 
 
 	property Instantiator channelsModel:Instantiator{
 		model: VeQItemTableModel {
-			uids:  bindPrefix + "/Channel"
+			uids: bindPrefixSwitches
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		delegate: QtObject {
@@ -29,7 +30,7 @@ Page {
 			//property string groupText: groupNameItem.value.length>18 ? groupNameItem.value.substring(0,15)+"...": groupNameItem.value!=="" ? groupNameItem.value : "--"
 
 			property VeQuickItem functionItem: VeQuickItem {
-				uid: model.uid + "/Function"
+				uid: model.uid + "/Settings/Type"
 				property string statusText: Global.switches.switchFunctionToText(value, (value === VenusOS.Switch_Function_Slave ) ? index : null)
 				onIsValidChanged:{
 					if (!isValid) Global.pageManager.popAllPages()
@@ -46,15 +47,15 @@ Page {
 				uid: model.uid + "/Dimming"
 			}
 			property VeQuickItem customNameItem: VeQuickItem {
-				uid: model.uid + "/CustomName"
+				uid: model.uid + "/Settings/CustomName"
 				property string shortText: isValid ? value.length > 25 ? value.substring(0,25)  + "...": value : ""
 			}
 			property VeQuickItem fuseItem: VeQuickItem {
-				uid: model.uid + "/FuseRating"
+				uid: model.uid + "/Settings/FuseRating"
 
 			}
 			property VeQuickItem groupNameItem: VeQuickItem {
-				uid: model.uid + "/GroupName"
+				uid: model.uid + "/Settings/Group"
 				property string shortText: isValid ? value.length > 18 ? value.substring(0,15)+"...": value : "--"
 			}
 		}
@@ -82,28 +83,23 @@ Page {
 			Column {
 				width: parent ? parent.width : 0
 
-				VeQuickItem {
-					id: nrOfOutputs
-					uid: root.bindPrefix + "/NrOfChannels"
-				}
-
 				Repeater {
 					model: channelsModel.count
 					delegate: ListQuantityGroup {
 						property QtObject info: channelsModel.objectAt(index)
+						property QuantityObjectModel quantityModel: QuantityObjectModel {
+							filterType: QuantityObjectModel.HasValue
+							QuantityObject { object: info.currentItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
+							QuantityObject { object: info; key: "combinedStatus" }
+							QuantityObject { object: info.functionItem; key: "statusText" }
+						}
+						property QuantityObjectModel baseQuantityModel: QuantityObjectModel {
+							filterType: QuantityObjectModel.HasValue
+							QuantityObject { object: info; key: "combinedStatus" }
+							QuantityObject { object: info.functionItem; key: "statusText" }
+						}
 						text: info.name
-						textModel:info.currentItem.isValid
-								   ?[
-										{ value: info.currentItem.value, unit: VenusOS.Units_Amp },
-										{ value: info.combinedStatus},
-										{ value: info.functionItem.statusText},
-									]
-									:[
-										//% "%1 of Ch %2"
-										{ value: info.combinedStatus},
-										{ value: info.functionItem.statusText},
-									]
-
+						model: info.currentItem.isValid ? quantityModel : baseQuantityModel
 					}
 				}
 			}
@@ -136,7 +132,7 @@ Page {
 					ListTextField {
 						//% "Name"
 						text: qsTrId("settings_deviceinfo_name")
-						dataItem.uid: root.bindPrefix + "/CustomName"
+						dataItem.uid: root.bindPrefix + "/Settings/CustomName"
 						dataItem.invalidate: false
 						textField.maximumLength: 32
 						preferredVisible : dataItem.isValid
@@ -151,23 +147,25 @@ Page {
 								id: listQuantityNavigation
 								property QtObject info: channelsModel.objectAt(index)
 								text: info.name
-								down: pressArea.containsPress
+								//down: pressArea.containsPress
 								enabled: userHasReadAccess
 								content.children: [
 									QuantityRow {
 										id: quantityRow
+										property QuantityObjectModel quantityModel: QuantityObjectModel {
+											filterType: QuantityObjectModel.HasValue
+											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
+											QuantityObject { object: info.functionItem; key: "statusText" }
+											QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
+										}
+										property QuantityObjectModel baseQuantityModel: QuantityObjectModel {
+											filterType: QuantityObjectModel.HasValue
+											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
+											QuantityObject { object: info.functionItem; key: "statusText" }
+										}
 										anchors.verticalCenter: parent.verticalCenter
 										width: Math.min(implicitWidth, listQuantityNavigation.maximumContentWidth - icon.width - parent.spacing)
-										model: info.fuseItem.isValid ? [
-											{ value: info.groupNameItem.shortText},
-											{ value: info.functionItem.statusText},
-											{ value: info.fuseItem.value, unit: VenusOS.Units_Amp }
-										]
-										:[
-											{ value: info.groupNameItem.shortText},
-											{ value: info.functionItem.statusText}
-										]
-
+										model: info.fuseItem.isValid ? 	quantityModel :	baseQuantityModel
 									},
 
 									CP.ColorImage {
@@ -209,7 +207,7 @@ Page {
 			title: device.name
 			VeQuickItem {
 				id: validFunctionsItem
-				uid: root.bindPrefix + "/Channel/%1/ValidFunctions".arg(root.currentChannel)
+				uid: root.bindPrefixSwitches + "/%1/Settings/ValidTypes".arg(root.currentChannel)
 				property var options: null
 				onValueChanged:{
 					var op = [];
@@ -224,7 +222,7 @@ Page {
 					ListTextField {
 						//% "Name"
 						text: qsTrId("settings_deviceinfo_name")
-						dataItem.uid: root.bindPrefix + "/Channel/%1/CustomName".arg(root.currentChannel)
+						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/CustomName".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
 						preferredVisible : dataItem.isValid
@@ -233,17 +231,17 @@ Page {
 					ListTextField {
 						//% "Group"
 						text: qsTrId("settings_deviceinfo_group")
-						dataItem.uid: root.bindPrefix + "/Channel/%1/GroupName".arg(root.currentChannel)
+						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/Group".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
 						preferredVisible : dataItem.isValid
-						placeholderText: "Group name" // CommonWords.group_name
+						placeholderText: qsTrId("settings_deviceinfo_group")
 					}
 					ListRadioButtonGroup {
 						//% "Channel Function "
 						id:channelFunction
-						text: qsTrId("Function")
-						dataItem.uid: root.bindPrefix + "/Channel/%1/Function".arg(root.currentChannel)
+						text: qsTrId("Type")
+						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/Type".arg(root.currentChannel)
 						enabled: userHasWriteAccess
 						preferredVisible : dataItem.isValid
 						optionModel: validFunctionsItem.options
@@ -256,7 +254,7 @@ Page {
 						preferredVisible : dataItem.isValid
 						unit: VenusOS.Units_Amp
 						decimals: 1
-						dataItem.uid: root.bindPrefix + "/Channel/%1/FuseRating".arg(root.currentChannel)
+						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/FuseRating".arg(root.currentChannel)
 
 						Timer {
 							id: validationTimer

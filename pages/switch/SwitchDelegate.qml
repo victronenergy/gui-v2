@@ -27,12 +27,12 @@ Item {
 		readonly property VeQuickItem _status: VeQuickItem {
 			uid: serviceUid + "/Status"
 		}
-		readonly property VeQuickItem _customName: VeQuickItem {
-			uid: serviceUid + "/CustomName"
-			property bool valueValid: isValid &&  value!==""
-		}
-		readonly property VeQuickItem _function: VeQuickItem {
-			uid: serviceUid + "/Function"
+//		readonly property VeQuickItem _customName: VeQuickItem {
+//			uid: serviceUid + "Settings/CustomName"
+//			property bool valueValid: isValid &&  value!==""
+//		}
+		readonly property VeQuickItem _type: VeQuickItem {
+			uid: serviceUid + "/Settings/Type"
 		}
 
 		readonly property VeQuickItem _state: VeQuickItem {
@@ -70,7 +70,7 @@ Item {
 				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
 					|| (switchData._status.value === VenusOS.Switch_Status_On)
 					|| (switchData._status.value === VenusOS.Switch_Status_Powered)
-					|| ((switchData._status.value === VenusOS.Switch_Status_Output_Fault) && (switchData._function.value === VenusOS.Switch_Function_Dimmable)))
+					|| ((switchData._status.value === VenusOS.Switch_Status_Output_Fault) && (switchData._type.value === VenusOS.Switch_Function_Dimmable)))
 				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
 				height: 25
 				radius: height/2
@@ -99,7 +99,7 @@ Item {
 				id: dimmingSwitch
 				grooveColor: backColor
 				highlightColor: switchData._state.value ? highLightColor : disabledColor
-				visible: switchData._function.isValid && (switchData._function.value == 2)
+				visible: switchData._type.isValid && (switchData._type.value == 2)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				radius: parent.radius
@@ -129,7 +129,7 @@ Item {
 			}
 			Rectangle{
 				id: momentarySwitch
-				visible: switchData._function.isValid && switchData._function.value == 0
+				visible: switchData._type.isValid && switchData._type.value == 0
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				radius: parent.radius
@@ -156,7 +156,7 @@ Item {
 
 			Item{
 				id: latchingSwitch
-				visible: !switchData._function.isValid || (switchData._function.isValid && switchData._function.value == 1)
+				visible: !switchData._type.isValid || (switchData._type.isValid && switchData._type.value == 1)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				width: parent.width - root.controlBorderWidth * 2

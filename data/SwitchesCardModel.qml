@@ -33,7 +33,7 @@ ListModel {
 					}
 				}
 
-				model: switchDevDelegate.device ? switchDevDelegate.device.channels : 0
+				model: switchDevDelegate.device ? switchDevDelegate.device.switchableOutputs : 0
 				delegate: QtObject {
 					property var _store: null  //holds the current group this switch object is in
 					readonly property string switchuid: model.uid
@@ -52,7 +52,7 @@ ListModel {
 						}
 					}
 					readonly property VeQuickItem _groupName: VeQuickItem {
-						uid: model.uid + "/GroupName"
+						uid: model.uid + "/Settings/Group"
 						property bool valueValid: isValid &&  value!==""
 					}
 					onGroupNameChanged: {
@@ -61,12 +61,12 @@ ListModel {
 						}
 					}
 					readonly property VeQuickItem _customName: VeQuickItem {
-						uid: model.uid + "/CustomName"
+						uid: model.uid + "/Settings/CustomName"
 						property bool valueValid: isValid &&  value!==""
 					}
 
-					readonly property VeQuickItem _Function: VeQuickItem {
-						uid: model.uid + "/Function"
+					readonly property VeQuickItem _Type: VeQuickItem {
+						uid: model.uid + "/Settings/Type"
 						property bool valueValid: isValid &&  ((value==VenusOS.Switch_Function_Momentary)
 													|| (value==VenusOS.Switch_Function_Latching)
 													|| (value==VenusOS.Switch_Function_Dimmable))
@@ -83,7 +83,7 @@ ListModel {
 					}
 
 					Component.onCompleted: {
-						if (_Function.valueValid){
+						if (_Type.valueValid){
 							_store = updateList(switchuid, groupName, groupName, name )
 						}
 					}
