@@ -82,10 +82,25 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
-		// TODO remove this when Access & Security page manages its own key events.
-		// Ideally each item would use focus handling to get its own key events, but in wasm the
-		// pagestack's pages do not reliably receive key events even when focused.
 		Keys.onPressed: function(event) {
+			// When a navigation key is pressed and it is not handled by an item higher up in the
+			// UI item hierarchy, enable key navigation to allow guiLoader to get focus and receive
+			// key events.
+			if (!Global.keyNavigationEnabled) {
+				switch (event.key) {
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+				case Qt.Key_Tab:
+				case Qt.Key_Backtab:
+					Global.keyNavigationEnabled = true
+					event.accepted = true
+					return
+				}
+			}
+
+			// TODO remove this when Access & Security page manages its own key events.
 			Global.keyPressed(event)
 			event.accepted = false
 		}
@@ -94,6 +109,7 @@ Window {
 	Loader {
 		id: guiLoader
 
+		focus: Global.keyNavigationEnabled
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
@@ -110,6 +126,7 @@ Window {
 		active: Global.dataManagerLoaded
 		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent
+			focus: true
 		}
 	}
 
@@ -140,6 +157,7 @@ Window {
 		interval: 60000
 		onTriggered: {
 			Global.applicationActive = false
+			Global.keyNavigationEnabled = false
 		}
 	}
 

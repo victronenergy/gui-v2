@@ -30,6 +30,8 @@
     "color_background_secondary": "color_gray1",
     "color_background_disabled": "color_gray2",
 
+    "color_focus_highlight": "color_green",
+
     "color_button": "color_blue",
     "color_button_down": "color_darkishBlue",
     "color_button_down_text": "color_white",

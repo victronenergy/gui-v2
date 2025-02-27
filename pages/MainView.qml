@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
@@ -92,6 +92,7 @@ Item {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
+		focus: true
 
 		Loader {
 			id: swipeViewLoader
@@ -146,6 +147,9 @@ Item {
 			backgroundColor: root.backgroundColor
 			opacity: 0
 			model: swipeView ? swipeView.contentModel : null
+
+			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
+			focus: true
 
 			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
