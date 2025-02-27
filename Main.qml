@@ -88,7 +88,7 @@ Window {
 	Loader {
 		id: guiLoader
 
-		clip: Qt.platform.os == "wasm"
+		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
 		anchors.horizontalCenter: parent.horizontalCenter
