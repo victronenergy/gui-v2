@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -19,7 +19,11 @@ SwipeViewPage {
 	GradientListView {
 		id: notificationsView
 
-		// Header contains the top list of active and/or unacknowledged notifications.
+		// prevent the nav bar buttons from clicking the notifications when it is shown
+		// over the top of the notificationsView
+		clip: true
+
+		// Header contains the top list of active and/or unsilenced notifications.
 		header: Item {
 			id: headerItem
 
@@ -88,22 +92,18 @@ SwipeViewPage {
 				width: parent.width
 				interactive: false  // this list cannot be scrolled separately to the main list
 				spacing: Theme.geometry_gradientList_spacing
-				model: Global.notifications.activeModel
+				model: Global.notifications.unsilencedModel
 				delegate: NotificationDelegate {
 					id: activeDelegate
 
-					// When the delegate is clicked, acknowledge it.
+					// When the delegate is clicked, silence it.
 					PressArea {
 						anchors.fill: parent
-						enabled: !activeDelegate.notification.acknowledged
+						enabled: !activeDelegate.silenced
 						radius: activeDelegate.radius
-
-						onReleased: {
-							activeDelegate.notification.setAcknowledged(true)
-							if (activeDelegate.notification.active) {
-								activeDelegate.color = Theme.color_background_secondary
-							}
-						}
+						// we have access to the BaseNotification via the notification role
+						// but it needs to be "as" Notification for us to be able to call updateSilenced()
+						onReleased: (activeDelegate.notification as Notification)?.updateSilenced(true)
 					}
 				}
 			}
@@ -155,8 +155,8 @@ SwipeViewPage {
 			}
 		}
 
-		// Main list contains the historical notifications (inactive and acknowledged).
-		model: Global.notifications.historicalModel
+		// Main list contains the historical notifications (inactive and silenced).
+		model: Global.notifications.silencedModel
 		spacing: Theme.geometry_gradientList_spacing
 		delegate: NotificationDelegate {}
 	}
