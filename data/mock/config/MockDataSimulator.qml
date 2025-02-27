@@ -70,13 +70,6 @@ QtObject {
 
 	function keyPressed(event) {
 		switch (event.key) {
-		case Qt.Key_Escape:
-			if (Global.mainView.controlsActive) {
-				Global.mainView.controlsActive = false
-			} else {
-				Global.pageManager.popPage()
-			}
-			break
 		case Qt.Key_1:
 		case Qt.Key_2:
 		case Qt.Key_3:

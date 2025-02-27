@@ -57,6 +57,17 @@ FocusScope {
 		swipeViewLoader.active = true
 	}
 
+	Keys.onEscapePressed: (event) => {
+		if (controlsActive) {
+			controlsActive = false
+			return
+		} else if (pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+
 	// Revert to the start page when the application is inactive.
 	Timer {
 		running: !!Global.systemSettings
@@ -87,6 +98,8 @@ FocusScope {
 
 		KeyNavigation.up: statusBar
 
+		objectName: "Main focus scope"
+
 		FocusScope {
 			// Anchor this to the PageStack's left side, so that this view slides out of view when
 			// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
@@ -99,7 +112,13 @@ FocusScope {
 			width: Theme.geometry_screen_width
 			focus: !pageStack.focus && !controlCardsLoader.focus
 
+			objectName: "Swipe + NavBar focus scope"
+
+
 			Loader {
+
+				objectName: "SwipeView loader"
+
 				id: swipeViewLoader
 				anchors {
 					top: parent.top
@@ -179,6 +198,8 @@ FocusScope {
 
 		Loader {
 			id: controlCardsLoader
+
+			objectName: "ControlCards Loader"
 
 			y: statusBar.height
 			width: parent.width

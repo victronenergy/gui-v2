@@ -21,4 +21,5 @@ Label {
 	font.pixelSize: Theme.font_size_body1
 	wrapMode: Text.Wrap
 	color: Theme.color_font_secondary
+	enabled: false  // Don't allow key navigation to land on this item.
 }

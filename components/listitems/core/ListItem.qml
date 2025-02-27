@@ -46,7 +46,7 @@ import Victron.VenusOS
 		The  ListPressArea press effect DOES NOT occur
 */
 
-Item {
+FocusScope {
 	id: root
 
 	property alias text: primaryLabel.text
@@ -88,6 +88,9 @@ Item {
 	visible: effectiveVisible
 	implicitHeight: effectiveVisible ? contentLayout.height : 0
 	implicitWidth: parent ? parent.width : 0
+	focus: true
+
+	Keys.onSpacePressed: clicked()
 
 	ListItemBackground {
 		id: backgroundRect
@@ -198,5 +201,10 @@ Item {
 				text: root.caption
 			}
 		}
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }

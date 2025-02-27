@@ -344,3 +344,17 @@ function toHexFormat(n) {
 function validationResult(status, notificationText = "", adjustedText = undefined) {
 	return { status: status, notificationText: notificationText, adjustedText: adjustedText }
 }
+
+function findParentPage(item) {
+	if (!item) {
+		return null
+	}
+	let parent = item.parent
+	while (!!parent) {
+		if (parent.__is_venus_gui_page__ === true) {
+			return parent
+		}
+		parent = item.parent
+	}
+	return null
+}
