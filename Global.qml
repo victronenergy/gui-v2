@@ -18,6 +18,7 @@ QtObject {
 	property var firmwareUpdate
 	property var allDevicesModel
 	property bool applicationActive: true
+	property bool keyNavigationEnabled
 
 	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
 		&& (Qt.platform.os !== "wasm"

@@ -23,6 +23,7 @@ Window {
 	property bool isDesktop: false
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
+	onActiveFocusItemChanged: console.log("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
 
 	function skipSplashScreen() {
 		Global.splashScreenVisible = false
@@ -77,10 +78,23 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
-		// TODO remove this when Access & Security page manages its own key events.
-		// Ideally each item would use focus handling to get its own key events, but in wasm the
-		// pagestack's pages do not reliably receive key events even when focused.
 		Keys.onPressed: function(event) {
+			if (!Global.keyNavigationEnabled) {
+				// When a navigation key is pressed, give focus to enable key navigation.
+				switch (event.key) {
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+				case Qt.Key_Tab:
+				case Qt.Key_Backtab:
+					Global.keyNavigationEnabled = true
+					event.accepted = true
+					return
+				}
+			}
+
+			// TODO remove this when Access & Security page manages its own key events.
 			Global.keyPressed(event)
 			event.accepted = false
 		}
@@ -89,6 +103,7 @@ Window {
 	Loader {
 		id: guiLoader
 
+		focus: Global.keyNavigationEnabled
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
