@@ -74,7 +74,7 @@
             // If mqtt param is set: use the provided MQTT address
             // If id/shard params are set: gui-v2 will use VRM
             // If none of these are set, will use a default MQTT address.
-            const needDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
+            const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
 
             try {
                 showUi(spinner);
