@@ -42,6 +42,10 @@ FocusScope {
 		}
 	}
 
+	readonly property Item _focusTarget: cardsLoader.enabled ? cardsLoader
+			: pageStack.depth > 0 && !pageStack.animating ? pageStack
+			: swipeViewAndNavBarContainer
+
 	function loadStartPage() {
 		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
 	}
@@ -57,6 +61,27 @@ FocusScope {
 		console.warn("Data sources ready, loading pages")
 		swipeViewLoader.active = true
 	}
+
+	Keys.onEscapePressed: (event) => {
+		if (Global.notificationLayer.deleteLastNotification()) {
+			return
+		} else if (cardsActive) {
+			cardsActive = false
+			return
+		} else if (pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+	Keys.onLeftPressed: (event) => {
+		if (pageStack.activeFocus && pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+	Keys.enabled: Global.keyNavigationEnabled
 
 	// Revert to the start page when the application has been inactive for the period of time
 	// specified by the startPageTimeout.
@@ -83,6 +108,8 @@ FocusScope {
 	}
 
 	FocusScope {
+		id: swipeViewAndNavBarContainer
+
 		// Anchor this to the PageStack's left side, so that this view slides out of view when
 		// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
 		// itself is part of the stack.
@@ -92,7 +119,9 @@ FocusScope {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		focus: true
+		focus: root._focusTarget === swipeViewAndNavBarContainer
+
+		KeyNavigation.up: statusBar
 
 		Loader {
 			id: swipeViewLoader
@@ -120,6 +149,8 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
+			KeyNavigation.down: navBar
+
 			Component {
 				id: swipeViewComponent
 				SwipeView {
@@ -129,6 +160,7 @@ FocusScope {
 
 					onReadyChanged: if (ready) ready = true // remove binding
 					anchors.fill: parent
+					focus: true
 					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 					contentChildren: swipePageModel.children
 				}
@@ -154,6 +186,7 @@ FocusScope {
 			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
 			Component.onCompleted: pageManager.navBar = navBar
+			KeyNavigation.up: swipeViewLoader
 		}
 	}
 
@@ -168,6 +201,9 @@ FocusScope {
 		}
 		x: width
 		width: Theme.geometry_screen_width
+		focus: root._focusTarget === pageStack
+
+		KeyNavigation.up: statusBar
 	}
 
 	CardViewLoader {
@@ -184,6 +220,8 @@ FocusScope {
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		viewActive: root.cardsActive
+		focus: root._focusTarget === cardsLoader
+		KeyNavigation.up: statusBar
 
 		Component {
 			id: controlCardsComponent
@@ -347,6 +385,9 @@ FocusScope {
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
+		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
+				: pageStack.depth > 0 ? pageStack
+				: swipeViewAndNavBarContainer
 	}
 
 	Loader {

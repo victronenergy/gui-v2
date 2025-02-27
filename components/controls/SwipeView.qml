@@ -41,6 +41,7 @@ T.SwipeView {
 		onCurrentIndexChanged: scrollingTimer.restart()	// 'listView.moving' stays false when we are moving to a different page due to clicking on the nav bar.
 														// The scrolling timer is needed to tell us when the listView is in motion due to a nav bar click.
 		focus: control.focus
+		keyNavigationEnabled: false
 
 		spacing: control.spacing
 		orientation: control.orientation

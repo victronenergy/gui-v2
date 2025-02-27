@@ -72,13 +72,6 @@ QtObject {
 
 	function keyPressed(event) {
 		switch (event.key) {
-		case Qt.Key_Escape:
-			if (Global.mainView.cardsActive) {
-				Global.mainView.cardsActive = false
-			} else {
-				Global.pageManager.popPage()
-			}
-			break
 		case Qt.Key_1:
 		case Qt.Key_2:
 		case Qt.Key_3:
@@ -90,14 +83,12 @@ QtObject {
 				event.accepted = true
 			}
 			break
-		case Qt.Key_Left: // fall through
 		case Qt.Key_Comma:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
-		case Qt.Key_Right: // fall through
 		case Qt.Key_Period:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()

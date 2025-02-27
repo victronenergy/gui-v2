@@ -13,7 +13,7 @@ C.StackView {
 	property var pageUrls: []
 	property Page _poppedPage
 
-	readonly property bool _busy: busy || fakePushAnimation.running || fakePopAnimation.running
+	readonly property bool animating: busy || fakePushAnimation.running || fakePopAnimation.running
 	property bool swipeViewVisible: true
 
 	// Slide new drill-down pages in from the right
@@ -67,7 +67,7 @@ C.StackView {
 		target: !!Global.pageManager ? Global.pageManager.emitter : null
 
 		function onPagePushRequested(obj, properties, operation) {
-			if (root._busy) {
+			if (root.animating) {
 				return
 			}
 
@@ -103,7 +103,7 @@ C.StackView {
 		}
 
 		function onPagePopRequested(toPage, operation) {
-			if (root._busy
+			if (root.animating
 					|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
 				return
 			}

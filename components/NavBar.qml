@@ -81,6 +81,8 @@ FocusScope {
 				focus: model.index === root.currentIndex
 				onClicked: root._currentIndex = model.index
 
+				KeyNavigation.right: buttonRepeater.itemAt((model.index + 1) % buttonRepeater.count)
+
 				Loader {
 					z: 1 // to get it on top of the IconLabel
 					anchors {
