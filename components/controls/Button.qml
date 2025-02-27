@@ -69,4 +69,10 @@ CT.Button {
 		font: root.font
 		color: root.color
 	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
+	}
+
 }

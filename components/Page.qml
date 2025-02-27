@@ -27,4 +27,5 @@ FocusScope {
 
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_screen_height
+	focus: isCurrentPage
 }

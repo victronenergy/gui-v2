@@ -52,8 +52,8 @@ FocusScope {
 
 	component StatusBarButton : Button {
 		radius: 0
-		width: parent.height
-		height: parent.height
+		width: Theme.geometry_statusBar_button_height
+		height: Theme.geometry_statusBar_button_height
 		backgroundColor: "transparent"  // don't show background when disabled
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
