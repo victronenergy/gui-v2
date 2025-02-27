@@ -100,6 +100,7 @@ FocusScope {
 		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
+		KeyNavigation.right: auxButton
 	}
 
 	StatusBarButton {
@@ -112,12 +113,9 @@ FocusScope {
 		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
 		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
 
-		PressArea {
-			anchors.fill: parent
-			onClicked: root.auxButtonClicked()
-		}
+		onClicked: root.auxButtonClicked()
+		KeyNavigation.right: breadcrumbs
 	}
-
 
 	Breadcrumbs {
 		id: breadcrumbs
@@ -155,6 +153,8 @@ FocusScope {
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
+
+		KeyNavigation.right: alarmButton
 	}
 
 	Label {
@@ -241,6 +241,8 @@ FocusScope {
 		}
 		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
 		backgroundColor: Theme.color_critical_background
+		downColor: Theme.color_critical
+		highlightMargins: -(4 * Theme.geometry_button_border_width) // ensure highlight border can be seen against critical backgroundColor
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 
 		//% "Silence alarm"
@@ -259,6 +261,7 @@ FocusScope {
 		}
 
 		StatusBarButton {
+			id: rightButton
 			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
 
@@ -272,15 +275,36 @@ FocusScope {
 							   ? "qrc:/images/icon_refresh_32.svg"
 							   : ""
 
+			KeyNavigation.left: alarmButton
+			KeyNavigation.right: sleepButton
 			onClicked: root.rightButtonClicked()
 		}
 
 		StatusBarButton {
+			id: sleepButton
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
-			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
-			enabled: !!Global.pageManager
-					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			visible: enabled
+			enabled: Global.screenBlanker?.supported
+					&& Global.screenBlanker?.enabled
+					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			onClicked: Global.screenBlanker.setDisplayOff()
+		}
+	}
+
+	// The status bar should never become the focused item; if it does, it means there was no
+	// previously focused item, or the last focused status bar button has been disabled. So, look
+	// for the first available button and focus that instead.
+	Connections {
+		target: Global.main
+		function onActiveFocusItemChanged() {
+			if (Global.main.activeFocusItem === root) {
+				for (const button of [leftButton, auxButton, breadcrumbs, alarmButton, rightButton, sleepButton]) {
+					if (button.enabled) {
+						button.focus = true
+						break
+					}
+				}
+			}
 		}
 	}
 }

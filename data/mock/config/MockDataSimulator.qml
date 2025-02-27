@@ -88,14 +88,12 @@ QtObject {
 				event.accepted = true
 			}
 			break
-		case Qt.Key_Left: // fall through
 		case Qt.Key_Comma:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
-		case Qt.Key_Right: // fall through
 		case Qt.Key_Period:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()
