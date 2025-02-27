@@ -45,6 +45,11 @@ Window {
 		console.warn("Rebuilding complete")
 	}
 
+	function ensureApplicationActive() {
+		Global.applicationActive = true
+		appIdleTimer.restart()
+	}
+
 	Component.onCompleted: Global.main = root
 
 	Loader {
@@ -77,6 +82,7 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
+		// TODO remove this when Access & Security page manages its own key events.
 		// Ideally each item would use focus handling to get its own key events, but in wasm the
 		// pagestack's pages do not reliably receive key events even when focused.
 		Keys.onPressed: function(event) {
@@ -125,6 +131,15 @@ Window {
 		active: Global.splashScreenVisible
 		sourceComponent: SplashView {
 			anchors.centerIn: parent
+		}
+	}
+
+	Timer {
+		id: appIdleTimer
+		running: !Global.splashScreenVisible
+		interval: 60000
+		onTriggered: {
+			Global.applicationActive = false
 		}
 	}
 
