@@ -69,12 +69,20 @@
                 ui.style.display = 'block';
             }
 
+            const searchParams = new URLSearchParams(window.location.search);
+
+            // If mqtt param is set: use the provided MQTT address
+            // If id/shard params are set: gui-v2 will use VRM
+            // If none of these are set, will use a default MQTT address.
+            const needDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
+
             try {
                 showUi(spinner);
                 status.innerHTML = 'Loading...';
 
+                let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
                 const instance = await qtLoad({
-                    arguments: ['--mqtt', (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'], // delete this line to run wasm builds on the desktop
+                    arguments: needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [],
                     qt: {
                         onLoaded: () => showUi(screen),
                         onExit: exitData =>
