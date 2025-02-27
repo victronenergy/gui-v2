@@ -8,7 +8,7 @@ import QtQuick.Window
 import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias mainView: mainView
@@ -27,6 +27,8 @@ Item {
 		appIdleTimer.restart()
 	}
 
+	focus: true
+
 	PageManager {
 		id: pageManager
 		Component.onCompleted: Global.pageManager = pageManager
@@ -36,6 +38,7 @@ Item {
 		id: mainView
 		anchors.fill: parent
 		pageManager: pageManager
+		focus: true
 		Component.onCompleted: Global.mainView = mainView
 	}
 
