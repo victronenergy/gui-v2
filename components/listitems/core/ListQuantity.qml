@@ -13,7 +13,7 @@ ListItem {
 	property alias value: quantityLabel.value
 	property alias unit: quantityLabel.unit
 	property alias precision: quantityLabel.precision
-	property alias 	valueColor: quantityLabel.valueColor
+	property alias valueColor: quantityLabel.valueColor
 	property alias unitColor: quantityLabel.unitColor
 
 	content.children: [
