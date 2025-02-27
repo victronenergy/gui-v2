@@ -81,6 +81,10 @@ QtObject {
 				uid: pvInverter.serviceUid + "/Role"
 			}
 
+			readonly property VeQuickItem _dataManagerVersion: VeQuickItem {
+				uid: pvInverter.serviceUid + "/DataManagerVersion"
+			}
+
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("My PV Inverter " + deviceInstance)
@@ -88,6 +92,9 @@ QtObject {
 				_productId.setValue(45058) // dummy value so that ProductId is not invalid, so PageAcIn.qml will show some content
 				_allowedRoles.setValue(Global.acInputs.roles.map((roleInfo) => { return roleInfo.role }))
 				_role.setValue("pvinverter")
+				if (deviceInstance % 2 == 0) {
+					_dataManagerVersion.setValue("5.0")
+				}
 				Global.mockDataSimulator.setMockValue(serviceUid + "/Connected", 1)
 			}
 		}

@@ -155,7 +155,7 @@ VisibleItemModel {
 	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage(deviceInfoComponent)
+			Global.pageManager.pushPage(deviceInfoComponent, { title: text })
 		}
 
 		Component {
@@ -166,12 +166,9 @@ VisibleItemModel {
 
 				bindPrefix: root.bindPrefix
 
-				Component.onCompleted: {
-					settingsListView.model.append(dataManagerVersionComponent.createObject(deviceInfoPage))
-				}
-
-				Component {
-					id: dataManagerVersionComponent
+				settingsListView.footer: Column {
+					topPadding: Theme.geometry_gradientList_spacing
+					width: parent.width
 
 					ListText {
 						//% "Data manager version"
