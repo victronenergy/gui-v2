@@ -284,6 +284,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/controls/Button.qml
     components/controls/ComboBox.qml
+    components/controls/KeyNavigationHighlight.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
@@ -1083,6 +1084,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/electron.svg
         images/ess.svg
         images/freshWater.svg
+        images/key_navigation_top_left_corner.svg
         images/icon_black_water_24.svg
         images/icon_charging_generator.svg
         images/icon_charging_grid.svg
