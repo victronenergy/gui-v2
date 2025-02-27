@@ -20,6 +20,11 @@
     "geometry_button_radius": 6,
     "geometry_button_border_width": 2,
 
+    "geometry_focus_highlight_margin": 4,
+    "geometry_focus_highlight_radius": 4,
+    "geometry_focus_border_margin_button": 2,
+    "geometry_focus_border_corner_size": 18,
+
     "geometry_silenceAlarmButton_horizontalPadding": 16,
 
     "geometry_listItemButton_horizontalPadding": 16,

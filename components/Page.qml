@@ -18,7 +18,6 @@ FocusScope {
 			&& !Global.mainView.screenIsBlanked
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
 
-
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
@@ -28,4 +27,10 @@ FocusScope {
 
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_screen_height
+	focus: isCurrentPage
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root === Global.main.activeFocusItem
+	}
 }

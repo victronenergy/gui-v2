@@ -23,6 +23,7 @@ Window {
 	property bool isDesktop: false
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
+	onActiveFocusItemChanged: console.log("** Active focused:", activeFocusItem, activeFocusItem?.title ?? "")
 
 	function skipSplashScreen() {
 		Global.splashScreenVisible = false
@@ -89,6 +90,7 @@ Window {
 	Loader {
 		id: guiLoader
 
+		focus: true
 		clip: Qt.platform.os == "wasm"
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height

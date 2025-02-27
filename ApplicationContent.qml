@@ -8,11 +8,12 @@ import QtQuick.Window
 import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias mainView: mainView
 
+	property bool _keyNavigationEnabled
 	property var _inputComponent
 
 	readonly property bool _goToNotifications: Global.allPagesLoaded && Global.notifications.alarm
@@ -27,6 +28,28 @@ Item {
 		appIdleTimer.restart()
 	}
 
+	focus: true
+
+	Keys.onPressed: (event) => {
+		if (!root._keyNavigationEnabled) {
+			// When a navigation key is pressed, give focus to MainView to enable key navigation.
+			switch (event.key) {
+			case Qt.Key_Left:
+			case Qt.Key_Right:
+			case Qt.Key_Up:
+			case Qt.Key_Down:
+			case Qt.Key_Tab:
+			case Qt.Key_Backtab:
+			case Qt.Key_Space:
+				// Allow mainView to receive key navigation focus.
+				_keyNavigationEnabled = true
+				event.accepted = true
+				return
+			}
+		}
+		event.accepted = false
+	}
+
 	PageManager {
 		id: pageManager
 		Component.onCompleted: Global.pageManager = pageManager
@@ -36,6 +59,7 @@ Item {
 		id: mainView
 		anchors.fill: parent
 		pageManager: pageManager
+		focus: root._keyNavigationEnabled
 		Component.onCompleted: Global.mainView = mainView
 	}
 

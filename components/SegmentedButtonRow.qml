@@ -58,6 +58,12 @@ Item {
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
+
+					KeyNavigationHighlight {
+						anchors.fill: parent
+						active: mouseArea.activeFocus
+						borderMargin: Theme.geometry_focus_border_margin_button
+					}
 				}
 				contentItem: Label {
 					anchors.centerIn: mouseArea

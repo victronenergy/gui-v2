@@ -53,6 +53,12 @@ CT.Button {
 		border.color: root.showEnabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
+		KeyNavigationHighlight {
+			anchors.fill: parent
+			active: root.activeFocus
+			borderMargin: Theme.geometry_focus_border_margin_button
+		}
+
 		PressEffect {
 			id: pressEffect
 			radius: backgroundRect.radius

@@ -75,8 +75,8 @@ FocusScope {
 				text: _modelData.navButtonText
 				icon.source: _modelData.navButtonIcon
 				checked: root.currentIndex === model.index
-				enabled: root.currentIndex !== model.index
 				backgroundColor: "transparent"
+				focus: model.index === root.currentIndex
 				onClicked: root._currentIndex = model.index
 
 				Rectangle {
