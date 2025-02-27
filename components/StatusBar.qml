@@ -98,6 +98,7 @@ FocusScope {
 			: root.leftButton === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
 			: ""
 		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
+		KeyNavigation.right: auxButton
 
 		onClicked: root.leftButtonClicked()
 	}
@@ -118,10 +119,10 @@ FocusScope {
 				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
 				: "qrc:/images/icon_smartswitch_off_32.svg"
 		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
+		KeyNavigation.right: breadcrumbs
 
 		onClicked: root.auxButtonClicked()
 	}
-
 
 	Breadcrumbs {
 		id: breadcrumbs
@@ -159,6 +160,8 @@ FocusScope {
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
+
+		KeyNavigation.right: alarmButton
 	}
 
 	Label {
@@ -245,6 +248,8 @@ FocusScope {
 		}
 		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
 		backgroundColor: Theme.color_critical_background
+		downColor: Theme.color_critical
+		highlightMargins: -(4 * Theme.geometry_button_border_width) // ensure highlight border can be seen against critical backgroundColor
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 
 		//% "Silence alarm"
@@ -263,9 +268,9 @@ FocusScope {
 		}
 
 		StatusBarButton {
+			id: rightButton
 			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
-
 			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
 						 ? "qrc:/images/icon_sidepanel_on_32.svg"
 						 : root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
@@ -275,16 +280,37 @@ FocusScope {
 							 : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
 							   ? "qrc:/images/icon_refresh_32.svg"
 							   : ""
+			KeyNavigation.left: alarmButton
+			KeyNavigation.right: sleepButton
 
 			onClicked: root.rightButtonClicked()
 		}
 
 		StatusBarButton {
+			id: sleepButton
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
-			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
-			enabled: !!Global.pageManager
-					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			visible: enabled
+			enabled: Global.screenBlanker?.supported
+					&& Global.screenBlanker?.enabled
+					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			onClicked: Global.screenBlanker.setDisplayOff()
+		}
+	}
+
+	// The status bar should never become the focused item; if it does, it means there was no
+	// previously focused button in the status bar, or the last focused button is now disabled and
+	// not focusable. So, find the first available button and focus that instead.
+	Connections {
+		target: Global.main
+		function onActiveFocusItemChanged() {
+			if (Global.main.activeFocusItem === root) {
+				for (const button of [leftButton, auxButton, breadcrumbs, alarmButton, rightButton, sleepButton]) {
+					if (button.enabled) {
+						button.focus = true
+						break
+					}
+				}
+			}
 		}
 	}
 }

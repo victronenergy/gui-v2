@@ -107,6 +107,11 @@ Loader {
 				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
+			PropertyAction {
+				target: root.statusBarItem
+				property: "focus"
+				value: true
+			}
 		}
 	}
 }

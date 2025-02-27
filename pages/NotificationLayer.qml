@@ -18,6 +18,16 @@ Item {
 		return toast
 	}
 
+	function deleteLastNotification() {
+		const toast = toastItemsModel.count > 0 ? toastItemsModel.get(toastItemsModel.count - 1) : null
+		if (toast) {
+			toastItemsModel.remove(toastItemsModel.count - 1, 1)
+			toast.destroy(1000)
+			return true
+		}
+		return false
+	}
+
 	function deleteNotification(toast) {
 		for (let i = 0; i < toastItemsModel.count; ++i) {
 			if (toastItemsModel.get(i) === toast) {
