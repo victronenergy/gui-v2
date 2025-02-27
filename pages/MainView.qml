@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -13,9 +13,9 @@ Item {
 	property PageManager pageManager
 	property bool controlsActive
 	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
-			   : !!pageStack.currentItem ? pageStack.currentItem
-			   : !!swipeView ? swipeView.currentItem
-			   : null
+																									 : !!pageStack.currentItem ? pageStack.currentItem
+																															   : !!swipeView ? swipeView.currentItem
+																																			 : null
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -24,8 +24,8 @@ Item {
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
 	property bool allowPageAnimations: BackendConnection.applicationVisible
-			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
-			&& !Global.splashScreenVisible
+									   && !pageStack.busy && (!swipeView || !swipeView.flicking)
+									   && !Global.splashScreenVisible
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -105,9 +105,11 @@ Item {
 			sourceComponent: swipeViewComponent
 			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
 			onLoaded: {
-				// If there is an alarm, the notifications page will be shown; otherwise, show the
+				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
-				if (!Global.notifications.alarm) {
+				if (Global.notifications?.alarms.hasActive ?? false) {
+					Global.notificationLayer.popAndGoToNotifications()
+				} else {
 					root.loadStartPage()
 				}
 				// Notify that the UI is ready to be displayed.
@@ -304,7 +306,7 @@ Item {
 		id: animateNavBarIn
 
 		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
+										  || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
 
 		YAnimator {
 			target: navBar
@@ -340,7 +342,7 @@ Item {
 		id: animateNavBarOut
 
 		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
+										  || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
 
 		OpacityAnimator {
 			target: navBar
