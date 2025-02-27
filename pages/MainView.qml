@@ -85,6 +85,8 @@ FocusScope {
 		anchors.fill: parent
 		focus: true
 
+		KeyNavigation.up: statusBar
+
 		FocusScope {
 			// Anchor this to the PageStack's left side, so that this view slides out of view when
 			// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
@@ -95,7 +97,7 @@ FocusScope {
 				right: pageStack.left
 			}
 			width: Theme.geometry_screen_width
-			focus: true
+			focus: !pageStack.focus && !controlCardsLoader.focus
 
 			Loader {
 				id: swipeViewLoader
@@ -120,6 +122,8 @@ FocusScope {
 					Global.allPagesLoaded = true
 				}
 
+				KeyNavigation.down: navBar
+
 				Component {
 					id: swipeViewComponent
 					SwipeView {
@@ -129,6 +133,7 @@ FocusScope {
 
 						onReadyChanged: if (ready) ready = true // remove binding
 						anchors.fill: parent
+						focus: true
 						onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 						contentChildren: swipePageModel.children
 					}
@@ -147,11 +152,13 @@ FocusScope {
 				backgroundColor: root.backgroundColor
 				opacity: 0
 				model: swipeView ? swipeView.contentModel : null
+				enabled: pageStack.depth === 0 && !root.controlsActive
 				focus: true
 
 				onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
 				Component.onCompleted: pageManager.navBar = navBar
+				KeyNavigation.up: swipeViewLoader
 			}
 		}
 
@@ -167,6 +174,7 @@ FocusScope {
 			}
 			x: width
 			width: Theme.geometry_screen_width
+			focus: depth > 0 && !controlCardsLoader.focus
 		}
 
 		Loader {
@@ -179,6 +187,7 @@ FocusScope {
 			sourceComponent: ControlCardsPage { }
 			active: root.controlsActive
 			enabled: root.controlsActive || controlsOutAnimation.running
+			focus: enabled
 
 			onActiveChanged: if (active) active = true // remove binding
 		}

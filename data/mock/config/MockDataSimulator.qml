@@ -89,13 +89,15 @@ QtObject {
 			}
 			break
 		case Qt.Key_Left:
-			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
+			if ((event.modifiers & Qt.ControlModifier)
+					&& !!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
 				event.accepted = true
 			}
 			break
 		case Qt.Key_Right:
-			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
+			if ((event.modifiers & Qt.ControlModifier)
+					&& !!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()
 				event.accepted = true
 			}
