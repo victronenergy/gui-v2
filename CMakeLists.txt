@@ -1137,6 +1137,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/inverter_charger.svg
         images/levels.svg
         images/notifications.svg
+        images/notifications_subtract.svg
         images/overview.svg
         images/rain.svg
         images/scatteredcloud.svg

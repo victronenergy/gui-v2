@@ -12,7 +12,7 @@ SwipeViewPage {
 
 	//% "Notifications"
 	navButtonText: qsTrId("nav_notifications")
-	navButtonIcon: "qrc:/images/notifications.svg"
+	navButtonIcon: Global.notifications?.hasUnsilencedNotifications ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 

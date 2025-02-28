@@ -103,6 +103,8 @@
     "geometry_navigationBar_notifications_redDot_topMargin": 7,
     "geometry_navigationBar_notifications_redDot_horizontalCenterOffset": 12,
     "geometry_navigationBar_notification_counter_height": 20,
+    "geometry_navigationBar_notification_counter_width_one_digit": 20,
+    "geometry_navigationBar_notification_counter_width_two_digits": 30,
 
     "geometry_notificationsPage_placeholder_height" : 90,
     "geometry_notificationsPage_delegate_marker_topMargin" : 12,

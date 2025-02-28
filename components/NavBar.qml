@@ -84,14 +84,13 @@ FocusScope {
 				Loader {
 					z: 1 // to get it on top of the IconLabel
 					anchors {
-						top: parent.top
-						topMargin: 6
 						left: parent.horizontalCenter
+						leftMargin: 3
+						top: parent.top
+						topMargin: 1
 					}
 					sourceComponent: NotificationCounter {
 						count: Global.notifications?.unsilencedNotificationCount ?? 0
-						// this will require pragma ComponentBehavior: Bound
-						borderColor: root.color
 					}
 					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
 							&& (Global.notifications?.hasUnsilencedNotifications ?? false)
