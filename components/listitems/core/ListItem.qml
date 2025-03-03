@@ -46,7 +46,7 @@ import Victron.VenusOS
 		The  ListPressArea press effect DOES NOT occur
 */
 
-Item {
+BaseListItem {
 	id: root
 
 	property alias text: primaryLabel.text
@@ -56,7 +56,6 @@ Item {
 	property string caption
 	readonly property alias down: pressArea.containsPress
 	property bool flat: false
-	property alias backgroundRect: backgroundRect
 	property int leftPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 	property int rightPadding: flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 
@@ -72,46 +71,46 @@ Item {
 				? VenusOS.ListItem_BottomContentSizeMode_Compact
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
-	// Set preferredVisible=false if the item should not be shown (e.g. if it would display invalid
-	// data).
-	property bool preferredVisible: true
-
-	// True if the item should be made visible. This is used by VisibleItemModel to filter out
-	// non-valid items. (We do not want to include 'visible' in this check, as that value is
-	// affected by the parent's visible value, causing the item to be unnecessarily filtered in and
-	// out of a VisibleItemModel whenever a parent page is shown/hidden.)
-	readonly property bool effectiveVisible: preferredVisible && userHasReadAccess
 	property bool interactive: false
 	readonly property bool clickable: enabled && interactive && userHasWriteAccess
+
 	signal clicked()
 
+	function activate() {
+		if (root.interactive) {
+			// Issue #1964: userHasWriteAccess is ignored for ListNavigation
+			if (root instanceof ListNavigation || root.userHasWriteAccess) {
+				root.clicked()
+			} else {
+				pressArea.toast?.close(true) // close immediately
+				//% "Setting locked for access level"
+				pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
+			}
+		}
+	}
+
+	effectiveVisible: preferredVisible && userHasReadAccess
 	visible: effectiveVisible
 	implicitHeight: effectiveVisible ? contentLayout.implicitHeight : 0
 	implicitWidth: parent ? parent.width : 0
+	background.visible: !root.flat
 
-	ListItemBackground {
-		id: backgroundRect
+	Keys.onSpacePressed: activate()
+	Keys.enabled: Global.keyNavigationEnabled
 
-		z: -2
-		height: root.height
-		color: Theme.color_listItem_background
-		visible: !root.flat
-		// TODO how to indicate read-only setting?
+	// Show thin colored indicator on left side if settings is only visible to super/service users
+	Rectangle {
+		visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+		width: Theme.geometry_listItem_radius * 2
+		height: parent.height
+		color: Theme.color_listItem_highAccessLevel
+		radius: Theme.geometry_listItem_radius
 
-		// Show thin colored indicator on left side if settings is only visible to super/service users
 		Rectangle {
-			visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
-			width: Theme.geometry_listItem_radius * 2
+			x: Theme.geometry_listItem_radius
+			width: Theme.geometry_listItem_radius
 			height: parent.height
-			color: Theme.color_listItem_highAccessLevel
-			radius: Theme.geometry_listItem_radius
-
-			Rectangle {
-				x: Theme.geometry_listItem_radius
-				width: Theme.geometry_listItem_radius
-				height: parent.height
-				color: backgroundRect.color
-			}
+			color: root.background.color
 		}
 	}
 
@@ -120,23 +119,10 @@ Item {
 
 		property ToastNotification toast: null
 
-		// Note: this doesn't fill the root - its height is less the gradient list spacing
-
-		anchors.fill: backgroundRect
-		radius: backgroundRect.radius
+		anchors.fill: parent
+		radius: root.background.radius
 		effectEnabled: root.interactive
-		onClicked: {
-			if (root.interactive) {
-				// Issue #1964: userHasWriteAccess is ignored for ListNavigation
-				if (root instanceof ListNavigation || root.userHasWriteAccess) {
-					root.clicked()
-				} else {
-					pressArea.toast?.close(true) // close immediately
-					//% "Setting locked for access level"
-					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
-				}
-			}
-		}
+		onClicked: root.activate()
 
 		Connections {
 			target: pressArea.toast

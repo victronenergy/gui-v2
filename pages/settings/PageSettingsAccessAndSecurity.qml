@@ -173,10 +173,10 @@ Page {
 					}
 				}
 
-				optionFooter: Column {
-					visible: securityProfile.currentIndex !== VenusOS.Security_Profile_Unsecured
+				optionFooter: SettingsColumn {
+					preferredVisible: securityProfile.currentIndex !== VenusOS.Security_Profile_Unsecured
 					width: parent.width
-					topPadding: Theme.geometry_gradientList_spacing
+					topPadding: spacing
 
 					ListButton {
 						//% "Change password"

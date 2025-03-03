@@ -144,37 +144,42 @@ Page {
 			unit: VenusOS.Units_Watt
 		}
 
-		QuantityTable {
-			// TODO set preferredVisible instead, when VisibleItemModel is available
-			visible: root.trackerCount > 1
-			rowCount: root.trackerCount
-			units: [
-				{ title: CommonWords.tracker, unit: VenusOS.Units_None },
-				{ title: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
-				{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-				{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
-			]
-			valueForModelIndex: function(trackerIndex, column) {
-				const tracker = trackerObjects.objectAt(trackerIndex)
-				if (column === 0) {
-					return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.trackerCount, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
-				} else if (column === 1) {
-					return tracker.voltage
-				} else if (column === 2) {
-					return tracker.current
-				} else if (column === 3) {
-					return tracker.power
+		BaseListItem {
+			width: parent ? parent.width : 0
+			height: trackerTable.y + trackerTable.height
+			preferredVisible: root.trackerCount > 1
+
+			QuantityTable {
+				id: trackerTable
+				rowCount: root.trackerCount
+				units: [
+					{ title: CommonWords.tracker, unit: VenusOS.Units_None },
+					{ title: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
+					{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+					{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+				]
+				valueForModelIndex: function(trackerIndex, column) {
+					const tracker = trackerObjects.objectAt(trackerIndex)
+					if (column === 0) {
+						return Global.solarDevices.formatTrackerName(tracker.name, trackerIndex, root.trackerCount, root.solarDevice.name, VenusOS.TrackerName_NoDevicePrefix)
+					} else if (column === 1) {
+						return tracker.voltage
+					} else if (column === 2) {
+						return tracker.current
+					} else if (column === 3) {
+						return tracker.power
+					}
 				}
-			}
 
-			Instantiator {
-				id: trackerObjects
-				model: root.solarDevice.trackerCount
-				delegate: SolarTracker {
-					required property int index
+				Instantiator {
+					id: trackerObjects
+					model: root.solarDevice.trackerCount
+					delegate: SolarTracker {
+						required property int index
 
-					device: root.solarDevice
-					trackerIndex: index
+						device: root.solarDevice
+						trackerIndex: index
+					}
 				}
 			}
 		}

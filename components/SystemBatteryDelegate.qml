@@ -8,12 +8,13 @@ import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-ListItemBackground {
+BaseListItem {
 	id: root
 
 	required property SystemBatteryDeviceModel.Battery device
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(device.serviceUid)
 
+	width: parent?.width ?? 0
 	height: Theme.geometry_batteryListPage_item_height
 
 	RowLayout {
@@ -114,11 +115,15 @@ ListItemBackground {
 		}
 	}
 
+	Keys.onSpacePressed: pressArea.clicked(null)
+	Keys.onRightPressed: pressArea.clicked(null)
+	Keys.enabled: Global.keyNavigationEnabled && pressArea.enabled
+
 	ListPressArea {
 		id: pressArea
 
-		radius: parent.radius
 		anchors.fill: parent
+		radius: parent.background.radius
 		enabled: root.device.deviceInstance >= 0
 				&& ["vebus","genset","battery"].indexOf(root.serviceType) >= 0
 		onClicked: {

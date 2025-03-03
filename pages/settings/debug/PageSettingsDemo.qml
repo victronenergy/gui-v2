@@ -25,6 +25,11 @@ Page {
 			}
 
 			ListNavigation {
+				text: "Key navigation"
+				onClicked: Global.pageManager.pushPage(keyNavigationComponent, { title: "Press up/down to navigate" })
+			}
+
+			ListNavigation {
 				text: "VisibleItemModel demo"
 				onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: text })
 			}
@@ -415,6 +420,49 @@ Page {
 					VisibleModelSwitch {
 						id: toggle3
 						text: "Toggle C"
+					}
+				}
+			}
+		}
+	}
+
+	Component {
+		id: keyNavigationComponent
+
+		Page {
+			GradientListView {
+				header: SettingsColumn {
+					width: parent ? parent.width : 0
+					bottomPadding: spacing
+
+					Repeater {
+						model: 5
+						delegate: ListItem {
+							text: "Header item " + model.index
+						}
+					}
+				}
+
+				model: 10
+				delegate: ListItem {
+					text: "List item " + model.index
+				}
+
+				footer: SettingsColumn {
+					width: parent ? parent.width : 0
+					topPadding: spacing
+
+					BaseListItem {
+						width: parent.width
+						height: footerRectangle.height + (2 * Theme.geometry_listItem_content_verticalMargin)
+
+						Rectangle {
+							id: footerRectangle
+							anchors.centerIn: parent
+							width: 120
+							height: 80
+							color: Theme.color_ok
+						}
 					}
 				}
 			}
