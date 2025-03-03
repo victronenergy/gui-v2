@@ -103,6 +103,14 @@ FocusScope {
 		onClicked: root.leftButtonClicked()
 
 		KeyNavigation.right: auxButton
+
+		Keys.onRightPressed: (event) => {
+			if (!auxButton.enabled) {
+				// Focus the left-most visible breadcrumb, rather than the last (right-most) breadcrumb.
+				breadcrumbs.setCurrentIndexToFirstVisible()
+			}
+			event.accepted = false
+		}
 	}
 
 	StatusBarButton {
@@ -158,6 +166,12 @@ FocusScope {
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
 
+		onActiveFocusChanged: {
+			if (activeFocus && !visible) {
+				// Breadcrumbs are no longer visible, so focus the left button instead.
+				KeyNavigation.left.focus = true
+			}
+		}
 		KeyNavigation.right: alarmButton
 	}
 
