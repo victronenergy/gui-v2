@@ -71,7 +71,7 @@ Page {
 				text: "Flags"
 				model: QuantityObjectModel {
 					QuantityObject { object: flagsGroup; key: "sustain" }
-					QuantityObject { object: flagsGroup; lowSoc: "lowSoc" }
+					QuantityObject { object: flagsGroup; key: "lowSoc" }
 				}
 			}
 
