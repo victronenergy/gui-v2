@@ -396,6 +396,8 @@ set (VENUS_QML_MODULE_SOURCES
     data/PvInverters.qml
     data/SolarDevices.qml
     data/StartPageConfiguration.qml
+    data/Switches.qml
+    data/SwitchesCardModel.qml
     data/System.qml
     data/SystemLoad.qml
     data/SystemSettings.qml
@@ -426,11 +428,13 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
+    data/common/SwitchDev.qml
     data/common/SystemBattery.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
 
+    pages/AuxPage.qml
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
@@ -546,6 +550,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
+    pages/settings/devicelist/PageSwitch.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
@@ -598,6 +603,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_pulsemeter.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_pvinverter.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_solarcharger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_switch.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_tank.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_temperature.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml
@@ -645,6 +651,10 @@ set (VENUS_QML_MODULE_SOURCES
     pages/solar/SolarDevicePage.qml
     pages/solar/SolarHistoryPage.qml
     pages/solar/SolarInputListPage.qml
+    pages/switch/SwitchAuxInsert.qml
+    pages/switch/SwitchDelegate.qml
+    pages/switch/SwitchAuxCard.qml
+    pages/switch/DimmingSlider.qml
     pages/vebusdevice/PageAcSensor.qml
     pages/vebusdevice/PageAcSensors.qml
     pages/vebusdevice/PageVeBusAdvanced.qml
@@ -811,6 +821,7 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/GeneratorsImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PvInvertersImpl.qml
+    data/dbus/SwitchesImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/InverterChargersImpl.qml
@@ -859,6 +870,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/PulseMetersImpl.qml
     data/mock/PvInvertersImpl.qml
     data/mock/SolarDevicesImpl.qml
+    data/mock/SwitchesImpl.qml
     data/mock/SystemImpl.qml
     data/mock/SystemSettingsImpl.qml
     data/mock/TanksImpl.qml
@@ -929,6 +941,7 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
     data/mqtt/PvInvertersImpl.qml
+    data/mqtt/SwitchesImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/InverterChargersImpl.qml
@@ -1057,6 +1070,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         fonts/Roboto-Regular.ttf
         images/acloads.svg
         images/alternator.svg
+		images/icon_auxpage_off_32.svg
+		images/icon_auxpage_on_32.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
         images/icon_battery_24.svg
