@@ -120,6 +120,7 @@ FocusScope {
 		height: Theme.geometry_settings_breadcrumb_height
 		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
 		visible: count >= 2
+		enabled: count > 0 // don't receive focus when list is empty
 
 		getText: function(index) {
 			return index === 0

@@ -26,6 +26,8 @@ ListView {
 		height: root.height
 		width: contentRow.width
 
+		Keys.onSpacePressed: root.clicked(index)
+
 		Row {
 			id: contentRow
 			height: parent.height
@@ -57,6 +59,11 @@ ListView {
 		PressArea {
 			anchors.fill: parent
 			onClicked: root.clicked(index)
+		}
+
+		KeyNavigationHighlight {
+			anchors.fill: parent
+			active: breadcrumb.activeFocus
 		}
 	}
 
