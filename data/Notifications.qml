@@ -122,6 +122,8 @@ QtObject {
 													   warnings.hasUnsilenced ||
 													   informations.hasUnsilenced
 
+	readonly property bool navBarNotificationCounterVisible: unsilencedModel.count > 0
+
 	readonly property int statusBarNotifcationIconPriority: alarms.hasUnsilenced ? VenusOS.Notification_Alarm
 																				 : warnings.hasUnsilenced ? VenusOS.Notification_Warning
 																										  : informations.hasUnsilenced ? VenusOS.Notification_Info : -1

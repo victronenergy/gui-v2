@@ -90,10 +90,10 @@ FocusScope {
 						topMargin: 1
 					}
 					sourceComponent: NotificationCounter {
-						count: Global.notifications?.unsilencedNotificationCount ?? 0
+						count: Global.notifications?.unsilencedModel.count ?? 0
 					}
 					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
-							&& (Global.notifications?.hasUnsilencedNotifications ?? false)
+							&& (Global.notifications?.navBarNotificationCounterVisible ?? false)
 				}
 			}
 		}
