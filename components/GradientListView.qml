@@ -13,6 +13,7 @@ BaseListView {
 	leftMargin: Theme.geometry_page_content_horizontalMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
 	spacing: Theme.geometry_gradientList_spacing
+	focus: true
 
 	ViewGradient {
 		anchors.bottom: root.bottom

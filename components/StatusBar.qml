@@ -58,6 +58,12 @@ FocusScope {
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
 		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				breadcrumbs.updateFocusDirectionHint()
+			}
+		}
+
 		Behavior on opacity {
 			enabled: root.animationEnabled
 			OpacityAnimator {
@@ -120,6 +126,21 @@ FocusScope {
 	Breadcrumbs {
 		id: breadcrumbs
 
+		property int focusDirectionHint: Qt.LeftToRight
+
+		function updateFocusDirectionHint() {
+			// When breadcrumbs list is focused: if the focus is arriving from the left side, focus
+			// the first breadcrumb, and if arriving from right side, focus the last breadcrumb.
+			if (leftButton.activeFocus || auxButton.activeFocus) {
+				focusDirectionHint = Qt.LeftToRight
+			} else if (rightButton.activeFocus || sleepButton.activeFocus) {
+				focusDirectionHint = Qt.RightToLeft
+			} else {
+				// Focus is coming from the main list view below, so do not change the current index
+				focusDirectionHint = -1
+			}
+		}
+
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_settings_breadcrumb_topMargin
@@ -131,6 +152,8 @@ FocusScope {
 		height: Theme.geometry_settings_breadcrumb_height
 		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
 		visible: count >= 2
+		enabled: visible // don't receive focus when invisble
+		focus: false // don't give status bar initial focus to the breadcrumbs
 
 		getText: function(index) {
 			return index === 0
@@ -154,7 +177,23 @@ FocusScope {
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
 
+		onActiveFocusChanged: {
+			if (activeFocus && focusDirectionHint >= 0) {
+				currentIndex = focusDirectionHint === Qt.LeftToRight ? 0 : count-1
+				focusDirectionHint = -1
+			}
+		}
+
 		KeyNavigation.right: alarmButton
+
+		Connections {
+			target: root.pageStack
+			enabled: Global.keyNavigationEnabled
+			function onDepthChanged() {
+				// When pages are pushed/popped, reset the focus to be on the last breadcrumb.
+				breadcrumbs.currentIndex = breadcrumbs.count - 1
+			}
+		}
 	}
 
 	Label {
