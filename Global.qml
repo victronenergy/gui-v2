@@ -19,6 +19,10 @@ QtObject {
 	property var allDevicesModel
 	property bool applicationActive: true
 
+	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
+		&& (Qt.platform.os != "wasm"
+			|| !BackendConnection.vrm
+			|| BackendConnection.heartbeatState !== BackendConnection.HeartbeatInactive)
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
