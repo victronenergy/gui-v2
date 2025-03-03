@@ -43,9 +43,9 @@ VisibleItemModel {
 		bindPrefix: root.bindPrefix
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: root.phaseNumbers.length > 0
 
 		Repeater {
 			model: root.phaseNumbers
@@ -101,9 +101,9 @@ VisibleItemModel {
 		}
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: root.phaseNumbers.length > 0
 
 		Repeater {
 			model: root.phaseNumbers
@@ -167,11 +167,13 @@ VisibleItemModel {
 
 				bindPrefix: root.bindPrefix
 
-				settingsListView.footer: Column {
+				settingsListView.footer: SettingsColumn {
 					topPadding: Theme.geometry_gradientList_spacing
 					width: parent.width
+					preferredVisible: dataManagerVersion.preferredVisible
 
 					ListText {
+						id: dataManagerVersion
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"

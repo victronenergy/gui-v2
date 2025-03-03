@@ -37,9 +37,9 @@ Page {
 				preferredVisible: dataItem.isValid
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: errorModel.count > 0
 
 				Repeater {
 					model: SolarHistoryErrorModel {

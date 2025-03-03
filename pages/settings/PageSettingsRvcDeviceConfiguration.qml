@@ -69,11 +69,12 @@ Page {
 
 				Repeater {
 					model: 3
-					delegate: Column {
+					delegate: SettingsColumn {
 						width: parent ? parent.width : 0
-						spacing: Theme.geometry_gradientList_spacing
+						preferredVisible: dcSourceInstance.dataItem.isValid || dcSourcePriority.dataItem.isValid
 
 						ListSpinBox {
+							id: dcSourceInstance
 							text: root._hasMultipleDcSources
 								  //: %1 = number of this DC source
 								  //% "DC source #%1 instance"
@@ -85,6 +86,7 @@ Page {
 						}
 
 						ListSpinBox {
+							id: dcSourcePriority
 							text: root._hasMultipleDcSources
 								  //: %1 = number of this DC source
 								  //% "DC source #%1 priority"

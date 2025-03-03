@@ -41,10 +41,9 @@ Page {
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Level/" + index
 		}
 
-		footer: Column {
+		footer: SettingsColumn {
 			topPadding: Theme.geometry_gradientList_spacing
 			width: parent.width
-			spacing: Theme.geometry_gradientList_spacing
 
 			ListRadioButtonGroup {
 				//: Show percentage values in Brief view

@@ -70,12 +70,13 @@ Page {
 				dataItem.uid: root.serviceUid + "/State"
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: inputSettingsModel.count > 0
 
 				Repeater {
 					model: AcInputSettingsModel {
+						id: inputSettingsModel
 						serviceUid: root.serviceUid
 					}
 					delegate: ListItem {

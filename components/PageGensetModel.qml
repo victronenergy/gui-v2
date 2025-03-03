@@ -149,9 +149,9 @@ VisibleItemModel {
 		}
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: phaseRepeater.count > 0
 
 		Repeater {
 			id: phaseRepeater

@@ -65,10 +65,9 @@ Page {
 			Component.onCompleted: _resetSource()
 		}
 
-		footer: Column {
+		footer: SettingsColumn {
 			width: parent.width
 			topPadding: Theme.geometry_gradientList_spacing
-			spacing: Theme.geometry_gradientList_spacing
 
 			ListButton {
 				//% "Remove disconnected devices"

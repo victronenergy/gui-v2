@@ -6,11 +6,9 @@
 import QtQuick
 import Victron.VenusOS
 
-Column {
+SettingsColumn {
 	property alias dvccActive: dvccSwitch.checked
 	readonly property alias userHasWriteAccess: dvccSwitch.userHasWriteAccess
-
-	spacing: Theme.geometry_gradientList_spacing
 
 	ListSwitchForced {
 		id: dvccSwitch

@@ -154,7 +154,7 @@ Page {
 						GradientListView {
 							id: tzListView
 
-							header: Column {
+							header: SettingsColumn {
 								width: parent.width
 								bottomPadding: Theme.geometry_gradientList_spacing
 

@@ -51,9 +51,9 @@ Page {
 					&& batteryMonitorRadioButtons.optionModel[batteryMonitorRadioButtons.currentIndex].value === "default"
 			}
 
-			Column {
-				spacing: Theme.geometry_gradientList_spacing
+			SettingsColumn {
 				width: parent ? parent.width : 0
+				preferredVisible: batteryModel.count > 0
 
 				Repeater {
 					model: batteryModel

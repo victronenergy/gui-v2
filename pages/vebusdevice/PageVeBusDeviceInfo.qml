@@ -16,12 +16,12 @@ PageDeviceInfo {
 
 	Component {
 		id: veBusDeviceInfoComponent
-		Column {
+		SettingsColumn {
 			width: parent ? parent.width : 0
-			spacing: Theme.geometry_gradientList_spacing
+			preferredVisible: deviceInfoModel.count > 0
 
 			Repeater {
-				model: VeBusDeviceInfoModel { }
+				model: VeBusDeviceInfoModel { id: deviceInfoModel }
 
 				ListText {
 					text: displayText
