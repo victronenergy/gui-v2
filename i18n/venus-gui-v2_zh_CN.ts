@@ -215,12 +215,12 @@
       <translation>ESS储能系统</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Energy meters</source>
       <translation>电表</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="100"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="109"/>
       <source>PV inverters</source>
       <translation>光伏逆变器</translation>
     </message>
@@ -245,12 +245,12 @@
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="85"/>
       <source>Generator start/stop</source>
       <translation>发电机启/停</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="97"/>
       <source>Tank pump</source>
       <translation>水箱泵</translation>
     </message>
@@ -971,7 +971,7 @@
       <translation>电流（安培）</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>水平 %1</translation>
@@ -1022,63 +1022,63 @@
       <translation type="unfinished">传感器不可用，请另设置一个</translation>
     </message>
     <message id="settings_dvcc_used_sensor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>Used sensor</source>
       <translation>使用过的传感器</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS 共用电流感应</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="139"/>
       <source>SCS status</source>
       <translation>SCS状态</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="147"/>
       <source>Disabled (external control)</source>
       <translation>已禁用（外部控制）</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Disabled (no chargers)</source>
       <translation>已禁用（无充电器）</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="151"/>
       <source>Disabled (no battery monitor)</source>
       <translation>已禁用（无电池监测器）</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="161"/>
       <source>Automatic selection</source>
       <translation>自动选择</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="163"/>
       <source>No BMS control</source>
       <translation>无 BMS 控制</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="167"/>
       <source>Controlling BMS</source>
       <translation>控制BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="173"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>不可用，设置另一个</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="203"/>
       <source>Auto selected</source>
       <translation>自动选择</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="209"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">无</translation>
@@ -1331,17 +1331,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>重新扫描</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
       <source>Remote support</source>
       <translation>远程支持</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
       <source>Remote support tunnel</source>
       <translation>远程支持通道</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Remote support IP and port</source>
       <translation>远程支持IP和端口</translation>
     </message>
@@ -2920,7 +2920,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>不支持</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Remove disconnected devices</source>
       <translation>移除断开连接的设备</translation>
     </message>
@@ -4002,24 +4002,24 @@ Use unless prohibited by the utility provider.</source>
       <translation>能量 L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
       <source>Phase Sequence</source>
       <translation>相序</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="176"/>
       <source>Data manager version</source>
       <translation>数据管理器版本</translation>
     </message>
@@ -5327,11 +5327,6 @@ Do you want to continue?</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>发电</translation>
     </message>
-    <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
-      <source>Zero feed-in power limit</source>
-      <translation>零馈入功率限制</translation>
-    </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
@@ -6026,7 +6021,7 @@ Do you want to continue?</source>
       <translation>MQTT 协议 5 级错误</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="228"/>
+      <location filename="../../components/StatusBar.qml" line="234"/>
       <source>Silence alarm</source>
       <translation>静音警报</translation>
     </message>
@@ -6690,24 +6685,29 @@ Do you want to continue?</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>请稍候，语言正在更改。</translation>
     </message>
+    <message id="settings_briefview_level_none">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
+      <source>None</source>
+      <translation type="unfinished">无</translation>
+    </message>
     <message id="settings_briefview_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="52"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
       <translation>简要视图单元</translation>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
       <source>No labels</source>
       <translation>无标签</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
       <source>Show tank volumes</source>
       <translation>显示水箱容积</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="59"/>
       <source>Show percentages</source>
       <translation>显示百分比</translation>
     </message>
@@ -7339,7 +7339,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">概要</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>系统负载高，关闭侧板以减少 CPU 负载</translation>
     </message>
@@ -7585,7 +7585,7 @@ See documentation for further information.</oldsource>
       <translation>触摸输入已禁用</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="213"/>
+      <location filename="../../components/StatusBar.qml" line="219"/>
       <source>Acknowledge alerts</source>
       <translation>确认警报</translation>
     </message>
@@ -7651,17 +7651,17 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">密码长度至少为 8 个字符</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Enter password</source>
       <translation type="unfinished">输入密码</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>密码长度至少为 8 个字符</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
       <source>Log out now</source>
       <translation type="unfinished">立即退出</translation>
     </message>
@@ -7706,12 +7706,12 @@ See documentation for further information.</oldsource>
 - 本地网站的非加密访问也已启用（HTTP/HTTPS）</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Root password</source>
       <translation>根密码</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Logout</source>
       <translation>登出</translation>
     </message>
@@ -7721,17 +7721,17 @@ See documentation for further information.</oldsource>
       <translation>立即退出</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Log out?</source>
       <translation>注销？</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>This will disconnect all local network connections.</source>
       <translation>这将断开所有本地网络连接。</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
       <source>Log out</source>
       <translation>登出</translation>
     </message>
@@ -8027,7 +8027,7 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>正常运行，但无服务（500 kbit/s）</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>Root password changed to %1</source>
       <translation>根密码更改为 %1</translation>
     </message>
@@ -8600,11 +8600,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Today's yield</source>
       <translation>今日发电</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>功率限制</translation>
-    </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
@@ -8651,12 +8646,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>西北</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="234"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>管理电池控制所有 Multis 和 Quattros 系统</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="241"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>启用后，受管电池可控制所有 Multis 和 Quattros。禁用时，只控制内置端口上的设备。更多信息请参阅文档。</translation>
     </message>
@@ -8686,7 +8681,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>警报和反馈</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Enable SSH on LAN</source>
       <translation>在局域网上启用 SSH</translation>
     </message>
@@ -9201,6 +9196,21 @@ firmware integrity before contacting support</source>
       <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>查找当地经销商</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_dynamic_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Dynamic power limiting</source>
+      <translation/>
+    </message>
+    <message id="access_and_security_page_will_reload">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <source>Page will automatically reload in 5 seconds</source>
+      <translation/>
+    </message>
+    <message id="common_words_dynamic_power_limit">
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <source>Dynamic power limit</source>
+      <translation/>
     </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
