@@ -197,6 +197,7 @@ void NotificationsModel::dateTimeChangedHandler()
 {
 	BaseNotification * notification = qobject_cast<BaseNotification*>(sender());
 	roleChangedHandler(notification, NotificationRoles::DateTime);
+	emit notificationUpdated(notification);
 }
 
 void NotificationsModel::descriptionChangedHandler()

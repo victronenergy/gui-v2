@@ -12,7 +12,17 @@ QtObject {
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
-		onNotificationInserted: (notification) => toastedNotification.onNotificationInserted(notification)
+		onNotificationUpdated: (notification) => {
+								   // When a notification is updated (including insertion)
+								   // we check it against the last modified notification and restart a timer
+								   // if it is the first one or newer. This should give ample time for
+								   // all the notification properties to have finished writing
+								   if(toastedNotification.pendingChangedNotification && toastedNotification.pendingChangedNotification.dateTime < notification.dateTime
+									  || toastedNotification.pendingChangedNotification === null) {
+									   toastedNotification.pendingChangedNotification = notification
+									   toastedNotification.timer.restart()
+								   }
+							   }
 		onNotificationRemoved: (notification) => toastedNotification.onNotificationRemoved(notification)
 	}
 
@@ -21,15 +31,28 @@ QtObject {
 
 		property ToastNotification toast: null
 		property BaseNotification notification: null
+		property BaseNotification pendingChangedNotification: null
 
-		function onNotificationInserted(notif: BaseNotification) {
-			toastedNotif.checkAndRemoveExistingToast(notif)
-			if (!toastedNotif.toast) {
-				let createdToast = Global.notificationLayer?.showToastNotification(notif.type, "")
-				if (createdToast) {
-					createdToast.text = Qt.binding(function() { return `${notif.deviceName}\n${notif.description}`})
-					toastedNotif.toast = createdToast
-					toastedNotif.notification = notif
+		property Timer timer: Timer {
+			id: notificationUpdatedTimer
+			repeat: false
+			interval: 500
+			onTriggered: toastedNotif.onNotificationUpdated(toastedNotif.pendingChangedNotification)
+		}
+
+		function onNotificationUpdated(notif: BaseNotification) {
+
+			// the notification must be active and unsilenced at the point of being updated
+			// for a toast to be considered for raising (and preempting existing ones)
+			if(notif.active && !notif.silenced) {
+				toastedNotif.checkAndRemoveExistingToast(notif)
+				if (!toastedNotif.toast) {
+					let createdToast = Global.notificationLayer?.showToastNotification(notif.type, "")
+					if (createdToast) {
+						createdToast.text = Qt.binding(function() { return `${notif.deviceName}\n${notif.description}`})
+						toastedNotif.toast = createdToast
+						toastedNotif.notification = notif
+					}
 				}
 			}
 		}

@@ -53,6 +53,7 @@ signals:
 	void countChanged();
 	void notificationInserted(const Victron::VenusOS::BaseNotification* notification);
 	void notificationRemoved(const Victron::VenusOS::BaseNotification* notification);
+	void notificationUpdated(const Victron::VenusOS::BaseNotification* notification);
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
