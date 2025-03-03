@@ -118,7 +118,7 @@ Rectangle {
 			onRunningChanged: {
 				if (running) {
 					logoIconFadeOutAnim.running = true
-				} else if (BackendConnection.state === BackendConnection.Ready) {
+				} else if (Global.backendReady) {
 					animatedLogo.playing = true
 				}
 			}
@@ -200,7 +200,9 @@ Rectangle {
 
 			states: State {
 				name: "alarm"
-				when: BackendConnection.state >= BackendConnection.Disconnected || mqttErrorLabel.text.length > 0
+				when: BackendConnection.state >= BackendConnection.Disconnected
+					|| mqttErrorLabel.text.length > 0
+					|| mqttHeartbeatLabel.visible
 				PropertyChanges {
 					target: alarmIconContainer
 					opacity: 1.0
@@ -215,7 +217,11 @@ Rectangle {
 			CP.ColorImage {
 				anchors.centerIn: parent
 				source: "qrc:/images/icon_warning_24.svg"
-				color: Theme.color_red
+				color: (BackendConnection.state >= BackendConnection.Disconnected
+						|| mqttErrorLabel.text.length > 0
+						|| (BackendConnection.vrm && BackendConnection.heartbeatState === BackendConnection.HeartbeatInactive))
+					? Theme.color_critical
+					: Theme.color_warning
 			}
 		}
 
@@ -238,14 +244,22 @@ Rectangle {
 				: BackendConnection.state === BackendConnection.Connected ? qsTrId("splash_view_connected")
 				  //% "Connected, receiving broker messages"
 				: BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing")
-				  //% "Connected, loading user interface"
-				: BackendConnection.state === BackendConnection.Ready ? qsTrId("splash_view_ready")
+				: BackendConnection.state === BackendConnection.Ready
+					? (BackendConnection.vrm && BackendConnection.heartbeatState !== BackendConnection.HeartbeatActive)
+						? Global.backendReadyLatched // whether we ever had an active heartbeat
+							  //% "Connection to the device has been lost, awaiting reconnection"
+							? qsTrId("splash_view_device_disconnected")
+							  //% "Connected to VRM, awaiting device"
+							: qsTrId("splash_view_awaiting_heartbeat")
+						  //% "Connected, loading user interface"
+						: qsTrId("splash_view_ready")
 				: CommonWords.idle)
 		}
 
 		Label {
 			id: mqttErrorLabel
 
+			visible: text.length > 0
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
 			font.pixelSize: Theme.font_splashView_progressText_size
@@ -272,6 +286,49 @@ Rectangle {
 				  //% "MQTT protocol level 5 error"
 				: BackendConnection.mqttClientError === BackendConnection.MqttClient_Mqtt5SpecificError ? qsTrId("splash_view_mqtt5_error")
 				: "")
+		}
+
+		Label {
+			id: mqttHeartbeatLabel
+
+			visible: false
+			width: parent.width
+			horizontalAlignment: Text.AlignHCenter
+			font.pixelSize: Theme.font_splashView_progressText_size
+			color: Theme.color_font_secondary
+			wrapMode: Text.Wrap
+			text: "[" + BackendConnection.heartbeatState + "] "
+			    + (BackendConnection.heartbeatState === BackendConnection.HeartbeatMissing
+				  //% "Device may have lost connectivity to VRM"
+				? qsTrId("splash_view_heartbeat_missing")
+				  //% "Device is not connected to VRM"
+				: qsTrId("splash_view_heartbeat_inactive"))
+
+			// if we successfully connected to VRM but the device isn't available, show a message.
+			property bool heartbeatError: BackendConnection.vrm
+				&& (BackendConnection.state === BackendConnection.Connected
+					|| BackendConnection.state === BackendConnection.Initializing
+					|| BackendConnection.state === BackendConnection.Ready)
+				&& BackendConnection.heartbeatState !== BackendConnection.HeartbeatActive
+
+			onHeartbeatErrorChanged: {
+				if (heartbeatError) {
+					awaitInitialHeartbeatTimer.start()
+				} else {
+					awaitInitialHeartbeatTimer.stop()
+					mqttHeartbeatLabel.visible = false
+				}
+			}
+
+			// When we first connect, it can take some time before we will receive
+			// the first heartbeat message from the device, as we will receive
+			// that one after all other initial messages are received (and parsed).
+			// We should NOT show the error label during this waiting period.
+			Timer {
+				id: awaitInitialHeartbeatTimer
+				interval: 8000
+				onTriggered: mqttHeartbeatLabel.visible = true
+			}
 		}
 	}
 
