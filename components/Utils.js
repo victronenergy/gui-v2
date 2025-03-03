@@ -365,3 +365,10 @@ function toHexFormat(n) {
 function validationResult(status, notificationText = "", adjustedText = undefined) {
 	return { status: status, notificationText: notificationText, adjustedText: adjustedText }
 }
+
+function acceptsKeyNavigation(item) {
+	return !!item
+			&& item.activeFocusOnTab
+			&& item.enabled
+			&& item.effectiveVisible !== false  // use !== to allow item that do not have effectiveVisible property
+}

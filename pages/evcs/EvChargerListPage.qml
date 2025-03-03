@@ -13,12 +13,15 @@ Page {
 	title: qsTrId("evcs_charging_stations")
 
 	GradientListView {
-		header: Item {
-			width: parent.width
-			height: summary.height + Theme.geometry_gradientList_spacing
+		id: settingsListView
 
-			ListItemBackground {
-				height: summary.y + summary.height
+		header: SettingsColumn {
+			width: parent.width
+			bottomPadding: settingsListView.spacing
+
+			BaseListItem {
+				width: parent.width
+				height: summary.height
 
 				QuantityTableSummary {
 					id: summary

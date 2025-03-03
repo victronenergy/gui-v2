@@ -14,7 +14,7 @@ Page {
 
 		model: Global.allDevicesModel
 
-		delegate: Loader {
+		delegate: BaseListLoader {
 			id: delegateLoader
 
 			required property bool connected
@@ -67,9 +67,13 @@ Page {
 
 		footer: SettingsColumn {
 			width: parent.width
-			topPadding: Theme.geometry_gradientList_spacing
+			topPadding: spacing
+			preferredVisible: gensetMenu.preferredVisible
+					|| tankPumpMenu.preferredVisible
+					|| removeDisconnectedButton.preferredVisible
 
 			ListNavigation {
+				id: gensetMenu
 				//% "Genset"
 				text: qsTrId("devicelistpage_genset")
 				preferredVisible: relay0.valid && relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
@@ -82,6 +86,7 @@ Page {
 			}
 
 			ListNavigation {
+				id: tankPumpMenu
 				preferredVisible: relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
@@ -89,6 +94,7 @@ Page {
 			}
 
 			ListButton {
+				id: removeDisconnectedButton
 				//% "Remove disconnected devices"
 				text: qsTrId("devicelist_remove_disconnected_devices")
 				secondaryText: CommonWords.remove

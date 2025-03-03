@@ -58,6 +58,12 @@ FocusScope {
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
 		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				breadcrumbs.updateFocusEdgeHint()
+			}
+		}
+
 		Behavior on opacity {
 			enabled: root.animationEnabled
 			OpacityAnimator {
@@ -127,6 +133,21 @@ FocusScope {
 	Breadcrumbs {
 		id: breadcrumbs
 
+		property int focusEdgeHint: Qt.LeftEdge
+
+		function updateFocusEdgeHint() {
+			// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
+			// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
+			if (leftButton.activeFocus || auxButton.activeFocus) {
+				focusEdgeHint = Qt.LeftEdge
+			} else if (rightButton.activeFocus || sleepButton.activeFocus) {
+				focusEdgeHint = Qt.RightEdge
+			} else {
+				// Focus is coming from the main list view below, so do not change the current index
+				focusEdgeHint = -1
+			}
+		}
+
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_settings_breadcrumb_topMargin
@@ -138,6 +159,8 @@ FocusScope {
 		height: Theme.geometry_settings_breadcrumb_height
 		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
 		visible: count >= 2
+		enabled: visible // don't receive focus when invisble
+		focus: false // don't give status bar initial focus to the breadcrumbs
 
 		getText: function(index) {
 			return index === 0
@@ -161,7 +184,25 @@ FocusScope {
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
 
+		onActiveFocusChanged: {
+			if (activeFocus && focusEdgeHint >= 0) {
+				// Focus the first (left-most) or last (right-most) breadcrumb, depending the side
+				// that the key navigation is arriving from.
+				currentIndex = focusEdgeHint === Qt.LeftEdge ? 0 : count - 1
+				focusEdgeHint = -1
+			}
+		}
+
 		KeyNavigation.right: alarmButton
+
+		Connections {
+			target: root.pageStack
+			enabled: Global.keyNavigationEnabled
+			function onDepthChanged() {
+				// When pages are pushed/popped, reset the focus to be on the last breadcrumb.
+				breadcrumbs.currentIndex = breadcrumbs.count - 1
+			}
+		}
 	}
 
 	Label {

@@ -15,6 +15,7 @@ ListItem {
 	property alias icon: icon
 
 	interactive: true
+	Keys.onRightPressed: root.activate()
 
 	// Issue #1964: userHasWriteAccess is ignored for ListNavigation - see ListItem
 

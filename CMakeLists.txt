@@ -221,6 +221,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
+    components/KeyNavigationListHelper.qml
     components/MultiServiceDeviceModel.qml
     components/NavBar.qml
     components/NavButton.qml
@@ -351,6 +352,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTemperatureRelay.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
+    components/listitems/core/BaseListItem.qml
+    components/listitems/core/BaseListLoader.qml
     components/listitems/core/ListAlarm.qml
     components/listitems/core/ListButton.qml
     components/listitems/core/ListDateSelector.qml
