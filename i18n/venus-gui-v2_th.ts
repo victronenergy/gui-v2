@@ -215,12 +215,12 @@
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Energy meters</source>
       <translation>เครื่องวัดพลังงาน</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="100"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="109"/>
       <source>PV inverters</source>
       <translation>อินเวอร์เตอร์ PV</translation>
     </message>
@@ -245,12 +245,12 @@
       <translation>จีพีเอส</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="85"/>
       <source>Generator start/stop</source>
       <translation>เครื่องกำเนิดไฟฟ้าเริ่มต้น/หยุด</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="97"/>
       <source>Tank pump</source>
       <translation>ปั๊มถัง</translation>
     </message>
@@ -971,7 +971,7 @@
       <translation>ปัจจุบัน (แอมป์)</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>ระดับ 1</translation>
@@ -1022,63 +1022,63 @@
       <translation type="unfinished">เซ็นเซอร์ไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
     <message id="settings_dvcc_used_sensor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>Used sensor</source>
       <translation>เซ็นเซอร์ที่ใช้แล้ว</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS - ความรู้สึกปัจจุบันที่ใช้ร่วมกัน</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="139"/>
       <source>SCS status</source>
       <translation>สถานะ SCS</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="147"/>
       <source>Disabled (external control)</source>
       <translation>ปิดการใช้งาน (การควบคุมภายนอก)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Disabled (no chargers)</source>
       <translation>ปิดการใช้งาน (ไม่มีที่ชาร์จ)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="151"/>
       <source>Disabled (no battery monitor)</source>
       <translation>ปิดการใช้งาน (ไม่มีการตรวจสอบแบตเตอรี่)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="161"/>
       <source>Automatic selection</source>
       <translation>การเลือกอัตโนมัติ</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="163"/>
       <source>No BMS control</source>
       <translation>ไม่มีการควบคุม BMS</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="167"/>
       <source>Controlling BMS</source>
       <translation>การควบคุม BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="173"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>ไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="203"/>
       <source>Auto selected</source>
       <translation>เลือกอัตโนมัติ</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="209"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">ไม่มี</translation>
@@ -1331,17 +1331,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>ค้นหาซ้ำ</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
       <source>Remote support</source>
       <translation>การสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
       <source>Remote support tunnel</source>
       <translation>ช่องทางการสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Remote support IP and port</source>
       <translation>รองรับ IP และพอร์ตระยะไกล</translation>
     </message>
@@ -2920,7 +2920,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ไม่รองรับ</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Remove disconnected devices</source>
       <translation>ถอดอุปกรณ์ที่ไม่ได้เชื่อมต่อ</translation>
     </message>
@@ -4002,24 +4002,24 @@ Use unless prohibited by the utility provider.</source>
       <translation>พลังงาน L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
       <source>Phase Sequence</source>
       <translation>ลำดับเฟส</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="176"/>
       <source>Data manager version</source>
       <translation>เวอร์ชันตัวจัดการข้อมูล</translation>
     </message>
@@ -5327,11 +5327,6 @@ Do you want to continue?</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิต</translation>
     </message>
-    <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
-      <source>Zero feed-in power limit</source>
-      <translation>จำกัดการป้อนพลังงานเข้าเป็นศูนย์</translation>
-    </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
@@ -6026,7 +6021,7 @@ Do you want to continue?</source>
       <translation>ข้อผิดพลาดของโปรโตคอล MQTT ระดับ 5</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="228"/>
+      <location filename="../../components/StatusBar.qml" line="234"/>
       <source>Silence alarm</source>
       <translation>ปลุกเงียบ</translation>
     </message>
@@ -6690,24 +6685,29 @@ Do you want to continue?</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>กรุณารอสักครู่ในขณะที่ภาษามีการเปลี่ยนแปลง</translation>
     </message>
+    <message id="settings_briefview_level_none">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
+      <source>None</source>
+      <translation type="unfinished">ไม่มี</translation>
+    </message>
     <message id="settings_briefview_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="52"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
       <translation>หน่วยมุมมองสั้น ๆ</translation>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
       <source>No labels</source>
       <translation>ไม่มีป้ายกำกับ</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
       <source>Show tank volumes</source>
       <translation>แสดงปริมาตรถัง</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="59"/>
       <source>Show percentages</source>
       <translation>แสดงเปอร์เซ็นต์</translation>
     </message>
@@ -7339,7 +7339,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">รวบรัด</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>โหลดของระบบสูง ปิดแผงด้านข้างเพื่อลดภาระของ CPU</translation>
     </message>
@@ -7585,7 +7585,7 @@ See documentation for further information.</oldsource>
       <translation>ปิดใช้งานการป้อนข้อมูลแบบสัมผัส</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="213"/>
+      <location filename="../../components/StatusBar.qml" line="219"/>
       <source>Acknowledge alerts</source>
       <translation>รับทราบการแจ้งเตือน</translation>
     </message>
@@ -7651,17 +7651,17 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Enter password</source>
       <translation type="unfinished">ใส่รหัสผ่าน</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
       <source>Log out now</source>
       <translation type="unfinished">ออกจากระบบตอนนี้</translation>
     </message>
@@ -7706,12 +7706,12 @@ See documentation for further information.</oldsource>
 • เปิดใช้งานการเข้าถึงเว็บไซต์ท้องถิ่นแบบไม่เข้ารหัสด้วยเช่นกัน (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Root password</source>
       <translation>รหัสผ่านรูท</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Logout</source>
       <translation>ออกจากระบบ</translation>
     </message>
@@ -7721,17 +7721,17 @@ See documentation for further information.</oldsource>
       <translation>ออกจากระบบตอนนี้</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Log out?</source>
       <translation>ออกจากระบบใช่ไหม?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>This will disconnect all local network connections.</source>
       <translation>การกระทำนี้จะตัดการเชื่อมต่อเครือข่ายท้องถิ่นทั้งหมด</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
       <source>Log out</source>
       <translation>ออกจากระบบ</translation>
     </message>
@@ -8027,7 +8027,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>ขึ้นแต่ไม่มีบริการ (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>Root password changed to %1</source>
       <translation>รหัสผ่านรูทเปลี่ยนเป็น %1</translation>
     </message>
@@ -8600,11 +8600,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Today's yield</source>
       <translation>ผลผลิตวันนี้</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>การจำกัดอำนาจ</translation>
-    </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
@@ -8651,12 +8646,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>ตะวันตกเฉียงเหนือ</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="234"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>การควบคุมแบตเตอรี่แบบจัดการ Multis และ Quattros ทั้งหมด</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="241"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>เมื่อเปิดใช้งานแล้ว แบตเตอรี่ที่จัดการจะควบคุม Multis และ Quattros ทั้งหมด เมื่อปิดใช้งาน จะควบคุมเฉพาะอุปกรณ์ที่พอร์ตในตัวเท่านั้น ดูข้อมูลเพิ่มเติมได้จากเอกสารประกอบ</translation>
     </message>
@@ -8686,7 +8681,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>สัญญาณเตือนและการตอบรับ</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Enable SSH on LAN</source>
       <translation>เปิดใช้งาน SSH บน LAN</translation>
     </message>
@@ -9200,6 +9195,21 @@ firmware integrity before contacting support</source>
       <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>ค้นหาตัวแทนจำหน่ายในพื้นที่</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_dynamic_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Dynamic power limiting</source>
+      <translation/>
+    </message>
+    <message id="access_and_security_page_will_reload">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <source>Page will automatically reload in 5 seconds</source>
+      <translation/>
+    </message>
+    <message id="common_words_dynamic_power_limit">
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <source>Dynamic power limit</source>
+      <translation/>
     </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>

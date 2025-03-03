@@ -215,12 +215,12 @@
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Energy meters</source>
       <translation>Contoare energie</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="100"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="109"/>
       <source>PV inverters</source>
       <translation>Invertoare PV</translation>
     </message>
@@ -245,12 +245,12 @@
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="85"/>
       <source>Generator start/stop</source>
       <translation>Start/stop generator</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="97"/>
       <source>Tank pump</source>
       <translation>Pompa de rezervor</translation>
     </message>
@@ -971,7 +971,7 @@
       <translation>Curent (Amperi)</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>Nivel %1</translation>
@@ -1022,63 +1022,63 @@
       <translation type="unfinished">Senzor indisponibil, defineste altul</translation>
     </message>
     <message id="settings_dvcc_used_sensor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>Used sensor</source>
       <translation>Senzor utilizat</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS - Sens comun intensitate</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="139"/>
       <source>SCS status</source>
       <translation>Stare SCS</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="147"/>
       <source>Disabled (external control)</source>
       <translation>Dezactivat (Control extern)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Disabled (no chargers)</source>
       <translation>Dezactivat (fara incarcatoare)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="151"/>
       <source>Disabled (no battery monitor)</source>
       <translation>Dezactivat (fara monitor baterie)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="161"/>
       <source>Automatic selection</source>
       <translation>Selectare automată</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="163"/>
       <source>No BMS control</source>
       <translation>Fără cotrol BMS</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="167"/>
       <source>Controlling BMS</source>
       <translation>Control BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="173"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>Indisponibil, configurați altul</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="203"/>
       <source>Auto selected</source>
       <translation>Selectat automat</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="209"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">Niciuna</translation>
@@ -1331,17 +1331,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Rescaneaza</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
       <source>Remote support</source>
       <translation>Asistenta la distanta</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
       <source>Remote support tunnel</source>
       <translation>Tunel asistenta la distanta</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Remote support IP and port</source>
       <translation>IP si port pentru asistenta</translation>
     </message>
@@ -2920,7 +2920,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation>Incompatibil</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Remove disconnected devices</source>
       <translation>Eliminare dispozitive deconectate</translation>
     </message>
@@ -4004,24 +4004,24 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation>Energie L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
       <source>Phase Sequence</source>
       <translation>Ordine faze</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L!-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="176"/>
       <source>Data manager version</source>
       <translation>Versiune manager de date</translation>
     </message>
@@ -5329,11 +5329,6 @@ Doriți să continuați?</translation>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Productie</translation>
     </message>
-    <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
-      <source>Zero feed-in power limit</source>
-      <translation>Limita zero pentru alimentarea cu energie</translation>
-    </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
@@ -6028,7 +6023,7 @@ Doriți să continuați?</translation>
       <translation>Eroare de nivel 5 al protocolului MQTT</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="228"/>
+      <location filename="../../components/StatusBar.qml" line="234"/>
       <source>Silence alarm</source>
       <translation>Opriți alarma</translation>
     </message>
@@ -6692,24 +6687,29 @@ Doriți să continuați?</translation>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>Vă rugăm să așteptați în timp ce se schimbă limba.</translation>
     </message>
+    <message id="settings_briefview_level_none">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
+      <source>None</source>
+      <translation type="unfinished">Niciuna</translation>
+    </message>
     <message id="settings_briefview_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="52"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
       <translation>Vizualizare unitate pe scurt</translation>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
       <source>No labels</source>
       <translation>Nu există etichete</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
       <source>Show tank volumes</source>
       <translation>Afișare volume rezervor</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="59"/>
       <source>Show percentages</source>
       <translation>Afișare procente</translation>
     </message>
@@ -7341,7 +7341,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">Pe scurt</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Sarcina sistemului este ridicată, închiderea panoului lateral pentru a reduce sarcina CPU</translation>
     </message>
@@ -7587,7 +7587,7 @@ See documentation for further information.</oldsource>
       <translation>Intrare tactilă dezactivat</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="213"/>
+      <location filename="../../components/StatusBar.qml" line="219"/>
       <source>Acknowledge alerts</source>
       <translation>Confirmarea alertelor</translation>
     </message>
@@ -7653,17 +7653,17 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">Parola trebuie să aibă cel puțin 8 caractere</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Enter password</source>
       <translation type="unfinished">Introduceți parola</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Parola trebuie să aibă cel puțin 8 caractere</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
       <source>Log out now</source>
       <translation type="unfinished">Deconectați-vă acum</translation>
     </message>
@@ -7708,12 +7708,12 @@ See documentation for further information.</oldsource>
 - Accesul necriptat la site-urile locale este de asemenea activat (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Root password</source>
       <translation>Parolă rădăcină</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Logout</source>
       <translation>Deconectare</translation>
     </message>
@@ -7723,17 +7723,17 @@ See documentation for further information.</oldsource>
       <translation>Deconectați-vă acum</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Log out?</source>
       <translation>Să vă deconectați?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Acest lucru va deconecta toate conexiunile la rețeaua locală.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
       <source>Log out</source>
       <translation>Deconectare</translation>
     </message>
@@ -8029,7 +8029,7 @@ După adăugarea/activarea unei noi rețele, trebuie să o aprobați o dată în
       <translation>În funcțiune, dar fără servicii (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>Root password changed to %1</source>
       <translation>Parolă rădăcină schimbată la %1</translation>
     </message>
@@ -8604,11 +8604,6 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <source>Today's yield</source>
       <translation>Randamentul de astăzi</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>Limitare alimentare</translation>
-    </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
@@ -8655,12 +8650,12 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <translation>NW</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="234"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>Bateria gestionată controlează toate Multis și Quattros</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="241"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>La activare, bateria gestionată controlează toate dispozitivele Multis și Quattros. La dezactivare, este controlat numai dispozitivul de pe portul încorporat. Consultați documentația pentru informații suplimentare.</translation>
     </message>
@@ -8690,7 +8685,7 @@ Cu o navigare simplificată și un aspect nou, tot ceea ce vă place este acum �
       <translation>Alarme și feedback</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Enable SSH on LAN</source>
       <translation>Activare SSH pe LAN</translation>
     </message>
@@ -9204,6 +9199,21 @@ firmware integrity before contacting support</source>
       <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>Găsiți un distribuitor local</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_dynamic_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Dynamic power limiting</source>
+      <translation/>
+    </message>
+    <message id="access_and_security_page_will_reload">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <source>Page will automatically reload in 5 seconds</source>
+      <translation/>
+    </message>
+    <message id="common_words_dynamic_power_limit">
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <source>Dynamic power limit</source>
+      <translation/>
     </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>

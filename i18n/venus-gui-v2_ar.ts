@@ -215,12 +215,12 @@
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Energy meters</source>
       <translation>عدادات الطاقة</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="100"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="109"/>
       <source>PV inverters</source>
       <translation>معاكسات ضوئية</translation>
     </message>
@@ -245,12 +245,12 @@
       <translation>نظام التموضع العالمي</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="85"/>
       <source>Generator start/stop</source>
       <translation>بدء/وقف المولد</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="97"/>
       <source>Tank pump</source>
       <translation>مضخة الخزان</translation>
     </message>
@@ -971,7 +971,7 @@
       <translation>التيار (أمبير)</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>المستوى %1</translation>
@@ -1022,63 +1022,63 @@
       <translation type="unfinished">مستشعر غير متوفر، اختر واحدا آخر</translation>
     </message>
     <message id="settings_dvcc_used_sensor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>Used sensor</source>
       <translation>الحساس المستخدم</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS - مراقب الجهد الكهربائي المشارك</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="139"/>
       <source>SCS status</source>
       <translation>حالة مراقب التيار الكهربائي المشارك</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="147"/>
       <source>Disabled (external control)</source>
       <translation>معطل (التحكم الخارجي)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Disabled (no chargers)</source>
       <translation>معطل (لا يوجد شواحن)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="151"/>
       <source>Disabled (no battery monitor)</source>
       <translation>معطل (لا توجد شاشة بطارية)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="161"/>
       <source>Automatic selection</source>
       <translation>التحديد التلقائي</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="163"/>
       <source>No BMS control</source>
       <translation>لا يوجد تحكم في BMS</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="167"/>
       <source>Controlling BMS</source>
       <translation>التحكم في BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="173"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>غير متوفر، عيّن آخر</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="203"/>
       <source>Auto selected</source>
       <translation>التحديد التلقائي</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="209"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">لا أحد</translation>
@@ -1331,17 +1331,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>إعادة المسح الضوئي</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
       <source>Remote support</source>
       <translation>دعم عن بعد</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
       <source>Remote support tunnel</source>
       <translation>نفق داعم عن بعد</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Remote support IP and port</source>
       <translation>عنوان IP ومنفذ دعم عن بعد</translation>
     </message>
@@ -2920,7 +2920,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>غير مدعم</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Remove disconnected devices</source>
       <translation>افصل الأجهزة غير المتصلة</translation>
     </message>
@@ -4007,24 +4007,24 @@ Use unless prohibited by the utility provider.</source>
       <translation>طاقة L%1/&gt;</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
       <source>Phase Sequence</source>
       <translation>مرحلة الطور</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="176"/>
       <source>Data manager version</source>
       <translation>نسخة مدير البيانات</translation>
     </message>
@@ -5332,11 +5332,6 @@ Do you want to continue?</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>المحصول</translation>
     </message>
-    <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
-      <source>Zero feed-in power limit</source>
-      <translation>حد قدرة التغذية الداخلة الصفرية</translation>
-    </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
@@ -6031,7 +6026,7 @@ Do you want to continue?</source>
       <translation>خطأ المستوى الخامس من بروتوكول MQTT</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="228"/>
+      <location filename="../../components/StatusBar.qml" line="234"/>
       <source>Silence alarm</source>
       <translation>إنذار صامت</translation>
     </message>
@@ -6695,24 +6690,29 @@ Do you want to continue?</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>يرجى الانتظار بينما يتم تغيير اللغة.</translation>
     </message>
+    <message id="settings_briefview_level_none">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
+      <source>None</source>
+      <translation type="unfinished">لا أحد</translation>
+    </message>
     <message id="settings_briefview_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="52"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
       <translation>وحدة عرض مختصرة</translation>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
       <source>No labels</source>
       <translation>لا توجد بطاقات عنونة</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
       <source>Show tank volumes</source>
       <translation>عرض أحجام الخزان</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="59"/>
       <source>Show percentages</source>
       <translation>عرض النسب المئوية</translation>
     </message>
@@ -7344,7 +7344,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">مختصر</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>حمل النظام مرتفع، يؤدي إغلاق اللوحة الجانبية لتقليل حمل وحدة المعالجة المركزية (CPU)</translation>
     </message>
@@ -7590,7 +7590,7 @@ See documentation for further information.</oldsource>
       <translation>تم تعطيل الإدخال باللمس</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="213"/>
+      <location filename="../../components/StatusBar.qml" line="219"/>
       <source>Acknowledge alerts</source>
       <translation>إدارة التنبيهات</translation>
     </message>
@@ -7656,17 +7656,17 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Enter password</source>
       <translation type="unfinished">إدخال كلمة المرور</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
       <source>Log out now</source>
       <translation type="unfinished">تسجيل خروج الآن</translation>
     </message>
@@ -7706,12 +7706,12 @@ See documentation for further information.</oldsource>
       <translation>• إن خدمات الشبكات المحلية لا تحتاج إلى كلمة مرور/. تم تفعيل الوصول غير المشفر للمواقع الإلكترونية المحلية أيضا (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Root password</source>
       <translation>كلمة المرور الرئيسية</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Logout</source>
       <translation>تسجيل الخروج</translation>
     </message>
@@ -7721,17 +7721,17 @@ See documentation for further information.</oldsource>
       <translation>تسجيل خروج الآن</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Log out?</source>
       <translation>تسجيل خروج؟</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>This will disconnect all local network connections.</source>
       <translation>سيؤدي هذا إلى قطع الاتصال بجميع الشبكات المحلية.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
       <source>Log out</source>
       <translation>تسجيل الخروج</translation>
     </message>
@@ -8019,7 +8019,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>أعلى، لكن دون خدمات (500 كيلو بت/ ثانية)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>Root password changed to %1</source>
       <translation>تم تغيير كلمة الكرور الرئيسية إلى %1</translation>
     </message>
@@ -8595,11 +8595,6 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Today's yield</source>
       <translation>عائد اليوم</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>تحديد الطاقة</translation>
-    </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
@@ -8646,12 +8641,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>شمال غرب</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="234"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>التحكم المُدار في البطارية يتحكم في جميع أجهزة Multis و Quattros</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="241"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>عند تفعيلها يتحكم التحكم المُدار في البطارية في جميع أجهزة Multis و Quattros. عند التعطيل، يتم التحكم فقط في الجهاز الموجود على المنفذ المدمج. للمزيد من المعلومات، راجع وثائق التشغيل.</translation>
     </message>
@@ -8681,7 +8676,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>الإنذارات والتقييمات</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Enable SSH on LAN</source>
       <translation>تفعيل خلية آمنة على الشبكة المحلية</translation>
     </message>
@@ -9194,6 +9189,21 @@ firmware integrity before contacting support</source>
       <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>البحث عن موزع محلي</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_dynamic_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Dynamic power limiting</source>
+      <translation/>
+    </message>
+    <message id="access_and_security_page_will_reload">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <source>Page will automatically reload in 5 seconds</source>
+      <translation/>
+    </message>
+    <message id="common_words_dynamic_power_limit">
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <source>Dynamic power limit</source>
+      <translation/>
     </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>

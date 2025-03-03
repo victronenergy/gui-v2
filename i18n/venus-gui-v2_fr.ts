@@ -215,12 +215,12 @@
       <translation>ESS</translation>
     </message>
     <message id="settings_energy_meters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Energy meters</source>
       <translation>Compteurs d'énergie</translation>
     </message>
     <message id="settings_pv_inverters">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="100"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="109"/>
       <source>PV inverters</source>
       <translation>Convertisseurs PV</translation>
     </message>
@@ -245,12 +245,12 @@
       <translation>GPS</translation>
     </message>
     <message id="settings_generator_start_stop">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="85"/>
       <source>Generator start/stop</source>
       <translation>Arrêter/Démarrer Générateur</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="97"/>
       <source>Tank pump</source>
       <translation>Pompe du réservoir</translation>
     </message>
@@ -971,7 +971,7 @@
       <translation>Courant (Ampères)</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>Niveau %1</translation>
@@ -1022,63 +1022,63 @@
       <translation type="unfinished">Sonde indisponible. Configurez-en une autre</translation>
     </message>
     <message id="settings_dvcc_used_sensor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
       <source>Used sensor</source>
       <translation>Capteur utilisé</translation>
     </message>
     <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="132"/>
       <source>SCS - Shared current sense</source>
       <translation>SCS - Partage du courant</translation>
     </message>
     <message id="settings_dvcc_scs_status">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="139"/>
       <source>SCS status</source>
       <translation>Statut SCS</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_external_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="147"/>
       <source>Disabled (external control)</source>
       <translation>Désactivé (contrôle externe)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_chargers">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
       <source>Disabled (no chargers)</source>
       <translation>Désactivé (pas de chargeurs)</translation>
     </message>
     <message id="settings_dvcc_scs_disabled_no_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="151"/>
       <source>Disabled (no battery monitor)</source>
       <translation>Désactivée (pas de moniteur de batterie)</translation>
     </message>
     <message id="settings_dvcc_auto_selection">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="161"/>
       <source>Automatic selection</source>
       <translation>Sélection automatique</translation>
     </message>
     <message id="settings_dvcc_no_bms_control">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="163"/>
       <source>No BMS control</source>
       <translation>Pas de contrôle par BMS</translation>
     </message>
     <message id="settings_dvcc_controlling_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="167"/>
       <source>Controlling BMS</source>
       <translation>Contrôle par BMS</translation>
     </message>
     <message id="settings_dvcc_unavailable_bms">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="173"/>
       <source>Unavailable, set another</source>
       <extracomment>Shown when BMS instance is invalid</extracomment>
       <translation>Indisponible, en paramètrer un autre</translation>
     </message>
     <message id="settings_dvcc_auto_selected">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="203"/>
       <source>Auto selected</source>
       <translation>Auto sélectionné</translation>
     </message>
     <message id="settings_dvcc_auto_selected_none">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="209"/>
       <source>None</source>
       <extracomment>Indicates no option is selected</extracomment>
       <translation type="unfinished">Aucune</translation>
@@ -1331,17 +1331,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Scanner à nouveau</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
       <source>Remote support</source>
       <translation>Assistance à distance</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
       <source>Remote support tunnel</source>
       <translation>Tunnel de support à distance</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Remote support IP and port</source>
       <translation>IP et port de support à distance</translation>
     </message>
@@ -2920,7 +2920,7 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Incompatible</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="75"/>
       <source>Remove disconnected devices</source>
       <translation>Supprimer les appareils déconnectés</translation>
     </message>
@@ -4003,24 +4003,24 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>Énergie L%1</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
       <source>Phase Sequence</source>
       <translation>Séquence de phase</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="135"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="176"/>
       <source>Data manager version</source>
       <translation>Version Data Manager</translation>
     </message>
@@ -5328,11 +5328,6 @@ Voulez-vous continuer ?</translation>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Production</translation>
     </message>
-    <message id="common_words_zero_feed_in_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
-      <source>Zero feed-in power limit</source>
-      <translation>Limite de puissance zéro injection</translation>
-    </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
       <source>Set date</source>
@@ -6027,7 +6022,7 @@ Voulez-vous continuer ?</translation>
       <translation>Erreur protocol MQTT niveau 5</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="228"/>
+      <location filename="../../components/StatusBar.qml" line="234"/>
       <source>Silence alarm</source>
       <translation>Alarme en silencieux</translation>
     </message>
@@ -6691,24 +6686,29 @@ Voulez-vous continuer ?</translation>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>Veuillez patienter pendant le changement de langue.</translation>
     </message>
+    <message id="settings_briefview_level_none">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
+      <source>None</source>
+      <translation type="unfinished">Aucune</translation>
+    </message>
     <message id="settings_briefview_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="52"/>
       <source>Brief view unit</source>
       <extracomment>Show percentage values in Brief view</extracomment>
       <translation>Vue d'ensemble de l'unité</translation>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
       <source>No labels</source>
       <translation>Pas d'étiquettes</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
       <source>Show tank volumes</source>
       <translation>Afficher les volumes des réservoirs</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="59"/>
       <source>Show percentages</source>
       <translation>Afficher les pourcentages</translation>
     </message>
@@ -7340,7 +7340,7 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">En bref</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="487"/>
+      <location filename="../../pages/BriefPage.qml" line="488"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Charge du système élevée, fermeture du panneau latéral pour réduire la charge du CPU</translation>
     </message>
@@ -7586,7 +7586,7 @@ See documentation for further information.</oldsource>
       <translation>Entrée tactile désactivée</translation>
     </message>
     <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="213"/>
+      <location filename="../../components/StatusBar.qml" line="219"/>
       <source>Acknowledge alerts</source>
       <translation>Accuser réception des alertes</translation>
     </message>
@@ -7652,17 +7652,17 @@ See documentation for further information.</oldsource>
       <translation type="unfinished">Le mot de passe doit comporter au moins 8 caractères</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Enter password</source>
       <translation type="unfinished">Saisir mot de passe</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Le mot de passe doit comporter au moins 8 caractères</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
       <source>Log out now</source>
       <translation type="unfinished">Se déconnecter</translation>
     </message>
@@ -7707,12 +7707,12 @@ See documentation for further information.</oldsource>
 • L'accès non chiffré aux sites web locaux est également autorisé (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Root password</source>
       <translation>Mot de passe root</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Logout</source>
       <translation>Déconnexion</translation>
     </message>
@@ -7722,17 +7722,17 @@ See documentation for further information.</oldsource>
       <translation>Se déconnecter</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Log out?</source>
       <translation>Déconnexion ?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Cette opération déconnecte toutes les connexions du réseau local.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
       <source>Log out</source>
       <translation>Déconnexion</translation>
     </message>
@@ -8028,7 +8028,7 @@ Après avoir ajouté/activé un nouveau réseau, vous devez l'approuver une fois
       <translation>Up, mais pas de services (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>Root password changed to %1</source>
       <translation>Le mot de passe racine a été changé en %1</translation>
     </message>
@@ -8602,11 +8602,6 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <source>Today's yield</source>
       <translation>Rendement du jour</translation>
     </message>
-    <message id="page_settings_fronius_inverter_power_limiting">
-      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
-      <source>Power limiting</source>
-      <translation>Limitation de la puissance</translation>
-    </message>
     <message id="page_settings_fronius_inverter_power_limiting_label">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
@@ -8653,12 +8648,12 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <translation>NW</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="234"/>
       <source>Managed battery controls all Multis and Quattros</source>
       <translation>La batterie gérée contrôle tous les Multis et Quattros</translation>
     </message>
     <message id="settings_dvcc_control_all_vebus_devices_label">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="241"/>
       <source>When enabled, the managed battery controls all Multis and Quattros. When disabled, only the device on the built-in port is controlled. See documentation for further information.</source>
       <translation>Lorsqu'elle est activée, la batterie gérée contrôle tous les Multis et Quattros. Lorsqu'elle est désactivée, seul l'appareil sur le port intégré est contrôlé. Voir la documentation pour plus d'informations.</translation>
     </message>
@@ -8688,7 +8683,7 @@ Avec une navigation simplifiée et un nouveau look, tout ce que vous aimez est m
       <translation>Alarmes et retour d'information</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Enable SSH on LAN</source>
       <translation>Activer SSH sur le réseau local</translation>
     </message>
@@ -9203,6 +9198,21 @@ l'intégrité du micrologiciel avant de contacter l'assistance</translation>
       <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>Trouver un distributeur local</translation>
+    </message>
+    <message id="page_settings_fronius_inverter_dynamic_power_limiting">
+      <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
+      <source>Dynamic power limiting</source>
+      <translation/>
+    </message>
+    <message id="access_and_security_page_will_reload">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <source>Page will automatically reload in 5 seconds</source>
+      <translation/>
+    </message>
+    <message id="common_words_dynamic_power_limit">
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <source>Dynamic power limit</source>
+      <translation/>
     </message>
     <message id="evcs_ac_position">
       <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
