@@ -12,6 +12,11 @@ ListView {
 
 	property var getText // override with function
 
+	function setCurrentIndexToFirstVisible() {
+		const visibleStartPos = contentItem.mapFromItem(root, 0, 0)
+		currentIndex = indexAt(visibleStartPos.x, visibleStartPos.y)
+	}
+
 	orientation: ListView.Horizontal
 	currentIndex: count - 1
 	clip: true
@@ -25,6 +30,8 @@ ListView {
 
 		height: root.height
 		width: contentRow.width
+
+		Keys.onSpacePressed: root.clicked(index)
 
 		Row {
 			id: contentRow
@@ -57,6 +64,11 @@ ListView {
 		PressArea {
 			anchors.fill: parent
 			onClicked: root.clicked(index)
+		}
+
+		KeyNavigationHighlight {
+			anchors.fill: parent
+			active: breadcrumb.activeFocus
 		}
 	}
 

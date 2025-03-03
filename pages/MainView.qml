@@ -61,6 +61,24 @@ FocusScope {
 		swipeViewLoader.active = true
 	}
 
+	Keys.onEscapePressed: (event) => {
+		if (controlsActive) {
+			controlsActive = false
+			return
+		} else if (pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+	Keys.onLeftPressed: (event) => {
+		if (pageStack.activeFocus && pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+
 	// Revert to the start page when the application is inactive.
 	Timer {
 		running: !!Global.systemSettings
