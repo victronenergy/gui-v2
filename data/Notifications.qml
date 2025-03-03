@@ -48,10 +48,13 @@ QtObject {
 		}
 
 		function checkAndRemoveExistingToast(notif: BaseNotification) {
-			if (toast && (notif.type === VenusOS.Notification_Alarm ||
-						  (notif.type === VenusOS.Notification_Warning && toast.category !== VenusOS.Notification_Alarm) ||
-						  toast.category === VenusOS.Notification_Info)) {
-				close()
+			if (toast) {
+				// Since it is easier to express the negative logic here, we write:
+				// "don't remove an existing toast if its toast.category has a higher priority than the notif.type"
+				if (!((toast.category === VenusOS.Notification_Warning && notif.type === VenusOS.Notification_Info)
+					  || (toast.category === VenusOS.Notification_Alarm && (notif.type === VenusOS.Notification_Warning || notif.type === VenusOS.Notification_Info)))) {
+					close()
+				}
 			}
 		}
 
