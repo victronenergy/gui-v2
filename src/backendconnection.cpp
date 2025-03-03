@@ -116,6 +116,37 @@ void BackendConnection::setState(bool connected)
 	setState(connected ? Ready : Disconnected);
 }
 
+BackendConnection::HeartbeatState BackendConnection::heartbeatState() const
+{
+	return m_heartbeatState;
+}
+
+void BackendConnection::setHeartbeatState(HeartbeatState backendHeartbeatState)
+{
+	if (m_heartbeatState != backendHeartbeatState) {
+		m_heartbeatState = backendHeartbeatState;
+		emit heartbeatStateChanged();
+	}
+}
+
+void BackendConnection::setHeartbeatState(VeQItemMqttProducer::HeartbeatState backendHeartbeatState)
+{
+	switch (backendHeartbeatState) {
+		case VeQItemMqttProducer::HeartbeatState::HeartbeatActive: {
+			setHeartbeatState(BackendConnection::HeartbeatState::HeartbeatActive);
+			break;
+		}
+		case VeQItemMqttProducer::HeartbeatState::HeartbeatMissing: {
+			setHeartbeatState(BackendConnection::HeartbeatState::HeartbeatMissing);
+			break;
+		}
+		case VeQItemMqttProducer::HeartbeatState::HeartbeatInactive: {
+			setHeartbeatState(BackendConnection::HeartbeatState::HeartbeatInactive);
+			break;
+		}
+	}
+}
+
 BackendConnection::MqttClientError BackendConnection::mqttClientError() const
 {
 	return MqttClientError(m_mqttClientError);
@@ -267,6 +298,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 	connect(mqttProducer, &VeQItemMqttProducer::connectionStateChanged, this, [mqttProducer, this] {
 		setState(mqttProducer->connectionState());
 	});
+	connect(mqttProducer, &VeQItemMqttProducer::heartbeatStateChanged, this, [mqttProducer, this] {
+		setHeartbeatState(mqttProducer->heartbeatState());
+	});
 	connect(mqttProducer, &VeQItemMqttProducer::errorChanged,
 		this, &BackendConnection::mqttErrorChanged);
 
@@ -276,6 +310,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	setVrm(address.startsWith(QStringLiteral("wss://webmqtt"))
 		&& address.contains(QStringLiteral(".victronenergy.com")));
+	if (isVrm()) {
+		setHeartbeatState(mqttProducer->heartbeatState());
+	}
 	mqttProducer->open(QUrl(address), QMqttClient::MQTT_3_1);
 
 	VeQItem *item = mqttProducer->services()->itemGetOrCreate("/platform/0/Network/ConfigChanged");

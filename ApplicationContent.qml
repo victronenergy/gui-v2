@@ -162,7 +162,7 @@ Item {
 
 	// Sometimes, the wasm code may crash. Use a watchdog to detect this and reload the page when necessary.
 	Timer {
-		running: Qt.platform.os === "wasm" && BackendConnection.state === BackendConnection.Ready
+		running: Qt.platform.os === "wasm" && Global.backendReadyLatched
 		repeat: true
 		interval: 1000
 		onTriggered: BackendConnection.hitWatchdog()

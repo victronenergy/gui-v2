@@ -49,7 +49,7 @@ Window {
 
 	Loader {
 		id: dataManagerLoader
-		readonly property bool connectionReady: BackendConnection.state === BackendConnection.Ready
+		readonly property bool connectionReady: Global.backendReady
 		onConnectionReadyChanged: {
 			if (connectionReady) {
 				active = true
