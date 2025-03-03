@@ -243,6 +243,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
     components/ServiceModelLoader.qml
+    components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
     components/ShinyProgressArc.qml

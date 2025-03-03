@@ -133,7 +133,7 @@ ListNavigation {
 					Component {
 						id: passwordComponent
 
-						Column {
+						SettingsColumn {
 							function focusPasswordInput() {
 								passwordField.showField = true
 								passwordField.secondaryText = ""
@@ -141,7 +141,6 @@ ListNavigation {
 							}
 
 							width: parent.width
-							spacing: Theme.geometry_gradientList_spacing
 
 							PrimaryListLabel {
 								topPadding: 0

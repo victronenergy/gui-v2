@@ -82,11 +82,12 @@ Page {
 				}
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: sensorRepeater.count > 0
 
 				Repeater {
+					id: sensorRepeater
 					model: VeQItemSortTableModel {
 						model: VeQItemChildModel {
 							model: sensors

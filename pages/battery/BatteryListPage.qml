@@ -15,7 +15,6 @@ Page {
 
 	GradientListView {
 		model: batteryModel
-		spacing: Theme.geometry_gradientList_spacing
 		delegate: ListItemBackground {
 			id: batteryDelegate
 

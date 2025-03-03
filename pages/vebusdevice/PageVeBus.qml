@@ -111,12 +111,13 @@ Page {
 
 			/*	This shows the current limits for Ac/In/<x>/CurrentLimit.
 				Note that gui-v1 instead shows a single current limit based on Ac/ActiveIn/CurrentLimit, which is deprecated in the dbus doco. */
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: inputSettingsModel.count > 0
 
 				Repeater {
 					model: AcInputSettingsModel {
+						id: inputSettingsModel
 						serviceUid: root.bindPrefix
 					}
 					delegate: ListItem {

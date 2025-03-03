@@ -40,11 +40,12 @@ Page {
 			text: qsTrId("settings_modbus_no_devices_saved")
 		}
 		model: VisibleItemModel {
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: modbusDeviceRepeater.count > 0
 
 				Repeater {
+					id: modbusDeviceRepeater
 					model: _devices.value ? _devices.value.split(',') : []
 					delegate: ListItem {
 						property int deviceNumber: index + 1

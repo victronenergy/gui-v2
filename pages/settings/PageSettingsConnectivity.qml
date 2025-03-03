@@ -67,11 +67,12 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGpsList.qml", {"title": text})
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: canInterfaceRepeater.count > 0
 
 				Repeater {
+					id: canInterfaceRepeater
 					model: canInterfaces.value || []
 					delegate: ListNavigation {
 						text: modelData["name"] || ""

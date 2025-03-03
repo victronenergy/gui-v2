@@ -152,11 +152,10 @@ Page {
 	Component {
 		id: singlePhaseAcInOut
 
-		Column {
+		SettingsColumn {
 			readonly property string singlePhaseName: _phase.value === 2 ? "L3"
 					: _phase.value === 1 ? "L2"
 					: "L1"  // _phase.value === 0 || !_phase.isValid
-			spacing: Theme.geometry_gradientList_spacing
 
 			PVCFListQuantityGroup {
 				//: %1 = phase name (e.g. L1, L2, L3)
@@ -210,9 +209,8 @@ Page {
 	Component {
 		id: multiTrackerComponent
 
-		Column {
+		SettingsColumn {
 			width: parent ? parent.width : 0
-			spacing: Theme.geometry_gradientList_spacing
 
 			ListQuantity {
 				//% "Total PV Power"

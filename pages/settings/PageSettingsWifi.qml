@@ -22,9 +22,8 @@ Page {
 			id: wifiModel
 		}
 
-		header: Column {
+		header: SettingsColumn {
 			width: parent.width
-			spacing: Theme.geometry_gradientList_spacing
 
 			ListSwitch {
 				//% "Create access point"

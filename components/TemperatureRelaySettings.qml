@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Column {
+SettingsColumn {
 	id: root
 
 	property int relayNumber
@@ -24,7 +24,6 @@ Column {
 	}
 
 	width: parent ? parent.width : 0
-	spacing: Theme.geometry_gradientList_spacing
 
 	VeQuickItem {
 		id: relay1Item

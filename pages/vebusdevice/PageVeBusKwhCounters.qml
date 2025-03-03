@@ -34,12 +34,12 @@ Page {
 				]
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: countersModel.count > 0
 
 				Repeater {
-					model: VeBusDeviceKwhCountersModel { }
+					model: VeBusDeviceKwhCountersModel { id: countersModel }
 
 					ListText {
 

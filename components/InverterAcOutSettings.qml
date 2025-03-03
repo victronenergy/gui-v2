@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Column {
+SettingsColumn {
 	id: root
 
 	property string bindPrefix
@@ -16,7 +16,6 @@ Column {
 			: inverterData.phase1
 
 	width: parent ? parent.width : 0
-	spacing: Theme.geometry_gradientList_spacing
 
 	VeQuickItem {
 		id: isInverterChargerItem
