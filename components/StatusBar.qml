@@ -103,6 +103,11 @@ FocusScope {
 
 		onClicked: root.leftButtonClicked()
 
+		Keys.onRightPressed: (event) => {
+			// Focus the left-most visible breadcrumb, rather than the last (right-most) breadcrumb.
+			breadcrumbs.setCurrentIndexToFirstVisible()
+			event.accepted = false
+		}
 		KeyNavigation.right: breadcrumbs
 	}
 
@@ -141,6 +146,13 @@ FocusScope {
 			}
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
+		}
+
+		onActiveFocusChanged: {
+			if (activeFocus && !visible) {
+				// Breadcrumbs are no longer visible, so focus the left button instead.
+				KeyNavigation.left.focus = true
+			}
 		}
 
 		KeyNavigation.right: alertButton.enabled ? alertButton : alarmButton

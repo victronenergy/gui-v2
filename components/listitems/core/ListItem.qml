@@ -88,6 +88,9 @@ Item {
 	visible: effectiveVisible
 	implicitHeight: effectiveVisible ? contentLayout.height : 0
 	implicitWidth: parent ? parent.width : 0
+	focus: true
+
+	Keys.onSpacePressed: pressArea.clicked(null)
 
 	ListItemBackground {
 		id: backgroundRect
@@ -199,5 +202,10 @@ Item {
 				text: root.caption
 			}
 		}
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }

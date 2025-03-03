@@ -17,6 +17,7 @@ ListView {
 	rightMargin: Theme.geometry_page_content_horizontalMargin
 	boundsBehavior: Flickable.StopAtBounds
 	spacing: Theme.geometry_gradientList_spacing
+	focus: true
 
 	ViewGradient {
 		anchors.bottom: root.bottom
