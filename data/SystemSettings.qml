@@ -21,6 +21,20 @@ QtObject {
 	readonly property StartPageConfiguration startPageConfiguration: StartPageConfiguration {
 		systemSettingsUid: root.serviceUid
 	}
+	readonly property int speedUnit: {
+		switch (_speedUnit.value) {
+		case "km/h":
+			return VenusOS.Units_Speed_KilometersPerHour
+		case "m/s":
+			return VenusOS.Units_Speed_MetresPerSecond
+		case "kt":
+			return VenusOS.Units_Speed_Knots
+		case "mph":
+			return VenusOS.Units_Speed_MilesPerHour
+		default:
+			return VenusOS.Units_None
+		}
+	}
 
 	function canAccess(level) {
 		return accessLevel.valid && accessLevel.value >= level
@@ -77,6 +91,14 @@ QtObject {
 
 	function convertFromCelsius(celsius_value) {
 		return Units.convert(celsius_value, VenusOS.Units_Temperature_Celsius, temperatureUnit)
+	}
+
+	function convertFromKilometersPerHour(kph) {
+		return Units.convert(kph, VenusOS.Units_Speed_KilometersPerHour, speedUnit)
+	}
+
+	function convertToKilometersPerHour(kph) {
+		return Units.convert(kph, speedUnit, VenusOS.Units_Speed_KilometersPerHour)
 	}
 
 	function networkStatusToText(status) {
@@ -270,6 +292,10 @@ QtObject {
 				break
 			}
 		}
+	}
+
+	property VeQuickItem _speedUnit: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 
 	property VeQuickItem _volumeUnit: VeQuickItem {

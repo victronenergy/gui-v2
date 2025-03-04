@@ -163,6 +163,50 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
 				unit: VenusOS.Units_Watt
 			}
+
+			SettingsListHeader {
+				//% "Boat page"
+				text: qsTrId("settings_minmax_boat_page")
+			}
+
+			ListRadioButtonGroup {
+				//% "Gauge Display"
+				text: qsTrId("settings_minmax_gauge_display")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CentreGauge/Type" // TBC
+				preferredVisible: dataItem.valid
+				writeAccessLevel: VenusOS.User_AccessType_User
+				optionModel: [
+					//% "Speed"
+					{ display: qsTrId("settings_minmax_speed"), value: 0 },
+					//% "Time to go"
+					{ display: qsTrId("settings_minmax_time_to_go"), value: 1 }
+				]
+			}
+
+			ListQuantityField {
+				text: CommonWords.maximum_power
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
+				unit: VenusOS.Units_Watt
+			}
+
+			ListQuantityField {
+				//% "Max Speed"
+				text: qsTrId("settings_minmax_max_speed")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
+				unit: Global.systemSettings.speedUnit
+				decimals: 0
+				value: Global.systemSettings.convertFromKilometersPerHour(dataItem.value)
+				saveInput: function() {
+					dataItem.setValue(Global.systemSettings.convertToKilometersPerHour(textField.text))
+				}
+			}
+
+			ListQuantityField {
+				//% "Max RPM"
+				text: qsTrId("settings_minmax_max_rpm")
+				unit: VenusOS.Units_RevolutionsPerMinute
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+			}
 		}
 	}
 }

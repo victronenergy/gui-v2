@@ -5,6 +5,15 @@
 
 .pragma library
 
+const SECONDS_PER_DAY = 86400
+const SECONDS_PER_HOUR = 3600
+const SECONDS_PER_MINUTE = 60
+const MS_PER_MINUTE = 60000
+const MINUTES_PER_HOUR = 60
+const METERS_PER_KILOMETER = 1000
+const METERS_PER_MILE = 1609.34
+const METERS_PER_NAUTICAL_MILE = 1852
+
 function arrayCompare(lhs, rhs) {
 	if (!Array.isArray(lhs)) {
 		if (!Array.isArray(rhs)) {
@@ -50,17 +59,17 @@ function findIndex(container, value) {
 }
 
 function decomposeDuration(seconds) {
-	const h = Math.floor(seconds / 3600)
-	const m = Math.floor((seconds - (h * 3600)) / 60)
+	const h = Math.floor(seconds / SECONDS_PER_HOUR)
+	const m = Math.floor((seconds - (h * SECONDS_PER_HOUR)) / SECONDS_PER_MINUTE)
 	return {
 		h: h,
 		m: m,
-		s: Math.floor(seconds - (h * 3600 + m * 60))
+		s: Math.floor(seconds - (h * SECONDS_PER_HOUR + m * SECONDS_PER_MINUTE))
 	}
 }
 
 function composeDuration(hours, minutes, seconds) {
-	return (hours || 0) * 3600 + (minutes || 0) * 60 + (seconds || 0)
+	return (hours || 0) * SECONDS_PER_HOUR + (minutes || 0) * SECONDS_PER_MINUTE + (seconds || 0)
 }
 
 function pad(val, length, char) {
@@ -111,7 +120,7 @@ function formatAsHHMMSS(seconds, showUnits) {
 }
 
 function formatGeneratorRuntime(seconds) {
-	return seconds < 60
+	return seconds < SECONDS_PER_MINUTE
 			? secondsToString(seconds)
 			: formatAsHHMM(seconds)
 }
@@ -182,31 +191,43 @@ function formatHoursMinutes(hours, minutes) {
 	return qsTrId("utils_format_hours_min").arg(hours).arg(minutes)
 }
 
+function decomposeSeconds(secs) {
+	const days = Math.floor(secs / SECONDS_PER_DAY)
+	const hours = Math.floor((secs - (days * SECONDS_PER_DAY)) / SECONDS_PER_HOUR)
+	const minutes = Math.floor((secs - (days * SECONDS_PER_DAY) - (hours * SECONDS_PER_HOUR)) / SECONDS_PER_MINUTE)
+	const seconds = Math.floor (secs - (days * SECONDS_PER_DAY) - (hours * SECONDS_PER_HOUR) - (minutes * SECONDS_PER_MINUTE))
+
+	return ({
+				days: days,
+				hours: hours,
+				minutes: minutes,
+				seconds: seconds
+			})
+}
+
 // Convert number of seconds into readable string
 function secondsToString(secs, showSeconds = true) {
 	if (isNaN(secs)) {
 		return "--"
 	}
-	const days = Math.floor(secs / 86400)
-	const hours = Math.floor((secs - (days * 86400)) / 3600)
-	const minutes = Math.floor((secs - (hours * 3600)) / 60)
-	const seconds = Math.floor(secs - (minutes * 60))
-	if (days > 0) {
-		return formatDaysHours(days, hours)
+	const duration = decomposeSeconds(secs)
+
+	if (duration.days > 0) {
+		return formatDaysHours(duration.days, duration.hours)
 	}
-	if (hours) {
-		return formatHoursMinutes(hours, minutes)
+	if (duration.hours) {
+		return formatHoursMinutes(duration.hours, duration.minutes)
 	}
-	if (minutes) {
+	if (duration.minutes) {
 		return showSeconds ?
 					//% "%1m %2s"
-					qsTrId("utils_format_min_sec").arg(minutes).arg(seconds) :
+					qsTrId("utils_format_min_sec").arg(duration.minutes).arg(duration.seconds) :
 					//% "%1m"
-					qsTrId("utils_format_min").arg(minutes)
+					qsTrId("utils_format_min").arg(duration.minutes)
 	}
 	return showSeconds ?
 				//% "%1s"
-				qsTrId("utils_format_sec").arg(seconds) :
+				qsTrId("utils_format_sec").arg(duration.seconds) :
 				//% "0m"
 				qsTrId("utils_zero_minutes")
 }
@@ -230,23 +251,23 @@ function qtyToString(qty, unitSingle, unitMultiple) {
 
 function formatTimestamp(dateTime, currentDateTime) {
 	let ms = Math.floor(currentDateTime - dateTime)
-	let minutes = Math.floor(ms / 60000)
+	let minutes = Math.floor(ms / MS_PER_MINUTE)
 	if (minutes < 1) {
 		//: Indicates an event happened very recently
 		//% "now"
 		return qsTrId("utils_formatTimestamp_now")
 	}
-	if (minutes < 60) {
+	if (minutes < MINUTES_PER_HOUR) {
 		//: Indicates an even happened some minutes before now. %1 = the number of minutes in the past
 		//% "%1m ago"
 		return qsTrId("utils_formatTimestamp_min_ago").arg(minutes) // eg. "26m ago"
 	}
-	let hours = Math.floor(minutes / 60)
+	let hours = Math.floor(minutes / MINUTES_PER_HOUR)
 	let days = Math.floor(hours / 24)
 	if (days < 1) {
 		//: Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past
 		//% "%1h %2m ago"
-		return qsTrId("utils_formatTimestamp_hours_min_ago").arg(hours).arg(minutes % 60) // eg. "2h 10m ago"
+		return qsTrId("utils_formatTimestamp_hours_min_ago").arg(hours).arg(minutes % MINUTES_PER_HOUR) // eg. "2h 10m ago"
 	}
 	if (days < 7) {
 		return dateTime.toLocaleString(Qt.locale(), "ddd hh:mm") // eg. "Mon 09:06"

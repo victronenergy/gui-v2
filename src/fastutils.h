@@ -29,6 +29,7 @@ public:
 	~FastUtils() override;
 
 	Q_INVOKABLE QList<qreal> calculateLoadGraphYValues(const QList<qreal> &data, int dataLen, qreal height) const;
+	Q_INVOKABLE qreal degreesToRadians(const qreal degrees) const;
 };
 
 }

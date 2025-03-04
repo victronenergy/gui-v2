@@ -21,10 +21,29 @@ QtObject {
 
 	property Component motorDriveComponent: Component {
 		Device {
+			property int gear: VenusOS.MotorDriveGear_Forward
+			property Timer t: Timer {
+				interval: 1000
+				running: true
+				repeat: true
+				onTriggered: {
+					if (++gear > VenusOS.MotorDriveGear_Forward) {
+						gear = VenusOS.MotorDriveGear_Neutral
+					}
+
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/RPM", Math.floor(Math.random() * 4000))
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Dc/0/Power", Math.floor(Math.random() * 12345))
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Dc/0/Current", Math.floor(Math.random() * 234))
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Direction", gear)
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Temperature", Math.floor(Math.random() * 100))
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Coolant/Temperature", Math.floor(Math.random() * 100))
+					Global.mockDataSimulator.setMockValue(serviceUid + "/Controller/Temperature", Math.floor(Math.random() * 100))
+				}
+			}
+
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Motor Drive %1".arg(deviceInstance))
-				Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/RPM", Math.floor(Math.random() * 50))
 			}
 		}
 	}
