@@ -264,6 +264,8 @@ Page {
 				dataItem.uid: root.bindPrefix + "/TimeToGo"
 				preferredVisible: dataItem.seen
 				secondaryText: Utils.secondsToString(dataItem.value)
+				property var value: dataItem.value
+				onValueChanged: console.log(dataItem.uid, value )
 			}
 
 			ListRelayState {
