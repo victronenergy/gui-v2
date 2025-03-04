@@ -241,7 +241,9 @@ SwipeViewPage {
 				// AC input gauge progresses in clockwise direction (i.e. upwards).
 				direction: PathArc.Clockwise
 				startAngle: gaugeParams.start + startAngleOffset
+				onStartAngleChanged: console.log("startAngle:", startAngle, gaugeParams.start, startAngleOffset)
 				endAngle: gaugeParams.end
+				onEndAngleChanged: console.log("endAngle:", endAngle)
 				phaseLabelHorizontalMargin: gaugeParams.phaseLabelHorizontalMargin
 				arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 				horizontalAlignment: Qt.AlignLeft

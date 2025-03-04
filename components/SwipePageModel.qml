@@ -17,6 +17,10 @@ ObjectModel {
 		}
 	}
 
+	BoatPage {
+		view: root.view
+	}
+
 	BriefPage {
 		view: root.view
 

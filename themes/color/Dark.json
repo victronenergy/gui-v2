@@ -95,6 +95,8 @@
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_blue",
 
+    "color_boatPage_background": "color_black",
+
     "color_briefPage_background": "color_black",
     "color_briefPage_battery_value_text_color": "color_gray5",
     "color_briefPage_battery_unit_text_color": "color_gray4",
