@@ -231,6 +231,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Page.qml
     components/PageGensetModel.qml
     components/PageStack.qml
+    components/VeQuickItemsQuotient.qml
     components/ProgressArc.qml
     components/QuantityTableMetrics.qml
     components/QuantityGroupListHeader.qml
@@ -435,6 +436,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/TankDescription.qml
     data/common/TankModel.qml
 
+    pages/BoatPage.qml
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
@@ -1060,6 +1062,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES
     FILES
         fonts/Roboto-Regular.ttf
+        images/boat_glow.png
         images/acloads.svg
         images/alternator.svg
         images/breadcrumb_lhs.svg
@@ -1067,6 +1070,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
+        images/icon_boat_32.svg
         images/icon_connectivity_32.png
         images/icon_debug_32.png
         images/icon_devices_32.png
@@ -1119,18 +1123,22 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_controls_off_32.svg
         images/icon_controls_on_32.svg
         images/icon_dc_24.svg
+        images/icon_engine_temp_32.svg
         images/icon_humidity_32.svg
         images/icon_input_24.svg
         images/icon_manualstart_24.svg
         images/icon_manualstart_timer_24.svg
         images/icon_minus.svg
+        images/icon_motorController_32.svg
         images/icon_plus.svg
         images/icon_plus_32.svg
+        images/icon_propeller_32.svg
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg
         images/icon_screen_sleep_32.svg
         images/icon_temp_32.svg
+        images/icon_temp_coolant_32.svg
         images/information.svg
         images/inverter.svg
         images/inverter_charger.svg

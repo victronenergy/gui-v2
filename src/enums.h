@@ -84,7 +84,10 @@ public:
 		Units_Hectopascal,
 		Units_Kilopascal,
 		Units_CardinalDirection,
-		Units_PowerFactor
+		Units_PowerFactor,
+		Units_Time_Day,
+		Units_Time_Hour,
+		Units_Time_Minute
 	};
 	Q_ENUM(Units_Type)
 
@@ -754,6 +757,13 @@ public:
 		ModificationChecks_SystemHooksState_HookLoadedAtBoot = 16
 	};
 	Q_ENUM(ModificationChecks_SystemHooksState)
+
+	enum MotorDriveGear {
+		MotorDriveGear_Neutral,
+		MotorDriveGear_Reverse,
+		MotorDriveGear_Forward
+	};
+	Q_ENUM(MotorDriveGear)
 
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
