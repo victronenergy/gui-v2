@@ -28,5 +28,10 @@ QList<qreal> FastUtils::calculateLoadGraphYValues(const QList<qreal> &data, int 
 	return ret;
 }
 
+qreal FastUtils::degreesToRadians(const qreal degrees) const
+{
+	return degrees * 0.017453292519943295;  // Math.PI/180
+}
+
 }
 }

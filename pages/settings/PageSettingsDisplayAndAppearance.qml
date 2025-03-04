@@ -72,9 +72,11 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Data units"
-				text: qsTrId("pagesettingsgeneral_data_units")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+				//% "Start page"
+				text: qsTrId("settings_brief_view_start_page")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayStartPage.qml", {"title": text})
+				}
 			}
 
 			ListNavigation {
@@ -85,19 +87,23 @@ Page {
 				}
 			}
 
+			ListSwitch {
+				//% "Boat page"
+				text: qsTrId("settings_display_boat_page")
+				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+			}
+
+			ListNavigation {
+				//% "Data units"
+				text: qsTrId("pagesettingsgeneral_data_units")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": text})
+			}
+
 			ListNavigation {
 				//% "Minimum and maximum gauge ranges"
 				text: qsTrId("settings_display_minmax")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayMinMax.qml", {"title": text})
-				}
-			}
-
-			ListNavigation {
-				//% "Start page"
-				text: qsTrId("settings_brief_view_start_page")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayStartPage.qml", {"title": text})
 				}
 			}
 

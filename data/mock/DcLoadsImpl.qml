@@ -69,6 +69,10 @@ QtObject {
 		repeat: true
 
 		onTriggered: {
+			if (! Global.allDevicesModel) {
+				return
+			}
+
 			let totalPower = NaN
 			for (let i = 0; i < Global.allDevicesModel.combinedDcLoadDevices.count; ++i) {
 				const dcLoad = Global.allDevicesModel.combinedDcLoadDevices.deviceAt(i)

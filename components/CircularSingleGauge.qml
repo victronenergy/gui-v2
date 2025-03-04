@@ -10,6 +10,8 @@ Item {
 	id: gauges
 
 	property alias value: arc.value
+	property alias startAngle: arc.startAngle
+	property alias endAngle: arc.endAngle
 	property int status
 	property alias animationEnabled: arc.animationEnabled
 	property alias shineAnimationEnabled: arc.shineAnimationEnabled
