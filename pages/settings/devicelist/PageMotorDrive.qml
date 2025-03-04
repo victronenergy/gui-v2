@@ -58,6 +58,13 @@ Page {
 			}
 
 			ListTemperature {
+				//% "Coolant Temperature"
+				text: qsTrId("devicelist_motordrive_coolanttemperature")
+				dataItem.uid: root.bindPrefix + "/Coolant/Temperature"
+				preferredVisible: dataItem.valid
+			}
+
+			ListTemperature {
 				//% "Controller Temperature"
 				text: qsTrId("devicelist_motordrive_controllertemperature")
 				dataItem.uid: root.bindPrefix + "/Controller/Temperature"

@@ -14,9 +14,10 @@ Item {
 	readonly property alias quantityInfo: quantityInfo
 	property alias font: unitLabel.font
 	property alias valueColor: valueLabel.color
+	property alias verticalAlignment: valueLabel.verticalAlignment
 	property alias unitColor: unitLabel.color
 	property alias valueText: valueLabel.text
-	readonly property alias unitText: unitLabel.text
+	property alias unitText: unitLabel.text
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
 	property alias formatHints: quantityInfo.formatHints
@@ -62,6 +63,7 @@ Item {
 			// else it is noticeably misaligned by less than 1 pixel.
 			anchors.baseline: valueLabel.baseline
 			anchors.alignWhenCentered: font.pixelSize >= Theme.font_size_body1
+			verticalAlignment: valueLabel.verticalAlignment
 			text: quantityInfo.unit
 			color: Theme.color_font_secondary
 		}

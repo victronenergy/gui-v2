@@ -182,31 +182,43 @@ function formatHoursMinutes(hours, minutes) {
 	return qsTrId("utils_format_hours_min").arg(hours).arg(minutes)
 }
 
+function decomposeSeconds(secs) {
+	const days = Math.floor(secs / 86400)
+	const hours = Math.floor((secs - (days * 86400)) / 3600)
+	const minutes = Math.floor((secs - (days * 86400) - (hours * 3600)) / 60)
+	const seconds = Math.floor (secs - (days * 86400) - (hours * 3600) - (minutes * 60))
+
+	return ({
+				days: days,
+				hours: hours,
+				minutes: minutes,
+				seconds: seconds
+			})
+}
+
 // Convert number of seconds into readable string
 function secondsToString(secs, showSeconds = true) {
 	if (isNaN(secs)) {
 		return "--"
 	}
-	const days = Math.floor(secs / 86400)
-	const hours = Math.floor((secs - (days * 86400)) / 3600)
-	const minutes = Math.floor((secs - (hours * 3600)) / 60)
-	const seconds = Math.floor(secs - (minutes * 60))
-	if (days > 0) {
-		return formatDaysHours(days, hours)
+	const duration = decomposeSeconds(secs)
+
+	if (duration.days > 0) {
+		return formatDaysHours(duration.days, duration.hours)
 	}
-	if (hours) {
-		return formatHoursMinutes(hours, minutes)
+	if (duration.hours) {
+		return formatHoursMinutes(duration.hours, duration.minutes)
 	}
-	if (minutes) {
+	if (duration.minutes) {
 		return showSeconds ?
 					//% "%1m %2s"
-					qsTrId("utils_format_min_sec").arg(minutes).arg(seconds) :
+					qsTrId("utils_format_min_sec").arg(duration.minutes).arg(duration.seconds) :
 					//% "%1m"
-					qsTrId("utils_format_min").arg(minutes)
+					qsTrId("utils_format_min").arg(duration.minutes)
 	}
 	return showSeconds ?
 				//% "%1s"
-				qsTrId("utils_format_sec").arg(seconds) :
+				qsTrId("utils_format_sec").arg(duration.seconds) :
 				//% "0m"
 				qsTrId("utils_zero_minutes")
 }
