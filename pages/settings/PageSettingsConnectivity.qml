@@ -61,12 +61,6 @@ Page {
 				}
 			}
 
-			ListNavigation {
-				//% "GPS"
-				text: qsTrId("settings_gps")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGpsList.qml", {"title": text})
-			}
-
 			Column {
 				width: parent ? parent.width : 0
 				spacing: Theme.geometry_gradientList_spacing

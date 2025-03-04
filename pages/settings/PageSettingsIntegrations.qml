@@ -20,6 +20,9 @@ Page {
 		id: settingsListView
 
 		model: VisibleItemModel {
+			/*
+			  The intention here was to provide a wizard helping to find the right setup process – As we are not there yet, let’s hide it for now
+
 			ListNavigation {
 				text: CommonWords.add_device
 				icon.source: "qrc:/images/icon_plus_32.svg"
@@ -30,11 +33,18 @@ Page {
 			}
 
 			SettingsListHeader { }
+			*/
 
 			ListNavigation {
 				//% "PV Inverters"
 				text: qsTrId("pagesettingsintegrations_pv_inverters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
+			}
+
+			ListNavigation {
+				//% "Energy meters via RS485"
+				text: qsTrId("pagesettingsintegrations_energy_meters")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
 			}
 
 			ListNavigation {
@@ -46,7 +56,7 @@ Page {
 			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
-				preferredVisible: hasBluetoothSupport.value
+				preferredVisible: !!hasBluetoothSupport.value
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
 
 				VeQuickItem {
@@ -162,7 +172,14 @@ Page {
 			ListNavigation {
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
+				secondaryText: modbusServerEnabled.value ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": text}) // TODO - is this correct?
+
+				VeQuickItem {
+					id: modbusServerEnabled
+
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				}
 			}
 
 			SettingsListHeader {
