@@ -203,7 +203,7 @@ QtObject {
 			}
 			var newSoc = dummyBattery._stateOfCharge.value + stepSize
 			if (newSoc >= 0 && newSoc <= 100) {
-				dummyBattery._stateOfCharge.setValue(newSoc)
+				dummyBattery._stateOfCharge.setValue(62)
 			} else if (newSoc > 100) {
 				dummyBattery._stateOfCharge.setValue(100)
 				stop()
@@ -213,7 +213,7 @@ QtObject {
 				stop()
 				chargeRestartTimer.start()
 			}
-			dummyBattery._timeToGo.setValue(60 * 60 * 3 * (newSoc / 100))
+			dummyBattery._timeToGo.setValue(72 * 60)
 
 			// Positive power when battery is charging, negative power when battery is discharging
 			const randomPower = Math.round(100 + (Math.random() * 300))
