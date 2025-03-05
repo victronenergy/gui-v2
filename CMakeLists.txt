@@ -1060,6 +1060,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES
     FILES
         fonts/Roboto-Regular.ttf
+        images/boat_glow.png
         images/acloads.svg
         images/alternator.svg
         images/breadcrumb_lhs.svg
@@ -1067,8 +1068,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
-	images/icon_boat_32.svg
-	images/icon_connectivity_32.png
+        images/icon_boat_32.svg
+        images/icon_connectivity_32.png
         images/icon_debug_32.png
         images/icon_devices_32.png
         images/icon_general_32.png
