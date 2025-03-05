@@ -16,8 +16,7 @@ QtObject {
 	readonly property real current: _current.isValid ? _current.value : NaN
 	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
 	readonly property real timeToGo: _timeToGo.isValid ? _timeToGo.value : NaN
-	readonly property string icon: mode === VenusOS.Battery_Mode_Idle ? "qrc:/images/icon_battery_24.svg"
-			: (mode === VenusOS.Battery_Mode_Charging ? "qrc:/images/icon_battery_charging_24.svg" : "qrc:/images/icon_battery_discharging_24.svg")
+	readonly property string icon: VenusOS.battery_iconFromMode(mode)
 	readonly property int mode: VenusOS.battery_modeFromPower(power)
 
 	readonly property VeQuickItem _stateOfCharge: VeQuickItem {

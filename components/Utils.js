@@ -117,7 +117,7 @@ function formatGeneratorRuntime(seconds) {
 }
 
 function formatBatteryTimeToGo(seconds) {
-	if (seconds == 0) {
+	if (isNaN(seconds) || seconds === 0) {
 		return ""
 	}
 	const text = secondsToString(seconds)

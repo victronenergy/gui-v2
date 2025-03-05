@@ -187,6 +187,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/BarGaugeBase.qml
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
+    components/BriefCenterDisplay.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
@@ -237,6 +238,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityRow.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
+    components/RadioButtonListPage.qml
     components/RsSystemAcIODisplay.qml
     components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
@@ -320,6 +322,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListActiveAcInput.qml
     components/listitems/ListAlarmLevelRadioButtonGroup.qml
     components/listitems/ListAlarmState.qml
+    components/listitems/ListBriefCenterDetails.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
