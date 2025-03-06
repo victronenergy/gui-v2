@@ -64,6 +64,7 @@ Page {
 			height: effectiveVisible ? implicitHeight : -Theme.geometry_gradientList_spacing
 
 			text: modelObject.display || ""
+			secondaryText: modelObject.secondaryText || ""
 			interactive: !modelObject.readOnly
 			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: interactive || checked
