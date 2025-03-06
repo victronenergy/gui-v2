@@ -30,7 +30,15 @@ Page {
 	}
 
 	GradientListView {
+		id: listView
+
 		model: services
+
+		header: PrimaryListLabel {
+			//% "No temperature sensors have been added yet."
+			text: qsTrId("settings_relay_no_temperature_sensors")
+			preferredVisible: listView.count === 0
+		}
 
 		delegate: ListTemperatureRelay {
 			id: relayDelegate
