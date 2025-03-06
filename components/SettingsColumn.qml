@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 Column {
-	property bool preferredVisible
+	property bool preferredVisible: true
 	readonly property bool effectiveVisible: preferredVisible
 
 	spacing: Theme.geometry_gradientList_spacing
