@@ -260,6 +260,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
+    components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
     components/TabBar.qml
     components/TankItem.qml
