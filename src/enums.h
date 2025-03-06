@@ -43,13 +43,13 @@ public:
 	};
 	Q_ENUM(Gauges_ValueType)
 
-    enum StatusBar_AuxButton {
+	enum StatusBar_AuxButton {
 		StatusBar_AuxButton_None,
 		StatusBar_AuxButton_AuxDisabled,
 		StatusBar_AuxButton_AuxInactive,
 		StatusBar_AuxButton_AuxActive,
-    };
-    Q_ENUM(StatusBar_AuxButton)
+	};
+	Q_ENUM(StatusBar_AuxButton)
 
 	enum StatusBar_LeftButton {
 		StatusBar_LeftButton_None,

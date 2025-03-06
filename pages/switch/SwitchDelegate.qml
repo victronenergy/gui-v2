@@ -8,6 +8,11 @@ import Victron.VenusOS
 import QtQuick.Effects as Effects
 
 Item {
+	id: root
+
+	height: mainItem.contentHeight
+	visible: switchData._status.isValid
+
 	property int controlBorderWidth: 2
 	property color backColor: Theme.color_darkOk
 	property color highLightColor: Theme.color_ok
@@ -15,7 +20,6 @@ Item {
 	property alias serviceUid: switchData.serviceUid
 	property alias title : titleText.text
 	property bool showSeparator: true
-
 
 	property QtObject switchData: QtObject {
 		id :switchData
@@ -27,10 +31,7 @@ Item {
 		readonly property VeQuickItem _status: VeQuickItem {
 			uid: serviceUid + "/Status"
 		}
-//		readonly property VeQuickItem _customName: VeQuickItem {
-//			uid: serviceUid + "Settings/CustomName"
-//			property bool valueValid: isValid &&  value!==""
-//		}
+
 		readonly property VeQuickItem _type: VeQuickItem {
 			uid: serviceUid + "/Settings/Type"
 		}
@@ -43,9 +44,6 @@ Item {
 		}
 	}
 
-	id: root
-	height: mainItem.contentHeight
-	visible: switchData._status.isValid
 	Column {
 		id: mainItem
 		Row {
@@ -88,7 +86,6 @@ Item {
 			color: Theme.color_ok
 			clip: true
 			anchors{
-				//top:header.bottom
 				horizontalCenter: parent.horizontalCenter
 			}
 			width: parent.width * 0.98

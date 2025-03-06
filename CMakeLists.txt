@@ -1070,8 +1070,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         fonts/Roboto-Regular.ttf
         images/acloads.svg
         images/alternator.svg
-		images/icon_auxpage_off_32.svg
-		images/icon_auxpage_on_32.svg
+        images/icon_auxpage_off_32.svg
+        images/icon_auxpage_on_32.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
         images/icon_battery_24.svg

@@ -104,7 +104,7 @@ Rectangle {
 
 	StatusBarButton {
 		id: auxButton
-				anchors {
+		anchors {
 			left: leftButton.right
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter

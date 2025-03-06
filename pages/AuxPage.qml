@@ -33,14 +33,10 @@ Page {
 
 		model: ObjectModel {
 			Loader {
-				property SwitchesCardModel switchModel: SwitchesCardModel {}
 				id: switchesLoader
-				// width: active
-				// 	   ? switchModel.count * root.cardWidth + (switchModel.count-1) * auxView.spacing
-				// 	   : -auxView.spacing
+				property SwitchesCardModel switchModel: SwitchesCardModel {}
 				sourceComponent: SwitchAuxInsert{
 					onImplicitWidthChanged: switchesLoader.width = implicitWidth
-					//width: switchesLoader.width
 					height: auxView.height
 					model: switchModel
 				}

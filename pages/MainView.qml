@@ -140,10 +140,6 @@ Item {
 		enabled: root.auxActive || auxOutAnimation.running
 
 		anchors {
-			// top: statusBar.bottom
-			// left: parent.left
-			// right: parent.right
-			// bottom: parent.bottom
 			top: statusBar.bottom
 			left: root.left
 			right: root.right
@@ -195,46 +191,46 @@ Item {
 		}
 
 		SequentialAnimation {
-		id: auxOutAnimation
+			id: auxOutAnimation
 
-		running: auxCardsLoader.active && !root.auxActive
+			running: auxCardsLoader.active && !root.auxActive
 
-		ParallelAnimation {
-			YAnimator {
-				target: auxCardsLoader
-				from: statusBar.height
-				to: statusBar.height - Theme.geometry_controlCards_slide_distance
-				duration: Theme.animation_controlCards_slide_duration
-				easing.type: Easing.InSine
-			}
-			OpacityAnimator {
-				target: auxCardsLoader
-				from: 1.0
-				to: 0.0
-				duration: Theme.animation_controlCards_slide_duration
-				easing.type: Easing.InSine
-			}
-			OpacityAnimator {
-				target: swipeView
-				from: 0.0
-				to: 1.0
-				duration: Theme.animation_controlCards_slide_duration
-				easing.type: Easing.InSine
-			}
-			OpacityAnimator {
-				target: navBar
-				from: 0.0
-				to: 1.0
-				duration: Theme.animation_controlCards_slide_duration
-				easing.type: Easing.InSine
-			}
-			ColorAnimation {
-				target: statusBar
-				property: "color"
-				from: Theme.color_page_background
-				to: root.backgroundColor
-				duration: Theme.animation_controlCards_slide_duration
-				easing.type: Easing.InSine
+			ParallelAnimation {
+				YAnimator {
+					target: auxCardsLoader
+					from: statusBar.height
+					to: statusBar.height - Theme.geometry_controlCards_slide_distance
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: auxCardsLoader
+					from: 1.0
+					to: 0.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: swipeView
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				OpacityAnimator {
+					target: navBar
+					from: 0.0
+					to: 1.0
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
+				}
+				ColorAnimation {
+					target: statusBar
+					property: "color"
+					from: Theme.color_page_background
+					to: root.backgroundColor
+					duration: Theme.animation_controlCards_slide_duration
+					easing.type: Easing.InSine
 				}
 			}
 		}
@@ -525,15 +521,15 @@ Item {
 		}
 
 		onAuxButtonClicked: {
-		switch (auxButton) {
-			case VenusOS.StatusBar_AuxButton_AuxInactive:
-				root.auxActive = true
-				break
-			case VenusOS.StatusBar_AuxButton_AuxActive:
-				root.auxActive = false
-				break;
-			default:
-				break
+			switch (auxButton) {
+				case VenusOS.StatusBar_AuxButton_AuxInactive:
+					root.auxActive = true
+					break
+				case VenusOS.StatusBar_AuxButton_AuxActive:
+					root.auxActive = false
+					break;
+				default:
+					break
 			}
 		}
 

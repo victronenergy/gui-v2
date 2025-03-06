@@ -9,8 +9,6 @@ import Victron.VenusOS
 Item {
 	id: root
 
-
-
 	property int spacing: Theme.geometry_controlCardsPage_spacing
 	property SwitchesCardModel model: null
 	implicitWidth: cards.implicitWidth

@@ -18,13 +18,13 @@ QtObject {
 		//channel status
 		case VenusOS.Switch_Status_Output_Fault:
 			//% "Output fault"
-			return qsTrId("Switch_Output_Fault")
+			return qsTrId("switch_output_fault")
 		case VenusOS.Switch_Status_Disabled:
 		case VenusOS.Switch_Status_TripLowVoltage:
 			return CommonWords.disabled
 		case VenusOS.Switch_Status_Powered:
 			//% "Powered"
-			return qsTrId("Switch_Input_Active")
+			return qsTrId("switch_Input_Active")
 
 		case VenusOS.Switch_Status_Off:
 			return CommonWords.off
@@ -32,32 +32,32 @@ QtObject {
 			return CommonWords.on
 		case VenusOS.Switch_Status_Over_Temperature:
 			//% "Over temperature"
-			return qsTrId("Switches_Over_temperature")
+			return qsTrId("switches_Over_temperature")
 		case VenusOS.Switch_Status_Short_Fault:
 			//% "Short"
-			return qsTrId("Switches_short") //move to common
+			return qsTrId("switches_short") //move to common
 		case VenusOS.Switch_Status_Tripped:
 			//% "Tripped"
-			return qsTrId("Switches_tripped")//move to common
+			return qsTrId("switches_tripped")//move to common
 
 		//module state
 		case VenusOS.Switch_ModuleState_Channel_Fault:
 			//% "Channel Fault"
-			return qsTrId("Switches_Channel_fault")
+			return qsTrId("switches_channel_fault")
 		case VenusOS.Switch_ModuleState_Channel_Tripped:
 			//% "Channel Tripped"
-			return qsTrId("Switches_Channel_Trippped")
+			return qsTrId("switches_channel_trippped")
 		case VenusOS.Switch_ModuleState_Connected:
 			return CommonWords.running_status
 		case VenusOS.Switch_ModuleState_Over_Temperature:
 			//% "Over temperature"
-			return qsTrId("Switches_Over_temperature")
+			return qsTrId("switches_Over_temperature")
 		case VenusOS.Switch_ModuleState_Temperature_Warning:
 			//% "Temperature Warning"
-			return qsTrId("Switches_temperature_warning")
+			return qsTrId("switches_temperature_warning")
 		case VenusOS.Switch_ModuleState_Under_Voltage:
 			//% "Under voltage"
-			return qsTrId("Switches_under_voltage")
+			return qsTrId("switches_under_voltage")
 		default:
 			return val
 		}
@@ -132,21 +132,21 @@ QtObject {
 		switch (val) {
 		case VenusOS.Switch_Function_Momentary:
 			//% "Momentary"
-			return qsTrId("Switches_Momentary")
+			return qsTrId("switches_momentary")
 		case VenusOS.Switch_Function_Latching:
 			//% "Latching"
-			return qsTrId("Switches_Latching")
+			return qsTrId("switches_latching")
 		case VenusOS.Switch_Function_Dimmable:
 			//% "Dimmable"
-			return qsTrId("Switches_Dimmable")
+			return qsTrId("switches_dimmable")
 		case VenusOS.Switch_Function_Slave:
 			//% "Slave of %1"
-			if (channel) return qsTrId("Switches_SlaveOf").arg(channel)
+			if (channel) return qsTrId("switches_slave_of").arg(channel)
 			//% "Slave"
-			 else return qsTrId("Switches_Slave")
+			 else return qsTrId("switches_slave")
 		default:
 			//% "Undefined"
-			return qsTrId("Switches_Undefined")
+			return qsTrId("switches_undefined")
 		}
 	}
 
