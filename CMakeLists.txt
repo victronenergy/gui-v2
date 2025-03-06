@@ -264,6 +264,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SwipeViewPage.qml
     components/SystemReason.qml
     components/SystemBatteryDeviceModel.qml
+    components/SystemBatteryDelegate.qml
     components/TabBar.qml
     components/TankItem.qml
     components/TankGauge.qml
