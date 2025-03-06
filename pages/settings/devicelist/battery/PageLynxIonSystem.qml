@@ -17,7 +17,7 @@ Page {
 				//% "Capacity"
 				text: qsTrId("lynxionsystem_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
@@ -50,7 +50,7 @@ Page {
 					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
 					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
 				}
-				preferredVisible: minCellVoltage.isValid && maxCellVoltage.isValid
+				preferredVisible: minCellVoltage.valid && maxCellVoltage.valid
 
 				VeQuickItem {
 					id: minCellVoltage
@@ -70,7 +70,7 @@ Page {
 					QuantityObject { object: minCellTemperature; key: "convertedValue"; unit: Global.systemSettings.temperatureUnit }
 					QuantityObject { object: maxCellTemperature; key: "convertedValue"; unit: Global.systemSettings.temperatureUnit }
 				}
-				preferredVisible: minCellTemperature.isValid && maxCellTemperature.isValid
+				preferredVisible: minCellTemperature.valid && maxCellTemperature.valid
 
 				VeQuickItem {
 					id: minCellTemperature

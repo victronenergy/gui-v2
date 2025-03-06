@@ -9,12 +9,12 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: statusCode.isValid ? "" : CommonWords.not_connected
+	secondaryText: statusCode.valid ? "" : CommonWords.not_connected
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
-		QuantityObject { object: statusCode.isValid ? statusCode : null; key: "statusText" }
-		QuantityObject { object: statusCode.isValid ? power : null; unit: VenusOS.Units_Watt }
+		QuantityObject { object: statusCode.valid ? statusCode : null; key: "statusText" }
+		QuantityObject { object: statusCode.valid ? power : null; unit: VenusOS.Units_Watt }
 	}
 
 	onClicked: {

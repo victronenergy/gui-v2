@@ -29,8 +29,8 @@ BaseDevice {
 		uid: root.serviceUid ? root.serviceUid + "/ProductName" : ""
 	}
 
-	deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
-	productId: _productId.isValid ? _productId.value : 0
+	deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
+	productId: _productId.valid ? _productId.value : 0
 	productName: _productName.value || ""
 	customName: _customName.value || ""
 	name: _customName.value || _productName.value || ""

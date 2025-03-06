@@ -14,7 +14,7 @@ PageGenerator {
 		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 	}
 
-	model: !relayFunction.isValid || relayFunction.value === 1 ? startStopModel : disabledModel
+	model: !relayFunction.valid || relayFunction.value === 1 ? startStopModel : disabledModel
 
 	VisibleItemModel {
 		id: disabledModel

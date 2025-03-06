@@ -93,8 +93,8 @@ Page {
 				//% "Detect generator at AC input"
 				text: qsTrId("page_settings_generator_detect_generator_at_ac_input")
 				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtAcIn"
-				interactive: dataItem.isValid && (generatorIsSet || checked)
-				preferredVisible: !noGeneratorAtDcInAlarm.isValid
+				interactive: dataItem.valid && (generatorIsSet || checked)
+				preferredVisible: !noGeneratorAtDcInAlarm.valid
 				onClicked: {
 					if (!checked) {
 						if (!generatorIsSet) {
@@ -126,8 +126,8 @@ Page {
 				//% "Alarm if DC generator is not providing power"
 				text: qsTrId("page_settings_generator_detect_generator_at_dc")
 				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtDcIn"
-				enabled: dataItem.isValid
-				preferredVisible: noGeneratorAtDcInAlarm.isValid
+				enabled: dataItem.valid
+				preferredVisible: noGeneratorAtDcInAlarm.valid
 				onClicked: {
 					if (!checked) {
 							//% "An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting"

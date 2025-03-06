@@ -84,7 +84,7 @@ Page {
 				text: CommonWords.dynamic_power_limit
 				unit: VenusOS.Units_Watt
 				dataItem.uid: root.pvInverter.serviceUid + "/Ac/PowerLimit"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListAcInError {

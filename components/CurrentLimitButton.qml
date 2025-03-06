@@ -20,9 +20,9 @@ ListItemButton {
 
 	function _currentLimitNotAdjustableText() {
 		if (serviceType !== "acsystem") {
-			if (dmc.isValid) {
+			if (dmc.valid) {
 				return CommonWords.noAdjustableByDmc
-			} else if (bmsMode.isValid) {
+			} else if (bmsMode.valid) {
 				return CommonWords.noAdjustableByBms
 			}
 		}
@@ -76,7 +76,7 @@ ListItemButton {
 		id: currentLimitDialogComponent
 
 		CurrentLimitDialog {
-			productId: productIdItem.isValid ? productIdItem.value : 0
+			productId: productIdItem.valid ? productIdItem.value : 0
 			title: Global.acInputs.currentLimitTypeToText(root.inputType)
 			secondaryTitle: CommonWords.acInput(root.inputNumber)
 			onAccepted: currentLimitItem.setValue(value)

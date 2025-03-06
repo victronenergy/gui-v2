@@ -29,7 +29,7 @@ VisibleItemModel {
 	ListTemperature {
 		text: CommonWords.temperature
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListQuantity {
@@ -37,7 +37,7 @@ VisibleItemModel {
 		text: qsTrId("dcmeter_aux_voltage")
 		dataItem.uid: root.bindPrefix + "/Dc/1/Voltage"
 		unit: VenusOS.Units_Volt_DC
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListRelayState {

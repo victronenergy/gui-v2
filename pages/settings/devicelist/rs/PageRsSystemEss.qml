@@ -63,7 +63,7 @@ Page {
 			ListNavigation {
 				//% "Scheduled charge levels"
 				text: qsTrId("settings_rs_scheduled_charge_levels")
-				secondaryText: scheduleSoc.isValid
+				secondaryText: scheduleSoc.valid
 						  //% "Active (%1)"
 						? qsTrId("scheduled_charge_active").arg(Units.getCombinedDisplayText(VenusOS.Units_Percentage, scheduleSoc.value))
 						  //% "Inactive"

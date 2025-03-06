@@ -168,7 +168,7 @@ FocusScope {
 			anchors.verticalCenter: parent.verticalCenter
 			color: Theme.color_font_primary
 			source: {
-				if (!signalStrength.isValid) {
+				if (!signalStrength.valid) {
 					return ""
 				} else if (signalStrength.value > 75) {
 					return "qrc:/images/icon_WiFi_4_32.svg"

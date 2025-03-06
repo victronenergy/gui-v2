@@ -30,7 +30,7 @@ Page {
 	}
 
 	function em24Locked() {
-		return em24SwitchPos.dataItem.isValid && em24SwitchPos.dataItem.value === 3
+		return em24SwitchPos.dataItem.valid && em24SwitchPos.dataItem.value === 3
 	}
 
 	function em24SwitchText(pos) {
@@ -106,7 +106,7 @@ Page {
 				text: qsTrId("ac-in-setup_phase_configuration")
 				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/PhaseConfig"
-				interactive: dataItem.isValid && !em24Locked()
+				interactive: dataItem.valid && !em24Locked()
 				optionModel: [
 					{ display: "3P.n", value: 0 },
 					{ display: "3P.1", value: 1 },
@@ -122,7 +122,7 @@ Page {
 				text: qsTrId("ac-in-setup_switch_position")
 				preferredVisible: productId.value == ProductInfo.ProductId_EnergyMeter_Em24
 				dataItem.uid: root.bindPrefix + "/SwitchPos"
-				secondaryText: dataItem.isValid ? em24SwitchText(dataItem.value) : "--"
+				secondaryText: dataItem.valid ? em24SwitchText(dataItem.value) : "--"
 			}
 
 			PrimaryListLabel {

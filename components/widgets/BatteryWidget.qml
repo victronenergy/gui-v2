@@ -10,7 +10,7 @@ import QtQuick.Controls.impl as CP
 OverviewWidget {
 	id: root
 
-	readonly property bool preferRenewable: preferRenewableEnergy.isValid
+	readonly property bool preferRenewable: preferRenewableEnergy.valid
 	readonly property bool preferRenewableOverride: preferRenewableEnergy.value === 0 || preferRenewableEnergy.value === 2
 	readonly property bool preferRenewableOverrideGenset: remoteGeneratorSelected.value === 1 || Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Generator
 
@@ -84,7 +84,7 @@ OverviewWidget {
 	title: CommonWords.battery
 	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
-	enabled: batteries.isValid
+	enabled: batteries.valid
 
 	quantityLabel.value: batteryData.stateOfCharge
 	quantityLabel.unit: VenusOS.Units_Percentage

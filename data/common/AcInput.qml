@@ -19,7 +19,7 @@ Device {
 	readonly property string serviceName: !!inputInfo ? inputInfo.serviceName : ""
 
 	readonly property int source: !!inputInfo ? inputInfo.source : VenusOS.AcInputs_InputSource_NotAvailable
-	readonly property int gensetStatusCode: _gensetStatusCode.isValid ? _gensetStatusCode.value : -1
+	readonly property int gensetStatusCode: _gensetStatusCode.valid ? _gensetStatusCode.value : -1
 
 	// clamp to zero any values with magnitude < 1 (assume it's noise) to avoid UI flicker.
 	readonly property real power: (Math.floor(Math.abs(_phaseMeasurements.power)) < 1.0) ? 0.0 : _phaseMeasurements.power
@@ -40,7 +40,7 @@ Device {
 				// - system /Ac/In/<x>/Connected=1 for this input
 				// - this input matches the vebus /Ac/ActiveIn value
 				if (root.inputInfo.connected
-						&& _activeInput.isValid
+						&& _activeInput.valid
 						&& root.inputInfo.inputIndex === _activeInput.value) {
 					return root.serviceUid + "/Ac/ActiveIn"
 				}
@@ -48,7 +48,7 @@ Device {
 			case "acsystem":
 				// Multi RS is like the vebus case; it can only measure its active input.
 				if (root.inputInfo.connected
-						&& _activeInput.isValid
+						&& _activeInput.valid
 						&& root.inputInfo.inputIndex === _activeInput.value) {
 					return "%1/Ac/In/%2".arg(root.serviceUid).arg(_activeInput.value + 1)
 				}

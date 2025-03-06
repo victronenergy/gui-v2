@@ -30,7 +30,7 @@ Page {
 			//% "%1: %2"
 			text: qsTrId("smappee_ct_list_type").arg(ctIndex + 1).arg(typeLookup.typeName)
 			secondaryText: phase.value === undefined ? "" : "L%1".arg(phase.value + 1)
-			preferredVisible: type.isValid
+			preferredVisible: type.valid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml",
 						{ "bindPrefix": root.bindPrefix, ctIndex: menu.ctIndex })

@@ -12,7 +12,7 @@ ListItem {
 	readonly property alias dataItem: slider.dataItem
 	readonly property alias slider: slider
 
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	rightPadding: 0
 	content.children: [

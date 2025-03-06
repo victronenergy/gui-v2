@@ -9,13 +9,13 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property bool _showPower: !mode.isValid || status.value === VenusOS.Evcs_Status_Charging
-	readonly property bool _showStatus: !_showPower && status.isValid
+	readonly property bool _showPower: !mode.valid || status.value === VenusOS.Evcs_Status_Charging
+	readonly property bool _showStatus: !_showPower && status.valid
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
-		QuantityObject { object: mode.isValid ? mode : null; key: "modeText" }
+		QuantityObject { object: mode.valid ? mode : null; key: "modeText" }
 		QuantityObject { object: root._showPower ? power : null; unit: VenusOS.Units_Watt }
 		QuantityObject { object: root._showStatus ? status : null; key: "statusText" }
 	}

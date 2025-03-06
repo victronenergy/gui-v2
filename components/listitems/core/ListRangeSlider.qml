@@ -12,15 +12,15 @@ ListItem {
 	readonly property alias firstDataItem: firstDataItem
 	readonly property alias secondDataItem: secondDataItem
 
-	readonly property bool dataValid: firstDataItem.isValid && secondDataItem.isValid
+	readonly property bool dataValid: firstDataItem.valid && secondDataItem.valid
 	readonly property alias slider: slider
 
 	// Optional functions that convert to/from the VeQuickItem values.
 	property var toSourceValue: undefined
 	property var fromSourceValue: undefined
 
-	interactive: (firstDataItem.uid === "" || firstDataItem.isValid) &&
-				 (secondDataItem.uid === "" || secondDataItem.isValid)
+	interactive: (firstDataItem.uid === "" || firstDataItem.valid) &&
+				 (secondDataItem.uid === "" || secondDataItem.valid)
 
 	rightPadding: 0
 	content.children: [

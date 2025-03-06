@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListModel {
 	id: model
 
-	readonly property bool isValid: servicesItem.isValid && scanItem.isValid
+	readonly property bool valid: servicesItem.valid && scanItem.valid
 	readonly property string connectedNetworkName: {
 		for (let i = 0; i < count; ++i) {
 			let network = get(i)
@@ -35,7 +35,7 @@ ListModel {
 	}
 
 	function update() {
-		if (!isValid || !scanItem.isValid) {
+		if (!valid || !scanItem.valid) {
 			model.clear()
 			return
 		}
@@ -102,6 +102,6 @@ ListModel {
 		}
 	}
 
-	onIsValidChanged: update()
+	onValidChanged: update()
 }
 

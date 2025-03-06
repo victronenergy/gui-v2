@@ -11,7 +11,7 @@ Page {
 
 	required property string bindPrefix
 	readonly property var evCharger: Global.evChargers.model.deviceAt(Global.evChargers.model.indexOf(bindPrefix))
-	readonly property bool energyMeterMode: !chargeMode.dataItem.isValid
+	readonly property bool energyMeterMode: !chargeMode.dataItem.valid
 
 	title: evCharger.name
 
@@ -100,7 +100,7 @@ Page {
 				//% "Charge mode"
 				text: qsTrId("evcs_charge_mode")
 				dataItem.uid: root.evCharger.serviceUid + "/Mode"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: Global.evChargers.modeOptionModel
 			}
 
@@ -110,20 +110,20 @@ Page {
 				from: 0
 				to: root.evCharger.maxCurrent
 				dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
-				preferredVisible: dataItem.isValid
-				interactive: dataItem.isValid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
+				preferredVisible: dataItem.valid
+				interactive: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 			}
 
 			ListSwitch {
 				//% "Enable charging"
 				text: qsTrId("evcs_enable_charging")
 				dataItem.uid: root.evCharger.serviceUid + "/StartStop"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListNavigation {
 				text: CommonWords.setup
-				preferredVisible: !root.energyMeterMode || allowedRoles.isValid
+				preferredVisible: !root.energyMeterMode || allowedRoles.valid
 				onClicked: {
 					if (root.energyMeterMode) {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",

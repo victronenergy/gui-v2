@@ -10,12 +10,12 @@ QtObject {
 	id: root
 
 	required property string systemServiceUid
-	readonly property real stateOfCharge: _stateOfCharge.isValid ? _stateOfCharge.value : NaN
-	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
-	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property real current: _current.isValid ? _current.value : NaN
-	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
-	readonly property real timeToGo: _timeToGo.isValid ? _timeToGo.value : NaN
+	readonly property real stateOfCharge: _stateOfCharge.valid ? _stateOfCharge.value : NaN
+	readonly property real voltage: _voltage.valid ? _voltage.value : NaN
+	readonly property real power: _power.valid ? _power.value : NaN
+	readonly property real current: _current.valid ? _current.value : NaN
+	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
+	readonly property real timeToGo: _timeToGo.valid ? _timeToGo.value : NaN
 	readonly property string icon: VenusOS.battery_iconFromMode(mode)
 	readonly property int mode: VenusOS.battery_modeFromPower(power)
 

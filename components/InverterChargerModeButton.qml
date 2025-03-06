@@ -28,10 +28,10 @@ ListItemButton {
 
 	onClicked: {
 		if (!modeAdjustable) {
-			if (dmc.isValid) {
+			if (dmc.valid) {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			} else if (bmsMode.isValid) {
+			} else if (bmsMode.valid) {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			} else {

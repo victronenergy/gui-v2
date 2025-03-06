@@ -37,7 +37,7 @@ ListItem {
 	signal editingFinished()
 	signal accepted()
 
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: forceActiveFocus()
 
@@ -126,7 +126,7 @@ ListItem {
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
 		visible: root.enabled
-		text: dataItem.isValid ? dataItem.value : ""
+		text: dataItem.valid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
 		borderColor: _showErrorHighlight ? Theme.color_red : Theme.color_ok
@@ -190,7 +190,7 @@ ListItem {
 		}
 	}
 
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.valid)
 	content.children: [
 		defaultContent,
 		readonlyLabel

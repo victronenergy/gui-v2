@@ -10,10 +10,10 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
-	readonly property int state: _systemState.isValid ? _systemState.value : VenusOS.System_State_Off
+	readonly property int state: _systemState.valid ? _systemState.value : VenusOS.System_State_Off
 
-	readonly property bool hasGridMeter: _gridDeviceType.isValid
-	readonly property bool hasAcOutSystem: _hasAcOutSystem.isValid && _hasAcOutSystem.value === 1
+	readonly property bool hasGridMeter: _gridDeviceType.valid
+	readonly property bool hasAcOutSystem: _hasAcOutSystem.valid && _hasAcOutSystem.value === 1
 	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
 	readonly property bool hasEss: hasVebusEss || _systemType.value === "AC System"
 	readonly property bool showInputLoads: load.acIn.hasPower
@@ -29,10 +29,10 @@ QtObject {
 	}
 
 	readonly property QtObject dc: QtObject {
-		readonly property real power: _dcSystemPower.isValid ? _dcSystemPower.value : NaN
+		readonly property real power: _dcSystemPower.valid ? _dcSystemPower.value : NaN
 		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
-		readonly property real voltage: _dcBatteryVoltage.isValid ? _dcBatteryVoltage.value : NaN
-		readonly property real maximumPower: _maximumDcPower.isValid ? _maximumDcPower.value : NaN
+		readonly property real voltage: _dcBatteryVoltage.valid ? _dcBatteryVoltage.value : NaN
+		readonly property real maximumPower: _maximumDcPower.valid ? _maximumDcPower.value : NaN
 
 		readonly property VeQuickItem _dcSystemPower: VeQuickItem {
 			uid: root.serviceUid + "/Dc/System/Power"
@@ -50,8 +50,8 @@ QtObject {
 	property QtObject solar: QtObject {
 		readonly property real power: Units.sumRealNumbers(acPower, dcPower)
 		property real acPower: _pvMonitor.totalPower
-		property real dcPower: _dcPvPower.isValid ? _dcPvPower.value : NaN
-		readonly property real maximumPower: _maximumPower.isValid ? _maximumPower.value : NaN
+		property real dcPower: _dcPvPower.valid ? _dcPvPower.value : NaN
+		readonly property real maximumPower: _maximumPower.valid ? _maximumPower.value : NaN
 
 		// In cases where the overall current cannot be determined, the value is NaN.
 		readonly property real current: {
@@ -70,7 +70,7 @@ QtObject {
 				// return a total current as they should all have the same PV output voltage.
 				return _pvMonitor.totalCurrent
 			} else if (Global.solarDevices.model.count > 0) {
-				return _dcPvCurrent.isValid ? _dcPvCurrent.value : NaN
+				return _dcPvCurrent.valid ? _dcPvCurrent.value : NaN
 			}
 			return NaN
 		}

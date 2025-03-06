@@ -30,7 +30,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: simStatus.isValid ? modemConnected : notConnected
+		model: simStatus.valid ? modemConnected : notConnected
 
 		VisibleItemModel {
 			id: notConnected
@@ -58,7 +58,7 @@ Page {
 
 				//% "Carrier"
 				text: qsTrId("page_settings_gsm_carrier")
-				secondaryText: dataItem.isValid ? dataItem.value + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
+				secondaryText: dataItem.valid ? dataItem.value + " " + Utils.simplifiedNetworkType(networkType.value) : "--"
 				dataItem.uid: bindPrefix + "/NetworkName"
 			}
 
@@ -84,7 +84,7 @@ Page {
 			ListItem {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
-				preferredVisible: status.dataItem.value === 0 && carrier.dataItem.isValid && simStatus.value === 1000
+				preferredVisible: status.dataItem.value === 0 && carrier.dataItem.valid && simStatus.value === 1000
 			}
 
 			ListSwitch {
@@ -138,7 +138,7 @@ Page {
 				dataItem.uid: settingsBindPrefix + "/PIN"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				// Show only when PIN required
-				preferredVisible: dataItem.isValid && [11, 16].indexOf(simStatus.value)  > -1
+				preferredVisible: dataItem.valid && [11, 16].indexOf(simStatus.value)  > -1
 			}
 
 			ListText {
@@ -151,7 +151,7 @@ Page {
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"
-				secondaryText: (!apnSetting.isValid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
+				secondaryText: (!apnSetting.valid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
 				onClicked: Global.pageManager.pushPage(apnPage, { title: text })
 				Component {
 					id: apnPage
@@ -169,7 +169,7 @@ Page {
 									checked: apnSetting.value === ""
 									checkable: true
 									onCheckedChanged: {
-										if (apnSetting.isValid && checked) {
+										if (apnSetting.valid && checked) {
 											apnSetting.setValue("")
 										}
 									}
@@ -223,7 +223,7 @@ Page {
 				//% "IMEI"
 				text: qsTrId("page_settings_gsm_imei")
 				dataItem.uid: bindPrefix + "/IMEI"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 	}

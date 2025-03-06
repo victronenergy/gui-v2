@@ -39,8 +39,8 @@ Page {
 			ListText {
 				text: CommonWords.status
 				secondaryText: {
-					if (connected.isValid && connected.value) {
-						if (fix.isValid && fix.value) {
+					if (connected.valid && connected.value) {
+						if (fix.valid && fix.value) {
 							//% "GPS OK (fix)"
 							return qsTrId("settings_gps_ok_fix")
 						}
@@ -56,21 +56,21 @@ Page {
 				//% "Latitude"
 				text: qsTrId("settings_gps_latitude")
 				dataItem.uid: bindPrefix + "/Position/Latitude"
-				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
+				secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
 			}
 
 			ListText {
 				//% "Longitude"
 				text: qsTrId("settings_gps_longitude")
 				dataItem.uid: bindPrefix + "/Position/Longitude"
-				secondaryText: dataItem.isValid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
+				secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
 			}
 
 			ListText {
 				text: CommonWords.speed
 				dataItem.uid: bindPrefix + "/Speed"
 				secondaryText: {
-					if (!dataItem.isValid) {
+					if (!dataItem.valid) {
 						return "--"
 					}
 					if (speedUnit.value === "km/h") {
@@ -97,7 +97,7 @@ Page {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
 				dataItem.uid: bindPrefix + "/Course"
-				secondaryText: dataItem.isValid ? "%1°".arg(Units.formatNumber(dataItem.value, 1)) : ""
+				secondaryText: dataItem.valid ? "%1°".arg(Units.formatNumber(dataItem.value, 1)) : ""
 			}
 
 			ListText {

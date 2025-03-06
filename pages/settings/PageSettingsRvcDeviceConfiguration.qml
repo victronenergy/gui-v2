@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool _hasMultipleDcSources: dcSource2Instance.isValid
+	readonly property bool _hasMultipleDcSources: dcSource2Instance.valid
 
 	function _lineInstanceName(num) {
 		return num
@@ -32,20 +32,20 @@ Page {
 				//% "Charger instance"
 				text: qsTrId("settings_rvc_charger_instance")
 				dataItem.uid: root.bindPrefix + "/ChargerInstance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListSpinBox {
 				//% "Inverter instance"
 				text: qsTrId("settings_rvc_inverter_instance")
 				dataItem.uid: root.bindPrefix + "/InverterInstance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListRadioButtonGroup {
-				text: root._lineInstanceName(line2.dataItem.isValid ? "1" : "")
+				text: root._lineInstanceName(line2.dataItem.valid ? "1" : "")
 				dataItem.uid: root.bindPrefix + "/Line/0/Instance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -57,7 +57,7 @@ Page {
 
 				text: root._lineInstanceName("2")
 				dataItem.uid: root.bindPrefix + "/Line/1/Instance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: "L1", value: 0 },
 					{ display: "L2", value: 1 },
@@ -71,7 +71,7 @@ Page {
 					model: 3
 					delegate: SettingsColumn {
 						width: parent ? parent.width : 0
-						preferredVisible: dcSourceInstance.dataItem.isValid || dcSourcePriority.dataItem.isValid
+						preferredVisible: dcSourceInstance.dataItem.valid || dcSourcePriority.dataItem.valid
 
 						ListSpinBox {
 							id: dcSourceInstance
@@ -82,7 +82,7 @@ Page {
 								  //% "DC source instance"
 								: qsTrId("settings_rvc_dc_source_instance")
 							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Instance"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 						}
 
 						ListSpinBox {
@@ -94,7 +94,7 @@ Page {
 								  //% "DC source priority"
 								: qsTrId("settings_rvc_dc_source_priority")
 							dataItem.uid: root.bindPrefix + "/DcSource/" + model.index + "/Priority"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 						}
 					}
 				}
@@ -104,7 +104,7 @@ Page {
 				//% "Tank instance"
 				text: qsTrId("settings_rvc_tank_instance")
 				dataItem.uid: root.bindPrefix + "/TankInstance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 	}

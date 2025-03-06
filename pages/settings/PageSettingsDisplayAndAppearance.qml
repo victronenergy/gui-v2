@@ -19,7 +19,7 @@ Page {
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
-				preferredVisible: Qt.platform.os != "wasm" && dataItem.isValid && dataItem.max === 1
+				preferredVisible: Qt.platform.os != "wasm" && dataItem.valid && dataItem.max === 1
 			}
 
 			ListSlider {

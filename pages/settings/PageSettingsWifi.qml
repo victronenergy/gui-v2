@@ -29,7 +29,7 @@ Page {
 				//% "Create access point"
 				text: qsTrId("settings_wifi_create_ap")
 				checked: accessPoint.value === 1
-				preferredVisible: accessPoint.isValid
+				preferredVisible: accessPoint.valid
 				onClicked: {
 					if (checked) {
 						Global.dialogLayer.open(confirmApDialogComponent)
@@ -63,12 +63,12 @@ Page {
 			SettingsListHeader {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")
-				preferredVisible: scanItem.isValid && accessPoint.isValid
+				preferredVisible: scanItem.valid && accessPoint.valid
 			}
 
 			PrimaryListLabel {
 				preferredVisible: settingsListView.count === 0
-				text: wifiModel.isValid
+				text: wifiModel.valid
 						//% "No access points"
 					  ? qsTrId("settings_wifi_no_access_points")
 						//% "No Wi-Fi adapter connected"

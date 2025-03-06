@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property bool _autoUpdateDisabled: autoUpdate.value !== 1
-	property bool _switchingEnabled: backupVersionItem.isValid
+	property bool _switchingEnabled: backupVersionItem.valid
 	property bool _rebooting
 
 	VeQuickItem {
@@ -93,7 +93,7 @@ Page {
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
 				secondaryText: CommonWords.running_status
-				preferredVisible: currentVersionItem.isValid && root._switchingEnabled
+				preferredVisible: currentVersionItem.valid && root._switchingEnabled
 			}
 
 			ListText {

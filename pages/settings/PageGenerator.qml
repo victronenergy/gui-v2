@@ -22,7 +22,7 @@ Page {
 	property alias startStopModel: startStopModel
 	property alias model: settingsListView.model
 
-	readonly property var _dates: historicalData.isValid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
+	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
 	VeQuickItem {
 		id: _generatorState
@@ -69,7 +69,7 @@ Page {
 		ListText {
 			//% "Current run time"
 			text: qsTrId("settings_page_relay_generator_run_time")
-			secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+			secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
 			dataItem.uid: root.startStopBindPrefix + "/Runtime"
 			preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 		}
@@ -86,7 +86,7 @@ Page {
 			VeQuickItem {
 				id: activeCondition
 
-				readonly property bool isAutoStarted: isValid && Global.generators.isAutoStarted(value)
+				readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
 
 				uid: root.startStopBindPrefix + "/RunningByConditionCode"
 			}
