@@ -132,7 +132,8 @@ TestCase {
 					 VenusOS.Units_Amp,
 					 VenusOS.Units_Hertz,
 					 VenusOS.Units_AmpHour,
-					 VenusOS.Units_Hectopascal]
+					 VenusOS.Units_Hectopascal,
+					 VenusOS.Units_TransmitPower]
 
 		for (const unit of units) {
 			const unitString = Units.defaultUnitString(unit)

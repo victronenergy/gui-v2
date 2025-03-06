@@ -90,7 +90,7 @@ Page {
 
 			ListQuantity {
 				dataItem.uid: bindPrefix + "/InstallationPower"
-				//% "Installation Power"
+				//% "Installation power"
 				text: qsTrId("page_meteo_installation_power")
 				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Watt
@@ -104,6 +104,22 @@ Page {
 				preferredVisible: dataItem.isValid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				precision: 1
+			}
+
+			ListText {
+				dataItem.uid: bindPrefix + "/TimeSinceLastSun"
+				//% "Time since last solar activity"
+				text: qsTrId("page_meteo_time_since_last_sun")
+				preferredVisible: dataItem.isValid
+				secondaryText: Utils.secondsToString(dataItem.value*60)
+			}
+
+			ListQuantity {
+				dataItem.uid: bindPrefix + "/TxPowerLevel"
+				//% "Tx power level"
+				text: qsTrId("page_meteo_tx_power_level")
+				preferredVisible: dataItem.isValid
+				unit: VenusOS.Units_TransmitPower
 			}
 
 			ListItem {
