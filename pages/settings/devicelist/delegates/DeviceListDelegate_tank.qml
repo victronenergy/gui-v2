@@ -9,7 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: level.isValid ? "" : (status.isValid ? Global.tanks.statusToText(status.value) : "--")
+	secondaryText: level.valid ? "" : (status.valid ? Global.tanks.statusToText(status.value) : "--")
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 

@@ -18,7 +18,7 @@ Page {
 
 			readonly property string distributor: String.fromCharCode(65 + model.index)
 			readonly property string bindPrefix: root.bindPrefix + "/Distributor/" + distributor
-			readonly property var connected: status.isValid && status.value === 1
+			readonly property var connected: status.valid && status.value === 1
 			readonly property list<FuseInfo> fuseInfoList: [
 				// Current distributor has 4 fuses
 				FuseInfo { fuseNumber: 0; bindPrefix: distributorDelegate.bindPrefix },
@@ -35,9 +35,9 @@ Page {
 
 			//% "Distributor %1"
 			text: qsTrId("batterylynxdistibutor_distributor").arg(distributor)
-			preferredVisible: status.isValid && status.value !== 0
+			preferredVisible: status.valid && status.value !== 0
 			secondaryText: {
-				if (!status.isValid) {
+				if (!status.valid) {
 					return "--"
 				} else if (status.value === 0) {
 					return CommonWords.not_available

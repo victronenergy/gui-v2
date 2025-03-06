@@ -24,9 +24,9 @@ Loader {
 		id: singlePhaseAcInOut
 
 		SettingsColumn {
-			readonly property string singlePhaseName: acOutL3.isValid ? "L3"
-					: acOutL2.isValid ? "L2"
-					: "L1"  // i.e. if _phase.value === 0 || !_phase.isValid
+			readonly property string singlePhaseName: acOutL3.valid ? "L3"
+					: acOutL2.valid ? "L2"
+					: "L1"  // i.e. if _phase.value === 0 || !_phase.valid
 
 			VeQuickItem { id: acOutL1; uid: root.serviceUid + "/Ac/Out/L1/P" }
 			VeQuickItem { id: acOutL2; uid: root.serviceUid + "/Ac/Out/L2/P" }

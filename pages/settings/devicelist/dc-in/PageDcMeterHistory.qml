@@ -11,8 +11,8 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool showStarterVoltage: hasStarterVoltage.isValid && hasStarterVoltage.value
-	readonly property bool showTemperature: hasTemperature.isValid && hasTemperature.value
+	readonly property bool showStarterVoltage: hasStarterVoltage.valid && hasStarterVoltage.value
+	readonly property bool showTemperature: hasTemperature.valid && hasTemperature.value
 
 	VeQuickItem {
 		id: hasStarterVoltage
@@ -29,27 +29,27 @@ Page {
 			ListQuantity {
 				text: CommonWords.minimum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
 				text: CommonWords.maximum_voltage
 				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListText {
 				text: CommonWords.low_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				text: CommonWords.high_voltage_alarms
 				dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
@@ -98,7 +98,7 @@ Page {
 				//% "Produced energy"
 				text: qsTrId("dcmeter_history_produced_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyOut"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
@@ -106,7 +106,7 @@ Page {
 				//% "Consumed energy"
 				text: qsTrId("dcmeter_history_consumed_energy")
 				dataItem.uid: root.bindPrefix + "/History/EnergyIn"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 

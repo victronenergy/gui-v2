@@ -25,7 +25,7 @@ ListButton {
 	signal selectorAccepted(newValue: var)
 
 	secondaryText: value === undefined ? "--" : Units.formatNumber(value, decimals) + root.suffix
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: Global.dialogLayer.open(numberSelectorComponent, {value: value})
 
@@ -33,7 +33,7 @@ ListButton {
 		id: rangeModel
 		minimumValue: root.from
 		maximumValue: root.to
-		value: dataItem.isValid ? dataItem.value : 0
+		value: dataItem.valid ? dataItem.value : 0
 	}
 
 	Component {

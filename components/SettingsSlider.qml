@@ -17,8 +17,8 @@ Slider {
 	to: dataItem.max !== undefined ? dataItem.max : 1
 	stepSize: (to-from) / Theme.geometry_listItem_slider_stepDivsion
 	live: true
-	value: to > from && dataItem.isValid ? dataItem.value : 0
-	enabled: dataItem.uid === "" || dataItem.isValid
+	value: to > from && dataItem.valid ? dataItem.value : 0
+	enabled: dataItem.uid === "" || dataItem.valid
 	snapMode: Slider.SnapAlways
 
 	leftPadding: Theme.geometry_listItem_content_horizontalMargin

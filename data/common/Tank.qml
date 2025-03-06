@@ -9,9 +9,9 @@ import Victron.VenusOS
 Device {
 	id: tank
 
-	readonly property int type: _type.isValid ? _type.value : -1
-	readonly property int status: _status.isValid ? _status.value : VenusOS.Tank_Status_Unknown
-	readonly property real temperature: _temperature.isValid ? _temperature.value : NaN
+	readonly property int type: _type.valid ? _type.value : -1
+	readonly property int status: _status.valid ? _status.value : VenusOS.Tank_Status_Unknown
+	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
 	property real level: NaN
 	property real remaining: NaN
 	property real capacity: NaN
@@ -62,9 +62,9 @@ Device {
 	}
 
 	function _updateMeasurements() {
-		let remainingValue = _remaining.isValid ? _remaining.value : NaN
-		let levelValue = _level.isValid ? _level.value : NaN   // 0 - 100
-		let capacityValue = _capacity.isValid ? _capacity.value : NaN
+		let remainingValue = _remaining.valid ? _remaining.value : NaN
+		let levelValue = _level.valid ? _level.value : NaN   // 0 - 100
+		let capacityValue = _capacity.valid ? _capacity.value : NaN
 
 		// If there is no /Level, calculate it from other values.
 		if (isNaN(levelValue) && !isNaN(capacityValue) && !isNaN(remainingValue)) {

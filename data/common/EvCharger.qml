@@ -9,19 +9,19 @@ import Victron.VenusOS
 Device {
 	id: evCharger
 
-	readonly property int status: _status.isValid ? _status.value : -1
-	readonly property int mode: _mode.isValid ? _mode.value : -1
+	readonly property int status: _status.valid ? _status.value : -1
+	readonly property int mode: _mode.valid ? _mode.value : -1
 	readonly property bool connected: _connected.value === 1
 	readonly property int chargingTime: _chargingTime.value || 0
-	readonly property int position: _position.isValid ? _position.value : VenusOS.Evcs_Position_Unknown
+	readonly property int position: _position.valid ? _position.value : VenusOS.Evcs_Position_Unknown
 
-	readonly property real energy: _energy.isValid ? _energy.value : NaN
-	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property real current: _current.isValid ? _current.value : NaN
-	readonly property real maxCurrent: _maxCurrent.isValid ? _maxCurrent.value : NaN
+	readonly property real energy: _energy.valid ? _energy.value : NaN
+	readonly property real power: _power.valid ? _power.value : NaN
+	readonly property real current: _current.valid ? _current.value : NaN
+	readonly property real maxCurrent: _maxCurrent.valid ? _maxCurrent.value : NaN
 
 	readonly property QtObject phases: QtObject {
-		property int count: _nrOfPhases.isValid ? _nrOfPhases.value : 0
+		property int count: _nrOfPhases.valid ? _nrOfPhases.value : 0
 
 		function updateCount(maxPhaseCount) {
 			count = Math.max(count, maxPhaseCount)
@@ -37,7 +37,7 @@ Device {
 				required property int index
 				readonly property string phaseUid: evCharger.serviceUid + "/Ac/L" + (index + 1)
 				readonly property string name: "L" + (index + 1)
-				readonly property real power: _power.isValid ? _power.value : NaN
+				readonly property real power: _power.valid ? _power.value : NaN
 
 				function updatePhaseCount(phaseCount) {
 					evCharger.count = Math.max(evCharger.count, phaseCount)
@@ -45,7 +45,7 @@ Device {
 
 				readonly property VeQuickItem _power: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: if (isValid && !_nrOfPhases.isValid) phases.updateCount(index + 1)
+					onValidChanged: if (valid && !_nrOfPhases.valid) phases.updateCount(index + 1)
 				}
 			}
 		}

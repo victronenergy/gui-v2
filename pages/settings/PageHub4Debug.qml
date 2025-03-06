@@ -60,14 +60,14 @@ Page {
 				VeQuickItem {
 					id: batteryCurrent
 					readonly property string summary: "Current: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Current" : ""
 				}
 
 				VeQuickItem {
 					id: batteryVoltage
 					readonly property string summary: "Voltage: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Volt_DC, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Dc/0/Voltage" : ""
 				}
 			}
@@ -83,14 +83,14 @@ Page {
 				VeQuickItem {
 					id: batteryChargeCurrent
 					readonly property string summary: "Charge: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
 					uid: root.batteryUid ? root.batteryUid + "/Info/MaxChargeCurrent" : ""
 				}
 
 				VeQuickItem {
 					id: batteryDischargeCurrent
 					readonly property string summary: "Discharge: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Amp, value) : "--")
 
 					uid: root.batteryUid ? root.batteryUid + "/Info/MaxDischargeCurrent" : ""
 				}
@@ -107,14 +107,14 @@ Page {
 				VeQuickItem {
 					id: batteryChargePower
 					readonly property string summary: "Charge: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
 					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 				}
 
 				VeQuickItem {
 					id: batteryDischargePower
 					readonly property string summary: "Discharge: %1"
-						.arg(isValid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
+						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
 					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 				}
 			}

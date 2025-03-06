@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	required property string bindPrefix
-	readonly property bool isMulti: numberOfAcInputs.isValid && numberOfAcInputs.value > 0
+	readonly property bool isMulti: numberOfAcInputs.valid && numberOfAcInputs.value > 0
 	readonly property bool chargeInProcess: preferRenewableEnergy.value === 0
 
 	title: veBusDevice.name
@@ -157,7 +157,7 @@ Page {
 								 :
 								   //% "Charge the battery to 100%"
 								   qsTrId("vebus_device_charge_the_battery_to_100")
-				preferredVisible: preferRenewableEnergy.isValid && preferRenewableEnergy.value !== 2
+				preferredVisible: preferRenewableEnergy.valid && preferRenewableEnergy.value !== 2
 				onClicked: Global.pageManager.pushPage(newPageComponent)
 
 				Component {
@@ -238,7 +238,7 @@ Page {
 			}
 
 			ListTemperature {
-				preferredVisible: dataItem.isValid && root.isMulti
+				preferredVisible: dataItem.valid && root.isMulti
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 				text: CommonWords.battery_temperature
 			}
@@ -283,13 +283,13 @@ Page {
 			PrimaryListLabel {
 				//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible."
 				text: qsTrId("vebus_device_bms_message")
-				preferredVisible: bmsMode.isValid
+				preferredVisible: bmsMode.valid
 			}
 
 			PrimaryListLabel {
 				//% "A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!"
 				text: qsTrId("vebus_device_bms_not_found")
-				preferredVisible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.isValid
+				preferredVisible: bmsType.value === VenusOS.VeBusDevice_Bms_Type_VeBus && !bmsMode.valid
 			}
 
 			ListNavigation {

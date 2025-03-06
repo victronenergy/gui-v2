@@ -9,9 +9,9 @@ import Victron.VenusOS
 Device {
 	id: inverterCharger
 
-	readonly property int state: _state.isValid ? _state.value : -1
-	readonly property int mode: _mode.isValid ? _mode.value : -1
-	readonly property real nominalInverterPower: _nominalInverterPower.isValid ? _nominalInverterPower.value : NaN
+	readonly property int state: _state.valid ? _state.value : -1
+	readonly property int mode: _mode.valid ? _mode.value : -1
+	readonly property real nominalInverterPower: _nominalInverterPower.valid ? _nominalInverterPower.value : NaN
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: inverterCharger.serviceUid + "/State"

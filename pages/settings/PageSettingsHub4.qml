@@ -165,7 +165,7 @@ Page {
 			text: qsTrId("settings_ess_limit_charge_power")
 			checked: maxChargePower.dataItem.value >= 0
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& !(maxChargeCurrentControl.isValid && maxChargeCurrentControl.value)
+				&& !(maxChargeCurrentControl.valid && maxChargeCurrentControl.value)
 
 			onClicked: {
 				if (maxChargePower.dataItem.value < 0) {
@@ -252,7 +252,7 @@ Page {
 		ListNavigation {
 			//% "Scheduled charge levels"
 			text: qsTrId("settings_ess_scheduled_charge_levels")
-			secondaryText: scheduleSoc.isValid
+			secondaryText: scheduleSoc.valid
 					  //% "Active (%1)"
 					? qsTrId("settings_ess_active").arg(scheduleSoc.text)
 					  //% "Inactive"

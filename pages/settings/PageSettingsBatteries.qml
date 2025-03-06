@@ -219,7 +219,7 @@ Page {
 	VeQuickItem {
 		uid: Global.system.serviceUid + "/Batteries"
 		onValueChanged: {
-			if (!isValid) {
+			if (!valid) {
 				batteryModel.deleteAllAndClear()
 				return
 			}

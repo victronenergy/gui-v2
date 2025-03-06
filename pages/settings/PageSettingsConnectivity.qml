@@ -53,7 +53,7 @@ Page {
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
 				}
-				preferredVisible: tailscale.isValid
+				preferredVisible: tailscale.valid
 
 				VeQuickItem {
 					id: tailscale
