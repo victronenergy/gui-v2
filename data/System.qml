@@ -20,7 +20,7 @@ QtObject {
 			&& (hasVebusEss ? (hasGridMeter && _withoutGridMeter.value === 0) : hasGridMeter)
 	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
 
-	readonly property SystemBattery battery: SystemBattery {
+	readonly property ActiveSystemBattery battery: ActiveSystemBattery {
 		systemServiceUid: root.serviceUid
 	}
 
