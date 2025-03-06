@@ -312,6 +312,9 @@ QtObject {
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
 
+	//% "None"
+	readonly property string none_option: qsTrId("common_words_none_option")
+
 	//: Indicates there are no errors
 	//% "None"
 	readonly property string none_errors: qsTrId("common_words_none_errors")

@@ -378,6 +378,15 @@ public:
 	};
 	Q_ENUM(BriefView_Unit)
 
+	enum BriefView_CentralGauge_Type {
+		BriefView_CentralGauge_None,
+		BriefView_CentralGauge_BatteryId,
+		BriefView_CentralGauge_SystemBattery,
+		BriefView_CentralGauge_TankAggregate,
+		BriefView_CentralGauge_TankId
+	};
+	Q_ENUM(BriefView_CentralGauge_Type)
+
 	enum Tank_Type {
 		// These values align with tank types from dbus
 		// see: https://github.com/victronenergy/venus/wiki/dbus#tank-levels

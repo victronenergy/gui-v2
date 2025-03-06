@@ -109,7 +109,7 @@ QtObject {
 	}
 
 	function updateBatteriesList() {
-		const dummyBatteryServiceName = dummyBattery.serviceUid.substring(BackendConnection.uidPrefix().length + 1)
+		const dummyBatteryServiceName = "com.victronenergy.battery/1"
 		const batteryList = [
 			{
 				// System battery
@@ -129,7 +129,8 @@ QtObject {
 				active_battery_service: false,
 				id: dummyBatteryServiceName + ":1",
 				name: "My starter battery",
-				voltage: 0.029999999329447746
+				voltage: 0.029999999329447746,
+				soc: 12.34,
 			}
 		]
 		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
