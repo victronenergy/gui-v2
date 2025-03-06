@@ -59,17 +59,17 @@ Item {
 						uid: switchDev.serviceUid + "/SwitchableOutput/%1/State".arg(index)
 						onValueChanged: {
 							if (value){
-								var statusData = [VenusOS.Switch_Status_Output_Fault,VenusOS.Switch_Status_Disabled,VenusOS.Switch_Status_Powered,
-												  VenusOS.Switch_Status_On,VenusOS.Switch_Status_Over_Temperature,
-												  VenusOS.Switch_Status_Short_Fault,VenusOS.Switch_Status_Tripped]
+								var statusData = [VenusOS.SwitchableOutput_Status_Output_Fault,VenusOS.SwitchableOutput_Status_Disabled,VenusOS.Switch_Status_Powered,
+												  VenusOS.SwitchableOutput_Status_On,VenusOS.SwitchableOutput_Status_Over_Temperature,
+												  VenusOS.SwitchableOutput_Status_Short_Fault,VenusOS.SwitchableOutput_Status_Tripped]
 								if (index === 0 ){
 									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index),  statusData[ _testStatusIndex])
 									_testStatusIndex++
 									if (_testStatusIndex >= statusData.length) _testStatusIndex = 0
-								} else switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.Switch_Status_On)
+								} else switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.SwitchableOutput_Status_On)
 
 							} else {
-								switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.Switch_Status_Off)
+								switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.SwitchableOutput_Status_Off)
 							}
 						}
 					}

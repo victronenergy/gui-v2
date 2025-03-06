@@ -16,7 +16,6 @@ ControlCard {
 	width: Theme.geometry_controlCard_minimumWidth * switchCol
 
 	icon.source: "qrc:/images/switches.svg"
-	//% "Switches"
 
 	GridView{
 		id: switchesView

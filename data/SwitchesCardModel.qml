@@ -74,9 +74,9 @@ ListModel {
 
 					readonly property VeQuickItem _Type: VeQuickItem {
 						uid: model.uid + "/Settings/Type"
-						property bool valueValid: isValid &&  ((value == VenusOS.Switch_Function_Momentary)
-													|| (value == VenusOS.Switch_Function_Latching)
-													|| (value == VenusOS.Switch_Function_Dimmable))
+						property bool valueValid: isValid &&  ((value == VenusOS.SwitchableOutput_Function_Momentary)
+													|| (value == VenusOS.SwitchableOutput_Function_Latching)
+													|| (value == VenusOS.SwitchableOutput_Function_Dimmable))
 						onValueValidChanged: {
 							if (status === Component.Ready){
 								if (valueValid){
@@ -94,7 +94,7 @@ ListModel {
 							_store = updateList(switchuid, groupName, groupName, name )
 						}
 					}
-
+					// remove this switchable service from the model
 					function removeFromList() {
 						let data = null
 						for (let i = 0; i < root.count; i++) {
@@ -108,7 +108,8 @@ ListModel {
 							}
 						}
 					}
-
+					//model is structured to provide a an ordered list of all the different groupNames
+					//with each list containing a ordered list of switchable services which are to be populated on the card with that groupName
 					function updateList(switchuid, oldGroupName, switchGroupName, name) {
 						let groupIndex = 0
 						let groupCount = 0
@@ -117,6 +118,7 @@ ListModel {
 						let data = null
 						let itemId = null
 						let isub
+						//if groupname changed used its switch uid to remove old group list
 						if (oldGroupName !== switchGroupName) {
 							for (i = 0; i < root.count; i++) {
 								data = root.get(i)
@@ -133,22 +135,27 @@ ListModel {
 								}
 							}
 						}
+						//find list that switchable service should be add to
 						for (i = 0; i < root.count; i++) {
 							data = root.get(i)
-							if (data.cardName >= switchGroupName){
+							if (data.cardName >= switchGroupName){ // find Alphabetical place
 								if (data.cardName === switchGroupName){
+									//Add to existing group list
+									//posible name change remove from list using uid
 									for (isub = 0; isub < data.viewModel.count; isub++) {
 										if (data.viewModel.get(isub).uid === switchuid) {
 											data.viewModel.remove(isub)
 											break
 										}
 									}
+									//find Alphabetical place and insert in correct position
 									for(isub = 0; isub < data.viewModel.count; isub++){
 										if (data.viewModel.get(isub).name > name) {
 											data.viewModel.insert(isub,{"uid": switchuid,"name": name})
 											break
 										}
 									}
+									//Alphabetical place beyond end of list so append to end
 									if (isub === data.viewModel.count) data.viewModel.append({"uid": switchuid,"name": name})
 									itemIndex = i
 									break
@@ -160,6 +167,7 @@ ListModel {
 								}
 							}
 						}
+						//Groups Alphabetical place beyond end of list so create new group list
 						if (i == root.count) {
 							root.append ({"cardName": switchGroupName,"viewModel":[{"uid": switchuid, "name": name}]})
 						}

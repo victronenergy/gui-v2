@@ -441,36 +441,36 @@ public:
 	};
 	Q_ENUM(Switch_ForcedMode)
 
-	enum Switch_Function {
-		Switch_Function_Momentary = 0,
-		Switch_Function_Latching,
-		Switch_Function_Dimmable,
-		Switch_Function_Slave = 5
+	enum Switch_DeviceState {
+		Switch_DeviceState_Connected = 0x100,
+		Switch_DeviceState_Over_Temperature,
+		Switch_DeviceState_Temperature_Warning,
+		Switch_DeviceState_Channel_Fault,
+		Switch_DeviceState_Channel_Tripped,
+		Switch_DeviceState_Under_Voltage
 	};
-	Q_ENUM(Switch_Function)
+	Q_ENUM(Switch_DeviceState)
 
-	enum Switch_ModuleState {
-		Switch_ModuleState_Connected = 0x100,
-		Switch_ModuleState_Over_Temperature,
-		Switch_ModuleState_Temperature_Warning,
-		Switch_ModuleState_Channel_Fault,
-		Switch_ModuleState_Channel_Tripped,
-		Switch_ModuleState_Under_Voltage,
+	enum SwitchableOutput_Function {
+		SwitchableOutput_Function_Momentary = 0,
+		SwitchableOutput_Function_Latching,
+		SwitchableOutput_Function_Dimmable,
+		SwitchableOutput_Function_Slave = 5
 	};
-	Q_ENUM(Switch_ModuleState)
+	Q_ENUM(SwitchableOutput_Function)
 
-	enum Switch_Status {
-		Switch_Status_Off,
-		Switch_Status_Powered,
-		Switch_Status_Tripped,
-		Switch_Status_Over_Temperature = 0x04,
-		Switch_Status_Output_Fault =0x08,
-		Switch_Status_On = 0x09,  //inputActive + active
-		Switch_Status_Short_Fault = 0x10,
-		Switch_Status_Disabled = 0x20,
-		Switch_Status_TripLowVoltage = 0x22
+	enum SwitchableOutput_Status {
+		SwitchableOutput_Status_Off,
+		SwitchableOutput_Status_Powered,
+		SwitchableOutput_Status_Tripped,
+		SwitchableOutput_Status_Over_Temperature = 0x04,
+		SwitchableOutput_Status_Output_Fault =0x08,
+		SwitchableOutput_Status_On = 0x09,  //inputActive + active
+		SwitchableOutput_Status_Short_Fault = 0x10,
+		SwitchableOutput_Status_Disabled = 0x20,
+		SwitchableOutput_Status_TripLowVoltage = 0x22
 	};
-	Q_ENUM(Switch_Status)
+	Q_ENUM(SwitchableOutput_Status)
 
 	enum Notification_Type {
 		Notification_Warning,
@@ -804,6 +804,10 @@ public:
 	Q_INVOKABLE QString pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) const;
 
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
+
+	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
+	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value, int channel = -1) const;
+	Q_INVOKABLE	QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
 };
 
 }

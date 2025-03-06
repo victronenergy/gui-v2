@@ -65,10 +65,10 @@ Item {
 
 			Rectangle {
 				id: statusRect
-				visible: !((switchData._status.value === VenusOS.Switch_Status_Off)
-					|| (switchData._status.value === VenusOS.Switch_Status_On)
-					|| (switchData._status.value === VenusOS.Switch_Status_Powered)
-					|| ((switchData._status.value === VenusOS.Switch_Status_Output_Fault) && (switchData._type.value === VenusOS.Switch_Function_Dimmable)))
+				visible: !((switchData._status.value === VenusOS.SwitchableOutput_Status_Off)
+					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_On)
+					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_Powered)
+					|| ((switchData._status.value === VenusOS.SwitchableOutput_Status_Output_Fault) && (switchData._type.value === VenusOS.SwitchableOutput_Function_Dimmable)))
 				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
 				height: 25
 				radius: height/2
@@ -77,7 +77,7 @@ Item {
 					id: childText
 					anchors.centerIn: parent
 					color: Global.switches.switchStatusToColor(switchData._status.value,true)//Qt.colorEqual(statusRect.color,"WHITE") ? "BLACK": "WHITE"
-					text: Global.switches.switchStatusToText(switchData._status.value)
+					text: VenusOS.switchableOutput_statusToText(switchData._status.value)
 				}
 			}
 		}

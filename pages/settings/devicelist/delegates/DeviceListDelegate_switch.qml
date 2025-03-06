@@ -9,7 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: Global.switches.switchStatusToText(state.value)
+	secondaryText: VenusOS.switch_deviceStateToText(state.value)
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitch.qml",

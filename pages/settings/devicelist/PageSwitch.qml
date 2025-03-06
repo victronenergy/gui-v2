@@ -22,16 +22,16 @@ Page {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		delegate: QtObject {
-			property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.Switch_Function_Dimmable
+			property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.SwitchableOutput_Function_Dimmable
 			property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
-			property string status: Global.switches.switchStatusToText(statusItem.value)
-			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.Switch_Status_On) || (statusItem.value === VenusOS.Switch_Status_Output_Fault))
+			property string status: VenusOS.switchableOutput_statusToText(statusItem.value)
+			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.SwitchableOutput_Status_On) || (statusItem.value === VenusOS.SwitchableOutput_Status_Output_Fault))
 			property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
 			//property string groupText: groupNameItem.value.length>18 ? groupNameItem.value.substring(0,15)+"...": groupNameItem.value!=="" ? groupNameItem.value : "--"
 
 			property VeQuickItem functionItem: VeQuickItem {
 				uid: model.uid + "/Settings/Type"
-				property string statusText: Global.switches.switchFunctionToText(value, (value === VenusOS.Switch_Function_Slave ) ? index : null)
+				property string statusText: VenusOS.switchableOutput_functionToText(value, (value === VenusOS.SwitchableOutput_Function_Slave ) ? index : null)
 				onIsValidChanged:{
 					if (!isValid) Global.pageManager.popAllPages()
 				}
@@ -69,7 +69,7 @@ Page {
 				//% "Module state"
 				text: qsTrId("settings_module_state")
 				dataItem.uid: root.bindPrefix + "/State"
-				secondaryText: Global.switches.switchStatusToText(dataItem.value)
+				secondaryText: VenusOS.switch_deviceStateToText(dataItem.value)
 			}
 			ListQuantity {
 				//% "Module Voltage"
@@ -212,7 +212,7 @@ Page {
 				onValueChanged:{
 					var op = [];
 					for (var i=0;i<8;i++){
-						if (value & (1<<i)) op.push({ display: Global.switches.switchFunctionToText(i), value: i});
+						if (value & (1<<i)) op.push({ display: VenusOS.switchableOutput_functionToText(i), value: i});
 					}
 					options = op;
 				}
