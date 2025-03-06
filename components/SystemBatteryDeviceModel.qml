@@ -70,7 +70,7 @@ DeviceModel {
 		}
 	}
 
-	component BatteryListDevice : BaseDevice {
+	component Battery : BaseDevice {
 		id: battery
 
 		property real current: NaN
@@ -91,7 +91,7 @@ DeviceModel {
 	}
 
 	readonly property Component _batteryComponent: Component {
-		BatteryListDevice {
+		Battery {
 		   id: battery
 
 			onValidChanged: {
