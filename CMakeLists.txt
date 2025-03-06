@@ -1133,7 +1133,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_sidepanel_on_32.svg
         images/icon_screen_sleep_32.svg
         images/icon_temp_32.svg
-        images/information.svg
+	images/indicator_5_.png
+	images/information.svg
         images/inverter.svg
         images/inverter_charger.svg
         images/levels.svg
