@@ -705,6 +705,23 @@ QString BackendConnection::uidPrefix() const
 	return QString();
 }
 
+QString BackendConnection::serviceUidToPortableId(const QString &serviceUid, int deviceInstance) const
+{
+	const QString serviceType = serviceTypeFromUid(serviceUid);
+	return QStringLiteral("com.victronenergy.%1/%2").arg(serviceType).arg(QString::number(deviceInstance));
+}
+
+QVariantMap BackendConnection::portableIdInfo(const QString &portableId) const
+{
+	const QStringList parts = portableId.split('/');
+	const QString serviceName = parts.first();
+
+	QVariantMap map;
+	map.insert(QStringLiteral("type"), serviceName.split('.').last());
+	map.insert(QStringLiteral("instance"), parts.last());
+	return map;
+}
+
 void BackendConnection::setMockValue(const QString &uid, const QVariant &value)
 {
 	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {

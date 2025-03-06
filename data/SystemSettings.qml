@@ -130,33 +130,53 @@ QtObject {
 	}
 
 	property QtObject briefView: QtObject {
+		property var centralGauges: []
 
-		property QtObject centralGauges: QtObject {
-			property var preferredOrder: []
-
-			function _refresh() {
-				let levels = []
-				for (let i = 0; i < Theme.geometry_briefPage_centerGauge_maximumGaugeCount; ++i) {
-					const obj = _savedLevels.objectAt(i)
-					levels.push(obj && obj.valid ? obj.value : VenusOS.Tank_Type_None)
-				}
-				preferredOrder = levels
-			}
-
-			property Instantiator _savedLevels: Instantiator {
-				model: VeQItemTableModel {
-					uids: [ root.serviceUid + "/Settings/Gui/BriefView/Level" ]
-					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-				}
-				delegate: VeQuickItem {
-					uid: model.uid
-					onValueChanged: Qt.callLater(root.briefView.centralGauges._refresh)
-				}
-			}
+		readonly property VeQuickItem unit: VeQuickItem {
+			 uid: root.serviceUid + "/Settings/Gui/BriefView/Unit"
 		}
 
-		property VeQuickItem unit: VeQuickItem {
-			 uid: root.serviceUid + "/Settings/Gui/BriefView/Unit"
+		function _refreshCentralGauges() {
+			let levels = []
+			for (let i = 0; i < Theme.geometry_briefPage_centerGauge_maximumGaugeCount; ++i) {
+				const obj = _savedLevels.objectAt(i)
+
+				// Each level value is an integer or a string, to indicate the data to be shown
+				// for that gauge level:
+				// - string: the tank id (to show the level for that particular tank) or a
+				// battery id (to show the SOC for that battery from the system /Batteries list)
+				// - integer: Tank_Type_Battery (to show the system battery), or a tank type to
+				// show the aggregate level for all tanks of that type.
+				if (!obj || !obj.valid || obj.value === "") {
+					continue
+				}
+				let centerGaugeType
+				const tankType = parseInt(obj.value)
+				if (isNaN(tankType)) {
+					centerGaugeType = BackendConnection.portableIdInfo(obj.value).type === "tank"
+							? VenusOS.BriefView_CentralGauge_TankId
+							: VenusOS.BriefView_CentralGauge_BatteryId
+				} else if (tankType === VenusOS.Tank_Type_None) {
+					centerGaugeType = VenusOS.BriefView_CentralGauge_None
+				} else if (tankType === VenusOS.Tank_Type_Battery) {
+					centerGaugeType = VenusOS.BriefView_CentralGauge_SystemBattery
+				} else {
+					centerGaugeType = VenusOS.BriefView_CentralGauge_TankAggregate
+				}
+				levels.push({ centerGaugeType: centerGaugeType, value: obj.value })
+			}
+			centralGauges = levels
+		}
+
+		readonly property Instantiator _savedLevels: Instantiator {
+			model: VeQItemTableModel {
+				uids: [ root.serviceUid + "/Settings/Gui2/BriefView/Level" ]
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+			delegate: VeQuickItem {
+				uid: model.uid
+				onValueChanged: Qt.callLater(root.briefView._refreshCentralGauges)
+			}
 		}
 	}
 

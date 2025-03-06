@@ -85,10 +85,15 @@ QtObject {
 		setMockSettingValue("Gui2/StartPageName", "")
 		setMockSettingValue("Gui2/StartPageTimeout", 0)
 
-		setMockSystemValue("AvailableBatteryServices", '{"default": "Automatic", "nobattery": "No battery monitor", "com.victronenergy.vebus/257": "Quattro 24/3000/70-2x50 on VE.Bus", "com.victronenergy.battery/0": "Lynx Smart BMS 500 on VE.Can"}')
-		setMockSystemValue("AutoSelectedBatteryService", "Lynx Smart BMS 500 on VE.Can")
-		setMockSystemValue("AvailableBatteries", '{"com.victronenergy.battery/0": {"name": "Lynx Smart BMS HQ21302VUDQ", "channel": null, "type": "battery"}, "com.victronenergy.vebus/257": {"name": "Quattro 24/3000/70-2x50", "channel": null, "type": "vebus"}}')
-		setMockSystemValue("ActiveBatteryService", "com.victronenergy.battery/0")
+		// Use mock tanks and batteries
+		setMockSettingValue("Gui2/BriefView/Level/0", "com.victronenergy.battery/1:1")
+		setMockSettingValue("Gui2/BriefView/Level/1", "com.victronenergy.tank/0")
+		setMockSettingValue("Gui2/BriefView/Level/2", "" + VenusOS.Tank_Type_Fuel)
+
+		setMockSystemValue("AvailableBatteryServices", '{"default": "Automatic", "nobattery": "No battery monitor", "com.victronenergy.vebus/257": "Quattro 24/3000/70-2x50 on VE.Bus", "com.victronenergy.battery/1": "Lynx Smart BMS HQ21302VUDQ"}')
+		setMockSystemValue("AutoSelectedBatteryService", "Lynx Smart BMS HQ21302VUDQ")
+		setMockSystemValue("AvailableBatteries", '{"com.victronenergy.battery/1": {"name": "Lynx Smart BMS HQ21302VUDQ", "channel": null, "type": "battery"}, "com.victronenergy.vebus/257": {"name": "Quattro 24/3000/70-2x50", "channel": null, "type": "vebus"}}')
+		setMockSystemValue("ActiveBatteryService", "com.victronenergy.battery/1")
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_battery/0/Enabled", 1)
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_battery/0/Name", "My battery")
 		setMockSettingValue("SystemSetup/Batteries/Configuration/com_victronenergy_vebus/257/Enabled", 1)
@@ -108,7 +113,7 @@ QtObject {
 		setMockSettingValue("SystemSetup/SharedTemperatureSense", 2)
 		setMockSystemValue("Control/BatteryCurrentSense", 0)
 		setMockSettingValue("SystemSetup/BmsInstance", -1)
-		setMockSystemValue("ActiveBmsService", "com.victronenergy.battery.ttyUSB1")
+		setMockSystemValue("ActiveBmsService", "com.victronenergy.battery.ttyUSB0")
 		setMockSystemValue("ActiveBmsInstance", 1)
 
 		//systemReason.lowSoc.setValue(1)
@@ -214,7 +219,7 @@ QtObject {
 
 		setMockSettingValue("Services/Modbus", 0)
 		setMockModbusTcpValue("Services/Count", 2)
-		setMockModbusTcpValue("Services/0/ServiceName", "com.victronenergy.battery.ttyUSB1")
+		setMockModbusTcpValue("Services/0/ServiceName", "com.victronenergy.battery.ttyUSB0")
 		setMockModbusTcpValue("Services/0/UnitId", 288)
 		setMockModbusTcpValue("Services/1/ServiceName", "com.victronenergy.solarcharger.ttyUSB1")
 		setMockModbusTcpValue("Services/1/UnitId", 289)
