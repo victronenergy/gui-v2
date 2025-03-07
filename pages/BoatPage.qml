@@ -12,7 +12,48 @@ SwipeViewPage {
 	id: root
 
 	readonly property var battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property real speed: _speed.value
+	readonly property real maxSpeed: 35.0 // TODO - move to Settings/gui/gauges once this has been added to plvePlatform
+	property real normalizedSpeed: 0 //(speed || 0) / maxSpeed // typically between 0 and 1
+	Timer {
+		id: timer
+		interval: 5000
+		running: true
+		repeat: true
+		onTriggered: normalizedSpeed = normalizedSpeed > 0 ? 0 : 1
+	}
+	Behavior on normalizedSpeed {
+		NumberAnimation {
+			duration: timer.interval
+		}
+	}
+
+
+	property string activeGpsUid
 	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+
+	readonly property VeQuickItem _speed: VeQuickItem {
+		uid: activeGpsUid ? activeGpsUid + "/Speed" : ""
+		//onValueChanged: console.log("***********", uid, value)
+	}
+
+	Instantiator {
+		model: Global.allDevicesModel.gpsDevices
+		delegate: QtObject {
+			readonly property var temp: modelData
+			onTempChanged: console.log("temp:", temp)
+			property var qi: VeQuickItem {
+				uid: modelData.serviceUid + "/Speed"
+				onValueChanged: {
+					//console.log(uid, value, index)
+					if (!activeGpsUid && value !== undefined) {
+						console.log(uid, "is now the active gps")
+						root.activeGpsUid = modelData.serviceUid
+					}
+				}
+			}
+		}
+	}
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
@@ -239,6 +280,8 @@ SwipeViewPage {
 	ProgressArc {
 		id: speedGauge
 
+		readonly property real angularRange: endAngle - startAngle
+
 		anchors {
 			top: parent.top
 			topMargin: 32
@@ -246,17 +289,61 @@ SwipeViewPage {
 		}
 		//y: (root._unexpandedHeight - height) / 2
 		rotation: 225
-		width: 320 //Theme.geometry_mainGauge_size
+		width: 320 // Theme.geometry_mainGauge_size
 		height: 320 // width
 		radius: width/2
 		startAngle: 0
 		endAngle: 270
-		value: 33 // visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
-		//progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
-		//remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
+		value: 100 * normalizedSpeed
 		strokeWidth: 24
 		animationEnabled: false
 
+		Rectangle {
+			id: needle
+			anchors {
+				bottom: parent.verticalCenter
+				//bottomMargin: -needle.radius
+				horizontalCenter: parent.horizontalCenter
+			}
+
+			width: speedGauge.strokeWidth
+			height: 169 - 9
+			radius: width / 2
+			color: "black"
+			transformOrigin: Item.Bottom
+			rotation: (speedGauge.angularRange * normalizedSpeed) // parent.transitionAngle //
+			Rectangle {
+				anchors {
+					top: parent.top
+					topMargin: radius
+					horizontalCenter: parent.horizontalCenter
+				}
+				width: 10
+				height: 49
+				radius: width / 2
+				gradient: Gradient {
+					GradientStop {
+						position: 0.0
+						color: "white"
+					}
+					GradientStop {
+						position: 0.4
+						color: "white"
+					}
+					GradientStop {
+						position: 0.6
+						color: "transparent"
+					}
+					GradientStop {
+						position: 1
+						color: "transparent"
+					}
+
+				}
+			}
+		}
+
+		/*
 		Image {
 			anchors {
 				bottom: parent.verticalCenter
@@ -264,13 +351,14 @@ SwipeViewPage {
 				//centerIn: parent
 			}
 			transformOrigin: Item.BottomRight
-			rotation: -136
+			rotation: -136 - 180 + speedGauge.angularRange * normalizedSpeed
 
 			//width: 18
 			//height: 169
 			//color: stateOfCharge.valueColor
 			source: "qrc:/images/indicator_5_.png"
 		}
+		*/
 	}
 
 
