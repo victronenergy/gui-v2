@@ -237,6 +237,8 @@ SwipeViewPage {
 	*/
 
 	ProgressArc {
+		id: speedGauge
+
 		anchors {
 			top: parent.top
 			topMargin: 32
@@ -255,15 +257,18 @@ SwipeViewPage {
 		strokeWidth: 24
 		animationEnabled: false
 
-		CP.ColorImage {
+		Image {
 			anchors {
-				verticalCenter: parent.verticalCenter
+				bottom: parent.verticalCenter
+				horizontalCenter: parent.horizontalCenter
+				//centerIn: parent
 			}
-			//transformOrigin: Item.BottomRight
+			transformOrigin: Item.BottomRight
+			rotation: -136
 
-			width: 40
-			height: width
-			color: stateOfCharge.valueColor
+			//width: 18
+			//height: 169
+			//color: stateOfCharge.valueColor
 			source: "qrc:/images/indicator_5_.png"
 		}
 	}
