@@ -72,11 +72,11 @@ Item {
 				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
 				height: 25
 				radius: height/2
-				color: Global.switches.switchStatusToColor(switchData._status.value, false)
+				color: Global.switches.switchableOutputStatusToColor(switchData._status.value, false)
 				Text {
 					id: childText
 					anchors.centerIn: parent
-					color: Global.switches.switchStatusToColor(switchData._status.value,true)//Qt.colorEqual(statusRect.color,"WHITE") ? "BLACK": "WHITE"
+					color: Global.switches.switchableOutputStatusToColor(switchData._status.value,true)
 					text: VenusOS.switchableOutput_statusToText(switchData._status.value)
 				}
 			}

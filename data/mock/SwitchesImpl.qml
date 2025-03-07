@@ -59,7 +59,7 @@ Item {
 						uid: switchDev.serviceUid + "/SwitchableOutput/%1/State".arg(index)
 						onValueChanged: {
 							if (value){
-								var statusData = [VenusOS.SwitchableOutput_Status_Output_Fault,VenusOS.SwitchableOutput_Status_Disabled,VenusOS.Switch_Status_Powered,
+								var statusData = [VenusOS.SwitchableOutput_Status_Output_Fault,VenusOS.SwitchableOutput_Status_Disabled,VenusOS.SwitchableOutput_Status_Powered,
 												  VenusOS.SwitchableOutput_Status_On,VenusOS.SwitchableOutput_Status_Over_Temperature,
 												  VenusOS.SwitchableOutput_Status_Short_Fault,VenusOS.SwitchableOutput_Status_Tripped]
 								if (index === 0 ){

@@ -14,59 +14,58 @@ QtObject {
 	}
 
 
-
-	function switchStatusToColor(val,text) {
-		var switchRedStatus = "#600000"
-		var switchRedText = "#FF8080"
-		var switchGreenStatus = "#006000"
-		var switchGreenText = "#80FF80"
-		var switchYellowStatus = "#705000"
-		var switchYellowText = "#e0e050"
+	function switchableOutputStatusToColor(val,text) {
 
 		switch (val) {
 		//channel status
 
-		case VenusOS.Switch_Status_Off:
-			if (text) return "WHITE"
-			else return "GREY"
+		case VenusOS.SwitchableOutput_Status_Off:
+			if (text) return Theme.color_white
+			else return Theme.color_gray8
+		case VenusOS.SwitchableOutput_Status_Powered:
+		case VenusOS.SwitchableOutput_Status_On:
+			if (text) return Theme.color_switchableStatusText_ok
+				else return Theme.color_switchableStatus_ok
 
-		case VenusOS.Switch_Status_Powered:
-		case VenusOS.Switch_Status_On:
-			if (text) return switchGreenText
-				else return switchGreenStatus
+		case VenusOS.SwitchableOutput_Status_Output_Fault:
+			if (text) return Theme.color_switchableStatusText_warning
+				else return Theme.color_switchableStatus_warning
 
-		case VenusOS.Switch_Status_Output_Fault:
-			if (text) return switchYellowText
-				else return switchYellowStatus
+		case VenusOS.SwitchableOutput_Status_Disabled:
+		case VenusOS.SwitchableOutput_Status_TripLowVoltage:
+		case VenusOS.SwitchableOutput_Status_Over_Temperature:
+		case VenusOS.SwitchableOutput_Status_Short_Fault:
+		case VenusOS.SwitchableOutput_Status_Tripped:
 
-		case VenusOS.Switch_Status_Disabled:
-		case VenusOS.Switch_Status_TripLowVoltage:
-		case VenusOS.Switch_Status_Over_Temperature:
-		case VenusOS.Switch_Status_Short_Fault:
-		case VenusOS.Switch_Status_Tripped:
+			if (text) return Theme.color_switchableStatusText_critical
+				else return Theme.color_switchableStatus_critical
 
-			if (text) return switchRedText
-				else return switchRedStatus
+		default:
+			if (text) return Theme.color_switchableStatusText_critical
+				else return Theme.color_switchableStatus_critical
+		}
+	}
+	function switchesOutputStatusToColor(val,text) {
 
-		//module state
+		switch (val) {
 		case VenusOS.Switch_ModuleState_Channel_Fault:
 		case VenusOS.Switch_ModuleState_Channel_Tripped:
 		case VenusOS.Switch_ModuleState_Over_Temperature:
-			if (text) return switchRedText
-				else return switchRedStatus
+			if (text) return Theme.color_switchableStatusText_critical
+				else return Theme.color_switchableStatus_critical
 
 		case VenusOS.Switch_ModuleState_Connected:
-			if (text) return switchGreenStatus
-				else return switchGreenText
+			if (text) return Theme.color_switchableStatus_ok
+				else return Theme.color_switchableStatusText_ok
 
 		case VenusOS.Switch_ModuleState_Temperature_Warning:
 		case VenusOS.Switch_ModuleState_Under_Voltage:
-			if (text) return switchYellowText
-				else return switchYellowStatus
+			if (text) return Theme.color_switchableStatusText_warning
+				else return Theme.color_switchableStatus_warning
 
 		default:
-			if (text) return switchRedText
-				else return switchRedStatus
+			if (text) return Theme.color_switchableStatusText_critical
+				else return Theme.color_switchableStatus_critical
 		}
 	}
 
