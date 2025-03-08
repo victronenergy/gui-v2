@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Loader {
+BaseListLoader {
 	id: root
 
 	property string serviceUid

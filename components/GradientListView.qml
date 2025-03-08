@@ -4,30 +4,22 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
-ListView {
+BaseListView {
 	id: root
 
-	width: parent.width
-	height: parent.height
+	spacing: Theme.geometry_gradientList_spacing
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
 	leftMargin: Theme.geometry_page_content_horizontalMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
-	boundsBehavior: Flickable.StopAtBounds
-	spacing: Theme.geometry_gradientList_spacing
-	focus: true
-
-	ViewGradient {
-		anchors.bottom: root.bottom
-	}
-
-	maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
-	flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
 	ScrollBar.vertical: ScrollBar {
 		topPadding: Theme.geometry_gradientList_topMargin
 		bottomPadding: Theme.geometry_gradientList_bottomMargin
+	}
+
+	ViewGradient {
+		anchors.bottom: root.bottom
 	}
 }

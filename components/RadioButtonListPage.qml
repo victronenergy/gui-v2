@@ -30,10 +30,12 @@ Page {
 	GradientListView {
 		id: optionsListView
 
+		// Use a separate "selectedIndex" property rather than "currentIndex" to track the selected
+		// index, as BaseListView internally modifies its currentIndex to track the focused item.
+		property int selectedIndex: root.currentIndex
 		property bool selectionChanged
 
 		model: root.optionModel
-		currentIndex: root.currentIndex
 
 		delegate: ListRadioButton {
 			id: radioButton
@@ -49,7 +51,7 @@ Page {
 				// pop the page, unless the user changed the selection and then selected the
 				// original option again. (The latter case can only occur if the page is not
 				// popped automatically, by setting popDestination=undefined.)
-				if (optionsListView.currentIndex !== root.currentIndex || optionsListView.selectionChanged) {
+				if (optionsListView.selectedIndex !== root.currentIndex || optionsListView.selectionChanged) {
 					optionsListView.selectionChanged = true
 					root.optionClicked(model.index, modelObject.value)
 				}
@@ -67,10 +69,10 @@ Page {
 			interactive: !modelObject.readOnly
 			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: interactive || checked
-			checked: optionsListView.currentIndex === model.index
+			checked: optionsListView.selectedIndex === model.index
 			C.ButtonGroup.group: radioButtonGroup
 
-			bottomContent.z: model.index === optionsListView.currentIndex ? 1 : -1
+			bottomContent.z: model.index === optionsListView.selectedIndex ? 1 : -1
 			bottomContentChildren: Loader {
 				id: bottomContentLoader
 
@@ -128,8 +130,8 @@ Page {
 						primaryLabel.color: Theme.color_font_secondary
 						textField.echoMode: TextInput.Password
 						interactive: radioButton.interactive
-						backgroundRect.color: "transparent"
-						preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
+						background.color: "transparent"
+						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
 						validateInput: function() {
 							// Validate the password on Enter/Return, or when "Confirm" is
 							// clicked. Ignore validation requests when the field does not
@@ -170,7 +172,7 @@ Page {
 
 			onClicked: {
 				if (root.updateCurrentIndexOnClick) {
-					optionsListView.currentIndex = model.index
+					optionsListView.selectedIndex = model.index
 				} else {
 					optionsListView.selectionChanged = true
 				}
