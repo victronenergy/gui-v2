@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Row {
+BaseListItem {
 	id: root
 
 	property int phaseCount
@@ -16,21 +16,29 @@ Row {
 	property alias totalOutputPowerUid: outputTable.totalPowerUid
 	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
-	spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
+	implicitWidth: contentRow.implicitWidth
+	implicitHeight: contentRow.implicitHeight
+	background.visible: false
 
-	ThreePhaseQuantityTable {
-		id: inputTable
-		width: (parent.width - parent.spacing) / 2
-		labelText: CommonWords.ac_in
-		rowCount: root.phaseCount
-		voltPrecision: root.voltPrecision
-	}
+	Row {
+		id: contentRow
+		width: parent.width
+		spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
 
-	ThreePhaseQuantityTable {
-		id: outputTable
-		width: (parent.width - parent.spacing) / 2
-		labelText: CommonWords.ac_out
-		rowCount: root.phaseCount
-		voltPrecision: root.voltPrecision
+		ThreePhaseQuantityTable {
+			id: inputTable
+			width: (parent.width - parent.spacing) / 2
+			labelText: CommonWords.ac_in
+			rowCount: root.phaseCount
+			voltPrecision: root.voltPrecision
+		}
+
+		ThreePhaseQuantityTable {
+			id: outputTable
+			width: (parent.width - parent.spacing) / 2
+			labelText: CommonWords.ac_out
+			rowCount: root.phaseCount
+			voltPrecision: root.voltPrecision
+		}
 	}
 }

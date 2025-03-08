@@ -14,7 +14,7 @@ Page {
 
 		model: Global.allDevicesModel
 
-		delegate: Loader {
+		delegate: BaseListLoader {
 			id: delegateLoader
 
 			required property bool connected
@@ -52,7 +52,6 @@ Page {
 			// Only set width; height is sized to the loaded item, in case preferredVisible=false and the
 			// item should not be visible.
 			width: parent ? parent.width : 0
-			focus: true
 
 			onStatusChanged: {
 				if (status === Loader.Error) {
