@@ -14,7 +14,11 @@ SwipeViewPage {
 	readonly property var battery: Global.system && Global.system.battery ? Global.system.battery : null
 	readonly property real speed: _speed.value
 	readonly property real maxSpeed: 35.0 // TODO - move to Settings/gui/gauges once this has been added to plvePlatform
-	property real normalizedSpeed: 0 //(speed || 0) / maxSpeed // typically between 0 and 1
+	property real normalizedSpeed: (speed || 0) / maxSpeed // typically between 0 and 1
+	readonly property int maxRpm: 3000
+	readonly property real normalizedRpm: (Math.abs(rpm.value) || 0) / maxRpm
+	property var motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	/*
 	Timer {
 		id: timer
 		interval: 5000
@@ -27,25 +31,21 @@ SwipeViewPage {
 			duration: timer.interval
 		}
 	}
-
+	*/
 
 	property string activeGpsUid
 	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
 
 	readonly property VeQuickItem _speed: VeQuickItem {
 		uid: activeGpsUid ? activeGpsUid + "/Speed" : ""
-		//onValueChanged: console.log("***********", uid, value)
 	}
 
 	Instantiator {
 		model: Global.allDevicesModel.gpsDevices
 		delegate: QtObject {
-			readonly property var temp: modelData
-			onTempChanged: console.log("temp:", temp)
 			property var qi: VeQuickItem {
 				uid: modelData.serviceUid + "/Speed"
 				onValueChanged: {
-					//console.log(uid, value, index)
 					if (!activeGpsUid && value !== undefined) {
 						console.log(uid, "is now the active gps")
 						root.activeGpsUid = modelData.serviceUid
@@ -338,116 +338,273 @@ SwipeViewPage {
 						position: 1
 						color: "transparent"
 					}
-
 				}
 			}
 		}
-
-		/*
-		Image {
-			anchors {
-				bottom: parent.verticalCenter
-				horizontalCenter: parent.horizontalCenter
-				//centerIn: parent
-			}
-			transformOrigin: Item.BottomRight
-			rotation: -136 - 180 + speedGauge.angularRange * normalizedSpeed
-
-			//width: 18
-			//height: 169
-			//color: stateOfCharge.valueColor
-			source: "qrc:/images/indicator_5_.png"
-		}
-		*/
 	}
 
 
+	ProgressArc {
+		id: rpmGauge
 
-	/*
-qml:
-Battery: {
-"objectName":"",
-"systemServiceUid":"mqtt/system/0",
-"stateOfCharge":null,
-"voltage":null,
-"power":null,
-"current":null,
-"temperature":null,
-"timeToGo":null,
-"icon":"qrc:/images/icon_battery_24.svg",
-"mode":0,
-"_stateOfCharge":{
-"objectName":"",
-"min":0,
-"max":2147483647,
-"defaultMin":0,
-"defaultMax":2147483647,
-"text":"--",
-"uid":"mqtt/system/0/Dc/Battery/Soc",
-"state":4,"
-seen":true,
-"unit":"",
-"decimals":0,
-"invalidText":"--",
-"displayUnit":-1,
-"sourceUnit":-1,
-"sourceMin":2147483647,
-"sourceMax":2147483647,
-"defaultSourceMin":0,
-"defaultSourceMax":2147483647,
-"isSetting":true,
-"isValid":false,
-"invalidate":true},
-"_voltage":{
-"objectName":"",
-"min":0,
-"max":2147483647,
-"defaultMin":0,
-"defaultMax":2147483647,
-"text":"--",
-"uid":"mqtt/system/0/Dc/Battery/Voltage",
-"state":4,
-"seen":true,
-"unit":"",
-"decimals":0,
-"invalidText":"--",
-"displayUnit":-1,
-"sourceUnit":-1,
-"sourceMin":2147483647,
-"sourceMax":2147483647,
-"defaultSourceMin":0,
-"defaultSourceMax":2147483647,
-"isSetting":true,
-"isValid":false,
-"invalidate":true
-},
-"_power":{
-"objectName":"",
-"min":0,
-"max":2147483647,
-"defaultMin":0,
-"defaultMax":2147483647,
-"text":"--",
-"uid":"mqtt/system/0/Dc/Battery/Power",
-"state":4,
-"seen":true,
-"unit":"",
-"decimals":0,
-"invalidText":"--",
-"displayUnit":-1,
-"sourceUnit":-1,
-"sourceMin":2147483647,
-"sourceMax":2147483647,
-"defaultSourceMin":0,
-"defaultSourceMax":2147483647,
-"isSetting":true,
-"isValid":false,
-"invalidate":true},
-"_current":{
-"objectName":"","min":0,"max":2147483647,"defaultMin":0,"defaultMax":2147483647,"text":"--","uid":"mqtt/system/0/Dc/Battery/Current","state":4,"seen":true,"unit":"","decimals":0,"invalidText":"--","displayUnit":-1,"sourceUnit":-1,"sourceMin":2147483647,"sourceMax":2147483647,"defaultSourceMin":0,"defaultSourceMax":2147483647,"isSetting":true,"isValid":false,"invalidate":true},"_temperature":{"objectName":"","min":0,"max":2147483647,"defaultMin":0,"defaultMax":2147483647,"text":"--","uid":"mqtt/system/0/Dc/Battery/Temperature","state":4,"seen":true,"unit":"","decimals":0,"invalidText":"--","displayUnit":-1,"sourceUnit":-1,"sourceMin":2147483647,"sourceMax":2147483647,"defaultSourceMin":0,"defaultSourceMax":2147483647,"isSetting":true,"isValid":false,"invalidate":true},
-"_timeToGo":{
-"objectName":"","min":0,"max":2147483647,"defaultMin":0,"defaultMax":2147483647,"text":"--","uid":"mqtt/system/0/Dc/Battery/TimeToGo","state":4,"seen":true,"unit":"","decimals":0,"invalidText":"--","displayUnit":-1,"sourceUnit":-1,"sourceMin":2147483647,"sourceMax":2147483647,"defaultSourceMin":0,"defaultSourceMax":2147483647,"isSetting":true,"isValid":false,"invalidate":true}}
-*/
+		anchors {
+			top: parent.top
+			topMargin: 66
+			horizontalCenter: parent.horizontalCenter
+		}
+		rotation: 225
+		width: 252 // Theme.geometry_mainGauge_size
+		height: width
+		radius: width/2
+		startAngle: 0
+		endAngle: 270
+		value: 100 * normalizedRpm
+		strokeWidth: 8
+		animationEnabled: false
+	}
 
+	Label {
+		id: min
+
+		anchors {
+			top: parent.top
+			topMargin: 299 + 10
+			left: speedGauge.left
+			leftMargin: 55
+		}
+
+		verticalAlignment: Text.AlignVCenter
+		color: Theme.color_font_secondary
+		font.pixelSize: 24
+		text: "0"
+	}
+
+	Label {
+		anchors {
+			top: min.top
+			right: speedGauge.right
+			rightMargin: 50
+		}
+
+		color: Theme.color_font_secondary
+		font.pixelSize: 24
+		text: maxRpm
+	}
+
+	Label {
+		anchors {
+			top: parent.top
+			topMargin: 95 - 20
+			horizontalCenter: parent.horizontalCenter
+		}
+		color: Theme.color_font_primary
+		//height: 91 // 153 // 128
+		onHeightChanged: console.log("*********** height:", height)
+		font.pixelSize: 128
+		font.weight: Font.Medium
+		text: "14" // Math.round(speed)
+	}
+
+	readonly property int delta: 13
+	Label {
+		anchors {
+			top: parent.top
+			topMargin: 220 - delta
+			horizontalCenter: parent.horizontalCenter
+		}
+
+		verticalAlignment: Text.AlignVCenter
+		font.pixelSize: 22
+		color: Theme.color_font_secondary
+		text: speedUnits.value === undefined ? "" : speedUnits.value
+
+		VeQuickItem {
+			id: speedUnits
+
+			uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
+		}
+	}
+
+	Label {
+		anchors {
+			top: parent.top
+			topMargin: 253 - delta
+			horizontalCenter: parent.horizontalCenter
+		}
+
+		verticalAlignment: Text.AlignVCenter
+		topPadding: 8
+		font.pixelSize: 34
+		text: Math.abs(rpm.value)
+	}
+
+	Label {
+		anchors {
+			top: parent.top
+			topMargin: 301 - delta
+			horizontalCenter: parent.horizontalCenter
+		}
+		verticalAlignment: Text.AlignVCenter
+		font.pixelSize: 22
+		color: Theme.color_font_secondary
+		//% "RPM"
+		text: qsTrId("boat_page_rpm")
+	}
+
+	VeQuickItem {
+		id: rpm
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Motor/RPM" : ""
+	}
+
+	VeQuickItem {
+		id: temperature
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Temperature" : ""
+	}
+
+	readonly property int direction: _direction.value === undefined ? -1 : _direction.value
+
+	Row {
+		id: gear
+
+		anchors {
+			top: parent.top
+			topMargin: 108
+			right: parent.right
+			rightMargin: 90
+		}
+
+		spacing: 8
+
+		VeQuickItem { //  0=neutral, 1=reverse, 2=forward (optional)
+			id: _direction
+
+			uid: motorDrive ? motorDrive.serviceUid + "/Motor/Direction" : ""
+		}
+
+		Label {
+			color: direction === VenusOS.MotorDriveGear_Forward ? Theme.color_font_primary : Theme.color_font_secondary
+			font.pixelSize: 28
+			width: 24
+			//: 'F' is for 'forward'
+			//% "F"
+			text: qsTrId("boat_page_f")
+		}
+
+		Label {
+			color: direction === VenusOS.MotorDriveGear_Neutral ? Theme.color_font_primary : Theme.color_font_secondary
+			font.pixelSize: 28
+			width: 24
+			//: 'N' is for 'neutral'
+			//% "N"
+			text: qsTrId("boat_page_n")
+		}
+
+		Label {
+			color: direction === VenusOS.MotorDriveGear_Reverse ? Theme.color_font_primary : Theme.color_font_secondary
+			font.pixelSize: 28
+			width: 24
+			//: 'R' is for 'reverse'
+			//% "R"
+			text: qsTrId("boat_page_r")
+		}
+	}
+
+	Row {
+		id: rhsMiddle
+
+		anchors {
+			top: parent.top
+			topMargin: 169
+			right: parent.right
+			rightMargin: 58
+		}
+
+		spacing: 4
+
+		VeQuickItem {
+			id: _current
+
+			uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Current" : ""
+		}
+
+		VeQuickItem {
+			id: _power
+
+			uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Power" : ""
+		}
+
+		QuantityLabel {
+			id: currentLabel
+
+			anchors.verticalCenter: parent.verticalCenter
+			verticalAlignment: Text.AlignVCenter
+			visible: _current.isValid
+			font.pixelSize: 34
+			value: _current.value
+			unit: VenusOS.Units_Amp
+		}
+
+		QuantityLabel {
+			id: powerLabel
+
+			anchors.verticalCenter: parent.verticalCenter
+			verticalAlignment: Text.AlignVCenter
+			visible: !currentLabel.visible && _power.isValid
+			font.pixelSize: 34
+			value: _power.value
+			unit: VenusOS.Units_Watt
+		}
+
+		Image {
+			id: propeller
+
+			anchors {
+				verticalCenter: parent.verticalCenter
+				verticalCenterOffset: 3
+			}
+			visible: currentLabel.visible || powerLabel.visible
+			source: "qrc:/images/icon_propeller_32.svg"
+		}
+
+		QuantityLabel {
+			id: batteryCurrentLabel
+			anchors.verticalCenter: parent.verticalCenter
+			verticalAlignment: Text.AlignVCenter
+			visible: !propeller.visible && _current.isValid
+			font.pixelSize: 34
+			value: battery.current
+			unit: VenusOS.Units_Amp
+		}
+
+		QuantityLabel {
+			id: batteryPowerLabel
+			anchors.verticalCenter: parent.verticalCenter
+			verticalAlignment: Text.AlignVCenter
+			visible: !propeller.visible && !batteryCurrentLabel.visible && battery.power !== undefined
+			font.pixelSize: 34
+			value: battery.power
+			unit: VenusOS.Units_Watt
+		}
+
+		Image {
+			anchors {
+				verticalCenter: parent.verticalCenter
+			}
+			visible: batteryCurrentLabel.visible || batteryPowerLabel.visible
+			source: "qrc:/images/icon_battery_24.svg"
+		}
+	}
+
+	Column {
+		id: rhsLower
+
+		anchors {
+			top: parent.top
+			topMargin: 237
+			right: parent.right
+			rightMargin: 90
+		}
+	}
 }
-

@@ -755,6 +755,13 @@ public:
 	};
 	Q_ENUM(ModificationChecks_SystemHooksState)
 
+	enum MotorDriveGear {
+		MotorDriveGear_Neutral,
+		MotorDriveGear_Reverse,
+		MotorDriveGear_Forward
+	};
+	Q_ENUM(MotorDriveGear)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
