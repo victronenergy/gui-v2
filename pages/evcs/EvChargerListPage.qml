@@ -13,35 +13,31 @@ Page {
 	title: qsTrId("evcs_charging_stations")
 
 	GradientListView {
-		header: Item {
+		header: BaseListItem {
 			width: parent.width
-			height: summary.height + Theme.geometry_gradientList_spacing
+			height: summary.height + ListView.view.spacing
 
-			ListItemBackground {
-				height: summary.y + summary.height
+			QuantityTableSummary {
+				id: summary
 
-				QuantityTableSummary {
-					id: summary
-
-					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
-					model: [
-						{
-							title: "",
-							text: CommonWords.total,
-							unit: VenusOS.Units_None
-						},
-						{
-							title: CommonWords.power_watts,
-							value: Global.evChargers.power,
-							unit: VenusOS.Units_Watt
-						},
-						{
-							title: CommonWords.energy,
-							value: Global.evChargers.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
-						}
-					]
-				}
+				width: parent.width - Theme.geometry_listItem_content_horizontalMargin
+				model: [
+					{
+						title: "",
+						text: CommonWords.total,
+						unit: VenusOS.Units_None
+					},
+					{
+						title: CommonWords.power_watts,
+						value: Global.evChargers.power,
+						unit: VenusOS.Units_Watt
+					},
+					{
+						title: CommonWords.energy,
+						value: Global.evChargers.energy,
+						unit: VenusOS.Units_Energy_KiloWattHour
+					}
+				]
 			}
 		}
 

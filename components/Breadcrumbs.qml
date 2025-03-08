@@ -16,7 +16,7 @@ ListView {
 	currentIndex: count - 1
 	clip: true
 
-	delegate: Item {
+	delegate: BaseListItem {
 		id: breadcrumb
 
 		readonly property bool isTopBreadcrumb: index === root.count - 1
@@ -59,11 +59,6 @@ ListView {
 		PressArea {
 			anchors.fill: parent
 			onClicked: root.clicked(index)
-		}
-
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: breadcrumb.activeFocus
 		}
 	}
 

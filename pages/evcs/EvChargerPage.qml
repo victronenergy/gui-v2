@@ -17,7 +17,8 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItemBackground {
+			BaseListItem {
+				width: parent ? parent.width : 0
 				height: phaseTable.y + phaseTable.height
 
 				QuantityTableSummary {

@@ -128,7 +128,7 @@ Page {
 						primaryLabel.color: Theme.color_font_secondary
 						textField.echoMode: TextInput.Password
 						interactive: radioButton.interactive
-						backgroundRect.color: "transparent"
+						background.color: "transparent"
 						preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 						validateInput: function() {
 							// Validate the password on Enter/Return, or when "Confirm" is

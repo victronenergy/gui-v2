@@ -12,6 +12,7 @@ Item {
 
 	property bool active
 
+	z: 1000 // show highlight above all siblings
 	visible: active && (!Global.pageManager || !Global.pageManager.expandLayout)
 
 	Rectangle {
