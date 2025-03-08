@@ -16,7 +16,7 @@ BaseListView {
 	currentIndex: count - 1
 	clip: true
 
-	delegate: Item {
+	delegate: BaseListItem {
 		id: breadcrumb
 
 		readonly property bool isTopBreadcrumb: index === root.count - 1
@@ -25,6 +25,7 @@ BaseListView {
 
 		height: root.height
 		width: contentRow.width
+		background.visible: false
 
 		Keys.onSpacePressed: root.clicked(index)
 
@@ -59,11 +60,6 @@ BaseListView {
 		PressArea {
 			anchors.fill: parent
 			onClicked: root.clicked(index)
-		}
-
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: breadcrumb.activeFocus
 		}
 	}
 
