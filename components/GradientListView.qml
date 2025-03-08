@@ -15,12 +15,12 @@ BaseListView {
 	spacing: Theme.geometry_gradientList_spacing
 	focus: true
 
-	ViewGradient {
-		anchors.bottom: root.bottom
-	}
-
 	ScrollBar.vertical: ScrollBar {
 		topPadding: Theme.geometry_gradientList_topMargin
 		bottomPadding: Theme.geometry_gradientList_bottomMargin
+	}
+
+	ViewGradient {
+		anchors.bottom: root.bottom
 	}
 }
