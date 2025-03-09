@@ -1121,11 +1121,13 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_controls_off_32.svg
         images/icon_controls_on_32.svg
         images/icon_dc_24.svg
+        images/icon_engine_temp_32.svg
         images/icon_humidity_32.svg
         images/icon_input_24.svg
         images/icon_manualstart_24.svg
         images/icon_manualstart_timer_24.svg
         images/icon_minus.svg
+        images/icon_motorController_32.svg
         images/icon_plus.svg
         images/icon_plus_32.svg
         images/icon_propeller_32.svg
@@ -1134,8 +1136,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_sidepanel_on_32.svg
         images/icon_screen_sleep_32.svg
         images/icon_temp_32.svg
-        images/indicator_5_.png
-        images/indicator_5_.svg
+        images/icon_temp_coolant_32.svg
         images/information.svg
         images/inverter.svg
         images/inverter_charger.svg

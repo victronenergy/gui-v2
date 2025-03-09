@@ -18,6 +18,14 @@ SwipeViewPage {
 	readonly property int maxRpm: 3000
 	readonly property real normalizedRpm: (Math.abs(rpm.value) || 0) / maxRpm
 	property var motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	readonly property real current: _current.value
+	readonly property real power: _power.value
+	property string activeGpsUid
+	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+	readonly property int direction: _direction.value === undefined ? -1 : _direction.value
+	readonly property string speedUnits: _speedUnits.value || ""
+
+
 	/*
 	Timer {
 		id: timer
@@ -33,10 +41,73 @@ SwipeViewPage {
 	}
 	*/
 
-	property string activeGpsUid
-	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
-	readonly property VeQuickItem _speed: VeQuickItem {
+	//% "Boat"
+	navButtonText: qsTrId("nav_boat")
+	navButtonIcon: "qrc:/images/icon_boat_32.svg"
+	url: "qrc:/qt/qml/Victron/VenusOS/pages/BoatPage.qml"
+	backgroundColor: Theme.color_boatPage_background
+	fullScreenWhenIdle: true
+
+	VeQuickItem {
+		id: rpm
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Motor/RPM" : ""
+	}
+
+	readonly property real motorDriveTemperature: _motorDriveTemperature.isValid
+												  ? _motorDriveTemperature.value
+												  : _motorDriveTemperatureDc0.isValid
+													? _motorDriveTemperatureDc0.value
+													: undefined
+	VeQuickItem {
+		id: _motorDriveTemperature
+		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Temperature" : ""
+	}
+
+	VeQuickItem {
+		id: _motorDriveTemperatureDc0
+		uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Temperature" : ""
+	}
+
+	VeQuickItem {
+		id: _motorDriveControllerTemperature
+		uid: motorDrive ? motorDrive.serviceUid + "/Controller/Temperature" : ""
+	}
+
+	VeQuickItem {
+		id: _motorDriveCoolantTemperature
+		uid: motorDrive ? motorDrive.serviceUid + "/Coolant/Temperature" : ""
+	}
+
+	VeQuickItem { //  0=neutral, 1=reverse, 2=forward (optional)
+		id: _direction
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Direction" : ""
+	}
+
+	VeQuickItem {
+		id: _speedUnits
+
+		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
+	}
+
+	VeQuickItem {
+		id: _current
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Current" : ""
+	}
+
+	VeQuickItem {
+		id: _power
+
+		uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Power" : ""
+	}
+
+	VeQuickItem {
+		id: _speed
+
 		uid: activeGpsUid ? activeGpsUid + "/Speed" : ""
 	}
 
@@ -55,17 +126,8 @@ SwipeViewPage {
 		}
 	}
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-
-	//% "Boat"
-	navButtonText: qsTrId("nav_boat")
-	navButtonIcon: "qrc:/images/icon_boat_32.svg"
-	url: "qrc:/qt/qml/Victron/VenusOS/pages/BoatPage.qml"
-	backgroundColor: Theme.color_boatPage_background
-	fullScreenWhenIdle: true
-
 	CP.ColorImage {
-		id: topLeft
+		id: shadowTopLeft
 
 		anchors {
 			top: parent.top
@@ -81,12 +143,12 @@ SwipeViewPage {
 	}
 
 	CP.ColorImage {
-		id: bottomLeft
+		id: shadowBottomLeft
 
 		anchors {
 			top: parent.top
 			topMargin: 227 // 296
-			left: topLeft.left
+			left: shadowTopLeft.left
 		}
 		width: 193
 		height: 69
@@ -95,9 +157,9 @@ SwipeViewPage {
 	}
 
 	CP.ColorImage {
-		id: topRight
+		id: shadowTopRight
 		anchors {
-			top: topLeft.top
+			top: shadowTopLeft.top
 			right: parent.right
 			rightMargin: 58 // 89
 		}
@@ -109,10 +171,10 @@ SwipeViewPage {
 	}
 
 	CP.ColorImage {
-		id: bottomRight
+		id: shadowBottomRight
 		anchors {
-			bottom: bottomLeft.bottom
-			right: topRight.right
+			bottom: shadowBottomLeft.bottom
+			right: shadowTopRight.right
 		}
 		width: 193
 		height: 69
@@ -138,7 +200,7 @@ SwipeViewPage {
 		value: battery.stateOfCharge || 0
 	}
 
-	Column {
+	Column { // battery 'Time to go' data
 		anchors {
 			top: parent.top
 			topMargin: 80 - 4
@@ -243,40 +305,6 @@ SwipeViewPage {
 		value: battery.temperature
 	}
 
-	/*
-	CircularSingleGauge {
-		id: centerGauge
-
-		readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
-		readonly property var battery: Global.system.battery
-
-		anchors {
-			top: parent.top
-			horizontalCenter: parent.horizontalCenter
-		}
-		width: 360 //Theme.geometry_mainGauge_size
-		height: 360 // width
-		name: properties.name
-		icon.source: battery.icon
-		value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
-		voltage: battery.voltage
-		current: battery.current
-		power: battery.power
-		status: Theme.getValueStatus(value, properties.valueType)
-		caption: Utils.formatBatteryTimeToGo(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
-		startAngle: 225
-		endAngle: 115
-		animationEnabled: false
-		shineAnimationEnabled: false
-
-		Rectangle {
-			anchors.fill: parent
-			color: "green"
-			opacity: 0.1
-		}
-	}
-	*/
-
 	ProgressArc {
 		id: speedGauge
 
@@ -343,7 +371,6 @@ SwipeViewPage {
 		}
 	}
 
-
 	ProgressArc {
 		id: rpmGauge
 
@@ -353,7 +380,7 @@ SwipeViewPage {
 			horizontalCenter: parent.horizontalCenter
 		}
 		rotation: 225
-		width: 252 // Theme.geometry_mainGauge_size
+		width: 252
 		height: width
 		radius: width/2
 		startAngle: 0
@@ -398,11 +425,9 @@ SwipeViewPage {
 			horizontalCenter: parent.horizontalCenter
 		}
 		color: Theme.color_font_primary
-		//height: 91 // 153 // 128
-		onHeightChanged: console.log("*********** height:", height)
 		font.pixelSize: 128
 		font.weight: Font.Medium
-		text: "14" // Math.round(speed)
+		text: Math.round(speed)
 	}
 
 	readonly property int delta: 13
@@ -416,13 +441,7 @@ SwipeViewPage {
 		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: 22
 		color: Theme.color_font_secondary
-		text: speedUnits.value === undefined ? "" : speedUnits.value
-
-		VeQuickItem {
-			id: speedUnits
-
-			uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
-		}
+		text: speedUnits
 	}
 
 	Label {
@@ -451,20 +470,6 @@ SwipeViewPage {
 		text: qsTrId("boat_page_rpm")
 	}
 
-	VeQuickItem {
-		id: rpm
-
-		uid: motorDrive ? motorDrive.serviceUid + "/Motor/RPM" : ""
-	}
-
-	VeQuickItem {
-		id: temperature
-
-		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Temperature" : ""
-	}
-
-	readonly property int direction: _direction.value === undefined ? -1 : _direction.value
-
 	Row {
 		id: gear
 
@@ -477,43 +482,32 @@ SwipeViewPage {
 
 		spacing: 8
 
-		VeQuickItem { //  0=neutral, 1=reverse, 2=forward (optional)
-			id: _direction
-
-			uid: motorDrive ? motorDrive.serviceUid + "/Motor/Direction" : ""
-		}
-
 		Label {
 			color: direction === VenusOS.MotorDriveGear_Forward ? Theme.color_font_primary : Theme.color_font_secondary
 			font.pixelSize: 28
 			width: 24
-			//: 'F' is for 'forward'
-			//% "F"
-			text: qsTrId("boat_page_f")
+			text: "F" // intentionally not translated
 		}
 
 		Label {
 			color: direction === VenusOS.MotorDriveGear_Neutral ? Theme.color_font_primary : Theme.color_font_secondary
 			font.pixelSize: 28
 			width: 24
-			//: 'N' is for 'neutral'
-			//% "N"
-			text: qsTrId("boat_page_n")
+			text: "N" // intentionally not translated
 		}
 
 		Label {
 			color: direction === VenusOS.MotorDriveGear_Reverse ? Theme.color_font_primary : Theme.color_font_secondary
 			font.pixelSize: 28
 			width: 24
-			//: 'R' is for 'reverse'
-			//% "R"
-			text: qsTrId("boat_page_r")
+			text: "R" // intentionally not translated
 		}
 	}
 
 	Row {
-		id: rhsMiddle
+		/*
 
+*/
 		anchors {
 			top: parent.top
 			topMargin: 169
@@ -523,26 +517,14 @@ SwipeViewPage {
 
 		spacing: 4
 
-		VeQuickItem {
-			id: _current
-
-			uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Current" : ""
-		}
-
-		VeQuickItem {
-			id: _power
-
-			uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Power" : ""
-		}
-
 		QuantityLabel {
 			id: currentLabel
 
 			anchors.verticalCenter: parent.verticalCenter
 			verticalAlignment: Text.AlignVCenter
-			visible: _current.isValid
+			visible: current !== undefined
 			font.pixelSize: 34
-			value: _current.value
+			value: current
 			unit: VenusOS.Units_Amp
 		}
 
@@ -572,7 +554,7 @@ SwipeViewPage {
 			id: batteryCurrentLabel
 			anchors.verticalCenter: parent.verticalCenter
 			verticalAlignment: Text.AlignVCenter
-			visible: !propeller.visible && _current.isValid
+			visible: !propeller.visible && current !== undefined
 			font.pixelSize: 34
 			value: battery.current
 			unit: VenusOS.Units_Amp
@@ -605,6 +587,47 @@ SwipeViewPage {
 			topMargin: 237
 			right: parent.right
 			rightMargin: 90
+		}
+
+		component TemperatureGauge : Row {
+			required property VeQuickItem veQuickItem
+			required property int unit
+			required property string source
+
+			anchors.right: parent.right
+			spacing: 4
+			//visible: veQuickItem && veQuickItem.isValid
+
+			QuantityLabel {
+				anchors.verticalCenter: parent.verticalCenter
+				verticalAlignment: Text.AlignVCenter
+				font.pixelSize: 28
+				value: veQuickItem && veQuickItem.value// || 0
+				unit: parent.unit
+			}
+
+			Image {
+				anchors.verticalCenter: parent.verticalCenter
+				source: parent.source
+			}
+		}
+
+		TemperatureGauge {
+			veQuickItem: _motorDriveTemperature
+			unit: VenusOS.Units_Temperature_Celsius
+			source: "qrc:/images/icon_engine_temp_32.svg"
+		}
+
+		TemperatureGauge {
+			veQuickItem: _motorDriveCoolantTemperature
+			unit: VenusOS.Units_Temperature_Celsius
+			source: "qrc:/images/icon_temp_coolant_32.svg"
+		}
+
+		TemperatureGauge {
+			veQuickItem: _motorDriveControllerTemperature
+			unit: VenusOS.Units_Temperature_Celsius
+			source: "qrc:/images/icon_motorController_32.svg"
 		}
 	}
 }
