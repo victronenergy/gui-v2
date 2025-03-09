@@ -114,7 +114,6 @@ SwipeViewPage {
 		source: "qrc:/images/boat_glow.png"
 	}
 
-
 	Shadow {
 		id: shadowTopLeft
 
@@ -168,16 +167,16 @@ SwipeViewPage {
 		y: (root._unexpandedHeight - height) / 2
 
 		direction: PathArc.Clockwise
-		startAngle: 243.25 // 243.5
-		endAngle: 293 // 296.5
+		startAngle: 243.25
+		endAngle: 293
 		strokeWidth: 15
 		horizontalAlignment: Qt.AlignLeft
-		animationEnabled: false // if set to true, the arc flickers momentarily when it becomes visible. Not sure why.
+		animationEnabled: false
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 		value: battery.stateOfCharge || 0
 	}
 
-	Column { // battery 'Time to go' data
+	Column {
 		anchors {
 			top: parent.top
 			topMargin: 80 - 4
@@ -189,9 +188,10 @@ SwipeViewPage {
 
 		Row {
 			readonly property int secs: battery.timeToGo
+			onSecsChanged: console.log("secs:", secs)
 			readonly property int days: Math.floor(secs / 86400)
 			readonly property int hours: Math.floor((secs - (days * 86400)) / 3600)
-			readonly property int minutes: Math.floor((secs - (hours * 3600)) / 60)
+			readonly property int minutes: Math.floor((secs - (days * 86400) - (hours * 3600)) / 60)
 
 			Label {
 				font.pixelSize: 28
@@ -292,10 +292,9 @@ SwipeViewPage {
 			topMargin: 32
 			horizontalCenter: parent.horizontalCenter
 		}
-		//y: (root._unexpandedHeight - height) / 2
 		rotation: 225
-		width: 320 // Theme.geometry_mainGauge_size
-		height: 320 // width
+		width: 320
+		height: width
 		radius: width/2
 		startAngle: 0
 		endAngle: 270
@@ -307,7 +306,6 @@ SwipeViewPage {
 			id: needle
 			anchors {
 				bottom: parent.verticalCenter
-				//bottomMargin: -needle.radius
 				horizontalCenter: parent.horizontalCenter
 			}
 
@@ -495,40 +493,6 @@ SwipeViewPage {
 			gear: VenusOS.MotorDriveGear_Reverse
 			text: "R" // intentionally not translated
 		}
-
-		/*
-		Label {
-			color: direction === VenusOS.MotorDriveGear_Forward ? Theme.color_font_primary : Theme.color_font_secondary
-			font.pixelSize: 28
-			width: 24
-			text: "F" // intentionally not translated
-
-			Rectangle {
-				anchors {
-					bottom: parent.top
-					bottomMargin: 6
-					horizontalCenter: parent.horizontalCenter
-				}
-				height: 5
-				width: 26
-				color: "#387DC5" // same for light & dark mode
-			}
-		}
-
-		Label {
-			color: direction === VenusOS.MotorDriveGear_Neutral ? Theme.color_font_primary : Theme.color_font_secondary
-			font.pixelSize: 28
-			width: 24
-			text: "N" // intentionally not translated
-		}
-
-		Label {
-			color: direction === VenusOS.MotorDriveGear_Reverse ? Theme.color_font_primary : Theme.color_font_secondary
-			font.pixelSize: 28
-			width: 24
-			text: "R" // intentionally not translated
-		}
-		*/
 	}
 
 	Row {
@@ -541,24 +505,24 @@ SwipeViewPage {
 
 		spacing: 4
 
-		QuantityLabel {
-			id: currentLabel
-
+		component BatteryQuantityLabel : QuantityLabel {
 			anchors.verticalCenter: parent.verticalCenter
 			verticalAlignment: Text.AlignVCenter
-			visible: current !== undefined
 			font.pixelSize: 34
+		}
+
+		BatteryQuantityLabel {
+			id: currentLabel
+
+			visible: current !== undefined
 			value: current
 			unit: VenusOS.Units_Amp
 		}
 
-		QuantityLabel {
+		BatteryQuantityLabel {
 			id: powerLabel
 
-			anchors.verticalCenter: parent.verticalCenter
-			verticalAlignment: Text.AlignVCenter
 			visible: !currentLabel.visible && _power.isValid
-			font.pixelSize: 34
 			value: _power.value
 			unit: VenusOS.Units_Watt
 		}
@@ -574,22 +538,16 @@ SwipeViewPage {
 			source: "qrc:/images/icon_propeller_32.svg"
 		}
 
-		QuantityLabel {
+		BatteryQuantityLabel {
 			id: batteryCurrentLabel
-			anchors.verticalCenter: parent.verticalCenter
-			verticalAlignment: Text.AlignVCenter
 			visible: !propeller.visible && current !== undefined
-			font.pixelSize: 34
 			value: battery.current
 			unit: VenusOS.Units_Amp
 		}
 
-		QuantityLabel {
+		BatteryQuantityLabel {
 			id: batteryPowerLabel
-			anchors.verticalCenter: parent.verticalCenter
-			verticalAlignment: Text.AlignVCenter
 			visible: !propeller.visible && !batteryCurrentLabel.visible && battery.power !== undefined
-			font.pixelSize: 34
 			value: battery.power
 			unit: VenusOS.Units_Watt
 		}
