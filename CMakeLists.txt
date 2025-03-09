@@ -263,6 +263,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
     components/SystemReason.qml
+    components/SystemBatteryDeviceModel.qml
+    components/SystemBatteryDelegate.qml
     components/TabBar.qml
     components/TankItem.qml
     components/TankGauge.qml
@@ -411,6 +413,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
     data/common/AcInput.qml
+    data/common/ActiveSystemBattery.qml
     data/common/DcDevice.qml
     data/common/DcInput.qml
     data/common/DeviceModel.qml
@@ -430,7 +433,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
-    data/common/SystemBattery.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
