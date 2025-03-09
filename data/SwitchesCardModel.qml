@@ -10,7 +10,7 @@ ListModel {
 	id: root
 
 	readonly property Instantiator switchDevObjects: Instantiator {
-		model: Global.switches.model.count
+		model: Global.switches.model
 
 		onObjectRemoved: (index,object) => {
 			object.switchObjects.removeAll()
