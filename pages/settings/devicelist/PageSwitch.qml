@@ -87,13 +87,15 @@ Page {
 					model: channelsModel.count
 					delegate: ListQuantityGroup {
 						property QtObject info: channelsModel.objectAt(index)
-						property QuantityObjectModel quantityModel: QuantityObjectModel {
+						QuantityObjectModel {
+							id: quantityModel
 							filterType: QuantityObjectModel.HasValue
 							QuantityObject { object: info.currentItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
 							QuantityObject { object: info; key: "combinedStatus" }
 							QuantityObject { object: info.functionItem; key: "statusText" }
 						}
-						property QuantityObjectModel baseQuantityModel: QuantityObjectModel {
+						QuantityObjectModel {
+							id: baseQuantityModel
 							filterType: QuantityObjectModel.HasValue
 							QuantityObject { object: info; key: "combinedStatus" }
 							QuantityObject { object: info.functionItem; key: "statusText" }
@@ -152,13 +154,15 @@ Page {
 								content.children: [
 									QuantityRow {
 										id: quantityRow
-										property QuantityObjectModel quantityModel: QuantityObjectModel {
+										QuantityObjectModel {
+											id: quantityModel
 											filterType: QuantityObjectModel.HasValue
 											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
 											QuantityObject { object: info.functionItem; key: "statusText" }
 											QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
 										}
-										property QuantityObjectModel baseQuantityModel: QuantityObjectModel {
+										QuantityObjectModel {
+											id: baseQuantityModel
 											filterType: QuantityObjectModel.HasValue
 											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
 											QuantityObject { object: info.functionItem; key: "statusText" }
@@ -238,19 +242,18 @@ Page {
 						placeholderText: qsTrId("settings_deviceinfo_group")
 					}
 					ListRadioButtonGroup {
-						//% "Channel Function "
 						id:channelFunction
-						text: qsTrId("Type")
+						//% "Type"
+						text: qsTrId("settings_type")
 						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/Type".arg(root.currentChannel)
-						enabled: userHasWriteAccess
 						preferredVisible : dataItem.isValid
 						optionModel: validFunctionsItem.options
 					}
 
 					ListQuantityField{
 						id:fuseListField
-						text: "Fuse rating"
-						enabled: userHasWriteAccess
+						//% "Fuse rating"
+						text:  qsTrId("settings_fuse_rating")
 						preferredVisible : dataItem.isValid
 						unit: VenusOS.Units_Amp
 						decimals: 1

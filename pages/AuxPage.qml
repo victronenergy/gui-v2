@@ -41,19 +41,7 @@ Page {
 					model: switchModel
 				}
 			}
-
-//           add relay card to test further extentions
-			 Loader {
-				 active: manualRelays.count > 0
-				 width: active ? root.cardWidth : -auxView.spacing
-				 sourceComponent: SwitchesCard {
-					 //width: root.cardWidth
-					 height: auxView.height
-					 model: manualRelays
-				 }
-
-				 ManualRelayModel { id: manualRelays }
-			 }
+			//place holder for other aux cards types ie Bilge pump service
 		}
 	}
 }
