@@ -29,9 +29,7 @@ Loader {
 	Component {
 		id: singlePhaseAcInOut
 
-		Column {
-			spacing: Theme.geometry_gradientList_spacing
-
+		SettingsColumn {
 			PVCFListQuantityGroup {
 				text: CommonWords.ac_in
 				data: AcPhase { serviceUid: root.serviceUid + "/Ac/ActiveIn/L1" }

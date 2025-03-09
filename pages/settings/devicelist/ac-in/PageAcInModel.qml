@@ -43,9 +43,9 @@ VisibleItemModel {
 		bindPrefix: root.bindPrefix
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: root.phaseNumbers.length > 0
 
 		Repeater {
 			model: root.phaseNumbers
@@ -101,9 +101,9 @@ VisibleItemModel {
 		}
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: root.phaseNumbers.length > 0
 
 		Repeater {
 			model: root.phaseNumbers
@@ -118,8 +118,9 @@ VisibleItemModel {
 		}
 	}
 
-	ListText {
-		text: CommonWords.zero_feed_in_power_limit
+	ListQuantity {
+		text: CommonWords.dynamic_power_limit
+		unit: VenusOS.Units_Watt
 		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
 		preferredVisible: dataItem.isValid
 	}
@@ -155,7 +156,7 @@ VisibleItemModel {
 	ListNavigation {
 		text: CommonWords.device_info_title
 		onClicked: {
-			Global.pageManager.pushPage(deviceInfoComponent)
+			Global.pageManager.pushPage(deviceInfoComponent, { title: text })
 		}
 
 		Component {
@@ -166,14 +167,13 @@ VisibleItemModel {
 
 				bindPrefix: root.bindPrefix
 
-				Component.onCompleted: {
-					settingsListView.model.append(dataManagerVersionComponent.createObject(deviceInfoPage))
-				}
-
-				Component {
-					id: dataManagerVersionComponent
+				settingsListView.footer: SettingsColumn {
+					topPadding: Theme.geometry_gradientList_spacing
+					width: parent.width
+					preferredVisible: dataManagerVersion.preferredVisible
 
 					ListText {
+						id: dataManagerVersion
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"

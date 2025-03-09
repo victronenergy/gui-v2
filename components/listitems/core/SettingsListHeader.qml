@@ -16,7 +16,8 @@ Label {
 		left: parent ? parent.left : undefined
 		leftMargin: Theme.geometry_listItem_content_horizontalMargin
 	}
-	topPadding: Theme.geometry_settingsListHeader_verticalPadding
+	topPadding: Theme.geometry_settingsListHeader_topPadding
+	bottomPadding: Theme.geometry_settingsListHeader_bottomPadding
 	width: Math.max(implicitWidth, 1)
 	font.pixelSize: Theme.font_size_body1
 	wrapMode: Text.Wrap

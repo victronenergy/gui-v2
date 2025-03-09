@@ -65,10 +65,28 @@ Page {
 			Component.onCompleted: _resetSource()
 		}
 
-		footer: Column {
+		footer: SettingsColumn {
 			width: parent.width
 			topPadding: Theme.geometry_gradientList_spacing
-			spacing: Theme.geometry_gradientList_spacing
+
+			ListNavigation {
+				//% "Genset"
+				text: qsTrId("devicelistpage_genset")
+				preferredVisible: relay0.isValid && relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
+
+				VeQuickItem {
+					id: relay0
+					uid: Global.system.serviceUid + "/Relay/0/State"
+				}
+			}
+
+			ListNavigation {
+				preferredVisible: relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
+				//% "Tank pump"
+				text: qsTrId("settings_tank_pump")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
+			}
 
 			ListButton {
 				//% "Remove disconnected devices"
@@ -79,36 +97,11 @@ Page {
 					Global.allDevicesModel.removeDisconnectedDevices()
 				}
 			}
-
-			ListNavigation {
-				//% "Generator start/stop"
-				text: qsTrId("settings_generator_start_stop")
-				preferredVisible: relay0.isValid
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
-
-				VeQuickItem {
-					id: relay0
-					uid: Global.system.serviceUid + "/Relay/0/State"
-				}
-			}
-
-			ListNavigation {
-				//% "Tank pump"
-				text: qsTrId("settings_tank_pump")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
-			}
-
-			ListNavigation {
-				//% "Energy meters"
-				text: qsTrId("settings_energy_meters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
-			}
-
-			ListNavigation {
-				//% "PV inverters"
-				text: qsTrId("settings_pv_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
-			}
 		}
+	}
+
+	VeQuickItem {
+		id: relayFunction
+		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 	}
 }

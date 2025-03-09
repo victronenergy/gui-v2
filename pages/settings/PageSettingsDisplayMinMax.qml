@@ -51,15 +51,14 @@ Page {
 				}
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
 
 				Repeater {
 					id: acInputsRepeater
 
 					model: 2
-					delegate: Column {
+					delegate: SettingsColumn {
 						required property int index
 						function reset() {
 							acInputMinCurrent.dataItem.setValue(0)
@@ -67,7 +66,6 @@ Page {
 						}
 
 						width: parent ? parent.width : 0
-						spacing: Theme.geometry_gradientList_spacing
 
 						SettingsListHeader {
 							text: {

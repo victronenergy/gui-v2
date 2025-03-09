@@ -32,9 +32,9 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: tableModel.rowCount > 0
 
 				Repeater {
 					model: tableModel

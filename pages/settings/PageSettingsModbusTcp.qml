@@ -31,6 +31,13 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 			}
 
+			ListNavigation {
+				//% "Available services"
+				text: qsTrId("settings_modbus_available_services")
+				preferredVisible: enableModbusTcp.checked
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+			}
+
 			PrimaryListLabel {
 				//% "No errors reported"
 				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
@@ -53,13 +60,6 @@ Page {
 					lastError.setValue(undefined)
 					timestamp.setValue(undefined)
 				}
-			}
-
-			ListNavigation {
-				//% "Available services"
-				text: qsTrId("settings_modbus_available_services")
-				preferredVisible: enableModbusTcp.checked
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
 			}
 		}
 	}

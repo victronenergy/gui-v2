@@ -45,9 +45,9 @@ Page {
 				decimals: 1
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: outputRepeater.count > 0
 
 				VeQuickItem {
 					id: nrOfOutputs
@@ -55,6 +55,7 @@ Page {
 				}
 
 				Repeater {
+					id: outputRepeater
 					model: nrOfOutputs.value || 1
 					delegate: ListQuantityGroup {
 						id: phaseDelegate

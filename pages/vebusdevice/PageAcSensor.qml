@@ -15,12 +15,12 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: sensorModel.count > 0
 
 				Repeater {
-					model: VeBusAcSensorModel { }
+					model: VeBusAcSensorModel { id: sensorModel }
 
 					ListText {
 						//% "AC sensor %1 %2"

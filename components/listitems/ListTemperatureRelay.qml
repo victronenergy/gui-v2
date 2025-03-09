@@ -29,7 +29,7 @@ ListNavigation {
 			} else {
 				//: %1 = temperature sensor type, %2 = input number of the sensor
 				//% "%1 temperature sensor (%2)"
-				return qsTrId("settings_relay_title_type_and_number").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value), inputNumber)
+				return qsTrId("settings_relay_title_type_and_number").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value)).arg(inputNumber)
 			}
 		}
 

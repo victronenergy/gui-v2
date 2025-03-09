@@ -45,7 +45,7 @@ VisibleItemModel {
 
 		onClicked: {
 			if (!checked) {
-				autostartSwitch.dataItem.setValue(true)
+				autostartSwitch.dataItem.setValue(1)
 			} else {
 				// check if they really want to disable
 				Global.dialogLayer.open(confirmationDialogComponent)
@@ -56,7 +56,7 @@ VisibleItemModel {
 			id: confirmationDialogComponent
 
 			GeneratorDisableAutoStartDialog {
-				onAccepted: autostartSwitch.dataItem.setValue(false)
+				onAccepted: autostartSwitch.dataItem.setValue(0)
 			}
 		}
 	}
@@ -149,9 +149,9 @@ VisibleItemModel {
 		}
 	}
 
-	Column {
+	SettingsColumn {
 		width: parent ? parent.width : 0
-		spacing: Theme.geometry_gradientList_spacing
+		preferredVisible: phaseRepeater.count > 0
 
 		Repeater {
 			id: phaseRepeater

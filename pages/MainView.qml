@@ -29,6 +29,10 @@ Item {
 			&& !pageStack.busy && (!swipeView || !swipeView.flicking)
 			&& !Global.splashScreenVisible
 
+	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
+	// and Settings).
+	property SwipeView swipeView: swipeViewLoader.item
+
 	readonly property bool screenIsBlanked: !!Global.screenBlanker && Global.screenBlanker.blanked
 
 	property int _loadedPages: 0
@@ -78,53 +82,78 @@ Item {
 		}
 	}
 
-	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
-	// and Settings).
-	property SwipeView swipeView: swipeViewLoader.item
-	Loader {
-		id: swipeViewLoader
-		// Anchor this to the PageStack's left side, so that this view slides out of view when the
-		// PageStack slides in (and vice-versa), giving the impression that the SwipeView itself
-		// is part of the stack.
+	FocusScope {
+		// Anchor this to the PageStack's left side, so that this view slides out of view when
+		// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
+		// itself is part of the stack.
 		anchors {
-			top: statusBar.bottom
-			bottom: navBar.top
+			top: parent.top
+			bottom: parent.bottom
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		active: false
-		asynchronous: true
-		sourceComponent: swipeViewComponent
-		visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running && !(root.auxActive && !auxInAnimation.running && !auxOutAnimation.running))
-		onLoaded: {
-			// If there is an alarm, the notifications page will be shown; otherwise, show the
-			// application start page, if set.
-			if (!Global.notifications.alarm) {
-				root.loadStartPage()
+
+		Loader {
+			id: swipeViewLoader
+			anchors {
+				top: parent.top
+				topMargin: statusBar.height
+				bottom: navBar.top
+				left: parent.left
+				right: parent.right
 			}
-			// Notify that the UI is ready to be displayed.
-			Global.allPagesLoaded = true
+			active: false
+			asynchronous: true
+			sourceComponent: swipeViewComponent
+			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+			onLoaded: {
+				// If there is an alarm, the notifications page will be shown; otherwise, show the
+				// application start page, if set.
+				if (!Global.notifications.alarm) {
+					root.loadStartPage()
+				}
+				// Notify that the UI is ready to be displayed.
+				Global.allPagesLoaded = true
+			}
+
+			Component {
+				id: swipeViewComponent
+				SwipeView {
+					id: _swipeView
+
+					property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
+
+					onReadyChanged: if (ready) ready = true // remove binding
+					anchors.fill: parent
+					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
+					contentChildren: swipePageModel.children
+				}
+			}
+
+			SwipePageModel {
+				id: swipePageModel
+				view: swipeView
+			}
+		}
+
+		NavBar {
+			id: navBar
+
+			y: root.height + 4  // nudge below the visible area for wasm
+			backgroundColor: root.backgroundColor
+			opacity: 0
+			model: swipeView ? swipeView.contentModel : null
+
+			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+
+			Component.onCompleted: pageManager.navBar = navBar
 		}
 	}
 
-	Component {
-		id: swipeViewComponent
-		SwipeView {
-			id: _swipeView
-
-			property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
-
-			onReadyChanged: if (ready) ready = true // remove binding
-			anchors.fill: parent
-			onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
-			contentChildren: swipePageModel.children
-		}
-	}
-
-	SwipePageModel {
-		id: swipePageModel
-		view: swipeView
-	}
+	// This stack is used to view Overview drilldown pages and Settings sub-pages. When
+	// Global.pageManager.pushPage() is called, pages are pushed onto this stack.
+	PageStack {
+		id: pageStack
 
 	CardViewLoader {
 		id: auxCardsLoader
@@ -138,10 +167,10 @@ Item {
 		viewActive: root.auxActive
 		anchors {
 			top: statusBar.bottom
-			left: parent.left
-			right: parent.right
 			bottom: parent.bottom
 		}
+		x: width
+		width: Theme.geometry_screen_width
 	}
 
 	CardViewLoader {
@@ -154,141 +183,116 @@ Item {
 		viewActive: root.controlsActive
 		anchors {
 			top: statusBar.bottom
-			left: parent.left
-			right: parent.right
-			bottom: parent.bottom
-		}
-	}
-
-	NavBar {
-		id: navBar
-
-		x: swipeViewLoader.x
-		y: root.height + 4  // nudge below the visible area for wasm
-		color: root.backgroundColor
-		opacity: 0
-		model: swipeView ? swipeView.contentModel : null
-
-		onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
-
-		Component.onCompleted: pageManager.navBar = navBar
-
-		SequentialAnimation {
-			running: !Global.splashScreenVisible
-
-			// Force the final animation values in case the Animators are
-			// not run (skipping the splash screen causes the animations to
-			// start before the parent is visible).
-			onStopped: {
-				navBar.y = yAnimator.to
-				navBar.opacity = opacityAnimator.to
-			}
-
-			PauseAnimation {
-				duration: Theme.animation_navBar_initialize_delayedStart_duration
-			}
-			ParallelAnimation {
-				YAnimator {
-					id: yAnimator
-					target: navBar
-					from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
-					to: root.height - navBar.height
-					duration: Theme.animation_navBar_initialize_fade_duration
-				}
-				OpacityAnimator {
-					id: opacityAnimator
-					target: navBar
-					from: 0.0
-					to: 1.0
-					duration: Theme.animation_navBar_initialize_fade_duration
-				}
-			}
-		}
-
-		SequentialAnimation {
-			id: animateNavBarIn
-
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
-
-			YAnimator {
-				target: navBar
-				from: root.height
-				to: root.height - navBar.height
-				duration: Theme.animation_page_idleResize_duration
-				easing.type: Easing.InOutQuad
-			}
-			ScriptAction {
-				script: {
-					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
-					}
-				}
-			}
-			OpacityAnimator {
-				target: navBar
-				from: 0.0
-				to: 1.0
-				duration: Theme.animation_page_idleOpacity_duration
-				easing.type: Easing.InOutQuad
-			}
-			ScriptAction {
-				script: {
-					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
-					}
-				}
-			}
-		}
-
-		SequentialAnimation {
-			id: animateNavBarOut
-
-			running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-					 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
-
-			OpacityAnimator {
-				target: navBar
-				from: 1.0
-				to: 0.0
-				duration: Theme.animation_page_idleOpacity_duration
-				easing.type: Easing.InOutQuad
-			}
-			ScriptAction {
-				script: {
-					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
-					}
-				}
-			}
-			YAnimator {
-				target: navBar
-				from: root.height - navBar.height
-				to: root.height
-				duration: Theme.animation_page_idleResize_duration
-				easing.type: Easing.InOutQuad
-			}
-			ScriptAction {
-				script: {
-					if (!!Global.pageManager) {
-						Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
-					}
-				}
-			}
-		}
-	}
-
-	// This stack is used to view Overview drilldown pages and Settings sub-pages. When
-	// Global.pageManager.pushPage() is called, pages are pushed onto this stack.
-	PageStack {
-		id: pageStack
-
-		anchors {
-			top: statusBar.bottom
 			bottom: parent.bottom
 		}
 		x: width
 		width: Theme.geometry_screen_width
+	}
+
+
+
+	SequentialAnimation {
+		running: !Global.splashScreenVisible
+
+		// Force the final animation values in case the Animators are
+		// not run (skipping the splash screen causes the animations to
+		// start before the parent is visible).
+		onStopped: {
+			navBar.y = yAnimator.to
+			navBar.opacity = opacityAnimator.to
+		}
+
+		PauseAnimation {
+			duration: Theme.animation_navBar_initialize_delayedStart_duration
+		}
+		ParallelAnimation {
+			YAnimator {
+				id: yAnimator
+				target: navBar
+				from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
+				to: root.height - navBar.height
+				duration: Theme.animation_navBar_initialize_fade_duration
+			}
+			OpacityAnimator {
+				id: opacityAnimator
+				target: navBar
+				from: 0.0
+				to: 1.0
+				duration: Theme.animation_navBar_initialize_fade_duration
+			}
+		}
+	}
+
+	SequentialAnimation {
+		id: animateNavBarIn
+
+		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
+
+		YAnimator {
+			target: navBar
+			from: root.height
+			to: root.height - navBar.height
+			duration: Theme.animation_page_idleResize_duration
+			easing.type: Easing.InOutQuad
+		}
+		ScriptAction {
+			script: {
+				if (!!Global.pageManager) {
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
+				}
+			}
+		}
+		OpacityAnimator {
+			target: navBar
+			from: 0.0
+			to: 1.0
+			duration: Theme.animation_page_idleOpacity_duration
+			easing.type: Easing.InOutQuad
+		}
+		ScriptAction {
+			script: {
+				if (!!Global.pageManager) {
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
+				}
+			}
+		}
+	}
+
+	SequentialAnimation {
+		id: animateNavBarOut
+
+		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
+				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
+
+		OpacityAnimator {
+			target: navBar
+			from: 1.0
+			to: 0.0
+			duration: Theme.animation_page_idleOpacity_duration
+			easing.type: Easing.InOutQuad
+		}
+		ScriptAction {
+			script: {
+				if (!!Global.pageManager) {
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
+				}
+			}
+		}
+		YAnimator {
+			target: navBar
+			from: root.height - navBar.height
+			to: root.height
+			duration: Theme.animation_page_idleResize_duration
+			easing.type: Easing.InOutQuad
+		}
+		ScriptAction {
+			script: {
+				if (!!Global.pageManager) {
+					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
+				}
+			}
+		}
 	}
 
 	StatusBar {
@@ -315,7 +319,7 @@ Item {
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
 		animationEnabled: BackendConnection.applicationVisible
-		color: root.backgroundColor
+		backgroundColor: root.backgroundColor
 
 		onLeftButtonClicked: {
 			switch (leftButton) {

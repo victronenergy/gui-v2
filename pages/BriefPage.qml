@@ -185,6 +185,14 @@ SwipeViewPage {
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
 			leftGaugeCount: root._leftGaugeCount
+
+			BriefCenterDisplay {
+				anchors.centerIn: parent
+				width: parent.width
+				visible: gaugeModel.count <= 3
+				showFullDetails: gaugeModel.count === 1
+				smallTextMode: gaugeModel.count === 3
+			}
 		}
 	}
 
@@ -195,16 +203,16 @@ SwipeViewPage {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
 			readonly property var battery: Global.system.battery
 
-			name: properties.name
-			icon.source: battery.icon
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
-			voltage: battery.voltage
-			current: battery.current
-			power: battery.power
 			status: Theme.getValueStatus(value, properties.valueType)
-			caption: Utils.formatBatteryTimeToGo(battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 			animationEnabled: root.animationEnabled
 			shineAnimationEnabled: battery.mode === VenusOS.Battery_Mode_Charging && root.animationEnabled
+
+			BriefCenterDisplay {
+				anchors.centerIn: parent
+				width: parent.width
+				showFullDetails: true
+			}
 		}
 	}
 

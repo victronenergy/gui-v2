@@ -78,8 +78,8 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Brief view levels"
-				text: qsTrId("settings_brief_view_levels")
+				//% "Brief page"
+				text: qsTrId("settings_brief_page")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": text})
 				}

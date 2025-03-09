@@ -277,6 +277,7 @@ public:
 		Generators_State_WarmUp = 2,
 		Generators_State_CoolDown = 3,
 		Generators_State_Stopping = 4,
+		Generators_State_StoppedByTankLevel = 5,
 		Generators_State_Error = 10
 	};
 	Q_ENUM(Generators_State)
@@ -795,6 +796,7 @@ public:
 
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
+	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
 
 	Q_INVOKABLE QString dcInput_typeToText(DcInputs_InputType type) const;
 

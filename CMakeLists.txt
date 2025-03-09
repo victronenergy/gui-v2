@@ -28,7 +28,7 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
-project(venus-gui-v2 LANGUAGES CXX VERSION 1.1.3)
+project(venus-gui-v2 LANGUAGES CXX VERSION 1.1.5)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -187,6 +187,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/BarGaugeBase.qml
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
+    components/BriefCenterDisplay.qml
     components/CardViewLoader.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -238,12 +239,14 @@ set (VENUS_QML_MODULE_SOURCES
     components/QuantityRow.qml
     components/QuantityTableSummary.qml
     components/QuantityTable.qml
+    components/RadioButtonListPage.qml
     components/RsSystemAcIODisplay.qml
     components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
     components/ServiceModelLoader.qml
+    components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
     components/ShinyProgressArc.qml
@@ -320,6 +323,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListActiveAcInput.qml
     components/listitems/ListAlarmLevelRadioButtonGroup.qml
     components/listitems/ListAlarmState.qml
+    components/listitems/ListBriefCenterDetails.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
@@ -504,7 +508,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsFroniusShowIpAddresses.qml
     pages/settings/PageSettingsGeneral.qml
     pages/settings/PageSettingsGenerator.qml
-    pages/settings/PageSettingsGpsList.qml
     pages/settings/PageSettingsGsm.qml
     pages/settings/PageSettingsHub4.qml
     pages/settings/PageSettingsHub4Feedin.qml
@@ -595,6 +598,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_evcharger.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_fuelcell.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_genset.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_gps.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_grid.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_heatpump.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_inverter.qml

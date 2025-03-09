@@ -48,6 +48,18 @@ Enums::Battery_Mode Enums::battery_modeFromPower(qreal power) const
 	}
 }
 
+QString Enums::battery_iconFromMode(Battery_Mode mode) const
+{
+	switch (mode) {
+	case Battery_Mode_Charging:
+		return "qrc:/images/icon_battery_charging_24.svg";
+	case Battery_Mode_Discharging:
+		return "qrc:/images/icon_battery_discharging_24.svg";
+	default:
+		return "qrc:/images/icon_battery_24.svg";
+	}
+}
+
 QString Enums::dcInput_typeToText(DcInputs_InputType type) const
 {
 	switch (type) {

@@ -4,8 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 // Each item in the model is expected to have at least 2 values:
@@ -66,203 +64,21 @@ ListNavigation {
 	Component {
 		id: optionsPageComponent
 
-		Page {
-			id: optionsPage
+		RadioButtonListPage {
+			optionModel: root.optionModel
+			currentIndex: root.currentIndex
+			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick
+			popDestination: root.popDestination
+			validatePassword: root.validatePassword
 
-			GradientListView {
-				id: optionsListView
-
-				property bool selectionChanged
-
-				model: root.optionModel
-				currentIndex: root.currentIndex
-
-				delegate: ListRadioButton {
-					id: radioButton
-
-					function select() {
-						// If the user selects the already-selected option, ignore this and just
-						// pop the page, unless the user changed the selection and then selected the
-						// original option again. (The latter case can only occur if the page is not
-						// popped automatically, by setting popDestination=undefined.)
-						if (optionsListView.currentIndex !== root.currentIndex || optionsListView.selectionChanged) {
-							optionsListView.selectionChanged = true
-							if (root.updateDataOnClick && dataItem.uid.length > 0) {
-								dataItem.setValue(Array.isArray(root.optionModel) ? modelData.value : model.value)
-							}
-							root.optionClicked(model.index)
-						}
-						popTimer.restartIfNeeded()
-					}
-
-					// TODO this is a hack to cancel out the GradientListView spacing, to avoid
-					// showing extra spacing between items if an item is not visible. See #1907.
-					height: effectiveVisible ? implicitHeight : -Theme.geometry_gradientList_spacing
-
-					text: Array.isArray(root.optionModel)
-						  ? modelData.display || ""
-						  : model.display || ""
-					interactive: (Array.isArray(root.optionModel)
-						  ? !modelData.readOnly
-						  : !model.readOnly)
-					primaryLabel.font.family: Array.isArray(root.optionModel)
-						  ? modelData.fontFamily || Global.fontFamily
-						  : model.fontFamily || Global.fontFamily
-
-					preferredVisible: (userHasWriteAccess && interactive) || checked
-					checked: optionsListView.currentIndex === model.index
-					showAccessLevel: root.showAccessLevel
-					writeAccessLevel: root.writeAccessLevel
-					C.ButtonGroup.group: radioButtonGroup
-
-					bottomContent.z: model.index === optionsListView.currentIndex ? 1 : -1
-					bottomContentChildren: Loader {
-						id: bottomContentLoader
-
-						readonly property string caption: Array.isArray(root.optionModel)
-							  ? modelData.caption || ""
-							  : model.caption || ""
-						readonly property bool promptPassword: Array.isArray(root.optionModel)
-							  ? !!modelData.promptPassword
-							  : !!model.promptPassword
-
-						width: parent.width
-						sourceComponent: promptPassword ? passwordComponent : (caption ? captionComponent : null)
-					}
-
-					Component {
-						id: passwordComponent
-
-						Column {
-							function focusPasswordInput() {
-								passwordField.showField = true
-								passwordField.secondaryText = ""
-								passwordField.forceActiveFocus()
-							}
-
-							width: parent.width
-							spacing: Theme.geometry_gradientList_spacing
-
-							PrimaryListLabel {
-								topPadding: 0
-								color: Theme.color_font_secondary
-								text: bottomContentLoader.caption
-								font.pixelSize: Theme.font_size_caption
-								preferredVisible: bottomContentLoader.caption.length > 0
-							}
-
-							ListTextField {
-								id: passwordField
-
-								readonly property ListItemButton confirmButton: ListItemButton {
-									//: Confirm password, and verify it if possible
-									//% "Confirm"
-									text: qsTrId("settings_radio_button_group_confirm")
-									onClicked: {
-										passwordField.validateOnConfirm = true
-										if (passwordField.textField.activeFocus) {
-											// Trigger the validation that occurs when focus is lost.
-											passwordField.textField.focus = false
-										} else {
-											passwordField.runValidation(VenusOS.InputValidation_ValidateAndSave)
-										}
-									}
-								}
-								property bool validateOnConfirm
-								property bool showField
-
-								//% "Enter password"
-								placeholderText: qsTrId("settings_radio_button_enter_password")
-								text: ""
-								flickable: optionsListView
-								primaryLabel.color: Theme.color_font_secondary
-								textField.echoMode: TextInput.Password
-								interactive: radioButton.interactive
-								backgroundRect.color: "transparent"
-								preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
-								validateInput: function() {
-									// Validate the password on Enter/Return, or when "Confirm" is
-									// clicked. Ignore validation requests when the field does not
-									// have focus: e.g. when the selected radio button changes, or
-									// when this page is popped, or when an external dialog opens
-									// and causes focus to be lost. We want to only validate the
-									// password when the user explicitly indicates it should be done.
-									if (!textField.activeFocus && !passwordField.validateOnConfirm) {
-										return Utils.validationResult(VenusOS.InputValidation_Result_Unknown)
-									}
-									passwordField.validateOnConfirm = false
-									return root.validatePassword(model.index, textField.text)
-								}
-								saveInput: function() {
-									if (preferredVisible) {
-										radioButton.select()
-									}
-								}
-								content.children: [
-									defaultContent,
-									confirmButton
-								]
-							}
-						}
-					}
-
-					Component {
-						id: captionComponent
-
-						PrimaryListLabel {
-							topPadding: 0
-							bottomPadding: 0
-							color: Theme.color_font_secondary
-							text: bottomContentLoader.caption
-							font.pixelSize: Theme.font_size_caption
-						}
-					}
-
-					onClicked: {
-						if (root.updateCurrentIndexOnClick) {
-							optionsListView.currentIndex = model.index
-						} else {
-							optionsListView.selectionChanged = true
-						}
-						if (bottomContentLoader.sourceComponent === passwordComponent) {
-							bottomContentLoader.item.focusPasswordInput()
-						} else {
-							radioButton.select()
-						}
-					}
+			onOptionClicked: (index, value) => {
+				if (root.updateDataOnClick && dataItem.uid.length > 0) {
+					dataItem.setValue(value)
 				}
-
-				C.ButtonGroup {
-					id: radioButtonGroup
-				}
+				root.optionClicked(index)
 			}
-
-			onIsCurrentPageChanged: {
-				if (!isCurrentPage) {
-					popTimer.stop()
-				}
-			}
-
-			Timer {
-				id: popTimer
-
-				function restartIfNeeded() {
-					if (root.popDestination !== undefined) {
-						restart()
-					}
-				}
-
-				interval: Theme.animation_settings_radioButtonPage_autoClose_duration
-				onTriggered: {
-					if (!!Global.pageManager) {
-						root.aboutToPop()
-						if (root.popDestination) {
-							Global.pageManager.popPage(root.popDestination)
-						} else {
-							Global.pageManager.popPage()
-						}
-					}
-				}
+			onAboutToPop: {
+				root.aboutToPop()
 			}
 		}
 	}

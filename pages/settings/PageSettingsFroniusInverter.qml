@@ -61,8 +61,8 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Power limiting"
-				text: qsTrId("page_settings_fronius_inverter_power_limiting")
+				//% "Dynamic power limiting"
+				text: qsTrId("page_settings_fronius_inverter_dynamic_power_limiting")
 				dataItem.uid: bindPrefix + "/EnableLimiter"
 				preferredVisible: isActive.dataItem.value === 1 && limiterSupportedItem.value === 1
 				optionModel: [

@@ -30,9 +30,9 @@ Page {
 				dataItem.uid: root.bindPrefix + "/VebusError"
 			}
 
-			Column {
+			SettingsColumn {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				preferredVisible: alarmStatusModel.count > 0
 
 				Repeater {
 					model: VeBusDeviceAlarmStatusModel { id: alarmStatusModel }

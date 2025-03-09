@@ -41,15 +41,13 @@ Page {
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Level/" + index
 		}
 
-		footer: Column {
+		footer: SettingsColumn {
 			topPadding: Theme.geometry_gradientList_spacing
 			width: parent.width
-			spacing: Theme.geometry_gradientList_spacing
 
 			ListRadioButtonGroup {
-				//: Show percentage values in Brief view
-				//% "Brief view unit"
-				text: qsTrId("settings_briefview_unit")
+				//% "Tank details"
+				text: qsTrId("settings_briefview_tank_details")
 				optionModel: [
 					//% "No labels"
 					{ display: qsTrId("settings_briefview_unit_none"), value: VenusOS.BriefView_Unit_None },
@@ -59,6 +57,9 @@ Page {
 					{ display: qsTrId("settings_briefview_unit_percentages"), value: VenusOS.BriefView_Unit_Percentage },
 				]
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+			}
+
+			ListBriefCenterDetails {
 			}
 		}
 	}
