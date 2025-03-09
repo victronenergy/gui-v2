@@ -17,7 +17,7 @@ QtObject {
 			model: Global.dataServiceModel
 		}
 
-		delegate: SwitchDev {
+		delegate: SwitchDevice {
 			serviceUid: model.uid
 		}
 	}

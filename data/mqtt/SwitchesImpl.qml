@@ -14,7 +14,7 @@ QtObject {
             uids: ["mqtt/switch"]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
-        delegate: SwitchDev {
+		delegate: SwitchDevice {
 			serviceUid: model.uid
 		}
 	}

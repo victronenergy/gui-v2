@@ -9,7 +9,7 @@ import Victron.VenusOS
 
 Page {
 	id: root
-	property SwitchDev device
+	property SwitchDevice device
 	readonly property string bindPrefix: device.serviceUid
 	readonly property string bindPrefixSwitches:bindPrefix + "/SwitchableOutput"
 	property int currentChannel

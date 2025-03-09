@@ -429,7 +429,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
-    data/common/SwitchDev.qml
+    data/common/SwitchDevice.qml
     data/common/SystemBattery.qml
     data/common/Tank.qml
     data/common/TankDescription.qml

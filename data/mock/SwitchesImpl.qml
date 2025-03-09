@@ -20,7 +20,7 @@ Item {
 	}
 
 	property Component switchDevComponent: Component {
-		SwitchDev {
+		SwitchDevice {
 			id: switchDev
 
 			property int inputCount: 4

@@ -18,7 +18,7 @@ ListModel {
 
 		delegate: QtObject {
 			id: switchDevDelegate
-			property SwitchDev device: Global.switches.model.deviceAt(index)
+			property SwitchDevice device: Global.switches.model.deviceAt(index)
 			property string devName: device ? device.name : ""
 			onDevNameChanged:{
 				//if device name likely overlap status in SwitchDeligate elide text to 22 char long
