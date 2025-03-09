@@ -25,30 +25,13 @@ SwipeViewPage {
 	readonly property int direction: _direction.value === undefined ? -1 : _direction.value
 	readonly property string speedUnits: _speedUnits.value || ""
 
-
-	/*
-	Timer {
-		id: timer
-		interval: 5000
-		running: true
-		repeat: true
-		onTriggered: normalizedSpeed = normalizedSpeed > 0 ? 0 : 1
-	}
-	Behavior on normalizedSpeed {
-		NumberAnimation {
-			duration: timer.interval
-		}
-	}
-	*/
-
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
 	navButtonIcon: "qrc:/images/icon_boat_32.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
+	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
 	VeQuickItem {
 		id: rpm
@@ -56,28 +39,27 @@ SwipeViewPage {
 		uid: motorDrive ? motorDrive.serviceUid + "/Motor/RPM" : ""
 	}
 
-	readonly property real motorDriveTemperature: _motorDriveTemperature.isValid
-												  ? _motorDriveTemperature.value
-												  : _motorDriveTemperatureDc0.isValid
-													? _motorDriveTemperatureDc0.value
-													: undefined
 	VeQuickItem {
 		id: _motorDriveTemperature
+
 		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Temperature" : ""
 	}
 
 	VeQuickItem {
 		id: _motorDriveTemperatureDc0
+
 		uid: motorDrive ? motorDrive.serviceUid + "/Dc/0/Temperature" : ""
 	}
 
 	VeQuickItem {
 		id: _motorDriveControllerTemperature
+
 		uid: motorDrive ? motorDrive.serviceUid + "/Controller/Temperature" : ""
 	}
 
 	VeQuickItem {
 		id: _motorDriveCoolantTemperature
+
 		uid: motorDrive ? motorDrive.serviceUid + "/Coolant/Temperature" : ""
 	}
 
@@ -126,7 +108,14 @@ SwipeViewPage {
 		}
 	}
 
-	CP.ColorImage {
+	component Shadow : CP.ColorImage {
+		width: 193
+		height: 69
+		source: "qrc:/images/boat_glow.png"
+	}
+
+
+	Shadow {
 		id: shadowTopLeft
 
 		anchors {
@@ -136,13 +125,10 @@ SwipeViewPage {
 			leftMargin: 58 // 89
 		}
 
-		width: 193
-		height: 69
 		rotation: 180
-		source: "qrc:/images/boat_glow.png"
 	}
 
-	CP.ColorImage {
+	Shadow {
 		id: shadowBottomLeft
 
 		anchors {
@@ -150,35 +136,26 @@ SwipeViewPage {
 			topMargin: 227 // 296
 			left: shadowTopLeft.left
 		}
-		width: 193
-		height: 69
 		mirror: true
-		source: "qrc:/images/boat_glow.png"
 	}
 
-	CP.ColorImage {
+	Shadow {
 		id: shadowTopRight
 		anchors {
 			top: shadowTopLeft.top
 			right: parent.right
 			rightMargin: 58 // 89
 		}
-		width: 193
-		height: 69
 		mirror: true
 		rotation: 180
-		source: "qrc:/images/boat_glow.png"
 	}
 
-	CP.ColorImage {
+	Shadow {
 		id: shadowBottomRight
 		anchors {
 			bottom: shadowBottomLeft.bottom
 			right: shadowTopRight.right
 		}
-		width: 193
-		height: 69
-		source: "qrc:/images/boat_glow.png"
 	}
 
 	SideGauge {
@@ -482,11 +459,60 @@ SwipeViewPage {
 
 		spacing: 8
 
+		component GearIndicator : Label {
+			required property int gear
+
+			color: direction === gear ? Theme.color_font_primary : Theme.color_font_secondary
+			font.pixelSize: 28
+			width: 24
+			horizontalAlignment: Text.AlignHCenter
+
+			Rectangle {
+				anchors {
+					bottom: parent.top
+					bottomMargin: 4
+					horizontalCenter: parent.horizontalCenter
+				}
+				radius: 3
+				height: 5
+				width: 26
+				color: "#387DC5" // same for light & dark mode
+				visible: direction === gear
+			}
+		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Forward
+			text: "F" // intentionally not translated
+		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Neutral
+			text: "N" // intentionally not translated
+		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Reverse
+			text: "R" // intentionally not translated
+		}
+
+		/*
 		Label {
 			color: direction === VenusOS.MotorDriveGear_Forward ? Theme.color_font_primary : Theme.color_font_secondary
 			font.pixelSize: 28
 			width: 24
 			text: "F" // intentionally not translated
+
+			Rectangle {
+				anchors {
+					bottom: parent.top
+					bottomMargin: 6
+					horizontalCenter: parent.horizontalCenter
+				}
+				height: 5
+				width: 26
+				color: "#387DC5" // same for light & dark mode
+			}
 		}
 
 		Label {
@@ -502,12 +528,10 @@ SwipeViewPage {
 			width: 24
 			text: "R" // intentionally not translated
 		}
+		*/
 	}
 
 	Row {
-		/*
-
-*/
 		anchors {
 			top: parent.top
 			topMargin: 169
@@ -589,6 +613,8 @@ SwipeViewPage {
 			rightMargin: 90
 		}
 
+		spacing: -2
+
 		component TemperatureGauge : Row {
 			required property VeQuickItem veQuickItem
 			required property int unit
@@ -602,7 +628,7 @@ SwipeViewPage {
 				anchors.verticalCenter: parent.verticalCenter
 				verticalAlignment: Text.AlignVCenter
 				font.pixelSize: 28
-				value: veQuickItem && veQuickItem.value// || 0
+				value: veQuickItem && veQuickItem.value || 0
 				unit: parent.unit
 			}
 
