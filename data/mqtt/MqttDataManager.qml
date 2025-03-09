@@ -20,4 +20,5 @@ QtObject {
 	property var pvInverters: PvInvertersImpl { }
 	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { }
+	property var switches: SwitchesImpl { }
 }
