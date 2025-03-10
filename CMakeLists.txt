@@ -463,6 +463,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/DvccCommonSettings.qml
     pages/settings/GeneratorCondition.qml
     pages/settings/IpAddressListView.qml
+    pages/settings/NetworkSettingsPageModel.qml
     pages/settings/PageCanbusStatus.qml
     pages/settings/PageChargeCurrentLimits.qml
     pages/settings/PageDeviceInfo.qml
