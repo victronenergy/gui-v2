@@ -22,7 +22,14 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
-	ListView {
+	// The cards list view is made up of:
+	// - Header - ESS card
+	// - List items: Cards for EVCS, Generators, Inverter/chargers
+	// - Footer - Manual relays
+	//
+	// Any single list item should not exceed the width of the view, otherwise it cannot be fully
+	// seen when the view is scrolled using key navigation.
+	BaseListView {
 		id: cardsView
 
 		anchors {
@@ -32,98 +39,104 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
-		boundsBehavior: Flickable.StopAtBounds
-		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
-		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
-		model: VisibleItemModel {
-			Loader {
-				active: systemType.value === "ESS" || systemType.value === "Hub-4"
-				width: active ? root.cardWidth : -cardsView.spacing
-				sourceComponent: ESSCard {
+		header: BaseListLoader {
+			active: systemType.value === "ESS" || systemType.value === "Hub-4"
+			sourceComponent: BaseListItem {
+				width: root.cardWidth + cardsView.spacing
+				height: cardsView.height
+				background.visible: false
+				navigationHighlight.visible: false
+
+				ESSCard {
 					width: root.cardWidth
 					height: cardsView.height
 				}
-
-				VeQuickItem {
-					id: systemType
-					uid: Global.system.serviceUid + "/SystemType"
-				}
 			}
 
-			Row {
+			VeQuickItem {
+				id: systemType
+				uid: Global.system.serviceUid + "/SystemType"
+			}
+		}
+
+		footer: BaseListLoader {
+			active: manualRelays.count > 0
+			sourceComponent: BaseListItem {
+				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
+				background.visible: false
+				navigationHighlight.visible: false
 
-				Repeater {
-					model: Global.evChargers.model
-
-					EVCSCard {
-						width: root.cardWidth
-						evCharger: model.device
-					}
-				}
-			}
-
-			Row {
-				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
-
-				Repeater {
-					model: Global.generators.model
-
-					GeneratorCard {
-						width: root.cardWidth
-						generator: model.device
-					}
-				}
-			}
-
-			Row {
-				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
-
-				Repeater {
-					model: Global.inverterChargers.veBusDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-
-				Repeater {
-					model: Global.inverterChargers.acSystemDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-
-				Repeater {
-					model: Global.inverterChargers.inverterDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-			}
-
-			Loader {
-				active: manualRelays.count > 0
-				width: active ? root.cardWidth : -cardsView.spacing
-				sourceComponent: SwitchesCard {
+				SwitchesCard {
+					x: cardsView.spacing
 					width: root.cardWidth
 					height: cardsView.height
 					model: manualRelays
 				}
+			}
 
-				ManualRelayModel { id: manualRelays }
+			ManualRelayModel { id: manualRelays }
+		}
+
+		model: AggregateDeviceModel {
+			sortBy: AggregateDeviceModel.NoSort
+			sourceModels: [
+				Global.evChargers.model,
+				Global.generators.model,
+				Global.inverterChargers.veBusDevices,
+				Global.inverterChargers.acSystemDevices,
+				Global.inverterChargers.inverterDevices
+			]
+		}
+
+		delegate: BaseListLoader {
+			id: deviceDelegate
+
+			required property Device device
+
+			// TODO remove Energy Meters from the EVCS model to avoid this hack to hide the card.
+			width: preferredVisible ? root.cardWidth : -cardsView.spacing
+			height: cardsView.height
+			preferredVisible: item?.preferredVisible ?? false
+			visible: effectiveVisible
+
+			sourceComponent: {
+				const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
+				if (serviceType === "evcharger") {
+					return evcsComponent
+				} else if (serviceType === "generator") {
+					return generatorComponent
+				}
+				return inverterChargerComponent
+			}
+
+			Component {
+				id: evcsComponent
+
+				EVCSCard {
+					width: root.cardWidth
+					evCharger: deviceDelegate.device
+				}
+			}
+
+			Component {
+				id: generatorComponent
+
+				GeneratorCard {
+					width: root.cardWidth
+					generator: deviceDelegate.device
+				}
+			}
+
+			Component {
+				id: inverterChargerComponent
+
+				InverterChargerCard {
+					width: root.cardWidth
+					serviceUid: deviceDelegate.device.serviceUid
+					name: deviceDelegate.device.name
+				}
 			}
 		}
 	}

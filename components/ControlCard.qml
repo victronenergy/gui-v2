@@ -8,15 +8,14 @@ import QtQuick.Controls.impl as CP
 import QtQuick.Controls as C
 import Victron.VenusOS
 
-Rectangle {
+BaseListItem {
 	property alias icon: icon
 	property alias title: title
 	property alias status: status
 
 	width: Theme.geometry_controlCard_maximumWidth
 	height: parent ? parent.height : 0
-	color: Theme.color_background_secondary
-	radius: Theme.geometry_panel_radius
+	navigationHighlight.active: false
 
 	CP.ColorImage {
 		id: icon

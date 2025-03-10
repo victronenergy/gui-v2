@@ -346,6 +346,7 @@ function validationResult(status, notificationText = "", adjustedText = undefine
 }
 
 function acceptsKeyNavigation(item) {
+	console.log("\taccept key nav?", item, item?.activeFocusOnTab, item?.effectiveVisible, item?.text)
 	return !!item
 			&& item.activeFocusOnTab
 			&& item.effectiveVisible !== false  // allow items that do not have effectiveVisible property

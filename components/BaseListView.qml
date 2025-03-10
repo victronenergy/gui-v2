@@ -41,6 +41,12 @@ ListView {
 	Keys.onDownPressed: (event) => {
 		event.accepted = orientation === Qt.Vertical ? keyNavHelper.focusNextItem() : false
 	}
+	Keys.onLeftPressed: (event) => {
+		event.accepted = orientation === Qt.Horizontal ? keyNavHelper.focusPreviousItem() : false
+	}
+	Keys.onRightPressed: (event) => {
+		event.accepted = orientation === Qt.Horizontal ? keyNavHelper.focusNextItem() : false
+	}
 
 	KeyNavigationListHelper {
 		id: keyNavHelper
@@ -52,5 +58,26 @@ ListView {
 
 		// Ensure view is auto-scrolled to keep the current index in view.
 		onCurrentIndexChanged: root.currentIndex = currentIndex
+	}
+
+	// When the header receives focus, scroll to make it visible. This is needed because normally
+	// the ListView ensures the header is visible when currentIndex is 0, and not when the header
+	// is focused.
+	Connections {
+		enabled: !!root.headerItem
+		target: root.headerItem
+		function onActiveFocusChanged() {
+			if (root.headerItem.activeFocus) {
+				showHeaderAnim.start()
+			}
+		}
+	}
+
+	NumberAnimation {
+		id: showHeaderAnim
+		target: root
+		property: root.orientation === Qt.Horizontal ? "contentX" : "contentY"
+		to: root.orientation === Qt.Horizontal ? root.originX : root.originY
+		duration: root.highlightMoveDuration
 	}
 }

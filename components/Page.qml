@@ -17,6 +17,7 @@ FocusScope {
 	readonly property bool defaultAnimationEnabled: !!Global.mainView && Global.mainView.allowPageAnimations
 			&& !Global.mainView.screenIsBlanked
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
+	property alias navigationHighlight: keyNavigationHighlight
 
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None

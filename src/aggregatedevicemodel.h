@@ -20,6 +20,7 @@ class AggregateDeviceModel : public QAbstractListModel
 	Q_OBJECT
 	QML_ELEMENT
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(int sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
 	Q_PROPERTY(int disconnectedDeviceCount READ disconnectedDeviceCount NOTIFY disconnectedDeviceCountChanged)
 	Q_PROPERTY(QVariantList sourceModels READ sourceModels WRITE setSourceModels NOTIFY sourceModelsChanged)
 
@@ -31,11 +32,20 @@ public:
 		CachedDeviceNameRole
 	};
 
+	enum SortBy {
+		NoSort,
+		SortByDeviceName = 0x1
+	};
+	Q_ENUM(SortBy)
+
 	explicit AggregateDeviceModel(QObject *parent = nullptr);
 	~AggregateDeviceModel();
 
 	QVariantList sourceModels() const;
 	void setSourceModels(const QVariantList &models);
+
+	void setSortBy(int sortBy);
+	int sortBy() const;
 
 	int count() const;
 	int disconnectedDeviceCount() const;
@@ -50,6 +60,7 @@ signals:
 	void countChanged();
 	void disconnectedDeviceCountChanged();
 	void sourceModelsChanged();
+	void sortByChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -86,6 +97,7 @@ private:
 	QVector<DeviceInfo> m_deviceInfos;
 	QVariantList m_sourceModels;
 	int m_disconnectedDeviceCount = 0;
+	int m_sortBy = SortByDeviceName;
 };
 
 } /* VenusOS */

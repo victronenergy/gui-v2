@@ -86,6 +86,7 @@ public:
 	};
 
 	enum SortBy {
+		NoSort,
 		SortByDeviceName = 0x1,
 		SortByDeviceInstance = 0x2  // Sort from lowest to highest
 	};

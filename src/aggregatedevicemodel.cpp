@@ -104,6 +104,24 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 	}
 }
 
+void AggregateDeviceModel::setSortBy(int sortBy)
+{
+	if (count() > 0) {
+		qmlInfo(this) << "Changing sort order after initialization is not supported";
+		return;
+	}
+
+	if (m_sortBy != sortBy) {
+		m_sortBy = sortBy;
+		emit sortByChanged();
+	}
+}
+
+int AggregateDeviceModel::sortBy() const
+{
+	return m_sortBy;
+}
+
 int AggregateDeviceModel::count() const
 {
 	return static_cast<int>(m_deviceInfos.count());
@@ -217,10 +235,12 @@ int AggregateDeviceModel::indexOf(const BaseDevice *device) const
 
 int AggregateDeviceModel::insertionIndex(BaseDevice *newDevice) const
 {
-	for (int i = 0; i < m_deviceInfos.count(); ++i) {
-		BaseDevice *device = m_deviceInfos[i].device;
-		if (device && newDevice->name().localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
-			return i;
+	if (m_sortBy == SortByDeviceName) {
+		for (int i = 0; i < m_deviceInfos.count(); ++i) {
+			BaseDevice *device = m_deviceInfos[i].device;
+			if (device && newDevice->name().localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
+				return i;
+			}
 		}
 	}
 	return static_cast<int>(m_deviceInfos.count());
@@ -356,26 +376,28 @@ void AggregateDeviceModel::deviceNameChanged()
 	static const QList<int> roles = { CachedDeviceNameRole };
 	emit dataChanged(createIndex(fromIndex, 0), createIndex(fromIndex, 0), roles);
 
-	// Update the list order if needed
-	int toIndex = count() - 1;
-	for (int i = 0; i < m_deviceInfos.count(); ++i) {
-		if (newName.localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
-			if (i > 0 && m_deviceInfos[i - 1].device == changedDevice) {
-				// The device at the previous index is this changed device, so it is already at
-				// the correct index.
-				return;
+	if (m_sortBy == SortByDeviceName) {
+		// Update the list order if needed
+		int toIndex = count() - 1;
+		for (int i = 0; i < m_deviceInfos.count(); ++i) {
+			if (newName.localeAwareCompare(m_deviceInfos[i].cachedDeviceName) < 0) {
+				if (i > 0 && m_deviceInfos[i - 1].device == changedDevice) {
+					// The device at the previous index is this changed device, so it is already at
+					// the correct index.
+					return;
+				}
+				// Move the entry to be immediately before this item.
+				toIndex = i > fromIndex ? i - 1 : i;
+				break;
 			}
-			// Move the entry to be immediately before this item.
-			toIndex = i > fromIndex ? i - 1 : i;
-			break;
 		}
-	}
 
-	if (fromIndex != toIndex) {
-		const int destIndex = toIndex > fromIndex ? toIndex + 1 : toIndex;
-		beginMoveRows(QModelIndex(), fromIndex, fromIndex, QModelIndex(), destIndex);
-		m_deviceInfos.move(fromIndex, toIndex);
-		endMoveRows();
+		if (fromIndex != toIndex) {
+			const int destIndex = toIndex > fromIndex ? toIndex + 1 : toIndex;
+			beginMoveRows(QModelIndex(), fromIndex, fromIndex, QModelIndex(), destIndex);
+			m_deviceInfos.move(fromIndex, toIndex);
+			endMoveRows();
+		}
 	}
 }
 

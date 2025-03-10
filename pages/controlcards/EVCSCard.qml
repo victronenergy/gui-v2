@@ -25,14 +25,14 @@ ControlCard {
 	status.text: Global.evChargers.chargerStatusToText(evCharger.status)
 
 	// do not show this card if not an EvCharger
-	visible: modeItem.isValid
+	preferredVisible: modeItem.isValid
 
 	VeQuickItem {
 		id: modeItem
 		uid: root.evCharger.serviceUid + "/Mode"
 	}
 
-	Column {
+	SettingsColumn {
 		anchors {
 			top: root.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
