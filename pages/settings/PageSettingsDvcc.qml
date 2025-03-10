@@ -38,7 +38,7 @@ Page {
 
 				//% "Limit managed battery charge voltage"
 				text: qsTrId("settings_dvcc_limit_managed_battery_charge_voltage")
-				checked: maxChargeVoltage.dataItem.isValid && maxChargeVoltage.dataItem.value > 0
+				checked: maxChargeVoltage.dataItem.valid && maxChargeVoltage.dataItem.value > 0
 				preferredVisible: commonSettings.dvccActive
 				onClicked: {
 					maxChargeVoltage.dataItem.setValue(maxChargeVoltage.dataItem.value === 0.0 ? 55.0 : 0.0)
@@ -173,7 +173,7 @@ Page {
 				defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
 				preferredVisible: commonSettings.dvccActive
 						 // Only show if there are valid services published on /AvailableBmsServices or a valid active BMS service selected
-						 && (bmsOptions.optionModel.length > 2 || bmsService.isValid)
+						 && (bmsOptions.optionModel.length > 2 || bmsService.valid)
 
 				VeQuickItem {
 					uid: Global.system.serviceUid + "/AvailableBmsServices"
@@ -202,7 +202,7 @@ Page {
 				//% "Auto selected"
 				text: qsTrId("settings_dvcc_auto_selected")
 				preferredVisible: bmsOptions.preferredVisible && bmsOptions.currentValue === -1
-				secondaryText: bmsService.isValid
+				secondaryText: bmsService.valid
 							   ? bmsCustomName.value || bmsProductName.value || ""
 								 //: Indicates no option is selected
 								 //% "None"
@@ -234,7 +234,7 @@ Page {
 				text: qsTrId("settings_dvcc_control_all_vebus_devices")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
 				preferredVisible: commonSettings.dvccActive &&
-						 nrVebusDevices.isValid && nrVebusDevices.value > 1
+						 nrVebusDevices.valid && nrVebusDevices.value > 1
 				//% "When enabled, the managed battery controls all Multis and Quattros. "
 				//% "When disabled, only the device on the built-in port is controlled. "
 				//% "See documentation for further information."

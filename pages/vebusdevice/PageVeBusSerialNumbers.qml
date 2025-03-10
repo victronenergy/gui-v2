@@ -39,7 +39,7 @@ Page {
 				Repeater {
 					model: tableModel
 					delegate: ListText {
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						text: name(model.id)
 						dataItem.uid: model.uid + "/SerialNumber"
 					}

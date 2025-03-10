@@ -60,12 +60,12 @@ ListNavigation {
 
 	function getItemText()
 	{
-		if (itemDay.isValid && itemDay.value >= 0) {
+		if (itemDay.valid && itemDay.value >= 0) {
 			const day = dayNameForValue(itemDay.value)
 			const startTimeSeconds = startTime.value || 0
 			const start = ClockTime.formatTime(Math.floor(startTimeSeconds / 3600), Math.floor(startTimeSeconds % 3600 / 60))
-			const durationSecs = !duration.isValid ? "--" : Utils.secondsToString(duration.value)
-			if (!socLimit.isValid || socLimit.value >= 100) {
+			const durationSecs = !duration.valid ? "--" : Utils.secondsToString(duration.value)
+			if (!socLimit.vValid || socLimit.value >= 100) {
 				//% "%1 %2 (%3)"
 				return qsTrId("cgwacs_battery_schedule_format_no_soc").arg(day).arg(start).arg(durationSecs)
 			}
@@ -113,7 +113,7 @@ ListNavigation {
 						id: itemEnabled
 
 						text: CommonWords.enabled
-						checked: itemDay.isValid && itemDay.value >= 0
+						checked: itemDay.valid && itemDay.value >= 0
 						checkable: true
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {

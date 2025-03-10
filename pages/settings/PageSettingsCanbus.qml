@@ -14,8 +14,8 @@ Page {
 	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + canbusProfile.gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
-	readonly property bool _isRvc: rvcSameUniqueNameUsed.isValid
-	readonly property bool _isVecan: vecanSameUniqueNameUsed.isValid
+	readonly property bool _isRvc: rvcSameUniqueNameUsed.valid
+	readonly property bool _isVecan: vecanSameUniqueNameUsed.valid
 
 	CanbusServiceFinder {
 		id: canbusService

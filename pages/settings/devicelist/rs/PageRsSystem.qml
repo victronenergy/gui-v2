@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value > 1
+	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value > 1
 
 	title: acSystemDevice.name
 

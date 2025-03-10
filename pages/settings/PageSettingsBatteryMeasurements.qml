@@ -65,7 +65,7 @@ Page {
 				}
 				return battery.name
 			}
-			secondaryText: batteryEnabled.isValid
+			secondaryText: batteryEnabled.valid
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
@@ -101,7 +101,7 @@ Page {
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-								preferredVisible: dataItem.isValid
+								preferredVisible: dataItem.valid
 								textField.maximumLength: 32
 							}
 						}

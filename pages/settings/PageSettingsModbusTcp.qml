@@ -40,7 +40,7 @@ Page {
 
 			PrimaryListLabel {
 				//% "No errors reported"
-				text: lastError.isValid ? lastError.value : qsTrId("settings_modbus_no_errors")
+				text: lastError.valid ? lastError.value : qsTrId("settings_modbus_no_errors")
 				preferredVisible: enableModbusTcp.checked
 				horizontalAlignment: Text.AlignHCenter
 			}
@@ -48,14 +48,14 @@ Page {
 			ListText {
 				//% "Time of last error"
 				text: qsTrId("settings_modbus_time_of_last_error")
-				secondaryText: timestamp.isValid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
-				preferredVisible: enableModbusTcp.checked && lastError.isValid
+				secondaryText: timestamp.valid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
+				preferredVisible: enableModbusTcp.checked && lastError.valid
 			}
 
 			ListButton {
 				text: CommonWords.clear_error_action
 				secondaryText: CommonWords.press_to_clear
-				preferredVisible: enableModbusTcp.checked && lastError.isValid
+				preferredVisible: enableModbusTcp.checked && lastError.valid
 				onClicked: {
 					lastError.setValue(undefined)
 					timestamp.setValue(undefined)

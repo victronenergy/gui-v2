@@ -52,8 +52,8 @@ QtObject {
 			uid: model.device.serviceUid + "/GensetService"
 			onValueChanged: {
 				const serviceType = BackendConnection.serviceTypeFromUid(root.gensetServiceUid)
-				if ( (isValid && serviceType === "dcgenset" && value.startsWith("com.victronenergy.dcgenset."))
-						|| (isValid && serviceType !== "dcgenset" && value.startsWith("com.victronenergy.genset.")) ) {
+				if ( (valid && serviceType === "dcgenset" && value.startsWith("com.victronenergy.dcgenset."))
+						|| (valid && serviceType !== "dcgenset" && value.startsWith("com.victronenergy.genset.")) ) {
 						root._generatorWithGensetService = model.device.serviceUid
 				}
 			}

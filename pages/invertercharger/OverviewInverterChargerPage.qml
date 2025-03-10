@@ -144,7 +144,7 @@ Page {
 
 				QtObject {
 					id: socObject
-					readonly property string value: CommonWords.soc_with_prefix.arg(stateOfCharge.isValid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--")
+					readonly property string value: CommonWords.soc_with_prefix.arg(stateOfCharge.valid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--")
 				}
 			}
 

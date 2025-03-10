@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property int phaseCount: phaseCountItem.isValid ? phaseCountItem.value : 1
+	readonly property int phaseCount: phaseCountItem.valid ? phaseCountItem.value : 1
 
 	VeQuickItem {
 		id: phaseCountItem

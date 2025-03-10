@@ -24,18 +24,18 @@ VisibleItemModel {
 
 	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
 	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
-	readonly property var phaseNumbers: nrOfPhases.isValid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
-			: phase.isValid ? [ phase.value ]
+	readonly property var phaseNumbers: nrOfPhases.valid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
+			: phase.valid ? [ phase.value ]
 			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
 
 	// If the number of phases is not known, show each phase depending on whether there is valid
 	// data for that phase.
-	readonly property bool phaseCountKnown: phase.isValid || nrOfPhases.isValid
+	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid
 
 	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
 	}
 
@@ -50,8 +50,8 @@ VisibleItemModel {
 		Repeater {
 			model: root.phaseNumbers
 			delegate: ListQuantityGroup {
-				preferredVisible: root.phaseCountKnown || (phaseVoltage.isValid || phaseCurrent.isValid ||
-												  phasePower.isValid || phasePowerFactor.isValid)
+				preferredVisible: root.phaseCountKnown || (phaseVoltage.valid || phaseCurrent.valid ||
+												  phasePower.valid || phasePowerFactor.valid)
 				text: CommonWords.ac_phase_x.arg(modelData)
 				model: QuantityObjectModel {
 					filterType: QuantityObjectModel.HasValue
@@ -113,7 +113,7 @@ VisibleItemModel {
 				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
 				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
 				unit: VenusOS.Units_Energy_KiloWattHour
-				preferredVisible: root.phaseCountKnown || dataItem.isValid
+				preferredVisible: root.phaseCountKnown || dataItem.valid
 			}
 		}
 	}
@@ -122,14 +122,14 @@ VisibleItemModel {
 		text: CommonWords.dynamic_power_limit
 		unit: VenusOS.Units_Watt
 		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListText {
 		//% "Phase Sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
 		dataItem.uid: root.bindPrefix + "/PhaseSequence"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 		secondaryText: dataItem.value === 1
 				  //: Phase sequence L1-L3-L2
 				  //% "L1-L3-L2"
@@ -141,7 +141,7 @@ VisibleItemModel {
 
 	ListNavigation {
 		text: CommonWords.setup
-		preferredVisible: allowedRoles.isValid
+		preferredVisible: allowedRoles.valid
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
@@ -177,7 +177,7 @@ VisibleItemModel {
 						//% "Data manager version"
 						text: qsTrId("ac-in-modeldefault_data_manager_version")
 						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 					}
 				}
 			}

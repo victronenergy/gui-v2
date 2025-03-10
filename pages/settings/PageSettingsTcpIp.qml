@@ -67,7 +67,7 @@ Page {
 		}
 
 		function parseJson() {
-			if (!isValid || typeof value !== "string") {
+			if (!valid || typeof value !== "string") {
 				return
 			}
 

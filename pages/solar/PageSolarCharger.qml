@@ -10,11 +10,11 @@ Page {
 	id: root
 
 	required property string bindPrefix
-	readonly property int trackerCount: nrOfTrackers.isValid ? nrOfTrackers.value : 1
+	readonly property int trackerCount: nrOfTrackers.valid ? nrOfTrackers.value : 1
 	readonly property SolarDevice solarDevice: Global.solarDevices.model.deviceAt(Global.solarDevices.model.indexOf(bindPrefix))
 
 	function _isModelSupported() {
-		if (!device.productId || !firmwareVersion.isValid) {
+		if (!device.productId || !firmwareVersion.valid) {
 			return true
 		}
 
@@ -115,7 +115,7 @@ Page {
 			id: pvQuantities
 
 			readonly property real pvCurrent: {
-				if (!pvVoltage.value || !pvTotalPower.isValid) {
+				if (!pvVoltage.value || !pvTotalPower.valid) {
 					return NaN
 				}
 				return pvTotalPower.value / pvVoltage.value
@@ -224,7 +224,7 @@ Page {
 			//: Solar charger total yield
 			//% "Total yield"
 			text: qsTrId("solarcharger_total_yield")
-			preferredVisible: dataItem.isValid
+			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
 			dataItem.uid: root.bindPrefix + "/Yield/User"
 		}
@@ -233,7 +233,7 @@ Page {
 			//: Solar charger system yield
 			//% "System yield"
 			text: qsTrId("solarcharger_system_yield")
-			preferredVisible: dataItem.isValid
+			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
 			dataItem.uid: root.bindPrefix + "/Yield/System"
 		}
@@ -248,7 +248,7 @@ Page {
 			text: qsTrId("solarcharger_load")
 			dataItem.uid: root.bindPrefix + "/Load/I"
 			unit: VenusOS.Units_Amp
-			preferredVisible: dataItem.isValid && loadState.dataItem.value === 1
+			preferredVisible: dataItem.valid && loadState.dataItem.value === 1
 		}
 
 		ListText {
@@ -256,7 +256,7 @@ Page {
 
 			text: loadQuantityItem.text
 			dataItem.uid: root.bindPrefix + "/Load/State"
-			preferredVisible: dataItem.isValid && !loadQuantityItem.visible
+			preferredVisible: dataItem.valid && !loadQuantityItem.visible
 			secondaryText: CommonWords.yesOrNo(dataItem.value)
 		}
 
@@ -273,10 +273,10 @@ Page {
 
 		ListNavigation {
 			text: CommonWords.alarm_status
-			preferredVisible: lowBatteryAlarm.isValid
-							  || highBatteryAlarm.isValid
-							  || highTemperatureAlarm.isValid
-							  || shortCircuitAlarm.isValid
+			preferredVisible: lowBatteryAlarm.valid
+							  || highBatteryAlarm.valid
+							  || highTemperatureAlarm.valid
+							  || shortCircuitAlarm.valid
 			onClicked: {
 				Global.pageManager.pushPage(alarmStatusComponent, { "title": text })
 			}
@@ -310,7 +310,7 @@ Page {
 		ListNavigation {
 			//% "Networked operation"
 			text: qsTrId("charger_networked_operation")
-			preferredVisible: linkNetworkStatus.isValid
+			preferredVisible: linkNetworkStatus.valid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
 						{ "title": text, "bindPrefix": root.bindPrefix })
@@ -349,7 +349,7 @@ Page {
 				delegate: ListAlarm {
 					text: modelData.display
 					dataItem.uid: root.bindPrefix + modelData.path
-					preferredVisible: dataItem.isValid
+					preferredVisible: dataItem.valid
 				}
 			}
 		}

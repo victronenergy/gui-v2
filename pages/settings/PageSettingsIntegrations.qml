@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property bool allModificationsEnabled: allModificationsEnabledItem.isValid && allModificationsEnabledItem.value === 1
+	readonly property bool allModificationsEnabled: allModificationsEnabledItem.valid && allModificationsEnabledItem.value === 1
 
 	VeQuickItem {
 		id: allModificationsEnabledItem
@@ -106,7 +106,7 @@ Page {
 				//% "Relays"
 				text: qsTrId("pagesettingsintegrations_relays")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": text})
-				preferredVisible: relay0.isValid
+				preferredVisible: relay0.valid
 
 				VeQuickItem {
 					id: relay0
@@ -208,7 +208,7 @@ Page {
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
 				enabled: userHasWriteAccess && root.allModificationsEnabled
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			PrimaryListLabel {
@@ -222,7 +222,7 @@ Page {
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
-				preferredVisible: nodeRedModeItem.isValid
+				preferredVisible: nodeRedModeItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": text })
 
 				VeQuickItem {

@@ -15,7 +15,7 @@ QtObject {
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
 
 	readonly property AcInput highlightedInput: {
-		if (_activeInSource.isValid || _activeInServiceType.isValid) {
+		if (_activeInSource.valid || _activeInServiceType.valid) {
 			// If system /Ac/ActiveIn is set, find the input that matches it.
 			return _isSystemActiveInput(input1) ? input1
 					: _isSystemActiveInput(input2) ? input2

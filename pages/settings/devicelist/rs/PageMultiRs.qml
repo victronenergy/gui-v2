@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value >= 2 && !_phase.isValid
+	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value >= 2 && !_phase.valid
 	readonly property int trackerCount: numberOfTrackers.value || 0
 	readonly property alias solarDevice: device
 
@@ -63,7 +63,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListActiveAcInput {
@@ -106,7 +106,7 @@ Page {
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
 			ListRelayState {
@@ -155,7 +155,7 @@ Page {
 		SettingsColumn {
 			readonly property string singlePhaseName: _phase.value === 2 ? "L3"
 					: _phase.value === 1 ? "L2"
-					: "L1"  // _phase.value === 0 || !_phase.isValid
+					: "L1"  // _phase.value === 0 || !_phase.valid
 
 			PVCFListQuantityGroup {
 				//: %1 = phase name (e.g. L1, L2, L3)
@@ -191,7 +191,7 @@ Page {
 		ListQuantityGroup {
 			id: singleTrackerQuantities
 
-			readonly property real pvCurrent: (pvVoltage.value || 0) === 0 || !pvTotalPower.isValid ? NaN
+			readonly property real pvCurrent: (pvVoltage.value || 0) === 0 || !pvTotalPower.valid ? NaN
 					: pvTotalPower.value / pvVoltage.value
 
 			//% "PV"

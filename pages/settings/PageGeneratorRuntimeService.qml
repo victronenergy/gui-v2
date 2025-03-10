@@ -13,7 +13,7 @@ Page {
 	property string startStopBindPrefix
 	property string gensetBindPrefix: ""
 
-	readonly property var _dates: historicalData.isValid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
+	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
 	VeQuickItem {
 		id: state
@@ -46,7 +46,7 @@ Page {
 			ListText {
 				//% "Total run time"
 				text: qsTrId("page_settings_run_time_and_service_total_run_time")
-				preferredVisible: gensetOperatingHours.isValid
+				preferredVisible: gensetOperatingHours.valid
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
 			}
 
@@ -57,8 +57,8 @@ Page {
 				text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60) + "h"
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
-				interactive: dataItem.isValid && state.value === 0
-				preferredVisible: dataItem.isValid && gensetBindPrefix === ""
+				interactive: dataItem.valid && state.value === 0
+				preferredVisible: dataItem.valid && gensetBindPrefix === ""
 				maximumLength: 6
 				saveInput: function() {
 					dataItem.setValue(accumulatedTotalItem.value - parseInt(textField.text, 10) * 60 * 60)
@@ -116,7 +116,7 @@ Page {
 				text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
 				secondaryText: ""
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
-				preferredVisible: dataItem.isValid && dataItem.value > 0
+				preferredVisible: dataItem.valid && dataItem.value > 0
 
 				Timer {
 					running: parent.preferredVisible && root.animationEnabled
@@ -149,7 +149,7 @@ Page {
 				text: qsTrId("settings_page_run_time_and_service_time_to_service")
 				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
 				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListIntField {
@@ -177,7 +177,7 @@ Page {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
 				secondaryText: CommonWords.press_to_reset
-				preferredVisible: serviceReset.isValid
+				preferredVisible: serviceReset.valid
 				onClicked: {
 					serviceReset.setValue(1)
 					//% "The service timer has been reset"

@@ -16,7 +16,7 @@ ListNavigation {
 	VeQuickItem {
 		id: code
 
-		property string text: isValid ? "0x" + value.toString(16) : "--"
+		property string text: valid ? "0x" + value.toString(16) : "--"
 
 		uid: devPrefix + "/ExtendStatus/GridRelayReport/Code"
 	}
@@ -24,7 +24,7 @@ ListNavigation {
 	VeQuickItem {
 		id: counter
 
-		property string text: isValid ? "#" + value : "--"
+		property string text: valid ? "#" + value : "--"
 
 		uid: devPrefix + "/ExtendStatus/GridRelayReport/Count"
 	}
@@ -33,7 +33,7 @@ ListNavigation {
 	//% "Phase L%1, device %2 (%3)"
 	text: qsTrId("vebus_device_phase_x_device_x_index_x").arg((_index % 3) + 1).arg(Math.floor(_index / 3) + 1).arg(_index)
 	secondaryText: counter.text + " " + code.text
-	preferredVisible: code.isValid
+	preferredVisible: code.valid
 	onClicked:  Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusError11Device.qml", {
 												bindPrefix: devPrefix,
 												title: text

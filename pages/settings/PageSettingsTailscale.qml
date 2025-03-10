@@ -12,13 +12,13 @@ Page {
 
 	readonly property string tailscaleServiceUid: BackendConnection.serviceUidForType("tailscale")
 
-	readonly property int connectState: stateItem.isValid ? stateItem.value : 0
+	readonly property int connectState: stateItem.valid ? stateItem.value : 0
 
-	readonly property string loginLink: loginItem.isValid ? loginItem.value : ""
+	readonly property string loginLink: loginItem.valid ? loginItem.value : ""
 	readonly property string serviceState: getState()
 
 	readonly property bool tailscaleEnabled: switchTailscaleEnabled.checked
-	readonly property bool tailscaleConnected: stateItem.isValid && tailscaleEnabled && connectState == 100
+	readonly property bool tailscaleConnected: stateItem.valid && tailscaleEnabled && connectState == 100
 
 	function _checkAndCleanup(text, pattern) {
 		// Trim and lowercase the text
@@ -45,7 +45,7 @@ Page {
 	function getState() {
 		let returnValue
 
-		if (!stateItem.isValid) {
+		if (!stateItem.valid) {
 			// Tailscale backend service not running
 			//% "Starting..."
 			returnValue = qsTrId("settings_tailscale_starting")
@@ -87,7 +87,7 @@ Page {
 			returnValue = qsTrId("settings_tailscale_unknown_state").arg(connectState)
 		}
 
-		if (tailscaleEnabled && !tailscaleConnected && connectState != 7 && errorMessageItem.isValid && errorMessageItem.value !== "") {
+		if (tailscaleEnabled && !tailscaleConnected && connectState != 7 && errorMessageItem.valid && errorMessageItem.value !== "") {
 			//% "ERROR: %1"
 			returnValue += "<br /><br />" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
 		}
@@ -98,17 +98,17 @@ Page {
 	function getLocalNetworkAccess() {
 		let returnValue = []
 
-		if (accessLocalEthernetItem.isValid && accessLocalEthernetItem.value === 1) {
+		if (accessLocalEthernetItem.valid && accessLocalEthernetItem.value === 1) {
 			//% "Ethernet"
 			returnValue.push(qsTrId("settings_tailscale_ethernet"))
 		}
 
-		if (accessLocalWifiItem.isValid && accessLocalWifiItem.value === 1) {
+		if (accessLocalWifiItem.valid && accessLocalWifiItem.value === 1) {
 			//% "WiFi"
 			returnValue.push(qsTrId("settings_tailscale_wifi"))
 		}
 
-		if (customNetworksItem.isValid && customNetworksItem.value !== "") {
+		if (customNetworksItem.valid && customNetworksItem.value !== "") {
 			//% "Custom"
 			returnValue.push(qsTrId("settings_tailscale_custom"))
 		}
@@ -207,7 +207,7 @@ Page {
 				text: qsTrId("settings_tailscale_machinename")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/MachineName"
 				placeholderText: "--"
-				interactive: dataItem.isValid && !root.tailscaleEnabled
+				interactive: dataItem.valid && !root.tailscaleEnabled
 				validateInput: function() {
 					return _checkAndCleanup(textField.text, "0-9a-z-")
 				}
@@ -217,14 +217,14 @@ Page {
 				//% "IPv4"
 				text: qsTrId("settings_tailscale_ipv4")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv4"
-				preferredVisible: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
+				preferredVisible: dataItem.valid && dataItem.value !== "" && root.tailscaleConnected
 			}
 
 			ListText {
 				//% "IPv6"
 				text: qsTrId("settings_tailscale_ipv6")
 				dataItem.uid: root.tailscaleServiceUid + "/IPv6"
-				preferredVisible: dataItem.isValid && dataItem.value !== "" && root.tailscaleConnected
+				preferredVisible: dataItem.valid && dataItem.value !== "" && root.tailscaleConnected
 			}
 
 			ListButton {
@@ -254,14 +254,14 @@ Page {
 								ListSwitch {
 									//% "Access local ethernet network"
 									text: qsTrId("settings_tailscale_local_network_access_ethernet")
-									interactive: dataItem.isValid && !root.tailscaleEnabled
+									interactive: dataItem.valid && !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalEthernet"
 								}
 
 								ListSwitch {
 									//% "Access local WiFi network"
 									text: qsTrId("settings_tailscale_local_network_access_wifi")
-									interactive: dataItem.isValid && !root.tailscaleEnabled
+									interactive: dataItem.valid && !root.tailscaleEnabled
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/AccessLocalWifi"
 								}
 
@@ -271,7 +271,7 @@ Page {
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomNetworks"
 									//% "Example: 192.168.1.0/24"
 									placeholderText: qsTrId("settings_tailscale_local_network_access_custom_networks_placeholder")
-									interactive: dataItem.isValid && !root.tailscaleEnabled
+									interactive: dataItem.valid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9./,")
 									}
@@ -313,7 +313,7 @@ Page {
 									text: qsTrId("settings_tailscale_advanced_custom_tailscale_up_arguments")
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomArguments"
 									placeholderText: "--"
-									interactive: dataItem.isValid && !root.tailscaleEnabled
+									interactive: dataItem.valid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9a-z-_=+:., ")
 									}
@@ -324,7 +324,7 @@ Page {
 									text: qsTrId("settings_tailscale_advanced_custom_server_url")
 									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/CustomServerUrl"
 									placeholderText: "--"
-									interactive: dataItem.isValid && !root.tailscaleEnabled
+									interactive: dataItem.valid && !root.tailscaleEnabled
 									validateInput: function() {
 										return _checkAndCleanup(textField.text, "0-9a-z-:/.")
 									}

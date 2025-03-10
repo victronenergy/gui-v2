@@ -14,7 +14,7 @@ VisibleItemModel {
 	property string startStopBindPrefix: _startStop1Finder.startStop1Uid
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(bindPrefix)
 	readonly property bool dcGenset: serviceType === "dcgenset"
-	readonly property int nrOfPhases: phases.isValid ? phases.value
+	readonly property int nrOfPhases: phases.valid ? phases.value
 												   : dcGenset ? 0
 															  : 3
 	readonly property VeQuickItem phases: VeQuickItem {
@@ -75,7 +75,7 @@ VisibleItemModel {
 	ListText {
 		//% "Current run time"
 		text: qsTrId("settings_page_genset_generator_run_time")
-		secondaryText: dataItem.isValid ? Utils.secondsToString(dataItem.value, false) : "0"
+		secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : ""
 		preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 	}
@@ -89,7 +89,7 @@ VisibleItemModel {
 
 		VeQuickItem {
 			id: activeCondition
-			readonly property bool isAutoStarted: isValid && Global.generators.isAutoStarted(value)
+			readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
 			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
 		}
 
@@ -102,7 +102,7 @@ VisibleItemModel {
 	ListGeneratorError {
 		//% "Control error code"
 		text: qsTrId("ac-in-genset_control_error_code")
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 	}
 
@@ -131,7 +131,7 @@ VisibleItemModel {
 			return errorCodes.length ? errorCodes : CommonWords.none_errors
 		}
 
-		preferredVisible: _dataItem.isValid
+		preferredVisible: _dataItem.valid
 		interactive: secondaryText !== CommonWords.none_errors
 
 		onClicked: Global.notificationLayer.popAndGoToNotifications()
@@ -225,7 +225,7 @@ VisibleItemModel {
 							//% "Load"
 							text: qsTrId("ac-in-genset_load")
 							dataItem.uid: root.bindPrefix + "/Engine/Load"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							unit: VenusOS.Units_Percentage
 						}
 
@@ -233,14 +233,14 @@ VisibleItemModel {
 							//% "Oil pressure"
 							text: qsTrId("ac-in-genset_oil_pressure")
 							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							unit: VenusOS.Units_Kilopascal
 						}
 
 						ListTemperature {
 							//% "Oil temperature"
 							text: qsTrId("ac-in-genset_oil_temperature")
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
 							precision: 0
 						}
@@ -248,7 +248,7 @@ VisibleItemModel {
 						ListTemperature {
 							//% "Coolant temperature"
 							text: qsTrId("ac-in-genset_coolant_temperature")
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
 							precision: 0
 						}
@@ -256,14 +256,14 @@ VisibleItemModel {
 						ListTemperature {
 							//% "Exhaust temperature"
 							text: qsTrId("ac-in-genset_exhaust_temperature")
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
 						}
 
 						ListTemperature {
 							//% "Winding temperature"
 							text: qsTrId("ac-in-genset_winding_temperature")
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
 						}
 
@@ -271,14 +271,14 @@ VisibleItemModel {
 							//% "Heatsink temperature"
 							text: qsTrId("genset_heatsink_temperature")
 							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 						}
 
 						ListQuantity {
 							//% "Starter battery voltage"
 							text: qsTrId("ac-in-genset_starter_battery_voltage")
 							dataItem.uid: root.bindPrefix + "/StarterVoltage"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							unit: VenusOS.Units_Volt_DC
 						}
 
@@ -286,7 +286,7 @@ VisibleItemModel {
 							//% "Number of starts"
 							text: qsTrId("ac-in-genset_number_of_starts")
 							dataItem.uid: root.bindPrefix + "/Engine/Starts"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 						}
 					}
 				}
@@ -309,7 +309,7 @@ VisibleItemModel {
 	ListNavigation {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
-		preferredVisible: chargeVoltage.isValid || chargeCurrent.isValid || bmsControlled.isValid
+		preferredVisible: chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid
 		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
 		VeQuickItem {
@@ -340,8 +340,8 @@ VisibleItemModel {
 							decimals: 1
 							stepSize: 0.1
 							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
-							preferredVisible: dataItem.isValid
-							interactive: dataItem.isValid && bmsControlled.dataItem.value === 0
+							preferredVisible: dataItem.valid
+							interactive: dataItem.valid && bmsControlled.dataItem.value === 0
 						}
 
 						ListText {
@@ -355,7 +355,7 @@ VisibleItemModel {
 							text: qsTrId("genset_charge_current_limit")
 							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
 							suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 						}
 
 						ListText {
@@ -365,7 +365,7 @@ VisibleItemModel {
 							text: qsTrId("genset_bms_controlled")
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-							preferredVisible: dataItem.isValid
+							preferredVisible: dataItem.valid
 							//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
 							caption: bmsControlled.dataItem.value === 1 ? qsTrId("genset_bms_control_enabled_automatically") : ""
 						}

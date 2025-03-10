@@ -33,7 +33,7 @@ Page {
 			ListText {
 				text: CommonWords.status
 				dataItem.uid: root.bindPrefix + "/Status"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				secondaryText: {
 					switch (dataItem.value) {
 					case 0:
@@ -67,7 +67,7 @@ Page {
 				text: qsTrId("temperature_humidity")
 				dataItem.uid: bindPrefix + "/Humidity"
 				unit: VenusOS.Units_Percentage
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
@@ -75,7 +75,7 @@ Page {
 				text: qsTrId("temperature_pressure")
 				dataItem.uid: bindPrefix + "/Pressure"
 				unit: VenusOS.Units_Hectopascal
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListItem {
@@ -83,7 +83,7 @@ Page {
 
 				//% "Sensor battery"
 				text: qsTrId("temperature_sensor_battery")
-				preferredVisible: batteryVoltage.isValid
+				preferredVisible: batteryVoltage.valid
 
 				content.children: [
 					QuantityLabel {
@@ -100,7 +100,7 @@ Page {
 					Label {
 						anchors.verticalCenter: parent.verticalCenter
 						text: {
-							if (lowBattery.isValid) {
+							if (lowBattery.valid) {
 								const low = lowBattery.value === 1
 								//% "Low"
 								return low ? qsTrId("temperature_sensor_battery_status_low")

@@ -9,11 +9,11 @@ import Victron.VenusOS
 Device {
 	id: generator
 
-	readonly property int state: _state.isValid ? _state.value : -1
+	readonly property int state: _state.valid ? _state.value : -1
 	readonly property bool autoStart: _autoStart.value === 1
-	readonly property int manualStartTimer: _manualStartTimer.isValid ? _manualStartTimer.value : 0
+	readonly property int manualStartTimer: _manualStartTimer.valid ? _manualStartTimer.value : 0
 	readonly property int runtime: _runtime.value || 0
-	readonly property int runningBy: _runningBy.isValid ? _runningBy.value : 0
+	readonly property int runningBy: _runningBy.valid ? _runningBy.value : 0
 	readonly property bool enabled: _enabled.value === 1
 
 	readonly property string runningByText: Global.generators.runningByText(runningBy)

@@ -9,9 +9,9 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property bool isParallelBms: numberOfBmses.isValid
+	readonly property bool isParallelBms: numberOfBmses.valid
 
-	quantityModel: !root.isParallelBms && state.isValid && state.value === VenusOS.Battery_State_Pending
+	quantityModel: !root.isParallelBms && state.valid && state.value === VenusOS.Battery_State_Pending
 		   ? pendingModel
 		   : defaultModel
 

@@ -77,7 +77,7 @@ Page {
 			text: "[" + (n2kDeviceInstance.value || 0) + "] " + (customName.value || productName.value || "")
 			model: QuantityObjectModel {
 				QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
-				QuantityObject { object: maxValue.isValid ? maxValue : null; key: "summary" }
+				QuantityObject { object: maxValue.valid ? maxValue : null; key: "summary" }
 			}
 
 			VeQuickItem {
@@ -94,7 +94,7 @@ Page {
 				id: maxValue
 
 				//% "Max: %1"
-				readonly property string summary: isValid ? qsTrId("settings_dvcc_max").arg(Units.formatNumber(value, 3)) : ""
+				readonly property string summary: valid ? qsTrId("settings_dvcc_max").arg(Units.formatNumber(value, 3)) : ""
 
 				uid: buddy.uid + "/Link/ChargeCurrent"
 			}

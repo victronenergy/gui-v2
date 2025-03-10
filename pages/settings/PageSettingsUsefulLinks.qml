@@ -20,7 +20,7 @@ Page {
 				//% "Product support & manuals"
 				text: qsTrId("settings_support_links_product_support_manuals")
 				url: {
-					let model = modelItem.isValid ? modelItem.value : ""
+					let model = modelItem.valid ? modelItem.value : ""
 					if (model === "Cerbo GX") {
 						return "https://ve3.nl/guidocs-cerbo-gx"
 					} else if (model === "MultiPlus-II") {

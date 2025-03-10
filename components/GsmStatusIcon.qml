@@ -10,7 +10,7 @@ import Victron.VenusOS
 Row {
 	id: root
 
-	readonly property bool valid: strength.isValid
+	readonly property bool valid: strength.valid
 	readonly property string modemServiceUid: BackendConnection.serviceUidForType("modem")
 
 	function getScaledStrength(strength) {
@@ -32,7 +32,7 @@ Row {
 		return 0
 	}
 
-	visible: simStatus.isValid
+	visible: simStatus.valid
 
 	Label {
 		id: gsmStatusText
@@ -41,10 +41,10 @@ Row {
 			top: parent.top
 			topMargin: Theme.geometry_settings_gsmModem_icon_statusText_topMargin
 		}
-		text: (roaming.isValid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
+		text: (roaming.valid && roaming.value) ? "R" : Utils.simplifiedNetworkType(networkType.value)
 		color: Theme.color_settings_gsmModem_signalStrength_active
 		verticalAlignment: Text.AlignTop
-		visible: !simLockedIcon.visible && ((roaming.isValid && roaming.value) || (connected.isValid && connected.value))
+		visible: !simLockedIcon.visible && ((roaming.valid && roaming.value) || (connected.valid && connected.value))
 		font {
 			pixelSize: Theme.font_size_gsm_icon_caption
 		}

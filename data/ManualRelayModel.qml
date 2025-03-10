@@ -17,8 +17,8 @@ ListModel {
 		}
 		delegate: QtObject {
 			readonly property int relayNumber: model.id
-			readonly property int relayState: _relayState.isValid ? _relayState.value : VenusOS.Relays_State_Inactive
-			readonly property int relayFunction: _relayFunction.isValid ? _relayFunction.value : -1
+			readonly property int relayState: _relayState.valid ? _relayState.value : VenusOS.Relays_State_Inactive
+			readonly property int relayFunction: _relayFunction.valid ? _relayFunction.value : -1
 
 			readonly property VeQuickItem _relayState: VeQuickItem {
 				uid: model.uid + "/State"

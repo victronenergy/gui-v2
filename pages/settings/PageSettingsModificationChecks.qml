@@ -10,10 +10,10 @@ import QtQuick.Templates as T
 Page {
 	id: root
 
-	readonly property int fsModifiedState: fsModifiedStateItem.isValid ? fsModifiedStateItem.value : -1
-	readonly property int systemHooksState: systemHooksStateItem.isValid ? systemHooksStateItem.value : -1
-	readonly property bool isLatestReleaseFirmwareInstalled: firmwareInstalledVersionItem.isValid && firmwareReleaseAvailableVersionItem.isValid && firmwareInstalledVersionItem.value === firmwareReleaseAvailableVersionItem.value
-	readonly property bool isLargeFirmwareInstalled: signalKItem.isValid || nodeRedItem.isValid
+	readonly property int fsModifiedState: fsModifiedStateItem.valid ? fsModifiedStateItem.value : -1
+	readonly property int systemHooksState: systemHooksStateItem.valid ? systemHooksStateItem.value : -1
+	readonly property bool isLatestReleaseFirmwareInstalled: firmwareInstalledVersionItem.valid && firmwareReleaseAvailableVersionItem.valid && firmwareInstalledVersionItem.value === firmwareReleaseAvailableVersionItem.value
+	readonly property bool isLargeFirmwareInstalled: signalKItem.valid || nodeRedItem.valid
 
 	property bool restoreFirmwareIntegrityPressed: false
 
@@ -105,16 +105,16 @@ Page {
 	}
 
 	function getLatestReleaseFirmwareInstalled() {
-		if (firmwareStateItem.isValid && firmwareStateItem.value === FirmwareUpdater.Checking) {
+		if (firmwareStateItem.valid && firmwareStateItem.value === FirmwareUpdater.Checking) {
 			//% "Checking..."
 			return qsTrId("pagesettingsmodificationchecks_firmware_checking")
-		} else if (firmwareStateItem.isValid && firmwareStateItem.value === FirmwareUpdater.ErrorDuringChecking && !firmwareReleaseAvailableVersionItem.isValid) {
+		} else if (firmwareStateItem.valid && firmwareStateItem.value === FirmwareUpdater.ErrorDuringChecking && !firmwareReleaseAvailableVersionItem.valid) {
 			//% "Error while checking for firmware updates"
 			return qsTrId("pagesettingsmodificationchecks_firmware_online_check_failed")
 		} else if (isLatestReleaseFirmwareInstalled) {
 			//% "Yes"
 			return qsTrId("common_words_yes")
-		} else if (firmwareReleaseAvailableVersionItem.isValid) {
+		} else if (firmwareReleaseAvailableVersionItem.valid) {
 			//: %1 = firmware version
 			//% "No, %1 is available"
 			return qsTrId("pagesettingsmodificationchecks_firmware_no_available").arg(firmwareReleaseAvailableVersionItem.value)
@@ -210,7 +210,7 @@ Page {
 				//% "Device model"
 				text: qsTrId("pagesettingsmodificationchecks_device_model")
 				secondaryText: modelItem.value || ""
-				secondaryLabel.color: modelItem.isValid && modelItem.value.indexOf("Raspberry") === -1 ? Theme.color_green : Theme.color_red
+				secondaryLabel.color: modelItem.valid && modelItem.value.indexOf("Raspberry") === -1 ? Theme.color_green : Theme.color_red
 			}
 
 			ListText {
@@ -218,7 +218,7 @@ Page {
 				//% "HQ serial number"
 				text: qsTrId("pagesettingsmodificationchecks_hq_serial_number")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
-				preferredVisible: dataItem.isValid && dataItem.value != ""
+				preferredVisible: dataItem.valid && dataItem.value != ""
 			}
 
 			ListText {
@@ -261,7 +261,7 @@ Page {
 				//% "Installed image type"
 				text: qsTrId("pagesettingsmodificationchecks_installed_image_type")
 				secondaryText: isLargeFirmwareInstalled ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
-				preferredVisible: largeImageSupportItem.isValid && largeImageSupportItem.value === 1
+				preferredVisible: largeImageSupportItem.valid && largeImageSupportItem.value === 1
 			}
 
 			ListText {
@@ -361,7 +361,7 @@ Page {
 						qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
 					} else {
 						//% "Press to install"
-						qsTrId("pagesettingsmodificationchecks_press_to_install") + (firmwareReleaseAvailableVersionItem.isValid ? " " + firmwareReleaseAvailableVersionItem.value : "")
+						qsTrId("pagesettingsmodificationchecks_press_to_install") + (firmwareReleaseAvailableVersionItem.valid ? " " + firmwareReleaseAvailableVersionItem.value : "")
 					}
 				}
 				writeAccessLevel: VenusOS.User_AccessType_User
@@ -407,7 +407,7 @@ Page {
 
 	Component.onCompleted: {
 		// Check for updates
-		if (firmwareReleaseCheckItem.isValid && firmwareReleaseCheckItem.value === 0) {
+		if (firmwareReleaseCheckItem.valid && firmwareReleaseCheckItem.value === 0) {
 			firmwareReleaseCheckItem.setValue(2)
 		}
 

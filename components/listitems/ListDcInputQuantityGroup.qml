@@ -14,7 +14,7 @@ ListQuantityGroup {
 	//: DC input measurement values
 	//% "Input"
 	text: qsTrId("dc_input")
-	preferredVisible: inVoltage.isValid || inPower.isValid
+	preferredVisible: inVoltage.valid || inPower.valid
 	model: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 

@@ -9,6 +9,6 @@ import Victron.VenusOS
 ListText {
 	//% "Relay state"
 	text: qsTrId("list_relay_state")
-	preferredVisible: dataItem.isValid
+	preferredVisible: dataItem.valid
 	secondaryText: CommonWords.onOrOff(dataItem.value)
 }

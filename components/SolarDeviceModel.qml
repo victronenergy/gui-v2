@@ -29,7 +29,7 @@ DeviceModel {
 				// For multi and inverter devices, only include them if /NrOfTrackers > 0.
 				readonly property bool hasSolarData: valid
 						&& (serviceInstantiator.modelData === "solarcharger"
-							|| (_nrOfTrackers.isValid && _nrOfTrackers.value > 0))
+							|| (_nrOfTrackers.valid && _nrOfTrackers.value > 0))
 
 				serviceUid: model.uid
 

@@ -15,7 +15,7 @@ Page {
 			ListRadioButtonGroup {
 				id: relayFunction
 
-				text: relay1State.isValid
+				text: relay1State.valid
 					  //% "Function (Relay 1)"
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
@@ -68,7 +68,7 @@ Page {
 			ListSwitch {
 				id: manualSwitch
 
-				text: relay1State.isValid
+				text: relay1State.valid
 					  //% "Relay 1 on"
 					? qsTrId("settings_relay_relay1on")
 					  //% "Relay on"
@@ -83,7 +83,7 @@ Page {
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
-				preferredVisible: relay1State.isValid
+				preferredVisible: relay1State.valid
 				optionModel: [
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
@@ -97,7 +97,7 @@ Page {
 				//% "Relay 2 on"
 				text: qsTrId("settings_relay_relay2on")
 				dataItem.uid: Global.system.serviceUid + "/Relay/1/State"
-				preferredVisible: relay1State.isValid
+				preferredVisible: relay1State.valid
 					&& relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 

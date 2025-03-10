@@ -9,7 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	text: productName.isValid ? productName.value : "--"
+	text: productName.valid ? productName.value : "--"
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/PageGps.qml",

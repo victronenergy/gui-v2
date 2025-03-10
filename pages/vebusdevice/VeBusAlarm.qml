@@ -37,11 +37,11 @@ ListItem {
 					if (index === 0) {
 						// Note: multi's connected to the CAN-bus still report these and don't
 						// report per phase alarms, so hide it if per phase L1 is available.
-						return modelData.isValid && !alarmGroup.phase1Alarm.isValid
+						return modelData.valid && !alarmGroup.phase1Alarm.valid
 					} else if (index === 1) {
-						return modelData.isValid
+						return modelData.valid
 					} else {
-						return modelData.isValid && root.multiPhase && numOfPhases >= index
+						return modelData.valid && root.multiPhase && numOfPhases >= index
 					}
 				}
 				anchors.verticalCenter: parent.verticalCenter

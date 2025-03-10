@@ -37,13 +37,13 @@ ListItemButton {
 		  : qsTrId("controlcard_generator_subcard_button_manual_start")
 
 	onClicked: {
-		if (!_state.isValid) {
+		if (!_state.valid) {
 			return
 		}
 		_generatorStateBeforeDialogOpen = _state.value
 
 		// If genset /RemoteStartModeEnabled is set to 0, then it cannot be started/stopped.
-		if (_remoteStartMode.isValid && _remoteStartMode.value === 0) {
+		if (_remoteStartMode.valid && _remoteStartMode.value === 0) {
 			Global.dialogLayer.open(noStartStopDialogComponent)
 			return
 		}

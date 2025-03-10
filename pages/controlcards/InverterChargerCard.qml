@@ -98,7 +98,7 @@ ControlCard {
 			id: essStateButton
 			text: CommonWords.ess
 			flat: true
-			preferredVisible: essModeItem.isValid
+			preferredVisible: essModeItem.valid
 			secondaryText: Global.ess.essStateToButtonText(essModeItem.value)
 			// change the font size for the child button
 			button.font.pixelSize: Theme.font_size_body1
@@ -111,7 +111,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("controlcard_inverter_charger_ess_minimum_soc")
 			flat: true
-			preferredVisible: essMinSocItem.isValid && [
+			preferredVisible: essMinSocItem.valid && [
 				VenusOS.Ess_State_OptimizedWithBatteryLife,
 				VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essModeItem.value)
 			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)

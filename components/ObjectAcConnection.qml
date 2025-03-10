@@ -17,16 +17,16 @@ QtObject {
 	readonly property VeQuickItem powerL1: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L1/" + root.powerKey : ""
 		onValueChanged: root.phases.setValue(0, PhaseModel.PowerRole, value)
-		onIsValidChanged: if (isValid) root._expandPhaseCount(1)
+		onValidChanged: if (valid) root._expandPhaseCount(1)
 	}
 	readonly property VeQuickItem powerL2: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L2/" + root.powerKey : ""
-		onIsValidChanged: if (isValid) root._expandPhaseCount(2)
+		onValidChanged: if (valid) root._expandPhaseCount(2)
 		onValueChanged: root.phases.setValue(1, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem powerL3: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L3/" + root.powerKey : ""
-		onIsValidChanged: if (isValid) root._expandPhaseCount(3)
+		onValidChanged: if (valid) root._expandPhaseCount(3)
 		onValueChanged: root.phases.setValue(2, PhaseModel.PowerRole, value)
 	}
 	readonly property VeQuickItem _currentL1: VeQuickItem {
@@ -47,11 +47,11 @@ QtObject {
 	property bool l2AndL1OutSummed: false
 
 	readonly property real power: hasPower ? _power : NaN
-	readonly property bool hasPower: powerL1.isValid || powerL2.isValid || powerL3.isValid
+	readonly property bool hasPower: powerL1.valid || powerL2.valid || powerL3.valid
 	property real _power: NaN
 
 	// multi-phase systems don't have a total current
-	readonly property real current: _phaseCount.value === 1 && _currentL1.isValid ? _currentL1.value : NaN
+	readonly property real current: _phaseCount.value === 1 && _currentL1.alid ? _currentL1.value : NaN
 
 	readonly property PhaseModel phases: PhaseModel {
 		id: _phases
@@ -72,7 +72,7 @@ QtObject {
 	}
 
 	function _expandPhaseCount(minimumCount) {
-		if (!_phaseCount.isValid) {
+		if (!_phaseCount.valid) {
 			phases.phaseCount = Math.max(phases.count, minimumCount)
 		}
 	}

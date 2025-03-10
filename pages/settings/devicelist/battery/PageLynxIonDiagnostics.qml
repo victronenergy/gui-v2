@@ -17,7 +17,7 @@ Page {
 				//% "Shutdowns due error"
 				text: qsTrId("lynxiondiagnostics_shutdowns_due_error")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/ShutDownsDueError"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			SettingsColumn {
@@ -50,13 +50,13 @@ Page {
 
 						VeQuickItem {
 							id: error
-							readonly property string textValue: isValid ? BmsError.description(value) : invalidText
+							readonly property string textValue: valid ? BmsError.description(value) : invalidText
 							uid: errorDelegate.bindPrefix + "/Error"
 						}
 
 						VeQuickItem {
 							id: errorTimestamp
-							readonly property string textValue: isValid ? Qt.formatDateTime(new Date(value * 1000), "yyyy-MM-dd hh:mm") : "--"
+							readonly property string textValue: valid ? Qt.formatDateTime(new Date(value * 1000), "yyyy-MM-dd hh:mm") : "--"
 							uid: errorDelegate.bindPrefix + "/Time"
 						}
 					}

@@ -12,8 +12,8 @@ QtObject {
 	property string bindPrefix
 	property string deviceName
 	property int trackerCount
-	readonly property int daysAvailable: _veHistoryCount.isValid ? _veHistoryCount.value : 0
-	readonly property bool valid: _veHistoryCount.isValid && _veHistoryCount.value > 0
+	readonly property int daysAvailable: _veHistoryCount.valid ? _veHistoryCount.value : 0
+	readonly property bool valid: _veHistoryCount.valid && _veHistoryCount.value > 0
 
 	property SolarHistoryErrorModel errorModel: SolarHistoryErrorModel {
 		uidPrefix: root.bindPrefix + "/History/Overall"

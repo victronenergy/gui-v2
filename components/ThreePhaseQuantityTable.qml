@@ -82,7 +82,7 @@ QuantityTable {
 				anchors.right: parent.right
 				font.pixelSize: Theme.font_size_body2
 				unit: VenusOS.Units_Watt
-				value: totalPowerItem.isValid ? totalPowerItem.value : NaN
+				value: totalPowerItem.valid ? totalPowerItem.value : NaN
 			}
 		}
 	}

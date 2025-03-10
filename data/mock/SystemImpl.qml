@@ -61,7 +61,7 @@ QtObject {
 	//--- AC data ---
 
 	property Timer randomizeAcValues: Timer {
-		running: Global.mockDataSimulator.timersActive && _maximumAcCurrent.isValid
+		running: Global.mockDataSimulator.timersActive && _maximumAcCurrent.valid
 		interval: 2000
 		repeat: true
 		triggeredOnStart: true

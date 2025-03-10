@@ -12,10 +12,10 @@ ListButton {
 	readonly property alias dataItem: dataItem
 
 	// data value is assumed to be in seconds
-	property var date: dataItem.isValid ? new Date(dataItem.value * 1000) : null
+	property var date: dataItem.valid ? new Date(dataItem.value * 1000) : null
 
 	secondaryText: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.isValid)
+	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: Global.dialogLayer.open(dateSelectorComponent, {
 		year: date ? date.getFullYear() : ClockTime.year,

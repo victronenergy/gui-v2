@@ -17,12 +17,12 @@ QtObject {
 	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
 
 	readonly property bool connected: !!_connected.value
-	readonly property int deviceInstance: _deviceInstance.isValid ? _deviceInstance.value : -1
+	readonly property int deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
 	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
-	readonly property int source: _source.isValid ? _source.value : VenusOS.AcInputs_InputSource_NotAvailable
-	readonly property real minimumCurrent: _minimumCurrent.isValid ? _minimumCurrent.value : NaN
-	readonly property real maximumCurrent: _maximumCurrent.isValid ? _maximumCurrent.value : NaN
+	readonly property int source: _source.valid ? _source.value : VenusOS.AcInputs_InputSource_NotAvailable
+	readonly property real minimumCurrent: _minimumCurrent.valid ? _minimumCurrent.value : NaN
+	readonly property real maximumCurrent: _maximumCurrent.valid ? _maximumCurrent.value : NaN
 
 	signal serviceInfoChanged
 

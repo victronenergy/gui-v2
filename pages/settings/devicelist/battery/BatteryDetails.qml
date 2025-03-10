@@ -29,13 +29,13 @@ QtObject {
 	readonly property alias capacity: capacity
 	readonly property alias connectionInformation: connectionInformation
 
-	readonly property bool allowsLowestCellVoltage: minCellVoltage.isValid
-	readonly property bool allowsHighestCellVoltage: maxCellVoltage.isValid
-	readonly property bool allowsMinimumCellTemperature: minCellTemperature.isValid
-	readonly property bool allowsMaximumCellTemperature: maxCellTemperature.isValid
-	readonly property bool allowsBatteryModules: modulesOnline.isValid || modulesOffline.isValid
-	readonly property bool allowsNumberOfModulesBlockingChargeDischarge: nrOfModulesBlockingCharge.isValid || nrOfModulesBlockingDischarge.isValid
-	readonly property bool allowsCapacity: installedCapacity.isValid
+	readonly property bool allowsLowestCellVoltage: minCellVoltage.valid
+	readonly property bool allowsHighestCellVoltage: maxCellVoltage.valid
+	readonly property bool allowsMinimumCellTemperature: minCellTemperature.valid
+	readonly property bool allowsMaximumCellTemperature: maxCellTemperature.valid
+	readonly property bool allowsBatteryModules: modulesOnline.valid || modulesOffline.valid
+	readonly property bool allowsNumberOfModulesBlockingChargeDischarge: nrOfModulesBlockingCharge.valid || nrOfModulesBlockingDischarge.valid
+	readonly property bool allowsCapacity: installedCapacity.valid
 
 	readonly property bool hasAllowedItem: allowsLowestCellVoltage
 		|| allowsHighestCellVoltage

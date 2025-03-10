@@ -16,7 +16,7 @@ VisibleItemModel {
 		dataItem.uid: root.bindPrefix + "/Mode"
 		valueTrue: 1
 		valueFalse: 4
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListDcInputQuantityGroup {
@@ -31,13 +31,13 @@ VisibleItemModel {
 		//% "Alternator Temperature"
 		text: qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListText {
 		text: CommonWords.state
 		secondaryText: Global.system.systemStateToText(dataItem.value)
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 		dataItem.uid: root.bindPrefix + "/State"
 	}
 
@@ -45,21 +45,21 @@ VisibleItemModel {
 		text: CommonWords.network_status
 		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
 		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/ErrorCode"
-		preferredVisible: dataItem.isValid
-		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+		preferredVisible: dataItem.valid
+		secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 	}
 
 	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error/0/Id"
-		preferredVisible: dataItem.isValid
-		secondaryText: dataItem.isValid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
+		preferredVisible: dataItem.valid
+		secondaryText: dataItem.valid ? AlternatorError.description(dataItem.value) : dataItem.invalidText
 	}
 
 	ListQuantity {
@@ -67,7 +67,7 @@ VisibleItemModel {
 		text: qsTrId("alternator_wakespeed_field_drive")
 		dataItem.uid: root.bindPrefix + "/FieldDrive"
 		unit: VenusOS.Units_Percentage
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListQuantity {
@@ -75,14 +75,14 @@ VisibleItemModel {
 		text: qsTrId("alternator_wakespeed_utilization")
 		dataItem.uid: root.bindPrefix + "/Utilization"
 		unit: VenusOS.Units_Percentage
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListQuantity {
 		text: CommonWords.speed
 		dataItem.uid: root.bindPrefix + "/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListQuantity {
@@ -90,14 +90,14 @@ VisibleItemModel {
 		text: qsTrId("alternator_wakespeed_engine_speed")
 		dataItem.uid: root.bindPrefix + "/Engine/Speed"
 		unit: VenusOS.Units_RevolutionsPerMinute
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListTemperature {
 		//% "Engine Temperature"
 		text: qsTrId("engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListNavigation {
@@ -121,7 +121,7 @@ VisibleItemModel {
 				text: qsTrId("alternator_wakespeed_operation_time")
 				secondaryText: Utils.secondsToString(dataItem.value, true)
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
@@ -130,35 +130,35 @@ VisibleItemModel {
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
 				unit: VenusOS.Units_AmpHour
 				precision: 0
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				//% "Cycles started"
 				text: qsTrId("alternator_wakespeed_cycles_started")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				//% "Cycles completed"
 				text: qsTrId("alternator_wakespeed_cycles_completed")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				//% "Number of power-ups"
 				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				//% "Number of deep discharges"
 				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 
@@ -176,7 +176,7 @@ VisibleItemModel {
 	ListNavigation {
 		//% "Charge cycle history"
 		text: qsTrId("alternator_wakespeed_charge_cycle_history")
-		preferredVisible: historyCyclesAvailable.isValid
+		preferredVisible: historyCyclesAvailable.valid
 		onClicked: {
 			Global.pageManager.pushPage(chargeHistoryComponent, { "title": text })
 		}
@@ -186,7 +186,7 @@ VisibleItemModel {
 
 			Page {
 				GradientListView {
-					model: historyCyclesAvailable.isValid ? historyCyclesAvailable.value + 1 : 1
+					model: historyCyclesAvailable.valid ? historyCyclesAvailable.value + 1 : 1
 					delegate: Component {
 						ListCycleHistoryItem {
 							width: parent ? parent.width : 0

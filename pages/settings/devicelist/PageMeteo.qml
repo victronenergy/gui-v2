@@ -45,18 +45,18 @@ Page {
 			ListTemperature {
 				//% "Cell temperature"
 				text: qsTrId("page_meteo_cell_temperature")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/CellTemperature"
 				precision: 1
 			}
 
 			ListTemperature {
-				text: sensor2.dataItem.isValid
+				text: sensor2.dataItem.valid
 					//% "External temperature (1)"
 					? qsTrId("page_meteo_external_temperature_1")
 					//% "External temperature"
 					: qsTrId("page_meteo_external_temperature")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/ExternalTemperature"
 				precision: 1
 			}
@@ -67,7 +67,7 @@ Page {
 				dataItem.uid: bindPrefix + "/ExternalTemperature2"
 				//% "External temperature (2)"
 				text: qsTrId("page_meteo_external_temperature_2")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				precision: 1
 			}
 
@@ -75,7 +75,7 @@ Page {
 				dataItem.uid: bindPrefix + "/WindSpeed"
 				//% "Wind speed"
 				text: qsTrId("page_meteo_wind_speed")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Speed_MetresPerSecond
 				precision: 1
 			}
@@ -84,7 +84,7 @@ Page {
 				dataItem.uid: bindPrefix + "/WindDirection"
 				//% "Wind direction"
 				text: qsTrId("page_meteo_wind_direction")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_CardinalDirection
 			}
 
@@ -92,7 +92,7 @@ Page {
 				dataItem.uid: bindPrefix + "/InstallationPower"
 				//% "Installation Power"
 				text: qsTrId("page_meteo_installation_power")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Watt
 				precision: 1
 			}
@@ -101,7 +101,7 @@ Page {
 				dataItem.uid: bindPrefix + "/TodaysYield"
 				//% "Today's yield"
 				text: qsTrId("page_meteo_daily_yield")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.alid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				precision: 1
 			}
@@ -111,7 +111,7 @@ Page {
 
 				//% "Sensor battery"
 				text: qsTrId("page_meteo_battery_voltage")
-				preferredVisible: batteryVoltage.isValid
+				preferredVisible: batteryVoltage.valid
 
 				content.children: [
 					QuantityLabel {
@@ -128,7 +128,7 @@ Page {
 					Label {
 						anchors.verticalCenter: parent.verticalCenter
 						text: {
-							if (lowBattery.isValid) {
+							if (lowBattery.valid) {
 								const low = lowBattery.value === 1
 								//% "Low"
 								return low ? qsTrId("meteo_sensor_battery_status_low")

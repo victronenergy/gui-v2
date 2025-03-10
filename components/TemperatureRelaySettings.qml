@@ -53,7 +53,7 @@ SettingsColumn {
 			//% "Relay 1"
 			{ display: qsTrId("settings_relay1"), value: 0 },
 			//% "Relay 2"
-			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.isValid },
+			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.valid },
 		]
 
 		PrimaryListLabel {

@@ -31,7 +31,7 @@ Page {
 				//% "Sensor type"
 				text: qsTrId("devicelist_tanksetup_sensor_type")
 				dataItem.uid: root.bindPrefix + "/SenseType"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.voltage, value: 1 },
 					{ display: CommonWords.current_amps, value: 2 },
@@ -44,7 +44,7 @@ Page {
 				//% "Standard"
 				text: qsTrId("devicelist_tanksetup_standard")
 				dataItem.uid: root.bindPrefix + "/Standard"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: [
 					//% "European (0 to 180 Ohm)"
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
@@ -58,7 +58,7 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when empty"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
-				preferredVisible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standard.dataItem.valid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueEmpty"
 				suffix: rawUnit.value || ""
 				decimals: rawUnit.displayDecimals
@@ -68,7 +68,7 @@ Page {
 			ListSpinBox {
 				//% "Sensor value when full"
 				text: qsTrId("devicelist_tanksetup_sensor_value_when_full")
-				preferredVisible: dataItem.seen && (!standard.dataItem.isValid || standard.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standard.dataItem.valid || standard.currentValue === 2)
 				dataItem.uid: root.bindPrefix + "/RawValueFull"
 				suffix: rawUnit.value || ""
 				decimals: rawUnit.displayDecimals
@@ -87,7 +87,7 @@ Page {
 			ListSpinBox {
 				//% "Butane ratio"
 				text: qsTrId("devicelist_tanksetup_butane_ratio")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				dataItem.uid: root.bindPrefix + "/ButaneRatio"
 				suffix: "%"
 			}
@@ -114,7 +114,7 @@ Page {
 				//% "Averaging time"
 				text: qsTrId("devicelist_tanksetup_averaging_time")
 				dataItem.uid: root.bindPrefix + "/FilterLength"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				suffix: "s"
 			}
 
@@ -122,8 +122,8 @@ Page {
 				//% "Sensor value"
 				text: qsTrId("devicelist_tanksetup_sensor_value")
 				dataItem.uid: root.bindPrefix + "/RawValue"
-				preferredVisible: dataItem.isValid
-				secondaryText: dataItem.isValid ? Units.formatNumber(dataItem.value, rawUnit.displayDecimals) + (rawUnit.value || "") : "--"
+				preferredVisible: dataItem.valid
+				secondaryText: dataItem.valid ? Units.formatNumber(dataItem.value, rawUnit.displayDecimals) + (rawUnit.value || "") : "--"
 			}
 
 			ListNavigation {

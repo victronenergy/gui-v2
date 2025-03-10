@@ -419,7 +419,7 @@ QtObject {
 					dcVoltage.setValue(Math.random() * 10)
 					dcCurrent.setValue(Math.random())
 
-					if (nrOfTrackers.isValid) {
+					if (nrOfTrackers.valid) {
 						setMockValue("/Pv/V", Math.random() * 0.5)
 						setMockValue("/Yield/Power", 100 + (Math.random() * 100))
 						setMockValue(mockValue("/Yield/System") + (Math.random() * 100))

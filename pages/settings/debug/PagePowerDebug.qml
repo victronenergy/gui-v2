@@ -14,11 +14,11 @@ Page {
 	property string vebusPrefix: Global.system.veBus.serviceUid
 
 	function powerDiff(a, b) {
-		return a.isValid && !b.isValid ? a.value - b.value : NaN
+		return a.valid && !b.valid ? a.value - b.value : NaN
 	}
 
 	function apparentPower(voltage, current) {
-		return voltage.isValid && !current.isValid ? voltage.value * current.value : NaN
+		return voltage.valid && !current.valid ? voltage.value * current.value : NaN
 	}
 
 	QtObject {

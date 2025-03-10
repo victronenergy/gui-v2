@@ -19,7 +19,7 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	content.children: [
 		Label {

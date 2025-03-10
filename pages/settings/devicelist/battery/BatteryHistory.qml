@@ -85,28 +85,28 @@ QtObject {
 		uid: root.bindPrefix + "/Settings/HasTemperature"
 	}
 
-	readonly property bool allowsDeepestDischarge: deepestDischarge.isValid
-	readonly property bool allowsLastDischarge: lastDischarge.isValid
-	readonly property bool allowsAverageDischarge: averageDischarge.isValid
-	readonly property bool allowsChargeCycles: chargeCycles.isValid
-	readonly property bool allowsFullDischarges: fullDischarges.isValid
-	readonly property bool allowsTotalAhDrawn: totalAhDrawn.isValid
-	readonly property bool allowsMinimumVoltage: minimumVoltage.isValid
-	readonly property bool allowsMaximumVoltage: maximumVoltage.isValid
-	readonly property bool allowsMinimumCellVoltage: minimumCellVoltage.isValid
-	readonly property bool allowsMaximumCellVoltage: maximumCellVoltage.isValid
-	readonly property bool allowsTimeSinceLastFullCharge: timeSinceLastFullCharge.isValid
-	readonly property bool allowsAutomaticSyncs: automaticSyncs.isValid
-	readonly property bool allowsLowVoltageAlarms: lowVoltageAlarms.isValid
-	readonly property bool allowsHighVoltageAlarms: highVoltageAlarms.isValid
-	readonly property bool allowsLowStarterVoltageAlarms: lowStarterVoltageAlarms.isValid && hasStarterVoltage.isValid && hasStarterVoltage.value
-	readonly property bool allowsHighStarterVoltageAlarms: highStarterVoltageAlarms.isValid && hasStarterVoltage.isValid && hasStarterVoltage.value
-	readonly property bool allowsMinimumStarterVoltage: minimumStarterVoltage.isValid && hasStarterVoltage.isValid && hasStarterVoltage.value
-	readonly property bool allowsMaximumStarterVoltage: maximumStarterVoltage.isValid && hasStarterVoltage.isValid && hasStarterVoltage.value
-	readonly property bool allowsMinimumTemperature: minimumTemperature.isValid && hasTemperature.value === 1
-	readonly property bool allowsMaximumTemperature: maximumTemperature.isValid && hasTemperature.value === 1
-	readonly property bool allowsDischargedEnergy: dischargedEnergy.isValid
-	readonly property bool allowsChargedEnergy: chargedEnergy.isValid
+	readonly property bool allowsDeepestDischarge: deepestDischarge.valid
+	readonly property bool allowsLastDischarge: lastDischarge.valid
+	readonly property bool allowsAverageDischarge: averageDischarge.valid
+	readonly property bool allowsChargeCycles: chargeCycles.valid
+	readonly property bool allowsFullDischarges: fullDischarges.valid
+	readonly property bool allowsTotalAhDrawn: totalAhDrawn.valid
+	readonly property bool allowsMinimumVoltage: minimumVoltage.valid
+	readonly property bool allowsMaximumVoltage: maximumVoltage.valid
+	readonly property bool allowsMinimumCellVoltage: minimumCellVoltage.valid
+	readonly property bool allowsMaximumCellVoltage: maximumCellVoltage.valid
+	readonly property bool allowsTimeSinceLastFullCharge: timeSinceLastFullCharge.valid
+	readonly property bool allowsAutomaticSyncs: automaticSyncs.valid
+	readonly property bool allowsLowVoltageAlarms: lowVoltageAlarms.valid
+	readonly property bool allowsHighVoltageAlarms: highVoltageAlarms.valid
+	readonly property bool allowsLowStarterVoltageAlarms: lowStarterVoltageAlarms.valid && hasStarterVoltage.valid && hasStarterVoltage.value
+	readonly property bool allowsHighStarterVoltageAlarms: highStarterVoltageAlarms.valid && hasStarterVoltage.valid && hasStarterVoltage.value
+	readonly property bool allowsMinimumStarterVoltage: minimumStarterVoltage.valid && hasStarterVoltage.valid && hasStarterVoltage.value
+	readonly property bool allowsMaximumStarterVoltage: maximumStarterVoltage.valid && hasStarterVoltage.valid && hasStarterVoltage.value
+	readonly property bool allowsMinimumTemperature: minimumTemperature.valid && hasTemperature.value === 1
+	readonly property bool allowsMaximumTemperature: maximumTemperature.valid && hasTemperature.value === 1
+	readonly property bool allowsDischargedEnergy: dischargedEnergy.valid
+	readonly property bool allowsChargedEnergy: chargedEnergy.valid
 
 	readonly property bool hasAllowedItem: allowsDeepestDischarge
 		|| allowsLastDischarge

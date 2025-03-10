@@ -25,7 +25,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				valueTrue: 1
 				valueFalse: 4
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListDcInputQuantityGroup {
@@ -39,7 +39,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: Global.systemSettings.temperatureUnit
 			}
 
@@ -52,7 +52,7 @@ Page {
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
 			ListNavigation {

@@ -148,13 +148,13 @@ Page {
 			ListNavigation {
 				//% "Modification checks"
 				text: qsTrId("pagesettingsgeneral_modification_checks")
-				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
 					//% "Unmodified"
 					? qsTrId("pagesettingsmodificationchecks_unmodified")
 					//% "Modified"
 					:  qsTrId("pagesettingsmodificationchecks_modified")
-				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.isValid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
-				preferredVisible: fsModifiedStateItem.isValid && systemHooksStateItem.isValid
+				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
+				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
 
 				VeQuickItem {

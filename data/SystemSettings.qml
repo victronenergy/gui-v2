@@ -12,7 +12,7 @@ QtObject {
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
 			// It's hard to skip onboarding without touch, so disable onboarding if touch is disabled.
-			&& _touchEnabled.isValid && _touchEnabled.value !== 0
+			&& _touchEnabled.valid && _touchEnabled.value !== 0
 
 	property int electricalQuantity: VenusOS.Units_None
 	property int temperatureUnit: VenusOS.Units_None
@@ -23,7 +23,7 @@ QtObject {
 	}
 
 	function canAccess(level) {
-		return accessLevel.isValid && accessLevel.value >= level
+		return accessLevel.valid && accessLevel.value >= level
 	}
 
 	function setElectricalQuantity(value) {
@@ -138,7 +138,7 @@ QtObject {
 				let levels = []
 				for (let i = 0; i < Theme.geometry_briefPage_centerGauge_maximumGaugeCount; ++i) {
 					const obj = _savedLevels.objectAt(i)
-					levels.push(obj && obj.isValid ? obj.value : VenusOS.Tank_Type_None)
+					levels.push(obj && obj.valid ? obj.value : VenusOS.Tank_Type_None)
 				}
 				preferredOrder = levels
 			}
@@ -283,7 +283,7 @@ QtObject {
 
 	readonly property VeQuickItem _onboardingState: VeQuickItem {
 		readonly property bool needsOnboarding: !_forceOnboardingDone
-			&& isValid
+			&& valid
 			&& ( (Qt.platform.os === "wasm" && !(value & VenusOS.OnboardingState_DoneWasm))
 				|| (Qt.platform.os !== "wasm" && !(value & VenusOS.OnboardingState_DoneNative)) )
 

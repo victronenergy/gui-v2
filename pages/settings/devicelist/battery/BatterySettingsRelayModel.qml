@@ -36,20 +36,20 @@ VisibleItemModel {
 			//% "Always open (don't use the relay)"
 			{ display: qsTrId("batterysettingrelay_always_open_dont_use_the_relay"), value: 3 },
 		]
-		preferredVisible: dataItem.isValid
+		preferredVisible: dataItem.valid
 	}
 
 	ListSwitch {
 		text: CommonWords.state
 		dataItem.uid: root.bindPrefix + "/Relay/0/State"
-		interactive: dataItem.isValid && mode.dataItem.isValid && mode.dataItem.value === 2
-		preferredVisible: dataItem.isValid
+		interactive: dataItem.valid && mode.dataItem.valid && mode.dataItem.value === 2
+		preferredVisible: dataItem.valid
 	}
 
 	PrimaryListLabel {
 		//% "Note that changing the Low state-of-charge setting also changes the Time-to-go discharge floor setting in the battery menu."
 		text: qsTrId("batterysettingrelay_low_state_of_charge_setting_note")
-		preferredVisible: dischargeFloorLinkedToRelay.isValid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
+		preferredVisible: dischargeFloorLinkedToRelay.valid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
 
 		VeQuickItem {
 			id: dischargeFloorLinkedToRelay
@@ -66,7 +66,7 @@ VisibleItemModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -78,7 +78,7 @@ VisibleItemModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0, 1)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0, 1)
 	}
 
 	ListRangeSlider {
@@ -90,7 +90,7 @@ VisibleItemModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -102,7 +102,7 @@ VisibleItemModel {
 		slider.secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -114,14 +114,14 @@ VisibleItemModel {
 		slider.secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0)
 	}
 
 	ListSwitch {
 		//% "Fuse blown"
 		text: qsTrId("batterysettingrelay_fuse_blown")
 		dataItem.uid: root.bindPrefix + "/Settings/Relay/FuseBlown"
-		preferredVisible: dataItem.isValid && showSetting(0)
+		preferredVisible: dataItem.valid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -135,7 +135,7 @@ VisibleItemModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0)
 	}
 
 	ListRangeSlider {
@@ -149,6 +149,6 @@ VisibleItemModel {
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		preferredVisible: firstDataItem.isValid && secondDataItem.isValid && showSetting(0)
+		preferredVisible: firstDataItem.valid && secondDataItem.valid && showSetting(0)
 	}
 }

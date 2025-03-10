@@ -11,7 +11,7 @@ QtObject {
 
 	required property string systemSettingsUid
 
-	readonly property bool hasStartPage: _startPageName.isValid && _startPageName.value !== ""
+	readonly property bool hasStartPage: _startPageName.valid && _startPageName.value !== ""
 	readonly property bool autoSelect: _startPageMode.value === VenusOS.StartPage_Mode_AutoSelect
 	readonly property int startPageTimeout: _startPageTimeout.value || 0     // in seconds
 

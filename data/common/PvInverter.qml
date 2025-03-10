@@ -9,11 +9,11 @@ import Victron.VenusOS
 Device {
 	id: pvInverter
 
-	readonly property int statusCode: _statusCode.isValid ? _statusCode.value : -1
-	readonly property int errorCode: _errorCode.isValid ? _errorCode.value : -1
+	readonly property int statusCode: _statusCode.valid ? _statusCode.value : -1
+	readonly property int errorCode: _errorCode.valid ? _errorCode.value : -1
 
-	readonly property real energy: _energy.isValid ? _energy.value : NaN
-	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property real energy: _energy.valid ? _energy.value : NaN
+	readonly property real power: _power.valid ? _power.value : NaN
 	readonly property real current: pvInverter.phases.singlePhaseCurrent
 	readonly property real voltage: pvInverter.phases.singlePhaseVoltage
 
@@ -36,10 +36,10 @@ Device {
 				readonly property string phaseUid: pvInverter.serviceUid + "/Ac/L" + (index + 1)
 
 				readonly property string name: "L" + (index + 1)
-				readonly property real energy: _phaseEnergy.isValid ? _phaseEnergy.value : NaN
-				readonly property real power: _phasePower.isValid ? _phasePower.value : NaN
-				readonly property real current: _phaseCurrent.isValid ? _phaseCurrent.value : NaN
-				readonly property real voltage: _phaseVoltage.isValid ? _phaseVoltage.value : NaN
+				readonly property real energy: _phaseEnergy.valid ? _phaseEnergy.value : NaN
+				readonly property real power: _phasePower.valid ? _phasePower.value : NaN
+				readonly property real current: _phaseCurrent.valid ? _phaseCurrent.value : NaN
+				readonly property real voltage: _phaseVoltage.valid ? _phaseVoltage.value : NaN
 
 				function _updatePhaseModel(valid, index, role) {
 					if (valid) {
@@ -51,22 +51,22 @@ Device {
 
 				readonly property VeQuickItem _phaseEnergy: VeQuickItem {
 					uid: phaseUid + "/Energy/Forward"
-					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.EnergyRole)
+					onValidChanged: phaseObject._updatePhaseModel(valid, phaseObject.index, PhaseModel.EnergyRole)
 					onValueChanged: phases.setValue(index, PhaseModel.EnergyRole, value)
 				}
 				readonly property VeQuickItem _phasePower: VeQuickItem {
 					uid: phaseUid + "/Power"
-					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.PowerRole)
+					onValidChanged: phaseObject._updatePhaseModel(valid, phaseObject.index, PhaseModel.PowerRole)
 					onValueChanged: phases.setValue(index, PhaseModel.PowerRole, value)
 				}
 				readonly property VeQuickItem _phaseCurrent: VeQuickItem {
 					uid: phaseUid + "/Current"
-					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.CurrentRole)
+					onValidChanged: phaseObject._updatePhaseModel(valid, phaseObject.index, PhaseModel.CurrentRole)
 					onValueChanged: phases.setValue(index, PhaseModel.CurrentRole, value)
 				}
 				readonly property VeQuickItem _phaseVoltage: VeQuickItem {
 					uid: phaseUid + "/Voltage"
-					onIsValidChanged: phaseObject._updatePhaseModel(isValid, phaseObject.index, PhaseModel.VoltageRole)
+					onValidChanged: phaseObject._updatePhaseModel(valid, phaseObject.index, PhaseModel.VoltageRole)
 					onValueChanged: phases.setValue(index, PhaseModel.VoltageRole, value)
 				}
 			}

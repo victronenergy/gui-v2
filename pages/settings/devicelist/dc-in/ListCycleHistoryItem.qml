@@ -96,6 +96,6 @@ SettingsColumn {
 	ListText {
 		text: CommonWords.error
 		dataItem.uid: root.bindPrefix + "/Error"
-		secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+		secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 	}
 }

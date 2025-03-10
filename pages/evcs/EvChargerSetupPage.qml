@@ -29,7 +29,7 @@ Page {
 				text: qsTrId("evcs_lock_charger_display")
 				dataItem.uid: root.bindPrefix + "/EnableDisplay"
 				invertSourceValue: true
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 	}

@@ -16,10 +16,10 @@ QtObject {
 		if (serviceType === "vebus"
 				&& Global.inverterChargers.veBusDevices.firstObject
 				&& serviceUid === Global.inverterChargers.veBusDevices.firstObject.serviceUid
-				&& _systemSetupType.isValid) {
+				&& _systemSetupType.valid) {
 			// The /SystemSetup/AcInput<x> settings only apply to the first/main vebus service.
 			return  _systemSetupType.value
-		} else if (serviceType === "acsystem" && _type.isValid) {
+		} else if (serviceType === "acsystem" && _type.valid) {
 			return _type.value
 		}
 		return -1

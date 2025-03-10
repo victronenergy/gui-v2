@@ -25,7 +25,7 @@ ControlCard {
 	status.text: Global.evChargers.chargerStatusToText(evCharger.status)
 
 	// do not show this card if not an EvCharger
-	visible: modeItem.isValid
+	visible: modeItem.valid
 
 	VeQuickItem {
 		id: modeItem
@@ -45,7 +45,7 @@ ControlCard {
 			text: CommonWords.mode
 			secondaryText: Global.evChargers.chargerModeToText(modeItem.value)
 			flat: true
-			interactive: modeItem.isValid
+			interactive: modeItem.valid
 			onClicked: Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
 		}
 
@@ -63,8 +63,8 @@ ControlCard {
 			to: root.evCharger.maxCurrent
 			stepSize: 1
 			dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
-			preferredVisible: dataItem.isValid
-			interactive: dataItem.isValid && modeItem.value === VenusOS.Evcs_Mode_Manual
+			preferredVisible: dataItem.valid
+			interactive: dataItem.valid && modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		FlatListItemSeparator {
@@ -75,7 +75,7 @@ ControlCard {
 			text: CommonWords.charging
 			flat: true
 			dataItem.uid: root.evCharger.serviceUid + "/StartStop"
-			preferredVisible: dataItem.isValid
+			preferredVisible: dataItem.valid
 		}
 	}
 

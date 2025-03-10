@@ -41,7 +41,7 @@ SettingsColumn {
 	ListQuantityGroup {
 		//: %1 = phase number (1-3)
 		//% "AC Out L%1"
-		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.isValid ? acPhaseNumber.value + 1 : 1)
+		text: qsTrId("inverter_ac-out_num").arg(acPhaseNumber.valid ? acPhaseNumber.value + 1 : 1)
 		preferredVisible: root.isInverterCharger
 		model: QuantityObjectModel {
 			QuantityObject { object: root.acPhase; key: "voltage"; unit: VenusOS.Units_Volt_AC }

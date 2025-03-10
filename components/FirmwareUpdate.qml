@@ -31,7 +31,7 @@ QtObject {
 		uid: (Global.allPagesLoaded && !!Global.notificationLayer) ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
 
 		onValueChanged: {
-			if (uid === "" || !isValid) {
+			if (uid === "" || !valid) {
 				return
 			}
 
@@ -57,11 +57,11 @@ QtObject {
 			case FirmwareUpdater.Checking:
 				break
 			case FirmwareUpdater.DownloadingAndInstalling:
-				if (_onlineVersion.isValid) {
+				if (_onlineVersion.valid) {
 					//: %1 = firmware version
 					//% "Downloading and installing firmware %1..."
 					msg = qsTrId("settings_firmware_downloading_and_installing").arg(_onlineVersion.value)
-				} else if (_offlineVersion.isValid) {
+				} else if (_offlineVersion.valid) {
 					//: %1 = firmware version
 					//% "Installing %1..."
 					msg = qsTrId("settings_firmware_installing").arg(_offlineVersion.value)
@@ -100,8 +100,8 @@ QtObject {
 	}
 	property VeQuickItem _onlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
-		onIsValidChanged: {
-			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
+		onValidChanged: {
+			if (valid && _updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
 				updateCheckTimer.stop()
 				Qt.callLater(root._finishUpdateCheck)
 			}
@@ -117,8 +117,8 @@ QtObject {
 	}
 	property VeQuickItem _offlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
-		onIsValidChanged: {
-			if (isValid && _updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
+		onValidChanged: {
+			if (valid && _updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
 				updateCheckTimer.stop()
 				Qt.callLater(root._finishUpdateCheck)
 			}

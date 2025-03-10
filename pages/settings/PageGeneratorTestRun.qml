@@ -71,7 +71,7 @@ Page {
 				//% "Run until battery is fully charged"
 				text: qsTrId("page_generator_test_run_run_until_fully_charged")
 				dataItem.uid: bindPrefix + "/TestRun/RunTillBatteryFull"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 	}

@@ -11,10 +11,10 @@ QtObject {
 
 	required property string systemServiceUid
 
-	readonly property real maximumAcCurrent: _maximumAcCurrent.isValid ? _maximumAcCurrent.value : NaN
+	readonly property real maximumAcCurrent: _maximumAcCurrent.valid ? _maximumAcCurrent.value : NaN
 
 	readonly property ObjectAcConnection ac: ObjectAcConnection {
-		l2AndL1OutSummed: _l2L1OutSummed.isValid && (_l2L1OutSummed.value !== 0)
+		l2AndL1OutSummed: _l2L1OutSummed.valid && (_l2L1OutSummed.value !== 0)
 		isAcOutput: true
 		bindPrefix: root.systemServiceUid + "/Ac/Consumption"
 	}
@@ -23,7 +23,7 @@ QtObject {
 		bindPrefix: root.systemServiceUid + "/Ac/ConsumptionOnInput"
 	}
 	readonly property ObjectAcConnection acOut: ObjectAcConnection {
-		l2AndL1OutSummed: _l2L1OutSummed.isValid && (_l2L1OutSummed.value !== 0)
+		l2AndL1OutSummed: _l2L1OutSummed.valid && (_l2L1OutSummed.value !== 0)
 		isAcOutput: true
 		bindPrefix: root.systemServiceUid + "/Ac/ConsumptionOnOutput"
 	}
