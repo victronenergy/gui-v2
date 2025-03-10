@@ -52,7 +52,7 @@ ControlCard {
 		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
-	Column {
+	SettingsColumn {
 		anchors {
 			top: parent.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin

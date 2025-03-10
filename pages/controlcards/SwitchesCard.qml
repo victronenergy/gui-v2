@@ -15,7 +15,7 @@ ControlCard {
 	//% "Switches"
 	title.text: qsTrId("controlcard_switches")
 
-	Column {
+	SettingsColumn {
 		id: switchesView
 
 		anchors {
