@@ -12,10 +12,16 @@ ListItem {
 
 	property alias checked: radioButton.checked
 	property alias radioButton: radioButton
+	property string secondaryText
 
 	interactive: true
 
 	content.children: [
+		SecondaryListLabel {
+			text: root.secondaryText
+			width: Math.min(implicitWidth, root.maximumContentWidth - radioButton.width - Theme.geometry_listItem_content_spacing)
+			visible: text.length > 0
+		},
 		RadioButton {
 			id: radioButton
 
