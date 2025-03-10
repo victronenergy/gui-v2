@@ -41,6 +41,12 @@ ListView {
 	Keys.onDownPressed: (event) => {
 		event.accepted = orientation === Qt.Vertical ? keyNavHelper.focusNextItem() : false
 	}
+	Keys.onLeftPressed: (event) => {
+		event.accepted = orientation === Qt.Horizontal ? keyNavHelper.focusPreviousItem() : false
+	}
+	Keys.onRightPressed: (event) => {
+		event.accepted = orientation === Qt.Horizontal ? keyNavHelper.focusNextItem() : false
+	}
 
 	KeyNavigationListHelper {
 		id: keyNavHelper
