@@ -105,7 +105,7 @@ Item {
 			active: false
 			asynchronous: true
 			sourceComponent: swipeViewComponent
-			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+			visible: swipeView && !(root.controlsActive && !controlCardsLoader.animationRunning && root.auxActive && !auxCardsLoader.animationRunning)
 			onLoaded: {
 				// If there is an alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
@@ -155,6 +155,15 @@ Item {
 	PageStack {
 		id: pageStack
 
+		anchors {
+			top: statusBar.bottom
+			bottom: parent.bottom
+		}
+		x: width
+		width: Theme.geometry_screen_width
+	}
+
+
 	CardViewLoader {
 		id: auxCardsLoader
 		animationRefStatusBar: statusBar
@@ -167,10 +176,10 @@ Item {
 		viewActive: root.auxActive
 		anchors {
 			top: statusBar.bottom
+			left: parent.left
+			right: parent.right
 			bottom: parent.bottom
 		}
-		x: width
-		width: Theme.geometry_screen_width
 	}
 
 	CardViewLoader {
@@ -183,13 +192,11 @@ Item {
 		viewActive: root.controlsActive
 		anchors {
 			top: statusBar.bottom
+			left: parent.left
+			right: parent.right
 			bottom: parent.bottom
 		}
-		x: width
-		width: Theme.geometry_screen_width
 	}
-
-
 
 	SequentialAnimation {
 		running: !Global.splashScreenVisible
