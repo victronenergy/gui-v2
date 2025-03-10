@@ -82,6 +82,8 @@ ControlCard {
 			}
 		}
 
+		KeyNavigation.down: controlButton
+
 		Component {
 			id: confirmationDialogComponent
 
@@ -92,6 +94,7 @@ ControlCard {
 	}
 
 	GeneratorManualControlButton {
+		id: controlButton
 		anchors {
 			margins: Theme.geometry_controlCard_button_margins
 			bottom: parent.bottom
