@@ -33,6 +33,31 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
+	function _registerKeys() {
+		if (contentItem) {
+			root.contentItem.Keys.returnPressed.connect(function() {
+				root._handleAccept()
+			})
+			root.contentItem.Keys.escapePressed.connect(function() {
+				root._handleReject()
+			})
+		}
+	}
+
+	function _handleAccept() {
+		if (!!root.tryAccept && !root.tryAccept()) {
+			return
+		}
+		root.accept()
+	}
+
+	function _handleReject() {
+		if (!!root.tryReject && !root.tryReject()) {
+			return
+		}
+		root.reject()
+	}
+
 	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
 	x: (parent.width - width) / 2
 	y: centeredY
@@ -49,6 +74,7 @@ T.Dialog {
 	horizontalPadding: 0
 	modal: true
 	closePolicy: T.Popup.NoAutoClose
+	focus: true
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
@@ -131,12 +157,7 @@ T.Dialog {
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			text: root.rejectText
-			onClicked: {
-				if (!!root.tryReject && !root.tryReject()) {
-					return
-				}
-				root.reject()
-			}
+			onClicked: root._handleReject()
 		}
 
 		SeparatorBar {
@@ -165,14 +186,12 @@ T.Dialog {
 			color: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
-			onClicked: {
-				if (!!root.tryAccept && !root.tryAccept()) {
-					return
-				}
-				root.accept()
-			}
+			onClicked: root._handleAccept()
 		}
 	}
+
+	Component.onCompleted: _registerKeys()
+	onContentItemChanged: _registerKeys()
 
 	property QtObject _stateManager: QtObject {
 		id: stateManager

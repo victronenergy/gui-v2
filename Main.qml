@@ -106,7 +106,7 @@ Window {
 	Loader {
 		id: guiLoader
 
-		focus: root.keyNavigationEnabled
+		focus: root.keyNavigationEnabled && !dialogLayer.currentDialog
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
@@ -124,6 +124,14 @@ Window {
 		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent
 		}
+	}
+
+	DialogLayer {
+		id: dialogLayer
+
+		anchors.fill: parent
+		focus: root.keyNavigationEnabled && !!currentDialog
+		Component.onCompleted: Global.dialogLayer = dialogLayer
 	}
 
 	Loader {
