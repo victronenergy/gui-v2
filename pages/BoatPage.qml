@@ -12,18 +12,17 @@ SwipeViewPage {
 	id: root
 
 	readonly property var battery: Global.system && Global.system.battery ? Global.system.battery : null
-	readonly property real speed: _speed.value
-	readonly property real maxSpeed: 35.0 // TODO - move to Settings/gui/gauges once this has been added to plvePlatform
-	property real normalizedSpeed: (speed || 0) / maxSpeed // typically between 0 and 1
-	readonly property int maxRpm: 3000
-	readonly property real normalizedRpm: (Math.abs(rpm.value) || 0) / maxRpm
-	property var motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
-	readonly property real current: _current.value
-	readonly property real power: _power.value
+	readonly property real speed: _speed.isValid ? _speed.value : NaN
+	readonly property real maxSpeed: 35.0 // TODO - move to Settings/gui/gauges once this has been added to vePlatform
+	readonly property real normalizedSpeed: (speed || 0) / maxSpeed // typically between 0 and 1
+	readonly property int maxRpm: 3000 // TODO
+	readonly property real normalizedRpm: _rpm.isValid && maxRpm /* TODO */ ? (Math.abs(_rpm.value) || 0) / maxRpm : NaN
+	readonly property var motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	readonly property real current: _current.isValid ? _current.value : NaN
+	readonly property real power: _power.isValid ? _power.value : NaN
+	readonly property int direction: _direction.isValid ? _direction.value : NaN
+	readonly property string speedUnits: _speedUnits.isValid ? _speedUnits.value : ""
 	property string activeGpsUid
-	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
-	readonly property int direction: _direction.value === undefined ? -1 : _direction.value
-	readonly property string speedUnits: _speedUnits.value || ""
 
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
@@ -34,7 +33,7 @@ SwipeViewPage {
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
 	VeQuickItem {
-		id: rpm
+		id: _rpm
 
 		uid: motorDrive ? motorDrive.serviceUid + "/Motor/RPM" : ""
 	}
@@ -99,7 +98,7 @@ SwipeViewPage {
 			property var qi: VeQuickItem {
 				uid: modelData.serviceUid + "/Speed"
 				onValueChanged: {
-					if (!activeGpsUid && value !== undefined) {
+					if (!activeGpsUid && isValid) {
 						console.log(uid, "is now the active gps")
 						root.activeGpsUid = modelData.serviceUid
 					}
@@ -109,8 +108,8 @@ SwipeViewPage {
 	}
 
 	component Shadow : CP.ColorImage {
-		width: 193
-		height: 69
+		width: Theme.geometry_boatPage_shadow_width
+		height: Theme.geometry_boatPage_shadow_height
 		source: "qrc:/images/boat_glow.png"
 	}
 
@@ -119,9 +118,9 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 85 // 119
+			topMargin: Theme.geometry_boatPage_shadow_topRow_topMargin // 119
 			left: parent.left
-			leftMargin: 58 // 89
+			leftMargin: Theme.geometry_boatPage_shadow_horizontalMargin // 89
 		}
 
 		rotation: 180
@@ -132,7 +131,7 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 227 // 296
+			topMargin: Theme.geometry_boatPage_shadow_bottomRow_topMargin // 296
 			left: shadowTopLeft.left
 		}
 		mirror: true
@@ -143,7 +142,7 @@ SwipeViewPage {
 		anchors {
 			top: shadowTopLeft.top
 			right: parent.right
-			rightMargin: 58 // 89
+			rightMargin: Theme.geometry_boatPage_shadow_horizontalMargin // 89
 		}
 		mirror: true
 		rotation: 180
@@ -164,12 +163,12 @@ SwipeViewPage {
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		y: (root._unexpandedHeight - height) / 2
+		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
 
 		direction: PathArc.Clockwise
-		startAngle: 243.25
-		endAngle: 293
-		strokeWidth: 15
+		startAngle: Theme.geometry_boatPage_batteryGauge_startAngle
+		endAngle: Theme.geometry_boatPage_batteryGauge_endAngle
+		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
 		horizontalAlignment: Qt.AlignLeft
 		animationEnabled: false
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
@@ -179,60 +178,51 @@ SwipeViewPage {
 	Column {
 		anchors {
 			top: parent.top
-			topMargin: 80 - 4
+			topMargin: Theme.geometry_boatPage_timeToGo_topMargin
 			left: parent.left
-			leftMargin: 66
+			leftMargin: Theme.geometry_boatPage_timeToGo_leftMargin
 		}
 
 		visible: !!battery
 
 		Row {
 			readonly property int secs: battery.timeToGo
-			onSecsChanged: console.log("secs:", secs)
 			readonly property int days: Math.floor(secs / 86400)
 			readonly property int hours: Math.floor((secs - (days * 86400)) / 3600)
 			readonly property int minutes: Math.floor((secs - (days * 86400) - (hours * 3600)) / 60)
 
-			Label {
-				font.pixelSize: 28
-				visible: parent.days
-				text: parent.days
+			spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
+
+			component TimeToGoQuantityLabel : QuantityLabel {
+				font.pixelSize: Theme.font_size_body3
+				anchors.verticalCenter: parent.verticalCenter
 			}
 
-			Label {
-				font.pixelSize: 28
-				visible: parent.days
-				color: Theme.color_font_secondary
-				text: "d "
+			TimeToGoQuantityLabel {
+				id: daysLabel
+
+				unit: VenusOS.Units_Time_Day
+				visible: value
+				value: parent.days
 			}
 
-			Label {
-				font.pixelSize: 28
-				visible: parent.hours
-				text: parent.hours
+			TimeToGoQuantityLabel {
+				id: hoursLabel
+
+				unit: VenusOS.Units_Time_Hour
+				visible: value || daysLabel.visible
+				value: parent.hours
 			}
 
-			Label {
-				font.pixelSize: 28
-				visible: parent.hours
-				color: Theme.color_font_secondary
-				text: "h "
-			}
-
-			Label {
-				font.pixelSize: 28
-				text: parent.minutes
-			}
-
-			Label {
-				font.pixelSize: 28
-				color: Theme.color_font_secondary
-				text: "m"
+			TimeToGoQuantityLabel {
+				unit: VenusOS.Units_Time_Minute
+				visible: value || hoursLabel.visible
+				value: parent.minutes
 			}
 		}
 
 		Label {
-			font.pixelSize: 22
+			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_font_secondary
 			//% "Time To Go"
 			text: qsTrId("boat_page_time_to_go")
@@ -244,16 +234,16 @@ SwipeViewPage {
 
 		anchors {
 			left: batteryGauge.left
-			leftMargin: 25 // 30
+			leftMargin: Theme.geometry_boatPage_batteryGauge_leftMargin
 			verticalCenter: batteryGauge.verticalCenter
-			verticalCenterOffset: 15 // 10
+			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
 		}
 
-		spacing: 4
+		spacing: Theme.geometry_boatPage_batteryGauge_rowSpacing
 
 		CP.ColorImage {
 			anchors.verticalCenter: parent.verticalCenter
-			width: 40
+			width: Theme.geometry_boatPage_batteryGauge_iconWidth
 			height: width
 			color: stateOfCharge.valueColor
 			source: "qrc:/images/icon_battery_24.svg"
@@ -263,7 +253,7 @@ SwipeViewPage {
 			id: stateOfCharge
 
 			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: 34
+			font.pixelSize: Theme.font_size_h1
 			unit: VenusOS.Units_Percentage
 			value: battery.stateOfCharge
 		}
@@ -272,12 +262,12 @@ SwipeViewPage {
 	QuantityLabel {
 		anchors {
 			top: row.bottom
-			topMargin: 29- 8
-			left: row.left
-			leftMargin: 42 - 26// 66
+			topMargin: Theme.geometry_boatPage_batteryTemperature_topMargin
+			left: parent.left
+			leftMargin: Theme.geometry_boatPage_batteryTemperature_leftMargin
 		}
 
-		font.pixelSize: 28
+		font.pixelSize: Theme.font_size_body3
 		unit: Global.systemSettings.temperatureUnit
 		value: battery.temperature
 	}
@@ -289,17 +279,17 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 32
+			topMargin: Theme.geometry_boatPage_speedGauge_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		rotation: 225
-		width: 320
+		rotation: Theme.geometry_boatPage_speedGauge_rotation
+		width: Theme.geometry_boatPage_speedGauge_width
 		height: width
 		radius: width/2
-		startAngle: 0
-		endAngle: 270
+		startAngle: Theme.geometry_boatPage_speedGauge_startAngle
+		endAngle: Theme.geometry_boatPage_speedGauge_endAngle
 		value: 100 * normalizedSpeed
-		strokeWidth: 24
+		strokeWidth: Theme.geometry_boatPage_speedGauge_strokeWidth
 		animationEnabled: false
 
 		Rectangle {
@@ -310,19 +300,19 @@ SwipeViewPage {
 			}
 
 			width: speedGauge.strokeWidth
-			height: 169 - 9
+			height: Theme.geometry_boatPage_speedGauge_needleHeight
 			radius: width / 2
-			color: "black"
+			color: Theme.color_boatPage_needle
 			transformOrigin: Item.Bottom
-			rotation: (speedGauge.angularRange * normalizedSpeed) // parent.transitionAngle //
+			rotation: (speedGauge.angularRange * normalizedSpeed)
 			Rectangle {
 				anchors {
 					top: parent.top
 					topMargin: radius
 					horizontalCenter: parent.horizontalCenter
 				}
-				width: 10
-				height: 49
+				width: Theme.geometry_boatPage_speedGauge_innerNeedleWidth
+				height: Theme.geometry_boatPage_speedGauge_innerNeedleHeight
 				radius: width / 2
 				gradient: Gradient {
 					GradientStop {
@@ -351,17 +341,17 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 66
+			topMargin: Theme.geometry_boatPage_rpmGauge_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-		rotation: 225
-		width: 252
+		rotation: speedGauge.rotation
+		width: Theme.geometry_boatPage_rpmGauge_width
 		height: width
 		radius: width/2
-		startAngle: 0
-		endAngle: 270
+		startAngle: speedGauge.startAngle
+		endAngle: speedGauge.endAngle
 		value: 100 * normalizedRpm
-		strokeWidth: 8
+		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
 		animationEnabled: false
 	}
 
@@ -370,14 +360,14 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 299 + 10
+			topMargin: Theme.geometry_boatPage_rpmGauge_minmax_topMargin
 			left: speedGauge.left
-			leftMargin: 55
+			leftMargin: Theme.geometry_boatPage_rpmGauge_minmax_leftMargin
 		}
 
 		verticalAlignment: Text.AlignVCenter
 		color: Theme.color_font_secondary
-		font.pixelSize: 24
+		font.pixelSize: Theme.geometry_boatPage_rpm_min_max_pixelSize
 		text: "0"
 	}
 
@@ -385,61 +375,63 @@ SwipeViewPage {
 		anchors {
 			top: min.top
 			right: speedGauge.right
-			rightMargin: 50
+			rightMargin: Theme.geometry_boatPage_rpmGauge_minmax_rightMargin
 		}
 
 		color: Theme.color_font_secondary
-		font.pixelSize: 24
+		font.pixelSize: Theme.geometry_boatPage_rpm_min_max_pixelSize
 		text: maxRpm
 	}
 
 	Label {
 		anchors {
 			top: parent.top
-			topMargin: 95 - 20
+			topMargin: Theme.geometry_boatPage_speedLabel_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
+		verticalAlignment: Text.AlignVCenter
 		color: Theme.color_font_primary
-		font.pixelSize: 128
+		font.pixelSize: Theme.geometry_boatPage_speed_pixelSize
 		font.weight: Font.Medium
 		text: Math.round(speed)
 	}
 
-	readonly property int delta: 13
 	Label {
 		anchors {
 			top: parent.top
-			topMargin: 220 - delta
+			topMargin: Theme.geometry_boatPage_speedUnitsLabel_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
 
 		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: 22
+		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_secondary
 		text: speedUnits
 	}
 
 	Label {
+		id: rpmLabel
 		anchors {
 			top: parent.top
-			topMargin: 253 - delta
+			topMargin: Theme.geometry_boatPage_rpmLabel_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
-
+		visible: _rpm.isValid
 		verticalAlignment: Text.AlignVCenter
-		topPadding: 8
-		font.pixelSize: 34
-		text: Math.abs(rpm.value)
+		topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
+		font.pixelSize: Theme.font_size_h1
+		text: _rpm.isValid ? Math.abs(_rpm.value) : ""
 	}
 
 	Label {
 		anchors {
 			top: parent.top
-			topMargin: 301 - delta
+			topMargin: Theme.geometry_boatPage_rpmText_topMargin
 			horizontalCenter: parent.horizontalCenter
 		}
+		visible: rpmLabel.visible
 		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: 22
+		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_secondary
 		//% "RPM"
 		text: qsTrId("boat_page_rpm")
@@ -450,31 +442,31 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: 108
+			topMargin: Theme.geometry_boatPage_gear_topMargin
 			right: parent.right
-			rightMargin: 90
+			rightMargin: Theme.geometry_boatPage_gear_rightMargin
 		}
 
-		spacing: 8
+		spacing: Theme.geometry_boatPage_gearRow_spacing
 
 		component GearIndicator : Label {
 			required property int gear
 
 			color: direction === gear ? Theme.color_font_primary : Theme.color_font_secondary
-			font.pixelSize: 28
-			width: 24
+			font.pixelSize: Theme.font_size_body3
+			width: Theme.geometry_boatPage_gearIndicator_width
 			horizontalAlignment: Text.AlignHCenter
 
 			Rectangle {
 				anchors {
 					bottom: parent.top
-					bottomMargin: 4
+					bottomMargin: Theme.geometry_boatPage_gearHighlighter_bottomMargin
 					horizontalCenter: parent.horizontalCenter
 				}
-				radius: 3
-				height: 5
-				width: 26
-				color: "#387DC5" // same for light & dark mode
+				radius: Theme.geometry_boatPage_gearHighlighter_radius
+				height: Theme.geometry_boatPage_gearHighlighter_height
+				width: Theme.geometry_boatPage_gearHighlighter_width
+				color: Theme.color_boatPage_gearHighlighter
 				visible: direction === gear
 			}
 		}
@@ -498,23 +490,23 @@ SwipeViewPage {
 	Row {
 		anchors {
 			top: parent.top
-			topMargin: 169
+			topMargin: Theme.geometry_boatPage_powerRow_topMargin
 			right: parent.right
-			rightMargin: 58
+			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
 
-		spacing: 4
+		spacing: Theme.geometry_boatPage_powerRow_spacing
 
 		component BatteryQuantityLabel : QuantityLabel {
 			anchors.verticalCenter: parent.verticalCenter
 			verticalAlignment: Text.AlignVCenter
-			font.pixelSize: 34
+			font.pixelSize: Theme.font_size_h1
 		}
 
 		BatteryQuantityLabel {
 			id: currentLabel
 
-			visible: current !== undefined
+			visible: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && !isNaN(current)
 			value: current
 			unit: VenusOS.Units_Amp
 		}
@@ -532,7 +524,7 @@ SwipeViewPage {
 
 			anchors {
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: 3
+				verticalCenterOffset: Theme.geometry_boatPage_propeller_verticalCenterOffset
 			}
 			visible: currentLabel.visible || powerLabel.visible
 			source: "qrc:/images/icon_propeller_32.svg"
@@ -540,7 +532,7 @@ SwipeViewPage {
 
 		BatteryQuantityLabel {
 			id: batteryCurrentLabel
-			visible: !propeller.visible && current !== undefined
+			visible: !propeller.visible && !isNaN(current)
 			value: battery.current
 			unit: VenusOS.Units_Amp
 		}
@@ -562,16 +554,14 @@ SwipeViewPage {
 	}
 
 	Column {
-		id: rhsLower
-
 		anchors {
 			top: parent.top
-			topMargin: 237
+			topMargin: Theme.geometry_boatPage_motorDrive_temperatures_topMargin
 			right: parent.right
-			rightMargin: 90
+			rightMargin: Theme.geometry_boatPage_motorDrive_temperatures_rightMargin
 		}
 
-		spacing: -2
+		spacing: Theme.geometry_boatPage_motorDrive_temperaturesColumn_spacing
 
 		component TemperatureGauge : Row {
 			required property VeQuickItem veQuickItem
@@ -579,13 +569,12 @@ SwipeViewPage {
 			required property string source
 
 			anchors.right: parent.right
-			spacing: 4
-			//visible: veQuickItem && veQuickItem.isValid
+			spacing: Theme.geometry_boatPage_motorDrive_temperaturesRow_spacing
 
 			QuantityLabel {
 				anchors.verticalCenter: parent.verticalCenter
 				verticalAlignment: Text.AlignVCenter
-				font.pixelSize: 28
+				font.pixelSize: Theme.font_size_body3
 				value: veQuickItem && veQuickItem.value || 0
 				unit: parent.unit
 			}

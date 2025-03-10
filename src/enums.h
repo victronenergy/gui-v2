@@ -84,7 +84,10 @@ public:
 		Units_Hectopascal,
 		Units_Kilopascal,
 		Units_CardinalDirection,
-		Units_PowerFactor
+		Units_PowerFactor,
+		Units_Time_Day,
+		Units_Time_Hour,
+		Units_Time_Minute
 	};
 	Q_ENUM(Units_Type)
 
