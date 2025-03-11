@@ -400,6 +400,15 @@
     "geometry_settingsListHeader_bottomPadding": 2,
     "geometry_settingsListNavigation_height": 64,
 
+    "geometry_switchableOutput_delegate_header_height": 33,
+    "geometry_switchableOutput_delegate_header_margin": 4,
+    "geometry_switchableOutput_delegate_control_height": 53,
+    "geometry_switchableOutput_delegate_control_radius": 10,
+    "geometry_switchableOutput_delegate_control_border_width": 2,
+    "geometry_switchableOutput_delegate_control_text_proportionateHeight": 0.5,
+    "geometry_switchableOutput_delegate_inner_proportionateWidth": 0.98,
+
+
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_firstColumn_width": 39,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,

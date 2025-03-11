@@ -13,7 +13,7 @@ Item {
 	height: mainItem.contentHeight
 	visible: switchData._status.isValid
 
-	property int controlBorderWidth: 2
+	property int controlBorderWidth: Theme.geometry_switchableOutput_delegate_control_border_width //2
 	property color backColor: Theme.color_darkOk
 	property color highLightColor: Theme.color_ok
 	property color disabledColor: Theme.color_button_down
@@ -48,12 +48,12 @@ Item {
 		id: mainItem
 		Row {
 			id:header
-			height: 33
-			width: root.width * 0.98
+			height: Theme.geometry_switchableOutput_delegate_header_height
+			width: root.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
 			Item {
 			anchors.bottom: statusRect.bottom
 				width: parent.width - statusRect.width
-				height: 25
+				height: header.height - Theme.geometry_switchableOutput_delegate_header_margin * 2
 				Text{
 					id:titleText
 					verticalAlignment: Text.AlignVCenter
@@ -70,7 +70,7 @@ Item {
 					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_Powered)
 					|| ((switchData._status.value === VenusOS.SwitchableOutput_Status_Output_Fault) && (switchData._type.value === VenusOS.SwitchableOutput_Function_Dimmable)))
 				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
-				height: 25
+				height: header.height - Theme.geometry_switchableOutput_delegate_header_margin * 2
 				radius: height/2
 				color: Global.switches.switchableOutputStatusToColor(switchData._status.value, false)
 				Text {
@@ -88,9 +88,9 @@ Item {
 			anchors{
 				horizontalCenter: parent.horizontalCenter
 			}
-			width: parent.width * 0.98
-			height:53
-			radius: 10
+			width: parent.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
+			height: Theme.geometry_switchableOutput_delegate_control_height
+			radius: Theme.geometry_switchableOutput_delegate_control_radius
 
 			DimmingSlider{
 				id: dimmingSwitch
@@ -119,7 +119,7 @@ Item {
 					id: dimText
 					color: Theme.color_font_primary
 					text: switchData._state.value ? CommonWords.on : CommonWords.off
-					font.pixelSize: parent.height * 0.5
+					font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
 					z: border.z + 1
 					anchors.centerIn: parent
 				}
@@ -146,7 +146,7 @@ Item {
 					color: Theme.color_font_primary
 					//% "Press"
 					text: switchData._state.value ? CommonWords.on : qsTrId("Switches_Press")
-					font.pixelSize: parent.height * 0.5
+					font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
 					anchors.centerIn: parent
 				}
 			}
@@ -201,7 +201,7 @@ Item {
 							id: offText
 							color: Theme.color_font_primary
 							text: CommonWords.off
-							font.pixelSize: parent.height * 0.5
+							font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
 							anchors.centerIn: parent
 						}
 					}
@@ -216,7 +216,7 @@ Item {
 							id: onText
 							color: Theme.color_font_primary
 							text: CommonWords.on
-							font.pixelSize: parent.height * 0.5
+							font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
 							anchors.centerIn: parent
 						}
 					}
