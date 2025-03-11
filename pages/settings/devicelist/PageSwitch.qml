@@ -137,48 +137,22 @@ Page {
 						width: parent ? parent.width : 0
 						   Repeater {
 							model: channelsModel.count
-							delegate: ListItem {
+							delegate:  ListQuantityGroupNavigation {
 								id: listQuantityNavigation
+
 								property QtObject info: channelsModel.objectAt(index)
+
 								text: info.name
-								//down: pressArea.containsPress
-								enabled: userHasReadAccess
-								content.children: [
-									QuantityRow {
-										anchors.verticalCenter: parent.verticalCenter
-										width: Math.min(implicitWidth, listQuantityNavigation.maximumContentWidth - icon.width - parent.spacing)
-										model: QuantityObjectModel {
-											filterType: QuantityObjectModel.HasValue
-											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
-											QuantityObject { object: info.functionItem; key: "statusText" }
-											QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp }
-										}
-									},
-
-									CP.ColorImage {
-										id: icon
-
-										anchors.verticalCenter: parent.verticalCenter
-										source: "qrc:/images/icon_arrow_32.svg"
-										rotation: 180
-										color: listQuantityNavigation.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-										visible: listQuantityNavigation.enabled
-									}
-								]
-
-								ListPressArea {
-									id: pressArea
-
-									radius: backgroundRect.radius
-									anchors {
-										fill: parent
-										bottomMargin: listQuantityNavigation.spacing
-									}
-									onClicked:{
-										root.currentChannel = index
-										Global.pageManager.pushPage(channelComponent,
-											{ title: text})
-									}
+								quantityModel: QuantityObjectModel {
+									filterType: QuantityObjectModel.HasValue
+									QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
+									QuantityObject { object: info.functionItem; key: "statusText" }
+									QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp }
+								}
+								onClicked:{
+									root.currentChannel = index
+									Global.pageManager.pushPage(channelComponent,
+										{ title: text})
 								}
 							}
 						}
