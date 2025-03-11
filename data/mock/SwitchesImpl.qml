@@ -9,7 +9,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int mockDeviceCount: 6
+	property int mockDeviceCount: 0
 
 	function populate() {
 		const deviceInstanceNum = mockDeviceCount++
@@ -107,7 +107,7 @@ Item {
 	}
 
 	Component.onCompleted: {
-		for (let i = 0; i < mockDeviceCount; ++i) {
+		for (let i = 0; i < 6; ++i) {
 			populate()
 		}
 	}

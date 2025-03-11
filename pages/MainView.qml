@@ -166,9 +166,9 @@ Item {
 
 	CardViewLoader {
 		id: auxCardsLoader
-		animationRefStatusBar: statusBar
-		anamationRefNavBar: navBar
-		animationRefMainbody: swipeView
+		statusBarItem: statusBar
+		navBarItem: navBar
+		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		sourceComponent:  AuxPage {
 			width: root.width
@@ -184,9 +184,9 @@ Item {
 
 	CardViewLoader {
 		id: controlCardsLoader
-		animationRefStatusBar: statusBar
-		anamationRefNavBar: navBar
-		animationRefMainbody: swipeView
+		statusBarItem: statusBar
+		navBarItem: navBar
+		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		sourceComponent: ControlCardsPage { }
 		viewActive: root.controlsActive

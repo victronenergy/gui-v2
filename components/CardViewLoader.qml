@@ -9,10 +9,11 @@ import Victron.VenusOS
 Loader {
 	id: root
 
+
+	required property Item statusBarItem
+	required property Item navBarItem
+	required property Item swipeViewItem
 	property color backgroundColor: Theme.color_page_background
-	required property Item animationRefStatusBar
-	required property Item anamationRefNavBar
-	required property Item animationRefMainbody
 	readonly property bool animationRunning: inAnimation.running || outAnimation.running
 	property int animationDuration: Theme.animation_controlCards_slide_duration
 	property bool viewActive: false
@@ -25,43 +26,43 @@ Loader {
 
 	SequentialAnimation {
 		id: inAnimation
-		running: viewActive
+		running: root.viewActive
 
 		ParallelAnimation {
 			YAnimator {
 				target: root
-				from: animationRefStatusBar.height - Theme.geometry_controlCards_slide_distance
-				to: animationRefStatusBar.height
-				duration: animationDuration
+				from: root.statusBarItem.height - Theme.geometry_controlCards_slide_distance
+				to: root.statusBarItem.height
+				duration: root.animationDuration
 				easing.type: Easing.OutSine
 			}
 			OpacityAnimator {
 				target: root
 				from: 0.0
 				to: 1.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.OutSine
 			}
 			OpacityAnimator {
-				target: root.animationRefMainbody
+				target: root.swipeViewItem
 				from: 1.0
 				to: 0.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.OutSine
 			}
 			OpacityAnimator {
-				target: root.anamationRefNavBar
+				target: root.navBarItem
 				from: 1.0
 				to: 0.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.OutSine
 			}
 			ColorAnimation {
-				target: animationRefStatusBar
+				target: statusBarItem
 				property: "backgroundColor"
 				from: root.backgroundColor
 				to: Theme.color_page_background
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.OutSine
 			}
 		}
@@ -69,46 +70,45 @@ Loader {
 
 	SequentialAnimation {
 		id: outAnimation
-		running: root.active && !viewActive
+		running: root.active && !root.viewActive
 
 		ParallelAnimation {
 			YAnimator {
 				target: root
-				from: animationRefStatusBar.height
-				to: animationRefStatusBar.height - Theme.geometry_controlCards_slide_distance
-				duration: animationDuration
+				from: root.statusBarItem.height
+				to: root.statusBarItem.height - Theme.geometry_controlCards_slide_distance
+				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
 			OpacityAnimator {
 				target: root
 				from: 1.0
 				to: 0.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
 			OpacityAnimator {
-				target: root.animationRefMainbody
+				target: root.swipeViewItem
 				from: 0.0
 				to: 1.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
 			OpacityAnimator {
-				target: root.anamationRefNavBar
+				target: root.navBarItem
 				from: 0.0
 				to: 1.0
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
 			ColorAnimation {
-				target: root.animationRefStatusBar
+				target: root.statusBarItem
 				property: "backgroundColor"
 				from: Theme.color_page_background
 				to: root.backgroundColor
-				duration: animationDuration
+				duration: root.animationDuration
 				easing.type: Easing.InSine
 			}
 		}
 	}
 }
-
