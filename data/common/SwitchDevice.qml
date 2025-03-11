@@ -8,7 +8,7 @@ import Victron.VenusOS
 
 
 Device {
-	id: switchDev
+	id: root
 	//% "%1 %2"
 	property string _instProductName: (_deviceInstance.isValid && _productName.isValid) ? qsTrId("switchDev_InstProductName").arg (_productName.value).arg(_deviceInstance.value) : productName.value
 	name: _customName.value || _instProductName || ""
@@ -16,11 +16,11 @@ Device {
 	readonly property int state: _state.isValid ? _state.value : -1
 
 	readonly property VeQuickItem _state: VeQuickItem {
-		uid: switchDev.serviceUid + "/State"
+		uid: root.serviceUid + "/State"
 	}
-	property VeQItemTableModel switchableOutputs
-	: VeQItemTableModel {
-		uids:  switchDev.serviceUid + "/SwitchableOutput"
+	property VeQItemTableModel switchableOutputs: VeQItemTableModel {
+		uids:  root.serviceUid + "/SwitchableOutput"
+
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 	}
 
@@ -28,9 +28,9 @@ Device {
 	onValidChanged: {
 		if (!!Global.switches) {
 			if (valid) {
-				Global.switches.model.addDevice(switchDev)
+				Global.switches.model.addDevice(root)
 			} else {
-				Global.switches.model.removeDevice(switchDev.serviceUid)
+				Global.switches.model.removeDevice(root.serviceUid)
 			}
 		}
 	}

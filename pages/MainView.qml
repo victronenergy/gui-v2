@@ -105,7 +105,7 @@ Item {
 			active: false
 			asynchronous: true
 			sourceComponent: swipeViewComponent
-			visible: swipeView && !(root.controlsActive && !controlCardsLoader.animationRunning && root.auxActive && !auxCardsLoader.animationRunning)
+			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlCardsLoader.animationRunning) || !(root.auxActive && !auxCardsLoader.animationRunning)
 			onLoaded: {
 				// If there is an alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
@@ -166,6 +166,13 @@ Item {
 
 	CardViewLoader {
 		id: auxCardsLoader
+
+		anchors {
+			top: statusBar.bottom
+			left: parent.left
+			right: parent.right
+			bottom: parent.bottom
+		}
 		statusBarItem: statusBar
 		navBarItem: navBar
 		swipeViewItem : swipeView
@@ -174,28 +181,23 @@ Item {
 			width: root.width
 		}
 		viewActive: root.auxActive
+	}
+
+	CardViewLoader {
+		id: controlCardsLoader
+
 		anchors {
 			top: statusBar.bottom
 			left: parent.left
 			right: parent.right
 			bottom: parent.bottom
 		}
-	}
-
-	CardViewLoader {
-		id: controlCardsLoader
 		statusBarItem: statusBar
 		navBarItem: navBar
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		sourceComponent: ControlCardsPage { }
 		viewActive: root.controlsActive
-		anchors {
-			top: statusBar.bottom
-			left: parent.left
-			right: parent.right
-			bottom: parent.bottom
-		}
 	}
 
 	SequentialAnimation {

@@ -290,7 +290,7 @@ QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value, 
 
 QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 {
-	switch (value){
+	switch (value) {
 	case Switch_DeviceState_Connected:
 		//% "Running"
 		return qtTrId("Switches_Running");
@@ -310,13 +310,13 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 		//% "Under voltage"
 		return qtTrId("Switches_under_voltage");
 	default:
-		return QString("%1").arg((int)value);
+		return QString::number(int(value));
 	}
 }
 
-QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) const{
+QString Enums::switchableOutput_statusToText (SwitchableOutput_Status value) const{
 
-	switch (value){
+	switch (value) {
 	case SwitchableOutput_Status_Off:
 		//% "Off"
 		return qtTrId("SwitchableOutput_Off");
@@ -343,7 +343,7 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 		//% "Disabled"
 		return qtTrId("SwitchableOutput_disabled");
 	default:
-		return QString("%1").arg((int)value);
+		return QString::number(int(value));
 	}
 }
 

@@ -13,21 +13,22 @@ Page {
 	readonly property string bindPrefix: device.serviceUid
 	readonly property string bindPrefixSwitches:bindPrefix + "/SwitchableOutput"
 	property int currentChannel
+
 	title: device.name
 
+	Instantiator{
+		id:channelsModel
 
-	property Instantiator channelsModel:Instantiator{
 		model: VeQItemTableModel {
 			uids: bindPrefixSwitches
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		delegate: QtObject {
-			property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.SwitchableOutput_Function_Dimmable
-			property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
-			property string status: VenusOS.switchableOutput_statusToText(statusItem.value)
-			property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.SwitchableOutput_Status_On) || (statusItem.value === VenusOS.SwitchableOutput_Status_Output_Fault))
-			property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
-			//property string groupText: groupNameItem.value.length>18 ? groupNameItem.value.substring(0,15)+"...": groupNameItem.value!=="" ? groupNameItem.value : "--"
+			readonly property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.SwitchableOutput_Function_Dimmable
+			readonly property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
+			readonly property string status: VenusOS.switchableOutput_statusToText(statusItem.value)
+			readonly property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.SwitchableOutput_Status_On) || (statusItem.value === VenusOS.SwitchableOutput_Status_Output_Fault))
+			readonly property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
 
 			property VeQuickItem functionItem: VeQuickItem {
 				uid: model.uid + "/Settings/Type"
@@ -87,33 +88,24 @@ Page {
 					model: channelsModel.count
 					delegate: ListQuantityGroup {
 						property QtObject info: channelsModel.objectAt(index)
-						QuantityObjectModel {
-							id: quantityModel
-							filterType: QuantityObjectModel.HasValue
-							QuantityObject { object: info.currentItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
-							QuantityObject { object: info; key: "combinedStatus" }
-							QuantityObject { object: info.functionItem; key: "statusText" }
-						}
-						QuantityObjectModel {
-							id: baseQuantityModel
-							filterType: QuantityObjectModel.HasValue
-							QuantityObject { object: info; key: "combinedStatus" }
-							QuantityObject { object: info.functionItem; key: "statusText" }
-						}
+
 						text: info.name
-						model: info.currentItem.isValid ? quantityModel : baseQuantityModel
+						model: 	QuantityObjectModel {
+							filterType: QuantityObjectModel.HasValue
+							QuantityObject { object: info.currentItem; key: "value"; unit: VenusOS.Units_Amp;}
+							QuantityObject { object: info; key: "combinedStatus" }
+							QuantityObject { object: info.functionItem; key: "statusText" }
+						}
 					}
 				}
 			}
 			ListNavigation {
-
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage(channellist,
 							{"title": text })
 				}
 			}
-
 			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
@@ -141,7 +133,7 @@ Page {
 						placeholderText: CommonWords.custom_name
 					}
 
-					Column {
+					SettingsColumn {
 						width: parent ? parent.width : 0
 						   Repeater {
 							model: channelsModel.count
@@ -153,23 +145,14 @@ Page {
 								enabled: userHasReadAccess
 								content.children: [
 									QuantityRow {
-										id: quantityRow
-										QuantityObjectModel {
-											id: quantityModel
-											filterType: QuantityObjectModel.HasValue
-											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
-											QuantityObject { object: info.functionItem; key: "statusText" }
-											QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp; defaultValue: "--" }
-										}
-										QuantityObjectModel {
-											id: baseQuantityModel
-											filterType: QuantityObjectModel.HasValue
-											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
-											QuantityObject { object: info.functionItem; key: "statusText" }
-										}
 										anchors.verticalCenter: parent.verticalCenter
 										width: Math.min(implicitWidth, listQuantityNavigation.maximumContentWidth - icon.width - parent.spacing)
-										model: info.fuseItem.isValid ? 	quantityModel :	baseQuantityModel
+										model: QuantityObjectModel {
+											filterType: QuantityObjectModel.HasValue
+											QuantityObject { object: info.groupNameItem; key: "shortText"; defaultValue: "--" }
+											QuantityObject { object: info.functionItem; key: "statusText" }
+											QuantityObject { object: info.fuseItem; key: "value"; unit: VenusOS.Units_Amp }
+										}
 									},
 
 									CP.ColorImage {
@@ -277,14 +260,17 @@ Page {
 							// adjust the precision of the displayed number.
 							const formattedNumber = Units.formatNumber(numberValue, fuseListField.decimals)
 							//% "Minimum value is %1"
-							if (numberValue < dataItem.min) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Minimum value is %1".arg(dataItem.min), formattedNumber)
+							if (numberValue < dataItem.min) {
+								return Utils.validationResult(VenusOS.InputValidation_Result_Error,  qsTrId("settings_minimum_value_is").arg(dataItem.min), formattedNumber)
+							}
 							//% "Maximum value is %1"
-							if (numberValue > dataItem.max) return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Maximum value is %1".arg(dataItem.max), formattedNumber)
+							if (numberValue > dataItem.max) {
+								return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_maximum_value_is").arg(dataItem.max), formattedNumber)
+							}
 							return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", formattedNumber)
 						}
 						saveInput: function(){
 							if (dataItem.uid) {
-							console.log("saveInput - ",textField.text)
 							dataItem.setValue(Units.formattedNumberToReal(textField.text))
 							validationTimer.start();
 							}

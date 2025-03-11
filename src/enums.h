@@ -809,7 +809,7 @@ public:
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value, int channel = -1) const;
-	Q_INVOKABLE	QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
+	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
 };
 
 }

@@ -13,7 +13,6 @@ QtObject {
 		modelId: "switches"
 	}
 
-
 	function switchableOutputStatusToColor(val,text) {
 
 		switch (val) {
@@ -68,8 +67,6 @@ QtObject {
 				else return Theme.color_switchableStatus_critical
 		}
 	}
-
-
 
 	Component.onCompleted: Global.switches = root
 }
