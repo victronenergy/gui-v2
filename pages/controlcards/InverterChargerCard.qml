@@ -80,15 +80,9 @@ ControlCard {
 			}
 		}
 
-		ListItem {
-			text: CommonWords.mode
+		ListInverterChargerModeButton {
+			serviceUid: root.serviceUid
 			flat: true
-			content.children: [
-				InverterChargerModeButton {
-					width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-					serviceUid: root.serviceUid
-				}
-			]
 		}
 
 		FlatListItemSeparator {}

@@ -216,7 +216,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterAcOutSettings.qml
-    components/InverterChargerModeButton.qml
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
@@ -330,6 +329,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareVersion.qml
     components/listitems/ListGeneratorError.qml
+    components/listitems/ListInverterChargerModeButton.qml
     components/listitems/ListLink.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
