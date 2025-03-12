@@ -51,17 +51,8 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItem {
-				id: modeListButton
-
-				text: CommonWords.mode
-				writeAccessLevel: VenusOS.User_AccessType_User
-				content.children: [
-					InverterChargerModeButton {
-						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
-						serviceUid: root.serviceUid
-					}
-				]
+			ListInverterChargerModeButton {
+				serviceUid: root.serviceUid
 			}
 
 			ListText {
