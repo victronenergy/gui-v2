@@ -190,7 +190,6 @@ ListItem {
 		}
 	}
 
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.valid)
 	content.children: [
 		defaultContent,
 		readonlyLabel
@@ -201,7 +200,7 @@ ListItem {
 
 		text: textField.text.length > 0 ? textField.text : "--"
 		width: Math.min(implicitWidth, root.maximumContentWidth)
-		visible: !root.enabled
+		visible: !root.interactive
 	}
 
 	VeQuickItem {
