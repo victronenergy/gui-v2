@@ -35,7 +35,7 @@ Page {
 			}
 
                         ListQuantityField {
-                                //%"Grid export limit"
+                                //% "Grid export limit"
 				text: qsTrId("settings_dess_grid_export_limit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/GridExportLimit"
                                 unit: VenusOS.Units_Energy_KiloWattHour
@@ -43,7 +43,7 @@ Page {
                         }
 
                         ListQuantityField {
-                                //%"Grid import limit"
+                                //% "Grid import limit"
 				text: qsTrId("settings_dess_grid_import_limit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/GridImportLimit"
                                 unit: VenusOS.Units_Energy_KiloWattHour
@@ -51,7 +51,7 @@ Page {
                         }
 
                         ListQuantityField {
-                                //%"Battery charge limit"
+                                //% "Battery charge limit"
 				text: qsTrId("settings_dess_battery_charge_limit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/BatteryChargeLimit"
                                 unit: VenusOS.Units_Energy_KiloWattHour
@@ -59,7 +59,7 @@ Page {
                         }
 
                         ListQuantityField {
-                                //%"Battery discharge limit"
+                                //% "Battery discharge limit"
 				text: qsTrId("settings_dess_battery_discharge_limit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/BatteryDischargeLimit"
                                 unit: VenusOS.Units_Energy_KiloWattHour
@@ -83,7 +83,7 @@ Page {
 			}
 
 			ListText {
-				//% Restrictions
+				//% "Restrictions
 				text: qsTrId("system_dess_restrictions")
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/Restrictions"
 				secondaryText: {
@@ -99,7 +99,7 @@ Page {
 			}
 
 			ListText {
-				//% Reactive strategy
+				//% "Reactive strategy"
 				text: qsTrId("system_dess_reactive_strategy")
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/ReactiveStrategy"
 				secondaryText: {
