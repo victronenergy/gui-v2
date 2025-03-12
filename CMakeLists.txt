@@ -194,7 +194,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
-    components/CurrentLimitButton.qml
     components/DateSelector.qml
     components/Device.qml
     components/DeviceListDelegate.qml
@@ -325,6 +324,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListBriefCenterDetails.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
+    components/listitems/ListCurrentLimitButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
     components/listitems/ListDcOutputQuantityGroup.qml
     components/listitems/ListFirmwareCheckButton.qml
