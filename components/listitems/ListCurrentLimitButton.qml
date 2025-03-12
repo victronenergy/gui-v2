@@ -1,21 +1,19 @@
 /*
-** Copyright (C) 2024 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
 import QtQuick
 import Victron.VenusOS
 
-ListItemButton {
+ListButton {
 	id: root
 
-	property string serviceUid
-	property int inputNumber
-	property int inputType: -1
+	required property string serviceUid
+	required property int inputNumber
+	required property int inputType
 
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
-	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
-	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool limitAdjustable: currentLimitIsAdjustable.value !== 0
 
 	function _currentLimitNotAdjustableText() {
@@ -30,13 +28,10 @@ ListItemButton {
 		return qsTrId("rs_current_limit_not_adjustable")
 	}
 
-	text: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
-
-	// TODO need to show a different indicator (like in settings pages) when a control is disabled
-	// due to reduced user access level. This is different from when the control is disabled due to
-	// the current limit not being adjustable.
-	enabled: userHasWriteAccess
-	showEnabled: limitAdjustable
+	text: Global.acInputs.currentLimitTypeToText(inputType)
+	secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
+	button.showEnabled: limitAdjustable
+	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: {
 		if (!limitAdjustable) {

@@ -64,17 +64,16 @@ ControlCard {
 			model: AcInputSettingsModel {
 				serviceUid: root.serviceUid
 			}
-			delegate: Column {
+			delegate: SettingsColumn {
+				required property AcInputSettings inputSettings
+
 				width: parent.width
 
-				ListItem {
-					text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+				ListCurrentLimitButton {
+					serviceUid: root.serviceUid
+					inputNumber: inputSettings.inputNumber
+					inputType: inputSettings.inputType
 					flat: true
-					content.children: CurrentLimitButton {
-						serviceUid: root.serviceUid
-						inputNumber: modelData.inputNumber
-						inputType: modelData.inputType
-					}
 				}
 
 				FlatListItemSeparator {}

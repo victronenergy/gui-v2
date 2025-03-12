@@ -54,18 +54,12 @@ Page {
 						id: inputSettingsModel
 						serviceUid: root.bindPrefix
 					}
-					delegate: ListItem {
-						id: currentLimitListButton
-						writeAccessLevel: VenusOS.User_AccessType_User
-						text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
-						content.children: [
-							CurrentLimitButton {
-								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
-								serviceUid: root.bindPrefix
-								inputNumber: modelData.inputNumber
-								inputType: modelData.inputType
-							}
-						]
+					delegate: ListCurrentLimitButton {
+						required property AcInputSettings inputSettings
+
+						serviceUid: root.bindPrefix
+						inputNumber: inputSettings.inputNumber
+						inputType: inputSettings.inputType
 					}
 				}
 			}
