@@ -82,6 +82,67 @@ Page {
 				}
 			}
 
+			ListText {
+				//% Restrictions
+				text: qsTrId("system_dess_restrictions")
+				dataItem.uid: Global.system.serviceUid + "/DynamicEss/Restrictions"
+				secondaryText: {
+					switch (dataItem.value) {
+					case 0: return CommonWords.none
+					//% "Battery to grid"
+					case 1: return qsTrId("settings_dess_restrictions_battery2grid")
+					//% "Grid to battery"
+					case 2: return qsTrId("settings_dess_restrictions_grid2battery")
+					dafault: return CommonWords.none
+					}
+				}
+			}
+
+			ListText {
+				//% Reactive strategy
+				text: qsTrId("system_dess_reactive_strategy")
+				dataItem.uid: Global.system.serviceUid + "/DynamicEss/ReactiveStrategy"
+				secondaryText: {
+					switch (dataItem.value) {
+					case 0: return CommonWords.none
+					//% "Scheduled self consumption"
+					case 1: return qsTrId("settings_dess_rs_scheduled_selfconsume")
+					//% "Scheduled charge (allow grid)"
+					case 2: return qsTrId("settings_dess_rs_scheduled_charge_allow_grid")
+					//% "Scheduled charge (enhanced)"
+					case 3: return qsTrId("settings_dess_rs_scheduled_charge_enhanced")
+					//% "Self consumption, accept charge"
+					case 4: return qsTrId("settings_dess_rs_selfconsume_accept_charge")
+					//% "Idle, scheduled feedin"
+					case 5: return qsTrId("settings_dess_rs_idle_schduled_feedin")
+					//% "Scheduled discharge"
+					case 6: return qsTrId("settings_dess_rs_scheduled_discharge")
+					//% "Self consumption, accept discharge"
+					case 7: return qsTrId("settings_dess_rs_selfconsume_accept_discharge")
+					//% "Idle, maintain surplus"
+					case 8: return qsTrId("settings_dess_rs_idle_maintain_surplus")
+					//% "Idle, maintain targetsoc"
+					case 9: return qsTrId("settings_dess_rs_idle_maintain_targetsoc")
+					//% "Scheduled charge, smooth transition"
+					case 10: return qsTrId("settings_dess_rs_scheduled_charge_smooth_transition")
+					//% "Scheduled charge, feedin"
+					case 11: return qsTrId("settings_dess_rs_scheduled_charge_feedin")
+					//% "Scheduled charge, no grid""
+					case 12: return qsTrId("settings_dess_rs_scheuled_charge_no_grid")
+					//% "Scheduled minimunm discharge"
+					case 13: return qsTrId("settings_dess_rs_schduled_minimum_discharge")
+					//% "Selfconsume, no grid""
+					case 14: return qsTrId("settings_dess_rs_selfconsume_no_grid")
+					//% "Idle, no opportunity"
+					case 15: return qsTrId("settings_dess_rs_idle_no_opportunity")
+					//% "Unscheduled charge, catchup target soc"
+					case 16: return qsTrId("settings_dess_rs_unscheduled_charge_catchup_targetsoc")
+					dafault: return CommonWords.unknown
+					}
+				}
+			}
+
+
 			ListQuantity {
 				//% "Target SOC"
 				text: qsTrId("settings_ess_target_soc")
