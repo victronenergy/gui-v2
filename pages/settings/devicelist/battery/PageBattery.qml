@@ -144,7 +144,7 @@ Page {
 			ListQuantity {
 				text: "Current (last 5 minutes avg.)"
 				dataItem.uid: root.bindPrefix + "/CurrentAvg"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Amp
 			}
 
@@ -205,7 +205,7 @@ Page {
 			ListTemperature {
 				text: "MOSFET Temperature"
 				dataItem.uid: root.bindPrefix + "/System/MOSTemperature"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: Global.systemSettings.temperatureUnit
 			}
 
@@ -285,7 +285,7 @@ Page {
 				text: "Time-to-SoC 0%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/0"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListText {
@@ -293,7 +293,7 @@ Page {
 				text: "Time-to-SoC 10%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/10"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListText {
@@ -301,7 +301,7 @@ Page {
 				text: "Time-to-SoC 20%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/20"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListText {
@@ -309,7 +309,7 @@ Page {
 				text: "Time-to-SoC 80%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/80"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListText {
@@ -317,7 +317,7 @@ Page {
 				text: "Time-to-SoC 90%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/90"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListText {
@@ -325,7 +325,7 @@ Page {
 				text: "Time-to-SoC 100%"
 				preferredVisible: dataItem.seen
 				dataItem.uid: root.bindPrefix + "/TimeToSoC/100"
-				secondaryText: dataItem.isValid && dataItem.value != "" > 0 ? dataItem.value : "--"
+				secondaryText: dataItem.valid && dataItem.value != "" > 0 ? dataItem.value : "--"
 			}
 
 			ListRelayState {
@@ -353,7 +353,7 @@ Page {
 
 			ListNavigation {
 				text: "Cell Voltages"
-				preferredVisible: cell3Voltage.isValid
+				preferredVisible: cell3Voltage.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryCellVoltages.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })

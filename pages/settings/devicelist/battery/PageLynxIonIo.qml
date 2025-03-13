@@ -17,47 +17,47 @@ Page {
 				//% "System Switch"
 				text: qsTrId("lynxionio_system_switch")
 				dataItem.uid: root.bindPrefix + "/SystemSwitch"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 			}
 
 			ListText {
 				text: CommonWords.allow_to_charge
 				dataItem.uid: root.bindPrefix + "/Io/AllowToCharge"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListText {
 				text: CommonWords.allow_to_discharge
 				dataItem.uid: root.bindPrefix + "/Io/AllowToDischarge"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListText {
 				text: "Allow to balance"
 				dataItem.uid: root.bindPrefix + "/Io/AllowToBalance"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 
 			ListSwitch {
 				text: "Force charging off"
 				dataItem.uid: root.bindPrefix + "/Io/ForceChargingOff"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListSwitch {
 				text: "Force discharging off"
 				dataItem.uid: root.bindPrefix + "/Io/ForceDischargingOff"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListSwitch {
 				text: "Turn balancing off"
 				dataItem.uid: root.bindPrefix + "/Io/TurnBalancingOff"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
