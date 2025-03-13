@@ -61,6 +61,13 @@
     "color_switch_groove_on": "color_ok",
     "color_switch_groove_border_off": "color_gray4",
     "color_switch_groove_border_on": "transparent",
+    "color_switchableStatus_critical": "#600000",
+    "color_switchableStatusText_critical": "#FF8080",
+    "color_switchableStatus_ok": "#006000",
+    "color_switchableStatusText_ok": "#80FF80",
+    "color_switchableStatus_warning": "#705000",
+    "color_switchableStatusText_warning": "#e0e050",
+
 
     "color_navigationBar_button_on": "color_blue",
     "color_navigationBar_button_off": "color_gray5",
