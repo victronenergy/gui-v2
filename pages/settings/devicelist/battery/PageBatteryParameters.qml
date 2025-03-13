@@ -16,7 +16,7 @@ Page {
 			ListText {
 				text: "Charge Mode"
 				dataItem.uid: root.bindPrefix + "/Info/ChargeMode"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
@@ -29,7 +29,7 @@ Page {
 			ListText {
 				text: "Charge Limitation"
 				dataItem.uid: root.bindPrefix + "/Info/ChargeLimitation"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
@@ -42,7 +42,7 @@ Page {
 			ListText {
 				text: "Discharge Limitation"
 				dataItem.uid: root.bindPrefix + "/Info/DischargeLimitation"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {

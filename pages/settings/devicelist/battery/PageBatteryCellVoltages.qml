@@ -19,7 +19,7 @@ Page {
         var balanceCellItem = Qt.createQmlObject('import Victron.VenusOS; VeQuickItem { uid: "' + root.bindPrefix + "/Balances/Cell" + cell + '" }', root);
         var voltageCellItem = Qt.createQmlObject('import Victron.VenusOS; VeQuickItem { uid: "' + root.bindPrefix + "/Voltages/Cell" + cell + '" }', root);
 
-        if (cellMin.isValid && cellMax.isValid && voltageCellItem.isValid && balanceCellItem.isValid && balanceCellItem.value == "1") {
+        if (cellMin.valid && cellMax.valid && voltageCellItem.valid && balanceCellItem.valid && balanceCellItem.value == "1") {
             return (cellMin.value == voltageCellItem.value) ? "#295C91"
 				: (cellMax.value == voltageCellItem.value) ? "#BF4845"
 				: "#BD7624";
@@ -153,7 +153,7 @@ Page {
 						property int outerIndex: model.index
 
 						text: "Cells %1-%2".arg(model.index * 4 + 1).arg(model.index * 4 + 4)
-						preferredVisible: firstRowCellVoltage.isValid
+						preferredVisible: firstRowCellVoltage.valid
 						content.children: [
 							Row {
 								id: contentRow
