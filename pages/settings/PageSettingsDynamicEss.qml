@@ -34,6 +34,14 @@ Page {
 			}
 
                         ListQuantityField {
+                                //% "Battery capacity"
+				text: qsTrId("settings_dess_battery_capacity")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/BatteryCapacity"
+                                unit: VenusOS.Units_Energy_KiloWattHour
+                                decimals: 1
+                        }
+
+                        ListQuantityField {
                                 //% "Grid export limit"
 				text: qsTrId("settings_dess_grid_export_limit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/GridExportLimit"
