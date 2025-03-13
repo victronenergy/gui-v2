@@ -99,7 +99,7 @@ Page {
 				//% "Reset SoC to"
 				text: "Reset SoC to"
 				dataItem.uid: root.bindPrefix + "/Settings/ResetSoc"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				suffix: "%"
 				from: 0
 				to: 100
