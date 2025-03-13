@@ -22,7 +22,6 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				id: dEssOperatingMode
 				//% "Operating mode"
 				text: qsTrId("settings_dess_operating_mode")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/OperatingMode"
@@ -66,6 +65,13 @@ Page {
                                 decimals: 1
                         }
 
+                        /* ListLink {
+				//% "More configuration (provider and such) can be done via VRM"
+                                text: qsTrId("settigs_dess_link_to_vrm")
+                                url: "https://www.victronenergy.com"
+                                      ""https://betavrm.victronenergy.com/installation/102195/settings/dynamic-ess
+                        } */
+
 			ListText {
 				text: CommonWords.status
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/Active"
@@ -86,6 +92,7 @@ Page {
 				//% "Restrictions
 				text: qsTrId("system_dess_restrictions")
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/Restrictions"
+				preferredVisible: dEssMode.dataItem.value === 1
 				secondaryText: {
 					switch (dataItem.value) {
 					case 0: return CommonWords.none
@@ -102,6 +109,7 @@ Page {
 				//% "Reactive strategy"
 				text: qsTrId("system_dess_reactive_strategy")
 				dataItem.uid: Global.system.serviceUid + "/DynamicEss/ReactiveStrategy"
+				preferredVisible: dEssMode.dataItem.value === 1
 				secondaryText: {
 					switch (dataItem.value) {
 					case 0: return CommonWords.none
@@ -142,6 +150,13 @@ Page {
 				}
 			}
 
+			ListQuantity {
+				//% "Minimum SOC"
+				text: qsTrId("settings_ess_minimum_soc")
+				preferredVisible: dEssMode.dataItem.value === 1
+				dataItem.uid: Global.system.serviceUid + "/DynamicEss/MinimumSoc"
+				unit: VenusOS.Units_Percentage
+			}
 
 			ListQuantity {
 				//% "Target SOC"
