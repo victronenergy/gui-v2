@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -7,94 +7,33 @@
 #define NOTIFICATIONSMODEL_H
 
 #include <QObject>
+#include <QQmlEngine>
 #include <QAbstractListModel>
-#include <QSortFilterProxyModel>
-#include <QDateTime>
-#include <QVariantList>
-#include "enums.h"
-
-class QQmlEngine;
-class QJSEngine;
-
-class AlarmMonitor;
+#include "basenotification.h"
 
 namespace Victron {
 
 namespace VenusOS {
 
-
-class BaseNotification : public QObject
-{
-	Q_OBJECT
-	QML_ELEMENT
-
-	Q_PROPERTY(int notificationId READ notificationId WRITE setNotificationId NOTIFY notificationIdChanged FINAL)
-	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged NOTIFY acknowledgedChanged FINAL)
-	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
-	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
-	Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged FINAL)
-	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged FINAL)
-	Q_PROPERTY(QString deviceName READ deviceName WRITE setDeviceName NOTIFY deviceNameChanged FINAL)
-	Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged FINAL)
-
-public:
-	int notificationId() const;
-	void setNotificationId(int notificationId);
-
-	bool acknowledged() const;
-	void setAcknowledged(bool acknowledged);
-
-	bool active() const;
-	void setActive(bool active);
-
-	int type() const;
-	void setType(int type);
-
-	QDateTime dateTime() const;
-	void setDateTime(const QDateTime &dateTime);
-
-	QString description() const;
-	void setDescription(const QString &description);
-
-	QString deviceName() const;
-	void setDeviceName(const QString &deviceName);
-
-	QString value() const;
-	void setValue(const QString &value);
-
-signals:
-	void notificationIdChanged();
-	void acknowledgedChanged();
-	void activeChanged();
-	void typeChanged();
-	void dateTimeChanged();
-	void descriptionChanged();
-	void deviceNameChanged();
-	void valueChanged();
-
-private:
-	friend class NotificationsModel;
-
-	int m_notificationId = -1;
-	bool m_acknowledged = false;
-	bool m_active = false;
-	int m_type = -1;
-	QDateTime m_dateTime;
-	QString m_description;
-	QString m_deviceName;
-	QString m_value;
-};
-
 class NotificationsModel : public QAbstractListModel
 {
 	Q_OBJECT
 	QML_ELEMENT
-	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
 
 public:
-	enum Role {
-		NotificationRole = Qt::UserRole,
+	enum NotificationRoles {
+		Notification = Qt::UserRole,
+		NotificationId,
+		Acknowledged,
+		Active,
+		Type,
+		DateTime,
+		Description,
+		DeviceName,
+		Value
 	};
+	Q_ENUM(NotificationRoles);
 
 	explicit NotificationsModel(QObject *parent = nullptr);
 
@@ -102,7 +41,8 @@ public:
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
-	Q_INVOKABLE void insertByDate(Victron::VenusOS::BaseNotification *notification);
+	Q_INVOKABLE void insertNotification(Victron::VenusOS::BaseNotification *notification);
+	Q_INVOKABLE void removeNotification(Victron::VenusOS::BaseNotification *notification);
 	Q_INVOKABLE void removeNotification(int notificationId);
 	Q_INVOKABLE void reset();
 
@@ -110,7 +50,10 @@ public:
 	void remove(int index);
 
 signals:
-	void countChanged(int);
+	void countChanged();
+	void notificationInserted(const Victron::VenusOS::BaseNotification* notification);
+	void notificationRemoved(const Victron::VenusOS::BaseNotification* notification);
+	void notificationUpdated(const Victron::VenusOS::BaseNotification* notification);
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -118,6 +61,16 @@ protected:
 	QVector<QPointer<BaseNotification> > m_data;
 
 private:
+	void roleChangedHandler(BaseNotification *notification, NotificationRoles role);
+	void notificationIdChangedHandler();
+	void acknowledgedChangedHandler();
+	void activeChangedHandler();
+	void typeChangedHandler();
+	void dateTimeChangedHandler();
+	void descriptionChangedHandler();
+	void deviceNameChangedHandler();
+	void valueChangedHandler();
+
 	QHash<int, QByteArray> m_roleNames;
 };
 
