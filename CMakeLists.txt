@@ -223,6 +223,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
+    components/NotificationCounter.qml
     components/NotificationDelegate.qml
     components/ObjectAcConnection.qml
     components/ObjectModelMonitor.qml
@@ -698,8 +699,12 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/enums.cpp
     src/fastutils.h
     src/fastutils.cpp
+    src/basenotification.h
+    src/basenotification.cpp
     src/notificationsmodel.h
     src/notificationsmodel.cpp
+    src/notificationsortfilterproxymodel.h
+    src/notificationsortfilterproxymodel.cpp
     src/clocktime.h
     src/clocktime.cpp
     src/cpuinfo.h
@@ -1140,6 +1145,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/inverter_charger.svg
         images/levels.svg
         images/notifications.svg
+        images/notifications_subtract.svg
         images/overview.svg
         images/rain.svg
         images/scatteredcloud.svg

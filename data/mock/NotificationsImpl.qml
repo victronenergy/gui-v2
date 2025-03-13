@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -43,21 +43,19 @@ QtObject {
 		}
 	]
 
-	property int dummyNotificationNumber
-
 	property Connections _mockConn: Connections {
 		target: Global.mockDataSimulator
 		function onAddDummyNotification(isAlarm) {
 			const notifType = isAlarm
-					? VenusOS.Notification_Alarm
-					: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
+							? VenusOS.Notification_Alarm
+							: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
 			const props = {
 				acknowledged: 0,
 				active: 1,
 				type: notifType,
 				dateTime: new Date(),
 				deviceName: "Mock data simulator",
-				description: "Notification no. %1".arg(dummyNotificationNumber++),
+				description: "NotificationId [%1]".arg(nextNotificationId),
 				value: Math.round(Math.random() * 100) + "%"
 			}
 			addNotification(props)
@@ -66,27 +64,20 @@ QtObject {
 
 	property Component notifComponent: Component {
 		Notification {
-			onActiveChanged: root._updateAlarmsAndAlerts()
+			id: notification
+			onActiveChanged: root.updateNotifications()
+			onAcknowledgedChanged: root.updateNotifications()
 
 			property Timer inactiveTimer: Timer {
-				running: Global.mockDataSimulator.timersActive
 				interval: 10000 * Math.random()
-				onTriggered: parent._active.setValue(0)
+				onTriggered: notification.updateActive(false)
 			}
 		}
 	}
 
-	property var notifications: []
-
+	property list<Notification> notifications: []
 	readonly property int maxNotificationCount: 20
-
-	property VeQuickItem _alarm: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/Alarm"
-	}
-
-	property VeQuickItem _alert: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/Alert"
-	}
+	property int nextNotificationId: 0
 
 	property VeQuickItem _numberOfNotifications: VeQuickItem {
 		uid: Global.notifications.serviceUid + "/NumberOfNotifications"
@@ -96,92 +87,132 @@ QtObject {
 		uid: Global.notifications.serviceUid + "/NumberOfActiveNotifications"
 	}
 
+	property VeQuickItem _numberOfActiveAlarms: VeQuickItem {
+		// including both acknowledged or unAcknowledged alarms
+		uid: Global.notifications.serviceUid + "/NumberOfActiveAlarms"
+	}
+
+	property VeQuickItem _numberOfActiveWarnings: VeQuickItem {
+		// including both acknowledged or unAcknowledged warnings
+		uid: Global.notifications.serviceUid + "/NumberOfActiveWarnings"
+	}
+
+	property VeQuickItem _numberOfActiveInformations: VeQuickItem {
+		// including both acknowledged or unAcknowledged informations
+		uid: Global.notifications.serviceUid + "/NumberOfActiveInformations"
+	}
+
+	property VeQuickItem _numberOfUnAcknowledgedAlarms: VeQuickItem {
+		// including both active or inactive alarms
+		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedAlarms"
+	}
+
+	property VeQuickItem _numberOfUnAcknowledgedWarnings: VeQuickItem {
+		// including both active or inactive warnings
+		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedWarnings"
+	}
+
+	property VeQuickItem _numberOfUnAcknowledgedInformations: VeQuickItem {
+		// including both active or inactive informations
+		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedInformations"
+	}
+
 	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
 		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
 		onValueChanged: {
-			for (let i = 0 ; i < notifications.length; ++i) {
-				const notif = notifications[i]
-				notif.setAcknowledged(true)
+			if (!isNaN(value) && value === 1) {
+				for (let i = 0 ; i < notifications.length; ++i) {
+					const notif = notifications[i]
+					notif.updateAcknowledged(true)
+				}
+				_acknowledgeAll.setValue(0)
 			}
-			_acknowledgeAll.setValue(0)
-			_alert.setValue(0)
-			_alarm.setValue(0)
 		}
 	}
 
 	function addNotification(params) {
-		const numberOfNotifications = notifications.length
-		let notificationId = numberOfNotifications
 
-		if (numberOfNotifications >= maxNotificationCount) {
-			notificationId = removeLastNotification()
+		let notif = null
+
+		if (notifications.length < maxNotificationCount) {
+			// Add a new Notification object
+			notif = notifComponent.createObject(root, { notificationId: nextNotificationId })
+			notifications.push(notif)
+		} else {
+			// Get an existing Notification from the notifications list to recycle.
+			// The recycled notification is going to re-use the same notificationId
+			notif = notifications[nextNotificationId]
 		}
 
-		let notif = notifComponent.createObject(root, { notificationId: notificationId })
+		// Update the VeQuickItem's values of the new or recycled Notification
+		// which updates the BaseNotification properties.
 		for (const p in params) {
 			const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
 			notif["_" + p].setValue(value)
 		}
-		if (params['type'] === VenusOS.Notification_Alarm) {
-			_alarm.setValue(1)
+
+		// Whether we created a new Notification or recycled an existing one,
+		// we increment (or wrap) the nextNotificationId.
+		nextNotificationId = ((nextNotificationId + 1) === maxNotificationCount) ? 0 : (nextNotificationId + 1)
+
+		// (re)start the mock notification inactive timer since notifications can be recycled
+		if (Global.mockDataSimulator.timersActive) {
+			notif.inactiveTimer.restart()
 		}
-		if (!!params['active']) {
-			_numberOfActiveNotifications.setValue((_numberOfActiveNotifications.value || 0) + 1)
-			_alert.setValue(1)
-		}
-		notifications.push(notif)
-		_numberOfNotifications.setValue(notifications.length)
+
+		updateNotifications()
 	}
 
-	function removeLastNotification() {
-		const notif = notifications[notifications.length - 1]
-		const notificationId = notif.notificationId
-		if (notif.active) {
-			_numberOfActiveNotifications.setValue(Math.max(0, _numberOfActiveNotifications.value - 1))
-		}
-		updateAlarm()
-		updateAlert()
-		notifications.splice(notifications.length - 1, 1)
-		return notificationId
-	}
+	function updateNotifications() {
 
-	function _updateAlarmsAndAlerts() {
-		updateAlarm()
-		updateAlert()
-	}
+		// Note: since the notifications array is capped at 20,
+		// these counters will never exceed 20.
 
-	function updateAlarm() {
 		let activeCount = 0
-		let hasAlarm = false
+		let activeAlarmCount = 0
+		let activeWarningCount = 0
+		let activeInformationCount = 0
+		let unAcknowledgedAlarmCount = 0
+		let unAcknowledgedWarningCount = 0
+		let unAcknowledgedInformationCount = 0
+
 		for (let i = 0 ; i < notifications.length; ++i) {
 			const notif = notifications[i]
 			if (notif.active) {
 				activeCount++
-				if (!hasAlarm && notif.type === VenusOS.Notification_Alarm && !notif.acknowledged) {
-					hasAlarm = true
+
+				if (notif.type === VenusOS.Notification_Alarm) {
+					activeAlarmCount++
+				} else if (notif.type === VenusOS.Notification_Warning) {
+					activeWarningCount++
+				} else if (notif.type === VenusOS.Notification_Info) {
+					activeInformationCount++
+				}
+			}
+			if (!notif.acknowledged) {
+				if (notif.type === VenusOS.Notification_Alarm) {
+					unAcknowledgedAlarmCount++
+				} else if (notif.type === VenusOS.Notification_Warning) {
+					unAcknowledgedWarningCount++
+				} else if (notif.type === VenusOS.Notification_Info) {
+					unAcknowledgedInformationCount++
 				}
 			}
 		}
 		_numberOfActiveNotifications.setValue(activeCount)
-		_alarm.setValue(hasAlarm)
-	}
-
-	function updateAlert() {
-		for (let i = 0 ; i < notifications.length; ++i) {
-			const notif = notifications[i]
-			if (!notif.acknowledged) {
-				_alert.setValue(1)
-				return
-			}
-		}
-		_alert.setValue(0)
+		_numberOfNotifications.setValue(notifications.length)
+		_numberOfActiveAlarms.setValue(activeAlarmCount)
+		_numberOfUnAcknowledgedAlarms.setValue(unAcknowledgedAlarmCount)
+		_numberOfActiveWarnings.setValue(activeWarningCount)
+		_numberOfUnAcknowledgedWarnings.setValue(unAcknowledgedWarningCount)
+		_numberOfActiveInformations.setValue(activeInformationCount)
+		_numberOfUnAcknowledgedInformations.setValue(unAcknowledgedInformationCount)
 	}
 
 	function populate() {
 		for (let i = 0; i < dummyNotifications.length; ++i) {
 			addNotification(dummyNotifications[i])
 		}
-		dummyNotificationNumber = notifications.length + 1
 	}
 
 	Component.onCompleted: {

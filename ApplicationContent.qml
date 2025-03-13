@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -14,13 +14,6 @@ Item {
 	property alias mainView: mainView
 
 	property var _inputComponent
-
-	readonly property bool _goToNotifications: Global.allPagesLoaded && Global.notifications.alarm
-	on_GoToNotificationsChanged: {
-		if (_goToNotifications) {
-			notificationLayer.popAndGoToNotifications()
-		}
-	}
 
 	PageManager {
 		id: pageManager
