@@ -298,7 +298,7 @@ Rectangle {
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			text: "[" + BackendConnection.heartbeatState + "] "
-			    + (BackendConnection.heartbeatState === BackendConnection.HeartbeatMissing
+				+ (BackendConnection.heartbeatState === BackendConnection.HeartbeatMissing
 				  //% "Device may have lost connectivity to VRM"
 				? qsTrId("splash_view_heartbeat_missing")
 				  //% "Device is not connected to VRM"
