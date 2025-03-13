@@ -12,15 +12,25 @@ Page {
 
 	property string bindPrefix
 
-	title: VenusOS.digitalInput_typeToText(inputType.value)
+	title: device.customName || VenusOS.digitalInput_typeToText(inputType.value)
 
 	VeQuickItem {
 		id: inputType
 		uid: root.bindPrefix + "/Type"
 	}
 
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
+			ListText {
+				text: CommonWords.type
+				secondaryText: VenusOS.digitalInput_typeToText(inputType.value)
+			}
+
 			ListText {
 				text: CommonWords.state
 				dataItem.uid: root.bindPrefix + "/State"
