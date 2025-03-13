@@ -122,7 +122,7 @@ Page {
 					//% "Self consumption, accept charge"
 					case 4: return qsTrId("settings_dess_rs_selfconsume_accept_charge")
 					//% "Idle, scheduled feedin"
-					case 5: return qsTrId("settings_dess_rs_idle_schduled_feedin")
+					case 5: return qsTrId("settings_dess_rs_idle_scheduled_feedin")
 					//% "Scheduled discharge"
 					case 6: return qsTrId("settings_dess_rs_scheduled_discharge")
 					//% "Self consumption, accept discharge"
@@ -136,9 +136,9 @@ Page {
 					//% "Scheduled charge, feedin"
 					case 11: return qsTrId("settings_dess_rs_scheduled_charge_feedin")
 					//% "Scheduled charge, no grid""
-					case 12: return qsTrId("settings_dess_rs_scheuled_charge_no_grid")
-					//% "Scheduled minimunm discharge"
-					case 13: return qsTrId("settings_dess_rs_schduled_minimum_discharge")
+					case 12: return qsTrId("settings_dess_rs_scheduled_charge_no_grid")
+					//% "Scheduled minimum discharge"
+					case 13: return qsTrId("settings_dess_rs_scheduled_minimum_discharge")
 					//% "Selfconsume, no grid""
 					case 14: return qsTrId("settings_dess_rs_selfconsume_no_grid")
 					//% "Idle, no opportunity"
