@@ -28,14 +28,4 @@ FocusScope {
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_screen_height
 	focus: isCurrentPage
-
-	KeyNavigationHighlight {
-		id: keyNavigationHighlight
-		anchors {
-			fill: parent
-			leftMargin: Theme.geometry_page_content_horizontalMargin
-			rightMargin: Theme.geometry_page_content_horizontalMargin
-		}
-		active: root === Global.main.activeFocusItem
-	}
 }

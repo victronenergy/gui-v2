@@ -121,6 +121,12 @@ FocusScope {
 
 		Loader {
 			id: swipeViewLoader
+
+			// True if the SwipeView is allowed to use key navigation. If false, the entire view is
+			// highlighted and key events are blocked (to allows for quick arrow key navigation from
+			// the status bar to the nav bar and vice-versa) until 'Space' is pressed.
+			property bool viewKeyNavigationEnabled
+
 			anchors {
 				top: parent.top
 				topMargin: statusBar.height
@@ -145,7 +151,15 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
+			onActiveFocusChanged: {
+				// Re-enable the focus blocker when focus moves to the status or nav bar.
+				if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
+					viewKeyNavigationEnabled = false
+				}
+			}
+
 			KeyNavigation.down: navBar
+			Keys.onSpacePressed: viewKeyNavigationEnabled = true
 
 			Component {
 				id: swipeViewComponent
@@ -153,10 +167,10 @@ FocusScope {
 					id: _swipeView
 
 					property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
-
 					onReadyChanged: if (ready) ready = true // remove binding
+
 					anchors.fill: parent
-					focus: true
+					focus: swipeViewLoader.viewKeyNavigationEnabled
 					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 					contentChildren: swipePageModel.children
 				}
@@ -165,6 +179,16 @@ FocusScope {
 			SwipePageModel {
 				id: swipePageModel
 				view: swipeView
+			}
+
+			KeyNavigationHighlight {
+				anchors{
+					fill: parent
+					leftMargin: Theme.geometry_page_content_horizontalMargin
+					rightMargin: Theme.geometry_page_content_horizontalMargin
+				}
+				active: swipeViewLoader.activeFocus && !swipeViewLoader.viewKeyNavigationEnabled
+					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			}
 		}
 
@@ -179,10 +203,17 @@ FocusScope {
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
 			focus: true
 
-			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+			onCurrentIndexChanged: {
+				if (swipeView) {
+					swipeView.setCurrentIndex(currentIndex)
+					focus = true // Move focus back to navbar if the SwipeView page changes.
+				}
+			}
 
 			Component.onCompleted: pageManager.navBar = navBar
-			KeyNavigation.up: swipeViewLoader
+
+			// Only move focus to SwipeView if its current page allows key navigation.
+			KeyNavigation.up: swipeView?.currentItem?.activeFocusOnTab ? swipeViewLoader : statusBar
 		}
 	}
 
