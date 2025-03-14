@@ -15,6 +15,7 @@ SwipeViewPage {
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
+	hasFocusableChildren: true
 	//% "Levels"
 	navButtonText: qsTrId("nav_levels")
 	navButtonIcon: "qrc:/images/levels.svg"

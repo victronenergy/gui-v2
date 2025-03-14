@@ -14,6 +14,7 @@ Page {
 	required property url navButtonIcon
 	required property string url
 	required property SwipeView view
+	property bool hasFocusableChildren
 
 	// Allow animations if this is the current page, or when dragging between pages
 	animationEnabled: defaultAnimationEnabled && visible
@@ -28,4 +29,5 @@ Page {
 			 ((view && view.moving && Global.mainView.swipeView)
 			 ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
 			 : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
+
 }

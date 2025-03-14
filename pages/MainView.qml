@@ -120,6 +120,9 @@ FocusScope {
 
 		Loader {
 			id: swipeViewLoader
+
+			readonly property bool hasFocusableChildren: item?.currentItem?.hasFocusableChildren ?? false
+
 			anchors {
 				top: parent.top
 				topMargin: statusBar.height
@@ -164,6 +167,36 @@ FocusScope {
 			}
 		}
 
+		// This item places a highlight over the entire swipe view and blocks input to the swipe
+		// view. This is used if the current SwipeViewPage has focusable children, to allow quick
+		// key navigation from the status bar to the nav bar and vice-versa, without needing to
+		// traverse through the current page's focusable children (e.g. the long list of settings
+		// items on the Settings page). If 'Space' is pressed while this input blocker is active,
+		// the blocker is deactivated, and re-activated whenever the status or nav bar are focused.
+		Item {
+			id: swipeViewFocusBlocker
+
+			property bool canActivate: true
+
+			anchors {
+				fill: parent
+				leftMargin: Theme.geometry_page_content_horizontalMargin
+				rightMargin: Theme.geometry_page_content_horizontalMargin
+			}
+
+			focus: canActivate && swipeViewLoader.hasFocusableChildren && !navBar.focus
+					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			Keys.onSpacePressed: {
+				canActivate = false
+				swipeViewLoader.focus = true
+			}
+
+			KeyNavigationHighlight {
+				anchors.fill: parent
+				active: parent.activeFocus
+			}
+		}
+
 		NavBar {
 			id: navBar
 
@@ -175,10 +208,16 @@ FocusScope {
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
 			focus: true
 
+			onActiveFocusChanged: {
+				if (activeFocus) {
+					swipeViewFocusBlocker.canActivate = true
+				}
+			}
+
 			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
 			Component.onCompleted: pageManager.navBar = navBar
-			KeyNavigation.up: swipeViewLoader
+			KeyNavigation.up: swipeViewLoader.hasFocusableChildren ? swipeViewFocusBlocker : statusBar
 		}
 	}
 
@@ -451,6 +490,12 @@ FocusScope {
 
 		onPopToPage: function(toPage) {
 			pageManager.popPage(toPage)
+		}
+
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				swipeViewFocusBlocker.canActivate = true
+			}
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
