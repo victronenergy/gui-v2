@@ -57,6 +57,8 @@ public:
 
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
+	Q_INVOKABLE QList<qreal> calculateLoadGraphYValues(const QList<qreal> &data, int dataLen, qreal height) const;
+
 	QString applicationVersion() const;
 
 Q_SIGNALS:

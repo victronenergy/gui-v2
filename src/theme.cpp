@@ -60,6 +60,7 @@ void Theme::setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme)
 		Q_EMIT colorSchemeChanged_parameterless(); // work around moc limitation.
 	}
 }
+
 Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const
 {
 	if (valueType == Victron::VenusOS::Enums::Gauges_ValueType_RisingPercentage) {
@@ -78,6 +79,17 @@ Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron:
 bool Theme::objectHasQObjectParent(QObject *obj) const
 {
 	return obj && obj->parent();
+}
+
+// this properly belongs in a utils class, but there is no cpp utils currently.
+QList<qreal> Theme::calculateLoadGraphYValues(const QList<qreal> &data, int dataLen, qreal height) const
+{
+	QList<qreal> ret;
+	ret.reserve(dataLen);
+	for (int i = 0; i < dataLen; ++i) {
+		ret.append((1.0 - (data.count() <= i ? 0.0 : data[i])) * height);
+	}
+	return ret;
 }
 
 QString Theme::applicationVersion() const
