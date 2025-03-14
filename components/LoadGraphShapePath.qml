@@ -24,12 +24,15 @@ Shape {
 	property list<real> yValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	onModelChanged: yValues = FastUtils.calculateLoadGraphYValues(model, 12, height)
 
-	smooth: true
+	smooth: !Global.isGxDevice
 
 	// Antialiasing without requiring multisample framebuffers.
+	// On GX devices we disable this supersample antialiasing for performance reasons,
+	// but we still require rendering the graph to a texture to avoid opacity/overdraw issues
+	// related to the fade-out gradients in LoadGraph.qml.
 	layer.enabled: true
-	layer.smooth: true
-	layer.textureSize: Qt.size(root.width*2, root.height*2)
+	layer.smooth: !Global.isGxDevice
+	layer.textureSize: !Global.isGxDevice ? Qt.size(root.width*2, root.height*2) : Qt.size(root.width, root.height)
 
 	ShapePath {
 		id: shapePath
