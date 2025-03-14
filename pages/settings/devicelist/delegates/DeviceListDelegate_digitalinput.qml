@@ -9,7 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	text: VenusOS.digitalInput_typeToText(type.value)
+	text: root.device.customName || VenusOS.digitalInput_typeToText(type.value)
 	secondaryText: VenusOS.digitalInput_stateToText(state.value)
 
 	onClicked: {
