@@ -68,9 +68,14 @@ Page {
 			SettingsListHeader {
 				//% "Physical I/O"
 				text: qsTrId("pagesettingsintegrations_physical_io")
+				preferredVisible: tankSensorsItem.preferredVisible
+					|| relaysItem.preferredVisible
+					|| digitalIoItem.preferredVisible
 			}
 
 			ListNavigation {
+				id: tankSensorsItem
+
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
 				preferredVisible: analogModel.rowCount > 0
@@ -103,6 +108,8 @@ Page {
 			}
 
 			ListNavigation {
+				id: relaysItem
+
 				//% "Relays"
 				text: qsTrId("pagesettingsintegrations_relays")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": text})
@@ -115,6 +122,8 @@ Page {
 			}
 
 			ListNavigation {
+				id: digitalIoItem
+
 				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
 				preferredVisible: digitalModel.rowCount > 0
