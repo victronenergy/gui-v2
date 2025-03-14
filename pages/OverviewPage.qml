@@ -390,6 +390,7 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
+	activeFocusOnTab: true
 
 	Component {
 		id: acInputComponent
