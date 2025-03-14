@@ -16,7 +16,7 @@ ListNavigation {
 	property alias secondaryText: secondary.text
 
 	height: Theme.geometry_settingsListNavigation_height
-	onClicked: Global.pageManager.pushPage(root.pageSource, {"title": root.text })
+	onClicked: Global.pageManager.pushPage(root.pageSource, {"title": Qt.binding(function() { return root.text }) })
 
 	CP.ColorImage {
 		id: icon
