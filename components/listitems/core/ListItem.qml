@@ -86,7 +86,7 @@ Item {
 	signal clicked()
 
 	visible: effectiveVisible
-	implicitHeight: effectiveVisible ? contentLayout.height : 0
+	implicitHeight: effectiveVisible ? contentLayout.implicitHeight : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
@@ -150,6 +150,7 @@ Item {
 		id: contentLayout
 
 		width: parent.width
+		anchors.verticalCenter: parent.verticalCenter
 		columns: 2
 		columnSpacing: Theme.geometry_listItem_content_spacing
 		rowSpacing: 0

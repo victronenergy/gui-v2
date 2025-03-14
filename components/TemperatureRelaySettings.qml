@@ -56,11 +56,8 @@ SettingsColumn {
 			{ display: qsTrId("settings_relay2"), value: 1, readOnly: !relay1Item.valid },
 		]
 
-		PrimaryListLabel {
-			//% "Warning: The above selected relay is not configured for temperature, this condition will be ignored."
-			text: qsTrId("settings_relay_invalid_temp_config_warning")
-			preferredVisible: root.hasInvalidRelayTempConfig
-		}
+		//% "Warning: The above selected relay is not configured for temperature, this condition will be ignored."
+		caption: root.hasInvalidRelayTempConfig ? qsTrId("settings_relay_invalid_temp_config_warning") : ""
 	}
 
 	ListSpinBox {
