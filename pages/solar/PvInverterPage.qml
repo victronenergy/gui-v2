@@ -78,6 +78,15 @@ Page {
 
 			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.pvInverter.serviceUid + "/Position"
+				preferredVisible: (!positionIsAdjustable.valid || positionIsAdjustable.value === 1) ? dataItem.valid : false
+
+				// Datapoint will exist in VM-3P75CT energy meters, but usually will not exist.
+				// In cases where the data point does not exist, assume position IS adjustable.
+				// Value will be zero if the position setting is not adjustable via gui-v2.
+				VeQuickItem {
+					id: positionIsAdjustable
+					uid: root.pvInverter.serviceUid + "/PositionIsAdjustable"
+				}
 			}
 
 			ListQuantity {
