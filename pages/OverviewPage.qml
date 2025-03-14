@@ -41,7 +41,7 @@ SwipeViewPage {
 			+ (Global.acInputs.input2?.operational ? 1 : 0)
 			+ (Global.system.showInputLoads ? 1 : 0)
 			+ (Global.system.hasAcOutSystem ? 1 : 0)
-			+ (Global.allDevicesModel.combinedDcLoadDevices.count === 0 || isNaN(Global.system.dc.power) ? 0 : 1)
+			+ (Global.allDevicesModel.combinedDcLoadDevices.count > 0 || !isNaN(Global.system.dc.power) ? 1 : 0)
 			+ (Global.solarDevices.model.count === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 			+ Global.evChargers.acInputPositionCount
