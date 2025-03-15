@@ -10,12 +10,22 @@ ObjectModel {
 	readonly property bool tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
 	readonly property bool environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
 
-	property bool _completed: false
+	readonly property Component boatPage: Component {
+		BoatPage {
+			view: root.view
+		}
+	}
+	readonly property VeQuickItem showBoatPage: VeQuickItem {
+		uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+	}
+
 	readonly property Component levelsPage: Component {
 		LevelsPage {
 			view: root.view
 		}
 	}
+
+	property bool _completed: false
 
 	BriefPage {
 		view: root.view
@@ -48,6 +58,11 @@ ObjectModel {
 		if (showLevelsPage) {
 			insert(2, levelsPage.createObject(parent))
 		}
+
+		// TODO - uncomment this line once ".../Settings/Gui/ElectricPropulsionUI/Enabled" has platform support.//	if (showBoatPage.value) {
+			insert(0, boatPage.createObject(parent))
+		// TODO - uncomment this line.//	}
+
 		_completed = true
 	}
 
