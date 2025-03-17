@@ -56,11 +56,11 @@ Page {
 				spacing: Theme.geometry_controlCardsPage_spacing
 
 				Repeater {
-					model: Global.evChargers.model
+					model: evChargerModel
 
 					EVCSCard {
 						width: root.cardWidth
-						evCharger: model.device
+						serviceUid: model.device.serviceUid
 					}
 				}
 			}
@@ -124,6 +124,35 @@ Page {
 				}
 
 				ManualRelayModel { id: manualRelays }
+			}
+		}
+	}
+
+	// A model of evcharger services that represent controllable EV chargers, i.e. those with a
+	// valid /Mode value. Global.evChargers.model cannot be used in the control cards, as it
+	// includes services without a /Mode, such as Energy Meters configured as EV chargers.
+	ServiceDeviceModel {
+		id: evChargerModel
+
+		serviceType: "evcharger"
+		modelId: "evcharger"
+		deviceDelegate: Device {
+			id: device
+
+			required property string uid
+			readonly property bool isRealCharger: valid && _chargerMode.valid
+
+			readonly property VeQuickItem _chargerMode: VeQuickItem {
+				uid: device.serviceUid + "/Mode"
+			}
+
+			serviceUid: uid
+			onIsRealChargerChanged: {
+				if (isRealCharger) {
+					evChargerModel.addDevice(device)
+				} else {
+					evChargerModel.removeDevice(device.serviceUid)
+				}
 			}
 		}
 	}
