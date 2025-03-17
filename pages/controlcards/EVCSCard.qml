@@ -10,9 +10,7 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	// can only assume this is a Device because there could be Energy Meters in the Global.evChargers.model
-	// as well as EvCharger
-	property Device evCharger
+	property string serviceUid
 
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
@@ -21,15 +19,22 @@ ControlCard {
 
 	//: %1 = the EVCS name
 	//% "EVCS (%1)"
-	title.text: qsTrId("controlcard_evcs_title").arg(evCharger.name)
-	status.text: Global.evChargers.chargerStatusToText(evCharger.status)
+	title.text: qsTrId("controlcard_evcs_title").arg(device.name)
+	status.text: Global.evChargers.chargerStatusToText(statusItem.value)
 
-	// do not show this card if not an EvCharger
-	visible: modeItem.valid
+	Device {
+		id: device
+		serviceUid: root.serviceUid
+	}
+
+	VeQuickItem {
+		id: statusItem
+		uid: root.serviceUid + "/Status"
+	}
 
 	VeQuickItem {
 		id: modeItem
-		uid: root.evCharger.serviceUid + "/Mode"
+		uid: root.serviceUid + "/Mode"
 	}
 
 	Column {
@@ -60,11 +65,20 @@ ControlCard {
 			flat: true
 			suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 			from: 0
-			to: root.evCharger.maxCurrent
 			stepSize: 1
-			dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
+			dataItem.uid: root.serviceUid + "/SetCurrent"
 			preferredVisible: dataItem.valid
 			interactive: dataItem.valid && modeItem.value === VenusOS.Evcs_Mode_Manual
+
+			VeQuickItem {
+				id: maxCurrent
+				uid: root.serviceUid + "/MaxCurrent"
+				onValueChanged: {
+					if (valid) {
+						chargeCurrentSpinBox.to = value
+					}
+				}
+			}
 		}
 
 		FlatListItemSeparator {
@@ -74,7 +88,7 @@ ControlCard {
 		ListSwitch {
 			text: CommonWords.charging
 			flat: true
-			dataItem.uid: root.evCharger.serviceUid + "/StartStop"
+			dataItem.uid: root.serviceUid + "/StartStop"
 			preferredVisible: dataItem.valid
 		}
 	}
