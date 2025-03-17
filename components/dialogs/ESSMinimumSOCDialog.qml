@@ -43,6 +43,8 @@ ModalDialog {
 				value: root.minimumStateOfCharge
 				from: 0
 				to: 100
+				stepSize: 1
+				focus: true
 				onMoved: root.minimumStateOfCharge = value
 			}
 

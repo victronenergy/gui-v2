@@ -75,6 +75,7 @@ ModalDialog {
 				to: Math.min(Global.int32Max, root.to * root._multiplier())
 				stepSize: root.stepSize * root._multiplier()
 				suffix: root.suffix
+				focus: true
 
 				onValueChanged: {
 					if (_initialized) {
@@ -88,6 +89,8 @@ ModalDialog {
 					spinBox.value = Math.round(root.value * root._multiplier())
 					_initialized = true
 				}
+
+				KeyNavigation.down: presetsRow
 			}
 
 			SegmentedButtonRow {

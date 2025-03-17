@@ -16,11 +16,18 @@ ModalDialog {
 
 	//% "ESS mode"
 	title: qsTrId("controlcard_inverter_charger_ess_mode")
-	contentItem: Column {
+	contentItem: SettingsColumn {
+		anchors {
+			top: parent.top
+			left: parent.left
+			right: parent.right
+			margins: Theme.geometry_modalDialog_content_horizontalMargin
+		}
+
 		Repeater {
 			id: repeater
 			model: Global.ess.stateModel
-			delegate: Column {
+			delegate: SettingsColumn {
 				width: parent.width
 
 				ListRadioButton {
@@ -30,7 +37,10 @@ ModalDialog {
 					onClicked: root.essMode = modelData.value
 				}
 
-				SeparatorBar { visible: model.index !== repeater.count - 1 }
+				SeparatorBar { 
+					width: parent.width
+					visible: model.index !== repeater.count - 1 
+				}
 			}
 		}
 	}
