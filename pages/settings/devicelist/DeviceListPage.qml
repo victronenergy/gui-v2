@@ -32,7 +32,7 @@ Page {
 						console.warn("DeviceList: cannot load delegate, cannot read service type from serviceUid:", device.serviceUid)
 						return
 					}
-					if (!source || !_usingCustomDelegate) {
+					if (source.toString().length === 0 || !_usingCustomDelegate) {
 						setSource("delegates/DeviceListDelegate_%1.qml".arg(serviceType), {
 							device: Qt.binding(function() { return delegateLoader.device }),
 							sourceModel: Qt.binding(function() { return delegateLoader.sourceModel }),
@@ -40,7 +40,7 @@ Page {
 						_usingCustomDelegate = true
 					}
 				} else {
-					if (!source || _usingCustomDelegate) {
+					if (source.toString().length === 0 || _usingCustomDelegate) {
 						setSource("delegates/DisconnectedDeviceListDelegate.qml", {
 							cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
 						})
