@@ -54,6 +54,10 @@ Rectangle {
 			: 0
 	}
 
+	function acceptsNavigationFocus() {
+		return enabled && size > VenusOS.OverviewWidget_Size_Zero
+	}
+
 	y: compactY
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
@@ -85,6 +89,8 @@ Rectangle {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
+	Keys.onSpacePressed: clicked()
 
 	Item {
 		id: header
@@ -125,5 +131,10 @@ Rectangle {
 		radius: root.radius
 		anchors.fill: parent
 		onClicked: root.clicked()
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }
