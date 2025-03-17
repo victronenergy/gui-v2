@@ -671,6 +671,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/PageVeBusError11View.qml
     pages/vebusdevice/PageVeBusKwhCounters.qml
     pages/vebusdevice/PageVeBusSerialNumbers.qml
+    pages/vebusdevice/PageVeBusBackupRestore.qml
     pages/vebusdevice/PVCFListQuantityGroup.qml
     pages/vebusdevice/VeBusAcSensorModel.qml
     pages/vebusdevice/PageVeBus.qml
