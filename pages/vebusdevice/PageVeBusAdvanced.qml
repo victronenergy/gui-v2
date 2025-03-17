@@ -62,6 +62,12 @@ Page {
 		uid: root.bindPrefix + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
 	}
 
+	VeQuickItem {
+		id: mkConnection
+
+		uid: root.bindPrefix + "/Interfaces/Mk2/Connection"
+	}
+
 	Timer {
 		id: startTimer
 		interval: 250
@@ -263,6 +269,15 @@ Page {
 				]
 			}
 
+			ListNavigation {
+				//% "Backup & Restore"
+				text: qsTrId("backup_and_restore")
+				preferredVisible: mkConnection.valid
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBackupRestore.qml", {
+					"title": text,
+					"serialVebus": mkConnection.value.split("/").pop()
+				})
+			}
 
 			ListNavigation {
 				//% "VE.Bus diagnostics"

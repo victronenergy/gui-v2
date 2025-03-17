@@ -388,6 +388,37 @@ QtObject {
 				_l1Power.setValue(99.9)
 				_l1Frequency.setValue(49.9)
 				_currentLimitIsAdjustable.setValue(1)
+				setMockValue("/Interfaces/Mk2/Connection", "/ttyS2")
+			}
+		}
+	}
+
+	readonly property VeQuickItem _backupRestoreAction: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Action"
+		onValueChanged: {
+			if (valid && value !== VenusOS.VeBusDevice_Backup_Restore_Action_None) {
+				Global.mockDataSimulator.setMockValue(Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Info", 10) // State = "Init"
+				_actionResetTimer.restart()
+			}
+		}
+
+		readonly property Timer _actionResetTimer: Timer {
+			interval: 2000
+			onTriggered: {
+				let successCode = _backupRestoreAction.value
+				switch (_backupRestoreAction.value) {
+				case VenusOS.VeBusDevice_Backup_Restore_Action_Backup:
+					successCode = 1
+					break
+				case VenusOS.VeBusDevice_Backup_Restore_Action_Restore:
+					successCode = 2
+					break
+				case VenusOS.VeBusDevice_Backup_Restore_Action_Delete:
+					successCode = 3
+					break
+				}
+				_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_None)
+				Global.mockDataSimulator.setMockValue(Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Notify", successCode)
 			}
 		}
 	}
