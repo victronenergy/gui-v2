@@ -125,12 +125,12 @@
       <translation>กำลังติดตั้ง %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="271"/>
+      <location filename="../../components/SplashView.qml" line="285"/>
       <source>Unknown error</source>
       <translation>ข้อผิดพลาดที่ไม่รู้จัก</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="112"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="105"/>
       <source>Minimum SOC</source>
       <translation>SOC ขั้นต่ำ</translation>
     </message>
@@ -346,7 +346,7 @@
       <translation>ผลิตภัณฑ์</translation>
     </message>
     <message id="settings_tcpip_name">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="136"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="16"/>
       <source>Name</source>
       <translation>ชื่อ</translation>
     </message>
@@ -471,12 +471,12 @@
       <translation>หยุดเมื่อพลังงานต่ำกว่า</translation>
     </message>
     <message id="settings_system_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="23"/>
       <source>Battery monitor</source>
       <translation>การตรวจสอบแบตเตอรี่</translation>
     </message>
     <message id="settings_system_unavailable_monitor">
-      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="26"/>
       <source>Unavailable monitor, set another</source>
       <translation>การตรวจสอบไม่พร้อมใช้งาน ตั้งค่าอื่น</translation>
     </message>
@@ -2244,7 +2244,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ชื่อระบบ</translation>
     </message>
     <message id="settings_tcpip_auto">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="54"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="103"/>
       <source>Automatic</source>
       <translation>อัตโนมัติ</translation>
     </message>
@@ -2284,7 +2284,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ตรวจสอบการตัดการเชื่อมต่อฝั่ง</translation>
     </message>
     <message id="settings_system_auto_selected">
-      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="48"/>
       <source>Auto-selected</source>
       <translation>เลือกอัตโนมัติ</translation>
     </message>
@@ -2351,89 +2351,89 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_connection_lost">
       <location filename="../../pages/settings/PageSettingsEthernet.qml" line="24"/>
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="33"/>
       <source>Connection lost</source>
       <translation>ขาดการเชื่อมต่อ</translation>
     </message>
     <message id="settings_tcpip_connection_unplugged">
       <location filename="../../pages/settings/PageSettingsEthernet.qml" line="26"/>
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="35"/>
       <source>Unplugged</source>
       <translation>ถอดปลั๊ก</translation>
     </message>
     <message id="settings_tcpip_hidden">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="141"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="83"/>
       <source>[Hidden]</source>
       <translation>[ที่ซ่อนอยู่]</translation>
     </message>
     <message id="settings_tcpip_connect_to_network">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="164"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="44"/>
       <source>Connect to network?</source>
       <translation>เชื่อมต่อกับเครือข่าย?</translation>
     </message>
     <message id="settings_tcpip_connect">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="166"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="46"/>
       <source>Connect</source>
       <translation>เชื่อมต่อ</translation>
     </message>
     <message id="settings_tcpip_forget_network">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="177"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="57"/>
       <source>Forget network?</source>
       <translation>ลืมเครือข่าย?</translation>
     </message>
     <message id="settings_tcpip_forget">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="179"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="59"/>
       <source>Forget</source>
       <translation>ลืม</translation>
     </message>
     <message id="settings_tcpip_forget_confirm">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="191"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="71"/>
       <source>Are you sure that you want to forget this network?</source>
       <translation>คุณแน่ใจหรือว่าต้องการลืมเครือข่ายนี้</translation>
     </message>
     <message id="settings_tcpip_mac_address">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="41"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="91"/>
       <source>MAC address</source>
       <translation>หมายเลขทางกายภาพ</translation>
     </message>
     <message id="settings_tcpip_ip_config">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="50"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="99"/>
       <source>IP configuration</source>
       <translation>การกำหนดค่า IP</translation>
     </message>
     <message id="settings_tcpip_manual">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="56"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="105"/>
       <source>Manual</source>
       <translation type="unfinished">คู่มือ</translation>
     </message>
     <message id="settings_tcpip_off">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="58"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="107"/>
       <source>Off</source>
       <translation type="unfinished">ปิด</translation>
     </message>
     <message id="settings_tcpip_fixed">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="60"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="109"/>
       <source>Fixed</source>
       <translation>แก้ไขแล้ว</translation>
     </message>
     <message id="settings_tcpip_netmask">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="85"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="134"/>
       <source>Netmask</source>
       <translation>เน็ตมาสก์</translation>
     </message>
     <message id="settings_tcpip_gateway">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="93"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="142"/>
       <source>Gateway</source>
       <translation>ประตู</translation>
     </message>
     <message id="settings_tcpip_dns_server">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="101"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="150"/>
       <source>DNS server</source>
       <translation>เซิร์ฟเวอร์ DNS</translation>
     </message>
     <message id="settings_tcpip_link_local">
-      <location filename="../../pages/settings/PageSettingsEthernet.qml" line="111"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="160"/>
       <source>Link-local IP address</source>
       <translation>ที่อยู่ IP ของลิงก์ในเครื่อง</translation>
     </message>
@@ -4200,79 +4200,79 @@ Use unless prohibited by the utility provider.</source>
       <translation>เซ็นเซอร์ไฟฟ้ากระแสสลับ %1 %2</translation>
     </message>
     <message id="vebus_mk3_new_version_available">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="95"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="86"/>
       <source>A new MK3 version is available.
 NOTE: The update might temporarily stop the system.</source>
       <translation>มี MK3 เวอร์ชันใหม่ให้บริการแล้ว
 หมายเหตุ: การอัพเดตอาจทำให้ระบบหยุดชั่วคราว</translation>
     </message>
     <message id="vebus_device_update_the_mk3">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="101"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="92"/>
       <source>Update the MK3</source>
       <translation>อัพเดต MK3</translation>
     </message>
     <message id="vebus_device_press_to_update">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="103"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="94"/>
       <source>Press to update</source>
       <translation>กดเพื่ออัพเดต</translation>
     </message>
     <message id="vebus_device_updating_the_mk3">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="107"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="98"/>
       <source>Updating the MK3, values will reappear after the update is complete</source>
       <translation>การอัปเดต MK3 ค่าต่างๆ จะปรากฏขึ้นอีกครั้งหลังจากการอัปเดตเสร็จสิ้น</translation>
     </message>
     <message id="vebus_device_charging_to_100">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="141"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="126"/>
       <source>Charging the battery to 100%</source>
       <translation type="unfinished">ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
     <message id="vebus_device_charging_the_battery_to_100">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="141"/>
       <source>Charging the battery to 100%</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
     <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="257"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="242"/>
       <source>Advanced</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
     <message id="vebus_device_in_progress">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="143"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="128"/>
       <source>In progress</source>
       <translation>กำลังดำเนินการ</translation>
     </message>
     <message id="vebus_device_press_to_stop">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="150"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="135"/>
       <source>Press to stop</source>
       <translation>กดเพื่อหยุด</translation>
     </message>
     <message id="vebus_device_press_to_start">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="116"/>
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="153"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="138"/>
       <source>Press to start</source>
       <translation>กดเพื่อเริ่ม</translation>
     </message>
     <message id="vebus_device_charge_the_battery_to_100">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="159"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="144"/>
       <source>Charge the battery to 100%</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
     <message id="vebus_device_return_to_normal_operation">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="168"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="153"/>
       <source>The system will return to normal operation, prioritizing renewable energy.
 Do you want to continue?</source>
       <translation>ระบบจะกลับสู่การทำงานปกติโดยให้ความสำคัญกับพลังงานทดแทน
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="vebus_device_use_shore_power">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="189"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="174"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
       <translation>ไฟฟ้าริมฝั่งจะถูกใช้เมื่อมี และตัวเลือก "ลำดับความสำคัญของแสงอาทิตย์และลม" จะถูกละเว้น
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="194"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="179"/>
       <source>Shore power will be used to complete a full battery charge for one time.
 After the charging process is complete, the system will return to normal operation, prioritizing solar and wind energy.
 Do you want to continue?</source>
@@ -4281,12 +4281,12 @@ Do you want to continue?</source>
 คุณต้องการดำเนินการต่อหรือไม่?</translation>
     </message>
     <message id="vebus_device_page_dc_voltage">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="222"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="207"/>
       <source>DC Voltage</source>
       <translation>แรงดันไฟตรง</translation>
     </message>
     <message id="vebus_device_page_dc_current">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="214"/>
       <source>DC Current</source>
       <translation>กระแสตรง</translation>
     </message>
@@ -4301,17 +4301,17 @@ Do you want to continue?</source>
       <translation>ตั้งปลุก</translation>
     </message>
     <message id="vebus_device_bms_message">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="285"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="270"/>
       <source>A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible.</source>
       <translation>VE.Bus BMS จะปิดระบบโดยอัตโนมัติเมื่อจำเป็นเพื่อปกป้องแบตเตอรี่ จึงไม่สามารถควบคุมระบบของตัวควบคุมได้</translation>
     </message>
     <message id="vebus_device_bms_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="291"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="276"/>
       <source>A BMS assistant is installed configured for a VE.Bus BMS, but the VE.Bus BMS is not found!</source>
       <translation>มีการติดตั้งผู้ช่วย BMS ที่ได้รับการกำหนดค่าสำหรับ VE.Bus BMS แต่ไม่พบ VE.Bus BMS!</translation>
     </message>
     <message id="vebus_device_vebus_bms">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="297"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="282"/>
       <source>VE.Bus BMS</source>
       <translation>VE.Bus BMS</translation>
     </message>
@@ -5042,7 +5042,7 @@ Do you want to continue?</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="100"/>
+      <location filename="../../data/AcInputs.qml" line="109"/>
       <source>Not available</source>
       <translation>ไม่ว่าง</translation>
     </message>
@@ -5508,7 +5508,7 @@ Do you want to continue?</source>
       <translation>น้ำดิบ</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="133"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="136"/>
       <source>Setting locked for access level</source>
       <translation>การตั้งค่าถูกล็อคสำหรับระดับการเข้าถึง</translation>
     </message>
@@ -5921,12 +5921,12 @@ Do you want to continue?</source>
       <translation>พลังสูงสุด</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="231"/>
+      <location filename="../../components/SplashView.qml" line="237"/>
       <source>Unable to connect</source>
       <translation>ไม่สามารถเชื่อมต่อ</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="233"/>
+      <location filename="../../components/SplashView.qml" line="239"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>ถูกตัดการเชื่อมต่อ กำลังพยายามเชื่อมต่อใหม่</translation>
     </message>
@@ -5936,62 +5936,62 @@ Do you want to continue?</source>
       <translation>กำลังเชื่อมต่อ</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="236"/>
+      <location filename="../../components/SplashView.qml" line="242"/>
       <source>Connecting</source>
       <translation type="unfinished">กำลังเชื่อมต่อ</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="238"/>
+      <location filename="../../components/SplashView.qml" line="244"/>
       <source>Connected, awaiting broker messages</source>
       <translation>เชื่อมต่อแล้ว กำลังรอข้อความจากนายหน้า</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="240"/>
+      <location filename="../../components/SplashView.qml" line="246"/>
       <source>Connected, receiving broker messages</source>
       <translation>เชื่อมต่อแล้ว กำลังรับข้อความจากนายหน้า</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="242"/>
+      <location filename="../../components/SplashView.qml" line="255"/>
       <source>Connected, loading user interface</source>
       <translation>เชื่อมต่อแล้ว กำลังโหลดส่วนติดต่อผู้ใช้</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="257"/>
+      <location filename="../../components/SplashView.qml" line="271"/>
       <source>Invalid protocol version</source>
       <translation>เวอร์ชันโปรโตคอลไม่ถูกต้อง</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="259"/>
+      <location filename="../../components/SplashView.qml" line="273"/>
       <source>Client ID rejected</source>
       <translation>รหัสลูกค้าถูกปฏิเสธ</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="261"/>
+      <location filename="../../components/SplashView.qml" line="275"/>
       <source>Broker service not available</source>
       <translation>ไม่มีบริการนายหน้า</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="263"/>
+      <location filename="../../components/SplashView.qml" line="277"/>
       <source>Bad username or password</source>
       <translation>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="265"/>
+      <location filename="../../components/SplashView.qml" line="279"/>
       <source>Client not authorized</source>
       <translation>ลูกค้าไม่ได้รับอนุญาต</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="267"/>
+      <location filename="../../components/SplashView.qml" line="281"/>
       <source>Transport connection error</source>
       <translation>ข้อผิดพลาดในการเชื่อมต่อการขนส่ง</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="269"/>
+      <location filename="../../components/SplashView.qml" line="283"/>
       <source>Protocol violation error</source>
       <translation>ข้อผิดพลาดการละเมิดโปรโตคอล</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="273"/>
+      <location filename="../../components/SplashView.qml" line="287"/>
       <source>MQTT protocol level 5 error</source>
       <translation>ข้อผิดพลาดของโปรโตคอล MQTT ระดับ 5</translation>
     </message>
@@ -6087,27 +6087,27 @@ Do you want to continue?</source>
       <translation>ลม</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="107"/>
+      <location filename="../../data/AcInputs.qml" line="116"/>
       <source>Shore</source>
       <translation>ชายฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="133"/>
+      <location filename="../../data/AcInputs.qml" line="142"/>
       <source>Grid current limit</source>
       <translation>ขีด จำกัด ปัจจุบันของกริด</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="136"/>
+      <location filename="../../data/AcInputs.qml" line="145"/>
       <source>Generator current limit</source>
       <translation>ขีด จำกัด กระแสไฟของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="139"/>
+      <location filename="../../data/AcInputs.qml" line="148"/>
       <source>Shore current limit</source>
       <translation>ขีดจำกัดกระแสฝั่ง</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="161"/>
+      <location filename="../../data/AcInputs.qml" line="170"/>
       <source>Stopping</source>
       <translation type="unfinished">หยุด</translation>
     </message>
@@ -6789,7 +6789,7 @@ Do you want to continue?</source>
       <translation>เข้าถึง Node-RED ได้ที่ https://venus.local:1881 และผ่าน VRM</translation>
     </message>
     <message id="settings_system_battery_measurements">
-      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsBatteries.qml" line="65"/>
       <source>Battery measurements</source>
       <oldsource>Battery Measurements</oldsource>
       <translation>การวัดแบตเตอรี่</translation>
@@ -7298,7 +7298,7 @@ See documentation for further information.</oldsource>
       <translation>กระแสส่งออกระบบสูงสุด (ต่อเฟส)</translation>
     </message>
     <message id="settings_tcpip_wired">
-      <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="139"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="19"/>
       <source>Wired</source>
       <translation>แบบมีสาย</translation>
     </message>
@@ -7349,7 +7349,7 @@ See documentation for further information.</oldsource>
       <translation>ตัวติดตาม</translation>
     </message>
     <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="108"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="93"/>
       <source>RS devices</source>
       <translation>อุปกรณ์อาร์เอส</translation>
     </message>
@@ -8026,12 +8026,12 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>รายเดือน</translation>
     </message>
     <message id="acInputs_evcharger">
-      <location filename="../../data/AcInputs.qml" line="39"/>
+      <location filename="../../data/AcInputs.qml" line="48"/>
       <source>EV Charger</source>
       <translation>เครื่องชาร์จ EV</translation>
     </message>
     <message id="acInputs_heat_pump">
-      <location filename="../../data/AcInputs.qml" line="41"/>
+      <location filename="../../data/AcInputs.qml" line="50"/>
       <source>Heat pump</source>
       <translation>ปั๊มความร้อน</translation>
     </message>
@@ -8124,7 +8124,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>ระยะเวลา</translation>
     </message>
     <message id="rssystem_system_alarms">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="83"/>
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="68"/>
       <source>System alarms</source>
       <translation>ระบบแจ้งเตือน</translation>
     </message>
@@ -8443,12 +8443,12 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>หลังจากที่ไม่ได้ใช้งานเป็นเวลา 1 นาที ให้เลือกหน้าปัจจุบันเป็นหน้าเริ่มต้น หากอยู่ในรายการนี้</translation>
     </message>
     <message id="rs_current_limit_not_adjustable">
-      <location filename="../../components/CurrentLimitButton.qml" line="30"/>
+      <location filename="../../components/listitems/ListCurrentLimitButton.qml" line="28"/>
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>ขีดจำกัดปัจจุบันนี้ได้รับการแก้ไขในการกำหนดค่าระบบ ไม่สามารถปรับเปลี่ยนได้</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/InverterChargerModeButton.qml" line="39"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="34"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>โหมดนี้ถูกกำหนดไว้ในการกำหนดค่าระบบแล้ว ไม่สามารถปรับเปลี่ยนได้</translation>
     </message>
@@ -8895,7 +8895,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation type="unfinished">สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
     <message id="page_vebus_charge_battery">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="171"/>
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
       <source>Charge battery</source>
       <translation>ชาร์จแบตเตอรี่</translation>
     </message>
@@ -9158,112 +9158,132 @@ firmware integrity before contacting support</source>
     <message id="page_settings_fronius_inverter_dynamic_power_limiting">
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="65"/>
       <source>Dynamic power limiting</source>
-      <translation/>
+      <translation>การจำกัดพลังงานแบบไดนามิก</translation>
     </message>
     <message id="access_and_security_page_will_reload">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
       <source>Page will automatically reload in 5 seconds</source>
-      <translation/>
+      <translation>หน้าจะโหลดซ้ำอัตโนมัติภายใน 5 วินาที</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
       <location filename="../../components/CommonWords.qml" line="523"/>
       <source>Dynamic power limit</source>
-      <translation/>
+      <translation>ขีดจำกัดพลังงานแบบไดนามิก</translation>
     </message>
     <message id="devicelistpage_genset">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="74"/>
       <source>Genset</source>
-      <translation/>
+      <translation>เครื่องปั่นไฟ</translation>
     </message>
     <message id="generator_condition_prevent_start_value">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="27"/>
       <source>Prevent start until %1 is higher than</source>
       <extracomment>%1 is the name of the tank level sensor</extracomment>
-      <translation/>
+      <translation>ป้องกันการเริ่มต้นจนกว่า %1 จะสูงกว่า</translation>
     </message>
     <message id="page_generator_conditions_tank_service">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="77"/>
       <source>Tank service</source>
-      <translation/>
+      <translation>บริการถังเก็บน้ำ</translation>
     </message>
     <message id="page_generator_conditions_unavailable_tank_service_set_another">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="79"/>
       <source>Unavailable tank service, set another</source>
-      <translation/>
+      <translation>ไม่มีบริการถัง ตั้งใหม่</translation>
     </message>
     <message id="settings_generator_condition_tank_level_enable_warning">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="192"/>
       <source>Trigger warning when the generator is stopped</source>
-      <translation/>
+      <translation>สัญญาณเตือนเมื่อเครื่องกำเนิดไฟฟ้าหยุดทำงาน</translation>
     </message>
     <message id="page_generator_conditions_tank_level">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="159"/>
       <source>Tank level</source>
-      <translation/>
+      <translation>ระดับถัง</translation>
     </message>
     <message id="page_generator_conditions_stop_on_tank_level">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="162"/>
       <source>Stop on tank level</source>
-      <translation/>
+      <translation>หยุดอยู่ที่ระดับถัง</translation>
     </message>
     <message id="settings_brief_page">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>Brief page</source>
-      <translation/>
+      <translation>หน้าสั้นๆ</translation>
     </message>
     <message id="settings_briefview_tank_details">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="50"/>
       <source>Tank details</source>
-      <translation/>
+      <translation>รายละเอียดถัง</translation>
     </message>
     <message id="page_setting_fronius_inverters_add_a_pv_inverter">
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
       <source>Add a PV inverter by using the “Find PV Inverter” function or by entering an IP address manually on the previous page.</source>
-      <translation/>
+      <translation>เพิ่มอินเวอร์เตอร์ PV โดยใช้ฟังก์ชัน “ค้นหาอินเวอร์เตอร์ PV” หรือโดยการป้อนที่อยู่ IP ด้วยตนเองในหน้าก่อนหน้า</translation>
     </message>
     <message id="settings_local_network_security_profile">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="102"/>
       <source>Local network security profile</source>
-      <translation/>
+      <translation>โปรไฟล์ความปลอดภัยเครือข่ายท้องถิ่น</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="46"/>
       <source>Energy meters via RS485</source>
-      <translation/>
+      <translation>มิเตอร์วัดพลังงานผ่าน RS485</translation>
     </message>
     <message id="settings_relay_genset_can_now_be_found">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="41"/>
       <source>The Genset can now be found in the devices list</source>
-      <translation/>
+      <translation>ตอนนี้สามารถพบ Genset ได้ในรายการอุปกรณ์</translation>
     </message>
     <message id="settings_relay_tank_pump_can_now_be_found">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="45"/>
       <source>The Tank Pump can now be found in the devices list</source>
-      <translation/>
+      <translation>ตอนนี้สามารถพบปั๊มถังได้ในรายการอุปกรณ์</translation>
     </message>
     <message id="settings_relay_no_temperature_sensors">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="39"/>
       <source>No temperature sensors have been added yet.</source>
-      <translation/>
+      <translation>ยังไม่มีการเพิ่มเซ็นเซอร์วัดอุณหภูมิ</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
       <location filename="../../pages/SettingsPage.qml" line="74"/>
       <source>Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…</source>
-      <translation/>
+      <translation>รีเลย์, เซ็นเซอร์, ถัง, อินเวอร์เตอร์ PV, Modbus, MQTT…</translation>
     </message>
     <message id="page_generator_stopped_by_tank_level">
       <location filename="../../data/Generators.qml" line="61"/>
       <source>Stopped by tank level</source>
-      <translation/>
+      <translation>หยุดอยู่ที่ระดับถัง</translation>
     </message>
     <message id="settings_briefview_center_details">
       <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="20"/>
       <source>Center details</source>
-      <translation/>
+      <translation>รายละเอียดศูนย์</translation>
     </message>
     <message id="settings_briefview_center_temperature_services">
       <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="34"/>
       <source>Temperature services</source>
+      <translation>การบริการอุณหภูมิ</translation>
+    </message>
+    <message id="splash_view_device_disconnected">
+      <location filename="../../components/SplashView.qml" line="251"/>
+      <source>Connection to the device has been lost, awaiting reconnection</source>
+      <translation/>
+    </message>
+    <message id="splash_view_awaiting_heartbeat">
+      <location filename="../../components/SplashView.qml" line="253"/>
+      <source>Connected to VRM, awaiting device</source>
+      <translation/>
+    </message>
+    <message id="splash_view_heartbeat_missing">
+      <location filename="../../components/SplashView.qml" line="303"/>
+      <source>Device may have lost connectivity to VRM</source>
+      <translation/>
+    </message>
+    <message id="splash_view_heartbeat_inactive">
+      <location filename="../../components/SplashView.qml" line="305"/>
+      <source>Device is not connected to VRM</source>
       <translation/>
     </message>
     <message id="evcs_ac_position">
@@ -9313,17 +9333,17 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">สถานะ</translation>
     </message>
     <message id="inverter_pv">
-      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="57"/>
       <source>PV</source>
       <translation type="unfinished">PV</translation>
     </message>
     <message id="inverter_total_yield">
-      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="77"/>
       <source>Total yield</source>
       <translation type="unfinished">ผลตอบแทนรวม</translation>
     </message>
     <message id="inverter_system_yield">
-      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="85"/>
       <source>System yield</source>
       <translation type="unfinished">ผลตอบแทนของระบบ</translation>
     </message>
