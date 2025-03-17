@@ -324,6 +324,14 @@ public:
 	};
 	Q_ENUM(VeBusDevice_ChargeState)
 
+	enum VeBusDevice_Backup_Restore_Action {
+		VeBusDevice_Backup_Restore_Action_None = 0,
+		VeBusDevice_Backup_Restore_Action_Backup,
+		VeBusDevice_Backup_Restore_Action_Restore,
+		VeBusDevice_Backup_Restore_Action_Delete
+	};
+	Q_ENUM(VeBusDevice_Backup_Restore_Action)
+
 	enum VeBusDevice_Bms_Type { // TODO: this is not documented, it is hard coded in gui-v1. Update when doco becomes available
 		VeBusDevice_Bms_Type_VeBus = 2
 	};

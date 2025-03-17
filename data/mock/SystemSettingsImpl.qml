@@ -123,6 +123,10 @@ QtObject {
 		setMockSettingValue("Gui2/StartPageName", "")
 		setMockSettingValue("Gui2/StartPageTimeout", 0)
 
+		setMockPlatformValue("Vebus/Interface/ttyS2/Action", 0)
+		setMockPlatformValue("Vebus/Interface/ttyS2/AvailableBackups", '["MyBackup-ttyS2.rvsc", "AnotherBackup-ttyS2.rvsc"]')
+		setMockPlatformValue("Vebus/Interface/ttyS2/FirmwareIncompatibleBackups", '["LegacyBackup-ttyS2.rvsc", "AnotherLegacyBackup-ttyS2.rvsc"]')
+
 		// Use mock tanks and batteries
 		setMockSettingValue("Gui2/BriefView/Level/0", "com.victronenergy.battery/1:1")
 		setMockSettingValue("Gui2/BriefView/Level/1", "com.victronenergy.tank/0")
