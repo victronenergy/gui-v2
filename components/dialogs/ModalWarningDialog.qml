@@ -25,6 +25,9 @@ ModalDialog {
 			bottom: parent.footer.top
 		}
 
+		// Set focus so that ModalDialog will receive Enter/Esc key shortcuts
+		focus: true
+
 		CP.IconImage {
 			id: alarmIcon
 			anchors {

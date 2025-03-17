@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias hour: hrSpinbox.value
@@ -32,6 +32,9 @@ Item {
 		textInput.text: Utils.pad(value, 2)
 		//% "hr"
 		secondaryText: qsTrId("timeselector_hr")
+		focus: true
+
+		KeyNavigation.right: minSpinbox
 	}
 
 	Label {

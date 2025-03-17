@@ -45,6 +45,7 @@ GeneratorDialog {
 			bottom: parent.footer.top
 		}
 		spacing: Theme.geometry_modalDialog_content_margins
+		focus: true
 
 		Column {
 			width: parent.width

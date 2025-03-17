@@ -207,6 +207,30 @@ CT.SpinBox {
 		return value
 	}
 
+	Keys.onPressed: (event) => {
+		if (event.key === Qt.Key_Minus) {
+			spinBox.decrease()
+			return
+		} else if (event.key === Qt.Key_Plus) {
+			spinBox.increase()
+			return
+		}
+		event.accepted = false
+	}
+
+
+	KeyNavigationHighlight {
+		anchors {
+			left: root.down.indicator.right
+			leftMargin: root.spacing
+			right: root.up.indicator.left
+			rightMargin: root.spacing
+			top: parent.top
+			bottom: parent.bottom
+		}
+		active: parent.activeFocus
+	}
+
 	Timer {
 		id: pressTimer
 

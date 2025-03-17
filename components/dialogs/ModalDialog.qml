@@ -33,6 +33,36 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
+	property Item _prevContentItem
+
+	function _registerKeys() {
+		if (_prevContentItem) {
+			_prevContentItem.Keys.returnPressed.connect(root._handleAccept)
+			_prevContentItem.Keys.enterPressed.connect(root._handleAccept)
+			_prevContentItem.Keys.escapePressed.connect(root._handleReject)
+		}
+		if (contentItem) {
+			root.contentItem.Keys.returnPressed.connect(root._handleAccept)
+			root.contentItem.Keys.enterPressed.connect(root._handleAccept)
+			root.contentItem.Keys.escapePressed.connect(root._handleReject)
+			_prevContentItem = contentItem
+		}
+	}
+
+	function _handleAccept() {
+		if (!root.canAccept || (!!root.tryAccept && !root.tryAccept())) {
+			return
+		}
+		root.accept()
+	}
+
+	function _handleReject() {
+		if (!!root.tryReject && !root.tryReject()) {
+			return
+		}
+		root.reject()
+	}
+
 	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
 	x: (parent.width - width) / 2
 	y: centeredY
@@ -49,6 +79,7 @@ T.Dialog {
 	horizontalPadding: 0
 	modal: true
 	closePolicy: T.Popup.NoAutoClose
+	focus: true
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
@@ -105,6 +136,7 @@ T.Dialog {
 	footer: Item {
 		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
 		height: visible ? Theme.geometry_modalDialog_footer_height : 0
+
 		SeparatorBar {
 			id: footerTopSeparator
 			anchors {
@@ -131,12 +163,7 @@ T.Dialog {
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			text: root.rejectText
-			onClicked: {
-				if (!!root.tryReject && !root.tryReject()) {
-					return
-				}
-				root.reject()
-			}
+			onClicked: root._handleReject()
 		}
 
 		SeparatorBar {
@@ -165,14 +192,12 @@ T.Dialog {
 			color: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
-			onClicked: {
-				if (!!root.tryAccept && !root.tryAccept()) {
-					return
-				}
-				root.accept()
-			}
+			onClicked: root._handleAccept()
 		}
 	}
+
+	onContentItemChanged: _registerKeys()
+	Component.onCompleted: _registerKeys()
 
 	property QtObject _stateManager: QtObject {
 		id: stateManager

@@ -15,8 +15,7 @@ ModalDialog {
 
 	title: CommonWords.mode
 
-	contentItem: Column {
-
+	contentItem: SettingsColumn {
 		anchors {
 			top: parent.top
 			left: parent.left
@@ -27,7 +26,7 @@ ModalDialog {
 		Repeater {
 			id: repeater
 			model: Global.evChargers.modeOptionModel
-			delegate: Column {
+			delegate: SettingsColumn {
 				width: parent.width
 
 				ListRadioButton {
@@ -37,7 +36,10 @@ ModalDialog {
 					onClicked: root.mode = modelData.value
 				}
 
-				SeparatorBar { visible: model.index !== repeater.count - 1 }
+				SeparatorBar {
+					width: parent.width
+					visible: model.index !== repeater.count - 1
+				}
 			}
 		}
 	}
