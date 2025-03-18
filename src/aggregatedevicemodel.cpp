@@ -65,7 +65,7 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 	}
 
 	const bool wasEmpty = count() == 0;
-	const int prevDisconnectedDeviceCount = m_disconnectedDeviceCount;
+	const int prevDisconnectedDeviceCount = disconnectedDeviceCount();
 
 	beginResetModel();
 	cleanUp();
@@ -91,6 +91,7 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 		connect(model, &BaseDeviceModel::rowsAboutToBeRemoved, this, &AggregateDeviceModel::sourceModelRowsAboutToBeRemoved);
 	}
 	m_sourceModels = models;
+	m_disconnectedDeviceIds.clear();
 
 	endResetModel();
 	emit sourceModelsChanged();
@@ -98,9 +99,21 @@ void AggregateDeviceModel::setSourceModels(const QVariantList &models)
 	if (wasEmpty) {
 		emit countChanged();
 	}
-	m_disconnectedDeviceCount = 0;
-	if (prevDisconnectedDeviceCount != m_disconnectedDeviceCount) {
+	if (prevDisconnectedDeviceCount != disconnectedDeviceCount()) {
 		emit disconnectedDeviceCountChanged();
+	}
+}
+
+bool AggregateDeviceModel::retainDevices() const
+{
+	return m_retainDevices;
+}
+
+void AggregateDeviceModel::setRetainDevices(bool retainDevices)
+{
+	if (m_retainDevices != retainDevices) {
+		m_retainDevices = retainDevices;
+		emit retainDevicesChanged();
 	}
 }
 
@@ -111,7 +124,7 @@ int AggregateDeviceModel::count() const
 
 int AggregateDeviceModel::disconnectedDeviceCount() const
 {
-	return m_disconnectedDeviceCount;
+	return m_disconnectedDeviceIds.count();
 }
 
 QVariant AggregateDeviceModel::data(const QModelIndex &index, int role) const
@@ -157,7 +170,7 @@ BaseDevice *AggregateDeviceModel::deviceAt(int index) const
 
 void AggregateDeviceModel::removeDisconnectedDevices()
 {
-	if (m_disconnectedDeviceCount == 0) {
+	if (m_disconnectedDeviceIds.count() == 0) {
 		return;
 	}
 
@@ -189,7 +202,7 @@ void AggregateDeviceModel::removeDisconnectedDevices()
 	}
 
 	emit countChanged();
-	m_disconnectedDeviceCount = 0;
+	m_disconnectedDeviceIds.clear();
 	emit disconnectedDeviceCountChanged();
 }
 
@@ -248,10 +261,11 @@ void AggregateDeviceModel::sourceModelRowsAboutToBeRemoved(const QModelIndex &, 
 	}
 
 	const int prevCount = count();
+	const int prevDisconnectedDeviceCount = disconnectedDeviceCount();
 
-	// If a source model is about to remove a valid device, then remove it from this aggregate
-	// model. (If the device is invalid, do not remove it; in that case, it should remain in this
-	// model but be marked as "Not connected", as per deviceValidChanged().)
+	// If a source model is about to remove a valid device:
+	// - if retainDevices=true, then keep the model entry but mark it as disconnected
+	// - if retainDevices=false, then remove the model entry.
 	for (int i = last; i >= first; --i) {
 		BaseDevice *device = sourceModel->deviceAt(i);
 		if (!device) {
@@ -259,19 +273,27 @@ void AggregateDeviceModel::sourceModelRowsAboutToBeRemoved(const QModelIndex &, 
 						  << sourceModel->objectName() << " with count:" << sourceModel->count();
 			continue;
 		}
-		if (device->isValid()) {
-			const int removalIndex = indexOf(DeviceInfo::infoId(device, sourceModel));
-			if (removalIndex < 0) {
-				qmlInfo(this) << "cannot find device" << device->serviceUid() << "in this aggregate model!";
-				continue;
-			}
-			device->disconnect(this);
-			beginRemoveRows(QModelIndex(), removalIndex, removalIndex);
-			m_deviceInfos.removeAt(removalIndex);
+		device->disconnect(this);
+		const int deviceInfoIndex = indexOf(DeviceInfo::infoId(device, sourceModel));
+		if (deviceInfoIndex < 0) {
+			qmlInfo(this) << "cannot find device" << device->serviceUid() << "in this aggregate model!";
+			continue;
+		}
+		if (m_retainDevices) {
+			m_disconnectedDeviceIds.insert(m_deviceInfos[deviceInfoIndex].id);
+			m_deviceInfos[deviceInfoIndex].device.clear();
+			emit dataChanged(createIndex(deviceInfoIndex, 0), createIndex(deviceInfoIndex, 0), { DeviceRole, ConnectedRole });
+		} else {
+			m_disconnectedDeviceIds.remove(m_deviceInfos[deviceInfoIndex].id);
+			beginRemoveRows(QModelIndex(), deviceInfoIndex, deviceInfoIndex);
+			m_deviceInfos.removeAt(deviceInfoIndex);
 			endRemoveRows();
 		}
 	}
 
+	if (prevDisconnectedDeviceCount != disconnectedDeviceCount()) {
+		emit disconnectedDeviceCountChanged();
+	}
 	if (prevCount != count()) {
 		emit countChanged();
 	}
@@ -286,7 +308,7 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 	}
 
 	const int prevCount = count();
-	const int prevDisconnectedDeviceCount = m_disconnectedDeviceCount;
+	const int prevDisconnectedDeviceCount = disconnectedDeviceCount();
 
 	for (int i = first; i <= last; ++i) {
 		BaseDevice *device = sourceModel->deviceAt(i);
@@ -298,7 +320,7 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 
 		int index = indexOf(DeviceInfo::infoId(device, sourceModel));
 		if (index >= 0) {
-			// The device is already in the list, i.e. it was disconnected then reconnected.
+			// The device is already in the list; may happen if retainDevices=true.
 			QList<int> roles = { ConnectedRole };
 			if (m_deviceInfos[index].device != device) {
 				m_deviceInfos[index].device = device;
@@ -309,7 +331,11 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 				m_deviceInfos[index].cachedDeviceName = device->name();
 				roles << CachedDeviceNameRole;
 			}
-			m_disconnectedDeviceCount--;
+			if (device->isValid()) {
+				m_disconnectedDeviceIds.remove(m_deviceInfos[index].id);
+			} else {
+				m_disconnectedDeviceIds.insert(m_deviceInfos[index].id);
+			}
 			emit dataChanged(createIndex(index, 0), createIndex(index, 0), roles);
 		} else {
 			// Add the device to the list.
@@ -327,7 +353,7 @@ void AggregateDeviceModel::sourceModelRowsInserted(const QModelIndex &, int firs
 	if (prevCount != count()) {
 		emit countChanged();
 	}
-	if (prevDisconnectedDeviceCount != m_disconnectedDeviceCount) {
+	if (prevDisconnectedDeviceCount != disconnectedDeviceCount()) {
 		emit disconnectedDeviceCountChanged();
 	}
 }
@@ -387,17 +413,19 @@ void AggregateDeviceModel::deviceValidChanged()
 		return;
 	}
 
-	const int prevDisconnectedDeviceCount = m_disconnectedDeviceCount;
+	const int prevDisconnectedDeviceCount = disconnectedDeviceCount();
 	for (int i = 0; i < m_deviceInfos.count(); ++i) {
 		DeviceInfo &deviceInfo = m_deviceInfos[i];
 		if (deviceInfo.device == device) {
 			emit dataChanged(createIndex(i, 0), createIndex(i, 0), { ConnectedRole });
-			if (!device->isValid()) {
-				m_disconnectedDeviceCount++;
+			if (device->isValid()) {
+				m_disconnectedDeviceIds.remove(deviceInfo.id);
+			} else {
+				m_disconnectedDeviceIds.insert(deviceInfo.id);
 			}
 		}
 	}
-	if (prevDisconnectedDeviceCount != m_disconnectedDeviceCount) {
+	if (prevDisconnectedDeviceCount != disconnectedDeviceCount()) {
 		emit disconnectedDeviceCountChanged();
 	}
 }
