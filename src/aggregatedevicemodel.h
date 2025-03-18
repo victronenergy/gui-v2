@@ -22,6 +22,7 @@ class AggregateDeviceModel : public QAbstractListModel
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 	Q_PROPERTY(int disconnectedDeviceCount READ disconnectedDeviceCount NOTIFY disconnectedDeviceCountChanged)
 	Q_PROPERTY(QVariantList sourceModels READ sourceModels WRITE setSourceModels NOTIFY sourceModelsChanged)
+	Q_PROPERTY(bool retainDevices READ retainDevices WRITE setRetainDevices NOTIFY retainDevicesChanged)
 
 public:
 	enum RoleNames {
@@ -37,6 +38,11 @@ public:
 	QVariantList sourceModels() const;
 	void setSourceModels(const QVariantList &models);
 
+	// True if model should keep entries even after they are removed from the source models.
+	// (Only the device uid and name will be kept; the device pointer will be discarded.)
+	bool retainDevices() const;
+	void setRetainDevices(bool retainDevices);
+
 	int count() const;
 	int disconnectedDeviceCount() const;
 
@@ -50,6 +56,7 @@ signals:
 	void countChanged();
 	void disconnectedDeviceCountChanged();
 	void sourceModelsChanged();
+	void retainDevicesChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -83,9 +90,10 @@ private:
 	void cleanUp();
 
 	QHash<int, QByteArray> m_roleNames;
+	QSet<QString> m_disconnectedDeviceIds;
 	QVector<DeviceInfo> m_deviceInfos;
 	QVariantList m_sourceModels;
-	int m_disconnectedDeviceCount = 0;
+	bool m_retainDevices = false;
 };
 
 } /* VenusOS */

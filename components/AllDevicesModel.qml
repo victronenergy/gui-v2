@@ -9,6 +9,7 @@ import Victron.VenusOS
 AggregateDeviceModel {
 	id: aggregateModel
 
+	retainDevices: true
 	sourceModels: [
 		batteryDevices,
 		Global.dcInputs.model,
