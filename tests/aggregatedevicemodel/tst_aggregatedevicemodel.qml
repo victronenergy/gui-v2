@@ -39,10 +39,12 @@ TestCase {
 	BaseDeviceModel {
 		id: deviceModelA
 		modelId: "deviceModelA"
+		sortBy: BaseDeviceModel.NoSort
 	}
 	BaseDeviceModel {
 		id: deviceModelB
 		modelId: "deviceModelB"
+		sortBy: BaseDeviceModel.NoSort
 	}
 
 	AggregateDeviceModel {
@@ -52,6 +54,7 @@ TestCase {
 	function init() {
 		aggModel.retainDevices = false
 		aggModel.sourceModels = []
+		aggModel.sortBy = AggregateDeviceModel.NoSort
 		deviceModelA.clear()
 		deviceModelB.clear()
 	}
@@ -93,6 +96,43 @@ TestCase {
 		compare(aggModel.deviceAt(1), deviceC)
 		deviceModelA.removeDevice(deviceA.serviceUid)
 		compare(aggModel.deviceAt(0), deviceC)
+	}
+
+	function test_sortBy_data() {
+		return [
+			{
+				tag: "sort=NoSort",
+				sortBy: AggregateDeviceModel.NoSort,
+				sorted: [deviceC, deviceA, deviceB] // sorted by the order of insertion
+			},
+			{
+				tag: "sort=SortByDeviceName",
+				sortBy: AggregateDeviceModel.SortByDeviceName,
+				sorted: [deviceA, deviceB, deviceC] // alphabetical order of device name
+			},
+			{
+				tag: "sort=SortBySourceModel",
+				sortBy: AggregateDeviceModel.SortBySourceModel,
+				sorted: [deviceC, deviceB, deviceA] // Model A items, then Model B items
+			},
+			{
+				tag: "sort=SortBySourceModel|SortByDeviceName",
+				sortBy: AggregateDeviceModel.SortBySourceModel | AggregateDeviceModel.SortByDeviceName,
+				sorted: [deviceB, deviceC, deviceA] // Ordered Model A names, then ordered Model B names
+			},
+		]
+	}
+
+	function test_sortBy(data) {
+		aggModel.sortBy = data.sortBy
+		aggModel.sourceModels = [deviceModelA, deviceModelB]
+		deviceModelA.addDevice(deviceC)
+		deviceModelB.addDevice(deviceA)
+		deviceModelA.addDevice(deviceB)
+
+		compare(aggModel.deviceAt(0), data.sorted[0])
+		compare(aggModel.deviceAt(1), data.sorted[1])
+		compare(aggModel.deviceAt(2), data.sorted[2])
 	}
 
 	function test_retainDevices_data() {
