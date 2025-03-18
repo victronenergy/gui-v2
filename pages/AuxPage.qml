@@ -34,11 +34,9 @@ Page {
 		model: ObjectModel {
 			Loader {
 				id: switchesLoader
-				property SwitchesCardModel switchModel: SwitchesCardModel {}
 				sourceComponent: SwitchAuxInsert{
 					onImplicitWidthChanged: switchesLoader.width = implicitWidth
 					height: auxView.height
-					model: switchModel
 				}
 			}
 			//place holder for other aux cards types ie Bilge pump service

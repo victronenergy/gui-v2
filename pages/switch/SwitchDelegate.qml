@@ -50,16 +50,17 @@ Item {
 			id:header
 			height: Theme.geometry_switchableOutput_delegate_header_height
 			width: root.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
-			Item {
-			anchors.bottom: statusRect.bottom
-				width: parent.width - statusRect.width
+			Label {
+				anchors.bottom: statusRect.bottom
+				width: statusRect.visible ? parent.width - statusRect.width : parent.width
 				height: header.height - Theme.geometry_switchableOutput_delegate_header_margin * 2
 				Text{
 					id:titleText
+					width: parent.width
 					verticalAlignment: Text.AlignVCenter
 					font.pixelSize: height
 					color: Theme.color_font_primary
-					elide: Text.ElideRight
+					elide: Text.ElideMiddle
 				}
 			}
 
@@ -69,7 +70,8 @@ Item {
 					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_On)
 					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_Powered)
 					|| ((switchData._status.value === VenusOS.SwitchableOutput_Status_Output_Fault) && (switchData._type.value === VenusOS.SwitchableOutput_Function_Dimmable)))
-				width: childrenRect.width < 80 ? 100 : childrenRect.width + 20
+				width: childText.width < 80 ? 100 : childText.width + 20
+
 				height: header.height - Theme.geometry_switchableOutput_delegate_header_margin * 2
 				radius: height/2
 				color: Global.switches.switchableOutputStatusToColor(switchData._status.value, false)

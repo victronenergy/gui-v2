@@ -62,7 +62,7 @@ Item {
 								var statusData = [VenusOS.SwitchableOutput_Status_Output_Fault,VenusOS.SwitchableOutput_Status_Disabled,VenusOS.SwitchableOutput_Status_Powered,
 												  VenusOS.SwitchableOutput_Status_On,VenusOS.SwitchableOutput_Status_Over_Temperature,
 												  VenusOS.SwitchableOutput_Status_Short_Fault,VenusOS.SwitchableOutput_Status_Tripped]
-								if (index === 0 ){
+								if ((index === 0 )||(index === 3 )){
 									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index),  statusData[ _testStatusIndex])
 									_testStatusIndex++
 									if (_testStatusIndex >= statusData.length) _testStatusIndex = 0
@@ -81,16 +81,26 @@ Item {
 
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
-				_customName.setValue("mock Switch " + deviceInstance)
-				_productName.setValue("mockSmartSwitch")
-				switchDev.setMockValue("/State", Math.floor(Math.random() * 3))
+				if (mockDeviceCount < 4) _customName.setValue("Switch %1 customName ".arg(deviceInstance));
+					else  _customName.setValue("")
+				_productName.setValue("Energy Solutions Smart Switch")
+
+				switchDev.setMockValue("/State", Math.floor(Math.random() * 3) + 0x100)
 				switchDev.setMockValue("/NrOfChannels", switchDev.inputCount)
 				for (let i=0;i<switchDev.inputCount;i++){
-					if (i === 1) switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(i), "cust %1".arg(i))
-					else switchDev.setMockValue("/SwitchableOutput/%1/CustomName".arg(i),"")
+					if (i === 1) switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(i), "function Val sw%1".arg(deviceInstance))
+					else switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(i),"")
 					switchDev.setMockValue("/SwitchableOutput/%1/Settings/Type".arg(i), i % 3)
-					if (i == 1) switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), 0x2);
-					else switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), 0x7);
+					if (i == 1){
+						if (mockDeviceCount === 4){
+							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i),
+												   (1<<VenusOS.SwitchableOutput_Function_Slave) | (1<<VenusOS.SwitchableOutput_Function_Latching));
+					} else {
+							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), (1<<VenusOS.SwitchableOutput_Function_Latching));
+						}
+					} else {
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), 0x7);
+					}
 					switchDev.setMockValue("/SwitchableOutput/%1/State".arg(i), 0)
 					switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(i), 0)
 					//optional
