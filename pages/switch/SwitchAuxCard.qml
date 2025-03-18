@@ -9,15 +9,16 @@ import Victron.VenusOS
 
 ControlCard {
 	id: root
+
 	property var model
 	property alias title: root.title
-	property int switchCol: (model.rowCount + 3)/4
+	property int switchCol: model.rowCount>0 ? (model.rowCount + 3)/4 : 1
 	implicitWidth: Theme.geometry_controlCard_minimumWidth * switchCol
 	width: Theme.geometry_controlCard_minimumWidth * switchCol
 
 	icon.source: "qrc:/images/switches.svg"
 
-	GridView {
+	GridView{
 		id: switchesView
 		anchors {
 			top: root.title.bottom
@@ -34,14 +35,12 @@ ControlCard {
 		cellWidth: switchesView.width / switchCol
 		model: root.model
 
-		delegate: SwitchDelegate {
+		delegate: SwitchDelegate{
 			serviceUid: uid
 			title: name
+			type: switchType
 			width: switchesView.width / switchCol
 			showSeparator: index < root.model.rowCount -1
-			// Component.onCompleted: {
-			// 	console.log("SwitchAuxCard count ",root.model.rowCount )
-			// }
 		}
 	}
 }

@@ -12,8 +12,8 @@ using namespace Victron::VenusOS;
 SwitchableOutputProxyModel::SwitchableOutputProxyModel(QObject *parent): QSortFilterProxyModel(parent),
 	m_group(""), m_flags(FilterByGroup)
 {
-	connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(rowCountChanged()));
-	connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(rowCountChanged()));
+	connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)), SIGNAL(rowCountChanged()));
+	connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)), SIGNAL(rowCountChanged()));
 	QSortFilterProxyModel::setDynamicSortFilter(true);
 }
 
@@ -93,23 +93,20 @@ void SwitchableOutputModel::addSwitchableOutput(const QString &serviceUid, const
 
 bool SwitchableOutputModel::setSwitchableOutput(const QString &serviceUid, const QVariantMap &values)
 {
-	 const int index = indexOf(serviceUid);
-	 if (index < 0) return false;
+	const int index = indexOf(serviceUid);
+	if (index < 0) {
+		return false;
+	}
 
-	 SwitchableOutput inputRec = {
-		.serviceUid = serviceUid,
-		.group = values["group"].toString(),
-		.name = values["name"].toString(),
-		.switchType = values["switchType"].toInt(),
-		.refId = values["refId"].toInt(),
-
-	};
-	beginInsertRows(QModelIndex(), index, index);
-	m_tableData.insert(index, inputRec);
-	endInsertRows();
-	emit countChanged();
+	SwitchableOutput &currentData = m_tableData[index];
+	currentData.group = values["group"].toString();
+	currentData.name = values["name"].toString();
+	currentData.switchType = values["switchtype"].toInt();
+	currentData.refId = values["refId"].toInt();
+	emit dataChanged(createIndex(index, 0), createIndex(index, 0), {GroupRole, NameRole, SwitchTypeRole, RefIdRole});
 	return true;
 }
+
 
 bool SwitchableOutputModel::setSwitchableOutputValue(const QString &serviceUid, Role role, const QVariant &value )
 {
@@ -118,7 +115,6 @@ bool SwitchableOutputModel::setSwitchableOutputValue(const QString &serviceUid, 
 	if (index < 0) {
 		return false;
 	}
-	beginInsertRows(QModelIndex(), index, index);
 	SwitchableOutput &currentData = m_tableData[index];
 	switch (role)
 	{
@@ -145,7 +141,6 @@ bool SwitchableOutputModel::setSwitchableOutputValue(const QString &serviceUid, 
 	default:
 		break;
 	}
-	endInsertRows();
 	return true;
 }
 

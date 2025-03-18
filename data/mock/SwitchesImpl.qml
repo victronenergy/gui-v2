@@ -47,7 +47,6 @@ Item {
 							switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(i), Math.random() * 10)
 						}
 					}
-
 				}
 			}
 
@@ -117,7 +116,7 @@ Item {
 	}
 
 	Component.onCompleted: {
-		for (let i = 0; i < 6; ++i) {
+		for (let i = 0; i < 5; ++i) {
 			populate()
 		}
 	}

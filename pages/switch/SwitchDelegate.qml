@@ -12,7 +12,7 @@ Item {
 
 	height: mainItem.contentHeight
 	visible: switchData._status.isValid
-
+	property int type
 	property int controlBorderWidth: Theme.geometry_switchableOutput_delegate_control_border_width //2
 	property color backColor: Theme.color_darkOk
 	property color highLightColor: Theme.color_ok
@@ -30,10 +30,6 @@ Item {
 
 		readonly property VeQuickItem _status: VeQuickItem {
 			uid: serviceUid + "/Status"
-		}
-
-		readonly property VeQuickItem _type: VeQuickItem {
-			uid: serviceUid + "/Settings/Type"
 		}
 
 		readonly property VeQuickItem _state: VeQuickItem {
@@ -69,7 +65,7 @@ Item {
 				visible: !((switchData._status.value === VenusOS.SwitchableOutput_Status_Off)
 					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_On)
 					|| (switchData._status.value === VenusOS.SwitchableOutput_Status_Powered)
-					|| ((switchData._status.value === VenusOS.SwitchableOutput_Status_Output_Fault) && (switchData._type.value === VenusOS.SwitchableOutput_Function_Dimmable)))
+					|| ((switchData._status.value === VenusOS.SwitchableOutput_Status_Output_Fault) && (type === VenusOS.SwitchableOutput_Function_Dimmable)))
 				width: childText.width < 80 ? 100 : childText.width + 20
 
 				height: header.height - Theme.geometry_switchableOutput_delegate_header_margin * 2
@@ -83,22 +79,54 @@ Item {
 				}
 			}
 		}
+
+		Loader {
+			id: insertLoader
+			sourceComponent: momentarySwitch
+		}
+
+		Item {
+			visible: showSeparator
+			height: showSeparator ? 14 : 0
+			width: parent.width
+		}
+		Rectangle {
+			visible: showSeparator
+			height: showSeparator ? 2 : 0
+			anchors{
+				horizontalCenter: parent.horizontalCenter
+			}
+			width: parent.width
+			color: Theme.color_card_separator
+		}
+	}
+	onTypeChanged: {
+		switch (type){
+		case VenusOS.SwitchableOutput_Function_Momentary:
+			insertLoader.sourceComponent = latchingSwitch;
+			break;
+		case VenusOS.SwitchableOutput_Function_Dimmable:
+			insertLoader.sourceComponent = dimmingSwitch;
+			break;
+		default:
+			insertLoader.sourceComponent = latchingSwitch
+			break;
+		}
+	}
+
+	Component {
+		id: dimmingSwitch
 		Rectangle {
 			id:border
 			color: Theme.color_ok
 			clip: true
-			anchors{
-				horizontalCenter: parent.horizontalCenter
-			}
-			width: parent.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
+			width: root.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
 			height: Theme.geometry_switchableOutput_delegate_control_height
 			radius: Theme.geometry_switchableOutput_delegate_control_radius
 
 			DimmingSlider{
-				id: dimmingSwitch
 				grooveColor: backColor
 				highlightColor: switchData._state.value ? highLightColor : disabledColor
-				visible: switchData._type.isValid && (switchData._type.value == 2)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				radius: parent.radius
@@ -112,7 +140,6 @@ Item {
 					var newVal = Math.round(value)
 					if (newVal !== switchData._dimming.value) switchData._dimming.setValue(value)
 				}
-
 				onButtonClicked: {
 					if (switchData._state.value) switchData._state.setValue(0)
 						else switchData._state.setValue(1)
@@ -126,36 +153,19 @@ Item {
 					anchors.centerIn: parent
 				}
 			}
-			Rectangle{
-				id: momentarySwitch
-				visible: switchData._type.isValid && switchData._type.value == 0
-				x:root.controlBorderWidth
-				y:root.controlBorderWidth
-				radius: parent.radius
-				color: switchData._state.value ? highLightColor :backColor
-				width: parent.width - root.controlBorderWidth * 2
-				height: parent.height - root.controlBorderWidth * 2
+		}
+	}
 
-				PressArea {
-					anchors.fill:  parent
-					color: switchData._state.value ? highLightColor :backColor
-					radius: parent.radius
-					onPressed: switchData._state.setValue(1)
-					onReleased: switchData._state.setValue(0)
-				}
-				Text {
-					id: momentaryText
-					color: Theme.color_font_primary
-					//% "Press"
-					text: switchData._state.value ? CommonWords.on : qsTrId("Switches_Press")
-					font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
-					anchors.centerIn: parent
-				}
-			}
-
+	Component {
+		id: latchingSwitch
+		Rectangle {
+			id:border
+			color: Theme.color_ok
+			clip: true
+			width: root.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
+			height: Theme.geometry_switchableOutput_delegate_control_height
+			radius: Theme.geometry_switchableOutput_delegate_control_radius
 			Item{
-				id: latchingSwitch
-				visible: !switchData._type.isValid || (switchData._type.isValid && switchData._type.value == 1)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				width: parent.width - root.controlBorderWidth * 2
@@ -232,20 +242,42 @@ Item {
 				}
 			}
 		}
-		Item {
-			visible: showSeparator
-			height: showSeparator ? 14 : 0
-			width: parent.width
-		}
+
+	}
+	Component{
+		id: momentarySwitch
+
 		Rectangle {
-			visible: showSeparator
-			height: showSeparator ? 2 : 0
-			anchors{
-				horizontalCenter: parent.horizontalCenter
+			id:border
+			color: Theme.color_ok
+			clip: true
+			width: root.width * Theme.geometry_switchableOutput_delegate_inner_proportionateWidth
+			height: Theme.geometry_switchableOutput_delegate_control_height
+			radius: Theme.geometry_switchableOutput_delegate_control_radius
+			Rectangle{
+				x:root.controlBorderWidth
+				y:root.controlBorderWidth
+				radius: parent.radius
+				color: switchData._state.value ? highLightColor :backColor
+				width: parent.width - root.controlBorderWidth * 2
+				height: parent.height - root.controlBorderWidth * 2
+
+				PressArea {
+					anchors.fill:  parent
+					color: switchData._state.value ? highLightColor :backColor
+					radius: parent.radius
+					onPressed: switchData._state.setValue(1)
+					onReleased: switchData._state.setValue(0)
+				}
+				Text {
+					id: momentaryText
+					color: Theme.color_font_primary
+					//% "Press"
+					text: switchData._state.value ? CommonWords.on : qsTrId("Switches_Press")
+					font.pixelSize: parent.height * Theme.geometry_switchableOutput_delegate_control_text_proportionateHeight
+					anchors.centerIn: parent
+				}
 			}
-			width: parent.width
-			color: Theme.color_card_separator
 		}
 	}
-
 }
