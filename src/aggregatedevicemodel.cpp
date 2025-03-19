@@ -4,6 +4,7 @@
 */
 
 #include "aggregatedevicemodel.h"
+#include "basedevice.h"
 
 #include <QQmlInfo>
 
