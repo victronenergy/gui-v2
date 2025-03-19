@@ -12,6 +12,8 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick)
 
 qt_add_executable(tst_aggregatedevicemodel
     tst_aggregatedevicemodel.cpp
+    ../../src/basedevice.h
+    ../../src/basedevice.cpp
     ../../src/basedevicemodel.h
     ../../src/basedevicemodel.cpp
     ../../src/aggregatedevicemodel.h
