@@ -20,7 +20,7 @@ void BaseTankDevice::updateMeasurements()
 	if (qIsNaN(m_level) && !qIsNaN(m_capacity) && !qIsNaN(m_remaining)) {
 		// Calculate level
 		if (m_capacity > 0) {
-			m_level = m_remaining / m_capacity * 100;
+			m_level = (m_remaining / m_capacity) * 100;
 		}
 	} else if (!qIsNaN(m_level) && qIsNaN(m_capacity) && !qIsNaN(m_remaining)) {
 		// Calculate capacity
