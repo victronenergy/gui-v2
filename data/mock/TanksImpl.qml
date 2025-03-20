@@ -59,13 +59,13 @@ QtObject {
 
 			onTypeChanged: {
 				if (type >= 0) {
-					_customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")
+					_device._customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")
 				}
 			}
 
 			Component.onCompleted: {
-				_deviceInstance.setValue(deviceInstance)
-				_productName.setValue("Generic Tank Input")
+				_device._deviceInstance.setValue(deviceInstance)
+				_device._productName.setValue("Generic Tank Input")
 				_status.setValue(VenusOS.Tank_Status_Ok)
 			}
 
@@ -132,7 +132,7 @@ QtObject {
 			} else {
 				// remove a tank
 				const index = Math.floor(Math.random() * _createdObjects.length)
-				_createdObjects[index].deviceInstance = -1 // causes tank to remove itself from model
+				_createdObjects[index]._device.deviceInstance = -1 // causes tank to remove itself from model
 				_createdObjects.splice(index, 1)
 			}
 		}
