@@ -45,8 +45,8 @@ QtObject {
 		const deviceInstanceNum = mockDeviceCount++
 		const tankObj = tankComponent.createObject(root, {
 			serviceUid: "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum,
-			deviceInstance: deviceInstanceNum,
 		})
+		tankObj._device.deviceInstance = deviceInstanceNum
 		_createdObjects.push(tankObj)
 		for (var p in properties) {
 			tankObj["_" + p].setValue(properties[p])
@@ -59,13 +59,12 @@ QtObject {
 
 			onTypeChanged: {
 				if (type >= 0) {
-					_customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")
+					_device._customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")
 				}
 			}
 
 			Component.onCompleted: {
-				_deviceInstance.setValue(deviceInstance)
-				_productName.setValue("Generic Tank Input")
+				_device._productName.setValue("Generic Tank Input")
 				_status.setValue(VenusOS.Tank_Status_Ok)
 			}
 
@@ -91,7 +90,7 @@ QtObject {
 			const hasCreatedObjects = _createdObjects.length > 0
 			while (_createdObjects.length > 1) {
 				let obj = _createdObjects.pop()
-				obj.deviceInstance = -1
+				obj._device.deviceInstance = -1
 				obj.destroy()
 			}
 
@@ -103,12 +102,11 @@ QtObject {
 
 			if (hasCreatedObjects) {
 				let lastObject = _createdObjects.shift()
-				lastObject.deviceInstance = -1
+				lastObject._device.deviceInstance = -1
 				lastObject.destroy()
 			}
 		}
 	}
-
 
 	property Timer randomizeTanks: Timer {
 		running: Global.mockDataSimulator.timersActive
@@ -132,7 +130,7 @@ QtObject {
 			} else {
 				// remove a tank
 				const index = Math.floor(Math.random() * _createdObjects.length)
-				_createdObjects[index].deviceInstance = -1 // causes tank to remove itself from model
+				_createdObjects[index]._device.deviceInstance = -1 // causes tank to remove itself from model
 				_createdObjects.splice(index, 1)
 			}
 		}
@@ -155,7 +153,7 @@ QtObject {
 			root.addTank(tankProperties)
 		} else {
 			for (var i = 0; i < _createdObjects.length; ++i) {
-				_createdObjects[i].deviceInstance = -1 // causes tank to remove itself from model
+				_createdObjects[i]._device.deviceInstance = -1 // causes tank to remove itself from model
 			}
 
 			_createdObjects = []
