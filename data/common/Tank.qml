@@ -12,7 +12,7 @@ BaseTankDevice {
 	readonly property int status: _status.valid ? _status.value : VenusOS.Tank_Status_Unknown
 	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
 
-	property DeviceModel _tankModel
+	property TankModel _tankModel
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"

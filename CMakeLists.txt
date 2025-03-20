@@ -697,6 +697,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/basedevicemodel.cpp
     src/basetankdevice.h
     src/basetankdevice.cpp
+    src/basetankdevicemodel.h
+    src/basetankdevicemodel.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h

@@ -6,11 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-DeviceModel {
-	property int type
-	property real averageLevel
-	property real totalCapacity
-	property real totalRemaining
-
+BaseTankDeviceModel {
+	objectName: modelId
 	onCountChanged: Global.tanks.updateTankModelTotals(type)
 }
