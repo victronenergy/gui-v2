@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListNavigation {
 	id: root
 
-	readonly property string activeBatteryName: availableBatteryServices.mapObject[activeBatteryService.value] ?? ""
+	required property string activeBatteryName
 	property string customServiceDescription
 
 	function _summaryText(deviceName, deviceInstance) {
@@ -56,26 +56,6 @@ ListNavigation {
 				root.customServiceDescription = root._summaryText(device?.name, device?.deviceInstance)
 			} else {
 				root.customServiceDescription = ""
-			}
-		}
-	}
-
-	VeQuickItem {
-		id: activeBatteryService
-		uid: Global.system.serviceUid + "/ActiveBatteryService"
-	}
-
-	VeQuickItem {
-		id: availableBatteryServices
-
-		property var mapObject: ({})
-
-		uid: Global.system.serviceUid + "/AvailableBatteryServices"
-		onValueChanged: {
-			try {
-				mapObject = JSON.parse(value)
-			} catch (e) {
-				console.warn("Unable to parse JSON:", value, "exception:", e)
 			}
 		}
 	}
