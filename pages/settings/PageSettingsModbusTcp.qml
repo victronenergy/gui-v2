@@ -32,10 +32,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: availableServicesItem
 				//% "Available services"
 				text: qsTrId("settings_modbus_available_services")
 				preferredVisible: enableModbusTcp.checked
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: Qt.binding(function() { return availableServicesItem.text }) })
 			}
 
 			PrimaryListLabel {

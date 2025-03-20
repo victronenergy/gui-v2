@@ -69,7 +69,7 @@ Page {
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
-			onClicked: Global.pageManager.pushPage(batterySettingsComponent, {"title": text})
+			onClicked: Global.pageManager.pushPage(batterySettingsComponent, {"title": Qt.binding(function() { return batteryMenuItem.text })})
 
 			VeQuickItem {
 				id: batteryEnabled

@@ -66,7 +66,7 @@ Page {
 			}
 
 			onClicked: {
-				Global.pageManager.pushPage(distributorPageComponent, { "title": text })
+				Global.pageManager.pushPage(distributorPageComponent, { "title": Qt.binding(function() { return distributorDelegate.text }) })
 			}
 
 			VeQuickItem {

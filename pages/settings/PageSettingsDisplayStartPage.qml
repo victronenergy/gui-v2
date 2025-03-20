@@ -58,7 +58,7 @@ Page {
 				caption: qsTrId("settings_startpage_description")
 
 				onClicked: {
-					Global.pageManager.pushPage(startPageOptionsComponent, { title: text })
+					Global.pageManager.pushPage(startPageOptionsComponent, { title: Qt.binding(function() { return startPageNavigation.text }) })
 				}
 			}
 

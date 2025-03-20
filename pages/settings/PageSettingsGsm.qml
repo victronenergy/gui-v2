@@ -148,11 +148,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: apnItem
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"
 				secondaryText: (!apnSetting.valid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
-				onClicked: Global.pageManager.pushPage(apnPage, { title: text })
+				onClicked: Global.pageManager.pushPage(apnPage, { title: Qt.binding(function() { return apnItem.text }) })
 				Component {
 					id: apnPage
 

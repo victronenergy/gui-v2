@@ -39,22 +39,20 @@ Page {
 		model: VisibleItemModel {
 
 			ListNavigation {
+				id: acSensorsItem
 				text: CommonWords.ac_sensors
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix + "/AcSensor"
-													   }
-													   )
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml",
+						{ "title": Qt.binding(function() { return acSensorsItem.text }),
+						  "bindPrefix": root.bindPrefix + "/AcSensor" })
 			}
 
 			ListNavigation {
+				id: kwhCountersItem
 				text: "kWh Counters"
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusKwhCounters.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix + "/Energy",
-														   "service": root.bindPrefix
-													   }
-													   )
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusKwhCounters.qml",
+						{ "title": Qt.binding(function() { return kwhCountersItem.text }),
+						  "bindPrefix": root.bindPrefix + "/Energy",
+						  "service": root.bindPrefix })
 			}
 
 			ListText {

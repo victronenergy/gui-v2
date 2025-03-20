@@ -116,12 +116,13 @@ Page {
 			}
 
 			ListNavigation {
+				id: timeZoneItem
 				//% "Time zone"
 				text: qsTrId("settings_tz_time_zone")
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
 				writeAccessLevel: VenusOS.User_AccessType_User
 
-				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
+				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: Qt.binding(function() { return timeZoneItem.text }) })
 
 				VeQuickItem {
 					id: tzData

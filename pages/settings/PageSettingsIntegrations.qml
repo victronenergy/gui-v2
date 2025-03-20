@@ -24,40 +24,45 @@ Page {
 			  The intention here was to provide a wizard helping to find the right setup process – As we are not there yet, let’s hide it for now
 
 			ListNavigation {
+				id: addDeviceItem
 				text: CommonWords.add_device
 				icon.source: "qrc:/images/icon_plus_32.svg"
 				icon.color: Theme.color_blue
 				icon.width: 32
 				icon.height: 32
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", {"title": Qt.binding(function() { return addDeviceItem.text })})
 			}
 
 			SettingsListHeader { }
 			*/
 
 			ListNavigation {
+				id: invertersItem
 				//% "PV Inverters"
 				text: qsTrId("pagesettingsintegrations_pv_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": Qt.binding(function() { return invertersItem.text })})
 			}
 
 			ListNavigation {
+				id: rs485EmsItem
 				//% "Energy meters via RS485"
 				text: qsTrId("pagesettingsintegrations_energy_meters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": Qt.binding(function() { return rs485EmsItem.text })})
 			}
 
 			ListNavigation {
+				id: modbusDevicesItem
 				//% "Modbus Devices"
 				text: qsTrId("pagesettingsintegrations_modbus_devices")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbus.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbus.qml", {"title": Qt.binding(function() { return modbusDevicesItem.text })})
 			}
 
 			ListNavigation {
+				id: bluetoothSensorsItem
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": Qt.binding(function() { return bluetoothSensorsItem.text })})
 
 				VeQuickItem {
 					id: hasBluetoothSupport
@@ -79,7 +84,7 @@ Page {
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
 				preferredVisible: analogModel.rowCount > 0
-				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": text})
+				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": Qt.binding(function() { return tankSensorsItem.text })})
 
 				VeQItemTableModel {
 					id: analogModel
@@ -112,7 +117,7 @@ Page {
 
 				//% "Relays"
 				text: qsTrId("pagesettingsintegrations_relays")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": Qt.binding(function() { return relaysItem.text })})
 				preferredVisible: relay0.valid
 
 				VeQuickItem {
@@ -127,7 +132,7 @@ Page {
 				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
 				preferredVisible: digitalModel.rowCount > 0
-				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
+				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": Qt.binding(function() { return digitalIoItem.text })})
 
 				VeQItemSortTableModel {
 					id: digitalModel
@@ -179,10 +184,11 @@ Page {
 			ListMqttAccessSwitch { }
 
 			ListNavigation {
+				id: modbusTcpServerItem
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
 				secondaryText: modbusServerEnabled.value ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": text}) // TODO - is this correct?
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": Qt.binding(function() { return modbusTcpServerItem.text })}) // TODO - is this correct?
 
 				VeQuickItem {
 					id: modbusServerEnabled
@@ -232,7 +238,7 @@ Page {
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
 				preferredVisible: nodeRedModeItem.valid
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": text })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": Qt.binding(function() { return nodeRed.text })})
 
 				VeQuickItem {
 					id: nodeRedModeItem

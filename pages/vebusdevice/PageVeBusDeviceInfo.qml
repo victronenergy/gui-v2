@@ -31,15 +31,13 @@ PageDeviceInfo {
 
 			// TODO: this crashes when running with '--mock'
 			ListNavigation {
+				id: serialNumbersItem
 				//% "Serial numbers"
 				text: qsTrId("vebus_device_serial_numbers")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusSerialNumbers.qml", {
-													//% "Serial numbers"
-													"title": qsTrId("vebus_device_serial_numbers"),
-													"bindPrefix": root.bindPrefix
-												}
-												)
+					Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusSerialNumbers.qml",
+							{ "title": Qt.binding(function() { return serialNumbersItem.text }),
+							  "bindPrefix": root.bindPrefix })
 				}
 			}
 		}

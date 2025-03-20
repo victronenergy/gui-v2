@@ -79,7 +79,7 @@ ListNavigation {
 	text: qsTrId("cgwacs_battery_schedule_name").arg(scheduleNumber + 1)
 	secondaryText: getItemText()
 
-	onClicked: Global.pageManager.pushPage(scheduledOptionsComponent, { title: text })
+	onClicked: Global.pageManager.pushPage(scheduledOptionsComponent, { title: Qt.binding(function() { return root.text }) })
 
 	VeQuickItem {
 		id: itemDay

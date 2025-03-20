@@ -28,11 +28,12 @@ Page {
 		model: VisibleItemModel {
 
 			ListNavigation {
+				id: analogInputsItem
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
 				preferredVisible: analogModel.rowCount > 0
 				onClicked: {
-					Global.pageManager.pushPage(analogInputsComponent, {"title": text})
+					Global.pageManager.pushPage(analogInputsComponent, {"title": Qt.binding(function() { return analogInputsItem.text })})
 				}
 
 				Component {
@@ -56,11 +57,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: digitalInputsItem
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
 				preferredVisible: digitalModel.rowCount > 0
 				onClicked: {
-					Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
+					Global.pageManager.pushPage(digitalInputsComponent, {"title": Qt.binding(function() { return digitalInputsItem.text })})
 				}
 
 				Component {

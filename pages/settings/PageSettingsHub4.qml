@@ -230,26 +230,29 @@ Page {
 		}
 
 		ListNavigation {
+			id: gridFeedInItem
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
-					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) })
+					{ title: Qt.binding(function() { return gridFeedInItem.text }), hub4Mode: Qt.binding(function() { return essMode.value }) })
 			}
 		}
 
 		ListNavigation {
+			id: peakShavingItem
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Peakshaving.qml", { title: text })
+				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Peakshaving.qml", { title: Qt.binding(function() { return peakShavingItem.text }) })
 			}
 		}
 
 		ListNavigation {
+			id: scheduledChargeLevelsItem
 			//% "Scheduled charge levels"
 			text: qsTrId("settings_ess_scheduled_charge_levels")
 			secondaryText: scheduleSoc.valid
@@ -261,7 +264,7 @@ Page {
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 			onClicked: {
-				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
+				Global.pageManager.pushPage(scheduledChargeComponent, { title: Qt.binding(function() { return scheduledChargeLevelsItem.text }) })
 			}
 
 			VeQuickItem {
@@ -289,13 +292,14 @@ Page {
 		}
 
 		ListNavigation {
+			id: dynamicEssItem
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
 			preferredVisible: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
 					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml", { title: text })
+				Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml", { title: Qt.binding(function() { return dynamicEssItem.text }) })
 			}
 
 			VeQuickItem {

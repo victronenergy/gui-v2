@@ -148,11 +148,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: currentTransformersItem
 				text: CommonWords.current_transformers
 				preferredVisible: productId.value == ProductInfo.ProductId_PowerBox_Smappee
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return currentTransformersItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 

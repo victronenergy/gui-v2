@@ -69,18 +69,20 @@ Page {
 			}
 
 			ListNavigation {
+				id: setupItem
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSetup.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return setupItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 		}

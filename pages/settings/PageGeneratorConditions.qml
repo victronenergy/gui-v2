@@ -123,9 +123,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: acLoadItem
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { title: text, bindPrefix: root.bindPrefix + "/AcLoad"})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml",
+						{ title: Qt.binding(function() { return acLoadItem.text }),
+						  bindPrefix: root.bindPrefix + "/AcLoad" })
 
 				VeQuickItem {
 					id: acLoadEnabled
@@ -169,10 +172,13 @@ Page {
 			}
 
 			ListNavigation {
+				id: periodicRunItem
 				//% "Periodic run"
 				text: qsTrId("page_generator_conditions_periodic_run")
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml",
+						{ title: Qt.binding(function() { return periodicRunItem.text }),
+						  bindPrefix: root.bindPrefix })
 
 				VeQuickItem {
 					id: testRunEnabled

@@ -43,13 +43,13 @@ Page {
 			ListNavigation {
 				//% "Saved devices"
 				text: qsTrId("page_settings_modbus_saved_devices")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDevices.qml", {"title": root.title})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDevices.qml", {"title": Qt.binding(function() { return root.title })})
 			}
 
 			ListNavigation {
 				//% "Discovered devices"
 				text: qsTrId("page_settings_modbus_discovered_devices")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDiscovered.qml", {"title": root.title})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDiscovered.qml", {"title": Qt.binding(function() { return root.title })})
 			}
 		}
 	}

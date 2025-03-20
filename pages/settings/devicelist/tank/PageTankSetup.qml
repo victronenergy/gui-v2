@@ -95,13 +95,14 @@ Page {
 			ListVolumeUnitRadioButtonGroup {}
 
 			ListNavigation {
+				id: customShapeItem
 				//% "Custom shape"
 				text: qsTrId("devicelist_tanksetup_custom_shape")
 				preferredVisible: shape.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankShape.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return customShapeItem.text }), "bindPrefix": root.bindPrefix })
 				}
 
 				VeQuickItem {
@@ -127,12 +128,13 @@ Page {
 			}
 
 			ListNavigation {
+				id: lowLevelAlarmItem
 				text: CommonWords.low_level_alarm
 				preferredVisible: low.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/Low" })
+							{ "title": Qt.binding(function() { return lowLevelAlarmItem.text }), "bindPrefix": root.bindPrefix + "/Alarms/Low" })
 				}
 
 				VeQuickItem {
@@ -142,12 +144,13 @@ Page {
 			}
 
 			ListNavigation {
+				id: highLevelAlarmItem
 				text: CommonWords.high_level_alarm
 				preferredVisible: high.seen
 
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/High" })
+							{ "title": Qt.binding(function() { return highLevelAlarmItem.text }), "bindPrefix": root.bindPrefix + "/Alarms/High" })
 				}
 
 				VeQuickItem {

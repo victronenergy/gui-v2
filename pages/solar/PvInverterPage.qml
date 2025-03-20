@@ -94,10 +94,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.pvInverter.serviceUid })
+							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.pvInverter.serviceUid })
 				}
 			}
 		}

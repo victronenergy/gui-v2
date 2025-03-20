@@ -40,11 +40,14 @@ Page {
 		}
 
 		delegate: ListNavigation {
+			id: cgwacsDelegate
 			readonly property string devicePath: Global.systemSettings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml", { title: text, devicePath: devicePath })
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacs.qml",
+					{ title: Qt.binding(function() { return cgwacsDelegate.text }),
+					  devicePath: devicePath })
 
 			VeQuickItem {
 				id: customNameItem

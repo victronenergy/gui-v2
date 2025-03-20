@@ -238,11 +238,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: localNetworkAccessItem
 				//% "Local network access"
 				text: qsTrId("settings_tailscale_local_network_access")
 				secondaryText: getLocalNetworkAccess()
 				onClicked: {
-					Global.pageManager.pushPage(tailscaleLocalNetworkAccess, {"title": text})
+					Global.pageManager.pushPage(tailscaleLocalNetworkAccess, {"title": Qt.binding(function() { return localNetworkAccessItem.text })})
 				}
 
 				Component {
@@ -296,10 +297,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: advancedItem
 				//% "Advanced"
 				text: qsTrId("settings_tailscale_advanced")
 				onClicked: {
-					Global.pageManager.pushPage(tailscaleAdvanced, {"title": text})
+					Global.pageManager.pushPage(tailscaleAdvanced, {"title": Qt.binding(function() { return advancedItem.text })})
 				}
 
 				Component {

@@ -154,17 +154,18 @@ Page {
 
 				text: CommonWords.settings
 				onClicked: Global.pageManager.pushPage("/pages/settings/devicelist/PageMeteoSettings.qml", {
-														   "title": CommonWords.settings,
+														   "title": Qt.binding(function() { return settingsMenu.text }),
 														   meteoSettingsPrefix: root.settingsPrefix
 													   })
 				preferredVisible: productId.value === ProductInfo.ProductId_MeteoSensor_Imt
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-									{ "title": text, "bindPrefix": root.bindPrefix })
+									{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 		}

@@ -30,9 +30,13 @@ Page {
 		model: VisibleItemModel {
 
 			ListNavigation {
+				id: conditionsItem
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml",
+						{ title: Qt.binding(function() { return conditionsItem.text }),
+						  bindPrefix: root.settingsBindPrefix,
+						  startStopBindPrefix: root.startStopBindPrefix })
 			}
 
 			ListSpinBox {
@@ -44,10 +48,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: warmUpCoolDownItem
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
 				preferredVisible: capabilities.value & warmupCapability
-				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
+				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: Qt.binding(function() { return warmUpCoolDownItem.text }) })
 
 				Component {
 					id: warmupPageComponent

@@ -25,8 +25,9 @@ Page {
 			}
 
 			ListNavigation {
+				id: visibleItemModelDemoItem
 				text: "VisibleItemModel demo"
-				onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: text })
+				onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: Qt.binding(function() { return visibleItemModelDemoItem.text }) })
 			}
 
 			ListSwitch {

@@ -238,12 +238,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: advancedItem
 				//% "Advanced"
 				text: qsTrId("vebus_device_page_advanced")
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",
-													   { "bindPrefix": root.bindPrefix,
-														   "title": text
-													   })
+						{ "bindPrefix": root.bindPrefix,
+						  "title": Qt.binding(function() { return advancedItem.text }) })
 			}
 
 			ListNavigation {
@@ -256,12 +256,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: alarmSetupItem
 				text: CommonWords.alarm_setup
 				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarmSettings.qml",
-													   {
-														   "title": text,
-														   "isMulti": root.isMulti
-													   })
+						{ "title": Qt.binding(function() { return alarmSetupItem.text }),
+						  "isMulti": root.isMulti })
 
 			}
 
@@ -278,42 +277,39 @@ Page {
 			}
 
 			ListNavigation {
+				id: vebusBmsItem
 				//% "VE.Bus BMS"
 				text: qsTrId("vebus_device_vebus_bms")
 				preferredVisible: bmsExpected.value === 1
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix
-													   })
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml",
+						{ "title": Qt.binding(function() { return vebusBmsItem.text }),
+						 "bindPrefix": root.bindPrefix })
 			}
 
 			ListNavigation {
+				id: acSensorsItem
 				text: CommonWords.ac_sensors
 				showAccessLevel: VenusOS.User_AccessType_Service
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix + "/AcSensor"
-													   }
-													   )
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml",
+						{ "title": Qt.binding(function() { return acSensorsItem.text }),
+						  "bindPrefix": root.bindPrefix + "/AcSensor" })
 			}
 
 			ListNavigation {
+				id: debugItem
 				text: CommonWords.debug
 				showAccessLevel: VenusOS.User_AccessType_Service
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDebug.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix
-													   }
-													   )
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDebug.qml",
+						{ "title": Qt.binding(function() { return debugItem.text }),
+						  "bindPrefix": root.bindPrefix })
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDeviceInfo.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix
-													   }
-													   )
+				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDeviceInfo.qml",
+						{ "title": Qt.binding(function() { return deviceInfoItem.text }),
+						  "bindPrefix": root.bindPrefix })
 			}
 		}
 	}

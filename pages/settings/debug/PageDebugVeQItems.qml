@@ -23,13 +23,14 @@ Page {
 		}
 
 		delegate: ListNavigation {
+			id: veQItemsDelegateItem
 			text: model.id
 			secondaryText: interactive ? "" : (model.value ?? "--")
 			interactive: subModel.rowCount > 0
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml",
-						{ title: text, bindPrefix: model.uid })
+						{ title: Qt.binding(function() { return veQItemsDelegateItem.text }), bindPrefix: model.uid })
 			}
 
 			VeQItemTableModel {

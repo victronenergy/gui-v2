@@ -70,10 +70,11 @@ Page {
 			topPadding: Theme.geometry_gradientList_spacing
 
 			ListNavigation {
+				id: gensetItem
 				//% "Genset"
 				text: qsTrId("devicelistpage_genset")
 				preferredVisible: relay0.valid && relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": Qt.binding(function() { return gensetItem.text })})
 
 				VeQuickItem {
 					id: relay0
@@ -82,10 +83,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: tankPumpItem
 				preferredVisible: relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": Qt.binding(function() { return tankPumpItem.text })})
 			}
 
 			ListButton {

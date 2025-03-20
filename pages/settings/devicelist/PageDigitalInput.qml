@@ -28,9 +28,10 @@ Page {
 			}
 
 			ListNavigation {
+				id: setupItem
 				text: CommonWords.setup
 				onClicked: {
-					Global.pageManager.pushPage(settingsComponent, { "title": text })
+					Global.pageManager.pushPage(settingsComponent, { "title": Qt.binding(function() { return setupItem.text }) })
 				}
 
 				Component {
@@ -72,10 +73,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 		}

@@ -26,9 +26,10 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListNavigation {
+				id: invertersItem
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": Qt.binding(function() { return invertersItem.text })})
 			}
 
 			ListButton {
@@ -39,15 +40,17 @@ Page {
 			}
 
 			ListNavigation {
+				id: detectedIpAddrItem
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": Qt.binding(function() { return detectedIpAddrItem.text })})
 			}
 
 			ListNavigation {
+				id: setIpAddrItem
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": Qt.binding(function() { return setIpAddrItem.text })})
 			}
 
 			ListPortField {

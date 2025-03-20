@@ -64,36 +64,40 @@ Page {
 			}
 
 			ListNavigation {
+				id: systemAlarmsItem
 				//% "System alarms"
 				text: qsTrId("rssystem_system_alarms")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return systemAlarmsItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 
 			ListNavigation {
+				id: alarmSetupItem
 				text: CommonWords.alarm_setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return alarmSetupItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 
 			ListNavigation {
+				id: essItem
 				text: CommonWords.ess
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return essItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 
 			ListNavigation {
+				id: rsDevicesItem
 				//% "RS devices"
 				text: qsTrId("settings_rs_devices")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemDevices.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": Qt.binding(function() { return rsDevicesItem.text }), "bindPrefix": root.bindPrefix })
 				}
 			}
 

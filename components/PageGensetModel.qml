@@ -202,10 +202,11 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
+		id: engineItem
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
-			Global.pageManager.pushPage(engineComponent, {"title": text})
+			Global.pageManager.pushPage(engineComponent, {"title": Qt.binding(function() { return engineItem.text })})
 		}
 
 		Component {
@@ -307,10 +308,11 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
+		id: dcGensetItem
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
 		preferredVisible: chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid
-		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": Qt.binding(function() { return dcGensetItem.text })})
 
 		VeQuickItem {
 			id: chargeVoltage
@@ -384,18 +386,20 @@ VisibleItemModel {
 	}
 
 	ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+		id: settingsItem
 		text: CommonWords.settings
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+										{ title: Qt.binding(function() { return text }), settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 		}
 	}
 
 	ListNavigation {
+		id: deviceInfoItem
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 		}
 	}
 }

@@ -134,15 +134,17 @@ Page {
 			}
 
 			ListNavigation {
+				id: essItem
 				text: CommonWords.ess
 				preferredVisible: root.serviceType === "acsystem"
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
-							{ "title": text, "bindPrefix": root.serviceUid })
+							{ "title": Qt.binding(function() { return essItem.text }), "bindPrefix": root.serviceUid })
 				}
 			}
 
 			ListNavigation {
+				id: productPageItem
 				text: CommonWords.product_page
 				onClicked: {
 					let pageUrl = ""
@@ -156,7 +158,7 @@ Page {
 						console.warn("Unsupported service:", root.serviceUid)
 						return
 					}
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.serviceUid })
+					Global.pageManager.pushPage(pageUrl, { title: Qt.binding(function() { return productPageItem.text }), bindPrefix: root.serviceUid })
 				}
 			}
 		}

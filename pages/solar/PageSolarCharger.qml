@@ -94,10 +94,11 @@ Page {
 		}
 
 		ListNavigation {
+			id: unsupportedDeviceInfoItem
 			text: CommonWords.device_info_title
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": Qt.binding(function() { return unsupportedDeviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 			}
 		}
 	}
@@ -272,13 +273,14 @@ Page {
 		}
 
 		ListNavigation {
+			id: alarmStatusItem
 			text: CommonWords.alarm_status
 			preferredVisible: lowBatteryAlarm.valid
 							  || highBatteryAlarm.valid
 							  || highTemperatureAlarm.valid
 							  || shortCircuitAlarm.valid
 			onClicked: {
-				Global.pageManager.pushPage(alarmStatusComponent, { "title": text })
+				Global.pageManager.pushPage(alarmStatusComponent, { "title": Qt.binding(function() { return alarmStatusItem.text }) })
 			}
 		}
 
@@ -299,21 +301,23 @@ Page {
 		}
 
 		ListNavigation {
+			id: overallHistoryItem
 			text: CommonWords.overall_history
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": Qt.binding(function() { return overallHistoryItem.text }), "bindPrefix": root.bindPrefix })
 			}
 		}
 
 		ListNavigation {
+			id: networkedOperationItem
 			//% "Networked operation"
 			text: qsTrId("charger_networked_operation")
 			preferredVisible: linkNetworkStatus.valid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": Qt.binding(function() { return networkedOperationItem.text }), "bindPrefix": root.bindPrefix })
 			}
 
 			VeQuickItem {
@@ -323,10 +327,11 @@ Page {
 		}
 
 		ListNavigation {
+			id: supportedDeviceInfoItem
 			text: CommonWords.device_info_title
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": Qt.binding(function() { return supportedDeviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 			}
 		}
 	}

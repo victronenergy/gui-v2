@@ -122,15 +122,16 @@ Page {
 			}
 
 			ListNavigation {
+				id: setupItem
 				text: CommonWords.setup
 				preferredVisible: !root.energyMeterMode || allowedRoles.valid
 				onClicked: {
 					if (root.energyMeterMode) {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ "title": Qt.binding(function() { return setupItem.text }), "bindPrefix": root.evCharger.serviceUid })
 					} else {
 						Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ "title": Qt.binding(function() { return setupItem.text }), "bindPrefix": root.evCharger.serviceUid })
 					}
 				}
 
@@ -141,10 +142,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.evCharger.serviceUid })
 				}
 			}
 		}

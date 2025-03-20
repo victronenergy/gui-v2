@@ -98,10 +98,11 @@ Page {
 		}
 
 		ListNavigation {
+			id: settingsItem
 			text: CommonWords.settings
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+					{ title: Qt.binding(function() { return settingsItem.text }), settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 			}
 		}
 

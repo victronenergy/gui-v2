@@ -66,9 +66,10 @@ Page {
 			}
 
 			ListNavigation {
+				id: dailyRunTimeItem
 				//% "Daily run time"
 				text: qsTrId("settings_page_run_time_and_service_daily_run_time")
-				onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
+				onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: Qt.binding(function() { return dailyRunTimeItem.text }) })
 
 				Component {
 					id: dailyRunTimePage

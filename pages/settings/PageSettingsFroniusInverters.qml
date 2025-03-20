@@ -35,7 +35,7 @@ Page {
 			property VeQuickItem positionItem: VeQuickItem { uid: inverterPath + "/Position" }
 			property VeQuickItem serialNumberItem: VeQuickItem { uid: inverterPath + "/SerialNumber" }
 
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": menu.text, "bindPrefix": menu.inverterPath})
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverter.qml", {"title": Qt.binding(function() { return menu.text }), "bindPrefix": menu.inverterPath})
 			text: customNameItem.value || serialNumberItem.value || '--'
 			secondaryText: {
 				switch (positionItem.value) {

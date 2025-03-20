@@ -49,28 +49,31 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
+		id: alarmsItem
 		text: CommonWords.alarms
 		preferredVisible: !isSssDcEnergyMeter
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ "title": Qt.binding(function() { return alarmsItem.text }), "bindPrefix": root.bindPrefix })
 		}
 	}
 
 	ListNavigation {
+		id: historyItem
 		text: CommonWords.history
 		preferredVisible: !isSssDcEnergyMeter
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ "title": Qt.binding(function() { return historyItem.text }), "bindPrefix": root.bindPrefix })
 		}
 	}
 
 	ListNavigation {
+		id: deviceInfoItem
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
 		}
 	}
 }

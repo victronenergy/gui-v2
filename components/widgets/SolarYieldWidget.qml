@@ -18,7 +18,7 @@ OverviewWidget {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
 					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
 		} else {
-			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": root.title })
+			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": Qt.binding(function() { return root.title }) })
 		}
 	}
 

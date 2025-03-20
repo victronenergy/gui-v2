@@ -61,6 +61,7 @@ Page {
 			}
 
 			ListNavigation {
+				id: scheduledChargeLevelsItem
 				//% "Scheduled charge levels"
 				text: qsTrId("settings_rs_scheduled_charge_levels")
 				secondaryText: scheduleSoc.valid
@@ -70,7 +71,7 @@ Page {
 						: qsTrId("scheduled_charge_inactive")
 				preferredVisible: root.isModeOptimized
 				onClicked: {
-					Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
+					Global.pageManager.pushPage(scheduledChargeComponent, { title: Qt.binding(function() { return scheduledChargeLevelsItem.text }) })
 				}
 
 				VeQuickItem {
@@ -93,12 +94,13 @@ Page {
 			}
 
 			ListNavigation {
+				id: dynamicEssItem
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
 				preferredVisible: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
-							{ title: text })
+							{ title: Qt.binding(function() { return dynamicEssItem.text }) })
 				}
 			}
 		}

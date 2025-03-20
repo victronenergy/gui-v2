@@ -30,7 +30,7 @@ OverviewWidget {
 
 	onClicked: {
 		if (Global.allDevicesModel.combinedDcLoadDevices.count > 1) {
-			Global.pageManager.pushPage(deviceListPageComponent, { "title": root.title })
+			Global.pageManager.pushPage(deviceListPageComponent, { "title": Qt.binding(function() { return root.title }) })
 		} else {
 			root._showSettingsPage(Global.allDevicesModel.combinedDcLoadDevices.firstObject)
 		}
