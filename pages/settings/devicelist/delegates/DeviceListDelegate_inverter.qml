@@ -14,13 +14,12 @@ DeviceListDelegate {
 		QuantityObject { object: inverter.currentPhase; key: "power"; unit: inverter.currentPhase.powerUnit }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageInverter.qml",
-				{ "title": Qt.binding(function() { return root.text }), bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.pageManager.pushPage(pageInverter)
 
 	Inverter {
 		id: inverter
 		serviceUid: root.device.serviceUid
 	}
+
+	Component { id: pageInverter; PageInverter { title: root.text; bindPrefix: root.device.serviceUid } }
 }

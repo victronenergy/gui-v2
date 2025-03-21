@@ -126,12 +126,9 @@ Page {
 			}
 
 			ListNavigation {
-				id: deviceInfoItem
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked:  Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}

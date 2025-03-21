@@ -18,12 +18,11 @@ OverviewWidget {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
 					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
 		} else {
-			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": Qt.binding(function() { return root.title }) })
+			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml")
 		}
 	}
 
-	//% "Solar yield"
-	title: qsTrId("overview_widget_solaryield_title")
+	title: CommonWords.solar_yield
 	icon.source: "qrc:/images/solaryield.svg"
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true

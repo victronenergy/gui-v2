@@ -13,8 +13,7 @@ DeviceListDelegate {
 	//% "Unsupported"
 	secondaryText: qsTrId("devicelist_unsupported")
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageUnsupportedDevice.qml",
-				{ "title": Qt.binding(function() { return root.text }), bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.pageManager.pushPage(pageUnsupportedDevice)
+
+	Component { id: pageUnsupportedDevice; PageUnsupportedDevice { title: root.text; bindPrefix: root.device.serviceUid } }
 }

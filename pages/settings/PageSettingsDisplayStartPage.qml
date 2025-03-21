@@ -24,6 +24,9 @@ Page {
 		return options
 	}
 
+	//% "Start page"
+	readonly property string startPageTitle: qsTrId("settings_startpage_name")
+
 	VeQuickItem {
 		id: startPageName
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageName"
@@ -33,8 +36,7 @@ Page {
 		model: VisibleItemModel {
 			ListNavigation {
 				id: startPageNavigation
-				//% "Start page"
-				text: qsTrId("settings_startpage_name")
+				text: root.startPageTitle
 				secondaryText: {
 					const options = Global.systemSettings.startPageConfiguration.options
 					let optionText = ""
@@ -57,9 +59,7 @@ Page {
 				//% "Go to this page when the application starts."
 				caption: qsTrId("settings_startpage_description")
 
-				onClicked: {
-					Global.pageManager.pushPage(startPageOptionsComponent, { title: Qt.binding(function() { return startPageNavigation.text }) })
-				}
+				onClicked: Global.pageManager.pushPage(startPageOptionsComponent)
 			}
 
 			ListRadioButtonGroup {
@@ -84,6 +84,7 @@ Page {
 		id: startPageOptionsComponent
 
 		Page {
+			title: root.startPageTitle
 			GradientListView {
 				model: VisibleItemModel {
 					ListSwitch {

@@ -17,6 +17,8 @@ Page {
 		{ display: qsTrId("page_meteo_settings_auto_detect"), value: "auto-detect" },
 	]
 
+	title: CommonWords.settings
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListRadioButtonGroup {

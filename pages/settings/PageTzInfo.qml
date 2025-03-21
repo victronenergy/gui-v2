@@ -122,7 +122,7 @@ Page {
 				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
 				writeAccessLevel: VenusOS.User_AccessType_User
 
-				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: Qt.binding(function() { return timeZoneItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageTzMenuComponent)
 
 				VeQuickItem {
 					id: tzData
@@ -152,6 +152,7 @@ Page {
 					id: pageTzMenuComponent
 
 					Page {
+						title: timeZoneItem.text
 						GradientListView {
 							id: tzListView
 

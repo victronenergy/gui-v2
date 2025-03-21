@@ -94,12 +94,9 @@ Page {
 		}
 
 		ListNavigation {
-			id: unsupportedDeviceInfoItem
 			text: CommonWords.device_info_title
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": Qt.binding(function() { return unsupportedDeviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-			}
+			onClicked: Global.pageManager.pushPage(pageDeviceInfoUnsupported)
+			Component { id: pageDeviceInfoUnsupported; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 		}
 	}
 
@@ -279,18 +276,14 @@ Page {
 							  || highBatteryAlarm.valid
 							  || highTemperatureAlarm.valid
 							  || shortCircuitAlarm.valid
-			onClicked: {
-				Global.pageManager.pushPage(alarmStatusComponent, { "title": Qt.binding(function() { return alarmStatusItem.text }) })
-			}
+			onClicked: Global.pageManager.pushPage(alarmStatusComponent)
 		}
 
 		ListNavigation {
 			text: CommonWords.daily_history
 			preferredVisible: root.trackerCount > 0
-			onClicked: {
-				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "solarHistory": solarHistory })
-			}
+
+			onClicked: Global.pageManager.pushPage(solarHistoryPage)
 
 			SolarHistory {
 				id: solarHistory
@@ -298,16 +291,16 @@ Page {
 				deviceName: root.title
 				trackerCount: root.trackerCount
 			}
+
+			Component { id: solarHistoryPage; SolarHistoryPage { solarHistory: solarHistory } }
 		}
 
 		ListNavigation {
 			id: overallHistoryItem
 			text: CommonWords.overall_history
 			preferredVisible: root.trackerCount > 0
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": Qt.binding(function() { return overallHistoryItem.text }), "bindPrefix": root.bindPrefix })
-			}
+			onClicked: Global.pageManager.pushPage(pageSolarStats)
+			Component { id: pageSolarStats; PageSolarStats { title: overallHistoryItem.text; bindPrefix: root.bindPrefix } }
 		}
 
 		ListNavigation {
@@ -315,24 +308,21 @@ Page {
 			//% "Networked operation"
 			text: qsTrId("charger_networked_operation")
 			preferredVisible: linkNetworkStatus.valid
-			onClicked: {
-				Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
-						{ "title": Qt.binding(function() { return networkedOperationItem.text }), "bindPrefix": root.bindPrefix })
-			}
+
+			onClicked: Global.pageManager.pushPage(pageSolarParallelOperation)
 
 			VeQuickItem {
 				id: linkNetworkStatus
 				uid: root.bindPrefix + "/Link/NetworkStatus"
 			}
+
+			Component { id: pageSolarParallelOperation; PageSolarParallelOperation { title: networkedOperationItem.text; bindPrefix: root.bindPrefix } }
 		}
 
 		ListNavigation {
-			id: supportedDeviceInfoItem
 			text: CommonWords.device_info_title
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": Qt.binding(function() { return supportedDeviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-			}
+			onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+			Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 		}
 	}
 
@@ -340,6 +330,7 @@ Page {
 		id: alarmStatusComponent
 
 		Page {
+			title: alarmStatusItem.text
 			GradientListView {
 				model: [
 					//% "Low battery voltage alarm"

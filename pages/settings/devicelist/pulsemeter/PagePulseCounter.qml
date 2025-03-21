@@ -30,19 +30,14 @@ Page {
 			ListNavigation {
 				id: setupItem
 				text: CommonWords.setup
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
-							{ "title": Qt.binding(function() { return setupItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pagePulseCounterSetup)
+				Component { id: pagePulseCounterSetup; PagePulseCounterSetup { title: setupItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
-				id: deviceInfoItem
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}

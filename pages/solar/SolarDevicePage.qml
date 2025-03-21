@@ -168,13 +168,10 @@ Page {
 			}
 
 			ListNavigation {
-				id: deviceInfoItem
 				text: CommonWords.device_info_title
 				preferredVisible: productPageLink.pageUrl.length === 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.solarDevice.serviceUid })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.solarDevice.serviceUid } }
 			}
 		}
 	}

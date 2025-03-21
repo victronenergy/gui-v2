@@ -72,37 +72,35 @@ Page {
 			}
 
 			ListNavigation {
-				id: dataUnitsItem
+				id: displayUnitsItem
 				//% "Data units"
 				text: qsTrId("pagesettingsgeneral_data_units")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayUnits.qml", {"title": Qt.binding(function() { return dataUnitsItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsDisplayUnits)
+				Component { id: pageSettingsDisplayUnits; PageSettingsDisplayUnits { title: displayUnitsItem.text } }
 			}
 
 			ListNavigation {
 				id: briefPageItem
 				//% "Brief page"
 				text: qsTrId("settings_brief_page")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayBrief.qml", {"title": Qt.binding(function() { return briefPageItem.text })})
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsDisplayBrief)
+				Component { id: pageSettingsDisplayBrief; PageSettingsDisplayBrief { title: briefPageItem.text } }
 			}
 
 			ListNavigation {
 				id: minmaxItem
 				//% "Minimum and maximum gauge ranges"
 				text: qsTrId("settings_display_minmax")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayMinMax.qml", {"title": Qt.binding(function() { return minmaxItem.text })})
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsDisplayMinMax)
+				Component { id: pageSettingsDisplayMinMax; PageSettingsDisplayMinMax { title: minmaxItem.text } }
 			}
 
 			ListNavigation {
 				id: startPageItem
 				//% "Start page"
 				text: qsTrId("settings_brief_view_start_page")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayStartPage.qml", {"title": Qt.binding(function() { return startPageItem.text })})
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsDisplayStartPage)
+				Component { id: pageSettingsDisplayStartPage; PageSettingsDisplayStartPage { title: startPageItem.text } }
 			}
 
 			ListRadioButtonGroup {

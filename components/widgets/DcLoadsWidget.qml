@@ -30,7 +30,7 @@ OverviewWidget {
 
 	onClicked: {
 		if (Global.allDevicesModel.combinedDcLoadDevices.count > 1) {
-			Global.pageManager.pushPage(deviceListPageComponent, { "title": Qt.binding(function() { return root.title }) })
+			Global.pageManager.pushPage(deviceListPageComponent)
 		} else {
 			root._showSettingsPage(Global.allDevicesModel.combinedDcLoadDevices.firstObject)
 		}
@@ -40,6 +40,7 @@ OverviewWidget {
 		id: deviceListPageComponent
 
 		Page {
+			title: root.title
 			GradientListView {
 				model: Global.allDevicesModel.combinedDcLoadDevices
 

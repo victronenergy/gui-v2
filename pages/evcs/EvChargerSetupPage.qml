@@ -12,6 +12,8 @@ Page {
 
 	required property string bindPrefix
 
+	title: CommonWords.setup
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListEvChargerPositionRadioButtonGroup {

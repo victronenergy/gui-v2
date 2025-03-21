@@ -206,13 +206,14 @@ VisibleItemModel {
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
-			Global.pageManager.pushPage(engineComponent, {"title": Qt.binding(function() { return engineItem.text })})
+			Global.pageManager.pushPage(engineComponent)
 		}
 
 		Component {
 			id: engineComponent
 
 			Page {
+				title: engineItem.text
 				GradientListView {
 					model: VisibleItemModel {
 						ListQuantity {
@@ -296,15 +297,12 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
-		//% "Run time and service"
-		text: qsTrId("page_settings_generator_run_time_and_service")
-		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-											   {
-												   title: text,
-												   settingsBindPrefix: root.settingsBindPrefix,
-												   startStopBindPrefix: root.startStopBindPrefix,
-												   gensetBindPrefix: root.bindPrefix
-											   })
+		text: CommonWords.run_time_and_service
+		onClicked: Global.pageManager.pushPage(pageGeneratorRuntimeService,
+				{ settingsBindPrefix: root.settingsBindPrefix,
+				  startStopBindPrefix: root.startStopBindPrefix,
+				  gensetBindPrefix: root.bindPrefix })
+		Component { id: pageGeneratorRuntimeService; PageGeneratorRuntimeService { } }
 	}
 
 	ListNavigation {
@@ -312,7 +310,7 @@ VisibleItemModel {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
 		preferredVisible: chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid
-		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": Qt.binding(function() { return dcGensetItem.text })})
+		onClicked: Global.pageManager.pushPage(settingsComponent)
 
 		VeQuickItem {
 			id: chargeVoltage
@@ -333,6 +331,7 @@ VisibleItemModel {
 			id: settingsComponent
 
 			Page {
+				title: dcGensetItem.text
 				GradientListView {
 					model: VisibleItemModel {
 						ListSpinBox {
@@ -386,20 +385,18 @@ VisibleItemModel {
 	}
 
 	ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
-		id: settingsItem
 		text: CommonWords.settings
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-										{ title: Qt.binding(function() { return text }), settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+					{ settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 		}
 	}
 
 	ListNavigation {
-		id: deviceInfoItem
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
+					{ bindPrefix: root.bindPrefix })
 		}
 	}
 }

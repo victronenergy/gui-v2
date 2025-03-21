@@ -279,14 +279,21 @@ Page {
 				//% "Details"
 				text: qsTrId("battery_details")
 				preferredVisible: batteryDetails.hasAllowedItem
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
-							{ "title": Qt.binding(function() { return detailsItem.text }), "bindPrefix": root.bindPrefix, "details": batteryDetails })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageBatteryDetails)
 
 				BatteryDetails {
 					id: batteryDetails
 					bindPrefix: root.bindPrefix
+				}
+
+				Component {
+					id: pageBatteryDetails
+					PageBatteryDetails {
+						title: detailsItem.text
+						bindPrefix: root.bindPrefix
+						details: batteryDetails
+					}
 				}
 			}
 
@@ -294,10 +301,8 @@ Page {
 				id: alarmsItem
 				text: CommonWords.alarms
 				preferredVisible: !root.isParallelBms
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
-							{ "title": Qt.binding(function() { return alarmsItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageBatteryAlarms)
+				Component { id: pageBatteryAlarms; PageBatteryAlarms { title: alarmsItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -305,9 +310,16 @@ Page {
 				//% "Module level alarms"
 				text: qsTrId("battery_module_level_alarms")
 				preferredVisible: moduleAlarmModel.rowCount > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryModuleAlarms.qml",
-							{ "title": Qt.binding(function() { return moduleAlarmsItem.text }), "bindPrefix": root.bindPrefix, alarmModel: moduleAlarmModel })
+
+				onClicked: Global.pageManager.pushPage(pageBatteryModuleAlarms)
+
+				Component {
+					id: pageBatteryModuleAlarms
+					PageBatteryModuleAlarms {
+						title: moduleAlarmsItem.text
+						bindPrefix: root.bindPrefix
+						alarmModel: moduleAlarmModel
+					}
 				}
 			}
 
@@ -315,14 +327,21 @@ Page {
 				id: historyItem
 				text: CommonWords.history
 				preferredVisible: !isFiamm48TL && batteryHistory.hasAllowedItem
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
-							{ "title": Qt.binding(function() { return historyItem.text }), "bindPrefix": root.bindPrefix, "history": batteryHistory })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageBatteryHistory)
 
 				BatteryHistory {
 					id: batteryHistory
 					bindPrefix: root.bindPrefix
+				}
+
+				Component {
+					id: pageBatteryHistory
+					PageBatteryHistory {
+						title: historyItem.text
+						bindPrefix: root.bindPrefix
+						history: batteryHistory
+					}
 				}
 			}
 
@@ -330,10 +349,8 @@ Page {
 				id: settingsItem
 				text: CommonWords.settings
 				preferredVisible: hasSettings.value === 1
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettings.qml",
-							{ "title": Qt.binding(function() { return settingsItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageBatterySettings)
+				Component { id: pageBatterySettings; PageBatterySettings { title: settingsItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -342,26 +359,23 @@ Page {
 				//% "Diagnostics"
 				text: qsTrId("battery_settings_diagnostics")
 				preferredVisible: lastError.valid
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml",
-							{ "title": Qt.binding(function() { return lynxIonDiagnostics.text }), "bindPrefix": root.bindPrefix })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageLynxIonDiagnostics)
 
 				VeQuickItem {
 					id: lastError
 					uid: root.bindPrefix + "/Diagnostics/LastErrors/1/Error"
 				}
+
+				Component { id: pageLynxIonDiagnostics; PageLynxIonDiagnostics { title: lynxIonDiagnostics.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
 				id: fiamm48TlDiagnosticsItem
 				text: lynxIonDiagnostics.text
 				preferredVisible: isFiamm48TL
-
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/Page48TlDiagnostics.qml",
-							{ "title": Qt.binding(function() { return fiamm48TlDiagnosticsItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(page48TlDiagnostics)
+				Component { id: page48TlDiagnostics; Page48TlDiagnostics { title: fiamm48TlDiagnosticsItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -370,15 +384,14 @@ Page {
 				text: qsTrId("battery_settings_fuses")
 				preferredVisible: nrOfDistributors.valid && nrOfDistributors.value > 0
 
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxDistributorList.qml",
-							{ "title": Qt.binding(function() { return fusesItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageLynxDistributorList)
 
 				VeQuickItem {
 					id: nrOfDistributors
 					uid: root.bindPrefix + "/NrOfDistributors"
 				}
+
+				Component { id: pageLynxDistributorList; PageLynxDistributorList { title: fusesItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -386,15 +399,15 @@ Page {
 				//% "IO"
 				text: qsTrId("battery_settings_io")
 				preferredVisible: allowToCharge.valid
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonIo.qml",
-							{ "title": Qt.binding(function() { return ioItem.text }), "bindPrefix": root.bindPrefix })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageLynxIonIo)
 
 				VeQuickItem {
 					id: allowToCharge
 					uid: root.bindPrefix + "/Io/AllowToCharge"
 				}
+
+				Component { id: pageLynxIonIo; PageLynxIonIo { title: ioItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -402,24 +415,21 @@ Page {
 				//% "System"
 				text: qsTrId("battery_settings_system")
 				preferredVisible: nrOfBatteries.valid
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonSystem.qml",
-							{ "title": Qt.binding(function() { return systemItem.text }), "bindPrefix": root.bindPrefix })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageLynxIonSystem)
 
 				VeQuickItem {
 					id: nrOfBatteries
 					uid: root.bindPrefix +"/System/NrOfBatteries"
 				}
+
+				Component { id: pageLynxIonSystem; PageLynxIonSystem { title: systemItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
-				id: deviceInfoItem
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
@@ -427,10 +437,8 @@ Page {
 				//% "Parameters"
 				text: qsTrId("battery_settings_parameters")
 				preferredVisible: cvl.valid || ccl.valid || dcl.valid
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryParameters.qml",
-							{ "title": Qt.binding(function() { return parametersItem.text }), "bindPrefix": root.bindPrefix })
-				}
+
+				onClicked: Global.pageManager.pushPage(pageBatteryParameters)
 
 				VeQuickItem {
 					id: cvl
@@ -446,6 +454,8 @@ Page {
 					id: dcl
 					uid: root.bindPrefix + "/Info/MaxDischargeCurrent"
 				}
+
+				Component { id: pageBatteryParameters; PageBatteryParameters { title: parametersItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListButton {

@@ -62,9 +62,8 @@ Page {
 
 			ListNavigation {
 				id: batteryMeasurementsItem
-				//% "Battery measurements"
-				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteryMeasurements.qml", { title: Qt.binding(function() { return batteryMeasurementsItem.text }) })
+				text: CommonWords.battery_measurements
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteryMeasurements.qml")
 			}
 		}
 	}

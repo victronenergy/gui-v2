@@ -143,23 +143,21 @@ VisibleItemModel {
 		id: setupItem
 		text: CommonWords.setup
 		preferredVisible: allowedRoles.valid
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-					{ "title": Qt.binding(function() { return setupItem.text }), "bindPrefix": root.bindPrefix })
-		}
+		onClicked: Global.pageManager.pushPage(pageAcInSetup)
 
 		VeQuickItem {
 			id: allowedRoles
 			uid: root.bindPrefix + "/AllowedRoles"
 		}
+
+		Component { id: pageAcInSetup; PageAcInSetup { bindPrefix: root.bindPrefix } }
 	}
 
 	ListNavigation {
 		id: deviceInfoItem
 		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage(deviceInfoComponent, { title: Qt.binding(function() { return deviceInfoItem.text }) })
-		}
+
+		onClicked: Global.pageManager.pushPage(deviceInfoComponent)
 
 		Component {
 			id: deviceInfoComponent
@@ -167,6 +165,7 @@ VisibleItemModel {
 			PageDeviceInfo {
 				id: deviceInfoPage
 
+				title: deviceInfoItem.text
 				bindPrefix: root.bindPrefix
 
 				settingsListView.footer: SettingsColumn {

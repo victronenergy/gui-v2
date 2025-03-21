@@ -14,38 +14,30 @@ Page {
 
 		model: VisibleItemModel {
 			ListNavigation {
-				id: ethernetItem
-				//% "Ethernet"
-				text: qsTrId("pagesettingsconnectivity_ethernet")
+				text: CommonWords.ethernet
 				secondaryText: networkServices.ipAddress
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": Qt.binding(function() { return ethernetItem.text })})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml")
 			}
 
 			ListNavigation {
-				id: wifiItem
-				//% "Wi-Fi"
-				text: qsTrId("pagesettingsconnectivity_wifi")
+				text: CommonWords.wifi
 				secondaryText: wifiModel.connectedNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": Qt.binding(function() { return wifiItem.text })})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml")
 				WifiModel {
 					id: wifiModel
 				}
 			}
 
 			ListNavigation {
-				id: bluetoothItem
-				//% "Bluetooth"
-				text: qsTrId("pagesettingsconnectivity_bluetooth")
+				text: CommonWords.bluetooth
 				preferredVisible: networkServices.hasBluetoothSupport
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": Qt.binding(function() { return bluetoothItem.text })})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml")
 			}
 
 			ListNavigation {
-				id: gsmItem
-				//% "Mobile Network"
-				text: qsTrId("pagesettingsconnectivity_mobile_network")
+				text: CommonWords.mobile_network
 				secondaryText: networkServices.mobileNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": Qt.binding(function() { return gsmItem.text })})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml")
 			}
 
 			SettingsListHeader { }
@@ -55,15 +47,15 @@ Page {
 				//% "Tailscale (remote VPN access)"
 				text: qsTrId("settings_services_tailscale_remote_vpn_access")
 				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: Qt.binding(function() { return tailscaleItem.text }) })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsTailscale)
 				preferredVisible: tailscale.valid
 
 				VeQuickItem {
 					id: tailscale
 					uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
 				}
+
+				Component { id: pageSettingsTailscale; PageSettingsTailscale { title: tailscaleItem.text } }
 			}
 
 			SettingsColumn {
@@ -77,12 +69,12 @@ Page {
 						id: canInterfaceDelegate
 						text: modelData["name"] || ""
 						secondaryText: canbusProfile.profileText
-						onClicked: Global.pageManager.pushPage(canBusComponent, { title: Qt.binding(function() { return canInterfaceDelegate.text }), canbusProfile: canbusProfile })
+						onClicked: Global.pageManager.pushPage(canBusComponent, { canbusProfile: canbusProfile })
 
 						Component {
 							id: canBusComponent
 
-							PageSettingsCanbus { }
+							PageSettingsCanbus { title: canInterfaceDelegate.text }
 						}
 
 						CanbusProfile {

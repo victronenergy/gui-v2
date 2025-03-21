@@ -257,12 +257,14 @@ Page {
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
 				preferredVisible: masterHasNetworkQuality.valid
-				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": Qt.binding(function() { return vebusDiagnosticsItem.text })})
+
+				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage)
 
 				Component {
 					id: vebusDiagnosticsPage
 
 					Page {
+						title: vebusDiagnosticsItem.text
 						GradientListView {
 							model: VisibleItemModel {
 								SettingsColumn {

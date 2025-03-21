@@ -30,7 +30,8 @@ Page {
 				icon.color: Theme.color_blue
 				icon.width: 32
 				icon.height: 32
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", {"title": Qt.binding(function() { return addDeviceItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsModbusAddDevice)
+				Component { id: pageSettingsModbusAddDevice; PageSettingsModbusAddDevice { title: addDeviceItem.text } }
 			}
 
 			SettingsListHeader { }
@@ -40,21 +41,24 @@ Page {
 				id: invertersItem
 				//% "PV Inverters"
 				text: qsTrId("pagesettingsintegrations_pv_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": Qt.binding(function() { return invertersItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsFronius)
+				Component { id: pageSettingsFronius; PageSettingsFronius { title: invertersItem.text } }
 			}
 
 			ListNavigation {
 				id: rs485EmsItem
 				//% "Energy meters via RS485"
 				text: qsTrId("pagesettingsintegrations_energy_meters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCGwacsOverview.qml", {"title": Qt.binding(function() { return rs485EmsItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsCGwacsOverview)
+				Component { id: pageSettingsCGwacsOverview; PageSettingsCGwacsOverview { title: rs485EmsItem.text } }
 			}
 
 			ListNavigation {
 				id: modbusDevicesItem
 				//% "Modbus Devices"
 				text: qsTrId("pagesettingsintegrations_modbus_devices")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbus.qml", {"title": Qt.binding(function() { return modbusDevicesItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsModbus)
+				Component { id: pageSettingsModbus; PageSettingsModbus { title: modbusDevicesItem.text } }
 			}
 
 			ListNavigation {
@@ -62,12 +66,14 @@ Page {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": Qt.binding(function() { return bluetoothSensorsItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsBleSensors)
 
 				VeQuickItem {
 					id: hasBluetoothSupport
 					uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
 				}
+
+				Component { id: pageSettingsBleSensors; PageSettingsBleSensors { title: bluetoothSensorsItem.text } }
 			}
 
 			SettingsListHeader {
@@ -84,7 +90,7 @@ Page {
 				//% "Tank and Temperature Sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
 				preferredVisible: analogModel.rowCount > 0
-				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": Qt.binding(function() { return tankSensorsItem.text })})
+				onClicked: Global.pageManager.pushPage(analogInputsComponent)
 
 				VeQItemTableModel {
 					id: analogModel
@@ -96,6 +102,7 @@ Page {
 					id: analogInputsComponent
 
 					Page {
+						title: tankSensorsItem.text
 						GradientListView {
 							model: analogModel
 							delegate: ListSwitch {
@@ -117,13 +124,15 @@ Page {
 
 				//% "Relays"
 				text: qsTrId("pagesettingsintegrations_relays")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsRelay.qml", {"title": Qt.binding(function() { return relaysItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsRelay)
 				preferredVisible: relay0.valid
 
 				VeQuickItem {
 					id: relay0
 					uid: Global.system.serviceUid + "/Relay/0/State"
 				}
+
+				Component { id: pageSettingsRelay; PageSettingsRelay { title: relaysItem.text } }
 			}
 
 			ListNavigation {
@@ -132,7 +141,7 @@ Page {
 				//% "Digital I/O"
 				text: qsTrId("pagesettingsintegrations_digital_io")
 				preferredVisible: digitalModel.rowCount > 0
-				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": Qt.binding(function() { return digitalIoItem.text })})
+				onClicked: Global.pageManager.pushPage(digitalInputsComponent)
 
 				VeQItemSortTableModel {
 					id: digitalModel
@@ -147,6 +156,7 @@ Page {
 					id: digitalInputsComponent
 
 					Page {
+						title: digitalIoItem.text
 						readonly property var delegateOptionModel: [
 							VenusOS.DigitalInput_Type_Disabled,
 							VenusOS.DigitalInput_Type_PulseMeter,
@@ -188,13 +198,15 @@ Page {
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
 				secondaryText: modbusServerEnabled.value ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": Qt.binding(function() { return modbusTcpServerItem.text })}) // TODO - is this correct?
+				onClicked: Global.pageManager.pushPage(pageSettingsModbusTcp)
 
 				VeQuickItem {
 					id: modbusServerEnabled
 
 					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 				}
+
+				Component { id: pageSettingsModbusTcp; PageSettingsModbusTcp { title: modbusTcpServerItem.text } }
 			}
 
 			SettingsListHeader {
@@ -238,12 +250,14 @@ Page {
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
 				preferredVisible: nodeRedModeItem.valid
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": Qt.binding(function() { return nodeRed.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsNodeRed)
 
 				VeQuickItem {
 					id: nodeRedModeItem
 					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				}
+
+				Component { id: pageSettingsNodeRed; PageSettingsNodeRed { title: nodeRed.text } }
 			}
 		}
 	}

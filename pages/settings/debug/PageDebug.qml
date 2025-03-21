@@ -44,19 +44,22 @@ Page {
 			ListNavigation {
 				id: powerItem
 				text: "Power"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: Qt.binding(function() { return powerItem.text }) })
+				onClicked: Global.pageManager.pushPage(pagePowerDebug)
+				Component { id: pagePowerDebug; PagePowerDebug { title: powerItem.text } }
 			}
 
 			ListNavigation {
 				id: systemDataItem
 				text: "System data"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: Qt.binding(function() { return systemDataItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageSystemData)
+				Component { id: pageSystemData; PageSystemData { title: systemDataItem.text } }
 			}
 
 			ListNavigation {
 				id: valuesItem
 				text: "Values"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: Qt.binding(function() { return valuesItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageDebugVeQItems)
+				Component { id: pageDebugVeQItems; PageDebugVeQItems { title: valuesItem.text } }
 			}
 
 			SwitchItem {
@@ -84,21 +87,24 @@ Page {
 			ListNavigation {
 				id: uiLibraryItem
 				text: "UI Library"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: Qt.binding(function() { return uiLibraryItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageSettingsDemo)
+				Component { id: pageSettingsDemo; PageSettingsDemo { title: uiLibraryItem.text } }
 			}
 
 			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
 			/*ListNavigation {
 				id: glibcMemoryItem
 				text: "glibc memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: Qt.binding(function() { return glibcMemoryItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageDebugMemoryLibc)
+				Component { id: pageDebugMemoryLibc; PageDebugMemoryLibc { title: glibcMemoryItem.text } }
 			}*/
 
 			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
 			/*ListNavigation {
 				id: qtMemoryItem
 				text: "Qt memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: Qt.binding(function() { return qtMemoryItem.text }) })
+				onClicked: Global.pageManager.pushPage(pageDebugMemoryQt)
+				Component { id: pageDebugMemoryQt; PageDebugMemoryQt { title: qtMemoryItem.text } }
 			}*/
 
 			ListRadioButtonGroup {

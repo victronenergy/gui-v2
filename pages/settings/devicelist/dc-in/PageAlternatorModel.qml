@@ -104,9 +104,8 @@ VisibleItemModel {
 		id: overallHistoryItem
 		text: CommonWords.overall_history
 		preferredVisible: overallHistoryMonitor.hasVisibleItem
-		onClicked: {
-			Global.pageManager.pushPage(overallHistoryComponent, { "title": Qt.binding(function() { return overallHistoryItem.text }) })
-		}
+
+		onClicked: Global.pageManager.pushPage(overallHistoryComponent)
 
 		// Declare ObjectModelMonitor before the model that it is monitoring. See QTBUG-123496
 		ObjectModelMonitor {
@@ -167,6 +166,7 @@ VisibleItemModel {
 			id: overallHistoryComponent
 
 			Page {
+				title: overallHistoryItem.text
 				GradientListView {
 					model: overallHistoryModel
 				}
@@ -179,14 +179,14 @@ VisibleItemModel {
 		//% "Charge cycle history"
 		text: qsTrId("alternator_wakespeed_charge_cycle_history")
 		preferredVisible: historyCyclesAvailable.valid
-		onClicked: {
-			Global.pageManager.pushPage(chargeHistoryComponent, { "title": Qt.binding(function() { return chargeCycleHistoryItem.text }) })
-		}
+
+		onClicked: Global.pageManager.pushPage(chargeHistoryComponent)
 
 		Component {
 			id: chargeHistoryComponent
 
 			Page {
+				title: chargeCycleHistoryItem.text
 				GradientListView {
 					model: historyCyclesAvailable.valid ? historyCyclesAvailable.value + 1 : 1
 					delegate: Component {
@@ -207,11 +207,8 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
-		id: deviceInfoItem
 		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": Qt.binding(function() { return deviceInfoItem.text }), "bindPrefix": root.bindPrefix })
-		}
+		onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+		Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 	}
 }

@@ -29,7 +29,8 @@ Page {
 				id: invertersItem
 				//% "Inverters"
 				text: qsTrId("page_settings_fronius_inverters")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusInverters.qml", {"title": Qt.binding(function() { return invertersItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusInverters)
+				Component { id: pageSettingsFroniusInverters; PageSettingsFroniusInverters { title: invertersItem.text } }
 			}
 
 			ListButton {
@@ -43,14 +44,16 @@ Page {
 				id: detectedIpAddrItem
 				//% "Detected IP addresses"
 				text: qsTrId("page_settings_fronius_detected_ip_addresses")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusShowIpAddresses.qml", {"title": Qt.binding(function() { return detectedIpAddrItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusShowIpAddresses)
+				Component { id: pageSettingsFroniusShowIpAddresses; PageSettingsFroniusShowIpAddresses { title: detectedIpAddrItem.text } }
 			}
 
 			ListNavigation {
 				id: setIpAddrItem
 				//% "Add IP address manually"
 				text: qsTrId("page_settings_fronius_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusSetIpAddresses.qml", {"title": Qt.binding(function() { return setIpAddrItem.text })})
+				onClicked: Global.pageManager.pushPage(pageSettingsFroniusSetIpAddresses)
+				Component { id: pageSettingsFroniusSetIpAddresses; PageSettingsFroniusSetIpAddresses { title: setIpAddrItem.text } }
 			}
 
 			ListPortField {

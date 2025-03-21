@@ -134,12 +134,11 @@ Page {
 			}
 
 			ListNavigation {
-				id: essItem
 				text: CommonWords.ess
 				preferredVisible: root.serviceType === "acsystem"
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
-							{ "title": Qt.binding(function() { return essItem.text }), "bindPrefix": root.serviceUid })
+							{ bindPrefix: root.serviceUid })
 				}
 			}
 

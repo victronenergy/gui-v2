@@ -37,10 +37,8 @@ Page {
 				id: batteryBankItem
 				//% "Battery bank"
 				text: qsTrId("batterysettings_battery_bank")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettingsBattery.qml",
-							{ "title": Qt.binding(function() { return batteryBankItem.text }), "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageBatterySettingsBattery)
+				Component { id: pageBatterySettingsBattery; PageBatterySettingsBattery { title: batteryBankItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {

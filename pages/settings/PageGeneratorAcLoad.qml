@@ -11,6 +11,8 @@ Page {
 
 	property string bindPrefix
 
+	title: CommonWords.ac_load
+
 	function minValueWarning()
 	{
 		//% "Value must be greater than stop value"
@@ -24,9 +26,6 @@ Page {
 		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("value_must_be_lower_than_start_value"),
 												   Theme.animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration)
 	}
-
-	//% "AC output"
-	title: qsTrId("ac_output")
 
 	GradientListView {
 

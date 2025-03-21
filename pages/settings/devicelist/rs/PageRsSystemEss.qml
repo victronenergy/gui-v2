@@ -15,6 +15,8 @@ Page {
 		VenusOS.Ess_State_OptimizedWithBatteryLife,
 		VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essMode.dataItem.value)
 
+	title: CommonWords.ess
+
 	VeQuickItem {
 		id: dEssModeItem
 
@@ -70,9 +72,8 @@ Page {
 						  //% "Inactive"
 						: qsTrId("scheduled_charge_inactive")
 				preferredVisible: root.isModeOptimized
-				onClicked: {
-					Global.pageManager.pushPage(scheduledChargeComponent, { title: Qt.binding(function() { return scheduledChargeLevelsItem.text }) })
-				}
+
+				onClicked: Global.pageManager.pushPage(scheduledChargeComponent)
 
 				VeQuickItem {
 					id: scheduleSoc
@@ -83,6 +84,7 @@ Page {
 					id: scheduledChargeComponent
 
 					Page {
+						title: scheduledChargeLevelsItem.text
 						GradientListView {
 							model: 5
 							delegate: ListChargeSchedule {
@@ -98,10 +100,8 @@ Page {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
 				preferredVisible: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
-							{ title: Qt.binding(function() { return dynamicEssItem.text }) })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsDynamicEss)
+				Component { id: pageSettingsDynamicEss; PageSettingsDynamicEss { title: dynamicEssItem.text } }
 			}
 		}
 	}

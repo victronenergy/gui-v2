@@ -21,8 +21,7 @@ ColumnLayout {
 			: null
 
 	BriefSidePanelWidget {
-		//% "Solar yield"
-		title: qsTrId("brief_solar_yield")
+		title: CommonWords.solar_yield
 		icon.source: "qrc:/images/solaryield.svg"
 		loadersActive: Global.solarDevices.model.count > 0 && Global.pvInverters.model.count === 0
 		visible: Global.solarDevices.model.count || Global.pvInverters.model.count
