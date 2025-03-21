@@ -61,9 +61,9 @@ Page {
 			topPadding: spacing
 
 			ListNavigation {
-				//% "Battery measurements"
-				text: qsTrId("settings_system_battery_measurements")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteryMeasurements.qml", { title: text })
+				id: batteryMeasurementsItem
+				text: CommonWords.battery_measurements
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteryMeasurements.qml")
 			}
 		}
 	}

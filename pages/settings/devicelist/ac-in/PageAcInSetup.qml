@@ -51,6 +51,8 @@ Page {
 		return CommonWords.unknown_status
 	}
 
+	title: CommonWords.setup
+
 	VeQuickItem {
 		id: productId
 		uid: root.bindPrefix + "/ProductId"
@@ -148,12 +150,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: currentTransformersItem
 				text: CommonWords.current_transformers
 				preferredVisible: productId.value == ProductInfo.ProductId_PowerBox_Smappee
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageSmappeeCTList.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageSmappeeCTList)
+				Component { id: pageSmappeeCTList; PageSmappeeCTList { title: currentTransformersItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {

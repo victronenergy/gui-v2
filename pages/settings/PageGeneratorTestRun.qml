@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	property string bindPrefix
 
+	title: CommonWords.periodic_run
+
 	GradientListView {
 
 		model: VisibleItemModel {

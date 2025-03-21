@@ -99,23 +99,19 @@ Page {
 		let returnValue = []
 
 		if (accessLocalEthernetItem.valid && accessLocalEthernetItem.value === 1) {
-			//% "Ethernet"
-			returnValue.push(qsTrId("settings_tailscale_ethernet"))
+			returnValue.push(CommonWords.ethernet)
 		}
 
 		if (accessLocalWifiItem.valid && accessLocalWifiItem.value === 1) {
-			//% "WiFi"
-			returnValue.push(qsTrId("settings_tailscale_wifi"))
+			returnValue.push(CommonWords.wifi)
 		}
 
 		if (customNetworksItem.valid && customNetworksItem.value !== "") {
-			//% "Custom"
-			returnValue.push(qsTrId("settings_tailscale_custom"))
+			returnValue.push(CommonWords.custom)
 		}
 
 		if (returnValue.length === 0) {
-			//% "Disabled"
-			returnValue.push(qsTrId("settings_tailscale_disabled"))
+			returnValue.push(CommonWords.disabled)
 		}
 
 		// join the array with a comma and space
@@ -238,17 +234,18 @@ Page {
 			}
 
 			ListNavigation {
+				id: localNetworkAccessItem
 				//% "Local network access"
 				text: qsTrId("settings_tailscale_local_network_access")
 				secondaryText: getLocalNetworkAccess()
-				onClicked: {
-					Global.pageManager.pushPage(tailscaleLocalNetworkAccess, {"title": text})
-				}
+
+				onClicked: Global.pageManager.pushPage(tailscaleLocalNetworkAccess)
 
 				Component {
 					id: tailscaleLocalNetworkAccess
 
 					Page {
+						title: localNetworkAccessItem.text
 						GradientListView {
 							model: VisibleItemModel {
 								ListSwitch {
@@ -296,16 +293,17 @@ Page {
 			}
 
 			ListNavigation {
+				id: advancedItem
 				//% "Advanced"
 				text: qsTrId("settings_tailscale_advanced")
-				onClicked: {
-					Global.pageManager.pushPage(tailscaleAdvanced, {"title": text})
-				}
+
+				onClicked: Global.pageManager.pushPage(tailscaleAdvanced)
 
 				Component {
 					id: tailscaleAdvanced
 
 					Page {
+						title: advancedItem.text
 						GradientListView {
 							model: VisibleItemModel {
 								ListTextField {

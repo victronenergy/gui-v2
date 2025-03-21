@@ -13,6 +13,8 @@ Page {
 	property string startStopBindPrefix
 	property int warmupCapability: 1
 
+	title: CommonWords.settings
+
 	VeQuickItem {
 		id: capabilities
 
@@ -30,9 +32,13 @@ Page {
 		model: VisibleItemModel {
 
 			ListNavigation {
+				id: conditionsItem
 				//% "Conditions"
 				text: qsTrId("page_settings_generator_conditions")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorConditions.qml", { title: text, bindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+				onClicked: Global.pageManager.pushPage(pageGeneratorConditions,
+						{ bindPrefix: root.settingsBindPrefix,
+						  startStopBindPrefix: root.startStopBindPrefix })
+				Component { id: pageGeneratorConditions; PageGeneratorConditions { title: conditionsItem.text } }
 			}
 
 			ListSpinBox {
@@ -44,14 +50,16 @@ Page {
 			}
 
 			ListNavigation {
+				id: warmUpCoolDownItem
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
 				preferredVisible: capabilities.value & warmupCapability
-				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
+				onClicked: Global.pageManager.pushPage(warmupPageComponent)
 
 				Component {
 					id: warmupPageComponent
 					Page {
+						title: warmUpCoolDownItem.text
 						GradientListView {
 							id: settingsListView
 

@@ -15,6 +15,8 @@ Page {
 
 	readonly property var _dates: historicalData.valid ? Object.keys(JSON.parse(historicalData.value)).reverse() : 0
 
+	title: CommonWords.run_time_and_service
+
 	VeQuickItem {
 		id: state
 
@@ -66,14 +68,16 @@ Page {
 			}
 
 			ListNavigation {
+				id: dailyRunTimeItem
 				//% "Daily run time"
 				text: qsTrId("settings_page_run_time_and_service_daily_run_time")
-				onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
+				onClicked: Global.pageManager.pushPage(dailyRunTimePage)
 
 				Component {
 					id: dailyRunTimePage
 
 					Page {
+						title: dailyRunTimeItem.text
 						GradientListView {
 							model: _dates
 							delegate: ListText {

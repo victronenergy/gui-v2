@@ -28,15 +28,15 @@ Page {
 			}
 
 			ListNavigation {
+				id: setupItem
 				text: CommonWords.setup
-				onClicked: {
-					Global.pageManager.pushPage(settingsComponent, { "title": text })
-				}
+				onClicked: Global.pageManager.pushPage(settingsComponent)
 
 				Component {
 					id: settingsComponent
 
 					Page {
+						title: setupItem.text
 						readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + (deviceInstance.value || 0)
 
 						GradientListView {
@@ -73,10 +73,8 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}

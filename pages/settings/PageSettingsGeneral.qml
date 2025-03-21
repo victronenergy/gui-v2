@@ -19,21 +19,26 @@ Page {
 			}
 
 			ListNavigation {
+				id: firmwareItem
 				//% "Firmware"
 				text: qsTrId("pagesettingsgeneral_firmware")
 				secondaryText: FirmwareVersion.versionText(firmwareVersion.value, "venus")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFirmware.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsFirmware)
 
 				VeQuickItem {
 					id: firmwareVersion
 					uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 				}
+
+				Component { id: pageSettingsFirmware; PageSettingsFirmware { title: firmwareItem.text } }
 			}
 
 			ListNavigation {
+				id: accessAndSecurityItem
 				//% "Access & Security"
 				text: qsTrId("pagesettingsgeneral_access_and_security")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAccessAndSecurity.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsAccessAndSecurity)
+				Component { id: pageSettingsAccessAndSecurity; PageSettingsAccessAndSecurity { title: accessAndSecurityItem.text } }
 			}
 
 			SettingsListHeader {
@@ -42,15 +47,19 @@ Page {
 			}
 
 			ListNavigation {
+				id: displayAndAppearanceItem
 				//% "Display & Appearance"
 				text: qsTrId("pagesettingsgeneral_display_and_appearance")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsDisplayAndAppearance)
+				Component { id: pageSettingsDisplayAndAppearance; PageSettingsDisplayAndAppearance { title: displayAndAppearanceItem.text } }
 			}
 
 			ListNavigation {
+				id: alarmsAndFeedbackItem
 				//% "Alarms & Feedback"
 				text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsAlarmsAndFeedback)
+				Component { id: pageSettingsAlarmsAndFeedback; PageSettingsAlarmsAndFeedback { title: alarmsAndFeedbackItem.text } }
 			}
 
 			SettingsListHeader { }
@@ -128,9 +137,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: tzInfoItem
 				//% "Date & Time"
 				text: qsTrId("pagesettingsgeneral_date_and_time")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageTzInfo)
+				Component { id: pageTzInfo; PageTzInfo { title: tzInfoItem.text } }
 			}
 
 			SettingsListHeader { }
@@ -140,12 +151,15 @@ Page {
 			SettingsListHeader { }
 
 			ListNavigation {
+				id: usefulLinksItem
 				//% "Useful Links"
 				text: qsTrId("pagesettingsgeneral_useful_links")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsUsefulLinks.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsUsefulLinks)
+				Component { id: pageSettingsUsefulLinks; PageSettingsUsefulLinks { title: usefulLinksItem.text } }
 			}
 
 			ListNavigation {
+				id: modificationChecksItem
 				//% "Modification checks"
 				text: qsTrId("pagesettingsgeneral_modification_checks")
 				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
@@ -155,7 +169,7 @@ Page {
 					:  qsTrId("pagesettingsmodificationchecks_modified")
 				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage(pageSettingsModificationChecks)
 
 				VeQuickItem {
 					id: fsModifiedStateItem
@@ -165,6 +179,8 @@ Page {
 					id: systemHooksStateItem
 					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
 				}
+
+				Component { id: pageSettingsModificationChecks; PageSettingsModificationChecks { title: modificationChecksItem.text } }
 			}
 		}
 	}

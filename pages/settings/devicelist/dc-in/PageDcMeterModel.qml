@@ -49,28 +49,24 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
+		id: alarmsItem
 		text: CommonWords.alarms
 		preferredVisible: !isSssDcEnergyMeter
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
-		}
+		onClicked: Global.pageManager.pushPage(pageDcMeterAlarms)
+		Component { id: pageDcMeterAlarms; PageDcMeterAlarms { title: alarmsItem.text; bindPrefix: root.bindPrefix } }
 	}
 
 	ListNavigation {
+		id: historyItem
 		text: CommonWords.history
 		preferredVisible: !isSssDcEnergyMeter
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
-		}
+		onClicked: Global.pageManager.pushPage(pageDcMeterHistory)
+		Component { id: pageDcMeterHistory; PageDcMeterHistory { title: historyItem.text; bindPrefix: root.bindPrefix } }
 	}
 
 	ListNavigation {
 		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
-		}
+		onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+		Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 	}
 }

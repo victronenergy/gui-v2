@@ -125,7 +125,8 @@ Page {
 			ListNavigation {
 				text: CommonWords.ac_load
 				secondaryText: acLoadEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml", { title: text, bindPrefix: root.bindPrefix + "/AcLoad"})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorAcLoad.qml",
+						{ bindPrefix: root.bindPrefix + "/AcLoad" })
 
 				VeQuickItem {
 					id: acLoadEnabled
@@ -169,10 +170,10 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Periodic run"
-				text: qsTrId("page_generator_conditions_periodic_run")
+				text: CommonWords.periodic_run
 				secondaryText: testRunEnabled.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml", { title: text, bindPrefix: root.bindPrefix })
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorTestRun.qml",
+						{ bindPrefix: root.bindPrefix })
 
 				VeQuickItem {
 					id: testRunEnabled

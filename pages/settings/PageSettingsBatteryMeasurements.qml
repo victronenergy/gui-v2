@@ -16,6 +16,8 @@ Page {
 	//% "Hidden"
 	readonly property string _hiddenText: qsTrId("settings_batteries_battery_hidden")
 
+	title: CommonWords.battery_measurements
+
 	VeQuickItem {
 		id: availableBatteries
 		uid: Global.system.serviceUid + "/AvailableBatteries"
@@ -69,7 +71,7 @@ Page {
 				? (batteryEnabled.value === 1 || activeBattery ? root._visibleText : root._hiddenText)
 				: "--"
 
-			onClicked: Global.pageManager.pushPage(batterySettingsComponent, {"title": text})
+			onClicked: Global.pageManager.pushPage(batterySettingsComponent)
 
 			VeQuickItem {
 				id: batteryEnabled
@@ -80,6 +82,7 @@ Page {
 				id: batterySettingsComponent
 
 				Page {
+					title: batteryMenuItem.text
 					GradientListView {
 						model: VisibleItemModel {
 							ListText {

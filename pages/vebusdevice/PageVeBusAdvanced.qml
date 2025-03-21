@@ -252,16 +252,19 @@ Page {
 
 
 			ListNavigation {
+				id: vebusDiagnosticsItem
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
 				preferredVisible: masterHasNetworkQuality.valid
-				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": text})
+
+				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage)
 
 				Component {
 					id: vebusDiagnosticsPage
 
 					Page {
+						title: vebusDiagnosticsItem.text
 						GradientListView {
 							model: VisibleItemModel {
 								SettingsColumn {

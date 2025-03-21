@@ -88,11 +88,17 @@ QtObject {
 	//% "Battery current"
 	readonly property string battery_current: qsTrId("common_words_battery_current")
 
+	//% "Battery measurements"
+	readonly property string battery_measurements: qsTrId("common_words_battery_measurements")
+
 	//% "Battery temperature"
 	readonly property string battery_temperature: qsTrId("common_words_battery_temperature")
 
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
+
+	//% "Bluetooth"
+	readonly property string bluetooth: qsTrId("common_words_bluetooth")
 
 	//% "Cancel"
 	readonly property string cancel: qsTrId("common_words_cancel")
@@ -121,6 +127,10 @@ QtObject {
 
 	//% "Current transformers"
 	readonly property string current_transformers: qsTrId("common_words_current_transformers")
+
+	//: Bespoke or user-defined setting value, as opposed to a well-defined preset value
+	//% "Custom"
+	readonly property string custom: qsTrId("common_words_custom")
 
 	//% "Custom name"
 	readonly property string custom_name: qsTrId("common_words_custom_name")
@@ -175,6 +185,9 @@ QtObject {
 
 	//% "ESS"
 	readonly property string ess: qsTrId("common_words_ess")
+
+	//% "Ethernet"
+	readonly property string ethernet: qsTrId("common_words_ethernet")
 
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")
@@ -291,6 +304,9 @@ QtObject {
 	//% "Minimum voltage"
 	readonly property string minimum_voltage: qsTrId("common_words_minimum_voltage")
 
+	//% "Mobile Network"
+	readonly property string mobile_network: qsTrId("common_words_mobile_network")
+
 	//% "Mode"
 	readonly property string mode: qsTrId("common_words_mode")
 
@@ -350,6 +366,9 @@ QtObject {
 	//% "Pending"
 	readonly property string pending: qsTrId("common_words_pending")
 
+	//% "Periodic run"
+	readonly property string periodic_run: qsTrId("common_words_periodic_run")
+
 	//% "Password"
 	readonly property string password: qsTrId("common_words_password")
 
@@ -403,6 +422,9 @@ QtObject {
 	//% "Running"
 	readonly property string running_status: qsTrId("common_words_running_status")
 
+	//% "Run time and service"
+	readonly property string run_time_and_service: qsTrId("common_words_run_time_and_service")
+
 	//% "Scanning %1%"
 	readonly property string scanning: qsTrId("common_words_scanning")
 
@@ -421,6 +443,9 @@ QtObject {
 	//: State of charge (as a percentage). %1 = the SOC value
 	//% "SOC %1"
 	readonly property string soc_with_prefix: qsTrId("common_words_soc")
+
+	//% "Solar yield"
+	readonly property string solar_yield: qsTrId("common_words_solar_yield")
 
 	//: A speed measurement value
 	//% "Speed"
@@ -504,6 +529,9 @@ QtObject {
 
 	//% "When warning is cleared stop after"
 	readonly property string when_warning_is_cleared_stop_after: qsTrId("common_words_when_warning_is_cleared_stop_after")
+
+	//% "Wi-Fi"
+	readonly property string wifi: qsTrId("common_words_wifi")
 
 	//% "Yes"
 	readonly property string yes: qsTrId("common_words_yes")

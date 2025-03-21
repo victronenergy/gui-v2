@@ -127,10 +127,10 @@ Page {
 				onClicked: {
 					if (root.energyMeterMode) {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ bindPrefix: root.evCharger.serviceUid })
 					} else {
 						Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ bindPrefix: root.evCharger.serviceUid })
 					}
 				}
 
@@ -144,7 +144,7 @@ Page {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+							{ bindPrefix: root.evCharger.serviceUid })
 				}
 			}
 		}

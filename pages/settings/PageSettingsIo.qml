@@ -28,17 +28,18 @@ Page {
 		model: VisibleItemModel {
 
 			ListNavigation {
+				id: analogInputsItem
 				//% "Analog inputs"
 				text: qsTrId("settings_io_analog_inputs")
 				preferredVisible: analogModel.rowCount > 0
-				onClicked: {
-					Global.pageManager.pushPage(analogInputsComponent, {"title": text})
-				}
+
+				onClicked: Global.pageManager.pushPage(analogInputsComponent)
 
 				Component {
 					id: analogInputsComponent
 
 					Page {
+						title: analogInputsItem.text
 						GradientListView {
 							model: analogModel
 							delegate: ListSwitch {
@@ -56,17 +57,18 @@ Page {
 			}
 
 			ListNavigation {
+				id: digitalInputsItem
 				//% "Digital inputs"
 				text: qsTrId("settings_io_digital_inputs")
 				preferredVisible: digitalModel.rowCount > 0
-				onClicked: {
-					Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
-				}
+
+				onClicked: Global.pageManager.pushPage(digitalInputsComponent)
 
 				Component {
 					id: digitalInputsComponent
 
 					Page {
+						title: digitalInputsItem.text
 						readonly property var delegateOptionModel: [
 							VenusOS.DigitalInput_Type_Disabled,
 							VenusOS.DigitalInput_Type_PulseMeter,

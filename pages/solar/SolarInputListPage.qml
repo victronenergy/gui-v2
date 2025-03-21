@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	title: CommonWords.solar_yield
+
 	// A list of all solar inputs. For solarcharger, multi and inverter services, each tracker is
 	// an individual entry in the list. For PV inverters, each inverter is an entry in the list,
 	// since PV inverters do not have multiple trackers.

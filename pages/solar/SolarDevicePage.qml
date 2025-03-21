@@ -163,17 +163,15 @@ Page {
 				text: CommonWords.product_page
 				preferredVisible: pageUrl.length > 0
 				onClicked: {
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.solarDevice.serviceUid })
+					Global.pageManager.pushPage(pageUrl, { title: Qt.binding(function() { return productPageLink.text }), bindPrefix: root.solarDevice.serviceUid })
 				}
 			}
 
 			ListNavigation {
 				text: CommonWords.device_info_title
 				preferredVisible: productPageLink.pageUrl.length === 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.solarDevice.serviceUid })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.solarDevice.serviceUid } }
 			}
 		}
 	}

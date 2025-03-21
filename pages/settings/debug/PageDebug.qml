@@ -42,18 +42,24 @@ Page {
 			}
 
 			ListNavigation {
+				id: powerItem
 				text: "Power"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pagePowerDebug)
+				Component { id: pagePowerDebug; PagePowerDebug { title: powerItem.text } }
 			}
 
 			ListNavigation {
+				id: systemDataItem
 				text: "System data"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSystemData)
+				Component { id: pageSystemData; PageSystemData { title: systemDataItem.text } }
 			}
 
 			ListNavigation {
+				id: valuesItem
 				text: "Values"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageDebugVeQItems)
+				Component { id: pageDebugVeQItems; PageDebugVeQItems { title: valuesItem.text } }
 			}
 
 			SwitchItem {
@@ -79,20 +85,26 @@ Page {
 			}
 
 			ListNavigation {
+				id: uiLibraryItem
 				text: "UI Library"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSettingsDemo)
+				Component { id: pageSettingsDemo; PageSettingsDemo { title: uiLibraryItem.text } }
 			}
 
 			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
 			/*ListNavigation {
+				id: glibcMemoryItem
 				text: "glibc memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageDebugMemoryLibc)
+				Component { id: pageDebugMemoryLibc; PageDebugMemoryLibc { title: glibcMemoryItem.text } }
 			}*/
 
 			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
 			/*ListNavigation {
+				id: qtMemoryItem
 				text: "Qt memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageDebugMemoryQt)
+				Component { id: pageDebugMemoryQt; PageDebugMemoryQt { title: qtMemoryItem.text } }
 			}*/
 
 			ListRadioButtonGroup {

@@ -119,10 +119,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: systemStatusItem
 				//% "System status"
 				text: qsTrId("settings_system_system_status")
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSystemStatus.qml", { title: text })
+				onClicked: Global.pageManager.pushPage(pageSettingsSystemStatus)
+				Component { id: pageSettingsSystemStatus; PageSettingsSystemStatus { title: systemStatusItem.text } }
 			}
 		}
 	}

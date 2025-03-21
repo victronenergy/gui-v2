@@ -12,6 +12,8 @@ Page {
 	readonly property string bindPrefix: BackendConnection.serviceUidForType("modem")
 	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Modem"
 
+	title: CommonWords.mobile_network
+
 	VeQuickItem {
 		id: simStatus
 		uid: bindPrefix + "/SimStatus"
@@ -148,15 +150,17 @@ Page {
 			}
 
 			ListNavigation {
+				id: apnItem
 				//% "APN"
 				text: qsTrId("page_settings_gsm_apn")
 				//% "Default"
 				secondaryText: (!apnSetting.valid || apnSetting.value === "") ? qsTrId("page_settings_gsm_default") : apnSetting.value
-				onClicked: Global.pageManager.pushPage(apnPage, { title: text })
+				onClicked: Global.pageManager.pushPage(apnPage)
 				Component {
 					id: apnPage
 
 					Page {
+						title: apnItem.text
 
 						GradientListView {
 

@@ -16,12 +16,13 @@ Page {
 		id: alarmListView
 
 		delegate: ListNavigation {
+			id: alarmDelegate
 			readonly property string modulePath: model.uid.slice(0, -3)
 
 			text: moduleRoot.value || ""
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryAlarms.qml",
-						{ "title": text, "bindPrefix": modulePath })
+						{ "title": Qt.binding(function() { return alarmDelegate.text }), "bindPrefix": modulePath })
 			}
 
 			VeQuickItem {

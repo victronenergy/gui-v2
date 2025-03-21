@@ -14,51 +14,48 @@ Page {
 
 		model: VisibleItemModel {
 			ListNavigation {
-				//% "Ethernet"
-				text: qsTrId("pagesettingsconnectivity_ethernet")
+				text: CommonWords.ethernet
 				secondaryText: networkServices.ipAddress
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml")
 			}
 
 			ListNavigation {
-				//% "Wi-Fi"
-				text: qsTrId("pagesettingsconnectivity_wifi")
+				text: CommonWords.wifi
 				secondaryText: wifiModel.connectedNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml")
 				WifiModel {
 					id: wifiModel
 				}
 			}
 
 			ListNavigation {
-				//% "Bluetooth"
-				text: qsTrId("pagesettingsconnectivity_bluetooth")
+				text: CommonWords.bluetooth
 				preferredVisible: networkServices.hasBluetoothSupport
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml")
 			}
 
 			ListNavigation {
-				//% "Mobile Network"
-				text: qsTrId("pagesettingsconnectivity_mobile_network")
+				text: CommonWords.mobile_network
 				secondaryText: networkServices.mobileNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml")
 			}
 
 			SettingsListHeader { }
 
 			ListNavigation {
+				id: tailscaleItem
 				//% "Tailscale (remote VPN access)"
 				text: qsTrId("settings_services_tailscale_remote_vpn_access")
 				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsTailscale)
 				preferredVisible: tailscale.valid
 
 				VeQuickItem {
 					id: tailscale
 					uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
 				}
+
+				Component { id: pageSettingsTailscale; PageSettingsTailscale { title: tailscaleItem.text } }
 			}
 
 			SettingsColumn {
@@ -69,14 +66,15 @@ Page {
 					id: canInterfaceRepeater
 					model: canInterfaces.value || []
 					delegate: ListNavigation {
+						id: canInterfaceDelegate
 						text: modelData["name"] || ""
 						secondaryText: canbusProfile.profileText
-						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text, canbusProfile: canbusProfile })
+						onClicked: Global.pageManager.pushPage(canBusComponent, { canbusProfile: canbusProfile })
 
 						Component {
 							id: canBusComponent
 
-							PageSettingsCanbus { }
+							PageSettingsCanbus { title: canInterfaceDelegate.text }
 						}
 
 						CanbusProfile {

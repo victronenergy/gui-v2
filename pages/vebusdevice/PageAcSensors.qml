@@ -20,9 +20,10 @@ Page {
 					model: 4
 
 					ListNavigation {
+						id: acSensorDelegateItem
 						text: CommonWords.ac_sensor_x.arg(index)
 						onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensor.qml", {
-									   "title": CommonWords.ac_sensor_x.arg(index),
+									   "title": Qt.binding(function() { return acSensorDelegateItem.text }),
 									   "bindPrefix": root.bindPrefix + "/" + index,
 									   "index": index
 						})

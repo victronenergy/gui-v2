@@ -54,7 +54,7 @@ ListNavigation {
 
 	onClicked: {
 		// onClicked is not emitted if interactive: false
-		Global.pageManager.pushPage(optionsPageComponent, { title: text })
+		Global.pageManager.pushPage(optionsPageComponent)
 	}
 
 	VeQuickItem {
@@ -65,6 +65,7 @@ ListNavigation {
 		id: optionsPageComponent
 
 		RadioButtonListPage {
+			title: root.text
 			optionModel: root.optionModel
 			currentIndex: root.currentIndex
 			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick

@@ -65,9 +65,7 @@ Page {
 				return CommonWords.ok
 			}
 
-			onClicked: {
-				Global.pageManager.pushPage(distributorPageComponent, { "title": text })
-			}
+			onClicked: Global.pageManager.pushPage(distributorPageComponent)
 
 			VeQuickItem {
 				id: status
@@ -78,6 +76,7 @@ Page {
 				id: distributorPageComponent
 
 				Page {
+					title: distributorDelegate.text
 					GradientListView {
 						header: PrimaryListLabel {
 							//% "No information available, see previous page for Distributor status."

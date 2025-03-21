@@ -55,15 +55,17 @@ Page {
 			}
 
 			ListNavigation {
+				id: bluetoothAdaptersItem
 				//% "Bluetooth adapters"
 				text: qsTrId("settings_io_bluetooth_adapters")
 				preferredVisible: enable.checked
-				onClicked: Global.pageManager.pushPage(bluetoothAdaptersComponent, {"title": text})
+				onClicked: Global.pageManager.pushPage(bluetoothAdaptersComponent)
 
 				Component {
 					id: bluetoothAdaptersComponent
 
 					Page {
+						title: bluetoothAdaptersItem.text
 						GradientListView {
 							model: VeQItemSortTableModel {
 								model: VeQItemChildModel {

@@ -11,13 +11,12 @@ DeviceListDelegate {
 
 	text: productName.valid ? productName.value : "--"
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/PageGps.qml",
-									{"title": text, bindPrefix: root.device.serviceUid })
-	}
+	onClicked: Global.pageManager.pushPage(pageGps)
 
 	VeQuickItem {
 		id: productName
 		uid: root.device.serviceUid + "/ProductName"
 	}
+
+	Component { id: pageGps; PageGps { title: root.text; bindPrefix: root.device.serviceUid } }
 }

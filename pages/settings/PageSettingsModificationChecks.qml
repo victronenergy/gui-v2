@@ -388,19 +388,19 @@ Page {
 			}
 
 			ListNavigation {
+				id: onlineUpdateItem
 				//% "Online update"
 				text: qsTrId("pagesettingsmodificationchecks_firmware_online_update")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsFirmwareOnline)
+				Component { id: pageSettingsFirmwareOnline; PageSettingsFirmwareOnline { title: onlineUpdateItem.text } }
 			}
 
 			ListNavigation {
+				id: installFromSdUsbItem
 				//% "Install from SD/USB"
 				text: qsTrId("pagesettingsmodificationchecks_firmware_install_from_sd_usb")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsFirmwareOffline)
+				Component { id: pageSettingsFirmwareOffline; PageSettingsFirmwareOffline { title: installFromSdUsbItem.text } }
 			}
 		}
 	}

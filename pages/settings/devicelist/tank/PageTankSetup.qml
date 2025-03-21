@@ -50,8 +50,7 @@ Page {
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
 					//% "US (240 to 30 Ohm)"
 					{ display: qsTrId("devicelist_tanksetup_us_(240_to_30_ohm)"), value: 1 },
-					//% "Custom"
-					{ display: qsTrId("devicelist_tanksetup_custom"), value: 2 },
+					{ display: CommonWords.custom, value: 2 },
 				]
 			}
 
@@ -95,19 +94,19 @@ Page {
 			ListVolumeUnitRadioButtonGroup {}
 
 			ListNavigation {
+				id: customShapeItem
 				//% "Custom shape"
 				text: qsTrId("devicelist_tanksetup_custom_shape")
 				preferredVisible: shape.seen
 
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankShape.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageTankShape)
 
 				VeQuickItem {
 					id: shape
 					uid: root.bindPrefix + "/Shape"
 				}
+
+				Component { id: pageTankShape; PageTankShape { title: customShapeItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListSpinBox {
@@ -127,33 +126,33 @@ Page {
 			}
 
 			ListNavigation {
+				id: lowLevelAlarmItem
 				text: CommonWords.low_level_alarm
 				preferredVisible: low.seen
 
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/Low" })
-				}
+				onClicked: Global.pageManager.pushPage(pageTankAlarmLow)
 
 				VeQuickItem {
 					id: low
 					uid: root.bindPrefix + "/Alarms/Low/Enable"
 				}
+
+				Component { id: pageTankAlarmLow; PageTankAlarm { title: lowLevelAlarmItem.text; bindPrefix: root.bindPrefix + "/Alarms/Low" } }
 			}
 
 			ListNavigation {
+				id: highLevelAlarmItem
 				text: CommonWords.high_level_alarm
 				preferredVisible: high.seen
 
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankAlarm.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix + "/Alarms/High" })
-				}
+				onClicked: Global.pageManager.pushPage(pageTankAlarmHigh)
 
 				VeQuickItem {
 					id: high
 					uid: root.bindPrefix + "/Alarms/High/Enable"
 				}
+
+				Component { id: pageTankAlarmHigh; PageTankAlarm { title: highLevelAlarmItem.text; bindPrefix: root.bindPrefix + "/Alarms/High" } }
 			}
 		}
 	}

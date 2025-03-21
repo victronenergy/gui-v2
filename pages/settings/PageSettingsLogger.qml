@@ -88,9 +88,11 @@ Page {
 			}
 
 			ListNavigation {
+				id: vrmDeviceInstancesItem
 				//% "VRM device instances"
 				text: qsTrId("settings_vrm_device_instances")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageVrmDeviceInstances.qml", {"title": text })
+				onClicked: Global.pageManager.pushPage(pageVrmDeviceInstances)
+				Component { id: pageVrmDeviceInstances; PageVrmDeviceInstances { title: vrmDeviceInstancesItem.text } }
 			}
 
 			ListRadioButtonGroup {

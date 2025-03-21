@@ -15,6 +15,8 @@ Page {
 		VenusOS.Ess_State_OptimizedWithBatteryLife,
 		VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essMode.dataItem.value)
 
+	title: CommonWords.ess
+
 	VeQuickItem {
 		id: dEssModeItem
 
@@ -61,6 +63,7 @@ Page {
 			}
 
 			ListNavigation {
+				id: scheduledChargeLevelsItem
 				//% "Scheduled charge levels"
 				text: qsTrId("settings_rs_scheduled_charge_levels")
 				secondaryText: scheduleSoc.valid
@@ -69,9 +72,8 @@ Page {
 						  //% "Inactive"
 						: qsTrId("scheduled_charge_inactive")
 				preferredVisible: root.isModeOptimized
-				onClicked: {
-					Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
-				}
+
+				onClicked: Global.pageManager.pushPage(scheduledChargeComponent)
 
 				VeQuickItem {
 					id: scheduleSoc
@@ -82,6 +84,7 @@ Page {
 					id: scheduledChargeComponent
 
 					Page {
+						title: scheduledChargeLevelsItem.text
 						GradientListView {
 							model: 5
 							delegate: ListChargeSchedule {
@@ -93,13 +96,12 @@ Page {
 			}
 
 			ListNavigation {
+				id: dynamicEssItem
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
 				preferredVisible: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
-							{ title: text })
-				}
+				onClicked: Global.pageManager.pushPage(pageSettingsDynamicEss)
+				Component { id: pageSettingsDynamicEss; PageSettingsDynamicEss { title: dynamicEssItem.text } }
 			}
 		}
 	}

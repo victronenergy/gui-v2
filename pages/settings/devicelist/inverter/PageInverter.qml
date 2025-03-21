@@ -148,38 +148,33 @@ Page {
 			}
 
 			ListNavigation {
+				id: overallHistoryItem
 				text: CommonWords.overall_history
 				preferredVisible: root.isInverterCharger
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageSolarStats)
+				Component { id: pageSolarStats; PageSolarStats { title: overallHistoryItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
+				id: alarmStatusItem
 				text: CommonWords.alarm_status
 				preferredVisible: root.isInverterCharger
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageRsAlarms)
+				Component { id: pageRsAlarms; PageRsAlarms { title: alarmStatusItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
+				id: alarmSetupItem
 				text: CommonWords.alarm_setup
 				preferredVisible: root.isInverterCharger
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageRsAlarmSettings)
+				Component { id: pageRsAlarmSettings; PageRsAlarmSettings { title: alarmSetupItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}

@@ -230,26 +230,25 @@ Page {
 		}
 
 		ListNavigation {
+			id: gridFeedInItem
 			//% "Grid feed-in"
 			text: qsTrId("settings_ess_grid_feed_in")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Feedin.qml",
-					{ title: text, hub4Mode: Qt.binding(function() { return essMode.value }) })
-			}
+			onClicked: Global.pageManager.pushPage(pageSettingsHub4Feedin)
+			Component { id: pageSettingsHub4Feedin; PageSettingsHub4Feedin { title: gridFeedInItemtext; hub4Mode: essMode.value } }
 		}
 
 		ListNavigation {
+			id: peakShavingItem
 			//% "Peak shaving"
 			text: qsTrId("settings_ess_peak_shaving")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsHub4Peakshaving.qml", { title: text })
-			}
+			onClicked: Global.pageManager.pushPage(pageSettingsHub4Peakshaving)
+			Component { id: pageSettingsHub4Peakshaving; PageSettingsHub4Peakshaving { title: peakShavingItem.text } }
 		}
 
 		ListNavigation {
+			id: scheduledChargeLevelsItem
 			//% "Scheduled charge levels"
 			text: qsTrId("settings_ess_scheduled_charge_levels")
 			secondaryText: scheduleSoc.valid
@@ -260,9 +259,7 @@ Page {
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
-			onClicked: {
-				Global.pageManager.pushPage(scheduledChargeComponent, { title: text })
-			}
+			onClicked: Global.pageManager.pushPage(scheduledChargeComponent)
 
 			VeQuickItem {
 				id: scheduleSoc
@@ -278,6 +275,7 @@ Page {
 				id: scheduledChargeComponent
 
 				Page {
+					title: scheduledChargeLevelsItem.text
 					GradientListView {
 						model: 5
 						delegate: ListChargeSchedule {
@@ -289,19 +287,21 @@ Page {
 		}
 
 		ListNavigation {
+			id: dynamicEssItem
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
 			preferredVisible: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
 					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml", { title: text })
-			}
+
+			onClicked: Global.pageManager.pushPage(pageSettingsDynamicEss)
 
 			VeQuickItem {
 				id: dEssModeItem
 				uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
 			}
+
+			Component { id: pageSettingsDynamicEss; PageSettingsDynamicEss { title: dynamicEssItem.text } }
 		}
 
 		ListNavigation {

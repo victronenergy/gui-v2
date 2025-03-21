@@ -34,30 +34,31 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListNavigation {
+				id: batteryBankItem
 				//% "Battery bank"
 				text: qsTrId("batterysettings_battery_bank")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettingsBattery.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageBatterySettingsBattery)
+				Component { id: pageBatterySettingsBattery; PageBatterySettingsBattery { title: batteryBankItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
+				id: alarmsItem
 				text: CommonWords.alarms
 				preferredVisible: alarmSettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
-							{ "title": text, "model": batterySettingsAlarmModel })
+							{ "title": Qt.binding(function() { return alarmsItem.text }), "model": batterySettingsAlarmModel })
 				}
 			}
 
 			ListNavigation {
+				id: relayItem
 				//% "Relay (on battery monitor)"
 				text: qsTrId("batterysettings_relay_on_battery_monitor")
 				preferredVisible: relaySettingsMonitor.hasVisibleItem
 				onClicked: {
 					Global.pageManager.pushPage(emptySettingsComponent,
-							{ "title": text, "model": batterySettingsRelayModel })
+							{ "title": Qt.binding(function() { return relayItem.text }), "model": batterySettingsRelayModel })
 				}
 			}
 

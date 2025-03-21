@@ -123,28 +123,24 @@ Page {
 			}
 
 			ListNavigation {
+				id: overallHistoryItem
 				text: CommonWords.overall_history
 				preferredVisible: root.trackerCount > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageSolarStats)
+				Component { id: pageSolarStats; PageSolarStats { title: overallHistoryItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
+				id: alarmStatusItem
 				text: CommonWords.alarm_status
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageRsAlarms)
+				Component { id: pageRsAlarms; PageRsAlarms { title: alarmStatusItem.text; bindPrefix: root.bindPrefix } }
 			}
 
 			ListNavigation {
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}

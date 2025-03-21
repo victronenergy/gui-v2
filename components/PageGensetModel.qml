@@ -202,16 +202,18 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
+		id: engineItem
 		//% "Engine"
 		text: qsTrId("ac-in-genset_engine")
 		onClicked: {
-			Global.pageManager.pushPage(engineComponent, {"title": text})
+			Global.pageManager.pushPage(engineComponent)
 		}
 
 		Component {
 			id: engineComponent
 
 			Page {
+				title: engineItem.text
 				GradientListView {
 					model: VisibleItemModel {
 						ListQuantity {
@@ -295,22 +297,20 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
-		//% "Run time and service"
-		text: qsTrId("page_settings_generator_run_time_and_service")
-		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-											   {
-												   title: text,
-												   settingsBindPrefix: root.settingsBindPrefix,
-												   startStopBindPrefix: root.startStopBindPrefix,
-												   gensetBindPrefix: root.bindPrefix
-											   })
+		text: CommonWords.run_time_and_service
+		onClicked: Global.pageManager.pushPage(pageGeneratorRuntimeService,
+				{ settingsBindPrefix: root.settingsBindPrefix,
+				  startStopBindPrefix: root.startStopBindPrefix,
+				  gensetBindPrefix: root.bindPrefix })
+		Component { id: pageGeneratorRuntimeService; PageGeneratorRuntimeService { } }
 	}
 
 	ListNavigation {
+		id: dcGensetItem
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
 		preferredVisible: chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid
-		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+		onClicked: Global.pageManager.pushPage(settingsComponent)
 
 		VeQuickItem {
 			id: chargeVoltage
@@ -331,6 +331,7 @@ VisibleItemModel {
 			id: settingsComponent
 
 			Page {
+				title: dcGensetItem.text
 				GradientListView {
 					model: VisibleItemModel {
 						ListSpinBox {
@@ -387,7 +388,7 @@ VisibleItemModel {
 		text: CommonWords.settings
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+					{ settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
 		}
 	}
 
@@ -395,7 +396,7 @@ VisibleItemModel {
 		text: CommonWords.device_info_title
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ bindPrefix: root.bindPrefix })
 		}
 	}
 }

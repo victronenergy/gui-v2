@@ -10,6 +10,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	title: CommonWords.wifi
+
 	VeQuickItem {
 		id: scanItem
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"

@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	title: CommonWords.ethernet
+
 	GradientListView {
 		id: settingsListView
 		model: networkServices.ready ? connectedModel : disconnectedModel

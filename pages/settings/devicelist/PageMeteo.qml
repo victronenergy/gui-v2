@@ -150,22 +150,16 @@ Page {
 			}
 
 			ListNavigation {
-				id: settingsMenu
-
 				text: CommonWords.settings
-				onClicked: Global.pageManager.pushPage("/pages/settings/devicelist/PageMeteoSettings.qml", {
-														   "title": CommonWords.settings,
-														   meteoSettingsPrefix: root.settingsPrefix
-													   })
+				onClicked: Global.pageManager.pushPage(pageMeteoSettings)
 				preferredVisible: productId.value === ProductInfo.ProductId_MeteoSensor_Imt
+				Component { id: pageMeteoSettings; PageMeteoSettings { meteoSettingsPrefix: root.settingsPrefix } }
 			}
 
 			ListNavigation {
 				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-									{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+				onClicked: Global.pageManager.pushPage(pageDeviceInfo)
+				Component { id: pageDeviceInfo; PageDeviceInfo { bindPrefix: root.bindPrefix } }
 			}
 		}
 	}
