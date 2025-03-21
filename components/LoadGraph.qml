@@ -114,7 +114,7 @@ Item {
 
 			width: parent.width
 			height: dotSize
-			spacing: dotSize
+			spacing: Global.isGxDevice ? dotSize * 2 : dotSize
 
 			Repeater {
 				model: dottedLine.width / (dotSize + dottedLine.spacing)
