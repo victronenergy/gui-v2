@@ -60,6 +60,7 @@ void Theme::setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme)
 		Q_EMIT colorSchemeChanged_parameterless(); // work around moc limitation.
 	}
 }
+
 Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const
 {
 	if (valueType == Victron::VenusOS::Enums::Gauges_ValueType_RisingPercentage) {

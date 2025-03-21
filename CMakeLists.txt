@@ -696,6 +696,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/language.cpp
     src/enums.h
     src/enums.cpp
+    src/fastutils.h
+    src/fastutils.cpp
     src/notificationsmodel.h
     src/notificationsmodel.cpp
     src/clocktime.h
