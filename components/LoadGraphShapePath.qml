@@ -21,18 +21,43 @@ Shape {
 	property alias fillGradient: shapePath.fillGradient
 	property bool zeroCentered
 
-	property list<real> yValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	onModelChanged: yValues = FastUtils.calculateLoadGraphYValues(model, 12, height)
+	property bool calculateMinYValue: false // calculate vs clamp
+	property list<real> yValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // length Theme.animation_loadGraph_model_length
+	property real minYValue: 0 // used to determine visibility for orange graphs, or clamp min value for blue graphs.
+	onModelChanged: {
+		const n = yValues.length
+		const newYValues = FastUtils.calculateLoadGraphYValues(model, n, height)
+
+		if (calculateMinYValue) {
+			let tempMin = Theme.geometry_screen_height
+			for (let i = 0; i < n; ++i)  {
+				const currYV = newYValues[i]
+				if (currYV < tempMin) {
+					tempMin = currYV
+				}
+			}
+			yValues = newYValues
+			// Set minYValue AFTER updating yValues
+			// to ensure that visibility change occurs
+			// after the ShapePath rendering updates.
+			minYValue = tempMin
+		} else {
+			for (let j = 0; j < n; ++j) {
+				if (newYValues[j] < minYValue) {
+					newYValues[j] = minYValue
+				}
+			}
+			yValues = newYValues
+		}
+	}
 
 	smooth: !Global.isGxDevice
 
 	// Antialiasing without requiring multisample framebuffers.
-	// On GX devices we disable this supersample antialiasing for performance reasons,
-	// but we still require rendering the graph to a texture to avoid opacity/overdraw issues
-	// related to the fade-out gradients in LoadGraph.qml.
-	layer.enabled: true
-	layer.smooth: !Global.isGxDevice
-	layer.textureSize: !Global.isGxDevice ? Qt.size(root.width*2, root.height*2) : Qt.size(root.width, root.height)
+	// On GX devices we disable this supersample antialiasing for performance reasons.
+	layer.enabled: !Global.isGxDevice
+	layer.smooth: true
+	layer.textureSize: Qt.size(root.width*2, root.height*2)
 
 	ShapePath {
 		id: shapePath

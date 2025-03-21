@@ -25,12 +25,13 @@ Item {
 	signal nextValueRequested()
 
 	function addValue(value) {
-		model.push(value)
-		model.shift()
-		orangePath.model = []
-		orangePath.model = root.model
+		let temp = model
+		temp.push(value)
+		temp.shift()
+		model = temp
 	}
 
+	clip: Global.isGxDevice // we have to clip if we don't use a layer in LoadGraphShapePath.
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
 	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
 
@@ -60,6 +61,8 @@ Item {
 			id: orangePath
 
 			anchors.fill: parent
+			visible: minYValue < (root.height - (root.height * threshold))
+			calculateMinYValue: true
 			model: root.model
 			strokeColor: aboveThresholdFillColor
 			offsetFraction: root.offsetFraction
@@ -71,20 +74,27 @@ Item {
 			}
 		}
 	}
+
 	Rectangle {
 		anchors.bottom: parent.bottom
 		width: parent.width
-		height: parent.height * threshold + 1 // '+1' to conceal a 1 pixel orange line from the orange section
-		clip: true
+		height: root.height * threshold
+		clip: true // we have to clip this, because we can't rely on setting minYValue of bluePath.
 		color: Theme.color_briefPage_background
 
 		LoadGraphShapePath {
 			id: bluePath
-			model: orangePath.model
+
+			anchors {
+				left: parent.left
+				right: parent.right
+				bottom: parent.bottom
+			}
+			height: root.height // larger than parent.
+
+			//minYValue: (root.height - (root.height * threshold)) // we would like to do this, but the cubic pathing causes orange edge mismatch.
+			model: root.model
 			strokeColor: belowThresholdFillColor
-			height: root.height + 2*strokeWidth
-			width: parent.width + 2*strokeWidth
-			anchors.bottom: parent.bottom
 			zeroCentered: root.zeroCentered
 			offsetFraction: root.offsetFraction
 			fillGradient: LinearGradient {
@@ -98,6 +108,7 @@ Item {
 				GradientStop { position: 1; color: bluePath.zeroCentered ? belowThresholdFillColor : "transparent" }
 			}
 		}
+
 		Row {
 			id: dottedLine
 
@@ -115,7 +126,9 @@ Item {
 			}
 		}
 	}
+
 	Rectangle { // the graph fades out on the sides
+		visible: !Global.isGxDevice
 		anchors.fill: parent
 		gradient: Gradient {
 			orientation: Gradient.Horizontal
@@ -131,5 +144,6 @@ Item {
 			GradientStop { position: 1; color: horizontalGradientColor1 }
 		}
 	}
+
 	Component.onCompleted: model = Array(Theme.animation_loadGraph_model_length).fill(initialModelValue)
 }
