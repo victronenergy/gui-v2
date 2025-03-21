@@ -704,6 +704,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/qmlobject.h
+    src/qmlobject.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
