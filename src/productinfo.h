@@ -45,6 +45,7 @@ public:
 		ProductId_Genset_FischerPandaDc = 0xB047,
 		ProductId_Genset_Cre = 0xB048,
 		ProductId_Genset_Deif = 0xB049,
+		ProductId_Genset_Cummins = 0xB04A,
 	};
 	Q_ENUM(ProductId_Genset)
 
@@ -69,6 +70,7 @@ public:
 		case ProductId_Genset_FischerPandaDc:
 		case ProductId_Genset_Cre:
 		case ProductId_Genset_Deif:
+		case ProductId_Genset_Cummins:
 			return true;
 		default:
 			return false;
