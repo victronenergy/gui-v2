@@ -13,6 +13,9 @@ Page {
 	required property var optionModel
 	readonly property alias optionView: optionsListView
 
+	property int showAccessLevel: VenusOS.User_AccessType_User
+	property int writeAccessLevel: VenusOS.User_AccessType_Installer
+
 	property int currentIndex
 	property bool updateCurrentIndexOnClick: true
 	property var popDestination: null
@@ -67,6 +70,8 @@ Page {
 			interactive: !modelObject.readOnly
 			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: interactive || checked
+			showAccessLevel: root.showAccessLevel
+			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.currentIndex === model.index
 			C.ButtonGroup.group: radioButtonGroup
 
@@ -129,6 +134,8 @@ Page {
 						textField.echoMode: TextInput.Password
 						interactive: radioButton.interactive
 						backgroundRect.color: "transparent"
+						showAccessLevel: root.showAccessLevel
+						writeAccessLevel: root.writeAccessLevel
 						preferredVisible: showField && model.index === optionsListView.currentIndex && !!root.validatePassword
 						validateInput: function() {
 							// Validate the password on Enter/Return, or when "Confirm" is
