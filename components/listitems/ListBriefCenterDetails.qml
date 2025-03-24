@@ -92,6 +92,9 @@ ListNavigation {
 				text: section
 			}
 
+			showAccessLevel: root.showAccessLevel
+			writeAccessLevel: root.writeAccessLevel
+
 			onOptionClicked: (index, serviceUid) => {
 				centerService.setValue(serviceUid)
 			}

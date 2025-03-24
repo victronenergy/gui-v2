@@ -69,6 +69,8 @@ ListNavigation {
 			currentIndex: root.currentIndex
 			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick
 			popDestination: root.popDestination
+			showAccessLevel: root.showAccessLevel
+			writeAccessLevel: root.writeAccessLevel
 			validatePassword: root.validatePassword
 
 			onOptionClicked: (index, value) => {
