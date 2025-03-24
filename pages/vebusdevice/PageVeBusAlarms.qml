@@ -11,7 +11,7 @@ Page {
 
 	property string bindPrefix
 	property var veBusDevice
-	property int numberOfPhases: phases.isValid ? phases.value : 1
+	property int numberOfPhases: phases.valid ? phases.value : 1
 	property bool isMulti
 
 	VeQuickItem {

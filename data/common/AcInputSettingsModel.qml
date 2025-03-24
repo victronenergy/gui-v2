@@ -16,7 +16,7 @@ ListModel {
 	}
 
 	property Instantiator _acInputSettingsObjects: Instantiator {
-		model: _numberOfAcInputs.isValid ? _numberOfAcInputs.value : null
+		model: _numberOfAcInputs.valid ? _numberOfAcInputs.value : null
 		delegate: AcInputSettings {
 			serviceUid: root.serviceUid
 			inputNumber: model.index + 1

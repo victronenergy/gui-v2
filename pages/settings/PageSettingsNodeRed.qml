@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property bool allModificationsEnabled: allModificationsEnabledItem.isValid && allModificationsEnabledItem.value === 1
+	readonly property bool allModificationsEnabled: allModificationsEnabledItem.valid && allModificationsEnabledItem.value === 1
 
 	VeQuickItem {
 		id: allModificationsEnabledItem
@@ -29,7 +29,7 @@ Page {
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				enabled: userHasWriteAccess && root.allModificationsEnabled
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
 					{ display: CommonWords.enabled, value: VenusOS.NodeRed_Mode_Enabled },

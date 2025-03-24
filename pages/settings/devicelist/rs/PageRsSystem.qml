@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
-	readonly property bool multiPhase: numberOfPhases.isValid && numberOfPhases.value > 1
+	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value > 1
 
 	title: acSystemDevice.name
 
@@ -26,17 +26,8 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItem {
-				id: modeListButton
-
-				text: CommonWords.mode
-				writeAccessLevel: VenusOS.User_AccessType_User
-				content.children: [
-					InverterChargerModeButton {
-						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
-						serviceUid: root.bindPrefix
-					}
-				]
+			ListInverterChargerModeButton {
+				serviceUid: root.bindPrefix
 			}
 
 			ListText {
@@ -54,18 +45,12 @@ Page {
 						id: inputSettingsModel
 						serviceUid: root.bindPrefix
 					}
-					delegate: ListItem {
-						id: currentLimitListButton
-						writeAccessLevel: VenusOS.User_AccessType_User
-						text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
-						content.children: [
-							CurrentLimitButton {
-								width: Math.min(implicitWidth, currentLimitListButton.maximumContentWidth)
-								serviceUid: root.bindPrefix
-								inputNumber: modelData.inputNumber
-								inputType: modelData.inputType
-							}
-						]
+					delegate: ListCurrentLimitButton {
+						required property AcInputSettings inputSettings
+
+						serviceUid: root.bindPrefix
+						inputNumber: inputSettings.inputNumber
+						inputType: inputSettings.inputType
 					}
 				}
 			}

@@ -19,7 +19,7 @@ ListNavigation {
 	readonly property alias dataItem: dataItem
 	property var optionModel: []
 	property int currentIndex: {
-		if (!optionModel || optionModel.length === undefined || dataItem.uid.length === 0 || !dataItem.isValid) {
+		if (!optionModel || optionModel.length === undefined || dataItem.uid.length === 0 || !dataItem.valid) {
 			return defaultIndex
 		}
 		for (let i = 0; i < optionModel.length; ++i) {
@@ -50,7 +50,7 @@ ListNavigation {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: {
 		// onClicked is not emitted if interactive: false
@@ -69,6 +69,8 @@ ListNavigation {
 			currentIndex: root.currentIndex
 			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick
 			popDestination: root.popDestination
+			showAccessLevel: root.showAccessLevel
+			writeAccessLevel: root.writeAccessLevel
 			validatePassword: root.validatePassword
 
 			onOptionClicked: (index, value) => {

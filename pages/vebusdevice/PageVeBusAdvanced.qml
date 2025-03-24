@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	required property string bindPrefix
-	readonly property bool isMulti: numberOfAcInputs.isValid && numberOfAcInputs.value > 0
+	readonly property bool isMulti: numberOfAcInputs.valid && numberOfAcInputs.value > 0
 	property bool startManualEq: false
 	readonly property bool isEssOrHub4: systemType.value === "ESS" || systemType.value === 'Hub-4'
 	property int forceEqCmd: 1
@@ -225,7 +225,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_1_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn1"
-				preferredVisible: dataItem.isValid && isMulti
+				preferredVisible: dataItem.valid && isMulti
 			}
 
 			ListText {
@@ -233,7 +233,7 @@ Page {
 				text: qsTrId("vebus_device_ac_input_2_ignored")
 				secondaryText: dataItem.value ? CommonWords.yes : CommonWords.no
 				dataItem.uid: root.bindPrefix + "/Ac/State/IgnoreAcIn2"
-				preferredVisible: dataItem.isValid && isMulti
+				preferredVisible: dataItem.valid && isMulti
 			}
 
 			ListRadioButtonGroup {
@@ -241,7 +241,7 @@ Page {
 				text: qsTrId("vebus_device_ess_relay_test")
 				dataItem.uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
 				interactive: false
-				preferredVisible: dataItem.isValid && isEssOrHub4 && isMulti
+				preferredVisible: dataItem.valid && isEssOrHub4 && isMulti
 				optionModel: [
 					//% "Completed"
 					{ display: qsTrId("vebus_device_ess_relay_test_completed"), value: 0 },
@@ -255,7 +255,7 @@ Page {
 				//% "VE.Bus diagnostics"
 				text: qsTrId("vebus_diagnostics")
 				showAccessLevel: VenusOS.User_AccessType_Service
-				preferredVisible: masterHasNetworkQuality.isValid
+				preferredVisible: masterHasNetworkQuality.valid
 				onClicked: Global.pageManager.pushPage(vebusDiagnosticsPage, {"title": text})
 
 				Component {
@@ -274,7 +274,7 @@ Page {
 											//% "Network quality counter Phase L%1, device %2 (%3)"
 											text: qsTrId("vebus_veice_network_quality_counter").arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
 											dataItem.uid: root.bindPrefix + "/Devices/" + index + "/ExtendStatus/VeBusNetworkQualityCounter"
-											preferredVisible: dataItem.isValid
+											preferredVisible: dataItem.valid
 										}
 									}
 								}

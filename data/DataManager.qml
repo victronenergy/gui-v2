@@ -31,7 +31,7 @@ Item {
 
 	readonly property bool _shouldInitialize: _dataObjectsReady
 			&& BackendConnection.type !== BackendConnection.UnknownSource
-			&& BackendConnection.state === BackendConnection.Ready
+			&& Global.backendReady
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {

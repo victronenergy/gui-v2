@@ -9,7 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property bool _hasError: errorCode.isValid && errorCode.value > 0
+	readonly property bool _hasError: errorCode.valid && errorCode.value > 0
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue

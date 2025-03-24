@@ -119,7 +119,7 @@ Page {
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
-				preferredVisible: vrmPortalMode.dataItem.isValid && vrmPortalMode.dataItem.value > 0
+				preferredVisible: vrmPortalMode.dataItem.valid && vrmPortalMode.dataItem.value > 0
 			}
 
 			ListSwitch {
@@ -140,7 +140,7 @@ Page {
 				//% "Last contact"
 				text: qsTrId("settings_last_contact")
 				dataItem.uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
-				preferredVisible: vrmPortalMode.dataItem.isValid && vrmPortalMode.dataItem.value !== VenusOS.Vrm_PortalMode_Off
+				preferredVisible: vrmPortalMode.dataItem.valid && vrmPortalMode.dataItem.value !== VenusOS.Vrm_PortalMode_Off
 
 				Timer {
 					interval: 1000
@@ -245,14 +245,14 @@ Page {
 				//% "Connection status (MQTT Real-time channel)"
 				text: qsTrId("settings_connection_error_realtime_channel")
 				secondaryText: connectionStatus.mqttRealtimeStatus.value || ''
-				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRealtimeConnected.isValid
+				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRealtimeConnected.valid
 			}
 
 			ListText {
 				//% "Connection status (MQTT RPC channel)"
 				text: qsTrId("settings_connection_error_rpc_channel")
 				secondaryText: connectionStatus.mqttRpcStatus.value || ''
-				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRpcConnected.isValid
+				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRpcConnected.valid
 			}
 
 			ListSwitch {

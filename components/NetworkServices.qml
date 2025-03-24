@@ -23,7 +23,8 @@ VeQuickItem {
 	property bool favorite
 	property bool completed
 	readonly property bool hasBluetoothSupport: _hasBluetoothSupport.value
-	readonly property string mobileNetworkName: _networkName.isValid ? _networkName.value + " " + Utils.simplifiedNetworkType(_networkType.value) : "--"
+	readonly property string mobileNetworkName: _networkName.valid ? _networkName.value + " " + Utils.simplifiedNetworkType(_networkType.value) : "--"
+	readonly property bool disconnected: state === "idle" || state === "failure"
 
 	property VeQuickItem setValueItem: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Network/SetValue"
@@ -61,7 +62,7 @@ VeQuickItem {
 	}
 
 	function parseJson() {
-		if (!isValid || typeof value !== "string") {
+		if (!valid || typeof value !== "string") {
 			return
 		}
 

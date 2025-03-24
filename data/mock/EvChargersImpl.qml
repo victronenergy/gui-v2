@@ -130,8 +130,8 @@ QtObject {
 			id: energyMeter
 
 			readonly property int status: Math.floor(Math.random() * VenusOS.Evcs_Status_ChargingLimit)
-			readonly property real energy: _energy.isValid ? _energy.value : NaN
-			readonly property real power: _power.isValid ? _power.value : NaN
+			readonly property real energy: _energy.valid ? _energy.value : NaN
+			readonly property real power: _power.valid ? _power.value : NaN
 			readonly property real current: NaN
 			readonly property real maxCurrent: NaN
 
@@ -175,7 +175,7 @@ QtObject {
 						required property int index
 						readonly property string phaseUid: energyMeter.serviceUid + "/Ac/L" + (index + 1)
 						readonly property string name: "L" + (index + 1)
-						readonly property real power: _power.isValid ? _power.value : NaN
+						readonly property real power: _power.valid ? _power.value : NaN
 
 						readonly property VeQuickItem _power: VeQuickItem {
 							uid: phaseUid + "/Power"

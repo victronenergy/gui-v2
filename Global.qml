@@ -19,6 +19,10 @@ QtObject {
 	property var allDevicesModel
 	property bool applicationActive: true
 
+	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
+		&& (Qt.platform.os !== "wasm"
+			|| !BackendConnection.vrm
+			|| BackendConnection.heartbeatState !== BackendConnection.HeartbeatInactive)
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
@@ -61,6 +65,9 @@ QtObject {
 
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom
+
+	property bool backendReadyLatched
+	onBackendReadyChanged: if (backendReady) backendReadyLatched = true
 
 	signal aboutToFocusTextField(var textField, var textFieldContainer, var flickable)
 	signal keyPressed(var event)

@@ -1,37 +1,32 @@
 /*
-** Copyright (C) 2023 Victron Energy B.V.
+** Copyright (C) 2025 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
 import QtQuick
 import Victron.VenusOS
 
-ListItemButton {
+ListButton {
 	id: root
 
-	property string serviceUid
+	required property string serviceUid
 
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
-	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
-	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool modeAdjustable: modeIsAdjustable.value !== 0
 
-	text: serviceType !== "inverter" || isInverterChargerItem.value === 1
+	text: CommonWords.mode
+	secondaryText: serviceType !== "inverter" || isInverterChargerItem.value === 1
 			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
 			: Global.inverterChargers.inverterModeToText(modeItem.value)
 
-	// TODO need to show a different indicator (like in settings pages) when a control is disabled
-	// due to reduced user access level. This is different from when the control is disabled due to
-	// the mode not being adjustable.
-	enabled: userHasWriteAccess
-	showEnabled: modeAdjustable
+	button.showEnabled: modeAdjustable
 
 	onClicked: {
 		if (!modeAdjustable) {
-			if (dmc.isValid) {
+			if (dmc.valid) {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
-			} else if (bmsMode.isValid) {
+			} else if (bmsMode.valid) {
 				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			} else {

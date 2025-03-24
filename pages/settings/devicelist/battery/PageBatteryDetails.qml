@@ -66,11 +66,11 @@ Page {
 
 				//: %1 = number of battery modules that are online
 				//% "%1 online"
-				readonly property string onlineText: details.modulesOnline.isValid ? qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value) : "--"
+				readonly property string onlineText: details.modulesOnline.valid ? qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value) : "--"
 
 				//: %1 = number of battery modules that are offline
 				//% "%1 offline"
-				readonly property string offlineText: details.modulesOffline.isValid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
+				readonly property string offlineText: details.modulesOffline.valid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
 
 				//% "Battery modules"
 				text: qsTrId("batterydetails_modules")
@@ -105,7 +105,7 @@ Page {
 				//% "Connection information"
 				text: qsTrId("batterydetails_connection_information")
 				secondaryText: details.connectionInformation.value ?? ""
-				preferredVisible: details.connectionInformation.isValid
+				preferredVisible: details.connectionInformation.valid
 			}
 		}
 	}

@@ -36,7 +36,7 @@ Page {
 		delegate: ListAlarmLevelRadioButtonGroup {
 			text: modelData.text
 			dataItem.uid: root.bindPrefix + modelData.pathSuffix
-			preferredVisible: dataItem.isValid
+			preferredVisible: dataItem.valid
 			onVisibleChanged: settingsListView.headerItem.updateVisibility()
 		}
 	}

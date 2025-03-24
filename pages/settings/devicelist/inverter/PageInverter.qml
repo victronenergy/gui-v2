@@ -20,17 +20,8 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItem {
-				id: modeListButton
-
-				text: CommonWords.mode
-				writeAccessLevel: VenusOS.User_AccessType_User
-				content.children: [
-					InverterChargerModeButton {
-						width: Math.min(implicitWidth, modeListButton.maximumContentWidth)
-						serviceUid: root.bindPrefix
-					}
-				]
+			ListInverterChargerModeButton {
+				serviceUid: root.bindPrefix
 			}
 
 			ListText {
@@ -64,7 +55,7 @@ Page {
 			ListQuantityGroup {
 				//% "PV"
 				text: qsTrId("inverter_pv")
-				preferredVisible: pvV.isValid || pvYieldPower.isValid
+				preferredVisible: pvV.valid || pvYieldPower.valid
 				model: QuantityObjectModel {
 					QuantityObject { object: pvV; unit: VenusOS.Units_Volt_DC }
 					QuantityObject { object: pvYieldPower; unit: VenusOS.Units_Watt }
@@ -84,7 +75,7 @@ Page {
 			ListQuantity {
 				//% "Total yield"
 				text: qsTrId("inverter_total_yield")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/User"
 			}
@@ -92,7 +83,7 @@ Page {
 			ListQuantity {
 				//% "System yield"
 				text: qsTrId("inverter_system_yield")
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Energy_KiloWattHour
 				dataItem.uid: root.bindPrefix + "/Yield/System"
 			}
@@ -107,7 +98,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {

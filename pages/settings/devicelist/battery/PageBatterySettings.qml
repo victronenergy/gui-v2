@@ -66,7 +66,7 @@ Page {
 				text: qsTrId("batterysettings_restore_factory_defaults")
 				//% "Press to restore"
 				secondaryText: qsTrId("batterysettings_press_to_restore")
-				preferredVisible: restoreDefaults.isValid
+				preferredVisible: restoreDefaults.valid
 				onClicked: Global.dialogLayer.open(confirmationDialogComponent)
 
 				Component {
@@ -92,7 +92,7 @@ Page {
 				//% "Bluetooth Enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
 				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 		}
 	}

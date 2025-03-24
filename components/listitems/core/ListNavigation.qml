@@ -16,6 +16,8 @@ ListItem {
 
 	interactive: true
 
+	// Issue #1964: userHasWriteAccess is ignored for ListNavigation - see ListItem
+
 	content.children: [
 		Label {
 			id: secondaryLabel

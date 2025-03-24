@@ -47,7 +47,7 @@ Item {
 	ScreenBlanker {
 		id: screenBlanker
 		enabled: !Global.splashScreenVisible && !(!!Global.pageManager && Global.pageManager.statusBar.notificationButtonVisible)
-		displayOffTime: displayOffItem.isValid ? 1000*displayOffItem.value : 0.0
+		displayOffTime: displayOffItem.valid ? 1000*displayOffItem.value : 0.0
 		window: root.Window.window
 		property VeQuickItem displayOffItem: VeQuickItem {
 			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff" : ""
@@ -162,7 +162,7 @@ Item {
 
 	// Sometimes, the wasm code may crash. Use a watchdog to detect this and reload the page when necessary.
 	Timer {
-		running: Qt.platform.os === "wasm" && BackendConnection.state === BackendConnection.Ready
+		running: Qt.platform.os === "wasm" && Global.backendReadyLatched
 		repeat: true
 		interval: 1000
 		onTriggered: BackendConnection.hitWatchdog()

@@ -15,19 +15,21 @@ DeviceModel {
 
 	required property string serviceType
 
-	readonly property Instantiator _objects: Instantiator {
-		model: modelLoader.item
-		delegate: Device {
-			id: device
-			serviceUid: model.uid
-			onValidChanged: {
-				if (valid) {
-					root.addDevice(device)
-				} else {
-					root.removeDevice(device.serviceUid)
-				}
+	property Component deviceDelegate: Device {
+		id: device
+		serviceUid: model.uid
+		onValidChanged: {
+			if (valid) {
+				root.addDevice(device)
+			} else {
+				root.removeDevice(device.serviceUid)
 			}
 		}
+	}
+
+	readonly property Instantiator _objects: Instantiator {
+		model: modelLoader.item
+		delegate: root.deviceDelegate
 	}
 
 	readonly property ServiceModelLoader modelLoader: ServiceModelLoader {

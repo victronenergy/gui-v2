@@ -25,7 +25,7 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Mode"
 				valueTrue: 1
 				valueFalse: 4
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -38,7 +38,7 @@ Page {
 			ListSpinBox {
 				text: CommonWords.input_current_limit
 				writeAccessLevel: VenusOS.User_AccessType_User
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 				dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				stepSize: 0.1
@@ -87,7 +87,7 @@ Page {
 			ListTemperature {
 				text: CommonWords.battery_temperature
 				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
@@ -95,14 +95,14 @@ Page {
 				text: qsTrId("settings_accharger_current")
 				unit: VenusOS.Units_Amp
 				dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListAlarm {
 				//% "Low battery voltage alarm"
 				text: qsTrId("settings_accharger_low_battery_voltage_alarm")
 				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListAlarm {
@@ -111,13 +111,13 @@ Page {
 				//% "High battery voltage alarm"
 				text: qsTrId("settings_accharger_high_battery_voltage_alarm")
 				dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				text: CommonWords.error
 				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				secondaryText: dataItem.isValid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
 			// This is the master´s relay state

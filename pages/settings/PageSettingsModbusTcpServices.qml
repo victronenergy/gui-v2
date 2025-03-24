@@ -62,7 +62,7 @@ Page {
 			// but it is currently mqtt/com.victronenergy.<service>/ProductName
 			VeQuickItem {
 				id: productName
-				uid: serviceName.isValid ? "%1/%2/ProductName".arg(BackendConnection.uidPrefix()).arg(serviceName.value) : ""
+				uid: serviceName.valid ? "%1/%2/ProductName".arg(BackendConnection.uidPrefix()).arg(serviceName.value) : ""
 			}
 
 			VeQuickItem {

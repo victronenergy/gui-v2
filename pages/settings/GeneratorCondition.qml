@@ -71,7 +71,7 @@ ListNavigation {
 
 					ListRadioButtonGroup {
 						id: tankService
-						preferredVisible: showTankServices && dataItem.isValid
+						preferredVisible: showTankServices && dataItem.valid
 
 						//% "Tank service"
 						text: qsTrId("page_generator_conditions_tank_service")
@@ -101,33 +101,33 @@ ListNavigation {
 						id: startValue
 
 						text: startValueDescription
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/StartValue"
 						suffix: root.unit
 						decimals: root.decimals
 						stepSize: root.stepSize
-						from: stopValue.dataItem.isValid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
-						to: stopValue.dataItem.isValid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
+						from: stopValue.dataItem.valid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
+						to: stopValue.dataItem.valid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
 					}
 
 					ListSpinBox {
 						id: quietHoursStartValue
 
 						text: CommonWords.start_value_during_quiet_hours
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 						suffix: root.unit
 						decimals: root.decimals
 						stepSize: root.stepSize
-						from: quietHoursStopValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : dataItem.defaultMin
-						to: quietHoursStopValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : dataItem.defaultMax
+						from: quietHoursStopValue.dataItem.valid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : dataItem.defaultMin
+						to: quietHoursStopValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : dataItem.defaultMax
 					}
 
 					ListSpinBox {
 						id: startTime
 
 						text: startTimeDescription
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/StartTimer"
 						suffix: root.timeUnit
 					}
@@ -136,33 +136,33 @@ ListNavigation {
 						id: stopValue
 
 						text: stopValueDescription
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/StopValue"
 						suffix: root.unit
 						decimals: root.decimals
 						stepSize: root.stepSize
-						to: startValue.dataItem.isValid && root.startValueIsGreater ? startValue.value - stepSize : dataItem.defaultMax
-						from: startValue.dataItem.isValid && !root.startValueIsGreater ? startValue.value + stepSize : dataItem.defaultMin
+						to: startValue.dataItem.valid && root.startValueIsGreater ? startValue.value - stepSize : dataItem.defaultMax
+						from: startValue.dataItem.valid && !root.startValueIsGreater ? startValue.value + stepSize : dataItem.defaultMin
 					}
 
 					ListSpinBox {
 						id: quietHoursStopValue
 
 						text: CommonWords.stop_value_during_quiet_hours
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 						suffix: root.unit
 						decimals: root.decimals
 						stepSize: root.stepSize
-						to: quietHoursStartValue.dataItem.isValid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : dataItem.defaultMax
-						from: quietHoursStartValue.dataItem.isValid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : dataItem.defaultMin
+						to: quietHoursStartValue.dataItem.valid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : dataItem.defaultMax
+						from: quietHoursStartValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : dataItem.defaultMin
 					}
 
 					ListSpinBox {
 						id: stopTime
 
 						text: stopTimeDescription
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/StopTimer"
 						suffix: root.timeUnit
 					}
@@ -171,13 +171,13 @@ ListNavigation {
 						id: preventStartValue
 
 						text: preventStartValueDescription
-						preferredVisible: dataItem.isValid
+						preferredVisible: dataItem.valid
 						dataItem.uid: bindPrefix + "/PreventStartValue"
 						suffix: root.unit
 						decimals: root.decimals
 						stepSize: root.stepSize
-						from: stopValue.dataItem.isValid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
-						to: stopValue.dataItem.isValid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
+						from: stopValue.dataItem.valid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
+						to: stopValue.dataItem.valid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
 					}
 
 					ListSwitch {

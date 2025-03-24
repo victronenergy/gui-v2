@@ -16,12 +16,12 @@ ListNavigation {
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
 	function getTitle() {
-		if (customName.isValid && customName.value !== "") {
+		if (customName.valid && customName.value !== "") {
 			return customName.value
 		}
-		const inputNumber = devInstance.isValid ? devInstance.value : ""
+		const inputNumber = devInstance.valid ? devInstance.value : ""
 
-		if (temperatureType.isValid) {
+		if (temperatureType.valid) {
 			if (inputNumber === "") {
 				//: %1 = temperature sensor type
 				//% "%1 temperature sensor"
@@ -51,12 +51,12 @@ ListNavigation {
 			//% "No actions"
 			return qsTrId("settings_relay_no_actions")
 		}
-		if (c0.isValid && c0.value > -1) {
+		if (c0.valid && c0.value > -1) {
 			//: %1 = Relay 1 activation value, %2 = Relay 1 deactivation value
 			//% "C1: %1, %2"
 			summary.push(qsTrId("settings_relay_c0_desc").arg(c0Set.value || "--").arg(c0Clear.value || "--"))
 		}
-		if (c1.isValid && c1.value > -1) {
+		if (c1.valid && c1.value > -1) {
 			//: %1 = Relay 2 activation value, %2 = Relay 2 deactivation value
 			//% "C2: %1, %2"
 			summary.push(qsTrId("settings_relay_c1_desc").arg(c1Set.value || "--").arg(c1Clear.value || "--"))

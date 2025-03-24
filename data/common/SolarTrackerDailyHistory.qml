@@ -13,9 +13,9 @@ QtObject {
 	// Prefix is: com.victronenergy.solarcharger.tty0/History/Daily/<day>/Pv/<pv-index>
 	property string uidPrefix
 
-	readonly property real yieldKwh: _yieldKwh.isValid ? _yieldKwh.value : NaN
-	readonly property real maxPower: _maxPower.isValid ? _maxPower.value : NaN
-	readonly property real maxVoltage: _maxVoltage.isValid ? _maxVoltage.value : NaN
+	readonly property real yieldKwh: _yieldKwh.valid ? _yieldKwh.value : NaN
+	readonly property real maxPower: _maxPower.valid ? _maxPower.value : NaN
+	readonly property real maxVoltage: _maxVoltage.valid ? _maxVoltage.value : NaN
 
 	//--- internal members below ---
 

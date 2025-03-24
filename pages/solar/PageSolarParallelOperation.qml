@@ -21,8 +21,8 @@ Page {
 				//% "Networked"
 				text: qsTrId("charger_networked")
 				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
-				preferredVisible: dataItem.isValid
-				secondaryText: dataItem.isValid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
+				preferredVisible: dataItem.valid
+				secondaryText: dataItem.valid ? CommonWords.yesOrNo(dataItem.value & 1) : ""
 			}
 
 			ListText {
@@ -36,7 +36,7 @@ Page {
 				//% "Mode setting"
 				text: qsTrId("charger_mode_setting")
 				secondaryText: {
-					if (!dataItem.isValid) {
+					if (!dataItem.valid) {
 						return ""
 					}
 					switch (dataItem.value & 0xE) {
@@ -69,14 +69,14 @@ Page {
 					}
 				}
 				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
-				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value
+				preferredVisible: dataItem.valid && networkModeEnabled.dataItem.value
 			}
 
 			ListText {
 				//% "Master setting"
 				text: qsTrId("charger_master_setting")
 				secondaryText: {
-					if (!dataItem.isValid) {
+					if (!dataItem.valid) {
 						return ""
 					}
 					switch (dataItem.value & 0x30) {
@@ -97,21 +97,21 @@ Page {
 					}
 				}
 				dataItem.uid: root.bindPrefix + "/Link/NetworkMode"
-				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
+				preferredVisible: dataItem.valid && networkModeEnabled.dataItem.value && ((dataItem.value & 0x30) > 0x00)
 			}
 
 			ListQuantity {
 				//% "Charge voltage"
 				text: qsTrId("charger_charge_voltage")
 				dataItem.uid: root.bindPrefix + "/Link/ChargeVoltage"
-				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
+				preferredVisible: dataItem.valid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x04)
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListText {
 				text: CommonWords.charge_current
 				dataItem.uid: root.bindPrefix + "/Link/ChargeCurrent"
-				preferredVisible: dataItem.isValid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
+				preferredVisible: dataItem.valid && networkModeEnabled.dataItem.value > 0 && (networkModeMode.dataItem.value & 0x08)
 			}
 
 			ListText {
@@ -120,7 +120,7 @@ Page {
 				text: qsTrId("charger_network_bms_controlled")
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-				preferredVisible: dataItem.isValid
+				preferredVisible: dataItem.valid
 			}
 
 			ListButton {

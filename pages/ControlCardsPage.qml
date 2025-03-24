@@ -23,6 +23,10 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
+	// The cards list view is made up of:
+	// - Header - ESS card
+	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers
+	// - Footer - Manual relays
 	ListView {
 		id: cardsView
 
@@ -37,94 +41,127 @@ Page {
 		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
 		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
-		model: VisibleItemModel {
-			Loader {
-				active: systemType.value === "ESS" || systemType.value === "Hub-4"
-				width: active ? root.cardWidth : -cardsView.spacing
-				sourceComponent: ESSCard {
+		header: Loader {
+			active: systemType.value === "ESS" || systemType.value === "Hub-4"
+			sourceComponent: Item {
+				width: root.cardWidth + cardsView.spacing
+				height: cardsView.height
+
+				ESSCard {
 					width: root.cardWidth
 					height: cardsView.height
 				}
-
-				VeQuickItem {
-					id: systemType
-					uid: Global.system.serviceUid + "/SystemType"
-				}
 			}
 
-			Row {
+			VeQuickItem {
+				id: systemType
+				uid: Global.system.serviceUid + "/SystemType"
+			}
+		}
+
+		footer: Loader {
+			active: manualRelays.count > 0
+			sourceComponent: Item {
+				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
 
-				Repeater {
-					model: Global.evChargers.model
-
-					EVCSCard {
-						width: root.cardWidth
-						evCharger: model.device
-					}
-				}
-			}
-
-			Row {
-				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
-
-				Repeater {
-					model: Global.generators.model
-
-					GeneratorCard {
-						width: root.cardWidth
-						generator: model.device
-					}
-				}
-			}
-
-			Row {
-				height: cardsView.height
-				spacing: Theme.geometry_controlCardsPage_spacing
-
-				Repeater {
-					model: Global.inverterChargers.veBusDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-
-				Repeater {
-					model: Global.inverterChargers.acSystemDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-
-				Repeater {
-					model: Global.inverterChargers.inverterDevices
-
-					InverterChargerCard {
-						width: root.cardWidth
-						serviceUid: model.device.serviceUid
-						name: model.device.name
-					}
-				}
-			}
-
-			Loader {
-				active: manualRelays.count > 0
-				width: active ? root.cardWidth : -cardsView.spacing
-				sourceComponent: SwitchesCard {
+				SwitchesCard {
+					x: cardsView.spacing
 					width: root.cardWidth
 					height: cardsView.height
 					model: manualRelays
 				}
+			}
 
-				ManualRelayModel { id: manualRelays }
+			ManualRelayModel { id: manualRelays }
+		}
+
+		model: controlCardModel
+		delegate: Loader {
+			id: deviceDelegate
+
+			required property Device device
+
+			width: root.cardWidth
+			height: cardsView.height
+			sourceComponent: {
+				const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
+				if (serviceType === "evcharger") {
+					return evcsComponent
+				} else if (serviceType === "generator") {
+					return generatorComponent
+				}
+				return inverterChargerComponent
+			}
+
+			Component {
+				id: evcsComponent
+
+				EVCSCard {
+					width: root.cardWidth
+					serviceUid: deviceDelegate.device.serviceUid
+				}
+			}
+
+			Component {
+				id: generatorComponent
+
+				GeneratorCard {
+					width: root.cardWidth
+					generator: deviceDelegate.device
+				}
+			}
+
+			Component {
+				id: inverterChargerComponent
+
+				InverterChargerCard {
+					width: root.cardWidth
+					serviceUid: deviceDelegate.device.serviceUid
+					name: deviceDelegate.device.name
+				}
+			}
+		}
+	}
+
+	AggregateDeviceModel {
+		id: controlCardModel
+
+		sortBy: AggregateDeviceModel.SortBySourceModel | AggregateDeviceModel.SortByDeviceName
+		sourceModels: [
+			evChargerModel,
+			Global.generators.model,
+			Global.inverterChargers.veBusDevices,
+			Global.inverterChargers.acSystemDevices,
+			Global.inverterChargers.inverterDevices
+		]
+	}
+
+	// A model of evcharger services that represent controllable EV chargers, i.e. those with a
+	// valid /Mode value. Global.evChargers.model cannot be used in the control cards, as it
+	// includes services without a /Mode, such as Energy Meters configured as EV chargers.
+	ServiceDeviceModel {
+		id: evChargerModel
+
+		serviceType: "evcharger"
+		modelId: "evcharger"
+		deviceDelegate: Device {
+			id: device
+
+			required property string uid
+			readonly property bool isRealCharger: valid && _chargerMode.valid
+
+			readonly property VeQuickItem _chargerMode: VeQuickItem {
+				uid: device.serviceUid + "/Mode"
+			}
+
+			serviceUid: uid
+			onIsRealChargerChanged: {
+				if (isRealCharger) {
+					evChargerModel.addDevice(device)
+				} else {
+					evChargerModel.removeDevice(device.serviceUid)
+				}
 			}
 		}
 	}

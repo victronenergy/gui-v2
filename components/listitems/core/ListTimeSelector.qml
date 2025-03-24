@@ -17,10 +17,10 @@ ListButton {
 	property int maximumMinute: 59
 
 	// total value, in seconds (data value is assumed to be in seconds)
-	property real value: !dataItem.isValid ? 0 : dataItem.value
+	property real value: !dataItem.valid ? 0 : dataItem.value
 
 	secondaryText: hour < 0 || minute < 0 ? "--" : ClockTime.formatTime(hour, minute)
-	interactive: (dataItem.uid === "" || dataItem.isValid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: Global.dialogLayer.open(timeSelectorComponent, {hour: hour, minute: minute})
 

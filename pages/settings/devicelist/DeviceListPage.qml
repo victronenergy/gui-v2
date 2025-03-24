@@ -32,7 +32,7 @@ Page {
 						console.warn("DeviceList: cannot load delegate, cannot read service type from serviceUid:", device.serviceUid)
 						return
 					}
-					if (!source || !_usingCustomDelegate) {
+					if (source.toString().length === 0 || !_usingCustomDelegate) {
 						setSource("delegates/DeviceListDelegate_%1.qml".arg(serviceType), {
 							device: Qt.binding(function() { return delegateLoader.device }),
 							sourceModel: Qt.binding(function() { return delegateLoader.sourceModel }),
@@ -40,7 +40,7 @@ Page {
 						_usingCustomDelegate = true
 					}
 				} else {
-					if (!source || _usingCustomDelegate) {
+					if (source.toString().length === 0 || _usingCustomDelegate) {
 						setSource("delegates/DisconnectedDeviceListDelegate.qml", {
 							cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
 						})
@@ -72,7 +72,7 @@ Page {
 			ListNavigation {
 				//% "Genset"
 				text: qsTrId("devicelistpage_genset")
-				preferredVisible: relay0.isValid && relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
+				preferredVisible: relay0.valid && relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
 
 				VeQuickItem {
@@ -82,7 +82,7 @@ Page {
 			}
 
 			ListNavigation {
-				preferredVisible: relayFunction.isValid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
+				preferredVisible: relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})

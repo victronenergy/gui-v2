@@ -86,7 +86,7 @@ Item {
 	signal clicked()
 
 	visible: effectiveVisible
-	implicitHeight: effectiveVisible ? contentLayout.height : 0
+	implicitHeight: effectiveVisible ? contentLayout.implicitHeight : 0
 	implicitWidth: parent ? parent.width : 0
 
 	ListItemBackground {
@@ -127,12 +127,13 @@ Item {
 		effectEnabled: root.interactive
 		onClicked: {
 			if (root.interactive) {
-				if (!root.userHasWriteAccess) {
+				// Issue #1964: userHasWriteAccess is ignored for ListNavigation
+				if (root instanceof ListNavigation || root.userHasWriteAccess) {
+					root.clicked()
+				} else {
 					pressArea.toast?.close(true) // close immediately
 					//% "Setting locked for access level"
 					pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
-				} else {
-					root.clicked()
 				}
 			}
 		}
@@ -149,6 +150,7 @@ Item {
 		id: contentLayout
 
 		width: parent.width
+		anchors.verticalCenter: parent.verticalCenter
 		columns: 2
 		columnSpacing: Theme.geometry_listItem_content_spacing
 		rowSpacing: 0

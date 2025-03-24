@@ -98,7 +98,7 @@ Page {
 				//% "Date/Time local"
 				text: qsTrId("settings_tz_date_time_local")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				interactive: Global.systemSettings.time.isValid
+				interactive: Global.systemSettings.time.valid
 
 				content.children: Row {
 					spacing: Theme.geometry_listItem_content_spacing

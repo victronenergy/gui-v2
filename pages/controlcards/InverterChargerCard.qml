@@ -64,32 +64,25 @@ ControlCard {
 			model: AcInputSettingsModel {
 				serviceUid: root.serviceUid
 			}
-			delegate: Column {
+			delegate: SettingsColumn {
+				required property AcInputSettings inputSettings
+
 				width: parent.width
 
-				ListItem {
-					text: Global.acInputs.currentLimitTypeToText(modelData.inputType)
+				ListCurrentLimitButton {
+					serviceUid: root.serviceUid
+					inputNumber: inputSettings.inputNumber
+					inputType: inputSettings.inputType
 					flat: true
-					content.children: CurrentLimitButton {
-						serviceUid: root.serviceUid
-						inputNumber: modelData.inputNumber
-						inputType: modelData.inputType
-					}
 				}
 
 				FlatListItemSeparator {}
 			}
 		}
 
-		ListItem {
-			text: CommonWords.mode
+		ListInverterChargerModeButton {
+			serviceUid: root.serviceUid
 			flat: true
-			content.children: [
-				InverterChargerModeButton {
-					width: Math.min(implicitWidth, Theme.geometry_veBusDeviceCard_modeButton_maximumWidth)
-					serviceUid: root.serviceUid
-				}
-			]
 		}
 
 		FlatListItemSeparator {}
@@ -98,7 +91,7 @@ ControlCard {
 			id: essStateButton
 			text: CommonWords.ess
 			flat: true
-			preferredVisible: essModeItem.isValid
+			preferredVisible: essModeItem.valid
 			secondaryText: Global.ess.essStateToButtonText(essModeItem.value)
 			// change the font size for the child button
 			button.font.pixelSize: Theme.font_size_body1
@@ -111,7 +104,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("controlcard_inverter_charger_ess_minimum_soc")
 			flat: true
-			preferredVisible: essMinSocItem.isValid && [
+			preferredVisible: essMinSocItem.valid && [
 				VenusOS.Ess_State_OptimizedWithBatteryLife,
 				VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essModeItem.value)
 			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, essMinSocItem.value)

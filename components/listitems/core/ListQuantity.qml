@@ -22,7 +22,7 @@ ListItem {
 
 			anchors.verticalCenter: parent.verticalCenter
 			font.pixelSize: Theme.font_size_body2
-			value: dataItem.isValid ? dataItem.value : NaN
+			value: dataItem.valid ? dataItem.value : NaN
 		}
 	]
 

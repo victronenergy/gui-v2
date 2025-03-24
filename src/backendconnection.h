@@ -25,6 +25,7 @@ class BackendConnection : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(State state READ state NOTIFY stateChanged FINAL)
+	Q_PROPERTY(HeartbeatState heartbeatState READ heartbeatState NOTIFY heartbeatStateChanged FINAL)
 	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged FINAL)
 	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged FINAL)
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged FINAL)
@@ -61,6 +62,14 @@ public:
 	};
 	Q_ENUM(State)
 
+	// Same as VeQItemMqttProducer::HeartbeatState
+	enum HeartbeatState {
+		HeartbeatActive,
+		HeartbeatMissing,
+		HeartbeatInactive,
+	};
+	Q_ENUM(HeartbeatState)
+
 	enum MqttClientError {
 		MqttClient_NoError = QMqttClient::NoError,
 		MqttClient_InvalidProtocolVersion = QMqttClient::InvalidProtocolVersion,
@@ -78,6 +87,7 @@ public:
 	static BackendConnection* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	State state() const;
+	HeartbeatState heartbeatState() const;
 	MqttClientError mqttClientError() const;
 
 	void loadConfiguration();
@@ -145,6 +155,7 @@ public:
 
 Q_SIGNALS:
 	void stateChanged();
+	void heartbeatStateChanged();
 	void typeChanged();
 	void mqttClientErrorChanged();
 	void usernameChanged();
@@ -166,6 +177,8 @@ private:
 	void setState(State backendConnectionState);
 	void setState(VeQItemMqttProducer::ConnectionState backendConnectionState);
 	void setState(bool connected);
+	void setHeartbeatState(HeartbeatState backendHeartbeatState);
+	void setHeartbeatState(VeQItemMqttProducer::HeartbeatState backendHeartbeatState);
 	void mqttErrorChanged();
 	void addSettings(VeQItemSettingsInfo *info);
 
@@ -188,6 +201,7 @@ private:
 	bool m_needsWasmKeyboardHandler = false;
 
 	State m_state = BackendConnection::State::Idle;
+	HeartbeatState m_heartbeatState = BackendConnection::HeartbeatState::HeartbeatActive;
 	SourceType m_type = UnknownSource;
 	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
 

@@ -30,7 +30,7 @@ Page {
 				text: qsTrId("settings_ess_dc_coupled_pv")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
 				preferredVisible: hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& doNotFeedInvOvervoltage.isValid
+					&& doNotFeedInvOvervoltage.valid
 
 				VeQuickItem {
 					id: doNotFeedInvOvervoltage
@@ -72,7 +72,7 @@ Page {
 				//% "Feed-in limiting active"
 				text: qsTrId("settings_ess_feed_in_limiting_active")
 				preferredVisible: hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
-					&& dataItem.isValid
+					&& dataItem.valid
 				dataItem.uid: BackendConnection.serviceUidForType("hub4") +"/PvPowerLimiterActive"
 				secondaryText: CommonWords.yesOrNo(feedInLimitingActive.dataItem.value)
 			}

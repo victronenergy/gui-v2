@@ -11,7 +11,7 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataItem.isValid
+	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataItem.valid
 
 	VeQuickItem {
 		id: manufacturer

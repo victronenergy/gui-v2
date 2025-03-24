@@ -15,11 +15,20 @@ QtObject {
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
 
 	readonly property AcInput highlightedInput: {
-		if (_activeInSource.isValid || _activeInServiceType.isValid) {
-			// If system /Ac/ActiveIn is set, find the input that matches it.
-			return _isSystemActiveInput(input1) ? input1
-					: _isSystemActiveInput(input2) ? input2
-					: null
+		if (_activeInSource.valid || _activeInServiceType.valid) {
+			// Normally system /Ac/ActiveIn/Source provides the AC input source, and this is matched
+			// against /Ac/In/<0|1>/Source to see whether AC-in 0 or AC-in 1 is the active input.
+			// If that path is not set, then as a backup, try to match /Ac/ActiveIn/ServiceType
+			// against /Ac/In/<0|1>/ServiceType to determine the active input.
+			if (_activeInSource.valid) {
+				return input1.source === _activeInSource.value ? input1
+						: input2.source === _activeInSource.value ? input2
+						: null
+			} else {
+				return input1.serviceType === _activeInServiceType.value ? input1
+						: input2.serviceType === _activeInServiceType.value ? input2
+						: null
+			}
 		} else {
 			// Prefer the first Grid/Shore input, or otherwise the first operational input.
 			return isGridOrShore(input1) ? input1
@@ -175,12 +184,6 @@ QtObject {
 	function roleName(role) {
 		const match = roles.find(function(r) { return r.role === role })
 		return match ? match.name : "--"
-	}
-
-	function _isSystemActiveInput(input) {
-		return input
-				&& ((_activeInSource.value !== VenusOS.AcInputs_InputSource_NotAvailable && input.source === _activeInSource.value)
-					|| (!!_activeInServiceType.value && input.serviceType === _activeInServiceType.value))
 	}
 
 	Component.onCompleted: Global.acInputs = root

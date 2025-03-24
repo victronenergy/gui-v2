@@ -13,8 +13,8 @@ QtObject {
 	required property int trackerIndex
 
 	readonly property string name: _name.value ?? ""
-	readonly property real power: _power.isValid ? _power.value : NaN
-	readonly property real voltage: _voltage.isValid ? _voltage.value : NaN
+	readonly property real power: _power.valid ? _power.value : NaN
+	readonly property real voltage: _voltage.valid ? _voltage.value : NaN
 	readonly property real current: !power || !voltage ? NaN : power / voltage
 
 	// If there is only 1 tracker (e.g. all common MPPTs), the voltage and power are provided via

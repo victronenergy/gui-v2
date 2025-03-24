@@ -28,7 +28,7 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
-project(venus-gui-v2 LANGUAGES CXX VERSION 1.1.5)
+project(venus-gui-v2 LANGUAGES CXX VERSION 1.1.7)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -195,7 +195,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
-    components/CurrentLimitButton.qml
     components/DateSelector.qml
     components/Device.qml
     components/DeviceListDelegate.qml
@@ -218,7 +217,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterAcOutSettings.qml
-    components/InverterChargerModeButton.qml
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
@@ -263,6 +261,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
+    components/SystemBatteryDelegate.qml
+    components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
     components/TabBar.qml
     components/TankItem.qml
@@ -326,11 +326,13 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListBriefCenterDetails.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
+    components/listitems/ListCurrentLimitButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
     components/listitems/ListDcOutputQuantityGroup.qml
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareVersion.qml
     components/listitems/ListGeneratorError.qml
+    components/listitems/ListInverterChargerModeButton.qml
     components/listitems/ListLink.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
@@ -414,6 +416,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/AcInputSettingsModel.qml
     data/common/AcInputSystemInfo.qml
     data/common/AcInput.qml
+    data/common/ActiveSystemBattery.qml
     data/common/DcDevice.qml
     data/common/DcInput.qml
     data/common/DeviceModel.qml
@@ -434,7 +437,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
     data/common/SwitchDevice.qml
-    data/common/SystemBattery.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
@@ -468,6 +470,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/DvccCommonSettings.qml
     pages/settings/GeneratorCondition.qml
     pages/settings/IpAddressListView.qml
+    pages/settings/NetworkSettingsPageModel.qml
     pages/settings/PageCanbusStatus.qml
     pages/settings/PageChargeCurrentLimits.qml
     pages/settings/PageDeviceInfo.qml
