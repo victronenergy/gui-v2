@@ -7,26 +7,16 @@ ifeq ($(EXTRAFONTS),)
 endif
 
 FILES=index.html qtloader.js venus-gui-v2.js \
-	  venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz victronenergy.svg \
-      LICENSE.txt
-
-all: venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz
-
-venus-gui-v2.wasm.sha256:
-	sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
-
-venus-gui-v2.wasm.gz:
-	gzip -k -9 venus-gui-v2.wasm
+	victronenergy.svg LICENSE.txt
 
 .PHONY: clean
 
 clean:
-	rm -f venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz
+	rm -f
 
-install: all
+install:
 	install -d $(DESTDIR)$(PREFIX)/
 	install -m 644 $(FILES) $(DESTDIR)$(PREFIX)/
 ifdef LINKFONT
-	  ln -s $(EXTRAFONTS) $(DESTDIR)$(PREFIX)/
+	ln -s $(EXTRAFONTS) $(DESTDIR)$(PREFIX)/
 endif
-
