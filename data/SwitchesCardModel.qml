@@ -43,7 +43,7 @@ ListModel {
 				delegate: QtObject {
 					property var _store: null  //holds the current group this switch object is in
 					readonly property string switchuid: model.uid
-					property bool customGp: _groupName.isValid && _groupName.value!==""
+					property bool customGp: _groupName.valid && _groupName.value!==""
 					property string groupName: customGp ? _groupName.value : devName
 					property string name: _customName.valueValid
 										 ? _customName.value
@@ -60,7 +60,7 @@ ListModel {
 					}
 					readonly property VeQuickItem _groupName: VeQuickItem {
 						uid: model.uid + "/Settings/Group"
-						property bool valueValid: isValid &&  value!==""
+						property bool valueValid: valid &&  value!==""
 					}
 					onGroupNameChanged: {
 						if (_store !== null){
@@ -69,12 +69,12 @@ ListModel {
 					}
 					readonly property VeQuickItem _customName: VeQuickItem {
 						uid: model.uid + "/Settings/CustomName"
-						property bool valueValid: isValid &&  value!==""
+						property bool valueValid: valid &&  value!==""
 					}
 
 					readonly property VeQuickItem _Type: VeQuickItem {
 						uid: model.uid + "/Settings/Type"
-						property bool valueValid: isValid &&  ((value == VenusOS.SwitchableOutput_Function_Momentary)
+						property bool valueValid: valid &&  ((value == VenusOS.SwitchableOutput_Function_Momentary)
 													|| (value == VenusOS.SwitchableOutput_Function_Latching)
 													|| (value == VenusOS.SwitchableOutput_Function_Dimmable))
 						onValueValidChanged: {

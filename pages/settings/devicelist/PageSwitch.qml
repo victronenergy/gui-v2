@@ -24,8 +24,8 @@ Page {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		delegate: QtObject {
-			readonly property bool isDimming: functionItem.isValid && functionItem.value === VenusOS.SwitchableOutput_Function_Dimmable
-			readonly property string name: customNameItem.isValid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
+			readonly property bool isDimming: functionItem.valid && functionItem.value === VenusOS.SwitchableOutput_Function_Dimmable
+			readonly property string name: customNameItem.valid && (customNameItem.value !== "") ? "Ch%1: %2".arg(index+1).arg(customNameItem.value) : "Channel %1".arg(index + 1)
 			readonly property string status: VenusOS.switchableOutput_statusToText(statusItem.value)
 			readonly property bool displayPercentage : isDimming && ((statusItem.value === VenusOS.SwitchableOutput_Status_On) || (statusItem.value === VenusOS.SwitchableOutput_Status_Output_Fault))
 			readonly property string combinedStatus: displayPercentage ? "%1%".arg(dimmingItem.value) : status
@@ -33,8 +33,8 @@ Page {
 			property VeQuickItem functionItem: VeQuickItem {
 				uid: model.uid + "/Settings/Type"
 				property string statusText: VenusOS.switchableOutput_functionToText(value, (value === VenusOS.SwitchableOutput_Function_Slave ) ? index : null)
-				onIsValidChanged:{
-					if (!isValid) Global.pageManager.popAllPages()
+				onValidChanged:{
+					if (!valid) Global.pageManager.popAllPages()
 				}
 			}
 			property VeQuickItem statusItem: VeQuickItem {
@@ -49,7 +49,7 @@ Page {
 			}
 			property VeQuickItem customNameItem: VeQuickItem {
 				uid: model.uid + "/Settings/CustomName"
-				property string shortText: isValid ? value.length > 25 ? value.substring(0,25)  + "...": value : ""
+				property string shortText: valid ? value.length > 25 ? value.substring(0,25)  + "...": value : ""
 			}
 			property VeQuickItem fuseItem: VeQuickItem {
 				uid: model.uid + "/Settings/FuseRating"
@@ -57,7 +57,7 @@ Page {
 			}
 			property VeQuickItem groupNameItem: VeQuickItem {
 				uid: model.uid + "/Settings/Group"
-				property string shortText: isValid ? value.length > 18 ? value.substring(0,15)+"...": value : "--"
+				property string shortText: valid ? value.length > 18 ? value.substring(0,15)+"...": value : "--"
 			}
 		}
 	}
@@ -129,7 +129,7 @@ Page {
 						dataItem.uid: root.bindPrefix + "/Settings/CustomName"
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						preferredVisible : dataItem.isValid
+						preferredVisible : dataItem.valid
 						placeholderText: CommonWords.custom_name
 					}
 
@@ -186,7 +186,7 @@ Page {
 						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/CustomName".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						preferredVisible : dataItem.isValid
+						preferredVisible : dataItem.valid
 						placeholderText: CommonWords.custom_name
 					}
 					ListTextField {
@@ -195,7 +195,7 @@ Page {
 						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/Group".arg(root.currentChannel)
 						dataItem.invalidate: false
 						textField.maximumLength: 32
-						preferredVisible : dataItem.isValid
+						preferredVisible : dataItem.valid
 						placeholderText: qsTrId("settings_deviceinfo_group")
 					}
 					ListRadioButtonGroup {
@@ -203,7 +203,7 @@ Page {
 						//% "Type"
 						text: qsTrId("settings_type")
 						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/Type".arg(root.currentChannel)
-						preferredVisible : dataItem.isValid
+						preferredVisible : dataItem.valid
 						optionModel: validFunctionsItem.options
 					}
 
@@ -211,7 +211,7 @@ Page {
 						id:fuseListField
 						//% "Fuse rating"
 						text:  qsTrId("settings_fuse_rating")
-						preferredVisible : dataItem.isValid
+						preferredVisible : dataItem.valid
 						unit: VenusOS.Units_Amp
 						decimals: 1
 						dataItem.uid: root.bindPrefixSwitches + "/%1/Settings/FuseRating".arg(root.currentChannel)

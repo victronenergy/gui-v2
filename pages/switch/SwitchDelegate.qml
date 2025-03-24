@@ -11,7 +11,7 @@ Item {
 	id: root
 
 	height: mainItem.contentHeight
-	visible: switchData._status.isValid
+	visible: switchData._status.valid
 
 	property int controlBorderWidth: Theme.geometry_switchableOutput_delegate_control_border_width //2
 	property color backColor: Theme.color_darkOk
@@ -96,13 +96,13 @@ Item {
 				id: dimmingSwitch
 				grooveColor: backColor
 				highlightColor: switchData._state.value ? highLightColor : disabledColor
-				visible: switchData._type.isValid && (switchData._type.value == 2)
+				visible: switchData._type.valid && (switchData._type.value == 2)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				radius: parent.radius
 				from: 1
 				to: 100
-				value: switchData._dimming.isValid ? switchData._dimming.value : 0
+				value: switchData._dimming.valid ? switchData._dimming.value : 0
 				width: parent.width - root.controlBorderWidth * 2
 				height: parent.height - root.controlBorderWidth * 2
 				buttonClickedEnabled: true
@@ -126,7 +126,7 @@ Item {
 			}
 			Rectangle{
 				id: momentarySwitch
-				visible: switchData._type.isValid && switchData._type.value == 0
+				visible: switchData._type.valid && switchData._type.value == 0
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				radius: parent.radius
@@ -153,7 +153,7 @@ Item {
 
 			Item{
 				id: latchingSwitch
-				visible: !switchData._type.isValid || (switchData._type.isValid && switchData._type.value == 1)
+				visible: !switchData._type.valid || (switchData._type.valid && switchData._type.value == 1)
 				x:root.controlBorderWidth
 				y:root.controlBorderWidth
 				width: parent.width - root.controlBorderWidth * 2

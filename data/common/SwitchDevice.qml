@@ -10,10 +10,10 @@ import Victron.VenusOS
 Device {
 	id: root
 	//% "%1 %2"
-	property string _instProductName: (_deviceInstance.isValid && _productName.isValid) ? qsTrId("switchDev_InstProductName").arg (_productName.value).arg(_deviceInstance.value) : productName.value
+	property string _instProductName: (_deviceInstance.valid && _productName.valid) ? qsTrId("switchDev_InstProductName").arg (_productName.value).arg(_deviceInstance.value) : productName.value
 	name: _customName.value || _instProductName || ""
 
-	readonly property int state: _state.isValid ? _state.value : -1
+	readonly property int state: _state.valid ? _state.value : -1
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: root.serviceUid + "/State"
