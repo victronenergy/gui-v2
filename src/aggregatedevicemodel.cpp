@@ -187,6 +187,14 @@ BaseDevice *AggregateDeviceModel::deviceAt(int index) const
 	return m_deviceInfos.at(index).device;
 }
 
+BaseDeviceModel *AggregateDeviceModel::sourceModelAt(int index) const
+{
+	if (index < 0 || index >= m_deviceInfos.count()) {
+		return nullptr;
+	}
+	return m_deviceInfos.at(index).sourceModel;
+}
+
 void AggregateDeviceModel::removeDisconnectedDevices()
 {
 	if (m_disconnectedDeviceIds.count() == 0) {

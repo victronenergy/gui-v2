@@ -127,10 +127,13 @@ QtObject {
 			]
 		},
 		{
-			name: "15 tanks (merge 3 Fuel tanks and 2 WasteWater tanks)",
+			name: "18 tanks (merge 6 Fuel tanks and 2 WasteWater tanks)",
 			tanks: [
 				{ type: VenusOS.Tank_Type_Fuel, level: 46.34, capacity: 1 },
 				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 46.34, capacity: 1 },
 				{ type: VenusOS.Tank_Type_Fuel, level: 75.334, capacity: 1 },
 				{ type: VenusOS.Tank_Type_FreshWater, level: 10, capacity: 2 },
 				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334, capacity: 1 },
@@ -152,7 +155,6 @@ QtObject {
 				// Should get an average level of 50%
 				{ type: VenusOS.Tank_Type_Fuel, level: 25 },
 				{ type: VenusOS.Tank_Type_Fuel, level: 75 },
-
 				{ type: VenusOS.Tank_Type_FreshWater, level: 10 },
 				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334 },
 				{ type: VenusOS.Tank_Type_LiveWell, capacity: 1, remaining: 2.5 },
@@ -166,6 +168,11 @@ QtObject {
 			tanks: [
 				{ type: VenusOS.Tank_Type_FreshWater, level: 25, capacity: 2 },
 				{ type: VenusOS.Tank_Type_FreshWater, level: 75, capacity: 20 },
+				{ type: VenusOS.Tank_Type_Fuel, level: 10 },
+				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334 },
+				{ type: VenusOS.Tank_Type_LiveWell, capacity: 1, remaining: 2.5 },
+				{ type: VenusOS.Tank_Type_Oil, level: 80.2, capacity: .1 },
+				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
 			]
 		},
 	]

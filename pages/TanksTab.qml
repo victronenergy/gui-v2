@@ -11,121 +11,96 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 import Victron.Gauges
 
 BaseListView {
 	id: root
 
-	property bool animateModelChanges
 	property bool animationEnabled: true
 
-	property int _tankItemCount // No. of visible tank items, where merged tanks only count as one item
-	property var _mergedTankTypes: []
-	property int _lastVisibleTankType
-	property int _spacing: Gauges.spacing(_tankItemCount)
-
-	function _updateLayout(initialLayout) {
-		let i = 0
-		for (i = Global.tanks.tankTypes.length - 1; i >= 0; --i) {
-			if (Global.tanks.tankModel(Global.tanks.tankTypes[i]).count > 0) {
-				_lastVisibleTankType = Global.tanks.tankTypes[i]
-				break
-			}
-		}
-
-		if (Global.tanks.totalTankCount < Theme.geometry_levelsPage_tankMergeThreshold) {
-			// There is no more than one tank per type, so merging is not required
-			_tankItemCount = Global.tanks.totalTankCount
-			_mergedTankTypes = []
-		} else {
-			let tankItemCountIfMerged = Global.tanks.totalTankCount
-			let mergedTankTypes = []
-			for (i = 0; i < Global.tanks.tankTypes.length; ++i) {
-				const tankModel = Global.tanks.tankModel(Global.tanks.tankTypes[i])
-				if (tankModel.count > 1) {
-					tankItemCountIfMerged = tankItemCountIfMerged - tankModel.count + 1
-					mergedTankTypes.push(Global.tanks.tankTypes[i])
-					if (tankItemCountIfMerged < Theme.geometry_levelsPage_tankMergeThreshold) {
-						break
-					}
-				}
-			}
-			_tankItemCount = tankItemCountIfMerged
-			_mergedTankTypes = mergedTankTypes
-		}
-
-		if (!initialLayout) {
-			animateModelChanges = true
-		}
+	model: AggregateTankModel {
+		mergeThreshold: Theme.geometry_levelsPage_tankMergeThreshold
+		tankModels: Global.tanks.allTankModels
 	}
-
-	model: Global.tanks.tankTypes
 	orientation: ListView.Horizontal
+	spacing: Gauges.spacing(count)
 
-	delegate: Row {
-		id: tankTypeDelegate
+	delegate: TankItem {
+		id: tankOrGroupDelegate
 
-		readonly property int tankType: modelData
-		readonly property var tankModel: Global.tanks.tankModel(tankType)
-		readonly property bool mergeTanks: root._mergedTankTypes.indexOf(tankType) >= 0
+		required property int index
+		required property bool isGroup
+		required property Tank tank // null if isGroup=true
+		required property TankModel tankModel
 
-		// Add spacing between this set of tank types and the next
-		width: implicitWidth + (gaugeRepeater.count === 0 || tankType == root._lastVisibleTankType ? 0 : root._spacing)
+		readonly property var tankProperties: Gauges.tankProperties(tankModel.type)
 
-		Repeater {
-			id: gaugeRepeater
+		width: Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
+		height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
+		header.text: tank?.name ?? tankProperties.name ?? ""
+		header.color: tankProperties.color
+		icon: tankProperties.icon
+		gauge: isGroup ? gaugeGroupComponent : singleGaugeComponent
+		level: isGroup ? tankModel.averageLevel : tank?.level ?? NaN
+		totalCapacity: isGroup ? tankModel.totalCapacity : tank?.capacity ?? NaN
+		totalRemaining: isGroup ? tankModel.totalRemaining : tank?.remaining ?? NaN
 
-			model: tankTypeDelegate.tankModel.count > 0
-				   ? (tankTypeDelegate.mergeTanks ? 1 : tankTypeDelegate.tankModel)
-				   : null
+		Behavior on height {
+			enabled: root.animationEnabled && !!Global.pageManager && Global.pageManager.animatingIdleResize
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
+		}
 
-			delegate: Item {
-				// Add spacing between this tank and the next (if there is more than one of this type)
-				width: gaugeGroup.width + (model.index === gaugeRepeater.count - 1 ? 0 : root._spacing)
-				height: 1
+		PressArea {
+			anchors.fill: parent
+			enabled: tankOrGroupDelegate.isGroup
+			radius: Theme.geometry_levelsPage_panel_radius
+			onClicked: {
+				expandedTanksLoader.tankModel = tankOrGroupDelegate.tankModel
+				expandedTanksLoader.active = true
+				expandedTanksLoader.item.active = true
+			}
+		}
 
-				TankGaugeGroup {
-					id: gaugeGroup
+		Component {
+			id: singleGaugeComponent
 
-					animationEnabled: root.animationEnabled
-					tankType: tankTypeDelegate.tankType
-					header.text: mergeTanks ? tankProperties.name : model.device.name || tankProperties.name
-					expanded: !!Global.pageManager && Global.pageManager.expandLayout
-					width: Gauges.width(_tankItemCount, Theme.geometry_levelsPage_max_tank_count, root.width)
-					height: Gauges.height(expanded)
+			TankGauge {
+				anchors.fill: parent
+				expanded: !!Global.pageManager && Global.pageManager.expandLayout
+				animationEnabled: root.animationEnabled
+				valueType: tankOrGroupDelegate.tankProperties.valueType
+				value: tankOrGroupDelegate.tank ? tankOrGroupDelegate.tank.level / 100 : NaN
+				isGrouped: false
+			}
+		}
 
-					level: mergeTanks ? gaugeTanks.averageLevel : model.device.level
-					totalRemaining: mergeTanks ? gaugeTanks.totalRemaining : model.device.remaining
-					totalCapacity: mergeTanks ? gaugeTanks.totalCapacity : model.device.capacity
+		Component {
+			id: gaugeGroupComponent
 
-					groupIndex: model.index
-					gaugeTanks: tankTypeDelegate.tankModel
-					mergeTanks: tankTypeDelegate.mergeTanks
+			Row {
+				id: gaugeRow
 
-					PressArea {
-						anchors.fill: parent
-						enabled: tankTypeDelegate.mergeTanks
-						radius: gaugeGroup.radius
-						onClicked: {
-							expandedTanksLoader.tankModel = tankTypeDelegate.tankModel
-							expandedTanksLoader.active = true
-							expandedTanksLoader.item.active = true
-						}
+				anchors.fill: parent
+				spacing: Theme.geometry_levelsPage_subgauges_spacing
+
+				Repeater {
+					model: tankOrGroupDelegate.tankModel
+					delegate: TankGauge {
+						required property BaseTankDevice device
+
+						width: (gaugeRow.width - (gaugeRow.spacing * (tankOrGroupDelegate.tankModel.count - 1))) / tankOrGroupDelegate.tankModel.count
+						height: parent.height
+						expanded: !!Global.pageManager && Global.pageManager.expandLayout
+						animationEnabled: root.animationEnabled
+						valueType: tankOrGroupDelegate.tankProperties.valueType
+						value: device.level / 100
+						isGrouped: true
 					}
 				}
 			}
-		}
-	}
-
-	Component.onCompleted: {
-		_updateLayout(true)
-	}
-
-	Connections {
-		target: Global.tanks
-		function onTotalTankCountChanged() {
-			Qt.callLater(_updateLayout)
 		}
 	}
 

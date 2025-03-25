@@ -53,6 +53,7 @@ public:
 
 	Q_INVOKABLE bool addDevice(BaseDevice *device);
 	Q_INVOKABLE bool removeDevice(const QString &serviceUid);
+	Q_INVOKABLE bool removeAt(int index);
 	Q_INVOKABLE void intersect(const QStringList &serviceUids); // remove entries that are not in this list
 	Q_INVOKABLE void clear();
 	Q_INVOKABLE void deleteAllAndClear();
