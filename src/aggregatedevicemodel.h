@@ -63,6 +63,7 @@ public:
 	QVariant data(const QModelIndex& index, int role) const override;
 
 	Q_INVOKABLE BaseDevice *deviceAt(int index) const;
+	Q_INVOKABLE BaseDeviceModel *sourceModelAt(int index) const;
 	Q_INVOKABLE void removeDisconnectedDevices();
 
 signals:

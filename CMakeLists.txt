@@ -269,7 +269,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/TabBar.qml
     components/TankItem.qml
     components/TankGauge.qml
-    components/TankGaugeGroup.qml
     components/TemperatureRelaySettings.qml
     components/ThreePhaseBarGauge.qml
     components/ThreePhaseDisplay.qml
@@ -689,6 +688,8 @@ list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 list(APPEND VenusQMLModule_CPP_SOURCES
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
+    src/aggregatetankmodel.h
+    src/aggregatetankmodel.cpp
     src/visibleitemmodel.h
     src/visibleitemmodel.cpp
     src/basedevice.h
