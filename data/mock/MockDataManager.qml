@@ -40,6 +40,7 @@ QtObject {
 			property var pulseMeters: PulseMetersImpl { }
 			property var pvInverters: PvInvertersImpl {}
 			property var solarDevices: SolarDevicesImpl {}
+			property var switches: SwitchesImpl {}
 			property var system: SystemImpl {}
 			property var systemSettings: SystemSettingsImpl {}
 			property var tanks: TanksImpl {}
