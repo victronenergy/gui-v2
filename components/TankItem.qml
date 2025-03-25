@@ -44,7 +44,15 @@ Rectangle {
 			topMargin: Theme.geometry_levelsPage_panel_spacing
 			bottom: percentageText.top
 			bottomMargin: Theme.geometry_levelsPage_subgauges_bottomMargin
-			horizontalCenter: parent.horizontalCenter
+			left: parent.left
+			leftMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
+			right: parent.right
+			rightMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
+		}
+		onStatusChanged: {
+			if (status === Loader.Error) {
+				console.warn("Unable to load tank levels gauge:", errorString())
+			}
 		}
 	}
 

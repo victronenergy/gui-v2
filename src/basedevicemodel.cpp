@@ -116,8 +116,12 @@ bool BaseDeviceModel::addDevice(BaseDevice *device)
 
 bool BaseDeviceModel::removeDevice(const QString &serviceUid)
 {
-	const int index = indexOf(serviceUid);
-	if (index >= 0) {
+	return removeAt(indexOf(serviceUid));
+}
+
+bool BaseDeviceModel::removeAt(int index)
+{
+	if (index >= 0 && index < count()) {
 		emit beginRemoveRows(QModelIndex(), index, index);
 		BaseDevice *device = m_devices.takeAt(index);
 		if (device) {
@@ -128,7 +132,6 @@ bool BaseDeviceModel::removeDevice(const QString &serviceUid)
 		refreshFirstObject();
 		return true;
 	}
-
 	return false;
 }
 
