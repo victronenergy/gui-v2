@@ -101,6 +101,12 @@ Page {
 				}
 			}
 
+			ListSwitch {
+				//% "Boat page"
+				text: qsTrId("settings_display_boat_page")
+				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+			}
+
 			ListRadioButtonGroup {
 				id: runningVersion
 
