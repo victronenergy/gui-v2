@@ -14,8 +14,7 @@ Column {
 	property bool showFullDetails
 	property bool smallTextMode
 
-	readonly property string _serviceUid: centerService.value ?? ""
-	readonly property bool _useTemperature: BackendConnection.serviceTypeFromUid(_serviceUid) === "temperature"
+	readonly property bool _useTemperature: BackendConnection.portableIdInfo(centerService.value).type === "temperature"
 
 	VeQuickItem {
 		id: centerService
@@ -24,7 +23,16 @@ Column {
 
 	VeQuickItem {
 		id: temperature
-		uid: root._useTemperature ? root._serviceUid + "/Temperature" : ""
+		uid: {
+			if (root._useTemperature) {
+				const idInfo = BackendConnection.portableIdInfo(centerService.value)
+				const device = Global.environmentInputs.model.deviceForDeviceInstance(idInfo.instance)
+				if (device) {
+					return device.serviceUid + "/Temperature"
+				}
+			}
+			return ""
+		}
 	}
 
 	Row {
