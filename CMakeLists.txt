@@ -437,6 +437,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
     data/common/SwitchDevice.qml
+    data/common/SwitchableOutputData.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
@@ -733,6 +734,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/screenblanker.cpp
     src/solarinputmodel.h
     src/solarinputmodel.cpp
+    src/switchableoutputmodel.h
+    src/switchableoutputmodel.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )

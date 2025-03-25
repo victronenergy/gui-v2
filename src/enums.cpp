@@ -298,7 +298,7 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 		//% "Over temperature"
 		return qtTrId("Switches_Over_temperature");
 	case Switch_DeviceState_Temperature_Warning:
-		//% "Temperture warning"
+		//% "Temperature warning"
 		return qtTrId("Switches_temperature_warning");
 	case Switch_DeviceState_Channel_Fault:
 		//% "Channel Fault"

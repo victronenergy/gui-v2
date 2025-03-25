@@ -11,7 +11,7 @@ ControlCard {
 	id: root
 	property var model
 	property alias title: root.title
-	property int switchCol: (model.count + 3)/4
+	property int switchCol: model.count ? (model.count + 3)/4 : 1// count porp rowcount function
 	implicitWidth: Theme.geometry_controlCard_minimumWidth * switchCol
 	width: Theme.geometry_controlCard_minimumWidth * switchCol
 
@@ -33,10 +33,10 @@ ControlCard {
 		cellHeight: switchesView.height/4
 		cellWidth: switchesView.width / switchCol
 		model: root.model
-
 		delegate: SwitchDelegate{
-			serviceUid: model.uid
-			title: model.name
+			serviceUid: uid
+			title: name
+			type: switchType
 			width: switchesView.width / switchCol
 			showSeparator: index < root.model.count -1
 		}

@@ -8,6 +8,120 @@ import Victron.VenusOS
 
 ListModel {
 	id: root
+	property SwitchableOutputModel switchableOutputModel: SwitchableOutputModel{
+		id: switchableOutputModel
+	}
+	property SwitchableOutputProxyModel testsort: SwitchableOutputProxyModel{
+		model: switchableOutputModel
+		group: "Group 1"
+		onRowCountChanged: {
+			console.log("SortFilterProxyModel count = ",rowCount)
+		}
+	}
+
+	readonly property Instantiator testlist: Instantiator {
+
+		model: VeQItemSortTableModel {
+			id: sortTable
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterFlags: VeQItemSortTableModel.FilterOffline
+			filterRegExp: "\.SwitchableOutput\.[0-9]$"
+			model: VeQItemTableModel {
+				uids: BackendConnection.uidPrefix()
+				flags: VeQItemTableModel.AddAllChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+		}
+
+		delegate: QtObject {
+			id: del
+			property Device device: Device {
+				serviceUid: deviceUid
+			}
+			property variant splitUid: model.uid.split("/SwitchableOutput/")
+			property string deviceUid: splitUid[0]
+
+			property string switchChannel: splitUid[1]
+
+			property string devName: device ? device.name : ""
+
+			onDevNameChanged:{
+				//if device name likely overlap status in SwitchDeligate elide text to 22 char long
+				// retain start and end of text as version and instance are likely to be on end
+				// ie default name with VRM instance of 5 "Energy Solutions Smart Switch 11" shortens to "Energy Solut...Switch 5"
+				if (devName.length > 22) {
+					shortDevName = devName.substring(0,11) +"..." + devName.substring(devName.length - 8,devName.length)
+				} else {
+					shortDevName = devName
+				}
+			}
+			property string shortDevName
+
+			property var _store: null  //holds the current group this switch object is in
+			readonly property string switchuid: model.uid
+			property bool customGp: _groupName.vaild && _groupName.value!==""
+			property string groupName: customGp ? _groupName.value : devName
+			property string name: _customName.valueValid
+								 ? _customName.value
+								 : customGp
+								   //: %1 is the channel of the device, %2 is the device name
+								   //% "%2|Ch %1"
+								   ? qsTrId("Switches_InGroupDefaultName").arg(index + 1).arg(shortDevName)
+								   //% "Channel %1"
+								   : qsTrId("Switches_NonGroupDefaultName").arg(index + 1)
+			onNameChanged: {
+				// if (_store !== null) {
+				// 	_store = updateList(switchuid, _store, groupName, name)
+				// }
+			}
+			readonly property VeQuickItem _groupName: VeQuickItem {
+				uid: model.uid + "/Settings/Group"
+				property bool valueValid: valid &&  value!==""
+			}
+			onGroupNameChanged: {
+				// if (_store !== null){
+				// 	_store = updateList(switchuid, _store, groupName, name)
+				// }
+			}
+			readonly property VeQuickItem _deviceName: VeQuickItem {
+				uid: deviceUid + "/ProductName"
+				property bool valueValid: valid &&  value!==""
+			}
+			readonly property VeQuickItem _customName: VeQuickItem {
+				uid: model.uid + "/Settings/CustomName"
+				property bool valueValid: valid &&  value!==""
+			}
+
+			readonly property VeQuickItem _Type: VeQuickItem {
+				uid: model.uid + "/Settings/Type"
+				property bool valueValid: valid &&  ((value == VenusOS.SwitchableOutput_Function_Momentary)
+											|| (value == VenusOS.SwitchableOutput_Function_Latching)
+											|| (value == VenusOS.SwitchableOutput_Function_Dimmable))
+				onValueValidChanged: {
+					// if (status === Component.Ready){
+					// 	if (valueValid){
+					// 		_store = updateList(switchuid, _store, groupName, name )
+					// 	}else{
+					// 		removeFromList()
+					// 		_store = null
+					// 	}
+					// }
+				}
+			}
+
+			Component.onCompleted: {
+				const values = {
+					group: del.groupName,
+					name: del.name,
+					refId: del.switchChannel,
+				}
+				root.switchableOutputModel.addSwitchableOutput(model.uid, values)
+				console.log(model.uid , _groupName , switchChannel)
+			}
+		}
+	}
+
+
 
 	readonly property Instantiator switchDevObjects: Instantiator {
 		model: Global.switches.model
