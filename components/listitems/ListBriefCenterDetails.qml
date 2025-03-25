@@ -27,13 +27,14 @@ ListNavigation {
 		let deviceOptionModel = [{ display: activeBatteryName, value: "", section: qsTrId("settings_briefview_center_active_battery_monitor") }]
 		for (let i = 0; i < deviceModel.count; ++i) {
 			const device = deviceModel.deviceAt(i)
+			const portableServiceId = BackendConnection.serviceUidToPortableId(device.serviceUid, device.deviceInstance)
 			deviceOptionModel.push({
 				display: root._summaryText(device.name, device.deviceInstance),
-				value: device.serviceUid,
+				value: portableServiceId,
 				//% "Temperature services"
 				section: qsTrId("settings_briefview_center_temperature_services")
 			})
-			if (selectedIndex < 0 && device.serviceUid === centerService.value) {
+			if (selectedIndex < 0 && portableServiceId === centerService.value) {
 				selectedIndex = i
 			}
 		}
@@ -48,12 +49,12 @@ ListNavigation {
 		id: centerService
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
 		onValueChanged: {
-			const serviceUid = value
-			const serviceType = BackendConnection.serviceTypeFromUid(serviceUid)
-			if (serviceType === "temperature") {
-				const deviceModel = Global.environmentInputs.model
-				const device = deviceModel.deviceAt(deviceModel.indexOf(serviceUid))
-				root.customServiceDescription = root._summaryText(device?.name, device?.deviceInstance)
+			const idInfo = BackendConnection.portableIdInfo(value)
+			if (idInfo.type === "temperature") {
+				const device = Global.environmentInputs.model.deviceForDeviceInstance(idInfo.instance)
+				if (device) {
+					root.customServiceDescription = root._summaryText(device?.name, device?.deviceInstance)
+				}
 			} else {
 				root.customServiceDescription = ""
 			}
@@ -75,8 +76,8 @@ ListNavigation {
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 
-			onOptionClicked: (index, serviceUid) => {
-				centerService.setValue(serviceUid)
+			onOptionClicked: (index, serviceId) => {
+				centerService.setValue(serviceId)
 			}
 		}
 	}
