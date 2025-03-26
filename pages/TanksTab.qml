@@ -33,13 +33,10 @@ BaseListView {
 		required property Tank tank // null if isGroup=true
 		required property TankModel tankModel
 
-		readonly property var tankProperties: Gauges.tankProperties(tankModel.type)
-
 		width: Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
 		height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
-		header.text: tank?.name ?? tankProperties.name ?? ""
-		header.color: tankProperties.color
-		icon: tankProperties.icon
+		fluidType: tankModel.type
+		name: tank?.name ?? ""
 		gauge: isGroup ? gaugeGroupComponent : singleGaugeComponent
 		level: isGroup ? tankModel.averageLevel : tank?.level ?? NaN
 		totalCapacity: isGroup ? tankModel.totalCapacity : tank?.capacity ?? NaN
