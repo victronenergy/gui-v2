@@ -46,6 +46,11 @@ Q_SIGNALS:
 	void totalRemainingChanged();
 
 private:
+	void modelRowsInserted(const QModelIndex &parent, int first, int last);
+	void modelRowsRemoved(const QModelIndex &parent, int first, int last);
+	void updateTotals();
+	qreal sumOf(qreal a, qreal b) const;
+
 	int m_type = 0;
 	qreal m_averageLevel = qQNaN();
 	qreal m_totalCapacity = qQNaN();

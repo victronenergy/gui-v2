@@ -142,37 +142,6 @@ QtObject {
 		}
 	}
 
-	function updateTankModelTotals(tankType) {
-		const model = tankModel(tankType)
-		if (!model) {
-			console.warn("updateTankModelTotals(): Unknown tank type", tankType)
-			return
-		}
-		let totalLevel = NaN
-		let totalRemaining = NaN
-		let totalCapacity = NaN
-		let requireFallback = false
-		for (let i = 0; i < model.count; ++i) {
-			const tank = model.deviceAt(i)
-			totalRemaining = Units.sumRealNumbers(totalRemaining, tank.remaining)
-			totalCapacity = Units.sumRealNumbers(totalCapacity, tank.capacity)
-			totalLevel = Units.sumRealNumbers(totalLevel, tank.level)
-			requireFallback = requireFallback || isNaN(tank.remaining) || isNaN(tank.capacity)
-		}
-
-		model.totalRemaining = totalRemaining
-		model.totalCapacity = totalCapacity
-		if (!requireFallback && !isNaN(totalRemaining) && !isNaN(totalCapacity) && totalCapacity > 0) {
-			// if we know all tank capacities and usages,
-			// we can calculate the combined level.
-			model.averageLevel = totalRemaining / totalCapacity * 100
-		} else {
-			// only fall back to a crude average level
-			// if we don't know all tank capacities and usages.
-			model.averageLevel = isNaN(totalLevel) || model.count === 0 ? NaN : totalLevel / model.count
-		}
-	}
-
 	function reset() {
 		for (let i = 0; i < tankTypes.length; ++i) {
 			tankModel(tankTypes[i]).clear()

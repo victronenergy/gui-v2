@@ -7,6 +7,4 @@ import QtQuick
 import Victron.VenusOS
 
 BaseTankDeviceModel {
-	objectName: modelId
-	onCountChanged: Global.tanks.updateTankModelTotals(type)
 }

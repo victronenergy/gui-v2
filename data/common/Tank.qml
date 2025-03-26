@@ -25,18 +25,12 @@ BaseTankDevice {
 	}
 	readonly property VeQuickItem _level: VeQuickItem {
 		uid: serviceUid + "/Level"
-		onValueChanged: Qt.callLater(tank._updateMeasurements)
-		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 	readonly property VeQuickItem _remaining: VeQuickItem {
 		uid: serviceUid + "/Remaining"
-		onValueChanged: Qt.callLater(tank._updateMeasurements)
-		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 	readonly property VeQuickItem _capacity: VeQuickItem {
 		uid: serviceUid + "/Capacity"
-		onValueChanged: Qt.callLater(tank._updateMeasurements)
-		Component.onCompleted: Qt.callLater(tank._updateMeasurements)
 	}
 
 	// Use a Device object to fetch the /DeviceInstance, /CustomName and /ProductName details.
@@ -74,13 +68,6 @@ BaseTankDevice {
 				_tankModel.removeDevice(tank.serviceUid)
 			}
 			_tankModel = null
-		}
-	}
-
-	function _updateMeasurements() {
-		// TODO move this into BaseTankModel
-		if (tank.type >= 0 && !!Global.tanks) {
-			Global.tanks.updateTankModelTotals(tank.type)
 		}
 	}
 }
