@@ -63,6 +63,9 @@
     "geometry_slider_groove_height": 8,
     "geometry_slider_groove_radius": 8,
 
+    "geometry_dimmingSlider_height": 40,
+    "geometry_dimmingSlider_dot_size": 4,
+
     "geometry_spinBox_indicator_minimumWidth": 64,
     "geometry_spinBox_indicator_maximumWidth": 136,
     "geometry_spinBox_indicator_height": 64,
@@ -419,5 +422,4 @@
 
     "geometry_modbus_device_protocol_width": 40,
     "geometry_modbus_device_ip_address_width": 150
-
 }
