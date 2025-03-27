@@ -185,6 +185,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
     components/BarGaugeBase.qml
+    components/BaseListView.qml
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml

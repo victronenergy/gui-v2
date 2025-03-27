@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-ListView {
+BaseListView {
 	id: root
 
 	property color primaryBreadcrumbColor: Theme.color_settings_breadcrumb_background_top_page
