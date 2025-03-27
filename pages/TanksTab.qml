@@ -14,7 +14,7 @@ import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 import Victron.Gauges
 
-ListView {
+BaseListView {
 	id: root
 
 	property bool animateModelChanges
@@ -62,9 +62,6 @@ ListView {
 
 	model: Global.tanks.tankTypes
 	orientation: ListView.Horizontal
-	boundsBehavior: Flickable.StopAtBounds
-	maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
-	flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
 	delegate: Row {
 		id: tankTypeDelegate
