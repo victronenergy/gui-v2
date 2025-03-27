@@ -103,7 +103,8 @@ Item {
 			active: false
 			asynchronous: true
 			sourceComponent: swipeViewComponent
-			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible && !(root.controlsActive && !controlsInAnimation.running && !controlsOutAnimation.running)
+			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible
+					 && !(root.controlsActive && !controlCardsLoader.animationRunning)
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
@@ -163,15 +164,8 @@ Item {
 		width: Theme.geometry_screen_width
 	}
 
-	Loader {
+	CardViewLoader {
 		id: controlCardsLoader
-
-		onActiveChanged: if (active) active = true // remove binding
-
-		opacity: 0.0
-		sourceComponent: ControlCardsPage { }
-		active: root.controlsActive
-		enabled: root.controlsActive || controlsOutAnimation.running
 
 		anchors {
 			top: statusBar.bottom
@@ -179,95 +173,12 @@ Item {
 			right: parent.right
 			bottom: parent.bottom
 		}
-
-		SequentialAnimation {
-			id: controlsInAnimation
-			running: root.controlsActive
-
-			ParallelAnimation {
-				YAnimator {
-					target: controlCardsLoader
-					from: statusBar.height - Theme.geometry_controlCards_slide_distance
-					to: statusBar.height
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.OutSine
-				}
-				OpacityAnimator {
-					target: controlCardsLoader
-					from: 0.0
-					to: 1.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.OutSine
-				}
-				OpacityAnimator {
-					target: swipeView
-					from: 1.0
-					to: 0.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.OutSine
-				}
-				OpacityAnimator {
-					target: navBar
-					from: 1.0
-					to: 0.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.OutSine
-				}
-				ColorAnimation {
-					target: statusBar
-					property: "backgroundColor"
-					from: root.backgroundColor
-					to: Theme.color_page_background
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.OutSine
-				}
-			}
-		}
-
-		SequentialAnimation {
-			id: controlsOutAnimation
-
-			running: controlCardsLoader.active && !root.controlsActive
-
-			ParallelAnimation {
-				YAnimator {
-					target: controlCardsLoader
-					from: statusBar.height
-					to: statusBar.height - Theme.geometry_controlCards_slide_distance
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
-				}
-				OpacityAnimator {
-					target: controlCardsLoader
-					from: 1.0
-					to: 0.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
-				}
-				OpacityAnimator {
-					target: swipeView
-					from: 0.0
-					to: 1.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
-				}
-				OpacityAnimator {
-					target: navBar
-					from: 0.0
-					to: 1.0
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
-				}
-				ColorAnimation {
-					target: statusBar
-					property: "backgroundColor"
-					from: Theme.color_page_background
-					to: root.backgroundColor
-					duration: Theme.animation_controlCards_slide_duration
-					easing.type: Easing.InSine
-				}
-			}
-		}
+		statusBarItem: statusBar
+		navBarItem: navBar
+		swipeViewItem : swipeView
+		backgroundColor: root.backgroundColor
+		sourceComponent: ControlCardsPage { }
+		viewActive: root.controlsActive
 	}
 
 	SequentialAnimation {
