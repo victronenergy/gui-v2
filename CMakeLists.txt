@@ -531,6 +531,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsSecurityProfile.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
     pages/settings/PageSettingsTailscale.qml
