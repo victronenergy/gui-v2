@@ -126,7 +126,7 @@ Page {
 					ListTextField {
 						//% "Name"
 						text: qsTrId("settings_deviceinfo_name")
-						dataItem.uid: root.bindPrefix + "/Settings/CustomName"
+						dataItem.uid: root.bindPrefix + "/CustomName"
 						dataItem.invalidate: false
 						textField.maximumLength: 32
 						preferredVisible : dataItem.isValid
