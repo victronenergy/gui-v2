@@ -11,11 +11,11 @@ Item {
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	property PageManager pageManager
-	property bool controlsActive
-	readonly property Page currentPage: controlsActive && controlCardsLoader.status === Loader.Ready ? controlCardsLoader.item
-																									 : !!pageStack.currentItem ? pageStack.currentItem
-																															   : !!swipeView ? swipeView.currentItem
-																																			 : null
+	property bool cardsActive
+	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
+			: !!pageStack.currentItem ? pageStack.currentItem
+			: !!swipeView ? swipeView.currentItem
+			: null
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -45,6 +45,7 @@ Item {
 	function loadStartPage() {
 		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
 	}
+
 
 	function clearUi() {
 		swipeViewLoader.active = false
@@ -104,7 +105,7 @@ Item {
 			asynchronous: true
 			sourceComponent: swipeViewComponent
 			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible
-					 && !(root.controlsActive && !controlCardsLoader.animationRunning)
+					 && !(root.cardsActive && !cardsLoader.animationRunning)
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
@@ -165,7 +166,7 @@ Item {
 	}
 
 	CardViewLoader {
-		id: controlCardsLoader
+		id: cardsLoader
 
 		anchors {
 			top: statusBar.bottom
@@ -177,8 +178,17 @@ Item {
 		navBarItem: navBar
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
-		sourceComponent: ControlCardsPage { }
-		viewActive: root.controlsActive
+		viewActive: root.cardsActive
+
+		Component {
+			id: controlCardsComponent
+			ControlCardsPage {}
+		}
+
+		Component {
+			id: auxCardsComponent
+			AuxCardsPage {}
+		}
 	}
 
 	SequentialAnimation {
@@ -304,16 +314,26 @@ Item {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				root.controlsActive = true
+				cardsLoader.sourceComponent = controlCardsComponent
+				root.cardsActive = true
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.controlsActive = false
+				root.cardsActive = false
 				break;
 			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
 				break
 			default:
 				break
+			}
+		}
+
+		onAuxButtonClicked: {
+			if (root.cardsActive) {
+				root.cardsActive = false
+			} else {
+				cardsLoader.sourceComponent = auxCardsComponent
+				root.cardsActive = true
 			}
 		}
 

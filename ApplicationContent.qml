@@ -125,7 +125,7 @@ Item {
 		// and the notifications layer is already part of the global object.
 		function popAndGoToNotifications() {
 			pageManager.popAllPages()
-			mainView.controlsActive = false
+			mainView.cardsActive = false
 			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
