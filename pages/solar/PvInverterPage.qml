@@ -78,6 +78,12 @@ Page {
 
 			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: root.pvInverter.serviceUid + "/Position"
+				preferredVisible: dataItem.valid && allowedRoles.valid
+
+				VeQuickItem {
+					id: allowedRoles
+					uid: root.pvInverter.serviceUid + "/AllowedRoles"
+				}
 			}
 
 			ListQuantity {
