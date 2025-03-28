@@ -443,6 +443,37 @@ public:
 	};
 	Q_ENUM(Switch_ForcedMode)
 
+	enum Switch_DeviceState {
+		Switch_DeviceState_Connected = 0x100,
+		Switch_DeviceState_Over_Temperature,
+		Switch_DeviceState_Temperature_Warning,
+		Switch_DeviceState_Channel_Fault,
+		Switch_DeviceState_Channel_Tripped,
+		Switch_DeviceState_Under_Voltage
+	};
+	Q_ENUM(Switch_DeviceState)
+
+	enum SwitchableOutput_Function {
+		SwitchableOutput_Function_Momentary = 0,
+		SwitchableOutput_Function_Latching,
+		SwitchableOutput_Function_Dimmable,
+		SwitchableOutput_Function_Slave = 5
+	};
+	Q_ENUM(SwitchableOutput_Function)
+
+	enum SwitchableOutput_Status {
+		SwitchableOutput_Status_Off,
+		SwitchableOutput_Status_Powered,
+		SwitchableOutput_Status_Tripped,
+		SwitchableOutput_Status_Over_Temperature = 0x04,
+		SwitchableOutput_Status_Output_Fault =0x08,
+		SwitchableOutput_Status_On = 0x09,  //inputActive + active
+		SwitchableOutput_Status_Short_Fault = 0x10,
+		SwitchableOutput_Status_Disabled = 0x20,
+		SwitchableOutput_Status_TripLowVoltage = 0x22
+	};
+	Q_ENUM(SwitchableOutput_Status)
+
 	enum Notification_Type {
 		Notification_Warning,
 		Notification_Alarm,
@@ -776,6 +807,10 @@ public:
 	Q_INVOKABLE QString pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) const;
 
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
+
+	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
+	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value, int channel = -1) const;
+	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
 };
 
 }

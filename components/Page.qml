@@ -18,7 +18,6 @@ FocusScope {
 			&& !Global.mainView.screenIsBlanked
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
 
-
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 

@@ -71,8 +71,8 @@ QtObject {
 	function keyPressed(event) {
 		switch (event.key) {
 		case Qt.Key_Escape:
-			if (Global.mainView.controlsActive) {
-				Global.mainView.controlsActive = false
+			if (Global.mainView.cardsActive) {
+				Global.mainView.cardsActive = false
 			} else {
 				Global.pageManager.popPage()
 			}

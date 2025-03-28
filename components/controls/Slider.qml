@@ -17,6 +17,7 @@ T.Slider {
 	property alias highlightColor: highlightRect.color
 	property alias showHandle: handleImg.visible
 	property bool animationEnabled
+	property Item maskSource: sourceItem
 
 	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight)
 
@@ -36,7 +37,7 @@ T.Slider {
 		width: root.availableWidth
 		height: Theme.geometry_slider_groove_height
 		radius: Theme.geometry_slider_groove_radius
-		color: Theme.color_darkOk
+		color: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
 
 		Rectangle {
 			id: maskRect
@@ -59,8 +60,7 @@ T.Slider {
 
 				width: parent.width
 				height: parent.height
-				radius: backgroundRect.radius
-				color: Theme.color_ok
+				color: root.enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
 				x: nextX
 
 				// don't use a behavior on x

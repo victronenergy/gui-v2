@@ -185,9 +185,11 @@ set (VENUS_QML_MODULE_SOURCES
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
     components/BarGaugeBase.qml
+    components/BaseListView.qml
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml
+    components/CardViewLoader.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
@@ -285,6 +287,7 @@ set (VENUS_QML_MODULE_SOURCES
 
     components/controls/Button.qml
     components/controls/ComboBox.qml
+    components/controls/DimmingSlider.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
@@ -403,6 +406,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/PvInverters.qml
     data/SolarDevices.qml
     data/StartPageConfiguration.qml
+    data/Switches.qml
     data/System.qml
     data/SystemLoad.qml
     data/SystemSettings.qml
@@ -438,6 +442,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/TankDescription.qml
     data/common/TankModel.qml
 
+    pages/AuxCardsPage.qml
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
@@ -873,6 +878,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/PulseMetersImpl.qml
     data/mock/PvInvertersImpl.qml
     data/mock/SolarDevicesImpl.qml
+    data/mock/SwitchesImpl.qml
     data/mock/SystemImpl.qml
     data/mock/SystemSettingsImpl.qml
     data/mock/TanksImpl.qml
@@ -1073,6 +1079,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
+        images/icon_auxpage_on_32.svg
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg

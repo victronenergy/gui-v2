@@ -26,7 +26,7 @@ Page {
 	// - Header - ESS card
 	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers
 	// - Footer - Manual relays
-	ListView {
+	BaseListView {
 		id: cardsView
 
 		anchors {
@@ -36,9 +36,6 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
-		boundsBehavior: Flickable.StopAtBounds
-		maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
-		flickDeceleration: Theme.geometry_flickable_flickDeceleration
 
 		header: Loader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"

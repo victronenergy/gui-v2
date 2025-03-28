@@ -265,5 +265,92 @@ QString Enums::solarCharger_stateToText(SolarCharger_State state) const
 	}
 }
 
+QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
+{
+	switch (value) {
+	case Switch_DeviceState_Connected:
+		//% "Running"
+		return qtTrId("switch_state_running");
+	case Switch_DeviceState_Over_Temperature:
+		//% "Over temperature"
+		return qtTrId("switch_state_over_temperature");
+	case Switch_DeviceState_Temperature_Warning:
+		//% "Temperature warning"
+		return qtTrId("switch_state_temperature_warning");
+	case Switch_DeviceState_Channel_Fault:
+		//% "Channel Fault"
+		return qtTrId("switch_state_channel_fault");
+	case Switch_DeviceState_Channel_Tripped:
+		//% "Channel Tripped"
+		return qtTrId("switch_state_channel_Trippped");
+	case Switch_DeviceState_Under_Voltage:
+		//% "Under voltage"
+		return qtTrId("switch_state_under_voltage");
+	default:
+		return QString::number(static_cast<int>(value));
+	}
+}
+
+QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value, int channel) const
+{
+	switch (value) {
+	case SwitchableOutput_Function_Momentary:
+		//% "Momentary"
+		return qtTrId("switchable_output_momentary");
+	case SwitchableOutput_Function_Latching:
+		//% "Latching"
+		return qtTrId("switchable_output_latching");
+	case SwitchableOutput_Function_Dimmable:
+		//% "Dimmable"
+		return qtTrId("switchable_output_dimmable");
+	case SwitchableOutput_Function_Slave:
+		//% "Slave of %1"
+		if (channel > 0) {
+			return qtTrId("switchable_output_slave_of").arg(channel);
+		} else {
+			//% "Slave"
+			return qtTrId("switchable_output_slave");
+		}
+	default:
+		//% "Undefined"
+		return qtTrId("switchable_output_undefined");
+	}
+}
+
+QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) const{
+
+	switch (value) {
+	case SwitchableOutput_Status_Off:
+		//% "Off"
+		return qtTrId("switchable_output_off");
+	case SwitchableOutput_Status_Powered:
+		//% "Powered"
+		return qtTrId("switchable_output_powered");
+	case SwitchableOutput_Status_Tripped:
+		//% "Tripped"
+		return qtTrId("switchable_output_tripped");
+	case SwitchableOutput_Status_Over_Temperature:
+		//% "Over temperature"
+		return qtTrId("switchable_output_over_temperature");
+	case SwitchableOutput_Status_Output_Fault:
+		//% "Output fault"
+		return qtTrId("switchable_output_output_Fault");
+	case SwitchableOutput_Status_On:
+		//% "On"
+		return qtTrId("switchable_output_on");
+	case SwitchableOutput_Status_Short_Fault:
+		//% "Short"
+		return qtTrId("switchable_output_short");
+	case SwitchableOutput_Status_Disabled:
+		//% "Disabled"
+		return qtTrId("switchable_output_disabled");
+	case SwitchableOutput_Status_TripLowVoltage:
+		//% "Disabled"
+		return qtTrId("switchable_output_trip_low_voltage");
+	default:
+		return QString::number(static_cast<int>(value));
+	}
+}
+
 }
 }
