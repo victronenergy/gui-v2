@@ -24,6 +24,7 @@ FocusScope {
 
 	signal leftButtonClicked()
 	signal rightButtonClicked()
+	signal auxButtonClicked()
 	signal popToPage(toPage: Page)
 
 	width: parent.width
@@ -56,7 +57,7 @@ FocusScope {
 		backgroundColor: "transparent"  // don't show background when disabled
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
-		opacity: enabled ? 1.0 : 0.0
+		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
 		Behavior on opacity {
 			enabled: root.animationEnabled
 			OpacityAnimator {
@@ -84,7 +85,6 @@ FocusScope {
 		}
 	}
 
-
 	StatusBarButton {
 		id: leftButton
 
@@ -93,18 +93,31 @@ FocusScope {
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
-		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive
-					 ? "qrc:/images/icon_controls_off_32.svg"
-					 : root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive
-					   ? "qrc:/images/icon_controls_on_32.svg"
-					   : "qrc:/images/icon_back_32.svg"
-
-		enabled: !!Global.pageManager
-				 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				 && root.leftButton != VenusOS.StatusBar_LeftButton_None
+		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
+			: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
+			: root.leftButton === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
+			: ""
+		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
 	}
+
+	StatusBarButton {
+		id: auxButton
+
+		anchors {
+			left: leftButton.right
+			verticalCenter: parent.verticalCenter
+		}
+		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
+		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
+
+		PressArea {
+			anchors.fill: parent
+			onClicked: root.auxButtonClicked()
+		}
+	}
+
 
 	Breadcrumbs {
 		id: breadcrumbs
@@ -246,9 +259,7 @@ FocusScope {
 		}
 
 		StatusBarButton {
-			enabled: !!Global.pageManager
-					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-					 && root.rightButton != VenusOS.StatusBar_RightButton_None
+			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
 
 			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive

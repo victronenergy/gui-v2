@@ -442,6 +442,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/TankDescription.qml
     data/common/TankModel.qml
 
+    pages/AuxCardsPage.qml
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
@@ -1078,6 +1079,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
+        images/icon_auxpage_on_32.svg
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
