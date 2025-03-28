@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 import Victron.Gauges
 
 Rectangle {
@@ -13,7 +12,6 @@ Rectangle {
 
 	property bool active
 	property alias tankModel: groupedSubgaugesRepeater.model
-	readonly property var _tankProperties: Gauges.tankProperties(tankModel.type)
 	property bool animationEnabled
 
 	parent: Global.dialogLayer
@@ -44,19 +42,19 @@ Rectangle {
 			id: groupedSubgaugesRepeater
 
 			delegate: TankItem {
+				id: gaugeDelegate
+
 				width: Gauges.width(groupedSubgaugesRepeater.count, Theme.geometry_levelsPage_max_tank_count, root.width)
 				height: Theme.geometry_levelsPage_panel_expanded_height
-
-				header.text: model.device.name || root._tankProperties.name
-				header.color: root._tankProperties.color
+				fluidType: root.tankModel.type
+				name: model.device.name
 				level: model.device.level
-				icon: root._tankProperties.icon
 				totalCapacity: model.device.capacity
 				totalRemaining: model.device.remaining
 
 				gauge: TankGauge {
 					width: Theme.geometry_levelsPage_groupedSubgauges_delegate_width
-					valueType: root._tankProperties.valueType
+					valueType: gaugeDelegate.tankProperties.valueType
 					animationEnabled: root.animationEnabled
 					value: model.device.level / 100
 				}
