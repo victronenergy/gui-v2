@@ -84,145 +84,130 @@ Page {
 					{ display: qsTrId("settings_access_service"), value: VenusOS.User_AccessType_Service, readOnly: true },
 				]
 				validatePassword: (index, password) => {
-					if ((index === 0 || index === 1) && password === "ZZZ") {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-					}
-					//% "Incorrect password"
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
-				}
+									  if ((index === 0 || index === 1) && password === "ZZZ") {
+										  return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+									  }
+									  //% "Incorrect password"
+									  return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
+								  }
 			}
 
 			ListNavigation {
+				id: securityProfileListNavigation
+
+				// TODO: (optional) put this in its own ListNavigation customised file
+				// TODO: showAccessLevel
+				// TODO: writeAccessLevel
+				// TODO: pass the accessLevels into securityProfileOptionsComponent and observe there also
+				// TODO: popTimer like ListRadioButtonGroup?
+
+				readonly property var optionModel: [
+					{
+						//% "Secured"
+						display: qsTrId("settings_security_profile_secured"),
+						value: VenusOS.Security_Profile_Secured,
+						//% "Password protected and the network communication is encrypted"
+						caption: qsTrId("settings_security_profile_secured_caption"),
+						promptPassword: true
+					},
+					{
+						//% "Weak"
+						display: qsTrId("settings_security_profile_weak"),
+						value: VenusOS.Security_Profile_Weak,
+						//% "Password protected, but the network communication is not encrypted"
+						caption: qsTrId("settings_security_profile_weak_caption"),
+						promptPassword: true
+					},
+					{
+						//% "Unsecured"
+						display: qsTrId("settings_security_profile_unsecured"),
+						value: VenusOS.Security_Profile_Unsecured,
+						//% "No password and the network communication is not encrypted"
+						caption: qsTrId("settings_security_profile_unsecured_caption")
+					}
+				]
+				readonly property int currentIndex: {
+					if (!optionModel || optionModel.length === undefined || securityProfile.uid.length === 0 || !securityProfile.valid) {
+						return defaultIndex
+					}
+					for (let i = 0; i < optionModel.length; ++i) {
+						if (optionModel[i].value === securityProfile.value) {
+							return i
+						}
+					}
+					return defaultIndex
+				}
+
+				readonly property var currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+													? optionModel[currentIndex].value
+													: undefined
+
+				property int defaultIndex: -1
+
 				//% "Local network security profile"
 				text: qsTrId("settings_local_network_security_profile")
-				secondaryText: "<TODO: Current Profile>"
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSecurityProfile.qml", { title: text })
+
+				//% "Unknown"
+				property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
+
+				secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+							   ? optionModel[currentIndex].display
+							   : defaultSecondaryText
+
+				interactive: true
+
+				VeQuickItem {
+					id: securityProfile
+					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+				}
+
+				VeQuickItem {
+					id: securityApi
+					uid: Global.venusPlatform.serviceUid + "/Security/Api"
+				}
+
+				onClicked: {
+					Global.pageManager.pushPage(securityProfileOptionsComponent, { title: text })
+				}
+
+				Component {
+					id: securityProfileOptionsComponent
+
+					PageSettingsSecurityProfile {
+						// now we can pass things back to the ListNavigationButton
+
+						currentIndex: securityProfileListNavigation.currentIndex
+
+						// TODO: pass the password in
+						currentPassword:"" // "TODO: get the password"
+
+						optionModel: securityProfileListNavigation.optionModel
+
+						onAccepted: {
+							console.log("The chosen security profile is", securityProfileIndex)
+
+							let password = "pass"// TODO get the current password
+
+							if (securityProfileIndex === VenusOS.Security_Profile_Unsecured) {
+								password = ""
+							}
+							// NOTE: this restarts the webserver when changed
+							let object = {"SetPassword": password, "SetSecurityProfile": securityProfileIndex}
+							let json = JSON.stringify(object)
+							securityApi.setValue(json)
+							// This guards the wasm version to trigger a reload even if the reply isn't received.
+							BackendConnection.securityProtocolChanged()
+							Global.pageManager.popPage()
+							if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
+								Global.showToastNotification(VenusOS.Notification_Info,
+															 //% "Page will automatically reload in 5 seconds"
+															 qsTrId("access_and_security_page_will_reload"),
+															 3000)
+							}
+						}
+					}
+				}
 			}
-
-			// ListRadioButtonGroup {
-			//     id: securityProfile
-
-			//     property int pendingProfile
-			//     property string pendingPassword
-
-			//     //% "Local network security profile"
-			//     text: qsTrId("settings_local_network_security_profile")
-			//     dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
-			//     updateDataOnClick: false // handle option clicked manually.
-			//     popDestination: undefined
-			//     //% "Please select..."
-			//     defaultSecondaryText: qsTrId("settings_security_profile_indeterminate")
-			//     optionModel: [
-			//         {
-			//             //% "Secured"
-			//             display: qsTrId("settings_security_profile_secured"),
-			//             value: VenusOS.Security_Profile_Secured,
-			//             //% "Password protected and the network communication is encrypted"
-			//             caption: qsTrId("settings_security_profile_secured_caption"),
-			//             promptPassword: true
-			//         },
-			//         {
-			//             //% "Weak"
-			//             display: qsTrId("settings_security_profile_weak"),
-			//             value: VenusOS.Security_Profile_Weak,
-			//             //% "Password protected, but the network communication is not encrypted"
-			//             caption: qsTrId("settings_security_profile_weak_caption"),
-			//             promptPassword: true
-			//         },
-			//         {
-			//             //% "Unsecured"
-			//             display: qsTrId("settings_security_profile_unsecured"),
-			//             value: VenusOS.Security_Profile_Unsecured,
-			//             //% "No password and the network communication is not encrypted"
-			//             caption: qsTrId("settings_security_profile_unsecured_caption")
-			//         },
-			//     ]
-			//     validatePassword: (index, password) => {
-			//         pendingPassword = ""
-			//         if (password.length < 8) {
-			//             //% "Password needs to be at least 8 characters long"
-			//             return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_security_too_short_password"))
-			//         }
-			//         pendingPassword = password
-			//         return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-			//     }
-
-			//     onOptionClicked: (index) => {
-			//         // Radio button model indexes should match the enums
-			//         securityProfile.pendingProfile = index
-			//         if (securityProfile.pendingProfile === VenusOS.Security_Profile_Unsecured) {
-			//             // NOTE: this restarts the webserver when changed
-			//             Global.dialogLayer.open(securityProfileConfirmationDialog)
-			//         } else {
-			//             Global.dialogLayer.open(securityProfileConfirmationDialog, {password: pendingPassword})
-			//         }
-			//     }
-
-			//     VeQuickItem {
-			//         id: securityApi
-			//         uid: Global.venusPlatform.serviceUid + "/Security/Api"
-			//     }
-
-			//     Component {
-			//         id: securityProfileConfirmationDialog
-
-			//         ModalWarningDialog {
-			//             property string password
-
-			//             icon.source: ""
-			//             title: {
-			//                 switch (securityProfile.pendingProfile) {
-			//                 case VenusOS.Security_Profile_Secured:
-			//                     //% "Select 'Secured' profile?"
-			//                     return qsTrId("settings_security_profile_secured_title")
-			//                 case VenusOS.Security_Profile_Weak:
-			//                     //% "Select 'Weak' profile?"
-			//                     return qsTrId("settings_security_profile_weak_title")
-			//                 case VenusOS.Security_Profile_Unsecured:
-			//                     //% "Select 'Unsecured' profile?"
-			//                     return qsTrId("settings_security_profile_unsecured_title")
-			//                 }
-			//             }
-
-			//             description: {
-			//                 switch (securityProfile.pendingProfile) {
-			//                 case VenusOS.Security_Profile_Secured:
-			//                     //% "• Local network services are password protected\n• The network communication is encrypted\n• A secure connection with VRM is enabled\n• Insecure settings cannot be enabled"
-			//                     return qsTrId("settings_security_profile_secured_description")
-			//                 case VenusOS.Security_Profile_Weak:
-			//                     //% "• Local network services are password protected\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
-			//                     return qsTrId("settings_security_profile_weak_description")
-			//                 case VenusOS.Security_Profile_Unsecured:
-			//                     //% "• Local network services do not need a password\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
-			//                     return  qsTrId("settings_security_profile_unsecured_description")
-			//                 }
-			//             }
-			//             onAccepted: {
-			//                 const profile = securityProfile.pendingProfile
-			//                 if (profile === VenusOS.Security_Profile_Unsecured)
-			//                     password = "";
-			//                 securityProfile.currentIndex = profile
-			//                 // NOTE: this restarts the webserver when changed
-			//                 var object = {"SetPassword": password, "SetSecurityProfile": profile};
-			//                 var json = JSON.stringify(object);
-			//                 securityApi.setValue(json);
-			//                 // This guards the wasm version to trigger a reload even if the reply isn't received.
-			//                 BackendConnection.securityProtocolChanged()
-			//                 Global.pageManager.popPage()
-			//                 if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
-			//                     Global.showToastNotification(VenusOS.Notification_Info,
-			//                                                  //% "Page will automatically reload in 5 seconds"
-			//                                                  qsTrId("access_and_security_page_will_reload"),
-			//                                                  3000)
-			//                 }
-			//             }
-			//             dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			//             height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
-			//                     ? Theme.geometry_modalDialog_height
-			//                     : Theme.geometry_modalDialog_height_small
-			//         }
-			//     }
-			// }
 
 			ListTextField {
 				//% "Root password"
@@ -284,7 +269,7 @@ Page {
 
 				// Cannot log out from GX devices, VRM or Unsecured profile with no password
 				preferredVisible: Qt.platform.os === "wasm" && !BackendConnection.vrm
-						 && securityProfile.dataItem.value !== VenusOS.Security_Profile_Unsecured
+								  && securityProfile.dataItem.value !== VenusOS.Security_Profile_Unsecured
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: Global.dialogLayer.open(logoutDialogComponent)
 
