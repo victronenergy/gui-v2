@@ -95,6 +95,8 @@
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_lightBlue",
 
+    "color_boatPage_background": "color_gray9",
+
     "color_briefPage_background": "color_gray9",
     "color_briefPage_battery_value_text_color": "color_gray2",
     "color_briefPage_battery_unit_text_color": "color_gray3",
@@ -125,5 +127,9 @@
     "color_settings_breadcrumb_background_top_page": "color_navigationBar_button_on",
     "color_settings_breadcrumb_background": "#B2C6D9",
     "color_settings_breadcrumb_primaryText": "color_gray9",
-    "color_settings_breadcrumb_secondaryText": "color_font_primary"
+    "color_settings_breadcrumb_secondaryText": "color_font_primary",
+
+    "color_boatPage_needle": "color_black",
+    "color_boatPage_gearHighlighter": "#387DC5",
+    "color_boatPage_icon": "color_gray2"
 }
