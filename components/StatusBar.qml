@@ -105,17 +105,21 @@ FocusScope {
 	StatusBarButton {
 		id: auxButton
 
+		readonly property bool auxCardsOpened: Global.mainView.cardsActive
+				&& root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
+
 		anchors {
 			left: leftButton.right
 			verticalCenter: parent.verticalCenter
 		}
-		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
-		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
+		visible: (root.pageStack.depth === 0 && Global.switches.groups.count > 0)
+				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
+		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
+				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
+				: "qrc:/images/icon_smartswitch_off_32.svg"
+		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
 
-		PressArea {
-			anchors.fill: parent
-			onClicked: root.auxButtonClicked()
-		}
+		onClicked: root.auxButtonClicked()
 	}
 
 
