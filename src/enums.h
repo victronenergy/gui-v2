@@ -453,13 +453,13 @@ public:
 	};
 	Q_ENUM(Switch_DeviceState)
 
-	enum SwitchableOutput_Function {
-		SwitchableOutput_Function_Momentary = 0,
-		SwitchableOutput_Function_Latching,
-		SwitchableOutput_Function_Dimmable,
-		SwitchableOutput_Function_Slave = 5
+	enum SwitchableOutput_Type {
+		SwitchableOutput_Type_Momentary = 0,
+		SwitchableOutput_Type_Latching,
+		SwitchableOutput_Type_Dimmable,
+		SwitchableOutput_Type_Slave = 5
 	};
-	Q_ENUM(SwitchableOutput_Function)
+	Q_ENUM(SwitchableOutput_Type)
 
 	enum SwitchableOutput_Status {
 		SwitchableOutput_Status_Off,
@@ -809,7 +809,7 @@ public:
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
-	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value, int channel = -1) const;
+	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, int channel = -1) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
 };
 
