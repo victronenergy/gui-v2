@@ -52,6 +52,7 @@ Page {
 			ListFirmwareVersion {
 				bindPrefix: root.bindPrefix
 				dataItem.invalidate: false
+				preferredVisible: dataItem.valid
 			}
 
 			ListText {
