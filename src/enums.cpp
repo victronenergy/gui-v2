@@ -312,8 +312,8 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, int chan
 			return qtTrId("switchable_output_slave");
 		}
 	default:
-		//% "Undefined"
-		return qtTrId("switchable_output_undefined");
+		//% "Unsupported type: %1"
+		return qtTrId("switchable_output_unsupported").arg(value);
 	}
 }
 

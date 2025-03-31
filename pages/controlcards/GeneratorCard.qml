@@ -98,7 +98,7 @@ ControlCard {
 			left: parent.left
 			right: parent.right
 		}
-		height: Theme.geometry_generatorCard_startButton_height
+		height: Theme.geometry_card_button_height
 		radius: Theme.geometry_button_radius
 		font.pixelSize: Theme.font_size_body1
 		generatorUid: root.generator.serviceUid

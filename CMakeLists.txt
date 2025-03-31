@@ -263,6 +263,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
+    components/SwitchableOutputDelegate.qml
+    components/SwitchableOutputGroupCard.qml
     components/SystemBatteryDelegate.qml
     components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
@@ -437,6 +439,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
+    data/common/SwitchableOutput.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
@@ -741,6 +744,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/screenblanker.cpp
     src/solarinputmodel.h
     src/solarinputmodel.cpp
+    src/switchableoutputgroupmodel.h
+    src/switchableoutputgroupmodel.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )
@@ -1086,7 +1091,6 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
-        images/icon_auxpage_on_32.svg
         images/icon_battery_24.svg
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
@@ -1095,6 +1099,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_devices_32.png
         images/icon_general_32.png
         images/icon_integration_32.png
+        images/icon_smartswitch_off_32.svg
+        images/icon_smartswitch_on_32.svg
         images/icon_system_32.png
         images/icon_vrm_32.png
         images/brief.svg
@@ -1153,6 +1159,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg
         images/icon_screen_sleep_32.svg
+        images/icon_switch_24.svg
         images/icon_temp_32.svg
         images/information.svg
         images/inverter.svg
