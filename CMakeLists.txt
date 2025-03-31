@@ -321,6 +321,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalWarningDialog.qml
     components/dialogs/NumberSelectorDialog.qml
+    components/dialogs/SecurityProfileConfirmationDialog.qml
+    components/dialogs/SecurityProfilePasswordDialog.qml
     components/dialogs/SolarDailyHistoryDialog.qml
     components/dialogs/TimeSelectorDialog.qml
 
@@ -539,6 +541,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsSecurityProfile.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
     pages/settings/PageSettingsTailscale.qml
