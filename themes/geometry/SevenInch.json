@@ -228,7 +228,16 @@
     "geometry_splashView_progressText_spacing": 4,
     "geometry_splashView_progressIconContainer_size": 46,
 
-    "geometry_generatorCard_startButton_height": 48,
+    "geometry_card_button_height": 48,
+
+    "geometry_switchableoutput_topMargin": 24,
+    "geometry_switchableoutput_row_count": 5,
+    "geometry_switchableoutput_label_margin": 4,
+    "geometry_switchableoutput_button_height": 48,
+    "geometry_switchableoutput_status_verticalPadding": 2,
+    "geometry_switchableoutput_status_horizontalPadding": 8,
+    "geometry_switchableoutput_status_radius": 10,
+    "geometry_switchableoutput_status_minimum_width": 48,
 
     "geometry_generatorIconLabel_icon_width": 24,
     "geometry_generatorIconLabel_icon_margin": 4,
