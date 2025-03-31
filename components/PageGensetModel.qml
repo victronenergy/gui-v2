@@ -17,6 +17,23 @@ VisibleItemModel {
 	readonly property int nrOfPhases: phases.valid ? phases.value
 												   : dcGenset ? 0
 															  : 3
+
+	// In case of multiple gensets, startstop will control the one with the lowest device instance.
+	// Check if this genset is controlled by startstop by checking if the instance is the same.
+	// When not controlled by startstop, the genset can only be monitored, so hide some controls.
+	readonly property bool isStartStopControlled: startStopGensetInstance.valid && gensetInstance.valid ?
+											startStopGensetInstance.value === gensetInstance.value : false
+
+	readonly property bool isGensetEnabled: gensetEnabled.valid ? gensetEnabled.value === 1 : false
+
+	readonly property VeQuickItem startStopGensetInstance: VeQuickItem {
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/GensetInstance" : ""
+	}
+
+	readonly property VeQuickItem gensetInstance: VeQuickItem {
+		uid: root.bindPrefix + "/DeviceInstance"
+	}
+
 	readonly property VeQuickItem phases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
@@ -29,17 +46,25 @@ VisibleItemModel {
 		gensetServiceUid: root.bindPrefix
 	}
 
+	// Show when startstop controlled but not enabled (because the required helper relay is not configured) and only if the genset service is present.
 	PrimaryListLabel {
-		preferredVisible: root.gensetEnabled.value === 0
+		preferredVisible: gensetInstance.valid && root.isStartStopControlled && !root.isGensetEnabled
 		//% "This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to \"Connected genset helper relay\"."
 		text: qsTrId("genset_controller_requires_helper_relay")
+	}
+
+	// Show when not startstop controlled, but only if the genset service is present.
+	PrimaryListLabel {
+		preferredVisible: gensetInstance.valid && !root.isStartStopControlled
+		//% "Multiple genset controllers detected.\nThe GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device."
+		text: qsTrId("genset_controller_multiple_genset_controllers")
 	}
 
 	ListSwitch {
 		id: autostartSwitch
 		//% "Auto start functionality"
 		text: qsTrId("ac-in-genset_auto_start_functionality")
-		preferredVisible: root.gensetEnabled.value === 1
+		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
 		updateDataOnClick: false
 
@@ -63,7 +88,7 @@ VisibleItemModel {
 
 	ListItem {
 		text: CommonWords.manual_control
-		preferredVisible: root.gensetEnabled.value === 1
+		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
 		content.children: [
 			GeneratorManualControlButton {
 				generatorUid: root.startStopBindPrefix
@@ -86,6 +111,7 @@ VisibleItemModel {
 		secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
 						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
 						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+		preferredVisible: root.isStartStopControlled
 
 		VeQuickItem {
 			id: activeCondition
@@ -102,7 +128,7 @@ VisibleItemModel {
 	ListGeneratorError {
 		//% "Control error code"
 		text: qsTrId("ac-in-genset_control_error_code")
-		preferredVisible: dataItem.valid
+		preferredVisible: dataItem.valid && root.isStartStopControlled
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 	}
 
@@ -297,6 +323,7 @@ VisibleItemModel {
 	ListNavigation {
 		//% "Run time and service"
 		text: qsTrId("page_settings_generator_run_time_and_service")
+		preferredVisible: root.isStartStopControlled
 		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
 											   {
 												   title: text,
@@ -309,7 +336,7 @@ VisibleItemModel {
 	ListNavigation {
 		//% "DC genset settings"
 		text: qsTrId("page_genset_model_dc_genset_settings")
-		preferredVisible: chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid
+		preferredVisible: root.isStartStopControlled && (chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid)
 		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
 		VeQuickItem {
@@ -385,6 +412,7 @@ VisibleItemModel {
 
 	ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
 		text: CommonWords.settings
+		preferredVisible: root.isStartStopControlled
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
 										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
