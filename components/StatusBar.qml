@@ -110,12 +110,9 @@ FocusScope {
 			verticalCenter: parent.verticalCenter
 		}
 		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
-		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
+		enabled: Global.mainView.cardsActive || (root.pageStack.depth === 0 && Global.switches.groups.count > 0)
 
-		PressArea {
-			anchors.fill: parent
-			onClicked: root.auxButtonClicked()
-		}
+		onClicked: root.auxButtonClicked()
 	}
 
 

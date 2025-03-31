@@ -39,6 +39,14 @@ Slider {
 		color: Theme.color_gray7
 	}
 
+	Rectangle {
+		anchors.fill: parent
+		color: "transparent"
+		border.width: Theme.geometry_button_border_width
+		border.color: Theme.color_ok
+		radius: Theme.geometry_button_radius
+	}
+
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
