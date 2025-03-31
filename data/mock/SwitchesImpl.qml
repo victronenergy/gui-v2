@@ -110,9 +110,9 @@ Item {
 					if (i == 1) {
 						if (mockDeviceCount === 4) {
 							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i),
-								(1 << VenusOS.SwitchableOutput_Function_Slave) | (1 << VenusOS.SwitchableOutput_Function_Latching));
+								(1 << VenusOS.SwitchableOutput_Type_Slave) | (1 << VenusOS.SwitchableOutput_Type_Latching));
 						} else {
-							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), (1<<VenusOS.SwitchableOutput_Function_Latching));
+							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), (1<<VenusOS.SwitchableOutput_Type_Latching));
 						}
 					} else {
 						switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), 0x7);
