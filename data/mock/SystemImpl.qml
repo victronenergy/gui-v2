@@ -123,6 +123,11 @@ QtObject {
 		Component.onCompleted: setValue(0)
 	}
 
+	readonly property VeQuickItem _speed: VeQuickItem {
+		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Speed/Max"
+		Component.onCompleted: setValue(50)
+	}
+
 	readonly property VeQuickItem _boatPageMaxSpeed: VeQuickItem {
 		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Speed/Max"
 		Component.onCompleted: setValue(50)

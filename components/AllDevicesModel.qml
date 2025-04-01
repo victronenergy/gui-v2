@@ -60,6 +60,7 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel gpsDevices: ServiceDeviceModel {
 		serviceType: "gps"
 		modelId: "gps"
+		onCountChanged: console.log(count)
 	}
 
 	readonly property ServiceDeviceModel gridDevices: ServiceDeviceModel {

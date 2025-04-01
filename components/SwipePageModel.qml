@@ -1,6 +1,7 @@
 import QtQuick
 import QtQml.Models
 import Victron.VenusOS
+import Victron.BoatPageComponents as BoatPageComponents
 
 ObjectModel {
 	id: root
@@ -11,7 +12,7 @@ ObjectModel {
 	readonly property bool environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
 
 	readonly property Component boatPage: Component {
-		BoatPage {
+		BoatPageComponents.BoatPage {
 			view: root.view
 		}
 	}
