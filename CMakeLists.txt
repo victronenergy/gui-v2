@@ -439,7 +439,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/TankDescription.qml
     data/common/TankModel.qml
 
-    pages/BoatPage.qml
     pages/BriefSidePanel.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
@@ -928,12 +927,49 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges)
     install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges/components)
     add_custom_command(
-        TARGET ${thisModule}
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
+	TARGET ${thisModule}
+	COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+	VERBATIM
     )
 endif()
 # end Gauges_QML_MODULE
+
+# BoatPageComponents_QML_MODULE
+set(BoatPageComponents_QML_MODULE_SOURCES
+    pages/BoatPage.qml
+    pages/boatpage/Background.qml
+    pages/boatpage/BatteryArc.qml
+    pages/boatpage/BatteryPercentage.qml
+    pages/boatpage/DcConsumptionGauge.qml
+    pages/boatpage/Gear.qml
+    pages/boatpage/LargeCenterGauge.qml
+    pages/boatpage/MotorDriveGauges.qml
+    pages/boatpage/TemperatureGauge.qml
+    pages/boatpage/TemperatureGauges.qml
+    pages/boatpage/TimeToGo.qml
+)
+
+list(APPEND TRANSLATION_SOURCES ${BoatPageComponents_QML_MODULE_SOURCES})
+
+qt_add_qml_module(BoatPageComponents
+    URI Victron.BoatPageComponents
+    STATIC
+    OUTPUT_DIRECTORY Victron/BoatPageComponents
+    QML_FILES ${BoatPageComponents_QML_MODULE_SOURCES}
+    ${QML_MODULE_OPTARGS}
+)
+if (${LOAD_QML_FROM_FILESYSTEM})
+    set(thisModule BoatPageComponents)
+    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
+    install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/BoatPageComponents)
+    install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/BoatPageComponents/components)
+    add_custom_command(
+	TARGET ${thisModule}
+	COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+	VERBATIM
+    )
+endif()
+# end BoatPageComponents_QML_MODULE
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
@@ -1076,8 +1112,9 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
-        images/icon_battery_24.svg
-        images/icon_battery_charging_24.svg
+	images/icon_battery_40.png
+	images/icon_battery_24.svg
+	images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
         images/icon_boat_32.svg
         images/icon_connectivity_32.png
@@ -1270,6 +1307,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Xml
     Qt6::Mqtt
     VenusQMLModuleplugin
+    BoatPageComponentsplugin
     VictronGaugesplugin
     VictronDbusplugin
     VictronMockplugin

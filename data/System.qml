@@ -21,6 +21,13 @@ QtObject {
 	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
 
 	readonly property ActiveSystemBattery battery: ActiveSystemBattery {
+		readonly property QtObject dcConsumption: QtObject {
+			readonly property real unit: Global.systemSettings.electricalQuantity
+			readonly property real value: unit === VenusOS.Units_Amp
+										  ? battery.current
+										  : battery.power
+		}
+
 		systemServiceUid: root.serviceUid
 	}
 
