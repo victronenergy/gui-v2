@@ -5,6 +5,8 @@
 
 #include "switchableoutputgroupmodel.h"
 
+#include <algorithm>
+
 #include <QQmlInfo>
 #include <QQmlEngine>
 
@@ -60,8 +62,10 @@ int SwitchableOutputGroupModel::count() const
 	return m_groups.count();
 }
 
-void SwitchableOutputGroupModel::addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid)
+void SwitchableOutputGroupModel::addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid, const QString &outputSortToken)
 {
+	m_outputSortTokens.insert(outputUid, outputSortToken);
+
 	const int index = indexOfNamedGroup(namedGroup);
 	if (index >= 0) {
 		addOutputToGroup(index, outputUid);
@@ -72,8 +76,10 @@ void SwitchableOutputGroupModel::addOutputToNamedGroup(const QString &namedGroup
 	}
 }
 
-void SwitchableOutputGroupModel::addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid)
+void SwitchableOutputGroupModel::addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid, const QString &outputSortToken)
 {
+	m_outputSortTokens.insert(outputUid, outputSortToken);
+
 	const int index = indexOfDeviceGroup(serviceUid);
 	if (index >= 0) {
 		addOutputToGroup(index, outputUid);
@@ -154,6 +160,22 @@ int SwitchableOutputGroupModel::indexOfDeviceGroup(const QString &serviceUid) co
 		}
 	}
 	return -1;
+}
+
+void SwitchableOutputGroupModel::updateSortTokenInGroup(int groupIndex, const QString &outputUid, const QString &outputSortToken)
+{
+	if (groupIndex < 0 || groupIndex >= m_groups.count()) {
+		qWarning() << "Cannot update sort token, invalid group index!" << groupIndex;
+		return;
+	}
+
+	m_outputSortTokens.insert(outputUid, outputSortToken);
+
+	std::sort(m_groups[groupIndex].outputUids.begin(),
+			  m_groups[groupIndex].outputUids.end(),
+			  [this](const QString &uid1, const QString &uid2) {
+		return outputUidLessThan(uid1, uid2);
+	});
 }
 
 void SwitchableOutputGroupModel::updateDeviceGroupName(BaseDevice *device)
@@ -237,11 +259,25 @@ int SwitchableOutputGroupModel::countGroupsWithDevice(const QString &serviceUid)
 	return matches;
 }
 
+bool SwitchableOutputGroupModel::outputUidLessThan(const QString &outputUid1, const QString &outputUid2) const
+{
+	return m_outputSortTokens.value(outputUid1).localeAwareCompare(m_outputSortTokens.value(outputUid2)) < 0;
+}
+
+int SwitchableOutputGroupModel::outputUidInsertionIndex(const QStringList &outputUids, const QString &outputUid) const
+{
+	for (int i = 0; i < outputUids.count(); ++i) {
+		if (outputUidLessThan(outputUid, outputUids.at(i))) {
+			return i;
+		}
+	}
+	return outputUids.count();
+}
+
 void SwitchableOutputGroupModel::addOutputToGroup(int index, const QString &outputUid)
 {
 	if (index >= 0 && index < m_groups.count()) {
-		m_groups[index].outputUids.append(outputUid);
-		m_groups[index].outputUids.sort();
+		m_groups[index].outputUids.insert(outputUidInsertionIndex(m_groups[index].outputUids, outputUid), outputUid);
 		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
 	}
 }
@@ -258,6 +294,7 @@ void SwitchableOutputGroupModel::removeOutputFromGroup(int index, const QString 
 			m_groups[index].outputUids.removeOne(outputUid);
 			emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
 		}
+		m_outputSortTokens.remove(outputUid);
 	}
 }
 
