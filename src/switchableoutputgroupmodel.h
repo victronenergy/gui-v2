@@ -44,8 +44,8 @@ public:
 
 	int count() const;
 
-	Q_INVOKABLE void addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid);
-	Q_INVOKABLE void addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid);
+	Q_INVOKABLE void addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid, const QString &outputSortToken);
+	Q_INVOKABLE void addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid, const QString &outputSortToken);
 
 	Q_INVOKABLE void removeOutputFromNamedGroup(const QString &namedGroup, const QString &outputUid);
 	Q_INVOKABLE void removeOutputFromDeviceGroup(const QString &serviceUid, const QString &outputUid);
@@ -57,6 +57,8 @@ public:
 
 	Q_INVOKABLE int indexOfNamedGroup(const QString &namedGroup) const;
 	Q_INVOKABLE int indexOfDeviceGroup(const QString &serviceUid) const;
+
+	Q_INVOKABLE void updateSortTokenInGroup(int groupIndex, const QString &outputUid, const QString &outputSortToken);
 
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
@@ -90,8 +92,12 @@ private:
 	void removeGroupAt(int index);
 	void moveDeviceGroupToSortedIndex(int groupIndex);
 
-	QList<Group> m_groups;
+	bool outputUidLessThan(const QString &outputUid1, const QString &outputUid2) const;
+	int outputUidInsertionIndex(const QStringList &outputUids, const QString &outputUid) const;
+
 	QMap<QString, BaseDevice *> m_knownDevices;
+	QMap<QString, QString> m_outputSortTokens;
+	QList<Group> m_groups;
 };
 
 } /* VenusOS */

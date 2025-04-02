@@ -35,23 +35,38 @@ QtObject {
 
 			required property string uid
 			required property string id
+
+			property bool initialized
 			property string currentNamedGroup
 			property bool inDeviceGroup
 
-			function addToGroup(newGroup) {
+			readonly property SwitchableOutput output: SwitchableOutput {
+				uid: outputObject.uid
+				onGroupChanged: outputObject.updateGroupModel()
+				onNameChanged: outputObject.updateSortToken()
+			}
+
+			function updateGroupModel() {
+				if (initialized) {
+					removeFromGroup()
+					addToGroup()
+				}
+			}
+
+			function addToGroup() {
 				// If the group name is set, then add the output to that named group. Otherwise, add
 				// it to the default group for its device.
-				if (newGroup.length > 0) {
-					root.groups.addOutputToNamedGroup(newGroup, outputObject.uid)
-					outputObject.currentNamedGroup = newGroup
+				if (output.group.length > 0) {
+					root.groups.addOutputToNamedGroup(output.group, output.uid, output.name)
+					outputObject.currentNamedGroup = output.group
 				} else {
-					const serviceUid = BackendConnection.serviceUidFromUid(outputObject.uid)
+					const serviceUid = BackendConnection.serviceUidFromUid(output.uid)
 					if (!root.groups.hasKnownDevice(serviceUid)) {
 						// Provide the model with a Device with the correct name, instance, etc.
 						// Note: the model takes ownership of the device.
 						root.groups.addKnownDevice(root._deviceComponent.createObject(root.groups, { serviceUid: serviceUid }))
 					}
-					root.groups.addOutputToDeviceGroup(serviceUid, outputObject.uid)
+					root.groups.addOutputToDeviceGroup(serviceUid, output.uid, output.name)
 					inDeviceGroup = true
 				}
 			}
@@ -62,21 +77,25 @@ QtObject {
 					currentNamedGroup = ""
 				}
 				if (inDeviceGroup) {
-					const serviceUid = BackendConnection.serviceUidFromUid(outputObject.uid)
+					const serviceUid = BackendConnection.serviceUidFromUid(output.uid)
 					root.groups.removeOutputFromDeviceGroup(serviceUid, uid)
 					inDeviceGroup = false
 				}
 			}
 
-			//--- implementation details below
-
-			readonly property VeQuickItem _group: VeQuickItem {
-				uid: `${outputObject.uid}/Settings/Group`
-				onValueChanged: {
-					outputObject.removeFromGroup()
-					outputObject.addToGroup(value)
+			function updateSortToken() {
+				if (currentNamedGroup.length > 0) {
+					root.groups.updateSortTokenInGroup(root.groups.indexOfNamedGroup(currentNamedGroup), output.uid, output.name);
+				} else if (inDeviceGroup) {
+					const serviceUid = BackendConnection.serviceUidFromUid(output.uid)
+					root.groups.updateSortTokenInGroup(root.groups.indexOfDeviceGroup(serviceUid), output.uid, output.name);
 				}
 			}
+		}
+
+		onObjectAdded: (index, outputObject) => {
+			outputObject.addToGroup()
+			outputObject.initialized = true
 		}
 
 		onObjectRemoved: (index, outputObject) => {
