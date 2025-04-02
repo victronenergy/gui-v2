@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var _timeZoneModels: [ tzAfrica, tzAmerica, tzAntartica, tzArtic, tzAsia, tzAtlantic, tzAustralia, tzEurope, tzIndian, tzPacific, tzEtc ]
+	property var _timeZoneModels: [ tzAfrica, tzAmerica, tzAntarctica, tzArctic, tzAsia, tzAtlantic, tzAustralia, tzEurope, tzIndian, tzPacific, tzEtc ]
 
 	function _findTimeZoneName(region, city) {
 		if (city === "UTC") {
@@ -222,16 +222,16 @@ Page {
 		readonly property string region: "America"
 	}
 	TzAntarcticaData {
-		id: tzAntartica
-		//% "Antartica"
-		readonly property string name: qsTrId("settings_tz_antartica")
-		readonly property string region: "Antartica"
+		id: tzAntarctica
+		//% "Antarctica"
+		readonly property string name: qsTrId("settings_tz_antarctica")
+		readonly property string region: "Antarctica"
 	}
 	TzArcticData {
-		id: tzArtic
-		//% "Artic"
-		readonly property string name: qsTrId("settings_tz_artic")
-		readonly property string region: "Artic"
+		id: tzArctic
+		//% "Arctic"
+		readonly property string name: qsTrId("settings_tz_arctic")
+		readonly property string region: "Arctic"
 	}
 	TzAsiaData {
 		id: tzAsia
