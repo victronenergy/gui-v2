@@ -809,7 +809,7 @@ public:
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
-	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, int channel = -1) const;
+	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
 };
 

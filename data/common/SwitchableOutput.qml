@@ -66,6 +66,7 @@ QtObject {
 	// Output/channel settings
 	readonly property int type: _type.valid ? _type.value : -1
 	readonly property string group: _group.value ?? ""
+	readonly property string customName: _customName.value ?? ""
 
 	function setDimming(value) {
 		_dimming.setValue(value)
