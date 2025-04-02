@@ -560,6 +560,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
+    pages/settings/devicelist/PageSwitch.qml
+    pages/settings/devicelist/PageSwitchableOutput.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
@@ -613,6 +615,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_pulsemeter.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_pvinverter.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_solarcharger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_switch.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_tank.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_temperature.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml

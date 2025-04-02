@@ -291,7 +291,7 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 	}
 }
 
-QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, int channel) const
+QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId) const
 {
 	switch (value) {
 	case SwitchableOutput_Type_Momentary:
@@ -305,8 +305,8 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, int chan
 		return qtTrId("switchable_output_dimmable");
 	case SwitchableOutput_Type_Slave:
 		//% "Slave of %1"
-		if (channel > 0) {
-			return qtTrId("switchable_output_slave_of").arg(channel);
+		if (channelId.length() > 0) {
+			return qtTrId("switchable_output_slave_of").arg(channelId);
 		} else {
 			//% "Slave"
 			return qtTrId("switchable_output_slave");
