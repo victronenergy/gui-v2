@@ -19,7 +19,7 @@ Row {
 		width: Theme.geometry_boatPage_batteryGauge_iconWidth
 		height: width
 		color: Theme.color_font_primary
-		source: "qrc:/images/icon_battery_24.svg"
+		source: "qrc:/images/icon_battery_40.png"
 	}
 
 	QuantityLabel {

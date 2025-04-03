@@ -46,7 +46,7 @@ Row {
 		width: Theme.geometry_boatPage_batteryGauge_iconWidth
 		height: width
 		color: Theme.color_boatPage_icon
-		source: root.showMotorDrive ? "qrc:/images/icon_propeller_32.svg" : "qrc:/images/icon_battery.png"
+		source: root.showMotorDrive ? "qrc:/images/icon_propeller_32.svg" : "qrc:/images/icon_battery_40.png"
 	}
 }
 

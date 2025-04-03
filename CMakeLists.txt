@@ -957,9 +957,6 @@ qt_add_qml_module(BoatPageComponents
     OUTPUT_DIRECTORY Victron/BoatPageComponents
     QML_FILES ${BoatPageComponents_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}
-
-
-
 )
 if (${LOAD_QML_FROM_FILESYSTEM})
     set(thisModule BoatPageComponents)
@@ -1115,7 +1112,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
-	images/icon_battery.png
+	images/icon_battery_40.png
 	images/icon_battery_24.svg
 	images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
