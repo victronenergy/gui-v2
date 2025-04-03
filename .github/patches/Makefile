@@ -2,31 +2,15 @@ ifeq ($(PREFIX),)
 	PREFIX := /var/www/venus/gui-beta
 endif
 
-ifeq ($(EXTRAFONTS),)
-	EXTRAFONTS=/usr/lib/fonts/DroidSansFallback.ttf /usr/lib/fonts/NotoSansThai.ttf /usr/lib/fonts/DejaVuSans.ttf
-endif
+FILES=index.html qtloader.js venus-gui-v2.js venus-gui-v2.wasm.gz venus-gui-v2.wasm.sha256 \
+	victronenergy.svg LICENSE.txt
 
-FILES=index.html qtloader.js venus-gui-v2.js \
-	  venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz victronenergy.svg \
-      LICENSE.txt
+.PHONY: all clean install
 
-all: venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz
+all: ;
 
-venus-gui-v2.wasm.sha256:
-	sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
+clean: ;
 
-venus-gui-v2.wasm.gz:
-	gzip -k -9 venus-gui-v2.wasm
-
-.PHONY: clean
-
-clean:
-	rm -f venus-gui-v2.wasm.sha256 venus-gui-v2.wasm.gz
-
-install: all
+install:
 	install -d $(DESTDIR)$(PREFIX)/
 	install -m 644 $(FILES) $(DESTDIR)$(PREFIX)/
-ifdef LINKFONT
-	  ln -s $(EXTRAFONTS) $(DESTDIR)$(PREFIX)/
-endif
-
