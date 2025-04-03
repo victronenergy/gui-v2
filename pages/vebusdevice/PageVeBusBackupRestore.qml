@@ -253,7 +253,7 @@ Page {
 		id: _backupRestoreError
 		uid: root.serviceUid + "/Error"
 		onValueChanged: {
-			if (isValid && value !== 0){
+			if (valid && value !== 0){
 				Global.showToastNotification(VenusOS.Notification_Warning, get_mk2vsc_error(value), 10000)
 				_backupRestoreError.setValue(0) // Prevent from showing again when page re-opens
 			}
@@ -265,7 +265,7 @@ Page {
 		id: _backupRestoreNotify
 		uid: root.serviceUid + "/Notify"
 		onValueChanged: {
-			if (isValid && value !== 0){
+			if (valid && value !== 0){
 				if (value >= 100) {
 					Global.showToastNotification(VenusOS.Notification_Warning, get_vebus_backup_notification(value), 10000)
 				} else {
@@ -294,7 +294,7 @@ Page {
 		id: _actionDoneReloadPage
 		uid: root.serviceUid + "/Action"
 		onValueChanged: {
-			if (isValid){
+			if (valid){
 				if (value === 0) {
 					// When done "reset" the page to initial state
 					resetPageToInitialState()
