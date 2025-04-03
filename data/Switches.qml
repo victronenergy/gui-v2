@@ -20,7 +20,7 @@ QtObject {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
 			filterFlags: VeQItemSortTableModel.FilterOffline
-			filterRegExp: "\.SwitchableOutput\.[0-9]$"
+			filterRegExp: "\/SwitchableOutput\/(?:\\w+)$" // output id may be int or string
 			model: VeQItemTableModel {
 				uids: BackendConnection.uidPrefix()
 
@@ -43,7 +43,7 @@ QtObject {
 			readonly property SwitchableOutput output: SwitchableOutput {
 				uid: outputObject.uid
 				onGroupChanged: outputObject.updateGroupModel()
-				onNameChanged: outputObject.updateSortToken()
+				onFormattedNameChanged: outputObject.updateSortToken()
 				onTypeChanged: outputObject.updateGroupModel()
 			}
 
@@ -66,7 +66,7 @@ QtObject {
 				// If the group name is set, then add the output to that named group. Otherwise, add
 				// it to the default group for its device.
 				if (output.group.length > 0) {
-					root.groups.addOutputToNamedGroup(output.group, output.uid, output.name)
+					root.groups.addOutputToNamedGroup(output.group, output.uid, output.formattedName)
 					outputObject.currentNamedGroup = output.group
 				} else {
 					const serviceUid = BackendConnection.serviceUidFromUid(output.uid)
@@ -75,7 +75,7 @@ QtObject {
 						// Note: the model takes ownership of the device.
 						root.groups.addKnownDevice(root._deviceComponent.createObject(root.groups, { serviceUid: serviceUid }))
 					}
-					root.groups.addOutputToDeviceGroup(serviceUid, output.uid, output.name)
+					root.groups.addOutputToDeviceGroup(serviceUid, output.uid, output.formattedName)
 					inDeviceGroup = true
 				}
 			}
@@ -94,10 +94,10 @@ QtObject {
 
 			function updateSortToken() {
 				if (currentNamedGroup.length > 0) {
-					root.groups.updateSortTokenInGroup(root.groups.indexOfNamedGroup(currentNamedGroup), output.uid, output.name);
+					root.groups.updateSortTokenInGroup(root.groups.indexOfNamedGroup(currentNamedGroup), output.uid, output.formattedName)
 				} else if (inDeviceGroup) {
 					const serviceUid = BackendConnection.serviceUidFromUid(output.uid)
-					root.groups.updateSortTokenInGroup(root.groups.indexOfDeviceGroup(serviceUid), output.uid, output.name);
+					root.groups.updateSortTokenInGroup(root.groups.indexOfDeviceGroup(serviceUid), output.uid, output.formattedName)
 				}
 			}
 		}
