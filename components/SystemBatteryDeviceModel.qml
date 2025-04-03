@@ -64,6 +64,7 @@ DeviceModel {
 				batteryObject.setValueIfValid("current", batteryInfo.current)
 				batteryObject.setValueIfValid("power", batteryInfo.power)
 				batteryObject.setValueIfValid("stateOfCharge", batteryInfo.soc)
+				batteryObject.setValueIfValid("temperature", batteryInfo.temperature)
 				batteryObject.setValueIfValid("timeToGo", batteryInfo.timetogo)
 				batteryObject.setValueIfValid("voltage", batteryInfo.voltage)
 			}
