@@ -32,7 +32,7 @@ Item {
 				anchors.bottom: parent.bottom
 				bottomPadding: Theme.geometry_switchableoutput_label_margin
 				rightPadding: Theme.geometry_switchableoutput_label_margin
-				text: output.name
+				text: output.formattedName
 				width: parent.width - (statusRect.visible ? statusRect.width : 0)
 				elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
 			}

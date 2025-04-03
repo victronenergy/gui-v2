@@ -32,34 +32,32 @@ QtObject {
 		serviceUid: BackendConnection.serviceUidFromUid(root.uid)
 	}
 
-	// The user-displayable name of the output.
-	readonly property string name: {
-		if (_customName.value) {
-			return _customName.value
+	// A name for the output, with additional details: if the output has no custom name and is in a
+	// named group (rather than its default device group), the returned text includes the device
+	// name and instance.
+	readonly property string formattedName: {
+		if (customName) {
+			return customName
 		}
 		if (group) {
 			// When the output is in a named group (where it might be in the same group as outputs
 			// from other devices) then use a name that identifies the source device.
-			//: Abbreviation of 'Channel'. %1 = channel name/number
-			//% "Ch %1"
-			const channelName = qsTrId("switchable_output_channel_abbr").arg(root.outputId)
 			if (device.customName) {
-				return `${device.customName} | ${channelName}`
+				return `${device.customName} | ${name}`
 			} else {
-				return `${device.productName} ${device.deviceInstance} | ${channelName}`
+				return `${device.productName} ${device.deviceInstance} | ${name}`
 			}
 		} else {
 			// When the output is in the default group for the device, instead of in a named group,
-			// then only the channel id needs to be in the name.
-			//: %1 = channel name/number
-			//% "Channel %1"
-			return qsTrId("switchable_output_channel").arg(root.outputId)
+			// then the /Name can be used directly.
+			return name
 		}
 	}
 
 	// Output/channel operational paths
 	readonly property int state: _state.valid ? _state.value : -1
 	readonly property int status: _status.valid ? _status.value : -1
+	readonly property string name: _name.value ?? ""
 	readonly property int dimming: _dimming.valid ? _dimming.value : 0  // 0-100 %
 	readonly property bool hasDimming: _dimming.valid
 
@@ -84,6 +82,10 @@ QtObject {
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: `${root.uid}/Status`
+	}
+
+	readonly property VeQuickItem _name: VeQuickItem {
+		uid: `${root.uid}/Name`
 	}
 
 	readonly property VeQuickItem _dimming: VeQuickItem {

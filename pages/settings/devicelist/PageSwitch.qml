@@ -12,12 +12,11 @@ Page {
 	required property string serviceUid
 
 	function switchableOutputDisplayName(output) {
-		return output.customName
-			 //: Abbreviated channel name. %1 = channel id, %2 = custom channel name
-			 //% "Ch %1: %2"
-			? qsTrId("page_switch_channel_abbr").arg(output.outputId).arg(output.customName)
-			 //% "Channel %1"
-			: qsTrId("page_switch_channel").arg(output.outputId)
+		if (output.customName) {
+			return "%1: %2".arg(output.name).arg(output.customName)
+		} else {
+			return output.name
+		}
 	}
 
 	VeQItemTableModel {
