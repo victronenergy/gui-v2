@@ -44,6 +44,7 @@ QtObject {
 				uid: outputObject.uid
 				onGroupChanged: outputObject.updateGroupModel()
 				onNameChanged: outputObject.updateSortToken()
+				onTypeChanged: outputObject.updateGroupModel()
 			}
 
 			function updateGroupModel() {
@@ -54,6 +55,14 @@ QtObject {
 			}
 
 			function addToGroup() {
+				if (output.type !== VenusOS.SwitchableOutput_Type_Momentary
+						&& output.type !== VenusOS.SwitchableOutput_Type_Latching
+						&& output.type !== VenusOS.SwitchableOutput_Type_Dimmable) {
+					// Only momentary/latching/dimmable outputs are controllable and should appear
+					// in the aux cards, so do not add other types of outputs to the model.
+					return
+				}
+
 				// If the group name is set, then add the output to that named group. Otherwise, add
 				// it to the default group for its device.
 				if (output.group.length > 0) {
