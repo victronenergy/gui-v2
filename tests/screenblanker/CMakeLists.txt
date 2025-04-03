@@ -3,7 +3,7 @@
 # See LICENSE.txt for license information.
 #
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 project(tst_screenblanker LANGUAGES CXX)
 
 if(VENUS_DESKTOP_BUILD)
