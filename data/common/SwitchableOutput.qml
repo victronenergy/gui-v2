@@ -34,15 +34,13 @@ QtObject {
 
 	// The user-displayable name of the output.
 	readonly property string name: {
-		if (_customName.value) {
-			return _customName.value
+		if (customName) {
+			return customName
 		}
 		if (group) {
 			// When the output is in a named group (where it might be in the same group as outputs
 			// from other devices) then use a name that identifies the source device.
-			//: Abbreviation of 'Channel'. %1 = channel name/number
-			//% "Ch %1"
-			const channelName = qsTrId("switchable_output_channel_abbr").arg(root.outputId)
+			const channelName = formattedId(true)
 			if (device.customName) {
 				return `${device.customName} | ${channelName}`
 			} else {
@@ -51,9 +49,7 @@ QtObject {
 		} else {
 			// When the output is in the default group for the device, instead of in a named group,
 			// then only the channel id needs to be in the name.
-			//: %1 = channel name/number
-			//% "Channel %1"
-			return qsTrId("switchable_output_channel").arg(root.outputId)
+			return formattedId(false)
 		}
 	}
 
@@ -74,6 +70,23 @@ QtObject {
 
 	function setState(value) {
 		_state.setValue(value)
+	}
+
+	// If outputId is a number, this returns "Channel <outputId + 1>" or "Ch <outputId + 1>".
+	// Otherwise, it simply returns the outputId.
+	function formattedId(abbreviate) {
+		const outputIdAsInt = parseInt(outputId)
+		if (isNaN(outputIdAsInt)) {
+			return outputId
+		} else {
+			return abbreviate
+				  //: Abbreviation of 'Channel'. %1 = channel name/number
+				  //% "Ch %1"
+				? qsTrId("switchable_output_channel_abbr").arg(outputIdAsInt + 1)
+				  //: Abbreviation of 'Channel'. %1 = channel name/number
+				  //% "Channel %1"
+				: qsTrId("switchable_output_channel").arg(outputIdAsInt + 1)
+		}
 	}
 
 	//--- internal implementation below

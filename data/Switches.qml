@@ -16,7 +16,7 @@ QtObject {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
 			filterFlags: VeQItemSortTableModel.FilterOffline
-			filterRegExp: "\.SwitchableOutput\.[0-9]$"
+			filterRegExp: "\/SwitchableOutput\/(?:\\w+)$" // output id may be int or string
 			model: VeQItemTableModel {
 				uids: BackendConnection.uidPrefix()
 
