@@ -40,6 +40,7 @@ QtObject {
 				uid: outputObject.uid
 				onGroupChanged: outputObject.updateGroupModel()
 				onNameChanged: outputObject.updateSortToken()
+				onTypeChanged: outputObject.updateGroupModel()
 			}
 
 			function updateGroupModel() {
@@ -50,6 +51,12 @@ QtObject {
 			}
 
 			function addToGroup() {
+				if (output.type === VenusOS.SwitchableOutput_Type_Slave) {
+					// Switches of slave type should not be visible in the card groups as they are
+					// not controllable.
+					return
+				}
+
 				// If the group name is set, then add the output to that named group. Otherwise, add
 				// it to the default group for its device.
 				if (output.group.length > 0) {
