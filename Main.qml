@@ -109,7 +109,12 @@ Window {
 	Loader {
 		id: guiLoader
 
+		// Receive key events if key navigation is enabled.
 		focus: Global.keyNavigationEnabled
+				// Do not receive focus while a dialog is open, as the key events will cause the
+				// focus item to change in the main UI.
+				&& !Global.dialogLayer?.currentDialog
+
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
@@ -157,7 +162,14 @@ Window {
 		interval: 60000
 		onTriggered: {
 			Global.applicationActive = false
-			Global.keyNavigationEnabled = false
+
+			// Disable key nav when app is inactive; user can re-enable it later by pressing a
+			// navigation key. Do not disable key nav when a dialog is shown, because the user
+			// cannot re-enable it within a modal dialog, as ModalDialog focus is only enabled when
+			// keyNavigationEnabled=true.
+			if (!Global.dialogLayer?.currentDialog) {
+				Global.keyNavigationEnabled = false
+			}
 		}
 	}
 

@@ -69,12 +69,26 @@ CT.Switch {
 	}
 
 	contentItem: Item {
+		anchors.verticalCenter: parent.verticalCenter
+
 		Label {
+			anchors.verticalCenter: parent.verticalCenter
 			text: root.text
 			color: Theme.color_font_primary
 			width: parent.width - Theme.geometry_switch_groove_width
 			elide: Text.ElideRight
 		}
+	}
+
+	KeyNavigationHighlight {
+		anchors {
+			fill: parent
+			leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+			rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+			topMargin: -Theme.geometry_listItem_content_verticalMargin
+			bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+		}
+		active: root.activeFocus
 	}
 
 	// Don't animate the value change when setting the value on initial load

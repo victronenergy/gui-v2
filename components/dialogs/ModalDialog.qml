@@ -7,6 +7,14 @@ import QtQuick
 import QtQuick.Templates as T
 import Victron.VenusOS
 
+/*
+	A generic modal dialog that appears over all other UI layers.
+
+	If the contentItem contains focusable UI controls, the contentItem should extend
+	ModalDialog.FocusableContentItem, so that the contentItem can receive the Enter/Return/Escape
+	shortcuts for accepting/rejecting the dialog, and also move the focus between the header and
+	footer.
+*/
 T.Dialog {
 	id: root
 
@@ -34,6 +42,32 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
+	function handleAccept() {
+		if (!root.canAccept || (!!root.tryAccept && !root.tryAccept())) {
+			return
+		}
+		root.accept()
+	}
+
+	function handleReject() {
+		if (!!root.tryReject && !root.tryReject()) {
+			return
+		}
+		root.reject()
+	}
+
+	// Base type for contentItem of child dialogs.
+	component FocusableContentItem : FocusScope {
+		// Give the initial focus to this content item so that child UI controls will receive focus.
+		focus: true
+
+		KeyNavigation.down: root.footer
+		Keys.onReturnPressed: root.handleAccept()
+		Keys.onEnterPressed: root.handleAccept()
+		Keys.onEscapePressed: root.handleReject()
+		Keys.enabled: Global.keyNavigationEnabled
+	}
+
 	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
 	x: (parent.width - width) / 2
 	y: centeredY
@@ -50,6 +84,11 @@ T.Dialog {
 	horizontalPadding: 0
 	modal: true
 	closePolicy: T.Popup.NoAutoClose
+
+	// Ideally, focus would be false and the user could enable key navigation while the dialog was
+	// open, by pressing a navigation key. However, if focus=false to begin with, then no key events
+	// would be received. So, just enable it when the dialog is opened, if key nav is enabled.
+	focus: Global.keyNavigationEnabled
 
 	enter: Transition {
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
@@ -103,9 +142,17 @@ T.Dialog {
 		}
 	}
 
-	footer: Item {
+	footer: FocusScope {
 		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
 		height: visible ? Theme.geometry_modalDialog_footer_height : 0
+		focus: false
+
+		// Do not allow enter/return to accept the dialog when the footer buttons are
+		// focused, as it would be confusing as to whether the Enter/Return key is
+		// accepting the dialog or pressing the Cancel button to reject the dialog.
+		Keys.onEscapePressed: root.handleReject()
+		Keys.enabled: Global.keyNavigationEnabled
+
 		SeparatorBar {
 			id: footerTopSeparator
 			anchors {
@@ -126,18 +173,13 @@ T.Dialog {
 				bottom: parent.bottom
 				bottomMargin: root.background.border.width
 			}
-
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_font_primary
 			spacing: 0
 			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			focus: enabled
 			text: root.rejectText
-			onClicked: {
-				if (!!root.tryReject && !root.tryReject()) {
-					return
-				}
-				root.reject()
-			}
+			onClicked: root.handleReject()
 		}
 
 		SeparatorBar {
@@ -161,17 +203,13 @@ T.Dialog {
 				bottom: parent.bottom
 				bottomMargin: root.background.border.width
 			}
-
+			focus: enabled && !rejectButton.enabled
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
-			onClicked: {
-				if (!!root.tryAccept && !root.tryAccept()) {
-					return
-				}
-				root.accept()
-			}
+			KeyNavigation.left: rejectButton
+			onClicked: root.handleAccept()
 		}
 	}
 
