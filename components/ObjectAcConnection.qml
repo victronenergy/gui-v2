@@ -53,6 +53,8 @@ QtObject {
 	// multi-phase systems don't have a total current
 	readonly property real current: _phaseCount.value === 1 && _currentL1.alid ? _currentL1.value : NaN
 
+	readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
+
 	readonly property PhaseModel phases: PhaseModel {
 		id: _phases
 		l2AndL1OutSummed: root.l2AndL1OutSummed

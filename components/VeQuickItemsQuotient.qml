@@ -13,7 +13,7 @@ QtObject {
 	required property int unit
 	readonly property var numerator: _numerator.valid ? _numerator.value : NaN
 	readonly property var denominator: _denominator.valid ? _denominator.value : NaN
-	readonly property real normalizedValue: numerator / denominator
+	readonly property real normalizedValue: denominator === 0 ? NaN : numerator / denominator
 	readonly property real percentage: 100 * normalizedValue
 	readonly property bool valid: !isNaN(percentage)
 

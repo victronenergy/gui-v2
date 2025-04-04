@@ -8,11 +8,12 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Row {
-	id: row
+	id: root
 
-	readonly property var battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property ActiveSystemBattery battery: Global.system && Global.system.battery ? Global.system.battery : null
 
-	spacing: Theme.geometry_boatPage_batteryGauge_rowSpacing
+	spacing: Theme.geometry_boatPage_row_spacing
+	visible: battery && !isNaN(battery.stateOfCharge)
 
 	CP.ColorImage {
 		anchors.verticalCenter: parent.verticalCenter
@@ -26,7 +27,7 @@ Row {
 		id: stateOfCharge
 
 		anchors.verticalCenter: parent.verticalCenter
-		font.pixelSize: Theme.geometry_boatPage_batterySoc_pixelSize
+		font.pixelSize: Theme.font_boatPage_batterySoc_pixelSize
 		unit: VenusOS.Units_Percentage
 		value: battery.stateOfCharge
 	}

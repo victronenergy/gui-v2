@@ -927,9 +927,9 @@ if (${LOAD_QML_FROM_FILESYSTEM})
     install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges)
     install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges/components)
     add_custom_command(
-	TARGET ${thisModule}
-	COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-	VERBATIM
+        TARGET ${thisModule}
+        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
+        VERBATIM
     )
 endif()
 # end Gauges_QML_MODULE
@@ -940,10 +940,13 @@ set(BoatPageComponents_QML_MODULE_SOURCES
     pages/boatpage/Background.qml
     pages/boatpage/BatteryArc.qml
     pages/boatpage/BatteryPercentage.qml
-    pages/boatpage/DcConsumptionGauge.qml
+    pages/boatpage/ConsumptionGauge.qml
     pages/boatpage/Gear.qml
+    pages/boatpage/Gps.qml
     pages/boatpage/LargeCenterGauge.qml
+    pages/boatpage/MotorDrive.qml
     pages/boatpage/MotorDriveGauges.qml
+    pages/boatpage/QuantityLabelIconRow.qml
     pages/boatpage/TemperatureGauge.qml
     pages/boatpage/TemperatureGauges.qml
     pages/boatpage/TimeToGo.qml
@@ -1112,9 +1115,9 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
-	images/icon_battery_40.png
-	images/icon_battery_24.svg
-	images/icon_battery_charging_24.svg
+        images/icon_battery_40.png
+        images/icon_battery_24.svg
+        images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
         images/icon_boat_32.svg
         images/icon_connectivity_32.png
@@ -1178,7 +1181,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_motorController_32.svg
         images/icon_plus.svg
         images/icon_plus_32.svg
-        images/icon_propeller_32.svg
+        images/icon_propeller_32.png
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg

@@ -21,13 +21,6 @@ QtObject {
 	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
 
 	readonly property ActiveSystemBattery battery: ActiveSystemBattery {
-		readonly property QtObject dcConsumption: QtObject {
-			readonly property real unit: Global.systemSettings.electricalQuantity
-			readonly property real value: unit === VenusOS.Units_Amp
-										  ? battery.current
-										  : battery.power
-		}
-
 		systemServiceUid: root.serviceUid
 	}
 
@@ -40,6 +33,7 @@ QtObject {
 		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
 		readonly property real voltage: _dcBatteryVoltage.valid ? _dcBatteryVoltage.value : NaN
 		readonly property real maximumPower: _maximumDcPower.valid ? _maximumDcPower.value : NaN
+		readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
 
 		readonly property VeQuickItem _dcSystemPower: VeQuickItem {
 			uid: root.serviceUid + "/Dc/System/Power"

@@ -10,29 +10,29 @@ import Victron.VenusOS
 import Victron.Gauges
 
 Column {
-	readonly property var motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	readonly property Device motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
 
 	spacing: Theme.geometry_boatPage_motorDrive_temperaturesColumn_spacing
 
 	BoatPageComponents.TemperatureGauge {
 		anchors.right: parent.right
-		veQuickItem: _motorDriveTemperature
+		dataItem: _motorDriveTemperature
 		unit: VenusOS.Units_Temperature_Celsius
-		source: "qrc:/images/icon_engine_temp_32.svg"
+		iconSource: "qrc:/images/icon_engine_temp_32.svg"
 	}
 
 	BoatPageComponents.TemperatureGauge {
 		anchors.right: parent.right
-		veQuickItem: _motorDriveCoolantTemperature
+		dataItem: _motorDriveCoolantTemperature
 		unit: VenusOS.Units_Temperature_Celsius
-		source: "qrc:/images/icon_temp_coolant_32.svg"
+		iconSource: "qrc:/images/icon_temp_coolant_32.svg"
 	}
 
 	BoatPageComponents.TemperatureGauge {
 		anchors.right: parent.right
-		veQuickItem: _motorDriveControllerTemperature
+		dataItem: _motorDriveControllerTemperature
 		unit: VenusOS.Units_Temperature_Celsius
-		source: "qrc:/images/icon_motorController_32.svg"
+		iconSource: "qrc:/images/icon_motorController_32.svg"
 	}
 
 	VeQuickItem {

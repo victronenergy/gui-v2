@@ -173,6 +173,7 @@ Page {
 				//% "Gauge Display"
 				text: qsTrId("settings_minmax_gauge_display")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CentreGauge/Type" // TBC
+				visible: dataItem.valid
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Speed"
@@ -187,6 +188,7 @@ Page {
 				text: qsTrId("settings_minmax_max_speed")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
 				unit: Global.systemSettings.speedUnit
+				decimals: 0
 				value: Global.systemSettings.convertFromKilometersPerHour(dataItem.value)
 				saveInput: function() {
 					dataItem.setValue(Global.systemSettings.convertToKilometersPerHour(textField.text))

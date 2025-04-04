@@ -11,24 +11,13 @@ import Victron.Gauges
 Column {
 	id: root
 
-	readonly property var battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property ActiveSystemBattery battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property var duration: Utils.decomposeSeconds(battery.timeToGo)
 
-	anchors {
-		top: parent.top
-		topMargin: Theme.geometry_boatPage_timeToGo_topMargin
-		left: parent.left
-		leftMargin: Theme.geometry_boatPage_timeToGo_leftMargin
-	}
-
-	visible: !!battery
+	visible: !!battery && battery.timeToGo > 60
 
 	Row {
 		id: timeToGo
-
-		readonly property int secs: battery.timeToGo
-		readonly property int days: Math.floor(secs / 86400)
-		readonly property int hours: Math.floor((secs - (days * 86400)) / 3600)
-		readonly property int minutes: Math.floor((secs - (days * 86400) - (hours * 3600)) / 60)
 
 		spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
 
@@ -42,7 +31,7 @@ Column {
 
 			unit: VenusOS.Units_Time_Day
 			visible: value
-			value: parent.days
+			value: duration.days
 		}
 
 		TimeToGoQuantityLabel {
@@ -50,18 +39,17 @@ Column {
 
 			unit: VenusOS.Units_Time_Hour
 			visible: value || daysLabel.visible
-			value: parent.hours
+			value: duration.hours
 		}
 
 		TimeToGoQuantityLabel {
 			unit: VenusOS.Units_Time_Minute
 			visible: value || hoursLabel.visible
-			value: parent.minutes
+			value: duration.minutes
 		}
 	}
 
 	Label {
-		visible: timeToGo.secs > 60
 		font.pixelSize: Theme.font_size_body2
 		color: Theme.color_font_secondary
 		//% "Time To Go"

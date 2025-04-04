@@ -12,23 +12,16 @@ import Victron.Gauges
 Column {
 	id: motorDriveColumn
 
-	required property var motorDriveDcConsumption
-	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	required property var motorDrive
+	readonly property string serviceUid: motorDrive && motorDrive.serviceUid ? motorDrive.serviceUid : ""
 
-	anchors {
-		verticalCenter: batteryGauge.verticalCenter
-		verticalCenterOffset: Theme.geometry_boatPage_motorDriveColumn_verticalCenterOffset
-		horizontalCenter: parent.horizontalCenter
-	}
-	visible: centerGauge.dataSource === motorDriveDcConsumption
-	height: childrenRect.height
 	spacing: Theme.geometry_boatPage_motorDriveColumn_spacing
 
 	Row {
 		id: motordriveRow
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		spacing: Theme.geometry_boatPage_motordriveRow_spacing
+		spacing: Theme.geometry_boatPage_row_spacing
 
 		CP.ColorImage {
 			anchors {
@@ -38,37 +31,23 @@ Column {
 			width: Theme.geometry_boatPage_motordriveRow_image_width
 			height: width
 			color: Theme.color_boatPage_icon
-			source: "qrc:/images/icon_propeller_32.svg"
+			source: "qrc:/images/icon_propeller_32.png"
 		}
 
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
-			font.pixelSize: Theme.geometry_boatPage_motordriveRow_label_pixelSize
+			font.pixelSize: Theme.font_size_body2
 			//% "Motordrive"
 			text: qsTrId("boat_page_motor_drive")
 		}
 	}
 
-	QuantityLabel {
-		id: motordriveLabel
-
-		anchors.horizontalCenter: parent.horizontalCenter
-		font.pixelSize: Theme.geometry_boatPage_motorDriveDcConsumption_pixelSize
-		value: motorDriveDcConsumption.numerator
-		unit: motorDriveDcConsumption.unit
-	}
-
 	TemperatureGauge {
 		anchors.horizontalCenter: parent.horizontalCenter
 		width: childrenRect.width
-		veQuickItem: _motorDriveTemperature
+		dataItem: motorDrive.motorTemperature
 		unit: VenusOS.Units_Temperature_Celsius
-		source: "qrc:/images/icon_engine_temp_32.svg"
-	}
-
-	VeQuickItem {
-		id: _motorDriveTemperature
-
-		uid: _motorDrive ? _motorDrive.serviceUid + "/Motor/Temperature" : ""
+		iconSource: "qrc:/images/icon_engine_temp_32.svg"
+		visible: motorDrive.motorTemperature.valid
 	}
 }

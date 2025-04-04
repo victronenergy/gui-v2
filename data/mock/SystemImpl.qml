@@ -128,19 +128,14 @@ QtObject {
 		Component.onCompleted: setValue(50)
 	}
 
-	readonly property VeQuickItem _boatPageMaxSpeed: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Speed/Max"
-		Component.onCompleted: setValue(50)
-	}
-
 	readonly property VeQuickItem _boatPageMaxRpm: VeQuickItem {
 		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Motordrive/Rpm/Max"
-		Component.onCompleted: setValue(10000)
+		Component.onCompleted: setValue(4000)
 	}
 
 	readonly property VeQuickItem _boatPageMaxPower: VeQuickItem {
 		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Motordrive/DC/Power/Max"
-		Component.onCompleted: setValue(10000)
+		Component.onCompleted: setValue(20000)
 	}
 
 	property Connections veBusServiceSetup: Connections {

@@ -7,65 +7,18 @@ import QtQuick
 import Victron.BoatPageComponents as BoatPageComponents
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Gauges
 
 SwipeViewPage {
 	id: root
 
-	property string activeGpsUid
-	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	readonly property var _battery: Global.system && Global.system.battery ? Global.system.battery : null
 
-	property VeQuickItemsQuotient gpsSpeed: VeQuickItemsQuotient {
-		property string units: _speedUnits.valid ? _speedUnits.value : ""
-		readonly property real value: {
-			switch (units) {
-			case "km/h":
-				return numerator * 3.6
-			case "mph":
-				return numerator * 2.236936
-			case "kt":
-				return numerator * (3600/1852)
-			default: // meters per second
-				return numerator
-			}
-		}
-
-		property VeQuickItem _speedUnits : VeQuickItem {
-			uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
-		}
-
-		objectName: "gpsSpeed"
-		numeratorUid: activeGpsUid ? activeGpsUid + "/Speed" : ""
-		denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
-		unit: VenusOS.Units_Speed_MetresPerSecond
-		onNumeratorChanged: console.log(objectName, "numerator:", numerator)
-		onDenominatorChanged: console.log(objectName, "denominator:", denominator)
-	}
-
-	property VeQuickItemsQuotient motorDriveRpm: VeQuickItemsQuotient {
-		objectName: "motorDriveRpm"
-		numeratorUid: _motorDrive ? _motorDrive.serviceUid + "/Motor/RPM" : ""
-		denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Motordrive/Rpm/Max" : ""
-		unit: VenusOS.Units_RevolutionsPerMinute
-	}
-
-	property VeQuickItemsQuotient motorDrivePower: VeQuickItemsQuotient {
-		objectName: "motorDrivePower"
-		numeratorUid: _motorDrive ? _motorDrive.serviceUid + "/Dc/0/Power" : ""
-		denominatorUid : Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Motordrive/DC/Power/Max" : ""
+	readonly property VeQuickItemsQuotient _systemDcLoad: VeQuickItemsQuotient {
+		objectName: "systemDcLoad"
+		numeratorUid: BackendConnection.serviceUidForType("system") + "/Dc/System/Power"
+		denominatorUid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
 		unit: VenusOS.Units_Watt
 	}
-
-	property VeQuickItemsQuotient motorDriveCurrent: VeQuickItemsQuotient {
-		objectName: "motorDriveCurrent"
-		numeratorUid: _motorDrive ? _motorDrive.serviceUid + "/Dc/0/Current" : ""
-		denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Motordrive/DC/Current/Max" : ""
-		unit: VenusOS.Units_Amp
-	}
-
-	readonly property VeQuickItemsQuotient _motorDriveDcConsumption: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
-																	? motorDriveCurrent
-																	: motorDrivePower
 
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
@@ -74,27 +27,6 @@ SwipeViewPage {
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-
-	VeQuickItem {
-		id: _motorDriveTemperatureDc0
-
-		uid: _motorDrive ? _motorDrive.serviceUid + "/Dc/0/Temperature" : ""
-	}
-
-	Instantiator { // There can be multiple GPSes, for v1 of boat page we just pick the first one we find and use that.
-		model: Global.allDevicesModel.gpsDevices
-		delegate: QtObject {
-			property var qi: VeQuickItem {
-				uid: modelData.serviceUid + "/Speed"
-				onValueChanged: {
-					if (!activeGpsUid && valid) {
-						console.log(modelData.serviceUid, "is now the active gps")
-						root.activeGpsUid = modelData.serviceUid
-					}
-				}
-			}
-		}
-	}
 
 	BoatPageComponents.Background { // the blue shadows
 		anchors.fill: parent
@@ -108,14 +40,14 @@ SwipeViewPage {
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		animationEnabled: root.animationEnabled
 	}
 
 	BoatPageComponents.TimeToGo { // top left
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_timeToGo_topMargin
-			left: parent.left
-			leftMargin: Theme.geometry_boatPage_timeToGo_leftMargin
+			bottom: batteryPercentage.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
+			left: batteryTemperature.left
 		}
 	}
 
@@ -130,181 +62,97 @@ SwipeViewPage {
 	}
 
 	QuantityLabel { // bottom left
-		readonly property var _battery: Global.system && Global.system.battery ? Global.system.battery : null
+		id: batteryTemperature
 
 		anchors {
 			top: batteryPercentage.bottom
-			topMargin: Theme.geometry_boatPage_batteryTemperature_topMargin
+			topMargin: Theme.geometry_boatPage_verticalMargin
 			left: parent.left
 			leftMargin: Theme.geometry_boatPage_batteryTemperature_leftMargin
 		}
 
-		font.pixelSize: Theme.geometry_boatPage_batteryTemperature_pixelSize
+		font.pixelSize: Theme.font_boatPage_batteryTemperature_pixelSize
 		unit: Global.systemSettings.temperatureUnit
 		value: _battery.temperature
 		visible: !isNaN(value)
 	}
 
-	BoatPageComponents.LargeCenterGauge {
+	/*
+		If there is GPS:
+
+			Show speed
+			Only show RPM, if there is a motordrive with valid RPM path and valid data
+
+		If there is no GPS but a Motordrive:
+
+			Show „Motordrive“ with the propeller icon
+			Only show temperatures, for which the paths exist and has valid data
+			Only show RPM gauge, if path exists and has valid data
+
+		If there is no GPS and no Motordrive:
+
+			Show „DC load“ with its „DC load“ icon
+			Show no temperature below
+			Show no RPM gauge
+	*/
+	BoatPageComponents.LargeCenterGauge { // vertical center, horizontal center
 		id: centerGauge
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_centerGauge_topMargin
-			horizontalCenter: parent.horizontalCenter
-		}
 
-		// Always show GPS speed in the center, unless it is unavailable. Then, we show motordrive or system dc consumption
-		dataSource: gpsSpeed.valid
-					? gpsSpeed
-					: _motorDriveDcConsumption
+		gps: _gps // primary data source
+		motorDrive: _motorDrive // secondary data source
+		systemDcLoad: _systemDcLoad // tertiary data source
+		animationEnabled: root.animationEnabled
 	}
 
-	ProgressArc {
-		id: rpmGauge
-
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_rpmGauge_topMargin
-			horizontalCenter: parent.horizontalCenter
-		}
-		rotation: centerGauge.rotation
-		width: Theme.geometry_boatPage_rpmGauge_width
-		height: width
-		radius: width/2
-		startAngle: centerGauge.startAngle
-		endAngle: centerGauge.endAngle
-		value: motorDriveRpm.percentage
-		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
-		animationEnabled: false
-		visible: centerGauge.dataSource === gpsSpeed
-	}
-
-	Label {
-		id: centerGaugeMinimumValue
-
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_rpmGauge_minmax_topMargin
-			left: centerGauge.left
-			leftMargin: Theme.geometry_boatPage_rpmGauge_minmax_leftMargin
-		}
-
-		verticalAlignment: Text.AlignVCenter
-		color: Theme.color_font_secondary
-		font.pixelSize: Theme.geometry_boatPage_rpm_min_max_pixelSize
-		text: "0"
-		visible: rpmGauge.visible
-	}
-
-	Label {
-		id: centerGaugeMaximumValue
-
-		anchors {
-			top: centerGaugeMinimumValue.top
-			right: centerGauge.right
-			rightMargin: Theme.geometry_boatPage_rpmGauge_minmax_rightMargin
-		}
-
-		color: Theme.color_font_secondary
-		font.pixelSize: Theme.geometry_boatPage_rpm_min_max_pixelSize
-		text: motorDriveRpm.denominator
-		visible: rpmGauge.visible
-	}
-
-	Label {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_speedLabel_topMargin
-			horizontalCenter: parent.horizontalCenter
-		}
-		verticalAlignment: Text.AlignVCenter
-		color: Theme.color_font_primary
-		font.pixelSize: Theme.geometry_boatPage_speed_pixelSize
-		font.weight: Font.Medium
-		visible: centerGauge.dataSource === gpsSpeed
-		text: Math.round(centerGauge.dataSource.numerator)
-	}
-
-	BoatPageComponents.MotorDriveGauges {
-		id: motorDriveColumn
-
+	Loader {
 		anchors {
 			verticalCenter: batteryGauge.verticalCenter
 			verticalCenterOffset: Theme.geometry_boatPage_motorDriveColumn_verticalCenterOffset
 			horizontalCenter: parent.horizontalCenter
 		}
-		visible: centerGauge.dataSource === _motorDriveDcConsumption
-		motorDriveDcConsumption: _motorDriveDcConsumption
-	}
+		sourceComponent: centerGauge.activeDataSource === _motorDrive.dcConsumption ||
+						 (centerGauge.activeDataSource === null && _motorDrive.rpm.valid)
+		? motorDriveColumn
+		: null
 
-	Label {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_speedUnitsLabel_topMargin
-			horizontalCenter: parent.horizontalCenter
+		Component {
+			id: motorDriveColumn
+
+			BoatPageComponents.MotorDriveGauges {
+				motorDrive: _motorDrive
+			}
 		}
-
-		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: Theme.font_size_body2
-		color: Theme.color_font_secondary
-		visible: centerGauge.dataSource === gpsSpeed
-		text: gpsSpeed.units
-	}
-
-	Label {
-		id: rpmLabel
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_rpmLabel_topMargin
-			horizontalCenter: parent.horizontalCenter
-		}
-		visible: !isNaN(motorDriveRpm.numerator) && centerGauge.dataSource === gpsSpeed
-		verticalAlignment: Text.AlignVCenter
-		topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
-		font.pixelSize: Theme.font_size_h1
-		text: Math.abs(motorDriveRpm.numerator)
-	}
-
-	Label {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_rpmText_topMargin
-			horizontalCenter: parent.horizontalCenter
-		}
-		visible: rpmLabel.visible
-		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: Theme.font_size_body2
-		color: Theme.color_font_secondary
-		//% "RPM"
-		text: qsTrId("boat_page_rpm")
 	}
 
 	BoatPageComponents.Gear { // top right
 		id: gear
 
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_gear_topMargin
-			right: parent.right
-			rightMargin: Theme.geometry_boatPage_gear_rightMargin
+			bottom: consumption.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
+			right: temperatureGauges.right
 		}
 	}
 
-	BoatPageComponents.DcConsumptionGauge { // vertical center right
+	BoatPageComponents.ConsumptionGauge { // vertical center right
+		id: consumption
+
 		anchors {
-			verticalCenter: batteryGauge.verticalCenter
-			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
+			verticalCenter: batteryPercentage.verticalCenter
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
 
-		motorDriveDcConsumption: _motorDriveDcConsumption
+		motorDriveDcConsumption: _motorDrive.dcConsumption
+		gps: _gps
 	}
 
 	BoatPageComponents.TemperatureGauges { // bottom right
+		id: temperatureGauges
+
 		anchors {
-			top: batteryPercentage.bottom
-			topMargin: Theme.geometry_boatPage_batteryTemperature_topMargin
+			top: consumption.bottom
+			topMargin: Theme.geometry_boatPage_verticalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_motorDrive_temperatures_rightMargin
 		}
@@ -324,12 +172,20 @@ SwipeViewPage {
 		endAngle: Theme.geometry_boatPage_batteryGauge_startAngle - 180
 		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
 		horizontalAlignment: Qt.AlignRight
-		animationEnabled: false
+		animationEnabled: root.animationEnabled
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-		value: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && !isNaN(motorDriveCurrent.percentage)
-			   ? motorDriveCurrent.percentage
-			   : !isNaN(motorDrivePower.percentage)
-				 ? motorDrivePower.percentage
+		value: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && !isNaN(_motorDrive.current.percentage)
+			   ? _motorDrive.current.percentage
+			   : !isNaN(_motorDrive.power.percentage)
+				 ? _motorDrive.power.percentage
 				 : 0
+	}
+
+	BoatPageComponents.MotorDrive {
+		id: _motorDrive
+	}
+
+	BoatPageComponents.Gps {
+		id: _gps
 	}
 }

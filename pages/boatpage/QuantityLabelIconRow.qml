@@ -4,30 +4,33 @@
 */
 
 import QtQuick
-import Victron.BoatPageComponents as BoatPageComponents
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
-import Victron.Gauges
+import QtQuick.Controls.impl as CP
 
 Row {
-	required property VeQuickItem dataItem
-	required property int unit
-	required property string iconSource
+	id: root
+
+	property alias value: label.value
+	property alias unit: label.unit
+	property alias icon: icon
+	property alias font: label.font
 
 	spacing: Theme.geometry_boatPage_row_spacing
-	visible: dataItem && dataItem.valid
 
 	QuantityLabel {
+		id: label
+
 		anchors.verticalCenter: parent.verticalCenter
 		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: Theme.font_boatPage_batteryTemperature_pixelSize
-		value: dataItem.value
-		unit: parent.unit
+		font.pixelSize: Theme.font_boatPage_batterySoc_pixelSize
 	}
 
 	CP.ColorImage {
+		id: icon
+
 		anchors.verticalCenter: parent.verticalCenter
+		width: Theme.geometry_boatPage_batteryGauge_iconWidth
+		height: width
 		color: Theme.color_boatPage_icon
-		source: parent.iconSource
 	}
 }

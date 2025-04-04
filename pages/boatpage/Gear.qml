@@ -9,6 +9,7 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Gauges
 
+// Only show the "F N R" if the /Motor/Direction path exists and has valid data
 Row {
 	id: root
 
@@ -16,6 +17,7 @@ Row {
 	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
 
 	spacing: Theme.geometry_boatPage_gearRow_spacing
+	visible: _direction.valid
 
 	VeQuickItem { //  0=neutral, 1=reverse, 2=forward (optional)
 		id: _direction
@@ -23,19 +25,18 @@ Row {
 		uid: _motorDrive ? _motorDrive.serviceUid + "/Motor/Direction" : ""
 	}
 
-	component GearIndicator : Label {
+	component GearIndicator : Item {
 		required property int gear
+		property alias text: gearLabel.text
 
-		color: direction === gear ? Theme.color_font_primary : Theme.color_font_secondary
-		font.pixelSize: Theme.geometry_boatPage_gear_pixelSize
-		width: Theme.geometry_boatPage_gearIndicator_width
-		height: width
-		horizontalAlignment: Text.AlignHCenter
+		width: Theme.geometry_boatPage_gearHighlighter_width
+		height: Theme.geometry_boatPage_gearHighlighter_height + Theme.geometry_boatPage_gear_verticalMargin + gearLabel.height
 
 		Rectangle {
+			id: highlighter
+
 			anchors {
-				bottom: parent.top
-				bottomMargin: Theme.geometry_boatPage_gearHighlighter_bottomMargin
+				top: parent.top
 				horizontalCenter: parent.horizontalCenter
 			}
 			radius: Theme.geometry_boatPage_gearHighlighter_radius
@@ -43,6 +44,19 @@ Row {
 			width: Theme.geometry_boatPage_gearHighlighter_width
 			color: Theme.color_boatPage_gearHighlighter
 			visible: direction === gear
+		}
+
+		Label {
+			id: gearLabel
+
+			anchors {
+				horizontalCenter: parent.horizontalCenter
+				bottom: parent.bottom
+			}
+			color: direction === parent.gear ? Theme.color_font_primary : Theme.color_font_secondary
+			font.pixelSize: Theme.font_boatPage_gear_pixelSize
+			width: Theme.geometry_boatPage_gearIndicator_width
+			horizontalAlignment: Text.AlignHCenter
 		}
 	}
 
