@@ -301,6 +301,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
+    components/controls/SpinBoxEditFrame.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TextField.qml
@@ -1167,6 +1168,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/settings.svg
         images/shore.svg
         images/solaryield.svg
+        images/spinbox_arrow_up.svg
         images/splash-logo-icon-5inch.svg
         images/splash-logo-icon-7inch.svg
         images/splash-logo-text-5inch.svg
