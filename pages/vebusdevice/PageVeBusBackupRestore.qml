@@ -153,14 +153,12 @@ Page {
 
 	ListModel {
 		id: _mergedBackupsModel
-
-		ListElement {display: ""}
-		ListElement {value: ""}
 	}
 
 	function updateMergedBackupsModel() {
 		// Add all available backup files, including the firmware version incompatible files
 		_mergedBackupsModel.clear()
+
 		for (var i = 0; i < _availableBackupsModel.count; i++) {
 			_mergedBackupsModel.append(_availableBackupsModel.get(i))
 		}
@@ -176,6 +174,7 @@ Page {
 			_availableBackupsModel.clear()
 			if ((value === undefined) || (value === "")) {
 				// no backups available
+				updateMergedBackupsModel()
 				return
 			}
 			let value_list
@@ -213,6 +212,7 @@ Page {
 			_incompatibleBackupsModel.clear()
 			if ((value === undefined) || (value === "")) {
 				// no backups available
+				updateMergedBackupsModel()
 				return
 			}
 			let value_list
