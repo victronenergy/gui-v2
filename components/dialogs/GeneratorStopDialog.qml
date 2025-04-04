@@ -36,7 +36,7 @@ GeneratorDialog {
 		root.generator.stop()
 	}
 
-	contentItem: Column {
+	contentItem: ModalDialog.FocusableContentItem {
 		anchors {
 			top: root.header.bottom
 			topMargin: Theme.geometry_modalDialog_content_margins
@@ -44,9 +44,10 @@ GeneratorDialog {
 			right: parent.right
 			bottom: parent.footer.top
 		}
-		spacing: Theme.geometry_modalDialog_content_margins
+		height: contentColumn.height
 
 		Column {
+			id: contentColumn
 			width: parent.width
 
 			Label {
@@ -82,7 +83,9 @@ GeneratorDialog {
 		}
 
 		Label {
+			anchors.top: contentColumn.bottom
 			width: parent.width
+			topPadding: Theme.geometry_modalDialog_content_margins
 			wrapMode: Text.Wrap
 			color: Theme.color_font_primary
 			horizontalAlignment: Text.AlignHCenter
