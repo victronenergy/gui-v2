@@ -14,7 +14,8 @@ ListModel {
 	ListElement { display: QT_TR_NOOP("Montevideo Standard Time"); city: "Montevideo"; caption: "(GMT -03:00) Montevideo" }
 	ListElement { display: QT_TR_NOOP("Newfoundland Standard Time"); city: "St_Johns"; caption: "(GMT -03:30) Newfoundland" }
 	ListElement { display: QT_TR_NOOP("SA Eastern Standard Time"); city: "Cayenne"; caption: "(GMT -03:00) Cayenne, Fortaleza" }
-	ListElement { display: QT_TR_NOOP("Atlantic Standard Time"); city: "Halifax"; caption: "(GMT -04:00) Atlantic Time (Canada)" }
+	ListElement { display: QT_TR_NOOP("Atlantic Daylight Time"); city: "Halifax"; caption: "(GMT -03:00) Atlantic Daylight Time (Canada)"}
+	ListElement { display: QT_TR_NOOP("Atlantic Standard Time"); city: "Lower_Princes"; caption: "(GMT -04:00) Atlantic Time"}
 	ListElement { display: QT_TR_NOOP("Central Brazilian Standard Time"); city: "Cuiaba"; caption: "(GMT -04:00) Cuiaba" }
 	ListElement { display: QT_TR_NOOP("Pacific SA Standard Time"); city: "Santiago"; caption: "(GMT -04:00) Santiago" }
 	ListElement { display: QT_TR_NOOP("Paraguay Standard Time"); city: "Asuncion"; caption: "(GMT -04:00) Asuncion" }
