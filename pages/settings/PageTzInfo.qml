@@ -271,7 +271,7 @@ Page {
 	}
 	TzEtcData {
 		id: tzEtc
-		//% "Etc"
+		//% "Other"
 		readonly property string name: qsTrId("settings_tz_etc")
 		readonly property string region: "Etc"
 	}
