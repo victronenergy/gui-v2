@@ -18,7 +18,7 @@ ModalDialog {
 	//% "Set time"
 	title: qsTrId("timeselectordialog_set_time")
 
-	contentItem: Item {
+	contentItem: ModalDialog.FocusableContentItem {
 		TimeSelector {
 			id: timeSelector
 
@@ -26,6 +26,9 @@ ModalDialog {
 				centerIn: parent
 				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 			}
+			focus: true
+			KeyNavigation.up: timeSelector
+			KeyNavigation.down: root.footer
 		}
 	}
 }

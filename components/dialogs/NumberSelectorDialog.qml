@@ -26,7 +26,6 @@ ModalDialog {
 	}
 
 	onAboutToShow: {
-
 		if (presets.length) {
 			let presetsIndex = -1
 			for (let i = 0; i < presets.length; ++i) {
@@ -39,7 +38,7 @@ ModalDialog {
 		}
 	}
 
-	contentItem: Item {
+	contentItem: ModalDialog.FocusableContentItem {
 		Column {
 			anchors {
 				verticalCenter: parent.verticalCenter
@@ -76,9 +75,17 @@ ModalDialog {
 				stepSize: root.stepSize * root._multiplier()
 				suffix: root.suffix
 
+				// Use BeforeItem priority to override the default key Spinbox event handling, else
+				// up/down keys will modify the number even when SpinBox is not in "edit" mode.
+				focus: true
+				KeyNavigation.priority: KeyNavigation.BeforeItem
+				KeyNavigation.up: spinBox
+				KeyNavigation.down: presetsRow.enabled ? presetsRow : root.footer
+
 				onValueChanged: {
 					if (_initialized) {
 						root.value = Number(spinBox.value / root._multiplier())
+						presetsRow.currentIndex = -1
 					}
 				}
 
@@ -97,10 +104,12 @@ ModalDialog {
 				anchors.horizontalCenter: parent.horizontalCenter
 				model: root.presets
 				visible: model.length > 0
+				enabled: visible
 				onButtonClicked: function (buttonIndex) {
-					currentIndex = buttonIndex
 					spinBox.value = model[buttonIndex].value * root._multiplier()
 				}
+
+				KeyNavigation.down: root.footer
 			}
 		}
 	}
