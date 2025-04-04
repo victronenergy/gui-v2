@@ -14,7 +14,7 @@ ModalDialog {
 	//% "Minimum SOC"
 	title: qsTrId("ess_card_minimum_soc")
 
-	contentItem: Item {
+	contentItem: ModalDialog.FocusableContentItem {
 		Column {
 			width: parent.width
 
@@ -43,7 +43,20 @@ ModalDialog {
 				value: root.minimumStateOfCharge
 				from: 0
 				to: 100
+				stepSize: 1
+				focus: true
 				onMoved: root.minimumStateOfCharge = value
+
+				KeyNavigationHighlight {
+					anchors {
+						fill: parent
+						leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+						rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+						topMargin: -Theme.geometry_listItem_content_verticalMargin
+						bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+					}
+					active: parent.activeFocus
+				}
 			}
 
 			Item {
