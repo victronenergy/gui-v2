@@ -5,17 +5,20 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Gauges
 import QtQuick.Controls.impl as CP
 
 Rectangle {
 	id: root
 
-	property alias header: header
-	property alias icon: img.source
+	property int fluidType
+	property string name
 	property real level
 	property alias gauge: loader.sourceComponent
 	property real totalCapacity
 	property real totalRemaining
+
+	readonly property var tankProperties: Gauges.tankProperties(fluidType)
 
 	color: Theme.color_levelsPage_gauge_backgroundColor
 	radius: Theme.geometry_levelsPage_panel_radius
@@ -25,6 +28,8 @@ Rectangle {
 	GaugeHeader {
 		id: header
 		textColor: Theme.color_levelsPage_tank_title
+		text: root.name || root.tankProperties.name
+		color: tankProperties.color
 	}
 
 	CP.ColorImage {
@@ -35,6 +40,7 @@ Rectangle {
 			horizontalCenter: parent.horizontalCenter
 		}
 		color: Theme.color_levelsPage_tankIcon
+		source: root.tankProperties.icon
 	}
 
 	Loader {
@@ -44,7 +50,15 @@ Rectangle {
 			topMargin: Theme.geometry_levelsPage_panel_spacing
 			bottom: percentageText.top
 			bottomMargin: Theme.geometry_levelsPage_subgauges_bottomMargin
-			horizontalCenter: parent.horizontalCenter
+			left: parent.left
+			leftMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
+			right: parent.right
+			rightMargin: Theme.geometry_levelsPage_subgauges_horizontalMargin
+		}
+		onStatusChanged: {
+			if (status === Loader.Error) {
+				console.warn("Unable to load tank levels gauge:", errorString())
+			}
 		}
 	}
 

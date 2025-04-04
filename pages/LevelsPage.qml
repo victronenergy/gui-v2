@@ -82,7 +82,7 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 
 		Behavior on x {
-			enabled: root.isCurrentPage && tanksTab.animateModelChanges
+			enabled: root.isCurrentPage
 			NumberAnimation { duration: Theme.animation_levelsPage_tanks_modelChangeResize_duration; easing.type: Easing.InOutQuad }
 		}
 		Behavior on anchors.topMargin {
