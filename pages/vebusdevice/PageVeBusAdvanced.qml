@@ -217,7 +217,20 @@ Page {
 								//% "Press to restart"
 							 : qsTrId("vebus_device_press_to_restart")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: systemReset.setValue(1)
+				onClicked: Global.dialogLayer.open(restartVEBusComponent)
+
+				Component {
+					id: restartVEBusComponent
+
+					ModalWarningDialog {
+						//% "Are you sure?"
+						title: qsTrId("vebus_device_restart_vebus_system_restart_confirmation_title")
+						//% "Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs."
+						description: qsTrId("vebus_device_restart_vebus_system_restart_confirmation_description")
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						onAccepted: systemReset.setValue(1)
+					}
+				}
 			}
 
 			ListText {
