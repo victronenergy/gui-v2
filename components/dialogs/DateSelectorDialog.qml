@@ -16,7 +16,7 @@ ModalDialog {
 	//% "Set date"
 	title: qsTrId("dateselectordialog_set_date")
 
-	contentItem: Item {
+	contentItem: ModalDialog.FocusableContentItem {
 		DateSelector {
 			id: dateSelector
 
@@ -25,6 +25,9 @@ ModalDialog {
 				centerIn: parent
 				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 			}
+			focus: true
+			KeyNavigation.up: dateSelector
+			KeyNavigation.down: root.footer
 		}
 	}
 }

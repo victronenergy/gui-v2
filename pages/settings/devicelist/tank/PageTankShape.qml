@@ -132,7 +132,7 @@ Page {
 			//% "Add point"
 			title: qsTrId("devicelist_tankshape_add_point")
 
-			contentItem: Item {
+			contentItem: ModalDialog.FocusableContentItem {
 				Row {
 					id: spinBoxRow
 
@@ -160,10 +160,19 @@ Page {
 							id: sensorLevelSpinBox
 							width: Theme.geometry_tankShapeSelector_spinBox_width
 							height: Theme.geometry_tankShapeSelector_spinBox_height
+							spacing: Theme.geometry_spinBox_wide_spacing
 							from: 1
 							to: 99
 							textFromValue: function(value, locale) { return value + "%" }
 							onValueModified: errorLabel.text = ""
+
+							// Use BeforeItem priority to override the default key Spinbox event handling, else
+							// up/down keys will modify the number even when SpinBox is not in "edit" mode.
+							focus: true
+							KeyNavigation.priority: KeyNavigation.BeforeItem
+							KeyNavigation.up: sensorLevelSpinBox
+							KeyNavigation.down: root.footer
+							KeyNavigation.right: volumeSpinBox
 						}
 					}
 
@@ -183,12 +192,19 @@ Page {
 
 						SpinBox {
 							id: volumeSpinBox
+
 							width: Theme.geometry_tankShapeSelector_spinBox_width
 							height: Theme.geometry_tankShapeSelector_spinBox_height
+							spacing: Theme.geometry_spinBox_wide_spacing
 							from: 1
 							to: 99
 							textFromValue: function(value, locale) { return value + "%" }
 							onValueModified: errorLabel.text = ""
+
+							KeyNavigation.priority: KeyNavigation.BeforeItem
+							KeyNavigation.up: volumeSpinBox
+							KeyNavigation.down: root.footer
+							KeyNavigation.left: sensorLevelSpinBox
 						}
 					}
 				}

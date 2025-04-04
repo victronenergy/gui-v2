@@ -25,7 +25,7 @@ GeneratorDialog {
 		root.generator.start(timedRunSwitch.checked ? Utils.composeDuration(timeSelector.hour, timeSelector.minute) : 0)
 	}
 
-	contentItem: Column {
+	contentItem: ModalDialog.FocusableContentItem {
 		anchors {
 			top: root.header.bottom
 			topMargin: Theme.geometry_modalDialog_content_margins
@@ -33,42 +33,53 @@ GeneratorDialog {
 			right: parent.right
 			bottom: parent.footer.top
 		}
-		spacing: Theme.geometry_modalDialog_content_margins
+		height: contentColumn.height
 
-		Switch {
-			id: timedRunSwitch
+		Column {
+			id: contentColumn
+			width: parent.width
+			spacing: Theme.geometry_modalDialog_content_margins
 
-			anchors {
-				left: timeSelector.left
-				right: timeSelector.right
+			Switch {
+				id: timedRunSwitch
+
+				anchors {
+					left: timeSelector.left
+					right: timeSelector.right
+				}
+				//% "Timed run"
+				text: qsTrId("controlcard_generator_startdialog_timed_run")
+				checked: root.generator.manualStartTimer > 0
+				checkable: true
+				focus: true
+
+				KeyNavigation.down: timeSelector
 			}
-			//% "Timed run"
-			text: qsTrId("controlcard_generator_startdialog_timed_run")
-			checked: root.generator.manualStartTimer > 0
-			checkable: true
-		}
 
-		TimeSelector {
-			id: timeSelector
+			TimeSelector {
+				id: timeSelector
 
-			anchors.horizontalCenter: parent.horizontalCenter
-			enabled: timedRunSwitch.checked
-			maximumHour: 59
-		}
+				anchors.horizontalCenter: parent.horizontalCenter
+				enabled: timedRunSwitch.checked
+				maximumHour: 59
 
-		Label {
-			anchors {
-				left: timeSelector.left
-				right: timeSelector.right
+				KeyNavigation.down: root.footer
 			}
-			wrapMode: Text.Wrap
-			color: Theme.color_font_primary
-			horizontalAlignment: Text.AlignHCenter
-			text: timedRunSwitch.checked && (timeSelector.hour || timeSelector.minute)
-				  ? //% "Generator will stop in %1 unless autostart conditions are enabled that keep it running."
-					qsTrId("generator_start_dialog_will_stop_in_x").arg(Utils.formatHoursMinutes(timeSelector.hour, timeSelector.minute))
-				  : //% "Generator will run until manually stopped, unless autostart conditions are enabled that keep it running."
-					qsTrId("generator_start_dialog_will_run_until_manually_stopped")
+
+			Label {
+				anchors {
+					left: timeSelector.left
+					right: timeSelector.right
+				}
+				wrapMode: Text.Wrap
+				color: Theme.color_font_primary
+				horizontalAlignment: Text.AlignHCenter
+				text: timedRunSwitch.checked && (timeSelector.hour || timeSelector.minute)
+					  ? //% "Generator will stop in %1 unless autostart conditions are enabled that keep it running."
+						qsTrId("generator_start_dialog_will_stop_in_x").arg(Utils.formatHoursMinutes(timeSelector.hour, timeSelector.minute))
+					  : //% "Generator will run until manually stopped, unless autostart conditions are enabled that keep it running."
+						qsTrId("generator_start_dialog_will_run_until_manually_stopped")
+			}
 		}
 	}
 

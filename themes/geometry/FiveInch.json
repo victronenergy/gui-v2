@@ -21,6 +21,7 @@
     "geometry_button_border_width": 2,
 
     "geometry_focus_highlight_corner_size": 14,
+    "geometry_focus_highlight_border_size": 4,
 
     "geometry_silenceAlarmButton_horizontalPadding": 16,
 
@@ -95,7 +96,8 @@
 
     "geometry_timeSelector_spinBox_width": 238,
     "geometry_timeSelector_spinBox_height": 72,
-    "geometry_timeSelector_spacing": 16,
+    "geometry_spinBox_wide_spacing": 10,
+    "geometry_timeSelector_horizontalMargin": 16,
     "geometry_tankShapeSelector_spinBox_width": 262,
     "geometry_tankShapeSelector_spinBox_height": 72,
 
