@@ -17,6 +17,10 @@ ModalDialog {
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
 
+	// Since there are no focusable UI controls in the contentItem, give the initial focus to the
+	// footer.
+	footer.focus: true
+
 	contentItem: Item {
 		anchors {
 			top: parent.top
