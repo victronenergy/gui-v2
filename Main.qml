@@ -103,7 +103,10 @@ Window {
 	Loader {
 		id: guiLoader
 
-		focus: Global.keyNavigationEnabled
+		// If a dialog is opened when key navigation is not enabled, disable focus so that key
+		// events key events do not result in the focus item changing in the main UI.
+		focus: Global.keyNavigationEnabled && !Global.dialogLayer?.currentDialog
+
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
