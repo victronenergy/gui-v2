@@ -139,6 +139,7 @@ public:
 	Q_INVOKABLE QString serviceUidForType(const QString &serviceType) const;
 	Q_INVOKABLE QString serviceTypeFromUid(const QString &uid) const;
 	Q_INVOKABLE QString serviceUidFromName(const QString &serviceName, int deviceInstance) const;
+	Q_INVOKABLE QString serviceUidFromUid(const QString &fullUid) const;
 	Q_INVOKABLE QString uidPrefix() const;
 
 	// A portable service id has the format "com.victronenergy.<serviceType>/<deviceInstance"

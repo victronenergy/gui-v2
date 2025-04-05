@@ -13,8 +13,8 @@ Rectangle {
 	property alias title: title
 	property alias status: status
 
-	width: Theme.geometry_controlCard_maximumWidth
-	height: parent ? parent.height : 0
+	implicitWidth: Theme.geometry_controlCard_maximumWidth
+	implicitHeight: parent ? parent.height : 0
 	color: Theme.color_background_secondary
 	radius: Theme.geometry_panel_radius
 

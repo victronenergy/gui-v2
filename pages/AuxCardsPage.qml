@@ -17,6 +17,7 @@ Page {
 	}
 
 	BaseListView {
+		id: cardsView
 		anchors {
 			fill: parent
 			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
@@ -24,5 +25,10 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
+		model: Global.switches.groups
+		delegate: SwitchableOutputGroupCard {
+			height: cardsView.height
+		}
 	}
+
 }
