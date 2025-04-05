@@ -72,14 +72,17 @@ FocusScope {
 				id: navButton
 
 				readonly property var _modelData: root.model.get(index)
-				height: root.height
+				anchors.verticalCenter: parent.verticalCenter
 				width: Theme.geometry_navigationBar_button_width
+				height: Theme.geometry_navigationBar_button_height
 				text: _modelData.navButtonText
 				icon.source: _modelData.navButtonIcon
 				checked: root.currentIndex === model.index
-				enabled: root.currentIndex !== model.index
 				backgroundColor: "transparent"
+				focus: model.index === root.currentIndex
 				onClicked: root._currentIndex = model.index
+
+				KeyNavigation.right: buttonRepeater.itemAt((model.index + 1) % buttonRepeater.count)
 
 				Loader {
 					z: 1 // to get it on top of the IconLabel

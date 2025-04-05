@@ -14,7 +14,7 @@ Page {
 
 		model: Global.allDevicesModel
 
-		delegate: Loader {
+		delegate: BaseListLoader {
 			id: delegateLoader
 
 			required property bool connected

@@ -106,4 +106,15 @@ T.Slider {
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 	}
+
+	KeyNavigationHighlight {
+		anchors {
+			fill: parent
+			leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+			rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+			topMargin: -Theme.geometry_listItem_content_verticalMargin
+			bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+		}
+		active: root.activeFocus
+	}
 }

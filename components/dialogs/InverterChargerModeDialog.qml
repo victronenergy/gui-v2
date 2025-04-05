@@ -30,42 +30,50 @@ ModalDialog {
 		   ? qsTrId("controlcard_inverter_mode")
 			 //% "Inverter / Charger mode"
 		   : qsTrId("controlcard_inverter_charger_mode")
+
 	height: header.height + contentHeight + footer.height
 
-	contentItem: Column {
+	contentItem: ModalDialog.FocusableContentItem {
 		anchors {
-			top: parent.top
+			top: root.title.bottom
 			left: parent.left
 			right: parent.right
-			margins: Theme.geometry_modalDialog_content_horizontalMargin
+			leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
+			rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 		}
+		height: contentColumn.height
 
-		Repeater {
-			id: repeater
-
-			// Options for inverter services
-			readonly property var inverterModel: [
-				{ value: VenusOS.Inverter_Mode_On },
-				{ value: VenusOS.Inverter_Mode_Eco },
-				{ value: VenusOS.Inverter_Mode_Off },
-			]
-
-			// Options for vebus and acsystem services
-			readonly property var inverterChargerModel: [
-				{ value: VenusOS.InverterCharger_Mode_On },
-				{ value: VenusOS.InverterCharger_Mode_ChargerOnly, visible: isMulti },
-				{ value: VenusOS.InverterCharger_Mode_InverterOnly, visible: isMulti },
-				{ value: VenusOS.InverterCharger_Mode_Off },
-				{
-					value: VenusOS.InverterCharger_Mode_Passthrough,
-					visible: root.serviceType === "acsystem",
-					enabled: hasAcPassthroughSupport.value === 1,
-				}
-			]
-
+		SettingsColumn {
+			id: contentColumn
 			width: parent.width
-			model: root.showInverterModesOnly ? inverterModel : inverterChargerModel
-			delegate: buttonStyling
+
+			Repeater {
+				id: repeater
+
+				// Options for inverter services
+				readonly property var inverterModel: [
+					{ value: VenusOS.Inverter_Mode_On },
+					{ value: VenusOS.Inverter_Mode_Eco },
+					{ value: VenusOS.Inverter_Mode_Off },
+				]
+
+				// Options for vebus and acsystem services
+				readonly property var inverterChargerModel: [
+					{ value: VenusOS.InverterCharger_Mode_On },
+					{ value: VenusOS.InverterCharger_Mode_ChargerOnly, visible: isMulti },
+					{ value: VenusOS.InverterCharger_Mode_InverterOnly, visible: isMulti },
+					{ value: VenusOS.InverterCharger_Mode_Off },
+					{
+						value: VenusOS.InverterCharger_Mode_Passthrough,
+						visible: root.serviceType === "acsystem",
+						enabled: hasAcPassthroughSupport.value === 1,
+					}
+				]
+
+				width: parent.width
+				model: root.showInverterModesOnly ? inverterModel : inverterChargerModel
+				delegate: buttonStyling
+			}
 		}
 	}
 
@@ -87,7 +95,7 @@ ModalDialog {
 	Component {
 		id: buttonStyling
 
-		Column {
+		SettingsColumn {
 			width: parent.width
 
 			ListRadioButton {
@@ -101,7 +109,10 @@ ModalDialog {
 				onClicked: root.mode = modelData.value
 			}
 
-			SeparatorBar { visible: model.index !== repeater.count - 1 }
+			SeparatorBar {
+				width: parent.width
+				visible: model.index !== repeater.count - 1
+			}
 		}
 	}
 }

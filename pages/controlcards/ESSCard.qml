@@ -14,7 +14,7 @@ ControlCard {
 	icon.source: "qrc:/images/ess.svg"
 	title.text: CommonWords.ess
 
-	Column {
+	SettingsColumn {
 		anchors {
 			top: root.title.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
@@ -30,7 +30,7 @@ ControlCard {
 
 			width: parent.width
 			model: Global.ess.stateModel
-			delegate: Column {
+			delegate: SettingsColumn {
 				width: parent.width
 
 				ListRadioButton {

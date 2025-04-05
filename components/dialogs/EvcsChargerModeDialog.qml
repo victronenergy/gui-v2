@@ -15,29 +15,38 @@ ModalDialog {
 
 	title: CommonWords.mode
 
-	contentItem: Column {
-
+	contentItem: ModalDialog.FocusableContentItem {
 		anchors {
-			top: parent.top
+			top: root.title.bottom
 			left: parent.left
 			right: parent.right
-			margins: Theme.geometry_modalDialog_content_horizontalMargin
+			leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
+			rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 		}
+		height: contentColumn.height
 
-		Repeater {
-			id: repeater
-			model: Global.evChargers.modeOptionModel
-			delegate: Column {
-				width: parent.width
+		SettingsColumn {
+			id: contentColumn
+			anchors.fill: parent
 
-				ListRadioButton {
-					flat: true
-					checked: modelData.value === root.mode
-					text: modelData.display
-					onClicked: root.mode = modelData.value
+			Repeater {
+				id: repeater
+				model: Global.evChargers.modeOptionModel
+				delegate: SettingsColumn {
+					width: parent.width
+
+					ListRadioButton {
+						flat: true
+						checked: modelData.value === root.mode
+						text: modelData.display
+						onClicked: root.mode = modelData.value
+					}
+
+					SeparatorBar {
+						width: parent.width
+						visible: model.index !== repeater.count - 1
+					}
 				}
-
-				SeparatorBar { visible: model.index !== repeater.count - 1 }
 			}
 		}
 	}

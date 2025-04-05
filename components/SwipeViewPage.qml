@@ -28,4 +28,5 @@ Page {
 			 ((view && view.moving && Global.mainView.swipeView)
 			 ? Global.mainView.swipeView.pageInView(x, width, Theme.geometry_page_content_horizontalMargin)
 			 : SwipeView.isCurrentItem) // 'SwipeView.isCurrentItem' correctly returns false for the Settings page on Startup.
+
 }

@@ -21,6 +21,20 @@ Item {
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
 
+	Keys.onSpacePressed: {
+		if (buttonRepeater.count > 0) {
+			if (currentIndex < 0) {
+				currentIndex = 0
+			}
+			buttonRepeater.itemAt(currentIndex).focus = true
+		}
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: buttonRow
+		active: parent.activeFocus
+	}
+
 	C.ButtonGroup {
 		buttons: root.children
 	}
@@ -58,6 +72,11 @@ Item {
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
+
+					KeyNavigationHighlight {
+						anchors.fill: parent
+						active: mouseArea.activeFocus
+					}
 				}
 				contentItem: Label {
 					anchors.centerIn: mouseArea
@@ -74,6 +93,9 @@ Item {
 							  ? Theme.color_button_down_text
 							  : Theme.color_font_primary)
 				}
+
+				KeyNavigation.right: buttonRepeater.itemAt((model.index + 1) % buttonRepeater.count)
+
 				onClicked: {
 					root.buttonClicked(model.index)
 					root.currentIndex = model.index

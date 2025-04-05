@@ -8,12 +8,19 @@ import QtQuick.Window
 import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property alias mainView: mainView
 
 	property var _inputComponent
+
+	function _ensureApplicationActive() {
+		Global.applicationActive = true
+		appIdleTimer.restart()
+	}
+
+	focus: true
 
 	PageManager {
 		id: pageManager
@@ -24,6 +31,7 @@ Item {
 		id: mainView
 		anchors.fill: parent
 		pageManager: pageManager
+		focus: true
 		Component.onCompleted: Global.mainView = mainView
 	}
 
@@ -74,8 +82,7 @@ Item {
 		anchors.fill: parent
 
 		onPressed: function(mouse) {
-			Global.applicationActive = true
-			appIdleTimer.restart()
+			root._ensureApplicationActive()
 
 			if (Global.isGxDevice && !touchEnabled.value) {
 				//% "Touch input disabled"
@@ -86,13 +93,14 @@ Item {
 
 			// block touch during navigation bar fadeout
 			mouse.accepted = mainView.navBarAnimatingOut
-			if (pageManager.idleModeTimer.running) {
-				pageManager.idleModeTimer.restart()
-			}
-			if (pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle) {
+
+			// Exit idle mode if needed, and consume the event so that this does not trigger a press
+			// event on the page in the process of exiting idle mode.
+			if (pageManager.ensureInteractive()) {
 				mouse.accepted = true
-				pageManager.interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
 			}
+
+			// Consume the event if the press event closes the VKB.
 			if (keyboardHandlerLoader.item && keyboardHandlerLoader.item.acceptMouseEvent(idleModeMouseArea, mouse.x, mouse.y)) {
 				mouse.accepted = true
 			}
@@ -159,5 +167,19 @@ Item {
 		repeat: true
 		interval: 1000
 		onTriggered: BackendConnection.hitWatchdog()
+	}
+
+	KeyEventFilter {
+		// When the UI is inactive, consume key events so that they are not processed by the UI.
+		consumeKeyEvents: !Global.applicationActive
+			|| (pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
+				&& pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
+		window: root.Window.window
+
+		onKeyPressed: (key) => {
+			// When any key is pressed, bring the application out of inactive mode.
+			root._ensureApplicationActive()
+			pageManager.ensureInteractive()
+		}
 	}
 }
