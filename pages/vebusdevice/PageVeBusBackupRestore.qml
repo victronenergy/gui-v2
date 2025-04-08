@@ -336,7 +336,7 @@ Page {
 					//% "Press to backup"
 					(_backupRestoreAction.value !== 1)? qsTrId("vebus_device_press_to_backup")
 					//% "Backing up..."
-					: qsTrId("backing_up") + (_backupRestoreInfo.isValid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					: qsTrId("backing_up") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
 				enabled: _backupRestoreAction.value === 0
 				preferredVisible: !_backupNameInput.preferredVisible
@@ -374,7 +374,7 @@ Page {
 					//% "Press to restore"
 					(_backupRestoreAction.value !== 2)? (qsTrId("vebus_device_press_to_restore"))
 					//% "Restoring..."
-					: qsTrId("restoring") + (_backupRestoreInfo.isValid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					: qsTrId("restoring") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
 				enabled: _backupRestoreAction.value === 0
 				preferredVisible: !_restoreOptionsList.preferredVisible
@@ -409,7 +409,7 @@ Page {
 					//% "Press to delete"
 					(_backupRestoreAction.value !== 3)? (qsTrId("vebus_device_press_to_delete"))
 					//% "Deleting..."
-					: qsTrId("deleting") + (_backupRestoreInfo.isValid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					: qsTrId("deleting") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
 				enabled: _backupRestoreAction.value === 0
 				preferredVisible: !_deleteOptionsList.preferredVisible
