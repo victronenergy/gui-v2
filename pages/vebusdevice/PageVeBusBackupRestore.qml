@@ -316,11 +316,13 @@ Page {
 				placeholderText: qsTrId("enter_backup_name")
 				onAccepted: {
 					if (secondaryText !== "") {
-						// check for spaces in the name
-						if (secondaryText.indexOf(" ") !== -1) {
-							//% "Backup name cannot contain spaces"
-							Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("backup_name_no_spaces"), 10000)
-						}else{
+						// check for invalid characters in the name
+						// [\w\-\.]: allows word characters (a-z, A-Z, 0-9, and _), dash -, and dot .
+						var valid = /^[\w\-\.]+$/.test(secondaryText);
+						if (!valid) {
+							//% "Invalid file name. Avoid using special characters"
+							Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("backup_name_invalid"), 10000)
+						}else {
 							_backupNameInput.preferredVisible = false
 						}
 					}
