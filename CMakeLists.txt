@@ -1249,7 +1249,10 @@ add_custom_target(${PROJECT_NAME}_lupdate_sleep
     DEPENDS ${PROJECT_NAME}_lupdate
     COMMENT "Waiting for lupdate artifacts to sync to disk"
 )
-add_dependencies(${PROJECT_NAME}_lrelease ${PROJECT_NAME}_lupdate_sleep)
+# Check if lrelease target exists before adding dependency
+if(TARGET ${PROJECT_NAME}_lrelease)
+    add_dependencies(${PROJECT_NAME}_lrelease ${PROJECT_NAME}_lupdate_sleep)
+endif()
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
