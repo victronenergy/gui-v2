@@ -51,16 +51,6 @@ Page {
 	}
 
 	VeQuickItem {
-		id: lowBatteryAlarm
-		uid: root.bindPrefix + "/Alarms/LowVoltage"
-	}
-
-	VeQuickItem {
-		id: highBatteryAlarm
-		uid: root.bindPrefix + "/Alarms/HighVoltage"
-	}
-
-	VeQuickItem {
 		id: highTemperatureAlarm
 		uid: root.bindPrefix + "/Alarms/HighTemperature"
 	}
@@ -273,9 +263,7 @@ Page {
 
 		ListNavigation {
 			text: CommonWords.alarm_status
-			preferredVisible: lowBatteryAlarm.valid
-							  || highBatteryAlarm.valid
-							  || highTemperatureAlarm.valid
+			preferredVisible: highTemperatureAlarm.valid
 							  || shortCircuitAlarm.valid
 			onClicked: {
 				Global.pageManager.pushPage(alarmStatusComponent, { "title": text })
@@ -337,10 +325,6 @@ Page {
 		Page {
 			GradientListView {
 				model: [
-					//% "Low battery voltage alarm"
-					{ display: qsTrId("charger_alarms_low_battery_voltage_alarm"), path: lowBatteryAlarm.uid },
-					//% "High battery voltage alarm"
-					{ display: qsTrId("charger_alarms_high_battery_voltage_alarm"), path: highBatteryAlarm.uid },
 					//% "High temperature alarm"
 					{ display: qsTrId("charger_alarms_high_temperature_alarm"), path: highTemperatureAlarm.uid },
 					//% "Short circuit alarm"
@@ -348,7 +332,7 @@ Page {
 				]
 				delegate: ListAlarm {
 					text: modelData.display
-					dataItem.uid: root.bindPrefix + modelData.path
+					dataItem.uid: modelData.path
 					preferredVisible: dataItem.valid
 				}
 			}
