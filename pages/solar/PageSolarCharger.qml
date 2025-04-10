@@ -348,7 +348,7 @@ Page {
 				]
 				delegate: ListAlarm {
 					text: modelData.display
-					dataItem.uid: root.bindPrefix + modelData.path
+					dataItem.uid: modelData.path
 					preferredVisible: dataItem.valid
 				}
 			}
