@@ -10,6 +10,7 @@
 #include <QAbstractListModel>
 
 #include "basedevicemodel.h"
+#include "basedevice.h"
 
 namespace Victron {
 
