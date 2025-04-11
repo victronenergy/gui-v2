@@ -107,6 +107,11 @@ Item {
 	Tanks {}
 	VenusPlatform {}
 
+	AllDevicesModel {
+		id: allDevicesModel
+		Component.onCompleted: Global.allDevicesModel = allDevicesModel
+	}
+
 	Loader {
 		id: dataManagerLoader
 
