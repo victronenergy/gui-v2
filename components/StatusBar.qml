@@ -52,8 +52,8 @@ FocusScope {
 
 	component StatusBarButton : Button {
 		radius: 0
-		width: parent.height
-		height: parent.height
+		width: Theme.geometry_statusBar_button_height
+		height: Theme.geometry_statusBar_button_height
 		backgroundColor: "transparent"  // don't show background when disabled
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
@@ -98,8 +98,19 @@ FocusScope {
 			: root.leftButton === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
 			: ""
 		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
+		focus: enabled
 
 		onClicked: root.leftButtonClicked()
+
+		KeyNavigation.right: auxButton
+
+		Keys.onRightPressed: (event) => {
+			if (!auxButton.enabled) {
+				// Focus the left-most visible breadcrumb, rather than the last (right-most) breadcrumb.
+				breadcrumbs.setCurrentIndexToFirstVisible()
+			}
+			event.accepted = false
+		}
 	}
 
 	StatusBarButton {
@@ -112,10 +123,9 @@ FocusScope {
 		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
 		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
 
-		PressArea {
-			anchors.fill: parent
-			onClicked: root.auxButtonClicked()
-		}
+		onClicked: root.auxButtonClicked()
+
+		KeyNavigation.right: breadcrumbs
 	}
 
 
@@ -155,6 +165,14 @@ FocusScope {
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 		}
+
+		onActiveFocusChanged: {
+			if (activeFocus && !visible) {
+				// Breadcrumbs are no longer visible, so focus the left button instead.
+				KeyNavigation.left.focus = true
+			}
+		}
+		KeyNavigation.right: alarmButton
 	}
 
 	Label {
@@ -272,10 +290,13 @@ FocusScope {
 							   ? "qrc:/images/icon_refresh_32.svg"
 							   : ""
 
+			KeyNavigation.left: alarmButton
+			KeyNavigation.right: sleepButton
 			onClicked: root.rightButtonClicked()
 		}
 
 		StatusBarButton {
+			id: sleepButton
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
 			enabled: !!Global.pageManager

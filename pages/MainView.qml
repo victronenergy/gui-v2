@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
@@ -42,6 +42,10 @@ Item {
 		}
 	}
 
+	readonly property Item _focusTarget: cardsLoader.enabled ? cardsLoader
+			: pageStack.depth > 0 && !pageStack.animating ? pageStack
+			: swipeViewAndNavBarContainer
+
 	function loadStartPage() {
 		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
 	}
@@ -56,6 +60,24 @@ Item {
 	function _loadUi() {
 		console.warn("Data sources ready, loading pages")
 		swipeViewLoader.active = true
+	}
+
+	Keys.onEscapePressed: (event) => {
+		if (cardsActive) {
+			cardsActive = false
+			return
+		} else if (pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
+	}
+	Keys.onLeftPressed: (event) => {
+		if (pageStack.activeFocus && pageStack.depth > 0) {
+			pageManager.popPage()
+			return
+		}
+		event.accepted = false
 	}
 
 	// Revert to the start page when the application is inactive.
@@ -82,6 +104,8 @@ Item {
 	}
 
 	FocusScope {
+		id: swipeViewAndNavBarContainer
+
 		// Anchor this to the PageStack's left side, so that this view slides out of view when
 		// the PageStack slides in (and vice-versa), giving the impression that the SwipeView
 		// itself is part of the stack.
@@ -91,9 +115,18 @@ Item {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
+		focus: root._focusTarget === swipeViewAndNavBarContainer
+
+		KeyNavigation.up: statusBar
 
 		Loader {
 			id: swipeViewLoader
+
+			// True if the SwipeView is allowed to use key navigation. If false, the entire view is
+			// highlighted and key events are blocked (to allows for quick arrow key navigation from
+			// the status bar to the nav bar and vice-versa) until 'Space' is pressed.
+			property bool viewKeyNavigationEnabled
+
 			anchors {
 				top: parent.top
 				topMargin: statusBar.height
@@ -118,15 +151,26 @@ Item {
 				Global.allPagesLoaded = true
 			}
 
+			onActiveFocusChanged: {
+				// Re-enable the focus blocker when focus moves to the status or nav bar.
+				if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
+					viewKeyNavigationEnabled = false
+				}
+			}
+
+			KeyNavigation.down: navBar
+			Keys.onSpacePressed: viewKeyNavigationEnabled = true
+
 			Component {
 				id: swipeViewComponent
 				SwipeView {
 					id: _swipeView
 
 					property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
-
 					onReadyChanged: if (ready) ready = true // remove binding
+
 					anchors.fill: parent
+					focus: swipeViewLoader.viewKeyNavigationEnabled
 					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 					contentChildren: swipePageModel.children
 				}
@@ -135,6 +179,16 @@ Item {
 			SwipePageModel {
 				id: swipePageModel
 				view: swipeView
+			}
+
+			KeyNavigationHighlight {
+				anchors{
+					fill: parent
+					leftMargin: Theme.geometry_page_content_horizontalMargin
+					rightMargin: Theme.geometry_page_content_horizontalMargin
+				}
+				active: swipeViewLoader.activeFocus && !swipeViewLoader.viewKeyNavigationEnabled
+					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			}
 		}
 
@@ -146,9 +200,20 @@ Item {
 			opacity: 0
 			model: swipeView ? swipeView.contentModel : null
 
-			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
+			focus: true
+
+			onCurrentIndexChanged: {
+				if (swipeView) {
+					swipeView.setCurrentIndex(currentIndex)
+					focus = true // Move focus back to navbar if the SwipeView page changes.
+				}
+			}
 
 			Component.onCompleted: pageManager.navBar = navBar
+
+			// Only move focus to SwipeView if its current page allows key navigation.
+			KeyNavigation.up: swipeView?.currentItem?.activeFocusOnTab ? swipeViewLoader : statusBar
 		}
 	}
 
@@ -163,6 +228,9 @@ Item {
 		}
 		x: width
 		width: Theme.geometry_screen_width
+		focus: root._focusTarget === pageStack
+
+		KeyNavigation.up: statusBar
 	}
 
 	CardViewLoader {
@@ -179,6 +247,8 @@ Item {
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		viewActive: root.cardsActive
+		focus: root._focusTarget === cardsLoader
+		KeyNavigation.up: statusBar
 
 		Component {
 			id: controlCardsComponent
@@ -342,6 +412,9 @@ Item {
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
+		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
+				: pageStack.depth > 0 ? pageStack
+				: swipeViewAndNavBarContainer
 	}
 
 	Loader {

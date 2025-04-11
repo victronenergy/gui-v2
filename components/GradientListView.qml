@@ -13,13 +13,14 @@ BaseListView {
 	leftMargin: Theme.geometry_page_content_horizontalMargin
 	rightMargin: Theme.geometry_page_content_horizontalMargin
 	spacing: Theme.geometry_gradientList_spacing
-
-	ViewGradient {
-		anchors.bottom: root.bottom
-	}
+	focus: true
 
 	ScrollBar.vertical: ScrollBar {
 		topPadding: Theme.geometry_gradientList_topMargin
 		bottomPadding: Theme.geometry_gradientList_bottomMargin
+	}
+
+	ViewGradient {
+		anchors.bottom: root.bottom
 	}
 }
