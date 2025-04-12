@@ -36,10 +36,14 @@ Page {
 	VeQuickItem {
 		id: temperatureMosItem
 		uid: root.bindPrefix + "/System/MOSTemperature"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	VeQuickItem {
 		id: temperature1Item
 		uid: root.bindPrefix + "/System/Temperature1"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	VeQuickItem {
 		id: temperature1NameItem
@@ -48,6 +52,8 @@ Page {
 	VeQuickItem {
 		id: temperature2Item
 		uid: root.bindPrefix + "/System/Temperature2"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	VeQuickItem {
 		id: temperature2NameItem
@@ -56,6 +62,8 @@ Page {
 	VeQuickItem {
 		id: temperature3Item
 		uid: root.bindPrefix + "/System/Temperature3"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	VeQuickItem {
 		id: temperature3NameItem
@@ -64,6 +72,8 @@ Page {
 	VeQuickItem {
 		id: temperature4Item
 		uid: root.bindPrefix + "/System/Temperature4"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	VeQuickItem {
 		id: temperature4NameItem
@@ -249,7 +259,7 @@ Page {
 							QuantityLabel {
 								width: parent.width
 								value: temperatureMosItem.value ?? NaN
-								unit: VenusOS.Units_Temperature_Celsius
+								unit: Global.systemSettings.temperatureUnit
 								precision: 1
 								valueColor: chargeLimitationItem.dataItem.value.indexOf("MOSFET") !== -1 ? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
@@ -269,7 +279,7 @@ Page {
 							QuantityLabel {
 								width: parent.width
 								value: temperature1Item.value ?? NaN
-								unit: VenusOS.Units_Temperature_Celsius
+								unit: Global.systemSettings.temperatureUnit
 								precision: 1
 								valueColor: chargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 || dischargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 ? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
@@ -289,7 +299,7 @@ Page {
 							QuantityLabel {
 								width: parent.width
 								value: temperature2Item.value ?? NaN
-								unit: VenusOS.Units_Temperature_Celsius
+								unit: Global.systemSettings.temperatureUnit
 								precision: 1
 								valueColor: chargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 || dischargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 ? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
@@ -309,7 +319,7 @@ Page {
 							QuantityLabel {
 								width: parent.width
 								value: temperature3Item.value ?? NaN
-								unit: VenusOS.Units_Temperature_Celsius
+								unit: Global.systemSettings.temperatureUnit
 								precision: 1
 								valueColor: chargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 || dischargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 ? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
@@ -329,7 +339,7 @@ Page {
 							QuantityLabel {
 								width: parent.width
 								value: temperature4Item.value ?? NaN
-								unit: VenusOS.Units_Temperature_Celsius
+								unit: Global.systemSettings.temperatureUnit
 								precision: 1
 								valueColor: chargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 || dischargeLimitationItem.dataItem.value.indexOf("Temp") !== -1 ? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
