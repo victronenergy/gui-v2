@@ -14,6 +14,7 @@ NotificationsModel::NotificationsModel(QObject *parent)
 	m_roleNames.insert(NotificationRoles::NotificationId, "notificationId");
 	m_roleNames.insert(NotificationRoles::Acknowledged, "acknowledged");
 	m_roleNames.insert(NotificationRoles::Active, "active");
+	m_roleNames.insert(NotificationRoles::ActiveOrUnAcknowledged, "activeOrUnAcknowledged");
 	m_roleNames.insert(NotificationRoles::Type, "type");
 	m_roleNames.insert(NotificationRoles::DateTime, "dateTime");
 	m_roleNames.insert(NotificationRoles::Description, "description");
@@ -43,6 +44,8 @@ QVariant NotificationsModel::data(const QModelIndex &index, int role) const
 		return m_data.at(row).get()->acknowledged();
 	case Active:
 		return m_data.at(row).get()->active();
+	case ActiveOrUnAcknowledged:
+		return m_data.at(row).get()->activeOrUnAcknowledged();
 	case Type:
 		return m_data.at(row).get()->type();
 	case DateTime:
@@ -166,7 +169,12 @@ void NotificationsModel::roleChangedHandler(BaseNotification *notification, Noti
 		return;
 	}
 	QModelIndex index = this->index(row, 0, QModelIndex());
-	emit dataChanged(index, index, QVector<int>() << role);
+	QVector<int> roles = { role };
+	if (role == Active || role == Acknowledged) {
+		roles << ActiveOrUnAcknowledged;
+	}
+
+	emit dataChanged(index, index, roles);
 	emit notificationUpdated(notification);
 }
 
