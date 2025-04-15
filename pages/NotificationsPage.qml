@@ -23,7 +23,7 @@ SwipeViewPage {
 		// over the top of the notificationsView
 		clip: true
 
-		header: Global.notifications.activeOrUnAcknowledgedModel.count === 0 ? noAlertsHeader : null
+		header: Global.notifications.activeOrUnAcknowledgedCount === 0 ? noAlertsHeader : null
 		onHeaderItemChanged: {
 			if (headerItem) {
 				notificationsView.positionViewAtBeginning()
