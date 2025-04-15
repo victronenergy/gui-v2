@@ -104,13 +104,15 @@ QtObject {
 	}
 
 	function _notificationSortFunction(leftNotification: BaseNotification, rightNotification: BaseNotification) : bool {
+		if (leftNotification.activeOrUnAcknowledged !== rightNotification.activeOrUnAcknowledged) {
+			return leftNotification.activeOrUnAcknowledged && !rightNotification.activeOrUnAcknowledged
+		}
 
 		if (leftNotification.active !== rightNotification.active) {
 			return leftNotification.active && !rightNotification.active
 		}
 
 		if (leftNotification.type !== rightNotification.type) {
-
 			if (leftNotification.type === VenusOS.Notification_Alarm && rightNotification.type !== VenusOS.Notification_Alarm) {
 				return true
 			}
@@ -127,9 +129,8 @@ QtObject {
 		filterFunction: (notification) => { return notification.active || !notification.acknowledged }
 		sortFunction: root._notificationSortFunction
 	}
-	readonly property NotificationSortFilterProxyModel inactiveAndAcknowledgedModel: NotificationSortFilterProxyModel {
+	readonly property NotificationSortFilterProxyModel sortedModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		filterFunction: (notification) => { return !notification.active && notification.acknowledged }
 		sortFunction: root._notificationSortFunction
 	}
 

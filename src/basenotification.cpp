@@ -28,8 +28,12 @@ bool BaseNotification::acknowledged() const
 void BaseNotification::setAcknowledged(bool acknowledged)
 {
 	if (m_acknowledged != acknowledged) {
+		const bool prevActiveOrUnAcknowledged = activeOrUnAcknowledged();
 		m_acknowledged = acknowledged;
 		Q_EMIT acknowledgedChanged();
+		if (activeOrUnAcknowledged() != prevActiveOrUnAcknowledged) {
+			Q_EMIT activeOrUnAcknowledgedChanged();
+		}
 	}
 }
 
@@ -41,9 +45,18 @@ bool BaseNotification::active() const
 void BaseNotification::setActive(bool active)
 {
 	if (m_active != active) {
+		const bool prevActiveOrUnAcknowledged = activeOrUnAcknowledged();
 		m_active = active;
 		Q_EMIT activeChanged();
+		if (activeOrUnAcknowledged() != prevActiveOrUnAcknowledged) {
+			Q_EMIT activeOrUnAcknowledgedChanged();
+		}
 	}
+}
+
+bool BaseNotification::activeOrUnAcknowledged() const
+{
+	return m_active || !m_acknowledged;
 }
 
 int BaseNotification::type() const
