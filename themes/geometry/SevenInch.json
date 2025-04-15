@@ -108,7 +108,6 @@
     "geometry_navigationBar_notification_counter_width_one_digit": 20,
     "geometry_navigationBar_notification_counter_width_two_digits": 30,
 
-    "geometry_notificationsPage_placeholder_height" : 150,
     "geometry_notificationsPage_delegate_marker_topMargin" : 12,
     "geometry_notificationsPage_delegate_marker_width" : 8,
     "geometry_notificationsPage_delegate_marker_radius" : 4,

@@ -22,6 +22,7 @@ class BaseNotification : public QObject
 	Q_PROPERTY(int notificationId READ notificationId WRITE setNotificationId NOTIFY notificationIdChanged FINAL)
 	Q_PROPERTY(bool acknowledged READ acknowledged WRITE setAcknowledged NOTIFY acknowledgedChanged FINAL)
 	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
+	Q_PROPERTY(bool activeOrUnAcknowledged READ activeOrUnAcknowledged NOTIFY activeOrUnAcknowledgedChanged FINAL)
 	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
 	Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged FINAL)
 	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged FINAL)
@@ -37,6 +38,8 @@ public:
 
 	bool active() const;
 	void setActive(bool active);
+
+	bool activeOrUnAcknowledged() const;
 
 	int type() const;
 	void setType(int type);
@@ -57,6 +60,7 @@ signals:
 	void notificationIdChanged();
 	void acknowledgedChanged();
 	void activeChanged();
+	void activeOrUnAcknowledgedChanged();
 	void typeChanged();
 	void dateTimeChanged();
 	void descriptionChanged();
