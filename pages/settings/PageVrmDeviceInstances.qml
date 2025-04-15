@@ -66,7 +66,8 @@ Page {
 
 		for (let i = 0; i < Global.allDevicesModel.count; ++i) {
 			const device = Global.allDevicesModel.deviceAt(i)
-			if (device.deviceInstance === deviceInstance
+			if (device
+					&& device.deviceInstance === deviceInstance
 					&& BackendConnection.serviceTypeFromUid(device.serviceUid) === deviceClass) {
 				return device
 			}
