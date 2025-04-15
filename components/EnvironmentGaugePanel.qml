@@ -18,8 +18,8 @@ Rectangle {
 	property var temperatureGaugeGradient
 	property var humidityGaugeGradient
 
-	readonly property int _twoGauges: !isNaN(temperature) && !isNaN(humidity)
-	readonly property int _gaugeWidth: _twoGauges
+	readonly property int hasTwoGauges: !isNaN(temperature) && !isNaN(humidity)
+	readonly property int _gaugeWidth: hasTwoGauges
 			? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
 			: Theme.geometry_levelsPage_environment_gauge_width
 
@@ -94,5 +94,10 @@ Rectangle {
 			gradient: root.humidityGaugeGradient
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load himidity environment gauge:", errorString())
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }

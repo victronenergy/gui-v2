@@ -30,12 +30,12 @@ SwipeViewPage {
 
 		anchors {
 			top: parent.top
-			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout) ? -tabBar.height : 0
+			topMargin: Global.pageManager?.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
 
-		opacity: (!!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-				 || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode))
+		opacity: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+				 || Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 				 ? 1.0
 				 : 0.0
 
@@ -58,6 +58,8 @@ SwipeViewPage {
 
 		// Prefer a tab that is enabled.
 		currentIndex: model[0].enabled || !model[1].enabled ? 0 : 1
+		focus: true
+		KeyNavigation.down: currentIndex === 0 ? tanksTab : environmentTab
 	}
 
 	TanksTab {
@@ -65,37 +67,13 @@ SwipeViewPage {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-					   ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
-					   : Theme.geometry_levelsPage_gaugesView_compact_topMargin
 			bottom: parent.bottom
-			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-						  ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
-						  : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
+			left: parent.left
+			right: parent.right
 		}
-		x: contentWidth > width
-				? Theme.geometry_levelsPage_gaugesView_horizontalMargin
-				: parent.width/2 - contentWidth / 2
-		width: parent.width
-		rightMargin: contentWidth > width
-					 ? 2*Theme.geometry_levelsPage_gaugesView_horizontalMargin
-					 : 0
 		animationEnabled: root.animationEnabled
-
-		Behavior on x {
-			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_levelsPage_tanks_modelChangeResize_duration; easing.type: Easing.InOutQuad }
-		}
-		Behavior on anchors.topMargin {
-			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
-		}
-		Behavior on anchors.bottomMargin {
-			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
-		}
-
 		visible: tabBar.currentIndex === 0
+		enabled: visible
 	}
 
 	EnvironmentTab {
@@ -103,28 +81,13 @@ SwipeViewPage {
 
 		anchors {
 			top: tabBar.bottom
-			topMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-					   ? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
-					   : Theme.geometry_levelsPage_gaugesView_compact_topMargin
 			bottom: parent.bottom
-			bottomMargin: (!!Global.pageManager && Global.pageManager.expandLayout)
-						  ? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
-						  : Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
 			left: parent.left
 			right: parent.right
 		}
 		animationEnabled: root.animationEnabled
-
-		Behavior on anchors.topMargin {
-			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
-		}
-		Behavior on anchors.bottomMargin {
-			enabled: root.isCurrentPage
-			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
-		}
-
 		visible: tabBar.currentIndex === 1
+		enabled: visible
 	}
 
 	// Show gradients on the left/right edges to indicate the page bounds
