@@ -8,6 +8,7 @@
 #include "notificationsortfilterproxymodel.h"
 #include "notificationsmodel.h"
 #include "basenotification.h"
+#include "enums.h"
 
 namespace Victron {
 
@@ -72,15 +73,39 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, c
 		if (!d->m_engine)
 			qWarning() << "NotificationSortFilterProxyModel can't sort without a JavaScript engine";
 	}
-	if (d->m_engine && d->m_sortFunction.isCallable()) {
-		BaseNotification *leftNotification = this->sourceModel()->data(this->sourceModel()->index(sourceLeft.row(), sourceLeft.column()),
-																	   NotificationsModel::Notification).value<BaseNotification*>();
-		BaseNotification *rightNotification = this->sourceModel()->data(this->sourceModel()->index(sourceRight.row(), sourceRight.column()),
-																		NotificationsModel::Notification).value<BaseNotification*>();
 
+	BaseNotification *leftNotification = this->sourceModel()->data(
+			this->sourceModel()->index(sourceLeft.row(), sourceLeft.column()),
+			NotificationsModel::Notification).value<BaseNotification*>();
+	BaseNotification *rightNotification = this->sourceModel()->data(
+			this->sourceModel()->index(sourceRight.row(), sourceRight.column()),
+			NotificationsModel::Notification).value<BaseNotification*>();
+
+	if (d->m_engine && d->m_sortFunction.isCallable()) {
 		QJSValueList args = { d->m_engine->toScriptValue(leftNotification), d->m_engine->toScriptValue(rightNotification) };
 		return d->m_sortFunction.call(args).toBool();
+	} else {
+		// Use the default sort order.
+		if (leftNotification->activeOrUnAcknowledged() != rightNotification->activeOrUnAcknowledged()) {
+			return leftNotification->activeOrUnAcknowledged() && !rightNotification->activeOrUnAcknowledged();
+		}
+
+		if (leftNotification->active() != rightNotification->active()) {
+			return leftNotification->active() && !rightNotification->active();
+		}
+
+		if (leftNotification->type() != rightNotification->type()) {
+			if (leftNotification->type() == Enums::Notification_Alarm && rightNotification->type() != Enums::Notification_Alarm) {
+				return true;
+			}
+			if (leftNotification->type() == Enums::Notification_Warning && rightNotification->type() == Enums::Notification_Info) {
+				return true;
+			}
+			return false;
+		}
+		return leftNotification->dateTime() > rightNotification->dateTime();
 	}
+
 	return QSortFilterProxyModel::lessThan(sourceLeft, sourceRight);
 }
 
