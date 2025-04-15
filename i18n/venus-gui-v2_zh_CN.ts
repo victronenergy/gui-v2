@@ -14,7 +14,7 @@
       <translation>逆变器过载</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="358"/>
+      <location filename="../../components/CommonWords.qml" line="361"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>功率</translation>
@@ -102,19 +102,19 @@
       <translation>无</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="365"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>位置</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>速度</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="445"/>
+      <location filename="../../components/CommonWords.qml" line="448"/>
       <source>State</source>
       <translation>状态</translation>
     </message>
@@ -135,7 +135,7 @@
       <translation>最小SOC</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="125"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="131"/>
       <source>Enter password</source>
       <translation>输入密码</translation>
     </message>
@@ -160,7 +160,7 @@
       <translation>太阳能发电量</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>External control</source>
       <translation>外部控制</translation>
     </message>
@@ -361,12 +361,12 @@
       <translation>产品ID</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="59"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="60"/>
       <source>Hardware version</source>
       <translation>硬件版本</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="80"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="81"/>
       <source>Device name</source>
       <translation>设备名</translation>
     </message>
@@ -952,7 +952,7 @@
       <translation>电流（安培）</translation>
     </message>
     <message id="settings_briefview_level">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="176"/>
       <source>Level %1</source>
       <extracomment>Level number</extracomment>
       <translation>水平 %1</translation>
@@ -1342,22 +1342,22 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>演示模式</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="109"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="107"/>
       <source>ESS demo</source>
       <translation>ESS演示</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="111"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="109"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>船/房车演示1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="113"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="111"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>船/房车演示2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="124"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="115"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>开始演示模式会更改某些设置，用户界面短时间没有反应。</translation>
     </message>
@@ -1407,7 +1407,7 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>安静时间之终止时间</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="299"/>
+      <location filename="../../components/PageGensetModel.qml" line="325"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
       <source>Run time and service</source>
       <translation>运行时和服务</translation>
@@ -1734,12 +1734,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>慢冲</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="198"/>
       <source>Sustain</source>
       <translation>维持</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="197"/>
+      <location filename="../../data/System.qml" line="201"/>
       <source>Recharge</source>
       <translation>重新充电</translation>
     </message>
@@ -1809,7 +1809,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>数字输入</translation>
     </message>
     <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="156"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="165"/>
       <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
       <source>Digital input %1</source>
       <extracomment>%1 = number of the digital input</extracomment>
@@ -1856,12 +1856,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>二氧化碳报警</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
       <source>Signal K</source>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="233"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
@@ -2502,15 +2502,15 @@ Use unless prohibited by the utility provider.</source>
       <source>America</source>
       <translation>美洲</translation>
     </message>
-    <message id="settings_tz_antartica">
+    <message id="settings_tz_antarctica">
       <location filename="../../pages/settings/PageTzInfo.qml" line="227"/>
-      <source>Antartica</source>
-      <translation>南极洲</translation>
+      <source>Antarctica</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="settings_tz_artic">
+    <message id="settings_tz_arctic">
       <location filename="../../pages/settings/PageTzInfo.qml" line="233"/>
-      <source>Artic</source>
-      <translation>北极</translation>
+      <source>Arctic</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_tz_asia">
       <location filename="../../pages/settings/PageTzInfo.qml" line="239"/>
@@ -2544,8 +2544,9 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tz_etc">
       <location filename="../../pages/settings/PageTzInfo.qml" line="275"/>
-      <source>Etc</source>
-      <translation>等</translation>
+      <source>Other</source>
+      <oldsource>Etc</oldsource>
+      <translation type="unfinished">等</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
       <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="262"/>
@@ -2589,25 +2590,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>高电池电压报警</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="568"/>
+      <location filename="../../components/CommonWords.qml" line="571"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>上次出错</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="571"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>第二次出错</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="574"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>第三次出错</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="580"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>第四次出错</translation>
@@ -2705,7 +2706,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>充电电压</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="397"/>
       <source>Reset</source>
       <translation>重置</translation>
     </message>
@@ -2987,7 +2988,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>报警标志</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="468"/>
+      <location filename="../../components/CommonWords.qml" line="471"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>开关</translation>
@@ -3903,53 +3904,59 @@ Use unless prohibited by the utility provider.</source>
       <source>Devices</source>
       <translation type="unfinished">设备</translation>
     </message>
+    <message id="genset_controller_multiple_genset_controllers">
+      <location filename="../../components/PageGensetModel.qml" line="60"/>
+      <source>Multiple genset controllers detected.
+The GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="168"/>
+      <location filename="../../components/PageGensetModel.qml" line="194"/>
       <source>AC</source>
       <translation>交流</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="206"/>
+      <location filename="../../components/PageGensetModel.qml" line="232"/>
       <source>Engine</source>
       <translation>引擎</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="219"/>
+      <location filename="../../components/PageGensetModel.qml" line="245"/>
       <source>Speed</source>
       <translation type="unfinished">速度</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="226"/>
+      <location filename="../../components/PageGensetModel.qml" line="252"/>
       <source>Load</source>
       <translation type="unfinished">负载</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="250"/>
+      <location filename="../../components/PageGensetModel.qml" line="276"/>
       <source>Coolant temperature</source>
       <translation>冷却剂温度</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="258"/>
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
       <source>Exhaust temperature</source>
       <translation>排气温度</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="265"/>
+      <location filename="../../components/PageGensetModel.qml" line="291"/>
       <source>Winding temperature</source>
       <translation>线圈温度</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="279"/>
+      <location filename="../../components/PageGensetModel.qml" line="305"/>
       <source>Starter battery voltage</source>
       <translation>启动电池电压</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="287"/>
+      <location filename="../../components/PageGensetModel.qml" line="313"/>
       <source>Number of starts</source>
       <translation>启动次数</translation>
     </message>
     <message id="genset_bms_control">
-      <location filename="../../components/PageGensetModel.qml" line="375"/>
+      <location filename="../../components/PageGensetModel.qml" line="402"/>
       <source>BMS control</source>
       <translation type="unfinished">BMS控制</translation>
     </message>
@@ -4055,17 +4062,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>倒置</translation>
     </message>
     <message id="digitalinput_enable_alarm">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="47"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="57"/>
       <source>Enable alarm</source>
       <translation type="unfinished">启用报警</translation>
     </message>
     <message id="digitalinput_inverted">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="53"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="63"/>
       <source>Inverted</source>
       <translation type="unfinished">倒置</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="69"/>
       <source>Invert alarm logic</source>
       <translation>警报逻辑倒置</translation>
     </message>
@@ -4190,7 +4197,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>总的光伏功率</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="377"/>
+      <location filename="../../components/CommonWords.qml" line="380"/>
       <source>Product page</source>
       <translation>产品页面</translation>
     </message>
@@ -4401,28 +4408,38 @@ Do you want to continue?</source>
       <source>Press to restart</source>
       <translation>按重新启动</translation>
     </message>
+    <message id="vebus_device_restart_vebus_system_restart_confirmation_title">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
+      <source>Are you sure?</source>
+      <translation type="unfinished">你确定吗？</translation>
+    </message>
+    <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="225"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>AC input 1 ignored</source>
       <translation>交流输入1已忽略</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
       <source>AC input 2 ignored</source>
       <translation>交流输入2已忽略</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="241"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="254"/>
       <source>ESS Relay test</source>
       <translation>ESS继电器测试</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="247"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
       <source>Completed</source>
       <translation type="unfinished">已完成</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="249"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="262"/>
       <source>Pending</source>
       <translation type="unfinished">等待中</translation>
     </message>
@@ -4432,17 +4449,17 @@ Do you want to continue?</source>
       <translation>已完成</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="351"/>
+      <location filename="../../components/CommonWords.qml" line="354"/>
       <source>Pending</source>
       <translation>等待中</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="256"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
       <source>VE.Bus diagnostics</source>
       <translation>VE.Bus诊断</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="275"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="288"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>网络质量计数器相位 L%1，设备 %2 (%3)</translation>
     </message>
@@ -4693,17 +4710,17 @@ Do you want to continue?</source>
       <translation type="unfinished">逆变器/充电器</translation>
     </message>
     <message id="common_words_ac_input">
-      <location filename="../../components/CommonWords.qml" line="534"/>
+      <location filename="../../components/CommonWords.qml" line="537"/>
       <source>AC Input</source>
       <translation>交流输入</translation>
     </message>
     <message id="common_words_ac_input_1">
-      <location filename="../../components/CommonWords.qml" line="530"/>
+      <location filename="../../components/CommonWords.qml" line="533"/>
       <source>AC Input 1</source>
       <translation>交流输入1</translation>
     </message>
     <message id="common_words_ac_input_2">
-      <location filename="../../components/CommonWords.qml" line="532"/>
+      <location filename="../../components/CommonWords.qml" line="535"/>
       <source>AC Input 2</source>
       <translation>交流输入2</translation>
     </message>
@@ -5047,12 +5064,12 @@ Do you want to continue?</source>
       <translation>不可用</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="326"/>
       <source>Not connected</source>
       <translation>未连接</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="329"/>
+      <location filename="../../components/CommonWords.qml" line="332"/>
       <source>Offline</source>
       <translation>离线</translation>
     </message>
@@ -5069,7 +5086,7 @@ Do you want to continue?</source>
       <translation>开</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="341"/>
       <source>Online</source>
       <translation>在线</translation>
     </message>
@@ -5080,59 +5097,59 @@ Do you want to continue?</source>
       <translation>打开</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="354"/>
+      <location filename="../../components/CommonWords.qml" line="357"/>
       <source>Password</source>
       <translation>密码</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="361"/>
+      <location filename="../../components/CommonWords.qml" line="364"/>
       <source>Phase</source>
       <translation>相位</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="368"/>
+      <location filename="../../components/CommonWords.qml" line="371"/>
       <source>Press to clear</source>
       <translation>按下清除</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="371"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Press to reset</source>
       <translation>按下复位</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="374"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Press to scan</source>
       <translation>按下即可扫描</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="380"/>
+      <location filename="../../components/CommonWords.qml" line="383"/>
       <source>PV Inverter</source>
       <translation>光伏逆变器</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="384"/>
+      <location filename="../../components/CommonWords.qml" line="387"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>PV功率</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="387"/>
+      <location filename="../../components/CommonWords.qml" line="390"/>
       <source>Quiet hours</source>
       <translation>安静时间</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="394"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>继电器</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="397"/>
+      <location filename="../../components/CommonWords.qml" line="400"/>
       <source>Reboot</source>
       <translation>重启</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="400"/>
+      <location filename="../../components/CommonWords.qml" line="403"/>
       <source>Remove</source>
       <translation>删除</translation>
     </message>
@@ -5143,12 +5160,12 @@ Do you want to continue?</source>
       <translation>运行</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="407"/>
+      <location filename="../../components/CommonWords.qml" line="410"/>
       <source>Scanning %1%</source>
       <translation>正在扫描%1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="410"/>
+      <location filename="../../components/CommonWords.qml" line="413"/>
       <source>Serial number</source>
       <translation>序列号</translation>
     </message>
@@ -5158,12 +5175,12 @@ Do you want to continue?</source>
       <translation>设置</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="416"/>
+      <location filename="../../components/CommonWords.qml" line="419"/>
       <source>Setup</source>
       <translation>设置</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="419"/>
+      <location filename="../../components/CommonWords.qml" line="422"/>
       <source>Signal strength</source>
       <translation>信号强度</translation>
     </message>
@@ -5174,32 +5191,32 @@ Do you want to continue?</source>
       <translation>待机</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="436"/>
       <source>Start after the condition is reached for</source>
       <translation>在达到条件后启动</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="436"/>
+      <location filename="../../components/CommonWords.qml" line="439"/>
       <source>Start time</source>
       <translation>启动时间</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="439"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>Start value during quiet hours</source>
       <translation>安静时间内的启动值</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="442"/>
+      <location filename="../../components/CommonWords.qml" line="445"/>
       <source>Start when warning is active for</source>
       <translation>在警报下启动</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="448"/>
+      <location filename="../../components/CommonWords.qml" line="451"/>
       <source>State of charge</source>
       <translation>充电状态</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="451"/>
+      <location filename="../../components/CommonWords.qml" line="454"/>
       <source>Status</source>
       <translation>状态</translation>
     </message>
@@ -5210,12 +5227,12 @@ Do you want to continue?</source>
       <translation>启动（%1）</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="458"/>
+      <location filename="../../components/CommonWords.qml" line="461"/>
       <source>Stop value during quiet hours</source>
       <translation>安静时间内的停止值</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="461"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>Stop after the condition is reached for</source>
       <translation>在达到条件后停止</translation>
     </message>
@@ -5226,38 +5243,38 @@ Do you want to continue?</source>
       <translation>已停止</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="471"/>
+      <location filename="../../components/CommonWords.qml" line="474"/>
       <source>Temperature</source>
       <translation>温度</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="474"/>
+      <location filename="../../components/CommonWords.qml" line="477"/>
       <source>Temperature sensor</source>
       <translation>温度传感器</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="477"/>
+      <location filename="../../components/CommonWords.qml" line="480"/>
       <source>Today</source>
       <translation>今天</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="480"/>
+      <location filename="../../components/CommonWords.qml" line="483"/>
       <source>Total</source>
       <translation>合计</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="484"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>跟踪器</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="487"/>
+      <location filename="../../components/CommonWords.qml" line="490"/>
       <source>Type</source>
       <translation>类型</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="490"/>
+      <location filename="../../components/CommonWords.qml" line="493"/>
       <source>Unique Identity Number</source>
       <translation>唯一身份号码</translation>
     </message>
@@ -5267,22 +5284,22 @@ Do you want to continue?</source>
       <translation>未知</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="497"/>
+      <location filename="../../components/CommonWords.qml" line="500"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus错误</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="500"/>
+      <location filename="../../components/CommonWords.qml" line="503"/>
       <source>Voltage</source>
       <translation>电压</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="506"/>
       <source>VRM instance</source>
       <translation>VRM实例</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="506"/>
+      <location filename="../../components/CommonWords.qml" line="509"/>
       <source>When warning is cleared stop after</source>
       <translation>当警报清除，之后停止</translation>
     </message>
@@ -5292,12 +5309,12 @@ Do you want to continue?</source>
       <translation>是</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="512"/>
+      <location filename="../../components/CommonWords.qml" line="515"/>
       <source>Yesterday</source>
       <translation>昨天</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="516"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>发电</translation>
@@ -5787,12 +5804,12 @@ Do you want to continue?</source>
       <translation>继电器2</translation>
     </message>
     <message id="settings_relay_invalid_temp_config_warning">
-      <location filename="../../components/TemperatureRelaySettings.qml" line="61"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="60"/>
       <source>Warning: The above selected relay is not configured for temperature, this condition will be ignored.</source>
       <translation>警告：上述选择的继电器未配置温度，此条件将被忽略。</translation>
     </message>
     <message id="settings_relay_activation_value">
-      <location filename="../../components/TemperatureRelaySettings.qml" line="70"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="67"/>
       <source>Activation value</source>
       <translation>启用值</translation>
     </message>
@@ -5996,7 +6013,7 @@ Do you want to continue?</source>
       <translation>MQTT 协议 5 级错误</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="234"/>
+      <location filename="../../components/StatusBar.qml" line="247"/>
       <source>Silence alarm</source>
       <translation>静音警报</translation>
     </message>
@@ -6208,6 +6225,111 @@ Do you want to continue?</source>
       <source>External control</source>
       <translation type="unfinished">外部控制</translation>
     </message>
+    <message id="switch_state_running">
+      <location filename="../../src/enums.cpp" line="273"/>
+      <source>Running</source>
+      <translation type="unfinished">运行</translation>
+    </message>
+    <message id="switch_state_over_temperature">
+      <location filename="../../src/enums.cpp" line="276"/>
+      <source>Over temperature</source>
+      <translation type="unfinished">温度过高</translation>
+    </message>
+    <message id="switch_state_temperature_warning">
+      <location filename="../../src/enums.cpp" line="279"/>
+      <source>Temperature warning</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switch_state_channel_fault">
+      <location filename="../../src/enums.cpp" line="282"/>
+      <source>Channel Fault</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switch_state_channel_Trippped">
+      <location filename="../../src/enums.cpp" line="285"/>
+      <source>Channel Tripped</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switch_state_under_voltage">
+      <location filename="../../src/enums.cpp" line="288"/>
+      <source>Under voltage</source>
+      <translation type="unfinished">低电压</translation>
+    </message>
+    <message id="switchable_output_momentary">
+      <location filename="../../src/enums.cpp" line="299"/>
+      <source>Momentary</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_latching">
+      <location filename="../../src/enums.cpp" line="302"/>
+      <source>Latching</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_dimmable">
+      <location filename="../../src/enums.cpp" line="305"/>
+      <source>Dimmable</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_slave_of">
+      <location filename="../../src/enums.cpp" line="309"/>
+      <source>Slave of %1</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_slave">
+      <location filename="../../src/enums.cpp" line="312"/>
+      <source>Slave</source>
+      <translation type="unfinished">从机</translation>
+    </message>
+    <message id="switchable_output_undefined">
+      <location filename="../../src/enums.cpp" line="316"/>
+      <source>Undefined</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_off">
+      <location filename="../../src/enums.cpp" line="325"/>
+      <source>Off</source>
+      <translation type="unfinished">关</translation>
+    </message>
+    <message id="switchable_output_powered">
+      <location filename="../../src/enums.cpp" line="328"/>
+      <source>Powered</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_tripped">
+      <location filename="../../src/enums.cpp" line="331"/>
+      <source>Tripped</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_over_temperature">
+      <location filename="../../src/enums.cpp" line="334"/>
+      <source>Over temperature</source>
+      <translation type="unfinished">温度过高</translation>
+    </message>
+    <message id="switchable_output_output_Fault">
+      <location filename="../../src/enums.cpp" line="337"/>
+      <source>Output fault</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_on">
+      <location filename="../../src/enums.cpp" line="340"/>
+      <source>On</source>
+      <translation type="unfinished">开</translation>
+    </message>
+    <message id="switchable_output_short">
+      <location filename="../../src/enums.cpp" line="343"/>
+      <source>Short</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_disabled">
+      <location filename="../../src/enums.cpp" line="346"/>
+      <source>Disabled</source>
+      <translation type="unfinished">已禁用</translation>
+    </message>
+    <message id="switchable_output_trip_low_voltage">
+      <location filename="../../src/enums.cpp" line="349"/>
+      <source>Disabled</source>
+      <translation type="unfinished">已禁用</translation>
+    </message>
     <message id="ess_state_keep_batteries_charged">
       <location filename="../../data/Ess.qml" line="47"/>
       <source>Keep batteries charged</source>
@@ -6294,7 +6416,7 @@ Do you want to continue?</source>
       <translation type="unfinished">已定时</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="200"/>
+      <location filename="../../data/System.qml" line="204"/>
       <source>Scheduled</source>
       <translation>已定时</translation>
     </message>
@@ -6368,102 +6490,102 @@ Do you want to continue?</source>
       <translation>均衡</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>AES mode</source>
       <translation>节能模式</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Fault condition</source>
       <translation>故障情况</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Bulk charging</source>
       <translation>快充</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Absorption charging</source>
       <translation>均充</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Float charging</source>
       <translation>浮充</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Storage mode</source>
       <translation>存储模式</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Equalization charging</source>
       <translation>均衡充电</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Pass-thru</source>
       <translation>直通</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Inverting</source>
       <translation>逆变</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="157"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Assisting</source>
       <translation>辅助供电</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="160"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Power supply mode</source>
       <translation>电源模式</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="163"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Sustain</source>
       <translation type="unfinished">维持</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Wake up</source>
       <translation>唤醒</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Repeated absorption</source>
       <translation>重复均充</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Auto equalize</source>
       <translation>自动均衡</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Battery safe</source>
       <translation>电池保护模式</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>Load detect</source>
       <translation>负载检测</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="182"/>
+      <location filename="../../data/System.qml" line="186"/>
       <source>Blocked</source>
       <translation>锁定</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Test</source>
       <translation>测试</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="203"/>
+      <location filename="../../data/System.qml" line="207"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">动态ESS</translation>
     </message>
@@ -6561,7 +6683,7 @@ Do you want to continue?</source>
       <translation>应用版本</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="242"/>
+      <location filename="../../components/PageGensetModel.qml" line="268"/>
       <source>Oil temperature</source>
       <translation>油温</translation>
     </message>
@@ -6660,23 +6782,64 @@ Do you want to continue?</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>请稍候，语言正在更改。</translation>
     </message>
-    <message id="settings_briefview_level_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="19"/>
-      <source>None</source>
-      <translation type="unfinished">无</translation>
+    <message id="settings_briefview_totals">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="29"/>
+      <source>Tank totals</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_battery_not_connected">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="50"/>
+      <source>Battery is not connected.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_tank_not_connected">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="71"/>
+      <source>Tank is not connected.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_active_battery_monitor">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="83"/>
+      <source>Active battery monitor</source>
+      <translation type="unfinished">主动式电池监测器</translation>
+    </message>
+    <message id="settings_briefview_individual_batteries">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="86"/>
+      <source>Individual batteries</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_individual_tanks">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="96"/>
+      <source>Individual tanks</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_unconnected_battery">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="183"/>
+      <source>Battery not connected</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_unconnected_tank">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="192"/>
+      <source>Tank not connected</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_briefview_not_configured">
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="196"/>
+      <source>Not configured</source>
+      <extracomment>No option has been selected</extracomment>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_briefview_unit_none">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="224"/>
       <source>No labels</source>
       <translation>无标签</translation>
     </message>
     <message id="settings_briefview_unit_absolute">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="226"/>
       <source>Show tank volumes</source>
       <translation>显示水箱容积</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="228"/>
       <source>Show percentages</source>
       <translation>显示百分比</translation>
     </message>
@@ -6777,7 +6940,7 @@ Do you want to continue?</source>
       <translation>电池寿命状态</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="225"/>
       <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
       <translation>通过 http://venus.local:3000 和 VRM 访问Signal K。</translation>
@@ -6863,85 +7026,90 @@ Do you want to continue?</source>
       <source>No</source>
       <translation type="unfinished">不</translation>
     </message>
+    <message id="common_words_none_option">
+      <location filename="../../components/CommonWords.qml" line="316"/>
+      <source>None</source>
+      <translation type="unfinished">无</translation>
+    </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="317"/>
+      <location filename="../../components/CommonWords.qml" line="320"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">无</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="323"/>
       <source>Not available</source>
       <translation type="unfinished">不可用</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="329"/>
       <source>Off</source>
       <translation type="unfinished">关</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="332"/>
+      <location filename="../../components/CommonWords.qml" line="335"/>
       <source>OK</source>
       <translation type="unfinished">正常</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="338"/>
       <source>On</source>
       <translation type="unfinished">开</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="342"/>
+      <location filename="../../components/CommonWords.qml" line="345"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">打开</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="348"/>
+      <location filename="../../components/CommonWords.qml" line="351"/>
       <source>Overall history</source>
       <translation>总体历史记录</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="404"/>
+      <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">运行</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="413"/>
+      <location filename="../../components/CommonWords.qml" line="416"/>
       <source>Settings</source>
       <translation type="unfinished">设置</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>Standby</source>
       <translation type="unfinished">待机</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="455"/>
+      <location filename="../../components/CommonWords.qml" line="458"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">启动（%1）</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="464"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Stopped</source>
       <translation type="unfinished">已停止</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="497"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">未知</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="509"/>
+      <location filename="../../components/CommonWords.qml" line="512"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="116"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="270"/>
       <source>Yes</source>
       <translation type="unfinished">是</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
       <source>Yield Today</source>
       <oldsource>Yield today</oldsource>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
@@ -6987,7 +7155,7 @@ Do you want to continue?</source>
       <translation>保留</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="77"/>
+      <location filename="../../components/NotificationDelegate.qml" line="85"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -7476,32 +7644,32 @@ See documentation for further information.</oldsource>
       <translation>发电机组上的远程启动功能被禁用。GX 现在将无法启动或停止发电机组。在发电机组控制面板上启用它。</translation>
     </message>
     <message id="ac-in-genset_auto_start_functionality">
-      <location filename="../../components/PageGensetModel.qml" line="41"/>
+      <location filename="../../components/PageGensetModel.qml" line="66"/>
       <source>Auto start functionality</source>
       <translation>自动启动功能</translation>
     </message>
     <message id="settings_page_genset_generator_run_time">
-      <location filename="../../components/PageGensetModel.qml" line="77"/>
+      <location filename="../../components/PageGensetModel.qml" line="102"/>
       <source>Current run time</source>
       <translation type="unfinished">当前运行时间</translation>
     </message>
     <message id="ac-in-genset_auto_control_status">
-      <location filename="../../components/PageGensetModel.qml" line="85"/>
+      <location filename="../../components/PageGensetModel.qml" line="110"/>
       <source>Control status</source>
       <translation>控制状态</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="111"/>
+      <location filename="../../components/PageGensetModel.qml" line="137"/>
       <source>Genset status</source>
       <translation>发电机状态</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="194"/>
+      <location filename="../../components/PageGensetModel.qml" line="220"/>
       <source>Remote start mode</source>
       <translation>远程启动模式</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="234"/>
+      <location filename="../../components/PageGensetModel.qml" line="260"/>
       <source>Oil pressure</source>
       <oldsource>Oil Pressure</oldsource>
       <translation>油压</translation>
@@ -7522,12 +7690,12 @@ See documentation for further information.</oldsource>
       <translation>手动停止</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="345"/>
+      <location filename="../../components/CommonWords.qml" line="348"/>
       <source>Open circuit</source>
       <translation>开路</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../components/CommonWords.qml" line="565"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -7539,27 +7707,22 @@ See documentation for further information.</oldsource>
       <translation>%1 (不可用)</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="72"/>
+      <location filename="../../ApplicationContent.qml" line="65"/>
       <source>Touch input on</source>
       <translation>触摸输入打开</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="74"/>
+      <location filename="../../ApplicationContent.qml" line="67"/>
       <source>Touch input off</source>
       <translation>触摸输入关闭</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="89"/>
+      <location filename="../../ApplicationContent.qml" line="82"/>
       <source>Touch input disabled</source>
       <translation>触摸输入已禁用</translation>
     </message>
-    <message id="notifications_acknowledge_alerts">
-      <location filename="../../components/StatusBar.qml" line="219"/>
-      <source>Acknowledge alerts</source>
-      <translation>确认警报</translation>
-    </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="104"/>
+      <location filename="../../components/PageGensetModel.qml" line="130"/>
       <source>Control error code</source>
       <translation>控制错误代码</translation>
     </message>
@@ -7735,7 +7898,7 @@ See documentation for further information.</oldsource>
       <translation>%1 "不是数字。</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="110"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="116"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>是的，退订</translation>
@@ -7767,37 +7930,37 @@ See documentation for further information.</oldsource>
       <translation>当前运行时间</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="122"/>
+      <location filename="../../components/PageGensetModel.qml" line="148"/>
       <source>Genset error codes</source>
       <translation>发电机组错误代码</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="272"/>
+      <location filename="../../components/PageGensetModel.qml" line="298"/>
       <source>Heatsink temperature</source>
       <translation>散热器温度</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="338"/>
+      <location filename="../../components/PageGensetModel.qml" line="365"/>
       <source>Charge voltage</source>
       <translation type="unfinished">充电电压</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="349"/>
+      <location filename="../../components/PageGensetModel.qml" line="376"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>充电电压目前由 BMS 控制。</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="355"/>
+      <location filename="../../components/PageGensetModel.qml" line="382"/>
       <source>Charge current limit</source>
       <translation>充电电流限制</translation>
     </message>
     <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="365"/>
+      <location filename="../../components/PageGensetModel.qml" line="392"/>
       <source>BMS Controlled</source>
       <translation>BMS控制</translation>
     </message>
     <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="370"/>
+      <location filename="../../components/PageGensetModel.qml" line="397"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>如果有BMS，BMS控制将自动启用。如果系统配置已更改或没有BMS，则进行重置。</translation>
     </message>
@@ -7817,7 +7980,7 @@ See documentation for further information.</oldsource>
       <translation>Tailscale（远程 VPN 访问）</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="426"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1</translation>
@@ -7975,7 +8138,7 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>自定义服务器 URL（Headscale）</translation>
     </message>
     <message id="genset_controller_requires_helper_relay">
-      <location filename="../../components/PageGensetModel.qml" line="35"/>
+      <location filename="../../components/PageGensetModel.qml" line="53"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
       <translation>该发电机组控制器需要一个辅助继电器来控制，但未配置辅助继电器。请在设置 → 继电器下将继电器 1 配置为 "已连接的发电机组辅助继电器"。</translation>
     </message>
@@ -8052,7 +8215,7 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>根据配置的自动启动条件启动和停止发电机。</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="311"/>
+      <location filename="../../components/PageGensetModel.qml" line="338"/>
       <source>DC genset settings</source>
       <translation>直流发电机组设置</translation>
     </message>
@@ -8315,7 +8478,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>自动启动 - %1</translation>
     </message>
     <message id="settings_relay_deactivation_value">
-      <location filename="../../components/TemperatureRelaySettings.qml" line="89"/>
+      <location filename="../../components/TemperatureRelaySettings.qml" line="86"/>
       <source>Deactivation value</source>
       <oldsource>Deativation value</oldsource>
       <translation>禁用值</translation>
@@ -8544,7 +8707,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>利用率</translation>
     </message>
     <message id="controlcard_evcs_title">
-      <location filename="../../pages/controlcards/EVCSCard.qml" line="24"/>
+      <location filename="../../pages/controlcards/EVCSCard.qml" line="22"/>
       <source>EVCS (%1)</source>
       <extracomment>%1 = the EVCS name</extracomment>
       <translation>EVCS (%1)</translation>
@@ -8670,37 +8833,37 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>物理输入/输出</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="80"/>
       <source>Tank and Temperature Sensors</source>
       <translation>水箱和温度传感器</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="114"/>
       <source>Relays</source>
       <translation>继电器</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="128"/>
       <source>Digital I/O</source>
       <translation>数字输入/输出</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="176"/>
       <source>Server Applications</source>
       <translation>服务器应用</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="174"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
       <source>Modbus TCP Server</source>
       <translation>Modbus TCP 服务器</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
       <source>Venus OS Large Features</source>
       <translation>Venus OS 大版本功能</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="195"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
 Documentation at https://ve3.nl/vol</source>
@@ -8948,7 +9111,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>访问控制, 显示, 语言, 支持</translation>
     </message>
     <message id="common_words_large_features_currently_disabled">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="529"/>
       <source>This feature is disabled, since "All modifications enabled" under "Settings -&gt; General -&gt; Modification checks" is disabled.</source>
       <translation>该功能已禁用，因为 "设置 -&gt; 常规 -&gt; 修改检查 "下的 "启用所有修改 "已禁用。</translation>
     </message>
@@ -9167,7 +9330,7 @@ firmware integrity before contacting support</source>
       <translation>页面将在 5 秒后自动重新加载</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Dynamic power limit</source>
       <translation>动态功率限制</translation>
     </message>
@@ -9213,7 +9376,7 @@ firmware integrity before contacting support</source>
       <translation>简短页面</translation>
     </message>
     <message id="settings_briefview_tank_details">
-      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="221"/>
       <source>Tank details</source>
       <translation>液位细节</translation>
     </message>
@@ -9263,7 +9426,7 @@ firmware integrity before contacting support</source>
       <translation>中心详情</translation>
     </message>
     <message id="settings_briefview_center_temperature_services">
-      <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="34"/>
+      <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="35"/>
       <source>Temperature services</source>
       <translation>温度服务</translation>
     </message>
@@ -11013,101 +11176,106 @@ firmware integrity before contacting support</source>
     </message>
     <message>
       <location filename="../../pages/settings/tz/TzAmericaData.qml" line="17"/>
+      <source>Atlantic Daylight Time</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
       <source>Atlantic Standard Time</source>
       <translation>大西洋标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="18"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
       <source>Central Brazilian Standard Time</source>
       <translation>巴西中部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="19"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
       <source>Pacific SA Standard Time</source>
       <translation>太平洋南美洲标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="20"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
       <source>Paraguay Standard Time</source>
       <translation>巴拉圭标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="21"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
       <source>SA Western Standard Time</source>
       <translation>南美西部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="22"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
       <source>Venezuela Standard Time</source>
       <translation>委内瑞拉标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="23"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
       <source>Eastern Standard Time</source>
       <translation>东部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="24"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
       <source>SA Pacific Standard Time</source>
       <translation>南美太平洋标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="25"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
       <source>US Eastern Standard Time</source>
       <translation>美国东部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="26"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
       <source>Canada Central Standard Time</source>
       <translation>加拿大中部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="27"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
       <source>Central America Standard Time</source>
       <translation>中美洲标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="28"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
       <source>Central Standard Time (Mexico)</source>
       <translation>中部标准时间（墨西哥）</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="29"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
       <source>Central Standard Time</source>
       <translation>中部标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="30"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
       <source>Mountain Standard Time (Mexico)</source>
       <translation>山区标准时间（墨西哥）</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="31"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
       <source>Mountain Standard Time</source>
       <translation>山区标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="32"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
       <source>US Mountain Standard Time</source>
       <translation>美国山区标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="33"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
       <source>Pacific Standard Time (Mexico)</source>
       <translation>太平洋标准时间（墨西哥）</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="34"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
       <source>Pacific Standard Time</source>
       <translation>太平洋标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="35"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
       <source>Alaskan Standard Time</source>
       <translation>阿拉斯加标准时间</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="36"/>
+      <location filename="../../pages/settings/tz/TzAmericaData.qml" line="37"/>
       <source>Hawaii-Aleutian</source>
       <translation>夏威夷-阿留申</translation>
     </message>
@@ -11368,6 +11536,11 @@ firmware integrity before contacting support</source>
       <source>Cape Verde Standard Time</source>
       <translation>佛得角标准时间</translation>
     </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzAtlanticData.qml" line="13"/>
+      <source>Mid-Atlantic Standard Time</source>
+      <translation type="unfinished">大西洋中部标准时间</translation>
+    </message>
   </context>
   <context>
     <name>TzAustraliaData</name>
@@ -11406,33 +11579,138 @@ firmware integrity before contacting support</source>
     <name>TzEtcData</name>
     <message>
       <location filename="../../pages/settings/tz/TzEtcData.qml" line="10"/>
+      <source>GMT -13</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
+      <source>GMT -12</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
+      <source>GMT -10</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
+      <source>GMT -09</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
+      <source>GMT -08</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="16"/>
+      <source>GMT -07</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="17"/>
+      <source>GMT -06</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="18"/>
+      <source>GMT -05</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="19"/>
+      <source>GMT -04</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="20"/>
+      <source>GMT -03</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="22"/>
+      <source>GMT -01</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="23"/>
+      <source>GMT</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="24"/>
+      <source>GMT +01</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="25"/>
+      <source>GMT +02</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="26"/>
+      <source>GMT +03</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="27"/>
+      <source>GMT +04</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="28"/>
+      <source>GMT +05</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="29"/>
+      <source>GMT +06</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="30"/>
+      <source>GMT +07</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="31"/>
+      <source>GMT +08</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="32"/>
+      <source>GMT +09</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="33"/>
+      <source>GMT +10</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="34"/>
+      <source>GMT +11</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="35"/>
       <source>GMT +12</source>
       <translation>GMT +12</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="11"/>
-      <source>GMT </source>
-      <translation>GMT</translation>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="36"/>
+      <source>UTC</source>
+      <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
-      <source>Mid-Atlantic Standard Time</source>
-      <translation>大西洋中部标准时间</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="13"/>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="21"/>
       <source>GMT -02</source>
       <translation>GMT -02</translation>
     </message>
     <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="14"/>
+      <location filename="../../pages/settings/tz/TzEtcData.qml" line="12"/>
       <source>GMT -11</source>
       <translation>GMT -11</translation>
-    </message>
-    <message>
-      <location filename="../../pages/settings/tz/TzEtcData.qml" line="15"/>
-      <source>Dateline Standard Time</source>
-      <translation>国际日期变更线标准时间</translation>
     </message>
   </context>
   <context>
