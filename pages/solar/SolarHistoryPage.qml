@@ -37,6 +37,10 @@ Page {
 				daysComboBox.currentIndex = prevComboIndex - 2
 			}
 		}
+
+		focus: true
+		KeyNavigation.right: daysComboBox
+		KeyNavigation.down: chart.visible ? chart : null
 	}
 
 	ComboBox {
