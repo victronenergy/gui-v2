@@ -11,6 +11,7 @@ T.Dialog {
 	id: root
 
 	property string secondaryTitle
+	property color backgroundColor: Theme.color_background_secondary
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property alias canAccept: doneButton.enabled
 	readonly property real centeredY: (parent.height - height) / 2
@@ -62,7 +63,7 @@ T.Dialog {
 
 	background: Rectangle {
 		radius: Theme.geometry_modalDialog_radius
-		color: Theme.color_background_secondary
+		color: root.backgroundColor
 		border.color: Theme.color_modalDialog_border
 
 		DialogShadow {}

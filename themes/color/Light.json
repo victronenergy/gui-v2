@@ -105,7 +105,6 @@
     "color_levelsPage_fallingGauge_alarmIcon": "color_red",
     "color_levelsPage_tank_title": "color_black",
     "color_levelsPage_risingGauge_alarmIcon": "color_white",
-    "color_levelsPage_tankGroupData_background_color": "#B2000000",
     "color_levelsPage_gauge_backgroundColor": "color_white",
     "color_levelsPage_gauge_separatorBarColor": "color_background_secondary",
 
