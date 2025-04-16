@@ -51,9 +51,7 @@ LevelsTab {
 			enabled: tankOrGroupDelegate.isGroup
 			radius: Theme.geometry_levelsPage_panel_radius
 			onClicked: {
-				expandedTanksLoader.tankModel = tankOrGroupDelegate.tankModel
-				expandedTanksLoader.active = true
-				expandedTanksLoader.item.active = true
+				Global.dialogLayer.open(expandedTanksComponent, { tankModel: tankOrGroupDelegate.tankModel })
 			}
 		}
 
@@ -99,16 +97,41 @@ LevelsTab {
 
 	// If you have multiple tanks merged into a single gauge, you can click on the gauge.
 	// This popup appears, containing an exploded view with each of the tanks in its own gauge.
-	Loader {
-		id: expandedTanksLoader
+	Component {
+		id: expandedTanksComponent
 
-		property var tankModel
+		ModalDialog {
+			id: expandedDialog
 
-		active: false
-		sourceComponent: ExpandedTanksView {
-			tankModel: expandedTanksLoader.tankModel
-			animationEnabled: root.animationEnabled
+			property TankModel tankModel
+
+			width: Theme.geometry_screen_width
+			height: Theme.geometry_screen_height
+			header: null
+			footer: null
+			backgroundColor: "transparent"
+
+			contentItem: Item {
+				ExpandedTanksView {
+					anchors.centerIn: parent
+					width: Theme.geometry_screen_width
+					height: Theme.geometry_levelsPage_panel_expanded_height
+					leftMargin: contentWidth > width
+							? Theme.geometry_levelsPage_gaugesView_horizontalMargin
+							: parent.width/2 - contentWidth / 2
+					rightMargin: contentWidth > width
+								 ? Theme.geometry_levelsPage_gaugesView_horizontalMargin
+								 : 0
+
+					model: expandedDialog.tankModel
+					animationEnabled: root.animationEnabled
+
+					MouseArea {
+						anchors.fill: parent
+						onClicked: expandedDialog.accept()
+					}
+				}
+			}
 		}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load expanded tanks view:", errorString())
 	}
 }
