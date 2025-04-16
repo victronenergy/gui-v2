@@ -31,10 +31,12 @@ Item {
 				? "qrc:/images/key_navigation_highlight_light.svg"
 				: "qrc:/images/key_navigation_highlight_dark.svg"
 		border {
-			left: Theme.geometry_focus_highlight_corner_size
-			right: Theme.geometry_focus_highlight_corner_size
-			top: Theme.geometry_focus_highlight_corner_size
-			bottom: Theme.geometry_focus_highlight_corner_size
+			// If the width/height of the highlight is shorter than the corner size, then shrink the
+			// border size to avoid cropping the corners of the image.
+			left: Math.min(root.width / 2, Theme.geometry_focus_highlight_corner_size)
+			right: Math.min(root.width / 2, Theme.geometry_focus_highlight_corner_size)
+			top: Math.min(root.height / 2, Theme.geometry_focus_highlight_corner_size)
+			bottom: Math.min(root.height / 2, Theme.geometry_focus_highlight_corner_size)
 		}
 	}
 }

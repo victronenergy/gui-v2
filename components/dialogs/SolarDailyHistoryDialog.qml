@@ -18,6 +18,13 @@ T.Dialog {
 	property int maximumDay
 	property var highlightBarForDay
 
+	function _setDay(d) {
+		if (d >= minimumDay && d <= maximumDay) {
+			day = d
+			_refresh()
+		}
+	}
+
 	function _refresh() {
 		dateLabel.text = ClockTime.formatDeltaDate(-1 * 86400 * day, "ddd d MMM")
 		tableView.dayRange = [day, day + 1]
@@ -48,6 +55,7 @@ T.Dialog {
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
+	focus: Global.keyNavigationEnabled
 
 	// In case height changes when dialog is opened, update the highlight bar position.
 	onHeightChanged: root._positionHighlightBar()
@@ -102,11 +110,7 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 			}
 			visible: root.day > root.minimumDay
-
-			onClicked: {
-				root.day--
-				root._refresh()
-			}
+			onClicked: root._setDay(root.day - 1)
 		}
 
 		ArrowButton {
@@ -117,11 +121,7 @@ T.Dialog {
 			}
 			visible: root.day < root.maximumDay
 			rotation: 180
-
-			onClicked: {
-				root.day++
-				root._refresh()
-			}
+			onClicked: root._setDay(root.day + 1)
 		}
 	}
 
@@ -129,6 +129,13 @@ T.Dialog {
 	contentItem: Rectangle {
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
+		focus: true
+
+		Keys.onLeftPressed: root._setDay(root.day - 1)
+		Keys.onRightPressed: root._setDay(root.day + 1)
+		Keys.onUpPressed: errorView.expanded = true
+		Keys.onDownPressed: errorView.expanded = false
+		Keys.enabled: Global.keyNavigationEnabled
 
 		Label {
 			id: dateLabel

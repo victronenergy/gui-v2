@@ -55,6 +55,11 @@ CT.ComboBox {
 				visible: root.currentIndex === index
 			}
 		}
+
+		KeyNavigationHighlight {
+			anchors.fill: parent
+			active: parent.ListView.isCurrentItem
+		}
 	}
 
 	indicator: CP.ColorImage {
@@ -114,5 +119,10 @@ CT.ComboBox {
 		// Workaround for QTBUG-121029 (popup does not open as popup visible=true even when closed)
 		function _updateVisibility() { visible = opened }
 		onOpenedChanged: Qt.callLater(_updateVisibility)
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }
