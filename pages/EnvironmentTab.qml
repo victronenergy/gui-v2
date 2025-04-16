@@ -5,51 +5,27 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 import Victron.Gauges
 
-Flickable {
+LevelsTab {
 	id: root
 
-	property bool animationEnabled: true
+	readonly property int twoGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 4, Theme.geometry_screen_width)
+	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
 
-	width: parent.width
-	height: parent.height
-	contentWidth: contentRow.width
-	leftMargin: levelsRepeater.count > 3
-			? Theme.geometry_levelsPage_environment_horizontalMargin
-			: (width - contentRow.width) / 2
-	rightMargin: Theme.geometry_levelsPage_environment_horizontalMargin
-	boundsBehavior: Flickable.StopAtBounds
-	contentX: -leftMargin   // shouldn't be needed, but initial value may be incorrect due to delegate resizing
+	model: Global.environmentInputs.model
+	delegate: EnvironmentGaugePanel {
+		required property Device device
 
-	property int twoGaugeWidth: Gauges.width(levelsRepeater.count, 4, root.width)
-	property int oneGaugeWidth: Gauges.width(levelsRepeater.count, 6, root.width)
-
-	Row {
-		id: contentRow
-
-		height: parent.height
-
-		spacing: Gauges.spacing(levelsRepeater.count)
-
-		Repeater {
-			id: levelsRepeater
-			model: Global.environmentInputs.model
-
-			delegate: EnvironmentGaugePanel {
-				animationEnabled: root.animationEnabled
-
-				width: _twoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
-				height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
-				title: model.device.name
-				temperature: Global.systemSettings.convertFromCelsius(model.device.temperature)
-				temperatureType: model.device.temperatureType
-				humidity: model.device.humidity
-				temperatureGaugeGradient: temperatureGradient
-				humidityGaugeGradient: humidityGradient
-			}
-		}
+		width: hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+		height: Gauges.height(Global.pageManager?.expandLayout)
+		animationEnabled: root.animationEnabled
+		title: device?.name ?? ""
+		temperature: Global.systemSettings.convertFromCelsius(device?.temperature ?? NaN)
+		temperatureType: device?.temperatureType ?? NaN
+		humidity: device?.humidity ?? NaN
+		temperatureGaugeGradient: temperatureGradient
+		humidityGaugeGradient: humidityGradient
 	}
 
 	Gradient {
