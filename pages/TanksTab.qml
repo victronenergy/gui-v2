@@ -13,17 +13,13 @@ import QtQuick
 import Victron.VenusOS
 import Victron.Gauges
 
-BaseListView {
+LevelsTab {
 	id: root
-
-	property bool animationEnabled: true
 
 	model: AggregateTankModel {
 		mergeThreshold: Theme.geometry_levelsPage_tankMergeThreshold
 		tankModels: Global.tanks.allTankModels
 	}
-	orientation: ListView.Horizontal
-	spacing: Gauges.spacing(count)
 
 	delegate: TankItem {
 		id: tankOrGroupDelegate
