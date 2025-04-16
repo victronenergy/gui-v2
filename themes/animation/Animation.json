@@ -24,8 +24,6 @@
     "animation_overviewPage_connector_fade_duration": 100,
     "animation_overviewPage_widget_battery_animation_duration": 1200,
     "animation_overviewPage_widget_battery_animation_pause_duration": 800,
-    "animation_levelsPage_tanks_expandedView_fade_duration": 500,
-    "animation_levelsPage_tanks_modelChangeResize_duration": 500,
     "animation_notificationsPage_delegate_displaced_duration": 200,
     "animation_notificationsPage_delegate_opacity_duration": 200,
     "animation_inputPanel_slide_duration": 250,
