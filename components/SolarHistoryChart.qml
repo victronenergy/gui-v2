@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+FocusScope {
 	id: root
 
 	property SolarHistory solarHistory
@@ -169,6 +169,8 @@ Item {
 		Repeater {
 			id: barRepeater
 
+			property int currentIndex: 0
+
 			model: SolarYieldModel {
 				id: yieldModel
 
@@ -186,13 +188,18 @@ Item {
 					coloredBar.height = (model.yieldKwh || 0) * (gridLinesColumn.height / root._maxTickValue)
 				}
 
+				function openHistoryDialog() {
+					Global.dialogLayer.open(dailyHistoryDialogComponent, {day: yieldModel.dayRange[0] + model.index})
+				}
+
 				width: (barRow.width - (barRow.spacing * (barRepeater.count - 1))) / barRepeater.count
 				height: parent.height
+				focus: model.index === barRepeater.currentIndex
 
-				onClicked: {
-					Global.dialogLayer.open(dailyHistoryDialogComponent,
-						{day:  yieldModel.dayRange[0] + model.index})
-				}
+				onClicked: openHistoryDialog()
+				Keys.onSpacePressed: openHistoryDialog()
+				Keys.enabled: Global.keyNavigationEnabled
+				KeyNavigation.right: barRepeater.itemAt((model.index + 1) % barRepeater.count)
 
 				Rectangle {
 					id: coloredBar
@@ -213,6 +220,11 @@ Item {
 						color: barMouseArea.containsPress ? Theme.color_lightBlue : Theme.color_ok
 					}
 				}
+
+				KeyNavigationHighlight {
+					anchors.fill: parent
+					active: parent.activeFocus
+				}
 			}
 		}
 	}
@@ -231,6 +243,9 @@ Item {
 					return null
 				}
 				return container.coloredBar
+			}
+			onDayChanged: {
+				barRepeater.currentIndex = day - yieldModel.dayRange[0]
 			}
 		}
 	}
