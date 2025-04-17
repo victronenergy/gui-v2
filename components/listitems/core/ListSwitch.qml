@@ -19,6 +19,12 @@ ListItem {
 	property int valueTrue: 1
 	property int valueFalse: 0
 
+	property bool _updatingValue
+
+	// Emitted when a click results in a change in the data value, or when checkable=true and the
+	// switch is toggled directly.
+	signal toggled
+
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	content.children: [
@@ -37,6 +43,7 @@ ListItem {
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
 			onClicked: root.clicked()
+			onToggled: root.toggled()
 		}
 	]
 
@@ -48,6 +55,7 @@ ListItem {
 				// (dataItem might not be valid until the first write so we can't simply use
 				// the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
 				// Note that an malformed uid will result in it being empty when inspected.
+				root._updatingValue = true
 				if (invertSourceValue) {
 					dataItem.setValue(switchItem.checked ? valueTrue : valueFalse)
 				} else {
@@ -59,5 +67,11 @@ ListItem {
 
 	VeQuickItem {
 		id: dataItem
+		onValueChanged: {
+			if (root._updatingValue) {
+				root.toggled()
+			}
+			root._updatingValue = false
+		}
 	}
 }
