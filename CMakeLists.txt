@@ -585,7 +585,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml
     pages/settings/devicelist/dc-in/PageDcMeterHistory.qml
     pages/settings/devicelist/delegates/AcInDeviceListDelegate.qml
-    pages/settings/devicelist/delegates/DcMeterDeviceListDelegate.qml
+    pages/settings/devicelist/delegates/DcDeviceListDelegate.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_acload.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_acsystem.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_alternator.qml
