@@ -13,6 +13,8 @@ Page {
 	property string bindPrefix
 	property alias settingsListView: settingsListView
 
+	title: CommonWords.device_info_title
+
 	GradientListView {
 		id: settingsListView
 

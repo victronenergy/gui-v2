@@ -10,6 +10,7 @@ Item {
 	id: root
 
 	property int mockDeviceCount: 0
+	readonly property int inputCount: 4
 
 	function populate() {
 		const deviceInstanceNum = mockDeviceCount++
@@ -19,20 +20,17 @@ Item {
 		})
 	}
 
+	function outputId(outputIndex) {
+		 // For the last output, use a non-integer id to test that is also supported.
+		return outputIndex === inputCount ? `output_${outputIndex}` : outputIndex
+	}
+
 	property Component switchDevComponent: Component {
 		Device {
 			id: switchDev
 
-			property int inputCount: 4
-
 			function setMockValue(path, value) {
 				Global.mockDataSimulator.setMockValue(serviceUid + path, value)
-			}
-
-			function populateSwitches(Channels){
-				for (let i = 0; i < switchDev.inputCount; ++i) {
-
-				}
 			}
 
 			property Timer _measurementUpdates: Timer {
@@ -40,11 +38,12 @@ Item {
 				repeat: true
 				interval: 2000
 				onTriggered: {
-					for (let i = 0; i < switchDev.inputCount; ++i) {
+					for (let i = 0; i < root.inputCount; ++i) {
 						if (i != 1){
-							switchDev.setMockValue("/SwitchableOutput/%1/Voltage".arg(i), Math.random() * 50)
-							switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(i), Math.random() * 10)
-							switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(i), Math.random() * 10)
+							const outputId = root.outputId(i)
+							switchDev.setMockValue("/SwitchableOutput/%1/Voltage".arg(outputId), Math.random() * 50)
+							switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(outputId), Math.random() * 10)
+							switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(outputId), Math.random() * 10)
 						}
 					}
 
@@ -52,12 +51,13 @@ Item {
 			}
 
 			property Instantiator vebusDevicesExtendedStatus: Instantiator {
-				model: switchDev.inputCount
+				model: root.inputCount
 				delegate: QtObject {
 					readonly property VeQuickItem switchState: VeQuickItem {
 						property int _testStatusIndex: 0
-						uid: switchDev.serviceUid + "/SwitchableOutput/%1/State".arg(index)
+						uid: switchDev.serviceUid + "/SwitchableOutput/%1/State".arg(root.outputId(model.index))
 						onValueChanged: {
+							const outputId = root.outputId(model.index)
 							if (value){
 								const statusData = [
 									VenusOS.SwitchableOutput_Status_Output_Fault,
@@ -69,21 +69,21 @@ Item {
 									VenusOS.SwitchableOutput_Status_Tripped
 								]
 								if ((index === 0 )||(index === 3 )) {
-									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index),  statusData[ _testStatusIndex])
+									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(outputId), statusData[ _testStatusIndex])
 									_testStatusIndex++
 									if (_testStatusIndex >= statusData.length) {
 										_testStatusIndex = 0
 									}
 								} else {
-									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.SwitchableOutput_Status_On)
+									switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(outputId), VenusOS.SwitchableOutput_Status_On)
 								}
 							} else {
-								switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(index), VenusOS.SwitchableOutput_Status_Off)
+								switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(outputId), VenusOS.SwitchableOutput_Status_Off)
 							}
 						}
 					}
 					readonly property VeQuickItem switchStatus: VeQuickItem {
-						uid: switchDev.serviceUid + "/SwitchableOutput/%1/Status".arg(index)
+						uid: switchDev.serviceUid + "/SwitchableOutput/%1/Status".arg(root.outputId(model.index))
 					}
 				}
 			}
@@ -98,38 +98,40 @@ Item {
 				_productName.setValue("Energy Solutions Smart Switch")
 
 				switchDev.setMockValue("/State", Math.floor(Math.random() * 3) + 0x100)
-				switchDev.setMockValue("/NrOfChannels", switchDev.inputCount)
+				switchDev.setMockValue("/NrOfChannels", root.inputCount)
 
-				for (let i = 0; i < switchDev.inputCount; i++) {
+				for (let i = 0; i < root.inputCount; i++) {
+					const outputId = root.outputId(i)
+					switchDev.setMockValue("/SwitchableOutput/%1/Name".arg(outputId), `Output ${i+1}`)
 					if (i === 1) {
-						switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(i), "function Val sw%1".arg(deviceInstance))
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(outputId), "function Val sw%1".arg(deviceInstance))
 					} else {
-						switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(i),"")
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(outputId), "")
 					}
-					switchDev.setMockValue("/SwitchableOutput/%1/Settings/Type".arg(i), i % 3)
+					switchDev.setMockValue("/SwitchableOutput/%1/Settings/Type".arg(outputId), i % 3)
 					if (i == 1) {
 						if (mockDeviceCount === 4) {
-							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i),
-								(1 << VenusOS.SwitchableOutput_Function_Slave) | (1 << VenusOS.SwitchableOutput_Function_Latching));
+							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(outputId),
+								(1 << VenusOS.SwitchableOutput_Type_Slave) | (1 << VenusOS.SwitchableOutput_Type_Latching));
 						} else {
-							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), (1<<VenusOS.SwitchableOutput_Function_Latching));
+							switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(outputId), (1<<VenusOS.SwitchableOutput_Type_Latching));
 						}
 					} else {
-						switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(i), 0x7);
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/ValidTypes".arg(outputId), 0x7);
 					}
-					switchDev.setMockValue("/SwitchableOutput/%1/State".arg(i), 0)
-					switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(i), 0)
+					switchDev.setMockValue("/SwitchableOutput/%1/State".arg(outputId), 0)
+					switchDev.setMockValue("/SwitchableOutput/%1/Status".arg(outputId), 0)
 
 					//optional
-					if (i != 0) switchDev.setMockValue("/SwitchableOutput/%1/Dimming".arg(i), 50)
-					if (i != 2) switchDev.setMockValue("/SwitchableOutput/%1/Settings/FuseRating".arg(i), 5)
-					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Temperature".arg(i), 0)
-					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Voltage".arg(i), 0)
-					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(i), 0)
+					if (i != 0) switchDev.setMockValue("/SwitchableOutput/%1/Dimming".arg(outputId), 50)
+					if (i != 2) switchDev.setMockValue("/SwitchableOutput/%1/Settings/FuseRating".arg(outputId), 5)
+					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Temperature".arg(outputId), 0)
+					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Voltage".arg(outputId), 0)
+					if (i != 1) switchDev.setMockValue("/SwitchableOutput/%1/Current".arg(outputId), 0)
 					if (i < 2) {
-						switchDev.setMockValue("/SwitchableOutput/%1/Settings/Group".arg(i), "")
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/Group".arg(outputId), "")
 					} else {
-						switchDev.setMockValue("/SwitchableOutput/%1/Settings/Group".arg(i), "Group %1".arg(Math.round(i/2)))
+						switchDev.setMockValue("/SwitchableOutput/%1/Settings/Group".arg(outputId), "Group %1".arg(Math.round(i/2)))
 					}
 				}
 			}

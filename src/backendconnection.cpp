@@ -690,6 +690,25 @@ QString BackendConnection::serviceUidFromName(const QString &serviceName, int de
 	return QString();
 }
 
+QString BackendConnection::serviceUidFromUid(const QString &fullUid) const
+{
+	// If the given uid has a path appended, this strips the path and returns the base service uid.
+	switch (type()) {
+	case UnknownSource:
+		break;
+	case DBusSource:
+	case MockSource:
+	{
+		// full uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffix]/path/to/value"
+		return fullUid.mid(0, fullUid.indexOf('/', uidPrefix().length() + 1));
+	}
+	case MqttSource:
+		// uid format is "mqtt/<serviceType>/<deviceInstance>/path/to/value"
+		return fullUid.split('/').mid(0, 3).join('/');
+	}
+	return QString();
+}
+
 QString BackendConnection::uidPrefix() const
 {
 	switch (type()) {
