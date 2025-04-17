@@ -55,6 +55,16 @@ Page {
 				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
+			ListOutputBatterySwitch {
+				bindPrefix: root.bindPrefix
+				onToggled: Global.pageManager.popPage() // service has changed to .alternator, so page is no longer relevant
+			}
+
+			DcHistorySettingsColumn {
+				width: parent?.width ?? 0
+				bindPrefix: root.bindPrefix
+			}
+
 			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {

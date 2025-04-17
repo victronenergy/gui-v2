@@ -113,6 +113,7 @@ QtObject {
 				setMockValue("/Link/TemperatureSense", 25)
 				setMockValue("/Link/NetworkStatus", 4)
 				setMockValue("/Error", 0)
+				setMockValue("/Settings/OutputBattery", 0)
 				setMockValue("/Dc/0/Temperature", Math.random() * 50)
 
 				setMockValue("/Dc/In/I", 3.5)

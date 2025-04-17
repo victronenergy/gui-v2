@@ -341,6 +341,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListLink.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
+    components/listitems/ListOutputBatterySwitch.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListEvChargerPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
@@ -583,6 +584,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml
     pages/settings/devicelist/battery/PageLynxIonIo.qml
     pages/settings/devicelist/battery/PageLynxIonSystem.qml
+    pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml
     pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml
     pages/settings/devicelist/dc-in/PageAlternator.qml
     pages/settings/devicelist/dc-in/PageAlternatorModel.qml
