@@ -28,6 +28,7 @@ public:
 		ProductId_Alternator_Generic = 0xB091,
 		ProductId_Alternator_Integrel = 0xB092,
 		ProductId_Alternator_MgAfc = 0xB0F0,
+		ProductId_Alternator_Altion = 0xB093,
 	};
 	Q_ENUM(ProductId_Alternator)
 
@@ -88,6 +89,7 @@ public:
 		case ProductId_Alternator_MgAfc:
 		case ProductId_Alternator_Generic:
 		case ProductId_Alternator_Integrel:
+		case ProductId_Alternator_Altion:
 			return true;
 		default:
 			return false;
