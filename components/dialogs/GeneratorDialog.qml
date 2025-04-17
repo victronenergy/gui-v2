@@ -88,6 +88,7 @@ ModalDialog {
 						// of closing the dialog.
 						acceptButtonBackground.animating = false
 						acceptButtonBackground.state = "default"
+						root.rejectButton.focus = true // accept button is now disabled, so focus a different button.
 						return false
 					}
 				}

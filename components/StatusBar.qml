@@ -52,12 +52,18 @@ FocusScope {
 
 	component StatusBarButton : Button {
 		radius: 0
-		width: parent.height
-		height: parent.height
+		width: Theme.geometry_statusBar_button_height
+		height: Theme.geometry_statusBar_button_height
 		backgroundColor: "transparent"  // don't show background when disabled
 		display: C.AbstractButton.IconOnly
 		color: Theme.color_ok
 		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				breadcrumbs.updateFocusDirectionHint()
+			}
+		}
+
 		Behavior on opacity {
 			enabled: root.animationEnabled
 			OpacityAnimator {
@@ -100,6 +106,7 @@ FocusScope {
 		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
 
 		onClicked: root.leftButtonClicked()
+		KeyNavigation.right: auxButton
 	}
 
 	StatusBarButton {
@@ -112,15 +119,27 @@ FocusScope {
 		icon.source: "qrc:/images/icon_auxpage_on_32.svg"
 		enabled: root.pageStack.depth === 0 && Global.allDevicesModel.switchDevices.count > 0
 
-		PressArea {
-			anchors.fill: parent
-			onClicked: root.auxButtonClicked()
-		}
+		onClicked: root.auxButtonClicked()
+		KeyNavigation.right: breadcrumbs
 	}
-
 
 	Breadcrumbs {
 		id: breadcrumbs
+
+		property int focusDirectionHint: Qt.LeftToRight
+
+		function updateFocusDirectionHint() {
+			// When breadcrumbs list is focused: if the focus is arriving from the left side, focus
+			// the first breadcrumb, and if arriving from right side, focus the last breadcrumb.
+			if (leftButton.activeFocus || auxButton.activeFocus) {
+				focusDirectionHint = Qt.LeftToRight
+			} else if (rightButton.activeFocus || sleepButton.activeFocus) {
+				focusDirectionHint = Qt.RightToLeft
+			} else {
+				// Focus is coming from the main list view below, so do not change the current index
+				focusDirectionHint = -1
+			}
+		}
 
 		anchors {
 			top: parent.top
@@ -133,6 +152,8 @@ FocusScope {
 		height: Theme.geometry_settings_breadcrumb_height
 		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
 		visible: count >= 2
+		enabled: visible // don't receive focus when invisble
+		focus: false // don't give status bar initial focus to the breadcrumbs
 
 		getText: function(index) {
 			return index === 0
@@ -154,6 +175,24 @@ FocusScope {
 			}
 
 			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
+		}
+
+		onActiveFocusChanged: {
+			if (activeFocus && focusDirectionHint >= 0) {
+				currentIndex = focusDirectionHint === Qt.LeftToRight ? 0 : count-1
+				focusDirectionHint = -1
+			}
+		}
+
+		KeyNavigation.right: alarmButton
+
+		Connections {
+			target: root.pageStack
+			enabled: Global.keyNavigationEnabled
+			function onDepthChanged() {
+				// When pages are pushed/popped, reset the focus to be on the last breadcrumb.
+				breadcrumbs.currentIndex = breadcrumbs.count - 1
+			}
 		}
 	}
 
@@ -241,6 +280,8 @@ FocusScope {
 		}
 		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
 		backgroundColor: Theme.color_critical_background
+		downColor: Theme.color_critical
+		highlightMargins: -(4 * Theme.geometry_button_border_width) // ensure highlight border can be seen against critical backgroundColor
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 
 		//% "Silence alarm"
@@ -259,6 +300,7 @@ FocusScope {
 		}
 
 		StatusBarButton {
+			id: rightButton
 			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
 
@@ -272,15 +314,36 @@ FocusScope {
 							   ? "qrc:/images/icon_refresh_32.svg"
 							   : ""
 
+			KeyNavigation.left: alarmButton
+			KeyNavigation.right: sleepButton
 			onClicked: root.rightButtonClicked()
 		}
 
 		StatusBarButton {
+			id: sleepButton
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
-			visible: !!Global.screenBlanker && Global.screenBlanker.supported && Global.screenBlanker.enabled
-			enabled: !!Global.pageManager
-					 && Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			visible: enabled
+			enabled: Global.screenBlanker?.supported
+					&& Global.screenBlanker?.enabled
+					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			onClicked: Global.screenBlanker.setDisplayOff()
+		}
+	}
+
+	// The status bar should never become the focused item; if it does, it means there was no
+	// previously focused item, or the last focused status bar button has been disabled. So, look
+	// for the first available button and focus that instead.
+	Connections {
+		target: Global.main
+		function onActiveFocusItemChanged() {
+			if (Global.main.activeFocusItem === root) {
+				for (const button of [leftButton, auxButton, breadcrumbs, alarmButton, rightButton, sleepButton]) {
+					if (button.enabled) {
+						button.focus = true
+						break
+					}
+				}
+			}
 		}
 	}
 }

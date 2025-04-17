@@ -11,6 +11,10 @@ QtObject {
 
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
+	readonly property int activeOrUnAcknowledgedCount: Math.max(alarms.activeCount, alarms.unAcknowledgedCount)
+			+ Math.max(warnings.activeCount, warnings.unAcknowledgedCount)
+			+ Math.max(informations.activeCount, informations.unAcknowledgedCount)
+
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
 		onNotificationUpdated: (notification) => toastedNotification.onNotificationUpdated(notification)
 		onNotificationRemoved: (notification) => toastedNotification.onNotificationRemoved(notification)
@@ -103,34 +107,8 @@ QtObject {
 		id: toastedNotification
 	}
 
-	function _notificationSortFunction(leftNotification: BaseNotification, rightNotification: BaseNotification) : bool {
-
-		if (leftNotification.active !== rightNotification.active) {
-			return leftNotification.active && !rightNotification.active
-		}
-
-		if (leftNotification.type !== rightNotification.type) {
-
-			if (leftNotification.type === VenusOS.Notification_Alarm && rightNotification.type !== VenusOS.Notification_Alarm) {
-				return true
-			}
-			if (leftNotification.type === VenusOS.Notification_Warning && rightNotification.type === VenusOS.Notification_Info) {
-				return true
-			}
-			return false
-		}
-
-		return leftNotification.dateTime > rightNotification.dateTime
-	}
-	readonly property NotificationSortFilterProxyModel activeOrUnAcknowledgedModel: NotificationSortFilterProxyModel {
+	readonly property NotificationSortFilterProxyModel sortedModel: NotificationSortFilterProxyModel {
 		sourceModel: allNotificationsModel
-		filterFunction: (notification) => { return notification.active || !notification.acknowledged }
-		sortFunction: root._notificationSortFunction
-	}
-	readonly property NotificationSortFilterProxyModel inactiveAndAcknowledgedModel: NotificationSortFilterProxyModel {
-		sourceModel: allNotificationsModel
-		filterFunction: (notification) => { return !notification.active && notification.acknowledged }
-		sortFunction: root._notificationSortFunction
 	}
 
 	function reset() {
@@ -145,14 +123,14 @@ QtObject {
 		uid: root.serviceUid + "/AcknowledgeAll"
 	}
 
-	readonly property bool statusBarNotificationIconVisible: activeOrUnAcknowledgedModel.count > 0
+	readonly property bool statusBarNotificationIconVisible: activeOrUnAcknowledgedCount > 0
 	readonly property int statusBarNotificationIconPriority: alarms.hasActive || !alarms.hasActive && alarms.hasUnAcknowledged ? VenusOS.Notification_Alarm :
 																																warnings.hasActive || !warnings.hasActive && warnings.hasUnAcknowledged ? VenusOS.Notification_Warning :
 																																																		  informations.hasActive || !informations.hasActive && informations.hasUnAcknowledged ? VenusOS.Notification_Info : -1
 	readonly property bool silenceAlarmVisible: alarms.hasUnAcknowledged ||
 												warnings.hasUnAcknowledged ||
 												informations.hasUnAcknowledged
-	readonly property bool navBarNotificationCounterVisible: activeOrUnAcknowledgedModel.count > 0
+	readonly property bool navBarNotificationCounterVisible: activeOrUnAcknowledgedCount > 0
 
 	component NotificationData: QtObject {
 		property int activeCount: 0

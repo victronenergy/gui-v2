@@ -52,4 +52,15 @@ QtObject {
 	function popAllPages(operation = PageStack.PopTransition) {
 		emitter.popAllPagesRequested(operation)
 	}
+
+	function ensureInteractive() {
+		if (idleModeTimer.running) {
+			idleModeTimer.restart()
+		}
+		if (interactivity === VenusOS.PageManager_InteractionMode_Idle) {
+			interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
+			return true
+		}
+		return false
+	}
 }

@@ -60,6 +60,13 @@ public:
 	};
 	Q_ENUM(StatusBar_RightButton)
 
+	enum SpinBox_FocusMode {
+		SpinBox_FocusMode_NoAction,
+		SpinBox_FocusMode_Navigate,
+		SpinBox_FocusMode_Edit
+	};
+	Q_ENUM(SpinBox_FocusMode)
+
 	enum Units_Type {
 		Units_None = 0,
 		Units_Volume_CubicMeter,

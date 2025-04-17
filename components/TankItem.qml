@@ -93,4 +93,9 @@ Rectangle {
 										   root.totalCapacity,
 										   root.totalRemaining)
 	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
+	}
 }

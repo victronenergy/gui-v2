@@ -221,6 +221,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
+    components/KeyNavigationListHelper.qml
     components/MultiServiceDeviceModel.qml
     components/NavBar.qml
     components/NavButton.qml
@@ -283,10 +284,10 @@ set (VENUS_QML_MODULE_SOURCES
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
     components/ClassAndVrmInstance.qml
-
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
+    components/controls/KeyNavigationHighlight.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
@@ -299,6 +300,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
+    components/controls/SpinBoxEditFrame.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TextField.qml
@@ -346,6 +348,8 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListTemperatureRelay.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
+    components/listitems/core/BaseListItem.qml
+    components/listitems/core/BaseListLoader.qml
     components/listitems/core/ListAlarm.qml
     components/listitems/core/ListButton.qml
     components/listitems/core/ListDateSelector.qml
@@ -448,6 +452,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/DialogLayer.qml
     pages/EnvironmentTab.qml
     pages/LevelsPage.qml
+    pages/LevelsTab.qml
     pages/MainView.qml
     pages/NotificationLayer.qml
     pages/NotificationsPage.qml
@@ -723,6 +728,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/keyeventfilter.h
+    src/keyeventfilter.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
@@ -1105,6 +1112,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/electron.svg
         images/ess.svg
         images/freshWater.svg
+        images/key_navigation_highlight_dark.svg
+        images/key_navigation_highlight_light.svg
         images/icon_black_water_24.svg
         images/icon_charging_generator.svg
         images/icon_charging_grid.svg
@@ -1166,6 +1175,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/settings.svg
         images/shore.svg
         images/solaryield.svg
+        images/spinbox_arrow_up.svg
         images/splash-logo-icon-5inch.svg
         images/splash-logo-icon-7inch.svg
         images/splash-logo-text-5inch.svg
