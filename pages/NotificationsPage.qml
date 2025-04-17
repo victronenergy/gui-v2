@@ -23,103 +23,44 @@ SwipeViewPage {
 		// over the top of the notificationsView
 		clip: true
 
-		// Header contains the top list of active and/or unAcknowledged notifications.
-		header: Item {
-			id: headerItem
-
-			function _scrollToTop() {
-				// Scroll to the top of both lists.
-				activeNotificationsView.positionViewAtBeginning()
+		header: Global.notifications.activeOrUnAcknowledgedCount === 0 ? noAlertsHeader : null
+		onHeaderItemChanged: {
+			if (headerItem) {
 				notificationsView.positionViewAtBeginning()
 			}
+		}
 
-			width: parent.width
-			height: history.y + history.height
+		section.property: "activeOrUnAcknowledged"
+		section.delegate: SettingsListHeader {
+			required property bool section
 
-			ListView {
-				id: activeNotificationsView
+			height: section ? 0 : implicitHeight
+			bottomPadding: Theme.geometry_gradientList_spacing
+			text: section ? "" : CommonWords.history
+		}
 
-				property bool animateHeightChanges
-				property int prevCount: -1
+		model: Global.notifications.sortedModel
+		spacing: Theme.geometry_gradientList_spacing
+		delegate: NotificationDelegate {
+			id: notifDelegate
 
-				onCountChanged: {
-					if (count < prevCount && count !== 0) { // don't fade/resize for the last remaining notification
-						// When the item 'remove' transition is triggered, also animate the
-						// shrinking of the list, otherwise the header size jumps abrumptly.
-						animateHeightChanges = true
-					} else if (count > prevCount) {
-						// When a new notification is added, scroll to the top of the list header
-						// so that the user can see it.
-						Qt.callLater(headerItem._scrollToTop)
-					}
-					prevCount = count
-				}
-
-				// Only item removals are animated. Animating additions is less straightforward as
-				// the ListView normally resizes upwards when the header grows in height, and the
-				// list will be scrolled to the top as soon as a new notification appears anyway.
-				remove: Transition {
-					enabled: root.isCurrentPage
-					NumberAnimation { property: "opacity"; to: 0; duration: Theme.animation_notificationsPage_delegate_opacity_duration }
-				}
-				removeDisplaced: Transition {
-					enabled: root.isCurrentPage
-					SequentialAnimation {
-						PauseAnimation { duration: Theme.animation_notificationsPage_delegate_opacity_duration }
-						NumberAnimation { property: "y"; duration: Theme.animation_notificationsPage_delegate_displaced_duration; easing.type: Easing.InOutQuad }
-					}
-				}
-
-				// Do not shrink smaller than the height of the "No current alerts" placeholder
-				// item. This allows placeholder to be shown over the last removed delegate in a
-				// smoother fashion, instead of abruptly hiding the view and showing the placeholder.
-				height: Math.max(Theme.geometry_notificationsPage_placeholder_height, contentHeight)
-
-				// When a remove occurs, animate the shrinking of the list so that the header does
-				// not abruptly jump in size and cause the historical items to jump upwards.
-				Behavior on height {
-					// The animation needs to be enabled when the view count changes. This cannot
-					// just bind to transition.running as the results are inconsistent.
-					enabled: activeNotificationsView.animateHeightChanges && root.isCurrentPage
-
-					SequentialAnimation {
-						PauseAnimation { duration: Theme.animation_notificationsPage_delegate_opacity_duration }
-						NumberAnimation { property: "height"; duration: Theme.animation_notificationsPage_delegate_displaced_duration; easing.type: Easing.InOutQuad }
-						ScriptAction { script: activeNotificationsView.animateHeightChanges = false }
-					}
-				}
-
-				width: parent.width
-				interactive: false  // this list cannot be scrolled separately to the main list
-				spacing: Theme.geometry_gradientList_spacing
-				model: Global.notifications.activeOrUnAcknowledgedModel
-				delegate: NotificationDelegate {
-					id: activeDelegate
-
-					// When the delegate is clicked, acknowledge it.
-					PressArea {
-						anchors.fill: parent
-						enabled: !activeDelegate.acknowledged
-						radius: activeDelegate.radius
-						// we have access to the BaseNotification via the notification role
-						// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
-						onReleased: (activeDelegate.notification as Notification)?.updateAcknowledged(true)
-					}
-				}
+			// When the delegate is clicked, acknowledge it.
+			PressArea {
+				anchors.fill: parent
+				enabled: !notifDelegate.acknowledged
+				radius: notifDelegate.radius
+				// we have access to the BaseNotification via the notification role
+				// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
+				onReleased: (notifDelegate.notification as Notification)?.updateAcknowledged(true)
 			}
+		}
+
+		Component {
+			id: noAlertsHeader
 
 			Row {
-				id: noCurrentAlerts
-
-				visible: activeNotificationsView.count === 0
-				width: parent.width
-				height: Theme.geometry_notificationsPage_placeholder_height
-
-				onVisibleChanged: {
-					if (visible) {
-						Qt.callLater(headerItem._scrollToTop)
-					}
-				}
+				width: notificationsView.width
+				height: checkmarkIcon.height + (2 * Theme.geometry_listItem_content_horizontalMargin)
 
 				Item {
 					id: iconContainer
@@ -145,19 +86,6 @@ SwipeViewPage {
 					text: qsTrId("notifications_no_current_alerts")
 				}
 			}
-
-			SectionHeader {
-				id: history
-
-				text: CommonWords.history
-				anchors.top: activeNotificationsView.count ? activeNotificationsView.bottom : noCurrentAlerts.bottom
-				preferredVisible: notificationsView.count !== 0
-			}
 		}
-
-		// Main list contains the historical notifications (inactive and acknowledged).
-		model: Global.notifications.inactiveAndAcknowledgedModel
-		spacing: Theme.geometry_gradientList_spacing
-		delegate: NotificationDelegate {}
 	}
 }

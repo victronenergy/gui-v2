@@ -27,6 +27,7 @@ public:
 		NotificationId,
 		Acknowledged,
 		Active,
+		ActiveOrUnAcknowledged,
 		Type,
 		DateTime,
 		Description,
