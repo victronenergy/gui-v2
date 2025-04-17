@@ -17,8 +17,13 @@ DeviceListDelegate {
 	}
 
 	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-				{ bindPrefix : root.device.serviceUid })
+		if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
+			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
+					{ "bindPrefix": device.serviceUid })
+		} else {
+			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
+					{ "bindPrefix": device.serviceUid })
+		}
 	}
 
 	VeQuickItem {
