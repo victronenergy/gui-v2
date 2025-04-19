@@ -92,20 +92,10 @@ Page {
 				}
 			}
 
-			ListRadioButtonGroup {
-				id: securityProfile
+			ListNavigation {
+				id: securityProfileListNavigation
 
-				property int pendingProfile
-				property string pendingPassword
-
-				//% "Local network security profile"
-				text: qsTrId("settings_local_network_security_profile")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
-				updateDataOnClick: false // handle option clicked manually.
-				popDestination: undefined
-				//% "Please select..."
-				defaultSecondaryText: qsTrId("settings_security_profile_indeterminate")
-				optionModel: [
+				readonly property var optionModel: [
 					{
 						//% "Secured"
 						display: qsTrId("settings_security_profile_secured"),
@@ -128,27 +118,45 @@ Page {
 						value: VenusOS.Security_Profile_Unsecured,
 						//% "No password and the network communication is not encrypted"
 						caption: qsTrId("settings_security_profile_unsecured_caption")
-					},
-				]
-				validatePassword: (index, password) => {
-					pendingPassword = ""
-					if (password.length < 8) {
-						//% "Password needs to be at least 8 characters long"
-						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_security_too_short_password"))
 					}
-					pendingPassword = password
-					return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+				]
+				readonly property int currentIndex: {
+					if (!optionModel || optionModel.length === undefined || securityProfile.uid.length === 0 || !securityProfile.valid) {
+						return defaultIndex
+					}
+					for (let i = 0; i < optionModel.length; ++i) {
+						if (optionModel[i].value === securityProfile.value) {
+							return i
+						}
+					}
+					return defaultIndex
 				}
 
-				onOptionClicked: (index) => {
-					// Radio button model indexes should match the enums
-					securityProfile.pendingProfile = index
-					if (securityProfile.pendingProfile === VenusOS.Security_Profile_Unsecured) {
-						// NOTE: this restarts the webserver when changed
-						Global.dialogLayer.open(securityProfileConfirmationDialog)
-					} else {
-						Global.dialogLayer.open(securityProfileConfirmationDialog, {password: pendingPassword})
-					}
+				readonly property int currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+													? optionModel[currentIndex].value
+													: VenusOS.Security_Profile_Indeterminate
+				property int defaultIndex: -1
+
+				// The password as entered during this flow sequence; it is not fetched from the backend
+				// and is used to facilitate this flow sequence only.
+				property string currentPassword
+
+
+				//% "Please select..."
+				property string defaultSecondaryText: qsTrId("settings_security_profile_indeterminate")
+
+				//% "Local network security profile"
+				text: qsTrId("settings_local_network_security_profile")
+
+				secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+							   ? optionModel[currentIndex].display
+							   : defaultSecondaryText
+
+				interactive: true
+
+				VeQuickItem {
+					id: securityProfile
+					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
 				}
 
 				VeQuickItem {
@@ -156,63 +164,35 @@ Page {
 					uid: Global.venusPlatform.serviceUid + "/Security/Api"
 				}
 
+				onClicked: {
+					Global.pageManager.pushPage(pageSettingsSecurityProfileComponent, { title: text })
+				}
+
 				Component {
-					id: securityProfileConfirmationDialog
+					id: pageSettingsSecurityProfileComponent
 
-					ModalWarningDialog {
-						property string password
+					PageSettingsSecurityProfile {
 
-						icon.source: ""
-						title: {
-							switch (securityProfile.pendingProfile) {
-							case VenusOS.Security_Profile_Secured:
-								//% "Select 'Secured' profile?"
-								return qsTrId("settings_security_profile_secured_title")
-							case VenusOS.Security_Profile_Weak:
-								//% "Select 'Weak' profile?"
-								return qsTrId("settings_security_profile_weak_title")
-							case VenusOS.Security_Profile_Unsecured:
-								//% "Select 'Unsecured' profile?"
-								return qsTrId("settings_security_profile_unsecured_title")
-							}
-						}
+						currentProfile: securityProfileListNavigation.currentValue
+						currentPassword: securityProfileListNavigation.currentPassword
+						optionModel: securityProfileListNavigation.optionModel
 
-						description: {
-							switch (securityProfile.pendingProfile) {
-							case VenusOS.Security_Profile_Secured:
-								//% "• Local network services are password protected\n• The network communication is encrypted\n• A secure connection with VRM is enabled\n• Insecure settings cannot be enabled"
-								return qsTrId("settings_security_profile_secured_description")
-							case VenusOS.Security_Profile_Weak:
-								//% "• Local network services are password protected\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
-								return qsTrId("settings_security_profile_weak_description")
-							case VenusOS.Security_Profile_Unsecured:
-								//% "• Local network services do not need a password\n• Unencrypted access to local websites is enabled as well (HTTP/HTTPS)"
-								return  qsTrId("settings_security_profile_unsecured_description")
-							}
-						}
-						onAccepted: {
-							const profile = securityProfile.pendingProfile
-							if (profile === VenusOS.Security_Profile_Unsecured)
-								password = "";
-							securityProfile.currentIndex = profile
-							// NOTE: this restarts the webserver when changed
-							var object = {"SetPassword": password, "SetSecurityProfile": profile};
-							var json = JSON.stringify(object);
-							securityApi.setValue(json);
-							// This guards the wasm version to trigger a reload even if the reply isn't received.
-							BackendConnection.securityProtocolChanged()
-							Global.pageManager.popPage()
-							if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
-								Global.showToastNotification(VenusOS.Notification_Info,
-															 //% "Page will automatically reload in 5 seconds"
-															 qsTrId("access_and_security_page_will_reload"),
-															 3000)
-							}
-						}
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
-								? Theme.geometry_modalDialog_height
-								: Theme.geometry_modalDialog_height_small
+						onUpdateProfile: (profile, password) => {
+
+											 // persist the currentPassword for this flow sequence instance only
+											 securityProfileListNavigation.currentPassword = password
+
+											 const object = {
+												 // use an empty password for the unsecure profile
+												 "SetPassword": (profile === VenusOS.Security_Profile_Unsecured ? "" : password),
+												 "SetSecurityProfile": profile
+											 }
+											 // NOTE: this restarts the webserver when changed
+											 securityApi.setValue(JSON.stringify(object))
+
+											 // This guards the wasm version to trigger a reload even if the reply isn't received.
+											 BackendConnection.securityProtocolChanged()
+										 }
 					}
 				}
 			}
