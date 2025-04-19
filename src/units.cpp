@@ -30,6 +30,16 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 		return Unit::Celsius;
 	case Victron::VenusOS::Enums::Units_Temperature_Fahrenheit:
 		return Unit::Fahrenheit;
+	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
+		return Unit::MetresPerSecond;
+	case Victron::VenusOS::Enums::Units_Speed_KilometersPerHour:
+		return Unit::KilometersPerHour;
+	case Victron::VenusOS::Enums::Units_Speed_MilesPerHour:
+		return Unit::MilesPerHour;
+	case Victron::VenusOS::Enums::Units_Speed_Knots:
+		return Unit::Knots;
+	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute:
+		return Unit::RevolutionsPerMinute;
 	default:
 		return Unit::Default;
 	}
@@ -97,6 +107,9 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
 	case VenusOS::Enums::Units_RevolutionsPerMinute:   // fall through
 	case VenusOS::Enums::Units_CardinalDirection:      // fall through
+	case VenusOS::Enums::Units_Time_Day:               // fall through
+	case VenusOS::Enums::Units_Time_Hour:              // fall through
+	case VenusOS::Enums::Units_Time_Minute:            // fall through
 		return 0;
 	default:
 		// VoltAmpere
@@ -149,6 +162,12 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("RPM");
 	case VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return QStringLiteral("m/s");
+	case VenusOS::Enums::Units_Speed_KilometersPerHour:
+		return QStringLiteral("km/h");
+	case VenusOS::Enums::Units_Speed_MilesPerHour:
+		return QStringLiteral("mph");
+	case VenusOS::Enums::Units_Speed_Knots:
+		return QStringLiteral("kn");
 	case VenusOS::Enums::Units_Hectopascal:
 		return QStringLiteral("hPa");
 	case VenusOS::Enums::Units_Kilopascal:
@@ -157,6 +176,12 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return DegreesSymbol;
 	case VenusOS::Enums::Units_PowerFactor:
 		return QString();
+	case VenusOS::Enums::Units_Time_Day:
+		return QStringLiteral("d");
+	case VenusOS::Enums::Units_Time_Hour:
+		return QStringLiteral("h");
+	case VenusOS::Enums::Units_Time_Minute:
+		return QStringLiteral("m");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
@@ -193,6 +218,9 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_WattsPerSquareMeter:
 	case VenusOS::Enums::Units_RevolutionsPerMinute:
 	case VenusOS::Enums::Units_Speed_MetresPerSecond:
+	case VenusOS::Enums::Units_Speed_KilometersPerHour:
+	case VenusOS::Enums::Units_Speed_MilesPerHour:
+	case VenusOS::Enums::Units_Speed_Knots:
 	case VenusOS::Enums::Units_Volume_CubicMeter:
 	case VenusOS::Enums::Units_Volume_Liter:
 	case VenusOS::Enums::Units_Volume_GallonUS:

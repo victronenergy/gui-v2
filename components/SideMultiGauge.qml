@@ -22,6 +22,7 @@ Item {
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode
+	property int strokeWidth: Theme.geometry_arc_strokeWidth
 
 	width: parent.width
 	height: parent.height
@@ -69,6 +70,7 @@ Item {
 				direction: root.direction
 				startAngle: root.startAngle
 				endAngle: root.endAngle
+				strokeWidth: root.strokeWidth
 				horizontalAlignment: root.horizontalAlignment
 				arcVerticalCenterOffset: root.arcVerticalCenterOffset
 				value: valueRange.valueAsRatio * 100
