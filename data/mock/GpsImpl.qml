@@ -47,7 +47,6 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetGpsRequested(config) {
-			console.log("function onSetGpsRequested(config)")
 			if (config) {
 				setMockGpsValue(".tty2/ProductName", config.productName)
 				setMockGpsValue(".tty2/DeviceInstance", config.deviceInstance)
