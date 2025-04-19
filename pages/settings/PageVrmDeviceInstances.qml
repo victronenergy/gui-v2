@@ -32,24 +32,19 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var _swapDialog
-	property var _rebootDialog
-
 	function _changeVrmInstance(uid, deviceClass, newVrmInstance, errorFunc) {
 		// See if another device of this class already has this VRM instance.
 		const conflictingDeviceIndex = classAndVrmInstanceModel.findByClassAndVrmInstance(deviceClass, newVrmInstance)
 		if (conflictingDeviceIndex >= 0) {
 			// Show a dialog to confirm whether to swap device instances with the conflicting one.
-			if (!_swapDialog) {
-				_swapDialog = swapDialogComponent.createObject(root)
-			}
 			const maximumVrmInstance = classAndVrmInstanceModel.maximumVrmInstance(deviceClass)
-
-			_swapDialog.instanceA.uid = uid
-			_swapDialog.instanceB.uid = classAndVrmInstanceModel.get(conflictingDeviceIndex).uid
-			_swapDialog.temporaryVrmInstance = isNaN(maximumVrmInstance) ? 0 : maximumVrmInstance + 1
-			_swapDialog.errorFunc = errorFunc
-			_swapDialog.open()
+			const dialogParams = {
+				instanceAUid: uid,
+				instanceBUid: classAndVrmInstanceModel.get(conflictingDeviceIndex).uid,
+				temporaryVrmInstance: isNaN(maximumVrmInstance) ? 0 : maximumVrmInstance + 1,
+				errorFunc: errorFunc,
+			}
+			Global.dialogLayer.open(swapDialogComponent, dialogParams)
 			return false
 		} else {
 			// No conflicts; just set the new VRM instance.
@@ -66,7 +61,8 @@ Page {
 
 		for (let i = 0; i < Global.allDevicesModel.count; ++i) {
 			const device = Global.allDevicesModel.deviceAt(i)
-			if (device.deviceInstance === deviceInstance
+			if (device
+					&& device.deviceInstance === deviceInstance
 					&& BackendConnection.serviceTypeFromUid(device.serviceUid) === deviceClass) {
 				return device
 			}
@@ -76,10 +72,6 @@ Page {
 
 	// If user changes the VRM instance, ask whether reboot should be done when page is popped.
 	tryPop: () => {
-		if (_swapDialog && _swapDialog.visible) {
-			return false
-		}
-
 		// If a text field delegate in the list is currently focused, remove the focus so that it
 		// calls _changeVrmInstance() to save the new VRM instance value, before this checks
 		// whether any VRM instances have changed.
@@ -89,10 +81,7 @@ Page {
 			return true
 		}
 
-		if (!_rebootDialog) {
-			_rebootDialog = rebootDialogComponent.createObject(root)
-		}
-		_rebootDialog.open()
+		Global.dialogLayer.open(rebootDialogComponent)
 		return false
 	}
 

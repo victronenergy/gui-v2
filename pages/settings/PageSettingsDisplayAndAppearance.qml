@@ -104,8 +104,6 @@ Page {
 			ListRadioButtonGroup {
 				id: runningVersion
 
-				property ModalWarningDialog _restartDialog
-
 				text: onScreenGuiv2Possible.value
 				//% "User interface"
 					  ? qsTrId("settings_display_onscreen_ui")
@@ -131,12 +129,11 @@ Page {
 					// When the /RunningVersion changes, venus-platform quits the currently-running
 					// app and starts the selected version. Note: on device, user may not see the
 					// dialog at all, depending on how quickly the app exits.
-					if (!_restartDialog) {
-						_restartDialog = restartDialogComponent.createObject(Global.dialogLayer)
+					const dialogParams = {
+						versionName: optionModel[index].display,
+						settingText: runningVersion.text
 					}
-					_restartDialog.versionName = optionModel[index].display
-					_restartDialog.settingText = runningVersion.text
-					_restartDialog.open()
+					Global.dialogLayer.open(restartDialogComponent, dialogParams)
 					dataItem.setValue(optionModel[index].value)
 				}
 
