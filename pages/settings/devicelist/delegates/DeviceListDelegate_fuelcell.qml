@@ -6,5 +6,5 @@
 import QtQuick
 import Victron.VenusOS
 
-DcMeterDeviceListDelegate {
+DcDeviceListDelegate {
 }
