@@ -2716,12 +2716,12 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <translation>BMS-beheer word outomaties geaktiveer wanneer BMS teenwoordig is. Herstel as die stelselkonfigurasie verander het of as daar geen BMS teenwoordig is nie.</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="248"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="238"/>
       <source>Load</source>
       <translation>Laai</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="312"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="300"/>
       <source>Networked operation</source>
       <translation>Genetwerkte werking</translation>
     </message>
@@ -6630,7 +6630,7 @@ Wil jy voortgaan?</translation>
       <translation>Slegs Omsetter</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="347"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="331"/>
       <source>Short circuit alarm</source>
       <translation>Kortsluiting alarm</translation>
     </message>
@@ -6971,7 +6971,7 @@ Wil jy voortgaan?</translation>
       <translation>VRM-toestelgevalle</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="345"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="329"/>
       <source>High temperature alarm</source>
       <translation>Hoë temperatuur alarm</translation>
     </message>
@@ -9013,52 +9013,42 @@ As die kragopwekker tans aan die gang is as gevolg van 'n outostart toestand, sa
       <translation>Data-eenhede</translation>
     </message>
     <message id="solarcharger_not_supported">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="73"/>
       <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
       <translation>Ongelukkig is die gekoppelde MPPT-sonkraglaaier nie versoenbaar nie.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_70_15">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="77"/>
       <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
       <translation>Die 70/15 moet van jaar/week 1308 of later wees. MPPT 70/15's wat tans vanaf ons pakhuis gestuur word, is versoenbaar.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_version">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="80"/>
       <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
       <translation>Die firmware weergawe in die MPPT Solar Charger moet v1.09 of later wees. Kontak Victron Service vir opdateringsinstruksies en lêers.</translation>
     </message>
     <message id="solarcharger_pv">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="126"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="116"/>
       <source>PV</source>
       <extracomment>PV power for solar charger</extracomment>
       <translation type="unfinished">PV</translation>
     </message>
     <message id="solarcharger_total_power">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="151"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="141"/>
       <source>Total PV power</source>
       <translation>Totale PV-krag</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="226"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="216"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">Totale opbrengs</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="235"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">Stelsel opbrengs</translation>
-    </message>
-    <message id="charger_alarms_low_battery_voltage_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="341"/>
-      <source>Low battery voltage alarm</source>
-      <translation type="unfinished">Lae battery spanning alarm</translation>
-    </message>
-    <message id="charger_alarms_high_battery_voltage_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="343"/>
-      <source>High battery voltage alarm</source>
-      <translation type="unfinished">Hoë battery spanning alarm</translation>
     </message>
     <message id="page_vebus_charge_battery">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
