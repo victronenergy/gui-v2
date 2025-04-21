@@ -2716,12 +2716,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Řízení BMS se aktivuje automaticky, pokud je BMS přítomna. Resetujte, pokud se změnila konfigurace systému nebo pokud není přítomna žádná BMS.</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="248"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="238"/>
       <source>Load</source>
       <translation>Zátěž</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="312"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="300"/>
       <source>Networked operation</source>
       <translation>Paralelní fungování</translation>
     </message>
@@ -6631,7 +6631,7 @@ Chcete pokračovat?</translation>
       <translation>Pouze měnič</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="347"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="331"/>
       <source>Short circuit alarm</source>
       <translation>Alarm zkratu</translation>
     </message>
@@ -6972,7 +6972,7 @@ Chcete pokračovat?</translation>
       <translation>Instance zařízení VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="345"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="329"/>
       <source>High temperature alarm</source>
       <translation>Alarm vysoké teploty</translation>
     </message>
@@ -9014,52 +9014,42 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <translation>Datové jednotky</translation>
     </message>
     <message id="solarcharger_not_supported">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="83"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="73"/>
       <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
       <translation>Připojená solární nabíječka MPPT bohužel není kompatibilní.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_70_15">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="87"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="77"/>
       <source>The 70/15 needs to be from year/week 1308 or later. MPPT 70/15's currently shipped from our warehouse are compatible.</source>
       <translation>Číslo 70/15 musí pocházet z roku/týdne 1308 nebo pozdějšího. Modely MPPT 70/15, které jsou v současné době dodávány z našeho skladu, jsou kompatibilní.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_version">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="90"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="80"/>
       <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
       <translation>Verze firmwaru solární nabíječky MPPT musí být v1.09 nebo novější. Pokyny k aktualizaci a soubory získáte od servisní služby Victron.</translation>
     </message>
     <message id="solarcharger_pv">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="126"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="116"/>
       <source>PV</source>
       <extracomment>PV power for solar charger</extracomment>
       <translation type="unfinished">FV</translation>
     </message>
     <message id="solarcharger_total_power">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="151"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="141"/>
       <source>Total PV power</source>
       <translation>Celkový FV výkon</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="226"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="216"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">Celkový výnos</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="235"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">Systémový výnos</translation>
-    </message>
-    <message id="charger_alarms_low_battery_voltage_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="341"/>
-      <source>Low battery voltage alarm</source>
-      <translation type="unfinished">Alarm nízkého napětí baterie</translation>
-    </message>
-    <message id="charger_alarms_high_battery_voltage_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="343"/>
-      <source>High battery voltage alarm</source>
-      <translation type="unfinished">Alarm vysokého napětí baterie</translation>
     </message>
     <message id="page_vebus_charge_battery">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="156"/>
