@@ -9,7 +9,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.count > 0
+									   ? Global.allDevicesModel.motorDriveDevices.firstObject
+									   : null
 
 	readonly property VeQuickItemsQuotient dcConsumption: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp
 																	? current

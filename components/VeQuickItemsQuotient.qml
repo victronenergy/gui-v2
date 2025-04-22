@@ -14,7 +14,7 @@ QtObject {
 	readonly property var denominator: _denominator.valid ? _denominator.value : NaN
 	readonly property real normalizedValue: denominator === 0 ? NaN : numerator / denominator
 	readonly property real percentage: 100 * normalizedValue
-	readonly property bool valid: !isNaN(percentage)
+	readonly property bool valid: numeratorUid && denominatorUid && !isNaN(percentage)
 	required property int sourceUnit
 	required property int displayUnit
 

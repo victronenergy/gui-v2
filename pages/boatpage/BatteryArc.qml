@@ -119,7 +119,7 @@ Loader {
 		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
 		animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-		value: _battery ? _battery.stateOfCharge : 0 //visible ? dcInputRange.valueAsRatio * 100 : 0
+		value: _battery ? _battery.stateOfCharge : 0
 	}
 	onStatusChanged: if (status === Loader.Error) console.warn("Unable to load", objectName)
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
