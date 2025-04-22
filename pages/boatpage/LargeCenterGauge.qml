@@ -100,7 +100,9 @@ Item {
 			anchors.horizontalCenter: parent.horizontalCenter
 			verticalAlignment: Text.AlignVCenter
 			color: Theme.color_font_primary
-			font.pixelSize: Theme.font_boatPage_speed_pixelSize
+			font.pixelSize: motorDriveGauges.visible || rpmLabel.visible
+							? Theme.font_boatPage_speed_pixelSize
+							: Theme.font_boatPage_speed_pixelSize_large
 			font.weight: Font.Medium
 			visible: activeDataSource === gps
 			text: Math.round(gps.numerator)
