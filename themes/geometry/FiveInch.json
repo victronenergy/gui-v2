@@ -44,7 +44,6 @@
     "geometry_segmentedButtonRow_height": 48,
 
     "geometry_listItem_height": 48,
-    "geometry_listItem_flat_height": 48,
     "geometry_listItem_radius": 8,
     "geometry_listItem_content_horizontalMargin": 24,
     "geometry_listItem_flat_content_horizontalMargin": 16,
@@ -105,7 +104,6 @@
     "geometry_navigationBar_button_spacing": "geometry_button_spacing",
     "geometry_navigationBar_notifications_redDot_leftMargin": 1,
     "geometry_navigationBar_notifications_redDot_topMargin": 6,
-    "geometry_navigationBar_notifications_redDot_horizontalCenterOffset": 12,
     "geometry_navigationBar_notification_counter_height": 20,
     "geometry_navigationBar_notification_counter_width_one_digit": 20,
     "geometry_navigationBar_notification_counter_width_two_digits": 30,
@@ -242,7 +240,6 @@
     "geometry_generatorIconLabel_icon_width": 24,
     "geometry_generatorIconLabel_icon_margin": 4,
 
-    "geometry_veBusDeviceCard_modeButton_maximumWidth": 180,
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,
@@ -426,7 +423,6 @@
 
     "geometry_settings_battery_rangeSlider_labelWidth": 70,
 
-    "geometry_veBusDevice_PVCFListQuantityGroup_minimumDelegateWidth": 100,
     "geometry_veBusAlarm_minimumDelegateWidth": 120,
 
     "geometry_modbus_device_protocol_width": 40,
