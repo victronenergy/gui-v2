@@ -11,7 +11,6 @@ Item {
 
 	required property VeQuickItemsQuotient gps
 	required property MotorDrive motorDrive
-	required property VeQuickItemsQuotient systemDcLoad
 
 	property bool animationEnabled: false
 
@@ -20,9 +19,7 @@ Item {
 															 ? gps
 															 : motorDriveDcConsumption.valid
 															   ? motorDriveDcConsumption
-															   : systemDcLoad.valid
-																 ? systemDcLoad
-																 : null
+															   : null
 
 	objectName: "LargeCenterGauge"
 	onActiveDataSourceChanged: console.log(objectName, "dataSource:", activeDataSource ? activeDataSource.objectName : "null")
@@ -139,7 +136,7 @@ Item {
 			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
 			font.pixelSize: Theme.font_size_h1
 			text: Math.abs(motorDrive.rpm._numerator.value)
-			visible: motorDrive && !isNaN(motorDrive.rpm.numerator)
+			visible: motorDrive && motorDrive.rpm.numeratorUid && !isNaN(motorDrive.rpm.numerator)
 		}
 
 		Label {

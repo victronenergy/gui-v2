@@ -20,6 +20,7 @@ QtObject {
 	signal setEnvironmentInputsRequested(config : var)
 	signal setEvChargersRequested(config : var)
 	signal setGeneratorsRequested(config : var)
+	signal setGpsRequested(config : var)
 	signal setSolarRequested(config : var)
 	signal setSystemRequested(config : var)
 	signal setTanksRequested(config : var)
@@ -30,6 +31,7 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/BoatPage.qml": boatPageConfig,
 	})
 
 	function setMockValue(uid, value) {
@@ -356,6 +358,10 @@ QtObject {
 
 	property NotificationsPageConfig notificationsConfig: NotificationsPageConfig {
 		id: notificationsConfig
+	}
+
+	property BoatPageConfig boatPageConfig: BoatPageConfig {
+		property int configIndex: -1
 	}
 
 	property Connections _globalConn: Connections {

@@ -871,6 +871,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/EssImpl.qml
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
+    data/mock/GpsImpl.qml
     data/mock/HeatPumpsImpl.qml
     data/mock/MeteoDevicesImpl.qml
     data/mock/MockDataManager.qml
@@ -885,6 +886,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/TanksImpl.qml
     data/mock/UnsupportedDevicesImpl.qml
     data/mock/InverterChargersImpl.qml
+    data/mock/config/BoatPageConfig.qml
     data/mock/config/BriefAndOverviewPageConfig.qml
     data/mock/config/LevelsPageConfig.qml
     data/mock/config/MockDataSimulator.qml
@@ -942,7 +944,7 @@ endif()
 
 # BoatPageComponents_QML_MODULE
 set(BoatPageComponents_QML_MODULE_SOURCES
-    pages/BoatPage.qml
+    pages/boatpage/BoatPage.qml
     pages/boatpage/Background.qml
     pages/boatpage/BatteryArc.qml
     pages/boatpage/BatteryPercentage.qml
@@ -979,6 +981,20 @@ if (${LOAD_QML_FROM_FILESYSTEM})
 	VERBATIM
     )
 endif()
+
+qt_add_resources(BoatPageComponents "BoatPageComponents_large_resources"
+    BIG_RESOURCES
+    FILES
+        images/boat_glow.png
+	images/icon_battery_40.png
+	images/icon_boat_32.svg
+	images/icon_engine_temp_32.svg
+	images/icon_motorController_32.svg
+	images/icon_propeller_32.png
+	images/icon_propeller.svg
+	images/icon_temp_coolant_32.svg
+)
+
 # end BoatPageComponents_QML_MODULE
 
 # Mqtt_QML_MODULE
@@ -1117,17 +1133,14 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
     BIG_RESOURCES
     FILES
         fonts/Roboto-Regular.ttf
-        images/boat_glow.png
         images/acloads.svg
         images/alternator.svg
         images/breadcrumb_lhs.svg
         images/breadcrumb_rhs.svg
         images/icon_auxpage_on_32.svg
         images/icon_battery_24.svg
-        images/icon_battery_40.png
         images/icon_battery_charging_24.svg
         images/icon_battery_discharging_24.svg
-        images/icon_boat_32.svg
         images/icon_connectivity_32.png
         images/icon_debug_32.png
         images/icon_devices_32.png
@@ -1180,23 +1193,18 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/icon_controls_off_32.svg
         images/icon_controls_on_32.svg
         images/icon_dc_24.svg
-        images/icon_engine_temp_32.svg
         images/icon_humidity_32.svg
         images/icon_input_24.svg
         images/icon_manualstart_24.svg
         images/icon_manualstart_timer_24.svg
         images/icon_minus.svg
-        images/icon_motorController_32.svg
         images/icon_plus.svg
         images/icon_plus_32.svg
-        images/icon_propeller_32.png
-        images/icon_propeller.svg
         images/icon_refresh_32.svg
         images/icon_sidepanel_off_32.svg
         images/icon_sidepanel_on_32.svg
         images/icon_screen_sleep_32.svg
         images/icon_temp_32.svg
-        images/icon_temp_coolant_32.svg
         images/information.svg
         images/inverter.svg
         images/inverter_charger.svg

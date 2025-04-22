@@ -91,7 +91,6 @@ SwipeViewPage {
 		anchors.fill: parent
 		gps: _gps // primary data source
 		motorDrive: _motorDrive // secondary data source
-		systemDcLoad: _systemDcLoad // tertiary data source
 		animationEnabled: root.animationEnabled
 	}
 
@@ -149,15 +148,6 @@ SwipeViewPage {
 
 	BoatPageComponents.Gps {
 		id: _gps
-	}
-
-	VeQuickItemsQuotient {
-		id: _systemDcLoad
-		objectName: "systemDcLoad"
-		numeratorUid: BackendConnection.serviceUidForType("system") + "/Dc/System/Power"
-		denominatorUid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
-		sourceUnit: VenusOS.Units_Watt
-		displayUnit: VenusOS.Units_Watt
 	}
 
 	states: State {
