@@ -32,8 +32,8 @@ QtObject {
 					}
 
 					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/RPM", Math.floor(Math.random() * 4000))
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Dc/0/Power", Math.floor(Math.random() * 12345))
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Dc/0/Current", Math.floor(Math.random() * 234))
+
+					power.setValue(Math.floor(Math.random() * 12345))
 					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Direction", gear)
 					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Temperature", Math.floor(Math.random() * 100))
 					Global.mockDataSimulator.setMockValue(serviceUid + "/Coolant/Temperature", Math.floor(Math.random() * 100))
@@ -46,6 +46,10 @@ QtObject {
 				_customName.setValue("Motor Drive %1".arg(deviceInstance))
 			}
 		}
+	}
+
+	property VeQuickItem power: VeQuickItem {
+		uid: BackendConnection.serviceUidForType("system") + "/MotorDrive/Power"
 	}
 
 	Component.onCompleted: {

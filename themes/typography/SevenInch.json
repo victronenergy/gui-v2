@@ -19,6 +19,7 @@
     "font_boatPage_consumptionGauge_smallPixelSize": 34,
     "font_boatPage_batteryTemperature_pixelSize": 34,
     "font_boatPage_rpm_min_max_pixelSize": 24,
+    "font_boatPage_speed_pixelSize_large": 176,
     "font_boatPage_speed_pixelSize": 128,
     "font_boatPage_centerGauge_consumption_pixelSize": 80,
     "font_boatPage_gear_pixelSize": 41

@@ -50,7 +50,7 @@ Column {
 		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
 		visible: motorDrive && motorDrive.dcConsumption.valid && showDcConsumption
-		value: motorDrive.dcConsumption.numerator
-		unit: Global.systemSettings.electricalQuantity
+		value: motorDrive.dcConsumption.numerator // this is always 'power', not 'current', as max current is not supported
+		unit: VenusOS.Units_Watt
 	}
 }

@@ -134,7 +134,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _motordriveRpmMax: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Rpm/Max"
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
 		Component.onCompleted: setValue(6000)
 	}
 
