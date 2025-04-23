@@ -200,8 +200,8 @@ Rectangle {
 
 			states: State {
 				name: "alarm"
-				when: BackendConnection.state >= BackendConnection.Disconnected
-					|| mqttErrorLabel.text.length > 0
+				when: errorStateTimer.errorIsPersistent
+					|| mqttErrorLabel.visible
 					|| mqttHeartbeatLabel.visible
 				PropertyChanges {
 					target: alarmIconContainer
@@ -217,11 +217,30 @@ Rectangle {
 			CP.ColorImage {
 				anchors.centerIn: parent
 				source: "qrc:/images/icon_warning_24.svg"
-				color: (BackendConnection.state >= BackendConnection.Disconnected
-						|| mqttErrorLabel.text.length > 0
+				color: (errorStateTimer.errorIsPersistent
+						|| mqttErrorLabel.visible
 						|| (BackendConnection.vrm && BackendConnection.heartbeatState === BackendConnection.HeartbeatInactive))
 					? Theme.color_critical
 					: Theme.color_warning
+			}
+
+			// Upon waking up a WASM tab, the websocket may have been dropped,
+			// so there will be both an MQTT comms error and a disconnected -> reconnecting state change.
+			// This is a common case, so we shouldn't alarm the user and show the warning labels
+			// unless reconnection fails (Serj suggested waiting for 3 seconds).
+			Timer {
+				id: errorStateTimer
+				interval: 3000
+				property bool errorIsPersistent
+				property bool stateIsError: BackendConnection.state >= BackendConnection.Disconnected
+				onStateIsErrorChanged: {
+					if (stateIsError) {
+						start()
+					} else {
+						errorIsPersistent = false
+					}
+				}
+				onTriggered: errorIsPersistent = true
 			}
 		}
 
@@ -259,7 +278,7 @@ Rectangle {
 		Label {
 			id: mqttErrorLabel
 
-			visible: text.length > 0
+			visible: text.length > 0 && errorStateTimer.errorIsPersistent
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
 			font.pixelSize: Theme.font_splashView_progressText_size
