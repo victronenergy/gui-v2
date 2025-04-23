@@ -107,7 +107,7 @@ Page {
 						anchors.fill: parent
 						onClicked: {
 							let pointList = pointsListView.model
-							pointList.splice(model.index, 1)
+							pointList.splice(pointDelegate.index, 1)
 							points.savePoints(pointList)
 							pointsListView.model = pointList
 						}
