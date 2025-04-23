@@ -15,6 +15,30 @@ else
 fi
 
 
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case "${1}" in
+        # do not delete build files
+        -P|--preserve)
+            PRESERVE=1
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: ${0} [options]"
+            echo "Options:"
+            echo "  -P, --preserve   Do not delete build files"
+            echo "  -H, --host       IP or hostname of the GX device for direct upload"
+            echo "  -h, --help       Show this help message"
+            exit 0
+            ;;
+        # If the option is not recognized, print an error message
+        *)
+            echo "Unknown option: ${1}"
+            ;;
+    esac
+done
+
+
 # Go to the parent directory of the script
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 cd "${BASE_DIR}"
@@ -36,16 +60,23 @@ export QTDIR=${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread
 source "${OUTPUTDIR}/emsdk/emsdk_env.sh"
 source /opt/venus/python/bin/activate
 
+# Checkout the branch you want to build, if not already on it
+# git checkout -b main origin/main
+
 # Update the submodules
 git submodule update --init
 
-# Cleanup old build directory
-if [ -d "build-wasm" ]; then
+# Clean build directory
+if [[ -d "build-wasm" && -z ${PRESERVE} ]]; then
+    echo "Cleaning build directory..."
     rm -rf "build-wasm"
 fi
 
 # Create build directory
-mkdir "build-wasm"
+if [[ ! -d "build-wasm" ]]; then
+    echo "Creating build directory..."
+    mkdir "build-wasm"
+fi
 
 cd "build-wasm"
 
@@ -54,44 +85,46 @@ cd "build-wasm"
 ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
 # Build the project using CMake with the MinSizeRel configuration
-cmake --build .
+cmake --build . --parallel $(nproc)
 
 if [ $? -ne 0 ]; then
     echo
-    echo "ERROR: Build failed."
+    echo -e "\e[31m*** ERROR: Build failed ***\e[0m"
     exit 1
 else
     echo
-    echo "*** Build successful. ***"
-    echo
+    echo -e "\e[32m*** Build successful ***\e[0m"
 fi
 
 
-# Cleanup old artifacts directory
-if [ -d "artifacts" ]; then
-    rm -rf "artifacts"
-fi
-
-# Prepare files that are needed for the GUIv2 to run
-mkdir -p artifacts/wasm
-mv venus-gui-v2.{html,js,wasm} qtloader.js artifacts/wasm/
-cp ../images/victronenergy.svg ../LICENSE.txt ../.github/patches/Makefile artifacts/wasm/
-cp -r ../wasm/icons artifacts/wasm/
-mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
-grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
-sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
-cd artifacts/wasm
-gzip -k -9 venus-gui-v2.wasm
-sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
-rm venus-gui-v2.wasm
-cd ../..
-
-
-# Delete all files and folders except for artifacts
 # Make sure, current path ends with build-wasm
 if [ "${PWD##*/}" = "build-wasm" ]; then
-    find . -mindepth 1 -maxdepth 1 ! -name 'artifacts' -exec rm -rf {} +
-    mv artifacts/wasm . && rmdir artifacts
+    if [ -d "../build-wasm_files_to_copy" ]; then
+        rm -rf ../build-wasm_files_to_copy
+    fi
+
+    # Create output directory
+    mkdir -p ../build-wasm_files_to_copy/wasm
+
+    # Copy the files to the output directory
+    cp venus-gui-v2.{html,js,wasm} qtloader.js \
+        ../build-wasm_files_to_copy/wasm/
+    cp ../images/victronenergy.svg ../LICENSE.txt ../.github/patches/Makefile \
+        ../build-wasm_files_to_copy/wasm/
+    cp -r ../wasm/icons ../build-wasm_files_to_copy/wasm/
+    mv ../build-wasm_files_to_copy/wasm/venus-gui-v2.html ../build-wasm_files_to_copy/wasm/index.html
+
+    # Apply patches
+    grep -q -E '^var createQtAppInstance' ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+    sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+
+    # Compress the wasm file
+    gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
+    sha256sum ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.sha256
+    rm ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
 else
     echo "Current directory is not build-wasm. Aborting to avoid unwanted deleting of files."
 fi
+
+echo "Elapsed time: ${SECONDS} seconds"
+echo

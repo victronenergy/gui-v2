@@ -77,7 +77,7 @@ jobs:
           export PATH=$PATH:${{env.OUTPUTDIR}}/Qt/Tools/CMake/bin
           export QTDIR=${{env.OUTPUTDIR}}/Qt/$QT_VERSION/gcc_64
           ${QTDIR}/bin/qt-configure-module ..
-          cmake --build .
+          cmake --build . --parallel $(nproc)
           cmake --install . --prefix ${QTDIR} --verbose
 
       - name: Configure CMake
@@ -91,7 +91,7 @@ jobs:
       - name: Build unit tests
         run: |
           cd build
-          cmake --build . --config ${{env.BUILD_TYPE}}
+          cmake --build . --config ${{env.BUILD_TYPE}} --parallel $(nproc)
 
       - name: Run unit test
         run: |
