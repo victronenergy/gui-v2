@@ -34,7 +34,7 @@ Page {
 			ListButton {
 				//% "Find PV inverters"
 				text: qsTrId("page_settings_fronius_find_pv_inverters")
-				secondaryText: autoDetectItem.value ? CommonWords.scanning.arg(scanProgressItem.value) : CommonWords.press_to_scan
+				secondaryText: autoDetectItem.value ? CommonWords.scanning.arg(scanProgressItem.value || 0) : CommonWords.press_to_scan
 				onClicked: autoDetectItem.setValue(autoDetectItem.value === 0 ? 1 : 0)
 			}
 
