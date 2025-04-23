@@ -15,6 +15,30 @@ else
 fi
 
 
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case "${1}" in
+        # do not delete build files
+        -P|--preserve)
+            PRESERVE=1
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: ${0} [options]"
+            echo "Options:"
+            echo "  -P, --preserve   Do not delete build files"
+            echo "  -H, --host       IP or hostname of the GX device for direct upload"
+            echo "  -h, --help       Show this help message"
+            exit 0
+            ;;
+        # If the option is not recognized, print an error message
+        *)
+            echo "Unknown option: ${1}"
+            ;;
+    esac
+done
+
+
 if [ ! -f "/opt/venus/current/environment-setup-cortexa8hf-neon-ve-linux-gnueabi" ]; then
     echo "ERROR: Venus OS SDK was not found."
     echo "Execute \"./build-gx-install-requirements.sh\" once or visit this link for how to install and use the SDK: https://github.com/victronenergy/venus/wiki/howto-install-and-use-the-sdk"
@@ -33,23 +57,20 @@ echo "Changed to parent directory: $(pwd)"
 # Checkout the branch you want to build, if not already on it
 # git checkout -b main origin/main
 
-# Replace git SSH URLs with HTTPS URLs
-# TODO
-# .git/config
-
 # Update the submodules
 git submodule update --init
 
-# Clean the repository of untracked files and directories
-# git clean -fd
-
-# Cleanup old build directory
-if [ -d "build-gx" ]; then
+# Clean build directory
+if [[ -d "build-gx" && -z ${PRESERVE} ]]; then
+    echo "Cleaning build directory..."
     rm -rf "build-gx"
 fi
 
 # Create build directory
-mkdir "build-gx"
+if [[ ! -d "build-gx" ]]; then
+    echo "Creating build directory..."
+    mkdir "build-gx"
+fi
 
 cd "build-gx"
 
@@ -58,25 +79,35 @@ cd "build-gx"
 cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
 # Build the project using CMake with the MinSizeRel configuration
-cmake --build . --config MinSizeRel
+cmake --build . --config MinSizeRel --parallel $(nproc)
 
 if [ $? -ne 0 ]; then
     echo
-    echo "ERROR: Build failed."
+    echo -e "\e[31m*** ERROR: Build failed ***\e[0m"
     exit 1
 else
     echo
-    echo "*** Build successful. ***"
-    echo
+    echo -e "\e[32m*** Build successful ***\e[0m"
 fi
 
 
-# Delete all files and folders except for bin and Victron
 # Make sure, current path ends with build-gx
 if [ "${PWD##*/}" = "build-gx" ]; then
-    find . -mindepth 1 -maxdepth 1 ! -name 'bin' ! -name 'venus-gui-v2' ! -name 'Victron' -exec rm -rf {} +
-    mv venus-gui-v2/Main.qml . && mv venus-gui-v2/qmldir . && rm -rf venus-gui-v2
-    mv bin/venus-gui-v2 . && rm -rf bin
+    if [ -d "../build-gx_files_to_copy" ]; then
+        rm -rf ../build-gx_files_to_copy
+    fi
+
+    # Create output directory
+    mkdir ../build-gx_files_to_copy
+
+    # Copy the files to the output directory
+    cp venus-gui-v2/Main.qml ../build-gx_files_to_copy
+    cp venus-gui-v2/qmldir ../build-gx_files_to_copy
+    cp bin/venus-gui-v2 ../build-gx_files_to_copy
+    cp -r Victron ../build-gx_files_to_copy
 else
     echo "Current directory is not build-gx. Aborting to avoid unwanted deleting of files."
 fi
+
+echo "Elapsed time: ${SECONDS} seconds"
+echo

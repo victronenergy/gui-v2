@@ -39,20 +39,21 @@ jobs:
 
       - name: Check for a cached version
         uses: actions/cache@v4
-        id: cached_qt_emscripten
+        id: cached-versions
         with:
           path: |
+            # Cache the Qt and emscripten installation
             ${{ env.OUTPUTDIR }}
           # Adding version as cache key
-          key: ${{ runner.os }}-qt-${{ env.QT_VERSION }}-em-${{ env.EMSCRIPTEN }}-libegl1
+          key: ${{ runner.os }}__qt-${{ env.QT_VERSION }}__em-${{ env.EMSCRIPTEN }}__libegl1
 
-      - name: Install requirements
-        if: steps.cached_qt_emscripten.outputs.cache-hit != true
+      - name: Install requirements (cache miss)
+        if: steps.cached-versions.outputs.cache-hit != 'true'
         run: |
           bash scripts/build-wasm-install-requirements.sh
 
-      - name: Install libraries needed for building the wasm
-        if: steps.cached_qt_emscripten.outputs.cache-hit == true
+      - name: Install libraries needed for building the wasm (cache hit)
+        if: steps.cached-versions.outputs.cache-hit == 'true'
         run: |
           sudo apt-get update -yq
           sudo apt-get install -y libegl1
@@ -65,16 +66,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: venus-webassembly
-          path: build-wasm
+          path: build-wasm_files_to_copy
           retention-days: 5
 
-      - name: ZIP wasm files for release
+      - name: Release - ZIP wasm files
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          cd build-wasm
+          cd build-wasm_files_to_copy
           zip -r ../venus-webassembly.zip wasm
 
-      - name: Release tagged wasm files
+      - name: Release - Create release with wasm files
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
