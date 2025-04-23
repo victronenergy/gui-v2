@@ -79,6 +79,9 @@ void BaseTankDeviceModel::modelRowsInserted(const QModelIndex &parent, int first
 		// changes all of these values at the same time for each device, so delay the update until
 		// the end of the event loop to minimize unnecessary recalculations.
 		if (BaseTankDevice *tank = tankAt(i)) {
+			connect(tank, &BaseTankDevice::statusChanged,
+					this, &BaseTankDeviceModel::updateTotals,
+					Qt::QueuedConnection);
 			connect(tank, &BaseTankDevice::levelChanged,
 					this, &BaseTankDeviceModel::updateTotals,
 					Qt::QueuedConnection);
@@ -123,7 +126,8 @@ void BaseTankDeviceModel::updateTotals()
 	bool requireFallback = false;
 
 	for (int i = 0; i < count(); ++i) {
-		if (const BaseTankDevice *tank = tankAt(i)) {
+		if (const BaseTankDevice *tank = tankAt(i);
+				tank && tank->status() == Enums::Tank_Status_Ok) {
 			totalLevel = sumOf(totalLevel, tank->level());
 			totalCapacity = sumOf(totalCapacity, tank->capacity());
 			totalRemaining = sumOf(totalRemaining, tank->remaining());

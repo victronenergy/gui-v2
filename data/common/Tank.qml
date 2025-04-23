@@ -9,7 +9,6 @@ import Victron.VenusOS
 BaseTankDevice {
 	id: tank
 
-	readonly property int status: _status.valid ? _status.value : VenusOS.Tank_Status_Unknown
 	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
 
 	property TankModel _tankModel
@@ -48,6 +47,7 @@ BaseTankDevice {
 	productName: device.productName
 	customName: device.customName
 	name: _description.description
+	status: _status.valid ? _status.value : VenusOS.Tank_Status_Unknown
 	type: _type.valid ? _type.value : -1
 	level: _level.valid ? _level.value : NaN
 	capacity: _capacity.valid ? _capacity.value : NaN

@@ -10,6 +10,7 @@
 #include <QtGlobal>
 
 #include "basedevice.h"
+#include "enums.h"
 
 namespace Victron {
 namespace VenusOS {
@@ -18,6 +19,7 @@ class BaseTankDevice : public BaseDevice
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_PROPERTY(int status READ status WRITE setStatus NOTIFY statusChanged)
 	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 	Q_PROPERTY(qreal level READ level WRITE setLevel NOTIFY levelChanged)
 	Q_PROPERTY(qreal capacity READ capacity WRITE setCapacity NOTIFY capacityChanged)
@@ -25,6 +27,9 @@ class BaseTankDevice : public BaseDevice
 
 public:
 	explicit BaseTankDevice(QObject *parent = nullptr);
+
+	int status() const;
+	void setStatus(int s);
 
 	int type() const;
 	void setType(int type);
@@ -40,6 +45,7 @@ public:
 	void setRemaining(qreal remaining);
 
 Q_SIGNALS:
+	void statusChanged();
 	void typeChanged();
 	void levelChanged();
 	void capacityChanged();
@@ -48,6 +54,7 @@ Q_SIGNALS:
 private:
 	void updateMeasurements(const qreal prevLevel, const qreal prevCacpacity, const qreal prevRemaining);
 
+	int m_status = Enums::Tank_Status_Ok; // assume ok by default
 	int m_type = 0;
 	qreal m_level = qQNaN();
 	qreal m_capacity = qQNaN();

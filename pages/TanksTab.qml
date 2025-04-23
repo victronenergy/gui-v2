@@ -31,6 +31,7 @@ LevelsTab {
 
 		width: Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
 		height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
+		status: isGroup ? VenusOS.Tank_Status_Ok : (tank?.status ?? VenusOS.Tank_Status_Unknown)
 		fluidType: tankModel.type
 		name: tank?.name ?? ""
 		gauge: isGroup ? gaugeGroupComponent : singleGaugeComponent
@@ -65,6 +66,9 @@ LevelsTab {
 				valueType: tankOrGroupDelegate.tankProperties.valueType
 				value: tankOrGroupDelegate.tank ? tankOrGroupDelegate.tank.level / 100 : NaN
 				isGrouped: false
+				surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
+						? Theme.color_levelsPage_gauge_separatorBarColor
+						: tankOrGroupDelegate.color
 			}
 		}
 
@@ -89,6 +93,9 @@ LevelsTab {
 						valueType: tankOrGroupDelegate.tankProperties.valueType
 						value: device.level / 100
 						isGrouped: true
+						surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
+								? Theme.color_levelsPage_gauge_separatorBarColor
+								: tankOrGroupDelegate.color
 					}
 				}
 			}
