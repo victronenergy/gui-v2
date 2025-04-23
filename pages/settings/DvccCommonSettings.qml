@@ -18,10 +18,15 @@ SettingsColumn {
 		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bol"
 
 		onCheckedChanged: {
-			if (dataItem.valid && !checked) {
+			if (dataItem.valid && !checked && nrVebusDevices.valid && nrVebusDevices.value >= 1) {
 				//% "Make sure to also reset the VE.Bus system after disabling DVCC"
 				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_dvcc_switch_reset_vebus_after_disabling_dvcc"))
 			}
+		}
+
+		VeQuickItem {
+			id: nrVebusDevices
+			uid: Global.system.serviceUid + "/Devices/NumberOfVebusDevices"
 		}
 	}
 
