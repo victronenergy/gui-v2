@@ -76,6 +76,7 @@ fi
 mkdir -p artifacts/wasm
 mv venus-gui-v2.{html,js,wasm} qtloader.js artifacts/wasm/
 cp ../images/victronenergy.svg ../LICENSE.txt ../.github/patches/Makefile artifacts/wasm/
+cp -r ../wasm/icons artifacts/wasm/
 mv artifacts/wasm/venus-gui-v2.html artifacts/wasm/index.html
 grep -q -E '^var createQtAppInstance' artifacts/wasm/venus-gui-v2.js
 sed -i "s%^var \(createQtAppInstance\)%window.\1%" artifacts/wasm/venus-gui-v2.js
