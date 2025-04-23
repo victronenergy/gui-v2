@@ -50,8 +50,8 @@ OverviewWidget {
 			text: Global.system.systemStateToText(Global.system.state)
 			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
-			fontSizeMode: Text.VerticalFit
-			wrapMode: Text.Wrap
+			fontSizeMode: Text.Fit
+			wrapMode: Text.WordWrap
 			maximumLineCount: 4
 			elide: Text.ElideRight
 		},
