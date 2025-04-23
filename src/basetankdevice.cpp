@@ -55,6 +55,19 @@ void BaseTankDevice::updateMeasurements(const qreal prevLevel, const qreal prevC
 	}
 }
 
+int BaseTankDevice::status() const
+{
+	return m_status;
+}
+
+void BaseTankDevice::setStatus(int s)
+{
+	if (m_status != s) {
+		m_status = s;
+		emit statusChanged();
+	}
+}
+
 int BaseTankDevice::type() const
 {
 	return m_type;

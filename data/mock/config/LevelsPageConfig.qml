@@ -175,6 +175,27 @@ QtObject {
 				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
 			]
 		},
+		{
+			// the total capacity and level etc should NOT include the error-state tank.
+			name: "2 Freshwater tanks, one in error state",
+			tanks: [
+				{ type: VenusOS.Tank_Type_FreshWater, level: 25, capacity: 10 },
+				{ type: VenusOS.Tank_Type_FreshWater, level: 75, capacity: 20, status: VenusOS.Tank_Status_Error },
+			]
+		},
+		{
+			// the total capacity and level etc should NOT include the error-state tank.
+			name: "Merge 2 Freshwater tanks, one in error state",
+			tanks: [
+				{ type: VenusOS.Tank_Type_FreshWater, level: 25, capacity: 10 },
+				{ type: VenusOS.Tank_Type_FreshWater, level: 75, capacity: 20, status: VenusOS.Tank_Status_Error },
+				{ type: VenusOS.Tank_Type_Fuel, level: 10 },
+				{ type: VenusOS.Tank_Type_WasteWater, level: 75.334 },
+				{ type: VenusOS.Tank_Type_LiveWell, capacity: 1, remaining: 2.5 },
+				{ type: VenusOS.Tank_Type_Oil, level: 80.2, capacity: .1 },
+				{ type: VenusOS.Tank_Type_BlackWater, level: 25, capacity: .2 },
+			]
+		},
 	]
 
 	property var environmentConfigs: [

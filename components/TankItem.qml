@@ -11,6 +11,7 @@ import QtQuick.Controls.impl as CP
 Rectangle {
 	id: root
 
+	property int status
 	property int fluidType
 	property string name
 	property real level
@@ -20,7 +21,7 @@ Rectangle {
 
 	readonly property var tankProperties: Gauges.tankProperties(fluidType)
 
-	color: Theme.color_levelsPage_gauge_backgroundColor
+	color: status === VenusOS.Tank_Status_Ok ? Theme.color_levelsPage_gauge_backgroundColor : Theme.color_levelsPage_panel_border_color
 	radius: Theme.geometry_levelsPage_panel_radius
 	border.width: Theme.geometry_levelsPage_panel_border_width
 	border.color: Theme.color_levelsPage_panel_border_color
@@ -39,7 +40,7 @@ Rectangle {
 			topMargin: Theme.geometry_levelsPage_panel_spacing
 			horizontalCenter: parent.horizontalCenter
 		}
-		color: Theme.color_levelsPage_tankIcon
+		color: root.status === VenusOS.Tank_Status_Ok ? Theme.color_levelsPage_tankIcon : Theme.color_warning
 		source: root.tankProperties.icon
 	}
 

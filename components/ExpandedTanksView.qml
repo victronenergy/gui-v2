@@ -21,6 +21,7 @@ BaseListView {
 
 		width: Gauges.width(root.model.count, Theme.geometry_levelsPage_max_tank_count, Theme.geometry_screen_width)
 		height: Theme.geometry_levelsPage_panel_expanded_height
+		status: device.status
 		fluidType: device.type
 		name: device.name
 		level: device.level
@@ -32,6 +33,9 @@ BaseListView {
 			valueType: tankDelegate.tankProperties.valueType
 			animationEnabled: root.animationEnabled
 			value: tankDelegate.device.level / 100
+			surfaceColor: tankDelegate.status === VenusOS.Tank_Status_Ok
+				? Theme.color_levelsPage_gauge_separatorBarColor
+				: tankDelegate.color
 		}
 	}
 }
