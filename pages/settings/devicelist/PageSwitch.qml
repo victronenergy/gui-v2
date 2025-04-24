@@ -19,10 +19,14 @@ Page {
 		}
 	}
 
-	VeQItemTableModel {
+	VeQItemSortTableModel {
 		id: switchableOutputModel
-		uids: [ root.serviceUid + "/SwitchableOutput" ]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		filterFlags: VeQItemSortTableModel.FilterOffline
+		dynamicSortFilter: true
+		model: VeQItemTableModel {
+			uids: [ root.serviceUid + "/SwitchableOutput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
 	}
 
 	GradientListView {
