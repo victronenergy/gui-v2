@@ -35,7 +35,7 @@ BaseListView {
 			value: tankDelegate.device.level / 100
 			surfaceColor: tankDelegate.status === VenusOS.Tank_Status_Ok
 				? Theme.color_levelsPage_gauge_separatorBarColor
-				: tankDelegate.color
+				: tankDelegate.backgroundColor
 		}
 	}
 }

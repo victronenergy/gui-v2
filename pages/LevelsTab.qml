@@ -12,10 +12,6 @@ BaseListView {
 
 	property bool animationEnabled: true
 
-	// QTBUG-102340: Horizontal ListView ignores topMargin, so set anchors.topMargin instead
-	anchors.topMargin: Global.pageManager?.expandLayout
-			? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
-			: Theme.geometry_levelsPage_gaugesView_compact_topMargin
 	bottomMargin: Global.pageManager?.expandLayout
 			? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
 			: Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
@@ -29,9 +25,4 @@ BaseListView {
 	orientation: ListView.Horizontal
 	spacing: Gauges.spacing(count)
 	currentIndex: 0
-
-	Behavior on anchors.topMargin {
-		enabled: root.animationEnabled
-		NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
-	}
 }
