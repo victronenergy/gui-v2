@@ -14,6 +14,8 @@ T.SwipeView {
 	readonly property alias dragging: listView.dragging
 	readonly property bool moving: listView.moving || scrollingTimer.running
 
+	property int focusEdgeHint
+
 	function pageInView(pageXStart, pageWidth, threshold) {
 		const pageXEnd = pageXStart + pageWidth
 		const visibleXStart = listView.contentX + threshold

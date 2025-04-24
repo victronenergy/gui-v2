@@ -185,6 +185,14 @@ FocusScope {
 
 			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
 
+			onActiveFocusChanged: {
+				// If the key navigation moves upwards from the NavBar to the SwipeView, suggest to
+				// the SwipeView that it should focus the bottom-most item in the page.
+				if (activeFocus) {
+					root.swipeView.focusEdgeHint = Qt.BottomEdge
+				}
+			}
+
 			Component.onCompleted: pageManager.navBar = navBar
 			KeyNavigation.up: swipeViewLoader
 		}
@@ -382,6 +390,14 @@ FocusScope {
 
 		onPopToPage: function(toPage) {
 			pageManager.popPage(toPage)
+		}
+
+		onActiveFocusChanged: {
+			// If the key navigation moves downwards from the StatusBar to the SwipeView, suggest to
+			// the SwipeView that it should focus the top-most item in the page.
+			if (activeFocus) {
+				root.swipeView.focusEdgeHint = Qt.TopEdge
+			}
 		}
 
 		Component.onCompleted: pageManager.statusBar = statusBar
