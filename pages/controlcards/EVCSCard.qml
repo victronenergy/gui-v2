@@ -37,7 +37,7 @@ ControlCard {
 		uid: root.serviceUid + "/Mode"
 	}
 
-	Column {
+	SettingsColumn {
 		anchors {
 			top: root.status.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
