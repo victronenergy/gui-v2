@@ -40,18 +40,28 @@ SwipeViewPage {
 		}
 
 		model: Global.notifications.sortedModel
-		spacing: Theme.geometry_gradientList_spacing
 		delegate: NotificationDelegate {
 			id: notifDelegate
+
+			function _acknowledge() {
+				// we have access to the BaseNotification via the notification role
+				// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
+				(notifDelegate.notification as Notification)?.updateAcknowledged(true)
+			}
+
+			Keys.onSpacePressed: {
+				if (!notifDelegate.acknowledged) {
+					_acknowledge()
+				}
+			}
+			Keys.enabled: Global.keyNavigationEnabled
 
 			// When the delegate is clicked, acknowledge it.
 			PressArea {
 				anchors.fill: parent
 				enabled: !notifDelegate.acknowledged
-				radius: notifDelegate.radius
-				// we have access to the BaseNotification via the notification role
-				// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
-				onReleased: (notifDelegate.notification as Notification)?.updateAcknowledged(true)
+				radius: Theme.geometry_listItem_radius
+				onReleased: notifDelegate._acknowledge()
 			}
 		}
 
