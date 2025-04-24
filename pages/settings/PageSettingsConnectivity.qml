@@ -16,7 +16,10 @@ Page {
 			ListNavigation {
 				//% "Ethernet"
 				text: qsTrId("pagesettingsconnectivity_ethernet")
-				secondaryText: networkServices.ipAddress
+				secondaryText: networkServices.state !== "idle" && networkServices.state !== ""
+					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.state))
+					//% "Unplugged"
+					: qsTrId("settings_tcpip_connection_unplugged")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": text})
 			}
 
@@ -33,15 +36,29 @@ Page {
 			ListNavigation {
 				//% "Bluetooth"
 				text: qsTrId("pagesettingsconnectivity_bluetooth")
-				preferredVisible: networkServices.hasBluetoothSupport
+				secondaryText: networkServices.hasBluetoothSupport
+					? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
+					//% "No Bluetooth adapter connected"
+					: qsTrId("settings_bluetooth_not_available")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+
+				VeQuickItem {
+					id: bluetooth
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+				}
 			}
 
 			ListNavigation {
 				//% "Mobile Network"
 				text: qsTrId("pagesettingsconnectivity_mobile_network")
-				secondaryText: networkServices.mobileNetworkName
+				//% "No GSM modem connected"
+				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_gsm_modem_connected")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
+
+				VeQuickItem {
+					id: simStatus
+					uid: BackendConnection.serviceUidForType("modem") + "/SimStatus"
+				}
 			}
 
 			SettingsListHeader { }
