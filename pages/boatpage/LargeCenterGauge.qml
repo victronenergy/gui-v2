@@ -15,11 +15,9 @@ Item {
 	property bool animationEnabled: false
 
 	readonly property VeQuickItemsQuotient motorDriveDcConsumption: motorDrive ? motorDrive.dcConsumption : null
-	readonly property VeQuickItemsQuotient activeDataSource: gps.valid
-															 ? gps
-															 : motorDriveDcConsumption.valid
-															   ? motorDriveDcConsumption
-															   : null
+	readonly property VeQuickItemsQuotient activeDataSource: gps.valid ? gps
+			: motorDriveDcConsumption.valid ? motorDriveDcConsumption
+			: null
 
 	objectName: "LargeCenterGauge"
 	onActiveDataSourceChanged: console.log(objectName, "dataSource:", activeDataSource ? activeDataSource.objectName : "null")

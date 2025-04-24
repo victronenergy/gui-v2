@@ -198,11 +198,11 @@ function decomposeSeconds(secs) {
 	const seconds = Math.floor (secs - (days * SECONDS_PER_DAY) - (hours * SECONDS_PER_HOUR) - (minutes * SECONDS_PER_MINUTE))
 
 	return ({
-				days: days,
-				hours: hours,
-				minutes: minutes,
-				seconds: seconds
-			})
+		days: days,
+		hours: hours,
+		minutes: minutes,
+		seconds: seconds
+	})
 }
 
 // Convert number of seconds into readable string

@@ -13,8 +13,6 @@ Loader {
 	required property bool animationEnabled
 	readonly property var _battery: Global.system && Global.system.battery ? Global.system.battery : null
 	readonly property int _leftGaugeCount: _battery ? 1 : 0
-	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
-	property real _gaugeArcOpacity: 1
 
 	objectName: "BatteryArc"
 	width: Theme.geometry_briefPage_edgeGauge_width
@@ -30,8 +28,7 @@ Loader {
 		arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 		horizontalAlignment: Qt.AlignLeft
 
-		x: root._gaugeArcMargin
-		opacity: root._gaugeArcOpacity
+		x: Theme.geometry_briefPage_edgeGauge_initialize_margin
 		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
 		animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
