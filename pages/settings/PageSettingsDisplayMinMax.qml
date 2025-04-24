@@ -172,7 +172,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Gauge Display"
 				text: qsTrId("settings_minmax_gauge_display")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CentreGauge/Type" // TBC
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
 				preferredVisible: dataItem.valid
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [

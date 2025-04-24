@@ -24,7 +24,7 @@ QtObject {
 			property int gear: VenusOS.MotorDriveGear_Forward
 			property Timer t: Timer {
 				interval: 1000
-				running: true
+				running: Global.mockDataSimulator.timersActive
 				repeat: true
 				onTriggered: {
 					if (++gear > VenusOS.MotorDriveGear_Forward) {
@@ -48,7 +48,7 @@ QtObject {
 		}
 	}
 
-	property VeQuickItem power: VeQuickItem {
+	readonly property VeQuickItem power: VeQuickItem {
 		uid: BackendConnection.serviceUidForType("system") + "/MotorDrive/Power"
 	}
 

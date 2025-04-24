@@ -10,7 +10,11 @@ QtObject {
 
 	required property string numeratorUid
 	required property string denominatorUid
+
+	// this may be an int or a float, so we can't use 'real' here
 	readonly property var numerator: _numerator.valid ? _numerator.value : NaN
+
+	// this may be an int or a float, so we can't use 'real' here
 	readonly property var denominator: _denominator.valid ? _denominator.value : NaN
 	readonly property real normalizedValue: denominator === 0 ? NaN : numerator / denominator
 	readonly property real percentage: 100 * normalizedValue

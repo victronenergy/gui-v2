@@ -14,11 +14,9 @@ Column {
 	required property Gps gps
 	required property MotorDrive motorDrive
 
-	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.valid
-											? 1 // just the motor drive
-											: dcLoadGauge.active
-											  ? 2 // both AC & DC
-											  : 1  // just AC. The AC load gauge is always active
+	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.valid ? 1 // just the motor drive
+											: dcLoadGauge.active ? 2 // both AC & DC
+											: 1  // just AC. The AC load gauge is always active
 
 	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
 

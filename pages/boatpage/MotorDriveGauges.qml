@@ -14,7 +14,7 @@ Column {
 
 	required property var motorDrive
 	property bool showDcConsumption
-	readonly property string serviceUid: motorDrive && motorDrive.serviceUid ? motorDrive.serviceUid : ""
+	readonly property string serviceUid: motorDrive?.serviceUid ?? ""
 
 	spacing: Theme.geometry_boatPage_motorDriveColumn_spacing
 

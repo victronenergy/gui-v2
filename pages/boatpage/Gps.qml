@@ -9,8 +9,8 @@ import Victron.VenusOS
 VeQuickItemsQuotient {
 	id: root
 
-	property string activeGpsUid: Global.allDevicesModel.gpsDevices.count > 0 ? Global.allDevicesModel.gpsDevices.deviceAt(0).serviceUid : ""
-	property string units: _speedUnits.valid ? _speedUnits.value : ""
+	readonly property string activeGpsUid: Global.allDevicesModel.gpsDevices.count > 0 ? Global.allDevicesModel.gpsDevices.deviceAt(0).serviceUid : ""
+	readonly property string units: _speedUnits.valid ? _speedUnits.value : ""
 	readonly property real speed: {
 		switch (units) {
 		case "km/h":
@@ -24,7 +24,7 @@ VeQuickItemsQuotient {
 		}
 	}
 
-	property VeQuickItem _speedUnits : VeQuickItem {
+	readonly property VeQuickItem _speedUnits : VeQuickItem {
 		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
 	}
 

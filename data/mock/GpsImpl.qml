@@ -24,7 +24,7 @@ QtObject {
 			property int gear: VenusOS.MotorDriveGear_Forward
 			property Timer t: Timer {
 				interval: 1000
-				running: true
+				running: Global.mockDataSimulator.timersActive
 				repeat: true
 				onTriggered: {
 					Global.mockDataSimulator.setMockValue(serviceUid + "/Speed", Math.floor(Math.random() * 30))

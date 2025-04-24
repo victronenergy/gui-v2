@@ -100,48 +100,10 @@ QtObject {
 		Component.onCompleted: setValue(20.4455)
 	}
 
-	//--- DC data ---
-
-	readonly property VeQuickItem _maximumDcPower: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
-		Component.onCompleted: setValue(1000)
-	}
-
-	readonly property VeQuickItem _hasDcSystem: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
-		Component.onCompleted: setValue(1)
-	}
-
 	//--- veBus ---
 
 	readonly property VeQuickItem veBusService: VeQuickItem {
 		uid: Global.system.serviceUid + "/VebusService"
-	}
-
-	readonly property VeQuickItem _boatPageEnabled: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ElectricPropulsionUI/Enabled"
-		Component.onCompleted: setValue(true)
-	}
-
-	readonly property VeQuickItem _boatPageCenterGaugeType: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/ElectricPropulsionUI/CentreGauge/Type"
-		Component.onCompleted: setValue(0)
-	}
-
-	readonly property VeQuickItem _speed: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/Speed/Max"
-		Component.onCompleted: setValue(50)
-	}
-
-	readonly property VeQuickItem _motordriveRpmMax: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
-		Component.onCompleted: setValue(6000)
-	}
-
-	readonly property VeQuickItem _boatPageMaxPower: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("settings") + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
-
-		Component.onCompleted: setValue(20000)
 	}
 
 	property Connections veBusServiceSetup: Connections {

@@ -9,14 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property var emptyAcInput: ({
-											 source: VenusOS.AcInputs_InputSource_NotAvailable,
-											 serviceType: "",
-											 serviceName: "",
-											 connected: 0,
-											 phaseCount: 0,
-										 })
-
 	readonly property var configs: [
 		{
 			name: "Motordrive, gps, km/h",
@@ -74,20 +66,21 @@ QtObject {
 		}
 
 		if (motorDrive) {
-			motorDriveComponent.createObject(root, {
-												 serviceUid: motorDrive.serviceUid,
-												 deviceInstance: 1
-											 })
+			motorDriveComponent.createObject(
+						root, {
+							serviceUid: motorDrive.serviceUid,
+							deviceInstance: 1
+						})
 		}
 
 		return config.name
 	}
 
-	property VeQuickItem _speedUnit : VeQuickItem {
+	readonly property VeQuickItem _speedUnit : VeQuickItem {
 		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
 	}
 
-	property Component gpsComponent: Component {
+	readonly property Component gpsComponent: Component {
 		Device {
 			id: gps
 
@@ -97,7 +90,7 @@ QtObject {
 		}
 	}
 
-	property Component motorDriveComponent: Component {
+	readonly property Component motorDriveComponent: Component {
 		Device {
 			id: motorDrive
 
@@ -108,16 +101,16 @@ QtObject {
 		}
 	}
 
-	property Timer motorDriveTimer: Timer {
+	readonly property Timer motorDriveTimer: Timer {
 		property int gear: VenusOS.MotorDriveGear_Forward
-		property var motorDrive: Global.allDevicesModel.motorDriveDevices.deviceAt(0)
-		property var serviceUid: motorDrive ? motorDrive.serviceUid : ""
+		readonly property Device motorDrive: Global.allDevicesModel.motorDriveDevices.deviceAt(0)
+		readonly property string serviceUid: motorDrive ? motorDrive.serviceUid : ""
 
 		interval: 1000
-		running: Global.allDevicesModel.motorDriveDevices.count > 0
+		running: Global.mockDataSimulator.timersActive && Global.allDevicesModel.motorDriveDevices.count > 0
 		repeat: true
 		onTriggered: {
-			var serviceUid = Global.allDevicesModel.motorDriveDevices.deviceAt(0).serviceUid
+			const serviceUid = Global.allDevicesModel.motorDriveDevices.deviceAt(0).serviceUid
 			if (++gear > VenusOS.MotorDriveGear_Forward) {
 				gear = VenusOS.MotorDriveGear_Neutral
 			}
@@ -131,16 +124,16 @@ QtObject {
 		}
 	}
 
-	property Timer gpsTimer: Timer {
+	readonly property Timer gpsTimer: Timer {
 		interval: 1000
-		running: Global.allDevicesModel.gpsDevices.count > 0
+		running: Global.mockDataSimulator.timersActive && Global.allDevicesModel.gpsDevices.count > 0
 		repeat: true
 		onTriggered: {
 			Global.mockDataSimulator.setMockValue(Global.allDevicesModel.gpsDevices.deviceAt(0).serviceUid + "/Speed", Math.floor(Math.random() * 30))
 		}
 	}
 
-	property VeQuickItem power: VeQuickItem {
+	readonly property VeQuickItem power: VeQuickItem {
 		uid: BackendConnection.serviceUidForType("system") + "/MotorDrive/Power"
 	}
 

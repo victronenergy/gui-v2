@@ -24,7 +24,6 @@ Column {
 									 ? Theme.font_boatPage_consumptionGauge_smallPixelSize
 									 : Theme.font_boatPage_consumptionGauge_largePixelSize
 
-	objectName: "ConsumptionGauge"
 	spacing: Theme.font_boatPage_consumptionGauge_columnSpacing
 
 	QuantityLabelIconRow {
