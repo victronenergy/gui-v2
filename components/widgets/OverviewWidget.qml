@@ -54,6 +54,27 @@ Rectangle {
 			: 0
 	}
 
+	function acceptsKeyNavigation() {
+		return enabled && size > VenusOS.OverviewWidget_Size_Zero
+	}
+
+	function connectedTo(widget) {
+		if (widget) {
+			let connector
+			for (connector of connectors) {
+				if (connector.startWidget === widget || connector.endWidget === widget) {
+					return true
+				}
+			}
+			for (connector of widget.connectors) {
+				if (connector.startWidget === root || connector.endWidget === root) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
 	y: compactY
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
@@ -85,6 +106,9 @@ Rectangle {
 			easing.type: Easing.InOutQuad
 		}
 	}
+
+	Keys.onSpacePressed: clicked()
+	Keys.enabled: Global.keyNavigationEnabled
 
 	Item {
 		id: header
@@ -125,5 +149,10 @@ Rectangle {
 		radius: root.radius
 		anchors.fill: parent
 		onClicked: root.clicked()
+	}
+
+	KeyNavigationHighlight {
+		anchors.fill: parent
+		active: root.activeFocus
 	}
 }

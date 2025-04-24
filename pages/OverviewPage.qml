@@ -13,6 +13,11 @@ SwipeViewPage {
 	readonly property var _centerWidgets: [inverterChargerWidget, batteryWidget]
 	property var _rightWidgets: []
 
+	property Item _lastFocusedWidget
+	property Item _lastFocusedLeftWidget
+	property Item _lastFocusedCenterWidget
+	property Item _lastFocusedRightWidget
+
 	// Preferred order for the input widgets on the left hand side. When placing widgets, avoid / minimize connectors crossing each other.
 	readonly property var _leftWidgetOrder: [
 		// Top widgets: these widgets have to be up the top, as they connect to the 'inverter/charger widget', which is at the top of the center column.
@@ -83,6 +88,11 @@ SwipeViewPage {
 		resetWidgetConnectors(_leftWidgets)
 		resetWidgetConnectors(_centerWidgets)
 		resetWidgetConnectors(_rightWidgets)
+
+		// Set the key navigation bindings
+		resetWidgetKeyNavigation(_leftWidgets)
+		resetWidgetKeyNavigation(_centerWidgets)
+		resetWidgetKeyNavigation(_rightWidgets)
 	}
 
 	function _resetWidgetSizes(widgets) {
@@ -202,6 +212,16 @@ SwipeViewPage {
 			} else if (widgets === _rightWidgets) {
 				widget.width = Theme.geometry_overviewPage_widget_rightWidgetWidth
 				widget.x = root.width - widget.width - Theme.geometry_page_content_horizontalMargin
+			}
+		}
+	}
+
+	function resetWidgetKeyNavigation(widgets) {
+		for (let i = 0; i < widgets.length - 1; ++i) {
+			if (widgets[i].acceptsKeyNavigation()) {
+				widgets[i].KeyNavigation.down = widgets[i + 1]
+			} else {
+				widgets[i].KeyNavigation.down = null
 			}
 		}
 	}
@@ -384,12 +404,92 @@ SwipeViewPage {
 		}
 	}
 
+	// For left/right key navigation, prefer to navigate to:
+	// 1. The last focused widget in the target direction, if it is connected to the current widget
+	// 2. Any widget in the target direction that is connected to the current widget
+	// 3. The last focused widget in the target direction
+	// 4. Any widget in the target direction
+	function _horizontalKeyNavigation(fromWidget, toWidgets, preferredTargetWidget) {
+		const target = _findKeyNavigationTarget(fromWidget, toWidgets, preferredTargetWidget)
+		if (target) {
+			fromWidget.focus = false
+			target.focus = true
+		}
+	}
+
+	function _findKeyNavigationTarget(fromWidget, toWidgets, preferredTargetWidget) {
+		if (preferredTargetWidget?.acceptsKeyNavigation() && preferredTargetWidget?.connectedTo(fromWidget)) {
+			return preferredTargetWidget
+		}
+		let widget
+		for (widget of toWidgets) {
+			if (widget.acceptsKeyNavigation() && widget.connectedTo(fromWidget)) {
+				return widget
+			}
+		}
+		if (preferredTargetWidget) {
+			return preferredTargetWidget
+		}
+		for (widget of toWidgets) {
+			if (widget.acceptsKeyNavigation()) {
+				return widget
+			}
+		}
+		return null
+	}
+
+	function _findFocusableItem(widgetList, searchFromEnd) {
+		for (let i = searchFromEnd ? widgetList.length - 1 : 0; searchFromEnd ? i >= 0 : i < widgetList.length; searchFromEnd ? --i : ++i) {
+			if (widgetList[i].acceptsKeyNavigation()) {
+				return widgetList[i]
+			}
+		}
+		return null
+	}
+
 	//% "Overview"
 	navButtonText: qsTrId("nav_overview")
 	navButtonIcon: "qrc:/images/overview.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
+
+	onActiveFocusChanged: {
+		if (Global.keyNavigationEnabled
+				&& activeFocus
+				&& (!root._lastFocusedWidget || !root._lastFocusedWidget.acceptsKeyNavigation())) {
+			// Set the initial focus widget.
+			const searchFromEnd = root.view.focusEdgeHint === Qt.BottomEdge
+			for (const widgetList of [_centerWidgets, _leftWidgets, _rightWidgets]) {
+				const widget = root._findFocusableItem(widgetList, searchFromEnd)
+				if (widget) {
+					widget.focus = true
+					break
+				}
+			}
+		}
+	}
+
+	Connections {
+		target: Global.main
+		enabled: Global.keyNavigationEnabled && root.isCurrentPage
+
+		function onActiveFocusItemChanged() {
+			const focusItem = Global.main.activeFocusItem
+			if (focusItem instanceof OverviewWidget) {
+				// Set the last focused widget in each column, so that left/right keys can be used
+				// to move between them.
+				root._lastFocusedWidget = focusItem
+				if (_centerWidgets.indexOf(focusItem) >= 0) {
+					root._lastFocusedCenterWidget = focusItem
+				} else if (_rightWidgets.indexOf(focusItem) >= 0) {
+					root._lastFocusedRightWidget = focusItem
+				} else if (_leftWidgets.indexOf(focusItem) >= 0) {
+					root._lastFocusedLeftWidget = focusItem
+				}
+			}
+		}
+	}
 
 	Component {
 		id: acInputComponent
@@ -401,6 +501,8 @@ SwipeViewPage {
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ acInputWidgetConnector ]
+
+			Keys.onRightPressed: root._horizontalKeyNavigation(acInputWidget, root._centerWidgets, root._lastFocusedCenterWidget)
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
@@ -433,6 +535,8 @@ SwipeViewPage {
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ dcInputConnector ]
+
+			Keys.onRightPressed: root._horizontalKeyNavigation(dcInputWidget, root._centerWidgets, root._lastFocusedCenterWidget)
 
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
@@ -494,6 +598,8 @@ SwipeViewPage {
 			animationEnabled: root.animationEnabled
 			connectors: [ acSolarConnector, dcSolarConnector ]
 
+			Keys.onRightPressed: root._horizontalKeyNavigation(solarWidget, root._centerWidgets, root._lastFocusedCenterWidget)
+
 			WidgetConnectorAnchor {
 				location: VenusOS.WidgetConnector_Location_Right
 				visible: acSolarConnector.visible || dcSolarConnector.visible
@@ -551,6 +657,9 @@ SwipeViewPage {
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 		connectors: [ inverterToAcLoadsConnector, inverterToBatteryConnector ]
+
+		Keys.onLeftPressed: root._horizontalKeyNavigation(inverterChargerWidget, root._leftWidgets, root._lastFocusedLeftWidget)
+		Keys.onRightPressed: root._horizontalKeyNavigation(inverterChargerWidget, root._rightWidgets, root._lastFocusedRightWidget)
 
 		WidgetConnectorAnchor {
 			id: inverterLeftConnectorAnchor
@@ -618,6 +727,9 @@ SwipeViewPage {
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled && !overviewPageRootAnimation.paused
+
+		Keys.onLeftPressed: root._horizontalKeyNavigation(batteryWidget, root._leftWidgets, root._lastFocusedLeftWidget)
+		Keys.onRightPressed: root._horizontalKeyNavigation(batteryWidget, root._rightWidgets, root._lastFocusedRightWidget)
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
@@ -695,6 +807,8 @@ SwipeViewPage {
 			animationEnabled: root.animationEnabled
 			connectors: [ batteryToDcLoadsConnector ]
 
+			Keys.onLeftPressed: root._horizontalKeyNavigation(dcLoadsWidget, root._centerWidgets, root._lastFocusedCenterWidget)
+
 			WidgetConnectorAnchor {
 				parent: batteryWidget
 				location: VenusOS.WidgetConnector_Location_Right
@@ -763,6 +877,8 @@ SwipeViewPage {
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 			connectors: [ acLoadsToEvcsConnector, essentialLoadsToEvcsConnector ]
+
+			Keys.onLeftPressed: root._horizontalKeyNavigation(evcsWidget, root._centerWidgets, root._lastFocusedCenterWidget)
 
 			// Connector for AC Loads -> EVCS
 			WidgetConnectorAnchor {
