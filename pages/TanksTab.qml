@@ -47,7 +47,17 @@ LevelsTab {
 			}
 		}
 
+		Keys.onSpacePressed: (event) => {
+			if (pressArea.enabled) {
+				Global.dialogLayer.open(expandedTanksComponent, { tankModel: tankOrGroupDelegate.tankModel })
+			} else {
+				event.accepted = false
+			}
+		}
+		Keys.enabled: Global.keyNavigationEnabled
+
 		PressArea {
+			id: pressArea
 			anchors.fill: parent
 			enabled: tankOrGroupDelegate.isGroup
 			radius: Theme.geometry_levelsPage_panel_radius
@@ -68,7 +78,7 @@ LevelsTab {
 				isGrouped: false
 				surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
 						? Theme.color_levelsPage_gauge_separatorBarColor
-						: tankOrGroupDelegate.color
+						: tankOrGroupDelegate.backgroundColor
 			}
 		}
 
@@ -95,7 +105,7 @@ LevelsTab {
 						isGrouped: true
 						surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
 								? Theme.color_levelsPage_gauge_separatorBarColor
-								: tankOrGroupDelegate.color
+								: tankOrGroupDelegate.backgroundColor
 					}
 				}
 			}
@@ -119,6 +129,10 @@ LevelsTab {
 			backgroundColor: "transparent"
 
 			contentItem: Item {
+				focus: true
+				Keys.onPressed: expandedDialog.accept()
+				Keys.enabled: Global.keyNavigationEnabled
+
 				ExpandedTanksView {
 					anchors.centerIn: parent
 					width: Theme.geometry_screen_width

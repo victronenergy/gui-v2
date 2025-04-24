@@ -8,7 +8,7 @@ import Victron.VenusOS
 import Victron.Gauges
 import QtQuick.Controls.impl as CP
 
-Rectangle {
+BaseListItem {
 	id: root
 
 	property int status
@@ -20,11 +20,12 @@ Rectangle {
 	property real totalRemaining
 
 	readonly property var tankProperties: Gauges.tankProperties(fluidType)
+	readonly property color backgroundColor: status === VenusOS.Tank_Status_Ok ? Theme.color_levelsPage_gauge_backgroundColor : Theme.color_levelsPage_panel_border_color
 
-	color: status === VenusOS.Tank_Status_Ok ? Theme.color_levelsPage_gauge_backgroundColor : Theme.color_levelsPage_panel_border_color
-	radius: Theme.geometry_levelsPage_panel_radius
-	border.width: Theme.geometry_levelsPage_panel_border_width
-	border.color: Theme.color_levelsPage_panel_border_color
+	background.color: backgroundColor
+	background.radius: Theme.geometry_levelsPage_panel_radius
+	background.border.width: Theme.geometry_levelsPage_panel_border_width
+	background.border.color: Theme.color_levelsPage_panel_border_color
 
 	GaugeHeader {
 		id: header

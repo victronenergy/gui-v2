@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-Rectangle {
+BaseListItem {
 	id: root
 
 	property alias title: header.text
@@ -23,10 +23,10 @@ Rectangle {
 			? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
 			: Theme.geometry_levelsPage_environment_gauge_width
 
-	border.color: Theme.color_levelsPage_panel_border_color
-	border.width: Theme.geometry_levelsPage_panel_border_width
-	color: Theme.color_levelsPage_environment_panel_background
-	radius: Theme.geometry_levelsPage_panel_radius
+	background.color: Theme.color_levelsPage_environment_panel_background
+	background.radius: Theme.geometry_levelsPage_panel_radius
+	background.border.width: Theme.geometry_levelsPage_panel_border_width
+	background.border.color: Theme.color_levelsPage_panel_border_color
 
 	Behavior on height {
 		enabled: root.animationEnabled
