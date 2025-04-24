@@ -32,6 +32,8 @@ ControlCard {
 		cellHeight: (height - Theme.geometry_controlCard_contentMargins) / Theme.geometry_switchableoutput_row_count
 		interactive: false
 		flow: GridView.FlowTopToBottom
+		focus: Global.keyNavigationEnabled
+		keyNavigationEnabled: Global.keyNavigationEnabled
 
 		// Model is a simple string list rather than a model, as we assume the model changes are
 		// rare and especially unlikely while the card is visible.

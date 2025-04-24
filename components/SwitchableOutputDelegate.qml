@@ -5,12 +5,16 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+BaseListItem {
 	id: root
 
 	required property string outputUid
 	readonly property int _buttonWidth: Theme.geometry_controlCard_minimumWidth
 			- (2 * Theme.geometry_controlCard_button_margins)
+
+	// Hide the delegate highlight when the loader item is showing its own highlight (i.e. if
+	// showing a DimmingSlider in edit mode).
+	navigationHighlight.active: activeFocus && !switchWidgetLoader.item?.activeFocus
 
 	SwitchableOutput {
 		id: output
@@ -100,6 +104,17 @@ Item {
 					: output.type === VenusOS.SwitchableOutput_Type_Momentary ? momentarySwitchButton
 					: output.type === VenusOS.SwitchableOutput_Type_Latching ? latchingButton
 					: null
+
+			// Instead of giving focus to the individual controls, handle the keys directly here.
+			// This is consistent with the Control Cards, which focus the overall delegates in each
+			// card, rather than the controls within the delegates.
+			// (The DimmingSlider is a special case; it needs to be focused individually to provide
+			// an "edit" mode, so that left/right keys will move the slider instead of navigating to
+			// the previous/next item in the grid.)
+			focus: true
+			Keys.onPressed: (event) => { event.accepted = item.handlePress !== undefined && item.handlePress(event.key) }
+			Keys.onReleased: (event) => { event.accepted = item.handleRelease !== undefined && item.handleRelease(event.key) }
+			Keys.enabled: Global.keyNavigationEnabled
 		}
 	}
 
@@ -111,11 +126,41 @@ Item {
 
 			property real movedValue: NaN
 
+			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
+			// toggles the on/off state and left/right keys move the slider.
+			// When return key is pressed, exit the edit mode.
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					if (activeFocus) {
+						_toggle()
+					} else {
+						focus = true
+					}
+					return true
+				case Qt.Key_Return:
+					focus = false
+					return true
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+					// Remove focus and reject event to allow key navigation to delegates above/below.
+					focus = false
+					return false
+				}
+				return false
+			}
+
+			function _toggle() {
+				output.setState(output.state === 0 ? 1 : 0)
+			}
+
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			highlightColor: output.state === 1 ? Theme.color_ok : Theme.color_button_down
 			from: 1
 			to: 100
+			stepSize: 1
+
 			onClicked: {
 				output.setState(output.state === 0 ? 1 : 0)
 			}
@@ -155,6 +200,11 @@ Item {
 				text: output.state === 1 ? CommonWords.on : CommonWords.off
 				font.pixelSize: Theme.font_size_body2
 			}
+
+			KeyNavigationHighlight {
+				anchors.fill: parent
+				active: parent.activeFocus
+			}
 		}
 	}
 
@@ -162,6 +212,16 @@ Item {
 		id: momentarySwitchButton
 
 		Button {
+			function handlePress(key) { return _handleKey(key, 1) }
+			function handleRelease(key) { return _handleKey(key, 0) }
+			function _handleKey(key, newValue) {
+				if (key === Qt.Key_Space) {
+					output.setState(newValue)
+					return true
+				}
+				return false
+			}
+
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			font.pixelSize: Theme.font_size_body2
@@ -180,6 +240,15 @@ Item {
 
 		SegmentedButtonRow {
 			id: buttonRow
+
+			function handlePress(key) {
+				if (key === Qt.Key_Space) {
+					currentIndex = currentIndex === 0 ? 1 : 0
+					return true
+				}
+				return false
+			}
+
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			fontPixelSize: Theme.font_size_body2

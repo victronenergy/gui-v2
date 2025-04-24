@@ -37,11 +37,13 @@ Page {
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
 
-		header: Loader {
+		header: BaseListLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
-			sourceComponent: Item {
+			sourceComponent: BaseListItem {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
+				background.visible: false
+				navigationHighlight.visible: false
 
 				ESSCard {
 					width: root.cardWidth
@@ -55,11 +57,13 @@ Page {
 			}
 		}
 
-		footer: Loader {
+		footer: BaseListLoader {
 			active: manualRelays.count > 0
-			sourceComponent: Item {
+			sourceComponent: BaseListItem {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
+				background.visible: false
+				navigationHighlight.visible: false
 
 				SwitchesCard {
 					x: cardsView.spacing
@@ -73,7 +77,7 @@ Page {
 		}
 
 		model: controlCardModel
-		delegate: Loader {
+		delegate: BaseListLoader {
 			id: deviceDelegate
 
 			required property Device device
