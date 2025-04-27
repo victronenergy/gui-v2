@@ -7,6 +7,14 @@ import QtQuick
 import QtQuick.Controls as C
 import Victron.VenusOS
 
+/*
+  A page in the main swipe view.
+
+  If the page allows key navigation, it should:
+	- set activeFocusOnTab to true
+	- set blockInitialFocus to true if the page has a long scrollable list, so that the user can
+	  easily skip past the page during key navigation
+*/
 Page {
 	id: root
 
@@ -14,6 +22,10 @@ Page {
 	required property url navButtonIcon
 	required property string url
 	required property SwipeView view
+
+	// Set to true if this page should be initially blocked by a full-screen highlight, which the
+	// user needs to dismiss (by pressing the space key) before the page receives focus.
+	property bool blockInitialFocus
 
 	// Allow animations if this is the current page, or when dragging between pages
 	animationEnabled: defaultAnimationEnabled && visible

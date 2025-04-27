@@ -125,6 +125,10 @@ FocusScope {
 
 		Loader {
 			id: swipeViewLoader
+
+			property bool blockItemFocus
+			property bool refreshBlockItemFocus: Global.keyNavigationEnabled
+
 			anchors {
 				top: parent.top
 				topMargin: statusBar.height
@@ -149,7 +153,21 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
+			onActiveFocusChanged: {
+				if (Global.keyNavigationEnabled) {
+					if (activeFocus && refreshBlockItemFocus && item?.currentItem?.blockInitialFocus) {
+						blockItemFocus = true
+						refreshBlockItemFocus = false
+					} else if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
+						// Re-refresh the focus blocker state if navigating back from status or nav bar.
+						refreshBlockItemFocus = true
+					}
+				}
+			}
+
 			KeyNavigation.down: navBar
+			Keys.onSpacePressed: blockItemFocus = false
+			Keys.enabled: Global.keyNavigationEnabled
 
 			Component {
 				id: swipeViewComponent
@@ -157,18 +175,29 @@ FocusScope {
 					id: _swipeView
 
 					property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
-
 					onReadyChanged: if (ready) ready = true // remove binding
+
 					anchors.fill: parent
-					focus: true
-					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
+					focus: !swipeViewLoader.blockItemFocus
 					contentChildren: swipePageModel.children
+					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
 				}
 			}
 
 			SwipePageModel {
 				id: swipePageModel
 				view: swipeView
+			}
+
+			KeyNavigationHighlight {
+				anchors {
+					fill: parent
+					leftMargin: Theme.geometry_page_content_horizontalMargin
+					rightMargin: Theme.geometry_page_content_horizontalMargin
+				}
+				active: swipeViewLoader.blockItemFocus
+					&& swipeViewLoader.activeFocus
+					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			}
 		}
 
@@ -181,9 +210,16 @@ FocusScope {
 			model: swipeView ? swipeView.contentModel : null
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
-			focus: true
+			focus: Global.keyNavigationEnabled
 
-			onCurrentIndexChanged: if (swipeView) swipeView.setCurrentIndex(currentIndex)
+			onCurrentIndexChanged: {
+				if (swipeView) {
+					swipeView.setCurrentIndex(currentIndex)
+					if (Global.keyNavigationEnabled) {
+						focus = true // Move focus back to navbar if the SwipeView page changes.
+					}
+				}
+			}
 
 			onActiveFocusChanged: {
 				// If the key navigation moves upwards from the NavBar to the SwipeView, suggest to
@@ -194,7 +230,9 @@ FocusScope {
 			}
 
 			Component.onCompleted: pageManager.navBar = navBar
-			KeyNavigation.up: swipeViewLoader
+
+			// Only move focus to SwipeView if its current page allows key navigation.
+			KeyNavigation.up: root.swipeView?.currentItem?.activeFocusOnTab ? swipeViewLoader : statusBar
 		}
 	}
 
