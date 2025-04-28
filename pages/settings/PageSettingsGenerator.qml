@@ -126,7 +126,6 @@ Page {
 				//% "Alarm if DC generator is not providing power"
 				text: qsTrId("page_settings_generator_detect_generator_at_dc")
 				dataItem.uid: settingsBindPrefix + "/Alarms/NoGeneratorAtDcIn"
-				enabled: dataItem.valid
 				preferredVisible: noGeneratorAtDcInAlarm.valid
 				onClicked: {
 					if (!checked) {

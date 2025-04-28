@@ -15,7 +15,7 @@ ListButton {
 	property var date: dataItem.valid ? new Date(dataItem.value * 1000) : null
 
 	secondaryText: date == null ? "--" : Qt.formatDate(date, "yyyy-MM-dd")
-	enabled: userHasWriteAccess && (dataItem.uid === "" || dataItem.valid)
+	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: Global.dialogLayer.open(dateSelectorComponent, {
 		year: date ? date.getFullYear() : ClockTime.year,

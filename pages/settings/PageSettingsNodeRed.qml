@@ -28,7 +28,7 @@ Page {
 
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
-				enabled: userHasWriteAccess && root.allModificationsEnabled
+				interactive: userHasWriteAccess && root.allModificationsEnabled
 				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },

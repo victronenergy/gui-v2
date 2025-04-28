@@ -216,7 +216,7 @@ Page {
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
-				enabled: userHasWriteAccess && root.allModificationsEnabled
+				interactive: userHasWriteAccess && root.allModificationsEnabled
 				preferredVisible: dataItem.valid
 			}
 
