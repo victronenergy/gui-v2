@@ -160,7 +160,7 @@
       <translation>Solarertrag</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="192"/>
+      <location filename="../../data/System.qml" line="193"/>
       <source>External control</source>
       <translation>Externe Steuerung</translation>
     </message>
@@ -175,7 +175,7 @@
       <translation>Umgebung</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="145"/>
+      <location filename="../../pages/NotificationsPage.qml" line="86"/>
       <source>No current alerts</source>
       <translation>Keine aktuellen Alarme</translation>
     </message>
@@ -336,12 +336,12 @@
       <translation>Max: %1</translation>
     </message>
     <message id="settings_deviceinfo_connection">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="22"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="24"/>
       <source>Connection</source>
       <translation>Verbindung</translation>
     </message>
     <message id="settings_deviceinfo_product">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="29"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>Produkt</translation>
     </message>
@@ -351,22 +351,22 @@
       <translation>Name</translation>
     </message>
     <message id="settings_deviceinfo_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="36"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Name</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="46"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
       <source>Product ID</source>
       <translation>Product-ID</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="60"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
       <source>Hardware version</source>
       <translation>Hardwareversion</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="81"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
       <source>Device name</source>
       <translation>Gerätename</translation>
     </message>
@@ -1734,12 +1734,12 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation>Langsames Laden</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="198"/>
+      <location filename="../../data/System.qml" line="199"/>
       <source>Sustain</source>
       <translation>Erhaltung</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="201"/>
+      <location filename="../../data/System.qml" line="202"/>
       <source>Recharge</source>
       <translation>Aufladen</translation>
     </message>
@@ -2549,28 +2549,28 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation type="unfinished">usw</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="262"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="251"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Unverbunden %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="315"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="304"/>
       <source>Reboot now?</source>
       <translation>Jetzt neu starten?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="318"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="307"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Die Änderungen der VRM-Instanz werden erst nach einem Neustart des Geräts übernommen.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="338"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="327"/>
       <source>Device is rebooting...</source>
       <translation>Gerät startet neu...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="341"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="330"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">Gerät wurde neu gestartet.</translation>
     </message>
@@ -2624,7 +2624,7 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation>Einstellung Modus</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="103"/>
+      <location filename="../../data/SystemSettings.qml" line="125"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Stand-Alone</translation>
@@ -2680,7 +2680,7 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="87"/>
+      <location filename="../../data/SystemSettings.qml" line="109"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -3979,30 +3979,36 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>AC Gesamt</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Energie L%1</translation>
     </message>
+    <message id="ac-in-modeldefault_energy_reverse_x">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <source>Reversed Energy L%1</source>
+      <extracomment>%1 = phase number (1-3)</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="153"/>
       <source>Phase Sequence</source>
       <translation>Phasenfolge</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="159"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="162"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="201"/>
       <source>Data manager version</source>
       <translation>Version des Datenmanagers</translation>
     </message>
@@ -5362,7 +5368,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Wechselrichter-/Ladegerät-Modus</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="26"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="27"/>
       <source>Set</source>
       <translation>Einstellen</translation>
     </message>
@@ -5372,7 +5378,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Abbrechen</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="324"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="313"/>
       <source>Close</source>
       <translation>Schließen</translation>
     </message>
@@ -5382,49 +5388,49 @@ Möchtest Sie fortfahren?</translation>
       <translation>Zeit einstellen</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="84"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
       <source>Already in use</source>
       <translation>Bereits im Einsatz</translation>
     </message>
     <message id="deviceinstanceswap_swap_error">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="90"/>
       <source>Swap error</source>
       <translation>Swap-Fehler</translation>
     </message>
     <message id="deviceinstanceswap_swap_completed">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="89"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="92"/>
       <source>Swap complete</source>
       <translation>Tausch abgeschlossen</translation>
     </message>
     <message id="deviceinstanceswap_busy">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="95"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="98"/>
       <source>Swapping device instances...</source>
       <translation>Geräteinstanzen austauschen...</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description_with_name">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="103"/>
       <source>Device instance %1 is already used by '%3'. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers, %3 = another device's name</extracomment>
       <translation>Geräteinstanz %1 wird bereits von '%3' verwendet. Tauschen Sie die Geräteinstanzen aus und weisen Sie sie %2 zu?</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="107"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="110"/>
       <source>Device instance %1 is already used by another device of the same type. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers</extracomment>
       <translation>Geräteinstanz %1 wird bereits von einem anderen Gerät desselben Typs verwendet. Tauschen Sie Geräteinstanzen aus und weisen Sie diese %2?</translation>
     </message>
     <message id="deviceinstanceswap_timed_out">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="115"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="118"/>
       <source>Cannot swap device instances: operation timed out.</source>
       <translation>Geräteinstanzen können nicht ausgetauscht werden: Zeitüberschreitung der Operation.</translation>
     </message>
     <message id="deviceinstanceswap_active_on_reboot">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="117"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="120"/>
       <source>New device instances will be active on reboot.</source>
       <translation>Die neuen Geräteinstanzen werden beim Neustart aktiv.</translation>
     </message>
     <message id="deviceinstanceswap_swap">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="124"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="127"/>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Tauschen Sie</translation>
@@ -5556,19 +5562,19 @@ Möchtest Sie fortfahren?</translation>
       <translation>Benachrichtigungen</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="237"/>
+      <location filename="../../components/Utils.js" line="258"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>Jetzt</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="242"/>
+      <location filename="../../components/Utils.js" line="263"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>vor %1m</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="249"/>
+      <location filename="../../components/Utils.js" line="270"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>vor %1h %2m</translation>
@@ -5949,7 +5955,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Getrennt, Versuch der Wiederherstellung der Verbindung</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="264"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Connecting</source>
       <translation>Es wird verbunden</translation>
     </message>
@@ -6014,7 +6020,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>MQTT-Protokoll Level 5 Fehler</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="247"/>
+      <location filename="../../components/StatusBar.qml" line="251"/>
       <source>Silence alarm</source>
       <translation>Alarm stummschalten</translation>
     </message>
@@ -6029,57 +6035,57 @@ Möchtest Sie fortfahren?</translation>
       <translation>Min</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="177"/>
+      <location filename="../../components/Utils.js" line="186"/>
       <source>%1d %2h</source>
       <translation>%1T %2h</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="182"/>
+      <location filename="../../components/Utils.js" line="191"/>
       <source>%1h %2m</source>
       <translation>%1h %2m</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="203"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="205"/>
+      <location filename="../../components/Utils.js" line="226"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="230"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="211"/>
+      <location filename="../../components/Utils.js" line="232"/>
       <source>0m</source>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="261"/>
+      <location filename="../../components/Utils.js" line="282"/>
       <source>Failure</source>
       <translation>Ausfall</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="267"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Retrieving IP address</source>
       <translation>IP Adresse wird ermittelt</translation>
     </message>
     <message id="utils_connman_connected">
-      <location filename="../../components/Utils.js" line="271"/>
+      <location filename="../../components/Utils.js" line="292"/>
       <source>Connected</source>
       <translation type="unfinished">Verbunden</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="274"/>
+      <location filename="../../components/Utils.js" line="295"/>
       <source>Disconnect</source>
       <translation>Verbindung trennen</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="278"/>
+      <location filename="../../components/Utils.js" line="299"/>
       <source>Disconnected</source>
       <translation type="unfinished">Getrennt</translation>
     </message>
@@ -6135,7 +6141,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Es wird gestoppt</translation>
     </message>
     <message id="utils_format_time_to_go">
-      <location filename="../../components/Utils.js" line="126"/>
+      <location filename="../../components/Utils.js" line="135"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
       <translation>%1 verbleiben</translation>
@@ -6281,9 +6287,9 @@ Möchtest Sie fortfahren?</translation>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
-    <message id="switchable_output_undefined">
+    <message id="switchable_output_unsupported">
       <location filename="../../src/enums.cpp" line="316"/>
-      <source>Undefined</source>
+      <source>Unsupported type: %1</source>
       <translation type="unfinished"/>
     </message>
     <message id="switchable_output_off">
@@ -6417,7 +6423,7 @@ Möchtest Sie fortfahren?</translation>
       <translation type="unfinished">Zeitgeplant</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="204"/>
+      <location filename="../../data/System.qml" line="205"/>
       <source>Scheduled</source>
       <translation>Zeitgeplant</translation>
     </message>
@@ -6491,102 +6497,102 @@ Möchtest Sie fortfahren?</translation>
       <translation>Ausgleichen</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="134"/>
+      <location filename="../../data/System.qml" line="135"/>
       <source>AES mode</source>
       <translation>AES-Modus</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="137"/>
+      <location filename="../../data/System.qml" line="138"/>
       <source>Fault condition</source>
       <translation>Störungszustand</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="140"/>
+      <location filename="../../data/System.qml" line="141"/>
       <source>Bulk charging</source>
       <translation>Bulkladung</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="143"/>
+      <location filename="../../data/System.qml" line="144"/>
       <source>Absorption charging</source>
       <translation>Absorptionsladung</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="146"/>
+      <location filename="../../data/System.qml" line="147"/>
       <source>Float charging</source>
       <translation>Erhaltungsladung</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="149"/>
+      <location filename="../../data/System.qml" line="150"/>
       <source>Storage mode</source>
       <translation>Lagerungsmodus</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="153"/>
       <source>Equalization charging</source>
       <translation>Ausgleichsladung</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="156"/>
       <source>Pass-thru</source>
       <translation>Durchleitung</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="159"/>
       <source>Inverting</source>
       <translation>Inverting</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Assisting</source>
       <translation>Unterstützen</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Power supply mode</source>
       <translation>Stromversorgungsmodus</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Sustain</source>
       <translation type="unfinished">Erhaltung</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="171"/>
+      <location filename="../../data/System.qml" line="172"/>
       <source>Wake up</source>
       <translation>Aufwachen</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="174"/>
+      <location filename="../../data/System.qml" line="175"/>
       <source>Repeated absorption</source>
       <translation>Wiederholte Absorption</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="177"/>
+      <location filename="../../data/System.qml" line="178"/>
       <source>Auto equalize</source>
       <translation>Automatisch ausgleichen</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="180"/>
+      <location filename="../../data/System.qml" line="181"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="183"/>
+      <location filename="../../data/System.qml" line="184"/>
       <source>Load detect</source>
       <translation>Last erkennen</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="186"/>
+      <location filename="../../data/System.qml" line="187"/>
       <source>Blocked</source>
       <translation>Blockiert</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="189"/>
+      <location filename="../../data/System.qml" line="190"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="207"/>
+      <location filename="../../data/System.qml" line="208"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
@@ -6596,25 +6602,25 @@ Möchtest Sie fortfahren?</translation>
       <translation>Dynamic ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="91"/>
+      <location filename="../../data/SystemSettings.qml" line="113"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Group Master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="95"/>
+      <location filename="../../data/SystemSettings.qml" line="117"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Master Instanz</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="99"/>
+      <location filename="../../data/SystemSettings.qml" line="121"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Group &amp; Instanz Master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="107"/>
+      <location filename="../../data/SystemSettings.qml" line="129"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Einzel- und Gruppenmaster</translation>
@@ -6695,37 +6701,37 @@ Möchtest Sie fortfahren?</translation>
       <translation>Beachten Sie, dass eine Änderung der Einstellung für die Entladezeit auch die Einstellung für den niedrigen Ladezustand im Relaismenü ändert.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="36"/>
       <source>Operation time</source>
       <translation>Betriebszeit</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="44"/>
       <source>Charged Ah</source>
       <translation>Geladene Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="53"/>
       <source>Cycles started</source>
       <translation>Gestartete Zyklen</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="60"/>
       <source>Cycles completed</source>
       <translation>Abgeschlossene Zyklen</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="67"/>
       <source>Number of power-ups</source>
       <translation>Anzahl der Einschaltvorgänge</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="74"/>
       <source>Number of deep discharges</source>
       <translation>Anzahl der Tiefentladungen</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="95"/>
       <source>Charge cycle history</source>
       <translation>Verlauf des Ladezyklus</translation>
     </message>
@@ -6758,17 +6764,22 @@ Möchtest Sie fortfahren?</translation>
       <translation>Kontinuierliches Scannen kann den WiFi-Betrieb stören.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimale und maximale Messbereiche</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
       <source>Start page</source>
       <translation type="unfinished">Startseite</translation>
     </message>
+    <message id="settings_display_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>Restarting application...</source>
       <translation>Neustart der Anwendung...</translation>
     </message>
@@ -7265,6 +7276,36 @@ Beachten Sie, dass dieses Menü nur Carlo Gavazzi Zähler anzeigt, die über RS4
       <source>Solar</source>
       <translation>Solar</translation>
     </message>
+    <message id="settings_minmax_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_gauge_display">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="174"/>
+      <source>Gauge Display</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="180"/>
+      <source>Speed</source>
+      <translation type="unfinished">Geschwindigkeit</translation>
+    </message>
+    <message id="settings_minmax_time_to_go">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
+      <source>Time to go</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="194"/>
+      <source>Max Speed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_rpm">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="206"/>
+      <source>Max RPM</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="devicelist_motordrive_motorrpm">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
@@ -7275,8 +7316,13 @@ Beachten Sie, dass dieses Menü nur Carlo Gavazzi Zähler anzeigt, die über RS4
       <source>Motor Temperature</source>
       <translation>Motortemperatur</translation>
     </message>
-    <message id="devicelist_motordrive_controllertemperature">
+    <message id="devicelist_motordrive_coolanttemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
+      <source>Coolant Temperature</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="devicelist_motordrive_controllertemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="69"/>
       <source>Controller Temperature</source>
       <translation>Steuergerättemperatur</translation>
     </message>
@@ -7472,12 +7518,12 @@ See documentation for further information.</oldsource>
       <translation>Verkabelt</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="153"/>
+      <location filename="../../pages/BriefPage.qml" line="49"/>
       <source>Brief</source>
       <translation type="unfinished">Kurz</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="496"/>
+      <location filename="../../pages/BriefPage.qml" line="395"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Hohe Systemlast. Schließen des Seitenpanels zur Reduzierung der CPU-Last</translation>
     </message>
@@ -7708,17 +7754,17 @@ See documentation for further information.</oldsource>
       <translation>%1 (nicht verfügbar)</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="65"/>
+      <location filename="../../ApplicationContent.qml" line="60"/>
       <source>Touch input on</source>
       <translation>Touch-Eingabe An</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="67"/>
+      <location filename="../../ApplicationContent.qml" line="62"/>
       <source>Touch input off</source>
       <translation>Touch-Eingabe Aus</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="82"/>
+      <location filename="../../ApplicationContent.qml" line="77"/>
       <source>Touch input disabled</source>
       <translation>Touch-Eingabe deaktiviert</translation>
     </message>
@@ -8252,12 +8298,12 @@ Nachdem Sie ein neues Netzwerk hinzugefügt/aktiviert haben, müssen Sie es einm
       <translation>Der Generator läuft, bis er manuell gestoppt wird, es sei denn, es sind Autostart-Bedingungen aktiviert, die ihn am Laufen halten.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
       <source>Classic UI</source>
       <translation>Klassische UI</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
       <source>New UI</source>
       <translation>Neue UI</translation>
     </message>
@@ -8405,29 +8451,29 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <translation>Startseite</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
       <source>User interface</source>
       <translation>Benutzeroberfläche</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
       <source>User interface (Remote Console)</source>
       <translation>Benutzeroberfläche (Remote Konsole)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 aktualisiert</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Die Benutzeroberfläche wird zu %1 wechseln.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 ist auf %2 gesetzt</translation>
@@ -8735,42 +8781,42 @@ Dank optimierter Navigation und neuem Look ist alles, was Sie lieben, jetzt noch
       <translation>Dieser PV-Wechselrichter unterstützt eine Leistungsbegrenzung. Deaktivieren Sie diese Einstellung, wenn sie den normalen Betrieb stört.</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="479"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="481"/>
       <source>NE</source>
       <translation>NO</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="483"/>
       <source>E</source>
       <translation>O</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="485"/>
       <source>SE</source>
       <translation>SO</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="487"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="489"/>
       <source>SW</source>
       <translation>SW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="491"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="493"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -9007,7 +9053,7 @@ Wenn der Generator derzeit aufgrund einer Autostart-Bedingung läuft, wird er du
       <translation>Link öffnen</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Data units</source>
       <translation>Dateneinheiten</translation>
     </message>
@@ -9363,7 +9409,7 @@ Firmware-Integrität wiederherstellen, bevor Sie den Support kontaktieren</trans
       <translation>Stopp bei Tankfüllstand</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Brief page</source>
       <translation>Kurzansicht</translation>
     </message>
@@ -9522,6 +9568,81 @@ Firmware-Integrität wiederherstellen, bevor Sie den Support kontaktieren</trans
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
       <source>Warning</source>
       <translation type="unfinished">Warnung</translation>
+    </message>
+    <message id="switchable_output_press">
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="140"/>
+      <source>Press</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="13"/>
+      <source>Output on auxiliary battery</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_dcdc">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="19"/>
+      <source>%1 changed to DC-DC service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_alternator">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="21"/>
+      <source>%1 changed to alternator service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_state">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="32"/>
+      <source>Module state</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_voltage">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="39"/>
+      <source>Module Voltage</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switch_device_name">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="117"/>
+      <source>Name</source>
+      <translation type="unfinished">Name</translation>
+    </message>
+    <message id="page_switchable_output_name">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="35"/>
+      <source>Name</source>
+      <translation type="unfinished">Name</translation>
+    </message>
+    <message id="page_switchable_output_group">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="45"/>
+      <source>Group</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switchable_output_type">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="55"/>
+      <source>Type</source>
+      <translation type="unfinished">Typ</translation>
+    </message>
+    <message id="page_switchable_output_fuse_rating">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="63"/>
+      <source>Fuse rating</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="nav_boat">
+      <location filename="../../pages/boatpage/BoatPage.qml" line="15"/>
+      <source>Boat</source>
+      <translation type="unfinished">Boot</translation>
+    </message>
+    <message id="boat_page_rpm">
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="150"/>
+      <source>RPM</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_motor_drive">
+      <location filename="../../pages/boatpage/MotorDriveGauges.qml" line="42"/>
+      <source>Motordrive</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_time_to_go">
+      <location filename="../../pages/boatpage/TimeToGo.qml" line="56"/>
+      <source>Time To Go</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
