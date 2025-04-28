@@ -23,6 +23,11 @@ while [[ $# -gt 0 ]]; do
             PRESERVE=1
             shift
             ;;
+        # IP or hostname of the GX device for direct upload
+        -H|--host)
+            HOST="${2}"
+            shift 2
+            ;;
         -h|--help)
             echo "Usage: ${0} [options]"
             echo "Options:"
@@ -128,3 +133,67 @@ fi
 
 echo "Elapsed time: ${SECONDS} seconds"
 echo
+
+
+# Check if HOST is set
+if [[ -n "${HOST}" ]]; then
+    echo
+    echo -e "\e[33mThe automated file upload to the GX device after build was selected\e[0m"
+
+    # Check if an SSH key exists
+    if [ ! -f "${HOME}/.ssh/id_rsa" ]; then
+        echo "No SSH key found. Generating a new SSH key..."
+        ssh-keygen -t rsa -b 2048 -f "${HOME}/.ssh/id_rsa" -N ""
+        echo
+    fi
+
+    # Test SSH connection
+    echo "Testing SSH connection to ${HOST}..."
+    ssh -o BatchMode=yes -o ConnectTimeout=5 root@${HOST} "exit" 2>/dev/null
+
+    if [ $? -ne 0 ]; then
+        echo
+        echo -e "\e[33mSSH authentication failed. Uploading SSH key to ${HOST}...\e[0m"
+        echo -e "\e[33mYou will be prompted for the password to upload the SSH key.\e[0m"
+        echo "Make sure you set a password on the GX device else it won't work. See https://www.victronenergy.com/live/ccgx:root_access#root_access"
+        echo
+        ssh-copy-id root@${HOST}
+        if [ $? -ne 0 ]; then
+            echo -e "\e[31mFailed to upload SSH key. Please check your password and try again.\e[0m"
+            exit 1
+        fi
+        echo
+        echo -e "\e[32mSSH key uploaded successfully.\e[0m"
+    else
+        echo -e "\e[32mSSH authentication successful.\e[0m"
+    fi
+    echo
+
+    # Make filesystem writable
+    echo -n "Making GX device filesystem writable..."
+    ssh root@${HOST} "/opt/victronenergy/swupdate-scripts/remount-rw.sh"
+    echo " done."
+    echo
+
+    # Upload the files to the GX device
+    echo "Uploading files to the GX device at ${HOST}..."
+
+    # Copy the files to the GX device, only output errors
+    scp -r ../build-wasm_files_to_copy/wasm/* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
+    if [ $? -ne 0 ]; then
+        echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
+        echo
+        echo "GX device disk space:"
+        ssh root@${HOST} "df -h | head -n 2"
+        echo
+        exit 1
+    fi
+    echo -e "\e[32mFiles uploaded successfully.\e[0m"
+    echo
+
+    # Restart vmrlogger to make GUIv2 changes visible in VRM portal
+    echo -n "Restarting vmrlogger on GX device..."
+    ssh root@${HOST} "svc -t /service/vrmlogger"
+    echo " done."
+    echo
+fi
