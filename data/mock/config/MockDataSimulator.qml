@@ -70,46 +70,46 @@ QtObject {
 		return data.url
 	}
 
-	function keyPressed(event) {
-		switch (event.key) {
+	function keyPressed(key, modifiers) {
+		if (Global.main.activeFocusItem?.hasOwnProperty("placeholderText")) {
+			// Very simplistic way of guessing whether the key was pressed inside a text input, to
+			// avoid triggering events in this case.
+			return
+		}
+		switch (key) {
 		case Qt.Key_1:
 		case Qt.Key_2:
 		case Qt.Key_3:
 		case Qt.Key_4:
 		case Qt.Key_5:
+		case Qt.Key_6:
 			if (!!Global.pageManager) {
-				const newIndex = event.key - Qt.Key_1
+				const newIndex = key - Qt.Key_1
 				Global.pageManager.navBar.setCurrentIndex(newIndex)
-				event.accepted = true
 			}
 			break
 		case Qt.Key_Comma:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
-				event.accepted = true
 			}
 			break
 		case Qt.Key_Period:
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()
-				event.accepted = true
 			}
 			break
 		case Qt.Key_Plus:
 			if (Theme.screenSize !== Theme.SevenInch) {
 				Theme.screenSize = Theme.SevenInch
-				event.accepted = true
 			}
 			break
 		case Qt.Key_Minus:
 			if (Theme.screenSize !== Theme.FiveInch) {
 				Theme.screenSize = Theme.FiveInch
-				event.accepted = true
 			}
 			break
 		case Qt.Key_A:
 			root.animationEnabled = !root.animationEnabled
-			event.accepted = true
 			break
 		case Qt.Key_B:
 			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled",
@@ -118,37 +118,29 @@ QtObject {
 			break
 		case Qt.Key_C:
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
-			event.accepted = true
 			break
 		case Qt.Key_D:
 			Global.pageManager.pushPage(Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml"))
-			event.accepted = true
 			break
 		case Qt.Key_E:
-			if (!!Global) {
-				Global.isGxDevice = !Global.isGxDevice
-				event.accepted = true
-			}
+			Global.isGxDevice = !Global.isGxDevice
 			break
 		case Qt.Key_F:
-		{
 			root.setMockValue(Global.system.serviceUid + "/Ac/ActiveIn/FeedbackEnabled", Global.system.feedbackEnabled ? 0 : 1)
-			event.accepted = true
 			break
-		}
 		case Qt.Key_G:
 			let oldValue
 			let newValue
-			if (event.modifiers & Qt.ShiftModifier) {
+			if (modifiers & Qt.ShiftModifier) {
 				newValue = root.mockValue("com.victronenergy.modem/SignalStrength") + 5
 				if (newValue > 25) {
 					newValue = 0
 				}
 				root.setMockValue("com.victronenergy.modem/SignalStrength", newValue)
-			} else if (event.modifiers & Qt.ControlModifier) {
+			} else if (modifiers & Qt.ControlModifier) {
 				oldValue = root.mockValue("com.victronenergy.modem/Roaming")
 				root.setMockValue("com.victronenergy.modem/Roaming", !oldValue)
-			} else if (event.modifiers & Qt.AltModifier) {
+			} else if (modifiers & Qt.AltModifier) {
 				oldValue = root.mockValue("com.victronenergy.modem/NetworkType")
 				switch (oldValue) {
 				case "NONE":
@@ -171,36 +163,32 @@ QtObject {
 					break
 				}
 				root.setMockValue("com.victronenergy.modem/NetworkType", newValue)
-			} else if (event.modifiers & Qt.MetaModifier) {
+			} else if (modifiers & Qt.MetaModifier) {
 				oldValue = root.mockValue("com.victronenergy.modem/SimStatus")
 				root.setMockValue("com.victronenergy.modem/SimStatus", oldValue === 1000 ? 11 : 1000)
 			} else {
 				oldValue = root.mockValue("com.victronenergy.modem/Connected")
 				root.setMockValue("com.victronenergy.modem/Connected", oldValue === 1 ? 0 : 1)
 			}
-			event.accepted = true
 			break
 		case Qt.Key_L:
 			Language.setCurrentLanguage((Language.current === Language.English ? Language.French : Language.English))
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
-			event.accepted = true
 			break
 		case Qt.Key_N:
-			if (event.modifiers & Qt.ShiftModifier) {
+			if (modifiers & Qt.ShiftModifier) {
 				root.addDummyNotification(true)
 			} else {
 				root.addDummyNotification(false)
 			}
-			event.accepted = true
 			break
 		case Qt.Key_O:
-			const notifType = (event.modifiers & Qt.ShiftModifier)
+			const notifType = (modifiers & Qt.ShiftModifier)
 				? VenusOS.Notification_Warning
-				: (event.modifiers & Qt.ControlModifier)
+				: (modifiers & Qt.ControlModifier)
 				  ? VenusOS.Notification_Alarm
 				  : VenusOS.Notification_Info
 			notificationsConfig.showToastNotification(notifType)
-			event.accepted = true
 			break
 		case Qt.Key_P:
 		{
@@ -208,10 +196,10 @@ QtObject {
 			for (let i = 0; i < phases.count; ++i) {
 				const phaseCurrent = phases.get(i).current
 				const phasePower = phases.get(i).power
-				if (event.modifiers & Qt.ControlModifier) {
+				if (modifiers & Qt.ControlModifier) {
 					phases.setValue(i, PhaseModel.CurrentRole, 0)
 					phases.setValue(i, PhaseModel.PowerRole, 0)
-				} else if (event.modifiers & Qt.ShiftModifier) {
+				} else if (modifiers & Qt.ShiftModifier) {
 					phases.setValue(i, PhaseModel.CurrentRole, phaseCurrent + 5)
 					phases.setValue(i, PhaseModel.PowerRole, phasePower + 100)
 				} else {
@@ -219,48 +207,44 @@ QtObject {
 					phases.setValue(i, PhaseModel.PowerRole, phasePower - 100)
 				}
 			}
-			event.accepted = true
 			break
 		}
 		case Qt.Key_Q:
 			root.setShowInputLoadsRequested(!Global.system.showInputLoads)
-			event.accepted = true
 			break
 		case Qt.Key_S:
 		{
-			if (event.modifiers & Qt.ShiftModifier) {
+			if (modifiers & Qt.ShiftModifier) {
 				var g = Global.generators.model.firstObject
 				g._runningBy.setValue(g._runningBy.value + 1)
 				break
 			}
-			if (event.modifiers & Qt.ControlModifier) {
+			if (modifiers & Qt.ControlModifier) {
 				var g = Global.generators.model.firstObject
 				g._runningBy.setValue(g._runningBy.value - 1)
 				break
 			}
 
 			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
-			event.accepted = true
 			break
 		}
 		case Qt.Key_T:
-			if (event.modifiers & Qt.ShiftModifier) {
+			if (modifiers & Qt.ShiftModifier) {
 				var g = Global.generators.model.firstObject
 				g._state.setValue(g._state.value + 1)
 				break
 			}
-			if (event.modifiers & Qt.ControlModifier) {
+			if (modifiers & Qt.ControlModifier) {
 				var g = Global.generators.model.firstObject
 				g._state.setValue(g._state.value - 1)
 				break
 			}
 			root.timersActive = !root.timersActive
 			pageConfigTitle.text = "Timers on: " + root.timersActive
-			event.accepted = true
 			break
 		case Qt.Key_U:
 			// Change the unit display of the Brief view center gauges
-			if (event.modifiers & Qt.ControlModifier) {
+			if (modifiers & Qt.ControlModifier) {
 				const v = root.mockValue(Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit")
 				let newBriefUnit = ""
 				if (v === VenusOS.BriefView_Unit_None) {
@@ -306,7 +290,6 @@ QtObject {
 						 : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						   ? "Gallons (US)"
 						   : "Gallons (Imperial)")
-			event.accepted = true
 			break
 		case Qt.Key_V:
 			levelsEnabled = !levelsEnabled
@@ -316,7 +299,6 @@ QtObject {
 			break
 		case Qt.Key_Space:
 			Global.splashScreenVisible = false
-			event.accepted = true
 			break
 		default:
 			break
@@ -360,10 +342,10 @@ QtObject {
 		property int configIndex: -1
 	}
 
-	property Connections _globalConn: Connections {
-		target: Global
-		function onKeyPressed(event) {
-			root.keyPressed(event)
+	property KeyEventFilter keyEventFilter: KeyEventFilter {
+		window: Global.main
+		onKeyPressed: (key, modifiers) => {
+			root.keyPressed(key, modifiers)
 		}
 	}
 
