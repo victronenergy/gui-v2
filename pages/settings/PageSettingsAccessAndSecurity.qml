@@ -17,28 +17,27 @@ Page {
 		}
 	}
 
-	Connections {
+	KeyEventFilter {
 		id: keyEvents
 
+		property bool enabled
 		property int repeatCount
 		property int upCount
 		property int downCount
 
-		target: Global
-		enabled: false
-
-		function onKeyPressed(event) {
-			if (event.key === Qt.Key_Right) {
+		window: enabled ? Global.main : null
+		onKeyPressed: (key) => {
+			if (key === Qt.Key_Right) {
 				// change to super user mode if the right button is pressed for a while
 				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
 					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
 					repeatCount = 0
 				}
-			} else if (event.key === Qt.Key_Up) {
+			} else if (key === Qt.Key_Up) {
 				if (upCount < 5) ++upCount
 				if (downCount > 0) upCount = 0
 				downCount = 0
-			} else if (event.key === Qt.Key_Down) {
+			} else if (key === Qt.Key_Down) {
 				if (downCount < 5) ++downCount;
 				if (upCount === 5 && downCount === 5) {
 					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)

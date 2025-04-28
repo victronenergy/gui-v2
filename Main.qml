@@ -99,9 +99,6 @@ Window {
 					return
 				}
 			}
-
-			// TODO remove this when Access & Security page manages its own key events.
-			Global.keyPressed(event)
 			event.accepted = false
 		}
 	}

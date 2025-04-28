@@ -29,7 +29,7 @@ public:
 	void setConsumeKeyEvents(bool consumeKeyEvents);
 
 Q_SIGNALS:
-	void keyPressed(int key);
+	void keyPressed(int key, int modifiers);
 	void windowChanged();
 	void consumeKeyEventsChanged();
 

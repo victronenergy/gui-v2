@@ -51,7 +51,8 @@ bool KeyEventFilter::eventFilter(QObject *obj, QEvent *event)
 {
 	if (m_window && obj == m_window) {
 		if (event->type() == QEvent::KeyPress) {
-			emit keyPressed(static_cast<QKeyEvent *>(event)->key());
+			QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+			emit keyPressed(keyEvent->key(), keyEvent->modifiers());
 			return m_consumeKeyEvents;
 		}
 	}
