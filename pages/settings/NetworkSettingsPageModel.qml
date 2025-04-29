@@ -124,7 +124,7 @@ VisibleItemModel {
 	}
 
 	ListIpAddressField {
-		enabled: method.userHasWriteAccess && networkServices.manual
+		interactive: networkServices.manual
 		textField.text: networkServices.ipAddress
 		saveInput: function() { networkServices.setServiceProperty("Address", textField.text) }
 	}
