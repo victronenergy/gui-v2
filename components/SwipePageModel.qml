@@ -31,11 +31,12 @@ ObjectModel {
 		}
 	}
 
-	readonly property Component levelsPage: Component {
+	readonly property Component levelsComponent: Component {
 		LevelsPage {
 			view: root.view
 		}
 	}
+	property LevelsPage levelsPage
 
 	property bool _completed: false
 
@@ -59,6 +60,7 @@ ObjectModel {
 	}
 
 	NotificationsPage {
+		id: notificationsPage
 		view: root.view
 	}
 
@@ -68,7 +70,8 @@ ObjectModel {
 
 	Component.onCompleted: {
 		if (showLevelsPage) {
-			insert(2, levelsPage.createObject(parent))
+			levelsPage = levelsComponent.createObject(parent)
+			insert(2, levelsPage) // ideally the index would not be hardcoded, but the view is not initialized yet
 		}
 
 		if (showBoatPage.value) {
@@ -84,9 +87,15 @@ ObjectModel {
 		}
 
 		if (showLevelsPage) {
-			root.view.insertItem(2, levelsPage.createObject(parent))
+			for (let i = 0; i < root.view.count; ++i) {
+				if (root.view.itemAt(i) === notificationsPage) {
+					root.levelsPage = levelsComponent.createObject(parent)
+					root.view.insertItem(i, root.levelsPage)
+					break
+				}
+			}
 		} else {
-			root.view.removeItem(view.itemAt(2))
+			root.view.removeItem(root.levelsPage)
 		}
 	}
 }

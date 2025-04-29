@@ -120,6 +120,11 @@ QtObject {
 			root.animationEnabled = !root.animationEnabled
 			event.accepted = true
 			break
+		case Qt.Key_B:
+			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled",
+				root.mockValue(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled") == 0 ? 1 : 0)
+			event.accepted = true
+			break
 		case Qt.Key_C:
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
 			event.accepted = true

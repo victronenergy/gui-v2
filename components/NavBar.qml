@@ -55,10 +55,10 @@ FocusScope {
 	}
 
 	Row {
+		id: buttonRow
 		x: Theme.geometry_page_content_horizontalMargin
 		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
 		height: parent.height
-		spacing: (width - (buttonRepeater.count * Theme.geometry_navigationBar_button_width)) / Math.max(buttonRepeater.count - 1, 1)
 
 		Repeater {
 			id: buttonRepeater
@@ -73,7 +73,7 @@ FocusScope {
 
 				readonly property var _modelData: root.model.get(index)
 				height: root.height
-				width: Theme.geometry_navigationBar_button_width
+				width: buttonRow.width / buttonRepeater.count
 				text: _modelData.navButtonText
 				icon.source: _modelData.navButtonIcon
 				checked: root.currentIndex === model.index
