@@ -41,6 +41,13 @@ QtObject {
 		target: Global.ess
 
 		function onSetStateRequested(essState) {
+			if (root.state === VenusOS.Ess_State_ExternalControl) {
+				// When changing away from External Control, /CGwacs/Hub4Mode is reset, so user
+				// should verify the settings changes.
+				//% "Make sure to check the Multiphase regulation setting"
+				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("ess_check_multiphase_regulation_setting"), 10000)
+			}
+
 			// Hub 4 mode
 			if (essState === VenusOS.Ess_State_ExternalControl && veHub4Mode.value !== VenusOS.Ess_Hub4ModeState_Disabled) {
 				veHub4Mode.setValue(VenusOS.Ess_Hub4ModeState_Disabled)
