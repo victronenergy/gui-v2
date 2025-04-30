@@ -107,18 +107,47 @@ Item {
 		id: dimmingSlider
 
 		DimmingSlider {
+			id: slider
+
+			property real movedValue: NaN
+
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			highlightColor: output.state === 1 ? Theme.color_ok : Theme.color_button_down
 			from: 1
 			to: 100
-			value: output.hasDimming ? output.dimming : 0
-			onPositionChanged:{
-				value = Math.round(value) // break binding so that the delayed data update doesn't fight user input
-				output.setDimming(value)
-			}
 			onClicked: {
 				output.setState(output.state === 0 ? 1 : 0)
+			}
+			onMoved: {
+				value = Math.round(value)
+				output.setDimming(value)
+				movedValue = value
+			}
+
+			Connections {
+				target: output
+				Component.onCompleted: slider.value = output.dimming
+
+				// Update the slider value from the backend. If the backend value is changing in
+				// response to slider user input, the backend change may lag behind the user change,
+				// so do not update the slider value until the slider and backend values are in
+				// sync, else the two values will fight each other.
+				function onDimmingChanged() {
+					if (isNaN(slider.movedValue)) {
+						// The slider was not moved, so the value change must have come from
+						// the backend independently, and the slider value can updated directly.
+						slider.value = output.dimming
+					} else if (slider.movedValue === Math.round(output.dimming)) {
+						// The user moved the slider and the backend is now up-to-date with the
+						// user-moved value, so clear the flag.
+						slider.movedValue = NaN
+					} else {
+						// The slider was moved, and the backend value changed in response, but
+						// the backend still has an older moved value from the UI, so ignore
+						// this as the backend is not yet up-to-date with the UI value.
+					}
+				}
 			}
 
 			Label {
@@ -150,6 +179,7 @@ Item {
 		id: latchingButton
 
 		SegmentedButtonRow {
+			id: buttonRow
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			fontPixelSize: Theme.font_size_body2
@@ -157,6 +187,15 @@ Item {
 			model: [{ "value": CommonWords.off }, { "value": CommonWords.on }]
 			onCurrentIndexChanged: {
 				output.setState(currentIndex === 1 ? 1 : 0)
+			}
+
+			// currentIndex binding is broken when user clicks the button, so ensure value is
+			// updated if backend value changes.
+			Connections {
+				target: output
+				function onStateChanged() {
+					buttonRow.currentIndex = output.state === 1 ? 1 : 0
+				}
 			}
 		}
 	}
