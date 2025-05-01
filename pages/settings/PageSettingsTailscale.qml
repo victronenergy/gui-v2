@@ -59,27 +59,22 @@ Page {
 			//% "Backend starting..."
 			returnValue = qsTrId("settings_tailscale_backend_starting")
 		} else if (connectState == 2) {
-			//% "Backend stopped."
+			//% "Backend stopped"
 			returnValue = qsTrId("settings_tailscale_backend_stopped")
 		} else if (connectState == 3) {
-			//% "Connection failed."
+			//% "Connection failed"
 			returnValue = qsTrId("settings_tailscale_connection_failed")
 		} else if (connectState == 5) {
-			//% "This GX device is logged out of Tailscale.\n\nPlease wait or check your internet connection."
+			//% "This GX device is logged out of Tailscale,\nplease wait or check your internet connection"
 			returnValue = qsTrId("settings_tailscale_logged_out")
 		} else if (connectState == 6) {
 			//% "Waiting for a response from Tailscale..."
 			returnValue = qsTrId("settings_tailscale_wait_for_response")
 		} else if (connectState == 7) {
-			//% "Connect this GX device to your Tailscale account by opening this link:"
-			returnValue = qsTrId("settings_tailscale_wait_for_login") + "<br /><br />"
-			if (Qt.platform.os === "wasm") {
-				returnValue += "<a href=\"" + loginLink + "\">" + loginLink + "</a>"
-			} else {
-				returnValue += loginLink
-			}
+			//% "Connection to your Tailscale account needed, see below"
+			returnValue = qsTrId("settings_tailscale_wait_for_login")
 		} else if (connectState == 8) {
-			//% "Please wait or check your internet connection."
+			//% "Please wait or check your internet connection"
 			returnValue = qsTrId("settings_tailscale_check_internet_connection")
 		} else {
 			//: %1 = number code for the connect state
@@ -89,7 +84,7 @@ Page {
 
 		if (tailscaleEnabled && !tailscaleConnected && connectState != 7 && errorMessageItem.valid && errorMessageItem.value !== "") {
 			//% "ERROR: %1"
-			returnValue += "<br /><br />" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
+			returnValue += "\n" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
 		}
 
 		return returnValue
@@ -170,36 +165,18 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
 			}
 
-			PrimaryListLabel {
-				text: root.serviceState
+			ListText {
+				//% "State"
+				text: qsTrId("settings_tailscale_state")
+				secondaryText: root.serviceState
 				preferredVisible: root.tailscaleEnabled && root.serviceState !== ""
-				horizontalAlignment: Text.AlignHCenter
-				onLinkActivated: (linkText) => {
-					BackendConnection.openUrl(linkText)
-				}
 			}
 
-			Rectangle {
-				id: qrCodeRect
-				color: Theme.color_page_background
-				width: 200
-				height: qrCodeRect.visible ? (200 + Theme.geometry_listItem_content_verticalMargin) : 0
-				visible: root.tailscaleEnabled && root.connectState == 7 && root.loginLink !== ""
-				anchors.horizontalCenter: parent.horizontalCenter
-
-				Image {
-					id: qrCodeImage
-					source: root.loginLink !== "" ? (
-						"image://QZXing/encode/" + root.loginLink +
-						"?correctionLevel=M" +
-						"&format=qrcode"
-					) : ""
-					sourceSize.width: 200
-					sourceSize.height: 200
-
-					width: 200
-					height: 200
-				}
+			ListLink {
+				//% "Connect this GX device to your Tailscale account"
+				text: qsTrId("settings_tailscale_connect_to_account")
+				url: root.loginLink
+				preferredVisible: root.tailscaleEnabled && root.connectState == 7 && root.loginLink !== ""
 			}
 
 			ListTextField {
