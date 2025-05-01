@@ -122,10 +122,10 @@ ListItem {
 		property bool _validateBeforeSaving
 
 		enabled: root.clickable
+		visible: root.clickable
 		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
-		visible: root.enabled
 		text: dataItem.valid ? dataItem.value : ""
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
