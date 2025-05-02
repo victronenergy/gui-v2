@@ -14,7 +14,7 @@ SwipeViewPage {
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
 	navButtonIcon: "qrc:/images/icon_boat_32.svg"
-	url: "qrc:/qt/qml/Victron/VenusOS/pages/BoatPage.qml"
+	url: "qrc:/qt/qml/Victron/BoatPageComponents/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
