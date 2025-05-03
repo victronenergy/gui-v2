@@ -1116,6 +1116,9 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
        COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_CURRENT_SOURCE_DIR}/images/victronenergy.svg"
             "${CMAKE_CURRENT_BINARY_DIR}/victronenergy.svg"
+       COMMAND ${CMAKE_COMMAND} -E copy
+            "${CMAKE_CURRENT_SOURCE_DIR}/images/victronenergy-light.svg"
+            "${CMAKE_CURRENT_BINARY_DIR}/victronenergy-light.svg"
     )
 
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
