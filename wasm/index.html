@@ -24,13 +24,24 @@
         overflow: hidden; height: 100%;
         background: #000; color: #fff;
       }
+      #logo {
+        content: url('victronenergy.svg');
+      }
+      @media (prefers-color-scheme: light) {
+        html, body {
+          background: #fff; color: #000;
+        }
+        #logo {
+          content: url('victronenergy-light.svg');
+        }
+      }
       #screen { width: 100%; height: 100%; }
     </style>
   </head>
   <body onload="init()">
     <figure style="overflow:visible;" id="qtspinner">
       <center style="margin-top:1.5em; line-height:150%">
-        <img src="victronenergy.svg" width="320" height="200" style="display:block"></img>
+        <img id="logo" width="320" height="200" style="display:block"></img>
         <div id="qtstatus"></div>
         <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
       </center>
@@ -40,7 +51,7 @@
     <script type="text/javascript">
         async function check(url, attempt, delay, available, unavailable)
         {
-           try {
+            try {
                 const response = await fetch(url, {cache: "no-cache"});
                 if (response.ok) {
                     available();
