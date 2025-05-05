@@ -43,6 +43,8 @@ ListNavigation {
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
+	property Component optionFooter
+
 	signal optionClicked(index: int)
 	signal aboutToPop()
 
@@ -65,6 +67,7 @@ ListNavigation {
 		id: optionsPageComponent
 
 		RadioButtonListPage {
+			footer: root.optionFooter
 			optionModel: root.optionModel
 			currentIndex: root.currentIndex
 			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick

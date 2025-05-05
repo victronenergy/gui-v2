@@ -21,6 +21,8 @@ Page {
 	property var popDestination: null
 	property var validatePassword
 
+	property alias footer: optionsListView.footer
+
 	signal optionClicked(index: int, value : var)
 	signal aboutToPop()
 
