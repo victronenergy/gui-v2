@@ -96,14 +96,17 @@ Item {
 			id: gpsSpeed
 
 			anchors.horizontalCenter: parent.horizontalCenter
+			width: rpmGauge.width - rpmGauge.radius/2
 			verticalAlignment: Text.AlignVCenter
+			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color_font_primary
 			font.pixelSize: motorDriveGauges.visible || rpmLabel.visible
 							? Theme.font_boatPage_speed_pixelSize
 							: Theme.font_boatPage_speed_pixelSize_large
 			font.weight: Font.Medium
+			fontSizeMode: Text.HorizontalFit
 			visible: activeDataSource === gps
-			text: Math.round(gps.numerator)
+			text: gps.numerator >= 10.0 ? Math.round(gps.numerator) : Units.formatNumber(gps.numerator, 1)
 			height: font.pixelSize
 		}
 
