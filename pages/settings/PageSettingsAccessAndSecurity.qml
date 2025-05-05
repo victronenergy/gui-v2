@@ -192,7 +192,7 @@ Page {
 								id: securityProfilePasswordDialog
 
 								onAccepted: {
-									setProfileAndPassword(securityProfile.currentIndex, password, false)
+									securityProfile.setProfileAndPassword(securityProfile.currentIndex, password, false)
 								}
 							}
 						}
@@ -242,7 +242,7 @@ Page {
 							const profile = securityProfile.pendingProfile
 							if (profile === VenusOS.Security_Profile_Unsecured)
 								password = "";
-							setProfileAndPassword(profile, password, true)
+							securityProfile.setProfileAndPassword(profile, password, true)
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
