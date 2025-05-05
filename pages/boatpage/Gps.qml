@@ -31,6 +31,6 @@ VeQuickItemsQuotient {
 	objectName: "BoatPageComponents.Gps"
 	numeratorUid: activeGpsUid ? activeGpsUid + "/Speed" : "" // meters per second
 	denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
-	sourceUnit: VenusOS.Units_Speed_KilometersPerHour
+	sourceUnit: VenusOS.Units_Speed_MetresPerSecond
 	displayUnit: Global.systemSettings.speedUnit
 }
