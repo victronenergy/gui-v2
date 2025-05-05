@@ -35,7 +35,7 @@ ListNavigation {
 				section: qsTrId("settings_briefview_center_temperature_services")
 			})
 			if (selectedIndex < 0 && portableServiceId === centerService.value) {
-				selectedIndex = i
+				selectedIndex = i+1 // allow for the prepended active battery option
 			}
 		}
 		Global.pageManager.pushPage(deviceOptionsComponent, {
