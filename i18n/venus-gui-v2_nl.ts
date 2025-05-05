@@ -125,7 +125,7 @@
       <translation>%1 wordt geïnstalleerd...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="285"/>
+      <location filename="../../components/SplashView.qml" line="304"/>
       <source>Unknown error</source>
       <translation>Onbekende fout</translation>
     </message>
@@ -160,7 +160,7 @@
       <translation>Zon opbrengst</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="192"/>
+      <location filename="../../data/System.qml" line="193"/>
       <source>External control</source>
       <translation>Externe besturing</translation>
     </message>
@@ -175,7 +175,7 @@
       <translation>Omgeving</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="145"/>
+      <location filename="../../pages/NotificationsPage.qml" line="86"/>
       <source>No current alerts</source>
       <translation>Geen huidige waarschuwingen</translation>
     </message>
@@ -185,9 +185,14 @@
       <translation type="unfinished">Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_bluetooth">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="38"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
+    </message>
+    <message id="settings_bluetooth_not_available">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
+      <source>No Bluetooth adapter connected</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_general">
       <location filename="../../pages/SettingsPage.qml" line="40"/>
@@ -220,7 +225,7 @@
       <translation>Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_wifi">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="28"/>
       <source>Wi-Fi</source>
       <translation>WiFi</translation>
     </message>
@@ -291,12 +296,12 @@
       <translation>Zorg ervoor dat ook het VE.Bus-systeem gereset wordt na het uitschakelen van DVCC.</translation>
     </message>
     <message id="settings_dvcc_limit_charge_current">
-      <location filename="../../pages/settings/DvccCommonSettings.qml" line="32"/>
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="37"/>
       <source>Limit charge current</source>
       <translation>Laadstroom beperken</translation>
     </message>
     <message id="settings_dvcc_max_charge_current">
-      <location filename="../../pages/settings/DvccCommonSettings.qml" line="44"/>
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="49"/>
       <source>Maximum charge current</source>
       <translation>Maximale laadstroom</translation>
     </message>
@@ -336,12 +341,12 @@
       <translation>Max: %1</translation>
     </message>
     <message id="settings_deviceinfo_connection">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="22"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="24"/>
       <source>Connection</source>
       <translation>Verbinding</translation>
     </message>
     <message id="settings_deviceinfo_product">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="29"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>Product</translation>
     </message>
@@ -351,22 +356,22 @@
       <translation>Naam</translation>
     </message>
     <message id="settings_deviceinfo_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="36"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Naam</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="46"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
       <source>Product ID</source>
       <translation>Product ID</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="60"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
       <source>Hardware version</source>
       <translation>Hardware versie</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="81"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
       <source>Device name</source>
       <translation>Apparaatnaam</translation>
     </message>
@@ -1397,12 +1402,12 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Er gaat een alarm af als er geen stroom van het aggregaat is gedetecteerd bij de AC ingang van de omvormer. Let er op dat de juiste AC ingang is ingesteld voor het aggregaat op de pagina systeem instellingen.</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="162"/>
       <source>Quiet hours start time</source>
       <translation>Begin tijd rustige uren</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="170"/>
       <source>Quiet hours end time</source>
       <translation>Eind tijd rustige uren</translation>
     </message>
@@ -1493,6 +1498,7 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Knopen</translation>
     </message>
     <message id="page_settings_no_gsm_modem_connected">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
       <source>No GSM modem connected</source>
       <translation>Geen GSM modem aangesloten</translation>
@@ -1734,12 +1740,12 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Langzaam laden</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="198"/>
+      <location filename="../../data/System.qml" line="199"/>
       <source>Sustain</source>
       <translation>Onderhouden</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="201"/>
+      <location filename="../../data/System.qml" line="202"/>
       <source>Recharge</source>
       <translation>Opnieuw laden</translation>
     </message>
@@ -2219,7 +2225,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Backup firmware niet beschikbaar</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="117"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus over TCP/IP (Debug)</translation>
     </message>
@@ -2356,6 +2362,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Verbinding onderbroken</translation>
     </message>
     <message id="settings_tcpip_connection_unplugged">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="22"/>
       <location filename="../../pages/settings/PageSettingsEthernet.qml" line="26"/>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="35"/>
       <source>Unplugged</source>
@@ -2549,28 +2556,28 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation type="unfinished">Enz.</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="262"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="251"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Niet verbonden %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="315"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="304"/>
       <source>Reboot now?</source>
       <translation>Nu opnieuw opstarten?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="318"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="307"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Wijzigingen aan de VRM instance worden pas toegepast als het apparaat opnieuw wordt opgestart.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="338"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="327"/>
       <source>Device is rebooting...</source>
       <translation>Apparaat start opnieuw op...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="341"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="330"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">Apparaat is opnieuw opgestart.</translation>
     </message>
@@ -2624,7 +2631,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Modusinstelling</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="103"/>
+      <location filename="../../data/SystemSettings.qml" line="125"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Stand-alone</translation>
@@ -2680,7 +2687,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="87"/>
+      <location filename="../../data/SystemSettings.qml" line="109"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -3144,7 +3151,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Accu opnieuw detecteren</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
       <source>Press to redetect</source>
       <translation>Drukken om te detecteren</translation>
     </message>
@@ -3979,30 +3986,36 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>AC totalen</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Energie L%1</translation>
     </message>
+    <message id="ac-in-modeldefault_energy_reverse_x">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <source>Reversed Energy L%1</source>
+      <extracomment>%1 = phase number (1-3)</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="153"/>
       <source>Phase Sequence</source>
       <translation>Fasevolgorde</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="159"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="162"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="201"/>
       <source>Data manager version</source>
       <translation>Data manager versie</translation>
     </message>
@@ -4255,7 +4268,7 @@ OPMERKING: Het bijwerken kan het systeem tijdelijk stoppen.</translation>
       <translation>Klik om te stoppen</translation>
     </message>
     <message id="vebus_device_press_to_start">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="116"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="138"/>
       <source>Press to start</source>
       <translation>Klik om te starten</translation>
@@ -4321,28 +4334,28 @@ Do you want to continue?</source>
       <translation>VE.Bus BMS</translation>
     </message>
     <message id="vebus_device_warning">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="91"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="97"/>
       <source>Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current.</source>
       <translation>Waarschuwing: Egalisatie aanzetten in ESS een systeem met zonneladers kan het laden van de accu met te hoge spanning en met te hoge stroom veroorzaken.</translation>
     </message>
     <message id="vebus_device_switch_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="95"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="101"/>
       <source>The system will automatically switch over to float once the Equalization charge has been completed.</source>
       <translation>Het systeem schakelt automatisch over naar druppel als de egalisatie lading is voltooid.</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
       <source>Interrupt equalization</source>
       <translation>Egalisatie onderbreken</translation>
     </message>
     <message id="vebus_device_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="104"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Equalization</source>
       <translation>Egalisatie</translation>
     </message>
     <message id="vebus_device_interrupting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
       <source>Interrupting...</source>
       <translation>Onderbreken...</translation>
     </message>
@@ -4352,94 +4365,99 @@ Do you want to continue?</source>
       <translation>Starten...</translation>
     </message>
     <message id="vebus_device_starting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="111"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
       <source>Starting...</source>
       <translation type="unfinished">Starten...</translation>
     </message>
     <message id="vebus_device_press_to_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="120"/>
       <source>Press to interrupt</source>
       <translation>Drukken om te onderbreken</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="158"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
       <source>Interrupt and restart absorption</source>
       <translation>Onderbreken en herstarten van absorptie</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
       <source>Interrupt and go to float</source>
       <translation>Onderbreken en ga naar druppel</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
       <source>Interrupt</source>
       <translation>Onderbreken</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="182"/>
       <source>Do not interrupt</source>
       <translation>Niet onderbreken</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="201"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="207"/>
       <source>Redetect VE.Bus system</source>
       <translation>VE.Bus systeem opnieuw zoeken.</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="204"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Redetecting...</source>
       <translation>Opnieuw detecteren...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="213"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
       <source>Restart VE.Bus system</source>
       <translation>Herstart VE.Bus systeem</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
       <source>Restarting...</source>
       <translation>Herstarten...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="218"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
       <source>Press to restart</source>
       <translation>Druk voor herstarten</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_title">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
       <source>Are you sure?</source>
       <translation type="unfinished">Weet je het zeker?</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
       <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
       <translation type="unfinished"/>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
       <source>AC input 1 ignored</source>
       <translation>AC ingang 1 genegeerd</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
       <source>AC input 2 ignored</source>
       <translation>AC ingang 2 genegeerd</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="254"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
       <source>ESS Relay test</source>
       <translation>ESS relais test</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="266"/>
       <source>Completed</source>
       <translation type="unfinished">Voltooid</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="268"/>
       <source>Pending</source>
       <translation type="unfinished">In behandeling...</translation>
+    </message>
+    <message id="backup_and_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="274"/>
+      <source>Backup &amp; Restore</source>
+      <translation type="unfinished"/>
     </message>
     <message id="cycle_history_completed">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="31"/>
@@ -4452,12 +4470,12 @@ Do you want to continue?</source>
       <translation>In behandeling...</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="284"/>
       <source>VE.Bus diagnostics</source>
       <translation>VE.Bus diagnostiek</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="288"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="303"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Netwerkkwaliteitsteller Fase L%1, apparaat %2 (%3)</translation>
     </message>
@@ -5359,7 +5377,7 @@ Do you want to continue?</source>
       <translation>Omvormer / ladermodus</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="26"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="27"/>
       <source>Set</source>
       <translation>Instellen</translation>
     </message>
@@ -5369,7 +5387,7 @@ Do you want to continue?</source>
       <translation>Annuleren</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="324"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="313"/>
       <source>Close</source>
       <translation>Sluiten</translation>
     </message>
@@ -5379,49 +5397,49 @@ Do you want to continue?</source>
       <translation>Tijd instellen</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="84"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
       <source>Already in use</source>
       <translation>Al in gebruik</translation>
     </message>
     <message id="deviceinstanceswap_swap_error">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="90"/>
       <source>Swap error</source>
       <translation>Fout met omruilen</translation>
     </message>
     <message id="deviceinstanceswap_swap_completed">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="89"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="92"/>
       <source>Swap complete</source>
       <translation>Omruilen voltooid</translation>
     </message>
     <message id="deviceinstanceswap_busy">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="95"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="98"/>
       <source>Swapping device instances...</source>
       <translation>Device instances verwisselen...</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description_with_name">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="103"/>
       <source>Device instance %1 is already used by '%3'. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers, %3 = another device's name</extracomment>
       <translation>Device instance %1 wordt al gebruikt door '%3'. Device instance verwisselen en toewijzen aan %2?</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="107"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="110"/>
       <source>Device instance %1 is already used by another device of the same type. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers</extracomment>
       <translation>Device instance %1 wordt al gebruikt door een ander apparaat van hetzelfde type. Device instance verwisselen en toewijzen aan %2?</translation>
     </message>
     <message id="deviceinstanceswap_timed_out">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="115"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="118"/>
       <source>Cannot swap device instances: operation timed out.</source>
       <translation>Kan device instances niet verwisselen: bewerking is afgebroken.</translation>
     </message>
     <message id="deviceinstanceswap_active_on_reboot">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="117"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="120"/>
       <source>New device instances will be active on reboot.</source>
       <translation>Nieuwe device instances zullen actief zijn bij het herstarten.</translation>
     </message>
     <message id="deviceinstanceswap_swap">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="124"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="127"/>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Omruil</translation>
@@ -5553,19 +5571,19 @@ Do you want to continue?</source>
       <translation>Berichten</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="237"/>
+      <location filename="../../components/Utils.js" line="258"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>Nu</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="242"/>
+      <location filename="../../components/Utils.js" line="263"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>%1m geleden</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="249"/>
+      <location filename="../../components/Utils.js" line="270"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>%1u %2m geleden</translation>
@@ -5936,82 +5954,82 @@ Do you want to continue?</source>
       <translation>Maximaal vermogen</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="237"/>
+      <location filename="../../components/SplashView.qml" line="256"/>
       <source>Unable to connect</source>
       <translation>Niet mogelijk verbinding te maken</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="239"/>
+      <location filename="../../components/SplashView.qml" line="258"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Verbinding verbroken, probeert opnieuw verbinding te maken</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="264"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Connecting</source>
       <translation>Verbinding wordt gemaakt</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="242"/>
+      <location filename="../../components/SplashView.qml" line="261"/>
       <source>Connecting</source>
       <translation type="unfinished">Verbinding wordt gemaakt</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="244"/>
+      <location filename="../../components/SplashView.qml" line="263"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Verbonden, in afwachting van brokerberichten</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="246"/>
+      <location filename="../../components/SplashView.qml" line="265"/>
       <source>Connected, receiving broker messages</source>
       <translation>Verbonden, ontvangt brokerberichten</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="255"/>
+      <location filename="../../components/SplashView.qml" line="274"/>
       <source>Connected, loading user interface</source>
       <translation>Aangesloten, gebruikersinterface laden</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="271"/>
+      <location filename="../../components/SplashView.qml" line="290"/>
       <source>Invalid protocol version</source>
       <translation>Ongeldige protocolversie</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="273"/>
+      <location filename="../../components/SplashView.qml" line="292"/>
       <source>Client ID rejected</source>
       <translation>Klant ID afgewezen</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="275"/>
+      <location filename="../../components/SplashView.qml" line="294"/>
       <source>Broker service not available</source>
       <translation>Broker service niet beschikbaar</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="277"/>
+      <location filename="../../components/SplashView.qml" line="296"/>
       <source>Bad username or password</source>
       <translation>Slechte gebruikersnaam of wachtwoord</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="279"/>
+      <location filename="../../components/SplashView.qml" line="298"/>
       <source>Client not authorized</source>
       <translation>Gebruiker niet geautoriseerd</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="300"/>
       <source>Transport connection error</source>
       <translation>Fout transportverbinding</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="283"/>
+      <location filename="../../components/SplashView.qml" line="302"/>
       <source>Protocol violation error</source>
       <translation>Protocol fout</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="287"/>
+      <location filename="../../components/SplashView.qml" line="306"/>
       <source>MQTT protocol level 5 error</source>
       <translation>MQTT protocol niveau 5 fout</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="247"/>
+      <location filename="../../components/StatusBar.qml" line="251"/>
       <source>Silence alarm</source>
       <translation>Alarm uitschakelen</translation>
     </message>
@@ -6026,57 +6044,57 @@ Do you want to continue?</source>
       <translation>min</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="177"/>
+      <location filename="../../components/Utils.js" line="186"/>
       <source>%1d %2h</source>
       <translation>%1d %2u</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="182"/>
+      <location filename="../../components/Utils.js" line="191"/>
       <source>%1h %2m</source>
       <translation>%1u %2m</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="203"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="205"/>
+      <location filename="../../components/Utils.js" line="226"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="230"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="211"/>
+      <location filename="../../components/Utils.js" line="232"/>
       <source>0m</source>
       <translation>0m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="261"/>
+      <location filename="../../components/Utils.js" line="282"/>
       <source>Failure</source>
       <translation>Fout</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="267"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Retrieving IP address</source>
       <translation>Bezig IP adres te ontvangen</translation>
     </message>
     <message id="utils_connman_connected">
-      <location filename="../../components/Utils.js" line="271"/>
+      <location filename="../../components/Utils.js" line="292"/>
       <source>Connected</source>
       <translation type="unfinished">Verbonden</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="274"/>
+      <location filename="../../components/Utils.js" line="295"/>
       <source>Disconnect</source>
       <translation>Verbinding verbreken</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="278"/>
+      <location filename="../../components/Utils.js" line="299"/>
       <source>Disconnected</source>
       <translation type="unfinished">Losgekoppeld</translation>
     </message>
@@ -6132,7 +6150,7 @@ Do you want to continue?</source>
       <translation>Stoppen</translation>
     </message>
     <message id="utils_format_time_to_go">
-      <location filename="../../components/Utils.js" line="126"/>
+      <location filename="../../components/Utils.js" line="135"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
       <translation>%1 te gaan</translation>
@@ -6278,9 +6296,9 @@ Do you want to continue?</source>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
-    <message id="switchable_output_undefined">
+    <message id="switchable_output_unsupported">
       <location filename="../../src/enums.cpp" line="316"/>
-      <source>Undefined</source>
+      <source>Unsupported type: %1</source>
       <translation type="unfinished"/>
     </message>
     <message id="switchable_output_off">
@@ -6414,7 +6432,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Geplanned</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="204"/>
+      <location filename="../../data/System.qml" line="205"/>
       <source>Scheduled</source>
       <translation>Geplanned</translation>
     </message>
@@ -6488,102 +6506,102 @@ Do you want to continue?</source>
       <translation>Egaliseren</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="134"/>
+      <location filename="../../data/System.qml" line="135"/>
       <source>AES mode</source>
       <translation>AES modus</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="137"/>
+      <location filename="../../data/System.qml" line="138"/>
       <source>Fault condition</source>
       <translation>Foutconditie</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="140"/>
+      <location filename="../../data/System.qml" line="141"/>
       <source>Bulk charging</source>
       <translation>Bulk laden</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="143"/>
+      <location filename="../../data/System.qml" line="144"/>
       <source>Absorption charging</source>
       <translation>Absorptie laden</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="146"/>
+      <location filename="../../data/System.qml" line="147"/>
       <source>Float charging</source>
       <translation>Druppel laden</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="149"/>
+      <location filename="../../data/System.qml" line="150"/>
       <source>Storage mode</source>
       <translation>Opslag modus</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="153"/>
       <source>Equalization charging</source>
       <translation>Egalisatie laden</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="156"/>
       <source>Pass-thru</source>
       <translation>Doorvoer</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="159"/>
       <source>Inverting</source>
       <translation>Omvormen</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Assisting</source>
       <translation>Assisteren</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Power supply mode</source>
       <translation>Voeding modus</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Sustain</source>
       <translation type="unfinished">Onderhouden</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="171"/>
+      <location filename="../../data/System.qml" line="172"/>
       <source>Wake up</source>
       <translation>Wakker worden</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="174"/>
+      <location filename="../../data/System.qml" line="175"/>
       <source>Repeated absorption</source>
       <translation>Herhaalde absorptie</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="177"/>
+      <location filename="../../data/System.qml" line="178"/>
       <source>Auto equalize</source>
       <translation>Automatisch egaliseren</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="180"/>
+      <location filename="../../data/System.qml" line="181"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="183"/>
+      <location filename="../../data/System.qml" line="184"/>
       <source>Load detect</source>
       <translation>Belasting detectie</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="186"/>
+      <location filename="../../data/System.qml" line="187"/>
       <source>Blocked</source>
       <translation>Geblokkeerd</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="189"/>
+      <location filename="../../data/System.qml" line="190"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="207"/>
+      <location filename="../../data/System.qml" line="208"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
@@ -6593,25 +6611,25 @@ Do you want to continue?</source>
       <translation>Dynamic ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="91"/>
+      <location filename="../../data/SystemSettings.qml" line="113"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Groep Master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="95"/>
+      <location filename="../../data/SystemSettings.qml" line="117"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="99"/>
+      <location filename="../../data/SystemSettings.qml" line="121"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Group &amp; Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="107"/>
+      <location filename="../../data/SystemSettings.qml" line="129"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Stand-alone &amp; Groep Master</translation>
@@ -6692,37 +6710,37 @@ Do you want to continue?</source>
       <translation>Let op dat het wijzigen van de instelling voor de Tijd tot ontladingsvloer ook de instelling voor de Lage laadstatus in het relaismenu verandert.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="36"/>
       <source>Operation time</source>
       <translation>Bedrijfstijd</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="44"/>
       <source>Charged Ah</source>
       <translation>Ah opgeladen</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="53"/>
       <source>Cycles started</source>
       <translation>Cycli begonnen</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="60"/>
       <source>Cycles completed</source>
       <translation>Cycli voltooid</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="67"/>
       <source>Number of power-ups</source>
       <translation>Aantal inschakelingen</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="74"/>
       <source>Number of deep discharges</source>
       <translation>Aantal diepe ontladingen</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="95"/>
       <source>Charge cycle history</source>
       <translation>Geschiedenis laadcyclus</translation>
     </message>
@@ -6755,17 +6773,22 @@ Do you want to continue?</source>
       <translation>Continu zoeken kan de WiFi functie verstoren.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimaal en maximaal meterbereik</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
       <source>Start page</source>
       <translation type="unfinished">Startpagina</translation>
     </message>
+    <message id="settings_display_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>Restarting application...</source>
       <translation>Applicatie opnieuw starten...</translation>
     </message>
@@ -6895,13 +6918,13 @@ Do you want to continue?</source>
       <translation>Aggregaat stoptijd</translation>
     </message>
     <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="141"/>
       <source>Alarm when generator is not in autostart mode</source>
       <oldsource>Alarm when generator is not in auto start mode</oldsource>
       <translation>Alarm als aggregaat niet in autostartmodus staat</translation>
     </message>
     <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="147"/>
       <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
       <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
       <translation>Er gaat een alarm af als de autostartfunctie meer dan 10 minuten uitgeschakeld blijft.</translation>
@@ -6979,19 +7002,19 @@ Do you want to continue?</source>
       <translation>BMS gestuurd</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="127"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
       <translation>Voor deze functie is firmwareversie 400 of hoger vereist. Neem contact op met de installateur om de Multi/Quattro bij te werken.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="139"/>
       <source>Charger not ready, equalization cannot be started</source>
       <oldsource>Charger not ready, equalization cannot be started.</oldsource>
       <translation>Lader niet gereed, egalisatie kan niet worden gestart</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="137"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="143"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
       <translation>Egalisatie kan niet worden geactiveerd tijdens bulklaadstatus</translation>
@@ -7262,6 +7285,36 @@ Let op: dit menu toont alleen Carlo Gavazzi meters die zijn aangesloten via RS48
       <source>Solar</source>
       <translation>Zon</translation>
     </message>
+    <message id="settings_minmax_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_gauge_display">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="174"/>
+      <source>Gauge Display</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="180"/>
+      <source>Speed</source>
+      <translation type="unfinished">Snelheid</translation>
+    </message>
+    <message id="settings_minmax_time_to_go">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
+      <source>Time to go</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="194"/>
+      <source>Max Speed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_rpm">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="206"/>
+      <source>Max RPM</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="devicelist_motordrive_motorrpm">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
@@ -7272,8 +7325,13 @@ Let op: dit menu toont alleen Carlo Gavazzi meters die zijn aangesloten via RS48
       <source>Motor Temperature</source>
       <translation>Temperatuur motor</translation>
     </message>
-    <message id="devicelist_motordrive_controllertemperature">
+    <message id="devicelist_motordrive_coolanttemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
+      <source>Coolant Temperature</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="devicelist_motordrive_controllertemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="69"/>
       <source>Controller Temperature</source>
       <translation>Temperatuur besturing</translation>
     </message>
@@ -7469,12 +7527,12 @@ See documentation for further information.</oldsource>
       <translation>Bedraad</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="153"/>
+      <location filename="../../pages/BriefPage.qml" line="49"/>
       <source>Brief</source>
       <translation type="unfinished">Kort</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="496"/>
+      <location filename="../../pages/BriefPage.qml" line="395"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Hoge systeembelasting, sluit het zijpaneel om CPU belasting te verminderen</translation>
     </message>
@@ -7707,17 +7765,17 @@ See documentation for further information.</oldsource>
 </translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="65"/>
+      <location filename="../../ApplicationContent.qml" line="60"/>
       <source>Touch input on</source>
       <translation>Aanraakscherm aan</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="67"/>
+      <location filename="../../ApplicationContent.qml" line="62"/>
       <source>Touch input off</source>
       <translation>Aanraakscherm uit</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="82"/>
+      <location filename="../../ApplicationContent.qml" line="77"/>
       <source>Touch input disabled</source>
       <translation>Aanraakscherm uitgeschakeld</translation>
     </message>
@@ -7975,7 +8033,7 @@ See documentation for further information.</oldsource>
       <translation>VRM Portal</translation>
     </message>
     <message id="settings_services_tailscale_remote_vpn_access">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="68"/>
       <source>Tailscale (remote VPN access)</source>
       <translation>Tailscale (VPN-toegang op afstand)</translation>
     </message>
@@ -8251,12 +8309,12 @@ Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgek
       <translation>Het aggregaat draait totdat het handmatig wordt gestopt, tenzij er automatische opstartcondities zijn ingeschakeld die het aggregaat aan de gang houden.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
       <source>Classic UI</source>
       <translation>Klassieke UI</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
       <source>New UI</source>
       <translation>Nieuwe UI</translation>
     </message>
@@ -8404,29 +8462,29 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <translation>Startpagina</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
       <source>User interface</source>
       <translation>Gebruikersinterface</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
       <source>User interface (Remote Console)</source>
       <translation>Gebruikersinterface (Console op afstand)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 bijgewerkt</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>De gebruikersinterface schakelt over naar %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 is ingesteld op %2</translation>
@@ -8734,42 +8792,42 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <translation>Deze PV-omvormer ondersteunt vermogensbegrenzing. Schakel deze instelling uit als deze de normale werking verstoort.</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="479"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="481"/>
       <source>NE</source>
       <translation>NO</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="483"/>
       <source>E</source>
       <translation>O</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="485"/>
       <source>SE</source>
       <translation>ZO</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="487"/>
       <source>S</source>
       <translation>Z</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="489"/>
       <source>SW</source>
       <translation>ZW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="491"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="493"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -8876,7 +8934,7 @@ Documentation at https://ve3.nl/vol</oldsource>
 Documentatie op https://ve3.nl/vol</translation>
     </message>
     <message id="pagesettingsconnectivity_mobile_network">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="53"/>
       <source>Mobile Network</source>
       <translation>Mobiel netwerk</translation>
     </message>
@@ -8982,10 +9040,20 @@ Documentatie op https://ve3.nl/vol</translation>
       <oldsource>System setup</oldsource>
       <translation>Systeem set-up</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_on">
+      <location filename="../../components/WifiModel.qml" line="23"/>
+      <source>Disconnected | AP On</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="21"/>
+      <location filename="../../components/WifiModel.qml" line="25"/>
       <source>Disconnected | AP Off</source>
       <translation>Uitgeschakeld | AP Uit</translation>
+    </message>
+    <message id="wifimodel_disconnected">
+      <location filename="../../components/WifiModel.qml" line="28"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">Losgekoppeld</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_description">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="16"/>
@@ -9006,7 +9074,7 @@ Als de generator momenteel draait vanwege een autostartconditie, zal het uitscha
       <translation>Open link</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Data units</source>
       <translation>Gegevenseenheden</translation>
     </message>
@@ -9092,7 +9160,7 @@ Als de generator momenteel draait vanwege een autostartconditie, zal het uitscha
       <translation>Alarm als DC-generator geen stroom levert</translation>
     </message>
     <message id="page_settings_generator_detect_at_dc_in_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>Er gaat een alarm af als de DC-generator niet minstens 5 A bereikt binnen de eerste 5 minuten na het opstarten.</translation>
     </message>
@@ -9362,7 +9430,7 @@ firmware-integriteit voordat u contact opneemt met ondersteuning</translation>
       <translation>Stoppen op tankniveau</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Brief page</source>
       <translation>Korte pagina</translation>
     </message>
@@ -9422,22 +9490,22 @@ firmware-integriteit voordat u contact opneemt met ondersteuning</translation>
       <translation>Temperatuurdiensten</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="251"/>
+      <location filename="../../components/SplashView.qml" line="270"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation/>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="253"/>
+      <location filename="../../components/SplashView.qml" line="272"/>
       <source>Connected to VRM, awaiting device</source>
       <translation/>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="303"/>
+      <location filename="../../components/SplashView.qml" line="322"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation/>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="305"/>
+      <location filename="../../components/SplashView.qml" line="324"/>
       <source>Device is not connected to VRM</source>
       <translation/>
     </message>
@@ -9521,6 +9589,430 @@ firmware-integriteit voordat u contact opneemt met ondersteuning</translation>
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
       <source>Warning</source>
       <translation type="unfinished">Waarschuwing</translation>
+    </message>
+    <message id="switchable_output_press">
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="140"/>
+      <source>Press</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="13"/>
+      <source>Output on auxiliary battery</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_dcdc">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="19"/>
+      <source>%1 changed to DC-DC service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_alternator">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="21"/>
+      <source>%1 changed to alternator service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_check_multiphase_regulation_setting">
+      <location filename="../../data/common/EssData.qml" line="48"/>
+      <source>Make sure to check the Multiphase regulation setting</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_state">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="32"/>
+      <source>Module state</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_voltage">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="39"/>
+      <source>Module Voltage</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switch_device_name">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="117"/>
+      <source>Name</source>
+      <translation type="unfinished">Naam</translation>
+    </message>
+    <message id="page_switchable_output_name">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="35"/>
+      <source>Name</source>
+      <translation type="unfinished">Naam</translation>
+    </message>
+    <message id="page_switchable_output_group">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="45"/>
+      <source>Group</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switchable_output_type">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="55"/>
+      <source>Type</source>
+      <translation type="unfinished">Type</translation>
+    </message>
+    <message id="page_switchable_output_fuse_rating">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="63"/>
+      <source>Fuse rating</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_init">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="16"/>
+      <source>Init</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_query_products">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="18"/>
+      <source>Query products</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_done">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="20"/>
+      <source>Done</source>
+      <translation type="unfinished">Klaar</translation>
+    </message>
+    <message id="mk2vsc_state_read_setting_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="22"/>
+      <source>Read setting data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_assistants">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="24"/>
+      <source>Read assistants</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_vebus_configuration">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="26"/>
+      <source>Read VE.Bus configuration</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_grid_info">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="28"/>
+      <source>Read grid info</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_settings_info">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="30"/>
+      <source>Write settings info</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_settings_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
+      <source>Write Settings Data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_assistants">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="34"/>
+      <source>Write assistants</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_vebus_configuration">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="36"/>
+      <source>Write VE.Bus configuration</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_resetting_vebus_products">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="38"/>
+      <source>Resetting VE.Bus products</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="Unknown">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Onbekend</translation>
+    </message>
+    <message id="mk2vsc_error_mk2_mk3_comm">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="47"/>
+      <source>MK2/MK3 communication error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_prod_addr_unreach">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
+      <source>Product address not reachable</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_incomp_mk2_fw">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
+      <source>Incompatible MK2 firmware version</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_no_vebus_prod">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
+      <source>No VE.Bus product was found</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_too_many_devices">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
+      <source>Too many devices on the VE.Bus</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_timed_out">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
+      <source>Timed out</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_wrong_pass">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
+      <source>Wrong password. (Use VeConfigure to set gridcode to None)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_malloc">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
+      <source>Malloc error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_no_settings">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
+      <source>Uploaded file does not contain settings data for the connected unit</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
+      <source>Uploaded file does not match model and/or installed firmware version</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_mult_unknown_units">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
+      <source>More than one unknown unit detected</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_update_single_unit">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
+      <source>Updating a single unit with another unit's settings is not possible, even if they are of the same type</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_unit_count_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
+      <source>The number of units in file does not match the number of units discovered</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_open">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
+      <source>File open error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_write">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
+      <source>File write error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_read">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
+      <source>File read error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_checksum">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
+      <source>File checksum error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_ver_incompat">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
+      <source>File incompatible version number</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_section_not_found">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
+      <source>File section not found</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_format">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
+      <source>File format error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_prod_num_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
+      <source>Product number does not match file</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_expired">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
+      <source>File expired</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_wrong_file_format">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
+      <source>Wrong file format. First open the file with VE.Bus System Configurator, then save it to a new file by closing VE.Configure</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_vebus_write_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
+      <source>VE.Bus write of assistant enable/disable setting failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_vebus_config_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
+      <source>Incompatible VE.Bus system configuration. Writing system configuration failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_read_settings_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
+      <source>Cannot read settings. VE.Bus system not configured</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_assist_write_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
+      <source>Assistants write failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_assist_read_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
+      <source>Assistants read failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_grid_info_read_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
+      <source>Grid info read failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_os_unknown_app">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
+      <source>OSerror, unknown application</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_com_port_no_resp">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
+      <source>Failed to open com port(no response)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_backup_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="116"/>
+      <source>Backup successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_restore_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
+      <source>Restore successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_file delete_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
+      <source>File delete successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_backup_process_unexpedly_closed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
+      <source>Backup process unexpectedly closed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_restore_process_unexpedly_closed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
+      <source>Restore process unexpectedly closed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_file_delete_failed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
+      <source>File delete failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="incompatible">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="228"/>
+      <source>Incompatible</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="294"/>
+      <source>Backup name</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backup_name">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="299"/>
+      <source>Enter backup name</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name_empty">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="303"/>
+      <source>File name cannot be empty</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name_invalid">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="308"/>
+      <source>Invalid file name. Avoid using special characters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backup">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="322"/>
+      <source>Backup</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_backup">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="325"/>
+      <source>Press to backup</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backing_up">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="327"/>
+      <source>Backing up...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="340"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="359"/>
+      <source>Restore</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_select_backup_file_to_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="343"/>
+      <source>Select backup file to restore</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="362"/>
+      <source>Press to restore</source>
+      <translation type="unfinished">Klik om te herstellen</translation>
+    </message>
+    <message id="vebus_backup_restoring">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="364"/>
+      <source>Restoring...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="377"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="396"/>
+      <source>Delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_select_backup_file_to_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="380"/>
+      <source>Select backup file to delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="399"/>
+      <source>Press to delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_deleting">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="401"/>
+      <source>Deleting...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_cancel">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="415"/>
+      <source>Press to cancel</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_firmware_version_specific_message">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
+      <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="nav_boat">
+      <location filename="../../pages/boatpage/BoatPage.qml" line="15"/>
+      <source>Boat</source>
+      <translation type="unfinished">Boot</translation>
+    </message>
+    <message id="boat_page_rpm">
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="150"/>
+      <source>RPM</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_motor_drive">
+      <location filename="../../pages/boatpage/MotorDriveGauges.qml" line="42"/>
+      <source>Motordrive</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_time_to_go">
+      <location filename="../../pages/boatpage/TimeToGo.qml" line="56"/>
+      <source>Time To Go</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>

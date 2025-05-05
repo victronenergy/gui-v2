@@ -125,7 +125,7 @@
       <translation>Instaluji %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="285"/>
+      <location filename="../../components/SplashView.qml" line="304"/>
       <source>Unknown error</source>
       <translation>Neznámá chyba</translation>
     </message>
@@ -160,7 +160,7 @@
       <translation>Solární výnos</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="192"/>
+      <location filename="../../data/System.qml" line="193"/>
       <source>External control</source>
       <translation>Externí ovládání</translation>
     </message>
@@ -175,7 +175,7 @@
       <translation>Prostředí</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="145"/>
+      <location filename="../../pages/NotificationsPage.qml" line="86"/>
       <source>No current alerts</source>
       <translation>Žádná aktuální upozornění</translation>
     </message>
@@ -185,9 +185,14 @@
       <translation type="unfinished">Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_bluetooth">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="38"/>
       <source>Bluetooth</source>
       <translation>Bluetooth</translation>
+    </message>
+    <message id="settings_bluetooth_not_available">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
+      <source>No Bluetooth adapter connected</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_general">
       <location filename="../../pages/SettingsPage.qml" line="40"/>
@@ -220,7 +225,7 @@
       <translation>Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_wifi">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="28"/>
       <source>Wi-Fi</source>
       <translation>Wi-Fi</translation>
     </message>
@@ -291,12 +296,12 @@
       <translation>Po vypnutí DVCC nezapomeňte také resetovat systém VE.Bus.</translation>
     </message>
     <message id="settings_dvcc_limit_charge_current">
-      <location filename="../../pages/settings/DvccCommonSettings.qml" line="32"/>
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="37"/>
       <source>Limit charge current</source>
       <translation>Omezení nabíjecího proudu</translation>
     </message>
     <message id="settings_dvcc_max_charge_current">
-      <location filename="../../pages/settings/DvccCommonSettings.qml" line="44"/>
+      <location filename="../../pages/settings/DvccCommonSettings.qml" line="49"/>
       <source>Maximum charge current</source>
       <translation>Maximální nabíjecí proud</translation>
     </message>
@@ -336,12 +341,12 @@
       <translation>Max: %1</translation>
     </message>
     <message id="settings_deviceinfo_connection">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="22"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="24"/>
       <source>Connection</source>
       <translation>Připojení</translation>
     </message>
     <message id="settings_deviceinfo_product">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="29"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>Výrobek</translation>
     </message>
@@ -351,22 +356,22 @@
       <translation>Název</translation>
     </message>
     <message id="settings_deviceinfo_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="36"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Název</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="46"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
       <source>Product ID</source>
       <translation>Identifikace výrobku</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="60"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
       <source>Hardware version</source>
       <translation>Verze hardwaru</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="81"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
       <source>Device name</source>
       <translation>Název zařízení</translation>
     </message>
@@ -1397,12 +1402,12 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Alarm bude spuštěn pokud nebude zjištěn žádný výkon z generátor na AC vstupu. Ujistěte se že je nastaven správný AC vstup pro generátor v sekci systémového nastavení.</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="162"/>
       <source>Quiet hours start time</source>
       <translation>Počáteční čas nočního klidu</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="170"/>
       <source>Quiet hours end time</source>
       <translation>Koncový čas nočního klidu</translation>
     </message>
@@ -1493,6 +1498,7 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Uzlů</translation>
     </message>
     <message id="page_settings_no_gsm_modem_connected">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
       <source>No GSM modem connected</source>
       <translation>Není připojen žádný GSM modem</translation>
@@ -1734,12 +1740,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Pomalé nabíjení</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="198"/>
+      <location filename="../../data/System.qml" line="199"/>
       <source>Sustain</source>
       <translation>Udržování</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="201"/>
+      <location filename="../../data/System.qml" line="202"/>
       <source>Recharge</source>
       <translation>Nabíjení</translation>
     </message>
@@ -2219,7 +2225,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Záložní firmware není k dispozici</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="117"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus přes TCP/IP (ladění)</translation>
     </message>
@@ -2356,6 +2362,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Ztráta připojení</translation>
     </message>
     <message id="settings_tcpip_connection_unplugged">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="22"/>
       <location filename="../../pages/settings/PageSettingsEthernet.qml" line="26"/>
       <location filename="../../pages/settings/PageSettingsTcpIp.qml" line="35"/>
       <source>Unplugged</source>
@@ -2549,28 +2556,28 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">Atd</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="262"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="251"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Nepřipojeno %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="315"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="304"/>
       <source>Reboot now?</source>
       <translation>Restartovat nyní?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="318"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="307"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Změny instance VRM se použijí až po restartování zařízení.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="338"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="327"/>
       <source>Device is rebooting...</source>
       <translation>Zařízení se restartuje...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="341"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="330"/>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">Zařízení bylo restartováno.</translation>
     </message>
@@ -2624,7 +2631,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Nastavení režimu</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="103"/>
+      <location filename="../../data/SystemSettings.qml" line="125"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Samostatný</translation>
@@ -2680,7 +2687,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">Podřízený</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="87"/>
+      <location filename="../../data/SystemSettings.qml" line="109"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Podřízený</translation>
@@ -3144,7 +3151,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Opakovat detekci baterie</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
       <source>Press to redetect</source>
       <translation>Stisknout</translation>
     </message>
@@ -3980,30 +3987,36 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>AC celkem</translation>
     </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="113"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="119"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Energie L%1</translation>
     </message>
+    <message id="ac-in-modeldefault_energy_reverse_x">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <source>Reversed Energy L%1</source>
+      <extracomment>%1 = phase number (1-3)</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="153"/>
       <source>Phase Sequence</source>
       <translation>Fázová sekvence</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="159"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="139"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="162"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
     </message>
     <message id="ac-in-modeldefault_data_manager_version">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="201"/>
       <source>Data manager version</source>
       <translation>Verze správce dat</translation>
     </message>
@@ -4256,7 +4269,7 @@ POZNÁMKA: Aktualizace může dočasně zastavit systém.</translation>
       <translation>Stisknutím zastavíte</translation>
     </message>
     <message id="vebus_device_press_to_start">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="116"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="138"/>
       <source>Press to start</source>
       <translation>Stiskněte pro start</translation>
@@ -4325,28 +4338,28 @@ Chcete pokračovat?</translation>
       <translation>VE.Bus BMS</translation>
     </message>
     <message id="vebus_device_warning">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="91"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="97"/>
       <source>Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current.</source>
       <translation>Varování: Aktivace vyrovnávání v systému ESS zahrnujícím solární nabíječky může způsobit nabíjení baterie při vysokém napětí a příliš vysokým proudem.</translation>
     </message>
     <message id="vebus_device_switch_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="95"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="101"/>
       <source>The system will automatically switch over to float once the Equalization charge has been completed.</source>
       <translation>Systém se automaticky přepne na režim plovoucího nabíjení, jakmile bude dokončena fáze vyrovnávacího nabíjení.</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
       <source>Interrupt equalization</source>
       <translation>Přerušit vyrovnávání</translation>
     </message>
     <message id="vebus_device_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="104"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
       <source>Equalization</source>
       <translation>Vyrovnávání</translation>
     </message>
     <message id="vebus_device_interrupting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
       <source>Interrupting...</source>
       <translation>Probíhá přerušení...</translation>
     </message>
@@ -4356,94 +4369,99 @@ Chcete pokračovat?</translation>
       <translation>Spouštím...</translation>
     </message>
     <message id="vebus_device_starting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="111"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
       <source>Starting...</source>
       <translation type="unfinished">Spouštím...</translation>
     </message>
     <message id="vebus_device_press_to_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="120"/>
       <source>Press to interrupt</source>
       <translation>Stiskněte pro přerušení</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="158"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
       <source>Interrupt and restart absorption</source>
       <translation>Přerušit a restartovat absorpční nabíjení</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
       <source>Interrupt and go to float</source>
       <translation>Přerušit a přejít do režimu plovoucího nabíjení</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
       <source>Interrupt</source>
       <translation>Přerušit</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="182"/>
       <source>Do not interrupt</source>
       <translation>Nepřerušovat</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="201"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="207"/>
       <source>Redetect VE.Bus system</source>
       <translation>RedetekceVE.Bus systému</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="204"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
       <source>Redetecting...</source>
       <translation>Opakování detekce...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="213"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
       <source>Restart VE.Bus system</source>
       <translation>Restartujte systém VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
       <source>Restarting...</source>
       <translation>Restartuji...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="218"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
       <source>Press to restart</source>
       <translation>Stisknutím tlačítka restartujte</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_title">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
       <source>Are you sure?</source>
       <translation type="unfinished">Jste si jistý?</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
       <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
       <translation type="unfinished"/>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
       <source>AC input 1 ignored</source>
       <translation>AC vstup 1 ignorován</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="246"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
       <source>AC input 2 ignored</source>
       <translation>AC vstup 2 ignorován</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="254"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
       <source>ESS Relay test</source>
       <translation>Kontrola ESS relé</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="266"/>
       <source>Completed</source>
       <translation type="unfinished">Hotovo</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="268"/>
       <source>Pending</source>
       <translation type="unfinished">Čekající</translation>
+    </message>
+    <message id="backup_and_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="274"/>
+      <source>Backup &amp; Restore</source>
+      <translation type="unfinished"/>
     </message>
     <message id="cycle_history_completed">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="31"/>
@@ -4456,12 +4474,12 @@ Chcete pokračovat?</translation>
       <translation>Čekající</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="284"/>
       <source>VE.Bus diagnostics</source>
       <translation>Diagnostika VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="288"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="303"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Čítač kvality sítě Fáze L%1, zařízení %2 (%3)</translation>
     </message>
@@ -5363,7 +5381,7 @@ Chcete pokračovat?</translation>
       <translation>Režim měniče / nabíječky</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="26"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="27"/>
       <source>Set</source>
       <translation>Nastavit</translation>
     </message>
@@ -5373,7 +5391,7 @@ Chcete pokračovat?</translation>
       <translation>Zrušit</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="324"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="313"/>
       <source>Close</source>
       <translation>Zavřít</translation>
     </message>
@@ -5383,49 +5401,49 @@ Chcete pokračovat?</translation>
       <translation>Nastavený čas</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="84"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
       <source>Already in use</source>
       <translation>Již se používá</translation>
     </message>
     <message id="deviceinstanceswap_swap_error">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="87"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="90"/>
       <source>Swap error</source>
       <translation>Chyba výměny</translation>
     </message>
     <message id="deviceinstanceswap_swap_completed">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="89"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="92"/>
       <source>Swap complete</source>
       <translation>Výměna dokončena</translation>
     </message>
     <message id="deviceinstanceswap_busy">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="95"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="98"/>
       <source>Swapping device instances...</source>
       <translation>Výměna instancí zařízení...</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description_with_name">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="103"/>
       <source>Device instance %1 is already used by '%3'. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers, %3 = another device's name</extracomment>
       <translation>Instance zařízení %1 je již používána zařízením '%3'. Vyměnit instance zařízení a přiřadit je k %2?</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned_description">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="107"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="110"/>
       <source>Device instance %1 is already used by another device of the same type. Swap device instances and assign that to %2?</source>
       <extracomment>%1 and %2 are unique device instance numbers</extracomment>
       <translation>Instance zařízení %1 je již používána jiným zařízením stejného typu. Vyměnit instance zařízení a přiřadit je k %2?</translation>
     </message>
     <message id="deviceinstanceswap_timed_out">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="115"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="118"/>
       <source>Cannot swap device instances: operation timed out.</source>
       <translation>Nelze vyměnit instance zařízení: operace vypršela.</translation>
     </message>
     <message id="deviceinstanceswap_active_on_reboot">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="117"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="120"/>
       <source>New device instances will be active on reboot.</source>
       <translation>Nové instance zařízení budou při restartu aktivní.</translation>
     </message>
     <message id="deviceinstanceswap_swap">
-      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="124"/>
+      <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="127"/>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Výměna</translation>
@@ -5557,19 +5575,19 @@ Chcete pokračovat?</translation>
       <translation>Oznámení</translation>
     </message>
     <message id="utils_formatTimestamp_now">
-      <location filename="../../components/Utils.js" line="237"/>
+      <location filename="../../components/Utils.js" line="258"/>
       <source>now</source>
       <extracomment>Indicates an event happened very recently</extracomment>
       <translation>nyní</translation>
     </message>
     <message id="utils_formatTimestamp_min_ago">
-      <location filename="../../components/Utils.js" line="242"/>
+      <location filename="../../components/Utils.js" line="263"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
       <translation>Před %1m</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
-      <location filename="../../components/Utils.js" line="249"/>
+      <location filename="../../components/Utils.js" line="270"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
       <translation>před %1h %2m</translation>
@@ -5940,82 +5958,82 @@ Chcete pokračovat?</translation>
       <translation>Maximální výkon</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="237"/>
+      <location filename="../../components/SplashView.qml" line="256"/>
       <source>Unable to connect</source>
       <translation>Nelze se připojit</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="239"/>
+      <location filename="../../components/SplashView.qml" line="258"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Odpojeno, pokus o opětovné připojení</translation>
     </message>
     <message id="utils_connman_connecting">
-      <location filename="../../components/Utils.js" line="264"/>
+      <location filename="../../components/Utils.js" line="285"/>
       <source>Connecting</source>
       <translation>Připojení</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="242"/>
+      <location filename="../../components/SplashView.qml" line="261"/>
       <source>Connecting</source>
       <translation type="unfinished">Připojení</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="244"/>
+      <location filename="../../components/SplashView.qml" line="263"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Připojeno, čeká na zprávy zprostředkovatele</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="246"/>
+      <location filename="../../components/SplashView.qml" line="265"/>
       <source>Connected, receiving broker messages</source>
       <translation>Připojeno, příjem zpráv od zprostředkovatele</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="255"/>
+      <location filename="../../components/SplashView.qml" line="274"/>
       <source>Connected, loading user interface</source>
       <translation>Připojené, načítání uživatelského rozhraní</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="271"/>
+      <location filename="../../components/SplashView.qml" line="290"/>
       <source>Invalid protocol version</source>
       <translation>Nesprávná verze protokolu</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="273"/>
+      <location filename="../../components/SplashView.qml" line="292"/>
       <source>Client ID rejected</source>
       <translation>ID klienta odmítnuto</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="275"/>
+      <location filename="../../components/SplashView.qml" line="294"/>
       <source>Broker service not available</source>
       <translation>Zprostředkovatelská služba není k dispozici</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="277"/>
+      <location filename="../../components/SplashView.qml" line="296"/>
       <source>Bad username or password</source>
       <translation>Špatné uživatelské jméno nebo heslo</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="279"/>
+      <location filename="../../components/SplashView.qml" line="298"/>
       <source>Client not authorized</source>
       <translation>Klient není oprávněn</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="300"/>
       <source>Transport connection error</source>
       <translation>Chyba trasportního spojení</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="283"/>
+      <location filename="../../components/SplashView.qml" line="302"/>
       <source>Protocol violation error</source>
       <translation>Chyba při porušení protokolu</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="287"/>
+      <location filename="../../components/SplashView.qml" line="306"/>
       <source>MQTT protocol level 5 error</source>
       <translation>Chyba protokolu MQTT úrovně 5</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="247"/>
+      <location filename="../../components/StatusBar.qml" line="251"/>
       <source>Silence alarm</source>
       <translation>Vypnutí alarmu</translation>
     </message>
@@ -6030,57 +6048,57 @@ Chcete pokračovat?</translation>
       <translation>Min.</translation>
     </message>
     <message id="utils_format_days_hours">
-      <location filename="../../components/Utils.js" line="177"/>
+      <location filename="../../components/Utils.js" line="186"/>
       <source>%1d %2h</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_hours_min">
-      <location filename="../../components/Utils.js" line="182"/>
+      <location filename="../../components/Utils.js" line="191"/>
       <source>%1h %2m</source>
       <translation>%1d %2h</translation>
     </message>
     <message id="utils_format_min_sec">
-      <location filename="../../components/Utils.js" line="203"/>
+      <location filename="../../components/Utils.js" line="224"/>
       <source>%1m %2s</source>
       <translation>%1m %2s</translation>
     </message>
     <message id="utils_format_min">
-      <location filename="../../components/Utils.js" line="205"/>
+      <location filename="../../components/Utils.js" line="226"/>
       <source>%1m</source>
       <translation>%1m</translation>
     </message>
     <message id="utils_format_sec">
-      <location filename="../../components/Utils.js" line="209"/>
+      <location filename="../../components/Utils.js" line="230"/>
       <source>%1s</source>
       <translation>%1s</translation>
     </message>
     <message id="utils_zero_minutes">
-      <location filename="../../components/Utils.js" line="211"/>
+      <location filename="../../components/Utils.js" line="232"/>
       <source>0m</source>
       <translation>0 m</translation>
     </message>
     <message id="utils_connman_failure">
-      <location filename="../../components/Utils.js" line="261"/>
+      <location filename="../../components/Utils.js" line="282"/>
       <source>Failure</source>
       <translation>Porucha</translation>
     </message>
     <message id="utils_connman_retrieving_ip_address">
-      <location filename="../../components/Utils.js" line="267"/>
+      <location filename="../../components/Utils.js" line="288"/>
       <source>Retrieving IP address</source>
       <translation>Získávám IP adresu</translation>
     </message>
     <message id="utils_connman_connected">
-      <location filename="../../components/Utils.js" line="271"/>
+      <location filename="../../components/Utils.js" line="292"/>
       <source>Connected</source>
       <translation type="unfinished">Připojeno</translation>
     </message>
     <message id="utils_connman_disconnect">
-      <location filename="../../components/Utils.js" line="274"/>
+      <location filename="../../components/Utils.js" line="295"/>
       <source>Disconnect</source>
       <translation>Odpojit</translation>
     </message>
     <message id="utils_connman_disconnected">
-      <location filename="../../components/Utils.js" line="278"/>
+      <location filename="../../components/Utils.js" line="299"/>
       <source>Disconnected</source>
       <translation type="unfinished">Odpojeno</translation>
     </message>
@@ -6136,7 +6154,7 @@ Chcete pokračovat?</translation>
       <translation>Zastavení</translation>
     </message>
     <message id="utils_format_time_to_go">
-      <location filename="../../components/Utils.js" line="126"/>
+      <location filename="../../components/Utils.js" line="135"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
       <translation>%1 zbývá</translation>
@@ -6282,9 +6300,9 @@ Chcete pokračovat?</translation>
       <source>Slave</source>
       <translation type="unfinished">Podřízený</translation>
     </message>
-    <message id="switchable_output_undefined">
+    <message id="switchable_output_unsupported">
       <location filename="../../src/enums.cpp" line="316"/>
-      <source>Undefined</source>
+      <source>Unsupported type: %1</source>
       <translation type="unfinished"/>
     </message>
     <message id="switchable_output_off">
@@ -6418,7 +6436,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Naplánováno</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="204"/>
+      <location filename="../../data/System.qml" line="205"/>
       <source>Scheduled</source>
       <translation>Naplánováno</translation>
     </message>
@@ -6492,102 +6510,102 @@ Chcete pokračovat?</translation>
       <translation>Vyrovnávání</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="134"/>
+      <location filename="../../data/System.qml" line="135"/>
       <source>AES mode</source>
       <translation>Nízký výkon</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="137"/>
+      <location filename="../../data/System.qml" line="138"/>
       <source>Fault condition</source>
       <translation>Poruchový stav</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="140"/>
+      <location filename="../../data/System.qml" line="141"/>
       <source>Bulk charging</source>
       <translation>Rychlé nabíjení</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="143"/>
+      <location filename="../../data/System.qml" line="144"/>
       <source>Absorption charging</source>
       <translation>Absorpční nabíjení</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="146"/>
+      <location filename="../../data/System.qml" line="147"/>
       <source>Float charging</source>
       <translation>Udržovací nabíjení</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="149"/>
+      <location filename="../../data/System.qml" line="150"/>
       <source>Storage mode</source>
       <translation>Režim skladování</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="153"/>
       <source>Equalization charging</source>
       <translation>Vyrovnávací nabíjení</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="156"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="159"/>
       <source>Inverting</source>
       <translation>Měnič</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Assisting</source>
       <translation>Asistence</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Power supply mode</source>
       <translation>Režim dodávky energie</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Sustain</source>
       <translation type="unfinished">Udržování</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="171"/>
+      <location filename="../../data/System.qml" line="172"/>
       <source>Wake up</source>
       <translation>Probuďte se</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="174"/>
+      <location filename="../../data/System.qml" line="175"/>
       <source>Repeated absorption</source>
       <translation>Opakovaná absorpce</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="177"/>
+      <location filename="../../data/System.qml" line="178"/>
       <source>Auto equalize</source>
       <translation>Automatické vyrovnávání</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="180"/>
+      <location filename="../../data/System.qml" line="181"/>
       <source>Battery safe</source>
       <translation>Systém Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="183"/>
+      <location filename="../../data/System.qml" line="184"/>
       <source>Load detect</source>
       <translation>Detekce zatížení</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="186"/>
+      <location filename="../../data/System.qml" line="187"/>
       <source>Blocked</source>
       <translation>Zablokovaný</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="189"/>
+      <location filename="../../data/System.qml" line="190"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="207"/>
+      <location filename="../../data/System.qml" line="208"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamické ESS</translation>
     </message>
@@ -6597,25 +6615,25 @@ Chcete pokračovat?</translation>
       <translation>Dynamické ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="91"/>
+      <location filename="../../data/SystemSettings.qml" line="113"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Skupinový master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="95"/>
+      <location filename="../../data/SystemSettings.qml" line="117"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Master případu</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="99"/>
+      <location filename="../../data/SystemSettings.qml" line="121"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Master skupiny a případu</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="107"/>
+      <location filename="../../data/SystemSettings.qml" line="129"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Samostatný a skupinový master</translation>
@@ -6696,37 +6714,37 @@ Chcete pokračovat?</translation>
       <translation>Všimněte si, že změnou nastavení dolní meze vybíjení Time-to-go se změní také nastavení Low state-of-charge (Nízký stav nabití) v nabídce relé.</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="121"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="36"/>
       <source>Operation time</source>
       <translation>Doba provozu</translation>
     </message>
     <message id="alternator_wakespeed_charged_ah">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="44"/>
       <source>Charged Ah</source>
       <translation>Nabité Ah</translation>
     </message>
     <message id="alternator_wakespeed_cycles_started">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="53"/>
       <source>Cycles started</source>
       <translation>Zahájení cyklů</translation>
     </message>
     <message id="alternator_wakespeed_cycles_completed">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="60"/>
       <source>Cycles completed</source>
       <translation>Dokončené cykly</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_power_ups">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="67"/>
       <source>Number of power-ups</source>
       <translation>Počet bonusů</translation>
     </message>
     <message id="alternator_wakespeed_nr_of_deep_discharges">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="74"/>
       <source>Number of deep discharges</source>
       <translation>Počet hlubokých výbojů</translation>
     </message>
     <message id="alternator_wakespeed_charge_cycle_history">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="178"/>
+      <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="95"/>
       <source>Charge cycle history</source>
       <translation>Historie nabíjecích cyklů</translation>
     </message>
@@ -6759,17 +6777,22 @@ Chcete pokračovat?</translation>
       <translation>Nepřetržité skenování může rušit provoz Wi-Fi.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimální a maximální rozsahy měřidla</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
       <source>Start page</source>
       <translation type="unfinished">Úvodní stránka</translation>
     </message>
+    <message id="settings_display_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
       <source>Restarting application...</source>
       <translation>Restartování aplikace...</translation>
     </message>
@@ -6899,13 +6922,13 @@ Chcete pokračovat?</translation>
       <translation>Doba zastavení generátoru</translation>
     </message>
     <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="141"/>
       <source>Alarm when generator is not in autostart mode</source>
       <oldsource>Alarm when generator is not in auto start mode</oldsource>
       <translation>Alarm, když generátor není v režimu automatického spuštění</translation>
     </message>
     <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="147"/>
       <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
       <oldsource>An alarm will be triggered when auto start function is left disabled for more than 10 minutes.</oldsource>
       <translation>Pokud je funkce autostart vypnutá déle než 10 minut, spustí se alarm.</translation>
@@ -6983,19 +7006,19 @@ Chcete pokračovat?</translation>
       <translation>Řízeno BMS</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="127"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <oldsource>This feature requires firmware version 400 or higher, contact your installer to update your Multi/Quattro.</oldsource>
       <translation>Tato funkce vyžaduje firmware verze 400 nebo vyšší. Pro aktualizaci zařízení Multi/Quattro se obraťte na svého instalatéra.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="139"/>
       <source>Charger not ready, equalization cannot be started</source>
       <oldsource>Charger not ready, equalization cannot be started.</oldsource>
       <translation>Nabíječka není připravena, vyrovnávání nelze spustit</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="137"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="143"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <oldsource>Equalization cannot be triggered during bulk charge state.</oldsource>
       <translation>Vyrovnání nelze spustit během stavu hromadného nabíjení</translation>
@@ -7266,6 +7289,36 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <source>Solar</source>
       <translation>Solární energie</translation>
     </message>
+    <message id="settings_minmax_boat_page">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
+      <source>Boat page</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_gauge_display">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="174"/>
+      <source>Gauge Display</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="180"/>
+      <source>Speed</source>
+      <translation type="unfinished">Rychlost</translation>
+    </message>
+    <message id="settings_minmax_time_to_go">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
+      <source>Time to go</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="194"/>
+      <source>Max Speed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_minmax_max_rpm">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="206"/>
+      <source>Max RPM</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="devicelist_motordrive_motorrpm">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="25"/>
       <source>Motor RPM</source>
@@ -7276,8 +7329,13 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <source>Motor Temperature</source>
       <translation>Teplota motoru</translation>
     </message>
-    <message id="devicelist_motordrive_controllertemperature">
+    <message id="devicelist_motordrive_coolanttemperature">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="62"/>
+      <source>Coolant Temperature</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="devicelist_motordrive_controllertemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="69"/>
       <source>Controller Temperature</source>
       <translation>Teplota ovladače</translation>
     </message>
@@ -7473,12 +7531,12 @@ See documentation for further information.</oldsource>
       <translation>Drátové připojení</translation>
     </message>
     <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="153"/>
+      <location filename="../../pages/BriefPage.qml" line="49"/>
       <source>Brief</source>
       <translation type="unfinished">Krátce</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="496"/>
+      <location filename="../../pages/BriefPage.qml" line="395"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Vysoké zatížení systému, zavřením bočního panelu se sníží zatížení procesoru</translation>
     </message>
@@ -7709,17 +7767,17 @@ See documentation for further information.</oldsource>
       <translation>%1 (není k dispozici)</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="65"/>
+      <location filename="../../ApplicationContent.qml" line="60"/>
       <source>Touch input on</source>
       <translation>Dotykový vstup zapnut</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="67"/>
+      <location filename="../../ApplicationContent.qml" line="62"/>
       <source>Touch input off</source>
       <translation>Dotykový vstup vypnut</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="82"/>
+      <location filename="../../ApplicationContent.qml" line="77"/>
       <source>Touch input disabled</source>
       <translation>Dotykový vstup deaktivován</translation>
     </message>
@@ -7977,7 +8035,7 @@ See documentation for further information.</oldsource>
       <translation>Portál VRM</translation>
     </message>
     <message id="settings_services_tailscale_remote_vpn_access">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="68"/>
       <source>Tailscale (remote VPN access)</source>
       <translation>Tailscale (vzdálený přístup VPN)</translation>
     </message>
@@ -8253,12 +8311,12 @@ Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole spr
       <translation>Generátor poběží, dokud nebude ručně zastaven, pokud nejsou povoleny podmínky automatického spuštění, které jej udržují v chodu.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
       <source>Classic UI</source>
       <translation>Klasické uživatelské rozhraní</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
       <source>New UI</source>
       <translation>Nové uživatelské rozhraní</translation>
     </message>
@@ -8406,29 +8464,29 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation>Úvodní stránka</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
       <source>User interface</source>
       <translation>Uživatelské rozhraní</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
       <source>User interface (Remote Console)</source>
       <translation>Uživatelské rozhraní (vzdálená konzola)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 aktualizováno</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Uživatelské rozhraní se přepne na %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 je nastaveno na %2</translation>
@@ -8737,42 +8795,42 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation>Tento fotovoltaický střídač podporuje omezení výkonu. Pokud toto nastavení narušuje normální provoz, zakažte jej.</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="479"/>
       <source>N</source>
       <translation>S</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="481"/>
       <source>NE</source>
       <translation>SW</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="483"/>
       <source>E</source>
       <translation>V</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="485"/>
       <source>SE</source>
       <translation>JV</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="487"/>
       <source>S</source>
       <translation>J</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="489"/>
       <source>SW</source>
       <translation>JZ</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="491"/>
       <source>W</source>
       <translation>Z</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="493"/>
       <source>NW</source>
       <translation>SZ</translation>
     </message>
@@ -8879,7 +8937,7 @@ Documentation at https://ve3.nl/vol</oldsource>
 Dokumentace na adrese https://ve3.nl/vol</translation>
     </message>
     <message id="pagesettingsconnectivity_mobile_network">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="53"/>
       <source>Mobile Network</source>
       <translation>Mobilní síť</translation>
     </message>
@@ -8985,10 +9043,20 @@ Dokumentace na adrese https://ve3.nl/vol</translation>
       <oldsource>System setup</oldsource>
       <translation>Nastavení systému</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_on">
+      <location filename="../../components/WifiModel.qml" line="23"/>
+      <source>Disconnected | AP On</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="21"/>
+      <location filename="../../components/WifiModel.qml" line="25"/>
       <source>Disconnected | AP Off</source>
       <translation>Odpojeno | AP Vypnuto</translation>
+    </message>
+    <message id="wifimodel_disconnected">
+      <location filename="../../components/WifiModel.qml" line="28"/>
+      <source>Disconnected</source>
+      <translation type="unfinished">Odpojeno</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_description">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="16"/>
@@ -9009,7 +9077,7 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <translation>Otevřít odkaz</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
       <source>Data units</source>
       <translation>Datové jednotky</translation>
     </message>
@@ -9095,7 +9163,7 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <translation>Alarm, pokud generátor stejnosměrného proudu nedodává energii</translation>
     </message>
     <message id="page_settings_generator_detect_at_dc_in_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>Alarm se spustí, pokud stejnosměrná elektrocentrála nedosáhne během prvních 5 minut po spuštění proudu alespoň 5 A.</translation>
     </message>
@@ -9365,7 +9433,7 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <translation>Zastavení na hladině v nádrži</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Brief page</source>
       <translation>Stručná stránka</translation>
     </message>
@@ -9425,22 +9493,22 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <translation>Teplotní služby</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="251"/>
+      <location filename="../../components/SplashView.qml" line="270"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation>Připojení k zařízení bylo ztraceno, čeká se na opětovné připojení</translation>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="253"/>
+      <location filename="../../components/SplashView.qml" line="272"/>
       <source>Connected to VRM, awaiting device</source>
       <translation>Připojeno k VRM, čeká na zařízení</translation>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="303"/>
+      <location filename="../../components/SplashView.qml" line="322"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation>Zařízení mohlo ztratit připojení k VRM</translation>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="305"/>
+      <location filename="../../components/SplashView.qml" line="324"/>
       <source>Device is not connected to VRM</source>
       <translation>Zařízení není připojeno k VRM</translation>
     </message>
@@ -9524,6 +9592,430 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
       <source>Warning</source>
       <translation type="unfinished">Upozornění</translation>
+    </message>
+    <message id="switchable_output_press">
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="140"/>
+      <source>Press</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="13"/>
+      <source>Output on auxiliary battery</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_dcdc">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="19"/>
+      <source>%1 changed to DC-DC service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="output_aux_battery_service_changed_alternator">
+      <location filename="../../components/listitems/ListOutputBatterySwitch.qml" line="21"/>
+      <source>%1 changed to alternator service</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_check_multiphase_regulation_setting">
+      <location filename="../../data/common/EssData.qml" line="48"/>
+      <source>Make sure to check the Multiphase regulation setting</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_state">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="32"/>
+      <source>Module state</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_module_voltage">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="39"/>
+      <source>Module Voltage</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switch_device_name">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="117"/>
+      <source>Name</source>
+      <translation type="unfinished">Název</translation>
+    </message>
+    <message id="page_switchable_output_name">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="35"/>
+      <source>Name</source>
+      <translation type="unfinished">Název</translation>
+    </message>
+    <message id="page_switchable_output_group">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="45"/>
+      <source>Group</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_switchable_output_type">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="55"/>
+      <source>Type</source>
+      <translation type="unfinished">Typ</translation>
+    </message>
+    <message id="page_switchable_output_fuse_rating">
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="63"/>
+      <source>Fuse rating</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_init">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="16"/>
+      <source>Init</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_query_products">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="18"/>
+      <source>Query products</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_done">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="20"/>
+      <source>Done</source>
+      <translation type="unfinished">Hotovo</translation>
+    </message>
+    <message id="mk2vsc_state_read_setting_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="22"/>
+      <source>Read setting data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_assistants">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="24"/>
+      <source>Read assistants</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_vebus_configuration">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="26"/>
+      <source>Read VE.Bus configuration</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_read_grid_info">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="28"/>
+      <source>Read grid info</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_settings_info">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="30"/>
+      <source>Write settings info</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_settings_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
+      <source>Write Settings Data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_assistants">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="34"/>
+      <source>Write assistants</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_write_vebus_configuration">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="36"/>
+      <source>Write VE.Bus configuration</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_state_resetting_vebus_products">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="38"/>
+      <source>Resetting VE.Bus products</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="Unknown">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Neznámý</translation>
+    </message>
+    <message id="mk2vsc_error_mk2_mk3_comm">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="47"/>
+      <source>MK2/MK3 communication error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_prod_addr_unreach">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
+      <source>Product address not reachable</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_incomp_mk2_fw">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
+      <source>Incompatible MK2 firmware version</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_no_vebus_prod">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
+      <source>No VE.Bus product was found</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_too_many_devices">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
+      <source>Too many devices on the VE.Bus</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_timed_out">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
+      <source>Timed out</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_wrong_pass">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
+      <source>Wrong password. (Use VeConfigure to set gridcode to None)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_malloc">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
+      <source>Malloc error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_no_settings">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
+      <source>Uploaded file does not contain settings data for the connected unit</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
+      <source>Uploaded file does not match model and/or installed firmware version</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_mult_unknown_units">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
+      <source>More than one unknown unit detected</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_update_single_unit">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
+      <source>Updating a single unit with another unit's settings is not possible, even if they are of the same type</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_unit_count_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
+      <source>The number of units in file does not match the number of units discovered</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_open">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
+      <source>File open error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_write">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
+      <source>File write error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_read">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
+      <source>File read error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_checksum">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
+      <source>File checksum error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_ver_incompat">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
+      <source>File incompatible version number</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_section_not_found">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
+      <source>File section not found</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_format">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
+      <source>File format error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_prod_num_mismatch">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
+      <source>Product number does not match file</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_file_expired">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
+      <source>File expired</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_wrong_file_format">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
+      <source>Wrong file format. First open the file with VE.Bus System Configurator, then save it to a new file by closing VE.Configure</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_vebus_write_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
+      <source>VE.Bus write of assistant enable/disable setting failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_vebus_config_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
+      <source>Incompatible VE.Bus system configuration. Writing system configuration failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_read_settings_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
+      <source>Cannot read settings. VE.Bus system not configured</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_assist_write_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
+      <source>Assistants write failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_assist_read_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
+      <source>Assistants read failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_grid_info_read_fail">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
+      <source>Grid info read failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_os_unknown_app">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
+      <source>OSerror, unknown application</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="mk2vsc_error_com_port_no_resp">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
+      <source>Failed to open com port(no response)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_backup_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="116"/>
+      <source>Backup successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_restore_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
+      <source>Restore successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_file delete_successful">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
+      <source>File delete successful</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_backup_process_unexpedly_closed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
+      <source>Backup process unexpectedly closed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_restore_process_unexpedly_closed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
+      <source>Restore process unexpectedly closed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_result_file_delete_failed">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
+      <source>File delete failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="incompatible">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="228"/>
+      <source>Incompatible</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="294"/>
+      <source>Backup name</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backup_name">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="299"/>
+      <source>Enter backup name</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name_empty">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="303"/>
+      <source>File name cannot be empty</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="backup_name_invalid">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="308"/>
+      <source>Invalid file name. Avoid using special characters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backup">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="322"/>
+      <source>Backup</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_backup">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="325"/>
+      <source>Press to backup</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_backing_up">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="327"/>
+      <source>Backing up...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="340"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="359"/>
+      <source>Restore</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_select_backup_file_to_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="343"/>
+      <source>Select backup file to restore</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_restore">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="362"/>
+      <source>Press to restore</source>
+      <translation type="unfinished">Stisknout pro obnovu</translation>
+    </message>
+    <message id="vebus_backup_restoring">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="364"/>
+      <source>Restoring...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="377"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="396"/>
+      <source>Delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_select_backup_file_to_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="380"/>
+      <source>Select backup file to delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_delete">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="399"/>
+      <source>Press to delete</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_deleting">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="401"/>
+      <source>Deleting...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_press_to_cancel">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="415"/>
+      <source>Press to cancel</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_backup_firmware_version_specific_message">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
+      <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="nav_boat">
+      <location filename="../../pages/boatpage/BoatPage.qml" line="15"/>
+      <source>Boat</source>
+      <translation type="unfinished">Loď</translation>
+    </message>
+    <message id="boat_page_rpm">
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="150"/>
+      <source>RPM</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_motor_drive">
+      <location filename="../../pages/boatpage/MotorDriveGauges.qml" line="42"/>
+      <source>Motordrive</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="boat_page_time_to_go">
+      <location filename="../../pages/boatpage/TimeToGo.qml" line="56"/>
+      <source>Time To Go</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
