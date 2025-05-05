@@ -98,6 +98,25 @@ Page {
 				property int pendingProfile
 				property string pendingPassword
 
+				function setProfileAndPassword(profile, password, popPage) {
+					securityProfile.currentIndex = profile
+					// NOTE: this restarts the webserver when changed
+					var object = {"SetPassword": password, "SetSecurityProfile": profile};
+					var json = JSON.stringify(object);
+					securityApi.setValue(json);
+					// This guards the wasm version to trigger a reload even if the reply isn't received.
+					BackendConnection.securityProtocolChanged()
+					if (popPage) {
+						Global.pageManager.popPage()
+					}
+					if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
+						Global.showToastNotification(VenusOS.Notification_Info,
+													 //% "Page will automatically reload in 5 seconds"
+													 qsTrId("access_and_security_page_will_reload"),
+													 3000)
+					}
+				}
+
 				//% "Local network security profile"
 				text: qsTrId("settings_local_network_security_profile")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
@@ -151,6 +170,35 @@ Page {
 					}
 				}
 
+				optionFooter: Column {
+					visible: securityProfile.currentIndex !== VenusOS.Security_Profile_Unsecured
+					width: parent.width
+					topPadding: Theme.geometry_gradientList_spacing
+
+					ListButton {
+						//% "Change password"
+						text: qsTrId("settings_security_profile_change_password")
+						//% "Update"
+						secondaryText: qsTrId("settings_security_profile_update")
+
+						onClicked: {
+							Global.dialogLayer.open(securityProfilePasswordDialogComponent)
+						}
+
+						Component {
+							id: securityProfilePasswordDialogComponent
+
+							SecurityProfilePasswordDialog {
+								id: securityProfilePasswordDialog
+
+								onAccepted: {
+									setProfileAndPassword(securityProfile.currentIndex, password, false)
+								}
+							}
+						}
+					}
+				}
+
 				VeQuickItem {
 					id: securityApi
 					uid: Global.venusPlatform.serviceUid + "/Security/Api"
@@ -194,20 +242,7 @@ Page {
 							const profile = securityProfile.pendingProfile
 							if (profile === VenusOS.Security_Profile_Unsecured)
 								password = "";
-							securityProfile.currentIndex = profile
-							// NOTE: this restarts the webserver when changed
-							var object = {"SetPassword": password, "SetSecurityProfile": profile};
-							var json = JSON.stringify(object);
-							securityApi.setValue(json);
-							// This guards the wasm version to trigger a reload even if the reply isn't received.
-							BackendConnection.securityProtocolChanged()
-							Global.pageManager.popPage()
-							if (Qt.platform.os === "wasm" && !BackendConnection.vrm) {
-								Global.showToastNotification(VenusOS.Notification_Info,
-															 //% "Page will automatically reload in 5 seconds"
-															 qsTrId("access_and_security_page_will_reload"),
-															 3000)
-							}
+							setProfileAndPassword(profile, password, true)
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
