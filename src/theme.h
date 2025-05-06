@@ -23,6 +23,7 @@ class Theme : public QObject
 	QML_NAMED_ELEMENT(ThemeBase)
 	Q_PROPERTY(ScreenSize screenSize READ screenSize WRITE setScreenSize NOTIFY screenSizeChanged)
 	Q_PROPERTY(ColorScheme colorScheme READ colorScheme WRITE setColorScheme NOTIFY colorSchemeChanged)
+	Q_PROPERTY(SystemColorScheme systemColorScheme READ systemColorScheme WRITE setSystemColorScheme NOTIFY systemColorSchemeChanged)
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
 
 public:
@@ -37,6 +38,12 @@ public:
 		Light
 	};
 	Q_ENUM(ColorScheme)
+
+	enum SystemColorScheme {
+		SystemColorSchemeDark = 0,
+		SystemColorSchemeLight
+	};
+	Q_ENUM(SystemColorScheme)
 
 	enum StatusLevel {
 		Ok = 0,
@@ -53,6 +60,9 @@ public:
 	Victron::VenusOS::Theme::ColorScheme colorScheme() const;
 	void setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme);
 
+	Victron::VenusOS::Theme::SystemColorScheme systemColorScheme() const;
+	void setSystemColorScheme(Victron::VenusOS::Theme::SystemColorScheme systemScheme);
+
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
 
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
@@ -64,10 +74,13 @@ Q_SIGNALS:
 	void screenSizeChanged_parameterless();
 	void colorSchemeChanged(Victron::VenusOS::Theme::ColorScheme colorScheme);
 	void colorSchemeChanged_parameterless();
+	void systemColorSchemeChanged(Victron::VenusOS::Theme::SystemColorScheme systemColorScheme);
+	void systemColorSchemeChanged_parameterless();
 
 protected:
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
+	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
 };
 
 }
