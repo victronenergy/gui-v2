@@ -93,14 +93,6 @@ QtObject {
 		return Units.convert(celsius_value, VenusOS.Units_Temperature_Celsius, temperatureUnit)
 	}
 
-	function convertFromKilometersPerHour(kph) {
-		return Units.convert(kph, VenusOS.Units_Speed_KilometersPerHour, speedUnit)
-	}
-
-	function convertToKilometersPerHour(kph) {
-		return Units.convert(kph, speedUnit, VenusOS.Units_Speed_KilometersPerHour)
-	}
-
 	function networkStatusToText(status) {
 		switch (status) {
 		case VenusOS.Link_NetworkStatus_Slave:

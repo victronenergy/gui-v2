@@ -193,12 +193,10 @@ Page {
 				//% "Max Speed"
 				text: qsTrId("settings_minmax_max_speed")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Speed_MetresPerSecond)
+				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.speedUnit)
 				unit: Global.systemSettings.speedUnit
 				decimals: 0
-				value: Global.systemSettings.convertFromKilometersPerHour(dataItem.value)
-				saveInput: function() {
-					dataItem.setValue(Global.systemSettings.convertToKilometersPerHour(textField.text))
-				}
 			}
 
 			ListQuantityField {
