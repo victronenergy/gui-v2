@@ -21,12 +21,12 @@ QtObject {
 			// If that path is not set, then as a backup, try to match /Ac/ActiveIn/ServiceType
 			// against /Ac/In/<0|1>/ServiceType to determine the active input.
 			if (_activeInSource.valid) {
-				return input1.source === _activeInSource.value ? input1
-						: input2.source === _activeInSource.value ? input2
+				return input1?.source === _activeInSource.value ? input1
+						: input2?.source === _activeInSource.value ? input2
 						: null
 			} else {
-				return input1.serviceType === _activeInServiceType.value ? input1
-						: input2.serviceType === _activeInServiceType.value ? input2
+				return input1?.serviceType === _activeInServiceType.value ? input1
+						: input2?.serviceType === _activeInServiceType.value ? input2
 						: null
 			}
 		} else {
