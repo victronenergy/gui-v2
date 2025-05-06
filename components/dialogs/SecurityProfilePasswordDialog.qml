@@ -19,28 +19,13 @@ ModalDialog {
 		if (firstPassword.length < 8) {
 
 			// First, validate that the firstPassword is at least 8 characters long.
-			// If not, the border of both firstPassword AND secondPassword turn red and
-			// the passwordHint warning about length, becomes visible.
+			// If not, the border turns red the passwordHint warning about length
+			// becomes visible.
 
 			firstPassword.borderColor = Theme.color_critical
-			secondPassword.borderColor = Theme.color_critical
 			passwordHint.visible = true
 			//% "Password needs to be at least 8 characters long"
 			passwordHint.text = qsTrId("settings_security_profile_password_incorrect_length")
-
-			return false
-		}
-
-		if (firstPassword.text !== secondPassword.text) {
-			// Secondly, validate that the passwords in both firstPassword AND secondPassword are equal.
-			// If not, the border of both firstPassword AND secondPassword turn red and
-			// the passwordHint warning about mismatch, becomes visible.
-
-			firstPassword.borderColor = Theme.color_critical
-			secondPassword.borderColor = Theme.color_critical
-			passwordHint.visible = true
-			//% "Passwords do not match, please check"
-			passwordHint.text = qsTrId("settings_security_profile_password_mismatch")
 
 			return false
 		}
@@ -59,7 +44,6 @@ ModalDialog {
 		// This is also this is ths default "validated" state
 
 		firstPassword.borderColor = Theme.color_ok
-		secondPassword.borderColor = Theme.color_ok
 		passwordHint.visible = false
 		passwordHint.text = ""
 	}
@@ -91,7 +75,7 @@ ModalDialog {
 
 				Layout.fillWidth: true
 
-				//% "Please assign a new GX password\nby entering it twice:"
+				//% "Please enter a new GX password:"
 				text: qsTrId("settings_security_profile_change_password_description")
 
 				font.pixelSize: Theme.font_size_body2
@@ -115,26 +99,7 @@ ModalDialog {
 				onTextEdited: root.resetValidation()
 
 				// When Return/Enter key is pressed (and as per current behaviour onFocusLost),
-				// the passwords shall be validated
-				onAccepted: root.acceptButton?.clicked()
-				onActiveFocusChanged: if(!focus) root.valiate()
-			}
-
-			TextField {
-				id: secondPassword
-
-				Layout.fillWidth: true
-
-				//% "Confirm new password"
-				placeholderText: qsTrId("settings_security_profile_confirm_new_password")
-				echoMode: TextInput.Password
-
-				// As soon as the input in any input field changes,
-				// the borderColors turns back to blue and the red passwordHint turns invisible.
-				onTextEdited: root.resetValidation()
-
-				// When Return/Enter key is pressed (and as per current behaviour onFocusLost),
-				// the passwords shall be validated
+				// the password shall be validated
 				onAccepted: root.acceptButton?.clicked()
 				onActiveFocusChanged: if(!focus) root.validate()
 			}
