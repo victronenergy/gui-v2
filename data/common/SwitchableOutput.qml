@@ -67,7 +67,9 @@ QtObject {
 	readonly property string customName: _customName.value ?? ""
 
 	function setDimming(value) {
-		_dimming.setValue(value)
+		if (hasDimming) {
+			_dimming.setValue(value)
+		}
 	}
 
 	function setState(value) {
@@ -89,7 +91,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _dimming: VeQuickItem {
-		uid: `${root.uid}/Dimming`
+		uid: root.type === VenusOS.SwitchableOutput_Type_Dimmable ? `${root.uid}/Dimming` : ""
 	}
 
 	readonly property VeQuickItem _customName: VeQuickItem {
