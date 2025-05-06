@@ -166,6 +166,33 @@ Page {
 					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
 				}
 			}
+
+			SettingsListHeader { }
+
+			ListRadioButtonGroup {
+				//% "Demo mode"
+				text: qsTrId("settings_demo_mode")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+				popDestination: undefined // don't pop page automatically.
+				updateDataOnClick: false // handle option clicked manually.
+				optionModel: [
+					{ display: CommonWords.disabled, value: 0 },
+					//% "ESS demo"
+					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
+					//% "Boat/Motorhome demo 1"
+					{ display: qsTrId("page_settings_demo_1"), value: 2 },
+					//% "Boat/Motorhome demo 2"
+					{ display: qsTrId("page_settings_demo_2"), value: 3 },
+				]
+
+				//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
+				caption: qsTrId("settings_demo_mode_caption")
+
+				onOptionClicked: function(index) {
+					Qt.callLater(Global.main.rebuildUi)
+					dataItem.setValue(index)
+				}
+			}
 		}
 	}
 }
