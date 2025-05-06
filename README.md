@@ -25,7 +25,7 @@ For more technical information on Venus OS, see the [Venus OS wiki](https://gith
 
 ## Don't use the issue tracker for support
 
-Do not use the issue tracker in this repo to ask for support. The issue tracker is our development workflow; and not for support. Instead, please use the open Venus OS beta thread on the [Modifications section on Victron Community](https://community.victronenergy.com/spaces/31/mods.html) (see top section on that page).
+Do not use the issue tracker in this repo to ask for support. The issue tracker is our development workflow; and not for support. Instead, please use the open Venus OS beta thread on the [Modifications section on Victron Community](https://community.victronenergy.com/c/modifications/5) (see top section on that page).
 
 ## Modifications
 
@@ -39,7 +39,7 @@ Building the WASM requires lots of tooling installed (Qt6, emscriptem), and then
 
 Concluding, we'll need a different solution to allow modifications. Preferably one that, like gui-v2, has a low barrier to get started. Publishing these sources is a first step.
 
-To discuss this, see https://community.victronenergy.com/questions/245056/venus-os-modifying-gui-v2.html.
+To discuss this, see https://communityarchive.victronenergy.com/questions/245056/venus-os-modifying-gui-v2.html.
 
 ## Building
 
@@ -48,4 +48,3 @@ See the wiki page: https://github.com/victronenergy/gui-v2/wiki/How-to-build-ven
 ## License
 
 See license file in the repo.
-
