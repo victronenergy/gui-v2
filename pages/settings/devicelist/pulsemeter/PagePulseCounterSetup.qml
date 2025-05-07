@@ -26,6 +26,8 @@ Page {
 				//% "Multiplier"
 				text: qsTrId("pulsecounter_setup_multiplier")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + root.inputNumber + "/Multiplier"
+				decimals: 6
+				stepSize: Math.pow(10, -decimals)
 			}
 
 			ListButton {
