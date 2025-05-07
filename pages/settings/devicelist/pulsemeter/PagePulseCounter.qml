@@ -31,7 +31,7 @@ Page {
 				text: CommonWords.setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
 				}
 			}
 
