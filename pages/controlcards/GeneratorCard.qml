@@ -10,13 +10,16 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	property Generator generator
+	property alias serviceUid: generator.serviceUid
 
 	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
-	status.text: root.generator.stateText
+	status.text: generator.stateText
 	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
-	visible: root.generator.enabled
+
+	Generator {
+		id: generator
+	}
 
 	GeneratorIconLabel {
 		id: timerDisplay
@@ -26,7 +29,7 @@ ControlCard {
 			top: parent.status.top
 			topMargin: parent.status.font.pixelSize - fontSize
 		}
-		generator: root.generator
+		generator: generator
 	}
 
 	Label {
@@ -40,13 +43,13 @@ ControlCard {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
-		text: root.generator.isAutoStarted
-			  ? CommonWords.autostarted_dot_running_by.arg(root.generator.runningByText)
-			  : root.generator.runningByText
+		text: generator.isAutoStarted
+			  ? CommonWords.autostarted_dot_running_by.arg(generator.runningByText)
+			  : generator.runningByText
 		color: Theme.color_font_secondary
 		font.pixelSize: Theme.font_size_caption
 		wrapMode: Text.WordWrap
-		visible: root.generator.isRunning
+		visible: generator.isRunning
 	}
 
 	ListSwitch {
@@ -59,7 +62,7 @@ ControlCard {
 
 		//% "Autostart"
 		text: qsTrId("controlcard_generator_label_autostart")
-		checked: root.generator.autoStart
+		checked: generator.autoStart
 		flat: true
 		bottomContent.children: [
 			PrimaryListLabel {
@@ -75,7 +78,7 @@ ControlCard {
 
 		onClicked: {
 			if (!checked) {
-				root.generator.setAutoStart(true)
+				generator.setAutoStart(true)
 			} else {
 				// check if they really want to disable
 				Global.dialogLayer.open(confirmationDialogComponent)
@@ -86,7 +89,7 @@ ControlCard {
 			id: confirmationDialogComponent
 
 			GeneratorDisableAutoStartDialog {
-				onAccepted: root.generator.setAutoStart(false)
+				onAccepted: generator.setAutoStart(false)
 			}
 		}
 	}
@@ -101,6 +104,6 @@ ControlCard {
 		height: Theme.geometry_card_button_height
 		radius: Theme.geometry_button_radius
 		font.pixelSize: Theme.font_size_body1
-		generatorUid: root.generator.serviceUid
+		generatorUid: generator.serviceUid
 	}
 }

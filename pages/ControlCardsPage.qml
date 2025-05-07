@@ -104,7 +104,7 @@ Page {
 
 				GeneratorCard {
 					width: root.cardWidth
-					generator: deviceDelegate.device
+					serviceUid: deviceDelegate.device.serviceUid
 				}
 			}
 
@@ -126,7 +126,7 @@ Page {
 		sortBy: AggregateDeviceModel.SortBySourceModel | AggregateDeviceModel.SortByDeviceName
 		sourceModels: [
 			evChargerModel,
-			Global.generators.model,
+			generatorModel,
 			Global.inverterChargers.veBusDevices,
 			Global.inverterChargers.acSystemDevices,
 			Global.inverterChargers.inverterDevices
@@ -157,6 +157,34 @@ Page {
 					evChargerModel.addDevice(device)
 				} else {
 					evChargerModel.removeDevice(device.serviceUid)
+				}
+			}
+		}
+	}
+
+	// A model of generator services with /Enabled=1, i.e. those that have the startstop1 feature
+	// for starting/stopping the generator.
+	ServiceDeviceModel {
+		id: generatorModel
+
+		serviceType: "generator"
+		modelId: "generator"
+		deviceDelegate: Device {
+			id: generatorDevice
+
+			required property string uid
+			readonly property bool controllable: valid && _enabled.valid && _enabled.value === 1
+
+			readonly property VeQuickItem _enabled: VeQuickItem {
+				uid: generatorDevice.serviceUid + "/Enabled"
+			}
+
+			serviceUid: uid
+			onControllableChanged: {
+				if (controllable) {
+					generatorModel.addDevice(generatorDevice)
+				} else {
+					generatorModel.removeDevice(generatorDevice.serviceUid)
 				}
 			}
 		}
