@@ -49,6 +49,9 @@ Page {
 				if (service.indexOf(".temperature.") > -1) {
 					return service.split(".temperature.")[1]
 				}
+				else if (service.indexOf(".battery.") > -1) {
+					return service.split(".battery.")[1]
+				}
 				return ""
 			}
 
