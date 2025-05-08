@@ -99,6 +99,7 @@ C.StackView {
 		function onPopAllPagesRequested(operation) {
 			fakePopAnimation.duration = _animationDuration(operation)
 			fakePopAnimation.start()
+			root.pageUrls = []
 		}
 
 		function onPagePopRequested(toPage, operation) {
