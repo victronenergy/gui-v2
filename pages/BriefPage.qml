@@ -45,8 +45,7 @@ SwipeViewPage {
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
 
-	//% "Brief"
-	navButtonText: qsTrId("nav_brief")
+	navButtonText: CommonWords.brief_page
 	navButtonIcon: "qrc:/images/brief.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
 	backgroundColor: Theme.color_briefPage_background
