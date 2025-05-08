@@ -84,7 +84,9 @@ QtObject {
 			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
 		}
 
-		readonly property PvMonitor _pvMonitor: PvMonitor {}
+		readonly property PvMonitor _pvMonitor: PvMonitor {
+			systemServiceUid: root.serviceUid
+		}
 
 		readonly property VeQuickItem _dcPvPower: VeQuickItem {
 			uid: root.serviceUid + "/Dc/Pv/Power"

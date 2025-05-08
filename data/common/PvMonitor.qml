@@ -9,6 +9,8 @@ import Victron.VenusOS
 Instantiator {
 	id: root
 
+	required property string systemServiceUid
+
 	property real totalPower: NaN
 	property real totalCurrent: NaN
 	property int maxPhaseCount: 0
@@ -42,9 +44,9 @@ Instantiator {
 	}
 
 	model: [
-		Global.system.serviceUid + "/Ac/PvOnGrid",
-		Global.system.serviceUid + "/Ac/PvOnGenset",
-		Global.system.serviceUid + "/Ac/PvOnOutput"
+		`${root.systemServiceUid}/Ac/PvOnGrid`,
+		`${root.systemServiceUid}/Ac/PvOnGenset`,
+		`${root.systemServiceUid}/Ac/PvOnOutput`
 	]
 
 	delegate: ObjectAcConnection {
