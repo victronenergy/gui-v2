@@ -17,9 +17,7 @@ QtObject {
 
 	readonly property var options: [
 		{
-			//: The 'Brief' page
-			//% "Brief"
-			display: qsTrId("startpage_option_brief_without_panel"),
+			display: CommonWords.brief_page,
 			value: _jsonStringForType(VenusOS.StartPage_Type_Brief_SidePanelClosed),
 		},
 		{
