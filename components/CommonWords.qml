@@ -13,6 +13,9 @@ QtObject {
 	//% "AC In"
 	readonly property string ac_in: qsTrId("common_words_ac_in")
 
+	//% "AC Input"
+	readonly property string ac_input: qsTrId("common_words_ac_input")
+
 	//% "Add device"
 	readonly property string add_device: qsTrId("common_words_add_device")
 
@@ -528,13 +531,14 @@ QtObject {
 	//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
 	readonly property string all_modifications_disabled: qsTrId("common_words_large_features_currently_disabled")
 
-	function acInput(index) {
-			   //% "AC Input 1"
-		return index === 0 ? qsTrId("common_words_ac_input_1")
-			   //% "AC Input 2"
-			 : index === 1 ? qsTrId("common_words_ac_input_2")
-			   //% "AC Input"
-			 : qsTrId("common_words_ac_input")
+	function acInputFromIndex(index) {
+		return acInputFromNumber(index + 1)
+	}
+
+	function acInputFromNumber(number) {
+		//: %1 = number of the AC input
+		//% "AC input %1"
+		return qsTrId("common_words_ac_input_number").arg(number)
 	}
 
 	function onOrOff(value) {

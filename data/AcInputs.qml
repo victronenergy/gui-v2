@@ -101,7 +101,7 @@ QtObject {
 
 	function sourceToText(source) {
 		if (source === undefined) {
-			return CommonWords.acInput()
+			return CommonWords.ac_input
 		}
 		switch (source) {
 		case VenusOS.AcInputs_InputSource_NotAvailable:
