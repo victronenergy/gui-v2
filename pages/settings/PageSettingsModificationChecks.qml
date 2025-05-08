@@ -52,8 +52,7 @@ Page {
 
 	function getFsModifiedState() {
 		if (fsModifiedState === 0) {
-			//% "Ok"
-			return qsTrId("common_words_ok")
+			return CommonWords.ok
 		} else if (fsModifiedState === 1) {
 			//% "Modified"
 			return qsTrId("pagesettingsmodificationchecks_modified")
