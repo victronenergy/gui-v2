@@ -783,7 +783,8 @@ public:
 		StartPage_Type_Overview,
 		StartPage_Type_Levels_Tanks,
 		StartPage_Type_Levels_Environment,
-		StartPage_Type_BatteryList
+		StartPage_Type_BatteryList,
+		StartPage_Type_Boat
 	};
 	Q_ENUM(StartPage_Type)
 

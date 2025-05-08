@@ -94,6 +94,10 @@ QtObject {
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
 
+	//: The 'Boat' page
+	//% "Boat"
+	readonly property string boat_page: qsTrId("common_words_boat_page")
+
 	//: The 'Brief' page
 	//% "Brief"
 	readonly property string brief_page: qsTrId("common_words_brief_page")
