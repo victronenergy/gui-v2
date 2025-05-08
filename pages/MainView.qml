@@ -58,17 +58,18 @@ Item {
 		swipeViewLoader.active = true
 	}
 
-	// Revert to the start page when the application is inactive.
+	// Revert to the start page when the application has been inactive for the period of time
+	// specified by the startPageTimeout.
 	Timer {
 		running: !!Global.systemSettings
 				 && Global.systemSettings.startPageConfiguration.hasStartPage
 				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
-				 && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Idle
+				 && !Global.applicationActive
 		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
 		onTriggered: root.loadStartPage()
 	}
 
-	// Auto-select the start page when the application is idle, if configured to do so.
+	// Auto-select the start page when the application becomes inactive, if configured to do so.
 	Connections {
 		target: Global
 		enabled: !!Global.systemSettings && Global.systemSettings.startPageConfiguration.autoSelect
