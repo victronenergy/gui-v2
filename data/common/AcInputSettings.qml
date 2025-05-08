@@ -14,12 +14,11 @@ QtObject {
 	property int inputNumber
 	readonly property int inputType: {
 		if (serviceType === "vebus"
-				&& Global.inverterChargers.veBusDevices.firstObject
-				&& serviceUid === Global.inverterChargers.veBusDevices.firstObject.serviceUid
+				&& serviceUid === Global.inverterChargers.veBusDevices.firstObject?.serviceUid
 				&& _systemSetupType.valid) {
 			// The /SystemSetup/AcInput<x> settings only apply to the first/main vebus service.
 			return  _systemSetupType.value
-		} else if (serviceType === "acsystem" && _type.valid) {
+		} else if (_type.valid) {
 			return _type.value
 		}
 		return -1
@@ -30,6 +29,7 @@ QtObject {
 	}
 
 	property VeQuickItem _type: VeQuickItem {
-		uid: root.serviceUid + "/Ac/In/" + inputNumber + "/Type"
+		// The /Type setting is only available for acsystem services.
+		uid: root.serviceType === "acsystem" ? root.serviceUid + "/Ac/In/" + inputNumber + "/Type" : ""
 	}
 }
