@@ -13,9 +13,7 @@ Page {
 
 	onIsCurrentPageChanged: {
 		if (isCurrentPage) {
-			keyEvents.repeatCount = 0
-			keyEvents.upCount = 0
-			keyEvents.downCount = 0
+			keyEvents.enabled = false
 		}
 	}
 
@@ -27,12 +25,9 @@ Page {
 		property int downCount
 
 		target: Global
+		enabled: false
 
 		function onKeyPressed(event) {
-			if (!root.isCurrentPage) {
-				repeatCount = 0
-				return
-			}
 			if (event.key === Qt.Key_Right) {
 				// change to super user mode if the right button is pressed for a while
 				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
@@ -89,6 +84,14 @@ Page {
 					}
 					//% "Incorrect password"
 					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
+				}
+				onClicked: {
+					// When the access options list is open, enable the key shortcuts for changing
+					// the access level.
+					keyEvents.repeatCount = 0
+					keyEvents.upCount = 0
+					keyEvents.downCount = 0
+					keyEvents.enabled = true
 				}
 			}
 
