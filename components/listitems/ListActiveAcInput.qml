@@ -19,13 +19,7 @@ ListText {
 
 	//% "Active AC Input"
 	text: qsTrId("vebus_device_active_ac_input")
-	secondaryText: {
-		switch (acActiveInput.value) {
-		case 0:
-		case 1:
-			return CommonWords.acInput(acActiveInput.value)
-		default:
-			return CommonWords.disconnected
-		}
-	}
+
+	// ActiveInput value is 0-based index.
+	secondaryText: acActiveInput.valid ? CommonWords.acInputFromIndex(acActiveInput.value) : CommonWords.disconnected
 }

@@ -6,6 +6,9 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	Provides AC input type data for inputs on a vebus or acsystem service.
+*/
 QtObject {
 	id: root
 
@@ -25,11 +28,14 @@ QtObject {
 	}
 
 	property VeQuickItem _systemSetupType: VeQuickItem {
+		// The setting path is 1-based: setting for first AC input is under /AcInput1
 		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
 	}
 
 	property VeQuickItem _type: VeQuickItem {
 		// The /Type setting is only available for acsystem services.
+		// The setting path is 1-based: setting for first AC input is under /Ac/In/1, unlike the
+		// com.victronenergy.system setting path for the first AC input, which is /Ac/In/0.
 		uid: root.serviceType === "acsystem" ? root.serviceUid + "/Ac/In/" + inputNumber + "/Type" : ""
 	}
 }

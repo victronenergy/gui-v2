@@ -73,12 +73,12 @@ Page {
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
 									//: %1 = 'AC input 1' or 'AC input 2'
 									//% "%1 (not available)"
-									return qsTrId("settings_minmax_ac_in_not_available").arg(CommonWords.acInput(index))
+									return qsTrId("settings_minmax_ac_in_not_available").arg(CommonWords.acInputFromIndex(index))
 								}
 								//: %1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)
 								//% "%1 (%2)"
 								return qsTrId("settings_minmax_ac_in_header_with_source")
-										.arg(CommonWords.acInput(index))
+										.arg(CommonWords.acInputFromIndex(index))
 										.arg(Global.acInputs.sourceToText(inputInfo.source))
 							}
 						}

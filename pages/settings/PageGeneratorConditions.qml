@@ -85,8 +85,8 @@ Page {
 							  ? 2 : 0
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
-					{ display: CommonWords.acInput(0), value: 1 },
-					{ display: CommonWords.acInput(1), value: 2, readOnly: !(capabilities.value & 1) },
+					{ display: CommonWords.acInputFromNumber(1), value: 1 },
+					{ display: CommonWords.acInputFromNumber(2), value: 2, readOnly: !(capabilities.value & 1) },
 				]
 
 				onOptionClicked: function(index) {

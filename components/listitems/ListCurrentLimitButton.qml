@@ -10,7 +10,7 @@ ListButton {
 	id: root
 
 	required property string serviceUid
-	required property int inputNumber
+	required property int inputNumber // note this is 1-based, i.e. first AC input has inputNumber=1, not 0
 	required property int inputType
 
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
@@ -73,7 +73,7 @@ ListButton {
 		CurrentLimitDialog {
 			productId: productIdItem.valid ? productIdItem.value : 0
 			title: Global.acInputs.currentLimitTypeToText(root.inputType)
-			secondaryTitle: CommonWords.acInput(root.inputNumber)
+			secondaryTitle: CommonWords.acInputFromNumber(root.inputNumber)
 			onAccepted: currentLimitItem.setValue(value)
 		}
 	}
