@@ -64,9 +64,10 @@ Page {
 				}
 			}
 
-			PrimaryListLabel {
-				//% "Access Node-RED at https://venus.local:1881 and via VRM."
+			ListLink {
+				//% "Access Node-RED locally or via VRM"
 				text: qsTrId("settings_large_access_node_red")
+				url: "https://venus.local:1881"
 				preferredVisible: nodered.currentValue > 0
 			}
 		}
