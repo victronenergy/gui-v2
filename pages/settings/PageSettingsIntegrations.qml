@@ -250,6 +250,18 @@ Page {
 
 				//% "Node-RED"
 				text: qsTrId("settings_large_node_red")
+				secondaryText: {
+					if (nodeRedModeItem.value === VenusOS.NodeRed_Mode_Disabled) {
+						return CommonWords.disabled
+					} else if (nodeRedModeItem.value === VenusOS.NodeRed_Mode_EnabledWithSafeMode) {
+						return qsTrId("settings_large_enabled_safe_mode")
+					} else if (nodeRedModeItem.value === VenusOS.NodeRed_Mode_Enabled) {
+						return CommonWords.enabled
+					} else if (nodeRedModeItem.value === VenusOS.NodeRed_Mode_EnabledWithSafeMode) {
+						//% "Enabled (safe mode)"
+						return qsTrId("settings_large_enabled_safe_mode")
+					}
+				}
 				preferredVisible: nodeRedModeItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRed.qml", {"title": text })
 
