@@ -38,8 +38,18 @@ Page {
 				//% "Low Voltage Disconnect (always ignored)"
 				text: qsTrId("batteryparameters_low_voltage_disconnect_always_ignored")
 				dataItem.uid: root.bindPrefix + "/Info/BatteryLowVoltage"
+				preferredVisible: dataItem.valid
 				showAccessLevel: VenusOS.User_AccessType_Service
 				unit: VenusOS.Units_Volt_DC
+			}
+
+			ListText {
+				//: Shows if the battery requests charging: yes or no
+				//% "Requests Charging"
+				text: qsTrId("batteryparameters_charge_request")
+				dataItem.uid: root.bindPrefix + "/Info/ChargeRequest"
+				preferredVisible: dataItem.valid
+				secondaryText: CommonWords.yesOrNo(dataItem.value)
 			}
 		}
 	}
