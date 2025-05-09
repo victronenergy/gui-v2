@@ -32,7 +32,6 @@ ListItem {
 			visible: root.mode === VenusOS.ListLink_Mode_LinkButton
 			anchors.verticalCenter: parent.verticalCenter
 			source: "qrc:/images/icon_open_link_32.svg"
-			rotation: 180
 			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 		},
 
