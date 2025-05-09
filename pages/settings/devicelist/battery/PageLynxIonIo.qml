@@ -17,6 +17,7 @@ Page {
 				//% "System Switch"
 				text: qsTrId("lynxionio_system_switch")
 				dataItem.uid: root.bindPrefix + "/SystemSwitch"
+				preferredVisible: dataItem.valid
 				secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
 			}
 
