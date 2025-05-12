@@ -4,17 +4,17 @@
   <context>
     <name/>
     <message id="settings_tailscale_disabled">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
       <source>Disabled</source>
       <translation>Devre dışı</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="231"/>
+      <location filename="../../components/CommonWords.qml" line="242"/>
       <source>Inverter overload</source>
       <translation>İnvertör aşırı yüklü</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="361"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>Güç</translation>
@@ -25,59 +25,71 @@
       <translation>Kapalı</translation>
     </message>
     <message id="common_words_auto">
-      <location filename="../../components/CommonWords.qml" line="77"/>
+      <location filename="../../components/CommonWords.qml" line="80"/>
       <source>Auto</source>
       <translation>Otomatik</translation>
     </message>
     <message id="common_words_battery">
-      <location filename="../../components/CommonWords.qml" line="86"/>
+      <location filename="../../components/CommonWords.qml" line="89"/>
       <source>Battery</source>
       <translation type="unfinished">Akü</translation>
     </message>
+    <message id="common_words_boat_page">
+      <location filename="../../components/CommonWords.qml" line="102"/>
+      <source>Boat</source>
+      <extracomment>The 'Boat' page</extracomment>
+      <translation type="unfinished">Tekne</translation>
+    </message>
+    <message id="common_words_brief_page">
+      <location filename="../../components/CommonWords.qml" line="106"/>
+      <source>Brief</source>
+      <extracomment>The 'Brief' page</extracomment>
+      <translation type="unfinished">Kısa</translation>
+    </message>
     <message id="common_words_charging">
-      <location filename="../../components/CommonWords.qml" line="105"/>
+      <location filename="../../components/CommonWords.qml" line="116"/>
       <source>Charging</source>
       <extracomment>"Charging" state</extracomment>
       <translation type="unfinished">Şarj</translation>
     </message>
     <message id="common_words_closed_status">
-      <location filename="../../components/CommonWords.qml" line="113"/>
+      <location filename="../../components/CommonWords.qml" line="124"/>
       <source>Closed</source>
       <extracomment>Status is 'closed'</extracomment>
       <translation type="unfinished">Kapalı</translation>
     </message>
     <message id="common_words_connected">
-      <location filename="../../components/CommonWords.qml" line="116"/>
+      <location filename="../../components/CommonWords.qml" line="127"/>
       <source>Connected</source>
       <translation type="unfinished">Bağlandı</translation>
     </message>
     <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="146"/>
+      <location filename="../../components/CommonWords.qml" line="157"/>
       <source>Disabled</source>
       <translation type="unfinished">Devre dışı</translation>
     </message>
     <message id="common_words_discharging">
-      <location filename="../../components/CommonWords.qml" line="149"/>
+      <location filename="../../components/CommonWords.qml" line="160"/>
       <source>Discharging</source>
       <translation type="unfinished">Deşarj </translation>
     </message>
     <message id="common_words_disconnected">
-      <location filename="../../components/CommonWords.qml" line="152"/>
+      <location filename="../../components/CommonWords.qml" line="163"/>
       <source>Disconnected</source>
       <translation type="unfinished">Bağlantı kesildi</translation>
     </message>
     <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="165"/>
+      <location filename="../../components/CommonWords.qml" line="176"/>
       <source>Error</source>
       <translation type="unfinished">Hata</translation>
     </message>
     <message id="common_words_generator">
-      <location filename="../../components/CommonWords.qml" line="183"/>
+      <location filename="../../components/CommonWords.qml" line="194"/>
       <source>Generator</source>
       <translation type="unfinished">Jeneratör</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="192"/>
+      <location filename="../../components/CommonWords.qml" line="203"/>
       <source>High battery voltage</source>
       <translation>Yüksek akü gerilimi</translation>
     </message>
@@ -87,12 +99,12 @@
       <translation>İnvertör / Şarj Cihazı</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="240"/>
+      <location filename="../../components/CommonWords.qml" line="251"/>
       <source>Low battery voltage</source>
       <translation>Düşük akü gerilimi</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="259"/>
+      <location filename="../../components/CommonWords.qml" line="270"/>
       <source>Manual</source>
       <translation>Manuel</translation>
     </message>
@@ -102,19 +114,19 @@
       <translation>Yok</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="368"/>
+      <location filename="../../components/CommonWords.qml" line="379"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>Konum</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="441"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>Hız</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="448"/>
+      <location filename="../../components/CommonWords.qml" line="459"/>
       <source>State</source>
       <translation>Durum</translation>
     </message>
@@ -135,7 +147,7 @@
       <translation>Minimüm SoC</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="131"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="135"/>
       <source>Enter password</source>
       <translation>Parola Gir</translation>
     </message>
@@ -150,7 +162,7 @@
       <translation>Kontrol etmek için basın</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="186"/>
+      <location filename="../../components/CommonWords.qml" line="197"/>
       <source>Grid</source>
       <translation>Şebeke</translation>
     </message>
@@ -160,22 +172,22 @@
       <translation>Güneş enerjisi verimi</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="193"/>
+      <location filename="../../data/System.qml" line="195"/>
       <source>External control</source>
       <translation>Extern kontrol</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="53"/>
+      <location filename="../../pages/LevelsPage.qml" line="62"/>
       <source>Tanks</source>
       <translation>Tanklar</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="55"/>
+      <location filename="../../pages/LevelsPage.qml" line="64"/>
       <source>Environment</source>
       <translation>Çevre</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="86"/>
+      <location filename="../../pages/NotificationsPage.qml" line="98"/>
       <source>No current alerts</source>
       <translation>Güncel uyarı yok</translation>
     </message>
@@ -195,17 +207,17 @@
       <translation type="unfinished"/>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>General</source>
       <translation>Genel</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="346"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="345"/>
       <source>Firmware</source>
       <translation>Firmware</translation>
     </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="130"/>
       <source>Date &amp; Time</source>
       <translation>Tarih &amp; Saat</translation>
     </message>
@@ -215,12 +227,12 @@
       <translation>DVCC</translation>
     </message>
     <message id="common_words_ess">
-      <location filename="../../components/CommonWords.qml" line="177"/>
+      <location filename="../../components/CommonWords.qml" line="188"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
     <message id="settings_tailscale_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="98"/>
       <source>Ethernet</source>
       <translation>Eternet</translation>
     </message>
@@ -236,7 +248,7 @@
       <translation>GPS</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="87"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="92"/>
       <source>Tank pump</source>
       <translation>Tank pompası</translation>
     </message>
@@ -266,27 +278,27 @@
       <translation>Anahtarlar</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
       <source>Access level</source>
       <translation>Access level</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
       <source>User</source>
       <translation>Kullanıcı</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
       <source>User &amp; Installer</source>
       <translation>Kullanıcı &amp; Yükleyici</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>Superuser</source>
       <translation>Süper Kullanıcı</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>Service</source>
       <translation>Servis</translation>
     </message>
@@ -331,7 +343,7 @@
       <translation>1'den küçük olduğunda dur</translation>
     </message>
     <message id="settings_fronius_remove_ip_address">
-      <location filename="../../pages/settings/IpAddressListView.qml" line="53"/>
+      <location filename="../../pages/settings/IpAddressListView.qml" line="56"/>
       <source>Remove IP address?</source>
       <translation>IP adresini kaldırın?</translation>
     </message>
@@ -406,7 +418,7 @@
       <translation>Şimdi çalışıyor</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="265"/>
+      <location filename="../../components/CommonWords.qml" line="276"/>
       <source>Manual start</source>
       <translation>Manuel başlat</translation>
     </message>
@@ -795,7 +807,7 @@
       <translation>Açık, ancak hizmet yok (250 kbit/s)</translation>
     </message>
     <message id="common_words_devices">
-      <location filename="../../components/CommonWords.qml" line="143"/>
+      <location filename="../../components/CommonWords.qml" line="154"/>
       <source>Devices</source>
       <translation>Cihazlar</translation>
     </message>
@@ -845,7 +857,7 @@
       <translation>TAMAM: Bu benzersiz numaraya bağlı başka bir cihaz yok.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="301"/>
+      <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Network status</source>
       <translation>Ağ durumu</translation>
     </message>
@@ -932,12 +944,12 @@
       <translation>Açık</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="58"/>
       <source>Language</source>
       <translation>Dil</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="110"/>
       <source>Changing language</source>
       <translation>Dil değiştirme</translation>
     </message>
@@ -1154,13 +1166,13 @@
     </message>
     <message id="settings_firmware_normal">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="58"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="262"/>
       <source>Normal</source>
       <translation>Normal</translation>
     </message>
     <message id="settings_firmware_large">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="60"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="262"/>
       <source>Large</source>
       <translation>Büyük</translation>
     </message>
@@ -1176,7 +1188,7 @@
     </message>
     <message id="settings_firmware_online_installing_progress">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="85"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="357"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="356"/>
       <source>Installing %1 %2%</source>
       <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress
 ----------
@@ -1185,7 +1197,7 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
     </message>
     <message id="settings_firmware_online_installing">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="89"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="361"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="360"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation type="unfinished">Yükleniyor %1...</translation>
@@ -1317,17 +1329,17 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Tekrar tara</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="289"/>
       <source>Remote support</source>
       <translation>Uzaktan Destek</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
       <source>Remote support tunnel</source>
       <translation>Uzaktan destek tüneli</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="304"/>
       <source>Remote support IP and port</source>
       <translation>Uzaktan destek IP'si ve bağlantı noktası</translation>
     </message>
@@ -1342,27 +1354,27 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Sesli alarm</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="172"/>
       <source>Demo mode</source>
       <translation>Demo modu</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="179"/>
       <source>ESS demo</source>
       <translation>ESS demosu</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="181"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Tekne/Karavan demosu 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="183"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Tekne/Karavan demosu 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="187"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Demo modunun başlatılması bazı ayarları değiştirecek ve kullanıcı arayüzü bir süreliğine yanıt vermeyecektir.</translation>
     </message>
@@ -1740,12 +1752,12 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Yavaş şarj</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="199"/>
+      <location filename="../../data/System.qml" line="201"/>
       <source>Sustain</source>
       <translation>Sürdür</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="202"/>
+      <location filename="../../data/System.qml" line="204"/>
       <source>Recharge</source>
       <translation>Re-Şarj</translation>
     </message>
@@ -1862,17 +1874,19 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>CO2 alarmı</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="235"/>
       <source>Signal K</source>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="233"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="252"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="257"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="262"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
       <source>Enabled (safe mode)</source>
       <translation>Etkin (güvenli mod)</translation>
@@ -2104,11 +2118,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
       <source>Available services</source>
       <translation>Kullanılabilir servisler</translation>
-    </message>
-    <message id="settings_modbus_unit_id">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="52"/>
-      <source>Unit ID: %1</source>
-      <translation>Birim Kimliği: %1</translation>
     </message>
     <message id="settings_relay_function_relay1">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
@@ -2495,62 +2504,62 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Tarih/Saat yerel</translation>
     </message>
     <message id="settings_tz_time_zone">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="120"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="125"/>
       <source>Time zone</source>
       <translation>Saat dilimi</translation>
     </message>
     <message id="settings_tz_africa">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="215"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="220"/>
       <source>Africa</source>
       <translation>Afrika</translation>
     </message>
     <message id="settings_tz_america">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="221"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="226"/>
       <source>America</source>
       <translation>Amerika</translation>
     </message>
     <message id="settings_tz_antarctica">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="227"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="232"/>
       <source>Antarctica</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_tz_arctic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="233"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="238"/>
       <source>Arctic</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_tz_asia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="239"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="244"/>
       <source>Asia</source>
       <translation>Asya</translation>
     </message>
     <message id="settings_tz_atlantic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="245"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="250"/>
       <source>Atlantic</source>
       <translation>Atlantik</translation>
     </message>
     <message id="settings_tz_ustralia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="251"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="256"/>
       <source>Australia</source>
       <translation>Avustralya</translation>
     </message>
     <message id="settings_tz_europe">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="257"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="262"/>
       <source>Europe</source>
       <translation>Avrupa</translation>
     </message>
     <message id="settings_tz_indian">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="263"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="268"/>
       <source>Indian</source>
       <translation>Hint</translation>
     </message>
     <message id="settings_tz_pacific">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="269"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="274"/>
       <source>Pacific</source>
       <translation>Pasifik</translation>
     </message>
     <message id="settings_tz_etc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="275"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="280"/>
       <source>Other</source>
       <oldsource>Etc</oldsource>
       <translation type="unfinished">Etc</translation>
@@ -2597,25 +2606,25 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Yüksek akü voltaj alarmı</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="571"/>
+      <location filename="../../components/CommonWords.qml" line="583"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Son hata</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="574"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>İkinci son hata</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="589"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Üçüncü son hata</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="580"/>
+      <location filename="../../components/CommonWords.qml" line="592"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Dördüncü son hata</translation>
@@ -2631,7 +2640,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Mod ayarı</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="125"/>
+      <location filename="../../data/SystemSettings.qml" line="117"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Standalone</translation>
@@ -2687,7 +2696,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="109"/>
+      <location filename="../../data/SystemSettings.qml" line="101"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -2713,7 +2722,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Şarj voltajı</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="397"/>
+      <location filename="../../components/CommonWords.qml" line="408"/>
       <source>Reset</source>
       <translation>Sıfırla</translation>
     </message>
@@ -2723,12 +2732,12 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>BMS mevcut olduğunda BMS kontrolü otomatik olarak etkinleştirilir. Sistem yapılandırması değişirse veya BMS yoksa sıfırlayın.</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="238"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="243"/>
       <source>Load</source>
       <translation>Yük</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="300"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="305"/>
       <source>Networked operation</source>
       <translation>Ağa bağlı işlem</translation>
     </message>
@@ -2788,18 +2797,18 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Elektrikli Araç Şarj İstasyonları</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="40"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="41"/>
       <source>Session</source>
       <translation>Oturum</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="62"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="63"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>Saat</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="101"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="102"/>
       <source>Charge mode</source>
       <translation>Şarj modu</translation>
     </message>
@@ -2819,7 +2828,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Yoğun olmayan saatlerde daha düşük elektrik ücretleri veya elektrikli aracınızın belirli bir zamanda tamamen şarj olmasını ve kullanıma hazır olmasını sağlamak istiyorsanız.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="119"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="120"/>
       <source>Enable charging</source>
       <translation>Şarjı etkinleştir</translation>
     </message>
@@ -2903,7 +2912,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Desteklenmiyor</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="99"/>
       <source>Remove disconnected devices</source>
       <translation>Bağlantısı kesilen cihazları kaldırın</translation>
     </message>
@@ -2939,7 +2948,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Sigorta atmış</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="262"/>
+      <location filename="../../components/CommonWords.qml" line="273"/>
       <source>Manual control</source>
       <translation>Manuel kontrol</translation>
     </message>
@@ -2995,7 +3004,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Alarm Bayrakları</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="471"/>
+      <location filename="../../components/CommonWords.qml" line="482"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Anahtar</translation>
@@ -3041,7 +3050,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Sağlık durumu</translation>
     </message>
     <message id="common_words_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="92"/>
+      <location filename="../../components/CommonWords.qml" line="95"/>
       <source>Battery temperature</source>
       <translation>Akü sıcaklığı</translation>
     </message>
@@ -3136,7 +3145,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Yeniden algılamak için basın</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="18"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="16"/>
       <source>System</source>
       <translation>Sistem</translation>
     </message>
@@ -3387,6 +3396,12 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Low Voltage Disconnect (always ignored)</source>
       <translation>Düşük Voltaj Bağlantı Kesme (her zaman yoksayılır)</translation>
     </message>
+    <message id="batteryparameters_charge_request">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="49"/>
+      <source>Requests Charging</source>
+      <extracomment>Shows if the battery requests charging: yes or no</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="batterysettings_battery_bank">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="38"/>
       <source>Battery bank</source>
@@ -3588,17 +3603,17 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Sistem Anahtarı</translation>
     </message>
     <message id="lynxionio_external_relay">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="37"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="38"/>
       <source>External relay</source>
       <translation>Extern röle</translation>
     </message>
     <message id="lynxionio_programmable_contact">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="46"/>
       <source>Programmable Contact</source>
       <translation>Programlanabilir Kontakt</translation>
     </message>
     <message id="common_words_batteries">
-      <location filename="../../components/CommonWords.qml" line="51"/>
+      <location filename="../../components/CommonWords.qml" line="54"/>
       <source>Batteries</source>
       <translation>Aküler</translation>
     </message>
@@ -3779,7 +3794,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>ABD (240-30 Ohm)</translation>
     </message>
     <message id="settings_tailscale_custom">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="108"/>
       <source>Custom</source>
       <translation>Özel</translation>
     </message>
@@ -3841,18 +3856,18 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Sensör Düzeyi</translation>
     </message>
     <message id="devicelist_tankshape_volume">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="181"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="190"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation type="unfinished">Hacim</translation>
     </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="240"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="256"/>
       <source>Duplicate sensor level values are not allowed.</source>
       <translation>Yinelenen sensör seviyesi değerlerine izin verilmez.</translation>
     </message>
     <message id="devicelist_tankshape_volume_not_increasing">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="246"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="262"/>
       <source>Volume values must be increasing.</source>
       <translation>Hacim değerleri artıyor olmalıdır.</translation>
     </message>
@@ -4048,13 +4063,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Smappee veri yolu cihazları</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="307"/>
+      <location filename="../../components/CommonWords.qml" line="318"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>Bir Dijital Multi Kontrol bağlandığında bu ayar devre dışı bırakılır.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="310"/>
+      <location filename="../../components/CommonWords.qml" line="321"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <oldsource>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>Bir VE.Bus BMS bağlandığında bu ayar devre dışı bırakılır.</translation>
@@ -4066,12 +4081,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>AC %1 içinde</translation>
     </message>
     <message id="common_words_dc">
-      <location filename="../../components/CommonWords.qml" line="132"/>
+      <location filename="../../components/CommonWords.qml" line="143"/>
       <source>DC</source>
       <translation>DC</translation>
     </message>
     <message id="pulsecounter_setup_inverted">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="20"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="21"/>
       <source>Inverted</source>
       <translation>Ters Çevrilmiş</translation>
     </message>
@@ -4151,12 +4166,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Küme</translation>
     </message>
     <message id="pulsecounter_setup_multiplier">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="27"/>
       <source>Multiplier</source>
       <translation>Çarpmak</translation>
     </message>
     <message id="pulsecounter_setup_reset_counter">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="32"/>
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="35"/>
       <source>Reset counter</source>
       <translation>Sayacı sıfırla</translation>
     </message>
@@ -4211,7 +4226,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Toplam PV gücü</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="380"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <source>Product page</source>
       <translation>Ürün sayfası</translation>
     </message>
@@ -4312,12 +4327,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>DC Akımı</translation>
     </message>
     <message id="settings_tailscale_advanced">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="300"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="277"/>
       <source>Advanced</source>
       <translation>Gelişmiş</translation>
     </message>
     <message id="common_words_alarm_setup">
-      <location filename="../../components/CommonWords.qml" line="62"/>
+      <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Alarm setup</source>
       <translation>Alarm ayarı</translation>
     </message>
@@ -4468,7 +4483,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Tamamlandı</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="354"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>Pending</source>
       <translation>Askıda olması...</translation>
     </message>
@@ -4650,7 +4665,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Aşırı Yük</translation>
     </message>
     <message id="common_words_alarm_setting_dc_ripple">
-      <location filename="../../components/CommonWords.qml" line="59"/>
+      <location filename="../../components/CommonWords.qml" line="62"/>
       <source>DC ripple</source>
       <extracomment>Alarm configuration when 'DC ripple' state is triggered</extracomment>
       <translation>DC ripple</translation>
@@ -4713,113 +4728,103 @@ Devam etmek istiyor musunuz?</translation>
       <translation>AC Girişi</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="214"/>
+      <location filename="../../components/CommonWords.qml" line="225"/>
       <source>Idle</source>
       <translation type="unfinished">Atıl</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="218"/>
+      <location filename="../../components/CommonWords.qml" line="229"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">Aktif değil</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="224"/>
+      <location filename="../../components/CommonWords.qml" line="235"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">İnvertör / Şarj Cihazı</translation>
     </message>
     <message id="common_words_ac_input">
-      <location filename="../../components/CommonWords.qml" line="537"/>
+      <location filename="../../components/CommonWords.qml" line="17"/>
       <source>AC Input</source>
       <translation>AC Girişi</translation>
     </message>
-    <message id="common_words_ac_input_1">
-      <location filename="../../components/CommonWords.qml" line="533"/>
-      <source>AC Input 1</source>
-      <translation>AC Girişi 1</translation>
-    </message>
-    <message id="common_words_ac_input_2">
-      <location filename="../../components/CommonWords.qml" line="535"/>
-      <source>AC Input 2</source>
-      <translation>AC Girişi 2</translation>
-    </message>
     <message id="common_words_ac_input_role">
-      <location filename="../../components/CommonWords.qml" line="21"/>
+      <location filename="../../components/CommonWords.qml" line="24"/>
       <source>Role</source>
       <extracomment>The role for an AC input (grid, genset, acload, etc.)</extracomment>
       <translation>Rol</translation>
     </message>
     <message id="common_words_ac_load">
-      <location filename="../../components/CommonWords.qml" line="24"/>
+      <location filename="../../components/CommonWords.qml" line="27"/>
       <source>AC load</source>
       <translation>AC Yükü</translation>
     </message>
     <message id="common_words_ac_out">
-      <location filename="../../components/CommonWords.qml" line="27"/>
+      <location filename="../../components/CommonWords.qml" line="30"/>
       <source>AC Out</source>
       <translation>AC Çıkışı</translation>
     </message>
     <message id="common_words_ac_output">
-      <location filename="../../components/CommonWords.qml" line="30"/>
+      <location filename="../../components/CommonWords.qml" line="33"/>
       <source>AC Output</source>
       <translation>AC Çıkışı</translation>
     </message>
     <message id="common_words_ac_phase_x">
-      <location filename="../../components/CommonWords.qml" line="34"/>
+      <location filename="../../components/CommonWords.qml" line="37"/>
       <source>AC Phase L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>AC Faz L%1</translation>
     </message>
     <message id="common_words_ac_sensor_x">
-      <location filename="../../components/CommonWords.qml" line="37"/>
+      <location filename="../../components/CommonWords.qml" line="40"/>
       <source>AC Sensor %1</source>
       <translation>AC Sensörü %1</translation>
     </message>
     <message id="common_words_ac_sensor">
-      <location filename="../../components/CommonWords.qml" line="40"/>
+      <location filename="../../components/CommonWords.qml" line="43"/>
       <source>AC Sensors</source>
       <translation>AC Sensörler</translation>
     </message>
     <message id="common_words_active">
-      <location filename="../../components/CommonWords.qml" line="44"/>
+      <location filename="../../components/CommonWords.qml" line="47"/>
       <source>Active</source>
       <extracomment>Status is 'active'</extracomment>
       <translation>Aktif</translation>
     </message>
     <message id="common_words_alarm">
-      <location filename="../../components/CommonWords.qml" line="48"/>
+      <location filename="../../components/CommonWords.qml" line="51"/>
       <source>Alarm</source>
       <extracomment>Voltage alarm is at "Alarm" level</extracomment>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="common_words_alarm_setting_overload">
-      <location filename="../../components/CommonWords.qml" line="55"/>
+      <location filename="../../components/CommonWords.qml" line="58"/>
       <source>Overload</source>
       <extracomment>Alarm configuration when 'overload' state is triggered</extracomment>
       <translation type="unfinished">Aşırı Yük</translation>
     </message>
     <message id="common_words_alarm_status">
-      <location filename="../../components/CommonWords.qml" line="65"/>
+      <location filename="../../components/CommonWords.qml" line="68"/>
       <source>Alarm status</source>
       <translation>Alarm durumu</translation>
     </message>
     <message id="common_words_alarms">
-      <location filename="../../components/CommonWords.qml" line="68"/>
+      <location filename="../../components/CommonWords.qml" line="71"/>
       <source>Alarms</source>
       <translation>Alarmlar</translation>
     </message>
     <message id="common_words_allow_to_charge">
-      <location filename="../../components/CommonWords.qml" line="71"/>
+      <location filename="../../components/CommonWords.qml" line="74"/>
       <source>Allow to charge</source>
       <translation>Şarja izin verildi</translation>
     </message>
     <message id="common_words_allow_to_discharge">
-      <location filename="../../components/CommonWords.qml" line="74"/>
+      <location filename="../../components/CommonWords.qml" line="77"/>
       <source>Allow to discharge</source>
       <translation>Deşarja izin verildi</translation>
     </message>
     <message id="common_words_automatic_scanning">
-      <location filename="../../components/CommonWords.qml" line="80"/>
+      <location filename="../../components/CommonWords.qml" line="83"/>
       <source>Automatic scanning</source>
       <translation>Otomatik tarama</translation>
     </message>
@@ -4829,17 +4834,17 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Akü</translation>
     </message>
     <message id="common_words_battery_current">
-      <location filename="../../components/CommonWords.qml" line="89"/>
+      <location filename="../../components/CommonWords.qml" line="92"/>
       <source>Battery current</source>
       <translation>Akü akımı</translation>
     </message>
     <message id="common_words_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="95"/>
+      <location filename="../../components/CommonWords.qml" line="98"/>
       <source>Battery voltage</source>
       <translation>Akü voltajı</translation>
     </message>
     <message id="common_words_charge_current">
-      <location filename="../../components/CommonWords.qml" line="101"/>
+      <location filename="../../components/CommonWords.qml" line="112"/>
       <source>Charge current</source>
       <translation>Şarj akımı</translation>
     </message>
@@ -4850,7 +4855,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Şarj</translation>
     </message>
     <message id="common_words_clear_error_action">
-      <location filename="../../components/CommonWords.qml" line="109"/>
+      <location filename="../../components/CommonWords.qml" line="120"/>
       <source>Clear error</source>
       <extracomment>Action to clear an error state</extracomment>
       <translation>Hatayı sil</translation>
@@ -4867,29 +4872,29 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Bağlandı</translation>
     </message>
     <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="120"/>
+      <location filename="../../components/CommonWords.qml" line="131"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Akım</translation>
     </message>
     <message id="common_words_current_transformers">
-      <location filename="../../components/CommonWords.qml" line="123"/>
+      <location filename="../../components/CommonWords.qml" line="134"/>
       <source>Current transformers</source>
       <translation>Akım transformatörleri</translation>
     </message>
     <message id="common_words_custom_name">
-      <location filename="../../components/CommonWords.qml" line="126"/>
+      <location filename="../../components/CommonWords.qml" line="137"/>
       <source>Custom name</source>
       <translation>Özel Ad</translation>
     </message>
     <message id="common_words_debug">
-      <location filename="../../components/CommonWords.qml" line="136"/>
+      <location filename="../../components/CommonWords.qml" line="147"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
       <translation>Hata giderme</translation>
     </message>
     <message id="common_words_device">
-      <location filename="../../components/CommonWords.qml" line="140"/>
+      <location filename="../../components/CommonWords.qml" line="151"/>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>Cihaz</translation>
@@ -4907,17 +4912,17 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Bağlantı kesildi</translation>
     </message>
     <message id="common_words_enable">
-      <location filename="../../components/CommonWords.qml" line="155"/>
+      <location filename="../../components/CommonWords.qml" line="166"/>
       <source>Enable</source>
       <translation>Etkinleştir</translation>
     </message>
     <message id="common_words_enabled">
-      <location filename="../../components/CommonWords.qml" line="158"/>
+      <location filename="../../components/CommonWords.qml" line="169"/>
       <source>Enabled</source>
       <translation>Etkin</translation>
     </message>
     <message id="common_words_energy">
-      <location filename="../../components/CommonWords.qml" line="162"/>
+      <location filename="../../components/CommonWords.qml" line="173"/>
       <source>Energy</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Enerji</translation>
@@ -4929,17 +4934,17 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Hata</translation>
     </message>
     <message id="common_words_error_colon">
-      <location filename="../../components/CommonWords.qml" line="168"/>
+      <location filename="../../components/CommonWords.qml" line="179"/>
       <source>Error:</source>
       <translation>Hata:</translation>
     </message>
     <message id="common_words_error_code">
-      <location filename="../../components/CommonWords.qml" line="171"/>
+      <location filename="../../components/CommonWords.qml" line="182"/>
       <source>Error code</source>
       <translation>Hata Kodu</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="180"/>
+      <location filename="../../components/CommonWords.qml" line="191"/>
       <source>Firmware version</source>
       <translation>Firmware sürümü</translation>
     </message>
@@ -4949,38 +4954,38 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Jeneratör</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="189"/>
+      <location filename="../../components/CommonWords.qml" line="200"/>
       <source>High battery temperature</source>
       <translation>Yüksek akü sıcaklığı</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="196"/>
+      <location filename="../../components/CommonWords.qml" line="207"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Yüksek seviye alarmı</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="199"/>
+      <location filename="../../components/CommonWords.qml" line="210"/>
       <source>High starter battery voltage</source>
       <translation>Yüksek starter akü voltaj</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="202"/>
+      <location filename="../../components/CommonWords.qml" line="213"/>
       <source>High temperature</source>
       <translation>Yüksek Sıcaklık</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="205"/>
+      <location filename="../../components/CommonWords.qml" line="216"/>
       <source>High voltage alarms</source>
       <translation>Yüksek voltaj alarmları</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="208"/>
+      <location filename="../../components/CommonWords.qml" line="219"/>
       <source>History</source>
       <translation>Geçmiş</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="211"/>
+      <location filename="../../components/CommonWords.qml" line="222"/>
       <source>%1 Hour(s)</source>
       <translation>1 Saat(ler)</translation>
     </message>
@@ -4996,73 +5001,73 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Aktif değil</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="234"/>
+      <location filename="../../components/CommonWords.qml" line="245"/>
       <source>IP address</source>
       <translation>IP adresi</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="237"/>
+      <location filename="../../components/CommonWords.qml" line="248"/>
       <source>Low battery temperature</source>
       <translation>Düşük akü sıcaklığı</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="244"/>
+      <location filename="../../components/CommonWords.qml" line="255"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Düşük seviye alarmı</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="247"/>
+      <location filename="../../components/CommonWords.qml" line="258"/>
       <source>Low starter battery voltage</source>
       <translation>Düşük starter akü voltaj</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="250"/>
+      <location filename="../../components/CommonWords.qml" line="261"/>
       <source>Low state-of-charge</source>
       <translation>Düşük şarj durumu</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="253"/>
+      <location filename="../../components/CommonWords.qml" line="264"/>
       <source>Low temperature</source>
       <translation>Düşük sıcaklık</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="256"/>
+      <location filename="../../components/CommonWords.qml" line="267"/>
       <source>Low voltage alarms</source>
       <translation>Düşük voltaj alarmları</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="271"/>
+      <location filename="../../components/CommonWords.qml" line="282"/>
       <source>Manufacturer</source>
       <translation>Üretici</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="280"/>
+      <location filename="../../components/CommonWords.qml" line="291"/>
       <source>Maximum temperature</source>
       <translation>Maksimum sıcaklık</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="283"/>
+      <location filename="../../components/CommonWords.qml" line="294"/>
       <source>Maximum voltage</source>
       <translation>Maksimum voltaj</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="289"/>
+      <location filename="../../components/CommonWords.qml" line="300"/>
       <source>Minimum temperature</source>
       <translation>Minimum sıcaklık</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="292"/>
+      <location filename="../../components/CommonWords.qml" line="303"/>
       <source>Minimum voltage</source>
       <translation>Minimum voltaj</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="295"/>
+      <location filename="../../components/CommonWords.qml" line="306"/>
       <source>Mode</source>
       <translation>Mod</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="298"/>
+      <location filename="../../components/CommonWords.qml" line="309"/>
       <source>Model name</source>
       <translation>Model Adı</translation>
     </message>
@@ -5073,7 +5078,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Hayır</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="313"/>
+      <location filename="../../components/CommonWords.qml" line="324"/>
       <source>No error</source>
       <translation>Hata yok</translation>
     </message>
@@ -5083,12 +5088,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Kullanılamıyor</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="337"/>
       <source>Not connected</source>
       <translation>Bağlı değil</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="332"/>
+      <location filename="../../components/CommonWords.qml" line="343"/>
       <source>Offline</source>
       <translation>Çevrimdışı</translation>
     </message>
@@ -5105,7 +5110,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Açık</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>Online</source>
       <translation>Online</translation>
     </message>
@@ -5116,59 +5121,59 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Açık</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="357"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Password</source>
       <translation>Parola</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="364"/>
+      <location filename="../../components/CommonWords.qml" line="375"/>
       <source>Phase</source>
       <translation>Faz</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="371"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Press to clear</source>
       <translation>Silmek için basın</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="374"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Press to reset</source>
       <translation>Sıfırlamak için basın</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="377"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Press to scan</source>
       <translation>Taramak için basın</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="383"/>
+      <location filename="../../components/CommonWords.qml" line="394"/>
       <source>PV Inverter</source>
       <translation>PV invertörü</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="387"/>
+      <location filename="../../components/CommonWords.qml" line="398"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>PV Güç</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="390"/>
+      <location filename="../../components/CommonWords.qml" line="401"/>
       <source>Quiet hours</source>
       <translation>Durgun saatler</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="405"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Röle</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="400"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>Reboot</source>
       <translation>Yeniden başlat</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="403"/>
+      <location filename="../../components/CommonWords.qml" line="414"/>
       <source>Remove</source>
       <translation>Çıkar</translation>
     </message>
@@ -5179,12 +5184,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Çalışıyor</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="410"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>Scanning %1%</source>
       <translation>Tarama %1</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="413"/>
+      <location filename="../../components/CommonWords.qml" line="424"/>
       <source>Serial number</source>
       <translation>Seri Numarası</translation>
     </message>
@@ -5194,12 +5199,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Ayarlar</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="419"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Setup</source>
       <translation>Kurulum</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="422"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>Signal strength</source>
       <translation>Sinyal gücü</translation>
     </message>
@@ -5210,32 +5215,32 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Bekleme</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="436"/>
+      <location filename="../../components/CommonWords.qml" line="447"/>
       <source>Start after the condition is reached for</source>
       <translation>Koşullara ulaşıldıktan sonra başlat</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="439"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Start time</source>
       <translation>Başlangıç zamanı</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="442"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Start value during quiet hours</source>
       <translation>Durgun saatlerdeki başlangıç değeri</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="445"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Start when warning is active for</source>
       <translation>Uyarı şunun için aktif olduğunda başlat</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="451"/>
+      <location filename="../../components/CommonWords.qml" line="462"/>
       <source>State of charge</source>
       <translation>Şarj durumu</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="454"/>
+      <location filename="../../components/CommonWords.qml" line="465"/>
       <source>Status</source>
       <translation>Durum</translation>
     </message>
@@ -5246,12 +5251,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Başlangıç (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="461"/>
+      <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Stop value during quiet hours</source>
       <translation>Sessiz saatlerdeki durma değeri</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="464"/>
+      <location filename="../../components/CommonWords.qml" line="475"/>
       <source>Stop after the condition is reached for</source>
       <translation>Koşullara ulaşıldıktan sonra durdur</translation>
     </message>
@@ -5262,63 +5267,63 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Durduruldu</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="474"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>Temperature</source>
       <translation>Sıcaklık</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="477"/>
+      <location filename="../../components/CommonWords.qml" line="488"/>
       <source>Temperature sensor</source>
       <translation>Sıcaklık sensörü</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="480"/>
+      <location filename="../../components/CommonWords.qml" line="491"/>
       <source>Today</source>
       <translation>Bugün</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="483"/>
+      <location filename="../../components/CommonWords.qml" line="494"/>
       <source>Total</source>
       <translation>Toplam</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="487"/>
+      <location filename="../../components/CommonWords.qml" line="498"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Tracker</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="490"/>
+      <location filename="../../components/CommonWords.qml" line="501"/>
       <source>Type</source>
       <translation>Tip</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="493"/>
+      <location filename="../../components/CommonWords.qml" line="504"/>
       <source>Unique Identity Number</source>
       <translation>Benzersiz Kimlik Numarası</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_unknown">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="122"/>
       <source>Unknown</source>
       <translation>Bilinmiyor</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="500"/>
+      <location filename="../../components/CommonWords.qml" line="511"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus hatası</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="514"/>
       <source>Voltage</source>
       <translation>Voltaj</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="506"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>VRM instance</source>
       <translation>VRM instance</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="509"/>
+      <location filename="../../components/CommonWords.qml" line="520"/>
       <source>When warning is cleared stop after</source>
       <translation>Uyarı şundan sonra kaybolduğunda durdur:</translation>
     </message>
@@ -5328,12 +5333,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Evet</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="515"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Yesterday</source>
       <translation>Dün</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="519"/>
+      <location filename="../../components/CommonWords.qml" line="530"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Verim</translation>
@@ -5349,7 +5354,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Şimdi başla</translation>
     </message>
     <message id="controlcard_generator_startdialog_timed_run">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="46"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="51"/>
       <source>Timed run</source>
       <translation>çalışmış süreç</translation>
     </message>
@@ -5359,18 +5364,18 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Şimdi Dur</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="61"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="62"/>
       <source>Total Run Time</source>
       <translation>Toplam çalışma süresi</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="80"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="81"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>Zamanı Ayarla %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="94"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="97"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>Otomatik başlatma koşulu karşılandığında jeneratör çalışmaya devam edecektir.</translation>
     </message>
@@ -5380,12 +5385,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>İnvertör / Şarj cihazı modu</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="27"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="35"/>
       <source>Set</source>
       <translation>Ayarla</translation>
     </message>
     <message id="common_words_cancel">
-      <location filename="../../components/CommonWords.qml" line="98"/>
+      <location filename="../../components/CommonWords.qml" line="109"/>
       <source>Cancel</source>
       <translation>İptal</translation>
     </message>
@@ -5448,7 +5453,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Takas</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_online_check_failed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="112"/>
       <source>Error while checking for firmware updates</source>
       <translation>Ürün firmware güncellemeleri kontrol edilirken hata oluştu</translation>
     </message>
@@ -5544,12 +5549,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Ham Su</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="136"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="87"/>
       <source>Setting locked for access level</source>
       <translation>Erişim seviyesi için kilitli ayarı</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
       <source>Incorrect password</source>
       <translation>Yanlış parola</translation>
     </message>
@@ -5564,7 +5569,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Görünüm</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../pages/LevelsPage.qml" line="19"/>
+      <location filename="../../pages/LevelsPage.qml" line="20"/>
       <source>Levels</source>
       <translation>Seviyeler</translation>
     </message>
@@ -5692,7 +5697,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>PV &amp; Akü</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_checking">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="109"/>
       <source>Checking...</source>
       <translation>Kontrol ediliyor...</translation>
     </message>
@@ -5918,7 +5923,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Float</translation>
     </message>
     <message id="timeselector_hr">
-      <location filename="../../components/TimeSelector.qml" line="34"/>
+      <location filename="../../components/TimeSelector.qml" line="33"/>
       <source>hr</source>
       <translation>saat</translation>
     </message>
@@ -6032,7 +6037,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>MQTT protokolü seviye 5 hatası</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="251"/>
+      <location filename="../../components/StatusBar.qml" line="297"/>
       <source>Silence alarm</source>
       <translation>Sessiz alarm</translation>
     </message>
@@ -6042,7 +6047,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Toplam güç</translation>
     </message>
     <message id="timeselector_min">
-      <location filename="../../components/TimeSelector.qml" line="62"/>
+      <location filename="../../components/TimeSelector.qml" line="69"/>
       <source>min</source>
       <translation>min</translation>
     </message>
@@ -6435,7 +6440,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation type="unfinished">Planlanmış</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="205"/>
+      <location filename="../../data/System.qml" line="207"/>
       <source>Scheduled</source>
       <translation>Planlanmış</translation>
     </message>
@@ -6509,102 +6514,102 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Equalize</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="135"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>AES mode</source>
       <translation>Otomatik Enerji Tasaruf (AES) modu</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="138"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Fault condition</source>
       <translation>Arıza durumu</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="141"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Bulk charging</source>
       <translation>Bulk Şarj</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="144"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Absorption charging</source>
       <translation>Absorption şarjı</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="147"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Float charging</source>
       <translation>Float şarjı</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="150"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Storage mode</source>
       <translation>Storage Mod</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="153"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Equalization charging</source>
       <translation>Equalization şarjı</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="156"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Pass-thru</source>
       <translation>Transfer</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="159"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Inverting</source>
       <translation>Çevriliyor</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="162"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Assisting</source>
       <translation>Assist</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="165"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Power supply mode</source>
       <translation>Güç Kaynağı Modu</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="168"/>
+      <location filename="../../data/System.qml" line="170"/>
       <source>Sustain</source>
       <translation type="unfinished">Sürdür</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="172"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Wake up</source>
       <translation>Uyan</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="175"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Repeated absorption</source>
       <translation>Tekrarlanan Absorption</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="178"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Auto equalize</source>
       <translation>Otomatik equalize</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="181"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>Battery safe</source>
       <translation>Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="184"/>
+      <location filename="../../data/System.qml" line="186"/>
       <source>Load detect</source>
       <translation>Yük algılama</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="187"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Blocked</source>
       <translation>Bloke</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="190"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="208"/>
+      <location filename="../../data/System.qml" line="210"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dinamik ESS</translation>
     </message>
@@ -6614,25 +6619,25 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Dinamik ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="113"/>
+      <location filename="../../data/SystemSettings.qml" line="105"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Grup Ana Birimi</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="117"/>
+      <location filename="../../data/SystemSettings.qml" line="109"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="121"/>
+      <location filename="../../data/SystemSettings.qml" line="113"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Group &amp; Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="129"/>
+      <location filename="../../data/SystemSettings.qml" line="121"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Bağımsız ve Grup Yöneticisi</translation>
@@ -6648,7 +6653,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Yalnız İnvertör</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="331"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="336"/>
       <source>Short circuit alarm</source>
       <translation>Kısa devre alarmı</translation>
     </message>
@@ -6663,7 +6668,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>DC Giriş</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="63"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="76"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
       <translation>Lityum aküler için %10'un altında şarj önerilmez. Diğer pil türleri için, üretici tarafından önerilen minimum seviye için veri sayfasını kontrol edin.</translation>
@@ -6796,12 +6801,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Uygulama yeniden başlatılıyor...</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="113"/>
       <source>Failed to change language!</source>
       <translation>Dil değiştirilemedi!</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="118"/>
       <source>Please wait while the language is changed.</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>Dil değiştirilirken lütfen bekleyin.</translation>
@@ -6964,16 +6969,16 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Akü ömrü durumu</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="225"/>
-      <source>Access Signal K at http://venus.local:3000 and via VRM.</source>
-      <oldsource>Access Signal K at http://venus.local:3000 and via VRM</oldsource>
-      <translation>http://venus.local:3000 adresinden ve VRM aracılığıyla Sinyal K'ya erişin.</translation>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
+      <source>Access Signal K locally or via VRM</source>
+      <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
+      <translation type="unfinished">http://venus.local:3000 adresinden ve VRM aracılığıyla Sinyal K'ya erişin.</translation>
     </message>
     <message id="settings_large_access_node_red">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="69"/>
-      <source>Access Node-RED at https://venus.local:1881 and via VRM.</source>
-      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM</oldsource>
-      <translation>Node-RED'e https://venus.local:1881 adresinden ve VRM aracılığıyla erişin.</translation>
+      <source>Access Node-RED locally or via VRM</source>
+      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM.</oldsource>
+      <translation type="unfinished">Node-RED'e https://venus.local:1881 adresinden ve VRM aracılığıyla erişin.</translation>
     </message>
     <message id="settings_system_battery_measurements">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="65"/>
@@ -6994,7 +6999,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>VRM Cihaz Örnekleri</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="329"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="334"/>
       <source>High temperature alarm</source>
       <translation>Yüksek sıcaklık alarmı</translation>
     </message>
@@ -7023,117 +7028,117 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Eşitleme, toplu şarj durumu sırasında tetiklenemez</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="228"/>
+      <location filename="../../components/CommonWords.qml" line="239"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eko</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="274"/>
+      <location filename="../../components/CommonWords.qml" line="285"/>
       <source>Maximum current</source>
       <translation>Maksimum akım</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="277"/>
+      <location filename="../../components/CommonWords.qml" line="288"/>
       <source>Maximum power</source>
       <translation>Maksimum güç</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="286"/>
+      <location filename="../../components/CommonWords.qml" line="297"/>
       <source>Minimum current</source>
       <translation>Minimum akım</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="304"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="69"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="270"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
       <source>No</source>
       <translation type="unfinished">Hayır</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="316"/>
+      <location filename="../../components/CommonWords.qml" line="327"/>
       <source>None</source>
       <translation type="unfinished">Yok</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="331"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Yok</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="334"/>
       <source>Not available</source>
       <translation type="unfinished">Kullanılamıyor</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="329"/>
+      <location filename="../../components/CommonWords.qml" line="340"/>
       <source>Off</source>
       <translation type="unfinished">Kapalı</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>OK</source>
       <translation type="unfinished">OK</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <source>On</source>
       <translation type="unfinished">Açık</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="345"/>
+      <location filename="../../components/CommonWords.qml" line="356"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Açık</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="351"/>
+      <location filename="../../components/CommonWords.qml" line="362"/>
       <source>Overall history</source>
       <translation>Genel geçmiş</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="407"/>
+      <location filename="../../components/CommonWords.qml" line="418"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">Çalışıyor</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="416"/>
+      <location filename="../../components/CommonWords.qml" line="427"/>
       <source>Settings</source>
       <translation type="unfinished">Ayarlar</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="444"/>
       <source>Standby</source>
       <translation type="unfinished">Bekleme</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="458"/>
+      <location filename="../../components/CommonWords.qml" line="469"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Başlangıç (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="467"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Stopped</source>
       <translation type="unfinished">Durduruldu</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="497"/>
+      <location filename="../../components/CommonWords.qml" line="508"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Bilinmiyor</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="512"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="116"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="270"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
       <source>Yes</source>
       <translation type="unfinished">Evet</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="534"/>
       <source>Yield Today</source>
       <oldsource>Yield today</oldsource>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
@@ -7179,7 +7184,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Ayrılmış</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="85"/>
+      <location filename="../../components/NotificationDelegate.qml" line="83"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -7314,7 +7319,7 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <translation type="unfinished"/>
     </message>
     <message id="settings_minmax_max_rpm">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="204"/>
       <source>Max RPM</source>
       <translation type="unfinished"/>
     </message>
@@ -7415,7 +7420,7 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <translation>Sistem verimi</translation>
     </message>
     <message id="common_words_daily_history">
-      <location filename="../../components/CommonWords.qml" line="129"/>
+      <location filename="../../components/CommonWords.qml" line="140"/>
       <source>Daily history</source>
       <translation>Günlük geçmiş</translation>
     </message>
@@ -7529,18 +7534,13 @@ See documentation for further information.</oldsource>
       <source>Wired</source>
       <translation>kablolu</translation>
     </message>
-    <message id="nav_brief">
-      <location filename="../../pages/BriefPage.qml" line="49"/>
-      <source>Brief</source>
-      <translation type="unfinished">Kısa</translation>
-    </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="395"/>
+      <location filename="../../pages/BriefPage.qml" line="394"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Sistem yükü yüksek, CPU yükünü azaltmak için yan panel kapatılıyor</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="221"/>
+      <location filename="../../components/CommonWords.qml" line="232"/>
       <source>Input current limit</source>
       <translation>Giriş akımı limiti</translation>
     </message>
@@ -7612,7 +7612,7 @@ See documentation for further information.</oldsource>
       <translation>Limit sistem AC ihracat akımı</translation>
     </message>
     <message id="common_words_add_device">
-      <location filename="../../components/CommonWords.qml" line="17"/>
+      <location filename="../../components/CommonWords.qml" line="20"/>
       <source>Add device</source>
       <translation>Cihaz ekle</translation>
     </message>
@@ -7672,7 +7672,7 @@ See documentation for further information.</oldsource>
       <translation>Cihaz %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="117"/>
       <source>Remove Modbus device?</source>
       <translation>Modbus cihazını kaldırın?</translation>
     </message>
@@ -7747,17 +7747,23 @@ See documentation for further information.</oldsource>
       <translation>Active (%1)</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="268"/>
+      <location filename="../../components/CommonWords.qml" line="279"/>
       <source>Manual stop</source>
       <translation>Manuel Durdurma</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="348"/>
+      <location filename="../../components/CommonWords.qml" line="359"/>
       <source>Open circuit</source>
       <translation>Açık devre</translation>
     </message>
+    <message id="common_words_ac_input_number">
+      <location filename="../../components/CommonWords.qml" line="549"/>
+      <source>AC input %1</source>
+      <extracomment>%1 = number of the AC input</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="565"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2
@@ -7771,12 +7777,12 @@ See documentation for further information.</oldsource>
 </translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="60"/>
+      <location filename="../../ApplicationContent.qml" line="61"/>
       <source>Touch input on</source>
       <translation>Dokunmatik giriş açık</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="62"/>
+      <location filename="../../ApplicationContent.qml" line="63"/>
       <source>Touch input off</source>
       <translation>Dokunmatik giriş kapalı</translation>
     </message>
@@ -7807,77 +7813,87 @@ See documentation for further information.</oldsource>
       <translation>Bağlantı bilgileri</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Please select...</source>
       <translation>Lütfen seçiniz...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="132"/>
       <source>Secured</source>
       <translation>Güvenli</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="135"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Parola korumalı ve ağ iletişimi şifrelenmiştir</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Weak</source>
       <translation>Zayıf</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="143"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Parola korumalı, ancak ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Unsecured</source>
       <translation>Teminatsız</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="151"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Şifre yok ve ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="158"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
+    <message id="settings_security_profile_change_password">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="182"/>
+      <source>Change password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_security_profile_update">
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <source>Update</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="262"/>
       <source>Enter password</source>
       <translation type="unfinished">Parola Gir</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="276"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
       <source>Log out now</source>
       <translation type="unfinished">Şimdi çıkış yap</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="170"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="220"/>
       <source>Select 'Secured' profile?</source>
       <translation>'Güvenli' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
       <source>Select 'Weak' profile?</source>
       <translation>'Zayıf' profili mi seçtiniz?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>'Güvencesiz' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="234"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7888,46 +7904,46 @@ See documentation for further information.</oldsource>
 - Güvensiz ayarlar etkinleştirilemez</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetleri parola korumalıdır
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetlerinin parolaya ihtiyacı yoktur
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="259"/>
       <source>Root password</source>
       <translation>Kök parola</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
       <source>Logout</source>
       <translation>Çıkış Yap</translation>
     </message>
     <message id="settings_tailscale_logout_button">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="211"/>
       <source>Log out now</source>
       <translation>Şimdi çıkış yap</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
       <source>Log out?</source>
       <translation>Oturumu kapatayım mı?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Bu işlem tüm yerel ağ bağlantılarını kesecektir.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="292"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
       <source>Log out</source>
       <translation>Çıkış Yap</translation>
     </message>
@@ -7957,12 +7973,12 @@ See documentation for further information.</oldsource>
       <translation>MQTT Erişimi</translation>
     </message>
     <message id="common_words_error_not_a_number">
-      <location filename="../../components/CommonWords.qml" line="174"/>
+      <location filename="../../components/CommonWords.qml" line="185"/>
       <source>'%1' is not a number.</source>
       <translation>'%1' bir sayı değil.</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="116"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="120"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Evet</translation>
@@ -8044,7 +8060,7 @@ See documentation for further information.</oldsource>
       <translation>Tailscale (uzaktan VPN erişimi)</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="426"/>
+      <location filename="../../components/CommonWords.qml" line="437"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1</translation>
@@ -8071,20 +8087,24 @@ See documentation for further information.</oldsource>
     </message>
     <message id="settings_tailscale_backend_stopped">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="63"/>
-      <source>Backend stopped.</source>
-      <translation>Arka uç durduruldu.</translation>
+      <source>Backend stopped</source>
+      <oldsource>Backend stopped.</oldsource>
+      <translation type="unfinished">Arka uç durduruldu.</translation>
     </message>
     <message id="settings_tailscale_connection_failed">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="66"/>
-      <source>Connection failed.</source>
-      <translation>Bağlantı başarısız oldu.</translation>
+      <source>Connection failed</source>
+      <oldsource>Connection failed.</oldsource>
+      <translation type="unfinished">Bağlantı başarısız oldu.</translation>
     </message>
     <message id="settings_tailscale_logged_out">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="69"/>
-      <source>This GX device is logged out of Tailscale.
+      <source>This GX device is logged out of Tailscale,
+please wait or check your internet connection</source>
+      <oldsource>This GX device is logged out of Tailscale.
 
-Please wait or check your internet connection.</source>
-      <translation>Bu GX cihazının Tailscale oturumu kapatılmıştır.
+Please wait or check your internet connection.</oldsource>
+      <translation type="unfinished">Bu GX cihazının Tailscale oturumu kapatılmıştır.
 
 Lütfen bekleyin veya internet bağlantınızı kontrol edin.</translation>
     </message>
@@ -8095,87 +8115,99 @@ Lütfen bekleyin veya internet bağlantınızı kontrol edin.</translation>
     </message>
     <message id="settings_tailscale_wait_for_login">
       <location filename="../../pages/settings/PageSettingsTailscale.qml" line="75"/>
-      <source>Connect this GX device to your Tailscale account by opening this link:</source>
-      <translation>Bu bağlantıyı açarak bu GX cihazını Tailscale hesabınıza bağlayın:</translation>
+      <source>Connection to your Tailscale account needed, see below</source>
+      <oldsource>Connect this GX device to your Tailscale account by opening this link:</oldsource>
+      <translation type="unfinished">Bu bağlantıyı açarak bu GX cihazını Tailscale hesabınıza bağlayın:</translation>
     </message>
     <message id="settings_tailscale_check_internet_connection">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="83"/>
-      <source>Please wait or check your internet connection.</source>
-      <translation>Lütfen bekleyin veya internet bağlantınızı kontrol edin.</translation>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="78"/>
+      <source>Please wait or check your internet connection</source>
+      <oldsource>Please wait or check your internet connection.</oldsource>
+      <translation type="unfinished">Lütfen bekleyin veya internet bağlantınızı kontrol edin.</translation>
     </message>
     <message id="settings_tailscale_unknown_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="82"/>
       <source>Unknown state: #%1</source>
       <extracomment>%1 = number code for the connect state</extracomment>
       <translation>Bilinmeyen durum: #%1</translation>
     </message>
     <message id="settings_tailscale_error">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="87"/>
       <source>ERROR: %1</source>
       <translation>Hata: %1</translation>
     </message>
     <message id="settings_tailscale_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="103"/>
       <source>WiFi</source>
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_tailscale_disable_to_edit">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="123"/>
       <source>Disable Tailscale to edit these settings.</source>
       <translation>Bu ayarları düzenlemek için Tailscale'i devre dışı bırakın.</translation>
     </message>
     <message id="settings_tailscale_enable">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="169"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="164"/>
       <source>Enable Tailscale</source>
       <translation>Tailscale Ölçeğini Etkinleştir</translation>
     </message>
+    <message id="settings_tailscale_state">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="170"/>
+      <source>State</source>
+      <translation type="unfinished">Durum</translation>
+    </message>
+    <message id="settings_tailscale_connect_to_account">
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="177"/>
+      <source>Connect this GX device to your Tailscale account</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_tailscale_machinename">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="207"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="184"/>
       <source>Machine name</source>
       <translation>Makine adı</translation>
     </message>
     <message id="settings_tailscale_ipv4">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="195"/>
       <source>IPv4</source>
       <translation>IPv4</translation>
     </message>
     <message id="settings_tailscale_ipv6">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="202"/>
       <source>IPv6</source>
       <translation>IPv6</translation>
     </message>
     <message id="settings_tailscale_logout">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="232"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="209"/>
       <source>Logout from Tailscale account</source>
       <translation>Tailscale hesabından çıkış</translation>
     </message>
     <message id="settings_tailscale_local_network_access">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="242"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="219"/>
       <source>Local network access</source>
       <translation>Yerel ağ erişimi</translation>
     </message>
     <message id="settings_tailscale_local_network_access_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="256"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="233"/>
       <source>Access local ethernet network</source>
       <translation>Yerel ethernet ağına erişim</translation>
     </message>
     <message id="settings_tailscale_local_network_access_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="240"/>
       <source>Access local WiFi network</source>
       <translation>Yerel WiFi ağına erişim</translation>
     </message>
     <message id="settings_tailscale_local_network_access_custom_networks">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="270"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="247"/>
       <source>Custom network(s)</source>
       <translation>Özel ağ(lar)</translation>
     </message>
     <message id="settings_tailscale_local_network_access_custom_networks_placeholder">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="250"/>
       <source>Example: 192.168.1.0/24</source>
       <translation>Örnek: 192.168.1.0/24</translation>
     </message>
     <message id="settings_tailscale_local_network_access_explanation">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="263"/>
       <source>Explanation:
 
 This feature, called subnet routes by Tailscale, allows remote access to other devices in the local network(s).
@@ -8192,12 +8224,12 @@ Tailscale tarafından alt ağ rotaları olarak adlandırılan bu özellik, yerel
 Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda bir kez onaylamanız gerekir.</translation>
     </message>
     <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="290"/>
       <source>Custom "tailscale up" arguments</source>
       <translation>Özel "tailscale ölçeği büyütme" argümanları</translation>
     </message>
     <message id="settings_tailscale_advanced_custom_server_url">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="324"/>
+      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="301"/>
       <source>Custom server URL (Headscale)</source>
       <translation>Özel sunucu URL'si (Headscale)</translation>
     </message>
@@ -8223,7 +8255,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Açık, ancak hizmet yok (500 kbit/s)</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
       <source>Root password changed to %1</source>
       <translation>Kök parolası %1 olarak değiştirildi</translation>
     </message>
@@ -8268,12 +8300,12 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Temel Yükler</translation>
     </message>
     <message id="controlcard_generator_label_autostart">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="61"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="64"/>
       <source>Autostart</source>
       <translation type="unfinished">Autostart</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="67"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <oldsource>The generator will start and stop based on the configured autostart conditions.</oldsource>
       <translation>Yapılandırılmış otomatik başlatma koşullarına göre jeneratörü başlatın ve durdurun.</translation>
@@ -8299,18 +8331,18 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Toplam çalışma süresi</translation>
     </message>
     <message id="charger_history_last_x_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="62"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="66"/>
       <source>Last %1 days</source>
       <extracomment>%1 = number of days of solar history that will be shown</extracomment>
       <translation>Son %1 gün</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="69"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="79"/>
       <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
       <translation>Çalışmaya devam etmesini sağlayan otomatik başlatma koşulları etkinleştirilmediği sürece jeneratör %1'de duracaktır.</translation>
     </message>
     <message id="generator_start_dialog_will_run_until_manually_stopped">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="71"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="81"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
       <translation>Jeneratör, çalışmasını sağlayan otomatik başlatma koşulları etkinleştirilmediği sürece manuel olarak durdurulana kadar çalışacaktır.</translation>
     </message>
@@ -8325,7 +8357,7 @@ Yeni bir ağ ekledikten/etkinleştirdikten sonra, Tailscale yönetici konsolunda
       <translation>Yeni UI</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="116"/>
       <source>Successfully changed language!</source>
       <translation>Dil başarıyla değiştirildi!</translation>
     </message>
@@ -8537,7 +8569,7 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <translation>Bağlantı durumu (MQTT RPC kanalı)</translation>
     </message>
     <message id="controlcard_generator_autostarted">
-      <location filename="../../components/CommonWords.qml" line="83"/>
+      <location filename="../../components/CommonWords.qml" line="86"/>
       <source>Auto-started • %1</source>
       <translation>Otomatik başlatıldı - %1</translation>
     </message>
@@ -8602,38 +8634,32 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Deşarj Devre Dışı</translation>
     </message>
-    <message id="startpage_option_brief_without_panel">
-      <location filename="../../data/StartPageConfiguration.qml" line="22"/>
-      <source>Brief</source>
-      <extracomment>The 'Brief' page</extracomment>
-      <translation type="unfinished">Kısa</translation>
-    </message>
     <message id="startpage_option_brief_with_panel">
-      <location filename="../../data/StartPageConfiguration.qml" line="28"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="30"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>Bilgi  (yan panel açık)</translation>
     </message>
     <message id="startpage_option_overview">
-      <location filename="../../data/StartPageConfiguration.qml" line="34"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="36"/>
       <source>Overview</source>
       <extracomment>The 'Overview' page</extracomment>
       <translation type="unfinished">Görünüm</translation>
     </message>
     <message id="startpage_option_levels_tanks">
-      <location filename="../../data/StartPageConfiguration.qml" line="40"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="42"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
       <translation>Seviyeler (Tanklar)</translation>
     </message>
     <message id="startpage_option_levels_environment">
-      <location filename="../../data/StartPageConfiguration.qml" line="46"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="48"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
       <translation>Seviyeler (Çevre)</translation>
     </message>
     <message id="startpage_option_battery list">
-      <location filename="../../data/StartPageConfiguration.qml" line="51"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="53"/>
       <source>Battery list</source>
       <translation>Pil listesi</translation>
     </message>
@@ -8847,32 +8873,32 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
       <translation>Etkinleştirilen yönetilen akü tüm Multi'leri ve Quattro'ları kontrol eder Devre dışı bırakıldığında, yalnızca yerleşik bağlantı noktasındaki cihaz kontrol edilir. Daha fazla bilgi için belgelere bakın.</translation>
     </message>
     <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="23"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="21"/>
       <source>Firmware</source>
       <translation type="unfinished">Firmware</translation>
     </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="33"/>
       <source>Access &amp; Security</source>
       <translation>Erişim ve Güvenlik</translation>
     </message>
     <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="39"/>
       <source>Preferences</source>
       <translation>Tercihler</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="44"/>
       <source>Display &amp; Appearance</source>
       <translation>Ekran ve Görünüm</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="50"/>
       <source>Alarms &amp; Feedback</source>
       <translation>Alarmlar ve Geri Bildirim</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
       <source>Enable SSH on LAN</source>
       <translation>LAN’da SSH’yi Etkinleştirme</translation>
     </message>
@@ -8928,15 +8954,23 @@ Kolaylaştırılmış navigasyon ve yeni bir görünümle, sevdiğiniz her şeye
     </message>
     <message id="settings_large_features_not_offically_supported">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
-      <source>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
-
-Documentation at https://ve3.nl/vol</source>
-      <oldsource>Note that these features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
+      <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
+      <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
 Documentation at https://ve3.nl/vol</oldsource>
-      <translation>Aşağıdaki özelliklerin Victron tarafından resmi olarak desteklenmediğini unutmayın. Lütfen sorular için community.victronenergy.com adresine bakın.
+      <translation type="unfinished">Aşağıdaki özelliklerin Victron tarafından resmi olarak desteklenmediğini unutmayın. Lütfen sorular için community.victronenergy.com adresine bakın.
 
 Belgeler şurada: https://ve3.nl/vol</translation>
+    </message>
+    <message id="settings_large_documentation">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <source>Documentation</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_large_victron_community">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
+      <source>Victron Community</source>
+      <translation type="unfinished">Victron community</translation>
     </message>
     <message id="pagesettingsconnectivity_mobile_network">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="53"/>
@@ -8990,57 +9024,57 @@ Belgeler şurada: https://ve3.nl/vol</translation>
       <translation>Ekran DC Yükleri</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="31"/>
+      <location filename="../../pages/SettingsPage.qml" line="33"/>
       <source>All connected devices</source>
       <translation>Tüm bağlantılı cihazlar</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="49"/>
+      <location filename="../../pages/SettingsPage.qml" line="51"/>
       <source>Connectivity</source>
       <translation>Bağlantı</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="51"/>
+      <location filename="../../pages/SettingsPage.qml" line="53"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, WiFi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="58"/>
+      <location filename="../../pages/SettingsPage.qml" line="60"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="60"/>
+      <location filename="../../pages/SettingsPage.qml" line="62"/>
       <source>Remote monitoring portal</source>
       <translation>Uzaktan izleme portalı</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="67"/>
+      <location filename="../../pages/SettingsPage.qml" line="69"/>
       <source>Advanced</source>
       <translation type="unfinished">Gelişmiş</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="72"/>
+      <location filename="../../pages/SettingsPage.qml" line="74"/>
       <source>Integrations</source>
       <translation>Entegrasyonlar</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="85"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>AC/DC sistemi, ESS, DVCC, Akü...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="90"/>
+      <location filename="../../pages/SettingsPage.qml" line="92"/>
       <source>Debug &amp; Develop</source>
       <translation>Hata Ayıklama ve Geliştirme</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="92"/>
+      <location filename="../../pages/SettingsPage.qml" line="94"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Profil oluşturma araçları, hata ayıklama istatistikleri, uygulama sürümü...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="81"/>
+      <location filename="../../pages/SettingsPage.qml" line="83"/>
       <source>System Setup</source>
       <oldsource>System setup</oldsource>
       <translation>Sistem kurulumu</translation>
@@ -9068,7 +9102,7 @@ If the generator is currently running due to a autostart condition, disabling au
 Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlatmanın devre dışı bırakılması da onu hemen durduracaktır.</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="58"/>
+      <location filename="../../components/listitems/ListLink.qml" line="57"/>
       <source>Scan the QR code with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>QR kodunu taşınabilir cihazınızla tarayın.&lt;br /&gt;Veya bağlantıyı girin: %1</translation>
@@ -9110,13 +9144,13 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
       <translation>Toplam PV gücü</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="216"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="221"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">Toplam verim</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="230"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">Sistem verimi</translation>
@@ -9139,23 +9173,23 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
       <translation>VE.Can Örneği# %1</translation>
     </message>
     <message id="pagesettingsgeneral_useful_links">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
       <source>Useful Links</source>
       <translation>Faydalı Bağlantılar</translation>
     </message>
     <message id="pagesettingsgeneral_modification_checks">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="148"/>
       <source>Modification checks</source>
       <translation>Modifikasyon kontrolleri</translation>
     </message>
     <message id="pagesettingsmodificationchecks_unmodified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="151"/>
       <source>Unmodified</source>
       <translation>Modifiye edilmemiş</translation>
     </message>
     <message id="pagesettingsmodificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="155"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="59"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="58"/>
       <source>Modified</source>
       <translation>Modifiye edilmiş</translation>
     </message>
@@ -9170,12 +9204,12 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
       <translation>DC jeneratör çalıştırıldıktan sonraki ilk 5 dakika içinde en az 5 A'ya ulaşmadığında bir alarm tetiklenecektir</translation>
     </message>
     <message id="settings_access_control_display_language">
-      <location filename="../../pages/SettingsPage.qml" line="42"/>
+      <location filename="../../pages/SettingsPage.qml" line="44"/>
       <source>Access control, Display, Language, Support</source>
       <translation>Erişim kontrolü, Ekran, Dil, Destek</translation>
     </message>
     <message id="common_words_large_features_currently_disabled">
-      <location filename="../../components/CommonWords.qml" line="529"/>
+      <location filename="../../components/CommonWords.qml" line="540"/>
       <source>This feature is disabled, since "All modifications enabled" under "Settings -&gt; General -&gt; Modification checks" is disabled.</source>
       <translation>Bu özellik devre dışıdır çünkü \“Ayarlar -&gt; Genel -&gt; Modifikasyon kontrolleri\” altındaki \“Tüm modifikasyonlar etkin\” seçeneği devre dışı bırakılmıştır.</translation>
     </message>
@@ -9202,169 +9236,169 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation>Desteklenmeyen GX cihazı</translation>
     </message>
     <message id="pagesettingsmodificationchecks_unknown">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="62"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="103"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="102"/>
       <source>Unknown: %1</source>
       <translation>Bilinmiyor: %1</translation>
     </message>
     <message id="pagesettingsmodificationchecks_yes_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="73"/>
       <source>Yes (rc.local and rcS.local)</source>
       <translation>Evet (rc.local ve rcS.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_yes_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="77"/>
       <source>Yes (rcS.local)</source>
       <translation>Evet (rcS.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_yes_rc_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="81"/>
       <source>Yes (rc.local)</source>
       <translation>Evet (rc.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_yes_but_disable_next_boot">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="86"/>
       <source>Yes, but disable at next boot</source>
       <translation>Evet ama bir sonraki yeniden başlatmada etkinleştirin</translation>
     </message>
     <message id="pagesettingsmodificationchecks_no_but_next_boot_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="91"/>
       <source>No, but enable at next boot (rc.local and rcS.local)</source>
       <translation>Hayır ama bir sonraki yeniden başlatmada etkinleştirin (rc.local ve rcS.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_no_but_next_boot_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="95"/>
       <source>No, but enable at next boot (rcS.local)</source>
       <translation>Hayır ama bir sonraki yeniden başlatmada etkinleştirin (rcS.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_no_but_next_boot_rc_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="99"/>
       <source>No, but enable at next boot (rc.local)</source>
       <translation>Hayır ama bir sonraki yeniden başlatmada etkinleştirin (rc.local)</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_no_available">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="119"/>
       <source>No, %1 is available</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Hayır %1 mevcut değil</translation>
     </message>
     <message id="pagesettingsmodificationchecks_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="197"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="196"/>
       <source>This page shows the current system state, allows you to enable or disable modifications, and restore the firmware to its original state.</source>
       <translation>Bu sayfa mevcut sistem durumunu gösterir, modifikasyonları etkinleştirmenize veya devre dışı bırakmanıza ve ürün yazılımını orijinal durumuna geri yüklemenize olanak tanır.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_system_state">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="201"/>
       <source>Victron Energy support</source>
       <translation>Victron Energy desteği</translation>
     </message>
     <message id="pagesettingsmodificationchecks_device_model">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="211"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="210"/>
       <source>Device model</source>
       <translation>Cihaz modeli</translation>
     </message>
     <message id="pagesettingsmodificationchecks_hq_serial_number">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="219"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="218"/>
       <source>HQ serial number</source>
       <translation>HQ seri numarası</translation>
     </message>
     <message id="pagesettingsmodificationchecks_data_free_space">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="225"/>
       <source>Data partition free space</source>
       <translation>Veri bölümü boş alanı</translation>
     </message>
     <message id="pagesettingsmodificationchecks_modifications_at_boot">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="233"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="232"/>
       <source>Modifications loaded at boot</source>
       <translation>Önyükleme sırasında yüklenen modifikasyonlar</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_integrity">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="239"/>
       <source>Firmware integrity</source>
       <translation>Ürün yazılımı bütünlüğü</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_integrity_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="244"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="243"/>
       <source>State of root-fs</source>
       <translation>root-fs durumu</translation>
     </message>
     <message id="pagesettingsmodificationchecks_latest_stable_firmware_installed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="248"/>
       <source>Latest stable firmware version installed?</source>
       <translation>En son kararlı ürün yazılımı sürümü yüklü mü?</translation>
     </message>
     <message id="pagesettingsmodificationchecks_installed_firmware_version">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="256"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="255"/>
       <source>Installed firmware version</source>
       <translation>Yüklü ürün yazılımı (firmware) sürümü</translation>
     </message>
     <message id="pagesettingsmodificationchecks_installed_image_type">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="261"/>
       <source>Installed image type</source>
       <translation>Yüklü görüntü türü</translation>
     </message>
     <message id="pagesettingsmodificationchecks_user_ssh_key_present">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="268"/>
       <source>User SSH key present</source>
       <translation>Kullanıcı SSH anahtarı mevcut</translation>
     </message>
     <message id="pagesettingsmodificationchecks_modifications">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="274"/>
       <source>Modifications</source>
       <translation>Modifikasyonlar</translation>
     </message>
     <message id="pagesettingsmodificationchecks_enable_all_modifications">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="281"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="280"/>
       <source>All modifications enabled</source>
       <translation>Tüm modifikasyonlar etkinleştirildi</translation>
     </message>
     <message id="pagesettingsmodificationchecks_enable_all_modifications_description_large">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="293"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="292"/>
       <source>Enables all modifications, allowing Signal K and Node-RED to be enabled separately.</source>
       <translation>Tüm değişiklikleri etkinleştirerek Signal K ve Node-RED'in ayrı ayrı etkinleştirilmesini sağlar.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_enable_all_modifications_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="294"/>
       <source>Enables all modifications</source>
       <translation>Tüm modifikasyonları etkinleştirir</translation>
     </message>
     <message id="pagesettingsmodificationchecks_reboot_needed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="318"/>
       <source>To apply changes a reboot is needed.&lt;br&gt;Press 'OK' to reboot now.</source>
       <translation>Değişiklikleri uygulamak için yeniden başlatma gereklidir.&lt;br&gt;Şimdi yeniden başlatmak için “Tamam”a basın.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_reboot_now_to_apply_changes">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="334"/>
       <source>Reboot now to apply changes</source>
       <translation>Değişiklikleri uygulamak için şimdi yeniden başlatın</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_reinstall">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="351"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="350"/>
       <source>Reinstall latest stable firmware</source>
       <translation>En son kararlı ürün yazılımını yeniden yükleyin</translation>
     </message>
     <message id="pagesettingsmodificationchecks_press_to_install">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="364"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="363"/>
       <source>Press to install</source>
       <translation>Yüklemek için basın</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_reinstall_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="369"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="368"/>
       <source>Restore the firmware to its original state while preserving system settings.</source>
       <translation>Sistem ayarlarını koruyarak ürün yazılımını orijinal durumuna geri yükleyin.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="377"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="376"/>
       <source>This will disable all modifications, download and reinstall the latest stable firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
       <translation>Bu, tüm değişiklikleri devre dışı bırakacak, en son kararlı ürün yazılımını indirecek ve yeniden yükleyecektir.&lt;br&gt;İnternet bağlantısı gereklidir.&lt;br&gt;Devam etmek için “Tamam”a basın.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_online_update">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="392"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="391"/>
       <source>Online update</source>
       <translation>Çevrim içi güncelleme</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_install_from_sd_usb">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="400"/>
+      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="399"/>
       <source>Install from SD/USB</source>
       <translation>SD/USB’den yükleyin</translation>
     </message>
@@ -9389,17 +9423,17 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation>Dinamik güç sınırlama</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="117"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>Sayfa 5 saniye içinde otomatik olarak yeniden yüklenecektir</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="537"/>
       <source>Dynamic power limit</source>
       <translation>Dinamik güç sınırı</translation>
     </message>
     <message id="devicelistpage_genset">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="78"/>
       <source>Genset</source>
       <translation>Jeneratör Grubu</translation>
     </message>
@@ -9450,7 +9484,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation>“FV İnvertör Bul” işlevini kullanarak veya önceki sayfada manuel olarak bir IP adresi girerek bir FV invertör ekleyin.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="123"/>
       <source>Local network security profile</source>
       <translation>Yerel ağ güvenlik profili</translation>
     </message>
@@ -9475,7 +9509,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation>Henüz sıcaklık sensörü eklenmedi.</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="74"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…</source>
       <translation>Röleler, Sensörler, Tanklar, PV İnvertörler, Modbus, MQTT...</translation>
     </message>
@@ -9551,7 +9585,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation type="unfinished">dcLoads</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="388"/>
+      <location filename="../../pages/OverviewPage.qml" line="451"/>
       <source>Overview</source>
       <translation type="unfinished">Görünüm</translation>
     </message>
@@ -9576,7 +9610,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation type="unfinished">Sistem verimi</translation>
     </message>
     <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="57"/>
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="58"/>
       <source>Total PV Power</source>
       <translation type="unfinished">Toplam PV gücü</translation>
     </message>
@@ -9596,7 +9630,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation type="unfinished">Uyarı</translation>
     </message>
     <message id="switchable_output_press">
-      <location filename="../../components/SwitchableOutputDelegate.qml" line="140"/>
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="229"/>
       <source>Press</source>
       <translation type="unfinished"/>
     </message>
@@ -10005,7 +10039,7 @@ yazılım bütünlüğünü geri yükleyin</translation>
       <translation type="unfinished">Tekne</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="150"/>
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="153"/>
       <source>RPM</source>
       <translation type="unfinished"/>
     </message>
@@ -10017,6 +10051,37 @@ yazılım bütünlüğünü geri yükleyin</translation>
     <message id="boat_page_time_to_go">
       <location filename="../../pages/boatpage/TimeToGo.qml" line="56"/>
       <source>Time To Go</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_security_profile_password_incorrect_length">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <source>Password needs to be at least 8 characters long</source>
+      <translation type="unfinished">Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
+    </message>
+    <message id="settings_security_profile_change_password_title">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <source>Changing the GX Password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="modaldialog_confirm">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <source>Confirm</source>
+      <translation type="unfinished">Evet</translation>
+    </message>
+    <message id="settings_security_profile_change_password_description">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="79"/>
+      <source>Please enter a new GX password:</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_security_profile_enter_new_password">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="94"/>
+      <source>Enter new password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_unit_name_and_id">
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="47"/>
+      <source>%1 | Unit ID: %2</source>
+      <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation type="unfinished"/>
     </message>
   </context>
