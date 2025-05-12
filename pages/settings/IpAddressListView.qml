@@ -12,7 +12,6 @@ GradientListView {
 	id: root
 
 	property alias ipAddresses: ipAddresses
-	property var _removalDialog
 
 	signal ipAddressUpdated(index : int, ipAddress : string)
 
@@ -23,11 +22,7 @@ GradientListView {
 
 		property RemoveButton removalButton: RemoveButton {
 			onClicked: {
-				if (!root._removalDialog) {
-					root._removalDialog = removalDialogComponent.createObject(root)
-				}
-				root._removalDialog.description = modelData
-				root._removalDialog.open()
+				Global.dialogLayer.open(removalDialogComponent, { description: modelData })
 			}
 		}
 
