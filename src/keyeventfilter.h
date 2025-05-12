@@ -37,7 +37,7 @@ protected:
 	bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
-	QQuickWindow *m_window;
+	QQuickWindow *m_window = nullptr;
 	bool m_consumeKeyEvents = false;
 };
 
