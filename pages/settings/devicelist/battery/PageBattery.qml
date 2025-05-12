@@ -275,6 +275,106 @@ Page {
 			}
 
 			ListNavigation {
+				text: "dbus-serialbattery - General"
+				preferredVisible: cvl.valid || ccl.valid || dcl.valid
+				/*
+				preferredVisible: {
+					// mr-manuel/dbus-serialbattery
+					productId.value === 0xBA77
+					// Dr-Gigavolt/dbus-aggregate-batteries
+					|| productId.value === 0xBA44
+				}
+				*/
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDbusSerialbattery.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+
+			ListNavigation {
+				text: "dbus-serialbattery - Cell Voltages"
+				preferredVisible: cell3Voltage.valid
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDbusSerialbatteryCellVoltages.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+
+				VeQuickItem {
+					id: cell3Voltage
+					uid: root.bindPrefix + "/Voltages/Cell3"
+				}
+			}
+
+			ListNavigation {
+				text: "dbus-serialbattery - Settings"
+				// show only for mr-manuel/dbus-serialbattery (productId registered at Victron)
+				preferredVisible: productId.value === 0xBA77
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDbusSerialbatterySettings.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+
+			ListNavigation {
+				text: "dbus-serialbattery - Time to SoC"
+				preferredVisible: timeToSoc0.seen ||
+						timeToSoc5.seen ||
+						timeToSoc10.seen ||
+						timeToSoc15.seen ||
+						timeToSoc20.seen ||
+						timeToSoc80.seen ||
+						timeToSoc85.seen ||
+						timeToSoc90.seen ||
+						timeToSoc95.seen ||
+						timeToSoc100.seen
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDbusSerialbatteryTimeToSoc.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+
+				VeQuickItem {
+					id: timeToSoc0
+					uid: root.bindPrefix + "/TimeToSoC/0"
+				}
+				VeQuickItem {
+					id: timeToSoc5
+					uid: root.bindPrefix + "/TimeToSoC/5"
+				}
+				VeQuickItem {
+					id: timeToSoc10
+					uid: root.bindPrefix + "/TimeToSoC/10"
+				}
+				VeQuickItem {
+					id: timeToSoc15
+					uid: root.bindPrefix + "/TimeToSoC/15"
+				}
+				VeQuickItem {
+					id: timeToSoc20
+					uid: root.bindPrefix + "/TimeToSoC/20"
+				}
+				VeQuickItem {
+					id: timeToSoc80
+					uid: root.bindPrefix + "/TimeToSoC/80"
+				}
+				VeQuickItem {
+					id: timeToSoc85
+					uid: root.bindPrefix + "/TimeToSoC/85"
+				}
+				VeQuickItem {
+					id: timeToSoc90
+					uid: root.bindPrefix + "/TimeToSoC/90"
+				}
+				VeQuickItem {
+					id: timeToSoc95
+					uid: root.bindPrefix + "/TimeToSoC/95"
+				}
+				VeQuickItem {
+					id: timeToSoc100
+					uid: root.bindPrefix + "/TimeToSoC/100"
+				}
+			}
+
+			ListNavigation {
 				//% "Details"
 				text: qsTrId("battery_details")
 				preferredVisible: batteryDetails.hasAllowedItem
