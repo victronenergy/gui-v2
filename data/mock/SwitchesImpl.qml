@@ -102,6 +102,7 @@ Item {
 
 				for (let i = 0; i < root.inputCount; i++) {
 					const outputId = root.outputId(i)
+					switchDev.setMockValue("/SwitchableOutput/%1/Settings/ShowUIControl".arg(outputId), 1)
 					switchDev.setMockValue("/SwitchableOutput/%1/Name".arg(outputId), `Output ${i+1}`)
 					if (i === 1) {
 						switchDev.setMockValue("/SwitchableOutput/%1/Settings/CustomName".arg(outputId), "function Val sw%1".arg(deviceInstance))
