@@ -58,6 +58,14 @@ Page {
 				optionModel: validTypesItem.options
 			}
 
+			ListSwitch {
+				//: Whether UI controls should be shown for this output
+				//% "Show controls"
+				text: qsTrId("page_switchable_show_controls")
+				dataItem.uid: root.outputUid + "/Settings/ShowUIControl"
+				preferredVisible: dataItem.valid
+			}
+
 			ListSpinBox {
 				//% "Fuse rating"
 				text:  qsTrId("page_switchable_output_fuse_rating")

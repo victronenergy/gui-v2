@@ -45,6 +45,7 @@ QtObject {
 				onGroupChanged: outputObject.updateGroupModel()
 				onFormattedNameChanged: outputObject.updateSortToken()
 				onTypeChanged: outputObject.updateGroupModel()
+				onShowUIControlChanged: outputObject.updateGroupModel()
 			}
 
 			function updateGroupModel() {
@@ -60,6 +61,9 @@ QtObject {
 						&& output.type !== VenusOS.SwitchableOutput_Type_Dimmable) {
 					// Only momentary/latching/dimmable outputs are controllable and should appear
 					// in the aux cards, so do not add other types of outputs to the model.
+					return
+				}
+				if (!output.showUIControl) {
 					return
 				}
 
