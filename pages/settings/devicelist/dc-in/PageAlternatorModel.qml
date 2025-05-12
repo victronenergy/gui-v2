@@ -10,6 +10,7 @@ VisibleItemModel {
 	id: root
 
 	property string bindPrefix
+	property Page page
 
 	ListSwitch {
 		text: CommonWords.switch_mode
@@ -100,14 +101,39 @@ VisibleItemModel {
 		preferredVisible: dataItem.valid
 	}
 
-	ListOutputBatterySwitch {
-		bindPrefix: root.bindPrefix
-		onToggled: Global.pageManager.popPage() // service has changed to .dcdc, so page is no longer relevant
-	}
-
 	DcHistorySettingsColumn {
 		width: parent?.width ?? 0
 		bindPrefix: root.bindPrefix
+	}
+
+	ListNavigation {
+		text: CommonWords.setup
+		preferredVisible: setupOutputItem.valid
+		onClicked: {
+			Global.pageManager.pushPage(settingsComponent)
+		}
+
+		VeQuickItem {
+			id: setupOutputItem
+			uid: bindPrefix + "/Settings/OutputBattery"
+		}
+
+		Component {
+			id: settingsComponent
+
+			Page {
+				title: CommonWords.settings
+
+				GradientListView {
+					model: VisibleItemModel {
+						ListOutputBatteryRadioButtonGroup {
+							bindPrefix: root.bindPrefix
+							settingsPage: root.page
+						}
+					}
+				}
+			}
+		}
 	}
 
 	ListNavigation {

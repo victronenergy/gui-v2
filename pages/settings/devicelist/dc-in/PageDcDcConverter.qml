@@ -55,14 +55,39 @@ Page {
 				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 			}
 
-			ListOutputBatterySwitch {
-				bindPrefix: root.bindPrefix
-				onToggled: Global.pageManager.popPage() // service has changed to .alternator, so page is no longer relevant
-			}
-
 			DcHistorySettingsColumn {
 				width: parent?.width ?? 0
 				bindPrefix: root.bindPrefix
+			}
+
+			ListNavigation {
+				text: CommonWords.settings
+				preferredVisible: setupOutputItem.valid
+				onClicked: {
+					Global.pageManager.pushPage(settingsComponent)
+				}
+
+				VeQuickItem {
+					id: setupOutputItem
+					uid: bindPrefix + "/Settings/OutputBattery"
+				}
+
+				Component {
+					id: settingsComponent
+
+					Page {
+						title: CommonWords.settings
+
+						GradientListView {
+							model: VisibleItemModel {
+								ListOutputBatteryRadioButtonGroup {
+									bindPrefix: root.bindPrefix
+									settingsPage: root
+								}
+							}
+						}
+					}
+				}
 			}
 
 			ListNavigation {
