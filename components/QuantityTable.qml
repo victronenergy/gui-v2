@@ -13,6 +13,7 @@ Column {
 	property var units: []
 	property int rowCount
 	property var valueForModelIndex  // function(row,column) -> data value for this row/column
+	property var rowIsVisible   // TODO remove when QuantityObjectModel is used as model instead.
 	property bool headerVisible: true
 	property Component headerComponent: defaultHeaderComponent
 	property int labelHorizontalAlignment: Qt.AlignLeft
@@ -83,7 +84,23 @@ Column {
 		sourceComponent: headerVisible ? headerComponent : null
 	}
 
+
 	Repeater {
+		id: rowRepeater
+
+		function resetRowColors() {
+			let visibleRowCount = 0
+			for (let i = 0; i < count; ++i) {
+				const row = itemAt(i)
+				if (row && row.visible) {
+					row.color = visibleRowCount % 2 === 0
+						? Theme.color_quantityTable_row_alternateBackground
+						: Theme.color_quantityTable_row_background
+					visibleRowCount++
+				}
+			}
+		}
+
 		model: root.rowCount
 
 		delegate: Rectangle {
@@ -93,9 +110,9 @@ Column {
 
 			width: parent.width
 			height: valueRow.height
-			color: model.index % 2 === 0
-				   ? Theme.color_quantityTable_row_alternateBackground
-				   : Theme.color_quantityTable_row_background
+			visible: !root.rowIsVisible || root.rowIsVisible(rowIndex)
+			onVisibleChanged: rowRepeater.resetRowColors()
+			Component.onCompleted: rowRepeater.resetRowColors()
 
 			Row {
 				id: valueRow

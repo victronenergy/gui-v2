@@ -84,16 +84,9 @@ Page {
 					}
 					readonly property string formattedName: Global.solarDevices.formatTrackerName(
 							name, index, device.trackerCount, device.name, VenusOS.TrackerName_WithDevicePrefix)
+					property bool initialized
 
-					device: solarDeviceDelegate.device
-					trackerIndex: index
-
-					onTodaysYieldChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.TodaysYieldRole, todaysYield, trackerIndex)
-					onPowerChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.PowerRole, power, trackerIndex)
-					onCurrentChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.CurrentRole, current, trackerIndex)
-					onVoltageChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.VoltageRole, voltage, trackerIndex)
-
-					onFormattedNameChanged: {
+					function addToModel() {
 						const values = {
 							group: "generic",
 							name: formattedName,
@@ -104,10 +97,43 @@ Page {
 						}
 						solarInputModel.addInput(device.serviceUid, values, trackerIndex)
 					}
+
+					function removeFromModel() {
+						const modelIndex = solarInputModel.indexOf(solarDeviceDelegate.device.serviceUid, index)
+						if (modelIndex >= 0) {
+							solarInputModel.removeAt(modelIndex)
+						}
+					}
+
+					function updateModel() {
+						if (initialized) {
+							removeFromModel()
+							if (enabled) {
+								addToModel()
+							}
+						}
+					}
+
+					device: solarDeviceDelegate.device
+					trackerIndex: index
+
+					onTodaysYieldChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.TodaysYieldRole, todaysYield, trackerIndex)
+					onPowerChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.PowerRole, power, trackerIndex)
+					onCurrentChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.CurrentRole, current, trackerIndex)
+					onVoltageChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.VoltageRole, voltage, trackerIndex)
+
+					onFormattedNameChanged: updateModel()
+					onEnabledChanged: updateModel()
 				}
 
+				onObjectAdded: (index, object) => {
+					if (object.enabled) {
+						object.addToModel()
+					}
+					object.initialized = true
+				}
 				onObjectRemoved: (index, object) => {
-					solarInputModel.removeAt(solarInputModel.indexOf(device.serviceUid, object.index))
+					object.removeFromModel()
 				}
 			}
 		}

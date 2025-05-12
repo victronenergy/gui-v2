@@ -81,12 +81,18 @@ QtObject {
 				setMockValue("/NrOfTrackers", trackerCount)
 				let trackerIndex = 0
 
-				// Sometimes trackers have names. If available, they should show up in the UI.
+				// Sometimes trackers have names. If available, they should show up in the UI,
+				// unless /Enabled=0 for the tracker.
 				if (trackerCount > 1 && Math.random() < 0.5) {
 					const charCode = 'A'.charCodeAt(0)
 					for (trackerIndex = 0; trackerIndex < trackerCount; ++trackerIndex) {
-						const nextTrackerName = "Tracker %1".arg(String.fromCharCode(charCode + trackerIndex))
-						setMockValue("/Pv/" + trackerIndex + "/Name", nextTrackerName)
+						if (trackerIndex === trackerCount - 1) {
+							setMockValue("/Pv/" + trackerIndex + "/Enabled", 0)
+							setMockValue("/Pv/" + trackerIndex + "/Name", "Disabled tracker, should not be in UI tracker lists")
+						} else {
+							const nextTrackerName = "Tracker %1".arg(String.fromCharCode(charCode + trackerIndex))
+							setMockValue("/Pv/" + trackerIndex + "/Name", nextTrackerName)
+						}
 					}
 				}
 
