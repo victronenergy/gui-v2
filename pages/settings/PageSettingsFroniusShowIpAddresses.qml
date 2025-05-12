@@ -10,8 +10,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property var _rescanDialog
-
 	topRightButton: VenusOS.StatusBar_RightButton_Refresh
 
 	IpAddressListView {
@@ -25,10 +23,7 @@ Page {
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {
-			if (!root._rescanDialog) {
-				root._rescanDialog = rescanDialogComponent.createObject(root)
-			}
-			root._rescanDialog.open()
+			Global.dialogLayer.open(rescanDialogComponent)
 		}
 	}
 
