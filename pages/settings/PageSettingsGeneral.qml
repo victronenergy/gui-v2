@@ -10,8 +10,6 @@ Page {
 	id: root
 
 	GradientListView {
-		id: settingsListView
-
 		model: VisibleItemModel {
 			SettingsListHeader {
 				//% "System"

@@ -103,13 +103,18 @@ Page {
 				content.children: Row {
 					spacing: Theme.geometry_listItem_content_spacing
 					ListItemButton {
+						id: localDateButton
 						text: ClockTime.currentDate
 						enabled: timeZoneButton.clickable
+						focus: enabled
+						KeyNavigation.right: localTimeButton
 						onClicked: root._openDateSelector()
 					}
 					ListItemButton {
+						id: localTimeButton
 						text: ClockTime.currentTime
 						enabled: timeZoneButton.clickable
+						focus: enabled
 						onClicked: root._openTimeSelector()
 					}
 				}
