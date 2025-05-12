@@ -70,6 +70,20 @@ ListItem {
 		}
 	]
 
+	// clicked() signal is emitted when Key_Space is pressed.
+	onClicked: slider.focus = true
+
+	Keys.onPressed: (event) => {
+		switch (event.key) {
+		case Qt.Key_Escape:
+		case Qt.Key_Return:
+		case Qt.Key_Enter:
+			slider.focus = false
+			break
+		}
+	}
+	Keys.enabled: Global.keyNavigationEnabled
+
 	VeQuickItem {
 		id: firstDataItem
 	}

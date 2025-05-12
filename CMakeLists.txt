@@ -384,6 +384,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/core/SectionHeader.qml
     components/listitems/core/SettingsListHeader.qml
     components/listitems/core/SettingsListNavigation.qml
+    components/listitems/core/SliderHandleHighlight.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml

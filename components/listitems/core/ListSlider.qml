@@ -21,6 +21,7 @@ ListItem {
 
 			enabled: root.clickable
 			width: Theme.geometry_listItem_slider_width
+			focus: true // receive key events
 		}
 	]
 }
