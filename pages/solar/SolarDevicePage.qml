@@ -92,6 +92,10 @@ Page {
 							return tracker.power
 						}
 					}
+					rowIsVisible: function(row) {
+						const tracker = trackerObjects.objectAt(row)
+						return tracker.enabled
+					}
 
 					Instantiator {
 						id: trackerObjects
