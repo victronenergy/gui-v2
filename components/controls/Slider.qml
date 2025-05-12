@@ -105,5 +105,10 @@ T.Slider {
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
+
+		SliderHandleHighlight {
+			handle: parent
+			visible: Global.keyNavigationEnabled && root.activeFocus
+		}
 	}
 }

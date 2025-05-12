@@ -42,12 +42,17 @@ C.RangeSlider {
 			left: parent.left
 			leftMargin: root.leftPadding + root.first.visualPosition * (root.availableWidth - width)
 			top: parent.top
-			topMargin: root.topPadding + root.availableHeight / 2 - height / 2
+			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset
 		}
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 		color: root.firstColor
+
+		SliderHandleHighlight {
+			handle: parent
+			visible: Global.keyNavigationEnabled && root.activeFocus
+		}
 	}
 
 	second.handle: CP.ColorImage {
@@ -55,11 +60,22 @@ C.RangeSlider {
 			left: parent.left
 			leftMargin: root.leftPadding + root.second.visualPosition * (root.availableWidth - width)
 			top: parent.top
-			topMargin: root.topPadding + root.availableHeight / 2 - height / 2
+			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset
 		}
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 		color: root.secondColor
+
+		SliderHandleHighlight {
+			handle: parent
+			visible: Global.keyNavigationEnabled && root.activeFocus
+			rotation: 0
+		}
 	}
+
+	Keys.onLeftPressed: first.decrease()
+	Keys.onRightPressed: first.increase()
+	Keys.onUpPressed: second.increase()
+	Keys.onDownPressed: second.decrease()
 }

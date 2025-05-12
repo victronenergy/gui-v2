@@ -15,6 +15,7 @@ Slider {
 	background.height: height
 
 	handle: Rectangle {
+		id: handleItem
 		parent: root.maskSource
 		width: Theme.geometry_switch_indicator_width
 		height: root.background.height
@@ -25,11 +26,22 @@ Slider {
 			anchors.centerIn: parent
 			width: Theme.geometry_dimmingSlider_dot_size
 			spacing: Theme.geometry_dimmingSlider_dot_size
+			opacity: handleHighlight.visible ? 0.3 : 1
 
 			Dot { }
 			Dot { }
 			Dot { }
 		}
+	}
+
+	// Declare this highlight outside the handle, else it is not shown due to the handle's mask source.
+	SliderHandleHighlight {
+		id: handleHighlight
+		x: root.handle.x + root.handle.width - (width / 2)
+		y: (parent.height / 2) - (height / 2)
+		width: root.handle.height - (2 * Theme.geometry_switch_groove_border_width)
+		height: Theme.geometry_switch_groove_border_width
+		visible: Global.keyNavigationEnabled && root.activeFocus
 	}
 
 	component Dot: Rectangle {
