@@ -48,6 +48,7 @@ Page {
 
 		PageAlternatorModel {
 			bindPrefix: root.bindPrefix
+			page: root
 		}
 	}
 
