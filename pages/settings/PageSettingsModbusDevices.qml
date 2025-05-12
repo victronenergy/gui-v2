@@ -84,6 +84,7 @@ Page {
 								width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
 							},
 							RemoveButton {
+								id: removeButton
 								onClicked: Global.dialogLayer.open(removeDeviceDialog,
 																   {
 																	   modbusDevice: modelData,
@@ -96,6 +97,9 @@ Page {
 																   })
 							}
 						]
+
+						Keys.onSpacePressed: removeButton.clicked()
+						Keys.enabled: Global.keyNavigationEnabled
 					}
 				}
 			}

@@ -39,6 +39,9 @@ GradientListView {
 			defaultContent,
 			removalButton
 		]
+
+		Keys.onSpacePressed: removalButton.clicked()
+		Keys.enabled: Global.keyNavigationEnabled
 	}
 
 	VeQuickItem {

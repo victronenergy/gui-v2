@@ -167,6 +167,11 @@ ListItem {
 			root.editingFinished()
 		}
 
+		// Consume arrow key events so that they do not go higher up the item hierarchy and trigger
+		// key navigation events while the text field is focused.
+		Keys.onLeftPressed: {}
+		Keys.onRightPressed: {}
+
 		Label {
 			id: suffixLabel
 

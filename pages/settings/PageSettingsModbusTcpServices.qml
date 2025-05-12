@@ -42,16 +42,11 @@ Page {
 			readonly property string servicePath: root.modbustcpServiceUid + "/Services/" + model.index
 
 			text: root._formatName(productName.value, serviceName.value)
-
-			bottomContentChildren: [
-				ListText {
-					id: serviceDetails
-					implicitHeight: serviceDetails.primaryLabel.height
-					text: root._shortServiceName(serviceName.value)
-					//% "Unit ID: %1"
-					secondaryText: qsTrId("settings_modbus_unit_id").arg(unitId.value)
-				}
-			]
+			//: Modbus TCP service details. %1 = service name or uid, %2 = unit id
+			//% "%1 | Unit ID: %2"
+			caption: qsTrId("settings_modbus_unit_name_and_id")
+					.arg(root._shortServiceName(serviceName.value))
+					.arg(unitId.value)
 
 			VeQuickItem {
 				id: serviceName

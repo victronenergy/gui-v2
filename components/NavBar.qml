@@ -72,7 +72,8 @@ FocusScope {
 				id: navButton
 
 				readonly property var _modelData: root.model.get(index)
-				height: root.height
+				anchors.verticalCenter: parent.verticalCenter
+				height: Theme.geometry_navigationBar_button_height
 				width: buttonRow.width / buttonRepeater.count
 				text: _modelData.navButtonText
 				icon.source: _modelData.navButtonIcon
