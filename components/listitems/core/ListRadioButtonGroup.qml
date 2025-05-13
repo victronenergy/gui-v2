@@ -80,7 +80,7 @@ ListNavigation {
 				if (root.updateDataOnClick && dataItem.uid.length > 0) {
 					dataItem.setValue(value)
 				}
-				root.optionClicked(index)
+				root.optionClicked(index, value)
 			}
 			onAboutToPop: {
 				root.aboutToPop()
