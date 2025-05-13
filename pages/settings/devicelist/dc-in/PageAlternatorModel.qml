@@ -107,7 +107,7 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
-		text: CommonWords.setup
+		text: CommonWords.settings
 		preferredVisible: setupOutputItem.valid
 		onClicked: {
 			Global.pageManager.pushPage(settingsComponent)
