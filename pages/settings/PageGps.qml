@@ -93,17 +93,21 @@ Page {
 				}
 			}
 
-			ListText {
+			ListQuantity {
 				//% "Course"
 				text: qsTrId("settings_gps_course")
 				dataItem.uid: bindPrefix + "/Course"
-				secondaryText: dataItem.valid ? "%1°".arg(Units.formatNumber(dataItem.value, 1)) : ""
+				preferredVisible: dataItem.valid
+				unit: VenusOS.Units_CardinalDirection
 			}
 
-			ListText {
+			ListQuantity {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
-				dataItem.uid: bindPrefix + "/Altitude"
+				dataItem.uid: root.bindPrefix + "/Altitude"
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Meter)
+				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
+				unit: Global.systemSettings.altitudeUnit
 			}
 
 			ListText {

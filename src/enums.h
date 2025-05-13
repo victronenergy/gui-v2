@@ -97,7 +97,9 @@ public:
 		Units_PowerFactor,
 		Units_Time_Day,
 		Units_Time_Hour,
-		Units_Time_Minute
+		Units_Time_Minute,
+		Units_Altitude_Meter,
+		Units_Altitude_Foot
 	};
 	Q_ENUM(Units_Type)
 
