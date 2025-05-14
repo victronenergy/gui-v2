@@ -300,16 +300,13 @@ QtObject {
 			switch (value) {
 			case ve_meter:
 				root.altitudeUnit = VenusOS.Units_Altitude_Meter
-				root.altitudeUnitSuffix = "m"
 				break
 			case ve_foot:
 				root.altitudeUnit = VenusOS.Units_Altitude_Foot
-				root.altitudeUnitSuffix = "ft"
 				break
 			default:
 				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to meter")
 				root.altitudeUnit = VenusOS.Units_Altitude_Meter
-				root.altitudeUnitSuffix = "m"
 				break
 			}
 		}
