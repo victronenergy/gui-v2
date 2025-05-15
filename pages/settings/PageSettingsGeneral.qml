@@ -144,6 +144,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Backup & Restore"
+				text: qsTrId("pagesettingsgeneral_backup_and_restore")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBackupRestore.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Modification checks"
 				text: qsTrId("pagesettingsgeneral_modification_checks")
 				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
