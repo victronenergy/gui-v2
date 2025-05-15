@@ -119,7 +119,7 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     # Copy the files to the output directory
     cp venus-gui-v2.{html,js,wasm} qtloader.js \
         ../build-wasm_files_to_copy/wasm/
-    cp ../images/victronenergy.svg ../images/victronenergy-light.svg ../LICENSE.txt ../.github/patches/Makefile \
+    cp  ../images/victronenergy.svg ../images/victronenergy-light.svg ../images/mockup.svg ../LICENSE.txt ../.github/patches/Makefile \
         ../build-wasm_files_to_copy/wasm/
     cp -r ../wasm/icons ../build-wasm_files_to_copy/wasm/
     mv ../build-wasm_files_to_copy/wasm/venus-gui-v2.html ../build-wasm_files_to_copy/wasm/index.html
