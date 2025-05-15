@@ -93,29 +93,8 @@ Page {
 			ListSwitch {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
 				height: Theme.geometry_settingsListNavigation_height
-
-				Column {
-					anchors {
-						left: parent.left
-						leftMargin: Theme.geometry_listItem_content_horizontalMargin
-						verticalCenter: parent.verticalCenter
-					}
-
-					Label {
-						font.pixelSize: Theme.font_size_body2
-						wrapMode: Text.Wrap
-						//% "Display DC Loads"
-						text: qsTrId("settings_system_has_dc_system")
-					}
-
-					Label {
-						font.pixelSize: Theme.font_size_body1
-						wrapMode: Text.Wrap
-						color: Theme.color_font_secondary
-						//% "Calculated estimate of DC consumption"
-						text: qsTrId("settings_system_calculated_estimate_of_dc_consumption")
-					}
-				}
+				//% "Display DC Loads"
+				text: qsTrId("settings_system_has_dc_system")
 			}
 
 			ListNavigation {
