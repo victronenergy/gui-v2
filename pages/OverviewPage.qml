@@ -833,11 +833,13 @@ SwipeViewPage {
 				animationEnabled: root.animationEnabled
 
 				// If load power is positive (i.e. consumed energy), energy flows to load.
+				// If load power is negative (i.e. devices generating power but not directly managed by GX), energy flows to battery.
 				animationMode: root.isCurrentPage
-						&& !isNaN(Global.system.dc.power)
-						&& Global.system.dc.power > 0
-						&& Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
-							? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+								&& !isNaN(Global.system.dc.power)
+								&& (Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold)
+							? (Global.system.dc.power > 0
+								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 							: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
 		}
