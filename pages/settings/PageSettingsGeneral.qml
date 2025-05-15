@@ -235,6 +235,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Backup & Restore"
+				text: qsTrId("pagesettingsgeneral_backup_and_restore")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBackupRestore.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Support status (modifications checks)"
 				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
 				secondaryText: supportStateText()

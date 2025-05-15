@@ -559,6 +559,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsAccessAndSecurity.qml
     pages/settings/PageSettingsAcSystem.qml
     pages/settings/PageSettingsAlarmsAndFeedback.qml
+    pages/settings/PageSettingsBackupRestore.qml
     pages/settings/PageSettingsBatteries.qml
     pages/settings/PageSettingsBatteryMeasurements.qml
     pages/settings/PageSettingsBleSensors.qml
