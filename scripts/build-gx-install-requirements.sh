@@ -55,7 +55,7 @@ then
 fi
 
 # Fetch latest SDK version
-URL="https://updates.victronenergy.com/feeds/venus/candidate/sdk/"
+URL="https://updates.victronenergy.com/feeds/venus/testing/sdk/"
 
 # Get the HTML content
 html_content=$(curl -s ${URL})
@@ -64,7 +64,7 @@ html_content=$(curl -s ${URL})
 filename=$(echo "${html_content}" | grep "${DEVICE_TYPE}" | grep -oP '(?<=href=")[^"]+\.sh' | head -n 1)
 
 # Construct the download URL
-download_url="https://updates.victronenergy.com/feeds/venus/candidate/sdk/${filename}"
+download_url="https://updates.victronenergy.com/feeds/venus/testing/sdk/${filename}"
 
 # Change to the temporary directory
 cd "/tmp"

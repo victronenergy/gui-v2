@@ -365,6 +365,27 @@ public:
 	};
 	Q_ENUM(VeBusDevice_Bms_Type)
 
+	enum Tank_Backup_Restore_Action {
+		Tank_Backup_Restore_Action_Idle = 0,
+		Tank_Backup_Restore_Action_Create_USB,
+		Tank_Backup_Restore_Action_Backup,
+		Tank_Backup_Restore_Action_Restore,
+		Tank_Backup_Restore_Action_Delete,
+	};
+	Q_ENUM(Tank_Backup_Restore_Action)
+
+	enum Tank_Backup_Restore_Notification {
+		Tank_Backup_Restore_Notification_Create_USB_Successful = 1,
+		Tank_Backup_Restore_Notification_Backup_Successful = 2,
+		Tank_Backup_Restore_Notification_Restore_Successful = 3,
+		Tank_Backup_Restore_Notification_Delete_Successful = 4,
+		Tank_Backup_Restore_Notification_Create_USB_Failed = 101,
+		Tank_Backup_Restore_Notification_Backup_Failed = 102,
+		Tank_Backup_Restore_Notification_Restore_Failed = 103,
+		Tank_Backup_Restore_Notification_Delete_Failed = 104,
+	};
+	Q_ENUM(Tank_Backup_Restore_Notification)
+
 	enum Relays_State {
 		Relays_State_Inactive = 0,
 		Relays_State_Active
