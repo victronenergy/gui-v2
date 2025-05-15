@@ -82,9 +82,23 @@ Page {
 			}
 
 			ListText {
+				id: portalId
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
+			}
+
+			ListLink {
+				preferredVisible: portalId.dataItem.valid && productId.valid
+
+				//% "VRM Device Registration"
+				text: qsTrId("settings_vrm_device_registration")
+				url: "https://vrm.victronenergy.com/login?installationIdentifier=%1&productId=%2".arg(portalId.dataItem.value).arg(productId.value)
+
+				VeQuickItem {
+					id: productId
+					uid: Global.venusPlatform.serviceUid + "/Device/ProductId"
+				}
 			}
 
 			ListNavigation {
