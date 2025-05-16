@@ -251,6 +251,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
+    components/SettingSync.qml
     components/ShinyProgressArc.qml
     components/SideGauge.qml
     components/SideMultiGauge.qml
