@@ -230,15 +230,13 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Managed battery controls all Multis and Quattros"
-				text: qsTrId("settings_dvcc_control_all_vebus_devices")
+				//% "Control MK3-USB connected inverter/charger system"
+				text: qsTrId("settings_dvcc_control_mk3_usb_inverter_charger_system")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
 				preferredVisible: commonSettings.dvccActive &&
 						 nrVebusDevices.valid && nrVebusDevices.value > 1
-				//% "When enabled, the managed battery controls all Multis and Quattros. "
-				//% "When disabled, only the device on the built-in port is controlled. "
-				//% "See documentation for further information."
-				caption: qsTrId("settings_dvcc_control_all_vebus_devices_label")
+				//% "Enable this setting when having a secondary MultiPlus or Quattro system powered by the same battery bank as the main inverter/charger system. When this setting is enabled, this secondary system will use the CVL and DCL parameters of the selected BMS."
+				caption: qsTrId("settings_dvcc_control_mk3_usb_inverter_charger_system_caption")
 				VeQuickItem {
 					id: nrVebusDevices
 					uid: Global.system.serviceUid + "/Devices/NumberOfVebusDevices"
