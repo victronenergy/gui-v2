@@ -52,7 +52,7 @@ FocusScope {
 			delegate: T.Button {
 				id: mouseArea
 
-				enabled: modelData.enabled !== false
+				enabled: root.enabled && modelData.enabled !== false
 				width: root.width / buttonRepeater.count
 				height: parent ? parent.height : 0
 				background: AsymmetricRoundedRectangle {
@@ -60,13 +60,13 @@ FocusScope {
 
 					width: root.width / buttonRepeater.count
 					height: parent ? parent.height : 0
-					color: modelData.enabled === false && model.index !== root.currentIndex
+					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_background_disabled
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
 							  ? Theme.color_ok
 							  : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
-					border.color: (modelData.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
+					border.color: (mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
 					radius: Theme.geometry_button_radius
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
@@ -86,7 +86,7 @@ FocusScope {
 					width: parent.width - 2*x
 					elide: Text.ElideRight
 					text: modelData.value
-					color: modelData.enabled === false && model.index !== root.currentIndex
+					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_font_disabled
 						   : (mouseArea.pressed || model.index === root.currentIndex
 							  ? Theme.color_button_down_text
