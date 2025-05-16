@@ -267,6 +267,10 @@ FocusScope {
 					   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
 			source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
 						"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+
+			TapHandler {
+				onTapped: pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+			}
 		}
 	}
 
