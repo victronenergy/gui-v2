@@ -26,6 +26,7 @@ class BackendConnection : public QObject
 	QML_SINGLETON
 	Q_PROPERTY(State state READ state NOTIFY stateChanged FINAL)
 	Q_PROPERTY(HeartbeatState heartbeatState READ heartbeatState NOTIFY heartbeatStateChanged FINAL)
+	Q_PROPERTY(VrmPortalMode vrmPortalMode READ vrmPortalMode NOTIFY vrmPortalModeChanged FINAL)
 	Q_PROPERTY(SourceType type READ type NOTIFY typeChanged FINAL)
 	Q_PROPERTY(MqttClientError mqttClientError READ mqttClientError NOTIFY mqttClientErrorChanged FINAL)
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged FINAL)
@@ -70,6 +71,15 @@ public:
 	};
 	Q_ENUM(HeartbeatState)
 
+	// Same as VeQItemMqttProducer::VrmPortalMode
+	enum VrmPortalMode {
+		Unknown = -1,
+		Off = 0,
+		ReadOnly = 1,
+		Full = 2
+	};
+	Q_ENUM(VrmPortalMode)
+
 	enum MqttClientError {
 		MqttClient_NoError = QMqttClient::NoError,
 		MqttClient_InvalidProtocolVersion = QMqttClient::InvalidProtocolVersion,
@@ -88,6 +98,7 @@ public:
 
 	State state() const;
 	HeartbeatState heartbeatState() const;
+	VrmPortalMode vrmPortalMode() const;
 	MqttClientError mqttClientError() const;
 
 	void loadConfiguration();
@@ -161,6 +172,7 @@ public:
 Q_SIGNALS:
 	void stateChanged();
 	void heartbeatStateChanged();
+	void vrmPortalModeChanged();
 	void typeChanged();
 	void mqttClientErrorChanged();
 	void usernameChanged();
@@ -184,6 +196,7 @@ private:
 	void setState(bool connected);
 	void setHeartbeatState(HeartbeatState backendHeartbeatState);
 	void setHeartbeatState(VeQItemMqttProducer::HeartbeatState backendHeartbeatState);
+	void setVrmPortalMode(VeQItemMqttProducer::VrmPortalMode backendVrmPortalMode);
 	void mqttErrorChanged();
 	void addSettings(VeQItemSettingsInfo *info);
 
@@ -207,6 +220,7 @@ private:
 
 	State m_state = BackendConnection::State::Idle;
 	HeartbeatState m_heartbeatState = BackendConnection::HeartbeatState::HeartbeatActive;
+	VrmPortalMode m_vrmPortalMode = BackendConnection::VrmPortalMode::Unknown;
 	SourceType m_type = UnknownSource;
 	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
 
