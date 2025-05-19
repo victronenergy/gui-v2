@@ -51,8 +51,8 @@ Page {
 			ListNavigation {
 				//% "Mobile Network"
 				text: qsTrId("pagesettingsconnectivity_mobile_network")
-				//% "No GSM modem connected"
-				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_gsm_modem_connected")
+				//% "No cellular modem connected"
+				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
 
 				VeQuickItem {
