@@ -36,8 +36,8 @@ Page {
 			id: notConnected
 
 			ListItem {
-				//% "No GSM modem connected"
-				text: qsTrId("page_settings_no_gsm_modem_connected")
+				//% "Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity."
+				text: qsTrId("page_settings_connect_cellular_modem")
 			}
 		}
 
