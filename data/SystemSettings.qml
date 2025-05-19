@@ -11,6 +11,8 @@ QtObject {
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
+			// The needsOnboarding setting can't be updated in ReadOnly mode, so never show onboarding in that case.
+			&& (Qt.platform.os !== "wasm" || !BackendConnection.vrm || BackendConnection.vrmPortalMode !== BackendConnection.ReadOnly)
 			// It's hard to skip onboarding without touch, so disable onboarding if touch is disabled.
 			&& _touchEnabled.valid && _touchEnabled.value !== 0
 

@@ -147,6 +147,17 @@ void BackendConnection::setHeartbeatState(VeQItemMqttProducer::HeartbeatState ba
 	}
 }
 
+BackendConnection::VrmPortalMode BackendConnection::vrmPortalMode() const
+{
+	return m_vrmPortalMode;
+}
+
+void BackendConnection::setVrmPortalMode(VeQItemMqttProducer::VrmPortalMode backendVrmPortalMode)
+{
+	m_vrmPortalMode = static_cast<BackendConnection::VrmPortalMode>(backendVrmPortalMode);
+	emit vrmPortalModeChanged();
+}
+
 BackendConnection::MqttClientError BackendConnection::mqttClientError() const
 {
 	return MqttClientError(m_mqttClientError);
@@ -300,6 +311,9 @@ void BackendConnection::initMqttConnection(const QString &address)
 	});
 	connect(mqttProducer, &VeQItemMqttProducer::heartbeatStateChanged, this, [mqttProducer, this] {
 		setHeartbeatState(mqttProducer->heartbeatState());
+	});
+	connect(mqttProducer, &VeQItemMqttProducer::vrmPortalModeChanged, this, [mqttProducer, this] {
+		setVrmPortalMode(mqttProducer->vrmPortalMode());
 	});
 	connect(mqttProducer, &VeQItemMqttProducer::errorChanged,
 		this, &BackendConnection::mqttErrorChanged);
