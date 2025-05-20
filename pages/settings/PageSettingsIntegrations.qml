@@ -157,11 +157,14 @@ Page {
 							model: digitalModel
 
 							delegate: ListRadioButtonGroup {
-								//: %1 = number of the digital input
-								//% "Digital input %1"
-								text: qsTrId("settings_io_digital_input").arg(model.uid.split('/').pop())
+								text: inputLabel.value || ""
 								dataItem.uid: model.uid + "/Type"
 								optionModel: delegateOptionModel
+
+								VeQuickItem {
+									id: inputLabel
+									uid: model.uid + "/Label"
+								}
 							}
 						}
 					}
