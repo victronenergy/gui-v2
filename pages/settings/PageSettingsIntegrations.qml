@@ -257,6 +257,8 @@ Page {
 					} else if (nodeRedModeItem.value === VenusOS.NodeRed_Mode_EnabledWithSafeMode) {
 						//% "Enabled (safe mode)"
 						return qsTrId("settings_large_enabled_safe_mode")
+					} else {
+						return ""
 					}
 				}
 				preferredVisible: nodeRedModeItem.valid
