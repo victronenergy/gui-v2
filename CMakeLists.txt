@@ -529,7 +529,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsHub4Feedin.qml
     pages/settings/PageSettingsHub4Peakshaving.qml
     pages/settings/PageSettingsIntegrations.qml
-    pages/settings/PageSettingsIo.qml
     pages/settings/PageSettingsLarge.qml
     pages/settings/PageSettingsLogger.qml
     pages/settings/PageSettingsModbus.qml
