@@ -64,6 +64,9 @@ Page {
 							QuantityObject { object: output; key: "typeText" }
 						}
 
+						// Do not show invalid outputs (e.g. those configured as inputs)
+						preferredVisible: output.state >= 0
+
 						SwitchableOutput {
 							id: output
 
