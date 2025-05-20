@@ -124,7 +124,8 @@ BaseListItem {
 		DimmingSlider {
 			id: slider
 
-			property real movedValue: NaN
+			property bool valueChangeKeyPressed
+			readonly property bool dragging: pressed || valueChangeKeyPressed
 
 			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
 			// toggles the on/off state and left/right keys move the slider.
@@ -158,43 +159,41 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			highlightColor: dimmingState.expectedValue === 1 ? Theme.color_ok : Theme.color_button_down
+			highlightColor: enabled
+				? (dimmingState.expectedValue === 1 ? Theme.color_ok : Theme.color_button_down)
+				: Theme.color_font_disabled
 			from: 1
 			to: 100
 			stepSize: 1
 
+			// On the MQTT backend, many consecutive changes can create a huge queue of backend
+			// changes. Avoid this by preventing changes until the backend is in sync.
+			enabled: !dimmingValue.busy || dragging
+
+			onDraggingChanged: {
+				if (!dragging) {
+					dimmingValue.syncBackendValueToSlider()
+				}
+			}
 			onClicked: {
 				_toggleState()
 			}
 			onMoved: {
 				value = Math.round(value)
-				output.setDimming(value)
-				movedValue = value
+				dimmingValue.writeValue(value)
 			}
 
-			Connections {
-				target: output
-				Component.onCompleted: slider.value = output.dimming
-
-				// Update the slider value from the backend. If the backend value is changing in
-				// response to slider user input, the backend change may lag behind the user change,
-				// so do not update the slider value until the slider and backend values are in
-				// sync, else the two values will fight each other.
-				function onDimmingChanged() {
-					if (isNaN(slider.movedValue)) {
-						// The slider was not moved, so the value change must have come from
-						// the backend independently, and the slider value can updated directly.
-						slider.value = output.dimming
-					} else if (slider.movedValue === Math.round(output.dimming)) {
-						// The user moved the slider and the backend is now up-to-date with the
-						// user-moved value, so clear the flag.
-						slider.movedValue = NaN
-					} else {
-						// The slider was moved, and the backend value changed in response, but
-						// the backend still has an older moved value from the UI, so ignore
-						// this as the backend is not yet up-to-date with the UI value.
-					}
+			Keys.onPressed: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = true
 				}
+				event.accepted = false
+			}
+			Keys.onReleased: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = false
+				}
+				event.accepted = false
 			}
 
 			Label {
@@ -212,6 +211,33 @@ BaseListItem {
 				id: dimmingState
 				backendValue: output.state
 				onUpdateToBackend: (value) => { output.setState(value) }
+			}
+
+			SettingSync {
+				id: dimmingValue
+
+				// Update the slider value to the backend value.
+				function syncBackendValueToSlider() {
+					// If user has interacted with the slider to change the value, delay briefly
+					// before syncing the slider to the backend value, else this may be done while
+					// user changes are still being written.
+					if (busy || slider.dragging || delayedSliderUpdate.running) {
+						delayedSliderUpdate.restart()
+					} else {
+						slider.value = backendValue
+					}
+				}
+
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+				onBackendValueChanged: syncBackendValueToSlider()
+				onBusyChanged: if (!busy) syncBackendValueToSlider()
+			}
+
+			Timer {
+				id: delayedSliderUpdate
+				interval: 1000
+				onTriggered: dimmingValue.syncBackendValueToSlider()
 			}
 		}
 	}
