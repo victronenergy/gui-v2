@@ -129,13 +129,10 @@ Page {
 				preferredVisible: digitalModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 
-				VeQItemSortTableModel {
+				VeQItemTableModel {
 					id: digitalModel
-					filterRegExp: "/[1-9]$"
-					model: VeQItemTableModel {
-						uids: [ Global.systemSettings.serviceUid + "/Settings/DigitalInput" ]
-						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-					}
+					uids: [ BackendConnection.serviceUidForType("digitalinputs") + "/Devices" ]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 				}
 
 				Component {
