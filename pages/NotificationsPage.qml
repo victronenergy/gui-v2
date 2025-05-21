@@ -12,7 +12,7 @@ SwipeViewPage {
 
 	//% "Notifications"
 	navButtonText: qsTrId("nav_notifications")
-	navButtonIcon: Global.notifications?.navBarNotificationCounterVisible ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
+	navButtonIcon: Global.notifications?.hasActiveOrUnAcknowledged ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	activeFocusOnTab: true
@@ -47,8 +47,7 @@ SwipeViewPage {
 
 			function _acknowledge() {
 				// we have access to the BaseNotification via the notification role
-				// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
-				(notifDelegate.notification as Notification)?.updateAcknowledged(true)
+				notifDelegate.notification.updateAcknowledged(true)
 			}
 
 			Keys.onSpacePressed: {

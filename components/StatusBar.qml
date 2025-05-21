@@ -259,13 +259,13 @@ FocusScope {
 			id: notificationIcon
 
 			anchors.verticalCenter: parent.verticalCenter
-			visible: Global.notifications?.statusBarNotificationIconVisible ?? false
-			color: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
+			visible: Global.notifications?.hasActiveOrUnAcknowledged ?? false
+			color: Global.notifications?.notificationPriority === VenusOS.Notification_Alarm
 				   ? Theme.color_critical
-				   : Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
+				   : Global.notifications?.notificationPriority === VenusOS.Notification_Warning
 					 ? Theme.color_warning :
-					   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
-			source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
+					   Global.notifications?.notificationPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
+			source: Global.notifications?.notificationPriority === VenusOS.Notification_Info ?
 						"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
 	}
@@ -287,7 +287,7 @@ FocusScope {
 			right: rightSideRow.right
 			verticalCenter: parent.verticalCenter
 		}
-		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
+		enabled: notificationButtonsEnabled && (Global.notifications?.hasUnAcknowledged ?? false)
 		backgroundColor: Theme.color_critical_background
 		downColor: Theme.color_critical
 		highlightMargins: -(4 * Theme.geometry_button_border_width) // ensure highlight border can be seen against critical backgroundColor

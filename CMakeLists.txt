@@ -437,6 +437,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/EvCharger.qml
     data/common/Generator.qml
     data/common/GensetErrorModel.qml
+    data/common/InjectedNotification.qml
     data/common/Inverter.qml
     data/common/InverterCharger.qml
     data/common/Notification.qml
