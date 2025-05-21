@@ -14,7 +14,7 @@ QtObject {
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
 			createCharger({
-				position: i % 2 === 0 ? VenusOS.Evcs_Position_ACInput : VenusOS.Evcs_Position_ACOutput,
+				position: i % 2 === 0 ? VenusOS.AcPosition_AcInput : VenusOS.AcPosition_AcOutput,
 				nrOfPhases: i + 1,
 				status: Math.floor(Math.random() * VenusOS.Evcs_Status_Charged),
 				mode: Math.floor(Math.random() * VenusOS.Evcs_Mode_Scheduled),

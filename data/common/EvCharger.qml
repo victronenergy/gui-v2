@@ -13,7 +13,7 @@ Device {
 	readonly property int mode: _mode.valid ? _mode.value : -1
 	readonly property bool connected: _connected.value === 1
 	readonly property int chargingTime: _chargingTime.value || 0
-	readonly property int position: _position.valid ? _position.value : VenusOS.Evcs_Position_Unknown
+	readonly property int position: _position.valid ? _position.value : VenusOS.AcPosition_Unknown
 
 	readonly property real energy: _energy.valid ? _energy.value : NaN
 	readonly property real power: _power.valid ? _power.value : NaN

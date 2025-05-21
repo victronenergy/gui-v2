@@ -14,7 +14,7 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListEvChargerPositionRadioButtonGroup {
+			ListAcInPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
 			}
 

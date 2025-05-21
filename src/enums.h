@@ -698,12 +698,12 @@ public:
 	};
 	Q_ENUM(Evcs_Mode)
 
-	enum Evcs_Position {
-		Evcs_Position_ACOutput,
-		Evcs_Position_ACInput,
-		Evcs_Position_Unknown = 100
+	enum AcPosition {
+		AcPosition_AcOutput,
+		AcPosition_AcInput,
+		AcPosition_Unknown = 100
 	};
-	Q_ENUM(Evcs_Position)
+	Q_ENUM(AcPosition)
 
 	enum PvInverter_StatusCode {
 		PvInverter_StatusCode_Startup0,

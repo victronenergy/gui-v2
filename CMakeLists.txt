@@ -344,9 +344,9 @@ set (VENUS_QML_MODULE_SOURCES
     components/listitems/ListLink.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
+    components/listitems/ListAcInPositionRadioButtonGroup.qml
     components/listitems/ListOutputBatteryRadioButtonGroup.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
-    components/listitems/ListEvChargerPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
     components/listitems/ListResetHistory.qml

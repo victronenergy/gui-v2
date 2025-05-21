@@ -234,7 +234,7 @@ QtObject {
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcInput },
 				]
 			}
 		},
@@ -243,7 +243,7 @@ QtObject {
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACOutput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcOutput },
 				]
 			}
 		},
@@ -252,8 +252,8 @@ QtObject {
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACInput },
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACOutput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcOutput },
 				]
 			}
 		},
@@ -262,8 +262,8 @@ QtObject {
 			system: { showInputLoads: true, hasAcOutSystem: 0, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACInput },
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACOutput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcOutput },
 				]
 			}
 		},
@@ -272,8 +272,8 @@ QtObject {
 			system: { showInputLoads: false, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACInput },
-					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.Evcs_Position_ACOutput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcInput },
+					{ status: VenusOS.Evcs_Status_Charging, position: VenusOS.AcPosition_AcOutput },
 				]
 			}
 		},
