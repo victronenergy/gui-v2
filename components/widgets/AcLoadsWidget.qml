@@ -19,7 +19,6 @@ AcWidget {
 	type: VenusOS.OverviewWidget_Type_AcLoads
 	quantityLabel.dataObject: root.measurements
 	phaseCount: root.measurements.phases.count
-	enabled: false
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
 		model: root.measurements.phases
 		widgetSize: root.size
@@ -28,4 +27,9 @@ AcWidget {
 		maximumValue: Global.system.load.maximumAcCurrent
 	}
 	extraContentLoader.active: root.phaseCount > 1 || root.measurements.l2AndL1OutSummed
+
+	// Heat pumps with Position=1 (AC input) are considered as "AC Loads", so they are
+	// accessible from this AC Loads widget.
+	enabled: Global.allDevicesModel.heatPumpInputDevices.count > 0
+	onClicked: openDevicePageOrList(Global.allDevicesModel.heatPumpInputDevices)
 }
