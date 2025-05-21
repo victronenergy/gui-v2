@@ -57,12 +57,16 @@ Page {
 				}
 			}
 
-			ListSwitch {
-				//% "NMEA2000-out"
-				text: qsTrId("settings_canbus_nmea2000out")
-				dataItem.uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
-				preferredVisible: root._isVecan
-			}
+			ListNavigation {
+                                //% "NMEA2000-out"
+                                text: qsTrId("settings_canbus_nmea2000out")
+                                onClicked: {
+                                        Global.pageManager.pushPage("/pages/settings/PageSettingsCanbusN2KGateway.qml",
+                                                { canbusProfile: canbusProfile, title: qsTrId("settings_canbus_nmea2000out")})
+                                }
+                                preferredVisible: root._isVecan
+                        }
+
 
 			ListSpinBox {
 				//% "Unique identity number selector"
