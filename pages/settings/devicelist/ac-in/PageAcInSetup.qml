@@ -93,8 +93,10 @@ Page {
 			}
 
 			ListAcInPositionRadioButtonGroup {
-				dataItem.uid: root.bindPrefix + "/Position"
-				preferredVisible: role.currentValue === "evcharger"
+				bindPrefix: root.bindPrefix
+				preferredVisible: role.currentValue === "acload"
+						|| role.currentValue === "evcharger"
+						|| role.currentValue === "heatpump"
 			}
 
 			/* EM24 settings */
