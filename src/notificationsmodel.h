@@ -44,7 +44,6 @@ public:
 
 	Q_INVOKABLE void insertNotification(Victron::VenusOS::BaseNotification *notification);
 	Q_INVOKABLE void removeNotification(Victron::VenusOS::BaseNotification *notification);
-	Q_INVOKABLE void removeNotification(int notificationId);
 	Q_INVOKABLE void reset();
 
 	void insert(const int index, BaseNotification *newNotification);

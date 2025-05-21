@@ -25,7 +25,7 @@ QtObject {
 	signal setSystemRequested(config : var)
 	signal setTanksRequested(config : var)
 	signal setShowInputLoadsRequested(split: bool)
-	signal addDummyNotification(isAlarm : bool)
+	signal addDummyNotification(isAlarm : bool, isInjected: bool)
 
 	readonly property var _configs: ({
 		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
@@ -176,11 +176,9 @@ QtObject {
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
 			break
 		case Qt.Key_N:
-			if (modifiers & Qt.ShiftModifier) {
-				root.addDummyNotification(true)
-			} else {
-				root.addDummyNotification(false)
-			}
+			// add ShiftModifier to specify type = "alarm"
+			// add ControlModifier to specify the notification should be "injected"
+			root.addDummyNotification(modifiers & Qt.ShiftModifier, modifiers & Qt.ControlModifier)
 			break
 		case Qt.Key_O:
 			const notifType = (modifiers & Qt.ShiftModifier)

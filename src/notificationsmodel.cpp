@@ -72,7 +72,7 @@ void NotificationsModel::insert(const int index, BaseNotification* notification)
 	m_data.insert(index, notification);
 
 	connect(notification, &BaseNotification::notificationIdChanged, this, &NotificationsModel::notificationIdChangedHandler);
-	connect(notification, &BaseNotification::acknowledgedChanged,       this, &NotificationsModel::acknowledgedChangedHandler);
+	connect(notification, &BaseNotification::acknowledgedChanged,   this, &NotificationsModel::acknowledgedChangedHandler);
 	connect(notification, &BaseNotification::activeChanged,         this, &NotificationsModel::activeChangedHandler);
 	connect(notification, &BaseNotification::typeChanged,           this, &NotificationsModel::typeChangedHandler);
 	connect(notification, &BaseNotification::dateTimeChanged,       this, &NotificationsModel::dateTimeChangedHandler);
@@ -102,18 +102,6 @@ void NotificationsModel::removeNotification(BaseNotification *notification)
 	}
 }
 
-void NotificationsModel::removeNotification(int notificationId)
-{
-	for (int i = 0; i < m_data.size(); ++i) {
-		const BaseNotification *notification = m_data.at(i);
-		if (notification && notification->notificationId() == notificationId) {
-			emit notificationRemoved(notification);
-			remove(i);
-			break;
-		}
-	}
-}
-
 void NotificationsModel::remove(int index)
 {
 	if (index < 0 || index >= m_data.count()) {
@@ -126,7 +114,7 @@ void NotificationsModel::remove(int index)
 		beginRemoveRows(QModelIndex(), index, index);
 
 		disconnect(notification, &BaseNotification::notificationIdChanged, this, &NotificationsModel::notificationIdChangedHandler);
-		disconnect(notification, &BaseNotification::acknowledgedChanged,       this, &NotificationsModel::acknowledgedChangedHandler);
+		disconnect(notification, &BaseNotification::acknowledgedChanged,   this, &NotificationsModel::acknowledgedChangedHandler);
 		disconnect(notification, &BaseNotification::activeChanged,         this, &NotificationsModel::activeChangedHandler);
 		disconnect(notification, &BaseNotification::typeChanged,           this, &NotificationsModel::typeChangedHandler);
 		disconnect(notification, &BaseNotification::dateTimeChanged,       this, &NotificationsModel::dateTimeChangedHandler);

@@ -45,7 +45,7 @@ QtObject {
 
 	property Connections _mockConn: Connections {
 		target: Global.mockDataSimulator
-		function onAddDummyNotification(isAlarm) {
+		function onAddDummyNotification(isAlarm, isInjected) {
 			const notifType = isAlarm
 							? VenusOS.Notification_Alarm
 							: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
@@ -55,18 +55,27 @@ QtObject {
 				type: notifType,
 				dateTime: new Date(),
 				deviceName: "Mock data simulator",
-				description: "NotificationId [%1]".arg(nextNotificationId),
+				// Injected Notifications don't have a notificationId
+				description: isInjected ? "Injected Notification" :
+										  "NotificationId [%1]".arg(nextNotificationId),
 				value: Math.round(Math.random() * 100) + "%"
 			}
-			addNotification(props)
+
+			addNotification(props, isInjected)
 		}
 	}
 
 	property Component notifComponent: Component {
 		Notification {
 			id: notification
-			onActiveChanged: root.updateNotifications()
-			onAcknowledgedChanged: root.updateNotifications()
+
+			// This is a mock Notification which requires the mocked paths
+			// to be updated with the correct path-based non-injected notification
+			// counters so we need to call updateNonInjectedNotificationCounts() here.
+			// All active/unacknowledged counters are driven by the sorted/filtered models
+			// and include injected and non-injected notifications.
+			onActiveChanged: root.updateNonInjectedNotificationCounts()
+			onAcknowledgedChanged: root.updateNonInjectedNotificationCounts()
 
 			property Timer inactiveTimer: Timer {
 				interval: 10000 * Math.random()
@@ -121,6 +130,7 @@ QtObject {
 		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
 		onValueChanged: {
 			if (!isNaN(value) && value === 1) {
+				// this loops round only the non-injected notifications
 				for (let i = 0 ; i < notifications.length; ++i) {
 					const notif = notifications[i]
 					notif.updateAcknowledged(true)
@@ -130,43 +140,55 @@ QtObject {
 		}
 	}
 
-	function addNotification(params) {
+	function addNotification(params: var, isInjected: bool) {
 
 		let notif = null
 
-		if (notifications.length < maxNotificationCount) {
-			// Add a new Notification object
-			notif = notifComponent.createObject(root, { notificationId: nextNotificationId })
-			notifications.push(notif)
+		if (isInjected) {
+
+			// Note: id, dateTime and value are omitted in the string format for injected notifications
+			// This means that the random generation of type may not always cause a unique "/Inject" value
+			// so not every keypress-based injection will cause a new injected notification.
+			Global.mockDataSimulator.setMockValue(Global.notifications.serviceUid + "/Inject",
+												  params.type + '\t' +
+												  params.deviceName + '\t' +
+												  params.description)
+
 		} else {
-			// Get an existing Notification from the notifications list to recycle.
-			// The recycled notification is going to re-use the same notificationId
-			notif = notifications[nextNotificationId]
+
+			if (notifications.length < maxNotificationCount) {
+				// Add a new Notification object
+				notif = notifComponent.createObject(root, { notificationId: nextNotificationId })
+				notifications.push(notif)
+			} else {
+				// Get an existing Notification from the notifications list to recycle.
+				// The recycled notification is going to re-use the same notificationId
+				notif = notifications[nextNotificationId]
+			}
+
+			// Update the VeQuickItem's values of the new or recycled Notification
+			// which updates the BaseNotification properties.
+			for (const p in params) {
+				const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
+				notif["_" + p].setValue(value)
+			}
+
+			// Whether we created a new Notification or recycled an existing one,
+			// we increment (or wrap) the nextNotificationId.
+			nextNotificationId = ((nextNotificationId + 1) === maxNotificationCount) ? 0 : (nextNotificationId + 1)
+
+			// (re)start the mock notification inactive timer since notifications can be recycled
+			if (Global.mockDataSimulator.timersActive) {
+				notif.inactiveTimer.restart()
+			}
+
+			root.updateNonInjectedNotificationCounts()
 		}
-
-		// Update the VeQuickItem's values of the new or recycled Notification
-		// which updates the BaseNotification properties.
-		for (const p in params) {
-			const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
-			notif["_" + p].setValue(value)
-		}
-
-		// Whether we created a new Notification or recycled an existing one,
-		// we increment (or wrap) the nextNotificationId.
-		nextNotificationId = ((nextNotificationId + 1) === maxNotificationCount) ? 0 : (nextNotificationId + 1)
-
-		// (re)start the mock notification inactive timer since notifications can be recycled
-		if (Global.mockDataSimulator.timersActive) {
-			notif.inactiveTimer.restart()
-		}
-
-		updateNotifications()
 	}
 
-	function updateNotifications() {
+	function updateNonInjectedNotificationCounts() {
 
-		// Note: since the notifications array is capped at 20,
-		// these counters will never exceed 20.
+		// These counters are for non-injected notifications only.
 
 		let activeCount = 0
 		let activeAlarmCount = 0
@@ -178,27 +200,35 @@ QtObject {
 
 		for (let i = 0 ; i < notifications.length; ++i) {
 			const notif = notifications[i]
-			if (notif.active) {
-				activeCount++
 
-				if (notif.type === VenusOS.Notification_Alarm) {
-					activeAlarmCount++
-				} else if (notif.type === VenusOS.Notification_Warning) {
-					activeWarningCount++
-				} else if (notif.type === VenusOS.Notification_Info) {
-					activeInformationCount++
+			if (notif instanceof Notification) {
+
+				if (notif.active) {
+					activeCount++
+
+					if (notif.type === VenusOS.Notification_Alarm) {
+						activeAlarmCount++
+					} else if (notif.type === VenusOS.Notification_Warning) {
+						activeWarningCount++
+					} else if (notif.type === VenusOS.Notification_Info) {
+						activeInformationCount++
+					}
 				}
-			}
-			if (!notif.acknowledged) {
-				if (notif.type === VenusOS.Notification_Alarm) {
-					unAcknowledgedAlarmCount++
-				} else if (notif.type === VenusOS.Notification_Warning) {
-					unAcknowledgedWarningCount++
-				} else if (notif.type === VenusOS.Notification_Info) {
-					unAcknowledgedInformationCount++
+				if (!notif.acknowledged) {
+					if (notif.type === VenusOS.Notification_Alarm) {
+						unAcknowledgedAlarmCount++
+					} else if (notif.type === VenusOS.Notification_Warning) {
+						unAcknowledgedWarningCount++
+					} else if (notif.type === VenusOS.Notification_Info) {
+						unAcknowledgedInformationCount++
+					}
 				}
+
+			} else if (notif instanceof InjectedNotification) {
+				console.log("counting injected notifications")
 			}
 		}
+
 		_numberOfActiveNotifications.setValue(activeCount)
 		_numberOfNotifications.setValue(notifications.length)
 		_numberOfActiveAlarms.setValue(activeAlarmCount)
@@ -211,7 +241,7 @@ QtObject {
 
 	function populate() {
 		for (let i = 0; i < dummyNotifications.length; ++i) {
-			addNotification(dummyNotifications[i])
+			addNotification(dummyNotifications[i], false)
 		}
 	}
 

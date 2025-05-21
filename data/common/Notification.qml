@@ -48,13 +48,13 @@ BaseNotification {
 										   && _dateTime.value !== undefined
 	on_CanInitializeChanged: _init()
 
-	function updateAcknowledged(acknowledged: bool) {
-		_acknowledged.setValue(acknowledged ? 1 : 0)
-	}
+	onUpdateAcknowledged: (acknowledged) => {
+							  _acknowledged.setValue(acknowledged ? 1 : 0)
+						  }
 
-	function updateActive(active: bool) {
-		_active.setValue(active ? 1 : 0)
-	}
+	onUpdateActive: (active) => {
+						_active.setValue(active ? 1 : 0)
+					}
 
 	function _init() {
 		if (!Global.notifications.allNotificationsModel || !_canInitialize) {

@@ -11,10 +11,6 @@ QtObject {
 
 	readonly property string serviceUid: "%1/Notifications".arg(BackendConnection.serviceUidForType("platform"))
 
-	readonly property int activeOrUnAcknowledgedCount: Math.max(alarms.activeCount, alarms.unAcknowledgedCount)
-			+ Math.max(warnings.activeCount, warnings.unAcknowledgedCount)
-			+ Math.max(informations.activeCount, informations.unAcknowledgedCount)
-
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
 		onNotificationUpdated: (notification) => toastedNotification.onNotificationUpdated(notification)
 		onNotificationRemoved: (notification) => toastedNotification.onNotificationRemoved(notification)
@@ -117,80 +113,74 @@ QtObject {
 
 	function acknowledgeAll() {
 		_acknowledgeAll.setValue(1)
+
+		// ensure that the injected notifications are also acknowledged in this case
+		for (let i = 0 ; i < _injectedNotifications.length; ++i) {
+			const notif = _injectedNotifications[i]
+			notif.updateAcknowledged(true)
+			// since injected notifications don't have the idea
+			// of being active or not, we set it active: false
+			// when it is acknowledged for now.
+			notif.updateActive(false)
+		}
 	}
 
 	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
 		uid: root.serviceUid + "/AcknowledgeAll"
 	}
 
-	readonly property bool statusBarNotificationIconVisible: activeOrUnAcknowledgedCount > 0
-	readonly property int statusBarNotificationIconPriority: alarms.hasActive || !alarms.hasActive && alarms.hasUnAcknowledged ? VenusOS.Notification_Alarm :
-																																warnings.hasActive || !warnings.hasActive && warnings.hasUnAcknowledged ? VenusOS.Notification_Warning :
-																																																		  informations.hasActive || !informations.hasActive && informations.hasUnAcknowledged ? VenusOS.Notification_Info : -1
-	readonly property bool silenceAlarmVisible: alarms.hasUnAcknowledged ||
-												warnings.hasUnAcknowledged ||
-												informations.hasUnAcknowledged
-	readonly property bool navBarNotificationCounterVisible: activeOrUnAcknowledgedCount > 0
+	readonly property int activeOrUnAcknowledgedCount: activeOrUnAcknowledged.count
+	readonly property bool hasActiveOrUnAcknowledged: activeOrUnAcknowledgedCount > 0
+	readonly property bool hasActiveAlarms: activeAlarms.count > 0
+	readonly property bool hasUnAcknowledged: unAcknowledged.count > 0
+	readonly property int notificationPriority: activeOrUnAcknowledgedAlarms.count > 0 ? VenusOS.Notification_Alarm :
+																						 activeOrUnAcknowledgedWarnings.count > 0 ? VenusOS.Notification_Warning :
+																																	activeOrUnAcknowledgedInformations.count > 0 ? VenusOS.Notification_Info : -1
 
-	component NotificationData: QtObject {
-		property int activeCount: 0
-		property int unAcknowledgedCount: 0
-
-		readonly property bool hasActive: activeCount > 0
-		readonly property bool hasUnAcknowledged: unAcknowledgedCount > 0
-
-		default property list<VeQuickItem> dataItems
+	property NotificationSortFilterProxyModel unAcknowledged: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return !notification.acknowledged }
+	}
+	property NotificationSortFilterProxyModel activeOrUnAcknowledged: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.active || !notification.acknowledged }
+	}
+	property NotificationSortFilterProxyModel activeAlarms: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && notification.active }
+	}
+	property NotificationSortFilterProxyModel activeOrUnAcknowledgedAlarms: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Alarm && (notification.active || !notification.acknowledged) }
+	}
+	property NotificationSortFilterProxyModel activeOrUnAcknowledgedWarnings: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Warning && (notification.active || !notification.acknowledged) }
+	}
+	property NotificationSortFilterProxyModel activeOrUnAcknowledgedInformations: NotificationSortFilterProxyModel {
+		sourceModel: allNotificationsModel
+		filterFunction: (notification) => { return notification.type === VenusOS.Notification_Info && (notification.active || !notification.acknowledged) }
 	}
 
-	readonly property NotificationData alarms: NotificationData {
-		activeCount: numberOfActiveAlarms.valid ? numberOfActiveAlarms.value : 0
-		unAcknowledgedCount: numberOfUnAcknowledgedAlarms.valid ? numberOfUnAcknowledgedAlarms.value : 0
+	property Component injectedNotificationComponent: Component {
+		InjectedNotification {
+			id: injectedNotification
 
-		VeQuickItem {
-			id: numberOfActiveAlarms
-			// including both acknowledged or unAcknowledged alarms
-			uid: root.serviceUid + "/NumberOfActiveAlarms"
-		}
-
-		VeQuickItem {
-			id: numberOfUnAcknowledgedAlarms
-			// including both active or inactive alarms
-			uid: root.serviceUid + "/NumberOfUnAcknowledgedAlarms"
-		}
-	}
-
-	readonly property NotificationData warnings: NotificationData {
-		activeCount: numberOfActiveWarnings.valid ? numberOfActiveWarnings.value : 0
-		unAcknowledgedCount: numberOfUnAcknowledgedWarnings.valid ? numberOfUnAcknowledgedWarnings.value : 0
-
-		VeQuickItem {
-			id: numberOfActiveWarnings
-			// including both acknowledged or unAcknowledged warnings
-			uid: root.serviceUid + "/NumberOfActiveWarnings"
-		}
-
-		VeQuickItem {
-			id: numberOfUnAcknowledgedWarnings
-			// including both active or inactive warnings
-			uid: root.serviceUid + "/NumberOfUnAcknowledgedWarnings"
+			// This is an injected Notification.
+			// All active/unacknowledged counters are driven by the sorted/filtered models
+			// and include injected and non-injected notifications
 		}
 	}
 
-	readonly property NotificationData informations: NotificationData {
-		activeCount: numberOfActiveInformations.valid ? numberOfActiveInformations.value : 0
-		unAcknowledgedCount: numberOfUnAcknowledgedInformations.valid ? numberOfUnAcknowledgedInformations.value : 0
+	property list<InjectedNotification> _injectedNotifications: []
 
-		VeQuickItem {
-			id: numberOfActiveInformations
-			// including both acknowledged or unAcknowledged informations
-			uid: root.serviceUid + "/NumberOfActiveInformations"
-		}
-
-		VeQuickItem {
-			id: numberOfUnAcknowledgedInformations
-			// including both active or inactive informations
-			uid: root.serviceUid + "/NumberOfUnAcknowledgedInformations"
-		}
+	readonly property VeQuickItem _injected: VeQuickItem {
+		uid: root.serviceUid + "/Inject"
+		onValueChanged: if (value !== undefined) {
+							// Note: injected notifications don't have an id
+							let notif = injectedNotificationComponent.createObject(root, { text: value })
+							_injectedNotifications.push(notif)
+						}
 	}
 
 	Component.onCompleted: {

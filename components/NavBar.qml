@@ -96,7 +96,7 @@ FocusScope {
 						count: Global.notifications?.activeOrUnAcknowledgedCount ?? 0
 					}
 					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
-							&& (Global.notifications?.navBarNotificationCounterVisible ?? false)
+							&& (Global.notifications?.hasActiveOrUnAcknowledged ?? false)
 				}
 			}
 		}
