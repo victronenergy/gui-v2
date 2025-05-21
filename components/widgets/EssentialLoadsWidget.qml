@@ -15,7 +15,6 @@ AcWidget {
 	type: VenusOS.OverviewWidget_Type_EssentialLoads
 	quantityLabel.dataObject: Global.system.load.acOut
 	phaseCount: Global.system.load.acOut.phases.count
-	enabled: false
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
 		model: Global.system.load.acOut.phases
 		widgetSize: root.size
@@ -24,4 +23,9 @@ AcWidget {
 		maximumValue: Global.system.load.maximumAcCurrent
 	}
 	extraContentLoader.active: root.phaseCount > 1 || Global.system.load.acOut.l2AndL1OutSummed
+
+	// Heat pumps with Position=0 (AC output) are considered as "Essential Loads", so they are
+	// accessible from this AC Loads widget.
+	enabled: Global.allDevicesModel.heatPumpOutputDevices.count > 0
+	onClicked: openDevicePageOrList(Global.allDevicesModel.heatPumpOutputDevices)
 }

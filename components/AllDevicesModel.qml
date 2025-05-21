@@ -34,7 +34,8 @@ AggregateDeviceModel {
 		gridDevices,
 		gensetDevices,
 		acLoadDevices,
-		heatPumpDevices
+		heatPumpInputDevices,
+		heatPumpOutputDevices,
 
 	].concat(Global.tanks.allTankModels)
 
@@ -73,9 +74,12 @@ AggregateDeviceModel {
 		modelId: "genset"
 	}
 
-	readonly property ServiceDeviceModel heatPumpDevices: ServiceDeviceModel {
-		serviceType: "heatpump"
-		modelId: "heatpump"
+	readonly property ServiceDeviceModel heatPumpInputDevices: HeatPumpModel {
+		position: VenusOS.AcPosition_AcInput
+	}
+
+	readonly property ServiceDeviceModel heatPumpOutputDevices: HeatPumpModel {
+		position: VenusOS.AcPosition_AcOutput
 	}
 
 	readonly property ServiceDeviceModel meteoDevices: ServiceDeviceModel {

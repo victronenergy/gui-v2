@@ -11,12 +11,13 @@ QtObject {
 
 	property int mockDeviceCount
 
-	function populate() {
+	function populate(position) {
 		const deviceInstanceNum = mockDeviceCount++
-		heatPumpComponent.createObject(root, {
+		const heatPump = heatPumpComponent.createObject(root, {
 			serviceUid: "mock/com.victronenergy.heatpump.ttyUSB" + deviceInstanceNum,
 			deviceInstance: deviceInstanceNum,
 		})
+		BackendConnection.setMockValue(heatPump.serviceUid + "/Position", position)
 	}
 
 	property Component heatPumpComponent: Component {
@@ -26,11 +27,14 @@ QtObject {
 				_customName.setValue("Heat Pump %1".arg(deviceInstance))
 				_productId.setValue(0x01) // set a non-empty value so that PageAcIn.qml shows some content
 				BackendConnection.setMockValue(serviceUid + "/Ac/Power", Math.random() * 100)
+				BackendConnection.setMockValue(serviceUid + "/AllowedRoles", Global.acInputs.roles.map((r) => { return r.role }))
+				BackendConnection.setMockValue(serviceUid + "/Role", "heatpump")
 			}
 		}
 	}
 
 	Component.onCompleted: {
-		populate()
+		populate(VenusOS.AcPosition_AcInput)
+		populate(VenusOS.AcPosition_AcOutput)
 	}
 }

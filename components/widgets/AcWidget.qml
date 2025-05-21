@@ -12,6 +12,18 @@ OverviewWidget {
 	property int phaseCount
 	readonly property alias extraContentLoader: extraContentLoader
 
+	function openDevicePage(serviceUid) {
+		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", { bindPrefix: serviceUid })
+	}
+
+	function openDevicePageOrList(deviceModel) {
+		if (deviceModel.count > 1) {
+			Global.pageManager.pushPage(inputListComponent, { model: deviceModel })
+		} else if (deviceModel.count === 1) {
+			openDevicePage(deviceModel.firstObject.serviceUid)
+		}
+	}
+
 	quantityLabel.visible: !!quantityLabel.dataObject
 	preferredSize: phaseCount > 1 ? VenusOS.OverviewWidget_PreferredSize_PreferLarge : VenusOS.OverviewWidget_PreferredSize_Any
 
@@ -74,4 +86,40 @@ OverviewWidget {
 		]
 	}
 
+	Component {
+		id: inputListComponent
+
+		Page {
+			property alias model: deviceListView.model
+
+			title: root.title
+
+			GradientListView {
+				id: deviceListView
+
+				header: QuantityGroupListHeader {
+					quantityTitleModel: [
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
+					]
+				}
+
+				delegate: ListQuantityGroupNavigation {
+					required property Device device
+
+					text: device.name
+					tableMode: true
+					quantityModel: QuantityObjectModel {
+						QuantityObject { object: power; unit: VenusOS.Units_Watt }
+					}
+
+					VeQuickItem {
+						id: power
+						uid: device.serviceUid + "/Ac/Power"
+					}
+
+					onClicked: root.openDevicePage(device.serviceUid)
+				}
+			}
+		}
+	}
 }
