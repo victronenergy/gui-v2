@@ -78,10 +78,10 @@ QtObject {
 			if (model.count === 1) {
 				overallCurrent = evCharger.current
 			}
-			if (evCharger.position === VenusOS.Evcs_Position_ACInput) {
+			if (evCharger.position === VenusOS.AcPosition_AcInput) {
 				totalInputCount++
 				totalInputPower = Units.sumRealNumbers(totalInputPower, evCharger.power)
-			} else if (evCharger.position === VenusOS.Evcs_Position_ACOutput) {
+			} else if (evCharger.position === VenusOS.AcPosition_AcOutput) {
 				totalOutputCount++
 				totalOutputPower = Units.sumRealNumbers(totalOutputPower, evCharger.power)
 			}

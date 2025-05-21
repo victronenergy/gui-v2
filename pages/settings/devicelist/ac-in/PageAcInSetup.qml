@@ -92,7 +92,7 @@ Page {
 				preferredVisible: role.currentValue === "pvinverter"
 			}
 
-			ListEvChargerPositionRadioButtonGroup {
+			ListAcInPositionRadioButtonGroup {
 				dataItem.uid: root.bindPrefix + "/Position"
 				preferredVisible: role.currentValue === "evcharger"
 			}
