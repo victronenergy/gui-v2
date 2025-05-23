@@ -343,6 +343,7 @@ FocusScope {
 	// not focusable. So, find the first available button and focus that instead.
 	Connections {
 		target: Global.main
+		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
 				for (const button of [leftButton, auxButton, breadcrumbs, alarmButton, rightButton, sleepButton]) {
