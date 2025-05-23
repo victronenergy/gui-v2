@@ -74,7 +74,8 @@ QtObject {
 	}
 
 	function setState(value) {
-		_state.setValue(value)
+		// require integer state value.
+		_state.setValue(value > 0 ? 1 : 0)
 	}
 
 	//--- internal implementation below
