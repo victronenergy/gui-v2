@@ -54,7 +54,13 @@ Item {
 			width: outerGauge.strokeWidth
 			height: Theme.geometry_boatPage_centerGauge_needleHeight - radius / 2
 			radius: width / 2
-			color: Theme.color_boatPage_background
+			// https://github.com/victronenergy/gui-v2/issues/2158
+			// The boat page has a different background color to other pages when in 'Light Mode'
+			// If we set the needle color to Theme.color_boatPage_background (which is the same as the boat page background color)
+			// it looks fine usually, but when we change pages to eg. SettingsPage, the background color changes to
+			// SettingsPage.backgroundColor (slightly darker) for ~0.5 seconds while the boat page is still visible,
+			// making this needle color 'pop' out of the background briefly.
+			color: Global.mainView.currentPage.backgroundColor
 			transformOrigin: Item.Bottom
 			rotation: parent.progressAnimatedEndAngle
 
