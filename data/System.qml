@@ -13,7 +13,10 @@ QtObject {
 	readonly property int state: _systemState.valid ? _systemState.value : VenusOS.System_State_Off
 
 	readonly property bool hasGridMeter: _gridDeviceType.valid
-	readonly property bool hasAcOutSystem: _hasAcOutSystem.valid && _hasAcOutSystem.value === 1
+	readonly property bool hasAcOutSystem: _hasAcOutSystem.valid && _hasAcOutSystem.value === 1 // i.e. Essential loads
+	readonly property bool hasAcLoads: showInputLoads
+				? (load.acIn !== null && load.acIn !== undefined && !isNaN(load.acIn.power))
+				: (load.ac !== null && load.ac !== undefined && !isNaN(load.ac.power))
 	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
 	readonly property bool hasEss: hasVebusEss || _systemType.value === "AC System"
 	readonly property bool showInputLoads: load.acIn.hasPower

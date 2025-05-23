@@ -345,7 +345,10 @@ SwipeViewPage {
 	}
 
 	function _resetRightWidgets() {
-		let widgets = [acLoadsWidget]
+		let widgets = []
+		if (acLoadsWidget.visible) {
+			widgets.push(acLoadsWidget)
+		}
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
@@ -683,6 +686,8 @@ SwipeViewPage {
 	WidgetConnector {
 		id: inverterToAcLoadsConnector
 
+		visible: acLoadsWidget.visible
+
 		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		straighten: _rightWidgets.length === 1 ? VenusOS.WidgetConnector_Straighten_None : VenusOS.WidgetConnector_Straighten_EndToStart
@@ -743,6 +748,10 @@ SwipeViewPage {
 
 	AcLoadsWidget {
 		id: acLoadsWidget
+
+		visible: Global.system.hasAcLoads
+				|| Global.evChargers.model.count > 0
+				|| (Global.system.showInputLoads && Global.system.hasAcOutSystem)
 
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
