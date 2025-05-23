@@ -435,7 +435,7 @@
     "geometry_boatPage_shadow_topRow_topMargin": 119,
     "geometry_boatPage_shadow_bottomRow_topMargin": 296,
     "geometry_boatPage_shadow_horizontalMargin": 89,
-    "geometry_boatPage_batteryGauge_leftMargin": 25,
+    "geometry_boatPage_batteryGauge_leftMargin": 43,
     "geometry_boatPage_batteryGauge_verticalCenterOffset": 15,
     "geometry_boatPage_batteryGauge_strokeWidth": 15,
     "geometry_boatPage_topRow_horizontalMargin": 130,
