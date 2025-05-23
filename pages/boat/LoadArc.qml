@@ -14,9 +14,16 @@ Column {
 	required property Gps gps
 	required property MotorDrive motorDrive
 
+<<<<<<< HEAD:pages/boat/LoadArc.qml
 	readonly property int _rightGaugeCount: root.gps.valid && root.motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
 											: dcLoadGauge.active ? 2 // both AC & DC
 											: 1  // just AC. The AC load gauge is always active
+=======
+	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.valid ? 1 // just the motor drive
+											: dcLoadGauge.active && acLoadGauge.active ? 2 // both AC & DC
+											: dcLoadGauge.active || acLoadGauge.active ? 1 // one of AC or DC
+											: 0
+>>>>>>> c30db8ba (Don't display AC Loads gauge or widget if no AC loads exist):pages/boatpage/LoadArc.qml
 
 	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
 
@@ -47,7 +54,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: !motorDriveLoadGauge.active
+		active: !motorDriveLoadGauge.active && Global.system.hasAcLoads
 
 		sourceComponent: SideMultiGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)
@@ -79,7 +86,7 @@ Column {
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 		active: !motorDriveLoadGauge.active && Global.system.dc.hasPower
 		sourceComponent: SideGauge {
-			readonly property var gaugeParams: Gauges.rightGaugeParameters(1, _rightGaugeCount,)
+			readonly property var gaugeParams: Gauges.rightGaugeParameters(acLoadGauge.active ? 1 : 0, _rightGaugeCount, false)
 			// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
 			direction: PathArc.Counterclockwise
 			startAngle: gaugeParams.end
