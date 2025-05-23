@@ -144,7 +144,7 @@ FocusScope {
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
-				if (Global.notifications?.alarms.hasActive ?? false) {
+				if (Global.notifications?.hasActiveAlarms ?? false) {
 					Global.notificationLayer.popAndGoToNotifications()
 				} else {
 					root.loadStartPage()

@@ -66,6 +66,8 @@ signals:
 	void descriptionChanged();
 	void deviceNameChanged();
 	void valueChanged();
+	void updateAcknowledged(bool acknowledged);
+	void updateActive(bool active);
 
 private:
 	int m_notificationId = -1;
