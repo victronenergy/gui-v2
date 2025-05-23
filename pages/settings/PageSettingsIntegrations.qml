@@ -161,6 +161,12 @@ Page {
 								dataItem.uid: model.uid + "/Type"
 								optionModel: delegateOptionModel
 
+								// TODO ideally digitalModel would filter out offline items using
+								// VeQItemSortTableModel.FilterOffline, but currently those are only
+								// filtered out when the service is offline, rather than the leaf
+								// items.
+								preferredVisible: dataItem.valid
+
 								VeQuickItem {
 									id: inputLabel
 									uid: model.uid + "/Label"
