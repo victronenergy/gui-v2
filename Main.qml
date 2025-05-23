@@ -82,25 +82,26 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
-		Keys.onPressed: function(event) {
-			// When a navigation key is pressed and it is not handled by an item higher up in the
-			// UI item hierarchy, enable key navigation to allow guiLoader to get focus and receive
-			// key events.
-			if (!Global.keyNavigationEnabled) {
-				switch (event.key) {
-				case Qt.Key_Left:
-				case Qt.Key_Right:
-				case Qt.Key_Up:
-				case Qt.Key_Down:
-				case Qt.Key_Tab:
-				case Qt.Key_Backtab:
-					Global.keyNavigationEnabled = true
-					event.accepted = true
-					return
-				}
-			}
-			event.accepted = false
-		}
+		// #2161 Key nav is disabled for now
+		// Keys.onPressed: function(event) {
+		//     // When a navigation key is pressed and it is not handled by an item higher up in the
+		//     // UI item hierarchy, enable key navigation to allow guiLoader to get focus and receive
+		//     // key events.
+		//     if (!Global.keyNavigationEnabled) {
+		//         switch (event.key) {
+		//         case Qt.Key_Left:
+		//         case Qt.Key_Right:
+		//         case Qt.Key_Up:
+		//         case Qt.Key_Down:
+		//         case Qt.Key_Tab:
+		//         case Qt.Key_Backtab:
+		//             Global.keyNavigationEnabled = true
+		//             event.accepted = true
+		//             return
+		//         }
+		//     }
+		//     event.accepted = false
+		// }
 	}
 
 	Loader {
