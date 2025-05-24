@@ -46,10 +46,14 @@ ControlCard {
 		}
 
 		ListButton {
+			id: minSocLimit
+
 			//% "Minimum SOC"
 			text: qsTrId("ess_card_minimum_soc")
 			flat: true
 			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.ess.minimumStateOfCharge)
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& batteryLifeState.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 			Component {
@@ -60,9 +64,19 @@ ControlCard {
 					onAccepted: Global.ess.setMinimumStateOfChargeRequested(minimumStateOfCharge)
 				}
 			}
+
+			VeQuickItem {
+				id: batteryLifeState
+				uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+			}
+
+			VeQuickItem {
+				id: essMode
+				uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+			}
 		}
 
-		FlatListItemSeparator { visible: batteryLifeLimitWarning.visible}
+		FlatListItemSeparator { visible: minSocLimit.visible && batteryLifeLimitWarning.visible}
 
 		ListItem {
 			id: batteryLifeLimitWarning
