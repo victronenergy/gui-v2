@@ -50,5 +50,6 @@ SettingsColumn {
 		preferredVisible: maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
 		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
 		suffix: Units.defaultUnitString(VenusOS.Units_Amp)
+		from: 0
 	}
 }
