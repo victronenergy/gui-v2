@@ -41,6 +41,7 @@ class QuantityObject : public QObject
 	Q_PROPERTY(qreal numberValue READ numberValue NOTIFY numberValueChanged FINAL)
 	Q_PROPERTY(QString textValue READ textValue NOTIFY textValueChanged FINAL)
 	Q_PROPERTY(bool hasValue READ hasValue NOTIFY hasValueChanged FINAL)
+	Q_PROPERTY(bool hidden READ hidden WRITE setHidden NOTIFY hiddenChanged FINAL)
 
 public:
 	explicit QuantityObject(QObject *parent = nullptr);
@@ -60,6 +61,9 @@ public:
 	QVariant defaultValue() const;
 	void setDefaultValue(const QVariant &value);
 
+	bool hidden() const;
+	void setHidden(bool hidden);
+
 	qreal numberValue() const;  // NaN if the value is not a real type
 	QString textValue() const;  // empty if the value is not a string type
 	bool hasValue() const;
@@ -73,6 +77,7 @@ Q_SIGNALS:
 	void numberValueChanged();
 	void textValueChanged();
 	void hasValueChanged();
+	bool hiddenChanged();
 
 private Q_SLOTS:
 	void updateValue();
@@ -89,6 +94,7 @@ private:
 	Victron::VenusOS::Enums::Units_Type m_unit = Victron::VenusOS::Enums::Units_None;
 	int m_precision = Victron::VenusOS::Enums::Units_Precision_Default;
 	bool m_hasValue = false;
+	bool m_hidden = false;
 };
 
 } /* VenusOS */

@@ -352,12 +352,12 @@
 
     "geometry_quantityTable_row_height": 32,
     "geometry_quantityTable_bottomMargin": 14,
-    "geometry_quantityTable_horizontalSpacing": 18,
+    "geometry_quantityTable_horizontalSpacing_small": 12,
+    "geometry_quantityTable_horizontalSpacing_large": 48,
 
     "geometry_quantityTableSummary_verticalMargin": 8,
-    "geometry_quantityTableSummary_verticalSpacing": 4,
 
-    "geometry_quantityGroupRow_spacing": 4,
+    "geometry_quantityGroupRow_spacing": 12,
 
     "geometry_solarHistoryPage_tabBar_width": 260,
 
@@ -417,7 +417,6 @@
     "geometry_settingsListNavigation_height": 64,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
-    "geometry_vebusDeviceListPage_quantityTable_firstColumn_width": 39,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
 
     "geometry_batteryListPage_item_height": 84,

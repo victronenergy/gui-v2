@@ -53,8 +53,11 @@ Page {
 		section.delegate: QuantityGroupListHeader {
 			required property string section
 
-			firstColumnText: section === "pvinverter" ? CommonWords.pv_inverter : ""
-			quantityTitleModel: [
+			width: parent.width
+			metricsFontSize: Theme.font_size_body2 // align columns with those in the delegate
+			rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+			headerText: section === "pvinverter" ? CommonWords.pv_inverter : ""
+			model: [
 				{ text: section === "pvinverter" ? CommonWords.energy : CommonWords.yield_today, unit: VenusOS.Units_Energy_KiloWattHour },
 				{ text: CommonWords.voltage, unit: section === "pvinverter" ? VenusOS.Units_Volt_AC : VenusOS.Units_Volt_DC },
 				{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },

@@ -89,6 +89,19 @@ void QuantityObject::setDefaultValue(const QVariant &value)
 	}
 }
 
+bool QuantityObject::hidden() const
+{
+	return m_hidden;
+}
+
+void QuantityObject::setHidden(bool hidden)
+{
+	if (m_hidden != hidden) {
+		m_hidden = hidden;
+		emit hiddenChanged();
+	}
+}
+
 qreal QuantityObject::numberValue() const
 {
 	const QVariant &v = m_value.isValid() ? m_value : m_defaultValue;
