@@ -214,6 +214,10 @@ Page {
 		id: maxChargeVoltageItem
 		uid: root.bindPrefix + "/Info/MaxChargeVoltage"
 	}
+	VeQuickItem {
+		id: maxChargeCellVoltageItem
+		uid: root.bindPrefix + "/Info/MaxChargeCellVoltage"
+	}
 
 	VeQuickItem {
 		id: productId
@@ -394,6 +398,7 @@ Page {
 								precision: 3
 								valueColor: (chargeLimitationItem.valid && chargeLimitationItem.value.indexOf("Cell Voltage") !== -1)
 									|| (dischargeLimitationItem.valid && dischargeLimitationItem.value.indexOf("Cell Voltage") !== -1)
+									|| (maxChargeCellVoltageItem.valid && cellMaxItem.value > maxChargeCellVoltageItem.value)
 									? "#BF4845" : Theme.color_font_primary
 								font.pixelSize: 22
 							}
@@ -594,12 +599,18 @@ Page {
 				]
 			}
 
+			ListText {
+				//% "Charge Mode"
+				text: "Charge Mode"
+				secondaryText: chargeModeItem.valid ? chargeModeItem.value : "--"
+				preferredVisible: chargeModeItem.valid
+			}
+
 			ListQuantityGroup {
 				id: chargeLimitationFullItem
 				//% "Charge Voltage Limit (CVL)"
 				text: qsTrId("batteryparameters_charge_voltage_limit_cvl")
 				model: QuantityObjectModel {
-					QuantityObject { object: chargeModeItem }
 					QuantityObject { object: customDataObject; key: "name" }
 					QuantityObject { object: maxChargeVoltageItem; unit: VenusOS.Units_Volt_DC }
 				}
@@ -609,17 +620,12 @@ Page {
 					id: customDataObject
 					property string name: maxChargeCellVoltageItem.valid ? maxChargeCellVoltageItem.value.toFixed(3) + "V/cell" : "--"
 				}
-				VeQuickItem {
-					id: maxChargeCellVoltageItem
-					uid: root.bindPrefix + "/Info/MaxChargeCellVoltage"
-				}
 			}
 
 			ListQuantityGroup {
 				//% "Charge Voltage Limit (CVL)"
 				text: qsTrId("batteryparameters_charge_voltage_limit_cvl")
 				model: QuantityObjectModel {
-					QuantityObject { object: chargeModeItem; defaultValue: "--" }
 					QuantityObject { object: maxChargeVoltageItem; unit: VenusOS.Units_Volt_DC }
 				}
 				preferredVisible: !chargeLimitationFullItem.visible
