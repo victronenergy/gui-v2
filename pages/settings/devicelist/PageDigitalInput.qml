@@ -47,27 +47,25 @@ Page {
 					id: settingsComponent
 
 					Page {
-						readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + (deviceInstance.value || 0)
-
 						GradientListView {
 							model: VisibleItemModel {
 								ListSwitch {
 									id: alarmSwitch
 									//% "Enable alarm"
 									text: qsTrId("digitalinput_enable_alarm")
-									dataItem.uid: settingsBindPrefix + "/AlarmSetting"
+									dataItem.uid: root.bindPrefix + "/Settings/AlarmSetting"
 								}
 
 								ListSwitch {
 									//% "Inverted"
 									text: qsTrId("digitalinput_inverted")
-									dataItem.uid: settingsBindPrefix + "/InvertTranslation"
+									dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
 								}
 
 								ListSwitch {
 									//% "Invert alarm logic"
 									text: qsTrId("digitalinput_invert_alarm_logic")
-									dataItem.uid: settingsBindPrefix + "/InvertAlarm"
+									dataItem.uid: root.bindPrefix + "/Settings/InvertAlarm"
 									preferredVisible: alarmSwitch.checked
 								}
 							}
