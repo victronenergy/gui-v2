@@ -206,6 +206,11 @@
       <source>No Bluetooth adapter connected</source>
       <translation type="unfinished"/>
     </message>
+    <message id="page_settings_no_cellular_modem_connected">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
+      <source>No cellular modem connected</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_general">
       <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>General</source>
@@ -1519,11 +1524,10 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <source>Knots</source>
       <translation>Uzlů</translation>
     </message>
-    <message id="page_settings_no_gsm_modem_connected">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
+    <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
-      <source>No GSM modem connected</source>
-      <translation>Není připojen žádný GSM modem</translation>
+      <source>Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="page_settings_gsm_internet">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="51"/>
@@ -1826,23 +1830,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Feed-in limiting active</source>
       <translation>Omezení dodávky do sítě je aktivní</translation>
     </message>
-    <message id="settings_io_analog_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="32"/>
-      <source>Analog inputs</source>
-      <translation>Analogové vstupy</translation>
-    </message>
-    <message id="settings_io_digital_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="60"/>
-      <source>Digital inputs</source>
-      <translation>Digitální vstupy</translation>
-    </message>
-    <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="165"/>
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
-      <source>Digital input %1</source>
-      <extracomment>%1 = number of the digital input</extracomment>
-      <translation>Digitální vstup %1</translation>
-    </message>
     <message id="digitalinputs_type_pulsemeter">
       <location filename="../../src/enums.cpp" line="105"/>
       <source>Pulse meter</source>
@@ -1884,19 +1871,19 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>CO2 alarm</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="235"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
       <source>Signal K</source>
       <translation>Server Signál K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>Server Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="268"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
       <source>Enabled (safe mode)</source>
       <translation>Povoleno (bezpečný režim)</translation>
@@ -2655,7 +2642,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Nastavení režimu</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="118"/>
+      <location filename="../../data/SystemSettings.qml" line="120"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Samostatný</translation>
@@ -2711,7 +2698,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">Podřízený</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="102"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Podřízený</translation>
@@ -6635,25 +6622,25 @@ Chcete pokračovat?</translation>
       <translation>Dynamické ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="106"/>
+      <location filename="../../data/SystemSettings.qml" line="108"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Skupinový master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="110"/>
+      <location filename="../../data/SystemSettings.qml" line="112"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Master případu</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="114"/>
+      <location filename="../../data/SystemSettings.qml" line="116"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Master skupiny a případu</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="122"/>
+      <location filename="../../data/SystemSettings.qml" line="124"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Samostatný a skupinový master</translation>
@@ -6985,7 +6972,7 @@ Chcete pokračovat?</translation>
       <translation>Stav životnosti baterie</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
       <source>Access Signal K locally or via VRM</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
       <translation type="unfinished">Přístup k signálu K na adrese http://venus.local:3000 a prostřednictvím VRM.</translation>
@@ -8941,22 +8928,22 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation>Digitální I/O</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
       <source>Server Applications</source>
       <translation>Serverové aplikace</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
       <source>Modbus TCP Server</source>
       <translation>Server Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
       <source>Venus OS Large Features</source>
       <translation>Funkce zařízení Venus OS Large</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
       <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
@@ -8966,12 +8953,12 @@ Documentation at https://ve3.nl/vol</oldsource>
 Dokumentace na adrese https://ve3.nl/vol</translation>
     </message>
     <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
       <source>Victron Community</source>
       <translation type="unfinished">Komunita Victron</translation>
     </message>
@@ -9546,12 +9533,6 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <source>Device is not connected to VRM</source>
       <translation>Zařízení není připojeno k VRM</translation>
     </message>
-    <message id="evcs_ac_position">
-      <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
-      <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
-      <translation type="unfinished">Pozice</translation>
-    </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
       <source>Unknown</source>
@@ -9628,7 +9609,7 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <translation type="unfinished">Upozornění</translation>
     </message>
     <message id="switchable_output_press">
-      <location filename="../../components/SwitchableOutputDelegate.qml" line="229"/>
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="270"/>
       <source>Press</source>
       <translation type="unfinished"/>
     </message>
@@ -9673,7 +9654,7 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <translation type="unfinished"/>
     </message>
     <message id="page_switch_device_name">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="117"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="120"/>
       <source>Name</source>
       <translation type="unfinished">Název</translation>
     </message>
@@ -10053,7 +10034,7 @@ integritu firmwaru, než se obrátíte na podporu</translation>
       <translation type="unfinished">Loď</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="153"/>
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="159"/>
       <source>RPM</source>
       <translation type="unfinished"/>
     </message>

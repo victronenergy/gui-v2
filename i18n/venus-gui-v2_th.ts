@@ -206,6 +206,11 @@
       <source>No Bluetooth adapter connected</source>
       <translation type="unfinished"/>
     </message>
+    <message id="page_settings_no_cellular_modem_connected">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
+      <source>No cellular modem connected</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_general">
       <location filename="../../pages/SettingsPage.qml" line="42"/>
       <source>General</source>
@@ -1519,11 +1524,10 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <source>Knots</source>
       <translation>นอต</translation>
     </message>
-    <message id="page_settings_no_gsm_modem_connected">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="55"/>
+    <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
-      <source>No GSM modem connected</source>
-      <translation>ไม่มีโมเด็ม GSM เชื่อมต่ออยู่</translation>
+      <source>Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="page_settings_gsm_internet">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="51"/>
@@ -1826,23 +1830,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Feed-in limiting active</source>
       <translation>เปิดใช้งานการจำกัดการป้อนเข้า</translation>
     </message>
-    <message id="settings_io_analog_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="32"/>
-      <source>Analog inputs</source>
-      <translation>นำเข้าแบบอะนาล็อก</translation>
-    </message>
-    <message id="settings_io_digital_inputs">
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="60"/>
-      <source>Digital inputs</source>
-      <translation>นำเข้าแบบดิจิตอล</translation>
-    </message>
-    <message id="settings_io_digital_input">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="165"/>
-      <location filename="../../pages/settings/PageSettingsIo.qml" line="90"/>
-      <source>Digital input %1</source>
-      <extracomment>%1 = number of the digital input</extracomment>
-      <translation>อินพุตดิจิตอล %1</translation>
-    </message>
     <message id="digitalinputs_type_pulsemeter">
       <location filename="../../src/enums.cpp" line="105"/>
       <source>Pulse meter</source>
@@ -1884,19 +1871,19 @@ Use unless prohibited by the utility provider.</source>
       <translation>สัญญาณเตือน CO2</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="235"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
       <source>Signal K</source>
       <translation>สัญญาณ K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="252"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>โหนด-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="268"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
       <source>Enabled (safe mode)</source>
       <translation>เปิดใช้งาน (เซฟโหมด)</translation>
@@ -2655,7 +2642,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>การตั้งค่าโหมด</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="118"/>
+      <location filename="../../data/SystemSettings.qml" line="120"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>สแตนด์อโลน</translation>
@@ -2711,7 +2698,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">ตัวรอง</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="102"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>ตัวรอง</translation>
@@ -6633,25 +6620,25 @@ Do you want to continue?</source>
       <translation>ไดนามิก ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="106"/>
+      <location filename="../../data/SystemSettings.qml" line="108"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>กลุ่มตัวหลัก</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="110"/>
+      <location filename="../../data/SystemSettings.qml" line="112"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>อินสแตนซ์มาสเตอร์</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="114"/>
+      <location filename="../../data/SystemSettings.qml" line="116"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>ต้นแบบกลุ่มและอินสแตนซ์</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="122"/>
+      <location filename="../../data/SystemSettings.qml" line="124"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>สแตนด์อโลน &amp; หัวหน้ากลุ่ม</translation>
@@ -6983,7 +6970,7 @@ Do you want to continue?</source>
       <translation>สถานะอายุการใช้งานแบตเตอรี่</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
       <source>Access Signal K locally or via VRM</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
       <translation type="unfinished">เข้าถึงสัญญาณ K ได้ที่ http://venus.local:3000 และผ่าน VRM</translation>
@@ -8937,22 +8924,22 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>ดิจิทัลไอโอ</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
       <source>Server Applications</source>
       <translation>แอปพลิเคชันเซิร์ฟเวอร์</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
       <source>Modbus TCP Server</source>
       <translation>เซิร์ฟเวอร์ Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
       <source>Venus OS Large Features</source>
       <translation>Venus OS คุณสมบัติขนาดใหญ่</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
       <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
@@ -8962,12 +8949,12 @@ Documentation at https://ve3.nl/vol</oldsource>
 ดูเอกสารได้ที่ https://ve3.nl/vol</translation>
     </message>
     <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
       <source>Victron Community</source>
       <translation type="unfinished">ชุมชนวิคตรอน</translation>
     </message>
@@ -9541,12 +9528,6 @@ firmware integrity before contacting support</source>
       <source>Device is not connected to VRM</source>
       <translation/>
     </message>
-    <message id="evcs_ac_position">
-      <location filename="../../components/listitems/ListEvChargerPositionRadioButtonGroup.qml" line="12"/>
-      <source>Position</source>
-      <extracomment>EVCS AC input/output position</extracomment>
-      <translation type="unfinished">ตำแหน่ง</translation>
-    </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
       <source>Unknown</source>
@@ -9623,7 +9604,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">คำเตือน</translation>
     </message>
     <message id="switchable_output_press">
-      <location filename="../../components/SwitchableOutputDelegate.qml" line="229"/>
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="270"/>
       <source>Press</source>
       <translation type="unfinished"/>
     </message>
@@ -9668,7 +9649,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished"/>
     </message>
     <message id="page_switch_device_name">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="117"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="120"/>
       <source>Name</source>
       <translation type="unfinished">ชื่อ</translation>
     </message>
@@ -10048,7 +10029,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">เรือ</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="153"/>
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="159"/>
       <source>RPM</source>
       <translation type="unfinished"/>
     </message>
