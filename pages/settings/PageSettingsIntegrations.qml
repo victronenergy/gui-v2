@@ -129,10 +129,28 @@ Page {
 				preferredVisible: digitalModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(digitalInputsComponent, {"title": text})
 
-				VeQItemTableModel {
+				VeQItemSortTableModel {
 					id: digitalModel
-					uids: [ BackendConnection.serviceUidForType("digitalinputs") + "/Devices" ]
-					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+					sortColumn: childValues.sortValueColumn
+					dynamicSortFilter: true
+					filterFlags: VeQItemSortTableModel.FilterInvalid
+
+					model: VeQItemChildModel {
+						id: childValues
+
+						model: VeQItemTableModel {
+							uids: [ BackendConnection.serviceUidForType("digitalinputs") + "/Devices" ]
+							flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+						}
+						childId: "Label"
+						sortDelegate: VeQItemSortDelegate {
+							VeQuickItem {
+								id: labelItem
+								uid: buddy.uid + "/Label"
+							}
+							sortValue: labelItem.value || ""
+						}
+					}
 				}
 
 				Component {
@@ -155,22 +173,12 @@ Page {
 
 						GradientListView {
 							model: digitalModel
-
 							delegate: ListRadioButtonGroup {
-								text: inputLabel.value || ""
-								dataItem.uid: model.uid + "/Type"
+								required property VeQItem item
+
+								text: item.value || ""
+								dataItem.uid: item.itemParent().uid + "/Type"
 								optionModel: delegateOptionModel
-
-								// TODO ideally digitalModel would filter out offline items using
-								// VeQItemSortTableModel.FilterOffline, but currently those are only
-								// filtered out when the service is offline, rather than the leaf
-								// items.
-								preferredVisible: dataItem.valid
-
-								VeQuickItem {
-									id: inputLabel
-									uid: model.uid + "/Label"
-								}
 							}
 						}
 					}
