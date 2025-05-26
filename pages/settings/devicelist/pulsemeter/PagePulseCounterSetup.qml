@@ -19,13 +19,13 @@ Page {
 			ListSwitch {
 				//% "Inverted"
 				text: qsTrId("pulsecounter_setup_inverted")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + root.inputNumber + "/InvertTranslation"
+				dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
 			}
 
 			ListSpinBox {
 				//% "Multiplier"
 				text: qsTrId("pulsecounter_setup_multiplier")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + root.inputNumber + "/Multiplier"
+				dataItem.uid: root.bindPrefix + "/Settings/Multiplier"
 				decimals: 6
 				stepSize: Math.pow(10, -decimals)
 			}
