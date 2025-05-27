@@ -9,9 +9,15 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	text: root.device.customName
-		  || (root.device.deviceInstance >= 0 && root.device.productName ? `${root.device.productName} ${root.device.deviceInstance}` : "")
-		  || ""
+	text: {
+		if (device.customName) {
+			return device.customName
+		} else if (device.deviceInstance >= 0 && device.productName) {
+			return `${device.productName} (${device.deviceInstance})`
+		} else {
+			return ""
+		}
+	}
 
 	secondaryText: VenusOS.switch_deviceStateToText(state.value)
 
