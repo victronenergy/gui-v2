@@ -388,18 +388,15 @@ VisibleItemModel {
 						ListText {
 							id: bmsControlled
 
-							//% "BMS Controlled"
-							text: qsTrId("genset_bms_controlled")
+							text: CommonWords.bms_controlled
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 							preferredVisible: dataItem.valid
-							//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
-							caption: bmsControlled.dataItem.value === 1 ? qsTrId("genset_bms_control_enabled_automatically") : ""
+							caption: bmsControlled.dataItem.value === 1 ? CommonWords.bms_control_info : ""
 						}
 
 						ListButton {
-							//% "BMS control"
-							text: qsTrId("genset_bms_control")
+							text: CommonWords.bms_control
 							secondaryText: CommonWords.press_to_reset
 							preferredVisible: bmsControlled.dataItem.value === 1
 							onClicked: bmsControlled.dataItem.setValue(0)

@@ -116,16 +116,14 @@ Page {
 
 			ListText {
 				id: bmsControlled
-				//% "BMS controlled"
-				text: qsTrId("charger_network_bms_controlled")
+				text: CommonWords.bms_controlled
 				secondaryText: CommonWords.yesOrNo(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 				preferredVisible: dataItem.valid
 			}
 
 			ListButton {
-				//% "BMS control"
-				text: qsTrId("charger_network_bms_control")
+				text: CommonWords.bms_control
 				secondaryText: CommonWords.reset
 				preferredVisible: bmsControlled.dataItem.value === 1
 				onClicked: {
@@ -136,8 +134,7 @@ Page {
 			PrimaryListLabel {
 				id: bmsControlInfoLabel
 
-				//% "BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present."
-				text: qsTrId("charger_network_bms_control_info")
+				text: CommonWords.bms_control_info
 				font.pixelSize: Theme.font_size_caption
 				color: Theme.color_font_secondary
 				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2

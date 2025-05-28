@@ -593,6 +593,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/battery/PageLynxIonSystem.qml
     pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml
     pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml
+    pages/settings/devicelist/dc-in/DcBmsSettingsPage.qml
     pages/settings/devicelist/dc-in/PageAlternator.qml
     pages/settings/devicelist/dc-in/PageAlternatorModel.qml
     pages/settings/devicelist/dc-in/PageDcDcConverter.qml
