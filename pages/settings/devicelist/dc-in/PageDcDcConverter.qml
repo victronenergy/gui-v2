@@ -64,29 +64,15 @@ Page {
 				text: CommonWords.settings
 				preferredVisible: setupOutputItem.valid
 				onClicked: {
-					Global.pageManager.pushPage(settingsComponent)
+					Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/DcBmsSettingsPage.qml", {
+						bindPrefix: root.bindPrefix,
+						settingsPage: root,
+					})
 				}
 
 				VeQuickItem {
 					id: setupOutputItem
 					uid: bindPrefix + "/Settings/OutputBattery"
-				}
-
-				Component {
-					id: settingsComponent
-
-					Page {
-						title: CommonWords.settings
-
-						GradientListView {
-							model: VisibleItemModel {
-								ListOutputBatteryRadioButtonGroup {
-									bindPrefix: root.bindPrefix
-									settingsPage: root
-								}
-							}
-						}
-					}
 				}
 			}
 

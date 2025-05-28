@@ -97,6 +97,15 @@ QtObject {
 	//% "Battery voltage"
 	readonly property string battery_voltage: qsTrId("common_words_battery_voltage")
 
+	//% "BMS control"
+	readonly property string bms_control: qsTrId("common_words_bms_control")
+
+	//% "BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present."
+	readonly property string bms_control_info: qsTrId("common_words_bms_control_info")
+
+	//% "BMS controlled"
+	readonly property string bms_controlled: qsTrId("common_words_bms_controlled")
+
 	//: The 'Boat' page
 	//% "Boat"
 	readonly property string boat_page: qsTrId("common_words_boat_page")
