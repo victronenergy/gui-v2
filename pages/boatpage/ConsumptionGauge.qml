@@ -46,7 +46,7 @@ Column {
 		unit: Global.systemSettings.electricalQuantity
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
-		visible: !motorDriveLoad.visible && !isNaN(value)
+		visible: !motorDriveLoad.visible // && !isNaN(value) once #2159 is resolved
 	}
 
 	QuantityLabelIconRow {
