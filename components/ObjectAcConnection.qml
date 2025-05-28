@@ -51,7 +51,7 @@ QtObject {
 	property real _power: NaN
 
 	// multi-phase systems don't have a total current
-	readonly property real current: _phaseCount.value === 1 && _currentL1.alid ? _currentL1.value : NaN
+	readonly property real current: _phaseCount.value === 1 && _currentL1.valid ? _currentL1.value : NaN
 
 	readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
 
