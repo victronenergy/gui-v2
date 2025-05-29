@@ -12,7 +12,7 @@ ControlCard {
 	required property string name
 	required property list<string> outputUids
 
-	implicitWidth: outputGrid.width
+	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
 	icon.source: "qrc:/images/icon_switch_24.svg"
 	title.text: name
 
@@ -20,7 +20,7 @@ ControlCard {
 		id: outputGrid
 
 		readonly property int rowCount: Math.floor(height / cellHeight)
-		readonly property int columnCount: Math.ceil(root.outputUids.length / rowCount)
+		readonly property int columnCount: Math.ceil(root.outputUids.length / Math.max(1, rowCount))
 
 		anchors {
 			top: root.title.bottom

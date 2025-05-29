@@ -276,7 +276,9 @@ int SwitchableOutputGroupModel::outputUidInsertionIndex(const QStringList &outpu
 
 void SwitchableOutputGroupModel::addOutputToGroup(int index, const QString &outputUid)
 {
-	if (index >= 0 && index < m_groups.count()) {
+	if (index >= 0
+			&& index < m_groups.count()
+			&& m_groups[index].outputUids.indexOf(outputUid) < 0) {
 		m_groups[index].outputUids.insert(outputUidInsertionIndex(m_groups[index].outputUids, outputUid), outputUid);
 		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
 	}
