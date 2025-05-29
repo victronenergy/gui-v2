@@ -319,13 +319,14 @@ void SwitchableOutputGroupModel::removeGroupAt(int index)
 {
 	if (index >= 0 && index < m_groups.count()) {
 		beginRemoveRows(QModelIndex(), index, index);
-		m_groups.removeAt(index);
+		Group group = m_groups.takeAt(index);
 
 		// If there are no more groups linked to this device, then remove the known device.
-		if (countGroupsWithDevice(m_groups.at(index).deviceServiceUid) == 0) {
-			BaseDevice *device = m_knownDevices.take(m_groups.at(index).deviceServiceUid);
-			device->disconnect(this);
-			delete device;
+		if (countGroupsWithDevice(group.deviceServiceUid) == 0) {
+			if (BaseDevice *device = m_knownDevices.take(group.deviceServiceUid)) {
+				device->disconnect(this);
+				delete device;
+			}
 		}
 
 		endRemoveRows();
