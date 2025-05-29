@@ -176,6 +176,7 @@ void SwitchableOutputGroupModel::updateSortTokenInGroup(int groupIndex, const QS
 			  [this](const QString &uid1, const QString &uid2) {
 		return outputUidLessThan(uid1, uid2);
 	});
+	emit dataChanged(createIndex(groupIndex, 0), createIndex(groupIndex, 0), { OutputUidsRole });
 }
 
 void SwitchableOutputGroupModel::updateDeviceGroupName(BaseDevice *device)
@@ -293,8 +294,12 @@ void SwitchableOutputGroupModel::removeOutputFromGroup(int index, const QString 
 			// altogether.
 			removeGroupAt(index);
 		} else {
-			m_groups[index].outputUids.removeOne(outputUid);
-			emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
+			if (m_groups[index].outputUids.removeOne(outputUid)) {
+				emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
+			} else {
+				qWarning() << "Cannot find output" << outputUid << "in group:"
+						   << m_groups[index].name << m_groups[index].namedGroup;
+			}
 		}
 		m_outputSortTokens.remove(outputUid);
 	}
