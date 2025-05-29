@@ -33,12 +33,19 @@ Page {
 			ListButton {
 				//% "Reset counter"
 				text: qsTrId("pulsecounter_setup_reset_counter")
-				secondaryText: itemCount.value || 0
-				onClicked: itemCount.setValue(0)
+				secondaryText: itemCount_readonly.value || 0
+				onClicked: itemCount_internal.setValue(0)
+				interactive: itemCount_internal.valid
 
 				VeQuickItem {
-					id: itemCount
+					id: itemCount_readonly
 					uid: root.bindPrefix + "/Count"
+				}
+
+				// Not valid for GX I/O Extender paths, see #2139
+				VeQuickItem {
+					id: itemCount_internal
+					uid: Global.systemSettings.serviceUid + "/Settings/DigitalInput/" + root.inputNumber + "/Count"
 				}
 			}
 		}
