@@ -9,12 +9,12 @@
       <translation>Deaktiveret</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="242"/>
+      <location filename="../../components/CommonWords.qml" line="251"/>
       <source>Inverter overload</source>
       <translation>Inverter overload</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="372"/>
+      <location filename="../../components/CommonWords.qml" line="381"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>Strømforsyning</translation>
@@ -34,62 +34,78 @@
       <source>Battery</source>
       <translation type="unfinished">Batteri</translation>
     </message>
+    <message id="common_words_bms_control">
+      <location filename="../../components/CommonWords.qml" line="101"/>
+      <source>BMS control</source>
+      <translation type="unfinished">BMS styring</translation>
+    </message>
+    <message id="common_words_bms_control_info">
+      <location filename="../../components/CommonWords.qml" line="104"/>
+      <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
+      <translation type="unfinished">BMS styring er automatisk aktiveret når en BMS er tilstede. 
+Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
+    </message>
+    <message id="common_words_bms_controlled">
+      <location filename="../../components/CommonWords.qml" line="107"/>
+      <source>BMS controlled</source>
+      <translation type="unfinished">BMS kontrolleret</translation>
+    </message>
     <message id="common_words_boat_page">
-      <location filename="../../components/CommonWords.qml" line="102"/>
+      <location filename="../../components/CommonWords.qml" line="111"/>
       <source>Boat</source>
       <extracomment>The 'Boat' page</extracomment>
       <translation type="unfinished">Båd</translation>
     </message>
     <message id="common_words_brief_page">
-      <location filename="../../components/CommonWords.qml" line="106"/>
+      <location filename="../../components/CommonWords.qml" line="115"/>
       <source>Brief</source>
       <extracomment>The 'Brief' page</extracomment>
       <translation type="unfinished">Kort</translation>
     </message>
     <message id="common_words_charging">
-      <location filename="../../components/CommonWords.qml" line="116"/>
+      <location filename="../../components/CommonWords.qml" line="125"/>
       <source>Charging</source>
       <extracomment>"Charging" state</extracomment>
       <translation type="unfinished">Oplader</translation>
     </message>
     <message id="common_words_closed_status">
-      <location filename="../../components/CommonWords.qml" line="124"/>
+      <location filename="../../components/CommonWords.qml" line="133"/>
       <source>Closed</source>
       <extracomment>Status is 'closed'</extracomment>
       <translation type="unfinished">Lukket</translation>
     </message>
     <message id="common_words_connected">
-      <location filename="../../components/CommonWords.qml" line="127"/>
+      <location filename="../../components/CommonWords.qml" line="136"/>
       <source>Connected</source>
       <translation type="unfinished">Forbundet</translation>
     </message>
     <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="157"/>
+      <location filename="../../components/CommonWords.qml" line="166"/>
       <source>Disabled</source>
       <translation type="unfinished">Deaktiveret</translation>
     </message>
     <message id="common_words_discharging">
-      <location filename="../../components/CommonWords.qml" line="160"/>
+      <location filename="../../components/CommonWords.qml" line="169"/>
       <source>Discharging</source>
       <translation type="unfinished">Aflader</translation>
     </message>
     <message id="common_words_disconnected">
-      <location filename="../../components/CommonWords.qml" line="163"/>
+      <location filename="../../components/CommonWords.qml" line="172"/>
       <source>Disconnected</source>
       <translation type="unfinished">Afbrudt.</translation>
     </message>
     <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="176"/>
+      <location filename="../../components/CommonWords.qml" line="185"/>
       <source>Error</source>
       <translation type="unfinished">Fejl</translation>
     </message>
     <message id="common_words_generator">
-      <location filename="../../components/CommonWords.qml" line="194"/>
+      <location filename="../../components/CommonWords.qml" line="203"/>
       <source>Generator</source>
       <translation type="unfinished">Generator</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="203"/>
+      <location filename="../../components/CommonWords.qml" line="212"/>
       <source>High battery voltage</source>
       <translation>Høj batteri volt</translation>
     </message>
@@ -99,12 +115,12 @@
       <translation>Inverter/oplader</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="251"/>
+      <location filename="../../components/CommonWords.qml" line="260"/>
       <source>Low battery voltage</source>
       <translation>Lav batteri volt</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="270"/>
+      <location filename="../../components/CommonWords.qml" line="279"/>
       <source>Manual</source>
       <translation>Manual</translation>
     </message>
@@ -114,19 +130,19 @@
       <translation>Ingen</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="379"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>Stilling</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="441"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>Hastighed</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="459"/>
+      <location filename="../../components/CommonWords.qml" line="468"/>
       <source>State</source>
       <translation>Tilstand</translation>
     </message>
@@ -162,7 +178,7 @@
       <translation>Tryk for at tjekke</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="197"/>
+      <location filename="../../components/CommonWords.qml" line="206"/>
       <source>Grid</source>
       <translation>Forsyning</translation>
     </message>
@@ -232,7 +248,7 @@
       <translation>DVCC</translation>
     </message>
     <message id="common_words_ess">
-      <location filename="../../components/CommonWords.qml" line="188"/>
+      <location filename="../../components/CommonWords.qml" line="197"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
@@ -423,7 +439,7 @@
       <translation>Kører nu</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="276"/>
+      <location filename="../../components/CommonWords.qml" line="285"/>
       <source>Manual start</source>
       <translation>Manuel start</translation>
     </message>
@@ -812,7 +828,7 @@
       <translation>Op, men ingen tjenester (250 kbit/s)</translation>
     </message>
     <message id="common_words_devices">
-      <location filename="../../components/CommonWords.qml" line="154"/>
+      <location filename="../../components/CommonWords.qml" line="163"/>
       <source>Devices</source>
       <translation>Enhed fundet</translation>
     </message>
@@ -862,7 +878,7 @@
       <translation>Ok: Ingen andre enheder er forbundet med dette nummer.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="312"/>
+      <location filename="../../components/CommonWords.qml" line="321"/>
       <source>Network status</source>
       <translation>Netværks status</translation>
     </message>
@@ -2330,12 +2346,6 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>BMS control</source>
       <translation type="unfinished">BMS styring</translation>
     </message>
-    <message id="charger_network_bms_control">
-      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="128"/>
-      <source>BMS control</source>
-      <oldsource>BMS Control</oldsource>
-      <translation>BMS styring</translation>
-    </message>
     <message id="settings_pump_function_not_enabled">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
@@ -2608,25 +2618,25 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Høj batteri volt alarm</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="583"/>
+      <location filename="../../components/CommonWords.qml" line="592"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Sidste fejl</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="586"/>
+      <location filename="../../components/CommonWords.qml" line="595"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Anden sidste fejl</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="589"/>
+      <location filename="../../components/CommonWords.qml" line="598"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Tredje sidste fejl</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="592"/>
+      <location filename="../../components/CommonWords.qml" line="601"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Fjerde sidste fejl</translation>
@@ -2724,14 +2734,9 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Lade volt</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="408"/>
+      <location filename="../../components/CommonWords.qml" line="417"/>
       <source>Reset</source>
       <translation>Nulstil</translation>
-    </message>
-    <message id="charger_network_bms_control_info">
-      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="140"/>
-      <source>BMS control is enabled automatically when BMS is present. Reset if the system configuration changed or if there is no BMS present.</source>
-      <translation>BMS-kontrol aktiveres automatisk, når BMS er til stede. Nulstil, hvis systemkonfigurationen ændres, eller hvis der ikke er nogen BMS til stede.</translation>
     </message>
     <message id="solarcharger_load">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="247"/>
@@ -2950,7 +2955,7 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation type="unfinished">Sikring sprunget</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="273"/>
+      <location filename="../../components/CommonWords.qml" line="282"/>
       <source>Manual control</source>
       <translation>Manuel styring</translation>
     </message>
@@ -3006,7 +3011,7 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation>Alarm Flag</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="482"/>
+      <location filename="../../components/CommonWords.qml" line="491"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Kontakt</translation>
@@ -3980,11 +3985,6 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Number of starts</source>
       <translation>Antal starter</translation>
     </message>
-    <message id="genset_bms_control">
-      <location filename="../../components/PageGensetModel.qml" line="402"/>
-      <source>BMS control</source>
-      <translation type="unfinished">BMS styring</translation>
-    </message>
     <message id="ac-in-modeldefault_front_selector_locked">
       <location filename="../../components/listitems/ListAcInError.qml" line="23"/>
       <source>Front selector locked (%1)</source>
@@ -4065,13 +4065,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Smappee bus enheder</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="318"/>
+      <location filename="../../components/CommonWords.qml" line="327"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>Denne indstilling er deaktiveret, når der er tilsluttet en Digital Multi Control.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="321"/>
+      <location filename="../../components/CommonWords.qml" line="330"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <oldsource>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>Denne indstilling er deaktiveret, når en VE.Bus BMS er tilsluttet.</translation>
@@ -4083,7 +4083,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>AC ind %1</translation>
     </message>
     <message id="common_words_dc">
-      <location filename="../../components/CommonWords.qml" line="143"/>
+      <location filename="../../components/CommonWords.qml" line="152"/>
       <source>DC</source>
       <translation>DC</translation>
     </message>
@@ -4093,17 +4093,17 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Omvendt</translation>
     </message>
     <message id="digitalinput_enable_alarm">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="57"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="55"/>
       <source>Enable alarm</source>
       <translation type="unfinished">Aktiver alarm</translation>
     </message>
     <message id="digitalinput_inverted">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="63"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Inverted</source>
       <translation type="unfinished">Omvendt</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="67"/>
       <source>Invert alarm logic</source>
       <translation>Omvend alarm logik</translation>
     </message>
@@ -4228,7 +4228,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Total PV power</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="400"/>
       <source>Product page</source>
       <translation>Produktside</translation>
     </message>
@@ -4485,7 +4485,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Registreringen er udført</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="365"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Pending</source>
       <translation>Afventer...</translation>
     </message>
@@ -4730,18 +4730,18 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>AC Ind</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="225"/>
+      <location filename="../../components/CommonWords.qml" line="234"/>
       <source>Idle</source>
       <translation type="unfinished">Inaktiv</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="229"/>
+      <location filename="../../components/CommonWords.qml" line="238"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">Inaktiv</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="235"/>
+      <location filename="../../components/CommonWords.qml" line="244"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">Inverter/oplader</translation>
     </message>
@@ -4846,7 +4846,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Batteri volt</translation>
     </message>
     <message id="common_words_charge_current">
-      <location filename="../../components/CommonWords.qml" line="112"/>
+      <location filename="../../components/CommonWords.qml" line="121"/>
       <source>Charge current</source>
       <translation>Opladning</translation>
     </message>
@@ -4857,7 +4857,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Oplader</translation>
     </message>
     <message id="common_words_clear_error_action">
-      <location filename="../../components/CommonWords.qml" line="120"/>
+      <location filename="../../components/CommonWords.qml" line="129"/>
       <source>Clear error</source>
       <extracomment>Action to clear an error state</extracomment>
       <translation>Fjern fejl</translation>
@@ -4874,29 +4874,29 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Forbundet</translation>
     </message>
     <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="131"/>
+      <location filename="../../components/CommonWords.qml" line="140"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Strøm</translation>
     </message>
     <message id="common_words_current_transformers">
-      <location filename="../../components/CommonWords.qml" line="134"/>
+      <location filename="../../components/CommonWords.qml" line="143"/>
       <source>Current transformers</source>
       <translation>Strøm transformer</translation>
     </message>
     <message id="common_words_custom_name">
-      <location filename="../../components/CommonWords.qml" line="137"/>
+      <location filename="../../components/CommonWords.qml" line="146"/>
       <source>Custom name</source>
       <translation>Eget navn</translation>
     </message>
     <message id="common_words_debug">
-      <location filename="../../components/CommonWords.qml" line="147"/>
+      <location filename="../../components/CommonWords.qml" line="156"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
       <translation>Debug</translation>
     </message>
     <message id="common_words_device">
-      <location filename="../../components/CommonWords.qml" line="151"/>
+      <location filename="../../components/CommonWords.qml" line="160"/>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>Enhed</translation>
@@ -4914,17 +4914,17 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Afbrudt.</translation>
     </message>
     <message id="common_words_enable">
-      <location filename="../../components/CommonWords.qml" line="166"/>
+      <location filename="../../components/CommonWords.qml" line="175"/>
       <source>Enable</source>
       <translation>Aktiver</translation>
     </message>
     <message id="common_words_enabled">
-      <location filename="../../components/CommonWords.qml" line="169"/>
+      <location filename="../../components/CommonWords.qml" line="178"/>
       <source>Enabled</source>
       <translation>Aktiveret</translation>
     </message>
     <message id="common_words_energy">
-      <location filename="../../components/CommonWords.qml" line="173"/>
+      <location filename="../../components/CommonWords.qml" line="182"/>
       <source>Energy</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Energi</translation>
@@ -4936,17 +4936,17 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Fejl</translation>
     </message>
     <message id="common_words_error_colon">
-      <location filename="../../components/CommonWords.qml" line="179"/>
+      <location filename="../../components/CommonWords.qml" line="188"/>
       <source>Error:</source>
       <translation>Fejl:</translation>
     </message>
     <message id="common_words_error_code">
-      <location filename="../../components/CommonWords.qml" line="182"/>
+      <location filename="../../components/CommonWords.qml" line="191"/>
       <source>Error code</source>
       <translation>Fejl kode</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="191"/>
+      <location filename="../../components/CommonWords.qml" line="200"/>
       <source>Firmware version</source>
       <translation>Firmwareversion</translation>
     </message>
@@ -4956,38 +4956,38 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Generator</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="200"/>
+      <location filename="../../components/CommonWords.qml" line="209"/>
       <source>High battery temperature</source>
       <translation>Høj batteri temperatur</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="207"/>
+      <location filename="../../components/CommonWords.qml" line="216"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Høj niveau alarm</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="210"/>
+      <location filename="../../components/CommonWords.qml" line="219"/>
       <source>High starter battery voltage</source>
       <translation>Høj starter batteri volt</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="213"/>
+      <location filename="../../components/CommonWords.qml" line="222"/>
       <source>High temperature</source>
       <translation>Høj temperatur</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="216"/>
+      <location filename="../../components/CommonWords.qml" line="225"/>
       <source>High voltage alarms</source>
       <translation>Høj volt alarmer</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="219"/>
+      <location filename="../../components/CommonWords.qml" line="228"/>
       <source>History</source>
       <translation>Historie</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="222"/>
+      <location filename="../../components/CommonWords.qml" line="231"/>
       <source>%1 Hour(s)</source>
       <translation>%1 time(r)</translation>
     </message>
@@ -5003,73 +5003,73 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Inaktiv</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="245"/>
+      <location filename="../../components/CommonWords.qml" line="254"/>
       <source>IP address</source>
       <translation>IP adresse</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="248"/>
+      <location filename="../../components/CommonWords.qml" line="257"/>
       <source>Low battery temperature</source>
       <translation>Lav batteri temperatur</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="255"/>
+      <location filename="../../components/CommonWords.qml" line="264"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Lav niveau alarm</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="258"/>
+      <location filename="../../components/CommonWords.qml" line="267"/>
       <source>Low starter battery voltage</source>
       <translation>Lav starter batteri volt</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="261"/>
+      <location filename="../../components/CommonWords.qml" line="270"/>
       <source>Low state-of-charge</source>
       <translation>Lav State of Charge</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="264"/>
+      <location filename="../../components/CommonWords.qml" line="273"/>
       <source>Low temperature</source>
       <translation>Lav temperatur</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="267"/>
+      <location filename="../../components/CommonWords.qml" line="276"/>
       <source>Low voltage alarms</source>
       <translation>Lav volt alarmer</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="282"/>
+      <location filename="../../components/CommonWords.qml" line="291"/>
       <source>Manufacturer</source>
       <translation>Fabrikant</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="291"/>
+      <location filename="../../components/CommonWords.qml" line="300"/>
       <source>Maximum temperature</source>
       <translation>Maksimum temperatur</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="294"/>
+      <location filename="../../components/CommonWords.qml" line="303"/>
       <source>Maximum voltage</source>
       <translation>Maksimum volt</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="300"/>
+      <location filename="../../components/CommonWords.qml" line="309"/>
       <source>Minimum temperature</source>
       <translation>Minimum temperator</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="303"/>
+      <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Minimum voltage</source>
       <translation>Minimum volt</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="306"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Mode</source>
       <translation>Mode</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="309"/>
+      <location filename="../../components/CommonWords.qml" line="318"/>
       <source>Model name</source>
       <translation>Model navn</translation>
     </message>
@@ -5080,7 +5080,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Nej</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="324"/>
+      <location filename="../../components/CommonWords.qml" line="333"/>
       <source>No error</source>
       <translation>Ingen fejl</translation>
     </message>
@@ -5090,12 +5090,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Ikke tilgængelig</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="337"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Not connected</source>
       <translation>Ikke forbundet</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="343"/>
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>Offline</source>
       <translation>Offline</translation>
     </message>
@@ -5112,7 +5112,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>On</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="352"/>
+      <location filename="../../components/CommonWords.qml" line="361"/>
       <source>Online</source>
       <translation>Online</translation>
     </message>
@@ -5123,59 +5123,59 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Åben</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="368"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Password</source>
       <translation>Adgangskode</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="375"/>
+      <location filename="../../components/CommonWords.qml" line="384"/>
       <source>Phase</source>
       <translation>Fase</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <source>Press to clear</source>
       <translation>Tryk for at fjerne</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="394"/>
       <source>Press to reset</source>
       <translation>Tryk for at nulstille</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="397"/>
       <source>Press to scan</source>
       <translation>Tryk for søge</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="403"/>
       <source>PV Inverter</source>
       <translation>PV Inverter</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="398"/>
+      <location filename="../../components/CommonWords.qml" line="407"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>PV-strøm</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="401"/>
+      <location filename="../../components/CommonWords.qml" line="410"/>
       <source>Quiet hours</source>
       <translation>Stille periode</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="405"/>
+      <location filename="../../components/CommonWords.qml" line="414"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Relæ</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="420"/>
       <source>Reboot</source>
       <translation>Genstart</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="423"/>
       <source>Remove</source>
       <translation>Fjerne</translation>
     </message>
@@ -5186,12 +5186,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Kører</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="421"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Scanning %1%</source>
       <translation>Scanning %1</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>Serial number</source>
       <translation>Serienummer</translation>
     </message>
@@ -5201,12 +5201,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Indstillinger</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="439"/>
       <source>Setup</source>
       <translation>Opsætning</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>Signal strength</source>
       <translation>Signal styrke</translation>
     </message>
@@ -5217,32 +5217,32 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Start after the condition is reached for</source>
       <translation>Start når betingelsen er opnået for</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="459"/>
       <source>Start time</source>
       <translation>Start tid</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="462"/>
       <source>Start value during quiet hours</source>
       <translation>Start værdi under stille periode</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="465"/>
       <source>Start when warning is active for</source>
       <translation>Start når advarsel er aktiv</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="462"/>
+      <location filename="../../components/CommonWords.qml" line="471"/>
       <source>State of charge</source>
       <translation>State of Charge</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="465"/>
+      <location filename="../../components/CommonWords.qml" line="474"/>
       <source>Status</source>
       <translation>Tilstand</translation>
     </message>
@@ -5253,12 +5253,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Opstart (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="472"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Stop value during quiet hours</source>
       <translation>Stop værdi under stille periode</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="475"/>
+      <location filename="../../components/CommonWords.qml" line="484"/>
       <source>Stop after the condition is reached for</source>
       <translation>Stop efter betingelsen er opnået for</translation>
     </message>
@@ -5269,38 +5269,38 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Stoppet</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="494"/>
       <source>Temperature</source>
       <translation>Temperatur</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="488"/>
+      <location filename="../../components/CommonWords.qml" line="497"/>
       <source>Temperature sensor</source>
       <translation>Temperatur sensor</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="491"/>
+      <location filename="../../components/CommonWords.qml" line="500"/>
       <source>Today</source>
       <translation>I dag</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="503"/>
       <source>Total</source>
       <translation>I alt</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="498"/>
+      <location filename="../../components/CommonWords.qml" line="507"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Overvåg</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="501"/>
+      <location filename="../../components/CommonWords.qml" line="510"/>
       <source>Type</source>
       <translation>Type</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="504"/>
+      <location filename="../../components/CommonWords.qml" line="513"/>
       <source>Unique Identity Number</source>
       <translation>Unikt identitetsnummer</translation>
     </message>
@@ -5310,22 +5310,22 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Ukendt</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="511"/>
+      <location filename="../../components/CommonWords.qml" line="520"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus fejl</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="514"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
       <source>Voltage</source>
       <translation>Spænding</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="517"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>VRM instance</source>
       <translation>Forekomst af enhed</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="529"/>
       <source>When warning is cleared stop after</source>
       <translation>Når advarsel er ryddet stop efter</translation>
     </message>
@@ -5335,12 +5335,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Ja</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="535"/>
       <source>Yesterday</source>
       <translation>I går</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="530"/>
+      <location filename="../../components/CommonWords.qml" line="539"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Produktion</translation>
@@ -5392,7 +5392,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Gem</translation>
     </message>
     <message id="common_words_cancel">
-      <location filename="../../components/CommonWords.qml" line="109"/>
+      <location filename="../../components/CommonWords.qml" line="118"/>
       <source>Cancel</source>
       <translation>Annuller</translation>
     </message>
@@ -7005,12 +7005,6 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>High temperature alarm</source>
       <translation>Høj temperatur alarm</translation>
     </message>
-    <message id="charger_network_bms_controlled">
-      <location filename="../../pages/solar/PageSolarParallelOperation.qml" line="120"/>
-      <source>BMS controlled</source>
-      <oldsource>BMS Controlled</oldsource>
-      <translation>BMS kontrolleret</translation>
-    </message>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
@@ -7030,117 +7024,117 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Udligning kan ikke udløses under masseopladningstilstand</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="239"/>
+      <location filename="../../components/CommonWords.qml" line="248"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="285"/>
+      <location filename="../../components/CommonWords.qml" line="294"/>
       <source>Maximum current</source>
       <translation>Maksimum strøm</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="288"/>
+      <location filename="../../components/CommonWords.qml" line="297"/>
       <source>Maximum power</source>
       <translation>Maksimal effekt</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="297"/>
+      <location filename="../../components/CommonWords.qml" line="306"/>
       <source>Minimum current</source>
       <translation>Minimum strømstyrke</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="315"/>
+      <location filename="../../components/CommonWords.qml" line="324"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="68"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
       <source>No</source>
       <translation type="unfinished">Nej</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="327"/>
+      <location filename="../../components/CommonWords.qml" line="336"/>
       <source>None</source>
       <translation type="unfinished">Ingen</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="331"/>
+      <location filename="../../components/CommonWords.qml" line="340"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Ingen</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="334"/>
+      <location filename="../../components/CommonWords.qml" line="343"/>
       <source>Not available</source>
       <translation type="unfinished">Ikke tilgængelig</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="340"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <source>Off</source>
       <translation type="unfinished">Fra</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="346"/>
+      <location filename="../../components/CommonWords.qml" line="355"/>
       <source>OK</source>
       <translation type="unfinished">OK</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="349"/>
+      <location filename="../../components/CommonWords.qml" line="358"/>
       <source>On</source>
       <translation type="unfinished">On</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="356"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Åben</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="362"/>
+      <location filename="../../components/CommonWords.qml" line="371"/>
       <source>Overall history</source>
       <translation>Overordnet historie</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+      <location filename="../../components/CommonWords.qml" line="427"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">Kører</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="436"/>
       <source>Settings</source>
       <translation type="unfinished">Indstillinger</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="444"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Standby</source>
       <translation type="unfinished">Standby</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="469"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Opstart (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="478"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>Stopped</source>
       <translation type="unfinished">Stoppet</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="508"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Ukendt</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="532"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="115"/>
       <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
       <source>Yes</source>
       <translation type="unfinished">Ja</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="534"/>
+      <location filename="../../components/CommonWords.qml" line="543"/>
       <source>Yield Today</source>
       <oldsource>Yield today</oldsource>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
@@ -7422,7 +7416,7 @@ Bemærk, at denne menu kun viser Carlo Gavazzi-målere, der er tilsluttet via RS
       <translation>Systemets produktion</translation>
     </message>
     <message id="common_words_daily_history">
-      <location filename="../../components/CommonWords.qml" line="140"/>
+      <location filename="../../components/CommonWords.qml" line="149"/>
       <source>Daily history</source>
       <translation>Daglig historie</translation>
     </message>
@@ -7542,7 +7536,7 @@ See documentation for further information.</oldsource>
       <translation>Høj systembelastning, luk sidepanelet for at reducere CPU-belastningen</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="232"/>
+      <location filename="../../components/CommonWords.qml" line="241"/>
       <source>Input current limit</source>
       <translation>Input nuværende grænse</translation>
     </message>
@@ -7746,23 +7740,23 @@ See documentation for further information.</oldsource>
       <translation>Aktiv (%1)</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="279"/>
+      <location filename="../../components/CommonWords.qml" line="288"/>
       <source>Manual stop</source>
       <translation>Manuelt stop</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="359"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Open circuit</source>
       <translation>Åbent kredsløb</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="549"/>
+      <location filename="../../components/CommonWords.qml" line="558"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation type="unfinished"/>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -7970,7 +7964,7 @@ See documentation for further information.</oldsource>
       <translation>MQTT-adgang</translation>
     </message>
     <message id="common_words_error_not_a_number">
-      <location filename="../../components/CommonWords.qml" line="185"/>
+      <location filename="../../components/CommonWords.qml" line="194"/>
       <source>'%1' is not a number.</source>
       <translation>'%1' er ikke et tal.</translation>
     </message>
@@ -8031,17 +8025,6 @@ See documentation for further information.</oldsource>
       <source>Charge current limit</source>
       <translation>Ladestrøm grænse</translation>
     </message>
-    <message id="genset_bms_controlled">
-      <location filename="../../components/PageGensetModel.qml" line="392"/>
-      <source>BMS Controlled</source>
-      <translation>BMS kontrolleret</translation>
-    </message>
-    <message id="genset_bms_control_enabled_automatically">
-      <location filename="../../components/PageGensetModel.qml" line="397"/>
-      <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
-      <translation>BMS styring er automatisk aktiveret når en BMS er tilstede. 
-Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
-    </message>
     <message id="page_settings_run_time_and_service_service_time_disabled">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="171"/>
       <source>Service timer disabled.</source>
@@ -8058,7 +8041,7 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <translation>Tailscale (VPN-fjernadgang)</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="437"/>
+      <location filename="../../components/CommonWords.qml" line="446"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1</translation>
@@ -9193,7 +9176,7 @@ Hvis generatoren i øjeblikket kører på grund af en autostart-tilstand, vil de
       <translation>En alarm udløses, når jævnstrømsgeneratoren ikke når op på mindst 5A inden for de første 5 minutter efter start.</translation>
     </message>
     <message id="common_words_large_features_currently_disabled">
-      <location filename="../../components/CommonWords.qml" line="540"/>
+      <location filename="../../components/CommonWords.qml" line="549"/>
       <source>This feature is disabled, since "All modifications enabled" under "Settings -&gt; General -&gt; Modification checks" is disabled.</source>
       <translation>Denne funktion er deaktiveret, da "Alle modifikationer aktiveret" under "Indstillinger -&gt; Generelt -&gt; Modifikationstjek" er deaktiveret.</translation>
     </message>
@@ -9412,7 +9395,7 @@ firmwareintegritet, før du kontakter support</translation>
       <translation>Siden genindlæses automatisk om 5 sekunder</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="537"/>
+      <location filename="../../components/CommonWords.qml" line="546"/>
       <source>Dynamic power limit</source>
       <translation>Dynamisk effektgrænse</translation>
     </message>
