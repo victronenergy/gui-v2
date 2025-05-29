@@ -27,6 +27,7 @@ QtObject {
 			property var batteries: BatteriesImpl {}
 			property var dcInputs: DcInputsImpl {}
 			property var dcLoads: DcLoadsImpl { }
+			property var digitalInput: DigitalInputImpl {}
 			property var digitalInputs: DigitalInputsImpl {}
 			property var environmentInputs: EnvironmentInputsImpl {}
 			property var ess: EssImpl {}
