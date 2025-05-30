@@ -21,9 +21,9 @@ QtObject {
 			onValidChanged: {
 				if (!!Global.generators) {
 					if (valid) {
-						Global.generators.addGenerator(generator)
+						Global.generators.model.addDevice(generator)
 					} else {
-						Global.generators.removeGenerator(generator)
+						Global.generators.model.removeDevice(generator.serviceUid)
 					}
 				}
 			}

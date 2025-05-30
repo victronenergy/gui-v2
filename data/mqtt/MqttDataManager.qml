@@ -14,7 +14,6 @@ QtObject {
 	property var environmentInputs: EnvironmentInputsImpl { }
 	property var ess: EssImpl { }
 	property var evChargers: EvChargersImpl { }
-	property var generators: GeneratorsImpl { }
 	property var inverterChargers: InverterChargersImpl {}
 	property var notifications: NotificationsImpl {}
 	property var pvInverters: PvInvertersImpl { }
