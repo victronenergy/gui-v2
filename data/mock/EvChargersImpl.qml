@@ -13,12 +13,12 @@ QtObject {
 
 	function populate() {
 		for (let i = 0; i < 3; ++i) {
-			createCharger({
+			const charger = createCharger({
 				position: i % 2 === 0 ? VenusOS.AcPosition_AcInput : VenusOS.AcPosition_AcOutput,
-				nrOfPhases: i + 1,
 				status: Math.floor(Math.random() * VenusOS.Evcs_Status_Charged),
 				mode: Math.floor(Math.random() * VenusOS.Evcs_Mode_Scheduled),
 			})
+			charger.phaseCount = i + 1
 		}
 		createEnergyMeter()
 	}
@@ -34,6 +34,7 @@ QtObject {
 			charger["_" + configProperty].setValue(configValue)
 		 }
 		_createdObjects.push(charger)
+		return charger
 	}
 
 	function createEnergyMeter() {
@@ -41,6 +42,7 @@ QtObject {
 		const charger = energyMeterComponent.createObject(root, {
 			serviceUid: "mock/com.victronenergy.evcharger.ttyUSB" + deviceInstanceNum,
 			deviceInstance: deviceInstanceNum,
+			phaseCount: 4,
 		})
 		_createdObjects.push(charger)
 	}
@@ -66,6 +68,8 @@ QtObject {
 		EvCharger {
 			id: evCharger
 
+			property int phaseCount
+
 			property Timer _dummyValues: Timer {
 				running: Global.mockDataSimulator.timersActive
 				repeat: true
@@ -74,16 +78,16 @@ QtObject {
 				onTriggered: {
 					const zeroPower = Math.random() < 0.2
 					let totalPower = 0
-					for (let i = 0; i < evCharger.phases._phases.count; ++i) {
+					for (let i = 0; i < evCharger.phaseCount; ++i) {
 						const phasePower = zeroPower ? 0 : 100 + Math.random() * 50
-						phases._phases.objectAt(i)._power.setValue(phasePower)
+						Global.mockDataSimulator.setMockValue(`${evCharger.serviceUid}/Ac/L${i+1}/Power`, phasePower)
 						totalPower += phasePower
 					}
 
-					_energy.setValue(1 + Math.random() * 10)
-					_current.setValue(1 + Math.random() * 20)
-					_power.setValue(totalPower)
-					_chargingTime.setValue(chargingTime + 60)
+					Global.mockDataSimulator.setMockValue(evCharger.serviceUid + "/Ac/Energy/Forward", 1 + Math.random() * 10)
+					Global.mockDataSimulator.setMockValue(evCharger.serviceUid + "/Current", 1 + Math.random() * 20)
+					Global.mockDataSimulator.setMockValue(evCharger.serviceUid + "/Ac/Power", totalPower)
+					Global.mockDataSimulator.setMockValue(evCharger.serviceUid + "/ChargingTime", chargingTime + 60)
 				}
 			}
 
@@ -134,11 +138,12 @@ QtObject {
 			readonly property real power: _power.valid ? _power.value : NaN
 			readonly property real current: NaN
 			readonly property real maxCurrent: NaN
+			property int phaseCount
 
 			function updateTotals() {
 				let totalPower = 0
-				for (let i = 0; i < phases.count; ++i) {
-					totalPower += phases.get(i).power
+				for (let i = 0; i < _phases.count; ++i) {
+					totalPower += _phases.objectAt(i).power
 				}
 				_power.setValue(totalPower)
 				_energy.setValue(Math.random() * 100)
@@ -162,32 +167,24 @@ QtObject {
 				Component.onCompleted: setValue(["evcharger"])
 			}
 
-			readonly property QtObject phases: QtObject {
-				property int count: 3
+			readonly property Instantiator _phases: Instantiator {
+				model: energyMeter.phaseCount
+				delegate: QtObject {
+					required property int index
+					readonly property string phaseUid: energyMeter.serviceUid + "/Ac/L" + (index + 1)
+					readonly property string name: "L" + (index + 1)
+					readonly property real power: _power.valid ? _power.value : NaN
 
-				function get(index) {
-					return _phases.objectAt(index)
-				}
-
-				readonly property Instantiator _phases: Instantiator {
-					model: 3
-					delegate: QtObject {
-						required property int index
-						readonly property string phaseUid: energyMeter.serviceUid + "/Ac/L" + (index + 1)
-						readonly property string name: "L" + (index + 1)
-						readonly property real power: _power.valid ? _power.value : NaN
-
-						readonly property VeQuickItem _power: VeQuickItem {
-							uid: phaseUid + "/Power"
-						}
-						property Timer _dummyValues: Timer {
-							running: Global.mockDataSimulator.timersActive
-							repeat: true
-							interval: 2000
-							onTriggered: {
-								_power.setValue(100 + (Math.random() * 100))
-								Qt.callLater(energyMeter.updateTotals)
-							}
+					readonly property VeQuickItem _power: VeQuickItem {
+						uid: phaseUid + "/Power"
+					}
+					property Timer _dummyValues: Timer {
+						running: Global.mockDataSimulator.timersActive
+						repeat: true
+						interval: 2000
+						onTriggered: {
+							_power.setValue(100 + (Math.random() * 100))
+							Qt.callLater(energyMeter.updateTotals)
 						}
 					}
 				}

@@ -64,18 +64,48 @@ Page {
 					anchors.top: chargerSummary.bottom
 					width: chargerSummary.width
 					columnSpacing: chargerSummary.columnSpacing
-					visible: root.evCharger.phases.count > 1
 					equalWidthColumns: true
-					model: root.evCharger.phases.count > 1 ? root.evCharger.phases.count : 0
+					model: phaseModel.count > 1 ? phaseModel : null
 					delegate: QuantityTable.TableRow {
-						readonly property QtObject phase: root.evCharger.phases.get(index)
+						id: tableRow
 
-						headerText: phase.name
+						required property string name
+						required property real power
+
+						headerText: name
 						model: QuantityObjectModel {
-							QuantityObject { object: phase; key: "power"; unit: VenusOS.Units_Watt }
+							QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }
 							QuantityObject {}
 							QuantityObject {}
 							QuantityObject {}
+						}
+					}
+
+					PhaseModel {
+						id: phaseModel
+					}
+
+					Instantiator {
+						model: VeQItemSortTableModel {
+							dynamicSortFilter: true
+							filterRole: VeQItemTableModel.UniqueIdRole
+							filterRegExp: "\/L\\d+$"
+							model: VeQItemTableModel {
+								uids: [ root.evCharger.serviceUid + "/Ac" ]
+								flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+							}
+						}
+						delegate: QtObject {
+							id: phaseObject
+
+							required property int index
+							required property string uid
+
+							readonly property VeQuickItem _power: VeQuickItem {
+								uid: phaseObject.uid + "/Power"
+								onValueChanged: phaseModel.setValue(index, PhaseModel.PowerRole, value)
+								onValidChanged: if (valid) phaseModel.phaseCount = Math.max(phaseModel.phaseCount, index + 1)
+							}
 						}
 					}
 				}

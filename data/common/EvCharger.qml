@@ -20,37 +20,6 @@ Device {
 	readonly property real current: _current.valid ? _current.value : NaN
 	readonly property real maxCurrent: _maxCurrent.valid ? _maxCurrent.value : NaN
 
-	readonly property QtObject phases: QtObject {
-		property int count: _nrOfPhases.valid ? _nrOfPhases.value : 0
-
-		function updateCount(maxPhaseCount) {
-			count = Math.max(count, maxPhaseCount)
-		}
-
-		function get(index) {
-			return _phases.objectAt(index)
-		}
-
-		readonly property Instantiator _phases: Instantiator {
-			model: 3
-			delegate: QtObject {
-				required property int index
-				readonly property string phaseUid: evCharger.serviceUid + "/Ac/L" + (index + 1)
-				readonly property string name: "L" + (index + 1)
-				readonly property real power: _power.valid ? _power.value : NaN
-
-				function updatePhaseCount(phaseCount) {
-					evCharger.count = Math.max(evCharger.count, phaseCount)
-				}
-
-				readonly property VeQuickItem _power: VeQuickItem {
-					uid: phaseUid + "/Power"
-					onValidChanged: if (valid && !_nrOfPhases.valid) phases.updateCount(index + 1)
-				}
-			}
-		}
-	}
-
 	readonly property VeQuickItem _energy: VeQuickItem {
 		uid: evCharger.serviceUid + "/Ac/Energy/Forward"
 	}
@@ -88,10 +57,6 @@ Device {
 	readonly property VeQuickItem _position: VeQuickItem {
 		uid: evCharger.serviceUid + "/Position"
 		onValueChanged: Global.evChargers.updateTotals()
-	}
-
-	readonly property VeQuickItem _nrOfPhases: VeQuickItem {
-		uid: evCharger.serviceUid + "/NrOfPhases"
 	}
 
 	onValidChanged: {
