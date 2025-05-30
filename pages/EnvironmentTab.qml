@@ -21,7 +21,7 @@ LevelsTab {
 		height: Gauges.height(Global.pageManager?.expandLayout)
 		animationEnabled: root.animationEnabled
 		title: device?.name ?? ""
-		temperature: Global.systemSettings.convertFromCelsius(device?.temperature ?? NaN)
+		temperature: device?.temperature ?? NaN
 		temperatureType: device?.temperatureType ?? NaN
 		humidity: device?.humidity ?? NaN
 		temperatureGaugeGradient: temperatureGradient

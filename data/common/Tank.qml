@@ -9,15 +9,10 @@ import Victron.VenusOS
 BaseTankDevice {
 	id: tank
 
-	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
-
 	property TankModel _tankModel
 
 	readonly property VeQuickItem _status: VeQuickItem {
 		uid: serviceUid + "/Status"
-	}
-	readonly property VeQuickItem _temperature: VeQuickItem {
-		uid: serviceUid + "/Temperature"
 	}
 	readonly property VeQuickItem _type: VeQuickItem {
 		uid: serviceUid + "/FluidType"

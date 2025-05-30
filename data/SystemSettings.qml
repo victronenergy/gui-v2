@@ -92,10 +92,6 @@ QtObject {
 		}
 	}
 
-	function convertFromCelsius(celsius_value) {
-		return Units.convert(celsius_value, VenusOS.Units_Temperature_Celsius, temperatureUnit)
-	}
-
 	function networkStatusToText(status) {
 		switch (status) {
 		case VenusOS.Link_NetworkStatus_Slave:
