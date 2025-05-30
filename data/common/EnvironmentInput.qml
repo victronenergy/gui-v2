@@ -15,6 +15,8 @@ Device {
 
 	readonly property VeQuickItem _temperature: VeQuickItem {
 		uid: serviceUid + "/Temperature"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 	readonly property VeQuickItem _humidity: VeQuickItem {
 		uid: serviceUid + "/Humidity"

@@ -37,6 +37,8 @@ QtObject {
 
 	readonly property VeQuickItem _temperature: VeQuickItem {
 		uid: root.systemServiceUid + "/Dc/Battery/Temperature"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	readonly property VeQuickItem _timeToGo: VeQuickItem {

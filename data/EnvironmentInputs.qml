@@ -78,15 +78,17 @@ QtObject {
 	}
 
 	function temperatureGaugeMinimum(temperatureType) {
-		return _validTemperatureType(temperatureType)
+		const temp = _validTemperatureType(temperatureType)
 				? (_temperatureDetails.get(temperatureType).temperatureGaugeMinimum)
 				: (_temperatureDetails.get(VenusOS.Temperature_DeviceType_Generic).temperatureGaugeMinimum)
+		return Units.convert(temp, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
 	}
 
 	function temperatureGaugeMaximum(temperatureType) {
-		return _validTemperatureType(temperatureType)
+		const temp = _validTemperatureType(temperatureType)
 				? (_temperatureDetails.get(temperatureType).temperatureGaugeMaximum)
 				: (_temperatureDetails.get(VenusOS.Temperature_DeviceType_Generic).temperatureGaugeMaximum)
+		return Units.convert(temp, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
 	}
 
 	function temperatureGaugeStepSize(temperatureType) {

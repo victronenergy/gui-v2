@@ -10,14 +10,9 @@ DcDevice {
 	id: input
 
 	readonly property int inputType: Global.dcInputs.inputType(serviceUid, monitorMode)
-	readonly property real temperature: _temperature.valid ? _temperature.value : NaN
 	readonly property int monitorMode: _monitorMode.valid ? _monitorMode.value : -1
 
 	property bool _completed
-
-	readonly property VeQuickItem _temperature: VeQuickItem {
-		uid: input.serviceUid + "/Dc/0/Temperature"
-	}
 
 	readonly property VeQuickItem _monitorMode: VeQuickItem {
 		uid: input.serviceUid + "/Settings/MonitorMode"
