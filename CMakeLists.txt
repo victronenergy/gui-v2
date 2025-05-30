@@ -858,7 +858,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/EnvironmentInputsImpl.qml
     data/dbus/EssImpl.qml
     data/dbus/EvChargersImpl.qml
-    data/dbus/GeneratorsImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PvInvertersImpl.qml
     data/dbus/SystemSettingsImpl.qml
@@ -1050,7 +1049,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/EnvironmentInputsImpl.qml
     data/mqtt/EssImpl.qml
     data/mqtt/EvChargersImpl.qml
-    data/mqtt/GeneratorsImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
     data/mqtt/PvInvertersImpl.qml
