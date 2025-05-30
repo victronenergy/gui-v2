@@ -68,8 +68,8 @@ SettingsColumn {
 		dataItem.uid: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 		dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		from: Global.systemSettings.convertFromCelsius(-50)
-		to: Global.systemSettings.convertFromCelsius(100)
+		from: Units.convert(-50, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+		to: Units.convert(100, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
 		suffix: Global.systemSettings.temperatureUnitSuffix
 
 		onValueChanged: {

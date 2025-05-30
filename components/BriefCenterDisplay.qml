@@ -33,6 +33,8 @@ Column {
 			}
 			return ""
 		}
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	Row {
@@ -77,9 +79,7 @@ Column {
 			}
 		}
 		unit: root._useTemperature ? Global.systemSettings.temperatureUnit : VenusOS.Units_Percentage
-		value: root._useTemperature
-			   ? Global.systemSettings.convertFromCelsius(temperature.value ?? NaN)
-			   : Global.system.battery.stateOfCharge
+		value: root._useTemperature ? (temperature.value ?? NaN) : Global.system.battery.stateOfCharge
 
 		FontMetrics {
 			id: centerLabelMetrics
