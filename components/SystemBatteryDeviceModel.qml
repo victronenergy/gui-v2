@@ -84,6 +84,9 @@ DeviceModel {
 
 		function setValueIfValid(propertyName, value) {
 			if (value !== undefined) {
+				if (propertyName === "temperature") {
+					value = Units.convert(value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+				}
 				battery[propertyName] = value
 			}
 		}

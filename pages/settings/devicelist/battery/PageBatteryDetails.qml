@@ -12,13 +12,6 @@ Page {
 	property string bindPrefix
 	property BatteryDetails details
 
-	QtObject {
-		id: temperatureData
-
-		readonly property real minCellTemperature: Global.systemSettings.convertFromCelsius(details.minCellTemperature.value)
-		readonly property real maxCellTemperature: Global.systemSettings.convertFromCelsius(details.maxCellTemperature.value)
-	}
-
 	GradientListView {
 		model: VisibleItemModel {
 			ListQuantityGroup {
@@ -46,7 +39,7 @@ Page {
 				text: qsTrId("batterydetails_minimum_cell_temperature")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.minTemperatureCellId; precision: details.minTemperatureCellId.decimals }
-					QuantityObject { object: temperatureData; key: "minCellTemperature"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: details.minCellTemperature; unit: Global.systemSettings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMinimumCellTemperature
 			}
@@ -56,7 +49,7 @@ Page {
 				text: qsTrId("batterydetails_maximum_cell_temperature")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.maxTemperatureCellId; precision: details.maxTemperatureCellId.decimals }
-					QuantityObject { object: temperatureData; key: "maxCellTemperature"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: details.maxCellTemperature; unit: Global.systemSettings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMaximumCellTemperature
 			}

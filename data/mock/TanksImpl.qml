@@ -57,6 +57,12 @@ QtObject {
 		Tank {
 			id: tank
 
+			readonly property VeQuickItem _temperature: VeQuickItem {
+				uid: tank.serviceUid + "/Temperature"
+				sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+				displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+			}
+
 			onTypeChanged: {
 				if (type >= 0) {
 					_device._customName.setValue("Custom " + Gauges.tankProperties(type).name + " tank")

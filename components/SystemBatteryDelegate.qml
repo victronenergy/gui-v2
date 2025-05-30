@@ -36,10 +36,6 @@ BaseListItem {
 			}
 
 			QuantityRow {
-				id: measurementsRow
-
-				readonly property real temperature: Global.systemSettings.convertFromCelsius(root.device.temperature)
-
 				height: nameLabel.height
 				showFirstSeparator: true    // otherwise this row does not align with the battery name
 				model: QuantityObjectModel {
@@ -48,7 +44,7 @@ BaseListItem {
 					QuantityObject { object: root.device; key: "voltage"; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
 					QuantityObject { object: root.device; key: "current"; unit: VenusOS.Units_Amp }
 					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: measurementsRow; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
 				}
 
 				// Show additional separator at the end, to balance with the first separator.
