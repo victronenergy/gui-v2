@@ -193,7 +193,7 @@ FocusScope {
 			}
 		}
 
-		KeyNavigation.right: alarmButton
+		KeyNavigation.right: notificationButton
 
 		Connections {
 			target: root.pageStack
@@ -254,20 +254,29 @@ FocusScope {
 			height: Theme.geometry_status_bar_gsmModem_icon_height
 			anchors.verticalCenter: parent.verticalCenter
 		}
+	}
 
-		CP.IconImage {
-			id: notificationIcon
+	StatusBarButton {
+		id: notificationButton
 
-			anchors.verticalCenter: parent.verticalCenter
-			visible: Global.notifications?.statusBarNotificationIconVisible ?? false
-			color: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
-				   ? Theme.color_critical
-				   : Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
-					 ? Theme.color_warning :
-					   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : notificationIcon.color
-			source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
-						"qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+		anchors {
+			left: connectivityRow.right
+			leftMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
+			verticalCenter: parent.verticalCenter
 		}
+		// The notificationButton should always be shown, even when the page is not interactive
+		opacity: 1
+		visible: !breadcrumbs.visible && (Global.notifications?.statusBarNotificationIconVisible ?? false)
+
+		color: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
+			   ? Theme.color_critical
+			   : Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
+				 ? Theme.color_warning :
+				   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : "transparent"
+		icon.source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
+						 "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+		onClicked: Global.pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+		KeyNavigation.right: alarmButton
 	}
 
 	Row {
@@ -346,7 +355,7 @@ FocusScope {
 		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
-				for (const button of [leftButton, auxButton, breadcrumbs, alarmButton, rightButton, sleepButton]) {
+				for (const button of [leftButton, auxButton, breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
 					if (button.enabled) {
 						button.focus = true
 						break
