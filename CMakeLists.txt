@@ -895,6 +895,7 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/ChargersImpl.qml
     data/mock/DcInputsImpl.qml
     data/mock/DcLoadsImpl.qml
+    data/mock/DigitalInputImpl.qml
     data/mock/DigitalInputsImpl.qml
     data/mock/EnvironmentInputsImpl.qml
     data/mock/EssImpl.qml
