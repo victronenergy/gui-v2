@@ -43,7 +43,7 @@ Page {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
 				background.visible: false
-				navigationHighlight.visible: false
+				KeyNavigationHighlightAttached.visible: false
 
 				ESSCard {
 					width: root.cardWidth
@@ -63,7 +63,7 @@ Page {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
 				background.visible: false
-				navigationHighlight.visible: false
+				KeyNavigationHighlightAttached.visible: false
 
 				SwitchesCard {
 					x: cardsView.spacing

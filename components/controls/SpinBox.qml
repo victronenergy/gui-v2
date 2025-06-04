@@ -244,28 +244,36 @@ CT.SpinBox {
 
 		// Shows a highlight box around the text when key navigation is enabled and the SpinBox is
 		// in navigation mode.
-		KeyNavigationHighlight {
-			id: navigationHighlight
-			anchors.centerIn: parent
-			width: primaryTextInputItem.width
-			height: valueColumn.height
-			active: Global.keyNavigationEnabled
-					&& root.focusMode === VenusOS.SpinBox_FocusMode_Navigate
-					&& parent.activeFocus
-		}
+		// KeyNavigationHighlight {
+		//     id: navigationHighlight
+		//     anchors.centerIn: parent
+		//     width: primaryTextInputItem.width
+		//     height: valueColumn.height
+		//     active: Global.keyNavigationEnabled
+		//             && root.focusMode === VenusOS.SpinBox_FocusMode_Navigate
+		//             && parent.activeFocus
+		// }
+		// TODO: Find a better way to position the KeyNavigationHighlight according
+		// to these above particular requirements
+		KeyNavigationHighlightAttached.active: Global.keyNavigationEnabled
+											   && root.focusMode === VenusOS.SpinBox_FocusMode_Navigate
+											   && parent.activeFocus
+
+		// TODO: sort out the EditFrame: its anchors and reliance on
+		// the visibilty of what is now the "Global" KeyNavigationHighlight
 
 		// Shows a box around the text when the SpinBox text can be edited directly (to indicate it
 		// can be clicked) or when key navigation is enabled and the SpinBox is in edit mode (to
 		// show up/down arrows indicating that the arrow keys can be used to change the value).
-		EditFrame {
-			anchors.fill: navigationHighlight
-			visible: !navigationHighlight.visible
-					&& (root.focusMode === VenusOS.SpinBox_FocusMode_Edit || root.editable)
-			border.color: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
-				  ? Theme.color_focus_highlight
-				  : Theme.color_blue
-			arrowHintsVisible: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
-		}
+		// EditFrame {
+		//     anchors.fill: navigationHighlight
+		//     visible: !navigationHighlight.visible
+		//             && (root.focusMode === VenusOS.SpinBox_FocusMode_Edit || root.editable)
+		//     border.color: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
+		//           ? Theme.color_focus_highlight
+		//           : Theme.color_blue
+		//     arrowHintsVisible: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
+		// }
 	}
 
 	up.indicator: Rectangle {
@@ -293,10 +301,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: parent.activeFocus
-		}
+		KeyNavigationHighlightAttached.active: parent.activeFocus
 
 		Image {
 			anchors.centerIn: parent
@@ -330,10 +335,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: parent.activeFocus
-		}
+		KeyNavigationHighlightAttached.active: parent.activeFocus
 
 		Image {
 			anchors.centerIn: parent

@@ -22,7 +22,6 @@ FocusScope {
 	property bool effectiveVisible: preferredVisible
 
 	property alias background: backgroundRect
-	property alias navigationHighlight: keyNavigationHighlight
 
 	// Allow item to receive focus within its focus scope.
 	focus: true
@@ -36,10 +35,5 @@ FocusScope {
 		anchors.fill: parent
 		z: -2 // allow PressArea highlight to be seen
 	}
-
-	KeyNavigationHighlight {
-		id: keyNavigationHighlight
-		anchors.fill: parent
-		active: parent.activeFocus
-	}
+	KeyNavigationHighlightAttached.active: parent.activeFocus
 }
