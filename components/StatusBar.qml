@@ -290,8 +290,9 @@ FocusScope {
 		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
 		backgroundColor: Theme.color_critical_background
 		downColor: Theme.color_critical
-		highlightMargins: -(4 * Theme.geometry_button_border_width) // ensure highlight border can be seen against critical backgroundColor
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
+		// ensure highlight border can be seen against critical backgroundColor
+		KeyNavigationHighlightAttached.margins: -(4 * Theme.geometry_button_border_width)
 
 		//% "Silence alarm"
 		text: qsTrId("notifications_silence_alarm")

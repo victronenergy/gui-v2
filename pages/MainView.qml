@@ -189,16 +189,11 @@ FocusScope {
 				view: swipeView
 			}
 
-			KeyNavigationHighlight {
-				anchors {
-					fill: parent
-					leftMargin: Theme.geometry_page_content_horizontalMargin
-					rightMargin: Theme.geometry_page_content_horizontalMargin
-				}
-				active: swipeViewLoader.blockItemFocus
-					&& swipeViewLoader.activeFocus
-					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			}
+			KeyNavigationHighlightAttached.active: swipeViewLoader.blockItemFocus
+												   && swipeViewLoader.activeFocus
+												   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			KeyNavigationHighlightAttached.leftMargin: Theme.geometry_page_content_horizontalMargin
+			KeyNavigationHighlightAttached.rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 
 		NavBar {
@@ -442,6 +437,46 @@ FocusScope {
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
 				: pageStack.depth > 0 ? pageStack
 				: swipeViewAndNavBarContainer
+	}
+
+	BorderImage {
+		id: globalKeyNavigationHighlight
+
+		readonly property Item activeFocusItem: Window.activeFocusItem ?? noActiveFocusItem
+		readonly property point mappedPoint: activeFocusItem.mapToItem(root, Qt.point(0,0))
+
+		x: mappedPoint.x + activeFocusItem.KeyNavigationHighlightAttached.leftMargin
+		y: mappedPoint.y + activeFocusItem.KeyNavigationHighlightAttached.topMargin
+		z: 1000 // show highlight above all siblings
+		width: activeFocusItem.width
+			   - activeFocusItem.KeyNavigationHighlightAttached.leftMargin
+			   - activeFocusItem.KeyNavigationHighlightAttached.rightMargin
+		height: activeFocusItem.height
+				- activeFocusItem.KeyNavigationHighlightAttached.topMargin
+				- activeFocusItem.KeyNavigationHighlightAttached.bottomMargin
+
+		source: Theme.colorScheme === Theme.Light
+				? "qrc:/images/key_navigation_highlight_light.svg"
+				: "qrc:/images/key_navigation_highlight_dark.svg"
+		border {
+			// If the width/height of the highlight is shorter than the corner size, then shrink the
+			// border size to avoid cropping the corners of the image.
+			left: Math.min(globalKeyNavigationHighlight.width / 2, Theme.geometry_focus_highlight_corner_size)
+			right: Math.min(globalKeyNavigationHighlight.width / 2, Theme.geometry_focus_highlight_corner_size)
+			top: Math.min(globalKeyNavigationHighlight.height / 2, Theme.geometry_focus_highlight_corner_size)
+			bottom: Math.min(globalKeyNavigationHighlight.height / 2, Theme.geometry_focus_highlight_corner_size)
+		}
+
+		Item {
+			id: noActiveFocusItem
+			visible: false
+		}
+
+		visible: Window.activeFocusItem
+				 && Global.keyNavigationEnabled
+				 && !Global.pageManager?.expandLayout
+				 && activeFocusItem.KeyNavigationHighlightAttached.visible
+				 && activeFocusItem.KeyNavigationHighlightAttached.active
 	}
 
 	Loader {

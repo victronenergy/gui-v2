@@ -14,7 +14,7 @@ BaseListItem {
 
 	// Hide the delegate highlight when the loader item is showing its own highlight (i.e. if
 	// showing a DimmingSlider in edit mode).
-	navigationHighlight.active: activeFocus && !switchWidgetLoader.item?.activeFocus
+	KeyNavigationHighlightAttached.active: activeFocus && !switchWidgetLoader.item?.activeFocus
 
 	SwitchableOutput {
 		id: output
@@ -202,10 +202,7 @@ BaseListItem {
 				font.pixelSize: Theme.font_size_body2
 			}
 
-			KeyNavigationHighlight {
-				anchors.fill: parent
-				active: parent.activeFocus
-			}
+			KeyNavigationHighlightAttached.active: parent.activeFocus
 
 			SettingSync {
 				id: dimmingState

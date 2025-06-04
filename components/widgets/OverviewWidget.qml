@@ -151,8 +151,5 @@ Rectangle {
 		onClicked: root.clicked()
 	}
 
-	KeyNavigationHighlight {
-		anchors.fill: parent
-		active: root.activeFocus
-	}
+	KeyNavigationHighlightAttached.active: root.activeFocus
 }

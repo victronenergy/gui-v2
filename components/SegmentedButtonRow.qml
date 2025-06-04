@@ -33,10 +33,7 @@ FocusScope {
 
 	// When the row is focused but none of its individual items are focused/highlighted, then
 	// highlight the row as a whole.
-	KeyNavigationHighlight {
-		anchors.fill: buttonRow
-		active: root.currentIndex < 0 && parent.activeFocus
-	}
+	KeyNavigationHighlightAttached.active: root.currentIndex < 0 && parent.activeFocus
 
 	Row {
 		id: buttonRow
@@ -72,10 +69,7 @@ FocusScope {
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
 
-					KeyNavigationHighlight {
-						anchors.fill: parent
-						active: mouseArea.activeFocus
-					}
+					KeyNavigationHighlightAttached.active: mouseArea.activeFocus
 				}
 				contentItem: Label {
 					anchors.centerIn: mouseArea

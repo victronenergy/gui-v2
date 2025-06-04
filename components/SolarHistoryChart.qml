@@ -221,10 +221,7 @@ FocusScope {
 					}
 				}
 
-				KeyNavigationHighlight {
-					anchors.fill: parent
-					active: parent.activeFocus
-				}
+				KeyNavigationHighlightAttached.active: parent.activeFocus
 			}
 		}
 	}
