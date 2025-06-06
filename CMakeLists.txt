@@ -28,7 +28,7 @@ cmake_minimum_required(VERSION 3.24) # earlier versions of cmake don't handle 'q
 cmake_policy(SET CMP0071 NEW) # process GENERATED source files in AUTOMOC and AUTOUIC. Added to silence a cmake warning.
 cmake_policy(SET CMP0079 NEW)
 
-project(venus-gui-v2 LANGUAGES CXX VERSION 1.1.19)
+project(venus-gui-v2 LANGUAGES CXX VERSION 1.2.0)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
