@@ -29,16 +29,16 @@ ControlCard {
 			id: repeater
 
 			width: parent.width
-			model: Global.ess.stateModel
+			model: Global.systemSettings.ess.stateModel
 			delegate: SettingsColumn {
 				width: parent.width
 
 				ListRadioButton {
 					text: modelData.display
 					flat: true
-					checked: Global.ess.state === modelData.value
+					checked: Global.systemSettings.ess.state === modelData.value
 					C.ButtonGroup.group: stateRadioButtonGroup
-					onClicked: Global.ess.setState(modelData.value)
+					onClicked: Global.systemSettings.ess.setState(modelData.value)
 				}
 
 				FlatListItemSeparator {}
@@ -51,7 +51,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("ess_card_minimum_soc")
 			flat: true
-			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.ess.minimumStateOfCharge)
+			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.systemSettings.ess.minimumStateOfCharge)
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
@@ -60,8 +60,8 @@ ControlCard {
 				id: minSocDialogComponent
 
 				ESSMinimumSOCDialog {
-					minimumStateOfCharge: Global.ess.minimumStateOfCharge
-					onAccepted: Global.ess.setMinimumStateOfCharge(minimumStateOfCharge)
+					minimumStateOfCharge: Global.systemSettings.ess.minimumStateOfCharge
+					onAccepted: Global.systemSettings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 
@@ -81,9 +81,9 @@ ControlCard {
 		ListItem {
 			id: activeSocLimit
 
-			visible: Global.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
+			visible: Global.systemSettings.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 			//% "Active SOC Limit: %1%"
-			text: qsTrId("ess_active_soc_limit").arg(Math.max(Global.ess.minimumStateOfCharge, Global.ess.stateOfChargeLimit))
+			text: qsTrId("ess_active_soc_limit").arg(Math.max(Global.systemSettings.ess.minimumStateOfCharge, Global.systemSettings.ess.stateOfChargeLimit))
 			flat: true
 			content.children: [
 				CP.IconImage {

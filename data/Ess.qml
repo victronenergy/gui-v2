@@ -9,6 +9,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string systemSettingsUid
 	readonly property int state: _getState()
 	readonly property int minimumStateOfCharge: _minimumSocLimit.valid ? _minimumSocLimit.value : 0
 	readonly property int stateOfChargeLimit: _socLimit.valid ? _socLimit.value : 0
@@ -140,20 +141,18 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _batteryLifeState: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+		uid: root.systemSettingsUid + "/Settings/CGwacs/BatteryLife/State"
 	}
 
 	readonly property VeQuickItem _hub4Mode: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+		uid: root.systemSettingsUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
 	readonly property VeQuickItem _minimumSocLimit: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/MinimumSocLimit"
+		uid: root.systemSettingsUid + "/Settings/CGwacs/BatteryLife/MinimumSocLimit"
 	}
 
 	readonly property VeQuickItem _socLimit: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
+		uid: root.systemSettingsUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
-
-	Component.onCompleted: Global.ess = root
 }

@@ -36,7 +36,6 @@ QtObject {
 	property var acInputs
 	property var dcInputs
 	property var environmentInputs
-	property var ess
 	property var evChargers
 	property var generators
 	property var inverterChargers
@@ -97,7 +96,6 @@ QtObject {
 		acInputs = null
 		dcInputs = null
 		environmentInputs = null
-		ess = null
 		evChargers = null
 		generators = null
 		inverterChargers = null

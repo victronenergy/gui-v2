@@ -37,17 +37,17 @@ Page {
 
 		ListRadioButtonGroup {
 			text: CommonWords.mode
-			optionModel: Global.ess.stateModel
+			optionModel: Global.systemSettings.ess.stateModel
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
-					if (optionModel[i].value === Global.ess.state) {
+					if (optionModel[i].value === Global.systemSettings.ess.state) {
 						return i
 					}
 				}
 				return -1
 			}
 			onOptionClicked: function(index) {
-				Global.ess.setState(optionModel[index].value)
+				Global.systemSettings.ess.setState(optionModel[index].value)
 			}
 		}
 
@@ -109,7 +109,7 @@ Page {
 
 			//% "Minimum SOC (unless grid fails)"
 			text: qsTrId("settings_ess_min_soc")
-			secondaryText: Global.ess.minimumStateOfCharge + "%"
+			secondaryText: Global.systemSettings.ess.minimumStateOfCharge + "%"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
@@ -118,8 +118,8 @@ Page {
 				id: minSocDialogComponent
 
 				ESSMinimumSOCDialog {
-					minimumStateOfCharge: Global.ess.minimumStateOfCharge
-					onAccepted: Global.ess.setMinimumStateOfCharge(minimumStateOfCharge)
+					minimumStateOfCharge: Global.systemSettings.ess.minimumStateOfCharge
+					onAccepted: Global.systemSettings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 		}
@@ -128,8 +128,8 @@ Page {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
-			value: Math.max(Global.ess.minimumStateOfCharge || 0, socLimit.value || 0)
+				&& Global.systemSettings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
+			value: Math.max(Global.systemSettings.ess.minimumStateOfCharge || 0, socLimit.value || 0)
 			unit: VenusOS.Units_Percentage
 		}
 
@@ -140,7 +140,7 @@ Page {
 			text: qsTrId("settings_ess_batteryLife_state")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
+				&& Global.systemSettings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			interactive: false
 			optionModel: [
 				// Values below taken from MaintenanceState enum in dbus-cgwacs
