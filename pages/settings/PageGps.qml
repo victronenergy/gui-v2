@@ -34,6 +34,13 @@ Page {
 		}
 	}
 
+	title: device.name
+
+	Device {
+		id: device
+		serviceUid: root.bindPrefix
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListText {
