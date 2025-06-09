@@ -6,53 +6,56 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
-	property alias firstColumnText: firstTitleLabel.text
-	property alias quantityTitleModel: titleRepeater.model
+Row {
+	id: root
 
-	width: parent.width
-	height: Theme.geometry_listItem_height
+	property alias headerText: firstTitleLabel.text
+	property alias model: titleRepeater.model
+	property int fontSize: Theme.font_size_caption
+	readonly property int columnCount: titleRepeater.count + 1 // +1 for header column
+
+	// Column sizing parameters
+	property int metricsFontSize: fontSize // the QuantityTableMetrics font size, for calculating column size
+	property real fixedColumnWidth: NaN // if set, use this for column widths, instead of QuantityTableMetrics
+
+	height: Theme.geometry_quantityTable_row_height
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
+	rightPadding: Theme.geometry_listItem_content_horizontalMargin
+	spacing: Theme.geometry_quantityGroupRow_spacing
 
 	Label {
 		id: firstTitleLabel
-		anchors {
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
-		}
-		leftPadding: Theme.geometry_listItem_content_horizontalMargin
-		font.pixelSize: Theme.font_size_caption
+		anchors.verticalCenter: parent.verticalCenter
+		font.pixelSize: root.fontSize
 		color: Theme.color_solarListPage_header_text
 		elide: Text.ElideRight
-		width: parent.width - quantityRow.width - Theme.geometry_quantityGroupRow_spacing
+		width: isNaN(root.fixedColumnWidth)
+			   ? parent.width - parent.leftPadding - parent.rightPadding - quantityRow.width - root.spacing
+			   : root.fixedColumnWidth
 	}
 
 	Row {
 		id: quantityRow
 
-		anchors {
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
-			right: parent.right
-			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
-		}
-		width: Theme.geometry_solarListPage_quantityRow_width
+		anchors.verticalCenter: parent.verticalCenter
+		spacing: root.spacing
 
 		Repeater {
 			id: titleRepeater
 
 			delegate: Label {
-				width: quantityMetrics.columnWidth(modelData.unit)
+				width: isNaN(root.fixedColumnWidth)
+					   ? quantityMetrics.columnWidth(modelData.unit, implicitWidth)
+					   : root.fixedColumnWidth
 				text: modelData.text
-				font.pixelSize: Theme.font_size_caption
+				font.pixelSize: root.fontSize
 				color: Theme.color_solarListPage_header_text
 			}
 		}
 
 		QuantityTableMetrics {
 			id: quantityMetrics
-			count: titleRepeater.count
-			availableWidth: quantityRow.width
-			spacing: Theme.geometry_quantityGroupRow_spacing
+			font.pixelSize: root.metricsFontSize
 		}
 	}
 }

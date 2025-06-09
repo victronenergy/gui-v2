@@ -6,36 +6,25 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	Provides a standardized width for a table column that shows a quantity.
+
+	The width is adjusted depending on the font size and the quantity unit.
+*/
 FontMetrics {
-	property bool smallTextMode
-	property real availableWidth
-	property bool equalWidthColumns
-	property int count
-	property int spacing: Theme.geometry_quantityTable_horizontalSpacing
-
-	// If specified, allows for a custom column width for the 'Units_None' column.
-	// Eg. label columns with cells like "L1", "L2" can be thinner to allow wider columns elsewhere.
-	property int firstColumnWidth
-
-	font.family: Global.fontFamily
-	font.pixelSize: smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
-
-	function columnWidth(unit) {
-		if (!!firstColumnWidth) {
-			if (unit === VenusOS.Units_None) {
-				return firstColumnWidth
-			}
-			return (availableWidth - firstColumnWidth) / (count - 1)
-		}
-
-		if (equalWidthColumns) {
-			return availableWidth / count
+	function columnWidth(unit, defaultValue) {
+		if (unit === VenusOS.Units_None) {
+			return defaultValue
 		}
 
 		// Give the unit symbol some extra space on the column.
-		const maxTextWidth = unit === VenusOS.Units_Energy_KiloWattHour
-						   ? advanceWidth("9999kWH")
-						   : advanceWidth("9999W")
-		return maxTextWidth + spacing
+		// Due to QTBUG-124588, use tightBoundingRect() instead of advanceWidth().
+		const maxTextRect = unit === VenusOS.Units_Energy_KiloWattHour
+				? tightBoundingRect("99.99kWH")
+				: tightBoundingRect("99.99W")
+		return maxTextRect.width + maxTextRect.x
 	}
+
+	font.family: Global.fontFamily
+	font.pixelSize: Theme.font_size_body3
 }

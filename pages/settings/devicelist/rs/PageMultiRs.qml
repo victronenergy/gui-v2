@@ -225,41 +225,24 @@ Page {
 
 				bottomContentChildren: [
 					QuantityTable {
-						headerVisible: false
-						rowCount: root.trackerCount
-						units: [
-							{ unit: VenusOS.Units_None },
-							{ unit: VenusOS.Units_Volt_DC },
-							{ unit: VenusOS.Units_Amp },
-							{ unit: VenusOS.Units_Watt },
-						]
-						valueForModelIndex: function(trackerIndex, column) {
-							const tracker = trackerObjects.objectAt(trackerIndex)
-							if (column === 0) {
-								return Global.solarDevices.formatTrackerName(tracker.name,
-										trackerIndex, root.trackerCount, root.title,
-										VenusOS.TrackerName_NoDevicePrefix)
-							} else if (column === 1) {
-								return tracker.voltage
-							} else if (column === 2) {
-								return tracker.current
-							} else if (column === 3) {
-								return tracker.power
+						width: parent.width
+						model: root.trackerCount
+						delegate: QuantityTable.TableRow {
+							id: tableRow
+							preferredVisible: tracker.enabled
+							headerText: Global.solarDevices.formatTrackerName(
+									  tracker.name, index, root.trackerCount, root.title,
+									  VenusOS.TrackerName_NoDevicePrefix)
+							model: QuantityObjectModel {
+								QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+								QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
+								QuantityObject { object: tracker; key: "power"; unit: VenusOS.Units_Watt }
 							}
-						}
-						rowIsVisible: function(row) {
-							const tracker = trackerObjects.objectAt(row)
-							return tracker.enabled
-						}
 
-						Instantiator {
-							id: trackerObjects
-							model: root.trackerCount
-							delegate: SolarTracker {
-								required property int index
-
+							SolarTracker {
+								id: tracker
 								device: root.solarDevice
-								trackerIndex: index
+								trackerIndex: tableRow.index
 							}
 						}
 					}

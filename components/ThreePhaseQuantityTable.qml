@@ -14,38 +14,8 @@ QuantityTable {
 	property string labelText
 	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
-	valueForModelIndex: function(phaseIndex, column) {
-		if (column === 0) {
-			return "L%1".arg(phaseIndex + 1)
-		}
-
-		const phase = phases.objectAt(phaseIndex)
-		if (phase) {
-			switch(column) {
-			case 1:
-				return phase.power
-			case 2:
-				return phase.voltage
-			case 3:
-				return phase.current
-			case 4:
-				return phase.frequency
-			}
-		}
-		return NaN
-	}
-
-	metrics.availableWidth: width - 2*Theme.geometry_listItem_content_horizontalMargin
-	metrics.firstColumnWidth: Theme.geometry_vebusDeviceListPage_quantityTable_firstColumn_width
-	units: [
-		{ unit: VenusOS.Units_None },
-		{ unit: VenusOS.Units_Watt },
-		{ unit: VenusOS.Units_Volt_AC, precision: root.voltPrecision },
-		{ unit: VenusOS.Units_Amp },
-		{ unit: VenusOS.Units_Hertz }
-	]
-	labelHorizontalAlignment: Qt.AlignRight
-	headerComponent: AsymmetricRoundedRectangle {
+	columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
+	header: AsymmetricRoundedRectangle {
 		layer.enabled: false // if 'layer.enabled' is true, any child text looks rough on wasm builds
 		width: root.width
 		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
@@ -87,12 +57,19 @@ QuantityTable {
 		}
 	}
 
-	Instantiator {
-		id: phases
-		model: root.rowCount
-		delegate: AcPhase {
-			required property int index
-			serviceUid: root.phaseUidPrefix.length ? root.phaseUidPrefix + "/L" + (index + 1) : ""
+	delegate: QuantityTable.TableRow {
+		headerText: `L${index + 1}`
+		labelAlignment: Qt.AlignRight
+		model: QuantityObjectModel {
+			QuantityObject { object: phase; key: "power"; unit: VenusOS.Units_Watt }
+			QuantityObject { object: phase; key: "voltage"; unit: VenusOS.Units_Volt_AC; precision: root.voltPrecision }
+			QuantityObject { object: phase; key: "current"; unit: VenusOS.Units_Amp }
+			QuantityObject { object: phase; key: "frequency"; unit: VenusOS.Units_Hertz }
+		}
+
+		AcPhase {
+			id: phase
+			serviceUid: root.phaseUidPrefix.length ? `${root.phaseUidPrefix}/L${index + 1}` : ""
 		}
 	}
 

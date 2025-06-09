@@ -98,7 +98,10 @@ OverviewWidget {
 				id: deviceListView
 
 				header: QuantityGroupListHeader {
-					quantityTitleModel: [
+					width: parent.width
+					metricsFontSize: Theme.font_size_body2 // align columns with those in the delegate
+					rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+					model: [
 						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
 					]
 				}

@@ -24,7 +24,7 @@ Page {
 				QuantityTableSummary {
 					id: chargerSummary
 
-					function _currentSummaryText() {
+					readonly property string currentSummaryText: {
 						if (root.energyMeterMode) {
 							return "--"
 						}
@@ -33,64 +33,53 @@ Page {
 						return actual + "/" + max
 					}
 
-					metrics.equalWidthColumns: true
+					readonly property string chargingTimeText: root.energyMeterMode ? "--"
+							: Utils.formatAsHHMM(root.evCharger.chargingTime, true)
 
-					model: [
-						{
-							//% "Session"
-							title: qsTrId("evcs_session"),
-							text: CommonWords.total,
-							unit: VenusOS.Units_None,
-						},
-						{
-							title: CommonWords.power_watts,
-							value: root.evCharger.power,
-							unit: VenusOS.Units_Watt
-						},
-						{
-							title: CommonWords.current_amps,
-							text: _currentSummaryText(),
-							secondaryText: Units.defaultUnitString(VenusOS.Units_Amp)
-						},
-						{
-							title: CommonWords.energy,
-							value: root.evCharger.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
-						},
-						{
-							//: Charging time for the EV charger
-							//% "Time"
-							title: qsTrId("evcs_charging_time"),
-							text: root.energyMeterMode ? "--" : Utils.formatAsHHMM(root.evCharger.chargingTime, true),
-							secondaryText: ""
-						},
+					width: parent.width
+					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
+					equalWidthColumns: true
+					//% "Session"
+					summaryHeaderText: qsTrId("evcs_session")
+					summaryModel: [
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_None },
+						{ text: CommonWords.current_amps, unit: VenusOS.Units_None },
+						{ text: CommonWords.energy, unit: VenusOS.Units_None },
+						//: Charging time for the EV charger
+						//% "Time"
+						{ text: qsTrId("evcs_charging_time"), unit: VenusOS.Units_None },
 					]
+					bodyHeaderText: CommonWords.total
+					bodyModel: QuantityObjectModel {
+						QuantityObject { object: root.evCharger; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: chargerSummary; key: "currentSummaryText"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: root.evCharger; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+						QuantityObject { object: chargerSummary; key: "chargingTimeText" }
+					}
 				}
 
 				QuantityTable {
 					id: phaseTable
 
 					anchors.top: chargerSummary.bottom
+					width: chargerSummary.width
+					columnSpacing: chargerSummary.columnSpacing
 					visible: root.evCharger.phases.count > 1
-					metrics.equalWidthColumns: true
-					headerVisible: false
+					equalWidthColumns: true
+					model: root.evCharger.phases.count > 1 ? root.evCharger.phases.count : 0
+					delegate: QuantityTable.TableRow {
+						readonly property QtObject phase: root.evCharger.phases.get(index)
 
-					rowCount: root.evCharger.phases.count
-					units: [
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_Watt },
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_None },
-						{ title: "", unit: VenusOS.Units_None },
-					]
-					valueForModelIndex: function(phaseIndex, column) {
-						const phase = root.evCharger.phases.get(phaseIndex)
-						if (column === 0) {
-							return phase.name
-						} else if (column === 1) {
-							return phase.power
-						} else {
-							return 0
+						headerText: phase.name
+						model: QuantityObjectModel {
+							QuantityObject { object: phase; key: "power"; unit: VenusOS.Units_Watt }
+
+							// The current, energy and charging time columns are only relevant to
+							// the summary and not the individual devices, so just add empty values
+							// here to pad out the remaining columns.
+							QuantityObject {}
+							QuantityObject {}
+							QuantityObject {}
 						}
 					}
 				}
