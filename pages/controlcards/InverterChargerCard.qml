@@ -92,7 +92,7 @@ ControlCard {
 			text: CommonWords.ess
 			flat: true
 			preferredVisible: essModeItem.valid
-			secondaryText: Global.ess.essStateToButtonText(essModeItem.value)
+			secondaryText: Global.systemSettings.ess.essStateToButtonText(essModeItem.value)
 			// change the font size for the child button
 			button.font.pixelSize: Theme.font_size_body1
 			onClicked: {

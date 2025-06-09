@@ -24,6 +24,11 @@ QtObject {
 	readonly property StartPageConfiguration startPageConfiguration: StartPageConfiguration {
 		systemSettingsUid: root.serviceUid
 	}
+
+	readonly property Ess ess: Ess {
+		systemSettingsUid: root.serviceUid
+	}
+
 	readonly property int speedUnit: {
 		switch (_speedUnit.value) {
 		case "km/h":
