@@ -130,6 +130,8 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints) const
 {
 	switch (unit) {
+	case VenusOS::Enums::Units_None:
+		return QString();
 	case VenusOS::Enums::Units_Watt:
 		return QStringLiteral("W");
 	case VenusOS::Enums::Units_Volt_AC: // fall through
@@ -268,14 +270,6 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	qreal unitMatchValue,
 	int formatHints) const
 {
-	// unit unknown
-	if (unit == VenusOS::Enums::Units_None) {
-		//qWarning() << "getDisplayText(): unknown unit " << unit << " with value " << value;
-		quantityInfo qty;
-		qty.number = QStringLiteral("--");
-		return qty;
-	}
-
 	// value unknown
 	if (qIsNaN(value)) {
 		quantityInfo qty;

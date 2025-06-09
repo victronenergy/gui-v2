@@ -102,6 +102,10 @@ QtObject {
 			"/TimeToGo": (24 * 60 * 60) + 190 * 60, // 1d 3h 10m
 			"/Settings/HasSettings": 1,
 			"/Settings/Battery/PeukertExponent": 1.03999999,
+			"/System/MinTemperatureCellId": 201,
+			"/System/MinCellTemperature": 14.5,
+			"/System/NrOfModulesBlockingCharge": 20,
+			"/System/NrOfModulesBlockingDischarge": 21,
 		}
 		for (var propName in props) {
 			Global.mockDataSimulator.setMockValue(battery.serviceUid + propName, props[propName])

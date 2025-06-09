@@ -25,7 +25,7 @@ Page {
 				//% "Lowest cell voltage"
 				text: qsTrId("batterydetails_lowest_cell_voltage")
 				model: QuantityObjectModel {
-					QuantityObject { object: details.minVoltageCellId }
+					QuantityObject { object: details.minVoltageCellId; precision: details.minVoltageCellId.decimals }
 					QuantityObject { object: details.minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
 				}
 				preferredVisible: details.allowsLowestCellVoltage
@@ -35,7 +35,7 @@ Page {
 				//% "Highest cell voltage"
 				text: qsTrId("batterydetails_highest_cell_voltage")
 				model: QuantityObjectModel {
-					QuantityObject { object: details.maxVoltageCellId }
+					QuantityObject { object: details.maxVoltageCellId; precision: details.maxVoltageCellId.decimals }
 					QuantityObject { object: details.maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
 				}
 				preferredVisible: details.allowsHighestCellVoltage
@@ -45,7 +45,7 @@ Page {
 				//% "Minimum cell temperature"
 				text: qsTrId("batterydetails_minimum_cell_temperature")
 				model: QuantityObjectModel {
-					QuantityObject { object: details.minTemperatureCellId }
+					QuantityObject { object: details.minTemperatureCellId; precision: details.minTemperatureCellId.decimals }
 					QuantityObject { object: temperatureData; key: "minCellTemperature"; unit: Global.systemSettings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMinimumCellTemperature
@@ -55,7 +55,7 @@ Page {
 				//% "Maximum cell temperature"
 				text: qsTrId("batterydetails_maximum_cell_temperature")
 				model: QuantityObjectModel {
-					QuantityObject { object: details.maxTemperatureCellId }
+					QuantityObject { object: details.maxTemperatureCellId; precision: details.maxTemperatureCellId.decimals }
 					QuantityObject { object: temperatureData; key: "maxCellTemperature"; unit: Global.systemSettings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMaximumCellTemperature
@@ -85,8 +85,8 @@ Page {
 				//% "Number of modules blocking charge / discharge"
 				text: qsTrId("batterydetails_number_of_modules_blocking_charge_discharge")
 				model: QuantityObjectModel {
-					QuantityObject { object: details.nrOfModulesBlockingCharge }
-					QuantityObject { object: details.nrOfModulesBlockingDischarge }
+					QuantityObject { object: details.nrOfModulesBlockingCharge; precision: details.nrOfModulesBlockingCharge.decimals }
+					QuantityObject { object: details.nrOfModulesBlockingDischarge; precision: details.nrOfModulesBlockingDischarge.decimals }
 				}
 				preferredVisible: details.allowsNumberOfModulesBlockingChargeDischarge
 			}
