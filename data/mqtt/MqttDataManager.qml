@@ -11,7 +11,6 @@ QtObject {
 	id: root
 
 	property var dcInputs: DcInputsImpl { }
-	property var ess: EssImpl { }
 	property var evChargers: EvChargersImpl { }
 	property var inverterChargers: InverterChargersImpl {}
 	property var notifications: NotificationsImpl {}

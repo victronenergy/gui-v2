@@ -433,7 +433,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/common/DcDevice.qml
     data/common/DcInput.qml
     data/common/DeviceModel.qml
-    data/common/EssData.qml
     data/common/EvCharger.qml
     data/common/Generator.qml
     data/common/GensetErrorModel.qml
@@ -853,7 +852,6 @@ endif()
 set(Dbus_QML_MODULE_SOURCES
     data/dbus/DBusDataManager.qml
     data/dbus/DcInputsImpl.qml
-    data/dbus/EssImpl.qml
     data/dbus/EvChargersImpl.qml
     data/dbus/NotificationsImpl.qml
     data/dbus/PvInvertersImpl.qml
@@ -894,7 +892,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/DcLoadsImpl.qml
     data/mock/DigitalInputsImpl.qml
     data/mock/EnvironmentInputsImpl.qml
-    data/mock/EssImpl.qml
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
     data/mock/GpsImpl.qml
@@ -1042,7 +1039,6 @@ qt_add_resources(BoatPageComponents "BoatPageComponents_large_resources"
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/DcInputsImpl.qml
-    data/mqtt/EssImpl.qml
     data/mqtt/EvChargersImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
