@@ -15,17 +15,34 @@ LevelsTab {
 
 	model: Global.environmentInputs.model
 	delegate: EnvironmentGaugePanel {
+		id: panel
+
 		required property Device device
 
 		width: hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
 		height: Gauges.height(Global.pageManager?.expandLayout)
 		animationEnabled: root.animationEnabled
 		title: device?.name ?? ""
-		temperature: device?.temperature ?? NaN
-		temperatureType: device?.temperatureType ?? NaN
-		humidity: device?.humidity ?? NaN
+		temperature: temperatureItem.valid ? temperatureItem.value : NaN
+		temperatureType: temperatureType.valid ? temperatureType.value : VenusOS.Temperature_DeviceType_Generic
+		humidity: humidity.valid ? humidity.value : NaN
 		temperatureGaugeGradient: temperatureGradient
 		humidityGaugeGradient: humidityGradient
+
+		VeQuickItem {
+			id: temperatureItem
+			uid: panel.device.serviceUid + "/Temperature"
+			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		}
+		VeQuickItem {
+			id: temperatureType
+			uid: panel.device.serviceUid + "/TemperatureType"
+		}
+		VeQuickItem {
+			id: humidity
+			uid: panel.device.serviceUid + "/Humidity"
+		}
 	}
 
 	Gradient {

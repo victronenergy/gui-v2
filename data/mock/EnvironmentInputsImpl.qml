@@ -50,8 +50,31 @@ Item {
 		}
 	}
 
+	component EnvironmentInput : Device {
+		readonly property real temperature: _temperature.valid ? _temperature.value : NaN
+		readonly property real humidity: _humidity.valid ? _humidity.value : NaN
+		readonly property int temperatureType: _temperatureType.valid ? _temperatureType.value : VenusOS.Temperature_DeviceType_Generic
+
+		readonly property VeQuickItem _temperature: VeQuickItem {
+			uid: serviceUid + "/Temperature"
+			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		}
+		readonly property VeQuickItem _humidity: VeQuickItem {
+			uid: serviceUid + "/Humidity"
+		}
+		readonly property VeQuickItem _temperatureType: VeQuickItem {
+			uid: serviceUid + "/TemperatureType"
+		}
+		readonly property VeQuickItem _status: VeQuickItem {
+			uid: serviceUid + "/Status"
+		}
+	}
+
 	property Component inputComponent: Component {
 		EnvironmentInput {
+			id: input
+
 			onTemperatureTypeChanged: {
 				if (temperatureType >= 0 && !_customName.value) {
 					Qt.callLater(function() {
@@ -87,7 +110,7 @@ Item {
 			const hasCreatedObjects = _createdObjects.length > 0
 			while (_createdObjects.length > 1) {
 				let obj = _createdObjects.pop()
-				obj.deviceInstance = -1
+				Global.mockDataSimulator.setMockValue(obj.serviceUid + "/DeviceInstance", -1)
 				obj.destroy()
 			}
 
@@ -99,7 +122,7 @@ Item {
 
 			if (hasCreatedObjects) {
 				let lastObject = _createdObjects.shift()
-				lastObject.deviceInstance = -1
+				Global.mockDataSimulator.setMockValue(lastObject.serviceUid + "/DeviceInstance", -1)
 				lastObject.destroy()
 			}
 		}
