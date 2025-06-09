@@ -16,7 +16,6 @@ Item {
 			&& !!Global.acInputs
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
-			&& !!Global.ess
 			&& !!Global.evChargers
 			&& !!Global.generators
 			&& !!Global.inverterChargers
@@ -94,7 +93,6 @@ Item {
 	AcInputs {}
 	DcInputs {}
 	EnvironmentInputs {}
-	Ess {}
 	EvChargers {}
 	Generators {}
 	InverterChargers {}
