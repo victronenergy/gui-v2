@@ -291,4 +291,10 @@ TestCase {
 		quantity = Units.getDisplayText(unit, 1.9612345, 4)
 		compare(quantity.number, "1.9612")
 	}
+
+	function test_unitNone() {
+		expect(VenusOS.Units_None, NaN, "--", "")
+		expect(VenusOS.Units_None, 123, "123", "")
+		expect(VenusOS.Units_None, 12345678, "12345678", "")
+	}
 }
