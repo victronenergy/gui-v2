@@ -38,7 +38,7 @@ ControlCard {
 					flat: true
 					checked: Global.ess.state === modelData.value
 					C.ButtonGroup.group: stateRadioButtonGroup
-					onClicked: Global.ess.setStateRequested(modelData.value)
+					onClicked: Global.ess.setState(modelData.value)
 				}
 
 				FlatListItemSeparator {}
@@ -61,7 +61,7 @@ ControlCard {
 
 				ESSMinimumSOCDialog {
 					minimumStateOfCharge: Global.ess.minimumStateOfCharge
-					onAccepted: Global.ess.setMinimumStateOfChargeRequested(minimumStateOfCharge)
+					onAccepted: Global.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 
