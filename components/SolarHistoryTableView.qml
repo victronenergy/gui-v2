@@ -67,63 +67,60 @@ Column {
 	QuantityTableSummary {
 		id: tableSummary
 
-		metrics.smallTextMode: root.smallTextMode
-		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
-		metrics.firstColumnWidth: (root.width / model.length) * 1.5  // expand tracker name column to fill 1.5 column space
-
-		model: [
-			{
-				title: "",
-				text: CommonWords.total,
-				unit: VenusOS.Units_None,
-			},
-			{
-				title: CommonWords.yield_kwh,
-				value: root._trackerHistoryTotal("yieldKwh"),
-				unit: VenusOS.Units_Energy_KiloWattHour
-			},
-			{
-				//% "Max Voltage"
-				title: qsTrId("charger_history_max_voltage"),
-				value: root._trackerHistoryMax("maxPvVoltage"),
-				unit: VenusOS.Units_Volt_DC
-			},
-			{
-				//% "Max Power"
-				title: qsTrId("charger_history_max_power"),
-				value: root._trackerHistoryMax("maxPower"),
-				unit: VenusOS.Units_Watt
-			},
+		width: parent.width
+		bodyFontSize: root.smallTextMode ? Theme.font_size_body2 : Theme.font_size_body3
+		summaryModel: [
+			{ text: CommonWords.yield_kwh, unit: VenusOS.Units_Energy_KiloWattHour },
+			  //% "Max Voltage"
+			{ text: qsTrId("charger_history_max_voltage"), unit: VenusOS.Units_Volt_DC },
+			  //% "Max Power"
+			{ text: qsTrId("charger_history_max_power"), unit: VenusOS.Units_Watt },
 		]
+		bodyHeaderText: CommonWords.total
+		bodyModel: QuantityObjectModel {
+			id: summaryModel
+
+			readonly property real totalYield: root._trackerHistoryTotal("yieldKwh")
+			readonly property real maxVoltage: root._trackerHistoryMax("maxPvVoltage")
+			readonly property real maxPower: root._trackerHistoryMax("maxPower")
+
+			QuantityObject { object: summaryModel; key: "totalYield"; unit: VenusOS.Units_Energy_KiloWattHour }
+			QuantityObject { object: summaryModel; key: "maxVoltage"; unit: VenusOS.Units_Volt_DC }
+			QuantityObject { object: summaryModel; key: "maxPower"; unit: VenusOS.Units_Watt }
+		}
 	}
 
 	QuantityTable {
 		id: trackerTable
 
-		bottomPadding: Theme.geometry_quantityTable_bottomMargin
-		visible: !root.summaryOnly && root.solarHistory.trackerCount > 1
-		headerVisible: false
-		metrics.smallTextMode: root.smallTextMode
-		metrics.spacing: 2*Theme.geometry_quantityTable_horizontalSpacing
-		metrics.firstColumnWidth: (root.width / units.length) * 1.5  // expand tracker name column to fill 1.5 column space
+		width: parent.width
+		bottomMargin: Theme.geometry_quantityTable_bottomMargin
+		visible: !root.summaryOnly
+		metricsFontSize: tableSummary.metricsFontSize
+		columnSpacing: tableSummary.columnSpacing
 
-		rowCount: root.solarHistory.trackerCount
-		units: [
-			// No 'title' property is specified, since these are same as summary headers.
-			{ unit: VenusOS.Units_None },
-			{ unit: VenusOS.Units_Energy_KiloWattHour },
-			{ unit: VenusOS.Units_Volt_DC },
-			{ unit: VenusOS.Units_Watt },
-		]
-		valueForModelIndex: function(trackerIndex, column) {
-			if (column === 0) {
-				return root.solarHistory.trackerName(trackerIndex, VenusOS.TrackerName_NoDevicePrefix)
-			} else if (column === 1) {
-				return root._trackerHistoryTotal("yieldKwh", trackerIndex)
-			} else if (column === 2) {
-				return root._trackerHistoryMax("maxVoltage", trackerIndex)
-			} else if (column === 3) {
-				return root._trackerHistoryMax("maxPower", trackerIndex)
+		// Table is only shown when there are multiple trackers.
+		model: root.solarHistory.trackerCount === 1 ? 0 : root.solarHistory.trackerCount
+		delegate: QuantityTable.TableRow {
+			id: tableRow
+
+			preferredVisible: trackerEnabled.value !== 0
+			headerText: root.solarHistory.trackerName(index, VenusOS.TrackerName_NoDevicePrefix)
+			model: QuantityObjectModel {
+				id: rowModel
+
+				readonly property real totalYield: root._trackerHistoryTotal("yieldKwh", index)
+				readonly property real maxVoltage: root._trackerHistoryMax("maxVoltage", index)
+				readonly property real maxPower: root._trackerHistoryMax("maxPower", index)
+
+				QuantityObject { object: rowModel; key: "totalYield"; unit: VenusOS.Units_Energy_KiloWattHour }
+				QuantityObject { object: rowModel; key: "maxVoltage"; unit: VenusOS.Units_Volt_DC }
+				QuantityObject { object: rowModel; key: "maxPower"; unit: VenusOS.Units_Watt }
+			}
+
+			VeQuickItem {
+				id: trackerEnabled
+				uid: `${root.solarHistory.bindPrefix}/Pv/${tableRow.index}/Enabled`
 			}
 		}
 	}

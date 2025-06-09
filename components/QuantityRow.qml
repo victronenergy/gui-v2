@@ -10,20 +10,25 @@ Row {
 	id: root
 
 	property QuantityObjectModel model
-	property alias quantityMetrics: quantityMetrics
 	property bool showFirstSeparator
+	property int fontSize: Theme.font_size_body2
+	property color valueColor: Theme.color_quantityTable_quantityValue
+	readonly property int count: quantityRepeater.count
 
-	// In table mode, items are spaced out without separators between them.
-	property bool tableMode
+	// Column sizing and alignment parameters
+	property bool tableMode // if true, items are spaced out without separators in between
+	property int metricsFontSize: fontSize // the QuantityTableMetrics font size, for calculating column size
+	property real fixedColumnWidth: NaN // if set, use this for column widths, instead of QuantityTableMetrics
+	property int labelAlignment: tableMode ? Qt.AlignLeft : Qt.AlignHCenter
 
 	readonly property bool _showSeparators: !tableMode
-	readonly property int _textAlignment: tableMode ? Qt.AlignLeft : Qt.AlignHCenter
 
 	height: Theme.geometry_listItem_height
+	spacing: Theme.geometry_quantityGroupRow_spacing
 
 	FontMetrics {
 		id: fontMetrics
-		font.pixelSize: Theme.font_size_body2
+		font.pixelSize: root.fontSize
 	}
 
 	Repeater {
@@ -35,25 +40,31 @@ Row {
 
 			required property int index
 			required property QuantityObject quantityObject
-			readonly property real horizontalPadding: quantityObject.textValue.length ? Theme.geometry_listItem_content_spacing : 0
+			readonly property real horizontalPadding: root._showSeparators ? Theme.geometry_listItem_content_spacing : 0
 
-			width: quantityObject.textValue.length ? implicitWidth : quantityMetrics.columnWidth(unit)
+			width: !isNaN(root.fixedColumnWidth) ? root.fixedColumnWidth
+				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
+				: quantityMetrics.columnWidth(quantityObject.unit) + horizontalPadding
+
 			height: root.height
-			leftPadding: verticalSeparator.width + horizontalPadding
+			leftPadding: horizontalPadding
+					+ (verticalSeparator.visible ? verticalSeparator.width : 0)
+					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
 			rightPadding: horizontalPadding
-			alignment: root._textAlignment
-			font.pixelSize: Theme.font_size_body2
+			alignment: root.labelAlignment
+			opacity: quantityObject.hidden ? 0 : 1
+			font.pixelSize: root.fontSize
 			value: quantityObject.numberValue
 			unit: quantityObject.unit
 			precision: quantityObject.precision
 			valueText: quantityObject.textValue || quantityInfo.number
-			valueColor: Theme.color_quantityTable_quantityValue
+			valueColor: root.valueColor
 			unitColor: Theme.color_quantityTable_quantityUnit
 
 			Rectangle {
 				id: verticalSeparator
 				anchors.verticalCenter: parent.verticalCenter
-				width: visible ? Theme.geometry_listItem_separator_width : 0
+				width: Theme.geometry_listItem_separator_width
 				height: fontMetrics.height
 				visible: root._showSeparators
 						 && (quantityDelegate.index > 0 || root.showFirstSeparator)
@@ -64,8 +75,6 @@ Row {
 
 	QuantityTableMetrics {
 		id: quantityMetrics
-		count: quantityRepeater.count
-		availableWidth: root.width
-		spacing: Theme.geometry_quantityGroupRow_spacing
+		font.pixelSize: root.metricsFontSize
 	}
 }

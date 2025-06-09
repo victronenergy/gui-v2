@@ -26,24 +26,17 @@ Page {
 				QuantityTableSummary {
 					id: summary
 
-					width: parent.width - Theme.geometry_listItem_content_horizontalMargin
-					model: [
-						{
-							title: "",
-							text: CommonWords.total,
-							unit: VenusOS.Units_None
-						},
-						{
-							title: CommonWords.power_watts,
-							value: Global.evChargers.power,
-							unit: VenusOS.Units_Watt
-						},
-						{
-							title: CommonWords.energy,
-							value: Global.evChargers.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
-						}
+					width: parent.width
+					rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+					summaryModel: [
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
+						{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
 					]
+					bodyHeaderText: CommonWords.total
+					bodyModel: QuantityObjectModel {
+						QuantityObject { object: Global.evChargers; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: Global.evChargers; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+					}
 				}
 			}
 		}

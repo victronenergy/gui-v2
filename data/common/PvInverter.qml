@@ -24,10 +24,6 @@ Device {
 			phaseCount = Math.max(count, maxPhaseCount)
 		}
 
-		function getPhase(index) {
-			return _phases.objectAt(index)
-		}
-
 		readonly property Instantiator _phases: Instantiator {
 			model: 3
 			delegate: QtObject {
