@@ -30,7 +30,6 @@ QtObject {
 			property var digitalInput: DigitalInputImpl {}
 			property var digitalInputs: DigitalInputsImpl {}
 			property var environmentInputs: EnvironmentInputsImpl {}
-			property var ess: EssImpl {}
 			property var evChargers: EvChargersImpl {}
 			property var generators: GeneratorsImpl {}
 			property var heatPumps: HeatPumpsImpl { }

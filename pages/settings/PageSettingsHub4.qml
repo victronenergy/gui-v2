@@ -47,7 +47,7 @@ Page {
 				return -1
 			}
 			onOptionClicked: function(index) {
-				Global.ess.setStateRequested(optionModel[index].value)
+				Global.ess.setState(optionModel[index].value)
 			}
 		}
 
@@ -119,7 +119,7 @@ Page {
 
 				ESSMinimumSOCDialog {
 					minimumStateOfCharge: Global.ess.minimumStateOfCharge
-					onAccepted: Global.ess.setMinimumStateOfChargeRequested(minimumStateOfCharge)
+					onAccepted: Global.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 		}
