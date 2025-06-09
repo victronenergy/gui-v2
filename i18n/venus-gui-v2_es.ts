@@ -272,11 +272,6 @@
       <source>Tank pump</source>
       <translation>Bomba del depósito</translation>
     </message>
-    <message id="ess_battery_life_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="72"/>
-      <source>Battery life limit: %1%</source>
-      <translation>Límite de vida de la batería: %1%</translation>
-    </message>
     <message id="controlcard_generator_subcard_button_manual_stop">
       <location filename="../../components/GeneratorManualControlButton.qml" line="34"/>
       <source>Manual Stop</source>
@@ -4712,7 +4707,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="50"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">Estado de carga mínimo</translation>
     </message>
@@ -8803,42 +8798,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Este inversor FV admite la limitación de potencia. Desactive este ajuste si interfiere con el funcionamiento normal.</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="489"/>
+      <location filename="../../src/units.cpp" line="483"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="491"/>
+      <location filename="../../src/units.cpp" line="485"/>
       <source>NE</source>
       <translation>NE</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="493"/>
+      <location filename="../../src/units.cpp" line="487"/>
       <source>E</source>
       <translation>E</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="495"/>
+      <location filename="../../src/units.cpp" line="489"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="497"/>
+      <location filename="../../src/units.cpp" line="491"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="499"/>
+      <location filename="../../src/units.cpp" line="493"/>
       <source>SW</source>
       <translation>SW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="501"/>
+      <location filename="../../src/units.cpp" line="495"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="503"/>
+      <location filename="../../src/units.cpp" line="497"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -10057,6 +10052,11 @@ la integridad del firmware antes de ponerse en contacto con el departamento de a
       <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="47"/>
       <source>%1 | Unit ID: %2</source>
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_active_soc_limit">
+      <location filename="../../pages/controlcards/ESSCard.qml" line="86"/>
+      <source>Active SOC Limit: %1%</source>
       <translation type="unfinished"/>
     </message>
   </context>
