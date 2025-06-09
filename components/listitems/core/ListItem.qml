@@ -99,18 +99,18 @@ BaseListItem {
 	Keys.enabled: Global.keyNavigationEnabled
 
 	// Show thin colored indicator on left side if settings is only visible to super/service users
-	Rectangle {
-		visible: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
-		width: Theme.geometry_listItem_radius * 2
-		height: parent.height
-		color: Theme.color_listItem_highAccessLevel
-		radius: Theme.geometry_listItem_radius
-
-		Rectangle {
-			x: Theme.geometry_listItem_radius
-			width: Theme.geometry_listItem_radius
-			height: parent.height
-			color: root.background.color
+	Loader {
+		active: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+		width: Theme.geometry_listItem_radius
+		height: root.height
+		sourceComponent: Item {
+			clip: true
+			Rectangle {
+				width: Theme.geometry_listItem_radius * 2
+				height: parent.height
+				color: Theme.color_listItem_highAccessLevel
+				radius: Theme.geometry_listItem_radius
+			}
 		}
 	}
 
