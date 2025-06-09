@@ -49,9 +49,7 @@ T.Dialog {
 
 	anchors.centerIn: parent
 	implicitWidth: background.implicitWidth
-	implicitHeight: Theme.geometry_solarDailyHistoryDialog_header_height
-					+ tableView.height
-					+ (errorView.visible ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_verticalMargin : 0)
+	implicitHeight: background.implicitHeight
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
@@ -83,7 +81,7 @@ T.Dialog {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: Theme.geometry_solarDailyHistoryDialog_header_height
 					+ tableView.height
-					+ (errorView.visible ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_verticalMargin : 0)
+					+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_verticalMargin : 0)
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
 
@@ -193,7 +191,8 @@ T.Dialog {
 				const history = root.solarHistory.dailyHistory(root.day)
 				return history ? history.errorModel : null
 			}
-			visible: model && model.count > 0
+			enabled: model?.count > 0
+			visible: enabled
 		}
 	}
 }

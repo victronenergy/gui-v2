@@ -236,12 +236,12 @@ set (VENUS_QML_MODULE_SOURCES
     components/PageStack.qml
     components/VeQuickItemsQuotient.qml
     components/ProgressArc.qml
-    components/QuantityTableMetrics.qml
     components/QuantityGroupListHeader.qml
     components/QuantityLabel.qml
     components/QuantityRow.qml
-    components/QuantityTableSummary.qml
     components/QuantityTable.qml
+    components/QuantityTableMetrics.qml
+    components/QuantityTableSummary.qml
     components/RadioButtonListPage.qml
     components/RsSystemAcIODisplay.qml
     components/SolarDeviceModel.qml

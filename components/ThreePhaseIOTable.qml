@@ -29,7 +29,7 @@ BaseListItem {
 			id: inputTable
 			width: (parent.width - parent.spacing) / 2
 			labelText: CommonWords.ac_in
-			rowCount: root.phaseCount
+			model: root.phaseCount
 			voltPrecision: root.voltPrecision
 		}
 
@@ -37,7 +37,7 @@ BaseListItem {
 			id: outputTable
 			width: (parent.width - parent.spacing) / 2
 			labelText: CommonWords.ac_out
-			rowCount: root.phaseCount
+			model: root.phaseCount
 			voltPrecision: root.voltPrecision
 		}
 	}

@@ -22,33 +22,22 @@ Page {
 				QuantityTableSummary {
 					id: phaseSummary
 
-					model: [
-						{
-							title: root.pvInverter.statusCode >= 0 ? CommonWords.status : "",
-							text: VenusOS.pvInverter_statusCodeToText(root.pvInverter.statusCode),
-							unit: VenusOS.Units_None,
-						},
-						{
-							title: CommonWords.energy,
-							value: root.pvInverter.energy,
-							unit: VenusOS.Units_Energy_KiloWattHour
-						},
-						{
-							title: CommonWords.voltage,
-							value: root.pvInverter.voltage,
-							unit: VenusOS.Units_Volt_AC
-						},
-						{
-							title: CommonWords.current_amps,
-							value: root.pvInverter.current,
-							unit: VenusOS.Units_Amp
-						},
-						{
-							title: CommonWords.power_watts,
-							value: root.pvInverter.power,
-							unit: VenusOS.Units_Watt
-						},
+					width: parent.width
+					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
+					summaryHeaderText: root.pvInverter.statusCode >= 0 ? CommonWords.status : ""
+					summaryModel: [
+						{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
+						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_AC },
+						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
+					bodyHeaderText: VenusOS.pvInverter_statusCodeToText(root.pvInverter.statusCode)
+					bodyModel: QuantityObjectModel {
+						QuantityObject { object: root.pvInverter; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+						QuantityObject { object: root.pvInverter; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+						QuantityObject { object: root.pvInverter; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: root.pvInverter; key: "power"; unit: VenusOS.Units_Watt }
+					}
 				}
 
 				QuantityTable {
@@ -58,21 +47,28 @@ Page {
 						top: phaseSummary.bottom
 						topMargin: Theme.geometry_gradientList_spacing
 					}
+					width: phaseSummary.width
 					visible: root.pvInverter.phases.count > 1
-					headerVisible: false
+					metricsFontSize: phaseSummary.metricsFontSize
+					columnSpacing: phaseSummary.columnSpacing
+					model: root.pvInverter.phases.count > 1 ? root.pvInverter.phases : 0
 
-					rowCount: root.pvInverter.phases.count
-					units: [
-						{ title: CommonWords.phase, unit: VenusOS.Units_None },
-						{ title: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-						{ title: CommonWords.voltage, unit: VenusOS.Units_Volt_AC },
-						{ title: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-						{ title: CommonWords.power_watts, unit: VenusOS.Units_Watt }
-					]
-					valueForModelIndex: function(phaseIndex, column) {
-						const phase = root.pvInverter.phases.getPhase(phaseIndex)
-						const columnProperties = ["name", "energy", "voltage", "current", "power"]
-						return phase[columnProperties[column]]
+					delegate: QuantityTable.TableRow {
+						id: tableRow
+
+						required property string name
+						required property real energy
+						required property real voltage
+						required property real current
+						required property real power
+
+						headerText: name
+						model: QuantityObjectModel {
+							QuantityObject { object: tableRow; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+							QuantityObject { object: tableRow; key: "voltage"; unit: VenusOS.Units_Volt_AC }
+							QuantityObject { object: tableRow; key: "current"; unit: VenusOS.Units_Amp }
+							QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }
+						}
 					}
 				}
 			}

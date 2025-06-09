@@ -6,153 +6,128 @@
 import QtQuick
 import Victron.VenusOS
 
-// TODO change this to use QuantityObjectModel for the model
-Column {
+/*
+	A table of quantity values.
+
+	The TableHeader and TableRow types can be used to implement header and delegate components that
+	automatically integrate with the look and feel of the table.
+*/
+ListView {
 	id: root
 
-	property var units: []
-	property int rowCount
-	property var valueForModelIndex  // function(row,column) -> data value for this row/column
-	property var rowIsVisible   // TODO remove when QuantityObjectModel is used as model instead.
-	property bool headerVisible: true
-	property Component headerComponent: defaultHeaderComponent
-	property int labelHorizontalAlignment: Qt.AlignLeft
+	// Main font sizes in the table
+	property int headerFontSize: Theme.font_size_caption
+	property int bodyFontSize: Theme.font_size_body1
 
-	property alias metrics: quantityMetrics
-	readonly property int leftMargin: Theme.geometry_listItem_content_horizontalMargin
+	// Parameters for sizing the columns in the table.
+	property int metricsFontSize: bodyFontSize
+	property int columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_large
+	property bool equalWidthColumns
 
-	QuantityTableMetrics {
-		id: quantityMetrics
+	property real leftPadding: Theme.geometry_listItem_content_horizontalMargin
+	property real rightPadding: Theme.geometry_listItem_content_horizontalMargin
 
-		count: units.length
-		// Omit the right margin to give the table a little more space.
-		availableWidth: root.width - root.leftMargin
-	}
+	readonly property real availableWidth: width - leftPadding - rightPadding
 
-	width: parent ? parent.width : 0
-	height: visible ? implicitHeight : 0
-
-	Component {
-		id: defaultHeaderComponent
-
-		Rectangle {
-			width: root.width
-			height: headerRow.height
-			color: Theme.color_quantityTable_row_background
-
-			Row {
-				id: headerRow
-
-				// Omit the right padding to give the table a little more space.
-				leftPadding: root.leftMargin
-				height: visible ? Theme.geometry_quantityTable_row_height : 0
-
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					width: metrics.availableWidth - headerQuantityRow.width
-					rightPadding: Theme.geometry_listItem_content_spacing
-					font.pixelSize: Theme.font_size_caption
-					elide: Text.ElideRight
-					text: root.units[0].title || ""
-					color: Theme.color_quantityTable_quantityValue
-				}
-
-				Row {
-					id: headerQuantityRow
-
-					anchors.verticalCenter: parent.verticalCenter
-
-					Repeater {
-						model: headerRow.visible ? units.length - 1 : null
-						delegate: Label {
-							anchors.verticalCenter: parent.verticalCenter
-							width: metrics.columnWidth(root.units[model.index + 1].unit)
-							rightPadding: Theme.geometry_gradientList_spacing
-							font.pixelSize: Theme.font_size_caption
-							elide: Text.ElideRight
-							text: root.units[model.index + 1].title || ""
-							color: Theme.color_quantityTable_quantityValue
-						}
-					}
-				}
+	function resetRowColors() {
+		let visibleRowCount = 0
+		for (let i = 0; i < count; ++i) {
+			const row = itemAtIndex(i)
+			if (row?.preferredVisible) {
+				row.color = visibleRowCount % 2 === 0
+					? Theme.color_quantityTable_row_alternateBackground
+					: Theme.color_quantityTable_row_background
+				visibleRowCount++
 			}
 		}
 	}
 
-	Loader {
-		id: header
-		sourceComponent: headerVisible ? headerComponent : null
-	}
+	implicitWidth: Theme.geometry_screen_width
+	implicitHeight: contentItem.height + topMargin + bottomMargin
+	interactive: false
 
+	component TableHeader: Rectangle {
+		id: tableHeader
 
-	Repeater {
-		id: rowRepeater
+		property QuantityTable table: ListView.view
+		property alias model: groupHeader.model
+		property alias headerText: groupHeader.headerText
 
-		function resetRowColors() {
-			let visibleRowCount = 0
-			for (let i = 0; i < count; ++i) {
-				const row = itemAt(i)
-				if (row && row.visible) {
-					row.color = visibleRowCount % 2 === 0
-						? Theme.color_quantityTable_row_alternateBackground
-						: Theme.color_quantityTable_row_background
-					visibleRowCount++
-				}
-			}
-		}
+		implicitWidth: table.width
+		implicitHeight: Theme.geometry_quantityTable_row_height
+		color: Theme.color_quantityTable_row_background
 
-		model: root.rowCount
-
-		delegate: Rectangle {
-			id: rowDelegate
-
-			readonly property var rowIndex: model.index
-
+		QuantityGroupListHeader {
+			id: groupHeader
 			width: parent.width
-			height: valueRow.height
-			visible: !root.rowIsVisible || root.rowIsVisible(rowIndex)
-			onVisibleChanged: rowRepeater.resetRowColors()
-			Component.onCompleted: rowRepeater.resetRowColors()
+			height: Theme.geometry_quantityTable_row_height
+			leftPadding: table.leftPadding
+			rightPadding: table.rightPadding
+			fontSize: table.headerFontSize
+			metricsFontSize: table.metricsFontSize
+			spacing: table.columnSpacing
+			fixedColumnWidth: table.equalWidthColumns ? (table.availableWidth - (table.columnSpacing * (columnCount-1))) / columnCount : NaN
+		}
+	}
 
-			Row {
-				id: valueRow
+	/*
+		A coloured rectangle with a QuantityRow for displaying a series of quantities.
+	*/
+	component TableRow: Rectangle {
+		id: tableRow
 
-				height: Theme.geometry_quantityTable_row_height
-				leftPadding: root.leftMargin
+		property QuantityTable table: ListView.view
+		required property int index
 
-				// Column 1: value is displayed by Label
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					width: metrics.availableWidth - quantityRow.width
-					rightPadding: Theme.geometry_listItem_content_spacing
-					elide: Text.ElideRight
-					text: root.valueForModelIndex(rowDelegate.rowIndex, 0) || ""
-					color: Theme.color_quantityTable_quantityValue
-				}
+		// Whether the row should be visible. Set this instead of 'visible', as that value changes
+		// if the item is no longer on the current page.
+		property bool preferredVisible: true
 
-				Row {
-					id: quantityRow
+		// Header column configuration
+		property alias headerText: headerColumnLabel.text
+		property alias headerColor: headerColumnLabel.color
 
-					anchors.verticalCenter: parent.verticalCenter
+		// Quantity row configuration
+		property alias model: quantityRow.model
+		property alias valueColor: quantityRow.valueColor
+		property alias labelAlignment: quantityRow.labelAlignment
 
-					// Column 2 onwards: value is displayed by QuantityLabel
-					Repeater {
-						id: quantityRepeater
+		readonly property real fixedColumnWidth: table.equalWidthColumns ? (table.availableWidth - (table.columnSpacing * (columnCount-1))) / columnCount : NaN
+		readonly property int columnCount: quantityRow.count + 1 // +1 for header column
 
-						model: root.units.length - 1    // omit the first (non-quantity) column
-						delegate: QuantityLabel {
-							width: metrics.columnWidth(unit)
-							alignment: root.labelHorizontalAlignment
-							value: root.valueForModelIndex(rowDelegate.rowIndex, model.index + 1)
-							unit: root.units[model.index + 1].unit
-							precision: root.units[model.index + 1].precision || VenusOS.Units_Precision_Default
-							font.pixelSize: Theme.font_size_body1
-							valueColor: Theme.color_quantityTable_quantityValue
-							unitColor: Theme.color_quantityTable_quantityUnit
-						}
-					}
-				}
+		implicitWidth: table.width
+		implicitHeight: preferredVisible ? Theme.geometry_quantityTable_row_height : 0
+		color: index % 2 === 0
+			   ? Theme.color_quantityTable_row_alternateBackground
+			   : Theme.color_quantityTable_row_background
+		visible: preferredVisible
+
+		onPreferredVisibleChanged: Qt.callLater(table.resetRowColors)
+
+		Label {
+			id: headerColumnLabel
+			anchors.verticalCenter: parent.verticalCenter
+			width: isNaN(tableRow.fixedColumnWidth)
+				   ? parent.width - x - table.columnSpacing - quantityRow.width - quantityRow.anchors.rightMargin
+				   : tableRow.fixedColumnWidth
+			x: table.leftPadding
+			elide: Text.ElideRight
+			font.pixelSize: table.bodyFontSize
+			color: quantityRow.valueColor
+		}
+
+		QuantityRow {
+			id: quantityRow
+			anchors {
+				verticalCenter: parent.verticalCenter
+				right: parent.right
+				rightMargin: table.rightPadding
 			}
+			tableMode: true
+			fontSize: table.bodyFontSize
+			metricsFontSize: table.metricsFontSize
+			spacing: table.columnSpacing
+			fixedColumnWidth: tableRow.fixedColumnWidth
 		}
 	}
 }
