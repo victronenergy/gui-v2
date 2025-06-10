@@ -46,7 +46,7 @@ QtObject {
 		const tankObj = tankComponent.createObject(root, {
 			serviceUid: "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum,
 		})
-		tankObj._device.deviceInstance = deviceInstanceNum
+		tankObj._device._deviceInstance.setValue(deviceInstanceNum)
 		_createdObjects.push(tankObj)
 		for (var p in properties) {
 			tankObj["_" + p].setValue(properties[p])
@@ -96,7 +96,7 @@ QtObject {
 			const hasCreatedObjects = _createdObjects.length > 0
 			while (_createdObjects.length > 1) {
 				let obj = _createdObjects.pop()
-				obj._device.deviceInstance = -1
+				Global.mockDataSimulator.setMockValue(obj.serviceUid + "/DeviceInstance", -1)
 				obj.destroy()
 			}
 
@@ -108,7 +108,7 @@ QtObject {
 
 			if (hasCreatedObjects) {
 				let lastObject = _createdObjects.shift()
-				lastObject._device.deviceInstance = -1
+				Global.mockDataSimulator.setMockValue(lastObject.serviceUid + "/DeviceInstance", -1)
 				lastObject.destroy()
 			}
 		}
@@ -136,7 +136,7 @@ QtObject {
 			} else {
 				// remove a tank
 				const index = Math.floor(Math.random() * _createdObjects.length)
-				_createdObjects[index]._device.deviceInstance = -1 // causes tank to remove itself from model
+				Global.mockDataSimulator.setMockValue(_createdObjects[index]._device.serviceUid + "/DeviceInstance", -1) // causes tank to remove itself from model
 				_createdObjects.splice(index, 1)
 			}
 		}
@@ -159,9 +159,8 @@ QtObject {
 			root.addTank(tankProperties)
 		} else {
 			for (var i = 0; i < _createdObjects.length; ++i) {
-				_createdObjects[i]._device.deviceInstance = -1 // causes tank to remove itself from model
+				Global.mockDataSimulator.setMockValue(_createdObjects[i]._device.serviceUid + "/DeviceInstance", -1) // causes tank to remove itself from model
 			}
-
 			_createdObjects = []
 		}
 	}

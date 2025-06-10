@@ -12,7 +12,6 @@ QtObject {
 
 	property var dcInputs: DcInputsImpl { }
 	property var notifications: NotificationsImpl {}
-	property var tanks: TanksImpl { }
 
 	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
 		uids: ["dbus"]
