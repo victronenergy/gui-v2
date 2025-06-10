@@ -47,11 +47,4 @@ QtObject {
 			property var unsupportedDevices: UnsupportedDevicesImpl { }
 		}
 	}
-
-	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
-		uids: ["mock"]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-
-		Component.onCompleted: Global.dataServiceModel = servicesTableModel
-	}
 }

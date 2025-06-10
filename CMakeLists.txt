@@ -846,33 +846,6 @@ else()
 endif()
 # end VENUS_QML_MODULE
 
-# Dbus_QML_MODULE
-set(Dbus_QML_MODULE_SOURCES
-    data/dbus/DBusDataManager.qml
-)
-
-list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
-
-qt_add_qml_module(VictronDbus
-    URI Victron.Dbus
-    STATIC
-    OUTPUT_DIRECTORY Victron/Dbus
-    QML_FILES ${Dbus_QML_MODULE_SOURCES}
-    ${QML_MODULE_OPTARGS}
-)
-if (${LOAD_QML_FROM_FILESYSTEM})
-    set(thisModule VictronDbus)
-    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir}  DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Dbus)
-    install(DIRECTORY data/dbus     DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Dbus/data)
-    add_custom_command(
-        TARGET ${thisModule}
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
-    )
-endif()
-# end Dbus_QML_MODULE
-
 # Mock_QML_MODULE
 set(Mock_QML_MODULE_SOURCES
     data/mock/AcInputsImpl.qml
@@ -1027,33 +1000,6 @@ qt_add_resources(BoatPageComponents "BoatPageComponents_large_resources"
 )
 
 # end BoatPageComponents_QML_MODULE
-
-# Mqtt_QML_MODULE
-set(Mqtt_QML_MODULE_SOURCES
-    data/mqtt/MqttDataManager.qml
-)
-
-list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
-
-qt_add_qml_module(VictronMqtt
-    URI Victron.Mqtt
-    STATIC
-    OUTPUT_DIRECTORY Victron/Mqtt
-    QML_FILES ${Mqtt_QML_MODULE_SOURCES}
-    ${QML_MODULE_OPTARGS}
-)
-if (${LOAD_QML_FROM_FILESYSTEM})
-    set(thisModule VictronMqtt)
-    qt_query_qml_module(${thisModule} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mqtt)
-    install(DIRECTORY data/mqtt    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Mqtt/data)
-    add_custom_command(
-        TARGET ${thisModule}
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
-    )
-endif()
-# end Mqtt_QML_MODULE
 
 set(VENUS_CPP_SOURCES
     src/main.cpp
@@ -1355,9 +1301,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     VenusQMLModuleplugin
     BoatPageComponentsplugin
     VictronGaugesplugin
-    VictronDbusplugin
     VictronMockplugin
-    VictronMqttplugin
     qzxing
 )
 
