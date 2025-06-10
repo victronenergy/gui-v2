@@ -142,7 +142,7 @@ T.Dialog {
 		}
 	}
 
-	footer: Item { // #2161 make this a FocusScope when key nav is re-enabled
+	footer: FocusScope {
 		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
 		height: visible ? Theme.geometry_modalDialog_footer_height : 0
 		focus: false
