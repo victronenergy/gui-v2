@@ -851,7 +851,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/DBusDataManager.qml
     data/dbus/DcInputsImpl.qml
     data/dbus/NotificationsImpl.qml
-    data/dbus/TanksImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
@@ -1036,7 +1035,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/DcInputsImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
-    data/mqtt/TanksImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
