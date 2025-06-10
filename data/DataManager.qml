@@ -5,8 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Dbus
-import Victron.Mqtt
 import Victron.Mock
 
 Item {
@@ -27,64 +25,14 @@ Item {
 			&& !!Global.tanks
 			&& !!Global.venusPlatform
 
-	readonly property bool _shouldInitialize: _dataObjectsReady
-			&& BackendConnection.type !== BackendConnection.UnknownSource
+	readonly property bool _ready: _dataObjectsReady
 			&& Global.backendReady
+			&& dataServiceModel.rowCount > 0
+			&& (!mockManagerLoader.active || mockManagerLoader.status === Loader.Ready)
 
-	function _setBackendSource() {
-		if (!_shouldInitialize) {
-			return
-		}
-		if (dataManagerLoader.active) {
-			console.warn("Data manager source is already set to", dataManagerLoader.source,
-				"cannot be changed after initialization")
-			return
-		}
-		switch (BackendConnection.type) {
-		case BackendConnection.DBusSource:
-			console.warn("Loading D-Bus data backend...")
-			dataManagerLoader.sourceComponent = dbus
-			break
-		case BackendConnection.MqttSource:
-			console.warn("Loading MQTT data backend...")
-			dataManagerLoader.sourceComponent = mqtt
-			break
-		case BackendConnection.MockSource:
-			console.warn("Loading mock data backend...")
-			dataManagerLoader.sourceComponent = mock
-			break
-		default:
-			console.warn("Unsupported data backend!", BackendConnection.type)
-			return
-		}
-		dataManagerLoader.active = true
-	}
-
-	Component {
-		id: dbus
-
-		DBusDataManager {}
-	}
-
-	Component {
-		id: mqtt
-
-		MqttDataManager {}
-	}
-
-	Component {
-		id: mock
-
-		MockDataManager {}
-	}
-
-	on_ShouldInitializeChanged: _setBackendSource()
-
-	Connections {
-		target: BackendConnection
-
-		function onTypeChanged() {
-			_setBackendSource()
+	on_ReadyChanged: {
+		if (_ready) {
+			Global.dataManagerLoaded = true
 		}
 	}
 
@@ -108,12 +56,18 @@ Item {
 		Component.onCompleted: Global.allDevicesModel = allDevicesModel
 	}
 
-	Loader {
-		id: dataManagerLoader
+	VeQItemTableModel {
+		id: dataServiceModel
+		uids: [ BackendConnection.uidPrefix() ]
+		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		Component.onCompleted: Global.dataServiceModel = dataServiceModel
+	}
 
-		active: false
+	Loader {
+		id: mockManagerLoader
+		active: root._dataObjectsReady && BackendConnection.type === BackendConnection.MockSource
 		asynchronous: true
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", source)
-		onLoaded: Qt.callLater(function() { Global.dataManagerLoaded = true })
+		sourceComponent: MockDataManager {}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mock data manager:", errorString())
 	}
 }
