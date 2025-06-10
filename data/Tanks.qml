@@ -90,6 +90,50 @@ QtObject {
 			+ hydraulicOilTanks.count
 			+ rawWaterTanks.count
 
+	readonly property Instantiator _tankObjects: Instantiator {
+		model: root._modelLoader.item
+		delegate: Tank {
+			id: tank
+			required property string uid
+			property bool canUpdate
+			property TankModel _tankModel
+
+			function updateModel() {
+				if (!canUpdate) {
+					return
+				}
+				if (valid && type >= 0) {
+					if (_tankModel) {
+						_tankModel.removeDevice(tank.serviceUid)
+					}
+					_tankModel = Global.tanks.tankModel(type)
+					_tankModel.addDevice(tank)
+				} else {
+					if (_tankModel) {
+						_tankModel.removeDevice(tank.serviceUid)
+					}
+					_tankModel = null
+				}
+			}
+
+			serviceUid: uid
+			onValidChanged: Qt.callLater(tank.updateModel)
+			onTypeChanged: Qt.callLater(tank.updateModel) // if type changes, move tank to the correct model
+			Component.onDestruction: canUpdate = false
+		}
+		onObjectAdded: (index, tankObject) => {
+			tankObject.canUpdate = true
+			Qt.callLater(tankObject.updateModel)
+		}
+		onObjectRemoved: (index, tankObject) => {
+			tankObject.canUpdate = false
+		}
+	}
+
+	readonly property ServiceModelLoader _modelLoader: ServiceModelLoader {
+		serviceType: "tank"
+	}
+
 	function tankModel(type) {
 		switch (type) {
 		case VenusOS.Tank_Type_Fuel:
@@ -139,12 +183,6 @@ QtObject {
 			return CommonWords.error
 		default:
 			return ""
-		}
-	}
-
-	function reset() {
-		for (let i = 0; i < tankTypes.length; ++i) {
-			tankModel(tankTypes[i]).clear()
 		}
 	}
 
