@@ -15,8 +15,9 @@ QtObject {
 	readonly property var firstObject: veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
 
 	// Devices from com.victronenergy.vebus
-	property DeviceModel veBusDevices: DeviceModel {
-		modelId: "veBusDevices"
+	readonly property ServiceDeviceModel veBusDevices: ServiceDeviceModel {
+		serviceType: "vebus"
+		modelId: "vebus"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
@@ -24,8 +25,9 @@ QtObject {
 	}
 
 	// Devices from com.victronenergy.acsystem
-	property DeviceModel acSystemDevices: DeviceModel {
-		modelId: "acSystemDevices"
+	readonly property ServiceDeviceModel acSystemDevices: ServiceDeviceModel {
+		serviceType: "acsystem"
+		modelId: "acsystem"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
@@ -34,8 +36,9 @@ QtObject {
 
 	// Devices from com.victronenergy.inverter
 	// (Inverter RS and Phoenix Inverter, which do not have AC inputs)
-	property DeviceModel inverterDevices: DeviceModel {
-		modelId: "inverterDevices"
+	readonly property ServiceDeviceModel inverterDevices: ServiceDeviceModel {
+		serviceType: "inverter"
+		modelId: "inverter"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 		onCountChanged: {
 			Qt.callLater(root.refreshNominalInverterPower)
@@ -43,8 +46,9 @@ QtObject {
 	}
 
 	// Devices from com.victronenergy.charger
-	property DeviceModel chargerDevices: DeviceModel {
-		modelId: "chargerDevices"
+	readonly property ServiceDeviceModel chargerDevices: ServiceDeviceModel {
+		serviceType: "charger"
+		modelId: "charger"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
 
