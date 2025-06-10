@@ -10,18 +10,24 @@ QtObject {
 	id: root
 
 	// The "first" inverter/charger is from one of com.victronenergy.vebus, com.victronenergy.acsystem
-	// or com.victronenergy.inverter (in that order of preference). If there is more than one service
-	// for a particular type, the one with the lowest device instance will be used.
-	readonly property var firstObject: veBusDevices.firstObject || acSystemDevices.firstObject || inverterDevices.firstObject
+	// com.victronenergy.inverter or com.victronenergy.charger (in that order of preference). If
+	// there is more than one service for a particular type, the one with the lowest device instance
+	// will be used.
+	readonly property Device firstObject: veBusDevices.firstObject
+			|| acSystemDevices.firstObject
+			|| inverterDevices.firstObject
+			|| chargerDevices.firstObject
+
+	readonly property int deviceCount: veBusDevices.count
+			+ acSystemDevices.count
+			+ inverterDevices.count
+			+ chargerDevices.count
 
 	// Devices from com.victronenergy.vebus
 	readonly property ServiceDeviceModel veBusDevices: ServiceDeviceModel {
 		serviceType: "vebus"
 		modelId: "vebus"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
-		onCountChanged: {
-			Qt.callLater(root.refreshNominalInverterPower)
-		}
 	}
 
 	// Devices from com.victronenergy.acsystem
@@ -29,9 +35,6 @@ QtObject {
 		serviceType: "acsystem"
 		modelId: "acsystem"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
-		onCountChanged: {
-			Qt.callLater(root.refreshNominalInverterPower)
-		}
 	}
 
 	// Devices from com.victronenergy.inverter
@@ -40,9 +43,6 @@ QtObject {
 		serviceType: "inverter"
 		modelId: "inverter"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
-		onCountChanged: {
-			Qt.callLater(root.refreshNominalInverterPower)
-		}
 	}
 
 	// Devices from com.victronenergy.charger
@@ -51,8 +51,6 @@ QtObject {
 		modelId: "charger"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
-
-	property real totalNominalInverterPower: NaN
 
 	readonly property var rsAlarms: [
 		{ text: CommonWords.low_state_of_charge, alarmSuffix: "/LowSoc", pathSuffix: "/Settings/AlarmLevel/LowSoc" },
@@ -68,23 +66,6 @@ QtObject {
 		//% "Short circuit"
 		{ text: qsTrId("rs_alarm_short_circuit"), alarmSuffix: "/ShortCircuit", pathSuffix: "/Settings/AlarmLevel/ShortCircuit" }
 	]
-
-	function refreshNominalInverterPower() {
-		// Only vebus and multi devices have /NominalInverterPower
-		totalNominalInverterPower = Units.sumRealNumbers(_totalNominalInverterPower(veBusDevices), _totalNominalInverterPower(acSystemDevices))
-	}
-
-	function _totalNominalInverterPower(model) {
-		let total = NaN
-		for (let i = 0; i < model.count; ++i) {
-			const device = model.deviceAt(i)
-			const value = device.nominalInverterPower
-			if (!isNaN(value)) {
-				total = isNaN(total) ? value : total + value
-			}
-		}
-		return total
-	}
 
 	function inverterChargerModeToText(m) {
 		switch (m) {

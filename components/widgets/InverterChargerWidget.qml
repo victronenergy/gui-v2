@@ -10,10 +10,7 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		if ((Global.inverterChargers.veBusDevices.count
-				+ Global.inverterChargers.inverterDevices.count
-				+ Global.inverterChargers.chargerDevices.count
-				+ Global.inverterChargers.acSystemDevices.count) > 1) {
+		if (Global.inverterChargers.deviceCount > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
@@ -34,7 +31,7 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: !!Global.inverterChargers.firstObject || Global.inverterChargers.chargerDevices.count
+	enabled: !!Global.inverterChargers.firstObject
 	quantityLabel.visible: false
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 	extraContentChildren: [

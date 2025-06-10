@@ -63,7 +63,7 @@ QtObject {
 	}
 
 	property Component inverterChargerComponent: Component {
-		InverterCharger {
+		Device {
 			id: veBusDevice
 
 			function setMockValue(path, value) {
@@ -72,6 +72,18 @@ QtObject {
 
 			readonly property VeQuickItem _modeAdjustable: VeQuickItem {
 				uid: veBusDevice.serviceUid + "/ModeIsAdjustable"
+			}
+
+			readonly property VeQuickItem _state: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/State"
+			}
+
+			readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/Out/NominalInverterPower"
+			}
+
+			readonly property VeQuickItem _mode: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Mode"
 			}
 
 			readonly property VeQuickItem _chargeState: VeQuickItem {
