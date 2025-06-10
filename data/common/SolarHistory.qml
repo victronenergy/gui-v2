@@ -32,7 +32,7 @@ QtObject {
 	function trackerName(trackerIndex, format) {
 		const nameObject = _trackerNames.objectAt(trackerIndex)
 		const name = nameObject ? nameObject.value || "" : ""
-		return Global.solarDevices.formatTrackerName(name, trackerIndex, trackerCount, deviceName, format)
+		return Global.solarInputs.formatTrackerName(name, trackerIndex, trackerCount, deviceName, format)
 	}
 
 	readonly property Instantiator _trackerNames: Instantiator {

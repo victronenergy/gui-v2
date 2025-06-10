@@ -60,8 +60,8 @@ QtObject {
 
 		// In cases where the overall current cannot be determined, the value is NaN.
 		readonly property real current: {
-			if (Global.pvInverters.model.count > 0) {
-				if (Global.solarDevices.model.count > 0) {
+			if (Global.solarInputs.pvInverterDevices.count > 0) {
+				if (Global.solarInputs.devices.count > 0) {
 					// If both PV chargers and PV inverters are present, return NaN as the current
 					// cannot be summed across AC and DC systems.
 					return NaN
@@ -74,7 +74,7 @@ QtObject {
 				// There are one or more PV inverters, which are all single-phase, so it's safe to
 				// return a total current as they should all have the same PV output voltage.
 				return _pvMonitor.totalCurrent
-			} else if (Global.solarDevices.model.count > 0) {
+			} else if (Global.solarInputs.devices.count > 0) {
 				return _dcPvCurrent.valid ? _dcPvCurrent.value : NaN
 			}
 			return NaN

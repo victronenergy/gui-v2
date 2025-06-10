@@ -12,7 +12,7 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		Global.solarDevices.model.clear()
+		Global.solarInputs.devices.clear()
 
 		// Add 4 chargers, each with an increasing number of trackers (max 4 trackers)
 		const chargerCount = 4
@@ -205,7 +205,7 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetSolarRequested(config) {
-			Global.solarDevices.model.clear()
+			Global.solarInputs.devices.clear()
 
 			if (config && config.chargers) {
 				for (let i = 0; i < config.chargers.length; ++i) {                    

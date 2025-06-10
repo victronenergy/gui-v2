@@ -9,7 +9,25 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property SolarDeviceModel model: SolarDeviceModel { }
+	readonly property SolarDeviceModel devices: SolarDeviceModel { }
+
+	readonly property ServiceDeviceModel pvInverterDevices: ServiceDeviceModel {
+		serviceType: "pvinverter"
+		modelId: "pvinverter"
+		deviceDelegate: PvInverter {
+			id: pvInverter
+			serviceUid: model.uid
+			onValidChanged: {
+				if (valid) {
+					root.pvInverterDevices.addDevice(pvInverter)
+				} else {
+					root.pvInverterDevices.removeDevice(pvInverter.serviceUid)
+				}
+			}
+		}
+	}
+
+	readonly property int inputCount: devices.count + pvInverterDevices.count
 
 	function formatTrackerName(trackerName, trackerIndex, totalTrackerCount, deviceName, format) {
 		if (format === VenusOS.TrackerName_WithDevicePrefix) {
@@ -29,5 +47,5 @@ QtObject {
 		}
 	}
 
-	Component.onCompleted: Global.solarDevices = root
+	Component.onCompleted: Global.solarInputs = root
 }
