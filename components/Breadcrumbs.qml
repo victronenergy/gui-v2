@@ -47,7 +47,6 @@ BaseListView {
 				color: breadcrumb.isTopBreadcrumb ? Theme.color_settings_breadcrumb_primaryText : Theme.color_settings_breadcrumb_secondaryText
 				background: Rectangle {
 					color: breadcrumb.iconColor
-					height: parent.height
 				}
 				text: getText(index)
 			}
