@@ -24,6 +24,9 @@ Window {
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
+	// Uncomment for key navigation debugging
+	// onActiveFocusItemChanged: console.info("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
+
 	function skipSplashScreen() {
 		Global.splashScreenVisible = false
 	}
@@ -82,26 +85,31 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
-		// #2161 Key nav is disabled for now
-		// Keys.onPressed: function(event) {
-		//     // When a navigation key is pressed and it is not handled by an item higher up in the
-		//     // UI item hierarchy, enable key navigation to allow guiLoader to get focus and receive
-		//     // key events.
-		//     if (!Global.keyNavigationEnabled) {
-		//         switch (event.key) {
-		//         case Qt.Key_Left:
-		//         case Qt.Key_Right:
-		//         case Qt.Key_Up:
-		//         case Qt.Key_Down:
-		//         case Qt.Key_Tab:
-		//         case Qt.Key_Backtab:
-		//             Global.keyNavigationEnabled = true
-		//             event.accepted = true
-		//             return
-		//         }
-		//     }
-		//     event.accepted = false
-		// }
+		Keys.onPressed: function(event) {
+			// If a key press is not handled by an item higher up in the hierarchy:
+			// Enable key navigation when an arrow or tab/backtab key is pressed.
+			// Disable it when the escape key is pressed.
+			if (Global.keyNavigationEnabled) {
+				if (event.key === Qt.Key_Escape) {
+					Global.keyNavigationEnabled = false
+					event.accepted = true
+					return
+				}
+			} else {
+				switch (event.key) {
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+				case Qt.Key_Tab:
+				case Qt.Key_Backtab:
+					Global.keyNavigationEnabled = true
+					event.accepted = true
+					return
+				}
+			}
+			event.accepted = false
+		}
 	}
 
 	Loader {

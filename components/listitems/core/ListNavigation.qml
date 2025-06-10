@@ -16,6 +16,8 @@ ListItem {
 
 	interactive: true
 	Keys.onRightPressed: root.activate()
+	Keys.onEnterPressed: root.activate()
+	Keys.onReturnPressed: root.activate()
 
 	// Issue #1964: userHasWriteAccess is ignored for ListNavigation - see ListItem
 

@@ -153,10 +153,12 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
+			// When focused during key navigation, show a full-page focus blocker if the current
+			// page has blockInitialFocus=true.
 			onActiveFocusChanged: {
 				if (Global.keyNavigationEnabled) {
-					if (activeFocus && refreshBlockItemFocus && item?.currentItem?.blockInitialFocus) {
-						blockItemFocus = true
+					if (activeFocus && refreshBlockItemFocus) {
+						blockItemFocus = item?.currentItem?.blockInitialFocus
 						refreshBlockItemFocus = false
 					} else if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
 						// Re-refresh the focus blocker state if navigating back from status or nav bar.
@@ -165,9 +167,18 @@ FocusScope {
 				}
 			}
 
-			KeyNavigation.down: navBar
-			Keys.onSpacePressed: blockItemFocus = false
+			// Space key disables the focus blocker, so that user can focus individual items on the
+			// page; Escape key re-enables the blocker. Ignore the event if no change is necessary.
+			Keys.onSpacePressed: (event) => {
+				event.accepted = blockItemFocus
+				blockItemFocus = false
+			}
+			Keys.onEscapePressed: (event) => {
+				event.accepted = !blockItemFocus
+				blockItemFocus = true
+			}
 			Keys.enabled: Global.keyNavigationEnabled
+			KeyNavigation.down: navBar
 
 			Component {
 				id: swipeViewComponent
