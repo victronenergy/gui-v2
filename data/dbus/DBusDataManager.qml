@@ -13,7 +13,6 @@ QtObject {
 	property var dcInputs: DcInputsImpl { }
 	property var evChargers: EvChargersImpl { }
 	property var notifications: NotificationsImpl {}
-	property var systemSettings: SystemSettingsImpl { }
 	property var tanks: TanksImpl { }
 
 	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
