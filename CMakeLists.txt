@@ -853,7 +853,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/DcInputsImpl.qml
     data/dbus/EvChargersImpl.qml
     data/dbus/NotificationsImpl.qml
-    data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
 )
 
@@ -1040,7 +1039,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/EvChargersImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
-    data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
 )
 
