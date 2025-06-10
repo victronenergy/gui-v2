@@ -159,7 +159,7 @@ Item {
 	Component {
 		id: inverterChargerComponent
 
-		InverterCharger {}
+		Device {}
 	}
 
 	Component.onCompleted: {
