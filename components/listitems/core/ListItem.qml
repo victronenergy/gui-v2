@@ -123,13 +123,6 @@ BaseListItem {
 		radius: root.background.radius
 		effectEnabled: root.interactive
 		onClicked: root.activate()
-
-		Connections {
-			target: pressArea.toast
-			function onDismissed() {
-				pressArea.toast = null
-			}
-		}
 	}
 
 	GridLayout {
