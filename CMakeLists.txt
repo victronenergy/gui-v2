@@ -850,7 +850,6 @@ endif()
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
     data/dbus/DBusDataManager.qml
-    data/dbus/DcInputsImpl.qml
     data/dbus/NotificationsImpl.qml
 )
 
@@ -1033,7 +1032,6 @@ qt_add_resources(BoatPageComponents "BoatPageComponents_large_resources"
 
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
-    data/mqtt/DcInputsImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
 )

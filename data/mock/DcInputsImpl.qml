@@ -27,9 +27,10 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetDcInputsRequested(config) {
-			Global.dcInputs.reset()
 			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
+				const obj = _createdObjects.pop()
+				Global.mockDataSimulator.setMockValue(obj.serviceUid + "/DeviceInstance", -1)
+				obj.destroy()
 			}
 
 			if (config) {

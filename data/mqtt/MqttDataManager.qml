@@ -10,6 +10,5 @@ import Victron.Mqtt
 QtObject {
 	id: root
 
-	property var dcInputs: DcInputsImpl { }
 	property var notifications: NotificationsImpl {}
 }
