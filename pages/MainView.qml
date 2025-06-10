@@ -455,6 +455,8 @@ FocusScope {
 
 		readonly property Item activeFocusItem: Window.activeFocusItem ?? noActiveFocusItem
 		readonly property point mappedPoint: activeFocusItem.mapToItem(root, Qt.point(0,0))
+		readonly property int _horizontalBorders: Math.min(globalKeyNavigationHighlight.width * 0.5, Theme.geometry_focus_highlight_corner_size)
+		readonly property int _verticalBorders: Math.min(globalKeyNavigationHighlight.height * 0.5, Theme.geometry_focus_highlight_corner_size)
 
 		x: mappedPoint.x + activeFocusItem.KeyNavigationHighlightAttached.leftMargin
 		y: mappedPoint.y + activeFocusItem.KeyNavigationHighlightAttached.topMargin
@@ -472,11 +474,12 @@ FocusScope {
 		border {
 			// If the width/height of the highlight is shorter than the corner size, then shrink the
 			// border size to avoid cropping the corners of the image.
-			left: Math.min(globalKeyNavigationHighlight.width / 2, Theme.geometry_focus_highlight_corner_size)
-			right: Math.min(globalKeyNavigationHighlight.width / 2, Theme.geometry_focus_highlight_corner_size)
-			top: Math.min(globalKeyNavigationHighlight.height / 2, Theme.geometry_focus_highlight_corner_size)
-			bottom: Math.min(globalKeyNavigationHighlight.height / 2, Theme.geometry_focus_highlight_corner_size)
+			left: globalKeyNavigationHighlight._horizontalBorders
+			right: globalKeyNavigationHighlight._horizontalBorders
+			top: globalKeyNavigationHighlight._verticalBorders
+			bottom: globalKeyNavigationHighlight._verticalBorders
 		}
+		asynchronous: true
 
 		Item {
 			id: noActiveFocusItem
