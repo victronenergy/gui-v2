@@ -613,14 +613,13 @@ SwipeViewPage {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterChargerWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: defaultVisible && Global.solarInputs.pvInverterDevices.count > 0
+				visible: defaultVisible && !isNaN(Global.system.solar.acPower)
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
 				// Energy flows to Inverter/Charger if there is any PV Inverter power (i.e. AC)
 				animationMode: root.isCurrentPage
-						&& !isNaN(Global.system.solar.acPower)
 						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -633,14 +632,13 @@ SwipeViewPage {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: defaultVisible && Global.solarInputs.devices.count > 0
+				visible: defaultVisible && !isNaN(Global.system.solar.dcPower)
 				expanded: root._expandLayout
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
 				// Energy flows to battery if there is any PV Charger power (i.e. DC, so solar is charging battery)
 				animationMode: root.isCurrentPage
-						&& !isNaN(Global.system.solar.dcPower)
 						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
