@@ -23,19 +23,23 @@ QtObject {
 
 	// If there is only 1 tracker (e.g. all common MPPTs), the voltage and power are provided via
 	// /Pv/V and /Yield/Power instead of /Pv/0/V and /Pv/0/P.
+	readonly property string _pv: root.device.serviceUid + "/Pv"
+	readonly property string _pvTrackerIndex: _pv + "/" + root.trackerIndex
+	readonly property bool _trackerCountLessEqualOne: root.device.trackerCount <= 1
+
 	readonly property VeQuickItem _voltage: VeQuickItem {
-		uid: root.device.trackerCount <= 1 ? `${root.device.serviceUid}/Pv/V` : `${root.device.serviceUid}/Pv/${root.trackerIndex}/V`
+		uid: root._trackerCountLessEqualOne ? root.device.serviceUid + "/Pv/V" : root._pvTrackerIndex + "/V"
 	}
 
 	readonly property VeQuickItem _power: VeQuickItem {
-		uid: root.device.trackerCount <= 1 ? `${root.device.serviceUid}/Yield/Power` : `${root.device.serviceUid}/Pv/${root.trackerIndex}/P`
+		uid: root._trackerCountLessEqualOne ? root.device.serviceUid + "/Yield/Power" : root._pvTrackerIndex + "/P"
 	}
 
 	readonly property VeQuickItem _name: VeQuickItem {
-		uid: root.device.trackerCount <= 1 ? "" : `${root.device.serviceUid}/Pv/${root.trackerIndex}/Name`
+		uid: root._trackerCountLessEqualOne ? "" : root._pvTrackerIndex + "/Name"
 	}
 
 	readonly property VeQuickItem _enabled: VeQuickItem {
-		uid: root.device.trackerCount <= 1 ? "" : `${root.device.serviceUid}/Pv/${root.trackerIndex}/Enabled`
+		uid: root._trackerCountLessEqualOne ? "" : root._pvTrackerIndex + "/Enabled"
 	}
 }
