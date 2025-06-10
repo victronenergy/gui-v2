@@ -70,7 +70,7 @@ Page {
 	// inject it into solarInputModel.
 	Instantiator {
 		model: Global.solarDevices.model
-		delegate: Instantiator {
+		delegate: QtObject {
 			id: solarDeviceDelegate
 
 			required property var device
