@@ -13,20 +13,9 @@ QtObject {
 	property real current: NaN
 	readonly property real maximumPower: _maximumPower.valid ? _maximumPower.value : NaN
 
-	property DeviceModel model: DeviceModel {
+	readonly property DeviceModel model: DeviceModel {
 		modelId: "dcInputs"
-	}
-
-	function addInput(input) {
-		if (model.addDevice(input)) {
-			updateTotals()
-		}
-	}
-
-	function removeInput(input) {
-		if (model.removeDevice(input.serviceUid)) {
-			updateTotals()
-		}
+		onCountChanged: Qt.callLater(root.updateTotals)
 	}
 
 	function updateTotals() {
@@ -51,12 +40,6 @@ QtObject {
 		}
 		power = totalPower
 		current = totalCurrent
-	}
-
-	function reset() {
-		model.clear()
-		power = NaN
-		current = NaN
 	}
 
 	// TODO these provide names that are not only for DC inputs, e.g. "dcsystem", so should move
@@ -120,6 +103,47 @@ QtObject {
 
 	readonly property VeQuickItem _maximumPower: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+	}
+
+	readonly property Instantiator _dcInputObjects: Instantiator {
+		model: root._modelLoader.item
+		delegate: DcInput {
+			id: input
+			required property string uid
+			serviceUid: uid
+			onValidChanged: {
+				if (valid) {
+					root.model.addDevice(input)
+				} else {
+					root.model.removeDevice(input.serviceUid)
+				}
+			}
+
+			onVoltageChanged: Qt.callLater(root.updateTotals)
+			onCurrentChanged: Qt.callLater(root.updateTotals)
+			onPowerChanged: Qt.callLater(root.updateTotals)
+		}
+	}
+
+	readonly property Loader _modelLoader: Loader {
+		sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? mqttModelComponent : dbusOrMockModelComponent
+
+		Component {
+			id: dbusOrMockModelComponent
+			VeQItemSortTableModel {
+				dynamicSortFilter: true
+				filterRole: VeQItemTableModel.UniqueIdRole
+				filterRegExp: "^%1/com\.victronenergy\.(alternator|fuelcell|dcsource|dcgenset)\.".arg(BackendConnection.uidPrefix())
+				model: Global.dataServiceModel
+			}
+		}
+		Component {
+			id: mqttModelComponent
+			VeQItemTableModel {
+				uids: [ "mqtt/alternator", "mqtt/fuelcell", "mqtt/dcsource", "mqtt/dcgenset" ]
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+		}
 	}
 
 	Component.onCompleted: Global.dcInputs = root
