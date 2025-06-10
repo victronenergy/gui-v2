@@ -40,10 +40,10 @@ Page {
 
 			onClicked: {
 				if (serviceType === "pvinverter") {
-					const pvInverter = Global.pvInverters.model.deviceAt(Global.pvInverters.model.indexOf(serviceUid))
+					const pvInverter = Global.solarInputs.pvInverterDevices.deviceAt(Global.solarInputs.pvInverterDevices.indexOf(serviceUid))
 					Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { pvInverter: pvInverter })
 				} else {
-					const solarDevice = Global.solarDevices.model.deviceAt(Global.solarDevices.model.indexOf(serviceUid))
+					const solarDevice = Global.solarInputs.devices.deviceAt(Global.solarInputs.devices.indexOf(serviceUid))
 					Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml", { solarDevice: solarDevice })
 				}
 			}
@@ -69,7 +69,7 @@ Page {
 	// Extract solar data from all known solar devices (solarcharger/multi/inverter services), and
 	// inject it into solarInputModel.
 	Instantiator {
-		model: Global.solarDevices.model
+		model: Global.solarInputs.devices
 		delegate: Instantiator {
 			id: solarDeviceDelegate
 
@@ -85,7 +85,7 @@ Page {
 								: device.dailyHistory(0)
 						return historyToday?.yieldKwh ?? NaN
 					}
-					readonly property string formattedName: Global.solarDevices.formatTrackerName(
+					readonly property string formattedName: Global.solarInputs.formatTrackerName(
 							name, index, device.trackerCount, device.name, VenusOS.TrackerName_WithDevicePrefix)
 					property bool initialized
 
@@ -144,7 +144,7 @@ Page {
 
 	// Extract solar data from all known PV inverters, and inject it into solarInputModel.
 	Instantiator {
-		model: Global.pvInverters.model
+		model: Global.solarInputs.pvInverterDevices
 		delegate: QtObject {
 			required property var device
 			readonly property string name: device.name

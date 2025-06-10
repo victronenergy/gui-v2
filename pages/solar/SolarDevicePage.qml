@@ -87,11 +87,13 @@ Page {
 					delegate: QuantityTable.TableRow {
 						id: tableRow
 
+						required property int index
+
 						// Today's yield for this tracker
 						readonly property real todaysYield: root.solarDevice.dailyTrackerHistory(0, index)?.yieldKwh ?? NaN
 
 						preferredVisible: tracker.enabled
-						headerText: Global.solarDevices.formatTrackerName(
+						headerText: Global.solarInputs.formatTrackerName(
 								  tracker.name, index, root.trackerCount, root.solarDevice.name,
 								  VenusOS.TrackerName_NoDevicePrefix)
 						model: QuantityObjectModel {

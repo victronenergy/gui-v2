@@ -228,7 +228,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
-			active: (Global.solarDevices.model.count > 0 || Global.pvInverters.model.count > 0) && root.state !== "panelOpened"
+			active: Global.solarInputs.inputCount > 0 && root.state !== "panelOpened"
 			sourceComponent: SolarYieldGauge {
 				readonly property var gaugeParams: Gauges.leftGaugeParameters(0, _leftGaugeCount)
 

@@ -415,8 +415,7 @@ set (VENUS_QML_MODULE_SOURCES
     data/InverterChargers.qml
     data/ManualRelayModel.qml
     data/Notifications.qml
-    data/PvInverters.qml
-    data/SolarDevices.qml
+    data/SolarInputs.qml
     data/StartPageConfiguration.qml
     data/Switches.qml
     data/System.qml
@@ -855,7 +854,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/DcInputsImpl.qml
     data/dbus/EvChargersImpl.qml
     data/dbus/NotificationsImpl.qml
-    data/dbus/PvInvertersImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
     data/dbus/InverterChargersImpl.qml
@@ -1044,7 +1042,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/EvChargersImpl.qml
     data/mqtt/MqttDataManager.qml
     data/mqtt/NotificationsImpl.qml
-    data/mqtt/PvInvertersImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
     data/mqtt/InverterChargersImpl.qml

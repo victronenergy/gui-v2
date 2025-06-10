@@ -230,7 +230,7 @@ Page {
 						delegate: QuantityTable.TableRow {
 							id: tableRow
 							preferredVisible: tracker.enabled
-							headerText: Global.solarDevices.formatTrackerName(
+							headerText: Global.solarInputs.formatTrackerName(
 									  tracker.name, index, root.trackerCount, root.title,
 									  VenusOS.TrackerName_NoDevicePrefix)
 							model: QuantityObjectModel {

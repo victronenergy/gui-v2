@@ -12,8 +12,6 @@ QtObject {
 	property int mockDeviceCount
 
 	function populate() {
-		Global.pvInverters.reset()
-
 		const inverterCount = 3
 		for (let i = 0; i < inverterCount; ++i) {
 			createPvInverter(i + 1)
@@ -104,9 +102,10 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetSolarRequested(config) {
-			Global.pvInverters.reset()
 			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
+				const pvInverter = _createdObjects.pop()
+				Global.mockDataSimulator.setMockValue(pvInverter.serviceUid + "/DeviceInstance", -1)
+				pvInverter.destroy()
 			}
 
 			if (config && config.inverters) {
