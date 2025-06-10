@@ -10,7 +10,6 @@ import Victron.Dbus
 QtObject {
 	id: root
 
-	property var dcInputs: DcInputsImpl { }
 	property var notifications: NotificationsImpl {}
 
 	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
