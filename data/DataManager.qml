@@ -20,8 +20,7 @@ Item {
 			&& !!Global.generators
 			&& !!Global.inverterChargers
 			&& !!Global.notifications
-			&& !!Global.pvInverters
-			&& !!Global.solarDevices
+			&& !!Global.solarInputs
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.switches
@@ -97,8 +96,7 @@ Item {
 	Generators {}
 	InverterChargers {}
 	Notifications {}
-	PvInverters {}
-	SolarDevices {}
+	SolarInputs {}
 	Switches {}
 	System {}
 	SystemSettings {}

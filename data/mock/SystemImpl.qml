@@ -172,7 +172,7 @@ QtObject {
 	}
 
 	property Instantiator solarDevices: Instantiator {
-		model: Global.solarDevices.model
+		model: Global.solarInputs.devices
 		delegate: QtObject {
 			readonly property real power: modelData.power
 			onPowerChanged: Qt.callLater(root._updatePvTotals)
@@ -181,7 +181,7 @@ QtObject {
 	}
 
 	property Instantiator pvInverters: Instantiator {
-		model: Global.pvInverters.model
+		model: Global.solarInputs.pvInverterDevices
 		delegate: QtObject {
 			readonly property real power: modelData.power
 			readonly property var phases: modelData.phases

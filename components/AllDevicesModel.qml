@@ -27,7 +27,7 @@ AggregateDeviceModel {
 		pulseMeterDevices,
 		solarChargerDevices,
 		switchDevices,
-		Global.pvInverters.model,
+		Global.solarInputs.pvInverterDevices,
 		unsupportedDevices,
 
 		// AC input models

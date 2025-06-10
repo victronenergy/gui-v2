@@ -11,7 +11,7 @@ Page {
 
 	required property string bindPrefix
 	readonly property int trackerCount: nrOfTrackers.valid ? nrOfTrackers.value : 1
-	readonly property SolarDevice solarDevice: Global.solarDevices.model.deviceAt(Global.solarDevices.model.indexOf(bindPrefix))
+	readonly property SolarDevice solarDevice: Global.solarInputs.devices.deviceAt(Global.solarInputs.devices.indexOf(bindPrefix))
 
 	function _isModelSupported() {
 		if (!device.productId || !firmwareVersion.valid) {
@@ -165,7 +165,7 @@ Page {
 					id: tableRow
 
 					preferredVisible: tracker.enabled
-					headerText: Global.solarDevices.formatTrackerName(
+					headerText: Global.solarInputs.formatTrackerName(
 							tracker.name, index, root.trackerCount, root.solarDevice.name,
 							VenusOS.TrackerName_NoDevicePrefix)
 					model: QuantityObjectModel {

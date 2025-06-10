@@ -10,13 +10,13 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		const singleDeviceOnly = (Global.solarDevices.model.count + Global.pvInverters.model.count) === 1
-		if (singleDeviceOnly && Global.solarDevices.model.count === 1) {
+		const singleDeviceOnly = (Global.solarInputs.devices.count + Global.solarInputs.pvInverterDevices.count) === 1
+		if (singleDeviceOnly && Global.solarInputs.devices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml",
-					{ "solarDevice": Global.solarDevices.model.firstObject })
-		} else if (singleDeviceOnly && Global.pvInverters.model === 1) {
+					{ "solarDevice": Global.solarInputs.devices.firstObject })
+		} else if (singleDeviceOnly && Global.solarInputs.pvInverterDevices === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
-					{ "pvInverter": Global.pvInverters.model.deviceAt(0) })
+					{ "pvInverter": Global.solarInputs.pvInverterDevices.deviceAt(0) })
 		} else {
 			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": root.title })
 		}
@@ -53,9 +53,9 @@ OverviewWidget {
 			}
 			active: root.size >= VenusOS.OverviewWidget_Size_L
 			sourceComponent: {
-				if (Global.pvInverters.model.count === 1 && Global.solarDevices.model.count === 0) {
+				if (Global.solarInputs.pvInverterDevices.count === 1 && Global.solarInputs.devices.count === 0) {
 					return phaseComponent
-				} else if (Global.pvInverters.model.count === 0) {
+				} else if (Global.solarInputs.pvInverterDevices.count === 0) {
 					return historyComponent
 				}
 				// If there are both chargers and inverters, do not show the history (as inverters
@@ -70,7 +70,7 @@ OverviewWidget {
 		id: phaseComponent
 
 		ThreePhaseDisplay {
-			model: Global.pvInverters.model.deviceAt(0).phases
+			model: Global.solarInputs.pvInverterDevices.deviceAt(0).phases
 			visible: model.count > 1
 			widgetSize: root.size
 		}
