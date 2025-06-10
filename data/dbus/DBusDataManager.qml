@@ -10,8 +10,6 @@ import Victron.Dbus
 QtObject {
 	id: root
 
-	property var notifications: NotificationsImpl {}
-
 	property VeQItemTableModel servicesTableModel: VeQItemTableModel {
 		uids: ["dbus"]
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem

@@ -849,7 +849,6 @@ endif()
 # Dbus_QML_MODULE
 set(Dbus_QML_MODULE_SOURCES
     data/dbus/DBusDataManager.qml
-    data/dbus/NotificationsImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
@@ -1032,7 +1031,6 @@ qt_add_resources(BoatPageComponents "BoatPageComponents_large_resources"
 # Mqtt_QML_MODULE
 set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/MqttDataManager.qml
-    data/mqtt/NotificationsImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
