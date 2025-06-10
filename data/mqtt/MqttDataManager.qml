@@ -9,6 +9,4 @@ import Victron.Mqtt
 
 QtObject {
 	id: root
-
-	property var notifications: NotificationsImpl {}
 }

@@ -194,6 +194,61 @@ QtObject {
 		}
 	}
 
+	readonly property Instantiator _notificationObjects: Instantiator {
+		model: root._modelLoader.item
+		delegate: Notification {
+			id: notification
+
+			required property string id
+			readonly property bool _canInitialize: _acknowledged.value !== undefined
+				   && _active.valid
+				   && _type.valid
+				   && _dateTime.valid
+			notificationId: id
+			on_CanInitializeChanged: _init()
+
+			function _init() {
+				if (!_canInitialize) {
+					return
+				}
+				root.allNotificationsModel.insertNotification(notification)
+			}
+
+			Component.onDestruction: {
+				root.allNotificationsModel.removeNotification(notification)
+			}
+		}
+	}
+
+	readonly property Loader _modelLoader: Loader {
+		sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? mqttModelComponent : dbusOrMockModelComponent
+
+		Component {
+			id: dbusOrMockModelComponent
+			VeQItemSortTableModel {
+				dynamicSortFilter: true
+				filterRole: VeQItemTableModel.UniqueIdRole
+				filterRegExp: "^%1\/com\.victronenergy\.platform\/Notifications\/\\d+$".arg(BackendConnection.uidPrefix())
+				model: VeQItemTableModel {
+					uids: ["%1/com.victronenergy.platform/Notifications".arg(BackendConnection.uidPrefix())]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
+			}
+		}
+		Component {
+			id: mqttModelComponent
+			VeQItemSortTableModel {
+				dynamicSortFilter: true
+				filterRole: VeQItemTableModel.UniqueIdRole
+				filterRegExp: "^mqtt\/platform\/0\/Notifications\/\\d+$"
+				model: VeQItemTableModel {
+					uids: ["mqtt/platform/0/Notifications"]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
+			}
+		}
+	}
+
 	Component.onCompleted: {
 		Global.notifications = root
 	}
