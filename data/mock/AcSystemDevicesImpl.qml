@@ -91,8 +91,7 @@ Item {
 				acSystem.setMockValue("/Devices/0/Instance", deviceInstance)
 
 				// Add this multi RS to the list of inverter/chargers on the system
-				const inverterCharger = inverterChargerComponent.createObject(acSystem, { serviceUid: acSystem.serviceUid })
-				Global.inverterChargers.acSystemDevices.addDevice(inverterCharger)
+				inverterChargerComponent.createObject(acSystem, { serviceUid: acSystem.serviceUid })
 			}
 		}
 	}
