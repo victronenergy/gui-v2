@@ -51,9 +51,10 @@ QtObject {
 		target: Global.mockDataSimulator || null
 
 		function onSetEvChargersRequested(config) {
-			Global.evChargers.reset()
 			while (_createdObjects.length > 0) {
-				_createdObjects.pop().destroy()
+				const evCharger = _createdObjects.pop()
+				Global.mockDataSimulator.setMockValue(evCharger.serviceUid + "/DeviceInstance", -1)
+				evCharger.destroy()
 			}
 
 			if (config && config.chargers) {
@@ -193,14 +194,6 @@ QtObject {
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_productName.setValue("Energy Meter")
-			}
-
-			onValidChanged: {
-				if (valid) {
-					Global.evChargers.addCharger(energyMeter)
-				} else {
-					Global.evChargers.removeCharger(energyMeter)
-				}
 			}
 		}
 	}
