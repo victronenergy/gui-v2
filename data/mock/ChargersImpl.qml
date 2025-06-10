@@ -42,14 +42,6 @@ Item {
 				}
 			}
 
-			onValidChanged: {
-				if (valid) {
-					Global.inverterChargers.chargerDevices.addDevice(charger)
-				} else {
-					Global.inverterChargers.chargerDevices.removeDevice(charger.serviceUid)
-				}
-			}
-
 			Component.onCompleted: {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("AC Charger " + deviceInstance)

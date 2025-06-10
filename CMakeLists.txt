@@ -855,7 +855,6 @@ set(Dbus_QML_MODULE_SOURCES
     data/dbus/NotificationsImpl.qml
     data/dbus/SystemSettingsImpl.qml
     data/dbus/TanksImpl.qml
-    data/dbus/InverterChargersImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Dbus_QML_MODULE_SOURCES})
@@ -1043,7 +1042,6 @@ set(Mqtt_QML_MODULE_SOURCES
     data/mqtt/NotificationsImpl.qml
     data/mqtt/SystemSettingsImpl.qml
     data/mqtt/TanksImpl.qml
-    data/mqtt/InverterChargersImpl.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mqtt_QML_MODULE_SOURCES} )
