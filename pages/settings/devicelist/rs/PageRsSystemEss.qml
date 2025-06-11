@@ -31,7 +31,7 @@ Page {
 			ListRadioButtonGroup {
 				id: essMode
 				text: CommonWords.mode
-				optionModel: Global.ess.stateModel
+				optionModel: Global.systemSettings.ess.stateModel
 				dataItem.uid: root.bindPrefix + "/Settings/Ess/Mode"
 			}
 

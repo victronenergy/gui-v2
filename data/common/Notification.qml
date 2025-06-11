@@ -42,26 +42,12 @@ BaseNotification {
 		uid: notification.serviceUid ? notification.serviceUid + "/Value" : ""
 	}
 
-	readonly property bool _canInitialize: _acknowledged.value !== undefined
-										   && _active.value !== undefined
-										   && _type.value !== undefined
-										   && _dateTime.value !== undefined
-	on_CanInitializeChanged: _init()
-
 	function updateAcknowledged(acknowledged: bool) {
 		_acknowledged.setValue(acknowledged ? 1 : 0)
 	}
 
 	function updateActive(active: bool) {
 		_active.setValue(active ? 1 : 0)
-	}
-
-	function _init() {
-		if (!Global.notifications.allNotificationsModel || !_canInitialize) {
-			return
-		}
-		// insert into the allNotificationsModel
-		Global.notifications.allNotificationsModel.insertNotification(notification)
 	}
 
 	// These properties should not be written to; use updateAcknowledged() and updateActive() functions
@@ -73,9 +59,4 @@ BaseNotification {
 	deviceName: _deviceName.value || ""
 	description: _description.value || ""
 	value: _value.value || ""
-
-	Component.onDestruction: {
-		// remove from the allNotificationsModel
-		Global.notifications.allNotificationsModel.removeNotification(notification)
-	}
 }

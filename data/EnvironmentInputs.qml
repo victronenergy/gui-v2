@@ -9,8 +9,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property DeviceModel model: DeviceModel {
-		modelId: "environmentInputs"
+	readonly property ServiceDeviceModel model: ServiceDeviceModel {
+		serviceType: "temperature"
+		modelId: "temperature"
 	}
 
 	readonly property ListModel _temperatureDetails: ListModel {
@@ -56,18 +57,6 @@ QtObject {
 			temperatureGaugeMaximum: 0
 			temperatureGaugeStep: 5
 		}
-	}
-
-	function addInput(input) {
-		model.addDevice(input)
-	}
-
-	function removeInput(input) {
-		model.removeDevice(input.serviceUid)
-	}
-
-	function reset() {
-		model.clear()
 	}
 
 	function temperatureTypeToText(temperatureType) {

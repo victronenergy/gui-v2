@@ -21,7 +21,6 @@ QtObject {
 		}
 		let quattroDevice = createInverterCharger(quattro)
 		addInputSettings(quattroDevice, [VenusOS.AcInputs_InputSource_Generator, VenusOS.AcInputs_InputSource_Shore])
-		Global.inverterChargers.veBusDevices.addDevice(quattroDevice)
 
 		let multiPlus = {
 			state: VenusOS.System_State_AbsorptionCharging,
@@ -32,7 +31,6 @@ QtObject {
 		}
 		let multiPlusDevice = createInverterCharger(multiPlus)
 		addInputSettings(multiPlusDevice, [VenusOS.AcInputs_InputSource_Grid])
-		Global.inverterChargers.veBusDevices.addDevice(multiPlusDevice)
 	}
 
 	function createInverterCharger(config) {
@@ -65,7 +63,7 @@ QtObject {
 	}
 
 	property Component inverterChargerComponent: Component {
-		InverterCharger {
+		Device {
 			id: veBusDevice
 
 			function setMockValue(path, value) {
@@ -74,6 +72,18 @@ QtObject {
 
 			readonly property VeQuickItem _modeAdjustable: VeQuickItem {
 				uid: veBusDevice.serviceUid + "/ModeIsAdjustable"
+			}
+
+			readonly property VeQuickItem _state: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/State"
+			}
+
+			readonly property VeQuickItem _nominalInverterPower: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Ac/Out/NominalInverterPower"
+			}
+
+			readonly property VeQuickItem _mode: VeQuickItem {
+				uid: veBusDevice.serviceUid + "/Mode"
 			}
 
 			readonly property VeQuickItem _chargeState: VeQuickItem {
@@ -506,7 +516,6 @@ QtObject {
 				inverterObj.setMockValue("/History/Overall/DaysAvailable", 1)
 				inverterObj.setMockValue("/History/Daily/0/Yield", Math.random())
 			}
-			Global.inverterChargers.inverterDevices.addDevice(inverterObj)
 		}
 	}
 

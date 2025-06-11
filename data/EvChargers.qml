@@ -18,8 +18,26 @@ QtObject {
 	property int acOutputPositionCount  // Chargers with output position, i.e. connected to Essential loads
 	property real acOutputPositionPower: NaN // The total power for chargers with an output position
 
-	property DeviceModel model: DeviceModel {
-		modelId: "evChargers"
+	readonly property ServiceDeviceModel model: ServiceDeviceModel {
+		serviceType: "evcharger"
+		modelId: "evcharger"
+		deviceDelegate: EvCharger {
+			id: evCharger
+			required property string uid
+			serviceUid: uid
+			onValidChanged: {
+				if (valid) {
+					root.model.addDevice(evCharger)
+				} else {
+					root.model.removeDevice(evCharger.serviceUid)
+				}
+			}
+
+			onPowerChanged: root.updateTotals()
+			onCurrentChanged: root.updateTotals()
+			onPositionChanged: root.updateTotals()
+		}
+		onCountChanged: root.updateTotals()
 	}
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })
@@ -44,18 +62,6 @@ QtObject {
 			caption: qsTrId("evcs_scheduled_caption")
 		}
 	]
-
-	function addCharger(evCharger) {
-		if (model.addDevice(evCharger)) {
-			updateTotals()
-		}
-	}
-
-	function removeCharger(evCharger) {
-		if (model.removeDevice(evCharger.serviceUid)) {
-			updateTotals()
-		}
-	}
 
 	function updateTotals() {
 		_measurementUpdates.start()
@@ -93,11 +99,6 @@ QtObject {
 		acInputPositionPower = totalInputPower
 		acOutputPositionCount = totalOutputCount
 		acOutputPositionPower = totalOutputPower
-	}
-
-	function reset() {
-		model.clear()
-		power = NaN
 	}
 
 	function chargerStatusToText(status) {

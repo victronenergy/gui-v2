@@ -91,7 +91,7 @@ Page {
 						readonly property real todaysYield: root.solarDevice.dailyTrackerHistory(0, index)?.yieldKwh ?? NaN
 
 						preferredVisible: tracker.enabled
-						headerText: Global.solarDevices.formatTrackerName(
+						headerText: Global.solarInputs.formatTrackerName(
 								  tracker.name, index, root.trackerCount, root.solarDevice.name,
 								  VenusOS.TrackerName_NoDevicePrefix)
 						model: QuantityObjectModel {

@@ -32,7 +32,7 @@ ModalDialog {
 
 			Repeater {
 				id: repeater
-				model: Global.ess.stateModel
+				model: Global.systemSettings.ess.stateModel
 				delegate: SettingsColumn {
 					width: parent.width
 

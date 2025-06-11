@@ -16,7 +16,7 @@ ListModel {
 	property bool _resetting
 
 	property Instantiator _yieldUpdateConnections: Instantiator {
-		model: !!root.targetHistory ? null : Global.solarDevices.model
+		model: !!root.targetHistory ? null : Global.solarInputs.devices
 
 		delegate: Connections {
 			target: model.device
@@ -52,8 +52,8 @@ ListModel {
 				yieldForDay += history.yieldKwh
 			}
 		} else {
-			for (i = 0; i < Global.solarDevices.model.count; ++i) {
-				const solarDevice = Global.solarDevices.model.deviceAt(i)
+			for (i = 0; i < Global.solarInputs.devices.count; ++i) {
+				const solarDevice = Global.solarInputs.devices.deviceAt(i)
 				history = solarDevice.dailyHistory(day)
 				if (history && !isNaN(history.yieldKwh)) {
 					yieldForDay += history.yieldKwh

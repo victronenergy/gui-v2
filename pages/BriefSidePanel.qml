@@ -24,8 +24,8 @@ ColumnLayout {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
 		icon.source: "qrc:/images/solaryield.svg"
-		loadersActive: Global.solarDevices.model.count > 0 && Global.pvInverters.model.count === 0
-		visible: Global.solarDevices.model.count || Global.pvInverters.model.count
+		loadersActive: Global.solarInputs.devices.count > 0 // pvinverters do not have history, so ignore them
+		visible: Global.solarInputs.devices.count > 0
 		quantityLabel.dataObject: Global.system.solar
 		sideComponent: SolarYieldGraph {}
 	}
@@ -34,9 +34,9 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		id: generatorWidget
 
-		title: Global.generators.model.count === 1 ? Global.generators.model.firstObject.name : CommonWords.generator
+		title: Global.generators.model.firstObject?.name ?? ""
 		icon.source: "qrc:/images/generator.svg"
-		loadersActive: generatorInput && generatorInput.operational
+		loadersActive: generatorInput && generatorInput.operational && Global.generators.model.firstObject
 		visible: loadersActive
 		quantityLabel.dataObject: generatorInput
 		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
@@ -52,7 +52,9 @@ ColumnLayout {
 					right: parent.right
 					bottom: parent.bottom
 				}
-				generator: Global.generators.model.firstObject
+				generator: Generator {
+					serviceUid: Global.generators.model.firstObject?.serviceUid ?? ""
+				}
 			}
 		}
 		bottomComponent: ThreePhaseBarGauge {

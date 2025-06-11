@@ -84,14 +84,4 @@ Device {
 	readonly property VeQuickItem _power: VeQuickItem {
 		uid: pvInverter.serviceUid + "/Ac/Power"
 	}
-
-	onValidChanged: {
-		if (!!Global.pvInverters) {
-			if (valid) {
-				Global.pvInverters.addInverter(pvInverter)
-			} else {
-				Global.pvInverters.removeInverter(pvInverter)
-			}
-		}
-	}
 }
