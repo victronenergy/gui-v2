@@ -38,7 +38,8 @@ QtObject {
 	readonly property Instantiator _trackerNames: Instantiator {
 		model: root.trackerCount
 		delegate: VeQuickItem {
-			uid: root.bindPrefix + "/Pv/" + model.index + "/Name"
+			required property int index
+			uid: root.bindPrefix + "/Pv/" + index + "/Name"
 		}
 	}
 
