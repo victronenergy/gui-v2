@@ -41,6 +41,8 @@ Item {
 			right: root.alignment & Qt.AlignRight ? parent.right : undefined
 		}
 
+		spacing: Theme.geometry_quantityLabel_spacing
+
 		Label {
 			id: valueLabel
 
@@ -49,11 +51,6 @@ Item {
 			font.pixelSize: root.font.pixelSize
 			font.weight: root.font.weight
 			font.family: Global.quantityFontFamily
-		}
-
-		Item {
-			width: Theme.geometry_quantityLabel_spacing
-			height: 1
 		}
 
 		Label {
