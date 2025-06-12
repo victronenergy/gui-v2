@@ -91,6 +91,7 @@
       </div>
     </div>
 
+    <script src="fflate.js"></script>
     <script type="text/javascript">
         async function check(url, attempt, delay, available, unavailable)
         {
@@ -132,12 +133,15 @@
                 received += value.length;
                 onProgress(received, total);
             }
-            let wasmBinary = new Uint8Array(received);
+            // Concatenate compressed chunks
+            let compressed = new Uint8Array(received);
             let pos = 0;
             for (let chunk of chunks) {
-                wasmBinary.set(chunk, pos);
+                compressed.set(chunk, pos);
                 pos += chunk.length;
             }
+            // Decompress using fflate
+            const wasmBinary = fflate.decompressSync(compressed);
             return wasmBinary;
         }
 
@@ -160,10 +164,6 @@
             }
 
             const searchParams = new URLSearchParams(window.location.search);
-
-            // If mqtt param is set: use the provided MQTT address
-            // If id/shard params are set: gui-v2 will use VRM
-            // If none of these are set, will use a default MQTT address.
             const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
 
             // Options to change display size and border
@@ -189,15 +189,15 @@
                 loadingBarText.textContent = '';
 
                 // Preload WASM with progress
-                const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
+                const wasmBinary = await preloadWasm('venus-gui-v2.wasm.gz', (received, total) => {
                     if (total) {
                         loadingBar.style.width = (received / total * 100).toFixed(1) + '%';
                         loadingBarText.textContent =
-                            `${(received/1024).toFixed(1)} KB / ${(total/1024).toFixed(1)} KB`;
+                            `${(received/(1024*1024)).toFixed(2)} MB / ${(total/(1024*1024)).toFixed(2)} MB`;
                     } else {
                         loadingBar.style.width = '100%';
                         loadingBarText.textContent =
-                            `${(received/1024).toFixed(1)} KB loaded`;
+                            `${(received/(1024*1024)).toFixed(2)} MB loaded`;
                     }
                 });
 
@@ -219,7 +219,7 @@
                                 exitData.text !== undefined ? ` (${exitData.text})` : '';
                             showUi(spinner);
                         },
-                        entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L113
+                        entryFunction: window.venus_gui_v2_entry,
                         containerElements: [screen],
                     }
                 });
