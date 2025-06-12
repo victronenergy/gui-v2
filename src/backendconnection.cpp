@@ -269,7 +269,13 @@ void BackendConnection::openUrl(const QString &url)
 
 void BackendConnection::hitWatchdog()
 {
-	emscripten_run_script("watchdogHit = true"); // 'watchdogHit' is defined in index.html, which checks it periodically and reloads the page if not hit regularly.
+	// 'watchdogHit' and 'initialized' are defined in index.html.
+	// After this function sets 'initialized' to true, a timer in index.html periodically:
+	//	1. checks watchdogHit - if false, reloads the page.
+	//	2. sets 'watchdogHit' to false.
+
+	emscripten_run_script("watchdogHit = true");
+	emscripten_run_script("initialized = true");
 }
 
 #else

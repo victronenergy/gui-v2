@@ -114,17 +114,15 @@
     <script src="venus-gui-v2.js"></script>
     <script type="text/javascript" src="qtloader.js"></script>
     <script type="text/javascript">
+        var initialized = false
         var watchdogHit = false // this gets set to 'true' by a timer via BackendConnection::hitWatchdog()
         var reloadTriggered = false // this gets set to 'true' if reload() is called to prevent multiple reload calls
         console.log("starting watchdog timer")
-        setTimeout(function() { // wait 2 minutes for the page to load, then set a 10 second watchdog timer
-            checkWatchdog()
-            setInterval(checkWatchdog, 10000)
-        }, 120000)
+        setInterval(checkWatchdog, 10000)
 
         function checkWatchdog()
         {
-            if (!watchdogHit && !reloadTriggered) {
+            if (!watchdogHit && !reloadTriggered && initialized) {
                 console.error("Watchdog timer expired - reloading page")
                 reload()
                 reloadTriggered = true
