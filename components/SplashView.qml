@@ -14,7 +14,7 @@ Rectangle {
 	property bool showSplashAnimation: Qt.platform.os != "wasm"
 	readonly property bool allPagesLoaded: Global.allPagesLoaded
 
-	color: Theme.color_background_primary
+	color: Theme.color_page_background
 	visible: Global.splashScreenVisible
 
 	onAllPagesLoadedChanged: {
