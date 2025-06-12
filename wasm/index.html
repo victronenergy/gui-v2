@@ -81,6 +81,10 @@
         <figure id="qtspinner">
           <img id="logo" style="display:block"></img>
           <div id="qtstatus"></div>
+          <div id="loading-bar-container" style="width:372px; height:6px; background:#11263B; border-radius:10px; margin-top:1em; display:none; position:relative; overflow:hidden;">
+          <div id="loading-bar" style="position:absolute; left:0; top:0; width:0%; height:100%; background:#387DC5; border-radius:10px 0 0 10px;"></div>
+          </div>
+          <div id="loading-bar-text" style="margin-top: 10px; align-items:center;"></div>
           <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
         </figure>
         <div id="screen"></div>
@@ -113,6 +117,30 @@
             check(location.href, 30, 1000, (function() { location.reload(); }), (function() { console.log("Failed to reload gui-v2: web server unavailable"); }) );
         }
 
+        async function preloadWasm(url, onProgress) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch WASM");
+            const contentLength = response.headers.get('content-length');
+            const total = contentLength ? parseInt(contentLength, 10) : null;
+            const reader = response.body.getReader();
+            let received = 0;
+            let chunks = [];
+            while (true) {
+                const {done, value} = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                onProgress(received, total);
+            }
+            let wasmBinary = new Uint8Array(received);
+            let pos = 0;
+            for (let chunk of chunks) {
+                wasmBinary.set(chunk, pos);
+                pos += chunk.length;
+            }
+            return wasmBinary;
+        }
+
         async function init()
         {
             const spinner = document.querySelector('#qtspinner');
@@ -120,6 +148,9 @@
             const status = document.querySelector('#qtstatus');
             const mockup = document.querySelector('#mockup');
             const wrapper_inner = document.querySelector('#wrapper-inner');
+            const loadingBarContainer = document.getElementById('loading-bar-container');
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingBarText = document.getElementById('loading-bar-text');
 
             const showUi = (ui) => {
                 [spinner, screen].forEach(element => element.style.visibility = 'hidden');
@@ -153,10 +184,30 @@
             try {
                 showUi(spinner);
                 status.innerHTML = 'Loading...';
+                loadingBarContainer.style.display = 'block';
+                loadingBar.style.width = '0%';
+                loadingBarText.textContent = '';
+
+                // Preload WASM with progress
+                const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
+                    if (total) {
+                        loadingBar.style.width = (received / total * 100).toFixed(1) + '%';
+                        loadingBarText.textContent =
+                            `${(received/1024).toFixed(1)} KB / ${(total/1024).toFixed(1)} KB`;
+                    } else {
+                        loadingBar.style.width = '100%';
+                        loadingBarText.textContent =
+                            `${(received/1024).toFixed(1)} KB loaded`;
+                    }
+                });
+
+                loadingBar.style.width = '100%';
+                loadingBarText.textContent = '';
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
-                const instance = await qtLoad({
+                await qtLoad({
                     arguments: needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [],
+                    wasmBinary: wasmBinary,
                     qt: {
                         onLoaded: () => showUi(screen),
                         onExit: exitData =>
