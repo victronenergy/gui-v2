@@ -589,6 +589,12 @@ public:
 	};
 	Q_ENUM(Vrm_PortalMode)
 
+	enum RemoteConsoleColorMode {
+		RemoteConsoleColorMode_FollowDisplayMode,
+		RemoteConsoleColorMode_FollowSystemTheme
+	};
+	Q_ENUM(RemoteConsoleColorMode)
+
 	enum DigitalInput_Type {
 		DigitalInput_Type_Disabled,
 		DigitalInput_Type_PulseMeter,
