@@ -215,23 +215,32 @@ ListModel {
 				id: tankIdSource
 
 				GaugeSource {
-					readonly property Tank _device: _findTank()
+					property Tank _device
+					readonly property int totalTankCount: Global.tanks.totalTankCount
 
-					function _findTank() {
+					function _updateTank() {
+						if (_device?.valid) {
+							return
+						}
 						const tankIdInfo = BackendConnection.portableIdInfo(gaugeObject.modelData.value)
 						for (const tankModel of Global.tanks.allTankModels) {
 							const tank = tankModel.deviceForDeviceInstance(tankIdInfo.instance)
 							if (tank) {
-								return tank
+								_device = tank
+								break
 							}
 						}
-						return null
 					}
 
 					name: _device?.name || ""
 					type: _device?.type ?? -1
 					level: _device?.level ?? NaN
 					remaining: Units.convert(_device?.remaining ?? NaN, VenusOS.Units_Volume_CubicMeter, Global.systemSettings.volumeUnit)
+
+					// Set tank on initialization, or when tanks are updated, in case the tank is
+					// disconnected and reconnected.
+					onTotalTankCountChanged: _updateTank()
+					Component.onCompleted: _updateTank()
 				}
 			}
 		}

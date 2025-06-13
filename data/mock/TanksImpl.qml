@@ -12,6 +12,7 @@ QtObject {
 
 	property int mockDeviceCount
 	property var _createdObjects: []
+	property var disabledInstances: []
 
 	function populate() {
 		if (!Global.mockDataSimulator.levelsEnabled) {
@@ -41,10 +42,10 @@ QtObject {
 		}
 	}
 
-	function addTank(properties) {
-		const deviceInstanceNum = mockDeviceCount++
+	function addTank(properties, serviceUid, deviceInstance) {
+		const deviceInstanceNum = deviceInstance ?? mockDeviceCount++
 		const tankObj = tankComponent.createObject(root, {
-			serviceUid: "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum,
+			serviceUid: serviceUid ?? "mock/com.victronenergy.tank.ttyUSB" + deviceInstanceNum,
 		})
 		tankObj._device.deviceInstance = deviceInstanceNum
 		_createdObjects.push(tankObj)
@@ -142,26 +143,24 @@ QtObject {
 		}
 	}
 
+	// When the tanks tab is removed, disconnect the tanks. If the tab is later re-enabled, simulate
+	// a reconnection of those same tanks.
 	property bool levelsEnabled: Global.mockDataSimulator.levelsEnabled
 	onLevelsEnabledChanged: {
+		let i
 		if (levelsEnabled) {
-			let model
-			model = Global.tanks.tankModel(Math.floor(Math.random() * Global.tanks.tankTypes.length))
-			const randomLevel = Math.random()
-			const capacity = 1  // m3
-			const tankProperties = {
-				type: model.type,
-				temperature: Math.random() * 100,
-				level: randomLevel * 100,
-				capacity: capacity,
-				remaining: capacity * randomLevel,
+			for (i = 0; i < disabledInstances.length; ++i) {
+				root.addTank(disabledInstances[i].properties, disabledInstances[i].serviceUid, disabledInstances[i].deviceInstance)
 			}
-			root.addTank(tankProperties)
+			disabledInstances = []
 		} else {
-			for (var i = 0; i < _createdObjects.length; ++i) {
-				_createdObjects[i]._device.deviceInstance = -1 // causes tank to remove itself from model
+			for (i = 0; i < _createdObjects.length; ++i) {
+				let obj = _createdObjects[i]
+				const properties = { type: obj.type, level: obj.level, capacity: obj.capacity, remaining: obj.remaining }
+				disabledInstances.push({ deviceInstance: obj.deviceInstance, serviceUid: obj.serviceUid, properties: properties })
+				obj._device.deviceInstance = -1 // causes tank to remove itself from model
+				obj.destroy()
 			}
-
 			_createdObjects = []
 		}
 	}
