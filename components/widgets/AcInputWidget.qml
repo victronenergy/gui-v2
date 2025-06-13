@@ -58,7 +58,6 @@ AcWidget {
 		sourceComponent: ThreePhaseBarGauge {
 			valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 			phaseModel: root.input.phases
-			phaseModelProperty: "current"
 			minimumValue: root.inputInfo?.minimumCurrent ?? NaN
 			maximumValue: root.inputInfo?.maximumCurrent ?? NaN
 			inputMode: true

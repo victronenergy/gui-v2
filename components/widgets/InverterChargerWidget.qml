@@ -87,7 +87,6 @@ OverviewWidget {
 		sourceComponent: ThreePhaseBarGauge {
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			phaseModel: Global.system.load.ac.phases
-			phaseModelProperty: "current"
 			maximumValue: Global.system.load.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 			inOverviewWidget: true
