@@ -19,7 +19,6 @@ AcWidget {
 		model: Global.system.load.acOut.phases
 		widgetSize: root.size
 		valueType: VenusOS.Gauges_ValueType_RisingPercentage
-		phaseModelProperty: "current"
 		maximumValue: Global.system.load.maximumAcCurrent
 	}
 	extraContentLoader.active: root.phaseCount > 1 || Global.system.load.acOut.l2AndL1OutSummed

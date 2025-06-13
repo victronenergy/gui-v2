@@ -67,7 +67,6 @@ Column {
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			phaseModel: Global.system.load.ac.phases
-			phaseModelProperty: "current"
 			maximumValue: Global.system.load.maximumAcCurrent
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")

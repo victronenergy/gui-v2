@@ -148,8 +148,7 @@ SwipeViewPage {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-				phaseModel: Global.acInputs.highlightedInput?.phases
-				phaseModelProperty: "current"
+				phaseModel: Global.acInputs.highlightedInput?.phases ?? null
 				minimumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.minimumCurrent : NaN
 				maximumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.maximumCurrent : NaN
 				inputMode: true
@@ -291,7 +290,6 @@ SwipeViewPage {
 				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				phaseModel: Global.system.load.ac.phases
-				phaseModelProperty: "current"
 				maximumValue: Global.system.load.maximumAcCurrent
 
 				ArcGaugeQuantityRow {

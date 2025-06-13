@@ -9,6 +9,7 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	required property PhaseModel phaseModel
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	property int direction
 	property real startAngle
@@ -17,8 +18,6 @@ Item {
 	property real arcVerticalCenterOffset
 	property real phaseLabelHorizontalMargin
 	property bool animationEnabled
-	property var phaseModel
-	property string phaseModelProperty
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode
@@ -27,17 +26,10 @@ Item {
 	width: parent.width
 	height: parent.height
 
-	onPhaseModelPropertyChanged: {
-		placeholderModel.clear();
-		if (phaseModelProperty.length > 0) {
-			let itemProperties = {}
-			itemProperties[phaseModelProperty] = NaN
-			placeholderModel.append(itemProperties)
-		}
-	}
-
-	ListModel {
+	// Always show at least one gauge, instead of showing empty space when device is disconnected.
+	PhaseModel {
 		id: placeholderModel
+		phaseCount: 1
 	}
 
 	Repeater {
@@ -48,20 +40,21 @@ Item {
 		delegate: Item {
 			id: gaugeDelegate
 
+			required property int index
+			required property real power
+			required property real current
+
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: root.height
 
-			// ignore noise values (close to zero)
-			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
-					: model[root.phaseModelProperty]
-			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
+			readonly property bool feedingToGrid: root.inputMode && power < -1.0 // ignore noise values (close to zero)
 
 			SideGauge {
 				id: gauge
 				animationEnabled: root.animationEnabled
 				width: Theme.geometry_briefPage_edgeGauge_width
 				height: root.height
-				x: (model.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing))
+				x: (gaugeDelegate.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing))
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType
@@ -86,7 +79,7 @@ Item {
 					bottomMargin: Theme.geometry_briefPage_edgeGauge_phaseLabel_bottomMargin
 				}
 				visible: gaugeRepeater.count > 1
-				text: model.index + 1
+				text: gaugeDelegate.index + 1
 				font.pixelSize: Theme.font_size_phase_number
 			}
 
@@ -97,7 +90,7 @@ Item {
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
 				value: root.visible
-					   ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.modelValue) : gaugeDelegate.modelValue)
+					   ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.current) : gaugeDelegate.current)
 					   : root.minimumValue
 				minimumValue: 0
 				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))

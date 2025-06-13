@@ -60,7 +60,6 @@ ColumnLayout {
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
 			phaseModel: root.visible ? generatorInput.phases : null
-			phaseModelProperty: "current"
 			minimumValue: generatorInput.inputInfo.minimumCurrent
 			maximumValue: generatorInput.inputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
@@ -198,7 +197,6 @@ exported power v  0.4 |   /
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
 			phaseModel: root.visible ? nonGeneratorInput.phases : null
-			phaseModelProperty: "current"
 			minimumValue: nonGeneratorInput.inputInfo.minimumCurrent
 			maximumValue: nonGeneratorInput.inputInfo.maximumCurrent
 			animationEnabled: root.animationEnabled
@@ -271,7 +269,6 @@ exported power v  0.4 |   /
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			phaseModel: root.visible ? Global.system.load.ac.phases : null
-			phaseModelProperty: "current"
 			maximumValue: Global.system.load.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 		}

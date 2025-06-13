@@ -9,9 +9,8 @@ import Victron.VenusOS
 Flow {
 	id: root
 
+	required property PhaseModel phaseModel
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-	property alias phaseModel: phaseRepeater.model
-	property string phaseModelProperty
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode
@@ -31,16 +30,17 @@ Flow {
 	Repeater {
 		id: phaseRepeater
 
+		model: root.phaseModel
 		delegate: Item {
 			id: phaseDelegate
 
+			required property int index
+			required property real power
+			required property real current
+			readonly property bool feedingToGrid: root.inputMode && power < -1.0 // ignore noise values (close to zero)
+
 			width: root.orientation === Qt.Vertical ? root.width : root._delegateLength
 			height: root.orientation === Qt.Vertical ? root._delegateLength : root.height
-
-			// ignore noise values (close to zero)
-			readonly property real modelValue: Math.floor(Math.abs(model[root.phaseModelProperty] || 0)) < 1.0 ? 0.0
-					: model[root.phaseModelProperty]
-			readonly property bool feedingToGrid: root.inputMode && modelValue < 0.0
 
 			Label {
 				id: phaseLabel
@@ -48,7 +48,7 @@ Flow {
 				anchors.verticalCenter: parent.verticalCenter
 				leftPadding: Theme.geometry_barGauge_phaseLabel_leftPadding
 				rightPadding: Theme.geometry_barGauge_phaseLabel_rightPadding
-				text: model.index + 1
+				text: phaseDelegate.index + 1
 				font.pixelSize: Theme.font_size_phase_number
 				visible: root.orientation === Qt.Horizontal && phaseRepeater.count > 1
 			}
@@ -60,7 +60,7 @@ Flow {
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
 				value: root.visible
-					   ? phaseDelegate.feedingToGrid ? Math.abs(phaseDelegate.modelValue) : phaseDelegate.modelValue
+					   ? phaseDelegate.feedingToGrid ? Math.abs(phaseDelegate.current) : phaseDelegate.current
 					   : root.minimumValue
 				minimumValue: 0
 				maximumValue: Math.max(Math.abs(root.minimumValue), Math.abs(root.maximumValue))
