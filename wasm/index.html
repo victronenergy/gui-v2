@@ -26,6 +26,7 @@
         font-family: "Roboto", sans-serif;
       }
       #logo {
+        display: block;
         content: url('victronenergy.svg');
         width: 300px; height: 54px;
         margin-top: 40px;
@@ -62,11 +63,32 @@
         width: 100%; height: 100%; position: absolute; top: 0; left: 0; margin: 0;
         z-index: 2;
       }
+      #loading-bar-container {
+        width: 45%;
+        max-width: 464px;
+        height: 8px;
+        background: #11263B;
+        border-radius: 2px;
+        display: none;
+        position: relative;
+        overflow: hidden;
+      }
+      #loading-bar {
+        position:absolute;
+        left:0;
+        top:0;
+        width:0%;
+        height:100%;
+        background:#387DC5;
+        border-radius: 10px 0 0 10px;
+      }
       #loading-bar-text {
         font-size: 18px;
         color: #969591;
         margin-top: 10px;
-        align-items: center;
+        text-align: center;
+        font-family: Roboto;
+        font-weight: 400;
       }
       @media (prefers-color-scheme: light) {
         html, body {
@@ -89,11 +111,10 @@
     <div id="wrapper-outer">
       <div id="wrapper-inner">
         <figure id="qtspinner">
-          <img id="logo" style="display:block"></img>
+          <img id="logo"></img>
           <div id="qtstatus"></div>
-          <!--<div id="loading-bar-container" style="width:372px; height:6px; background:#11263B; border-radius:10px; margin-top:1em; display:none; position:relative; overflow:hidden;">-->
-          <div id="loading-bar-container" style="width:45%; height:8px; background:#11263B; border-radius:2px; display:none; position:relative; overflow:hidden;">
-          <div id="loading-bar" style="position:absolute; left:0; top:0; width:0%; height:100%; background:#387DC5; border-radius:10px 0 0 10px;"></div>
+          <div id="loading-bar-container">
+            <div id="loading-bar"></div>
           </div>
           <div id="loading-bar-text"></div>
           <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
@@ -216,9 +237,9 @@
                 // Preload WASM with progress
                 const wasmBinary = await preloadWasm('venus-gui-v2.wasm.gz', (received, total) => {
                     if (total) {
-                        loadingBar.style.width = (received / total * 100).toFixed(1) + '%';
-                        loadingBarText.textContent =
-                            `Downloading... ${(received/(1024*1024)).toFixed(2)} MB / ${(total/(1024*1024)).toFixed(2)} MB`;
+                        const percent = (received / total * 100).toFixed(1);
+                        loadingBar.style.width = percent + '%';
+                        loadingBarText.textContent = `Downloading... ${percent}%`;
                     } else {
                         loadingBar.style.width = '100%';
                         loadingBarText.textContent =
