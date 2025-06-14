@@ -28,6 +28,26 @@ Page {
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 			}
 
+			ListText {
+				//% "Image type"
+				text: qsTrId("settings_image_type")
+				secondaryText: signalK.valid || nodeRed.valid ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
+				preferredVisible: largeImageSupport.valid && largeImageSupport.value === 1
+
+				VeQuickItem {
+					id: signalK
+					uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				}
+				VeQuickItem {
+					id: nodeRed
+					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+				}
+				VeQuickItem {
+					id: largeImageSupport
+					uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+				}
+			}
+
 			ListNavigation {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
