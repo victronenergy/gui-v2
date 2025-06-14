@@ -19,13 +19,13 @@ Page {
 
 	function getVictronSupportState() {
 		if (modelItem.value.indexOf("Raspberry") === -1) {
-			if (fsModifiedState === 0 && !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)) {
+			if (fsModifiedState !== VenusOS.ModificationChecks_FsModifiedState_Modified && !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)) {
 				//% "Yes"
 				return qsTrId("pagesettingsmodificationchecks_yes")
-			} else if ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) && fsModifiedState === 0) {
+			} else if ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) && fsModifiedState !== VenusOS.ModificationChecks_FsModifiedState_Modified) {
 				//% "Disable all modifications before contacting support"
 				return qsTrId("pagesettingsmodificationchecks_disable_modifications")
-			} else if (fsModifiedState === 1 && !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)) {
+			} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified && !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)) {
 				//% "Restore firmware integrity before contacting support"
 				return qsTrId("pagesettingsmodificationchecks_disable_system_hooks")
 			} else {
@@ -51,14 +51,14 @@ Page {
 	}
 
 	function getFsModifiedState() {
-		if (fsModifiedState === 0) {
+		if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Clean) {
 			return CommonWords.ok
-		} else if (fsModifiedState === 1) {
+		} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified) {
 			//% "Modified"
 			return qsTrId("pagesettingsmodificationchecks_modified")
 		} else {
-			//% "Unknown: %1"
-			return qsTrId("pagesettingsmodificationchecks_unknown").arg(fsModifiedState)
+			//% "Not available on this device"
+			return qsTrId("pagesettingsmodificationchecks_not_available_on_this_device")
 		}
 	}
 
@@ -200,7 +200,7 @@ Page {
 				//% "Victron Energy support"
 				text: qsTrId("pagesettingsmodificationchecks_system_state")
 				secondaryText: getVictronSupportState()
-				secondaryLabel.color: fsModifiedState === 0 && modelItem.value.indexOf("Raspberry") === -1
+				secondaryLabel.color: modelItem.value.indexOf("Raspberry") === -1 && fsModifiedState !== VenusOS.ModificationChecks_FsModifiedState_Modified
 					&& !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
 					? Theme.color_green : Theme.color_red
 			}
@@ -228,42 +228,6 @@ Page {
 			}
 
 			ListText {
-				//% "Modifications loaded at boot"
-				text: qsTrId("pagesettingsmodificationchecks_modifications_at_boot")
-				secondaryText: getSystemHooksState()
-				secondaryLabel.color: systemHooksState < 4 ? Theme.color_green : systemHooksState < 16 ? Theme.color_orange : Theme.color_red
-			}
-
-			ListText {
-				//% "Firmware integrity"
-				text: qsTrId("pagesettingsmodificationchecks_firmware_integrity")
-				secondaryText: getFsModifiedState()
-				secondaryLabel.color: fsModifiedState === 0 ? Theme.color_green : Theme.color_red
-				//% "State of root-fs"
-				caption: qsTrId("pagesettingsmodificationchecks_firmware_integrity_description")
-			}
-
-			ListText {
-				//% "Latest stable firmware version installed?"
-				text: qsTrId("pagesettingsmodificationchecks_latest_stable_firmware_installed")
-				secondaryText: getLatestReleaseFirmwareInstalled()
-				secondaryLabel.color: isLatestReleaseFirmwareInstalled ? Theme.color_green : Theme.color_red
-			}
-
-			ListText {
-				//% "Installed firmware version"
-				text: qsTrId("pagesettingsmodificationchecks_installed_firmware_version")
-				secondaryText: FirmwareVersion.versionText(firmwareInstalledVersionItem.value, "venus")
-			}
-
-			ListText {
-				//% "Installed image type"
-				text: qsTrId("pagesettingsmodificationchecks_installed_image_type")
-				secondaryText: isLargeFirmwareInstalled ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
-				preferredVisible: largeImageSupportItem.valid && largeImageSupportItem.value === 1
-			}
-
-			ListText {
 				//% "User SSH key present"
 				text: qsTrId("pagesettingsmodificationchecks_user_ssh_key_present")
 				secondaryText: sshKeyForRootPresentItem.value === 1 ? qsTrId("common_words_yes") : qsTrId("common_words_no")
@@ -274,10 +238,17 @@ Page {
 				text: qsTrId("pagesettingsmodificationchecks_modifications")
 			}
 
+			ListText {
+				//% "Third-party modifications loaded at boot"
+				text: qsTrId("pagesettingsmodificationchecks_third_party_modifications_at_boot")
+				secondaryText: getSystemHooksState()
+				secondaryLabel.color: systemHooksState < 4 ? Theme.color_green : systemHooksState < 16 ? Theme.color_orange : Theme.color_red
+			}
+
 			ListSwitch {
 				id: enableAllModifications
-				//% "All modifications enabled"
-				text: qsTrId("pagesettingsmodificationchecks_enable_all_modifications")
+				//% "Load third-party modifications at boot (if present)"
+				text: qsTrId("pagesettingsmodificationchecks_enable_third_party_modifications")
 				/*
 				Venus Platform
 				- Save the current state of Signal K and Node-RED
@@ -287,11 +258,8 @@ Page {
 				- Disable rcS.local by renaming it to rcS.local.disabled
 				*/
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ModificationChecks/AllModificationsEnabled"
-				caption: isLargeFirmwareInstalled
-					//% "Enables all modifications, allowing Signal K and Node-RED to be enabled separately."
-					? qsTrId("pagesettingsmodificationchecks_enable_all_modifications_description_large")
-					//% "Enables all modifications"
-					: qsTrId("pagesettingsmodificationchecks_enable_all_modifications_description")
+				//% "Enables all modifications, allowing Signal K and Node-RED to be enabled separately."
+				// caption: qsTrId("pagesettingsmodificationchecks_enable_all_modifications_description_large")
 
 				onCheckedChanged: {
 					/*
@@ -314,8 +282,10 @@ Page {
 					id: askForRebootDialogComponent
 
 					ModalWarningDialog {
-						//% "To apply changes a reboot is needed.<br>Press 'OK' to reboot now."
+						//% "Reboot needed"
 						title: qsTrId("pagesettingsmodificationchecks_reboot_needed")
+						//% "To apply changes a reboot is needed.<br>Press 'OK' to reboot now."
+						description: qsTrId("pagesettingsmodificationchecks_reboot_needed_description")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						onClosed: {
 							if (result === T.Dialog.Accepted) {
@@ -345,6 +315,38 @@ Page {
 				text: qsTrId("pagesettingsmodificationchecks_firmware")
 			}
 
+			ListText {
+				//% "Installed firmware version"
+				text: qsTrId("pagesettingsmodificationchecks_installed_firmware_version")
+				secondaryText: FirmwareVersion.versionText(firmwareInstalledVersionItem.value, "venus")
+			}
+
+			ListText {
+				//% "Installed image type"
+				text: qsTrId("pagesettingsmodificationchecks_installed_image_type")
+				secondaryText: isLargeFirmwareInstalled ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
+				preferredVisible: largeImageSupportItem.valid && largeImageSupportItem.value === 1
+			}
+
+			ListText {
+				//% "Firmware integrity"
+				text: qsTrId("pagesettingsmodificationchecks_firmware_integrity")
+				secondaryText: getFsModifiedState()
+				secondaryLabel.color: fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Clean ? Theme.color_green
+					: fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified ? Theme.color_red : Theme.color_orange
+				// Theme.color_font_secondary
+				//% "State of root-fs"
+				caption: qsTrId("pagesettingsmodificationchecks_firmware_integrity_description")
+				// preferredVisible: fsModifiedStateItem.valid && fsModifiedStateItem.value !== VenusOS.ModificationChecks_FsModifiedState_Unknown
+			}
+
+			ListText {
+				//% "Latest stable firmware version installed?"
+				text: qsTrId("pagesettingsmodificationchecks_latest_stable_firmware_installed")
+				secondaryText: getLatestReleaseFirmwareInstalled()
+				secondaryLabel.color: isLatestReleaseFirmwareInstalled ? Theme.color_green : Theme.color_red
+			}
+
 			ListButton {
 				//% "Reinstall latest stable firmware"
 				text: qsTrId("pagesettingsmodificationchecks_firmware_reinstall")
@@ -365,15 +367,17 @@ Page {
 				}
 				writeAccessLevel: VenusOS.User_AccessType_User
 				//% "Restore the firmware to its original state while preserving system settings."
-				caption: qsTrId("pagesettingsmodificationchecks_firmware_reinstall_description")
+				caption: qsTrId("pagesettingsmodificationchecks_firmware_reinstall_caption")
 				onClicked: Global.dialogLayer.open(confirmReinstallDialogComponent)
 
 				Component {
 					id: confirmReinstallDialogComponent
 
 					ModalWarningDialog {
-						//% "This will disable all modifications, download and reinstall the latest stable firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
-						title: qsTrId("pagesettingsmodificationchecks_firmware_restore_clean_state_description")
+						//% "Reinstall latest stable firmware"
+						title: qsTrId("pagesettingsmodificationchecks_firmware_restore_clean_state_title")
+						//% "This will disable all third-party modifications, download and reinstall the latest stable firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
+						description: qsTrId("pagesettingsmodificationchecks_firmware_restore_clean_state_description")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						onClosed: {
 							if (result === T.Dialog.Accepted) {
@@ -386,20 +390,48 @@ Page {
 				}
 			}
 
-			ListNavigation {
-				//% "Online update"
-				text: qsTrId("pagesettingsmodificationchecks_firmware_online_update")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+			SettingsListHeader {
+				//% "Integrations"
+				text: qsTrId("pagesettingsmodificationchecks_integrations")
+			}
+
+			ListText {
+				//% "MQTT Access"
+				text: qsTrId("pagesettingsmodificationchecks_mqtt_access")
+				secondaryText: mqttAccessItem.valid && mqttAccessItem.value ? CommonWords.enabled : CommonWords.disabled
+
+				VeQuickItem {
+					id: mqttAccessItem
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
 				}
 			}
 
-			ListNavigation {
-				//% "Install from SD/USB"
-				text: qsTrId("pagesettingsmodificationchecks_firmware_install_from_sd_usb")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+			ListText {
+				//% "Modbus/TCP"
+				text: qsTrId("pagesettingsmodificationchecks_modbus_tcp")
+				secondaryText: modbusTcpItem.valid && modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
+
+				VeQuickItem {
+					id: modbusTcpItem
+					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 				}
+			}
+
+			ListText {
+				//% "Signal K"
+				text: qsTrId("pagesettingsmodificationchecks_signal_k")
+				secondaryText: signalKItem.valid && signalKItem.value ? CommonWords.enabled : CommonWords.disabled
+				preferredVisible: signalKItem.valid
+			}
+
+			ListText {
+				//% "Node-RED"
+				text: qsTrId("pagesettingsmodificationchecks_node_red")
+				secondaryText: nodeRedItem.valid && nodeRedItem.value === VenusOS.NodeRed_Mode_Disabled
+					? CommonWords.disabled : nodeRedItem.value === VenusOS.NodeRed_Mode_Enabled
+						//% "Enabled (safe mode)"
+						? CommonWords.enabled : qsTrId("settings_large_enabled_safe_mode")
+				preferredVisible: nodeRedItem.valid
 			}
 		}
 	}

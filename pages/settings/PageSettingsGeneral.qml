@@ -146,12 +146,16 @@ Page {
 			ListNavigation {
 				//% "Modification checks"
 				text: qsTrId("pagesettingsgeneral_modification_checks")
-				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+				secondaryText: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Clean && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
 					//% "Unmodified"
 					? qsTrId("pagesettingsmodificationchecks_unmodified")
-					//% "Modified"
-					:  qsTrId("pagesettingsmodificationchecks_modified")
-				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
+					: (fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Modified
+						//% "Modified"
+						? qsTrId("pagesettingsmodificationchecks_modified")
+						//% "Check page for more information"
+						: qsTrId("pagesettingsmodificationchecks_check_page_for_more_information"))
+				secondaryLabel.color: fsModifiedStateItem.value !== VenusOS.ModificationChecks_FsModifiedState_Modified && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+					? Theme.color_font_primary : Theme.color_red
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
 

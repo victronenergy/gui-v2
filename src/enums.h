@@ -819,6 +819,13 @@ public:
 	};
 	Q_ENUM(ModificationChecks_SystemHooksState)
 
+	enum ModificationChecks_FsModifiedState {
+		ModificationChecks_FsModifiedState_Unknown  = -1,
+		ModificationChecks_FsModifiedState_Clean    = 0,
+		ModificationChecks_FsModifiedState_Modified = 1,
+	};
+	Q_ENUM(ModificationChecks_FsModifiedState)
+
 	enum MotorDriveGear {
 		MotorDriveGear_Neutral,
 		MotorDriveGear_Reverse,

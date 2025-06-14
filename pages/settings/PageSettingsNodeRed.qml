@@ -9,26 +9,13 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property bool allModificationsEnabled: allModificationsEnabledItem.valid && allModificationsEnabledItem.value === 1
-
-	VeQuickItem {
-		id: allModificationsEnabledItem
-		uid: Global.systemSettings.serviceUid + "/Settings/System/ModificationChecks/AllModificationsEnabled"
-	}
-
 	GradientListView {
 		model: VisibleItemModel {
-			PrimaryListLabel {
-				text: CommonWords.all_modifications_disabled
-				preferredVisible: !root.allModificationsEnabled
-			}
-
 			ListRadioButtonGroup {
 				id: nodered
 
 				text: qsTrId("settings_large_node_red")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
-				interactive: userHasWriteAccess && root.allModificationsEnabled
 				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
