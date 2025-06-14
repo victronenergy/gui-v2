@@ -56,19 +56,27 @@ Page {
 			ListRadioButtonGroup {
 				//% "Display mode"
 				text: qsTrId("settings_display_color_mode")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ColorScheme"
 				optionModel: [
 					//: Dark colors mode
 					//% "Dark"
-					{ display: qsTrId("settings_display_dark_mode") },
+					{ display: qsTrId("settings_display_dark_mode"), value: Theme.Dark },
 					//: Light colors mode
 					//% "Light"
-					{ display: qsTrId("settings_display_light_mode") },
+					{ display: qsTrId("settings_display_light_mode"), value: Theme.Light },
 				]
-				currentIndex: Theme.colorScheme === Theme.Light ? 1 : 0
+			}
 
-				onOptionClicked: function(index) {
-					Global.systemSettings.colorScheme.setValue(index === 1 ? Theme.Light : Theme.Dark)
-				}
+			ListRadioButtonGroup {
+				//% "Remote console color mode"
+				text: qsTrId("settings_display_remote_console_color_mode")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
+				optionModel: [
+					//% "Follow display mode"
+					{ display: qsTrId("settings_display_follow_display_mode"), value: VenusOS.RemoteConsoleColorMode_FollowDisplayMode },
+					//% "Follow system theme of individual device"
+					{ display: qsTrId("settings_display_follow_individual_device"), value: VenusOS.RemoteConsoleColorMode_FollowSystemTheme },
+				]
 			}
 
 			ListNavigation {

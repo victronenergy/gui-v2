@@ -119,7 +119,7 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     # Copy the files to the output directory
     cp venus-gui-v2.{html,js,wasm} qtloader.js \
         ../build-wasm_files_to_copy/wasm/
-    cp ../images/victronenergy.svg ../LICENSE.txt ../.github/patches/Makefile \
+    cp  ../images/victronenergy.svg ../images/victronenergy-light.svg ../images/mockup.svg ../LICENSE.txt ../.github/patches/Makefile \
         ../build-wasm_files_to_copy/wasm/
     cp -r ../wasm/icons ../build-wasm_files_to_copy/wasm/
     mv ../build-wasm_files_to_copy/wasm/venus-gui-v2.html ../build-wasm_files_to_copy/wasm/index.html
@@ -127,6 +127,11 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     # Apply patches
     grep -q -E '^var createQtAppInstance' ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
     sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+
+    # Save wasm file size to a file
+    # this is needed, since the reported size is the compressed size
+    # but the downloaded size is shown as uncompressed size, since the browser decompresses it
+    stat -c%s ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.size
 
     # Compress the wasm file
     gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
