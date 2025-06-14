@@ -128,6 +128,11 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     grep -q -E '^var createQtAppInstance' ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
     sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
 
+    # Save wasm file size to a file
+    # this is needed, since the reported size is the compressed size
+    # but the downloaded size is shown as uncompressed size, since the browser decompresses it
+    stat -c%s ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.size
+
     # Compress the wasm file
     gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
     sha256sum ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.sha256

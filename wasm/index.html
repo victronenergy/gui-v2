@@ -123,7 +123,6 @@
       </div>
     </div>
 
-    <script src="fflate.js"></script>
     <script type="text/javascript">
         async function check(url, attempt, delay, available, unavailable)
         {
@@ -153,8 +152,21 @@
         async function preloadWasm(url, onProgress) {
             const response = await fetch(url);
             if (!response.ok) throw new Error("Failed to fetch WASM");
-            const contentLength = response.headers.get('content-length');
-            const total = contentLength ? parseInt(contentLength, 10) : null;
+
+            let total = null;
+            // this is needed, since the reported size is the compressed size
+            // but the downloaded size is shown as uncompressed size, since the browser decompresses it
+            const sizeResp = await fetch('venus-gui-v2.wasm.size');
+            if (sizeResp.ok) {
+                total = parseInt(await sizeResp.text(), 10);
+            } else {
+                // should not be needed, but just in case?
+                const estimatedCompressionRatio = 0.4; // Assume 40% as compressed size
+                const contentLength = response.headers.get('content-length');
+                total = contentLength ? parseInt(contentLength, 10) / estimatedCompressionRatio : null;
+                console.warn("venus-gui-v2.wasm.size not found, using estimated size of " + (total ? (total / 1024).toFixed(2) + ' KB' : 'unknown'));
+            }
+
             const reader = response.body.getReader();
             let received = 0;
             let chunks = [];
@@ -165,29 +177,12 @@
                 received += value.length;
                 onProgress(received, total);
             }
-            // Concatenate compressed chunks
-            let compressed = new Uint8Array(received);
+            let wasmBinary = new Uint8Array(received);
             let pos = 0;
             for (let chunk of chunks) {
-                compressed.set(chunk, pos);
+                wasmBinary.set(chunk, pos);
                 pos += chunk.length;
             }
-            // Switch to extracting bar
-            const loadingBar = document.getElementById('loading-bar');
-            const loadingBarText = document.getElementById('loading-bar-text');
-            loadingBar.style.width = '100%';
-            loadingBarText.textContent = 'Extracting...';
-
-            // Let the browser render the text before blocking extraction
-            await new Promise(resolve => setTimeout(resolve, 0));
-
-            // Decompress using fflate asynchronously
-            const wasmBinary = await new Promise((resolve, reject) => {
-                fflate.decompress(compressed, (err, data) => {
-                    if (err) reject(err);
-                    else resolve(data);
-                });
-            });
             return wasmBinary;
         }
 
@@ -210,6 +205,10 @@
             }
 
             const searchParams = new URLSearchParams(window.location.search);
+
+            // If mqtt param is set: use the provided MQTT address
+            // If id/shard params are set: gui-v2 will use VRM
+            // If none of these are set, will use a default MQTT address.
             const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
 
             // Options to change display size and border
@@ -235,11 +234,12 @@
                 loadingBarText.textContent = 'Downloading...';
 
                 // Preload WASM with progress
-                const wasmBinary = await preloadWasm('venus-gui-v2.wasm.gz', (received, total) => {
+                const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
                     if (total) {
                         const percent = (received / total * 100).toFixed(1);
                         loadingBar.style.width = percent + '%';
                         loadingBarText.textContent = `Downloading... ${percent}%`;
+                    // If total is unknown, show the received size in MB
                     } else {
                         loadingBar.style.width = '100%';
                         loadingBarText.textContent =
@@ -265,7 +265,7 @@
                                 exitData.text !== undefined ? ` (${exitData.text})` : '';
                             showUi(spinner);
                         },
-                        entryFunction: window.venus_gui_v2_entry,
+                        entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L113
                         containerElements: [screen],
                     }
                 });
