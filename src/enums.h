@@ -832,6 +832,20 @@ public:
 	};
 	Q_ENUM(MotorDriveGear)
 
+	enum TailscaleConnectState {
+		TailscaleConnectState_Initializing = 0,
+		TailscaleConnectState_Backend_Starting = 1,
+		TailscaleConnectState_Backend_Stopped = 2,
+		TailscaleConnectState_Connection_Failed = 3,
+		TailscaleConnectState_Stopped = 4,
+		TailscaleConnectState_Logged_Out = 5,
+		TailscaleConnectState_Wait_For_Response = 6,
+		TailscaleConnectState_Wait_For_Login = 7,
+		TailscaleConnectState_No_State = 8,
+		TailscaleConnectState_Connection_Ok = 100
+	};
+	Q_ENUM(TailscaleConnectState)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
