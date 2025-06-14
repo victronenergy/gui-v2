@@ -12,13 +12,13 @@ Page {
 
 	readonly property string tailscaleServiceUid: BackendConnection.serviceUidForType("tailscale")
 
-	readonly property int connectState: stateItem.valid ? stateItem.value : 0
+	readonly property int connectState: stateItem.valid ? stateItem.value : VenusOS.TailscaleConnectState_Initializing
 
 	readonly property string loginLink: loginItem.valid ? loginItem.value : ""
 	readonly property string serviceState: getState()
 
 	readonly property bool tailscaleEnabled: switchTailscaleEnabled.checked
-	readonly property bool tailscaleConnected: stateItem.valid && tailscaleEnabled && connectState == 100
+	readonly property bool tailscaleConnected: stateItem.valid && tailscaleEnabled && connectState == VenusOS.TailscaleConnectState_Connection_Ok
 
 	function _checkAndCleanup(text, pattern) {
 		// Trim and lowercase the text
@@ -52,28 +52,28 @@ Page {
 		} else if (tailscaleConnected) {
 			// Tailscale connected successfully
 			returnValue = ""
-		} else if (connectState == 0 || connectState == 4) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Initializing || connectState == VenusOS.TailscaleConnectState_Stopped) {
 			//% "Initializing..."
 			returnValue = qsTrId("settings_tailscale_initializing")
-		} else if (connectState == 1) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Backend_Starting) {
 			//% "Backend starting..."
 			returnValue = qsTrId("settings_tailscale_backend_starting")
-		} else if (connectState == 2) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Backend_Stopped) {
 			//% "Backend stopped"
 			returnValue = qsTrId("settings_tailscale_backend_stopped")
-		} else if (connectState == 3) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Connection_Failed) {
 			//% "Connection failed"
 			returnValue = qsTrId("settings_tailscale_connection_failed")
-		} else if (connectState == 5) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Logged_Out) {
 			//% "This GX device is logged out of Tailscale,\nplease wait or check your internet connection"
 			returnValue = qsTrId("settings_tailscale_logged_out")
-		} else if (connectState == 6) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Wait_For_Response) {
 			//% "Waiting for a response from Tailscale..."
 			returnValue = qsTrId("settings_tailscale_wait_for_response")
-		} else if (connectState == 7) {
+		} else if (connectState == VenusOS.TailscaleConnectState_Wait_For_Login) {
 			//% "Connection to your Tailscale account needed, see below"
 			returnValue = qsTrId("settings_tailscale_wait_for_login")
-		} else if (connectState == 8) {
+		} else if (connectState == VenusOS.TailscaleConnectState_No_State) {
 			//% "Please wait or check your internet connection"
 			returnValue = qsTrId("settings_tailscale_check_internet_connection")
 		} else {
@@ -82,7 +82,7 @@ Page {
 			returnValue = qsTrId("settings_tailscale_unknown_state").arg(connectState)
 		}
 
-		if (tailscaleEnabled && !tailscaleConnected && connectState != 7 && errorMessageItem.valid && errorMessageItem.value !== "") {
+		if (tailscaleEnabled && !tailscaleConnected && connectState != VenusOS.TailscaleConnectState_Wait_For_Login && errorMessageItem.valid && errorMessageItem.value !== "") {
 			//% "ERROR: %1"
 			returnValue += "\n" + qsTrId("settings_tailscale_error").arg(errorMessageItem.value)
 		}
@@ -176,7 +176,7 @@ Page {
 				//% "Connect this GX device to your Tailscale account"
 				text: qsTrId("settings_tailscale_connect_to_account")
 				url: root.loginLink
-				preferredVisible: root.tailscaleEnabled && root.connectState == 7 && root.loginLink !== ""
+				preferredVisible: root.tailscaleEnabled && root.connectState == VenusOS.TailscaleConnectState_Wait_For_Login && root.loginLink !== ""
 			}
 
 			ListTextField {
