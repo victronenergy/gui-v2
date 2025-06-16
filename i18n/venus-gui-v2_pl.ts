@@ -613,66 +613,66 @@
       <translation>Pracuj do momentu pełnego naładowania akumulatora</translation>
     </message>
     <message id="settings_gps_ok_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="45"/>
+      <location filename="../../pages/settings/PageGps.qml" line="52"/>
       <source>GPS OK (fix)</source>
       <translation>GPS OK (stały)</translation>
     </message>
     <message id="settings_gps_ok_no_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="48"/>
+      <location filename="../../pages/settings/PageGps.qml" line="55"/>
       <source>GPS connected, but no GPS fix</source>
       <translation>GPS podłączony, ale brak stałej pozycji GPS</translation>
     </message>
     <message id="settings_gps_not_connected">
-      <location filename="../../pages/settings/PageGps.qml" line="51"/>
+      <location filename="../../pages/settings/PageGps.qml" line="58"/>
       <source>No GPS connected</source>
       <translation>Brak podłączonego GPS</translation>
     </message>
     <message id="settings_gps_latitude">
-      <location filename="../../pages/settings/PageGps.qml" line="57"/>
+      <location filename="../../pages/settings/PageGps.qml" line="64"/>
       <source>Latitude</source>
       <translation>Szerokość geograficzna</translation>
     </message>
     <message id="settings_gps_longitude">
-      <location filename="../../pages/settings/PageGps.qml" line="64"/>
+      <location filename="../../pages/settings/PageGps.qml" line="71"/>
       <source>Longitude</source>
       <translation>Długość geograficzna</translation>
     </message>
     <message id="settings_gps_speed_kmh">
-      <location filename="../../pages/settings/PageGps.qml" line="79"/>
+      <location filename="../../pages/settings/PageGps.qml" line="86"/>
       <source>%1 km/h</source>
       <extracomment>GPS speed data, in kilometers per hour</extracomment>
       <translation>%1 km/h</translation>
     </message>
     <message id="settings_gps_speed_mph">
-      <location filename="../../pages/settings/PageGps.qml" line="83"/>
+      <location filename="../../pages/settings/PageGps.qml" line="90"/>
       <source>%1 mph</source>
       <extracomment>GPS speed data, in miles per hour</extracomment>
       <translation>%1 mph</translation>
     </message>
     <message id="settings_gps_speed_kt">
-      <location filename="../../pages/settings/PageGps.qml" line="87"/>
+      <location filename="../../pages/settings/PageGps.qml" line="94"/>
       <source>%1 kt</source>
       <extracomment>GPS speed data, in knots</extracomment>
       <translation>%1 kt</translation>
     </message>
     <message id="settings_gps_speed_ms">
-      <location filename="../../pages/settings/PageGps.qml" line="91"/>
+      <location filename="../../pages/settings/PageGps.qml" line="98"/>
       <source>%1 m/s</source>
       <extracomment>GPS speed data, in meters per second</extracomment>
       <translation>%1 m/s</translation>
     </message>
     <message id="settings_gps_course">
-      <location filename="../../pages/settings/PageGps.qml" line="98"/>
+      <location filename="../../pages/settings/PageGps.qml" line="105"/>
       <source>Course</source>
       <translation>Kurs</translation>
     </message>
     <message id="settings_gps_altitude">
-      <location filename="../../pages/settings/PageGps.qml" line="106"/>
+      <location filename="../../pages/settings/PageGps.qml" line="113"/>
       <source>Altitude</source>
       <translation>Wysokość</translation>
     </message>
     <message id="settings_gps_num_satellites">
-      <location filename="../../pages/settings/PageGps.qml" line="115"/>
+      <location filename="../../pages/settings/PageGps.qml" line="122"/>
       <source>Number of satellites</source>
       <translation>Liczba satelitów</translation>
     </message>
@@ -947,13 +947,13 @@
       <translation>Tryb wyświetlania</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>Ciemny</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>Jasny</translation>
@@ -1881,19 +1881,19 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Alarm CO2</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
       <source>Signal K</source>
       <translation>Sygnał K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="266"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="276"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
       <source>Enabled (safe mode)</source>
       <translation>Włączone (tryb bezpieczny)</translation>
@@ -2116,18 +2116,33 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <source>Enable Modbus/TCP</source>
       <translation>Włącz Modbus/TCP</translation>
     </message>
-    <message id="settings_modbus_no_errors">
+    <message id="settings_modbus_access_rights">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <source>Access permissions</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readwrite">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="41"/>
+      <source>Write allowed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readonly">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <source>Read only</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_no_errors">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="56"/>
       <source>No errors reported</source>
       <translation>Nie zgłoszono błędów</translation>
     </message>
     <message id="settings_modbus_time_of_last_error">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="63"/>
       <source>Time of last error</source>
       <translation>Czas ostatniego błędu</translation>
     </message>
     <message id="settings_modbus_available_services">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
       <source>Available services</source>
       <translation>Dostępne usługi</translation>
     </message>
@@ -2646,7 +2661,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Ustawienie trybu pracy</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="120"/>
+      <location filename="../../data/SystemSettings.qml" line="116"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Standalone</translation>
@@ -2702,7 +2717,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="104"/>
+      <location filename="../../data/SystemSettings.qml" line="100"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -2733,12 +2748,12 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Resetuj</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="247"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="242"/>
       <source>Load</source>
       <translation>Ładowanie</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="309"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="304"/>
       <source>Networked operation</source>
       <translation>Praca w sieci</translation>
     </message>
@@ -2798,18 +2813,18 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Stacje ładowania EV</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="41"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="43"/>
       <source>Session</source>
       <translation>Sesja</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="63"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="50"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>Godzina</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="102"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="91"/>
       <source>Charge mode</source>
       <translation>Tryb ładowania</translation>
     </message>
@@ -2829,7 +2844,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Niższe stawki za energię elektryczną poza godzinami szczytu lub jeśli chcesz mieć pewność, że Twój pojazd elektryczny jest w pełni naładowany i gotowy do jazdy o określonej godzinie.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="120"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="109"/>
       <source>Enable charging</source>
       <translation>Włączenie ładowania</translation>
     </message>
@@ -3256,49 +3271,49 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Niskie napięcie celi</translation>
     </message>
     <message id="batterydetails_lowest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="19"/>
       <source>Lowest cell voltage</source>
       <translation>Najniższe napięcie celi</translation>
     </message>
     <message id="batterydetails_highest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="29"/>
       <source>Highest cell voltage</source>
       <translation>Najwyższe napięcie celi</translation>
     </message>
     <message id="batterydetails_minimum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="46"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="39"/>
       <source>Minimum cell temperature</source>
       <translation>Minimalna temperatura celi</translation>
     </message>
     <message id="batterydetails_maximum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="49"/>
       <source>Maximum cell temperature</source>
       <translation>Maksymalna temperatura celi</translation>
     </message>
     <message id="batterydetails_modules">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
       <source>Battery modules</source>
       <translation>Moduły baterii</translation>
     </message>
     <message id="devicelist_batterydetails_modules_online">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="62"/>
       <source>%1 online</source>
       <extracomment>%1 = number of battery modules that are online</extracomment>
       <translation>%1 online</translation>
     </message>
     <message id="devicelist_batterydetails_modules_offline">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="66"/>
       <source>%1 offline</source>
       <extracomment>%1 = number of battery modules that are offline</extracomment>
       <translation>%1 offline</translation>
     </message>
     <message id="batterydetails_number_of_modules_blocking_charge_discharge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="79"/>
       <source>Number of modules blocking charge / discharge</source>
       <translation>Liczba modułów blokujących ładowanie/rozładowanie</translation>
     </message>
     <message id="batterydetails_installed_available_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
       <source>Installed / Available capacity</source>
       <translation>Pojemność zainstalowana / dostępna</translation>
     </message>
@@ -3645,17 +3660,17 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Min/max temperatura celi</translation>
     </message>
     <message id="lynxionsystem_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
       <source>Balancing</source>
       <translation type="unfinished">Balansowanie</translation>
     </message>
     <message id="lynxionsystem_balancer_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="108"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balancing</source>
       <translation>Balansowanie</translation>
     </message>
     <message id="lynxionsystem_balancer_unknown">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="115"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="117"/>
       <source>Unknown</source>
       <translation type="unfinished">Nieznany</translation>
     </message>
@@ -5865,7 +5880,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Min. Napięcie</translation>
     </message>
     <message id="charger_history_max_voltage">
-      <location filename="../../components/SolarHistoryTableView.qml" line="87"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="75"/>
       <source>Max Voltage</source>
       <translation>Maks. Napięcie</translation>
     </message>
@@ -5954,7 +5969,7 @@ Czy chcesz kontynuować?</translation>
       <translation>4. ostatni</translation>
     </message>
     <message id="charger_history_max_power">
-      <location filename="../../components/SolarHistoryTableView.qml" line="93"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="77"/>
       <source>Max Power</source>
       <translation>Maksymalna Moc</translation>
     </message>
@@ -6034,12 +6049,12 @@ Czy chcesz kontynuować?</translation>
       <translation>Błąd poziomu 5 protokołu MQTT</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="297"/>
+      <location filename="../../components/StatusBar.qml" line="306"/>
       <source>Silence alarm</source>
       <translation>Wyciszenie alarmu</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="77"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="47"/>
       <source>Total Power</source>
       <translation>Moc Ogółem</translation>
     </message>
@@ -6616,25 +6631,25 @@ Czy chcesz kontynuować?</translation>
       <translation>Dynamiczny ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="108"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Group Master</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="112"/>
+      <location filename="../../data/SystemSettings.qml" line="108"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="116"/>
+      <location filename="../../data/SystemSettings.qml" line="112"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Group &amp; Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="124"/>
+      <location filename="../../data/SystemSettings.qml" line="120"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Standalone i Group Master</translation>
@@ -6650,7 +6665,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Tylko inwerter</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="340"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="335"/>
       <source>Short circuit alarm</source>
       <translation>Alarm zwarciowy</translation>
     </message>
@@ -6778,22 +6793,37 @@ Czy chcesz kontynuować?</translation>
       <translation>Ciągłe skanowanie może zakłócać działanie sieci Wi-Fi.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimalny i maksymalny zakres pomiarowy</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Start page</source>
       <translation type="unfinished">Strona startowa</translation>
     </message>
+    <message id="settings_display_remote_console_color_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
+      <source>Remote console color mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_display_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Follow display mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_individual_device">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
+      <source>Follow system theme of individual device</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="100"/>
       <source>Boat page</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>Restarting application...</source>
       <translation>Restart aplikacji...</translation>
     </message>
@@ -6966,7 +6996,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Stan żywotności aku.</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="257"/>
       <source>Access Signal K locally or via VRM</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
       <translation type="unfinished">Dostęp do Signal K na http://venus.local:3000 i przez VRM.</translation>
@@ -6996,7 +7026,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Instancje urządzenia VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="338"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="333"/>
       <source>High temperature alarm</source>
       <translation>Alarm wysokiej temperatury</translation>
     </message>
@@ -7456,17 +7486,17 @@ Należy pamiętać, że to menu pokazuje tylko liczniki Carlo Gavazzi podłączo
       <translation>Nieprawidłowa konfiguracja akumulatorów</translation>
     </message>
     <message id="lynxionsystem_balancer_status">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="100"/>
       <source>Balancer status</source>
       <translation>Status balansera</translation>
     </message>
     <message id="lynxionsystem_balancer_balanced">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
       <source>Balanced</source>
       <translation>Wyrównane</translation>
     </message>
     <message id="lynxionsystem_balancer_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
       <source>Imbalance</source>
       <translation>Niewyrównane</translation>
     </message>
@@ -7526,7 +7556,7 @@ See documentation for further information.</oldsource>
       <translation>Przewodowy</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="394"/>
+      <location filename="../../pages/BriefPage.qml" line="392"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Wysokie obciążenie systemu, zamykam panel boczny, aby zmniejszyć obciążenie procesora</translation>
     </message>
@@ -7794,7 +7824,7 @@ See documentation for further information.</oldsource>
       <translation>Napięcie instalacji</translation>
     </message>
     <message id="batterydetails_connection_information">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="99"/>
       <source>Connection information</source>
       <translation>Informacje o połączeniu</translation>
     </message>
@@ -8323,12 +8353,12 @@ Po dodaniu/włączeniu nowej sieci należy ją raz zatwierdzić w konsoli admini
       <translation>Generator będzie działał do momentu ręcznego zatrzymania, chyba że włączone zostaną warunki autostartu, które utrzymają go w działaniu.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="132"/>
       <source>Classic UI</source>
       <translation>Klasyczny UI</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
       <source>New UI</source>
       <translation>Nowy UI</translation>
     </message>
@@ -8476,29 +8506,29 @@ Dzięki usprawnionej nawigacji i świeżemu wyglądowi wszystko, co kochasz, jes
       <translation>Strona startowa</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
       <source>User interface</source>
       <translation>Interfejs użytkownika</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>User interface (Remote Console)</source>
       <translation>Interfejs użytkownika (Konsola Zdalna)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 aktualizacji</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="175"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Interfejs użytkownika przełączy się na %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 jest ustawione na %2</translation>
@@ -8906,22 +8936,22 @@ Dzięki usprawnionej nawigacji i świeżemu wyglądowi wszystko, co kochasz, jes
       <translation>Cyfrowe I/O</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="190"/>
       <source>Server Applications</source>
       <translation>Aplikacje Serwerowe</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="197"/>
       <source>Modbus TCP Server</source>
       <translation>Serwer Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="212"/>
       <source>Venus OS Large Features</source>
       <translation>Funkcje Venus OS Large</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="218"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
       <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
@@ -8931,12 +8961,12 @@ Documentation at https://ve3.nl/vol</oldsource>
 Dokumentacja na stronie https://ve3.nl/vol</translation>
     </message>
     <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="231"/>
       <source>Victron Community</source>
       <translation type="unfinished">Społeczność Victron</translation>
     </message>
@@ -9081,7 +9111,7 @@ Jeśli generator jest obecnie uruchomiony z powodu warunków autostartu, wyłąc
       <translation>Otwórz link</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
       <source>Data units</source>
       <translation>Jednostki danych</translation>
     </message>
@@ -9112,13 +9142,13 @@ Jeśli generator jest obecnie uruchomiony z powodu warunków autostartu, wyłąc
       <translation>Moc pv ogółem</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="220"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">Uzysk całkowity</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="234"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="229"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">Uzysk systemu</translation>
@@ -9432,7 +9462,7 @@ integralność oprogramowania układowego przed skontaktowaniem się z pomocą t
       <translation>Zatrzymanie na poziomie zbiornika</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
       <source>Brief page</source>
       <translation>Krótka strona</translation>
     </message>
@@ -9527,17 +9557,17 @@ integralność oprogramowania układowego przed skontaktowaniem się z pomocą t
       <translation type="unfinished">Uzysk solarny</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="211"/>
       <source>DC input</source>
       <translation type="unfinished">Wejście DC</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="252"/>
       <source>AC Loads</source>
       <translation type="unfinished">Obciążenia AC</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="282"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="279"/>
       <source>DC Loads</source>
       <translation type="unfinished">Obciążenia DC</translation>
     </message>
@@ -9567,7 +9597,7 @@ integralność oprogramowania układowego przed skontaktowaniem się z pomocą t
       <translation type="unfinished">Uzysk systemu</translation>
     </message>
     <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="58"/>
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="50"/>
       <source>Total PV Power</source>
       <translation type="unfinished">Moc PV ogółem</translation>
     </message>

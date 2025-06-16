@@ -613,66 +613,66 @@
       <translation>تشغيل حتى يتم شحن البطارية بالكامل</translation>
     </message>
     <message id="settings_gps_ok_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="45"/>
+      <location filename="../../pages/settings/PageGps.qml" line="52"/>
       <source>GPS OK (fix)</source>
       <translation>النظام الكوني لتحديد المواقع صحيح (مهيأ)</translation>
     </message>
     <message id="settings_gps_ok_no_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="48"/>
+      <location filename="../../pages/settings/PageGps.qml" line="55"/>
       <source>GPS connected, but no GPS fix</source>
       <translation>النظام الكوني لتحديد المواقع متصل، لكنه غير مهيأ</translation>
     </message>
     <message id="settings_gps_not_connected">
-      <location filename="../../pages/settings/PageGps.qml" line="51"/>
+      <location filename="../../pages/settings/PageGps.qml" line="58"/>
       <source>No GPS connected</source>
       <translation>نظام التموضع العالمي غير متصل</translation>
     </message>
     <message id="settings_gps_latitude">
-      <location filename="../../pages/settings/PageGps.qml" line="57"/>
+      <location filename="../../pages/settings/PageGps.qml" line="64"/>
       <source>Latitude</source>
       <translation>خط العرض</translation>
     </message>
     <message id="settings_gps_longitude">
-      <location filename="../../pages/settings/PageGps.qml" line="64"/>
+      <location filename="../../pages/settings/PageGps.qml" line="71"/>
       <source>Longitude</source>
       <translation>خط الطول</translation>
     </message>
     <message id="settings_gps_speed_kmh">
-      <location filename="../../pages/settings/PageGps.qml" line="79"/>
+      <location filename="../../pages/settings/PageGps.qml" line="86"/>
       <source>%1 km/h</source>
       <extracomment>GPS speed data, in kilometers per hour</extracomment>
       <translation>%1 كم/ ساعة</translation>
     </message>
     <message id="settings_gps_speed_mph">
-      <location filename="../../pages/settings/PageGps.qml" line="83"/>
+      <location filename="../../pages/settings/PageGps.qml" line="90"/>
       <source>%1 mph</source>
       <extracomment>GPS speed data, in miles per hour</extracomment>
       <translation>%1 ميل/ ساعة</translation>
     </message>
     <message id="settings_gps_speed_kt">
-      <location filename="../../pages/settings/PageGps.qml" line="87"/>
+      <location filename="../../pages/settings/PageGps.qml" line="94"/>
       <source>%1 kt</source>
       <extracomment>GPS speed data, in knots</extracomment>
       <translation>%1 كيلو طن</translation>
     </message>
     <message id="settings_gps_speed_ms">
-      <location filename="../../pages/settings/PageGps.qml" line="91"/>
+      <location filename="../../pages/settings/PageGps.qml" line="98"/>
       <source>%1 m/s</source>
       <extracomment>GPS speed data, in meters per second</extracomment>
       <translation>%1 متر/ ثانية</translation>
     </message>
     <message id="settings_gps_course">
-      <location filename="../../pages/settings/PageGps.qml" line="98"/>
+      <location filename="../../pages/settings/PageGps.qml" line="105"/>
       <source>Course</source>
       <translation>المسار</translation>
     </message>
     <message id="settings_gps_altitude">
-      <location filename="../../pages/settings/PageGps.qml" line="106"/>
+      <location filename="../../pages/settings/PageGps.qml" line="113"/>
       <source>Altitude</source>
       <translation>الارتفاع</translation>
     </message>
     <message id="settings_gps_num_satellites">
-      <location filename="../../pages/settings/PageGps.qml" line="115"/>
+      <location filename="../../pages/settings/PageGps.qml" line="122"/>
       <source>Number of satellites</source>
       <translation>عدد الأقمار الصناعية</translation>
     </message>
@@ -947,13 +947,13 @@
       <translation>نمط العرض</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>غامق</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>فاتح</translation>
@@ -1881,19 +1881,19 @@ Use unless prohibited by the utility provider.</source>
       <translation>إنذار ثاني أكسيد الكربون</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
       <source>Signal K</source>
       <translation>الإشارة K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="266"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
       <source>Node-RED</source>
       <translation>أداة التطوير Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="276"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
       <source>Enabled (safe mode)</source>
       <translation>تمكين (الوضع الآمن)</translation>
@@ -2116,18 +2116,33 @@ Use unless prohibited by the utility provider.</source>
       <source>Enable Modbus/TCP</source>
       <translation>فعل نمط المسار التجميعي / بروتوكول التحكم في الإرسال</translation>
     </message>
-    <message id="settings_modbus_no_errors">
+    <message id="settings_modbus_access_rights">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <source>Access permissions</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readwrite">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="41"/>
+      <source>Write allowed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readonly">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <source>Read only</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_no_errors">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="56"/>
       <source>No errors reported</source>
       <translation>لم يتم الإبلاغ عن أي أخطاء</translation>
     </message>
     <message id="settings_modbus_time_of_last_error">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="63"/>
       <source>Time of last error</source>
       <translation>وقت آخر خطأ</translation>
     </message>
     <message id="settings_modbus_available_services">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
       <source>Available services</source>
       <translation>خدمات متوفرة</translation>
     </message>
@@ -2646,7 +2661,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>وضعية الإعداد</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="120"/>
+      <location filename="../../data/SystemSettings.qml" line="116"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>مستقل</translation>
@@ -2702,7 +2717,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">تابع</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="104"/>
+      <location filename="../../data/SystemSettings.qml" line="100"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>تابع</translation>
@@ -2733,12 +2748,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>إعادة ضبط</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="247"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="242"/>
       <source>Load</source>
       <translation>تحميل</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="309"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="304"/>
       <source>Networked operation</source>
       <translation>عملية عبر الشبكة</translation>
     </message>
@@ -2798,18 +2813,18 @@ Use unless prohibited by the utility provider.</source>
       <translation>محطات شحن المركبات الكهربائية</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="41"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="43"/>
       <source>Session</source>
       <translation>جلسة</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="63"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="50"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>الوقت</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="102"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="91"/>
       <source>Charge mode</source>
       <translation>نمط الشحن</translation>
     </message>
@@ -2829,7 +2844,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>أسعار الكهرباء الأقل في غير ساعات الذروة أو إن أردت التأكد من شحن مركبتك الكهربائية بالكامل والاستعداد للانطلاق في وقت محدد.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="120"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="109"/>
       <source>Enable charging</source>
       <translation>تفعيل الشحن</translation>
     </message>
@@ -3256,49 +3271,49 @@ Use unless prohibited by the utility provider.</source>
       <translation>الجهد الكهربائي المنخفض للخلية</translation>
     </message>
     <message id="batterydetails_lowest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="19"/>
       <source>Lowest cell voltage</source>
       <translation>الجهد الكهربائي الأدنى للخلية</translation>
     </message>
     <message id="batterydetails_highest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="29"/>
       <source>Highest cell voltage</source>
       <translation>الجهد الكهربائي الأعلى للخلية</translation>
     </message>
     <message id="batterydetails_minimum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="46"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="39"/>
       <source>Minimum cell temperature</source>
       <translation>الحرارة الأدنى للخلية</translation>
     </message>
     <message id="batterydetails_maximum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="49"/>
       <source>Maximum cell temperature</source>
       <translation>الحرارة الأعلى للخلية</translation>
     </message>
     <message id="batterydetails_modules">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
       <source>Battery modules</source>
       <translation>وحدات البطارية</translation>
     </message>
     <message id="devicelist_batterydetails_modules_online">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="62"/>
       <source>%1 online</source>
       <extracomment>%1 = number of battery modules that are online</extracomment>
       <translation>%1 متصل</translation>
     </message>
     <message id="devicelist_batterydetails_modules_offline">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="66"/>
       <source>%1 offline</source>
       <extracomment>%1 = number of battery modules that are offline</extracomment>
       <translation>%1 غير متصل</translation>
     </message>
     <message id="batterydetails_number_of_modules_blocking_charge_discharge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="79"/>
       <source>Number of modules blocking charge / discharge</source>
       <translation>عدد الوحدات التي تمنع الشحن/ التفريغ</translation>
     </message>
     <message id="batterydetails_installed_available_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
       <source>Installed / Available capacity</source>
       <translation>منصبة / مساحة متوفرة</translation>
     </message>
@@ -3648,17 +3663,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>الحد الأدنى/الحد الأعلى لحرارة الخلية</translation>
     </message>
     <message id="lynxionsystem_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
       <source>Balancing</source>
       <translation type="unfinished">يقوم بالموازنة</translation>
     </message>
     <message id="lynxionsystem_balancer_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="108"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balancing</source>
       <translation>يقوم بالموازنة</translation>
     </message>
     <message id="lynxionsystem_balancer_unknown">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="115"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="117"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
@@ -5868,7 +5883,7 @@ Do you want to continue?</source>
       <translation>أقل جهد كهربي</translation>
     </message>
     <message id="charger_history_max_voltage">
-      <location filename="../../components/SolarHistoryTableView.qml" line="87"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="75"/>
       <source>Max Voltage</source>
       <translation>أقصى جهد كهربي</translation>
     </message>
@@ -5957,7 +5972,7 @@ Do you want to continue?</source>
       <translation>الرابع الأخير</translation>
     </message>
     <message id="charger_history_max_power">
-      <location filename="../../components/SolarHistoryTableView.qml" line="93"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="77"/>
       <source>Max Power</source>
       <translation>أقصى قدرة</translation>
     </message>
@@ -6037,12 +6052,12 @@ Do you want to continue?</source>
       <translation>خطأ المستوى الخامس من بروتوكول MQTT</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="297"/>
+      <location filename="../../components/StatusBar.qml" line="306"/>
       <source>Silence alarm</source>
       <translation>إنذار صامت</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="77"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="47"/>
       <source>Total Power</source>
       <translation>إجمالي الطاقة</translation>
     </message>
@@ -6619,25 +6634,25 @@ Do you want to continue?</source>
       <translation>نظام تخزين الطاقة الديناميكي (ESS)</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="108"/>
+      <location filename="../../data/SystemSettings.qml" line="104"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>رئيس المجموعة</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="112"/>
+      <location filename="../../data/SystemSettings.qml" line="108"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>نموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="116"/>
+      <location filename="../../data/SystemSettings.qml" line="112"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>مجموعة ونموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="124"/>
+      <location filename="../../data/SystemSettings.qml" line="120"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>رئيس مجموعة وقائم بذاته</translation>
@@ -6653,7 +6668,7 @@ Do you want to continue?</source>
       <translation>فقط المعاكس</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="340"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="335"/>
       <source>Short circuit alarm</source>
       <translation>إنذار دائرة قصر</translation>
     </message>
@@ -6781,22 +6796,37 @@ Do you want to continue?</source>
       <translation>قد يتداخل المسح المستمر مع تشغيل الواي فاي.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>الحد الأدنى والحد الأقصى لنطاقات القياس</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Start page</source>
       <translation type="unfinished">صفحة البدء</translation>
     </message>
+    <message id="settings_display_remote_console_color_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
+      <source>Remote console color mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_display_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Follow display mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_individual_device">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
+      <source>Follow system theme of individual device</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="100"/>
       <source>Boat page</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>Restarting application...</source>
       <translation>جارٍ إعادة تشغيل التطبيق...</translation>
     </message>
@@ -6969,7 +6999,7 @@ Do you want to continue?</source>
       <translation>حالة عمر البطارية</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="257"/>
       <source>Access Signal K locally or via VRM</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
       <translation type="unfinished">قم بالوصول إلى الإشارة ك على http://venus.local:3000 وعبر VRM.</translation>
@@ -6999,7 +7029,7 @@ Do you want to continue?</source>
       <translation>حالات جهاز VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="338"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="333"/>
       <source>High temperature alarm</source>
       <translation>إنذار درجة حرارة مرتفعة</translation>
     </message>
@@ -7459,17 +7489,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>إعداد البطارية غير صالح</translation>
     </message>
     <message id="lynxionsystem_balancer_status">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="100"/>
       <source>Balancer status</source>
       <translation>حالة الموّزع</translation>
     </message>
     <message id="lynxionsystem_balancer_balanced">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
       <source>Balanced</source>
       <translation>متوازن</translation>
     </message>
     <message id="lynxionsystem_balancer_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
       <source>Imbalance</source>
       <translation>اختلال التوازن</translation>
     </message>
@@ -7529,7 +7559,7 @@ See documentation for further information.</oldsource>
       <translation>موصول بالأسلاك</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="394"/>
+      <location filename="../../pages/BriefPage.qml" line="392"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>حمل النظام مرتفع، يؤدي إغلاق اللوحة الجانبية لتقليل حمل وحدة المعالجة المركزية (CPU)</translation>
     </message>
@@ -7797,7 +7827,7 @@ See documentation for further information.</oldsource>
       <translation>جهد النظام</translation>
     </message>
     <message id="batterydetails_connection_information">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="99"/>
       <source>Connection information</source>
       <translation>معلومات الاتصال</translation>
     </message>
@@ -8313,12 +8343,12 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>سيظل المولد قيد التشغيل حتى إيقافه يدويا، ما لم تكن يتم تفعيل شروط التشغيل الآلي إلى الاستمرار قيد التشغيل.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="132"/>
       <source>Classic UI</source>
       <translation>واجهة المستخدم الكلاسيكية</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
       <source>New UI</source>
       <translation>واجهة مستخدم جديدة</translation>
     </message>
@@ -8464,29 +8494,29 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>صفحة البدء</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
       <source>User interface</source>
       <translation>واجهة المستخدم</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>User interface (Remote Console)</source>
       <translation>واجهة المستخدم (وحدة التحكم عن بعد)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1محدث</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="175"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>ستتبدل واجهة المستخدم إلى %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>تم ضبط %1 إلى %2.</translation>
@@ -8897,22 +8927,22 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>داخل/ خارج رقمي</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="190"/>
       <source>Server Applications</source>
       <translation>تطبيقات الخادم</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="197"/>
       <source>Modbus TCP Server</source>
       <translation>خادم Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="212"/>
       <source>Venus OS Large Features</source>
       <translation>سمات فينوس أو إس لارج</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="218"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
       <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
@@ -8922,12 +8952,12 @@ Documentation at https://ve3.nl/vol</oldsource>
 Documentation على https://ve3.nl/vol</translation>
     </message>
     <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="231"/>
       <source>Victron Community</source>
       <translation type="unfinished">مجتمع Victron</translation>
     </message>
@@ -9071,7 +9101,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>فتح الرابط</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
       <source>Data units</source>
       <translation>وحدات البيانات</translation>
     </message>
@@ -9102,13 +9132,13 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>إجمالي الطاقة الكهروضوئية</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="220"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">الإنتاجية الكلية</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="234"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="229"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">إنتاجية النظام</translation>
@@ -9421,7 +9451,7 @@ firmware integrity before contacting support</source>
       <translation>إيقاف عند مستوى الخزان</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
       <source>Brief page</source>
       <translation>صفحة المختصر</translation>
     </message>
@@ -9516,17 +9546,17 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">إنتاج الطاقة الشمسية</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="211"/>
       <source>DC input</source>
       <translation type="unfinished">دخل التيار المستمر</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="252"/>
       <source>AC Loads</source>
       <translation type="unfinished">تحميلات التيار المتردد</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="282"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="279"/>
       <source>DC Loads</source>
       <translation type="unfinished">أحمال التيار المستمر</translation>
     </message>
@@ -9556,7 +9586,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">إنتاجية النظام</translation>
     </message>
     <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="58"/>
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="50"/>
       <source>Total PV Power</source>
       <translation type="unfinished">إجمالي الطاقة الكهروضوئية</translation>
     </message>
