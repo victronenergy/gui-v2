@@ -47,6 +47,8 @@ public:
 		ProductId_Genset_Cre = 0xB048,
 		ProductId_Genset_Deif = 0xB049,
 		ProductId_Genset_Cummins = 0xB04A,
+		ProductId_Genset_VirtualAc = 0xC06B,
+		ProductId_Genset_VirtualDc = 0xC06D,
 	};
 	Q_ENUM(ProductId_Genset)
 
@@ -72,6 +74,8 @@ public:
 		case ProductId_Genset_Cre:
 		case ProductId_Genset_Deif:
 		case ProductId_Genset_Cummins:
+		case ProductId_Genset_VirtualAc:
+		case ProductId_Genset_VirtualDc:
 			return true;
 		default:
 			return false;
