@@ -39,6 +39,11 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	setSystemColorScheme(isSystemSchemeDark ? Victron::VenusOS::Theme::SystemColorSchemeDark
 								: Victron::VenusOS::Theme::SystemColorSchemeLight);
 
+	// Sets the initial color to the same as the HTML loading screen until the right setting is available and applied
+	// This prevents changing color scheme too often during startup
+	setColorScheme(isSystemSchemeDark ? Victron::VenusOS::Theme::Dark
+								: Victron::VenusOS::Theme::Light);
+
 	// Register JavaScript listener for dynamic updates
 	mql.call<void>("addEventListener", std::string("change"), emscripten::val::module_property("jsSystemColorSchemeChanged"));
 #else
