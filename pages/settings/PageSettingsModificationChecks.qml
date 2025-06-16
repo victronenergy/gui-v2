@@ -325,6 +325,12 @@ Page {
 						}
 					}
 				}
+
+				Component {
+					id: rebootingDialogComponent
+
+					ModalRebootingDialog { }
+				}
 			}
 
 			ListRebootButton {
