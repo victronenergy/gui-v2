@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <!--Set visual viewport size for mobile devices to the device size,
-        witch results in a scale of 1 and a 1:1 mapping between CSS pixels
-        and Qt device independent pixels. -->
+    <!--
+      Set visual viewport size for mobile devices to the device size,
+      witch results in a scale of 1 and a 1:1 mapping between CSS pixels
+      and Qt device independent pixels.
+    -->
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover"/>
 
     <title>Victron GUIv2</title>
@@ -20,50 +22,90 @@
     <style>
       /* Make the html body cover the entire (visual) viewport with no scroll bars. */
       html, body {
-        margin: 0; padding: 0;
-        overflow: hidden; height: 100%;
-        background: #000000; color: #FAF9F5;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        background: #000000;
+        color: #FAF9F5;
         font-family: "Roboto", sans-serif;
       }
       #logo {
         content: url('victronenergy.svg');
-        width: 300px; height: 54px;
+        width: 300px;
+        height: 54px;
       }
       #mockup {
-        display: none; z-index: 0;
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 1200px; height: 840px;
+        display: none;
+        z-index: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1200px;
+        height: 840px;
       }
       @media screen and (min-width: 1400px) and (min-height: 900px) {
-        #mockup { display: block; }
-        #wrapper-inner { outline: 1px solid #141414; }
+        #mockup {
+          display: block;
+        }
+        #wrapper-inner {
+          outline: 1px solid #141414;
+        }
       }
       #wrapper-outer  {
-        width: 100%; height: 100%; max-height: 100dvh;
-        margin: 0; padding: 0;
-        display: flex; justify-content: center; align-items: center;
-        position: absolute; top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        max-height: 100dvh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
       #wrapper-inner {
         width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
         max-width: 1024px;
         max-height: calc(100% - env(safe-area-inset-bottom));
         aspect-ratio: 1024/600;
-        position: relative; background: #000; color: #fff; text-align: center;
+        position: relative;
+        background: #000;
+        color: #969591;
+        text-align: center;
       }
       #qtspinner {
-        width: 100%; height: 100%; position: absolute; top: 0; left: 0; margin: 0;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         z-index: 1;
       }
-      #qtstatus { min-height: 20px; padding-top: 28px; }
+      #qtstatus {
+        min-height: 20px;
+        padding-top: 28px;
+      }
       #screen {
-        width: 100%; height: 100%; position: absolute; top: 0; left: 0; margin: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
         z-index: 2;
       }
       @media (prefers-color-scheme: light) {
         html, body {
-          background: #E6E5E1; color: #1D1D1B;
+          background: #E6E5E1;
+          color: #1D1D1B;
         }
         #logo {
           content: url('victronenergy-light.svg');
