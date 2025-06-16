@@ -205,6 +205,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/EnvironmentGaugePanel.qml
     components/ExpandedTanksView.qml
     components/FirmwareUpdate.qml
+    components/FittedQuantityLabel.qml
     components/FixedWidthLabel.qml
     components/GaugeModel.qml
     components/GaugeHeader.qml

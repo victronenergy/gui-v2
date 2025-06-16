@@ -8,6 +8,9 @@
 
 #include <QQmlEngine>
 #include <QObject>
+#include <QFont>
+
+#include "themeobjects.h"
 
 namespace Victron {
 namespace VenusOS {
@@ -30,6 +33,7 @@ public:
 
 	Q_INVOKABLE QList<qreal> calculateLoadGraphYValues(const QList<qreal> &data, int dataLen, qreal height) const;
 	Q_INVOKABLE qreal degreesToRadians(const qreal degrees) const;
+	Q_INVOKABLE int fittedPixelSize(const QString &text, const qreal maxWidth, int minPixelSize, int maxPixelSize, const QFont &font, ThemeSingleton *theme = nullptr) const;
 };
 
 }
