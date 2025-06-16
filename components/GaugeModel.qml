@@ -125,11 +125,12 @@ ListModel {
 			readonly property real remaining: item?.remaining ?? NaN
 			readonly property int valueType: properties.valueType ?? VenusOS.Gauges_ValueType_NeutralPercentage
 			readonly property color color: properties.color ?? Theme.color_ok
-
 			readonly property var properties: type >= 0 ? Gauges.tankProperties(type) : ({})
 
-			function _updateGaugeModel() {
-				if (root) { // may be null if this object has been destroyed after the Qt.callLater() call
+			property bool canUpdate
+
+			function updateGaugeModel() {
+				if (canUpdate) {
 					root._updateGauge(index, gaugeObject)
 				}
 			}
@@ -141,15 +142,17 @@ ListModel {
 
 			// If tank data changes, update the model at the end of the event loop to avoid
 			// excess updates if multiple values change simultaneously for the same tank.
-			onNameChanged: Qt.callLater(_updateGaugeModel)
-			onIconChanged: Qt.callLater(_updateGaugeModel)
-			onLevelChanged: Qt.callLater(_updateGaugeModel)
+			onNameChanged: Qt.callLater(updateGaugeModel)
+			onIconChanged: Qt.callLater(updateGaugeModel)
+			onLevelChanged: Qt.callLater(updateGaugeModel)
+
+			Component.onDestruction: canUpdate = false
 
 			Connections {
 				target: Global.systemSettings.briefView.unit
 
 				function onValueChanged() {
-					Qt.callLater(_updateGaugeModel)
+					Qt.callLater(updateGaugeModel)
 				}
 			}
 
@@ -244,6 +247,15 @@ ListModel {
 				}
 			}
 		}
+
+		onObjectAdded: (index, gaugeObject) => {
+			gaugeObject.canUpdate = true
+			Qt.callLater(gaugeObject.updateGaugeModel)
+		}
+		onObjectRemoved: (index, gaugeObject) => {
+			gaugeObject.canUpdate = false
+		}
+
 	}
 
 	property Connections _tankCountConn: Connections {
