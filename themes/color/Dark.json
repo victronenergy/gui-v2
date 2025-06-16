@@ -58,7 +58,8 @@
 
     "color_scrollBar_bar": "color_gray2",
 
-    "color_splash_logo": "color_white",
+    "color_splash_logo_icon": "color_white",
+    "color_splash_logo_text": "color_white",
 
     "color_switch_groove_disabled": "color_gray4",
     "color_switch_groove_off": "transparent",
