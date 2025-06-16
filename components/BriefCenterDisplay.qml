@@ -12,7 +12,6 @@ Column {
 	id: root
 
 	property bool showFullDetails
-	property bool smallTextMode
 
 	readonly property bool _useTemperature: BackendConnection.portableIdInfo(centerService.value).type === "temperature"
 
@@ -62,29 +61,13 @@ Column {
 		}
 	}
 
-	QuantityLabel {
+	FittedQuantityLabel {
 		id: centerLabel
-
-		anchors.horizontalCenter: parent.horizontalCenter
-		height: root.smallTextMode ? centerLabelMetrics.ascent : implicitHeight
-		font.pixelSize: {
-			if (root._useTemperature) {
-				return root.smallTextMode
-					? Theme.font_briefPage_battery_temperature_minimumPixelSize
-					: Theme.font_briefPage_battery_temperature_maximumPixelSize
-			} else {
-				return root.smallTextMode
-					? Theme.font_briefPage_battery_percentage_minimumPixelSize
-					: Theme.font_briefPage_battery_percentage_maximumPixelSize
-			}
-		}
+		width: parent.width
 		unit: root._useTemperature ? Global.systemSettings.temperatureUnit : VenusOS.Units_Percentage
 		value: root._useTemperature ? (temperature.value ?? NaN) : Global.system.battery.stateOfCharge
-
-		FontMetrics {
-			id: centerLabelMetrics
-			font: centerLabel.font
-		}
+		minimumPixelSize: Theme.font_briefPage_battery_percentage_minimumPixelSize
+		maximumPixelSize: Theme.font_briefPage_battery_percentage_maximumPixelSize
 	}
 
 	Loader {

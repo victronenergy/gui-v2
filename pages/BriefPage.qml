@@ -74,6 +74,7 @@ SwipeViewPage {
 		id: multiGauge
 
 		CircularMultiGauge {
+			id: circularMultiGauge
 			model: gaugeModel
 			animationEnabled: root.animationEnabled
 			labelOpacity: root._gaugeLabelOpacity
@@ -82,10 +83,8 @@ SwipeViewPage {
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
-				width: parent.width
-				visible: gaugeModel.count <= 3
+				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
 				showFullDetails: gaugeModel.count === 1
-				smallTextMode: gaugeModel.count === 3
 			}
 		}
 	}
