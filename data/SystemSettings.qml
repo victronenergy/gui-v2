@@ -225,7 +225,8 @@ QtObject {
 				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 			}
 			delegate: VeQuickItem {
-				uid: model.uid
+				required property string id
+				uid: root.serviceUid + "/Settings/Gui2/BriefView/Level/" + id
 				onValueChanged: Qt.callLater(root.briefView._refreshCentralGauges)
 			}
 		}
