@@ -324,6 +324,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/dialogs/InverterChargerModeDialog.qml
     components/dialogs/InverterChargerEssModeDialog.qml
     components/dialogs/ModalDialog.qml
+    components/dialogs/ModalRebootingDialog.qml
     components/dialogs/ModalWarningDialog.qml
     components/dialogs/NumberSelectorDialog.qml
     components/dialogs/SecurityProfilePasswordDialog.qml

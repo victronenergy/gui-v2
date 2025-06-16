@@ -36,17 +36,6 @@ ListButton {
 	Component {
 		id: rebootingDialogComponent
 
-		ModalWarningDialog {
-			title: BackendConnection.type === BackendConnection.DBusSource
-				//% "Rebooting..."
-				? qsTrId("reboot_button_dialoglayer_rebooting")
-				//% "Device has been rebooted."
-				: qsTrId("reboot_button_dialoglayer_rebooted")
-
-			// On device, dialog cannot be dismissed; just wait until device is rebooted.
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-			footer.enabled: BackendConnection.type !== BackendConnection.DBusSource
-			footer.opacity: footer.enabled ? 1 : 0
-		}
+		ModalRebootingDialog { }
 	}
 }
