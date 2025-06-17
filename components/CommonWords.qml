@@ -196,6 +196,14 @@ QtObject {
 	//% "ESS"
 	readonly property string ess: qsTrId("common_words_ess")
 
+	//: The firmware type for normal images
+	//% "Normal"
+	readonly property string firmware_type_normal: qsTrId("common_words_firmware_type_normal")
+
+	//: The firmware type for large images
+	//% "Large"
+	readonly property string firmware_type_large: qsTrId("common_words_firmware_type_large")
+
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")
 
@@ -232,6 +240,9 @@ QtObject {
 
 	//% "Idle"
 	readonly property string idle: qsTrId("common_words_idle")
+
+	//% "Image type"
+	readonly property string image_type: qsTrId("common_words_image_type")
 
 	//: Status is 'inactive'
 	//% "Inactive"

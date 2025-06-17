@@ -28,6 +28,8 @@ Page {
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 			}
 
+			ListFirmwareImageTypeInstalled { }
+
 			ListNavigation {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")

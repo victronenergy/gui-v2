@@ -49,15 +49,12 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Image type"
-				text: qsTrId("settings_firmware_image_type")
+				text: CommonWords.image_type
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
 				preferredVisible: largeImageSupport.value === 1
 				optionModel: [
-					//% "Normal"
-					{ display: qsTrId("settings_firmware_normal"), value: FirmwareUpdater.ImageTypeNormal },
-					//% "Large"
-					{ display: qsTrId("settings_firmware_large"), value: FirmwareUpdater.ImageTypeLarge },
+					{ display: CommonWords.firmware_type_normal, value: FirmwareUpdater.ImageTypeNormal },
+					{ display: CommonWords.firmware_type_large, value: FirmwareUpdater.ImageTypeLarge },
 				]
 
 				VeQuickItem {
