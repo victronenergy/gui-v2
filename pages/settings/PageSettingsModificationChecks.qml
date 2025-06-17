@@ -256,11 +256,9 @@ Page {
 				secondaryText: FirmwareVersion.versionText(firmwareInstalledVersionItem.value, "venus")
 			}
 
-			ListText {
+			ListFirmwareImageTypeInstalled {
 				//% "Installed image type"
 				text: qsTrId("pagesettingsmodificationchecks_installed_image_type")
-				secondaryText: isLargeFirmwareInstalled ? qsTrId("settings_firmware_large") : qsTrId("settings_firmware_normal")
-				preferredVisible: largeImageSupportItem.valid && largeImageSupportItem.value === 1
 			}
 
 			ListText {
