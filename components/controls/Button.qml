@@ -72,8 +72,10 @@ CT.Button {
 	}
 
 	KeyNavigationHighlight {
-		anchors.fill: parent
+		anchors {
+			fill: parent
+			margins: root.highlightMargins
+		}
 		active: root.activeFocus
-		margins: root.highlightMargins
 	}
 }
