@@ -436,16 +436,16 @@ SwipeViewPage {
 					NumberAnimation {
 						target: root
 						properties: "_gaugeArcOpacity,_gaugeArcMargin"
-						duration: Theme.animation_briefPage_gaugeArc_initialize_duration
+						duration: root.animationEnabled ? Theme.animation_briefPage_gaugeArc_initialize_duration : 1
 					}
 					SequentialAnimation {
 						PauseAnimation {
-							duration: Theme.animation_briefPage_gaugeLabel_initialize_delayedStart_duration
+							duration: root.animationEnabled ? Theme.animation_briefPage_gaugeLabel_initialize_delayedStart_duration : 1
 						}
 						NumberAnimation {
 							target: root
 							properties: "_gaugeLabelOpacity,_gaugeLabelMargin"
-							duration: Theme.animation_briefPage_gaugeLabel_initialize_duration
+							duration: root.animationEnabled ? Theme.animation_briefPage_gaugeLabel_initialize_duration : 1
 						}
 					}
 				}
@@ -459,12 +459,12 @@ SwipeViewPage {
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
-					duration: Theme.animation_briefPage_edgeGauge_fade_duration
+					duration: root.animationEnabled ? Theme.animation_briefPage_sidePanel_slide_duration : 1
 				}
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: Theme.animation_briefPage_sidePanel_slide_duration
+					duration: root.animationEnabled ? Theme.animation_briefPage_sidePanel_slide_duration : 1
 					easing.type: Easing.InQuad
 				}
 				ScriptAction { script: root.state = "panelOpened" }
@@ -478,13 +478,13 @@ SwipeViewPage {
 				NumberAnimation {
 					target: sidePanel
 					properties: 'x,opacity'
-					duration: Theme.animation_briefPage_sidePanel_slide_duration
+					duration: root.animationEnabled ? Theme.animation_briefPage_sidePanel_slide_duration : 1
 					easing.type: Easing.InQuad
 				}
 				NumberAnimation {
 					target: root
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
-					duration: Theme.animation_briefPage_edgeGauge_fade_duration
+					duration: root.animationEnabled ? Theme.animation_briefPage_sidePanel_slide_duration : 1
 				}
 				ScriptAction { script: sidePanel.active = false }
 			}

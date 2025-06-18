@@ -147,7 +147,7 @@ exported power v  0.4 |   /
 				}
 			}
 
-			active: root.animationEnabled
+			animationEnabled: root.animationEnabled
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
 			initialModelValue: _graphShowsFeedIn ? 0.5 : 0
@@ -216,7 +216,7 @@ exported power v  0.4 |   /
 		visible: loadersActive
 		quantityLabel.dataObject: Global.dcInputs
 		sideComponent: LoadGraph {
-			active: root.animationEnabled
+			animationEnabled: root.animationEnabled
 			threshold: 0    // no threshold needed for inputs
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
@@ -256,7 +256,7 @@ exported power v  0.4 |   /
 		quantityLabel.dataObject: Global.system.load.ac
 		loadersActive: true
 		sideComponent: LoadGraph {
-			active: root.animationEnabled
+			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)
 
 			AcPhasesCurrentRange {
@@ -284,7 +284,7 @@ exported power v  0.4 |   /
 		visible: loadersActive
 		quantityLabel.dataObject: Global.system.dc
 		sideComponent: LoadGraph {
-			active: root.animationEnabled
+			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
 

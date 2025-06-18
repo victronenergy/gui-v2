@@ -12,7 +12,6 @@ QtObject {
 	property bool timersActive: !Global.splashScreenVisible
 	property int deviceCount
 	property bool levelsEnabled: true
-	property bool animationEnabled: true
 
 	signal setBatteryRequested(config : var)
 	signal setAcInputsRequested(config : var)
@@ -109,7 +108,7 @@ QtObject {
 			}
 			break
 		case Qt.Key_A:
-			root.animationEnabled = !root.animationEnabled
+			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/Gui2/UIAnimations", Global.systemSettings.animationEnabled ? 0 : 1)
 			break
 		case Qt.Key_B:
 			root.setMockValue(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled",
@@ -347,19 +346,5 @@ QtObject {
 		onKeyPressed: (key, modifiers) => {
 			root.keyPressed(key, modifiers)
 		}
-	}
-
-	property Binding _pageAnimationsBinding: Binding {
-		when: !animationEnabled
-		target: !!Global.mainView ? Global.mainView : null
-		property: "allowPageAnimations"
-		value: false
-	}
-
-	property Binding _statusBarAnimationsBinding: Binding {
-		when: !animationEnabled
-		target: !!Global.pageManager ? Global.pageManager.statusBar : null
-		property: "animationEnabled"
-		value: false
 	}
 }

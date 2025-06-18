@@ -26,7 +26,7 @@ Item {
 	property bool animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
-	readonly property real animationElapsed: overviewPageRootAnimation.animationElapsed
+	required property FrameAnimation frameAnimation
 	readonly property bool _animated: _initialized && visible && animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated && animationEnabled
 	property real _electronTravelDistance
 	property bool _initialized
@@ -56,10 +56,8 @@ Item {
 		}
 
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
-		const electronTravelDistance = _animated
-				// Use a min value to ensure at least one electron is shown for short connectors
-				? Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
-				: 0
+		// Use a min value to ensure at least one electron is shown for short connectors
+		const electronTravelDistance = Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
 		const modelCount = Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
 
 		if (electronRepeater.count !== modelCount) {
@@ -77,14 +75,13 @@ Item {
 		}
 
 		// Force drawing manually if the animations are paused
-		if (overviewPageRootAnimation.paused) {
+		if (frameAnimation.paused || !_animated) {
 			pathUpdater.update()
 		}
 	}
 
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
-	onAnimationElapsedChanged: if (root._animated) pathUpdater.normalizedElapsed = 1000*animationElapsed/pathUpdater.duration
 
 	// Ensure electrons are shown above connector paths that do not have electrons, to avoid a
 	// situation where non-animated connector paths partially obscure electrons from other paths.
@@ -101,7 +98,7 @@ Item {
 	}
 
 	transitions: Transition {
-		enabled: root.animateGeometry
+		enabled: root.animationEnabled && root.animateGeometry
 		NumberAnimation {
 			properties: "y, yDistance, startAnchorY, endAnchorY, _transitionUpdating"
 			duration: Theme.animation_page_idleResize_duration
@@ -229,18 +226,24 @@ Item {
 		}
 	}
 
-	// Force drawing during the expanding transition even if the animations are paused
+	// Force drawing during the expanding transition even if the animations are paused.
+	// Force drawing the final positions even if animations disabled.
 	property real _transitionUpdating
-	on_TransitionUpdatingChanged: if (overviewPageRootAnimation.paused) pathUpdater.update()
+	on_TransitionUpdatingChanged: {
+		if (root.frameAnimation.paused
+				|| (!root.animationEnabled && (_transitionUpdating == 1.0 || _transitionUpdating == 0.0))) {
+			pathUpdater.update()
+		}
+	}
 
 	WidgetConnectorPathUpdater {
 		id: pathUpdater
 
-		property real normalizedElapsed
 		property real duration
+		property real normalizedElapsed: 1000 * root.frameAnimation.animationElapsed / pathUpdater.duration
 		readonly property real loopedElapsed: normalizedElapsed - Math.trunc(normalizedElapsed)
 		readonly property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-		progress: startToEnd ? loopedElapsed : 1.0 - loopedElapsed
+		progress: root.animationEnabled ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.5
 
 		animationMode: root.animationMode
 

@@ -30,7 +30,7 @@ QtObject {
 	property var notificationLayer
 	property ScreenBlanker screenBlanker
 	property bool displayCpuUsage
-	property bool pauseElectronAnimations
+	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && BackendConnection.applicationVisible
 
 	// data sources
 	property var acInputs
@@ -58,8 +58,6 @@ QtObject {
 	property bool isDesktop
 	property bool isGxDevice: Qt.platform.os === "linux" && !isDesktop
 	property real scalingRatio: 1.0
-
-	property bool animationEnabled: true // for mock mode only.
 
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom

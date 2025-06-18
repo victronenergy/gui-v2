@@ -48,12 +48,12 @@ SwipeViewPage {
 				 : 0.0
 
 		Behavior on opacity {
-			enabled: root.isCurrentPage
+			enabled: root.animationEnabled && root.isCurrentPage
 			OpacityAnimator { duration: Theme.animation_page_idleOpacity_duration }
 		}
 
 		Behavior on anchors.topMargin {
-			enabled: root.isCurrentPage
+			enabled: root.animationEnabled && root.isCurrentPage
 			NumberAnimation { duration: Theme.animation_page_idleResize_duration; easing.type: Easing.InOutQuad }
 		}
 
