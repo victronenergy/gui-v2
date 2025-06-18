@@ -455,6 +455,10 @@ FocusScope {
 				: swipeViewAndNavBarContainer
 	}
 
+	GlobalKeyNavigationHighlight {
+		id: globalKeyNavigationHighlight
+	}
+
 	Loader {
 		active: Global.displayCpuUsage
 		anchors {
