@@ -55,7 +55,7 @@ Page {
 
 			onStatusChanged: {
 				if (status === Loader.Error) {
-					console.log("Failed to load Device List delegate for '%1' service from file: %2"
+					console.warn("Failed to load Device List delegate for '%1' service from file: %2"
 						.arg(BackendConnection.serviceTypeFromUid(device.serviceUid))
 						.arg(source))
 				}

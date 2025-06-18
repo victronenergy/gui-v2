@@ -32,20 +32,24 @@ Window {
 	}
 
 	function rebuildUi() {
-		console.warn("Rebuilding UI")
+		console.info("Main: UI rebuild required")
 		if (Global.mainView) {
 			Global.mainView.clearUi()
 		}
-		Global.reset()
-		if (dataManagerLoader.active && dataManagerLoader.connectionReady) {
+		const demoModeChange = dataManagerLoader.active && dataManagerLoader.connectionReady
+		if (demoModeChange) {
 			// we haven't lost backend connection.
 			// we must be rebuilding UI due to demo mode change.
 			// manually cycle the data manager loader.
+			console.info("Main: resetting data manager due to demo mode change")
 			dataManagerLoader.active = false
+		}
+		Global.reset()
+		if (demoModeChange) {
 			dataManagerLoader.active = true
 		}
 		gc()
-		console.warn("Rebuilding complete")
+		console.info("Main: UI rebuild started successfully")
 	}
 
 	function ensureApplicationActive() {
@@ -135,6 +139,7 @@ Window {
 
 		asynchronous: true
 		active: Global.dataManagerLoaded
+		onActiveChanged: if (active) console.info("Main: data manager finished loading; now loading application content")
 		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent
 			focus: true

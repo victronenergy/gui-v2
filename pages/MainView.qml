@@ -19,13 +19,14 @@ FocusScope {
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
+	property bool mainViewVisible: BackendConnection.applicationVisible && !Global.splashScreenVisible
+	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
+
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: BackendConnection.applicationVisible
-									   && !pageStack.busy && (!swipeView || !swipeView.flicking)
-									   && !Global.splashScreenVisible
+	property bool allowPageAnimations: mainViewVisible && !pageStack.busy && (!swipeView || !swipeView.flicking)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -38,7 +39,8 @@ FocusScope {
 	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
-			_loadUi()
+			console.info("MainView: data sources ready, loading swipe view pages")
+			swipeViewLoader.active = true
 		}
 	}
 
@@ -50,16 +52,10 @@ FocusScope {
 		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
 	}
 
-
 	function clearUi() {
 		swipeViewLoader.active = false
 		pageStack.clear()
 		_loadedPages = 0
-	}
-
-	function _loadUi() {
-		console.warn("Data sources ready, loading pages")
-		swipeViewLoader.active = true
 	}
 
 	Keys.onEscapePressed: (event) => {
@@ -150,6 +146,7 @@ FocusScope {
 					root.loadStartPage()
 				}
 				// Notify that the UI is ready to be displayed.
+				console.info("MainView: swipe view pages loaded!")
 				Global.allPagesLoaded = true
 			}
 
@@ -235,7 +232,7 @@ FocusScope {
 			onActiveFocusChanged: {
 				// If the key navigation moves upwards from the NavBar to the SwipeView, suggest to
 				// the SwipeView that it should focus the bottom-most item in the page.
-				if (activeFocus) {
+				if (activeFocus && root.swipeView) {
 					root.swipeView.focusEdgeHint = Qt.BottomEdge
 				}
 			}
