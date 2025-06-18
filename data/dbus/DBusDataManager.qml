@@ -25,6 +25,9 @@ QtObject {
 		uids: ["dbus"]
 		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 
-		Component.onCompleted: Global.dataServiceModel = servicesTableModel
+		Component.onCompleted: {
+			console.info("DBusDataManager: services table model ready")
+			Global.dataServiceModel = servicesTableModel
+		}
 	}
 }

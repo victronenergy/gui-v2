@@ -20,7 +20,6 @@ Item {
 			: null
 
 	objectName: "LargeCenterGauge"
-	onActiveDataSourceChanged: console.log(objectName, "dataSource:", activeDataSource ? activeDataSource.objectName : "null")
 
 	ProgressArc {
 		id: outerGauge
@@ -60,7 +59,7 @@ Item {
 			// it looks fine usually, but when we change pages to eg. SettingsPage, the background color changes to
 			// SettingsPage.backgroundColor (slightly darker) for ~0.5 seconds while the boat page is still visible,
 			// making this needle color 'pop' out of the background briefly.
-			color: Global.mainView.currentPage.backgroundColor
+			color: (Global.mainView && Global.mainView.currentPage) ? Global.mainView.currentPage.backgroundColor : "transparent"
 			transformOrigin: Item.Bottom
 			rotation: parent.progressAnimatedEndAngle
 
