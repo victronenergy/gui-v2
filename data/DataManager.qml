@@ -11,7 +11,6 @@ Item {
 	id: root
 
 	readonly property bool _dataObjectsReady: !!Global.acInputs
-			&& !!Global.acInputs
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
 			&& !!Global.evChargers
@@ -30,8 +29,11 @@ Item {
 			&& dataServiceModel.rowCount > 0
 			&& (!mockManagerLoader.active || mockManagerLoader.status === Loader.Ready)
 
+
+	on_DataObjectsReadyChanged: if (_dataObjectsReady) console.info("DataManager: data objects ready")
 	on_ReadyChanged: {
 		if (_ready) {
+			console.info("DataManager: loading complete")
 			Global.dataManagerLoaded = true
 		}
 	}
@@ -53,7 +55,7 @@ Item {
 
 	AllDevicesModel {
 		id: allDevicesModel
-		Component.onCompleted: Global.allDevicesModel = allDevicesModel
+		Component.onCompleted: { console.info("DataManager: all devices model ready"); Global.allDevicesModel = allDevicesModel }
 	}
 
 	VeQItemTableModel {
@@ -68,6 +70,7 @@ Item {
 		active: root._dataObjectsReady && BackendConnection.type === BackendConnection.MockSource
 		asynchronous: true
 		sourceComponent: MockDataManager {}
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load mock data manager:", errorString())
+		onStatusChanged: if (status === Loader.Error) console.warn("DataManager: Unable to load mock data manager:", errorString())
+		onLoaded: console.info("DataManager: mock data manager loaded!")
 	}
 }

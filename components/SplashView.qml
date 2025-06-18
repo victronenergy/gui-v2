@@ -18,12 +18,13 @@ Rectangle {
 	visible: Global.splashScreenVisible
 
 	onAllPagesLoadedChanged: {
-		if (!showSplashAnimation) {
+		if (allPagesLoaded && !showSplashAnimation) {
 			hideSplashView()
 		}
 	}
 
 	function hideSplashView() {
+		console.info("SplashView: UI ready; hiding splash view")
 		Global.splashScreenVisible = false
 		// reset the state variables we animated.
 		logoIcon.opacity = 1.0
@@ -40,7 +41,10 @@ Rectangle {
 		to: 0
 		duration: Theme.animation_splash_fade_duration
 		onRunningChanged: {
-			if (!running) {
+			if (running) {
+				console.info("SplashView: playing view opacity fade out animation")
+			} else {
+				console.info("SplashView: finished view opacity fade out animation")
 				root.hideSplashView()
 			}
 		}
@@ -55,10 +59,16 @@ Rectangle {
 		}
 
 		playing: false
+		onPlayingChanged: {
+			if (playing) {
+				console.info("SplashView: playing gauge gif animation")
+			}
+		}
 		cache: false
 		paused: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
 		onPausedChanged: {
 			if (paused) {
+				console.info("SplashView: finished gauge gif animation")
 				fadeOutAnim.start()
 			}
 		}
@@ -117,8 +127,17 @@ Rectangle {
 
 			onRunningChanged: {
 				if (running) {
+					console.info("SplashView: fading out logo text")
 					logoIconFadeOutAnim.running = true
-				} else if (Global.backendReady) {
+				} else if (Global.backendReady || Global.backendReadyLatched) {
+					console.info("SplashView: finished fading out logo text")
+					animatedLogo.playing = true
+				} else {
+					// this condition should never be hit.
+					// if we do hit it, continue the splash view teardown,
+					// so that we don't get stuck, even if the UI might
+					// not be fully loaded at this point.
+					console.info("SplashView: fading out logo text but backend is not ready!")
 					animatedLogo.playing = true
 				}
 			}
@@ -129,6 +148,15 @@ Rectangle {
 		id: initialFadeAnimation
 
 		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && root.showSplashAnimation
+		onRunningChanged: {
+			if (running) {
+				console.info("SplashView: application content pages have loaded, running initial fade animation")
+			} else {
+				console.info("SplashView: finished running initial fade animation")
+				logoTextFadeOutAnim.running = true
+			}
+		}
+
 		PropertyAction {
 			target: extraInfoColumn
 			property: "nextOpacity"
@@ -146,11 +174,6 @@ Rectangle {
 		}
 		PauseAnimation {
 			duration: Theme.animation_splash_logo_preFadePause_duration
-		}
-		PropertyAction {
-			target: logoTextFadeOutAnim
-			property: "running"
-			value: true
 		}
 	}
 
@@ -362,6 +385,7 @@ Rectangle {
 		onLoaded: {
 			// If the welcome screen is shown, force the splash animation to be shown even on wasm
 			// so that there is a nicer transition from the welcome to the main screen.
+			console.info("SplashView: welcome view loaded, starting splash animation")
 			root.showSplashAnimation = true
 		}
 	}

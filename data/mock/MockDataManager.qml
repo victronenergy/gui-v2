@@ -14,6 +14,7 @@ QtObject {
 
 	property MockDataSimulator mockDataSimulator: MockDataSimulator {
 		Component.onCompleted: {
+			console.info("MockDataManager: data simulator ready")
 			Global.mockDataSimulator = mockDataSimulator
 			_mockDataSources = mockDataSourceComponent.createObject(root)
 		}
