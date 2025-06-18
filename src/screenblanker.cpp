@@ -10,19 +10,22 @@
 
 #include "screenblanker.h"
 
+#include <QtDebug>
+
 using namespace Victron::VenusOS;
 
 ScreenBlanker::ScreenBlanker(QObject *parent) : QObject(parent)
 {
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
+	qInfo() << "ScreenBlanker: determining support";
 	m_blankDevice = getFeature("blank_display_device");
-	m_blanked = readFromFile(m_blankDevice) == 1;
-#endif
+	m_blanked = supported() ? readFromFile(m_blankDevice) == 1 : false;
 
 	if (supported()) {
+		qInfo() << "ScreenBlanker: supported.  Currently, blanked = " << m_blanked;
 		m_enabled = true;
-
 		connect(&m_blankingTimer, &QTimer::timeout, this, &ScreenBlanker::setDisplayOff);
+	} else {
+		qWarning() << "ScreenBlanker: not supported.";
 	}
 }
 
@@ -156,9 +159,7 @@ void ScreenBlanker::setBlanked(bool blanked)
 {
 	if (supported() && blanked != m_blanked) {
 		m_blanked = blanked;
-#if !defined(VENUS_DESKTOP_BUILD)
 		writeToFile(m_blankDevice, blanked ? 1 : 0);
-#endif
 		emit blankedChanged();
 	}
 }
@@ -166,6 +167,9 @@ void ScreenBlanker::setBlanked(bool blanked)
 // From gui/platform/ve_platform.cpp
 bool ScreenBlanker::writeToFile(QString filename, int value) const
 {
+	if (filename.isEmpty())
+		return false;
+
 	QFile file(filename);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return false;
@@ -179,13 +183,25 @@ bool ScreenBlanker::writeToFile(QString filename, int value) const
 
 int ScreenBlanker::readFromFile(QString filename) const
 {
+	if (filename.isEmpty())
+		return 0;
+
 	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-		return false;
+		return 0;
 
-	int value;
-	QTextStream in(&file);
-	in >> value;
+	int value = 0;
+	if (!file.atEnd()) {
+		const QString data = QString::fromUtf8(file.readAll());
+		bool ok = true;
+		value = data.toInt(&ok);
+		if (!ok) {
+			qWarning() << "ScreenBlanker: unable to read status from file; assuming not blanked";
+			value = 0;
+		}
+	} else {
+		qWarning() << "ScreenBlanker: no data to read from file; assuming not blanked";
+	}
 	file.close();
 
 	return value;
@@ -194,6 +210,7 @@ int ScreenBlanker::readFromFile(QString filename) const
 // From gui/platform/ve_platform_venus.cpp
 QString ScreenBlanker::getFeature(QString const &name) const
 {
+#if !defined(VENUS_WEBASSEMBLY_BUILD) && !defined(VENUS_DESKTOP_BUILD)
 	QDir machineRuntimeDir = QDir("/etc/venus");
 	if (!machineRuntimeDir.exists()) {
 		qmlWarning(this) << "could not find the machine feature directory " + machineRuntimeDir.absolutePath();
@@ -213,4 +230,7 @@ QString ScreenBlanker::getFeature(QString const &name) const
 	}
 
 	return ret.count() >= 1 ? ret[0] : QString();
+#else
+	return QString();
+#endif
 }
