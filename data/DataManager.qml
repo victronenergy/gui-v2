@@ -13,7 +13,6 @@ Item {
 	id: root
 
 	readonly property bool _dataObjectsReady: !!Global.acInputs
-			&& !!Global.acInputs
 			&& !!Global.dcInputs
 			&& !!Global.environmentInputs
 			&& !!Global.ess
@@ -35,28 +34,29 @@ Item {
 
 	function _setBackendSource() {
 		if (!_shouldInitialize) {
+			console.warn("DataManager: not setting backend source: not ready to initialize")
 			return
 		}
 		if (dataManagerLoader.active) {
-			console.warn("Data manager source is already set to", dataManagerLoader.source,
-				"cannot be changed after initialization")
+			console.warn("DataManager: source is already set to: ", dataManagerLoader.source,
+				" cannot be changed after initialization")
 			return
 		}
 		switch (BackendConnection.type) {
 		case BackendConnection.DBusSource:
-			console.warn("Loading D-Bus data backend...")
+			console.warn("DataManager: loading D-Bus data backend...")
 			dataManagerLoader.sourceComponent = dbus
 			break
 		case BackendConnection.MqttSource:
-			console.warn("Loading MQTT data backend...")
+			console.warn("DataManager: loading MQTT data backend...")
 			dataManagerLoader.sourceComponent = mqtt
 			break
 		case BackendConnection.MockSource:
-			console.warn("Loading mock data backend...")
+			console.warn("DataManager: loading mock data backend...")
 			dataManagerLoader.sourceComponent = mock
 			break
 		default:
-			console.warn("Unsupported data backend!", BackendConnection.type)
+			console.warn("DataManager: unsupported data backend: ", BackendConnection.type)
 			return
 		}
 		dataManagerLoader.active = true
@@ -80,6 +80,7 @@ Item {
 		MockDataManager {}
 	}
 
+	on_DataObjectsReadyChanged: if (_dataObjectsReady) console.info("DataManager: data objects ready")
 	on_ShouldInitializeChanged: _setBackendSource()
 
 	Connections {
@@ -109,7 +110,7 @@ Item {
 
 	AllDevicesModel {
 		id: allDevicesModel
-		Component.onCompleted: Global.allDevicesModel = allDevicesModel
+		Component.onCompleted: { console.info("DataManager: all devices model ready"); Global.allDevicesModel = allDevicesModel }
 	}
 
 	Loader {
@@ -117,7 +118,7 @@ Item {
 
 		active: false
 		asynchronous: true
-		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load data manager:", source)
-		onLoaded: Qt.callLater(function() { Global.dataManagerLoaded = true })
+		onStatusChanged: if (status === Loader.Error) console.warn("DataManager: unable to load backend: ", source)
+		onLoaded: Qt.callLater(function() { console.info("DataManager: backend finished loading!"); Global.dataManagerLoaded = true })
 	}
 }

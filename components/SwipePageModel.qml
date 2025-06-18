@@ -49,7 +49,7 @@ ObjectModel {
 			source: BackendConnection.demoImageFileName
 			onStatusChanged: {
 				if (status === Image.Ready) {
-					console.log("Loaded demo image:", source)
+					console.info("Loaded demo image:", source)
 				}
 			}
 		}

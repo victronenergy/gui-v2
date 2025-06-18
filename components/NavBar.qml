@@ -34,7 +34,7 @@ FocusScope {
 			return
 		}
 		if (index < 0 || index >= model.count) {
-			console.log("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count)
+			console.warn("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count)
 			return
 		}
 		_currentIndex = index
