@@ -122,6 +122,7 @@ QtObject {
 		setMockSettingValue("Gui2/StartPage", VenusOS.StartPage_Mode_AutoSelect)
 		setMockSettingValue("Gui2/StartPageName", "")
 		setMockSettingValue("Gui2/StartPageTimeout", 0)
+		setMockSettingValue("Gui2/UIAnimations", 1)
 
 		setMockPlatformValue("Vebus/Interface/ttyS2/Action", 0)
 		setMockPlatformValue("Vebus/Interface/ttyS2/AvailableBackups", '["MyBackup-ttyS2.rvsc", "AnotherBackup-ttyS2.rvsc"]')

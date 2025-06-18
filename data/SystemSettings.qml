@@ -44,6 +44,8 @@ QtObject {
 		}
 	}
 
+	readonly property bool animationEnabled: _animationEnabled.valid ? _animationEnabled.value : true
+
 	function canAccess(level) {
 		return accessLevel.valid && accessLevel.value >= level
 	}
@@ -405,6 +407,11 @@ QtObject {
 
 	readonly property VeQuickItem _touchEnabled: VeQuickItem {
 		uid: root.serviceUid + "/Settings/Gui/TouchEnabled"
+	}
+
+	// 0 = disabled, 1 = enabled; value is 1 by default.
+	readonly property VeQuickItem _animationEnabled: VeQuickItem {
+		uid: root.serviceUid + "/Settings/Gui2/UIAnimations"
 	}
 
 	function reset() {

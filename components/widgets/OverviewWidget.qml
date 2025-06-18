@@ -98,7 +98,7 @@ Rectangle {
 	}
 
 	transitions: Transition {
-		enabled: root.animateGeometry
+		enabled: root.animationEnabled && root.animateGeometry
 
 		NumberAnimation {
 			properties: "y,height,verticalMargin"

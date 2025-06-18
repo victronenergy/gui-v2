@@ -26,7 +26,9 @@ FocusScope {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: mainViewVisible && !pageStack.busy && (!swipeView || !swipeView.flicking)
+	property bool allowPageAnimations: Global.animationEnabled
+									   && mainViewVisible
+									   && !pageStack.busy && (!swipeView || !swipeView.flicking)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -269,6 +271,7 @@ FocusScope {
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		viewActive: root.cardsActive
+		animationEnabled: root.allowPageAnimations
 		focus: root._focusTarget === cardsLoader
 		KeyNavigation.up: statusBar
 
@@ -303,14 +306,14 @@ FocusScope {
 				target: navBar
 				from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
 				to: root.height - navBar.height
-				duration: Theme.animation_navBar_initialize_fade_duration
+				duration: Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}
 			OpacityAnimator {
 				id: opacityAnimator
 				target: navBar
 				from: 0.0
 				to: 1.0
-				duration: Theme.animation_navBar_initialize_fade_duration
+				duration: Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}
 		}
 	}
@@ -325,7 +328,7 @@ FocusScope {
 			target: navBar
 			from: root.height
 			to: root.height - navBar.height
-			duration: Theme.animation_page_idleResize_duration
+			duration: Global.animationEnabled ? Theme.animation_page_idleResize_duration : 1
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
@@ -339,7 +342,7 @@ FocusScope {
 			target: navBar
 			from: 0.0
 			to: 1.0
-			duration: Theme.animation_page_idleOpacity_duration
+			duration: Global.animationEnabled ? Theme.animation_page_idleOpacity_duration : 1
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
@@ -361,7 +364,7 @@ FocusScope {
 			target: navBar
 			from: 1.0
 			to: 0.0
-			duration: Theme.animation_page_idleOpacity_duration
+			duration: Global.animationEnabled ? Theme.animation_page_idleOpacity_duration : 1
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
@@ -375,7 +378,7 @@ FocusScope {
 			target: navBar
 			from: root.height - navBar.height
 			to: root.height
-			duration: Theme.animation_page_idleResize_duration
+			duration: Global.animationEnabled ? Theme.animation_page_idleResize_duration : 1
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
@@ -400,7 +403,7 @@ FocusScope {
 			return customButton
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
-		animationEnabled: BackendConnection.applicationVisible
+		animationEnabled: Global.animationEnabled
 		backgroundColor: root.backgroundColor
 
 		onLeftButtonClicked: {

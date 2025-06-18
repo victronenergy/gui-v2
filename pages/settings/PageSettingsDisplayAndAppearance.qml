@@ -115,6 +115,16 @@ Page {
 				}
 			}
 
+			ListSwitch {
+				id: animationsEnabled
+				//% "UI Animations"
+				text: qsTrId("settings_ui_animations")
+				//% "Disable to reduce CPU usage"
+				secondaryText: qsTrId("settings_ui_animations_description")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/UIAnimations"
+				preferredVisible: dataItem.valid
+			}
+
 			ListRadioButtonGroup {
 				id: runningVersion
 

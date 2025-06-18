@@ -71,13 +71,6 @@ Page {
 				preferredVisible: Qt.platform.os === "linux"
 			}
 
-			SwitchItem {
-				//% "Pause electron animations"
-				text: qsTrId("settings_page_debug_pause_electron_animations")
-				checked: Global.pauseElectronAnimations
-				onClicked: Global.pauseElectronAnimations = !Global.pauseElectronAnimations
-			}
-
 			ListNavigation {
 				text: "UI Library"
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })

@@ -20,7 +20,7 @@ Item {
 	property color horizontalGradientColor1: Theme.color_briefPage_background
 	property color horizontalGradientColor2: "transparent"
 	property bool zeroCentered
-	property alias active: graphAnimation.running
+	property alias animationEnabled: graphAnimation.running
 
 	signal nextValueRequested()
 
@@ -34,6 +34,18 @@ Item {
 	clip: Global.isGxDevice // we have to clip if we don't use a layer in LoadGraphShapePath.
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
 	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
+
+	Timer {
+		id: pausedAnimationTimer
+		running: !root.animationEnabled
+		repeat: true
+		interval: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
+		onTriggered: {
+			// step the graph and request the next value.
+			root.offsetFraction = 1.0
+			root.nextValueRequested();
+		}
+	}
 
 	SequentialAnimation {
 		id: graphAnimation

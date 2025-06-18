@@ -91,9 +91,11 @@ T.Dialog {
 	focus: Global.keyNavigationEnabled
 
 	enter: Transition {
+		enabled: Global.animationEnabled
 		NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
 	}
 	exit: Transition {
+		enabled: Global.animationEnabled
 		NumberAnimation {
 			loops: Qt.platform.os == "wasm" ? 0 : 1 // workaround wasm crash, see https://bugreports.qt.io/browse/QTBUG-121382
 			property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration
@@ -269,6 +271,7 @@ T.Dialog {
 			transitions: [
 				Transition {
 					to: "*"
+					enabled: Global.animationEnabled
 					NumberAnimation {
 						target: root
 						property: "y"
