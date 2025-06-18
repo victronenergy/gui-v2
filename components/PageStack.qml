@@ -13,6 +13,7 @@ C.StackView {
 	property var pageUrls: []
 	property Page _poppedPage
 
+	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
 	readonly property bool animating: busy || fakePushAnimation.running || fakePopAnimation.running
 	property bool swipeViewVisible: true
 
@@ -21,7 +22,7 @@ C.StackView {
 		XAnimator {
 			from: width
 			to: 0
-			duration: Theme.animation_page_slide_duration
+			duration: root.animationDuration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -30,7 +31,7 @@ C.StackView {
 		XAnimator {
 			from: 0
 			to: -width
-			duration: Theme.animation_page_slide_duration
+			duration: root.animationDuration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -38,7 +39,7 @@ C.StackView {
 		XAnimator {
 			from: -width
 			to: 0
-			duration: Theme.animation_page_slide_duration
+			duration: root.animationDuration
 			easing.type: Easing.InOutQuad
 		}
 	}
@@ -48,7 +49,7 @@ C.StackView {
 			XAnimator {
 				from: 0
 				to: width
-				duration: Theme.animation_page_slide_duration
+				duration: root.animationDuration
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
@@ -120,7 +121,7 @@ C.StackView {
 		}
 
 		function _animationDuration(operation) {
-			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? Theme.animation_page_slide_duration : 0
+			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? root.animationDuration : 0
 		}
 
 		function _adjustedStackOperation(operation) {

@@ -53,7 +53,8 @@ T.SwipeView {
 		highlightRangeMode: ListView.StrictlyEnforceRange
 		preferredHighlightBegin: 0
 		preferredHighlightEnd: 0
-		highlightMoveDuration: Global.allPagesLoaded ? 250 : 0 // don't animate when loading initial page
+		highlightMoveDuration: Global.allPagesLoaded && Global.mainView && Global.mainView.allowPageAnimations ? 250 : 0 // don't animate when loading initial page, or when animations are disabled.
+		highlightMoveVelocity: Global.allPagesLoaded && Global.mainView && Global.mainView.allowPageAnimations ? 400 : -1
 		maximumFlickVelocity: 4 * (control.orientation === Qt.Horizontal ? width : height)
 
 		Timer {
