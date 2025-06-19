@@ -502,15 +502,16 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsBatteryMeasurements.qml
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
+    pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
-    pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsConnectivity.qml
     pages/settings/PageSettingsDisplayAndAppearance.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
-    pages/settings/PageSettingsDisplayUnits.qml
     pages/settings/PageSettingsDisplayStartPage.qml
+    pages/settings/PageSettingsDisplayUnits.qml
+    pages/settings/PageSettingsDocumentation.qml
     pages/settings/PageSettingsDvcc.qml
     pages/settings/PageSettingsDynamicEss.qml
     pages/settings/PageSettingsEthernet.qml
@@ -537,7 +538,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusDiscovered.qml
     pages/settings/PageSettingsModbusTcp.qml
     pages/settings/PageSettingsModbusTcpServices.qml
-    pages/settings/PageSettingsModificationChecks.qml
     pages/settings/PageSettingsNodeRed.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml
@@ -545,12 +545,12 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsSupportStatus.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
     pages/settings/PageSettingsTailscale.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
-    pages/settings/PageSettingsUsefulLinks.qml
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
     pages/settings/PageSettingsWifi.qml
