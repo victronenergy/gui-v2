@@ -26,10 +26,10 @@ Page {
 				//% "Disable custom startup scripts before contacting support"
 				return qsTrId("pagesettingsmodificationchecks_support_state_custom_startup_scripts")
 			} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified && !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup)) {
-				//% "Re-install latest official firmware before contacting support"
+				//% "Refresh rootfs with the latest official firmware before contacting support"
 				return qsTrId("pagesettingsmodificationchecks_support_state_reinstall_firmware")
 			} else {
-				//% "Disable custom startup scripts and re-install latest official firmware before contacting support"
+				//% "Disable custom startup scripts and refresh rootfs with the latest official firmware before contacting support"
 				return qsTrId("pagesettingsmodificationchecks_support_state_custom_startup_scripts_reinstall_firmware")
 			}
 		} else {
@@ -79,7 +79,7 @@ Page {
 			//% "Clean"
 			return qsTrId("pagesettingsmodificationchecks_clean")
 		} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified) {
-			//% "Modified (re-install latest official firmware)"
+			//% "Modified (refresh rootfs with the latest official firmware)"
 			return qsTrId("pagesettingsmodificationchecks_modified")
 		} else {
 			//% "Not available on this device"
@@ -92,7 +92,7 @@ Page {
 			//% "Clean"
 			return Theme.color_green
 		} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified) {
-			//% "Modified (re-install latest official firmware)"
+			//% "Modified (refresh rootfs with the latest official firmware)"
 			return Theme.color_red
 		} else {
 			//% "Not available on this device"
@@ -368,7 +368,7 @@ Page {
 			}
 
 			ListButton {
-				//% "(Re-)Install latest official firmware"
+				//% "Refresh rootfs with the latest official firmware"
 				text: qsTrId("pagesettingsmodificationchecks_firmware_reinstall")
 				button.text: {
 					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
@@ -389,7 +389,7 @@ Page {
 
 				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				//% "Restore the firmware to its original state while preserving system settings"
+				//% "System settings are preserved during refresh of rootfs"
 				caption: qsTrId("pagesettingsmodificationchecks_firmware_reinstall_caption")
 				onClicked: Global.dialogLayer.open(confirmReinstallDialogComponent)
 
@@ -397,9 +397,9 @@ Page {
 					id: confirmReinstallDialogComponent
 
 					ModalWarningDialog {
-						//% "(Re-)Install latest official firmware"
+						//% "Refresh rootfs with the latest official firmware"
 						title: qsTrId("pagesettingsmodificationchecks_firmware_restore_clean_state_title")
-						//% "This will download and re-install the latest official firmware. You will also be asked, if you want to disable the custom startup scripts in the next step.<br>Internet connectivity is required.<br>Press 'OK' to continue."
+						//% "This will download and refresh rootfs with the latest official firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
 						description: qsTrId("pagesettingsmodificationchecks_firmware_restore_clean_state_description")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						onClosed: {
