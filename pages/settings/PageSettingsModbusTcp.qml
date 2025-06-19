@@ -26,7 +26,7 @@ Page {
 			ListSwitch {
 				id: enableModbusTcp
 
-				//% "Enable Modbus/TCP"
+				//% "Enable Modbus-TCP"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
 			}
