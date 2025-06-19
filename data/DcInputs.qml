@@ -106,7 +106,7 @@ QtObject {
 	}
 
 	readonly property Instantiator _dcInputObjects: Instantiator {
-		model: root._modelLoader.item
+		model: ServiceModel { serviceTypes: ["alternator","fuelcell","dcsource","dcgenset"] }
 		delegate: DcInput {
 			id: input
 			required property string uid
@@ -122,27 +122,6 @@ QtObject {
 			onVoltageChanged: Qt.callLater(root.updateTotals)
 			onCurrentChanged: Qt.callLater(root.updateTotals)
 			onPowerChanged: Qt.callLater(root.updateTotals)
-		}
-	}
-
-	readonly property Loader _modelLoader: Loader {
-		sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? mqttModelComponent : dbusOrMockModelComponent
-
-		Component {
-			id: dbusOrMockModelComponent
-			VeQItemSortTableModel {
-				dynamicSortFilter: true
-				filterRole: VeQItemTableModel.UniqueIdRole
-				filterRegExp: "^%1/com\.victronenergy\.(alternator|fuelcell|dcsource|dcgenset)\.".arg(BackendConnection.uidPrefix())
-				model: Global.dataServiceModel
-			}
-		}
-		Component {
-			id: mqttModelComponent
-			VeQItemTableModel {
-				uids: [ "mqtt/alternator", "mqtt/fuelcell", "mqtt/dcsource", "mqtt/dcgenset" ]
-				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-			}
 		}
 	}
 
