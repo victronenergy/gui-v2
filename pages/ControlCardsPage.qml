@@ -143,7 +143,7 @@ Page {
 	ServiceDeviceModel {
 		id: evChargerModel
 
-		serviceType: "evcharger"
+		serviceTypes: ["evcharger"]
 		modelId: "evcharger"
 		deviceDelegate: Device {
 			id: device
@@ -171,7 +171,7 @@ Page {
 	ServiceDeviceModel {
 		id: generatorModel
 
-		serviceType: "generator"
+		serviceTypes: ["generator"]
 		modelId: "generator"
 		deviceDelegate: Device {
 			id: generatorDevice

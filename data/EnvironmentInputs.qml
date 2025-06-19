@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	readonly property ServiceDeviceModel model: ServiceDeviceModel {
-		serviceType: "temperature"
+		serviceTypes: ["temperature"]
 		modelId: "temperature"
 	}
 

@@ -40,37 +40,37 @@ AggregateDeviceModel {
 	].concat(Global.tanks.allTankModels)
 
 	readonly property ServiceDeviceModel acLoadDevices: ServiceDeviceModel {
-		serviceType: "acload"
+		serviceTypes: ["acload"]
 		modelId: "acload"
 	}
 
 	readonly property ServiceDeviceModel batteryDevices: ServiceDeviceModel {
-		serviceType: "battery"
+		serviceTypes: ["battery"]
 		modelId: "battery"
 	}
 
-	readonly property MultiServiceDeviceModel combinedDcLoadDevices: MultiServiceDeviceModel {
+	readonly property ServiceDeviceModel combinedDcLoadDevices: ServiceDeviceModel {
 		serviceTypes: ["dcload", "dcsystem", "dcdc"]
 		modelId: "combinedDcloads"
 	}
 
 	readonly property ServiceDeviceModel digitalInputDevices: ServiceDeviceModel {
-		serviceType: "digitalinput"
+		serviceTypes: ["digitalinput"]
 		modelId: "digitalinput"
 	}
 
 	readonly property ServiceDeviceModel gpsDevices: ServiceDeviceModel {
-		serviceType: "gps"
+		serviceTypes: ["gps"]
 		modelId: "gps"
 	}
 
 	readonly property ServiceDeviceModel gridDevices: ServiceDeviceModel {
-		serviceType: "grid"
+		serviceTypes: ["grid"]
 		modelId: "grid"
 	}
 
 	readonly property ServiceDeviceModel gensetDevices: ServiceDeviceModel {
-		serviceType: "genset"
+		serviceTypes: ["genset"]
 		modelId: "genset"
 	}
 
@@ -83,32 +83,32 @@ AggregateDeviceModel {
 	}
 
 	readonly property ServiceDeviceModel meteoDevices: ServiceDeviceModel {
-		serviceType: "meteo"
+		serviceTypes: ["meteo"]
 		modelId: "meteo"
 	}
 
 	readonly property ServiceDeviceModel motorDriveDevices: ServiceDeviceModel {
-		serviceType: "motordrive"
+		serviceTypes: ["motordrive"]
 		modelId: "motordrive"
 	}
 
 	readonly property ServiceDeviceModel pulseMeterDevices: ServiceDeviceModel {
-		serviceType: "pulsemeter"
+		serviceTypes: ["pulsemeter"]
 		modelId: "pulsemeter"
 	}
 
 	readonly property ServiceDeviceModel solarChargerDevices: ServiceDeviceModel {
-		serviceType: "solarcharger"
+		serviceTypes: ["solarcharger"]
 		modelId: "solarcharger"
 	}
 
 	readonly property ServiceDeviceModel switchDevices: ServiceDeviceModel {
-		serviceType: "switch"
+		serviceTypes: ["switch"]
 		modelId: "switch"
 	}
 
 	readonly property ServiceDeviceModel unsupportedDevices: ServiceDeviceModel {
-		serviceType: "unsupported"
+		serviceTypes: ["unsupported"]
 		modelId: "unsupported"
 	}
 }
