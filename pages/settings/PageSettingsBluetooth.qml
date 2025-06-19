@@ -11,7 +11,19 @@ Page {
 
 	GradientListView {
 
-		model: VisibleItemModel {
+		model: networkServices.hasBluetoothSupport ? bluetoothAvailable : bluetoothUnavailable
+
+		VisibleItemModel {
+			id: bluetoothUnavailable
+
+			ListItem {
+				//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
+				text: qsTrId("settings_bluetooth_unavailable_message")
+			}
+		}
+
+		VisibleItemModel {
+			id: bluetoothAvailable
 
 			ListSwitch {
 				id: bluetoothEnabled
@@ -37,5 +49,9 @@ Page {
 				}
 			}
 		}
+	}
+
+	NetworkServices {
+		id: networkServices
 	}
 }
