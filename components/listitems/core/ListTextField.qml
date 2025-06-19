@@ -167,10 +167,10 @@ ListItem {
 			root.editingFinished()
 		}
 
-		// Consume arrow key events so that they do not go higher up the item hierarchy and trigger
-		// key navigation events while the text field is focused.
-		Keys.onLeftPressed: {}
-		Keys.onRightPressed: {}
+		// When the cursor is on the left/right edges, consume left/right key events so that they do
+		// not travel higher up the item hierarchy and activate key navigation.
+		Keys.onLeftPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === 0 }
+		Keys.onRightPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === textField.text.length }
 
 		Label {
 			id: suffixLabel
