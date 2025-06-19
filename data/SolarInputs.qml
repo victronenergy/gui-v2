@@ -12,7 +12,7 @@ QtObject {
 	readonly property SolarDeviceModel devices: SolarDeviceModel { }
 
 	readonly property ServiceDeviceModel pvInverterDevices: ServiceDeviceModel {
-		serviceType: "pvinverter"
+		serviceTypes: ["pvinverter"]
 		modelId: "pvinverter"
 		deviceDelegate: PvInverter {
 			id: pvInverter

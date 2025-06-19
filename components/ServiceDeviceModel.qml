@@ -6,29 +6,39 @@
 import QtQuick
 import Victron.VenusOS
 
-// Provides a generic DeviceModel for a specified service type.
+// Provides a generic DeviceModel for the specified service types.
 //
-// All services found for the specified type will be added and removed as Device objects.
+// All services found for the specified types will be added and removed as Device objects.
 
 DeviceModel {
 	id: root
 
-	required property string serviceType
+	required property list<string> serviceTypes
 
-	property Component deviceDelegate: Device {
-		id: device
-		serviceUid: model.uid
-		onValidChanged: {
-			if (valid) {
-				root.addDevice(device)
-			} else {
-				root.removeDevice(device.serviceUid)
+	property Component deviceDelegate: _defaultComponent
+
+	readonly property Component _defaultComponent: Component {
+		id: defaultComponent
+		Device {
+			id: device
+			serviceUid: model.uid
+			onValidChanged: {
+				if (valid) {
+					root.addDevice(device)
+				} else {
+					root.removeDevice(device.serviceUid)
+				}
 			}
 		}
 	}
 
 	readonly property Instantiator _objects: Instantiator {
-		model: ServiceModel { serviceTypes: [root.serviceType] }
+		model: serviceModel
 		delegate: root.deviceDelegate
+	}
+
+	readonly property ServiceModel _serviceModel: ServiceModel {
+		id: serviceModel
+		serviceTypes: root.serviceTypes
 	}
 }

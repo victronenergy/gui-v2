@@ -11,7 +11,7 @@ ServiceDeviceModel {
 
 	required property int position
 
-	serviceType: "heatpump"
+	serviceTypes: ["heatpump"]
 	modelId: "heatpump"
 
 	deviceDelegate: Device {
@@ -19,6 +19,7 @@ ServiceDeviceModel {
 
 		required property string uid
 		readonly property bool positionMatched: valid && _position.valid && _position.value === root.position
+		property bool addedToModel
 
 		readonly property VeQuickItem _position: VeQuickItem {
 			uid: device.serviceUid + "/Position"
@@ -26,10 +27,12 @@ ServiceDeviceModel {
 
 		serviceUid: uid
 		onPositionMatchedChanged: {
-			if (positionMatched) {
+			if (positionMatched && !addedToModel) {
 				root.addDevice(device)
-			} else {
+				addedToModel = true
+			} else if (!positionMatched && addedToModel) {
 				root.removeDevice(device.serviceUid)
+				addedToModel = false
 			}
 		}
 	}
