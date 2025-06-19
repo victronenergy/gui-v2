@@ -27,7 +27,7 @@ VeQItemSortTableModel {
 	dynamicSortFilter: BackendConnection.type !== BackendConnection.MqttSource
 	filterRole: VeQItemTableModel.UniqueIdRole
 	filterRegExp: BackendConnection.type === BackendConnection.MqttSource ? ""
-			: "^%1/com\.victronenergy\.(?:%2)\."
+			: "^%1/com\\.victronenergy\\.(?:%2)\\."
 					.arg(BackendConnection.uidPrefix())
 					.arg(root.serviceTypes.join("|"))
 	model: BackendConnection.type === BackendConnection.MqttSource ? mqttModel : Global.dataServiceModel

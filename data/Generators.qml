@@ -10,7 +10,7 @@ QtObject {
 	id: root
 
 	readonly property ServiceDeviceModel model: ServiceDeviceModel {
-		serviceType: "generators"
+		serviceTypes: ["generators"]
 		modelId: "generators"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}

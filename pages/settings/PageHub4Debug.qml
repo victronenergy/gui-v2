@@ -16,7 +16,7 @@ Page {
 
 	ServiceDeviceModel {
 		id: batteryModel
-		serviceType: "battery"
+		serviceTypes: ["battery"]
 	}
 
 	GradientListView {

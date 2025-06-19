@@ -25,14 +25,14 @@ QtObject {
 
 	// Devices from com.victronenergy.vebus
 	readonly property ServiceDeviceModel veBusDevices: ServiceDeviceModel {
-		serviceType: "vebus"
+		serviceTypes: ["vebus"]
 		modelId: "vebus"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
 
 	// Devices from com.victronenergy.acsystem
 	readonly property ServiceDeviceModel acSystemDevices: ServiceDeviceModel {
-		serviceType: "acsystem"
+		serviceTypes: ["acsystem"]
 		modelId: "acsystem"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
@@ -40,14 +40,14 @@ QtObject {
 	// Devices from com.victronenergy.inverter
 	// (Inverter RS and Phoenix Inverter, which do not have AC inputs)
 	readonly property ServiceDeviceModel inverterDevices: ServiceDeviceModel {
-		serviceType: "inverter"
+		serviceTypes: ["inverter"]
 		modelId: "inverter"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
 
 	// Devices from com.victronenergy.charger
 	readonly property ServiceDeviceModel chargerDevices: ServiceDeviceModel {
-		serviceType: "charger"
+		serviceTypes: ["charger"]
 		modelId: "charger"
 		sortBy: BaseDeviceModel.SortByDeviceInstance
 	}
