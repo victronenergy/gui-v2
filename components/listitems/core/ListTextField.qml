@@ -172,6 +172,11 @@ ListItem {
 		Keys.onLeftPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === 0 }
 		Keys.onRightPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === textField.text.length }
 
+		// When the text field is focused, consume up/down key events so that the user does not
+		// activate key navigation and move the focus elsewhere if the text is not yet accepted.
+		Keys.onUpPressed: (event) => { event.accepted = textField.activeFocus }
+		Keys.onDownPressed: (event) => { event.accepted = textField.activeFocus }
+
 		Label {
 			id: suffixLabel
 
