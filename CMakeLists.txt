@@ -249,7 +249,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
-    components/ServiceModelLoader.qml
+    components/ServiceModel.qml
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml

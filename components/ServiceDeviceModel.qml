@@ -28,11 +28,7 @@ DeviceModel {
 	}
 
 	readonly property Instantiator _objects: Instantiator {
-		model: modelLoader.item
+		model: ServiceModel { serviceTypes: [root.serviceType] }
 		delegate: root.deviceDelegate
-	}
-
-	readonly property ServiceModelLoader modelLoader: ServiceModelLoader {
-		serviceType: root.serviceType
 	}
 }

@@ -19,11 +19,8 @@ DeviceModel {
 		model: root.serviceTypes
 		delegate: Instantiator {
 			required property string modelData
-			readonly property ServiceModelLoader modelLoader: ServiceModelLoader {
-				serviceType: modelData
-			}
 
-			model: modelLoader.item
+			model: ServiceModel { serviceTypes: [modelData] }
 			delegate: Device {
 				id: device
 				serviceUid: model.uid
