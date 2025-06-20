@@ -14,7 +14,7 @@ Rectangle {
 	property bool showSplashAnimation: Qt.platform.os != "wasm"
 	readonly property bool allPagesLoaded: Global.allPagesLoaded
 
-	color: Theme.color_background_primary
+	color: Theme.color_page_background
 	visible: Global.splashScreenVisible
 
 	onAllPagesLoadedChanged: {
@@ -94,7 +94,7 @@ Rectangle {
 		source: Theme.screenSize === Theme.FiveInch
 				? "qrc:/images/splash-logo-icon-5inch.svg"
 				: "qrc:/images/splash-logo-icon-7inch.svg"
-		color: Theme.color_splash_logo
+		color: Theme.color_splash_logo_icon
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
@@ -116,7 +116,7 @@ Rectangle {
 		source: Theme.screenSize === Theme.FiveInch
 				? "qrc:/images/splash-logo-text-5inch.svg"
 				: "qrc:/images/splash-logo-text-7inch.svg"
-		color: Theme.color_splash_logo
+		color: Theme.color_splash_logo_text
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim
