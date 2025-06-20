@@ -8,7 +8,7 @@
 
 #include "veutil/qt/ve_qitem.hpp"
 
-#include <QtCore/QHash>
+#include <QtCore/QVariantMap>
 
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSEngine>
@@ -38,10 +38,12 @@ class VeQItemMockProducer : public VeQItemProducer
 
 public:
 	VeQItemMockProducer(VeQItem *root, const QString &id, QObject *parent = nullptr);
-	void initialize();
+	bool hasValues() const;
 
 	void setValue(const QString &uid, const QVariant &value);
 	QVariant value(const QString &uid) const;
+	void removeValue(const QString &uid);
+	void removeAllValues();
 
 	VeQItem *createItem() override;
 
@@ -50,11 +52,12 @@ public:
 Q_SIGNALS:
 	void dbusUidChanged();
 	void mqttUidChanged();
+	void hasValuesChanged();
 
 private:
 	static QString normalizedUid(const QString &uid);
 
-	QHash<QString,QVariant> m_values;
+	QVariantMap m_values;
 };
 
 } /* VenusOS */

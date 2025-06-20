@@ -13,11 +13,6 @@ QtObject {
 		Global.mockDataSimulator.setMockValue("com.victronenergy.system" + path, value)
 	}
 
-	function populate() {
-		setMockValue("/SystemState/State", VenusOS.System_State_AbsorptionCharging)
-		setAcLoadPhaseCount(3)
-	}
-
 	function setAcLoadPhaseCount(phaseCount) {
 		setMockValue("/Ac/Consumption/NumberOfPhases", phaseCount)
 		setMockValue("/Ac/ConsumptionOnInput/NumberOfPhases", phaseCount)
@@ -64,7 +59,7 @@ QtObject {
 		running: Global.mockDataSimulator.timersActive && _maximumAcCurrent.valid
 		interval: 2000
 		repeat: true
-		triggeredOnStart: true
+		// triggeredOnStart: true
 
 		onTriggered: {
 			// Use some wild fluctuations that can be seen in the Brief side panel graph
@@ -87,117 +82,12 @@ QtObject {
 
 	readonly property VeQuickItem _input1MaximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
-		Component.onCompleted: setValue(50.1235)    // settings page should show this with precision=1
 	}
-
 	readonly property VeQuickItem _input2MaximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
-		Component.onCompleted: setValue(100.98483)
 	}
-
 	readonly property VeQuickItem _maximumAcCurrent: VeQuickItem {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
-		Component.onCompleted: setValue(20.4455)
 	}
 
-	//--- veBus ---
-
-	readonly property VeQuickItem veBusService: VeQuickItem {
-		uid: Global.system.serviceUid + "/VebusService"
-	}
-
-	property Connections veBusServiceSetup: Connections {
-		target: Global.inverterChargers.veBusDevices
-		function onFirstObjectChanged() {
-			const device = Global.inverterChargers.veBusDevices.firstObject
-			if (device) {
-				// Write uid like "com.victronenergy.vebus.tty0", without "mock/" prefix
-				const uid = device.serviceUid.substring(BackendConnection.uidPrefix().length)
-				root.veBusService.setValue(uid)
-			} else {
-				root.veBusService.setValue("")
-			}
-		}
-	}
-
-	//--- PV data ---
-
-	function _updatePvTotals() {
-		let phaseIndex
-		if (pvInverters.count) {
-			let phaseCount = 0
-			let phasePowers = []
-			let phaseCurrents = []
-			for (let i = 0; i < pvInverters.count; ++i) {
-				const inverter = pvInverters.objectAt(i)
-				if (inverter) {
-					phaseCount = Math.max(phaseCount, inverter.phases.count)
-					for (phaseIndex = 0; phaseIndex < inverter.phases.count; ++phaseIndex) {
-						const phase = inverter.phases.get(phaseIndex)
-						phasePowers[phaseIndex] = Units.sumRealNumbers(phasePowers[phaseIndex], phase.power)
-						phaseCurrents[phaseIndex] = Units.sumRealNumbers(phaseCurrents[phaseIndex], phase.current)
-					}
-				}
-			}
-			// Could set the values on any of PvOnGrid/PvOnGenset/PvOnOutput
-			root.setMockValue("/Ac/PvOnOutput/NumberOfPhases", phaseCount)
-			for (phaseIndex = 0; phaseIndex < phaseCount; ++phaseIndex) {
-				root.setMockValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
-				root.setMockValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
-			}
-			// Reset any other phase values from previous configurations.
-			for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
-				root.setMockValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
-				root.setMockValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
-			}
-		} else {
-			root.setMockValue("/Ac/PvOnOutput/NumberOfPhases", undefined)
-			for (phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
-				root.setMockValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
-				root.setMockValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
-			}
-		}
-
-		let dcPower = NaN
-		if (solarDevices.model.count) {
-			for (let i = 0; i < solarDevices.model.count; ++i) {
-				const charger = solarDevices.model.deviceAt(i)
-				if (charger) {
-					dcPower = Units.sumRealNumbers(dcPower, charger.power)
-				}
-			}
-		}
-		root.setMockValue("/Dc/Pv/Power", dcPower)
-		root.setMockValue("/Dc/Pv/Current", dcPower * 0.01)
-	}
-
-	property Instantiator solarDevices: Instantiator {
-		model: Global.solarInputs.devices
-		delegate: QtObject {
-			readonly property real power: modelData.power
-			onPowerChanged: Qt.callLater(root._updatePvTotals)
-		}
-		onCountChanged: Qt.callLater(root._updatePvTotals)
-	}
-
-	property Instantiator pvInverters: Instantiator {
-		model: Global.solarInputs.pvInverterDevices
-		delegate: QtObject {
-			readonly property real power: modelData.power
-			readonly property var phases: modelData.phases
-			onPowerChanged: Qt.callLater(root._updatePvTotals)
-		}
-		onCountChanged: Qt.callLater(root._updatePvTotals)
-	}
-
-	readonly property VeQuickItem _maximumPvPower: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
-		Component.onCompleted: setValue(1000)
-	}
-
-	//---
-
-	Component.onCompleted: {
-		populate()
-	}
 }

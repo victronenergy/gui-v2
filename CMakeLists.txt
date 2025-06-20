@@ -742,6 +742,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/frameratemodel.cpp
     src/keyeventfilter.h
     src/keyeventfilter.cpp
+    src/mockmanager.h
+    src/mockmanager.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
@@ -865,6 +867,11 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/HeatPumpsImpl.qml
     data/mock/MeteoDevicesImpl.qml
     data/mock/MockDataManager.qml
+    data/mock/MockSetup.qml
+    data/mock/MockSetupBatteries.qml
+    data/mock/MockSetupDevices.qml
+    data/mock/MockSetupGaugeAutoRange.qml
+    data/mock/MockSetupTemperature.qml
     data/mock/MotorDrivesImpl.qml
     data/mock/NotificationsImpl.qml
     data/mock/PulseMetersImpl.qml
@@ -903,6 +910,35 @@ if (${LOAD_QML_FROM_FILESYSTEM})
         VERBATIM
     )
 endif()
+qt_add_resources(VictronMock "VictronMock_resources"
+    FILES
+        data/mock/conf/default.json
+        data/mock/conf/full.json
+        data/mock/conf/setup-common.json
+        data/mock/conf/services/alternator.json
+        data/mock/conf/services/battery-bms.json
+        data/mock/conf/services/battery-lynxparallel.json
+        data/mock/conf/services/battery-smartshunt.json
+        data/mock/conf/services/dcsource-wind.json
+        data/mock/conf/services/ess.json
+        data/mock/conf/services/generator.json
+        data/mock/conf/services/solarcharger-mppt.json
+        data/mock/conf/services/tank-diesel1.json
+        data/mock/conf/services/tank-diesel2.json
+        data/mock/conf/services/tank-diesel3.json
+        data/mock/conf/services/tank-greywater.json
+        data/mock/conf/services/tank-lpg.json
+        data/mock/conf/services/tank-water1.json
+        data/mock/conf/services/tank-water2.json
+        data/mock/conf/services/tank-water3.json
+        data/mock/conf/services/tank-water4.json
+        data/mock/conf/services/temperature-freezer.json
+        data/mock/conf/services/temperature-fridge.json
+        data/mock/conf/services/temperature-salon.json
+        data/mock/conf/services/temperature-watertank.json
+        data/mock/conf/services/pvinverter-fronius.json
+        data/mock/conf/services/vebus-quattro.json
+)
 # end Mock_QML_MODULE
 
 # Gauges_QML_MODULE

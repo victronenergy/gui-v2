@@ -370,7 +370,7 @@ QtObject {
 				_chargeState.setValue(VenusOS.VeBusDevice_ChargeState_InitializingCharger)
 				_setChargeState.setValue(VenusOS.VeBusDevice_ChargeState_InitializingCharger)
 				_redetectSystem.setValue(0)
-				_l2L1OutSummed.setValue(1)
+				_l2L1OutSummed.setValue(0)
 				_ignoreAcIn1.setValue(0)
 				_ignoreAcIn2.setValue(0)
 				_waitingForRelayTest.setValue(0)

@@ -6,6 +6,7 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
+#include "src/mockmanager.h"
 #include "src/frameratemodel.h"
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -146,8 +147,14 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(skipSplash);
 
 	QCommandLineOption mockMode({ "k", "mock" },
-		QGuiApplication::tr("Use mock data source for testing."));
+		QGuiApplication::tr("Use mock data source for testing"));
 	parser.addOption(mockMode);
+
+	QCommandLineOption mockConfig({ "mc", "mock-conf" },
+		QGuiApplication::tr("Name of mock configuration"),
+		QGuiApplication::tr("mockConfig", "Configuration name"));
+	mockConfig.setDefaultValue("default");
+	parser.addOption(mockConfig);
 
 	parser.process(*QCoreApplication::instance());
 
@@ -183,6 +190,8 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(parser.value(mqttPortalId)));
 	} else if (parser.isSet(mockMode)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
+		const QString configName = parser.value(mockConfig);
+		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
 	} else {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 		backend->setUsername(queryMqttUser);

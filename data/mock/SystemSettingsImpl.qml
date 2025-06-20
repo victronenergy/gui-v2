@@ -166,7 +166,6 @@ QtObject {
 		//systemReason.userChargeLimited.setValue(1)
 		//systemReason.userDischargeLimited.setValue(1)
 
-		setMockSystemValue("SystemType", "ESS")
 		setMockSystemValue("Hub", 4)
 		setMockSettingValue("CGwacs/AcPowerSetPoint", 50)
 		setMockSettingValue("CGwacs/BatteryLife/DischargedTime", 0)

@@ -9,7 +9,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property bool timersActive: !Global.splashScreenVisible && !MockManager.hasValues
+	property bool timersActive
 	property int deviceCount
 	property bool levelsEnabled: true
 	property bool animationEnabled: true

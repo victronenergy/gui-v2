@@ -10,16 +10,27 @@ import Victron.Mock
 QtObject {
 	id: root
 
-	property var _mockDataSources
-
 	property MockDataSimulator mockDataSimulator: MockDataSimulator {
 		Component.onCompleted: {
 			Global.mockDataSimulator = mockDataSimulator
-			_mockDataSources = mockDataSourceComponent.createObject(root)
+			implComponent.createObject(root)
+
+			// If the default configuration has been loaded, then also load the implementations
+			// which dynamically create their own mock values.
+			if (MockManager.lastConfiguration.indexOf("/default.json") >= 0) {
+				legacyImplComponent.createObject(root)
+				mockDataSimulator.timersActive = true
+			}
 		}
 	}
 
-	property Component mockDataSourceComponent: Component {
+	property Component implComponent: Component {
+		QtObject {
+			property var setup: MockSetup {}
+		}
+	}
+
+	property Component legacyImplComponent: Component {
 		QtObject {
 			property var acSystemDevices: AcSystemDevicesImpl { }
 			property var acInputs: AcInputsImpl {}

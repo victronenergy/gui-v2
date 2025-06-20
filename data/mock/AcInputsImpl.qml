@@ -131,7 +131,7 @@ QtObject {
 			readonly property string vebusServiceUid: Global.system.veBus.serviceUid
 			onVebusServiceUidChanged: {
 				if (modelData.serviceType === "vebus") {
-					inputInfo._serviceName.setValue(vebusServiceUid.substr(6))
+					inputInfo._serviceName.setValue(vebusServiceUid.substr(BackendConnection.uidPrefix().length + 1))
 				}
 			}
 

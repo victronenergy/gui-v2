@@ -1,0 +1,21 @@
+{
+    "description": "Default configuration for mock mode",
+    "files": [
+        ":/data/mock/conf/services/ess.json",
+        ":/data/mock/conf/services/pvinverter-fronius.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.system": {
+            "/ActiveBatteryService": "com.victronenergy.battery/1"
+        },
+        "com.victronenergy.settings": {
+            "/Settings/Gui2/BriefView/Level/0": "com.victronenergy.battery/1:1",
+            "/Settings/Gui2/BriefView/Level/1": "com.victronenergy.tank/0",
+            "/Settings/Gui2/BriefView/Level/2": "1",
+            "/Settings/SystemSetup/AcInput1": 1,
+            "/Settings/SystemSetup/AcInput2": 2,
+            "/Settings/SystemSetup/HasDcSystem": 1
+        }
+    }
+}

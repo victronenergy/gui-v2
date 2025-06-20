@@ -17,7 +17,7 @@ QtObject {
 			serviceUid: "mock/com.victronenergy.heatpump.ttyUSB" + deviceInstanceNum,
 			deviceInstance: deviceInstanceNum,
 		})
-		BackendConnection.setMockValue(heatPump.serviceUid + "/Position", position)
+		MockManager.setValue(heatPump.serviceUid + "/Position", position)
 	}
 
 	property Component heatPumpComponent: Component {
@@ -26,9 +26,9 @@ QtObject {
 				_deviceInstance.setValue(deviceInstance)
 				_customName.setValue("Heat Pump %1".arg(deviceInstance))
 				_productId.setValue(0x01) // set a non-empty value so that PageAcIn.qml shows some content
-				BackendConnection.setMockValue(serviceUid + "/Ac/Power", Math.random() * 100)
-				BackendConnection.setMockValue(serviceUid + "/AllowedRoles", Global.acInputs.roles.map((r) => { return r.role }))
-				BackendConnection.setMockValue(serviceUid + "/Role", "heatpump")
+				MockManager.setValue(serviceUid + "/Ac/Power", Math.random() * 100)
+				MockManager.setValue(serviceUid + "/AllowedRoles", Global.acInputs.roles.map((r) => { return r.role }))
+				MockManager.setValue(serviceUid + "/Role", "heatpump")
 			}
 		}
 	}

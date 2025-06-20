@@ -1,0 +1,20 @@
+{
+    "com.victronenergy.temperature.adc_builtin0_8": {
+        "/Connected": 1,
+        "/CustomName": "Freezer",
+        "/DeviceInstance": 24,
+        "/FilterLength": 10,
+        "/Mgmt/Connection": "Temperature input 1",
+        "/Mgmt/ProcessName": "dbus-adc",
+        "/Mgmt/ProcessVersion": "1.32",
+        "/Offset": 0.0,
+        "/ProductId": 41314,
+        "/ProductName": "Generic Temperature Input",
+        "/RawUnit": "V",
+        "/RawValue": 2.930032968521118,
+        "/Scale": 1.0,
+        "/Status": 0,
+        "/Temperature": -18,
+        "/TemperatureType": 6
+    }
+}

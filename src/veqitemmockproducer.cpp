@@ -29,31 +29,9 @@ VeQItemMockProducer::VeQItemMockProducer(VeQItem *root, const QString &id, QObje
 {
 }
 
-void VeQItemMockProducer::initialize()
+bool VeQItemMockProducer::hasValues() const
 {
-	// Initialize mock values that should be present before the app is started.
-
-	const QString systemSettingUid = QStringLiteral("com.victronenergy.settings/Settings/System/%1");
-	const QString guiSettingUid = QStringLiteral("com.victronenergy.settings/Settings/Gui/%1");
-
-	setValue(systemSettingUid.arg("AccessLevel"), Enums::User_AccessType_Service);
-	setValue(systemSettingUid.arg("VolumeUnit"), 1);    // 1 = Liter
-	setValue(systemSettingUid.arg("Units/Temperature"), QStringLiteral("celsius"));
-
-	setValue(guiSettingUid.arg("ColorScheme"), Theme::Light);
-	setValue(guiSettingUid.arg("ElectricalPowerIndicator"), 0); // 0 = watts, 1 = amps
-	setValue(guiSettingUid.arg("BriefView/Unit"), Enums::BriefView_Unit_Percentage);
-
-	static const QMap<int, QVariant> defaultLevels = {
-		{ 0, Enums::Tank_Type_Battery },
-		{ 1, Enums::Tank_Type_Fuel },
-		{ 2, Enums::Tank_Type_FreshWater },
-		{ 3, Enums::Tank_Type_BlackWater },
-	};
-	for (int i = 0; i < 4; ++i) {
-		const QString uid = guiSettingUid.arg("BriefView/Level/%1").arg(QString::number(i));
-		setValue(uid, defaultLevels[i]);
-	}
+	return !m_values.isEmpty();
 }
 
 void VeQItemMockProducer::setValue(const QString &uid, const QVariant &value)
@@ -68,6 +46,33 @@ void VeQItemMockProducer::setValue(const QString &uid, const QVariant &value)
 QVariant VeQItemMockProducer::value(const QString &uid) const
 {
 	return m_values.value(normalizedUid(uid));
+}
+
+void VeQItemMockProducer::removeValue(const QString &uid)
+{
+	if (m_values.remove(uid)) {
+		if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGet(uid))) {
+			item->itemDelete();
+		}
+		if (m_values.isEmpty()) {
+			Q_EMIT hasValuesChanged();
+		}
+	}
+}
+
+void VeQItemMockProducer::removeAllValues()
+{
+	if (m_values.isEmpty()) {
+		return;
+	}
+
+	for (auto it = m_values.constBegin(); it != m_values.constEnd(); ++it) {
+		if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGet(it.key()))) {
+			item->itemDelete();
+		}
+	}
+	m_values.clear();
+	Q_EMIT hasValuesChanged();
 }
 
 VeQItem *VeQItemMockProducer::createItem()
