@@ -876,11 +876,11 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/TanksImpl.qml
     data/mock/UnsupportedDevicesImpl.qml
     data/mock/InverterChargersImpl.qml
-    data/mock/config/BoatPageConfig.qml
-    data/mock/config/BriefAndOverviewPageConfig.qml
-    data/mock/config/LevelsPageConfig.qml
-    data/mock/config/MockDataSimulator.qml
-    data/mock/config/NotificationsPageConfig.qml
+    data/mock/page-conf/BoatPageConfig.qml
+    data/mock/page-conf/BriefAndOverviewPageConfig.qml
+    data/mock/page-conf/LevelsPageConfig.qml
+    data/mock/page-conf/MockDataSimulator.qml
+    data/mock/page-conf/NotificationsPageConfig.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mock_QML_MODULE_SOURCES})

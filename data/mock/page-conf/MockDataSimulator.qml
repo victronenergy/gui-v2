@@ -9,7 +9,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property bool timersActive: !Global.splashScreenVisible
+	property bool timersActive: !Global.splashScreenVisible && !MockManager.hasValues
 	property int deviceCount
 	property bool levelsEnabled: true
 	property bool animationEnabled: true
@@ -35,11 +35,11 @@ QtObject {
 	})
 
 	function setMockValue(uid, value) {
-		BackendConnection.setMockValue(uid, value)
+		MockManager.setValue(uid, value)
 	}
 
 	function mockValue(uid) {
-		return BackendConnection.mockValue(uid)
+		return MockManager.value(uid)
 	}
 
 	function setConfigIndex(pageConfig, configIndex) {
