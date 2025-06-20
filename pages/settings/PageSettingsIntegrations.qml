@@ -28,6 +28,11 @@ Page {
 			SettingsListHeader { }
 			*/
 
+			SettingsListHeader {
+				//% "Device Integrations"
+				text: qsTrId("pagesettingsintegrations_device_integrations")
+			}
+
 			ListNavigation {
 				//% "PV Inverters"
 				text: qsTrId("pagesettingsintegrations_pv_inverters")
@@ -206,44 +211,19 @@ Page {
 				visible: signalk.preferredVisible || nodeRed.preferredVisible
 			}
 
-			PrimaryListLabel {
-				//% "Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions."
-				text: qsTrId("settings_large_features_not_offically_supported")
-				preferredVisible: osLargeFeatures.visible
-			}
-
-			ListLink {
-				//% "Documentation"
-				text: qsTrId("settings_large_documentation")
-				url: "https://ve3.nl/vol"
-				preferredVisible: osLargeFeatures.visible
-			}
-
-			ListLink {
-				//% "Victron Community"
-				text: qsTrId("settings_large_victron_community")
-				url: "https://community.victronenergy.com"
-				preferredVisible: osLargeFeatures.visible
-			}
-
-			SettingsListHeader {
-				preferredVisible: osLargeFeatures.visible
-			}
-
-			ListSwitch {
+			ListNavigation {
 				id: signalk
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
-				preferredVisible: dataItem.valid
-			}
+				secondaryText: signalkItem.valid && signalkItem.value ? CommonWords.enabled : CommonWords.disabled
+				preferredVisible: signalkItem.valid
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSignalK.qml", {"title": text })
 
-			ListLink {
-				//% "Access Signal K locally or via VRM"
-				text: qsTrId("settings_large_access_signal_k")
-				url: "http://venus.local:3000"
-				preferredVisible: signalk.checked
+				VeQuickItem {
+					id: signalkItem
+					uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				}
 			}
 
 			ListNavigation {
@@ -272,6 +252,20 @@ Page {
 					id: nodeRedModeItem
 					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 				}
+			}
+
+			ListLink {
+				//% "Venus OS Large Documentation"
+				text: qsTrId("settings_venusos_large_documentation")
+				url: "https://ve3.nl/vol"
+				preferredVisible: osLargeFeatures.visible
+			}
+
+			ListLink {
+				//% "Victron Community"
+				text: qsTrId("settings_large_victron_community")
+				url: "https://community.victronenergy.com"
+				preferredVisible: osLargeFeatures.visible
 			}
 		}
 	}
