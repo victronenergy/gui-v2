@@ -151,8 +151,8 @@ CT.SpinBox {
 
 		// Shows a highlight box around the text when key navigation is enabled and the SpinBox is
 		// in navigation mode.
-		KeyNavigationHighlightAttached.active: keyNavigationHighlightVisible
-		KeyNavigationHighlightAttached.fill: editHighlightArea
+		KeyNavigationHighlight.active: keyNavigationHighlightVisible
+		KeyNavigationHighlight.fill: editHighlightArea
 
 		Column {
 			id: valueColumn
@@ -304,7 +304,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlightAttached.active: activeFocus
+		KeyNavigationHighlight.active: activeFocus
 
 		Image {
 			anchors.centerIn: parent
@@ -338,7 +338,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlightAttached.active: activeFocus
+		KeyNavigationHighlight.active: activeFocus
 
 		Image {
 			anchors.centerIn: parent

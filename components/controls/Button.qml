@@ -70,5 +70,5 @@ CT.Button {
 		color: root.color
 	}
 
-	KeyNavigationHighlightAttached.active: root.activeFocus
+	KeyNavigationHighlight.active: root.activeFocus
 }

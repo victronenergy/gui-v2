@@ -80,11 +80,11 @@ CT.Switch {
 		}
 	}
 
-	KeyNavigationHighlightAttached.active: root.activeFocus
-	KeyNavigationHighlightAttached.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-	KeyNavigationHighlightAttached.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-	KeyNavigationHighlightAttached.topMargin: -Theme.geometry_listItem_content_verticalMargin
-	KeyNavigationHighlightAttached.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+	KeyNavigationHighlight.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+	KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_verticalMargin
+	KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
 
 	// Don't animate the value change when setting the value on initial load
 	Component.onCompleted: valueChangeBehavior.enabled = true

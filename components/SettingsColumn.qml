@@ -20,7 +20,7 @@ BaseListItem {
 	implicitWidth: contentColumn.implicitWidth
 	implicitHeight: contentColumn.implicitHeight
 	background.visible: false
-	KeyNavigationHighlightAttached.active: false
+	KeyNavigationHighlight.active: false
 
 	Keys.onUpPressed: (event) => event.accepted = keyNavHelper.focusPreviousItem()
 	Keys.onDownPressed: (event) => event.accepted = keyNavHelper.focusNextItem()

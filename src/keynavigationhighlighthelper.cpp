@@ -22,27 +22,27 @@ void KeyNavigationHighlightHelper::setActiveFocusItem(QQuickItem *activeFocusIte
 
 	// disconnect from the previous attached object's signals (if there was one)
 	if(m_attached) {
-		disconnect(m_attached, &KeyNavigationHighlightAttached::activeChanged, this, &KeyNavigationHighlightHelper::updateActive);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::fillChanged, this, &KeyNavigationHighlightHelper::updateFill);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::marginsChanged, this, &KeyNavigationHighlightHelper::updateMargins);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::leftMarginChanged, this, &KeyNavigationHighlightHelper::updateLeftMargin);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::rightMarginChanged, this, &KeyNavigationHighlightHelper::updateRightMargin);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::topMarginChanged, this, &KeyNavigationHighlightHelper::updateTopMargin);
-		disconnect(m_attached, &KeyNavigationHighlightAttached::bottomMarginChanged, this, &KeyNavigationHighlightHelper::updateBottomMargin);
+		disconnect(m_attached, &KeyNavigationHighlight::activeChanged, this, &KeyNavigationHighlightHelper::updateActive);
+		disconnect(m_attached, &KeyNavigationHighlight::fillChanged, this, &KeyNavigationHighlightHelper::updateFill);
+		disconnect(m_attached, &KeyNavigationHighlight::marginsChanged, this, &KeyNavigationHighlightHelper::updateMargins);
+		disconnect(m_attached, &KeyNavigationHighlight::leftMarginChanged, this, &KeyNavigationHighlightHelper::updateLeftMargin);
+		disconnect(m_attached, &KeyNavigationHighlight::rightMarginChanged, this, &KeyNavigationHighlightHelper::updateRightMargin);
+		disconnect(m_attached, &KeyNavigationHighlight::topMarginChanged, this, &KeyNavigationHighlightHelper::updateTopMargin);
+		disconnect(m_attached, &KeyNavigationHighlight::bottomMarginChanged, this, &KeyNavigationHighlightHelper::updateBottomMargin);
 	}
 
 	// find the new attached object (if there is one)
-	m_attached = qobject_cast<KeyNavigationHighlightAttached*>(qmlAttachedPropertiesObject<KeyNavigationHighlightAttached>(activeFocusItem, false));
+	m_attached = qobject_cast<KeyNavigationHighlight*>(qmlAttachedPropertiesObject<KeyNavigationHighlight>(activeFocusItem, false));
 
 	// find a new one and connect to its signals
 	if(m_attached) {
-		connect(m_attached, &KeyNavigationHighlightAttached::activeChanged, this, &KeyNavigationHighlightHelper::updateActive);
-		connect(m_attached, &KeyNavigationHighlightAttached::fillChanged, this, &KeyNavigationHighlightHelper::updateFill);
-		connect(m_attached, &KeyNavigationHighlightAttached::marginsChanged, this, &KeyNavigationHighlightHelper::updateMargins);
-		connect(m_attached, &KeyNavigationHighlightAttached::leftMarginChanged, this, &KeyNavigationHighlightHelper::updateLeftMargin);
-		connect(m_attached, &KeyNavigationHighlightAttached::rightMarginChanged, this, &KeyNavigationHighlightHelper::updateRightMargin);
-		connect(m_attached, &KeyNavigationHighlightAttached::topMarginChanged, this, &KeyNavigationHighlightHelper::updateTopMargin);
-		connect(m_attached, &KeyNavigationHighlightAttached::bottomMarginChanged, this, &KeyNavigationHighlightHelper::updateBottomMargin);
+		connect(m_attached, &KeyNavigationHighlight::activeChanged, this, &KeyNavigationHighlightHelper::updateActive);
+		connect(m_attached, &KeyNavigationHighlight::fillChanged, this, &KeyNavigationHighlightHelper::updateFill);
+		connect(m_attached, &KeyNavigationHighlight::marginsChanged, this, &KeyNavigationHighlightHelper::updateMargins);
+		connect(m_attached, &KeyNavigationHighlight::leftMarginChanged, this, &KeyNavigationHighlightHelper::updateLeftMargin);
+		connect(m_attached, &KeyNavigationHighlight::rightMarginChanged, this, &KeyNavigationHighlightHelper::updateRightMargin);
+		connect(m_attached, &KeyNavigationHighlight::topMarginChanged, this, &KeyNavigationHighlightHelper::updateTopMargin);
+		connect(m_attached, &KeyNavigationHighlight::bottomMarginChanged, this, &KeyNavigationHighlightHelper::updateBottomMargin);
 	}
 
 	// call the updatedate functions immediately.

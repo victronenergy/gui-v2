@@ -109,7 +109,7 @@ Rectangle {
 
 	Keys.onSpacePressed: clicked()
 	Keys.enabled: Global.keyNavigationEnabled
-	KeyNavigationHighlightAttached.active: root.activeFocus
+	KeyNavigationHighlight.active: root.activeFocus
 
 	Item {
 		id: header

@@ -1,22 +1,22 @@
-#include "keynavigationhighlightattached.h"
+#include "keynavigationhighlight.h"
 
-KeyNavigationHighlightAttached::KeyNavigationHighlightAttached(QObject *parent) :
+KeyNavigationHighlight::KeyNavigationHighlight(QObject *parent) :
 	QObject{parent}
 {
 
 }
 
-KeyNavigationHighlightAttached *KeyNavigationHighlightAttached::qmlAttachedProperties(QObject *object)
+KeyNavigationHighlight *KeyNavigationHighlight::qmlAttachedProperties(QObject *object)
 {
-	return new KeyNavigationHighlightAttached(object);
+	return new KeyNavigationHighlight(object);
 }
 
-bool KeyNavigationHighlightAttached::active() const
+bool KeyNavigationHighlight::active() const
 {
 	return m_active;
 }
 
-void KeyNavigationHighlightAttached::setActive(bool active)
+void KeyNavigationHighlight::setActive(bool active)
 {
 	if (m_active == active) {
 		return;
@@ -25,12 +25,12 @@ void KeyNavigationHighlightAttached::setActive(bool active)
 	emit activeChanged();
 }
 
-QQuickItem *KeyNavigationHighlightAttached::fill() const
+QQuickItem *KeyNavigationHighlight::fill() const
 {
 	return m_fill;
 }
 
-void KeyNavigationHighlightAttached::setFill(QQuickItem *fill)
+void KeyNavigationHighlight::setFill(QQuickItem *fill)
 {
 	if (m_fill == fill)
 		return;
@@ -39,12 +39,12 @@ void KeyNavigationHighlightAttached::setFill(QQuickItem *fill)
 }
 
 
-int KeyNavigationHighlightAttached::leftMargin() const
+int KeyNavigationHighlight::leftMargin() const
 {
 	return m_hasLeftMargin ? m_leftMargin : m_margins;
 }
 
-void KeyNavigationHighlightAttached::setLeftMargin(int leftMargin)
+void KeyNavigationHighlight::setLeftMargin(int leftMargin)
 {
 	m_hasLeftMargin = true;
 
@@ -55,18 +55,18 @@ void KeyNavigationHighlightAttached::setLeftMargin(int leftMargin)
 	emit leftMarginChanged();
 }
 
-void KeyNavigationHighlightAttached::resetLeftMargin()
+void KeyNavigationHighlight::resetLeftMargin()
 {
 	m_hasLeftMargin = false;
 	emit leftMarginChanged();
 }
 
-int KeyNavigationHighlightAttached::rightMargin() const
+int KeyNavigationHighlight::rightMargin() const
 {
 	return m_hasRightMargin ? m_rightMargin : m_margins;
 }
 
-void KeyNavigationHighlightAttached::setRightMargin(int rightMargin)
+void KeyNavigationHighlight::setRightMargin(int rightMargin)
 {
 	m_hasRightMargin = true;
 
@@ -77,18 +77,18 @@ void KeyNavigationHighlightAttached::setRightMargin(int rightMargin)
 	emit rightMarginChanged();
 }
 
-void KeyNavigationHighlightAttached::resetRightMargin()
+void KeyNavigationHighlight::resetRightMargin()
 {
 	m_hasRightMargin = false;
 	emit rightMarginChanged();
 }
 
-int KeyNavigationHighlightAttached::topMargin() const
+int KeyNavigationHighlight::topMargin() const
 {
 	return m_hasTopMargin ? m_topMargin : m_margins;
 }
 
-void KeyNavigationHighlightAttached::setTopMargin(int topMargin)
+void KeyNavigationHighlight::setTopMargin(int topMargin)
 {
 	m_hasTopMargin = true;
 
@@ -99,18 +99,18 @@ void KeyNavigationHighlightAttached::setTopMargin(int topMargin)
 	emit topMarginChanged();
 }
 
-void KeyNavigationHighlightAttached::resetTopMargin()
+void KeyNavigationHighlight::resetTopMargin()
 {
 	m_hasTopMargin = false;
 	emit topMarginChanged();
 }
 
-int KeyNavigationHighlightAttached::bottomMargin() const
+int KeyNavigationHighlight::bottomMargin() const
 {
 	return m_hasBottomMargin ? m_bottomMargin : m_margins;
 }
 
-void KeyNavigationHighlightAttached::setBottomMargin(int bottomMargin)
+void KeyNavigationHighlight::setBottomMargin(int bottomMargin)
 {
 	m_hasBottomMargin = true;
 
@@ -121,18 +121,18 @@ void KeyNavigationHighlightAttached::setBottomMargin(int bottomMargin)
 	emit bottomMarginChanged();
 }
 
-void KeyNavigationHighlightAttached::resetBottomMargin()
+void KeyNavigationHighlight::resetBottomMargin()
 {
 	m_hasBottomMargin = false;
 	emit bottomMarginChanged();
 }
 
-int KeyNavigationHighlightAttached::margins() const
+int KeyNavigationHighlight::margins() const
 {
 	return m_margins;
 }
 
-void KeyNavigationHighlightAttached::setMargins(int margins)
+void KeyNavigationHighlight::setMargins(int margins)
 {
 	if (m_margins == margins) {
 		return;

@@ -15,7 +15,7 @@ BaseListItem {
 
 	implicitWidth: Theme.geometry_controlCard_maximumWidth
 	implicitHeight: parent ? parent.height : 0
-	KeyNavigationHighlightAttached.active: false
+	KeyNavigationHighlight.active: false
 
 	CP.ColorImage {
 		id: icon

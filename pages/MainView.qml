@@ -179,11 +179,11 @@ FocusScope {
 			}
 			Keys.enabled: Global.keyNavigationEnabled
 			KeyNavigation.down: navBar
-			KeyNavigationHighlightAttached.active: swipeViewLoader.blockItemFocus
-												   && swipeViewLoader.activeFocus
-												   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			KeyNavigationHighlightAttached.leftMargin: Theme.geometry_page_content_horizontalMargin
-			KeyNavigationHighlightAttached.rightMargin: Theme.geometry_page_content_horizontalMargin
+			KeyNavigationHighlight.active: swipeViewLoader.blockItemFocus
+										   && swipeViewLoader.activeFocus
+										   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			KeyNavigationHighlight.leftMargin: Theme.geometry_page_content_horizontalMargin
+			KeyNavigationHighlight.rightMargin: Theme.geometry_page_content_horizontalMargin
 
 			Component {
 				id: swipeViewComponent

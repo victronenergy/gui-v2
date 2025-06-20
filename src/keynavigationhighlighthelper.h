@@ -3,7 +3,7 @@
 
 #include <QQuickItem>
 #include <QtQmlIntegration/qqmlintegration.h>
-#include "keynavigationhighlightattached.h"
+#include "keynavigationhighlight.h"
 
 class KeyNavigationHighlightHelper : public QObject
 {
@@ -62,7 +62,7 @@ private:
 	void updateTopMargin();
 	void updateBottomMargin();
 
-	KeyNavigationHighlightAttached * m_attached { nullptr };
+	KeyNavigationHighlight * m_attached { nullptr };
 	QQuickItem *m_activeFocusItem { nullptr };
 	bool m_active { false };
 	QQuickItem *m_fill { nullptr };

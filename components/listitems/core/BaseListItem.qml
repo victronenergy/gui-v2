@@ -32,7 +32,7 @@ FocusScope {
 	// TODO from Qt 6.7 can change this to set focusPolicy instead.
 	activeFocusOnTab: true
 
-	KeyNavigationHighlightAttached.active: root.activeFocus
+	KeyNavigationHighlight.active: root.activeFocus
 
 	ListItemBackground {
 		id: backgroundRect

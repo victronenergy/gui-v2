@@ -200,7 +200,7 @@ FocusScope {
 				Keys.onSpacePressed: openHistoryDialog()
 				Keys.enabled: Global.keyNavigationEnabled
 				KeyNavigation.right: barRepeater.itemAt((model.index + 1) % barRepeater.count)
-				KeyNavigationHighlightAttached.active: barMouseArea.activeFocus
+				KeyNavigationHighlight.active: barMouseArea.activeFocus
 
 				Rectangle {
 					id: coloredBar

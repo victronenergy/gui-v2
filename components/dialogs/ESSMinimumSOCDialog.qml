@@ -49,11 +49,11 @@ ModalDialog {
 				focus: true
 				onMoved: root.minimumStateOfCharge = value
 
-				KeyNavigationHighlightAttached.active: slider.activeFocus
-				KeyNavigationHighlightAttached.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-				KeyNavigationHighlightAttached.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-				KeyNavigationHighlightAttached.topMargin: -Theme.geometry_listItem_content_verticalMargin
-				KeyNavigationHighlightAttached.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+				KeyNavigationHighlight.active: slider.activeFocus
+				KeyNavigationHighlight.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+				KeyNavigationHighlight.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+				KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_verticalMargin
+				KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
 			}
 
 			Item {

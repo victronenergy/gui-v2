@@ -56,7 +56,7 @@ CT.ComboBox {
 			}
 		}
 
-		KeyNavigationHighlightAttached.active: ListView.isCurrentItem
+		KeyNavigationHighlight.active: ListView.isCurrentItem
 	}
 
 	indicator: CP.ColorImage {
@@ -118,5 +118,5 @@ CT.ComboBox {
 		onOpenedChanged: Qt.callLater(_updateVisibility)
 	}
 
-	KeyNavigationHighlightAttached.active: root.activeFocus
+	KeyNavigationHighlight.active: root.activeFocus
 }

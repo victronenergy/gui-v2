@@ -32,8 +32,8 @@ FocusScope {
 	Keys.enabled: Global.keyNavigationEnabled
 	// When the row is focused but none of its individual items are focused/highlighted, then
 	// highlight the row as a whole.
-	KeyNavigationHighlightAttached.active: root.currentIndex < 0 && root.activeFocus
-	KeyNavigationHighlightAttached.fill: buttonRow
+	KeyNavigationHighlight.active: root.currentIndex < 0 && root.activeFocus
+	KeyNavigationHighlight.fill: buttonRow
 
 	Row {
 		id: buttonRow
@@ -99,7 +99,7 @@ FocusScope {
 					return null
 				}
 
-				KeyNavigationHighlightAttached.active: mouseArea.activeFocus
+				KeyNavigationHighlight.active: mouseArea.activeFocus
 
 				onClicked: {
 					root.buttonClicked(model.index)

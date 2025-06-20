@@ -1,18 +1,16 @@
-#ifndef KEYNAVIGATIONHIGHLIGHTATTACHED_H
-#define KEYNAVIGATIONHIGHLIGHTATTACHED_H
+#ifndef KEYNAVIGATIONHIGHLIGHT_H
+#define KEYNAVIGATIONHIGHLIGHT_H
 
 #include <QQuickItem>
 #include <QtQmlIntegration/qqmlintegration.h>
 
-class KeyNavigationHighlightAttached : public QObject
+class KeyNavigationHighlight : public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
 
-	// TODO: rename to KeyNavigationHighlight
-
-	QML_ATTACHED(KeyNavigationHighlightAttached)
-	QML_UNCREATABLE("KeyNavigationHighlightAttached is an attached object and is not creatable")
+	QML_ATTACHED(KeyNavigationHighlight)
+	QML_UNCREATABLE("KeyNavigationHighlight is an attached object and is not creatable")
 
 	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 	Q_PROPERTY(QQuickItem* fill READ fill WRITE setFill NOTIFY fillChanged FINAL)
@@ -23,9 +21,9 @@ class KeyNavigationHighlightAttached : public QObject
 	Q_PROPERTY(int margins READ margins WRITE setMargins NOTIFY marginsChanged FINAL)
 
 public:
-	explicit KeyNavigationHighlightAttached(QObject *parent = nullptr);
+	explicit KeyNavigationHighlight(QObject *parent = nullptr);
 
-	static KeyNavigationHighlightAttached *qmlAttachedProperties(QObject *object);
+	static KeyNavigationHighlight *qmlAttachedProperties(QObject *object);
 
 	bool active() const;
 	void setActive(bool active);
@@ -78,4 +76,4 @@ private:
 	bool m_hasBottomMargin { false };
 };
 
-#endif // KEYNAVIGATIONHIGHLIGHTATTACHED_H
+#endif // KEYNAVIGATIONHIGHLIGHT_H
