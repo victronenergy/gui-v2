@@ -30,13 +30,10 @@ FocusScope {
 		}
 	}
 	Keys.enabled: Global.keyNavigationEnabled
-
 	// When the row is focused but none of its individual items are focused/highlighted, then
 	// highlight the row as a whole.
-	KeyNavigationHighlight {
-		anchors.fill: buttonRow
-		active: root.currentIndex < 0 && parent.activeFocus
-	}
+	KeyNavigationHighlight.active: root.currentIndex < 0 && root.activeFocus
+	KeyNavigationHighlight.fill: buttonRow
 
 	Row {
 		id: buttonRow
@@ -72,10 +69,6 @@ FocusScope {
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
 
-					KeyNavigationHighlight {
-						anchors.fill: parent
-						active: mouseArea.activeFocus
-					}
 				}
 				contentItem: Label {
 					anchors.centerIn: mouseArea
@@ -105,6 +98,8 @@ FocusScope {
 					}
 					return null
 				}
+
+				KeyNavigationHighlight.active: mouseArea.activeFocus
 
 				onClicked: {
 					root.buttonClicked(model.index)

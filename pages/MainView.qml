@@ -176,6 +176,11 @@ FocusScope {
 			}
 			Keys.enabled: Global.keyNavigationEnabled
 			KeyNavigation.down: navBar
+			KeyNavigationHighlight.active: swipeViewLoader.blockItemFocus
+										   && swipeViewLoader.activeFocus
+										   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			KeyNavigationHighlight.leftMargin: Theme.geometry_page_content_horizontalMargin
+			KeyNavigationHighlight.rightMargin: Theme.geometry_page_content_horizontalMargin
 
 			Component {
 				id: swipeViewComponent
@@ -195,17 +200,6 @@ FocusScope {
 			SwipePageModel {
 				id: swipePageModel
 				view: swipeView
-			}
-
-			KeyNavigationHighlight {
-				anchors {
-					fill: parent
-					leftMargin: Theme.geometry_page_content_horizontalMargin
-					rightMargin: Theme.geometry_page_content_horizontalMargin
-				}
-				active: swipeViewLoader.blockItemFocus
-					&& swipeViewLoader.activeFocus
-					&& root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			}
 		}
 
@@ -450,6 +444,10 @@ FocusScope {
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
 				: pageStack.depth > 0 ? pageStack
 				: swipeViewAndNavBarContainer
+	}
+
+	GlobalKeyNavigationHighlight {
+		id: globalKeyNavigationHighlight
 	}
 
 	Loader {

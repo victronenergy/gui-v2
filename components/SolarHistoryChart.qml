@@ -200,6 +200,7 @@ FocusScope {
 				Keys.onSpacePressed: openHistoryDialog()
 				Keys.enabled: Global.keyNavigationEnabled
 				KeyNavigation.right: barRepeater.itemAt((model.index + 1) % barRepeater.count)
+				KeyNavigationHighlight.active: barMouseArea.activeFocus
 
 				Rectangle {
 					id: coloredBar
@@ -219,11 +220,6 @@ FocusScope {
 						radius: Theme.geometry_solarChart_bar_radius
 						color: barMouseArea.containsPress ? Theme.color_lightBlue : Theme.color_ok
 					}
-				}
-
-				KeyNavigationHighlight {
-					anchors.fill: parent
-					active: parent.activeFocus
 				}
 			}
 		}

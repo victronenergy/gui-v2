@@ -56,10 +56,7 @@ CT.ComboBox {
 			}
 		}
 
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: parent.ListView.isCurrentItem
-		}
+		KeyNavigationHighlight.active: ListView.isCurrentItem
 	}
 
 	indicator: CP.ColorImage {
@@ -121,8 +118,5 @@ CT.ComboBox {
 		onOpenedChanged: Qt.callLater(_updateVisibility)
 	}
 
-	KeyNavigationHighlight {
-		anchors.fill: parent
-		active: root.activeFocus
-	}
+	KeyNavigationHighlight.active: root.activeFocus
 }
