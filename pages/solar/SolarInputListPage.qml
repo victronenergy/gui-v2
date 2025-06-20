@@ -70,13 +70,15 @@ Page {
 	// inject it into solarInputModel.
 	Instantiator {
 		model: Global.solarInputs.devices
-		delegate: Instantiator {
+		asynchronous: true
+		delegate: QtObject {
 			id: solarDeviceDelegate
 
 			required property var device
 
 			readonly property Instantiator trackerObjects: Instantiator {
 				model: solarDeviceDelegate.device.trackerCount
+				asynchronous: true
 				delegate: SolarTracker {
 					required property int index
 					readonly property real todaysYield: {
@@ -145,6 +147,7 @@ Page {
 	// Extract solar data from all known PV inverters, and inject it into solarInputModel.
 	Instantiator {
 		model: Global.solarInputs.pvInverterDevices
+		asynchronous: true
 		delegate: QtObject {
 			required property var device
 			readonly property string name: device.name
