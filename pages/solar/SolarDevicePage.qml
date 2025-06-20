@@ -72,22 +72,11 @@ Page {
 					rightPadding: trackerSummary.rightPadding
 					columnSpacing: trackerSummary.columnSpacing
 					metricsFontSize: trackerSummary.metricsFontSize
-					visible: root.solarDevice.trackerCount > 1
-
 					model: root.solarDevice.trackerCount > 1 ? root.solarDevice.trackerCount : 0
-					header: QuantityTable.TableHeader {
-						headerText: CommonWords.tracker
-						model: [
-							{ text: CommonWords.yield_today, unit: VenusOS.Units_Energy_KiloWattHour },
-							{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
-							{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-							{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
-						]
-					}
+					header: count > 0 ? tableHeaderComponent : null
+
 					delegate: QuantityTable.TableRow {
 						id: tableRow
-
-						required property int index
 
 						// Today's yield for this tracker
 						readonly property real todaysYield: root.solarDevice.dailyTrackerHistory(0, index)?.yieldKwh ?? NaN
@@ -107,6 +96,20 @@ Page {
 							id: tracker
 							device: root.solarDevice
 							trackerIndex: tableRow.index
+						}
+					}
+
+					Component {
+						id: tableHeaderComponent
+
+						QuantityTable.TableHeader {
+							headerText: CommonWords.tracker
+							model: [
+								{ text: CommonWords.yield_today, unit: VenusOS.Units_Energy_KiloWattHour },
+								{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
+								{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+								{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+							]
 						}
 					}
 				}

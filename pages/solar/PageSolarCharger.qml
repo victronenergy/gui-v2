@@ -153,14 +153,7 @@ Page {
 				id: trackerTable
 				width: parent.width
 				model: root.trackerCount > 1 ? root.trackerCount : 0
-				header: QuantityTable.TableHeader {
-					headerText: CommonWords.tracker
-					model: [
-						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
-						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
-					]
-				}
+				header: count > 0 ? tableHeaderComponent : null
 				delegate: QuantityTable.TableRow {
 					id: tableRow
 
@@ -178,6 +171,19 @@ Page {
 						id: tracker
 						device: root.solarDevice
 						trackerIndex: tableRow.index
+					}
+				}
+
+				Component {
+					id: tableHeaderComponent
+
+					QuantityTable.TableHeader {
+						headerText: CommonWords.tracker
+						model: [
+							{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
+							{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+							{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+						]
 					}
 				}
 			}
