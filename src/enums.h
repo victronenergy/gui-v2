@@ -815,13 +815,28 @@ public:
 	};
 	Q_ENUM(ListLink_Mode)
 
+	enum ModificationChecks_Action {
+		ModificationChecks_Action_Idle,
+		ModificationChecks_Action_StartCheck,
+		ModificationChecks_Action_SystemHooksEnable,
+		ModificationChecks_Action_SystemHooksDisable
+	};
+	Q_ENUM(ModificationChecks_Action)
+
+	enum ModificationChecks_FsModifiedState {
+		ModificationChecks_FsModifiedState_Unknown  = -1,
+		ModificationChecks_FsModifiedState_Clean    = 0,
+		ModificationChecks_FsModifiedState_Modified = 1,
+	};
+	Q_ENUM(ModificationChecks_FsModifiedState)
+
 	enum ModificationChecks_SystemHooksState {
-		ModificationChecks_SystemHooksState_NonePresent      = 0,
-		ModificationChecks_SystemHooksState_RcLocalDisabled  = 1,
-		ModificationChecks_SystemHooksState_RcSLocalDisabled = 2,
-		ModificationChecks_SystemHooksState_RcLocal          = 4,
-		ModificationChecks_SystemHooksState_RcSLocal         = 8,
-		ModificationChecks_SystemHooksState_HookLoadedAtBoot = 16
+		ModificationChecks_SystemHooksState_NonePresent         = 0b00000,
+		ModificationChecks_SystemHooksState_RcLocalDisabled     = 0b00001,
+		ModificationChecks_SystemHooksState_RcSLocalDisabled    = 0b00010,
+		ModificationChecks_SystemHooksState_RcLocal             = 0b00100,
+		ModificationChecks_SystemHooksState_RcSLocal            = 0b01000,
+		ModificationChecks_SystemHooksState_HookLoadedAtStartup = 0b10000
 	};
 	Q_ENUM(ModificationChecks_SystemHooksState)
 
@@ -831,6 +846,20 @@ public:
 		MotorDriveGear_Forward
 	};
 	Q_ENUM(MotorDriveGear)
+
+	enum TailscaleConnectState {
+		TailscaleConnectState_Initializing = 0,
+		TailscaleConnectState_Backend_Starting = 1,
+		TailscaleConnectState_Backend_Stopped = 2,
+		TailscaleConnectState_Connection_Failed = 3,
+		TailscaleConnectState_Stopped = 4,
+		TailscaleConnectState_Logged_Out = 5,
+		TailscaleConnectState_Wait_For_Response = 6,
+		TailscaleConnectState_Wait_For_Login = 7,
+		TailscaleConnectState_No_State = 8,
+		TailscaleConnectState_Connection_Ok = 100
+	};
+	Q_ENUM(TailscaleConnectState)
 
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;

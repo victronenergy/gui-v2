@@ -556,9 +556,6 @@ QtObject {
 	//% "Dynamic power limit"
 	readonly property string dynamic_power_limit: qsTrId("common_words_dynamic_power_limit")
 
-	//% "This feature is disabled, since \"All modifications enabled\" under \"Settings -> General -> Modification checks\" is disabled."
-	readonly property string all_modifications_disabled: qsTrId("common_words_large_features_currently_disabled")
-
 	function acInputFromIndex(index) {
 		return acInputFromNumber(index + 1)
 	}

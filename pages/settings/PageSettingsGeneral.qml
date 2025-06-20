@@ -9,6 +9,82 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool isClean: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Clean
+		&& systemHooksStateItem.valid
+		&& !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+	readonly property bool isModified: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Modified
+
+	function modificationCheckText() {
+		let runningServices = []
+
+		if (isModified){
+			//% "Modifications installed"
+			return qsTrId("pagesettingsgeneral_modificationchecks_modified")
+		}
+
+		if (modbusTcpItem.value !== 0){
+			//% "Modbus-TCP"
+			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_modbus"))
+		}
+		if (signalKItem.valid && signalKItem.value !== 0) {
+			//% "Signal K"
+			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_signalk"))
+		}
+		if (nodeRedItem.valid && nodeRedItem.value !== 0) {
+			//% "Node-RED"
+			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_nodered"))
+		}
+		if (runningServices.length > 0){
+			let runningServicesText = runningServices.join(", ")
+			// Check if the text is longer then 20 characters
+			if (runningServicesText.length > 20) {
+				//% "%1 running integrations"
+				return qsTrId("pagesettingsgeneral_modificationchecks_running_integrations").arg(runningServices.length)
+			}
+			return runningServices.join(", ")
+		}
+
+		if (isClean){
+			//% "Clean"
+			return qsTrId("pagesettingsgeneral_modificationchecks_clean")
+		}
+
+		return ""
+	}
+
+	function modificationCheckColor() {
+		if (isModified){
+			// "Modified"
+			return Theme.color_red
+		}
+		if (modbusTcpItem.value !== 0
+			|| (signalKItem.valid && signalKItem.value !== 0)
+			|| (nodeRedItem.valid && nodeRedItem.value !== 0)) {
+			// "Running integrations"
+			return Theme.color_orange
+		}
+		if (isClean){
+			// "Clean"
+			return Theme.color_green
+		}
+
+		// "Check details"
+		return Theme.color_font_secondary
+	}
+
+	VeQuickItem {
+		id: modbusTcpItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+	}
+	VeQuickItem {
+		id: signalKItem
+		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+	}
+	VeQuickItem {
+		id: nodeRedItem
+		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			SettingsListHeader {
@@ -67,7 +143,7 @@ Page {
 				onOptionClicked: function(index) {
 					// The SystemSettings data point listener will set the Language.
 					// It may take a few seconds for the backend to deliver the value
-					// change to that other data point.  So, display a message to the user.
+					// change to that other data point. So, display a message to the user.
 					Global.dialogLayer.open(changingLanguageDialog)
 					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
 				}
@@ -109,12 +185,12 @@ Page {
 						//% "Changing language"
 						title: qsTrId("settings_language_changing_language")
 						description: dlg.languageChangeFailed
-							  //% "Failed to change language!"
+							//% "Failed to change language!"
 							? qsTrId("settings_language_change_failed")
 							: dlg.languageChangeSucceeded
-							  //% "Successfully changed language!"
+							//% "Successfully changed language!"
 							? qsTrId("settings_language_change_succeeded")
-							  //% "Please wait while the language is changed."
+							//% "Please wait while the language is changed."
 							: qsTrId("settings_language_please_wait")
 						Connections {
 							target: Language
@@ -138,22 +214,18 @@ Page {
 			SettingsListHeader { }
 
 			ListNavigation {
-				//% "Useful Links"
-				text: qsTrId("pagesettingsgeneral_useful_links")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsUsefulLinks.qml", {"title": text})
+				//% "Documentation"
+				text: qsTrId("pagesettingsgeneral_documentation")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDocumentation.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "Modification checks"
-				text: qsTrId("pagesettingsgeneral_modification_checks")
-				secondaryText: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
-					//% "Unmodified"
-					? qsTrId("pagesettingsmodificationchecks_unmodified")
-					//% "Modified"
-					:  qsTrId("pagesettingsmodificationchecks_modified")
-				secondaryLabel.color: fsModifiedStateItem.value === 0 && systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot) ? Theme.color_font_primary : Theme.color_red
+				//% "Support status (modifications checks)"
+				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
+				secondaryText: modificationCheckText()
+				secondaryLabel.color: modificationCheckColor()
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModificationChecks.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
 
 				VeQuickItem {
 					id: fsModifiedStateItem
