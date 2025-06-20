@@ -11,7 +11,7 @@ ServiceDeviceModel {
 
 	required property int position
 
-	serviceType: "heatpump"
+	serviceTypes: ["heatpump"]
 	modelId: "heatpump"
 
 	deviceDelegate: Device {

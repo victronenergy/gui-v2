@@ -224,7 +224,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/KeyNavigationListHelper.qml
-    components/MultiServiceDeviceModel.qml
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
@@ -249,7 +248,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
-    components/ServiceModelLoader.qml
+    components/ServiceModel.qml
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml

@@ -9,28 +9,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	VeQItemSortTableModel {
-		id: dbusModel
-
-		filterFlags: VeQItemSortTableModel.FilterOffline
-		dynamicSortFilter: true
-		filterRole: VeQItemTableModel.UniqueIdRole
-		filterRegExp: "^dbus/com\.victronenergy\.(inverter|solarcharger)\."
-		model: BackendConnection.type === BackendConnection.DBusSource ? Global.dataServiceModel : null
-	}
-
-	VeQItemSortTableModel {
-		id: mqttModel
-
-		filterFlags: VeQItemSortTableModel.FilterOffline
-		dynamicSortFilter: true
-		filterRole: VeQItemTableModel.UniqueIdRole
-		model: VeQItemTableModel {
-			uids: BackendConnection.type === BackendConnection.MqttSource ? ["mqtt/inverter","mqtt/solarcharger"] : []
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-	}
-
 	GradientListView {
 		header: DvccCommonSettings {
 			bottomPadding: Theme.geometry_gradientList_spacing
@@ -46,11 +24,7 @@ Page {
 				id: childValues
 
 				childId: "Link/ChargeCurrent"
-				model: BackendConnection.type === BackendConnection.DBusSource
-					   ? dbusModel
-					   : BackendConnection.type === BackendConnection.MqttSource
-						 ? mqttModel
-						 : null
+				model: ServiceModel { serviceTypes: ["inverter", "solarcharger"] }
 
 				// And sort them by n2kInstance, description
 				sortDelegate: VeQItemSortDelegate {
