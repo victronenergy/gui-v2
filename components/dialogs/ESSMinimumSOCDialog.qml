@@ -38,6 +38,8 @@ ModalDialog {
 			}
 
 			Slider {
+				id: slider
+
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 				value: root.minimumStateOfCharge
@@ -47,16 +49,11 @@ ModalDialog {
 				focus: true
 				onMoved: root.minimumStateOfCharge = value
 
-				KeyNavigationHighlight {
-					anchors {
-						fill: parent
-						leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-						rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-						topMargin: -Theme.geometry_listItem_content_verticalMargin
-						bottomMargin: -Theme.geometry_listItem_content_verticalMargin
-					}
-					active: parent.activeFocus
-				}
+				KeyNavigationHighlightAttached.active: slider.activeFocus
+				KeyNavigationHighlightAttached.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+				KeyNavigationHighlightAttached.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+				KeyNavigationHighlightAttached.topMargin: -Theme.geometry_listItem_content_verticalMargin
+				KeyNavigationHighlightAttached.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
 			}
 
 			Item {
