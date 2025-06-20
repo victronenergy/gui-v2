@@ -171,8 +171,9 @@ FocusScope {
 				blockItemFocus = false
 			}
 			Keys.onEscapePressed: (event) => {
-				event.accepted = !blockItemFocus
-				blockItemFocus = true
+				const shouldBlockFocus = item?.currentItem?.blockInitialFocus
+				event.accepted = shouldBlockFocus && !blockItemFocus
+				blockItemFocus = shouldBlockFocus
 			}
 			Keys.enabled: Global.keyNavigationEnabled
 			KeyNavigation.down: navBar
