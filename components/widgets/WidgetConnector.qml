@@ -58,7 +58,9 @@ Item {
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
 		// Use a min value to ensure at least one electron is shown for short connectors
 		const electronTravelDistance = Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
-		const modelCount = Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
+		const modelCount = animationEnabled
+			? Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
+			: 1 // show just one arrow, if animations are disabled.
 
 		if (electronRepeater.count !== modelCount) {
 			electronRepeater.model = modelCount
@@ -211,7 +213,7 @@ Item {
 
 				delegate: Image {
 					opacity: 0.0
-					source: "qrc:/images/electron.svg"
+					source: animationEnabled ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
 
 					Behavior on opacity {
 						enabled: root._animated
