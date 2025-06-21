@@ -7,6 +7,9 @@
 
     "geometry_icon_size_medium": 32,
 
+    "geometry_splashScreen_logo_width": 224,
+    "geometry_splashScreen_logo_height": 43,
+
     "geometry_flickable_maximumFlickVelocity": 2500,
     "geometry_flickable_flickDeceleration": 2500,
 

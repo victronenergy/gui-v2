@@ -1435,10 +1435,8 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/shore.svg
         images/solaryield.svg
         images/spinbox_arrow_up.svg
-        images/splash-logo-icon-5inch.svg
-        images/splash-logo-icon-7inch.svg
-        images/splash-logo-text-5inch.svg
-        images/splash-logo-text-7inch.svg
+        images/splash-logo-icon.svg
+        images/splash-logo-text.svg
         images/sunny.svg
         images/switch_indicator.png
         images/switches.svg
