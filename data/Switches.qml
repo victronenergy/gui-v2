@@ -16,17 +16,45 @@ QtObject {
 	readonly property SwitchableOutputGroupModel groups: SwitchableOutputGroupModel {}
 
 	readonly property Instantiator _modelBuilder: Instantiator {
-		model: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterFlags: VeQItemSortTableModel.FilterOffline
-			filterRegExp: "\/SwitchableOutput\/(?:\\w+)$" // output id may be int or string
-			model: VeQItemTableModel {
-				uids: BackendConnection.uidPrefix()
+		model: VeQItemTableModel {
+			id: switchableOutputModel
 
-				// TODO only add children to depth=1, instead of adding all children. That would
-				// reduce the number of items to be filtered by the VeQItemSortTableModel.
-				flags: VeQItemTableModel.AddAllChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+
+			function updateUids() {
+				let candidates = []
+				for (let i = 0; i < childModel.rowCount; ++i) {
+					candidates.push(childModel.data(childModel.index(i, 0), VeQItemTableModel.UniqueIdRole))
+				}
+				uids = candidates
+			}
+
+			readonly property VeQItemChildModel childModel: VeQItemChildModel {
+				childId: "SwitchableOutput"
+				model: _modelLoader.item
+				onRowCountChanged: Qt.callLater(switchableOutputModel.updateUids)
+
+				readonly property Loader _modelLoader: Loader {
+					sourceComponent: BackendConnection.type === BackendConnection.MqttSource ? mqttModel : dbusOrMockModel
+
+					Component {
+						id: dbusOrMockModel
+						VeQItemSortTableModel {
+							dynamicSortFilter: true
+							filterRole: VeQItemTableModel.UniqueIdRole
+							filterRegExp: "^%1/com\\.victronenergy\\.switch\\.".arg(BackendConnection.uidPrefix())
+							model: Global.dataServiceModel
+						}
+					}
+
+					Component {
+						id: mqttModel
+						VeQItemTableModel {
+							uids: ["mqtt/switch"]
+							flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+						}
+					}
+				}
 			}
 		}
 
