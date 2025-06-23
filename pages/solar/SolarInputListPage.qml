@@ -70,74 +70,76 @@ Page {
 	// inject it into solarInputModel.
 	Instantiator {
 		model: Global.solarInputs.devices
+		asynchronous: true
+
 		delegate: Instantiator {
 			id: solarDeviceDelegate
 
 			required property var device
 
-			readonly property Instantiator trackerObjects: Instantiator {
-				model: solarDeviceDelegate.device.trackerCount
-				delegate: SolarTracker {
-					required property int index
-					readonly property real todaysYield: {
-						const historyToday = device.trackerCount > 1
-								? device.dailyTrackerHistory(0, index)
-								: device.dailyHistory(0)
-						return historyToday?.yieldKwh ?? NaN
+			model: device.trackerCount
+			asynchronous: true
+
+			delegate: SolarTracker {
+				required property int index
+				readonly property real todaysYield: {
+					const historyToday = device.trackerCount > 1
+							? device.dailyTrackerHistory(0, index)
+							: device.dailyHistory(0)
+					return historyToday?.yieldKwh ?? NaN
+				}
+				readonly property string formattedName: Global.solarInputs.formatTrackerName(
+						name, index, device.trackerCount, device.name, VenusOS.TrackerName_WithDevicePrefix)
+				property bool initialized
+
+				function addToModel() {
+					const values = {
+						group: "generic",
+						name: formattedName,
+						todaysYield: todaysYield,
+						power: power,
+						current: current,
+						voltage: voltage
 					}
-					readonly property string formattedName: Global.solarInputs.formatTrackerName(
-							name, index, device.trackerCount, device.name, VenusOS.TrackerName_WithDevicePrefix)
-					property bool initialized
-
-					function addToModel() {
-						const values = {
-							group: "generic",
-							name: formattedName,
-							todaysYield: todaysYield,
-							power: power,
-							current: current,
-							voltage: voltage
-						}
-						solarInputModel.addInput(device.serviceUid, values, trackerIndex)
-					}
-
-					function removeFromModel() {
-						const modelIndex = solarInputModel.indexOf(solarDeviceDelegate.device.serviceUid, index)
-						if (modelIndex >= 0) {
-							solarInputModel.removeAt(modelIndex)
-						}
-					}
-
-					function updateModel() {
-						if (initialized) {
-							removeFromModel()
-							if (enabled) {
-								addToModel()
-							}
-						}
-					}
-
-					device: solarDeviceDelegate.device
-					trackerIndex: index
-
-					onTodaysYieldChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.TodaysYieldRole, todaysYield, trackerIndex)
-					onPowerChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.PowerRole, power, trackerIndex)
-					onCurrentChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.CurrentRole, current, trackerIndex)
-					onVoltageChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.VoltageRole, voltage, trackerIndex)
-
-					onFormattedNameChanged: updateModel()
-					onEnabledChanged: updateModel()
+					solarInputModel.addInput(device.serviceUid, values, trackerIndex)
 				}
 
-				onObjectAdded: (index, object) => {
-					if (object.enabled) {
-						object.addToModel()
+				function removeFromModel() {
+					const modelIndex = solarInputModel.indexOf(device.serviceUid, index)
+					if (modelIndex >= 0) {
+						solarInputModel.removeAt(modelIndex)
 					}
-					object.initialized = true
 				}
-				onObjectRemoved: (index, object) => {
-					object.removeFromModel()
+
+				function updateModel() {
+					if (initialized) {
+						removeFromModel()
+						if (enabled) {
+							addToModel()
+						}
+					}
 				}
+
+				device: solarDeviceDelegate.device
+				trackerIndex: index
+
+				onTodaysYieldChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.TodaysYieldRole, todaysYield, trackerIndex)
+				onPowerChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.PowerRole, power, trackerIndex)
+				onCurrentChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.CurrentRole, current, trackerIndex)
+				onVoltageChanged: solarInputModel.setInputValue(device.serviceUid, SolarInputModel.VoltageRole, voltage, trackerIndex)
+
+				onFormattedNameChanged: updateModel()
+				onEnabledChanged: updateModel()
+			}
+
+			onObjectAdded: (index, object) => {
+				if (object.enabled) {
+					object.addToModel()
+				}
+				object.initialized = true
+			}
+			onObjectRemoved: (index, object) => {
+				object.removeFromModel()
 			}
 		}
 	}
@@ -145,6 +147,7 @@ Page {
 	// Extract solar data from all known PV inverters, and inject it into solarInputModel.
 	Instantiator {
 		model: Global.solarInputs.pvInverterDevices
+		asynchronous: true
 		delegate: QtObject {
 			required property var device
 			readonly property string name: device.name
