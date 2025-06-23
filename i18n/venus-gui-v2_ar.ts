@@ -9,12 +9,12 @@
       <translation>معطل</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="251"/>
+      <location filename="../../components/CommonWords.qml" line="262"/>
       <source>Inverter overload</source>
       <translation>إفراط في تحيمل المعاكس</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="381"/>
+      <location filename="../../components/CommonWords.qml" line="392"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>طاقة</translation>
@@ -98,28 +98,40 @@
       <source>Error</source>
       <translation type="unfinished">خطأ</translation>
     </message>
+    <message id="common_words_firmware_type_normal">
+      <location filename="../../components/CommonWords.qml" line="201"/>
+      <source>Normal</source>
+      <extracomment>The firmware type for normal images</extracomment>
+      <translation type="unfinished">عادي</translation>
+    </message>
+    <message id="common_words_firmware_type_large">
+      <location filename="../../components/CommonWords.qml" line="205"/>
+      <source>Large</source>
+      <extracomment>The firmware type for large images</extracomment>
+      <translation type="unfinished">عادي</translation>
+    </message>
     <message id="common_words_generator">
-      <location filename="../../components/CommonWords.qml" line="203"/>
+      <location filename="../../components/CommonWords.qml" line="211"/>
       <source>Generator</source>
       <translation type="unfinished">مولد</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="212"/>
+      <location filename="../../components/CommonWords.qml" line="220"/>
       <source>High battery voltage</source>
       <translation>جهد البطارية مرتفع</translation>
     </message>
     <message id="overview_widget_inverter_title">
-      <location filename="../../components/widgets/InverterChargerWidget.qml" line="34"/>
+      <location filename="../../components/widgets/InverterChargerWidget.qml" line="31"/>
       <source>Inverter / Charger</source>
       <translation>محول التردد/ الشاحن</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="260"/>
+      <location filename="../../components/CommonWords.qml" line="271"/>
       <source>Low battery voltage</source>
       <translation>جهد البطارية منخفض</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="279"/>
+      <location filename="../../components/CommonWords.qml" line="290"/>
       <source>Manual</source>
       <translation>يدوي</translation>
     </message>
@@ -129,19 +141,19 @@
       <translation>لا أحد</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="399"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>الموقع</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="461"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>السرعة</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="468"/>
+      <location filename="../../components/CommonWords.qml" line="479"/>
       <source>State</source>
       <translation>الحالة</translation>
     </message>
@@ -152,7 +164,7 @@
       <translation>جارٍ التثبيت %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="304"/>
+      <location filename="../../components/SplashView.qml" line="327"/>
       <source>Unknown error</source>
       <translation>خطأ غير معروف</translation>
     </message>
@@ -177,7 +189,7 @@
       <translation>اضغط للتحقق</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="206"/>
+      <location filename="../../components/CommonWords.qml" line="214"/>
       <source>Grid</source>
       <translation>الشبكة</translation>
     </message>
@@ -187,7 +199,7 @@
       <translation>إنتاج الطاقة الشمسية</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="195"/>
+      <location filename="../../data/System.qml" line="173"/>
       <source>External control</source>
       <translation>التحكم الخارجي</translation>
     </message>
@@ -232,12 +244,12 @@
       <translation>عام</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="345"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="349"/>
       <source>Firmware</source>
       <translation>البرامج الثابتة</translation>
     </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="206"/>
       <source>Date &amp; Time</source>
       <translation>التاريخ والوقت</translation>
     </message>
@@ -433,7 +445,7 @@
       <translation>مشغل حاليا</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="285"/>
+      <location filename="../../components/CommonWords.qml" line="296"/>
       <source>Manual start</source>
       <translation>البدء الآلي</translation>
     </message>
@@ -558,7 +570,7 @@
       <translation type="unfinished">تشغيل دوري</translation>
     </message>
     <message id="settings_inverter_high_temperature">
-      <location filename="../../data/Generators.qml" line="95"/>
+      <location filename="../../data/Generators.qml" line="84"/>
       <source>Inverter high temperature</source>
       <translation>درجة حرارة عالية في المعاكس</translation>
     </message>
@@ -573,7 +585,7 @@
       <translation>تشغيل عند التحذير من الحمل الزائد</translation>
     </message>
     <message id="generator_periodic_run">
-      <location filename="../../data/Generators.qml" line="77"/>
+      <location filename="../../data/Generators.qml" line="66"/>
       <source>Periodic run</source>
       <translation>تشغيل دوري</translation>
     </message>
@@ -613,66 +625,66 @@
       <translation>تشغيل حتى يتم شحن البطارية بالكامل</translation>
     </message>
     <message id="settings_gps_ok_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="45"/>
+      <location filename="../../pages/settings/PageGps.qml" line="52"/>
       <source>GPS OK (fix)</source>
       <translation>النظام الكوني لتحديد المواقع صحيح (مهيأ)</translation>
     </message>
     <message id="settings_gps_ok_no_fix">
-      <location filename="../../pages/settings/PageGps.qml" line="48"/>
+      <location filename="../../pages/settings/PageGps.qml" line="55"/>
       <source>GPS connected, but no GPS fix</source>
       <translation>النظام الكوني لتحديد المواقع متصل، لكنه غير مهيأ</translation>
     </message>
     <message id="settings_gps_not_connected">
-      <location filename="../../pages/settings/PageGps.qml" line="51"/>
+      <location filename="../../pages/settings/PageGps.qml" line="58"/>
       <source>No GPS connected</source>
       <translation>نظام التموضع العالمي غير متصل</translation>
     </message>
     <message id="settings_gps_latitude">
-      <location filename="../../pages/settings/PageGps.qml" line="57"/>
+      <location filename="../../pages/settings/PageGps.qml" line="64"/>
       <source>Latitude</source>
       <translation>خط العرض</translation>
     </message>
     <message id="settings_gps_longitude">
-      <location filename="../../pages/settings/PageGps.qml" line="64"/>
+      <location filename="../../pages/settings/PageGps.qml" line="71"/>
       <source>Longitude</source>
       <translation>خط الطول</translation>
     </message>
     <message id="settings_gps_speed_kmh">
-      <location filename="../../pages/settings/PageGps.qml" line="79"/>
+      <location filename="../../pages/settings/PageGps.qml" line="86"/>
       <source>%1 km/h</source>
       <extracomment>GPS speed data, in kilometers per hour</extracomment>
       <translation>%1 كم/ ساعة</translation>
     </message>
     <message id="settings_gps_speed_mph">
-      <location filename="../../pages/settings/PageGps.qml" line="83"/>
+      <location filename="../../pages/settings/PageGps.qml" line="90"/>
       <source>%1 mph</source>
       <extracomment>GPS speed data, in miles per hour</extracomment>
       <translation>%1 ميل/ ساعة</translation>
     </message>
     <message id="settings_gps_speed_kt">
-      <location filename="../../pages/settings/PageGps.qml" line="87"/>
+      <location filename="../../pages/settings/PageGps.qml" line="94"/>
       <source>%1 kt</source>
       <extracomment>GPS speed data, in knots</extracomment>
       <translation>%1 كيلو طن</translation>
     </message>
     <message id="settings_gps_speed_ms">
-      <location filename="../../pages/settings/PageGps.qml" line="91"/>
+      <location filename="../../pages/settings/PageGps.qml" line="98"/>
       <source>%1 m/s</source>
       <extracomment>GPS speed data, in meters per second</extracomment>
       <translation>%1 متر/ ثانية</translation>
     </message>
     <message id="settings_gps_course">
-      <location filename="../../pages/settings/PageGps.qml" line="98"/>
+      <location filename="../../pages/settings/PageGps.qml" line="105"/>
       <source>Course</source>
       <translation>المسار</translation>
     </message>
     <message id="settings_gps_altitude">
-      <location filename="../../pages/settings/PageGps.qml" line="106"/>
+      <location filename="../../pages/settings/PageGps.qml" line="113"/>
       <source>Altitude</source>
       <translation>الارتفاع</translation>
     </message>
     <message id="settings_gps_num_satellites">
-      <location filename="../../pages/settings/PageGps.qml" line="115"/>
+      <location filename="../../pages/settings/PageGps.qml" line="122"/>
       <source>Number of satellites</source>
       <translation>عدد الأقمار الصناعية</translation>
     </message>
@@ -872,7 +884,7 @@
       <translation>جيد. ليس هناك أي جهاز متصل مع نفس هذا الرقم الفريد.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="321"/>
+      <location filename="../../components/CommonWords.qml" line="332"/>
       <source>Network status</source>
       <translation>حالة الشبكة</translation>
     </message>
@@ -947,24 +959,24 @@
       <translation>نمط العرض</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>غامق</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>فاتح</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="134"/>
       <source>Language</source>
       <translation>اللغة</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="186"/>
       <source>Changing language</source>
       <translation>تغيير اللغة</translation>
     </message>
@@ -1112,17 +1124,17 @@
       <translation>إقامة التاريخ/الوقت</translation>
     </message>
     <message id="settings_online_updates">
-      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="35"/>
       <source>Online updates</source>
       <translation>تحديثات مباشرة</translation>
     </message>
     <message id="settings_install_firmware_from_sd_usb">
-      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="43"/>
       <source>Install firmware from SD/USB</source>
       <translation>قم بتنصيب البرنامج المبيت من المايكرو إس دي/يو إس بي</translation>
     </message>
     <message id="settings_stored_backup_firmware">
-      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsFirmware.qml" line="51"/>
       <source>Stored backup firmware</source>
       <translation>نسخة أمان مخزنة للبرنامج المبيت</translation>
     </message>
@@ -1149,7 +1161,7 @@
       <translation type="unfinished">اضغط للتحديث إلى %1</translation>
     </message>
     <message id="settings_firmware_online_press_to_update_to">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="90"/>
       <source>Press to update to %1</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>اضغط للتحديث إلى %1</translation>
@@ -1184,36 +1196,19 @@
       <source>Update feed</source>
       <translation>تحديث التغذية</translation>
     </message>
-    <message id="settings_firmware_image_type">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="53"/>
-      <source>Image type</source>
-      <translation>نوع الصورة</translation>
-    </message>
-    <message id="settings_firmware_normal">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="58"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="262"/>
-      <source>Normal</source>
-      <translation>عادي</translation>
-    </message>
-    <message id="settings_firmware_large">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="60"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="262"/>
-      <source>Large</source>
-      <translation>عادي</translation>
-    </message>
     <message id="settings_firmware_check_for_updates">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="68"/>
       <source>Check for updates</source>
       <translation>تحقق من التحديثات</translation>
     </message>
     <message id="settings_firmware_update_available">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="76"/>
       <source>Update available</source>
       <translation>التحديث متوفر</translation>
     </message>
     <message id="settings_firmware_online_installing_progress">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="85"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="356"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="378"/>
       <source>Installing %1 %2%</source>
       <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress
 ----------
@@ -1221,14 +1216,14 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>تثبيت %1 %2%</translation>
     </message>
     <message id="settings_firmware_online_installing">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="89"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="360"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="382"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation type="unfinished">جارٍ التثبيت %1...</translation>
     </message>
     <message id="settings_firmware_update_build_date_time">
-      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="109"/>
       <source>Update build date/time</source>
       <translation>تحديث إقامة التاريخ/الوقت</translation>
     </message>
@@ -1378,28 +1373,68 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <source>Audible alarm</source>
       <translation>إنذار مسموع</translation>
     </message>
+    <message id="pagesettingsgeneral_modificationchecks_modified">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="22"/>
+      <source>Modifications installed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_modbus">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="27"/>
+      <source>Modbus-TCP</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_signalk">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="31"/>
+      <source>Signal K</source>
+      <translation type="unfinished">الإشارة K</translation>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_nodered">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="35"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">أداة التطوير Node-RED</translation>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_running_integrations">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="42"/>
+      <source>%1 running integrations</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_clean">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="49"/>
+      <source>Clean</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsgeneral_documentation">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="218"/>
+      <source>Documentation</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsgeneral_support_status_modification_checks">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
+      <source>Support status (modifications checks)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="244"/>
       <source>Demo mode</source>
       <translation>وضعية استعراض</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="179"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="251"/>
       <source>ESS demo</source>
       <translation>نظام تخزين الطاقة تجريبي</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="253"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>قارب/منزل متنقل تجريبي 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>قارب/منزل متنقل تجريبي21</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="259"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>البدء بوضعية الاستعراض يمكن أن يغير بعض الإعدادات ولن يتم التفاعل مع المستخدم لبعض الوقت.</translation>
     </message>
@@ -1776,12 +1811,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>شحن بطيء</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="201"/>
+      <location filename="../../data/System.qml" line="179"/>
       <source>Sustain</source>
       <translation>ركيزة</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="204"/>
+      <location filename="../../data/System.qml" line="182"/>
       <source>Recharge</source>
       <translation>الشحن</translation>
     </message>
@@ -1881,20 +1916,21 @@ Use unless prohibited by the utility provider.</source>
       <translation>إنذار ثاني أكسيد الكربون</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="237"/>
       <source>Signal K</source>
       <translation>الإشارة K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation>أداة التطوير Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="268"/>
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="481"/>
       <source>Enabled (safe mode)</source>
       <translation>تمكين (الوضع الآمن)</translation>
     </message>
@@ -2113,21 +2149,37 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_modbus_enable_modbus_tcp">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
-      <source>Enable Modbus/TCP</source>
-      <translation>فعل نمط المسار التجميعي / بروتوكول التحكم في الإرسال</translation>
+      <source>Enable Modbus-TCP</source>
+      <oldsource>Enable Modbus/TCP</oldsource>
+      <translation type="unfinished">فعل نمط المسار التجميعي / بروتوكول التحكم في الإرسال</translation>
+    </message>
+    <message id="settings_modbus_access_rights">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <source>Access permissions</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readwrite">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="41"/>
+      <source>Write allowed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_modbus_access_readonly">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <source>Read only</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_modbus_no_errors">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="56"/>
       <source>No errors reported</source>
       <translation>لم يتم الإبلاغ عن أي أخطاء</translation>
     </message>
     <message id="settings_modbus_time_of_last_error">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="63"/>
       <source>Time of last error</source>
       <translation>وقت آخر خطأ</translation>
     </message>
     <message id="settings_modbus_available_services">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
       <source>Available services</source>
       <translation>خدمات متوفرة</translation>
     </message>
@@ -2596,11 +2648,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Device has been rebooted.</source>
       <translation type="unfinished">تم إعادة تشغيل الجهاز.</translation>
     </message>
-    <message id="reboot_button_dialoglayer_rebooted">
-      <location filename="../../components/listitems/ListRebootButton.qml" line="44"/>
-      <source>Device has been rebooted.</source>
-      <translation>تم إعادة تشغيل الجهاز.</translation>
-    </message>
     <message id="settings_accharger_low_battery_voltage_alarm">
       <location filename="../../pages/settings/devicelist/PageAcCharger.qml" line="103"/>
       <source>Low battery voltage alarm</source>
@@ -2612,25 +2659,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>منبه جهد البطارية المرتفعة</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="592"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>آخر خطأ</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="595"/>
+      <location filename="../../components/CommonWords.qml" line="603"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>ثاني آخر خطأ</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="598"/>
+      <location filename="../../components/CommonWords.qml" line="606"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>ثالث آخر خطأ</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="601"/>
+      <location filename="../../components/CommonWords.qml" line="609"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>رابع آخر خطأ</translation>
@@ -2646,7 +2693,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>وضعية الإعداد</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="120"/>
+      <location filename="../../data/SystemSettings.qml" line="121"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>مستقل</translation>
@@ -2702,7 +2749,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">تابع</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="104"/>
+      <location filename="../../data/SystemSettings.qml" line="105"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>تابع</translation>
@@ -2728,17 +2775,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>الجهد الكهربائي للشحن</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="417"/>
+      <location filename="../../components/CommonWords.qml" line="428"/>
       <source>Reset</source>
       <translation>إعادة ضبط</translation>
     </message>
     <message id="solarcharger_load">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="247"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="248"/>
       <source>Load</source>
       <translation>تحميل</translation>
     </message>
     <message id="charger_networked_operation">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="309"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="310"/>
       <source>Networked operation</source>
       <translation>عملية عبر الشبكة</translation>
     </message>
@@ -2783,12 +2830,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>الحجم</translation>
     </message>
     <message id="tank_status_short_circuited">
-      <location filename="../../data/Tanks.qml" line="132"/>
+      <location filename="../../data/Tanks.qml" line="176"/>
       <source>Short circuited</source>
       <translation>حدثت دائرة قصر</translation>
     </message>
     <message id="tank_status_reverse_polarity">
-      <location filename="../../data/Tanks.qml" line="135"/>
+      <location filename="../../data/Tanks.qml" line="179"/>
       <source>Reverse polarity</source>
       <translation>قطبية معاكسة</translation>
     </message>
@@ -2798,38 +2845,38 @@ Use unless prohibited by the utility provider.</source>
       <translation>محطات شحن المركبات الكهربائية</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="41"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="43"/>
       <source>Session</source>
       <translation>جلسة</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="63"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="50"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>الوقت</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="102"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="120"/>
       <source>Charge mode</source>
       <translation>نمط الشحن</translation>
     </message>
     <message id="evcs_manual_caption">
-      <location filename="../../data/EvChargers.qml" line="32"/>
+      <location filename="../../data/EvChargers.qml" line="50"/>
       <source>Start and stop the process yourself. Use this for quick charges and close monitoring.</source>
       <translation>بدء العملية وإيقافها بنفسك. استخدم ذلك في الشحن السريع والمراقبة الدقيقة.</translation>
     </message>
     <message id="evcs_auto_caption">
-      <location filename="../../data/EvChargers.qml" line="38"/>
+      <location filename="../../data/EvChargers.qml" line="56"/>
       <source>Starts and stops based on the battery charge level. Optimal for overnight and extended charges to avoid overcharging.</source>
       <translation>يعتمد بدء التشغيل والإيقاف على مستوى شحن البطارية. نموذجي للشحن الليلي والممتد لتجنب الشحن الزائد.</translation>
     </message>
     <message id="evcs_scheduled_caption">
-      <location filename="../../data/EvChargers.qml" line="44"/>
+      <location filename="../../data/EvChargers.qml" line="62"/>
       <source>Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time.</source>
       <translation>أسعار الكهرباء الأقل في غير ساعات الذروة أو إن أردت التأكد من شحن مركبتك الكهربائية بالكامل والاستعداد للانطلاق في وقت محدد.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="120"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
       <source>Enable charging</source>
       <translation>تفعيل الشحن</translation>
     </message>
@@ -2949,7 +2996,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">انصهار متضخم</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="282"/>
+      <location filename="../../components/CommonWords.qml" line="293"/>
       <source>Manual control</source>
       <translation>تحكم يدوي</translation>
     </message>
@@ -3005,7 +3052,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>علامات الإنذار</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="491"/>
+      <location filename="../../components/CommonWords.qml" line="502"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>مبدل</translation>
@@ -3146,7 +3193,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">اضغط لإعادة الكشف</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="16"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
       <source>System</source>
       <translation>النظام</translation>
     </message>
@@ -3181,7 +3228,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>تيار التفريغ مرتفع</translation>
     </message>
     <message id="evchargers_status_low_state_of_charge">
-      <location filename="../../data/EvChargers.qml" line="127"/>
+      <location filename="../../data/EvChargers.qml" line="128"/>
       <source>Low SOC</source>
       <translation>SoC منخفض</translation>
     </message>
@@ -3256,49 +3303,49 @@ Use unless prohibited by the utility provider.</source>
       <translation>الجهد الكهربائي المنخفض للخلية</translation>
     </message>
     <message id="batterydetails_lowest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="26"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="19"/>
       <source>Lowest cell voltage</source>
       <translation>الجهد الكهربائي الأدنى للخلية</translation>
     </message>
     <message id="batterydetails_highest_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="36"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="29"/>
       <source>Highest cell voltage</source>
       <translation>الجهد الكهربائي الأعلى للخلية</translation>
     </message>
     <message id="batterydetails_minimum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="46"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="39"/>
       <source>Minimum cell temperature</source>
       <translation>الحرارة الأدنى للخلية</translation>
     </message>
     <message id="batterydetails_maximum_cell_temperature">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="49"/>
       <source>Maximum cell temperature</source>
       <translation>الحرارة الأعلى للخلية</translation>
     </message>
     <message id="batterydetails_modules">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
       <source>Battery modules</source>
       <translation>وحدات البطارية</translation>
     </message>
     <message id="devicelist_batterydetails_modules_online">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="62"/>
       <source>%1 online</source>
       <extracomment>%1 = number of battery modules that are online</extracomment>
       <translation>%1 متصل</translation>
     </message>
     <message id="devicelist_batterydetails_modules_offline">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="66"/>
       <source>%1 offline</source>
       <extracomment>%1 = number of battery modules that are offline</extracomment>
       <translation>%1 غير متصل</translation>
     </message>
     <message id="batterydetails_number_of_modules_blocking_charge_discharge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="79"/>
       <source>Number of modules blocking charge / discharge</source>
       <translation>عدد الوحدات التي تمنع الشحن/ التفريغ</translation>
     </message>
     <message id="batterydetails_installed_available_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="96"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
       <source>Installed / Available capacity</source>
       <translation>منصبة / مساحة متوفرة</translation>
     </message>
@@ -3648,17 +3695,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>الحد الأدنى/الحد الأعلى لحرارة الخلية</translation>
     </message>
     <message id="lynxionsystem_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
       <source>Balancing</source>
       <translation type="unfinished">يقوم بالموازنة</translation>
     </message>
     <message id="lynxionsystem_balancer_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="108"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balancing</source>
       <translation>يقوم بالموازنة</translation>
     </message>
     <message id="lynxionsystem_balancer_unknown">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="115"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="117"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
@@ -4063,13 +4110,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>أجهزة مسار Smappee</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="327"/>
+      <location filename="../../components/CommonWords.qml" line="338"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>تم تعطيل هذا الإعداد عند توصيل التحكم الرقمي المتعدد.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="330"/>
+      <location filename="../../components/CommonWords.qml" line="341"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <oldsource>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>تم تعطيل هذا الإعداد عند توصيل VE.Bus BMS.</translation>
@@ -4226,7 +4273,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>إجمالي الطاقة الكهروضوئية</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="400"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>Product page</source>
       <translation>صفحة المنتج</translation>
     </message>
@@ -4483,7 +4530,7 @@ Do you want to continue?</source>
       <translation>مكتمل</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="374"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Pending</source>
       <translation>قيد الانتظار</translation>
     </message>
@@ -4728,18 +4775,23 @@ Do you want to continue?</source>
       <translation>مدخل التيار المناوب</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="234"/>
+      <location filename="../../components/CommonWords.qml" line="242"/>
       <source>Idle</source>
       <translation type="unfinished">ساكن</translation>
     </message>
+    <message id="common_words_image_type">
+      <location filename="../../components/CommonWords.qml" line="245"/>
+      <source>Image type</source>
+      <translation type="unfinished">نوع الصورة</translation>
+    </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="238"/>
+      <location filename="../../components/CommonWords.qml" line="249"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">غير نشط</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="244"/>
+      <location filename="../../components/CommonWords.qml" line="255"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">محول التردد/ الشاحن</translation>
     </message>
@@ -4867,7 +4919,7 @@ Do you want to continue?</source>
       <translation>مغلق</translation>
     </message>
     <message id="evchargers_status_connected">
-      <location filename="../../data/EvChargers.qml" line="110"/>
+      <location filename="../../data/EvChargers.qml" line="111"/>
       <source>Connected</source>
       <translation>متصل</translation>
     </message>
@@ -4906,7 +4958,7 @@ Do you want to continue?</source>
       <translation>يقوم بتفريغ الشحن</translation>
     </message>
     <message id="evchargers_status_disconnected">
-      <location filename="../../data/EvChargers.qml" line="107"/>
+      <location filename="../../data/EvChargers.qml" line="108"/>
       <source>Disconnected</source>
       <oldsource>Unplugged</oldsource>
       <translation>منفصل</translation>
@@ -4944,7 +4996,7 @@ Do you want to continue?</source>
       <translation>خطأ بالرمز</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="200"/>
+      <location filename="../../components/CommonWords.qml" line="208"/>
       <source>Firmware version</source>
       <translation>نسخة البرنامج المبيت</translation>
     </message>
@@ -4954,38 +5006,38 @@ Do you want to continue?</source>
       <translation>مولد</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="209"/>
+      <location filename="../../components/CommonWords.qml" line="217"/>
       <source>High battery temperature</source>
       <translation>حرارة البطارية مرتفعة</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="216"/>
+      <location filename="../../components/CommonWords.qml" line="224"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>إنذار مستوى مرتفع</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="219"/>
+      <location filename="../../components/CommonWords.qml" line="227"/>
       <source>High starter battery voltage</source>
       <translation>جهد بطارية البادئ مرتفع</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="222"/>
+      <location filename="../../components/CommonWords.qml" line="230"/>
       <source>High temperature</source>
       <translation>حرارة مرتفعة</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="225"/>
+      <location filename="../../components/CommonWords.qml" line="233"/>
       <source>High voltage alarms</source>
       <translation>تيار المنبهات مرتفع</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="228"/>
+      <location filename="../../components/CommonWords.qml" line="236"/>
       <source>History</source>
       <translation>تاريخ</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="231"/>
+      <location filename="../../components/CommonWords.qml" line="239"/>
       <source>%1 Hour(s)</source>
       <translation>%1 ساعة/ ساعات</translation>
     </message>
@@ -5001,73 +5053,73 @@ Do you want to continue?</source>
       <translation>غير نشط</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="254"/>
+      <location filename="../../components/CommonWords.qml" line="265"/>
       <source>IP address</source>
       <translation>عنوان بروتوكول الإنترنت</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="257"/>
+      <location filename="../../components/CommonWords.qml" line="268"/>
       <source>Low battery temperature</source>
       <translation>حرارة البطارية منخفضة</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="264"/>
+      <location filename="../../components/CommonWords.qml" line="275"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>إنذار مستوى منخفض</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="267"/>
+      <location filename="../../components/CommonWords.qml" line="278"/>
       <source>Low starter battery voltage</source>
       <translation>جهد بطارية البادئ منخفض</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="270"/>
+      <location filename="../../components/CommonWords.qml" line="281"/>
       <source>Low state-of-charge</source>
       <translation>حالة الشحن منخفضة</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="273"/>
+      <location filename="../../components/CommonWords.qml" line="284"/>
       <source>Low temperature</source>
       <translation>حرارة منخفضة</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="276"/>
+      <location filename="../../components/CommonWords.qml" line="287"/>
       <source>Low voltage alarms</source>
       <translation>إنذارات الجهد المنخفض</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="291"/>
+      <location filename="../../components/CommonWords.qml" line="302"/>
       <source>Manufacturer</source>
       <translation>الشركة المصنعة</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="300"/>
+      <location filename="../../components/CommonWords.qml" line="311"/>
       <source>Maximum temperature</source>
       <translation>الحد الأقصى لدرجة الحرارة</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="303"/>
+      <location filename="../../components/CommonWords.qml" line="314"/>
       <source>Maximum voltage</source>
       <translation>الحد الأعلى للجهد الكهربائي</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="309"/>
+      <location filename="../../components/CommonWords.qml" line="320"/>
       <source>Minimum temperature</source>
       <translation>الحرارة الأدنى</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="312"/>
+      <location filename="../../components/CommonWords.qml" line="323"/>
       <source>Minimum voltage</source>
       <translation>الحد الأدنى للجهد الكهربائي</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="315"/>
+      <location filename="../../components/CommonWords.qml" line="326"/>
       <source>Mode</source>
       <translation>وضعية</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="318"/>
+      <location filename="../../components/CommonWords.qml" line="329"/>
       <source>Model name</source>
       <translation>اسم الطراز</translation>
     </message>
@@ -5078,7 +5130,7 @@ Do you want to continue?</source>
       <translation>لا</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="333"/>
+      <location filename="../../components/CommonWords.qml" line="344"/>
       <source>No error</source>
       <translation>لا يوجد خطأ</translation>
     </message>
@@ -5088,12 +5140,12 @@ Do you want to continue?</source>
       <translation>غير متوفر</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="346"/>
+      <location filename="../../components/CommonWords.qml" line="357"/>
       <source>Not connected</source>
       <translation>غير متصل</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="352"/>
+      <location filename="../../components/CommonWords.qml" line="363"/>
       <source>Offline</source>
       <translation>خارج الخط</translation>
     </message>
@@ -5110,7 +5162,7 @@ Do you want to continue?</source>
       <translation>مشغل</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="361"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>Online</source>
       <translation>على الخط</translation>
     </message>
@@ -5121,59 +5173,59 @@ Do you want to continue?</source>
       <translation>مفتوح</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="377"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Password</source>
       <translation>كلمة السر</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="384"/>
+      <location filename="../../components/CommonWords.qml" line="395"/>
       <source>Phase</source>
       <translation>الطور</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="402"/>
       <source>Press to clear</source>
       <translation>اضغط للمحو</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="405"/>
       <source>Press to reset</source>
       <translation>اضغط لإعادة الضبط</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="397"/>
+      <location filename="../../components/CommonWords.qml" line="408"/>
       <source>Press to scan</source>
       <translation>اضغط للمسح الضوئي</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="403"/>
+      <location filename="../../components/CommonWords.qml" line="414"/>
       <source>PV Inverter</source>
       <translation>معاكس ضوئي</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="407"/>
+      <location filename="../../components/CommonWords.qml" line="418"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>طاقة معاكس ضوئية</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="410"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>Quiet hours</source>
       <translation>ساعات السكون</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="425"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>المرحل</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="420"/>
+      <location filename="../../components/CommonWords.qml" line="431"/>
       <source>Reboot</source>
       <translation>إعادة التشغيل</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="434"/>
       <source>Remove</source>
       <translation>إزالة</translation>
     </message>
@@ -5184,12 +5236,12 @@ Do you want to continue?</source>
       <translation>مشغل</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="441"/>
       <source>Scanning %1%</source>
       <translation>مسح %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="444"/>
       <source>Serial number</source>
       <translation>رقم السلسلة</translation>
     </message>
@@ -5199,12 +5251,12 @@ Do you want to continue?</source>
       <translation>الإعدادات</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="439"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Setup</source>
       <translation>إعادة ضبط</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="442"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Signal strength</source>
       <translation>قوة الإشارة</translation>
     </message>
@@ -5215,32 +5267,32 @@ Do you want to continue?</source>
       <translation>انتظار</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Start after the condition is reached for</source>
       <translation>التشغيل بعد ما يصل الشرط إلى</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="459"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Start time</source>
       <translation>وقت البدء</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="462"/>
+      <location filename="../../components/CommonWords.qml" line="473"/>
       <source>Start value during quiet hours</source>
       <translation>قيمة البدء خلال ساعات السكون</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="465"/>
+      <location filename="../../components/CommonWords.qml" line="476"/>
       <source>Start when warning is active for</source>
       <translation>تشغيل عندما يكون التنبيه مفعلا ل</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="471"/>
+      <location filename="../../components/CommonWords.qml" line="482"/>
       <source>State of charge</source>
       <translation>حالة الشحن</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="474"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>Status</source>
       <translation>الحالة</translation>
     </message>
@@ -5251,12 +5303,12 @@ Do you want to continue?</source>
       <translation>بدء التشغيل (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="481"/>
+      <location filename="../../components/CommonWords.qml" line="492"/>
       <source>Stop value during quiet hours</source>
       <translation>قيمة التوقف خلال ساعات السكون</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="484"/>
+      <location filename="../../components/CommonWords.qml" line="495"/>
       <source>Stop after the condition is reached for</source>
       <translation>الإيقاف بعد ما يصل الشرط إلى</translation>
     </message>
@@ -5267,78 +5319,73 @@ Do you want to continue?</source>
       <translation>متوقف</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="505"/>
       <source>Temperature</source>
       <translation>الحرارة</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="497"/>
+      <location filename="../../components/CommonWords.qml" line="508"/>
       <source>Temperature sensor</source>
       <translation>حساس الحرارة</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="500"/>
+      <location filename="../../components/CommonWords.qml" line="511"/>
       <source>Today</source>
       <translation>اليوم</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="514"/>
       <source>Total</source>
       <translation>المجموع</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="507"/>
+      <location filename="../../components/CommonWords.qml" line="518"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>المتعقب</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="510"/>
+      <location filename="../../components/CommonWords.qml" line="521"/>
       <source>Type</source>
       <translation>النوع</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="513"/>
+      <location filename="../../components/CommonWords.qml" line="524"/>
       <source>Unique Identity Number</source>
       <translation>رقم التعريف الفريد</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_unknown">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="160"/>
       <source>Unknown</source>
       <translation>مجهول</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="531"/>
       <source>VE.Bus Error</source>
       <translation>خطأ في المسار التجميعي VE</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="534"/>
       <source>Voltage</source>
       <translation>الجهد الكهربائي</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="537"/>
       <source>VRM instance</source>
       <translation>نموذج VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="529"/>
+      <location filename="../../components/CommonWords.qml" line="540"/>
       <source>When warning is cleared stop after</source>
       <translation>عندما يختفي التنبيه توقف بعد</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_yes">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="24"/>
-      <source>Yes</source>
-      <translation>نعم</translation>
-    </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="535"/>
+      <location filename="../../components/CommonWords.qml" line="546"/>
       <source>Yesterday</source>
       <translation>الأمس</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="539"/>
+      <location filename="../../components/CommonWords.qml" line="550"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>المحصول</translation>
@@ -5453,7 +5500,7 @@ Do you want to continue?</source>
       <translation>تبديل</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_online_check_failed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="150"/>
       <source>Error while checking for firmware updates</source>
       <translation>خطأ في أثناء التحقق من تحديثات البرنامج الثابت</translation>
     </message>
@@ -5697,7 +5744,7 @@ Do you want to continue?</source>
       <translation>الخلايا الكهروضوئية والبطارية</translation>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_checking">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="147"/>
       <source>Checking...</source>
       <translation>تدقيق...</translation>
     </message>
@@ -5868,7 +5915,7 @@ Do you want to continue?</source>
       <translation>أقل جهد كهربي</translation>
     </message>
     <message id="charger_history_max_voltage">
-      <location filename="../../components/SolarHistoryTableView.qml" line="87"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="75"/>
       <source>Max Voltage</source>
       <translation>أقصى جهد كهربي</translation>
     </message>
@@ -5957,17 +6004,17 @@ Do you want to continue?</source>
       <translation>الرابع الأخير</translation>
     </message>
     <message id="charger_history_max_power">
-      <location filename="../../components/SolarHistoryTableView.qml" line="93"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="77"/>
       <source>Max Power</source>
       <translation>أقصى قدرة</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="256"/>
+      <location filename="../../components/SplashView.qml" line="279"/>
       <source>Unable to connect</source>
       <translation>لا يمكن الاتصال</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="258"/>
+      <location filename="../../components/SplashView.qml" line="281"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>انقطع الاتصال، محاولة إعادة الاتصال</translation>
     </message>
@@ -5977,72 +6024,72 @@ Do you want to continue?</source>
       <translation>جاري الاتصال</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="261"/>
+      <location filename="../../components/SplashView.qml" line="284"/>
       <source>Connecting</source>
       <translation type="unfinished">جاري الاتصال</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="263"/>
+      <location filename="../../components/SplashView.qml" line="286"/>
       <source>Connected, awaiting broker messages</source>
       <translation>تم الاتصال، بانتظار رسائل الوسيط</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="265"/>
+      <location filename="../../components/SplashView.qml" line="288"/>
       <source>Connected, receiving broker messages</source>
       <translation>تم الاتصال، استلام رسائل الوسيط</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="274"/>
+      <location filename="../../components/SplashView.qml" line="297"/>
       <source>Connected, loading user interface</source>
       <translation>تم الاتصال، تحميل واجهة المستخدم</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="290"/>
+      <location filename="../../components/SplashView.qml" line="313"/>
       <source>Invalid protocol version</source>
       <translation>نسخة البروتوكول غير صالحة</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="292"/>
+      <location filename="../../components/SplashView.qml" line="315"/>
       <source>Client ID rejected</source>
       <translation>رفض معرف العميل</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="294"/>
+      <location filename="../../components/SplashView.qml" line="317"/>
       <source>Broker service not available</source>
       <translation>خدمة الوسيط غير متاحة</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="296"/>
+      <location filename="../../components/SplashView.qml" line="319"/>
       <source>Bad username or password</source>
       <translation>اسم المستخدم غير صالح أو كلمة المرور غير صالحة</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="298"/>
+      <location filename="../../components/SplashView.qml" line="321"/>
       <source>Client not authorized</source>
       <translation>العميل غير مصرح</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="300"/>
+      <location filename="../../components/SplashView.qml" line="323"/>
       <source>Transport connection error</source>
       <translation>خطأ اتصال النقل</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="302"/>
+      <location filename="../../components/SplashView.qml" line="325"/>
       <source>Protocol violation error</source>
       <translation>خطأ انتهاك البروتوكول</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="306"/>
+      <location filename="../../components/SplashView.qml" line="329"/>
       <source>MQTT protocol level 5 error</source>
       <translation>خطأ المستوى الخامس من بروتوكول MQTT</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="297"/>
+      <location filename="../../components/StatusBar.qml" line="306"/>
       <source>Silence alarm</source>
       <translation>إنذار صامت</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="77"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="47"/>
       <source>Total Power</source>
       <translation>إجمالي الطاقة</translation>
     </message>
@@ -6153,7 +6200,7 @@ Do you want to continue?</source>
       <translation type="unfinished">توقف</translation>
     </message>
     <message id="page_generator_stopping">
-      <location filename="../../data/Generators.qml" line="56"/>
+      <location filename="../../data/Generators.qml" line="45"/>
       <source>Stopping</source>
       <translation>توقف</translation>
     </message>
@@ -6355,107 +6402,107 @@ Do you want to continue?</source>
       <translation type="unfinished">معطل</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="47"/>
+      <location filename="../../data/Ess.qml" line="34"/>
       <source>Keep batteries charged</source>
       <translation>حافظ على أن تكون البطاريات مشحونة</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="33"/>
+      <location filename="../../data/Ess.qml" line="20"/>
       <source>Optimized with battery life</source>
       <translation>محسن مع عمر البطارية</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="40"/>
+      <location filename="../../data/Ess.qml" line="27"/>
       <source>Optimized without battery life</source>
       <translation>محسن دون عمر البطارية</translation>
     </message>
     <message id="evchargers_status_charged">
-      <location filename="../../data/EvChargers.qml" line="115"/>
+      <location filename="../../data/EvChargers.qml" line="116"/>
       <source>Charged</source>
       <translation>مشحون</translation>
     </message>
     <message id="evchargers_status_waiting_for_sun">
-      <location filename="../../data/EvChargers.qml" line="118"/>
+      <location filename="../../data/EvChargers.qml" line="119"/>
       <source>Waiting for sun</source>
       <translation>في انتظار الشمس</translation>
     </message>
     <message id="evchargers_status_waiting_for_rfid">
-      <location filename="../../data/EvChargers.qml" line="121"/>
+      <location filename="../../data/EvChargers.qml" line="122"/>
       <source>Waiting for RFID</source>
       <translation>في انتظار تحديد تردد الراديو</translation>
     </message>
     <message id="evchargers_status_waiting_for_start">
-      <location filename="../../data/EvChargers.qml" line="124"/>
+      <location filename="../../data/EvChargers.qml" line="125"/>
       <source>Waiting for start</source>
       <translation>بانتظار بدء التشغيل</translation>
     </message>
     <message id="evchargers_status_ground_test_error">
-      <location filename="../../data/EvChargers.qml" line="130"/>
+      <location filename="../../data/EvChargers.qml" line="131"/>
       <source>Ground test error</source>
       <translation>خطأ اختبار التوصيل الأرضي</translation>
     </message>
     <message id="evchargers_status_cp_input_test_error">
-      <location filename="../../data/EvChargers.qml" line="136"/>
+      <location filename="../../data/EvChargers.qml" line="137"/>
       <source>CP input test error</source>
       <translation>خطأ في اختبار مدخلات CP</translation>
     </message>
     <message id="evchargers_status_residual_current_detected">
-      <location filename="../../data/EvChargers.qml" line="139"/>
+      <location filename="../../data/EvChargers.qml" line="140"/>
       <source>Residual current detected</source>
       <translation>تم الكشف عن التيار المتبقي</translation>
     </message>
     <message id="evchargers_status_undervoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="142"/>
+      <location filename="../../data/EvChargers.qml" line="143"/>
       <source>Undervoltage detected</source>
       <translation>تم الكشف عن انخفاض الجهد</translation>
     </message>
     <message id="evchargers_status_overvoltage_detected">
-      <location filename="../../data/EvChargers.qml" line="145"/>
+      <location filename="../../data/EvChargers.qml" line="146"/>
       <source>Overvoltage detected</source>
       <translation>تم الكشف عن الجهد الزائد</translation>
     </message>
     <message id="evchargers_status_overheating_detected">
-      <location filename="../../data/EvChargers.qml" line="148"/>
+      <location filename="../../data/EvChargers.qml" line="149"/>
       <source>Overheating detected</source>
       <translation>تم الكشف عن ارتفاع درجة الحرارة</translation>
     </message>
     <message id="evchargers_status_charging_limit">
-      <location filename="../../data/EvChargers.qml" line="151"/>
+      <location filename="../../data/EvChargers.qml" line="152"/>
       <source>Charging limit</source>
       <translation>حد الشحن</translation>
     </message>
     <message id="evchargers_status_start_charging">
-      <location filename="../../data/EvChargers.qml" line="154"/>
+      <location filename="../../data/EvChargers.qml" line="155"/>
       <source>Start charging</source>
       <translation>ابدأ الشحن</translation>
     </message>
     <message id="evchargers_status_unknown">
-      <location filename="../../data/EvChargers.qml" line="170"/>
+      <location filename="../../data/EvChargers.qml" line="171"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="183"/>
+      <location filename="../../data/EvChargers.qml" line="184"/>
       <source>Scheduled</source>
       <translation type="unfinished">مجدول</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="207"/>
+      <location filename="../../data/System.qml" line="185"/>
       <source>Scheduled</source>
       <translation>مجدول</translation>
     </message>
     <message id="page_generator_warm_up">
-      <location filename="../../data/Generators.qml" line="50"/>
+      <location filename="../../data/Generators.qml" line="39"/>
       <source>Warm-up</source>
       <translation>إحماء المحرك</translation>
     </message>
     <message id="page_generator_cool_down">
-      <location filename="../../data/Generators.qml" line="53"/>
+      <location filename="../../data/Generators.qml" line="42"/>
       <source>Cool-down</source>
       <translation>التبريد</translation>
     </message>
     <message id="generator_manually_started">
-      <location filename="../../data/Generators.qml" line="74"/>
+      <location filename="../../data/Generators.qml" line="63"/>
       <source>Manually started</source>
       <translation>تم البدء يدويا</translation>
     </message>
@@ -6514,102 +6561,102 @@ Do you want to continue?</source>
       <translation>معادلة</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="137"/>
+      <location filename="../../data/System.qml" line="115"/>
       <source>AES mode</source>
       <translation>قدرة منخفضة</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="140"/>
+      <location filename="../../data/System.qml" line="118"/>
       <source>Fault condition</source>
       <translation>حالة عطل</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="143"/>
+      <location filename="../../data/System.qml" line="121"/>
       <source>Bulk charging</source>
       <translation>الشحن المبدئي</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="146"/>
+      <location filename="../../data/System.qml" line="124"/>
       <source>Absorption charging</source>
       <translation>شحن الامتصاص</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="149"/>
+      <location filename="../../data/System.qml" line="127"/>
       <source>Float charging</source>
       <translation>الشحن المساند</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="130"/>
       <source>Storage mode</source>
       <translation>وضع التخزين</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="133"/>
       <source>Equalization charging</source>
       <translation>موازنة الشحن</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="136"/>
       <source>Pass-thru</source>
       <translation>تمرير</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="139"/>
       <source>Inverting</source>
       <translation>عكس</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="142"/>
       <source>Assisting</source>
       <translation>مساندة</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="145"/>
       <source>Power supply mode</source>
       <translation>وضع إمدادات الطاقة</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="148"/>
       <source>Sustain</source>
       <translation type="unfinished">ركيزة</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="174"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Wake up</source>
       <translation>تنبيه</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="177"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Repeated absorption</source>
       <translation>امتصاص متكرر</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="180"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Auto equalize</source>
       <translation>موازنة تلقائية</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="183"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Battery safe</source>
       <translation>آمان البطارية</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="186"/>
+      <location filename="../../data/System.qml" line="164"/>
       <source>Load detect</source>
       <translation>الكشف عن الحمل</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="189"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Blocked</source>
       <translation>محظور</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="192"/>
+      <location filename="../../data/System.qml" line="170"/>
       <source>Test</source>
       <translation>معاينة</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="210"/>
+      <location filename="../../data/System.qml" line="188"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">نظام تخزين الطاقة الديناميكي (ESS)</translation>
     </message>
@@ -6619,41 +6666,41 @@ Do you want to continue?</source>
       <translation>نظام تخزين الطاقة الديناميكي (ESS)</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="108"/>
+      <location filename="../../data/SystemSettings.qml" line="109"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>رئيس المجموعة</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="112"/>
+      <location filename="../../data/SystemSettings.qml" line="113"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>نموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="116"/>
+      <location filename="../../data/SystemSettings.qml" line="117"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>مجموعة ونموذج رئيسي</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="124"/>
+      <location filename="../../data/SystemSettings.qml" line="125"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>رئيس مجموعة وقائم بذاته</translation>
     </message>
     <message id="inverterCharger_mode_charger_only">
-      <location filename="../../data/InverterChargers.qml" line="91"/>
+      <location filename="../../data/InverterChargers.qml" line="76"/>
       <source>Charger only</source>
       <translation>الشاحن فقط</translation>
     </message>
     <message id="inverterCharger_mode_inverter_only">
-      <location filename="../../data/InverterChargers.qml" line="94"/>
+      <location filename="../../data/InverterChargers.qml" line="79"/>
       <source>Inverter only</source>
       <translation>فقط المعاكس</translation>
     </message>
     <message id="charger_alarms_short_circuit_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="340"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="341"/>
       <source>Short circuit alarm</source>
       <translation>إنذار دائرة قصر</translation>
     </message>
@@ -6781,32 +6828,47 @@ Do you want to continue?</source>
       <translation>قد يتداخل المسح المستمر مع تشغيل الواي فاي.</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>الحد الأدنى والحد الأقصى لنطاقات القياس</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
       <source>Start page</source>
       <translation type="unfinished">صفحة البدء</translation>
     </message>
+    <message id="settings_display_remote_console_color_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
+      <source>Remote console color mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_display_mode">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <source>Follow display mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_display_follow_individual_device">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
+      <source>Follow system theme of individual device</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="100"/>
       <source>Boat page</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
       <source>Restarting application...</source>
       <translation>جارٍ إعادة تشغيل التطبيق...</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="189"/>
       <source>Failed to change language!</source>
       <translation>فشل في تغيير اللغة!</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="194"/>
       <source>Please wait while the language is changed.</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>يرجى الانتظار بينما يتم تغيير اللغة.</translation>
@@ -6906,9 +6968,19 @@ Do you want to continue?</source>
       <translation>تطوير (فيكترون داخلي(</translation>
     </message>
     <message id="reboot_button_dialoglayer_rebooting">
-      <location filename="../../components/listitems/ListRebootButton.qml" line="42"/>
+      <location filename="../../components/dialogs/ModalRebootingDialog.qml" line="14"/>
       <source>Rebooting...</source>
       <translation>يقوم بإعادة التشغيل...</translation>
+    </message>
+    <message id="reboot_button_dialoglayer_reboot_initiated">
+      <location filename="../../components/dialogs/ModalRebootingDialog.qml" line="16"/>
+      <source>Reboot initiated</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="reboot_button_dialoglayer_rebooting_description">
+      <location filename="../../components/dialogs/ModalRebootingDialog.qml" line="19"/>
+      <source>Please wait until the device rebooted.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_enable_status_leds">
       <location filename="../../pages/settings/PageSettingsAlarmsAndFeedback.qml" line="30"/>
@@ -6969,13 +7041,13 @@ Do you want to continue?</source>
       <translation>حالة عمر البطارية</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="244"/>
       <source>Access Signal K locally or via VRM</source>
       <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
       <translation type="unfinished">قم بالوصول إلى الإشارة ك على http://venus.local:3000 وعبر VRM.</translation>
     </message>
     <message id="settings_large_access_node_red">
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="56"/>
       <source>Access Node-RED locally or via VRM</source>
       <oldsource>Access Node-RED at https://venus.local:1881 and via VRM.</oldsource>
       <translation type="unfinished">قم بالوصول إلى Node-RED على https://venus.local:1881 وعبر VRM.</translation>
@@ -6999,7 +7071,7 @@ Do you want to continue?</source>
       <translation>حالات جهاز VRM</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="338"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="339"/>
       <source>High temperature alarm</source>
       <translation>إنذار درجة حرارة مرتفعة</translation>
     </message>
@@ -7022,117 +7094,118 @@ Do you want to continue?</source>
       <translation>لا يمكن تفعيل التعادل في أثناء حالة الشحن المجمع</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="248"/>
+      <location filename="../../components/CommonWords.qml" line="259"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>بيئة</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="294"/>
+      <location filename="../../components/CommonWords.qml" line="305"/>
       <source>Maximum current</source>
       <translation>الحد الأقصى للتيار</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="297"/>
+      <location filename="../../components/CommonWords.qml" line="308"/>
       <source>Maximum power</source>
       <translation>الطاقة القصوى</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="306"/>
+      <location filename="../../components/CommonWords.qml" line="317"/>
       <source>Minimum current</source>
       <translation>الحد الأدنى للتيار</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="324"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="68"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
+      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="432"/>
       <source>No</source>
       <translation type="unfinished">لا</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="336"/>
+      <location filename="../../components/CommonWords.qml" line="347"/>
       <source>None</source>
       <translation type="unfinished">لا أحد</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="340"/>
+      <location filename="../../components/CommonWords.qml" line="351"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">لا أحد</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="343"/>
+      <location filename="../../components/CommonWords.qml" line="354"/>
       <source>Not available</source>
       <translation type="unfinished">غير متوفر</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="349"/>
+      <location filename="../../components/CommonWords.qml" line="360"/>
       <source>Off</source>
       <translation type="unfinished">مطفأ</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="355"/>
+      <location filename="../../components/CommonWords.qml" line="366"/>
       <source>OK</source>
       <translation type="unfinished">صحيح</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="358"/>
+      <location filename="../../components/CommonWords.qml" line="369"/>
       <source>On</source>
       <translation type="unfinished">مشغل</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="365"/>
+      <location filename="../../components/CommonWords.qml" line="376"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">مفتوح</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="371"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Overall history</source>
       <translation>السجل الإجمالي</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="438"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">مشغل</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="436"/>
+      <location filename="../../components/CommonWords.qml" line="447"/>
       <source>Settings</source>
       <translation type="unfinished">الإعدادات</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>Standby</source>
       <translation type="unfinished">انتظار</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="478"/>
+      <location filename="../../components/CommonWords.qml" line="489"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">بدء التشغيل (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="487"/>
+      <location filename="../../components/CommonWords.qml" line="498"/>
       <source>Stopped</source>
       <translation type="unfinished">متوقف</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="517"/>
+      <location filename="../../components/CommonWords.qml" line="528"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="532"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="115"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="269"/>
+      <location filename="../../components/CommonWords.qml" line="543"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="430"/>
       <source>Yes</source>
       <translation type="unfinished">نعم</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="543"/>
+      <location filename="../../components/CommonWords.qml" line="554"/>
       <source>Yield Today</source>
       <oldsource>Yield today</oldsource>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
@@ -7150,30 +7223,30 @@ Do you want to continue?</source>
       <translation>التحكم في الإدخال باللمس</translation>
     </message>
     <message id="evchargers_status_welded_contacts_error">
-      <location filename="../../data/EvChargers.qml" line="133"/>
+      <location filename="../../data/EvChargers.qml" line="134"/>
       <source>Welded contacts test error (shorted)</source>
       <oldsource>Welded contacts error</oldsource>
       <translation>خطأ اختبار التلامسات الملحومة (تماس قصير)</translation>
     </message>
     <message id="evchargers_status_switching_to_three_phase">
-      <location filename="../../data/EvChargers.qml" line="157"/>
+      <location filename="../../data/EvChargers.qml" line="158"/>
       <source>Switching to 3 phase</source>
       <oldsource>Switching to 3-phase</oldsource>
       <translation>التحويل إلى ثلاثي الطور</translation>
     </message>
     <message id="evchargers_status_switching_to_single_phase">
-      <location filename="../../data/EvChargers.qml" line="160"/>
+      <location filename="../../data/EvChargers.qml" line="161"/>
       <source>Switching to 1 phase</source>
       <oldsource>Switching to single phase</oldsource>
       <translation>التحويل إلى أحادي الطور</translation>
     </message>
     <message id="evchargers_status_stop_charging">
-      <location filename="../../data/EvChargers.qml" line="163"/>
+      <location filename="../../data/EvChargers.qml" line="164"/>
       <source>Stop charging</source>
       <translation>إيقاف الشحن</translation>
     </message>
     <message id="evchargers_status_reserved">
-      <location filename="../../data/EvChargers.qml" line="167"/>
+      <location filename="../../data/EvChargers.qml" line="168"/>
       <source>Reserved</source>
       <translation>غير مستخدم/محجوز</translation>
     </message>
@@ -7201,7 +7274,7 @@ Do you want to continue?</source>
       <translation>مدخل</translation>
     </message>
     <message id="inverterCharger_mode_passthrough">
-      <location filename="../../data/InverterChargers.qml" line="99"/>
+      <location filename="../../data/InverterChargers.qml" line="84"/>
       <source>Passthrough</source>
       <translation>العبور</translation>
     </message>
@@ -7394,12 +7467,12 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>البطارية (جهد&lt;sub&gt;&lt;1/&gt;البداية&lt;/sub&gt;/V&lt;sub&gt;النهاية(&lt;/sub&gt;</translation>
     </message>
     <message id="rs_alarm_low_ac_out_voltage">
-      <location filename="../../data/InverterChargers.qml" line="59"/>
+      <location filename="../../data/InverterChargers.qml" line="61"/>
       <source>Low AC OUT voltage</source>
       <translation>الجهد الكهربائي لخرج التيار المتردد منخفض</translation>
     </message>
     <message id="rs_alarm_high_ac_out_voltage">
-      <location filename="../../data/InverterChargers.qml" line="61"/>
+      <location filename="../../data/InverterChargers.qml" line="63"/>
       <source>High AC OUT voltage</source>
       <translation>الجهد الكهربائي لخرج التيار المتردد مرتفع</translation>
     </message>
@@ -7459,17 +7532,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>إعداد البطارية غير صالح</translation>
     </message>
     <message id="lynxionsystem_balancer_status">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="100"/>
       <source>Balancer status</source>
       <translation>حالة الموّزع</translation>
     </message>
     <message id="lynxionsystem_balancer_balanced">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="105"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
       <source>Balanced</source>
       <translation>متوازن</translation>
     </message>
     <message id="lynxionsystem_balancer_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="111"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
       <source>Imbalance</source>
       <translation>اختلال التوازن</translation>
     </message>
@@ -7529,17 +7602,17 @@ See documentation for further information.</oldsource>
       <translation>موصول بالأسلاك</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="394"/>
+      <location filename="../../pages/BriefPage.qml" line="391"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>حمل النظام مرتفع، يؤدي إغلاق اللوحة الجانبية لتقليل حمل وحدة المعالجة المركزية (CPU)</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="241"/>
+      <location filename="../../components/CommonWords.qml" line="252"/>
       <source>Input current limit</source>
       <translation>حد تيار الدخل</translation>
     </message>
     <message id="rs_alarm_short_circuit">
-      <location filename="../../data/InverterChargers.qml" line="65"/>
+      <location filename="../../data/InverterChargers.qml" line="67"/>
       <source>Short circuit</source>
       <translation>دائرة قصر</translation>
     </message>
@@ -7738,23 +7811,23 @@ See documentation for further information.</oldsource>
       <translation>نشط (%1)</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="288"/>
+      <location filename="../../components/CommonWords.qml" line="299"/>
       <source>Manual stop</source>
       <translation>التوقف اليدوي</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="368"/>
+      <location filename="../../components/CommonWords.qml" line="379"/>
       <source>Open circuit</source>
       <translation>دائرة مفتوحة</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="558"/>
+      <location filename="../../components/CommonWords.qml" line="566"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation type="unfinished"/>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="586"/>
+      <location filename="../../components/CommonWords.qml" line="594"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -7797,7 +7870,7 @@ See documentation for further information.</oldsource>
       <translation>جهد النظام</translation>
     </message>
     <message id="batterydetails_connection_information">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="99"/>
       <source>Connection information</source>
       <translation>معلومات الاتصال</translation>
     </message>
@@ -8034,7 +8107,7 @@ See documentation for further information.</oldsource>
       <translation>Tailscale (الوصول إلى شبكة افتراضية خاصة عن بعد)</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="446"/>
+      <location filename="../../components/CommonWords.qml" line="457"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>حالة الشحن 1%</translation>
@@ -8313,17 +8386,17 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>سيظل المولد قيد التشغيل حتى إيقافه يدويا، ما لم تكن يتم تفعيل شروط التشغيل الآلي إلى الاستمرار قيد التشغيل.</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="132"/>
       <source>Classic UI</source>
       <translation>واجهة المستخدم الكلاسيكية</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
       <source>New UI</source>
       <translation>واجهة مستخدم جديدة</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="116"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="192"/>
       <source>Successfully changed language!</source>
       <translation>تم تغيير اللغة بنجاح!</translation>
     </message>
@@ -8464,29 +8537,29 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>صفحة البدء</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
       <source>User interface</source>
       <translation>واجهة المستخدم</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
       <source>User interface (Remote Console)</source>
       <translation>واجهة المستخدم (وحدة التحكم عن بعد)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1محدث</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="175"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>ستتبدل واجهة المستخدم إلى %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>تم ضبط %1 إلى %2.</translation>
@@ -8497,13 +8570,13 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>اضغط على «نعم» لإعادة التشغيل</translation>
     </message>
     <message id="page_settings_nodered_factory_reset">
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="44"/>
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="45"/>
       <source>Node-RED factory reset</source>
       <translation>إعادة ضبط المصنع لأداة التطوير Node-RED</translation>
     </message>
     <message id="page_settings_nodered_factory_reset_confirmation">
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="47"/>
       <source>Are you sure that you want to reset Node-RED to factory defaults? This will delete all of your flows.</source>
       <translation>هل أنت متأكد أنك تريد إعادة ضبط المصنع لأداة التطوير Node-RED؟ سيحذف هذا كل التدفقات الخاصة بك.</translation>
     </message>
@@ -8544,37 +8617,37 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>قيمة إلغاء التفعيل</translation>
     </message>
     <message id="generator_not_running">
-      <location filename="../../data/Generators.qml" line="71"/>
+      <location filename="../../data/Generators.qml" line="60"/>
       <source>Not running</source>
       <translation>لا يعمل</translation>
     </message>
     <message id="settings_loss_of_communication">
-      <location filename="../../data/Generators.qml" line="80"/>
+      <location filename="../../data/Generators.qml" line="69"/>
       <source>Loss of communication</source>
       <translation>فقد الاتصال</translation>
     </message>
     <message id="settings_soc_condition">
-      <location filename="../../data/Generators.qml" line="83"/>
+      <location filename="../../data/Generators.qml" line="72"/>
       <source>SOC condition</source>
       <translation>حالة مستوى شحن البطارية</translation>
     </message>
     <message id="settings_ac_load_condition">
-      <location filename="../../data/Generators.qml" line="86"/>
+      <location filename="../../data/Generators.qml" line="75"/>
       <source>AC load condition</source>
       <translation>حالة حمل التيار المتردد</translation>
     </message>
     <message id="settings_battery_current_condition">
-      <location filename="../../data/Generators.qml" line="89"/>
+      <location filename="../../data/Generators.qml" line="78"/>
       <source>Battery current condition</source>
       <translation>حالة تيار البطارية</translation>
     </message>
     <message id="settings_battery_voltage_condition">
-      <location filename="../../data/Generators.qml" line="92"/>
+      <location filename="../../data/Generators.qml" line="81"/>
       <source>Battery voltage condition</source>
       <translation>حالة الجهد الكهربائي للبطارية</translation>
     </message>
     <message id="settings_inverter_overload_condition">
-      <location filename="../../data/Generators.qml" line="98"/>
+      <location filename="../../data/Generators.qml" line="87"/>
       <source>Inverter overload condition</source>
       <translation>حالة الحمل الزائد في المعاكس</translation>
     </message>
@@ -8711,22 +8784,22 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>سيقوم النظام بعرض الأحمال المتصلة بدخل العاكس/الشاحن تلقائيًا إذا كان عداد الشبكة موجودًا. الأحمال المتصلة بالمخرج تعرض دائما.</translation>
     </message>
     <message id="ess_state_optimized_with_battery_life_button">
-      <location filename="../../data/Ess.qml" line="35"/>
+      <location filename="../../data/Ess.qml" line="22"/>
       <source>Optimized + battery life</source>
       <translation>محسن مع عمر البطارية</translation>
     </message>
     <message id="ess_state_optimized_without_battery_life_button">
-      <location filename="../../data/Ess.qml" line="42"/>
+      <location filename="../../data/Ess.qml" line="29"/>
       <source>Optimized</source>
       <translation>محسن</translation>
     </message>
     <message id="ess_state_keep_batteries_charged_button">
-      <location filename="../../data/Ess.qml" line="49"/>
+      <location filename="../../data/Ess.qml" line="36"/>
       <source>Keep charged</source>
       <translation>يظل مشحونا</translation>
     </message>
     <message id="ess_state_external_control">
-      <location filename="../../data/Ess.qml" line="54"/>
+      <location filename="../../data/Ess.qml" line="41"/>
       <source>External control</source>
       <translation type="unfinished">التحكم الخارجي</translation>
     </message>
@@ -8832,27 +8905,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>شمال غرب</translation>
     </message>
     <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="21"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="97"/>
       <source>Firmware</source>
       <translation type="unfinished">البرامج الثابتة</translation>
     </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
       <source>Access &amp; Security</source>
       <translation>الوصول والأمان</translation>
     </message>
     <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
       <source>Preferences</source>
       <translation>التفضيلات</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
       <source>Display &amp; Appearance</source>
       <translation>العرض والمظهر</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
       <source>Alarms &amp; Feedback</source>
       <translation>الإنذارات والتقييمات</translation>
     </message>
@@ -8862,57 +8935,57 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>تفعيل خلية آمنة على الشبكة المحلية</translation>
     </message>
     <message id="pagesettingsintegrations_pv_inverters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="40"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="33"/>
       <source>PV Inverters</source>
       <translation>معاكسات ضوئية</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="45"/>
       <source>Modbus Devices</source>
       <translation>أجهزة Modbus</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="51"/>
       <source>Bluetooth Sensors</source>
       <translation>مستشعرات بلوتوث</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="70"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="63"/>
       <source>Physical I/O</source>
       <translation>داخل/خارج فعلي</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="73"/>
       <source>Tank and Temperature Sensors</source>
       <translation>حساسات الخزان ودرجة الحرارة</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="114"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="107"/>
       <source>Relays</source>
       <translation>الموصلات</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="121"/>
       <source>Digital I/O</source>
       <translation>داخل/ خارج رقمي</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
       <source>Server Applications</source>
       <translation>تطبيقات الخادم</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="190"/>
       <source>Modbus TCP Server</source>
       <translation>خادم Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="204"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="205"/>
       <source>Venus OS Large Features</source>
       <translation>سمات فينوس أو إس لارج</translation>
     </message>
     <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="211"/>
       <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
       <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
 
@@ -8922,12 +8995,12 @@ Documentation at https://ve3.nl/vol</oldsource>
 Documentation على https://ve3.nl/vol</translation>
     </message>
     <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
       <source>Victron Community</source>
       <translation type="unfinished">مجتمع Victron</translation>
     </message>
@@ -9071,7 +9144,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>فتح الرابط</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
       <source>Data units</source>
       <translation>وحدات البيانات</translation>
     </message>
@@ -9102,13 +9175,13 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>إجمالي الطاقة الكهروضوئية</translation>
     </message>
     <message id="solarcharger_total_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="225"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="226"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
       <translation type="unfinished">الإنتاجية الكلية</translation>
     </message>
     <message id="solarcharger_system_yield">
-      <location filename="../../pages/solar/PageSolarCharger.qml" line="234"/>
+      <location filename="../../pages/solar/PageSolarCharger.qml" line="235"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">إنتاجية النظام</translation>
@@ -9130,26 +9203,11 @@ If the generator is currently running due to a autostart condition, disabling au
       <oldsource>Device# %1</oldsource>
       <translation>#نسخة الجهاز VE.Can%1</translation>
     </message>
-    <message id="pagesettingsgeneral_useful_links">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
-      <source>Useful Links</source>
-      <translation>روابط مفيدة</translation>
-    </message>
-    <message id="pagesettingsgeneral_modification_checks">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="148"/>
-      <source>Modification checks</source>
-      <translation>فحوصات التعديل</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_unmodified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="151"/>
-      <source>Unmodified</source>
-      <translation>غير معدلة</translation>
-    </message>
     <message id="pagesettingsmodificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="153"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="58"/>
-      <source>Modified</source>
-      <translation>معدلة</translation>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="83"/>
+      <source>Modified (refresh rootfs with the latest official firmware)</source>
+      <oldsource>Modified</oldsource>
+      <translation type="unfinished">معدلة</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_dc">
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
@@ -9161,211 +9219,267 @@ If the generator is currently running due to a autostart condition, disabling au
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>سيتم تشغيل إنذار إذا لم يصل مولد التيار المستمر إلى 5 أمبير على الأقل خلال أول 5 دقائق بعد التشغيل.</translation>
     </message>
-    <message id="common_words_large_features_currently_disabled">
-      <location filename="../../components/CommonWords.qml" line="549"/>
-      <source>This feature is disabled, since "All modifications enabled" under "Settings -&gt; General -&gt; Modification checks" is disabled.</source>
-      <translation>تم تعطيل هذه الخاصية، نظرًا لتعطيل خيار "تمكين جميع التعديلات" ضمن "الإعدادات -&gt; عام -&gt; فحوصات التعديل".</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_modifications">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="27"/>
-      <source>Disable all modifications before contacting support</source>
-      <translation>عطل جميع التعديلات قبل الاتصال بالدعم</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_system_hooks">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="30"/>
-      <source>Restore firmware integrity before contacting support</source>
-      <translation>استعد سلامة البرنامج الثابت قبل الاتصال بالدعم</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_modifications_system_hooks">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="33"/>
-      <source>Disable all modifications and restore
-firmware integrity before contacting support</source>
-      <translation>عطل جميع التعديلات واستعد سلامة البرنامج الثابت قبل الاتصال بالدعم</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_unsupported_gx_device">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="37"/>
-      <source>Unsupported GX device</source>
-      <translation>جهاز GX غير مدعوم</translation>
-    </message>
     <message id="pagesettingsmodificationchecks_unknown">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="61"/>
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="140"/>
       <source>Unknown: %1</source>
       <translation>غير معروف: %1</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_yes_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="73"/>
-      <source>Yes (rc.local and rcS.local)</source>
-      <translation>نعم (rc.local و rcS.local)</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_yes_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="77"/>
-      <source>Yes (rcS.local)</source>
-      <translation>نعم (rcS.local)</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_yes_rc_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="81"/>
-      <source>Yes (rc.local)</source>
-      <translation>نعم (rc.local)</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_yes_but_disable_next_boot">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="86"/>
-      <source>Yes, but disable at next boot</source>
-      <translation>نعم، ولكن عطّل عند إعادة التشغيل التالية</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_no_but_next_boot_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="91"/>
-      <source>No, but enable at next boot (rc.local and rcS.local)</source>
-      <translation>لا، ولكن فعل عند إعادة التشغيل التالية (rc.local و rcS.local)</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_no_but_next_boot_rcS_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="95"/>
-      <source>No, but enable at next boot (rcS.local)</source>
-      <translation>لا، ولكن فعل عند إعادة التشغيل التالية ( rcS.local)</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_no_but_next_boot_rc_local">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="99"/>
-      <source>No, but enable at next boot (rc.local)</source>
-      <translation>لا، ولكن فعل عند إعادة التشغيل التالية (rc.local)</translation>
-    </message>
     <message id="pagesettingsmodificationchecks_firmware_no_available">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="157"/>
       <source>No, %1 is available</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>لا، %1 متاح</translation>
     </message>
     <message id="pagesettingsmodificationchecks_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="196"/>
-      <source>This page shows the current system state, allows you to enable or disable modifications, and restore the firmware to its original state.</source>
-      <translation>تعرض هذه الصفحة الحالة الحالية للنظام، وتتيح لك تمكين أو تعطيل التعديلات، واستعادة البرنامج الثابت إلى حالته الأصلية.</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_system_state">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="201"/>
-      <source>Victron Energy support</source>
-      <translation>دعم Victron Energy</translation>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="222"/>
+      <source>This page shows the current system state, allows you to enable or disable custom startup scripts and (re-)install the latest official firmware.</source>
+      <oldsource>This page shows the current system state, allows you to enable or disable modifications, and restore the firmware to its original state.</oldsource>
+      <translation type="unfinished">تعرض هذه الصفحة الحالة الحالية للنظام، وتتيح لك تمكين أو تعطيل التعديلات، واستعادة البرنامج الثابت إلى حالته الأصلية.</translation>
     </message>
     <message id="pagesettingsmodificationchecks_device_model">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="234"/>
       <source>Device model</source>
       <translation>طراز الجهاز</translation>
     </message>
     <message id="pagesettingsmodificationchecks_hq_serial_number">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="242"/>
       <source>HQ serial number</source>
       <translation>رقم مسلسل HQ</translation>
     </message>
     <message id="pagesettingsmodificationchecks_data_free_space">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="249"/>
       <source>Data partition free space</source>
       <translation>المساحة الخالية لقسم البيانات</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_modifications_at_boot">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="232"/>
-      <source>Modifications loaded at boot</source>
-      <translation>التعديلات المحمّلة عند التشغيل</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_integrity">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="239"/>
-      <source>Firmware integrity</source>
-      <translation>سلامة البرنامج الثابت</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_integrity_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="243"/>
-      <source>State of root-fs</source>
-      <translation>حالة root-fs</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_latest_stable_firmware_installed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="248"/>
-      <source>Latest stable firmware version installed?</source>
-      <translation>هل تم تثبيت أحدث إصدار ثابت من البرنامج الثابت؟</translation>
-    </message>
     <message id="pagesettingsmodificationchecks_installed_firmware_version">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="354"/>
       <source>Installed firmware version</source>
       <translation>نسخة البرنامج الثابت المثبتة</translation>
     </message>
     <message id="pagesettingsmodificationchecks_installed_image_type">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="360"/>
       <source>Installed image type</source>
       <translation>نوع الصورة المثبتة</translation>
     </message>
     <message id="pagesettingsmodificationchecks_user_ssh_key_present">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="256"/>
       <source>User SSH key present</source>
       <translation>مفتاح SSH الخاص بالمستخدم موجود</translation>
     </message>
+    <message id="pagesettingsmodificationchecks_support_state_check_details">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="21"/>
+      <source>Check details</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_support_state_clean_system">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="24"/>
+      <source>Clean system</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="27"/>
+      <source>Disable custom startup scripts before contacting support</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_support_state_reinstall_firmware">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="30"/>
+      <source>Refresh rootfs with the latest official firmware before contacting support</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts_reinstall_firmware">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="33"/>
+      <source>Disable custom startup scripts and refresh rootfs with the latest official firmware before contacting support</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_support_state_unsupported_gx_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="37"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">جهاز GX غير مدعوم</translation>
+    </message>
+    <message id="pagesettingsmodificationchecks_clean">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="80"/>
+      <source>Clean</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_not_available_on_this_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="86"/>
+      <source>Not available on this device</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_not_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="106"/>
+      <source>Not installed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="111"/>
+      <source>Installed but disabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="114"/>
+      <source>Installed but disabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="117"/>
+      <source>Installed but disabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_disabled_but_enable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="121"/>
+      <source>Installed but disabled, enables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="127"/>
+      <source>Installed and enabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="130"/>
+      <source>Installed and enabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="133"/>
+      <source>Installed and enabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_enabled_but_disable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="136"/>
+      <source>Installed and enabled, disables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_victron_energy_support">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="227"/>
+      <source>Support status</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="pagesettingsmodificationchecks_modifications">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="274"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="262"/>
       <source>Modifications</source>
       <translation>التعديلات</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_enable_all_modifications">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="280"/>
-      <source>All modifications enabled</source>
-      <translation>تم تفعيل جميع التعديلات</translation>
+    <message id="pagesettingsmodificationchecks_startup_type">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="267"/>
+      <source>Custom startup scripts</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="pagesettingsmodificationchecks_enable_all_modifications_description_large">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="292"/>
-      <source>Enables all modifications, allowing Signal K and Node-RED to be enabled separately.</source>
-      <translation>تمكن جميع التعديلات، وتتيح لأداة التطوير Node-RED والإشارة K التفعيل بشكل منفصل.</translation>
+    <message id="pagesettingsmodificationchecks_disable_custom_boot_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="274"/>
+      <source>Disable custom startup scripts</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="pagesettingsmodificationchecks_enable_all_modifications_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="294"/>
-      <source>Enables all modifications</source>
-      <translation>تفعل جميع التعديلات</translation>
+    <message id="pagesettingsmodificationchecks_disable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="284"/>
+      <source>Disable custom startup scripts</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="pagesettingsmodificationchecks_reboot_needed">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="318"/>
-      <source>To apply changes a reboot is needed.&lt;br&gt;Press 'OK' to reboot now.</source>
-      <translation>لتطبيق التغييرات يجب إعادة التشغيل.&lt;br&gt; اضغط على «نعم» لإعادة التشغيل الآن.</translation>
+    <message id="pagesettingsmodificationchecks_press_ok_to_disable_and_reboot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="286"/>
+      <source>Press 'OK' to disable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="pagesettingsmodificationchecks_reboot_now_to_apply_changes">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="334"/>
-      <source>Reboot now to apply changes</source>
-      <translation>إعادة التشغيل الآن لتطبيق التغييرات</translation>
+    <message id="pagesettingsmodificationchecks_re_enable_custom_boot_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="307"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_reenable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="319"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_press_ok_to_reenable_and_reboot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="321"/>
+      <source>Press 'OK' to re-enable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_file_system_status">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="342"/>
+      <source>File system (rootfs) status</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_latest_official_firmware_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="365"/>
+      <source>Latest official firmware version installed?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_firmware_reinstall_caption">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="393"/>
+      <source>System settings are preserved during refresh of rootfs</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_title">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="401"/>
+      <source>Refresh rootfs with the latest official firmware</source>
+      <translation type="unfinished">إعادة تثبيت أحدث إصدار للبرنامج الثابت</translation>
+    </message>
+    <message id="pagesettingsmodificationchecks_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="425"/>
+      <source>Custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_disable_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="427"/>
+      <source>Disable also custom startup scripts?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_integrations">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="447"/>
+      <source>Integrations</source>
+      <translation type="unfinished">التكاملات</translation>
+    </message>
+    <message id="pagesettingsmodificationchecks_modbus_tcp">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="452"/>
+      <source>Modbus-TCP</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsmodificationchecks_signal_k">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="464"/>
+      <source>Signal K</source>
+      <translation type="unfinished">الإشارة K</translation>
+    </message>
+    <message id="pagesettingsmodificationchecks_node_red">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="477"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">أداة التطوير Node-RED</translation>
+    </message>
+    <message id="pagesettingsmodificationchecks_orange_items_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="493"/>
+      <source>Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="pagesettingsmodificationchecks_firmware_reinstall">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="350"/>
-      <source>Reinstall latest stable firmware</source>
-      <translation>إعادة تثبيت أحدث إصدار للبرنامج الثابت</translation>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="372"/>
+      <source>Refresh rootfs with the latest official firmware</source>
+      <oldsource>Reinstall latest stable firmware</oldsource>
+      <translation type="unfinished">إعادة تثبيت أحدث إصدار للبرنامج الثابت</translation>
     </message>
     <message id="pagesettingsmodificationchecks_press_to_install">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="363"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="386"/>
       <source>Press to install</source>
       <translation>اضغط للتثبيت</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_firmware_reinstall_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="368"/>
-      <source>Restore the firmware to its original state while preserving system settings.</source>
-      <translation>يستعيد الحالة الأصلية للبرنامج الثابت بينما يحافظ على إعدادات النظام.</translation>
-    </message>
     <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_description">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="376"/>
-      <source>This will disable all modifications, download and reinstall the latest stable firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
-      <translation>سيؤدي هذا إلى تعطيل جميع التعديلات، وتنزيل وتثبيت أحدث إصدار ثابت من البرنامج الثابت. &lt;br&gt;يلزم الاتصال بالإنترنت.&lt;br&gt; اضغط "نعم" للمتابعة.</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_online_update">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="391"/>
-      <source>Online update</source>
-      <translation>تحديثات عبر الإنترنت</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_install_from_sd_usb">
-      <location filename="../../pages/settings/PageSettingsModificationChecks.qml" line="399"/>
-      <source>Install from SD/USB</source>
-      <translation>التثبيت من خلال SD/USB</translation>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="403"/>
+      <source>This will download and refresh rootfs with the latest official firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
+      <oldsource>This will disable all modifications, download and reinstall the latest stable firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</oldsource>
+      <translation type="unfinished">سيؤدي هذا إلى تعطيل جميع التعديلات، وتنزيل وتثبيت أحدث إصدار ثابت من البرنامج الثابت. &lt;br&gt;يلزم الاتصال بالإنترنت.&lt;br&gt; اضغط "نعم" للمتابعة.</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
-      <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="21"/>
+      <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
       <source>Product support &amp; manuals</source>
       <translation>دعم المنتج/ الكتيبات</translation>
     </message>
     <message id="settings_support_links_community">
-      <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="36"/>
       <source>Victron Community</source>
       <translation>مجتمع Victron</translation>
     </message>
     <message id="settings_support_links_distributor">
-      <location filename="../../pages/settings/PageSettingsUsefulLinks.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="42"/>
       <source>Find a local distributor</source>
       <translation>البحث عن موزع محلي</translation>
     </message>
@@ -9380,7 +9494,7 @@ firmware integrity before contacting support</source>
       <translation>سيعاد تحميل الصفحة تلقائيا خلال 5 ثوانٍ.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="546"/>
+      <location filename="../../components/CommonWords.qml" line="557"/>
       <source>Dynamic power limit</source>
       <translation>حد الطاقة الديناميكية</translation>
     </message>
@@ -9421,7 +9535,7 @@ firmware integrity before contacting support</source>
       <translation>إيقاف عند مستوى الخزان</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
       <source>Brief page</source>
       <translation>صفحة المختصر</translation>
     </message>
@@ -9441,7 +9555,7 @@ firmware integrity before contacting support</source>
       <translation>ملف تعريف أمن الشبكة المحلية</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="39"/>
       <source>Energy meters via RS485</source>
       <translation>عدادات الطاقة من خلال RS485</translation>
     </message>
@@ -9466,7 +9580,7 @@ firmware integrity before contacting support</source>
       <translation>الموصلات، الحساسات، الخزانات، العواكس الكهروضوئية، Modbus، MQTT...</translation>
     </message>
     <message id="page_generator_stopped_by_tank_level">
-      <location filename="../../data/Generators.qml" line="61"/>
+      <location filename="../../data/Generators.qml" line="50"/>
       <source>Stopped by tank level</source>
       <translation>متوقف بسبب مستوى خزان</translation>
     </message>
@@ -9481,22 +9595,22 @@ firmware integrity before contacting support</source>
       <translation>خدمات الحرارة</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="270"/>
+      <location filename="../../components/SplashView.qml" line="293"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation/>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="272"/>
+      <location filename="../../components/SplashView.qml" line="295"/>
       <source>Connected to VRM, awaiting device</source>
       <translation/>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="322"/>
+      <location filename="../../components/SplashView.qml" line="345"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation/>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="324"/>
+      <location filename="../../components/SplashView.qml" line="347"/>
       <source>Device is not connected to VRM</source>
       <translation/>
     </message>
@@ -9506,7 +9620,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="77"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="66"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
@@ -9526,12 +9640,12 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">تحميلات التيار المتردد</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="282"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="281"/>
       <source>DC Loads</source>
       <translation type="unfinished">أحمال التيار المستمر</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="451"/>
+      <location filename="../../pages/OverviewPage.qml" line="450"/>
       <source>Overview</source>
       <translation type="unfinished">نظرة عامة</translation>
     </message>
@@ -9556,7 +9670,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">إنتاجية النظام</translation>
     </message>
     <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="58"/>
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="50"/>
       <source>Total PV Power</source>
       <translation type="unfinished">إجمالي الطاقة الكهروضوئية</translation>
     </message>
@@ -9606,7 +9720,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished"/>
     </message>
     <message id="ess_check_multiphase_regulation_setting">
-      <location filename="../../data/common/EssData.qml" line="48"/>
+      <location filename="../../data/Ess.qml" line="76"/>
       <source>Make sure to check the Multiphase regulation setting</source>
       <translation type="unfinished"/>
     </message>
@@ -9619,11 +9733,6 @@ firmware integrity before contacting support</source>
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="39"/>
       <source>Module Voltage</source>
       <translation type="unfinished"/>
-    </message>
-    <message id="page_switch_device_name">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="120"/>
-      <source>Name</source>
-      <translation type="unfinished">اسم</translation>
     </message>
     <message id="page_switchable_output_name">
       <location filename="../../pages/settings/devicelist/PageSwitchableOutput.qml" line="35"/>
@@ -10001,7 +10110,7 @@ firmware integrity before contacting support</source>
       <translation type="unfinished">قارب</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="159"/>
+      <location filename="../../pages/boatpage/LargeCenterGauge.qml" line="158"/>
       <source>RPM</source>
       <translation type="unfinished"/>
     </message>
@@ -10643,37 +10752,37 @@ firmware integrity before contacting support</source>
   <context>
     <name>EnvironmentInputs</name>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="19"/>
       <source>Battery</source>
       <translation>بطارية</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="25"/>
       <source>Fridge</source>
       <translation>المبرد</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="31"/>
       <source>Generic</source>
       <translation>عام</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="37"/>
       <source>Room</source>
       <translation>غرفة</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="43"/>
       <source>Outdoor</source>
       <translation>الخارج</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="49"/>
       <source>Water Heater</source>
       <translation>سخان الماء</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="55"/>
       <source>Freezer</source>
       <translation>ثلاجة تجميد</translation>
     </message>
