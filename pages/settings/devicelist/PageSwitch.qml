@@ -111,20 +111,6 @@ Page {
 			title: CommonWords.setup
 
 			GradientListView {
-				header: SettingsColumn {
-					width: parent.width
-					bottomPadding: spacing
-
-					ListTextField {
-						//% "Name"
-						text: qsTrId("page_switch_device_name")
-						dataItem.uid: root.serviceUid + "/CustomName"
-						dataItem.invalidate: false
-						textField.maximumLength: 32
-						preferredVisible : dataItem.valid
-						placeholderText: CommonWords.custom_name
-					}
-				}
 				model: switchableOutputModel
 				delegate: ListQuantityGroupNavigation {
 					id: outputQuantities
