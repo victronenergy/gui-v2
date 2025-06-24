@@ -9,9 +9,26 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	VeQuickItem {
+		id: hasBluetoothSupport
+		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
+	}
+
 	GradientListView {
 
-		model: VisibleItemModel {
+		model: hasBluetoothSupport.value ? bluetoothAvailable : bluetoothUnavailable
+
+		VisibleItemModel {
+			id: bluetoothUnavailable
+
+			ListItem {
+				//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
+				text: qsTrId("settings_bluetooth_unavailable_message")
+			}
+		}
+
+		VisibleItemModel {
+			id: bluetoothAvailable
 
 			ListSwitch {
 				id: bluetoothEnabled
