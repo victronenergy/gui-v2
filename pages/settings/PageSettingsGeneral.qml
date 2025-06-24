@@ -23,7 +23,7 @@ Page {
 		}
 
 		if (modbusTcpItem.value !== 0){
-			//% "Modbus-TCP"
+			//% "Modbus TCP Server"
 			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_modbus"))
 		}
 		if (signalKItem.valid && signalKItem.value !== 0) {
