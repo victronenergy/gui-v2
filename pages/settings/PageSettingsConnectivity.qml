@@ -34,12 +34,12 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Bluetooth"
-				text: qsTrId("pagesettingsconnectivity_bluetooth")
+				//% "Bluetooth (for VictronConnect App)"
+				text: qsTrId("pagesettingsconnectivity_bluetooth_for_victronconnect_app")
 				secondaryText: networkServices.hasBluetoothSupport
 					? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
-					//% "No Bluetooth adapter connected"
-					: qsTrId("settings_bluetooth_not_available")
+					//% "No Bluetooth available"
+					: qsTrId("pagesettingsconnectivity_bluetooth_not_available")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
 
 				VeQuickItem {
