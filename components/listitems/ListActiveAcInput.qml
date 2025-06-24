@@ -21,5 +21,7 @@ ListText {
 	text: qsTrId("vebus_device_active_ac_input")
 
 	// ActiveInput value is 0-based index.
-	secondaryText: acActiveInput.valid ? CommonWords.acInputFromIndex(acActiveInput.value) : CommonWords.disconnected
+	secondaryText: acActiveInput.valid && acActiveInput.value !== VenusOS.AcInputs_InputSource_Inverting
+			? CommonWords.acInputFromIndex(acActiveInput.value)
+			: CommonWords.disconnected
 }
