@@ -4,10 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Templates as CT
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-CT.TextField {
+T.TextField {
 	id: root
 
 	property color borderColor: Theme.color_ok

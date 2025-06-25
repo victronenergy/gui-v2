@@ -5,7 +5,7 @@
 
 import QtQuick
 import QtQuick.Window
-import QtQuick.Controls as QtQuickControls
+import QtQuick.Controls as C
 import Victron.VenusOS
 
 FocusScope {
@@ -138,7 +138,7 @@ FocusScope {
 		source: Global.isGxDevice
 				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
-		parent: QtQuickControls.Overlay.overlay
+		parent: C.Overlay.overlay
 		z: 1
 	}
 
