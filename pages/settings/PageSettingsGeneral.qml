@@ -10,11 +10,12 @@ Page {
 	id: root
 
 	readonly property bool isClean: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Clean
-		&& systemHooksStateItem.valid
-		&& !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtBoot)
+		&& systemHooksStateItem.valid && !(systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup)
 	readonly property bool isModified: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Modified
+		|| (systemHooksStateItem.valid && (systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup))
+	readonly property bool isRaspberry: modelItem.valid && modelItem.value.indexOf("Raspberry") !== -1
 
-	function modificationCheckText() {
+	function supportStateText() {
 		let runningServices = []
 
 		if (isModified){
@@ -30,7 +31,7 @@ Page {
 			//% "Signal K"
 			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_signalk"))
 		}
-		if (nodeRedItem.valid && nodeRedItem.value !== 0) {
+		if (nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled) {
 			//% "Node-RED"
 			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_nodered"))
 		}
@@ -44,6 +45,11 @@ Page {
 			return runningServices.join(", ")
 		}
 
+		if (isRaspberry){
+			//% "Unsupported GX device"
+			return qsTrId("pagesettingsgeneral_modificationchecks_unsupported_device")
+		}
+
 		if (isClean){
 			//% "Clean"
 			return qsTrId("pagesettingsgeneral_modificationchecks_clean")
@@ -52,7 +58,7 @@ Page {
 		return ""
 	}
 
-	function modificationCheckColor() {
+	function supportStateColor() {
 		if (isModified){
 			// "Modified"
 			return Theme.color_red
@@ -63,13 +69,22 @@ Page {
 			// "Running integrations"
 			return Theme.color_orange
 		}
+		if (isRaspberry){
+			// "Unsupported GX device"
+			return Theme.color_red
+		}
 		if (isClean){
 			// "Clean"
 			return Theme.color_green
 		}
 
-		// "Check details"
+		// ""
 		return Theme.color_font_secondary
+	}
+
+	VeQuickItem {
+		id: modelItem
+		uid: Global.venusPlatform.serviceUid + "/Device/Model"
 	}
 
 	VeQuickItem {
@@ -222,8 +237,8 @@ Page {
 			ListNavigation {
 				//% "Support status (modifications checks)"
 				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
-				secondaryText: modificationCheckText()
-				secondaryLabel.color: modificationCheckColor()
+				secondaryText: supportStateText()
+				secondaryLabel.color: supportStateColor()
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
 
