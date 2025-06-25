@@ -297,9 +297,9 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	case SwitchableOutput_Type_Momentary:
 		//% "Momentary"
 		return qtTrId("switchable_output_momentary");
-	case SwitchableOutput_Type_Latching:
-		//% "Latching"
-		return qtTrId("switchable_output_latching");
+	case SwitchableOutput_Type_Toggle:
+		//% "Toggle"
+		return qtTrId("switchable_output_toggle");
 	case SwitchableOutput_Type_Dimmable:
 		//% "Dimmable"
 		return qtTrId("switchable_output_dimmable");
