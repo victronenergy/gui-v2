@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -57,7 +56,7 @@ FocusScope {
 		width: Theme.geometry_statusBar_button_height
 		height: Theme.geometry_statusBar_button_height
 		backgroundColor: "transparent"  // don't show background when disabled
-		display: C.AbstractButton.IconOnly
+		display: Button.IconOnly
 		color: Theme.color_ok
 		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
 		onActiveFocusChanged: {

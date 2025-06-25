@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 BaseListItem {
