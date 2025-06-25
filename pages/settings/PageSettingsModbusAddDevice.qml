@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls as C
 
 Page {
 	id: root
@@ -15,7 +14,7 @@ Page {
 	//% "Add Modbus TCP/UDP device"
 	title: qsTrId("add_modbus_tcp_udp_device")
 
-	C.ButtonGroup {
+	ButtonGroup {
 		id: radioButtonGroup
 	}
 
