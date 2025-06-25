@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 Page {
@@ -78,7 +77,7 @@ Page {
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.selectedIndex === model.index
-			C.ButtonGroup.group: radioButtonGroup
+			ButtonGroup.group: radioButtonGroup
 
 			bottomContent.z: model.index === optionsListView.selectedIndex ? 1 : -1
 			bottomContentChildren: Loader {
@@ -195,7 +194,7 @@ Page {
 			}
 		}
 
-		C.ButtonGroup {
+		ButtonGroup {
 			id: radioButtonGroup
 		}
 	}

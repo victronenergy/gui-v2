@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 Rectangle {
@@ -152,12 +151,12 @@ Rectangle {
 		}
 		onObjectAdded: (index, object) => {
 			if (index === 0) {
-				stackView.push(object, {}, C.StackView.Immediate)
+				stackView.push(object, {}, StackView.Immediate)
 			}
 		}
 	}
 
-	C.StackView {
+	StackView {
 		id: stackView
 		anchors {
 			left: parent.left

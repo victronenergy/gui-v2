@@ -855,6 +855,7 @@ qt_add_qml_module(VenusQMLModule
     URI Victron.VenusOS
     VERSION 2.0
     STATIC
+    IMPORTS QtQuick.Controls.Basic
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VENUS_QML_MODULE_SOURCES}
     SOURCES ${VenusQMLModule_CPP_SOURCES}
