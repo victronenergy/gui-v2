@@ -4,10 +4,9 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
-C.StackView {
+StackView {
 	id: root
 
 	property var pageUrls: []
@@ -89,7 +88,7 @@ C.StackView {
 
 			if (root.depth === 0) {
 				// When the first page is added to the stack, move the stack into view.
-				root.push(objectOrUrl, properties, C.StackView.Immediate)
+				root.push(objectOrUrl, properties, StackView.Immediate)
 				fakePushAnimation.duration = _animationDuration(operation)
 				fakePushAnimation.start()
 			} else {
@@ -121,11 +120,11 @@ C.StackView {
 		}
 
 		function _animationDuration(operation) {
-			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? root.animationDuration : 0
+			return Global.allPagesLoaded && operation !== StackView.Immediate ? root.animationDuration : 0
 		}
 
 		function _adjustedStackOperation(operation) {
-			return Global.allPagesLoaded && operation !== C.StackView.Immediate ? operation : C.StackView.Immediate
+			return Global.allPagesLoaded && operation !== StackView.Immediate ? operation : StackView.Immediate
 		}
 	}
 
@@ -148,7 +147,7 @@ C.StackView {
 		onStopped: {
 			// When leaving the page stack destroy all the pages
 			while (root.depth > 1) {
-				const page = root.pop(duration > 0 ? C.StackView.PopTransition : C.StackView.Immediate)
+				const page = root.pop(duration > 0 ? StackView.PopTransition : StackView.Immediate)
 				if (page && !Theme.objectHasQObjectParent(page)) {
 					page.destroy()
 				}
