@@ -57,9 +57,9 @@ QtObject {
 
 			function addToGroup() {
 				if (output.type !== VenusOS.SwitchableOutput_Type_Momentary
-						&& output.type !== VenusOS.SwitchableOutput_Type_Latching
+						&& output.type !== VenusOS.SwitchableOutput_Type_Toggle
 						&& output.type !== VenusOS.SwitchableOutput_Type_Dimmable) {
-					// Only momentary/latching/dimmable outputs are controllable and should appear
+					// Only momentary/toggle/dimmable outputs are controllable and should appear
 					// in the aux cards, so do not add other types of outputs to the model.
 					return
 				}

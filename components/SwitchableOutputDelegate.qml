@@ -102,7 +102,7 @@ BaseListItem {
 			anchors.horizontalCenter: parent.horizontalCenter
 			sourceComponent: output.type === VenusOS.SwitchableOutput_Type_Dimmable ? dimmingComponent
 					: output.type === VenusOS.SwitchableOutput_Type_Momentary ? momentaryComponent
-					: output.type === VenusOS.SwitchableOutput_Type_Latching ? latchingComponent
+					: output.type === VenusOS.SwitchableOutput_Type_Toggle ? toggleComponent
 					: null
 
 			// Instead of giving focus to the individual controls, handle the keys directly here.
@@ -292,7 +292,7 @@ BaseListItem {
 	}
 
 	Component {
-		id: latchingComponent
+		id: toggleComponent
 
 		SegmentedButtonRow {
 			id: buttonRow
@@ -308,9 +308,9 @@ BaseListItem {
 
 			function activateIndex(index) {
 				const newValue = index === 1 ? 1 : 0
-				if (newValue !== latchingState.backendValue) {
+				if (newValue !== toggleState.backendValue) {
 					currentIndex = index
-					latchingState.writeValue(newValue)
+					toggleState.writeValue(newValue)
 				}
 			}
 
@@ -318,13 +318,13 @@ BaseListItem {
 			height: Theme.geometry_switchableoutput_button_height
 			fontPixelSize: Theme.font_size_body2
 			model: [{ "value": CommonWords.off }, { "value": CommonWords.on }]
-			enabled: !latchingState.busy
+			enabled: !toggleState.busy
 			onButtonClicked: (buttonIndex) => {
 				activateIndex(buttonIndex)
 			}
 
 			SettingSync {
-				id: latchingState
+				id: toggleState
 				backendValue: output.state
 				onUpdateToBackend: (value) => { output.setState(value) }
 				onBackendValueChanged: buttonRow.currentIndex = backendValue === 1 ? 1 : 0

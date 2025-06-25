@@ -478,7 +478,7 @@ public:
 
 	enum SwitchableOutput_Type {
 		SwitchableOutput_Type_Momentary = 0,
-		SwitchableOutput_Type_Latching,
+		SwitchableOutput_Type_Toggle,
 		SwitchableOutput_Type_Dimmable,
 		SwitchableOutput_Type_Slave = 5
 	};
