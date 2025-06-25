@@ -4,9 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import QtQuick.Templates as CT
-import QtQuick.Controls.impl as CP
 import QtQuick.Layouts
 import Victron.VenusOS
 
