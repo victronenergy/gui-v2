@@ -4,11 +4,11 @@
 */
 
 import QtQuick
-import QtQuick.Templates as CT
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-CT.ComboBox {
+T.ComboBox {
 	id: root
 
 	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
@@ -20,7 +20,7 @@ CT.ComboBox {
 	bottomPadding: Theme.geometry_comboBox_verticalPadding
 	spacing: Theme.geometry_comboBox_spacing
 
-	delegate: CT.ItemDelegate {
+	delegate: T.ItemDelegate {
 		id: optionDelegate
 
 		width: root.width
@@ -91,7 +91,7 @@ CT.ComboBox {
 			   : Theme.color_background_disabled
 	}
 
-	popup: CT.Popup {
+	popup: T.Popup {
 		width: root.width
 		implicitHeight: contentItem.implicitHeight
 

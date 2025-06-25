@@ -4,10 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Templates as CT
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-CT.ScrollBar {
+T.ScrollBar {
 	id: root
 
 	implicitWidth: Math.max(
