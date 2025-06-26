@@ -14,7 +14,7 @@ Rectangle {
 	property bool showSplashAnimation: Qt.platform.os != "wasm"
 	readonly property bool allPagesLoaded: Global.allPagesLoaded
 
-	color: Theme.color_background_primary
+	color: Theme.color_page_background
 	visible: Global.splashScreenVisible
 
 	onAllPagesLoadedChanged: {
@@ -91,10 +91,16 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: Theme.screenSize === Theme.FiveInch
-				? "qrc:/images/splash-logo-icon-5inch.svg"
-				: "qrc:/images/splash-logo-icon-7inch.svg"
-		color: Theme.color_splash_logo
+		source: "qrc:/images/splash-logo-icon.svg"
+		color: Theme.color_splash_logo_icon
+		width: Theme.screenSize === Theme.FiveInch
+			? 224
+			: 284
+		height: Theme.screenSize === Theme.FiveInch
+			? 43
+			: 55
+		sourceSize.width: width
+		sourceSize.height: height
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
@@ -113,10 +119,16 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: Theme.screenSize === Theme.FiveInch
-				? "qrc:/images/splash-logo-text-5inch.svg"
-				: "qrc:/images/splash-logo-text-7inch.svg"
-		color: Theme.color_splash_logo
+		source: "qrc:/images/splash-logo-text.svg"
+		color: Theme.color_splash_logo_text
+		width: Theme.screenSize === Theme.FiveInch
+			? 224
+			: 284
+		height: Theme.screenSize === Theme.FiveInch
+			? 43
+			: 55
+		sourceSize.width: width
+		sourceSize.height: height
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim
