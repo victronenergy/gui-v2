@@ -181,7 +181,9 @@
     <script src="venus-gui-v2.js"></script>
     <script type="text/javascript" src="qtloader.js"></script>
     <script type="text/javascript">
-        var initialized = false
+        // Note: VRM does not use this index.html, so if you add some
+        // control variables here, make sure you coordinate with VRM.
+        var guiv2initialized = false
         var watchdogHit = false // this gets set to 'true' by a timer via BackendConnection::hitWatchdog()
         var reloadTriggered = false // this gets set to 'true' if reload() is called to prevent multiple reload calls
         console.log("starting watchdog timer")
@@ -189,7 +191,7 @@
 
         function checkWatchdog()
         {
-            if (!watchdogHit && !reloadTriggered && initialized) {
+            if (!watchdogHit && !reloadTriggered && guiv2initialized) {
                 console.error("Watchdog timer expired - reloading page")
                 reload()
                 reloadTriggered = true
