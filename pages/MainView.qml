@@ -26,7 +26,9 @@ FocusScope {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: mainViewVisible && !pageStack.busy && (!swipeView || !swipeView.flicking)
+	property bool allowPageAnimations: Global.animationEnabled
+									   && mainViewVisible
+									   && !pageStack.busy && (!swipeView || !swipeView.flicking)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -275,6 +277,7 @@ FocusScope {
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
 		viewActive: root.cardsActive
+		animationEnabled: root.allowPageAnimations
 		focus: root._focusTarget === cardsLoader
 		KeyNavigation.up: statusBar
 
@@ -406,7 +409,7 @@ FocusScope {
 			return customButton
 		}
 		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
-		animationEnabled: BackendConnection.applicationVisible
+		animationEnabled: Global.animationEnabled
 		backgroundColor: root.backgroundColor
 
 		onLeftButtonClicked: {

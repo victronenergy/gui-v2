@@ -29,7 +29,9 @@ FocusScope {
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
-	opacity: 0
+	opacity: 0.0
+
+	Component.onCompleted: if (!animationEnabled) { root.opacity = 1.0 }
 
 	Rectangle {
 		id: backgroundRect
@@ -83,9 +85,9 @@ FocusScope {
 		font.family: Global.fontFamily
 		font.pixelSize: Theme.font_size_caption
 		Behavior on opacity {
+			enabled: root.animationEnabled
 			OpacityAnimator {
 				id: animator
-
 				duration: Theme.animation_toastNotification_fade_duration
 			}
 		}

@@ -1134,6 +1134,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/dcloads.svg
         images/dropdown.svg
         images/electron.svg
+        images/electron_arrow.svg
         images/ess.svg
         images/freshWater.svg
         images/key_navigation_highlight_dark.svg

@@ -518,6 +518,7 @@ SwipeViewPage {
 				endWidget: inverterChargerWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(acInputWidgetConnector)
@@ -552,6 +553,7 @@ SwipeViewPage {
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root._inputConnectorAnimationMode(dcInputConnector)
@@ -570,7 +572,7 @@ SwipeViewPage {
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
-		paused: cpuInfo.overLimit || Global.pauseElectronAnimations
+		paused: cpuInfo.overLimit
 		running: root.animationEnabled
 		property real previousElapsed
 
@@ -615,6 +617,7 @@ SwipeViewPage {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: defaultVisible && !isNaN(Global.system.solar.acPower)
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
@@ -634,6 +637,7 @@ SwipeViewPage {
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				visible: defaultVisible && !isNaN(Global.system.solar.dcPower)
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
@@ -686,6 +690,7 @@ SwipeViewPage {
 		endWidget: acLoadsWidget
 		endLocation: VenusOS.WidgetConnector_Location_Left
 		expanded: root._expandLayout
+		frameAnimation: overviewPageRootAnimation
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
@@ -705,6 +710,7 @@ SwipeViewPage {
 		endWidget: batteryWidget
 		endLocation: VenusOS.WidgetConnector_Location_Top
 		expanded: root._expandLayout
+		frameAnimation: overviewPageRootAnimation
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
 
@@ -781,6 +787,7 @@ SwipeViewPage {
 			endWidget: essentialLoadsWidget
 			endLocation: VenusOS.WidgetConnector_Location_Left
 			expanded: root._expandLayout
+			frameAnimation: overviewPageRootAnimation
 			animateGeometry: root._animateGeometry
 			animationEnabled: root.animationEnabled
 
@@ -826,6 +833,7 @@ SwipeViewPage {
 				endWidget: dcLoadsWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 
@@ -906,6 +914,7 @@ SwipeViewPage {
 				endOffsetY: acLoadsToEvcsEndAnchor.offsetY
 				midpointOffsetX: -evcsWidget.loadsConnectorsXDistance
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
@@ -941,6 +950,7 @@ SwipeViewPage {
 				endOffsetY: essentialLoadsToEvcsEndAnchor.offsetY
 				midpointOffsetX: -evcsWidget.loadsConnectorsXDistance
 				expanded: root._expandLayout
+				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
