@@ -16,17 +16,17 @@ QtObject {
 
 	readonly property var stateModel: [
 		{
-			//% "Optimized with battery life"
-			display: qsTrId("ess_state_optimized_with_battery_life"),
-			//% "Optimized + battery life"
-			buttonText: qsTrId("ess_state_optimized_with_battery_life_button"),
+			//% "Optimized with BatteryLife"
+			display: qsTrId("ess_state_optimized_with_batterylife"),
+			//% "Optimized + BatteryLife"
+			buttonText: qsTrId("ess_state_optimized_with_batterylife_button"),
 			value: VenusOS.Ess_State_OptimizedWithBatteryLife
 		},
 		{
-			//% "Optimized without battery life"
-			display: qsTrId("ess_state_optimized_without_battery_life"),
+			//% "Optimized without BatteryLife"
+			display: qsTrId("ess_state_optimized_without_batterylife"),
 			//% "Optimized"
-			buttonText: qsTrId("ess_state_optimized_without_battery_life_button"),
+			buttonText: qsTrId("ess_state_optimized_without_batterylife_button"),
 			value: VenusOS.Ess_State_OptimizedWithoutBatteryLife
 		},
 		{

@@ -136,7 +136,7 @@ Page {
 		ListRadioButtonGroup {
 			id: batteryLifeState
 
-			//% "Battery life state"
+			//% "BatteryLife state"
 			text: qsTrId("settings_ess_batteryLife_state")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
