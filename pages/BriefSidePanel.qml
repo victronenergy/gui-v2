@@ -280,7 +280,7 @@ exported power v  0.4 |   /
 		//% "DC Loads"
 		title: qsTrId("brief_dc_loads")
 		icon.source: "qrc:/images/dcloads.svg"
-		loadersActive: !isNaN(Global.system.dc.power)
+		loadersActive: Global.system.dc.hasPower
 		visible: loadersActive
 		quantityLabel.dataObject: Global.system.dc
 		sideComponent: LoadGraph {
