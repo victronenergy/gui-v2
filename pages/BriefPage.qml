@@ -307,7 +307,7 @@ SwipeViewPage {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-			active: !isNaN(Global.system.dc.power) && root.state !== "panelOpened"
+			active: Global.system.dc.hasPower && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: Gauges.rightGaugeParameters(1, _rightGaugeCount)
 

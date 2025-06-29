@@ -46,7 +46,7 @@ SwipeViewPage {
 			+ (Global.acInputs.input2?.operational ? 1 : 0)
 			+ (Global.system.showInputLoads ? 1 : 0)
 			+ (Global.system.hasAcOutSystem ? 1 : 0)
-			+ (Global.allDevicesModel.combinedDcLoadDevices.count > 0 || !isNaN(Global.system.dc.power) ? 1 : 0)
+			+ (Global.system.dc.hasPower ? 1 : 0)
 			+ (Global.solarInputs.inputCount === 0 ? 0 : 1)
 			+ (Global.evChargers.model.count === 0 ? 0 : 1)
 			+ Global.evChargers.acInputPositionCount
@@ -353,7 +353,7 @@ SwipeViewPage {
 		} else {
 			essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
 		}
-		if (Global.allDevicesModel.combinedDcLoadDevices.count > 0 || !isNaN(Global.system.dc.power)) {
+		if (Global.system.dc.hasPower) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
 		}
 		_rightWidgets = widgets
