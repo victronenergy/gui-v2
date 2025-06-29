@@ -17,11 +17,8 @@ DeviceModel {
 			id: serviceInstantiator
 
 			required property string modelData
-			readonly property ServiceModelLoader modelLoader: ServiceModelLoader {
-				serviceType: modelData
-			}
 
-			model: modelLoader.item
+			model: ServiceModel { serviceTypes: [modelData] }
 			delegate: SolarDevice {
 				id: solarDevice
 

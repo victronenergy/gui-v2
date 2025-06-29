@@ -19,7 +19,7 @@ QtObject {
 	property real acOutputPositionPower: NaN // The total power for chargers with an output position
 
 	readonly property ServiceDeviceModel model: ServiceDeviceModel {
-		serviceType: "evcharger"
+		serviceTypes: ["evcharger"]
 		modelId: "evcharger"
 		deviceDelegate: EvCharger {
 			id: evCharger

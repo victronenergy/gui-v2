@@ -143,13 +143,14 @@ Page {
 	ServiceDeviceModel {
 		id: evChargerModel
 
-		serviceType: "evcharger"
+		serviceTypes: ["evcharger"]
 		modelId: "evcharger"
 		deviceDelegate: Device {
 			id: device
 
 			required property string uid
 			readonly property bool isRealCharger: valid && _chargerMode.valid
+			property bool addedToModel
 
 			readonly property VeQuickItem _chargerMode: VeQuickItem {
 				uid: device.serviceUid + "/Mode"
@@ -157,9 +158,17 @@ Page {
 
 			serviceUid: uid
 			onIsRealChargerChanged: {
-				if (isRealCharger) {
+				if (isRealCharger && !addedToModel) {
 					evChargerModel.addDevice(device)
-				} else {
+					addedToModel = true
+				} else if (!isRealCharger && addedToModel) {
+					evChargerModel.removeDevice(device.serviceUid)
+					addedToModel = false
+				}
+			}
+
+			Component.onDestruction: {
+				if (addedToModel) {
 					evChargerModel.removeDevice(device.serviceUid)
 				}
 			}
@@ -171,13 +180,14 @@ Page {
 	ServiceDeviceModel {
 		id: generatorModel
 
-		serviceType: "generator"
+		serviceTypes: ["generator"]
 		modelId: "generator"
 		deviceDelegate: Device {
 			id: generatorDevice
 
 			required property string uid
 			readonly property bool controllable: valid && _enabled.valid && _enabled.value === 1
+			property bool addedToModel
 
 			readonly property VeQuickItem _enabled: VeQuickItem {
 				uid: generatorDevice.serviceUid + "/Enabled"
@@ -185,9 +195,17 @@ Page {
 
 			serviceUid: uid
 			onControllableChanged: {
-				if (controllable) {
+				if (controllable && !addedToModel) {
 					generatorModel.addDevice(generatorDevice)
-				} else {
+					addedToModel = true
+				} else if (!controllable && addedToModel) {
+					generatorModel.removeDevice(generatorDevice.serviceUid)
+					addedToModel = false
+				}
+			}
+
+			Component.onDestruction: {
+				if (addedToModel) {
 					generatorModel.removeDevice(generatorDevice.serviceUid)
 				}
 			}

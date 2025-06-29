@@ -91,7 +91,7 @@ QtObject {
 			+ rawWaterTanks.count
 
 	readonly property Instantiator _tankObjects: Instantiator {
-		model: root._modelLoader.item
+		model: ServiceModel { serviceTypes: ["tank"] }
 		delegate: Tank {
 			id: tank
 			required property string uid
@@ -128,10 +128,6 @@ QtObject {
 		onObjectRemoved: (index, tankObject) => {
 			tankObject.canUpdate = false
 		}
-	}
-
-	readonly property ServiceModelLoader _modelLoader: ServiceModelLoader {
-		serviceType: "tank"
 	}
 
 	function tankModel(type) {
