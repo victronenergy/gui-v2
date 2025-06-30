@@ -110,6 +110,8 @@ CT.SpinBox {
 	Component.onCompleted: primaryTextInput.updateText()
 
 	contentItem: Item {
+		id: spinBoxContentItem
+
 		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
 		// so that it can call the valueFromText() function
 		readonly property alias text: primaryTextInput.text
@@ -138,6 +140,19 @@ CT.SpinBox {
 					&& root.orientation === Qt.Vertical
 				? root.down.indicator
 				: null
+
+		// we include the additional GlobalKeyNavigationHighlight's visible binding conditions here
+		// because we want to know its absolute visibility, not just its "intention" to be active.
+		readonly property bool keyNavigationHighlightVisible: root.focusMode === VenusOS.SpinBox_FocusMode_Navigate
+															  && spinBoxContentItem.visible
+															  && spinBoxContentItem.activeFocus
+															  && Global.keyNavigationEnabled
+															  && !Global.pageManager?.expandLayout
+
+		// Shows a highlight box around the text when key navigation is enabled and the SpinBox is
+		// in navigation mode.
+		KeyNavigationHighlight.active: keyNavigationHighlightVisible
+		KeyNavigationHighlight.fill: editHighlightArea
 
 		Column {
 			id: valueColumn
@@ -242,29 +257,25 @@ CT.SpinBox {
 			}
 		}
 
-		// Shows a highlight box around the text when key navigation is enabled and the SpinBox is
-		// in navigation mode.
-		KeyNavigationHighlight {
-			id: navigationHighlight
+		Item {
+			id: editHighlightArea
+
 			anchors.centerIn: parent
 			width: primaryTextInputItem.width
 			height: valueColumn.height
-			active: Global.keyNavigationEnabled
-					&& root.focusMode === VenusOS.SpinBox_FocusMode_Navigate
-					&& parent.activeFocus
-		}
 
-		// Shows a box around the text when the SpinBox text can be edited directly (to indicate it
-		// can be clicked) or when key navigation is enabled and the SpinBox is in edit mode (to
-		// show up/down arrows indicating that the arrow keys can be used to change the value).
-		EditFrame {
-			anchors.fill: navigationHighlight
-			visible: !navigationHighlight.visible
-					&& (root.focusMode === VenusOS.SpinBox_FocusMode_Edit || root.editable)
-			border.color: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
-				  ? Theme.color_focus_highlight
-				  : Theme.color_blue
-			arrowHintsVisible: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
+			// Shows a box around the text when the SpinBox text can be edited directly (to indicate it
+			// can be clicked) or when key navigation is enabled and the SpinBox is in edit mode (to
+			// show up/down arrows indicating that the arrow keys can be used to change the value).
+			EditFrame {
+				anchors.fill: parent
+				visible: !spinBoxContentItem.keyNavigationHighlightVisible
+						 && (root.focusMode === VenusOS.SpinBox_FocusMode_Edit || root.editable)
+				border.color: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
+							  ? Theme.color_focus_highlight
+							  : Theme.color_blue
+				arrowHintsVisible: root.focusMode === VenusOS.SpinBox_FocusMode_Edit
+			}
 		}
 	}
 
@@ -293,10 +304,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: parent.activeFocus
-		}
+		KeyNavigationHighlight.active: activeFocus
 
 		Image {
 			anchors.centerIn: parent
@@ -330,10 +338,7 @@ CT.SpinBox {
 		}
 		Keys.enabled: Global.keyNavigationEnabled
 
-		KeyNavigationHighlight {
-			anchors.fill: parent
-			active: parent.activeFocus
-		}
+		KeyNavigationHighlight.active: activeFocus
 
 		Image {
 			anchors.centerIn: parent

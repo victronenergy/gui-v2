@@ -23,7 +23,6 @@ CT.Button {
 			: Theme.color_ok
 	property alias border: backgroundRect.border
 	property alias radius: backgroundRect.radius
-	property real highlightMargins
 	property bool showEnabled: enabled
 
 	onPressed: pressEffect.start(pressX/width, pressY/height)
@@ -71,11 +70,5 @@ CT.Button {
 		color: root.color
 	}
 
-	KeyNavigationHighlight {
-		anchors {
-			fill: parent
-			margins: root.highlightMargins
-		}
-		active: root.activeFocus
-	}
+	KeyNavigationHighlight.active: root.activeFocus
 }

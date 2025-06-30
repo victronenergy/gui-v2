@@ -13,6 +13,8 @@ import Victron.VenusOS
 	Set preferredVisible=false if it should be hidden (e.g. if it would display invalid data).
 */
 FocusScope {
+	id: root
+
 	property bool preferredVisible: true
 
 	// True if the item should be made visible. This is used by VisibleItemModel to filter out
@@ -22,7 +24,6 @@ FocusScope {
 	property bool effectiveVisible: preferredVisible
 
 	property alias background: backgroundRect
-	property alias navigationHighlight: keyNavigationHighlight
 
 	// Allow item to receive focus within its focus scope.
 	focus: true
@@ -31,15 +32,11 @@ FocusScope {
 	// TODO from Qt 6.7 can change this to set focusPolicy instead.
 	activeFocusOnTab: true
 
+	KeyNavigationHighlight.active: root.activeFocus
+
 	ListItemBackground {
 		id: backgroundRect
 		anchors.fill: parent
 		z: -2 // allow PressArea highlight to be seen
-	}
-
-	KeyNavigationHighlight {
-		id: keyNavigationHighlight
-		anchors.fill: parent
-		active: parent.activeFocus
 	}
 }

@@ -142,7 +142,7 @@ Page {
 						showAccessLevel: root.showAccessLevel
 						writeAccessLevel: root.writeAccessLevel
 						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
-						navigationHighlight.visible: false
+						KeyNavigationHighlight.active: false
 						validateInput: function() {
 							// Validate the password on Enter/Return, or when "Confirm" is
 							// clicked. Ignore validation requests when the field does not

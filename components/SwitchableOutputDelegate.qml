@@ -12,10 +12,6 @@ BaseListItem {
 	readonly property int _buttonWidth: Theme.geometry_controlCard_minimumWidth
 			- (2 * Theme.geometry_controlCard_button_margins)
 
-	// Hide the delegate highlight when the loader item is showing its own highlight (i.e. if
-	// showing a DimmingSlider in edit mode).
-	navigationHighlight.active: activeFocus && !switchWidgetLoader.item?.activeFocus
-
 	SwitchableOutput {
 		id: output
 		uid: root.outputUid
@@ -115,6 +111,11 @@ BaseListItem {
 			Keys.onPressed: (event) => { event.accepted = !event.isAutoRepeat && item.handlePress !== undefined && item.handlePress(event.key) }
 			Keys.onReleased: (event) => { event.accepted = item.handleRelease !== undefined && item.handleRelease(event.key) }
 			Keys.enabled: Global.keyNavigationEnabled
+
+			// Hide the delegate highlight when the loader item is showing its own highlight (i.e. if
+			// showing a DimmingSlider in edit mode).
+			KeyNavigationHighlight.active: switchWidgetLoader.activeFocus && !switchWidgetLoader.item?.activeFocus
+			KeyNavigationHighlight.fill: root
 		}
 	}
 
@@ -195,16 +196,12 @@ BaseListItem {
 				}
 				event.accepted = false
 			}
+			KeyNavigationHighlight.active: slider.activeFocus
 
 			Label {
 				anchors.centerIn: parent
 				text: CommonWords.onOrOff(dimmingState.expectedValue)
 				font.pixelSize: Theme.font_size_body2
-			}
-
-			KeyNavigationHighlight {
-				anchors.fill: parent
-				active: parent.activeFocus
 			}
 
 			SettingSync {
