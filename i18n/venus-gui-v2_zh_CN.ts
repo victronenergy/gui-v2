@@ -223,14 +223,14 @@
       <source>Ethernet</source>
       <translation type="unfinished">以太网</translation>
     </message>
-    <message id="pagesettingsconnectivity_bluetooth">
+    <message id="pagesettingsconnectivity_bluetooth_for_victronconnect_app">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="38"/>
-      <source>Bluetooth</source>
-      <translation>蓝牙</translation>
+      <source>Bluetooth (for VictronConnect App)</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="settings_bluetooth_not_available">
+    <message id="pagesettingsconnectivity_bluetooth_not_available">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
-      <source>No Bluetooth adapter connected</source>
+      <source>No Bluetooth available</source>
       <translation type="unfinished"/>
     </message>
     <message id="page_settings_no_cellular_modem_connected">
@@ -243,13 +243,8 @@
       <source>General</source>
       <translation>通用</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="349"/>
-      <source>Firmware</source>
-      <translation>固件</translation>
-    </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="221"/>
       <source>Date &amp; Time</source>
       <translation>日期 &amp;时间</translation>
     </message>
@@ -763,13 +758,18 @@
       <source>Bluetooth adapters</source>
       <translation>蓝牙适配器</translation>
     </message>
+    <message id="settings_bluetooth_unavailable_message">
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="26"/>
+      <source>Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_pincode">
-      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="42"/>
       <source>Pincode</source>
       <translation>PIN码</translation>
     </message>
     <message id="settings_bluetooth_remove_existing_pairing_info">
-      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="52"/>
       <source>It might be necessary to remove existing pairing information before connecting.</source>
       <translation>连接之前，可能需要删除现有配对信息。</translation>
     </message>
@@ -971,12 +971,12 @@
       <translation>浅色</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
       <source>Language</source>
       <translation>语言</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="201"/>
       <source>Changing language</source>
       <translation>更改语言</translation>
     </message>
@@ -1208,16 +1208,12 @@
     </message>
     <message id="settings_firmware_online_installing_progress">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="82"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="378"/>
       <source>Installing %1 %2%</source>
-      <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress
-----------
-Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress</extracomment>
+      <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress</extracomment>
       <translation>正在安装 %1 %2%</translation>
     </message>
     <message id="settings_firmware_online_installing">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="86"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="382"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation type="unfinished">正在安装 %1...</translation>
@@ -1374,67 +1370,73 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>声音报警</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="23"/>
       <source>Modifications installed</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="27"/>
-      <source>Modbus-TCP</source>
-      <translation type="unfinished"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="28"/>
+      <source>Modbus TCP Server</source>
+      <oldsource>Modbus-TCP</oldsource>
+      <translation type="unfinished">Modbus TCP 服务器</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="32"/>
       <source>Signal K</source>
       <translation type="unfinished">Signal K</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_nodered">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="36"/>
       <source>Node-RED</source>
       <translation type="unfinished">Node-RED</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_running_integrations">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="43"/>
       <source>%1 running integrations</source>
       <translation type="unfinished"/>
     </message>
+    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="50"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">不支持的GX 设备</translation>
+    </message>
     <message id="pagesettingsgeneral_modificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="55"/>
       <source>Clean</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_documentation">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="233"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_support_status_modification_checks">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>Support status (modifications checks)</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="244"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="259"/>
       <source>Demo mode</source>
       <translation>演示模式</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="251"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="266"/>
       <source>ESS demo</source>
       <translation>ESS演示</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="268"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>船/房车演示1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>船/房车演示2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="274"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>开始演示模式会更改某些设置，用户界面短时间没有反应。</translation>
     </message>
@@ -1916,21 +1918,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>二氧化碳报警</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="30"/>
       <source>Signal K</source>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="233"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="481"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="482"/>
       <source>Enabled (safe mode)</source>
       <translation>启用（安全模式）</translation>
     </message>
@@ -2149,8 +2152,8 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_modbus_enable_modbus_tcp">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
-      <source>Enable Modbus-TCP</source>
-      <oldsource>Enable Modbus/TCP</oldsource>
+      <source>Enable Modbus TCP Server</source>
+      <oldsource>Enable Modbus-TCP</oldsource>
       <translation type="unfinished">启用Modbus/TCP</translation>
     </message>
     <message id="settings_modbus_access_rights">
@@ -3193,7 +3196,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">按下重新检测</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
       <source>System</source>
       <translation>系统</translation>
     </message>
@@ -5349,11 +5352,6 @@ Do you want to continue?</source>
       <source>Unique Identity Number</source>
       <translation>唯一身份号码</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_firmware_unknown">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="160"/>
-      <source>Unknown</source>
-      <translation>未知</translation>
-    </message>
     <message id="common_words_vebus_error">
       <location filename="../../components/CommonWords.qml" line="531"/>
       <source>VE.Bus Error</source>
@@ -5493,11 +5491,6 @@ Do you want to continue?</source>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>交换</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_online_check_failed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="150"/>
-      <source>Error while checking for firmware updates</source>
-      <translation>检查固件更新时出错</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="55"/>
@@ -5737,11 +5730,6 @@ Do you want to continue?</source>
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="172"/>
       <source>PV &amp; Battery</source>
       <translation>光伏&amp;电池</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_checking">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="147"/>
-      <source>Checking...</source>
-      <translation>检查...</translation>
     </message>
     <message id="list_alarm_state">
       <location filename="../../components/listitems/ListAlarmState.qml" line="11"/>
@@ -6326,9 +6314,9 @@ Do you want to continue?</source>
       <source>Momentary</source>
       <translation type="unfinished"/>
     </message>
-    <message id="switchable_output_latching">
+    <message id="switchable_output_toggle">
       <location filename="../../src/enums.cpp" line="302"/>
-      <source>Latching</source>
+      <source>Toggle</source>
       <translation type="unfinished"/>
     </message>
     <message id="switchable_output_dimmable">
@@ -6400,16 +6388,6 @@ Do you want to continue?</source>
       <location filename="../../data/Ess.qml" line="34"/>
       <source>Keep batteries charged</source>
       <translation>让电池保持在充电状态</translation>
-    </message>
-    <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="20"/>
-      <source>Optimized with battery life</source>
-      <translation>优化电池寿命</translation>
-    </message>
-    <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="27"/>
-      <source>Optimized without battery life</source>
-      <translation>非电池长寿命优化</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="116"/>
@@ -6858,12 +6836,12 @@ Do you want to continue?</source>
       <translation>正在重新启动应用程序...</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
       <source>Failed to change language!</source>
       <translation>更改语言失败！</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="209"/>
       <source>Please wait while the language is changed.</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>请稍候，语言正在更改。</translation>
@@ -7031,20 +7009,25 @@ Do you want to continue?</source>
     </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="140"/>
-      <source>Battery life state</source>
-      <oldsource>BatteryLife state</oldsource>
-      <translation>电池寿命状态</translation>
+      <source>BatteryLife state</source>
+      <oldsource>Battery life state</oldsource>
+      <translation type="unfinished">电池寿命状态</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="244"/>
-      <source>Access Signal K locally or via VRM</source>
-      <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="37"/>
+      <source>Access Signal K (local network)</source>
+      <oldsource>Access Signal K locally or via VRM</oldsource>
       <translation type="unfinished">通过 http://venus.local:3000 和 VRM 访问Signal K。</translation>
+    </message>
+    <message id="settings_large_signal_k_vrm_access">
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="44"/>
+      <source>Signal K can also be accessed remotely via VRM.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_large_access_node_red">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="56"/>
-      <source>Access Node-RED locally or via VRM</source>
-      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM.</oldsource>
+      <source>Access Node-RED (local network)</source>
+      <oldsource>Access Node-RED locally or via VRM</oldsource>
       <translation type="unfinished">通过 https://venus.local:1881 和 VRM 访问 Node-RED。</translation>
     </message>
     <message id="settings_system_battery_measurements">
@@ -7111,8 +7094,8 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_no">
       <location filename="../../components/CommonWords.qml" line="335"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="432"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">不</translation>
     </message>
@@ -7139,6 +7122,8 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_ok">
       <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">正常</translation>
     </message>
@@ -7193,9 +7178,9 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_yes">
       <location filename="../../components/CommonWords.qml" line="543"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="153"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="430"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
       <source>Yes</source>
       <translation type="unfinished">是</translation>
     </message>
@@ -8404,7 +8389,7 @@ Tailscale 将此功能称为子网路由，允许远程访问本地网络中的�
       <translation>新的用户界面</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="192"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="207"/>
       <source>Successfully changed language!</source>
       <translation>成功更改语言！</translation>
     </message>
@@ -8589,6 +8574,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="47"/>
       <source>Are you sure that you want to reset Node-RED to factory defaults? This will delete all of your flows.</source>
       <translation>您确定要将 Node-RED 重置为出厂默认设置吗？这将删除您的所有流量。</translation>
+    </message>
+    <message id="settings_large_node_red_vrm_access">
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="63"/>
+      <source>Node-RED can also be accessed remotely via VRM.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="199"/>
@@ -8788,15 +8778,25 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
       <translation>如果有电网表，系统将自动显示逆变器/充电器输入端的负载。输出端负载始终显示。</translation>
     </message>
-    <message id="ess_state_optimized_with_battery_life_button">
-      <location filename="../../data/Ess.qml" line="22"/>
-      <source>Optimized + battery life</source>
-      <translation>优化 + 电池寿命</translation>
+    <message id="ess_state_optimized_with_batterylife">
+      <location filename="../../data/Ess.qml" line="20"/>
+      <source>Optimized with BatteryLife</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="ess_state_optimized_without_battery_life_button">
+    <message id="ess_state_optimized_with_batterylife_button">
+      <location filename="../../data/Ess.qml" line="22"/>
+      <source>Optimized + BatteryLife</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_state_optimized_without_batterylife">
+      <location filename="../../data/Ess.qml" line="27"/>
+      <source>Optimized without BatteryLife</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="29"/>
       <source>Optimized</source>
-      <translation>优化</translation>
+      <translation type="unfinished">优化</translation>
     </message>
     <message id="ess_state_keep_batteries_charged_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8910,27 +8910,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>西北</translation>
     </message>
     <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Firmware</source>
       <translation type="unfinished">固件</translation>
     </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="124"/>
       <source>Access &amp; Security</source>
       <translation>访问与安全</translation>
     </message>
     <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="130"/>
       <source>Preferences</source>
       <translation>偏好</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="135"/>
       <source>Display &amp; Appearance</source>
       <translation>展示与外观</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="141"/>
       <source>Alarms &amp; Feedback</source>
       <translation>警报和反馈</translation>
     </message>
@@ -8939,73 +8939,68 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Enable SSH on LAN</source>
       <translation>在局域网上启用 SSH</translation>
     </message>
-    <message id="pagesettingsintegrations_pv_inverters">
+    <message id="pagesettingsintegrations_device_integrations">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="33"/>
+      <source>Device Integrations</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsintegrations_pv_inverters">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="38"/>
       <source>PV Inverters</source>
       <translation>光伏逆变器</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="50"/>
       <source>Modbus Devices</source>
       <translation>Modbus 设备</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="56"/>
       <source>Bluetooth Sensors</source>
       <translation>蓝牙感应</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="68"/>
       <source>Physical I/O</source>
       <translation>物理输入/输出</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="78"/>
       <source>Tank and Temperature Sensors</source>
       <translation>水箱和温度传感器</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="112"/>
       <source>Relays</source>
       <translation>继电器</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="126"/>
       <source>Digital I/O</source>
       <translation>数字输入/输出</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="188"/>
       <source>Server Applications</source>
       <translation>服务器应用</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="195"/>
       <source>Modbus TCP Server</source>
       <translation>Modbus TCP 服务器</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
       <source>Venus OS Large Features</source>
       <translation>Venus OS 大版本功能</translation>
     </message>
-    <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="211"/>
-      <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
-      <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
-
-Documentation at https://ve3.nl/vol</oldsource>
-      <translation type="unfinished">请注意，Victron 官方不支持以下功能。如有问题，请访问 community.victronenergy.com。
-
-文档 https://ve3.nl/vol</translation>
-    </message>
-    <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
-      <source>Documentation</source>
+    <message id="settings_venusos_large_documentation">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="259"/>
+      <source>Venus OS Large Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="266"/>
       <source>Victron Community</source>
       <translation type="unfinished">Victron社区</translation>
     </message>
@@ -9209,12 +9204,6 @@ If the generator is currently running due to a autostart condition, disabling au
       <oldsource>Device# %1</oldsource>
       <translation>VE.Can示例# %1</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="83"/>
-      <source>Modified (refresh rootfs with the latest official firmware)</source>
-      <oldsource>Modified</oldsource>
-      <translation type="unfinished">已更改</translation>
-    </message>
     <message id="page_settings_generator_detect_generator_at_dc">
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
       <source>Alarm if DC generator is not providing power</source>
@@ -9224,255 +9213,6 @@ If the generator is currently running due to a autostart condition, disabling au
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>当直流发电机组在启动后的最初 5 分钟内电流未达到至少 5A 时将触发警报</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_unknown">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="140"/>
-      <source>Unknown: %1</source>
-      <translation>未知：%1</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_no_available">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="157"/>
-      <source>No, %1 is available</source>
-      <extracomment>%1 = firmware version</extracomment>
-      <translation>否，%1 可用</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="222"/>
-      <source>This page shows the current system state, allows you to enable or disable custom startup scripts and (re-)install the latest official firmware.</source>
-      <oldsource>This page shows the current system state, allows you to enable or disable modifications, and restore the firmware to its original state.</oldsource>
-      <translation type="unfinished">该页面显示当前系统状态，允许您启用或禁用修改，并将固件恢复到初始状态。</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_device_model">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="234"/>
-      <source>Device model</source>
-      <translation>设备型号</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_hq_serial_number">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="242"/>
-      <source>HQ serial number</source>
-      <translation>HQ序列号</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_data_free_space">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="249"/>
-      <source>Data partition free space</source>
-      <translation>数据分区可用空间</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_installed_firmware_version">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="354"/>
-      <source>Installed firmware version</source>
-      <translation>安装固件版本</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_installed_image_type">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="360"/>
-      <source>Installed image type</source>
-      <translation>安装的图像类型</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_user_ssh_key_present">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="256"/>
-      <source>User SSH key present</source>
-      <translation>存在用户 SSH 密钥</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_check_details">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="21"/>
-      <source>Check details</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_clean_system">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="24"/>
-      <source>Clean system</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="27"/>
-      <source>Disable custom startup scripts before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_reinstall_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="30"/>
-      <source>Refresh rootfs with the latest official firmware before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts_reinstall_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="33"/>
-      <source>Disable custom startup scripts and refresh rootfs with the latest official firmware before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_unsupported_gx_device">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="37"/>
-      <source>Unsupported GX device</source>
-      <translation type="unfinished">不支持的GX 设备</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="80"/>
-      <source>Clean</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_not_available_on_this_device">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="86"/>
-      <source>Not available on this device</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_not_installed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="106"/>
-      <source>Not installed</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="111"/>
-      <source>Installed but disabled (rc.local and rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="114"/>
-      <source>Installed but disabled (rc.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="117"/>
-      <source>Installed but disabled (rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_but_enable_next_boot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="121"/>
-      <source>Installed but disabled, enables at next boot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="127"/>
-      <source>Installed and enabled (rc.local and rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="130"/>
-      <source>Installed and enabled (rc.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="133"/>
-      <source>Installed and enabled (rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_but_disable_next_boot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="136"/>
-      <source>Installed and enabled, disables at next boot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_victron_energy_support">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="227"/>
-      <source>Support status</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_modifications">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="262"/>
-      <source>Modifications</source>
-      <translation>修改</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_startup_type">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="267"/>
-      <source>Custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_custom_boot_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="274"/>
-      <source>Disable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_and_reboot_now">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="284"/>
-      <source>Disable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_ok_to_disable_and_reboot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="286"/>
-      <source>Press 'OK' to disable custom startup scripts and reboot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_re_enable_custom_boot_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="307"/>
-      <source>Re-enable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_reenable_and_reboot_now">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="319"/>
-      <source>Re-enable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_ok_to_reenable_and_reboot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="321"/>
-      <source>Press 'OK' to re-enable custom startup scripts and reboot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_file_system_status">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="342"/>
-      <source>File system (rootfs) status</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_latest_official_firmware_installed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="365"/>
-      <source>Latest official firmware version installed?</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_reinstall_caption">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="393"/>
-      <source>System settings are preserved during refresh of rootfs</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_title">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="401"/>
-      <source>Refresh rootfs with the latest official firmware</source>
-      <translation type="unfinished">重新安装最新的稳定固件</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="425"/>
-      <source>Custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="427"/>
-      <source>Disable also custom startup scripts?</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_integrations">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="447"/>
-      <source>Integrations</source>
-      <translation type="unfinished">集成</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_modbus_tcp">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="452"/>
-      <source>Modbus-TCP</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_signal_k">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="464"/>
-      <source>Signal K</source>
-      <translation type="unfinished">Signal K</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_node_red">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="477"/>
-      <source>Node-RED</source>
-      <translation type="unfinished">Node-RED</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_orange_items_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="493"/>
-      <source>Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_reinstall">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="372"/>
-      <source>Refresh rootfs with the latest official firmware</source>
-      <oldsource>Reinstall latest stable firmware</oldsource>
-      <translation type="unfinished">重新安装最新的稳定固件</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_to_install">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="386"/>
-      <source>Press to install</source>
-      <translation>按下 安装</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="403"/>
-      <source>This will download and refresh rootfs with the latest official firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
-      <oldsource>This will disable all modifications, download and reinstall the latest stable firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</oldsource>
-      <translation type="unfinished">这将禁用所有修改，下载并重新安装最新的稳定固件。&lt;br&gt;需要连接互联网。&lt;br&gt;按 "确定 "继续。</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
       <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
@@ -9561,7 +9301,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>本地网络安全配置文件</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="44"/>
       <source>Energy meters via RS485</source>
       <translation>通过 RS485 连接的电能表</translation>
     </message>
@@ -10164,6 +9904,267 @@ If the generator is currently running due to a autostart condition, disabling au
     <message id="ess_active_soc_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="86"/>
       <source>Active SOC Limit: %1%</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_red_orange">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="29"/>
+      <source>Check below items in red and orange</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_red">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="32"/>
+      <source>Check below items in red</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_orange">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="35"/>
+      <source>Check below items in orange</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_unsupported_gx_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="38"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">不支持的GX 设备</translation>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_clean">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="86"/>
+      <source>Clean</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_modified">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="89"/>
+      <source>Modified</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_not_available_on_this_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="92"/>
+      <source>Not available on this device</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_not_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="112"/>
+      <source>Not installed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="117"/>
+      <source>Installed but disabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="120"/>
+      <source>Installed but disabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="123"/>
+      <source>Installed but disabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_but_enable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="127"/>
+      <source>Installed but disabled, enables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="133"/>
+      <source>Installed and enabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="136"/>
+      <source>Installed and enabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="139"/>
+      <source>Installed and enabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_but_disable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="142"/>
+      <source>Installed and enabled, disables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_unknown">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="146"/>
+      <source>Unknown: %1</source>
+      <translation type="unfinished">未知：%1</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_checking">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="153"/>
+      <source>Checking...</source>
+      <translation type="unfinished">检查...</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_online_check_failed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="156"/>
+      <source>Error while checking for firmware updates</source>
+      <translation type="unfinished">检查固件更新时出错</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_no_available">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="163"/>
+      <source>No, %1 is available</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">否，%1 可用</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_unknown">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="166"/>
+      <source>Unknown</source>
+      <translation type="unfinished">未知</translation>
+    </message>
+    <message id="pagesettingssupportstate_support_status">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="228"/>
+      <source>Support status</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_device_model">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="235"/>
+      <source>Device model</source>
+      <translation type="unfinished">设备型号</translation>
+    </message>
+    <message id="pagesettingssupportstate_hq_serial_number">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="243"/>
+      <source>HQ serial number</source>
+      <translation type="unfinished">HQ序列号</translation>
+    </message>
+    <message id="pagesettingssupportstate_data_free_space">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="250"/>
+      <source>Data partition free space</source>
+      <translation type="unfinished">数据分区可用空间</translation>
+    </message>
+    <message id="pagesettingssupportstate_user_ssh_key_present">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
+      <source>User SSH key present</source>
+      <translation type="unfinished">存在用户 SSH 密钥</translation>
+    </message>
+    <message id="pagesettingssupportstate_modifications">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="263"/>
+      <source>Modifications</source>
+      <translation type="unfinished">修改</translation>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="426"/>
+      <source>Custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="286"/>
+      <source>Disable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="277"/>
+      <source>Disable and reboot now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_custom_startup_scripts_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="288"/>
+      <source>Press 'OK' to disable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_re_enable_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="309"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_re_enable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="311"/>
+      <source>Re-enable and reboot now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_reenable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="322"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_press_ok_to_reenable_and_reboot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="324"/>
+      <source>Press 'OK' to re-enable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_file_system_status">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="345"/>
+      <source>File system (rootfs) status</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_firmware">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="352"/>
+      <source>Firmware</source>
+      <translation type="unfinished">固件</translation>
+    </message>
+    <message id="pagesettingssupportstate_installed_firmware_version">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="357"/>
+      <source>Installed firmware version</source>
+      <translation type="unfinished">安装固件版本</translation>
+    </message>
+    <message id="pagesettingssupportstate_installed_image_type">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="363"/>
+      <source>Installed image type</source>
+      <translation type="unfinished">安装的图像类型</translation>
+    </message>
+    <message id="pagesettingssupportstate_latest_official_firmware_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="368"/>
+      <source>Latest official firmware version installed?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_update_firmware_to_fix_modified_state">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="375"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="402"/>
+      <source>Update the firmware to fix the modified state</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_updating_progress">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="381"/>
+      <source>Updating %1 %2%</source>
+      <extracomment>Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_updating">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="385"/>
+      <source>Updating %1...</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_press_to_update">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="389"/>
+      <source>Press to update to</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_update_firmware_to_fix_modified_state_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="404"/>
+      <source>This will download and update rootfs with the latest official firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_also_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="428"/>
+      <source>Disable also custom startup scripts?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_integrations">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="448"/>
+      <source>Integrations</source>
+      <translation type="unfinished">集成</translation>
+    </message>
+    <message id="pagesettingssupportstate_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="453"/>
+      <source>Modbus TCP Server</source>
+      <translation type="unfinished">Modbus TCP 服务器</translation>
+    </message>
+    <message id="pagesettingssupportstate_signal_k">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="465"/>
+      <source>Signal K</source>
+      <translation type="unfinished">Signal K</translation>
+    </message>
+    <message id="pagesettingssupportstate_node_red">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="478"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">Node-RED</translation>
+    </message>
+    <message id="pagesettingssupportstate_orange_items_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="494"/>
+      <source>Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first.</source>
       <translation type="unfinished"/>
     </message>
   </context>

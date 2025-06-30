@@ -223,14 +223,14 @@
       <source>Ethernet</source>
       <translation type="unfinished">Локальна мережа Ethernet</translation>
     </message>
-    <message id="pagesettingsconnectivity_bluetooth">
+    <message id="pagesettingsconnectivity_bluetooth_for_victronconnect_app">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="38"/>
-      <source>Bluetooth</source>
-      <translation>Bluetooth</translation>
+      <source>Bluetooth (for VictronConnect App)</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="settings_bluetooth_not_available">
+    <message id="pagesettingsconnectivity_bluetooth_not_available">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="42"/>
-      <source>No Bluetooth adapter connected</source>
+      <source>No Bluetooth available</source>
       <translation type="unfinished"/>
     </message>
     <message id="page_settings_no_cellular_modem_connected">
@@ -243,13 +243,8 @@
       <source>General</source>
       <translation>Головне</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="349"/>
-      <source>Firmware</source>
-      <translation>Прошивка</translation>
-    </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="221"/>
       <source>Date &amp; Time</source>
       <translation>Дата, час</translation>
     </message>
@@ -763,13 +758,18 @@
       <source>Bluetooth adapters</source>
       <translation>Адаптери Bluetooth</translation>
     </message>
+    <message id="settings_bluetooth_unavailable_message">
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="26"/>
+      <source>Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_pincode">
-      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="42"/>
       <source>Pincode</source>
       <translation>PIN-код</translation>
     </message>
     <message id="settings_bluetooth_remove_existing_pairing_info">
-      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsBluetooth.qml" line="52"/>
       <source>It might be necessary to remove existing pairing information before connecting.</source>
       <translation>Перед підключенням може знадобитися видалити наявну інформацію про сполучення.</translation>
     </message>
@@ -971,12 +971,12 @@
       <translation>Світлий</translation>
     </message>
     <message id="settings_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="134"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="149"/>
       <source>Language</source>
       <translation>Мова</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="201"/>
       <source>Changing language</source>
       <translation>Зміна мови</translation>
     </message>
@@ -1208,16 +1208,12 @@
     </message>
     <message id="settings_firmware_online_installing_progress">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="82"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="378"/>
       <source>Installing %1 %2%</source>
-      <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress
-----------
-Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress</extracomment>
+      <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress</extracomment>
       <translation>Встановлення %1 %2%</translation>
     </message>
     <message id="settings_firmware_online_installing">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="86"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="382"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation type="unfinished">Встановлення %1...</translation>
@@ -1374,67 +1370,73 @@ Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update
       <translation>Звукова тривога</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="23"/>
       <source>Modifications installed</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="27"/>
-      <source>Modbus-TCP</source>
-      <translation type="unfinished"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="28"/>
+      <source>Modbus TCP Server</source>
+      <oldsource>Modbus-TCP</oldsource>
+      <translation type="unfinished">Сервер Modbus TCP</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="31"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="32"/>
       <source>Signal K</source>
       <translation type="unfinished">Signal K</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_nodered">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="36"/>
       <source>Node-RED</source>
       <translation type="unfinished">Node-RED</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_running_integrations">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="42"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="43"/>
       <source>%1 running integrations</source>
       <translation type="unfinished"/>
     </message>
+    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="50"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">Непідтримуваний пристрій GX</translation>
+    </message>
     <message id="pagesettingsgeneral_modificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="55"/>
       <source>Clean</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_documentation">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="233"/>
       <source>Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingsgeneral_support_status_modification_checks">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="239"/>
       <source>Support status (modifications checks)</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="244"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="259"/>
       <source>Demo mode</source>
       <translation>Демонстраційний режим</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="251"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="266"/>
       <source>ESS demo</source>
       <translation>Демо ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="268"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Демо човна/дома на колесах 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="255"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="270"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Демо човна/дома на колесах 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="274"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Запуск демо режиму призведе до зміни деяких налаштувань, а інтерфейс користувача на мить не відповідає.</translation>
     </message>
@@ -1916,21 +1918,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>CO2 тривога</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="30"/>
       <source>Signal K</source>
       <translation>Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="233"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="481"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="482"/>
       <source>Enabled (safe mode)</source>
       <translation>Увімкнено (безпечний режим)</translation>
     </message>
@@ -2149,8 +2152,8 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_modbus_enable_modbus_tcp">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
-      <source>Enable Modbus-TCP</source>
-      <oldsource>Enable Modbus/TCP</oldsource>
+      <source>Enable Modbus TCP Server</source>
+      <oldsource>Enable Modbus-TCP</oldsource>
       <translation type="unfinished">Увімкнути Modbus/TCP</translation>
     </message>
     <message id="settings_modbus_access_rights">
@@ -3193,7 +3196,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Натисніть , щоб знайти</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="107"/>
       <source>System</source>
       <translation>СТАТУС</translation>
     </message>
@@ -5351,11 +5354,6 @@ Do you want to continue?</source>
       <source>Unique Identity Number</source>
       <translation>Унікальний ідентифікаційний номер</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_firmware_unknown">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="160"/>
-      <source>Unknown</source>
-      <translation>Невідоме</translation>
-    </message>
     <message id="common_words_vebus_error">
       <location filename="../../components/CommonWords.qml" line="531"/>
       <source>VE.Bus Error</source>
@@ -5495,11 +5493,6 @@ Do you want to continue?</source>
       <source>Swap</source>
       <extracomment>Confirm that the two devices' instance number should be swapped.</extracomment>
       <translation>Заміна.</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_online_check_failed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="150"/>
-      <source>Error while checking for firmware updates</source>
-      <translation>Помилка під час перевірки оновлень прошивки</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
       <location filename="../../components/FirmwareUpdate.qml" line="55"/>
@@ -5739,11 +5732,6 @@ Do you want to continue?</source>
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="172"/>
       <source>PV &amp; Battery</source>
       <translation>PV і Батарея</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_checking">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="147"/>
-      <source>Checking...</source>
-      <translation>Перевірка...</translation>
     </message>
     <message id="list_alarm_state">
       <location filename="../../components/listitems/ListAlarmState.qml" line="11"/>
@@ -6328,9 +6316,9 @@ Do you want to continue?</source>
       <source>Momentary</source>
       <translation type="unfinished"/>
     </message>
-    <message id="switchable_output_latching">
+    <message id="switchable_output_toggle">
       <location filename="../../src/enums.cpp" line="302"/>
-      <source>Latching</source>
+      <source>Toggle</source>
       <translation type="unfinished"/>
     </message>
     <message id="switchable_output_dimmable">
@@ -6402,16 +6390,6 @@ Do you want to continue?</source>
       <location filename="../../data/Ess.qml" line="34"/>
       <source>Keep batteries charged</source>
       <translation>Тримати батареї зарядженими</translation>
-    </message>
-    <message id="ess_state_optimized_with_battery_life">
-      <location filename="../../data/Ess.qml" line="20"/>
-      <source>Optimized with battery life</source>
-      <translation>Оптимізовано з BatteryLife</translation>
-    </message>
-    <message id="ess_state_optimized_without_battery_life">
-      <location filename="../../data/Ess.qml" line="27"/>
-      <source>Optimized without battery life</source>
-      <translation>Оптимізовано без BatteryLife</translation>
     </message>
     <message id="evchargers_status_charged">
       <location filename="../../data/EvChargers.qml" line="116"/>
@@ -6860,12 +6838,12 @@ Do you want to continue?</source>
       <translation>Перезапуск програми...</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
       <source>Failed to change language!</source>
       <translation>Не вдалося змінити мову!</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="194"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="209"/>
       <source>Please wait while the language is changed.</source>
       <oldsource>Please wait while the language is changed</oldsource>
       <translation>Будь ласка, зачекайте, поки мова зміниться.</translation>
@@ -7033,20 +7011,25 @@ Do you want to continue?</source>
     </message>
     <message id="settings_ess_batteryLife_state">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="140"/>
-      <source>Battery life state</source>
-      <oldsource>BatteryLife state</oldsource>
-      <translation>Стан заряду батареї</translation>
+      <source>BatteryLife state</source>
+      <oldsource>Battery life state</oldsource>
+      <translation type="unfinished">Стан заряду батареї</translation>
     </message>
     <message id="settings_large_access_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="244"/>
-      <source>Access Signal K locally or via VRM</source>
-      <oldsource>Access Signal K at http://venus.local:3000 and via VRM.</oldsource>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="37"/>
+      <source>Access Signal K (local network)</source>
+      <oldsource>Access Signal K locally or via VRM</oldsource>
       <translation type="unfinished">Доступ до Signal K на http://venus.local:3000 та через VRM.</translation>
+    </message>
+    <message id="settings_large_signal_k_vrm_access">
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="44"/>
+      <source>Signal K can also be accessed remotely via VRM.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_large_access_node_red">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="56"/>
-      <source>Access Node-RED locally or via VRM</source>
-      <oldsource>Access Node-RED at https://venus.local:1881 and via VRM.</oldsource>
+      <source>Access Node-RED (local network)</source>
+      <oldsource>Access Node-RED locally or via VRM</oldsource>
       <translation type="unfinished">Доступ до Node-RED на https://venus.local:1881 та через VRM.</translation>
     </message>
     <message id="settings_system_battery_measurements">
@@ -7113,8 +7096,8 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_no">
       <location filename="../../components/CommonWords.qml" line="335"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="432"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">Ні</translation>
     </message>
@@ -7141,6 +7124,8 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_ok">
       <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">ОК</translation>
     </message>
@@ -7195,9 +7180,9 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_yes">
       <location filename="../../components/CommonWords.qml" line="543"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="153"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="430"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
       <source>Yes</source>
       <translation type="unfinished">Так</translation>
     </message>
@@ -8406,7 +8391,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>Новий інтерфейс</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="192"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="207"/>
       <source>Successfully changed language!</source>
       <translation>Успішно змінили мову!</translation>
     </message>
@@ -8591,6 +8576,11 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="47"/>
       <source>Are you sure that you want to reset Node-RED to factory defaults? This will delete all of your flows.</source>
       <translation>Ви впевнені, що хочете скинути Node-RED до заводських налаштувань? Це видалить всі ваші потоки.</translation>
+    </message>
+    <message id="settings_large_node_red_vrm_access">
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="63"/>
+      <source>Node-RED can also be accessed remotely via VRM.</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="199"/>
@@ -8792,15 +8782,25 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
       <translation>Система автоматично відображає навантаження на вході інвертора/зарядного пристрою за наявності мережевого лічильника. Навантаження на виході відображається завжди.</translation>
     </message>
-    <message id="ess_state_optimized_with_battery_life_button">
-      <location filename="../../data/Ess.qml" line="22"/>
-      <source>Optimized + battery life</source>
-      <translation>Оптимізовано + час автономної роботи</translation>
+    <message id="ess_state_optimized_with_batterylife">
+      <location filename="../../data/Ess.qml" line="20"/>
+      <source>Optimized with BatteryLife</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="ess_state_optimized_without_battery_life_button">
+    <message id="ess_state_optimized_with_batterylife_button">
+      <location filename="../../data/Ess.qml" line="22"/>
+      <source>Optimized + BatteryLife</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_state_optimized_without_batterylife">
+      <location filename="../../data/Ess.qml" line="27"/>
+      <source>Optimized without BatteryLife</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="29"/>
       <source>Optimized</source>
-      <translation>Оптимізовано</translation>
+      <translation type="unfinished">Оптимізовано</translation>
     </message>
     <message id="ess_state_keep_batteries_charged_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8914,27 +8914,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>NW</translation>
     </message>
     <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="112"/>
       <source>Firmware</source>
       <translation type="unfinished">Прошивка</translation>
     </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="124"/>
       <source>Access &amp; Security</source>
       <translation>Доступ та безпека</translation>
     </message>
     <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="130"/>
       <source>Preferences</source>
       <translation>Налаштування</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="135"/>
       <source>Display &amp; Appearance</source>
       <translation>Дисплей та зовнішній вигляд</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="141"/>
       <source>Alarms &amp; Feedback</source>
       <translation>Тривоги та зворотній зв'язок</translation>
     </message>
@@ -8943,73 +8943,68 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <source>Enable SSH on LAN</source>
       <translation>Увімкнення SSH на локальній мережі</translation>
     </message>
-    <message id="pagesettingsintegrations_pv_inverters">
+    <message id="pagesettingsintegrations_device_integrations">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="33"/>
+      <source>Device Integrations</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingsintegrations_pv_inverters">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="38"/>
       <source>PV Inverters</source>
       <translation>PV інвертори</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="50"/>
       <source>Modbus Devices</source>
       <translation>Пристрої Modbus</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="56"/>
       <source>Bluetooth Sensors</source>
       <translation>Датчики Bluetooth</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="68"/>
       <source>Physical I/O</source>
       <translation>Фізичний ввід/вивід</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="78"/>
       <source>Tank and Temperature Sensors</source>
       <translation>Датчики ємності та температури</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="112"/>
       <source>Relays</source>
       <translation>Реле</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="126"/>
       <source>Digital I/O</source>
       <translation>Цифровий ввід/вивід</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="188"/>
       <source>Server Applications</source>
       <translation>Серверні програми</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="190"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="195"/>
       <source>Modbus TCP Server</source>
       <translation>Сервер Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="210"/>
       <source>Venus OS Large Features</source>
       <translation>Функції Venus OS Large</translation>
     </message>
-    <message id="settings_large_features_not_offically_supported">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="211"/>
-      <source>Note that the following features are not officially supported by Victron. Please turn to the Victron Community for questions.</source>
-      <oldsource>Note that the following features are not officially supported by Victron. Please turn to community.victronenergy.com for questions.
-
-Documentation at https://ve3.nl/vol</oldsource>
-      <translation type="unfinished">Зверніть увагу, що наступні функції офіційно не підтримуються Victron. Будь ласка, зверніться до community.victronenergy.com з питаннями.
-
-Документація на https://ve3.nl/vol</translation>
-    </message>
-    <message id="settings_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
-      <source>Documentation</source>
+    <message id="settings_venusos_large_documentation">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="259"/>
+      <source>Venus OS Large Documentation</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="266"/>
       <source>Victron Community</source>
       <translation type="unfinished">Спільнота Victron</translation>
     </message>
@@ -9213,12 +9208,6 @@ If the generator is currently running due to a autostart condition, disabling au
       <oldsource>Device# %1</oldsource>
       <translation>VE.Can Instance# %1</translation>
     </message>
-    <message id="pagesettingsmodificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="83"/>
-      <source>Modified (refresh rootfs with the latest official firmware)</source>
-      <oldsource>Modified</oldsource>
-      <translation type="unfinished">Змінено</translation>
-    </message>
     <message id="page_settings_generator_detect_generator_at_dc">
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
       <source>Alarm if DC generator is not providing power</source>
@@ -9228,255 +9217,6 @@ If the generator is currently running due to a autostart condition, disabling au
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>Сигнал тривоги спрацьовує, якщо протягом перших 5 хвилин після запуску генераторна установка постійного струму не досягає принаймні 5 А</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_unknown">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="140"/>
-      <source>Unknown: %1</source>
-      <translation>Невідомо: %1</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_no_available">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="157"/>
-      <source>No, %1 is available</source>
-      <extracomment>%1 = firmware version</extracomment>
-      <translation>Ні, %1 доступний</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="222"/>
-      <source>This page shows the current system state, allows you to enable or disable custom startup scripts and (re-)install the latest official firmware.</source>
-      <oldsource>This page shows the current system state, allows you to enable or disable modifications, and restore the firmware to its original state.</oldsource>
-      <translation type="unfinished">Ця сторінка показує поточний стан системи, дозволяє увімкнути або вимкнути модифікації, а також відновити прошивку до початкового стану.</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_device_model">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="234"/>
-      <source>Device model</source>
-      <translation>Модель пристрою</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_hq_serial_number">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="242"/>
-      <source>HQ serial number</source>
-      <translation>Серійний номер штаб-квартири</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_data_free_space">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="249"/>
-      <source>Data partition free space</source>
-      <translation>Вільний простір розділу даних</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_installed_firmware_version">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="354"/>
-      <source>Installed firmware version</source>
-      <translation>Встановлена версія програмно-апаратного забезпечення</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_installed_image_type">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="360"/>
-      <source>Installed image type</source>
-      <translation>Тип встановленого образу</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_user_ssh_key_present">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="256"/>
-      <source>User SSH key present</source>
-      <translation>Присутній SSH-ключ користувача</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_check_details">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="21"/>
-      <source>Check details</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_clean_system">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="24"/>
-      <source>Clean system</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="27"/>
-      <source>Disable custom startup scripts before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_reinstall_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="30"/>
-      <source>Refresh rootfs with the latest official firmware before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_custom_startup_scripts_reinstall_firmware">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="33"/>
-      <source>Disable custom startup scripts and refresh rootfs with the latest official firmware before contacting support</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_support_state_unsupported_gx_device">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="37"/>
-      <source>Unsupported GX device</source>
-      <translation type="unfinished">Непідтримуваний пристрій GX</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="80"/>
-      <source>Clean</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_not_available_on_this_device">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="86"/>
-      <source>Not available on this device</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_not_installed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="106"/>
-      <source>Not installed</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="111"/>
-      <source>Installed but disabled (rc.local and rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rc_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="114"/>
-      <source>Installed but disabled (rc.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="117"/>
-      <source>Installed but disabled (rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_disabled_but_enable_next_boot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="121"/>
-      <source>Installed but disabled, enables at next boot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="127"/>
-      <source>Installed and enabled (rc.local and rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rc_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="130"/>
-      <source>Installed and enabled (rc.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_rcS_local">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="133"/>
-      <source>Installed and enabled (rcS.local)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_enabled_but_disable_next_boot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="136"/>
-      <source>Installed and enabled, disables at next boot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_victron_energy_support">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="227"/>
-      <source>Support status</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_modifications">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="262"/>
-      <source>Modifications</source>
-      <translation>Модифікації</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_startup_type">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="267"/>
-      <source>Custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_custom_boot_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="274"/>
-      <source>Disable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_and_reboot_now">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="284"/>
-      <source>Disable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_ok_to_disable_and_reboot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="286"/>
-      <source>Press 'OK' to disable custom startup scripts and reboot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_re_enable_custom_boot_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="307"/>
-      <source>Re-enable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_reenable_and_reboot_now">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="319"/>
-      <source>Re-enable custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_ok_to_reenable_and_reboot">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="321"/>
-      <source>Press 'OK' to re-enable custom startup scripts and reboot</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_file_system_status">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="342"/>
-      <source>File system (rootfs) status</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_latest_official_firmware_installed">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="365"/>
-      <source>Latest official firmware version installed?</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_reinstall_caption">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="393"/>
-      <source>System settings are preserved during refresh of rootfs</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_title">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="401"/>
-      <source>Refresh rootfs with the latest official firmware</source>
-      <translation type="unfinished">Перевстановити останню стабільну прошивку</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="425"/>
-      <source>Custom startup scripts</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_disable_custom_startup_scripts">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="427"/>
-      <source>Disable also custom startup scripts?</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_integrations">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="447"/>
-      <source>Integrations</source>
-      <translation type="unfinished">Інтеграції</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_modbus_tcp">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="452"/>
-      <source>Modbus-TCP</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_signal_k">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="464"/>
-      <source>Signal K</source>
-      <translation type="unfinished">Signal K</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_node_red">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="477"/>
-      <source>Node-RED</source>
-      <translation type="unfinished">Node-RED</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_orange_items_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="493"/>
-      <source>Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_reinstall">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="372"/>
-      <source>Refresh rootfs with the latest official firmware</source>
-      <oldsource>Reinstall latest stable firmware</oldsource>
-      <translation type="unfinished">Перевстановити останню стабільну прошивку</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_press_to_install">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="386"/>
-      <source>Press to install</source>
-      <translation>Натисніть, щоб встановити</translation>
-    </message>
-    <message id="pagesettingsmodificationchecks_firmware_restore_clean_state_description">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="403"/>
-      <source>This will download and refresh rootfs with the latest official firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
-      <oldsource>This will disable all modifications, download and reinstall the latest stable firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</oldsource>
-      <translation type="unfinished">Це вимкне всі модифікації, завантажить і переінсталює останню стабільну прошивку.&lt;br&gt;Потрібне підключення до Інтернету.&lt;br&gt;Натисніть "ОК", щоб продовжити.</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
       <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
@@ -9565,7 +9305,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Профіль безпеки локальної мережі</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="44"/>
       <source>Energy meters via RS485</source>
       <translation>Лічильники енергії через RS485</translation>
     </message>
@@ -10168,6 +9908,267 @@ If the generator is currently running due to a autostart condition, disabling au
     <message id="ess_active_soc_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="86"/>
       <source>Active SOC Limit: %1%</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_red_orange">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="29"/>
+      <source>Check below items in red and orange</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_red">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="32"/>
+      <source>Check below items in red</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_check_below_orange">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="35"/>
+      <source>Check below items in orange</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_support_state_unsupported_gx_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="38"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">Непідтримуваний пристрій GX</translation>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_clean">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="86"/>
+      <source>Clean</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_modified">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="89"/>
+      <source>Modified</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_modifiedstate_not_available_on_this_device">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="92"/>
+      <source>Not available on this device</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_not_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="112"/>
+      <source>Not installed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="117"/>
+      <source>Installed but disabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="120"/>
+      <source>Installed but disabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="123"/>
+      <source>Installed but disabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_but_disabled_but_enable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="127"/>
+      <source>Installed but disabled, enables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rc_local_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="133"/>
+      <source>Installed and enabled (rc.local and rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rc_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="136"/>
+      <source>Installed and enabled (rc.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_rcS_local">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="139"/>
+      <source>Installed and enabled (rcS.local)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_installed_and_enabled_but_disable_next_boot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="142"/>
+      <source>Installed and enabled, disables at next boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_unknown">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="146"/>
+      <source>Unknown: %1</source>
+      <translation type="unfinished">Невідомо: %1</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_checking">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="153"/>
+      <source>Checking...</source>
+      <translation type="unfinished">Перевірка...</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_online_check_failed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="156"/>
+      <source>Error while checking for firmware updates</source>
+      <translation type="unfinished">Помилка під час перевірки оновлень прошивки</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_no_available">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="163"/>
+      <source>No, %1 is available</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished">Ні, %1 доступний</translation>
+    </message>
+    <message id="pagesettingssupportstate_firmware_unknown">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="166"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Невідоме</translation>
+    </message>
+    <message id="pagesettingssupportstate_support_status">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="228"/>
+      <source>Support status</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_device_model">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="235"/>
+      <source>Device model</source>
+      <translation type="unfinished">Модель пристрою</translation>
+    </message>
+    <message id="pagesettingssupportstate_hq_serial_number">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="243"/>
+      <source>HQ serial number</source>
+      <translation type="unfinished">Серійний номер штаб-квартири</translation>
+    </message>
+    <message id="pagesettingssupportstate_data_free_space">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="250"/>
+      <source>Data partition free space</source>
+      <translation type="unfinished">Вільний простір розділу даних</translation>
+    </message>
+    <message id="pagesettingssupportstate_user_ssh_key_present">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
+      <source>User SSH key present</source>
+      <translation type="unfinished">Присутній SSH-ключ користувача</translation>
+    </message>
+    <message id="pagesettingssupportstate_modifications">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="263"/>
+      <source>Modifications</source>
+      <translation type="unfinished">Модифікації</translation>
+    </message>
+    <message id="pagesettingssupportstate_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="426"/>
+      <source>Custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="286"/>
+      <source>Disable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="277"/>
+      <source>Disable and reboot now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_custom_startup_scripts_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="288"/>
+      <source>Press 'OK' to disable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_re_enable_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="309"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_re_enable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="311"/>
+      <source>Re-enable and reboot now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_reenable_and_reboot_now">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="322"/>
+      <source>Re-enable custom startup scripts</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_press_ok_to_reenable_and_reboot">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="324"/>
+      <source>Press 'OK' to re-enable custom startup scripts and reboot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_file_system_status">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="345"/>
+      <source>File system (rootfs) status</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_firmware">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="352"/>
+      <source>Firmware</source>
+      <translation type="unfinished">Прошивка</translation>
+    </message>
+    <message id="pagesettingssupportstate_installed_firmware_version">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="357"/>
+      <source>Installed firmware version</source>
+      <translation type="unfinished">Встановлена версія програмно-апаратного забезпечення</translation>
+    </message>
+    <message id="pagesettingssupportstate_installed_image_type">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="363"/>
+      <source>Installed image type</source>
+      <translation type="unfinished">Тип встановленого образу</translation>
+    </message>
+    <message id="pagesettingssupportstate_latest_official_firmware_installed">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="368"/>
+      <source>Latest official firmware version installed?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_update_firmware_to_fix_modified_state">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="375"/>
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="402"/>
+      <source>Update the firmware to fix the modified state</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_updating_progress">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="381"/>
+      <source>Updating %1 %2%</source>
+      <extracomment>Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_updating">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="385"/>
+      <source>Updating %1...</source>
+      <extracomment>%1 = firmware version</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_press_to_update">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="389"/>
+      <source>Press to update to</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_update_firmware_to_fix_modified_state_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="404"/>
+      <source>This will download and update rootfs with the latest official firmware.&lt;br&gt;Internet connectivity is required.&lt;br&gt;Press 'OK' to continue.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_disable_also_custom_startup_scripts">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="428"/>
+      <source>Disable also custom startup scripts?</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssupportstate_integrations">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="448"/>
+      <source>Integrations</source>
+      <translation type="unfinished">Інтеграції</translation>
+    </message>
+    <message id="pagesettingssupportstate_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="453"/>
+      <source>Modbus TCP Server</source>
+      <translation type="unfinished">Сервер Modbus TCP</translation>
+    </message>
+    <message id="pagesettingssupportstate_signal_k">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="465"/>
+      <source>Signal K</source>
+      <translation type="unfinished">Signal K</translation>
+    </message>
+    <message id="pagesettingssupportstate_node_red">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="478"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">Node-RED</translation>
+    </message>
+    <message id="pagesettingssupportstate_orange_items_description">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="494"/>
+      <source>Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first.</source>
       <translation type="unfinished"/>
     </message>
   </context>
