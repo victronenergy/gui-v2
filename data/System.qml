@@ -29,7 +29,11 @@ QtObject {
 	}
 
 	readonly property QtObject dc: QtObject {
-		readonly property real power: (_hasDcSystem.valid && _hasDcSystem.value && _dcSystemPower.valid) ? _dcSystemPower.value : NaN
+		// Regardless of the actual power value, regard the system as having DC power (and show
+		// DC Loads in the UI) if any dc system services are present or if /HasDcSystem=1.
+		readonly property bool hasPower: Global.allDevicesModel.combinedDcLoadDevices.count > 0 || _hasDcSystem.value === 1
+
+		readonly property real power: hasPower ? _dcSystemPower.value || 0 : NaN
 		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
 		readonly property real voltage: _dcBatteryVoltage.valid ? _dcBatteryVoltage.value : NaN
 		readonly property real maximumPower: _maximumDcPower.valid ? _maximumDcPower.value : NaN

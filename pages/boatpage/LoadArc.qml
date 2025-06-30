@@ -77,7 +77,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: !motorDriveLoadGauge.active && !isNaN(Global.system.dc.power)
+		active: !motorDriveLoadGauge.active && Global.system.dc.hasPower
 		sourceComponent: SideGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(1, _rightGaugeCount,)
 			// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
