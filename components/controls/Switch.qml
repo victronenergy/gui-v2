@@ -80,16 +80,11 @@ CT.Switch {
 		}
 	}
 
-	KeyNavigationHighlight {
-		anchors {
-			fill: parent
-			leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-			rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-			topMargin: -Theme.geometry_listItem_content_verticalMargin
-			bottomMargin: -Theme.geometry_listItem_content_verticalMargin
-		}
-		active: root.activeFocus
-	}
+	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+	KeyNavigationHighlight.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
+	KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_verticalMargin
+	KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
 
 	// Don't animate the value change when setting the value on initial load
 	Component.onCompleted: valueChangeBehavior.enabled = true

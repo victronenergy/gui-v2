@@ -293,7 +293,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
     components/controls/EditFrame.qml
-    components/controls/KeyNavigationHighlight.qml
+    components/controls/GlobalKeyNavigationHighlight.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
@@ -743,6 +743,10 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/frameratemodel.cpp
     src/keyeventfilter.h
     src/keyeventfilter.cpp
+    src/keynavigationhighlight.cpp
+    src/keynavigationhighlight.h
+    src/keynavigationhighlighthelper.h
+    src/keynavigationhighlighthelper.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
