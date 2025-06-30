@@ -4,9 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
-import QtQuick.Templates as CT
-import QtQuick.Controls.impl as CP
+import QtQuick.Templates as T
 import QtQuick.Layouts
 import Victron.VenusOS
 
@@ -14,7 +12,7 @@ import Victron.VenusOS
 // When the button is released, 'stepSize' reverts to its original value.
 // TODO - find a way to do this without exposing the changes to 'stepSize', as it may surprise developers when the value changes unexpectedly.
 
-CT.SpinBox {
+T.SpinBox {
 	id: root
 
 	property alias textInput: primaryTextInput

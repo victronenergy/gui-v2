@@ -4,15 +4,24 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-C.RangeSlider {
+T.RangeSlider {
 	id: root
 
 	property color firstColor: "transparent"
 	property color secondColor: "transparent"
+
+	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+							first.implicitHandleWidth + leftPadding + rightPadding,
+							second.implicitHandleWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+							 first.implicitHandleHeight + topPadding + bottomPadding,
+							 second.implicitHandleHeight + topPadding + bottomPadding)
+
+	padding: 6
 
 	background: Rectangle {
 		anchors {

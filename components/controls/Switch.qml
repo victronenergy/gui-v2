@@ -4,12 +4,10 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
-import QtQuick.Templates as CT
-import QtQuick.Controls.impl as CP
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-CT.Switch {
+T.Switch {
 	id: root
 
 	checkable: false
