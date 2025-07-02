@@ -81,7 +81,7 @@ Page {
 						return "--"
 					}
 					if (speedUnit.value === "km/h") {
-						//: GPS speed data, in kilometers per hour
+						//: GPS speed data, in kilometres per hour
 						//% "%1 km/h"
 						return qsTrId("settings_gps_speed_kmh").arg(Units.formatNumber(dataItem.value * 3.6, 1))
 					} else if (speedUnit.value === "mph") {
@@ -93,7 +93,7 @@ Page {
 						//% "%1 kt"
 						return qsTrId("settings_gps_speed_kt").arg(Units.formatNumber(dataItem.value * (3600/1852), 1))
 					} else {
-						//: GPS speed data, in meters per second
+						//: GPS speed data, in metres per second
 						//% "%1 m/s"
 						return qsTrId("settings_gps_speed_ms").arg(Units.formatNumber(dataItem.value, 2))
 					}
@@ -112,7 +112,7 @@ Page {
 				//% "Altitude"
 				text: qsTrId("settings_gps_altitude")
 				dataItem.uid: root.bindPrefix + "/Altitude"
-				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Meter)
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Metre)
 				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
 				unit: Global.systemSettings.altitudeUnit
 			}

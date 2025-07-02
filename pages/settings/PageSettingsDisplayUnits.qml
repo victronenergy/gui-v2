@@ -29,7 +29,7 @@ Page {
 			}
 
 			ListVolumeUnitRadioButtonGroup {
-				//: Title for a list of units of volume (e.g. cubic meters, liters, gallons)
+				//: Title for a list of units of volume (e.g. cubic metres, litres, gallons)
 				//% "Volume"
 				text: qsTrId("components_volumeunit_volume")
 			}
@@ -86,9 +86,9 @@ Page {
 				text: qsTrId("settings_gps_speed_unit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 				optionModel: [
-					//% "Kilometers per hour"
+					//% "Kilometres per hour"
 					{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },
-					//% "Meters per second"
+					//% "Metres per second"
 					{ display: qsTrId("settings_gps_format_ms"), value: "m/s" },
 					//% "Miles per hour"
 					{ display: qsTrId("settings_gps_format_mph"), value: "mph" },

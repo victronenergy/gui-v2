@@ -81,15 +81,15 @@ TestCase {
 	}
 
 	function test_precisionZero() {
-		var units = [VenusOS.Units_Volume_Liter,
+		var units = [VenusOS.Units_Volume_Litre,
 					 VenusOS.Units_Volume_GallonImperial,
 					 VenusOS.Units_Volume_GallonUS,
 					 VenusOS.Units_Watt,
-					 VenusOS.Units_WattsPerSquareMeter,
+					 VenusOS.Units_WattsPerSquareMetre,
 					 VenusOS.Units_Temperature_Celsius,
 					 VenusOS.Units_Temperature_Fahrenheit,
 					 VenusOS.Units_Temperature_Kelvin,
-					 VenusOS.Units_Altitude_Meter,
+					 VenusOS.Units_Altitude_Metre,
 					 VenusOS.Units_Altitude_Foot,
 					 VenusOS.Units_RevolutionsPerMinute]
 
@@ -112,7 +112,7 @@ TestCase {
 			expect(unit, 1234, "1234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
-				if (unit === VenusOS.Units_Volume_Liter) {
+				if (unit === VenusOS.Units_Volume_Litre) {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
@@ -212,8 +212,8 @@ TestCase {
 		expect(unit, 123456789012, "123.5", "TWh")
 	}
 
-	function test_volumeCubicMeter() {
-		const unit = VenusOS.Units_Volume_CubicMeter
+	function test_volumeCubicMetre() {
+		const unit = VenusOS.Units_Volume_CubicMetre
 
 		expect(unit, NaN, "--", "m³")
 		expect(unit, 0, "0.000", "m³")

@@ -33,12 +33,12 @@ Page {
 		model: VisibleItemModel {
 
 			ListQuantity {
-				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1)
+				property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1)
 				//% "Irradiance"
 				text: qsTrId("page_meteo_irradiance")
 				dataItem.uid: bindPrefix + "/Irradiance"
-				value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMeter, dataItem.value, 1).number
-				unit: VenusOS.Units_WattsPerSquareMeter
+				value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1).number
+				unit: VenusOS.Units_WattsPerSquareMetre
 				precision: 1
 			}
 
