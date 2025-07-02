@@ -16,9 +16,9 @@ static const QString DegreesSymbol = QStringLiteral("\u00b0");
 Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 {
 	switch (unit) {
-	case Victron::VenusOS::Enums::Units_Volume_CubicMeter:
-		return Unit::CubicMeter;
-	case Victron::VenusOS::Enums::Units_Volume_Liter:
+	case Victron::VenusOS::Enums::Units_Volume_CubicMetre:
+		return Unit::CubicMetre;
+	case Victron::VenusOS::Enums::Units_Volume_Litre:
 		return Unit::Litre;
 	case Victron::VenusOS::Enums::Units_Volume_GallonUS:
 		return Unit::UsGallon;
@@ -32,16 +32,16 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 		return Unit::Fahrenheit;
 	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return Unit::MetresPerSecond;
-	case Victron::VenusOS::Enums::Units_Speed_KilometersPerHour:
-		return Unit::KilometersPerHour;
+	case Victron::VenusOS::Enums::Units_Speed_KilometresPerHour:
+		return Unit::KilometresPerHour;
 	case Victron::VenusOS::Enums::Units_Speed_MilesPerHour:
 		return Unit::MilesPerHour;
 	case Victron::VenusOS::Enums::Units_Speed_Knots:
 		return Unit::Knots;
 	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute:
 		return Unit::RevolutionsPerMinute;
-	case Victron::VenusOS::Enums::Units_Altitude_Meter:
-		return Unit::Meter;
+	case Victron::VenusOS::Enums::Units_Altitude_Metre:
+		return Unit::Metre;
 	case Victron::VenusOS::Enums::Units_Altitude_Foot:
 		return Unit::Foot;
 	default:
@@ -97,15 +97,15 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	switch (unit) {
 	case VenusOS::Enums::Units_Energy_KiloWattHour:  return 3;
 	case VenusOS::Enums::Units_PowerFactor:          return 3;
-	case VenusOS::Enums::Units_Volume_CubicMeter:    return 3;
+	case VenusOS::Enums::Units_Volume_CubicMetre:    return 3;
 	case VenusOS::Enums::Units_Volt_DC:              return 2;
 	case VenusOS::Enums::Units_Volt_AC:                // fall through
-	case VenusOS::Enums::Units_Volume_Liter:           // fall through
+	case VenusOS::Enums::Units_Volume_Litre:           // fall through
 	case VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
 	case VenusOS::Enums::Units_Volume_GallonUS:        // fall through
 	case VenusOS::Enums::Units_Percentage:             // fall through
 	case VenusOS::Enums::Units_Watt:                   // fall through
-	case VenusOS::Enums::Units_WattsPerSquareMeter:    // fall through
+	case VenusOS::Enums::Units_WattsPerSquareMetre:    // fall through
 	case VenusOS::Enums::Units_Temperature_Celsius:    // fall through
 	case VenusOS::Enums::Units_Temperature_Fahrenheit: // fall through
 	case VenusOS::Enums::Units_Temperature_Kelvin:     // fall through
@@ -114,7 +114,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Time_Day:               // fall through
 	case VenusOS::Enums::Units_Time_Hour:              // fall through
 	case VenusOS::Enums::Units_Time_Minute:            // fall through
-	case VenusOS::Enums::Units_Altitude_Meter:         // fall through
+	case VenusOS::Enums::Units_Altitude_Metre:         // fall through
 	case VenusOS::Enums::Units_Altitude_Foot:          // fall through
 		return 0;
 	default:
@@ -147,7 +147,7 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("kWh");
 	case VenusOS::Enums::Units_AmpHour:
 		return QStringLiteral("Ah");
-	case VenusOS::Enums::Units_WattsPerSquareMeter:
+	case VenusOS::Enums::Units_WattsPerSquareMetre:
 		return QStringLiteral("W/m2");
 	case VenusOS::Enums::Units_Percentage:
 		return QStringLiteral("%");
@@ -157,10 +157,10 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return (formatHints & CompactUnitFormat) ? DegreesSymbol : DegreesSymbol + QLatin1Char('F');
 	case VenusOS::Enums::Units_Temperature_Kelvin:
 		return (formatHints & CompactUnitFormat) ? DegreesSymbol : DegreesSymbol + QLatin1Char('K');
-	case VenusOS::Enums::Units_Volume_Liter:
+	case VenusOS::Enums::Units_Volume_Litre:
 		// \u2113 = l, \u3398 = kl
 		return QStringLiteral("\u2113");
-	case VenusOS::Enums::Units_Volume_CubicMeter:
+	case VenusOS::Enums::Units_Volume_CubicMetre:
 		// \u33A5 is not supported by the font, so use two characters \u006D\u00B3 instead.
 		return QStringLiteral("m³");
 	case VenusOS::Enums::Units_Volume_GallonUS: // fall through
@@ -170,7 +170,7 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("RPM");
 	case VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return QStringLiteral("m/s");
-	case VenusOS::Enums::Units_Speed_KilometersPerHour:
+	case VenusOS::Enums::Units_Speed_KilometresPerHour:
 		return QStringLiteral("km/h");
 	case VenusOS::Enums::Units_Speed_MilesPerHour:
 		return QStringLiteral("mph");
@@ -190,7 +190,7 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("h");
 	case VenusOS::Enums::Units_Time_Minute:
 		return QStringLiteral("m");
-	case VenusOS::Enums::Units_Altitude_Meter:
+	case VenusOS::Enums::Units_Altitude_Metre:
 		return QStringLiteral("m");
 	case VenusOS::Enums::Units_Altitude_Foot:
 		return QStringLiteral("ft");
@@ -227,14 +227,14 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Hertz:
 	case VenusOS::Enums::Units_Energy_KiloWattHour:
 	case VenusOS::Enums::Units_AmpHour:
-	case VenusOS::Enums::Units_WattsPerSquareMeter:
+	case VenusOS::Enums::Units_WattsPerSquareMetre:
 	case VenusOS::Enums::Units_RevolutionsPerMinute:
 	case VenusOS::Enums::Units_Speed_MetresPerSecond:
-	case VenusOS::Enums::Units_Speed_KilometersPerHour:
+	case VenusOS::Enums::Units_Speed_KilometresPerHour:
 	case VenusOS::Enums::Units_Speed_MilesPerHour:
 	case VenusOS::Enums::Units_Speed_Knots:
-	case VenusOS::Enums::Units_Volume_CubicMeter:
-	case VenusOS::Enums::Units_Volume_Liter:
+	case VenusOS::Enums::Units_Volume_CubicMetre:
+	case VenusOS::Enums::Units_Volume_Litre:
 	case VenusOS::Enums::Units_Volume_GallonUS:
 	case VenusOS::Enums::Units_Volume_GallonImperial:
 		return true;
@@ -338,7 +338,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		};
 
 		// Litre scaling is special, only kilo range scaling is supported
-		if (unit == VenusOS::Enums::Units_Volume_Liter) {
+		if (unit == VenusOS::Enums::Units_Volume_Litre) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
 				// \u2113 = litres symbol.
 				// we don't use \u3398 (kilolitres symbol)
@@ -418,8 +418,8 @@ QString Units::getCapacityDisplayText(
 	qreal capacity_m3,
 	qreal remaining_m3) const
 {
-	const qreal capacity = convert(capacity_m3, VenusOS::Enums::Units_Volume_CubicMeter, unit);
-	const qreal remaining = convert(remaining_m3, VenusOS::Enums::Units_Volume_CubicMeter, unit);
+	const qreal capacity = convert(capacity_m3, VenusOS::Enums::Units_Volume_CubicMetre, unit);
+	const qreal remaining = convert(remaining_m3, VenusOS::Enums::Units_Volume_CubicMetre, unit);
 
 	const int precision = defaultUnitPrecision(unit);
 	const quantityInfo c = getDisplayText(unit, capacity, precision);

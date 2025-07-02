@@ -69,8 +69,8 @@ public:
 
 	enum Units_Type {
 		Units_None = 0,
-		Units_Volume_CubicMeter,
-		Units_Volume_Liter,
+		Units_Volume_CubicMetre,
+		Units_Volume_Litre,
 		Units_Volume_GallonImperial,
 		Units_Volume_GallonUS,
 		Units_Percentage,
@@ -82,13 +82,13 @@ public:
 		Units_Hertz,
 		Units_Energy_KiloWattHour,
 		Units_AmpHour,
-		Units_WattsPerSquareMeter,
+		Units_WattsPerSquareMetre,
 		Units_Temperature_Kelvin,
 		Units_Temperature_Celsius,
 		Units_Temperature_Fahrenheit,
 		Units_RevolutionsPerMinute,
 		Units_Speed_MetresPerSecond,
-		Units_Speed_KilometersPerHour,
+		Units_Speed_KilometresPerHour,
 		Units_Speed_MilesPerHour,
 		Units_Speed_Knots,
 		Units_Hectopascal,
@@ -98,7 +98,7 @@ public:
 		Units_Time_Day,
 		Units_Time_Hour,
 		Units_Time_Minute,
-		Units_Altitude_Meter,
+		Units_Altitude_Metre,
 		Units_Altitude_Foot
 	};
 	Q_ENUM(Units_Type)
