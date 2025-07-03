@@ -28,7 +28,6 @@ ListView {
 	highlightFollowsCurrentItem: true
 	highlightMoveDuration: Theme.animation_listView_highlightMoveDuration
 	focus: Global.keyNavigationEnabled
-	reuseItems: true
 
 	// Pass the Utils.acceptsKeyNavigation() test to receive focus during key navigation when this
 	// list view is within another container.
