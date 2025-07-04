@@ -78,7 +78,24 @@ endif()
 
 set(REQUIRED_QT_VERSION 6.8.3) # qt 6.8.3 required for 'qt_standard_project_setup(...)' to work
 
-find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools ShaderTools REQUIRED)
+set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
+
+# Common Qt components for all platforms
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools REQUIRED)
+
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+    add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
+    add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS WebSockets REQUIRED)
+else()
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus ShaderTools REQUIRED)
+endif()
 
 list(APPEND TS_CODES "af" "ar" "cs" "da" "de" "es" "fr" "it" "nl" "pl" "ro" "ru" "sv" "th" "tr" "uk" "zh_CN")
 list(APPEND TS_FILES ${TS_CODES})
@@ -799,15 +816,18 @@ qt_add_qml_module(VenusQMLModule
     SOURCES ${VenusQMLModule_CPP_SOURCES}
 )
 
-qt6_add_shaders(VenusQMLModule "venus-shaders"
-    BATCHABLE
-    PRECOMPILE
-    OPTIMIZED
-    PREFIX
-        "/"
-    FILES
-        "components/controls/presseffect.frag"
-)
+# Add shaders only for non-WebAssembly builds (requires QtShaderTools)
+if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    qt6_add_shaders(VenusQMLModule "venus-shaders"
+        BATCHABLE
+        PRECOMPILE
+        OPTIMIZED
+        PREFIX
+            "/"
+        FILES
+            "components/controls/presseffect.frag"
+    )
+endif()
 
 list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
 
