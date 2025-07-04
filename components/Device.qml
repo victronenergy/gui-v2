@@ -32,7 +32,7 @@ BaseDevice {
 	}
 
 	deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
-	productId: _productId.valid ? _productId.value : 0
+	productId: _productId.valid ? _productId.value ?? 0 : 0
 	productName: _productName.value || ""
 	customName: _customName.value || ""
 	name: _customName.value || _productName.value || ""
