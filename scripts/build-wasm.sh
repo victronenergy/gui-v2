@@ -64,8 +64,9 @@ else
 fi
 
 
-export PATH=${OUTPUTDIR}/Qt/Tools/CMake/bin:${PATH}
-export QTDIR=${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread
+#export PATH=${OUTPUTDIR}/Qt/Tools/CMake/bin:${PATH}
+#export QTDIR=${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread
+export QTDIR=/opt/Qt/6.8.3/wasm_singlethread
 
 source "${OUTPUTDIR}/emsdk/emsdk_env.sh"
 source /opt/venus/python/bin/activate
