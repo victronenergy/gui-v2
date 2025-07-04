@@ -32,7 +32,7 @@ QtObject {
 	readonly property int speedUnit: {
 		switch (_speedUnit.value) {
 		case "km/h":
-			return VenusOS.Units_Speed_KilometersPerHour
+			return VenusOS.Units_Speed_KilometresPerHour
 		case "m/s":
 			return VenusOS.Units_Speed_MetresPerSecond
 		case "kt":
@@ -79,11 +79,11 @@ QtObject {
 
 	function setVolumeUnit(value) {
 		switch (value) {
-			case VenusOS.Units_Volume_CubicMeter:
+			case VenusOS.Units_Volume_CubicMetre:
 				_volumeUnit.setValue(_volumeUnit.ve_cm3)
 				break
-			case VenusOS.Units_Volume_Liter:
-				_volumeUnit.setValue(_volumeUnit.ve_liter)
+			case VenusOS.Units_Volume_Litre:
+				_volumeUnit.setValue(_volumeUnit.ve_litre)
 				break
 			case VenusOS.Units_Volume_GallonImperial:
 				_volumeUnit.setValue(_volumeUnit.ve_gallonImperial)
@@ -334,21 +334,21 @@ QtObject {
 	}
 
 	property VeQuickItem _altitudeUnit: VeQuickItem {
-		readonly property string ve_meter: "meter"
+		readonly property string ve_metre: "meter"
 		readonly property string ve_foot: "foot"
 
 		uid: root.serviceUid + "/Settings/System/Units/Altitude"
 		onValueChanged: {
 			switch (value) {
-			case ve_meter:
-				root.altitudeUnit = VenusOS.Units_Altitude_Meter
+			case ve_metre:
+				root.altitudeUnit = VenusOS.Units_Altitude_Metre
 				break
 			case ve_foot:
 				root.altitudeUnit = VenusOS.Units_Altitude_Foot
 				break
 			default:
-				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to meter")
-				root.altitudeUnit = VenusOS.Units_Altitude_Meter
+				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
+				root.altitudeUnit = VenusOS.Units_Altitude_Metre
 				break
 			}
 		}
@@ -356,7 +356,7 @@ QtObject {
 
 	property VeQuickItem _volumeUnit: VeQuickItem {
 		readonly property int ve_cm3: 0
-		readonly property int ve_liter: 1
+		readonly property int ve_litre: 1
 		readonly property int ve_gallonImperial: 2
 		readonly property int ve_gallonUs: 3
 
@@ -364,10 +364,10 @@ QtObject {
 		onValueChanged: {
 			switch (value) {
 			case ve_cm3:
-				root.volumeUnit = VenusOS.Units_Volume_CubicMeter
+				root.volumeUnit = VenusOS.Units_Volume_CubicMetre
 				break
-			case ve_liter:
-				root.volumeUnit = VenusOS.Units_Volume_Liter
+			case ve_litre:
+				root.volumeUnit = VenusOS.Units_Volume_Litre
 				break
 			case ve_gallonImperial:
 				root.volumeUnit = VenusOS.Units_Volume_GallonImperial
@@ -377,7 +377,7 @@ QtObject {
 				break
 			default:
 				console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
-				root.volumeUnit = VenusOS.Units_Volume_CubicMeter
+				root.volumeUnit = VenusOS.Units_Volume_CubicMetre
 				break
 			}
 		}

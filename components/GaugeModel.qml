@@ -210,7 +210,7 @@ ListModel {
 							: !isNaN(_tankModel.averageLevel) ? _tankModel.averageLevel
 							: (_tankModel.count === 0 || _tankModel.totalCapacity === 0) ? 0
 							: ((Math.min(_tankModel.totalRemaining / _tankModel.totalCapacity, 1.0) * 100))
-					remaining: Units.convert(_tankModel.totalRemaining, VenusOS.Units_Volume_CubicMeter, Global.systemSettings.volumeUnit)
+					remaining: Units.convert(_tankModel.totalRemaining, VenusOS.Units_Volume_CubicMetre, Global.systemSettings.volumeUnit)
 				}
 			}
 
@@ -238,7 +238,7 @@ ListModel {
 					name: _device?.name || ""
 					type: _device?.type ?? -1
 					level: _device?.level ?? NaN
-					remaining: Units.convert(_device?.remaining ?? NaN, VenusOS.Units_Volume_CubicMeter, Global.systemSettings.volumeUnit)
+					remaining: Units.convert(_device?.remaining ?? NaN, VenusOS.Units_Volume_CubicMetre, Global.systemSettings.volumeUnit)
 
 					// Set tank on initialization, or when tanks are updated, in case the tank is
 					// disconnected and reconnected.

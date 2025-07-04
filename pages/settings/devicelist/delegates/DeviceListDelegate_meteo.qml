@@ -11,7 +11,7 @@ DeviceListDelegate {
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
-		QuantityObject { object: irradiance; unit: VenusOS.Units_WattsPerSquareMeter }
+		QuantityObject { object: irradiance; unit: VenusOS.Units_WattsPerSquareMetre }
 	}
 
 	onClicked: {

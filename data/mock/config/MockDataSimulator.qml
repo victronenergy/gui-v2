@@ -268,13 +268,13 @@ QtObject {
 					? VenusOS.Units_Temperature_Fahrenheit
 					: VenusOS.Units_Temperature_Celsius)
 			Global.systemSettings.setVolumeUnit(
-					Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
-					? VenusOS.Units_Volume_Liter
-					: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Liter
+					Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
+					? VenusOS.Units_Volume_Litre
+					: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Litre
 					  ? VenusOS.Units_Volume_GallonUS
 					  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						? VenusOS.Units_Volume_GallonImperial
-						: VenusOS.Units_Volume_CubicMeter)
+						: VenusOS.Units_Volume_CubicMetre)
 
 			pageConfigTitle.text = "Units: "
 					+ (Global.systemSettings.electricalQuantity === VenusOS.Units_Watt
@@ -283,10 +283,10 @@ QtObject {
 					+ (Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 					   ? "Celsius"
 					   : "Fahrenheit") + " | "
-					+ (Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMeter
-					   ? "Cubic meters"
-					   : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Liter
-						 ? "Liters"
+					+ (Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
+					   ? "Cubic metres"
+					   : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Litre
+						 ? "Litres"
 						 : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						   ? "Gallons (US)"
 						   : "Gallons (Imperial)")

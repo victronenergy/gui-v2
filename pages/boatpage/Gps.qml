@@ -14,12 +14,12 @@ VeQuickItemsQuotient {
 	readonly property real speed: {
 		switch (units) {
 		case "km/h":
-			return numerator * Utils.SECONDS_PER_HOUR / Utils.METERS_PER_KILOMETER
+			return numerator * Utils.SECONDS_PER_HOUR / Utils.METRES_PER_KILOMETRE
 		case "mph":
-			return numerator * Utils.SECONDS_PER_HOUR / Utils.METERS_PER_MILE
+			return numerator * Utils.SECONDS_PER_HOUR / Utils.METRES_PER_MILE
 		case "kt":
-			return numerator * Utils.SECONDS_PER_HOUR / Utils.METERS_PER_NAUTICAL_MILE
-		default: // meters per second
+			return numerator * Utils.SECONDS_PER_HOUR / Utils.METRES_PER_NAUTICAL_MILE
+		default: // metres per second
 			return numerator
 		}
 	}
@@ -29,7 +29,7 @@ VeQuickItemsQuotient {
 	}
 
 	objectName: "BoatPageComponents.Gps"
-	numeratorUid: activeGpsUid ? activeGpsUid + "/Speed" : "" // meters per second
+	numeratorUid: activeGpsUid ? activeGpsUid + "/Speed" : "" // metres per second
 	denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
 	sourceUnit: VenusOS.Units_Speed_MetresPerSecond
 	displayUnit: Global.systemSettings.speedUnit

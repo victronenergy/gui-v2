@@ -38,7 +38,7 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: remaining
 		uid: root.device.serviceUid + "/Remaining"
-		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMeter)
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
 		displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
 	}
 
