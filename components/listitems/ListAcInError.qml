@@ -14,6 +14,9 @@ ListText {
 	text: CommonWords.error_code
 	dataItem.uid: root.bindPrefix + "/ErrorCode"
 	secondaryText: {
+		if (!preferredVisible) {
+			return ""
+		}
 		if (productId.value === ProductInfo.ProductId_PvInverter_Fronius) {
 			return dataItem.value
 		} else if (productId.value === ProductInfo.ProductId_EnergyMeter_CarloGavazzi) {
