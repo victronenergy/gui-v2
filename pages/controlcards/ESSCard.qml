@@ -85,12 +85,23 @@ ControlCard {
 			//% "Active SOC Limit: %1%"
 			text: qsTrId("ess_active_soc_limit").arg(Math.max(Global.systemSettings.ess.minimumStateOfCharge, Global.systemSettings.ess.stateOfChargeLimit))
 			flat: true
-			content.children: [
-				CP.IconImage {
-					source: "qrc:/images/information.svg"
-					color: Theme.color_blue
-				}
-			]
+			primaryLabel.color: Theme.color_font_disabled
+			leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
+			interactive: true
+
+			onClicked: {
+				//% "BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability."
+				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("ess_active_soc_limit_info"), 10000)
+			}
+
+			CP.IconImage {
+				id: infoIcon
+
+				x: Theme.geometry_listItem_flat_content_horizontalMargin
+				anchors.verticalCenter: parent.verticalCenter
+				source: "qrc:/images/information.svg"
+				color: Theme.color_font_disabled
+			}
 		}
 	}
 }
