@@ -16,6 +16,13 @@ QtObject {
 
 	readonly property var stateModel: [
 		{
+			//% "Keep batteries charged"
+			display: qsTrId("ess_state_keep_batteries_charged"),
+			//% "Keep charged"
+			buttonText: qsTrId("ess_state_keep_batteries_charged_button"),
+			value: VenusOS.Ess_State_KeepBatteriesCharged
+		},
+		{
 			//% "Optimized with BatteryLife"
 			display: qsTrId("ess_state_optimized_with_batterylife"),
 			//% "Optimized + BatteryLife"
@@ -28,13 +35,6 @@ QtObject {
 			//% "Optimized"
 			buttonText: qsTrId("ess_state_optimized_without_batterylife_button"),
 			value: VenusOS.Ess_State_OptimizedWithoutBatteryLife
-		},
-		{
-			//% "Keep batteries charged"
-			display: qsTrId("ess_state_keep_batteries_charged"),
-			//% "Keep charged"
-			buttonText: qsTrId("ess_state_keep_batteries_charged_button"),
-			value: VenusOS.Ess_State_KeepBatteriesCharged
 		},
 		{
 			//% "External control"
