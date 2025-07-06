@@ -1,0 +1,23 @@
+{
+    "com.victronenergy.temperature.ruuvi_f00f00d00001": {
+        "/AccelX": 0.04800000041723251,
+        "/AccelY": -0.08399999886751175,
+        "/AccelZ": 1.0119999647140503,
+        "/BatteryVoltage": 3.1750001907348633,
+        "/Connected": 1,
+        "/CustomName": "Refrigerator",
+        "/DeviceInstance": 28,
+        "/DeviceName": "Ruuvi 41EA",
+        "/Humidity": 32.61000061035156,
+        "/Mgmt/Connection": "Bluetooth LE",
+        "/Mgmt/ProcessName": "dbus-ble-sensors",
+        "/Mgmt/ProcessVersion": "0.3",
+        "/Pressure": 100.19400024414062,
+        "/ProductId": 49193,
+        "/ProductName": "RuuviTag",
+        "/SeqNo": 445,
+        "/Temperature": 4.4,
+        "/TemperatureType": 1,
+        "/TxPower": 4.0
+    }
+}

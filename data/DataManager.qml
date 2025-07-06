@@ -27,7 +27,7 @@ Item {
 	readonly property bool _ready: _dataObjectsReady
 			&& Global.backendReady
 			&& dataServiceModel.rowCount > 0
-			&& (!mockManagerLoader.active || mockManagerLoader.status === Loader.Ready)
+			&& (!mockSetupLoader.active || mockSetupLoader.status === Loader.Ready)
 
 
 	on_DataObjectsReadyChanged: if (_dataObjectsReady) console.info("DataManager: data objects ready")
@@ -66,11 +66,15 @@ Item {
 	}
 
 	Loader {
-		id: mockManagerLoader
+		id: mockSetupLoader
 		active: root._dataObjectsReady && BackendConnection.type === BackendConnection.MockSource
 		asynchronous: true
-		sourceComponent: MockDataManager {}
-		onStatusChanged: if (status === Loader.Error) console.warn("DataManager: Unable to load mock data manager:", errorString())
-		onLoaded: console.info("DataManager: mock data manager loaded!")
+		sourceComponent: MockSetup {}
+		onLoaded: console.info("DataManager: mock setup loaded!")
+		onStatusChanged: {
+			if (status === Loader.Error) {
+				console.warn("DataManager: Unable to load mock setup:", errorString())
+			}
+		}
 	}
 }

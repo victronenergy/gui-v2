@@ -137,6 +137,7 @@ public:
 	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
 
 	QUrl demoImageFileName() const;
+	VeQItemProducer *producer() const;
 
 	// Each service type (system, settings, battery, etc.) has a base uid, which has different
 	// forms on D-Bus and MQTT:
@@ -162,9 +163,6 @@ public:
 	Q_INVOKABLE void reloadPage();
 	Q_INVOKABLE void openUrl(const QString &url);
 
-	// Move this to some mock data manager when available
-	Q_INVOKABLE void setMockValue(const QString &uid, const QVariant &value);
-	Q_INVOKABLE QVariant mockValue(const QString &uid) const;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	Q_INVOKABLE void hitWatchdog();
 #endif

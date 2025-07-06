@@ -360,7 +360,6 @@ void BackendConnection::initMockConnection()
 {
 	VeQItemMockProducer *producer = new VeQItemMockProducer(VeQItems::getRoot(), "mock");
 	m_producer = producer;
-	producer->initialize();
 	setState(true);
 }
 
@@ -651,6 +650,11 @@ QUrl BackendConnection::demoImageFileName() const
 	return fileExists ? filePath : QUrl();
 }
 
+VeQItemProducer *BackendConnection::producer() const
+{
+	return m_producer;
+}
+
 QString BackendConnection::serviceUidForType(const QString &serviceType) const
 {
 	// Assumes the specified service has the equivalent of DeviceInstance = 0 on MQTT. That is,
@@ -759,21 +763,6 @@ QVariantMap BackendConnection::portableIdInfo(const QString &portableId) const
 	map.insert(QStringLiteral("type"), serviceName.split('.').last());
 	map.insert(QStringLiteral("instance"), parts.last());
 	return map;
-}
-
-void BackendConnection::setMockValue(const QString &uid, const QVariant &value)
-{
-	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
-		producer->setValue(uid, value);
-	}
-}
-
-QVariant BackendConnection::mockValue(const QString &uid) const
-{
-	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
-		return producer->value(uid);
-	}
-	return QVariant();
 }
 
 BackendConnectionTester::BackendConnectionTester()
