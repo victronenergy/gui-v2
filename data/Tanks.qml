@@ -126,7 +126,12 @@ QtObject {
 			Qt.callLater(tankObject.updateModel)
 		}
 		onObjectRemoved: (index, tankObject) => {
-			tankObject.canUpdate = false
+			if (tankObject) {
+				tankObject.canUpdate = false
+				if (tankObject._tankModel) {
+					tankObject._tankModel.removeDevice(tankObject.serviceUid)
+				}
+			}
 		}
 	}
 
