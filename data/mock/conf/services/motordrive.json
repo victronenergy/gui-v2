@@ -1,0 +1,32 @@
+{
+    "com.victronenergy.motordrive.demo1": {
+        "/Connected": 1,
+        "/Controller/Temperature": 23,
+        "/Coolant/Temperature": 23,
+        "/CustomName": "",
+        "/Dc/0/Current": 58.099998474121094,
+        "/Dc/0/Power": 2945,
+        "/Dc/0/Temperature": null,
+        "/Dc/0/Voltage": 50.70000076293945,
+        "/DeviceInstance": 0,
+        "/FirmwareVersion": 0,
+        "/HardwareVersion": 0,
+        "/Mgmt/Connection": "Simulation",
+        "/Mgmt/ProcessName": "/data/dbus-motordrive-simulator/ext/velib_python/dbusdummyservice.py ",
+        "/Mgmt/ProcessVersion": "",
+        "/Motor/Direction": 2,
+        "/Motor/RPM": 1411,
+        "/Motor/Temperature": 23,
+        "/N2kDeviceInstance": 0,
+        "/N2kUniqueNumber": 655188,
+        "/ProductId": 45155,
+        "/ProductName": "Motordrive Simulation",
+        "/Serial": ""
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Gui/ElectricPropulsionUI/Enabled": 1,
+        "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type": 0,
+        "/Settings/Gui/Gauges/MotorDrive/Power/Max": 20000,
+        "/Settings/Gui/Gauges/MotorDrive/RPM/Max": 6000
+    }
+}

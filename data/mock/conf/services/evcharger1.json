@@ -1,0 +1,36 @@
+{
+    "com.victronenergy.evcharger.evc_HQ2306Q4GED": {
+        "/Ac/Energy/Forward": 17.26,
+        "/Ac/L1/Power": 6927.0,
+        "/Ac/L2/Power": 0.0,
+        "/Ac/L3/Power": 0.0,
+        "/Ac/Power": 6927.0,
+        "/AutoStart": 1.0,
+        "/ChargingTime": 8838.0,
+        "/Connected": 1,
+        "/Current": 32.0,
+        "/CustomName": "EVCS-Victron",
+        "/DeviceInstance": 75,
+        "/EnableDisplay": 1.0,
+        "/FirmwareVersion": 75775,
+        "/MaxCurrent": 32.0,
+        "/Mgmt/Connection": "Modbus TCP 192.168.20.80",
+        "/Mgmt/ProcessName": "dbus-modbus-client.py",
+        "/Mgmt/ProcessVersion": "1.37",
+        "/Mode": 0,
+        "/Model": "AC22E",
+        "/Position": 0,
+        "/ProductId": 49189,
+        "/ProductName": "EV Charging Station",
+        "/Role": "evcharger",
+        "/Serial": "HQ2306Q4GED",
+        "/SetCurrent": 32.0,
+        "/StartStop": 1,
+        "/Status": 2
+    },
+    "com.victronenergy.modbusclient.tcp": {
+        "/Devices/evc_HQ2306Q4GED/Enabled": 1,
+        "/Devices/evc_HQ2306Q4GED/Name": "EVCS-Victron",
+        "/Devices/evc_HQ2306Q4GED/Serial": "HQ2306Q4GED"
+    }
+}

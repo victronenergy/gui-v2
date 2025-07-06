@@ -1,0 +1,14 @@
+{
+    "com.victronenergy.unsupported.dummy_123": {
+        "/CustomName": "",
+        "/DeviceInstance": 0,
+        "/FirmwareVersion": 0,
+        "/HardwareVersion": null,
+        "/Mgmt/Connection": "USB",
+        "/Mgmt/ProcessName": "vedirect-dbus",
+        "/Mgmt/ProcessVersion": "1.23",
+        "/ProductId": 0,
+        "/ProductName": "Random unsupported service",
+        "/Serial": "123456789"
+    }
+}

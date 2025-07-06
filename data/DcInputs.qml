@@ -12,6 +12,7 @@ QtObject {
 	property real power: NaN
 	property real current: NaN
 	readonly property real maximumPower: _maximumPower.valid ? _maximumPower.value : NaN
+	readonly property list<string> serviceTypes: ["alternator","fuelcell","dcsource","dcgenset"]
 
 	readonly property DeviceModel model: DeviceModel {
 		modelId: "dcInputs"
@@ -106,7 +107,7 @@ QtObject {
 	}
 
 	readonly property Instantiator _dcInputObjects: Instantiator {
-		model: ServiceModel { serviceTypes: ["alternator","fuelcell","dcsource","dcgenset"] }
+		model: ServiceModel { serviceTypes: root.serviceTypes }
 		delegate: DcInput {
 			id: input
 			required property string uid

@@ -1,0 +1,50 @@
+{
+    "com.victronenergy.modbusclient.tcp": {
+        "/Scan": false,
+        "/ScanProgress": null
+    },
+    "com.victronenergy.platform": {
+        "/Device/Model": "Cerbo GX",
+        "/Device/Time": 1750553847
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Alarm/System/GridLost": 1,
+        "/Settings/DynamicEss/Mode": 1,
+        "/Settings/Gps/Format": 0,
+        "/Settings/Gps/SpeedUnit": "km/h",
+        "/Settings/Gui/ColorScheme": 1,
+        "/Settings/Gui/DemoMode": 0,
+        "/Settings/Gui/ElectricalPowerIndicator": 0,
+        "/Settings/Gui/Gauges/AutoMax": 1,
+        "/Settings/Gui/Gauges/Speed/Max": 50,
+        "/Settings/Gui/TouchEnabled": 1,
+        "/Settings/Gui2/OnBoarding": 1,
+        "/Settings/Gui2/StartPage": 0,
+        "/Settings/Gui2/StartPageName": "",
+        "/Settings/Gui2/StartPageTimeout": 0,
+        "/Settings/ModbusClient/tcp/AutoScan": 1,
+        "/Settings/ModbusClient/tcp/Devices": "tcp:192.168.1.232:502:1,tcp:192.168.1.232:503:10",
+        "/Settings/Services/Bol": 1,
+        "/Settings/Services/Modbus": 0,
+        "/Settings/Services/MqttLocal": 0,
+        "/Settings/Services/MqttLocalInsecure": 0,
+        "/Settings/System/AccessLevel": 3,
+        "/Settings/System/SecurityProfile": 0,
+        "/Settings/System/TimeZone": "Europe/Berlin",
+        "/Settings/System/Units/Altitude": "meter",
+        "/Settings/System/Units/Temperature": "celsius",
+        "/Settings/System/VncLocal": 1,
+        "/Settings/System/VolumeUnit": 1,
+        "/Settings/System/SecurityProfile": 0,
+        "/Settings/SystemSetup/BatteryService": "default",
+        "/Settings/SystemSetup/BmsInstance": -1,
+        "/Settings/SystemSetup/MaxChargeCurrent": -1,
+        "/Settings/SystemSetup/MaxChargeVoltage": 0,
+        "/Settings/SystemSetup/SharedTemperatureSense": 1,
+        "/Settings/SystemSetup/SharedVoltageSense": 3,
+        "/Settings/SystemSetup/TemperatureService": "default"
+    },
+    "com.victronenergy.system": {
+        "/Control/BatteryCurrentSense": 0
+    }
+}

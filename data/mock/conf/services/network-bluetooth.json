@@ -1,0 +1,9 @@
+{
+    "com.victronenergy.platform": {
+        "/Network/HasBluetoothSupport": 1
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Services/Bluetooth": 1,
+        "/Settings/Ble/Service/Pincode": "12345"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "com.victronenergy.platform": {
+        "/Network/ConfigChanged": 0,
+        "/Network/Ethernet/LinkLocalIpAddress": null,
+        "/Network/Services": "{\"ethernet\":{\"Wired\":{\"Address\":\"192.168.1.1\",\"Gateway\":\"192.168.2.2\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"dhcp\",\"Nameservers\":[\"192.168.3.3\"],\"Netmask\":\"255.255.255.0\",\"Service\":\"/net/connman/service/ethernet_1234556789_cable\",\"State\":\"ready\"}},\"wifi\":{\"\":{\"Address\":\"\",\"Favorite\":\"no\",\"Gateway\":\"\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"\",\"Nameservers\":[],\"Netmask\":\"\",\"Secured\":\"yes\",\"Service\":\"/net/connman/service/wifi_123456789abc_hidden_managed_psk\",\"State\":\"idle\",\"Strength\":94},\"Network A\":{\"Address\":\"\",\"Favorite\":\"no\",\"Gateway\":\"\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"\",\"Nameservers\":[],\"Netmask\":\"\",\"Secured\":\"yes\",\"Service\":\"/net/connman/service/wifi_123456789abc_41636164656d79_managed_psk\",\"State\":\"idle\",\"Strength\":42},\"Network B\":{\"Address\":\"\",\"Favorite\":\"no\",\"Gateway\":\"\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"\",\"Nameservers\":[],\"Netmask\":\"\",\"Secured\":\"yes\",\"Service\":\"/net/connman/service/wifi_123456789abc_managed_psk\",\"State\":\"idle\",\"Strength\":42},\"Network C\":{\"Address\":\"192.168.5.96\",\"Favorite\":\"yes\",\"Gateway\":\"192.168.5.1\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"dhcp\",\"Nameservers\":[\"192.168.5.1\"],\"Netmask\":\"255.255.255.0\",\"Secured\":\"yes\",\"Service\":\"/net/connman/service/wifi_123456789abc_51696e65746963_managed_psk\",\"State\":\"ready\",\"Strength\":94},\"Network D\":{\"Address\":\"\",\"Favorite\":\"no\",\"Gateway\":\"\",\"Mac\":\"11:22:33:AA:BB:CC\",\"Method\":\"\",\"Nameservers\":[],\"Netmask\":\"\",\"Secured\":\"yes\",\"Service\":\"/net/connman/service/wifi_123456789abc_576946692d5046374342_managed_psk\",\"State\":\"idle\",\"Strength\":42}}}",
+        "/Network/SetValue": 0,
+        "/Network/Wifi/Scan": 0,
+        "/Network/Wifi/SignalStrength": 94,
+        "/Network/Wifi/State": "ready",
+        "/Services/AccessPoint/Enabled": 0
+    }
+}

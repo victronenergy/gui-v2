@@ -1,0 +1,26 @@
+{
+    "com.victronenergy.meteo.solarsense_123456789": {
+        "/Alarms/LowBattery": 0,
+        "/BatteryVoltage": 3.799999952316284,
+        "/CellTemperature": 17.900001525878906,
+        "/ChrErrorCode": 116,
+        "/Connected": 1,
+        "/CustomName": "SolarSense",
+        "/DeviceInstance": 20,
+        "/DeviceName": "SolarSense 1168",
+        "/Devices/0/DeviceInstance": 20,
+        "/Devices/0/ProductId": 49232,
+        "/ErrorCode": 5125,
+        "/Irradiance": 0,
+        "/Mgmt/Connection": "Bluetooth LE",
+        "/Mgmt/ProcessName": "dbus-ble-sensors",
+        "/Mgmt/ProcessVersion": "0.23",
+        "/ProductId": 49232,
+        "/ProductName": "SolarSense 750",
+        "/Status": 0,
+        "/TimeSinceLastSun": 220,
+        "/TodaysYield": 0,
+        "/TxPowerLevel": 6,
+        "/UnspecifiedRemnant": 1
+    }
+}
