@@ -745,6 +745,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/keynavigationhighlight.h
     src/keynavigationhighlighthelper.h
     src/keynavigationhighlighthelper.cpp
+    src/mockmanager.h
+    src/mockmanager.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
@@ -857,37 +859,26 @@ endif()
 
 # Mock_QML_MODULE
 set(Mock_QML_MODULE_SOURCES
-    data/mock/AcInputsImpl.qml
-    data/mock/AcSystemDevicesImpl.qml
     data/mock/BatteriesImpl.qml
-    data/mock/ChargersImpl.qml
-    data/mock/DcInputsImpl.qml
-    data/mock/DcLoadsImpl.qml
-    data/mock/DigitalInputImpl.qml
-    data/mock/DigitalInputsImpl.qml
-    data/mock/EnvironmentInputsImpl.qml
+    data/mock/DevicesImpl.qml
     data/mock/EvChargersImpl.qml
     data/mock/GeneratorsImpl.qml
-    data/mock/GpsImpl.qml
-    data/mock/HeatPumpsImpl.qml
-    data/mock/MeteoDevicesImpl.qml
-    data/mock/MockDataManager.qml
+    data/mock/InverterChargersImpl.qml
+    data/mock/MiscServicesImpl.qml
+    data/mock/MockDataRandomizer.qml
+    data/mock/MockDataRangeAnimator.qml
+    data/mock/MockSetup.qml
+    data/mock/MockShortcuts.qml
     data/mock/MotorDrivesImpl.qml
     data/mock/NotificationsImpl.qml
-    data/mock/PulseMetersImpl.qml
-    data/mock/PvInvertersImpl.qml
-    data/mock/SolarDevicesImpl.qml
-    data/mock/SwitchesImpl.qml
-    data/mock/SystemImpl.qml
-    data/mock/SystemSettingsImpl.qml
+    data/mock/SolarInputsImpl.qml
+    data/mock/SystemAcImpl.qml
+    data/mock/SystemDcImpl.qml
     data/mock/TanksImpl.qml
-    data/mock/UnsupportedDevicesImpl.qml
-    data/mock/InverterChargersImpl.qml
-    data/mock/config/BoatPageConfig.qml
-    data/mock/config/BriefAndOverviewPageConfig.qml
-    data/mock/config/LevelsPageConfig.qml
-    data/mock/config/MockDataSimulator.qml
-    data/mock/config/NotificationsPageConfig.qml
+    data/mock/TemperaturesImpl.qml
+    data/mock/page-conf/BoatPageConfig.qml
+    data/mock/page-conf/BriefAndOverviewPageConfig.qml
+    data/mock/page-conf/LevelsPageConfig.qml
 )
 
 list(APPEND TRANSLATION_SOURCES ${Mock_QML_MODULE_SOURCES})
@@ -910,6 +901,74 @@ if (${LOAD_QML_FROM_FILESYSTEM})
         VERBATIM
     )
 endif()
+qt_add_resources(VictronMock "VictronMock_resources"
+    BIG_RESOURCES
+    FILES
+        data/mock/conf/barebones.json
+        data/mock/conf/maximal.json
+        data/mock/conf/multi-rs.json
+        data/mock/conf/services/alternator.json
+        data/mock/conf/services/dcsystem.json
+        data/mock/conf/services/dse-genset.json
+        data/mock/conf/services/digitalinput-alarm.json
+        data/mock/conf/services/em-acload.json
+        data/mock/conf/services/em-evcharger.json
+        data/mock/conf/services/em-genset.json
+        data/mock/conf/services/em-grid.json
+        data/mock/conf/services/em-heatpump-input.json
+        data/mock/conf/services/em-heatpump-output.json
+        data/mock/conf/services/em-pvinverter.json
+        data/mock/conf/services/ess.json
+        data/mock/conf/services/evcharger1.json
+        data/mock/conf/services/fronius.json
+        data/mock/conf/services/generator.json
+        data/mock/conf/services/gioextender.json
+        data/mock/conf/services/gps.json
+        data/mock/conf/services/inverter-rs.json
+        data/mock/conf/services/lynxbms.json
+        data/mock/conf/services/lynxparallel.json
+        data/mock/conf/services/meteo-solarsense.json
+        data/mock/conf/services/modem.json
+        data/mock/conf/services/motordrive.json
+        data/mock/conf/services/mppt1.json
+        data/mock/conf/services/mppt2.json
+        data/mock/conf/services/multirs-smart.json
+        data/mock/conf/services/network-bluetooth.json
+        data/mock/conf/services/network-wifi-and-ethernet.json
+        data/mock/conf/services/notifications-alarm.json
+        data/mock/conf/services/notifications-no-alarm.json
+        data/mock/conf/services/orionxs-alternator.json
+        data/mock/conf/services/orionxs-dcdc.json
+        data/mock/conf/services/phoenix-smart-charger.json
+        data/mock/conf/services/pulsemeter.json
+        data/mock/conf/services/pump.json
+        data/mock/conf/services/pvinverter.json
+        data/mock/conf/services/pylontech.json
+        data/mock/conf/services/quattro-3phase-grid-genset.json
+        data/mock/conf/services/relays.json
+        data/mock/conf/services/ruuvi-fridge.json
+        data/mock/conf/services/ruuvi-salon.json
+        data/mock/conf/services/skylla-charger.json
+        data/mock/conf/services/smartshunt-battery.json
+        data/mock/conf/services/smartshunt-dcsource.json
+        data/mock/conf/services/smartswitch.json
+        data/mock/conf/services/tank-blackwater-error-state.json
+        data/mock/conf/services/tank-fuel1.json
+        data/mock/conf/services/tank-fuel2.json
+        data/mock/conf/services/tank-fuel3.json
+        data/mock/conf/services/tank-greywater.json
+        data/mock/conf/services/tank-lpg.json
+        data/mock/conf/services/tank-water1.json
+        data/mock/conf/services/tank-water2.json
+        data/mock/conf/services/tank-water3.json
+        data/mock/conf/services/tank-water4.json
+        data/mock/conf/services/temperature-freezer.json
+        data/mock/conf/services/temperature-watertank.json
+        data/mock/conf/services/unsupported.json
+        data/mock/conf/services/wind.json
+        data/mock/conf/setup-common.json
+        data/mock/conf/setup-essential-loads.json
+)
 # end Mock_QML_MODULE
 
 # Gauges_QML_MODULE

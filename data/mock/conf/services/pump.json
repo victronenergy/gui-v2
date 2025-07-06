@@ -1,0 +1,11 @@
+{
+    "com.victronenergy.pump.startstop0": {
+        "AvailableTankServices": "{\"notanksensor\": \"No tank sensor\"}",
+        "State": 0
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Pump0/Mode": 2,
+        "/Settings/Pump0/StartValue": 50,
+        "/Settings/Pump0/StopValue": 80
+    }
+}

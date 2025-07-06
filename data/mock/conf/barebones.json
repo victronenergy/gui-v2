@@ -1,0 +1,11 @@
+{
+    "files": [
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.settings": {
+        },
+        "com.victronenergy.system": {
+        }
+    }
+}

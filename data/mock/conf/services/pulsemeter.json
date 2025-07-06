@@ -1,0 +1,18 @@
+{
+    "com.victronenergy.pulsemeter.pm_12345": {
+        "/Aggregate": 0,
+        "/Connected": 1,
+        "/Count": 0,
+        "/CustomName": "",
+        "/DeviceInstance": 12,
+        "/Mgmt/Connection": "/run/io-ext/pm_12345/input_7",
+        "/Mgmt/ProcessName": "/opt/victronenergy/dbus-digitalinputs/dbus_digitalinputs.py",
+        "/Mgmt/ProcessVersion": "0.31",
+        "/ProductId": 41317,
+        "/ProductName": "Generic pulse meter",
+        "/Settings/AlarmSetting": 0,
+        "/Settings/InvertAlarm": 0,
+        "/Settings/InvertTranslation": 0,
+        "/Settings/Multiplier": 0.001
+    }
+}
