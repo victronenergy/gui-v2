@@ -8,8 +8,6 @@
 
 #include "veutil/qt/ve_qitem.hpp"
 
-#include <QtCore/QHash>
-
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSEngine>
 
@@ -53,8 +51,6 @@ Q_SIGNALS:
 
 private:
 	static QString normalizedUid(const QString &uid);
-
-	QHash<QString,QVariant> m_values;
 };
 
 } /* VenusOS */
