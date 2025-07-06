@@ -58,16 +58,17 @@ void VeQItemMockProducer::initialize()
 
 void VeQItemMockProducer::setValue(const QString &uid, const QVariant &value)
 {
-	const QString normalizedUid = this->normalizedUid(uid);
-	m_values.insert(normalizedUid, value);
-
-	VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGetOrCreate(normalizedUid, true, true));
-	item->produceValue(value);
+	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGetOrCreate(normalizedUid(uid), true, true))) {
+		item->produceValue(value);
+	}
 }
 
 QVariant VeQItemMockProducer::value(const QString &uid) const
 {
-	return m_values.value(normalizedUid(uid));
+	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGet(normalizedUid(uid)))) {
+		return item->getValue();
+	}
+	return QVariant();
 }
 
 VeQItem *VeQItemMockProducer::createItem()
