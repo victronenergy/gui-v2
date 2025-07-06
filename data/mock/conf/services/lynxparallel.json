@@ -1,0 +1,27 @@
+{
+    "com.victronenergy.battery.lynxparallel0": {
+        "/Capacity": 1600,
+        "/Connected": 1,
+        "/ConsumedAmphours": -14.0,
+        "/CustomName": "Lynx parallel BMS",
+        "/Dc/0/Current": -0.6000000238418579,
+        "/Dc/0/Power": -32,
+        "/Dc/0/Voltage": 26.940000534057617,
+        "/Dc/0/Temperature": 24,
+        "/DeviceInstance": 0,
+        "/FirmwareVersion": "1.1.3",
+        "/HardwareVersion": null,
+        "/Info/MaxChargeCurrent": 1600.0,
+        "/Info/MaxChargeVoltage": 27.399999618530273,
+        "/Info/MaxDischargeCurrent": 2400.0,
+        "/Mgmt/Connection": "Virtual",
+        "/Mgmt/ProcessName": "/opt/victronenergy/dbus-parallel-bms/dbus_parallel_bms.py",
+        "/Mgmt/ProcessVersion": "1.1.3",
+        "/NumberOfBmses": "2/2",
+        "/ProductId": 41955,
+        "/ProductName": "Lynx Smart BMS Totals",
+        "/Soc": 19.20999908447266,
+        "/State": 9,
+        "/TimeToGo": 864000.0
+    }
+}

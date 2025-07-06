@@ -6,236 +6,361 @@
 import QtQuick
 import Victron.VenusOS
 
-QtObject {
+/*
+	Configures the battery-related mock values based on the battery-type devices on the system.
+
+	Services with a /Dc/[0-9] path and matching "batteryServiceTypes" are added to:
+	- system /AvailableBatteries, /AvailableBatteryMeasurements, /AvailableBatteryServices
+	- settings /Settings/SystemSetup/Batteries/Configuration with Enabled=1
+
+	The active battery monitor (as per com.victronenergy.system/ActiveBatteryService) is used to
+	update the values in com.victronenergy.system/Dc/Battery/.
+
+	If the active battery monitor and active BMS service are not set, and the settings is configured
+	to allow the system to auto-select it, then:
+	- The active battery monitor is set to the first battery that is found
+	- The active BMS service is set to the first BMS-enabled service that is found
+*/
+Item {
 	id: root
 
-	function initLynxBattery(battery) {
-		const props = {
-			"/Alarms/LowCellVoltage": 0,
-			"/Balancing": 0,
-			"/Balancer/Status": VenusOS.Battery_Balancer_Balancing,
-			"/Capacity": 200,
-			"/InstalledCapacity": 250,
-			"/ConnectionInformation": "Generic connection info",
-			"/NumberOfBmses": 1,
-			"/Connected": 1,
-			"/Errors/SmartLithium/Communication": 0,
-			"/ConsumedAmphours": 10,
-			"/CustomName": "Lynx Smart BMS HQ21302VUDQ",
-			"/Dc/0/Voltage": 26.4,
-			"/Dc/0/Temperature": 23.3,
-			"/Dc/0/Power": 750,
-			"/DeviceInstance": 1,
-			"/Diagnostics/LastErrors/1/Error": 32,
-			"/Diagnostics/LastErrors/1/Time": 1710467492,
-			"/Diagnostics/LastErrors/2/Error": 32,
-			"/Diagnostics/LastErrors/2/Time": 1710467412,
-			"/Diagnostics/LastErrors/3/Error": 0,
-			"/Diagnostics/LastErrors/4/Error": 0,
-			"/ErrorCode": 0,
-			"/Mgmt/Connection": "VE.Bus",
-			"/FirmwareVersion": 66303,
-			"/History/AutomaticSyncs": 10,
-			"/History/CanBeCleared": 1,
-			"/History/ChargeCycles": 2,
-			"/History/ChargedEnergy": 11.44,
-			"/History/DeepestDischarge": -25,
-			"/History/DischargedEnergy": 8.5,
-			"/History/FullDischarges": 0,
-			"/History/MaximumVoltage": 57.16,
-			"/History/MinimumVoltage": 26.07,
-			"/History/TotalAhDrawn": 160.8,
-			"/Info/BatteryLowVoltage": 41.6,
-			"/Info/MaxChargeCurrent": 50,
-			"/Info/MaxChargeVoltage": 54,
-			"/Info/MaxDischargeCurrent": 600,
-			"/Io/AllowToCharge": 1,
-			"/Io/AllowToDischarge": 1,
-			"/Mgmt/Connection": "VE.Can",
-			"/Mgmt/ProcessName": "vecan-dbus",
-			"/Mgmt/ProcessVersion": "2.69",
-			"/Mode": 3,
-			"/N2kDeviceInstance": 0,
-			"/ProductId": 41957,
-			"/ProductName": "Lynx Smart BMS 500",
-			"/Settings/Alarm/LowSoc": 10,
-			"/Settings/Alarm/LowSocClear": 20,
-			"/Settings/Battery/Capacity": 50,
-			"/Settings/Battery/NominalVoltage": 48,
-			"/Settings/BluetoothMode": 1,
-			"/Settings/DischargeFloorLinkedToRelay": 1,
-			"/Settings/HasSettings": 1,
-			"/Settings/HasTemperature": 1,
-			"/Settings/Alarm/HighBatteryTemperatureClear": 363,
-			"/Settings/Alarm/HighBatteryTemperature": 373,
-			"/Settings/Alarm/HighVoltageClear": 90,
-			"/Settings/Alarm/HighVoltage": 100,
-			"/Settings/Alarm/HighStarterVoltageClear": 50,
-			"/Settings/Alarm/HighStarterVoltage": 90,
-			"/Settings/Alarm/LowBatteryTemperature": 283,
-			"/Settings/Alarm/LowBatteryTemperatureClear": 293,
-			"/Settings/Alarm/LowSoc": 10,
-			"/Settings/Alarm/LowSocClear": 15,
-			"/Settings/Alarm/LowStarterVoltage": 0,
-			"/Settings/Alarm/LowStarterVoltageClear": 10,
-			"/Settings/Alarm/LowVoltage": 0,
-			"/Settings/Alarm/LowVoltageClear": 10,
-			"/Settings/Relay/Mode": 0,
-			"/Settings/Relay/FuseBlown": 1,
-			"/Settings/Relay/HighBatteryTemperatureClear": 363,
-			"/Settings/Relay/HighBatteryTemperature": 373,
-			"/Settings/Relay/HighVoltageClear": 200,
-			"/Settings/Relay/HighVoltage": 250,
-			"/Settings/Relay/HighStarterVoltageClear": 200,
-			"/Settings/Relay/HighStarterVoltage": 250,
-			"/Settings/Relay/LowBatteryTemperature": 283,
-			"/Settings/Relay/LowBatteryTemperatureClear": 293,
-			"/Settings/Relay/LowSoc": 10,
-			"/Settings/Relay/LowSocClear": 15,
-			"/Settings/Relay/LowStarterVoltage": 0,
-			"/Settings/Relay/LowStarterVoltageClear": 10,
-			"/Settings/Relay/LowVoltage": 0,
-			"/Settings/Relay/LowVoltageClear": 10,
-			"/Settings/RestoreDefaults": 0,
-			"/Soc": 95.234,
-			"/SystemSwitch": 1,
-			"/TimeToGo": (24 * 60 * 60) + 190 * 60, // 1d 3h 10m
-			"/Settings/HasSettings": 1,
-			"/Settings/Battery/PeukertExponent": 1.03999999,
-			"/System/MinTemperatureCellId": 201,
-			"/System/MinCellTemperature": 14.5,
-			"/System/NrOfModulesBlockingCharge": 20,
-			"/System/NrOfModulesBlockingDischarge": 21,
+	readonly property var batteryServiceTypes: ["battery", "dcsource"]
+
+	function setSystemValue(path, value) {
+		MockManager.setValue("com.victronenergy.system" + path, value)
+	}
+	function systemValue(path) {
+		return MockManager.value("com.victronenergy.system" + path)
+	}
+	function settingsValue(path) {
+		return MockManager.value("com.victronenergy.settings" + path)
+	}
+
+	function setDefaultBatteryMonitor(battery) {
+		// If the active battery monitor is not set, and the settings indicate the system should
+		// select one by default, then set it to this battery.
+		const canAutoSelect = settingsValue("/Settings/SystemSetup/BatteryService") === "default"
+		if (canAutoSelect && !activeBatteryService.valid) {
+			console.warn("Mock: auto-set active battery to", battery.portableIdWithInstance(), battery.name)
+			activeBatteryService.setValue(battery.portableIdWithInstance())
 		}
-		for (var propName in props) {
-			Global.mockDataSimulator.setMockValue(battery.serviceUid + propName, props[propName])
+		// Also set the name of the auto-selected battery, if not already set.
+		if (canAutoSelect
+				&& !root.systemValue("/AutoSelectedBatteryService")
+				&& activeBatteryService.value === battery.portableIdWithInstance()) {
+			root.setSystemValue("/AutoSelectedBatteryService", battery.name)
 		}
 	}
 
-	function updateBatteriesList() {
-		const dummyBatteryServiceName = "com.victronenergy.battery/1"
-		const batteryList = [
-			{
-				// System battery
-				active_battery_service: true,
-				current: dummyBattery.current,
-				id: dummyBatteryServiceName,
-				instance: dummyBattery.deviceInstance,
-				name: dummyBattery.name,
-				power: dummyBattery._power.value,
-				soc: dummyBattery._stateOfCharge.value,
-				temperature: dummyBattery._temperature.value,
-				timetogo: dummyBattery._timeToGo.value,
-				voltage: dummyBattery._voltage.value,
-			},
-			{
-				// Starter battery, which does not have an instance number
-				active_battery_service: false,
-				id: dummyBatteryServiceName + ":1",
-				name: "My starter battery",
-				voltage: 0.029999999329447746,
-				soc: 12.34,
+	function setDefaultBmService(battery) {
+		// If the active BMS service is not set, and the settings indicate the system should
+		// select one by default, then set it to this battery (if it has BMS capabilities).
+		const canAutoSelect = settingsValue("/Settings/SystemSetup/BmsInstance") === -1
+		if (canAutoSelect && !activeBmsService.valid) {
+			console.warn("Mock: auto-set active BMS service to", battery.serviceUid, "with instance", battery.deviceInstance)
+			activeBmsService.setValue(battery.serviceUid)
+			root.setSystemValue("/ActiveBmsInstance", battery.deviceInstance)
+		}
+	}
+
+	VeQuickItem {
+		id: activeBatteryService
+		uid: Global.system.serviceUid + "/ActiveBatteryService"
+	}
+
+	VeQuickItem {
+		id: activeBmsService
+		uid: Global.system.serviceUid + "/ActiveBmsService"
+	}
+
+	VeQuickItem {
+		id: availableBmsServices
+
+		function addBattery(battery) {
+			let services = valid ? value : []
+			services.push({ instance: battery.deviceInstance, name: battery.name })
+			setValue(services)
+		}
+
+		uid: Global.system.serviceUid + "/AvailableBmsServices"
+	}
+
+	// Set system /Batteries (a list of objects). Example value:
+	// [{'active_battery_service': 1,'current': 55,'id': com.victronenergy.battery.ttyO0,'instance': 256,'name': House battery,'power': 1337,'soc': 98.4,'state': 1,'timetogo': 38040,'voltage': 24.3}]
+	// Only 'id', 'name' and 'active_battery_service' are guaranteed to be present for each battery.
+	VeQuickItem {
+		id: batteries
+
+		property var batteryList: []
+
+		// Returns e.g. "com.victronenergy.battery.ttyUSB1", or "com.victronenergy.battery.ttyUSB1:1"
+		// for a virtual battery with channel=1.
+		function idFromServiceUid(battery) {
+			return battery.serviceUid.substring(battery.serviceUid.indexOf("com.victronenergy")) // strip "mock"
+					+ (battery.channel > 0 ? ":" + battery.channel : "")
+		}
+
+		function addBattery(battery) {
+			let properties = {
+				active_battery_service: activeBatteryService.value === battery.portableIdWithInstance(),
+				id: idFromServiceUid(battery),
+				name: battery.name,
 			}
-		]
-		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + "/Batteries", batteryList)
-	}
-
-	function updateSystemBattery(path, value) {
-		Global.mockDataSimulator.setMockValue(Global.system.serviceUid + path, value)
-		root.updateBatteriesList()
-	}
-
-	readonly property Device dummyBattery: Device {
-		serviceUid: "mock/com.victronenergy.battery.ttyUSB1"
-
-		// This is used as the system battery, so copy the values over when they change.
-		readonly property VeQuickItem _stateOfCharge: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Soc"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/Soc", value)
-		}
-		readonly property VeQuickItem _voltage: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Dc/0/Voltage"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/Voltage", value)
-		}
-		readonly property VeQuickItem _power: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Dc/0/Power"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/Power", value)
-		}
-		readonly property VeQuickItem _current: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Dc/0/Current"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/Current", value)
+			if (battery.channel === 0 && battery.deviceInstance >= 0) {
+				// Device instance is only valid when the channel is not set.
+				properties["instance"] = battery.deviceInstance
+			}
+			batteryList.push(_updatedBatteryProperties(properties, battery))
+			setValue(batteryList)
 		}
 
-		readonly property VeQuickItem _temperature: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/Dc/0/Temperature"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/Temperature", value)
+		function removeBattery(battery,) {
+			const id = idFromServiceUid(battery)
+			for (let i = 0; i < batteryList.length; ++i) {
+				if (batteryList[i].id === id) {
+					batteryList.splice(i, 1)
+					break
+				}
+			}
+			setValue(batteryList)
 		}
 
-		readonly property VeQuickItem _timeToGo: VeQuickItem {
-			uid: dummyBattery.serviceUid + "/TimeToGo"
-			onValueChanged: root.updateSystemBattery("/Dc/Battery/TimeToGo", value)
-		}
-
-		Component.onCompleted: {
-			_deviceInstance.setValue(1)
-			root.initLynxBattery(dummyBattery)
-			root.updateBatteriesList()
-		}
-	}
-
-	property Connections batteryConn: Connections {
-		target: Global.mockDataSimulator || null
-
-		function onSetBatteryRequested(config) {
-			if (config) {
-				for (var propName in config) {
-					dummyBattery["_" + propName].setValue(config[propName])
+		function updateBattery(battery) {
+			const id = idFromServiceUid(battery)
+			for (let i = 0; i < batteryList.length; ++i) {
+				if (batteryList[i].id === id) {
+					batteryList[i] = _updatedBatteryProperties(batteryList[i], battery)
+					setValue(batteryList)
+					break
 				}
 			}
 		}
+
+		function _updatedBatteryProperties(properties, battery) {
+			for (const propertyName of ["current", "power", "soc", "temperature", "timetogo", "voltage"]) {
+				const propertyValue = battery[propertyName].value
+				if (propertyValue == null) {
+					delete properties[propertyName]
+				} else {
+					properties[propertyName] = propertyValue
+				}
+			}
+			properties["name"] = battery.name
+			return properties
+		}
+
+		uid: Global.system.serviceUid + "/Batteries"
 	}
 
-	// Use a Timer rather than NumberAnimations because otherwise we get
-	// a heap of animated property value updates showing up in the profiler.
-	property Timer chargeTimer: Timer {
-		running: Global.mockDataSimulator.timersActive
-		repeat: true
-		interval: 1000
-		property real stepSize: 1.0 // will take 100 steps to charge to 100% from 0%.
-		onTriggered: {
-			if (!Global.mockDataSimulator.timersActive) {
-				return
-			}
-			var newSoc = dummyBattery._stateOfCharge.value + stepSize
-			if (newSoc >= 0 && newSoc <= 100) {
-				dummyBattery._stateOfCharge.setValue(newSoc)
-			} else if (newSoc > 100) {
-				dummyBattery._stateOfCharge.setValue(100)
-				stop()
-				chargeRestartTimer.start()
-			} else if (newSoc < 0) {
-				dummyBattery._stateOfCharge.setValue(0)
-				stop()
-				chargeRestartTimer.start()
-			}
-			dummyBattery._timeToGo.setValue(60 * 60 * 3 * (newSoc / 100))
+	// Set system /AvailableBatteries (type is string). Example value:
+	// '{"com.victronenergy.battery/1": {"name": "House battery 1", "channel": null, "type": "battery"}, "com.victronenergy.vebus/257": {"name": "Quattro 24/3000/70-2x50", "channel": null, "type": "vebus"} }'
+	VeQuickItem {
+		id: availableBatteries
 
-			// Positive power when battery is charging, negative power when battery is discharging
-			const randomPower = Math.round(100 + (Math.random() * 300))
-			const power = stepSize > 0 ? randomPower
-					: stepSize < 0 ? randomPower * -1
-					: 0
-			dummyBattery._power.setValue(power)
-			dummyBattery._current.setValue(power * 0.1)
-			root.updateBatteriesList()
+		property var batteryMap: ({})
+
+		function addBattery(battery) {
+			batteryMap[battery.portableIdWithInstance()] = {
+				name: battery.name,
+				channel: battery.channel > 0 ? battery.channel : null,
+				type: BackendConnection.serviceTypeFromUid(battery.serviceUid)
+			}
+			setValue(JSON.stringify(batteryMap))
+		}
+
+		function removeBattery(battery) {
+			delete batteryMap[battery.portableIdWithInstance()]
+			setValue(JSON.stringify(batteryMap))
+		}
+
+		uid: Global.system.serviceUid + "/AvailableBatteries"
+	}
+
+	// Set system /AvailableBatteryServices (type is string). Example value:
+	// `{"default": "Automatic", "nobattery": "No battery monitor", "com.victronenergy.vebus/257": "Quattro 24/3000/70-2x50 on VE.Bus" }`
+	VeQuickItem {
+		id: availableBatteryServices
+
+		property var batteryServices: {"default": "Automatic", "nobattery": "No battery monitor"}
+
+		function addBattery(battery) {
+			batteryServices[battery.portableIdWithInstance()] = battery.name
+			setValue(JSON.stringify(batteryServices))
+		}
+
+		function removeBattery(battery) {
+			delete batteryServices[battery.portableIdWithInstance()]
+			setValue(JSON.stringify(batteryServices))
+		}
+
+		uid: Global.system.serviceUid + "/AvailableBatteryServices"
+	}
+
+	// Set system /AvailableBatteryMeasurements (type is object). Example value:
+	// {"com_victronenergy_battery_0/Dc/0":"House battery total","com_victronenergy_battery_1/Dc/0":"House battery 1"}
+	VeQuickItem {
+		id: availableBatteryMeasurements
+
+		property var batteryNames: ({})
+
+		function normalizedId(battery) {
+			return battery.portableIdWithInstance().replace(/\//g, "_").replace(/\./g, "_")
+					+ `/Dc/${battery.channel}`
+		}
+
+		function addBattery(battery) {
+			batteryNames[normalizedId(battery)] = battery.name
+			setValue(batteryNames)
+		}
+
+		function removeBattery(battery) {
+			delete batteryNames[normalizedId(battery)]
+			setValue(batteryNames)
+		}
+
+		uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
+	}
+
+	// Set settings /Settings/SystemSetup/Batteries/Configuration/*. Example values for a battery
+	// service with instance=1:
+	// "/Settings/SystemSetup/Batteries/Configuration/com_victronenergy_battery/1/Enabled": 1,
+	// "/Settings/SystemSetup/Batteries/Configuration/com_victronenergy_battery/1/Name": "",
+	// "/Settings/SystemSetup/Batteries/Configuration/com_victronenergy_battery/1/Service": "com.victronenergy.battery/1",
+	QtObject {
+		id: batteriesConfiguration
+
+		property var batteryNames: ({})
+
+		function configPath(battery) {
+			const batteryId = battery.portableIdWithInstance().replace(/\./g, "_")
+			return `${Global.systemSettings.serviceUid}/Settings/SystemSetup/Batteries/Configuration/${batteryId}`
+		}
+
+		function addBattery(battery) {
+			const prefix = configPath(battery)
+			MockManager.setValue(`${prefix}/Enabled`, 1)
+			MockManager.setValue(`${prefix}/Name`, "")
+			MockManager.setValue(`${prefix}/Service`, battery.portableIdWithInstance())
+		}
+
+		function removeBattery(battery) {
+			const prefix = configPath(battery)
+			for (const path of ["/Enabled", "/Name", "/Service"]) {
+				MockManager.removeValue(`${prefix}/path`)
+			}
 		}
 	}
 
-	property Timer chargeRestartTimer: Timer {
-		interval: 5000
-		onTriggered: {
-			chargeTimer.stepSize *= -1
-			chargeTimer.start()
+	// Find Battery entries on the system.
+	Instantiator {
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterRole: VeQItemTableModel.UniqueIdRole
+			filterFlags: VeQItemSortTableModel.FilterOffline
+			filterRegExp: "^mock/com\.victronenergy\.(%1)\.\\w+\/Dc\/\\d+$".arg(root.batteryServiceTypes.join("|"))
+			model: VeQItemTableModel {
+				uids: BackendConnection.uidPrefix()
+				flags: VeQItemTableModel.AddAllChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
+		}
+		delegate: Device {
+			id: battery
+
+			required property string uid
+			required property string id
+
+			// Channel comes from /Dc/<channel>. Normally the channel is 0, unless there are
+			// multiple batteries on the service.
+			property int channel: parseInt(id)
+
+			// Returns e.g. "com.victronenergy.battery/289" or "com.victronenergy.vebus/289".
+			// Note there is no service suffix like ttyO1, etc.
+			// If there is a channel, it is added on the end, e.g. "com.victronenergy.battery/289/1"
+			// for a battery with channel=1.
+			function portableIdWithInstance() {
+				const portableId = BackendConnection.serviceUidToPortableId(serviceUid, deviceInstance)
+				return battery.channel > 0 ? `${portableId}/${battery.channel}` : portableId
+			}
+
+			function hasBmses() {
+				return numberOfBmses.valid && numberOfBmses.value > 0
+			}
+
+			function syncBatteryInfo() {
+				if (battery.valid) {
+					batteries.updateBattery(battery)
+
+					// If this is the active system battery, update /Dc/Battery/* values as well.
+					if (activeBatteryService.valid && activeBatteryService.value === portableIdWithInstance()) {
+						const properties = {
+							"current": "/Dc/Battery/Current",
+							"power": "/Dc/Battery/Power",
+							"soc": "/Dc/Battery/Soc",
+							"temperature": "/Dc/Battery/Temperature",
+							"timetogo": "/Dc/Battery/TimeToGo",
+							"voltage": "/Dc/Battery/Voltage",
+						}
+						for (const propertyName in properties) {
+							root.setSystemValue(properties[propertyName], battery[propertyName].value)
+						}
+					}
+				}
+			}
+
+			serviceUid: uid.substring(0, uid.indexOf("/Dc/"))
+
+			// If there is a channel, the custom/product name comes from the /Devices sub-path
+			// instead.
+			_customName.uid: channel > 0 ? `${serviceUid}/Devices/${channel}/CustomName` : `${serviceUid}/CustomName`
+			_productName.uid: channel > 0 ? `${serviceUid}/Devices/${channel}/ProductName` : `${serviceUid}/ProductName`
+
+			readonly property BatteryProperty current: BatteryProperty { path: `/Dc/${battery.channel}/Current` }
+			readonly property BatteryProperty power: BatteryProperty { path: `/Dc/${battery.channel}/Power` }
+			readonly property BatteryProperty soc: BatteryProperty { path: battery.channel > 0 ? "" : "/Soc" }
+			readonly property BatteryProperty temperature: BatteryProperty { path: `/Dc/${battery.channel}/Temperature` }
+			readonly property BatteryProperty timetogo: BatteryProperty { path: battery.channel > 0 ? "" : "/TimeToGo" }
+			readonly property BatteryProperty voltage: BatteryProperty { path: `/Dc/${battery.channel}/Voltage` }
+			onNameChanged: Qt.callLater(battery.syncBatteryInfo)
+
+			component BatteryProperty: VeQuickItem {
+				required property string path
+				uid: path && battery.valid ? `${battery.serviceUid}${path}` : ""
+				onValueChanged: Qt.callLater(battery.syncBatteryInfo)
+			}
+
+			readonly property VeQuickItem numberOfBmses: VeQuickItem {
+				uid: battery.valid ? `${battery.serviceUid}/NumberOfBmses` : ""
+			}
+		}
+		onObjectAdded: (index, battery) => {
+			if (!battery.valid) {
+				return
+			}
+
+			// If the active system battery has not been set, set it now. Otherwise, the system
+			// will not have a battery monitor.
+			root.setDefaultBatteryMonitor(battery)
+
+			// If the active BMS service has not been set, set it to this battery if possible.
+			if (battery.hasBmses()) {
+				root.setDefaultBmService(battery)
+				availableBmsServices.addBattery(battery)
+			}
+
+			availableBatteries.addBattery(battery)
+			availableBatteryServices.addBattery(battery)
+			availableBatteryMeasurements.addBattery(battery)
+			batteries.addBattery(battery)
+			batteriesConfiguration.addBattery(battery)
+		}
+		onObjectRemoved: (index, battery) => {
+			if (battery.valid) {
+				availableBatteries.removeBattery(battery)
+				availableBatteryServices.removeBattery(battery)
+				availableBatteryMeasurements.removeBattery(battery)
+				batteries.removeBattery(battery)
+				batteriesConfiguration.removeBattery(battery)
+			}
 		}
 	}
 }

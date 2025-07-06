@@ -1,0 +1,12 @@
+{
+    "com.victronenergy.system": {
+        "/Relay/0/State": 1,
+        "/Relay/1/State": 1
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Relay/1/Function": 0,
+        "/Settings/Relay/1/Polarity": 0,
+        "/Settings/Relay/Function": 0,
+        "/Settings/Relay/Polarity": 0
+    }
+}

@@ -31,17 +31,17 @@ LevelsTab {
 
 		VeQuickItem {
 			id: temperatureItem
-			uid: panel.device.serviceUid + "/Temperature"
+			uid: panel.device ? panel.device.serviceUid + "/Temperature" : ""
 			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 		}
 		VeQuickItem {
 			id: temperatureType
-			uid: panel.device.serviceUid + "/TemperatureType"
+			uid: panel.device ? panel.device.serviceUid + "/TemperatureType" : ""
 		}
 		VeQuickItem {
 			id: humidity
-			uid: panel.device.serviceUid + "/Humidity"
+			uid: panel.device ? panel.device.serviceUid + "/Humidity" : ""
 		}
 	}
 

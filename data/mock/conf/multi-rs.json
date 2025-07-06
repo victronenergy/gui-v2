@@ -1,0 +1,25 @@
+{
+    "files": [
+        ":/data/mock/conf/services/evcharger1.json",
+        ":/data/mock/conf/services/pylontech.json",
+        ":/data/mock/conf/services/motordrive.json",
+        ":/data/mock/conf/services/multirs-smart.json",
+        ":/data/mock/conf/services/network-ethernet.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.settings": {
+            "/Settings/SystemSetup/AcInput1": 1,
+            "/Settings/SystemSetup/AcInput2": 0
+        },
+        "com.victronenergy.system": {
+            "/Ac/ActiveIn/FeedbackEnabled": 1,
+            "/Ac/In/0/Connected": 1,
+            "/Ac/In/0/DeviceInstance": 0,
+            "/Ac/In/0/ServiceType": "acsystem",
+            "/Ac/In/0/ServiceName": "com.victronenergy.acsystem.socketcan_vecan0_sys0",
+            "/Ac/In/0/Source": 1,
+            "/ActiveBatteryService": "com.victronenergy.battery/512"
+        }
+    }
+}

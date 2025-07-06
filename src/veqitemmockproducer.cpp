@@ -29,33 +29,6 @@ VeQItemMockProducer::VeQItemMockProducer(VeQItem *root, const QString &id, QObje
 {
 }
 
-void VeQItemMockProducer::initialize()
-{
-	// Initialize mock values that should be present before the app is started.
-
-	const QString systemSettingUid = QStringLiteral("com.victronenergy.settings/Settings/System/%1");
-	const QString guiSettingUid = QStringLiteral("com.victronenergy.settings/Settings/Gui/%1");
-
-	setValue(systemSettingUid.arg("AccessLevel"), Enums::User_AccessType_Service);
-	setValue(systemSettingUid.arg("VolumeUnit"), 1);    // 1 = Litre
-	setValue(systemSettingUid.arg("Units/Temperature"), QStringLiteral("celsius"));
-
-	setValue(guiSettingUid.arg("ColorScheme"), Theme::Light);
-	setValue(guiSettingUid.arg("ElectricalPowerIndicator"), 0); // 0 = watts, 1 = amps
-	setValue(guiSettingUid.arg("BriefView/Unit"), Enums::BriefView_Unit_Percentage);
-
-	static const QMap<int, QVariant> defaultLevels = {
-		{ 0, Enums::Tank_Type_Battery },
-		{ 1, Enums::Tank_Type_Fuel },
-		{ 2, Enums::Tank_Type_FreshWater },
-		{ 3, Enums::Tank_Type_BlackWater },
-	};
-	for (int i = 0; i < 4; ++i) {
-		const QString uid = guiSettingUid.arg("BriefView/Level/%1").arg(QString::number(i));
-		setValue(uid, defaultLevels[i]);
-	}
-}
-
 void VeQItemMockProducer::setValue(const QString &uid, const QVariant &value)
 {
 	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGetOrCreate(normalizedUid(uid), true, true))) {
@@ -69,6 +42,33 @@ QVariant VeQItemMockProducer::value(const QString &uid) const
 		return item->getValue();
 	}
 	return QVariant();
+}
+
+void VeQItemMockProducer::removeValue(const QString &uid)
+{
+	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGet(normalizedUid(uid)))) {
+		item->itemDelete();
+	} else {
+		qWarning() << "Value not removed, cannot find uid:" << uid;
+	}
+}
+
+void VeQItemMockProducer::removeServices(const QString &serviceType)
+{
+	const QString prefix = QStringLiteral("com.victronenergy.%1.").arg(serviceType);
+	const VeQItem::Children children = mProducerRoot->itemChildren();
+	QStringList serviceUids;
+	for (auto it = children.constBegin(); it != children.constEnd(); ++it) {
+		if (it.key().startsWith(prefix)) {
+			serviceUids.append(it.key());
+		}
+	}
+
+	for (const QString &uid : serviceUids) {
+		if (VeQItem *item = mProducerRoot->itemGet(uid)) {
+			item->itemDelete();
+		}
+	}
 }
 
 VeQItem *VeQItemMockProducer::createItem()
@@ -85,4 +85,3 @@ QString VeQItemMockProducer::normalizedUid(const QString &uid)
 } /* VenusOS */
 
 } /* Victron */
-

@@ -1,0 +1,20 @@
+{
+    "com.victronenergy.digitalinput.input_12345": {
+        "/Alarm": 0,
+        "/Connected": 1,
+        "/Count": 0,
+        "/CustomName": "",
+        "/DeviceInstance": 10,
+        "/InputState": 1,
+        "/Mgmt/Connection": "/run/io-ext/HQ2513WG7JM/input_5",
+        "/Mgmt/ProcessName": "/opt/victronenergy/dbus-digitalinputs/dbus_digitalinputs.py",
+        "/Mgmt/ProcessVersion": "0.31",
+        "/ProductId": 41318,
+        "/ProductName": "Burglar alarm",
+        "/Settings/AlarmSetting": 1,
+        "/Settings/InvertAlarm": 1,
+        "/Settings/InvertTranslation": 0,
+        "/State": 9,
+        "/Type": 5
+    }
+}

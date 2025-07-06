@@ -36,10 +36,11 @@ class VeQItemMockProducer : public VeQItemProducer
 
 public:
 	VeQItemMockProducer(VeQItem *root, const QString &id, QObject *parent = nullptr);
-	void initialize();
 
 	void setValue(const QString &uid, const QVariant &value);
 	QVariant value(const QString &uid) const;
+	void removeValue(const QString &uid);
+	void removeServices(const QString &serviceType);
 
 	VeQItem *createItem() override;
 
