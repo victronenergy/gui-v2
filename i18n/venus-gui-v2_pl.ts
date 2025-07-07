@@ -199,7 +199,7 @@
       <translation>Uzysk solarny</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>External control</source>
       <translation>Sterowanie zewnętrzne</translation>
     </message>
@@ -370,7 +370,7 @@
       <translation>Usunąć adres IP?</translation>
     </message>
     <message id="settings_dvcc_max">
-      <location filename="../../pages/settings/PageChargeCurrentLimits.qml" line="97"/>
+      <location filename="../../pages/settings/PageChargeCurrentLimits.qml" line="71"/>
       <source>Max: %1</source>
       <translation>Max: %1</translation>
     </message>
@@ -647,7 +647,7 @@
     <message id="settings_gps_speed_kmh">
       <location filename="../../pages/settings/PageGps.qml" line="86"/>
       <source>%1 km/h</source>
-      <extracomment>GPS speed data, in kilometers per hour</extracomment>
+      <extracomment>GPS speed data, in kilometres per hour</extracomment>
       <translation>%1 km/h</translation>
     </message>
     <message id="settings_gps_speed_mph">
@@ -665,7 +665,7 @@
     <message id="settings_gps_speed_ms">
       <location filename="../../pages/settings/PageGps.qml" line="98"/>
       <source>%1 m/s</source>
-      <extracomment>GPS speed data, in meters per second</extracomment>
+      <extracomment>GPS speed data, in metres per second</extracomment>
       <translation>%1 m/s</translation>
     </message>
     <message id="settings_gps_course">
@@ -1553,13 +1553,15 @@
     </message>
     <message id="settings_gps_format_kmh">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
-      <source>Kilometers per hour</source>
-      <translation>Kilometry na godzinę</translation>
+      <source>Kilometres per hour</source>
+      <oldsource>Kilometers per hour</oldsource>
+      <translation type="unfinished">Kilometry na godzinę</translation>
     </message>
     <message id="settings_gps_format_ms">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
-      <source>Meters per second</source>
-      <translation>Metry na sekundę</translation>
+      <source>Metres per second</source>
+      <oldsource>Meters per second</oldsource>
+      <translation type="unfinished">Metry na sekundę</translation>
     </message>
     <message id="settings_gps_format_mph">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
@@ -1813,12 +1815,12 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Powolne ładowanie</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>Sustain</source>
       <translation>Podtrzymanie</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="182"/>
+      <location filename="../../data/System.qml" line="186"/>
       <source>Recharge</source>
       <translation>Ładowanie ponowne</translation>
     </message>
@@ -2829,16 +2831,16 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
     <message id="components_volumeunit_volume">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="34"/>
       <source>Volume</source>
-      <extracomment>Title for a list of units of volume (e.g. cubic meters, liters, gallons)</extracomment>
+      <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation>Objętość</translation>
     </message>
     <message id="tank_status_short_circuited">
-      <location filename="../../data/Tanks.qml" line="176"/>
+      <location filename="../../data/Tanks.qml" line="172"/>
       <source>Short circuited</source>
       <translation>Zwarcie</translation>
     </message>
     <message id="tank_status_reverse_polarity">
-      <location filename="../../data/Tanks.qml" line="179"/>
+      <location filename="../../data/Tanks.qml" line="175"/>
       <source>Reverse polarity</source>
       <translation>Odwrotna polaryzacja</translation>
     </message>
@@ -5874,15 +5876,15 @@ Czy chcesz kontynuować?</translation>
       <source>Volume unit</source>
       <translation>Jednostka objętości</translation>
     </message>
-    <message id="components_volumeunit_cubic_meters">
+    <message id="components_volumeunit_cubic_metres">
       <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="15"/>
-      <source>Cubic meters</source>
-      <translation>Metry sześcienne</translation>
+      <source>Cubic metres</source>
+      <translation type="unfinished"/>
     </message>
-    <message id="components_volumeunit_liters">
+    <message id="components_volumeunit_litres">
       <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="17"/>
-      <source>Liters</source>
-      <translation>Litry</translation>
+      <source>Litres</source>
+      <translation type="unfinished"/>
     </message>
     <message id="components_volumeunit_gallons_us">
       <location filename="../../components/listitems/ListVolumeUnitRadioButtonGroup.qml" line="19"/>
@@ -6462,7 +6464,7 @@ Czy chcesz kontynuować?</translation>
       <translation type="unfinished">Zaplanowane</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Scheduled</source>
       <translation>Zaplanowane</translation>
     </message>
@@ -6536,102 +6538,102 @@ Czy chcesz kontynuować?</translation>
       <translation>Wyrównaj</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="115"/>
+      <location filename="../../data/System.qml" line="119"/>
       <source>AES mode</source>
       <translation>Tryb AES</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="118"/>
+      <location filename="../../data/System.qml" line="122"/>
       <source>Fault condition</source>
       <translation>Stan błędu</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="121"/>
+      <location filename="../../data/System.qml" line="125"/>
       <source>Bulk charging</source>
       <translation>Ładowanie Bulk</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="128"/>
       <source>Absorption charging</source>
       <translation>Ładowanie absorpcyjne</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Float charging</source>
       <translation>Ładowanie Float</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Storage mode</source>
       <translation>Tryb przechowywania</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Equalization charging</source>
       <translation>Ładowanie wyrównawcze</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Pass-thru</source>
       <translation>Przepuszczanie</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Inverting</source>
       <translation>Transformuje</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Assisting</source>
       <translation>Asystuje</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Power supply mode</source>
       <translation>Tryb zasilania</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Sustain</source>
       <translation type="unfinished">Podtrzymanie</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="156"/>
       <source>Wake up</source>
       <translation>Obudź się</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="159"/>
       <source>Repeated absorption</source>
       <translation>Powtórzona absorbcja</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Auto equalize</source>
       <translation>Automatyczne wyrównanie</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Load detect</source>
       <translation>Wykrywanie obciążenia</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Blocked</source>
       <translation>Zablokowany</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamiczny ESS</translation>
     </message>
@@ -9475,12 +9477,12 @@ Jeśli generator jest obecnie uruchomiony z powodu warunków autostartu, wyłąc
       <translation type="unfinished"/>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="32"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="24"/>
       <source>Module state</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="31"/>
       <source>Module Voltage</source>
       <translation type="unfinished"/>
     </message>
