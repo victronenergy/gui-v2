@@ -213,6 +213,9 @@ QtObject {
 	//% "Grid"
 	readonly property string grid: qsTrId("common_words_grid")
 
+	//% "GX device relays"
+	readonly property string gx_device_relays: qsTrId("common_words_gx_device_relays")
+
 	//% "High battery temperature"
 	readonly property string high_battery_temperature: qsTrId("common_words_high_battery_temperature")
 

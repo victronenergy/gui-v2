@@ -36,15 +36,7 @@ SwitchableOutputGroupModel::Group SwitchableOutputGroupModel::Group::fromDevice(
 
 void SwitchableOutputGroupModel::Group::refreshName(BaseDevice *device)
 {
-	if (device) {
-		if (!device->customName().isEmpty()) {
-			name = device->customName();
-		} else {
-			name = QStringLiteral("%1 %2").arg(device->productName()).arg(QString::number(device->deviceInstance()));
-		}
-	} else {
-		name = namedGroup;
-	}
+	name = device ? device->name() : namedGroup;
 }
 
 SwitchableOutputGroupModel::SwitchableOutputGroupModel(QObject *parent)
@@ -132,9 +124,7 @@ void SwitchableOutputGroupModel::addKnownDevice(BaseDevice *device)
 	QQmlEngine::setObjectOwnership(device, QQmlEngine::CppOwnership);
 
 	// Allow group names to be updated when the device name changes.
-	connect(device, &BaseDevice::customNameChanged, this, [this, device] { updateDeviceGroupName(device); });
-	connect(device, &BaseDevice::productNameChanged, this, [this, device] { updateDeviceGroupName(device); });
-	connect(device, &BaseDevice::deviceInstanceChanged, this, [this, device] { updateDeviceGroupName(device); });
+	connect(device, &BaseDevice::nameChanged, this, [this, device] { updateDeviceGroupName(device); });
 }
 
 bool SwitchableOutputGroupModel::hasKnownDevice(const QString &serviceUid) const

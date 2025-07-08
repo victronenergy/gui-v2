@@ -15,6 +15,9 @@ import Victron.VenusOS
 
 	Further settings are provided under the /Settings path:
 		com.victronenergy.switch[.suffix]/SwitchableOutput/<outputId>/Settings/<Group|Type|[etc]>
+
+	System relays configured with a "manual" function are also published as switchable outputs, at:
+		com.victronenergy.system/SwitchableOutput/<outputId>
 */
 QtObject {
 	id: root
@@ -27,7 +30,8 @@ QtObject {
 	readonly property string outputId: uid.substring(uid.lastIndexOf('/') + 1)
 
 	// The device to which this output belongs. This may be a switch from a com.victronenergy.switch
-	// service, or another service like a solar charger or inverter.
+	// service, or another service like a solar charger or inverter, or the system service if it
+	// controls a system relay.
 	readonly property Device device: Device {
 		serviceUid: BackendConnection.serviceUidFromUid(root.uid)
 	}
@@ -42,11 +46,10 @@ QtObject {
 		if (group) {
 			// When the output is in a named group (where it might be in the same group as outputs
 			// from other devices) then use a name that identifies the source device.
-			if (device.customName) {
-				return `${device.customName} | ${name}`
-			} else {
-				return `${device.productName} ${device.deviceInstance} | ${name}`
-			}
+			const prefix = device.serviceType === "system" ? CommonWords.gx_device_relays
+					: device.customName ? device.customName
+					: "%1 (%2)".arg(device.productName).arg(device.deviceInstance)
+			return "%1 | %2".arg(prefix).arg(name)
 		} else {
 			// When the output is in the default group for the device, instead of in a named group,
 			// then the /Name can be used directly.
@@ -65,7 +68,9 @@ QtObject {
 	readonly property int type: _type.valid ? _type.value : -1
 	readonly property string group: _group.value ?? ""
 	readonly property string customName: _customName.value ?? ""
-	readonly property bool showUIControl: !_showUIControl.valid || _showUIControl.value === 1 // true when setting is not present
+	readonly property bool showUIControl: (!_showUIControl.valid || _showUIControl.value === 1) // true when setting is not present
+			// If this is a system relay, it is only shown in the UI if it is a manual relay.
+			&& (!_relayFunction.uid || _relayFunction.value === VenusOS.Relay_Function_Manual)
 
 	function setDimming(value) {
 		if (hasDimming) {
@@ -110,5 +115,10 @@ QtObject {
 
 	readonly property VeQuickItem _showUIControl: VeQuickItem {
 		uid: `${root.uid}/Settings/ShowUIControl`
+	}
+
+	// /Settings/Function is only valid for system relays.
+	readonly property VeQuickItem _relayFunction: VeQuickItem {
+		uid: root.device.serviceType === "system" ? `${root.uid}/Settings/Function` : ""
 	}
 }

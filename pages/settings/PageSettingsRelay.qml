@@ -9,6 +9,16 @@ import Victron.VenusOS
 Page {
 	id: root
 
+
+	SwitchableOutputModel {
+		id: systemRelayModel
+		sourceModel: VeQItemTableModel {
+			uids: [ Global.system.serviceUid + "/SwitchableOutput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+		filterType: SwitchableOutputModel.ManualFunction
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 
@@ -44,6 +54,10 @@ Page {
 						//% "The Tank Pump can now be found in the devices list"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_tank_pump_can_now_be_found"), 5000)
 						break
+					case VenusOS.Relay_Function_Manual:
+						//% "The Relay can now be found in the devices list"
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_manual_can_now_be_found"), 5000)
+						break
 					default:
 						break
 					}
@@ -65,18 +79,6 @@ Page {
 				]
 			}
 
-			ListSwitch {
-				id: manualSwitch
-
-				text: relay1State.valid
-					  //% "Relay 1 on"
-					? qsTrId("settings_relay_relay1on")
-					  //% "Relay on"
-					: qsTrId("settings_relay_on")
-				dataItem.uid: Global.system.serviceUid + "/Relay/0/State"
-				preferredVisible: relayFunction.currentValue === VenusOS.Relay_Function_Manual
-			}
-
 			ListRadioButtonGroup {
 				id: relay1Function
 
@@ -89,16 +91,6 @@ Page {
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
 					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
 				]
-			}
-
-			ListSwitch {
-				id: manualSwitch1
-
-				//% "Relay 2 on"
-				text: qsTrId("settings_relay_relay2on")
-				dataItem.uid: Global.system.serviceUid + "/Relay/1/State"
-				preferredVisible: relay1State.valid
-					&& relay1Function.currentValue === VenusOS.Relay_Function_Manual
 			}
 
 			ListNavigation {
