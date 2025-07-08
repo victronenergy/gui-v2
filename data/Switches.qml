@@ -117,7 +117,11 @@ QtObject {
 	}
 
 	readonly property Component _deviceComponent: Component {
-		Device {}
+		Device {
+			name: serviceType === "system" ? CommonWords.gx_device_relays
+				: customName ? customName
+				: "%1 (%2)".arg(productName).arg(deviceInstance)
+		}
 	}
 
 	Component.onCompleted: Global.switches = root

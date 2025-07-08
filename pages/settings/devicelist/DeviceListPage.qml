@@ -68,9 +68,34 @@ Page {
 		footer: SettingsColumn {
 			width: parent.width
 			topPadding: spacing
-			preferredVisible: gensetMenu.preferredVisible
+			preferredVisible: relaysMenu.preferredVisible
+					|| gensetMenu.preferredVisible
 					|| tankPumpMenu.preferredVisible
 					|| removeDisconnectedButton.preferredVisible
+
+			ListNavigation {
+				id: relaysMenu
+				text: CommonWords.gx_device_relays
+				preferredVisible: systemRelayModel.count > 0
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitchableOutputList.qml", {
+						serviceUid: Global.system.serviceUid,
+						switchableOutputModel: systemRelayModel,
+						showDeviceSettings: false,
+						title: text,
+					})
+				}
+
+				SwitchableOutputModel {
+					id: systemRelayModel
+
+					sourceModel: VeQItemTableModel {
+						uids: [ Global.system.serviceUid + "/SwitchableOutput" ]
+						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+					}
+					filterType: SwitchableOutputModel.ManualFunction
+				}
+			}
 
 			ListNavigation {
 				id: gensetMenu

@@ -9,6 +9,8 @@ import Victron.VenusOS
 BaseDevice {
 	id: root
 
+	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
+
 	readonly property VeQuickItem _deviceInstance: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/DeviceInstance" : ""
 	}

@@ -414,7 +414,6 @@ set (VENUS_QML_MODULE_SOURCES
     data/EvChargers.qml
     data/Generators.qml
     data/InverterChargers.qml
-    data/ManualRelayModel.qml
     data/Notifications.qml
     data/SolarInputs.qml
     data/StartPageConfiguration.qml
@@ -471,7 +470,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/controlcards/EVCSCard.qml
     pages/controlcards/GeneratorCard.qml
     pages/controlcards/InverterChargerCard.qml
-    pages/controlcards/SwitchesCard.qml
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
@@ -569,8 +567,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
-    pages/settings/devicelist/PageSwitch.qml
     pages/settings/devicelist/PageSwitchableOutput.qml
+    pages/settings/devicelist/PageSwitchableOutputList.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
@@ -767,6 +765,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/screenblanker.cpp
     src/solarinputmodel.h
     src/solarinputmodel.cpp
+    src/switchableoutputmodel.h
+    src/switchableoutputmodel.cpp
     src/switchableoutputgroupmodel.h
     src/switchableoutputgroupmodel.cpp
     src/widgetconnectorpathupdater.h

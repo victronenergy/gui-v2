@@ -25,7 +25,6 @@ Page {
 	// The cards list view is made up of:
 	// - Header - ESS card
 	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers
-	// - Footer - Manual relays
 	BaseListView {
 		id: cardsView
 
@@ -55,25 +54,6 @@ Page {
 				id: systemType
 				uid: Global.system.serviceUid + "/SystemType"
 			}
-		}
-
-		footer: BaseListLoader {
-			active: manualRelays.count > 0
-			sourceComponent: BaseListItem {
-				width: root.cardWidth + cardsView.spacing
-				height: cardsView.height
-				background.visible: false
-				KeyNavigationHighlight.active: false
-
-				SwitchesCard {
-					x: cardsView.spacing
-					width: root.cardWidth
-					height: cardsView.height
-					model: manualRelays
-				}
-			}
-
-			ManualRelayModel { id: manualRelays }
 		}
 
 		model: controlCardModel
