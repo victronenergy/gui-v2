@@ -16,8 +16,8 @@ ListNavigation {
 	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
 	function getTitle() {
-		if (customName.valid && customName.value !== "") {
-			return customName.value
+		if (device.name) {
+			return device.name
 		}
 		const inputNumber = devInstance.valid ? devInstance.value : ""
 
@@ -77,9 +77,9 @@ ListNavigation {
 		uid: bindPrefix + "/TemperatureType"
 	}
 
-	VeQuickItem {
-		id: customName
-		uid: bindPrefix + "/CustomName"
+	Device {
+		id: device
+		serviceUid: bindPrefix
 	}
 
 	VeQuickItem {
