@@ -24,6 +24,7 @@ DeviceListDelegate {
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitch.qml", {
 			serviceUid: root.device.serviceUid,
+			switchableOutputModel: switchOutputModel,
 			title: Qt.binding(function() { return root.text })
 		})
 	}
@@ -31,5 +32,13 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: state
 		uid: root.device.serviceUid + "/State"
+	}
+
+	SwitchableOutputModel {
+		id: switchOutputModel
+		sourceModel: VeQItemTableModel {
+			uids: [ root.device.serviceUid + "/SwitchableOutput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
 	}
 }

@@ -10,15 +10,13 @@ Page {
 	id: root
 
 	required property string serviceUid
-
-	VeQItemTableModel {
-		id: switchableOutputModel
-		uids: [ root.serviceUid + "/SwitchableOutput" ]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-	}
+	required property SwitchableOutputModel switchableOutputModel
 
 	GradientListView {
-		model: VisibleItemModel {
+		header: SettingsColumn {
+			width: parent?.width ?? 0
+			bottomPadding: spacing
+
 			ListText {
 				//% "Module state"
 				text: qsTrId("settings_module_state")
@@ -34,59 +32,54 @@ Page {
 				unit: VenusOS.Units_Volt_DC
 				precision: 1
 			}
+		}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: switchableOutputModel.rowCount > 0
+		model: root.switchableOutputModel
 
-				Repeater {
-					model: switchableOutputModel
-					delegate: ListQuantityGroupNavigation {
-						id: outputQuantities
+		delegate: ListQuantityGroupNavigation {
+			id: outputQuantities
 
-						required property string uid
+			required property string uid
+			required property string name
 
-						text: output.customName
-								? "%1: %2".arg(output.name).arg(output.customName)
-								: output.name
-						quantityModel: QuantityObjectModel {
-							filterType: QuantityObjectModel.HasValue
+			text: name
+			quantityModel: QuantityObjectModel {
+				filterType: QuantityObjectModel.HasValue
 
-							QuantityObject { object: outputCurrent; unit: VenusOS.Units_Amp }
-							QuantityObject { object: output.displayPercentage ? output : null; key: "dimming"; unit: VenusOS.Units_Percentage }
-							QuantityObject { object: output.displayPercentage ? null : output; key: "statusText" }
-							QuantityObject { object: output; key: "typeText" }
-						}
-
-						// Do not show invalid outputs (e.g. those configured as inputs)
-						preferredVisible: output.state >= 0
-
-						onClicked: {
-							Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitchableOutput.qml", {
-								outputUid: output.uid,
-								title: Qt.binding(function() { return outputQuantities.text })
-							})
-						}
-
-						SwitchableOutput {
-							id: output
-
-							readonly property bool displayPercentage: type === VenusOS.SwitchableOutput_Type_Dimmable
-									&& ((status === VenusOS.SwitchableOutput_Status_On)
-										|| (status === VenusOS.SwitchableOutput_Status_Output_Fault))
-							readonly property string statusText: VenusOS.switchableOutput_statusToText(status)
-							readonly property string typeText: VenusOS.switchableOutput_typeToText(type, name)
-
-							uid: outputQuantities.uid
-						}
-
-						VeQuickItem {
-							id: outputCurrent
-							uid: outputQuantities.uid + "/Current"
-						}
-					}
-				}
+				QuantityObject { object: outputCurrent; unit: VenusOS.Units_Amp }
+				QuantityObject { object: output.displayPercentage ? output : null; key: "dimming"; unit: VenusOS.Units_Percentage }
+				QuantityObject { object: output.displayPercentage ? null : output; key: "statusText" }
+				QuantityObject { object: output; key: "typeText" }
 			}
+
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitchableOutput.qml", {
+					outputUid: output.uid,
+					title: Qt.binding(function() { return outputQuantities.text })
+				})
+			}
+
+			SwitchableOutput {
+				id: output
+
+				readonly property bool displayPercentage: type === VenusOS.SwitchableOutput_Type_Dimmable
+						&& ((status === VenusOS.SwitchableOutput_Status_On)
+							|| (status === VenusOS.SwitchableOutput_Status_Output_Fault))
+				readonly property string statusText: VenusOS.switchableOutput_statusToText(status)
+				readonly property string typeText: VenusOS.switchableOutput_typeToText(type, name)
+
+				uid: outputQuantities.uid
+			}
+
+			VeQuickItem {
+				id: outputCurrent
+				uid: outputQuantities.uid + "/Current"
+			}
+		}
+
+		footer: SettingsColumn {
+			width: parent?.width ?? 0
+			topPadding: ListView.view.count > 0 ? spacing : 0
 
 			ListNavigation {
 				text: CommonWords.device_info_title

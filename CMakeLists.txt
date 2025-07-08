@@ -745,6 +745,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/keyeventfilter.cpp
     src/mockmanager.h
     src/mockmanager.cpp
+    src/switchableoutputmodel.h
+    src/switchableoutputmodel.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
