@@ -31,8 +31,6 @@ ModalDialog {
 			 //% "Inverter / Charger mode"
 		   : qsTrId("controlcard_inverter_charger_mode")
 
-	height: header.height + contentHeight + footer.height
-
 	contentItem: ModalDialog.FocusableContentItem {
 		anchors {
 			top: root.title.bottom
