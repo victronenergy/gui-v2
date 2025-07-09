@@ -230,19 +230,25 @@
 
             // Options to change display size and border
             // Force fullscreen
-            if (searchParams.has("fullscreen")) {
+            if (searchParams.has("fullscreen") || (!searchParams.has("default") && !searchParams.has("nomock") && !searchParams.has("mock") && localStorage.getItem('venus-gui-v2-css-display') === 'fullscreen')) {
                 wrapper_inner.style.maxWidth = '100%';
                 wrapper_inner.style.height = '100%';
                 mockup.style.visibility = 'hidden';
                 mockup.style.display = 'none';
+                // Save display mode in localStorage
+                localStorage.setItem('venus-gui-v2-css-display', 'fullscreen');
             // Force mockup hide
-            } else if (searchParams.has("nomock")) {
+            } else if (searchParams.has("nomock") || (!searchParams.has("default") && !searchParams.has("mock") && localStorage.getItem('venus-gui-v2-css-display') === 'nomock')) {
                 mockup.style.visibility = 'hidden';
                 wrapper_inner.style.outline = 'none';
+                // Save display mode in localStorage
+                localStorage.setItem('venus-gui-v2-css-display', 'nomock');
             // Force mockup show
-            } else if (searchParams.has("mock")) {
+            } else if (searchParams.has("mock") || (!searchParams.has("default") && localStorage.getItem('venus-gui-v2-css-display') === 'mock')) {
                 mockup.style.visibility = 'visible';
                 mockup.style.display = 'block';
+                // Save display mode in localStorage
+                localStorage.setItem('venus-gui-v2-css-display', 'mock');
             }
 
             try {
