@@ -78,8 +78,6 @@ endif()
 
 set(REQUIRED_QT_VERSION 6.8.3) # qt 6.8.3 required for 'qt_standard_project_setup(...)' to work
 
-set(REQUIRED_QT_VERSION 6.5.2) # require at least qt 6.5.2 for qt_add_qml_module to work properly
-
 # Common Qt components for all platforms
 find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools REQUIRED)
 
