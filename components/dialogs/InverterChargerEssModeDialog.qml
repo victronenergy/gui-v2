@@ -28,7 +28,7 @@ ModalDialog {
 
 		SettingsColumn {
 			id: contentColumn
-			anchors.fill: parent
+			width: parent.width
 
 			Repeater {
 				id: repeater
