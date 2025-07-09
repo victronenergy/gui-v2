@@ -30,10 +30,7 @@ BorderImage {
 			? "qrc:/images/key_navigation_highlight_light.svg"
 			: "qrc:/images/key_navigation_highlight_dark.svg"
 
-	// no need to bind to activeFocusItem.visible since we will "inherit" visible from the parent
-	visible: Global.keyNavigationEnabled
-			 && !Global.pageManager?.expandLayout
-			 && helper.active
+	visible: helper.showHighlight
 
 	z: 1000 // show highlight above all siblings
 
@@ -41,6 +38,12 @@ BorderImage {
 
 	KeyNavigationHighlightHelper {
 		id: helper
+
+		// Whether the highlight should be visible. No need to bind to activeFocusItem.visible
+		// since we will "inherit" visible from the parent.
+		readonly property bool showHighlight: Global.keyNavigationEnabled
+				&& !Global.pageManager?.expandLayout
+				&& active
 
 		// KeyNavigationHighlightHelper isn't a QQuickItem so we have to
 		// get the Window.activeFocusItem from the root instead.
@@ -55,6 +58,6 @@ BorderImage {
 	// Automatic reparenting of this object into the activeFocusItem (or specified fill item)
 	Binding {
 		root.parent: helper.fill
-		when: helper.fill && root.visible
+		when: helper.fill && helper.showHighlight
 	}
 }
