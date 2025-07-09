@@ -4,12 +4,11 @@
 */
 
 import QtQuick
-import QtQuick.Templates as CT
-import QtQuick.Controls as C
+import QtQuick.Templates as T
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-CT.Button {
+T.Button {
 	id: root
 
 	property color color: !showEnabled ? Theme.color_font_disabled
