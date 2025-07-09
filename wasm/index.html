@@ -232,11 +232,13 @@
             // Force fullscreen
             if (searchParams.has("fullscreen")) {
                 wrapper_inner.style.maxWidth = '100%';
+                wrapper_inner.style.height = '100%';
                 mockup.style.visibility = 'hidden';
                 mockup.style.display = 'none';
             // Force mockup hide
             } else if (searchParams.has("nomock")) {
                 mockup.style.visibility = 'hidden';
+                wrapper_inner.style.outline = 'none';
             // Force mockup show
             } else if (searchParams.has("mock")) {
                 mockup.style.visibility = 'visible';
