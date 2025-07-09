@@ -115,13 +115,15 @@ QtObject {
 		// Allow key navigation to move to the footer (if moving forwards) or footer (if backwards).
 		if (forward && Utils.acceptsKeyNavigation(footerItem)) {
 			footerItem.focus = true
+			scrollToEndRequested() // ensure footer can be seen
 			return true
 		} else if (!forward && Utils.acceptsKeyNavigation(headerItem)) {
 			headerItem.focus = true
+			scrollToStartRequested() // ensure header can be seen
 			return true
 		}
 
-		// If there are more items but they are not focusable, ensure these items are visible
+		// If there are more items but they are not focusable, ensure these items can be seen
 		// before the focus moves outside of the list, else those items may remain hidden.
 		if (forward) {
 			if (_currentIndex < itemCount - 1 || footerItem) {
