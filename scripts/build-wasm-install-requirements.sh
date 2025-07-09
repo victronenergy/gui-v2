@@ -50,7 +50,12 @@ echo -e "\n\n*** Installing dependencies ***"
 sudo apt-get update -yq
 sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
                         wget libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
-                        ninja-build dos2unix libegl1 cmake
+                        ninja-build dos2unix libegl1 cmake \
+                        libxkbcommon-dev libx11-dev libxcb1-dev libxcb-util-dev \
+                        libxcb-keysyms1-dev libxcb-image0-dev libxcb-render-util0-dev \
+                        libxcb-randr0-dev libxcb-xinerama0-dev libxcb-shape0-dev \
+                        libxcb-sync-dev libxcb-xfixes0-dev libfontconfig1-dev \
+                        libfreetype6-dev libwayland-dev
 
 # Install yq
 echo -e "\n\n*** Installing yq ***"
@@ -215,7 +220,20 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Install QtWebSockets for WebAssembly - CRITICAL FIX
+# Install QtShaderTools for WebAssembly
+echo -e "\n\n*** Installing QtShaderTools for WebAssembly ***"
+aqt install-qt all_os wasm ${QT_VERSION} wasm_singlethread --modules qtshadertools --outputdir ${OUTPUTDIR}/Qt
+
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install QtShaderTools module for WebAssembly"
+    echo "This is required for the build to succeed"
+    exit 1
+else
+    echo "✓ QtShaderTools module installed successfully"
+fi
+
+
+# Install QtWebSockets for WebAssembly
 echo -e "\n\n*** Installing QtWebSockets for WebAssembly ***"
 echo "Installing QtWebSockets module for WebAssembly target..."
 aqt install-qt all_os wasm ${QT_VERSION} wasm_singlethread --modules qtwebsockets --outputdir ${OUTPUTDIR}/Qt
@@ -386,7 +404,7 @@ else
     echo "? QtMQTT for WebAssembly status unclear"
 fi
 
-# Check QtWebSockets installation - CRITICAL VERIFICATION
+# Check QtWebSockets installation
 if [ -f "${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread/lib/cmake/Qt6WebSockets/Qt6WebSocketsConfig.cmake" ]; then
     echo "✓ QtWebSockets for WebAssembly found"
 else
@@ -395,3 +413,112 @@ else
     ls -la ${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread/lib/cmake/ | grep Qt6
     exit 1
 fi
+
+# Build and install QtShaderTools for desktop (host tools needed for WebAssembly cross-compilation)
+echo -e "\n\n*** Building and installing QtShaderTools for desktop ***"
+cd ${OUTPUTDIR}
+if [ -d "qtshadertools" ]; then
+    rm -rf "qtshadertools"
+fi
+git clone https://github.com/qt/qtshadertools.git
+cd qtshadertools
+git checkout ${QT_VERSION}
+if [ $? -ne 0 ]; then
+    echo "ERROR: QtShaderTools version ${QT_VERSION} not available"
+    echo "Available QtShaderTools branches/tags:"
+    git branch -r | head -10
+    git tag | grep "^${QT_VERSION%.*}" | head -5
+    exit 1
+fi
+
+if [ -d "build-qtshadertools-desktop" ]; then
+    rm -rf "build-qtshadertools-desktop"
+fi
+mkdir build-qtshadertools-desktop
+cd build-qtshadertools-desktop
+
+# Set up environment for desktop build
+export PATH=${OUTPUTDIR}/Qt/Tools/CMake/bin:${PATH}
+export QTDIR=${OUTPUTDIR}/Qt/${QT_VERSION}/${ACTUAL_DESKTOP_DIR}
+
+echo "Using desktop QTDIR: ${QTDIR}"
+
+# Configure QtShaderTools for desktop
+${QTDIR}/bin/qt-cmake ..
+
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to configure QtShaderTools for desktop with qt-cmake"
+    exit 1
+fi
+
+cmake --build . --parallel $(nproc)
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to build QtShaderTools for desktop"
+    exit 1
+fi
+
+cmake --install . --prefix ${QTDIR} --verbose
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install QtShaderTools for desktop"
+    exit 1
+fi
+
+echo "✓ QtShaderTools for desktop installed successfully"
+
+# Create Qt6ShaderToolsTools package manually
+echo -e "\n\n*** Creating Qt6ShaderToolsTools package ***"
+DESKTOP_CMAKE_DIR="${OUTPUTDIR}/Qt/${QT_VERSION}/${ACTUAL_DESKTOP_DIR}/lib/cmake"
+QSB_TOOL_DIR="${OUTPUTDIR}/Qt/${QT_VERSION}/${ACTUAL_DESKTOP_DIR}/bin"
+
+# Create the Qt6ShaderToolsTools directory
+mkdir -p "${DESKTOP_CMAKE_DIR}/Qt6ShaderToolsTools"
+
+# Create Qt6ShaderToolsToolsConfig.cmake
+cat > "${DESKTOP_CMAKE_DIR}/Qt6ShaderToolsTools/Qt6ShaderToolsToolsConfig.cmake" << 'EOF'
+# Qt6ShaderToolsTools Config
+
+get_filename_component(_qt_cmake_dir "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
+set(QT_CMAKE_DIR "${_qt_cmake_dir}")
+
+# Import the qsb tool
+if(NOT TARGET Qt6::qsb)
+    add_executable(Qt6::qsb IMPORTED)
+    get_filename_component(_qt_bin_dir "${CMAKE_CURRENT_LIST_DIR}/../../../bin" ABSOLUTE)
+    set_target_properties(Qt6::qsb PROPERTIES
+        IMPORTED_LOCATION "${_qt_bin_dir}/qsb"
+    )
+endif()
+
+# Mark as found
+set(Qt6ShaderToolsTools_FOUND TRUE)
+EOF
+
+# Create Qt6ShaderToolsToolsConfigVersion.cmake
+cat > "${DESKTOP_CMAKE_DIR}/Qt6ShaderToolsTools/Qt6ShaderToolsToolsConfigVersion.cmake" << 'EOF'
+set(PACKAGE_VERSION "6.8.3")
+set(PACKAGE_VERSION_EXACT False)
+set(PACKAGE_VERSION_COMPATIBLE True)
+
+if("${PACKAGE_VERSION}" VERSION_LESS "${PACKAGE_FIND_VERSION}")
+    set(PACKAGE_VERSION_COMPATIBLE False)
+endif()
+
+if("${PACKAGE_FIND_VERSION}" STREQUAL "${PACKAGE_VERSION}")
+    set(PACKAGE_VERSION_EXACT True)
+endif()
+EOF
+
+# Create Qt6ShaderToolsToolsTargets.cmake
+cat > "${DESKTOP_CMAKE_DIR}/Qt6ShaderToolsTools/Qt6ShaderToolsToolsTargets.cmake" << 'EOF'
+# Qt6ShaderToolsTools Targets
+
+if(NOT TARGET Qt6::qsb)
+    add_executable(Qt6::qsb IMPORTED)
+    get_filename_component(_qt_bin_dir "${CMAKE_CURRENT_LIST_DIR}/../../../bin" ABSOLUTE)
+    set_target_properties(Qt6::qsb PROPERTIES
+        IMPORTED_LOCATION "${_qt_bin_dir}/qsb"
+    )
+endif()
+EOF
+
+echo "✓ Qt6ShaderToolsTools package created successfully"
