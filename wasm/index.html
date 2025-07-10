@@ -165,42 +165,65 @@
         }
 
         async function preloadWasm(url, onProgress) {
-            let total = null;
-            // This is needed, since the reported size is the compressed size
-            // but the downloaded size is shown as uncompressed size, since the browser decompresses it
-            const sizeResp = await fetch('venus-gui-v2.wasm.size');
+            try {
+                let total = null;
+                // This is needed, since the reported size is the compressed size
+                // but the downloaded size is shown as uncompressed size, since the browser decompresses it
+                const sizeResp = await fetch('venus-gui-v2.wasm.size');
 
-            // Load WASM after the size is fetched, else the size is not downloaded
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("Failed to fetch WASM");
+                // Load WASM after the size is fetched, else the size is not downloaded
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Failed to fetch WASM");
 
-            if (sizeResp.ok) {
-                total = parseInt(await sizeResp.text(), 10);
-            } else {
-                // should not be needed, but just in case?
-                const estimatedCompressionRatio = 0.4; // Assume 40% as compressed size
-                const contentLength = response.headers.get('content-length');
-                total = contentLength ? parseInt(contentLength, 10) / estimatedCompressionRatio : null;
-                console.warn("venus-gui-v2.wasm.size not found, using estimated size of " + (total ? (total / 1024).toFixed(2) + ' KB' : 'unknown'));
-            }
+                if (sizeResp.ok) {
+                    total = parseInt(await sizeResp.text(), 10);
+                } else {
+                    // should not be needed, but just in case?
+                    const estimatedCompressionRatio = 0.4; // Assume 40% as compressed size
+                    const contentLength = response.headers.get('content-length');
+                    total = contentLength ? parseInt(contentLength, 10) / estimatedCompressionRatio : null;
+                    console.warn("venus-gui-v2.wasm.size not found, using estimated size of " + (total ? (total / 1024).toFixed(2) + ' KB' : 'unknown'));
+                }
 
-            const reader = response.body.getReader();
-            let received = 0;
-            let chunks = [];
-            while (true) {
-                const {done, value} = await reader.read();
-                if (done) break;
-                chunks.push(value);
-                received += value.length;
-                onProgress(received, total);
+                const reader = response.body.getReader();
+                let received = 0;
+                let chunks = [];
+                while (true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    chunks.push(value);
+                    received += value.length;
+                    onProgress(received, total);
+                }
+                let wasmBinary = new Uint8Array(received);
+                let pos = 0;
+                for (let chunk of chunks) {
+                    wasmBinary.set(chunk, pos);
+                    pos += chunk.length;
+                }
+                return wasmBinary;
+            } catch (e) {
+                console.error(e);
+                console.error(e.stack);
+                // Show error message in wrapper_inner
+                const wrapper_inner = document.querySelector('#wrapper-inner');
+                wrapper_inner.innerHTML = `
+                  <div style="color: red; font-size: 20px; margin-top: 20px;">
+                    <b>Error loading application!</b><br><br>
+                    <b>URL:</b> <i>${window.location.href}</i><br>
+                    <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
+                    <b>${e.name}:</b> <i>${e.message}</i><br>
+                    <b>Stack:</b> <i>${e.stack}</i>
+                  </div>`;
+
+                class PreloadWasmError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = "PreloadWasmError";
+                    }
+                }
+                throw new PreloadWasmError(e);
             }
-            let wasmBinary = new Uint8Array(received);
-            let pos = 0;
-            for (let chunk of chunks) {
-                wasmBinary.set(chunk, pos);
-                pos += chunk.length;
-            }
-            return wasmBinary;
         }
 
         async function init()
@@ -296,6 +319,20 @@
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
+                // Show error message in wrapper_inner
+                if (e instanceof PreloadWasmError) {
+                    // If the error is from preloadWasm, we already showed the error
+                    console.warn("PreloadWasmError caught, no need to show again");
+                } else {
+                    wrapper_inner.innerHTML += `
+                      <div style="color: red; font-size: 20px; margin-top: 20px;">
+                        <b>Error loading application!</b><br><br>
+                        <b>URL:</b> <i>${window.location.href}</i><br>
+                        <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
+                        <b>${e.name}:</b> <i>${e.message}</i><br>
+                        <b>Stack:</b> <i>${e.stack}</i>
+                      </div>`;
+                }
             }
         }
     </script>
