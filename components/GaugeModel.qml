@@ -185,6 +185,7 @@ ListModel {
 							battery.icon = batteryIcon
 							battery.level = batteryLevel
 						}
+						Component.onCompleted: onValueChanged()
 					}
 				}
 			}

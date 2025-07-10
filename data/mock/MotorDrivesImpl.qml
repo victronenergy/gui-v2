@@ -6,53 +6,70 @@
 import QtQuick
 import Victron.VenusOS
 
-QtObject {
+Item {
 	id: root
 
-	property int mockDeviceCount
-
-	function populate() {
-		const deviceInstanceNum = mockDeviceCount++
-		motorDriveComponent.createObject(root, {
-			serviceUid: "mock/com.victronenergy.motordrive.ttyUSB" + deviceInstanceNum,
-			deviceInstance: deviceInstanceNum,
-		})
+	function setSystemValue(path, value) {
+		MockManager.setValue("com.victronenergy.system" + path, value)
 	}
 
-	property Component motorDriveComponent: Component {
-		Device {
-			property int gear: VenusOS.MotorDriveGear_Forward
-			property Timer t: Timer {
-				interval: 1000
-				running: Global.mockDataSimulator.timersActive
-				repeat: true
-				onTriggered: {
-					if (++gear > VenusOS.MotorDriveGear_Forward) {
-						gear = VenusOS.MotorDriveGear_Neutral
+	VeQuickItem {
+		id: gaugesAutoMax
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+	}
+
+	VeQuickItem {
+		id: maxMotorRpm
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+	}
+
+	Instantiator {
+		model: ServiceModel { serviceTypes: ["motordrive"] }
+		delegate: Item {
+			id: motorDrive
+
+			required property int index
+			required property string uid
+
+			// Set system /MotorDrive/Power to the power of the first motordrive on the system.
+			VeQuickItem {
+				uid: motorDrive.uid + "/Dc/0/Power"
+				onValueChanged: {
+					if (motorDrive.index === 0) {
+						root.setSystemValue("/MotorDrive/Power", value ?? 0)
 					}
-
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/RPM", Math.floor(Math.random() * 4000))
-
-					power.setValue(Math.floor(Math.random() * 12345))
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Direction", gear)
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Motor/Temperature", Math.floor(Math.random() * 100))
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Coolant/Temperature", Math.floor(Math.random() * 100))
-					Global.mockDataSimulator.setMockValue(serviceUid + "/Controller/Temperature", Math.floor(Math.random() * 100))
 				}
 			}
 
-			Component.onCompleted: {
-				_deviceInstance.setValue(deviceInstance)
-				_customName.setValue("Motor Drive %1".arg(deviceInstance))
+			// Update the max value of the RPM gauge on the Boat page.
+			VeQuickItem {
+				uid: motorDrive.uid + "/Motor/RPM"
+				onValueChanged: {
+					if (valid && gaugesAutoMax.value === 1) {
+						maxMotorRpm.setValue(Math.max(value, maxMotorRpm.value || 0))
+					}
+				}
+			}
+
+			// Animate motordrive values.
+			MockDataRandomizer {
+				VeQuickItem { uid: motorDrive.uid + "/Dc/0/Power" }
+				VeQuickItem { uid: motorDrive.uid + "/Dc/0/Voltage" }
+				VeQuickItem { uid: motorDrive.uid + "/Dc/0/Current" }
+				VeQuickItem { uid: motorDrive.uid + "/Dc/0/Temperature" }
+				VeQuickItem { uid: motorDrive.uid + "/Motor/Temperature" }
+				VeQuickItem { uid: motorDrive.uid + "/Coolant/Temperature" }
+				VeQuickItem { uid: motorDrive.uid + "/Controller/Temperature" }
+			}
+			MockDataRangeAnimator {
+				stepSize: -876 // use a step size that looks uneven
+				maximumValue: MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max") || 0
+				VeQuickItem { uid: motorDrive.uid + "/Motor/RPM" }
+			}
+			MockDataRangeAnimator {
+				maximumValue: VenusOS.MotorDriveGear_Forward
+				VeQuickItem { uid: motorDrive.uid + "/Motor/Direction" }
 			}
 		}
-	}
-
-	readonly property VeQuickItem power: VeQuickItem {
-		uid: BackendConnection.serviceUidForType("system") + "/MotorDrive/Power"
-	}
-
-	Component.onCompleted: {
-		populate()
 	}
 }

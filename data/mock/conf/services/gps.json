@@ -1,0 +1,20 @@
+{
+    "com.victronenergy.gps.virtual_986745bac72057c2": {
+        "/Altitude": 27,
+        "/Connected": 1,
+        "/Course": -125.58,
+        "/CustomName": "Virtual gps",
+        "/DeviceInstance": 100,
+        "/Fix": 1,
+        "/Mgmt/Connection": "Virtual",
+        "/Mgmt/ProcessName": "dbus-victron-virtual",
+        "/Mgmt/ProcessVersion": "0.1.14",
+        "/NrOfSatellites": 8,
+        "/Position/Latitude": 52.377956,
+        "/Position/Longitude": 4.897070,
+        "/ProductId": 49256,
+        "/ProductName": "Virtual gps",
+        "/Serial": "986745bac72057c2",
+        "/Speed": 8.79
+    }
+}

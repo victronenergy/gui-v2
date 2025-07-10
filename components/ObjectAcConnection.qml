@@ -29,15 +29,15 @@ QtObject {
 		onValidChanged: if (valid) root._expandPhaseCount(3)
 		onValueChanged: root.phases.setValue(2, PhaseModel.PowerRole, value)
 	}
-	readonly property VeQuickItem _currentL1: VeQuickItem {
+	readonly property VeQuickItem currentL1: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L1/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(0, PhaseModel.CurrentRole, value)
 	}
-	readonly property VeQuickItem _currentL2: VeQuickItem {
+	readonly property VeQuickItem currentL2: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L2/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(1, PhaseModel.CurrentRole, value)
 	}
-	readonly property VeQuickItem _currentL3: VeQuickItem {
+	readonly property VeQuickItem currentL3: VeQuickItem {
 		uid: bindPrefix ? bindPrefix + "/L3/" + root.currentKey : ""
 		onValueChanged: root.phases.setValue(2, PhaseModel.CurrentRole, value)
 	}
@@ -51,7 +51,7 @@ QtObject {
 	property real _power: NaN
 
 	// multi-phase systems don't have a total current
-	readonly property real current: _phaseCount.value === 1 && _currentL1.valid ? _currentL1.value : NaN
+	readonly property real current: _phaseCount.value === 1 && currentL1.valid ? currentL1.value : NaN
 
 	readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
 

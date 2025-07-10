@@ -9,42 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property date date26MinutesAgo: new Date()
-	property date date2h10mAgo: new Date()
-	property date date1dAgo: new Date()
-	property date date8dAgo: new Date()
-
-	readonly property var dummyNotifications: [
-		{
-			acknowledged: 0,
-			active: 0,
-			type: VenusOS.Notification_Warning,
-			dateTime: root.date1dAgo,
-			deviceName: "Fuel tank custom name",
-			description: "Fuel level low",
-			value: "15%",
-		},
-		{
-			acknowledged: 0,
-			active: 0,
-			type: VenusOS.Notification_Info,
-			dateTime: root.date26MinutesAgo,
-			deviceName: "System",
-			description: "Software update available"
-		},
-		{
-			acknowledged: 0,
-			active: 0,
-			type: VenusOS.Notification_Info,
-			dateTime: root.date2h10mAgo,
-			deviceName: "Pro Battery",
-			description: "High temperature",
-			value: "25C",
-		}
-	]
-
 	property Connections _mockConn: Connections {
-		target: Global.mockDataSimulator
+		target: MockManager
 		function onAddDummyNotification(isAlarm) {
 			const notifType = isAlarm
 							? VenusOS.Notification_Alarm
@@ -156,7 +122,7 @@ QtObject {
 		nextNotificationId = ((nextNotificationId + 1) === maxNotificationCount) ? 0 : (nextNotificationId + 1)
 
 		// (re)start the mock notification inactive timer since notifications can be recycled
-		if (Global.mockDataSimulator.timersActive) {
+		if (MockManager.timersActive) {
 			notif.inactiveTimer.restart()
 		}
 
@@ -207,19 +173,5 @@ QtObject {
 		_numberOfUnAcknowledgedWarnings.setValue(unAcknowledgedWarningCount)
 		_numberOfActiveInformations.setValue(activeInformationCount)
 		_numberOfUnAcknowledgedInformations.setValue(unAcknowledgedInformationCount)
-	}
-
-	function populate() {
-		for (let i = 0; i < dummyNotifications.length; ++i) {
-			addNotification(dummyNotifications[i])
-		}
-	}
-
-	Component.onCompleted: {
-		root.date26MinutesAgo.setMinutes(root.date26MinutesAgo.getMinutes() - 26)
-		root.date2h10mAgo.setMinutes(root.date2h10mAgo.getMinutes() - 130)
-		root.date1dAgo.setHours(root.date1dAgo.getHours() - 24)
-		root.date8dAgo.setDate(root.date8dAgo.getDate() - 8)
-		populate()
 	}
 }
