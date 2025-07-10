@@ -79,7 +79,7 @@ T.Dialog {
 	makes it scale properly when you shrink the window. See https://bugreports.qt.io/browse/QTBUG-127068
 	*/
 	width: Theme.geometry_modalDialog_width
-	height: Theme.geometry_modalDialog_height
+	height: header.height + contentHeight + footer.height
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true
