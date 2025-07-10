@@ -6,11 +6,12 @@
 # https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2
 
 
-# Check if the script is run on Ubuntu 24.x or later
-if [[ "$(lsb_release -is)" == "Ubuntu" && "$(lsb_release -rs)" =~ ^24 ]]; then
-    echo "Running on Ubuntu 24.x or later"
+# Check if the script is run on Ubuntu 22.x or later
+UBUNTU_VERSION=$(lsb_release -rs | cut -d. -f1)
+if [[ "$(lsb_release -is)" == "Ubuntu" && "$UBUNTU_VERSION" -ge 22 ]]; then
+    echo "Running on Ubuntu $(lsb_release -rs | cut -f1)"
 else
-    echo "This script requires Ubuntu 24.x or later"
+    echo "This script requires Ubuntu 22.x or later"
     exit 1
 fi
 
