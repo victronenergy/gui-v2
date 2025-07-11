@@ -171,6 +171,9 @@ QtObject {
 	//% "Disconnected"
 	readonly property string disconnected: qsTrId("common_words_disconnected")
 
+	//% "Discovered devices"
+	readonly property string discovered_devices: qsTrId("common_words_discovered_devices")
+
 	//% "Enable"
 	readonly property string enable: qsTrId("common_words_enable")
 

@@ -52,6 +52,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Shelly Devices"
+				text: qsTrId("pagesettingsintegrations_shelly_devices")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShelly.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
