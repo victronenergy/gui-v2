@@ -542,6 +542,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsShelly.qml
     pages/settings/PageSettingsSignalK.qml
     pages/settings/PageSettingsSupportStatus.qml
     pages/settings/PageSettingsSystem.qml
@@ -948,6 +949,7 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/services/relays.json
         data/mock/conf/services/ruuvi-fridge.json
         data/mock/conf/services/ruuvi-salon.json
+        data/mock/conf/services/shelly.json
         data/mock/conf/services/skylla-charger.json
         data/mock/conf/services/smartshunt-battery.json
         data/mock/conf/services/smartshunt-dcsource.json

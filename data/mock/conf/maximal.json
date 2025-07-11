@@ -37,6 +37,7 @@
         ":/data/mock/conf/services/ruuvi-fridge.json",
         ":/data/mock/conf/services/ruuvi-salon.json",
         ":/data/mock/conf/services/skylla-charger.json",
+        ":/data/mock/conf/services/shelly.json",
         ":/data/mock/conf/services/smartshunt-battery.json",
         ":/data/mock/conf/services/smartswitch.json",
         ":/data/mock/conf/services/tank-blackwater-error-state.json",
