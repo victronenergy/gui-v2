@@ -47,8 +47,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Discovered devices"
-				text: qsTrId("page_settings_modbus_discovered_devices")
+				text: CommonWords.discovered_devices
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusDiscovered.qml", {"title": root.title})
 			}
 		}
