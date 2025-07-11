@@ -17,7 +17,7 @@ jobs:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
@@ -56,13 +56,13 @@ jobs:
 
       - name: Install Qt ${{env.QT_VERSION}} linux desktop
         if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
-          aqtversion: '==3.1.*'
+          aqtversion: '==3.3.*'
           version: "${{env.QT_VERSION}}"
           host: 'linux'
           target: 'desktop'
-          arch: 'gcc_64'
+          arch: 'linux_gcc_64'
           modules: 'qtwebsockets qt5compat qtshadertools'
           dir: '${{env.OUTPUTDIR}}'
 
