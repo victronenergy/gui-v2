@@ -126,8 +126,15 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     mv ../build-wasm_files_to_copy/wasm/venus-gui-v2.html ../build-wasm_files_to_copy/wasm/index.html
 
     # Apply patches
-    grep -q -E '^var createQtAppInstance' ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
-    sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+    venus_gui_v2_js_file="../build-wasm_files_to_copy/wasm/venus-gui-v2.js"
+
+    if grep -q -E '^var createQtAppInstance' "$venus_gui_v2_js_file"; then
+        sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+    fi
+
+    # Fix for qt6.8.3 - append $line to the .js file if it's not already there
+    line="window.createQtAppInstance = venus_gui_v2_entry;"
+    grep -qxF "$line" "$venus_gui_v2_js_file" || echo "$line" >> "$venus_gui_v2_js_file"
 
     # Compress the wasm file
     gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
