@@ -24,7 +24,7 @@ Page {
 		delegate: ListSpinBox {
 			id: listDelegate
 
-			text: "%1 [%2]".arg(customName.value || modelName.value).arg(uniqueNumber.value)
+			text: "%1 [%2]".arg(customName.value || modelName.value).arg(""+uniqueNumber.value)
 			//% "VE.Can Instance# %1"
 			secondaryText: qsTrId("settings_vecan_device_number").arg(dataItem.value)
 			dataItem.uid: model.uid + "/DeviceInstance"
