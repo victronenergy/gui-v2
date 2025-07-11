@@ -542,6 +542,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRvcDevice.qml
     pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
+    pages/settings/PageSettingsShelly.qml
     pages/settings/PageSettingsSignalK.qml
     pages/settings/PageSettingsSupportStatus.qml
     pages/settings/PageSettingsSystem.qml
