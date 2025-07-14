@@ -78,6 +78,18 @@ QtObject {
 			display: qsTrId("settings_up_but_no_services_500"),
 			value: VenusOS.CanBusProfile_None500,
 			readOnly: true
+		},
+		{
+			//% "CANopen Motor drive (250 kbit/s)"
+			display: qsTrId("settings_canopen_motordrive_250"),
+			value: VenusOS.CanBusProfile_CanOpenMotordrive250,
+			readOnly: isReadOnly(VenusOS.CanBusProfile_CanOpenMotordrive250)
+		},
+		{
+			//% "CANopen Motor drive (500 kbit/s)"
+			display: qsTrId("settings_canopen_motordrive_500"),
+			value: VenusOS.CanBusProfile_CanOpenMotordrive500,
+			readOnly: isReadOnly(VenusOS.CanBusProfile_CanOpenMotordrive500)
 		}
 	]
 

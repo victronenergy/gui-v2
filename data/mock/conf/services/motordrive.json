@@ -21,12 +21,18 @@
         "/N2kUniqueNumber": 655188,
         "/ProductId": 45155,
         "/ProductName": "Motordrive Simulation",
-        "/Serial": null
+        "/Serial": null,
+        "/Settings/Motor/DirectionInverted": 0
     },
     "com.victronenergy.settings": {
         "/Settings/Gui/ElectricPropulsionUI/Enabled": 1,
         "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type": 0,
         "/Settings/Gui/Gauges/MotorDrive/Power/Max": 20000,
         "/Settings/Gui/Gauges/MotorDrive/RPM/Max": 6000
+    },
+    "com.victronenergy.canopenmotordrive.vecan0": {
+        "/Scan": 0,
+        "/ScanProgress": 0,
+        "/DiscoveredNodes": "1,36"
     }
 }
