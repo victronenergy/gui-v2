@@ -89,11 +89,12 @@ if [ ! -f "${METADATA_FILE}" ]; then
     exit 1
 fi
 
-# Create backup
-cp "${METADATA_FILE}" "${METADATA_FILE}.backup"
+if [ ! -f "${METADATA_FILE}.backup" ]; then
+    # Create backup
+    cp "${METADATA_FILE}" "${METADATA_FILE}.backup"
 
-# Apply the specific patch for Qt 6.8.3 nested directory structure
-python3 << 'PATCH_EOF'
+    # Apply the specific patch for Qt 6.8.3 nested directory structure
+    python3 << 'PATCH_EOF'
 import re
 
 metadata_file = "/opt/venus/python/lib/python3.12/site-packages/aqt/metadata.py"
@@ -101,6 +102,12 @@ metadata_file = "/opt/venus/python/lib/python3.12/site-packages/aqt/metadata.py"
 # Read the file
 with open(metadata_file, 'r') as f:
     content = f.read()
+
+# Check if patch marker is already present
+patch_marker = "# Handle Qt 6.8+ nested directory structure - Victron Energy patch"
+if patch_marker in content:
+    print("✓ Patch already applied, skipping.")
+    exit(0)
 
 # Find the exact line pattern and show it
 lines = content.split('\n')
@@ -124,7 +131,7 @@ if target_line_num is None:
 
 # Create the replacement code
 replacement_lines = [
-    "        # Handle Qt 6.8+ nested directory structure",
+    patch_marker,
     "        if folder.startswith(\"qt6_\") and len(folder) == 6 and folder[4:].isdigit():",
     "            version_code = folder[4:]  # Extract version number like \"683\" from \"qt6_683\"",
     "            if int(version_code) >= 680:",
@@ -148,10 +155,11 @@ with open(metadata_file, 'w') as f:
 print("Successfully patched aqtinstall for Qt 6.8.3 nested directory structure")
 PATCH_EOF
 
-if [ $? -ne 0 ]; then
-    echo "ERROR: Failed to patch aqtinstall"
-    exit 1
-fi
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to patch aqtinstall"
+        exit 1
+    fi
+fi # [ ! -f "${METADATA_FILE}.backup" ]
 
 # Create the output directory and change ownership
 sudo mkdir -p ${OUTPUTDIR}
