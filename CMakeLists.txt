@@ -79,7 +79,7 @@ endif()
 set(REQUIRED_QT_VERSION 6.8.3) # qt 6.8.3 required for 'qt_standard_project_setup(...)' to work
 
 # Common Qt components for all platforms
-find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick Svg Xml Mqtt LinguistTools REQUIRED)
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS Core Gui Qml Quick QuickControls2 Svg Xml Mqtt LinguistTools REQUIRED)
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -142,14 +142,6 @@ endif()
 # end TODO
 
 list(APPEND TS_CODES "af" "ar" "cs" "da" "de" "es" "fr" "it" "nl" "pl" "ro" "ru" "sv" "th" "tr" "uk" "zh_CN")
-list(APPEND TS_FILES ${TS_CODES})
-list(TRANSFORM TS_FILES PREPEND "i18n/${PROJECT_NAME}_")
-list(TRANSFORM TS_FILES APPEND ".ts")
-list(APPEND TS_FILES "i18n/${PROJECT_NAME}.ts")
-
-list(APPEND BUILD_DIR_TS_FILES ${TS_FILES} i18n/${PROJECT_NAME}_en.ts)
-list(TRANSFORM BUILD_DIR_TS_FILES PREPEND "${CMAKE_CURRENT_BINARY_DIR}/")
-
 qt_standard_project_setup(REQUIRES ${REQUIRED_QT_VERSION}
     I18N_SOURCE_LANGUAGE en # optional - this is the default
     I18N_TRANSLATED_LANGUAGES ${TS_CODES}
@@ -1107,6 +1099,111 @@ list(APPEND TRANSLATION_SOURCES
     ${SOURCES}
 )
 
+# Add targets to update the ts files from poeditor.
+foreach(code IN LISTS TS_CODES)
+    set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${code}.ts)
+    set(new_target ${PROJECT_NAME}_${code})
+    add_custom_target( ${new_target}
+        COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/download_from_poeditor.sh ${code} ${output_file}"
+    )
+    list(APPEND TS_TARGETS ${new_target})
+endforeach()
+
+add_custom_target(download_translations
+    DEPENDS ${TS_TARGETS}
+)
+
+add_custom_target(upload_translations
+    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+    DEPENDS ${PROJECT_NAME}
+)
+
+# Copy the input .ts files to the build directory before running lupdate on the copies.
+# That way if new entries are added in code, the updates don't pollute the git diff.
+# Then run lupdate manually and lrelease manually, and mark the generated files as GENERATED TRUE
+# to force CMake to respect an appropriate dependency ordering.
+SET(BUILD_DIR_TS_FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+)
+SET(BUILD_DIR_QM_FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
+)
+SET(TRANSLATION_RESOURCE_FILES
+    "<file>${PROJECT_NAME}_en.qm</file>"
+)
+foreach(TsCode ${TS_CODES})
+    list(APPEND BUILD_DIR_QM_FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
+    )
+    list(APPEND BUILD_DIR_TS_FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
+    )
+endforeach()
+
+find_program(QT_TOOL_LUPDATE
+    NAMES lupdate
+    HINTS ${Qt6_DIR}
+    PATH_SUFFIXES bin
+)
+
+find_program(QT_TOOL_LRELEASE
+    NAMES lrelease
+    HINTS ${Qt6_DIR}
+    PATH_SUFFIXES bin
+)
+
+list(APPEND ABSOLUTE_PATH_TRANSLATION_SOURCES ${TRANSLATION_SOURCES})
+list(TRANSFORM ABSOLUTE_PATH_TRANSLATION_SOURCES PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt"
+    CONTENT "$<JOIN:${ABSOLUTE_PATH_TRANSLATION_SOURCES},\n>"
+)
+add_custom_target(${PROJECT_NAME}_generate_translation_sources_file ALL
+    COMMAND ${CMAKE_COMMAND} -E touch "${CMAKE_CURRENT_BINARY_DIR}/output.txt"
+    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt"
+)
+
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}.ts" "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+    COMMENT "copying: ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}.ts to ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+)
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm
+    COMMAND ${QT_TOOL_LUPDATE} -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+    COMMAND ${QT_TOOL_LRELEASE} -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
+    DEPENDS ${BUILD_DIR_TS_FILES}
+    COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_en.ts"
+)
+foreach(TsCode ${TS_CODES})
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
+        COMMENT "copying: ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts to ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
+    )
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm
+        COMMAND ${QT_TOOL_LUPDATE} -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
+        COMMAND ${QT_TOOL_LRELEASE} -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
+        DEPENDS ${BUILD_DIR_TS_FILES}
+        COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_${TsCode}.ts"
+    )
+endforeach()
+
+set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm" PROPERTIES
+    QT_RESOURCE_ALIAS "${PROJECT_NAME}_en.qm"
+    GENERATED TRUE
+)
+foreach(TsCode ${TS_CODES})
+    set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm" PROPERTIES
+        QT_RESOURCE_ALIAS "${PROJECT_NAME}_${TsCode}.qm"
+        GENERATED TRUE
+    )
+endforeach()
+add_custom_target(${PROJECT_NAME}_qm_files_exist
+    DEPENDS ${BUILD_DIR_QM_FILES}
+)
+
+
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     qt_add_executable(${PROJECT_NAME}
         ${SOURCES}
@@ -1320,38 +1417,11 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         themes/typography/TypographyDesign.json
 )
 
-# Copy the input .ts files to the build directory before running lupdate on the copies.
-# That way if new entries are added in code, the updates don't pollute the git diff.
-file(COPY ${TS_FILES} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/i18n") # build directory
-configure_file(i18n/${PROJECT_NAME}.ts ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts) # this is the least clumsy way to copy-and-rename a file in cmake
-
-foreach(code IN LISTS TS_CODES)
-    set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${code}.ts)
-    set(new_target ${PROJECT_NAME}_${code})
-    add_custom_target( ${new_target}
-        COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/download_from_poeditor.sh ${code} ${output_file}"
-    )
-    list(APPEND TS_TARGETS ${new_target})
-endforeach()
-
-add_custom_target(download_translations
-    DEPENDS ${TS_TARGETS}
+qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
+    PREFIX "/i18n"
+    FILES ${BUILD_DIR_QM_FILES}
 )
-
-add_custom_target(upload_translations
-    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
-    DEPENDS ${PROJECT_NAME}
-)
-
-# This adds 2 new targets, venus-gui-v2_lupdate and venus-gui-v2_lrelease. Parallel builds (eg. 'make -j') do not rebuild venus-gui-v2_lrelease correctly without further 'add_dependencies' hackery
-qt_add_translations( ${PROJECT_NAME}
-    TS_FILES ${BUILD_DIR_TS_FILES}
-    SOURCES ${TRANSLATION_SOURCES}
-    LUPDATE_OPTIONS -no-obsolete
-    LRELEASE_OPTIONS -idbased
-)
-
-add_dependencies(${PROJECT_NAME} venus-gui-v2_lupdate)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_qm_files_exist)
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
