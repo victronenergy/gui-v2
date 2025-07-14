@@ -1140,17 +1140,7 @@ foreach(TsCode ${TS_CODES})
     )
 endforeach()
 
-find_program(QT_TOOL_LUPDATE
-    NAMES lupdate
-    HINTS ${Qt6_DIR}
-    PATH_SUFFIXES bin
-)
 
-find_program(QT_TOOL_LRELEASE
-    NAMES lrelease
-    HINTS ${Qt6_DIR}
-    PATH_SUFFIXES bin
-)
 
 list(APPEND ABSOLUTE_PATH_TRANSLATION_SOURCES ${TRANSLATION_SOURCES})
 list(TRANSFORM ABSOLUTE_PATH_TRANSLATION_SOURCES PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
@@ -1169,8 +1159,8 @@ add_custom_command(
 )
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm
-    COMMAND ${QT_TOOL_LUPDATE} -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
-    COMMAND ${QT_TOOL_LRELEASE} -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
+    COMMAND Qt6::lupdate -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
+    COMMAND Qt6::lrelease -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
     DEPENDS ${BUILD_DIR_TS_FILES}
     COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_en.ts"
 )
@@ -1182,8 +1172,8 @@ foreach(TsCode ${TS_CODES})
     )
     add_custom_command(
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm
-        COMMAND ${QT_TOOL_LUPDATE} -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
-        COMMAND ${QT_TOOL_LRELEASE} -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
+        COMMAND Qt6::lupdate -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
+        COMMAND Qt6::lrelease -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
         DEPENDS ${BUILD_DIR_TS_FILES}
         COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_${TsCode}.ts"
     )
