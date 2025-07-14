@@ -9,12 +9,12 @@
       <translation>พิการ</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="262"/>
+      <location filename="../../components/CommonWords.qml" line="265"/>
       <source>Inverter overload</source>
       <translation>โอเวอร์โหลดอินเวอร์เตอร์</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="392"/>
+      <location filename="../../components/CommonWords.qml" line="395"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>พลังงาน</translation>
@@ -115,8 +115,13 @@
       <source>Generator</source>
       <translation type="unfinished">เครื่องกำเนิดไฟฟ้า</translation>
     </message>
+    <message id="common_words_gx_device_relays">
+      <location filename="../../components/CommonWords.qml" line="217"/>
+      <source>GX device relays</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="220"/>
+      <location filename="../../components/CommonWords.qml" line="223"/>
       <source>High battery voltage</source>
       <translation>แรงดันแบตเตอรี่สูง</translation>
     </message>
@@ -126,12 +131,12 @@
       <translation>อินเวอร์เตอร์/เครื่องชาร์จ</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="271"/>
+      <location filename="../../components/CommonWords.qml" line="274"/>
       <source>Low battery voltage</source>
       <translation>แรงดันแบตเตอรี่ต่ำ</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="290"/>
+      <location filename="../../components/CommonWords.qml" line="293"/>
       <source>Manual</source>
       <translation>คู่มือ</translation>
     </message>
@@ -141,19 +146,19 @@
       <translation>ไม่มี</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="399"/>
+      <location filename="../../components/CommonWords.qml" line="402"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>ตำแหน่ง</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="461"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation>ความเร็ว</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="479"/>
+      <location filename="../../components/CommonWords.qml" line="482"/>
       <source>State</source>
       <translation>สถานะ</translation>
     </message>
@@ -275,7 +280,7 @@
       <translation>จีพีเอส</translation>
     </message>
     <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="92"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="117"/>
       <source>Tank pump</source>
       <translation>ปั๊มถัง</translation>
     </message>
@@ -293,11 +298,6 @@
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="23"/>
       <source>Autostart</source>
       <translation>เริ่มอัตโนมัติ</translation>
-    </message>
-    <message id="controlcard_switches">
-      <location filename="../../pages/controlcards/SwitchesCard.qml" line="16"/>
-      <source>Switches</source>
-      <translation>สวิตช์</translation>
     </message>
     <message id="settings_access_level">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
@@ -440,7 +440,7 @@
       <translation>วิ่งแล้ว</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="296"/>
+      <location filename="../../components/CommonWords.qml" line="299"/>
       <source>Manual start</source>
       <translation>เริ่มด้วยตัวเอง</translation>
     </message>
@@ -884,7 +884,7 @@
       <translation>ตกลง: ไม่มีอุปกรณ์อื่นเชื่อมต่อกับหมายเลขเฉพาะนี้</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="332"/>
+      <location filename="../../components/CommonWords.qml" line="335"/>
       <source>Network status</source>
       <translation>สถานะเครือข่าย</translation>
     </message>
@@ -2189,68 +2189,58 @@ Use unless prohibited by the utility provider.</source>
       <translation>บริการที่มีจำหน่าย</translation>
     </message>
     <message id="settings_relay_function_relay1">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="30"/>
       <source>Function (Relay 1)</source>
       <translation>ฟังก์ชั่น (รีเลย์ 1)</translation>
     </message>
     <message id="settings_relay_function">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="32"/>
       <source>Function</source>
       <translation>ฟังก์ชั่น</translation>
     </message>
     <message id="settings_relay_alarm_relay">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="26"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="36"/>
       <source>Alarm relay</source>
       <translation>รีเลย์ปลุก</translation>
     </message>
     <message id="settings_relay_tank_pump">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="32"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="42"/>
       <source>Tank pump</source>
       <translation type="unfinished">ปั๊มถัง</translation>
     </message>
     <message id="settings_relay_manual">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="34"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="91"/>
       <source>Manual</source>
       <translation type="unfinished">คู่มือ</translation>
     </message>
+    <message id="settings_relay_manual_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="59"/>
+      <source>The Relay can now be found in the devices list</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_relay_alarm_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="71"/>
       <source>Alarm relay polarity</source>
       <translation>ขั้วรีเลย์สัญญาณเตือน</translation>
     </message>
     <message id="settings_relay_normally_open">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
       <source>Normally open</source>
       <translation>ปกติเปิด</translation>
     </message>
     <message id="settings_relay_normally_closed">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
       <source>Normally closed</source>
       <translation>ปกติปิด</translation>
     </message>
-    <message id="settings_relay_relay1on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="73"/>
-      <source>Relay 1 on</source>
-      <translation>รีเลย์ 1 เปิด</translation>
-    </message>
-    <message id="settings_relay_on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="75"/>
-      <source>Relay on</source>
-      <translation>เปิดรีเลย์</translation>
-    </message>
     <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="86"/>
       <source>Function (Relay 2)</source>
       <translation>ฟังก์ชั่น (รีเลย์ 2)</translation>
     </message>
-    <message id="settings_relay_relay2on">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
-      <source>Relay 2 on</source>
-      <translation>รีเลย์ 2 เปิด</translation>
-    </message>
     <message id="settings_relay_temp_control_rules">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
       <source>Temperature control rules</source>
       <translation>กฎการควบคุมอุณหภูมิ</translation>
     </message>
@@ -2664,25 +2654,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="600"/>
+      <location filename="../../components/CommonWords.qml" line="603"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>ข้อผิดพลาดล่าสุด</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="603"/>
+      <location filename="../../components/CommonWords.qml" line="606"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 2</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="606"/>
+      <location filename="../../components/CommonWords.qml" line="609"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 3</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="609"/>
+      <location filename="../../components/CommonWords.qml" line="612"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 4</translation>
@@ -2698,7 +2688,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>การตั้งค่าโหมด</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="121"/>
+      <location filename="../../data/SystemSettings.qml" line="123"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>สแตนด์อโลน</translation>
@@ -2754,7 +2744,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">ตัวรอง</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="105"/>
+      <location filename="../../data/SystemSettings.qml" line="107"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>ตัวรอง</translation>
@@ -2780,7 +2770,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>แรงดันไฟชาร์จ</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="428"/>
+      <location filename="../../components/CommonWords.qml" line="431"/>
       <source>Reset</source>
       <translation>รีเซ็ต</translation>
     </message>
@@ -2835,12 +2825,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>ปริมาณ</translation>
     </message>
     <message id="tank_status_short_circuited">
-      <location filename="../../data/Tanks.qml" line="172"/>
+      <location filename="../../data/Tanks.qml" line="177"/>
       <source>Short circuited</source>
       <translation>ลัดวงจร</translation>
     </message>
     <message id="tank_status_reverse_polarity">
-      <location filename="../../data/Tanks.qml" line="175"/>
+      <location filename="../../data/Tanks.qml" line="180"/>
       <source>Reverse polarity</source>
       <translation>ขั้วย้อนกลับ</translation>
     </message>
@@ -2965,7 +2955,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ไม่รองรับ</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="99"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="124"/>
       <source>Remove disconnected devices</source>
       <translation>ถอดอุปกรณ์ที่ไม่ได้เชื่อมต่อ</translation>
     </message>
@@ -3001,7 +2991,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">ฟิวส์ขาด</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="293"/>
+      <location filename="../../components/CommonWords.qml" line="296"/>
       <source>Manual control</source>
       <translation>ควบคุมด้วยมือ</translation>
     </message>
@@ -3057,7 +3047,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>สัญลักษณ์แจ้งเตือน</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="502"/>
+      <location filename="../../components/CommonWords.qml" line="505"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>สวิตช์</translation>
@@ -4031,13 +4021,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>จำนวนการเริ่มต้น</translation>
     </message>
     <message id="ac-in-modeldefault_front_selector_locked">
-      <location filename="../../components/listitems/ListAcInError.qml" line="23"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="26"/>
       <source>Front selector locked (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>ล็อคตัวเลือกด้านหน้า (%1)</translation>
     </message>
     <message id="ac-in-modeldefault_no_error">
-      <location filename="../../components/listitems/ListAcInError.qml" line="27"/>
+      <location filename="../../components/listitems/ListAcInError.qml" line="30"/>
       <source>No error (%1)</source>
       <extracomment>%1 = the error number</extracomment>
       <translation>ไม่มีข้อผิดพลาด (%1)</translation>
@@ -4110,13 +4100,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อุปกรณ์ Smappee bus</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="341"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <oldsource>This setting is disabled when a Digital Multi Control is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>การตั้งค่านี้จะถูกปิดใช้งานเมื่อเชื่อมต่อ Digital Multi Control</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="344"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <oldsource>This setting is disabled when a VE.Bus BMS is connected. If it was recently disconnected execute 'Redetect system' that is available below on this menu.</oldsource>
       <translation>การตั้งค่านี้ถูกปิดใช้งานเมื่อมีการเชื่อมต่อ VE.Bus BMS</translation>
@@ -4273,7 +4263,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>พลัง PV ทั้งหมด</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="414"/>
       <source>Product page</source>
       <translation>หน้าสินค้า</translation>
     </message>
@@ -4530,7 +4520,7 @@ Do you want to continue?</source>
       <translation>สมบูรณ์</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Pending</source>
       <translation>รอดำเนินการ</translation>
     </message>
@@ -4775,23 +4765,23 @@ Do you want to continue?</source>
       <translation>เอซี อิน</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="242"/>
+      <location filename="../../components/CommonWords.qml" line="245"/>
       <source>Idle</source>
       <translation type="unfinished">ว่าง</translation>
     </message>
     <message id="common_words_image_type">
-      <location filename="../../components/CommonWords.qml" line="245"/>
+      <location filename="../../components/CommonWords.qml" line="248"/>
       <source>Image type</source>
       <translation type="unfinished">ประเภทรูปภาพ</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="249"/>
+      <location filename="../../components/CommonWords.qml" line="252"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">ไม่ใช้งาน</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="255"/>
+      <location filename="../../components/CommonWords.qml" line="258"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">อินเวอร์เตอร์/เครื่องชาร์จ</translation>
     </message>
@@ -5006,38 +4996,38 @@ Do you want to continue?</source>
       <translation>เครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="217"/>
+      <location filename="../../components/CommonWords.qml" line="220"/>
       <source>High battery temperature</source>
       <translation>อุณหภูมิแบตเตอรี่สูง</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="224"/>
+      <location filename="../../components/CommonWords.qml" line="227"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>สัญญาณเตือนระดับสูง</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="227"/>
+      <location filename="../../components/CommonWords.qml" line="230"/>
       <source>High starter battery voltage</source>
       <translation>แรงดันแบตเตอรี่สตาร์ทสูง</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="230"/>
+      <location filename="../../components/CommonWords.qml" line="233"/>
       <source>High temperature</source>
       <translation>อุณหภูมิสูง</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="233"/>
+      <location filename="../../components/CommonWords.qml" line="236"/>
       <source>High voltage alarms</source>
       <translation>สัญญาณเตือนไฟฟ้าแรงสูง</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="236"/>
+      <location filename="../../components/CommonWords.qml" line="239"/>
       <source>History</source>
       <translation>ประวัติศาสตร์</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="239"/>
+      <location filename="../../components/CommonWords.qml" line="242"/>
       <source>%1 Hour(s)</source>
       <translation>%1 ชั่วโมง</translation>
     </message>
@@ -5053,73 +5043,73 @@ Do you want to continue?</source>
       <translation>ไม่ใช้งาน</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="265"/>
+      <location filename="../../components/CommonWords.qml" line="268"/>
       <source>IP address</source>
       <translation>ที่อยู่ IP</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="268"/>
+      <location filename="../../components/CommonWords.qml" line="271"/>
       <source>Low battery temperature</source>
       <translation>อุณหภูมิแบตเตอรี่ต่ำ</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="275"/>
+      <location filename="../../components/CommonWords.qml" line="278"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>สัญญาณเตือนระดับต่ำ</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="278"/>
+      <location filename="../../components/CommonWords.qml" line="281"/>
       <source>Low starter battery voltage</source>
       <translation>แรงดันแบตเตอรี่สตาร์ทต่ำ</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="281"/>
+      <location filename="../../components/CommonWords.qml" line="284"/>
       <source>Low state-of-charge</source>
       <translation>สถานะการชาร์จต่ำ</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="284"/>
+      <location filename="../../components/CommonWords.qml" line="287"/>
       <source>Low temperature</source>
       <translation>อุณหภูมิต่ำ</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="287"/>
+      <location filename="../../components/CommonWords.qml" line="290"/>
       <source>Low voltage alarms</source>
       <translation>สัญญาณเตือนแรงดันต่ำ</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="302"/>
+      <location filename="../../components/CommonWords.qml" line="305"/>
       <source>Manufacturer</source>
       <translation>ผู้ผลิต</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="311"/>
+      <location filename="../../components/CommonWords.qml" line="314"/>
       <source>Maximum temperature</source>
       <translation>อุณหภูมิสูงสุด</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="314"/>
+      <location filename="../../components/CommonWords.qml" line="317"/>
       <source>Maximum voltage</source>
       <translation>แรงดันไฟฟ้าสูงสุด</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="323"/>
       <source>Minimum temperature</source>
       <translation>อุณหภูมิต่ำสุด</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="326"/>
       <source>Minimum voltage</source>
       <translation>แรงดันไฟฟ้าขั้นต่ำ</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="329"/>
       <source>Mode</source>
       <translation>โหมด</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="329"/>
+      <location filename="../../components/CommonWords.qml" line="332"/>
       <source>Model name</source>
       <translation>ชื่อรุ่น</translation>
     </message>
@@ -5130,7 +5120,7 @@ Do you want to continue?</source>
       <translation>ไม่</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="344"/>
+      <location filename="../../components/CommonWords.qml" line="347"/>
       <source>No error</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
@@ -5140,12 +5130,12 @@ Do you want to continue?</source>
       <translation>ไม่ว่าง</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="357"/>
+      <location filename="../../components/CommonWords.qml" line="360"/>
       <source>Not connected</source>
       <translation>ไม่ได้เชื่อมต่อ</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="363"/>
+      <location filename="../../components/CommonWords.qml" line="366"/>
       <source>Offline</source>
       <translation>ออฟไลน์</translation>
     </message>
@@ -5162,7 +5152,7 @@ Do you want to continue?</source>
       <translation>เปิด</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="372"/>
+      <location filename="../../components/CommonWords.qml" line="375"/>
       <source>Online</source>
       <translation>ออนไลน์</translation>
     </message>
@@ -5173,59 +5163,59 @@ Do you want to continue?</source>
       <translation>เปิด</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <source>Password</source>
       <translation>รหัสผ่าน</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="395"/>
+      <location filename="../../components/CommonWords.qml" line="398"/>
       <source>Phase</source>
       <translation>เฟส</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="402"/>
+      <location filename="../../components/CommonWords.qml" line="405"/>
       <source>Press to clear</source>
       <translation>กดเพื่อล้าง</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="405"/>
+      <location filename="../../components/CommonWords.qml" line="408"/>
       <source>Press to reset</source>
       <translation>กดเพื่อรีเซ็ต</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="408"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>Press to scan</source>
       <translation>กดเพื่อสแกน</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="417"/>
       <source>PV Inverter</source>
       <translation>PV อินเวอร์เตอร์</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>พีวี พาวเวอร์</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="421"/>
+      <location filename="../../components/CommonWords.qml" line="424"/>
       <source>Quiet hours</source>
       <translation>ชั่วโมงที่เงียบสงบ</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="425"/>
+      <location filename="../../components/CommonWords.qml" line="428"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>รีเลย์</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="431"/>
+      <location filename="../../components/CommonWords.qml" line="434"/>
       <source>Reboot</source>
       <translation>รีบูต</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="434"/>
+      <location filename="../../components/CommonWords.qml" line="437"/>
       <source>Remove</source>
       <translation>ลบ</translation>
     </message>
@@ -5236,12 +5226,12 @@ Do you want to continue?</source>
       <translation>ทำงาน</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="441"/>
+      <location filename="../../components/CommonWords.qml" line="444"/>
       <source>Scanning %1%</source>
       <translation>กำลังสแกน %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="444"/>
+      <location filename="../../components/CommonWords.qml" line="447"/>
       <source>Serial number</source>
       <translation>หมายเลขซีเรียล</translation>
     </message>
@@ -5251,12 +5241,12 @@ Do you want to continue?</source>
       <translation>การตั้งค่า</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Setup</source>
       <translation>ติดตั้ง</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Signal strength</source>
       <translation>ความแรงของสัญญาณ</translation>
     </message>
@@ -5267,32 +5257,32 @@ Do you want to continue?</source>
       <translation>สแตนด์บาย</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="467"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Start after the condition is reached for</source>
       <translation>เริ่มเมื่อถึงเงื่อนไขสำหรับ</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="470"/>
+      <location filename="../../components/CommonWords.qml" line="473"/>
       <source>Start time</source>
       <translation>เวลาเริ่มต้น</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="473"/>
+      <location filename="../../components/CommonWords.qml" line="476"/>
       <source>Start value during quiet hours</source>
       <translation>มูลค่าเริ่มต้นในช่วงเวลาที่เงียบสงบ</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="476"/>
+      <location filename="../../components/CommonWords.qml" line="479"/>
       <source>Start when warning is active for</source>
       <translation>เริ่มเมื่อมีการเตือนสำหรับ</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="482"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>State of charge</source>
       <translation>สถานะของค่าใช้จ่าย</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="488"/>
       <source>Status</source>
       <translation>สถานะ</translation>
     </message>
@@ -5303,12 +5293,12 @@ Do you want to continue?</source>
       <translation>การเริ่มต้น (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="492"/>
+      <location filename="../../components/CommonWords.qml" line="495"/>
       <source>Stop value during quiet hours</source>
       <translation>ค่าหยุดในช่วงเวลาที่เงียบสงบ</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="495"/>
+      <location filename="../../components/CommonWords.qml" line="498"/>
       <source>Stop after the condition is reached for</source>
       <translation>หยุดเมื่อถึงเงื่อนไขสำหรับ</translation>
     </message>
@@ -5319,68 +5309,68 @@ Do you want to continue?</source>
       <translation>หยุด</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="505"/>
+      <location filename="../../components/CommonWords.qml" line="508"/>
       <source>Temperature</source>
       <translation>อุณหภูมิ</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="508"/>
+      <location filename="../../components/CommonWords.qml" line="511"/>
       <source>Temperature sensor</source>
       <translation>เซ็นเซอร์อุณหภูมิ</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="511"/>
+      <location filename="../../components/CommonWords.qml" line="514"/>
       <source>Today</source>
       <translation>วันนี้</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="514"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>Total</source>
       <translation>ทั้งหมด</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="518"/>
+      <location filename="../../components/CommonWords.qml" line="521"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>ตัวติดตาม</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="521"/>
+      <location filename="../../components/CommonWords.qml" line="524"/>
       <source>Type</source>
       <translation>พิมพ์</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="524"/>
+      <location filename="../../components/CommonWords.qml" line="527"/>
       <source>Unique Identity Number</source>
       <translation>หมายเลขประจำตัวที่ไม่ซ้ำกัน</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="531"/>
+      <location filename="../../components/CommonWords.qml" line="534"/>
       <source>VE.Bus Error</source>
       <translation>ข้อผิดพลาดของ VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="534"/>
+      <location filename="../../components/CommonWords.qml" line="537"/>
       <source>Voltage</source>
       <translation>แรงดันไฟฟ้า</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="537"/>
+      <location filename="../../components/CommonWords.qml" line="540"/>
       <source>VRM instance</source>
       <translation>อินสแตนซ์ VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="540"/>
+      <location filename="../../components/CommonWords.qml" line="543"/>
       <source>When warning is cleared stop after</source>
       <translation>ให้หยุดหลังจากคำเตือนถูกลบออก</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="546"/>
+      <location filename="../../components/CommonWords.qml" line="549"/>
       <source>Yesterday</source>
       <translation>เมื่อวาน</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="550"/>
+      <location filename="../../components/CommonWords.qml" line="553"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิต</translation>
@@ -6069,7 +6059,7 @@ Do you want to continue?</source>
       <translation>ข้อผิดพลาดของโปรโตคอล MQTT ระดับ 5</translation>
     </message>
     <message id="notifications_silence_alarm">
-      <location filename="../../components/StatusBar.qml" line="306"/>
+      <location filename="../../components/StatusBar.qml" line="309"/>
       <source>Silence alarm</source>
       <translation>ปลุกเงียบ</translation>
     </message>
@@ -6387,7 +6377,7 @@ Do you want to continue?</source>
       <translation type="unfinished">พิการ</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
-      <location filename="../../data/Ess.qml" line="34"/>
+      <location filename="../../data/Ess.qml" line="20"/>
       <source>Keep batteries charged</source>
       <translation>เก็บแบตเตอรี่ไว้</translation>
     </message>
@@ -6482,12 +6472,12 @@ Do you want to continue?</source>
       <translation>เริ่มต้นด้วยตนเอง</translation>
     </message>
     <message id="notifications_toast_short_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="13"/>
+      <location filename="../../data/mock/MockShortcuts.qml" line="66"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi.</translation>
     </message>
     <message id="notifications_toast_long_text">
-      <location filename="../../data/mock/config/NotificationsPageConfig.qml" line="16"/>
+      <location filename="../../data/mock/MockShortcuts.qml" line="68"/>
       <source>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
@@ -6508,12 +6498,6 @@ Do you want to continue?</source>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>ทำงาน (จำกัด)</translation>
-    </message>
-    <message id="controlcard_switches_relay_name">
-      <location filename="../../pages/controlcards/SwitchesCard.qml" line="34"/>
-      <source>Relay %1</source>
-      <extracomment>%1 = Relay number</extracomment>
-      <translation>รีเลย์ %1</translation>
     </message>
     <message id="solarchargers_state_fault">
       <location filename="../../src/enums.cpp" line="244"/>
@@ -6641,25 +6625,25 @@ Do you want to continue?</source>
       <translation>ไดนามิก ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="109"/>
+      <location filename="../../data/SystemSettings.qml" line="111"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>กลุ่มตัวหลัก</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="113"/>
+      <location filename="../../data/SystemSettings.qml" line="115"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>อินสแตนซ์มาสเตอร์</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="117"/>
+      <location filename="../../data/SystemSettings.qml" line="119"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>ต้นแบบกลุ่มและอินสแตนซ์</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="125"/>
+      <location filename="../../data/SystemSettings.qml" line="127"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>สแตนด์อโลน &amp; หัวหน้ากลุ่ม</translation>
@@ -6690,7 +6674,7 @@ Do you want to continue?</source>
       <translation>อินพุตกระแสตรง</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="76"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="73"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <oldsource>For Lithium batteries, below 10% is not recommended. For other battery types, check the datasheet for the manufacturer recommended minimum.</oldsource>
       <translation>สำหรับแบตเตอรี่ลิเธียม ไม่แนะนำให้ชาร์จต่ำกว่า 10% สำหรับแบตเตอรี่ประเภทอื่นๆ ให้ตรวจสอบเอกสารข้อมูลเพื่อดูระดับขั้นต่ำที่แนะนำโดยผู้ผลิต</translation>
@@ -6832,8 +6816,18 @@ Do you want to continue?</source>
       <source>Boat page</source>
       <translation type="unfinished"/>
     </message>
+    <message id="settings_ui_animations">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="121"/>
+      <source>UI Animations</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ui_animations_description">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
+      <source>Disable to reduce CPU usage</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
       <source>Restarting application...</source>
       <translation>กำลังรีสตาร์ทแอปพลิเคชัน...</translation>
     </message>
@@ -7074,112 +7068,112 @@ Do you want to continue?</source>
       <translation>ไม่สามารถทริกเกอร์การปรับสมดุลระหว่างสถานะการชาร์จจำนวนมาก</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="259"/>
+      <location filename="../../components/CommonWords.qml" line="262"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>อีโค</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="305"/>
+      <location filename="../../components/CommonWords.qml" line="308"/>
       <source>Maximum current</source>
       <translation>กระแสสูงสุด</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="308"/>
+      <location filename="../../components/CommonWords.qml" line="311"/>
       <source>Maximum power</source>
       <translation>กำลังสูงสุด</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="317"/>
+      <location filename="../../components/CommonWords.qml" line="320"/>
       <source>Minimum current</source>
       <translation>กระแสไฟฟ้าขั้นต่ำ</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="338"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">ไม่</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="347"/>
+      <location filename="../../components/CommonWords.qml" line="350"/>
       <source>None</source>
       <translation type="unfinished">ไม่มี</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="351"/>
+      <location filename="../../components/CommonWords.qml" line="354"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">ไม่มี</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="354"/>
+      <location filename="../../components/CommonWords.qml" line="357"/>
       <source>Not available</source>
       <translation type="unfinished">ไม่ว่าง</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="360"/>
+      <location filename="../../components/CommonWords.qml" line="363"/>
       <source>Off</source>
       <translation type="unfinished">ปิด</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../components/CommonWords.qml" line="369"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">ตกลง</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="369"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>On</source>
       <translation type="unfinished">เปิด</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="376"/>
+      <location filename="../../components/CommonWords.qml" line="379"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">เปิด</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Overall history</source>
       <translation>ประวัติโดยรวม</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="438"/>
+      <location filename="../../components/CommonWords.qml" line="441"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">ทำงาน</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Settings</source>
       <translation type="unfinished">การตั้งค่า</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="464"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Standby</source>
       <translation type="unfinished">สแตนด์บาย</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="489"/>
+      <location filename="../../components/CommonWords.qml" line="492"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">การเริ่มต้น (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="498"/>
+      <location filename="../../components/CommonWords.qml" line="501"/>
       <source>Stopped</source>
       <translation type="unfinished">หยุด</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="528"/>
+      <location filename="../../components/CommonWords.qml" line="531"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">ไม่รู้จัก</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="543"/>
+      <location filename="../../components/CommonWords.qml" line="546"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7187,7 +7181,7 @@ Do you want to continue?</source>
       <translation type="unfinished">ใช่</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="554"/>
+      <location filename="../../components/CommonWords.qml" line="557"/>
       <source>Yield Today</source>
       <oldsource>Yield today</oldsource>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
@@ -7589,7 +7583,7 @@ See documentation for further information.</oldsource>
       <translation>โหลดของระบบสูง ปิดแผงด้านข้างเพื่อลดภาระของ CPU</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="252"/>
+      <location filename="../../components/CommonWords.qml" line="255"/>
       <source>Input current limit</source>
       <translation>อินพุตขีดจำกัดปัจจุบัน</translation>
     </message>
@@ -7628,11 +7622,6 @@ See documentation for further information.</oldsource>
       <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="93"/>
       <source>RS devices</source>
       <translation>อุปกรณ์อาร์เอส</translation>
-    </message>
-    <message id="settings_page_debug_pause_electron_animations">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="76"/>
-      <source>Pause electron animations</source>
-      <translation>หยุดภาพเคลื่อนไหวของอิเล็กตรอนชั่วคราว</translation>
     </message>
     <message id="devicelist_battery_total_capacity">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="146"/>
@@ -7793,23 +7782,23 @@ See documentation for further information.</oldsource>
       <translation>ใช้งานอยู่ (%1)</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="299"/>
+      <location filename="../../components/CommonWords.qml" line="302"/>
       <source>Manual stop</source>
       <translation>หยุดด้วยตนเอง</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="379"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Open circuit</source>
       <translation>วงจรเปิด</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="566"/>
+      <location filename="../../components/CommonWords.qml" line="569"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation type="unfinished"/>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="594"/>
+      <location filename="../../components/CommonWords.qml" line="597"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -8094,7 +8083,7 @@ See documentation for further information.</oldsource>
       <translation>Tailscale (การเข้าถึง VPN ระยะไกล)</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="457"/>
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>เอสโอซี %1</translation>
@@ -8294,7 +8283,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>รหัสผ่านรูทเปลี่ยนเป็น %1</translation>
     </message>
     <message id="settings_relay_genset_helper_relay">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="40"/>
       <source>Connected genset helper relay</source>
       <translation>รีเลย์ตัวช่วยเครื่องกำเนิดไฟฟ้าที่เชื่อมต่อ</translation>
     </message>
@@ -8381,12 +8370,12 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานจนกว่าจะหยุดด้วยตนเอง เว้นแต่จะมีการเปิดใช้งานเงื่อนไขการสตาร์ทอัตโนมัติเพื่อให้เครื่องทำงานได้ต่อไป</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="142"/>
       <source>Classic UI</source>
       <translation>UI แบบคลาสสิก</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="147"/>
       <source>New UI</source>
       <translation>UI ใหม่</translation>
     </message>
@@ -8401,7 +8390,7 @@ After adding/enabling a new network, you need to approve it in the Tailscale adm
       <translation>สำหรับอุปกรณ์ Multi-RS และ HS19 การตั้งค่า ESS มีอยู่ในหน้าผลิตภัณฑ์ระบบ RS</translation>
     </message>
     <message id="settings_relay_genset_start_stop">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="28"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="38"/>
       <source>Genset start/stop</source>
       <translation>การสตาร์ท/หยุดเครื่องกำเนิดไฟฟ้า</translation>
     </message>
@@ -8534,29 +8523,29 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>หน้าแรก</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="133"/>
       <source>User interface</source>
       <translation>อินเทอร์เฟซผู้ใช้</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="135"/>
       <source>User interface (Remote Console)</source>
       <translation>อินเทอร์เฟซผู้ใช้ (คอนโซลระยะไกล)</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="181"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 อัปเดตแล้ว</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="175"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="185"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>อินเทอร์เฟซผู้ใช้จะสลับไปที่ %1</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="189"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 ถูกตั้งค่าเป็น %2</translation>
@@ -8781,27 +8770,27 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>ระบบจะแสดงโหลดที่อินพุตของอินเวอร์เตอร์/เครื่องชาร์จโดยอัตโนมัติหากมีมิเตอร์กริด โหลดที่เอาต์พุตจะแสดงอยู่เสมอ</translation>
     </message>
     <message id="ess_state_optimized_with_batterylife">
-      <location filename="../../data/Ess.qml" line="20"/>
+      <location filename="../../data/Ess.qml" line="27"/>
       <source>Optimized with BatteryLife</source>
       <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_with_batterylife_button">
-      <location filename="../../data/Ess.qml" line="22"/>
+      <location filename="../../data/Ess.qml" line="29"/>
       <source>Optimized + BatteryLife</source>
       <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife">
-      <location filename="../../data/Ess.qml" line="27"/>
+      <location filename="../../data/Ess.qml" line="34"/>
       <source>Optimized without BatteryLife</source>
       <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
-      <location filename="../../data/Ess.qml" line="29"/>
+      <location filename="../../data/Ess.qml" line="36"/>
       <source>Optimized</source>
       <translation type="unfinished">เพิ่มประสิทธิภาพ</translation>
     </message>
     <message id="ess_state_keep_batteries_charged_button">
-      <location filename="../../data/Ess.qml" line="36"/>
+      <location filename="../../data/Ess.qml" line="22"/>
       <source>Keep charged</source>
       <translation>ชาร์จพลังไว้</translation>
     </message>
@@ -9242,12 +9231,12 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>หน้าจะโหลดซ้ำอัตโนมัติภายใน 5 วินาที</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="557"/>
+      <location filename="../../components/CommonWords.qml" line="560"/>
       <source>Dynamic power limit</source>
       <translation>ขีดจำกัดพลังงานแบบไดนามิก</translation>
     </message>
     <message id="devicelistpage_genset">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="78"/>
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="103"/>
       <source>Genset</source>
       <translation>เครื่องปั่นไฟ</translation>
     </message>
@@ -9308,12 +9297,12 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>มิเตอร์วัดพลังงานผ่าน RS485</translation>
     </message>
     <message id="settings_relay_genset_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="51"/>
       <source>The Genset can now be found in the devices list</source>
       <translation>ตอนนี้สามารถพบ Genset ได้ในรายการอุปกรณ์</translation>
     </message>
     <message id="settings_relay_tank_pump_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="55"/>
       <source>The Tank Pump can now be found in the devices list</source>
       <translation>ตอนนี้สามารถพบปั๊มถังได้ในรายการอุปกรณ์</translation>
     </message>
@@ -9438,7 +9427,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation type="unfinished">คำเตือน</translation>
     </message>
     <message id="switchable_output_press">
-      <location filename="../../components/SwitchableOutputDelegate.qml" line="270"/>
+      <location filename="../../components/SwitchableOutputDelegate.qml" line="267"/>
       <source>Press</source>
       <translation type="unfinished"/>
     </message>
@@ -9473,12 +9462,12 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation type="unfinished"/>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="24"/>
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutputList.qml" line="25"/>
       <source>Module state</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="31"/>
+      <location filename="../../pages/settings/devicelist/PageSwitchableOutputList.qml" line="32"/>
       <source>Module Voltage</source>
       <translation type="unfinished"/>
     </message>
@@ -9906,6 +9895,11 @@ If the generator is currently running due to a autostart condition, disabling au
     <message id="ess_active_soc_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="86"/>
       <source>Active SOC Limit: %1%</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="ess_active_soc_limit_info">
+      <location filename="../../pages/controlcards/ESSCard.qml" line="94"/>
+      <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation type="unfinished"/>
     </message>
     <message id="pagesettingssupportstate_support_state_check_below_red_orange">
@@ -11650,100 +11644,116 @@ If the generator is currently running due to a autostart condition, disabling au
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="100"/>
+      <location filename="../../src/main.cpp" line="101"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus ที่ระบุ</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="101"/>
+      <location filename="../../src/main.cpp" line="102"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>ที่อยู่</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="105"/>
+      <location filename="../../src/main.cpp" line="106"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>ใช้แหล่งข้อมูล D-Bus: เชื่อมต่อกับที่อยู่ D-Bus เริ่มต้น</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="110"/>
+      <location filename="../../src/main.cpp" line="111"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>ใช้แหล่งข้อมูล MQTT: เชื่อมต่อกับที่อยู่โบรกเกอร์ MQTT ที่ระบุ</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="111"/>
+      <location filename="../../src/main.cpp" line="112"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>ที่อยู่</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="116"/>
+      <location filename="../../src/main.cpp" line="117"/>
       <source>MQTT data source device portal id.</source>
       <translation>รหัสพอร์ทัลอุปกรณ์แหล่งข้อมูล MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="117"/>
+      <location filename="../../src/main.cpp" line="118"/>
       <source>portalId</source>
       <translation>รหัสพอร์ทัล</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="121"/>
+      <location filename="../../src/main.cpp" line="122"/>
       <source>MQTT VRM webhost shard</source>
       <translation>ชาร์ดเว็บโฮสต์ MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="122"/>
+      <location filename="../../src/main.cpp" line="123"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>เศษ</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="126"/>
+      <location filename="../../src/main.cpp" line="127"/>
       <source>MQTT data source username</source>
       <translation>ชื่อผู้ใช้แหล่งข้อมูล MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="127"/>
+      <location filename="../../src/main.cpp" line="128"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>ผู้ใช้</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>MQTT data source password</source>
       <translation>รหัสผ่านแหล่งข้อมูล MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>ผ่าน</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="136"/>
+      <location filename="../../src/main.cpp" line="137"/>
       <source>MQTT data source token</source>
       <translation>โทเค็นแหล่งข้อมูล MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="137"/>
+      <location filename="../../src/main.cpp" line="138"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>โทเค็น</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="141"/>
+      <location filename="../../src/main.cpp" line="142"/>
       <source>Enable FPS counter</source>
       <translation>เปิดใช้งานตัวนับ FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>Skip splash screen</source>
       <translation>ข้ามหน้าจอเริ่มต้น</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="149"/>
+      <location filename="../../src/main.cpp" line="150"/>
       <source>Use mock data source for testing.</source>
       <translation>ใช้แหล่งข้อมูลจำลองสำหรับการทดสอบ</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="154"/>
+      <source>Name of mock configuration</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="155"/>
+      <source>mockConfig</source>
+      <comment>Configuration name</comment>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="160"/>
+      <source>Set to disable mock timers on startup</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
