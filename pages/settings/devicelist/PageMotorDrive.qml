@@ -67,5 +67,13 @@ DevicePage {
 			dataItem.uid: root.bindPrefix + "/Controller/Temperature"
 			preferredVisible: dataItem.valid
 		}
+
+		ListSwitch {
+			//% "Motor Direction Inverted"
+			text: qsTrId("devicelist_motordrive_motordirectioninverted")
+			dataItem.uid: root.bindPrefix + "/Settings/Motor/DirectionInverted"
+			dataItem.invalidate: false
+			preferredVisible: dataItem.valid
+		}
 	}
 }

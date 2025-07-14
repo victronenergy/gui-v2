@@ -552,7 +552,9 @@ public:
 		CanBusProfile_None250,
 		CanBusProfile_RvC,
 		CanBusProfile_HighVoltage,
-		CanBusProfile_None500
+		CanBusProfile_None500,
+		CanBusProfile_CanOpenMotordrive250,
+		CanBusProfile_CanOpenMotordrive500
 	};
 	Q_ENUM(CanBusProfile_Type)
 
