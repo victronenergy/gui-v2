@@ -54,38 +54,62 @@ QtObject {
 			return VenusOS.DcInputs_InputType_Alternator
 		case "fuelcell":
 			return VenusOS.DcInputs_InputType_FuelCell
+		case "motordrive":
+			return VenusOS.DcInputs_InputType_ElectricDrive
+		case "solarcharger":
+			return VenusOS.DcInputs_InputType_SolarCharger
+		case "dcsystem":
+			return VenusOS.DcInputs_InputType_DcSystem
+		case "dcload":
+			// use the monitor mode to determine a sub-type
+			break
 		case "dcsource":
 			// use the monitor mode to determine a sub-type
 			break
-		case "dcsystem":
-			return VenusOS.DcInputs_InputType_DcSystem
 		default:
-			break
+			return VenusOS.DcInputs_InputType_GenericMeter
 		}
 
 		try {
 			monitorMode = parseInt(monitorMode)
 		} catch (e) {
-			console.warn("Defaulting to DC generator type, invalid monitor mode specified!", monitorMode)
-			return VenusOS.DcInputs_InputType_DcGenerator
+
+			console.warn("Defaulting to generic meter type, invalid monitor mode specified!", monitorMode)
+			return VenusOS.DcInputs_InputType_GenericMeter
 		}
 
-		switch (monitorMode) {
-		case -1:
-			return VenusOS.DcInputs_InputType_DcGenerator
-		case -2:
-			return VenusOS.DcInputs_InputType_AcCharger
-		case -3:
-			return VenusOS.DcInputs_InputType_DcCharger
-		case -4:
-			return VenusOS.DcInputs_InputType_WaterGenerator
-		case -7:
-			return VenusOS.DcInputs_InputType_ShaftGenerator
-		case -8:
-			return VenusOS.DcInputs_InputType_Wind
-		default:
-			// Generic DC input = DC generator
-			return VenusOS.DcInputs_InputType_DcGenerator
+		if (serviceType === "dcload") {
+			switch (monitorMode) {
+			case 8:
+				return VenusOS.DcInputs_InputType_WaterHeater
+			case 7:
+				return VenusOS.DcInputs_InputType_Inverter
+			case 5:
+				return VenusOS.DcInputs_InputType_BilgePump
+			case 4:
+				return VenusOS.DcInputs_InputType_WaterPump
+			case 3:
+				return VenusOS.DcInputs_InputType_Fridge
+			case 1:
+			default:
+				return VenusOS.DcInputs_InputType_GenericLoad
+			}
+		} else {
+			switch (monitorMode) {
+			case -2:
+				return VenusOS.DcInputs_InputType_AcCharger
+			case -3:
+				return VenusOS.DcInputs_InputType_DcCharger
+			case -4:
+				return VenusOS.DcInputs_InputType_WaterGenerator
+			case -7:
+				return VenusOS.DcInputs_InputType_ShaftGenerator
+			case -8:
+				return VenusOS.DcInputs_InputType_WindCharger
+			case -1:
+			default:
+				return VenusOS.DcInputs_InputType_GenericSource
+			}
 		}
 	}
 
@@ -93,9 +117,9 @@ QtObject {
 		switch (type) {
 		case VenusOS.DcInputs_InputType_Alternator:
 			return "qrc:/images/alternator.svg"
-		case VenusOS.DcInputs_InputType_DcGenerator:
+		case VenusOS.DcInputs_InputType_GenericSource:
 			return "qrc:/images/generator.svg"
-		case VenusOS.DcInputs_InputType_Wind:
+		case VenusOS.DcInputs_InputType_WindCharger:
 			return "qrc:/images/wind.svg"
 		default:
 			return "qrc:/images/icon_dc_24.svg"

@@ -69,27 +69,54 @@ QString Enums::dcInput_typeToText(DcInputs_InputType type) const
 	case DcInputs_InputType_Alternator:
 		//% "Alternator"
 		return qtTrId("dcInputs_alternator");
+	case DcInputs_InputType_BilgePump:
+		//% "Bilge pump"
+		return qtTrId("dcInputs_bilge_pump");
 	case DcInputs_InputType_DcCharger:
-		//% "DC charger"
+		//% "DC/DC charger"
 		return qtTrId("dcInputs_dccharger");
-	case DcInputs_InputType_DcGenerator:
-		//% "DC generator"
-		return qtTrId("dcInputs_dc_generator");
 	case DcInputs_InputType_DcSystem:
 		//% "DC system"
 		return qtTrId("dcInputs_dc_system");
+	case DcInputs_InputType_ElectricDrive:
+		//% "Electric drive"
+		return qtTrId("dcInputs_electric_drive");
+	case DcInputs_InputType_Fridge:
+		//% "Fridge"
+		return qtTrId("dcInputs_fridge");
 	case DcInputs_InputType_FuelCell:
 		//% "Fuel cell"
 		return qtTrId("dcInputs_fuelcell");
+	case DcInputs_InputType_GenericLoad:
+		//% "Generic load"
+		return qtTrId("dcInputs_generic_load");
+	case DcInputs_InputType_GenericMeter:
+		//% "Generic meter"
+		return qtTrId("dcInputs_generic_meter");
+	case DcInputs_InputType_GenericSource:
+		//% "Generic source"
+		return qtTrId("dcInputs_generic_source");
+	case DcInputs_InputType_Inverter:
+		//% "Inverter"
+		return qtTrId("dcInputs_inverter");
 	case DcInputs_InputType_ShaftGenerator:
 		//% "Shaft generator"
 		return qtTrId("dcInputs_shaft_generator");
+	case DcInputs_InputType_SolarCharger:
+		//% "Solar charger"
+		return qtTrId("dcInputs_solar_charger");
 	case DcInputs_InputType_WaterGenerator:
 		//% "Water generator"
 		return qtTrId("dcInputs_water_generator");
-	case DcInputs_InputType_Wind:
-		//% "Wind"
-		return qtTrId("dcInputs_wind");
+	case DcInputs_InputType_WaterHeater:
+		//% "Water heater"
+		return qtTrId("dcInputs_water_heater");
+	case DcInputs_InputType_WaterPump:
+		//% "Water pump"
+		return qtTrId("dcInputs_water_pump");
+	case DcInputs_InputType_WindCharger:
+		//% "Wind charger"
+		return qtTrId("dcInputs_wind_charger");
 	}
 	return QString();
 }

@@ -198,13 +198,22 @@ public:
 	enum DcInputs_InputType {
 		DcInputs_InputType_AcCharger,
 		DcInputs_InputType_Alternator,
+		DcInputs_InputType_BilgePump,
 		DcInputs_InputType_DcCharger,
-		DcInputs_InputType_DcGenerator,
 		DcInputs_InputType_DcSystem,
+		DcInputs_InputType_ElectricDrive,
+		DcInputs_InputType_Fridge,
 		DcInputs_InputType_FuelCell,
+		DcInputs_InputType_GenericLoad,
+		DcInputs_InputType_GenericMeter,
+		DcInputs_InputType_GenericSource,
+		DcInputs_InputType_Inverter,
 		DcInputs_InputType_ShaftGenerator,
+		DcInputs_InputType_SolarCharger,
 		DcInputs_InputType_WaterGenerator,
-		DcInputs_InputType_Wind
+		DcInputs_InputType_WaterHeater,
+		DcInputs_InputType_WaterPump,
+		DcInputs_InputType_WindCharger
 	};
 	Q_ENUM(DcInputs_InputType)
 
