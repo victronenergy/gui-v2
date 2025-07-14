@@ -18,6 +18,11 @@ Page {
 		serviceUid: root.bindPrefix
 	}
 
+	VeQuickItem {
+		id: productId
+		uid: root.bindPrefix + "/ProductId"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListQuantity {
@@ -69,6 +74,15 @@ Page {
 				text: qsTrId("devicelist_motordrive_controllertemperature")
 				dataItem.uid: root.bindPrefix + "/Controller/Temperature"
 				preferredVisible: dataItem.valid
+			}
+
+			ListNavigation {
+				text: CommonWords.setup
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/motordrive/PageSevconSetup.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+				preferredVisible: productId.value == ProductInfo.ProductId_MotorDrive_Sevcon
 			}
 
 			ListNavigation {

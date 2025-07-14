@@ -7394,6 +7394,11 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <source>Controller Temperature</source>
       <translation>Температура Контролера</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Напрямок двигуна змінено</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>

@@ -7393,6 +7393,11 @@ Beachten Sie, dass dieses Menü nur Carlo Gavazzi Zähler anzeigt, die über RS4
       <source>Controller Temperature</source>
       <translation>Steuergerättemperatur</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Motordrehrichtung umgekehrt</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>

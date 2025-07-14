@@ -7394,6 +7394,11 @@ Rețineți că acest meniu afișează doar contoarele Carlo Gavazzi conectate pr
       <source>Controller Temperature</source>
       <translation>Temperatura controller</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Direcția motorului inversată</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>

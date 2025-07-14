@@ -7391,6 +7391,11 @@ Notare che questo menu mostra solo i contatori Carlo Gavazzi collegati tramite R
       <source>Controller Temperature</source>
       <translation>Temperatura regolatore</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Direzione del motore invertita</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>

@@ -633,6 +633,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/GensetDeviceListDelegate.qml
     pages/settings/devicelist/inverter/PageInverter.qml
     pages/settings/devicelist/inverter/PageSolarStats.qml
+    pages/settings/devicelist/motordrive/PageSevconSetup.qml
     pages/settings/devicelist/rs/PageMultiRs.qml
     pages/settings/devicelist/rs/PageRsAlarms.qml
     pages/settings/devicelist/rs/PageRsAlarmSettings.qml
