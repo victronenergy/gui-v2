@@ -307,6 +307,10 @@ QtObject {
 	//% "Manufacturer"
 	readonly property string manufacturer: qsTrId("common_words_manufacturer")
 
+	//: Short for Maximum
+	//% "Max"
+	readonly property string max: qsTrId("common_words_max")
+
 	//% "Maximum current"
 	readonly property string maximum_current: qsTrId("common_words_maximum_current")
 
@@ -318,6 +322,10 @@ QtObject {
 
 	//% "Maximum voltage"
 	readonly property string maximum_voltage: qsTrId("common_words_maximum_voltage")
+
+	//: Short for Minimum
+	//% "Min"
+	readonly property string min: qsTrId("common_words_min")
 
 	//% "Minimum current"
 	readonly property string minimum_current: qsTrId("common_words_minimum_current")
