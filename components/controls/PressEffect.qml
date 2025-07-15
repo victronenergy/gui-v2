@@ -6,6 +6,14 @@
 import QtQuick
 import Victron.VenusOS
 
+Item {
+	function start(x, y) {}
+	function stop() {}
+	property real radius
+	property color color
+}
+
+/* TODO: re-enable once AQT supports QtShaderTools again.
 ShaderEffect {
 	id: shaderEffect
 
@@ -82,3 +90,4 @@ ShaderEffect {
 		}
 	}
 }
+*/
