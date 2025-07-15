@@ -387,7 +387,122 @@ BaseListItem {
 	Component {
 		id: temperatureSetpointComponent
 
-		PlaceholderDelegate {}
+		TemperatureSlider {
+			id: slider
+
+			property bool valueChangeKeyPressed
+			readonly property bool dragging: pressed || valueChangeKeyPressed
+
+			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
+			// toggles the on/off state and left/right keys move the slider.
+			// When return key is pressed, exit the edit mode.
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					if (activeFocus) {
+						_toggleState()
+					} else {
+						focus = true
+					}
+					return true
+				case Qt.Key_Return:
+					focus = false
+					return true
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+					// Remove focus and reject event to allow key navigation to delegates above/below.
+					focus = false
+					return false
+				}
+				return false
+			}
+
+			function _toggleState() {
+				if (!dimmingState.busy) {
+					dimmingState.writeValue(output.state === 0 ? 1 : 0)
+				}
+			}
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			from: dimmingMin.valid ? dimmingMin.value : 0
+			to: dimmingMax.valid ? dimmingMax.value : 100
+			stepSize: stepsize.valid ? stepsize.value : 1
+
+			// On the MQTT backend, many consecutive changes can create a huge queue of backend
+			// changes. Avoid this by preventing changes until the backend is in sync.
+			enabled: !dimmingValue.busy || dragging
+
+			onDraggingChanged: {
+				if (!dragging) {
+					dimmingValue.syncBackendValueToSlider()
+				}
+			}
+			onMoved: {
+				value = Math.round(value)
+				dimmingValue.writeValue(value)
+			}
+
+			Keys.onPressed: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = true
+				}
+				event.accepted = false
+			}
+			Keys.onReleased: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = false
+				}
+				event.accepted = false
+			}
+			KeyNavigationHighlight.active: slider.activeFocus
+
+			VeQuickItem {
+				id: dimmingMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: dimmingMin
+				uid: root.outputUid + "/Settings/DimmingMin"
+			}
+			VeQuickItem {
+				id: stepsize
+				uid: root.outputUid + "/Settings/StepSize"
+			}
+
+			SettingSync {
+				id: dimmingState
+				backendValue: output.state
+				onUpdateToBackend: (value) => { output.setState(value) }
+			}
+
+			SettingSync {
+				id: dimmingValue
+
+				// Update the slider value to the backend value.
+				function syncBackendValueToSlider() {
+					// If user has interacted with the slider to change the value, delay briefly
+					// before syncing the slider to the backend value, else this may be done while
+					// user changes are still being written.
+					if (busy || slider.dragging || delayedSliderUpdate.running) {
+						delayedSliderUpdate.restart()
+					} else {
+						slider.value = backendValue
+					}
+				}
+
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+				onBackendValueChanged: syncBackendValueToSlider()
+				onBusyChanged: if (!busy) syncBackendValueToSlider()
+			}
+
+			Timer {
+				id: delayedSliderUpdate
+				interval: 1000
+				onTriggered: dimmingValue.syncBackendValueToSlider()
+			}
+		}
 	}
 
 	Component {

@@ -358,6 +358,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
+    components/controls/TemperatureSlider.qml
     components/controls/EditFrame.qml
     components/controls/GlobalKeyNavigationHighlight.qml
     components/controls/Label.qml
@@ -1374,6 +1375,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_large_resources"
         images/cloud.svg
         images/consumption.svg
         images/dcloads.svg
+        images/dot.svg
         images/dropdown.svg
         images/electron.svg
         images/electron_arrow.svg
