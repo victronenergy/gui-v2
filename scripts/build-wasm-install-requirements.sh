@@ -16,11 +16,14 @@ fi
 arch=$(dpkg --print-architecture)
 if [ "${arch}" == "arm64" ]; then
     install_os="linux_arm64"
+    install_gcc="gcc_arm64"
     echo "ERROR: ARM64 is currently not supported by this script. You have to manually install the required dependencies."
     echo "       See https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2"
     exit 1
 else
     install_os="linux"
+    # Qt 6.8.3 requires linux_gcc_64 for aqtinstall but installs to gcc_64
+    install_gcc="linux_gcc_64"
 fi
 
 
@@ -359,7 +362,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cmake --build . --parallel $(nproc)
+VERBOSE=1 cmake --build .
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to build QtMQTT"
     exit 1
@@ -459,7 +462,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cmake --build . --parallel $(nproc)
+cmake --build .
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to build QtShaderTools for desktop"
     exit 1

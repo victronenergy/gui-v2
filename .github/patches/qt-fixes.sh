@@ -13,8 +13,14 @@ else
     exit 1
 fi
 
+arch=$(dpkg --print-architecture)
+if [ "${arch}" == "arm64" ]; then
+    ACTUAL_DESKTOP_DIR="gcc_arm64"
+else
+    ACTUAL_DESKTOP_DIR="gcc_64"
+fi
+
 DIR=${OUTPUTDIR}/Qt
-ACTUAL_DESKTOP_DIR="gcc_64"  # Qt 6.8.3 always installs to gcc_64
 
 echo "### Applying Qt 6.8.3 fixes for ${QT_VERSION} in ${DIR}"
 
