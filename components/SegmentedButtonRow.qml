@@ -60,7 +60,7 @@ FocusScope {
 					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_background_disabled
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
-							  ? Theme.color_ok
+							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
 							  : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
 					border.color: (mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
