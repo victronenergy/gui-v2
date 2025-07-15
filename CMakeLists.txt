@@ -358,6 +358,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
+    components/controls/TemperatureSlider.qml
     components/controls/EditFrame.qml
     components/controls/GlobalKeyNavigationHighlight.qml
     components/controls/Label.qml
