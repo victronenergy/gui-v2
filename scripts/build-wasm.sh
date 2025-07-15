@@ -96,7 +96,8 @@ cd "build-wasm"
 ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
 # Build the project using CMake with the MinSizeRel configuration
-cmake --build . --parallel $(nproc)
+# parallel builds cause an error here.
+cmake --build .
 
 if [ $? -ne 0 ]; then
     echo
