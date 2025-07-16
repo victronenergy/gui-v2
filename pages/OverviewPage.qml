@@ -457,15 +457,11 @@ SwipeViewPage {
 	QtObject {
 		id: layoutConditions
 
-		// Affects whether one or both AcInputWidgets are shown.
-		readonly property int activeAcInputSource: Global.acInputs?.activeInSource ?? VenusOS.AcInputs_InputSource_NotAvailable
-		onActiveAcInputSourceChanged: Qt.callLater(root._resetWidgets)
-
-		// When AC-in operational state changes, the AcInputWidget size changes.
-		readonly property bool acInput1Operational: Global.acInputs?.input1?.operational ?? false
-		onAcInput1OperationalChanged: Qt.callLater(root._resetWidgets)
-		readonly property bool acInput2Operational: Global.acInputs?.input2?.operational ?? false
-		onAcInput2OperationalChanged: Qt.callLater(root._resetWidgets)
+		// Affects whether one or both AcInputWidgets are shown, and their widget sizes.
+		readonly property AcInput acInput1: Global.acInputs?.input1 ?? null
+		onAcInput1Changed: Qt.callLater(root._resetWidgets)
+		readonly property AcInput acInput2: Global.acInputs?.input2 ?? null
+		onAcInput2Changed: Qt.callLater(root._resetWidgets)
 
 		// Affects whether DcInputWidget is shown.
 		readonly property bool showDcInputs: Global.dcInputs?.model.count ?? 0 > 0
