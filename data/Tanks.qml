@@ -106,7 +106,7 @@ QtObject {
 					if (_tankModel) {
 						_tankModel.removeDevice(tank.serviceUid)
 					}
-					_tankModel = Global.tanks.tankModel(type)
+					_tankModel = root.tankModel(type)
 					_tankModel.addDevice(tank)
 				} else {
 					if (_tankModel) {
