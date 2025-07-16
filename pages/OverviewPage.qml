@@ -38,27 +38,9 @@ SwipeViewPage {
 		// End bottom widgets
 	]
 
-	// Set a counter that updates whenever the layout should change.
-	// Use a delayed binding to avoid repopulating the model unnecessarily.
-	readonly property int _shouldResetWidgets: Global.dcInputs.model.count
-			+ Global.acInputs.activeInSource
-			+ (Global.acInputs.input1?.operational ? 1 : 0)
-			+ (Global.acInputs.input2?.operational ? 1 : 0)
-			+ (Global.system.showInputLoads ? 1 : 0)
-			+ (Global.system.hasAcOutSystem ? 1 : 0)
-			+ (Global.system.dc.hasPower ? 1 : 0)
-			+ (Global.solarInputs.inputCount === 0 ? 0 : 1)
-			+ (Global.evChargers.model.count === 0 ? 0 : 1)
-			+ Global.evChargers.acInputPositionCount
-			+ Global.evChargers.acOutputPositionCount
-	on_ShouldResetWidgetsChanged: Qt.callLater(_resetWidgets)
-	Component.onCompleted: Qt.callLater(_resetWidgets)
-
 	property var _createdWidgets: ({})
-
 	property bool _expandLayout: !!Global.pageManager && Global.pageManager.expandLayout
 	property bool _animateGeometry: root.isCurrentPage && !!Global.pageManager && Global.pageManager.animatingIdleResize
-	property int _evcsChangeToken
 
 	// Resets the layout, setting the y pos and height for all overview widgets. This is done once
 	// imperatively, instead of using anchors or y/height bindings, so that widget connector path
@@ -348,12 +330,12 @@ SwipeViewPage {
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
-		if (Global.system.showInputLoads && Global.system.hasAcOutSystem) {
+		if (layoutConditions.showEssentialLoads) {
 			widgets.push(essentialLoadsWidget)
 		} else {
 			essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
 		}
-		if (Global.system.dc.hasPower) {
+		if (layoutConditions.showDcLoads) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
 		}
 		_rightWidgets = widgets
@@ -468,6 +450,44 @@ SwipeViewPage {
 				}
 			}
 		}
+	}
+
+	// Update the layout whenever any of these conditions change.
+	// Ideally the left/right/centre areas would reorganize their layouts themselves, eventually.
+	QtObject {
+		id: layoutConditions
+
+		// Affects whether one or both AcInputWidgets are shown.
+		readonly property int activeAcInputSource: Global.acInputs?.activeInSource ?? VenusOS.AcInputs_InputSource_NotAvailable
+		onActiveAcInputSourceChanged: Qt.callLater(root._resetWidgets)
+
+		// When AC-in operational state changes, the AcInputWidget size changes.
+		readonly property bool acInput1Operational: Global.acInputs?.input1?.operational ?? false
+		onAcInput1OperationalChanged: Qt.callLater(root._resetWidgets)
+		readonly property bool acInput2Operational: Global.acInputs?.input2?.operational ?? false
+		onAcInput2OperationalChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether DcInputWidget is shown.
+		readonly property bool showDcInputs: Global.dcInputs?.model.count ?? 0 > 0
+		onShowDcInputsChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether SolarYieldWidget is shown, and its widget size.
+		readonly property int pvChargerCount: Global.solarInputs?.devices.count ?? 0
+		onPvChargerCountChanged: Qt.callLater(root._resetWidgets)
+		readonly property int pvInverterCount: Global.solarInputs?.pvInverterDevices.count ?? 0
+		onPvInverterCountChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether DcLoadsWidget is shown.
+		readonly property bool showDcLoads: Global.system?.dc.hasPower
+		onShowDcLoadsChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether EssentialLoadsWidget is shown.
+		readonly property bool showEssentialLoads: Global.system?.showInputLoads && Global.system?.hasAcOutSystem
+		onShowEssentialLoadsChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether EvcsWidget is shown.
+		readonly property bool showEvChargers: Global.evChargers?.model.count ?? 0 > 0
+		onShowEvChargersChanged: Qt.callLater(root._resetWidgets)
 	}
 
 	Connections {
