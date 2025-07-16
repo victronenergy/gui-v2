@@ -332,7 +332,7 @@ QtObject {
 	}
 
 	property VeQuickItem _speedUnit: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+		uid: root.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 
 	property VeQuickItem _altitudeUnit: VeQuickItem {
