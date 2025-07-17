@@ -166,9 +166,9 @@ if(QT_KNOWN_POLICY_QTP0001)
     qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
-set(QZXING_USE_QML ON)
-set(QZXING_USE_ENCODER ON)
-add_subdirectory(src/qzxing/src)
+#set(QZXING_USE_QML ON)
+#set(QZXING_USE_ENCODER ON)
+#add_subdirectory(src/qzxing/src)
 
 include_directories(src/veutil/inc src .)
 
@@ -363,7 +363,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
     components/controls/PressArea.qml
-    components/controls/PressEffect.qml
+#    components/controls/PressEffect.qml
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
@@ -853,17 +853,17 @@ qt_add_qml_module(VenusQMLModule
 )
 
 # Add shaders for WebAssembly builds (requires QtShaderTools)
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    qt6_add_shaders(VenusQMLModule "venus-shaders"
-        BATCHABLE
-        PRECOMPILE
-        OPTIMIZED
-        PREFIX
-            "/"
-        FILES
-            "components/controls/presseffect.frag"
-    )
-endif()
+#if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+#    qt6_add_shaders(VenusQMLModule "venus-shaders"
+#        BATCHABLE
+#        PRECOMPILE
+#        OPTIMIZED
+#        PREFIX
+#            "/"
+#        FILES
+#            "components/controls/presseffect.frag"
+#    )
+#endif()
 
 list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
 
@@ -1494,7 +1494,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     BoatPageComponentsplugin
     VictronGaugesplugin
     VictronMockplugin
-    qzxing
+#    qzxing
 )
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")

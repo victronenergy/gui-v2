@@ -6,6 +6,17 @@
 import QtQuick
 import Victron.VenusOS
 
+Item {
+	id: shaderEffect
+	function start(x,y) {}
+	function stop() {}
+	property real radius
+	property color color
+	opacity: 0.0
+	anchors.fill: parent
+}
+
+/*
 ShaderEffect {
 	id: shaderEffect
 
@@ -82,3 +93,4 @@ ShaderEffect {
 		}
 	}
 }
+*/

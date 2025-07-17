@@ -29,7 +29,7 @@
 #include <QtDebug>
 
 #include "themeobjects.h"
-#include "QZXing.h"
+//#include "QZXing.h"
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
@@ -322,8 +322,8 @@ int main(int argc, char *argv[])
 	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
-	QZXing::registerQMLTypes();
-	QZXing::registerQMLImageProvider(engine);
+//	QZXing::registerQMLTypes();
+//	QZXing::registerQMLImageProvider(engine);
 
 	initBackend(&enableFpsCounter, &skipSplashScreen);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);

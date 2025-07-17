@@ -25,9 +25,9 @@ CT.Button {
 	property alias radius: backgroundRect.radius
 	property bool showEnabled: enabled
 
-	onPressed: pressEffect.start(pressX/width, pressY/height)
-	onReleased: pressEffect.stop()
-	onCanceled: pressEffect.stop()
+//	onPressed: pressEffect.start(pressX/width, pressY/height)
+//	onReleased: pressEffect.stop()
+//	onCanceled: pressEffect.stop()
 
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
@@ -53,11 +53,11 @@ CT.Button {
 		border.color: root.showEnabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
-		PressEffect {
-			id: pressEffect
-			radius: backgroundRect.radius
-			anchors.fill: parent
-		}
+//		PressEffect {
+//			id: pressEffect
+//			radius: backgroundRect.radius
+//			anchors.fill: parent
+//		}
 	}
 
 	contentItem: CP.IconLabel {

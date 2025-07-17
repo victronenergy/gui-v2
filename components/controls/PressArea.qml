@@ -10,6 +10,9 @@ MouseArea {
 	id: root
 
 	property bool effectEnabled: true
+	property real radius: 0.0
+	property color color: "transparent"
+/*
 	property alias radius: pressEffect.radius
 	property alias color: pressEffect.color
 
@@ -20,4 +23,5 @@ MouseArea {
 	PressEffect {
 		id: pressEffect
 	}
+*/
 }
