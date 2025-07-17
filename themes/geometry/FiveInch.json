@@ -64,7 +64,13 @@
     "geometry_slider_groove_radius": 8,
 
     "geometry_dimmingSlider_height": 40,
-    "geometry_dimmingSlider_dot_size": 4,
+    "geometry_dimmingSlider_label_leftMargin": 12,
+    "geometry_dimmingSlider_indicator_width": 12,
+    "geometry_dimmingSlider_handle_width": 4,
+    "geometry_dimmingSlider_handle_vertical_padding": 6,
+    "geometry_dimmingSlider_seperator_width": 2,
+    "geometry_dimmingSlider_seperator_vertical_padding": 6,
+    "geometry_dimmingSlider_leftPadding": 49,
 
     "geometry_spinBox_indicator_minimumWidth": 64,
     "geometry_spinBox_indicator_maximumWidth": 136,

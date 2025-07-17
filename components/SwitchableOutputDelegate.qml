@@ -198,12 +198,6 @@ BaseListItem {
 			}
 			KeyNavigationHighlight.active: slider.activeFocus
 
-			Label {
-				anchors.centerIn: parent
-				text: CommonWords.onOrOff(dimmingState.expectedValue)
-				font.pixelSize: Theme.font_size_body2
-			}
-
 			SettingSync {
 				id: dimmingState
 				backendValue: output.state
