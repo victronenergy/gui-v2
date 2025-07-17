@@ -5,7 +5,7 @@
     },
     "com.victronenergy.platform": {
         "/Device/Model": "Cerbo GX",
-        "/Device/Time": 1750553847
+        "/Device/Time": 1751358535
     },
     "com.victronenergy.settings": {
         "/Settings/Alarm/System/GridLost": 1,

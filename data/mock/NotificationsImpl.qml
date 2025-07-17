@@ -87,11 +87,13 @@ QtObject {
 		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
 		onValueChanged: {
 			if (!isNaN(value) && value === 1) {
-				for (let i = 0 ; i < notifications.length; ++i) {
-					const notif = notifications[i]
+				const model = Global.notifications.allNotificationsModel
+				for (let i = 0 ; i < model.count; ++i) {
+					const notif = model.data(model.index(i, 0), NotificationsModel.Notification)
 					notif.updateAcknowledged(true)
 				}
 				_acknowledgeAll.setValue(0)
+				updateNotifications()
 			}
 		}
 	}
