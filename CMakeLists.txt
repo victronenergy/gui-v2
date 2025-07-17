@@ -55,6 +55,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 message("Building VenusOS for ${CMAKE_SYSTEM_NAME}")
+message("Host system architecture: ${CMAKE_HOST_SYSTEM_PROCESSOR}")
 message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 
@@ -105,7 +106,18 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten" AND NOT COMMAND qt6_add_shaders)
         cmake_parse_arguments(SHADER "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
         # Find qsb tool
-        find_program(QSB_TOOL qsb PATHS /opt/venus/build-gx-hostedtoolcache/Qt/6.8.3/gcc_64/bin NO_DEFAULT_PATH)
+        if("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "aarch64" OR "${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "arm64")
+            find_program(QSB_TOOL qsb
+                PATHS
+                    /opt/venus/build-gx-hostedtoolcache/Qt/6.8.3/gcc_arm64/bin
+                NO_DEFAULT_PATH
+            )
+        else()
+            find_program(QSB_TOOL qsb
+                PATHS /opt/venus/build-gx-hostedtoolcache/Qt/6.8.3/gcc_64/bin
+                NO_DEFAULT_PATH
+            )
+        endif()
 
         if(NOT QSB_TOOL)
             message(FATAL_ERROR "qsb tool not found")
