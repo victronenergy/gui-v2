@@ -166,6 +166,7 @@ BaseListItem {
 			from: 1
 			to: 100
 			stepSize: 1
+			text: CommonWords.onOrOff(dimmingState.expectedValue)
 
 			// On the MQTT backend, many consecutive changes can create a huge queue of backend
 			// changes. Avoid this by preventing changes until the backend is in sync.
@@ -197,12 +198,6 @@ BaseListItem {
 				event.accepted = false
 			}
 			KeyNavigationHighlight.active: slider.activeFocus
-
-			Label {
-				anchors.centerIn: parent
-				text: CommonWords.onOrOff(dimmingState.expectedValue)
-				font.pixelSize: Theme.font_size_body2
-			}
 
 			SettingSync {
 				id: dimmingState
