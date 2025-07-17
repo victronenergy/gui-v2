@@ -16,7 +16,7 @@ fi
 arch=$(dpkg --print-architecture)
 if [ "${arch}" == "arm64" ]; then
     install_os="linux_arm64"
-    install_gcc="gcc_arm64"
+    install_gcc="linux_gcc_arm64"
     echo "ERROR: ARM64 is currently not supported by this script. You have to manually install the required dependencies."
     echo "       See https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2"
     exit 1
@@ -41,9 +41,6 @@ else
     exit 1
 fi
 
-# Qt 6.8.3 requires linux_gcc_64 for aqtinstall but installs to gcc_64
-install_gcc="linux_gcc_64"
-
 echo "Using Qt version ${QT_VERSION} from .env file (no fallbacks)"
 echo "Using architecture: ${install_gcc} for Qt ${QT_VERSION}"
 
@@ -59,15 +56,43 @@ sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
                         libxcb-randr0-dev libxcb-xinerama0-dev libxcb-shape0-dev \
                         libxcb-sync-dev libxcb-xfixes0-dev libfontconfig1-dev \
                         libfreetype6-dev libwayland-dev
+# Check if the installation was successful
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install dependencies"
+    exit 1
+else
+    echo "✓ Dependencies installed successfully"
+fi
 
 # Install yq
 echo -e "\n\n*** Installing yq ***"
+# Check if snap is installed
+if ! command -v snap &> /dev/null; then
+    echo "Snap is not installed, installing snapd..."
+    sudo apt-get install -y snapd
+fi
+
+# Install yq using snap
 sudo snap install yq
+# Check if yq was installed successfully
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install yq"
+    exit 1
+else
+    echo "✓ yq installed successfully"
+fi
 
 # Set up Python 3.x
 echo -e "\n\n*** Setting up Python 3.x ***"
 sudo apt-get install python3-venv -y
 sudo python3 -m venv /opt/venus/python
+# Check if Python virtual environment was created successfully
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to create Python virtual environment"
+    exit 1
+else
+    echo "✓ Python virtual environment created successfully"
+fi
 
 # Change ownership of the Python directory
 sudo chown -R ${USER}:${USER} /opt/venus/python
@@ -78,6 +103,13 @@ source /opt/venus/python/bin/activate
 # Install aqtinstall
 echo -e "\n\n*** Installing aqtinstall ***"
 pip install aqtinstall
+# Check if aqtinstall was installed successfully
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install aqtinstall"
+    exit 1
+else
+    echo "✓ aqtinstall installed successfully"
+fi
 
 # Apply the critical patch for Qt 6.8.3 nested directory structure
 echo -e "\n\n*** Patching aqtinstall for Qt 6.8.3 nested directory support ***"
@@ -155,7 +187,7 @@ lines[target_line_num] = '\n'.join(replacement_lines)
 with open(metadata_file, 'w') as f:
     f.write('\n'.join(lines))
 
-print("Successfully patched aqtinstall for Qt 6.8.3 nested directory structure")
+print("✓ Successfully patched aqtinstall for Qt 6.8.3 nested directory structure")
 PATCH_EOF
 
     if [ $? -ne 0 ]; then
@@ -195,7 +227,14 @@ echo "✓ Qt ${QT_VERSION} is available for both desktop and WebAssembly"
 # Check what archives are available for debugging
 echo -e "\n\n*** Checking available archives for Qt ${QT_VERSION} ***"
 echo "Available archives:"
-aqt list-qt ${install_os} desktop --archives ${QT_VERSION} ${install_gcc} || echo "Could not list archives"
+aqt list-qt ${install_os} desktop --archives ${QT_VERSION} ${install_gcc}
+if [ $? -ne 0 ]; then
+    echo "ERROR: Could not list archives"
+    echo "This is a hard requirement. No fallbacks allowed."
+    exit 1
+else
+    echo "✓ Archives listed successfully"
+fi
 
 # Install Qt for desktop
 echo -e "\n\n*** Installing Qt ${QT_VERSION} for desktop ***"
@@ -212,6 +251,10 @@ if [ -d "${OUTPUTDIR}/Qt/${QT_VERSION}/linux_gcc_64" ]; then
     ACTUAL_DESKTOP_DIR="linux_gcc_64"
 elif [ -d "${OUTPUTDIR}/Qt/${QT_VERSION}/gcc_64" ]; then
     ACTUAL_DESKTOP_DIR="gcc_64"
+elif [ -d "${OUTPUTDIR}/Qt/${QT_VERSION}/linux_gcc_arm64" ]; then
+    ACTUAL_DESKTOP_DIR="linux_gcc_arm64"
+elif [ -d "${OUTPUTDIR}/Qt/${QT_VERSION}/gcc_arm64" ]; then
+    ACTUAL_DESKTOP_DIR="gcc_arm64"
 else
     echo "ERROR: Could not find desktop Qt installation directory"
     echo "Available directories:"
@@ -229,6 +272,8 @@ if [ $? -ne 0 ]; then
     echo "ERROR: Failed to install Qt ${QT_VERSION} for WebAssembly"
     echo "This is a hard requirement. No fallbacks allowed."
     exit 1
+else
+    echo "✓ Qt ${QT_VERSION} for WebAssembly installed successfully"
 fi
 
 # Install QtShaderTools for WebAssembly
@@ -265,7 +310,7 @@ sudo chown -R ${USER}:${USER} ${OUTPUTDIR}
 
 echo -e "\n\n*** Applying Qt fixes ***"
 # Apply Qt 6.8.3 specific fixes
-echo "### Applying Qt 6.8.3 specific fixes"
+echo "-- Applying Qt 6.8.3 specific fixes"
 
 # Fix file permissions
 chmod -v 755 ${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread/bin/{qmake,qmake6,qt-cmake,qt-configure-module,qtpaths,qtpaths6}
@@ -276,21 +321,21 @@ DEPS_FILE="${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread/lib/cmake/Qt6/Qt6Depe
 INTERNALS_FILE="${OUTPUTDIR}/Qt/${QT_VERSION}/wasm_singlethread/lib/cmake/Qt6BuildInternals/QtBuildInternalsExtra.cmake"
 
 if [ -f "${DEPS_FILE}" ]; then
-    echo "### Patching Qt6Dependencies.cmake for correct host paths"
+    echo "-- Patching Qt6Dependencies.cmake for correct host paths"
     dos2unix "${DEPS_FILE}"
     sed -i "s|/Users/qt/work/install|${OUTPUTDIR}/Qt/${QT_VERSION}/${ACTUAL_DESKTOP_DIR}|g" "${DEPS_FILE}"
-    echo "### Qt6Dependencies.cmake patched"
+    echo "-- Qt6Dependencies.cmake patched"
 fi
 
 if [ -f "${INTERNALS_FILE}" ]; then
-    echo "### Patching QtBuildInternalsExtra.cmake for correct install paths"
+    echo "-- Patching QtBuildInternalsExtra.cmake for correct install paths"
     dos2unix "${INTERNALS_FILE}"
     sed -i "s|C:/Qt/Qt-[^\"]*|${OUTPUTDIR}/Qt|g" "${INTERNALS_FILE}"
     sed -i "s|/Users/qt/work/install/target|${OUTPUTDIR}/Qt/${QT_VERSION}/${ACTUAL_DESKTOP_DIR}|g" "${INTERNALS_FILE}"
-    echo "### QtBuildInternalsExtra.cmake patched"
+    echo "-- QtBuildInternalsExtra.cmake patched"
 fi
 
-echo "### Qt 6.8.3 fixes completed"
+echo "✓  Qt 6.8.3 fixes completed"
 
 # Install emscripten
 echo -e "\n\n*** Installing Emscripten ${EMSCRIPTEN} ***"
@@ -301,7 +346,29 @@ fi
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
 ./emsdk install ${EMSCRIPTEN}
+
+# Install can easily fail for arm64, since a binary is not available for all versions
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install Emscripten ${EMSCRIPTEN}, try to build it manually"
+
+    echo "ERROR: Failed to install sdk-main-64bit"
+    echo "This is required for the build to succeed"
+    exit 1
+else
+    echo "✓ Emscripten installed successfully"
+    echo
+fi
+
 ./emsdk activate ${EMSCRIPTEN}
+# Check if activation was successful
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to activate Emscripten ${EMSCRIPTEN}"
+    echo "This is required for the build to succeed"
+    exit 1
+else
+    echo "✓ Emscripten activated successfully"
+fi
+
 source "${OUTPUTDIR}/emsdk/emsdk_env.sh"
 
 
@@ -369,6 +436,12 @@ if [ $? -ne 0 ]; then
 fi
 
 cmake --install . --prefix ${QTDIR} --verbose
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to install QtMQTT"
+    exit 1
+else
+    echo "✓ QtMQTT installed successfully"
+fi
 
 # Change ownership of the output directory
 sudo chown -R ${USER}:${USER} ${OUTPUTDIR}
