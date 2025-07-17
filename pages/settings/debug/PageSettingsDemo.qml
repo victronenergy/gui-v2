@@ -5,7 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
-import QZXing
+//import QZXing
 
 Page {
 	id: root
