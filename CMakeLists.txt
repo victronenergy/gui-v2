@@ -983,6 +983,7 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/maximal.json
         data/mock/conf/multi-rs.json
         data/mock/conf/services/alternator.json
+        data/mock/conf/services/dcload-fridge.json
         data/mock/conf/services/dcsystem.json
         data/mock/conf/services/dse-genset.json
         data/mock/conf/services/digitalinput-alarm.json
