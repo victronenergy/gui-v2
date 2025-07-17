@@ -195,27 +195,27 @@ public:
 	};
 	Q_ENUM(AcInputs_InputSource)
 
-	enum DcInputs_InputType {
-		DcInputs_InputType_AcCharger,
-		DcInputs_InputType_Alternator,
-		DcInputs_InputType_BilgePump,
-		DcInputs_InputType_DcCharger,
-		DcInputs_InputType_DcSystem,
-		DcInputs_InputType_ElectricDrive,
-		DcInputs_InputType_Fridge,
-		DcInputs_InputType_FuelCell,
-		DcInputs_InputType_GenericLoad,
-		DcInputs_InputType_GenericMeter,
-		DcInputs_InputType_GenericSource,
-		DcInputs_InputType_Inverter,
-		DcInputs_InputType_ShaftGenerator,
-		DcInputs_InputType_SolarCharger,
-		DcInputs_InputType_WaterGenerator,
-		DcInputs_InputType_WaterHeater,
-		DcInputs_InputType_WaterPump,
-		DcInputs_InputType_WindCharger
+	enum DcMeter_Type {
+		DcMeter_Type_AcCharger,
+		DcMeter_Type_Alternator,
+		DcMeter_Type_BilgePump,
+		DcMeter_Type_DcCharger,
+		DcMeter_Type_DcSystem,
+		DcMeter_Type_ElectricDrive,
+		DcMeter_Type_Fridge,
+		DcMeter_Type_FuelCell,
+		DcMeter_Type_GenericLoad,
+		DcMeter_Type_GenericMeter,
+		DcMeter_Type_GenericSource,
+		DcMeter_Type_Inverter,
+		DcMeter_Type_ShaftGenerator,
+		DcMeter_Type_SolarCharger,
+		DcMeter_Type_WaterGenerator,
+		DcMeter_Type_WaterHeater,
+		DcMeter_Type_WaterPump,
+		DcMeter_Type_WindCharger
 	};
-	Q_ENUM(DcInputs_InputType)
+	Q_ENUM(DcMeter_Type)
 
 	enum EnvironmentInput_Status {
 		EnvironmentInput_Status_Ok = 0,
@@ -874,7 +874,9 @@ public:
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
 
-	Q_INVOKABLE QString dcInput_typeToText(DcInputs_InputType type) const;
+	Q_INVOKABLE DcMeter_Type dcMeter_type(const QString &serviceType, int monitorMode) const;
+	Q_INVOKABLE QString dcMeter_typeToText(DcMeter_Type type) const;
+	Q_INVOKABLE QString dcMeter_iconForType(DcMeter_Type type) const;
 
 	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
 	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;
