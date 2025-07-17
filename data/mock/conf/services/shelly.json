@@ -1,0 +1,22 @@
+{
+    "com.victronenergy.shelly": {
+        "/Devices/E465B8B6F444/2/Enabled": 1,
+        "/Devices/E465B8B6F444/1/Enabled": 0,
+        "/Devices/E465B8B6F444/0/Enabled": 1,
+        "/Devices/E465B8B6F444/3/Enabled": 1,
+        "/Devices/E465B8B6F444/4/Enabled": 0,
+        "/Devices/E465B8B6F444/5/Enabled": 1,
+        "/Devices/E465B8B6F444/Mac": "11:22:33:aa:bb:cc",
+        "/Devices/E465B8B6F444/Model": "ShellyPlusPlugS",
+        "/Devices/E465B8B6F444/Name": "",
+        "/Devices/E465B8B6F444/Server": "ShellyPlusPlugS-E465B8B6F444.local",
+        "/Devices/ABC/2/Enabled": 1,
+        "/Devices/ABC/1/Enabled": 0,
+        "/Devices/ABC/0/Enabled": 0,
+        "/Devices/ABC/Mac": "22:22:33:aa:bb:cc",
+        "/Devices/ABC/Model": "X",
+        "/Devices/ABC/Name": "",
+        "/Devices/ABC/Server": "X-ABC.local",
+        "/Refresh": 0
+    }
+}

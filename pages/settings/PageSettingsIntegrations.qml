@@ -52,6 +52,19 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Shelly Devices"
+				text: qsTrId("pagesettingsintegrations_shelly_devices")
+				preferredVisible: shellyDevices.rowCount > 0
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShelly.qml", {"title": text})
+
+				VeQItemTableModel {
+					id: shellyDevices
+					uids: [ BackendConnection.serviceUidForType("shelly") + "/Devices" ]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
+			}
+
+			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
