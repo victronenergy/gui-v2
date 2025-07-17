@@ -313,8 +313,9 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			fontPixelSize: Theme.font_size_body2
-			model: [{ "value": CommonWords.off }, { "value": CommonWords.on }]
+			fontPixelSize: Theme.font_size_body1
+			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
+				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
 			enabled: !toggleState.busy
 			onButtonClicked: (buttonIndex) => {
 				activateIndex(buttonIndex)
