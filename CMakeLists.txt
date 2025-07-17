@@ -363,7 +363,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
     components/controls/PressArea.qml
-    components/controls/PressEffect.qml
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
@@ -763,6 +762,13 @@ set (VENUS_QML_MODULE_SOURCES
     pages/welcome/WelcomePage.qml
     pages/welcome/WelcomeView.qml
 )
+
+# TODO: re-enable for Desktop and Device builds, see issue #2351
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+    list(APPEND VENUS_QML_MODULE_SOURCES
+        components/controls/PressEffect.qml
+    )
+endif()
 
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
