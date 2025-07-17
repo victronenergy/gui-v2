@@ -137,6 +137,11 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     line="window.createQtAppInstance = venus_gui_v2_entry;"
     grep -qxF "$line" "$venus_gui_v2_js_file" || echo "$line" >> "$venus_gui_v2_js_file"
 
+    # Save wasm file size to a file
+    # this is needed, since the reported size is the compressed size
+    # but the downloaded size is shown as uncompressed size, since the browser decompresses it
+    stat -c%s ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.size
+
     # Compress the wasm file
     gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
     sha256sum ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.sha256

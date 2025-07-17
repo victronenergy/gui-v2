@@ -79,8 +79,8 @@ Window {
 	}
 
 	contentItem {
-		// on wasm just show the GUI at the top of the screen
-		transformOrigin: Qt.platform.os !== "wasm" ? Item.Center : Item.Top
+		// show the GUI always centered in the window
+		transformOrigin: Item.Center
 
 		// In WebAssembly builds, if we are displaying on a low-dpi mobile
 		// device, it may not have enough pixels to display the UI natively.
@@ -129,13 +129,7 @@ Window {
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
 		anchors.horizontalCenter: parent.horizontalCenter
-		states: State {
-			when: Qt.platform.os !== "wasm"
-			AnchorChanges {
-				target: guiLoader
-				anchors.verticalCenter: parent.verticalCenter
-			}
-		}
+		anchors.verticalCenter: parent.verticalCenter
 
 		asynchronous: true
 		active: Global.dataManagerLoaded
@@ -153,13 +147,7 @@ Window {
 		width: Theme.geometry_screen_width
 		height: Theme.geometry_screen_height
 		anchors.horizontalCenter: parent.horizontalCenter
-		states: State {
-			when: Qt.platform.os !== "wasm"
-			AnchorChanges {
-				target: splashLoader
-				anchors.verticalCenter: parent.verticalCenter
-			}
-		}
+		anchors.verticalCenter: parent.verticalCenter
 
 		active: Global.splashScreenVisible
 		sourceComponent: SplashView {
