@@ -413,7 +413,7 @@ Item {
 				const serviceUid = createDevice(inputConfig.serviceType, deviceInstanceNum, values)
 				MockManager.setValue(serviceUid + "/CustomName", "%1 (%2)"
 						.arg(inputConfig.serviceType)
-						.arg(VenusOS.dcInput_typeToText(Global.dcInputs.inputType(serviceUid, monitorMode))))
+						.arg(VenusOS.dcMeter_typeToText(VenusOS.dcMeter_type(inputConfig.serviceType, monitorMode))))
 			}
 		}
 	}

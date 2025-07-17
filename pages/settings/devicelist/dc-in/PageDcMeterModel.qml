@@ -22,7 +22,7 @@ VisibleItemModel {
 	}
 
 	ListDcOutputQuantityGroup {
-		text: VenusOS.dcInput_typeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
+		text: VenusOS.dcMeter_typeToText(VenusOS.dcMeter_type(BackendConnection.serviceTypeFromUid(root.bindPrefix), monitorMode.value))
 		bindPrefix: root.bindPrefix
 	}
 
