@@ -190,10 +190,10 @@ BaseListItem {
 			height: Theme.geometry_switchableoutput_button_height
 			highlightColor: enabled
 				? (dimmingState.expectedValue === 1 ? Theme.color_ok : Theme.color_button_down)
-				: Theme.color_font_disabled
-			from: 1
-			to: 100
-			stepSize: 1
+				: (dimmingState.expectedValue === 1 ? Theme.color_font_disabled : Theme.color_gray3)
+			from: dimmingMin.valid ? dimmingMin.value : 0
+			to: dimmingMax.valid ? dimmingMax.value : 100
+			state: dimmingState.expectedValue
 
 			// On the MQTT backend, many consecutive changes can create a huge queue of backend
 			// changes. Avoid this by preventing changes until the backend is in sync.
@@ -226,10 +226,13 @@ BaseListItem {
 			}
 			KeyNavigationHighlight.active: slider.activeFocus
 
-			Label {
-				anchors.centerIn: parent
-				text: CommonWords.onOrOff(dimmingState.expectedValue)
-				font.pixelSize: Theme.font_size_body2
+			VeQuickItem {
+				id: dimmingMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: dimmingMin
+				uid: root.outputUid + "/Settings/DimmingMin"
 			}
 
 			SettingSync {
