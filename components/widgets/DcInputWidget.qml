@@ -11,9 +11,9 @@ OverviewWidget {
 
 	property DeviceModel inputs: DeviceModel {}
 	readonly property int inputType: !!inputs.firstObject
-			? Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode)
+			? VenusOS.dcMeter_type(inputs.firstObject.serviceType, inputs.firstObject.monitorMode)
 			: -1
-	readonly property string detailUrl: inputType === VenusOS.DcInputs_InputType_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+	readonly property string detailUrl: inputType === VenusOS.DcMeter_Type_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
 	function _refreshTotalPower() {
@@ -28,12 +28,12 @@ OverviewWidget {
 		quantityLabel.dataObject.current = totalCurrent
 	}
 
-	title: VenusOS.dcInput_typeToText(inputType)
+	title: VenusOS.dcMeter_typeToText(inputType)
 	quantityLabel.dataObject: QtObject {
 		property real power: NaN
 		property real current: NaN
 	}
-	icon.source: Global.dcInputs.inputTypeIcon(inputType)
+	icon.source: VenusOS.dcMeter_iconForType(inputType)
 	enabled: true
 
 	onClicked: {
