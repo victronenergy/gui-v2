@@ -60,65 +60,119 @@ QString Enums::battery_iconFromMode(Battery_Mode mode) const
 	}
 }
 
-QString Enums::dcInput_typeToText(DcInputs_InputType type) const
+Enums::DcMeter_Type Enums::dcMeter_type(const QString &serviceType, int monitorMode) const
+{
+	// These service types directly reflect the DC meter type, regardless of the /MonitorMode value.
+	static const QHash<QString, DcMeter_Type> serviceTypes = {
+		{ QStringLiteral("alternator"), DcMeter_Type_Alternator },
+		{ QStringLiteral("dcsystem"), DcMeter_Type_DcSystem },
+		{ QStringLiteral("fuelcell"), DcMeter_Type_FuelCell },
+		{ QStringLiteral("motordrive"), DcMeter_Type_ElectricDrive },
+		{ QStringLiteral("solarcharger"), DcMeter_Type_SolarCharger },
+	};
+	if (const auto it = serviceTypes.find(serviceType); it != serviceTypes.end()) {
+		return it.value();
+	}
+
+	// For dcload and dcsource services, the /MonitorMode indicates the type of DC load/source.
+	if (serviceType == "dcsource") {
+		switch (monitorMode) {
+		case MonitorMode_DcSource_Generic: return DcMeter_Type_GenericSource;
+		case MonitorMode_DcSource_AcCharger: return DcMeter_Type_AcCharger;
+		case MonitorMode_DcSource_DcCharger: return DcMeter_Type_DcCharger;
+		case MonitorMode_DcSource_WaterGenerator: return DcMeter_Type_WaterGenerator;
+		case MonitorMode_DcSource_ShaftGenerator: return DcMeter_Type_ShaftGenerator;
+		case MonitorMode_DcSource_WindCharger: return DcMeter_Type_WindCharger;
+		default: return DcMeter_Type_GenericSource;
+		}
+	} else if (serviceType == "dcload") {
+		switch (monitorMode) {
+		case MonitorMode_DcLoad_Generic: return DcMeter_Type_GenericLoad;
+		case MonitorMode_DcLoad_Fridge: return DcMeter_Type_Fridge;
+		case MonitorMode_DcLoad_WaterPump: return DcMeter_Type_WaterPump;
+		case MonitorMode_DcLoad_BilgePump: return DcMeter_Type_BilgePump;
+		case MonitorMode_DcLoad_Inverter: return DcMeter_Type_Inverter;
+		case MonitorMode_DcLoad_WaterHeater: return DcMeter_Type_WaterHeater;
+		default: return DcMeter_Type_GenericLoad;
+		}
+	} else {
+		return DcMeter_Type_GenericMeter;
+	}
+}
+
+QString Enums::dcMeter_typeToText(DcMeter_Type type) const
 {
 	switch (type) {
-	case DcInputs_InputType_AcCharger:
+	case DcMeter_Type_AcCharger:
 		//% "AC charger"
-		return qtTrId("dcInputs_ac_charger");
-	case DcInputs_InputType_Alternator:
+		return qtTrId("dcMeter_ac_charger");
+	case DcMeter_Type_Alternator:
 		//% "Alternator"
-		return qtTrId("dcInputs_alternator");
-	case DcInputs_InputType_BilgePump:
+		return qtTrId("dcMeter_alternator");
+	case DcMeter_Type_BilgePump:
 		//% "Bilge pump"
-		return qtTrId("dcInputs_bilge_pump");
-	case DcInputs_InputType_DcCharger:
+		return qtTrId("dcMeter_bilge_pump");
+	case DcMeter_Type_DcCharger:
 		//% "DC/DC charger"
-		return qtTrId("dcInputs_dccharger");
-	case DcInputs_InputType_DcSystem:
+		return qtTrId("dcMeter_dccharger");
+	case DcMeter_Type_DcSystem:
 		//% "DC system"
-		return qtTrId("dcInputs_dc_system");
-	case DcInputs_InputType_ElectricDrive:
+		return qtTrId("dcMeter_dc_system");
+	case DcMeter_Type_ElectricDrive:
 		//% "Electric drive"
-		return qtTrId("dcInputs_electric_drive");
-	case DcInputs_InputType_Fridge:
+		return qtTrId("dcMeter_electric_drive");
+	case DcMeter_Type_Fridge:
 		//% "Fridge"
-		return qtTrId("dcInputs_fridge");
-	case DcInputs_InputType_FuelCell:
+		return qtTrId("dcMeter_fridge");
+	case DcMeter_Type_FuelCell:
 		//% "Fuel cell"
-		return qtTrId("dcInputs_fuelcell");
-	case DcInputs_InputType_GenericLoad:
+		return qtTrId("dcMeter_fuelcell");
+	case DcMeter_Type_GenericLoad:
 		//% "Generic load"
-		return qtTrId("dcInputs_generic_load");
-	case DcInputs_InputType_GenericMeter:
+		return qtTrId("dcMeter_generic_load");
+	case DcMeter_Type_GenericMeter:
 		//% "Generic meter"
-		return qtTrId("dcInputs_generic_meter");
-	case DcInputs_InputType_GenericSource:
+		return qtTrId("dcMeter_generic_meter");
+	case DcMeter_Type_GenericSource:
 		//% "Generic source"
-		return qtTrId("dcInputs_generic_source");
-	case DcInputs_InputType_Inverter:
+		return qtTrId("dcMeter_generic_source");
+	case DcMeter_Type_Inverter:
 		//% "Inverter"
-		return qtTrId("dcInputs_inverter");
-	case DcInputs_InputType_ShaftGenerator:
+		return qtTrId("dcMeter_inverter");
+	case DcMeter_Type_ShaftGenerator:
 		//% "Shaft generator"
-		return qtTrId("dcInputs_shaft_generator");
-	case DcInputs_InputType_SolarCharger:
+		return qtTrId("dcMeter_shaft_generator");
+	case DcMeter_Type_SolarCharger:
 		//% "Solar charger"
-		return qtTrId("dcInputs_solar_charger");
-	case DcInputs_InputType_WaterGenerator:
+		return qtTrId("dcMeter_solar_charger");
+	case DcMeter_Type_WaterGenerator:
 		//% "Water generator"
-		return qtTrId("dcInputs_water_generator");
-	case DcInputs_InputType_WaterHeater:
+		return qtTrId("dcMeter_water_generator");
+	case DcMeter_Type_WaterHeater:
 		//% "Water heater"
-		return qtTrId("dcInputs_water_heater");
-	case DcInputs_InputType_WaterPump:
+		return qtTrId("dcMeter_water_heater");
+	case DcMeter_Type_WaterPump:
 		//% "Water pump"
-		return qtTrId("dcInputs_water_pump");
-	case DcInputs_InputType_WindCharger:
+		return qtTrId("dcMeter_water_pump");
+	case DcMeter_Type_WindCharger:
 		//% "Wind charger"
-		return qtTrId("dcInputs_wind_charger");
+		return qtTrId("dcMeter_wind_charger");
 	}
 	return QString();
+}
+
+QString Enums::dcMeter_iconForType(DcMeter_Type type) const
+{
+	switch (type) {
+	case DcMeter_Type_Alternator:
+		return "qrc:/images/alternator.svg";
+	case DcMeter_Type_GenericSource:
+		return "qrc:/images/generator.svg";
+	case DcMeter_Type_WindCharger:
+		return "qrc:/images/wind.svg";
+	default:
+		return "qrc:/images/icon_dc_24.svg";
+	}
 }
 
 QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
