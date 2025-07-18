@@ -65,12 +65,4 @@ VisibleItemModel {
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}
-
-	ListNavigation {
-		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
-		}
-	}
 }

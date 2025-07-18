@@ -175,35 +175,4 @@ VisibleItemModel {
 			uid: root.bindPrefix + "/AllowedRoles"
 		}
 	}
-
-	ListNavigation {
-		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage(deviceInfoComponent, { title: text })
-		}
-
-		Component {
-			id: deviceInfoComponent
-
-			PageDeviceInfo {
-				id: deviceInfoPage
-
-				bindPrefix: root.bindPrefix
-
-				settingsListView.footer: SettingsColumn {
-					topPadding: Theme.geometry_gradientList_spacing
-					width: parent.width
-					preferredVisible: dataManagerVersion.preferredVisible
-
-					ListText {
-						id: dataManagerVersion
-						//% "Data manager version"
-						text: qsTrId("ac-in-modeldefault_data_manager_version")
-						dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-						preferredVisible: dataItem.valid
-					}
-				}
-			}
-		}
-	}
 }

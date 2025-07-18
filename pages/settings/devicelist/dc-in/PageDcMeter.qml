@@ -6,21 +6,16 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of generic DC meter settings for a DC device.
+*/
+DevicePage {
 	id: root
 
 	property alias bindPrefix: dcMeterMode.bindPrefix
 
-	title: device.name
-
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
-
-	GradientListView {
-		model: PageDcMeterModel {
-			id: dcMeterMode
-		}
+	serviceUid: bindPrefix
+	settingsModel: PageDcMeterModel {
+		id: dcMeterMode
 	}
 }
