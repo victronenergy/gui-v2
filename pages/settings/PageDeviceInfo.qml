@@ -10,33 +10,34 @@ import QtQuick.Controls.impl as CP
 Page {
 	id: root
 
-	property string bindPrefix
-	property alias settingsListView: settingsListView
+	// The uid of the service that provides the device information.
+	required property string serviceUid
+
+	// Additional settings to be loaded.
+	property Component extraDeviceInfo
 
 	title: CommonWords.device_info_title
 
 	GradientListView {
-		id: settingsListView
-
 		model: VisibleItemModel {
 			ListText {
 				//% "Connection"
 				text: qsTrId("settings_deviceinfo_connection")
-				dataItem.uid: root.bindPrefix + "/Mgmt/Connection"
+				dataItem.uid: root.serviceUid + "/Mgmt/Connection"
 				dataItem.invalidate: false
 			}
 
 			ListText {
 				//% "Product"
 				text: qsTrId("settings_deviceinfo_product")
-				dataItem.uid: root.bindPrefix + "/ProductName"
+				dataItem.uid: root.serviceUid + "/ProductName"
 				dataItem.invalidate: false
 			}
 
 			ListTextField {
 				//% "Name"
 				text: qsTrId("settings_deviceinfo_name")
-				dataItem.uid: root.bindPrefix + "/CustomName"
+				dataItem.uid: root.serviceUid + "/CustomName"
 				dataItem.invalidate: false
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
@@ -47,12 +48,12 @@ Page {
 				//% "Product ID"
 				text: qsTrId("settings_deviceinfo_product_id")
 				secondaryText: Utils.toHexFormat(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/ProductId"
+				dataItem.uid: root.serviceUid + "/ProductId"
 				dataItem.invalidate: false
 			}
 
 			ListFirmwareVersion {
-				bindPrefix: root.bindPrefix
+				bindPrefix: root.serviceUid
 				dataItem.invalidate: false
 				preferredVisible: dataItem.valid
 			}
@@ -60,20 +61,20 @@ Page {
 			ListText {
 				//% "Hardware version"
 				text: qsTrId("settings_deviceinfo_hardware_version")
-				dataItem.uid: root.bindPrefix + "/HardwareVersion"
+				dataItem.uid: root.serviceUid + "/HardwareVersion"
 				dataItem.invalidate: false
 				preferredVisible: dataItem.valid
 			}
 
 			ListText {
 				text: CommonWords.vrm_instance
-				dataItem.uid: root.bindPrefix + "/DeviceInstance"
+				dataItem.uid: root.serviceUid + "/DeviceInstance"
 				dataItem.invalidate: false
 			}
 
 			ListText {
 				text: CommonWords.serial_number
-				dataItem.uid: root.bindPrefix + "/Serial"
+				dataItem.uid: root.serviceUid + "/Serial"
 				dataItem.invalidate: false
 				preferredVisible: dataItem.valid
 			}
@@ -81,10 +82,12 @@ Page {
 			ListText {
 				//% "Device name"
 				text: qsTrId("settings_deviceinfo_device_name")
-				dataItem.uid: root.bindPrefix + "/DeviceName"
+				dataItem.uid: root.serviceUid + "/DeviceName"
 				dataItem.invalidate: false
 				preferredVisible: dataItem.valid
 			}
 		}
+
+		footer: root.extraDeviceInfo
 	}
 }

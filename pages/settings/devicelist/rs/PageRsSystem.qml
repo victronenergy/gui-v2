@@ -6,6 +6,12 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	Provides a list of settings for an acsystem service.
+
+	Note this does not extend DevicePage, as an AC system is a virtual device for managing a group
+	of Multi RS devices.
+*/
 Page {
 	id: root
 

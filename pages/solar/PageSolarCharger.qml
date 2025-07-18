@@ -6,7 +6,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for a solarcharger device.
+*/
+DevicePage {
 	id: root
 
 	required property string bindPrefix
@@ -33,12 +36,8 @@ Page {
 		return true
 	}
 
-	title: device.name
-
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
+	serviceUid: root.bindPrefix
+	settingsModel: _isModelSupported() ? supportedProductModel : unsupportedProductModel
 
 	VeQuickItem {
 		id: firmwareVersion
@@ -60,10 +59,6 @@ Page {
 		uid: root.bindPrefix + "/Alarms/ShortCircuit"
 	}
 
-	GradientListView {
-		model: _isModelSupported() ? supportedProductModel : unsupportedProductModel
-	}
-
 	VisibleItemModel {
 		id: unsupportedProductModel
 
@@ -80,14 +75,6 @@ Page {
 					reason = qsTrId("solarcharger_not_supported_reason_version")
 				}
 				return unsupported + (reason ? "\n" + reason : "")
-			}
-		}
-
-		ListNavigation {
-			text: CommonWords.device_info_title
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
 			}
 		}
 	}
@@ -317,14 +304,6 @@ Page {
 			VeQuickItem {
 				id: linkNetworkStatus
 				uid: root.bindPrefix + "/Link/NetworkStatus"
-			}
-		}
-
-		ListNavigation {
-			text: CommonWords.device_info_title
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
 			}
 		}
 	}

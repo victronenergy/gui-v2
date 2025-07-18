@@ -264,6 +264,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/DateSelector.qml
     components/Device.qml
     components/DeviceListDelegate.qml
+    components/DevicePage.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
     components/EnvironmentGauge.qml
@@ -632,8 +633,7 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
     pages/settings/devicelist/PageMotorDrive.qml
-    pages/settings/devicelist/PageSwitchableOutput.qml
-    pages/settings/devicelist/PageSwitchableOutputList.qml
+    pages/settings/devicelist/PageSwitch.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
@@ -717,6 +717,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounter.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml
+    pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml
+    pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml
     pages/settings/devicelist/temperature/PageTemperatureSensor.qml
     pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml
     pages/settings/tz/TzAfricaData.qml
@@ -744,7 +746,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/vebusdevice/PageVeBusAlarmSettings.qml
     pages/vebusdevice/PageVeBusBms.qml
     pages/vebusdevice/PageVeBusDebug.qml
-    pages/vebusdevice/PageVeBusDeviceInfo.qml
     pages/vebusdevice/PageVeBusError11Device.qml
     pages/vebusdevice/PageVeBusError11Menu.qml
     pages/vebusdevice/PageVeBusError11View.qml

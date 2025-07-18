@@ -175,15 +175,6 @@ Page {
 					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.solarDevice.serviceUid })
 				}
 			}
-
-			ListNavigation {
-				text: CommonWords.device_info_title
-				preferredVisible: productPageLink.pageUrl.length === 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.solarDevice.serviceUid })
-				}
-			}
 		}
 	}
 }

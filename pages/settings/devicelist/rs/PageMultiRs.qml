@@ -6,18 +6,113 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for a Multi RS device.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
 	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value >= 2 && !_phase.valid
 	readonly property int trackerCount: numberOfTrackers.value || 0
-	readonly property alias solarDevice: device
 
-	title: device.name
+	serviceUid: bindPrefix
+
+	settingsModel: VisibleItemModel {
+		ListText {
+			text: CommonWords.state
+			secondaryText: Global.system.systemStateToText(dataItem.value)
+			dataItem.uid: root.bindPrefix + "/State"
+		}
+
+		ListQuantity {
+			text: CommonWords.state_of_charge
+			dataItem.uid: root.bindPrefix + "/Soc"
+			unit: VenusOS.Units_Percentage
+		}
+
+		ListTemperature {
+			text: CommonWords.battery_temperature
+			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			preferredVisible: dataItem.valid
+		}
+
+		ListActiveAcInput {
+			bindPrefix: root.bindPrefix
+		}
+
+		Loader {
+			width: parent ? parent.width : 0
+			sourceComponent: root.multiPhase ? threePhaseTables : singlePhaseAcInOut
+		}
+
+		ListDcOutputQuantityGroup {
+			text: CommonWords.dc
+			bindPrefix: root.bindPrefix
+		}
+
+		Loader {
+			width: parent ? parent.width : 0
+			sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
+					: root.trackerCount > 1 ? multiTrackerComponent
+					: null
+		}
+
+		ListQuantity {
+			//% "Total yield"
+			text: qsTrId("settings_multirs_total_yield")
+			preferredVisible: root.trackerCount > 0
+			unit: VenusOS.Units_Energy_KiloWattHour
+			dataItem.uid: root.bindPrefix + "/Yield/User"
+		}
+
+		ListQuantity {
+			//% "System yield"
+			text: qsTrId("settings_multirs_system_yield")
+			preferredVisible: root.trackerCount > 0
+			unit: VenusOS.Units_Energy_KiloWattHour
+			dataItem.uid: root.bindPrefix + "/Yield/System"
+		}
+
+		ListText {
+			text: CommonWords.error
+			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+		}
+
+		ListRelayState {
+			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+		}
+
+		ListNavigation {
+			text: CommonWords.daily_history
+			preferredVisible: root.trackerCount > 0
+			onClicked: {
+				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
+						{ "solarHistory": solarDevice.history })
+			}
+		}
+
+		ListNavigation {
+			text: CommonWords.overall_history
+			preferredVisible: root.trackerCount > 0
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
+						{ "title": text, "bindPrefix": root.bindPrefix })
+			}
+		}
+
+		ListNavigation {
+			text: CommonWords.alarm_status
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
+						{ "title": text, "bindPrefix": root.bindPrefix })
+			}
+		}
+	}
 
 	SolarDevice {
-		id: device
+		id: solarDevice
 		serviceUid: root.bindPrefix
 	}
 
@@ -44,109 +139,6 @@ Page {
 	VeQuickItem {
 		id: pvVoltage
 		uid: root.bindPrefix + "/Pv/V"
-	}
-
-	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				text: CommonWords.state
-				secondaryText: Global.system.systemStateToText(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/State"
-			}
-
-			ListQuantity {
-				text: CommonWords.state_of_charge
-				dataItem.uid: root.bindPrefix + "/Soc"
-				unit: VenusOS.Units_Percentage
-			}
-
-			ListTemperature {
-				text: CommonWords.battery_temperature
-				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-				preferredVisible: dataItem.valid
-			}
-
-			ListActiveAcInput {
-				bindPrefix: root.bindPrefix
-			}
-
-			Loader {
-				width: parent ? parent.width : 0
-				sourceComponent: root.multiPhase ? threePhaseTables : singlePhaseAcInOut
-			}
-
-			ListDcOutputQuantityGroup {
-				text: CommonWords.dc
-				bindPrefix: root.bindPrefix
-			}
-
-			Loader {
-				width: parent ? parent.width : 0
-				sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
-						: root.trackerCount > 1 ? multiTrackerComponent
-						: null
-			}
-
-			ListQuantity {
-				//% "Total yield"
-				text: qsTrId("settings_multirs_total_yield")
-				preferredVisible: root.trackerCount > 0
-				unit: VenusOS.Units_Energy_KiloWattHour
-				dataItem.uid: root.bindPrefix + "/Yield/User"
-			}
-
-			ListQuantity {
-				//% "System yield"
-				text: qsTrId("settings_multirs_system_yield")
-				preferredVisible: root.trackerCount > 0
-				unit: VenusOS.Units_Energy_KiloWattHour
-				dataItem.uid: root.bindPrefix + "/Yield/System"
-			}
-
-			ListText {
-				text: CommonWords.error
-				dataItem.uid: root.bindPrefix + "/ErrorCode"
-				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
-			}
-
-			ListRelayState {
-				dataItem.uid: root.bindPrefix + "/Relay/0/State"
-			}
-
-			ListNavigation {
-				text: CommonWords.daily_history
-				preferredVisible: root.trackerCount > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "solarHistory": root.device.history })
-				}
-			}
-
-			ListNavigation {
-				text: CommonWords.overall_history
-				preferredVisible: root.trackerCount > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
-			}
-
-			ListNavigation {
-				text: CommonWords.alarm_status
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
-			}
-
-			ListNavigation {
-				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
-			}
-		}
 	}
 
 	Component {
@@ -241,7 +233,7 @@ Page {
 
 							SolarTracker {
 								id: tracker
-								device: root.solarDevice
+								device: solarDevice
 								trackerIndex: tableRow.index
 							}
 						}
