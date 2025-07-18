@@ -64,6 +64,15 @@ Page {
 				preferredVisible: root._isVecan
 			}
 
+			ListSwitch {
+				//% "Reverse current polarity"
+				text: qsTrId("settings_canbus_rvc_reverse_current_polarity")
+				dataItem.uid: root._rvcSettingsPrefix + "/ReverseCurrent"
+				preferredVisible: root._isRvc && dataItem.valid
+				//% "When enabled, the current polarity in the CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1, and SOLAR_CONTROLLER_BATTERY_STATUS DGNs is reversed."
+				caption: qsTrId("settings_canbus_rvc_reverse_current_polarity_description")
+			}
+
 			ListSpinBox {
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
