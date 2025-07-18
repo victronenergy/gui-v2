@@ -14,6 +14,7 @@ OverviewWidget {
 			? Global.dcInputs.inputType(inputs.firstObject.serviceUid, inputs.firstObject.monitorMode)
 			: -1
 	readonly property string detailUrl: inputType === VenusOS.DcInputs_InputType_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+			: inputs.firstObject?.serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
 	function _refreshTotalPower() {
