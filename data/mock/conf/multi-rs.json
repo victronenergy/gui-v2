@@ -4,7 +4,7 @@
         ":/data/mock/conf/services/pylontech.json",
         ":/data/mock/conf/services/motordrive.json",
         ":/data/mock/conf/services/multirs-smart.json",
-        ":/data/mock/conf/services/network-ethernet.json",
+        ":/data/mock/conf/services/notifications-alarm.json",
         ":/data/mock/conf/setup-common.json"
     ],
     "setup": {
