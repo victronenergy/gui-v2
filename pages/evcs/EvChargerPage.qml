@@ -10,7 +10,6 @@ Page {
 	id: root
 
 	required property string bindPrefix
-	readonly property var evCharger: Global.evChargers.model.deviceAt(Global.evChargers.model.indexOf(bindPrefix))
 	readonly property bool energyMeterMode: !chargeMode.dataItem.valid
 
 	title: evCharger.name
@@ -28,13 +27,13 @@ Page {
 						if (root.energyMeterMode) {
 							return "--"
 						}
-						const actual = isNaN(root.evCharger.current) ? "--" : Math.round(root.evCharger.current)
-						const max = isNaN(root.evCharger.maxCurrent) ? "--" : Math.round(root.evCharger.maxCurrent)
+						const actual = isNaN(evCharger.current) ? "--" : Math.round(evCharger.current)
+						const max = isNaN(evCharger.maxCurrent) ? "--" : Math.round(evCharger.maxCurrent)
 						return actual + "/" + max
 					}
 
 					readonly property string chargingTimeText: root.energyMeterMode ? "--"
-							: Utils.formatAsHHMM(root.evCharger.chargingTime, true)
+							: Utils.formatAsHHMM(evCharger.chargingTime, true)
 
 					width: parent.width
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
@@ -51,9 +50,9 @@ Page {
 					]
 					bodyHeaderText: CommonWords.total
 					bodyModel: QuantityObjectModel {
-						QuantityObject { object: root.evCharger; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: evCharger; key: "power"; unit: VenusOS.Units_Watt }
 						QuantityObject { object: chargerSummary; key: "currentSummaryText"; unit: VenusOS.Units_Amp }
-						QuantityObject { object: root.evCharger; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+						QuantityObject { object: evCharger; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
 						QuantityObject { object: chargerSummary; key: "chargingTimeText" }
 					}
 				}
@@ -94,7 +93,7 @@ Page {
 							filterRole: VeQItemTableModel.UniqueIdRole
 							filterRegExp: "\/L\\d+$"
 							model: VeQItemTableModel {
-								uids: [ root.evCharger.serviceUid + "/Ac" ]
+								uids: [ evCharger.serviceUid + "/Ac" ]
 								flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 							}
 						}
@@ -118,7 +117,7 @@ Page {
 				id: chargeMode
 				//% "Charge mode"
 				text: qsTrId("evcs_charge_mode")
-				dataItem.uid: root.evCharger.serviceUid + "/Mode"
+				dataItem.uid: evCharger.serviceUid + "/Mode"
 				preferredVisible: dataItem.valid
 				optionModel: Global.evChargers.modeOptionModel
 			}
@@ -127,8 +126,8 @@ Page {
 				text: CommonWords.charge_current
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				from: 0
-				to: root.evCharger.maxCurrent
-				dataItem.uid: root.evCharger.serviceUid + "/SetCurrent"
+				to: evCharger.maxCurrent
+				dataItem.uid: evCharger.serviceUid + "/SetCurrent"
 				preferredVisible: dataItem.valid
 				interactive: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 			}
@@ -136,7 +135,7 @@ Page {
 			ListSwitch {
 				//% "Enable charging"
 				text: qsTrId("evcs_enable_charging")
-				dataItem.uid: root.evCharger.serviceUid + "/StartStop"
+				dataItem.uid: evCharger.serviceUid + "/StartStop"
 				preferredVisible: dataItem.valid
 			}
 
@@ -146,16 +145,16 @@ Page {
 				onClicked: {
 					if (root.energyMeterMode) {
 						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ "title": text, "bindPrefix": evCharger.serviceUid })
 					} else {
 						Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
-								{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+								{ "title": text, "bindPrefix": evCharger.serviceUid })
 					}
 				}
 
 				VeQuickItem {
 					id: allowedRoles
-					uid: root.evCharger.serviceUid + "/AllowedRoles"
+					uid: evCharger.serviceUid + "/AllowedRoles"
 				}
 			}
 
@@ -163,9 +162,14 @@ Page {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.evCharger.serviceUid })
+							{ "title": text, "bindPrefix": evCharger.serviceUid })
 				}
 			}
 		}
+	}
+
+	EvCharger {
+		id: evCharger
+		serviceUid: root.bindPrefix
 	}
 }
