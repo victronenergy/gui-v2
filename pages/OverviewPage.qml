@@ -302,11 +302,11 @@ SwipeViewPage {
 
 	function _dcWidgetTypeForInputType(dcInputType) {
 		switch (dcInputType) {
-		case VenusOS.DcInputs_InputType_Alternator:
+		case VenusOS.DcMeter_Type_Alternator:
 			return VenusOS.OverviewWidget_Type_Alternator
-		case VenusOS.DcInputs_InputType_FuelCell:
+		case VenusOS.DcMeter_Type_FuelCell:
 			return VenusOS.OverviewWidget_Type_FuelCell
-		case VenusOS.DcInputs_InputType_WindCharger:
+		case VenusOS.DcMeter_Type_WindCharger:
 			return VenusOS.OverviewWidget_Type_Wind
 		default:
 			// Use DC Generator as the catch-all type for any DC power source that isn't
