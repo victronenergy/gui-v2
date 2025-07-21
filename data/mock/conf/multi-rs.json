@@ -1,5 +1,6 @@
 {
     "files": [
+        ":/data/mock/conf/services/dcgenset.json",
         ":/data/mock/conf/services/evcharger1.json",
         ":/data/mock/conf/services/pylontech.json",
         ":/data/mock/conf/services/motordrive.json",
