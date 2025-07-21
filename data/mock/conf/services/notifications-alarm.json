@@ -1,13 +1,13 @@
 {
     "com.victronenergy.platform": {
-        "/Notifications/0/Acknowledged": false,
-        "/Notifications/0/Active": true,
+        "/Notifications/0/Acknowledged": 0,
+        "/Notifications/0/Active": 0,
         "/Notifications/0/AlarmValue": 2,
         "/Notifications/0/DateTime": 1750230796,
         "/Notifications/0/Description": "Low SOC",
         "/Notifications/0/DeviceName": "SmartShunt",
         "/Notifications/0/Service": "com.victronenergy.battery.ttyS5",
-        "/Notifications/0/Silenced": false,
+        "/Notifications/0/Silenced": 0,
         "/Notifications/0/Trigger": "/Alarms/LowSoc",
         "/Notifications/0/Type": 1,
         "/Notifications/0/Value": "",
