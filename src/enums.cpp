@@ -67,6 +67,7 @@ Enums::DcMeter_Type Enums::dcMeter_type(const QString &serviceType, int monitorM
 		{ QStringLiteral("alternator"), DcMeter_Type_Alternator },
 		{ QStringLiteral("dcsystem"), DcMeter_Type_DcSystem },
 		{ QStringLiteral("fuelcell"), DcMeter_Type_FuelCell },
+		{ QStringLiteral("dcgenset"), DcMeter_Type_Genset },
 		{ QStringLiteral("motordrive"), DcMeter_Type_ElectricDrive },
 		{ QStringLiteral("solarcharger"), DcMeter_Type_SolarCharger },
 	};
@@ -136,6 +137,9 @@ QString Enums::dcMeter_typeToText(DcMeter_Type type) const
 	case DcMeter_Type_GenericSource:
 		//% "Generic source"
 		return qtTrId("dcMeter_generic_source");
+	case DcMeter_Type_Genset:
+		//% "DC genset"
+		return qtTrId("dcMeter_dc_genset");
 	case DcMeter_Type_Inverter:
 		//% "Inverter"
 		return qtTrId("dcMeter_inverter");
