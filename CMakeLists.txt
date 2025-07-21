@@ -1228,7 +1228,7 @@ add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm
     COMMAND Qt6::lupdate -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -I "${CMAKE_CURRENT_SOURCE_DIR}/src/veutil/inc"
     COMMAND Qt6::lrelease -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
-    DEPENDS ${BUILD_DIR_TS_FILES}
+    DEPENDS ${BUILD_DIR_TS_FILES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
     COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_en.ts"
 )
 foreach(TsCode ${TS_CODES})
@@ -1241,7 +1241,7 @@ foreach(TsCode ${TS_CODES})
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm
         COMMAND Qt6::lupdate -no-obsolete "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -I "${CMAKE_CURRENT_SOURCE_DIR}/src/veutil/inc"
         COMMAND Qt6::lrelease -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
-        DEPENDS ${BUILD_DIR_TS_FILES}
+        DEPENDS ${BUILD_DIR_TS_FILES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
         COMMENT "Running lupdate and lrelease for ${PROJECT_NAME}_${TsCode}.ts"
     )
 endforeach()
