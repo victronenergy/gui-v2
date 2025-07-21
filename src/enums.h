@@ -207,6 +207,7 @@ public:
 		DcMeter_Type_GenericLoad,
 		DcMeter_Type_GenericMeter,
 		DcMeter_Type_GenericSource,
+		DcMeter_Type_Genset,
 		DcMeter_Type_Inverter,
 		DcMeter_Type_ShaftGenerator,
 		DcMeter_Type_SolarCharger,
