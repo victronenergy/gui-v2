@@ -81,7 +81,7 @@
             "/Ac/In/0/Connected": 0,
             "/Ac/In/0/DeviceInstance": 40,
             "/Ac/In/0/ServiceType": "genset",
-            "/Ac/In/0/ServiceName": "com.victronenergy.genset.dse_4294967295",
+            "/Ac/In/0/ServiceName": "com.victronenergy.genset.dse_987654",
             "/Ac/In/0/Source": 2,
             "/Ac/In/1/Connected": 1,
             "/Ac/In/1/DeviceInstance": 274,
