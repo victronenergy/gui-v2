@@ -29,6 +29,7 @@
     "color_background_primary": "color_white",
     "color_background_secondary": "color_gray9",
     "color_background_disabled": "color_gray6",
+    "color_background_disabled_selected": "color_gray8",
 
     "color_focus_highlight": "color_orange",
 

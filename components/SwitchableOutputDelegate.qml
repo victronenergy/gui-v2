@@ -344,7 +344,7 @@ BaseListItem {
 			fontPixelSize: Theme.font_size_body1
 			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
 				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
-			enabled: !toggleState.busy
+			enabled: !toggleState.busy && output.status !== VenusOS.SwitchableOutput_Status_Disabled
 			onButtonClicked: (buttonIndex) => {
 				activateIndex(buttonIndex)
 			}
