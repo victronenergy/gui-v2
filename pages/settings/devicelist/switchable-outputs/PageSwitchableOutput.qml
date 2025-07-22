@@ -56,6 +56,7 @@ Page {
 				dataItem.uid: root.outputUid + "/Settings/Type"
 				preferredVisible: dataItem.valid
 				optionModel: validTypesItem.options
+				interactive: validTypesItem.options.length > 1
 			}
 
 			ListSwitch {
