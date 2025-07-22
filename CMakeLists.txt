@@ -1232,7 +1232,7 @@ add_custom_command(
     COMMAND echo "running lrelease for ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
     COMMAND Qt6::lrelease -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.qm"
     COMMAND echo "finished running lrelease for ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
 )
 
 foreach(TsCode ${TS_CODES})
@@ -1246,7 +1246,7 @@ foreach(TsCode ${TS_CODES})
         #COMMAND "${CMAKE_COMMAND}" -E sleep 5
         COMMAND echo "running lrelease for ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
         COMMAND Qt6::lrelease -verbose -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
-        #DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt
+        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
         COMMENT "Running lupdate, lrelease for ${PROJECT_NAME}_${TsCode}.ts"
     )
 endforeach()
