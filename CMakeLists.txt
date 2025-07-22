@@ -1240,13 +1240,13 @@ foreach(TsCode ${TS_CODES})
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm
         COMMAND echo "copying ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts to ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
         COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
-        COMMAND "${CMAKE_COMMAND}" -E sleep 5
+        #COMMAND "${CMAKE_COMMAND}" -E sleep 5
         COMMAND Qt6::lupdate -no-obsolete -verbose "@${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt" -ts "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -I "${CMAKE_CURRENT_SOURCE_DIR}/src/veutil/inc"
         COMMAND echo "finished running lupdate for ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
-        COMMAND "${CMAKE_COMMAND}" -E sleep 5
+        #COMMAND "${CMAKE_COMMAND}" -E sleep 5
         COMMAND echo "running lrelease for ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
         COMMAND Qt6::lrelease -verbose -idbased "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" -qm "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.qm"
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt
+        #DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt
         COMMENT "Running lupdate, lrelease for ${PROJECT_NAME}_${TsCode}.ts"
     )
 endforeach()
