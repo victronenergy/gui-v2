@@ -49,5 +49,9 @@ if (${VENUS_GX_BUILD})
             data
             pages
         DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
+    install(
+        FILES
+            ${PROJECT_SOURCE_DIR}/tools/customisationcompiler.py
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
 

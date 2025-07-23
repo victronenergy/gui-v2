@@ -6,6 +6,7 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
+#include "src/customisations.h"
 #include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
@@ -494,6 +495,9 @@ int main(int argc, char *argv[])
 	languageLoader->setFontUrlPrefix(fontUrlPrefix);
 #endif
 	languageLoader->init(); // load the translation catalogue.
+
+	/* Force construction of customisations loader */
+	Victron::VenusOS::Customisations *customisationsLoader = Victron::VenusOS::Customisations::create(&engine);
 
 	/* Force construction of fps counter */
 	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
