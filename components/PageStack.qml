@@ -80,7 +80,9 @@ StackView {
 			_popAndDestroyAllPages(StackView.Immediate)
 		}
 
-		let objectOrUrl = typeof(obj) === "string" ? ".." + obj : obj
+		let objectOrUrl = typeof(obj) !== "string" ? obj
+			: obj.indexOf("qrc:") === 0 ? obj
+			: ".." + obj
 		if (typeof(obj) === "string") {
 			// pre-construct the object to make sure there are no errors
 			// to avoid messing up the page stack state.

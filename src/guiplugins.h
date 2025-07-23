@@ -1,0 +1,316 @@
+/*
+** Copyright (C) 2025 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+#ifndef VICTRON_GUIV2_GUIPLUGINS_H
+#define VICTRON_GUIV2_GUIPLUGINS_H
+
+#include <QAbstractListModel>
+#include <QUrl>
+#include <QString>
+#include <QStringList>
+#include <QColor>
+#include <QVector>
+#include <QPointer>
+#include <QMap>
+
+#include <QTimer>
+
+#include <QLocale>
+#include <QTranslator>
+
+#include <qqmlintegration.h>
+#include <QQmlEngine>
+#include <QQmlParserStatus>
+
+class QFileSystemWatcher;
+
+namespace Victron {
+namespace VenusOS {
+
+class GuiPlugin;
+
+// needs to be initialised before loading the UI.
+class GuiPluginLoader : public QObject
+{
+	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
+
+	Q_PROPERTY(QString pluginsJson READ pluginsJson WRITE setPluginsJson NOTIFY pluginsJsonChanged)
+	Q_PROPERTY(QVector<GuiPlugin> plugins READ plugins NOTIFY pluginsChanged)
+
+public:
+	enum IntegrationType {
+		InvalidIntegrationType,
+		PluginSettingsPage,
+		DeviceListSettingsPage,
+		NavigationPage,
+		QuickAccessPane,
+		QuickAccessPaneCard
+	};
+	Q_ENUM(IntegrationType)
+
+	enum QuickAccessPaneCardType {
+		InvalidCardType,
+		ControlsCard,
+		SwitchesCard
+	};
+	Q_ENUM(QuickAccessPaneCardType)
+
+	static GuiPluginLoader* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
+	GuiPluginLoader() = delete;
+	GuiPluginLoader(const GuiPluginLoader&) = delete;
+	GuiPluginLoader& operator=(const GuiPluginLoader&) = delete;
+	GuiPluginLoader(QObject *parent);
+	~GuiPluginLoader() override;
+
+	QString pluginsJson() const;
+	void setPluginsJson(const QString &json);
+
+	QVector<GuiPlugin> plugins() const;
+	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
+
+Q_SIGNALS:
+	void pluginsJsonChanged();
+	void pluginsChanged();
+
+private:
+	void watchPluginDirs(const QString &appsDir);
+	void readFromFilesystem(const QString &path);
+	void initPlugins();
+	void populatePlugins();
+	QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins) const;
+	bool loadPluginData(const GuiPlugin &plugin);
+	void unloadPluginData();
+	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
+	QString m_pluginsJson;
+	QVector<GuiPlugin> m_plugins;
+	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
+	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
+	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
+	QFileSystemWatcher *m_guiPluginDirsWatcher = nullptr;
+	QMap<QString, QStringList> m_pluginDirData;
+	QTimer m_invokeOnceTimer;
+};
+
+/*
+Each plugin can specify one or more integrations.
+
+Each integration is associated with a plugin,
+which is identified by the pluginName property.
+
+There are currently 5 supported types of integrations:
+	1) a plugin settings page
+		- causes the plugin entry in Settings/Integrations/UI Plugins
+		  to become a drill-down to the custom settings page.
+	2) a device list settings page
+		- causes a new navigation list item to be injected into
+		  the device list settings page associated with any
+		  device whose productId matches the specified productId.
+	3) a navigation page
+		- causes a new icon to be added to the navigation bar,
+		  and an associated page to be added to be navigation
+		  swipe view.
+	4) a quick access pane
+		- causes a new icon to be added to the status bar,
+		  which opens an associated custom quick access pane
+		  when pressed.
+	5) a quick access pane card
+		- causes a new card to be injected into one of the
+		  existing quick action pane views (i.e. either a
+		  controls card, or a switches card).
+
+** TODO: actually support 3/4/5. **
+In the prototype, only type 1 and 2 are supported.
+*/
+class GuiPluginIntegration
+{
+	Q_GADGET
+
+	// valid for all integrations:
+	Q_PROPERTY(QString pluginName READ pluginName)
+	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type)
+	Q_PROPERTY(QUrl url READ url)
+
+	// valid for navigation page and quick access pane integrations
+	Q_PROPERTY(QUrl icon READ icon)
+
+	// valid for device list settings page integrations only
+	Q_PROPERTY(QString title READ title)
+	Q_PROPERTY(QString productId READ productId)
+
+	// valid for quick access pane card integrations only
+	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType)
+
+public:
+	QString pluginName() const { return m_pluginName; }
+	QString title() const { return m_title; }
+	QString productId() const { return m_productId; }
+	QUrl icon() const { return m_icon; }
+	QUrl url() const { return m_url; }
+	GuiPluginLoader::IntegrationType type() const { return m_type; }
+	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
+
+private:
+	friend class GuiPluginLoader;
+	QString m_pluginName;
+	QString m_title;
+	QString m_productId;
+	QUrl m_icon;
+	QUrl m_url;
+	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
+};
+
+/*
+Each plugin is specified as a .json blob
+which is generated by the gui-v2-plugin-compiler.py script.
+Each plugin can include one or more integrations.
+*/
+class GuiPlugin
+{
+	Q_GADGET
+	Q_PROPERTY(QString name READ name)
+	Q_PROPERTY(QString version READ version)
+	Q_PROPERTY(QString minRequiredVersion READ minRequiredVersion)
+	Q_PROPERTY(QString maxRequiredVersion READ maxRequiredVersion)
+	Q_PROPERTY(QString resource READ resource)
+	Q_PROPERTY(QVector<QUrl> translations READ translations)
+	Q_PROPERTY(QVector<GuiPluginIntegration> integrations READ integrations)
+	Q_PROPERTY(QColor color READ color)
+
+public:
+	QString name() const { return m_name; }
+	QString version() const { return m_version; }
+	QString minRequiredVersion() const { return m_minRequiredVersion; }
+	QString maxRequiredVersion() const { return m_maxRequiredVersion; }
+	QString resource() const { return QString::fromUtf8(m_resource.toBase64()); }
+	QVector<QUrl> translations() const { return m_translations; }
+	QVector<GuiPluginIntegration> integrations() const { return m_integrations; }
+	QColor color() const { return m_color; }
+
+private:
+	friend class GuiPluginLoader;
+	QString m_name;
+	QString m_version;
+	QString m_minRequiredVersion;
+	QString m_maxRequiredVersion;
+	QColor m_color;
+	QByteArray m_resource;
+	QVector<QUrl> m_translations;
+	QVector<GuiPluginIntegration> m_integrations;
+};
+
+class GuiPluginModel : public QAbstractListModel, public QQmlParserStatus
+{
+	Q_OBJECT
+	QML_ELEMENT
+	Q_INTERFACES(QQmlParserStatus)
+
+	Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+public:
+	enum RoleNames {
+		PluginRole = Qt::UserRole,
+		NameRole,
+		VersionRole,
+		MinRequiredVersionRole,
+		MaxRequiredVersionRole,
+		ColorRole,
+		ResourceRole,
+		TranslationsRole,
+		IntegrationsRole
+	};
+
+	explicit GuiPluginModel(QObject *parent = nullptr);
+
+	int rowCount(const QModelIndex &parent) const override;
+	QVariant data(const QModelIndex& index, int role) const override;
+
+	int count() const;
+	Q_INVOKABLE GuiPlugin pluginAt(int index) const;
+
+Q_SIGNALS:
+	void countChanged();
+
+protected:
+	QHash<int, QByteArray> roleNames() const override;
+
+	// QQmlParserStatus
+	void classBegin() override;
+	void componentComplete() override;
+
+private:
+	void updatePlugins();
+	QVector<GuiPlugin> m_plugins;
+	bool m_complete = false;
+};
+
+class GuiPluginIntegrationModel : public QAbstractListModel, public QQmlParserStatus
+{
+	Q_OBJECT
+	QML_ELEMENT
+	Q_INTERFACES(QQmlParserStatus)
+
+	Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+	// filtering
+	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type WRITE setType NOTIFY typeChanged)
+	Q_PROPERTY(QString productId READ productId WRITE setProductId NOTIFY productIdChanged)
+	// TODO: add filtering for cardType also.
+
+public:
+	enum RoleNames {
+		IntegrationRole = Qt::UserRole,
+		PluginNameRole,
+		PluginColorRole,
+		TitleRole,
+		ProductIdRole,
+		IconRole,
+		UrlRole,
+		TypeRole,
+		CardTypeRole
+	};
+
+	explicit GuiPluginIntegrationModel(QObject *parent = nullptr);
+
+	int rowCount(const QModelIndex &parent) const override;
+	QVariant data(const QModelIndex& index, int role) const override;
+
+	int count() const;
+	Q_INVOKABLE GuiPluginIntegration integrationAt(int index) const;
+
+	GuiPluginLoader::IntegrationType type() const;
+	void setType(GuiPluginLoader::IntegrationType t);
+	QString productId() const;
+	void setProductId(const QString &productId);
+
+Q_SIGNALS:
+	void countChanged();
+	void typeChanged();
+	void productIdChanged();
+
+protected:
+	QHash<int, QByteArray> roleNames() const override;
+
+	// QQmlParserStatus
+	void classBegin() override;
+	void componentComplete() override;
+
+private:
+	void updateIntegrations();
+	QVector<GuiPluginIntegration> m_integrations;
+	QString m_productId;
+	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	bool m_complete = false;
+};
+
+} /* VenusOS */
+} /* Victron */
+
+Q_DECLARE_METATYPE(Victron::VenusOS::GuiPluginIntegration)
+Q_DECLARE_METATYPE(Victron::VenusOS::GuiPlugin)
+
+#endif // VICTRON_GUIV2_GUIPLUGINS_H

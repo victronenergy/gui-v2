@@ -76,6 +76,8 @@ BaseListItem {
 	property bool pressAreaEnabled: true
 	readonly property bool clickable: enabled && interactive && userHasWriteAccess
 
+	property color indicatorColor: Qt.rgba(0,0,0,0) // fully transparent by default.
+
 	signal clicked()
 
 	function activate() {
@@ -108,19 +110,15 @@ BaseListItem {
 	Keys.enabled: Global.keyNavigationEnabled
 
 	// Show thin colored indicator on left side if settings is only visible to super/service users
-	Loader {
-		active: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+	// Also show the indicator for list items from gui plugins.
+	Rectangle {
+		visible: color.a > 0.0
+		height: parent.height
 		width: Theme.geometry_listItem_radius
-		height: root.height
-		sourceComponent: Item {
-			clip: true
-			Rectangle {
-				width: Theme.geometry_listItem_radius * 2
-				height: parent.height
-				color: Theme.color_listItem_highAccessLevel
-				radius: Theme.geometry_listItem_radius
-			}
-		}
+		topLeftRadius: Theme.geometry_listItem_radius
+		bottomLeftRadius: Theme.geometry_listItem_radius
+		color: root.showAccessLevel >= VenusOS.User_AccessType_SuperUser
+			? Theme.color_listItem_highAccessLevel : root.indicatorColor
 	}
 
 	ListPressArea {
