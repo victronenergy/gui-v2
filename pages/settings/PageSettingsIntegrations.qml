@@ -280,6 +280,97 @@ Page {
 				url: "https://community.victronenergy.com"
 				preferredVisible: osLargeFeatures.visible
 			}
+
+			SettingsListHeader {
+				id: customisationsHeader
+
+				//% "UI Customisations"
+				text: qsTrId("pagesettingsintegrations_ui_customisations")
+				preferredVisible: Customisations.customisations.length > 0
+
+				VeQuickItem {
+					id: enabledCustomisations
+					uid: Global.systemSettings.serviceUid + "/Gui2/EnabledCustomisations"
+					property var names: valid ? value : []
+
+					function toggleEnabled(name) {
+						var list = enabledCustomisations.names
+						if (list.indexOf(name) >= 0) {
+							list.splice(list.indexOf(name))
+						} else {
+							list.push(name)
+						}
+
+						if (enabledCustomisations.valid) {
+							enabledCustomisations.value = list
+						} else {
+							// DEBUGGING ONLY!  REMOVE THIS!
+							enabledCustomisations.names = list
+						}
+					}
+				}
+			}
+
+			SettingsColumn {
+				id: customisationsColumn
+				width: parent ? parent.width : 0
+				preferredVisible: customisationsHeader.preferredVisible
+				Repeater {
+					model: CustomisationsModel { id: customisationsModel }
+					delegate: BaseListLoader {
+						id: customisationEntryDelegate
+						required property string name
+						required property color color
+						required property var integrations
+						readonly property var customisationSettingsPageIntegration: {
+							if (integrations !== null && integrations.length > 0) {
+								for (let i = 0; i < integrations.length; ++i) {
+									if (integrations[i].type === Customisations.CustomisationSettingsPage) {
+										return integrations[i];
+									}
+								}
+							}
+							return null
+						}
+
+						width: customisationsColumn.width
+						sourceComponent: customisationSettingsPageIntegration == null ? toggleSwitchOnly : toggleSwitchDrilldown
+
+						// Ideally we wouldn't declare this in the delegate,
+						// but we need to bind to delegate properties...
+						Component {
+							id: toggleSwitchDrilldown
+							SettingsListNavigation {
+								id: switchNavigationItem
+								text: customisationEntryDelegate.name
+								indicatorColor: customisationEntryDelegate.color
+								pageSource: customisationEntryDelegate.customisationSettingsPageIntegration.url
+
+								Switch {
+									anchors {
+										verticalCenter: parent.verticalCenter
+										right: parent.right
+										rightMargin: switchNavigationItem.icon.width + 2*Theme.geometry_listItem_content_horizontalMargin
+									}
+									checked: enabledCustomisations.names.indexOf(customisationEntryDelegate.name) >= 0
+									onClicked: toggleEnabled(customisationEntryDelegate.name)
+								}
+							}
+						}
+
+						Component {
+							id: toggleSwitchOnly
+							ListSwitch {
+								text: customisationEntryDelegate.name
+								indicatorColor: customisationEntryDelegate.color
+								interactive: enabledCustomisations.valid
+								checked: enabledCustomisations.names.indexOf(customisationEntryDelegate.name) >= 0
+								onClicked: toggleEnabled(customisationEntryDelegate.name)
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
