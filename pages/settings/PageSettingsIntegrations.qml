@@ -282,6 +282,44 @@ Page {
 				url: "https://community.victronenergy.com"
 				preferredVisible: osLargeFeatures.largeEnabled
 			}
+
+			SettingsListHeader {
+				id: guiPluginsHeader
+
+				//% "UI Plugins"
+				text: qsTrId("pagesettingsintegrations_ui_plugins")
+				preferredVisible: GuiPluginLoader.plugins.length > 0
+			}
+
+			SettingsColumn {
+				width: parent ? parent.width : 0
+				preferredVisible: guiPluginsHeader.preferredVisible
+				Repeater {
+					model: GuiPluginModel { id: pluginModel }
+					delegate: SettingsListNavigation {
+						id: switchNavigationItem
+
+						required property string name
+						required property color color
+						required property var integrations
+						readonly property var pluginSettingsPageIntegration: {
+							if (integrations !== null && integrations.length > 0) {
+								for (let i = 0; i < integrations.length; ++i) {
+									if (integrations[i].type === GuiPluginLoader.PluginSettingsPage) {
+										return integrations[i];
+									}
+								}
+							}
+							return null
+						}
+
+						text: switchNavigationItem.name
+						indicatorColor: switchNavigationItem.color
+						pageSource: switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
+						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
+					}
+				}
+			}
 		}
 	}
 }

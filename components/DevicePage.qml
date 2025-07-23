@@ -80,6 +80,30 @@ Page {
 					})
 				}
 			}
+
+			SettingsColumn {
+				id: guiPluginIntegrationsColumn
+				width: parent ? parent.width : 0
+				preferredVisible: root.device.productId > 0 && integrationsModel.count
+
+				Repeater {
+					model: GuiPluginIntegrationModel {
+						id: integrationsModel
+						type: GuiPluginLoader.DeviceListSettingsPage
+						productId: root.device.productId > 0 ? Utils.toHexFormat(root.device.productId) : ""
+					}
+					delegate: SettingsListNavigation {
+						required property string pluginName
+						required property color pluginColor
+						required property string url
+						required property string title
+						text: qsTrId(title)
+						indicatorColor: pluginColor
+						pageSource: url
+						pageProperties: ({"device": root.device})
+					}
+				}
+			}
 		}
 	}
 }
