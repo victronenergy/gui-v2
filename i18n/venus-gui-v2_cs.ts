@@ -7394,6 +7394,11 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <source>Controller Temperature</source>
       <translation>Teplota ovladače</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Směr motoru je obrácen</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>

@@ -7393,6 +7393,11 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <source>Controller Temperature</source>
       <translation>Controllertemperatur</translation>
     </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/motordrive/PageSevconSetup.qml" line="24"/>
+      <source>Motor Direction Inverted</source>
+      <translation>Motorns riktning omvänd</translation>
+    </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
       <source>Active cycle</source>
