@@ -6,17 +6,19 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for an alternator device.
+
+	It shows different settings depending on whether the alternator is acting as a DC source or a
+	DC load.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
 
-	title: device.name
-
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
+	serviceUid: root.bindPrefix
+	settingsModel: modelLoader.item
 
 	VeQuickItem {
 		id: productIdDataItem
@@ -31,11 +33,6 @@ Page {
 				}
 			}
 		}
-	}
-
-	GradientListView {
-		id: settingsListView
-		model: modelLoader.item
 	}
 
 	Loader {

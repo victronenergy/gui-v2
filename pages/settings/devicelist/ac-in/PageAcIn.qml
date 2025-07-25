@@ -6,17 +6,21 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for an AC input device.
+
+	The device could be one of the main AC inputs (i.e. a grid/shore or genset). It could also be,
+	for example, an energy meter configured with a specific role (such as heatpump, genset,
+	pvinverter, or evcharger) or a generic AC load.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
 
-	title: acInDevice.name
-
-	Device {
-		id: acInDevice
-		serviceUid: root.bindPrefix
-	}
+	serviceUid: bindPrefix
+	settingsModel: modelLoader.item
+	extraDeviceInfo: modelLoader.sourceComponent === acInModelComponent ? acInFooterComponent : null
 
 	VeQuickItem {
 		id: productIdDataItem
@@ -27,16 +31,12 @@ Page {
 				if (ProductInfo.isGensetProduct(value)) {
 					modelLoader.sourceComponent = gensetModelComponent
 				} else {
-					modelLoader.sourceComponent = defaultModelComponent
+					modelLoader.sourceComponent = acInModelComponent
 				}
 			}
 		}
 	}
 
-	GradientListView {
-		id: settingsListView
-		model: modelLoader.item
-	}
 
 	Loader {
 		id: modelLoader
@@ -52,11 +52,29 @@ Page {
 	}
 
 	Component {
-		id: defaultModelComponent
+		id: acInModelComponent
 
 		PageAcInModel {
 			bindPrefix: root.bindPrefix
 			productId: productIdDataItem.value
+		}
+	}
+
+	Component {
+		id: acInFooterComponent
+
+		SettingsColumn {
+			width: parent?.width ?? 0
+			topPadding: spacing
+			preferredVisible: dataManagerVersion.preferredVisible
+
+			ListText {
+				id: dataManagerVersion
+				//% "Data manager version"
+				text: qsTrId("ac-in-modeldefault_data_manager_version")
+				dataItem.uid: root.bindPrefix + "/DataManagerVersion"
+				preferredVisible: dataItem.valid
+			}
 		}
 	}
 }

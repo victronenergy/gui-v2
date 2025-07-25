@@ -100,10 +100,10 @@ Page {
 			}
 
 			ListNavigation {
-				text: CommonWords.device_info_title
+				text: CommonWords.product_page
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.pvInverter.serviceUid })
+					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml",
+							{ title: text, bindPrefix: root.pvInverter.serviceUid })
 				}
 			}
 		}
