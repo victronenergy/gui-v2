@@ -53,6 +53,7 @@ If --mock is set but no configuration is specified, the 'maximal' configuration 
     - Boat page without GPS
     - Loads: (AC output loads only, i.e. no Essential Loads)
         - Single EV charger
+    - DC genset with startstop1 generator
 
 
 ## Future mock configurations

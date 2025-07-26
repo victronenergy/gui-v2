@@ -37,8 +37,12 @@ AcWidget {
 			Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
 				"bindPrefix": inputServiceUid
 			})
+		} else if (root.inputInfo.serviceType === "genset") {
+			Global.pageManager.pushPage( "/pages/settings/devicelist/PageGenset.qml", {
+				"bindPrefix": inputServiceUid
+			})
 		} else {
-			// Assume this is on a grid/genset service
+			// Assume this is on a generic AC input
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
 				"bindPrefix": inputServiceUid
 			})

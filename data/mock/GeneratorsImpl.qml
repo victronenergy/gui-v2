@@ -9,35 +9,44 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	Generator {
-		id: startstop0
-		serviceUid: "mock/com.victronenergy.generator.startstop0"
-	}
+	Instantiator {
+		model: [
+			"mock/com.victronenergy.generator.startstop0",
+			"mock/com.victronenergy.generator.startstop1"
+		]
 
-	Connections {
-		target: startstop0._manualStart
-		enabled: startstop0.valid
-
-		// When the user does a manual start/stop, update the generator state.
-		function onValueChanged() {
-			if (target.value === 1) {
-				startstop0._state.setValue(VenusOS.Generators_State_Running)
-				startstop0._runningBy.setValue(VenusOS.Generators_RunningBy_Manual)
-			} else if (target.value === 0) {
-				startstop0._state.setValue(VenusOS.Generators_State_Stopped)
-				startstop0._runningBy.setValue(VenusOS.Generators_RunningBy_NotRunning)
-				startstop0._runtime.setValue(0)
+		delegate: Item {
+			Generator {
+				id: generator
+				serviceUid: modelData
 			}
-		}
 
-		// When the generator is running, update the /Runtime.
-		property Timer _runTimeTick: Timer {
-			running: MockManager.timersActive
-					 && startstop0.state === VenusOS.Generators_State_Running
-			interval: 1000
-			repeat: true
-			onTriggered: {
-				startstop0._runtime.setValue(startstop0.runtime + 1)
+			Connections {
+				target: generator._manualStart
+				enabled: generator.valid
+
+				// When the user does a manual start/stop, update the generator state.
+				function onValueChanged() {
+					if (target.value === 1) {
+						generator._state.setValue(VenusOS.Generators_State_Running)
+						generator._runningBy.setValue(VenusOS.Generators_RunningBy_Manual)
+					} else if (target.value === 0) {
+						generator._state.setValue(VenusOS.Generators_State_Stopped)
+						generator._runningBy.setValue(VenusOS.Generators_RunningBy_NotRunning)
+						generator._runtime.setValue(0)
+					}
+				}
+
+				// When the generator is running, update the /Runtime.
+				property Timer _runTimeTick: Timer {
+					running: MockManager.timersActive
+							 && generator.state === VenusOS.Generators_State_Running
+					interval: 1000
+					repeat: true
+					onTriggered: {
+						generator._runtime.setValue(generator.runtime + 1)
+					}
+				}
 			}
 		}
 	}

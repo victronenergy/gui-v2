@@ -19,62 +19,21 @@ DevicePage {
 	property string bindPrefix
 
 	serviceUid: bindPrefix
-	settingsModel: modelLoader.item
-	extraDeviceInfo: modelLoader.sourceComponent === acInModelComponent ? acInFooterComponent : null
-
-	VeQuickItem {
-		id: productIdDataItem
-
-		uid: root.bindPrefix + "/ProductId"
-		onValueChanged: {
-			if (value !== undefined && modelLoader.status === Loader.Null) {
-				if (ProductInfo.isGensetProduct(value)) {
-					modelLoader.sourceComponent = gensetModelComponent
-				} else {
-					modelLoader.sourceComponent = acInModelComponent
-				}
-			}
-		}
+	settingsModel: PageAcInModel {
+		bindPrefix: root.bindPrefix
+		productId: root.device.productId
 	}
+	extraDeviceInfo: SettingsColumn {
+		width: parent?.width ?? 0
+		topPadding: spacing
+		preferredVisible: dataManagerVersion.preferredVisible
 
-
-	Loader {
-		id: modelLoader
-		asynchronous: true
-	}
-
-	Component {
-		id: gensetModelComponent
-
-		PageGensetModel {
-			bindPrefix: root.bindPrefix
-		}
-	}
-
-	Component {
-		id: acInModelComponent
-
-		PageAcInModel {
-			bindPrefix: root.bindPrefix
-			productId: productIdDataItem.value
-		}
-	}
-
-	Component {
-		id: acInFooterComponent
-
-		SettingsColumn {
-			width: parent?.width ?? 0
-			topPadding: spacing
-			preferredVisible: dataManagerVersion.preferredVisible
-
-			ListText {
-				id: dataManagerVersion
-				//% "Data manager version"
-				text: qsTrId("ac-in-modeldefault_data_manager_version")
-				dataItem.uid: root.bindPrefix + "/DataManagerVersion"
-				preferredVisible: dataItem.valid
-			}
+		ListText {
+			id: dataManagerVersion
+			//% "Data manager version"
+			text: qsTrId("ac-in-modeldefault_data_manager_version")
+			dataItem.uid: root.bindPrefix + "/DataManagerVersion"
+			preferredVisible: dataItem.valid
 		}
 	}
 }

@@ -129,7 +129,7 @@ BaseListItem {
 					"bindPrefix": root.device.serviceUid
 				})
 			} else if (root.serviceType === "genset") {
-				Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
+				Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml", {
 					"bindPrefix": root.device.serviceUid
 				})
 			} else {
