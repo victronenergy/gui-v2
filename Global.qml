@@ -115,5 +115,50 @@ QtObject {
 
 	readonly property IntValidator _intValidator: IntValidator {
 	}
+
+	readonly property VeQuickItem _customisations: VeQuickItem {
+		uid: (systemSettings && systemSettings.serviceUid.length > 0)
+			? systemSettings.serviceUid + "/Gui2/Customisations"
+			: ""
+		property string json: valid ? value
+			: debugJson // DEBUGGING ONLY
+
+		property string debugJson: "[" + debug_simpleJson + "," + debug_simpleTrJson + "]"
+		property string debug_simpleJson: '
+{
+	"name": "Simple",
+	"version": "Simple",
+	"minRequiredVersion": "v1.2.7",
+	"maxRequiredVersion": "",
+	"translations": [
+		"qrc:/Simple/Simple_en.qm"
+	],
+	"integrations": [
+		{
+			"type": 1,
+			"url": "qrc:/Simple/Simple_PageSettingsSimple.qml"
+		}
+	],
+	"resource": "cXJlcwAAAAMAAAH+AAAAGAAAAY4AAAAAAAAAITy4ZBjK75yVzSEcv2Chvd2nAAAABWVuX1VTiAAAAAIBAQAAAU1pbXBvcnQgUXRRdWljawppbXBvcnQgVmljdHJvbi5WZW51c09TCgpQYWdlIHsKCWlkOiByb290CgoJdGl0bGU6ICJTaW1wbGUiCgoJR3JhZGllbnRMaXN0VmlldyB7CgkJaWQ6IHNldHRpbmdzTGlzdFZpZXcKCgkJbW9kZWw6IFZpc2libGVJdGVtTW9kZWwgewoJCQlMaXN0U3dpdGNoIHsKCQkJCXRleHQ6ICJTd2l0Y2giCgkJCQlwcm9wZXJ0eSBib29sIHZhbHVlCgkJCQljaGVja2VkOiB2YWx1ZQoJCQkJb25DbGlja2VkOiB7CgkJCQkJdmFsdWUgPSAhY2hlY2tlZAoJCQkJCWNvbnNvbGUubG9nKCJTd2l0Y2ggbm93IGNoZWNrZWQ/IiwgY2hlY2tlZCkKCQkJCX0KCQkJfQoJCX0KCX0KfQoABgWgRyUAUwBpAG0AcABsAGUADAAcmz0AUwBpAG0AcABsAGUAXwBlAG4ALgBxAG0AHQSI5lwAUwBpAG0AcABsAGUAXwBQAGEAZwBlAFMAZQB0AHQAaQBuAGcAcwBTAGkAbQBwAGwAZQAuAHEAbQBsAAAAAAACAAAAAQAAAAEAAAAAAAAAAAAAAAAAAgAAAAIAAAACAAAAAAAAAAAAAAASAAAAAAABAAAAAAAAAZg8I71qAAAAMAAAAAAAAQAAACUAAAGYPB9q3A=="
+}'
+		property string debug_simpleTrJson: '
+{
+    "name": "SimpleTr",
+    "version": "SimpleTr",
+    "minRequiredVersion": "v1.2.7",
+    "maxRequiredVersion": "",
+    "translations": [
+        "qrc:/SimpleTr/SimpleTr_fr.qm",
+        "qrc:/SimpleTr/SimpleTr_en.qm"
+    ],
+    "integrations": [
+        {
+            "type": 1,
+            "url": "qrc:/SimpleTr/SimpleTr_PageSettingsSimpleTr.qml"
+        }
+    ],
+    "resource": "cXJlcwAAAAMAAANbAAAAGAAAArkAAAAAAAABj2ltcG9ydCBRdFF1aWNrCmltcG9ydCBWaWN0cm9uLlZlbnVzT1MKClBhZ2UgewoJaWQ6IHJvb3QKCgl0aXRsZTogIlNpbXBsZVRyIgoKCUdyYWRpZW50TGlzdFZpZXcgewoJCWlkOiBzZXR0aW5nc0xpc3RWaWV3CgoJCW1vZGVsOiBWaXNpYmxlSXRlbU1vZGVsIHsKCQkJTGlzdFN3aXRjaCB7CgkJCQkvLyUgIkJhdHRlcnkiCgkJCQl0ZXh0OiBxc1RySWQoInNpbXBsZXRyX3BhZ2Vfc2V0dGluZ3Nfc2ltcGxldHJfdGV4dF9iYXR0ZXJ5IikKCQkJCXByb3BlcnR5IGJvb2wgdmFsdWUKCQkJCWNoZWNrZWQ6IHZhbHVlCgkJCQlvbkNsaWNrZWQ6IHsKCQkJCQl2YWx1ZSA9ICFjaGVja2VkCgkJCQkJY29uc29sZS5sb2coIlN3aXRjaCBub3cgY2hlY2tlZD8iLCBjaGVja2VkKQoJCQkJfQoJCQl9CgkJfQoJfQp9CgAAAIQ8uGQYyu+clc0hHL9gob3dpwAAAAVmcl9GUkIAAAAIAGMUCQAAAABpAAAAUQMAAAAQAEIAYQB0AHQAZQByAGkAZQgAAAAABgAAACxzaW1wbGV0cl9wYWdlX3NldHRpbmdzX3NpbXBsZXRyX3RleHRfYmF0dGVyeQcAAAAAAYgAAAACAwEAAACCPLhkGMrvnJXNIRy/YKG93acAAAAFZW5fVVNCAAAACABjFAkAAAAAaQAAAE8DAAAADgBCAGEAdAB0AGUAcgB5CAAAAAAGAAAALHNpbXBsZXRyX3BhZ2Vfc2V0dGluZ3Nfc2ltcGxldHJfdGV4dF9iYXR0ZXJ5BwAAAAABiAAAAAIBAQAIAEch8gBTAGkAbQBwAGwAZQBUAHIAIQ146fwAUwBpAG0AcABsAGUAVAByAF8AUABhAGcAZQBTAGUAdAB0AGkAbgBnAHMAUwBpAG0AcABsAGUAVAByAC4AcQBtAGwADgjTFp0AUwBpAG0AcABsAGUAVAByAF8AZgByAC4AcQBtAA4I1ladAFMAaQBtAHAAbABlAFQAcgBfAGUAbgAuAHEAbQAAAAAAAgAAAAEAAAABAAAAAAAAAAAAAAAAAAIAAAADAAAAAgAAAAAAAAAAAAAAXgAAAAAAAQAAAZMAAAGYPEWP1wAAAIAAAAAAAAEAAAIbAAABmDxFj80AAAAWAAAAAAABAAAAAAAAAZg8IFUT"
+}'
+	}
 }
 
