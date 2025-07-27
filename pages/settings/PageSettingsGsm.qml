@@ -49,7 +49,7 @@ Page {
 
 				//% "Internet"
 				text: qsTrId("page_settings_gsm_internet")
-				secondaryText: dataItem.value === 1 ? CommonWords.online : CommonWords.offline
+				secondaryText: dataItem.value ? CommonWords.online : CommonWords.offline
 				dataItem.uid: bindPrefix + "/Connected"
 			}
 
@@ -121,14 +121,69 @@ Page {
 						//% "Wrong PIN"
 						return qsTrId("page_settings_gsm_wrong_pin")
 					case 1000:
-						//% "Ready"
-						return qsTrId("page_settings_gsm_ready")
+						//% "OK"
+						return qsTrId("page_settings_gsm_ok")
 					default:
 						//% "Unknown error"
 						return qsTrId("page_settings_gsm_unknown_error")
 					}
 				}
 				dataItem.uid: bindPrefix + "/SimStatus"
+			}
+
+			ListText {
+				//% "Registration status"
+				text: qsTrId("page_settings_gsm_registration_status")
+				secondaryText: {
+					switch (dataItem.value) {
+					case 0:
+						//% "Not registered, not searching for operator"
+						return qsTrId("page_settings_gsm_not_registered_not_searching")
+					case 1:
+						//% "Registered, home network"
+						return qsTrId("page_settings_gsm_registered_home_network")
+					case 2:
+						//% "Not registered, searching for operator"
+						return qsTrId("page_settings_gsm_not_registered_searching")
+					case 3:
+						//% "Registration denied"
+						return qsTrId("page_settings_gsm_registration_denied")
+					case 4:
+						//% "Unknown"
+						return qsTrId("page_settings_gsm_unknown_state")
+					case 5:
+						//% "Registered, roaming"
+						return qsTrId("page_settings_gsm_registered_roaming")
+					default:
+						//% "Unknown"
+						return qsTrId("page_settings_gsm_unknown_value")
+					}
+				}
+				dataItem.uid: bindPrefix + "/RegStatus"
+				preferredVisible: dataItem.valid
+			}
+
+			ListText {
+				//% "Data link (PPP) status"
+				text: qsTrId("page_settings_gsm_data_link_status")
+				secondaryText: {
+					switch (dataItem.value) {
+					case 0:
+						//% "Offline"
+						return qsTrId("page_settings_gsm_offline")
+					case 1:
+						//% "Connecting"
+						return qsTrId("page_settings_gsm_connecting")
+					case 2:
+						//% "Connected"
+						return qsTrId("page_settings_gsm_connected")
+					default:
+						//% "Unknown"
+						return qsTrId("page_settings_gsm_unknown_value")
+					}
+				}
+				dataItem.uid: bindPrefix + "/PPPStatus"
+				preferredVisible: dataItem.valid
 			}
 
 			ListTextField {
@@ -192,7 +247,7 @@ Page {
 				id: useAuth
 				//% "Use authentication"
 				text: qsTrId("page_settings_gsm_use_authentication")
-				checked: authUser.value !== "" && authPass.value !== ""
+				checked: authUser.dataItem.value !== "" || authPass.dataItem.value !== ""
 				checkable: true
 				onCheckedChanged: {
 					if (!checked) {
@@ -228,4 +283,3 @@ Page {
 		}
 	}
 }
-
