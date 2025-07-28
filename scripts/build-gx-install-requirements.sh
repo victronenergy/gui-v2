@@ -3,6 +3,12 @@
 # This script installs or updates the dependencies needed to build the GUIv2 for a GX device
 
 
+# For which device type are you building?
+# arm: All GX devices, except Raspberry Pi 5
+# aarch64: Raspberry Pi 5
+DEVICE_TYPE="arm"
+
+
 # Check if the script is run on Ubuntu 24.x or later
 if [[ "$(lsb_release -is)" == "Ubuntu" && "$(lsb_release -rs)" =~ ^24 ]]; then
     echo "Running on Ubuntu 24.x or later"
@@ -11,6 +17,10 @@ else
     exit 1
 fi
 
+echo
+echo "NOTE: If you are using a Raspberry Pi 5, please change the DEVICE_TYPE variable to 'aarch64' in this script."
+echo
+sleep 3
 
 # Check if curl is installed, if not, install it
 if ! command -v curl > /dev/null 2>&1
@@ -51,7 +61,7 @@ URL="https://updates.victronenergy.com/feeds/venus/candidate/sdk/"
 html_content=$(curl -s ${URL})
 
 # Extract the filename ending with .sh from the HTML content
-filename=$(echo "${html_content}" | grep -oP '(?<=href=")[^"]+\.sh' | head -n 1)
+filename=$(echo "${html_content}" | grep "${DEVICE_TYPE}" | grep -oP '(?<=href=")[^"]+\.sh' | head -n 1)
 
 # Construct the download URL
 download_url="https://updates.victronenergy.com/feeds/venus/candidate/sdk/${filename}"
