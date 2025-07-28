@@ -330,6 +330,12 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	case SwitchableOutput_Type_Dimmable:
 		//% "Dimmable"
 		return qtTrId("switchable_output_dimmable");
+	case SwitchableOutput_Type_TemperatureSetpoint:
+		//% "Temperature setpoint"
+		return qtTrId("switchable_output_temperature_setpoint");
+	case SwitchableOutput_Type_SteppedSwitch:
+		//% "Stepped switch"
+		return qtTrId("switchable_output_Stepped_Switch");
 	case SwitchableOutput_Type_Slave:
 		//% "Slave of %1"
 		if (channelId.length() > 0) {
@@ -338,6 +344,18 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 			//% "Slave"
 			return qtTrId("switchable_output_slave");
 		}
+	case SwitchableOutput_Type_Dropdown:
+		//% "Dropdown"
+		return qtTrId("switchable_output_dropdown");
+	case SwitchableOutput_Type_BasicSlider:
+		//% "Basic slider"
+		return qtTrId("switchable_output_basic_slider");
+	case SwitchableOutput_Type_UnrangedSetpoint:
+		//% "Unranged setpoint"
+		return qtTrId("switchable_output_unranged_setpoint");
+	case SwitchableOutput_Type_ThreeStateSwitch:
+		//% "Three-state switch"
+		return qtTrId("switchable_output_three_state_switch");
 	default:
 		//% "Unsupported type: %1"
 		return qtTrId("switchable_output_unsupported").arg(value);

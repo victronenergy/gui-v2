@@ -56,11 +56,9 @@ QtObject {
 			}
 
 			function addToGroup() {
-				if (output.type !== VenusOS.SwitchableOutput_Type_Momentary
-						&& output.type !== VenusOS.SwitchableOutput_Type_Toggle
-						&& output.type !== VenusOS.SwitchableOutput_Type_Dimmable) {
-					// Only momentary/toggle/dimmable outputs are controllable and should appear
-					// in the aux cards, so do not add other types of outputs to the model.
+				if (output.type < VenusOS.SwitchableOutput_Type_Momentary
+						|| output.type > VenusOS.SwitchableOutput_Type_ThreeStateSwitch) {
+					// Only include output types with matching UI controls in the switch panel.
 					return
 				}
 				if (!output.showUIControl) {
