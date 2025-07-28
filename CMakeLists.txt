@@ -982,6 +982,7 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/barebones.json
         data/mock/conf/maximal.json
         data/mock/conf/multi-rs.json
+        data/mock/conf/switch-pane.json
         data/mock/conf/services/alternator.json
         data/mock/conf/services/dcsystem.json
         data/mock/conf/services/dse-genset.json
@@ -1028,6 +1029,7 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/services/smartshunt-battery.json
         data/mock/conf/services/smartshunt-dcsource.json
         data/mock/conf/services/smartswitch.json
+        data/mock/conf/services/switch-controls-tester.json
         data/mock/conf/services/tank-blackwater-error-state.json
         data/mock/conf/services/tank-fuel1.json
         data/mock/conf/services/tank-fuel2.json

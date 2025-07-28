@@ -485,11 +485,18 @@ public:
 	};
 	Q_ENUM(Switch_DeviceState)
 
+	// TODO clarify these type values, and whether Slave is still supported.
 	enum SwitchableOutput_Type {
-		SwitchableOutput_Type_Momentary = 0,
+		SwitchableOutput_Type_Momentary,
 		SwitchableOutput_Type_Toggle,
 		SwitchableOutput_Type_Dimmable,
-		SwitchableOutput_Type_Slave = 5
+		SwitchableOutput_Type_TemperatureSetpoint,
+		SwitchableOutput_Type_SteppedSwitch,
+		SwitchableOutput_Type_Slave = 5,
+		SwitchableOutput_Type_Dropdown,
+		SwitchableOutput_Type_BasicSlider,
+		SwitchableOutput_Type_UnrangedSetpoint,
+		SwitchableOutput_Type_ThreeStateSwitch
 	};
 	Q_ENUM(SwitchableOutput_Type)
 

@@ -96,17 +96,45 @@ BaseListItem {
 		Loader {
 			id: switchWidgetLoader
 			anchors.horizontalCenter: parent.horizontalCenter
-			sourceComponent: output.type === VenusOS.SwitchableOutput_Type_Dimmable ? dimmingComponent
-					: output.type === VenusOS.SwitchableOutput_Type_Momentary ? momentaryComponent
-					: output.type === VenusOS.SwitchableOutput_Type_Toggle ? toggleComponent
-					: null
+			enabled: output.status !== VenusOS.SwitchableOutput_Status_Disabled
+			sourceComponent: {
+				switch (output.type) {
+				case VenusOS.SwitchableOutput_Type_Momentary:
+					return momentaryComponent
+				case VenusOS.SwitchableOutput_Type_Toggle:
+					return toggleComponent
+				case VenusOS.SwitchableOutput_Type_Dimmable:
+					return dimmingComponent
+				case VenusOS.SwitchableOutput_Type_TemperatureSetpoint:
+					return temperatureSetpointComponent
+				case VenusOS.SwitchableOutput_Type_SteppedSwitch:
+					return steppedSwitchComponent
+				case VenusOS.SwitchableOutput_Type_Dropdown:
+					return dropdownComponent
+				case VenusOS.SwitchableOutput_Type_BasicSlider:
+					return basicSliderComponent
+				case VenusOS.SwitchableOutput_Type_UnrangedSetpoint:
+					return unrangedSetpointComponent
+				case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
+					return threeStateSwitchComponent
+				default:
+					return null
+				}
+			}
 
-			// Instead of giving focus to the individual controls, handle the keys directly here.
-			// This is consistent with the Control Cards, which focus the overall delegates in each
-			// card, rather than the controls within the delegates.
-			// (The DimmingSlider is a special case; it needs to be focused individually to provide
-			// an "edit" mode, so that left/right keys will move the slider instead of navigating to
-			// the previous/next item in the grid.)
+			// For simple controls without internal arrow key handling (e.g. momentary/latching
+			// controls, which only respond to the space key), focus the overall control and just
+			// call handlePress() and handleRelease() to trigger its features. This is consistent
+			// with the Control Cards, which focus the overall delegates in each card, rather than
+			// the controls within the delegates.
+			//
+			// For controls that require internaly arrow key handling (e.g. a slider with left/right
+			// triggers to move the handle), they need to have an "edit" mode, where:
+			//  - the space key enters edit mode by setting focus=true on the control; while in this
+			//    mode, the control handles all key events.
+			//  - the return key exits edit mode by setting focus=false, thus returning focus to
+			//    the overall delegate, so that arrow keys can once again navigate to previous/next
+			//    items in the switch pane grid.
 			focus: true
 			Keys.onPressed: (event) => { event.accepted = !event.isAutoRepeat && item.handlePress !== undefined && item.handlePress(event.key) }
 			Keys.onReleased: (event) => { event.accepted = item.handleRelease !== undefined && item.handleRelease(event.key) }
@@ -329,5 +357,53 @@ BaseListItem {
 				Component.onCompleted: buttonRow.currentIndex = backendValue === 1 ? 1 : 0
 			}
 		}
+	}
+
+	// TODO remove this type when all controls are implemented.
+	component PlaceholderDelegate : Rectangle {
+		width: root._buttonWidth
+		height: Theme.geometry_switchableoutput_button_height
+		color: Theme.color_button_off_background
+
+		Label {
+			anchors.centerIn: parent
+			text: "Placeholder"
+		}
+	}
+
+	Component {
+		id: temperatureSetpointComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: steppedSwitchComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: dropdownComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: basicSliderComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: unrangedSetpointComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: threeStateSwitchComponent
+
+		PlaceholderDelegate {}
 	}
 }
