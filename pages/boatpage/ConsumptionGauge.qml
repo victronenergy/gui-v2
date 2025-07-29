@@ -18,9 +18,9 @@ Column {
 	id: root
 
 	required property Gps gps
-	required property VeQuickItemsQuotient motorDriveDcConsumption
+	required property MotorDrive motorDrive
 	readonly property int visibleCount: motorDriveLoad.visible + systemAcLoad.visible + systemDcLoad.visible
-	readonly property int _pixelSize: visibleCount > 1
+	readonly property int _pixelSize: root.visibleCount > 1
 									 ? Theme.font_boatPage_consumptionGauge_smallPixelSize
 									 : Theme.font_boatPage_consumptionGauge_largePixelSize
 
@@ -30,10 +30,10 @@ Column {
 		id: motorDriveLoad
 
 		font.pixelSize: root._pixelSize
-		value: motorDriveDcConsumption.numerator
-		unit: motorDriveDcConsumption.displayUnit
+		value: root.motorDrive.dcConsumption.scalar.valid ? root.motorDrive.dcConsumption.scalar.value : NaN
+		unit: root.motorDrive.dcConsumption.scalarUnit
 		icon.source: "qrc:/images/icon_propeller.svg"
-		visible: gps.valid && motorDriveDcConsumption && motorDriveDcConsumption.valid
+		visible: root.gps.valid && root.motorDrive.dcConsumption.scalar && root.motorDrive.dcConsumption.scalar.valid
 	}
 
 	QuantityLabelIconRow {
