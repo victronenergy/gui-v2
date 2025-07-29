@@ -49,8 +49,8 @@ Column {
 		anchors.horizontalCenter: parent.horizontalCenter
 		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
-		visible: motorDrive && motorDrive.dcConsumption.valid && showDcConsumption
-		value: motorDrive.dcConsumption.numerator // this is always 'power', not 'current', as max current is not supported
+		visible: motorDrive && motorDrive.dcConsumption.quotient.valid && showDcConsumption
+		value: motorDrive.dcConsumption.quotient.numerator // this is always 'power', not 'current', as max current is not supported
 		unit: VenusOS.Units_Watt
 	}
 }

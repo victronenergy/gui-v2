@@ -14,7 +14,7 @@ Column {
 	required property Gps gps
 	required property MotorDrive motorDrive
 
-	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.valid ? 1 // just the motor drive
+	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
 											: dcLoadGauge.active ? 2 // both AC & DC
 											: 1  // just AC. The AC load gauge is always active
 
@@ -28,7 +28,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: gps.valid && motorDrive.dcConsumption.valid
+		active: gps.valid && motorDrive.dcConsumption.quotient.valid
 		sourceComponent: SideGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount)
 			direction: PathArc.Counterclockwise
@@ -38,7 +38,7 @@ Column {
 			horizontalAlignment: Qt.AlignRight
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			value: motorDrive.dcConsumption.percentage
+			value: motorDrive.dcConsumption.quotient.percentage
 		}
 	}
 

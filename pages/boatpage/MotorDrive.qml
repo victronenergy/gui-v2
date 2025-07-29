@@ -12,8 +12,11 @@ QtObject {
 	readonly property var motorDrive: Global.allDevicesModel.motorDriveDevices.count > 0
 										 ? Global.allDevicesModel.motorDriveDevices.firstObject
 										 : null
-	// we no longer support max current, so BoatPage always shows power, regardless of Global.systemSettings.electricalQuantity
-	readonly property VeQuickItemsQuotient dcConsumption: power
+
+	readonly property QtObject dcConsumption: QtObject {
+		// we no longer support max current, so BoatPage always shows power, regardless of Global.systemSettings.electricalQuantity
+		readonly property VeQuickItemsQuotient quotient: power
+	}
 
 	readonly property VeQuickItemsQuotient power: VeQuickItemsQuotient {
 		objectName: "motorDrivePower"
