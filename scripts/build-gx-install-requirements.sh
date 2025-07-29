@@ -51,7 +51,7 @@ URL="https://updates.victronenergy.com/feeds/venus/candidate/sdk/"
 html_content=$(curl -s ${URL})
 
 # Extract the filename ending with .sh from the HTML content
-filename=$(echo "${html_content}" | grep -oP '(?<=href=")[^"]+\.sh' | head -n 1)
+filename=$(echo "${html_content}" | grep "arm" | grep -oP '(?<=href=")[^"]+\.sh' | head -n 1)
 
 # Construct the download URL
 download_url="https://updates.victronenergy.com/feeds/venus/candidate/sdk/${filename}"
