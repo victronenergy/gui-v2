@@ -10,11 +10,11 @@ import Victron.VenusOS
 import Victron.Gauges
 
 Column {
-	id: motorDriveColumn
+	id: root
 
 	required property var motorDrive
 	property bool showDcConsumption
-	readonly property string serviceUid: motorDrive?.serviceUid ?? ""
+	readonly property string serviceUid: root.motorDrive?.serviceUid ?? ""
 
 	spacing: Theme.geometry_boatPage_motorDriveColumn_spacing
 
@@ -49,8 +49,8 @@ Column {
 		anchors.horizontalCenter: parent.horizontalCenter
 		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
-		visible: motorDrive && motorDrive.dcConsumption.quotient.valid && showDcConsumption
-		value: motorDrive.dcConsumption.quotient.numerator // this is always 'power', not 'current', as max current is not supported
+		visible: root.motorDrive && root.motorDrive.dcConsumption.quotient.valid && root.showDcConsumption
+		value: root.motorDrive.dcConsumption.quotient.numerator // this is always 'power', not 'current', as max current is not supported
 		unit: VenusOS.Units_Watt
 	}
 }

@@ -14,9 +14,9 @@ Item {
 
 	property bool animationEnabled: false
 
-	readonly property VeQuickItemsQuotient motorDriveDcConsumption: motorDrive ? motorDrive.dcConsumption.quotient : null
-	readonly property VeQuickItemsQuotient activeDataSource: gps.valid ? gps
-			: motorDriveDcConsumption.valid ? motorDriveDcConsumption
+	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrive ? root.motorDrive.dcConsumption.quotient : null
+	readonly property VeQuickItemsQuotient activeDataSource: root.gps.valid ? root.gps
+			: root.motorDriveDcConsumption.valid ? root.motorDriveDcConsumption
 			: null
 
 	objectName: "LargeCenterGauge"
@@ -34,11 +34,11 @@ Item {
 		height: width
 		radius: width/2
 		endAngle: Theme.geometry_boatPage_centerGauge_angularRange
-		value: activeDataSource ? activeDataSource.percentage : 0
+		value: root.activeDataSource ? root.activeDataSource.percentage : 0
 		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
 		animationEnabled: root.animationEnabled
 		objectName: "centerGauge"
-		visible: activeDataSource === gps || activeDataSource === motorDriveDcConsumption
+		visible: root.activeDataSource === root.gps || root.activeDataSource === root.motorDriveDcConsumption
 		layer.enabled: true
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
@@ -110,8 +110,8 @@ Item {
 							: Theme.font_boatPage_speed_pixelSize_large
 			font.weight: Font.Medium
 			fontSizeMode: Text.HorizontalFit
-			visible: activeDataSource === gps
-			text: gps.numerator >= 10.0 ? Math.round(gps.numerator) : Units.formatNumber(gps.numerator, 1)
+			visible: root.activeDataSource === root.gps
+			text: root.gps.numerator >= 10.0 ? Math.round(root.gps.numerator) : Units.formatNumber(root.gps.numerator, 1)
 			height: font.pixelSize
 		}
 
@@ -123,7 +123,7 @@ Item {
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_font_secondary
 			visible: gpsSpeed.visible
-			text: gps.units
+			text: root.gps.units
 		}
 
 		MotorDriveGauges {
@@ -131,9 +131,9 @@ Item {
 
 			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
 			motorDrive: root.motorDrive
-			showDcConsumption: !gps.valid
-			visible: activeDataSource === motorDriveDcConsumption ||
-					 (activeDataSource === null && motorDrive.rpm.valid)
+			showDcConsumption: !root.gps.valid
+			visible: root.activeDataSource === root.motorDriveDcConsumption ||
+					 (root.activeDataSource === null && root.motorDrive.rpm.valid)
 		}
 
 		Label {
@@ -143,8 +143,8 @@ Item {
 			verticalAlignment: Text.AlignVCenter
 			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
 			font.pixelSize: Theme.font_size_h1
-			text: Math.abs(motorDrive.rpm._numerator.value)
-			visible: motorDrive && motorDrive.rpm.numeratorUid && !isNaN(motorDrive.rpm.numerator)
+			text: Math.abs(root.motorDrive.rpm._numerator.value)
+			visible: root.motorDrive && root.motorDrive.rpm.numeratorUid && !isNaN(root.motorDrive.rpm.numerator)
 		}
 
 		Label {
@@ -174,10 +174,10 @@ Item {
 		radius: width/2
 		startAngle: outerGauge.startAngle
 		endAngle: outerGauge.endAngle
-		value: motorDrive ? motorDrive.rpm.percentage : 0
+		value: root.motorDrive ? root.motorDrive.rpm.percentage : 0
 		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
 		animationEnabled: root.animationEnabled
-		visible: motorDrive.rpm.valid
+		visible: root.motorDrive.rpm.valid
 		layer.enabled: true
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
@@ -210,9 +210,9 @@ Item {
 		}
 		valueColor: Theme.color_font_secondary
 		font.pixelSize: Theme.font_boatPage_rpm_min_max_pixelSize
-		visible: activeDataSource && activeDataSource.valid && outerGauge.visible
-		value: activeDataSource ? activeDataSource.denominator : 0
-		unit: activeDataSource ? activeDataSource.displayUnit : 0
+		visible: root.activeDataSource && root.activeDataSource.valid && outerGauge.visible
+		value: root.activeDataSource ? root.activeDataSource.denominator : 0
+		unit: root.activeDataSource ? root.activeDataSource.displayUnit : 0
 		unitText: ""
 		precision: 0
 	}
