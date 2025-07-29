@@ -14,7 +14,7 @@ Column {
 	required property Gps gps
 	required property MotorDrive motorDrive
 
-	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
+	readonly property int _rightGaugeCount: root.gps.valid && root.motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
 											: dcLoadGauge.active ? 2 // both AC & DC
 											: 1  // just AC. The AC load gauge is always active
 
