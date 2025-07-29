@@ -14,7 +14,7 @@ Item {
 
 	property bool animationEnabled: false
 
-	readonly property VeQuickItemsQuotient motorDriveDcConsumption: motorDrive ? motorDrive.dcConsumption : null
+	readonly property VeQuickItemsQuotient motorDriveDcConsumption: motorDrive ? motorDrive.dcConsumption.quotient : null
 	readonly property VeQuickItemsQuotient activeDataSource: gps.valid ? gps
 			: motorDriveDcConsumption.valid ? motorDriveDcConsumption
 			: null
@@ -132,7 +132,7 @@ Item {
 			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
 			motorDrive: root.motorDrive
 			showDcConsumption: !gps.valid
-			visible: activeDataSource === motorDrive.dcConsumption ||
+			visible: activeDataSource === motorDriveDcConsumption ||
 					 (activeDataSource === null && motorDrive.rpm.valid)
 		}
 

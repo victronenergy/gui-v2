@@ -113,7 +113,7 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
 
-		motorDriveDcConsumption: _motorDrive.dcConsumption
+		motorDriveDcConsumption: _motorDrive.dcConsumption.quotient
 		gps: _gps
 	}
 
