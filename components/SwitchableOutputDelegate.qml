@@ -356,6 +356,10 @@ BaseListItem {
 			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
 				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
 			enabled: !toggleState.busy
+
+			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
+			focusPolicy: Qt.NoFocus
+
 			onButtonClicked: (buttonIndex) => {
 				activateIndex(buttonIndex)
 			}
