@@ -273,17 +273,24 @@ BaseListItem {
 		Button {
 			id: momentaryButton
 
-			property bool spaceKeyPressed
-
-			function handlePress(key) { return _handleKey(key, 1) }
-			function handleRelease(key) { return _handleKey(key, 0) }
-			function _handleKey(key, newValue) {
+			function handlePress(key) {
 				if (key === Qt.Key_Space) {
-					spaceKeyPressed = newValue === 1
-					if (enabled) {
-						momentaryState.writeValue(newValue)
-						return true
+					// Write state=1 (on) if no other write is in progress.
+					if (!momentaryState.busy) {
+						momentaryState.writeValue(1)
 					}
+					return true
+				}
+				return false
+			}
+			function handleRelease(key) {
+				if (key === Qt.Key_Space) {
+					// If writing state=0 (off), then allow it even if a previous state=1 (on) write
+					// is in progress; the state=0 change will be queued on the backend.
+					if (!momentaryState.busy || momentaryState.expectedValue !== 0) {
+						momentaryState.writeValue(0)
+					}
+					return true
 				}
 				return false
 			}
@@ -296,17 +303,17 @@ BaseListItem {
 			flat: false
 
 			// Disable if a write is in progress, unless expecting mouse/key release.
-			enabled: !momentaryState.busy || pressed || spaceKeyPressed
+			enabled: !momentaryState.busy || momentaryState.expectedValue === 1
+
+			// Show as checked, when pressing or backend indicates it is pressed.
+			checked: momentaryState.expectedValue === 1 || momentaryState.backendValue === 1
+
+			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
+			focusPolicy: Qt.NoFocus
 
 			onPressed: momentaryState.writeValue(1)
 			onReleased: momentaryState.writeValue(0)
 			onCanceled: momentaryState.writeValue(0)
-
-			// When UI is idle, update the button to reflect the backend state.
-			Binding {
-				when: !momentaryState.busy && !momentaryButton.pressed && !momentaryButton.spaceKeyPressed
-				momentaryButton.checked: momentaryState.backendValue === 1
-			}
 
 			SettingSync {
 				id: momentaryState
