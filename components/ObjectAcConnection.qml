@@ -50,10 +50,11 @@ QtObject {
 	readonly property bool hasPower: powerL1.valid || powerL2.valid || powerL3.valid
 	property real _power: NaN
 
+	readonly property bool singlePhaseCurrentValid: _phaseCount.value === 1 && currentL1.valid
 	// multi-phase systems don't have a total current
-	readonly property real current: _phaseCount.value === 1 && _currentL1.valid ? _currentL1.value : NaN
-
-	readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
+	readonly property real current: singlePhaseCurrentValid ? currentL1.value : NaN
+	readonly property int preferredUnit: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && singlePhaseCurrentValid ? VenusOS.Units_Amp : VenusOS.Units_Watt
+	readonly property real preferredQuantity: preferredUnit === VenusOS.Units_Amp ? current : power
 
 	readonly property PhaseModel phases: PhaseModel {
 		id: _phases
