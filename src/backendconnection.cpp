@@ -778,5 +778,39 @@ void BackendConnectionTester::qmlEngineAvailable(QQmlEngine *engine)
 	engine->rootContext()->setContextProperty("dbusBackend", &dbusBackend);
 }
 
+void BackendConnection::setNodeRedUrl(const QString &url)
+{
+	if (m_nodeRedUrl != url) {
+		m_nodeRedUrl = url;
+		emit nodeRedUrlChanged();
+	}
+}
+
+QString BackendConnection::nodeRedUrl() const
+{
+	if (m_nodeRedUrl.isEmpty()) {
+		return QStringLiteral("https://venus.local:1881");
+	} else {
+		return m_nodeRedUrl;
+	}
+}
+
+void BackendConnection::setSignalKUrl(const QString &url)
+{
+	if (m_signalKUrl != url) {
+		m_signalKUrl = url;
+		emit signalKUrlChanged();
+	}
+}
+
+QString BackendConnection::signalKUrl() const
+{
+	if (m_signalKUrl.isEmpty()) {
+		return QStringLiteral("https://venus.local:3000");
+	} else {
+		return m_signalKUrl;
+	}
+}
+
 }
 }

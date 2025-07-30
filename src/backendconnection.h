@@ -34,6 +34,8 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString portalId READ portalId WRITE setPortalId NOTIFY portalIdChanged FINAL)
 	Q_PROPERTY(QString shard READ shard WRITE setShard NOTIFY shardChanged FINAL)
 	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged FINAL)
+	Q_PROPERTY(QString nodeRedUrl READ nodeRedUrl WRITE setNodeRedUrl NOTIFY nodeRedUrlChanged FINAL)
+	Q_PROPERTY(QString signalKUrl READ signalKUrl WRITE setSignalKUrl NOTIFY signalKUrlChanged FINAL)
 	Q_PROPERTY(QUrl demoImageFileName READ demoImageFileName CONSTANT FINAL)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
@@ -121,6 +123,12 @@ public:
 	QString token() const;
 	void setToken(const QString &tok);
 
+	QString nodeRedUrl() const;
+	void setNodeRedUrl(const QString &url);
+
+	QString signalKUrl() const;
+	void setSignalKUrl(const QString &url);
+
 	int idUser() const;
 	void setIdUser(int id);
 
@@ -182,6 +190,8 @@ Q_SIGNALS:
 	void vrmChanged();
 	void applicationVisibleChanged();
 	void needsWasmKeyboardHandlerChanged();
+	void nodeRedUrlChanged();
+	void signalKUrlChanged();
 
 private Q_SLOTS:
 	void onNetworkConfigChanged(const QVariant var);
@@ -211,6 +221,9 @@ private:
 	QString m_shard;
 	QString m_token;
 	int m_idUser = -1;
+
+	QString m_nodeRedUrl;
+	QString m_signalKUrl;
 
 	bool m_vrm = false;
 	bool m_applicationVisible = true;

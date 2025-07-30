@@ -33,16 +33,9 @@ Page {
 			}
 
 			ListLink {
-				//% "Access Signal K (local network)"
+				//% "Access Signal K"
 				text: qsTrId("settings_large_access_signal_k")
-				url: "http://venus.local:3000"
-				preferredVisible: signalk.checked
-			}
-
-			PrimaryListLabel {
-				//% "Signal K can also be accessed remotely via VRM."
-				text: qsTrId("settings_large_signal_k_vrm_access")
-				color: Theme.color_font_secondary
+				url: BackendConnection.signalKUrl
 				preferredVisible: signalk.checked
 			}
 		}

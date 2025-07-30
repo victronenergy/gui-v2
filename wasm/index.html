@@ -306,8 +306,14 @@
                 loadingBarText.textContent = 'Loading application...';
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
+                let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
+                argumentList.push(
+                    '--nodeRedUrl', 'https://' + document.location.host + ':1881',
+                    '--signalKUrl', 'http://' + document.location.host + ':3000',
+                );
+
                 const instance = await qtLoad({
-                    arguments: needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [],
+                    arguments: argumentList,
                     wasmBinary: wasmBinary,
                     qt: {
                         onLoaded: () => showUi(screen),
