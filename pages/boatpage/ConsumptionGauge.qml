@@ -43,7 +43,7 @@ Column {
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
 		value: Global.system.load.ac.preferredQuantity
-		unit: Global.systemSettings.electricalQuantity
+		unit: Global.system.load.ac.preferredUnit
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
 		visible: !motorDriveLoad.visible // && !isNaN(value) once #2159 is resolved
@@ -56,7 +56,7 @@ Column {
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
 		value: Global.system.dc.preferredQuantity
-		unit: Global.systemSettings.electricalQuantity
+		unit: Global.system.dc.preferredUnit
 		icon.source: "qrc:/images/dcloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
 		visible: !motorDriveLoad.visible && !isNaN(value)

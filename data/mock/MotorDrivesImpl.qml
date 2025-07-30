@@ -37,6 +37,7 @@ Item {
 				onValueChanged: {
 					if (motorDrive.index === 0) {
 						root.setSystemValue("/MotorDrive/Power", value ?? 0)
+						root.setSystemValue("/MotorDrive/Current", value/100 ?? 0)
 					}
 				}
 			}
