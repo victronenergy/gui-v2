@@ -63,7 +63,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryNodeRedUrl, querySignalKUrl;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
@@ -89,6 +89,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	if (query.hasQueryItem("fpsCounter")) {
 		queryFpsCounter = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("fpsCounter").toUtf8())); // e.g.: enabled
+	}
+	if (query.hasQueryItem("nodeRedUrl")) {
+		queryNodeRedUrl = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("nodeRedUrl").toUtf8())); // e.g.: "https://192.168.1.132:1881/"
+	}
+	if (query.hasQueryItem("signalKUrl")) {
+		querySignalKUrl = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("signalKUrl").toUtf8())); // e.g.: "http://192.168.1.132:3000/"
 	}
 #endif
 
@@ -174,6 +180,18 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
 	optionList << noMockTimers;
+
+	QCommandLineOption nodeRedUrl("nodeRedUrl",
+		QGuiApplication::tr("Node-RED URL"),
+		QGuiApplication::tr("url", "Node-RED URL"));
+	parser.addOption(nodeRedUrl);
+	optionList << nodeRedUrl;
+
+	QCommandLineOption signalKUrl("signalKUrl",
+		QGuiApplication::tr("Signal K URL"),
+		QGuiApplication::tr("url", "Signal K URL"));
+	parser.addOption(signalKUrl);
+	optionList << signalKUrl;
 
 
 	// parser.setUnknownOptionMode(QCommandLineParser::IgnoreUnknownOptions); did not work
@@ -292,6 +310,16 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	if (parser.isSet(skipSplash)) {
 		*skipSplashScreen = true;
+	}
+	if (parser.isSet(nodeRedUrl)) {
+		backend->setNodeRedUrl(parser.value(nodeRedUrl));
+	} else if (!queryNodeRedUrl.isEmpty()) {
+		backend->setNodeRedUrl(queryNodeRedUrl);
+	}
+	if (parser.isSet(signalKUrl)) {
+		backend->setSignalKUrl(parser.value(signalKUrl));
+	} else if (!querySignalKUrl.isEmpty()) {
+		backend->setSignalKUrl(querySignalKUrl);
 	}
 }
 
