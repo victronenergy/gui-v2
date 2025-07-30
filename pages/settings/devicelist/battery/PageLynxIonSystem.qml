@@ -75,15 +75,15 @@ Page {
 				VeQuickItem {
 					id: minCellTemperature
 					uid: root.bindPrefix + "/System/MinCellTemperature"
-					dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-					dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+					sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+					displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 				}
 
 				VeQuickItem {
 					id: maxCellTemperature
 					uid: root.bindPrefix + "/System/MaxCellTemperature"
-					dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-					dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+					sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+					displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 				}
 			}
 
