@@ -97,70 +97,134 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addHelpOption();
 	parser.addVersionOption();
 
+	QList<QCommandLineOption> optionList;
+
 	QCommandLineOption dbusAddress({ "d", "dbus" },
 		QGuiApplication::tr("Use D-Bus data source: connect to the specified D-Bus address."),
 		QGuiApplication::tr("address", "D-Bus address"));
 	parser.addOption(dbusAddress);
+	optionList << dbusAddress;
 
 	QCommandLineOption dbusDefault("dbus-default",
 		QGuiApplication::tr("Use D-Bus data source: connect to the default D-Bus address"));
 	parser.addOption(dbusDefault);
+	optionList << dbusDefault;
 
 	// If the MQTT Address is provided, then it's a local LAN MQTT broker (e.g. the CerboGX address).
 	QCommandLineOption mqttAddress({ "m", "mqtt" },
 		QGuiApplication::tr("Use MQTT data source: connect to the specified MQTT broker address."),
 		QGuiApplication::tr("address", "MQTT broker address"));
 	parser.addOption(mqttAddress);
+	optionList << mqttAddress;
 
 	// Otherwise, we need to calculate the VRM broker shard address from the portal id.
 	QCommandLineOption mqttPortalId({ "i", "id" },
 		QGuiApplication::tr("MQTT data source device portal id."),
 		QGuiApplication::tr("portalId"));
 	parser.addOption(mqttPortalId);
+	optionList << mqttPortalId;
 
 	QCommandLineOption mqttShard({ "s", "shard" },
 		QGuiApplication::tr("MQTT VRM webhost shard"),
 		QGuiApplication::tr("shard", "MQTT VRM webhost shard"));
 	parser.addOption(mqttShard);
+	optionList << mqttShard;
 
 	QCommandLineOption mqttUser({ "u", "user" },
 		QGuiApplication::tr("MQTT data source username"),
 		QGuiApplication::tr("user", "MQTT broker username."));
 	parser.addOption(mqttUser);
+	optionList << mqttUser;
 
 	QCommandLineOption mqttPass({ "p", "pass" },
 		QGuiApplication::tr("MQTT data source password"),
 		QGuiApplication::tr("pass", "MQTT broker password."));
 	parser.addOption(mqttPass);
+	optionList << mqttPass;
 
 	QCommandLineOption mqttToken({ "t", "token" },
 		QGuiApplication::tr("MQTT data source token"),
 		QGuiApplication::tr("token", "MQTT broker auth token."));
 	parser.addOption(mqttToken);
+	optionList << mqttToken;
 
 	QCommandLineOption fpsCounter({ "f", "fpsCounter" },
 		QGuiApplication::tr("Enable FPS counter"));
 	parser.addOption(fpsCounter);
+	optionList << fpsCounter;
 
 	QCommandLineOption skipSplash("skip-splash",
 		QGuiApplication::tr("Skip splash screen"));
 	parser.addOption(skipSplash);
+	optionList << skipSplash;
 
 	QCommandLineOption mockMode({ "k", "mock" },
 		QGuiApplication::tr("Use mock data source for testing."));
 	parser.addOption(mockMode);
+	optionList << mockMode;
 
 	QCommandLineOption mockConfig({ "mc", "mock-conf" },
 		QGuiApplication::tr("Name of mock configuration"),
 		QGuiApplication::tr("mockConfig", "Configuration name"));
 	mockConfig.setDefaultValue("maximal");
 	parser.addOption(mockConfig);
+	optionList << mockConfig;
 
 	QCommandLineOption noMockTimers("no-mock-timers",
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
+	optionList << noMockTimers;
 
-	parser.process(*QCoreApplication::instance());
+
+	// parser.setUnknownOptionMode(QCommandLineParser::IgnoreUnknownOptions); did not work
+	// in Qt 6.8.3, so we manually filter the arguments.
+	// Build a set of all valid option names (including short and long forms)
+	QSet<QString> validOptions;
+	for (const QCommandLineOption &opt : optionList) {
+		for (const QString &name : opt.names()) {
+			// Options can be specified with either a single dash or double dash
+			validOptions.insert("-" + name);
+			validOptions.insert("--" + name);
+		}
+	}
+
+	// Filter arguments: skip unknown options and all their values
+	QStringList filteredArgs;
+	const QStringList args = QCoreApplication::arguments();
+	for (int i = 0; i < args.size(); ++i) {
+		const QString &arg = args.at(i);
+		if (arg.startsWith('-')) {
+			QString optName = arg;
+			int eq = optName.indexOf('=');
+			if (eq > 0)
+				optName = optName.left(eq);
+			if (!validOptions.contains(optName)) {
+				// Skip this unknown option and all following values until next option or end
+				while (i + 1 < args.size() && !args.at(i + 1).startsWith('-'))
+					++i;
+				continue;
+			}
+		}
+		filteredArgs << arg;
+	}
+
+	// If the original command line arguments and the filtered arguments differ,
+	// print the original, filtered and removed arguments.
+	if (filteredArgs.size() != args.size()) {
+		qWarning() << "Unknown command line arguments were filtered out!";
+		qInfo() << "|- Original:" << args.join(' ');
+		qInfo() << "|- Filtered:" << filteredArgs.join(' ');
+
+		QStringList removed, added;
+		for (const QString &arg : args) {
+			if (!filteredArgs.contains(arg)) {
+				removed << arg;
+			}
+		}
+		qInfo() << "|- Removed:" << removed.join(' ');
+	}
+
+	parser.process(filteredArgs);
 
 	if (parser.isSet(mqttAddress) || parser.isSet(mqttPortalId)) {
 		if (parser.isSet(mqttUser)) {
