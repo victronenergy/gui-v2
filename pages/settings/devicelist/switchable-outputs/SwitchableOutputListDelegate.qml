@@ -32,7 +32,8 @@ ListQuantityGroupNavigation {
 	SwitchableOutput {
 		id: output
 
-		readonly property bool displayPercentage: type === VenusOS.SwitchableOutput_Type_Dimmable
+		readonly property bool displayTemperature: type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
+		readonly property bool displayPercentage: type === VenusOS.SwitchableOutput_Type_Dimmable || type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
 				&& ((status === VenusOS.SwitchableOutput_Status_On)
 					|| (status === VenusOS.SwitchableOutput_Status_Output_Fault))
 		readonly property string statusText: VenusOS.switchableOutput_statusToText(status)

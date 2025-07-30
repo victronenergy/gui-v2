@@ -69,6 +69,9 @@
     "geometry_dimmingSlider_height": 40,
     "geometry_dimmingSlider_dot_size": 4,
 
+    "geometry_temperatureSlider_dot_size": 4,
+    "geometry_temperatureSlider_indicator_size": 4,
+
     "geometry_spinBox_indicator_minimumWidth": 64,
     "geometry_spinBox_indicator_maximumWidth": 136,
     "geometry_spinBox_indicator_height": 64,
