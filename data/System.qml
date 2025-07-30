@@ -34,10 +34,12 @@ QtObject {
 		readonly property bool hasPower: Global.allDevicesModel.combinedDcLoadDevices.count > 0 || _hasDcSystem.value === 1
 
 		readonly property real power: hasPower ? _dcSystemPower.value || 0 : NaN
-		readonly property real current: (isNaN(power) || isNaN(voltage) || voltage === 0) ? NaN : power / voltage
+		readonly property bool currentValid: !isNaN(power) && !isNaN(voltage) && (voltage !== 0)
+		readonly property real current: currentValid ? power / voltage : NaN
 		readonly property real voltage: _dcBatteryVoltage.valid ? _dcBatteryVoltage.value : NaN
 		readonly property real maximumPower: _maximumDcPower.valid ? _maximumDcPower.value : NaN
-		readonly property real preferredQuantity: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? current : power
+		readonly property int preferredUnit: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && currentValid ? VenusOS.Units_Amp : VenusOS.Units_Watt
+		readonly property real preferredQuantity: preferredUnit === VenusOS.Units_Amp ? current : power
 
 		readonly property VeQuickItem _dcSystemPower: VeQuickItem {
 			uid: root.serviceUid + "/Dc/System/Power"
