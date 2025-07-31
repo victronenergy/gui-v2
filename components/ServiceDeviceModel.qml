@@ -37,7 +37,7 @@ DeviceModel {
 		delegate: root.deviceDelegate
 	}
 
-	readonly property ServiceModel _serviceModel: ServiceModel {
+	readonly property FilteredServiceModel _serviceModel: FilteredServiceModel {
 		id: serviceModel
 		serviceTypes: root.serviceTypes
 	}

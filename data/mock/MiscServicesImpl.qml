@@ -11,7 +11,7 @@ Item {
 
 	// Animate gps values.
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["gps"] }
+		model: FilteredServiceModel { serviceTypes: ["gps"] }
 		delegate: Item {
 			id: gps
 
@@ -27,7 +27,7 @@ Item {
 
 	// Animate meteo values.
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["meteo"] }
+		model: FilteredServiceModel { serviceTypes: ["meteo"] }
 		delegate: Item {
 			id: meteo
 

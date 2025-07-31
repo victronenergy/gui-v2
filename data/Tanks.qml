@@ -91,7 +91,7 @@ QtObject {
 			+ rawWaterTanks.count
 
 	readonly property Instantiator _tankObjects: Instantiator {
-		model: ServiceModel { serviceTypes: ["tank"] }
+		model: FilteredServiceModel { serviceTypes: ["tank"] }
 		delegate: Tank {
 			id: tank
 			required property string uid

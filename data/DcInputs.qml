@@ -48,7 +48,7 @@ QtObject {
 	}
 
 	readonly property Instantiator _dcInputObjects: Instantiator {
-		model: ServiceModel { serviceTypes: root.serviceTypes }
+		model: FilteredServiceModel { serviceTypes: root.serviceTypes }
 		delegate: DcInput {
 			id: input
 			required property string uid

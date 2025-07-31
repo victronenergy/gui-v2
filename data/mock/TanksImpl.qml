@@ -12,7 +12,7 @@ Item {
 	// Animate tank values.
 	Instantiator {
 		id: tankObjects
-		model: ServiceModel { serviceTypes: ["tank"] }
+		model: FilteredServiceModel { serviceTypes: ["tank"] }
 		delegate: Item {
 			id: tank
 
