@@ -94,6 +94,7 @@ public:
 	};
 	Q_ENUM(MqttClientError)
 
+	static BackendConnection* instance();
 	static BackendConnection* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	State state() const;
@@ -182,6 +183,7 @@ Q_SIGNALS:
 	void vrmChanged();
 	void applicationVisibleChanged();
 	void needsWasmKeyboardHandlerChanged();
+	void producerChanged();
 
 private Q_SLOTS:
 	void onNetworkConfigChanged(const QVariant var);

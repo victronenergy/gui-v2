@@ -6,6 +6,7 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
+#include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
 
@@ -229,6 +230,9 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	if (parser.isSet(skipSplash)) {
 		*skipSplashScreen = true;
 	}
+
+	// Initialize main models
+	Victron::VenusOS::AllServicesModel::create();
 }
 
 } // namespace
