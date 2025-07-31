@@ -24,7 +24,7 @@ Item {
 	}
 
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["motordrive"] }
+		model: FilteredServiceModel { serviceTypes: ["motordrive"] }
 		delegate: Item {
 			id: motorDrive
 

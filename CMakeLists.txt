@@ -326,7 +326,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
-    components/ServiceModel.qml
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
@@ -363,6 +362,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Utils.js
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
+    components/VeQItemServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml

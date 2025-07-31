@@ -93,7 +93,7 @@ Item {
 
 	// Animate DC meters.
 	Instantiator {
-		model: ServiceModel {
+		model: FilteredServiceModel {
 			serviceTypes: [
 				"alternator",
 				"battery",
