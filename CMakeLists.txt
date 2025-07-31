@@ -784,6 +784,8 @@ set (VENUS_QML_MODULE_SOURCES
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
 list(APPEND VenusQMLModule_CPP_SOURCES
+    src/allservicesmodel.h
+    src/allservicesmodel.cpp
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
     src/aggregatetankmodel.h
