@@ -60,8 +60,9 @@ Item {
 		const electronTravelDistance = Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
 		const modelCount = animationEnabled
 			? Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
-			: 1 // show just one arrow, if animations are disabled.
-
+			: animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
+				? 1 	// show just one arrow, if animations are disabled.
+				: 0 	// or show none if no power is flowing
 		if (electronRepeater.count !== modelCount) {
 			electronRepeater.model = modelCount
 
