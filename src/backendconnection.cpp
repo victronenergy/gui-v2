@@ -26,6 +26,11 @@
 namespace Victron {
 namespace VenusOS {
 
+BackendConnection* BackendConnection::instance()
+{
+	return create();
+}
+
 BackendConnection* BackendConnection::create(QQmlEngine *, QJSEngine *)
 {
 	static BackendConnection* connection = nullptr;
@@ -198,11 +203,13 @@ void BackendConnection::initDBusConnection(const QString &address)
 	QDBusConnection dbus = VeDbusConnection::getConnection();
 	if (!dbus.isConnected()) {
 		qWarning() << "D-Bus connection failed!";
+		emit producerChanged();
 		setState(Failed);
 		return;
 	}
 
 	dbusProducer->open(dbus);
+	emit producerChanged();
 
 	setState(VeDbusConnection::getConnection().isConnected());
 }
@@ -354,12 +361,14 @@ void BackendConnection::initMqttConnection(const QString &address)
 		mqttProducer->open(QHostAddress(address), 1883);
 	}
 #endif
+	emit producerChanged();
 }
 
 void BackendConnection::initMockConnection()
 {
 	VeQItemMockProducer *producer = new VeQItemMockProducer(VeQItems::getRoot(), "mock");
 	m_producer = producer;
+	emit producerChanged();
 	setState(true);
 }
 
@@ -373,6 +382,7 @@ void BackendConnection::setType(const SourceType type, const QString &address)
 	if (m_producer) {
 		m_producer->deleteLater();
 		m_producer = nullptr;
+		emit producerChanged();
 	}
 
 	switch (type) {
