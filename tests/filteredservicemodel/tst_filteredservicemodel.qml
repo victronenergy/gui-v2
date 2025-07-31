@@ -11,7 +11,7 @@ TestCase {
 
 	name: "FilteredServiceModelTest"
 
-	FilteredServiceModel {
+	FilteredFilteredServiceModel {
 		id: model
 	}
 

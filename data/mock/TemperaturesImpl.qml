@@ -84,7 +84,7 @@ Item {
 
 	// Animate temperature service values.
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["temperature"] }
+		model: FilteredServiceModel { serviceTypes: ["temperature"] }
 		delegate: Item {
 			id: temperature
 

@@ -11,7 +11,7 @@ Item {
 
 	// Animate evcharger values.
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["evcharger"] }
+		model: FilteredServiceModel { serviceTypes: ["evcharger"] }
 		delegate: Item {
 			id: evcs
 
