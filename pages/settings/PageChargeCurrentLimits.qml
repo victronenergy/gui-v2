@@ -24,7 +24,7 @@ Page {
 				id: childValues
 
 				childId: "Link/ChargeCurrent"
-				model: ServiceModel { serviceTypes: ["inverter", "solarcharger"] }
+				model: VeQItemFilteredServiceModel { serviceTypes: ["inverter", "solarcharger"] }
 
 				// And sort them by n2kInstance, description
 				sortDelegate: VeQItemSortDelegate {
