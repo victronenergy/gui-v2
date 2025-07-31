@@ -64,6 +64,9 @@ Window {
 		readonly property bool connectionReady: Global.backendReady
 		onConnectionReadyChanged: {
 			if (connectionReady) {
+				// Note: we don't bind to value changes, as we don't want
+				// to unload customisations if we lose backend data connection.
+				Customisations.customisationsJson = Global._customisations.json
 				active = true
 			} else if (active && !Global.needPageReload) {
 				root.rebuildUi()
