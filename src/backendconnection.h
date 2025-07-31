@@ -192,6 +192,7 @@ Q_SIGNALS:
 	void needsWasmKeyboardHandlerChanged();
 	void nodeRedUrlChanged();
 	void signalKUrlChanged();
+	void producerChanged();
 
 private Q_SLOTS:
 	void onNetworkConfigChanged(const QVariant var);

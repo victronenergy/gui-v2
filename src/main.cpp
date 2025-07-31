@@ -6,6 +6,7 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
+#include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
 
@@ -351,6 +352,9 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	Victron::VenusOS::ThemeSingleton *theme = Victron::VenusOS::ThemeSingleton::create();
 	theme->setForcedColorScheme(forcedScheme);
+
+	// Initialize main models
+	Victron::VenusOS::AllServicesModel::create();
 }
 
 } // namespace
