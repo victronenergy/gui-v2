@@ -314,7 +314,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/ServiceDeviceModel.qml
-    components/ServiceModel.qml
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
@@ -351,6 +350,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/Utils.js
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
+    components/VeQItemServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
@@ -775,6 +775,8 @@ endif()
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
 list(APPEND VenusQMLModule_CPP_SOURCES
+    src/allservicesmodel.h
+    src/allservicesmodel.cpp
     src/aggregatedevicemodel.h
     src/aggregatedevicemodel.cpp
     src/aggregatetankmodel.h
@@ -789,6 +791,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/filteredservicemodel.h
+    src/filteredservicemodel.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h

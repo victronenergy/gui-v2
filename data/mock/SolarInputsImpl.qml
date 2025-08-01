@@ -176,7 +176,7 @@ Item {
 
 	// Animate PV inverter values.
 	Instantiator {
-		model: ServiceModel { serviceTypes: ["pvinverter"] }
+		model: FilteredServiceModel { serviceTypes: ["pvinverter"] }
 		delegate: Item {
 			id: pvInverter
 
