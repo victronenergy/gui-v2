@@ -63,7 +63,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 {
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryNodeRedUrl, querySignalKUrl;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryColorScheme, queryNodeRedUrl, querySignalKUrl;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
@@ -95,6 +95,10 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	if (query.hasQueryItem("signalKUrl")) {
 		querySignalKUrl = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("signalKUrl").toUtf8())); // e.g.: "http://192.168.1.132:3000/"
+	}
+	if (query.hasQueryItem("colorScheme")) {
+		// "dark" forces dark mode, "light" forces light mode, "auto" forces auto mode, "default" uses the user choice
+		queryColorScheme = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("colorScheme").toUtf8())); // e.g.: "dark", "light", "auto", "default"
 	}
 #endif
 
@@ -192,6 +196,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		QGuiApplication::tr("url", "Signal K URL"));
 	parser.addOption(signalKUrl);
 	optionList << signalKUrl;
+
+	QCommandLineOption colorScheme("colorScheme",
+		QGuiApplication::tr("Color scheme (dark, light, auto, default)"),
+		QGuiApplication::tr("scheme", "Color scheme value"));
+	parser.addOption(colorScheme);
+	optionList << colorScheme;
 
 
 	// parser.setUnknownOptionMode(QCommandLineParser::IgnoreUnknownOptions); did not work
@@ -321,6 +331,26 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	} else if (!querySignalKUrl.isEmpty()) {
 		backend->setSignalKUrl(querySignalKUrl);
 	}
+
+	QString colorSchemeValue = QString("default");
+	if (parser.isSet(colorScheme)) {
+		colorSchemeValue = parser.value(colorScheme).toLower();
+	} else if (!queryColorScheme.isEmpty()) {
+		colorSchemeValue = queryColorScheme.toLower();
+	}
+
+	Victron::VenusOS::Theme::ForcedColorScheme forcedScheme;
+	if (colorSchemeValue == "dark") {
+		forcedScheme = Victron::VenusOS::Theme::ForcedColorSchemeDark;
+	} else if (colorSchemeValue == "light") {
+		forcedScheme = Victron::VenusOS::Theme::ForcedColorSchemeLight;
+	} else if (colorSchemeValue == "auto") {
+		forcedScheme = Victron::VenusOS::Theme::ForcedColorSchemeAuto;
+	} else { // default
+		forcedScheme = Victron::VenusOS::Theme::ForcedColorSchemeDefault;
+	}
+	Victron::VenusOS::ThemeSingleton *theme = Victron::VenusOS::ThemeSingleton::create();
+	theme->setForcedColorScheme(forcedScheme);
 }
 
 } // namespace
@@ -393,8 +423,8 @@ int main(int argc, char *argv[])
 	qreal height = qMin(getWindowInnerWidth(), getWindowInnerHeight());
 
 	if (width > 0 && height > 0) {
-		Victron::VenusOS::ThemeSingleton theme;
-		scaleFactor = qMax(1.0, qMin(width/theme.geometry_screen_width(), height/theme.geometry_screen_height()));
+		Victron::VenusOS::ThemeSingleton *theme = Victron::VenusOS::ThemeSingleton::create();
+		scaleFactor = qMax(1.0, qMin(width/theme->geometry_screen_width(), height/theme->geometry_screen_height()));
 	}
 
 	Victron::VenusOS::BackendConnection::create()->setNeedsWasmKeyboardHandler(hasNativeVirtualKeyboard());
