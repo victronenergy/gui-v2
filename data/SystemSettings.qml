@@ -141,19 +141,22 @@ QtObject {
 	property VeQuickItem remoteConsoleColorMode: VeQuickItem {
 		uid: root.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
 		onValueChanged: {
-			// Follow "/Settings/Gui/ColorScheme" if the remote console color mode is manual
-			if (value === VenusOS.RemoteConsoleColorMode_FollowDisplayMode) {
-				if (colorScheme.value === Theme.Dark) {
-					Theme.colorScheme = Theme.Dark
-				} else if (colorScheme.value === Theme.Light) {
-					Theme.colorScheme = Theme.Light
-				}
-			// Follow the client device color scheme if the platform is wasm and the remote console mode is auto
-			} else if (Qt.platform.os === "wasm" && value === VenusOS.RemoteConsoleColorMode_FollowSystemTheme) {
-				if (Theme.systemColorScheme === Theme.Dark) {
-					Theme.colorScheme = Theme.Dark
-				} else if (Theme.systemColorScheme === Theme.Light) {
-					Theme.colorScheme = Theme.Light
+			// Check if remote console color mode was forced by command line or query parameter
+			if (Theme.forcedColorScheme === Theme.ForcedColorSchemeDefault) {
+				// Follow "/Settings/Gui/ColorScheme" if the remote console color mode is manual
+				if (value === VenusOS.RemoteConsoleColorMode_FollowDisplayMode) {
+					if (colorScheme.value === Theme.Dark) {
+						Theme.colorScheme = Theme.Dark
+					} else if (colorScheme.value === Theme.Light) {
+						Theme.colorScheme = Theme.Light
+					}
+				// Follow the client device color scheme if the platform is wasm and the remote console mode is auto
+				} else if (Qt.platform.os === "wasm" && value === VenusOS.RemoteConsoleColorMode_FollowSystemTheme) {
+					if (Theme.systemColorScheme === Theme.Dark) {
+						Theme.colorScheme = Theme.Dark
+					} else if (Theme.systemColorScheme === Theme.Light) {
+						Theme.colorScheme = Theme.Light
+					}
 				}
 			}
 		}
@@ -162,12 +165,15 @@ QtObject {
 	property VeQuickItem colorScheme: VeQuickItem {
 		uid: root.serviceUid + "/Settings/Gui/ColorScheme"
 		onValueChanged: {
-			// Follow the color scheme if the platform is not wasm or the remote console mode is manual
-			if (Qt.platform.os !== "wasm" || !remoteConsoleColorMode.valid || remoteConsoleColorMode.value === VenusOS.RemoteConsoleColorMode_FollowDisplayMode) {
-				if (value === Theme.Dark) {
-					Theme.colorScheme = Theme.Dark
-				} else if (value === Theme.Light) {
-					Theme.colorScheme = Theme.Light
+			// Check if remote console color mode was forced by command line or query parameter
+			if (Theme.forcedColorScheme === Theme.ForcedColorSchemeDefault) {
+				// Follow the color scheme if the platform is not wasm or the remote console mode is manual
+				if (Qt.platform.os !== "wasm" || !remoteConsoleColorMode.valid || remoteConsoleColorMode.value === VenusOS.RemoteConsoleColorMode_FollowDisplayMode) {
+					if (value === Theme.Dark) {
+						Theme.colorScheme = Theme.Dark
+					} else if (value === Theme.Light) {
+						Theme.colorScheme = Theme.Light
+					}
 				}
 			}
 		}
@@ -176,12 +182,15 @@ QtObject {
 	property VeQuickItem systemColorScheme: VeQuickItem {
 		value: Theme.systemColorScheme
 		onValueChanged: {
-			// Follow the client device color scheme if the platform is wasm and the remote console mode is auto
-			if (Qt.platform.os === "wasm" && remoteConsoleColorMode.value === VenusOS.RemoteConsoleColorMode_FollowSystemTheme) {
-				if (value === Theme.Dark) {
-					Theme.colorScheme = Theme.Dark
-				} else if (value === Theme.Light) {
-					Theme.colorScheme = Theme.Light
+			// Check if remote console color mode was forced by command line or query parameter
+			if (Theme.forcedColorScheme === Theme.ForcedColorSchemeDefault || Theme.forcedColorScheme === Theme.ForcedColorSchemeAuto) {
+				// Follow the client device color scheme if the platform is wasm and the remote console mode is auto or auto was forced
+				if ((Qt.platform.os === "wasm" && remoteConsoleColorMode.value === VenusOS.RemoteConsoleColorMode_FollowSystemTheme) || Theme.forcedColorScheme === Theme.ForcedColorSchemeAuto) {
+					if (value === Theme.Dark) {
+						Theme.colorScheme = Theme.Dark
+					} else if (value === Theme.Light) {
+						Theme.colorScheme = Theme.Light
+					}
 				}
 			}
 		}

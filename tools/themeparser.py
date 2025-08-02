@@ -40,9 +40,14 @@ class ThemeSingleton : public Theme
 %s
 
 public:
-	ThemeSingleton(QObject *parent = nullptr)
+	ThemeSingleton(QObject *parent)
 		: Theme(parent)
 	{
+	}
+
+	static ThemeSingleton *create(QQmlEngine *engine = nullptr, QJSEngine *js = nullptr) {
+		static ThemeSingleton *instance = new ThemeSingleton(nullptr);
+		return instance;
 	}
 
 	// property accessors
