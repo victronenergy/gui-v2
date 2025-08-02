@@ -124,7 +124,54 @@
           visibility: visible !important;
         }
       }
+      /* Force dark or light color scheme */
+      html[data-forced-scheme="dark"], html[data-forced-scheme="dark"] body {
+          background: #000000 !important;
+          color: #FAF9F5 !important;
+      }
+      html[data-forced-scheme="dark"] #wrapper-inner {
+          background: #000 !important;
+          color: #969591 !important;
+      }
+      html[data-forced-scheme="dark"] #loading-bar-text {
+          color: #969591 !important;
+      }
+      html[data-forced-scheme="dark"] #logo-dark {
+          visibility: visible !important;
+      }
+      html[data-forced-scheme="dark"] #logo-light {
+          visibility: hidden !important;
+      }
+
+      html[data-forced-scheme="light"], html[data-forced-scheme="light"] body {
+          background: #E6E5E1 !important;
+          color: #1D1D1B !important;
+      }
+      html[data-forced-scheme="light"] #wrapper-inner {
+          background: #E6E5E1 !important;
+          color: #64635F !important;
+      }
+      html[data-forced-scheme="light"] #loading-bar-text {
+          color: #64635F !important;
+      }
+      html[data-forced-scheme="light"] #logo-dark {
+          visibility: hidden !important;
+      }
+      html[data-forced-scheme="light"] #logo-light {
+          visibility: visible !important;
+      }
     </style>
+    <script>
+      (function() {
+          const params = new URLSearchParams(window.location.search);
+          if (params.has('colorScheme')) {
+              const scheme = params.get('colorScheme').toLowerCase();
+              if (scheme === 'dark' || scheme === 'light') {
+                  document.documentElement.setAttribute('data-forced-scheme', scheme);
+              }
+          }
+      })();
+    </script>
   </head>
   <body onload="init()">
     <img id="mockup" src="mockup.svg">
