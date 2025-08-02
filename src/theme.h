@@ -24,6 +24,7 @@ class Theme : public QObject
 	Q_PROPERTY(ScreenSize screenSize READ screenSize WRITE setScreenSize NOTIFY screenSizeChanged)
 	Q_PROPERTY(ColorScheme colorScheme READ colorScheme WRITE setColorScheme NOTIFY colorSchemeChanged)
 	Q_PROPERTY(SystemColorScheme systemColorScheme READ systemColorScheme WRITE setSystemColorScheme NOTIFY systemColorSchemeChanged)
+	Q_PROPERTY(ForcedColorScheme forcedColorScheme READ forcedColorScheme WRITE setForcedColorScheme NOTIFY forcedColorSchemeChanged)
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
 
 public:
@@ -45,6 +46,14 @@ public:
 	};
 	Q_ENUM(SystemColorScheme)
 
+	enum ForcedColorScheme {
+		ForcedColorSchemeDark = 0,
+		ForcedColorSchemeLight,
+		ForcedColorSchemeAuto,
+		ForcedColorSchemeDefault // uses the user choice, not the forced color scheme
+	};
+	Q_ENUM(ForcedColorScheme)
+
 	enum StatusLevel {
 		Ok = 0,
 		Warning,
@@ -63,6 +72,11 @@ public:
 	Victron::VenusOS::Theme::SystemColorScheme systemColorScheme() const;
 	void setSystemColorScheme(Victron::VenusOS::Theme::SystemColorScheme systemScheme);
 
+	static Theme *instance();
+
+	Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme() const;
+	void setForcedColorScheme(Victron::VenusOS::Theme::ForcedColorScheme forcedScheme);
+
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
 
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
@@ -76,11 +90,13 @@ Q_SIGNALS:
 	void colorSchemeChanged_parameterless();
 	void systemColorSchemeChanged(Victron::VenusOS::Theme::SystemColorScheme systemColorScheme);
 	void systemColorSchemeChanged_parameterless();
+	void forcedColorSchemeChanged(Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme);
 
 protected:
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
 	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
+	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
 };
 
 }
