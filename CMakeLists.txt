@@ -991,7 +991,8 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/services/dse-genset.json
         data/mock/conf/services/digitalinput-alarm.json
         data/mock/conf/services/em-acload.json
-        data/mock/conf/services/em-evcharger.json
+        data/mock/conf/services/em-evcharger-input.json
+        data/mock/conf/services/em-evcharger-output.json
         data/mock/conf/services/em-genset.json
         data/mock/conf/services/em-grid.json
         data/mock/conf/services/em-heatpump-input.json
