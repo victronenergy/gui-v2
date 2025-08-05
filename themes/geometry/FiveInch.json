@@ -67,7 +67,11 @@
     "geometry_slider_groove_radius": 8,
 
     "geometry_dimmingSlider_height": 40,
-    "geometry_dimmingSlider_dot_size": 4,
+    "geometry_dimmingSlider_text_padding": 13,
+    "geometry_dimmingSlider_handle_width": 12,
+    "geometry_dimmingSlider_indicator_width": 4,
+    "geometry_dimmingSlider_separator_width": 2,
+    "geometry_dimmingSlider_decorator_vertical_padding": 6,
 
     "geometry_spinBox_indicator_minimumWidth": 64,
     "geometry_spinBox_indicator_maximumWidth": 136,
