@@ -1186,7 +1186,7 @@ add_custom_target(download_translations
 )
 
 add_custom_target(upload_translations
-    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}.ts"
+    COMMAND bash "-c" "${CMAKE_CURRENT_SOURCE_DIR}/.github/scripts/upload_new_terms.sh ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
     DEPENDS ${PROJECT_NAME}
 )
 
