@@ -519,6 +519,9 @@ QtObject {
 	//% "Total"
 	readonly property string total: qsTrId("common_words_total")
 
+	//% "Total power"
+	readonly property string total_power: qsTrId("common_words_total_power")
+
 	//: Solar tracker
 	//% "Tracker"
 	readonly property string tracker: qsTrId("common_words_tracker")

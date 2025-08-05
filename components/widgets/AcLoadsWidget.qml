@@ -27,8 +27,47 @@ AcWidget {
 	}
 	extraContentLoader.active: root.phaseCount > 1 || root.measurements.l2AndL1OutSummed
 
-	// Heat pumps with Position=1 (AC input) are considered as "AC Loads", so they are
+	// AC meters with Position=1 (AC input) are considered as "AC Loads", so they are
 	// accessible from this AC Loads widget.
-	enabled: Global.allDevicesModel.heatPumpInputDevices.count > 0
-	onClicked: openDevicePageOrList(Global.allDevicesModel.heatPumpInputDevices)
+	// For 3-phase systems, the drilldown is always enabled.
+	// For 1-phase systems, only enable the drilldown if there are devices to be shown.
+	enabled: root.measurements.phaseCount > 1 || inputLoadDevices.count > 0
+
+	onClicked: {
+		Global.pageManager.pushPage("/pages/loads/AcLoadListPage.qml", {
+			title: root.title,
+			measurements: root.measurements,
+			model: Global.system.showInputLoads ? inputLoadDevices : allLoadDevices
+		})
+	}
+
+	// TODO when #2371 is fixed, use a single FilteredDeviceModel instead of choosing between this
+	// ServiceDeviceModel vs an AggregateDeviceModel.
+	ServiceDeviceModel {
+		id: allLoadDevices
+		serviceTypes: ["acload", "evcharger", "heatpump"]
+	}
+
+	AggregateDeviceModel {
+		id: inputLoadDevices
+		sourceModels: [
+			acLoadInputDevices,
+			evChargerInputDevices,
+			Global.allDevicesModel.heatPumpInputDevices,
+		]
+	}
+
+	AcMeterModel {
+		id: acLoadInputDevices
+		position: VenusOS.AcPosition_AcInput
+		serviceTypes: ["acload"]
+		modelId: "acload-input"
+	}
+
+	AcMeterModel {
+		id: evChargerInputDevices
+		position: VenusOS.AcPosition_AcInput
+		serviceTypes: ["evcharger"]
+		modelId: "evcharger-input"
+	}
 }

@@ -24,6 +24,7 @@ FocusScope {
 	property bool effectiveVisible: preferredVisible
 
 	property alias background: backgroundRect
+	property real bottomInset
 
 	// Allow item to receive focus within its focus scope.
 	focus: true
@@ -36,7 +37,10 @@ FocusScope {
 
 	ListItemBackground {
 		id: backgroundRect
-		anchors.fill: parent
+		anchors {
+			fill: parent
+			bottomMargin: root.bottomInset
+		}
 		z: -2 // allow PressArea highlight to be seen
 	}
 }
