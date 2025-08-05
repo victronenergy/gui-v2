@@ -241,6 +241,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/AcceptButtonBackground.qml
     components/AcPhasesCurrentRange.qml
     components/AcInputDirectionIcon.qml
+    components/AcMeterModel.qml
     components/AllDevicesModel.qml
     components/AcOutput.qml
     components/AcPhase.qml
@@ -282,7 +283,6 @@ set (VENUS_QML_MODULE_SOURCES
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
     components/GsmStatusIcon.qml
-    components/HeatPumpModel.qml
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterAcOutSettings.qml
@@ -540,6 +540,8 @@ set (VENUS_QML_MODULE_SOURCES
     pages/evcs/EvChargerSetupPage.qml
     pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
+    pages/loads/AcLoadListPage.qml
+    pages/loads/LoadListDelegate.qml
     pages/settings/CanbusProfile.qml
     pages/settings/CanbusServiceFinder.qml
     pages/settings/DvccCommonSettings.qml
@@ -991,7 +993,8 @@ qt_add_resources(VictronMock "VictronMock_resources"
         data/mock/conf/services/dse-genset.json
         data/mock/conf/services/digitalinput-alarm.json
         data/mock/conf/services/em-acload.json
-        data/mock/conf/services/em-evcharger.json
+        data/mock/conf/services/em-evcharger-input.json
+        data/mock/conf/services/em-evcharger-output.json
         data/mock/conf/services/em-genset.json
         data/mock/conf/services/em-grid.json
         data/mock/conf/services/em-heatpump-input.json

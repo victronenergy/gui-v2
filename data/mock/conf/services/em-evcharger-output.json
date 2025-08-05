@@ -1,6 +1,6 @@
 {
-    "com.victronenergy.evcharger.evcs_em_1001": {
-        "/Ac/Current": 0,
+    "com.victronenergy.evcharger.evcs_em_1002": {
+        "/Ac/Current": 0.2,
         "/Ac/Energy/Forward": 39869.8,
         "/Ac/Frequency": 50,
         "/Ac/L1/Current": 0.1,
@@ -21,8 +21,8 @@
         "/ChargingTime": null,
         "/Connected": 1,
         "/Current": null,
-        "/CustomName": "Energy meter (as evcharger)",
-        "/DeviceInstance": 1001,
+        "/CustomName": "Energy meter (evcharger, output)",
+        "/DeviceInstance": 1002,
         "/DeviceType": 71,
         "/ErrorCode": 0,
         "/FirmwareVersion": "2",
@@ -37,6 +37,6 @@
         "/ProductName": "EVSE",
         "/RefreshTime": 600,
         "/Role": "evcharger",
-        "/Status": null
+        "/Status": 1
     }
 }
