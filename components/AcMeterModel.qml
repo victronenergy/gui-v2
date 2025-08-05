@@ -15,7 +15,12 @@ ServiceDeviceModel {
 		id: device
 
 		required property string uid
-		readonly property bool positionMatched: valid && _position.valid && _position.value === root.position
+
+		// For services without a /Position value, assume it is in the "input" position.
+		readonly property bool positionMatched: root.position === VenusOS.AcPosition_AcOutput
+				? valid && _position.valid && _position.value === VenusOS.AcPosition_AcOutput
+				: valid && (!_position.valid || _position.value === VenusOS.AcPosition_AcInput)
+
 		property bool addedToModel
 
 		readonly property VeQuickItem _position: VeQuickItem {
