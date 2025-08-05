@@ -429,6 +429,8 @@
     "geometry_batteryListPage_item_height": 84,
     "geometry_batteryListPage_item_verticalSpacing": 2,
 
+    "geometry_loadListPage_item_height": 68,
+
     "geometry_settings_battery_rangeSlider_labelWidth": 70,
 
     "geometry_veBusAlarm_minimumDelegateWidth": 120,

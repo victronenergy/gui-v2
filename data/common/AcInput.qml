@@ -20,6 +20,7 @@ Device {
 
 	readonly property int source: !!inputInfo ? inputInfo.source : VenusOS.AcInputs_InputSource_NotAvailable
 	readonly property int gensetStatusCode: _gensetStatusCode.valid ? _gensetStatusCode.value : -1
+	readonly property string measurementsUid: _phaseMeasurements.bindPrefix
 
 	// clamp to zero any values with magnitude < 1 (assume it's noise) to avoid UI flicker.
 	readonly property real power: (Math.floor(Math.abs(_phaseMeasurements.power)) < 1.0) ? 0.0 : _phaseMeasurements.power
