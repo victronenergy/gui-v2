@@ -363,6 +363,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
+    components/controls/MomentaryButton.qml
     components/controls/PressArea.qml
     components/controls/PressEffect.qml
     components/controls/ProgressBar.qml
