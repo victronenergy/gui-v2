@@ -37,7 +37,7 @@ else()
     include(GNUInstallDirs)
 endif()
 
-option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
+option(LOAD_QML_FROM_FILESYSTEM "enable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=ON" OFF) # Disabled by default
 option(NO_CACHEGEN "Enable bytecode compilation and lint processing for all qml files via cmake -NO_CACHEGEN=OFF" ON) # Enabled by default
 option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_TESTS=ON" OFF) # Disabled by default
 
@@ -848,6 +848,12 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
+if (LOAD_QML_FROM_FILESYSTEM)
+    list(APPEND VenusQMLModule_CPP_SOURCES
+        src/urlinterceptor.h
+        src/urlinterceptor.cpp)
+endif()
+
 list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
@@ -1486,7 +1492,10 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_qm_files_exist)
 
 target_compile_definitions(${PROJECT_NAME}
-    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+    PRIVATE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+        LOAD_QML_FROM_FILESYSTEM=$<BOOL:${LOAD_QML_FROM_FILESYSTEM}>
+)
 
 add_link_options(
     $<$<CONFIG:RELEASE>:-s>     # strip the binary for Release builds
