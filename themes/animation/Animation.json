@@ -19,6 +19,7 @@
     "animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration": 10000,
     "animation_generator_detectGeneratorSet_toastNotification_autoClose_duration": 12000,
     "animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration": 3000,
+    "animation_momentary_button_effect_duration": 750,
     "animation_page_idleOpacity_duration": 250,
     "animation_page_idleResize_duration": 250,
     "animation_page_idleResize_timeout": 8000,
