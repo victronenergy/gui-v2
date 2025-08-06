@@ -404,6 +404,9 @@ QtObject {
 	//% "Position"
 	readonly property string position_ac: qsTrId("common_words_position_ac")
 
+	//% "Press"
+	readonly property string press: qsTrId("common_words_press")
+
 	//% "Press to clear"
 	readonly property string press_to_clear: qsTrId("common_words_press_to_clear")
 
