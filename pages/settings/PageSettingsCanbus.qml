@@ -164,7 +164,7 @@ Page {
 				text: CommonWords.network_status
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageCanbusStatus.qml",
-						{ gateway: canbusProfile.gateway, title: root.title })
+						{ gateway: canbusProfile.gateway, title: CommonWords.network_status })
 				}
 			}
 		}
