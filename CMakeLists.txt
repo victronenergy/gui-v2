@@ -92,7 +92,7 @@ else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus REQUIRED)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus ShaderTools REQUIRED)
 endif()
 
 # TODO - Remove the following block once aqtinstall supports 'qt6_add_shaders(...)'.
@@ -364,6 +364,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
     components/controls/PressArea.qml
+    components/controls/PressEffect.qml
     components/controls/ProgressBar.qml
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
@@ -767,13 +768,6 @@ set (VENUS_QML_MODULE_SOURCES
     pages/welcome/WelcomeView.qml
 )
 
-# TODO: re-enable for Desktop and Device builds, see issue #2351
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    list(APPEND VENUS_QML_MODULE_SOURCES
-        components/controls/PressEffect.qml
-    )
-endif()
-
 list(APPEND TRANSLATION_SOURCES ${VENUS_QML_MODULE_SOURCES})
 
 list(APPEND VenusQMLModule_CPP_SOURCES
@@ -862,18 +856,15 @@ qt_add_qml_module(VenusQMLModule
     SOURCES ${VenusQMLModule_CPP_SOURCES}
 )
 
-# Add shaders for WebAssembly builds (requires QtShaderTools)
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    qt6_add_shaders(VenusQMLModule "venus-shaders"
-        BATCHABLE
-        PRECOMPILE
-        OPTIMIZED
-        PREFIX
-            "/"
-        FILES
-            "components/controls/presseffect.frag"
-    )
-endif()
+qt6_add_shaders(VenusQMLModule "venus-shaders"
+    BATCHABLE
+    PRECOMPILE
+    OPTIMIZED
+    PREFIX
+        "/"
+    FILES
+        "components/controls/presseffect.frag"
+)
 
 list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
 
