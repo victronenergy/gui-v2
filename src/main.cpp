@@ -10,6 +10,10 @@
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
 
+#if VENUS_GX_BUILD
+#include "src/urlinterceptor.h"
+#endif
+
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten/html5.h>
 #include <emscripten/val.h>
@@ -448,6 +452,9 @@ int main(int argc, char *argv[])
 	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
+#if VENUS_GX_BUILD
+	engine.addUrlInterceptor(new Victron::VenusOS::UrlInterceptor());
+#endif
 	QZXing::registerQMLTypes();
 	QZXing::registerQMLImageProvider(engine);
 

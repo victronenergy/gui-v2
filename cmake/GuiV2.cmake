@@ -55,7 +55,7 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
     FILES ${BUILD_DIR_QM_FILES}
 )
 
-if (${LOAD_QML_FROM_FILESYSTEM})
+if (${VENUS_GX_BUILD})
     qt_query_qml_module(${PROJECT_NAME} QML_FILES module_qml_files QMLDIR module_qmldir)
     install(TARGETS ${PROJECT_NAME}
         DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -65,12 +65,6 @@ if (${LOAD_QML_FROM_FILESYSTEM})
 
     install(FILES ${module_qml_files} ${module_qmldir} $<TARGET_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(FILES $<TARGET_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_BINDIR} PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
-
-    add_custom_command(
-        TARGET ${PROJECT_NAME}
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
-    )
 endif()
 
 target_compile_definitions(${PROJECT_NAME}

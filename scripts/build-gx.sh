@@ -87,12 +87,11 @@ cd "build-gx"
 
 
 # Configure the project with CMake, setting the build type to MinSizeRel (minimum size release)
-# load QML from filesystem causes an error
-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DLOAD_QML_FROM_FILESYSTEM=OFF ..
+cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
 # Build the project using CMake with the MinSizeRel configuration
-# parallel builds cause an error here.
-cmake --build . --config MinSizeRel
+cmake --build . -j8
+cmake --install .
 
 if [ $? -ne 0 ]; then
     echo
@@ -114,10 +113,7 @@ if [ "${PWD##*/}" = "build-gx" ]; then
     mkdir ../build-gx_files_to_copy
 
     # Copy the files to the output directory
-    cp venus-gui-v2/Main.qml ../build-gx_files_to_copy
-    cp venus-gui-v2/qmldir ../build-gx_files_to_copy
-    cp bin/venus-gui-v2 ../build-gx_files_to_copy
-    cp -r Victron ../build-gx_files_to_copy
+    cp -r install/bin/* ../build-gx_files_to_copy
 else
     echo "Current directory is not build-gx. Aborting to avoid unwanted deleting of files."
 fi

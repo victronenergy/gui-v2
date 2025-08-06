@@ -30,7 +30,6 @@ endif()
 project(venus-gui-v2 LANGUAGES CXX VERSION 1.2.8)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
-option(LOAD_QML_FROM_FILESYSTEM "disable filesystem loading via cmake -DLOAD_QML_FROM_FILESYSTEM=OFF" ON) # Enabled by default
 option(NO_CACHEGEN "Enable bytecode compilation and lint processing for all qml files via cmake -NO_CACHEGEN=OFF" ON) # Enabled by default
 option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_TESTS=ON" OFF) # Disabled by default
 
@@ -46,10 +45,6 @@ message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 if (${NO_CACHEGEN})
     message("Disabling cache generation for faster builds")
     set (QML_MODULE_OPTARGS ${QML_MODULE_OPTARGS} "NO_CACHEGEN")
-endif()
-
-if (${LOAD_QML_FROM_FILESYSTEM})
-    message("This application will load qml sources from the filesystem, not from the compiled resources")
 endif()
 
 include(cmake/ModuleVenus_Sources.cmake)

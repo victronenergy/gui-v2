@@ -29,6 +29,7 @@ else()
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     set(VENUS_GX_BUILD ON)
     add_compile_definitions(VENUS_GX_BUILD)
+    message("This application will load qml sources from the filesystem, not from the compiled resources")
 endif()
 
 # If we want a release build, remove the '-g' debug compiler flag set by the environment setup script.

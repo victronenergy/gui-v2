@@ -134,6 +134,13 @@ FocusScope {
 		asynchronous: true
 		active: Global.isGxDevice
 			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
+
+		// Note that for gx builds, all references to 'qrc:/.../Thing.qml' are intercepted by
+		// UrlInterceptor and changed to '.../Thing.qml', i.e. they are loaded from the file
+		// system, not from the compiled resources. This allows customers to edit qml source code
+		// on the device without needing to build gui-v2 from source. This uses relative paths,
+		// i.e. it doesn't matter where gui-v2 is installed, customers can change gui-v2 behavior
+		// by editing qml.
 		source: Global.isGxDevice
 				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
