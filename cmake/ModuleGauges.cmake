@@ -6,14 +6,9 @@ qt_add_qml_module(VictronGauges
     ${QML_MODULE_OPTARGS}
 )
 
-if (${LOAD_QML_FROM_FILESYSTEM})
+if (${VENUS_GX_BUILD})
     qt_query_qml_module(VictronGauges QML_FILES module_qml_files QMLDIR module_qmldir)
     install(FILES ${module_qmldir}    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges)
     install(FILES ${module_qml_files} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Gauges/components)
-    add_custom_command(
-        TARGET VictronGauges
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
-    )
 endif()
 

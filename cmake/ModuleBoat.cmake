@@ -11,13 +11,8 @@ qt_add_resources(VictronBoat "VictronBoat_large_resources"
     FILES ${VictronBoat_QML_MODULE_RESOURCES}
 )
 
-if (${LOAD_QML_FROM_FILESYSTEM})
+if (${VENUS_GX_BUILD})
     qt_query_qml_module(VictronBoat QML_FILES module_qml_files QMLDIR module_qmldir)
     install(DIRECTORY pages/boat/  DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Boat)
     install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Boat)
-    add_custom_command(
-        TARGET VictronBoat
-        COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/StripRegexFromFile.cmake" ${module_qmldir} "^prefer.*$"
-        VERBATIM
-    )
 endif()
