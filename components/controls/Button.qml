@@ -25,9 +25,9 @@ CT.Button {
 	property alias radius: backgroundRect.radius
 	property bool showEnabled: enabled
 
-	onPressed: if (pressEffect.active) pressEffect.item.start(pressX/width, pressY/height)
-	onReleased: if (pressEffect.active) pressEffect.item.stop()
-	onCanceled: if (pressEffect.active) pressEffect.item.stop()
+	onPressed: pressEffect.start(pressX/width, pressY/height)
+	onReleased: pressEffect.stop()
+	onCanceled: pressEffect.stop()
 
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
@@ -53,16 +53,10 @@ CT.Button {
 		border.color: root.showEnabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
-		Loader {
+		PressEffect {
 			id: pressEffect
+			radius: backgroundRect.radius
 			anchors.fill: parent
-			active: Qt.platform.os === "wasm"
-			source: "qrc:/qt/qml/Victron/VenusOS/components/controls/PressEffect.qml"
-			onItemChanged: {
-				if (item) {
-					item.radius = Qt.binding(function() { return backgroundRect.radius })
-				}
-			}
 		}
 	}
 
