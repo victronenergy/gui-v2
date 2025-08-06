@@ -136,7 +136,7 @@ FocusScope {
 		active: Global.isGxDevice
 			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
 		source: Global.isGxDevice
-				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
+				? "file:///opt/victronenergy/gui-v2/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
 		parent: QtQuickControls.Overlay.overlay
 		z: 1

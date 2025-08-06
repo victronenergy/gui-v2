@@ -163,7 +163,13 @@ endif()
 
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
 if(QT_KNOWN_POLICY_QTP0001)
-    qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
+    # The OLD behavior of this policy is that, the RESOURCE_PREFIX argument for qt_add_qml_module() defaults to "/".
+    # The NEW behavior of this policy is that the RESOURCE_PREFIX argument for qt_add_qml_module() defaults to "/qt/qml/".
+    # The new behavior ensures that modules are put into the QML Import Path and can be found without further setup.
+    # As of qt 6.8, we can't access the same modules via qrc and via the filesystem.
+    # Setting QTP0001 to "OLD" means that our qml modules can't be found at runtime, and therefore don'tclash with the qml modules found in the file system.
+    # This is as bad as it sounds.
+    qt_policy(SET QTP0001 OLD)
 endif()
 
 set(QZXING_USE_QML ON)
