@@ -215,6 +215,7 @@ Item {
 					opacity: 0.0
 					source: animationEnabled ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
 					visible: root.animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					rotation: animationEnabled ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
 
 					Behavior on opacity {
 						enabled: root._animated
