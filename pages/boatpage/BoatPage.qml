@@ -158,4 +158,5 @@ SwipeViewPage {
 			loadArc.anchors.rightMargin: Theme.geometry_page_content_horizontalMargin / 2
 		}
 	}
+	Component.onCompleted: console.log("********************************************************************************** BoatPage: loaded from:", Qt.resolvedUrl("").toString() )
 }
