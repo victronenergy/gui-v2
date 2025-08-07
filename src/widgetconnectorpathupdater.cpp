@@ -71,3 +71,15 @@ void WidgetConnectorPathUpdater::update() const {
 		electron->setProperty("opacity", normalizedProgress > fadeOutThreshold ? 0 : 1);
 	}
 }
+
+qreal WidgetConnectorPathUpdater::angleForArrow(qreal progress, bool startToEnd)
+{
+	if (!path) {
+		qmlDebug(this) << "Cannot animate electrons without a specified path";
+		return qQNaN();
+	}
+
+	qreal angle = 0;
+	const QPointF position = path->sequentialPointAt(progress, &angle);
+	return startToEnd ? 360.0 - angle : 180 - angle;
+}
