@@ -5,6 +5,8 @@
 
 import QtQuick
 import QtQuick.Templates as CT
+import Victron.VenusOS.Shaders
+
 import Victron.VenusOS
 
 CT.Button {
@@ -42,18 +44,12 @@ CT.Button {
 		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
-		ShaderEffect {
+		BasePressEffect {
 			id: shaderEffect
+
 			anchors.fill: parent
-
-			property real radius: backgroundRect.radius
-			property real progress
-			property point touchPos
-			property real aspectRatio: height > 0 ? width/height : 1.0
-			property real radiusRatio: height > 0 ? radius/height : 0.0
-			property color color: Theme.color_dimWhite2
-
-			fragmentShader:  "qrc:/components/controls/presseffect.frag.qsb"
+			radius: backgroundRect.radius
+			color: Theme.color_dimWhite2
 
 			ParallelAnimation {
 				id: shaderAnimation
