@@ -28,7 +28,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			textInput.font.pixelSize: Theme.font_size_h2
+			fontPixelSize: Theme.font_size_h2
 			from: 1970
 			to: 2100
 
@@ -47,7 +47,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			textInput.font.pixelSize: Theme.font_size_h2
+			fontPixelSize: Theme.font_size_h2
 			from: 1
 			to: 12
 			textFromValue: (value, locale) => Utils.pad(value, 2)
@@ -64,7 +64,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			textInput.font.pixelSize: Theme.font_size_h2
+			fontPixelSize: Theme.font_size_h2
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
 			textFromValue: (value, locale) => Utils.pad(value, 2)

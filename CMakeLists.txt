@@ -385,6 +385,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SpinBox.qml
+    components/controls/SpinBoxInputArea.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TextField.qml

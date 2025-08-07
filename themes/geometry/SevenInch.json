@@ -77,7 +77,6 @@
     "geometry_spinBox_indicator_maximumWidth": 136,
     "geometry_spinBox_indicator_height": 64,
     "geometry_spinBox_indicator_radius": 6,
-    "geometry_spinBox_spacing": "geometry_button_spacing",
 
     "geometry_switch_container_width": 48,
     "geometry_switch_container_height": 24,

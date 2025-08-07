@@ -10,7 +10,6 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property bool arrowHintsVisible
 
 	color: "transparent"
 	border.color: Theme.color_focus_highlight
@@ -25,7 +24,6 @@ Rectangle {
 		}
 		source: "qrc:/images/spinbox_arrow_up.svg"
 		color: Theme.color_focus_highlight
-		visible: root.arrowHintsVisible
 	}
 
 	CP.ColorImage {
@@ -37,6 +35,5 @@ Rectangle {
 		source: "qrc:/images/spinbox_arrow_up.svg"
 		color: Theme.color_focus_highlight
 		rotation: 180
-		visible: root.arrowHintsVisible
 	}
 }

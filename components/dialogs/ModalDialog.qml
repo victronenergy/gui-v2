@@ -61,7 +61,7 @@ T.Dialog {
 		// Give the initial focus to this content item so that child UI controls will receive focus.
 		focus: true
 
-		KeyNavigation.down: root.footer
+		KeyNavigation.down: Global.keyNavigationEnabled ? root.footer : null
 		Keys.onReturnPressed: root.handleAccept()
 		Keys.onEnterPressed: root.handleAccept()
 		Keys.onEscapePressed: root.handleReject()
