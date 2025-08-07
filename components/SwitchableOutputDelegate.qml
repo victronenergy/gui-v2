@@ -339,8 +339,8 @@ BaseListItem {
 				const newValue = index === 1 ? 1 : 0
 				if (newValue !== toggleState.backendValue) {
 					currentIndex = index
-					toggleState.writeValue(newValue)
 				}
+				toggleState.writeValue(newValue)
 			}
 
 			width: root._buttonWidth
