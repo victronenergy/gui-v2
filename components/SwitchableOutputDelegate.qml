@@ -273,7 +273,7 @@ BaseListItem {
 	Component {
 		id: momentaryComponent
 
-		Button {
+		MomentaryButton {
 			id: momentaryButton
 
 			function handlePress(key) {
@@ -300,16 +300,15 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			font.pixelSize: Theme.font_size_body2
-			//% "Press"
-			text: qsTrId("switchable_output_press")
-			flat: false
 
 			// Disable if a write is in progress, unless expecting mouse/key release.
 			enabled: !momentaryState.busy || momentaryState.expectedValue === 1
 
-			// Show as checked, when pressing or backend indicates it is pressed.
-			checked: momentaryState.expectedValue === 1 || momentaryState.backendValue === 1
+			// Show as checked, when pressing or backend indicates it is pressed
+			checked: momentaryState.expectedValue === 1
+				// Or when waiting for a release to be synced, else the button text flickers between
+				// "On" and "Pressed" on Wasm when there is a delay between release and sync.
+				|| momentaryState.busy
 
 			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
 			focusPolicy: Qt.NoFocus
