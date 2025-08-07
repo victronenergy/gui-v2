@@ -80,6 +80,29 @@ Page {
 					})
 				}
 			}
+
+			SettingsColumn {
+				id: customisationsColumn
+				width: parent ? parent.width : 0
+				preferredVisible: root.device._productId.valid && integrationsModel.count
+
+				Repeater {
+					model: CustomisationIntegrationsModel {
+						id: integrationsModel
+						type: Customisations.DeviceListSettingsPage
+						productId: root.device._productId.valid ? Utils.toHexFormat(root.device._productId.value) : ""
+					}
+					delegate: SettingsListNavigation {
+						required property string customisationName
+						required property string url
+						required property string title
+						text: qsTrId(title)
+						indicatorColor: Customisations.customisation(customisationName).color
+						pageSource: url
+						preferredVisible: Customisations.enabledCustomisations.indexOf(customisationName) >= 0
+					}
+				}
+			}
 		}
 	}
 }
