@@ -857,14 +857,23 @@ qt_add_qml_module(VenusQMLModule
     SOURCES ${VenusQMLModule_CPP_SOURCES}
 )
 
-qt6_add_shaders(VenusQMLModule "venus-shaders"
+qt_add_qml_module(VenusQMLShaderModule
+    ${QML_MODULE_OPTARGS}
+    URI Victron.VenusOS.Shaders
+    VERSION 2.0
+    STATIC
+    OUTPUT_DIRECTORY Victron/VenusOS/Shaders
+    QML_FILES components/shaders/BasePressEffect.qml
+)
+
+qt6_add_shaders(VenusQMLShaderModule "venus-shaders"
     BATCHABLE
     PRECOMPILE
     OPTIMIZED
     PREFIX
         "/"
     FILES
-        "components/controls/presseffect.frag"
+        "components/shaders/presseffect.frag"
 )
 
 list(APPEND TRANSLATION_SOURCES ${VenusQMLModule_CPP_SOURCES})
