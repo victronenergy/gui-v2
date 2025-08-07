@@ -370,8 +370,8 @@ SwipeViewPage {
 
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
-			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
+			return Math.abs(power) < Theme.geometry_overviewPage_connector_animationPowerThreshold ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					: power > 0.0 ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_EndToStart
 		} else if (connectorWidget.endWidget === batteryWidget) {
 			// For DC inputs, positive power means energy is flowing towards battery.

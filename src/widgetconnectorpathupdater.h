@@ -33,6 +33,7 @@ public:
 	Q_INVOKABLE void remove(QQuickItem *electron);
 
 	Q_INVOKABLE void update() const;
+	Q_INVOKABLE qreal angleForArrow(qreal progress, bool startToEnd);
 
 signals:
 	void progressChanged();
