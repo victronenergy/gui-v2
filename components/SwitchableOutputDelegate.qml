@@ -4,6 +4,7 @@
 */
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Templates as CT
 
 BaseListItem {
 	id: root
@@ -492,7 +493,71 @@ BaseListItem {
 	Component {
 		id: unrangedSetpointComponent
 
-		PlaceholderDelegate {}
+		MiniSpinBox {
+			id: spinBox
+
+			function handlePress(key) {
+				// Enter edit mode when space is pressed.
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				default:
+					return false
+				}
+			}
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			enabled: !unrangedValueSync.busy
+			editable: !Global.isGxDevice // no room for VKB in the switch pane
+			suffix: unrangedUnit.value ?? ""
+			from: decimalConverter.intFrom
+			to: decimalConverter.intTo
+			stepSize: decimalConverter.intStepSize
+			value: decimalConverter.decimalToInt(unrangedValueSync.backendValue)
+			textFromValue: (value, locale) => decimalConverter.textFromValue(value)
+			valueFromText: (text, locale) => {
+				const v = decimalConverter.valueFromText(text)
+				return isNaN(v) ? decimalConverter.decimalToInt(unrangedValueSync.backendValue) : v
+			}
+			onValueModified: {
+				// Update the /Dimming value to the user-entered value.
+				unrangedValueSync.writeValue(decimalConverter.intToDecimal(value))
+			}
+
+			VeQuickItem {
+				id: unrangedMin
+				uid: root.outputUid + "/Settings/DimmingMin"
+			}
+			VeQuickItem {
+				id: unrangedMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: unrangedStepSize
+				uid: root.outputUid + "/Settings/StepSize"
+			}
+			VeQuickItem {
+				id: unrangedUnit
+				uid: root.outputUid + "/Settings/Unit"
+			}
+
+			SpinBoxDecimalConverter {
+				id: decimalConverter
+
+				decimals: 2
+				from: unrangedMin.valid ? unrangedMin.value : 0
+				to: unrangedMax.valid ? unrangedMax.value : 100
+				stepSize: unrangedStepSize.valid ? unrangedStepSize.value : 1
+			}
+
+			SettingSync {
+				id: unrangedValueSync
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+			}
+		}
 	}
 
 	Component {

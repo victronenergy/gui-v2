@@ -10,6 +10,7 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
+	property real arrowMargin: Theme.geometry_focus_highlight_border_size
 
 	color: "transparent"
 	border.color: Theme.color_focus_highlight
@@ -19,7 +20,7 @@ Rectangle {
 	CP.ColorImage {
 		anchors {
 			top: parent.top
-			topMargin: -height - Theme.geometry_focus_highlight_border_size
+			topMargin: -height - root.arrowMargin
 			horizontalCenter: parent.horizontalCenter
 		}
 		source: "qrc:/images/spinbox_arrow_up.svg"
@@ -29,7 +30,7 @@ Rectangle {
 	CP.ColorImage {
 		anchors {
 			bottom: parent.bottom
-			bottomMargin: -height - Theme.geometry_focus_highlight_border_size
+			bottomMargin: -height - root.arrowMargin
 			horizontalCenter: parent.horizontalCenter
 		}
 		source: "qrc:/images/spinbox_arrow_up.svg"

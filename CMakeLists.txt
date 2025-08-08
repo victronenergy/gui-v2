@@ -341,6 +341,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/SolarYieldGraph.qml
     components/SolarYieldModel.qml
     components/SplashView.qml
+    components/SpinBoxDecimalConverter.qml
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
@@ -375,6 +376,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
+    components/controls/MiniSpinBox.qml
     components/controls/MomentaryButton.qml
     components/controls/PressArea.qml
     components/controls/PressEffect.qml
