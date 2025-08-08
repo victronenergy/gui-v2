@@ -21,10 +21,6 @@ ModalDialog {
 	signal maxValueReached()
 	signal minValueReached()
 
-	function _multiplier() {
-		return Math.pow(10, decimals)
-	}
-
 	onAboutToShow: {
 		if (presets.length) {
 			let presetsIndex = -1
@@ -50,8 +46,6 @@ ModalDialog {
 			SpinBox {
 				id: spinBox
 
-				property bool _initialized: false
-
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 				height: Theme.geometry_timeSelector_spinBox_height
@@ -59,21 +53,16 @@ ModalDialog {
 				indicatorImplicitWidth: root.decimals > 0
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
-				textFromValue: function(value, locale) {
-					return Units.formatNumber(value / root._multiplier(), root.decimals)
-				}
-				valueFromText: function(text, locale) {
-					let value = Units.formattedNumberToReal(text) * root._multiplier()
-					if (isNaN(value)) {
-						// don't change the current value
-						value = spinBox.value
-					}
-					return value
-				}
-				from: Math.max(Global.int32Min, root.from * root._multiplier())
-				to: Math.min(Global.int32Max, root.to * root._multiplier())
-				stepSize: root.stepSize * root._multiplier()
 				suffix: root.suffix
+				from: decimalConverter.intFrom
+				to: decimalConverter.intTo
+				stepSize: decimalConverter.intStepSize
+				value: decimalConverter.decimalToInt(root.value)
+				textFromValue: (value, locale) => decimalConverter.textFromValue(value)
+				valueFromText: (text, locale) => {
+					const v = decimalConverter.valueFromText(text)
+					return isNaN(v) ? decimalConverter.decimalToInt(root.value) : v // if invalid, use the previous value
+				}
 
 				// Use BeforeItem priority to override the default key Spinbox event handling, else
 				// up/down keys will modify the number even when SpinBox is not in "edit" mode.
@@ -82,18 +71,20 @@ ModalDialog {
 				KeyNavigation.up: spinBox
 				KeyNavigation.down: presetsRow.enabled ? presetsRow : root.footer
 
-				onValueChanged: {
-					if (_initialized) {
-						root.value = Number(spinBox.value / root._multiplier())
-						presetsRow.currentIndex = -1
-					}
+				onValueModified: {
+					root.value = decimalConverter.intToDecimal(spinBox.value)
+					presetsRow.currentIndex = -1
 				}
-
 				onMinValueReached: root.minValueReached()
 				onMaxValueReached: root.maxValueReached()
-				Component.onCompleted: {
-					spinBox.value = Math.round(root.value * root._multiplier())
-					_initialized = true
+
+				SpinBoxDecimalConverter {
+					id: decimalConverter
+
+					decimals: root.decimals
+					from: root.from
+					to: root.to
+					stepSize: root.stepSize
 				}
 			}
 
@@ -106,7 +97,7 @@ ModalDialog {
 				visible: model.length > 0
 				enabled: visible
 				onButtonClicked: function (buttonIndex) {
-					spinBox.value = model[buttonIndex].value * root._multiplier()
+					spinBox.value = decimalConverter.decimalToInt(model[buttonIndex].value)
 				}
 
 				KeyNavigation.down: root.footer

@@ -98,7 +98,9 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _dimming: VeQuickItem {
-		uid: root.type === VenusOS.SwitchableOutput_Type_Dimmable ? `${root.uid}/Dimming` : ""
+		uid: root.type === VenusOS.SwitchableOutput_Type_Dimmable
+				|| root.type === VenusOS.SwitchableOutput_Type_UnrangedSetpoint
+			 ? `${root.uid}/Dimming` : ""
 	}
 
 	readonly property VeQuickItem _customName: VeQuickItem {
