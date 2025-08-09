@@ -848,6 +848,12 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
+if (LOAD_QML_FROM_FILESYSTEM)
+    list(APPEND VenusQMLModule_CPP_SOURCES
+        src/urlinterceptor.h
+        src/urlinterceptor.cpp)
+endif()
+
 list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
@@ -1483,12 +1489,15 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
     BIG_RESOURCES
     FILES ${BUILD_DIR_QM_FILES}
 )
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_qm_files_exist)
+#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_qm_files_exist)
 
 target_compile_definitions(${PROJECT_NAME}
-    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+    PRIVATE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+        LOAD_QML_FROM_FILESYSTEM=$<BOOL:${LOAD_QML_FROM_FILESYSTEM}>
+)
 
-add_link_options(
+        add_link_options(
     $<$<CONFIG:RELEASE>:-s>     # strip the binary for Release builds
     $<$<CONFIG:MINSIZEREL>:-s>  # strip the binary for MinSizeRel builds
 )
