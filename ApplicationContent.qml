@@ -163,4 +163,6 @@ FocusScope {
 			pageManager.ensureInteractive()
 		}
 	}
+	Component.onCompleted: console.log("*********************************************************** onCompleted: Qt.resolvedUrl(./ApplicationContent.qml): ", Qt.resolvedUrl("./ApplicationContent.qml"),
+									   "Qt.resolvedUrl(.):", Qt.resolvedUrl("."))
 }
