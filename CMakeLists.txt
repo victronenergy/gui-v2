@@ -163,13 +163,7 @@ endif()
 
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
 if(QT_KNOWN_POLICY_QTP0001)
-    # The OLD behavior of this policy is that, the RESOURCE_PREFIX argument for qt_add_qml_module() defaults to "/".
-    # The NEW behavior of this policy is that the RESOURCE_PREFIX argument for qt_add_qml_module() defaults to "/qt/qml/".
-    # The new behavior ensures that modules are put into the QML Import Path and can be found without further setup.
-    # As of qt 6.8, we can't access the same modules via qrc and via the filesystem.
-    # Setting QTP0001 to "OLD" means that our qml modules can't be found at runtime, and therefore don't clash with the qml modules found in the file system.
-    # This is as bad as it sounds.
-    qt_policy(SET QTP0001 NEW)
+    qt_policy(SET QTP0001 NEW) # >Qt6.5 only. Enabling this policy ensures that your QML module is placed under a default import path, and its types can be found without manual calls to QQmlEngine::addImportPath.
 endif()
 
 set(QZXING_USE_QML ON)
@@ -854,6 +848,12 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
+if (LOAD_QML_FROM_FILESYSTEM)
+    list(APPEND VenusQMLModule_CPP_SOURCES
+        src/urlinterceptor.h
+        src/urlinterceptor.cpp)
+endif()
+
 list(APPEND VenusQMLModule_CPP_SOURCES ${Units_CPP_SOURCES})
 
 qt_add_qml_module(VenusQMLModule
@@ -1492,9 +1492,12 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
 #add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_qm_files_exist)
 
 target_compile_definitions(${PROJECT_NAME}
-    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+    PRIVATE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+        LOAD_QML_FROM_FILESYSTEM=$<BOOL:${LOAD_QML_FROM_FILESYSTEM}>
+)
 
-add_link_options(
+        add_link_options(
     $<$<CONFIG:RELEASE>:-s>     # strip the binary for Release builds
     $<$<CONFIG:MINSIZEREL>:-s>  # strip the binary for MinSizeRel builds
 )

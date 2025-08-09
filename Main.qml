@@ -57,11 +57,7 @@ Window {
 		appIdleTimer.restart()
 	}
 
-	Component.onCompleted: {
-		console.log("*********************************************************** onCompleted: Qt.resolvedUrl(./Main.qml): ", Qt.resolvedUrl("./Main.qml"),
-											   "Qt.resolvedUrl(.):", Qt.resolvedUrl("."))
-		Global.main = root
-	}
+	Component.onCompleted: Global.main = root
 
 	Loader {
 		id: dataManagerLoader

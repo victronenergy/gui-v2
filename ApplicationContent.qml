@@ -136,7 +136,7 @@ FocusScope {
 		active: Global.isGxDevice
 			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
 		source: Global.isGxDevice
-				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml" // Qt.resolvedUrl("components/InputPanel.qml")
+				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
 		parent: QtQuickControls.Overlay.overlay
 		z: 1
@@ -163,6 +163,4 @@ FocusScope {
 			pageManager.ensureInteractive()
 		}
 	}
-	Component.onCompleted: console.log("*********************************************************** onCompleted: Qt.resolvedUrl(./ApplicationContent.qml): ", Qt.resolvedUrl("./ApplicationContent.qml"),
-									   "Qt.resolvedUrl(.):", Qt.resolvedUrl("."))
 }

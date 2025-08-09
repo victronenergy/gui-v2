@@ -14,7 +14,7 @@ SwipeViewPage {
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
 	navButtonIcon: "qrc:/images/icon_boat_32.svg"
-	url: "file:///opt/victronenergy/gui-v2/Victron/BoatPageComponents/BoatPage.qml"
+	url: "qrc:/qt/qml/Victron/BoatPageComponents/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
@@ -158,5 +158,4 @@ SwipeViewPage {
 			loadArc.anchors.rightMargin: Theme.geometry_page_content_horizontalMargin / 2
 		}
 	}
-	Component.onCompleted: console.log("********************************************************************************** BoatPage: loaded from:", Qt.resolvedUrl("").toString() )
 }
