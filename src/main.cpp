@@ -17,6 +17,7 @@
 #include <QUrlQuery>
 #endif
 
+#include <QQmlAbstractUrlInterceptor>
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlComponent>
@@ -403,6 +404,22 @@ EM_JS(bool, hasNativeVirtualKeyboard, (), {
 
 #endif
 
+class Interceptor : public QQmlAbstractUrlInterceptor
+{
+    QString exeDir  = QCoreApplication::applicationDirPath();
+
+    QUrl intercept(const QUrl &url, QQmlAbstractUrlInterceptor::DataType type)
+    {
+        QString returnUrl(url.toString());
+        if (returnUrl.endsWith(".qml") && returnUrl.indexOf("qrc:/qt/qml/") == 0)    // == "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml")
+        {
+            returnUrl.replace("qrc:/qt/qml", exeDir);
+        }
+        qDebug() << Q_FUNC_INFO << "url:" << url.toString() << "returnUrl:" << returnUrl;
+        return QUrl(returnUrl);
+    }
+};
+
 int main(int argc, char *argv[])
 {
 	qInfo().nospace() << "Victron gui version: v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH;
@@ -444,6 +461,7 @@ int main(int argc, char *argv[])
 	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
+    engine.setUrlInterceptor(new Interceptor());
 	QZXing::registerQMLTypes();
 	QZXing::registerQMLImageProvider(engine);
 
