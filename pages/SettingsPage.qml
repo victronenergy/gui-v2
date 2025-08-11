@@ -20,7 +20,6 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	activeFocusOnTab: true
-	blockInitialFocus: true
 
 	GradientListView {
 		id: settingsListView

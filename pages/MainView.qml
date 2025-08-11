@@ -134,8 +134,6 @@ FocusScope {
 		Loader {
 			id: swipeViewLoader
 
-			property bool blockItemFocus
-			property bool refreshBlockItemFocus: Global.keyNavigationEnabled
 			readonly property bool readyToLoad: swipePageModel.completed
 					&& Global.notifications && Global.notificationLayer // checked by onLoaded handler
 
@@ -164,38 +162,8 @@ FocusScope {
 				Global.allPagesLoaded = true
 			}
 
-			// When focused during key navigation, show a full-page focus blocker if the current
-			// page has blockInitialFocus=true.
-			onActiveFocusChanged: {
-				if (Global.keyNavigationEnabled) {
-					if (activeFocus && refreshBlockItemFocus) {
-						blockItemFocus = item?.currentItem?.blockInitialFocus
-						refreshBlockItemFocus = false
-					} else if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
-						// Re-refresh the focus blocker state if navigating back from status or nav bar.
-						refreshBlockItemFocus = true
-					}
-				}
-			}
-
-			// Space key disables the focus blocker, so that user can focus individual items on the
-			// page; Escape key re-enables the blocker. Ignore the event if no change is necessary.
-			Keys.onSpacePressed: (event) => {
-				event.accepted = blockItemFocus
-				blockItemFocus = false
-			}
-			Keys.onEscapePressed: (event) => {
-				const shouldBlockFocus = item?.currentItem?.blockInitialFocus
-				event.accepted = shouldBlockFocus && !blockItemFocus
-				blockItemFocus = shouldBlockFocus
-			}
 			Keys.enabled: Global.keyNavigationEnabled
 			KeyNavigation.down: navBar
-			KeyNavigationHighlight.active: swipeViewLoader.blockItemFocus
-										   && swipeViewLoader.activeFocus
-										   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			KeyNavigationHighlight.leftMargin: Theme.geometry_page_content_horizontalMargin
-			KeyNavigationHighlight.rightMargin: Theme.geometry_page_content_horizontalMargin
 
 			Component {
 				id: swipeViewComponent
@@ -206,7 +174,7 @@ FocusScope {
 					onReadyChanged: if (ready) ready = true // remove binding
 
 					anchors.fill: parent
-					focus: !swipeViewLoader.blockItemFocus
+					focus: true
 					contentChildren: swipePageModel.children
 
 					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
