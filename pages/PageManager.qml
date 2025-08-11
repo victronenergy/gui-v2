@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property Page currentMainPage
+
 	property QtObject emitter: QtObject {
 		signal pagePushRequested(obj: var, properties: var, operation: int)
 
@@ -17,9 +19,6 @@ QtObject {
 		signal pagePopRequested(toPage: var, operation: int)
 		signal popAllPagesRequested(operation: int)
 	}
-
-	property NavBar navBar
-	property StatusBar statusBar
 
 	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 
@@ -32,9 +31,7 @@ QtObject {
 
 	property Timer idleModeTimer: Timer {
 		running: !Global.splashScreenVisible
-			&& !!Global.mainView
-			&& Global.mainView.currentPage !== null && Global.mainView.currentPage !== undefined
-			&& Global.mainView.currentPage.fullScreenWhenIdle
+			&& currentMainPage?.fullScreenWhenIdle
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
 		interval: Theme.animation_page_idleResize_timeout
@@ -79,4 +76,6 @@ QtObject {
 		}
 		return false
 	}
+
+	Component.onCompleted: Global.pageManager = root
 }

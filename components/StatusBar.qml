@@ -165,7 +165,7 @@ FocusScope {
 
 		getText: function(index) {
 			return index === 0
-					? Global.pageManager.navBar.activeButtonText // eg: "Settings"
+					? Global.mainView.navBar.activeButtonText // eg: "Settings"
 					: pageStack.get(index - 1).title // eg: "Device list"
 		}
 
@@ -276,7 +276,7 @@ FocusScope {
 				   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : "transparent"
 		icon.source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
 						 "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
-		onClicked: Global.pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+		onClicked: Global.mainView.navBar.setCurrentPage("NotificationsPage.qml")
 		KeyNavigation.right: alarmButton
 	}
 

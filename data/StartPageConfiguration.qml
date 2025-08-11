@@ -70,7 +70,7 @@ QtObject {
 		}
 
 		// Load the main page and its properties
-		if (!config.main || !Global.pageManager.navBar.setCurrentPage(config.main.page)) {
+		if (!config.main || !Global.mainView.navBar.setCurrentPage(config.main.page)) {
 			return
 		}
 		const mainPage = swipeView.getCurrentPage()

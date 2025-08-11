@@ -9,8 +9,11 @@ import Victron.VenusOS
 FocusScope {
 	id: root
 
+	readonly property alias pageManager: pageManager
+	readonly property alias navBar: navBar
+	readonly property alias statusBar: statusBar
+
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
-	property PageManager pageManager
 	property bool cardsActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
 			: !!pageStack.currentItem ? pageStack.currentItem
@@ -38,7 +41,7 @@ FocusScope {
 
 	property int _loadedPages: 0
 
-	readonly property bool _readyToInit: !!Global.pageManager && Global.dataManagerLoaded && !Global.needPageReload
+	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
 			console.info("MainView: data sources ready, loading swipe view pages")
@@ -81,6 +84,11 @@ FocusScope {
 	}
 	Keys.enabled: Global.keyNavigationEnabled
 
+	PageManager {
+		id: pageManager
+		currentMainPage: root.currentPage
+	}
+
 	// Revert to the start page when the application has been inactive for the period of time
 	// specified by the startPageTimeout.
 	Timer {
@@ -98,7 +106,7 @@ FocusScope {
 		enabled: !!Global.systemSettings && Global.systemSettings.startPageConfiguration.autoSelect
 		function onApplicationActiveChanged() {
 			if (!Global.applicationActive) {
-				const mainPageName = root.pageManager.navBar.getCurrentPage()
+				const mainPageName = navBar.getCurrentPage()
 				const mainPage = swipeView.getCurrentPage()
 				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
 			}
@@ -234,15 +242,13 @@ FocusScope {
 				}
 			}
 
-			Component.onCompleted: pageManager.navBar = navBar
-
 			// Only move focus to SwipeView if its current page allows key navigation.
 			KeyNavigation.up: root.swipeView?.currentItem?.activeFocusOnTab ? swipeViewLoader : statusBar
 		}
 	}
 
 	// This stack is used to view Overview drilldown pages and Settings sub-pages. When
-	// Global.pageManager.pushPage() is called, pages are pushed onto this stack.
+	// pageManager.pushPage() is called, pages are pushed onto this stack.
 	PageStack {
 		id: pageStack
 
@@ -321,8 +327,8 @@ FocusScope {
 	SequentialAnimation {
 		id: animateNavBarIn
 
-		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
-										  || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode)
+		running: pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
+				|| pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 
 		YAnimator {
 			target: navBar
@@ -332,11 +338,7 @@ FocusScope {
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
-			script: {
-				if (!!Global.pageManager) {
-					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
-				}
-			}
+			script: pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
 		}
 		OpacityAnimator {
 			target: navBar
@@ -346,19 +348,15 @@ FocusScope {
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
-			script: {
-				if (!!Global.pageManager) {
-					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
-				}
-			}
+			script: pageManager.interactivity = VenusOS.PageManager_InteractionMode_Interactive
 		}
 	}
 
 	SequentialAnimation {
 		id: animateNavBarOut
 
-		running: !!Global.pageManager && (Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
-										  || Global.pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen)
+		running: pageManager.interactivity === VenusOS.PageManager_InteractionMode_EnterIdleMode
+				 || pageManager.interactivity === VenusOS.PageManager_InteractionMode_BeginFullScreen
 
 		OpacityAnimator {
 			target: navBar
@@ -368,11 +366,7 @@ FocusScope {
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
-			script: {
-				if (!!Global.pageManager) {
-					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
-				}
-			}
+			script: pageManager.interactivity = VenusOS.PageManager_InteractionMode_BeginFullScreen
 		}
 		YAnimator {
 			target: navBar
@@ -382,11 +376,7 @@ FocusScope {
 			easing.type: Easing.InOutQuad
 		}
 		ScriptAction {
-			script: {
-				if (!!Global.pageManager) {
-					Global.pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
-				}
-			}
+			script: pageManager.interactivity = VenusOS.PageManager_InteractionMode_Idle
 		}
 	}
 
@@ -444,7 +434,6 @@ FocusScope {
 			}
 		}
 
-		Component.onCompleted: pageManager.statusBar = statusBar
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
 				: pageStack.depth > 0 ? pageStack
 				: swipeViewAndNavBarContainer
