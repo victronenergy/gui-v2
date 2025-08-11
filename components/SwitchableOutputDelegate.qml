@@ -566,6 +566,75 @@ BaseListItem {
 	Component {
 		id: threeStateSwitchComponent
 
-		PlaceholderDelegate {}
+		AutoToggleButton {
+			id: autoToggleButton
+
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				case Qt.Key_Escape:
+				case Qt.Key_Enter:
+				case Qt.Key_Return:
+					focus = false
+					return true
+				}
+				return false
+			}
+
+			// Process key events in edit mode.
+			Keys.onPressed: (event) => {
+				switch (event.key) {
+				case Qt.Key_Enter:
+				case Qt.Key_Return:
+				case Qt.Key_Escape:
+					focus = false
+					event.accepted = true
+					return
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+					// When in edit mode, prevent left/right from moving focus to another item in
+					// the grid view.
+					event.accepted = true
+					return
+				default:
+					break
+				}
+				event.accepted = false
+			}
+
+			height: Theme.geometry_switchableoutput_button_height
+			width: root._buttonWidth
+			enabled: !toggleState.busy || !autoToggleState.busy
+			checked: toggleState.backendValue === 1
+			autoChecked: autoToggleState.backendValue
+			onOnClicked: {
+				autoToggleState.writeValue(0)
+				toggleState.writeValue(1)
+			}
+			onOffClicked: {
+				autoToggleState.writeValue(0)
+				toggleState.writeValue(0)
+			}
+			onAutoClicked: autoToggleState.writeValue(autoToggleState.backendValue === 1 ? 0 : 1)
+
+			SettingSync {
+				id: autoToggleState
+				backendValue: autoState.value
+				onUpdateToBackend: (value) => { autoState.setValue(value) }
+			}
+
+			VeQuickItem {
+				id: autoState
+				uid: root.outputUid + "/Auto"
+			}
+
+			SettingSync {
+				id: toggleState
+				backendValue: output.state
+				onUpdateToBackend: (value) => { output.setState(value) }
+			}
+		}
 	}
 }
