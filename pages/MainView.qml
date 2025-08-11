@@ -31,7 +31,7 @@ FocusScope {
 	// when the user drags slowly between pages.
 	property bool allowPageAnimations: Global.animationEnabled
 									   && mainViewVisible
-									   && !pageStack.busy && (!swipeView || !swipeView.flicking)
+									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
