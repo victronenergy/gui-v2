@@ -62,8 +62,6 @@ T.Dialog {
 		focus: true
 
 		KeyNavigation.down: Global.keyNavigationEnabled ? root.footer : null
-		Keys.onReturnPressed: root.handleAccept()
-		Keys.onEnterPressed: root.handleAccept()
 		Keys.onEscapePressed: root.handleReject()
 		Keys.enabled: Global.keyNavigationEnabled
 	}
