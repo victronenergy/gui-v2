@@ -64,22 +64,32 @@ FocusScope {
 		_loadedPages = 0
 	}
 
-	Keys.onEscapePressed: (event) => {
-		if (Global.notificationLayer.deleteLastNotification()) {
-			return
-		} else if (cardsActive) {
-			cardsActive = false
-			return
-		} else if (pageStack.depth > 0) {
-			pageManager.popPage()
+	Keys.onPressed: (event) => {
+		if (!Global.keyNavigationEnabled) {
+			event.accepted = false
 			return
 		}
-		event.accepted = false
-	}
-	Keys.onLeftPressed: (event) => {
-		if (pageStack.activeFocus && pageStack.depth > 0) {
-			pageManager.popPage()
-			return
+		switch (event.key) {
+		case Qt.Key_Escape:
+			// Escape = close current Toast notification, or close Control/Switch pane.
+			if (Global.notificationLayer.deleteLastNotification()) {
+				event.accepted = true
+				return
+			} else if (cardsActive) {
+				cardsActive = false
+				event.accepted = true
+				return
+			}
+			break
+		case Qt.Key_Back:
+		case Qt.Key_Left:
+			// Backspace or Left arrow = go to previous page.
+			if (pageStack.activeFocus && pageStack.depth > 0) {
+				pageManager.popPage()
+				event.accepted = true
+				return
+			}
+			break
 		}
 		event.accepted = false
 	}
