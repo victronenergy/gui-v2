@@ -63,69 +63,65 @@ StackView {
 		}
 	}
 
-	Connections {
-		target: !!Global.pageManager ? Global.pageManager.emitter : null
-
-		function onPagePushRequested(obj, properties, operation) {
-			if (root.animating) {
-				return
-			}
-
-			let objectOrUrl = typeof(obj) === "string" ? ".." + obj : obj
-			if (typeof(obj) === "string") {
-				// pre-construct the object to make sure there are no errors
-				// to avoid messing up the page stack state.
-				let checkComponent = Qt.createComponent(objectOrUrl)
-				if (checkComponent.status !== Component.Ready) {
-					console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
-					return
-				}
-				objectOrUrl = checkComponent.createObject(null, properties)
-				root.pageUrls.push(obj)
-			} else {
-				root.pageUrls.push("")
-			}
-
-			if (root.depth === 0) {
-				// When the first page is added to the stack, move the stack into view.
-				root.push(objectOrUrl, properties, StackView.Immediate)
-				fakePushAnimation.duration = _animationDuration(operation)
-				fakePushAnimation.start()
-			} else {
-				root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
-			}
+	function pushPage(obj, properties, operation) {
+		if (root.animating) {
+			return
 		}
 
-		function onPopAllPagesRequested(operation) {
+		let objectOrUrl = typeof(obj) === "string" ? ".." + obj : obj
+		if (typeof(obj) === "string") {
+			// pre-construct the object to make sure there are no errors
+			// to avoid messing up the page stack state.
+			let checkComponent = Qt.createComponent(objectOrUrl)
+			if (checkComponent.status !== Component.Ready) {
+				console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
+				return
+			}
+			objectOrUrl = checkComponent.createObject(null, properties)
+			root.pageUrls.push(obj)
+		} else {
+			root.pageUrls.push("")
+		}
+
+		if (root.depth === 0) {
+			// When the first page is added to the stack, move the stack into view.
+			root.push(objectOrUrl, properties, StackView.Immediate)
+			fakePushAnimation.duration = _animationDuration(operation)
+			fakePushAnimation.start()
+		} else {
+			root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+		}
+	}
+
+	function popAllPages(operation) {
+		fakePopAnimation.duration = _animationDuration(operation)
+		fakePopAnimation.start()
+		root.pageUrls = []
+	}
+
+	function popPage(toPage, operation) {
+		if (root.animating
+				|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
+			return
+		}
+		if (root.depth === 1) {
+			// When the last page is removed from the stack, move the stack out of view.
 			fakePopAnimation.duration = _animationDuration(operation)
 			fakePopAnimation.start()
-			root.pageUrls = []
+		} else {
+			// Pop and delay destruction of the popped page until the animation completes,
+			// otherwise the page disappears immediately.
+			_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
 		}
+		root.pageUrls.pop()
+	}
 
-		function onPagePopRequested(toPage, operation) {
-			if (root.animating
-					|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
-				return
-			}
-			if (root.depth === 1) {
-				// When the last page is removed from the stack, move the stack out of view.
-				fakePopAnimation.duration = _animationDuration(operation)
-				fakePopAnimation.start()
-			} else {
-				// Pop and delay destruction of the popped page until the animation completes,
-				// otherwise the page disappears immediately.
-				_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
-			}
-			root.pageUrls.pop()
-		}
+	function _animationDuration(operation) {
+		return Global.allPagesLoaded && operation !== StackView.Immediate ? root.animationDuration : 0
+	}
 
-		function _animationDuration(operation) {
-			return Global.allPagesLoaded && operation !== StackView.Immediate ? root.animationDuration : 0
-		}
-
-		function _adjustedStackOperation(operation) {
-			return Global.allPagesLoaded && operation !== StackView.Immediate ? operation : StackView.Immediate
-		}
+	function _adjustedStackOperation(operation) {
+		return Global.allPagesLoaded && operation !== StackView.Immediate ? operation : StackView.Immediate
 	}
 
 	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.

@@ -87,6 +87,7 @@ FocusScope {
 	PageManager {
 		id: pageManager
 		currentMainPage: root.currentPage
+		pageStack: pageStack
 	}
 
 	// Revert to the start page when the application has been inactive for the period of time
