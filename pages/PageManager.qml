@@ -10,15 +10,7 @@ QtObject {
 	id: root
 
 	required property Page currentMainPage
-
-	property QtObject emitter: QtObject {
-		signal pagePushRequested(obj: var, properties: var, operation: int)
-
-		// NB. 'toPage' has to be a 'var', not a 'Page', otherwise 'emitter.pagePopRequested(undefined, operation)' becomes 'emitter.pagePopRequested(null, operation)',
-		// which pops all the way to the bottom of the stack, instead of just a single page.
-		signal pagePopRequested(toPage: var, operation: int)
-		signal popAllPagesRequested(operation: int)
-	}
+	required property PageStack pageStack
 
 	property int interactivity: VenusOS.PageManager_InteractionMode_Interactive
 
@@ -39,11 +31,11 @@ QtObject {
 	}
 
 	function pushPage(obj, properties, operation = PageStack.PushTransition) {
-		emitter.pagePushRequested(obj, properties, operation)
+		pageStack.pushPage(obj, properties, operation)
 	}
 
 	function popPage(toPage, operation = PageStack.PopTransition) {
-		emitter.pagePopRequested(toPage, operation)
+		pageStack.popPage(toPage, operation)
 	}
 
 	function popToAbovePage(page, operation = PageStack.PopTransition) {
@@ -63,7 +55,7 @@ QtObject {
 	}
 
 	function popAllPages(operation = PageStack.PopTransition) {
-		emitter.popAllPagesRequested(operation)
+		pageStack.popAllPages(operation)
 	}
 
 	function ensureInteractive() {
