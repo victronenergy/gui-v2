@@ -14,7 +14,7 @@ Page {
 	topRightButton: VenusOS.StatusBar_RightButton_Add
 
 	Connections {
-		target: !!Global.pageManager ? Global.pageManager.statusBar : null
+		target: Global.mainView?.statusBar ?? null
 		enabled: root.isCurrentPage
 
 		function onRightButtonClicked() {

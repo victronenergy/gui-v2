@@ -14,15 +14,9 @@ FocusScope {
 
 	property var _inputComponent
 
-	PageManager {
-		id: pageManager
-		Component.onCompleted: Global.pageManager = pageManager
-	}
-
 	MainView {
 		id: mainView
 		anchors.fill: parent
-		pageManager: pageManager
 		focus: true
 		Component.onCompleted: Global.mainView = mainView
 	}
@@ -34,7 +28,7 @@ FocusScope {
 
 	ScreenBlanker {
 		id: screenBlanker
-		enabled: !Global.splashScreenVisible && !(!!Global.pageManager && Global.pageManager.statusBar.notificationButtonVisible)
+		enabled: !Global.splashScreenVisible && !mainView.statusBar.notificationButtonVisible
 		displayOffTime: displayOffItem.valid ? 1000*displayOffItem.value : 0.0
 		window: root.Window.window
 		property VeQuickItem displayOffItem: VeQuickItem {
@@ -83,7 +77,7 @@ FocusScope {
 
 			// Exit idle mode if needed, and consume the event so that this does not trigger a press
 			// event on the page in the process of exiting idle mode.
-			if (pageManager.ensureInteractive()) {
+			if (mainView.pageManager.ensureInteractive()) {
 				mouse.accepted = true
 			}
 
@@ -112,9 +106,9 @@ FocusScope {
 		// but we need to way to expose the "go to notifications page" functionality
 		// and the notifications layer is already part of the global object.
 		function popAndGoToNotifications() {
-			pageManager.popAllPages()
+			mainView.pageManager.popAllPages()
 			mainView.cardsActive = false
-			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+			mainView.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
 
@@ -152,14 +146,14 @@ FocusScope {
 	KeyEventFilter {
 		// When the UI is inactive, consume key events so that they are not processed by the UI.
 		consumeKeyEvents: !Global.applicationActive
-			|| (pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
-				&& pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
+			|| (mainView.pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
+				&& mainView.pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
 		window: root.Window.window
 
 		onKeyPressed: {
 			// When any key is pressed, bring the application out of inactive mode.
 			Global.main.ensureApplicationActive()
-			pageManager.ensureInteractive()
+			mainView.pageManager.ensureInteractive()
 		}
 	}
 }
