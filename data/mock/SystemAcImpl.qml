@@ -277,13 +277,13 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
-				notifyUpdate: (index, value) => {
+				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(acObject.uid + "/Ac/L%1/Voltage".arg(index + 1))
 					if (voltage > 0) {
 						MockManager.setValue(acObject.uid + "/Ac/L%1/Current".arg(index + 1), value / voltage)
 					}
 				}
-				notifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
+				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
 
 				VeQuickItem { uid: acObject.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Power" }
