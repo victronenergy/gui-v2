@@ -962,7 +962,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/GeneratorsImpl.qml
     data/mock/InverterChargersImpl.qml
     data/mock/MiscServicesImpl.qml
-    data/mock/MockDataRangeAnimator.qml
     data/mock/MockSetup.qml
     data/mock/MockShortcuts.qml
     data/mock/MotorDrivesImpl.qml

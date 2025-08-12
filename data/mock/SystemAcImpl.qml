@@ -236,7 +236,7 @@ Item {
 					acInput?._phaseMeasurements.currentL3 ?? null,
 				]
 
-				onTriggered: {
+				onNotifyTotal: {
 					if (!acInput || !acInput._phaseMeasurements.bindPrefix || index < 0) {
 						return
 					}
