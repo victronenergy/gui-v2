@@ -20,7 +20,7 @@ Item {
 			VeQuickItem { id: evcsMaxCurrent; uid: evcs.uid + "/MaxCurrent" }
 
 			MockDataRandomizer {
-				notifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
+				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
 
 				VeQuickItem { uid: evcs.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: evcs.uid + "/Ac/L2/Power" }
