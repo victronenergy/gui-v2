@@ -205,7 +205,14 @@ FocusScope {
 					anchors.fill: parent
 					focus: !swipeViewLoader.blockItemFocus
 					contentChildren: swipePageModel.children
-					onCurrentIndexChanged: navBar.setCurrentIndex(currentIndex)
+
+					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
+					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
+					onMovingChanged: {
+						if (!moving) {
+							navBar.setCurrentIndex(currentIndex)
+						}
+					}
 				}
 			}
 
