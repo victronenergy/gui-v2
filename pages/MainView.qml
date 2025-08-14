@@ -146,7 +146,7 @@ FocusScope {
 			active: false
 			asynchronous: true
 			sourceComponent: swipeViewComponent
-			visible: swipeView && swipeView.ready && pageStack.swipeViewVisible
+			visible: swipeView && swipeView.ready && !pageStack.opened
 					 && !(root.cardsActive && !cardsLoader.animationRunning)
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
@@ -264,8 +264,6 @@ FocusScope {
 			top: statusBar.bottom
 			bottom: parent.bottom
 		}
-		x: width
-		width: Theme.geometry_screen_width
 		focus: root._focusTarget === pageStack
 
 		KeyNavigation.up: statusBar
