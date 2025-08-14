@@ -169,7 +169,7 @@ Item {
 			filterRegExp: "^mock/com\.victronenergy\.(vebus|acsystem|inverter|charger)\.\\w+$"
 			model: Global.dataServiceModel
 		}
-		delegate: Item {
+		delegate: QtObject {
 			id: acService
 
 			required property string uid
