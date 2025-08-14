@@ -274,7 +274,7 @@ private:
 	qreal m_interval = 1000.0;
 	int m_timerId = 0;
 	bool m_repeat = true;
-	bool m_active = true;
+	bool m_active = false;
 	bool m_complete = false;
 };
 
@@ -526,7 +526,7 @@ private:
 	qreal m_interval = 1000.0;
 	int m_timerId = 0;
 	bool m_repeat = true;
-	bool m_active = true;
+	bool m_active = false;
 	bool m_complete = false;
 };
 

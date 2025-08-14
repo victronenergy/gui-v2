@@ -127,6 +127,7 @@ Item {
 			}
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: pvCharger.uid + "/Pv/V" }
 				VeQuickItem { uid: pvCharger.uid + "/Yield/Power" }
 			}
@@ -145,10 +146,12 @@ Item {
 					readonly property real todaysYield: trackerYield.value || 0
 
 					MockDataRandomizer {
+						active: Global.mainView && Global.mainView.mainViewVisible
 						VeQuickItem { uid: `${pvCharger.uid}/Pv/${index}/P` }
 						VeQuickItem { uid: `${pvCharger.uid}/Pv/${index}/V` }
 					}
 					MockDataRangeAnimator {
+						active: Global.mainView && Global.mainView.mainViewVisible
 						stepSize: 0.005
 						maximumValue: NaN
 
@@ -163,7 +166,7 @@ Item {
 
 			// If there are no trackers, increase the overall yield here.
 			MockDataRangeAnimator {
-				active: trackerObjects.count === 0
+				active: Global.mainView && Global.mainView.mainViewVisible && trackerObjects.count === 0
 				stepSize: 0.005
 				maximumValue: NaN
 
@@ -183,6 +186,7 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(pvInverter.uid + "/Ac/L%1/Voltage".arg(index + 1))
 					if (voltage > 0) {
@@ -197,6 +201,7 @@ Item {
 			}
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L1/Voltage" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L2/Voltage" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L3/Voltage" }
