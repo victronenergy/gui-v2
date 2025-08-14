@@ -87,8 +87,8 @@ Item {
 				}
 				// Reset any other phase values from previous configurations.
 				for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
+					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
+					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
 				}
 			} else {
 				root.setSystemValue("/Ac/PvOnOutput/NumberOfPhases", undefined)
@@ -102,7 +102,7 @@ Item {
 		model: Global.solarInputs.pvInverterDevices
 		delegate: QtObject {
 			readonly property real power: modelData.power
-			readonly property var phases: modelData.phases
+			readonly property PhaseModel phases: modelData.phases
 			onPowerChanged: Qt.callLater(pvInverters.updateAcTotals)
 		}
 		onCountChanged: Qt.callLater(updateAcTotals)
