@@ -9,12 +9,16 @@ import Victron.VenusOS
 StackView {
 	id: root
 
-	property var pageUrls: []
-	property Page _poppedPage
-
 	readonly property bool opened: state === "opened" && !fakePushTransition.running
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
 	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
+
+	// The file url of the top page on the stack. Undefined if depth=0, or empty string if the top
+	// page is from a component, so no url is available.
+	property var topPageUrl
+
+	property var _pageUrls: []
+	property Page _poppedPage
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -78,9 +82,11 @@ StackView {
 				return
 			}
 			objectOrUrl = checkComponent.createObject(null, properties)
-			root.pageUrls.push(obj)
+			root._pageUrls.push(obj)
+			root.topPageUrl = obj
 		} else {
-			root.pageUrls.push("")
+			root._pageUrls.push("")
+			root.topPageUrl = ""
 		}
 
 		if (root.depth === 0) {
@@ -94,9 +100,10 @@ StackView {
 	}
 
 	function popAllPages(operation) {
+		root._pageUrls = []
+		root.topPageUrl = undefined
 		fakePopAnimation.duration = _animationDuration(operation)
 		root.state = "closed"
-		root.pageUrls = []
 	}
 
 	function popPage(toPage, operation) {
@@ -104,6 +111,9 @@ StackView {
 				|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
 			return
 		}
+		root._pageUrls.pop()
+		root.topPageUrl = root._pageUrls[root._pageUrls.length-1]
+
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
 			fakePopAnimation.duration = _animationDuration(operation)
@@ -113,7 +123,6 @@ StackView {
 			// otherwise the page disappears immediately.
 			_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
 		}
-		root.pageUrls.pop()
 	}
 
 	function _animationDuration(operation) {

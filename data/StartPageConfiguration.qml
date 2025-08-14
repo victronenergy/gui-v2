@@ -56,7 +56,7 @@ QtObject {
 	]
 
 	// Changes the application view to show the start page.
-	function loadStartPage(swipeView, stackPageUrls) {
+	function loadStartPage(swipeView, topStackPageUrl) {
 		if (!hasStartPage) {
 			return
 		}
@@ -83,8 +83,8 @@ QtObject {
 		// Load the required pages onto the stack
 		const stackPages = config.stack || []
 		if (stackPages.length > 0
-				&& stackPageUrls.length > 0
-				&& stackPages[stackPages.length - 1].page === stackPageUrls[stackPageUrls.length - 1]) {
+				&& !!topStackPageUrl
+				&& stackPages[stackPages.length - 1].page === topStackPageUrl) {
 			// Looks like the stack is already showing the correct page, so there's nothing to do.
 			return
 		}
@@ -97,7 +97,7 @@ QtObject {
 	}
 
 	// Changes the "start page" to be the current visible page, if possible.
-	function autoSelectStartPage(mainPageName, mainPage, stackPageUrls) {
+	function autoSelectStartPage(mainPageName, mainPage, topStackPageUrl) {
 		if (!autoSelect) {
 			return
 		}
@@ -105,7 +105,7 @@ QtObject {
 			console.warn("autoSelect() failed: mainPageName or mainPage not set")
 			return
 		}
-		const startPageType = _findStartPageTypeForView(mainPageName, mainPage, stackPageUrls)
+		const startPageType = _findStartPageTypeForView(mainPageName, mainPage, topStackPageUrl)
 		if (startPageType >= 0) {
 			_startPageName.setValue(_jsonStringForType(startPageType))
 		}
@@ -154,12 +154,12 @@ QtObject {
 		}
 	}
 
-	function _findStartPageTypeForView(mainPageName, mainPage, stackPageUrls) {
+	function _findStartPageTypeForView(mainPageName, mainPage, topStackPageUrl) {
 		switch (mainPageName) {
 		case "BoatPage.qml":
 			return VenusOS.StartPage_Type_Boat
 		case "BriefPage.qml":
-			if (stackPageUrls.length === 0) {
+			if (!topStackPageUrl) {
 				if (mainPage.showSidePanel === undefined) {
 					console.warn("Error: BriefPage does not have showSidePanel property!")
 				} else {
@@ -170,14 +170,14 @@ QtObject {
 			}
 			break
 		case "OverviewPage.qml":
-			if (stackPageUrls.length === 0) {
+			if (!topStackPageUrl) {
 				return VenusOS.StartPage_Type_Overview
-			} else if (stackPageUrls[stackPageUrls.length - 1].endsWith("/BatteryListPage.qml")) {
+			} else if (topStackPageUrl.endsWith("/BatteryListPage.qml")) {
 				return VenusOS.StartPage_Type_BatteryList
 			}
 			break
 		case "LevelsPage.qml":
-			if (stackPageUrls.length === 0) {
+			if (!topStackPageUrl) {
 				if (mainPage.currentTabIndex === undefined) {
 					console.warn("Error: LevelsPage does not have currentTabIndex property!")
 				} else {
