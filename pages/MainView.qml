@@ -54,7 +54,7 @@ FocusScope {
 			: swipeViewAndNavBarContainer
 
 	function loadStartPage() {
-		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.pageUrls)
+		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.topPageUrl)
 	}
 
 	function clearUi() {
@@ -109,7 +109,7 @@ FocusScope {
 			if (!Global.applicationActive) {
 				const mainPageName = navBar.getCurrentPage()
 				const mainPage = swipeView.getCurrentPage()
-				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.pageUrls)
+				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.topPageUrl)
 			}
 		}
 	}
