@@ -20,7 +20,7 @@ Item {
 			required property string uid
 
 			MockDataRangeAnimator {
-				active: status.value === VenusOS.Tank_Status_Ok
+				active: Global.mainView && Global.mainView.mainViewVisible && status.value === VenusOS.Tank_Status_Ok
 				stepSize: 7
 				maximumValue: 100
 

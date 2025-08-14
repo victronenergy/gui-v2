@@ -115,16 +115,19 @@ Item {
 			// service will be ignored.
 			MockDataRangeAnimator {
 				id: socAnimator
+				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: 100
 				stepSize: 8
 				VeQuickItem { uid: dcMeter.uid + "/Soc" }
 			}
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				followSignOf: socAnimator.actualStepSizes[0] ?? NaN
 				VeQuickItem { uid: dcMeter.uid + "/Dc/0/Power" }
 				VeQuickItem { uid: dcMeter.uid + "/Dc/0/Current" }
 			}
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: dcMeter.uid + "/Dc/0/Voltage" }
 				VeQuickItem { uid: dcMeter.uid + "/Dc/0/Temperature" }
 				VeQuickItem { uid: dcMeter.uid + "/Dc/In/P" }
