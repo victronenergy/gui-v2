@@ -12,9 +12,9 @@ StackView {
 	property var pageUrls: []
 	property Page _poppedPage
 
+	readonly property bool opened: state === "opened" && !fakePushTransition.running
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
-	readonly property bool animating: busy || fakePushAnimation.running || fakePopAnimation.running
-	property bool swipeViewVisible: true
+	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -87,7 +87,7 @@ StackView {
 			// When the first page is added to the stack, move the stack into view.
 			root.push(objectOrUrl, properties, StackView.Immediate)
 			fakePushAnimation.duration = _animationDuration(operation)
-			fakePushAnimation.start()
+			root.state = "opened"
 		} else {
 			root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 		}
@@ -95,7 +95,7 @@ StackView {
 
 	function popAllPages(operation) {
 		fakePopAnimation.duration = _animationDuration(operation)
-		fakePopAnimation.start()
+		root.state = "closed"
 		root.pageUrls = []
 	}
 
@@ -107,7 +107,7 @@ StackView {
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
 			fakePopAnimation.duration = _animationDuration(operation)
-			fakePopAnimation.start()
+			root.state = "closed"
 		} else {
 			// Pop and delay destruction of the popped page until the animation completes,
 			// otherwise the page disappears immediately.
@@ -124,45 +124,65 @@ StackView {
 		return Global.allPagesLoaded && operation !== StackView.Immediate ? operation : StackView.Immediate
 	}
 
-	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
-		id: fakePushAnimation
+	// The stack is initially off-screen, and slides into view when the first page is pushed.
+	x: Theme.geometry_screen_width
+	width: Theme.geometry_screen_width
+	state: "closed"
 
-		onStopped: swipeViewVisible = false
-
-		target: root
-		property: "x"
-		from: root.width
-		to: 0
-		easing.type: Easing.InOutQuad
-	}
-
-	NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
-		id: fakePopAnimation
-
-		onStarted: swipeViewVisible = true
-		onStopped: {
-			// When leaving the page stack destroy all the pages
-			while (root.depth > 1) {
-				const page = root.pop(duration > 0 ? StackView.PopTransition : StackView.Immediate)
-				if (page && !Theme.objectHasQObjectParent(page)) {
-					page.destroy()
-				}
-			}
-
-			// pop() only works for depth > 1
-			const obj = root.currentItem
-			root.clear()
-
-			// Clean up the page object that was created on push.
-			if (obj && !Theme.objectHasQObjectParent(obj)) {
-				obj.destroy()
+	states: [
+		State {
+			name: "opened"
+			PropertyChanges {
+				target: root
+				x: 0
 			}
 		}
+	]
 
-		target: root
-		property: "x"
-		from: 0
-		to: root.width
-		easing.type: Easing.InOutQuad
-	}
+	transitions: [
+		Transition {
+			id: fakePushTransition
+
+			to: "opened"
+
+			NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+				id: fakePushAnimation
+				property: "x"
+				easing.type: Easing.InOutQuad
+			}
+		},
+		Transition {
+			id: fakePopTransition
+
+			to: "closed"
+
+			SequentialAnimation {
+				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+					id: fakePopAnimation
+					property: "x"
+					easing.type: Easing.InOutQuad
+				}
+				ScriptAction {
+					script: {
+						// When leaving the page stack destroy all the pages
+						while (root.depth > 1) {
+							const page = root.pop(fakePopAnimation.duration > 0 ? StackView.PopTransition : StackView.Immediate)
+							if (page && !Theme.objectHasQObjectParent(page)) {
+								page.destroy()
+							}
+						}
+
+						// pop() only works for depth > 1
+						const obj = root.currentItem
+						root.clear()
+
+						// Clean up the page object that was created in pushPage().
+						if (obj && !Theme.objectHasQObjectParent(obj)) {
+							obj.destroy()
+						}
+					}
+				}
+			}
+		}
+	]
 }
