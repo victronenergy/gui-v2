@@ -262,6 +262,7 @@ set (VENUS_QML_MODULE_SOURCES
     components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
+    components/CustomDevicePageEntry.qml
     components/DateSelector.qml
     components/Device.qml
     components/DeviceListDelegate.qml
@@ -786,6 +787,8 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/customisations.h
+    src/customisations.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h

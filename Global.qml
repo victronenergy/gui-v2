@@ -115,5 +115,39 @@ QtObject {
 
 	readonly property IntValidator _intValidator: IntValidator {
 	}
+
+	readonly property VeQuickItem _enabledCustomisations: VeQuickItem {
+		uid: (systemSettings && systemSettings.serviceUid.length > 0)
+			? systemSettings.serviceUid + "/Gui2/EnabledCustomisations"
+			: ""
+		property var names: valid ? value : []
+
+		function toggleEnabled(name) {
+			var list = _enabledCustomisations.names
+			if (list.indexOf(name) >= 0) {
+				list.splice(list.indexOf(name))
+			} else {
+				list.push(name)
+			}
+
+			if (_enabledCustomisations.valid) {
+				_enabledCustomisations.value = list
+			} else {
+				// DEBUGGING ONLY!  TODO: REMOVE THIS!
+				_enabledCustomisations.names = list
+			}
+		}
+
+		onNamesChanged: Customisations.enabledCustomisations = names
+	}
+
+	readonly property VeQuickItem _customisations: VeQuickItem {
+		uid: (systemSettings && systemSettings.serviceUid.length > 0)
+			? systemSettings.serviceUid + "/Gui2/Customisations"
+			: ""
+		property string json: valid ? value
+			: debugJson // DEBUGGING ONLY
+		property string debugJson: Customisations.loadFromFilesystem()
+	}
 }
 
