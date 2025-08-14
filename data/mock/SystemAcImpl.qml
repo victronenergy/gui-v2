@@ -227,6 +227,7 @@ Item {
 
 			// For each phase, slide between the minimum and maximum current values.
 			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: acInputInfo.maximumCurrent
 				minimumValue: acInputInfo.minimumCurrent
 				stepSize: (maximumValue - minimumValue) / 10
@@ -277,6 +278,7 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(acObject.uid + "/Ac/L%1/Voltage".arg(index + 1))
 					if (voltage > 0) {
@@ -290,6 +292,7 @@ Item {
 				VeQuickItem { uid: acObject.uid + "/Ac/L3/Power" }
 			}
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: acObject.uid + "/Ac/L1/Voltage" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Voltage" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L3/Voltage" }

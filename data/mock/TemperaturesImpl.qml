@@ -91,6 +91,7 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: temperature.uid + "/Temperature" }
 				VeQuickItem { uid: temperature.uid + "/Humidity" }
 			}

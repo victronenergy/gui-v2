@@ -18,6 +18,7 @@ Item {
 			required property string uid
 
 			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				stepSize: 8
 				maximumValue: MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max") || 0
 				VeQuickItem { uid: gps.uid + "/Speed" }
@@ -34,11 +35,13 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: meteo.uid + "/Irradiance" }
 				VeQuickItem { uid: meteo.uid + "/WindSpeed" }
 				VeQuickItem { uid: meteo.uid + "/InstallationPower" }
 			}
 			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				stepSize: 45
 				maximumValue: 360
 				VeQuickItem { uid: meteo.uid + "/WindDirection" }
