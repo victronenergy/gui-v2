@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import Victron.BoatPageComponents as BoatPageComponents
+import Victron.Boat as Boat
 import Victron.VenusOS
 import Victron.Gauges
 
@@ -13,19 +13,19 @@ Column {
 
 	spacing: Theme.geometry_boatPage_motorDrive_temperaturesColumn_spacing
 
-	BoatPageComponents.TemperatureGauge {
+	Boat.TemperatureGauge {
 		anchors.right: parent.right
 		dataItem: _motorDriveTemperature
 		iconSource: "qrc:/images/icon_engine_temp_32.svg"
 	}
 
-	BoatPageComponents.TemperatureGauge {
+	Boat.TemperatureGauge {
 		anchors.right: parent.right
 		dataItem: _motorDriveCoolantTemperature
 		iconSource: "qrc:/images/icon_temp_coolant_32.svg"
 	}
 
-	BoatPageComponents.TemperatureGauge {
+	Boat.TemperatureGauge {
 		anchors.right: parent.right
 		dataItem: _motorDriveControllerTemperature
 		iconSource: "qrc:/images/icon_motorController_32.svg"
