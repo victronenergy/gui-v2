@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import Victron.BoatPageComponents as BoatPageComponents
 import Victron.VenusOS
 import Victron.Gauges
 
