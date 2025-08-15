@@ -16,7 +16,7 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
-		"qrc:/qt/qml/Victron/BoatPageComponents/BoatPage.qml": boatPageConfig,
+		"qrc:/qt/qml/Victron/Boat/BoatPage.qml": boatPageConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {
