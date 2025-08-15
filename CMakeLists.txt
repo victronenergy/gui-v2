@@ -94,6 +94,16 @@ else()
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus ShaderTools REQUIRED)
+
+    if (${VENUS_DESKTOP_BUILD})
+        # nothing extra...
+    else()
+        if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
+            add_compile_definitions(VENUS_GX_BUILD_AARCH64)
+        else()
+            add_compile_definitions(VENUS_GX_BUILD_ARM)
+        endif()
+    endif()
 endif()
 
 # TODO - Remove the following block once aqtinstall supports 'qt6_add_shaders(...)'.
@@ -158,20 +168,6 @@ qt_standard_project_setup(REQUIRES ${REQUIRED_QT_VERSION}
     I18N_SOURCE_LANGUAGE en # optional - this is the default
     I18N_TRANSLATED_LANGUAGES ${TS_CODES}
 )
-
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-    add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
-    add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS WebSockets REQUIRED)
-else()
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS DBus REQUIRED)
-endif()
 
 # This has to go after 'find_package(Qt6 COMPONENTS Core)', and before 'qt_add_qml_module(... QML_FILES ${VENUS_QML_MODULE_SOURCES})'
 if(QT_KNOWN_POLICY_QTP0001)
