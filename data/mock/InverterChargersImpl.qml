@@ -172,19 +172,21 @@ Item {
 			readonly property string uid: device.serviceUid
 
 			MockDataRandomizer {
-				notifyUpdate: (index, value) => {
+				active: Global.mainView && Global.mainView.mainViewVisible
+				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(inverterCharger.uid + "/Ac/Out/L%1/V".arg(index + 1))
 					if (voltage > 0) {
 						MockManager.setValue(inverterCharger.uid + "/Ac/L%1/I".arg(index + 1), value / voltage)
 					}
 				}
-				notifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Out/P", totalPower) }
+				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Out/P", totalPower) }
 
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L1/P" }
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L2/P" }
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L3/P" }
 			}
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L1/V" }
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L2/V" }
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L3/V" }

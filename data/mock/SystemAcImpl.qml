@@ -169,7 +169,7 @@ Item {
 			filterRegExp: "^mock/com\.victronenergy\.(vebus|acsystem|inverter|charger)\.\\w+$"
 			model: Global.dataServiceModel
 		}
-		delegate: Item {
+		delegate: QtObject {
 			id: acService
 
 			required property string uid
@@ -227,6 +227,7 @@ Item {
 
 			// For each phase, slide between the minimum and maximum current values.
 			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: acInputInfo.maximumCurrent
 				minimumValue: acInputInfo.minimumCurrent
 				stepSize: (maximumValue - minimumValue) / 10
@@ -236,7 +237,7 @@ Item {
 					acInput?._phaseMeasurements.currentL3 ?? null,
 				]
 
-				onTriggered: {
+				onNotifyTotal: {
 					if (!acInput || !acInput._phaseMeasurements.bindPrefix || index < 0) {
 						return
 					}
@@ -277,19 +278,21 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
-				notifyUpdate: (index, value) => {
+				active: Global.mainView && Global.mainView.mainViewVisible
+				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(acObject.uid + "/Ac/L%1/Voltage".arg(index + 1))
 					if (voltage > 0) {
 						MockManager.setValue(acObject.uid + "/Ac/L%1/Current".arg(index + 1), value / voltage)
 					}
 				}
-				notifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
+				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
 
 				VeQuickItem { uid: acObject.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Power" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L3/Power" }
 			}
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: acObject.uid + "/Ac/L1/Voltage" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Voltage" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L3/Voltage" }

@@ -834,6 +834,7 @@ list(APPEND VenusQMLModule_CPP_SOURCES
     src/keynavigationhighlight.h
     src/keynavigationhighlighthelper.h
     src/keynavigationhighlighthelper.cpp
+    src/mockanimators.h
     src/mockmanager.h
     src/mockmanager.cpp
     src/phasemodel.h
@@ -964,8 +965,6 @@ set(Mock_QML_MODULE_SOURCES
     data/mock/GeneratorsImpl.qml
     data/mock/InverterChargersImpl.qml
     data/mock/MiscServicesImpl.qml
-    data/mock/MockDataRandomizer.qml
-    data/mock/MockDataRangeAnimator.qml
     data/mock/MockSetup.qml
     data/mock/MockShortcuts.qml
     data/mock/MotorDrivesImpl.qml

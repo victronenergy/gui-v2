@@ -87,8 +87,8 @@ Item {
 				}
 				// Reset any other phase values from previous configurations.
 				for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
+					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
+					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
 				}
 			} else {
 				root.setSystemValue("/Ac/PvOnOutput/NumberOfPhases", undefined)
@@ -102,7 +102,7 @@ Item {
 		model: Global.solarInputs.pvInverterDevices
 		delegate: QtObject {
 			readonly property real power: modelData.power
-			readonly property var phases: modelData.phases
+			readonly property PhaseModel phases: modelData.phases
 			onPowerChanged: Qt.callLater(pvInverters.updateAcTotals)
 		}
 		onCountChanged: Qt.callLater(updateAcTotals)
@@ -127,6 +127,7 @@ Item {
 			}
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: pvCharger.uid + "/Pv/V" }
 				VeQuickItem { uid: pvCharger.uid + "/Yield/Power" }
 			}
@@ -145,10 +146,12 @@ Item {
 					readonly property real todaysYield: trackerYield.value || 0
 
 					MockDataRandomizer {
+						active: Global.mainView && Global.mainView.mainViewVisible
 						VeQuickItem { uid: `${pvCharger.uid}/Pv/${index}/P` }
 						VeQuickItem { uid: `${pvCharger.uid}/Pv/${index}/V` }
 					}
 					MockDataRangeAnimator {
+						active: Global.mainView && Global.mainView.mainViewVisible
 						stepSize: 0.005
 						maximumValue: NaN
 
@@ -163,7 +166,7 @@ Item {
 
 			// If there are no trackers, increase the overall yield here.
 			MockDataRangeAnimator {
-				active: trackerObjects.count === 0
+				active: Global.mainView && Global.mainView.mainViewVisible && trackerObjects.count === 0
 				stepSize: 0.005
 				maximumValue: NaN
 
@@ -183,13 +186,14 @@ Item {
 			required property string uid
 
 			MockDataRandomizer {
-				notifyUpdate: (index, value) => {
+				active: Global.mainView && Global.mainView.mainViewVisible
+				onNotifyUpdate: (index, value) => {
 					const voltage = MockManager.value(pvInverter.uid + "/Ac/L%1/Voltage".arg(index + 1))
 					if (voltage > 0) {
 						MockManager.setValue(pvInverter.uid + "/Ac/L%1/Current".arg(index + 1), value / voltage)
 					}
 				}
-				notifyTotal: (totalPower) => { MockManager.setValue(pvInverter.uid + "/Ac/Power", totalPower) }
+				onNotifyTotal: (totalPower) => { MockManager.setValue(pvInverter.uid + "/Ac/Power", totalPower) }
 
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L2/Power" }
@@ -197,6 +201,7 @@ Item {
 			}
 
 			MockDataRandomizer {
+				active: Global.mainView && Global.mainView.mainViewVisible
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L1/Voltage" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L2/Voltage" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L3/Voltage" }

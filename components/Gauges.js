@@ -6,8 +6,6 @@
 .pragma library
 .import Victron.VenusOS as V
 
-const briefCentralGauges = [V.VenusOS.Tank_Type_Battery].concat(V.Global.tanks.tankTypes)
-
 function tankProperties(type) {
 	switch (type) {
 	case V.VenusOS.Tank_Type_Battery:
