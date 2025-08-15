@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import Victron.BoatPageComponents as BoatPageComponents
+import Victron.Boat as Boat
 import Victron.VenusOS
 
 SwipeViewPage {
@@ -13,16 +13,16 @@ SwipeViewPage {
 	//% "Boat"
 	navButtonText: qsTrId("nav_boat")
 	navButtonIcon: "qrc:/images/icon_boat_32.svg"
-	url: "qrc:/qt/qml/Victron/BoatPageComponents/BoatPage.qml"
+	url: "qrc:/qt/qml/Victron/Boat/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
-	BoatPageComponents.Background { // the blue shadows
+	Boat.Background { // the blue shadows
 		anchors.fill: parent
 	}
 
-	BoatPageComponents.BatteryArc { // arc gauge on the far left
+	Boat.BatteryArc { // arc gauge on the far left
 		id: batteryGauge
 
 		anchors {
@@ -33,7 +33,7 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
-	BoatPageComponents.TimeToGo { // top left
+	Boat.TimeToGo { // top left
 		id: ttg
 
 		anchors {
@@ -43,7 +43,7 @@ SwipeViewPage {
 		}
 	}
 
-	BoatPageComponents.BatteryPercentage { // vertical center left
+	Boat.BatteryPercentage { // vertical center left
 		id: batteryPercentage
 		anchors {
 			left: batteryGauge.left
@@ -84,7 +84,7 @@ SwipeViewPage {
 			As the motordrive current/power is now shown in the center, it does not make sense to also have it to the right (vertical center) →
 			Therefore, only in this scenario without GPS, we show DC (and if available also AC ) loads at the right vertical center.
 	*/
-	BoatPageComponents.LargeCenterGauge { // vertical center, horizontal center
+	Boat.LargeCenterGauge { // vertical center, horizontal center
 		id: centerGauge
 
 		anchors.fill: parent
@@ -93,7 +93,7 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
-	BoatPageComponents.Gear { // top right
+	Boat.Gear { // top right
 		id: gear
 
 		anchors {
@@ -103,7 +103,7 @@ SwipeViewPage {
 		}
 	}
 
-	BoatPageComponents.ConsumptionGauge { // vertical center right
+	Boat.ConsumptionGauge { // vertical center right
 		id: consumption
 
 		anchors {
@@ -117,7 +117,7 @@ SwipeViewPage {
 	}
 
 	/*	Don't display motordrive temperatures for v1. TBD whether we want them for v2.
-	BoatPageComponents.TemperatureGauges { // bottom right
+	Boat.TemperatureGauges { // bottom right
 		id: temperatureGauges
 
 		anchors {
@@ -128,7 +128,7 @@ SwipeViewPage {
 	}
 	*/
 
-	BoatPageComponents.LoadArc { // arc gauge on the far right
+	Boat.LoadArc { // arc gauge on the far right
 		id: loadArc
 
 		anchors {
@@ -141,11 +141,11 @@ SwipeViewPage {
 		gps: _gps
 	}
 
-	BoatPageComponents.MotorDrive {
+	Boat.MotorDrive {
 		id: _motorDrive
 	}
 
-	BoatPageComponents.Gps {
+	Boat.Gps {
 		id: _gps
 	}
 
