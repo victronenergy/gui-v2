@@ -10,15 +10,18 @@ StackView {
 	id: root
 
 	readonly property bool opened: state === "opened" && !fakePushTransition.running
+	readonly property Page currentPage: opened ? currentItem : null
+
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
 	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
 
-	// The file url of the top page on the stack. Undefined if depth=0, or empty string if the top
-	// page is from a component, so no url is available.
-	property var topPageUrl
+	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty
+	// string if the top page is from a component (and so no url is available).
+	property var topPageUrl: opened ? _topPageUrl : undefined
 
 	property var _pageUrls: []
 	property Page _poppedPage
+	property var _topPageUrl
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -71,6 +74,11 @@ StackView {
 		if (root.animating) {
 			return
 		}
+		if (state === "hidden") {
+			// If the stack was hidden, it now contains pages that are no longer relevant. Clear all
+			// pages on the stack, without changing the state to closed.
+			_popAndDestroyAllPages(StackView.Immediate)
+		}
 
 		let objectOrUrl = typeof(obj) === "string" ? ".." + obj : obj
 		if (typeof(obj) === "string") {
@@ -83,10 +91,10 @@ StackView {
 			}
 			objectOrUrl = checkComponent.createObject(null, properties)
 			root._pageUrls.push(obj)
-			root.topPageUrl = obj
+			root._topPageUrl = obj
 		} else {
 			root._pageUrls.push("")
-			root.topPageUrl = ""
+			root._topPageUrl = ""
 		}
 
 		if (root.depth === 0) {
@@ -100,8 +108,6 @@ StackView {
 	}
 
 	function popAllPages(operation) {
-		root._pageUrls = []
-		root.topPageUrl = undefined
 		fakePopAnimation.duration = _animationDuration(operation)
 		root.state = "closed"
 	}
@@ -112,7 +118,7 @@ StackView {
 			return
 		}
 		root._pageUrls.pop()
-		root.topPageUrl = root._pageUrls[root._pageUrls.length-1]
+		root._topPageUrl = root._pageUrls[root._pageUrls.length-1]
 
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
@@ -122,6 +128,45 @@ StackView {
 			// Pop and delay destruction of the popped page until the animation completes,
 			// otherwise the page disappears immediately.
 			_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
+		}
+	}
+
+	function show() {
+		if (animating || state === "opened" || depth === 0) {
+			return false
+		}
+		fakePushAnimation.duration = _animationDuration(StackView.PushTransition)
+		state = "opened"
+		return true
+	}
+
+	function hide() {
+		if (animating || state !== "opened") {
+			return false
+		}
+		fakePopAnimation.duration = _animationDuration(StackView.PopTransition)
+		state = "hidden"
+		return true
+	}
+
+	function _popAndDestroyAllPages(operation) {
+		root._pageUrls = []
+		root._topPageUrl = undefined
+
+		while (root.depth > 1) {
+			const page = root.pop(operation)
+			if (page && !Theme.objectHasQObjectParent(page)) {
+				page.destroy()
+			}
+		}
+
+		// pop() only works for depth > 1
+		const obj = root.currentItem
+		root.clear()
+
+		// Clean up the page object that was created in pushPage().
+		if (obj && !Theme.objectHasQObjectParent(obj)) {
+			obj.destroy()
 		}
 	}
 
@@ -163,7 +208,7 @@ StackView {
 		Transition {
 			id: fakePopTransition
 
-			to: "closed"
+			from: "opened"
 
 			SequentialAnimation {
 				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
@@ -173,22 +218,13 @@ StackView {
 				}
 				ScriptAction {
 					script: {
+						if (root.state === "hidden") {
+							// The stack is just being hidden temporarily; do not pop all pages.
+							return
+						}
+
 						// When leaving the page stack destroy all the pages
-						while (root.depth > 1) {
-							const page = root.pop(fakePopAnimation.duration > 0 ? StackView.PopTransition : StackView.Immediate)
-							if (page && !Theme.objectHasQObjectParent(page)) {
-								page.destroy()
-							}
-						}
-
-						// pop() only works for depth > 1
-						const obj = root.currentItem
-						root.clear()
-
-						// Clean up the page object that was created in pushPage().
-						if (obj && !Theme.objectHasQObjectParent(obj)) {
-							obj.destroy()
-						}
+						root._popAndDestroyAllPages(fakePopAnimation.duration > 0 ? StackView.PopTransition : StackView.Immediate)
 					}
 				}
 			}
