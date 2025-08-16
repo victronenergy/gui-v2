@@ -16,9 +16,7 @@ FocusScope {
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	property bool cardsActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
-			: !!pageStack.currentItem ? pageStack.currentItem
-			: !!swipeView ? swipeView.currentItem
-			: null
+			: pageStack.currentPage || swipeView?.currentItem
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -51,16 +49,12 @@ FocusScope {
 	}
 
 	readonly property Item _focusTarget: cardsLoader.enabled ? cardsLoader
-			: pageStack.depth > 0 && !pageStack.animating ? pageStack
+			: !!pageStack.currentPage && !pageStack.animating ? pageStack
 			: swipeViewAndNavBarContainer
-
-	function loadStartPage() {
-		Global.systemSettings.startPageConfiguration.loadStartPage(pageManager, navBar, swipeView, pageStack.topPageUrl)
-	}
 
 	function clearUi() {
 		swipeViewLoader.active = false
-		pageStack.clear()
+		pageStack.popAllPages(StackView.Immediate)
 		_loadedPages = 0
 	}
 
@@ -73,18 +67,27 @@ FocusScope {
 		case Qt.Key_Escape:
 			// Escape = close current Toast notification, or close Control/Switch pane.
 			if (Global.notificationLayer.deleteLastNotification()) {
-				event.accepted = true
-				return
-			} else if (cardsActive) {
-				cardsActive = false
-				event.accepted = true
-				return
+				// Nothing else to do
+			} else {
+				if (cardsActive) {
+					cardsActive = false
+				} else {
+					pageManager.goToStartPageOrNextMainPage()
+				}
 			}
-			break
+			event.accepted = true
+			return
+		case Qt.Key_Return:
+			if (cardsActive) {
+				cardsActive = false
+			}
+			pageManager.returnToLastStackPage()
+			event.accepted = true
+			return
 		case Qt.Key_Back:
 		case Qt.Key_Left:
 			// Backspace or Left arrow = go to previous page.
-			if (pageStack.activeFocus && pageStack.depth > 0) {
+			if (pageStack.opened) {
 				pageManager.popPage()
 				event.accepted = true
 				return
@@ -99,6 +102,7 @@ FocusScope {
 		id: pageManager
 		currentMainPage: root.currentPage
 		pageStack: pageStack
+		navBar: navBar
 	}
 
 	// Revert to the start page when the application has been inactive for the period of time
@@ -109,7 +113,7 @@ FocusScope {
 				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
 				 && !Global.applicationActive
 		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
-		onTriggered: root.loadStartPage()
+		onTriggered: pageManager.goToStartPage()
 	}
 
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
@@ -120,7 +124,7 @@ FocusScope {
 			if (!Global.applicationActive) {
 				const mainPageName = navBar.getCurrentPage()
 				const mainPage = swipeView.getCurrentPage()
-				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.topPageUrl)
+				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.opened ? pageStack.topPageUrl : "")
 			}
 		}
 	}
@@ -165,7 +169,7 @@ FocusScope {
 				if (Global.notifications?.alarms.hasActive) {
 					Global.notificationLayer.popAndGoToNotifications()
 				} else {
-					root.loadStartPage()
+					pageManager.goToStartPage()
 				}
 				// Notify that the UI is ready to be displayed.
 				console.info("MainView: swipe view pages loaded!")
@@ -374,7 +378,7 @@ FocusScope {
 		title: !!root.currentPage ? root.currentPage.title || "" : ""
 		leftButton: {
 			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
-			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.depth > 0) {
+			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
 				return VenusOS.StatusBar_LeftButton_Back
 			}
 			return customButton
@@ -422,7 +426,7 @@ FocusScope {
 		}
 
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
-				: pageStack.depth > 0 ? pageStack
+				: pageStack.opened ? pageStack
 				: swipeViewAndNavBarContainer
 	}
 
