@@ -11,9 +11,10 @@ QtObject {
 
 	required property string systemSettingsUid
 
-	readonly property bool hasStartPage: _startPageName.valid && _startPageName.value !== ""
+	readonly property bool hasStartPage: _startPageNameConfig != null
 	readonly property bool autoSelect: _startPageMode.value === VenusOS.StartPage_Mode_AutoSelect
 	readonly property int startPageTimeout: _startPageTimeout.value || 0     // in seconds
+	readonly property var startPageInfo: _startPageNameConfig
 
 	readonly property var options: [
 		{
@@ -55,46 +56,7 @@ QtObject {
 		},
 	]
 
-	// Changes the application view to show the start page.
-	function loadStartPage(pageManager, navBar, swipeView, topStackPageUrl) {
-		if (!hasStartPage) {
-			return
-		}
-
-		let config
-		try {
-			config = JSON.parse(_startPageName.value)
-		} catch (e) {
-			console.warn("Unable to parse JSON from:", _startPageName.value, ", exception:", e)
-			return
-		}
-
-		// Load the main page and its properties
-		if (!config.main || !navBar.setCurrentPage(config.main.page)) {
-			return
-		}
-		const mainPage = swipeView.getCurrentPage()
-		for (const propertyName in config.main.properties) {
-			if (mainPage.hasOwnProperty(propertyName)) {
-				mainPage[propertyName] = config.main.properties[propertyName]
-			}
-		}
-
-		// Load the required pages onto the stack
-		const stackPages = config.stack || []
-		if (stackPages.length > 0
-				&& !!topStackPageUrl
-				&& stackPages[stackPages.length - 1].page === topStackPageUrl) {
-			// Looks like the stack is already showing the correct page, so there's nothing to do.
-			return
-		}
-		pageManager.popAllPages(PageStack.Immediate)
-		for (let i = 0; i < stackPages.length; ++i) {
-			if (stackPages[i].page) {
-				pageManager.pushPage(stackPages[i].page, stackPages[i].properties || {})
-			}
-		}
-	}
+	property var _startPageNameConfig
 
 	// Changes the "start page" to be the current visible page, if possible.
 	function autoSelectStartPage(mainPageName, mainPage, topStackPageUrl) {
@@ -199,6 +161,11 @@ QtObject {
 	// JSON string containing the start page configuration.
 	readonly property VeQuickItem _startPageName: VeQuickItem {
 		uid: root.systemSettingsUid + "/Settings/Gui2/StartPageName"
+		onValueChanged: {
+			if (valid && value !== "") {
+				root._startPageNameConfig = valid && value !== "" ? JSON.parse(_startPageName.value) : null
+			}
+		}
 	}
 
 	// Time to wait (in seconds) when the app is idle, before loading the start page.
