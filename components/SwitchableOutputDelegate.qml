@@ -174,8 +174,11 @@ BaseListItem {
 					return true
 				case Qt.Key_Up:
 				case Qt.Key_Down:
-					// Prevent key navigation to other grid delegates while in edit mode.
-					return true
+					if (activeFocus) {
+						// Prevent key navigation to other grid delegates while in edit mode.
+						return true
+					}
+					break
 				}
 				return false
 			}
