@@ -182,6 +182,7 @@ StackView {
 	x: Theme.geometry_screen_width
 	width: Theme.geometry_screen_width
 	state: "closed"
+	enabled: opened
 
 	states: [
 		State {
