@@ -219,6 +219,34 @@
             check(location.href, 30, 1000, (function() { location.reload(); }), (function() { console.log("Failed to reload gui-v2: web server unavailable"); }) );
         }
 
+        // Helper functions for cookies
+        function setCookie(name, value, days) {
+            // Check if document.cookie is available, since it might not be on some older MFD devices
+            // or if the browser has disabled cookies.
+            if (typeof document.cookie === "undefined") return;
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            // Check if document.cookie is available, since it might not be on some older MFD devices
+            // or if the browser has disabled cookies.
+            if (typeof document.cookie === "undefined") return null;
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i=0;i < ca.length;i++) {
+                let c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+
         async function preloadWasm(url, onProgress) {
             try {
                 let total = null;
@@ -308,25 +336,26 @@
 
             // Options to change display size and border
             // Force fullscreen
-            if (searchParams.has("fullscreen") || (!searchParams.has("default") && !searchParams.has("nomock") && !searchParams.has("mock") && localStorage.getItem('venus-gui-v2-css-display') === 'fullscreen')) {
+            if (searchParams.has("fullscreen") || (!searchParams.has("default") && !searchParams.has("nomock") && !searchParams.has("mock") && getCookie('venus-gui-v2-css-display') === 'fullscreen')) {
                 wrapper_inner.style.maxWidth = '100%';
                 wrapper_inner.style.height = '100%';
                 mockup.style.visibility = 'hidden';
                 mockup.style.display = 'none';
-                // Save display mode in localStorage
-                localStorage.setItem('venus-gui-v2-css-display', 'fullscreen');
+                // Save display mode in cookie
+                setCookie('venus-gui-v2-css-display', 'fullscreen', 365);
             // Force mockup hide
-            } else if (searchParams.has("nomock") || (!searchParams.has("default") && !searchParams.has("mock") && localStorage.getItem('venus-gui-v2-css-display') === 'nomock')) {
+            } else if (searchParams.has("nomock") || (!searchParams.has("default") && !searchParams.has("mock") && getCookie('venus-gui-v2-css-display') === 'nomock')) {
                 mockup.style.visibility = 'hidden';
                 wrapper_inner.style.outline = 'none';
-                // Save display mode in localStorage
-                localStorage.setItem('venus-gui-v2-css-display', 'nomock');
+                setCookie('venus-gui-v2-css-display', 'nomock', 365);
             // Force mockup show
-            } else if (searchParams.has("mock") || (!searchParams.has("default") && localStorage.getItem('venus-gui-v2-css-display') === 'mock')) {
+            } else if (searchParams.has("mock") || (!searchParams.has("default") && getCookie('venus-gui-v2-css-display') === 'mock')) {
                 mockup.style.visibility = 'visible';
                 mockup.style.display = 'block';
-                // Save display mode in localStorage
-                localStorage.setItem('venus-gui-v2-css-display', 'mock');
+                setCookie('venus-gui-v2-css-display', 'mock', 365);
+            } else if (searchParams.has("default")) {
+                // Default display mode, do nothing
+                setCookie('venus-gui-v2-css-display', 'default', 0);
             }
 
             try {
