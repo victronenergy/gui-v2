@@ -14,7 +14,7 @@ FocusScope {
 	readonly property alias statusBar: statusBar
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
-	property bool cardsActive
+	readonly property bool cardsActive: cardsLoader.viewActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
 			: pageStack.currentPage || swipeView?.currentItem
 
@@ -48,9 +48,11 @@ FocusScope {
 		}
 	}
 
-	readonly property Item _focusTarget: cardsLoader.enabled ? cardsLoader
-			: !!pageStack.currentPage && !pageStack.animating ? pageStack
-			: swipeViewAndNavBarContainer
+	function goToNotificationsPage() {
+		pageManager.popAllPages()
+		cardsLoader.hide()
+		navBar.setCurrentPage("NotificationsPage.qml")
+	}
 
 	function clearUi() {
 		swipeViewLoader.active = false
@@ -70,7 +72,7 @@ FocusScope {
 				// Nothing else to do
 			} else {
 				if (cardsActive) {
-					cardsActive = false
+					cardsLoader.hide()
 				} else {
 					pageManager.goToStartPageOrNextMainPage()
 				}
@@ -79,7 +81,7 @@ FocusScope {
 			return
 		case Qt.Key_Return:
 			if (cardsActive) {
-				cardsActive = false
+				cardsLoader.hide()
 			}
 			pageManager.returnToLastStackPage()
 			event.accepted = true
@@ -141,7 +143,8 @@ FocusScope {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		focus: root._focusTarget === swipeViewAndNavBarContainer
+		focus: Global.keyNavigationEnabled && enabled
+		enabled: !pageStack.opened && !root.cardsActive
 
 		KeyNavigation.up: statusBar
 
@@ -167,7 +170,7 @@ FocusScope {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
 				if (Global.notifications?.alarms.hasActive) {
-					Global.notificationLayer.popAndGoToNotifications()
+					root.goToNotificationsPage()
 				} else {
 					pageManager.goToStartPage()
 				}
@@ -216,14 +219,11 @@ FocusScope {
 			model: swipeView ? swipeView.contentModel : null
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
-			focus: Global.keyNavigationEnabled
+			focus: true
 
 			onCurrentIndexChanged: {
 				if (swipeView) {
 					swipeView.setCurrentIndex(currentIndex)
-					if (Global.keyNavigationEnabled) {
-						focus = true // Move focus back to navbar if the SwipeView page changes.
-					}
 				}
 			}
 
@@ -249,13 +249,22 @@ FocusScope {
 			top: statusBar.bottom
 			bottom: parent.bottom
 		}
-		focus: root._focusTarget === pageStack
 
+		focus: opened
 		KeyNavigation.up: statusBar
 	}
 
 	CardViewLoader {
 		id: cardsLoader
+
+		function show(viewComponent) {
+			sourceComponent = viewComponent
+			viewActive = true
+		}
+
+		function hide() {
+			viewActive = false
+		}
 
 		anchors {
 			top: statusBar.bottom
@@ -267,9 +276,9 @@ FocusScope {
 		navBarItem: navBar
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
-		viewActive: root.cardsActive
 		animationEnabled: root.allowPageAnimations
-		focus: root._focusTarget === cardsLoader
+		focus: viewActive
+
 		KeyNavigation.up: statusBar
 
 		Component {
@@ -390,11 +399,10 @@ FocusScope {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				cardsLoader.sourceComponent = controlCardsComponent
-				root.cardsActive = true
+				cardsLoader.show(controlCardsComponent)
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.cardsActive = false
+				cardsLoader.hide()
 				break;
 			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
@@ -406,10 +414,9 @@ FocusScope {
 
 		onAuxButtonClicked: {
 			if (root.cardsActive) {
-				root.cardsActive = false
+				cardsLoader.hide()
 			} else {
-				cardsLoader.sourceComponent = auxCardsComponent
-				root.cardsActive = true
+				cardsLoader.show(auxCardsComponent)
 			}
 		}
 
