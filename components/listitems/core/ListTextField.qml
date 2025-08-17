@@ -33,7 +33,6 @@ ListItem {
 		}
 	}
 
-	signal editingFinished()
 	signal accepted()
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
@@ -117,8 +116,10 @@ ListItem {
 		id: textField
 
 		property var currentNotification
+		property string _initialText
 		property bool _showErrorHighlight
 		property bool _validateBeforeSaving
+		property bool _inputCancelled
 
 		enabled: root.clickable
 		visible: root.clickable
@@ -158,12 +159,13 @@ ListItem {
 		}
 
 		onActiveFocusChanged: {
-			// When focus is lost and the text was changed, validate and save the text.
-			if (_validateBeforeSaving) {
+			if (activeFocus) {
+				_initialText = text
+			} else if (_validateBeforeSaving && !_inputCancelled) {
+				// When focus is lost and the text was changed, validate and save the text.
 				_showErrorHighlight = root.runValidation(VenusOS.InputValidation_ValidateAndSave) === VenusOS.InputValidation_Result_Error
 				_validateBeforeSaving = false
 			}
-			root.editingFinished()
 		}
 
 		// When the cursor is on the left/right edges, consume left/right key events so that they do
@@ -175,6 +177,14 @@ ListItem {
 		// activate key navigation and move the focus elsewhere if the text is not yet accepted.
 		Keys.onUpPressed: (event) => { event.accepted = textField.activeFocus }
 		Keys.onDownPressed: (event) => { event.accepted = textField.activeFocus }
+
+		// When escape is pressed, revert to the original text.
+		Keys.onEscapePressed: {
+			text = _initialText
+			_inputCancelled = true // flag to prevent validation from running when focus is lost
+			focus = false
+			_inputCancelled = false
+		}
 
 		Label {
 			id: suffixLabel
