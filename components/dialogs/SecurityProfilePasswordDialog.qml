@@ -58,7 +58,7 @@ ModalDialog {
 
 	Component.onCompleted: resetValidation()
 
-	contentItem: Item {
+	contentItem: ModalDialog.FocusableContentItem {
 		id: passwordEntryItem
 
 		ColumnLayout {
