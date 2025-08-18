@@ -65,7 +65,9 @@ FocusScope {
 							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
 							  : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
-					border.color: (mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
+					border.color: !root.enabled ? Theme.color_gray4
+							: (mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color
+							: Theme.color_ok
 					radius: Theme.geometry_button_radius
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right

@@ -355,8 +355,8 @@ BaseListItem {
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			fontPixelSize: Theme.font_size_body1
-			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
-				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
+			model: [{ "value": CommonWords.off, "selectedBackgroundColor": buttonRow.enabled ? Theme.color_button_off_background : Theme.color_gray4 },
+				{ "value": CommonWords.on, "selectedBackgroundColor": buttonRow.enabled ? Theme.color_button_on_background : Theme.color_gray4 }]
 			enabled: !toggleState.busy
 
 			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
