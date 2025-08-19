@@ -173,7 +173,7 @@ BaseListItem {
 		id: dimmingComponent
 
 		DimmingSlider {
-			id: slider
+			id: dimmingSlider
 
 			property bool valueChangeKeyPressed
 			readonly property bool dragging: pressed || valueChangeKeyPressed
@@ -220,7 +220,7 @@ BaseListItem {
 
 			onDraggingChanged: {
 				if (dragging) {
-					delayedSliderUpdate.stop()
+					delayedDimmingSliderUpdate.stop()
 				} else {
 					dimmingValue.syncBackendValueToSlider()
 				}
@@ -245,7 +245,7 @@ BaseListItem {
 				}
 				event.accepted = false
 			}
-			KeyNavigationHighlight.active: slider.activeFocus
+			KeyNavigationHighlight.active: dimmingSlider.activeFocus
 
 			VeQuickItem {
 				id: dimmingMax
@@ -270,10 +270,10 @@ BaseListItem {
 					// If user has interacted with the slider to change the value, delay briefly
 					// before syncing the slider to the backend value, else this may be done while
 					// user changes are still being written.
-					if (busy || slider.dragging || delayedSliderUpdate.running) {
-						delayedSliderUpdate.restart()
+					if (busy || dimmingSlider.dragging || delayedDimmingSliderUpdate.running) {
+						delayedDimmingSliderUpdate.restart()
 					} else {
-						slider.value = backendValue
+						dimmingSlider.value = backendValue
 					}
 				}
 
@@ -287,7 +287,7 @@ BaseListItem {
 			// else the user will release the slider and then immediately see it jump several times
 			// as the backend catches up to the last written value.
 			Timer {
-				id: delayedSliderUpdate
+				id: delayedDimmingSliderUpdate
 				interval: 1000
 				onTriggered: dimmingValue.syncBackendValueToSlider()
 			}
@@ -665,7 +665,85 @@ BaseListItem {
 	Component {
 		id: basicSliderComponent
 
-		PlaceholderDelegate {}
+		BaseSlider {
+			id: basicSlider
+
+			property bool valueChangeKeyPressed
+			readonly property bool dragging: pressed || valueChangeKeyPressed
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			highlightColor: enabled
+				? Theme.color_ok
+				: Theme.color_font_disabled
+			from: sliderMin.valid ? sliderMin.value : 0
+			to: sliderMax.valid ? sliderMax.value : 100
+			stepSize: 1
+
+			// On the MQTT backend, many consecutive changes can create a huge queue of backend
+			// changes. Avoid this by preventing changes until the backend is in sync.
+			enabled: !sliderValue.busy || dragging
+
+			onDraggingChanged: {
+				if (!dragging) {
+					sliderValue.syncBackendValueToSlider()
+				}
+			}
+			onMoved: {
+				value = Math.round(value)
+				sliderValue.writeValue(value)
+			}
+
+			Keys.onPressed: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = true
+				}
+				event.accepted = false
+			}
+			Keys.onReleased: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = false
+				}
+				event.accepted = false
+			}
+			KeyNavigationHighlight.active: basicSlider.activeFocus
+
+			VeQuickItem {
+				id: sliderMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: sliderMin
+				uid: root.outputUid + "/Settings/DimmingMin"
+			}
+
+			SettingSync {
+				id: sliderValue
+
+				// Update the slider value to the backend value.
+				function syncBackendValueToSlider() {
+					// If user has interacted with the slider to change the value, delay briefly
+					// before syncing the slider to the backend value, else this may be done while
+					// user changes are still being written.
+					if (busy || basicSlider.dragging || delayedSliderUpdate.running) {
+						delayedSliderUpdate.restart()
+					} else {
+						basicSlider.value = backendValue
+					}
+				}
+
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+				onBackendValueChanged: syncBackendValueToSlider()
+				onBusyChanged: if (!busy) syncBackendValueToSlider()
+			}
+
+			Timer {
+				id: delayedSliderUpdate
+				interval: 1000
+				onTriggered: sliderValue.syncBackendValueToSlider()
+			}
+		}
 	}
 
 	Component {

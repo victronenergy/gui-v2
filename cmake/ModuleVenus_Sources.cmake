@@ -132,6 +132,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/WifiModel.qml
     components/ClassAndVrmInstance.qml
     components/controls/AutoToggleButton.qml
+    components/controls/BaseSlider.qml
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
@@ -150,6 +151,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/RemoveButton.qml
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
+    components/controls/SliderIndicator.qml
     components/controls/SpinBox.qml
     components/controls/SpinBoxInputArea.qml
     components/controls/SwipeView.qml
