@@ -397,7 +397,64 @@ BaseListItem {
 	Component {
 		id: steppedSwitchComponent
 
-		PlaceholderDelegate {}
+		MultiStepButton {
+			id: multiStep
+
+			function handlePress(key) {
+				// Enter edit mode when space is pressed.
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				default:
+					return false
+				}
+			}
+
+			function generateModel() {
+				if (multiStepMax.value === undefined) {
+					multiStep.model = []
+				} else {
+					let items = []
+					// limit maximum number of options
+					let totalOptions = Math.min(10, multiStepMax.value)
+					for (let i = 0; i < totalOptions; i++) {
+						items.push({ 'text': i, 'backgroundColor': i === multiStep.currentIndex ? Theme.color_ok : Theme.color_gray1 })
+					}
+					multiStep.model = items
+				}
+			}
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			currentIndex: multiStepSelection.valid ?? multiStepSelection.value
+			checked: multiStepState.backendValue
+			onClicked: (index) => { multiStepSelection.setValue(index) }
+			onToggled: multiStepState.writeValue(!multiStepState.backendValue)
+
+			VeQuickItem {
+				id: multiStepMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+				onValueChanged: {
+					multiStep.currentIndex = Math.floor(multiStepSelection.value)
+					multiStep.generateModel()
+				}
+			}
+
+			SettingSync {
+				id: multiStepState
+				backendValue: output.state
+				onUpdateToBackend: (value) => { output.setState(value) }
+				onBackendValueChanged: multiStep.generateModel()
+			}
+
+			// The /DimmingValue holds the selected index.
+			VeQuickItem {
+				id: multiStepSelection
+				uid: root.outputUid + "/Dimming"
+				onValueChanged: multiStep.currentIndex = value
+			}
+		}
 	}
 
 	Component {
