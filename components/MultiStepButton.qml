@@ -1,0 +1,121 @@
+/*
+** Copyright (C) 2025 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+import Victron.VenusOS
+
+BaseListView {
+	id: root
+
+	property int currentIndex
+	property bool checked
+	property int totalDelegateWidth: width - headerItem.width
+
+	signal indexClicked(index: int)
+	signal onClicked()
+	signal offClicked()
+
+	implicitWidth: parent.width
+	implicitHeight: Theme.geometry_segmentedButtonRow_height
+
+	orientation: ListView.Horizontal
+
+	delegate: BaseListItem {
+
+		property bool lastListItem: index === root.model.length - 1
+
+		height: root.height
+		width: root.totalDelegateWidth / root.model.length
+
+		// background border color
+		Rectangle {
+			anchors.fill: parent
+			topRightRadius: lastListItem ? Theme.geometry_button_radius : 0
+			bottomRightRadius: lastListItem ? Theme.geometry_button_radius : 0
+			color: root.enabled ? root.checked ? Theme.color_ok : Theme.color_button_off_background : Theme.color_gray4
+		}
+
+		Button {
+			anchors.fill: parent
+			anchors.topMargin: Theme.geometry_button_border_width
+			anchors.bottomMargin: Theme.geometry_button_border_width
+			anchors.rightMargin: lastListItem ? Theme.geometry_button_border_width : 0
+
+			radius: 0 // this influences the press effect
+			topLeftRadius: 0
+			bottomLeftRadius: 0
+			topRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
+			bottomRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
+			borderWidth: 0
+
+			text: modelData.text
+			font.pixelSize: Theme.font_size_body1
+			color: root.enabled ? index === root.currentIndex ? Theme.color_button_down_text : Theme.color_font_primary : Theme.color_gray6
+			backgroundColor: !root.enabled ? Theme.color_background_disabled
+					: index === root.currentIndex ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
+					: Theme.color_darkOk
+
+			enabled: root.checked
+
+			onClicked: root.indexClicked(index)
+		}
+	}
+
+	header: Rectangle {
+		width: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
+			   + Theme.geometry_dimmingSlider_separator_width + (Theme.geometry_dimmingSlider_text_padding * 2)
+		height: parent.height
+		topLeftRadius: Theme.geometry_slider_groove_radius
+		bottomLeftRadius: Theme.geometry_slider_groove_radius
+		topRightRadius: 0
+		bottomRightRadius: 0
+		color: root.enabled ? root.checked ? Theme.color_ok : Theme.color_button_off_background : Theme.color_gray4
+
+		Button {
+			anchors.fill: parent
+			anchors.topMargin: Theme.geometry_button_border_width
+			anchors.bottomMargin: Theme.geometry_button_border_width
+			anchors.leftMargin: Theme.geometry_button_border_width
+
+			radius: 0 // this influences the press effect
+			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+			topRightRadius: 0
+			bottomRightRadius: 0
+
+			text: root.checked ? CommonWords.on : CommonWords.off
+			font.pixelSize: Theme.font_size_body1
+			backgroundColor: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
+
+			onClicked: root.checked ? root.offClicked() : root.onClicked()
+		}
+
+		Rectangle {
+			anchors.right: parent.right
+			anchors.verticalCenter: parent.verticalCenter
+			width: Theme.geometry_dimmingSlider_separator_width
+			height: parent.height - (Theme.geometry_dimmingSlider_decorator_vertical_padding * 2)
+			radius: Theme.geometry_dimmingSlider_separator_width / 2
+			visible: currentIndex > 0
+			color: root.enabled ? Theme.color_multistepbutton_separator : Theme.color_background_disabled
+		}
+
+		TextMetrics {
+			id: labelTextMetrics
+			font.pixelSize: Theme.font_size_body1
+			text: (CommonWords.on.length > CommonWords.off.length) ? CommonWords.on : CommonWords.off
+		}
+
+	}
+
+	Keys.onEnterPressed: focus = false
+	Keys.onEscapePressed: focus = false
+	Keys.onReturnPressed: focus = false
+	Keys.onLeftPressed: {}
+	Keys.onRightPressed: {}
+	Keys.onUpPressed: {}
+	Keys.onDownPressed: {}
+	// KeyNavigationHighlight.active: activeFocus
+}

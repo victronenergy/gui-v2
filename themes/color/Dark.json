@@ -42,6 +42,8 @@
     "color_button_on_background_disabled": "color_gray3",
     "color_button_off_background_disabled": "#333333",
 
+    "color_multistepbutton_separator": "#5B6E80",
+
     "color_card_separator": "color_gray2",
 
     "color_modalDialog_border": "color_gray2",
