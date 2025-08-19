@@ -121,9 +121,9 @@
         "/SwitchableOutput/temp_setpoint_3/Status": 32,
 
         "/SwitchableOutput/stepped_switch_1/Dimming": 0,
-        "/SwitchableOutput/stepped_switch_1/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_1/Name": "4a. Stepped switch, 3 options, on",
         "/SwitchableOutput/stepped_switch_1/Settings/CustomName": "",
+        "/SwitchableOutput/stepped_switch_1/Settings/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_1/Settings/Function": 2,
         "/SwitchableOutput/stepped_switch_1/Settings/Group": "",
         "/SwitchableOutput/stepped_switch_1/Settings/ShowUIControl": 1,
@@ -133,9 +133,9 @@
         "/SwitchableOutput/stepped_switch_1/Status": 9,
 
         "/SwitchableOutput/stepped_switch_2/Dimming": 2,
-        "/SwitchableOutput/stepped_switch_2/DimmingMax": 5,
         "/SwitchableOutput/stepped_switch_2/Name": "4b. Stepped switch, 5 options, off",
         "/SwitchableOutput/stepped_switch_2/Settings/CustomName": "",
+        "/SwitchableOutput/stepped_switch_2/Settings/DimmingMax": 5,
         "/SwitchableOutput/stepped_switch_2/Settings/Function": 2,
         "/SwitchableOutput/stepped_switch_2/Settings/Group": "",
         "/SwitchableOutput/stepped_switch_2/Settings/ShowUIControl": 1,
@@ -145,9 +145,9 @@
         "/SwitchableOutput/stepped_switch_2/Status": 9,
 
         "/SwitchableOutput/stepped_switch_3/Dimming": 0,
-        "/SwitchableOutput/stepped_switch_3/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_3/Name": "4c. Stepped switch, disabled",
         "/SwitchableOutput/stepped_switch_3/Settings/CustomName": "",
+        "/SwitchableOutput/stepped_switch_3/Settings/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_3/Settings/Function": 2,
         "/SwitchableOutput/stepped_switch_3/Settings/Group": "",
         "/SwitchableOutput/stepped_switch_3/Settings/ShowUIControl": 1,
