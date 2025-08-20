@@ -7,6 +7,7 @@
 #define VICTRON_GUIV2_FILTEREDSERVICEMODEL_H
 
 #include <QStringList>
+#include <QQmlParserStatus>
 #include <QSortFilterProxyModel>
 #include <qqmlintegration.h>
 
@@ -16,10 +17,11 @@ namespace VenusOS {
 /*
 	Provides a service model that can be filtered based on the service type.
 */
-class FilteredServiceModel : public QSortFilterProxyModel
+class FilteredServiceModel : public QSortFilterProxyModel, public QQmlParserStatus
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_INTERFACES(QQmlParserStatus)
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
 	Q_PROPERTY(QStringList serviceTypes READ serviceTypes WRITE setServiceTypes NOTIFY serviceTypesChanged)
 
@@ -30,6 +32,9 @@ public:
 
 	QStringList serviceTypes() const;
 	void setServiceTypes(const QStringList &serviceTypes);
+
+	void classBegin() override;
+	void componentComplete() override;
 
 Q_SIGNALS:
 	void countChanged();
@@ -43,6 +48,7 @@ private:
 
 	QStringList m_serviceTypes;
 	int m_count = 0;
+	bool m_completed = false;
 };
 
 } /* VenusOS */

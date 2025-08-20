@@ -36,14 +36,33 @@ void FilteredServiceModel::setServiceTypes(const QStringList &serviceTypes)
 {
 	if (m_serviceTypes != serviceTypes) {
 		m_serviceTypes = serviceTypes;
+		if (m_completed) {
+			invalidateFilter();
+		}
 		emit serviceTypesChanged();
-		invalidateFilter();
 	}
+}
+
+void FilteredServiceModel::classBegin()
+{
+}
+
+void FilteredServiceModel::componentComplete()
+{
+	m_completed = true;
+	invalidateFilter();
 }
 
 bool FilteredServiceModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	Q_UNUSED(sourceParent)
+
+	// Do not include any services if serviceTypes is not yet set. Otherwise, from QML, we will
+	// initially see all services present in the model.
+	if (!m_completed) {
+		return false;
+	}
+
 	if (m_serviceTypes.isEmpty()) {
 		return true;
 	}
