@@ -65,10 +65,9 @@ Page {
 			width: root.cardWidth
 			height: cardsView.height
 			sourceComponent: {
-				const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
-				if (serviceType === "evcharger") {
+				if (device.serviceType === "evcharger") {
 					return evcsComponent
-				} else if (serviceType === "generator") {
+				} else if (device.serviceType === "generator") {
 					return generatorComponent
 				}
 				return inverterChargerComponent
