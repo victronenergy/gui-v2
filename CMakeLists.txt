@@ -80,7 +80,6 @@ include(cmake/RunTests.cmake)
 
 add_dependencies(generate_translation_sources_file theme_parser)
 add_dependencies(${PROJECT_NAME} theme_parser)
-add_dependencies(${PROJECT_NAME} qm_files_exist)
 
 # to visualise the dependency graph, do the following:
 # $ cmake --graphviz=dependencies.dot ../gui-v2/
