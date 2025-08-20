@@ -892,6 +892,10 @@ public:
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
+
+	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
+
+	static Enums* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 };
 
 }

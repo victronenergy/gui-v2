@@ -37,7 +37,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
-    components/Device.qml
     components/DeviceListDelegate.qml
     components/DevicePage.qml
     components/DynamicValueRange.qml
@@ -572,6 +571,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/device.h
+    src/device.cpp
     src/filteredservicemodel.h
     src/filteredservicemodel.cpp
     src/theme.h
