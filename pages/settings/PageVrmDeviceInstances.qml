@@ -58,11 +58,11 @@ Page {
 			return null
 		}
 
-		for (let i = 0; i < Global.allDevicesModel.count; ++i) {
-			const device = Global.allDevicesModel.deviceAt(i)
+		for (let i = 0; i < AllDevicesModel.count; ++i) {
+			const device = AllDevicesModel.deviceAt(i)
 			if (device
 					&& device.deviceInstance === deviceInstance
-					&& device.deviceType === deviceClass) {
+					&& device.serviceType === deviceClass) {
 				return device
 			}
 		}

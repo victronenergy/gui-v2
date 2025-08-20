@@ -23,10 +23,10 @@ Item {
 			&& !!Global.switches
 			&& !!Global.tanks
 			&& !!Global.venusPlatform
+			&& !!RuntimeDeviceModel // ensure singleton is created
 
 	readonly property bool _ready: _dataObjectsReady
 			&& Global.backendReady
-			&& dataServiceModel.rowCount > 0
 			&& (BackendConnection.type !== BackendConnection.MockSource || mockSetupLoader.mockLoaded)
 
 	on_DataObjectsReadyChanged: if (_dataObjectsReady) console.info("DataManager: data objects ready")
@@ -51,11 +51,6 @@ Item {
 	SystemSettings {}
 	Tanks {}
 	VenusPlatform {}
-
-	AllDevicesModel {
-		id: allDevicesModel
-		Component.onCompleted: { console.info("DataManager: all devices model ready"); Global.allDevicesModel = allDevicesModel }
-	}
 
 	VeQItemTableModel {
 		id: dataServiceModel
