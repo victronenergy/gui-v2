@@ -23,22 +23,13 @@ QtObject {
 	required property int displayUnit
 
 	property VeQuickItem _numerator: VeQuickItem {
+		uid: root.numeratorUid
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 	property VeQuickItem _denominator: VeQuickItem {
+		uid: root.denominatorUid
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
-	}
-
-	onNumeratorUidChanged: {
-		if (numeratorUid && !_numerator.uid) {
-			_numerator.uid = numeratorUid
-		}
-	}
-	onDenominatorUidChanged: {
-		if (denominatorUid && !_denominator.uid) {
-			_denominator.uid = denominatorUid
-		}
 	}
 }

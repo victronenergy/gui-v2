@@ -23,12 +23,14 @@ class FilteredServiceModel : public QSortFilterProxyModel, public QQmlParserStat
 	QML_ELEMENT
 	Q_INTERFACES(QQmlParserStatus)
 	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(QString firstUid READ firstUid NOTIFY firstUidChanged)
 	Q_PROPERTY(QStringList serviceTypes READ serviceTypes WRITE setServiceTypes NOTIFY serviceTypesChanged)
 
 public:
 	explicit FilteredServiceModel(QObject *parent = nullptr);
 
 	int count() const;
+	QString firstUid() const;
 
 	QStringList serviceTypes() const;
 	void setServiceTypes(const QStringList &serviceTypes);
@@ -36,8 +38,11 @@ public:
 	void classBegin() override;
 	void componentComplete() override;
 
+	Q_INVOKABLE QString uidAt(int index) const;
+
 Q_SIGNALS:
 	void countChanged();
+	void firstUidChanged();
 	void serviceTypesChanged();
 
 protected:
@@ -47,6 +52,7 @@ private:
 	void updateCount();
 
 	QStringList m_serviceTypes;
+	QString m_firstUid;
 	int m_count = 0;
 	bool m_completed = false;
 };
