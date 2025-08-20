@@ -62,7 +62,7 @@ Page {
 			const device = Global.allDevicesModel.deviceAt(i)
 			if (device
 					&& device.deviceInstance === deviceInstance
-					&& BackendConnection.serviceTypeFromUid(device.serviceUid) === deviceClass) {
+					&& device.deviceType === deviceClass) {
 				return device
 			}
 		}
