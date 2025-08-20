@@ -12,7 +12,6 @@ QtObject {
 	property var main
 	property var pageManager
 	property var mainView
-	property var dataManager
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
 	property var allDevicesModel
@@ -81,7 +80,6 @@ QtObject {
 		// as main will never be destroyed during the ui rebuild.
 		pageManager = null
 		mainView = null
-		dataManager = null
 		dataServiceModel = null
 		firmwareUpdate = null
 		allDevicesModel = null
