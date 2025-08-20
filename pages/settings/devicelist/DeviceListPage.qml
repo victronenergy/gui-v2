@@ -12,14 +12,15 @@ Page {
 	GradientListView {
 		id: deviceListView
 
-		model: Global.allDevicesModel
+		model: SortedRuntimeDeviceModel {
+			sourceModel: RuntimeDeviceModel
+		}
 
 		delegate: BaseListLoader {
 			id: delegateLoader
 
 			required property bool connected
 			required property BaseDevice device
-			required property BaseDeviceModel sourceModel
 			required property string cachedDeviceName
 
 			readonly property bool _loadCustomDelegate: connected && !!device
@@ -27,15 +28,9 @@ Page {
 
 			function _resetSource() {
 				if (_loadCustomDelegate) {
-					const serviceType = BackendConnection.serviceTypeFromUid(device.serviceUid)
-					if (!serviceType) {
-						console.warn("DeviceList: cannot load delegate, cannot read service type from serviceUid:", device.serviceUid)
-						return
-					}
 					if (source.toString().length === 0 || !_usingCustomDelegate) {
-						setSource("delegates/DeviceListDelegate_%1.qml".arg(serviceType), {
+						setSource("delegates/DeviceListDelegate_%1.qml".arg(device.serviceType), {
 							device: Qt.binding(function() { return delegateLoader.device }),
-							sourceModel: Qt.binding(function() { return delegateLoader.sourceModel }),
 						})
 						_usingCustomDelegate = true
 					}
@@ -128,9 +123,9 @@ Page {
 				//% "Remove disconnected devices"
 				text: qsTrId("devicelist_remove_disconnected_devices")
 				secondaryText: CommonWords.remove
-				preferredVisible: Global.allDevicesModel.disconnectedDeviceCount > 0
+				preferredVisible: RuntimeDeviceModel.disconnectedDeviceCount > 0
 				onClicked: {
-					Global.allDevicesModel.removeDisconnectedDevices()
+					RuntimeDeviceModel.removeDisconnectedDevices()
 				}
 			}
 		}

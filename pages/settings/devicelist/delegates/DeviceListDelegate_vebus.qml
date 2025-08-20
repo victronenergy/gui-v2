@@ -9,9 +9,6 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	// vebus devices may also show up as AC inputs or batteries, so ensure they do not
-	// appear multiple times in the list.
-	preferredVisible: sourceModel === Global.inverterChargers.veBusDevices
 	secondaryText: Global.system.systemStateToText(state.value)
 
 	onClicked: {
