@@ -23,16 +23,21 @@ OverviewWidget {
 	title: qsTrId("overview_widget_dcloads_title")
 	icon.source: "qrc:/images/dcloads.svg"
 	type: VenusOS.OverviewWidget_Type_DcLoads
-	enabled: Global.allDevicesModel.combinedDcLoadDevices.count > 0
+	enabled: combinedDcLoadDevices.count > 0
 
 	quantityLabel.dataObject: Global.system.dc
 
 	onClicked: {
-		if (Global.allDevicesModel.combinedDcLoadDevices.count > 1) {
+		if (combinedDcLoadDevices.count > 1) {
 			Global.pageManager.pushPage(deviceListPageComponent, { "title": root.title })
 		} else {
-			root._showSettingsPage(Global.allDevicesModel.combinedDcLoadDevices.firstObject)
+			root._showSettingsPage(combinedDcLoadDevices.firstObject)
 		}
+	}
+
+	ServiceDeviceModel {
+		id: combinedDcLoadDevices
+		serviceTypes: ["dcload", "dcsystem", "dcdc"]
 	}
 
 	Component {
@@ -40,7 +45,7 @@ OverviewWidget {
 
 		Page {
 			GradientListView {
-				model: Global.allDevicesModel.combinedDcLoadDevices
+				model: combinedDcLoadDevices
 
 				delegate: ListQuantityGroupNavigation {
 					id: deviceDelegate

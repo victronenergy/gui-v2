@@ -53,7 +53,7 @@ AcWidget {
 		sourceModels: [
 			acLoadInputDevices,
 			evChargerInputDevices,
-			Global.allDevicesModel.heatPumpInputDevices,
+			heatPumpInputDevices,
 		]
 	}
 
@@ -69,5 +69,12 @@ AcWidget {
 		position: VenusOS.AcPosition_AcInput
 		serviceTypes: ["evcharger"]
 		modelId: "evcharger-input"
+	}
+
+	AcMeterModel {
+		id: heatPumpInputDevices
+		position: VenusOS.AcPosition_AcInput
+		serviceTypes: ["heatpump"]
+		modelId: "heatpump-input"
 	}
 }

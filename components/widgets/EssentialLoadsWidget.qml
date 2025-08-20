@@ -41,7 +41,7 @@ AcWidget {
 		sourceModels: [
 			acLoadOutputDevices,
 			evChargerOutputDevices,
-			Global.allDevicesModel.heatPumpOutputDevices,
+			heatPumpOutputDevices,
 		]
 	}
 
@@ -57,5 +57,12 @@ AcWidget {
 		position: VenusOS.AcPosition_AcOutput
 		serviceTypes: ["evcharger"]
 		modelId: "evcharger-output"
+	}
+
+	AcMeterModel {
+		id: heatPumpOutputDevices
+		position: VenusOS.AcPosition_AcOutput
+		serviceTypes: ["heatpump"]
+		modelId: "heatpump-output"
 	}
 }

@@ -27,6 +27,11 @@ int FilteredServiceModel::count() const
 	return m_count;
 }
 
+QString FilteredServiceModel::firstUid() const
+{
+	return m_firstUid;
+}
+
 QStringList FilteredServiceModel::serviceTypes() const
 {
 	return m_serviceTypes;
@@ -53,6 +58,11 @@ void FilteredServiceModel::componentComplete()
 	invalidateFilter();
 }
 
+QString FilteredServiceModel::uidAt(int index) const
+{
+	return data(this->index(index, 0), AllServicesModel::UidRole).toString();
+}
+
 bool FilteredServiceModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	Q_UNUSED(sourceParent)
@@ -73,10 +83,19 @@ bool FilteredServiceModel::filterAcceptsRow(int sourceRow, const QModelIndex &so
 
 void FilteredServiceModel::updateCount()
 {
-	const int count = rowCount();
-	if (m_count != count) {
-		m_count = count;
+	const QString prevFirstUid = m_firstUid;
+	m_firstUid = uidAt(0);
+
+	const int prevCount = m_count;
+	m_count = rowCount();
+
+	// Delay emitting the change signals until after both members are set, so that QML connections
+	// to either of the change signals will get the updated values for both properties.
+	if (m_count != prevCount) {
 		emit countChanged();
+	}
+	if (m_firstUid != prevFirstUid) {
+		emit firstUidChanged();
 	}
 }
 
