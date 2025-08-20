@@ -455,5 +455,58 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 	}
 }
 
+QString Enums::tank_fluidTypeToText(Tank_Type type) const
+{
+	switch (type) {
+	case Tank_Type_Fuel:
+		//% "Fuel"
+		return qtTrId("tank_type_fuel");
+	case Tank_Type_FreshWater:
+		//% "Fresh water"
+		return qtTrId("tank_type_fresh_water");
+	case Tank_Type_WasteWater:
+		//% "Waste water"
+		return qtTrId("tank_type_waste_water");
+	case Tank_Type_LiveWell:
+		//% "Live well"
+		return qtTrId("tank_type_live_well");
+	case Tank_Type_Oil:
+		//% "Oil"
+		return qtTrId("tank_type_oil");
+	case Tank_Type_BlackWater:
+		//% "Black water"
+		return qtTrId("tank_type_black_water");
+	case Tank_Type_Gasoline:
+		//% "Gasoline"
+		return qtTrId("tank_type_gasoline");
+	case Tank_Type_Diesel:
+		//% "Diesel"
+		return qtTrId("tank_type_diesel");
+	case Tank_Type_LPG:
+		//% "LPG"
+		return qtTrId("tank_type_lpg");
+	case Tank_Type_LNG:
+		//% "LNG"
+		return qtTrId("tank_type_lng");
+	case Tank_Type_HydraulicOil:
+		//% "Hydraulic oil"
+		return qtTrId("tank_type_hydraulic_oil");
+	case Tank_Type_RawWater:
+		//% "Raw water"
+		return qtTrId("tank_type_raw_water");
+	default:
+		return QString();
+	}
+}
+
+Enums* Enums::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+	Q_UNUSED(engine)
+	Q_UNUSED(jsEngine)
+
+	static Enums *instance = new Enums;
+	return instance;
+}
+
 }
 }

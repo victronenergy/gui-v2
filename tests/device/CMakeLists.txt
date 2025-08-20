@@ -4,20 +4,24 @@
 #
 
 cmake_minimum_required(VERSION 3.16)
-project(tst_allservicesmodel LANGUAGES CXX)
+project(tst_device LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick DBus Mqtt)
 
-qt_add_executable(tst_allservicesmodel
-    tst_allservicesmodel.cpp
+qt_add_executable(tst_device
+    tst_device.cpp
     ../../src/allservicesmodel.h
     ../../src/allservicesmodel.cpp
     ../../src/backendconnection.h
     ../../src/backendconnection.cpp
     ../../src/basedevice.h
     ../../src/basedevice.cpp
+    ../../src/device.h
+    ../../src/device.cpp
+    ../../src/enums.h
+    ../../src/enums.cpp
     ../../src/mockmanager.h
     ../../src/mockmanager.cpp
 
@@ -43,22 +47,22 @@ qt_add_qml_module( ${PROJECT_NAME}
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES
-        tst_allservicesmodel.qml
+        tst_device.qml
     OUTPUT_DIRECTORY Victron/VenusOS
 )
 
-set_target_properties(tst_allservicesmodel PROPERTIES
+set_target_properties(tst_device PROPERTIES
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE TRUE
 )
 
 option(VENUS_INSTALL_TESTS "enable test installation via cmake -DVENUS_INSTALL_TESTS=ON" OFF) # Disabled by default
 if (VENUS_INSTALL_TESTS)
-    install(FILES tst_allservicesmodel.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/allservicesmodel)
-    install(TARGETS tst_allservicesmodel DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/allservicesmodel)
+    install(FILES tst_device.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/device)
+    install(TARGETS tst_device DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/device)
 endif()
 
-target_link_libraries(tst_allservicesmodel PRIVATE
+target_link_libraries(tst_device PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::QuickPrivate

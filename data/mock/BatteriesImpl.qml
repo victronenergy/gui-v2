@@ -310,9 +310,20 @@ Item {
 			serviceUid: uid.substring(0, uid.indexOf("/Dc/"))
 
 			// If there is a channel, the custom/product name comes from the /Devices sub-path
-			// instead.
-			_customName.uid: channel > 0 ? `${serviceUid}/Devices/${channel}/CustomName` : `${serviceUid}/CustomName`
-			_productName.uid: channel > 0 ? `${serviceUid}/Devices/${channel}/ProductName` : `${serviceUid}/ProductName`
+			// instead of the root battery path.
+			customName: customNameItem.value ?? ""
+			productName: productNameItem.value ?? ""
+
+			readonly property VeQuickItem customNameItem : VeQuickItem {
+				uid: battery.channel > 0
+					 ? "%1/Devices/%2/CustomName".arg(battery.serviceUid).arg(battery.channel)
+					 : battery.serviceUid + "/CustomName"
+			}
+			readonly property VeQuickItem productNameItem : VeQuickItem {
+				uid: battery.channel > 0
+					 ? "%1/Devices/%2/ProductName".arg(battery.serviceUid).arg(battery.channel)
+					 : battery.serviceUid + "/ProductName"
+			}
 
 			readonly property BatteryProperty current: BatteryProperty { path: `/Dc/${battery.channel}/Current` }
 			readonly property BatteryProperty power: BatteryProperty { path: `/Dc/${battery.channel}/Power` }
