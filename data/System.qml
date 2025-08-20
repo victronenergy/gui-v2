@@ -30,8 +30,8 @@ QtObject {
 
 	readonly property QtObject dc: QtObject {
 		// Regardless of the actual power value, regard the system as having DC power (and show
-		// DC Loads in the UI) if any dc system services are present or if /HasDcSystem=1.
-		readonly property bool hasPower: Global.allDevicesModel.combinedDcLoadDevices.count > 0 || _hasDcSystem.value === 1
+		// DC Loads in the UI) if any relevant DC services are present or if /HasDcSystem=1.
+		readonly property bool hasPower: serviceModel.count > 0 || _hasDcSystem.value === 1
 
 		readonly property real power: hasPower ? _dcSystemPower.value || 0 : NaN
 		readonly property bool currentValid: !isNaN(power) && !isNaN(voltage) && (voltage !== 0)
@@ -55,6 +55,10 @@ QtObject {
 
 		readonly property VeQuickItem _hasDcSystem: VeQuickItem {
 			uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
+		}
+
+		readonly property FilteredServiceModel serviceModel: FilteredServiceModel {
+			serviceTypes: ["dcload", "dcsystem", "dcdc"]
 		}
 	}
 

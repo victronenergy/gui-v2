@@ -10,8 +10,6 @@ Item {
 	id: root
 
 	property int mockDeviceCount
-	property Device gpsDevice
-	property Device motorDriveDevice
 
 	readonly property var configs: [
 		{
@@ -55,47 +53,55 @@ Item {
 		const config = configs[configIndex]
 		if (!config) return
 
-		if (!gpsDevice) {
-			gpsDevice = findGpsDevice()
+		// Remove gps and motordrive services
+		while (gpsServices.count > 0) {
+			MockManager.removeValue(gpsServices.uidAt(gpsServices.count - 1))
 		}
-		if (!motorDriveDevice) {
-			motorDriveDevice = findMotorDriveDevice()
+		while (motorDriveServices.count > 0) {
+			MockManager.removeValue(motorDriveServices.uidAt(motorDriveServices.count - 1))
 		}
 
-		Global.allDevicesModel.gpsDevices.clear()
-		Global.allDevicesModel.motorDriveDevices.clear()
-
+		// Add new services if needed
+		let deviceInstance
+		let serviceUid
 		if (config.gps) {
-			Global.allDevicesModel.gpsDevices.addDevice(gpsDevice)
-			MockManager.setValue(Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit", config.gps.speedUnit)
+			deviceInstance = mockDeviceCount++
+			serviceUid = "mock/com.victronenergy.gps.mock_%1".arg(deviceInstance)
+			MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
+			MockManager.setValue(serviceUid + "/ProductName", "GPS %1".arg(deviceInstance))
+			MockManager.setValue(serviceUid + "/Speed", 100)
+			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit", config.gps.speedUnit)
 		}
 		if (config.motorDrive) {
-			Global.allDevicesModel.motorDriveDevices.addDevice(motorDriveDevice)
+			deviceInstance = mockDeviceCount++
+			serviceUid = "mock/com.victronenergy.motordrive.mock_%1".arg(deviceInstance)
+			MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
+			MockManager.setValue(serviceUid + "/ProductName", "Motor drive %1".arg(deviceInstance))
+			MockManager.setValue(serviceUid + "/Motor/Direction", Math.floor(Math.random() * 3))
+			MockManager.setValue(serviceUid + "/Motor/RPM", Math.random() * MockManager.value(Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max"))
+			MockManager.setValue(serviceUid + "/Motor/Temperature", Math.random() * 100)
+			MockManager.setValue(serviceUid + "/Coolant/Temperature", Math.random() * 100)
+			MockManager.setValue(serviceUid + "/Controller/Temperature", Math.random() * 100)
+			const current = 50 + (Math.random() * 10)
+			const voltage = 50 + (Math.random() * 10)
+			MockManager.setValue(serviceUid + "/Dc/0/Power", current * voltage)
+			MockManager.setValue(serviceUid + "/Dc/0/Current", current)
+			MockManager.setValue(serviceUid + "/Dc/0/Voltage", voltage)
+			MockManager.setValue(serviceUid + "/Dc/0/Temperature", Math.random() * 100)
 		}
 
 		return config.name
 	}
 
-	function findGpsDevice() {
-		if (Global.allDevicesModel.gpsDevices.count === 0) {
-			const deviceInstance = mockDeviceCount++
-			const serviceUid = "mock/com.victronenergy.gps.mock_%1".arg(deviceInstance)
-			MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
-			MockManager.setValue(serviceUid + "/ProductName", "GPS %1".arg(deviceInstance))
-		}
-		return Global.allDevicesModel.gpsDevices.firstObject
-	}
-
-	function findMotorDriveDevice() {
-		if (Global.allDevicesModel.motorDriveDevices.count === 0) {
-			const deviceInstance = mockDeviceCount++
-			const serviceUid = "mock/com.victronenergy.motordrive.mock_%1".arg(deviceInstance)
-			MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
-			MockManager.setValue(serviceUid + "/ProductName", "Motor drive %1".arg(deviceInstance))
-			MockManager.setValue(serviceUid + "/Motor/RPM", Math.random() * MockManager.value(Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max"))
-		}
-		return Global.allDevicesModel.motorDriveDevices.firstObject
-	}
-
 	objectName: "BoatPageConfig"
+
+	FilteredServiceModel {
+		id: gpsServices
+		serviceTypes: ["gps"]
+	}
+
+	FilteredServiceModel {
+		id: motorDriveServices
+		serviceTypes: ["motordrive"]
+	}
 }

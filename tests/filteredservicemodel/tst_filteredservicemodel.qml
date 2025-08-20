@@ -77,6 +77,9 @@ TestCase {
 		let deviceInstanceCount
 		let i
 
+		compare(model.count, 0)
+		compare(model.firstUid, "")
+
 		// Set filter, then add services and verify model is correct.
 		model.serviceTypes = data.serviceTypes ?? []
 		for (uid of data.uids) {
@@ -86,12 +89,14 @@ TestCase {
 		for (i = 0 ; i < data.expectedUids.length; ++i) {
 			compare(model.data(model.index(i, 0), AllServicesModel.UidRole), data.expectedUids[i])
 		}
+		compare(model.firstUid, data.expectedUids[0])
 
 		// Remove services
 		for (uid of data.uids) {
 			MockManager.removeValue(uid)
 		}
 		compare(model.count, 0)
+		compare(model.firstUid, "")
 
 		// Add services, without a filter set...
 		model.serviceTypes = []
@@ -102,6 +107,7 @@ TestCase {
 		for (i = 0 ; i < data.uids.length; ++i) {
 			compare(model.data(model.index(i, 0), AllServicesModel.UidRole), data.uids[i])
 		}
+		compare(model.firstUid, data.uids[0])
 
 		// ...then set filter and check model is updated
 		model.serviceTypes = data.serviceTypes ?? []
@@ -109,11 +115,13 @@ TestCase {
 		for (i = 0 ; i < data.expectedUids.length; ++i) {
 			compare(model.data(model.index(i, 0), AllServicesModel.UidRole), data.expectedUids[i])
 		}
+		compare(model.firstUid, data.expectedUids[0])
 
 		// Remove services
 		for (uid of data.uids) {
 			MockManager.removeValue(uid)
 		}
 		compare(model.count, 0)
+		compare(model.firstUid, "")
 	}
 }
