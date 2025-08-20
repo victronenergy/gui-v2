@@ -10,7 +10,6 @@ ListQuantityGroupNavigation {
 	id: root
 
 	property BaseDevice device
-	property BaseDeviceModel sourceModel
 
 	text: device.name
 }

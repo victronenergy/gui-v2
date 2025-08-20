@@ -16,7 +16,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/AcPhasesCurrentRange.qml
     components/AcInputDirectionIcon.qml
     components/AcMeterModel.qml
-    components/AllDevicesModel.qml
     components/AcOutput.qml
     components/AcPhase.qml
     components/Arc.qml
@@ -553,6 +552,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 )
 
 list(APPEND VictronVenusOS_CPP_SOURCES
+    src/alldevicesmodel.h
+    src/alldevicesmodel.cpp
     src/allservicesmodel.h
     src/allservicesmodel.cpp
     src/aggregatedevicemodel.h
@@ -575,6 +576,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/device.cpp
     src/filteredservicemodel.h
     src/filteredservicemodel.cpp
+    src/runtimedevicemodel.h
+    src/runtimedevicemodel.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h

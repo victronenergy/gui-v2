@@ -14,7 +14,6 @@ QtObject {
 	property var mainView
 	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
-	property var allDevicesModel
 	property bool applicationActive: true
 	property bool keyNavigationEnabled
 
@@ -82,7 +81,6 @@ QtObject {
 		mainView = null
 		dataServiceModel = null
 		firmwareUpdate = null
-		allDevicesModel = null
 		dialogLayer = null
 		notificationLayer = null
 
