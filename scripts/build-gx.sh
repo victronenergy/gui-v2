@@ -89,8 +89,7 @@ cd "build-gx"
 # Configure the project with CMake, setting the build type to MinSizeRel (minimum size release)
 cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
-# Build the project using CMake with the MinSizeRel configuration
-cmake --build . -j8
+cmake --build . --parallel $(nproc)
 cmake --install .
 
 if [ $? -ne 0 ]; then

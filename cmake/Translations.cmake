@@ -100,8 +100,3 @@ foreach(TsCode IN ITEMS ${TS_CODES})
     )
 endforeach()
 
-add_custom_target(
-    qm_files_exist
-    DEPENDS ${BUILD_DIR_QM_FILES}
-)
-
