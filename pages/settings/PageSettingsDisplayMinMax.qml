@@ -46,6 +46,9 @@ Page {
 							noAcInMaxOutCurrent.dataItem.setValue(0)
 							dcOutMaxPower.dataItem.setValue(0)
 							pvMaxPower.dataItem.setValue(0)
+							motorDriveMaxPower.dataItem.setValue(0)
+							maxSpeed.dataItem.setValue(0)
+							motorDriveMaxRpm.dataItem.setValue(0)
 						}
 					}
 				}
@@ -184,12 +187,14 @@ Page {
 			}
 
 			ListQuantityField {
+				id: motorDriveMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
 				unit: VenusOS.Units_Watt
 			}
 
 			ListQuantityField {
+				id: maxSpeed
 				//% "Max Speed"
 				text: qsTrId("settings_minmax_max_speed")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
@@ -200,6 +205,7 @@ Page {
 			}
 
 			ListQuantityField {
+				id: motorDriveMaxRpm
 				//% "Max RPM"
 				text: qsTrId("settings_minmax_max_rpm")
 				unit: VenusOS.Units_RevolutionsPerMinute

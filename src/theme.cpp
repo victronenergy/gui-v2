@@ -7,13 +7,13 @@
 
 using namespace Victron::VenusOS;
 
+// Global pointer to current theme instance
+static Victron::VenusOS::Theme *g_themeInstance = nullptr;
+
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten.h>
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
-
-// Global pointer to current theme instance
-static Victron::VenusOS::Theme *g_themeInstance = nullptr;
 
 EM_JS(int, getScreenWidth, (), {
 	return Math.min(screen.width, screen.height);
@@ -39,6 +39,11 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	setSystemColorScheme(isSystemSchemeDark ? Victron::VenusOS::Theme::SystemColorSchemeDark
 								: Victron::VenusOS::Theme::SystemColorSchemeLight);
 
+	// Sets the initial color to the same as the HTML loading screen until the right setting is available and applied
+	// This prevents changing color scheme too often during startup
+	setColorScheme(isSystemSchemeDark ? Victron::VenusOS::Theme::Dark
+								: Victron::VenusOS::Theme::Light);
+
 	// Register JavaScript listener for dynamic updates
 	mql.call<void>("addEventListener", std::string("change"), emscripten::val::module_property("jsSystemColorSchemeChanged"));
 #else
@@ -49,6 +54,11 @@ Theme::Theme(QObject *parent) : QObject(parent)
 		? Victron::VenusOS::Theme::SevenInch
 		: Victron::VenusOS::Theme::FiveInch);
 #endif
+}
+
+Theme *Theme::instance()
+{
+	return g_themeInstance;
 }
 
 Victron::VenusOS::Theme::ScreenSize Theme::screenSize() const
@@ -90,6 +100,30 @@ void Theme::setSystemColorScheme(Victron::VenusOS::Theme::SystemColorScheme syst
 		m_systemColorScheme = systemScheme;
 		Q_EMIT systemColorSchemeChanged(systemScheme);
 		Q_EMIT systemColorSchemeChanged_parameterless(); // work around moc limitation.
+	}
+}
+
+Victron::VenusOS::Theme::ForcedColorScheme Theme::forcedColorScheme() const
+{
+	return m_forcedColorScheme;
+}
+
+void Theme::setForcedColorScheme(Victron::VenusOS::Theme::ForcedColorScheme forcedScheme)
+{
+	if (m_forcedColorScheme != forcedScheme) {
+		m_forcedColorScheme = forcedScheme;
+		Q_EMIT forcedColorSchemeChanged(forcedScheme);
+
+		if (forcedScheme == Victron::VenusOS::Theme::ForcedColorSchemeDark) {
+			setColorScheme(Victron::VenusOS::Theme::Dark);
+		} else if (forcedScheme == Victron::VenusOS::Theme::ForcedColorSchemeLight) {
+			setColorScheme(Victron::VenusOS::Theme::Light);
+		} else if (forcedScheme == Victron::VenusOS::Theme::ForcedColorSchemeAuto) {
+			// Auto mode: use system color scheme
+			setColorScheme(m_systemColorScheme == Victron::VenusOS::Theme::SystemColorSchemeDark
+				? Victron::VenusOS::Theme::Dark
+				: Victron::VenusOS::Theme::Light);
+		}
 	}
 }
 

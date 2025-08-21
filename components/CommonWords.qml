@@ -171,6 +171,9 @@ QtObject {
 	//% "Disconnected"
 	readonly property string disconnected: qsTrId("common_words_disconnected")
 
+	//% "Discovered devices"
+	readonly property string discovered_devices: qsTrId("common_words_discovered_devices")
+
 	//% "Enable"
 	readonly property string enable: qsTrId("common_words_enable")
 
@@ -401,6 +404,9 @@ QtObject {
 	//% "Position"
 	readonly property string position_ac: qsTrId("common_words_position_ac")
 
+	//% "Press"
+	readonly property string press: qsTrId("common_words_press")
+
 	//% "Press to clear"
 	readonly property string press_to_clear: qsTrId("common_words_press_to_clear")
 
@@ -515,6 +521,9 @@ QtObject {
 
 	//% "Total"
 	readonly property string total: qsTrId("common_words_total")
+
+	//% "Total power"
+	readonly property string total_power: qsTrId("common_words_total_power")
 
 	//: Solar tracker
 	//% "Tracker"

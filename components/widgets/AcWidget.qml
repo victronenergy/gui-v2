@@ -58,7 +58,9 @@ OverviewWidget {
 				when: root.size === VenusOS.OverviewWidget_Size_S
 				PropertyChanges {
 					target: root.quantityLabel
-					font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_smallSizeWithExtraContent
+					font.pixelSize: extraContentLoader.status === Loader.Ready
+						? Theme.font_overviewPage_widget_quantityLabel_smallSizeWithExtraContent // allow space for 3-phase metrics
+						: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 				}
 				PropertyChanges {
 					target: extraContentLoader

@@ -91,7 +91,7 @@ QtObject {
 			+ rawWaterTanks.count
 
 	readonly property Instantiator _tankObjects: Instantiator {
-		model: ServiceModel { serviceTypes: ["tank"] }
+		model: FilteredServiceModel { serviceTypes: ["tank"] }
 		delegate: Tank {
 			id: tank
 			required property string uid
@@ -106,7 +106,7 @@ QtObject {
 					if (_tankModel) {
 						_tankModel.removeDevice(tank.serviceUid)
 					}
-					_tankModel = Global.tanks.tankModel(type)
+					_tankModel = root.tankModel(type)
 					_tankModel.addDevice(tank)
 				} else {
 					if (_tankModel) {
@@ -126,7 +126,12 @@ QtObject {
 			Qt.callLater(tankObject.updateModel)
 		}
 		onObjectRemoved: (index, tankObject) => {
-			tankObject.canUpdate = false
+			if (tankObject) {
+				tankObject.canUpdate = false
+				if (tankObject._tankModel) {
+					tankObject._tankModel.removeDevice(tankObject.serviceUid)
+				}
+			}
 		}
 	}
 

@@ -6,26 +6,21 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for an unsupported device.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
 
-	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				//% "Unsupported device found"
-				text: qsTrId("devicelist_unsupporteddevices_found")
-				dataItem.uid: root.bindPrefix + "/Reason"
-			}
+	serviceUid: bindPrefix
 
-			ListNavigation {
-				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
-			}
+	settingsModel: VisibleItemModel {
+		ListText {
+			//% "Unsupported device found"
+			text: qsTrId("devicelist_unsupporteddevices_found")
+			dataItem.uid: root.bindPrefix + "/Reason"
 		}
 	}
 }

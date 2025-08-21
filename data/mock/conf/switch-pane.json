@@ -1,0 +1,12 @@
+{
+    "files": [
+        ":/data/mock/conf/services/switch-controls-tester.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.settings": {
+        },
+        "com.victronenergy.system": {
+        }
+    }
+}

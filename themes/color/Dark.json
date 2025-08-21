@@ -37,6 +37,8 @@
     "color_button_down_text": "color_white",
     "color_button_icon": "color_gray4",
     "color_button_icon_down": "color_gray5",
+    "color_button_on_background": "color_ok",
+    "color_button_off_background": "color_dimBlue",
 
     "color_card_separator": "color_gray2",
 
@@ -56,7 +58,10 @@
 
     "color_scrollBar_bar": "color_gray2",
 
-    "color_splash_logo": "color_white",
+    "color_slider_separator": "#C3D8EE",
+
+    "color_splash_logo_icon": "color_white",
+    "color_splash_logo_text": "color_white",
 
     "color_switch_groove_disabled": "color_gray4",
     "color_switch_groove_off": "transparent",

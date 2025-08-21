@@ -16,5 +16,4 @@ EditFrame {
 	height: handle.height
 	y: -Theme.geometry_switch_indicator_shadowOffset
 	rotation: 90
-	arrowHintsVisible: true
 }

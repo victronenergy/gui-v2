@@ -6,7 +6,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for a gps device.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
@@ -34,102 +37,87 @@ Page {
 		}
 	}
 
-	title: device.name
+	serviceUid: bindPrefix
 
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
-
-	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				text: CommonWords.status
-				secondaryText: {
-					if (connected.valid && connected.value) {
-						if (fix.valid && fix.value) {
-							//% "GPS OK (fix)"
-							return qsTrId("settings_gps_ok_fix")
-						}
-						//% "GPS connected, but no GPS fix"
-						return qsTrId("settings_gps_ok_no_fix")
+	settingsModel: VisibleItemModel {
+		ListText {
+			text: CommonWords.status
+			secondaryText: {
+				if (connected.valid && connected.value) {
+					if (fix.valid && fix.value) {
+						//% "GPS OK (fix)"
+						return qsTrId("settings_gps_ok_fix")
 					}
-					//% "No GPS connected"
-					return qsTrId("settings_gps_not_connected")
+					//% "GPS connected, but no GPS fix"
+					return qsTrId("settings_gps_ok_no_fix")
+				}
+				//% "No GPS connected"
+				return qsTrId("settings_gps_not_connected")
+			}
+		}
+
+		ListText {
+			//% "Latitude"
+			text: qsTrId("settings_gps_latitude")
+			dataItem.uid: bindPrefix + "/Position/Latitude"
+			secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
+		}
+
+		ListText {
+			//% "Longitude"
+			text: qsTrId("settings_gps_longitude")
+			dataItem.uid: bindPrefix + "/Position/Longitude"
+			secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
+		}
+
+		ListText {
+			text: CommonWords.speed
+			dataItem.uid: bindPrefix + "/Speed"
+			secondaryText: {
+				if (!dataItem.valid) {
+					return "--"
+				}
+				if (speedUnit.value === "km/h") {
+					//: GPS speed data, in kilometres per hour
+					//% "%1 km/h"
+					return qsTrId("settings_gps_speed_kmh").arg(Units.formatNumber(dataItem.value * 3.6, 1))
+				} else if (speedUnit.value === "mph") {
+					//: GPS speed data, in miles per hour
+					//% "%1 mph"
+					return qsTrId("settings_gps_speed_mph").arg(Units.formatNumber(dataItem.value * 2.236936, 1))
+				} else if (speedUnit.value === "kt") {
+					//: GPS speed data, in knots
+					//% "%1 kt"
+					return qsTrId("settings_gps_speed_kt").arg(Units.formatNumber(dataItem.value * (3600/1852), 1))
+				} else {
+					//: GPS speed data, in metres per second
+					//% "%1 m/s"
+					return qsTrId("settings_gps_speed_ms").arg(Units.formatNumber(dataItem.value, 2))
 				}
 			}
+		}
 
-			ListText {
-				//% "Latitude"
-				text: qsTrId("settings_gps_latitude")
-				dataItem.uid: bindPrefix + "/Position/Latitude"
-				secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
-			}
+		ListQuantity {
+			//% "Course"
+			text: qsTrId("settings_gps_course")
+			dataItem.uid: bindPrefix + "/Course"
+			preferredVisible: dataItem.valid
+			unit: VenusOS.Units_CardinalDirection
+		}
 
-			ListText {
-				//% "Longitude"
-				text: qsTrId("settings_gps_longitude")
-				dataItem.uid: bindPrefix + "/Position/Longitude"
-				secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
-			}
+		ListQuantity {
+			//% "Altitude"
+			text: qsTrId("settings_gps_altitude")
+			dataItem.uid: root.bindPrefix + "/Altitude"
+			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Metre)
+			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
+			unit: Global.systemSettings.altitudeUnit
+		}
 
-			ListText {
-				text: CommonWords.speed
-				dataItem.uid: bindPrefix + "/Speed"
-				secondaryText: {
-					if (!dataItem.valid) {
-						return "--"
-					}
-					if (speedUnit.value === "km/h") {
-						//: GPS speed data, in kilometres per hour
-						//% "%1 km/h"
-						return qsTrId("settings_gps_speed_kmh").arg(Units.formatNumber(dataItem.value * 3.6, 1))
-					} else if (speedUnit.value === "mph") {
-						//: GPS speed data, in miles per hour
-						//% "%1 mph"
-						return qsTrId("settings_gps_speed_mph").arg(Units.formatNumber(dataItem.value * 2.236936, 1))
-					} else if (speedUnit.value === "kt") {
-						//: GPS speed data, in knots
-						//% "%1 kt"
-						return qsTrId("settings_gps_speed_kt").arg(Units.formatNumber(dataItem.value * (3600/1852), 1))
-					} else {
-						//: GPS speed data, in metres per second
-						//% "%1 m/s"
-						return qsTrId("settings_gps_speed_ms").arg(Units.formatNumber(dataItem.value, 2))
-					}
-				}
-			}
-
-			ListQuantity {
-				//% "Course"
-				text: qsTrId("settings_gps_course")
-				dataItem.uid: bindPrefix + "/Course"
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_CardinalDirection
-			}
-
-			ListQuantity {
-				//% "Altitude"
-				text: qsTrId("settings_gps_altitude")
-				dataItem.uid: root.bindPrefix + "/Altitude"
-				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Metre)
-				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
-				unit: Global.systemSettings.altitudeUnit
-			}
-
-			ListText {
-				//% "Number of satellites"
-				text: qsTrId("settings_gps_num_satellites")
-				dataItem.uid: bindPrefix + "/NrOfSatellites"
-			}
-
-			ListNavigation {
-				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
-			}
+		ListText {
+			//% "Number of satellites"
+			text: qsTrId("settings_gps_num_satellites")
+			dataItem.uid: bindPrefix + "/NrOfSatellites"
 		}
 	}
 

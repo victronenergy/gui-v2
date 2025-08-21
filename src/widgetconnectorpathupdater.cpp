@@ -52,7 +52,7 @@ void WidgetConnectorPathUpdater::update() const {
 		};
 
 		// Evenly space out the progress of each electron
-		qreal _progress = modulo(progress - ((1.0 / electrons.count()) * i), 1.0);
+		const qreal _progress = modulo((qIsNaN(progress) ? 0.0 : progress) - ((1.0 / electrons.count()) * i), 1.0);
 
 		qreal angle = 0;
 		const QPointF position = path->sequentialPointAt(_progress, &angle);
@@ -65,9 +65,21 @@ void WidgetConnectorPathUpdater::update() const {
 		// The rotation expects clock-wise angle
 		electron->setRotation(startToEnd ? 360.0 - angle : 180 - angle);
 
-		qreal normalizedProgress = startToEnd ? _progress : (1.0 - _progress);
+		const qreal normalizedProgress = startToEnd ? _progress : (1.0 - _progress);
 
 		// Set opacity using setProperty() to make sure the behavior animation plays
 		electron->setProperty("opacity", normalizedProgress > fadeOutThreshold ? 0 : 1);
 	}
+}
+
+qreal WidgetConnectorPathUpdater::angleForArrow(qreal progress, bool startToEnd)
+{
+	if (!path) {
+		qmlDebug(this) << "Cannot animate electrons without a specified path";
+		return qQNaN();
+	}
+
+	qreal angle = 0;
+	const QPointF position = path->sequentialPointAt(progress, &angle);
+	return startToEnd ? 360.0 - angle : 180 - angle;
 }

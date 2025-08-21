@@ -5,8 +5,9 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.VenusOS.Shaders
 
-ShaderEffect {
+BasePressEffect {
 	id: shaderEffect
 
 	function start(x, y) {
@@ -25,16 +26,10 @@ ShaderEffect {
 	}
 
 	property bool _stopPending
-	property real radius
-	property real progress
-	property point touchPos
-	property real aspectRatio: height > 0 ? width/height : 1.0
-	property real radiusRatio: height > 0 ? root.radius/height : 0.0
-	property color color: Qt.rgba(Theme.color_font_primary.r, Theme.color_font_primary.g, Theme.color_font_primary.b, 0.1)
 
-	opacity: 0.0
 	anchors.fill: parent
-	fragmentShader:  "qrc:/components/controls/presseffect.frag.qsb"
+	color: Qt.rgba(Theme.color_font_primary.r, Theme.color_font_primary.g, Theme.color_font_primary.b, 0.1)
+	opacity: 0.0
 
 	ParallelAnimation {
 		id: pressEffect

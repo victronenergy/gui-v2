@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
 import Victron.VenusOS
 
 // Allows VRM instances to be changed for devices on the system.
@@ -336,7 +335,7 @@ Page {
 
 				if (BackendConnection.type === BackendConnection.DBusSource) {
 					// Reboot takes a while to execute, so prevent any user activity until that happens.
-					closePolicy = C.Popup.NoAutoClose
+					closePolicy = Popup.NoAutoClose
 					footer.enabled = false
 					footer.opacity = 0
 				}

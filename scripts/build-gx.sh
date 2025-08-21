@@ -6,11 +6,12 @@
 # https://github.com/victronenergy/gui-v2/wiki/How-to-build-venus-gui-v2
 
 
-# Check if the script is run on Ubuntu 24.x or later
-if [[ "$(lsb_release -is)" == "Ubuntu" && "$(lsb_release -rs)" =~ ^24 ]]; then
-    echo "Running on Ubuntu 24.x or later"
+# Check if the script is run on Ubuntu 22.x or later
+UBUNTU_VERSION=$(lsb_release -rs | cut -d. -f1)
+if [[ "$(lsb_release -is)" == "Ubuntu" && "$UBUNTU_VERSION" -ge 22 ]]; then
+    echo "Running on Ubuntu $(lsb_release -rs | cut -f1)"
 else
-    echo "This script requires Ubuntu 24.x or later"
+    echo "This script requires Ubuntu 22.x or later"
     exit 1
 fi
 
@@ -88,8 +89,8 @@ cd "build-gx"
 # Configure the project with CMake, setting the build type to MinSizeRel (minimum size release)
 cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
-# Build the project using CMake with the MinSizeRel configuration
-cmake --build . --config MinSizeRel --parallel $(nproc)
+cmake --build . --parallel $(nproc)
+cmake --install .
 
 if [ $? -ne 0 ]; then
     echo
@@ -111,10 +112,7 @@ if [ "${PWD##*/}" = "build-gx" ]; then
     mkdir ../build-gx_files_to_copy
 
     # Copy the files to the output directory
-    cp venus-gui-v2/Main.qml ../build-gx_files_to_copy
-    cp venus-gui-v2/qmldir ../build-gx_files_to_copy
-    cp bin/venus-gui-v2 ../build-gx_files_to_copy
-    cp -r Victron ../build-gx_files_to_copy
+    cp -r install/bin/* ../build-gx_files_to_copy
 else
     echo "Current directory is not build-gx. Aborting to avoid unwanted deleting of files."
 fi
@@ -140,9 +138,19 @@ if [[ -n "${HOST_LIST}" ]]; then
     # Loop through each host
     for HOST in "${HOSTS[@]}"; do
 
+        # Test if port 22 is open
+        echo -n "Testing if port 22 is reachable on ${HOST}... "
+        if nc -z -w 5 "${HOST}" 22; then
+            echo -e "\e[32mOK.\e[0m"
+        else
+            echo -e "\e[31mPort 22 is not reachable on ${HOST}. Please check the IP address and network connection.\e[0m"
+            # Skip to the next host
+            continue
+        fi
+
         # Test SSH connection
         echo "Testing SSH connection to ${HOST}..."
-        ssh -o BatchMode=yes -o ConnectTimeout=5 root@${HOST} "exit" 2>/dev/null
+        ssh -o BatchMode=yes -o ConnectTimeout=5 root@${HOST} "exit"
 
         if [ $? -ne 0 ]; then
             echo
@@ -153,7 +161,8 @@ if [[ -n "${HOST_LIST}" ]]; then
             ssh-copy-id root@${HOST}
             if [ $? -ne 0 ]; then
                 echo -e "\e[31mFailed to upload SSH key. Please check your password and try again.\e[0m"
-                exit 1
+                # Skip to the next host
+                continue
             fi
             echo
             echo -e "\e[32mSSH key uploaded successfully.\e[0m"
@@ -183,7 +192,8 @@ if [[ -n "${HOST_LIST}" ]]; then
             echo "GX device disk space:"
             ssh root@${HOST} "df -h | head -n 2"
             echo
-            exit 1
+            # Skip to the next host
+            continue
         fi
         echo -e "\e[32mFiles uploaded successfully.\e[0m"
         echo

@@ -9,6 +9,24 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	function notifyRelayFunctionChange(relayFunction) {
+		switch (relayFunction) {
+		case VenusOS.Relay_Function_GeneratorStartStop:
+			//% "The Genset can now be found in the devices list"
+			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_genset_can_now_be_found"), 5000)
+			break
+		case VenusOS.Relay_Function_Tank_Pump:
+			//% "The Tank Pump can now be found in the devices list"
+			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_tank_pump_can_now_be_found"), 5000)
+			break
+		case VenusOS.Relay_Function_Manual:
+			//% "The Relay can now be found in the devices list"
+			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_manual_can_now_be_found"), 5000)
+			break
+		default:
+			break
+		}
+	}
 
 	SwitchableOutputModel {
 		id: systemRelayModel
@@ -45,22 +63,7 @@ Page {
 					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
 				]
 				onOptionClicked: function(index) {
-					switch (optionModel[index].value) {
-					case VenusOS.Relay_Function_GeneratorStartStop:
-						//% "The Genset can now be found in the devices list"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_genset_can_now_be_found"), 5000)
-						break
-					case VenusOS.Relay_Function_Tank_Pump:
-						//% "The Tank Pump can now be found in the devices list"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_tank_pump_can_now_be_found"), 5000)
-						break
-					case VenusOS.Relay_Function_Manual:
-						//% "The Relay can now be found in the devices list"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_manual_can_now_be_found"), 5000)
-						break
-					default:
-						break
-					}
+					root.notifyRelayFunctionChange(optionModel[index].value)
 				}
 			}
 
@@ -91,6 +94,9 @@ Page {
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
 					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
 				]
+				onOptionClicked: function(index) {
+					root.notifyRelayFunctionChange(optionModel[index].value)
+				}
 			}
 
 			ListNavigation {

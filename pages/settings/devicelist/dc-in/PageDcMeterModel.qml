@@ -22,7 +22,7 @@ VisibleItemModel {
 	}
 
 	ListDcOutputQuantityGroup {
-		text: VenusOS.dcInput_typeToText(Global.dcInputs.inputType(root.bindPrefix, monitorMode.value))
+		text: VenusOS.dcMeter_typeToText(VenusOS.dcMeter_type(BackendConnection.serviceTypeFromUid(root.bindPrefix), monitorMode.value))
 		bindPrefix: root.bindPrefix
 	}
 
@@ -62,14 +62,6 @@ VisibleItemModel {
 		preferredVisible: !isSssDcEnergyMeter
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeterHistory.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
-		}
-	}
-
-	ListNavigation {
-		text: CommonWords.device_info_title
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
 					{ "title": text, "bindPrefix": root.bindPrefix })
 		}
 	}

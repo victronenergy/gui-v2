@@ -6,7 +6,10 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for a genset or dcgenset device.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
@@ -19,12 +22,8 @@ Page {
 		}
 	}
 
-	title: device.name
-
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
+	serviceUid: bindPrefix
+	settingsModel: modelLoader.item
 
 	VeQuickItem {
 		id: productIdDataItem
@@ -35,11 +34,6 @@ Page {
 				setPageModel()
 			}
 		}
-	}
-
-	GradientListView {
-		id: settingsListView
-		model: modelLoader.item
 	}
 
 	Loader {

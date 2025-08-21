@@ -77,13 +77,18 @@ Page {
 				id: relaysMenu
 				text: CommonWords.gx_device_relays
 				preferredVisible: systemRelayModel.count > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitchableOutputList.qml", {
-						serviceUid: Global.system.serviceUid,
-						switchableOutputModel: systemRelayModel,
-						showDeviceSettings: false,
-						title: text,
-					})
+				onClicked: Global.pageManager.pushPage(switchableOutputPageComponent)
+
+				Component {
+					id: switchableOutputPageComponent
+					Page {
+						title: CommonWords.gx_device_relays
+
+						GradientListView {
+							model: systemRelayModel
+							delegate: SwitchableOutputListDelegate {}
+						}
+					}
 				}
 
 				SwitchableOutputModel {

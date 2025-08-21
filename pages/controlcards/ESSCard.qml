@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import QtQuick.Controls as C
 import QtQuick.Controls.impl as CP
 
 ControlCard {
@@ -21,7 +20,7 @@ ControlCard {
 		}
 		width: parent.width
 
-		C.ButtonGroup {
+		ButtonGroup {
 			id: stateRadioButtonGroup
 		}
 
@@ -37,7 +36,7 @@ ControlCard {
 					text: modelData.display
 					flat: true
 					checked: Global.systemSettings.ess.state === modelData.value
-					C.ButtonGroup.group: stateRadioButtonGroup
+					ButtonGroup.group: stateRadioButtonGroup
 					onClicked: Global.systemSettings.ess.setState(modelData.value)
 				}
 

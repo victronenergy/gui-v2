@@ -6,41 +6,29 @@
 import QtQuick
 import Victron.VenusOS
 
-Page {
+/*
+	Provides a list of settings for a pulsemeter device.
+*/
+DevicePage {
 	id: root
 
 	property string bindPrefix
 
-	title: device.name
+	serviceUid: bindPrefix
 
-	Device {
-		id: device
-		serviceUid: root.bindPrefix
-	}
+	settingsModel: VisibleItemModel {
+		ListQuantity {
+			//% "Aggregate"
+			text: qsTrId("pulsecounter_aggregate")
+			dataItem.uid: bindPrefix + "/Aggregate"
+			unit: Global.systemSettings.volumeUnit
+		}
 
-	GradientListView {
-		model: VisibleItemModel {
-			ListQuantity {
-				//% "Aggregate"
-				text: qsTrId("pulsecounter_aggregate")
-				dataItem.uid: bindPrefix + "/Aggregate"
-				unit: Global.systemSettings.volumeUnit
-			}
-
-			ListNavigation {
-				text: CommonWords.setup
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
-				}
-			}
-
-			ListNavigation {
-				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
-				}
+		ListNavigation {
+			text: CommonWords.setup
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
+						{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
 			}
 		}
 	}

@@ -60,6 +60,16 @@ Page {
 				}
 			}
 
+			ListTextField {
+				//% "Access Point password"
+				text: qsTrId("settings_wifi_access_point_password")
+				//% "Enter password"
+				placeholderText: qsTrId("settings_wifi_access_point_enter_password")
+				writeAccessLevel: VenusOS.User_AccessType_User
+				preferredVisible: accessPoint.valid
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/AccessPointPassword"
+			}
+
 			SettingsListHeader {
 				//% "Wi-Fi networks"
 				text: qsTrId("settings_wifi_networks")

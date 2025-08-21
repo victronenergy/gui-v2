@@ -198,11 +198,13 @@ void BackendConnection::initDBusConnection(const QString &address)
 	QDBusConnection dbus = VeDbusConnection::getConnection();
 	if (!dbus.isConnected()) {
 		qWarning() << "D-Bus connection failed!";
+		emit producerChanged();
 		setState(Failed);
 		return;
 	}
 
 	dbusProducer->open(dbus);
+	emit producerChanged();
 
 	setState(VeDbusConnection::getConnection().isConnected());
 }
@@ -354,13 +356,14 @@ void BackendConnection::initMqttConnection(const QString &address)
 		mqttProducer->open(QHostAddress(address), 1883);
 	}
 #endif
+	emit producerChanged();
 }
 
 void BackendConnection::initMockConnection()
 {
 	VeQItemMockProducer *producer = new VeQItemMockProducer(VeQItems::getRoot(), "mock");
 	m_producer = producer;
-	producer->initialize();
+	emit producerChanged();
 	setState(true);
 }
 
@@ -374,6 +377,7 @@ void BackendConnection::setType(const SourceType type, const QString &address)
 	if (m_producer) {
 		m_producer->deleteLater();
 		m_producer = nullptr;
+		emit producerChanged();
 	}
 
 	switch (type) {
@@ -651,6 +655,11 @@ QUrl BackendConnection::demoImageFileName() const
 	return fileExists ? filePath : QUrl();
 }
 
+VeQItemProducer *BackendConnection::producer() const
+{
+	return m_producer;
+}
+
 QString BackendConnection::serviceUidForType(const QString &serviceType) const
 {
 	// Assumes the specified service has the equivalent of DeviceInstance = 0 on MQTT. That is,
@@ -761,21 +770,6 @@ QVariantMap BackendConnection::portableIdInfo(const QString &portableId) const
 	return map;
 }
 
-void BackendConnection::setMockValue(const QString &uid, const QVariant &value)
-{
-	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
-		producer->setValue(uid, value);
-	}
-}
-
-QVariant BackendConnection::mockValue(const QString &uid) const
-{
-	if (VeQItemMockProducer *producer = qobject_cast<VeQItemMockProducer *>(m_producer)) {
-		return producer->value(uid);
-	}
-	return QVariant();
-}
-
 BackendConnectionTester::BackendConnectionTester()
 {
 	mqttBackend.setType(Victron::VenusOS::BackendConnection::SourceType::MqttSource);
@@ -787,6 +781,40 @@ void BackendConnectionTester::qmlEngineAvailable(QQmlEngine *engine)
 	// Initialization requiring the QQmlEngine to be constructed
 	engine->rootContext()->setContextProperty("mqttBackend", &mqttBackend);
 	engine->rootContext()->setContextProperty("dbusBackend", &dbusBackend);
+}
+
+void BackendConnection::setNodeRedUrl(const QString &url)
+{
+	if (m_nodeRedUrl != url) {
+		m_nodeRedUrl = url;
+		emit nodeRedUrlChanged();
+	}
+}
+
+QString BackendConnection::nodeRedUrl() const
+{
+	if (m_nodeRedUrl.isEmpty()) {
+		return QStringLiteral("https://venus.local:1881");
+	} else {
+		return m_nodeRedUrl;
+	}
+}
+
+void BackendConnection::setSignalKUrl(const QString &url)
+{
+	if (m_signalKUrl != url) {
+		m_signalKUrl = url;
+		emit signalKUrlChanged();
+	}
+}
+
+QString BackendConnection::signalKUrl() const
+{
+	if (m_signalKUrl.isEmpty()) {
+		return QStringLiteral("https://venus.local:3000");
+	} else {
+		return m_signalKUrl;
+	}
 }
 
 }

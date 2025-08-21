@@ -9,7 +9,7 @@ import Victron.VenusOS
 DcDevice {
 	id: input
 
-	readonly property int inputType: Global.dcInputs.inputType(serviceUid, monitorMode)
+	readonly property int inputType: VenusOS.dcMeter_type(serviceType, monitorMode)
 	readonly property int monitorMode: _monitorMode.valid ? _monitorMode.value : -1
 
 	readonly property VeQuickItem _monitorMode: VeQuickItem {

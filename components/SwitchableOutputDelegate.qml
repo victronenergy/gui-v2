@@ -4,6 +4,7 @@
 */
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Templates as CT
 
 BaseListItem {
 	id: root
@@ -96,17 +97,45 @@ BaseListItem {
 		Loader {
 			id: switchWidgetLoader
 			anchors.horizontalCenter: parent.horizontalCenter
-			sourceComponent: output.type === VenusOS.SwitchableOutput_Type_Dimmable ? dimmingComponent
-					: output.type === VenusOS.SwitchableOutput_Type_Momentary ? momentaryComponent
-					: output.type === VenusOS.SwitchableOutput_Type_Toggle ? toggleComponent
-					: null
+			enabled: output.status !== VenusOS.SwitchableOutput_Status_Disabled
+			sourceComponent: {
+				switch (output.type) {
+				case VenusOS.SwitchableOutput_Type_Momentary:
+					return momentaryComponent
+				case VenusOS.SwitchableOutput_Type_Toggle:
+					return toggleComponent
+				case VenusOS.SwitchableOutput_Type_Dimmable:
+					return dimmingComponent
+				case VenusOS.SwitchableOutput_Type_TemperatureSetpoint:
+					return temperatureSetpointComponent
+				case VenusOS.SwitchableOutput_Type_SteppedSwitch:
+					return steppedSwitchComponent
+				case VenusOS.SwitchableOutput_Type_Dropdown:
+					return dropdownComponent
+				case VenusOS.SwitchableOutput_Type_BasicSlider:
+					return basicSliderComponent
+				case VenusOS.SwitchableOutput_Type_UnrangedSetpoint:
+					return unrangedSetpointComponent
+				case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
+					return threeStateSwitchComponent
+				default:
+					return null
+				}
+			}
 
-			// Instead of giving focus to the individual controls, handle the keys directly here.
-			// This is consistent with the Control Cards, which focus the overall delegates in each
-			// card, rather than the controls within the delegates.
-			// (The DimmingSlider is a special case; it needs to be focused individually to provide
-			// an "edit" mode, so that left/right keys will move the slider instead of navigating to
-			// the previous/next item in the grid.)
+			// For simple controls without internal arrow key handling (e.g. momentary/latching
+			// controls, which only respond to the space key), focus the overall control and just
+			// call handlePress() and handleRelease() to trigger its features. This is consistent
+			// with the Control Cards, which focus the overall delegates in each card, rather than
+			// the controls within the delegates.
+			//
+			// For controls that require internaly arrow key handling (e.g. a slider with left/right
+			// triggers to move the handle), they need to have an "edit" mode, where:
+			//  - the space key enters edit mode by setting focus=true on the control; while in this
+			//    mode, the control handles all key events.
+			//  - the return key exits edit mode by setting focus=false, thus returning focus to
+			//    the overall delegate, so that arrow keys can once again navigate to previous/next
+			//    items in the switch pane grid.
 			focus: true
 			Keys.onPressed: (event) => { event.accepted = !event.isAutoRepeat && item.handlePress !== undefined && item.handlePress(event.key) }
 			Keys.onReleased: (event) => { event.accepted = item.handleRelease !== undefined && item.handleRelease(event.key) }
@@ -145,9 +174,11 @@ BaseListItem {
 					return true
 				case Qt.Key_Up:
 				case Qt.Key_Down:
-					// Remove focus and reject event to allow key navigation to delegates above/below.
-					focus = false
-					return false
+					if (activeFocus) {
+						// Prevent key navigation to other grid delegates while in edit mode.
+						return true
+					}
+					break
 				}
 				return false
 			}
@@ -163,9 +194,10 @@ BaseListItem {
 			highlightColor: enabled
 				? (dimmingState.expectedValue === 1 ? Theme.color_ok : Theme.color_button_down)
 				: Theme.color_font_disabled
-			from: 1
-			to: 100
+			from: dimmingMin.valid ? dimmingMin.value : 0
+			to: dimmingMax.valid ? dimmingMax.value : 100
 			stepSize: 1
+			state: dimmingState.expectedValue
 
 			// On the MQTT backend, many consecutive changes can create a huge queue of backend
 			// changes. Avoid this by preventing changes until the backend is in sync.
@@ -198,10 +230,13 @@ BaseListItem {
 			}
 			KeyNavigationHighlight.active: slider.activeFocus
 
-			Label {
-				anchors.centerIn: parent
-				text: CommonWords.onOrOff(dimmingState.expectedValue)
-				font.pixelSize: Theme.font_size_body2
+			VeQuickItem {
+				id: dimmingMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: dimmingMin
+				uid: root.outputUid + "/Settings/DimmingMin"
 			}
 
 			SettingSync {
@@ -242,43 +277,49 @@ BaseListItem {
 	Component {
 		id: momentaryComponent
 
-		Button {
+		MomentaryButton {
 			id: momentaryButton
 
-			property bool spaceKeyPressed
-
-			function handlePress(key) { return _handleKey(key, 1) }
-			function handleRelease(key) { return _handleKey(key, 0) }
-			function _handleKey(key, newValue) {
+			function handlePress(key) {
 				if (key === Qt.Key_Space) {
-					spaceKeyPressed = newValue === 1
-					if (enabled) {
-						momentaryState.writeValue(newValue)
-						return true
+					// Write state=1 (on) if no other write is in progress.
+					if (!momentaryState.busy) {
+						momentaryState.writeValue(1)
 					}
+					return true
+				}
+				return false
+			}
+			function handleRelease(key) {
+				if (key === Qt.Key_Space) {
+					// If writing state=0 (off), then allow it even if a previous state=1 (on) write
+					// is in progress; the state=0 change will be queued on the backend.
+					if (!momentaryState.busy || momentaryState.expectedValue !== 0) {
+						momentaryState.writeValue(0)
+					}
+					return true
 				}
 				return false
 			}
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			font.pixelSize: Theme.font_size_body2
-			//% "Press"
-			text: qsTrId("switchable_output_press")
-			flat: false
 
 			// Disable if a write is in progress, unless expecting mouse/key release.
-			enabled: !momentaryState.busy || pressed || spaceKeyPressed
+			enabled: !momentaryState.busy || momentaryState.expectedValue === 1
+
+			// Show as checked, when pressing or backend indicates it is pressed
+			checked: momentaryState.expectedValue === 1
+				// Or when waiting for a release to be synced, else the button text flickers between
+				// "On" and "Pressed" on Wasm when there is a delay between release and sync.
+				|| momentaryState.busy
+
+			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
+			focusPolicy: Qt.NoFocus
 
 			onPressed: momentaryState.writeValue(1)
 			onReleased: momentaryState.writeValue(0)
 			onCanceled: momentaryState.writeValue(0)
-
-			// When UI is idle, update the button to reflect the backend state.
-			Binding {
-				when: !momentaryState.busy && !momentaryButton.pressed && !momentaryButton.spaceKeyPressed
-				momentaryButton.checked: momentaryState.backendValue === 1
-			}
 
 			SettingSync {
 				id: momentaryState
@@ -313,9 +354,14 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			fontPixelSize: Theme.font_size_body2
-			model: [{ "value": CommonWords.off }, { "value": CommonWords.on }]
+			fontPixelSize: Theme.font_size_body1
+			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
+				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
 			enabled: !toggleState.busy
+
+			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
+			focusPolicy: Qt.NoFocus
+
 			onButtonClicked: (buttonIndex) => {
 				activateIndex(buttonIndex)
 			}
@@ -328,5 +374,198 @@ BaseListItem {
 				Component.onCompleted: buttonRow.currentIndex = backendValue === 1 ? 1 : 0
 			}
 		}
+	}
+
+	// TODO remove this type when all controls are implemented.
+	component PlaceholderDelegate : Rectangle {
+		width: root._buttonWidth
+		height: Theme.geometry_switchableoutput_button_height
+		color: Theme.color_button_off_background
+
+		Label {
+			anchors.centerIn: parent
+			text: "Placeholder"
+		}
+	}
+
+	Component {
+		id: temperatureSetpointComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: steppedSwitchComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: dropdownComponent
+
+		ComboBox {
+			id: dropdown
+
+			function handlePress(key) {
+				// Enter edit mode (i.e. allow ComboBox to handle key events) when space is pressed.
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				default:
+					return false
+				}
+			}
+
+			width: root._buttonWidth
+			enabled: !dropdownSync.busy
+			onActivated: (index) => dropdownSync.writeValue(index)
+
+			// Process key events in edit mode.
+			Keys.onPressed: (event) => {
+				switch (event.key) {
+				case Qt.Key_Enter:
+				case Qt.Key_Return:
+					// Save highlighted index as the currentIndex, and exit edit mode.
+					if (highlightedIndex >= 0 && highlightedIndex < count) {
+						currentIndex = highlightedIndex
+						activated(highlightedIndex)
+					}
+					focus = false
+					event.accepted = true
+					return
+				case Qt.Key_Escape:
+					// Exit edit mode. If the popup was open, it will be closed without changing the
+					// current index.
+					focus = false
+					event.accepted = true
+					return
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+					// When in edit mode, prevent left/right from moving focus to another item in
+					// the grid view.
+					event.accepted = true
+					return
+				default:
+					break
+				}
+				event.accepted = false
+			}
+
+			SettingSync {
+				id: dropdownSync
+				backendValue: dropdownSelection.value
+				onUpdateToBackend: (value) => { dropdownSelection.setValue(Math.floor(value)) }
+				onBackendValueChanged: {
+					if (backendValue >= 0 && backendValue < dropdown.count) {
+						dropdown.currentIndex = Math.floor(backendValue)
+					}
+				}
+			}
+
+			VeQuickItem {
+				uid: root.outputUid + "/Settings/Labels"
+				onValueChanged: {
+					if (value === undefined) {
+						dropdown.model = []
+					} else {
+						let items = []
+						for (const key in value) {
+							items.push({ text: value[key] })
+						}
+						dropdown.model = items
+						dropdown.currentIndex = Math.floor(dropdownSync.backendValue)
+					}
+				}
+			}
+
+			// The /DimmingValue holds the selected dropdwon index.
+			VeQuickItem {
+				id: dropdownSelection
+				uid: root.outputUid + "/Dimming"
+			}
+		}
+	}
+
+	Component {
+		id: basicSliderComponent
+
+		PlaceholderDelegate {}
+	}
+
+	Component {
+		id: unrangedSetpointComponent
+
+		MiniSpinBox {
+			id: spinBox
+
+			function handlePress(key) {
+				// Enter edit mode when space is pressed.
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				default:
+					return false
+				}
+			}
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			enabled: !unrangedValueSync.busy
+			editable: !Global.isGxDevice // no room for VKB in the switch pane
+			suffix: unrangedUnit.value ?? ""
+			from: decimalConverter.intFrom
+			to: decimalConverter.intTo
+			stepSize: decimalConverter.intStepSize
+			value: decimalConverter.decimalToInt(unrangedValueSync.backendValue)
+			textFromValue: (value, locale) => decimalConverter.textFromValue(value)
+			valueFromText: (text, locale) => {
+				const v = decimalConverter.valueFromText(text)
+				return isNaN(v) ? decimalConverter.decimalToInt(unrangedValueSync.backendValue) : v
+			}
+			onValueModified: {
+				// Update the /Dimming value to the user-entered value.
+				unrangedValueSync.writeValue(decimalConverter.intToDecimal(value))
+			}
+
+			VeQuickItem {
+				id: unrangedMin
+				uid: root.outputUid + "/Settings/DimmingMin"
+			}
+			VeQuickItem {
+				id: unrangedMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: unrangedStepSize
+				uid: root.outputUid + "/Settings/StepSize"
+			}
+			VeQuickItem {
+				id: unrangedUnit
+				uid: root.outputUid + "/Settings/Unit"
+			}
+
+			SpinBoxDecimalConverter {
+				id: decimalConverter
+
+				decimals: 2
+				from: unrangedMin.valid ? unrangedMin.value : 0
+				to: unrangedMax.valid ? unrangedMax.value : 100
+				stepSize: unrangedStepSize.valid ? unrangedStepSize.value : 1
+			}
+
+			SettingSync {
+				id: unrangedValueSync
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+			}
+		}
+	}
+
+	Component {
+		id: threeStateSwitchComponent
+
+		PlaceholderDelegate {}
 	}
 }

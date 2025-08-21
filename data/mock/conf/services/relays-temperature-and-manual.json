@@ -1,0 +1,40 @@
+{
+    "com.victronenergy.system": {
+        "/Relay/0/State": 0,
+        "/Relay/1/State": 0,
+        "/SwitchableOutput/0/Name": "GX internal relay 1",
+        "/SwitchableOutput/0/Settings/CustomName": "",
+        "/SwitchableOutput/0/Settings/Function": 4,
+        "/SwitchableOutput/0/Settings/Group": "",
+        "/SwitchableOutput/0/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/0/Settings/Type": 1,
+        "/SwitchableOutput/0/Settings/ValidFunctions": 63,
+        "/SwitchableOutput/0/Settings/ValidTypes": 2,
+        "/SwitchableOutput/0/State": 0,
+        "/SwitchableOutput/0/Status": 0,
+        "/SwitchableOutput/1/Name": "GX internal relay 2",
+        "/SwitchableOutput/1/Settings/CustomName": "",
+        "/SwitchableOutput/1/Settings/Function": 2,
+        "/SwitchableOutput/1/Settings/Group": "",
+        "/SwitchableOutput/1/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/1/Settings/Type": 1,
+        "/SwitchableOutput/1/Settings/ValidFunctions": 20,
+        "/SwitchableOutput/1/Settings/ValidTypes": 2,
+        "/SwitchableOutput/1/State": 0,
+        "/SwitchableOutput/1/Status": 0
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Relay/0/CustomName": "",
+        "/Settings/Relay/0/Group": "",
+        "/Settings/Relay/0/InitialState": 0,
+        "/Settings/Relay/0/ShowUIControl": 1,
+        "/Settings/Relay/1/CustomName": "",
+        "/Settings/Relay/1/Function": 2,
+        "/Settings/Relay/1/Group": "",
+        "/Settings/Relay/1/InitialState": 0,
+        "/Settings/Relay/1/Polarity": 0,
+        "/Settings/Relay/1/ShowUIControl": 1,
+        "/Settings/Relay/Function": 4,
+        "/Settings/Relay/Polarity": 0
+    }
+}

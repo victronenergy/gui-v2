@@ -36,6 +36,11 @@ Page {
 	GradientListView {
 		model: serviceCount.value || 0
 
+		header: PrimaryListLabel {
+			//% "See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs."
+			text: qsTrId("settings_modbus_tcp_unit_id_note")
+		}
+
 		delegate: ListItem {
 			id: serviceDelegate
 

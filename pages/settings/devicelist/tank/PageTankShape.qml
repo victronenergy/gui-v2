@@ -20,7 +20,7 @@ Page {
 			: VenusOS.StatusBar_RightButton_None
 
 	Connections {
-		target: !!Global.pageManager ? Global.pageManager.statusBar : null
+		target: Global.mainView?.statusBar ?? null
 		enabled: root._canEditPoints && root.isCurrentPage
 
 		function onRightButtonClicked() {

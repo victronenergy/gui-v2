@@ -61,7 +61,7 @@ T.Dialog {
 		// Give the initial focus to this content item so that child UI controls will receive focus.
 		focus: true
 
-		KeyNavigation.down: root.footer
+		KeyNavigation.down: Global.keyNavigationEnabled ? root.footer : null
 		Keys.onReturnPressed: root.handleAccept()
 		Keys.onEnterPressed: root.handleAccept()
 		Keys.onEscapePressed: root.handleReject()
@@ -79,7 +79,7 @@ T.Dialog {
 	makes it scale properly when you shrink the window. See https://bugreports.qt.io/browse/QTBUG-127068
 	*/
 	width: Theme.geometry_modalDialog_width
-	height: Theme.geometry_modalDialog_height
+	height: Math.max(Theme.geometry_modalDialog_height, (header ? header.height : 0) + contentHeight + (footer ? footer.height : 0))
 	verticalPadding: 0
 	horizontalPadding: 0
 	modal: true

@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Window
-import QtQuick.Controls as QtQuickControls
 import Victron.VenusOS
 
 FocusScope {
@@ -15,15 +14,9 @@ FocusScope {
 
 	property var _inputComponent
 
-	PageManager {
-		id: pageManager
-		Component.onCompleted: Global.pageManager = pageManager
-	}
-
 	MainView {
 		id: mainView
 		anchors.fill: parent
-		pageManager: pageManager
 		focus: true
 		Component.onCompleted: Global.mainView = mainView
 	}
@@ -35,7 +28,7 @@ FocusScope {
 
 	ScreenBlanker {
 		id: screenBlanker
-		enabled: !Global.splashScreenVisible && !(!!Global.pageManager && Global.pageManager.statusBar.notificationButtonVisible)
+		enabled: !Global.splashScreenVisible && !mainView.statusBar.notificationButtonVisible
 		displayOffTime: displayOffItem.valid ? 1000*displayOffItem.value : 0.0
 		window: root.Window.window
 		property VeQuickItem displayOffItem: VeQuickItem {
@@ -84,7 +77,7 @@ FocusScope {
 
 			// Exit idle mode if needed, and consume the event so that this does not trigger a press
 			// event on the page in the process of exiting idle mode.
-			if (pageManager.ensureInteractive()) {
+			if (mainView.pageManager.ensureInteractive()) {
 				mouse.accepted = true
 			}
 
@@ -113,9 +106,9 @@ FocusScope {
 		// but we need to way to expose the "go to notifications page" functionality
 		// and the notifications layer is already part of the global object.
 		function popAndGoToNotifications() {
-			pageManager.popAllPages()
+			mainView.pageManager.popAllPages()
 			mainView.cardsActive = false
-			pageManager.navBar.setCurrentPage("NotificationsPage.qml")
+			mainView.navBar.setCurrentPage("NotificationsPage.qml")
 		}
 	}
 
@@ -135,10 +128,17 @@ FocusScope {
 		asynchronous: true
 		active: Global.isGxDevice
 			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
+
+		// Note that for gx builds, all references to 'qrc:/.../Thing.qml' are intercepted by
+		// UrlInterceptor and changed to '.../Thing.qml', i.e. they are loaded from the file
+		// system, not from the compiled resources. This allows customers to edit qml source code
+		// on the device without needing to build gui-v2 from source. This uses relative paths,
+		// i.e. it doesn't matter where gui-v2 is installed, customers can change gui-v2 behavior
+		// by editing qml.
 		source: Global.isGxDevice
 				? "qrc:/qt/qml/Victron/VenusOS/components/InputPanel.qml"
 				: "qrc:/qt/qml/Victron/VenusOS/components/WasmVirtualKeyboardHandler.qml"
-		parent: QtQuickControls.Overlay.overlay
+		parent: Overlay.overlay
 		z: 1
 	}
 
@@ -153,14 +153,14 @@ FocusScope {
 	KeyEventFilter {
 		// When the UI is inactive, consume key events so that they are not processed by the UI.
 		consumeKeyEvents: !Global.applicationActive
-			|| (pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
-				&& pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
+			|| (mainView.pageManager.interactivity !== VenusOS.PageManager_InteractionMode_Interactive
+				&& mainView.pageManager.interactivity !== VenusOS.PageManager_InteractionMode_ExitIdleMode)
 		window: root.Window.window
 
 		onKeyPressed: {
 			// When any key is pressed, bring the application out of inactive mode.
 			Global.main.ensureApplicationActive()
-			pageManager.ensureInteractive()
+			mainView.pageManager.ensureInteractive()
 		}
 	}
 }

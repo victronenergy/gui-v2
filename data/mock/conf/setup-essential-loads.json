@@ -1,0 +1,9 @@
+{
+    "com.victronenergy.settings": {
+        "/Settings/CGwacs/RunWithoutGridMeter": 0,
+        "/Settings/SystemSetup/HasAcOutSystem": 1
+    },
+    "com.victronenergy.system": {
+        "/Ac/Grid/DeviceType": 0
+    }
+}

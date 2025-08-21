@@ -7,6 +7,9 @@
 
     "geometry_icon_size_medium": 32,
 
+    "geometry_splashScreen_logo_width": 224,
+    "geometry_splashScreen_logo_height": 43,
+
     "geometry_flickable_maximumFlickVelocity": 2500,
     "geometry_flickable_flickDeceleration": 2500,
 
@@ -64,13 +67,16 @@
     "geometry_slider_groove_radius": 8,
 
     "geometry_dimmingSlider_height": 40,
-    "geometry_dimmingSlider_dot_size": 4,
+    "geometry_dimmingSlider_text_padding": 13,
+    "geometry_dimmingSlider_handle_width": 12,
+    "geometry_dimmingSlider_indicator_width": 4,
+    "geometry_dimmingSlider_separator_width": 2,
+    "geometry_dimmingSlider_decorator_vertical_padding": 6,
 
     "geometry_spinBox_indicator_minimumWidth": 64,
     "geometry_spinBox_indicator_maximumWidth": 136,
     "geometry_spinBox_indicator_height": 64,
     "geometry_spinBox_indicator_radius": 6,
-    "geometry_spinBox_spacing": "geometry_button_spacing",
 
     "geometry_switch_container_width": 48,
     "geometry_switch_container_height": 24,
@@ -421,6 +427,8 @@
 
     "geometry_batteryListPage_item_height": 84,
     "geometry_batteryListPage_item_verticalSpacing": 2,
+
+    "geometry_loadListPage_item_height": 68,
 
     "geometry_settings_battery_rangeSlider_labelWidth": 70,
 

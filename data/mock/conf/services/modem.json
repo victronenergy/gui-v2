@@ -1,0 +1,22 @@
+{
+    "com.victronenergy.modem": {
+        "/Connected": 1,
+        "/IMEI": "123456789",
+        "/IP": "1.2.3.4",
+        "/Model": "SIMCOM_SIM7600SA",
+        "/NetworkName": "Telstra",
+        "/NetworkType": "LTE",
+        "/RegStatus": 1,
+        "/Roaming": 1,
+        "/SignalStrength": 17,
+        "/SimStatus": 1000
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Modem/APN": "",
+        "/Settings/Modem/Connected": 1,
+        "/Settings/Modem/PIN": "1234",
+        "/Settings/Modem/Password": "tinyurl.com/msvnbd3r",
+        "/Settings/Modem/RoamingPermitted": 0,
+        "/Settings/Modem/User": "Rick"
+    }
+}

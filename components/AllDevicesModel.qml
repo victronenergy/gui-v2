@@ -74,12 +74,16 @@ AggregateDeviceModel {
 		modelId: "genset"
 	}
 
-	readonly property ServiceDeviceModel heatPumpInputDevices: HeatPumpModel {
+	readonly property ServiceDeviceModel heatPumpInputDevices: AcMeterModel {
 		position: VenusOS.AcPosition_AcInput
+		serviceTypes: ["heatpump"]
+		modelId: "heatpump-input"
 	}
 
-	readonly property ServiceDeviceModel heatPumpOutputDevices: HeatPumpModel {
+	readonly property ServiceDeviceModel heatPumpOutputDevices: AcMeterModel {
 		position: VenusOS.AcPosition_AcOutput
+		serviceTypes: ["heatpump"]
+		modelId: "heatpump-output"
 	}
 
 	readonly property ServiceDeviceModel meteoDevices: ServiceDeviceModel {

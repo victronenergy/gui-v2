@@ -18,7 +18,7 @@ DeviceModel {
 
 			required property string modelData
 
-			model: ServiceModel { serviceTypes: [modelData] }
+			model: FilteredServiceModel { serviceTypes: [modelData] }
 			delegate: SolarDevice {
 				id: solarDevice
 

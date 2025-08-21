@@ -4,8 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls as C
-import QtQuick.Controls.impl as CP
 import QtQuick.Templates as T
 import Victron.VenusOS
 
@@ -20,6 +18,9 @@ FocusScope {
 
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
+
+	// Set a default focus policy that will be used by each delegate in the row.
+	focusPolicy: Qt.StrongFocus
 
 	Keys.onSpacePressed: {
 		if (buttonRepeater.count > 0) {
@@ -52,6 +53,7 @@ FocusScope {
 				enabled: root.enabled && modelData.enabled !== false
 				width: root.width / buttonRepeater.count
 				height: parent ? parent.height : 0
+				focusPolicy: root.focusPolicy
 				background: AsymmetricRoundedRectangle {
 					id: buttonDelegate
 
@@ -60,7 +62,7 @@ FocusScope {
 					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_background_disabled
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
-							  ? Theme.color_ok
+							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
 							  : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
 					border.color: (mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok

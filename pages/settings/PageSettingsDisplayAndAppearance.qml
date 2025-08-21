@@ -54,8 +54,8 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Display mode"
-				text: qsTrId("settings_display_color_mode")
+				//% "GX display appearance"
+				text: qsTrId("settings_gx_display_appearance")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ColorScheme"
 				optionModel: [
 					//: Dark colors mode
@@ -67,16 +67,47 @@ Page {
 				]
 			}
 
+			ListText {
+				//% "Remote Console appearance"
+				text: qsTrId("settings_remote_console_appearance")
+				//: %1 = "dark", "light" or "auto"
+				//: %2 = "VRM" or "app"
+				//% "Forced by %2 to %1"
+				secondaryText: qsTrId("settings_remote_console_forced").arg(
+					Theme.forcedColorScheme === Theme.ForcedColorSchemeDark
+						//: Forced by app to %1
+						//% "dark"
+						? qsTrId("settings_remote_console_forced_appearance_dark")
+						: Theme.forcedColorScheme === Theme.ForcedColorSchemeLight
+							//: Forced by app to %1
+							//% "light"
+							? qsTrId("settings_remote_console_forced_appearance_light")
+							//: Forced by app to %1
+							//% "auto"
+							: qsTrId("settings_remote_console_forced_appearance_auto")
+				).arg(
+					BackendConnection.vrm
+					//: Forced by %2 to dark
+					//% "VRM"
+					? qsTrId("settings_remote_console_forced_by_vrm")
+					//: Forced by %2 to dark
+					//% "app"
+					: qsTrId("settings_remote_console_forced_by_app")
+				)
+				preferredVisible: Theme.forcedColorScheme !== Theme.ForcedColorSchemeDefault
+			}
+
 			ListRadioButtonGroup {
-				//% "Remote console color mode"
-				text: qsTrId("settings_display_remote_console_color_mode")
+				//% "Remote Console appearance"
+				text: qsTrId("settings_remote_console_appearance")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
 				optionModel: [
-					//% "Follow display mode"
-					{ display: qsTrId("settings_display_follow_display_mode"), value: VenusOS.RemoteConsoleColorMode_FollowDisplayMode },
-					//% "Follow system theme of individual device"
-					{ display: qsTrId("settings_display_follow_individual_device"), value: VenusOS.RemoteConsoleColorMode_FollowSystemTheme },
+					//% "Same as GX display"
+					{ display: qsTrId("settings_remote_console_appearance_same_as_gx_display"), value: VenusOS.RemoteConsoleColorMode_FollowDisplayMode },
+					//% "Auto"
+					{ display: qsTrId("settings_remote_console_appearance_auto"), value: VenusOS.RemoteConsoleColorMode_FollowSystemTheme },
 				]
+				preferredVisible: Theme.forcedColorScheme === Theme.ForcedColorSchemeDefault
 			}
 
 			ListNavigation {
