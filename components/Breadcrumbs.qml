@@ -19,6 +19,7 @@ BaseListView {
 	delegate: BaseListItem {
 		id: breadcrumb
 
+		required property int index
 		readonly property bool isTopBreadcrumb: index === root.count - 1
 		readonly property bool isBottomBreadcrumb: index === 0
 		readonly property color iconColor: isTopBreadcrumb ? primaryBreadcrumbColor : secondaryBreadcrumbColor
@@ -27,7 +28,7 @@ BaseListView {
 		width: contentRow.width
 		background.visible: false
 
-		Keys.onSpacePressed: root.clicked(index)
+		Keys.onSpacePressed: root.clicked(breadcrumb.index)
 		Keys.enabled: Global.keyNavigationEnabled
 
 		Row {
@@ -48,7 +49,7 @@ BaseListView {
 				background: Rectangle {
 					color: breadcrumb.iconColor
 				}
-				text: getText(index)
+				text: getText(breadcrumb.index)
 			}
 
 			CP.ColorImage {
@@ -59,7 +60,7 @@ BaseListView {
 
 		PressArea {
 			anchors.fill: parent
-			onClicked: root.clicked(index)
+			onClicked: root.clicked(breadcrumb.index)
 		}
 	}
 
