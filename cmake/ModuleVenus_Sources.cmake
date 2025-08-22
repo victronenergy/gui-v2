@@ -23,6 +23,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ArcGauge.qml
     components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
+    components/AutoToggleButton.qml
     components/BarGauge.qml
     components/BarGaugeBase.qml
     components/BaseListView.qml

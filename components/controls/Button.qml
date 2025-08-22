@@ -21,7 +21,12 @@ T.Button {
 	property color downColor: flat ? "transparent"
 			: Theme.color_ok
 	property alias border: backgroundRect.border
-	property alias radius: backgroundRect.radius
+	property real radius
+	property real topLeftRadius
+	property real bottomLeftRadius
+	property real topRightRadius
+	property real bottomRightRadius
+
 	property bool showEnabled: enabled
 
 	onPressed: pressEffect.start(pressX/width, pressY/height)
@@ -50,7 +55,10 @@ T.Button {
 		color: root.backgroundColor
 		border.width: root.flat ? 0 : Theme.geometry_button_border_width
 		border.color: root.showEnabled ? Theme.color_ok : Theme.color_font_disabled
-		radius: Theme.geometry_button_radius
+		topLeftRadius: root.topLeftRadius ?? root.radius
+		bottomLeftRadius: root.bottomLeftRadius ?? root.radius
+		topRightRadius: root.topRightRadius ?? root.radius
+		bottomRightRadius: root.bottomRightRadius?? root.radius
 
 		PressEffect {
 			id: pressEffect
