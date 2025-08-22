@@ -16,50 +16,41 @@ QtObject {
 	required property real backendValue
 
 	// True if a value has been written to the backend, and the backend is not yet in sync.
-	// This is only set for MQTT backends, where there is a noticeable latency in syncing values.
-	readonly property bool busy: BackendConnection.type === BackendConnection.MqttSource && _busy
+	readonly property bool busy: _maxBusyTimer.running && backendValue !== _pendingValue
 
 	// If busy=true, this is the value that was written (but not yet present in the backend),
 	// otherwise this is the backend value.
 	readonly property real expectedValue: busy ? _pendingValue : backendValue
 
 	property real _pendingValue: NaN
-	property bool _busy
 
 	signal updateToBackend(real value)
+	signal timeout()
 
+	// Note, it is valid to write a value that is the same as the pending or backend value:
+	// - User might want to force a write of the same value, if the previous write did not succeed.
+	// - There may be another write in progress on the backend, and so it will change to that other
+	// value, then to this new value when the request is received.
 	function writeValue(v) {
-		if (_pendingValue !== v) {
-			_pendingValue = v
-			_busy = true
-
-			// It is valid to write the same value as the current backend value, if there is
-			// another write in progress (i.e. if it will change to another value, then back to
-			// this current backend value).
-			if (backendValue === v) {
-				_maxBusyTimer.restart()
-			}
-
-			updateToBackend(v)
-		}
-	}
-
-	function _reset() {
-		_busy = false
-		_pendingValue = NaN
+		_pendingValue = v
+		_maxBusyTimer.restart()
+		updateToBackend(v)
 	}
 
 	onBackendValueChanged: {
-		_maxBusyTimer.stop()
-		if (backendValue === _pendingValue) {
-			_reset()
+		if (_pendingValue === backendValue) {
+			_maxBusyTimer.stop()
 		}
 	}
 
-	// Avoid a deadlock situation where the backend never updates to the expected value - e.g. if
-	// the pending write did not occur due to a write by another user via VRM.
+	// Avoid a deadlock situation where the backend never updates to the expected value. Possible
+	// reasons include:
+	// - the pending write did not occur due to a write by another user via VRM
+	// - the backend was unable (or refused) to update the value
+	// - some latency when changing values via VRM
 	readonly property Timer _maxBusyTimer: Timer {
-		interval: 3000
-		onTriggered: root._reset()
+		// Timeout is 3 sec over VRM, or 0.5 sec on Wasm local and on-screen device.
+		interval: BackendConnection.vrm ? 3000 : 500
+		onTriggered: root.timeout()
 	}
 }
