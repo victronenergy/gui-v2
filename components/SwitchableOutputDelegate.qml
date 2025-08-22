@@ -332,46 +332,32 @@ BaseListItem {
 	Component {
 		id: toggleComponent
 
-		SegmentedButtonRow {
-			id: buttonRow
+		ToggleButtonRow {
+			id: toggleButtonRow
 
 			function handlePress(key) {
 				if (key === Qt.Key_Space && enabled) {
-					// Toggle the currentIndex between 0 and 1.
-					activateIndex(currentIndex === 0 ? 1 : 0)
+					toggleState.writeValue(toggleState.backendValue === 1 ? 0 : 1)
 					return true
 				}
 				return false
 			}
 
-			function activateIndex(index) {
-				const newValue = index === 1 ? 1 : 0
-				if (newValue !== toggleState.backendValue) {
-					currentIndex = index
-					toggleState.writeValue(newValue)
-				}
-			}
-
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			fontPixelSize: Theme.font_size_body1
-			model: [{ "value": CommonWords.off, "selectedBackgroundColor": Theme.color_button_off_background },
-				{ "value": CommonWords.on, "selectedBackgroundColor": Theme.color_button_on_background }]
+			on: toggleState.expectedValue === 1
 			enabled: !toggleState.busy
 
-			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
+			// Do not focus the internal buttons when clicked, as this control has no edit mode.
 			focusPolicy: Qt.NoFocus
 
-			onButtonClicked: (buttonIndex) => {
-				activateIndex(buttonIndex)
-			}
+			onOnClicked: toggleState.writeValue(1)
+			onOffClicked: toggleState.writeValue(0)
 
 			SettingSync {
 				id: toggleState
 				backendValue: output.state
 				onUpdateToBackend: (value) => { output.setState(value) }
-				onBackendValueChanged: buttonRow.currentIndex = backendValue === 1 ? 1 : 0
-				Component.onCompleted: buttonRow.currentIndex = backendValue === 1 ? 1 : 0
 			}
 		}
 	}
