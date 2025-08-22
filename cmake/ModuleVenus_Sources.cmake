@@ -130,6 +130,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
     components/ClassAndVrmInstance.qml
+    components/controls/BaseSlider.qml
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
