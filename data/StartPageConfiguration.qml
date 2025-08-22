@@ -56,7 +56,7 @@ QtObject {
 	]
 
 	// Changes the application view to show the start page.
-	function loadStartPage(swipeView, topStackPageUrl) {
+	function loadStartPage(navBar, swipeView, topStackPageUrl) {
 		if (!hasStartPage) {
 			return
 		}
@@ -70,7 +70,7 @@ QtObject {
 		}
 
 		// Load the main page and its properties
-		if (!config.main || !Global.mainView.navBar.setCurrentPage(config.main.page)) {
+		if (!config.main || !navBar.setCurrentPage(config.main.page)) {
 			return
 		}
 		const mainPage = swipeView.getCurrentPage()
