@@ -12,6 +12,8 @@ import Victron.VenusOS
 CT.Button {
 	id: root
 
+	property bool pressEffectRunning
+
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 							implicitContentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
@@ -23,10 +25,10 @@ CT.Button {
 	text: down ? CommonWords.on : CommonWords.press
 	down: pressed || checked
 
-	onCheckedChanged: {
+	onPressEffectRunningChanged: {
 		// When triggered by a key press, start the press animation from the center of the button;
 		// otherwise, start it from the mouse click position.
-		if (checked) {
+		if (pressEffectRunning) {
 			const clickX = pressed ? pressX : (width / 2)
 			const clickY = pressed ? pressY : (height / 2)
 			shaderEffect.touchPos = Qt.point(clickX / width, clickY / height)

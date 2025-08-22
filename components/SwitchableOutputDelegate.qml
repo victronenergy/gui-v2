@@ -314,6 +314,9 @@ BaseListItem {
 				// "On" and "Pressed" on Wasm when there is a delay between release and sync.
 				|| momentaryState.busy
 
+			// Only show the press effect when the backend has written the state succesfully.
+			pressEffectRunning: momentaryState.backendValue === 1
+
 			// Do not give focus to the control when clicked/tabbed, as it has no edit mode.
 			focusPolicy: Qt.NoFocus
 
@@ -440,13 +443,17 @@ BaseListItem {
 
 			SettingSync {
 				id: dropdownSync
-				backendValue: dropdownSelection.value
-				onUpdateToBackend: (value) => { dropdownSelection.setValue(Math.floor(value)) }
-				onBackendValueChanged: {
+
+				function syncValueToDropdown() {
 					if (backendValue >= 0 && backendValue < dropdown.count) {
 						dropdown.currentIndex = Math.floor(backendValue)
 					}
 				}
+
+				backendValue: dropdownSelection.value
+				onUpdateToBackend: (value) => { dropdownSelection.setValue(Math.floor(value)) }
+				onBackendValueChanged: syncValueToDropdown()
+				onTimeout: syncValueToDropdown()
 			}
 
 			VeQuickItem {
@@ -545,6 +552,7 @@ BaseListItem {
 				id: unrangedValueSync
 				backendValue: output.dimming
 				onUpdateToBackend: (value) => { output.setDimming(value) }
+				onTimeout: spinBox.value = decimalConverter.decimalToInt(backendValue)
 			}
 		}
 	}
