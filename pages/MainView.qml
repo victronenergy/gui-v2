@@ -54,7 +54,7 @@ FocusScope {
 			: swipeViewAndNavBarContainer
 
 	function loadStartPage() {
-		Global.systemSettings.startPageConfiguration.loadStartPage(swipeView, pageStack.topPageUrl)
+		Global.systemSettings.startPageConfiguration.loadStartPage(navBar, swipeView, pageStack.topPageUrl)
 	}
 
 	function clearUi() {
