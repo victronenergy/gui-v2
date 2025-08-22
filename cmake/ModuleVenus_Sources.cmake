@@ -153,6 +153,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TextField.qml
+    components/controls/ToggleButtonRow.qml
 
     components/dialogs/CurrentLimitDialog.qml
     components/dialogs/DateSelectorDialog.qml
