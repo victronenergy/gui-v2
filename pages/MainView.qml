@@ -14,11 +14,9 @@ FocusScope {
 	readonly property alias statusBar: statusBar
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
-	property bool cardsActive
+	readonly property bool cardsActive: cardsLoader.viewActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
-			: !!pageStack.currentItem ? pageStack.currentItem
-			: !!swipeView ? swipeView.currentItem
-			: null
+			: pageStack.currentPage || swipeView?.currentItem
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -49,36 +47,53 @@ FocusScope {
 		}
 	}
 
-	readonly property Item _focusTarget: cardsLoader.enabled ? cardsLoader
-			: pageStack.depth > 0 && !pageStack.animating ? pageStack
-			: swipeViewAndNavBarContainer
-
-	function loadStartPage() {
-		Global.systemSettings.startPageConfiguration.loadStartPage(navBar, swipeView, pageStack.topPageUrl)
+	function goToNotificationsPage() {
+		pageManager.popAllPages()
+		cardsLoader.hide()
+		navBar.setCurrentPage("NotificationsPage.qml")
 	}
 
 	function clearUi() {
 		swipeViewLoader.active = false
-		pageStack.clear()
+		pageStack.popAllPages(StackView.Immediate)
 		_loadedPages = 0
 	}
 
-	Keys.onEscapePressed: (event) => {
-		if (Global.notificationLayer.deleteLastNotification()) {
-			return
-		} else if (cardsActive) {
-			cardsActive = false
-			return
-		} else if (pageStack.depth > 0) {
-			pageManager.popPage()
+	Keys.onPressed: (event) => {
+		if (!Global.keyNavigationEnabled) {
+			event.accepted = false
 			return
 		}
-		event.accepted = false
-	}
-	Keys.onLeftPressed: (event) => {
-		if (pageStack.activeFocus && pageStack.depth > 0) {
-			pageManager.popPage()
+		switch (event.key) {
+		case Qt.Key_Escape:
+			// Escape = close current Toast notification, or close Control/Switch pane.
+			if (Global.notificationLayer.deleteLastNotification()) {
+				// Nothing else to do
+			} else {
+				if (cardsActive) {
+					cardsLoader.hide()
+				} else {
+					pageManager.goToStartPageOrNextMainPage()
+				}
+			}
+			event.accepted = true
 			return
+		case Qt.Key_Return:
+			if (cardsActive) {
+				cardsLoader.hide()
+			}
+			pageManager.returnToLastStackPage()
+			event.accepted = true
+			return
+		case Qt.Key_Back:
+		case Qt.Key_Left:
+			// Backspace or Left arrow = go to previous page.
+			if (pageStack.opened) {
+				pageManager.popPage()
+				event.accepted = true
+				return
+			}
+			break
 		}
 		event.accepted = false
 	}
@@ -88,6 +103,7 @@ FocusScope {
 		id: pageManager
 		currentMainPage: root.currentPage
 		pageStack: pageStack
+		navBar: navBar
 	}
 
 	// Revert to the start page when the application has been inactive for the period of time
@@ -98,7 +114,7 @@ FocusScope {
 				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
 				 && !Global.applicationActive
 		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
-		onTriggered: root.loadStartPage()
+		onTriggered: pageManager.goToStartPage()
 	}
 
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
@@ -109,7 +125,7 @@ FocusScope {
 			if (!Global.applicationActive) {
 				const mainPageName = navBar.getCurrentPage()
 				const mainPage = swipeView.getCurrentPage()
-				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.topPageUrl)
+				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.opened ? pageStack.topPageUrl : "")
 			}
 		}
 	}
@@ -126,15 +142,13 @@ FocusScope {
 			right: pageStack.left
 		}
 		width: Theme.geometry_screen_width
-		focus: root._focusTarget === swipeViewAndNavBarContainer
+		focus: Global.keyNavigationEnabled && enabled
+		enabled: !pageStack.opened && !root.cardsActive
 
 		KeyNavigation.up: statusBar
 
 		Loader {
 			id: swipeViewLoader
-
-			property bool blockItemFocus
-			property bool refreshBlockItemFocus: Global.keyNavigationEnabled
 
 			anchors {
 				top: parent.top
@@ -152,47 +166,17 @@ FocusScope {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
 				if (Global.notifications?.alarms.hasActive ?? false) {
-					Global.notificationLayer.popAndGoToNotifications()
+					root.goToNotificationsPage()
 				} else {
-					root.loadStartPage()
+					pageManager.goToStartPage()
 				}
 				// Notify that the UI is ready to be displayed.
 				console.info("MainView: swipe view pages loaded!")
 				Global.allPagesLoaded = true
 			}
 
-			// When focused during key navigation, show a full-page focus blocker if the current
-			// page has blockInitialFocus=true.
-			onActiveFocusChanged: {
-				if (Global.keyNavigationEnabled) {
-					if (activeFocus && refreshBlockItemFocus) {
-						blockItemFocus = item?.currentItem?.blockInitialFocus
-						refreshBlockItemFocus = false
-					} else if (!activeFocus && (statusBar.activeFocus || navBar.activeFocus)) {
-						// Re-refresh the focus blocker state if navigating back from status or nav bar.
-						refreshBlockItemFocus = true
-					}
-				}
-			}
-
-			// Space key disables the focus blocker, so that user can focus individual items on the
-			// page; Escape key re-enables the blocker. Ignore the event if no change is necessary.
-			Keys.onSpacePressed: (event) => {
-				event.accepted = blockItemFocus
-				blockItemFocus = false
-			}
-			Keys.onEscapePressed: (event) => {
-				const shouldBlockFocus = item?.currentItem?.blockInitialFocus
-				event.accepted = shouldBlockFocus && !blockItemFocus
-				blockItemFocus = shouldBlockFocus
-			}
 			Keys.enabled: Global.keyNavigationEnabled
 			KeyNavigation.down: navBar
-			KeyNavigationHighlight.active: swipeViewLoader.blockItemFocus
-										   && swipeViewLoader.activeFocus
-										   && root.pageManager.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			KeyNavigationHighlight.leftMargin: Theme.geometry_page_content_horizontalMargin
-			KeyNavigationHighlight.rightMargin: Theme.geometry_page_content_horizontalMargin
 
 			Component {
 				id: swipeViewComponent
@@ -203,7 +187,7 @@ FocusScope {
 					onReadyChanged: if (ready) ready = true // remove binding
 
 					anchors.fill: parent
-					focus: !swipeViewLoader.blockItemFocus
+					focus: true
 					contentChildren: swipePageModel.children
 
 					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
@@ -231,14 +215,11 @@ FocusScope {
 			model: swipeView ? swipeView.contentModel : null
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
-			focus: Global.keyNavigationEnabled
+			focus: true
 
 			onCurrentIndexChanged: {
 				if (swipeView) {
 					swipeView.setCurrentIndex(currentIndex)
-					if (Global.keyNavigationEnabled) {
-						focus = true // Move focus back to navbar if the SwipeView page changes.
-					}
 				}
 			}
 
@@ -264,13 +245,22 @@ FocusScope {
 			top: statusBar.bottom
 			bottom: parent.bottom
 		}
-		focus: root._focusTarget === pageStack
 
+		focus: opened
 		KeyNavigation.up: statusBar
 	}
 
 	CardViewLoader {
 		id: cardsLoader
+
+		function show(viewComponent) {
+			sourceComponent = viewComponent
+			viewActive = true
+		}
+
+		function hide() {
+			viewActive = false
+		}
 
 		anchors {
 			top: statusBar.bottom
@@ -282,9 +272,9 @@ FocusScope {
 		navBarItem: navBar
 		swipeViewItem : swipeView
 		backgroundColor: root.backgroundColor
-		viewActive: root.cardsActive
 		animationEnabled: root.allowPageAnimations
-		focus: root._focusTarget === cardsLoader
+		focus: viewActive
+
 		KeyNavigation.up: statusBar
 
 		Component {
@@ -393,7 +383,7 @@ FocusScope {
 		title: !!root.currentPage ? root.currentPage.title || "" : ""
 		leftButton: {
 			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
-			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.depth > 0) {
+			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
 				return VenusOS.StatusBar_LeftButton_Back
 			}
 			return customButton
@@ -405,11 +395,10 @@ FocusScope {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				cardsLoader.sourceComponent = controlCardsComponent
-				root.cardsActive = true
+				cardsLoader.show(controlCardsComponent)
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.cardsActive = false
+				cardsLoader.hide()
 				break;
 			case VenusOS.StatusBar_LeftButton_Back:
 				pageManager.popPage()
@@ -421,10 +410,9 @@ FocusScope {
 
 		onAuxButtonClicked: {
 			if (root.cardsActive) {
-				root.cardsActive = false
+				cardsLoader.hide()
 			} else {
-				cardsLoader.sourceComponent = auxCardsComponent
-				root.cardsActive = true
+				cardsLoader.show(auxCardsComponent)
 			}
 		}
 
@@ -441,7 +429,7 @@ FocusScope {
 		}
 
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
-				: pageStack.depth > 0 ? pageStack
+				: pageStack.opened ? pageStack
 				: swipeViewAndNavBarContainer
 	}
 
