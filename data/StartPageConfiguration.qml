@@ -56,7 +56,7 @@ QtObject {
 	]
 
 	// Changes the application view to show the start page.
-	function loadStartPage(navBar, swipeView, topStackPageUrl) {
+	function loadStartPage(pageManager, navBar, swipeView, topStackPageUrl) {
 		if (!hasStartPage) {
 			return
 		}
@@ -88,10 +88,10 @@ QtObject {
 			// Looks like the stack is already showing the correct page, so there's nothing to do.
 			return
 		}
-		Global.pageManager.popAllPages(PageStack.Immediate)
+		pageManager.popAllPages(PageStack.Immediate)
 		for (let i = 0; i < stackPages.length; ++i) {
 			if (stackPages[i].page) {
-				Global.pageManager.pushPage(stackPages[i].page, stackPages[i].properties || {})
+				pageManager.pushPage(stackPages[i].page, stackPages[i].properties || {})
 			}
 		}
 	}
