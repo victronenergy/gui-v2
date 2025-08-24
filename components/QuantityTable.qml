@@ -28,6 +28,7 @@ ListView {
 	property real rightPadding: Theme.geometry_listItem_content_horizontalMargin
 
 	readonly property real availableWidth: width - leftPadding - rightPadding
+	readonly property real fixedColumnWidth: headerItem?.fixedColumnWidth ?? NaN
 
 	function resetRowColors() {
 		let visibleRowCount = 0
@@ -52,6 +53,7 @@ ListView {
 		property QuantityTable table: ListView.view
 		property alias model: groupHeader.model
 		property alias headerText: groupHeader.headerText
+		readonly property alias fixedColumnWidth: groupHeader.fixedColumnWidth
 
 		implicitWidth: table.width
 		implicitHeight: Theme.geometry_quantityTable_row_height
