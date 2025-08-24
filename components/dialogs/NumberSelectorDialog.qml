@@ -35,6 +35,12 @@ ModalDialog {
 	}
 
 	contentItem: ModalDialog.FocusableContentItem {
+		id: dialogContent
+
+		function valueModified() {
+			root.value = decimalConverter.intToDecimal(spinBox.value)
+		}
+
 		Column {
 			anchors {
 				verticalCenter: parent.verticalCenter
@@ -72,7 +78,7 @@ ModalDialog {
 				KeyNavigation.down: presetsRow.enabled ? presetsRow : root.footer
 
 				onValueModified: {
-					root.value = decimalConverter.intToDecimal(spinBox.value)
+					dialogContent.valueModified()
 					presetsRow.currentIndex = -1
 				}
 				onMinValueReached: root.minValueReached()
@@ -98,6 +104,7 @@ ModalDialog {
 				enabled: visible
 				onButtonClicked: function (buttonIndex) {
 					spinBox.value = decimalConverter.decimalToInt(model[buttonIndex].value)
+					dialogContent.valueModified()
 				}
 
 				KeyNavigation.down: root.footer
