@@ -27,7 +27,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten" AND NOT COMMAND qt6_add_shaders)
 
         # Process each shader file
         foreach(shader_file ${SHADER_FILES})
-            get_filename_component(shader_name ${shader_file} NAME_WE)
+            get_filename_component(shader_name ${shader_file} NAME)
             get_filename_component(shader_dir ${shader_file} DIRECTORY)
 
             # Output file
@@ -47,8 +47,16 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten" AND NOT COMMAND qt6_add_shaders)
 
             # Add to target
             target_sources(${target} PRIVATE ${output_file})
-            set_source_files_properties(${output_file} PROPERTIES QT_RESOURCE_ALIAS "${shader_name}.qsb")
+            set_source_files_properties(${output_file} PROPERTIES QT_RESOURCE_ALIAS "${shader_file}.qsb")
+
+            # Add to resource files
+            list(APPEND qsb_files "${output_file}")
         endforeach()
+
+        # Add resource file containing the qsb files
+        qt6_add_resources(${target} "${target}_resources"
+            FILES "${qsb_files}"
+        )
     endfunction()
 
     message(STATUS "Created custom qt6_add_shaders function")
