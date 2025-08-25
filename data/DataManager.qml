@@ -52,13 +52,6 @@ Item {
 	Tanks {}
 	VenusPlatform {}
 
-	VeQItemTableModel {
-		id: dataServiceModel
-		uids: [ BackendConnection.uidPrefix() ]
-		flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		Component.onCompleted: Global.dataServiceModel = dataServiceModel
-	}
-
 	Loader {
 		id: mockSetupLoader
 		active: root._dataObjectsReady && BackendConnection.type === BackendConnection.MockSource
