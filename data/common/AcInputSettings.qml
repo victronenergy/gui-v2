@@ -17,7 +17,7 @@ QtObject {
 	property int inputNumber
 	readonly property int inputType: {
 		if (serviceType === "vebus"
-				&& serviceUid === Global.inverterChargers.veBusDevices.firstObject?.serviceUid
+				&& serviceUid === Global.system.veBus.serviceUid
 				&& _systemSetupType.valid) {
 			// The /SystemSetup/AcInput<x> settings only apply to the first/main vebus service.
 			return  _systemSetupType.value

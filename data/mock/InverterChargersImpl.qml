@@ -16,21 +16,16 @@ Item {
 		return MockManager.value("com.victronenergy.system" + path)
 	}
 
-	AggregateDeviceModel {
+	FilteredDeviceModel {
 		id: inverterChargerModel
-		sourceModels: [
-			Global.inverterChargers.veBusDevices,
-			Global.inverterChargers.acSystemDevices,
-			Global.inverterChargers.inverterDevices,
-			Global.inverterChargers.chargerDevices,
-		]
+		serviceTypes: ["vebus", "acsystem", "inverter", "charger"]
 	}
 
 	// Set /SystemState/State to the state of the inverter/charger with the lowest instance.
 	// This isn't necessarily correct, but it will do for mock mode.
 	VeQuickItem {
-		uid: Global.inverterChargers.firstObject
-			 ? Global.inverterChargers.firstObject.serviceUid + "/State"
+		uid: inverterChargerModel.firstObject
+			 ? inverterChargerModel.firstObject.serviceUid + "/State"
 			 : ""
 		onValueChanged: root.setSystemValue("/SystemState/State", value ?? VenusOS.System_State_Off)
 	}
@@ -54,11 +49,16 @@ Item {
 		}
 	}
 
+	FilteredDeviceModel {
+		id: vebusModel
+		serviceTypes: ["vebus"]
+	}
+
 	// Set /VebusService to name of the first vebus service found on the system.
 	Connections {
-		target: Global.inverterChargers.veBusDevices
+		target: vebusModel
 		function onFirstObjectChanged() {
-			const device = Global.inverterChargers.veBusDevices.firstObject
+			const device = vebusModel.firstObject
 			if (device) {
 				// Write uid like "com.victronenergy.vebus.tty0", without "mock/" prefix
 				const uid = device.serviceUid.substring(BackendConnection.uidPrefix().length + 1)
@@ -73,7 +73,7 @@ Item {
 
 	// Simulate various vebus actions to make the UI more responsive when changing vebus settings.
 	Instantiator {
-		model: Global.inverterChargers.veBusDevices
+		model: vebusModel
 		delegate: Item {
 			id: veBusDelegate
 

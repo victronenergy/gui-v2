@@ -11,19 +11,17 @@ QtObject {
 
 	readonly property SolarDeviceModel devices: SolarDeviceModel { }
 
-	readonly property ServiceDeviceModel pvInverterDevices: ServiceDeviceModel {
-		serviceTypes: ["pvinverter"]
-		modelId: "pvinverter"
-		deviceDelegate: PvInverter {
-			id: pvInverter
-			serviceUid: model.uid
-			onValidChanged: {
-				if (valid) {
-					root.pvInverterDevices.addDevice(pvInverter)
-				} else {
-					root.pvInverterDevices.removeDevice(pvInverter.serviceUid)
-				}
+	// TODO remove the BaseDeviceModel+Instantiator and just use FilteredDeviceModel. This requires
+	// some changes in SolarInputListPage to avoid requiring PvInverter objects in the model.
+	readonly property BaseDeviceModel pvInverterDevices: BaseDeviceModel {
+		readonly property Instantiator _objects: Instantiator {
+			model: FilteredDeviceModel { serviceTypes: "pvinverter" }
+			delegate: PvInverter {
+				required property BaseDevice device
+				serviceUid: device.serviceUid
 			}
+			onObjectAdded: (index, object) => root.pvInverterDevices.addDevice(object)
+			onObjectRemoved: (index, object) => root.pvInverterDevices.removeDevice(object.serviceUid)
 		}
 	}
 

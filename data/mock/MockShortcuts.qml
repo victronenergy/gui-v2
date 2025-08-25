@@ -349,7 +349,7 @@ QtObject {
 		}
 	}
 
-	property ServiceDeviceModel tanksAndTemperatureModel: ServiceDeviceModel {
+	property FilteredDeviceModel tanksAndTemperatureModel: FilteredDeviceModel {
 		serviceTypes: ["tank", "temperature"]
 	}
 }
