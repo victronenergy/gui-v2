@@ -21,7 +21,25 @@ ListItem {
 
 			enabled: root.clickable
 			width: Theme.geometry_listItem_slider_width
-			focus: true // receive key events
 		}
 	]
+
+	// clicked() signal is emitted when Key_Space is pressed.
+	onClicked: slider.focus = true
+
+	Keys.onPressed: (event) => {
+		switch (event.key) {
+		case Qt.Key_Escape:
+		case Qt.Key_Return:
+		case Qt.Key_Enter:
+			if (slider.activeFocus) {
+				slider.focus = false
+				event.accepted = true
+				return
+			}
+			break
+		}
+		event.accepted = false
+	}
+	Keys.enabled: Global.keyNavigationEnabled
 }
