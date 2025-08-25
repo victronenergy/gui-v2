@@ -17,6 +17,16 @@ ListQuantityGroupNavigation {
 		filterType: QuantityObjectModel.HasValue
 
 		QuantityObject { object: outputCurrent; unit: VenusOS.Units_Amp }
+		QuantityObject {
+			id: temperatureQuantity
+
+			readonly property real temperature: output.displayTemperature
+				? Units.convert(output.dimming, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit) : NaN
+
+			object: output.displayTemperature ? temperatureQuantity : null
+			key: "temperature"
+			unit: Global.systemSettings.temperatureUnit
+		}
 		QuantityObject { object: output.displayPercentage ? output : null; key: "dimming"; unit: VenusOS.Units_Percentage }
 		QuantityObject { object: output.displayPercentage ? null : output; key: "statusText" }
 		QuantityObject { object: output; key: "typeText" }
@@ -32,6 +42,7 @@ ListQuantityGroupNavigation {
 	SwitchableOutput {
 		id: output
 
+		readonly property bool displayTemperature: type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
 		readonly property bool displayPercentage: type === VenusOS.SwitchableOutput_Type_Dimmable
 				&& ((status === VenusOS.SwitchableOutput_Status_On)
 					|| (status === VenusOS.SwitchableOutput_Status_Output_Fault))

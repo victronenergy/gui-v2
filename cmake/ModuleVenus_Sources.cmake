@@ -152,6 +152,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/SpinBoxInputArea.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
+    components/controls/TemperatureSlider.qml
     components/controls/TextField.qml
 
     components/dialogs/CurrentLimitDialog.qml
@@ -653,6 +654,7 @@ set(VictronVenusOS_RESOURCES
     images/cloud.svg
     images/consumption.svg
     images/dcloads.svg
+    images/dot.svg
     images/dropdown.svg
     images/electron.svg
     images/electron_arrow.svg
