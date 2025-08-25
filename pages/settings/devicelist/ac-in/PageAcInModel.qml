@@ -85,6 +85,8 @@ VisibleItemModel {
 	ListQuantityGroup {
 		//% "AC Totals"
 		text: qsTrId("ac-in-modeldefault_ac_totals")
+		preferredVisible: root.phaseNumbers.length > 1
+
 		model: QuantityObjectModel {
 			QuantityObject { object: totalPower; unit: VenusOS.Units_Watt }
 			QuantityObject { object: totalEnergy; unit: VenusOS.Units_Energy_KiloWattHour; defaultValue: "--" }
