@@ -19,6 +19,5 @@ Loader {
 	focus: true
 
 	// Allow Utils.acceptsKeyNavigation() to accept moving focus to this item.
-	// TODO from Qt 6.7 can change this to set focusPolicy instead.
-	activeFocusOnTab: true
+	focusPolicy: effectiveVisible ? Qt.TabFocus : Qt.NoFocus
 }
