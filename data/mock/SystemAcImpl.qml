@@ -162,13 +162,7 @@ Item {
 			}
 		}
 
-		model: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterFlags: VeQItemSortTableModel.FilterOffline
-			filterRegExp: "^mock/com\.victronenergy\.(vebus|acsystem|inverter|charger)\.\\w+$"
-			model: Global.dataServiceModel
-		}
+		model: FilteredServiceModel { serviceTypes: ["vebus", "acsystem", "inverter", "charger"] }
 		delegate: QtObject {
 			id: acService
 
@@ -265,13 +259,7 @@ Item {
 	// Animate AC values for select energy meters. Grid/genset are already animated if they are the
 	// active AC input, and pvinverter/evcharger are already animated elsewhere.
 	Instantiator {
-		model: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterFlags: VeQItemSortTableModel.FilterOffline
-			filterRegExp: "^mock/com\.victronenergy\.(acload|heatpump)\.\\w+$"
-			model: Global.dataServiceModel
-		}
+		model: FilteredServiceModel { serviceTypes: ["acload", "heatpump"] }
 		delegate: Item {
 			id: acObject
 

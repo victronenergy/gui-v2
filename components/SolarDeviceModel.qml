@@ -11,6 +11,15 @@ DeviceModel {
 
 	modelId: "solarDevices"
 
+	// TODO replace this with a FilteredDeviceModel. This requires some changes in SolarInputListPage
+	// and SolarYieldModel to not require SolarDevice devices in the model. Then we can use this:
+	// FilteredDeviceModel {
+	//     serviceTypes: ["solarcharger", "multi", "inverter"]
+	//     childFilterIds: { "multi": ["NrOfTrackers"], "inverter": ["NrOfTrackers"] }
+	//     childFilterFunction: (device, childItems) => {
+	//         return childItems["NrOfTrackers"]?.value > 0
+	//     }
+	// }
 	readonly property Instantiator _serviceObjects: Instantiator {
 		model: ["solarcharger", "multi", "inverter"]
 		delegate: Instantiator {

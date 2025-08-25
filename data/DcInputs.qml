@@ -50,21 +50,15 @@ QtObject {
 	readonly property Instantiator _dcInputObjects: Instantiator {
 		model: FilteredServiceModel { serviceTypes: root.serviceTypes }
 		delegate: DcInput {
-			id: input
 			required property string uid
 			serviceUid: uid
-			onValidChanged: {
-				if (valid) {
-					root.model.addDevice(input)
-				} else {
-					root.model.removeDevice(input.serviceUid)
-				}
-			}
 
 			onVoltageChanged: Qt.callLater(root.updateTotals)
 			onCurrentChanged: Qt.callLater(root.updateTotals)
 			onPowerChanged: Qt.callLater(root.updateTotals)
 		}
+		onObjectAdded: (index, inputObject) => root.model.addDevice(inputObject)
+		onObjectRemoved: (index, inputObject) => root.model.removeDevice(inputObject.serviceUid)
 	}
 
 	Component.onCompleted: Global.dcInputs = root
