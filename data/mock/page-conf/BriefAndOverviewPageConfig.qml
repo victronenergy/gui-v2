@@ -346,7 +346,7 @@ Item {
 		}
 
 		// Set the system /Ac/In/<x> details so that AcInputs.qml detects the new input details
-		const device = inputInfoConfig.serviceType === "vebus" ? Global.inverterChargers.veBusDevices.firstObject
+		const device = inputInfoConfig.serviceType === "vebus" ? vebusModel.firstObject
 				: inputInfoConfig.serviceType === "genset" ? gensetModel.firstObject
 				: inputInfoConfig.serviceType === "grid" ? gridModel.firstObject
 				: inputInfoConfig.serviceType === "acsystem" ? acSystemModel.firstObject
@@ -508,37 +508,43 @@ Item {
 		MockManager.removeValue(serviceUid)
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
+		id: vebusModel
+		serviceTypes: ["vebus"]
+		sorting: FilteredDeviceModel.DeviceInstance
+	}
+
+	FilteredDeviceModel {
 		id: gridModel
 		serviceTypes: ["grid"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: gensetModel
 		serviceTypes: ["genset"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: dcInputModel
 		serviceTypes: Global.dcInputs.serviceTypes
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: acSystemModel
 		serviceTypes: ["acsystem"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: dcLoadsModel
 		serviceTypes: ["dcload", "dcsystem", "dcdc"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: solarInputModel
 		serviceTypes: ["solarcharger", "pvinverter", "inverter"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: evcsModel
 		serviceTypes: ["evcharger"]
 	}

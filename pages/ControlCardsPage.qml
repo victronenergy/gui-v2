@@ -103,90 +103,22 @@ Page {
 		}
 	}
 
-	AggregateDeviceModel {
+	FilteredDeviceModel {
 		id: controlCardModel
-
-		sortBy: AggregateDeviceModel.SortBySourceModel | AggregateDeviceModel.SortByDeviceName
-		sourceModels: [
-			evChargerModel,
-			generatorModel,
-			Global.inverterChargers.veBusDevices,
-			Global.inverterChargers.acSystemDevices,
-			Global.inverterChargers.inverterDevices
-		]
-	}
-
-	// A model of evcharger services that represent controllable EV chargers, i.e. those with a
-	// valid /Mode value. Global.evChargers.model cannot be used in the control cards, as it
-	// includes services without a /Mode, such as Energy Meters configured as EV chargers.
-	ServiceDeviceModel {
-		id: evChargerModel
-
-		serviceTypes: ["evcharger"]
-		modelId: "evcharger"
-		deviceDelegate: Device {
-			id: device
-
-			required property string uid
-			readonly property bool isRealCharger: valid && _chargerMode.valid
-			property bool addedToModel
-
-			readonly property VeQuickItem _chargerMode: VeQuickItem {
-				uid: device.serviceUid + "/Mode"
-			}
-
-			serviceUid: uid
-			onIsRealChargerChanged: {
-				if (isRealCharger && !addedToModel) {
-					evChargerModel.addDevice(device)
-					addedToModel = true
-				} else if (!isRealCharger && addedToModel) {
-					evChargerModel.removeDevice(device.serviceUid)
-					addedToModel = false
-				}
-			}
-
-			Component.onDestruction: {
-				if (addedToModel) {
-					evChargerModel.removeDevice(device.serviceUid)
-				}
-			}
-		}
-	}
-
-	// A model of generator services with /Enabled=1, i.e. those that have the startstop1 feature
-	// for starting/stopping the generator.
-	ServiceDeviceModel {
-		id: generatorModel
-
-		serviceTypes: ["generator"]
-		modelId: "generator"
-		deviceDelegate: Device {
-			id: generatorDevice
-
-			required property string uid
-			readonly property bool controllable: valid && _enabled.valid && _enabled.value === 1
-			property bool addedToModel
-
-			readonly property VeQuickItem _enabled: VeQuickItem {
-				uid: generatorDevice.serviceUid + "/Enabled"
-			}
-
-			serviceUid: uid
-			onControllableChanged: {
-				if (controllable && !addedToModel) {
-					generatorModel.addDevice(generatorDevice)
-					addedToModel = true
-				} else if (!controllable && addedToModel) {
-					generatorModel.removeDevice(generatorDevice.serviceUid)
-					addedToModel = false
-				}
-			}
-
-			Component.onDestruction: {
-				if (addedToModel) {
-					generatorModel.removeDevice(generatorDevice.serviceUid)
-				}
+		sorting: FilteredDeviceModel.ServiceTypeOrder | FilteredDeviceModel.Name
+		serviceTypes: [ "evcharger", "generator", "vebus", "acsystem", "inverter" ]
+		childFilterIds: { "evcharger": ["Mode"], "generator": ["Enabled"] }
+		childFilterFunction: (device, childItems) => {
+			if (device.serviceType === "evcharger") {
+				// Only include EV chargers that represent controllable EV chargers (with valid
+				// /Mode values), to prevent Energy Meters from appearing in the cards.
+				return childItems["Mode"]?.value !== undefined
+			} else if (device.serviceType === "generator") {
+				// Only include generators with /Enabled=1, which means they have the startstop1
+				// for starting/stopping the generator.
+				return childItems["Enabled"]?.value === 1
+			} else {
+				return true
 			}
 		}
 	}

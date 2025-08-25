@@ -76,7 +76,10 @@ Item {
 			dynamicSortFilter: true
 			filterRole: VeQItemTableModel.UniqueIdRole
 			filterFlags: VeQItemSortTableModel.FilterOffline
-			model: Global.dataServiceModel
+			model: VeQItemTableModel {
+				uids: [ BackendConnection.uidPrefix() ]
+				flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+			}
 
 			// Only match services with a suffix after the service type (e.g. match
 			// com.victronenergy.vebus.ttyO1 but not com.victronenergy.system).

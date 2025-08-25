@@ -31,50 +31,26 @@ AcWidget {
 	// accessible from this AC Loads widget.
 	// For 3-phase systems, the drilldown is always enabled.
 	// For 1-phase systems, only enable the drilldown if there are devices to be shown.
-	enabled: root.measurements.phaseCount > 1 || inputLoadDevices.count > 0
+	enabled: root.measurements.phaseCount > 1 || acLoadDevices.count > 0
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/loads/AcLoadListPage.qml", {
 			title: root.title,
 			measurements: root.measurements,
-			model: Global.system.showInputLoads ? inputLoadDevices : allLoadDevices
+			model: acLoadDevices,
 		})
 	}
 
-	// TODO when #2371 is fixed, use a single FilteredDeviceModel instead of choosing between this
-	// ServiceDeviceModel vs an AggregateDeviceModel.
-	ServiceDeviceModel {
-		id: allLoadDevices
+	FilteredDeviceModel {
+		id: acLoadDevices
 		serviceTypes: ["acload", "evcharger", "heatpump"]
-	}
-
-	AggregateDeviceModel {
-		id: inputLoadDevices
-		sourceModels: [
-			acLoadInputDevices,
-			evChargerInputDevices,
-			heatPumpInputDevices,
-		]
-	}
-
-	AcMeterModel {
-		id: acLoadInputDevices
-		position: VenusOS.AcPosition_AcInput
-		serviceTypes: ["acload"]
-		modelId: "acload-input"
-	}
-
-	AcMeterModel {
-		id: evChargerInputDevices
-		position: VenusOS.AcPosition_AcInput
-		serviceTypes: ["evcharger"]
-		modelId: "evcharger-input"
-	}
-
-	AcMeterModel {
-		id: heatPumpInputDevices
-		position: VenusOS.AcPosition_AcInput
-		serviceTypes: ["heatpump"]
-		modelId: "heatpump-input"
-	}
+		childFilterIds: Global.system.showInputLoads
+				? { "acload": ["Position"], "evcharger": ["Position"], "heatpump": ["Position"] }
+				: {}
+		childFilterFunction: (device, childItems) => {
+			// If a service does not have a /Position value, assume it is in the "input" position.
+			const pos = childItems["Position"]
+			return !pos || pos.value === undefined || pos.value === VenusOS.AcPosition_AcInput
+		}
+	 }
 }
