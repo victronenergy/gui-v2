@@ -101,6 +101,7 @@ SwipeViewPage {
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
+		serviceUid: _motorDrive.serviceUid
 	}
 
 	Boat.ConsumptionGauge { // vertical center right
@@ -125,6 +126,7 @@ SwipeViewPage {
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
+		serviceUid: _motorDrive.serviceUid
 	}
 	*/
 

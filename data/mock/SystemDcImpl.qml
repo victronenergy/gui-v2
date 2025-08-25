@@ -75,13 +75,13 @@ Item {
 			}
 		}
 
-		model: Global.allDevicesModel.combinedDcLoadDevices
+		model: Global.system?.dc.serviceModel ?? undefined
 		delegate: QtObject {
 			id: dcLoad
 
-			required property Device device
+			required property string uid
 			readonly property VeQuickItem power: VeQuickItem {
-				uid: dcLoad.device.serviceUid + "/Dc/0/Power"
+				uid: dcLoad.uid + "/Dc/0/Power"
 				onValueChanged: Qt.callLater(dcLoads.updateTotals)
 			}
 		}
