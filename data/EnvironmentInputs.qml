@@ -9,9 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property ServiceDeviceModel model: ServiceDeviceModel {
+	readonly property FilteredDeviceModel model: FilteredDeviceModel {
 		serviceTypes: ["temperature"]
-		modelId: "temperature"
 	}
 
 	readonly property ListModel _temperatureDetails: ListModel {

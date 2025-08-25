@@ -42,12 +42,7 @@ Item {
 		}
 
 		active: gaugesAutoMax.value === 1
-		model: VeQItemSortTableModel {
-			dynamicSortFilter: true
-			filterRole: VeQItemTableModel.UniqueIdRole
-			filterRegExp: "^mock/com\.victronenergy\.(alternator|fuelcell|dcsource|dcgenset)\."
-			model: Global.dataServiceModel
-		}
+		model: FilteredServiceModel { serviceTypes: ["alternator", "fuelcell", "dcsource", "dcgenset"] }
 		delegate: VeQuickItem {
 			id: inputDelegate
 			uid: model.uid + "/Dc/0/Power"

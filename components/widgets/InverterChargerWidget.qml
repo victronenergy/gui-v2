@@ -14,8 +14,9 @@ OverviewWidget {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
-			if (Global.inverterChargers.chargerDevices.count) {
-				const charger = Global.inverterChargers.chargerDevices.firstObject
+			chargerModelLoader.active = true
+			if (chargerModelLoader.item.count > 0) {
+				const charger = chargerModelLoader.item.firstObject
 				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
 						{ "bindPrefix": charger.serviceUid })
 			} else {
@@ -87,6 +88,15 @@ OverviewWidget {
 			maximumValue: Global.system.load.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 			inOverviewWidget: true
+		}
+	}
+
+	Loader {
+		id: chargerModelLoader
+		active: false
+		sourceComponent: FilteredDeviceModel {
+			serviceTypes: ["charger"]
+			sorting: FilteredDeviceModel.DeviceInstance
 		}
 	}
 }
