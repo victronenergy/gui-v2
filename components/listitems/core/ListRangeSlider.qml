@@ -78,9 +78,14 @@ ListItem {
 		case Qt.Key_Escape:
 		case Qt.Key_Return:
 		case Qt.Key_Enter:
-			slider.focus = false
+			if (slider.activeFocus) {
+				slider.focus = false
+				event.accepted = true
+				return
+			}
 			break
 		}
+		event.accepted = false
 	}
 	Keys.enabled: Global.keyNavigationEnabled
 
