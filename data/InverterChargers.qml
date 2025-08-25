@@ -13,43 +13,12 @@ QtObject {
 	// com.victronenergy.inverter or com.victronenergy.charger (in that order of preference). If
 	// there is more than one service for a particular type, the one with the lowest device instance
 	// will be used.
-	readonly property Device firstObject: veBusDevices.firstObject
-			|| acSystemDevices.firstObject
-			|| inverterDevices.firstObject
-			|| chargerDevices.firstObject
+	readonly property Device firstObject: model.firstObject
+	readonly property int deviceCount: model.count
 
-	readonly property int deviceCount: veBusDevices.count
-			+ acSystemDevices.count
-			+ inverterDevices.count
-			+ chargerDevices.count
-
-	// Devices from com.victronenergy.vebus
-	readonly property ServiceDeviceModel veBusDevices: ServiceDeviceModel {
-		serviceTypes: ["vebus"]
-		modelId: "vebus"
-		sortBy: BaseDeviceModel.SortByDeviceInstance
-	}
-
-	// Devices from com.victronenergy.acsystem
-	readonly property ServiceDeviceModel acSystemDevices: ServiceDeviceModel {
-		serviceTypes: ["acsystem"]
-		modelId: "acsystem"
-		sortBy: BaseDeviceModel.SortByDeviceInstance
-	}
-
-	// Devices from com.victronenergy.inverter
-	// (Inverter RS and Phoenix Inverter, which do not have AC inputs)
-	readonly property ServiceDeviceModel inverterDevices: ServiceDeviceModel {
-		serviceTypes: ["inverter"]
-		modelId: "inverter"
-		sortBy: BaseDeviceModel.SortByDeviceInstance
-	}
-
-	// Devices from com.victronenergy.charger
-	readonly property ServiceDeviceModel chargerDevices: ServiceDeviceModel {
-		serviceTypes: ["charger"]
-		modelId: "charger"
-		sortBy: BaseDeviceModel.SortByDeviceInstance
+	readonly property FilteredDeviceModel model: FilteredDeviceModel {
+		serviceTypes: ["vebus", "acsystem", "inverter", "charger"]
+		sorting: FilteredDeviceModel.ServiceTypeOrder | FilteredDeviceModel.DeviceInstance
 	}
 
 	readonly property var rsAlarms: [

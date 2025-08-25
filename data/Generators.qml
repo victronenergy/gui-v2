@@ -9,10 +9,9 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	readonly property ServiceDeviceModel model: ServiceDeviceModel {
+	readonly property FilteredDeviceModel model: FilteredDeviceModel {
 		serviceTypes: ["generator"]
-		modelId: "generator"
-		sortBy: BaseDeviceModel.SortByDeviceInstance
+		sorting: FilteredDeviceModel.DeviceInstance
 	}
 
 	function stateAndCondition(state, conditionCode) {
