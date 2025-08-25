@@ -454,7 +454,6 @@ SwipeViewPage {
 		Transition {
 			to: "panelOpening"
 			from: "initialized"
-			enabled: Global.allPagesLoaded
 			SequentialAnimation {
 				NumberAnimation {
 					target: root
@@ -473,7 +472,6 @@ SwipeViewPage {
 		Transition {
 			to: "initialized"
 			from: "panelOpened"
-			enabled: Global.allPagesLoaded
 			SequentialAnimation {
 				NumberAnimation {
 					target: sidePanel
