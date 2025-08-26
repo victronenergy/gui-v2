@@ -42,6 +42,7 @@ FocusScope {
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload
+			&& swipeViewLoader.readyToLoad
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
 			console.info("MainView: data sources ready, loading swipe view pages")
@@ -135,6 +136,8 @@ FocusScope {
 
 			property bool blockItemFocus
 			property bool refreshBlockItemFocus: Global.keyNavigationEnabled
+			readonly property bool readyToLoad: swipePageModel.completed
+					&& Global.notifications && Global.notificationLayer // checked by onLoaded handler
 
 			anchors {
 				top: parent.top
@@ -151,7 +154,7 @@ FocusScope {
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
-				if (Global.notifications?.alarms.hasActive ?? false) {
+				if (Global.notifications?.alarms.hasActive) {
 					Global.notificationLayer.popAndGoToNotifications()
 				} else {
 					root.loadStartPage()
