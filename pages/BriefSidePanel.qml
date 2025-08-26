@@ -79,23 +79,23 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		id: acInputWidget
 
-		 title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
-		 icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
-		 quantityLabel.dataObject: nonGeneratorInput
-		 quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		 quantityLabel.acInputMode: true
-		 loadersActive: nonGeneratorInput && nonGeneratorInput.operational
-		 visible: loadersActive
+		title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
+		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
+		quantityLabel.dataObject: nonGeneratorInput
+		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.acInputMode: true
+		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
+		visible: loadersActive
 
-		 AcInputDirectionIcon {
-			 id: acInputDirectionIcon
-			 parent: acInputWidget.quantityLabel
-			 anchors.verticalCenter: parent.verticalCenter
-			 input: nonGeneratorInput
-		 }
+		AcInputDirectionIcon {
+			id: acInputDirectionIcon
+			parent: acInputWidget.quantityLabel
+			anchors.verticalCenter: parent.verticalCenter
+			input: nonGeneratorInput
+		}
 
-		 sideComponent: LoadGraph {
-				/*
+		sideComponent: LoadGraph {
+			/*
 			This graph shows the current/amps that is imported/exported by the AC input. On a
 			multi-phase system, the graph shows the average current per phase.
 
@@ -131,8 +131,7 @@ exported power v  0.4 |   /
 				  0.2 |
 				  0.1 |
 	Min current   0.0 |----------------------------> <Time>
-
-				  */
+			*/
 
 			readonly property bool _graphShowsFeedIn: acInputGraphRange.minimumCurrent < 0
 			property real _prevGraphMin

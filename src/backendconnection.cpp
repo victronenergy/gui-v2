@@ -648,6 +648,19 @@ void BackendConnection::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandle
 	}
 }
 
+bool BackendConnection::msaaEnabled() const
+{
+	return m_msaaEnabled;
+}
+
+void BackendConnection::setMsaaEnabled(bool e)
+{
+	if (m_msaaEnabled != e) {
+		m_msaaEnabled = e;
+		emit msaaEnabledChanged();
+	}
+}
+
 QUrl BackendConnection::demoImageFileName() const
 {
 	static const QUrl filePath = QUrl::fromLocalFile("/data/demo-brief.png");

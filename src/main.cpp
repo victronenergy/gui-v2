@@ -416,19 +416,18 @@ int main(int argc, char *argv[])
 {
 	qInfo().nospace() << "Victron gui version: v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH;
 
-	// Must set the default QSurfaceFormat before creating the app object if
-	// AA_ShareOpenGLContexts is going to be set.
+	// Must set the default QSurfaceFormat before creating the app object.
 	QSurfaceFormat surfaceFormat;
 	surfaceFormat.setDepthBufferSize(24);
 	surfaceFormat.setStencilBufferSize(8);
-#if defined(VENUS_GX_BUILD_ARM)
-	// CerboGX doesn't support multisample render buffers; other platforms do.
-	surfaceFormat.setSamples(1);
+#if defined(VENUS_GX_BUILD_ARM) || defined(VENUS_WEBASSEMBLY_BUILD)
+	// CerboGX and WASM don't support multisample render buffers; other platforms do.
+	surfaceFormat.setSamples(-1);
+	Victron::VenusOS::BackendConnection::create()->setMsaaEnabled(false);
 #else
 	surfaceFormat.setSamples(4);
 #endif
 	QSurfaceFormat::setDefaultFormat(surfaceFormat);
-	QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
 #if defined(VENUS_GX_BUILD_AARCH64)
 	// Shader disk cache doesn't work properly on new hardware.
 	QCoreApplication::setAttribute(Qt::AA_DisableShaderDiskCache);
