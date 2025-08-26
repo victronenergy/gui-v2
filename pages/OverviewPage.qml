@@ -71,8 +71,8 @@ SwipeViewPage {
 		resetWidgetConnectors(_rightWidgets)
 
 		// Set the key navigation bindings
-		resetWidgetKeyNavigation(_leftWidgets)
-		resetWidgetKeyNavigation(_centerWidgets)
+		resetWidgetKeyNavigation(_leftWidgets, _centerWidgets)
+		resetWidgetKeyNavigation(_centerWidgets, _rightWidgets)
 		resetWidgetKeyNavigation(_rightWidgets)
 	}
 
@@ -197,12 +197,36 @@ SwipeViewPage {
 		}
 	}
 
-	function resetWidgetKeyNavigation(widgets) {
-		for (let i = 0; i < widgets.length - 1; ++i) {
+	function resetWidgetKeyNavigation(widgets, nextWidgets) {
+		let i
+		for (i = 0; i < widgets.length - 1; ++i) {
 			if (widgets[i].acceptsKeyNavigation()) {
 				widgets[i].KeyNavigation.down = widgets[i + 1]
+				widgets[i].KeyNavigation.tab = widgets[i + 1]
 			} else {
 				widgets[i].KeyNavigation.down = null
+				widgets[i].KeyNavigation.tab = null
+			}
+		}
+
+		// Allow tab navigation from the last widget in this set to the first widget of the next.
+		if (nextWidgets) {
+			let lastFocusableWidget
+			for (i = widgets.length - 1; i >= 0; --i) {
+				if (widgets[i].acceptsKeyNavigation()) {
+					lastFocusableWidget = widgets[i]
+					break
+				}
+			}
+			if (lastFocusableWidget) {
+				let nextFocusableWidget = null
+				for (i = 0; i < nextWidgets.length - 1; ++i) {
+					if (nextWidgets[i].acceptsKeyNavigation()) {
+						nextFocusableWidget = nextWidgets[i]
+						break
+					}
+				}
+				lastFocusableWidget.KeyNavigation.tab = nextFocusableWidget // null if there is no next item
 			}
 		}
 	}
