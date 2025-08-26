@@ -42,6 +42,8 @@ ListItem {
 			enabled: root.clickable
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
+			focusPolicy: Qt.NoFocus
+
 			onClicked: root.clicked()
 			onToggled: root.toggled()
 		}
