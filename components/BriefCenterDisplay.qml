@@ -63,7 +63,8 @@ Column {
 
 	FittedQuantityLabel {
 		id: centerLabel
-		width: parent.width
+		anchors.horizontalCenter: parent.horizontalCenter
+		width: parent.width - (2 * Theme.geometry_briefPage_centerGauge_centerText_horizontalSpacing)
 		unit: root._useTemperature ? Global.systemSettings.temperatureUnit : VenusOS.Units_Percentage
 		value: root._useTemperature ? (temperature.value ?? NaN) : Global.system.battery.stateOfCharge
 		minimumPixelSize: Theme.font_briefPage_battery_percentage_minimumPixelSize
