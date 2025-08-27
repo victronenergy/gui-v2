@@ -130,6 +130,7 @@ ListItem {
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
 		borderColor: _showErrorHighlight ? Theme.color_red : Theme.color_ok
+		focusPolicy: Qt.ClickFocus
 
 		onTextEdited: {
 			// When the input is marked as invalid, run the validation again each time the input is

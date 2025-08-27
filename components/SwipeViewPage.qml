@@ -9,7 +9,7 @@ import Victron.VenusOS
 /*
   A page in the main swipe view.
 
-  If the page allows key navigation, it should set activeFocusOnTab to true.
+  If the page allows key navigation, it should set focusPolicy to include Qt.TabFocus.
 */
 Page {
 	id: root

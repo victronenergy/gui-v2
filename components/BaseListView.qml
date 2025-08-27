@@ -29,10 +29,6 @@ ListView {
 	highlightMoveDuration: Theme.animation_listView_highlightMoveDuration
 	focus: Global.keyNavigationEnabled
 
-	// Pass the Utils.acceptsKeyNavigation() test to receive focus during key navigation when this
-	// list view is within another container.
-	activeFocusOnTab: true
-
 	// Disable the built-in navigation, and rely solely on key handling in KeyNavigationListHelper.
 	// Otherwise, if the first/last items in the list fail Utils.acceptsKeyNavigation() during
 	// navigation, the key event is passed up to the ListView, which will attempt to focus those

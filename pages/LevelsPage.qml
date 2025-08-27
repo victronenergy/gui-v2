@@ -14,7 +14,7 @@ SwipeViewPage {
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
-	activeFocusOnTab: true
+	focusPolicy: Qt.TabFocus
 	//% "Levels"
 	navButtonText: qsTrId("nav_levels")
 	navButtonIcon: "qrc:/images/levels.svg"

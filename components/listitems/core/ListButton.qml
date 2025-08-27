@@ -21,6 +21,7 @@ ListItem {
 			down: pressed || checked || root.down
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			enabled: root.clickable
+			focusPolicy: Qt.NoFocus
 
 			onClicked: root.clicked()
 		}
