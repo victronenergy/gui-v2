@@ -17,9 +17,6 @@ FilteredServiceModel::FilteredServiceModel(QObject *parent)
 	connect(this, &QSortFilterProxyModel::rowsRemoved, this, &FilteredServiceModel::updateCount);
 	connect(this, &QSortFilterProxyModel::modelReset, this, &FilteredServiceModel::updateCount);
 	connect(this, &QSortFilterProxyModel::layoutChanged, this, &FilteredServiceModel::updateCount);
-
-	setSourceModel(AllServicesModel::create());
-	updateCount();
 }
 
 int FilteredServiceModel::count() const
@@ -55,7 +52,7 @@ void FilteredServiceModel::classBegin()
 void FilteredServiceModel::componentComplete()
 {
 	m_completed = true;
-	invalidateFilter();
+	setSourceModel(AllServicesModel::create());
 }
 
 QString FilteredServiceModel::uidAt(int index) const
