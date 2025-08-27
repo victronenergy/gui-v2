@@ -120,14 +120,17 @@ T.SpinBox {
 					// The user entered "edit" mode by pressing Space. Now move the focus back to
 					// the contentItem so key navigation can be used to navigate to the indicators.
 					inputArea.focus = false
-				} else if (clickableHintFrame.visible) {
+					event.accepted = true
+				} else if (clickableHintFrame.visible && inputArea.activeFocus) {
 					// The user entered "edit" mode by clicking within the blue frame.
 					// Remove the focus from the entire SpinBox, so that up/down keys do not trigger
 					// the default increase/decrease behaviour (as that should only occur when the
 					// orange up/down hint frame is shown).
 					root.focus = false
+					event.accepted = true
+				} else {
+					event.accepted = false
 				}
-				event.accepted = true
 				return
 			case Qt.Key_Up:
 			case Qt.Key_Down:

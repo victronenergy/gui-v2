@@ -160,7 +160,7 @@ VisibleItemModel {
 		preferredVisible: _dataItem.valid
 		interactive: secondaryText !== CommonWords.none_errors
 
-		onClicked: Global.notificationLayer.popAndGoToNotifications()
+		onClicked: Global.mainView.goToNotificationsPage()
 
 		VeQuickItem {
 			id: _dataItem
