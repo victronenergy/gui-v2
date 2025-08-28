@@ -31,7 +31,7 @@ Item {
 		model = temp
 	}
 
-	clip: Global.isGxDevice // we have to clip if we don't use a layer in LoadGraphShapePath.
+	clip: true // we have to clip if we don't use a layer in LoadGraphShapePath.
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
 	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
 
@@ -70,10 +70,11 @@ Item {
 		color: Theme.color_briefPage_background
 
 		LoadGraphShapePath {
-			id: orangePath
+			id: orangePath // .. or entire graph if no threshold is set.
 
 			anchors.fill: parent
-			visible: minYValue < (root.height - (root.height * threshold))
+
+			visible: threshold === 0.0 || minYValue < (root.height - (root.height * threshold))
 			calculateMinYValue: true
 			model: root.model
 			strokeColor: aboveThresholdFillColor
@@ -89,6 +90,7 @@ Item {
 
 	Rectangle {
 		anchors.bottom: parent.bottom
+		visible: threshold > 0.0
 		width: parent.width
 		height: root.height * threshold
 		clip: true // we have to clip this, because we can't rely on setting minYValue of bluePath.
