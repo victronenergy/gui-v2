@@ -68,6 +68,16 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: accessPoint.valid
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/AccessPointPassword"
+				validateInput: function() {
+					const length = textField.text.length
+					if ((length > 0 && length < 10) || length > 63) {
+						//% "Password length must be either 0 or between 10 and 63 characters long"
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("page_settings_wifi_invalid_password"))
+					}
+
+					//% "Password updated"
+					return Utils.validationResult(VenusOS.Notification_Info, qsTrId("page_settings_wifi_password_updated"))
+				}
 			}
 
 			SettingsListHeader {
