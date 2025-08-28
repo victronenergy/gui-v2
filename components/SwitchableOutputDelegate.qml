@@ -3,6 +3,7 @@
 ** See LICENSE.txt for license information.
 */
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 import QtQuick.Templates as CT
 
@@ -22,7 +23,7 @@ BaseListItem {
 		anchors.verticalCenter: parent.verticalCenter
 		width: parent.width
 
-		Row {
+		RowLayout {
 			anchors {
 				left: switchWidgetLoader.left
 				right: switchWidgetLoader.right
@@ -30,23 +31,29 @@ BaseListItem {
 
 			Label {
 				id: nameLabel
-				anchors.bottom: parent.bottom
+				Layout.maximumWidth: parent.width - infoLabel.width - statusRect.width
 				bottomPadding: Theme.geometry_switchableoutput_label_margin
 				rightPadding: Theme.geometry_switchableoutput_label_margin
 				text: output.formattedName
-				width: parent.width - (statusRect.visible ? statusRect.width : 0)
+				width: nameTextMetrics.tightBoundingRect.x + nameTextMetrics.tightBoundingRect.width
+				elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
+			}
+
+			Label {
+				id: infoLabel
+				Layout.minimumWidth: width
+				bottomPadding: Theme.geometry_switchableoutput_label_margin
+				text: switchWidgetLoader.item.info ?? ""
+				width: infoTextMetrics.tightBoundingRect.x + infoTextMetrics.tightBoundingRect.width
 				elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
 			}
 
 			Rectangle {
 				id: statusRect
 
-				anchors {
-					bottom: parent.bottom
-					bottomMargin: Theme.geometry_switchableoutput_label_margin
-				}
+				Layout.minimumWidth: statusLabel.text === "" ? 0 : 100
 				width: Math.max(Theme.geometry_switchableoutput_status_minimum_width,
-								Math.min(parent.width / 2, statusLabel.implicitWidth))
+								statusTextMetrics.tightBoundingRect.x + statusTextMetrics.tightBoundingRect.width + Theme.geometry_switchableoutput_status_horizontalPadding * 2)
 				height: statusLabel.height
 				color: statusLabel.color === Theme.color_green ? Theme.color_darkGreen
 						: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
@@ -90,6 +97,22 @@ BaseListItem {
 							return Theme.color_red
 						}
 					}
+				}
+
+				TextMetrics {
+					id: nameTextMetrics
+					font: nameLabel.font
+					text: output.formattedName
+				}
+				TextMetrics {
+					id: infoTextMetrics
+					font: infoLabel.font
+					text: infoLabel.text
+				}
+				TextMetrics {
+					id: statusTextMetrics
+					font: statusLabel.font
+					text: statusLabel.text
 				}
 			}
 		}
@@ -391,7 +414,118 @@ BaseListItem {
 	Component {
 		id: temperatureSetpointComponent
 
-		PlaceholderDelegate {}
+		TemperatureSlider {
+			id: temperatureSlider
+
+			property bool valueChangeKeyPressed
+			readonly property bool dragging: pressed || valueChangeKeyPressed
+			readonly property string info: Math.round(value) + Global.systemSettings.temperatureUnitSuffix
+
+			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
+			// toggles the on/off state and left/right keys move the slider.
+			// When return key is pressed, exit the edit mode.
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				case Qt.Key_Return:
+					focus = false
+					return true
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+					// Remove focus and reject event to allow key navigation to delegates above/below.
+					focus = false
+					if (activeFocus) {
+							// Prevent key navigation to other grid delegates while in edit mode.
+							return true
+						}
+						break
+				}
+				return false
+			}
+
+			width: root._buttonWidth
+			height: Theme.geometry_switchableoutput_button_height
+			from: temperatureMin.valid ? Units.convert(temperatureMin.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+									   : Units.convert(0, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+			to: temperatureMax.valid ? Units.convert(temperatureMax.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+									 : Units.convert(100, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+			stepSize: temperatureStepsize.valid ? temperatureStepsize.value : 1
+
+			// On the MQTT backend, many consecutive changes can create a huge queue of backend
+			// changes. Avoid this by preventing changes until the backend is in sync.
+			enabled: !temperatureValue.busy || dragging
+
+			onDraggingChanged: {
+				if (!dragging) {
+					temperatureValue.syncBackendValueToSlider()
+				}
+			}
+			onMoved: {
+				value = Math.round(value)
+				temperatureValue.writeValue(Units.convert(value, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Celsius))
+			}
+
+			Keys.onPressed: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = true
+				}
+				event.accepted = false
+			}
+			Keys.onReleased: (event) => {
+				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+					valueChangeKeyPressed = false
+				}
+				event.accepted = false
+			}
+			KeyNavigationHighlight.active: temperatureSlider.activeFocus
+
+			VeQuickItem {
+				id: temperatureMax
+				uid: root.outputUid + "/Settings/DimmingMax"
+			}
+			VeQuickItem {
+				id: temperatureMin
+				uid: root.outputUid + "/Settings/DimmingMin"
+			}
+			VeQuickItem {
+				id: temperatureStepsize
+				uid: root.outputUid + "/Settings/StepSize"
+			}
+
+			SettingSync {
+				id: temperatureValue
+
+				// Update the slider value to the backend value.
+				function syncBackendValueToSlider() {
+					// If user has interacted with the slider to change the value, delay briefly
+					// before syncing the slider to the backend value, else this may be done while
+					// user changes are still being written.
+					if (busy || temperatureSlider.dragging || temperatureDelayedSliderUpdate.running) {
+						temperatureDelayedSliderUpdate.restart()
+					} else {
+						temperatureSlider.value = Units.convert(backendValue, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+					}
+				}
+
+				backendValue: output.dimming
+				onUpdateToBackend: (value) => { output.setDimming(value) }
+				onBackendValueChanged: syncBackendValueToSlider()
+				onBusyChanged: if (!busy) syncBackendValueToSlider()
+			}
+
+			Connections {
+				target: Global.systemSettings
+				function onTemperatureUnitChanged() { temperatureValue.syncBackendValueToSlider() }
+			}
+
+			Timer {
+				id: temperatureDelayedSliderUpdate
+				interval: 1000
+				onTriggered: temperatureValue.syncBackendValueToSlider()
+			}
+		}
 	}
 
 	Component {
