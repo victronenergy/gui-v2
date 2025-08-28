@@ -566,6 +566,43 @@ BaseListItem {
 	Component {
 		id: threeStateSwitchComponent
 
-		PlaceholderDelegate {}
+		AutoToggleButton {
+			id: autoToggleButton
+
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					focus = true
+					return true
+				}
+				return false
+			}
+
+			height: Theme.geometry_switchableoutput_button_height
+			width: root._buttonWidth
+			enabled: !toggleState.busy || !autoToggleState.busy
+			onChecked: toggleState.backendValue === 1
+			autoChecked: autoToggleState.backendValue
+			onOnClicked: toggleState.writeValue(1)
+			onOffClicked: toggleState.writeValue(0)
+			onAutoClicked: autoToggleState.writeValue(autoToggleState.backendValue === 1 ? 0 : 1)
+
+			SettingSync {
+				id: autoToggleState
+				backendValue: autoState.value
+				onUpdateToBackend: (value) => { autoState.setValue(value) }
+			}
+
+			VeQuickItem {
+				id: autoState
+				uid: root.outputUid + "/Auto"
+			}
+
+			SettingSync {
+				id: toggleState
+				backendValue: output.state
+				onUpdateToBackend: (value) => { output.setState(value) }
+			}
+		}
 	}
 }
