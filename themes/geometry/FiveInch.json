@@ -13,6 +13,8 @@
     "geometry_flickable_maximumFlickVelocity": 2500,
     "geometry_flickable_flickDeceleration": 2500,
 
+    "geometry_autotoggle_button_spacing": 10,
+
     "geometry_barGauge_vertical_width_large": 8,
     "geometry_barGauge_vertical_width_small": 4,
     "geometry_barGauge_horizontal_height": 10,
