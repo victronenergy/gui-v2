@@ -13,15 +13,9 @@ Page {
 	title: qsTrId("inverter_chargers_title")
 
 	GradientListView {
-		model: AggregateDeviceModel {
-			sourceModels: [
-				Global.inverterChargers.veBusDevices,
-				Global.inverterChargers.acSystemDevices,
-				Global.inverterChargers.inverterDevices,
-				Global.inverterChargers.chargerDevices,
-			]
+		model: FilteredDeviceModel {
+			serviceTypes: ["vebus", "acsystem", "inverter", "charger"]
 		}
-
 		delegate: ListNavigation {
 			text: model.device.name
 			secondaryText: Global.system.systemStateToText(stateItem.value)

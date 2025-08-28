@@ -16,6 +16,8 @@ qt_add_executable(tst_allservicesmodel
     ../../src/allservicesmodel.cpp
     ../../src/backendconnection.h
     ../../src/backendconnection.cpp
+    ../../src/basedevice.h
+    ../../src/basedevice.cpp
     ../../src/mockmanager.h
     ../../src/mockmanager.cpp
 

@@ -7,6 +7,7 @@
 #include "src/logging.h"
 #include "src/backendconnection.h"
 #include "src/allservicesmodel.h"
+#include "src/runtimedevicemodel.h"
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
 
@@ -479,6 +480,10 @@ int main(int argc, char *argv[])
 
 	/* Force construction of fps counter */
 	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
+
+	// Create RuntimeDeviceModel now so that it sees all devices that are created even before it is
+	// used in the Device List.
+	Victron::VenusOS::RuntimeDeviceModel::create();
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {

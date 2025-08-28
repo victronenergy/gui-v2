@@ -5,7 +5,6 @@
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Gauges
 
 Page {
 	id: root
@@ -80,7 +79,7 @@ Page {
 				text: qsTrId("devicelist_tanksetup_fluid_type")
 				dataItem.uid: root.bindPrefix + "/FluidType"
 				optionModel: Global.tanks.tankTypes.map(function(tankType) {
-					return { display: Gauges.tankProperties(tankType).name || "", value: tankType }
+					return { display: VenusOS.tank_fluidTypeToText(tankType), value: tankType }
 				})
 			}
 

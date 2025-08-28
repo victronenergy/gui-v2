@@ -35,7 +35,7 @@ OverviewWidget {
 		}
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: combinedDcLoadDevices
 		serviceTypes: ["dcload", "dcsystem", "dcdc"]
 	}
