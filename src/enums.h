@@ -566,6 +566,7 @@ public:
 	Q_ENUM(CanBusConfig_Type)
 
 	enum Relay_Function {
+		Relay_Function_Disabled = -1,
 		Relay_Function_Alarm = 0,
 		Relay_Function_GeneratorStartStop,
 		Relay_Function_Manual,

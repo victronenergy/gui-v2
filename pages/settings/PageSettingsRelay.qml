@@ -43,13 +43,15 @@ Page {
 			ListRadioButtonGroup {
 				id: relayFunction
 
-				text: relay1State.valid
+				text: relay1State.seen
 					  //% "Function (Relay 1)"
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
 					: qsTrId("settings_relay_function")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
 				optionModel: [
+					//% "Disabled"
+					{ display: qsTrId("settings_relay_disabled"), value: VenusOS.Relay_Function_Disabled },
 					//% "Alarm relay"
 					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.Relay_Function_Alarm },
 					//% "Genset start/stop"
@@ -68,12 +70,14 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				id: alarmPolaritySwitch
-
-				//% "Alarm relay polarity"
-				text: qsTrId("settings_relay_alarm_polarity")
+				id: relayPolaritySwitch
+				text: relay1State.seen
+					  //% "Polarity (Relay 1)"
+					? qsTrId("settings_relay_polarity_relay1")
+					  //% "Polarity"
+					: qsTrId("settings_relay_polarity")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
-				preferredVisible: relayFunction.currentValue === VenusOS.Relay_Function_Alarm
+				preferredVisible: [VenusOS.Relay_Function_Alarm, VenusOS.Relay_Function_Manual].indexOf(relayFunction.currentValue) >= 0
 				optionModel: [
 					//% "Normally open"
 					{ display: qsTrId("settings_relay_normally_open"), value: 0 },
@@ -88,8 +92,10 @@ Page {
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
-				preferredVisible: relay1State.valid
+				preferredVisible: relay1State.seen
 				optionModel: [
+					//% "Disabled"
+					{ display: qsTrId("settings_relay_disabled"), value: VenusOS.Relay_Function_Disabled },
 					//% "Manual"
 					{ display: qsTrId("settings_relay_manual"), value: VenusOS.Relay_Function_Manual },
 					{ display: CommonWords.temperature, value: VenusOS.Relay_Function_Temperature },
@@ -97,6 +103,15 @@ Page {
 				onOptionClicked: function(index) {
 					root.notifyRelayFunctionChange(optionModel[index].value)
 				}
+			}
+
+			ListRadioButtonGroup {
+				id: relay1PolaritySwitch
+				//% "Polarity (Relay 2)"
+				text: qsTrId("settings_relay_polarity_relay2")
+				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Polarity"
+				preferredVisible: relay1Function.currentValue === VenusOS.Relay_Function_Manual
+				optionModel: relayPolaritySwitch.optionModel
 			}
 
 			ListNavigation {
