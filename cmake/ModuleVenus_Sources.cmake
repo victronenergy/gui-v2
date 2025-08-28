@@ -130,6 +130,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
     components/ClassAndVrmInstance.qml
+    components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/ComboBox.qml
     components/controls/DimmingSlider.qml
@@ -555,6 +556,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/aggregatetankmodel.cpp
     src/visibleitemmodel.h
     src/visibleitemmodel.cpp
+    src/baseautotoggleswitch.h
+    src/baseautotoggleswitch.cpp
     src/basedevice.h
     src/basedevice.cpp
     src/basedevicemodel.h
