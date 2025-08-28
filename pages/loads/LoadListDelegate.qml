@@ -16,20 +16,25 @@ BaseListItem {
 	property real temperature: NaN
 	property real power: NaN
 
+	property real columnWidth: NaN
+	property real columnSpacing
+
 	signal clicked
 
 	width: parent?.width ?? 0
 	height: Theme.geometry_loadListPage_item_height
 
-	component QuantityColumn : ColumnLayout {
+	component QuantityColumn : Column {
 		property alias title: quantityTitle.text
 		property alias value: quantityLabel.value
 		property alias unit: quantityLabel.unit
 
+		width: root.columnWidth || implicitWidth
 		spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
 		Label {
 			id: quantityTitle
+			width: parent.width
 			elide: Text.ElideRight
 			color: Theme.color_listItem_secondaryText
 			font.pixelSize: Theme.font_size_caption
@@ -44,11 +49,12 @@ BaseListItem {
 	RowLayout {
 		width: parent.width
 		height: parent.height
+		spacing: 0
 
 		Column {
 			Layout.fillWidth: true
 			Layout.leftMargin: Theme.geometry_listItem_content_horizontalMargin
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
+			Layout.rightMargin: root.columnSpacing
 			spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
 			Label {
@@ -69,7 +75,7 @@ BaseListItem {
 		}
 
 		Loader {
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
+			Layout.rightMargin: root.columnSpacing
 			active: !isNaN(root.temperature)
 			sourceComponent: QuantityColumn {
 				title: CommonWords.temperature
@@ -79,7 +85,6 @@ BaseListItem {
 		}
 
 		QuantityColumn {
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
 			title: CommonWords.total_power
 			value: root.power
 			unit: VenusOS.Units_Watt
