@@ -68,13 +68,12 @@ DevicePage {
 			preferredVisible: dataItem.valid
 		}
 
-		ListNavigation {
-			text: CommonWords.setup
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/motordrive/PageSevconSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
-			}
-			preferredVisible: productId.value == ProductInfo.ProductId_MotorDrive_Sevcon
+		ListSwitch {
+			//% "Motor Direction Inverted"
+			text: qsTrId("devicelist_motordrive_motordirectioninverted")
+			dataItem.uid: root.bindPrefix + "/Settings/Motor/DirectionInverted"
+			dataItem.invalidate: false
+			preferredVisible: dataItem.valid
 		}
 	}
 }

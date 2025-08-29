@@ -346,6 +346,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
     pages/settings/PageSettingsCanbus.qml
+    pages/settings/PageSettingsCanOpenMotordrive.qml
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsConnectivity.qml
@@ -479,7 +480,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/GensetDeviceListDelegate.qml
     pages/settings/devicelist/inverter/PageInverter.qml
     pages/settings/devicelist/inverter/PageSolarStats.qml
-    pages/settings/devicelist/motordrive/PageSevconSetup.qml
     pages/settings/devicelist/rs/PageMultiRs.qml
     pages/settings/devicelist/rs/PageRsAlarms.qml
     pages/settings/devicelist/rs/PageRsAlarmSettings.qml
