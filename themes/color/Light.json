@@ -40,6 +40,8 @@
     "color_button_on_background": "color_ok",
     "color_button_off_background": "#74A4D6",
 
+    "color_multistepbutton_separator": "#D3E1EE",
+
     "color_card_separator": "color_gray6",
 
     "color_modalDialog_border": "color_gray2",
