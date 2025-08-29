@@ -16,7 +16,8 @@ QtObject {
 			+ Math.max(informations.activeCount, informations.unAcknowledgedCount)
 
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
-		onNotificationUpdated: (notification) => toastedNotification.onNotificationUpdated(notification)
+		onNotificationInserted: (notification) => toastedNotification.queueNotification(notification)
+		onNotificationUpdated: (notification) => toastedNotification.queueNotification(notification)
 		onNotificationRemoved: (notification) => toastedNotification.onNotificationRemoved(notification)
 	}
 
@@ -35,7 +36,7 @@ QtObject {
 			onTriggered: toastedNotif.requestToastForNotification(toastedNotif.pendingNotification)
 		}
 
-		function onNotificationUpdated(notif: BaseNotification) {
+		function queueNotification(notif: BaseNotification) {
 			if (!toastedNotif.pendingNotification || notif.dateTime >= toastedNotif.pendingNotification.dateTime) {
 				toastedNotif.pendingNotification = notif;
 				pendingNotificationTimer.restart();
@@ -43,11 +44,10 @@ QtObject {
 		}
 
 		function requestToastForNotification(notif: BaseNotification) {
-
 			// the notification must be acknowledged: false at the point of being updated
 			// (this is because injected notifications' active is always false)
 			// for a toast to be considered for raising (and preempting existing ones)
-			if (!notif.acknowledged) {
+			if (!notif.acknowledged && notif.active) {
 				toastedNotif.checkAndRemoveExistingToast(notif)
 				if (!toastedNotif.toast) {
 					let createdToast = Global.notificationLayer?.showToastNotification(notif.type, "")
