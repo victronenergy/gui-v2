@@ -184,9 +184,7 @@ BaseListItem {
 			}
 
 			function _toggleState() {
-				if (!dimmingState.busy) {
-					dimmingState.writeValue(output.state === 0 ? 1 : 0)
-				}
+				dimmingState.writeValue(output.state === 0 ? 1 : 0)
 			}
 
 			width: root._buttonWidth
@@ -199,12 +197,10 @@ BaseListItem {
 			stepSize: 1
 			state: dimmingState.expectedValue
 
-			// On the MQTT backend, many consecutive changes can create a huge queue of backend
-			// changes. Avoid this by preventing changes until the backend is in sync.
-			enabled: !dimmingValue.busy || dragging
-
 			onDraggingChanged: {
-				if (!dragging) {
+				if (dragging) {
+					delayedSliderUpdate.stop()
+				} else {
 					dimmingValue.syncBackendValueToSlider()
 				}
 			}
@@ -266,6 +262,9 @@ BaseListItem {
 				onBusyChanged: if (!busy) syncBackendValueToSlider()
 			}
 
+			// When the slider is released, wait a second for the user value to sync to the backend,
+			// else the user will release the slider and then immediately see it jump several times
+			// as the backend catches up to the last written value.
 			Timer {
 				id: delayedSliderUpdate
 				interval: 1000
@@ -282,10 +281,7 @@ BaseListItem {
 
 			function handlePress(key) {
 				if (key === Qt.Key_Space) {
-					// Write state=1 (on) if no other write is in progress.
-					if (!momentaryState.busy) {
-						momentaryState.writeValue(1)
-					}
+					momentaryState.writeValue(1)
 					return true
 				}
 				return false
@@ -304,9 +300,6 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-
-			// Disable if a write is in progress, unless expecting mouse/key release.
-			enabled: !momentaryState.busy || momentaryState.expectedValue === 1
 
 			// Show as checked, when pressing or backend indicates it is pressed
 			checked: momentaryState.expectedValue === 1
@@ -349,7 +342,6 @@ BaseListItem {
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
 			on: toggleState.expectedValue === 1
-			enabled: !toggleState.busy
 
 			// Do not focus the internal buttons when clicked, as this control has no edit mode.
 			focusPolicy: Qt.NoFocus
@@ -407,7 +399,6 @@ BaseListItem {
 			}
 
 			width: root._buttonWidth
-			enabled: !dropdownSync.busy
 			onActivated: (index) => dropdownSync.writeValue(index)
 
 			// Process key events in edit mode.
@@ -505,7 +496,6 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_button_height
-			enabled: !unrangedValueSync.busy
 			editable: !Global.isGxDevice // no room for VKB in the switch pane
 			suffix: unrangedUnit.value ?? ""
 			from: decimalConverter.intFrom
