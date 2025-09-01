@@ -3,14 +3,18 @@
 ** See LICENSE.txt for license information.
 */
 
-#ifndef SOLARINPUTMODEL_H
-#define SOLARINPUTMODEL_H
+#ifndef VICTRON_GUIV2_SOLARINPUTMODEL_H
+#define VICTRON_GUIV2_SOLARINPUTMODEL_H
 
 #include <QAbstractListModel>
 #include <qqmlintegration.h>
+#include <QSortFilterProxyModel>
 
 namespace Victron {
 namespace VenusOS {
+
+class Device;
+class SolarInput;
 
 /*
   Provides a model for solar input data.
@@ -28,13 +32,14 @@ class SolarInputModel : public QAbstractListModel
 public:
 	enum Role {
 		ServiceUidRole = Qt::UserRole,
+		ServiceTypeRole,
 		GroupRole,
+		EnabledRole,
 		NameRole,
 		TodaysYieldRole,
 		PowerRole,
 		CurrentRole,
 		VoltageRole,
-		EnergyRole
 	};
 	Q_ENUM(Role)
 
@@ -45,11 +50,6 @@ public:
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
-	Q_INVOKABLE void addInput(const QString &serviceUid, const QVariantMap &values, int trackerIndex = 0);
-	Q_INVOKABLE void setInputValue(const QString &serviceUid, Role role, const QVariant &value, int trackerIndex = 0);
-	Q_INVOKABLE int indexOf(const QString &serviceUid, int trackerIndex = 0) const;
-	Q_INVOKABLE void removeAt(int index);
-
 Q_SIGNALS:
 	void countChanged();
 
@@ -57,25 +57,36 @@ protected:
 	QHash<int, QByteArray> roleNames() const override;
 
 private:
-	struct Input {
-		QString serviceUid;
-		QString group;
-		QString name;
-		qreal todaysYield = qQNaN();
-		qreal energy = qQNaN();
-		qreal power = qQNaN();
-		qreal current = qQNaN();
-		qreal voltage = qQNaN();
-		int trackerIndex = 0;
-	};
+	void maybeAddDevice(Device *device);
+	void sourceDeviceAdded(const QModelIndex &parent, int first, int last);
+	void sourceDeviceAboutToBeRemoved(const QModelIndex &parent, int first, int last);
+	void clearInputs();
+	void addAvailableInputs();
+	void initializeInput(SolarInput *input);
+	void inputEnabledChanged();
+	void emitInputValueChanged(SolarInput *input, Role role);
 
-	int insertionIndex(const Input &input) const;
+	QVector<SolarInput *> m_enabledInputs;
+	QVector<SolarInput *> m_disabledInputs;
+};
 
-	QHash<int, QByteArray> m_roleNames;
-	QVector<Input> m_inputs;
+/*
+	Provides a sorted SolarInputModel.
+
+	Inputs are sorted by their group and name.
+*/
+class SortedSolarInputModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+public:
+	explicit SortedSolarInputModel(QObject *parent = nullptr);
+
+protected:
+	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 };
 
 } /* VenusOS */
 } /* Victron */
 
-#endif // SOLARINPUTMODEL_H
+#endif // VICTRON_GUIV2_SOLARINPUTMODEL_H
