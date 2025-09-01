@@ -541,7 +541,7 @@ Item {
 
 	FilteredDeviceModel {
 		id: solarInputModel
-		serviceTypes: ["solarcharger", "pvinverter", "inverter"]
+		serviceTypes: ["solarcharger", "multi", "pvinverter", "inverter"]
 	}
 
 	FilteredDeviceModel {

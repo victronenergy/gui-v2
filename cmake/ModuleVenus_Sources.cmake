@@ -627,6 +627,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/units.cpp
     src/screenblanker.h
     src/screenblanker.cpp
+    src/solarinput.h
+    src/solarinput.cpp
     src/solarinputmodel.h
     src/solarinputmodel.cpp
     src/switchableoutputmodel.h
