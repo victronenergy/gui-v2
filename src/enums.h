@@ -388,6 +388,18 @@ public:
 	};
 	Q_ENUM(Tank_Backup_Restore_Notification)
 
+	enum Tank_Backup_Restore_Error {
+		Tank_Backup_Restore_Error_None = 0,
+		Tank_Backup_Restore_Error_UsbDriveNotMounted,
+		Tank_Backup_Restore_Error_CreateUsbException,
+		Tank_Backup_Restore_Error_BackupException,
+		Tank_Backup_Restore_Error_RestoreException,
+		Tank_Backup_Restore_Error_ArchiveFileDeleteFailed,
+		Tank_Backup_Restore_Error_BackupFileDeleteFailed,
+		Tank_Backup_Restore_Error_BackupFileMissing,
+	};
+	Q_ENUM(Tank_Backup_Restore_Error)
+
 	enum Relays_State {
 		Relays_State_Inactive = 0,
 		Relays_State_Active
