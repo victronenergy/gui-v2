@@ -120,7 +120,48 @@ Page {
 		uid: serviceUid + "/Error"
 		onValueChanged: {
 			if (valid && value !== 0) {
-				Global.showToastNotification(VenusOS.Notification_Warning, "ERROR #" + value, 10000)
+				let errorMessage = ""
+				switch (value) {
+					case VenusOS.Tank_Backup_Restore_Error_UsbDriveNotMounted:
+						//% "No USB drive is mounted. Please insert a USB drive and try again."
+						errorMessage = qsTrId("tank_backup_error_no_usb_drive_mounted")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_CreateUsbException:
+						//% "An error occurred while creating the USB drive. Please try again."
+						errorMessage = qsTrId("tank_backup_error_create_usb_exception")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_BackupException:
+						//% "An error occurred while backing up the tank settings. Please try again."
+						errorMessage = qsTrId("tank_backup_error_backup_exception")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_RestoreException:
+						//% "An error occurred while restoring the tank settings. Please try again."
+						errorMessage = qsTrId("tank_backup_error_restore_exception")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_ArchiveFileDeleteFailed:
+						//% "Failed to delete existing archive file on USB drive. Please try again."
+						errorMessage = qsTrId("tank_backup_error_archive_file_delete_failed")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_BackupFileDeleteFailed:
+						//% "Failed to delete existing backup file on USB drive. Please try again."
+						errorMessage = qsTrId("tank_backup_error_backup_file_delete_failed")
+						break
+
+					case VenusOS.Tank_Backup_Restore_Error_BackupFileMissing:
+						//% "No tank settings backup file found on USB drive. Please create a backup first."
+						errorMessage = qsTrId("tank_backup_error_no_backup_file_found")
+						break
+
+					default:
+						//% "An unknown error occurred: #%1"
+						errorMessage = qsTrId("tank_backup_error_unknown_error").arg(value)
+				}
+				Global.showToastNotification(VenusOS.Notification_Warning, errorMessage, 10000)
 				_backupRestoreError.setValue(0) // Prevent from showing again when page re-opens
 			}
 
@@ -166,6 +207,7 @@ Page {
 			// - Add option to choose backup name as in Vebus backup
 			// - Add option to select backup to restore as in Vebus backup
 
+			/*
 			ListButton {
 				id: _createUsbButton
 				//% "Create USB stick for automatic tank settings restore"
@@ -177,6 +219,7 @@ Page {
 					_backupRestoreAction.setValue(VenusOS.Tank_Backup_Restore_Action_Create_USB)
 				}
 			}
+			*/
 
             // backup whole tank configuration
             // after backup was successful, display modal dialog and tell the user backup is completed and media was ejected
