@@ -19,7 +19,8 @@ QtObject {
 	readonly property int decimalFactor: Math.pow(10, decimals)
 
 	function decimalToInt(value) {
-		return value * decimalFactor
+		// Round the number to adjust for loss of precision in values reported from the backend
+		return Math.round(value * decimalFactor)
 	}
 
 	function intToDecimal(value) {
