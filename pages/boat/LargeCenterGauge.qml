@@ -39,7 +39,8 @@ Item {
 		animationEnabled: root.animationEnabled
 		objectName: "centerGauge"
 		visible: root.activeDataSource === root.gps || root.activeDataSource === root.motorDriveDcConsumption
-		layer.enabled: true
+
+		layer.enabled: !BackendConnection.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 
@@ -178,7 +179,8 @@ Item {
 		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrive.rpm.valid
-		layer.enabled: true
+
+		layer.enabled: !BackendConnection.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 	}
