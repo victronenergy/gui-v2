@@ -97,7 +97,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SolarHistoryTableView.qml
     components/SolarYieldGauge.qml
     components/SolarYieldGraph.qml
-    components/SolarYieldModel.qml
     components/SplashView.qml
     components/SpinBoxDecimalConverter.qml
     components/StatusBar.qml
@@ -635,6 +634,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/solarinput.cpp
     src/solarinputmodel.h
     src/solarinputmodel.cpp
+    src/solaryieldmodel.h
+    src/solaryieldmodel.cpp
     src/switchableoutputmodel.h
     src/switchableoutputmodel.cpp
     src/switchableoutputgroupmodel.h

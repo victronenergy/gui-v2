@@ -26,7 +26,10 @@ ColumnLayout {
 		loadersActive: Global.solarInputs.devices.count > 0 // pvinverters do not have history, so ignore them
 		visible: Global.solarInputs.devices.count > 0
 		quantityLabel.dataObject: Global.system.solar
-		sideComponent: SolarYieldGraph {}
+		sideComponent: SolarYieldGraph {
+			spacing: Theme.geometry_sidePanel_solar_graph_bar_spacing
+			maximumBarCount: Theme.geometry_sidePanel_solar_graph_bar_count
+		}
 	}
 
 	// In most cases there is only 1 generator, so don't worry about other ones here.
