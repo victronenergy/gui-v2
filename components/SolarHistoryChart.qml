@@ -10,7 +10,7 @@ FocusScope {
 	id: root
 
 	property SolarHistory solarHistory
-	property alias dayRange: yieldModel.dayRange
+	property var dayRange: [0, 1]
 
 	property var _dailyHistoryDialog
 	property real _maxTickValue: 1
@@ -174,7 +174,9 @@ FocusScope {
 			model: SolarYieldModel {
 				id: yieldModel
 
-				targetHistory: root.solarHistory
+				serviceUid: root.solarHistory.bindPrefix
+				firstDay: root.dayRange[0]
+				lastDay: root.dayRange[1] - 1
 
 				onMaximumYieldChanged: Qt.callLater(root._fitChartToMaxYield)
 			}
@@ -189,7 +191,7 @@ FocusScope {
 				}
 
 				function openHistoryDialog() {
-					Global.dialogLayer.open(dailyHistoryDialogComponent, {day: yieldModel.dayRange[0] + model.index})
+					Global.dialogLayer.open(dailyHistoryDialogComponent, {day: yieldModel.firstDay + model.index})
 				}
 
 				width: (barRow.width - (barRow.spacing * (barRepeater.count - 1))) / barRepeater.count
@@ -230,10 +232,10 @@ FocusScope {
 
 		SolarDailyHistoryDialog {
 			solarHistory: root.solarHistory
-			minimumDay: yieldModel.dayRange[0]
-			maximumDay: yieldModel.dayRange[1] - 1
+			minimumDay: yieldModel.firstDay
+			maximumDay: yieldModel.lastDay
 			highlightBarForDay: function(day) {
-				const container = barRepeater.itemAt(day - yieldModel.dayRange[0])
+				const container = barRepeater.itemAt(day - yieldModel.firstDay)
 				if (!container) {
 					console.warn("highlightBarSource() failed, no repeater item at day:", day, "dayRange:", root.dayRange)
 					return null
@@ -241,7 +243,7 @@ FocusScope {
 				return container.coloredBar
 			}
 			onDayChanged: {
-				barRepeater.currentIndex = day - yieldModel.dayRange[0]
+				barRepeater.currentIndex = day - yieldModel.firstDay
 			}
 		}
 	}
