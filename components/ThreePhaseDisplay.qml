@@ -27,6 +27,8 @@ Flow {
 	// If true, the color text will be green when the phase is feeding back to the grid.
 	property bool inputMode
 
+	readonly property real availableWidth: width - leftPadding - rightPadding
+
 	Repeater {
 		id: phaseRepeater
 
@@ -47,8 +49,8 @@ Flow {
 					: Theme.color_font_primary
 
 			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S
-				   ? parent.width / 3
-				   : parent.width
+				   ? root.availableWidth / 3
+				   : root.availableWidth
 			height: root.widgetSize <= VenusOS.OverviewWidget_Size_S
 					? quantityLabel.y + quantityLabel.height
 					: phaseLabel.height

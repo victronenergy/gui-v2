@@ -39,17 +39,13 @@ OverviewWidget {
 		Loader {
 			id: extraContentLoader
 
-			readonly property int margin: sourceComponent === historyComponent
-				  ? Theme.geometry_overviewPage_widget_solar_graph_margins
-				  : root.verticalMargin
-
 			anchors {
 				left: parent.left
-				leftMargin: margin
 				right: parent.right
-				rightMargin: margin
 				bottom: parent.bottom
-				bottomMargin: margin
+				bottomMargin: sourceComponent === historyComponent
+					? Theme.geometry_overviewPage_widget_content_verticalMargin
+					: root.verticalMargin
 			}
 			active: root.size >= VenusOS.OverviewWidget_Size_L
 			sourceComponent: {
@@ -70,6 +66,8 @@ OverviewWidget {
 		id: phaseComponent
 
 		ThreePhaseDisplay {
+			leftPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			rightPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			model: Global.solarInputs.pvInverterDevices.deviceAt(0).phases
 			visible: model.count > 1
 			widgetSize: root.size
@@ -80,7 +78,12 @@ OverviewWidget {
 		id: historyComponent
 
 		SolarYieldGraph {
+			width: parent.width
+			leftPadding: Theme.geometry_overviewPage_widget_solar_graph_margins
+			rightPadding: Theme.geometry_overviewPage_widget_solar_graph_margins
 			height: root.extraContent.height - (2 * Theme.geometry_overviewPage_widget_solar_graph_margins)
+			spacing: Theme.geometry_overviewPage_widget_solar_graph_bar_spacing
+			maximumBarCount: Theme.geometry_overviewPage_widget_solar_graph_bar_count
 		}
 	}
 }

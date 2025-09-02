@@ -6,38 +6,31 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+Row {
 	id: root
 
-	readonly property int _maxBars: Math.max(0, width / (Theme.geometry_overviewPage_widget_solar_graph_bar_width
-		+ Theme.geometry_overviewPage_widget_solar_graph_margins))
+	property int maximumBarCount
 
-	Row {
-		anchors {
-			horizontalCenter: parent.horizontalCenter
-			bottom: parent.bottom
+	readonly property real availableWidth: width - leftPadding - rightPadding
+	readonly property real _barWidth: (availableWidth - ((yieldModel.count - 1) * spacing)) / yieldModel.count
+
+	Repeater {
+		id: dayRepeater
+
+		model: SolarYieldModel {
+			id: yieldModel
+			firstDay: 0
+			lastDay: root.maximumBarCount - 1
 		}
-		width: (_maxBars * Theme.geometry_overviewPage_widget_solar_graph_bar_width)
-			+ ((_maxBars-1) * Theme.geometry_overviewPage_widget_solar_graph_margins)
-		spacing: Theme.geometry_overviewPage_widget_solar_graph_margins
 
-		Repeater {
-			id: dayRepeater
-
-			model: SolarYieldModel {
-				id: yieldModel
-				dayRange: [0, root._maxBars]
-			}
-
-			delegate: Rectangle {
-				anchors.bottom: parent.bottom
-				height: yieldModel.maximumYield > 0
-						? root.height * (model.yieldKwh / yieldModel.maximumYield)
-						: 0
-				width: Theme.geometry_overviewPage_widget_solar_graph_bar_width
-				radius: Theme.geometry_overviewPage_widget_solar_graph_bar_radius
-				color: Theme.color_overviewPage_widget_solar_graph_bar
-			}
+		delegate: Rectangle {
+			anchors.bottom: parent.bottom
+			height: yieldModel.maximumYield > 0
+					? root.height * (model.yieldKwh / yieldModel.maximumYield)
+					: 0
+			width: root._barWidth
+			radius: Theme.geometry_overviewPage_widget_solar_graph_bar_radius
+			color: Theme.color_overviewPage_widget_solar_graph_bar
 		}
 	}
 }

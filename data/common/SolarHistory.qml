@@ -19,8 +19,6 @@ QtObject {
 		uidPrefix: root.bindPrefix + "/History/Overall"
 	}
 
-	signal yieldUpdatedForDay(day: int, yieldKwh: real)
-
 	function dailyHistory(day) {
 		return _historyObjects.dailyHistory(day)
 	}
@@ -72,23 +70,8 @@ QtObject {
 				}
 			}
 
-			property bool _completed
-
 			// uid is e.g. com.victronenergy.root.tty0/History/Daily/<day>
 			uidPrefix: root.bindPrefix + "/History/Daily/" + model.index
-
-			onYieldKwhChanged: {
-				if (_completed) {
-					root.yieldUpdatedForDay(model.index, yieldKwh)
-				}
-			}
-
-			Component.onCompleted: {
-				_completed = true
-				if (!isNaN(yieldKwh)) {
-					root.yieldUpdatedForDay(model.index, yieldKwh)
-				}
-			}
 		}
 	}
 
