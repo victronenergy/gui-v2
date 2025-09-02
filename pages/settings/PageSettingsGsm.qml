@@ -31,9 +31,17 @@ Page {
 		id: settingsListView
 
 		model: simStatus.valid ? modemConnected : notConnected
+		onModelChanged: console.log("settingsListView: model:", model.objectName)
 
 		VisibleItemModel {
 			id: notConnected
+
+			objectName: "notConnected"
+
+			ListButton {
+				secondaryText: "toggle model"
+				onClicked: settingsListView.model = settingsListView.model === modemConnected ? notConnected : modemConnected
+			}
 
 			ListItem {
 				//% "Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity."
@@ -43,6 +51,12 @@ Page {
 
 		VisibleItemModel {
 			id: modemConnected
+
+			objectName: "modemConnected"
+			ListButton {
+				secondaryText: "toggle model"
+				onClicked: settingsListView.model = settingsListView.model === modemConnected ? notConnected : modemConnected
+			}
 
 			ListText {
 				id: status
