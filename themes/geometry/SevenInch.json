@@ -232,6 +232,8 @@
     "geometry_sidePanel_sideWidget_bottomMargin": 4,
     "geometry_sidePanel_quantityLabel_bottomMargin": 4,
     "geometry_sidePanel_verticalMargin": 16,
+    "geometry_sidePanel_solar_graph_bar_count": 9,
+    "geometry_sidePanel_solar_graph_bar_spacing": 8,
 
     "geometry_acInputDirectionIcon_rightMargin": 2,
 
@@ -293,9 +295,10 @@
 
     "geometry_overviewPage_layout_expanded_bottomMargin": 40,
 
-    "geometry_overviewPage_widget_solar_graph_bar_width": 8,
+    "geometry_overviewPage_widget_solar_graph_bar_count": 13,
+    "geometry_overviewPage_widget_solar_graph_bar_width": 10,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
-    "geometry_overviewPage_widget_solar_graph_margins": 8,
+    "geometry_overviewPage_widget_solar_graph_margins": 12,
     "geometry_overviewPage_batterywidget_renewable_icon_right_margin": 8,
     "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 3,
 

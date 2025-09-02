@@ -25,8 +25,6 @@ Device {
 
 	readonly property bool _isSolarCharger: BackendConnection.serviceTypeFromUid(serviceUid) === "solarcharger"
 
-	signal yieldUpdatedForDay(day: int, yieldKwh: real)
-
 	function dailyHistory(day) {
 		return _history.dailyHistory(day)
 	}
@@ -52,8 +50,5 @@ Device {
 		bindPrefix: root.serviceUid
 		deviceName: root.name
 		trackerCount: root.trackerCount
-		onYieldUpdatedForDay: (day, yieldKwh) => {
-			root.yieldUpdatedForDay(day, yieldKwh)
-		}
 	}
 }
