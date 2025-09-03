@@ -47,11 +47,9 @@ Page {
 
 			onClicked: {
 				if (serviceType === "pvinverter") {
-					const pvInverter = Global.solarInputs.pvInverterDevices.deviceAt(Global.solarInputs.pvInverterDevices.indexOf(serviceUid))
-					Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { pvInverter: pvInverter })
+					Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml", { serviceUid: serviceUid })
 				} else {
-					const solarDevice = Global.solarInputs.devices.deviceAt(Global.solarInputs.devices.indexOf(serviceUid))
-					Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml", { solarDevice: solarDevice })
+					Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml", { serviceUid: serviceUid })
 				}
 			}
 		}
