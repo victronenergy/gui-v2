@@ -109,9 +109,9 @@ Column {
 			model: QuantityObjectModel {
 				id: rowModel
 
-				readonly property real totalYield: root._trackerHistoryTotal("yieldKwh", index)
-				readonly property real maxVoltage: root._trackerHistoryMax("maxVoltage", index)
-				readonly property real maxPower: root._trackerHistoryMax("maxPower", index)
+				readonly property real totalYield: root._trackerHistoryTotal("yieldKwh", tableRow.index)
+				readonly property real maxVoltage: root._trackerHistoryMax("maxVoltage", tableRow.index)
+				readonly property real maxPower: root._trackerHistoryMax("maxPower", tableRow.index)
 
 				QuantityObject { object: rowModel; key: "totalYield"; unit: VenusOS.Units_Energy_KiloWattHour }
 				QuantityObject { object: rowModel; key: "maxVoltage"; unit: VenusOS.Units_Volt_DC }
