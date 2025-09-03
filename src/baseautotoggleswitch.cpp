@@ -1,7 +1,7 @@
 #include "baseautotoggleswitch.h"
 
 BaseAutoToggleSwitch::BaseAutoToggleSwitch(QQuickItem *parent)
-    : QQuickControl(parent)
+	: QQuickControl(parent)
 {
 	setFlag(ItemIsFocusScope);
 	setFocusPolicy(Qt::StrongFocus);
@@ -35,5 +35,5 @@ void BaseAutoToggleSwitch::setAutoChecked(bool checked)
 
 int BaseAutoToggleSwitch::buttonCount() const
 {
-    return 3;
+	return 3;
 }

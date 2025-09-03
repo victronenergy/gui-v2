@@ -14,7 +14,7 @@ class BaseAutoToggleSwitch : public QQuickControl
 	Q_PROPERTY(int buttonCount READ buttonCount CONSTANT FINAL)
 
 public:
-    BaseAutoToggleSwitch(QQuickItem *parent = nullptr);
+	BaseAutoToggleSwitch(QQuickItem *parent = nullptr);
 
 	bool onChecked() const;
 	void setOnChecked(bool checked);
