@@ -9,20 +9,30 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	required property SolarDevice solarDevice
+	required property string serviceUid
 	readonly property SolarTracker singleTracker: solarDevice.trackerCount === 1 ? firstTracker : null
 
 	title: solarDevice.name
 
+	SolarDevice {
+		id: solarDevice
+		serviceUid: root.serviceUid
+	}
+
 	SolarTracker {
 		id: firstTracker
-		device: root.solarDevice
+		device: solarDevice
 		trackerIndex: 0
 	}
 
 	VeQuickItem {
+		id: overallYieldToday
+		uid: root.serviceUid + "/History/Daily/0/Yield"
+	}
+
+	VeQuickItem {
 		id: stateItem
-		uid: root.solarDevice.serviceUid + "/State"
+		uid: solarDevice.serviceUid + "/State"
 	}
 
 	GradientListView {
@@ -54,13 +64,10 @@ Page {
 
 					bodyHeaderText: VenusOS.solarCharger_stateToText(stateItem.value)
 					bodyModel: QuantityObjectModel {
-						id: summaryModel
-						readonly property real todaysYield: root.solarDevice.dailyHistory(0)?.yieldKwh ?? NaN
-
-						QuantityObject { object: summaryModel; key: "todaysYield"; unit: VenusOS.Units_Energy_KiloWattHour }
+						QuantityObject { object: overallYieldToday; unit: VenusOS.Units_Energy_KiloWattHour }
 						QuantityObject { object: root.singleTracker; key: "voltage"; unit: VenusOS.Units_Volt_DC; hidden: !root.singleTracker }
 						QuantityObject { object: root.singleTracker; key: "current"; unit: VenusOS.Units_Amp; hidden: !root.singleTracker }
-						QuantityObject { object: root.solarDevice; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: solarDevice; key: "power"; unit: VenusOS.Units_Watt }
 					}
 				}
 
@@ -72,21 +79,18 @@ Page {
 					rightPadding: trackerSummary.rightPadding
 					columnSpacing: trackerSummary.columnSpacing
 					metricsFontSize: trackerSummary.metricsFontSize
-					model: root.solarDevice.trackerCount > 1 ? root.solarDevice.trackerCount : 0
+					model: solarDevice.trackerCount > 1 ? solarDevice.trackerCount : 0
 					header: count > 0 ? tableHeaderComponent : null
 
 					delegate: QuantityTable.TableRow {
 						id: tableRow
 
-						// Today's yield for this tracker
-						readonly property real todaysYield: root.solarDevice.dailyTrackerHistory(0, index)?.yieldKwh ?? NaN
-
 						preferredVisible: tracker.enabled
 						headerText: Global.solarInputs.formatTrackerName(
-								  tracker.name, index, root.trackerCount, root.solarDevice.name,
+								  tracker.name, index, root.trackerCount, solarDevice.name,
 								  VenusOS.TrackerName_NoDevicePrefix)
 						model: QuantityObjectModel {
-							QuantityObject { object: tableRow; key: "todaysYield"; unit: VenusOS.Units_Energy_KiloWattHour }
+							QuantityObject { object: tracker; key: "todaysYield"; unit: VenusOS.Units_Energy_KiloWattHour }
 							QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
 							QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
 							QuantityObject { object: tracker; key: "power"; unit: VenusOS.Units_Watt }
@@ -94,7 +98,7 @@ Page {
 
 						SolarTracker {
 							id: tracker
-							device: root.solarDevice
+							device: solarDevice
 							trackerIndex: tableRow.index
 						}
 					}
@@ -124,32 +128,32 @@ Page {
 
 				VeQuickItem {
 					id: batteryVoltage
-					uid: root.solarDevice.serviceUid + "/Dc/0/Voltage"
+					uid: solarDevice.serviceUid + "/Dc/0/Voltage"
 				}
 
 				VeQuickItem {
 					id: batteryCurrent
-					uid: root.solarDevice.serviceUid + "/Dc/0/Current"
+					uid: solarDevice.serviceUid + "/Dc/0/Current"
 				}
 
 			}
 
 			ListRelayState {
-				dataItem.uid: root.solarDevice.serviceUid + "/Relay/0/State"
+				dataItem.uid: solarDevice.serviceUid + "/Relay/0/State"
 			}
 
 			ListText {
 				text: CommonWords.error
-				dataItem.uid: root.solarDevice.serviceUid + "/ErrorCode"
+				dataItem.uid: solarDevice.serviceUid + "/ErrorCode"
 				secondaryText: ChargerError.description(dataItem.value)
 			}
 
 			ListNavigation {
 				text: CommonWords.history
-				preferredVisible: root.solarDevice.history.valid
+				preferredVisible: solarDevice.history.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "solarHistory": root.solarDevice.history })
+							{ "solarHistory": solarDevice.history })
 				}
 			}
 
@@ -157,7 +161,7 @@ Page {
 				id: productPageLink
 
 				readonly property string pageUrl: {
-					const serviceType = BackendConnection.serviceTypeFromUid(root.solarDevice.serviceUid)
+					const serviceType = BackendConnection.serviceTypeFromUid(solarDevice.serviceUid)
 					if (serviceType === "solarcharger") {
 						return "/pages/solar/PageSolarCharger.qml"
 					} else if (serviceType === "multi") {
@@ -172,7 +176,7 @@ Page {
 				text: CommonWords.product_page
 				preferredVisible: pageUrl.length > 0
 				onClicked: {
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.solarDevice.serviceUid })
+					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: solarDevice.serviceUid })
 				}
 			}
 		}

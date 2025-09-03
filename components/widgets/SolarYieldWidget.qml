@@ -13,10 +13,10 @@ OverviewWidget {
 		const singleDeviceOnly = (Global.solarInputs.devices.count + Global.solarInputs.pvInverterDevices.count) === 1
 		if (singleDeviceOnly && Global.solarInputs.devices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml",
-					{ "solarDevice": Global.solarInputs.devices.firstObject })
+					{ "serviceUid": Global.solarInputs.devices.firstObject.serviceUid })
 		} else if (singleDeviceOnly && Global.solarInputs.pvInverterDevices === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
-					{ "pvInverter": Global.solarInputs.pvInverterDevices.deviceAt(0) })
+					{ "serviceUid": Global.solarInputs.pvInverterDevices.firstObject.serviceUid })
 		} else {
 			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": root.title })
 		}
