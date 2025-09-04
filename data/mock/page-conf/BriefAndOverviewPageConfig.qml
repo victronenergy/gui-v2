@@ -526,7 +526,7 @@ Item {
 
 	FilteredDeviceModel {
 		id: dcInputModel
-		serviceTypes: Global.dcInputs.serviceTypes
+		serviceTypes: ["alternator", "fuelcell", "dcsource", "dcgenset"]
 	}
 
 	FilteredDeviceModel {
