@@ -16,6 +16,17 @@ class VisibleItemModelPrivate : public QObjectPrivate
 {
 	Q_DECLARE_PUBLIC(VisibleItemModel)
 public:
+	class Item {
+	public:
+		Item(QQuickItem *i) : item(i) {}
+
+		void addRef() { ++ref; }
+		bool deref() { return --ref == 0; }
+
+		QPointer<QQuickItem> item;
+		int ref = 0;
+	};
+
 	VisibleItemModelPrivate()
 		: QObjectPrivate() {}
 
@@ -41,6 +52,15 @@ public:
 		static_cast<VisibleItemModelPrivate *>(prop->data)->removeLast();
 	}
 
+	int indexOfVisibleItem(QQuickItem *item) const {
+		for (int i = 0; i < visibleItems.count(); ++i) {
+			if (visibleItems.at(i).item == item) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	void append(QQuickItem *item) {
 		Q_Q(VisibleItemModel);
 		allItems.append(item);
@@ -63,7 +83,7 @@ public:
 			if (last) {
 				last->disconnect(q);
 			}
-			const int visibleItemIndex = visibleItems.indexOf(last);
+			const int visibleItemIndex = indexOfVisibleItem(last);
 			if (visibleItemIndex >= 0) {
 				QQmlChangeSet changeSet;
 				changeSet.remove(visibleItemIndex, 1);
@@ -103,12 +123,12 @@ public:
 			if (insertionIndex >= 0) {
 				QQmlChangeSet changeSet;
 				changeSet.insert(insertionIndex, 1);
-				visibleItems.insert(insertionIndex, item);
+				visibleItems.insert(insertionIndex, Item(item));
 				emit q->modelUpdated(changeSet, false);
 				emit q->countChanged();
 			}
 		} else {
-			const int removalIndex = visibleItems.indexOf(item);
+			const int removalIndex = indexOfVisibleItem(item);
 			if (removalIndex >= 0) {
 				QQmlChangeSet changeSet;
 				changeSet.remove(removalIndex, 1);
@@ -124,7 +144,7 @@ public:
 		Returns -1 if the index should not be inserted.
 	*/
 	int visibleInsertionIndex(QQuickItem *item) {
-		if (!item || visibleItems.indexOf(item) >= 0) {
+		if (!item || indexOfVisibleItem(item) >= 0) {
 			return -1;
 		}
 
@@ -145,7 +165,7 @@ public:
 
 		// In the visible items list: find the index of that previous visible item.
 		if (prevVisibleItem) {
-			const int prevVisibleIndex = visibleItems.indexOf(prevVisibleItem);
+			const int prevVisibleIndex = indexOfVisibleItem(prevVisibleItem);
 			if (prevVisibleIndex >= 0) {
 				// Insert the new item after that previous visible item.
 				return prevVisibleIndex + 1;
@@ -156,7 +176,7 @@ public:
 	}
 
 	QVector<QPointer<QQuickItem> > allItems;
-	QVector<QPointer<QQuickItem> > visibleItems;
+	QVector<Item> visibleItems;
 };
 
 VisibleItemModel::VisibleItemModel(QObject *parent)
@@ -198,14 +218,27 @@ QObject *VisibleItemModel::object(int index, QQmlIncubator::IncubationMode)
 	if (index < 0 || index >= d->visibleItems.count()) {
 		return nullptr;
 	}
-	return d->visibleItems.at(index);
+	VisibleItemModelPrivate::Item &item = d->visibleItems[index];
+	item.addRef();
+	if (item.ref == 1) {
+		emit initItem(index, item.item);
+		emit createdItem(index, item.item);
+	}
+	return item.item;
 }
 
-QQmlInstanceModel::ReleaseFlags VisibleItemModel::release(QObject *, ReusableFlag)
+QQmlInstanceModel::ReleaseFlags VisibleItemModel::release(QObject *object, ReusableFlag)
 {
-	// Always return Referenced flag. Otherwise, when a view sees the item is no longer referenced,
-	// it will unparent the item.
-	return QQmlInstanceModel::Referenced;
+	Q_D(VisibleItemModel);
+	if (QQuickItem *item = qobject_cast<QQuickItem*>(object)) {
+		const int index = d->indexOfVisibleItem(item);
+		if (index >= 0 && !d->visibleItems[index].deref()) {
+			return QQmlInstanceModel::Referenced;
+		}
+	}
+
+	// The item is no longer referenced, so it can be unparented from the view.
+	return {};
 }
 
 QVariant VisibleItemModel::variantValue(int index, const QString &role)
@@ -214,7 +247,7 @@ QVariant VisibleItemModel::variantValue(int index, const QString &role)
 	if (index < 0 || index >= d->visibleItems.count()) {
 		return QVariant();
 	}
-	const QQuickItem *item = d->visibleItems.at(index);
+	const QQuickItem *item = d->visibleItems.at(index).item;
 	return item ? item->property(role.toUtf8().constData()) : QVariant();
 }
 
@@ -224,13 +257,11 @@ QQmlIncubator::Status VisibleItemModel::incubationStatus(int)
 	return QQmlIncubator::Ready;
 }
 
-int VisibleItemModel::indexOf(QObject *item, QObject *) const
+int VisibleItemModel::indexOf(QObject *object, QObject *) const
 {
 	Q_D(const VisibleItemModel);
-	for (int i = 0; i < d->visibleItems.count(); ++i) {
-		if (d->visibleItems.at(i) == item) {
-			return i;
-		}
+	if (QQuickItem *item = qobject_cast<QQuickItem*>(object)) {
+		return d->indexOfVisibleItem(item);
 	}
 	return -1;
 }
