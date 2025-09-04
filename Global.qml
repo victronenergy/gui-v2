@@ -12,9 +12,7 @@ QtObject {
 	property var main
 	property var pageManager
 	property var mainView
-	property VeQItemTableModel dataServiceModel: null
 	property var firmwareUpdate
-	property var allDevicesModel
 	property bool applicationActive: true
 	property bool keyNavigationEnabled
 
@@ -80,9 +78,7 @@ QtObject {
 		// as main will never be destroyed during the ui rebuild.
 		pageManager = null
 		mainView = null
-		dataServiceModel = null
 		firmwareUpdate = null
-		allDevicesModel = null
 		dialogLayer = null
 		notificationLayer = null
 

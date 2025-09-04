@@ -20,6 +20,11 @@ bool BaseDevice::isValid() const
 	return !m_serviceUid.isEmpty() && (!m_productName.isEmpty() || !m_customName.isEmpty()) && m_deviceInstance >= 0;
 }
 
+QString BaseDevice::serviceType() const
+{
+	return m_serviceType;
+}
+
 QString BaseDevice::serviceUid() const
 {
 	return m_serviceUid;
@@ -37,7 +42,9 @@ void BaseDevice::setServiceUid(const QString &serviceUid)
 	if (m_serviceUid != serviceUid) {
 		maybeEmitValidChanged([serviceUid, this]() {
 			m_serviceUid = serviceUid;
+			m_serviceType = serviceTypeFromUid(serviceUid);
 			emit serviceUidChanged();
+			emit serviceTypeChanged();
 		});
 	}
 }
@@ -122,3 +129,24 @@ void BaseDevice::maybeEmitValidChanged(const std::function<void ()> &propertyCha
 	}
 }
 
+QString BaseDevice::serviceTypeFromUid(const QString &uid)
+{
+	static const int prefixLength = 5; // connection prefix is "dbus/", "mqtt/" or "mock/".
+	if (uid.length() < prefixLength) {
+		qWarning() << "Cannot parse service type from invalid uid:" << uid;
+		return QString();
+	}
+
+	const int nextSlashIndex = uid.indexOf('/', prefixLength);
+	const QString stringBetweenSlashes = nextSlashIndex >= 0
+			? uid.sliced(prefixLength, nextSlashIndex - prefixLength)
+			: uid.sliced(prefixLength);
+
+	if (uid.startsWith(QStringLiteral("mqtt/"))) {
+		// uid format is "mqtt/<serviceType>/*"
+		return stringBetweenSlashes;
+	} else {
+		// uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffix]/*"
+		return stringBetweenSlashes.split('.').value(2);
+	}
+}

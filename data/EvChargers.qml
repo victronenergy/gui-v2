@@ -18,26 +18,27 @@ QtObject {
 	property int acOutputPositionCount  // Chargers with output position, i.e. connected to Essential loads
 	property real acOutputPositionPower: NaN // The total power for chargers with an output position
 
-	readonly property ServiceDeviceModel model: ServiceDeviceModel {
-		serviceTypes: ["evcharger"]
-		modelId: "evcharger"
-		deviceDelegate: EvCharger {
-			id: evCharger
-			required property string uid
-			serviceUid: uid
-			onValidChanged: {
-				if (valid) {
-					root.model.addDevice(evCharger)
-				} else {
-					root.model.removeDevice(evCharger.serviceUid)
-				}
-			}
+	// TODO replace this with a C++ model that updates the totals.
+	readonly property BaseDeviceModel model: BaseDeviceModel {
+		readonly property Instantiator _objects: Instantiator {
+			model: FilteredDeviceModel { serviceTypes: "evcharger" }
+			delegate: EvCharger {
+				required property BaseDevice device
+				serviceUid: device.serviceUid
 
-			onPowerChanged: root.updateTotals()
-			onCurrentChanged: root.updateTotals()
-			onPositionChanged: root.updateTotals()
+				onPowerChanged: root.updateTotals()
+				onCurrentChanged: root.updateTotals()
+				onPositionChanged: root.updateTotals()
+			}
+			onObjectAdded: (index, evCharger) => {
+				root.model.addDevice(evCharger)
+				root.updateTotals()
+			}
+			onObjectRemoved: (index, evCharger) => {
+				root.model.removeDevice(evCharger.serviceUid)
+				root.updateTotals()
+			}
 		}
-		onCountChanged: root.updateTotals()
 	}
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })

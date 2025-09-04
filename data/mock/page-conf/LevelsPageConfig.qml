@@ -394,12 +394,12 @@ Item {
 		}
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: tankModel
 		serviceTypes: ["tank"]
 	}
 
-	ServiceDeviceModel {
+	FilteredDeviceModel {
 		id: temperatureModel
 		serviceTypes: ["temperature"]
 	}
