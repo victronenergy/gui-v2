@@ -319,6 +319,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/evcs/EvChargerListPage.qml
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
+    pages/ev/EvPage.qml
     pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
     pages/loads/AcLoadListPage.qml
@@ -460,6 +461,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_dcsystem.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_digitalinput.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_evcharger.qml
+    pages/settings/devicelist/delegates/DeviceListDelegate_ev.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_fuelcell.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_genset.qml
     pages/settings/devicelist/delegates/DeviceListDelegate_gps.qml

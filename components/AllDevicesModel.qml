@@ -15,6 +15,7 @@ AggregateDeviceModel {
 		Global.dcInputs.model,
 		combinedDcLoadDevices,
 		digitalInputDevices,
+		evDevices,
 		Global.environmentInputs.model,
 		Global.evChargers.model,
 		Global.inverterChargers.veBusDevices,
@@ -57,6 +58,11 @@ AggregateDeviceModel {
 	readonly property ServiceDeviceModel digitalInputDevices: ServiceDeviceModel {
 		serviceTypes: ["digitalinput"]
 		modelId: "digitalinput"
+	}
+
+	readonly property ServiceDeviceModel evDevices: ServiceDeviceModel {
+		serviceTypes: ["ev"]
+		modelId: "ev"
 	}
 
 	readonly property ServiceDeviceModel gpsDevices: ServiceDeviceModel {
