@@ -189,6 +189,11 @@ DevicePage {
 		}
 
 		ListNavigation {
+			//% "Microgrid parameters"
+			text: qsTrid("vebus_device_page_microgrid_parameters")
+		}
+
+		ListNavigation {
 			//% "Advanced"
 			text: qsTrId("vebus_device_page_advanced")
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",
