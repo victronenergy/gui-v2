@@ -14,8 +14,7 @@ SwipeViewPage {
 	navButtonIcon: Global.notifications?.navBarNotificationCounterVisible ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	activeFocusOnTab: true
-	blockInitialFocus: true
+	activeFocusOnTab: notificationsView.count > 0
 
 	GradientListView {
 		id: notificationsView
