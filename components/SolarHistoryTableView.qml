@@ -21,6 +21,9 @@ Column {
 
 	function _trackerHistoryTotal(role, trackerIndex) {
 		let totalValue = NaN
+		if (!solarHistory.ready) {
+			return totalValue
+		}
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
 			const history = trackerIndex === undefined
 					? root.solarHistory.dailyHistory(day)
@@ -34,6 +37,9 @@ Column {
 
 	function _trackerHistoryMin(role, trackerIndex) {
 		let minValue = NaN
+		if (!solarHistory.ready) {
+			return minValue
+		}
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
 			const history = trackerIndex === undefined
 					? root.solarHistory.dailyHistory(day)
@@ -50,6 +56,9 @@ Column {
 
 	function _trackerHistoryMax(role, trackerIndex) {
 		let maxValue = NaN
+		if (!solarHistory.ready) {
+			return maxValue
+		}
 		for (let day = dayRange[0]; day < dayRange[1]; ++day) {
 			const history = trackerIndex === undefined
 					? root.solarHistory.dailyHistory(day)
@@ -104,8 +113,8 @@ Column {
 		delegate: QuantityTable.TableRow {
 			id: tableRow
 
-			preferredVisible: trackerEnabled.value !== 0
-			headerText: root.solarHistory.trackerName(index, VenusOS.TrackerName_NoDevicePrefix)
+			preferredVisible: solarTracker.enabled
+			headerText: solarTracker.name
 			model: QuantityObjectModel {
 				id: rowModel
 
@@ -118,9 +127,11 @@ Column {
 				QuantityObject { object: rowModel; key: "maxPower"; unit: VenusOS.Units_Watt }
 			}
 
-			VeQuickItem {
-				id: trackerEnabled
-				uid: `${root.solarHistory.bindPrefix}/Pv/${tableRow.index}/Enabled`
+			SolarTracker {
+				id: solarTracker
+				serviceUid: root.solarHistory.serviceUid
+				trackerIndex: tableRow.index
+				trackerCount: root.solarHistory.trackerCount
 			}
 		}
 	}

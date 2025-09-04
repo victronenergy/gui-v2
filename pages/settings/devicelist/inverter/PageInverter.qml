@@ -112,37 +112,16 @@ DevicePage {
 		}
 
 		ListNavigation {
-			property SolarHistory solarHistory
-
 			text: CommonWords.daily_history
 			preferredVisible: (numberOfTrackers.value || 0) > 0
 			onClicked: {
-				if (!solarHistory) {
-					solarHistory = solarHistoryComponent.createObject(root)
-				}
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "solarHistory": solarHistory })
+						{ "serviceUid": root.bindPrefix })
 			}
 
 			VeQuickItem {
 				id: numberOfTrackers
 				uid: root.bindPrefix + "/NrOfTrackers"
-			}
-
-			Component {
-				id: solarHistoryComponent
-
-				SolarHistory {
-					id: solarHistory
-
-					bindPrefix: root.bindPrefix
-					deviceName: solarDevice.name
-					trackerCount: numberOfTrackers.value || 0
-
-					readonly property Device solarDevice: Device {
-						serviceUid: root.bindPrefix
-					}
-				}
 			}
 		}
 
