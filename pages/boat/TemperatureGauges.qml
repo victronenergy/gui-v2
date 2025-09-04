@@ -9,7 +9,9 @@ import Victron.VenusOS
 import Victron.Gauges
 
 Column {
-	readonly property Device motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
+	id: root
+
+	required property string serviceUid
 
 	spacing: Theme.geometry_boatPage_motorDrive_temperaturesColumn_spacing
 
@@ -34,7 +36,7 @@ Column {
 	VeQuickItem {
 		id: _motorDriveTemperature
 
-		uid: motorDrive ? motorDrive.serviceUid + "/Motor/Temperature" : ""
+		uid: root.serviceUid ? root.serviceUid + "/Motor/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
@@ -42,7 +44,7 @@ Column {
 	VeQuickItem {
 		id: _motorDriveCoolantTemperature
 
-		uid: motorDrive ? motorDrive.serviceUid + "/Coolant/Temperature" : ""
+		uid: root.serviceUid ? root.serviceUid + "/Coolant/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
@@ -50,7 +52,7 @@ Column {
 	VeQuickItem {
 		id: _motorDriveControllerTemperature
 
-		uid: motorDrive ? motorDrive.serviceUid + "/Controller/Temperature" : ""
+		uid: root.serviceUid ? root.serviceUid + "/Controller/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}

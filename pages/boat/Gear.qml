@@ -11,8 +11,8 @@ import Victron.Gauges
 Row {
 	id: root
 
+	required property string serviceUid
 	readonly property int direction: _direction.valid ? _direction.value : NaN
-	readonly property var _motorDrive: Global.allDevicesModel.motorDriveDevices.firstObject
 
 	spacing: Theme.geometry_boatPage_gearRow_spacing
 	visible: _direction.valid
@@ -20,7 +20,7 @@ Row {
 	VeQuickItem { //  0=neutral, 1=reverse, 2=forward (optional)
 		id: _direction
 
-		uid: _motorDrive ? _motorDrive.serviceUid + "/Motor/Direction" : ""
+		uid: root.serviceUid ? root.serviceUid + "/Motor/Direction" : ""
 	}
 
 	component GearIndicator : Item {
