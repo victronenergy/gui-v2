@@ -520,6 +520,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/solar/SolarInputListPage.qml
     pages/vebusdevice/PageAcSensor.qml
     pages/vebusdevice/PageAcSensors.qml
+    pages/vebusdevice/PageMicrogrid.qml
     pages/vebusdevice/PageVeBusAdvanced.qml
     pages/vebusdevice/PageVeBusAlarms.qml
     pages/vebusdevice/PageVeBusAlarmSettings.qml
