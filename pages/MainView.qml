@@ -236,7 +236,7 @@ FocusScope {
 			}
 
 			// Only move focus to SwipeView if its current page allows key navigation.
-			KeyNavigation.up: root.swipeView?.currentItem?.activeFocusOnTab ? swipeViewLoader : statusBar
+			KeyNavigation.up: (root.swipeView?.currentItem?.focusPolicy ?? 0) & Qt.TabFocus ? swipeViewLoader : statusBar
 		}
 	}
 
