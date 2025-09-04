@@ -144,6 +144,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("V");
 	case VenusOS::Enums::Units_VoltAmpere:
 		return QStringLiteral("VA");
+	case VenusOS::Enums::Units_VoltAmpereReactive:
+		return QStringLiteral("var");
 	case VenusOS::Enums::Units_Amp:
 		return QStringLiteral("A");
 	case VenusOS::Enums::Units_Hertz:
@@ -228,6 +230,7 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Volt_AC:
 	case VenusOS::Enums::Units_Volt_DC:
 	case VenusOS::Enums::Units_VoltAmpere:
+	case VenusOS::Enums::Units_VoltAmpereReactive:
 	case VenusOS::Enums::Units_Amp:
 	case VenusOS::Enums::Units_Hertz:
 	case VenusOS::Enums::Units_Energy_KiloWattHour:

@@ -50,6 +50,7 @@ BaseListItem {
 	id: root
 
 	property alias text: primaryLabel.text
+	property alias textFormat: primaryLabel.textFormat
 	property alias content: content
 	property alias bottomContent: bottomContent
 	property alias bottomContentChildren: bottomContent.children

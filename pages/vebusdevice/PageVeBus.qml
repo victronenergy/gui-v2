@@ -189,6 +189,18 @@ DevicePage {
 		}
 
 		ListNavigation {
+			//% "Microgrid parameters"
+			text: qsTrId("vebus_device_page_microgrid_parameters")
+			visible: mode.valid && mode.value === VenusOS.MicrogridMode_HybridDroop // TODO: show this for non - hybrid droop modes when platform support is added
+			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.bindPrefix })
+
+			VeQuickItem {
+				id: mode
+				uid: root.bindPrefix + "/Mode"
+			}
+		}
+
+		ListNavigation {
 			//% "Advanced"
 			text: qsTrId("vebus_device_page_advanced")
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",

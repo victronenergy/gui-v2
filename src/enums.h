@@ -70,6 +70,7 @@ public:
 		Units_Volt_AC,
 		Units_Volt_DC,
 		Units_VoltAmpere,
+		Units_VoltAmpereReactive,
 		Units_Watt,
 		Units_Amp,
 		Units_Hertz,
@@ -875,6 +876,27 @@ public:
 	};
 	Q_ENUM(MotorDriveGear)
 
+	enum TailscaleConnectState {
+		TailscaleConnectState_Initializing = 0,
+		TailscaleConnectState_Backend_Starting = 1,
+		TailscaleConnectState_Backend_Stopped = 2,
+		TailscaleConnectState_Connection_Failed = 3,
+		TailscaleConnectState_Stopped = 4,
+		TailscaleConnectState_Logged_Out = 5,
+		TailscaleConnectState_Wait_For_Response = 6,
+		TailscaleConnectState_Wait_For_Login = 7,
+		TailscaleConnectState_No_State = 8,
+		TailscaleConnectState_Connection_Ok = 100
+	};
+	Q_ENUM(TailscaleConnectState)
+
+	enum MicrogridMode {
+		MicrogridMode_GridForming = 0,
+		MicrogridMode_GridFollowing = 1,
+		MicrogridMode_HybridDroop = 3
+	};
+	Q_ENUM(MicrogridMode)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
@@ -894,6 +916,8 @@ public:
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
+
+	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 

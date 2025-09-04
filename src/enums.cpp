@@ -517,6 +517,23 @@ QString Enums::tank_fluidTypeToText(Tank_Type type) const
 	}
 }
 
+QString Enums::microgridModeToText(MicrogridMode mode) const
+{
+	switch (mode) {
+	case MicrogridMode_HybridDroop:
+		//% "Hybrid droop"
+		return qtTrId("microgrid_mode_hybrid_droop");
+	case MicrogridMode_GridFollowing:
+		//% "Grid-following"
+		return qtTrId("microgrid_mode_grid_following");
+	case MicrogridMode_GridForming:
+		//% "Grid-forming"
+		return qtTrId("microgrid_mode_grid_forming");
+	default:
+		return QString();
+	}
+}
+
 Enums* Enums::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
 	Q_UNUSED(engine)
