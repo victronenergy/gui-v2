@@ -71,6 +71,12 @@
     "color_switch_groove_border_off": "color_gray4",
     "color_switch_groove_border_on": "transparent",
 
+    "color_temperatureslider_gradient_max": "#752E2C",
+    "color_temperatureslider_gradient_max_border": "#F35C58",
+    "color_temperatureslider_gradient_min": "#2D2647",
+    "color_temperatureslider_gradient_min_border": "#387DC5",
+    "color_temperatureslider_gradient_mid": "#1D3D60",
+
     "color_navigationBar_button_on": "color_blue",
     "color_navigationBar_button_off": "color_gray5",
 
