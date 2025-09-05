@@ -11,7 +11,7 @@ UBUNTU_VERSION=$(lsb_release -rs | cut -d. -f1)
 if [[ "$(lsb_release -is)" == "Ubuntu" && "$UBUNTU_VERSION" -ge 22 ]]; then
     echo "Running on Ubuntu $(lsb_release -rs | cut -f1)"
 else
-    echo "This script requires Ubuntu 22.x or later"
+    echo -e "\033[1;33mThis script requires Ubuntu 22.x or later\033[0m"
     exit 1
 fi
 
