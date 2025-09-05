@@ -108,6 +108,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Backup & Restore"
+				text: qsTrId("pagesettingsgeneral_backup_and_restore")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBackupRestore.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Firmware"
 				text: qsTrId("pagesettingsgeneral_firmware")
 				secondaryText: FirmwareVersion.versionText(firmwareVersion.value, "venus")

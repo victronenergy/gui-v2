@@ -10,7 +10,7 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		if (Global.inverterChargers.deviceCount > 1) {
+		if (Global.inverterChargers.deviceCount > 0) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
