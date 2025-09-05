@@ -194,14 +194,6 @@ Page {
 				text: qsTrId("pagesettingsbackuprestore_tank_settings")
 			}
 
-            // needed, if there is already a backup on the USB, but you don't want to restore it
-			ListSwitch {
-                id: _autoRestoreSwitch
-                //% "Enable automatic tank settings restore on USB insert"
-				text: qsTrId("pagesettingsbackuprestore_tank_settings_enable_automatic_restore_on_usb_insert")
-				dataItem.uid: settingsUid + "/AutoRestore"
-			}
-
 			// IDEAS:
 			// - Add option field to select USB stick, if multiple are present
 			// - Add option to choose backup name as in Vebus backup
@@ -221,27 +213,31 @@ Page {
 			}
 			*/
 
-            // backup whole tank configuration
-            // after backup was successful, display modal dialog and tell the user backup is completed and media was ejected
+			// backup whole tank configuration
+			// after backup was successful, display modal dialog and tell the user backup is completed and media was ejected
 			ListButton {
 				id: _backupButton
 				//% "Backup all tank settings to USB"
 				text: qsTrId("pagesettingsbackuprestore_tank_settings_backup_to_usb")
-				secondaryText: get_backup_button_text()
-				enabled: _backupRestoreAction.value === 0
+				//% "No storage found"
+				secondaryText: _ejectUsbButton.mounted ? get_backup_button_text() : qsTrId("pagesettingsbackuprestore_no_storage_found")
+				// enabled: _backupRestoreAction.value === 0
+				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
 				onClicked: {
 					_backupRestoreAction.setValue(VenusOS.Tank_Backup_Restore_Action_Backup)
 				}
 			}
 
-            // restore whole tank configuration
+			// restore whole tank configuration
 			ListButton {
-                id: _restoreButton
+				id: _restoreButton
 				//% "Restore all tank settings from USB"
 				text: qsTrId("pagesettingsbackuprestore_restore_from_usb")
-				secondaryText: get_restore_button_text()
-				enabled: _backupRestoreAction.value === 0
+				//% "No storage found"
+				secondaryText: _ejectUsbButton.mounted ? get_restore_button_text() : qsTrId("pagesettingsbackuprestore_no_storage_found")
+				// enabled: _backupRestoreAction.value === 0
+				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
 				onClicked: Global.dialogLayer.open(confirmRestoreDialog)
 
@@ -265,12 +261,14 @@ Page {
 				}
 			}
 
-            // Delete existing backup, only if there is one
+			// Delete existing backup, only if there is one
 			ListButton {
 				//% "Delete tank setting backup from USB"
-				text: qsTrId("delete")
-				secondaryText: get_delete_button_text()
-				enabled: _backupRestoreAction.value === 0
+				text: qsTrId("pagesettingsbackuprestore_delete_backup_from_usb")
+				//% "No storage found"
+				secondaryText: _ejectUsbButton.mounted ? get_delete_button_text() : qsTrId("pagesettingsbackuprestore_no_storage_found")
+				// enabled: _backupRestoreAction.value === 0
+				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
 				onClicked: Global.dialogLayer.open(confirmDeleteDialog)
 
@@ -295,14 +293,63 @@ Page {
 			}
 
 			ListMountStateButton {
+				id: _ejectUsbButton
 				//% "Eject USB"
 				text: qsTrId("components_mount_state_eject_usb")
-				interactive: _backupRestoreAction.value === 0
+				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 			}
 
 			PrimaryListLabel {
 				//% "Note: Backup files are Venus OS firmware version specific and can only be used to restore settings on products with matching firmware versions
 				text: qsTrId("tankk_backup_firmware_version_specific_message")
+			}
+
+			// needed, if there is already a backup on the USB, but you don't want to restore it
+			ListSwitch {
+				id: _autoRestoreSwitch
+				//% "Prevent automatic tank settings restore on USB insert"
+				text: qsTrId("pagesettingsbackuprestore_tank_settings_enable_automatic_restore_on_usb_insert")
+				dataItem.uid: settingsUid + "/PreventAutoRestore"
+			}
+
+			// TODO: Do not display, if all veBusDeviceRepeaters are invisible
+			SettingsListHeader {
+				//% "VE.Bus Settings"
+				text: qsTrId("pagesettingsbackuprestore_vebus_settings")
+				preferredVisible: veBusVisibleCount > 0
+			}
+
+			// List all VE.Bus devices, and navigate to their backup & restore page on click
+			SettingsColumn {
+				width: parent ? parent.width : 0
+				preferredVisible: Global.inverterChargers.veBusDevices.count > 0
+
+				Repeater {
+					model: AggregateDeviceModel {
+						sourceModels: [
+							Global.inverterChargers.veBusDevices,
+							// Global.inverterChargers.acSystemDevices,
+							// Global.inverterChargers.inverterDevices,
+							// Global.inverterChargers.chargerDevices,
+						]
+					}
+
+					delegate: ListNavigation {
+						id: veBusDeviceRepeater
+						text: model.device.name
+						preferredVisible: mkConnection.valid
+
+						onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBackupRestore.qml", {
+							"title": text,
+							"serialVebus": mkConnection.value.split("/").pop()
+						})
+
+						VeQuickItem {
+							id: mkConnection
+							uid: model.device.serviceUid + "/Interfaces/Mk2/Connection"
+						}
+					}
+				}
 			}
 		}
 	}
