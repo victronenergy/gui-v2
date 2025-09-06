@@ -39,8 +39,7 @@ OverviewWidget {
 			}
 			active: root.size >= VenusOS.OverviewWidget_Size_M
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
-					: Global.evChargers.model.count > 0 ? singleEvChargerComponent
-					: null
+					: Global.evChargers.model.count > 0 ? singleEvChargerComponent : null
 		}
 	]
 
@@ -52,37 +51,51 @@ OverviewWidget {
 
 			width: parent.width
 
-			ElectricalQuantityLabel {
-				height: chargingTimeLabel.height // use normal label height, instead of default baseline calculation
-				value: evCharger.energy
-				valueColor: unitColor
-				alignment: Qt.AlignLeft
-				unit: VenusOS.Units_Energy_KiloWattHour
-			}
-
-			Label {
+			// Row 1: Energy and charging time
+			Row {
 				width: parent.width
-				elide: Text.ElideRight
-				text: Global.evChargers.chargerStatusToText(evCharger.status)
-				color: Theme.color_font_secondary
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+
+				ElectricalQuantityLabel {
+					width: parent.width - chargingTimeLabel.width - parent.spacing
+					height: chargingTimeLabel.height // use normal label height, instead of default baseline calculation
+					value: evCharger.energy
+					valueColor: unitColor
+					alignment: Qt.AlignLeft
+					unit: VenusOS.Units_Energy_KiloWattHour
+				}
+
+				Label {
+					id: chargingTimeLabel
+					text: {
+						if (isNaN(evCharger.chargingTime) || evCharger.chargingTime < 0) {
+							return "--h --m"
+						}
+						const duration = Utils.decomposeDuration(evCharger.chargingTime)
+						return duration.h + "h " + Utils.pad(duration.m, 2) + "m"
+					}
+					color: Theme.color_font_secondary
+					horizontalAlignment: Text.AlignRight
+				}
 			}
 
+			// Row 2: Status and mode
 			Row {
 				width: parent.width
 				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
 
 				Label {
-					width: parent.width - chargingTimeLabel.width - parent.spacing
+					width: parent.width - modeLabel.width - parent.spacing
 					elide: Text.ElideRight
-					text: Global.evChargers.chargerModeToText(evCharger.mode)
+					text: Global.evChargers.chargerStatusToText(evCharger.status)
 					color: Theme.color_font_secondary
 				}
 
-				FixedWidthLabel {
-					id: chargingTimeLabel
-
-					text: Utils.formatAsHHMM(evCharger.chargingTime, true)
+				Label {
+					id: modeLabel
+					text: Global.evChargers.chargerModeToText(evCharger.mode)
 					color: Theme.color_font_secondary
+					horizontalAlignment: Text.AlignRight
 				}
 			}
 		}
