@@ -244,6 +244,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/widgets/DcLoadsWidget.qml
     components/widgets/EssentialLoadsWidget.qml
     components/widgets/EvcsWidget.qml
+	components/widgets/EvWidget.qml
     components/widgets/InverterChargerWidget.qml
     components/widgets/OverviewWidget.qml
     components/widgets/SolarYieldWidget.qml

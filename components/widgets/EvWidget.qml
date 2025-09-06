@@ -1,0 +1,127 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+import Victron.VenusOS
+
+OverviewWidget {
+	id: root
+
+	// Get the first EV device from the global device model
+	readonly property var evDevice: Global.allDevicesModel.evDevices.count > 0
+									? Global.allDevicesModel.evDevices.deviceAt(0)
+									: null
+
+	onClicked: {
+		// Navigate to EV device page when clicked
+		if (evDevice) {
+			Global.pageManager.pushPage("/pages/settings/devicelist/PageDeviceList.qml")
+		}
+	}
+
+	//: Abbreviation of Electric Vehicle
+	//% "EV"
+	title: qsTrId("overview_widget_ev_title")
+	// Reusing EVCS icon for now as requested
+	icon.source: "qrc:/images/icon_charging_station_24.svg"
+	type: VenusOS.OverviewWidget_Type_Ev
+	enabled: evDevice !== null
+
+	// Show State of Charge as the main quantity
+	quantityLabel.value: evDevice ? evDevice.stateOfCharge : NaN
+	quantityLabel.unit: VenusOS.Units_Percentage
+
+	extraContentChildren: [
+		Loader {
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
+				bottom: parent.bottom
+				bottomMargin: root.verticalMargin
+			}
+			active: root.size >= VenusOS.OverviewWidget_Size_M && evDevice
+			sourceComponent: evInfoComponent
+		}
+	]
+
+	Component {
+		id: evInfoComponent
+
+		Column {
+			width: parent.width
+			spacing: Theme.geometry_listItem_spacing / 2
+
+			// Row 1: Range
+			Row {
+				width: parent.width
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+
+				Label {
+					text: CommonWords.range || "Range"
+					color: Theme.color_font_secondary
+					width: parent.width / 2
+				}
+
+				Label {
+					text: evDevice && !isNaN(evDevice.range) ?
+						  evDevice.range + " km" : "--"
+					color: Theme.color_font_primary
+					horizontalAlignment: Text.AlignRight
+					width: parent.width / 2 - parent.spacing
+				}
+			}
+
+			// Row 2: Charging state
+			Row {
+				width: parent.width
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+
+				Label {
+					text: CommonWords.state || "State"
+					color: Theme.color_font_secondary
+					width: parent.width / 2
+				}
+
+				Label {
+					text: {
+						if (!evDevice) return "--"
+						// You'll need to map the actual EV state values to text
+						// This is just an example
+						switch(evDevice.chargingState) {
+						case 1: return "Charging"
+						case 0: return "Not charging"
+						default: return "Unknown"
+						}
+					}
+					color: Theme.color_font_primary
+					horizontalAlignment: Text.AlignRight
+					width: parent.width / 2 - parent.spacing
+				}
+			}
+
+			// Row 3: At site indicator (if available)
+			Row {
+				width: parent.width
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+				visible: evDevice && evDevice.hasOwnProperty("atSite")
+
+				Label {
+					text: "At site"
+					color: Theme.color_font_secondary
+					width: parent.width / 2
+				}
+
+				Label {
+					text: evDevice && evDevice.atSite ? "Yes" : "No"
+					color: Theme.color_font_primary
+					horizontalAlignment: Text.AlignRight
+					width: parent.width / 2 - parent.spacing
+				}
+			}
+		}
+	}
+}

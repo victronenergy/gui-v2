@@ -136,7 +136,8 @@ public:
 		OverviewWidget_Type_AcLoads,
 		OverviewWidget_Type_DcLoads,
 		OverviewWidget_Type_EssentialLoads,
-		OverviewWidget_Type_Evcs
+		OverviewWidget_Type_Evcs,
+		OverviewWidget_Type_Ev
 	};
 	Q_ENUM(OverviewWidget_Type)
 

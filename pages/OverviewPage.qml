@@ -234,6 +234,9 @@ SwipeViewPage {
 		case VenusOS.OverviewWidget_Type_Evcs:
 			widget = evcsComponent.createObject(root, args)
 			break
+		case VenusOS.OverviewWidget_Type_Ev:
+			widget = evComponent.createObject(root, args)
+			break
 		case VenusOS.OverviewWidget_Type_Solar:
 			widget = solarComponent.createObject(root, args)
 			break
@@ -326,19 +329,27 @@ SwipeViewPage {
 	}
 
 	function _resetRightWidgets() {
-		let widgets = [acLoadsWidget]
-		if (Global.evChargers.model.count > 0) {
-			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
-		}
-		if (layoutConditions.showEssentialLoads) {
-			widgets.push(essentialLoadsWidget)
-		} else {
-			essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
-		}
-		if (layoutConditions.showDcLoads) {
-			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
-		}
-		_rightWidgets = widgets
+    	let widgets = [acLoadsWidget]
+
+    	if (Global.evChargers.model.count > 0) {
+        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
+    	}
+
+    	if (Global.allDevicesModel.evDevices.count > 0) {
+        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Ev))
+    	}
+
+    	if (layoutConditions.showEssentialLoads) {
+        	widgets.push(essentialLoadsWidget)
+    	} else {
+        	essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
+    	}
+
+    	if (layoutConditions.showDcLoads) {
+        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
+    	}
+
+    	_rightWidgets = widgets
 	}
 
 	function _findWidget(widgets, widgetType) {
@@ -863,6 +874,12 @@ SwipeViewPage {
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 							: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
+		}
+	}
+
+	Component {
+		id: evComponent
+		EvWidget {
 		}
 	}
 
