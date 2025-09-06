@@ -9,58 +9,14 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	// Show enhanced info: SOC + charging state or location status
-	secondaryText: {
-		const socText = soc.valid ? Math.round(soc.value) + "%" : "--"
+	quantityModel: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
 
-		if (chargingState.valid) {
-			let stateText = ""
-			switch (chargingState.value) {
-			case 0:
-				//% "Not charging"
-				stateText = qsTrId("ev_charging_state_not_charging")
-				break
-			case 1:
-				//% "Low power mode"
-				stateText = qsTrId("ev_charging_state_low_power")
-				break
-			case 3:
-				//% "Charging"
-				stateText = qsTrId("ev_charging_state_charging")
-				break
-			case 244:
-				//% "Sustain"
-				stateText = qsTrId("ev_charging_state_sustain")
-				break
-			case 245:
-				//% "Wake up"
-				stateText = qsTrId("ev_charging_state_wake_up")
-				break
-			case 256:
-				//% "Discharging"
-				stateText = qsTrId("ev_charging_state_discharging")
-				break
-			case 259:
-				//% "Scheduled charging"
-				stateText = qsTrId("ev_charging_state_scheduled_charging")
-				break
-			default:
-				stateText = ""
-			}
-
-			if (stateText !== "") {
-				return socText + " | " + stateText
-			}
+		QuantityObject { object: soc; unit: VenusOS.Units_Percentage }
+		QuantityObject {
+			object: chargingStateText;
+			key: "stateText"
 		}
-
-		// Fallback to location status if no charging state
-		if (atSite.valid) {
-			//% "Away"
-			const locationText = atSite.value === 1 ? "At site" : qsTrId("ev_away")
-			return socText + " | " + locationText
-		}
-
-		return socText
 	}
 
 	onClicked: {
@@ -70,6 +26,53 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: soc
 		uid: root.device.serviceUid + "/Soc"
+	}
+
+	QtObject {
+		id: chargingStateText
+
+		readonly property string stateText: {
+			if (!chargingState.valid) {
+				// Fallback to location status if no charging state
+				if (atSite.valid) {
+					//% "Away"
+					return atSite.value === 1 ? "At site" : qsTrId("ev_away")
+				}
+				return ""
+			}
+
+			const intValue = parseInt(chargingState.value)
+			switch (intValue) {
+			case 0:
+				//% "Not charging"
+				return qsTrId("ev_charging_state_not_charging")
+			case 1:
+				//% "Low power mode"
+				return qsTrId("ev_charging_state_low_power")
+			case 3:
+				//% "Charging"
+				return qsTrId("ev_charging_state_charging")
+			case 244:
+				//% "Sustain"
+				return qsTrId("ev_charging_state_sustain")
+			case 245:
+				//% "Wake up"
+				return qsTrId("ev_charging_state_wake_up")
+			case 256:
+				//% "Discharging"
+				return qsTrId("ev_charging_state_discharging")
+			case 259:
+				//% "Scheduled charging"
+				return qsTrId("ev_charging_state_scheduled_charging")
+			default:
+				// Fallback to location status for unknown states
+				if (atSite.valid) {
+					//% "Away"
+					return atSite.value === 1 ? "At site" : qsTrId("ev_away")
+				}
+				return ""
+			}
+		}
 	}
 
 	VeQuickItem {
