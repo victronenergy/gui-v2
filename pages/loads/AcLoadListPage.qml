@@ -59,7 +59,7 @@ Page {
 				rightPadding: loadSummary.rightPadding
 				width: parent.width
 				equalWidthColumns: true
-				model: root.measurements.phases
+				model: root.measurements.phaseCount > 1 ? root.measurements.phases : null
 				delegate: QuantityTable.TableRow {
 					id: tableRow
 
