@@ -67,7 +67,6 @@ private:
 	void removeServiceItem(VeQItem *item);
 	void addServicesFromChildrenOf(VeQItem *parentItem);
 	int indexOf(const QString &uid) const;
-	void clear();
 
 	QList<ServiceInfo> m_services;
 };
