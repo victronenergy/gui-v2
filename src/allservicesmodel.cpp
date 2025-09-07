@@ -77,34 +77,41 @@ QHash<int, QByteArray> AllServicesModel::roleNames() const
 
 void AllServicesModel::backendProducerChanged()
 {
-	if (!BackendConnection::create()->producer()
-			|| !BackendConnection::create()->producer()->services()) {
-		clear();
-		return;
+	const int prevCount = count();
+	beginResetModel();
+	m_services.clear();
+
+	if (VeQItem *servicesRoot = BackendConnection::create()->producer()
+			? BackendConnection::create()->producer()->services()
+			: nullptr) {
+		if (BackendConnection::create()->type() == BackendConnection::MqttSource) {
+			// For MQTT, the servicesRoot contains mqtt/<service-type> items; each of these items have
+			// children, which are the services to be added.
+			const VeQItem::Children &serviceTypes = servicesRoot->itemChildren();
+			for (auto it = serviceTypes.constBegin(); it != serviceTypes.constEnd(); ++it) {
+				// Add the <x> service for each mqtt/<service-type>/<x> service.
+				addServicesFromChildrenOf(it.value());
+			}
+			// When a new service type is added to the root mqtt item, add its children as services.
+			connect(servicesRoot, &VeQItem::childAdded, this, &AllServicesModel::addServicesFromChildrenOf);
+
+			// When a service type is removed, remove all of its children from the service list.
+			connect(servicesRoot, &VeQItem::childAboutToBeRemoved, this, [this](VeQItem *child) {
+				child->disconnect(this);
+				for (auto it = child->itemChildren().constBegin(); it != child->itemChildren().constEnd(); ++it) {
+					removeServiceItem(it.value());
+				}
+			});
+		} else {
+			// For D-Bus and Mock, the servicesRoot has children, which are the services to be added.
+			addServicesFromChildrenOf(servicesRoot);
+		}
 	}
 
-	VeQItem *servicesRoot = BackendConnection::create()->producer()->services();
-	if (BackendConnection::create()->type() == BackendConnection::MqttSource) {
-		// For MQTT, the servicesRoot contains mqtt/<service-type> items; each of these items have
-		// children, which are the services to be added.
-		const VeQItem::Children &serviceTypes = servicesRoot->itemChildren();
-		for (auto it = serviceTypes.constBegin(); it != serviceTypes.constEnd(); ++it) {
-			// Add the <x> service for each mqtt/<service-type>/<x> service.
-			addServicesFromChildrenOf(it.value());
-		}
-		// When a new service type is added to the root mqtt item, add its children as services.
-		connect(servicesRoot, &VeQItem::childAdded, this, &AllServicesModel::addServicesFromChildrenOf);
+	endResetModel();
 
-		// When a service type is removed, remove all of its children from the service list.
-		connect(servicesRoot, &VeQItem::childAboutToBeRemoved, this, [this](VeQItem *child) {
-			child->disconnect(this);
-			for (auto it = child->itemChildren().constBegin(); it != child->itemChildren().constEnd(); ++it) {
-				removeServiceItem(it.value());
-			}
-		});
-	} else {
-		// For D-Bus and Mock, the servicesRoot has children, which are the services to be added.
-		addServicesFromChildrenOf(servicesRoot);
+	if (count() != prevCount) {
+		emit countChanged();
 	}
 }
 
@@ -147,18 +154,6 @@ void AllServicesModel::addServicesFromChildrenOf(VeQItem *parentItem)
 	// When a child is added/removed, then add/remove the relevant service.
 	connect(parentItem, &VeQItem::childAdded, this, &AllServicesModel::serviceItemDiscovered);
 	connect(parentItem, &VeQItem::childAboutToBeRemoved, this, &AllServicesModel::removeServiceItem);
-}
-
-void AllServicesModel::clear()
-{
-	if (count() == 0) {
-		return;
-	}
-
-	beginResetModel();
-	m_services.clear();
-	endResetModel();
-	emit countChanged();
 }
 
 int AllServicesModel::indexOf(const QString &uid) const
