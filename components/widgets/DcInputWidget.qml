@@ -9,54 +9,34 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	property DeviceModel inputs: DeviceModel {}
-	readonly property int inputType: !!inputs.firstObject
-			? VenusOS.dcMeter_type(inputs.firstObject.serviceType, inputs.firstObject.monitorMode)
-			: -1
+	required property string serviceType
+	required property int inputType
 	readonly property string detailUrl: inputType === VenusOS.DcMeter_Type_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
-			: inputs.firstObject?.serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
+			: inputDeviceModel.firstObject?.serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
-
-	function _refreshTotalPower() {
-		let totalPower = NaN
-		let totalCurrent = NaN
-		for (let i = 0; i < inputs.count; ++i) {
-			const input = inputs.deviceAt(i)
-			totalPower = Units.sumRealNumbers(totalPower, input.power)
-			totalCurrent = Units.sumRealNumbers(totalCurrent, input.current)
-		}
-		quantityLabel.dataObject.power = totalPower
-		quantityLabel.dataObject.current = totalCurrent
-	}
 
 	title: VenusOS.dcMeter_typeToText(inputType)
 	quantityLabel.dataObject: QtObject {
-		property real power: NaN
-		property real current: NaN
+		readonly property real power: inputDeviceModel.totalPower
+		readonly property real current: inputDeviceModel.totalCurrent
 	}
 	icon.source: VenusOS.dcMeter_iconForType(inputType)
 	enabled: true
 
 	onClicked: {
-		if (root.inputs.count === 1) {
+		if (inputDeviceModel.count === 1) {
 			Global.pageManager.pushPage(root.detailUrl, {
-				"bindPrefix": root.inputs.firstObject.serviceUid
+				"bindPrefix": inputDeviceModel.firstObject.serviceUid
 			})
 		} else {
 			Global.pageManager.pushPage(listPageComponent)
 		}
 	}
 
-	Instantiator {
-		model: root.inputs
-		// Each object in the model should be a DcDevice object with a 'power' value.
-		delegate: Connections {
-			target: model.device
-			function onPowerChanged() {
-				Qt.callLater(root._refreshTotalPower)
-			}
-			Component.onCompleted: Qt.callLater(root._refreshTotalPower)
-		}
+	DcMeterDeviceModel {
+		id: inputDeviceModel
+		serviceTypes: [ root.serviceType ]
+		meterType: root.inputType
 	}
 
 	Component {
@@ -77,20 +57,27 @@ OverviewWidget {
 					]
 				}
 
-				model: root.inputs
+				model: inputDeviceModel
 				delegate: ListQuantityGroupNavigation {
-					text: model.device.name
+					required property BaseDevice device
+
+					text: device.name
 					tableMode: true
 					quantityModel: QuantityObjectModel {
-						QuantityObject { object: model.device; key: "voltage"; unit: VenusOS.Units_Volt_DC }
-						QuantityObject { object: model.device; key: "current"; unit: VenusOS.Units_Amp }
-						QuantityObject { object: model.device; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: dcInput; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: dcInput; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: dcInput; key: "power"; unit: VenusOS.Units_Watt }
 					}
 
 					onClicked: {
 						Global.pageManager.pushPage(root.detailUrl, {
-							"bindPrefix": model.device.serviceUid
+							"bindPrefix": device.serviceUid
 						})
+					}
+
+					DcDevice {
+						id: dcInput
+						serviceUid: device.serviceUid
 					}
 				}
 			}
