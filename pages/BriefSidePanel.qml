@@ -11,7 +11,6 @@ ColumnLayout {
 	id: root
 
 	property bool animationEnabled
-	property string dcInputIconSource
 
 	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
 			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
@@ -207,10 +206,12 @@ exported power v  0.4 |   /
 
 	BriefSidePanelWidget {
 		title: Global.dcInputs.model.count === 1
-				? VenusOS.dcMeter_typeToText(Global.dcInputs.model.firstObject.inputType)
+				? VenusOS.dcMeter_typeToText(Global.dcInputs.model.firstMeterType)
 				  //% "DC input"
 				: qsTrId("brief_dc_input")
-		icon.source: root.dcInputIconSource
+		icon.source: Global.dcInputs.model.count === 1
+				? VenusOS.dcMeter_iconForType(Global.dcInputs.model.firstMeterType)
+				: VenusOS.dcMeter_iconForMultipleTypes()
 		loadersActive: Global.dcInputs.model.count > 0
 		visible: loadersActive
 		quantityLabel.dataObject: Global.dcInputs
