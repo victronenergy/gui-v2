@@ -224,6 +224,7 @@ public:
 		MonitorMode_DcLoad_BilgePump = 5,
 		MonitorMode_DcLoad_Inverter = 7,
 		MonitorMode_DcLoad_WaterHeater = 8,
+		MonitorMode_Unknown = 1000
 	};
 	Q_ENUM(MonitorMode_Type)
 
@@ -881,6 +882,7 @@ public:
 	Q_INVOKABLE DcMeter_Type dcMeter_type(const QString &serviceType, int monitorMode) const;
 	Q_INVOKABLE QString dcMeter_typeToText(DcMeter_Type type) const;
 	Q_INVOKABLE QString dcMeter_iconForType(DcMeter_Type type) const;
+	Q_INVOKABLE QString dcMeter_iconForMultipleTypes() const;
 
 	Q_INVOKABLE QString digitalInput_typeToText(DigitalInput_Type type) const;
 	Q_INVOKABLE QString digitalInput_stateToText(DigitalInput_State state) const;

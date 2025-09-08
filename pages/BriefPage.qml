@@ -14,7 +14,6 @@ SwipeViewPage {
 	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
-	readonly property string _dcInputIconSource: VenusOS.dcMeter_iconForType(Global.dcInputs.model.firstObject?.inputType)
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
@@ -207,7 +206,9 @@ SwipeViewPage {
 							// top, or is the first (top) gauge, so label aligns to the bottom.
 							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
 							: Qt.AlignLeft| Qt.AlignVCenter
-					icon.source: root._dcInputIconSource
+					icon.source: Global.dcInputs.model.count === 1
+							? VenusOS.dcMeter_iconForType(Global.dcInputs.model.firstMeterType)
+							: VenusOS.dcMeter_iconForMultipleTypes()
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.dataObject: Global.dcInputs
@@ -359,7 +360,6 @@ SwipeViewPage {
 			width: parent.width
 			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled
-			dcInputIconSource: root._dcInputIconSource
 		}
 
 		// the brief monitor panel has animations which mess with the asynchronous heuristic

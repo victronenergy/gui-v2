@@ -179,6 +179,11 @@ QString Enums::dcMeter_iconForType(DcMeter_Type type) const
 	}
 }
 
+QString Enums::dcMeter_iconForMultipleTypes() const
+{
+	return "qrc:/images/icon_dc_24.svg";
+}
+
 QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 {
 	switch (type) {

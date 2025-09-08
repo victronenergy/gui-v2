@@ -298,18 +298,12 @@ SwipeViewPage {
 
 		// Add DC widgets. Only one widget is added per DC type, regardless of the number of inputs
 		// for that type.
-		let clearedWidgets = []
 		for (i = 0; i < Global.dcInputs.model.count; ++i) {
 			// Add the input to the DC widget
 			const dcInput = Global.dcInputs.model.deviceAt(i)
-			widgetType = _dcWidgetTypeForInputType(dcInput.inputType)
-			widget = _createWidget(widgetType)
-			if (clearedWidgets.indexOf(widget) < 0) {
-				// Ensure the layout starts with a clean list of inputs for this widget.
-				widget.inputs.clear()
-				clearedWidgets.push(widget)
-			}
-			widget.inputs.addDevice(dcInput)
+			const dcInputType = Global.dcInputs.model.meterTypeAt(i)
+			widgetType = _dcWidgetTypeForInputType(dcInputType)
+			widget = _createWidget(widgetType, { serviceType: dcInput.serviceType, inputType: dcInputType })
 			if (widgetCandidates.indexOf(widget) < 0) {
 				// Only show one widget for each DC input type.
 				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
