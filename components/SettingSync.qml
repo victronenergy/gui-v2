@@ -16,7 +16,7 @@ QtObject {
 	required property real backendValue
 
 	// True if a value has been written to the backend, and the backend is not yet in sync.
-	readonly property bool busy: _maxBusyTimer.running && backendValue !== _pendingValue
+	readonly property bool busy: _maxBusyTimer.running
 
 	// If busy=true, this is the value that was written (but not yet present in the backend),
 	// otherwise this is the backend value.
@@ -37,11 +37,7 @@ QtObject {
 		updateToBackend(v)
 	}
 
-	onBackendValueChanged: {
-		if (_pendingValue === backendValue) {
-			_maxBusyTimer.stop()
-		}
-	}
+	onBackendValueChanged: _maxBusyTimer.stop()
 
 	// Avoid a deadlock situation where the backend never updates to the expected value. Possible
 	// reasons include:
