@@ -73,8 +73,8 @@
         "/SwitchableOutput/dimming_1/State": 1,
         "/SwitchableOutput/dimming_1/Status": 9,
 
-        "/SwitchableOutput/dimming_2/Dimming": 2,
-        "/SwitchableOutput/dimming_2/Name": "2b. Dimming, disabled",
+        "/SwitchableOutput/dimming_2/Dimming": 50,
+        "/SwitchableOutput/dimming_2/Name": "2b. Dimming, on, disabled",
         "/SwitchableOutput/dimming_2/Settings/CustomName": "",
         "/SwitchableOutput/dimming_2/Settings/Function": 2,
         "/SwitchableOutput/dimming_2/Settings/Group": "",
@@ -83,6 +83,17 @@
         "/SwitchableOutput/dimming_2/Settings/ValidFunctions": 2,
         "/SwitchableOutput/dimming_2/State": 1,
         "/SwitchableOutput/dimming_2/Status": 32,
+
+        "/SwitchableOutput/dimming_3/Dimming": 50,
+        "/SwitchableOutput/dimming_3/Name": "2c. Dimming, off, disabled",
+        "/SwitchableOutput/dimming_3/Settings/CustomName": "",
+        "/SwitchableOutput/dimming_3/Settings/Function": 2,
+        "/SwitchableOutput/dimming_3/Settings/Group": "",
+        "/SwitchableOutput/dimming_3/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/dimming_3/Settings/Type": 2,
+        "/SwitchableOutput/dimming_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dimming_3/State": 0,
+        "/SwitchableOutput/dimming_3/Status": 32,
 
         "/SwitchableOutput/temp_setpoint_1/Dimming": 1,
         "/SwitchableOutput/temp_setpoint_1/Name": "3a. Temperature setpoint",
@@ -208,7 +219,7 @@
         "/SwitchableOutput/basic_slider_2/State": 1,
         "/SwitchableOutput/basic_slider_2/Status": 9,
 
-        "/SwitchableOutput/basic_slider_3/Dimming": 0,
+        "/SwitchableOutput/basic_slider_3/Dimming": 50,
         "/SwitchableOutput/basic_slider_3/Name": "7c. Basic slider, disabled",
         "/SwitchableOutput/basic_slider_3/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_3/Settings/Function": 2,

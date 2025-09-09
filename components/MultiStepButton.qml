@@ -71,7 +71,7 @@ BaseListView {
 
 	header: BaseListItem  {
 		width: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
-			   + Theme.geometry_dimmingSlider_separator_width + (Theme.geometry_dimmingSlider_text_padding * 2)
+			   + Theme.geometry_miniSlider_separator_width + (Theme.geometry_miniSlider_text_padding * 2)
 		height: parent.height
 
 		// background border color
@@ -112,9 +112,9 @@ BaseListView {
 		Rectangle {
 			anchors.right: parent.right
 			anchors.verticalCenter: parent.verticalCenter
-			width: Theme.geometry_dimmingSlider_separator_width
-			height: parent.height - (Theme.geometry_dimmingSlider_decorator_vertical_padding * 2)
-			radius: Theme.geometry_dimmingSlider_separator_width / 2
+			width: Theme.geometry_miniSlider_separator_width
+			height: parent.height - (Theme.geometry_miniSlider_decorator_vertical_padding * 2)
+			radius: Theme.geometry_miniSlider_separator_width / 2
 			visible: currentIndex > 0
 			color: root.enabled ? Theme.color_multistepbutton_separator : Theme.color_background_disabled
 		}

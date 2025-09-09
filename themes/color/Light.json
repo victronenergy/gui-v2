@@ -41,6 +41,8 @@
     "color_button_off_background": "#74A4D6",
     "color_button_on_background_disabled": "color_gray5",
     "color_button_off_background_disabled": "color_dimWhite2",
+    "color_button_on_text_disabled": "color_gray6",
+    "color_button_off_text_disabled": "color_gray4",
 
     "color_multistepbutton_separator": "#D3E1EE",
 

@@ -110,6 +110,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SwipeViewPage.qml
     components/SwitchableOutputDelegate.qml
     components/SwitchableOutputGroupCard.qml
+    components/SwitchableOutputSlider.qml
     components/SystemBatteryDelegate.qml
     components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
@@ -134,13 +135,14 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/ComboBox.qml
-    components/controls/DimmingSlider.qml
     components/controls/EditFrame.qml
     components/controls/GlobalKeyNavigationHighlight.qml
     components/controls/Label.qml
     components/controls/ListItemButton.qml
     components/controls/ListPressArea.qml
+    components/controls/MiniSlider.qml
     components/controls/MiniSpinBox.qml
+    components/controls/MiniToggleButton.qml
     components/controls/MomentaryButton.qml
     components/controls/PressArea.qml
     components/controls/PressEffect.qml
@@ -150,6 +152,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/RemoveButton.qml
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
+    components/controls/SliderIndicator.qml
     components/controls/SpinBox.qml
     components/controls/SpinBoxInputArea.qml
     components/controls/SwipeView.qml
