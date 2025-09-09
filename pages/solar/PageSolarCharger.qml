@@ -14,7 +14,6 @@ DevicePage {
 
 	required property string bindPrefix
 	readonly property int trackerCount: nrOfTrackers.valid ? nrOfTrackers.value : 1
-	readonly property SolarDevice solarDevice: Global.solarInputs.devices.deviceAt(Global.solarInputs.devices.indexOf(bindPrefix))
 
 	function _isModelSupported() {
 		if (!device.productId || !firmwareVersion.valid) {
@@ -38,6 +37,11 @@ DevicePage {
 
 	serviceUid: root.bindPrefix
 	settingsModel: _isModelSupported() ? supportedProductModel : unsupportedProductModel
+
+	SolarDevice {
+		id: solarDevice
+		serviceUid: root.bindPrefix
+	}
 
 	VeQuickItem {
 		id: firmwareVersion
@@ -146,7 +150,7 @@ DevicePage {
 
 					preferredVisible: tracker.enabled
 					headerText: Global.solarInputs.formatTrackerName(
-							tracker.name, index, root.trackerCount, root.solarDevice.name,
+							tracker.name, index, root.trackerCount, solarDevice.name,
 							VenusOS.TrackerName_NoDevicePrefix)
 					model: QuantityObjectModel {
 						QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
@@ -156,7 +160,7 @@ DevicePage {
 
 					SolarTracker {
 						id: tracker
-						device: root.solarDevice
+						device: solarDevice
 						trackerIndex: tableRow.index
 					}
 				}

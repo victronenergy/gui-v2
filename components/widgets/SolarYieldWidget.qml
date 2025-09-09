@@ -14,7 +14,7 @@ OverviewWidget {
 		if (singleDeviceOnly && Global.solarInputs.devices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml",
 					{ "serviceUid": Global.solarInputs.devices.firstObject.serviceUid })
-		} else if (singleDeviceOnly && Global.solarInputs.pvInverterDevices === 1) {
+		} else if (singleDeviceOnly && Global.solarInputs.pvInverterDevices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
 					{ "serviceUid": Global.solarInputs.pvInverterDevices.firstObject.serviceUid })
 		} else {
@@ -69,9 +69,14 @@ OverviewWidget {
 		ThreePhaseDisplay {
 			leftPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			rightPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
-			model: Global.solarInputs.pvInverterDevices.deviceAt(0).phases
+			model: pvInverter.phases
 			visible: model.count > 1
 			widgetSize: root.size
+
+			PvInverter {
+				id: pvInverter
+				serviceUid: Global.solarInputs.pvInverterDevices.firstObject?.serviceUid ?? ""
+			}
 		}
 	}
 
