@@ -49,7 +49,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
     components/GensetStartStop1Finder.qml
-    components/EvChargerStatusModel.qml
     components/FlatListItemSeparator.qml
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
@@ -572,6 +571,10 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/dcmeterdevicemodel.cpp
     src/device.h
     src/device.cpp
+    src/evchargerdevicemodel.h
+    src/evchargerdevicemodel.cpp
+    src/evchargerstatusmodel.h
+    src/evchargerstatusmodel.cpp
     src/filtereddevicemodel.h
     src/filtereddevicemodel.cpp
     src/filteredservicemodel.h

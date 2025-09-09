@@ -9,37 +9,16 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	property real power: NaN
-	property real current: NaN
-	property real energy: NaN
+	readonly property real power: model.totalPower
+	readonly property real current: model.totalCurrent
+	readonly property real energy: model.totalEnergy
 
-	property int acInputPositionCount   // Chargers with input position, i.e. connected to (non-essential) AC loads
-	property real acInputPositionPower: NaN // The total power for chargers with an input position
-	property int acOutputPositionCount  // Chargers with output position, i.e. connected to Essential loads
-	property real acOutputPositionPower: NaN // The total power for chargers with an output position
+	readonly property int acInputPositionCount: model.inputCount   // Chargers with input position, i.e. connected to (non-essential) AC loads
+	readonly property real acInputPositionPower: model.inputPower // The total power for chargers with an input position
+	readonly property int acOutputPositionCount: model.outputCount  // Chargers with output position, i.e. connected to Essential loads
+	readonly property real acOutputPositionPower: model.outputPower // The total power for chargers with an output position
 
-	// TODO replace this with a C++ model that updates the totals.
-	readonly property BaseDeviceModel model: BaseDeviceModel {
-		readonly property Instantiator _objects: Instantiator {
-			model: FilteredDeviceModel { serviceTypes: "evcharger" }
-			delegate: EvCharger {
-				required property BaseDevice device
-				serviceUid: device.serviceUid
-
-				onPowerChanged: root.updateTotals()
-				onCurrentChanged: root.updateTotals()
-				onPositionChanged: root.updateTotals()
-			}
-			onObjectAdded: (index, evCharger) => {
-				root.model.addDevice(evCharger)
-				root.updateTotals()
-			}
-			onObjectRemoved: (index, evCharger) => {
-				root.model.removeDevice(evCharger.serviceUid)
-				root.updateTotals()
-			}
-		}
-	}
+	readonly property EvChargerDeviceModel model: EvChargerDeviceModel {}
 
 	readonly property var maxCurrentPresets: [6, 8, 10, 14, 16, 24, 32].map(function(v) { return { value: v } })
 
@@ -63,44 +42,6 @@ QtObject {
 			caption: qsTrId("evcs_scheduled_caption")
 		}
 	]
-
-	function updateTotals() {
-		_measurementUpdates.start()
-	}
-
-	function _doUpdateTotals() {
-		let totalPower = NaN
-		let totalEnergy = NaN
-		let overallCurrent = NaN // current cannot be summed, so it is NaN when > 1 charger
-
-		let totalInputCount = 0
-		let totalInputPower = NaN
-		let totalOutputCount = 0
-		let totalOutputPower = NaN
-
-		for (let i = 0; i < model.count; ++i) {
-			const evCharger = model.deviceAt(i)
-			totalPower = Units.sumRealNumbers(totalPower, evCharger.power)
-			totalEnergy = Units.sumRealNumbers(totalEnergy, evCharger.energy)
-			if (model.count === 1) {
-				overallCurrent = evCharger.current
-			}
-			if (evCharger.position === VenusOS.AcPosition_AcInput) {
-				totalInputCount++
-				totalInputPower = Units.sumRealNumbers(totalInputPower, evCharger.power)
-			} else if (evCharger.position === VenusOS.AcPosition_AcOutput) {
-				totalOutputCount++
-				totalOutputPower = Units.sumRealNumbers(totalOutputPower, evCharger.power)
-			}
-		}
-		power = totalPower
-		current = overallCurrent
-		energy = totalEnergy
-		acInputPositionCount = totalInputCount
-		acInputPositionPower = totalInputPower
-		acOutputPositionCount = totalOutputCount
-		acOutputPositionPower = totalOutputPower
-	}
 
 	function chargerStatusToText(status) {
 		switch (status) {
@@ -186,13 +127,6 @@ QtObject {
 		default:
 			return ""
 		}
-	}
-
-	// Only update the totals periodically (and only when they change) to avoid excessive changes,
-	// especially on multi-phase systems.
-	readonly property Timer _measurementUpdates: Timer {
-		interval: 1000
-		onTriggered: root._doUpdateTotals()
 	}
 
 	Component.onCompleted: Global.evChargers = root
