@@ -39,7 +39,7 @@ Rectangle {
 			: (selected ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
 		color: enabled
 			? (down || selected ? Theme.color_button_down_text : Theme.color_font_primary)
-			: (selected ? Theme.color_gray6 : Theme.color_gray4)
+			: (selected ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
 		borderWidth: 0
 		topLeftRadius: root.radius - Theme.geometry_button_border_width
 		bottomLeftRadius: root.radius - Theme.geometry_button_border_width
@@ -66,7 +66,7 @@ Rectangle {
 			: (selected ? Theme.color_button_on_background_disabled : Theme.color_background_disabled)
 		color: enabled
 			? (down || selected ? Theme.color_button_down_text : Theme.color_font_primary)
-			: (selected ? Theme.color_gray6 : Theme.color_gray4)
+			: (selected ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
 		borderWidth: 0
 		topRightRadius: root.radius - Theme.geometry_button_border_width
 		bottomRightRadius: root.radius - Theme.geometry_button_border_width
