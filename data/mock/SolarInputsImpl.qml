@@ -35,9 +35,9 @@ Item {
 
 		function updateDcTotals() {
 			let dcPower = NaN
-			if (model.count) {
-				for (let i = 0; i < model.count; ++i) {
-					const charger = model.deviceAt(i)
+			if (pvChargers.count) {
+				for (let i = 0; i < count; ++i) {
+					const charger = pvChargers.objectAt(i)
 					if (charger) {
 						dcPower = Units.sumRealNumbers(dcPower, charger.power)
 					}
@@ -52,8 +52,9 @@ Item {
 		}
 
 		model: Global.solarInputs.devices
-		delegate: QtObject {
-			readonly property real power: modelData.power
+		delegate: SolarDevice {
+			required property BaseDevice device
+			serviceUid: device.serviceUid
 			onPowerChanged: Qt.callLater(pvChargers.updateDcTotals)
 		}
 		onCountChanged: Qt.callLater(updateDcTotals)
@@ -100,9 +101,9 @@ Item {
 		}
 
 		model: Global.solarInputs.pvInverterDevices
-		delegate: QtObject {
-			readonly property real power: modelData.power
-			readonly property PhaseModel phases: modelData.phases
+		delegate: PvInverter {
+			required property BaseDevice device
+			serviceUid: device.serviceUid
 			onPowerChanged: Qt.callLater(pvInverters.updateAcTotals)
 		}
 		onCountChanged: Qt.callLater(updateAcTotals)

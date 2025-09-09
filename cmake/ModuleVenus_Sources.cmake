@@ -81,7 +81,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/QuantityTableSummary.qml
     components/RadioButtonListPage.qml
     components/RsSystemAcIODisplay.qml
-    components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/SettingsColumn.qml
