@@ -5,7 +5,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
-import QtQuick.Templates as CT
 
 BaseListItem {
 	id: root
@@ -172,11 +171,10 @@ BaseListItem {
 	Component {
 		id: dimmingComponent
 
-		DimmingSlider {
-			id: slider
-
-			property bool valueChangeKeyPressed
-			readonly property bool dragging: pressed || valueChangeKeyPressed
+		// This container is used to separate the slider control from the on/off button, so that
+		// their enabled states can be controlled independently.
+		FocusScope {
+			id: dimmingSliderContainer
 
 			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
 			// toggles the on/off state and left/right keys move the slider.
@@ -190,16 +188,6 @@ BaseListItem {
 						focus = true
 					}
 					return true
-				case Qt.Key_Return:
-					focus = false
-					return true
-				case Qt.Key_Up:
-				case Qt.Key_Down:
-					if (activeFocus) {
-						// Prevent key navigation to other grid delegates while in edit mode.
-						return true
-					}
-					break
 				}
 				return false
 			}
@@ -209,87 +197,69 @@ BaseListItem {
 			}
 
 			width: root._buttonWidth
-			height: Theme.geometry_switchableoutput_button_height
-			highlightColor: enabled
-				? (dimmingState.expectedValue === 1 ? Theme.color_ok : Theme.color_button_down)
-				: Theme.color_font_disabled
-			from: dimmingMin.valid ? dimmingMin.value : 0
-			to: dimmingMax.valid ? dimmingMax.value : 100
-			stepSize: 1
-			state: dimmingState.expectedValue
+			height: dimmingSlider.height
 
-			onDraggingChanged: {
-				if (dragging) {
-					delayedSliderUpdate.stop()
-				} else {
-					dimmingValue.syncBackendValueToSlider()
-				}
-			}
-			onClicked: {
-				_toggleState()
-			}
-			onMoved: {
-				value = Math.round(value)
-				dimmingValue.writeValue(value)
-			}
+			// Continue to show the key navigation highlight when the slider is disabled (due to the
+			// slider being in the off state).
+			KeyNavigationHighlight.fill: dimmingSliderContainer
+			KeyNavigationHighlight.active: dimmingSliderContainer.activeFocus && !dimmingSlider.activeFocus
 
 			Keys.onPressed: (event) => {
-				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
-					valueChangeKeyPressed = true
+				switch (event.key) {
+				case Qt.Key_Return:
+				case Qt.Key_Enter:
+				case Qt.Key_Escape:
+					focus = false
+					event.accepted = true
+					return
+				case Qt.Key_Up:
+				case Qt.Key_Down:
+				case Qt.Key_Left:
+				case Qt.Key_Right:
+					// When button is 'off', the dimmingSlider is disabled and does not receive
+					// events, so accept them here to prevent navigation to other grid delegates.
+					event.accepted = true
+					return
 				}
 				event.accepted = false
 			}
-			Keys.onReleased: (event) => {
-				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
-					valueChangeKeyPressed = false
-				}
-				event.accepted = false
-			}
-			KeyNavigationHighlight.active: slider.activeFocus
 
-			VeQuickItem {
-				id: dimmingMax
-				uid: root.outputUid + "/Settings/DimmingMax"
-			}
-			VeQuickItem {
-				id: dimmingMin
-				uid: root.outputUid + "/Settings/DimmingMin"
-			}
+			SwitchableOutputSlider {
+				id: dimmingSlider
 
-			SettingSync {
-				id: dimmingState
-				backendValue: output.state
-				onUpdateToBackend: (value) => { output.setState(value) }
+				width: parent.width
+				switchableOutput: output
+				leftPadding: dimmingToggleButton.width
+				borderColor: dimmingSliderContainer.enabled ? Theme.color_ok : Theme.color_font_disabled
+				highlightColor: dimmingState.expectedValue === 1
+					? (dimmingSliderContainer.enabled ? Theme.color_ok : Theme.color_background_disabled)
+					: (dimmingSliderContainer.enabled ? Theme.color_button_off_background : Theme.color_background_disabled)
+				backgroundColor: dimmingSliderContainer.enabled ? Theme.color_darkOk : Theme.color_background_disabled
+				enabled: dimmingState.expectedValue === 1 || dragging
+				focus: true
+				KeyNavigationHighlight.fill: dimmingSliderContainer
 			}
 
-			SettingSync {
-				id: dimmingValue
+			MiniToggleButton {
+				id: dimmingToggleButton
 
-				// Update the slider value to the backend value.
-				function syncBackendValueToSlider() {
-					// If user has interacted with the slider to change the value, delay briefly
-					// before syncing the slider to the backend value, else this may be done while
-					// user changes are still being written.
-					if (busy || slider.dragging || delayedSliderUpdate.running) {
-						delayedSliderUpdate.restart()
-					} else {
-						slider.value = backendValue
-					}
+				checked: dimmingState.expectedValue === 1
+				onClicked: dimmingSliderContainer._toggleState()
+
+				Rectangle {
+					anchors.right: parent.right
+					anchors.verticalCenter: parent.verticalCenter
+					width: Theme.geometry_dimmingSlider_separator_width
+					height: parent.height - (Theme.geometry_dimmingSlider_decorator_vertical_padding * 2)
+					radius: Theme.geometry_dimmingSlider_separator_width / 2
+					color: enabled ? Theme.color_slider_separator : Theme.color_font_disabled
 				}
 
-				backendValue: output.dimming
-				onUpdateToBackend: (value) => { output.setDimming(value) }
-				onBackendValueChanged: syncBackendValueToSlider()
-				onBusyChanged: if (!busy) syncBackendValueToSlider()
-			}
-
-			// When the slider is released, wait a second for the user value to sync to the backend,
-			// else the user will release the slider and then immediately see it jump several times
-			// as the backend catches up to the last written value.
-			Timer {
-				id: delayedSliderUpdate
-				interval: 1000
-				onTriggered: dimmingValue.syncBackendValueToSlider()
+				SettingSync {
+					id: dimmingState
+					backendValue: output.state
+					onUpdateToBackend: (value) => { output.setState(value) }
+				}
 			}
 		}
 	}
@@ -396,13 +366,8 @@ BaseListItem {
 		TemperatureSlider {
 			id: temperatureSlider
 
-			property bool valueChangeKeyPressed
-			readonly property bool dragging: pressed || valueChangeKeyPressed
 			readonly property string secondaryTitle: Math.round(value) + Global.systemSettings.temperatureUnitSuffix
 
-			// When space key is pressed, enter an "edit" (i.e. focused) mode where the space key
-			// toggles the on/off state and left/right keys move the slider.
-			// When return key is pressed, exit the edit mode.
 			function handlePress(key) {
 				switch (key) {
 				case Qt.Key_Space:
@@ -414,29 +379,10 @@ BaseListItem {
 			}
 
 			width: root._buttonWidth
-			height: Theme.geometry_switchableoutput_button_height
-			from: temperatureMin.valid ? Units.convert(temperatureMin.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-									   : Units.convert(0, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-			to: temperatureMax.valid ? Units.convert(temperatureMax.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-									 : Units.convert(100, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-			stepSize: temperatureStepsize.valid ? temperatureStepsize.value : 1
-
-			onDraggingChanged: {
-				if (dragging) {
-					temperatureDelayedSliderUpdate.stop()
-				} else {
-					temperatureValue.syncBackendValueToSlider()
-				}
-			}
-			onMoved: {
-				value = Math.round(value)
-				temperatureValue.writeValue(Units.convert(value, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Celsius))
-			}
+			switchableOutput: output
+			stepSize: temperatureStepSize.valid ? temperatureStepSize.value : 1
 
 			Keys.onPressed: (event) => {
-				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
-					valueChangeKeyPressed = true
-				}
 				switch (event.key) {
 				case Qt.Key_Return:
 				case Qt.Key_Enter:
@@ -444,67 +390,13 @@ BaseListItem {
 					focus = false
 					event.accepted = true
 					return
-				case Qt.Key_Up:
-				case Qt.Key_Down:
-					event.accepted = true
-					return
 				}
 				event.accepted = false
 			}
-			Keys.onReleased: (event) => {
-				if (event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
-					valueChangeKeyPressed = false
-				}
-				event.accepted = false
-			}
-			KeyNavigationHighlight.active: temperatureSlider.activeFocus
 
 			VeQuickItem {
-				id: temperatureMax
-				uid: root.outputUid + "/Settings/DimmingMax"
-			}
-			VeQuickItem {
-				id: temperatureMin
-				uid: root.outputUid + "/Settings/DimmingMin"
-			}
-			VeQuickItem {
-				id: temperatureStepsize
+				id: temperatureStepSize
 				uid: root.outputUid + "/Settings/StepSize"
-			}
-
-			SettingSync {
-				id: temperatureValue
-
-				// Update the slider value to the backend value.
-				function syncBackendValueToSlider() {
-					// If user has interacted with the slider to change the value, delay briefly
-					// before syncing the slider to the backend value, else this may be done while
-					// user changes are still being written.
-					if (busy || temperatureSlider.dragging || temperatureDelayedSliderUpdate.running) {
-						temperatureDelayedSliderUpdate.restart()
-					} else {
-						temperatureSlider.value = Units.convert(backendValue, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-					}
-				}
-
-				backendValue: output.dimming
-				onUpdateToBackend: (value) => { output.setDimming(value) }
-				onBackendValueChanged: syncBackendValueToSlider()
-				onBusyChanged: if (!busy) syncBackendValueToSlider()
-			}
-
-			Connections {
-				target: Global.systemSettings
-				function onTemperatureUnitChanged() { temperatureValue.syncBackendValueToSlider() }
-			}
-
-			// When the slider is released, wait a second for the user value to sync to the backend,
-			// else the user will release the slider and then immediately see it jump several times
-			// as the backend catches up to the last written value.
-			Timer {
-				id: temperatureDelayedSliderUpdate
-				interval: 1000
-				onTriggered: temperatureValue.syncBackendValueToSlider()
 			}
 		}
 	}
@@ -665,7 +557,43 @@ BaseListItem {
 	Component {
 		id: basicSliderComponent
 
-		PlaceholderDelegate {}
+		SwitchableOutputSlider {
+			id: basicSlider
+
+			readonly property string secondaryTitle: Math.round(value) + (basicSliderUnitItem.value || "")
+
+			function handlePress(key) {
+				switch (key) {
+				case Qt.Key_Space:
+					if (!activeFocus) {
+						focus = true
+						return true
+					}
+					break
+				}
+				return false
+			}
+
+			width: root._buttonWidth
+			switchableOutput: output
+
+			Keys.onPressed: (event) => {
+				switch (event.key) {
+				case Qt.Key_Return:
+				case Qt.Key_Enter:
+				case Qt.Key_Escape:
+					focus = false
+					event.accepted = true
+					return
+				}
+				event.accepted = false
+			}
+
+			VeQuickItem {
+				id: basicSliderUnitItem
+				uid: root.outputUid + "/Settings/Unit"
+			}
+		}
 	}
 
 	Component {
