@@ -39,10 +39,20 @@ Item {
 				VeQuickItem { uid: evcs.uid + "/Ac/Energy/Forward" }
 			}
 			MockDataRangeAnimator {
-				active: Global.mainView && Global.mainView.mainViewVisible
+				active: Global.mainView && Global.mainView.mainViewVisible && statusItem.value === VenusOS.Evcs_Status_Charging
 				stepSize: 1
 				maximumValue: NaN
 				VeQuickItem { uid: evcs.uid + "/ChargingTime" }
+			}
+			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
+				interval: 5000
+				minimumValue: VenusOS.Evcs_Status_Disconnected
+				maximumValue: VenusOS.Evcs_Status_Charged
+				VeQuickItem {
+					id: statusItem
+					uid: evcs.uid + "/Status"
+				}
 			}
 		}
 	}
