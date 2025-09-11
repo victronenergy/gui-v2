@@ -51,7 +51,7 @@ DevicePage {
 			bindPrefix: root.bindPrefix
 		}
 
-		Loader {
+		BaseListLoader {
 			width: parent ? parent.width : 0
 			sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
 					: root.trackerCount > 1 ? multiTrackerComponent
@@ -89,7 +89,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "solarHistory": solarDevice.history })
+						{ "serviceUid": root.bindPrefix })
 			}
 		}
 
@@ -109,11 +109,6 @@ DevicePage {
 						{ "title": text, "bindPrefix": root.bindPrefix })
 			}
 		}
-	}
-
-	SolarDevice {
-		id: solarDevice
-		serviceUid: root.bindPrefix
 	}
 
 	VeQuickItem {
@@ -222,9 +217,7 @@ DevicePage {
 						delegate: QuantityTable.TableRow {
 							id: tableRow
 							preferredVisible: tracker.enabled
-							headerText: Global.solarInputs.formatTrackerName(
-									  tracker.name, index, root.trackerCount, root.title,
-									  VenusOS.TrackerName_NoDevicePrefix)
+							headerText: tracker.name
 							model: QuantityObjectModel {
 								QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
 								QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
@@ -233,8 +226,9 @@ DevicePage {
 
 							SolarTracker {
 								id: tracker
-								device: solarDevice
+								serviceUid: root.bindPrefix
 								trackerIndex: tableRow.index
+								trackerCount: root.trackerCount
 							}
 						}
 					}

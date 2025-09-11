@@ -38,11 +38,6 @@ DevicePage {
 	serviceUid: root.bindPrefix
 	settingsModel: _isModelSupported() ? supportedProductModel : unsupportedProductModel
 
-	SolarDevice {
-		id: solarDevice
-		serviceUid: root.bindPrefix
-	}
-
 	VeQuickItem {
 		id: firmwareVersion
 		uid: root.bindPrefix + "/FirmwareVersion"
@@ -149,9 +144,7 @@ DevicePage {
 					id: tableRow
 
 					preferredVisible: tracker.enabled
-					headerText: Global.solarInputs.formatTrackerName(
-							tracker.name, index, root.trackerCount, solarDevice.name,
-							VenusOS.TrackerName_NoDevicePrefix)
+					headerText: tracker.name
 					model: QuantityObjectModel {
 						QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
 						QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
@@ -160,8 +153,9 @@ DevicePage {
 
 					SolarTracker {
 						id: tracker
-						device: solarDevice
+						serviceUid: root.bindPrefix
 						trackerIndex: tableRow.index
+						trackerCount: root.trackerCount
 					}
 				}
 
@@ -276,14 +270,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "solarHistory": solarHistory })
-			}
-
-			SolarHistory {
-				id: solarHistory
-				bindPrefix: root.bindPrefix
-				deviceName: root.title
-				trackerCount: root.trackerCount
+						{ "serviceUid": root.bindPrefix })
 			}
 		}
 

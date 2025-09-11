@@ -14,24 +14,10 @@ Device {
 	id: root
 
 	readonly property real power: _totalPower.valid ? _totalPower.value : NaN
-	readonly property alias history: _history
 
 	// For solarcharger services, assume trackerCount=1 if /NrOfTrackers is not set.
-	readonly property int trackerCount: _nrOfTrackers.valid ? _nrOfTrackers.value : (_isSolarCharger ? 1 : 0)
-
-	// This is the overall error history.
-	// For the per-day error history, use dailyHistory(day).errorModel
-	readonly property alias errorModel: _history.errorModel
-
-	readonly property bool _isSolarCharger: BackendConnection.serviceTypeFromUid(serviceUid) === "solarcharger"
-
-	function dailyHistory(day) {
-		return _history.dailyHistory(day)
-	}
-
-	function dailyTrackerHistory(day, trackerIndex) {
-		return _history.dailyTrackerHistory(day, trackerIndex)
-	}
+	readonly property int trackerCount: _nrOfTrackers.valid ? _nrOfTrackers.value
+			: (BackendConnection.serviceTypeFromUid(serviceUid) === "solarcharger" ? 1 : 0)
 
 	//--- internal members below ---
 
@@ -41,14 +27,5 @@ Device {
 
 	readonly property VeQuickItem _nrOfTrackers: VeQuickItem {
 		uid: root.serviceUid + "/NrOfTrackers"
-	}
-
-	//--- history ---
-
-	readonly property SolarHistory _history: SolarHistory {
-		id: _history
-		bindPrefix: root.serviceUid
-		deviceName: root.name
-		trackerCount: root.trackerCount
 	}
 }
