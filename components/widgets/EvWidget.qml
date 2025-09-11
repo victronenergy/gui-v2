@@ -29,10 +29,8 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_Ev
 	enabled: evDevice !== null
 
-	// Show Range as the main quantity so it's visible even in small widget sizes
-	quantityLabel.value: rangeItem.valid ? rangeItem.value : NaN
-	quantityLabel.unit: VenusOS.Units_None
-	quantityLabel.unitText: "km"
+	// Hide the default quantity label - we'll show our custom layout instead
+	quantityLabel.visible: false
 
 	// VeQuickItem to access the custom name
 	VeQuickItem {
@@ -52,6 +50,12 @@ OverviewWidget {
 		uid: evDevice ? evDevice.serviceUid + "/Soc" : ""
 	}
 
+	// VeQuickItem to access the target SOC data
+	VeQuickItem {
+		id: targetSocItem
+		uid: evDevice ? evDevice.serviceUid + "/TargetSoc" : ""
+	}
+
 	extraContentChildren: [
 		Loader {
 			anchors {
@@ -59,10 +63,10 @@ OverviewWidget {
 				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
-				bottom: parent.bottom
-				bottomMargin: root.verticalMargin
+				top: parent.top
+				topMargin: root.verticalMargin
 			}
-			active: root.size >= VenusOS.OverviewWidget_Size_M && evDevice
+			active: evDevice  // Always show when EV device is present
 			sourceComponent: evInfoComponent
 		}
 	]
@@ -70,88 +74,67 @@ OverviewWidget {
 	Component {
 		id: evInfoComponent
 
-		Column {
+		// Single row showing both range and SOC info side by side
+		Row {
 			width: parent.width
-			spacing: Theme.geometry_listItem_spacing / 2
 
-			// VeQuickItems for EV data (socItem and targetSocItem are already defined above)
-			VeQuickItem {
-				id: chargingStateItem
-				uid: evDevice ? evDevice.serviceUid + "/ChargingState" : ""
-			}
-
-			VeQuickItem {
-				id: atSiteItem
-				uid: evDevice ? evDevice.serviceUid + "/AtSite" : ""
-			}
-
-			// Row 1: State of Charge
 			Row {
-				width: parent.width
-				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+				id: rangeDisplay
+				spacing: 4
+				anchors.verticalCenter: parent.verticalCenter
 
 				Label {
-					text: CommonWords.state_of_charge || "SoC"
-					color: Theme.color_font_secondary
-					width: parent.width / 2
+					text: rangeItem.valid ? Math.round(rangeItem.value).toString() : "--"
+					color: Theme.color_font_primary  // White number
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
 				}
 
 				Label {
-					text: socItem.valid ? Math.round(socItem.value) + "%" : "--"
-					color: Theme.color_font_primary
-					horizontalAlignment: Text.AlignRight
-					width: parent.width / 2 - parent.spacing
-				}
-			}
-
-			// Row 2: Charging state
-			Row {
-				width: parent.width
-				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
-
-				Label {
-					text: CommonWords.state || "State"
-					color: Theme.color_font_secondary
-					width: parent.width / 2
-				}
-
-				Label {
-					text: {
-						if (!chargingStateItem.valid) return "--"
-						switch(chargingStateItem.value) {
-						case 0: return "Not charging"
-						case 1: return "Low power"
-						case 3: return "Charging"
-						case 244: return "Sustain"
-						case 245: return "Wake up"
-						case 256: return "Discharging"
-						case 259: return "Scheduled"
-						default: return "Unknown"
-						}
-					}
-					color: Theme.color_font_primary
-					horizontalAlignment: Text.AlignRight
-					width: parent.width / 2 - parent.spacing
+					text: "km"
+					color: Theme.color_font_secondary  // Grey unit
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
 				}
 			}
 
-			// Row 3: At site indicator (if available)
+			Item {
+				// Spacer to push SOC info to the right
+				width: parent.width - rangeDisplay.width - socDisplay.width
+				height: 1
+			}
+
 			Row {
-				width: parent.width
-				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
-				visible: atSiteItem.valid
+				id: socDisplay
+				spacing: 0
+				anchors.verticalCenter: parent.verticalCenter
 
 				Label {
-					text: "At site"
-					color: Theme.color_font_secondary
-					width: parent.width / 2
+					text: socItem.valid ? Math.round(socItem.value).toString() : "--"
+					color: Theme.color_font_primary  // White number
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
 				}
 
 				Label {
-					text: atSiteItem.valid ? (atSiteItem.value === 1 ? "Yes" : "No") : "--"
-					color: Theme.color_font_primary
-					horizontalAlignment: Text.AlignRight
-					width: parent.width / 2 - parent.spacing
+					text: "/"
+					color: Theme.color_font_secondary  // Grey separator
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
+				}
+
+				Label {
+					text: targetSocItem.valid ? Math.round(targetSocItem.value).toString() : "--"
+					color: Theme.color_font_primary  // White number
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
+				}
+
+				Label {
+					text: "%"
+					color: Theme.color_font_secondary  // Grey unit
+					font.pixelSize: Theme.font_size_body1
+					anchors.verticalCenter: parent.verticalCenter
 				}
 			}
 		}
