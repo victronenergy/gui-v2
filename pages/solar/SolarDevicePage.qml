@@ -21,8 +21,9 @@ Page {
 
 	SolarTracker {
 		id: firstTracker
-		device: solarDevice
+		serviceUid: root.serviceUid
 		trackerIndex: 0
+		trackerCount: solarDevice.trackerCount
 	}
 
 	VeQuickItem {
@@ -86,9 +87,7 @@ Page {
 						id: tableRow
 
 						preferredVisible: tracker.enabled
-						headerText: Global.solarInputs.formatTrackerName(
-								  tracker.name, index, root.trackerCount, solarDevice.name,
-								  VenusOS.TrackerName_NoDevicePrefix)
+						headerText: tracker.name
 						model: QuantityObjectModel {
 							QuantityObject { object: tracker; key: "todaysYield"; unit: VenusOS.Units_Energy_KiloWattHour }
 							QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
@@ -98,8 +97,9 @@ Page {
 
 						SolarTracker {
 							id: tracker
-							device: solarDevice
+							serviceUid: root.serviceUid
 							trackerIndex: tableRow.index
+							trackerCount: solarDevice.trackerCount
 						}
 					}
 
@@ -150,10 +150,15 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.history
-				preferredVisible: solarDevice.history.valid
+				preferredVisible: daysAvailable.valid && daysAvailable.value > 0
 				onClicked: {
 					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "solarHistory": solarDevice.history })
+							{ "serviceUid": solarDevice.serviceUid })
+				}
+
+				VeQuickItem {
+					id: daysAvailable
+					uid: solarDevice.serviceUid + "/History/Overall/DaysAvailable"
 				}
 			}
 
