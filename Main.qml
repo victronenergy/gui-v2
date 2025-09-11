@@ -92,12 +92,30 @@ Window {
 		// show the GUI always centered in the window
 		transformOrigin: Item.Center
 
+		// Rotate for Raspberry Pi Touch Display 2
+		transform: Rotation {
+			origin.x: root.width / 2
+			origin.y: root.height / 2
+			angle: Theme.requiredRotation
+		}
+
+		// Adjust scale depending on the rotation
+		property real rotatedScale: (Theme.requiredRotation == 90.0)
+			? Math.min(root.width / Theme.geometry_screen_height,
+				root.height / Theme.geometry_screen_width)
+			: Math.min(root.width / Theme.geometry_screen_width,
+				root.height / Theme.geometry_screen_height)
+		scale: rotatedScale
+
+		// Center the content only if rotated
+		x: requiresRotation ? (root.width - Theme.geometry_screen_height * scale) / 2 : 0
+		y: requiresRotation ? (root.height - Theme.geometry_screen_width * scale) / 2 : 0
+
 		// In WebAssembly builds, if we are displaying on a low-dpi mobile
 		// device, it may not have enough pixels to display the UI natively.
 		// To fix, we need to downscale everything by the appropriate factor,
 		// and take into account browser chrome stealing real-estate also.
 		onScaleChanged: Global.scalingRatio = contentItem.scale
-		scale: Math.min(root.width/Theme.geometry_screen_width, root.height/Theme.geometry_screen_height)
 
 		Keys.onPressed: function(event) {
 			// If a key press is not handled by an item higher up in the hierarchy:

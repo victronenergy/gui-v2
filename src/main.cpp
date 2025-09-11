@@ -31,6 +31,8 @@
 #include <QCommandLineParser>
 #include <QQuickItem>
 #include <QStyleHints>
+#include <QQmlContext>
+#include <QFile>
 
 #include <QtDebug>
 
@@ -63,6 +65,37 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	}
 	const QString shardStr = shard > 0 ? QStringLiteral("%1").arg(shard % 128) : QString();
 	return calculateMqttAddressFromShard(shardStr);
+}
+
+bool checkFileContent(const QString &path, const QStringList &expectedValues)
+{
+	QFile file(path);
+	if (file.exists() && file.open(QIODevice::ReadOnly)) {
+		QByteArray content = file.readAll();
+		file.close();
+
+		// Clean up spaces and null characters
+		QString text = QString::fromUtf8(content).trimmed();
+		text.replace(QChar('\0'), "");
+
+		// Check against provided expected values
+		for (const auto &expected : expectedValues) {
+			if (text.compare(expected) == 0) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool isHdmiConnected(const QString &path)
+{
+	return checkFileContent(path, {"connected"});
+}
+
+bool isRpiTouchDisplay2(const QString &path)
+{
+	return checkFileContent(path, {"raspberrypi,dsi-7inch", "raspberrypi,dsi-5inch"});
 }
 
 void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
@@ -497,6 +530,28 @@ int main(int argc, char *argv[])
 
 	/* Force construction of fps counter */
 	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
+
+#if VENUS_GX_BUILD
+	/* Detect if HDMI has been connected */
+	QString hdmi0 = QStringLiteral("/sys/class/drm/card0-HDMI-A-1/status");
+	QString hdmi1 = QStringLiteral("/sys/class/drm/card0-HDMI-A-2/status");
+	bool hdmiConnected = isHdmiConnected(hdmi0) || isHdmiConnected(hdmi1);
+
+	/* Don't check for DSI display and don't rotate if HDMI has been connected */
+	qreal rotation = 0.0;
+	if (!hdmiConnected) {
+		/* Detect if device tree binary overlay for the Raspberry Pi Touch Display 2
+		   has been automatically loaded on rpi5 and enable screen rotatition for it */
+		QString disp0 = QStringLiteral("/proc/device-tree/axi/pcie@1000120000/rp1/dsi@110000/dsi_panel@0/compatible");
+		QString disp1 = QStringLiteral("/proc/device-tree/axi/pcie@1000120000/rp1/dsi@128000/dsi_panel@0/compatible");
+		if (isRpiTouchDisplay2(disp0) || isRpiTouchDisplay2(disp1)) {
+			rotation = 90.0;
+		}
+	}
+
+	Victron::VenusOS::ThemeSingleton *theme = Victron::VenusOS::ThemeSingleton::create();
+	theme->setRequiredRotation(rotation);
+#endif
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
 	if (component.isError()) {
