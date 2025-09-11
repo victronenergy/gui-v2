@@ -247,6 +247,13 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Copy Settings"
+				text: qsTrId("pagesettingsgeneral_copy_settings")
+				preferredVisible: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCopySettings.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Support status (modifications checks)"
 				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
 				secondaryText: supportStateText()

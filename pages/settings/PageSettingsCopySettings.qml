@@ -189,10 +189,11 @@ Page {
 	GradientListView {
 		model: ObjectModel {
 
+			/*
 			// TODO: Do not display, if all veBusDeviceRepeaters are invisible
 			SettingsListHeader {
 				//% "VE.Bus Settings"
-				text: qsTrId("pagesettingsbackuprestore_vebus_settings")
+				text: qsTrId("pagesettingscopysettings_vebus_settings")
 				preferredVisible: veBusVisibleCount > 0
 			}
 
@@ -228,16 +229,19 @@ Page {
 					}
 				}
 			}
+			*/
 
 			SettingsListHeader {
 				//% "Tank Settings"
-				text: qsTrId("pagesettingsbackuprestore_tank_settings")
+				text: qsTrId("pagesettingscopysettings_tank_settings")
 			}
 
+			/*
 			PrimaryListLabel {
 				//% "Note: Backup files are Venus OS firmware version specific and can only be used to restore settings on products with matching firmware versions
 				text: qsTrId("tankk_backup_firmware_version_specific_message")
 			}
+			*/
 
 			// IDEAS:
 			// - Add option field to select USB stick, if multiple are present
@@ -248,7 +252,7 @@ Page {
 			ListButton {
 				id: _createUsbButton
 				//% "Create USB stick for automatic tank settings restore"
-				text: qsTrId("pagesettingsbackuprestore_tank_create_usb_for_automatic_restore")
+				text: qsTrId("pagesettingscopysettings_tank_create_usb_for_automatic_restore")
 				secondaryText: get_create_usb_button_text()
 				enabled: _backupRestoreAction.value === 0
 				// preferredVisible: !_backupNameInput.preferredVisible
@@ -262,10 +266,10 @@ Page {
 			// after backup was successful, display modal dialog and tell the user backup is completed and media was ejected
 			ListButton {
 				id: _backupButton
-				//% "Backup all tank settings to USB"
-				text: qsTrId("pagesettingsbackuprestore_tank_settings_backup_to_usb")
+				//% "Copy all tank settings from Venus OS to USB"
+				text: qsTrId("pagesettingscopysettings_tank_settings_backup_to_usb")
 				//% "No USB connected"
-				secondaryText: _ejectUsbButton.mounted ? get_backup_button_text() : qsTrId("pagesettingsbackuprestore_no_usb_connected")
+				secondaryText: _ejectUsbButton.mounted ? get_backup_button_text() : qsTrId("pagesettingscopysettings_no_usb_connected")
 				// enabled: _backupRestoreAction.value === 0
 				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
@@ -277,10 +281,10 @@ Page {
 			// restore whole tank configuration
 			ListButton {
 				id: _restoreButton
-				//% "Restore all tank settings from USB"
-				text: qsTrId("pagesettingsbackuprestore_restore_from_usb")
+				//% "Copy all tank settings from USB to Venus OS"
+				text: qsTrId("pagesettingscopysettings_restore_from_usb")
 				//% "No USB connected"
-				secondaryText: _ejectUsbButton.mounted ? get_restore_button_text() : qsTrId("pagesettingsbackuprestore_no_usb_connected")
+				secondaryText: _ejectUsbButton.mounted ? get_restore_button_text() : qsTrId("pagesettingscopysettings_no_usb_connected")
 				// enabled: _backupRestoreAction.value === 0
 				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
@@ -291,7 +295,7 @@ Page {
 
 					ModalWarningDialog {
 						//% "Are you sure that you want to restore the tank settings from the USB?\nThis will overwrite all current settings."
-						title: qsTrId("pagesettingsbackuprestore_restore_from_usb_warning")
+						title: qsTrId("pagesettingscopysettings_restore_from_usb_warning")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						//% "Yes"
 						acceptText: qsTrId("common_words_yes")
@@ -308,10 +312,10 @@ Page {
 
 			// Delete existing backup, only if there is one
 			ListButton {
-				//% "Delete tank setting backup from USB"
-				text: qsTrId("pagesettingsbackuprestore_delete_backup_from_usb")
+				//% "Delete tank setting from USB"
+				text: qsTrId("pagesettingscopysettings_delete_backup_from_usb")
 				//% "No USB connected"
-				secondaryText: _ejectUsbButton.mounted ? get_delete_button_text() : qsTrId("pagesettingsbackuprestore_no_usb_connected")
+				secondaryText: _ejectUsbButton.mounted ? get_delete_button_text() : qsTrId("pagesettingscopysettings_no_usb_connected")
 				// enabled: _backupRestoreAction.value === 0
 				interactive: _backupRestoreAction.value === 0 && _ejectUsbButton.mounted
 				// preferredVisible: !_backupNameInput.preferredVisible
@@ -322,7 +326,7 @@ Page {
 
 					ModalWarningDialog {
 						//% "Are you sure that you want to delelte the tank settings from the USB?"
-						title: qsTrId("pagesettingsbackuprestore_delete_backup_warning")
+						title: qsTrId("pagesettingscopysettings_delete_backup_warning")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						//% "Yes"
 						acceptText: qsTrId("common_words_yes")
@@ -347,8 +351,10 @@ Page {
 			// needed, if there is already a backup on the USB, but you don't want to restore it
 			ListSwitch {
 				id: _autoRestoreSwitch
-				//% "Prevent automatic restore of tank settings on USB insert"
-				text: qsTrId("pagesettingsbackuprestore_tank_settings_prevent_automatic_restore_on_usb_insert")
+				//% "Prevent automatic copy of tank settings on USB insert"
+				text: qsTrId("pagesettingscopysettings_tank_settings_prevent_automatic_restore_on_usb_insert")
+				//% "If enabled, tank settings will not be automatically copied from USB to Venus OS when a USB with a tank settings backup is inserted."
+				caption: qsTrId("pagesettingscopysettings_tank_settings_prevent_automatic_restore_on_usb_insert_description")
 				dataItem.uid: settingsUid + "/PreventAutoRestore"
 			}
 		}
