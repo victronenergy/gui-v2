@@ -25,23 +25,5 @@ QtObject {
 
 	readonly property int inputCount: devices.count + pvInverterDevices.count
 
-	function formatTrackerName(trackerName, trackerIndex, totalTrackerCount, deviceName, format) {
-		if (format === VenusOS.TrackerName_WithDevicePrefix) {
-			if (trackerName.length > 0) {
-				return "%1-%2".arg(deviceName).arg(trackerName)
-			} else if (totalTrackerCount > 1) {
-				return "%1-#%2".arg(deviceName).arg(trackerIndex + 1)
-			} else {
-				return deviceName
-			}
-		} else {    // format === VenusOS.TrackerName_NoDevicePrefix
-			if (trackerName.length > 0) {
-				return trackerName
-			} else {
-				return "#%1".arg(trackerIndex + 1)
-			}
-		}
-	}
-
 	Component.onCompleted: Global.solarInputs = root
 }

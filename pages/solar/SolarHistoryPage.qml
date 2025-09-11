@@ -9,9 +9,15 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property SolarHistory solarHistory
+	required property string serviceUid
+	readonly property alias solarHistory: solarHistory
 
 	title: CommonWords.history
+
+	SolarHistory {
+		id: solarHistory
+		serviceUid: root.serviceUid
+	}
 
 	TabBar {
 		id: tabBar

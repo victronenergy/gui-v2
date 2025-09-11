@@ -174,7 +174,7 @@ FocusScope {
 			model: SolarYieldModel {
 				id: yieldModel
 
-				serviceUid: root.solarHistory.bindPrefix
+				serviceUid: root.solarHistory.serviceUid
 				firstDay: root.dayRange[0]
 				lastDay: root.dayRange[1] - 1
 
