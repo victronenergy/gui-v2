@@ -495,6 +495,10 @@ SwipeViewPage {
 		// Affects whether EvcsWidget is shown.
 		readonly property bool showEvChargers: Global.evChargers?.model.count ?? 0 > 0
 		onShowEvChargersChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether EvWidget is shown.
+		readonly property bool showEvDevices: Global.allDevicesModel?.evDevices.count ?? 0 > 0
+		onShowEvDevicesChanged: Qt.callLater(root._resetWidgets)
 	}
 
 	Connections {

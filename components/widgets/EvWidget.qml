@@ -23,15 +23,34 @@ OverviewWidget {
 
 	//: Abbreviation of Electric Vehicle
 	//% "EV"
-	title: qsTrId("overview_widget_ev_title")
+	title: customNameItem.valid && customNameItem.value ? customNameItem.value : qsTrId("overview_widget_ev_title")
 	// Reusing EVCS icon for now as requested
 	icon.source: "qrc:/images/icon_charging_station_24.svg"
 	type: VenusOS.OverviewWidget_Type_Ev
 	enabled: evDevice !== null
 
-	// Show State of Charge as the main quantity
-	quantityLabel.value: evDevice ? evDevice.stateOfCharge : NaN
-	quantityLabel.unit: VenusOS.Units_Percentage
+	// Show Range as the main quantity so it's visible even in small widget sizes
+	quantityLabel.value: rangeItem.valid ? rangeItem.value : NaN
+	quantityLabel.unit: VenusOS.Units_None
+	quantityLabel.unitText: "km"
+
+	// VeQuickItem to access the custom name
+	VeQuickItem {
+		id: customNameItem
+		uid: evDevice ? evDevice.serviceUid + "/CustomName" : ""
+	}
+
+	// VeQuickItem to access the range data
+	VeQuickItem {
+		id: rangeItem
+		uid: evDevice ? evDevice.serviceUid + "/RangeToGo" : ""
+	}
+
+	// VeQuickItem to access the SOC data
+	VeQuickItem {
+		id: socItem
+		uid: evDevice ? evDevice.serviceUid + "/Soc" : ""
+	}
 
 	extraContentChildren: [
 		Loader {
@@ -55,20 +74,30 @@ OverviewWidget {
 			width: parent.width
 			spacing: Theme.geometry_listItem_spacing / 2
 
-			// Row 1: Range
+			// VeQuickItems for EV data (socItem and targetSocItem are already defined above)
+			VeQuickItem {
+				id: chargingStateItem
+				uid: evDevice ? evDevice.serviceUid + "/ChargingState" : ""
+			}
+
+			VeQuickItem {
+				id: atSiteItem
+				uid: evDevice ? evDevice.serviceUid + "/AtSite" : ""
+			}
+
+			// Row 1: State of Charge
 			Row {
 				width: parent.width
 				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
 
 				Label {
-					text: CommonWords.range || "Range"
+					text: CommonWords.state_of_charge || "SoC"
 					color: Theme.color_font_secondary
 					width: parent.width / 2
 				}
 
 				Label {
-					text: evDevice && !isNaN(evDevice.range) ?
-						  evDevice.range + " km" : "--"
+					text: socItem.valid ? Math.round(socItem.value) + "%" : "--"
 					color: Theme.color_font_primary
 					horizontalAlignment: Text.AlignRight
 					width: parent.width / 2 - parent.spacing
@@ -88,12 +117,15 @@ OverviewWidget {
 
 				Label {
 					text: {
-						if (!evDevice) return "--"
-						// You'll need to map the actual EV state values to text
-						// This is just an example
-						switch(evDevice.chargingState) {
-						case 1: return "Charging"
+						if (!chargingStateItem.valid) return "--"
+						switch(chargingStateItem.value) {
 						case 0: return "Not charging"
+						case 1: return "Low power"
+						case 3: return "Charging"
+						case 244: return "Sustain"
+						case 245: return "Wake up"
+						case 256: return "Discharging"
+						case 259: return "Scheduled"
 						default: return "Unknown"
 						}
 					}
@@ -107,7 +139,7 @@ OverviewWidget {
 			Row {
 				width: parent.width
 				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
-				visible: evDevice && evDevice.hasOwnProperty("atSite")
+				visible: atSiteItem.valid
 
 				Label {
 					text: "At site"
@@ -116,7 +148,7 @@ OverviewWidget {
 				}
 
 				Label {
-					text: evDevice && evDevice.atSite ? "Yes" : "No"
+					text: atSiteItem.valid ? (atSiteItem.value === 1 ? "Yes" : "No") : "--"
 					color: Theme.color_font_primary
 					horizontalAlignment: Text.AlignRight
 					width: parent.width / 2 - parent.spacing
