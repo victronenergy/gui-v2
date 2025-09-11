@@ -143,7 +143,7 @@ void AllServicesModel::addServicesFromChildrenOf(VeQItem *parentItem)
 	// Add all children of this item as services.
 	const VeQItem::Children &services = parentItem->itemChildren();
 	if (services.count() > 0) {
-		beginInsertRows(QModelIndex(), 0, services.count() - 1);
+		beginInsertRows(QModelIndex(), m_services.count(), m_services.count());
 		for (auto it = services.constBegin(); it != services.constEnd(); ++it) {
 			m_services.append({ BackendConnection::create()->serviceTypeFromUid(it.value()->uniqueId()), it.value() });
 		}
