@@ -70,7 +70,7 @@ Page {
 			//% "Self-consumption from battery"
 			text: qsTrId("settings_ess_self_consumption_battery")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryUse"
-			preferredVisible: withoutGridMeter.currentIndex === 0 && hasAcOutSystemItem.value === 1
+			preferredVisible: withoutGridMeter.currentIndex === 0 && (hasAcOutSystemItem.value === 1 || dataItem.value === 1)
 			optionModel: [
 				//% "All system loads"
 				{ display: qsTrId("settings_ess_all_system_loads"), value: 0 },
