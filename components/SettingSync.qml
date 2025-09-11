@@ -24,7 +24,7 @@ QtObject {
 
 	property real _pendingValue: NaN
 
-	signal updateToBackend(real value)
+	signal updateToBackend(value : var)
 	signal timeout()
 
 	// Note, it is valid to write a value that is the same as the pending or backend value:
