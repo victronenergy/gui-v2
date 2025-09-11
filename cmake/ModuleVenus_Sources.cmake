@@ -354,6 +354,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsConnectivity.qml
+    pages/settings/PageSettingsCopySettings.qml
     pages/settings/PageSettingsDisplayAndAppearance.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
