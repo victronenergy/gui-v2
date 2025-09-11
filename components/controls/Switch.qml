@@ -48,9 +48,9 @@ T.Switch {
 
 	indicator: Image {
 		x: root.checked
-		   ? parent.width - width + Theme.geometry_switch_indicator_shadowOffset
-		   : parent.width - indicatorBackground.width - Theme.geometry_switch_indicator_shadowOffset
-		y: parent.height/2 - height/2
+		   ? root.background.width - width + Theme.geometry_switch_indicator_shadowOffset + root.leftInset
+		   : root.background.width - indicatorBackground.width - Theme.geometry_switch_indicator_shadowOffset + root.leftInset
+		y: root.topInset + root.background.height/2 - height/2
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"

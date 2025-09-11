@@ -72,6 +72,7 @@ BaseListItem {
 				: VenusOS.ListItem_BottomContentSizeMode_Stretch
 
 	property bool interactive: false
+	property bool pressAreaEnabled: true
 	readonly property bool clickable: enabled && interactive && userHasWriteAccess
 
 	signal clicked()
@@ -121,6 +122,7 @@ BaseListItem {
 
 		anchors.fill: parent
 		radius: root.background.radius
+		enabled: root.pressAreaEnabled
 		effectEnabled: root.interactive
 		onClicked: root.activate()
 
