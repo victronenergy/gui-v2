@@ -167,6 +167,13 @@ Page {
 						{ gateway: canbusProfile.gateway, title: CommonWords.network_status })
 				}
 			}
+
+			ListNavigation {
+				//% "CANOpen Motor drive nodes"
+				text: qsTrId("pagesettingsintegrations_canopenmotordrive_nodes")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCanOpenMotordrive.qml", {"title": text})
+				preferredVisible: canbusProfile.canbusProfile.value === VenusOS.CanBusProfile_CanOpenMotordrive250 || canbusProfile.canbusProfile.value === VenusOS.CanBusProfile_CanOpenMotordrive500
+			}
 		}
 	}
 }
