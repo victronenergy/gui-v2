@@ -12,15 +12,19 @@ ListItem {
 	readonly property alias button: button
 	property alias secondaryText: button.text
 
-	interactive: true
+	// Override ListItem right padding to give Switch a larger touch area for users
+	rightPadding: 0
 
 	content.children: [
 		ListItemButton {
 			id: button
 
+			leftInset: Theme.geometry_listItem_content_spacing
+			rightInset: root.flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
+
 			down: pressed || checked || root.down
 			width: Math.min(implicitWidth, root.maximumContentWidth)
-			enabled: root.clickable
+			enabled: root.enabled && root.userHasWriteAccess
 			focusPolicy: Qt.NoFocus
 
 			onClicked: root.clicked()

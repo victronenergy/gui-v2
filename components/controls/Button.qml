@@ -40,8 +40,8 @@ T.Button {
 	leftPadding: 0
 	rightPadding: 0
 
-	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
-	implicitHeight: contentItem.implicitHeight + root.topPadding + root.bottomPadding
+	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding + root.leftInset + root.rightInset
+	implicitHeight: contentItem.implicitHeight + root.topPadding + root.bottomPadding + root.topInset + root.bottomInset
 
 	icon.color: root.color
 
@@ -77,7 +77,7 @@ T.Button {
 	}
 
 	contentItem: CP.IconLabel {
-		anchors.fill: parent
+		anchors.fill: root.background
 		spacing: root.spacing
 		display: root.display
 		icon: root.icon
