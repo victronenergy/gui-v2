@@ -13,6 +13,7 @@ ListItem {
 	property alias secondaryText: button.text
 
 	interactive: true
+	pressAreaEnabled: false
 
 	content.children: [
 		ListItemButton {
