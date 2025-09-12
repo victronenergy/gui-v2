@@ -15,8 +15,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/AcceptButtonBackground.qml
     components/AcPhasesCurrentRange.qml
     components/AcInputDirectionIcon.qml
-    components/AcMeterModel.qml
-    components/AllDevicesModel.qml
     components/AcOutput.qml
     components/AcPhase.qml
     components/Arc.qml
@@ -37,7 +35,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
-    components/Device.qml
     components/DeviceListDelegate.qml
     components/DevicePage.qml
     components/DynamicValueRange.qml
@@ -88,7 +85,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SolarDeviceModel.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
-    components/ServiceDeviceModel.qml
     components/SettingsColumn.qml
     components/SettingsRangeSlider.qml
     components/SettingsSlider.qml
@@ -126,7 +122,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/Utils.js
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
-    components/VeQItemServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
@@ -550,6 +545,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 )
 
 list(APPEND VictronVenusOS_CPP_SOURCES
+    src/alldevicesmodel.h
+    src/alldevicesmodel.cpp
     src/allservicesmodel.h
     src/allservicesmodel.cpp
     src/aggregatedevicemodel.h
@@ -568,8 +565,14 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/device.h
+    src/device.cpp
+    src/filtereddevicemodel.h
+    src/filtereddevicemodel.cpp
     src/filteredservicemodel.h
     src/filteredservicemodel.cpp
+    src/runtimedevicemodel.h
+    src/runtimedevicemodel.cpp
     src/theme.h
     src/theme.cpp
     src/themeobjects.h

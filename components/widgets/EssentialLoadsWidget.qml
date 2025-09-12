@@ -36,33 +36,12 @@ AcWidget {
 		})
 	}
 
-	AggregateDeviceModel {
+	FilteredDeviceModel {
 		id: essentialLoadDevices
-		sourceModels: [
-			acLoadOutputDevices,
-			evChargerOutputDevices,
-			heatPumpOutputDevices,
-		]
-	}
-
-	AcMeterModel {
-		id: acLoadOutputDevices
-		position: VenusOS.AcPosition_AcOutput
-		serviceTypes: ["acload"]
-		modelId: "acload-output"
-	}
-
-	AcMeterModel {
-		id: evChargerOutputDevices
-		position: VenusOS.AcPosition_AcOutput
-		serviceTypes: ["evcharger"]
-		modelId: "evcharger-output"
-	}
-
-	AcMeterModel {
-		id: heatPumpOutputDevices
-		position: VenusOS.AcPosition_AcOutput
-		serviceTypes: ["heatpump"]
-		modelId: "heatpump-output"
-	}
+		serviceTypes: ["acload", "evcharger", "heatpump"]
+		childFilterIds: { "acload": ["Position"], "evcharger": ["Position"], "heatpump": ["Position"] }
+		childFilterFunction: (device, childItems) => {
+			return childItems["Position"]?.value === VenusOS.AcPosition_AcOutput
+		}
+	 }
 }

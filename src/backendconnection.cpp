@@ -5,6 +5,7 @@
 
 #include "backendconnection.h"
 #include "veqitemmockproducer.h"
+#include "basedevice.h"
 #include "enums.h"
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -691,21 +692,7 @@ QString BackendConnection::serviceUidForType(const QString &serviceType) const
 
 QString BackendConnection::serviceTypeFromUid(const QString &uid) const
 {
-	switch (type()) {
-	case UnknownSource:
-		break;
-	case DBusSource:
-	case MockSource:
-	{
-		// uid format is "<dbus|mock>/com.victronenergy.<serviceType>[.suffix]/*"
-		const QString serviceTypePart = uid.split('/').value(1);
-		return serviceTypePart.split('.').value(2);
-	}
-	case MqttSource:
-		// uid format is "mqtt/<serviceType>/*"
-		return uid.split('/').value(1);
-	}
-	return QString();
+	return BaseDevice::serviceTypeFromUid(uid);
 }
 
 QString BackendConnection::serviceUidFromName(const QString &serviceName, int deviceInstance) const

@@ -41,7 +41,6 @@ public:
 
 	Q_INVOKABLE int indexOf(const QString &uid);
 
-	static AllServicesModel* instance();
 	static AllServicesModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
@@ -68,7 +67,6 @@ private:
 	void removeServiceItem(VeQItem *item);
 	void addServicesFromChildrenOf(VeQItem *parentItem);
 	int indexOf(const QString &uid) const;
-	void clear();
 
 	QList<ServiceInfo> m_services;
 };

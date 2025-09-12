@@ -15,6 +15,8 @@ qt_add_executable(${PROJECT_NAME}
 
     ../../src/backendconnection.h
     ../../src/backendconnection.cpp
+    ../../src/basedevice.h
+    ../../src/basedevice.cpp
 
     ../../src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
     ../../src/veutil/src/qt/ve_qitems_mqtt.cpp
