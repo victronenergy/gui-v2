@@ -888,6 +888,13 @@ public:
 	};
 	Q_ENUM(TailscaleConnectState)
 
+	enum MicrogridMode {
+		MicrogridMode_HybridDroop,
+		MicrogridMode_GridFollowing,
+		MicrogridMode_GridForming
+	};
+	Q_ENUM(MicrogridMode)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
@@ -906,6 +913,7 @@ public:
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
+	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
 };
 
 }

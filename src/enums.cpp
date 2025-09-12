@@ -455,5 +455,22 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 	}
 }
 
+//Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
+QString Enums::microgridModeToText(MicrogridMode mode) const
+{
+	switch (mode) {
+	case MicrogridMode_HybridDroop:
+		//% "Hybrid droop"
+		return qtTrId("microgrid_mode_hybrid_droop");
+	case MicrogridMode_GridFollowing:
+		//% "Grid-following"
+		return qtTrId("microgrid_mode_grid_following");
+	case MicrogridMode_GridForming:
+		//% "Grid-forming"
+		return qtTrId("microgrid_mode_grid_forming");
+	default:
+		return QString();
+	}
+}
 }
 }

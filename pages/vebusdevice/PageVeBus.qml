@@ -190,8 +190,8 @@ DevicePage {
 
 		ListNavigation {
 			//% "Microgrid parameters"
-			text: qsTrid("vebus_device_page_microgrid_parameters")
-			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml"/*, { "bindPrefix": root.bindPrefix,"title": text }*/)
+			text: qsTrId("vebus_device_page_microgrid_parameters")
+			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.bindPrefix/*,"title": text */})
 		}
 
 		ListNavigation {
