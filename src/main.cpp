@@ -24,6 +24,7 @@
 
 #include <QGuiApplication>
 #include <QQuickView>
+#include <QSurfaceFormat>
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickWindow>
@@ -415,6 +416,23 @@ int main(int argc, char *argv[])
 {
 	qInfo().nospace() << "Victron gui version: v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH;
 
+	// Must set the default QSurfaceFormat before creating the app object.
+	QSurfaceFormat surfaceFormat;
+	surfaceFormat.setDepthBufferSize(24);
+	surfaceFormat.setStencilBufferSize(8);
+#if defined(VENUS_GX_BUILD_ARM) || defined(VENUS_WEBASSEMBLY_BUILD)
+	// CerboGX and WASM don't support multisample render buffers; other platforms do.
+	surfaceFormat.setSamples(-1);
+	Victron::VenusOS::BackendConnection::create()->setMsaaEnabled(false);
+#else
+	surfaceFormat.setSamples(4);
+#endif
+	QSurfaceFormat::setDefaultFormat(surfaceFormat);
+#if defined(VENUS_GX_BUILD_AARCH64)
+	// Shader disk cache doesn't work properly on new hardware.
+	QCoreApplication::setAttribute(Qt::AA_DisableShaderDiskCache);
+#endif
+
 #if !defined(VENUS_WEBASSEMBLY_BUILD) && !defined(VENUS_DESKTOP_BUILD)
 	// The qt vkb behaves in an annoying manner in qt6.5.2 wasm builds (but not other versions).
 	// It pops up every time you tap the screen, making landscape mode unusable.
@@ -488,12 +506,6 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<QObject> object(component.beginCreate(engine.rootContext()));
 	const auto window = qobject_cast<QQuickWindow *>(object.data());
-#if defined(VENUS_DESKTOP_BUILD) || defined(VENUS_GX_BUILD_AARCH64) || defined(VENUS_WEBASSEMBLY_BUILD)
-	// CerboGX doesn't support multisample render buffers; other platforms do.
-	QSurfaceFormat format = window->format();
-	format.setSamples(4); // enable MSAA
-	window->setFormat(format);
-#endif
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	QObject::connect(window, &QQuickWindow::activeFocusItemChanged, [window] {

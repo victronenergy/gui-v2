@@ -18,6 +18,9 @@ Page {
 
 	GradientListView {
 		header: BaseListItem {
+			readonly property alias columnWidth: loadSummary.fixedColumnWidth
+			readonly property alias columnSpacing: loadSummary.columnSpacing
+
 			width: parent?.width ?? 0
 			height: phaseTable.y + phaseTable.height + bottomInset
 			bottomInset: Theme.geometry_gradientList_spacing
@@ -28,9 +31,9 @@ Page {
 				width: parent.width
 				equalWidthColumns: true
 
-				// rightPadding = width of the sub-menu arrow icon, plus margin around it. Needed to
-				// align the "Total power" column with the "Total power" in each list delegate.
-				rightPadding: 32 + (Theme.geometry_listItem_content_horizontalMargin * 2)
+				// rightPadding = 32px width of the sub-menu arrow icon in each list delegate, plus
+				// margin, to align with the columns in the delegates.
+				rightPadding: 32 + Theme.geometry_listItem_content_horizontalMargin
 				summaryModel: [
 					{ text: "", unit: VenusOS.Units_None },
 					{ text: "", unit: VenusOS.Units_None },
@@ -59,7 +62,7 @@ Page {
 				rightPadding: loadSummary.rightPadding
 				width: parent.width
 				equalWidthColumns: true
-				model: root.measurements.phases
+				model: root.measurements.phaseCount > 1 ? root.measurements.phases : null
 				delegate: QuantityTable.TableRow {
 					id: tableRow
 
@@ -108,6 +111,8 @@ Page {
 
 			name: device.name
 			power: powerItem.value ?? NaN
+			columnWidth: ListView.view.headerItem?.columnWidth ?? NaN
+			columnSpacing: ListView.view.headerItem?.columnSpacing ?? 0
 
 			// Status depends on the service:
 			// - acload, heatpump: /SwitchableOutput/Status

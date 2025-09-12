@@ -14,7 +14,7 @@
       <translation>Växelriktare överbelastning</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="398"/>
+      <location filename="../../components/CommonWords.qml" line="406"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>Effekt</translation>
@@ -55,7 +55,7 @@
       <translation>Ingen</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="405"/>
+      <location filename="../../components/CommonWords.qml" line="413"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>Position</translation>
@@ -762,7 +762,7 @@
       <translation>OK: Ingen annan enhet är kopplad till detta unika nummer.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Network status</source>
       <translation>Nätverksstatus</translation>
     </message>
@@ -2019,44 +2019,60 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <source>Function</source>
       <translation>Funktion</translation>
     </message>
-    <message id="settings_relay_alarm_relay">
+    <message id="settings_relay_disabled">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Inaktiverad</translation>
+    </message>
+    <message id="settings_relay_alarm_relay">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
       <source>Alarm relay</source>
       <translation>Larmrelä</translation>
     </message>
     <message id="settings_relay_tank_pump">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
       <source>Tank pump</source>
       <translation type="unfinished">Tankpump</translation>
     </message>
     <message id="settings_relay_manual">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
       <source>Manual</source>
       <translation type="unfinished">Manual</translation>
     </message>
-    <message id="settings_relay_alarm_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="74"/>
-      <source>Alarm relay polarity</source>
-      <translation>Polaritet larmrelä</translation>
+    <message id="settings_relay_polarity_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
+      <source>Polarity (Relay 1)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_relay_polarity">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
+      <source>Polarity</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_relay_normally_open">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="83"/>
       <source>Normally open</source>
       <translation>Normalt öppen</translation>
     </message>
     <message id="settings_relay_normally_closed">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="85"/>
       <source>Normally closed</source>
       <translation>Normalt stängd</translation>
     </message>
     <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
       <source>Function (Relay 2)</source>
       <translation>Funktion (Relä 2)</translation>
     </message>
+    <message id="settings_relay_polarity_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
+      <source>Polarity (Relay 2)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_relay_temp_control_rules">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="119"/>
       <source>Temperature control rules</source>
       <translation>Kontrollregler temperatur</translation>
     </message>
@@ -2253,7 +2269,7 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="103"/>
       <source>[Hidden]</source>
       <translation>[Dold]</translation>
     </message>
@@ -2343,12 +2359,12 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>VE.Can-enheter</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
       <source>No access points</source>
       <translation>Inga åtkomstpunkter</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="95"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Ingen Wi-Fi adapter ansluten</translation>
     </message>
@@ -2362,8 +2378,18 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <source>Enter password</source>
       <translation type="unfinished">Ange lösenord</translation>
     </message>
-    <message id="settings_wifi_networks">
+    <message id="page_settings_wifi_invalid_password">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
+      <source>Password length must be either 0 or between 10 and 63 characters long</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_settings_wifi_password_updated">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="79"/>
+      <source>Password updated</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_wifi_networks">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi-nätverk</translation>
     </message>
@@ -2464,25 +2490,25 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Larm hög batterispänning</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="612"/>
+      <location filename="../../components/CommonWords.qml" line="620"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Senaste fel</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="615"/>
+      <location filename="../../components/CommonWords.qml" line="623"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>2:a senaste fel</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="618"/>
+      <location filename="../../components/CommonWords.qml" line="626"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>3:e senaste fel</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="621"/>
+      <location filename="../../components/CommonWords.qml" line="629"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>4:e senaste fel</translation>
@@ -2585,7 +2611,7 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Laddningsspänning</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="437"/>
+      <location filename="../../components/CommonWords.qml" line="445"/>
       <source>Reset</source>
       <translation>Återställ</translation>
     </message>
@@ -2850,7 +2876,7 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Larmflaggor</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="511"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Brytare</translation>
@@ -3875,12 +3901,12 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Smappee-bussenheter</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="344"/>
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Den här inställningen är inaktiv när en Digital Multi Control är ansluten.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="347"/>
+      <location filename="../../components/CommonWords.qml" line="355"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Den här inställningen är inaktiv när en VE.Bus BMS är ansluten.</translation>
     </message>
@@ -4036,7 +4062,7 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Total solcellseffekt</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="420"/>
+      <location filename="../../components/CommonWords.qml" line="428"/>
       <source>Product page</source>
       <translation>Produktsida</translation>
     </message>
@@ -4278,7 +4304,7 @@ Vill du fortsätta?</translation>
       <translation>Avslutad</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="399"/>
       <source>Pending</source>
       <translation>Avvaktar</translation>
     </message>
@@ -4819,32 +4845,32 @@ Vill du fortsätta?</translation>
       <translation>Tillverkare</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="317"/>
+      <location filename="../../components/CommonWords.qml" line="321"/>
       <source>Maximum temperature</source>
       <translation>Högsta temperatur</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="324"/>
       <source>Maximum voltage</source>
       <translation>Maximal spänning</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="334"/>
       <source>Minimum temperature</source>
       <translation>Lägsta temperatur</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="329"/>
+      <location filename="../../components/CommonWords.qml" line="337"/>
       <source>Minimum voltage</source>
       <translation>Minimispänning</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="332"/>
+      <location filename="../../components/CommonWords.qml" line="340"/>
       <source>Mode</source>
       <translation>Läge</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="343"/>
       <source>Model name</source>
       <translation>Modellnamn</translation>
     </message>
@@ -4855,7 +4881,7 @@ Vill du fortsätta?</translation>
       <translation>Nej</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="350"/>
+      <location filename="../../components/CommonWords.qml" line="358"/>
       <source>No error</source>
       <translation>Inget fel</translation>
     </message>
@@ -4865,12 +4891,12 @@ Vill du fortsätta?</translation>
       <translation>Inte tillgänglig</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="363"/>
+      <location filename="../../components/CommonWords.qml" line="371"/>
       <source>Not connected</source>
       <translation>Ej ansluten</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="369"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Offline</source>
       <translation>Offline</translation>
     </message>
@@ -4886,7 +4912,7 @@ Vill du fortsätta?</translation>
       <translation>På</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="378"/>
+      <location filename="../../components/CommonWords.qml" line="386"/>
       <source>Online</source>
       <translation>Online</translation>
     </message>
@@ -4897,59 +4923,59 @@ Vill du fortsätta?</translation>
       <translation>Öppen</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="402"/>
       <source>Password</source>
       <translation>Lösenord</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="401"/>
+      <location filename="../../components/CommonWords.qml" line="409"/>
       <source>Phase</source>
       <translation>Fas</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="419"/>
       <source>Press to clear</source>
       <translation>Tryck för att rensa</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="422"/>
       <source>Press to reset</source>
       <translation>Tryck för återställning</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="417"/>
+      <location filename="../../components/CommonWords.qml" line="425"/>
       <source>Press to scan</source>
       <translation>Tryck för att skanna</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="431"/>
       <source>PV Inverter</source>
       <translation>Solcellsväxelriktare</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="435"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>Solcellsenergi</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="438"/>
       <source>Quiet hours</source>
       <translation>Tysta timmar</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="434"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Relä</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="440"/>
+      <location filename="../../components/CommonWords.qml" line="448"/>
       <source>Reboot</source>
       <translation>Omstart</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="443"/>
+      <location filename="../../components/CommonWords.qml" line="451"/>
       <source>Remove</source>
       <translation>Ta bort</translation>
     </message>
@@ -4959,12 +4985,12 @@ Vill du fortsätta?</translation>
       <translation>I drift</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="458"/>
       <source>Scanning %1%</source>
       <translation>Skannar %1 %</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="461"/>
       <source>Serial number</source>
       <translation>Serienummer</translation>
     </message>
@@ -4974,12 +5000,12 @@ Vill du fortsätta?</translation>
       <translation>Inställningar</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="459"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Setup</source>
       <translation>Inställning</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="462"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Signal strength</source>
       <translation>Signalstyrka</translation>
     </message>
@@ -4990,32 +5016,32 @@ Vill du fortsätta?</translation>
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="476"/>
+      <location filename="../../components/CommonWords.qml" line="484"/>
       <source>Start after the condition is reached for</source>
       <translation>Starta efter att villkoret har uppnåtts i</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="479"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>Start time</source>
       <translation>Starttid</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="482"/>
+      <location filename="../../components/CommonWords.qml" line="490"/>
       <source>Start value during quiet hours</source>
       <translation>Starta värde under tysta timmar</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="493"/>
       <source>Start when warning is active for</source>
       <translation>Starta när varningen har varit aktiv i</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="491"/>
+      <location filename="../../components/CommonWords.qml" line="499"/>
       <source>State of charge</source>
       <translation>Laddningsstatus</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="502"/>
       <source>Status</source>
       <translation>Status</translation>
     </message>
@@ -5026,12 +5052,12 @@ Vill du fortsätta?</translation>
       <translation>Start (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="501"/>
+      <location filename="../../components/CommonWords.qml" line="509"/>
       <source>Stop value during quiet hours</source>
       <translation>Stoppa värde under tysta timmar</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="504"/>
+      <location filename="../../components/CommonWords.qml" line="512"/>
       <source>Stop after the condition is reached for</source>
       <translation>Stoppa när villkoret har uppnåtts i</translation>
     </message>
@@ -5042,27 +5068,27 @@ Vill du fortsätta?</translation>
       <translation>Stoppad</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="514"/>
+      <location filename="../../components/CommonWords.qml" line="522"/>
       <source>Temperature</source>
       <translation>Temperatur</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="517"/>
+      <location filename="../../components/CommonWords.qml" line="525"/>
       <source>Temperature sensor</source>
       <translation>Temperatursensor</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="528"/>
       <source>Today</source>
       <translation>Idag</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="531"/>
       <source>Total</source>
       <translation>Totalt</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="530"/>
+      <location filename="../../components/CommonWords.qml" line="538"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Övervakning</translation>
@@ -5073,7 +5099,7 @@ Vill du fortsätta?</translation>
       <translation>Sort</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="536"/>
+      <location filename="../../components/CommonWords.qml" line="544"/>
       <source>Unique Identity Number</source>
       <translation>Unikt identitetsnummer</translation>
     </message>
@@ -5083,22 +5109,22 @@ Vill du fortsätta?</translation>
       <translation>Okänd</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="543"/>
+      <location filename="../../components/CommonWords.qml" line="551"/>
       <source>VE.Bus Error</source>
       <translation>Fel VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="546"/>
+      <location filename="../../components/CommonWords.qml" line="554"/>
       <source>Voltage</source>
       <translation>Spänning</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="549"/>
+      <location filename="../../components/CommonWords.qml" line="557"/>
       <source>VRM instance</source>
       <translation>VRM-instans</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="552"/>
+      <location filename="../../components/CommonWords.qml" line="560"/>
       <source>When warning is cleared stop after</source>
       <translation>När varning försvinner, stoppa efter</translation>
     </message>
@@ -5109,12 +5135,12 @@ Vill du fortsätta?</translation>
       <translation>Ja</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="558"/>
+      <location filename="../../components/CommonWords.qml" line="566"/>
       <source>Yesterday</source>
       <translation>Igår</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../components/CommonWords.qml" line="570"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Utbyte</translation>
@@ -7351,12 +7377,12 @@ Vill du fortsätta?</translation>
       <translation>Anslutningsstatus (MQTT RPC-kanal)</translation>
     </message>
     <message id="settings_relay_genset_start_stop">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="58"/>
       <source>Genset start/stop</source>
       <translation>Generator start/stopp</translation>
     </message>
     <message id="settings_relay_genset_helper_relay">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="60"/>
       <source>Connected genset helper relay</source>
       <translation>Hjälprelä för ansluten generator</translation>
     </message>
@@ -7670,7 +7696,7 @@ Vill du fortsätta?</translation>
       <translation>En omstart av VE.Bus-systemet återställer alla växelriktare på bussen och leder till effektbortfall på deras utgångar.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="569"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>Dynamic power limit</source>
       <translation>Dynamisk effektgräns</translation>
     </message>
@@ -7763,144 +7789,156 @@ Vill du fortsätta?</translation>
       <source>Manual stop</source>
       <translation>Manuellt stopp</translation>
     </message>
+    <message id="common_words_max">
+      <location filename="../../components/CommonWords.qml" line="312"/>
+      <source>Max</source>
+      <extracomment>Short for Maximum</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="311"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Maximum current</source>
       <translation>Högsta ström</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="314"/>
+      <location filename="../../components/CommonWords.qml" line="318"/>
       <source>Maximum power</source>
       <translation>Högsta effekt</translation>
     </message>
+    <message id="common_words_min">
+      <location filename="../../components/CommonWords.qml" line="328"/>
+      <source>Min</source>
+      <extracomment>Short for Minimum</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="331"/>
       <source>Minimum current</source>
       <translation>Lägsta ström</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">Nej</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="353"/>
+      <location filename="../../components/CommonWords.qml" line="361"/>
       <source>None</source>
       <translation type="unfinished">Ingen</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="357"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Ingen</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="360"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Not available</source>
       <translation type="unfinished">Inte tillgänglig</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Off</source>
       <translation type="unfinished">Av</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="372"/>
+      <location filename="../../components/CommonWords.qml" line="380"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">Ok</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="375"/>
+      <location filename="../../components/CommonWords.qml" line="383"/>
       <source>On</source>
       <translation type="unfinished">På</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="390"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Öppen</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="393"/>
       <source>Open circuit</source>
       <translation>Öppen krets</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="396"/>
       <source>Overall history</source>
       <translation>Total historik</translation>
     </message>
     <message id="common_words_press">
-      <location filename="../../components/CommonWords.qml" line="408"/>
+      <location filename="../../components/CommonWords.qml" line="416"/>
       <source>Press</source>
       <translation type="unfinished">Press</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="455"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">I drift</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>Settings</source>
       <translation type="unfinished">Inställningar</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="466"/>
+      <location filename="../../components/CommonWords.qml" line="474"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SoC %1%</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="470"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation type="unfinished">Hastighet</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="473"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Standby</source>
       <translation type="unfinished">Standby</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="488"/>
+      <location filename="../../components/CommonWords.qml" line="496"/>
       <source>State</source>
       <translation type="unfinished">Status</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="498"/>
+      <location filename="../../components/CommonWords.qml" line="506"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Start (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="507"/>
+      <location filename="../../components/CommonWords.qml" line="515"/>
       <source>Stopped</source>
       <translation type="unfinished">Stoppad</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="534"/>
       <source>Total power</source>
       <translation type="unfinished"/>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="533"/>
+      <location filename="../../components/CommonWords.qml" line="541"/>
       <source>Type</source>
       <translation type="unfinished">Sort</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="540"/>
+      <location filename="../../components/CommonWords.qml" line="548"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Okänd</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="555"/>
+      <location filename="../../components/CommonWords.qml" line="563"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7908,13 +7946,13 @@ Vill du fortsätta?</translation>
       <translation type="unfinished">Ja</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="566"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>Produktion idag</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="606"/>
+      <location filename="../../components/CommonWords.qml" line="614"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -9104,7 +9142,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Säkringskapacitet</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="158"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="159"/>
       <source>RPM</source>
       <translation>RPM</translation>
     </message>
@@ -9489,7 +9527,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Dokumentation</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="578"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>AC-ingång %1</translation>
@@ -10265,17 +10303,17 @@ vänta eller kontrollera din internetanslutning.</translation>
       <translation type="unfinished">Solcellsproduktion</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="212"/>
       <source>DC input</source>
       <translation type="unfinished">DC-ingång</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="253"/>
       <source>AC Loads</source>
       <translation type="unfinished">AC-belastningar</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="281"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="280"/>
       <source>DC Loads</source>
       <translation type="unfinished">DC-belastningar</translation>
     </message>
@@ -10335,6 +10373,11 @@ vänta eller kontrollera din internetanslutning.</translation>
       <extracomment>Application title</extracomment>
       <translation type="unfinished"/>
       <extra-Context>only shown on desktop systems</extra-Context>
+    </message>
+    <message id="autotoggleswitch_function_auto_mode_info">
+      <location filename="../../components/controls/AutoToggleButton.qml" line="29"/>
+      <source>Function is set on Auto Mode</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -11817,146 +11860,146 @@ vänta eller kontrollera din internetanslutning.</translation>
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="119"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Använd D-bussdatakälla: anslut till angiven D-bussadress.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>adress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Använd D-bussdatakälla: anslut till standard D-bussadress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="130"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Använd MQTT-datakälla: anslut till angiven MQQT-mäklaradress.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>adress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="137"/>
+      <location filename="../../src/main.cpp" line="138"/>
       <source>MQTT data source device portal id.</source>
       <translation>Enhetsportal-id MQTT datakälla.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="139"/>
       <source>portalId</source>
       <translation>Portal-id</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="143"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Webbhotell-shard MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="144"/>
+      <location filename="../../src/main.cpp" line="145"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>shard</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="149"/>
+      <location filename="../../src/main.cpp" line="150"/>
       <source>MQTT data source username</source>
       <translation>Användarnamn MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="150"/>
+      <location filename="../../src/main.cpp" line="151"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Användare</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="155"/>
+      <location filename="../../src/main.cpp" line="156"/>
       <source>MQTT data source password</source>
       <translation>Lösenord MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="156"/>
+      <location filename="../../src/main.cpp" line="157"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>lösen</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="161"/>
+      <location filename="../../src/main.cpp" line="162"/>
       <source>MQTT data source token</source>
       <translation>Token MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="162"/>
+      <location filename="../../src/main.cpp" line="163"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Token-kod</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="167"/>
+      <location filename="../../src/main.cpp" line="168"/>
       <source>Enable FPS counter</source>
       <translation>Aktivera FPS-räknare</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="172"/>
+      <location filename="../../src/main.cpp" line="173"/>
       <source>Skip splash screen</source>
       <translation>Skippa startbild</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="177"/>
+      <location filename="../../src/main.cpp" line="178"/>
       <source>Use mock data source for testing.</source>
       <translation>Använd simulerad datakälla för testning.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="182"/>
+      <location filename="../../src/main.cpp" line="183"/>
       <source>Name of mock configuration</source>
       <translation>Namn på mock-konfiguration</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="183"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="189"/>
+      <location filename="../../src/main.cpp" line="190"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Ange för att inaktivera mock-timers vid start</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="194"/>
+      <location filename="../../src/main.cpp" line="195"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="195"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="200"/>
+      <location filename="../../src/main.cpp" line="201"/>
       <source>Signal K URL</source>
       <translation>Signal K URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="201"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="206"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Färgschema (mörkt, ljust, auto, standard)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>

@@ -9,7 +9,7 @@ import Victron.VenusOS
 VeQuickItemsQuotient {
 	id: root
 
-	readonly property string activeGpsUid: Global.allDevicesModel.gpsDevices.count > 0 ? Global.allDevicesModel.gpsDevices.deviceAt(0).serviceUid : ""
+	readonly property string activeGpsUid: _gpsServices.firstUid
 	readonly property string units: _speedUnits.valid ? _speedUnits.value : ""
 	readonly property real speed: {
 		switch (units) {
@@ -26,6 +26,10 @@ VeQuickItemsQuotient {
 
 	readonly property VeQuickItem _speedUnits : VeQuickItem {
 		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
+	}
+
+	readonly property FilteredServiceModel _gpsServices: FilteredServiceModel {
+		serviceTypes: ["gps"]
 	}
 
 	objectName: "Boat.Gps"

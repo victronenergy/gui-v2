@@ -21,39 +21,37 @@ Page {
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 
-		delegate: ListSpinBox {
+		delegate: ListNavigation {
 			id: listDelegate
+
+			required property string uid
 
 			// Use JS string concatenation to avoid Qt string arg() from formatting as scientific notation.
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(""+uniqueNumber.value)
 			//% "VE.Can Instance# %1"
-			secondaryText: qsTrId("settings_vecan_device_number").arg(dataItem.value)
-			dataItem.uid: model.uid + "/DeviceInstance"
-
-			CP.ColorImage {
-				parent: listDelegate.content
-				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/icon_arrow_32.svg"
-				rotation: 180
-				color: listDelegate.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			}
+			secondaryText: qsTrId("settings_vecan_device_number").arg(deviceInstance.value)
 
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
-												   { bindPrefix: model.uid, title: text })
+												   { bindPrefix: listDelegate.uid, title: text })
+
+			VeQuickItem {
+				id: deviceInstance
+				uid: listDelegate.uid + "/DeviceInstance"
+			}
 
 			VeQuickItem {
 				id: modelName
-				uid: model.uid + "/ModelName"
+				uid: listDelegate.uid + "/ModelName"
 			}
 
 			VeQuickItem {
 				id: customName
-				uid: model.uid + "/CustomName"
+				uid: listDelegate.uid + "/CustomName"
 			}
 
 			VeQuickItem {
 				id: uniqueNumber
-				uid: model.uid + "/N2kUniqueNumber"
+				uid: listDelegate.uid + "/N2kUniqueNumber"
 			}
 		}
 	}

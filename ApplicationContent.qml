@@ -101,15 +101,6 @@ FocusScope {
 
 		anchors.fill: parent
 		Component.onCompleted: Global.notificationLayer = notificationLayer
-
-		// technically, the notification layer is not related to the notifications page
-		// but we need to way to expose the "go to notifications page" functionality
-		// and the notifications layer is already part of the global object.
-		function popAndGoToNotifications() {
-			mainView.pageManager.popAllPages()
-			mainView.cardsActive = false
-			mainView.navBar.setCurrentPage("NotificationsPage.qml")
-		}
 	}
 
 	// Keyboard handling:

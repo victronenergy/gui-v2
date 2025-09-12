@@ -14,7 +14,7 @@
       <translation>逆变器过载</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="398"/>
+      <location filename="../../components/CommonWords.qml" line="406"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>功率</translation>
@@ -55,7 +55,7 @@
       <translation>无</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="405"/>
+      <location filename="../../components/CommonWords.qml" line="413"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>位置</translation>
@@ -762,7 +762,7 @@
       <translation>可以：没有其他设备与此唯一编号连接。</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Network status</source>
       <translation>网络状态</translation>
     </message>
@@ -2019,44 +2019,60 @@ Use unless prohibited by the utility provider.</source>
       <source>Function</source>
       <translation>功能</translation>
     </message>
-    <message id="settings_relay_alarm_relay">
+    <message id="settings_relay_disabled">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
+      <source>Disabled</source>
+      <translation type="unfinished">已禁用</translation>
+    </message>
+    <message id="settings_relay_alarm_relay">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
       <source>Alarm relay</source>
       <translation>报警继电器</translation>
     </message>
     <message id="settings_relay_tank_pump">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
       <source>Tank pump</source>
       <translation type="unfinished">水箱泵</translation>
     </message>
     <message id="settings_relay_manual">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
       <source>Manual</source>
       <translation type="unfinished">手动</translation>
     </message>
-    <message id="settings_relay_alarm_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="74"/>
-      <source>Alarm relay polarity</source>
-      <translation>报警继电器极性</translation>
+    <message id="settings_relay_polarity_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
+      <source>Polarity (Relay 1)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_relay_polarity">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
+      <source>Polarity</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_relay_normally_open">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="83"/>
       <source>Normally open</source>
       <translation>常开</translation>
     </message>
     <message id="settings_relay_normally_closed">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="85"/>
       <source>Normally closed</source>
       <translation>常闭</translation>
     </message>
     <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
       <source>Function (Relay 2)</source>
       <translation>功能（继电器2）</translation>
     </message>
+    <message id="settings_relay_polarity_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
+      <source>Polarity (Relay 2)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_relay_temp_control_rules">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="119"/>
       <source>Temperature control rules</source>
       <translation>温度控制规则</translation>
     </message>
@@ -2253,7 +2269,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="103"/>
       <source>[Hidden]</source>
       <translation>[隐藏]</translation>
     </message>
@@ -2343,12 +2359,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>VE.CAN 设备</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
       <source>No access points</source>
       <translation>无接入点</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="95"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>无Wi-Fi适配器连接</translation>
     </message>
@@ -2362,8 +2378,18 @@ Use unless prohibited by the utility provider.</source>
       <source>Enter password</source>
       <translation type="unfinished">输入密码</translation>
     </message>
-    <message id="settings_wifi_networks">
+    <message id="page_settings_wifi_invalid_password">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
+      <source>Password length must be either 0 or between 10 and 63 characters long</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_settings_wifi_password_updated">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="79"/>
+      <source>Password updated</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_wifi_networks">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi网络</translation>
     </message>
@@ -2464,25 +2490,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>高电池电压报警</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="612"/>
+      <location filename="../../components/CommonWords.qml" line="620"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>上次出错</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="615"/>
+      <location filename="../../components/CommonWords.qml" line="623"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>第二次出错</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="618"/>
+      <location filename="../../components/CommonWords.qml" line="626"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>第三次出错</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="621"/>
+      <location filename="../../components/CommonWords.qml" line="629"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>第四次出错</translation>
@@ -2585,7 +2611,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>充电电压</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="437"/>
+      <location filename="../../components/CommonWords.qml" line="445"/>
       <source>Reset</source>
       <translation>重置</translation>
     </message>
@@ -2850,7 +2876,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>报警标志</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="511"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>开关</translation>
@@ -3874,12 +3900,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Smappee总线设备</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="344"/>
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>连接数字多功能控制器时，此设置将被禁用。</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="347"/>
+      <location filename="../../components/CommonWords.qml" line="355"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>连接 VE.Bus BMS 时，此设置将被禁用。</translation>
     </message>
@@ -4035,7 +4061,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>总的光伏功率</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="420"/>
+      <location filename="../../components/CommonWords.qml" line="428"/>
       <source>Product page</source>
       <translation>产品页面</translation>
     </message>
@@ -4277,7 +4303,7 @@ Do you want to continue?</source>
       <translation>已完成</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="399"/>
       <source>Pending</source>
       <translation>等待中</translation>
     </message>
@@ -4818,32 +4844,32 @@ Do you want to continue?</source>
       <translation>制造商</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="317"/>
+      <location filename="../../components/CommonWords.qml" line="321"/>
       <source>Maximum temperature</source>
       <translation>最高温度</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="324"/>
       <source>Maximum voltage</source>
       <translation>最高电压</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="334"/>
       <source>Minimum temperature</source>
       <translation>最低温度</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="329"/>
+      <location filename="../../components/CommonWords.qml" line="337"/>
       <source>Minimum voltage</source>
       <translation>最低电压</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="332"/>
+      <location filename="../../components/CommonWords.qml" line="340"/>
       <source>Mode</source>
       <translation>模式</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="343"/>
       <source>Model name</source>
       <translation>型号名称</translation>
     </message>
@@ -4854,7 +4880,7 @@ Do you want to continue?</source>
       <translation>不</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="350"/>
+      <location filename="../../components/CommonWords.qml" line="358"/>
       <source>No error</source>
       <translation>无错误</translation>
     </message>
@@ -4864,12 +4890,12 @@ Do you want to continue?</source>
       <translation>不可用</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="363"/>
+      <location filename="../../components/CommonWords.qml" line="371"/>
       <source>Not connected</source>
       <translation>未连接</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="369"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Offline</source>
       <translation>离线</translation>
     </message>
@@ -4885,7 +4911,7 @@ Do you want to continue?</source>
       <translation>开</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="378"/>
+      <location filename="../../components/CommonWords.qml" line="386"/>
       <source>Online</source>
       <translation>在线</translation>
     </message>
@@ -4896,59 +4922,59 @@ Do you want to continue?</source>
       <translation>打开</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="394"/>
+      <location filename="../../components/CommonWords.qml" line="402"/>
       <source>Password</source>
       <translation>密码</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="401"/>
+      <location filename="../../components/CommonWords.qml" line="409"/>
       <source>Phase</source>
       <translation>相位</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="419"/>
       <source>Press to clear</source>
       <translation>按下清除</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="422"/>
       <source>Press to reset</source>
       <translation>按下复位</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="417"/>
+      <location filename="../../components/CommonWords.qml" line="425"/>
       <source>Press to scan</source>
       <translation>按下即可扫描</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="431"/>
       <source>PV Inverter</source>
       <translation>光伏逆变器</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="435"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>PV功率</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="438"/>
       <source>Quiet hours</source>
       <translation>安静时间</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="434"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>继电器</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="440"/>
+      <location filename="../../components/CommonWords.qml" line="448"/>
       <source>Reboot</source>
       <translation>重启</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="443"/>
+      <location filename="../../components/CommonWords.qml" line="451"/>
       <source>Remove</source>
       <translation>删除</translation>
     </message>
@@ -4958,12 +4984,12 @@ Do you want to continue?</source>
       <translation>运行</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="458"/>
       <source>Scanning %1%</source>
       <translation>正在扫描%1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="461"/>
       <source>Serial number</source>
       <translation>序列号</translation>
     </message>
@@ -4973,12 +4999,12 @@ Do you want to continue?</source>
       <translation>设置</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="459"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Setup</source>
       <translation>设置</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="462"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Signal strength</source>
       <translation>信号强度</translation>
     </message>
@@ -4989,32 +5015,32 @@ Do you want to continue?</source>
       <translation>待机</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="476"/>
+      <location filename="../../components/CommonWords.qml" line="484"/>
       <source>Start after the condition is reached for</source>
       <translation>在达到条件后启动</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="479"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>Start time</source>
       <translation>启动时间</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="482"/>
+      <location filename="../../components/CommonWords.qml" line="490"/>
       <source>Start value during quiet hours</source>
       <translation>安静时间内的启动值</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="493"/>
       <source>Start when warning is active for</source>
       <translation>在警报下启动</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="491"/>
+      <location filename="../../components/CommonWords.qml" line="499"/>
       <source>State of charge</source>
       <translation>充电状态</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="502"/>
       <source>Status</source>
       <translation>状态</translation>
     </message>
@@ -5025,12 +5051,12 @@ Do you want to continue?</source>
       <translation>启动（%1）</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="501"/>
+      <location filename="../../components/CommonWords.qml" line="509"/>
       <source>Stop value during quiet hours</source>
       <translation>安静时间内的停止值</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="504"/>
+      <location filename="../../components/CommonWords.qml" line="512"/>
       <source>Stop after the condition is reached for</source>
       <translation>在达到条件后停止</translation>
     </message>
@@ -5041,27 +5067,27 @@ Do you want to continue?</source>
       <translation>已停止</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="514"/>
+      <location filename="../../components/CommonWords.qml" line="522"/>
       <source>Temperature</source>
       <translation>温度</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="517"/>
+      <location filename="../../components/CommonWords.qml" line="525"/>
       <source>Temperature sensor</source>
       <translation>温度传感器</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="528"/>
       <source>Today</source>
       <translation>今天</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="531"/>
       <source>Total</source>
       <translation>合计</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="530"/>
+      <location filename="../../components/CommonWords.qml" line="538"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>跟踪器</translation>
@@ -5072,7 +5098,7 @@ Do you want to continue?</source>
       <translation>类型</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="536"/>
+      <location filename="../../components/CommonWords.qml" line="544"/>
       <source>Unique Identity Number</source>
       <translation>唯一身份号码</translation>
     </message>
@@ -5082,22 +5108,22 @@ Do you want to continue?</source>
       <translation>未知</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="543"/>
+      <location filename="../../components/CommonWords.qml" line="551"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus错误</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="546"/>
+      <location filename="../../components/CommonWords.qml" line="554"/>
       <source>Voltage</source>
       <translation>电压</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="549"/>
+      <location filename="../../components/CommonWords.qml" line="557"/>
       <source>VRM instance</source>
       <translation>VRM实例</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="552"/>
+      <location filename="../../components/CommonWords.qml" line="560"/>
       <source>When warning is cleared stop after</source>
       <translation>当警报清除，之后停止</translation>
     </message>
@@ -5108,12 +5134,12 @@ Do you want to continue?</source>
       <translation>是</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="558"/>
+      <location filename="../../components/CommonWords.qml" line="566"/>
       <source>Yesterday</source>
       <translation>昨天</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../components/CommonWords.qml" line="570"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>发电</translation>
@@ -7350,12 +7376,12 @@ Do you want to continue?</source>
       <translation>连接状态（MQTT RPC 通道）</translation>
     </message>
     <message id="settings_relay_genset_start_stop">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="58"/>
       <source>Genset start/stop</source>
       <translation>发电机组启动/停止</translation>
     </message>
     <message id="settings_relay_genset_helper_relay">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="60"/>
       <source>Connected genset helper relay</source>
       <translation>已连接发电机组辅助继电器</translation>
     </message>
@@ -7669,7 +7695,7 @@ Do you want to continue?</source>
       <translation>重启 VE.Bus 系统将重置总线上的任何逆变器，并导致其输出功率损失。</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="569"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>Dynamic power limit</source>
       <translation>动态功率限制</translation>
     </message>
@@ -7762,144 +7788,156 @@ Do you want to continue?</source>
       <source>Manual stop</source>
       <translation>手动停止</translation>
     </message>
+    <message id="common_words_max">
+      <location filename="../../components/CommonWords.qml" line="312"/>
+      <source>Max</source>
+      <extracomment>Short for Maximum</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="311"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Maximum current</source>
       <translation>最大电流</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="314"/>
+      <location filename="../../components/CommonWords.qml" line="318"/>
       <source>Maximum power</source>
       <translation>最大功率</translation>
     </message>
+    <message id="common_words_min">
+      <location filename="../../components/CommonWords.qml" line="328"/>
+      <source>Min</source>
+      <extracomment>Short for Minimum</extracomment>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="331"/>
       <source>Minimum current</source>
       <translation>最小电流</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">不</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="353"/>
+      <location filename="../../components/CommonWords.qml" line="361"/>
       <source>None</source>
       <translation type="unfinished">无</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="357"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">无</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="360"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Not available</source>
       <translation type="unfinished">不可用</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Off</source>
       <translation type="unfinished">关</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="372"/>
+      <location filename="../../components/CommonWords.qml" line="380"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">正常</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="375"/>
+      <location filename="../../components/CommonWords.qml" line="383"/>
       <source>On</source>
       <translation type="unfinished">开</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="390"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">打开</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="393"/>
       <source>Open circuit</source>
       <translation>开路</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="396"/>
       <source>Overall history</source>
       <translation>总体历史记录</translation>
     </message>
     <message id="common_words_press">
-      <location filename="../../components/CommonWords.qml" line="408"/>
+      <location filename="../../components/CommonWords.qml" line="416"/>
       <source>Press</source>
       <translation type="unfinished">报道</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="455"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">运行</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="464"/>
       <source>Settings</source>
       <translation type="unfinished">设置</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="466"/>
+      <location filename="../../components/CommonWords.qml" line="474"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="470"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation type="unfinished">速度</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="473"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Standby</source>
       <translation type="unfinished">待机</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="488"/>
+      <location filename="../../components/CommonWords.qml" line="496"/>
       <source>State</source>
       <translation type="unfinished">状态</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="498"/>
+      <location filename="../../components/CommonWords.qml" line="506"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">启动（%1）</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="507"/>
+      <location filename="../../components/CommonWords.qml" line="515"/>
       <source>Stopped</source>
       <translation type="unfinished">已停止</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="534"/>
       <source>Total power</source>
       <translation type="unfinished"/>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="533"/>
+      <location filename="../../components/CommonWords.qml" line="541"/>
       <source>Type</source>
       <translation type="unfinished">类型</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="540"/>
+      <location filename="../../components/CommonWords.qml" line="548"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">未知</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="555"/>
+      <location filename="../../components/CommonWords.qml" line="563"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7907,13 +7945,13 @@ Do you want to continue?</source>
       <translation type="unfinished">是</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="566"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>今日发电量</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="606"/>
+      <location filename="../../components/CommonWords.qml" line="614"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
@@ -9103,7 +9141,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>保险丝额定值</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="158"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="159"/>
       <source>RPM</source>
       <translation>转速</translation>
     </message>
@@ -9488,7 +9526,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>文档</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="578"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>交流输入 %1</translation>
@@ -10263,17 +10301,17 @@ please wait or check your internet connection</source>
       <translation type="unfinished">太阳能发电量</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="213"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="212"/>
       <source>DC input</source>
       <translation type="unfinished">直流输入</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="253"/>
       <source>AC Loads</source>
       <translation type="unfinished">交流负载</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="281"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="280"/>
       <source>DC Loads</source>
       <translation type="unfinished">直流负载</translation>
     </message>
@@ -10333,6 +10371,11 @@ please wait or check your internet connection</source>
       <extracomment>Application title</extracomment>
       <translation type="unfinished"/>
       <extra-Context>only shown on desktop systems</extra-Context>
+    </message>
+    <message id="autotoggleswitch_function_auto_mode_info">
+      <location filename="../../components/controls/AutoToggleButton.qml" line="29"/>
+      <source>Function is set on Auto Mode</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -11815,146 +11858,146 @@ please wait or check your internet connection</source>
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="118"/>
+      <location filename="../../src/main.cpp" line="119"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>使用D-Bus数据源：连接到指定的D-Bus地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="124"/>
+      <location filename="../../src/main.cpp" line="125"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>使用D-Bus数据源：连接到默认的D-Bus地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="130"/>
+      <location filename="../../src/main.cpp" line="131"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>使用MQTT数据源：连接到指定的MQTT代理地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="137"/>
+      <location filename="../../src/main.cpp" line="138"/>
       <source>MQTT data source device portal id.</source>
       <translation>MQTT 数据源设备门户 ID。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="139"/>
       <source>portalId</source>
       <translation>门户ID</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="143"/>
+      <location filename="../../src/main.cpp" line="144"/>
       <source>MQTT VRM webhost shard</source>
       <translation>MQTT VRM Web 主机分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="144"/>
+      <location filename="../../src/main.cpp" line="145"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="149"/>
+      <location filename="../../src/main.cpp" line="150"/>
       <source>MQTT data source username</source>
       <translation>MQTT 数据源用户名</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="150"/>
+      <location filename="../../src/main.cpp" line="151"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>用户</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="155"/>
+      <location filename="../../src/main.cpp" line="156"/>
       <source>MQTT data source password</source>
       <translation>MQTT数据源密码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="156"/>
+      <location filename="../../src/main.cpp" line="157"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>通过</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="161"/>
+      <location filename="../../src/main.cpp" line="162"/>
       <source>MQTT data source token</source>
       <translation>MQTT 数据源令牌</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="162"/>
+      <location filename="../../src/main.cpp" line="163"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>令牌代码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="167"/>
+      <location filename="../../src/main.cpp" line="168"/>
       <source>Enable FPS counter</source>
       <translation>启用 FPS 计数器</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="172"/>
+      <location filename="../../src/main.cpp" line="173"/>
       <source>Skip splash screen</source>
       <translation>跳过启动画面</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="177"/>
+      <location filename="../../src/main.cpp" line="178"/>
       <source>Use mock data source for testing.</source>
       <translation>使用模拟数据源进行测试。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="182"/>
+      <location filename="../../src/main.cpp" line="183"/>
       <source>Name of mock configuration</source>
       <translation>模拟配置的名称</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="183"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="189"/>
+      <location filename="../../src/main.cpp" line="190"/>
       <source>Set to disable mock timers on startup</source>
       <translation>设置为在启动时禁用模拟定时器</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="194"/>
+      <location filename="../../src/main.cpp" line="195"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="195"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="200"/>
+      <location filename="../../src/main.cpp" line="201"/>
       <source>Signal K URL</source>
       <translation>Signal K URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="201"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="206"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>配色方案（深色、浅色、自动、默认）</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>

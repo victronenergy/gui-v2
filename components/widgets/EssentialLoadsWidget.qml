@@ -25,7 +25,9 @@ AcWidget {
 
 	// AC meters with Position=0 (AC output) are considered as "Essential Loads", so they are
 	// accessible from this AC Loads widget.
-	enabled: essentialLoadDevices.count > 0
+	// For 3-phase systems, the drilldown is always enabled.
+	// For 1-phase systems, only enable the drilldown if there are devices to be shown.
+	enabled: Global.system.load.acOut.phaseCount > 1 || essentialLoadDevices.count > 0
 	onClicked: {
 		Global.pageManager.pushPage("/pages/loads/AcLoadListPage.qml", {
 			title: root.title,
@@ -39,7 +41,7 @@ AcWidget {
 		sourceModels: [
 			acLoadOutputDevices,
 			evChargerOutputDevices,
-			Global.allDevicesModel.heatPumpOutputDevices,
+			heatPumpOutputDevices,
 		]
 	}
 
@@ -55,5 +57,12 @@ AcWidget {
 		position: VenusOS.AcPosition_AcOutput
 		serviceTypes: ["evcharger"]
 		modelId: "evcharger-output"
+	}
+
+	AcMeterModel {
+		id: heatPumpOutputDevices
+		position: VenusOS.AcPosition_AcOutput
+		serviceTypes: ["heatpump"]
+		modelId: "heatpump-output"
 	}
 }

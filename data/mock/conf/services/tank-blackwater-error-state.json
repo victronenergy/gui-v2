@@ -1,5 +1,5 @@
 {
-    "com.victronenergy.tank.adc_builtin5_21": {
+    "com.victronenergy.tank.adc_builtin5_30": {
         "/Alarms/High/Active": 90,
         "/Alarms/High/Delay": 5,
         "/Alarms/High/Enable": 0,
@@ -13,7 +13,7 @@
         "/Capacity": 0.052,
         "/Connected": 1,
         "/CustomName": "Black water",
-        "/DeviceInstance": 21,
+        "/DeviceInstance": 30,
         "/FilterLength": 10,
         "/FluidType": 5,
         "/Level": 89,

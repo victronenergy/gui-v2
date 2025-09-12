@@ -368,7 +368,6 @@ function validationResult(status, notificationText = "", adjustedText = undefine
 
 function acceptsKeyNavigation(item) {
 	return !!item
-			&& item.activeFocusOnTab
+			&& (item.focusPolicy & 0x1) // 0x1 = Qt.TabFocus
 			&& item.enabled
-			&& item.effectiveVisible !== false  // use !== to allow item that do not have effectiveVisible property
 }

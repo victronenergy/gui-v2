@@ -64,6 +64,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/KeyNavigationListHelper.qml
+    components/MultiStepButton.qml
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
@@ -153,6 +154,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/SpinBoxInputArea.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
+    components/controls/TemperatureSlider.qml
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
 
@@ -397,7 +399,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsSupportStatus.qml
     pages/settings/PageSettingsSystem.qml
     pages/settings/PageSettingsSystemStatus.qml
-    pages/settings/PageSettingsTailscale.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
     pages/settings/PageSettingsVecanDevice.qml
@@ -660,6 +661,7 @@ set(VictronVenusOS_RESOURCES
     images/cloud.svg
     images/consumption.svg
     images/dcloads.svg
+    images/dot.svg
     images/dropdown.svg
     images/electron.svg
     images/electron_arrow.svg

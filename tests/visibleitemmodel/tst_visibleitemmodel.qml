@@ -96,6 +96,21 @@ TestCase {
 					ListDelegate { id: viewWithNestedItems_item2 }
 				}
 			}
+
+			ListView {
+				id: viewWithDynamicModels
+				anchors.fill: parent
+				VisibleItemModel {
+					id: dynamicViewModelA
+					ListDelegate { id: dynamicViewModelA_item1 }
+					ListDelegate { id: dynamicViewModelA_item2 }
+				}
+				VisibleItemModel {
+					id: dynamicViewModelB
+					ListDelegate { id: dynamicViewModelB_item }
+				}
+			}
+
 		}
 	}
 
@@ -214,5 +229,20 @@ TestCase {
 		compare(viewWithNestedItems.model.get(0), viewWithNestedItems_item1)
 		compare(viewWithNestedItems.model.get(1), viewWithNestedItems_item2)
 		compare(viewWithNestedItems.count, 2)
+	}
+
+	function test_viewWithDynamicModels() {
+		compare(viewWithDynamicModels.count, 0)
+
+		viewWithDynamicModels.model = dynamicViewModelA
+		compare(viewWithDynamicModels.count, 2)
+		compare(viewWithDynamicModels.model.get(0), dynamicViewModelA_item1)
+		compare(viewWithDynamicModels.model.get(1), dynamicViewModelA_item2)
+		compare(viewWithDynamicModels.count, 2)
+
+		viewWithDynamicModels.model = dynamicViewModelB
+		compare(viewWithDynamicModels.count, 1)
+		compare(viewWithDynamicModels.model.get(0), dynamicViewModelB_item)
+		compare(viewWithDynamicModels.count, 1)
 	}
 }

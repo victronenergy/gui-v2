@@ -57,6 +57,16 @@ Window {
 		appIdleTimer.restart()
 	}
 
+	function keyNavigationTimeout() {
+		// Disable key nav when app is inactive; user can re-enable it later by pressing a
+		// navigation key. Do not disable key nav when a dialog is shown, because the user
+		// cannot re-enable it within a modal dialog, as ModalDialog focus is only enabled when
+		// keyNavigationEnabled=true.
+		if (!Global.dialogLayer?.currentDialog) {
+			Global.keyNavigationEnabled = false
+		}
+	}
+
 	Component.onCompleted: Global.main = root
 
 	Loader {
@@ -92,14 +102,7 @@ Window {
 		Keys.onPressed: function(event) {
 			// If a key press is not handled by an item higher up in the hierarchy:
 			// Enable key navigation when an arrow or tab/backtab key is pressed.
-			// Disable it when the escape key is pressed.
-			if (Global.keyNavigationEnabled) {
-				if (event.key === Qt.Key_Escape) {
-					Global.keyNavigationEnabled = false
-					event.accepted = true
-					return
-				}
-			} else {
+			if (!Global.keyNavigationEnabled) {
 				switch (event.key) {
 				case Qt.Key_Left:
 				case Qt.Key_Right:
@@ -107,6 +110,7 @@ Window {
 				case Qt.Key_Down:
 				case Qt.Key_Tab:
 				case Qt.Key_Backtab:
+				case Qt.Key_Space:
 					Global.keyNavigationEnabled = true
 					event.accepted = true
 					return
@@ -159,14 +163,7 @@ Window {
 		interval: 60000
 		onTriggered: {
 			Global.applicationActive = false
-
-			// Disable key nav when app is inactive; user can re-enable it later by pressing a
-			// navigation key. Do not disable key nav when a dialog is shown, because the user
-			// cannot re-enable it within a modal dialog, as ModalDialog focus is only enabled when
-			// keyNavigationEnabled=true.
-			if (!Global.dialogLayer?.currentDialog) {
-				Global.keyNavigationEnabled = false
-			}
+			root.keyNavigationTimeout()
 		}
 	}
 

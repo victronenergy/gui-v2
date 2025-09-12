@@ -120,7 +120,7 @@ FocusScope {
 			left: leftButton.right
 			verticalCenter: parent.verticalCenter
 		}
-		visible: (root.pageStack.depth === 0 && Global.switches.groups.count > 0)
+		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
 				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
@@ -158,7 +158,7 @@ FocusScope {
 			verticalCenter: leftButton.verticalCenter
 		}
 		height: Theme.geometry_settings_breadcrumb_height
-		model: root.pageStack.depth + 1 // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
+		model: root.pageStack.opened ? root.pageStack.depth + 1 : null // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
 		visible: count >= 2
 		enabled: visible // don't receive focus when invisble
 		focus: false // don't give status bar initial focus to the breadcrumbs
@@ -198,7 +198,7 @@ FocusScope {
 
 		Connections {
 			target: root.pageStack
-			enabled: Global.keyNavigationEnabled
+			enabled: root.pageStack.opened && Global.keyNavigationEnabled
 			function onDepthChanged() {
 				// When pages are pushed/popped, reset the focus to be on the last breadcrumb.
 				breadcrumbs.currentIndex = breadcrumbs.count - 1
@@ -276,7 +276,7 @@ FocusScope {
 				   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : "transparent"
 		icon.source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
 						 "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
-		onClicked: Global.mainView.navBar.setCurrentPage("NotificationsPage.qml")
+		onClicked: Global.mainView.goToNotificationsPage()
 		KeyNavigation.right: alarmButton
 	}
 

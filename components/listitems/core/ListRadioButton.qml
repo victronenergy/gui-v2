@@ -26,6 +26,8 @@ ListItem {
 
 			checkable: false
 			enabled: root.clickable
+			focusPolicy: Qt.NoFocus
+
 			onClicked: root.clicked()
 		}
 	]

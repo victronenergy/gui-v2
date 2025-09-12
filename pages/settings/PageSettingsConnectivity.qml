@@ -63,21 +63,6 @@ Page {
 
 			SettingsListHeader { }
 
-			ListNavigation {
-				//% "Tailscale (remote VPN access)"
-				text: qsTrId("settings_services_tailscale_remote_vpn_access")
-				secondaryText: tailscale.value === 1 ? CommonWords.enabled : CommonWords.disabled
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsTailscale.qml", { title: text })
-				}
-				preferredVisible: tailscale.valid
-
-				VeQuickItem {
-					id: tailscale
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Tailscale/Enabled"
-				}
-			}
-
 			SettingsColumn {
 				width: parent ? parent.width : 0
 				preferredVisible: canInterfaceRepeater.count > 0

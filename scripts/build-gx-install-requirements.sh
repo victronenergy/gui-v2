@@ -9,11 +9,18 @@
 DEVICE_TYPE="arm"
 
 
-# Check if the script is run on Ubuntu 24.x or later
-if [[ "$(lsb_release -is)" == "Ubuntu" && "$(lsb_release -rs)" =~ ^24 ]]; then
-    echo "Running on Ubuntu 24.x or later"
+# Check if the script is run on Ubuntu 22.x or later
+UBUNTU_VERSION=$(lsb_release -rs | cut -d. -f1)
+if [[ "$(lsb_release -is)" == "Ubuntu" && "$UBUNTU_VERSION" -ge 22 ]]; then
+    echo "Running on Ubuntu $(lsb_release -rs | cut -f1)"
 else
-    echo "This script requires Ubuntu 24.x or later"
+    echo -e "\033[1;33mThis script requires Ubuntu 22.x or later\033[0m"
+    exit 1
+fi
+
+# Check if script is run as root
+if [ "$EUID" -eq 0 ]; then
+    echo -e "\033[1;33mPlease do NOT run this script as root or with sudo.\nThis will cause file permission problems and the build will fail.\033[0m"
     exit 1
 fi
 

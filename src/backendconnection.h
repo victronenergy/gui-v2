@@ -41,6 +41,7 @@ class BackendConnection : public QObject
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
 	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
 	Q_PROPERTY(bool needsWasmKeyboardHandler READ needsWasmKeyboardHandler WRITE setNeedsWasmKeyboardHandler NOTIFY needsWasmKeyboardHandlerChanged FINAL)
+	Q_PROPERTY(bool msaaEnabled READ msaaEnabled WRITE setMsaaEnabled NOTIFY msaaEnabledChanged FINAL)
 
 	friend class BackendConnectionTester;
 public:
@@ -144,6 +145,9 @@ public:
 	bool needsWasmKeyboardHandler() const;
 	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
 
+	bool msaaEnabled() const;
+	void setMsaaEnabled(bool e);
+
 	QUrl demoImageFileName() const;
 	VeQItemProducer *producer() const;
 
@@ -190,6 +194,7 @@ Q_SIGNALS:
 	void vrmChanged();
 	void applicationVisibleChanged();
 	void needsWasmKeyboardHandlerChanged();
+	void msaaEnabledChanged();
 	void nodeRedUrlChanged();
 	void signalKUrlChanged();
 	void producerChanged();
@@ -229,6 +234,7 @@ private:
 	bool m_vrm = false;
 	bool m_applicationVisible = true;
 	bool m_needsWasmKeyboardHandler = false;
+	bool m_msaaEnabled = true;
 
 	State m_state = BackendConnection::State::Idle;
 	HeartbeatState m_heartbeatState = BackendConnection::HeartbeatState::HeartbeatActive;

@@ -24,6 +24,7 @@ Shape {
 	property bool calculateMinYValue: false // calculate vs clamp
 	property list<real> yValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // length Theme.animation_loadGraph_model_length
 	property real minYValue: 0 // used to determine visibility for orange graphs, or clamp min value for blue graphs.
+
 	onModelChanged: {
 		const n = yValues.length
 		const newYValues = FastUtils.calculateLoadGraphYValues(model, n, height)
@@ -50,14 +51,6 @@ Shape {
 			yValues = newYValues
 		}
 	}
-
-	smooth: !Global.isGxDevice
-
-	// Antialiasing without requiring multisample framebuffers.
-	// On GX devices we disable this supersample antialiasing for performance reasons.
-	layer.enabled: !Global.isGxDevice
-	layer.smooth: true
-	layer.textureSize: Qt.size(root.width*2, root.height*2)
 
 	ShapePath {
 		id: shapePath

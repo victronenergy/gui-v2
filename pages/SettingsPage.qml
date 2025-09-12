@@ -19,8 +19,7 @@ SwipeViewPage {
 	navButtonIcon: "qrc:/images/settings.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-	activeFocusOnTab: true
-	blockInitialFocus: true
+	focusPolicy: Qt.TabFocus
 
 	GradientListView {
 		id: settingsListView
