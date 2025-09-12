@@ -889,9 +889,10 @@ public:
 	Q_ENUM(TailscaleConnectState)
 
 	enum MicrogridMode {
-		MicrogridMode_HybridDroop = 1,
-		MicrogridMode_GridFollowing,
-		MicrogridMode_GridForming
+		MicrogridMode_GridForming = 0,
+		MicrogridMode_GridFollowing = 1,
+
+		MicrogridMode_HybridDroop = 3
 	};
 	Q_ENUM(MicrogridMode)
 

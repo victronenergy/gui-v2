@@ -12,12 +12,12 @@ Item {
 	property alias value: quantityInfo.value
 	property alias unit: quantityInfo.unitType
 	readonly property alias quantityInfo: quantityInfo
-	property alias font: unitLabel.font
-	property alias valueColor: valueLabel.color
-	property alias verticalAlignment: valueLabel.verticalAlignment
-	property alias unitColor: unitLabel.color
-	property alias valueText: valueLabel.text
-	property alias unitText: unitLabel.text
+	property alias font: digitRow.font// unitLabel.font
+	property alias valueColor: digitRow.valueColor// valueLabel.color
+	property alias verticalAlignment: digitRow.verticalAlignment// valueLabel.verticalAlignment
+	property alias unitColor: digitRow.unitColor// unitLabel.color
+	property alias valueText: digitRow.valueText// valueLabel.text
+	property alias unitText: digitRow.unitText //Label.text
 	property int alignment: Qt.AlignHCenter
 	property alias precision: quantityInfo.precision
 	property alias formatHints: quantityInfo.formatHints
@@ -31,8 +31,19 @@ Item {
 		id: quantityInfo
 	}
 
-	Row {
+	ValueUnitRow {
 		id: digitRow
+		anchors {
+			verticalCenter: parent.verticalCenter
+			horizontalCenter: root.alignment & Qt.AlignHCenter ? parent.horizontalCenter : undefined
+			left: root.alignment & Qt.AlignLeft ? parent.left : undefined
+			right: root.alignment & Qt.AlignRight ? parent.right : undefined
+		}
+	}
+
+	/*
+	Row {
+		//id: digitRow
 
 		anchors {
 			verticalCenter: parent.verticalCenter
@@ -65,4 +76,5 @@ Item {
 			color: Theme.color_font_secondary
 		}
 	}
+	*/
 }

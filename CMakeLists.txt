@@ -62,6 +62,11 @@ include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
 include(cmake/ModuleBoat.cmake)
+
+target_sources(VictronBoat
+  PRIVATE
+    components/ValueUnitRow.qml
+)
 include(cmake/ModuleMock.cmake)
 
 include(cmake/QZXing.cmake)

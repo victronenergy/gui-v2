@@ -125,6 +125,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ToastNotification.qml
     components/Utils.js
     components/ValueRange.qml
+    components/ValueUnitRow.qml
     components/VeBusAcIODisplay.qml
     components/VeQItemServiceModel.qml
     components/ViewGradient.qml
