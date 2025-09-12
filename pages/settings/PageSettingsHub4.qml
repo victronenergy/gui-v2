@@ -313,6 +313,34 @@ Page {
 				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")
 			}
 		}
+
+		SettingsListHeader {
+			//% "Deprecated settings"
+			text: qsTrId("settings_ess_deprecated")
+			preferredVisible: maxChargePowerPercentage.preferredVisible || maxDischargePowerPercentage.preferredVisible
+		}
+
+		ListSpinBox {
+			id: maxChargePowerPercentage
+			//% "Battery charge limit (% of CCL)"
+			text: qsTrId("settings_ess_max_charge_percentage")
+			preferredVisible: dataItem.value < 100.0
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePercentage"
+			suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
+			from: 0
+			to: 100
+		}
+
+		ListSpinBox {
+			id: maxDischargePowerPercentage
+			//% "Battery discharge limit (% of DCL)"
+			text: qsTrId("settings_ess_max_discharge_percentage")
+			preferredVisible: dataItem.value < 100.0
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePercentage"
+			suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
+			from: 0
+			to: 100
+		}
 	}
 
 	GradientListView {
