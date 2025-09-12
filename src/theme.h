@@ -26,6 +26,7 @@ class Theme : public QObject
 	Q_PROPERTY(SystemColorScheme systemColorScheme READ systemColorScheme WRITE setSystemColorScheme NOTIFY systemColorSchemeChanged)
 	Q_PROPERTY(ForcedColorScheme forcedColorScheme READ forcedColorScheme WRITE setForcedColorScheme NOTIFY forcedColorSchemeChanged)
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
+	Q_PROPERTY(qreal requiredRotation READ requiredRotation WRITE setRequiredRotation NOTIFY requiredRotationChanged)
 
 public:
 	enum ScreenSize {
@@ -83,6 +84,10 @@ public:
 
 	QString applicationVersion() const;
 
+	qreal requiredRotation() const;
+
+	void setRequiredRotation(qreal rotation);
+
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
@@ -91,12 +96,14 @@ Q_SIGNALS:
 	void systemColorSchemeChanged(Victron::VenusOS::Theme::SystemColorScheme systemColorScheme);
 	void systemColorSchemeChanged_parameterless();
 	void forcedColorSchemeChanged(Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme);
+	void requiredRotationChanged();
 
 protected:
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
 	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
+	qreal m_requiredRotation = 0.0;
 };
 
 }

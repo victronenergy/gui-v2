@@ -152,6 +152,19 @@ QString Theme::applicationVersion() const
 	return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
 }
 
+qreal Theme::requiredRotation() const
+{
+	return m_requiredRotation;
+}
+
+void Theme::setRequiredRotation(qreal rotation)
+{
+	if (!qFuzzyCompare(m_requiredRotation, rotation)) {
+		m_requiredRotation = rotation;
+		emit requiredRotationChanged();
+	}
+}
+
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 
 // Called from JavaScript when theme changes
