@@ -17,37 +17,43 @@ Page {
 	objectName: "PageMicrogrid"
 	onBindPrefixChanged: console.log(objectName, "bindPrefix:", bindPrefix)
 
-	component MicrogridVisibleItemModel : VisibleItemModel {
-		ListText {
-			//% "Active mode"
-			text: qsTrId("page_microgrid_active_mode")
-			secondaryText: VenusOS.microgridModeToText(mode.value)
-		}
-	}
-
-	component VfDirectDriveSettingsSettingsListHeader : SettingsListHeader {
-		//% "V-f direct drive settings"
-		text: qsTrId("page_microgrid_v_f_direct_drive_settings")
-	}
 
 	GradientListView {
-		model: droopModel/*{
-			switch (mode.value)
-			{
-			case VenusOS.MicrogridMode_HybridDroop:
-				return droopModel
-			case VenusOS.MicrogridMode_GridFollowing:
-				return gridFollowingModel
-			case VenusOS.MicroMicrogridMode_GridForming:
-				return gridFormingModel
-			default:
-				return []
+		model: VisibleItemModel {
+			ListText {
+				//% "Active mode"
+				text: qsTrId("page_microgrid_active_mode")
+				secondaryText: VenusOS.microgridModeToText(mode.value)
 			}
-		}*/
+
+			SettingsListHeader {
+				//% "Hybrid droop parameters"
+				text: qsTrId("page_microgrid_hybrid_droop_parameters")
+			}
+
+			ListText {
+				dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/P0/Value"
+				textFormat: Text.RichText
+				//% "Reference active power (P<sub>0</sub>)"
+				text: qsTrId("page_microgrid_reference_active_power_p0")
+				secondaryText: dataItem.value * 100 + "%"
+			}
+
+			ListText {
+				dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/P0/Value"
+				textFormat: Text.RichText
+				//% "Reference frequency (f<sub>0</sub>)"
+				text: qsTrId("page_microgrid_reference_frequency_f0")
+			}
+		}
+
+		//loader.status == loader.Ready && mode.valid ? loader.item : null
 
 		VeQuickItem {
 			id: mode
-			uid: root.bindPrefix + "Mode"
+			uid: root.bindPrefix + "/Mode"
+			onValueChanged: console.log("*********************************************** ", uid, value)
+			Component.onCompleted: console.log("*********************************************** ", uid, value)
 		}
 
 
@@ -97,35 +103,88 @@ Page {
 		}
 		*/
 	}
-	VisibleItemModel {
-		id: droopModel
 
+	/*
+	component MicrogridVisibleItemModel : VisibleItemModel {
 		ListText {
 			//% "Active mode"
 			text: qsTrId("page_microgrid_active_mode")
 			secondaryText: VenusOS.microgridModeToText(mode.value)
 		}
+	}
 
-		SettingsListHeader {
-			//% "Hybrid droop parameters"
-			text: qsTrId("page_microgrid_hybrid_droop_parameters")
-		}
+	component VfDirectDriveSettingsSettingsListHeader : SettingsListHeader {
+		//% "V-f direct drive settings"
+		text: qsTrId("page_microgrid_v_f_direct_drive_settings")
+	}
 
-		ListText {
-			//% "Reference power active (%1)".arg()
-			text: qsTrId("page_microgrid_reference_power_active_p0").arg("(P<sub>0</sub>)")
+	Component {
+		id: droopModel
+
+		VisibleItemModel {
+			ListText {
+				//% "Active mode"
+				text: qsTrId("page_microgrid_active_mode")
+				secondaryText: VenusOS.microgridModeToText(mode.value)
+			}
+
+			SettingsListHeader {
+				//% "Hybrid droop parameters"
+				text: qsTrId("page_microgrid_hybrid_droop_parameters")
+			}
+
+			ListText {
+				//% "Reference power active (%1)"
+				text: qsTrId("page_microgrid_reference_power_active_p0").arg("(P<sub>0</sub>)")
+			}
 		}
 	}
 
-	MicrogridVisibleItemModel {
+	Component {
 		id: gridFollowingModel
 
-		VfDirectDriveSettingsSettingsListHeader {}
+		VisibleItemModel {
+
+			ListText {
+				//% "Active mode"
+				text: qsTrId("page_microgrid_active_mode")
+				secondaryText: VenusOS.microgridModeToText(mode.value)
+			}
+
+			VfDirectDriveSettingsSettingsListHeader {}
+		}
 	}
 
-	MicrogridVisibleItemModel {
+
+	Component {
 		id: gridFormingModel
+		VisibleItemModel {
 
-		VfDirectDriveSettingsSettingsListHeader {}
+			ListText {
+				//% "Active mode"
+				text: qsTrId("page_microgrid_active_mode")
+				secondaryText: VenusOS.microgridModeToText(mode.value)
+			}
+
+			VfDirectDriveSettingsSettingsListHeader {}
+		}
 	}
+		Loader {
+			id: loader
+
+			sourceComponent: droopModel {
+				switch (mode.value)
+				{
+				case VenusOS.MicrogridMode_HybridDroop:
+					return droopModel
+				case VenusOS.MicrogridMode_GridFollowing:
+					return gridFollowingModel
+				case VenusOS.MicroMicrogridMode_GridForming:
+					return gridFormingModel
+				default:
+					return []
+				}
+			}
+		}
+	*/
 }
