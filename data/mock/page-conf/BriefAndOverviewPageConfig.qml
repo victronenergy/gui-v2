@@ -491,12 +491,12 @@ Item {
 
 	function createDevice(serviceType, deviceInstance, properties) {
 		const serviceUid = "mock/com.victronenergy.%1.mock_brief_config_%2".arg(serviceType).arg(deviceInstance)
-		MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
-		const productName = properties["/ProductName"] ?? serviceType + " " + deviceInstance
-		MockManager.setValue(serviceUid + "/ProductName", productName)
 		for (const path in properties) {
 			MockManager.setValue(serviceUid + path, properties[path])
 		}
+		MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
+		const productName = properties["/ProductName"] ?? serviceType + " " + deviceInstance
+		MockManager.setValue(serviceUid + "/ProductName", productName)
 		return serviceUid
 	}
 
@@ -526,7 +526,7 @@ Item {
 
 	FilteredDeviceModel {
 		id: dcInputModel
-		serviceTypes: Global.dcInputs.serviceTypes
+		serviceTypes: ["alternator", "fuelcell", "dcsource", "dcgenset"]
 	}
 
 	FilteredDeviceModel {
