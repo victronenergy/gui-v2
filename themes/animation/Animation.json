@@ -29,6 +29,7 @@
     "animation_notificationsPage_delegate_displaced_duration": 200,
     "animation_notificationsPage_delegate_opacity_duration": 200,
     "animation_inputPanel_slide_duration": 250,
+    "animation_slider_valueChange_duration": 60,
     "animation_splash_progressBar_fade_duration": 350,
     "animation_splash_logo_preFadePause_duration": 400,
     "animation_splash_logoIcon_fade_duration": 200,

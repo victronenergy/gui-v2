@@ -101,6 +101,7 @@ QtObject {
 		uid: root.type === VenusOS.SwitchableOutput_Type_Dimmable
 				|| root.type === VenusOS.SwitchableOutput_Type_UnrangedSetpoint
 				|| root.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
+				|| root.type === VenusOS.SwitchableOutput_Type_BasicSlider
 			 ? `${root.uid}/Dimming` : ""
 	}
 
