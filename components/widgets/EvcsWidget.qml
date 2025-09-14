@@ -1,3 +1,4 @@
+
 /*
 ** Copyright (C) 2023 Victron Energy B.V.
 ** See LICENSE.txt for license information.
@@ -5,6 +6,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
 OverviewWidget {
 	id: root
@@ -121,11 +123,12 @@ OverviewWidget {
 				spacing: 4
 				visible: evDevice !== null
 
-				Image {
+				CP.ColorImage {
 					source: "qrc:/images/icon_ev_24.svg"
 					width: 16
 					height: 16
 					anchors.verticalCenter: parent.verticalCenter
+					color: Theme.color_font_secondary
 				}
 
 				Label {
