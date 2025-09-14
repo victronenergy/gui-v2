@@ -323,6 +323,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
     pages/ev/EvPage.qml
+    pages/ev/EvMapPage.qml
     pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
     pages/loads/AcLoadListPage.qml
