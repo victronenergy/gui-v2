@@ -107,11 +107,12 @@ OverviewWidget {
 				}
 			}
 
-			// Separator line
+			// Separator line - only show when there's an EV device
 			Rectangle {
 				width: parent.width
 				height: 1
 				color: Theme.color_listItem_separator
+				visible: evDevice !== null
 			}
 
 			// Row 3: EV info header with icon and model name
@@ -120,10 +121,10 @@ OverviewWidget {
 				spacing: 4
 				visible: evDevice !== null
 
-				Image {
-					source: "qrc:/images/icon_charging_station_24.svg"
-					width: 16
-					height: 16
+				Label {
+					text: "🚗"
+					color: Theme.color_font_secondary
+					font.pixelSize: 14
 					anchors.verticalCenter: parent.verticalCenter
 				}
 
