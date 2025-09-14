@@ -78,17 +78,36 @@ Page {
             backdrop-filter: blur(10px);
             z-index: 1000;
             border: 1px solid #4a9eff;
+            min-width: 120px;
         }
         .range-label {
             font-size: 12px;
             color: #999;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
         .range-value {
             font-size: 20px;
             font-weight: bold;
             color: #4a9eff;
+            margin-bottom: 12px;
+        }
+        .range-legend {
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+        .range-legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .range-legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         .no-gps {
             position: absolute;
@@ -143,6 +162,20 @@ Page {
     <div class="range-info" id="rangeInfo" style="display: none;">
         <div class="range-label">Range</div>
         <div class="range-value" id="rangeValue">-- km</div>
+        <div class="range-legend">
+            <div class="range-legend-item">
+                <div class="range-legend-color" style="background-color: rgba(74, 158, 255, 0.6);"></div>
+                <span>Highway driving</span>
+            </div>
+            <div class="range-legend-item">
+                <div class="range-legend-color" style="background-color: rgba(74, 158, 255, 0.4);"></div>
+                <span>Mixed driving</span>
+            </div>
+            <div class="range-legend-item">
+                <div class="range-legend-color" style="background-color: rgba(74, 158, 255, 0.2);"></div>
+                <span>City driving</span>
+            </div>
+        </div>
     </div>
 
     <div class="no-gps" id="noGpsOverlay" style="display: none;">
@@ -156,7 +189,7 @@ Page {
     <script>
         let map;
         let evMarker;
-        let rangeCircle;
+        let rangeCircles = [];
         let evData = {
             name: '${root.displayName}',
             latitude: ${root.hasValidPosition ? root.evLatitude : 52.377956},
@@ -180,10 +213,10 @@ Page {
                 attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            // Add EV marker and range circle
+            // Add EV marker and range circles
             addEVMarker();
             if (evData.range > 0) {
-                addRangeCircle();
+                addRealisticRangeCircles();
                 showRangeInfo();
             }
         }
@@ -205,25 +238,70 @@ Page {
                         <h3>\${evData.name}</h3>
                         <p><strong>Range:</strong> \${evData.range} km</p>
                         <p><strong>Position:</strong> \${evData.latitude.toFixed(4)}, \${evData.longitude.toFixed(4)}</p>
+                        <p style="font-size: 12px; color: #999; margin-top: 8px;">
+                            Range circles show realistic driving distances based on road conditions.
+                        </p>
                     </div>
                 \`);
         }
 
-        function addRangeCircle() {
-            // Add range circle (radius in meters)
-            const radiusInMeters = evData.range * 1000;
-            
-            rangeCircle = L.circle([evData.latitude, evData.longitude], {
-                color: '#4a9eff',
-                fillColor: '#4a9eff',
-                fillOpacity: 0.2,
-                opacity: 0.6,
-                weight: 2,
-                radius: radiusInMeters
-            }).addTo(map);
+        function addRealisticRangeCircles() {
+            // Clear existing circles
+            rangeCircles.forEach(circle => map.removeLayer(circle));
+            rangeCircles = [];
 
-            // Fit map to show both marker and circle
-            const group = new L.featureGroup([evMarker, rangeCircle]);
+            // Base range in meters
+            const baseRange = evData.range * 1000;
+
+            // Range circles with different confidence levels
+            const rangeConfigs = [
+                {
+                    // Outer circle: Highway driving (80% of theoretical range)
+                    factor: 0.8,
+                    color: '#4a9eff',
+                    fillOpacity: 0.1,
+                    opacity: 0.6,
+                    weight: 1,
+                    dashArray: '10, 5'
+                },
+                {
+                    // Middle circle: Mixed driving (60% of theoretical range)
+                    factor: 0.6,
+                    color: '#4a9eff',
+                    fillOpacity: 0.15,
+                    opacity: 0.7,
+                    weight: 2,
+                    dashArray: '5, 3'
+                },
+                {
+                    // Inner circle: City driving (40% of theoretical range)
+                    factor: 0.4,
+                    color: '#4a9eff',
+                    fillOpacity: 0.2,
+                    opacity: 0.8,
+                    weight: 2,
+                    dashArray: null
+                }
+            ];
+
+            // Add circles from largest to smallest (so smaller ones appear on top)
+            rangeConfigs.forEach(config => {
+                const circle = L.circle([evData.latitude, evData.longitude], {
+                    color: config.color,
+                    fillColor: config.color,
+                    fillOpacity: config.fillOpacity,
+                    opacity: config.opacity,
+                    weight: config.weight,
+                    radius: baseRange * config.factor,
+                    dashArray: config.dashArray
+                }).addTo(map);
+                
+                rangeCircles.push(circle);
+            });
+
+            // Fit map to show the largest circle with some padding
+            const outerCircle = rangeCircles[0];
+            const group = new L.featureGroup([evMarker, outerCircle]);
             map.fitBounds(group.getBounds().pad(0.1));
         }
 
@@ -247,14 +325,16 @@ Page {
                             <h3>\${evData.name}</h3>
                             <p><strong>Range:</strong> \${evData.range} km</p>
                             <p><strong>Position:</strong> \${evData.latitude.toFixed(4)}, \${evData.longitude.toFixed(4)}</p>
+                            <p style="font-size: 12px; color: #999; margin-top: 8px;">
+                                Range circles show realistic driving distances based on road conditions.
+                            </p>
                         </div>
                     \`);
                 }
 
-                // Update range circle
-                if (rangeCircle) {
-                    rangeCircle.setLatLng([evData.latitude, evData.longitude]);
-                    rangeCircle.setRadius(evData.range * 1000);
+                // Update range circles
+                if (evData.range > 0) {
+                    addRealisticRangeCircles();
                 }
 
                 // Update range info
@@ -336,13 +416,13 @@ Page {
 							anchors.fill: parent
 							
 							Component.onCompleted: {
-								console.log("WebView created, loading OpenStreetMap")
+								console.log("WebView created, loading OpenStreetMap with realistic range")
 								loadHtml(root.mapHtml)
 							}
 
 							onLoadingChanged: function(loadRequest) {
 								if (loadRequest.status === WebView.LoadSucceededStatus) {
-									console.log("OpenStreetMap loaded successfully")
+									console.log("OpenStreetMap with realistic range loaded successfully")
 								} else if (loadRequest.status === WebView.LoadFailedStatus) {
 									console.log("OpenStreetMap failed to load")
 									webViewLoader.sourceComponent = mapPlaceholderComponent
@@ -417,6 +497,15 @@ Page {
 								text: root.evRange > 0 ? "Range: " + Math.round(root.evRange) + " km" : "Range: Unknown"
 								color: Theme.color_font_secondary
 								font.pixelSize: Theme.font_size_caption
+								visible: root.hasValidPosition
+							}
+
+							Label {
+								anchors.horizontalCenter: parent.horizontalCenter
+								text: "Realistic range circles: 80% highway, 60% mixed, 40% city"
+								color: Theme.color_ok
+								font.pixelSize: Theme.font_size_caption
+								opacity: 0.8
 								visible: root.hasValidPosition
 							}
 
