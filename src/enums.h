@@ -70,6 +70,7 @@ public:
 		Units_Volt_AC,
 		Units_Volt_DC,
 		Units_VoltAmpere,
+		Units_VoltAmpereReactive,
 		Units_Watt,
 		Units_Amp,
 		Units_Hertz,

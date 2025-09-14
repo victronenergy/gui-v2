@@ -18,6 +18,37 @@ Page {
 	onBindPrefixChanged: console.log(objectName, "bindPrefix:", bindPrefix)
 
 
+	component ToFromListText: ListText {
+		property int unitType: VenusOS.Units_None
+		property alias dataItemFrom: dataItemFrom
+		property alias dataItemTo: dataItemTo
+		property alias quantityInfoFrom: from
+		property alias quantityInfoTo: to
+
+		//% "%1 %2 to %3 %4"
+		secondaryText: qsTrId("page_microgrid_from_p1_to_p2").arg(from.number).arg(Units.defaultUnitString(unitType)).arg(to.number).arg(Units.defaultUnitString(unitType))
+
+		QuantityInfo {
+			id: from
+			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
+			value: dataItemFrom.valid ? dataItemFrom.value : NaN
+		}
+
+		QuantityInfo {
+			id: to
+			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
+			value: dataItemTo.valid ? dataItemTo.value : NaN
+		}
+
+		VeQuickItem {
+			id: dataItemFrom
+		}
+
+		VeQuickItem {
+			id: dataItemTo
+		}
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListText {
@@ -71,9 +102,9 @@ Page {
 			ListQuantity {
 				dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/U0/Value"
 				textFormat: Text.RichText
-				//% "Reference voltage (U<sub>0</sub>)"
+				//% "Reference Voltage (U<sub>0</sub>)"
 				text: qsTrId("page_microgrid_reference_voltage")
-				unit: VenusOS.Units_Volt_DC
+				unit: VenusOS.Units_Volt_AC
 				precision: 1
 			}
 
@@ -91,37 +122,23 @@ Page {
 				text: qsTrId("page_microgrid_minimum_and_maximum_parameters")
 			}
 
-
-			ListText {
+			ToFromListText {
 				//% "Allowed active power range"
 				text: qsTrId("page_microgrid_allowed_active_power_range")
-
-				//% "%1 %2 to %3 %4"
-				secondaryText: qsTrId("page_microgrid_from_p1_to_p2").arg(from.number).arg(from.unit).arg(to.number).arg(to.unit)
-
-				QuantityInfo {
-					id: from
-					unitType: VenusOS.Units_Watt
-					value: dataItemFrom.valid ? dataItemFrom.value : NaN
-				}
-				QuantityInfo {
-					id: to
-					unitType: VenusOS.Units_Watt
-					value: dataItemTo.valid ? dataItemTo.value : NaN
-
-				}
-				VeQuickItem {
-					id: dataItemFrom
-					unit: VenusOS.Units_VoltAmpere
-					uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Value"
-				}
-				VeQuickItem {
-					id: dataItemTo
-					unit: VenusOS.Units_VoltAmpere
-					uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
-				}
+				unitType: VenusOS.Units_Watt
+				dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Value"
+				dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
 			}
 
+			ToFromListText {
+				//% "Allowed reactive power range"
+				text: qsTrId("page_microgrid_allowed_reactive_power_range")
+				unitType: VenusOS.Units_VoltAmpereReactive
+				dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
+				dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
+			}
+
+			/*
 			ListText {
 				//% "Allowed reactive power range"
 				text: qsTrId("page_microgrid_allowed_reactive_power_range")
@@ -150,6 +167,7 @@ Page {
 					uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
 				}
 			}
+			*/
 		}
 
 		//loader.status == loader.Ready && mode.valid ? loader.item : null
