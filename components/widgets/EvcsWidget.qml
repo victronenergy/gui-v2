@@ -115,16 +115,16 @@ OverviewWidget {
 				visible: evDevice !== null
 			}
 
-			// Row 3: EV info header with icon and model name
+			// Row 3: EV info header with proper EV icon and model name
 			Row {
 				width: parent.width
 				spacing: 4
 				visible: evDevice !== null
 
-				Label {
-					text: "🚗"
-					color: Theme.color_font_secondary
-					font.pixelSize: 14
+				Image {
+					source: "qrc:/images/icon_ev_24.svg"
+					width: 16
+					height: 16
 					anchors.verticalCenter: parent.verticalCenter
 				}
 

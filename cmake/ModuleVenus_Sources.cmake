@@ -706,6 +706,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_controls_off_32.svg
     images/icon_controls_on_32.svg
     images/icon_dc_24.svg
+    images/icon_ev_24.svg
     images/icon_humidity_32.svg
     images/icon_input_24.svg
     images/icon_manualstart_24.svg
