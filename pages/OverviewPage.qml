@@ -353,27 +353,27 @@ SwipeViewPage {
 	}
 
 	function _resetRightWidgets() {
-    	let widgets = [acLoadsWidget]
+		let widgets = [acLoadsWidget]
 
-    	if (Global.evChargers.model.count > 0) {
-        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
-    	}
+		// Add EVCS widget (now includes EV when present)
+		if (Global.evChargers.model.count > 0) {
+			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
+		}
 
-    	if (Global.allDevicesModel.evDevices.count > 0) {
-        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Ev))
-    	}
+		// REMOVE: No longer create separate EV widget
+		// The EV widget functionality is now integrated into EVCS widget
 
-    	if (layoutConditions.showEssentialLoads) {
-        	widgets.push(essentialLoadsWidget)
-    	} else {
-        	essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
-    	}
+		if (layoutConditions.showEssentialLoads) {
+			widgets.push(essentialLoadsWidget)
+		} else {
+			essentialLoadsWidget.size = VenusOS.OverviewWidget_Size_Zero
+		}
 
-    	if (layoutConditions.showDcLoads) {
-        	widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
-    	}
+		if (layoutConditions.showDcLoads) {
+			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_DcLoads))
+		}
 
-    	_rightWidgets = widgets
+		_rightWidgets = widgets
 	}
 
 	function _findWidget(widgets, widgetType) {
@@ -516,13 +516,19 @@ SwipeViewPage {
 		readonly property bool showEssentialLoads: Global.system?.showInputLoads && Global.system?.hasAcOutSystem
 		onShowEssentialLoadsChanged: Qt.callLater(root._resetWidgets)
 
-		// Affects whether EvcsWidget is shown.
+		// The EVCS condition now handles both EVCS and EV:
 		readonly property bool showEvChargers: Global.evChargers?.model.count ?? 0 > 0
 		onShowEvChargersChanged: Qt.callLater(root._resetWidgets)
 
-		// Affects whether EvWidget is shown.
-		readonly property bool showEvDevices: Global.allDevicesModel?.evDevices.count ?? 0 > 0
-		onShowEvDevicesChanged: Qt.callLater(root._resetWidgets)
+		// Add condition to refresh EVCS when EV devices change (for integrated display)
+		readonly property int evDeviceCount: Global.allDevicesModel?.evDevices.count ?? 0
+		onEvDeviceCountChanged: {
+			// Trigger EVCS widget refresh when EV devices change
+			if (Global.evChargers?.model.count > 0) {
+				Qt.callLater(root._resetWidgets)
+			}
+		}
+
 	}
 
 	Connections {

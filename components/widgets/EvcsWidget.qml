@@ -26,6 +26,8 @@ OverviewWidget {
 	preferredSize: VenusOS.OverviewWidget_PreferredSize_LargeOnly
 	enabled: true
 	quantityLabel.dataObject: { "power": Global.evChargers.power, "current": Global.evChargers.current }
+	quantityLabel.font.pixelSize: Theme.font_size_body2
+	quantityLabel.alignment: Qt.AlignLeft
 
 	extraContentChildren: [
 		Loader {
@@ -48,8 +50,11 @@ OverviewWidget {
 
 		Column {
 			readonly property var evCharger: Global.evChargers.model.deviceAt(0)
-
+			readonly property var evDevice: Global.allDevicesModel.evDevices.count > 0
+											? Global.allDevicesModel.evDevices.deviceAt(0)
+											: null
 			width: parent.width
+			spacing: 3
 
 			// Row 1: Energy and charging time
 			Row {
@@ -58,7 +63,7 @@ OverviewWidget {
 
 				ElectricalQuantityLabel {
 					width: parent.width - chargingTimeLabel.width - parent.spacing
-					height: chargingTimeLabel.height // use normal label height, instead of default baseline calculation
+					height: chargingTimeLabel.height
 					value: evCharger.energy
 					valueColor: unitColor
 					alignment: Qt.AlignLeft
@@ -75,6 +80,7 @@ OverviewWidget {
 						return duration.h + "h " + Utils.pad(duration.m, 2) + "m"
 					}
 					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
 					horizontalAlignment: Text.AlignRight
 				}
 			}
@@ -89,14 +95,116 @@ OverviewWidget {
 					elide: Text.ElideRight
 					text: Global.evChargers.chargerStatusToText(evCharger.status)
 					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
 				}
 
 				Label {
 					id: modeLabel
 					text: Global.evChargers.chargerModeToText(evCharger.mode)
 					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
 					horizontalAlignment: Text.AlignRight
 				}
+			}
+
+			// Separator line
+			Rectangle {
+				width: parent.width
+				height: 1
+				color: Theme.color_listItem_separator
+			}
+
+			// Row 3: EV info header with icon and model name
+			Row {
+				width: parent.width
+				spacing: 4
+				visible: evDevice !== null
+
+				Image {
+					source: "qrc:/images/icon_charging_station_24.svg"
+					width: 16
+					height: 16
+					anchors.verticalCenter: parent.verticalCenter
+				}
+
+				Label {
+					text: evDevice && customNameItem.valid && customNameItem.value
+						  ? customNameItem.value
+						  : evDevice && evDevice.name
+						  ? evDevice.name
+						  : "EV"
+					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
+					anchors.verticalCenter: parent.verticalCenter
+					elide: Text.ElideRight
+					width: parent.width - parent.spacing - 16
+				}
+			}
+
+			// Row 4: Range and SOC info
+			Row {
+				width: parent.width
+				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+				visible: evDevice !== null
+
+				Label {
+					text: rangeItem.valid ? Math.round(rangeItem.value) + " km" : "-- km"
+					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
+				}
+
+				Item {
+					// Spacer to push SOC to the right
+					width: parent.width - rangeLabel.width - socLabel.width - (2 * parent.spacing)
+					height: 1
+				}
+
+				Label {
+					id: socLabel
+					text: {
+						const soc = socItem.valid ? Math.round(socItem.value) : NaN
+						const targetSoc = targetSocItem.valid ? Math.round(targetSocItem.value) : NaN
+
+						if (!isNaN(soc) && !isNaN(targetSoc)) {
+							return soc + "/" + targetSoc + " %"
+						} else if (!isNaN(soc)) {
+							return soc + " %"
+						} else {
+							return "-- %"
+						}
+					}
+					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_size_caption
+					horizontalAlignment: Text.AlignRight
+				}
+
+				Label {
+					id: rangeLabel
+					visible: false
+					text: rangeItem.valid ? Math.round(rangeItem.value) + " km" : "-- km"
+					font.pixelSize: Theme.font_size_caption
+				}
+			}
+
+			// VeQuickItems for EV data
+			VeQuickItem {
+				id: customNameItem
+				uid: evDevice ? evDevice.serviceUid + "/CustomName" : ""
+			}
+
+			VeQuickItem {
+				id: rangeItem
+				uid: evDevice ? evDevice.serviceUid + "/RangeToGo" : ""
+			}
+
+			VeQuickItem {
+				id: socItem
+				uid: evDevice ? evDevice.serviceUid + "/Soc" : ""
+			}
+
+			VeQuickItem {
+				id: targetSocItem
+				uid: evDevice ? evDevice.serviceUid + "/TargetSoc" : ""
 			}
 		}
 	}
@@ -122,7 +230,6 @@ OverviewWidget {
 
 					Label {
 						id: chargerCountLabel
-
 						text: model.statusCount || "-"
 						color: Theme.color_font_secondary
 					}
