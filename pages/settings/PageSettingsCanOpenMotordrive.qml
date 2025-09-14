@@ -23,20 +23,19 @@ Page {
 		uid: root.service + "/ScanProgress"
 	}
 
-
 	GradientListView {
 		model: VisibleItemModel {
 			ListButton {
-				//% "Scan for nodes"
-				text: qsTrId("page_settings_canopenmotordrive_scan_for_nodes")
+				//% "Scan for motor drives"
+				text: qsTrId("page_settings_canopenmotordrive_scan_for_motor_drives")
 				secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.press_to_scan
 				onClicked: scanItem.setValue(!scanItem.value)
 				preferredVisible: userHasWriteAccess
 			}
 
 			ListText {
-				//% "Discovered nodes"
-				text: qsTrId("page_settings_canopenmotordrive_discovered_nodes")
+				//% "Discovered motor drives"
+				text: qsTrId("page_settings_canopenmotordrive_discovered_motor_drives")
 				dataItem.uid: root.service + "/DiscoveredNodes"
 				dataItem.invalidate: false
 			}

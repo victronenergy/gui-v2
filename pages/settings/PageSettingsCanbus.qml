@@ -169,8 +169,8 @@ Page {
 			}
 
 			ListNavigation {
-				//% "CANOpen Motor drive nodes"
-				text: qsTrId("pagesettingsintegrations_canopenmotordrive_nodes")
+				//% "CANopen motor drives"
+				text: qsTrId("pagesettingsintegrations_canopenmotordrive")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCanOpenMotordrive.qml", {"title": text})
 				preferredVisible: canbusProfile.canbusProfile.value === VenusOS.CanBusProfile_CanOpenMotordrive250 || canbusProfile.canbusProfile.value === VenusOS.CanBusProfile_CanOpenMotordrive500
 			}
