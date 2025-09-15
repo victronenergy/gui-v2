@@ -65,11 +65,6 @@
       <source>Speed</source>
       <translation>ความเร็ว</translation>
     </message>
-    <message id="settings_tailscale_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="170"/>
-      <source>State</source>
-      <translation>สถานะ</translation>
-    </message>
     <message id="settings_firmware_installing">
       <location filename="../../components/FirmwareUpdate.qml" line="67"/>
       <source>Installing %1...</source>
@@ -122,12 +117,12 @@
       <translation>สิ่งแวดล้อม</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="97"/>
+      <location filename="../../pages/NotificationsPage.qml" line="96"/>
       <source>No current alerts</source>
       <translation>ไม่มีการแจ้งเตือนในปัจจุบัน</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="42"/>
+      <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>General</source>
       <translation>ทั่วไป</translation>
     </message>
@@ -150,11 +145,6 @@
       <location filename="../../components/CommonWords.qml" line="200"/>
       <source>ESS</source>
       <translation>ESS</translation>
-    </message>
-    <message id="settings_tailscale_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="98"/>
-      <source>Ethernet</source>
-      <translation>อีเธอร์เน็ต</translation>
     </message>
     <message id="pagesettingsconnectivity_wifi">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="28"/>
@@ -1617,6 +1607,21 @@ Use unless prohibited by the utility provider.</source>
       <source>Dynamic ESS</source>
       <translation type="unfinished">ไดนามิก ESS</translation>
     </message>
+    <message id="settings_ess_deprecated">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="319"/>
+      <source>Deprecated settings</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_charge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="326"/>
+      <source>Battery charge limit (% of CCL)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_discharge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="337"/>
+      <source>Battery discharge limit (% of DCL)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
       <source>Minimum SOC (unless grid fails)</source>
@@ -1659,12 +1664,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>ชาร์จช้า</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Sustain</source>
       <translation>ยังชีพประคับประคอง</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Recharge</source>
       <translation>เติมเงิน</translation>
     </message>
@@ -2125,7 +2130,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>เฟิร์มแวร์สำรองไม่พร้อมใช้งาน</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="102"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN บัสผ่าน TCP/IP (ดีบัก)</translation>
     </message>
@@ -3663,11 +3668,6 @@ Use unless prohibited by the utility provider.</source>
       <source>US (240 to 30 Ohm)</source>
       <translation>สหรัฐอเมริกา (240 ถึง 30 โอห์ม)</translation>
     </message>
-    <message id="settings_tailscale_custom">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="108"/>
-      <source>Custom</source>
-      <translation>กำหนดเอง</translation>
-    </message>
     <message id="devicelist_tanksetup_custom">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
       <source>Custom</source>
@@ -4161,11 +4161,6 @@ Do you want to continue?</source>
       <source>DC Current</source>
       <translation>กระแสตรง</translation>
     </message>
-    <message id="settings_tailscale_advanced">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="277"/>
-      <source>Advanced</source>
-      <translation>ขั้นสูง</translation>
-    </message>
     <message id="common_words_alarm_setup">
       <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Alarm setup</source>
@@ -4211,11 +4206,6 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
       <source>Interrupting...</source>
       <translation>รบกวน...</translation>
-    </message>
-    <message id="settings_tailscale_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="51"/>
-      <source>Starting...</source>
-      <translation>เริ่ม...</translation>
     </message>
     <message id="vebus_device_starting">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
@@ -6078,7 +6068,7 @@ Do you want to continue?</source>
       <translation type="unfinished">กำหนดการ</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="191"/>
+      <location filename="../../data/System.qml" line="195"/>
       <source>Scheduled</source>
       <translation>กำหนดการ</translation>
     </message>
@@ -6146,107 +6136,107 @@ Do you want to continue?</source>
       <translation>Equalize</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="121"/>
+      <location filename="../../data/System.qml" line="125"/>
       <source>AES mode</source>
       <translation>พลังงานต่ำ</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="128"/>
       <source>Fault condition</source>
       <translation>สภาพข้อบกพร่อง</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Bulk charging</source>
       <translation>การชาร์จจำนวนมาก</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Absorption charging</source>
       <translation>การชาร์จแบบดูดซับ</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Float charging</source>
       <translation>การชาร์จแบบลอยตัว</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Storage mode</source>
       <translation>โหมดการจัดเก็บข้อมูล</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Equalization charging</source>
       <translation>การชาร์จที่เท่าเทียมกัน</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Pass-thru</source>
       <translation>ผ่าน</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Inverting</source>
       <translation>สลับด้าน</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Assisting</source>
       <translation>ช่วยเหลือ</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Power supply mode</source>
       <translation>โหมดพาวเวอร์ซัพพลาย</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation type="unfinished">ยังชีพประคับประคอง</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Wake up</source>
       <translation>ตื่น</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Repeated absorption</source>
       <translation>การดูดซึมซ้ำ</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Auto equalize</source>
       <translation>ปรับสมดุลอัตโนมัติ</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Battery safe</source>
       <translation>แบตเตอรี่ปลอดภัย</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Load detect</source>
       <translation>โหลดตรวจจับ</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Blocked</source>
       <translation>ถูกบล็อค</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Test</source>
       <translation>ทดสอบ</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="198"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">ไดนามิก ESS</translation>
     </message>
@@ -7104,11 +7094,6 @@ Do you want to continue?</source>
       <source>Logout</source>
       <translation>ออกจากระบบ</translation>
     </message>
-    <message id="settings_tailscale_logout_button">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="211"/>
-      <source>Log out now</source>
-      <translation>ออกจากระบบตอนนี้</translation>
-    </message>
     <message id="settings_logout_dialog_title">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
       <source>Log out?</source>
@@ -7415,11 +7400,6 @@ Do you want to continue?</source>
       <source>Mobile Network</source>
       <translation>เครือข่ายมือถือ</translation>
     </message>
-    <message id="settings_services_tailscale_remote_vpn_access">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="68"/>
-      <source>Tailscale (remote VPN access)</source>
-      <translation>Tailscale (การเข้าถึง VPN ระยะไกล)</translation>
-    </message>
     <message id="settings_system_name_boat">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
       <source>Boat</source>
@@ -7526,7 +7506,7 @@ Do you want to continue?</source>
       <translation>อินสแตนซ์อุปกรณ์ VE.Can</translation>
     </message>
     <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="32"/>
       <source>VE.Can Instance# %1</source>
       <translation>VE.Can อินสแตนซ์# %1</translation>
     </message>
@@ -7541,62 +7521,62 @@ Do you want to continue?</source>
       <translation>อาร์กติก</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
       <source>All connected devices</source>
       <translation>อุปกรณ์ที่เชื่อมต่อทั้งหมด</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="51"/>
+      <location filename="../../pages/SettingsPage.qml" line="50"/>
       <source>Connectivity</source>
       <translation>การเชื่อมต่อ</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>อีเทอร์เน็ต, Wi-Fi, บลูทูธ, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="60"/>
+      <location filename="../../pages/SettingsPage.qml" line="59"/>
       <source>VRM</source>
       <translation>วีอาร์เอ็ม</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="62"/>
+      <location filename="../../pages/SettingsPage.qml" line="61"/>
       <source>Remote monitoring portal</source>
       <translation>พอร์ทัลการตรวจสอบระยะไกล</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="69"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>Advanced</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="74"/>
+      <location filename="../../pages/SettingsPage.qml" line="73"/>
       <source>Integrations</source>
       <translation>การบูรณาการ</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="76"/>
+      <location filename="../../pages/SettingsPage.qml" line="75"/>
       <source>Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…</source>
       <translation>รีเลย์, เซ็นเซอร์, ถัง, อินเวอร์เตอร์ PV, Modbus, MQTT…</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="85"/>
+      <location filename="../../pages/SettingsPage.qml" line="84"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>ระบบ AC/DC, ESS, DVCC, แบตเตอรี่...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="92"/>
+      <location filename="../../pages/SettingsPage.qml" line="91"/>
       <source>Debug &amp; Develop</source>
       <translation>แก้ไขและพัฒนา</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="94"/>
+      <location filename="../../pages/SettingsPage.qml" line="93"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>เครื่องมือสร้างโปรไฟล์ สถิติการดีบัก เวอร์ชันแอป...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>System Setup</source>
       <translation>ติดตั้งระบบ</translation>
     </message>
@@ -8372,31 +8352,31 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>ทะลุผ่าน</translation>
     </message>
     <message id="startpage_option_brief_with_panel">
-      <location filename="../../data/StartPageConfiguration.qml" line="30"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="31"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>กางเกงชั้นใน (แผงด้านข้างเปิด)</translation>
     </message>
     <message id="startpage_option_overview">
-      <location filename="../../data/StartPageConfiguration.qml" line="36"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="37"/>
       <source>Overview</source>
       <extracomment>The 'Overview' page</extracomment>
       <translation type="unfinished">ภาพรวม</translation>
     </message>
     <message id="startpage_option_levels_tanks">
-      <location filename="../../data/StartPageConfiguration.qml" line="42"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="43"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
       <translation>ระดับ (รถถัง)</translation>
     </message>
     <message id="startpage_option_levels_environment">
-      <location filename="../../data/StartPageConfiguration.qml" line="48"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="49"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
       <translation>ระดับ (สิ่งแวดล้อม)</translation>
     </message>
     <message id="startpage_option_battery list">
-      <location filename="../../data/StartPageConfiguration.qml" line="53"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="54"/>
       <source>Battery list</source>
       <translation>รายการแบตเตอรี่</translation>
     </message>
@@ -8650,129 +8630,6 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="263"/>
       <source>Modifications</source>
       <translation>การปรับเปลี่ยน</translation>
-    </message>
-    <message id="settings_tailscale_replaced_invalid_characters">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="36"/>
-      <source>'%1' was replaced with '%2' since it contained invalid characters.</source>
-      <translation>'%1' ถูกแทนที่ด้วย '%2' เนื่องจากมีอักขระที่ไม่ถูกต้อง</translation>
-    </message>
-    <message id="settings_tailscale_initializing">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="57"/>
-      <source>Initializing...</source>
-      <translation>กำลังเริ่มต้น...</translation>
-    </message>
-    <message id="settings_tailscale_backend_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="60"/>
-      <source>Backend starting...</source>
-      <translation>กำลังเริ่มต้นแบ็คเอนด์...</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_response">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="72"/>
-      <source>Waiting for a response from Tailscale...</source>
-      <translation>กำลังรอการตอบกลับจาก Tailscale...</translation>
-    </message>
-    <message id="settings_tailscale_unknown_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="82"/>
-      <source>Unknown state: #%1</source>
-      <extracomment>%1 = number code for the connect state</extracomment>
-      <translation>สถานะที่ไม่รู้จัก: #%1</translation>
-    </message>
-    <message id="settings_tailscale_error">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="87"/>
-      <source>ERROR: %1</source>
-      <translation>ข้อผิดพลาด: %1</translation>
-    </message>
-    <message id="settings_tailscale_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="103"/>
-      <source>WiFi</source>
-      <translation>Wi-Fi</translation>
-    </message>
-    <message id="settings_tailscale_disabled">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
-      <source>Disabled</source>
-      <translation type="unfinished">พิการ</translation>
-    </message>
-    <message id="settings_tailscale_disable_to_edit">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="123"/>
-      <source>Disable Tailscale to edit these settings.</source>
-      <translation>ปิดใช้งาน Tailscale เพื่อแก้ไขการตั้งค่าเหล่านี้</translation>
-    </message>
-    <message id="settings_tailscale_enable">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="164"/>
-      <source>Enable Tailscale</source>
-      <translation>เปิดใช้งาน Tailscale</translation>
-    </message>
-    <message id="settings_tailscale_machinename">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="184"/>
-      <source>Machine name</source>
-      <translation>ชื่อเครื่องจักร</translation>
-    </message>
-    <message id="settings_tailscale_ipv4">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="195"/>
-      <source>IPv4</source>
-      <translation>IPv4</translation>
-    </message>
-    <message id="settings_tailscale_ipv6">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="202"/>
-      <source>IPv6</source>
-      <translation>IPv6</translation>
-    </message>
-    <message id="settings_tailscale_logout">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="209"/>
-      <source>Logout from Tailscale account</source>
-      <translation>ออกจากระบบบัญชี Tailscale</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="219"/>
-      <source>Local network access</source>
-      <translation>การเข้าถึงเครือข่ายท้องถิ่น</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="233"/>
-      <source>Access local ethernet network</source>
-      <translation>เข้าถึงเครือข่ายอีเธอร์เน็ตในพื้นที่</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="240"/>
-      <source>Access local WiFi network</source>
-      <translation>เข้าถึงเครือข่าย WiFi ในพื้นที่</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="247"/>
-      <source>Custom network(s)</source>
-      <translation>เครือข่ายที่กำหนดเอง</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks_placeholder">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="250"/>
-      <source>Example: 192.168.1.0/24</source>
-      <translation>ตัวอย่าง: 192.168.1.0/24</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_explanation">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="263"/>
-      <source>Explanation:
-
-This feature, called subnet routes by Tailscale, allows remote access to other devices in the local network(s).
-
-The custom networks field accepts a comma-separated list of CIDR notation subnets.
-
-After adding/enabling a new network, you need to approve it in the Tailscale admin console once.</source>
-      <translation>คำอธิบาย:
-
-ฟีเจอร์นี้เรียกว่าเส้นทางซับเน็ตโดย Tailscale ซึ่งอนุญาตให้เข้าถึงอุปกรณ์อื่นในเครือข่ายท้องถิ่นจากระยะไกล
-
-ฟิลด์เครือข่ายที่กำหนดเองจะยอมรับรายการซับเน็ตรูปแบบ CIDR ที่คั่นด้วยจุลภาค
-
-หลังจากเพิ่ม/เปิดใช้งานเครือข่ายใหม่แล้ว คุณต้องอนุมัติในคอนโซลผู้ดูแลระบบ Tailscale หนึ่งครั้ง</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="290"/>
-      <source>Custom "tailscale up" arguments</source>
-      <translation>อาร์กิวเมนต์ "tailscale up" ที่กำหนดเอง</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_server_url">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="301"/>
-      <source>Custom server URL (Headscale)</source>
-      <translation>URL เซิร์ฟเวอร์ที่กำหนดเอง (Headscale)</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
       <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
@@ -9557,38 +9414,6 @@ The GX device can only control one connected genset and takes the one with the l
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation>%1 | รหัสหน่วย: %2</translation>
     </message>
-    <message id="settings_tailscale_backend_stopped">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="63"/>
-      <source>Backend stopped</source>
-      <translation>ระบบเบื้องหลังหยุดทำงาน</translation>
-    </message>
-    <message id="settings_tailscale_connection_failed">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="66"/>
-      <source>Connection failed</source>
-      <translation>การเชื่อมต่อล้มเหลว</translation>
-    </message>
-    <message id="settings_tailscale_logged_out">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="69"/>
-      <source>This GX device is logged out of Tailscale,
-please wait or check your internet connection</source>
-      <translation>อุปกรณ์ GX นี้ออกจากระบบ Tailscale แล้ว
-โปรดรอสักครู่หรือตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณ</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_login">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="75"/>
-      <source>Connection to your Tailscale account needed, see below</source>
-      <translation>จำเป็นต้องเชื่อมต่อกับบัญชี Tailscale ของคุณ โปรดดูด้านล่าง</translation>
-    </message>
-    <message id="settings_tailscale_check_internet_connection">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="78"/>
-      <source>Please wait or check your internet connection</source>
-      <translation>โปรดรอสักครู่หรือตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณ</translation>
-    </message>
-    <message id="settings_tailscale_connect_to_account">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="177"/>
-      <source>Connect this GX device to your Tailscale account</source>
-      <translation>เชื่อมต่ออุปกรณ์ GX นี้กับบัญชี Tailscale ของคุณ</translation>
-    </message>
     <message id="settings_dvcc_control_mk3_usb_inverter_charger_system">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="233"/>
       <source>Control MK3-USB connected inverter/charger system</source>
@@ -9605,7 +9430,7 @@ please wait or check your internet connection</source>
       <translation>การลงทะเบียนอุปกรณ์ VRM</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="44"/>
+      <location filename="../../pages/SettingsPage.qml" line="43"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>การควบคุมการเข้าถึง, จอแสดงผล, เฟิร์มแวร์, การสนับสนุน</translation>
     </message>
@@ -10316,7 +10141,7 @@ please wait or check your internet connection</source>
       <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="432"/>
+      <location filename="../../pages/OverviewPage.qml" line="456"/>
       <source>Overview</source>
       <translation type="unfinished">ภาพรวม</translation>
     </message>
@@ -10361,7 +10186,7 @@ please wait or check your internet connection</source>
       <translation type="unfinished">คำเตือน</translation>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="66"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="72"/>
       <source>Status: %1</source>
       <translation type="unfinished"/>
     </message>
