@@ -17,6 +17,18 @@ Page {
 	objectName: "PageMicrogrid"
 	onBindPrefixChanged: console.log(objectName, "bindPrefix:", bindPrefix)
 
+	component MicrogridVisibleItemModel : VisibleItemModel {
+		ListText {
+			//% "Active mode"
+			text: qsTrId("page_microgrid_active_mode")
+			secondaryText: VenusOS.microgridModeToText(mode.value)
+		}
+	}
+
+	component VfDirectDriveSettingsListHeader : SettingsListHeader {
+		//% "V-f direct drive settings"
+		text: qsTrId("page_microgrid_v_f_direct_drive_settings")
+	}
 
 	component ToFromListText: ListText {
 		property int unitType: VenusOS.Units_None
@@ -50,12 +62,25 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
+		model: {
+			if (! mode.valid) {
+				return null
 			}
+
+			switch (mode.value) {
+			case VenusOS.MicrogridMode_GridForming:
+				return gridFormingModel
+			case VenusOS.MicrogridMode_GridFollowing:
+				return gridFollowingModel
+			case VenusOS.MicrogridMode_HybridDroop:
+				return hybridDroopModel
+			default:
+				return null
+			}
+		}
+
+		MicrogridVisibleItemModel {
+			id: hybridDroopModel
 
 			SettingsListHeader {
 				//% "Hybrid droop parameters"
@@ -137,177 +162,59 @@ Page {
 				dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
 				dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
 			}
-
-			/*
-			ListText {
-				//% "Allowed reactive power range"
-				text: qsTrId("page_microgrid_allowed_reactive_power_range")
-
-				secondaryText: qsTrId("page_microgrid_from_p1_to_p2").arg(from2.number).arg(from2.unit).arg(to2.number).arg(to2.unit)
-
-				QuantityInfo {
-					id: from2
-					unitType: VenusOS.Units_VoltAmpere
-					value: dataItemFrom2.valid ? dataItemFrom2.value : NaN
-				}
-				QuantityInfo {
-					id: to2
-					unitType: VenusOS.Units_VoltAmpere
-					value: dataItemTo2.valid ? dataItemTo2.value : NaN
-
-				}
-				VeQuickItem {
-					id: dataItemFrom2
-					unit: VenusOS.Units_VoltAmpere
-					uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
-				}
-				VeQuickItem {
-					id: dataItemTo2
-					unit: VenusOS.Units_VoltAmpere
-					uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
-				}
-			}
-			*/
 		}
 
-		//loader.status == loader.Ready && mode.valid ? loader.item : null
+		MicrogridVisibleItemModel {
+			id: gridFollowingModel
+
+			VfDirectDriveSettingsListHeader {}
+
+			ListText {
+				//% "Active power setpoint (P)"
+				text: qsTrId("page_microgrid_active_power_setpoint_p")
+				// TODO: secondaryText:
+			}
+
+			ListText {
+				//% "Reactive power setpoint (Q)"
+				text: qsTrId("page_microgrid_reactive_power_setpoint_q")
+				// TODO: secondaryText:
+			}
+
+			ListText {
+				//% "Allowed fequency range"
+				text: qsTrId("page_microgrid_allowed frequency range")
+				// TODO: secondaryText:
+			}
+
+			ListText {
+				//% "Allowed voltage range"
+				text: qsTrId("page_microgrid_allowed voltage range")
+				// TODO: secondaryText:
+			}
+		}
+
+		MicrogridVisibleItemModel {
+			id: gridFormingModel
+
+			VfDirectDriveSettingsListHeader {}
+
+			ListText {
+				//% "Voltage setpoint (U)"
+				text: qsTrId("page_microgrid_voltage_setpoint")
+				// TODO: secondaryText:
+			}
+
+			ListText {
+				//% "Frequency setpoint (f)"
+				text: qsTrId("page_microgrid_frequency_setpoint")
+				// TODO: secondaryText:
+			}
+		}
 
 		VeQuickItem {
 			id: mode
 			uid: root.bindPrefix + "/Mode"
-			onValueChanged: console.log("*********************************************** ", uid, value)
-			Component.onCompleted: console.log("*********************************************** ", uid, value)
-		}
-
-
-		/*
-		VisibleItemModel {
-			id: droopModel
-
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			SettingsListHeader {
-				//% "Hybrid droop parameters"
-				text: qsTrId("page_microgrid_hybrid_droop_parameters")
-			}
-		}
-
-		VisibleItemModel {
-			id: gridFollowingModel
-
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			SettingsListHeader {
-				//% "V-f direct drive settings"
-				text: qsTrId("page_microgrid_v_f_direct_drive_settings")
-			}
-		}
-
-		VisibleItemModel {
-			id: gridFormingModel
-
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			SettingsListHeader {
-				text: qsTrId("page_microgrid_v_f_direct_drive_settings")
-			}
-		}
-		*/
-	}
-
-	/*
-	component MicrogridVisibleItemModel : VisibleItemModel {
-		ListText {
-			//% "Active mode"
-			text: qsTrId("page_microgrid_active_mode")
-			secondaryText: VenusOS.microgridModeToText(mode.value)
 		}
 	}
-
-	component VfDirectDriveSettingsSettingsListHeader : SettingsListHeader {
-		//% "V-f direct drive settings"
-		text: qsTrId("page_microgrid_v_f_direct_drive_settings")
-	}
-
-	Component {
-		id: droopModel
-
-		VisibleItemModel {
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			SettingsListHeader {
-				//% "Hybrid droop parameters"
-				text: qsTrId("page_microgrid_hybrid_droop_parameters")
-			}
-
-			ListText {
-				//% "Reference power active (%1)"
-				text: qsTrId("page_microgrid_reference_power_active_p0").arg("(P<sub>0</sub>)")
-			}
-		}
-	}
-
-	Component {
-		id: gridFollowingModel
-
-		VisibleItemModel {
-
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			VfDirectDriveSettingsSettingsListHeader {}
-		}
-	}
-
-
-	Component {
-		id: gridFormingModel
-		VisibleItemModel {
-
-			ListText {
-				//% "Active mode"
-				text: qsTrId("page_microgrid_active_mode")
-				secondaryText: VenusOS.microgridModeToText(mode.value)
-			}
-
-			VfDirectDriveSettingsSettingsListHeader {}
-		}
-	}
-		Loader {
-			id: loader
-
-			sourceComponent: droopModel {
-				switch (mode.value)
-				{
-				case VenusOS.MicrogridMode_HybridDroop:
-					return droopModel
-				case VenusOS.MicrogridMode_GridFollowing:
-					return gridFollowingModel
-				case VenusOS.MicroMicrogridMode_GridForming:
-					return gridFormingModel
-				default:
-					return []
-				}
-			}
-		}
-	*/
 }
