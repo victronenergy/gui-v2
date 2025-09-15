@@ -9,13 +9,10 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string bindPrefix // mqtt/vebus/274
+	required property string bindPrefix
 
 	//% "Microgrid"
 	title: qsTrId("microgrid")
-
-	objectName: "PageMicrogrid"
-	onBindPrefixChanged: console.log(objectName, "bindPrefix:", bindPrefix)
 
 	component MicrogridVisibleItemModel : VisibleItemModel {
 		ListText {
@@ -30,7 +27,7 @@ Page {
 		text: qsTrId("page_microgrid_v_f_direct_drive_settings")
 	}
 
-	component ToFromListText: ListText {
+	component FromAToBListText: ListText {
 		property int unitType: VenusOS.Units_None
 		property alias dataItemFrom: dataItemFrom
 		property alias dataItemTo: dataItemTo
@@ -147,7 +144,7 @@ Page {
 				text: qsTrId("page_microgrid_minimum_and_maximum_parameters")
 			}
 
-			ToFromListText {
+			FromAToBListText {
 				//% "Allowed active power range"
 				text: qsTrId("page_microgrid_allowed_active_power_range")
 				unitType: VenusOS.Units_Watt
@@ -155,7 +152,7 @@ Page {
 				dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
 			}
 
-			ToFromListText {
+			FromAToBListText {
 				//% "Allowed reactive power range"
 				text: qsTrId("page_microgrid_allowed_reactive_power_range")
 				unitType: VenusOS.Units_VoltAmpereReactive
