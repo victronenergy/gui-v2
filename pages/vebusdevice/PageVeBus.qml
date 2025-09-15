@@ -191,7 +191,13 @@ DevicePage {
 		ListNavigation {
 			//% "Microgrid parameters"
 			text: qsTrId("vebus_device_page_microgrid_parameters")
-			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.bindPrefix/*,"title": text */})
+			visible: mode.valid
+			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.bindPrefix })
+
+			VeQuickItem {
+				id: mode
+				uid: root.bindPrefix + "/Mode"
+			}
 		}
 
 		ListNavigation {
