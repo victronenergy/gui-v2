@@ -65,11 +65,6 @@
       <source>Speed</source>
       <translation>Snelheid</translation>
     </message>
-    <message id="settings_tailscale_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="170"/>
-      <source>State</source>
-      <translation>Status</translation>
-    </message>
     <message id="settings_firmware_installing">
       <location filename="../../components/FirmwareUpdate.qml" line="67"/>
       <source>Installing %1...</source>
@@ -122,12 +117,12 @@
       <translation>Omgeving</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="97"/>
+      <location filename="../../pages/NotificationsPage.qml" line="96"/>
       <source>No current alerts</source>
       <translation>Geen actuele waarschuwingen</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="42"/>
+      <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>General</source>
       <translation>Algemeen</translation>
     </message>
@@ -150,11 +145,6 @@
       <location filename="../../components/CommonWords.qml" line="200"/>
       <source>ESS</source>
       <translation>ESS</translation>
-    </message>
-    <message id="settings_tailscale_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="98"/>
-      <source>Ethernet</source>
-      <translation>Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_wifi">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="28"/>
@@ -1617,6 +1607,21 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
+    <message id="settings_ess_deprecated">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="319"/>
+      <source>Deprecated settings</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_charge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="326"/>
+      <source>Battery charge limit (% of CCL)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_discharge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="337"/>
+      <source>Battery discharge limit (% of DCL)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
       <source>Minimum SOC (unless grid fails)</source>
@@ -1659,12 +1664,12 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Langzaam laden</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Sustain</source>
       <translation>Onderhouden</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Recharge</source>
       <translation>Opnieuw laden</translation>
     </message>
@@ -2125,7 +2130,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Backup firmware niet beschikbaar</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="102"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus over TCP/IP (Debug)</translation>
     </message>
@@ -3664,11 +3669,6 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <source>US (240 to 30 Ohm)</source>
       <translation>VS (240 tot 30 Ohm)</translation>
     </message>
-    <message id="settings_tailscale_custom">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="108"/>
-      <source>Custom</source>
-      <translation>Aangepast</translation>
-    </message>
     <message id="devicelist_tanksetup_custom">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
       <source>Custom</source>
@@ -4159,11 +4159,6 @@ Do you want to continue?</source>
       <source>DC Current</source>
       <translation>DC stroom</translation>
     </message>
-    <message id="settings_tailscale_advanced">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="277"/>
-      <source>Advanced</source>
-      <translation>Geavanceerd</translation>
-    </message>
     <message id="common_words_alarm_setup">
       <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Alarm setup</source>
@@ -4209,11 +4204,6 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
       <source>Interrupting...</source>
       <translation>Onderbreken...</translation>
-    </message>
-    <message id="settings_tailscale_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="51"/>
-      <source>Starting...</source>
-      <translation>Starten...</translation>
     </message>
     <message id="vebus_device_starting">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
@@ -6076,7 +6066,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Gepland</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="191"/>
+      <location filename="../../data/System.qml" line="195"/>
       <source>Scheduled</source>
       <translation>Gepland</translation>
     </message>
@@ -6144,107 +6134,107 @@ Do you want to continue?</source>
       <translation>Egaliseren</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="121"/>
+      <location filename="../../data/System.qml" line="125"/>
       <source>AES mode</source>
       <translation>AES modus</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="128"/>
       <source>Fault condition</source>
       <translation>Fouttoestand</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Bulk charging</source>
       <translation>Bulk laden</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Absorption charging</source>
       <translation>Absorptie laden</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Float charging</source>
       <translation>Druppel laden</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Storage mode</source>
       <translation>Opslag modus</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Equalization charging</source>
       <translation>Egalisatie laden</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Pass-thru</source>
       <translation>Doorvoer</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Inverting</source>
       <translation>Omvormen</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Assisting</source>
       <translation>Assisteren</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Power supply mode</source>
       <translation>Voeding modus</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation type="unfinished">Onderhouden</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Wake up</source>
       <translation>Wakker worden</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Repeated absorption</source>
       <translation>Herhaalde absorptie</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Auto equalize</source>
       <translation>Automatisch egaliseren</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Battery safe</source>
       <translation>BatterySafe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Load detect</source>
       <translation>Belasting detectie</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Blocked</source>
       <translation>Geblokkeerd</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>External control</source>
       <translation type="unfinished">Externe besturing</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="198"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamic ESS</translation>
     </message>
@@ -7102,11 +7092,6 @@ Do you want to continue?</source>
       <source>Logout</source>
       <translation>Uitloggen</translation>
     </message>
-    <message id="settings_tailscale_logout_button">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="211"/>
-      <source>Log out now</source>
-      <translation>Nu uitloggen</translation>
-    </message>
     <message id="settings_logout_dialog_title">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
       <source>Log out?</source>
@@ -7413,11 +7398,6 @@ Do you want to continue?</source>
       <source>Mobile Network</source>
       <translation>Mobiel netwerk</translation>
     </message>
-    <message id="settings_services_tailscale_remote_vpn_access">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="68"/>
-      <source>Tailscale (remote VPN access)</source>
-      <translation>Tailscale (VPN toegang op afstand)</translation>
-    </message>
     <message id="settings_system_name_boat">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
       <source>Boat</source>
@@ -7524,7 +7504,7 @@ Do you want to continue?</source>
       <translation>VE.Can Device Instance</translation>
     </message>
     <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="32"/>
       <source>VE.Can Instance# %1</source>
       <translation>VE.Can Instance# %1</translation>
     </message>
@@ -7539,62 +7519,62 @@ Do you want to continue?</source>
       <translation>Artic</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
       <source>All connected devices</source>
       <translation>Alle aangesloten apparaten</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="51"/>
+      <location filename="../../pages/SettingsPage.qml" line="50"/>
       <source>Connectivity</source>
       <translation>Connectiviteit</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="60"/>
+      <location filename="../../pages/SettingsPage.qml" line="59"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="62"/>
+      <location filename="../../pages/SettingsPage.qml" line="61"/>
       <source>Remote monitoring portal</source>
       <translation>Portaal voor bewaking op afstand</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="69"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>Advanced</source>
       <translation type="unfinished">Geavanceerd</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="74"/>
+      <location filename="../../pages/SettingsPage.qml" line="73"/>
       <source>Integrations</source>
       <translation>Integraties</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="76"/>
+      <location filename="../../pages/SettingsPage.qml" line="75"/>
       <source>Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…</source>
       <translation>Relais, sensoren, tanks, PV-omvormers, Modbus, MQTT...</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="85"/>
+      <location filename="../../pages/SettingsPage.qml" line="84"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>AC/DC systeem, ESS, DVCC, Accu...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="92"/>
+      <location filename="../../pages/SettingsPage.qml" line="91"/>
       <source>Debug &amp; Develop</source>
       <translation>Debuggen en ontwikkelen</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="94"/>
+      <location filename="../../pages/SettingsPage.qml" line="93"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Profileringstools, debugstatistieken, app-versie...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>System Setup</source>
       <translation>Systeemconfiguratie</translation>
     </message>
@@ -8370,31 +8350,31 @@ Als het aggregaat momenteel draait vanwege een autostartconditie, zal het uitsch
       <translation>Doorvoer</translation>
     </message>
     <message id="startpage_option_brief_with_panel">
-      <location filename="../../data/StartPageConfiguration.qml" line="30"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="31"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>Kort (zijpaneel open)</translation>
     </message>
     <message id="startpage_option_overview">
-      <location filename="../../data/StartPageConfiguration.qml" line="36"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="37"/>
       <source>Overview</source>
       <extracomment>The 'Overview' page</extracomment>
       <translation type="unfinished">Overzicht</translation>
     </message>
     <message id="startpage_option_levels_tanks">
-      <location filename="../../data/StartPageConfiguration.qml" line="42"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="43"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
       <translation>Niveaus (Tanks)</translation>
     </message>
     <message id="startpage_option_levels_environment">
-      <location filename="../../data/StartPageConfiguration.qml" line="48"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="49"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
       <translation>Niveaus (Omgeving)</translation>
     </message>
     <message id="startpage_option_battery list">
-      <location filename="../../data/StartPageConfiguration.qml" line="53"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="54"/>
       <source>Battery list</source>
       <translation>Accu lijst</translation>
     </message>
@@ -8649,129 +8629,6 @@ Let op: dit menu toont alleen Carlo Gavazzi-meters die zijn aangesloten via RS48
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="263"/>
       <source>Modifications</source>
       <translation>Aanpassingen</translation>
-    </message>
-    <message id="settings_tailscale_replaced_invalid_characters">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="36"/>
-      <source>'%1' was replaced with '%2' since it contained invalid characters.</source>
-      <translation>'%1' is vervangen door '%2' omdat het ongeldige tekens bevatte.</translation>
-    </message>
-    <message id="settings_tailscale_initializing">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="57"/>
-      <source>Initializing...</source>
-      <translation>Initialiseren...</translation>
-    </message>
-    <message id="settings_tailscale_backend_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="60"/>
-      <source>Backend starting...</source>
-      <translation>Backend start op...</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_response">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="72"/>
-      <source>Waiting for a response from Tailscale...</source>
-      <translation>Wachten op een reactie van Tailscale...</translation>
-    </message>
-    <message id="settings_tailscale_unknown_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="82"/>
-      <source>Unknown state: #%1</source>
-      <extracomment>%1 = number code for the connect state</extracomment>
-      <translation>Onbekende status: #%1</translation>
-    </message>
-    <message id="settings_tailscale_error">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="87"/>
-      <source>ERROR: %1</source>
-      <translation>Fout: %1</translation>
-    </message>
-    <message id="settings_tailscale_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="103"/>
-      <source>WiFi</source>
-      <translation>WiFi</translation>
-    </message>
-    <message id="settings_tailscale_disabled">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Uitgeschakeld</translation>
-    </message>
-    <message id="settings_tailscale_disable_to_edit">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="123"/>
-      <source>Disable Tailscale to edit these settings.</source>
-      <translation>Schakel Tailscale uit om deze instellingen te bewerken.</translation>
-    </message>
-    <message id="settings_tailscale_enable">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="164"/>
-      <source>Enable Tailscale</source>
-      <translation>Tailscale inschakelen</translation>
-    </message>
-    <message id="settings_tailscale_machinename">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="184"/>
-      <source>Machine name</source>
-      <translation>Naam machine</translation>
-    </message>
-    <message id="settings_tailscale_ipv4">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="195"/>
-      <source>IPv4</source>
-      <translation>IPv4</translation>
-    </message>
-    <message id="settings_tailscale_ipv6">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="202"/>
-      <source>IPv6</source>
-      <translation>IPv6</translation>
-    </message>
-    <message id="settings_tailscale_logout">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="209"/>
-      <source>Logout from Tailscale account</source>
-      <translation>Afmelden Tailscale gebruiker</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="219"/>
-      <source>Local network access</source>
-      <translation>Toegang tot lokaal netwerk</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="233"/>
-      <source>Access local ethernet network</source>
-      <translation>Toegang tot lokaal ethernetnetwerk</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="240"/>
-      <source>Access local WiFi network</source>
-      <translation>Toegang tot lokaal WiFi netwerk</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="247"/>
-      <source>Custom network(s)</source>
-      <translation>Aangepast(e) netwerk(en)</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks_placeholder">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="250"/>
-      <source>Example: 192.168.1.0/24</source>
-      <translation>Voorbeeld: 192.168.1.0/24</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_explanation">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="263"/>
-      <source>Explanation:
-
-This feature, called subnet routes by Tailscale, allows remote access to other devices in the local network(s).
-
-The custom networks field accepts a comma-separated list of CIDR notation subnets.
-
-After adding/enabling a new network, you need to approve it in the Tailscale admin console once.</source>
-      <translation>Uitleg:
-
-Deze functie, die door Tailscale subnet routes wordt genoemd, maakt het mogelijk om op afstand toegang te krijgen tot andere apparaten in het (de) lokale netwerk(en).
-
-Het veld Aangepaste netwerken accepteert een door komma's gescheiden lijst met subnetten in de CIDR-notatie.
-
-Nadat er een nieuw netwerk is toegevoegd/ingeschakeld, moet het eenmalig goedgekeurd worden in de Tailscale beheerconsole.</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="290"/>
-      <source>Custom "tailscale up" arguments</source>
-      <translation>Aangepaste "tailscale up" argumenten</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_server_url">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="301"/>
-      <source>Custom server URL (Headscale)</source>
-      <translation>Aangepaste server-URL (Headscale)</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
       <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
@@ -9556,38 +9413,6 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation>%1 | Unit ID: %2</translation>
     </message>
-    <message id="settings_tailscale_backend_stopped">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="63"/>
-      <source>Backend stopped</source>
-      <translation>Backend gestopt</translation>
-    </message>
-    <message id="settings_tailscale_connection_failed">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="66"/>
-      <source>Connection failed</source>
-      <translation>Verbinding mislukt</translation>
-    </message>
-    <message id="settings_tailscale_logged_out">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="69"/>
-      <source>This GX device is logged out of Tailscale,
-please wait or check your internet connection</source>
-      <translation>Dit GX-apparaat is afgemeld bij Tailscale,
-wacht even of controleer de internetverbinding</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_login">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="75"/>
-      <source>Connection to your Tailscale account needed, see below</source>
-      <translation>Verbinding met het Tailscale-account vereist, zie hieronder</translation>
-    </message>
-    <message id="settings_tailscale_check_internet_connection">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="78"/>
-      <source>Please wait or check your internet connection</source>
-      <translation>Wacht even of controleer de internetverbinding</translation>
-    </message>
-    <message id="settings_tailscale_connect_to_account">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="177"/>
-      <source>Connect this GX device to your Tailscale account</source>
-      <translation>Verbind dit GX-apparaat met het Tailscale-account</translation>
-    </message>
     <message id="settings_dvcc_control_mk3_usb_inverter_charger_system">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="233"/>
       <source>Control MK3-USB connected inverter/charger system</source>
@@ -9604,7 +9429,7 @@ wacht even of controleer de internetverbinding</translation>
       <translation>VRM Apparaat Registratie</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="44"/>
+      <location filename="../../pages/SettingsPage.qml" line="43"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Toegangscontrole, Display, Firmware, Ondersteuning</translation>
     </message>
@@ -10317,7 +10142,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation type="unfinished">DC Belastingen</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="432"/>
+      <location filename="../../pages/OverviewPage.qml" line="456"/>
       <source>Overview</source>
       <translation type="unfinished">Overzicht</translation>
     </message>
@@ -10362,7 +10187,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation type="unfinished">Waarschuwing</translation>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="66"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="72"/>
       <source>Status: %1</source>
       <translation type="unfinished"/>
     </message>

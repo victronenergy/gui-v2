@@ -65,11 +65,6 @@
       <source>Speed</source>
       <translation>Rychlost</translation>
     </message>
-    <message id="settings_tailscale_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="170"/>
-      <source>State</source>
-      <translation>Stav</translation>
-    </message>
     <message id="settings_firmware_installing">
       <location filename="../../components/FirmwareUpdate.qml" line="67"/>
       <source>Installing %1...</source>
@@ -122,12 +117,12 @@
       <translation>Prostředí</translation>
     </message>
     <message id="notifications_no_current_alerts">
-      <location filename="../../pages/NotificationsPage.qml" line="97"/>
+      <location filename="../../pages/NotificationsPage.qml" line="96"/>
       <source>No current alerts</source>
       <translation>Žádná aktuální upozornění</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="42"/>
+      <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>General</source>
       <translation>Všeobecný</translation>
     </message>
@@ -150,11 +145,6 @@
       <location filename="../../components/CommonWords.qml" line="200"/>
       <source>ESS</source>
       <translation>ESS</translation>
-    </message>
-    <message id="settings_tailscale_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="98"/>
-      <source>Ethernet</source>
-      <translation>Ethernet</translation>
     </message>
     <message id="pagesettingsconnectivity_wifi">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="28"/>
@@ -1617,6 +1607,21 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamické ESS</translation>
     </message>
+    <message id="settings_ess_deprecated">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="319"/>
+      <source>Deprecated settings</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_charge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="326"/>
+      <source>Battery charge limit (% of CCL)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_ess_max_discharge_percentage">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="337"/>
+      <source>Battery discharge limit (% of DCL)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
       <source>Minimum SOC (unless grid fails)</source>
@@ -1659,12 +1664,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Pomalé nabíjení</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="189"/>
       <source>Sustain</source>
       <translation>Udržování</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Recharge</source>
       <translation>Nabíjení</translation>
     </message>
@@ -2125,7 +2130,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Záložní firmware není k dispozici</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="102"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN-bus přes TCP/IP (ladění)</translation>
     </message>
@@ -3665,11 +3670,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>US (240 to 30 Ohm)</source>
       <translation>US (240 až 30 Ohmů)</translation>
     </message>
-    <message id="settings_tailscale_custom">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="108"/>
-      <source>Custom</source>
-      <translation>Vlastní</translation>
-    </message>
     <message id="devicelist_tanksetup_custom">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="54"/>
       <source>Custom</source>
@@ -4163,11 +4163,6 @@ Chcete pokračovat?</translation>
       <source>DC Current</source>
       <translation>DC proud</translation>
     </message>
-    <message id="settings_tailscale_advanced">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="277"/>
-      <source>Advanced</source>
-      <translation>Pokročilé</translation>
-    </message>
     <message id="common_words_alarm_setup">
       <location filename="../../components/CommonWords.qml" line="65"/>
       <source>Alarm setup</source>
@@ -4213,11 +4208,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
       <source>Interrupting...</source>
       <translation>Probíhá přerušení...</translation>
-    </message>
-    <message id="settings_tailscale_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="51"/>
-      <source>Starting...</source>
-      <translation>Spouštím...</translation>
     </message>
     <message id="vebus_device_starting">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
@@ -6080,7 +6070,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Naplánováno</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="191"/>
+      <location filename="../../data/System.qml" line="195"/>
       <source>Scheduled</source>
       <translation>Naplánováno</translation>
     </message>
@@ -6148,107 +6138,107 @@ Chcete pokračovat?</translation>
       <translation>Vyrovnávání</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="121"/>
+      <location filename="../../data/System.qml" line="125"/>
       <source>AES mode</source>
       <translation>Nízký výkon</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="124"/>
+      <location filename="../../data/System.qml" line="128"/>
       <source>Fault condition</source>
       <translation>Poruchový stav</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="127"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Bulk charging</source>
       <translation>Rychlé nabíjení</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Absorption charging</source>
       <translation>Absorpční nabíjení</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Float charging</source>
       <translation>Udržovací nabíjení</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Storage mode</source>
       <translation>Režim skladování</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Equalization charging</source>
       <translation>Vyrovnávací nabíjení</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Pass-thru</source>
       <translation>Pass-thru</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Inverting</source>
       <translation>Měnič</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Assisting</source>
       <translation>Asistence</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Power supply mode</source>
       <translation>Režim dodávky energie</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Sustain</source>
       <translation type="unfinished">Udržování</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="162"/>
       <source>Wake up</source>
       <translation>Probuďte se</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="161"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Repeated absorption</source>
       <translation>Opakovaná absorpce</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="164"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Auto equalize</source>
       <translation>Automatické vyrovnávání</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Battery safe</source>
       <translation>Systém Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Load detect</source>
       <translation>Detekce zatížení</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Blocked</source>
       <translation>Zablokovaný</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>External control</source>
       <translation type="unfinished">Externí ovládání</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="198"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamické ESS</translation>
     </message>
@@ -7106,11 +7096,6 @@ Chcete pokračovat?</translation>
       <source>Logout</source>
       <translation>Odhlásit se</translation>
     </message>
-    <message id="settings_tailscale_logout_button">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="211"/>
-      <source>Log out now</source>
-      <translation>Odhlásit se</translation>
-    </message>
     <message id="settings_logout_dialog_title">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
       <source>Log out?</source>
@@ -7417,11 +7402,6 @@ Chcete pokračovat?</translation>
       <source>Mobile Network</source>
       <translation>Mobilní síť</translation>
     </message>
-    <message id="settings_services_tailscale_remote_vpn_access">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="68"/>
-      <source>Tailscale (remote VPN access)</source>
-      <translation>Tailscale (vzdálený přístup VPN)</translation>
-    </message>
     <message id="settings_system_name_boat">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
       <source>Boat</source>
@@ -7528,7 +7508,7 @@ Chcete pokračovat?</translation>
       <translation>Instance zařízení VE.Can</translation>
     </message>
     <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="32"/>
       <source>VE.Can Instance# %1</source>
       <translation>Instance VE.Can# %1</translation>
     </message>
@@ -7543,62 +7523,62 @@ Chcete pokračovat?</translation>
       <translation>Arktida</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="33"/>
+      <location filename="../../pages/SettingsPage.qml" line="32"/>
       <source>All connected devices</source>
       <translation>Všechna připojená zařízení</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="51"/>
+      <location filename="../../pages/SettingsPage.qml" line="50"/>
       <source>Connectivity</source>
       <translation>Připojení</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="53"/>
+      <location filename="../../pages/SettingsPage.qml" line="52"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="60"/>
+      <location filename="../../pages/SettingsPage.qml" line="59"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="62"/>
+      <location filename="../../pages/SettingsPage.qml" line="61"/>
       <source>Remote monitoring portal</source>
       <translation>Portál pro vzdálené monitorování</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="69"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>Advanced</source>
       <translation type="unfinished">Pokročilé</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="74"/>
+      <location filename="../../pages/SettingsPage.qml" line="73"/>
       <source>Integrations</source>
       <translation>Integrace</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="76"/>
+      <location filename="../../pages/SettingsPage.qml" line="75"/>
       <source>Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…</source>
       <translation>Relé, senzory, nádrže, fotovoltaické měniče, Modbus, MQTT...</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="85"/>
+      <location filename="../../pages/SettingsPage.qml" line="84"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>Systém AC/DC, ESS, DVCC, baterie...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="92"/>
+      <location filename="../../pages/SettingsPage.qml" line="91"/>
       <source>Debug &amp; Develop</source>
       <translation>Ladění a vývoj</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="94"/>
+      <location filename="../../pages/SettingsPage.qml" line="93"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Nástroje pro profilování, statistiky ladění, verze aplikace...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="83"/>
+      <location filename="../../pages/SettingsPage.qml" line="82"/>
       <source>System Setup</source>
       <translation>Nastavení systému</translation>
     </message>
@@ -8374,31 +8354,31 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <translation>Průchozí</translation>
     </message>
     <message id="startpage_option_brief_with_panel">
-      <location filename="../../data/StartPageConfiguration.qml" line="30"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="31"/>
       <source>Brief (side panel open)</source>
       <extracomment>The 'Brief' page, with the side panel opened</extracomment>
       <translation>Stručný popis (otevřený boční panel)</translation>
     </message>
     <message id="startpage_option_overview">
-      <location filename="../../data/StartPageConfiguration.qml" line="36"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="37"/>
       <source>Overview</source>
       <extracomment>The 'Overview' page</extracomment>
       <translation type="unfinished">Přehled</translation>
     </message>
     <message id="startpage_option_levels_tanks">
-      <location filename="../../data/StartPageConfiguration.qml" line="42"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="43"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
       <translation>Úrovně (nádrže)</translation>
     </message>
     <message id="startpage_option_levels_environment">
-      <location filename="../../data/StartPageConfiguration.qml" line="48"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="49"/>
       <source>Levels (Environment)</source>
       <extracomment>The 'Levels' page, with the "Environment" section opened</extracomment>
       <translation>Úrovně (prostředí)</translation>
     </message>
     <message id="startpage_option_battery list">
-      <location filename="../../data/StartPageConfiguration.qml" line="53"/>
+      <location filename="../../data/StartPageConfiguration.qml" line="54"/>
       <source>Battery list</source>
       <translation>Seznam baterií</translation>
     </message>
@@ -8654,129 +8634,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="263"/>
       <source>Modifications</source>
       <translation>Úpravy</translation>
-    </message>
-    <message id="settings_tailscale_replaced_invalid_characters">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="36"/>
-      <source>'%1' was replaced with '%2' since it contained invalid characters.</source>
-      <translation>'%1' bylo nahrazeno '%2', protože obsahovalo neplatné znaky.</translation>
-    </message>
-    <message id="settings_tailscale_initializing">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="57"/>
-      <source>Initializing...</source>
-      <translation>Inicializace...</translation>
-    </message>
-    <message id="settings_tailscale_backend_starting">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="60"/>
-      <source>Backend starting...</source>
-      <translation>Backend začíná...</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_response">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="72"/>
-      <source>Waiting for a response from Tailscale...</source>
-      <translation>Čekáme na odpověď od společnosti Tailscale...</translation>
-    </message>
-    <message id="settings_tailscale_unknown_state">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="82"/>
-      <source>Unknown state: #%1</source>
-      <extracomment>%1 = number code for the connect state</extracomment>
-      <translation>Neznámý stav: #%1</translation>
-    </message>
-    <message id="settings_tailscale_error">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="87"/>
-      <source>ERROR: %1</source>
-      <translation>Chyba: %1</translation>
-    </message>
-    <message id="settings_tailscale_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="103"/>
-      <source>WiFi</source>
-      <translation>Wi-Fi</translation>
-    </message>
-    <message id="settings_tailscale_disabled">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="113"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
-    </message>
-    <message id="settings_tailscale_disable_to_edit">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="123"/>
-      <source>Disable Tailscale to edit these settings.</source>
-      <translation>Chcete-li upravit tato nastavení, zakažte Tailscale.</translation>
-    </message>
-    <message id="settings_tailscale_enable">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="164"/>
-      <source>Enable Tailscale</source>
-      <translation>Povolení měřítka ocasu</translation>
-    </message>
-    <message id="settings_tailscale_machinename">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="184"/>
-      <source>Machine name</source>
-      <translation>Název stroje</translation>
-    </message>
-    <message id="settings_tailscale_ipv4">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="195"/>
-      <source>IPv4</source>
-      <translation>IPv4</translation>
-    </message>
-    <message id="settings_tailscale_ipv6">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="202"/>
-      <source>IPv6</source>
-      <translation>IPv6</translation>
-    </message>
-    <message id="settings_tailscale_logout">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="209"/>
-      <source>Logout from Tailscale account</source>
-      <translation>Odhlášení z účtu Tailscale</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="219"/>
-      <source>Local network access</source>
-      <translation>Přístup k místní síti</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_ethernet">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="233"/>
-      <source>Access local ethernet network</source>
-      <translation>Přístup k místní síti ethernet</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_wifi">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="240"/>
-      <source>Access local WiFi network</source>
-      <translation>Přístup k místní síti WiFi</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="247"/>
-      <source>Custom network(s)</source>
-      <translation>Vlastní síť(e)</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_custom_networks_placeholder">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="250"/>
-      <source>Example: 192.168.1.0/24</source>
-      <translation>Příklad: 192.168.1.0/24</translation>
-    </message>
-    <message id="settings_tailscale_local_network_access_explanation">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="263"/>
-      <source>Explanation:
-
-This feature, called subnet routes by Tailscale, allows remote access to other devices in the local network(s).
-
-The custom networks field accepts a comma-separated list of CIDR notation subnets.
-
-After adding/enabling a new network, you need to approve it in the Tailscale admin console once.</source>
-      <translation>Vysvětlení:
-
-Tato funkce, kterou Tailscale nazývá podsíťové trasy, umožňuje vzdálený přístup k jiným zařízením v místní síti (sítích).
-
-Pole Vlastní sítě přijímá seznam podsítí v notaci CIDR oddělený čárkou.
-
-Po přidání/povolení nové sítě je třeba ji jednou schválit v konzole správce Tailscale.</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_tailscale_up_arguments">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="290"/>
-      <source>Custom "tailscale up" arguments</source>
-      <translation>Vlastní argumenty "tailscale up"</translation>
-    </message>
-    <message id="settings_tailscale_advanced_custom_server_url">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="301"/>
-      <source>Custom server URL (Headscale)</source>
-      <translation>Vlastní adresa URL serveru (Headscale)</translation>
     </message>
     <message id="settings_support_links_product_support_manuals">
       <location filename="../../pages/settings/PageSettingsDocumentation.qml" line="21"/>
@@ -9561,38 +9418,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation>%1 | ID jednotky: %2</translation>
     </message>
-    <message id="settings_tailscale_backend_stopped">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="63"/>
-      <source>Backend stopped</source>
-      <translation>Backend zastaven</translation>
-    </message>
-    <message id="settings_tailscale_connection_failed">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="66"/>
-      <source>Connection failed</source>
-      <translation>Připojení selhalo</translation>
-    </message>
-    <message id="settings_tailscale_logged_out">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="69"/>
-      <source>This GX device is logged out of Tailscale,
-please wait or check your internet connection</source>
-      <translation>Toto zařízení GX je odhlášeno z Tailscale,
-čekejte prosím nebo zkontrolujte své internetové připojení</translation>
-    </message>
-    <message id="settings_tailscale_wait_for_login">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="75"/>
-      <source>Connection to your Tailscale account needed, see below</source>
-      <translation>Je vyžadováno připojení k vašemu účtu Tailscale, viz níže</translation>
-    </message>
-    <message id="settings_tailscale_check_internet_connection">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="78"/>
-      <source>Please wait or check your internet connection</source>
-      <translation>Čekejte prosím nebo zkontrolujte své internetové připojení</translation>
-    </message>
-    <message id="settings_tailscale_connect_to_account">
-      <location filename="../../pages/settings/PageSettingsTailscale.qml" line="177"/>
-      <source>Connect this GX device to your Tailscale account</source>
-      <translation>Připojte toto zařízení GX ke svému účtu Tailscale</translation>
-    </message>
     <message id="settings_dvcc_control_mk3_usb_inverter_charger_system">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="233"/>
       <source>Control MK3-USB connected inverter/charger system</source>
@@ -9609,7 +9434,7 @@ please wait or check your internet connection</source>
       <translation>Registrace zařízení VRM</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="44"/>
+      <location filename="../../pages/SettingsPage.qml" line="43"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Řízení přístupu, Displej, Firmware, Podpora</translation>
     </message>
@@ -10320,7 +10145,7 @@ please wait or check your internet connection</source>
       <translation type="unfinished">DC zátěže</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="432"/>
+      <location filename="../../pages/OverviewPage.qml" line="456"/>
       <source>Overview</source>
       <translation type="unfinished">Přehled</translation>
     </message>
@@ -10365,7 +10190,7 @@ please wait or check your internet connection</source>
       <translation type="unfinished">Upozornění</translation>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="66"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="72"/>
       <source>Status: %1</source>
       <translation type="unfinished"/>
     </message>
