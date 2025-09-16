@@ -426,7 +426,7 @@ BaseListItem {
 					// limit maximum number of options
 					let totalOptions = Math.min(7, multiStepMax.value)
 					for (let i = 0; i < totalOptions; i++) {
-						items.push({ 'text': i })
+						items.push({ 'text': i + 1 })   // options are 1-based
 					}
 					multiStep.model = items
 				}
@@ -434,32 +434,33 @@ BaseListItem {
 
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_control_height
-			currentIndex: multiStepSelection.valid ? multiStepSelection.value : -1
 			checked: multiStepState.backendValue
-			onIndexClicked: (index) => { multiStepSelection.setValue(index) }
 			onOnClicked: multiStepState.writeValue(1)
 			onOffClicked: multiStepState.writeValue(0)
 
+			// Get/set the current index. Note Dimming and DimmingMax are 1-based. E.g. if Dimming=1
+			// and DimmingMax=5, the options are 1-5 inclusive, and the first option is selected.
+			currentIndex: output.hasDimming ? output.dimming - 1 : -1
+			onIndexClicked: (index) => { output.setDimming(index + 1) }
+
+			Connections {
+				target: output
+				function onDimmingChanged() {
+					multiStep.currentIndex = output.hasDimming ? output.dimming - 1 : -1
+				}
+			}
+
+			// The /DimmingMax holds the maximum value.
 			VeQuickItem {
 				id: multiStepMax
 				uid: root.outputUid + "/Settings/DimmingMax"
-				onValueChanged: {
-					multiStep.currentIndex = Math.floor(multiStepSelection.value)
-					multiStep.generateModel()
-				}
+				onValueChanged: multiStep.generateModel()
 			}
 
 			SettingSync {
 				id: multiStepState
 				backendValue: output.state
 				onUpdateToBackend: (value) => { output.setState(value) }
-			}
-
-			// The /DimmingValue holds the selected index.
-			VeQuickItem {
-				id: multiStepSelection
-				uid: root.outputUid + "/Dimming"
-				onValueChanged: multiStep.currentIndex = value
 			}
 		}
 	}
