@@ -218,10 +218,12 @@ Page {
 
 			SettingsListHeader {
 				id: osLargeFeatures
-
-				//% "Venus OS Large Features"
-				text: qsTrId("pagesettingsintegrations_venus_os_large_features")
-				visible: signalk.preferredVisible || nodeRed.preferredVisible
+				readonly property bool largeEnabled: signalk.preferredVisible || nodeRed.preferredVisible
+				text: largeEnabled
+					//% "Venus OS Large Features"
+					? qsTrId("pagesettingsintegrations_venus_os_large_features")
+					//% "Enable the Venus OS Large firmware to use Node-RED or Signal-K"
+					: qsTrId("pagesettingsintegrations_venus_os_enable_large_features")
 			}
 
 			ListNavigation {
@@ -271,14 +273,14 @@ Page {
 				//% "Venus OS Large Documentation"
 				text: qsTrId("settings_venusos_large_documentation")
 				url: "https://ve3.nl/vol"
-				preferredVisible: osLargeFeatures.visible
+				preferredVisible: osLargeFeatures.largeEnabled
 			}
 
 			ListLink {
 				//% "Victron Community"
 				text: qsTrId("settings_large_victron_community")
 				url: "https://community.victronenergy.com"
-				preferredVisible: osLargeFeatures.visible
+				preferredVisible: osLargeFeatures.largeEnabled
 			}
 		}
 	}
