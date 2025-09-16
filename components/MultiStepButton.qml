@@ -22,6 +22,7 @@ BaseListView {
 
 	orientation: ListView.Horizontal
 	focus: false
+	interactive: false
 
 	delegate: BaseListItem {
 
