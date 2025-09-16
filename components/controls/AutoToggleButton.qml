@@ -10,6 +10,7 @@ BaseAutoToggleSwitch {
 	id: root
 
 	property int buttonWidth: (root.width - (Theme.geometry_button_border_width * (root.buttonCount + 2)) - Theme.geometry_autotoggle_button_spacing) / root.buttonCount
+	property var _notif
 
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
@@ -25,8 +26,12 @@ BaseAutoToggleSwitch {
 	}
 
 	function notification() {
-		//% "Function is set on Auto Mode"
-		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("autotoggleswitch_function_auto_mode_info"))
+		if (_notif) {
+			// The notification is already visible
+			return
+		}
+		//% "Disable Auto mode first"
+		_notif = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("autotoggleswitch_disable_auto_mode_info"), 3000)
 	}
 
 	contentItem: FocusScope {
