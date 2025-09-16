@@ -131,7 +131,7 @@ Item {
 		id: timer
 
 		interval: 0
-		onTriggered: root.dismissed()
+		onTriggered: dismiss.dismissClicked = true
 		onIntervalChanged: {
 			if (interval !== 0) {
 				start()
