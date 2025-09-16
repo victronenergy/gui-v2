@@ -372,7 +372,7 @@ BaseListItem {
 		TemperatureSlider {
 			id: temperatureSlider
 
-			readonly property string secondaryTitle: Math.round(value) + Global.systemSettings.temperatureUnitSuffix
+			readonly property string secondaryTitle: value.toFixed(stepSizeDecimalCount) + Global.systemSettings.temperatureUnitSuffix
 
 			function handlePress(key) {
 				switch (key) {
@@ -560,7 +560,7 @@ BaseListItem {
 		SwitchableOutputSlider {
 			id: basicSlider
 
-			readonly property string secondaryTitle: Math.round(value) + (basicSliderUnitItem.value || "")
+			readonly property string secondaryTitle: value.toFixed(stepSizeDecimalCount) + (basicSliderUnitItem.value || "")
 
 			function handlePress(key) {
 				switch (key) {
@@ -641,6 +641,7 @@ BaseListItem {
 			}
 			VeQuickItem {
 				id: unrangedStepSize
+				readonly property int decimalCount: valid ? value.toString().split(".")[1]?.length ?? 0 : 0
 				uid: root.outputUid + "/Settings/StepSize"
 			}
 			VeQuickItem {
@@ -651,7 +652,7 @@ BaseListItem {
 			SpinBoxDecimalConverter {
 				id: decimalConverter
 
-				decimals: 2
+				decimals: unrangedStepSize.decimalCount
 				from: unrangedMin.valid ? unrangedMin.value : 0
 				to: unrangedMax.valid ? unrangedMax.value : 100
 				stepSize: unrangedStepSize.valid ? unrangedStepSize.value : 1
