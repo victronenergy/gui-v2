@@ -536,9 +536,14 @@ BaseListItem {
 					if (value === undefined) {
 						dropdown.model = []
 					} else {
+						const labelsJson = JSON.parse(value)
 						let items = []
-						for (const key in value) {
-							items.push({ text: value[key] })
+						if (labelsJson) {
+							for (const key in labelsJson) {
+								items.push({ text: labelsJson[key] })
+							}
+						} else {
+							console.warn("Unable to parse dropdown labels at:", uid, "from value:", value)
 						}
 						dropdown.model = items
 						dropdown.currentIndex = Math.floor(dropdownSync.backendValue)
