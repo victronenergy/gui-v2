@@ -18,6 +18,12 @@ MiniSlider {
 	property var fromDisplayValue: (v) => { return v }
 	property var toDisplayValue: (v) => { return v }
 
+	// The number of decimals in the /StepSize value. Use this to determine the number of decimals
+	// to be used when showing the selected value.
+	readonly property int stepSizeDecimalCount: stepSizeItem.valid
+			? stepSizeItem.value.toString().split(".")[1]?.length ?? 0
+			: 0
+
 	from: dimmingMinItem.valid ? toDisplayValue(dimmingMinItem.value) : 0
 	to: dimmingMaxItem.valid ? toDisplayValue(dimmingMaxItem.value) : 100
 	stepSize: stepSizeItem.valid ? toDisplayValue(stepSizeItem.value) : 1
@@ -37,7 +43,6 @@ MiniSlider {
 	}
 
 	onMoved: {
-		value = Math.round(value)
 		dimmingValue.writeValue(fromDisplayValue(value))
 	}
 

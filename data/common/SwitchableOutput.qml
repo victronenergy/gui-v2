@@ -61,7 +61,7 @@ QtObject {
 	readonly property int state: _state.valid ? _state.value : -1
 	readonly property int status: _status.valid ? _status.value : -1
 	readonly property string name: _name.value ?? ""
-	readonly property int dimming: _dimming.valid ? _dimming.value : 0  // 0-100 %
+	readonly property real dimming: _dimming.valid ? _dimming.value : 0  // 0-100 %
 	readonly property bool hasDimming: _dimming.valid
 
 	// Output/channel settings
