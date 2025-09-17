@@ -14,11 +14,12 @@ ListItemButton {
 
 	property int _generatorStateBeforeDialogOpen: -1
 
-	flat: true
 	enabled: _state.value !== VenusOS.Generators_State_Error && _state.value !== VenusOS.Generators_State_StoppedByTankLevel
 			&& Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
+	flat: false
 	backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen
+	borderWidth: 0
 
 	// If the stop or start dialog is open, set the button color based on the generator
 	// state at the time dialog was opened. This avoid changing the color of the button

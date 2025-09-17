@@ -58,12 +58,13 @@ BaseListView {
 
 			text: modelData.text
 			font.pixelSize: Theme.font_size_body1
-			color: root.enabled ? index === root.currentIndex ? Theme.color_button_down_text : Theme.color_font_primary : Theme.color_font_disabled
-			backgroundColor: !root.enabled ? Theme.color_background_disabled
-					: index === root.currentIndex ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
+			flat: false
+			color: root.enabled ? checked ? Theme.color_button_down_text : Theme.color_font_primary : Theme.color_font_disabled
+			backgroundColor: !root.enabled ? (checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
+					: checked ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
 					: Theme.color_darkOk
-
 			enabled: root.checked
+			checked: index === root.currentIndex
 			focus: true
 
 			onClicked: root.indexClicked(index)
@@ -103,8 +104,9 @@ BaseListView {
 
 			text: root.checked ? CommonWords.on : CommonWords.off
 			font.pixelSize: Theme.font_size_body1
+			borderWidth: 0
+			flat: false
 			backgroundColor: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
-
 			focus: true
 
 			onClicked: root.checked ? root.offClicked() : root.onClicked()
