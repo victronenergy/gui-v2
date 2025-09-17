@@ -18,7 +18,7 @@ ListText {
 			return ""
 		}
 		if (productId.value === ProductInfo.ProductId_PvInverter_Fronius) {
-			return dataItem.value
+			return dataItem.value || ""
 		} else if (productId.value === ProductInfo.ProductId_EnergyMeter_CarloGavazzi) {
 			if (dataItem.value === 1) {
 				//: %1 = the error number
