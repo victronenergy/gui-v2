@@ -40,7 +40,7 @@ BaseListItem {
 			Label {
 				id: secondaryTitleLabel
 				bottomPadding: Theme.geometry_switchableoutput_label_margin
-				text: switchWidgetLoader.item.secondaryTitle ?? ""
+				text: switchWidgetLoader.item?.secondaryTitle ?? ""
 			}
 
 			Rectangle {
