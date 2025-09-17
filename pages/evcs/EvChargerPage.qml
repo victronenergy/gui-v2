@@ -124,13 +124,9 @@ DevicePage {
 			optionModel: Global.evChargers.modeOptionModel
 		}
 
-		ListSpinBox {
+		ListEvcsSetCurrentSpinBox {
+			serviceUid: evCharger.serviceUid
 			text: CommonWords.charge_current
-			suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-			from: 0
-			to: evCharger.maxCurrent
-			dataItem.uid: evCharger.serviceUid + "/SetCurrent"
-			preferredVisible: dataItem.valid
 			interactive: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 		}
 

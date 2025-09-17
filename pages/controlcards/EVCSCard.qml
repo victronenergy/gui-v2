@@ -57,27 +57,12 @@ ControlCard {
 			visible: modeListButton.visible
 		}
 
-		ListSpinBox {
+		ListEvcsSetCurrentSpinBox {
 			id: chargeCurrentSpinBox
 
-			text: CommonWords.charge_current
+			serviceUid: root.serviceUid
 			flat: true
-			suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-			from: 0
-			stepSize: 1
-			dataItem.uid: root.serviceUid + "/SetCurrent"
-			preferredVisible: dataItem.valid
 			interactive: dataItem.valid && modeItem.value === VenusOS.Evcs_Mode_Manual
-
-			VeQuickItem {
-				id: maxCurrent
-				uid: root.serviceUid + "/MaxCurrent"
-				onValueChanged: {
-					if (valid) {
-						chargeCurrentSpinBox.to = value
-					}
-				}
-			}
 		}
 
 		FlatListItemSeparator {
