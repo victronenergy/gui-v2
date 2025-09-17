@@ -8,7 +8,7 @@
         "/AutoStart": 1.0,
         "/ChargingTime": 8838.0,
         "/Connected": 1,
-        "/Current": 32.0,
+        "/Current": 22.0,
         "/CustomName": "EVCS",
         "/DeviceInstance": 75,
         "/EnableDisplay": 1.0,
@@ -24,7 +24,7 @@
         "/ProductName": "EV Charging Station",
         "/Role": "evcharger",
         "/Serial": "ABC123456",
-        "/SetCurrent": 32.0,
+        "/SetCurrent": 22,
         "/StartStop": 1,
         "/Status": 2
     },

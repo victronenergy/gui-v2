@@ -31,8 +31,8 @@ ListButton {
 
 	RangeModel {
 		id: rangeModel
-		minimumValue: root.from
-		maximumValue: root.to
+		minimumValue: isNaN(root.from) ? 0 : root.from
+		maximumValue: isNaN(root.to) ? 100 : root.to
 		value: dataItem.valid ? dataItem.value : 0
 	}
 
