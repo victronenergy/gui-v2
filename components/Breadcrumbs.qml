@@ -64,6 +64,9 @@ BaseListView {
 		}
 	}
 
+	// Whenever a breadcrumb is added or removed, scroll to the end to make the last crumb visible.
+	onCountChanged: positionViewAtEnd()
+
 	Rectangle { // fade out the breadcrumbs LHS when overflowing
 		anchors.fill: parent
 		visible: !root.atXBeginning
