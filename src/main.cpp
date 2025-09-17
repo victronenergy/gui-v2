@@ -536,7 +536,7 @@ int main(int argc, char *argv[])
 #if defined(VENUS_DESKTOP_BUILD)
 	const bool desktop(true);
 #else
-	const bool desktop(QGuiApplication::primaryScreen()->availableSize().height() > 600);
+	const bool desktop(false);
 #endif
 
 	window->setProperty("scaleFactor", scaleFactor);
