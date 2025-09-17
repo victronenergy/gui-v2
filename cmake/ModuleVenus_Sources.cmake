@@ -191,6 +191,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListCurrentLimitButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
     components/listitems/ListDcOutputQuantityGroup.qml
+    components/listitems/ListEvcsSetCurrentSpinBox.qml
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareImageTypeInstalled.qml
     components/listitems/ListFirmwareVersion.qml
