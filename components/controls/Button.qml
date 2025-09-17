@@ -11,17 +11,14 @@ import Victron.VenusOS
 T.Button {
 	id: root
 
-	property color color: !showEnabled ? Theme.color_font_disabled
-			: down ? Theme.color_button_down_text
-			: Theme.color_font_primary
-	property color backgroundColor: !showEnabled ? Theme.color_background_disabled
-			: down ? downColor
-			: flat ? "transparent"
-			: Theme.color_darkOk
-	property color downColor: flat ? "transparent"
-			: Theme.color_ok
+	property color color: showEnabled
+		? (down ? Theme.color_button_down_text : Theme.color_font_primary)
+		: (down ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
+	property color backgroundColor: showEnabled
+		? (down ? Theme.color_ok : Theme.color_darkOk)
+		: (down ? Theme.color_button_on_background_disabled : Theme.color_background_disabled)
 	property color borderColor: showEnabled ? Theme.color_ok : Theme.color_font_disabled
-	property real borderWidth: flat ? 0 : Theme.geometry_button_border_width
+	property real borderWidth: Theme.geometry_button_border_width
 	property real radius: Theme.geometry_button_radius
 	property real topLeftRadius: NaN
 	property real bottomLeftRadius: NaN
@@ -44,15 +41,17 @@ T.Button {
 	implicitHeight: contentItem.implicitHeight + root.topPadding + root.bottomPadding
 
 	icon.color: root.color
-
 	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_size_body1
+
+	// flat=true means the background should not be visible.
 	flat: true
 
 	background: Rectangle {
 		color: root.backgroundColor
 		border.width: root.borderWidth
 		border.color: root.borderColor
+		visible: !root.flat
 
 		// Only set the radius if none of the corner radii are set, otherwise each corner will be
 		// rounded even if no radius has been set for that corner.
@@ -68,12 +67,6 @@ T.Button {
 		bottomLeftRadius: isNaN(root.bottomLeftRadius) ? undefined : root.bottomLeftRadius
 		topRightRadius: isNaN(root.topRightRadius) ? undefined : root.topRightRadius
 		bottomRightRadius: isNaN(root.bottomRightRadius) ? undefined : root.bottomRightRadius
-
-		PressEffect {
-			id: pressEffect
-			radius: root.radius
-			anchors.fill: parent
-		}
 	}
 
 	contentItem: CP.IconLabel {
@@ -84,6 +77,12 @@ T.Button {
 		text: root.text
 		font: root.font
 		color: root.color
+	}
+
+	PressEffect {
+		id: pressEffect
+		radius: root.radius
+		anchors.fill: parent
 	}
 
 	KeyNavigationHighlight.active: root.activeFocus
