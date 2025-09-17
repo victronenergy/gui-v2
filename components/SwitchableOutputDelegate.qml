@@ -134,8 +134,8 @@ BaseListItem {
 					return dropdownComponent
 				case VenusOS.SwitchableOutput_Type_BasicSlider:
 					return basicSliderComponent
-				case VenusOS.SwitchableOutput_Type_UnrangedSetpoint:
-					return unrangedSetpointComponent
+				case VenusOS.SwitchableOutput_Type_NumericInput:
+					return numericInputComponent
 				case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
 					return threeStateSwitchComponent
 				default:
@@ -603,7 +603,7 @@ BaseListItem {
 	}
 
 	Component {
-		id: unrangedSetpointComponent
+		id: numericInputComponent
 
 		MiniSpinBox {
 			id: spinBox
@@ -622,50 +622,50 @@ BaseListItem {
 			width: root._buttonWidth
 			height: Theme.geometry_switchableoutput_control_height
 			editable: !Global.isGxDevice // no room for VKB in the switch pane
-			suffix: unrangedUnit.value ?? ""
+			suffix: numericInputUnit.value ?? ""
 			from: decimalConverter.intFrom
 			to: decimalConverter.intTo
 			stepSize: decimalConverter.intStepSize
-			value: decimalConverter.decimalToInt(unrangedValueSync.backendValue)
+			value: decimalConverter.decimalToInt(numericInputValueSync.backendValue)
 			textFromValue: (value, locale) => decimalConverter.textFromValue(value)
 			valueFromText: (text, locale) => {
 				const v = decimalConverter.valueFromText(text)
-				return isNaN(v) ? decimalConverter.decimalToInt(unrangedValueSync.backendValue) : v
+				return isNaN(v) ? decimalConverter.decimalToInt(numericInputValueSync.backendValue) : v
 			}
 			onValueModified: {
 				// Update the /Dimming value to the user-entered value.
-				unrangedValueSync.writeValue(decimalConverter.intToDecimal(value))
+				numericInputValueSync.writeValue(decimalConverter.intToDecimal(value))
 			}
 
 			VeQuickItem {
-				id: unrangedMin
+				id: numericInputMin
 				uid: root.outputUid + "/Settings/DimmingMin"
 			}
 			VeQuickItem {
-				id: unrangedMax
+				id: numericInputMax
 				uid: root.outputUid + "/Settings/DimmingMax"
 			}
 			VeQuickItem {
-				id: unrangedStepSize
+				id: numericInputStepSize
 				readonly property int decimalCount: valid ? value.toString().split(".")[1]?.length ?? 0 : 0
 				uid: root.outputUid + "/Settings/StepSize"
 			}
 			VeQuickItem {
-				id: unrangedUnit
+				id: numericInputUnit
 				uid: root.outputUid + "/Settings/Unit"
 			}
 
 			SpinBoxDecimalConverter {
 				id: decimalConverter
 
-				decimals: unrangedStepSize.decimalCount
-				from: unrangedMin.valid ? unrangedMin.value : 0
-				to: unrangedMax.valid ? unrangedMax.value : 100
-				stepSize: unrangedStepSize.valid ? unrangedStepSize.value : 1
+				decimals: numericInputStepSize.decimalCount
+				from: numericInputMin.valid ? numericInputMin.value : 0
+				to: numericInputMax.valid ? numericInputMax.value : 100
+				stepSize: numericInputStepSize.valid ? numericInputStepSize.value : 1
 			}
 
 			SettingSync {
-				id: unrangedValueSync
+				id: numericInputValueSync
 				backendValue: output.dimming
 				onUpdateToBackend: (value) => { output.setDimming(value) }
 				onTimeout: spinBox.value = decimalConverter.decimalToInt(backendValue)

@@ -505,7 +505,7 @@ public:
 		SwitchableOutput_Type_Slave = 5,
 		SwitchableOutput_Type_Dropdown,
 		SwitchableOutput_Type_BasicSlider,
-		SwitchableOutput_Type_UnrangedSetpoint,
+		SwitchableOutput_Type_NumericInput,
 		SwitchableOutput_Type_ThreeStateSwitch
 	};
 	Q_ENUM(SwitchableOutput_Type)
