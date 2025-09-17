@@ -408,9 +408,9 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	case SwitchableOutput_Type_BasicSlider:
 		//% "Basic slider"
 		return qtTrId("switchable_output_basic_slider");
-	case SwitchableOutput_Type_UnrangedSetpoint:
-		//% "Unranged setpoint"
-		return qtTrId("switchable_output_unranged_setpoint");
+	case SwitchableOutput_Type_NumericInput:
+		//% "Numeric input"
+		return qtTrId("switchable_output_numeric_input");
 	case SwitchableOutput_Type_ThreeStateSwitch:
 		//% "Three-state switch"
 		return qtTrId("switchable_output_three_state_switch");
