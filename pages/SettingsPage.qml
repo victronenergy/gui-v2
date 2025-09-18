@@ -71,7 +71,7 @@ SwipeViewPage {
 			SettingsListNavigation {
 				//% "Integrations"
 				text: qsTrId("settings_integrations")
-				//% "Relays, Sensors, Tanks, PV Inverters, Modbus, MQTT…"
+				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
 				secondaryText: qsTrId("settings_relays_sensors_tanks")
 				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
 				iconSource: "qrc:/images/icon_integration_32.png"
