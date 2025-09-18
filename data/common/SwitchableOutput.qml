@@ -102,6 +102,7 @@ QtObject {
 				|| root.type === VenusOS.SwitchableOutput_Type_SteppedSwitch
 				|| root.type === VenusOS.SwitchableOutput_Type_NumericInput
 				|| root.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
+				|| root.type === VenusOS.SwitchableOutput_Type_Dropdown
 				|| root.type === VenusOS.SwitchableOutput_Type_BasicSlider
 			 ? `${root.uid}/Dimming` : ""
 	}
