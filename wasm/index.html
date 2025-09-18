@@ -254,6 +254,31 @@
                 // but the downloaded size is shown as uncompressed size, since the browser decompresses it
                 const sizeResp = await fetch('venus-gui-v2.wasm.size');
 
+                // check if query parameter download is set to 'vrm'
+                const searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('download') && searchParams.get('download').toLowerCase() === 'vrm') {
+
+                    console.log("Download from VRM server forced by URL parameter");
+
+                    // Download hash file from GX device
+                    const wasmHash = await fetch('venus-gui-v2.wasm.sha256');
+                    // Extract the hash from the file
+                    const hash = (await wasmHash.text()).trim().split(' ')[0];
+
+                    // Check if file is available on VRM server
+                    // It fetches automatically the gzipped version
+                    const vrmWasmUrl = "https://updates.victronenergy.com/venus-gui/" + hash + "/venus-gui-v2.wasm"
+
+                    const vrmResp = await fetch(vrmWasmUrl, { method: 'HEAD' });
+                    if (!vrmResp.ok) {
+                        console.warn(`WASM file not found on VRM server (HTTP ${vrmResp.status}), falling back to local download`);
+                    } else {
+                        // If available, change the url to the VRM download url
+                        url = vrmWasmUrl;
+
+                    }
+                }
+
                 // Load WASM after the size is fetched, else the size is not downloaded
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Failed to fetch WASM");
