@@ -54,6 +54,7 @@ Page {
 				preferredVisible: dataItem.valid
 				from: 0
 				to: 10
+				stepSize: 0.1
 				decimals: 1
 			}
 
