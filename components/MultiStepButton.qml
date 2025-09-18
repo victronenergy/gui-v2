@@ -18,7 +18,7 @@ BaseListView {
 	signal offClicked()
 
 	implicitWidth: parent.width
-	implicitHeight: Theme.geometry_segmentedButtonRow_height
+	implicitHeight: Theme.geometry_switchableoutput_control_height
 
 	orientation: ListView.Horizontal
 	focus: false
