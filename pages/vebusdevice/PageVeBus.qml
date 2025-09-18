@@ -217,7 +217,7 @@ DevicePage {
 		}
 
 		PrimaryListLabel {
-			//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the Color Control is therefore not possible."
+			//% "A VE.Bus BMS automatically turns the system off when needed to protect the battery. Controlling the system from the GX device is therefore not possible."
 			text: qsTrId("vebus_device_bms_message")
 			preferredVisible: bmsMode.valid
 		}
