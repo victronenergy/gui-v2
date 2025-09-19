@@ -21,7 +21,8 @@
         "/N2kUniqueNumber": 655188,
         "/ProductId": 45155,
         "/ProductName": "Motordrive Simulation",
-        "/Serial": null
+        "/Serial": null,
+        "/Settings/Motor/DirectionInverted": 0
     },
     "com.victronenergy.settings": {
         "/Settings/Gui/ElectricPropulsionUI/Enabled": 1,
