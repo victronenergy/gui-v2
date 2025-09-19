@@ -298,8 +298,9 @@ FocusScope {
 			verticalCenter: parent.verticalCenter
 		}
 		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
-		backgroundColor: Theme.color_critical_background
-		downColor: Theme.color_critical
+		flat: false
+		backgroundColor: down ? Theme.color_critical : Theme.color_critical_background
+		borderWidth: 0
 		// ensure highlight border can be seen against critical backgroundColor
 		KeyNavigationHighlight.margins: -(4 * Theme.geometry_button_border_width)
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"

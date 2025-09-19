@@ -37,64 +37,14 @@ BaseAutoToggleSwitch {
 	contentItem: FocusScope {
 		focus: true
 
-		Button {
-			id: offButton
-
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_button_border_width
-				top: parent.top
-				topMargin: Theme.geometry_button_border_width
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_button_border_width
-			}
-			width: root.buttonWidth
+		ToggleButtonRow {
+			width: (2 * root.buttonWidth) + (3 * Theme.geometry_button_border_width)
 			height: parent.height
-			radius: 0
-			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-			backgroundColor: !root.enabled ? Theme.color_background_disabled
-				: root.onChecked ? Theme.color_darkOk
-				: Theme.color_button_off_background
-
-			text: CommonWords.off
-
-			checked: !root.onChecked
-			onClicked: root.autoChecked ? notification() : root.offClicked()
-			focus: !root.onChecked
-
-			Keys.onSpacePressed: root.autoChecked ? notification() : root.offClicked()
-			KeyNavigation.right: onButton
-		}
-
-		Button {
-			id: onButton
-
-			anchors {
-				left: offButton.right
-				leftMargin: Theme.geometry_button_border_width
-				top: parent.top
-				topMargin: Theme.geometry_button_border_width
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_button_border_width
-			}
-			width: root.buttonWidth
-			height: parent.height
-			radius: 0
-			topRightRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-			bottomRightRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-			backgroundColor: !root.enabled ? Theme.color_background_disabled
-				: root.onChecked ? Theme.color_ok
-				: Theme.color_darkOk
-
-			text: CommonWords.on
-
-			checked: root.onChecked
-			onClicked: root.autoChecked ? notification() : root.onClicked()
-			focus: root.onChecked
-
-			Keys.onSpacePressed: root.autoChecked ? notification() : root.onClicked()
+			on: root.onChecked
 			KeyNavigation.right: autoButton
+
+			onOnClicked: root.autoChecked ? root.notification() : root.onClicked()
+			onOffClicked: root.autoChecked ? root.notification() : root.offClicked()
 		}
 
 		Button {
@@ -107,17 +57,14 @@ BaseAutoToggleSwitch {
 			}
 			width: root.buttonWidth
 			height: parent.height
-
 			radius: Theme.geometry_button_radius
-			backgroundColor: !root.enabled ? Theme.color_background_disabled
-				: root.autoChecked ? Theme.color_ok
-				: Theme.color_darkOk
+			flat: false
 			borderWidth: Theme.geometry_button_border_width
 			borderColor: root.enabled ? Theme.color_ok : Theme.color_font_disabled
-
 			text: CommonWords.auto
-
 			checked: root.autoChecked
+			focus: true
+
 			onClicked: root.autoClicked()
 
 			Keys.onSpacePressed: root.autoClicked()

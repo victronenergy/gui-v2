@@ -39,12 +39,38 @@ ControlCard {
 		// rare and especially unlikely while the card is visible.
 		model: root.outputUids
 
-		delegate: SwitchableOutputDelegate {
+		delegate: BaseListLoader {
+			id: delegateLoader
+
 			required property string modelData
 
-			width: outputGrid.cellWidth
-			height: outputGrid.cellHeight
-			outputUid: modelData
+			// Allow this to receive the focus highlight for navigational purposes. The internal
+			// loaded item should set its enabled=false when the output is disabled.
+			KeyNavigationHighlight.active: activeFocus
+
+			SwitchableOutput {
+				id: output
+				uid: modelData
+				onTypeChanged: {
+					if (type >= 0) {
+						delegateLoader.setSource("switches/delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
+							width: Qt.binding(function() { return outputGrid.cellWidth }),
+							height: Qt.binding(function() { return outputGrid.cellHeight }),
+							switchableOutput: output,
+						})
+					} else {
+						source = ""
+					}
+				}
+			}
+
+			onStatusChanged: {
+				if (status === Loader.Error) {
+					console.warn("Failed to load SwitchableOutputDelegate for type '%1' from file: %2"
+						.arg(VenusOS.switchableOutput_typeToText(output.type))
+						.arg(source))
+				}
+			}
 		}
 	}
 }
