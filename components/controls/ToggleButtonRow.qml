@@ -10,6 +10,8 @@ FocusScope {
 	id: root
 
 	property bool on
+	property string offButtonText: CommonWords.off
+	property bool useOffButtonColors: true // set to false to use standard colours for Off button
 
 	readonly property real _buttonWidth: (width / 2) - Theme.geometry_button_border_width
 	readonly property real _buttonHeight: height - (2 * Theme.geometry_button_border_width)
@@ -46,15 +48,21 @@ FocusScope {
 		topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
 		bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
 		flat: false
-		backgroundColor: showEnabled
-				? (down ? Theme.color_button_off_background : Theme.color_darkOk)
-				: (down ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
-		text: CommonWords.off
+		text: root.offButtonText
 		focus: checked
 		focusPolicy: root.focusPolicy
 		KeyNavigation.right: onButton
 
 		onClicked: root.offClicked()
+
+		Binding {
+			target: offButton
+			when: root.useOffButtonColors
+			property: "backgroundColor"
+			value: offButton.enabled
+					? (offButton.down ? Theme.color_button_off_background : Theme.color_darkOk)
+					: (offButton.down ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
+		}
 	}
 
 	Button {
