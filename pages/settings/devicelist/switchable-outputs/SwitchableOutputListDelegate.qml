@@ -50,7 +50,7 @@ ListQuantityGroupNavigation {
 				? Global.systemSettings.temperatureUnit
 				: VenusOS.Units_Percentage
 
-		readonly property string statusText: VenusOS.switchableOutput_statusToText(status)
+		readonly property string statusText: VenusOS.switchableOutput_statusToText(status, type)
 		readonly property string typeText: VenusOS.switchableOutput_typeToText(type, name)
 
 		uid: root.uid

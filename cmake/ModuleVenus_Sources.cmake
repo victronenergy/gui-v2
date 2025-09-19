@@ -243,6 +243,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/switches/delegates/SwitchableOutputCardDelegate_7.qml
     components/switches/delegates/SwitchableOutputCardDelegate_8.qml
     components/switches/delegates/SwitchableOutputCardDelegate_9.qml
+    components/switches/delegates/SwitchableOutputCardDelegate_10.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml

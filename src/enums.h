@@ -496,7 +496,6 @@ public:
 	};
 	Q_ENUM(Switch_DeviceState)
 
-	// TODO clarify these type values, and whether Slave is still supported.
 	enum SwitchableOutput_Type {
 		SwitchableOutput_Type_Momentary,
 		SwitchableOutput_Type_Toggle,
@@ -507,7 +506,8 @@ public:
 		SwitchableOutput_Type_Dropdown,
 		SwitchableOutput_Type_BasicSlider,
 		SwitchableOutput_Type_NumericInput,
-		SwitchableOutput_Type_ThreeStateSwitch
+		SwitchableOutput_Type_ThreeStateSwitch,
+		SwitchableOutput_Type_BilgePump
 	};
 	Q_ENUM(SwitchableOutput_Type)
 
@@ -893,7 +893,7 @@ public:
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
-	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value) const;
+	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 
