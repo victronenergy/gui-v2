@@ -118,7 +118,7 @@ Page {
 			// - acload, heatpump: /SwitchableOutput/Status
 			// - evcharger: /Status
 			statusText: !statusItem.valid ? ""
-				: device.serviceType === "acload" || device.serviceType === "heatpump" ? VenusOS.switchableOutput_statusToText(statusItem.value)
+				: device.serviceType === "acload" || device.serviceType === "heatpump" ? VenusOS.switchableOutput_statusToText(statusItem.value, outputTypeItem.value)
 				: device.serviceType === "evcharger" ? Global.evChargers.chargerStatusToText(statusItem.value)
 				: ""
 
@@ -139,6 +139,12 @@ Page {
 				id: statusItem
 				uid: device.serviceType === "acload" || device.serviceType === "heatpump" ? device.serviceUid + "/SwitchableOutput/Status"
 					: device.serviceType === "evcharger" ? device.serviceUid + "/Status"
+					: ""
+			}
+
+			VeQuickItem {
+				id: outputTypeItem
+				uid: device.serviceType === "acload" || device.serviceType === "heatpump" ? device.serviceUid + "/SwitchableOutput/Type"
 					: ""
 			}
 

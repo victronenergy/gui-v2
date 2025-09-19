@@ -419,18 +419,26 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	case SwitchableOutput_Type_ThreeStateSwitch:
 		//% "Three-state switch"
 		return qtTrId("switchable_output_three_state_switch");
+	case SwitchableOutput_Type_BilgePump:
+		//% "Bilge pump"
+		return qtTrId("switchable_output_bilge_pump");
 	default:
 		//% "Unsupported type: %1"
 		return qtTrId("switchable_output_unsupported").arg(value);
 	}
 }
 
-QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) const{
-
+QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const
+{
 	switch (value) {
 	case SwitchableOutput_Status_Off:
-		//% "Off"
-		return qtTrId("switchable_output_off");
+		if (type == SwitchableOutput_Type_BilgePump) {
+			//% "Not running"
+			return qtTrId("switchable_output_not_running");
+		} else {
+			//% "Off"
+			return qtTrId("switchable_output_off");
+		}
 	case SwitchableOutput_Status_Powered:
 		//% "Powered"
 		return qtTrId("switchable_output_powered");
@@ -444,8 +452,13 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 		//% "Fault"
 		return qtTrId("switchable_output_fault");
 	case SwitchableOutput_Status_On:
-		//% "On"
-		return qtTrId("switchable_output_on");
+		if (type == SwitchableOutput_Type_BilgePump) {
+			//% "Running"
+			return qtTrId("switchable_output_running");
+		} else {
+			//% "On"
+			return qtTrId("switchable_output_on");
+		}
 	case SwitchableOutput_Status_Short_Fault:
 		//% "Short"
 		return qtTrId("switchable_output_short");

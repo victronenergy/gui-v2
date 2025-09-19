@@ -57,7 +57,8 @@ QtObject {
 
 			function addToGroup() {
 				if (output.type < VenusOS.SwitchableOutput_Type_Momentary
-						|| output.type > VenusOS.SwitchableOutput_Type_ThreeStateSwitch) {
+						|| output.type > VenusOS.SwitchableOutput_Type_BilgePump
+						|| output.type === VenusOS.SwitchableOutput_Type_Slave) {
 					// Only include output types with matching UI controls in the switch panel.
 					return
 				}
