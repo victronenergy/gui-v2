@@ -39,13 +39,11 @@ RowLayout {
 		color: statusLabel.color === Theme.color_green ? Theme.color_darkGreen
 				: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
 				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
-				: Theme.color_background_disabled
+				: Theme.color_switch_status_disabled
 		radius: Theme.geometry_switchableoutput_status_radius
-		visible: !(root.switchableOutput.status === VenusOS.SwitchableOutput_Status_Off
-			  || root.switchableOutput.status === VenusOS.SwitchableOutput_Status_On
-			  || root.switchableOutput.status === VenusOS.SwitchableOutput_Status_Powered
-			  || (root.switchableOutput.status === VenusOS.SwitchableOutput_Status_Output_Fault
-				  && root.switchableOutput.type === VenusOS.SwitchableOutput_Type_Dimmable))
+		visible: !(switchableOutput.status === VenusOS.SwitchableOutput_Status_Off
+				   || switchableOutput.status === VenusOS.SwitchableOutput_Status_On
+				   || switchableOutput.status === VenusOS.SwitchableOutput_Status_Powered)
 
 		Label {
 			id: statusLabel
@@ -59,7 +57,7 @@ RowLayout {
 			rightPadding: Theme.geometry_switchableoutput_status_horizontalPadding
 			horizontalAlignment: Text.AlignHCenter
 			elide: Text.ElideRight
-			font.pixelSize: Theme.font_size_caption
+			font.pixelSize: Theme.font_size_tiny
 			color: {
 				switch (root.switchableOutput.status) {
 				case VenusOS.SwitchableOutput_Status_Off:
