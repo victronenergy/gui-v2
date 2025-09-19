@@ -12,6 +12,9 @@ RowLayout {
 
 	required property SwitchableOutput switchableOutput
 	property string secondaryTitle
+	property bool statusVisible: !(switchableOutput.status === VenusOS.SwitchableOutput_Status_Off
+			|| switchableOutput.status === VenusOS.SwitchableOutput_Status_On
+			|| switchableOutput.status === VenusOS.SwitchableOutput_Status_Powered)
 
 	Label {
 		id: nameLabel
@@ -41,15 +44,13 @@ RowLayout {
 				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
 				: Theme.color_switch_status_disabled
 		radius: Theme.geometry_switchableoutput_status_radius
-		visible: !(switchableOutput.status === VenusOS.SwitchableOutput_Status_Off
-				   || switchableOutput.status === VenusOS.SwitchableOutput_Status_On
-				   || switchableOutput.status === VenusOS.SwitchableOutput_Status_Powered)
+		visible: root.statusVisible
 
 		Label {
 			id: statusLabel
 
 			anchors.centerIn: parent
-			text: VenusOS.switchableOutput_statusToText(root.switchableOutput.status)
+			text: VenusOS.switchableOutput_statusToText(root.switchableOutput.status, root.switchableOutput.type)
 			width: parent.width
 			topPadding: Theme.geometry_switchableoutput_status_verticalPadding
 			bottomPadding: Theme.geometry_switchableoutput_status_verticalPadding
@@ -63,8 +64,14 @@ RowLayout {
 				case VenusOS.SwitchableOutput_Status_Off:
 					return Theme.color_font_secondary
 				case VenusOS.SwitchableOutput_Status_Powered:
-				case VenusOS.SwitchableOutput_Status_On:
 					return Theme.color_green
+				case VenusOS.SwitchableOutput_Status_On:
+					if (root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump) {
+						// A running Bilge Pump is not a normal state, so use a warning colour.
+						return Theme.color_orange
+					} else {
+						return Theme.color_green
+					}
 				case VenusOS.SwitchableOutput_Status_Output_Fault:
 					return Theme.color_orange
 				case VenusOS.SwitchableOutput_Status_Disabled:
