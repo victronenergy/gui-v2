@@ -441,8 +441,8 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 		//% "Over temperature"
 		return qtTrId("switchable_output_over_temperature");
 	case SwitchableOutput_Status_Output_Fault:
-		//% "Output fault"
-		return qtTrId("switchable_output_output_Fault");
+		//% "Fault"
+		return qtTrId("switchable_output_fault");
 	case SwitchableOutput_Status_On:
 		//% "On"
 		return qtTrId("switchable_output_on");
@@ -453,7 +453,7 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value) cons
 		//% "Disabled"
 		return qtTrId("switchable_output_disabled");
 	case SwitchableOutput_Status_TripLowVoltage:
-		//% "Disabled"
+		//% "Trip low voltage"
 		return qtTrId("switchable_output_trip_low_voltage");
 	default:
 		return QString::number(static_cast<int>(value));
