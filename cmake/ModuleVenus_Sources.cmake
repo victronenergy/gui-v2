@@ -338,6 +338,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
     pages/loads/AcLoadListPage.qml
+    pages/loads/DcLoadListPage.qml
     pages/loads/LoadListDelegate.qml
     pages/settings/CanbusProfile.qml
     pages/settings/CanbusServiceFinder.qml

@@ -8,7 +8,7 @@
         "/Alarms/LowTemperature": 0,
         "/Alarms/LowVoltage": 0,
         "/Connected": 1,
-        "/CustomName": "",
+        "/CustomName": "Mock DC I",
         "/Dc/0/Current": 1.0,
         "/Dc/0/Power": 14.0,
         "/Dc/0/Temperature": null,

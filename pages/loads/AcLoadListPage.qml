@@ -13,8 +13,7 @@ Page {
 	required property ObjectAcConnection measurements
 
 	// The model of devices to be displayed
-	// TODO make this a FilteredDeviceModel when #2371 is fixed.
-	required property var model
+	required property FilteredDeviceModel model
 
 	GradientListView {
 		header: BaseListItem {
