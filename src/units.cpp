@@ -80,6 +80,11 @@ QString Units::numberFormattingLocaleName() const
 	return formattingLocale()->name();
 }
 
+QString Units::degreesSymbol() const
+{
+	return DegreesSymbol;
+}
+
 QString Units::formatNumber(qreal number, int precision) const
 {
 	return formattingLocale()->toString(number, 'f', precision);

@@ -38,6 +38,7 @@ class Units : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(QString numberFormattingLocaleName READ numberFormattingLocaleName CONSTANT FINAL)
+	Q_PROPERTY(QString degreesSymbol READ degreesSymbol CONSTANT FINAL)
 
 public:
 	enum FormatHint {
@@ -52,6 +53,8 @@ public:
 	static QObject* instance(QQmlEngine *engine, QJSEngine *);
 
 	QString numberFormattingLocaleName() const;
+	QString degreesSymbol() const;
+
 	Q_INVOKABLE QString formatNumber(qreal number, int precision = 0) const;
 	Q_INVOKABLE qreal formattedNumberToReal(const QString &s) const;
 

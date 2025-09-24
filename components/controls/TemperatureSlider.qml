@@ -97,7 +97,7 @@ SwitchableOutputSlider {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			font.pixelSize: Theme.font_size_h2
-			text: root.value + "\u00b0"
+			text: root.value.toFixed(root.stepSizeDecimalCount) + Units.degreesSymbol
 			color: Theme.color_button_down_text
 		}
 	}
