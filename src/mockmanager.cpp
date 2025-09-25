@@ -155,7 +155,12 @@ void MockManager::setServiceValues(const QJsonObject &object)
 				qInfo() << "Warning: changing value of" << path << "from" << value(path)
 						<< "to" << valueIterator.value().toVariant();
 			}
-			setValue(path, valueIterator.value().toVariant());
+			// Store all parsed numbers as doubles. Otherwise, if a number can be floating-point but
+			// is written without a decimal in the JSON, it will be stored as an int, and then
+			// veutil will prevent it from being saved as a double in order to preserve the original
+			// type.
+			const QJsonValue jsonValue = valueIterator.value();
+			setValue(path, jsonValue.isDouble() ? jsonValue.toDouble() : jsonValue.toVariant());
 		}
 	}
 }
