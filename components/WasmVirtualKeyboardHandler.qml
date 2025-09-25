@@ -66,11 +66,10 @@ Item {
 		// then the lower text field would no longer be visible, due to the shortened bottomMargin.
 		//
 		if (!textField || !textFieldContainer || !flickable) {
-			console.warn("onAboutToFocusTextField(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
+			console.warn("updateFocusItem(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
 			return
 		}
 
-		scrollAnimation.stop()
 		if (flickable != root.focusedFlickable) {
 			root.setFlickable(flickable)
 		}
@@ -88,9 +87,7 @@ Item {
 			flickable.bottomMargin = Math.max(jumpDistance, flickable.bottomMargin)
 		}
 
-		scrollAnimation.target = flickable
-		scrollAnimation.to = textContainerContentY
-		scrollAnimation.start()
+		flickable.contentY = textContainerContentY
 	}
 
 	Connections {
@@ -108,6 +105,9 @@ Item {
 		// flickable. Instead, record the parameters and call updateFocusItem() when the item
 		// actually receives the focus (i.e. after the mouse is released).
 		function onAboutToFocusTextField(textField, textFieldContainer, flickable) {
+			if (!Theme.windowIsLandscape()) {
+				return
+			}
 			focusListener.textField = textField
 			focusListener.textFieldContainer = textFieldContainer
 			focusListener.flickable = flickable
@@ -122,12 +122,6 @@ Item {
 				updateFocusItem(focusListener.textField, focusListener.textFieldContainer, focusListener.flickable)
 			}
 		}
-	}
-
-	NumberAnimation {
-		id: scrollAnimation
-		properties: "contentY"
-		duration: Theme.animation_inputPanel_slide_duration
 	}
 
 	Connections {
