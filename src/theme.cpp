@@ -19,6 +19,14 @@ EM_JS(int, getScreenWidth, (), {
 	return Math.min(screen.width, screen.height);
 });
 
+EM_JS(int, getWindowWidth, (), {
+	return window.innerWidth;
+});
+
+EM_JS(int, getWindowHeight, (), {
+	return window.innerHeight;
+});
+
 #endif
 
 Theme::Theme(QObject *parent) : QObject(parent)
@@ -140,6 +148,15 @@ Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron:
 	} else {
 		return Ok;
 	}
+}
+
+bool Theme::windowIsLandscape() const
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	return getWindowWidth() > getWindowHeight();
+#else
+	return false;
+#endif
 }
 
 bool Theme::objectHasQObjectParent(QObject *obj) const

@@ -117,8 +117,7 @@ FocusScope {
 		id: keyboardHandlerLoader
 
 		asynchronous: true
-		active: Global.isGxDevice
-			|| (BackendConnection.needsWasmKeyboardHandler && Global.main.width > Global.main.height)
+		active: Global.isGxDevice || BackendConnection.needsWasmKeyboardHandler
 
 		// Note that for gx builds, all references to 'qrc:/.../Thing.qml' are intercepted by
 		// UrlInterceptor and changed to '.../Thing.qml', i.e. they are loaded from the file
