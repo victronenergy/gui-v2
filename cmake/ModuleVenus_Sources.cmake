@@ -34,6 +34,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ClippingBarGauge.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
+    components/CustomDevicePageEntry.qml
     components/DateSelector.qml
     components/DeviceListDelegate.qml
     components/DevicePage.qml
@@ -577,6 +578,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/customisations.h
+    src/customisations.cpp
     src/dcmeterdevicemodel.h
     src/dcmeterdevicemodel.cpp
     src/device.h
