@@ -109,14 +109,9 @@ FocusScope {
 				if (value === undefined) {
 					dropdown.model = []
 				} else {
-					const labelsJson = JSON.parse(value)
 					let items = []
-					if (labelsJson) {
-						for (const key in labelsJson) {
-							items.push({ text: labelsJson[key] })
-						}
-					} else {
-						console.warn("Unable to parse dropdown labels at:", uid, "from value:", value)
+					for (const text of value) {
+						items.push({ text: text })
 					}
 					dropdown.model = items
 					dropdown.currentIndex = Math.floor(dropdownSync.backendValue)
