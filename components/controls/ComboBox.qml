@@ -24,7 +24,7 @@ T.ComboBox {
 		id: optionDelegate
 
 		width: root.width
-		height: Theme.geometry_comboBox_height
+		height: root.height
 		highlighted: root.highlightedIndex === index
 
 		contentItem: Rectangle {
