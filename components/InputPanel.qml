@@ -13,13 +13,19 @@ import Victron.VenusOS
 // *** so that the loader's source property is:
 // *** "file:///opt/victronenergy/gui-v2/Victron/VenusOS/components/InputPanel.qml"
 
+/*
+	An implementation of the Qt VKB InputPanel. This is only shown on the GX device.
+*/
 QtVirtualKeyboard.InputPanel {
 	id: root
 
-	property var focusedItem
-	property var focusedFlickable
+	property Item focusedItem
+	property Item focusedView
+
 	property real toContentY
 	property real toHeight
+
+	property real cardsYOffset
 
 	readonly property string localeName: Language.currentLocaleName
 
@@ -32,6 +38,8 @@ QtVirtualKeyboard.InputPanel {
 			// The screen was clicked outside of the text field. Remove focus from the text field,
 			// so that the VKB will close. Return true to swallow the mouse event.
 			focusedItem.focus = false
+			focusedItem = null
+			focusedView = null
 			return true
 		}
 		// The mouse was clicked within the text field, so allow it to receive the mouse event.
@@ -40,6 +48,7 @@ QtVirtualKeyboard.InputPanel {
 
 	visible: Qt.inputMethod.visible || yAnimator.running
 	y: Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height : Theme.geometry_screen_height
+
 	Behavior on y {
 		YAnimator {
 			id: yAnimator
@@ -50,31 +59,57 @@ QtVirtualKeyboard.InputPanel {
 
 	width: Theme.geometry_screen_width
 
-	states: State {
-		name: "visible"
-		when: Qt.inputMethod.visible && !!root.focusedFlickable
+	states: [
+		State {
+			name: "openedForFlickable"
+			when: Qt.inputMethod.visible
+				  && !!root.focusedView
+				  && root.focusedView !== Global.mainView.cardsLoader
 
-		PropertyChanges {
-			target: root.focusedFlickable
-			contentY: root.toContentY
-			height: root.toHeight
-		}
-	}
+			PropertyChanges {
+				target: root.focusedView
+				contentY: root.toContentY
+				height: root.toHeight
+			}
+		},
+		State {
+			name: "openedForCards"
+			when: Qt.inputMethod.visible
+				  && !!root.focusedView
+				  && root.focusedView === Global.mainView.cardsLoader
 
-	transitions: Transition {
-		NumberAnimation {
-			properties: "contentY,height"
-			duration: Theme.animation_inputPanel_slide_duration
-			easing.type: Easing.InOutQuad
+			// No PropertyChanges, the Transitions will trigger the cardsLoader to slide up/down.
 		}
-	}
+	]
+
+	transitions: [
+		Transition {
+			NumberAnimation {
+				properties: "contentY,height"
+				duration: Theme.animation_inputPanel_slide_duration
+				easing.type: Easing.InOutQuad
+			}
+		},
+		Transition {
+			to: "openedForCards"
+			ScriptAction {
+				script: Global.mainView.cardsLoader.setYOffset(root.cardsYOffset, true)
+			}
+		},
+		Transition {
+			from: "openedForCards"
+			ScriptAction {
+				script: Global.mainView.cardsLoader.clearYOffset()
+			}
+		}
+	]
 
 	Connections {
 		target: Global
 
-		function onAboutToFocusTextField(textField, textFieldContainer, flickable) {
-			if (!textField || !textFieldContainer || !flickable) {
-				console.warn("onAboutToFocusTextField(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
+		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
+			if (!textField || !textFieldContainer || !viewToScroll) {
+				console.warn("onAboutToFocusTextField(): invalid item/container/viewToScroll:", textField, textFieldContainer, viewToScroll)
 				return
 			}
 			const inputPanelY = Global.mainView.height - root.height
@@ -88,9 +123,18 @@ QtVirtualKeyboard.InputPanel {
 			// Find the distance between the top of the input panel and the bottom of the text
 			// field container.
 			const delta = toWinY - inputPanelY
+			if (delta < 0) {
+				// View does not need to be scrolled to see the VKB.
+				return
+			}
 
-			if (delta > 0) {
+			if (viewToScroll === Global.mainView.cardsLoader) {
+				// The text field is in the main cards view.
+				root.cardsYOffset = viewToScroll.y - delta
+			} else {
+				// The text field is in some other flickable.
 				// Scroll the flickable upwards to show the item above the vkb.
+				const flickable = viewToScroll
 				root.toContentY = flickable.contentY + delta
 
 				if (flickable.contentY + delta + flickable.height > flickable.contentHeight) {
@@ -101,14 +145,10 @@ QtVirtualKeyboard.InputPanel {
 					// No flickable height changes required.
 					root.toHeight = flickable.height
 				}
-			} else {
-				// No position changes required, but PropertyChanges requires a valid target, so
-				// set the dest values to the current values.
-				root.toContentY = flickable.contentY
-				root.toHeight = flickable.height
 			}
+
 			root.focusedItem = textField
-			root.focusedFlickable = flickable
+			root.focusedView = viewToScroll
 		}
 	}
 

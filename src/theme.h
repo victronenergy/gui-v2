@@ -78,7 +78,7 @@ public:
 	void setForcedColorScheme(Victron::VenusOS::Theme::ForcedColorScheme forcedScheme);
 
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
-
+	Q_INVOKABLE bool windowIsLandscape() const;
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
 	QString applicationVersion() const;

@@ -16,12 +16,41 @@ Loader {
 	property color backgroundColor: Theme.color_page_background
 	readonly property bool animationRunning: inAnimation.running || outAnimation.running
 	property bool viewActive: false
+	property real yOffset
+
 	readonly property int _animationDuration: animationEnabled ? Theme.animation_controlCards_slide_duration : 1
+
+	function setYOffset(offset, animate) {
+		yOffset = offset
+		displaceTransition.enabled = animate
+		state = "displaced"
+	}
+
+	function clearYOffset() {
+		yOffset = 0
+		displaceTransition.enabled = true
+		state = ""
+	}
 
 	active: viewActive
 	onActiveChanged: if (active) active = viewActive // remove binding
 	opacity: 0.0
 	enabled: viewActive || outAnimation.running
+
+	states: State {
+		name: "displaced"
+		PropertyChanges {
+			target: cardsLoader
+			y: cardsLoader.yOffset
+		}
+	}
+	transitions: Transition {
+		id: displaceTransition
+		YAnimator {
+			duration: Theme.animation_inputPanel_slide_duration
+			easing.type: Easing.InOutQuad
+		}
+	}
 
 	SequentialAnimation {
 		id: inAnimation

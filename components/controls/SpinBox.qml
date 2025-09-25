@@ -57,6 +57,9 @@ T.SpinBox {
 	topPadding: orientation === Qt.Vertical ? up.indicator.height + spacing : 0
 	bottomPadding: orientation === Qt.Vertical ? down.indicator.height + spacing : 0
 	spacing: Theme.geometry_spinBox_spacing
+	validator: DoubleValidator {
+		locale: Units.numberFormattingLocaleName
+	}
 
 	onValueModified: {
 		if (value === to) {

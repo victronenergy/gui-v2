@@ -55,7 +55,6 @@ FocusScope {
 			top: header.bottom
 		}
 		height: Theme.geometry_switchableoutput_control_height
-		editable: !Global.isGxDevice // no room for VKB in the switch pane
 		suffix: numericInputUnit.value ?? ""
 		from: decimalConverter.intFrom
 		to: decimalConverter.intTo
@@ -87,6 +86,14 @@ FocusScope {
 		VeQuickItem {
 			id: numericInputUnit
 			uid: root.switchableOutput.uid + "/Settings/Unit"
+		}
+
+		MouseArea {
+			anchors.fill: spinBox.contentItem
+			onPressed: (event) => {
+				Global.aboutToFocusTextField(spinBox.textInput, spinBox, Global.mainView.cardsLoader)
+				event.accepted = false
+			}
 		}
 
 		SpinBoxDecimalConverter {

@@ -24,6 +24,7 @@ CT.SpinBox {
 
 	property string suffix
 	readonly property real indicatorWidth: width / 4
+	property Item textInput
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 			implicitContentWidth + leftPadding + rightPadding)
@@ -32,6 +33,9 @@ CT.SpinBox {
 	leftPadding: indicatorWidth
 	rightPadding: indicatorWidth
 	editable: true
+	validator: DoubleValidator {
+		locale: Units.numberFormattingLocaleName
+	}
 
 	onValueChanged: inputArea.setTextFromValue(value)
 	Component.onCompleted: inputArea.setTextFromValue(value)
@@ -89,6 +93,8 @@ CT.SpinBox {
 			fontPixelSize: Theme.font_size_body2
 			arrowKeysEnabled: upDownHintFrame.visible
 			focus: Global.keyNavigationEnabled
+
+			Component.onCompleted: root.textInput = inputArea
 		}
 
 		// Orange frame with arrow indicators, to hint that up/down keys will change the value,
@@ -112,10 +118,19 @@ CT.SpinBox {
 		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
 		border.width: Theme.geometry_button_border_width
 
-		// Disable up/down indicators while text is edited directly, as indicators increase/decrease
-		// based on the actual SpinBox value, which may be different from the value shown by the
-		// text input if it has not yet been accepted.
-		enabled: !(root.editable && inputArea.activeFocus)
+		MouseArea {
+			anchors.fill: parent
+			onPressed: (event) => {
+				if (root.editable && inputArea.activeFocus) {
+					// Use the custom decrease(), which decreases the currently-entered value.
+					inputArea.decrease()
+					event.accepted = true
+				} else {
+					// Use the default SpinBox decrease(), which decreases the saved root.value.
+					event.accepted = false
+				}
+			}
+		}
 
 		CP.ColorImage {
 			anchors.centerIn: parent
@@ -135,7 +150,20 @@ CT.SpinBox {
 			   : Theme.color_background_disabled
 		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
 		border.width: Theme.geometry_button_border_width
-		enabled: !(root.editable && inputArea.activeFocus)
+
+		MouseArea {
+			anchors.fill: parent
+			onPressed: (event) => {
+				if (root.editable && inputArea.activeFocus) {
+					// Use the custom increase(), which increases the currently-entered value.
+					inputArea.increase()
+					event.accepted = true
+				} else {
+					// Use the default SpinBox increase(), which increases the saved root.value.
+					event.accepted = false
+				}
+			}
+		}
 
 		CP.ColorImage {
 			anchors.centerIn: parent
