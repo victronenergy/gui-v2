@@ -54,6 +54,7 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
+		height: Theme.geometry_switchableoutput_control_height
 
 		onActivated: (index) => dropdownSync.writeValue(index)
 
