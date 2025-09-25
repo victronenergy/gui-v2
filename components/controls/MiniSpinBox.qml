@@ -33,6 +33,9 @@ CT.SpinBox {
 	leftPadding: indicatorWidth
 	rightPadding: indicatorWidth
 	editable: true
+	validator: DoubleValidator {
+		locale: Units.numberFormattingLocaleName
+	}
 
 	onValueChanged: inputArea.setTextFromValue(value)
 	Component.onCompleted: inputArea.setTextFromValue(value)
