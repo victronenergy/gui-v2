@@ -24,6 +24,7 @@ CT.SpinBox {
 
 	property string suffix
 	readonly property real indicatorWidth: width / 4
+	property Item textInput
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 			implicitContentWidth + leftPadding + rightPadding)
@@ -89,6 +90,8 @@ CT.SpinBox {
 			fontPixelSize: Theme.font_size_body2
 			arrowKeysEnabled: upDownHintFrame.visible
 			focus: Global.keyNavigationEnabled
+
+			Component.onCompleted: root.textInput = inputArea
 		}
 
 		// Orange frame with arrow indicators, to hint that up/down keys will change the value,

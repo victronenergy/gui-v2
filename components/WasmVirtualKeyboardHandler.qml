@@ -6,23 +6,51 @@
 import QtQuick
 import Victron.VenusOS
 
-// This handler increases the space below a flickable area whenever a text field within the
-// flickable is focused, if the text field is near the bottom of the flickable, and would otherwise
-// be obscured by the native virtual keyboard.
-//
-// This is required on Qt for Wasm on mobile browsers, as Qt.inputMethod does not provide the
-// geometry of the native VKB in this instance (see QTBUG-128406) so it is not possible to resize
-// and scroll flickables appropriately. So, the safest bet is to just scroll enough to show the
-// text field at the very top of the flickable, as the native VKB may almost fill the entire screen
-// on a mobile device in landscape orientation.
+/*
+	Handles the case where a text field is focused when running on Wasm, causing the native virtual
+	keyboard (not the Qt virtual keyboard, as defined by InputPanel.qml) to appear. When this
+	happens in landscape orientation, the view needs to move upwards or be scrolled upwards, so
+	that the focused field is not obscured by the native VKB.
+
+	Ideally this would only scroll the view up as much as is necessary to make space for the VKB,
+	but Qt.inputMethod does not provide the geometry of the native VKB (see QTBUG-128406). So, the
+	safest bet is to scroll enough to show the text field at the very top of the view, as the native
+	VKB may almost fill the entire screen on a mobile device in landscape orientation.
+
+	Two separate cases are handled:
+
+	- When a text field is focused within the Control Cards or Switch Pane view, the view is moved
+	upwards. (If the mouse is pressed outside of the text field container item, then the view's
+	original position is restored. Ideally this would also be done when the native VKB was closed
+	independently of the text field focus, but it is not possible to determine when this happens.)
+
+	- When a text field is focused within a flickable elsewhere in the UI, the flickable is scrolled
+	and space is added below it, if the text field would otherwise be obscured by the native VKB.
+	(The original scroll position is not restored  when the mouse is pressed outside of the of the
+	container, as the user may continue to scroll  through the view, and may choose to focus some
+	other text field without wanting to make the VKB disappear and re-appear again.)
+*/
 Item {
 	id: root
 
-	property var focusedFlickable
+	property Flickable focusedFlickable
 	property real initialBottomMargin
 	property real initialCacheBuffer
 
+	property Item focusedCardItem
+
 	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
+		if (!!focusedCardItem) {
+			const mappedPoint = focusedCardItem.mapFromItem(item, itemMouseX, itemMouseY)
+			if (!focusedCardItem.contains(mappedPoint)) {
+				// The screen was clicked outside of the text field. Remove focus from it, so that
+				// the VKB will close. Return true to swallow the mouse event.
+				focusedCardItem.focus = false
+				focusedCardItem = null
+				Global.mainView.cardsLoader.clearYOffset()
+				return true
+			}
+		}
 		return false
 	}
 
@@ -91,35 +119,48 @@ Item {
 	}
 
 	Connections {
-		id: focusListener
-
-		property var textField
-		property var textFieldContainer
-		property var flickable
-
 		target: Global
 
-		// Do not updateFocusItem() when this function is called, as that causes the flickable
-		// scrolling to occur when a text field is pressed (rather than when released), which
-		// produces confused scrolling behavior when dragging over a text field within the
-		// flickable. Instead, record the parameters and call updateFocusItem() when the item
-		// actually receives the focus (i.e. after the mouse is released).
-		function onAboutToFocusTextField(textField, textFieldContainer, flickable) {
+		// Called when a text field is pressed, before it receives focus.
+		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
 			if (!Theme.windowIsLandscape()) {
 				return
 			}
-			focusListener.textField = textField
-			focusListener.textFieldContainer = textFieldContainer
-			focusListener.flickable = flickable
+
+			if (viewToScroll === Global.mainView.cardsLoader) {
+				// The text field is in the Control Cards or Switch Pane view. Find the position of
+				// the text field container within the view, and move the view by this amount.
+				// (Ideally this would not be done until the onReleased event, but in that case, on
+				// the browser does not realise the text field is already in view, so when text is
+				// entered into the field, the browser auto-shrinks the window, causing the field to
+				// disappear from view.)
+				const textContainerY = textFieldContainer.mapToItem(viewToScroll, 0, 0).y
+				focusedCardItem = textField
+				Global.mainView.cardsLoader.setYOffset(-textContainerY, false)
+			} else {
+				// The text field is in a flickable in some other view. Delay the call to
+				// updateFocusItem() until the onReleased event, to avoid confused scrolling
+				// behavior when dragging over a text field within the view. Instead, record the
+				// parameters and call the function later when the item actually receives the focus.
+				focusListener.textField = textField
+				focusListener.textFieldContainer = textFieldContainer
+				focusListener.flickable = viewToScroll
+			}
 		}
 	}
 
 	Connections {
+		id: focusListener
+
+		property Item textField
+		property Item textFieldContainer
+		property Flickable flickable
+
 		target: Global.main
 
 		function onActiveFocusItemChanged() {
-			if (Global.main.activeFocusItem && Global.main.activeFocusItem === focusListener.textField) {
-				updateFocusItem(focusListener.textField, focusListener.textFieldContainer, focusListener.flickable)
+			if (Global.main.activeFocusItem && Global.main.activeFocusItem === textField) {
+				updateFocusItem(textField, textFieldContainer, flickable)
 			}
 		}
 	}
