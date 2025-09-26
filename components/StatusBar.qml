@@ -24,7 +24,10 @@ FocusScope {
 	signal leftButtonClicked()
 	signal rightButtonClicked()
 	signal auxButtonClicked()
-	signal popToPage(toPage: Page)
+	// PageStack.get(...) returns an Item, so the arg for 'popToPage' needs to be 'Item'. If we make it a 'Page', it works fine on the desktop,
+	// but shows an unusual failure on the device. There is an error message about "passing incompatible arguments to signals is not supported",
+	// and the page stack pops 1 too many pages.
+	signal popToPage(toPage: Item)
 
 	width: parent.width
 	height: Theme.geometry_statusBar_height
