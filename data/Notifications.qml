@@ -47,7 +47,7 @@ QtObject {
 			// the notification must be acknowledged: false at the point of being updated
 			// (this is because injected notifications' active is always false)
 			// for a toast to be considered for raising (and preempting existing ones)
-			if (!notif.acknowledged && notif.active) {
+			if (!notif.acknowledged) {
 				toastedNotif.checkAndRemoveExistingToast(notif)
 				if (!toastedNotif.toast) {
 					let createdToast = Global.notificationLayer?.showToastNotification(notif.type, "")
