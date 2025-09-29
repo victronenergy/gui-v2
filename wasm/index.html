@@ -30,6 +30,12 @@
         color: #FAF9F5;
         font-family: "Roboto", sans-serif;
       }
+      a,
+      a:visited,
+      a:hover,
+      a:active {
+        color: #387DC5;
+      }
       #mockup {
         display: none;
         z-index: 0;
@@ -316,13 +322,33 @@
                 // Show error message in wrapper_inner
                 const wrapper_inner = document.querySelector('#wrapper-inner');
                 wrapper_inner.innerHTML = `
-                  <div style="color: red; font-size: 20px; margin-top: 20px;">
-                    <b>Error loading application!</b><br><br>
-                    <b>URL:</b> <i>${window.location.href}</i><br>
-                    <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
-                    <b>${e.name}:</b> <i>${e.message}</i><br>
-                    <b>Stack:</b> <i>${e.stack}</i>
-                  </div>`;
+                    <div style="color: red; font-size: 20px; margin: 20px 25px 0;">
+                      <b>Error pre-loading application!</b><br><br>
+                      <b>URL:</b> <i>${window.location.href}</i><br>
+                      <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
+                      <b>${e.name}:</b> <i>${e.message}</i><br>
+                      <b>Stack:</b> <i>${e.stack}</i>
+                    </div>`;
+
+                // show button to reload the page and try downloading from VRM server
+                if ((
+                    e.message.toLowerCase().includes('network')
+                    || e.message.toLowerCase().includes('error in input stream')
+                ) && !window.location.search.includes('download=vrm')) {
+                    const params = new URLSearchParams(window.location.search);
+                    params.set('download', 'vrm');
+                    const link = `${window.location.pathname}?${params.toString()}`;
+                    wrapper_inner.innerHTML += `
+                        <div style="margin: 20px 50px 0;">
+                          It looks like the network connection is too slow or unstable to download the UI.<br><br>
+                          <a href="${link}">Click here</a> to try downloading the UI web application from the VRM servers on the internet,
+                          instead from the GX device. The data connection will still be direct to the GX device: no connection between the VRM Portal
+                          and the GX device is required.<br>
+                          <br>
+                          This split-method (download UI from internet & direct data connection) is for systems with a limited network connection
+                          between the GX device and the internet. For example a GX device with a GSM connection and a client connected over VPN.
+                        </div>`;
+                }
 
                 class PreloadWasmError extends Error {
                     constructor(message) {
@@ -439,14 +465,34 @@
                     // If the error is from preloadWasm, we already showed the error
                     console.warn("PreloadWasmError caught, no need to show again");
                 } else {
-                    wrapper_inner.innerHTML += `
-                      <div style="color: red; font-size: 20px; margin-top: 20px;">
-                        <b>Error loading application!</b><br><br>
-                        <b>URL:</b> <i>${window.location.href}</i><br>
-                        <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
-                        <b>${e.name}:</b> <i>${e.message}</i><br>
-                        <b>Stack:</b> <i>${e.stack}</i>
-                      </div>`;
+                    wrapper_inner.innerHTML = `
+                        <div style="color: red; font-size: 20px; margin: 20px 25px 0;">
+                          <b>Error loading application!</b><br><br>
+                          <b>URL:</b> <i>${window.location.href}</i><br>
+                          <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
+                          <b>${e.name}:</b> <i>${e.message}</i><br>
+                          <b>Stack:</b> <i>${e.stack}</i>
+                        </div>`;
+
+                    // show button to reload the page and try downloading from VRM server
+                    if ((
+                        e.message.toLowerCase().includes('network')
+                        || e.message.toLowerCase().includes('error in input stream')
+                    ) && !window.location.search.includes('download=vrm')) {
+                        const params = new URLSearchParams(window.location.search);
+                        params.set('download', 'vrm');
+                        const link = `${window.location.pathname}?${params.toString()}`;
+                        wrapper_inner.innerHTML += `
+                            <div style="margin: 20px 50px 0;">
+                              It looks like the network connection is too slow or unstable to download the UI.<br><br>
+                              <a href="${link}">Click here</a> to try downloading the UI web application from the VRM servers on the internet,
+                              instead from the GX device. The data connection will still be direct to the GX device: no connection between the VRM Portal
+                              and the GX device is required.<br>
+                              <br>
+                              This split-method (download UI from internet & direct data connection) is for systems with a limited network connection
+                              between the GX device and the internet. For example a GX device with a GSM connection and a client connected over VPN.
+                            </div>`;
+                    }
                 }
             }
         }
