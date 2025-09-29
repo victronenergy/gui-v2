@@ -1,0 +1,31 @@
+/*
+** Copyright (C) 2023 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+import Victron.VenusOS
+
+ModalDialog {
+	id: root
+
+	property alias r: colorSelector.r
+	property alias g: colorSelector.g
+	property alias b: colorSelector.b
+
+	//% "Color"
+	title: qsTrId("colorselectordialog_set_date")
+
+	contentItem: ModalDialog.FocusableContentItem {
+		ColorSelector {
+			id: colorSelector
+
+			availableWidth: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
+			anchors {
+				centerIn: parent
+				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+			}
+			focus: true
+		}
+	}
+}
