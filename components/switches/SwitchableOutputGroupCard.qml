@@ -53,7 +53,7 @@ ControlCard {
 				uid: modelData
 				onTypeChanged: {
 					if (type >= 0) {
-						delegateLoader.setSource("switches/delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
+						delegateLoader.setSource("delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
 							width: Qt.binding(function() { return outputGrid.cellWidth }),
 							height: Qt.binding(function() { return outputGrid.cellHeight }),
 							switchableOutput: output,
