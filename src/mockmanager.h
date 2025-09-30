@@ -30,6 +30,7 @@ public:
 	Q_INVOKABLE void removeServices(const QString &serviceType);
 
 	Q_INVOKABLE bool loadConfiguration(const QString &fileName);
+	Q_INVOKABLE void dumpValues();
 
 	static MockManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 

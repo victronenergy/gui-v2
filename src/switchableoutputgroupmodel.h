@@ -7,14 +7,66 @@
 #define VICTRON_GUIV2_SWITCHABLEOUTPUTGROUPMODEL_H
 
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
 #include <QStringList>
 #include <QMap>
+#include <QPointer>
+#include <QQmlListProperty>
 #include <qqmlintegration.h>
 
 #include "basedevice.h"
 
+class VeQItem;
+
 namespace Victron {
 namespace VenusOS {
+
+class SwitchableOutput;
+class SwitchableOutputGroupModel;
+
+/*
+	A group of of switchable outputs.
+
+	This is either a named group, with a custom user-defined name, or the group for a device on the
+	system.
+*/
+class SwitchableOutputGroup : public QObject
+{
+	Q_OBJECT
+	QML_ELEMENT
+	QML_UNCREATABLE("Created by SwitchableOutputGroupModel")
+	Q_PROPERTY(QString name READ name NOTIFY nameChanged FINAL)
+	Q_PROPERTY(QQmlListProperty<SwitchableOutput> outputs READ outputs NOTIFY outputsChanged FINAL)
+public:
+	QString groupId() const;
+	QQmlListProperty<SwitchableOutput> outputs();
+
+	// Returns the group name (either the named group, or the service/device name)
+	QString name() const;
+	void setName(const QString &name);
+
+	bool addOutput(SwitchableOutput *output);
+	bool removeOutput(const QString &outputUid);
+	bool isRemainingOutput(const QString &outputUid) const;
+
+	static SwitchableOutputGroup *newNamedGroup(const QString &groupName, QObject *parent);
+	static SwitchableOutputGroup *newDeviceGroup(const QString &serviceUid, QObject *parent);
+	static QString namedGroupId(const QString &groupName);
+	static QString deviceGroupId(const QString &serviceUid);
+
+Q_SIGNALS:
+	void nameChanged();
+	void outputsChanged();
+
+private:
+	explicit SwitchableOutputGroup(QObject *parent, const QString &groupId);
+	void sortOutputs();
+
+	QList<SwitchableOutput *> m_outputs;
+	QString m_groupId;
+	QString m_name;
+};
+
 
 /*
 	A model of switchable output groups.
@@ -30,12 +82,12 @@ class SwitchableOutputGroupModel : public QAbstractListModel
 {
 	Q_OBJECT
 	QML_ELEMENT
-	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
 
 public:
 	enum Role {
-		NameRole = Qt::UserRole,
-		OutputUidsRole
+		GroupRole = Qt::UserRole,
+		GroupNameRole
 	};
 	Q_ENUM(Role)
 
@@ -43,22 +95,6 @@ public:
 	~SwitchableOutputGroupModel();
 
 	int count() const;
-
-	Q_INVOKABLE void addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid, const QString &outputSortToken);
-	Q_INVOKABLE void addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid, const QString &outputSortToken);
-
-	Q_INVOKABLE void removeOutputFromNamedGroup(const QString &namedGroup, const QString &outputUid);
-	Q_INVOKABLE void removeOutputFromDeviceGroup(const QString &serviceUid, const QString &outputUid);
-
-	// Device groups require addKnownDevice() to be called first, to provide an appropriate device.
-	// Note: this model takes ownership of the device.
-	Q_INVOKABLE void addKnownDevice(BaseDevice *device);
-	Q_INVOKABLE bool hasKnownDevice(const QString &serviceUid) const;
-
-	Q_INVOKABLE int indexOfNamedGroup(const QString &namedGroup) const;
-	Q_INVOKABLE int indexOfDeviceGroup(const QString &serviceUid) const;
-
-	Q_INVOKABLE void updateSortTokenInGroup(int groupIndex, const QString &outputUid, const QString &outputSortToken);
 
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
@@ -70,35 +106,39 @@ protected:
 	QHash<int, QByteArray> roleNames() const override;
 
 private:
-	struct Group {
-		static Group fromName(const QString &groupName);
-		static Group fromDevice(BaseDevice *device);
-
-		void refreshName(BaseDevice *device = nullptr);
-
-		QStringList outputUids;
-		QString deviceServiceUid; // only set if this is a device group
-		QString namedGroup; // only set if this is a named group
-		QString name;
+	struct SwitchableOutputInfo {
+		SwitchableOutput *output = nullptr;
+		QString groupId; // The current group of the output
 	};
 
-	void updateDeviceGroupName(BaseDevice *device);
-	int insertionIndex(const Group &group) const;
-	int sortedGroupIndex(const Group &group, int defaultValue) const;
-	int countGroupsWithDevice(const QString &serviceUid);
-	void addOutputToGroup(int index, const QString &outputUid);
-	void removeOutputFromGroup(int index, const QString &outputUid);
-	void insertGroupAt(int index, const Group &group);
-	void removeGroupAt(int index);
-	void moveDeviceGroupToSortedIndex(int groupIndex);
+	void cleanUp();
+	void addAvailableServices();
+	void anyServiceAdded(VeQItem *serviceItem);
+	void addSwitchableOutputChildren(VeQItem *switchableOutputParentItem);
+	void anyServiceAboutToBeRemoved(VeQItem *serviceItem);
+	void addOutputForItem(VeQItem *switchableOutputItem);
+	void removeOutputForItem(VeQItem *switchableOutputItem);
+	int indexOfGroup(const QString &groupId) const;
+	void addOutputToItsGroup(SwitchableOutput *output);
+	void removeOutputFromItsGroup(const QString &outputUid);
 
-	bool outputUidLessThan(const QString &outputUid1, const QString &outputUid2) const;
-	int outputUidInsertionIndex(const QStringList &outputUids, const QString &outputUid) const;
-
-	QMap<QString, BaseDevice *> m_knownDevices;
-	QMap<QString, QString> m_outputSortTokens;
-	QList<Group> m_groups;
+	QList<SwitchableOutputGroup *> m_groups;
+	QHash<QString, SwitchableOutputInfo> m_outputs;
 };
+
+/*
+	Provides a sorted SwitchableOutputGroupModel.
+
+	Groups are sorted by name.
+*/
+class SortedSwitchableOutputGroupModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+public:
+	explicit SortedSwitchableOutputGroupModel(QObject *parent = nullptr);
+};
+
 
 } /* VenusOS */
 } /* Victron */

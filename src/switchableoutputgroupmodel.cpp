@@ -4,324 +4,152 @@
 */
 
 #include "switchableoutputgroupmodel.h"
-
-#include <algorithm>
+#include "allservicesmodel.h"
+#include "alldevicesmodel.h"
+#include "switchableoutput.h"
 
 #include <QQmlInfo>
 #include <QQmlEngine>
 
 using namespace Victron::VenusOS;
-
-
-SwitchableOutputGroupModel::Group SwitchableOutputGroupModel::Group::fromName(const QString &groupName)
+SwitchableOutputGroup::SwitchableOutputGroup(QObject *parent, const QString &groupId)
+	: QObject(parent)
+	, m_groupId(groupId)
 {
-	Group group;
-	group.namedGroup = groupName;
-	group.refreshName();
-	return group;
 }
 
-SwitchableOutputGroupModel::Group SwitchableOutputGroupModel::Group::fromDevice(BaseDevice *device)
+QString SwitchableOutputGroup::groupId() const
 {
-	if (!device) {
-		qWarning() << "Cannot create group, invalid device!";
-		return Group();
+	return m_groupId;
+}
+
+QQmlListProperty<SwitchableOutput> SwitchableOutputGroup::outputs()
+{
+	return QQmlListProperty<SwitchableOutput>(this, &m_outputs);
+}
+
+QString SwitchableOutputGroup::name() const
+{
+	return m_name;
+}
+
+void SwitchableOutputGroup::setName(const QString &name)
+{
+	if (m_name != name) {
+		m_name = name;
+		emit nameChanged();
 	}
+}
 
-	Group group;
-	group.deviceServiceUid = device->serviceUid();
-	group.refreshName(device);
+bool SwitchableOutputGroup::addOutput(SwitchableOutput *output)
+{
+	if (!output) {
+		qWarning() << "output group: cannot add invalid output!";
+		return false;
+	}
+	if (m_outputs.contains(output)) {
+		return false;
+	} else {
+		m_outputs.append(output);
+		sortOutputs();
+		connect(output, &SwitchableOutput::formattedNameChanged, this, &SwitchableOutputGroup::sortOutputs);
+		emit outputsChanged();
+		return true;
+	}
+}
+
+bool SwitchableOutputGroup::removeOutput(const QString &outputUid)
+{
+	for (int i = 0; i < m_outputs.count(); ++i) {
+		if (m_outputs.at(i)->uid() == outputUid) {
+			m_outputs[i]->disconnect(this);
+			m_outputs.removeAt(i);
+			sortOutputs();
+			emit outputsChanged();
+			return true;
+		}
+	}
+	return false;
+}
+
+bool SwitchableOutputGroup::isRemainingOutput(const QString &outputUid) const
+{
+	return m_outputs.count() == 1 && outputUid == m_outputs.at(0)->uid();
+}
+
+void SwitchableOutputGroup::sortOutputs()
+{
+	std::sort(m_outputs.begin(),
+			  m_outputs.end(),
+			  [this](SwitchableOutput *output1, SwitchableOutput *output2) {
+		return output1 && output2
+				&& output1->formattedName().localeAwareCompare(output2->formattedName()) < 0;
+	});
+}
+
+SwitchableOutputGroup *SwitchableOutputGroup::newNamedGroup(const QString &groupName, QObject *parent)
+{
+	SwitchableOutputGroup *group = new SwitchableOutputGroup(parent, namedGroupId(groupName));
+	group->setName(groupName);
 	return group;
 }
 
-void SwitchableOutputGroupModel::Group::refreshName(BaseDevice *device)
+SwitchableOutputGroup *SwitchableOutputGroup::newDeviceGroup(const QString &serviceUid, QObject *parent)
 {
-	name = device ? device->name() : namedGroup;
+	SwitchableOutputGroup *group = new SwitchableOutputGroup(parent, deviceGroupId(serviceUid));
+	const QString serviceType = BaseDevice::serviceTypeFromUid(serviceUid);
+	if (serviceType == QStringLiteral("system")) {
+		//% "GX device relays"
+		group->setName(qtTrId("gx_device_relays"));
+	} else {
+		if (BaseDevice *device = AllDevicesModel::create()->findDevice(serviceUid)) {
+			connect(device, &BaseDevice::nameChanged, group, [group, device]() {
+				 group->setName(device->name());
+			});
+			group->setName(device->name());
+		}
+	}
+	return group;
 }
+
+QString SwitchableOutputGroup::namedGroupId(const QString &groupName)
+{
+	return QStringLiteral("__venus_guiv2_named_group_%1").arg(groupName);
+}
+
+QString SwitchableOutputGroup::deviceGroupId(const QString &serviceUid)
+{
+	return QStringLiteral("__venus_guiv2_service_group_%1").arg(serviceUid);
+}
+
 
 SwitchableOutputGroupModel::SwitchableOutputGroupModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
+	addAvailableServices();
+
+	connect(AllServicesModel::create(), &AllServicesModel::serviceAdded,
+			this, &SwitchableOutputGroupModel::anyServiceAdded);
+	connect(AllServicesModel::create(), &AllServicesModel::serviceAboutToBeRemoved,
+			this, &SwitchableOutputGroupModel::anyServiceAboutToBeRemoved);
+	connect(AllServicesModel::create(), &AllServicesModel::modelAboutToBeReset, this, [this]() {
+		beginResetModel();
+		cleanUp();
+	});
+	connect(AllServicesModel::create(), &AllServicesModel::modelReset, this, [this]() {
+		addAvailableServices();
+		endResetModel();
+		emit countChanged();
+	});
 }
 
 SwitchableOutputGroupModel::~SwitchableOutputGroupModel()
 {
-	qDeleteAll(m_knownDevices.values());
 }
 
 int SwitchableOutputGroupModel::count() const
 {
 	return m_groups.count();
-}
-
-void SwitchableOutputGroupModel::addOutputToNamedGroup(const QString &namedGroup, const QString &outputUid, const QString &outputSortToken)
-{
-	m_outputSortTokens.insert(outputUid, outputSortToken);
-
-	const int index = indexOfNamedGroup(namedGroup);
-	if (index >= 0) {
-		addOutputToGroup(index, outputUid);
-	} else {
-		Group group = Group::fromName(namedGroup);
-		group.outputUids.append(outputUid);
-		insertGroupAt(insertionIndex(group), group);
-	}
-}
-
-void SwitchableOutputGroupModel::addOutputToDeviceGroup(const QString &serviceUid, const QString &outputUid, const QString &outputSortToken)
-{
-	m_outputSortTokens.insert(outputUid, outputSortToken);
-
-	const int index = indexOfDeviceGroup(serviceUid);
-	if (index >= 0) {
-		addOutputToGroup(index, outputUid);
-	} else {
-		BaseDevice *device = m_knownDevices.value(serviceUid);
-		if (!device) {
-			qWarning() << "No known device with uid" << serviceUid << ", call addKnownDevice() to add it first!";
-			return;
-		}
-		Group group = Group::fromDevice(device);
-		group.outputUids.append(outputUid);
-		insertGroupAt(insertionIndex(group), group);
-	}
-}
-
-void SwitchableOutputGroupModel::removeOutputFromNamedGroup(const QString &namedGroup, const QString &outputUid)
-{
-	const int index = indexOfNamedGroup(namedGroup);
-	if (index >= 0) {
-		removeOutputFromGroup(index, outputUid);
-	} else {
-		qWarning() << "remove failed, cannot find group with name:" << namedGroup;
-	}
-}
-
-void SwitchableOutputGroupModel::removeOutputFromDeviceGroup(const QString &serviceUid, const QString &outputUid)
-{
-	const int index = indexOfDeviceGroup(serviceUid);
-	if (index >= 0) {
-		removeOutputFromGroup(index, outputUid);
-	} else {
-		qWarning() << "remove failed, cannot find group for device:" << serviceUid;
-	}
-}
-
-void SwitchableOutputGroupModel::addKnownDevice(BaseDevice *device)
-{
-	if (!device) {
-		qWarning() << "Invalid device, cannot add known device";
-		return;
-	}
-
-	if (m_knownDevices.contains(device->serviceUid())) {
-		qWarning() << "Cannot add known device, entry already exists for" << device->serviceUid();
-		return;
-	}
-	m_knownDevices.insert(device->serviceUid(), device);
-
-	// Ensure the object is not garbage collected by the JS engine.
-	QQmlEngine::setObjectOwnership(device, QQmlEngine::CppOwnership);
-
-	// Allow group names to be updated when the device name changes.
-	connect(device, &BaseDevice::nameChanged, this, [this, device] { updateDeviceGroupName(device); });
-}
-
-bool SwitchableOutputGroupModel::hasKnownDevice(const QString &serviceUid) const
-{
-	return m_knownDevices.contains(serviceUid);
-}
-
-int SwitchableOutputGroupModel::indexOfNamedGroup(const QString &namedGroup) const
-{
-	for (int i = 0; i < m_groups.count(); ++i) {
-		if (m_groups.at(i).namedGroup == namedGroup) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-int SwitchableOutputGroupModel::indexOfDeviceGroup(const QString &serviceUid) const
-{
-	for (int i = 0; i < m_groups.count(); ++i) {
-		if (m_groups.at(i).deviceServiceUid == serviceUid) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-void SwitchableOutputGroupModel::updateSortTokenInGroup(int groupIndex, const QString &outputUid, const QString &outputSortToken)
-{
-	if (groupIndex < 0 || groupIndex >= m_groups.count()) {
-		qWarning() << "Cannot update sort token, invalid group index!" << groupIndex;
-		return;
-	}
-
-	m_outputSortTokens.insert(outputUid, outputSortToken);
-
-	std::sort(m_groups[groupIndex].outputUids.begin(),
-			  m_groups[groupIndex].outputUids.end(),
-			  [this](const QString &uid1, const QString &uid2) {
-		return outputUidLessThan(uid1, uid2);
-	});
-	emit dataChanged(createIndex(groupIndex, 0), createIndex(groupIndex, 0), { OutputUidsRole });
-}
-
-void SwitchableOutputGroupModel::updateDeviceGroupName(BaseDevice *device)
-{
-	if (!device) {
-		qWarning() << "Invalid device, cannot update group name";
-		return;
-	}
-	const int index = indexOfDeviceGroup(device->serviceUid());
-	if (index < 0) {
-		return;
-	}
-
-	const QString prevName = m_groups[index].name;
-	m_groups[index].refreshName(device);
-	if (prevName != m_groups[index].name) {
-		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { NameRole });
-
-		// Move the group to preserve the sorted model order.
-		moveDeviceGroupToSortedIndex(index);
-	}
-}
-
-void SwitchableOutputGroupModel::moveDeviceGroupToSortedIndex(int groupIndex)
-{
-	if (groupIndex < 0 || groupIndex >= m_groups.count()) {
-		return;
-	}
-
-	const Group &group = m_groups.at(groupIndex);
-	const int sortedIndex = sortedGroupIndex(group, -1);
-
-	if (sortedIndex > 0
-			&& sortedIndex < m_groups.count()
-			&& m_groups[sortedIndex].deviceServiceUid == group.deviceServiceUid) {
-		// The group at the previous index is this group that was modified, so it is already at
-		// the correct index.
-		return;
-	}
-
-	int fromIndex = groupIndex;
-	int toIndex = -1;
-	if (sortedIndex < 0) {
-		// Move the entry to the end of the list.
-		toIndex = count() - 1;
-	} else {
-		// Move the entry to be immediately before the sorted index.
-		toIndex = sortedIndex > fromIndex ? sortedIndex - 1 : sortedIndex;
-	}
-	if (fromIndex != toIndex) {
-		const int destIndex = toIndex > fromIndex ? toIndex + 1 : toIndex;
-		beginMoveRows(QModelIndex(), fromIndex, fromIndex, QModelIndex(), destIndex);
-		m_groups.move(fromIndex, toIndex);
-		endMoveRows();
-	}
-}
-
-int SwitchableOutputGroupModel::insertionIndex(const Group &group) const
-{
-	return sortedGroupIndex(group, m_groups.count());
-}
-
-int SwitchableOutputGroupModel::sortedGroupIndex(const Group &group, int defaultValue) const
-{
-	for (int i = 0; i < m_groups.count(); ++i) {
-		if (group.name.localeAwareCompare(m_groups.at(i).name) < 0) {
-			return i;
-		}
-	}
-	return defaultValue;
-}
-
-int SwitchableOutputGroupModel::countGroupsWithDevice(const QString &serviceUid)
-{
-	int matches = 0;
-	for (const Group &group : m_groups) {
-		if (group.deviceServiceUid == serviceUid) {
-			matches++;
-		}
-	}
-	return matches;
-}
-
-bool SwitchableOutputGroupModel::outputUidLessThan(const QString &outputUid1, const QString &outputUid2) const
-{
-	return m_outputSortTokens.value(outputUid1).localeAwareCompare(m_outputSortTokens.value(outputUid2)) < 0;
-}
-
-int SwitchableOutputGroupModel::outputUidInsertionIndex(const QStringList &outputUids, const QString &outputUid) const
-{
-	for (int i = 0; i < outputUids.count(); ++i) {
-		if (outputUidLessThan(outputUid, outputUids.at(i))) {
-			return i;
-		}
-	}
-	return outputUids.count();
-}
-
-void SwitchableOutputGroupModel::addOutputToGroup(int index, const QString &outputUid)
-{
-	if (index >= 0
-			&& index < m_groups.count()
-			&& m_groups[index].outputUids.indexOf(outputUid) < 0) {
-		m_groups[index].outputUids.insert(outputUidInsertionIndex(m_groups[index].outputUids, outputUid), outputUid);
-		emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
-	}
-}
-
-void SwitchableOutputGroupModel::removeOutputFromGroup(int index, const QString &outputUid)
-{
-	if (index >= 0 && index < m_groups.count()) {
-		const QStringList &groupOutputUids = m_groups.at(index).outputUids;
-		if (groupOutputUids.count() == 1 && groupOutputUids.first() == outputUid) {
-			// Removing this output would result in an empty group, so just remove the group
-			// altogether.
-			removeGroupAt(index);
-		} else {
-			if (m_groups[index].outputUids.removeOne(outputUid)) {
-				emit dataChanged(createIndex(index, 0), createIndex(index, 0), { OutputUidsRole });
-			} else {
-				qWarning() << "Cannot find output" << outputUid << "in group:"
-						   << m_groups[index].name << m_groups[index].namedGroup;
-			}
-		}
-		m_outputSortTokens.remove(outputUid);
-	}
-}
-
-void SwitchableOutputGroupModel::insertGroupAt(int index, const Group &group)
-{
-	if (index >= 0 && index <= m_groups.count()) {
-		beginInsertRows(QModelIndex(), index, index);
-		m_groups.insert(index, group);
-		endInsertRows();
-		emit countChanged();
-	}
-}
-
-void SwitchableOutputGroupModel::removeGroupAt(int index)
-{
-	if (index >= 0 && index < m_groups.count()) {
-		beginRemoveRows(QModelIndex(), index, index);
-		Group group = m_groups.takeAt(index);
-
-		// If there are no more groups linked to this device, then remove the known device.
-		if (countGroupsWithDevice(group.deviceServiceUid) == 0) {
-			if (BaseDevice *device = m_knownDevices.take(group.deviceServiceUid)) {
-				device->disconnect(this);
-				delete device;
-			}
-		}
-
-		endRemoveRows();
-		emit countChanged();
-	}
 }
 
 QVariant SwitchableOutputGroupModel::data(const QModelIndex &index, int role) const
@@ -331,13 +159,12 @@ QVariant SwitchableOutputGroupModel::data(const QModelIndex &index, int role) co
 		return QVariant();
 	}
 
-	const Group &group = m_groups.at(row);
 	switch (role)
 	{
-	case NameRole:
-		return group.name;
-	case OutputUidsRole:
-		return QVariant::fromValue(group.outputUids);
+	case GroupRole:
+		return QVariant::fromValue<SwitchableOutputGroup *>(m_groups.at(row));
+	case GroupNameRole:
+		return m_groups.at(row)->name();
 	}
 	return QVariant();
 }
@@ -349,9 +176,195 @@ int SwitchableOutputGroupModel::rowCount(const QModelIndex &) const
 
 QHash<int, QByteArray> SwitchableOutputGroupModel::roleNames() const
 {
-	static QHash<int, QByteArray> roles = {
-		{ NameRole, "name" },
-		{ OutputUidsRole, "outputUids" },
+	static const QHash<int, QByteArray> roles {
+		{ GroupRole, "group" },
+		{ GroupNameRole, "groupName" },
 	};
 	return roles;
+}
+
+void SwitchableOutputGroupModel::cleanUp()
+{
+	qDeleteAll(m_groups);
+	m_groups.clear();
+
+	for (auto it = m_outputs.begin(); it != m_outputs.end(); ++it) {
+		SwitchableOutput *output = it.value().output;
+		output->disconnect(this);
+		delete output;
+	}
+	m_outputs.clear();
+}
+
+void SwitchableOutputGroupModel::addAvailableServices()
+{
+	for (int i = 0; i < AllServicesModel::create()->count(); ++i) {
+		if (VeQItem *serviceItem = AllServicesModel::create()->itemAt(i)) {
+			anyServiceAdded(serviceItem);
+		}
+	}
+}
+
+void SwitchableOutputGroupModel::anyServiceAdded(VeQItem *serviceItem)
+{
+	// If the service has a /SwitchableOutput path, add the children of that path as switchable
+	// outputs.
+	if (VeQItem *switchableOutputParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
+		addSwitchableOutputChildren(switchableOutputParentItem);
+	}
+
+	connect(serviceItem, &VeQItem::childAdded, this, [this](VeQItem *childItem) {
+		if (childItem->id() == QStringLiteral("SwitchableOutput")) {
+			addSwitchableOutputChildren(childItem);
+		}
+	});
+}
+
+void SwitchableOutputGroupModel::addSwitchableOutputChildren(VeQItem *switchableOutputParentItem)
+{
+	for (auto it = switchableOutputParentItem->itemChildren().begin();
+		 it != switchableOutputParentItem->itemChildren().end();
+		 ++it) {
+		addOutputForItem(it.value());
+	}
+	// If any children of the /SwitchableOutput path are added/removed in the future, add/remove
+	// the children as switchable outputs.
+	connect(switchableOutputParentItem, &VeQItem::childAdded,
+			this, &SwitchableOutputGroupModel::addOutputForItem);
+	connect(switchableOutputParentItem, &VeQItem::childAboutToBeRemoved,
+			this, &SwitchableOutputGroupModel::removeOutputForItem);
+}
+
+void SwitchableOutputGroupModel::anyServiceAboutToBeRemoved(VeQItem *serviceItem)
+{
+	// If the service has a /SwitchableOutput path, remove all children of that path as switchable
+	// outputs.
+	if (VeQItem *switchableOutputParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
+		for (auto it = switchableOutputParentItem->itemChildren().begin();
+			 it != switchableOutputParentItem->itemChildren().end();
+			 ++it) {
+			removeOutputForItem(it.value());
+		}
+	}
+}
+
+void SwitchableOutputGroupModel::addOutputForItem(VeQItem *switchableOutputItem)
+{
+	SwitchableOutput *output = new SwitchableOutput(this, switchableOutputItem);
+	m_outputs.insert(output->uid(), SwitchableOutputInfo { output, QString() });
+
+	// Add the output to its group.
+	if (output->allowedInGroupModel()) {
+		addOutputToItsGroup(output);
+	}
+
+	// Update the group of the output when its group name changes, or when it is allowed/disallowed
+	// in groups.
+	connect(output, &SwitchableOutput::allowedInGroupModelChanged, this, [this, output]() {
+		removeOutputFromItsGroup(output->uid());
+		addOutputToItsGroup(output);
+	});
+	connect(output, &SwitchableOutput::groupChanged, this, [this, output]() {
+		removeOutputFromItsGroup(output->uid());
+		addOutputToItsGroup(output);
+	});
+}
+
+void SwitchableOutputGroupModel::removeOutputForItem(VeQItem *switchableOutputItem)
+{
+	if (auto it = m_outputs.find(switchableOutputItem->uniqueId()); it != m_outputs.end()) {
+		// From the output from its group, if it is in one.
+		removeOutputFromItsGroup(switchableOutputItem->uniqueId());
+
+		// Remove the output from m_outputs and delete the output object.
+		SwitchableOutput *output = it.value().output;
+		output->disconnect(this);
+		m_outputs.erase(it);
+		delete output;
+	}
+}
+
+int SwitchableOutputGroupModel::indexOfGroup(const QString &groupId) const
+{
+	for (int i = 0; i < m_groups.count(); ++i) {
+		if (m_groups.at(i)->groupId() == groupId) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+void SwitchableOutputGroupModel::addOutputToItsGroup(SwitchableOutput *output)
+{
+	if (!output->allowedInGroupModel()) {
+		return;
+	}
+
+	const QString groupId = output->group().length() > 0
+			? SwitchableOutputGroup::namedGroupId(output->group())
+			: SwitchableOutputGroup::deviceGroupId(output->serviceUid());
+	if (const int groupIndex = indexOfGroup(groupId); groupIndex >= 0) {
+		// Add the output to an existing group.
+		m_groups[groupIndex]->addOutput(output);
+	} else {
+		// Create a new group. If the output group is set, add the output to that named group.
+		// Otherwise, add it to the group for its device.
+		SwitchableOutputGroup *group = output->group().length() > 0
+				? SwitchableOutputGroup::newNamedGroup(output->group(), this)
+				: SwitchableOutputGroup::newDeviceGroup(output->serviceUid(), this);
+		group->addOutput(output);
+		beginInsertRows(QModelIndex(), m_groups.count(), m_groups.count());
+		m_groups.append(group);
+		endInsertRows();
+		emit countChanged();
+
+		// Update the model data when the group name changes.
+		connect(group, &SwitchableOutputGroup::nameChanged, this, [this, group]() {
+			if (const int groupIndex = indexOfGroup(group->groupId()); groupIndex >= 0) {
+				emit dataChanged(createIndex(groupIndex, 0), createIndex(groupIndex, 0), { GroupNameRole });
+			}
+		});
+	}
+
+	m_outputs[output->uid()].groupId = groupId;
+}
+
+void SwitchableOutputGroupModel::removeOutputFromItsGroup(const QString &outputUid)
+{
+	auto it = m_outputs.find(outputUid);
+	if (it == m_outputs.end() || it.value().groupId.isEmpty()) {
+		// Output is not currently in a group.
+		return;
+	}
+
+	const int groupIndex = indexOfGroup(it.value().groupId);
+	if (groupIndex < 0) {
+		qWarning() << "Cannot find group" << it.value().groupId << "for output:" << outputUid;
+		return;
+	}
+
+	if (m_groups.at(groupIndex)->isRemainingOutput(outputUid)) {
+		// Removing this output would result in an empty group, so just remove the group
+		// altogether.
+		beginRemoveRows(QModelIndex(), groupIndex, groupIndex);
+		delete m_groups.takeAt(groupIndex);
+		endRemoveRows();
+		emit countChanged();
+	} else {
+		if (!m_groups[groupIndex]->removeOutput(outputUid)) {
+			qWarning() << "Cannot find output" << outputUid << "in group:" << m_groups.at(groupIndex)->groupId();
+		}
+	}
+
+	// Indicate the output is no longer in a group.
+	it.value().groupId.clear();
+}
+
+
+SortedSwitchableOutputGroupModel::SortedSwitchableOutputGroupModel(QObject *parent)
+	: QSortFilterProxyModel(parent)
+{
+	setSortLocaleAware(true);
+	setSortRole(SwitchableOutputGroupModel::GroupNameRole);
+	sort(0, Qt::AscendingOrder);
 }
