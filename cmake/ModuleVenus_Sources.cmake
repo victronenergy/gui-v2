@@ -102,8 +102,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
-    components/SwitchableOutputGroupCard.qml
-    components/SwitchableOutputSlider.qml
     components/SystemBatteryDelegate.qml
     components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
@@ -235,6 +233,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/SliderHandleHighlight.qml
 
     components/switches/SwitchableOutputCardDelegateHeader.qml
+    components/switches/SwitchableOutputGroupCard.qml
+    components/switches/SwitchableOutputSlider.qml
     components/switches/delegates/SwitchableOutputCardDelegate_0.qml
     components/switches/delegates/SwitchableOutputCardDelegate_1.qml
     components/switches/delegates/SwitchableOutputCardDelegate_2.qml
