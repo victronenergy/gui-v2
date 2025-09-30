@@ -191,6 +191,18 @@
         "/SwitchableOutput/dropdown_2/State": 1,
         "/SwitchableOutput/dropdown_2/Status": 32,
 
+        "/SwitchableOutput/dropdown_3/Dimming": 3,
+        "/SwitchableOutput/dropdown_3/Name": "06c. Dropdown, 15 options",
+        "/SwitchableOutput/dropdown_3/Settings/CustomName": "",
+        "/SwitchableOutput/dropdown_3/Settings/Function": 2,
+        "/SwitchableOutput/dropdown_3/Settings/Group": "",
+        "/SwitchableOutput/dropdown_3/Settings/Labels": ["Label 0", "Label 1", "Label 2", "Label 3", "Label 4", "Label 5", "Label 6", "Label 7", "Label 8", "Label 9", "Label 10", "Label 11", "Label 12", "Label 13", "Label 14", "Label 15"],
+        "/SwitchableOutput/dropdown_3/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/dropdown_3/Settings/Type": 6,
+        "/SwitchableOutput/dropdown_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dropdown_3/State": 1,
+        "/SwitchableOutput/dropdown_3/Status": 9,
+
         "/SwitchableOutput/basic_slider_1/Dimming": 100,
         "/SwitchableOutput/basic_slider_1/Name": "07a. Basic slider",
         "/SwitchableOutput/basic_slider_1/Settings/CustomName": "",

@@ -89,10 +89,15 @@ T.ComboBox {
 
 		contentItem: ListView {
 			clip: true
-			interactive: false
-			implicitHeight: contentHeight
+			implicitHeight: Math.min(contentHeight, Global.mainView.height - (2 * Theme.geometry_comboBox_verticalPadding))
+			boundsBehavior: Flickable.StopAtBounds
 			model: root.popup.visible ? root.delegateModel : null
 			currentIndex: root.highlightedIndex
+
+			ScrollBar.vertical: ScrollBar {
+				topPadding: Theme.geometry_comboBox_verticalPadding
+				bottomPadding: Theme.geometry_comboBox_verticalPadding
+			}
 		}
 
 		background: Rectangle {
@@ -112,9 +117,18 @@ T.ComboBox {
 			}
 		}
 
-		// Workaround for QTBUG-121029 (popup does not open as popup visible=true even when closed)
-		function _updateVisibility() { visible = opened }
-		onOpenedChanged: Qt.callLater(_updateVisibility)
+		onAboutToShow: {
+			// Prefer to show popup in a position where the current selection is shown over the top
+			// of the combo box.
+			y = -(root.currentIndex * root.height)
+
+			// If the popup would be shown with the top edge above the top of the main view, move
+			// it downwards.
+			const posInWindow = mapToItem(Global.mainView, 0, y)
+			if (posInWindow.y < Theme.geometry_comboBox_verticalPadding) {
+				y = mapFromItem(Global.mainView, 0, Theme.geometry_comboBox_verticalPadding).y
+			}
+		}
 	}
 
 	Keys.enabled: Global.keyNavigationEnabled
