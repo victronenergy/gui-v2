@@ -68,13 +68,13 @@ FocusScope {
 
 		// Get/set the current index. Note Dimming and DimmingMax are 1-based. E.g. if Dimming=1
 		// and DimmingMax=5, the options are 1-5 inclusive, and the first option is selected.
-		currentIndex: root.switchableOutput.hasDimming ? root.switchableOutput.dimming - 1 : -1
+		currentIndex: root.switchableOutput.dimming - 1
 		onIndexClicked: (index) => { root.switchableOutput.setDimming(index + 1) }
 
 		Connections {
 			target: root.switchableOutput
 			function onDimmingChanged() {
-				multiStep.currentIndex = root.switchableOutput.hasDimming ? root.switchableOutput.dimming - 1 : -1
+				multiStep.currentIndex = root.switchableOutput.dimming - 1
 			}
 		}
 

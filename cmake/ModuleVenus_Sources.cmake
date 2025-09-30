@@ -300,7 +300,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
-    data/common/SwitchableOutput.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml
@@ -648,6 +647,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/solarinputmodel.cpp
     src/solaryieldmodel.h
     src/solaryieldmodel.cpp
+    src/switchableoutput.h
+    src/switchableoutput.cpp
     src/switchableoutputmodel.h
     src/switchableoutputmodel.cpp
     src/switchableoutputgroupmodel.h
