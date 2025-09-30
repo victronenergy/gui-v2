@@ -509,9 +509,10 @@ public:
 		SwitchableOutput_Type_NumericInput,
 		SwitchableOutput_Type_ThreeStateSwitch,
 		SwitchableOutput_Type_BilgePump,
+		SwitchableOutput_Type_RgbwDimmer,
 
 		// Update this value whenever new types are added.
-		SwitchableOutput_Type_MaxSupportedType = SwitchableOutput_Type_BilgePump
+		SwitchableOutput_Type_MaxSupportedType = SwitchableOutput_Type_RgbwDimmer
 	};
 	Q_ENUM(SwitchableOutput_Type)
 

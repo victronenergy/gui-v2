@@ -52,6 +52,9 @@
 
     "color_modalDialog_border": "color_gray2",
 
+    "color_colorWheelDialog_button_border": "color_gray5",
+    "color_colorWheelDialog_button_rgb_border": "color_gray7",
+
     "color_radioButton_indicator_on": "color_ok",
     "color_radioButton_indicator_off": "color_gray3",
     "color_radioButton_indicator_disabled": "color_gray6",

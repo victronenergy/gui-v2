@@ -150,6 +150,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
 
+    components/dialogs/ColorWheelDialog.qml
     components/dialogs/CurrentLimitDialog.qml
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogShadow.qml
@@ -231,8 +232,11 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
 
+    components/switches/ColorPresetGrid.qml
+    components/switches/ColorWheelModeButton.qml
     components/switches/SwitchableOutputCardDelegateHeader.qml
     components/switches/SwitchableOutputGroupCard.qml
+    components/switches/SwitchableOutputDimmableSlider.qml
     components/switches/SwitchableOutputSlider.qml
     components/switches/delegates/SwitchableOutputCardDelegate_0.qml
     components/switches/delegates/SwitchableOutputCardDelegate_1.qml
@@ -244,6 +248,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/switches/delegates/SwitchableOutputCardDelegate_8.qml
     components/switches/delegates/SwitchableOutputCardDelegate_9.qml
     components/switches/delegates/SwitchableOutputCardDelegate_10.qml
+    components/switches/delegates/SwitchableOutputCardDelegate_11.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
@@ -681,6 +686,8 @@ set(VictronVenusOS_RESOURCES
     images/icon_vrm_32.png
     images/brief.svg
     images/cloud.svg
+    images/color_wheel_rgb.png
+    images/color_wheel_temp.png
     images/consumption.svg
     images/dcloads.svg
     images/dot.svg
@@ -697,6 +704,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_charging_renewables.svg
     images/icon_charging_shore.svg
     images/icon_CL_24.svg
+    images/icon_edit_32.svg
     images/icon_fresh_water_24.svg
     images/icon_raw_water_24.svg
     images/icon_waste_water_24.svg

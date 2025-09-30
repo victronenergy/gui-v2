@@ -25,7 +25,7 @@ Window {
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
 	// Uncomment for key navigation debugging
-	// onActiveFocusItemChanged: console.info("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
+	onActiveFocusItemChanged: console.info("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
 
 	function skipSplashScreen() {
 		Global.splashScreenVisible = false
