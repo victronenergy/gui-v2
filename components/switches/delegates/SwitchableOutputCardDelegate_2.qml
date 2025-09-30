@@ -72,12 +72,6 @@ FocusScope {
 	SwitchableOutputSlider {
 		id: slider
 
-		// True when the On/Off button and the slider are both controllable.
-		readonly property bool controlIsEnabled: root.enabled
-
-		// True when the On/Off button text is "On", i.e. the slider should be controllable.
-		readonly property bool sliderIsEnabled: dimmingState.expectedValue === 1 || dragging
-
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
@@ -88,13 +82,12 @@ FocusScope {
 
 		switchableOutput: root.switchableOutput
 		leftPadding: dimmingToggleButton.width
-		enabled: sliderIsEnabled
 		focus: root.editing
-		highlightColor: controlIsEnabled
-			? (sliderIsEnabled ? Theme.color_ok : Theme.color_button_off_background)
-			: (sliderIsEnabled ? Theme.color_button_on_background_disabled : Theme.color_button_off_background_disabled)
-		backgroundColor: controlIsEnabled ? Theme.color_darkOk : Theme.color_background_disabled
-		borderColor: controlIsEnabled ? Theme.color_ok : Theme.color_font_disabled
+		highlightColor: enabled
+			? (dimmingToggleButton.checked ? Theme.color_ok : Theme.color_button_off_background)
+			: (dimmingToggleButton.checked ? Theme.color_button_on_background_disabled : Theme.color_button_off_background_disabled)
+		backgroundColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
+		borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
 	}
 
 	MiniToggleButton {
