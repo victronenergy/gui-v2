@@ -25,23 +25,15 @@ T.ComboBox {
 
 		width: root.width
 		height: root.height
-		highlighted: root.highlightedIndex === index
+		highlighted: root.highlightedIndex === index || pressed
 
 		contentItem: Rectangle {
 			anchors.fill: parent
-			radius: Theme.geometry_button_radius
+			topLeftRadius: index === 0 ? Theme.geometry_button_radius : 0
+			topRightRadius: index === 0 ? Theme.geometry_button_radius : 0
+			bottomLeftRadius: index === root.count - 1 ? Theme.geometry_button_radius : 0
+			bottomRightRadius: index === root.count - 1 ? Theme.geometry_button_radius : 0
 			color: optionDelegate.highlighted ? Theme.color_ok : "transparent"
-
-			// Add another rectangle to fill out the bottom and/or top corners to pretend this is
-			// showing a half-rounded rect for the first/last options, and no rounded corners for
-			// the other options in between.
-			Rectangle {
-				y: index === 0 ? height : 0
-				width: parent.width
-				height: index === 0 || index === root.count - 1 ? parent.height / 2 : parent.height
-				color: parent.color
-				visible: root.count > 0
-			}
 
 			Label {
 				anchors.fill: parent
