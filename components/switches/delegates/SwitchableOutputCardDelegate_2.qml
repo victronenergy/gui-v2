@@ -75,7 +75,7 @@ FocusScope {
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
-			right: parent.right
+			right: colorSelector.left
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
@@ -110,6 +110,49 @@ FocusScope {
 			radius: Theme.geometry_miniSlider_separator_width / 2
 			color: enabled ? Theme.color_slider_separator : Theme.color_font_disabled
 		}
+	}
+
+
+	Rectangle {
+		id: colorSelector
+
+		anchors {
+			right: parent.right
+			rightMargin: Theme.geometry_controlCard_button_margins
+			top: header.bottom
+		}
+		implicitHeight: Theme.geometry_switchableoutput_control_height
+		implicitWidth: Theme.geometry_switchableoutput_control_height
+		radius: 6
+
+		color: "green"
+
+		MouseArea {
+			anchors.fill: parent
+
+
+			onClicked: Global.dialogLayer.open(colorWheelComponent, {
+				r: colorSelector.color.r,
+				g: colorSelector.color.g,
+				b: colorSelector.color.b
+			})
+
+			Component {
+				id: colorWheelComponent
+
+				ColorWheelDialog {
+					onAccepted: {
+						const seconds = ClockTime.otherClockTime(year, month, day, date ? date.getHours() : 0, date ? date.getSeconds() : 0)
+						if (dataItem.uid.length > 0) {
+							dataItem.setValue(seconds)
+						} else {
+							root.date = new Date(seconds * 1000)
+						}
+					}
+				}
+			}
+		}
+
 	}
 
 	SettingSync {

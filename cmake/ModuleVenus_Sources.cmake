@@ -32,6 +32,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
     components/ClippingBarGauge.qml
+    components/ColorSelector.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
@@ -152,6 +153,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
 
+    components/dialogs/ColorWheelDialog.qml
     components/dialogs/CurrentLimitDialog.qml
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogShadow.qml
