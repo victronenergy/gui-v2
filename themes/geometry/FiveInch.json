@@ -257,7 +257,7 @@
 
     "geometry_switchableoutput_topMargin": 16,
     "geometry_switchableoutput_row_count": 4,
-    "geometry_switchableoutput_label_margin": 4,
+    "geometry_switchableoutput_label_margin": 2,
     "geometry_switchableoutput_control_height": 40,
     "geometry_switchableoutput_status_verticalPadding": 2,
     "geometry_switchableoutput_status_horizontalPadding": 8,
