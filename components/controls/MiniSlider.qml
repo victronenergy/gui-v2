@@ -24,17 +24,22 @@ T.Slider {
 		+ borderWidth
 		+ (root.visualPosition * (root.availableWidth - indicatorBackgroundWidth - 2*borderWidth))
 
+	property bool _completed
+
 	Component.onCompleted: {
-		anim.duration = Theme.animation_slider_valueChange_duration
+		_completed = true
 	}
 
 	onNextSliderXChanged: {
-		if (!root.animationEnabled) {
+		// Don't animate the value change if it was changed by the user (i.e. pressed=true), else it
+		// looks laggy. Also don't animate when setting the initial binding (before completed=true).
+		if (!root.animationEnabled || pressed || !_completed) {
 			sliderX = nextSliderX
 		} else {
 			anim.stop()
 			anim.from = sliderX
 			anim.to = nextSliderX
+			anim.duration = Theme.animation_slider_valueChange_duration
 			anim.start()
 		}
 	}
@@ -44,7 +49,8 @@ T.Slider {
 		radius: Theme.geometry_slider_groove_radius
 		color: root.backgroundColor
 
-		// Inner rectangle that fills the slider area up to the handle position.
+		// Inner rectangle that fills the slider area up until the handle position, to display the
+		// progress value.
 		Rectangle {
 			anchors {
 				top: parent.top
