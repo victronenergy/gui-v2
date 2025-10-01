@@ -85,7 +85,7 @@
     "geometry_temperatureSlider_dot_padding": 4,
     "geometry_temperatureSlider_indicator_size": 4,
     "geometry_temperatureSlider_decorator_vertical_padding": 6,
-    "geometry_temperatureSlider_popup_padding": 20,
+    "geometry_temperatureSlider_popup_padding": 8,
     "geometry_temperatureSlider_popup_width": 90,
     "geometry_temperatureSlider_popup_height": 53,
     "geometry_temperatureSlider_popup_radius": 8,

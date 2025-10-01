@@ -49,7 +49,19 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
-		secondaryTitle: slider.value.toFixed(slider.stepSizeDecimalCount) + Global.systemSettings.temperatureUnitSuffix
+		secondaryTitle: measurementItem.valid
+			? "%1%2/<font color=\"%3\">%4</font>%5"
+					.arg(slider.value.toFixed(slider.stepSizeDecimalCount))
+					.arg(Units.degreesSymbol)
+					.arg(Theme.color_font_secondary)
+					.arg(measurementItem.value.toFixed(slider.stepSizeDecimalCount))
+					.arg(Global.systemSettings.temperatureUnitSuffix)
+			: slider.value.toFixed(slider.stepSizeDecimalCount) + Global.systemSettings.temperatureUnitSuffix
+	}
+
+	VeQuickItem {
+		id: measurementItem
+		uid: root.switchableOutput.uid + "/Measurement"
 	}
 
 	TemperatureSlider {
@@ -63,5 +75,6 @@ FocusScope {
 			top: header.bottom
 		}
 		switchableOutput: root.switchableOutput
+		measurementText: measurementItem.valid ? measurementItem.value.toFixed(slider.stepSizeDecimalCount) + Units.degreesSymbol : ""
 	}
 }

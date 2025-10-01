@@ -10,6 +10,8 @@ import Victron.VenusOS
 SwitchableOutputSlider {
 	id: root
 
+	property string measurementText
+
 	// Determine the number of dots with padding will fit into the available space (Add one for the maximal dot)
 	readonly property real dotWithPadding: Theme.geometry_temperatureSlider_dot_size + Theme.geometry_temperatureSlider_dot_padding
 	readonly property int dotCount: Math.min(Math.floor(availableWidth / dotWithPadding) + 1, ((to - from) / stepSize) + 1)
@@ -70,9 +72,9 @@ SwitchableOutputSlider {
 		id: popup
 
 		x: handle.x + (handle.width / 2) - (width / 2)
-		y: handle.y - height - Theme.geometry_temperatureSlider_popup_padding
+		y: handle.y - height - (2 * Theme.geometry_temperatureSlider_popup_padding)
 		width: Math.max(Theme.geometry_temperatureSlider_popup_width,
-			popupLabel.implicitWidth + Theme.geometry_temperatureSlider_popup_padding)
+			popupLabel.implicitWidth + (2 * Theme.geometry_temperatureSlider_popup_padding))
 		height: Theme.geometry_temperatureSlider_popup_height
 		closePolicy: Popup.CloseOnReleaseOutside
 
@@ -94,11 +96,54 @@ SwitchableOutputSlider {
 
 		contentItem: Label {
 			id: popupLabel
+			rightPadding: measurementLabel.visible
+					// Add padding on either side of the separator, and on the right edge
+					? measurementLabel.width + (3 * Theme.geometry_temperatureSlider_popup_padding)
+					: 0
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			font.pixelSize: Theme.font_size_h2
 			text: root.value.toFixed(root.stepSizeDecimalCount) + Units.degreesSymbol
 			color: Theme.color_button_down_text
+
+			SeparatorBar {
+				id: popupSeparator
+				anchors {
+					verticalCenter: parent.verticalCenter
+					right: measurementLabel.left
+					rightMargin: Theme.geometry_temperatureSlider_popup_padding
+				}
+				height: popupLabel.implicitHeight - (2 * Theme.geometry_temperatureSlider_popup_padding)
+				visible: root.measurementText.length > 0
+				color: Theme.color_gray7
+			}
+
+			Label {
+				id: measurementLabel
+				anchors {
+					verticalCenter: parent.verticalCenter
+					verticalCenterOffset: -(measurementCaptionLabel.height / 2)
+					right: parent.right
+				}
+				width: Math.max(measurementCaptionLabel.implicitWidth, implicitWidth)
+				visible: root.measurementText.length > 0
+				horizontalAlignment: Text.AlignHCenter
+				color: Theme.color_gray7
+				text: root.measurementText
+				font.pixelSize: Theme.font_size_body2
+
+				Label {
+					id: measurementCaptionLabel
+					anchors.top: parent.bottom
+					//: The current temperature measurement
+					//% "Current"
+					text: qsTrId("temperature_slider_current")
+					font.pixelSize: Theme.font_size_tiny
+					width: parent.width
+					horizontalAlignment: Text.AlignHCenter
+					color: Theme.color_gray7
+				}
+			}
 		}
 	}
 
