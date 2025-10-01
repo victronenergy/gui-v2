@@ -96,6 +96,7 @@
         "/SwitchableOutput/dimming_3/Status": 32,
 
         "/SwitchableOutput/temp_setpoint_1/Dimming": 1.5,
+        "/SwitchableOutput/temp_setpoint_1/Measurement": 1.2,
         "/SwitchableOutput/temp_setpoint_1/Name": "03a. Temperature setpoint",
         "/SwitchableOutput/temp_setpoint_1/Settings/CustomName": "",
         "/SwitchableOutput/temp_setpoint_1/Settings/Function": 2,
