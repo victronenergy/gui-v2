@@ -93,7 +93,7 @@ FocusScope {
 						topMargin: Theme.geometry_navigationBar_notifications_redDot_topMargin
 					}
 					sourceComponent: NotificationCounter {
-						count: Global.notifications?.activeOrUnAcknowledgedCount ?? 0
+						count: Global.notifications?.unAcknowledgedCount ?? 0
 					}
 					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
 							&& (Global.notifications?.navBarNotificationCounterVisible ?? false)
