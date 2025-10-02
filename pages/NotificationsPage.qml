@@ -65,6 +65,17 @@ SwipeViewPage {
 				radius: Theme.geometry_listItem_radius
 				onReleased: notifDelegate._acknowledge()
 			}
+
+			// Automatically acknowledge/silence all Information type notifications upon leaving the page.
+			// NOTE: we actually need to add a method to NotificationsModel to acknowledge ALL rather than
+			//       just the visible delegates, but first we need to refactor the code to ensure that the
+			//       NotificationsModel elements (BaseNotification) also has the backend communication
+			//       (i.e. VeQuickItems) that are in Notification.qml currently.
+			Component.onDestruction: {
+				if (type === VenusOS.Notification_Info) {
+					_acknowledge()
+				}
+			}
 		}
 
 		Component {
