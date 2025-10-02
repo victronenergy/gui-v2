@@ -15,7 +15,7 @@ FocusScope {
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
-	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
+	readonly property Page currentPage: cardsActive ? cardsLoader.currentPage
 			: pageStack.currentPage || swipeView?.currentItem
 	readonly property alias cardsLoader: cardsLoader
 
@@ -41,6 +41,7 @@ FocusScope {
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload
+			&& cardsLoader.ready
 			&& swipeViewLoader.readyToLoad
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
@@ -362,7 +363,7 @@ FocusScope {
 		onLeftButtonClicked: {
 			switch (leftButton) {
 			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				cardsLoader.show(controlCardsComponent)
+				cardsLoader.show(cardsLoader.controlCardsPage)
 				break
 			case VenusOS.StatusBar_LeftButton_ControlsActive:
 				cardsLoader.hide()
@@ -379,7 +380,7 @@ FocusScope {
 			if (root.cardsActive) {
 				cardsLoader.hide()
 			} else {
-				cardsLoader.show(auxCardsComponent)
+				cardsLoader.show(cardsLoader.auxCardsPage)
 			}
 		}
 
@@ -405,14 +406,9 @@ FocusScope {
 	CardViewLoader {
 		id: cardsLoader
 
-		function show(viewComponent) {
-			sourceComponent = viewComponent
-			viewActive = true
-		}
-
-		function hide() {
-			viewActive = false
-		}
+		readonly property ControlCardsPage controlCardsPage: controlCardsLoader.item
+		readonly property AuxCardsPage auxCardsPage: auxCardsLoader.item
+		readonly property bool ready: controlCardsLoader.status === Loader.Ready && auxCardsLoader.status === Loader.Ready
 
 		anchors {
 			left: parent.left
@@ -429,14 +425,19 @@ FocusScope {
 
 		KeyNavigation.up: statusBar
 
-		Component {
-			id: controlCardsComponent
-			ControlCardsPage {}
+		Loader {
+			id: controlCardsLoader
+			anchors.fill: parent
+			sourceComponent: ControlCardsPage {
+				visible: cardsLoader.currentPage === cardsLoader.controlCardsPage
+			}
 		}
-
-		Component {
-			id: auxCardsComponent
-			AuxCardsPage {}
+		Loader {
+			id: auxCardsLoader
+			anchors.fill: parent
+			sourceComponent: AuxCardsPage {
+				visible: cardsLoader.currentPage === cardsLoader.auxCardsPage
+			}
 		}
 	}
 

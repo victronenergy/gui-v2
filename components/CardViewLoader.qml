@@ -6,16 +6,17 @@
 import QtQuick
 import Victron.VenusOS
 
-Loader {
+Item {
 	id: root
 
 	required property Item statusBarItem
 	required property Item navBarItem
 	required property Item swipeViewItem
 	required property bool animationEnabled
+	property Page currentPage
 	property color backgroundColor: Theme.color_page_background
 	readonly property bool animationRunning: inAnimation.running || outAnimation.running
-	property bool viewActive: false
+	property bool viewActive
 	property real yOffset
 
 	readonly property int _animationDuration: animationEnabled ? Theme.animation_controlCards_slide_duration : 1
@@ -32,10 +33,19 @@ Loader {
 		state = ""
 	}
 
-	active: viewActive
-	onActiveChanged: if (active) active = viewActive // remove binding
+	function show(page) {
+		currentPage = page
+		viewActive = true
+		inAnimation.start()
+	}
+
+	function hide() {
+		viewActive = false
+		outAnimation.start()
+	}
+
 	opacity: 0.0
-	enabled: viewActive || outAnimation.running
+	enabled: currentPage != null
 
 	states: State {
 		name: "displaced"
@@ -54,7 +64,6 @@ Loader {
 
 	SequentialAnimation {
 		id: inAnimation
-		running: root.viewActive
 
 		ParallelAnimation {
 			YAnimator {
@@ -98,7 +107,6 @@ Loader {
 
 	SequentialAnimation {
 		id: outAnimation
-		running: root.active && !root.viewActive
 
 		ParallelAnimation {
 			YAnimator {
@@ -137,11 +145,16 @@ Loader {
 				duration: root._animationDuration
 				easing.type: Easing.InSine
 			}
-			PropertyAction {
-				target: root.statusBarItem
-				property: "focus"
-				value: true
-			}
+		}
+		PropertyAction {
+			target: root.statusBarItem
+			property: "focus"
+			value: true
+		}
+		PropertyAction {
+			target: root
+			property: "currentPage"
+			value: null
 		}
 	}
 }
