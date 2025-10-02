@@ -89,12 +89,16 @@ SwipeViewPage {
 					id: iconContainer
 
 					anchors.verticalCenter: parent.verticalCenter
-					width: checkmarkIcon.width + (2 * Theme.geometry_listItem_content_horizontalMargin)
+					width: checkmarkIcon.width + 2*checkmarkIcon.anchors.leftMargin
 					height: parent.height
 
 					Image {
 						id: checkmarkIcon
-						anchors.centerIn: parent
+						anchors {
+							verticalCenter: parent.verticalCenter
+							left: parent.left
+							leftMargin: Theme.geometry_listItem_content_horizontalMargin - 8 // (48 - 32) / 2, to centre with delegate icons
+						}
 						source: "qrc:/images/icon_checkmark_48"
 					}
 				}
@@ -102,11 +106,11 @@ SwipeViewPage {
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					width: parent.width - iconContainer.width
-					color: Theme.color_font_secondary
-					font.pixelSize: Theme.font_size_body3
+					color: Theme.color_font_primary
+					font.pixelSize: Theme.font_size_h1
 
-					//% "No current alerts"
-					text: qsTrId("notifications_no_current_alerts")
+					//% "No active notifications"
+					text: qsTrId("notifications_no_active_notifications")
 				}
 			}
 		}
