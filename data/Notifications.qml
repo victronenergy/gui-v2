@@ -15,6 +15,11 @@ QtObject {
 			+ Math.max(warnings.activeCount, warnings.unAcknowledgedCount)
 			+ Math.max(informations.activeCount, informations.unAcknowledgedCount)
 
+	// We should show the status bar icon if there are any active or any unacknowledged
+	// Warning or Alarm type notifications, ignoring Information type notifications.
+	readonly property int activeOrUnAcknowledgedWarningsAndAlarms: Math.max(alarms.activeCount, alarms.unAcknowledgedCount)
+			+ Math.max(warnings.activeCount, warnings.unAcknowledgedCount)
+
 	// The "silence alarms" button simply acknowledges all,
 	// so we can assume that acknowledged alarms are silent.
 	// The dot should display the number of unsilenced alarms+warnings,
@@ -133,10 +138,11 @@ QtObject {
 		uid: root.serviceUid + "/AcknowledgeAll"
 	}
 
-	readonly property bool statusBarNotificationIconVisible: activeOrUnAcknowledgedCount > 0
-	readonly property int statusBarNotificationIconPriority: alarms.hasActive || !alarms.hasActive && alarms.hasUnAcknowledged ? VenusOS.Notification_Alarm :
-																																warnings.hasActive || !warnings.hasActive && warnings.hasUnAcknowledged ? VenusOS.Notification_Warning :
-																																																		  informations.hasActive || !informations.hasActive && informations.hasUnAcknowledged ? VenusOS.Notification_Info : -1
+	readonly property bool statusBarNotificationIconVisible: activeOrUnAcknowledgedWarningsAndAlarms > 0
+	readonly property int statusBarNotificationIconPriority: (alarms.hasActive || alarms.hasUnAcknowledged) ? VenusOS.Notification_Alarm
+			: (warnings.hasActive || warnings.hasUnAcknowledged) ? VenusOS.Notification_Warning
+			: (informations.hasActive || informations.hasUnAcknowledged) ? VenusOS.Notification_Info
+			: -1
 	readonly property bool silenceAlarmVisible: alarms.hasUnAcknowledged ||
 												warnings.hasUnAcknowledged ||
 												informations.hasUnAcknowledged
