@@ -469,6 +469,9 @@ QtObject {
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
 
+	//% "Silence alarm"
+	readonly property string silence_alarm: qsTrId("common_words_silence_alarm")
+
 	//: State of charge (as a percentage). %1 = the SOC value
 	//% "SOC %1"
 	readonly property string soc_with_prefix: qsTrId("common_words_soc")
