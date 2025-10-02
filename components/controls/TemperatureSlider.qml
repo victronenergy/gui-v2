@@ -4,11 +4,14 @@
 */
 
 import QtQuick
+import QtQuick.Effects as Effects
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 SwitchableOutputSlider {
 	id: root
+
+	property string measurementText
 
 	// Determine the number of dots with padding will fit into the available space (Add one for the maximal dot)
 	readonly property real dotWithPadding: Theme.geometry_temperatureSlider_dot_size + Theme.geometry_temperatureSlider_dot_padding
@@ -58,47 +61,110 @@ SwitchableOutputSlider {
 		}
 	}
 
+	// Ideally the popup is shown when pressed=true, but on device that causes the popup to be shown
+	// on the first press when the handle has not yet moved to the touch position, as the device
+	// drag threshold has not been reached. So, show the popup when the slider indicator has moved,
+	// rather than when it is pressed.
+	onMoved: {
+		popupLoader.active = true
+		popupLoader.item.open()
+	}
 	onPressedChanged: {
-		if (pressed) {
-			popup.open()
-		} else {
-			popup.close()
+		if (!pressed && !!popupLoader.item) {
+			popupLoader.item.close()
 		}
 	}
 
-	Popup {
-		id: popup
+	Loader {
+		id: popupLoader
 
-		x: handle.x + (handle.width / 2) - (width / 2)
-		y: handle.y - height - Theme.geometry_temperatureSlider_popup_padding
-		width: Math.max(Theme.geometry_temperatureSlider_popup_width,
-			popupLabel.implicitWidth + Theme.geometry_temperatureSlider_popup_padding)
-		height: Theme.geometry_temperatureSlider_popup_height
-		closePolicy: Popup.CloseOnReleaseOutside
+		active: false
+		sourceComponent: Popup {
+			id: popup
 
-		background: Rectangle {
-			color: Theme.color_blue
-			radius: Theme.geometry_temperatureSlider_popup_radius
+			x: handle.x + (handle.width / 2) - (width / 2)
+			y: -height + Theme.geometry_button_border_width
+			leftPadding: Theme.geometry_temperatureSlider_popup_padding
+			rightPadding: Theme.geometry_temperatureSlider_popup_padding
+			topPadding: 0
+			bottomPadding: 0
+			closePolicy: Popup.CloseOnReleaseOutside
 
-			CP.ColorImage {
-				anchors {
-					top: parent.bottom
-					topMargin: -1 // overlap that prevents artifacts and it just looks better
-					horizontalCenter: parent.horizontalCenter
-				}
-				source: "qrc:/images/spinbox_arrow_up.svg"
+			background: Rectangle {
 				color: Theme.color_blue
-				rotation: 180
-			}
-		}
+				radius: Theme.geometry_temperatureSlider_popup_radius
+				layer.enabled: true
+				layer.effect: Effects.MultiEffect {
+					shadowEnabled: true
+					shadowHorizontalOffset: Theme.geometry_temperatureSlider_popup_shadow_horizontalOffset
+					shadowVerticalOffset: Theme.geometry_temperatureSlider_popup_shadow_verticalOffset
+					blurMax: 24
+				}
 
-		contentItem: Label {
-			id: popupLabel
-			horizontalAlignment: Text.AlignHCenter
-			verticalAlignment: Text.AlignVCenter
-			font.pixelSize: Theme.font_size_h2
-			text: root.value.toFixed(root.stepSizeDecimalCount) + Units.degreesSymbol
-			color: Theme.color_button_down_text
+				CP.ColorImage {
+					id: popupArrow
+					anchors {
+						top: parent.bottom
+						topMargin: -1 // overlap that prevents artifacts and it just looks better
+						horizontalCenter: parent.horizontalCenter
+					}
+					source: "qrc:/images/spinbox_arrow_up.svg"
+					color: Theme.color_blue
+					rotation: 180
+				}
+			}
+
+			contentItem: Label {
+				id: popupLabel
+				rightPadding: measurementLabel.visible
+						// Add padding on either side of the separator, and on the right edge
+						? measurementLabel.width + (2 * Theme.geometry_temperatureSlider_popup_padding)
+						: 0
+				horizontalAlignment: Text.AlignHCenter
+				verticalAlignment: Text.AlignVCenter
+				font.pixelSize: Theme.font_size_h2
+				text: root.value.toFixed(root.stepSizeDecimalCount) + Units.degreesSymbol
+				color: Theme.color_button_down_text
+
+				SeparatorBar {
+					id: popupSeparator
+					anchors {
+						verticalCenter: parent.verticalCenter
+						right: measurementLabel.left
+						rightMargin: Theme.geometry_temperatureSlider_popup_padding
+					}
+					height: popupLabel.implicitHeight - (2 * Theme.geometry_temperatureSlider_popup_padding)
+					visible: root.measurementText.length > 0
+					color: Theme.color_gray7
+				}
+
+				Label {
+					id: measurementLabel
+					anchors {
+						verticalCenter: parent.verticalCenter
+						verticalCenterOffset: -(measurementCaptionLabel.height / 2)
+						right: parent.right
+					}
+					width: Math.max(measurementCaptionLabel.implicitWidth, implicitWidth)
+					visible: root.measurementText.length > 0
+					horizontalAlignment: Text.AlignHCenter
+					color: Theme.color_gray7
+					text: root.measurementText
+					font.pixelSize: Theme.font_size_body2
+
+					Label {
+						id: measurementCaptionLabel
+						anchors.top: parent.bottom
+						//: The current temperature measurement
+						//% "Current"
+						text: qsTrId("temperature_slider_current")
+						font.pixelSize: Theme.font_size_tiny
+						width: parent.width
+						horizontalAlignment: Text.AlignHCenter
+						color: Theme.color_gray7
+					}
+				}
+			}
 		}
 	}
 
