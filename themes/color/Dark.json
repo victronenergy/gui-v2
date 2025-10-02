@@ -23,7 +23,7 @@
     "color_critical_background": "#AA403E",
 
     "color_font_primary": "color_white",
-    "color_font_secondary": "color_dimWhite2",
+    "color_font_secondary": "color_gray5",
     "color_font_disabled": "color_gray4",
 
     "color_background_primary": "color_black",
@@ -109,12 +109,13 @@
     "color_solarDetailBox_quantityTitle": "color_gray5",
     "color_solarDetailBox_columnTitle": "color_gray6",
 
-    "color_solarListPage_header_text": "color_gray4",
+    "color_solarListPage_header_text": "color_gray5",
 
     "color_overviewPage_widget_background": "color_darkBlue",
     "color_overviewPage_widget_border": "color_ok",
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_blue",
+    "color_overviewPage_widget_battery_font_secondary": "color_dimWhite2",
 
     "color_boatPage_background": "color_black",
 

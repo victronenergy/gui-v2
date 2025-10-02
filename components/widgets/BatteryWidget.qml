@@ -88,6 +88,7 @@ OverviewWidget {
 
 	quantityLabel.value: batteryData.stateOfCharge
 	quantityLabel.unit: VenusOS.Units_Percentage
+	quantityLabel.unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 
 	color: "transparent"
 
@@ -168,6 +169,7 @@ OverviewWidget {
 
 		value: batteryData.temperature
 		unit: Global.systemSettings.temperatureUnit
+		unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 		font.pixelSize: Theme.font_size_body2
 		alignment: Qt.AlignRight
 		visible: !isNaN(batteryData.temperature)
@@ -187,7 +189,7 @@ OverviewWidget {
 				font.pixelSize: Theme.font_size_body1
 				width: parent.width
 				elide: Text.ElideRight
-				color: Theme.color_font_secondary
+				color: Theme.color_overviewPage_widget_battery_font_secondary
 			}
 			Label {
 				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
@@ -228,6 +230,7 @@ OverviewWidget {
 
 			value: batteryData.voltage
 			unit: VenusOS.Units_Volt_DC
+			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 			alignment: Qt.AlignLeft
 		},
@@ -242,6 +245,7 @@ OverviewWidget {
 			}
 			value: batteryData.current
 			unit: VenusOS.Units_Amp
+			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 		},
 
@@ -270,6 +274,7 @@ OverviewWidget {
 			}
 			value: batteryData.power
 			unit: VenusOS.Units_Watt
+			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
 			alignment: Qt.AlignRight
 		}

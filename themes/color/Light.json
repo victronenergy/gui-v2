@@ -23,7 +23,7 @@
     "color_critical_background": "#F58B87",
 
     "color_font_primary": "color_gray2",
-    "color_font_secondary": "color_dimGray2",
+    "color_font_secondary": "color_gray5",
     "color_font_disabled": "color_gray4",
 
     "color_background_primary": "color_white",
@@ -62,7 +62,7 @@
     "color_listItem_down_forwardIcon": "color_button_icon_down",
     "color_listItem_separator": "color_gray5",
     "color_listItem_secondaryText": "color_gray4",
-    "color_listItem_highAccessLevel": "#66F0962E",
+    "color_listItem_highAccessLevel": "color_darkOrange",
 
     "color_scrollBar_bar": "color_gray5",
 
@@ -115,6 +115,7 @@
     "color_overviewPage_widget_border": "color_ok",
     "color_overviewPage_widget_solar_graph_bar": "color_ok",
     "color_overviewPage_widget_battery_background": "color_lightBlue",
+    "color_overviewPage_widget_battery_font_secondary": "color_dimGray2",
 
     "color_boatPage_background": "color_gray9",
 
