@@ -46,6 +46,10 @@ QtObject {
 	//% "Active"
 	readonly property string active_status: qsTrId("common_words_active")
 
+	//: Notification has not been seen by the user, or has an active alarm associated with it.
+	//% "Active or unseen"
+	readonly property string active_or_unseen: qsTrId("common_words_active_or_unseen")
+
 	//: Voltage alarm is at "Alarm" level
 	//% "Alarm"
 	readonly property string alarm: qsTrId("common_words_alarm")
@@ -468,6 +472,9 @@ QtObject {
 
 	//% "Signal strength"
 	readonly property string signal_strength: qsTrId("common_words_signal_strength");
+
+	//% "Silence alarm"
+	readonly property string silence_alarm: qsTrId("common_words_silence_alarm")
 
 	//: State of charge (as a percentage). %1 = the SOC value
 	//% "SOC %1"

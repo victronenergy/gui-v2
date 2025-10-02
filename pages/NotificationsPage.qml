@@ -34,9 +34,11 @@ SwipeViewPage {
 		section.delegate: SettingsListHeader {
 			required property bool section
 
-			height: section ? 0 : implicitHeight
+			height: implicitHeight
 			bottomPadding: Theme.geometry_gradientList_spacing
-			text: section ? "" : CommonWords.history
+			text: section
+				? CommonWords.active_or_unseen
+				: CommonWords.history
 		}
 
 		model: Global.notifications.sortedModel
@@ -63,6 +65,17 @@ SwipeViewPage {
 				radius: Theme.geometry_listItem_radius
 				onReleased: notifDelegate._acknowledge()
 			}
+
+			// Automatically acknowledge/silence all Information type notifications upon leaving the page.
+			// NOTE: we actually need to add a method to NotificationsModel to acknowledge ALL rather than
+			//       just the visible delegates, but first we need to refactor the code to ensure that the
+			//       NotificationsModel elements (BaseNotification) also has the backend communication
+			//       (i.e. VeQuickItems) that are in Notification.qml currently.
+			Component.onDestruction: {
+				if (type === VenusOS.Notification_Info) {
+					_acknowledge()
+				}
+			}
 		}
 
 		Component {
@@ -76,12 +89,16 @@ SwipeViewPage {
 					id: iconContainer
 
 					anchors.verticalCenter: parent.verticalCenter
-					width: checkmarkIcon.width + (2 * Theme.geometry_listItem_content_horizontalMargin)
+					width: checkmarkIcon.width + 2*checkmarkIcon.anchors.leftMargin
 					height: parent.height
 
 					Image {
 						id: checkmarkIcon
-						anchors.centerIn: parent
+						anchors {
+							verticalCenter: parent.verticalCenter
+							left: parent.left
+							leftMargin: Theme.geometry_listItem_content_horizontalMargin - 8 // (48 - 32) / 2, to centre with delegate icons
+						}
 						source: "qrc:/images/icon_checkmark_48"
 					}
 				}
@@ -89,11 +106,11 @@ SwipeViewPage {
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					width: parent.width - iconContainer.width
-					color: Theme.color_font_secondary
-					font.pixelSize: Theme.font_size_body3
+					color: Theme.color_font_primary
+					font.pixelSize: Theme.font_size_h1
 
-					//% "No current alerts"
-					text: qsTrId("notifications_no_current_alerts")
+					//% "No active notifications"
+					text: qsTrId("notifications_no_active_notifications")
 				}
 			}
 		}
