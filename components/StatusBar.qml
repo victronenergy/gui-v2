@@ -307,9 +307,7 @@ FocusScope {
 		// ensure highlight border can be seen against critical backgroundColor
 		KeyNavigationHighlight.margins: -(4 * Theme.geometry_button_border_width)
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
-
-		//% "Silence alarm"
-		text: qsTrId("notifications_silence_alarm")
+		text: CommonWords.silence_alarm
 
 		onClicked: Global.notifications.acknowledgeAll()
 	}

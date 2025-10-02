@@ -58,7 +58,7 @@ Item {
 			 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
 			 : Theme.color_toastNotification_background_informative
 
-		AsymmetricRoundedRectangle {
+		Rectangle {
 			id: highlight
 			anchors {
 				left: parent.left
@@ -68,8 +68,8 @@ Item {
 
 			visible: root.category !== ToastNotification.None
 			width: Theme.geometry_toastNotification_minHeight
-			radius: parent.radius
-			flat: true
+			topLeftRadius: parent.radius
+			bottomLeftRadius: parent.radius
 
 			color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
 				 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
@@ -110,19 +110,59 @@ Item {
 				right: parent.right
 				top: parent.top
 				bottom: parent.bottom
+				margins: isSilenceButton ? Theme.geometry_toastNotification_label_padding : 0
 			}
 
+			readonly property bool isSilenceButton: root.category === VenusOS.Notification_Warning || root.category === VenusOS.Notification_Alarm
 			property bool dismissClicked: false
 			property bool dismissAvailable: false
-			width: Theme.geometry_toastNotification_minHeight
-			onClicked: dismissClicked = true
+			width: isSilenceButton ? silenceLabel.x + silenceLabel.implicitWidth + silenceLabel.anchors.rightMargin
+				: Theme.geometry_toastNotification_minHeight
+			radius: isSilenceButton ? Theme.geometry_button_radius : Theme.geometry_button_border_width
+
+			onClicked: {
+				if (isSilenceButton) {
+					Global.notifications.acknowledgeAll()
+				}
+				dismissClicked = true
+			}
 
 			CP.IconImage {
 				id: dismissIcon
-				anchors.centerIn: parent
+				anchors {
+					verticalCenter: parent.verticalCenter
+					left: parent.left
+					leftMargin: Theme.geometry_silenceAlarmButton_horizontalPadding
+				}
 
 				color: Theme.color_toastNotification_foreground
-				source: "qrc:/images/icon_close_32.svg"
+				source: dismiss.isSilenceButton ? "qrc:/images/icon_alarm_snooze_24.svg"
+					: "qrc:/images/icon_close_32.svg"
+			}
+
+			Label {
+				id: silenceLabel
+				anchors {
+					verticalCenter: parent.verticalCenter
+					left: dismissIcon.right
+					right: parent.right
+					leftMargin: dismissIcon.anchors.leftMargin
+					rightMargin: dismissIcon.anchors.leftMargin
+				}
+				visible: dismiss.isSilenceButton
+				text: CommonWords.silence_alarm
+				color: dismissIcon.color
+				font.pixelSize: Theme.font_size_tiny
+			}
+
+			Rectangle {
+				id: silenceBorder
+				anchors.fill: parent
+				visible: dismiss.isSilenceButton
+				radius: parent.radius
+				color: "transparent"
+				border.color: dismissIcon.color
+				border.width: Theme.geometry_button_border_width
 			}
 		}
 	}
