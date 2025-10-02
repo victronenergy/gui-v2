@@ -9,18 +9,17 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	required property string name
-	required property list<string> outputUids
+	required property SwitchableOutputGroup group
 
 	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
 	icon.source: "qrc:/images/icon_switch_24.svg"
-	title.text: name
+	title.text: root.group.name
 
 	GridView {
 		id: outputGrid
 
 		readonly property int rowCount: Math.floor(height / cellHeight)
-		readonly property int columnCount: Math.ceil(root.outputUids.length / Math.max(1, rowCount))
+		readonly property int columnCount: Math.ceil(root.group.outputs.length / Math.max(1, rowCount))
 
 		anchors {
 			top: root.title.bottom
@@ -34,35 +33,34 @@ ControlCard {
 		flow: GridView.FlowTopToBottom
 		focus: Global.keyNavigationEnabled
 		keyNavigationEnabled: Global.keyNavigationEnabled
-
-		// Model is a simple string list rather than a model, as we assume the model changes are
-		// rare and especially unlikely while the card is visible.
-		model: root.outputUids
+		model: root.group.outputs
 
 		delegate: BaseListLoader {
 			id: delegateLoader
 
-			required property string modelData
+			required property SwitchableOutput modelData
+			readonly property int type: modelData.type
+			property int _lastLoadedType: -1
+
+			function _reload() {
+				if (type == _lastLoadedType) {
+					return
+				}
+				if (type >= 0) {
+					delegateLoader.setSource("switches/delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
+						width: Qt.binding(function() { return outputGrid.cellWidth }),
+						height: Qt.binding(function() { return outputGrid.cellHeight }),
+						switchableOutput: modelData,
+					})
+				} else {
+					source = ""
+				}
+				_lastLoadedType = type
+			}
 
 			// Allow this to receive the focus highlight for navigational purposes. The internal
 			// loaded item should set its enabled=false when the output is disabled.
 			KeyNavigationHighlight.active: activeFocus
-
-			SwitchableOutput {
-				id: output
-				uid: modelData
-				onTypeChanged: {
-					if (type >= 0) {
-						delegateLoader.setSource("switches/delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
-							width: Qt.binding(function() { return outputGrid.cellWidth }),
-							height: Qt.binding(function() { return outputGrid.cellHeight }),
-							switchableOutput: output,
-						})
-					} else {
-						source = ""
-					}
-				}
-			}
 
 			onStatusChanged: {
 				if (status === Loader.Error) {
@@ -71,6 +69,9 @@ ControlCard {
 						.arg(source))
 				}
 			}
+
+			onTypeChanged: _reload()
+			Component.onCompleted: _reload()
 		}
 	}
 }

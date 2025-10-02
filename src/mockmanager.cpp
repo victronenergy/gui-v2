@@ -165,6 +165,13 @@ void MockManager::setServiceValues(const QJsonObject &object)
 	}
 }
 
+void MockManager::dumpValues()
+{
+	qInfo() << "--- Begin value dump ---";
+	producer()->dumpValues();
+	qInfo() << "--- End value dump ---";
+}
+
 VeQItemMockProducer *MockManager::producer() const
 {
 	return qobject_cast<VeQItemMockProducer *>(BackendConnection::create()->producer());

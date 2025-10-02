@@ -211,6 +211,17 @@ int AllDevicesModel::indexOf(const QString &uid) const
 	return -1;
 }
 
+// This is faster than calling deviceAt(indexOf(uid)) as it avoids searching through the device list.
+Device *AllDevicesModel::findDevice(const QString &uid) const
+{
+	if (auto it = m_allDeviceCandidates.constFind(uid); it != m_allDeviceCandidates.constEnd()) {
+		if (it.value()->isValid()) {
+			return it.value();
+		}
+	}
+	return nullptr;
+}
+
 Device *AllDevicesModel::deviceAt(int index) const
 {
 	if (index >= 0 && index < m_devices.count()) {

@@ -71,6 +71,13 @@ void VeQItemMockProducer::removeServices(const QString &serviceType)
 	}
 }
 
+void VeQItemMockProducer::dumpValues()
+{
+	mProducerRoot->forAllChildren([this](VeQItem *item) {
+		qInfo() << item->uniqueId() << item->getValue();
+	});
+}
+
 VeQItem *VeQItemMockProducer::createItem()
 {
 	return new VeQItemMock(this);

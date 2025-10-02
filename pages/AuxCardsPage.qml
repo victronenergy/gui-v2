@@ -25,7 +25,7 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
-		model: Global.switches.groups
+		model: SortedSwitchableOutputGroupModel { sourceModel: Global.switches.groups }
 		delegate: SwitchableOutputGroupCard {
 			height: cardsView.height
 		}

@@ -41,6 +41,7 @@ public:
 	QVariant value(const QString &uid) const;
 	void removeValue(const QString &uid);
 	void removeServices(const QString &serviceType);
+	void dumpValues();
 
 	VeQItem *createItem() override;
 
