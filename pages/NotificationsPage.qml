@@ -34,9 +34,11 @@ SwipeViewPage {
 		section.delegate: SettingsListHeader {
 			required property bool section
 
-			height: section ? 0 : implicitHeight
+			height: implicitHeight
 			bottomPadding: Theme.geometry_gradientList_spacing
-			text: section ? "" : CommonWords.history
+			text: section
+				? CommonWords.active_or_unseen
+				: CommonWords.history
 		}
 
 		model: Global.notifications.sortedModel

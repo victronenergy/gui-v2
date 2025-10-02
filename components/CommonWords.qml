@@ -46,6 +46,10 @@ QtObject {
 	//% "Active"
 	readonly property string active_status: qsTrId("common_words_active")
 
+	//: Notification has not been seen by the user, or has an active alarm associated with it.
+	//% "Active or unseen"
+	readonly property string active_or_unseen: qsTrId("common_words_active_or_unseen")
+
 	//: Voltage alarm is at "Alarm" level
 	//% "Alarm"
 	readonly property string alarm: qsTrId("common_words_alarm")
