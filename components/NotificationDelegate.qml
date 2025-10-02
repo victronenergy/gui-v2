@@ -20,6 +20,8 @@ BaseListItem {
 	required property string deviceName
 	required property string value
 
+	readonly property bool historical: root.acknowledged && !root.active
+
 	width: parent ? parent.width : 0
 	height: textColumn.height
 
@@ -33,10 +35,10 @@ BaseListItem {
 			id: icon
 			anchors.centerIn: parent
 			color: root.type === VenusOS.Notification_Info
-				   ? (root.active ? Theme.color_ok : Theme.color_darkOk)
-				   : root.type === VenusOS.Notification_Warning
-					 ? (root.active ? Theme.color_warning : Theme.color_darkWarning)
-					 : (root.active ? Theme.color_critical : Theme.color_darkCritical)
+				? (root.historical ? Theme.color_darkOk : Theme.color_ok)
+				: root.type === VenusOS.Notification_Warning
+					? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
+					: (root.historical ? Theme.color_darkCritical : Theme.color_critical)
 			source: root.type === VenusOS.Notification_Info
 					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
@@ -62,7 +64,7 @@ BaseListItem {
 			wrapMode: Text.Wrap
 			visible: root.description.length > 0 || root.value.length > 0
 			elide: Text.ElideRight
-			color: Theme.color_font_primary
+			color: root.historical ? Theme.color_font_secondary : Theme.color_font_primary
 			font.pixelSize: Theme.font_size_body2
 			//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
 			//% "%1 %2"
@@ -73,7 +75,7 @@ BaseListItem {
 			width: parent.width
 			wrapMode: Text.Wrap
 			visible: text.length > 0
-			color: Theme.color_listItem_secondaryText
+			color: root.historical ? Theme.color_font_disabled : Theme.color_font_secondary
 			font.pixelSize: descriptionLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
 			text: root.deviceName
 		}
