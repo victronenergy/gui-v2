@@ -15,6 +15,15 @@ QtObject {
 			+ Math.max(warnings.activeCount, warnings.unAcknowledgedCount)
 			+ Math.max(informations.activeCount, informations.unAcknowledgedCount)
 
+	// The "silence alarms" button simply acknowledges all,
+	// so we can assume that acknowledged alarms are silent.
+	// The dot should display the number of unsilenced alarms+warnings,
+	// plus the number of unacknowledged informations,
+	// and so this is equivalent to the unAcknowledged count.
+	readonly property int unAcknowledgedCount: alarms.unAcknowledgedCount
+			+ warnings.unAcknowledgedCount
+			+ informations.unAcknowledgedCount
+
 	readonly property NotificationsModel allNotificationsModel: NotificationsModel {
 		onNotificationInserted: (notification) => toastedNotification.queueNotification(notification)
 		onNotificationUpdated: (notification) => toastedNotification.queueNotification(notification)
@@ -131,7 +140,7 @@ QtObject {
 	readonly property bool silenceAlarmVisible: alarms.hasUnAcknowledged ||
 												warnings.hasUnAcknowledged ||
 												informations.hasUnAcknowledged
-	readonly property bool navBarNotificationCounterVisible: activeOrUnAcknowledgedCount > 0
+	readonly property bool navBarNotificationCounterVisible: unAcknowledgedCount > 0
 
 	component NotificationData: QtObject {
 		property int activeCount: 0
