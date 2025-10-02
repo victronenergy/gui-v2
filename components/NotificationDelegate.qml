@@ -23,20 +23,6 @@ BaseListItem {
 	width: parent ? parent.width : 0
 	height: textColumn.height
 
-	Rectangle {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
-			left: parent.left
-			leftMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
-		}
-		width: Theme.geometry_notificationsPage_delegate_marker_width
-		height: Theme.geometry_notificationsPage_delegate_marker_width
-		radius: Theme.geometry_notificationsPage_delegate_marker_radius
-		color: Theme.color_critical
-		visible: !root.acknowledged
-	}
-
 	Item {
 		id: iconContainer
 
