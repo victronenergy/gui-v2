@@ -36,6 +36,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/CpuMonitor.qml
     components/DateSelector.qml
     components/DeviceListDelegate.qml
+    components/DeviceListPluginPage.qml
     components/DevicePage.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
@@ -589,6 +590,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/filtereddevicemodel.cpp
     src/filteredservicemodel.h
     src/filteredservicemodel.cpp
+    src/guiplugins.h
+    src/guiplugins.cpp
     src/runtimedevicemodel.h
     src/runtimedevicemodel.cpp
     src/theme.h
