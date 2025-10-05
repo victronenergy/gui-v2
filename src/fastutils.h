@@ -34,6 +34,13 @@ public:
 	Q_INVOKABLE QList<qreal> calculateLoadGraphYValues(const QList<qreal> &data, int dataLen, qreal height) const;
 	Q_INVOKABLE qreal degreesToRadians(const qreal degrees) const;
 	Q_INVOKABLE int fittedPixelSize(const QString &text, const qreal maxWidth, int minPixelSize, int maxPixelSize, const QFont &font, ThemeSingleton *theme = nullptr) const;
+
+	Q_INVOKABLE qreal scaleNumber(qreal n, qreal fromMin, qreal fromMax, qreal toMin, qreal toMax) const {
+		const qreal fromRange = fromMax - fromMin;
+		const qreal toRange = toMax - toMin;
+		qreal normalized = qMax(fromMin, qMin(fromMax, n));
+		return qFuzzyIsNull(fromRange) ? 0.0 : ((((normalized - fromMin) / fromRange) * toRange) + toMin);
+	}
 };
 
 }
