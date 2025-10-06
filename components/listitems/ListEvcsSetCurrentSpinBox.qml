@@ -17,6 +17,7 @@ ListSpinBox {
 	to: maxCurrent.valid ? maxCurrent.value : 32
 	stepSize: 1
 	dataItem.uid: serviceUid + "/SetCurrent"
+	writeAccessLevel: VenusOS.User_AccessType_User
 	preferredVisible: dataItem.valid
 
 	VeQuickItem {

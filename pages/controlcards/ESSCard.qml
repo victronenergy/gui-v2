@@ -33,6 +33,7 @@ ControlCard {
 				width: parent.width
 
 				ListRadioButton {
+					writeAccessLevel: VenusOS.User_AccessType_User
 					text: modelData.display
 					flat: true
 					checked: Global.systemSettings.ess.state === modelData.value
@@ -53,6 +54,7 @@ ControlCard {
 			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.systemSettings.ess.minimumStateOfCharge)
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
+			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
 
 			Component {
@@ -87,6 +89,7 @@ ControlCard {
 			primaryLabel.color: Theme.color_font_disabled
 			leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
 			interactive: true
+			writeAccessLevel: VenusOS.User_AccessType_User
 
 			onClicked: {
 				//% "BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability."

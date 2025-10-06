@@ -19,6 +19,7 @@ Page {
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: Qt.platform.os != "wasm" && dataItem.valid && dataItem.max === 1
 			}
 
@@ -56,6 +57,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "GX display appearance"
 				text: qsTrId("settings_gx_display_appearance")
+				writeAccessLevel: VenusOS.User_AccessType_User
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ColorScheme"
 				optionModel: [
 					//: Dark colors mode
@@ -94,6 +96,7 @@ Page {
 					//% "app"
 					: qsTrId("settings_remote_console_forced_by_app")
 				)
+				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: Theme.forcedColorScheme !== Theme.ForcedColorSchemeDefault
 			}
 
@@ -101,6 +104,7 @@ Page {
 				//% "Remote Console appearance"
 				text: qsTrId("settings_remote_console_appearance")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Same as GX display"
 					{ display: qsTrId("settings_remote_console_appearance_same_as_gx_display"), value: VenusOS.RemoteConsoleColorMode_FollowDisplayMode },
@@ -130,6 +134,7 @@ Page {
 				//% "Boat page"
 				text: qsTrId("settings_display_boat_page")
 				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListNavigation {
@@ -154,6 +159,7 @@ Page {
 				secondaryText: qsTrId("settings_ui_animations_description")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/UIAnimations"
 				preferredVisible: dataItem.valid
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListRadioButtonGroup {

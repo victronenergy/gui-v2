@@ -16,6 +16,7 @@ Page {
 				//% "Auto-ranging"
 				text: qsTrId("settings_minmax_autorange")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
 				caption: qsTrId("settings_minmax_autorange_desc")
 			}
@@ -24,6 +25,7 @@ Page {
 				//% "Reset all range values to zero"
 				text: qsTrId("settings_minmax_reset")
 				secondaryText: CommonWords.reset
+				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: Global.dialogLayer.open(confirmResetDialog)
 
 				Component {
@@ -90,12 +92,14 @@ Page {
 							id: acInputMinCurrent
 							text: CommonWords.minimum_current
 							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(index)
+							writeAccessLevel: VenusOS.User_AccessType_User
 							unit: VenusOS.Units_Amp
 						}
 						ListQuantityField {
 							id: acInputMaxCurrent
 							text: CommonWords.maximum_current
 							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(index)
+							writeAccessLevel: VenusOS.User_AccessType_User
 							unit: VenusOS.Units_Amp
 						}
 					}
@@ -111,6 +115,7 @@ Page {
 				id: dcInMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Watt
 			}
 
@@ -124,6 +129,7 @@ Page {
 				//% "Maximum current: AC in 1 connected"
 				text: qsTrId("settings_minmax_acout_max_acin1")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Amp
 			}
 
@@ -132,6 +138,7 @@ Page {
 				//% "Maximum current: AC in 2 connected"
 				text: qsTrId("settings_minmax_acout_max_acin2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Amp
 			}
 
@@ -140,6 +147,7 @@ Page {
 				//% "Maximum current: no AC inputs"
 				text: qsTrId("settings_minmax_acout_max")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Amp
 			}
 
@@ -152,6 +160,7 @@ Page {
 				id: dcOutMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Watt
 			}
 
@@ -164,6 +173,7 @@ Page {
 				id: pvMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Watt
 			}
 
@@ -190,6 +200,7 @@ Page {
 				id: motorDriveMaxPower
 				text: CommonWords.maximum_power
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: VenusOS.Units_Watt
 			}
 
@@ -200,6 +211,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
 				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Speed_MetresPerSecond)
 				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.speedUnit)
+				writeAccessLevel: VenusOS.User_AccessType_User
 				unit: Global.systemSettings.speedUnit
 				decimals: 0
 			}
@@ -210,6 +222,7 @@ Page {
 				text: qsTrId("settings_minmax_max_rpm")
 				unit: VenusOS.Units_RevolutionsPerMinute
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 		}
 	}

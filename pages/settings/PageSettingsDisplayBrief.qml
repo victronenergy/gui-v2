@@ -228,10 +228,12 @@ Page {
 					{ display: qsTrId("settings_briefview_unit_percentages"), value: VenusOS.BriefView_Unit_Percentage },
 				]
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListBriefCenterDetails {
 				activeBatteryName: root.activeBatteryName
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 		}
 	}
@@ -244,6 +246,7 @@ Page {
 
 			required property int levelIndex
 
+			writeAccessLevel: VenusOS.User_AccessType_User
 			optionView.section.property: "section"
 			optionView.section.delegate: SettingsListHeader {
 				required property string section

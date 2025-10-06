@@ -15,6 +15,7 @@ Page {
 		model: VisibleItemModel {
 			ListRadioButtonGroup {
 				text: CommonWords.temperature
+				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Celsius"
 					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
@@ -37,7 +38,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Electrical power display"
 				text: qsTrId("settings_units_energy")
-
+				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Power (Watts)"
 					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
@@ -67,6 +68,7 @@ Page {
 				//% "Format"
 				text: qsTrId("settings_gps_format")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
 					//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
@@ -85,6 +87,7 @@ Page {
 				//% "Speed Unit"
 				text: qsTrId("settings_gps_speed_unit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Kilometres per hour"
 					{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },

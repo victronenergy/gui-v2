@@ -9,7 +9,7 @@ import Victron.VenusOS
 ListRadioButtonGroup {
 	//% "Volume unit"
 	text: qsTrId("components_volumeunit_title")
-
+	writeAccessLevel: VenusOS.User_AccessType_User
 	optionModel: [
 		//% "Cubic metres"
 		{ display: qsTrId("components_volumeunit_cubic_metres"), value: VenusOS.Units_Volume_CubicMetre },
