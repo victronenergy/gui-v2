@@ -19,12 +19,17 @@ ListItem {
 		ListItemButton {
 			id: button
 
-			down: pressed || checked || root.down
+			down: root.clickable && (pressed || checked || root.down)
 			width: Math.min(implicitWidth, root.maximumContentWidth)
-			enabled: root.clickable
+			showEnabled: root.clickable
 			focusPolicy: Qt.NoFocus
 
-			onClicked: root.clicked()
+			onClicked: {
+				if (!root.checkWriteAccessLevel() || !root.clickable) {
+					return
+				}
+				root.clicked()
+			}
 		}
 	]
 }

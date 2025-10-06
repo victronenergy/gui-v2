@@ -81,13 +81,20 @@ BaseListItem {
 	function activate() {
 		if (root.interactive) {
 			// Issue #1964: userHasWriteAccess is ignored for ListNavigation
-			if (root.__is_venus_gui_list_navigation__ === true || root.userHasWriteAccess) {
+			if (root.__is_venus_gui_list_navigation__ === true || checkWriteAccessLevel()) {
 				root.clicked()
-			} else {
-				pressArea.toast?.close(true) // close immediately
-				//% "Setting locked for access level"
-				pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
 			}
+		}
+	}
+
+	function checkWriteAccessLevel() {
+		if (root.userHasWriteAccess) {
+			return true
+		} else {
+			pressArea.toast?.close(true) // close immediately
+			//% "Setting locked for access level"
+			pressArea.toast = Global.notificationLayer.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
+			return false
 		}
 	}
 
