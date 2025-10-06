@@ -41,6 +41,7 @@ Page {
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: CommonWords.custom_name
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListText {

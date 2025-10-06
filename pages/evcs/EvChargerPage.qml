@@ -122,6 +122,7 @@ DevicePage {
 			dataItem.uid: evCharger.serviceUid + "/Mode"
 			preferredVisible: dataItem.valid
 			optionModel: Global.evChargers.modeOptionModel
+			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 
 		ListEvcsSetCurrentSpinBox {
@@ -135,6 +136,7 @@ DevicePage {
 			text: qsTrId("evcs_enable_charging")
 			dataItem.uid: evCharger.serviceUid + "/StartStop"
 			preferredVisible: dataItem.valid
+			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 
 		ListNavigation {

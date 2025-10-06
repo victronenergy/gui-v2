@@ -62,6 +62,7 @@ ControlCard {
 		//% "Autostart"
 		text: qsTrId("controlcard_generator_label_autostart")
 		checked: generator.autoStart
+		writeAccessLevel: VenusOS.User_AccessType_User
 		flat: true
 		bottomContent.children: [
 			PrimaryListLabel {

@@ -20,6 +20,7 @@ ListButton {
 			: Global.inverterChargers.inverterModeToText(modeItem.value)
 
 	button.showEnabled: modeAdjustable
+	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: {
 		if (!modeAdjustable) {

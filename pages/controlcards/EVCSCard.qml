@@ -50,6 +50,7 @@ ControlCard {
 			secondaryText: Global.evChargers.chargerModeToText(modeItem.value)
 			flat: true
 			interactive: modeItem.valid
+			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
 		}
 
@@ -73,6 +74,7 @@ ControlCard {
 			text: CommonWords.charging
 			flat: true
 			dataItem.uid: root.serviceUid + "/StartStop"
+			writeAccessLevel: VenusOS.User_AccessType_User
 			preferredVisible: dataItem.valid
 		}
 	}

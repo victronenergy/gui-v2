@@ -301,6 +301,10 @@ QtObject {
 			pageConfigTitle.text = "Return to start page"
 			Global.mainView.loadStartPage()
 			break
+		case Qt.Key_X:
+			Global.systemSettings.accessLevel.setValue(Utils.modulo(Global.systemSettings.accessLevel.value + 1, VenusOS.User_AccessType_Service + 1))
+			pageConfigTitle.text = "Access Level: " + Global.systemSettings.accessLevel.value
+			break
 		case Qt.Key_Space:
 			Global.splashScreenVisible = false
 			break

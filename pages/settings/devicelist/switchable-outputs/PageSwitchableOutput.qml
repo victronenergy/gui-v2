@@ -35,6 +35,7 @@ Page {
 				text: qsTrId("page_switchable_output_name")
 				dataItem.uid: root.outputUid + "/Settings/CustomName"
 				dataItem.invalidate: false
+				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: CommonWords.custom_name
@@ -45,6 +46,7 @@ Page {
 				text: qsTrId("page_switchable_output_group")
 				dataItem.uid: root.outputUid + "/Settings/Group"
 				dataItem.invalidate: false
+				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: text
@@ -64,6 +66,7 @@ Page {
 				//% "Show controls"
 				text: qsTrId("page_switchable_show_controls")
 				dataItem.uid: root.outputUid + "/Settings/ShowUIControl"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
 			}
 

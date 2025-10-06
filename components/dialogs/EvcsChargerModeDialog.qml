@@ -39,6 +39,7 @@ ModalDialog {
 						flat: true
 						checked: modelData.value === root.mode
 						text: modelData.display
+						writeAccessLevel: VenusOS.User_AccessType_User
 						onClicked: root.mode = modelData.value
 					}
 

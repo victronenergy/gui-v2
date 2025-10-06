@@ -68,6 +68,7 @@ Page {
 				text: qsTrId("settings_startpage_timeout")
 				optionModel: root._timeoutOptions()
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
+				writeAccessLevel: VenusOS.User_AccessType_User
 				//% "Revert to the start page when the application is inactive."
 				caption: qsTrId("settings_startpage_timeout_description")
 			}
@@ -90,6 +91,7 @@ Page {
 						id: startPageMode
 						text: CommonWords.auto
 						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
+						writeAccessLevel: VenusOS.User_AccessType_User
 						invertSourceValue: true
 						//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
 						caption: qsTrId("settings_startpage_auto_description")
@@ -111,6 +113,7 @@ Page {
 							delegate: ListRadioButton {
 								checked: modelData.value === startPageName.value
 								text: modelData.display
+								writeAccessLevel: VenusOS.User_AccessType_User
 								onClicked: {
 									popTimer.stop()
 									startPageName.setValue(modelData.value)
