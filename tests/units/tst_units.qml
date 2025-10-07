@@ -297,4 +297,51 @@ TestCase {
 		expect(VenusOS.Units_None, 123, "123", "")
 		expect(VenusOS.Units_None, 12345678, "12345678", "")
 	}
+
+	function test_partsPerMillion() {
+		const unit = VenusOS.Units_PartsPerMillion
+		const unitString = Units.defaultUnitString(unit)
+
+		expect(unit, NaN, "--", unitString)
+		expect(unit, 0, "0", unitString)
+		expect(unit, 400, "400", unitString)
+		expect(unit, 425, "425", unitString)
+		expect(unit, 1000, "1000", unitString)
+		expect(unit, 5000, "5000", unitString)
+		expect(unit, 40000, "40000", unitString)
+	}
+
+	function test_microgramPerCubicMeter() {
+		const unit = VenusOS.Units_MicrogramPerCubicMeter
+		const unitString = Units.defaultUnitString(unit)
+
+		expect(unit, NaN, "--", unitString)
+		expect(unit, 0, "0.0", unitString)
+		expect(unit, 0.4, "0.4", unitString)
+		expect(unit, 0.54, "0.5", unitString)
+		expect(unit, 0.55, "0.6", unitString)
+		expect(unit, 2.2, "2.2", unitString)
+		expect(unit, 10.5, "10.5", unitString)
+		expect(unit, 100, "100", unitString)
+		expect(unit, 250.7, "251", unitString)
+		expect(unit, 999.9, "1000", unitString)
+		expect(unit, 1000, "1000", unitString)
+	}
+
+	function test_lux() {
+		const unit = VenusOS.Units_Lux
+		const unitString = Units.defaultUnitString(unit)
+
+		expect(unit, NaN, "--", unitString)
+		expect(unit, 0, "0", unitString)
+		expect(unit, 1, "1", unitString)
+		expect(unit, 10, "10", unitString)
+		expect(unit, 100, "100", unitString)
+		expect(unit, 244, "244", unitString)
+		expect(unit, 1000, "1000", unitString)
+		expect(unit, 10472, "10472", unitString)
+		expect(unit, 13026.67, "13027", unitString)
+		expect(unit, 65535, "65535", unitString)
+		expect(unit, 144284, "144284", unitString)
+	}
 }
