@@ -12,8 +12,15 @@ DeviceListDelegate {
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
-		QuantityObject { object: temperature; unit: Global.systemSettings.temperatureUnit }
-		QuantityObject { object: humidity; unit: VenusOS.Units_Percentage }
+		// Show air quality data if CO2 is available, otherwise show temperature/humidity
+		QuantityObject {
+			object: co2.value !== undefined ? co2 : temperature
+			unit: co2.value !== undefined ? VenusOS.Units_PartsPerMillion : Global.systemSettings.temperatureUnit
+		}
+		QuantityObject {
+			object: co2.value !== undefined ? pm25 : humidity
+			unit: co2.value !== undefined ? VenusOS.Units_MicrogramPerCubicMeter : VenusOS.Units_Percentage
+		}
 	}
 
 	onClicked: {
@@ -31,5 +38,15 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: humidity
 		uid: root.device.serviceUid + "/Humidity"
+	}
+
+	VeQuickItem {
+		id: co2
+		uid: root.device.serviceUid + "/CO2"
+	}
+
+	VeQuickItem {
+		id: pm25
+		uid: root.device.serviceUid + "/PM25"
 	}
 }

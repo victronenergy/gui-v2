@@ -93,7 +93,10 @@ public:
 		Units_Time_Hour,
 		Units_Time_Minute,
 		Units_Altitude_Metre,
-		Units_Altitude_Foot
+		Units_Altitude_Foot,
+		Units_PartsPerMillion,
+		Units_MicrogramPerCubicMeter,
+		Units_Lux
 	};
 	Q_ENUM(Units_Type)
 
