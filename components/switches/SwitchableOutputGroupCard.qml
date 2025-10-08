@@ -40,22 +40,39 @@ ControlCard {
 
 			required property SwitchableOutput modelData
 			readonly property int type: modelData.type
-			property int _lastLoadedType: -1
+			property string _lastLoadedUrl
 
 			function _reload() {
-				if (type == _lastLoadedType) {
-					return
-				}
+				let componentUrl
 				if (type >= 0) {
-					delegateLoader.setSource("delegates/SwitchableOutputCardDelegate_%1.qml".arg(type), {
-						width: Qt.binding(function() { return outputGrid.cellWidth }),
-						height: Qt.binding(function() { return outputGrid.cellHeight }),
-						switchableOutput: modelData,
-					})
+					if (type >= VenusOS.SwitchableOutput_Type_ColorDimmerRgb
+							&& type <= VenusOS.SwitchableOutput_Type_ColorDimmerRgbW) {
+						// For color wheel delegates, the output type can be changed from within the
+						// delegate, so load a type that encapsulates multiple types.
+						componentUrl = "delegates/SwitchableOutputCardDelegate_color.qml"
+					} else {
+						// For other types, load a fixed filename according to the output type.
+						componentUrl = "delegates/SwitchableOutputCardDelegate_%1.qml".arg(type)
+					}
 				} else {
-					source = ""
+					componentUrl = ""
 				}
-				_lastLoadedType = type
+
+				// Only reload the source if the required file changes; otherwise, when a color
+				// output changes while the ColorWheelDialog is open within the delegate, the UI
+				// attempts to change the delegate source while its dialog is still open.
+				if (_lastLoadedUrl !== componentUrl) {
+					if (componentUrl) {
+						delegateLoader.setSource(componentUrl, {
+							width: Qt.binding(function() { return outputGrid.cellWidth }),
+							height: Qt.binding(function() { return outputGrid.cellHeight }),
+							switchableOutput: modelData,
+						})
+					} else {
+						source = ""
+					}
+					_lastLoadedUrl = componentUrl
+				}
 			}
 
 			// Allow this to receive the focus highlight for navigational purposes. The internal
