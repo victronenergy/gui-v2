@@ -12,6 +12,9 @@
 
 #include "themeobjects.h"
 
+class QQmlEngine;
+class QJSEngine;
+
 namespace Victron {
 namespace VenusOS {
 
@@ -41,6 +44,8 @@ public:
 		qreal normalized = qMax(fromMin, qMin(fromMax, n));
 		return qFuzzyIsNull(fromRange) ? 0.0 : ((((normalized - fromMin) / fromRange) * toRange) + toMin);
 	}
+
+	static FastUtils* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 };
 
 }

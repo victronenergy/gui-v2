@@ -24,6 +24,12 @@ MiniSlider {
 			? stepSizeItem.value.toString().split(".")[1]?.length ?? 0
 			: 0
 
+	// Reads the slider value from the output. By default, this reads from the /Dimming path.
+	property real sourceValue: switchableOutput.dimming
+
+	// Writes the current slider value to the output. By default, this writes to the /Dimming path.
+	property var updateValueToSource: (v) => { switchableOutput.setDimming(v) }
+
 	from: dimmingMinItem.valid ? toDisplayValue(dimmingMinItem.value) : 0
 	to: dimmingMaxItem.valid ? toDisplayValue(dimmingMaxItem.value) : 100
 	stepSize: stepSizeItem.valid ? toDisplayValue(stepSizeItem.value) : 1
@@ -96,8 +102,8 @@ MiniSlider {
 			}
 		}
 
-		backendValue: switchableOutput.dimming
-		onUpdateToBackend: (value) => { switchableOutput.setDimming(value) }
+		backendValue: root.sourceValue
+		onUpdateToBackend: (value) => { root.updateValueToSource(value) }
 		onBackendValueChanged: syncBackendValueToSlider()
 		onBusyChanged: if (!busy) syncBackendValueToSlider()
 	}
