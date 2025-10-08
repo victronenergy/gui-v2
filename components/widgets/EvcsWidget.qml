@@ -72,6 +72,7 @@ OverviewWidget {
 				elide: Text.ElideRight
 				text: Global.evChargers.chargerStatusToText(statusItem.value)
 				color: Theme.color_font_secondary
+				visible: statusItem.valid
 
 				VeQuickItem {
 					id: statusItem
@@ -98,8 +99,10 @@ OverviewWidget {
 				FixedWidthLabel {
 					id: chargingTimeLabel
 
-					text: Utils.formatAsHHMM(chargingTimeItem.value, true)
+					text: chargingTimeItem.value > 60 ? Utils.formatAsHHMM(chargingTimeItem.value, true) : Utils.formatAsHHMMSS(chargingTimeItem.value, true)
 					color: Theme.color_font_secondary
+					// do not show value under a second
+					visible: chargingTimeItem.value > 0
 
 					VeQuickItem {
 						id: chargingTimeItem
