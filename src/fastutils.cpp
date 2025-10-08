@@ -96,5 +96,11 @@ int FastUtils::fittedPixelSize(const QString &text, const qreal maxWidth, int mi
 	return minPixelSize;
 }
 
+FastUtils* FastUtils::create(QQmlEngine *, QJSEngine *)
+{
+	static FastUtils *instance = new FastUtils;
+	return instance;
+}
+
 }
 }

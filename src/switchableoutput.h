@@ -43,7 +43,7 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(int state READ state NOTIFY stateChanged FINAL)
 	Q_PROPERTY(int status READ status NOTIFY statusChanged FINAL)
 	Q_PROPERTY(qreal dimming READ dimming NOTIFY dimmingChanged FINAL)
-	Q_PROPERTY(int type READ type NOTIFY typeChanged FINAL)
+	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
 	Q_PROPERTY(QString group READ group NOTIFY groupChanged FINAL)
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
 
@@ -80,6 +80,7 @@ public:
 
 	// Output/channel settings (under /Settings sub-path)
 	int type() const;
+	void setType(int type);
 	QString group() const;
 
 	Q_INVOKABLE void setState(int state);
@@ -100,7 +101,7 @@ Q_SIGNALS:
 private:
 	void initialize(VeQItem *outputItem);
 	void reset();
-	void setType(const QVariant &typeValue);
+	void setTypeFromVariant(const QVariant &typeValue);
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
 
