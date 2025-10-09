@@ -86,14 +86,8 @@ ModalDialog {
 			elide: Text.ElideRight
 		}
 
-		IconButton {
-			anchors {
-				verticalCenter: headerLabel.baseline
-				right: parent.right
-				rightMargin: Theme.geometry_page_content_horizontalMargin
-			}
-			icon.color: Theme.color_ok
-			icon.source: "qrc:/images/icon_close_32.svg"
+		CloseButton {
+			anchors.right: parent.right
 			onClicked: root.close()
 		}
 	}
@@ -154,11 +148,6 @@ ModalDialog {
 			}
 			colorDimmerData: root.colorDimmerData
 			outputType: root.switchableOutput.type
-
-			Label {
-				text: "Mode: " + root.stateGroup.state
-				font.pixelSize: Theme.font_size_h1
-			}
 		}
 
 		ColorPresetGrid {
@@ -175,6 +164,7 @@ ModalDialog {
 				// Take the color data from the selected preset, and load it into the color data
 				// that is displayed by the color selector.
 				root.colorDimmerData.loadFromPreset(model.get(index))
+				colorSelector.updateWheelAngle()
 			}
 			onPresetAdded: (index) => {
 				// Take the color data from the color selector, and adds it as a new preset.
