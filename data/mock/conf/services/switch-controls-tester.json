@@ -221,7 +221,7 @@
         "/SwitchableOutput/dropdown_3/State": 1,
         "/SwitchableOutput/dropdown_3/Status": 9,
 
-        "/SwitchableOutput/basic_slider_1/Dimming": 100,
+        "/SwitchableOutput/basic_slider_1/Dimming": 30.5,
         "/SwitchableOutput/basic_slider_1/Name": "07a. Basic slider",
         "/SwitchableOutput/basic_slider_1/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_1/Settings/Function": 2,
