@@ -27,6 +27,25 @@
 
     "geometry_closeButton_margins": 4,
 
+    "geometry_colorWheel_width": 316,
+    "geometry_colorWheel_height": 260,
+    "geometry_colorWheel_selector_width": 208,
+    "geometry_colorWheel_selector_height": 208,
+    "geometry_colorWheel_selector_centre_diameter": 107,
+    "geometry_colorWheel_selector_centre_borderWidth": 23,
+    "geometry_colorWheel_selector_ring_width": 38,
+    "geometry_colorWheel_slider_width": 62,
+    "geometry_colorWheel_slider_height": 208,
+    "geometry_colorWheel_slider_arc_radius": 141,
+    "geometry_colorWheel_slider_strokeWidth": 30,
+    "geometry_colorWheel_slider_borderWidth": 2,
+    "geometry_colorWheel_selector_halo_diameter": 32,
+    "geometry_colorWheel_slider_halo_diameter": 24,
+    "geometry_colorWheel_lowerSlider_width": 172,
+    "geometry_colorWheel_lowerSlider_height": 49,
+    "geometry_colorWheel_lowerSlider_padding": 3,
+    "geometry_colorWheel_component_overlap": 9,
+
     "geometry_focus_highlight_corner_size": 14,
     "geometry_focus_highlight_border_size": 4,
 

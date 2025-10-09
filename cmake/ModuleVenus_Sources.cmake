@@ -767,6 +767,8 @@ set(VictronVenusOS_RESOURCES
     images/scatteredcloud.svg
     images/settings.svg
     images/shore.svg
+    images/slider_background_light.svg
+    images/slider_background_dark.svg
     images/solaryield.svg
     images/spinbox_arrow_up.svg
     images/splash-logo-icon.svg

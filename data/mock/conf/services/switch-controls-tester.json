@@ -491,7 +491,7 @@
         "/SwitchableOutput/color_dimmer_rgb/Status": 9,
 
         "/SwitchableOutput/color_dimmer_cct/Name": "12. CCT wheel",
-        "/SwitchableOutput/color_dimmer_cct/LightControls": [32,26,92,0,2100],
+        "/SwitchableOutput/color_dimmer_cct/LightControls": [32,26,92,0,3380],
         "/SwitchableOutput/color_dimmer_cct/ValidTypes": 4096,
         "/SwitchableOutput/color_dimmer_cct/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_cct/Settings/Function": 2,
