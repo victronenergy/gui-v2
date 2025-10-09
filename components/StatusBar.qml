@@ -309,7 +309,7 @@ FocusScope {
 		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 		text: CommonWords.silence_alarm
 
-		onClicked: Global.notifications.acknowledgeAll()
+		onClicked: NotificationModel.acknowledgeAll()
 	}
 
 	Row {

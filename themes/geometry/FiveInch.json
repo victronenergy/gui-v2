@@ -134,6 +134,7 @@
     "geometry_navigationBar_notification_counter_width_one_digit": 20,
     "geometry_navigationBar_notification_counter_width_two_digits": 30,
 
+    "geometry_notificationsPage_delegate_unacknowledged_border_width": 2,
     "geometry_notificationsPage_snoozeButton_height" : 36,
 
     "geometry_textField_height": 40,

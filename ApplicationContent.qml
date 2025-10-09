@@ -91,7 +91,6 @@ FocusScope {
 	// We rely on the implicit Z ordering, so dialog/notification layers be declared after the other views.
 	DialogLayer {
 		id: dialogLayer
-
 		anchors.fill: parent
 		Component.onCompleted: Global.dialogLayer = dialogLayer
 	}
