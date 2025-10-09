@@ -72,8 +72,10 @@ Page {
 			text: modelObject.display || ""
 			secondaryText: modelObject.secondaryText || ""
 			interactive: !modelObject.readOnly
+					// Prevent selection of already selected index
+					&& root.currentIndex !== model.index
 			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
-			preferredVisible: interactive || checked
+			preferredVisible: !modelObject.readOnly || checked
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.selectedIndex === model.index
