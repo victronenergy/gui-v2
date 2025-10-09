@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 ** Copyright (C) 2025 Victron Energy B.V.
+=======
+** Copyright (C) 2023 Victron Energy B.V.
+>>>>>>> d117de04 (WIP: UI Controls: light source colorwheel selector)
 ** See LICENSE.txt for license information.
 */
 
@@ -201,6 +205,25 @@ ModalDialog {
 				id: cctPresetModel
 				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/CCT"
 			}
+// =======
+// 	property alias r: colorSelector.r
+// 	property alias g: colorSelector.g
+// 	property alias b: colorSelector.b
+
+// 	//% "Color"
+// 	title: qsTrId("colorselectordialog_set_date")
+
+// 	contentItem: ModalDialog.FocusableContentItem {
+// 		ColorSelector {
+// 			id: colorSelector
+
+// 			availableWidth: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
+// 			anchors {
+// 				centerIn: parent
+// 				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+// 			}
+// 			focus: true
+// >>>>>>> d117de04 (WIP: UI Controls: light source colorwheel selector)
 		}
 	}
 }
