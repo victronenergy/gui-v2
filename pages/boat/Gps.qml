@@ -9,7 +9,6 @@ import Victron.VenusOS
 VeQuickItemsQuotient {
 	id: root
 
-	readonly property string activeGpsUid: _gpsServices.firstUid
 	readonly property string units: _speedUnits.valid ? _speedUnits.value : ""
 	readonly property real speed: {
 		switch (units) {
@@ -28,12 +27,8 @@ VeQuickItemsQuotient {
 		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
 	}
 
-	readonly property FilteredServiceModel _gpsServices: FilteredServiceModel {
-		serviceTypes: ["gps"]
-	}
-
 	objectName: "Boat.Gps"
-	numeratorUid: activeGpsUid ? activeGpsUid + "/Speed" : "" // metres per second
+	numeratorUid: Global.system.serviceUid ? Global.system.serviceUid + "/GpsSpeed" : "" // metres per second
 	denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
 	sourceUnit: VenusOS.Units_Speed_MetresPerSecond
 	displayUnit: Global.systemSettings.speedUnit
