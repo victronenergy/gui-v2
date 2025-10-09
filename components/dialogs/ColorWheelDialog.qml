@@ -156,10 +156,10 @@ ModalDialog {
 			colorDimmerData: root.colorDimmerData
 			outputType: root.switchableOutput.type
 
-			Label {
-				text: "Mode: " + root.stateGroup.state
-				font.pixelSize: Theme.font_size_h1
-			}
+			// Label {
+			// 	text: "Mode: " + root.stateGroup.state
+			// 	font.pixelSize: Theme.font_size_h1
+			// }
 		}
 
 		ColorPresetGrid {
@@ -176,6 +176,7 @@ ModalDialog {
 				// Take the color data from the selected preset, and load it into the color data
 				// that is displayed by the color selector.
 				root.colorDimmerData.loadFromPreset(model.get(index))
+				colorSelector.resetHue()
 			}
 			onPresetAdded: (index) => {
 				// Take the color data from the color selector, and adds it as a new preset.

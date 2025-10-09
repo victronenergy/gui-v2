@@ -32,5 +32,7 @@
     "color_lpg": "#B98CDD",
     "color_lng": "#919AE7",
     "color_hydraulicOil": "#B56847",
-    "color_rawWater": "#4B93B2"
+    "color_rawWater": "#4B93B2",
+    "color_temperature_warm": "#FFB055",
+    "color_temperature_cool": "#51A6FF"
 }
