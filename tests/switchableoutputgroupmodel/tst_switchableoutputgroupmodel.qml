@@ -341,6 +341,39 @@ TestCase {
 				],
 			},
 			{
+				tag: "Device becomes valid after group is created, which changes the group name",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.solarcharger.a",
+						children: {
+							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/Settings/Type": 0,
+							"SwitchableOutput/0/Settings/Group": "",
+						},
+					}
+				],
+				initialGroups: [
+					{
+						name: "",
+						outputs: [
+							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
+						]
+					}
+				],
+				changes: {
+					"mock/com.victronenergy.solarcharger.a/DeviceInstance" : 0,
+					"mock/com.victronenergy.solarcharger.a/ProductName" : "new_product_name",
+				},
+				finalGroups: [
+					{
+						name: "new_product_name",
+						outputs: [
+							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
+						]
+					}
+				],
+			},
+			{
 				tag: "Remove output from device group by setting invalid type",
 				devices: [
 					{

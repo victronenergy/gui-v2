@@ -23,6 +23,7 @@ namespace VenusOS {
 
 class SwitchableOutput;
 class SwitchableOutputGroupModel;
+class Device;
 
 /*
 	A group of of switchable outputs.
@@ -61,6 +62,7 @@ Q_SIGNALS:
 private:
 	explicit SwitchableOutputGroup(QObject *parent, const QString &groupId);
 	void sortOutputs();
+	void initializeDevice(Device *device);
 
 	QList<SwitchableOutput *> m_outputs;
 	QString m_groupId;

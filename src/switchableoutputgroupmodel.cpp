@@ -102,14 +102,25 @@ SwitchableOutputGroup *SwitchableOutputGroup::newDeviceGroup(const QString &serv
 		//% "GX device relays"
 		group->setName(qtTrId("gx_device_relays"));
 	} else {
-		if (BaseDevice *device = AllDevicesModel::create()->findDevice(serviceUid)) {
-			connect(device, &BaseDevice::nameChanged, group, [group, device]() {
-				 group->setName(device->name());
-			});
-			group->setName(device->name());
+		if (Device *device = AllDevicesModel::create()->findDevice(serviceUid)) {
+			group->initializeDevice(device);
+		} else {
+			connect(AllDevicesModel::create(), &AllDevicesModel::deviceAdded,
+					group, &SwitchableOutputGroup::initializeDevice);
 		}
 	}
 	return group;
+}
+
+void SwitchableOutputGroup::initializeDevice(Device *device)
+{
+	if (deviceGroupId(device->serviceUid()) == m_groupId) {
+		AllDevicesModel::create()->disconnect(this);
+		connect(device, &BaseDevice::nameChanged, this, [this, device]() {
+			 setName(device->name());
+		});
+		setName(device->name());
+	}
 }
 
 QString SwitchableOutputGroup::namedGroupId(const QString &groupName)
