@@ -19,7 +19,7 @@ Page {
 		uid: root.outputUid + "/Settings/ValidTypes"
 		onValueChanged:{
 			let op = []
-			for (let i = 0; i < VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
+			for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
 				if (value & (1 << i)) {
 					op.push({ display: VenusOS.switchableOutput_typeToText(i), value: i })
 				}
