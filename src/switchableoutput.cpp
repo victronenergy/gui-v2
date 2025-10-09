@@ -259,7 +259,7 @@ void SwitchableOutput::updateAllowedInGroupModel()
 	// - If this is a system relay, it is only allowed if it is set as a manual relay
 	const QVariant showUIControl = m_showUIControlItem ? m_showUIControlItem->getValue() : QVariant();
 	const int typeInt = type();
-	const bool allowed = (!showUIControl.isValid() || showUIControl.toBool() == 1)
+	const bool allowed = (!showUIControl.isValid() || showUIControl.toInt() == 1)
 			&& (typeInt >= 0 && typeInt != Enums::SwitchableOutput_Type_Slave)
 			&& (!m_relayFunctionItem || m_relayFunctionItem->getValue().toInt() == Enums::Relay_Function_Manual);
 	if (allowed != m_allowedInGroupModel) {

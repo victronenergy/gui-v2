@@ -95,7 +95,6 @@ Q_SIGNALS:
 	void dimmingChanged();
 	void typeChanged();
 	void groupChanged();
-	void showUIControlChanged();
 	void allowedInGroupModelChanged();
 
 private:
