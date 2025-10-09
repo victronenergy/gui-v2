@@ -94,6 +94,9 @@
     "color_toastNotification_highlight_warning": "color_warning",
     "color_toastNotification_highlight_error": "color_critical",
 
+    "color_notificationsPage_delegate_unacknowledged_border": "#494844",
+    "color_notificationsPage_delegate_unacknowledged_background": "#272622",
+
     "color_page_background": "color_black",
 
     "color_viewGradient_color1": "transparent",

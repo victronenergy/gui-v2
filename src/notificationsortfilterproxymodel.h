@@ -3,8 +3,10 @@
 ** See LICENSE.txt for license information.
 */
 
-#ifndef NOTIFICATIONSORTFILTERPROXYMODEL_H
-#define NOTIFICATIONSORTFILTERPROXYMODEL_H
+#ifndef VICTRON_VENUSOS_GUI_V2_NOTIFICATIONSORTFILTERPROXYMODEL_H
+#define VICTRON_VENUSOS_GUI_V2_NOTIFICATIONSORTFILTERPROXYMODEL_H
+
+#include "notificationmodel.h"
 
 #include <QObject>
 #include <QQmlEngine>
@@ -23,24 +25,17 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 	QML_ELEMENT
 
 	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
-	Q_PROPERTY(QJSValue filterFunction READ filterFunction WRITE setFilterFunction NOTIFY filterFunctionChanged FINAL)
-	Q_PROPERTY(QJSValue sortFunction READ sortFunction WRITE setSortFunction NOTIFY sortFunctionChanged FINAL)
 
 public:
 	explicit NotificationSortFilterProxyModel(QObject *parent = nullptr);
 	~NotificationSortFilterProxyModel();
 
 	int count() const;
-	QJSValue filterFunction() const;
-	void setFilterFunction(const QJSValue &callback);
 
-	QJSValue sortFunction() const;
-	void setSortFunction(const QJSValue &callback);
+	Q_INVOKABLE notificationData at(int row) const;
 
 signals:
 	void countChanged();
-	void filterFunctionChanged();
-	void sortFunctionChanged();
 
 protected:
 	bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const override;
@@ -48,12 +43,11 @@ protected:
 
 private:
 	void updateCount();
-	NotificationSortFilterProxyModelPrivate *d = nullptr;
-	QJSEngine *getJSEngine() const;
 	int m_count = 0;
 };
 
 } /* VenusOS */
 
 } /* Victron */
-#endif // NOTIFICATIONSORTFILTERPROXYMODEL_H
+
+#endif // VICTRON_VENUSOS_GUI_V2_NOTIFICATIONSORTFILTERPROXYMODEL_H

@@ -170,7 +170,7 @@ FocusScope {
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
-				if (Global.notifications?.alarms.hasActive) {
+				if (NotificationModel.activeAlarms > 0) {
 					root.goToNotificationsPage()
 				} else {
 					pageManager.goToStartPage()

@@ -23,37 +23,41 @@ SwipeViewPage {
 		// over the top of the notificationsView
 		clip: true
 
-		header: Global.notifications.activeOrUnAcknowledgedCount === 0 ? noAlertsHeader : null
+		readonly property int activeNotifications: NotificationModel.activeAlarms + NotificationModel.activeWarnings + NotificationModel.activeInfos
+		readonly property int unacknowledgedNotifications: NotificationModel.unacknowledgedAlarms + NotificationModel.unacknowledgedWarnings + NotificationModel.unacknowledgedInfos
+		header: (activeNotifications > 0 || unacknowledgedNotifications > 0) ? null : noAlertsHeader
 		onHeaderItemChanged: {
 			if (headerItem) {
 				notificationsView.positionViewAtBeginning()
 			}
 		}
 
-		section.property: "activeOrUnAcknowledged"
+		section.property: "section"
 		section.delegate: SettingsListHeader {
-			required property bool section
-
-			height: implicitHeight
+			id: sectionDelegate
+			required property int section
 			bottomPadding: Theme.geometry_gradientList_spacing
-			text: section
-				? CommonWords.active_or_unseen
+			text: sectionDelegate.section === 0 ?
+					//: List section header, for the section which contains current/active notifications
+					//% "Active Notifications"
+					qsTrId("notifications_page_active_notifications")
+				: sectionDelegate.section === 1 ?
+					//: List section header, for the section which contains inactive (but unseen) notifications
+					//% "Inactive Notifications"
+					qsTrId("notifications_page_inactive_notifications")
 				: CommonWords.history
 		}
 
-		model: Global.notifications.sortedModel
-		delegate: NotificationDelegate {
-			id: notifDelegate
+		model: NotificationSortFilterProxyModel {
+			sourceModel: NotificationModel
+		}
 
-			function _acknowledge() {
-				// we have access to the BaseNotification via the notification role
-				// but it needs to be "as" Notification for us to be able to call updateAcknowledged()
-				(notifDelegate.notification as Notification)?.updateAcknowledged(true)
-			}
+		delegate: NotificationDelegate {
+			id: del
 
 			Keys.onSpacePressed: {
-				if (!notifDelegate.acknowledged) {
-					_acknowledge()
+				if (!del.acknowledged) {
+					NotificationModel.acknowledge(modelId)
 				}
 			}
 			Keys.enabled: Global.keyNavigationEnabled
@@ -61,20 +65,9 @@ SwipeViewPage {
 			// When the delegate is clicked, acknowledge it.
 			PressArea {
 				anchors.fill: parent
-				enabled: !notifDelegate.acknowledged
+				enabled: !del.acknowledged
 				radius: Theme.geometry_listItem_radius
-				onReleased: notifDelegate._acknowledge()
-			}
-
-			// Automatically acknowledge/silence all Information type notifications upon leaving the page.
-			// NOTE: we actually need to add a method to NotificationsModel to acknowledge ALL rather than
-			//       just the visible delegates, but first we need to refactor the code to ensure that the
-			//       NotificationsModel elements (BaseNotification) also has the backend communication
-			//       (i.e. VeQuickItems) that are in Notification.qml currently.
-			Component.onDestruction: {
-				if (type === VenusOS.Notification_Info) {
-					_acknowledge()
-				}
+				onReleased: NotificationModel.acknowledge(del.modelId)
 			}
 		}
 
@@ -115,4 +108,7 @@ SwipeViewPage {
 			}
 		}
 	}
+
+	// automatically acknowledge all Info notifications upon navigating away from this page.
+	onIsCurrentPageChanged: if (!isCurrentPage) NotificationModel.acknowledgeType(VenusOS.Notification_Info)
 }
