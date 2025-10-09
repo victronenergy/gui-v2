@@ -13,7 +13,7 @@ Item {
 	anchors.bottomMargin: Qt.inputMethod && Qt.inputMethod.visible ? Qt.inputMethod.keyboardRectangle.height : 0
 
 	function showToastNotification(category, text, autoCloseInterval = 0) {
-		var toast = toaster.createObject(root, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
+		var toast = toaster.createObject(view, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
 		toastItemsModel.append(toast)
 		return toast
 	}
@@ -40,6 +40,7 @@ Item {
 	}
 
 	ListView {
+		id: view
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_toastNotification_horizontalMargin
@@ -48,6 +49,7 @@ Item {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry_toastNotification_bottomMargin
 		}
+
 		width: parent.width
 		height: childrenRect.height
 		spacing: Theme.geometry_toastNotification_bottomMargin
@@ -64,7 +66,10 @@ Item {
 			id: toast
 
 			// delay removal from model, else will crash
-			onDismissed: root.deleteNotification(toast)
+			onDismissed: {
+				toast.visible = false
+				root.deleteNotification(toast)
+			}
 		}
 	}
 

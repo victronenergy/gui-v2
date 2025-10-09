@@ -46,7 +46,7 @@ Item {
 	opacity: dismiss.dismissClicked ? 0.0
 		: dismiss.dismissAvailable  ? 1.0
 		: 0.0
-	onOpacityChanged: if (dismiss.dismissClicked && opacity === 0.0) root.dismissed()
+	onOpacityChanged: if (dismiss.dismissClicked && opacity <= 0.001) root.dismissed()
 	Component.onCompleted: dismiss.dismissAvailable = true // ensures fade-in as well as fade-out transition.
 
 	Rectangle {
@@ -122,7 +122,12 @@ Item {
 
 			onClicked: {
 				if (isSilenceButton) {
-					Global.notifications.acknowledgeAll()
+					if (root.category === VenusOS.Notification_Alarm) {
+						NotificationModel.acknowledgeType(VenusOS.Notification_Alarm)
+						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
+					} else {
+						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
+					}
 				}
 				dismissClicked = true
 			}
