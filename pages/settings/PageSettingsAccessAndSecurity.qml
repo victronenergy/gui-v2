@@ -173,7 +173,9 @@ Page {
 				}
 
 				optionFooter: SettingsColumn {
-					preferredVisible: securityProfile.currentIndex !== VenusOS.Security_Profile_Unsecured
+					// Set visible instead of preferredVisible, since this is a footer and not a
+					// list item, so preferredVisible would have no effect.
+					visible: securityProfile.currentIndex !== VenusOS.Security_Profile_Unsecured
 					width: parent.width
 					topPadding: spacing
 

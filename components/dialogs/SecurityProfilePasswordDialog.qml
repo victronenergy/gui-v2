@@ -56,6 +56,10 @@ ModalDialog {
 
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 
+	// Since the text field is the only visible item in this dialog, allow it to receive focus as
+	// soon as the dialog is opened.
+	focus: true
+
 	Component.onCompleted: resetValidation()
 
 	contentItem: ModalDialog.FocusableContentItem {
