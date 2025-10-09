@@ -291,7 +291,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/common/Generator.qml
     data/common/GensetErrorModel.qml
     data/common/Inverter.qml
-    data/common/Notification.qml
     data/common/PvInverter.qml
     data/common/PvMonitor.qml
     data/common/SolarDailyHistory.qml
@@ -602,10 +601,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/enums.cpp
     src/fastutils.h
     src/fastutils.cpp
-    src/basenotification.h
-    src/basenotification.cpp
-    src/notificationsmodel.h
-    src/notificationsmodel.cpp
+    src/notificationmodel.h
+    src/notificationmodel.cpp
     src/notificationsortfilterproxymodel.h
     src/notificationsortfilterproxymodel.cpp
     src/clocktime.h

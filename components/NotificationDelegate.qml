@@ -10,8 +10,8 @@ import Victron.VenusOS
 BaseListItem {
 	id: root
 
-	required property BaseNotification notification
-	required property int notificationId
+	required property int modelId
+
 	required property bool active
 	required property bool acknowledged
 	required property int type
@@ -21,9 +21,24 @@ BaseListItem {
 	required property string value
 
 	readonly property bool historical: root.acknowledged && !root.active
+	readonly property notificationData entry: NotificationModel.get(modelId)
 
 	width: parent ? parent.width : 0
 	height: textColumn.height
+
+	Rectangle {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
+			left: parent.left
+			leftMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
+		}
+		width: Theme.geometry_notificationsPage_delegate_marker_width
+		height: Theme.geometry_notificationsPage_delegate_marker_width
+		radius: Theme.geometry_notificationsPage_delegate_marker_radius
+		color: Theme.color_critical
+		visible: !root.acknowledged
+	}
 
 	Item {
 		id: iconContainer
