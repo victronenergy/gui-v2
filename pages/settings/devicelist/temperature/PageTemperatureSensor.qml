@@ -65,6 +65,46 @@ DevicePage {
 			preferredVisible: dataItem.valid
 		}
 
+		ListQuantity {
+			//% "PM2.5"
+			text: qsTrId("temperature_pm25")
+			dataItem.uid: bindPrefix + "/PM25"
+			unit: VenusOS.Units_MicrogramPerCubicMeter
+			preferredVisible: dataItem.valid
+		}
+
+		ListQuantity {
+			//% "CO₂"
+			text: qsTrId("temperature_co2")
+			dataItem.uid: bindPrefix + "/CO2"
+			unit: VenusOS.Units_PartsPerMillion
+			preferredVisible: dataItem.valid
+		}
+
+		ListQuantity {
+			//% "VOC index"
+			text: qsTrId("temperature_voc")
+			dataItem.uid: bindPrefix + "/VOC"
+			unit: VenusOS.Units_None
+			preferredVisible: dataItem.valid
+		}
+
+		ListQuantity {
+			//% "NOx index"
+			text: qsTrId("temperature_nox")
+			dataItem.uid: bindPrefix + "/NOX"
+			unit: VenusOS.Units_None
+			preferredVisible: dataItem.valid
+		}
+
+		ListQuantity {
+			//% "Luminosity"
+			text: qsTrId("temperature_luminosity")
+			dataItem.uid: bindPrefix + "/Luminosity"
+			unit: VenusOS.Units_Lux
+			preferredVisible: dataItem.valid
+		}
+
 		ListItem {
 			id: sensorBattery
 
