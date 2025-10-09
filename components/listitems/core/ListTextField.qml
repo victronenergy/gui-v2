@@ -220,7 +220,7 @@ ListItem {
 
 		text: textField.text.length > 0 ? textField.text : "--"
 		width: Math.min(implicitWidth, root.maximumContentWidth)
-		visible: !textField.visible
+		visible: !textField.visible && textField.echoMode !== TextInput.Password
 	}
 
 	VeQuickItem {
