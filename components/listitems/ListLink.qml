@@ -35,18 +35,18 @@ ListItem {
 			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 		},
 
-		Item {
+		ListItemButton {
 			visible: root.mode === VenusOS.ListLink_Mode_QRCode
-			width: Theme.geometry_listLink_qrCodeSize
+			width: height
 			height: Theme.geometry_listLink_qrCodeSize + (2 * Theme.geometry_listItem_content_verticalMargin)
-
-			Image {
-				anchors.centerIn: parent
+			onClicked: Global.dialogLayer.open(largeQrCodeComponent)
+			contentItem: Image {
 				source: root.mode === VenusOS.ListLink_Mode_QRCode
 						? `image://QZXing/encode/${root.url}?correctionLevel=M&format=qrcode`
 						: ""
 				sourceSize.width: Theme.geometry_listLink_qrCodeSize
 				sourceSize.height: Theme.geometry_listLink_qrCodeSize
+				fillMode: Image.PreserveAspectFit
 			}
 		}
 	]
@@ -57,4 +57,22 @@ ListItem {
 		: qsTrId("listlink_scan_qr_code").arg(formattedUrl)
 
 	onClicked: BackendConnection.openUrl(root.url)
+
+	Component {
+		id: largeQrCodeComponent
+
+		ModalDialog {
+			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+
+			Image {
+				anchors.fill: parent
+				source: root.mode === VenusOS.ListLink_Mode_QRCode
+						? `image://QZXing/encode/${root.url}?correctionLevel=M&format=qrcode`
+						: ""
+				sourceSize.width: Theme.geometry_listLink_qrCodeSize
+				sourceSize.height: Theme.geometry_listLink_qrCodeSize
+				fillMode: Image.PreserveAspectFit
+			}
+		}
+	}
 }
