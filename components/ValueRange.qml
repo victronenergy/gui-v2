@@ -11,5 +11,5 @@ QtObject {
 	property real maximumValue
 	property real value: NaN
 	readonly property real valueAsRatio: (isNaN(value) || isNaN(minimumValue) || isNaN(maximumValue)) ? 0.0
-			: Units.scaleNumber(value, minimumValue, maximumValue, 0, 1) // Scale the value from the min-max range to a 0-1 range.
+			: FastUtils.scaleNumber(value, minimumValue, maximumValue, 0, 1) // Scale the value from the min-max range to a 0-1 range.
 }

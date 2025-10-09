@@ -52,6 +52,13 @@
 
     "color_modalDialog_border": "color_gray2",
 
+    "color_colorWheelDialog_preset_empty_button_border": "color_dimWhite",
+    "color_colorWheelDialog_preset_empty_button_border_disabled": "color_gray7",
+    "color_colorWheelDialog_preset_empty_button_icon_disabled": "#CCCBC7",
+    "color_colorWheelDialog_preset_empty_button_background": "color_gray8",
+    "color_colorWheelDialog_mode_button_background": "color_gray8",
+    "color_colorWheelDialog_mode_button_separator": "color_gray7",
+
     "color_radioButton_indicator_on": "color_ok",
     "color_radioButton_indicator_off": "color_gray3",
     "color_radioButton_indicator_disabled": "color_gray6",
