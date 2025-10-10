@@ -62,7 +62,7 @@ FocusScope {
 			top: header.bottom
 		}
 		height: Theme.geometry_switchableoutput_control_height
-		checked: multiStepState.backendValue
+		checked: multiStepState.expectedValue === 1
 		onOnClicked: multiStepState.writeValue(1)
 		onOffClicked: multiStepState.writeValue(0)
 
