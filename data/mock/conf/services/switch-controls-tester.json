@@ -19,8 +19,10 @@
         "/SwitchableOutput/momentary_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/momentary_1/Settings/Type": 0,
         "/SwitchableOutput/momentary_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/momentary_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/momentary_1/State": 0,
         "/SwitchableOutput/momentary_1/Status": 9,
+        "/SwitchableOutput/momentary_1/Current": 1.2,
 
         "/SwitchableOutput/momentary_2/Name": "00b. Momentary, disabled",
         "/SwitchableOutput/momentary_2/Settings/CustomName": "",
@@ -29,6 +31,7 @@
         "/SwitchableOutput/momentary_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/momentary_2/Settings/Type": 0,
         "/SwitchableOutput/momentary_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/momentary_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/momentary_2/State": 0,
         "/SwitchableOutput/momentary_2/Status": 32,
 
@@ -39,6 +42,7 @@
         "/SwitchableOutput/toggle_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/toggle_1/Settings/Type": 1,
         "/SwitchableOutput/toggle_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/toggle_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/toggle_1/State": 0,
         "/SwitchableOutput/toggle_1/Status": 9,
 
@@ -49,6 +53,7 @@
         "/SwitchableOutput/toggle_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/toggle_2/Settings/Type": 1,
         "/SwitchableOutput/toggle_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/toggle_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/toggle_2/State": 0,
         "/SwitchableOutput/toggle_2/Status": 32,
 
@@ -59,6 +64,7 @@
         "/SwitchableOutput/toggle_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/toggle_3/Settings/Type": 1,
         "/SwitchableOutput/toggle_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/toggle_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/toggle_3/State": 1,
         "/SwitchableOutput/toggle_3/Status": 32,
 
@@ -70,6 +76,7 @@
         "/SwitchableOutput/dimming_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dimming_1/Settings/Type": 2,
         "/SwitchableOutput/dimming_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dimming_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dimming_1/State": 1,
         "/SwitchableOutput/dimming_1/Status": 9,
 
@@ -81,6 +88,7 @@
         "/SwitchableOutput/dimming_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dimming_2/Settings/Type": 2,
         "/SwitchableOutput/dimming_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dimming_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dimming_2/State": 1,
         "/SwitchableOutput/dimming_2/Status": 32,
 
@@ -92,6 +100,7 @@
         "/SwitchableOutput/dimming_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dimming_3/Settings/Type": 2,
         "/SwitchableOutput/dimming_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dimming_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dimming_3/State": 0,
         "/SwitchableOutput/dimming_3/Status": 32,
 
@@ -107,6 +116,7 @@
         "/SwitchableOutput/temp_setpoint_1/Settings/StepSize": 0.5,
         "/SwitchableOutput/temp_setpoint_1/Settings/Type": 3,
         "/SwitchableOutput/temp_setpoint_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/temp_setpoint_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/temp_setpoint_1/State": 1,
         "/SwitchableOutput/temp_setpoint_1/Status": 9,
 
@@ -118,6 +128,7 @@
         "/SwitchableOutput/temp_setpoint_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/temp_setpoint_2/Settings/Type": 3,
         "/SwitchableOutput/temp_setpoint_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/temp_setpoint_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/temp_setpoint_2/State": 1,
         "/SwitchableOutput/temp_setpoint_2/Status": 9,
 
@@ -129,6 +140,7 @@
         "/SwitchableOutput/temp_setpoint_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/temp_setpoint_3/Settings/Type": 3,
         "/SwitchableOutput/temp_setpoint_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/temp_setpoint_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/temp_setpoint_3/State": 1,
         "/SwitchableOutput/temp_setpoint_3/Status": 32,
 
@@ -141,6 +153,7 @@
         "/SwitchableOutput/stepped_switch_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/stepped_switch_1/Settings/Type": 4,
         "/SwitchableOutput/stepped_switch_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/stepped_switch_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/stepped_switch_1/State": 1,
         "/SwitchableOutput/stepped_switch_1/Status": 9,
 
@@ -153,6 +166,7 @@
         "/SwitchableOutput/stepped_switch_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/stepped_switch_2/Settings/Type": 4,
         "/SwitchableOutput/stepped_switch_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/stepped_switch_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/stepped_switch_2/State": 0,
         "/SwitchableOutput/stepped_switch_2/Status": 9,
 
@@ -165,6 +179,7 @@
         "/SwitchableOutput/stepped_switch_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/stepped_switch_3/Settings/Type": 4,
         "/SwitchableOutput/stepped_switch_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/stepped_switch_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/stepped_switch_3/State": 1,
         "/SwitchableOutput/stepped_switch_3/Status": 32,
 
@@ -177,6 +192,7 @@
         "/SwitchableOutput/dropdown_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dropdown_1/Settings/Type": 6,
         "/SwitchableOutput/dropdown_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dropdown_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dropdown_1/State": 1,
         "/SwitchableOutput/dropdown_1/Status": 9,
 
@@ -189,6 +205,7 @@
         "/SwitchableOutput/dropdown_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dropdown_2/Settings/Type": 6,
         "/SwitchableOutput/dropdown_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dropdown_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dropdown_2/State": 1,
         "/SwitchableOutput/dropdown_2/Status": 32,
 
@@ -201,10 +218,11 @@
         "/SwitchableOutput/dropdown_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/dropdown_3/Settings/Type": 6,
         "/SwitchableOutput/dropdown_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/dropdown_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/dropdown_3/State": 1,
         "/SwitchableOutput/dropdown_3/Status": 9,
 
-        "/SwitchableOutput/basic_slider_1/Dimming": 100,
+        "/SwitchableOutput/basic_slider_1/Dimming": 30.5,
         "/SwitchableOutput/basic_slider_1/Name": "07a. Basic slider",
         "/SwitchableOutput/basic_slider_1/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_1/Settings/Function": 2,
@@ -216,6 +234,7 @@
         "/SwitchableOutput/basic_slider_1/Settings/Unit": "W",
         "/SwitchableOutput/basic_slider_1/Settings/Type": 7,
         "/SwitchableOutput/basic_slider_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/basic_slider_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/basic_slider_1/State": 1,
         "/SwitchableOutput/basic_slider_1/Status": 9,
 
@@ -227,6 +246,7 @@
         "/SwitchableOutput/basic_slider_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/basic_slider_2/Settings/Type": 7,
         "/SwitchableOutput/basic_slider_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/basic_slider_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/basic_slider_2/State": 1,
         "/SwitchableOutput/basic_slider_2/Status": 9,
 
@@ -238,6 +258,7 @@
         "/SwitchableOutput/basic_slider_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/basic_slider_3/Settings/Type": 7,
         "/SwitchableOutput/basic_slider_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/basic_slider_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/basic_slider_3/State": 1,
         "/SwitchableOutput/basic_slider_3/Status": 32,
 
@@ -253,6 +274,7 @@
         "/SwitchableOutput/numeric_input_1/Settings/Unit": "W",
         "/SwitchableOutput/numeric_input_1/Settings/Type": 8,
         "/SwitchableOutput/numeric_input_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/numeric_input_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/numeric_input_1/State": 1,
         "/SwitchableOutput/numeric_input_1/Status": 9,
 
@@ -264,6 +286,7 @@
         "/SwitchableOutput/numeric_input_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/numeric_input_2/Settings/Type": 8,
         "/SwitchableOutput/numeric_input_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/numeric_input_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/numeric_input_2/State": 1,
         "/SwitchableOutput/numeric_input_2/Status": 9,
 
@@ -275,6 +298,7 @@
         "/SwitchableOutput/numeric_input_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/numeric_input_3/Settings/Type": 8,
         "/SwitchableOutput/numeric_input_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/numeric_input_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/numeric_input_3/State": 1,
         "/SwitchableOutput/numeric_input_3/Status": 32,
 
@@ -286,6 +310,7 @@
         "/SwitchableOutput/three_state_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/three_state_1/Settings/Type": 9,
         "/SwitchableOutput/three_state_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/three_state_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/three_state_1/State": 0,
         "/SwitchableOutput/three_state_1/Status": 9,
 
@@ -297,6 +322,7 @@
         "/SwitchableOutput/three_state_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/three_state_2/Settings/Type": 9,
         "/SwitchableOutput/three_state_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/three_state_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/three_state_2/State": 1,
         "/SwitchableOutput/three_state_2/Status": 9,
 
@@ -308,6 +334,7 @@
         "/SwitchableOutput/three_state_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/three_state_3/Settings/Type": 9,
         "/SwitchableOutput/three_state_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/three_state_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/three_state_3/State": 1,
         "/SwitchableOutput/three_state_3/Status": 32,
 
@@ -318,6 +345,7 @@
         "/SwitchableOutput/bilge_pump_1/Settings/ShowUIControl": 1,
         "/SwitchableOutput/bilge_pump_1/Settings/Type": 10,
         "/SwitchableOutput/bilge_pump_1/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/bilge_pump_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/bilge_pump_1/State": 0,
         "/SwitchableOutput/bilge_pump_1/Status": 9,
 
@@ -328,6 +356,7 @@
         "/SwitchableOutput/bilge_pump_2/Settings/ShowUIControl": 1,
         "/SwitchableOutput/bilge_pump_2/Settings/Type": 10,
         "/SwitchableOutput/bilge_pump_2/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/bilge_pump_2/Settings/ValidTypes": 8191,
         "/SwitchableOutput/bilge_pump_2/State": 1,
         "/SwitchableOutput/bilge_pump_2/Status": 0,
 
@@ -338,6 +367,7 @@
         "/SwitchableOutput/bilge_pump_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/bilge_pump_3/Settings/Type": 10,
         "/SwitchableOutput/bilge_pump_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/bilge_pump_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/bilge_pump_3/State": 1,
         "/SwitchableOutput/bilge_pump_3/Status": 8,
 
@@ -348,6 +378,7 @@
         "/SwitchableOutput/bilge_pump_3/Settings/ShowUIControl": 1,
         "/SwitchableOutput/bilge_pump_3/Settings/Type": 10,
         "/SwitchableOutput/bilge_pump_3/Settings/ValidFunctions": 2,
+        "/SwitchableOutput/bilge_pump_3/Settings/ValidTypes": 8191,
         "/SwitchableOutput/bilge_pump_3/State": 0,
         "/SwitchableOutput/bilge_pump_3/Status": 32
     }
