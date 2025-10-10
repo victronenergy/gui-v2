@@ -22,6 +22,7 @@
         "/SwitchableOutput/momentary_1/Settings/ValidTypes": 8191,
         "/SwitchableOutput/momentary_1/State": 0,
         "/SwitchableOutput/momentary_1/Status": 9,
+        "/SwitchableOutput/momentary_1/Current": 1.2,
 
         "/SwitchableOutput/momentary_2/Name": "00b. Momentary, disabled",
         "/SwitchableOutput/momentary_2/Settings/CustomName": "",
