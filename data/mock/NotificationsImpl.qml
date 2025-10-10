@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property string notificationsServiceUid: "" + BackendConnection.serviceUidForType("platform") + "/Notifications"
+
 	property Connections _mockConn: Connections {
 		target: MockManager
 		function onAddDummyNotification(isAlarm) {
@@ -17,6 +19,7 @@ QtObject {
 							: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
 			const props = {
 				acknowledged: 0,
+				silenced: 0,
 				active: 1,
 				type: notifType,
 				dateTime: new Date(),
@@ -29,68 +32,68 @@ QtObject {
 	}
 
 	property Component notifComponent: Component {
-		Notification {
+		MockNotification {
 			id: notification
+
 			onActiveChanged: root.updateNotifications()
 			onAcknowledgedChanged: root.updateNotifications()
 
 			property Timer inactiveTimer: Timer {
 				interval: 10000 * Math.random()
-				onTriggered: notification.updateActive(false)
+				onTriggered: notification._active.setValue(0)
 			}
 		}
 	}
 
-	property list<Notification> notifications: []
+	property list<MockNotification> notifications: []
 	readonly property int maxNotificationCount: 20
 	property int nextNotificationId: 0
 
 	property VeQuickItem _numberOfNotifications: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/NumberOfNotifications"
+		uid: notificationsServiceUid + "/NumberOfNotifications"
 	}
 
 	property VeQuickItem _numberOfActiveNotifications: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/NumberOfActiveNotifications"
+		uid: notificationsServiceUid + "/NumberOfActiveNotifications"
 	}
 
 	property VeQuickItem _numberOfActiveAlarms: VeQuickItem {
 		// including both acknowledged or unAcknowledged alarms
-		uid: Global.notifications.serviceUid + "/NumberOfActiveAlarms"
+		uid: notificationsServiceUid + "/NumberOfActiveAlarms"
 	}
 
 	property VeQuickItem _numberOfActiveWarnings: VeQuickItem {
 		// including both acknowledged or unAcknowledged warnings
-		uid: Global.notifications.serviceUid + "/NumberOfActiveWarnings"
+		uid: notificationsServiceUid + "/NumberOfActiveWarnings"
 	}
 
 	property VeQuickItem _numberOfActiveInformations: VeQuickItem {
 		// including both acknowledged or unAcknowledged informations
-		uid: Global.notifications.serviceUid + "/NumberOfActiveInformations"
+		uid: notificationsServiceUid + "/NumberOfActiveInformations"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedAlarms: VeQuickItem {
 		// including both active or inactive alarms
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedAlarms"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedAlarms"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedWarnings: VeQuickItem {
 		// including both active or inactive warnings
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedWarnings"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedWarnings"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedInformations: VeQuickItem {
 		// including both active or inactive informations
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedInformations"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedInformations"
 	}
 
 	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
+		uid: notificationsServiceUid + "/AcknowledgeAll"
 		onValueChanged: {
 			if (!isNaN(value) && value === 1) {
-				const model = Global.notifications.allNotificationsModel
+				const model = NotificationModel
 				for (let i = 0 ; i < model.count; ++i) {
-					const notif = model.data(model.index(i, 0), NotificationsModel.Notification)
-					notif.updateAcknowledged(true)
+					model.acknowledgeRow(i)
 				}
 				_acknowledgeAll.setValue(0)
 				updateNotifications()
@@ -99,7 +102,6 @@ QtObject {
 	}
 
 	function addNotification(params) {
-
 		let notif = null
 
 		if (notifications.length < maxNotificationCount) {
@@ -110,10 +112,15 @@ QtObject {
 			// Get an existing Notification from the notifications list to recycle.
 			// The recycled notification is going to re-use the same notificationId
 			notif = notifications[nextNotificationId]
+
+			// venus-platform first "removes" the old notification,
+			// which sets active=false then acknowledged=true.
+			// emulate this behaviour.
+			notif._active.setValue(0)
+			notif._acknowledged.setValue(1)
 		}
 
-		// Update the VeQuickItem's values of the new or recycled Notification
-		// which updates the BaseNotification properties.
+		// Update the VeQuickItem's values for the Notification
 		for (const p in params) {
 			const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
 			notif["_" + p].setValue(value)
@@ -176,4 +183,7 @@ QtObject {
 		_numberOfActiveInformations.setValue(activeInformationCount)
 		_numberOfUnAcknowledgedInformations.setValue(unAcknowledgedInformationCount)
 	}
+
+	// in case some notifications were pre-instantiated
+	Component.onCompleted: nextNotificationId = NotificationModel.count
 }

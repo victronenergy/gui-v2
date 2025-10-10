@@ -6,13 +6,17 @@
 import QtQuick
 import Victron.VenusOS
 
-BaseNotification {
+QtObject {
 	id: notification
 
 	readonly property string serviceUid: notificationId < 0 ? ""
-															: Global.notifications.serviceUid + "/" + notificationId
+			: ("" + BackendConnection.serviceUidForType("platform") + "/Notifications" + "/" + notificationId)
 
 	property date _invalidDate
+
+	readonly property VeQuickItem _silenced: VeQuickItem {
+		uid: notification.serviceUid ? notification.serviceUid + "/Silenced" : ""
+	}
 
 	readonly property VeQuickItem _acknowledged: VeQuickItem {
 		uid: notification.serviceUid ? notification.serviceUid + "/Acknowledged" : ""
@@ -42,21 +46,13 @@ BaseNotification {
 		uid: notification.serviceUid ? notification.serviceUid + "/Value" : ""
 	}
 
-	function updateAcknowledged(acknowledged: bool) {
-		_acknowledged.setValue(acknowledged ? 1 : 0)
-	}
-
-	function updateActive(active: bool) {
-		_active.setValue(active ? 1 : 0)
-	}
-
-	// These properties should not be written to; use updateAcknowledged() and updateActive() functions
-	// to maintain data sync and not break bindings.
-	acknowledged: !!_acknowledged.value
-	active: !!_active.value
-	type: _type.valid ? parseInt(_type.value) : -1
-	dateTime: _dateTime.valid ? new Date(_dateTime.value * 1000) : _invalidDate
-	deviceName: _deviceName.value || ""
-	description: _description.value || ""
-	value: _value.value || ""
+	readonly property int notificationId: 0 // slot index
+	readonly property bool acknowledged: !!_acknowledged.value
+	readonly property bool silenced: !!_silenced.value
+	readonly property bool active: _active.valid ? _active.value : true // assume active by default.
+	readonly property int type: _type.valid ? parseInt(_type.value) : -1
+	readonly property date dateTime: _dateTime.valid ? new Date(_dateTime.value * 1000) : _invalidDate
+	readonly property string deviceName: _deviceName.value || ""
+	readonly property string description: _description.value || ""
+	readonly property string value: _value.value || ""
 }
