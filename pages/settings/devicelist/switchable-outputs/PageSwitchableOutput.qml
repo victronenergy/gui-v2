@@ -78,6 +78,13 @@ Page {
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				preferredVisible: dataItem.valid
 			}
+
+			ListQuantity {
+				text: CommonWords.current_amps
+				dataItem.uid: root.outputUid + "/Current"
+				preferredVisible: dataItem.valid
+				unit: VenusOS.Units_Amp
+			}
 		}
 	}
 }
