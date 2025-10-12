@@ -1,0 +1,10 @@
+{
+    "Soc": 75,
+    "TargetSoc": 80,
+    "RangeToGo": 320,
+    "ChargingState": 3,
+    "AtSite": 1,
+    "BatteryCapacity": 82,
+    "Ac/Power": 7200,
+    "CustomName": "Model 3"
+}
