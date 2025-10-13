@@ -61,7 +61,7 @@
       <translation>Position</translation>
     </message>
     <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
       <source>Speed</source>
       <translation>Hastighet</translation>
     </message>
@@ -77,12 +77,12 @@
       <translation>Okänt fel</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="105"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="106"/>
       <source>Minimum SOC</source>
       <translation>Lägsta SOC</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="134"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
       <source>Enter password</source>
       <translation>Ange lösenord</translation>
     </message>
@@ -152,7 +152,7 @@
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_units_gps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="63"/>
       <source>GPS</source>
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
@@ -273,17 +273,17 @@
       <translation type="unfinished">Namn</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
       <source>Product ID</source>
       <translation>Produkt-id</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="63"/>
       <source>Hardware version</source>
       <translation>Maskinvaruversion</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
       <source>Device name</source>
       <translation>Enhetsnamn</translation>
     </message>
@@ -343,7 +343,7 @@
       <translation>Värdet måste vara lägre än startvärdet</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="124"/>
       <source>AC output</source>
       <translation>AC-utgång</translation>
     </message>
@@ -701,6 +701,16 @@
       <source>Up, but no services (250 kbit/s)</source>
       <translation>Aktiv men inga tjänster (250 kbit/s)</translation>
     </message>
+    <message id="settings_canopen_motordrive_250">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="84"/>
+      <source>CANopen Motor drive (250 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_canopen_motordrive_500">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="90"/>
+      <source>CANopen Motor drive (500 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_devices">
       <location filename="../../components/CommonWords.qml" line="163"/>
       <source>Devices</source>
@@ -751,6 +761,11 @@
       <source>OK: No other device is connected with this unique number.</source>
       <translation>OK: Ingen annan enhet är kopplad till detta unika nummer.</translation>
     </message>
+    <message id="pagesettingsintegrations_canopenmotordrive">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="173"/>
+      <source>CANopen motor drives</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_network_status">
       <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Network status</source>
@@ -762,22 +777,22 @@
       <translation>Anpassningsbar ljusstyrka</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="28"/>
       <source>Brightness</source>
       <translation>Ljusstyrka</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="36"/>
       <source>Display off time</source>
       <translation>Tid skärmsläckning</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="42"/>
       <source>10 sec</source>
       <translation>10 sek</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="44"/>
       <source>30 sec</source>
       <translation>30 sek</translation>
     </message>
@@ -802,13 +817,13 @@
       <translation>Aldrig</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>Mörk</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="68"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>Ljus</translation>
@@ -824,17 +839,17 @@
       <translation>Byter språk</translation>
     </message>
     <message id="settings_units_energy">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="40"/>
       <source>Electrical power display</source>
       <translation>Elektrisk effektindikator</translation>
     </message>
     <message id="settings_units_watts">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Power (Watts)</source>
       <translation>Effekt (Watt)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
       <source>Current (Amps)</source>
       <translation>Ström (Amp)</translation>
     </message>
@@ -845,12 +860,12 @@
       <translation>Nivå %1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="21"/>
       <source>Celsius</source>
       <translation>Celsius (°C)</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="23"/>
       <source>Fahrenheit</source>
       <translation>Fahrenheit (F)</translation>
     </message>
@@ -1195,17 +1210,17 @@
       <translation>Skanna igen</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
       <source>Remote support</source>
       <translation>Fjärrsupport</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
       <source>Remote support tunnel</source>
       <translation>Fjärrsupporttunnel</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="304"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
       <source>Remote support IP and port</source>
       <translation>Fjärrstödd IP och port</translation>
     </message>
@@ -1326,48 +1341,48 @@
       <translation>Återställa servicetimer</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
       <source>Volume</source>
       <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation type="unfinished">Volym</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="69"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>Format</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="75"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" E</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="78"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="81"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="88"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Hastighetsenhet'</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="97"/>
       <source>Miles per hour</source>
       <translation>Miles per timme</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
       <source>Knots</source>
       <translation>Knop</translation>
     </message>
@@ -2705,7 +2720,7 @@ Använd såvida det inte är förbjudet av elleverantören.</translation>
       <translation>Lägre elpris under timmar med lägre belastning eller om du vill säkerställa att din elbil är fulladdad och körklar vid en viss tid.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="135"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="136"/>
       <source>Enable charging</source>
       <translation>Aktivera laddning</translation>
     </message>
@@ -4528,7 +4543,7 @@ Vill du fortsätta?</translation>
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="51"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">Lägsta SOC</translation>
     </message>
@@ -5089,7 +5104,7 @@ Vill du fortsätta?</translation>
       <translation>Övervakning</translation>
     </message>
     <message id="page_switchable_output_type">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="57"/>
       <source>Type</source>
       <translation>Sort</translation>
     </message>
@@ -5286,7 +5301,7 @@ Vill du fortsätta?</translation>
       <translation>Ingen programvara hittades</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="89"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="98"/>
       <source>Setting locked for access level</source>
       <translation>Inställning låst för åtkomstnivå</translation>
     </message>
@@ -6257,7 +6272,7 @@ Vill du fortsätta?</translation>
       <translation>Generatorns totala drifttid (timmar)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="111"/>
       <source>DC input</source>
       <translation>DC-ingång</translation>
     </message>
@@ -6272,7 +6287,7 @@ Vill du fortsätta?</translation>
       <translation type="unfinished">Autostart</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <translation>Starta och stoppa generatorn baserat på de inställda villkoren för autostart.</translation>
     </message>
@@ -6656,52 +6671,52 @@ Vill du fortsätta?</translation>
       <translation>Aktiv men inga tjänster (500 kbit/s)</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="142"/>
       <source>Data units</source>
       <translation>Dataenheter</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="127"/>
       <source>Brief page</source>
       <translation>Kort sida</translation>
     </message>
     <message id="settings_displayoff_1min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="46"/>
       <source>1 min</source>
       <translation type="unfinished">1 min</translation>
     </message>
     <message id="settings_displayoff_10min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="48"/>
       <source>10 min</source>
       <translation type="unfinished">10 min</translation>
     </message>
     <message id="settings_displayoff_30min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="50"/>
       <source>30 min</source>
       <translation type="unfinished">30 min</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="52"/>
       <source>Never</source>
       <translation type="unfinished">Aldrig</translation>
     </message>
     <message id="settings_remote_console_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Auto</source>
       <translation type="unfinished">Automatisk</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
       <source>Start page</source>
       <translation type="unfinished">Startsida</translation>
     </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="135"/>
       <source>Boat page</source>
       <translation type="unfinished">Båtsida</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="148"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Högsta och lägsta mätarintervaller</translation>
     </message>
@@ -6711,44 +6726,44 @@ Vill du fortsätta?</translation>
       <translation>Startsida</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="170"/>
       <source>User interface</source>
       <translation>Användargränssnitt</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="172"/>
       <source>User interface (Remote Console)</source>
       <translation>Användargränssnitt (Remote Console)</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>Classic UI</source>
       <translation>Klassiskt användargränssnitt</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="184"/>
       <source>New UI</source>
       <translation>Nytt användargränssnitt</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="209"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="215"/>
       <source>Restarting application...</source>
       <translation>Startar om applikation ...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="212"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="218"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 uppdaterat</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="222"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Användargränssnitt växlar till %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="226"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 är inställt på %2</translation>
@@ -6952,7 +6967,7 @@ Vill du fortsätta?</translation>
       <translation>Inget lösenord och nätverkskommunikationen är inte krypterad</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
       <source>Log out now</source>
       <translation type="unfinished">Logga ut nu</translation>
     </message>
@@ -6962,22 +6977,22 @@ Vill du fortsätta?</translation>
       <translation>Lösenordet måste innehålla minst 8 tecken</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Select 'Secured' profile?</source>
       <translation>Välja ”säkrad” profil?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Select 'Weak' profile?</source>
       <translation>Välja ”svag” profil?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Välja ”osäkrad” profil?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6988,14 +7003,14 @@ Vill du fortsätta?</translation>
 • Osäkra inställningar kan inte aktiveras</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Lokala nätverkstjänster är lösenordsskyddade
 • Även okrypterad åtkomst till lokala webbsidor är aktiverad (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Lokala nätverkstjänster kräver inget lösenord
@@ -7012,47 +7027,47 @@ Vill du fortsätta?</translation>
       <translation type="unfinished">Lösenordet måste innehålla minst 8 tecken</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
       <source>Root password</source>
       <translation>Root-lösenord</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
       <source>Enter password</source>
       <translation type="unfinished">Ange lösenord</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Lösenordet måste innehålla minst 8 tecken</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
       <source>Root password changed to %1</source>
       <translation>Root-lösenord ändrat till %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
       <source>Enable SSH on LAN</source>
       <translation>Aktivera SSH på LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
       <source>Logout</source>
       <translation>Utloggning</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
       <source>Log out?</source>
       <translation>Logga ut?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Detta kopplar från alla lokala nätverksanslutningar.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
       <source>Log out</source>
       <translation>Logga ut</translation>
     </message>
@@ -7107,7 +7122,7 @@ Vill du fortsätta?</translation>
       <translation>Ett larm utlöses när autostart-funktionen har varit inaktiv i över 10 minuter</translation>
     </message>
     <message id="settings_units_amps_exceptions">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="50"/>
       <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
       <translation>Obs: Om ström inte kan visas (exempelvis när totalvärdet för de kombinerade AC- och DC-källorna visas) visas effekt istället.</translation>
     </message>
@@ -7240,6 +7255,11 @@ Vill du fortsätta?</translation>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="281"/>
       <source>Victron Community</source>
       <translation type="unfinished">Victron-Community</translation>
+    </message>
+    <message id="pagesettingsintegrations_ui_plugins">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="290"/>
+      <source>UI Plugins</source>
+      <translation type="unfinished"/>
     </message>
     <message id="pagesettingssupportstate_modbus_tcp_server">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="453"/>
@@ -7909,7 +7929,7 @@ Vill du fortsätta?</translation>
       <translation>Fast programvara installerad, enheten startar om.</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="119"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Bekräfta</translation>
@@ -8232,17 +8252,17 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Ingång</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="34"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="35"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Läget är fastställt i systemkonfigurationen. Det kan inte justeras.</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="26"/>
+      <location filename="../../components/listitems/ListLink.qml" line="27"/>
       <source>Open link</source>
       <translation>Öppna länk</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="57"/>
+      <location filename="../../components/listitems/ListLink.qml" line="70"/>
       <source>Scan the QR code with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>Skanna QR-koden med din bärbara enhet.&lt;br /&gt;Eller ange länken: %1</translation>
@@ -8378,59 +8398,59 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <translation>Autointervaller</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="21"/>
       <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
       <translation>När detta är aktiverat justeras de lägsta och högsta värdena för mätare och diagram automatiskt beroende på tidigare värden.</translation>
     </message>
     <message id="settings_minmax_reset">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
       <translation>Återställ alla värden till noll</translation>
     </message>
     <message id="settings_minmax_reset_range_values">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
       <source>Reset Range Values</source>
       <translation>Återställ intervallvärden</translation>
     </message>
     <message id="settings_minmax_reset_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="39"/>
       <source>Are you sure that you want to reset all the values to zero?</source>
       <translation>Är du säker på att du vill återställa alla värden till noll?</translation>
     </message>
     <message id="settings_minmax_ac_in_not_available">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="81"/>
       <source>%1 (not available)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
       <translation>%1 (ej tillgänglig)</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="130"/>
       <source>Maximum current: AC in 1 connected</source>
       <translation>Maximal ström: AC-in 1 ansluten</translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="139"/>
       <source>Maximum current: AC in 2 connected</source>
       <translation>Maximal ström: AC-in 2 ansluten</translation>
     </message>
     <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
       <source>Maximum current: no AC inputs</source>
       <translation>Högsta ström: inga AC-ingångar</translation>
     </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="156"/>
       <source>DC output</source>
       <translation>DC-utgång</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
       <source>Solar</source>
       <translation>Solceller</translation>
     </message>
@@ -8453,12 +8473,12 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <translation>Timeout</translation>
     </message>
     <message id="settings_startpage_timeout_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="73"/>
       <source>Revert to the start page when the application is inactive.</source>
       <translation>Återgå till startsidan när applikationen är inaktiv.</translation>
     </message>
     <message id="settings_startpage_auto_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="97"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
       <translation>Efter en minuts inaktivitet, välj strömsidan som startsidan, om den är med på den här listan.</translation>
     </message>
@@ -8633,6 +8653,11 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="66"/>
       <source>Controller Temperature</source>
       <translation>Controllertemperatur</translation>
+    </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="73"/>
+      <source>Motor Direction Inverted</source>
+      <translation type="unfinished"/>
     </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
@@ -8895,7 +8920,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Omvänd energi L%1</translation>
     </message>
     <message id="settings_minmax_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
       <source>Boat page</source>
       <translation>Båtsida</translation>
     </message>
@@ -8915,22 +8940,22 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>%1 ändrad till generatortjänst</translation>
     </message>
     <message id="settings_minmax_gauge_display">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="187"/>
       <source>Gauge Display</source>
       <translation>Mätare</translation>
     </message>
     <message id="settings_minmax_time_to_go">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="195"/>
       <source>Time to go</source>
       <translation>Återstående tid</translation>
     </message>
     <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
       <source>Max Speed</source>
       <translation>Högsta hastighet</translation>
     </message>
     <message id="settings_minmax_max_rpm">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="222"/>
       <source>Max RPM</source>
       <translation>Högsta varv/min</translation>
     </message>
@@ -8950,12 +8975,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Modulspänning</translation>
     </message>
     <message id="page_switchable_output_group">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="46"/>
       <source>Group</source>
       <translation>Grupp</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="75"/>
       <source>Fuse rating</source>
       <translation>Säkringskapacitet</translation>
     </message>
@@ -9330,12 +9355,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Laddar begäranden</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
       <source>Change password</source>
       <translation>Byt lösenord</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Update</source>
       <translation>Uppdatera</translation>
     </message>
@@ -9361,12 +9386,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation type="unfinished">Bekräfta</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
       <source>Please enter a new GX password:</source>
       <translation>Ange ett nytt GX-lösenord</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="94"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="98"/>
       <source>Enter new password</source>
       <translation>Ange nytt lösenord</translation>
     </message>
@@ -9412,7 +9437,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Laddar ett annat batteri från huvudbatteriet</translation>
     </message>
     <message id="page_switchable_show_controls">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="67"/>
       <source>Show controls</source>
       <extracomment>Whether UI controls should be shown for this output</extracomment>
       <translation>Visa kontroller</translation>
@@ -9428,7 +9453,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Inget mobilmodem är anslutet</translation>
     </message>
     <message id="ess_active_soc_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="85"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="87"/>
       <source>Active SOC Limit: %1%</source>
       <translation>Aktiv SOC-gräns: %1%</translation>
     </message>
@@ -9745,12 +9770,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Detta kommer att ladda ner och uppdatera rootfs med den senaste officiella programvaran.&lt;br&gt;Internetanslutning krävs.&lt;br&gt;Tryck på 'OK' för att fortsätta.</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="93"/>
       <source>Kilometres per hour</source>
       <translation>Kilometer per timme</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="95"/>
       <source>Metres per second</source>
       <translation>Meter per sekund</translation>
     </message>
@@ -9765,12 +9790,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Liter</translation>
     </message>
     <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>UI Animations</source>
       <translation>UI-animationer</translation>
     </message>
     <message id="settings_ui_animations_description">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="159"/>
       <source>Disable to reduce CPU usage</source>
       <translation>Inaktivera för att minska CPU-användningen</translation>
     </message>
@@ -9785,7 +9810,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>GX-enhetens reläer</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="93"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="96"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLife justerar dynamiskt batteriets lägsta laddningsnivå för att förhindra djupa urladdningar och säkerställa regelbundna fulladdningar, vilket bidrar till att förlänga batteriets livslängd och upprätthålla systemets tillförlitlighet.</translation>
     </message>
@@ -9800,54 +9825,54 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>När detta är aktiverat omvänds strömpolariteten i DGN:erna CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1 och SOLAR_CONTROLLER_BATTERY_STATUS.</translation>
     </message>
     <message id="settings_gx_display_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="59"/>
       <source>GX display appearance</source>
       <translation>GX-skärmens utseende</translation>
     </message>
     <message id="settings_remote_console_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
       <source>Remote Console appearance</source>
       <translation>Remote Console-utseende</translation>
     </message>
     <message id="settings_remote_console_forced">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
       <source>Forced by %2 to %1</source>
       <extracomment>%1 = "dark", "light" or "auto" %2 = "VRM" or "app"</extracomment>
       <translation>Tvingad av %2 till %1</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_dark">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>dark</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>mörk</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_light">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="86"/>
       <source>light</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>ljus</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="89"/>
       <source>auto</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>auto</translation>
     </message>
     <message id="settings_remote_console_forced_by_vrm">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="94"/>
       <source>VRM</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation type="unfinished">VRM</translation>
     </message>
     <message id="settings_remote_console_forced_by_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="97"/>
       <source>app</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation>app</translation>
     </message>
     <message id="settings_remote_console_appearance_same_as_gx_display">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="110"/>
       <source>Same as GX display</source>
       <translation>Samma som GX-skärm</translation>
     </message>
@@ -10349,6 +10374,32 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="230"/>
       <source>Frequency setpoint (f)</source>
       <translation type="unfinished"/>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="160"/>
+      <source>Current</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation type="unfinished">Ström</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
+      <source>Scan for motor drives</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
+      <source>Discovered motor drive IDs</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchableoutput_gx_device_relays">
+      <location filename="../../src/switchableoutput.cpp" line="284"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">GX-enhetens reläer</translation>
+    </message>
+    <message id="gx_device_relays">
+      <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">GX-enhetens reläer</translation>
     </message>
   </context>
   <context>
@@ -11831,146 +11882,146 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Använd D-bussdatakälla: anslut till angiven D-bussadress.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="120"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>adress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="125"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Använd D-bussdatakälla: anslut till standard D-bussadress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Använd MQTT-datakälla: anslut till angiven MQQT-mäklaradress.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>adress</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="139"/>
       <source>MQTT data source device portal id.</source>
       <translation>Enhetsportal-id MQTT datakälla.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>portalId</source>
       <translation>Portal-id</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="144"/>
+      <location filename="../../src/main.cpp" line="145"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Webbhotell-shard MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>shard</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="150"/>
+      <location filename="../../src/main.cpp" line="151"/>
       <source>MQTT data source username</source>
       <translation>Användarnamn MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="152"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Användare</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="156"/>
+      <location filename="../../src/main.cpp" line="157"/>
       <source>MQTT data source password</source>
       <translation>Lösenord MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="158"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>lösen</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="162"/>
+      <location filename="../../src/main.cpp" line="163"/>
       <source>MQTT data source token</source>
       <translation>Token MQTT-datakälla</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="164"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Token-kod</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="168"/>
+      <location filename="../../src/main.cpp" line="169"/>
       <source>Enable FPS counter</source>
       <translation>Aktivera FPS-räknare</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="173"/>
+      <location filename="../../src/main.cpp" line="174"/>
       <source>Skip splash screen</source>
       <translation>Skippa startbild</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>Use mock data source for testing.</source>
       <translation>Använd simulerad datakälla för testning.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="183"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>Name of mock configuration</source>
       <translation>Namn på mock-konfiguration</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="184"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="190"/>
+      <location filename="../../src/main.cpp" line="191"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Ange för att inaktivera mock-timers vid start</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="195"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="201"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>Signal K URL</source>
       <translation>Signal K URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="203"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Färgschema (mörkt, ljust, auto, standard)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="209"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>

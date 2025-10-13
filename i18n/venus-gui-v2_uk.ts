@@ -61,7 +61,7 @@
       <translation>Позиція</translation>
     </message>
     <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
       <source>Speed</source>
       <translation>Швидкість</translation>
     </message>
@@ -77,12 +77,12 @@
       <translation>Невідома помилка</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="105"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="106"/>
       <source>Minimum SOC</source>
       <translation>Мін. SOC:</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="134"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
       <source>Enter password</source>
       <translation>Введіть пароль</translation>
     </message>
@@ -152,7 +152,7 @@
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_units_gps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="63"/>
       <source>GPS</source>
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
@@ -273,17 +273,17 @@
       <translation type="unfinished">Ім'я</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
       <source>Product ID</source>
       <translation>ID продукту</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="63"/>
       <source>Hardware version</source>
       <translation>Апаратна версія</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
       <source>Device name</source>
       <translation>Назва пристрою</translation>
     </message>
@@ -343,7 +343,7 @@
       <translation>Значення має бути нижчим за початкове значення</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="124"/>
       <source>AC output</source>
       <translation>Вихід AC</translation>
     </message>
@@ -701,6 +701,16 @@
       <source>Up, but no services (250 kbit/s)</source>
       <translation>Працює, але без служб (250 кбіт/с)</translation>
     </message>
+    <message id="settings_canopen_motordrive_250">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="84"/>
+      <source>CANopen Motor drive (250 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_canopen_motordrive_500">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="90"/>
+      <source>CANopen Motor drive (500 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_devices">
       <location filename="../../components/CommonWords.qml" line="163"/>
       <source>Devices</source>
@@ -751,6 +761,11 @@
       <source>OK: No other device is connected with this unique number.</source>
       <translation>OK: жоден інший пристрій не підключено до цього унікального номера.</translation>
     </message>
+    <message id="pagesettingsintegrations_canopenmotordrive">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="173"/>
+      <source>CANopen motor drives</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_network_status">
       <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Network status</source>
@@ -762,22 +777,22 @@
       <translation>Адаптивна яскравість</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="28"/>
       <source>Brightness</source>
       <translation>Яскравість</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="36"/>
       <source>Display off time</source>
       <translation>Час вимкнення дисплея</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="42"/>
       <source>10 sec</source>
       <translation>10 сек</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="44"/>
       <source>30 sec</source>
       <translation>30 сек</translation>
     </message>
@@ -802,13 +817,13 @@
       <translation>Ніколи</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>Темний</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="68"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>Світлий</translation>
@@ -824,17 +839,17 @@
       <translation>Зміна мови</translation>
     </message>
     <message id="settings_units_energy">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="40"/>
       <source>Electrical power display</source>
       <translation>Індикатор електричної потужності</translation>
     </message>
     <message id="settings_units_watts">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Power (Watts)</source>
       <translation>Потужність (Вт)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
       <source>Current (Amps)</source>
       <translation>Струм (Ампер)</translation>
     </message>
@@ -845,12 +860,12 @@
       <translation>Рівень %1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="21"/>
       <source>Celsius</source>
       <translation>Цельсій (°C)</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="23"/>
       <source>Fahrenheit</source>
       <translation>Фаренгейт (F)</translation>
     </message>
@@ -1195,17 +1210,17 @@
       <translation>Повторне сканування</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
       <source>Remote support</source>
       <translation>Віддалена підтримка</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
       <source>Remote support tunnel</source>
       <translation>Тунель віддаленої підтримки</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="304"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
       <source>Remote support IP and port</source>
       <translation>IP та порт віддаленої підтримки</translation>
     </message>
@@ -1326,48 +1341,48 @@
       <translation>Скидання таймера обслуговування</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
       <source>Volume</source>
       <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation type="unfinished">Об’єм</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="69"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>Формат</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="75"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41,6" пн. ш., 5° 13' 12,3" сх.д.</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="78"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="81"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20,693 пн.ш., 5° 13,205 сх.д</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="88"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Одиниця швидкості</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="97"/>
       <source>Miles per hour</source>
       <translation>Милі на годину</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
       <source>Knots</source>
       <translation>Вузли</translation>
     </message>
@@ -2705,7 +2720,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Нижчі тарифи на електроенергію в непікові години або якщо ви хочете бути впевненими, що ваш електромобіль повністю заряджений і готовий до поїздки в певний час.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="135"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="136"/>
       <source>Enable charging</source>
       <translation>Увімкнути заряджання</translation>
     </message>
@@ -4529,7 +4544,7 @@ Do you want to continue?</source>
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="51"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">Мін. SOC:</translation>
     </message>
@@ -5090,7 +5105,7 @@ Do you want to continue?</source>
       <translation>Трекер</translation>
     </message>
     <message id="page_switchable_output_type">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="57"/>
       <source>Type</source>
       <translation>Тип</translation>
     </message>
@@ -5287,7 +5302,7 @@ Do you want to continue?</source>
       <translation>Прошивка не знайдена</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="89"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="98"/>
       <source>Setting locked for access level</source>
       <translation>Налаштування заблоковано для рівня доступу</translation>
     </message>
@@ -6258,7 +6273,7 @@ Do you want to continue?</source>
       <translation>Загальний час роботи генератора (годин)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="111"/>
       <source>DC input</source>
       <translation>Вхід постійного струму</translation>
     </message>
@@ -6273,7 +6288,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Автозапуск</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <translation>Запуск і зупинка генератора на основі налаштованих умов автозапуску.</translation>
     </message>
@@ -6657,52 +6672,52 @@ Do you want to continue?</source>
       <translation>Вгору, але без послуг (500 кбіт/с)</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="142"/>
       <source>Data units</source>
       <translation>Одиниці виміру даних</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="127"/>
       <source>Brief page</source>
       <translation>Коротка сторінка</translation>
     </message>
     <message id="settings_displayoff_1min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="46"/>
       <source>1 min</source>
       <translation type="unfinished">1 хв</translation>
     </message>
     <message id="settings_displayoff_10min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="48"/>
       <source>10 min</source>
       <translation type="unfinished">10 хв</translation>
     </message>
     <message id="settings_displayoff_30min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="50"/>
       <source>30 min</source>
       <translation type="unfinished">30 хв</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="52"/>
       <source>Never</source>
       <translation type="unfinished">Ніколи</translation>
     </message>
     <message id="settings_remote_console_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Auto</source>
       <translation type="unfinished">Авто</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
       <source>Start page</source>
       <translation type="unfinished">Початкова сторінка</translation>
     </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="135"/>
       <source>Boat page</source>
       <translation type="unfinished">Сторінка човна</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="148"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Мінімальний і максимальний діапазони індикаторів</translation>
     </message>
@@ -6712,44 +6727,44 @@ Do you want to continue?</source>
       <translation>Початкова сторінка</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="170"/>
       <source>User interface</source>
       <translation>Інтерфейс користувача</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="172"/>
       <source>User interface (Remote Console)</source>
       <translation>Інтерфейс користувача (віддалена консоль)</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>Classic UI</source>
       <translation>Класичний інтерфейс</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="184"/>
       <source>New UI</source>
       <translation>Новий інтерфейс</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="209"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="215"/>
       <source>Restarting application...</source>
       <translation>Перезапуск програми...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="212"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="218"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 оновлено</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="222"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Інтерфейс користувача зміниться на %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="226"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 встановлено на %2</translation>
@@ -6953,7 +6968,7 @@ Do you want to continue?</source>
       <translation>Немає пароля і мережеве з'єднання не шифрується</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
       <source>Log out now</source>
       <translation type="unfinished">Вийдіть з системи</translation>
     </message>
@@ -6963,22 +6978,22 @@ Do you want to continue?</source>
       <translation>Пароль повинен мати довжину не менше 8 символів</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Select 'Secured' profile?</source>
       <translation>Обрали профіль "Захищений"?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Select 'Weak' profile?</source>
       <translation>Обрали профіль "Слабкий"?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Обрали профіль "Незахищений"?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6989,14 +7004,14 @@ Do you want to continue?</source>
 - Неможливо ввімкнути небезпечні налаштування</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Служби локальної мережі захищені паролем
 - Також дозволено незашифрований доступ до локальних веб-сайтів (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Служби локальної мережі не потребують пароля
@@ -7013,47 +7028,47 @@ Do you want to continue?</source>
       <translation type="unfinished">Пароль повинен мати довжину не менше 8 символів</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
       <source>Root password</source>
       <translation>Рут-пароль</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
       <source>Enter password</source>
       <translation type="unfinished">Введіть пароль</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Пароль повинен мати довжину не менше 8 символів</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
       <source>Root password changed to %1</source>
       <translation>Рут-пароль змінено на %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
       <source>Enable SSH on LAN</source>
       <translation>Увімкнення SSH на локальній мережі</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
       <source>Logout</source>
       <translation>Вихід</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
       <source>Log out?</source>
       <translation>Вийти з системи?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Це призведе до відключення всіх підключень до локальної мережі.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
       <source>Log out</source>
       <translation>Вихід</translation>
     </message>
@@ -7108,7 +7123,7 @@ Do you want to continue?</source>
       <translation>Сигнал тривоги спрацьовує, якщо функцію автозапуску вимкнено більше ніж на 10 хвилин</translation>
     </message>
     <message id="settings_units_amps_exceptions">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="50"/>
       <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
       <translation>Примітка: Якщо струм неможливо відобразити (наприклад, коли відображається загальна сума для комбінованих джерел змінного і постійного струму), замість нього буде показано потужність.</translation>
     </message>
@@ -7241,6 +7256,11 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="281"/>
       <source>Victron Community</source>
       <translation type="unfinished">Спільнота Victron</translation>
+    </message>
+    <message id="pagesettingsintegrations_ui_plugins">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="290"/>
+      <source>UI Plugins</source>
+      <translation type="unfinished"/>
     </message>
     <message id="pagesettingssupportstate_modbus_tcp_server">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="453"/>
@@ -7910,7 +7930,7 @@ Do you want to continue?</source>
       <translation>Встановлено прошивку, пристрій перезавантажено</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="119"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Так, скасуйте підписку</translation>
@@ -8234,17 +8254,17 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Вхід</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="34"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="35"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Режим зафіксовано в конфігурації системи. Він не може бути змінений.</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="26"/>
+      <location filename="../../components/listitems/ListLink.qml" line="27"/>
       <source>Open link</source>
       <translation>Відкрийте посилання</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="57"/>
+      <location filename="../../components/listitems/ListLink.qml" line="70"/>
       <source>Scan the QR code with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>Відскануйте QR-код своїм портативним пристроєм.&lt;br /&gt;Або вставте посилання: %1</translation>
@@ -8380,59 +8400,59 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Автовідбір</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="21"/>
       <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
       <translation>Якщо увімкнено, мінімуми та максимуми індикаторів і графіків автоматично коригуються на основі минулих значень.</translation>
     </message>
     <message id="settings_minmax_reset">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
       <translation>Скинути всі значення діапазону до нуля</translation>
     </message>
     <message id="settings_minmax_reset_range_values">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
       <source>Reset Range Values</source>
       <translation>Скинути значення діапазону</translation>
     </message>
     <message id="settings_minmax_reset_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="39"/>
       <source>Are you sure that you want to reset all the values to zero?</source>
       <translation>Ви впевнені, що хочете обнулити всі значення?</translation>
     </message>
     <message id="settings_minmax_ac_in_not_available">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="81"/>
       <source>%1 (not available)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
       <translation>%1 (недоступно)</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="130"/>
       <source>Maximum current: AC in 1 connected</source>
       <translation>Максимальний струм: AC в 1 підключеному</translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="139"/>
       <source>Maximum current: AC in 2 connected</source>
       <translation>Максимальний струм: Перемінний струм у 2 підключених</translation>
     </message>
     <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
       <source>Maximum current: no AC inputs</source>
       <translation>Максимальний струм: немає входів змінного струму</translation>
     </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="156"/>
       <source>DC output</source>
       <translation>Вихід постійного струму</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
       <source>Solar</source>
       <translation>Сонячна</translation>
     </message>
@@ -8456,12 +8476,12 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Тайм-аут.</translation>
     </message>
     <message id="settings_startpage_timeout_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="73"/>
       <source>Revert to the start page when the application is inactive.</source>
       <translation>Повернутися до стартової сторінки, коли програма неактивна.</translation>
     </message>
     <message id="settings_startpage_auto_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="97"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
       <translation>Після однієї хвилини бездіяльності виберіть поточну сторінку як стартову, якщо вона є в цьому списку.</translation>
     </message>
@@ -8636,6 +8656,11 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="66"/>
       <source>Controller Temperature</source>
       <translation>Контролер температури</translation>
+    </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="73"/>
+      <source>Motor Direction Inverted</source>
+      <translation type="unfinished"/>
     </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
@@ -8898,7 +8923,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Реверсивна енергія L%1</translation>
     </message>
     <message id="settings_minmax_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
       <source>Boat page</source>
       <translation>Сторінка човна</translation>
     </message>
@@ -8918,22 +8943,22 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>%1 змінено на обслуговування генератора змінного струму</translation>
     </message>
     <message id="settings_minmax_gauge_display">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="187"/>
       <source>Gauge Display</source>
       <translation>Дисплей манометра</translation>
     </message>
     <message id="settings_minmax_time_to_go">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="195"/>
       <source>Time to go</source>
       <translation>Час до вимкнення</translation>
     </message>
     <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
       <source>Max Speed</source>
       <translation>Максимальна швидкість</translation>
     </message>
     <message id="settings_minmax_max_rpm">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="222"/>
       <source>Max RPM</source>
       <translation>Максимальне число обертів</translation>
     </message>
@@ -8953,12 +8978,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Напруга модуля</translation>
     </message>
     <message id="page_switchable_output_group">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="46"/>
       <source>Group</source>
       <translation>Група</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="75"/>
       <source>Fuse rating</source>
       <translation>Номінал запобіжника</translation>
     </message>
@@ -9333,12 +9358,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Запитує зарядку</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
       <source>Change password</source>
       <translation>Змінити пароль</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Update</source>
       <translation>Оновити</translation>
     </message>
@@ -9364,12 +9389,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">Так, скасуйте підписку</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
       <source>Please enter a new GX password:</source>
       <translation>Будь ласка, введіть новий пароль GX:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="94"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="98"/>
       <source>Enter new password</source>
       <translation>Введіть новий пароль</translation>
     </message>
@@ -9415,7 +9440,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Заряджання іншої батареї від основної батареї</translation>
     </message>
     <message id="page_switchable_show_controls">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="67"/>
       <source>Show controls</source>
       <extracomment>Whether UI controls should be shown for this output</extracomment>
       <translation>Показати елементи керування</translation>
@@ -9431,7 +9456,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Немає підключеного стільникового модему</translation>
     </message>
     <message id="ess_active_soc_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="85"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="87"/>
       <source>Active SOC Limit: %1%</source>
       <translation>Активний ліміт SOC: %1%</translation>
     </message>
@@ -9748,12 +9773,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Це завантажить та оновить rootfs до останньої офіційної прошивки.&lt;br&gt;Необхідне підключення до Інтернету.&lt;br&gt;Натисніть «OK», щоб продовжити.</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="93"/>
       <source>Kilometres per hour</source>
       <translation>Кілометри на годину</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="95"/>
       <source>Metres per second</source>
       <translation>Метри на секунду</translation>
     </message>
@@ -9768,12 +9793,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Літри</translation>
     </message>
     <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>UI Animations</source>
       <translation>Анімація інтерфейсу</translation>
     </message>
     <message id="settings_ui_animations_description">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="159"/>
       <source>Disable to reduce CPU usage</source>
       <translation>Вимкніть, щоб зменшити використання ЦП</translation>
     </message>
@@ -9788,7 +9813,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Реле пристрою GX</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="93"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="96"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLife динамічно регулює мінімальний стан заряду акумулятора, щоб запобігти глибоким розрядам і забезпечити регулярні повні заряди, що допомагає продовжити термін служби акумулятора та підтримувати надійність системи.</translation>
     </message>
@@ -9803,54 +9828,54 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Якщо ввімкнено, полярність струму в DGN CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1 та SOLAR_CONTROLLER_BATTERY_STATUS змінюється на зворотну.</translation>
     </message>
     <message id="settings_gx_display_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="59"/>
       <source>GX display appearance</source>
       <translation>Зовнішній вигляд дисплея GX</translation>
     </message>
     <message id="settings_remote_console_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
       <source>Remote Console appearance</source>
       <translation>Зовнішній вигляд віддаленої консолі</translation>
     </message>
     <message id="settings_remote_console_forced">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
       <source>Forced by %2 to %1</source>
       <extracomment>%1 = "dark", "light" or "auto" %2 = "VRM" or "app"</extracomment>
       <translation>Примусово %2 до %1</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_dark">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>dark</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>темна</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_light">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="86"/>
       <source>light</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>світла</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="89"/>
       <source>auto</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>авто</translation>
     </message>
     <message id="settings_remote_console_forced_by_vrm">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="94"/>
       <source>VRM</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation type="unfinished">VRM</translation>
     </message>
     <message id="settings_remote_console_forced_by_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="97"/>
       <source>app</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation>застосунок</translation>
     </message>
     <message id="settings_remote_console_appearance_same_as_gx_display">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="110"/>
       <source>Same as GX display</source>
       <translation>Як на дисплеї GX</translation>
     </message>
@@ -10352,6 +10377,32 @@ The GX device can only control one connected genset and takes the one with the l
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="230"/>
       <source>Frequency setpoint (f)</source>
       <translation type="unfinished"/>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="160"/>
+      <source>Current</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation type="unfinished">Струм</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
+      <source>Scan for motor drives</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
+      <source>Discovered motor drive IDs</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchableoutput_gx_device_relays">
+      <location filename="../../src/switchableoutput.cpp" line="284"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">Реле пристрою GX</translation>
+    </message>
+    <message id="gx_device_relays">
+      <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">Реле пристрою GX</translation>
     </message>
   </context>
   <context>
@@ -11834,146 +11885,146 @@ The GX device can only control one connected genset and takes the one with the l
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Використовувати джерело даних D-Bus: підключитися до вказаної адреси D-Bus.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="120"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>адресу</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="125"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Використовувати джерело даних D-Bus: підключитися до адреси D-Bus за умовчанням</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Використовувати джерело даних MQTT: підключитися до вказаної адреси брокера MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>адресу</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="139"/>
       <source>MQTT data source device portal id.</source>
       <translation>Ідентифікатор порталу джерела даних MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>portalId</source>
       <translation>ідентифікатор порталу</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="144"/>
+      <location filename="../../src/main.cpp" line="145"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Шард веб-хосту MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>осколок</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="150"/>
+      <location filename="../../src/main.cpp" line="151"/>
       <source>MQTT data source username</source>
       <translation>Ім’я користувача джерела даних MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="152"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Користувач</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="156"/>
+      <location filename="../../src/main.cpp" line="157"/>
       <source>MQTT data source password</source>
       <translation>Пароль джерела даних MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="158"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>Пароль</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="162"/>
+      <location filename="../../src/main.cpp" line="163"/>
       <source>MQTT data source token</source>
       <translation>Маркер джерела даних MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="164"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Код токена</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="168"/>
+      <location filename="../../src/main.cpp" line="169"/>
       <source>Enable FPS counter</source>
       <translation>Увімкнути лічильник FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="173"/>
+      <location filename="../../src/main.cpp" line="174"/>
       <source>Skip splash screen</source>
       <translation>Пропустити заставку</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>Use mock data source for testing.</source>
       <translation>Використовуйте макет джерела даних для тестування.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="183"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>Name of mock configuration</source>
       <translation>Назва фіктивної конфігурації</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="184"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="190"/>
+      <location filename="../../src/main.cpp" line="191"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Увімкніть, щоб вимкнути фіктивні таймери під час запуску</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="195"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="201"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>Signal K URL</source>
       <translation>Signal K URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="203"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Колірна схема (темна, світла, автоматична, стандартна)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="209"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>

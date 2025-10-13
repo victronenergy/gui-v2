@@ -61,7 +61,7 @@
       <translation>Positie</translation>
     </message>
     <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
       <source>Speed</source>
       <translation>Snelheid</translation>
     </message>
@@ -77,12 +77,12 @@
       <translation>Onbekende fout</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="105"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="106"/>
       <source>Minimum SOC</source>
       <translation>Minimum laadtoestand</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="134"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
       <source>Enter password</source>
       <translation>Geef wachtwoord</translation>
     </message>
@@ -152,7 +152,7 @@
       <translation>WiFi</translation>
     </message>
     <message id="settings_units_gps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="63"/>
       <source>GPS</source>
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
@@ -273,17 +273,17 @@
       <translation type="unfinished">Naam</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="48"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
       <source>Product ID</source>
       <translation>Product ID</translation>
     </message>
     <message id="settings_deviceinfo_hardware_version">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="62"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="63"/>
       <source>Hardware version</source>
       <translation>Hardware versie</translation>
     </message>
     <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="83"/>
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
       <source>Device name</source>
       <translation>Apparaatnaam</translation>
     </message>
@@ -343,7 +343,7 @@
       <translation>Waarde moet lager zijn dan startwaarde</translation>
     </message>
     <message id="settings_minmax_acout_max_power">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="124"/>
       <source>AC output</source>
       <translation>AC uitgang</translation>
     </message>
@@ -701,6 +701,16 @@
       <source>Up, but no services (250 kbit/s)</source>
       <translation>Beschikbaar, maar geen diensten (250 kbit/s)</translation>
     </message>
+    <message id="settings_canopen_motordrive_250">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="84"/>
+      <source>CANopen Motor drive (250 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="settings_canopen_motordrive_500">
+      <location filename="../../pages/settings/CanbusProfile.qml" line="90"/>
+      <source>CANopen Motor drive (500 kbit/s)</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_devices">
       <location filename="../../components/CommonWords.qml" line="163"/>
       <source>Devices</source>
@@ -751,6 +761,11 @@
       <source>OK: No other device is connected with this unique number.</source>
       <translation>OK: Geen ander apparaat met dit unieke nummer is verbonden.</translation>
     </message>
+    <message id="pagesettingsintegrations_canopenmotordrive">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="173"/>
+      <source>CANopen motor drives</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="common_words_network_status">
       <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Network status</source>
@@ -762,22 +777,22 @@
       <translation>Adaptieve helderheid</translation>
     </message>
     <message id="settings_brightness">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="27"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="28"/>
       <source>Brightness</source>
       <translation>Helderheid</translation>
     </message>
     <message id="settings_display_off_time">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="36"/>
       <source>Display off time</source>
       <translation>Uitschakeltijd scherm</translation>
     </message>
     <message id="settings_displayoff_10sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="42"/>
       <source>10 sec</source>
       <translation>10 sec</translation>
     </message>
     <message id="settings_displayoff_30sec">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="44"/>
       <source>30 sec</source>
       <translation>30 sec</translation>
     </message>
@@ -802,13 +817,13 @@
       <translation>Nooit</translation>
     </message>
     <message id="settings_display_dark_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="65"/>
       <source>Dark</source>
       <extracomment>Dark colors mode</extracomment>
       <translation>Donker</translation>
     </message>
     <message id="settings_display_light_mode">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="68"/>
       <source>Light</source>
       <extracomment>Light colors mode</extracomment>
       <translation>Licht</translation>
@@ -824,17 +839,17 @@
       <translation>Taal wijzigen</translation>
     </message>
     <message id="settings_units_energy">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="40"/>
       <source>Electrical power display</source>
       <translation>Elektrisch vermogen weergave</translation>
     </message>
     <message id="settings_units_watts">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
       <source>Power (Watts)</source>
       <translation>Vermogen (Watt)</translation>
     </message>
     <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="46"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
       <source>Current (Amps)</source>
       <translation>Stroom (Ampère)</translation>
     </message>
@@ -845,12 +860,12 @@
       <translation>Niveau %1</translation>
     </message>
     <message id="settings_units_celsius">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="21"/>
       <source>Celsius</source>
       <translation>Celsius</translation>
     </message>
     <message id="settings_units_fahrenheit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="22"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="23"/>
       <source>Fahrenheit</source>
       <translation>Fahrenheit</translation>
     </message>
@@ -1195,17 +1210,17 @@
       <translation>Opnieuw zoeken</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="289"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
       <source>Remote support</source>
       <translation>Remote support</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
       <source>Remote support tunnel</source>
       <translation>Tunnel voor remote ondersteuning</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="304"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
       <source>Remote support IP and port</source>
       <translation>IP en poort voor remote ondersteuning</translation>
     </message>
@@ -1326,48 +1341,48 @@
       <translation>Onderhoudstimer herstarten</translation>
     </message>
     <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
       <source>Volume</source>
       <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation type="unfinished">Volume</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="68"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="69"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>jjjj-mm-dd</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="75"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41.6" N, 5° 13' 12.3" O</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="78"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52.34489, 5.22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="81"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 O</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="88"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Snelheidseenheid</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="97"/>
       <source>Miles per hour</source>
       <translation>Mijlen per uur</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
       <source>Knots</source>
       <translation>Knopen</translation>
     </message>
@@ -2705,7 +2720,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Lagere elektriciteitstarieven tijdens daluren of als ervoor gezord moet worden dat de EV volledig opgeladen is en klaar om te vertrekken op een specifiek tijdstip.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="135"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="136"/>
       <source>Enable charging</source>
       <translation>Laden toestaan</translation>
     </message>
@@ -4525,7 +4540,7 @@ Do you want to continue?</source>
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="51"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">Minimum laadtoestand</translation>
     </message>
@@ -5086,7 +5101,7 @@ Do you want to continue?</source>
       <translation>Tracker</translation>
     </message>
     <message id="page_switchable_output_type">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="57"/>
       <source>Type</source>
       <translation>Type</translation>
     </message>
@@ -5283,7 +5298,7 @@ Do you want to continue?</source>
       <translation>Geen firmware gevonden</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="89"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="98"/>
       <source>Setting locked for access level</source>
       <translation>Instelling vergrendeld voor toegangsniveau</translation>
     </message>
@@ -6254,7 +6269,7 @@ Do you want to continue?</source>
       <translation>Totale looptijd aggregaat (uur)</translation>
     </message>
     <message id="settings_minmax_dc_input">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="111"/>
       <source>DC input</source>
       <translation>DC ingang</translation>
     </message>
@@ -6269,7 +6284,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Automatisch starten</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="69"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <translation>Het aggregaat starten en stoppen op basis van de ingestelde autostartvoorwaarden.</translation>
     </message>
@@ -6653,52 +6668,52 @@ Do you want to continue?</source>
       <translation>In bedrijf, maar geen diensten (500 kbit/s)</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="142"/>
       <source>Data units</source>
       <translation>Gegevenseenheden</translation>
     </message>
     <message id="settings_brief_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="127"/>
       <source>Brief page</source>
       <translation>Korte pagina</translation>
     </message>
     <message id="settings_displayoff_1min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="46"/>
       <source>1 min</source>
       <translation type="unfinished">1 min</translation>
     </message>
     <message id="settings_displayoff_10min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="47"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="48"/>
       <source>10 min</source>
       <translation type="unfinished">10 min</translation>
     </message>
     <message id="settings_displayoff_30min">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="50"/>
       <source>30 min</source>
       <translation type="unfinished">30 min</translation>
     </message>
     <message id="settings_displayoff_never">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="52"/>
       <source>Never</source>
       <translation type="unfinished">Nooit</translation>
     </message>
     <message id="settings_remote_console_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="112"/>
       <source>Auto</source>
       <translation type="unfinished">Automatisch</translation>
     </message>
     <message id="settings_brief_view_start_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="119"/>
       <source>Start page</source>
       <translation type="unfinished">Startpagina</translation>
     </message>
     <message id="settings_display_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="131"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="135"/>
       <source>Boat page</source>
       <translation type="unfinished">Bootpagina</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="148"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimaal en maximaal meterbereik</translation>
     </message>
@@ -6708,44 +6723,44 @@ Do you want to continue?</source>
       <translation>Startpagina</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="170"/>
       <source>User interface</source>
       <translation>Gebruikersinterface</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="172"/>
       <source>User interface (Remote Console)</source>
       <translation>Gebruikersinterface (Console op afstand)</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
       <source>Classic UI</source>
       <translation>Klassieke UI</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="184"/>
       <source>New UI</source>
       <translation>Nieuwe UI</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="209"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="215"/>
       <source>Restarting application...</source>
       <translation>Applicatie opnieuw starten...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="212"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="218"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 bijgewerkt</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="216"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="222"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>De gebruikersinterface schakelt over naar %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="226"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 is ingesteld op %2</translation>
@@ -6949,7 +6964,7 @@ Do you want to continue?</source>
       <translation>Geen wachtwoord en de netwerkcommunicatie is niet versleuteld</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
       <source>Log out now</source>
       <translation type="unfinished">Nu uitloggen</translation>
     </message>
@@ -6959,22 +6974,22 @@ Do you want to continue?</source>
       <translation>Wachtwoord moet minstens 8 tekens lang zijn</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="220"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
       <source>Select 'Secured' profile?</source>
       <translation>Profiel 'Beveiligd' selecteren?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
       <source>Select 'Weak' profile?</source>
       <translation>Selecteer 'Zwak' profiel?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Selecteer 'Niet beveiligd' profiel?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6985,14 +7000,14 @@ Do you want to continue?</source>
 - Onveilige instellingen kunnen niet worden ingeschakeld</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="237"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Lokale netwerkdiensten zijn beveiligd met een wachtwoord
 - Onversleutelde toegang tot lokale websites is ook ingeschakeld (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Lokale netwerkdiensten hebben geen wachtwoord nodig
@@ -7009,47 +7024,47 @@ Do you want to continue?</source>
       <translation type="unfinished">Wachtwoord moet minstens 8 tekens lang zijn</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
       <source>Root password</source>
       <translation>Root wachtwoord</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="262"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
       <source>Enter password</source>
       <translation type="unfinished">Geef wachtwoord</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="267"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Wachtwoord moet minstens 8 tekens lang zijn</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
       <source>Root password changed to %1</source>
       <translation>Root wachtwoord gewijzigd in %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
       <source>Enable SSH on LAN</source>
       <translation>SSH op LAN inschakelen</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
       <source>Logout</source>
       <translation>Uitloggen</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="325"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
       <source>Log out?</source>
       <translation>Uitloggen?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Hierdoor worden alle lokale netwerkverbindingen verbroken.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
       <source>Log out</source>
       <translation>Uitloggen</translation>
     </message>
@@ -7104,7 +7119,7 @@ Do you want to continue?</source>
       <translation>Er gaat een alarm af als de autostartfunctie meer dan 10 minuten uitgeschakeld blijft.</translation>
     </message>
     <message id="settings_units_amps_exceptions">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="50"/>
       <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
       <translation>Opmerking: Als stroom niet kan worden weergegeven (bijvoorbeeld bij een totaal voor gecombineerde AC- en DC-bronnen), dan wordt in plaats daarvan vermogen weergegeven.</translation>
     </message>
@@ -7237,6 +7252,11 @@ Do you want to continue?</source>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="281"/>
       <source>Victron Community</source>
       <translation type="unfinished">Victron Community</translation>
+    </message>
+    <message id="pagesettingsintegrations_ui_plugins">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="290"/>
+      <source>UI Plugins</source>
+      <translation type="unfinished"/>
     </message>
     <message id="pagesettingssupportstate_modbus_tcp_server">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="453"/>
@@ -7906,7 +7926,7 @@ Do you want to continue?</source>
       <translation>Firmware geïnstalleerd, apparaat start opnieuw op</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="119"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation>Bevestigen</translation>
@@ -8230,17 +8250,17 @@ Als het aggregaat momenteel draait vanwege een autostartconditie, zal het uitsch
       <translation>Ingang</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="34"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="35"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>De modus staat vast in de systeeminstellingen en kan niet worden aangepast.</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="26"/>
+      <location filename="../../components/listitems/ListLink.qml" line="27"/>
       <source>Open link</source>
       <translation>Open link</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="57"/>
+      <location filename="../../components/listitems/ListLink.qml" line="70"/>
       <source>Scan the QR code with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>Scan de QR-code met een draagbaar apparaat.&lt;br /&gt;Of voeg de link in: %1</translation>
@@ -8376,59 +8396,59 @@ Let op: dit menu toont alleen Carlo Gavazzi-meters die zijn aangesloten via RS48
       <translation>Automatisch bereik</translation>
     </message>
     <message id="settings_minmax_autorange_desc">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="20"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="21"/>
       <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
       <translation>Indien ingeschakeld, worden de minima en maxima van meters en grafieken automatisch aangepast op basis van waarden uit het verleden.</translation>
     </message>
     <message id="settings_minmax_reset">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="25"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
       <translation>Alle bereikwaarden op nul zetten</translation>
     </message>
     <message id="settings_minmax_reset_range_values">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
       <source>Reset Range Values</source>
       <translation>Bereikwaarden resetten</translation>
     </message>
     <message id="settings_minmax_reset_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="39"/>
       <source>Are you sure that you want to reset all the values to zero?</source>
       <translation>Weet je zeker dat je alle waarden op nul wilt zetten?</translation>
     </message>
     <message id="settings_minmax_ac_in_not_available">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="81"/>
       <source>%1 (not available)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
       <translation>%1 (niet beschikbaar)</translation>
     </message>
     <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
       <source>%1 (%2)</source>
       <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="130"/>
       <source>Maximum current: AC in 1 connected</source>
       <translation>Maximale stroom: AC IN 1 aangesloten</translation>
     </message>
     <message id="settings_minmax_acout_max_acin2">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="139"/>
       <source>Maximum current: AC in 2 connected</source>
       <translation>Maximale stroom: AC IN 2 aangesloten</translation>
     </message>
     <message id="settings_minmax_acout_max">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
       <source>Maximum current: no AC inputs</source>
       <translation>Maximale stroom: geen AC-ingangen</translation>
     </message>
     <message id="settings_minmax_dc_out">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="156"/>
       <source>DC output</source>
       <translation>DC uitgang</translation>
     </message>
     <message id="settings_minmax_solar">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="160"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="169"/>
       <source>Solar</source>
       <translation>Zon</translation>
     </message>
@@ -8451,12 +8471,12 @@ Let op: dit menu toont alleen Carlo Gavazzi-meters die zijn aangesloten via RS48
       <translation>Time-out</translation>
     </message>
     <message id="settings_startpage_timeout_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="73"/>
       <source>Revert to the start page when the application is inactive.</source>
       <translation>Terugkeren naar de startpagina als de toepassing inactief is.</translation>
     </message>
     <message id="settings_startpage_auto_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="97"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
       <translation>Na één minuut inactiviteit wordt de huidige pagina als startpagina geselecteerd, als deze in deze lijst staat.</translation>
     </message>
@@ -8631,6 +8651,11 @@ Let op: dit menu toont alleen Carlo Gavazzi-meters die zijn aangesloten via RS48
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="66"/>
       <source>Controller Temperature</source>
       <translation>Temperatuur besturing</translation>
+    </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="73"/>
+      <source>Motor Direction Inverted</source>
+      <translation type="unfinished"/>
     </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
@@ -8893,7 +8918,7 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Omgekeerde energie L%1</translation>
     </message>
     <message id="settings_minmax_boat_page">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="182"/>
       <source>Boat page</source>
       <translation>Bootpagina</translation>
     </message>
@@ -8913,22 +8938,22 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>%1 gewijzigd in dynamo bedrijf</translation>
     </message>
     <message id="settings_minmax_gauge_display">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="177"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="187"/>
       <source>Gauge Display</source>
       <translation>Meterweergave</translation>
     </message>
     <message id="settings_minmax_time_to_go">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="195"/>
       <source>Time to go</source>
       <translation>Tijd over</translation>
     </message>
     <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="199"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
       <source>Max Speed</source>
       <translation>Max. snelheid</translation>
     </message>
     <message id="settings_minmax_max_rpm">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="222"/>
       <source>Max RPM</source>
       <translation>Max. toerental</translation>
     </message>
@@ -8948,12 +8973,12 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Module spanning</translation>
     </message>
     <message id="page_switchable_output_group">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="46"/>
       <source>Group</source>
       <translation>Groep</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="75"/>
       <source>Fuse rating</source>
       <translation>Zekeringwaarde</translation>
     </message>
@@ -9328,12 +9353,12 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Laadverzoeken</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
       <source>Change password</source>
       <translation>Wachtwoord wijzigen</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Update</source>
       <translation>Bijwerken</translation>
     </message>
@@ -9359,12 +9384,12 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation type="unfinished">Bevestigen</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
       <source>Please enter a new GX password:</source>
       <translation>Voer een nieuw GX wachtwoord in:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="94"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="98"/>
       <source>Enter new password</source>
       <translation>Voer nieuw wachtwoord in</translation>
     </message>
@@ -9410,7 +9435,7 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Een andere accu opladen vanuit de hoofdaccu</translation>
     </message>
     <message id="page_switchable_show_controls">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="67"/>
       <source>Show controls</source>
       <extracomment>Whether UI controls should be shown for this output</extracomment>
       <translation>Toon bedieningselementen</translation>
@@ -9426,7 +9451,7 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Geen cellulaire modem aangesloten</translation>
     </message>
     <message id="ess_active_soc_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="85"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="87"/>
       <source>Active SOC Limit: %1%</source>
       <translation>Actieve laadtoestand limiet: %1%</translation>
     </message>
@@ -9745,12 +9770,12 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Dit zal rootfs downloaden en updaten met de laatste officiële firmware.&lt;br&gt;Een internetverbinding is vereist.&lt;br&gt;Druk op 'OK' om door te gaan.</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="93"/>
       <source>Kilometres per hour</source>
       <translation>Kilometers per uur</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="95"/>
       <source>Metres per second</source>
       <translation>Meters per seconde</translation>
     </message>
@@ -9765,12 +9790,12 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Liters</translation>
     </message>
     <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
       <source>UI Animations</source>
       <translation>UI-animaties</translation>
     </message>
     <message id="settings_ui_animations_description">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="154"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="159"/>
       <source>Disable to reduce CPU usage</source>
       <translation>Uitschakelen om CPU-gebruik te verminderen</translation>
     </message>
@@ -9785,7 +9810,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>GX apparaat relais</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="93"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="96"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLife past de minimale laadstatus van de batterij dynamisch aan om diepe ontladingen te voorkomen en regelmatige volledige laadbeurten te garanderen, waardoor de levensduur van de batterij wordt verlengd en de betrouwbaarheid van het systeem wordt behouden.</translation>
     </message>
@@ -9800,54 +9825,54 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Indien ingeschakeld, wordt de stroompolariteit in de DGN's CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1 en SOLAR_CONTROLLER_BATTERY_STATUS omgekeerd.</translation>
     </message>
     <message id="settings_gx_display_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="59"/>
       <source>GX display appearance</source>
       <translation>Weergave van het GX-scherm</translation>
     </message>
     <message id="settings_remote_console_appearance">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="72"/>
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
       <source>Remote Console appearance</source>
       <translation>Weergave van de Remote Console</translation>
     </message>
     <message id="settings_remote_console_forced">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
       <source>Forced by %2 to %1</source>
       <extracomment>%1 = "dark", "light" or "auto" %2 = "VRM" or "app"</extracomment>
       <translation>Geforceerd door %2 naar %1</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_dark">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="82"/>
       <source>dark</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>donker</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_light">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="86"/>
       <source>light</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>licht</translation>
     </message>
     <message id="settings_remote_console_forced_appearance_auto">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="89"/>
       <source>auto</source>
       <extracomment>Forced by app to %1</extracomment>
       <translation>auto</translation>
     </message>
     <message id="settings_remote_console_forced_by_vrm">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="94"/>
       <source>VRM</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation type="unfinished">VRM</translation>
     </message>
     <message id="settings_remote_console_forced_by_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="97"/>
       <source>app</source>
       <extracomment>Forced by %2 to dark</extracomment>
       <translation>app</translation>
     </message>
     <message id="settings_remote_console_appearance_same_as_gx_display">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="110"/>
       <source>Same as GX display</source>
       <translation>Hetzelfde als GX-scherm</translation>
     </message>
@@ -10349,6 +10374,32 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="230"/>
       <source>Frequency setpoint (f)</source>
       <translation type="unfinished"/>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="160"/>
+      <source>Current</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation type="unfinished">Stroom</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
+      <source>Scan for motor drives</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
+      <source>Discovered motor drive IDs</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchableoutput_gx_device_relays">
+      <location filename="../../src/switchableoutput.cpp" line="284"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">GX apparaat relais</translation>
+    </message>
+    <message id="gx_device_relays">
+      <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
+      <source>GX device relays</source>
+      <translation type="unfinished">GX apparaat relais</translation>
     </message>
   </context>
   <context>
@@ -11831,146 +11882,146 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="119"/>
+      <location filename="../../src/main.cpp" line="120"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Gebruik D Bus-gegevensbron: maak verbinding met het opgegeven D Bus-adres.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="120"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>Adres</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="125"/>
+      <location filename="../../src/main.cpp" line="126"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Gebruik D Bus-gegevensbron: maak verbinding met het standaard D Bus adres</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="131"/>
+      <location filename="../../src/main.cpp" line="132"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Gebruik MQTT gegevensbron: maak verbinding met het opgegeven MQTT-brokeradres.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>Adres</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="139"/>
       <source>MQTT data source device portal id.</source>
       <translation>Portal-ID van MQTT gegevensbronapparaat.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>portalId</source>
       <translation>Portal ID</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="144"/>
+      <location filename="../../src/main.cpp" line="145"/>
       <source>MQTT VRM webhost shard</source>
       <translation>MQTT VRM-webhost-shard</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>Shard</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="150"/>
+      <location filename="../../src/main.cpp" line="151"/>
       <source>MQTT data source username</source>
       <translation>Gebruikersnaam van MQTT gegevensbron</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="152"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Gebruiker</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="156"/>
+      <location filename="../../src/main.cpp" line="157"/>
       <source>MQTT data source password</source>
       <translation>Wachtwoord voor MQTT gegevensbron</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="158"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>Wachtwoord</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="162"/>
+      <location filename="../../src/main.cpp" line="163"/>
       <source>MQTT data source token</source>
       <translation>MQTT gegevensbrontoken</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="164"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>Token</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="168"/>
+      <location filename="../../src/main.cpp" line="169"/>
       <source>Enable FPS counter</source>
       <translation>Schakel FPS teller in</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="173"/>
+      <location filename="../../src/main.cpp" line="174"/>
       <source>Skip splash screen</source>
       <translation>Opstartscherm overslaan</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>Use mock data source for testing.</source>
       <translation>Gebruik een testgegevensbron om te testen.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="183"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>Name of mock configuration</source>
       <translation>Naam van de mock-configuratie</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="184"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="190"/>
+      <location filename="../../src/main.cpp" line="191"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Instellen om mock-timers uit te schakelen bij het opstarten</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="195"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="201"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>Signal K URL</source>
       <translation>Signal K-URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="203"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Kleurenschema (donker, licht, auto, standaard)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="209"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>
