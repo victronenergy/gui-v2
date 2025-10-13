@@ -104,6 +104,8 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_PowerFactor:          return 3;
 	case VenusOS::Enums::Units_Volume_CubicMetre:    return 3;
 	case VenusOS::Enums::Units_Volt_DC:              return 2;
+	case VenusOS::Enums::Units_MicrogramPerCubicMeter: return 1;
+	case VenusOS::Enums::Units_Lux:                    return 0;
 	case VenusOS::Enums::Units_Volt_AC:                // fall through
 	case VenusOS::Enums::Units_Volume_Litre:           // fall through
 	case VenusOS::Enums::Units_Volume_GallonImperial:  // fall through
@@ -121,6 +123,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Time_Minute:            // fall through
 	case VenusOS::Enums::Units_Altitude_Metre:         // fall through
 	case VenusOS::Enums::Units_Altitude_Foot:          // fall through
+	case VenusOS::Enums::Units_PartsPerMillion:        // fall through
 		return 0;
 	default:
 		// VoltAmpere
@@ -201,6 +204,12 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("m");
 	case VenusOS::Enums::Units_Altitude_Foot:
 		return QStringLiteral("ft");
+	case VenusOS::Enums::Units_PartsPerMillion:
+		return QStringLiteral("ppm");
+	case VenusOS::Enums::Units_MicrogramPerCubicMeter:
+		return QStringLiteral("µg/m³");
+	case VenusOS::Enums::Units_Lux:
+		return QStringLiteral("lux");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
