@@ -95,13 +95,6 @@ public:
 
 	Q_INVOKABLE qreal sumRealNumbersList(const QList<qreal> &numbers) const;
 
-	Q_INVOKABLE qreal scaleNumber(qreal n, qreal fromMin, qreal fromMax, qreal toMin, qreal toMax) const {
-		const qreal fromRange = fromMax - fromMin;
-		const qreal toRange = toMax - toMin;
-		qreal normalized = qMax(fromMin, qMin(fromMax, n));
-		return qFuzzyIsNull(fromRange) ? 0.0 : ((((normalized - fromMin) / fromRange) * toRange) + toMin);
-	}
-
 private:
 	QString formatWindDirection(int degrees) const;
 };

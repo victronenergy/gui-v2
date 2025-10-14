@@ -260,6 +260,12 @@ FocusScope {
 		}
 	}
 
+Timer {
+		running: true
+		interval: 500
+		onTriggered: auxButtonClicked()
+	}
+
 	StatusBarButton {
 		id: notificationButton
 
