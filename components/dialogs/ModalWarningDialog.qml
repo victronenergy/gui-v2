@@ -14,6 +14,8 @@ ModalDialog {
 	property alias icon: alarmIcon
 	property alias descriptionLabel: consequencesLabel
 
+	property bool showIcon: true
+
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
 	header: null
 
@@ -41,13 +43,15 @@ ModalDialog {
 			sourceSize.height: Theme.geometry_modalWarningDialog_alarmIcon_width
 			source: "qrc:/images/icon_alarm_48.svg"
 			color: Theme.color_red
+			visible: root.showIcon
+			height: visible ? 48 : 0
 		}
 
 		Label {
 			id: titleLabel
 			anchors {
 				top: alarmIcon.bottom
-				topMargin: Theme.geometry_modalWarningDialog_title_spacing
+				topMargin: alarmIcon.visible ? Theme.geometry_modalWarningDialog_title_spacing : 0
 				left: parent.left
 				leftMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
 				right: parent.right
