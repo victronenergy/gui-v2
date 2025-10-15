@@ -367,26 +367,38 @@ public:
 	};
 	Q_ENUM(VeBusDevice_Bms_Type)
 
-	enum Tank_Backup_Restore_Action {
-		Tank_Backup_Restore_Action_Idle = 0,
-		Tank_Backup_Restore_Action_Create_USB,
-		Tank_Backup_Restore_Action_Backup,
-		Tank_Backup_Restore_Action_Restore,
-		Tank_Backup_Restore_Action_Delete,
+	enum Copy_Settings_Action {
+		Copy_Settings_Action_Idle = 0,
+		Copy_Settings_Action_Create_Drive,
+		Copy_Settings_Action_Export,
+		Copy_Settings_Action_Import,
+		Copy_Settings_Action_Delete,
 	};
-	Q_ENUM(Tank_Backup_Restore_Action)
+	Q_ENUM(Copy_Settings_Action)
 
-	enum Tank_Backup_Restore_Notification {
-		Tank_Backup_Restore_Notification_Create_USB_Successful = 1,
-		Tank_Backup_Restore_Notification_Backup_Successful = 2,
-		Tank_Backup_Restore_Notification_Restore_Successful = 3,
-		Tank_Backup_Restore_Notification_Delete_Successful = 4,
-		Tank_Backup_Restore_Notification_Create_USB_Failed = 101,
-		Tank_Backup_Restore_Notification_Backup_Failed = 102,
-		Tank_Backup_Restore_Notification_Restore_Failed = 103,
-		Tank_Backup_Restore_Notification_Delete_Failed = 104,
+	enum Copy_Settings_Notification {
+		Copy_Settings_Notification_Create_Drive_Successful = 1,
+		Copy_Settings_Notification_Export_Successful = 2,
+		Copy_Settings_Notification_Import_Successful = 3,
+		Copy_Settings_Notification_Delete_Successful = 4,
+		Copy_Settings_Notification_Create_Drive_Failed = 101,
+		Copy_Settings_Notification_Export_Failed = 102,
+		Copy_Settings_Notification_Import_Failed = 103,
+		Copy_Settings_Notification_Delete_Failed = 104,
 	};
-	Q_ENUM(Tank_Backup_Restore_Notification)
+	Q_ENUM(Copy_Settings_Notification)
+
+	enum Copy_Settings_Error {
+		Copy_Settings_Error_None = 0,
+		Copy_Settings_Error_DriveNotMounted,
+		Copy_Settings_Error_CreateDriveException,
+		Copy_Settings_Error_ExportException,
+		Copy_Settings_Error_ImportException,
+		Copy_Settings_Error_ArchiveFileDeleteFailed,
+		Copy_Settings_Error_ExportFileDeleteFailed,
+		Copy_Settings_Error_ExportFileMissing,
+	};
+	Q_ENUM(Copy_Settings_Error)
 
 	enum Relays_State {
 		Relays_State_Inactive = 0,

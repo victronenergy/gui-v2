@@ -351,7 +351,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsAccessAndSecurity.qml
     pages/settings/PageSettingsAcSystem.qml
     pages/settings/PageSettingsAlarmsAndFeedback.qml
-    pages/settings/PageSettingsBackupRestore.qml
     pages/settings/PageSettingsBatteries.qml
     pages/settings/PageSettingsBatteryMeasurements.qml
     pages/settings/PageSettingsBleSensors.qml
@@ -361,6 +360,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsConnectivity.qml
+    pages/settings/PageSettingsCopySettings.qml
     pages/settings/PageSettingsDisplayAndAppearance.qml
     pages/settings/PageSettingsDisplayBrief.qml
     pages/settings/PageSettingsDisplayMinMax.qml
