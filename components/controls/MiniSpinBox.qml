@@ -135,7 +135,7 @@ CT.SpinBox {
 		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
-			color: enabled ? Theme.color_white : Theme.color_font_disabled
+			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 		}
 	}
 
@@ -168,7 +168,7 @@ CT.SpinBox {
 		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_plus.svg'
-			color: enabled ? Theme.color_white : Theme.color_font_disabled
+			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 		}
 	}
 }
