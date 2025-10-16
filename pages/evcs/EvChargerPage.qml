@@ -26,10 +26,10 @@ DevicePage {
 				id: chargerSummary
 
 				readonly property string currentSummaryText: {
-					if (root.energyMeterMode) {
-						return "--"
-					}
 					const actual = isNaN(evCharger.current) ? "--" : Math.round(evCharger.current)
+					if (root.energyMeterMode) {
+						return actual
+					}
 					const max = isNaN(evCharger.maxCurrent) ? "--" : Math.round(evCharger.maxCurrent)
 					return actual + "/" + max
 				}
