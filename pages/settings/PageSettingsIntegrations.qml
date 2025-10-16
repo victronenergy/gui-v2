@@ -54,7 +54,6 @@ Page {
 			ListNavigation {
 				//% "Shelly Devices"
 				text: qsTrId("pagesettingsintegrations_shelly_devices")
-				preferredVisible: shellyDevices.rowCount > 0
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShelly.qml", {"title": text})
 
 				VeQItemTableModel {
