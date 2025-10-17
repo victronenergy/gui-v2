@@ -9,88 +9,107 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property string notificationsServiceUid: "" + BackendConnection.serviceUidForType("platform") + "/Notifications"
+
 	property Connections _mockConn: Connections {
 		target: MockManager
 		function onAddDummyNotification(isAlarm) {
+			if (notificationRateLimitTimer.running) {
+				return
+			}
+
+			notificationRateLimitTimer.start();
 			const notifType = isAlarm
 							? VenusOS.Notification_Alarm
 							: Math.random() < 0.5 ? VenusOS.Notification_Info : VenusOS.Notification_Warning
+			const val = Math.round(Math.random() * 100) + "%"
 			const props = {
-				acknowledged: 0,
-				active: 1,
-				type: notifType,
+				service: "mockService",
 				dateTime: new Date(),
+				trigger: val,
+				alarmValue: val,
 				deviceName: "Mock data simulator",
-				description: "NotificationId [%1]".arg(nextNotificationId),
-				value: Math.round(Math.random() * 100) + "%"
+				value: val,
+				type: notifType,
+				active: 1,
+				acknowledged: 0,
+				silenced: 0,
+				description: "NotificationId [%1]".arg(nextNotificationId)
 			}
 			addNotification(props)
+		}
+
+		property Timer rateLimitTimer: Timer {
+			id: notificationRateLimitTimer
+			interval: 500
+			repeat: false
+			running: false
 		}
 	}
 
 	property Component notifComponent: Component {
-		Notification {
+		MockNotification {
 			id: notification
+
 			onActiveChanged: root.updateNotifications()
 			onAcknowledgedChanged: root.updateNotifications()
 
-			property Timer inactiveTimer: Timer {
-				interval: 10000 * Math.random()
-				onTriggered: notification.updateActive(false)
+			property Timer activeTimer: Timer {
+				interval: 1000 + (9000 * Math.random())
+				onTriggered: notification._active.setValue(0)
 			}
 		}
 	}
 
-	property list<Notification> notifications: []
+	property list<MockNotification> notifications: []
 	readonly property int maxNotificationCount: 20
 	property int nextNotificationId: 0
 
 	property VeQuickItem _numberOfNotifications: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/NumberOfNotifications"
+		uid: notificationsServiceUid + "/NumberOfNotifications"
 	}
 
 	property VeQuickItem _numberOfActiveNotifications: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/NumberOfActiveNotifications"
+		uid: notificationsServiceUid + "/NumberOfActiveNotifications"
 	}
 
 	property VeQuickItem _numberOfActiveAlarms: VeQuickItem {
 		// including both acknowledged or unAcknowledged alarms
-		uid: Global.notifications.serviceUid + "/NumberOfActiveAlarms"
+		uid: notificationsServiceUid + "/NumberOfActiveAlarms"
 	}
 
 	property VeQuickItem _numberOfActiveWarnings: VeQuickItem {
 		// including both acknowledged or unAcknowledged warnings
-		uid: Global.notifications.serviceUid + "/NumberOfActiveWarnings"
+		uid: notificationsServiceUid + "/NumberOfActiveWarnings"
 	}
 
 	property VeQuickItem _numberOfActiveInformations: VeQuickItem {
 		// including both acknowledged or unAcknowledged informations
-		uid: Global.notifications.serviceUid + "/NumberOfActiveInformations"
+		uid: notificationsServiceUid + "/NumberOfActiveInformations"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedAlarms: VeQuickItem {
 		// including both active or inactive alarms
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedAlarms"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedAlarms"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedWarnings: VeQuickItem {
 		// including both active or inactive warnings
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedWarnings"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedWarnings"
 	}
 
 	property VeQuickItem _numberOfUnAcknowledgedInformations: VeQuickItem {
 		// including both active or inactive informations
-		uid: Global.notifications.serviceUid + "/NumberOfUnAcknowledgedInformations"
+		uid: notificationsServiceUid + "/NumberOfUnAcknowledgedInformations"
 	}
 
 	readonly property VeQuickItem _acknowledgeAll: VeQuickItem {
-		uid: Global.notifications.serviceUid + "/AcknowledgeAll"
+		uid: notificationsServiceUid + "/AcknowledgeAll"
 		onValueChanged: {
 			if (!isNaN(value) && value === 1) {
-				const model = Global.notifications.allNotificationsModel
+				const model = NotificationModel
 				for (let i = 0 ; i < model.count; ++i) {
-					const notif = model.data(model.index(i, 0), NotificationsModel.Notification)
-					notif.updateAcknowledged(true)
+					model.acknowledgeRow(i)
 				}
 				_acknowledgeAll.setValue(0)
 				updateNotifications()
@@ -99,7 +118,6 @@ QtObject {
 	}
 
 	function addNotification(params) {
-
 		let notif = null
 
 		if (notifications.length < maxNotificationCount) {
@@ -110,23 +128,37 @@ QtObject {
 			// Get an existing Notification from the notifications list to recycle.
 			// The recycled notification is going to re-use the same notificationId
 			notif = notifications[nextNotificationId]
+
+			// venus-platform first "removes" the old notification,
+			// which sets active=false then acknowledged=true.
+			// emulate this behaviour.
+			notif._active.setValue(0)
+			notif._acknowledged.setValue(1)
 		}
 
-		// Update the VeQuickItem's values of the new or recycled Notification
-		// which updates the BaseNotification properties.
-		for (const p in params) {
-			const value = p === "dateTime" ? params[p].valueOf() / 1000 : params[p]
-			notif["_" + p].setValue(value)
+		// Update the VeQuickItem's values for the Notification.
+		// Note that we must update them in the same order as venus-platform Notification ctor does.
+		notif._service.setValue(params.service)
+		notif._dateTime.setValue(params.dateTime / 1000)
+		notif._trigger.setValue(params.trigger)
+		notif._alarmValue.setValue(params.alarmValue)
+		notif._deviceName.setValue(params.deviceName)
+		notif._value.setValue(params.value)
+		notif._type.setValue(params.type)
+		notif._active.setValue(params.active)
+		notif._acknowledged.setValue(params.acknowledged)
+		notif._silenced.setValue(params.silenced)
+		notif._description.setValue(params.description)
+
+		// (re)start the mock notification active timer since notifications can be recycled.
+		// this will set the notification active to false after some time.
+		if (MockManager.timersActive) {
+			notif.activeTimer.restart()
 		}
 
 		// Whether we created a new Notification or recycled an existing one,
 		// we increment (or wrap) the nextNotificationId.
 		nextNotificationId = ((nextNotificationId + 1) === maxNotificationCount) ? 0 : (nextNotificationId + 1)
-
-		// (re)start the mock notification inactive timer since notifications can be recycled
-		if (MockManager.timersActive) {
-			notif.inactiveTimer.restart()
-		}
 
 		updateNotifications()
 	}
@@ -175,5 +207,24 @@ QtObject {
 		_numberOfUnAcknowledgedWarnings.setValue(unAcknowledgedWarningCount)
 		_numberOfActiveInformations.setValue(activeInformationCount)
 		_numberOfUnAcknowledgedInformations.setValue(unAcknowledgedInformationCount)
+	}
+
+	// in case some notifications were pre-instantiated via the config,
+	// we need to initialise our in-memory array of notification slots.
+	Component.onCompleted: {
+		let i = 0
+		let notif
+		for (i = 0; i < NotificationModel.count; ++i) {
+			if (notifications.length < maxNotificationCount) {
+				notif = notifComponent.createObject(root, { notificationId: nextNotificationId })
+				notifications.push(notif)
+			} else {
+				notif = notifications[i]
+			}
+			++nextNotificationId
+			if (nextNotificationId >= maxNotificationCount) {
+				nextNotificationId = 0
+			}
+		}
 	}
 }

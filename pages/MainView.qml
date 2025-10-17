@@ -69,8 +69,8 @@ FocusScope {
 		switch (event.key) {
 		case Qt.Key_Escape:
 			// Escape = close current Toast notification, or close Control/Switch pane.
-			if (Global.notificationLayer.deleteLastNotification()) {
-				// Nothing else to do
+			if (ToastModel.count) {
+				ToastModel.removeFirst()
 			} else {
 				if (cardsActive) {
 					cardsLoader.hide()
@@ -170,7 +170,7 @@ FocusScope {
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
-				if (Global.notifications?.alarms.hasActive) {
+				if (NotificationModel.activeAlarms > 0) {
 					root.goToNotificationsPage()
 				} else {
 					pageManager.goToStartPage()

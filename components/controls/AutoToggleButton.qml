@@ -26,12 +26,12 @@ BaseAutoToggleSwitch {
 	}
 
 	function notification() {
-		if (_notif) {
+		if (ToastModel.count) {
 			// The notification is already visible
 			return
 		}
 		//% "Disable Auto mode first"
-		_notif = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("autotoggleswitch_disable_auto_mode_info"), 3000)
+		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("autotoggleswitch_disable_auto_mode_info"), 3000)
 	}
 
 	contentItem: FocusScope {
