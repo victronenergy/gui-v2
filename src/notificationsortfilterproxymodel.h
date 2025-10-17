@@ -25,6 +25,7 @@ class NotificationSortFilterProxyModel : public QSortFilterProxyModel
 	QML_ELEMENT
 
 	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
+	Q_PROPERTY(bool filterAcknowledged READ filterAcknowledged WRITE setFilterAcknowledged NOTIFY filterAcknowledgedChanged FINAL)
 
 public:
 	explicit NotificationSortFilterProxyModel(QObject *parent = nullptr);
@@ -34,8 +35,12 @@ public:
 
 	Q_INVOKABLE notificationData at(int row) const;
 
+	bool filterAcknowledged() const;
+	void setFilterAcknowledged(bool f);
+
 signals:
 	void countChanged();
+	void filterAcknowledgedChanged();
 
 protected:
 	bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const override;
@@ -44,6 +49,7 @@ protected:
 private:
 	void updateCount();
 	int m_count = 0;
+	bool m_filterAcknowledged = false;
 };
 
 } /* VenusOS */

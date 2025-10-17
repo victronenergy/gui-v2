@@ -71,13 +71,13 @@ ListItem {
 
 		// If attempting to save, then show any errors and adjust the input text.
 		if (mode === VenusOS.InputValidation_ValidateAndSave) {
-			if (textField.currentNotification) {
-				textField.currentNotification.close(true)
+			if (root.toast) {
+				ToastModel.requestClose(root.toast)
 			}
 			if (result.notificationText.length > 0) {
 				const notificationType = result.status === VenusOS.InputValidation_Result_Error ? VenusOS.Notification_Alarm
 						: VenusOS.Notification_Info
-				textField.currentNotification = Global.showToastNotification(notificationType, result.notificationText, 5000)
+				root.toast = Global.showToastNotification(notificationType, result.notificationText, 5000)
 			}
 			if (result.adjustedText != null) {
 				textField.text = result.adjustedText
@@ -115,7 +115,6 @@ ListItem {
 	property TextField defaultContent: TextField {
 		id: textField
 
-		property var currentNotification
 		property string _initialText
 		property bool _showErrorHighlight
 		property bool _validateBeforeSaving
@@ -139,10 +138,9 @@ ListItem {
 			if (_showErrorHighlight && root.runValidation(VenusOS.InputValidation_ValidateOnly) !== VenusOS.InputValidation_Result_Error) {
 				_showErrorHighlight = false
 			}
-			// Close error notification if visible.
-			if (textField.currentNotification) {
-				textField.currentNotification.close(false)
-				textField.currentNotification = null
+			// Dismiss error notification if visible.
+			if (root.toast) {
+				ToastModel.requestDismiss(root.toast)
 			}
 			_validateBeforeSaving = true
 		}

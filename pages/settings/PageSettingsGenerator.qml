@@ -143,7 +143,7 @@ Page {
 				onClicked: {
 					if (!checked) {
 						//% "An alarm will be triggered when autostart function is left disabled for more than 10 minutes"
-						Global.notificationLayer.showToastNotification(VenusOS.Notification_Info,
+						Global.showToastNotification(VenusOS.Notification_Info,
 								qsTrId("page_settings_generator_alarm_info"), 12000)
 					}
 				}

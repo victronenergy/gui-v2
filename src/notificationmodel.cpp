@@ -520,6 +520,15 @@ void NotificationModel::acknowledgeType(int type)
 	}
 }
 
+void NotificationModel::acknowledgeAllInactive()
+{
+	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		if (!m_data[i].acknowledged && !m_data[i].active) {
+			acknowledgeRow(static_cast<int>(i));
+		}
+	}
+}
+
 void NotificationModel::acknowledgeAll()
 {
 	if (m_acknowledgeAll) {
@@ -591,36 +600,6 @@ int NotificationModel::getSection(quint32 modelId) const
 		: 2;
 }
 
-quint32 NotificationModel::toastiest() const
-{
-	bool foundWarning = false, foundInfo = false;
-	quint32 newestWarning = 0, newestInfo = 0;
-
-	for (qsizetype i = m_data.size() - 1; i >= 0; --i) {
-		if (!m_data[i].acknowledged) {
-			if (m_data[i].type == static_cast<int>(Enums::Notification_Alarm)) {
-				return m_data[i].modelId;
-			} else if (m_data[i].type == static_cast<int>(Enums::Notification_Warning) && !foundWarning) {
-				foundWarning = true;
-				newestWarning = m_data[i].modelId;
-			} else if (m_data[i].type == static_cast<int>(Enums::Notification_Info) && !foundInfo) {
-				foundInfo = true;
-				newestInfo = m_data[i].modelId;
-			}
-		}
-	}
-
-	if (foundWarning) {
-		return newestWarning;
-	}
-
-	if (foundInfo) {
-		return newestInfo;
-	}
-
-	return m_data.size() ? m_data.last().modelId : 0;
-}
-
 int NotificationModel::rowCount(const QModelIndex &) const
 {
 	return static_cast<int>(m_data.size());
@@ -684,6 +663,194 @@ QHash<int, QByteArray> NotificationModel::roleNames() const
 		{ static_cast<int>(NotificationRoles::Active), "active" },
 		{ static_cast<int>(NotificationRoles::Silenced), "silenced" },
 		{ static_cast<int>(NotificationRoles::Section), "section" },
+	};
+	return roles;
+}
+
+
+ToastModel* ToastModel::create(QQmlEngine *engine, QJSEngine *)
+{
+	static ToastModel* instance = new ToastModel(engine);
+	return instance;
+}
+
+ToastModel::ToastModel(QObject *parent)
+	: QAbstractListModel(parent)
+{
+}
+
+quint32 ToastModel::addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval)
+{
+	toastData toast;
+	toast.modelId = ++m_modelId;
+	toast.notificationModelId = notificationModelId;
+	toast.type = type;
+	toast.description = text;
+	toast.autoCloseInterval = autoCloseInterval;
+
+	// insert in appropriate sort order, highest prio first.
+	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		if (type == Enums::Notification_Alarm
+				|| m_data[i].type == type
+				|| m_data[i].type == Enums::Notification_Info) {
+			beginInsertRows(QModelIndex(), i, i);
+			m_data.insert(i, toast);
+			endInsertRows();
+			Q_EMIT countChanged();
+			return toast.modelId;
+		}
+	}
+
+	beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
+	m_data.append(toast);
+	endInsertRows();
+	Q_EMIT countChanged();
+	return toast.modelId;
+}
+
+void ToastModel::updateNotification(quint32 notificationModelId, const QString &text)
+{
+	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		if (m_data[i].notificationModelId == notificationModelId) {
+			m_data[i].description = text;
+			Q_EMIT dataChanged(createIndex(i, 0), createIndex(i, 0), QList<int>() << static_cast<int>(ToastModel::ToastRoles::Description));
+			return;
+		}
+	}
+}
+
+bool ToastModel::removeNotification(quint32 notificationModelId)
+{
+	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		if (m_data[i].notificationModelId == notificationModelId) {
+			const quint32 modelId = m_data[i].modelId;
+			beginRemoveRows(QModelIndex(), i, i);
+			m_data.remove(i);
+			endRemoveRows();
+			Q_EMIT removed(modelId);
+			Q_EMIT countChanged();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+quint32 ToastModel::add(int type, const QString &text, int autoCloseInterval)
+{
+	return addNotification(0, type, text, autoCloseInterval);
+}
+
+bool ToastModel::remove(quint32 modelId)
+{
+	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		if (m_data[i].modelId == modelId) {
+			beginRemoveRows(QModelIndex(), i, i);
+			m_data.remove(i);
+			endRemoveRows();
+			Q_EMIT removed(modelId);
+			Q_EMIT countChanged();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool ToastModel::removeFirst()
+{
+	if (m_data.isEmpty()) {
+		return false;
+	}
+
+	const quint32 modelId = m_data[0].modelId;
+	beginRemoveRows(QModelIndex(), 0, 0);
+	m_data.removeFirst();
+	endRemoveRows();
+	Q_EMIT removed(modelId);
+	Q_EMIT countChanged();
+	return true;
+}
+
+bool ToastModel::removeRow(int row)
+{
+	if (row < 0 || row >= m_data.size()) {
+		return false;
+	}
+
+	const quint32 modelId = m_data[row].modelId;
+	beginRemoveRows(QModelIndex(), row, row);
+	m_data.remove(row);
+	endRemoveRows();
+	Q_EMIT removed(modelId);
+	Q_EMIT countChanged();
+	return true;
+}
+
+void ToastModel::removeAllInfoExcept(quint32 modelId)
+{
+	for (qsizetype i = m_data.size() - 1; i >= 0; --i) {
+		const quint32 currModelId = m_data[i].modelId;
+		if (m_data[i].type == Enums::Notification_Info && currModelId != modelId) {
+			beginRemoveRows(QModelIndex(), i, i);
+			m_data.remove(i);
+			endRemoveRows();
+			Q_EMIT removed(currModelId);
+			Q_EMIT countChanged();
+		}
+	}
+}
+
+void ToastModel::requestDismiss(quint32 modelId)
+{
+	Q_EMIT dismissRequested(modelId);
+	remove(modelId);
+}
+
+void ToastModel::requestClose(quint32 modelId)
+{
+	Q_EMIT closeRequested(modelId);
+	// TODO: view should momentarily disable animations for the close operation.
+	remove(modelId);
+}
+
+QVariant ToastModel::data(const QModelIndex& index, int role) const
+{
+	const int row = index.row();
+	if (row < 0 || row >= m_data.size()) {
+		return QVariant();
+	}
+
+	switch (role)
+	{
+		case static_cast<int>(ToastRoles::ModelId):
+			return m_data[row].modelId;
+		case static_cast<int>(ToastRoles::NotificationModelId):
+			return m_data[row].notificationModelId;
+		case static_cast<int>(ToastRoles::Type):
+			return m_data[row].type;
+		case static_cast<int>(ToastRoles::Description):
+			return m_data[row].description;
+		case static_cast<int>(ToastRoles::AutoCloseInterval):
+			return m_data[row].autoCloseInterval;
+		default: break;
+	}
+	return QVariant();
+}
+
+int ToastModel::rowCount(const QModelIndex &) const
+{
+	return m_data.count();
+}
+
+QHash<int, QByteArray> ToastModel::roleNames() const
+{
+	static const QHash<int, QByteArray> roles {
+		{ static_cast<int>(ToastRoles::ModelId), "modelId" },
+		{ static_cast<int>(ToastRoles::NotificationModelId), "notificationModelId" },
+		{ static_cast<int>(ToastRoles::Type), "type" },
+		{ static_cast<int>(ToastRoles::Description), "description" },
+		{ static_cast<int>(ToastRoles::AutoCloseInterval), "autoCloseInterval" },
 	};
 	return roles;
 }

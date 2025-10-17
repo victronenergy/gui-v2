@@ -155,13 +155,13 @@ public:
 	Q_INVOKABLE void acknowledge(quint32 modelId);
 	Q_INVOKABLE void acknowledgeRow(int row);
 	Q_INVOKABLE void acknowledgeType(int type);
+	Q_INVOKABLE void acknowledgeAllInactive();
 	Q_INVOKABLE void acknowledgeAll();
 
 	Q_INVOKABLE bool removeRow(int row);
 
 	notificationData at(int row) const;
 	Q_INVOKABLE notificationData get(quint32 modelId) const;
-	Q_INVOKABLE quint32 toastiest() const;
 
 	Q_INVOKABLE int getSection(quint32 modelId) const;
 
@@ -207,6 +207,83 @@ private:
 	int m_unacknowledgedInfos = 0;
 	int const m_maximumRows = 200;
 };
+
+// Toast data.
+// Note that not all toasts are Notification-backed toasts,
+// they might simply be info toasts raised directly by the UI.
+// Thus, they may not have a valid notificationModelId associated.
+class toastData
+{
+	Q_GADGET
+	QML_ELEMENT
+
+	Q_PROPERTY(quint32 modelId MEMBER modelId FINAL)
+	Q_PROPERTY(quint32 notificationModelId MEMBER notificationModelId FINAL)
+	Q_PROPERTY(int type MEMBER type FINAL)
+	Q_PROPERTY(QString description MEMBER description FINAL)
+	Q_PROPERTY(int autoCloseInterval MEMBER autoCloseInterval FINAL)
+
+public:
+	quint32 modelId = 0;
+	quint32 notificationModelId = 0;
+	int type = -1;
+	QString description;
+	int autoCloseInterval = -1;
+};
+
+// The model of toast entries, and client-facing API.
+// Only the first (index zero) toast is visible in the view.
+class ToastModel : public QAbstractListModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+	QML_SINGLETON
+
+	Q_PROPERTY(int count READ rowCount NOTIFY countChanged FINAL)
+
+public:
+	enum class ToastRoles {
+		ModelId = Qt::UserRole,
+		NotificationModelId,
+		Type,
+		Description,
+		AutoCloseInterval
+	};
+	Q_ENUM(ToastRoles);
+
+	static ToastModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
+	explicit ToastModel(QObject *parent);
+
+	QVariant data(const QModelIndex& index, int role) const override;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+
+	Q_INVOKABLE quint32 addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval = -1);
+	Q_INVOKABLE void updateNotification(quint32 notificationModelId, const QString &text);
+	Q_INVOKABLE bool removeNotification(quint32 notificationModelId);
+
+	Q_INVOKABLE quint32 add(int type, const QString &text, int autoCloseInterval = -1);
+	Q_INVOKABLE bool remove(quint32 modelId);
+	Q_INVOKABLE bool removeFirst();
+	Q_INVOKABLE bool removeRow(int row);
+	Q_INVOKABLE void removeAllInfoExcept(quint32 modelId);
+
+	Q_INVOKABLE void requestDismiss(quint32 modelId);
+	Q_INVOKABLE void requestClose(quint32 modelId);
+
+Q_SIGNALS:
+	void countChanged();
+	void dismissRequested(quint32 modelId);
+	void closeRequested(quint32 modelId);
+	void removed(quint32 modelId);
+
+protected:
+	QHash<int, QByteArray> roleNames() const override;
+
+private:
+	QVector<toastData> m_data;
+	quint32 m_modelId = 0;
+};
+
 
 } /* VenusOS */
 
