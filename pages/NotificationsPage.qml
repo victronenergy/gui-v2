@@ -109,6 +109,13 @@ SwipeViewPage {
 		}
 	}
 
-	// automatically acknowledge all Info notifications upon navigating away from this page.
-	onIsCurrentPageChanged: if (!isCurrentPage) NotificationModel.acknowledgeType(VenusOS.Notification_Info)
+	// automatically acknowledge all Info notifications,
+	// and also all non-active Warning+Alarm notifications,
+	// upon navigating away from this page.
+	onIsCurrentPageChanged: {
+		if (!isCurrentPage) {
+			NotificationModel.acknowledgeType(VenusOS.Notification_Info)
+			NotificationModel.acknowledgeAllInactive()
+		}
+	}
 }

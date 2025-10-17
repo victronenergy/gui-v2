@@ -69,8 +69,8 @@ FocusScope {
 		switch (event.key) {
 		case Qt.Key_Escape:
 			// Escape = close current Toast notification, or close Control/Switch pane.
-			if (Global.notificationLayer.deleteLastNotification()) {
-				// Nothing else to do
+			if (ToastModel.count) {
+				ToastModel.removeFirst()
 			} else {
 				if (cardsActive) {
 					cardsLoader.hide()
