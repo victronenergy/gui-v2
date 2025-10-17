@@ -97,8 +97,8 @@ FocusScope {
 
 	NotificationLayer {
 		id: notificationLayer
-
 		anchors.fill: parent
+		animationEnabled: Global.animationEnabled
 		Component.onCompleted: Global.notificationLayer = notificationLayer
 	}
 

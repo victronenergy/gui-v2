@@ -12,31 +12,47 @@ Item {
 	anchors.fill: parent
 	anchors.bottomMargin: Qt.inputMethod && Qt.inputMethod.visible ? Qt.inputMethod.keyboardRectangle.height : 0
 
-	function showToastNotification(category, text, autoCloseInterval = 0) {
-		var toast = toaster.createObject(view, { "category": category, "text": text, autoCloseInterval: autoCloseInterval })
-		toastItemsModel.append(toast)
-		return toast
-	}
+	property bool animationEnabled: Global.animationEnabled
 
-	function deleteLastNotification() {
-		const toast = toastItemsModel.count > 0 ? toastItemsModel.get(toastItemsModel.count - 1) : null
-		if (toast) {
-			toastItemsModel.remove(toastItemsModel.count - 1, 1)
-			toast.destroy(1000)
-			return true
-		}
-		return false
-	}
+	property Connections _toastController: Connections {
+		id: toastController
+		target: NotificationModel
 
-	function deleteNotification(toast) {
-		for (let i = 0; i < toastItemsModel.count; ++i) {
-			if (toastItemsModel.get(i) === toast) {
-				toastItemsModel.remove(i, 1)
-				toast.destroy(1000)
-				return true
+		function onAdded(modelId) {
+			let entry = NotificationModel.get(modelId)
+			if (!entry.acknowledged) {
+				ToastModel.addNotification(
+						modelId,
+						entry.type,
+						"" + entry.deviceName + "\n" + entry.description)
 			}
 		}
-		return false
+
+		function onChanged(modelId, roles) {
+			let entry = NotificationModel.get(modelId)
+			if (roles.indexOf(NotificationModel.NotificationRoles.Acknowledged) >= 0) {
+				if (entry.acknowledged) {
+					ToastModel.removeNotification(modelId)
+				} else {
+					// because Notification slots are recycled, the acknowledged value
+					// for "new" notifications residing in recycled slots can be updated
+					// after its active value becomes true.
+					if (!entry.acknowledged) {
+						ToastModel.addNotification(
+								modelId,
+								entry.type,
+								"" + entry.deviceName + "\n" + entry.description)
+					}
+				}
+			} else if (roles.indexOf(NotificationModel.NotificationRoles.Description) >= 0) {
+				let text = "" + entry.deviceName + "\n" + entry.description
+				ToastModel.updateNotification(modelId, text)
+			}
+		}
+
+		function onRemoved(modelId) {
+			ToastModel.removeNotification(modelId)
+		}
 	}
 
 	ListView {
@@ -50,27 +66,119 @@ Item {
 			bottomMargin: Theme.geometry_toastNotification_bottomMargin
 		}
 
-		width: parent.width
-		height: childrenRect.height
-		spacing: Theme.geometry_toastNotification_bottomMargin
-		layoutDirection: Qt.RightToLeft     // layout from bottom to top
+		height: 2*Theme.geometry_toastNotification_minHeight
+		spacing: Theme.geometry_toastNotification_horizontalMargin
+		orientation: Qt.Horizontal
+		interactive: false
+		cacheBuffer: Theme.geometry_screen_width - 2*Theme.geometry_toastNotification_horizontalMargin
+		model: ToastModel
 
-		model: ObjectModel {
-			id: toastItemsModel
+		property bool animationEnabled: true
+		onAnimationEnabledChanged: {
+			if (!animationEnabled) {
+				Qt.callLater(view.resetAnimationEnabled)
+			}
 		}
-	}
+		function resetAnimationEnabled() {
+			animationEnabled = true
+		}
 
-	Component {
-		id: toaster
-		ToastNotification {
-			id: toast
+		delegate: Item {
+			id: toastContainer
 
-			// delay removal from model, else will crash
-			onDismissed: {
-				toast.visible = false
-				root.deleteNotification(toast)
+			required property int index
+			required property int modelId
+			required property int notificationModelId
+			required property int type
+			required property string description
+			required property int autoCloseInterval
+
+			width: view.width
+			height: view.height
+			opacity: 1.0
+
+			Behavior on opacity {
+				enabled: root.animationEnabled
+				OpacityAnimator { duration: 200 }
+			}
+
+			Component.onCompleted: checkIndex()
+			onIndexChanged: checkIndex()
+			function checkIndex() {
+				toastContainer.opacity = index === 0 ? 1.0 : 0.0
+				if (index === 0 && autoCloseInterval > 0) {
+					// our index is zero, so we're the visible toast.
+					// check to see if we need to autoclose.
+					autoCloseTimer.interval = autoCloseInterval
+					autoCloseTimer.start()
+				}
+			}
+
+			Timer {
+				id: autoCloseTimer
+				onTriggered: ToastModel.remove(toastContainer.modelId)
+			}
+
+			ToastNotification {
+				y: parent.height - height
+
+				height: implicitHeight
+				width: parent.width
+
+				notificationModelId: toastContainer.notificationModelId
+				toastModelId: toastContainer.modelId
+				text: toastContainer.description
+				type: toastContainer.type
+
+				onDismissed: {
+					if (toastContainer.notificationModelId !== 0) {
+						NotificationModel.acknowledge(toastContainer.notificationModelId)
+					}
+					ToastModel.remove(toastContainer.modelId)
+				}
+
+				onClosed: {
+					view.animationEnabled = false
+					if (toastContainer.notificationModelId !== 0) {
+						NotificationModel.acknowledge(toastContainer.notificationModelId)
+					}
+					ToastModel.remove(toastContainer.modelId)
+				}
+			}
+		}
+
+		// We cannot use XAnimator etc for view transitions, as it
+		// messes with ListView's content positioning logic etc.
+		// So, we have to use NumberAnimation instead.
+		add: Transition {
+			enabled: root.animationEnabled && view.animationEnabled
+			NumberAnimation {
+				properties: "x"
+				from: -view.width
+				duration: Theme.animation_toastNotification_fade_duration
+			}
+		}
+		addDisplaced: Transition {
+			enabled: root.animationEnabled && view.animationEnabled
+			NumberAnimation {
+				properties: "x"
+				duration: Theme.animation_toastNotification_fade_duration
+			}
+		}
+		remove: Transition {
+			enabled: root.animationEnabled && view.animationEnabled
+			NumberAnimation {
+				properties: "y"
+				to: view.height
+				duration: Theme.animation_toastNotification_fade_duration
+			}
+		}
+		removeDisplaced: Transition {
+			enabled: root.animationEnabled && view.animationEnabled
+			NumberAnimation {
+				properties: "x"
+				duration: Theme.animation_toastNotification_fade_duration
 			}
 		}
 	}
-
 }
