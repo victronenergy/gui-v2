@@ -49,10 +49,28 @@ int NotificationSortFilterProxyModel::count() const
 	return m_count;
 }
 
+bool NotificationSortFilterProxyModel::filterAcknowledged() const
+{
+	return m_filterAcknowledged;
+}
+
+void NotificationSortFilterProxyModel::setFilterAcknowledged(bool f)
+{
+	if (m_filterAcknowledged != f) {
+		m_filterAcknowledged = f;
+		Q_EMIT filterAcknowledgedChanged();
+		invalidateFilter();
+	}
+}
+
 bool NotificationSortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
-	Q_UNUSED(sourceRow)
-	Q_UNUSED(sourceParent)
+	if (m_filterAcknowledged) {
+		// filter out any acknowledged notifications.
+		return sourceModel() && !sourceModel()->data(
+				sourceModel()->index(sourceRow, 0),
+				static_cast<int>(NotificationModel::NotificationRoles::Acknowledged)).toBool();
+	}
 	return true;
 }
 

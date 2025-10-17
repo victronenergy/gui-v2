@@ -10,52 +10,37 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	property int category: VenusOS.Notification_Info
+	property int notificationModelId
+	property int toastModelId
+
+	property int type: VenusOS.Notification_Info
 	property alias backgroundColor: background.color
 	property alias highlightColor: highlight.color
 	property alias icon: icon
 	property alias text: label.text
-	property alias autoCloseInterval: timer.interval
-
-	property bool _closed
 
 	function close(immediately) {
-		if (_closed) {
-			return
-		}
-		_closed = true
 		if (immediately) {
-			dismissed()
+			closed()
 		} else {
-			dismiss.dismissClicked = true
+			dismissed()
 		}
 	}
 
 	signal dismissed()
+	signal closed()
 
 	implicitWidth: parent ? parent.width : 0
 	implicitHeight: Math.max(Theme.geometry_toastNotification_minHeight,
 			label.implicitHeight + 2*Theme.geometry_toastNotification_label_padding)
-
-	Behavior on opacity {
-		enabled: Global.animationEnabled
-		OpacityAnimator {
-			duration: Theme.animation_toastNotification_fade_duration
-		}
-	}
-	opacity: dismiss.dismissClicked ? 0.0
-		: dismiss.dismissAvailable  ? 1.0
-		: 0.0
-	onOpacityChanged: if (dismiss.dismissClicked && opacity <= 0.001) root.dismissed()
-	Component.onCompleted: dismiss.dismissAvailable = true // ensures fade-in as well as fade-out transition.
 
 	Rectangle {
 		id: background
 		anchors.fill: parent
 
 		radius: Theme.geometry_toastNotification_radius
-		color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
-			 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
+		color: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
+			 : root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
 			 : Theme.color_toastNotification_background_informative
 
 		Rectangle {
@@ -66,13 +51,13 @@ Item {
 				bottom: parent.bottom
 			}
 
-			visible: root.category !== ToastNotification.None
+			visible: root.type !== ToastNotification.None
 			width: Theme.geometry_toastNotification_minHeight
 			topLeftRadius: parent.radius
 			bottomLeftRadius: parent.radius
 
-			color: root.category === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
-				 : root.category === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
+			color: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
+				 : root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
 				 : Theme.color_toastNotification_highlight_informative
 
 			CP.IconImage {
@@ -80,8 +65,8 @@ Item {
 				anchors.centerIn: parent
 
 				color: Theme.color_toastNotification_foreground
-				source: root.category === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
-					  : root.category === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
+				source: root.type === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
+					  : root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
 					  : "qrc:/images/icon_info_32.svg"
 			}
 		}
@@ -113,23 +98,35 @@ Item {
 				margins: isSilenceButton ? Theme.geometry_toastNotification_label_padding : 0
 			}
 
-			readonly property bool isSilenceButton: root.category === VenusOS.Notification_Warning || root.category === VenusOS.Notification_Alarm
-			property bool dismissClicked: false
-			property bool dismissAvailable: false
+			readonly property bool isSilenceButton: root.type === VenusOS.Notification_Warning || root.type === VenusOS.Notification_Alarm
 			width: isSilenceButton ? silenceLabel.x + silenceLabel.implicitWidth + silenceLabel.anchors.rightMargin
 				: Theme.geometry_toastNotification_minHeight
 			radius: isSilenceButton ? Theme.geometry_button_radius : Theme.geometry_button_border_width
 
 			onClicked: {
 				if (isSilenceButton) {
-					if (root.category === VenusOS.Notification_Alarm) {
+					// Silence all similar or lower-level notifications by acknowledging them.
+					// Do NOT acknowledge Info notifications, as they don't buzz, and we
+					// still want the user to see the number of outstanding notifications
+					// in the Notifications navbar icon bubble number.
+					if (root.type === VenusOS.Notification_Alarm) {
 						NotificationModel.acknowledgeType(VenusOS.Notification_Alarm)
 						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
 					} else {
 						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
 					}
+				} else {
+					// for Info toasts, acknowledge the related notification when we dismiss it
+					// and remove from the toast model (but do NOT acknowledge) all other Info toasts.
+					// This ensures that if something generates a hundred Info toasts in a row the user
+					// doesn't have to manually dismiss them all, but can still see the number of
+					// unacknowledged notifications in the Notifications navbar icon bubble number.
+					ToastModel.removeAllInfoExcept(root.toastModelId)
+					if (root.notificationModelId !== 0) {
+						NotificationModel.acknowledge(root.notificationModelId)
+					}
 				}
-				dismissClicked = true
+				root.dismissed()
 			}
 
 			CP.IconImage {
@@ -168,18 +165,6 @@ Item {
 				color: "transparent"
 				border.color: dismissIcon.color
 				border.width: Theme.geometry_button_border_width
-			}
-		}
-	}
-
-	Timer {
-		id: timer
-
-		interval: 0
-		onTriggered: dismiss.dismissClicked = true
-		onIntervalChanged: {
-			if (interval !== 0) {
-				start()
 			}
 		}
 	}

@@ -63,11 +63,8 @@ QtObject {
 
 	signal aboutToFocusTextField(var textField, var textFieldContainer, var viewToScroll)
 
-	function showToastNotification(category, text, autoCloseInterval = 0) {
-		if (!!notificationLayer) {
-			return notificationLayer.showToastNotification(category, text, autoCloseInterval)
-		}
-		return null
+	function showToastNotification(type, text, autoCloseInterval = 0) {
+		return ToastModel.add(type, text, autoCloseInterval)
 	}
 
 	function reset() {
