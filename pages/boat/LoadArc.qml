@@ -14,16 +14,10 @@ Column {
 	required property Gps gps
 	required property MotorDrive motorDrive
 
-<<<<<<< HEAD:pages/boat/LoadArc.qml
-	readonly property int _rightGaugeCount: root.gps.valid && root.motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
-											: dcLoadGauge.active ? 2 // both AC & DC
-											: 1  // just AC. The AC load gauge is always active
-=======
 	readonly property int _rightGaugeCount: gps.valid && motorDrive.dcConsumption.valid ? 1 // just the motor drive
 											: dcLoadGauge.active && acLoadGauge.active ? 2 // both AC & DC
 											: dcLoadGauge.active || acLoadGauge.active ? 1 // one of AC or DC
 											: 0
->>>>>>> c30db8ba (Don't display AC Loads gauge or widget if no AC loads exist):pages/boatpage/LoadArc.qml
 
 	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
 

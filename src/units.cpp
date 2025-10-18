@@ -17,7 +17,7 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 {
 	switch (unit) {
 	case Victron::VenusOS::Enums::Units_Volume_CubicMetre:
-		return Unit::CubicMetre;
+		return Unit::CubicMeter;
 	case Victron::VenusOS::Enums::Units_Volume_Litre:
 		return Unit::Litre;
 	case Victron::VenusOS::Enums::Units_Volume_GallonUS:
@@ -33,7 +33,7 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 	case Victron::VenusOS::Enums::Units_Speed_MetresPerSecond:
 		return Unit::MetresPerSecond;
 	case Victron::VenusOS::Enums::Units_Speed_KilometresPerHour:
-		return Unit::KilometresPerHour;
+		return Unit::KilometersPerHour;
 	case Victron::VenusOS::Enums::Units_Speed_MilesPerHour:
 		return Unit::MilesPerHour;
 	case Victron::VenusOS::Enums::Units_Speed_Knots:
@@ -41,7 +41,7 @@ Unit::Type unitToVeUnit(Victron::VenusOS::Enums::Units_Type unit)
 	case Victron::VenusOS::Enums::Units_RevolutionsPerMinute:
 		return Unit::RevolutionsPerMinute;
 	case Victron::VenusOS::Enums::Units_Altitude_Metre:
-		return Unit::Metre;
+		return Unit::Meter;
 	case Victron::VenusOS::Enums::Units_Altitude_Foot:
 		return Unit::Foot;
 	default:
