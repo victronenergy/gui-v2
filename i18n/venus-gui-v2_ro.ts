@@ -1210,17 +1210,17 @@
       <translation>Rescaneaza</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>Asistenta la distanta</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>Tunel asistenta la distanta</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>IP si port pentru asistenta</translation>
     </message>
@@ -6928,47 +6928,47 @@ Doriți să continuați?</translation>
       <translation>Adăugați un invertor fotovoltaic utilizând funcția „Găsire invertor fotovoltaic” sau introducând manual o adresă IP pe pagina anterioară.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
       <source>Local network security profile</source>
       <translation>Profilul de securitate al rețelei locale</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
       <source>Please select...</source>
       <translation>Vă rugăm să selectați...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Secured</source>
       <translation>Securizat</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="135"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Protejat prin parolă, iar comunicarea în rețea este criptată</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
       <source>Weak</source>
       <translation>Slab</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Protejat cu parolă, dar comunicarea în rețea nu este criptată</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
       <source>Unsecured</source>
       <translation>Nesecurizat</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Nu există parolă și comunicarea prin rețea nu este criptată</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation type="unfinished">Deconectați-vă acum</translation>
     </message>
@@ -6978,22 +6978,22 @@ Doriți să continuați?</translation>
       <translation>Parola trebuie să aibă cel puțin 8 caractere</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
       <source>Select 'Secured' profile?</source>
       <translation>Selectați profilul "Securizat"?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Weak' profile?</source>
       <translation>Selectați profilul "slab"?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Selectați profilul "Nesecurizat"?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="241"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7004,71 +7004,71 @@ Doriți să continuați?</translation>
 - Setările nesecurizate nu pot fi activate</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Serviciile rețelei locale sunt protejate prin parolă
 - Accesul necriptat la site-urile locale este de asemenea activat (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Serviciile rețelei locale nu au nevoie de parolă
 - Accesul necriptat la site-urile locale este de asemenea activat (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>Pagina se va reîncărca automat în 5 secunde</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Parola trebuie să aibă cel puțin 8 caractere</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>Parolă rădăcină</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">Introduceți parola</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Parola trebuie să aibă cel puțin 8 caractere</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>Parolă rădăcină schimbată la %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>Activare SSH pe LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>Deconectare</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>Să vă deconectați?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Acest lucru va deconecta toate conexiunile la rețeaua locală.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>Deconectare</translation>
     </message>
@@ -9358,12 +9358,12 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Solicită încărcare</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Change password</source>
       <translation>Schimbă parola</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="188"/>
       <source>Update</source>
       <translation>Actualizare</translation>
     </message>

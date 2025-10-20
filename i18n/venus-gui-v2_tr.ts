@@ -1210,17 +1210,17 @@
       <translation>Tekrar tara</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>Uzaktan Destek</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>Uzaktan destek tüneli</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>Uzaktan destek IP'si ve bağlantı noktası</translation>
     </message>
@@ -6927,47 +6927,47 @@ Devam etmek istiyor musunuz?</translation>
       <translation>“FV İnvertör Bul” işlevini kullanarak veya önceki sayfada manuel olarak bir IP adresi girerek bir FV invertör ekleyin.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
       <source>Local network security profile</source>
       <translation>Yerel ağ güvenlik profili</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
       <source>Please select...</source>
       <translation>Lütfen seçiniz...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Secured</source>
       <translation>Güvenli</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="135"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Parola korumalı ve ağ iletişimi şifrelenmiştir</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
       <source>Weak</source>
       <translation>Zayıf</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Parola korumalı, ancak ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
       <source>Unsecured</source>
       <translation>Teminatsız</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Şifre yok ve ağ iletişimi şifrelenmemiş</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation type="unfinished">Şimdi çıkış yap</translation>
     </message>
@@ -6977,22 +6977,22 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
       <source>Select 'Secured' profile?</source>
       <translation>'Güvenli' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Weak' profile?</source>
       <translation>'Zayıf' profili mi seçtiniz?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>'Güvencesiz' profili seçin?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="241"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7003,71 +7003,71 @@ Devam etmek istiyor musunuz?</translation>
 - Güvensiz ayarlar etkinleştirilemez</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetleri parola korumalıdır
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Yerel ağ hizmetlerinin parolaya ihtiyacı yoktur
 - Yerel web sitelerine şifrelenmemiş erişim de etkinleştirilmiştir (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>Sayfa 5 saniye içinde otomatik olarak yeniden yüklenecektir</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>Kök parola</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">Parola Gir</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Şifrenin en az 8 karakter uzunluğunda olması gerekir</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>Kök parolası %1 olarak değiştirildi</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>LAN’da SSH’yi Etkinleştirme</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>Çıkış Yap</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>Oturumu kapatayım mı?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Bu işlem tüm yerel ağ bağlantılarını kesecektir.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>Çıkış Yap</translation>
     </message>
@@ -9355,12 +9355,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Şarj Talepleri</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Change password</source>
       <translation>Parolayı değiştir</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="188"/>
       <source>Update</source>
       <translation>Güncelle</translation>
     </message>
