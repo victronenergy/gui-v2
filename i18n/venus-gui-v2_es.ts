@@ -1210,17 +1210,17 @@
       <translation>Volver a escanear</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="291"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>Soporte remoto</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="297"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>Túnel de soporte remoto</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>Puerto e IP de soporte remoto</translation>
     </message>
@@ -6926,47 +6926,47 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Añadir el inversor FV con la función “Buscar inversor FV” o introduciendo una dirección de IP manualmente en la página anterior.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="123"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
       <source>Local network security profile</source>
       <translation>Perfil de seguridad de la red local</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
       <source>Please select...</source>
       <translation>Por favor, seleccione...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Secured</source>
       <translation>Asegurado</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="135"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Protegido con contraseña y la comunicación de red está encriptada</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
       <source>Weak</source>
       <translation>Débil</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="143"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Protegido con contraseña, pero comunicación de red no está encriptada</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
       <source>Unsecured</source>
       <translation>No asegurado</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Sin contraseña y la comunicación de red no está encriptada</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation type="unfinished">Cerrar sesión ahora</translation>
     </message>
@@ -6976,22 +6976,22 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>La contraseña ha tener al menos ocho caracteres</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="224"/>
       <source>Select 'Secured' profile?</source>
       <translation>¿Seleccionar el perfil «Seguro»?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Weak' profile?</source>
       <translation>¿Seleccionar el perfil « Débil»?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="228"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>¿Seleccionar el perfil « No seguro»?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="236"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="241"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -7002,71 +7002,71 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
 - No se pueden habilitar configuraciones no seguras</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="239"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Los servicios de la red local están protegidos por contraseña
 • El acceso no cifrado a los sitios web locales también está habilitado (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="242"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Los servicios de la red local no necesitan contraseña
 • El acceso no cifrado a los sitios web locales también está habilitado (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="117"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>La página se volverá a cargar automáticamente en 5 segundos</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="158"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">La contraseña ha tener al menos ocho caracteres</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="261"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>Contraseña raíz</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">Introducir contraseña</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">La contraseña ha tener al menos ocho caracteres</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>La contraseña raíz ha cambiado a %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>Habilitar SSH en LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="313"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>Cerrar sesión</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="327"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>¿Cerrar sesión?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="329"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Esto desconectará todas las conexiones de red locales.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>Cerrar sesión</translation>
     </message>
@@ -9355,12 +9355,12 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Cargando solicitudes</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
       <source>Change password</source>
       <translation>Cambiar contraseña</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="186"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="188"/>
       <source>Update</source>
       <translation>Actualizar</translation>
     </message>
