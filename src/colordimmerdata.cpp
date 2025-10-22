@@ -79,6 +79,8 @@ void ColorDimmerData::setDataUid(const QString &dataUid)
 		if (!m_colorDataItem) {
 			qmlWarning(this) << "dataUid: " << dataUid << " has no matching VeQItem, colors will not be saved";
 		}
+		if (m_colorDataItem)
+			connect(m_colorDataItem, &VeQItem::valueChanged, this, &ColorDimmerData::colorDataChanged);
 		reload();
 		emit dataUidChanged();
 	}
@@ -165,6 +167,11 @@ void ColorDimmerData::save()
 		::setStorageColorData(dataList, m_color, m_white, m_colorTemperature);
 		m_colorDataItem->setValue(QVariant::fromValue(dataList));
 	}
+}
+
+void ColorDimmerData::colorDataChanged(QVariant var)
+{
+	reload();
 }
 
 

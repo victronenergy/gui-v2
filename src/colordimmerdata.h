@@ -54,6 +54,9 @@ Q_SIGNALS:
 	void whiteChanged();
 	void colorTemperatureChanged();
 
+private Q_SLOTS:
+	void colorDataChanged(QVariant var);
+
 private:
 	void reload();
 
