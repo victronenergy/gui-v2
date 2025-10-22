@@ -100,7 +100,9 @@ Rectangle {
 
 		onMoved: {
 			// Save the selected brightness.
-			root.switchableOutput.setDimming(value)
+			// root.switchableOutput.setDimming(value)
+			root.colorDimmerData.color.hsvValue = value
+			root.colorDimmerData.save()
 		}
 
 		handle: Halo {
@@ -200,7 +202,7 @@ Rectangle {
 
 		x: colorWheel.x + colorWheel.width - 9
 		anchors.verticalCenter: colorWheel.verticalCenter
-		value: root.colorDimmerData.color.hslSaturation
+		value: root.colorDimmerData.color.hsvSaturation
 		width: root._sliderWidth
 		height: root._sliderHeight
 		orientation: Qt.Vertical
@@ -210,7 +212,7 @@ Rectangle {
 
 		onMoved: {
 			// Save the selected saturation.
-			//root.colorDimmerData.color.hsvSaturation = value
+			root.colorDimmerData.color.hsvSaturation = value
 			root.colorDimmerData.save()
 		}
 
