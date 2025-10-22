@@ -49,17 +49,15 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, qreal *wh
 		*colorTemperature = variantToReal(colorData.value(4));
 	}
 }
-void setStorageColorData(QVariantList *colorData, const QColor color, qreal white, qreal colorTemperature)
+void setStorageColorData(QList<double> &colorData, const QColor color, qreal white, qreal colorTemperature)
 {
-	if (colorData) {
-		float h, s, v;
-		color.getHsvF(&h, &s, &v);
-		colorData->append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
-		colorData->append(s * 100);
-		colorData->append(v * 100);
-		colorData->append(white);
-		colorData->append(colorTemperature);
-	}
+	float h, s, v;
+	color.getHsvF(&h, &s, &v);
+	colorData.append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
+	colorData.append(s * 100);
+	colorData.append(v * 100);
+	colorData.append(white);
+	colorData.append(colorTemperature);
 }
 
 }
@@ -163,9 +161,9 @@ void ColorDimmerData::loadFromPreset(const QVariantMap &values)
 void ColorDimmerData::save()
 {
 	if (m_colorDataItem) {
-		QVariantList dataList;
-		::setStorageColorData(&dataList, m_color, m_white, m_colorTemperature);
-		m_colorDataItem->setValue(dataList);
+		QList<double> dataList;
+		::setStorageColorData(dataList, m_color, m_white, m_colorTemperature);
+		m_colorDataItem->setValue(QVariant::fromValue(dataList));
 	}
 }
 
@@ -285,9 +283,9 @@ void ColorPresetModel::save()
 		if (VeQItem *presetItem = m_settingItem->itemGetOrCreate(QString::number(i))) {
 			const ColorInfo &info = m_colors.at(i);
 			if (info.color.isValid()) {
-				QVariantList colorData;
-				::setStorageColorData(&colorData, info.color, info.white, info.colorTemperature);
-				presetItem->setValue(QVariant(colorData));
+				QList<double> colorData;
+				::setStorageColorData(colorData, info.color, info.white, info.colorTemperature);
+				presetItem->setValue(QVariant::fromValue(colorData));
 			} else {
 				presetItem->setValue(QVariant());
 			}
