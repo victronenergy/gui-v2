@@ -47,6 +47,10 @@ FocusScope {
 	MiniSpinBox {
 		id: spinBox
 
+		function reload() {
+			value = decimalConverter.decimalToInt(numericInputValueSync.dataItem.value)
+		}
+
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
@@ -55,15 +59,20 @@ FocusScope {
 			top: header.bottom
 		}
 		height: Theme.geometry_switchableoutput_control_height
-		suffix: numericInputUnit.value ?? ""
+		suffix: Units.defaultUnitString(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+				|| root.switchableOutput.unitText
 		from: decimalConverter.intFrom
 		to: decimalConverter.intTo
 		stepSize: decimalConverter.intStepSize
-		value: decimalConverter.decimalToInt(numericInputValueSync.backendValue)
+
+		// Note: the number is displayed as the raw unscaled value (e.g. as 10000l instead of 10kl).
+		// Scaling is not required, but also, showing it in a scaled format is not possible without
+		// some library functions to return a non-scaled form in valueFromText().
+		value: decimalConverter.decimalToInt(numericInputValueSync.dataItem.value)
 		textFromValue: (value, locale) => decimalConverter.textFromValue(value)
 		valueFromText: (text, locale) => {
 			const v = decimalConverter.valueFromText(text)
-			return isNaN(v) ? decimalConverter.decimalToInt(numericInputValueSync.backendValue) : v
+			return isNaN(v) ? decimalConverter.decimalToInt(numericInputValueSync.dataItem.value) : v
 		}
 		onValueModified: {
 			// Update the /Dimming value to the user-entered value.
@@ -73,19 +82,20 @@ FocusScope {
 		VeQuickItem {
 			id: numericInputMin
 			uid: root.switchableOutput.uid + "/Settings/DimmingMin"
+			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
+			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
 		}
 		VeQuickItem {
 			id: numericInputMax
 			uid: root.switchableOutput.uid + "/Settings/DimmingMax"
+			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
+			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
 		}
 		VeQuickItem {
 			id: numericInputStepSize
-			readonly property int decimalCount: valid ? value.toString().split(".")[1]?.length ?? 0 : 0
 			uid: root.switchableOutput.uid + "/Settings/StepSize"
-		}
-		VeQuickItem {
-			id: numericInputUnit
-			uid: root.switchableOutput.uid + "/Settings/Unit"
+			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
+			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
 		}
 
 		MouseArea {
@@ -99,17 +109,26 @@ FocusScope {
 		SpinBoxDecimalConverter {
 			id: decimalConverter
 
-			decimals: numericInputStepSize.decimalCount
+			decimals: root.switchableOutput.stepSizeDecimals
 			from: numericInputMin.valid ? numericInputMin.value : 0
 			to: numericInputMax.valid ? numericInputMax.value : 100
 			stepSize: numericInputStepSize.valid ? numericInputStepSize.value : 1
+
+			// If the from/to is not available immediately from DimmingMin/Max, the SpinBox value is
+			// clamped to the default 0-100 range, so be sure to refresh the spinBox value when the
+			// DimmingMin/Max become available and the from/to are updated.
+			onFromChanged: spinBox.reload()
+			onToChanged: spinBox.reload()
 		}
 
 		SettingSync {
 			id: numericInputValueSync
-			backendValue: root.switchableOutput.dimming
-			onUpdateToBackend: (value) => { root.switchableOutput.setDimming(value) }
-			onTimeout: spinBox.value = decimalConverter.decimalToInt(backendValue)
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/Dimming"
+				sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
+				displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			}
+			onTimeout: spinBox.reload()
 		}
 	}
 }

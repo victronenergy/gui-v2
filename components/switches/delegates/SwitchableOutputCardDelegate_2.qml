@@ -114,7 +114,8 @@ FocusScope {
 
 	SettingSync {
 		id: dimmingState
-		backendValue: root.switchableOutput.state
-		onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+		dataItem: VeQuickItem {
+			uid: root.switchableOutput.uid + "/State"
+		}
 	}
 }

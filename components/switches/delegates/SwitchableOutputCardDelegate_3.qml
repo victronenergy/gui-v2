@@ -51,17 +51,19 @@ FocusScope {
 		switchableOutput: root.switchableOutput
 		secondaryTitle: measurementItem.valid
 			? "%1%2/<font color=\"%3\">%4</font>%5"
-					.arg(slider.value.toFixed(slider.stepSizeDecimalCount))
+					.arg(slider.value.toFixed(root.switchableOutput.stepSizeDecimals))
 					.arg(Units.degreesSymbol)
 					.arg(Theme.color_font_secondary)
-					.arg(measurementItem.value.toFixed(slider.stepSizeDecimalCount))
+					.arg(measurementItem.value.toFixed(root.switchableOutput.stepSizeDecimals))
 					.arg(Global.systemSettings.temperatureUnitSuffix)
-			: slider.value.toFixed(slider.stepSizeDecimalCount) + Global.systemSettings.temperatureUnitSuffix
+			: slider.value.toFixed(root.switchableOutput.stepSizeDecimals) + Global.systemSettings.temperatureUnitSuffix
 	}
 
 	VeQuickItem {
 		id: measurementItem
 		uid: root.switchableOutput.uid + "/Measurement"
+		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	TemperatureSlider {
@@ -75,6 +77,6 @@ FocusScope {
 			top: header.bottom
 		}
 		switchableOutput: root.switchableOutput
-		measurementText: measurementItem.valid ? measurementItem.value.toFixed(slider.stepSizeDecimalCount) + Units.degreesSymbol : ""
+		measurementText: measurementItem.valid ? measurementItem.value.toFixed(root.switchableOutput.stepSizeDecimals) + Units.degreesSymbol : ""
 	}
 }

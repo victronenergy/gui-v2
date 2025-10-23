@@ -18,7 +18,7 @@ Item {
 	Keys.onPressed: (event) => {
 		switch (event.key) {
 		case Qt.Key_Space:
-			bilgePumpState.writeValue(bilgePumpState.backendValue === 1 ? 0 : 1)
+			bilgePumpState.writeValue(bilgePumpState.dataItem.value === 1 ? 0 : 1)
 			event.accepted = true
 		}
 	}
@@ -54,8 +54,9 @@ Item {
 
 		SettingSync {
 			id: bilgePumpState
-			backendValue: root.switchableOutput.state
-			onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/State"
+			}
 		}
 	}
 }

@@ -31,14 +31,35 @@ QtObject {
 
 	readonly property int speedUnit: {
 		switch (_speedUnit.value) {
-		case "km/h":
+		case _speedUnit.ve_kmh:
 			return VenusOS.Units_Speed_KilometresPerHour
-		case "m/s":
+		case _speedUnit.ve_ms:
 			return VenusOS.Units_Speed_MetresPerSecond
-		case "kt":
+		case _speedUnit.ve_kt:
 			return VenusOS.Units_Speed_Knots
-		case "mph":
+		case _speedUnit.ve_mph:
 			return VenusOS.Units_Speed_MilesPerHour
+		default:
+			return VenusOS.Units_None
+		}
+	}
+
+	function toPreferredUnit(unitType) {
+		switch (unitType) {
+		case VenusOS.Units_Volume_CubicMetre:
+		case VenusOS.Units_Volume_Litre:
+		case VenusOS.Units_Volume_GallonImperial:
+		case VenusOS.Units_Volume_GallonUS:
+			return volumeUnit
+		case VenusOS.Units_Temperature_Kelvin:
+		case VenusOS.Units_Temperature_Celsius:
+		case VenusOS.Units_Temperature_Fahrenheit:
+			return temperatureUnit
+		case VenusOS.Units_Speed_KilometresPerHour:
+		case VenusOS.Units_Speed_MetresPerSecond:
+		case VenusOS.Units_Speed_Knots:
+		case VenusOS.Units_Speed_MilesPerHour:
+			return speedUnit
 		default:
 			return VenusOS.Units_None
 		}
@@ -95,6 +116,26 @@ QtObject {
 				break
 			default:
 				console.warn("setVolumeUnit() unknown value:", value)
+				break
+		}
+	}
+
+	function setSpeedUnit(value) {
+		switch (value) {
+			case VenusOS.Units_Speed_KilometresPerHour:
+				_speedUnit.setValue(_speedUnit.ve_kmh)
+				break
+			case VenusOS.Units_Speed_MetresPerSecond:
+				_speedUnit.setValue(_speedUnit.ve_ms)
+				break
+			case VenusOS.Units_Speed_Knots:
+				_speedUnit.setValue(_speedUnit.ve_kt)
+				break
+			case VenusOS.Units_Speed_MilesPerHour:
+				_speedUnit.setValue(_speedUnit.ve_mph)
+				break
+			default:
+				console.warn("setSpeedUnit() unknown value:", value)
 				break
 		}
 	}
@@ -341,6 +382,11 @@ QtObject {
 	}
 
 	property VeQuickItem _speedUnit: VeQuickItem {
+		readonly property string ve_kmh: "km/h"
+		readonly property string ve_ms: "m/s"
+		readonly property string ve_kt: "kt"
+		readonly property string ve_mph: "mph"
+
 		uid: root.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 

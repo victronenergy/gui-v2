@@ -20,8 +20,8 @@ SwitchableOutputSlider {
 	leftPadding: leftPaddingText.implicitWidth
 	rightPadding: rightPaddingText.implicitWidth
 	indicatorBackgroundWidth: 0 // align handle exactly with the start/end dots
-	fromDisplayValue: (v) => { return Units.convert(v, Global.systemSettings.temperatureUnit, VenusOS.Units_Temperature_Celsius) }
-	toDisplayValue: (v) => { return Units.convert(v, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit) }
+	sourceUnit: VenusOS.Units_Temperature_Celsius
+	displayUnit: Global.systemSettings.temperatureUnit
 
 	background: Rectangle {
 		radius: Theme.geometry_slider_groove_radius
@@ -123,7 +123,7 @@ SwitchableOutputSlider {
 				horizontalAlignment: Text.AlignHCenter
 				verticalAlignment: Text.AlignVCenter
 				font.pixelSize: Theme.font_size_h2
-				text: root.value.toFixed(root.stepSizeDecimalCount) + Units.degreesSymbol
+				text: root.value.toFixed(root.switchableOutput.stepSizeDecimals) + Units.degreesSymbol
 				color: Theme.color_button_down_text
 
 				SeparatorBar {
@@ -165,14 +165,6 @@ SwitchableOutputSlider {
 					}
 				}
 			}
-		}
-	}
-
-	Connections {
-		target: Global.systemSettings
-		function onTemperatureUnitChanged() {
-			// Force the value to match the updated system temperature unit.
-			value = toDisplayValue(root.switchableOutput.dimming)
 		}
 	}
 
