@@ -468,7 +468,10 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 	case SwitchableOutput_Status_TripLowVoltage:
 		//% "Trip low voltage"
 		return qtTrId("switchable_output_trip_low_voltage");
-	default:
+    case SwitchableOutput_Status_Bypassed:
+        //% "Bypassed"
+        return qtTrId("switchable_output_bypassed");
+    default:
 		return QString::number(static_cast<int>(value));
 	}
 }
