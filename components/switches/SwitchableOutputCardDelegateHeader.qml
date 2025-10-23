@@ -76,6 +76,7 @@ RowLayout {
 						return Theme.color_green
 					}
 				case VenusOS.SwitchableOutput_Status_Output_Fault:
+				case VenusOS.SwitchableOutput_Status_Bypassed:
 					return Theme.color_orange
 				case VenusOS.SwitchableOutput_Status_Disabled:
 				case VenusOS.SwitchableOutput_Status_TripLowVoltage:
