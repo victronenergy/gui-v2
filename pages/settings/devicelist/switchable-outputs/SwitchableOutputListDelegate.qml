@@ -17,7 +17,15 @@ ListQuantityGroupNavigation {
 		filterType: QuantityObjectModel.HasValue
 
 		QuantityObject { object: outputCurrent; unit: VenusOS.Units_Amp }
-		QuantityObject { object: output; key: "dataText"; unit: output.dataNumberUnit }
+
+		// Generally, if Status=On, then show some output-specific detail (e.g. the Dimming value)
+		// and otherwise, just show the status text (On, Off, Fault, etc.)
+		QuantityObject {
+			object: output
+			key: !isNaN(output.dataNumber) ? "dataNumber" : "dataText"
+			unit: output.dataNumberUnit
+			precision: output.stepSizeDecimals
+		}
 		QuantityObject { object: output; key: output.secondaryDataText ? "secondaryDataText" : ""; unit: VenusOS.Units_None }
 		QuantityObject { object: output; key: "typeText" }
 	}
@@ -32,9 +40,23 @@ ListQuantityGroupNavigation {
 	SwitchableOutput {
 		id: output
 
-		// The main information to show for this output. Generally, if Status=On, then some detail
-		// is shown (e.g. the Dimming value) and otherwise, just show the status text (On, Off,
-		// Fault, etc.)
+		// The number and unit to show for this output, if applicable for the output type, and if
+		// the output state=On.
+		readonly property real dataNumber: output.status !== VenusOS.SwitchableOutput_Status_On
+			|| (output.type !== VenusOS.SwitchableOutput_Type_Dimmable
+				&& output.type !== VenusOS.SwitchableOutput_Type_TemperatureSetpoint
+				&& output.type !== VenusOS.SwitchableOutput_Type_BasicSlider
+				&& output.type !== VenusOS.SwitchableOutput_Type_NumericInput)
+			? NaN
+			: dimmingItem.value // use the dimming value with unit conversion, not the unconverted output.dimming
+		readonly property int dataNumberUnit: isNaN(dataNumber) ? VenusOS.Units_None
+			: output.type === VenusOS.SwitchableOutput_Type_Dimmable ? VenusOS.Units_Percentage
+			: output.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint ? Global.systemSettings.temperatureUnit
+			: output.type === VenusOS.SwitchableOutput_Type_BasicSlider ? Global.systemSettings.toPreferredUnit(output.unitType)
+			: output.type === VenusOS.SwitchableOutput_Type_NumericInput ? Global.systemSettings.toPreferredUnit(output.unitType)
+			: VenusOS.Units_None
+
+		// The text data to show for this output, if dataNumber is not applicable.
 		readonly property string dataText: {
 			switch (output.type) {
 			case VenusOS.SwitchableOutput_Type_Momentary:
@@ -47,35 +69,10 @@ ListQuantityGroupNavigation {
 					return CommonWords.onOrOff(output.state)
 				}
 				break
-			case VenusOS.SwitchableOutput_Type_Dimmable:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					return output.dimming
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_TemperatureSetpoint:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					const temp = Units.convert(output.dimming, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-					return temp.toFixed(stepSizeItem.decimalCount)
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_SteppedSwitch:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					return output.dimming
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_Slave:
-				break
 			case VenusOS.SwitchableOutput_Type_Dropdown:
 				// Show the label for the current dropdown index.
 				if (output.status === VenusOS.SwitchableOutput_Status_On) {
 					return dropdownLabelsItem.selectedLabel
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_BasicSlider:
-			case VenusOS.SwitchableOutput_Type_NumericInput:
-				// For both of these types, show /Dimming with /Unit text.
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					return output.dimming.toFixed(stepSizeItem.decimalCount) + (unitItem.value || "")
 				}
 				break
 			case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
@@ -90,16 +87,9 @@ ListQuantityGroupNavigation {
 					}
 				}
 				break
-			case VenusOS.SwitchableOutput_Type_BilgePump:
-				break
 			}
 			return statusText
 		}
-
-		readonly property int dataNumberUnit: output.status !== VenusOS.SwitchableOutput_Status_On ? VenusOS.Units_None
-				: type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint ? Global.systemSettings.temperatureUnit
-				: type === VenusOS.SwitchableOutput_Type_Dimmable ? VenusOS.Units_Percentage
-				: VenusOS.Units_None
 
 		readonly property string secondaryDataText: {
 			if (output.type === VenusOS.SwitchableOutput_Type_BilgePump) {
@@ -121,6 +111,13 @@ ListQuantityGroupNavigation {
 	}
 
 	VeQuickItem {
+		id: dimmingItem
+		uid: output.uid + "/Dimming"
+		sourceUnit: Units.unitToVeUnit(output.unitType)
+		displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(output.unitType))
+	}
+
+	VeQuickItem {
 		id: outputCurrent
 		uid: root.uid + "/Current"
 	}
@@ -128,28 +125,6 @@ ListQuantityGroupNavigation {
 	VeQuickItem {
 		id: autoItem
 		uid: output.type === VenusOS.SwitchableOutput_Type_ThreeStateSwitch ? output.uid + "/Auto" : ""
-	}
-
-	VeQuickItem {
-		id: stepSizeItem
-
-		readonly property int decimalCount: stepSizeItem.valid
-				? stepSizeItem.value.toString().split(".")[1]?.length ?? 0
-				: 0
-
-		uid: output.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
-				|| output.type === VenusOS.SwitchableOutput_Type_BasicSlider
-				|| output.type === VenusOS.SwitchableOutput_Type_NumericInput
-			 ? root.uid + "/Settings/StepSize"
-			 : ""
-	}
-
-	VeQuickItem {
-		id: unitItem
-		uid: output.type === VenusOS.SwitchableOutput_Type_BasicSlider
-				|| output.type === VenusOS.SwitchableOutput_Type_NumericInput
-			 ? root.uid + "/Settings/Unit"
-			 : ""
 	}
 
 	VeQuickItem {

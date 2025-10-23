@@ -346,4 +346,58 @@ TestCase {
 			}
 		}
 	}
+
+	function test_unit_data() {
+		return [
+			{
+				tag: "no unit",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { State: 0 }, // add dummy value to ensure output has some properties
+				unitType: VenusOS.Units_None,
+				unitText: "",
+			},
+			{
+				tag: "custom unit",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "test test" },
+				unitType: VenusOS.Units_None,
+				unitText: "test test",
+			},
+			{
+				tag: "speed",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\S" },
+				unitType: VenusOS.Units_Speed_MetresPerSecond,
+				unitText: "\\S",
+			},
+			{
+				tag: "temperature",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\T" },
+				unitType: VenusOS.Units_Temperature_Celsius,
+				unitText: "\\T",
+			},
+			{
+				tag: "volume",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\V" },
+				unitType: VenusOS.Units_Volume_CubicMetre,
+				unitText: "\\V",
+			},
+		]
+	}
+
+	function test_unit(data) {
+		compare(output.unitType, VenusOS.Units_None)
+		compare(output.unitText, "")
+
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.unitType, data.unitType)
+		compare(output.unitText, data.unitText)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+	}
 }

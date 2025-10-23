@@ -59,12 +59,11 @@ FocusScope {
 		autoChecked: autoToggleState.expectedValue === 1
 		onOnClicked: toggleState.writeValue(1)
 		onOffClicked: toggleState.writeValue(0)
-		onAutoClicked: autoToggleState.writeValue(autoToggleState.backendValue === 1 ? 0 : 1)
+		onAutoClicked: autoToggleState.writeValue(autoToggleState.dataItem.value === 1 ? 0 : 1)
 
 		SettingSync {
 			id: autoToggleState
-			backendValue: autoState.value
-			onUpdateToBackend: (value) => { autoState.setValue(value) }
+			dataItem: autoState
 		}
 
 		VeQuickItem {
@@ -74,8 +73,9 @@ FocusScope {
 
 		SettingSync {
 			id: toggleState
-			backendValue: root.switchableOutput.state
-			onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/State"
+			}
 		}
 	}
 }

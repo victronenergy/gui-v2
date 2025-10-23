@@ -99,8 +99,9 @@ FocusScope {
 
 		SettingSync {
 			id: multiStepState
-			backendValue: root.switchableOutput.state
-			onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/State"
+			}
 		}
 	}
 }

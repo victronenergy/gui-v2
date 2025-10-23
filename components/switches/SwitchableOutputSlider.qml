@@ -9,24 +9,17 @@ MiniSlider {
 	id: root
 
 	required property SwitchableOutput switchableOutput
+	property alias valueItem: valueItem.uid
+	property int sourceUnit
+	property int displayUnit
 
 	// True if the slider value is being changed by the user (either by touch or key press)
 	readonly property bool dragging: pressed || _valueChangeKeyPressed
 	property bool _valueChangeKeyPressed
 
-	// Override these functions if the displayed value is different from the backend value.
-	property var fromDisplayValue: (v) => { return v }
-	property var toDisplayValue: (v) => { return v }
-
-	// The number of decimals in the /StepSize value. Use this to determine the number of decimals
-	// to be used when showing the selected value.
-	readonly property int stepSizeDecimalCount: stepSizeItem.valid
-			? stepSizeItem.value.toString().split(".")[1]?.length ?? 0
-			: 0
-
-	from: dimmingMinItem.valid ? toDisplayValue(dimmingMinItem.value) : 0
-	to: dimmingMaxItem.valid ? toDisplayValue(dimmingMaxItem.value) : 100
-	stepSize: stepSizeItem.valid ? toDisplayValue(stepSizeItem.value) : 1
+	from: dimmingMinItem.valid ? dimmingMinItem.value : 0
+	to: dimmingMaxItem.valid ? dimmingMaxItem.value : 100
+	stepSize: stepSizeItem.valid ? stepSizeItem.value : 1
 
 	onDraggingChanged: {
 		if (dragging) {
@@ -38,12 +31,12 @@ MiniSlider {
 			// (via the onMoved handler) to wait for the backend to get the updated value, before
 			// syncing the backend value back to the slider, else the handle will briefly jump back
 			// to the old backend value before updating to the new one.
-			dimmingValue.syncBackendValueToSlider()
+			valueSync.syncBackendValueToSlider()
 		}
 	}
 
 	onMoved: {
-		dimmingValue.writeValue(fromDisplayValue(value))
+		valueItem.setValue(value)
 	}
 
 	Keys.onPressed: (event) => {
@@ -69,20 +62,33 @@ MiniSlider {
 	KeyNavigationHighlight.active: root.activeFocus
 
 	VeQuickItem {
+		id: valueItem
+		uid: root.switchableOutput.uid + "/Dimming"
+		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
+		displayUnit: Units.unitToVeUnit(root.displayUnit)
+		onValueChanged: valueSync.syncBackendValueToSlider()
+	}
+	VeQuickItem {
 		id: dimmingMaxItem
 		uid: root.switchableOutput.uid + "/Settings/DimmingMax"
+		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
+		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 	VeQuickItem {
 		id: dimmingMinItem
 		uid: root.switchableOutput.uid + "/Settings/DimmingMin"
+		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
+		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 	VeQuickItem {
 		id: stepSizeItem
 		uid: root.switchableOutput.uid + "/Settings/StepSize"
+		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
+		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 
 	SettingSync {
-		id: dimmingValue
+		id: valueSync
 
 		// Update the slider value to the backend value.
 		function syncBackendValueToSlider() {
@@ -92,13 +98,11 @@ MiniSlider {
 			if (busy || root.dragging || delayedSliderUpdate.running) {
 				delayedSliderUpdate.restart()
 			} else {
-				root.value = root.toDisplayValue(backendValue)
+				root.value = dataItem.value ?? 0
 			}
 		}
 
-		backendValue: switchableOutput.dimming
-		onUpdateToBackend: (value) => { switchableOutput.setDimming(value) }
-		onBackendValueChanged: syncBackendValueToSlider()
+		dataItem: valueItem
 		onBusyChanged: if (!busy) syncBackendValueToSlider()
 	}
 
@@ -108,6 +112,6 @@ MiniSlider {
 	Timer {
 		id: delayedSliderUpdate
 		interval: 1000
-		onTriggered: dimmingValue.syncBackendValueToSlider()
+		onTriggered: valueSync.syncBackendValueToSlider()
 	}
 }
