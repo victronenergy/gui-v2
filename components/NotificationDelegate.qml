@@ -10,8 +10,8 @@ import Victron.VenusOS
 BaseListItem {
 	id: root
 
-	required property BaseNotification notification
-	required property int notificationId
+	required property int modelId
+
 	required property bool active
 	required property bool acknowledged
 	required property int type
@@ -20,22 +20,15 @@ BaseListItem {
 	required property string deviceName
 	required property string value
 
+	readonly property bool historical: root.acknowledged && !root.active
+	readonly property notificationData entry: NotificationModel.get(modelId)
+
 	width: parent ? parent.width : 0
 	height: textColumn.height
 
-	Rectangle {
-		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
-			left: parent.left
-			leftMargin: Theme.geometry_notificationsPage_delegate_marker_topMargin
-		}
-		width: Theme.geometry_notificationsPage_delegate_marker_width
-		height: Theme.geometry_notificationsPage_delegate_marker_width
-		radius: Theme.geometry_notificationsPage_delegate_marker_radius
-		color: Theme.color_critical
-		visible: !root.acknowledged
-	}
+	background.border.width: root.acknowledged ? 0 : Theme.geometry_notificationsPage_delegate_unacknowledged_border_width
+	background.border.color: Theme.color_notificationsPage_delegate_unacknowledged_border
+	background.color: root.acknowledged ? Theme.color_listItem_background : Theme.color_notificationsPage_delegate_unacknowledged_background
 
 	Item {
 		id: iconContainer
@@ -47,10 +40,10 @@ BaseListItem {
 			id: icon
 			anchors.centerIn: parent
 			color: root.type === VenusOS.Notification_Info
-				   ? (root.active ? Theme.color_ok : Theme.color_darkOk)
-				   : root.type === VenusOS.Notification_Warning
-					 ? (root.active ? Theme.color_warning : Theme.color_darkWarning)
-					 : (root.active ? Theme.color_critical : Theme.color_darkCritical)
+				? (root.historical ? Theme.color_darkOk : Theme.color_ok)
+				: root.type === VenusOS.Notification_Warning
+					? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
+					: (root.historical ? Theme.color_darkCritical : Theme.color_critical)
 			source: root.type === VenusOS.Notification_Info
 					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
 		}
@@ -76,7 +69,7 @@ BaseListItem {
 			wrapMode: Text.Wrap
 			visible: root.description.length > 0 || root.value.length > 0
 			elide: Text.ElideRight
-			color: Theme.color_font_primary
+			color: root.historical ? Theme.color_font_secondary : Theme.color_font_primary
 			font.pixelSize: Theme.font_size_body2
 			//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
 			//% "%1 %2"
@@ -87,7 +80,7 @@ BaseListItem {
 			width: parent.width
 			wrapMode: Text.Wrap
 			visible: text.length > 0
-			color: Theme.color_listItem_secondaryText
+			color: root.historical ? Theme.color_font_disabled : Theme.color_font_secondary
 			font.pixelSize: descriptionLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
 			text: root.deviceName
 		}
