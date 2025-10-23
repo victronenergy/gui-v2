@@ -20,7 +20,7 @@ Page {
 		secondaryText: VenusOS.microgridModeToText(mode.value)
 	}
 
-	component FromAToBListText: ListText {
+	component ListValueRange: ListText {
 		property int unitType: VenusOS.Units_None
 		property alias dataItemFrom: dataItemFrom
 		property alias dataItemTo: dataItemTo
@@ -151,7 +151,7 @@ Page {
 					text: qsTrId("page_microgrid_minimum_and_maximum_parameters")
 				}
 
-				FromAToBListText {
+				ListValueRange {
 					//% "Allowed active power range"
 					text: qsTrId("page_microgrid_allowed_active_power_range")
 					unitType: VenusOS.Units_Watt
@@ -159,7 +159,7 @@ Page {
 					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
 				}
 
-				FromAToBListText {
+				ListValueRange {
 					//% "Allowed reactive power range"
 					text: qsTrId("page_microgrid_allowed_reactive_power_range")
 					unitType: VenusOS.Units_VoltAmpereReactive
@@ -181,28 +181,36 @@ Page {
 					text: qsTrId("page_microgrid_p_q_direct_drive_settings")
 				}
 
-				ListText {
+				ListQuantity {
 					//% "Active power setpoint (P)"
 					text: qsTrId("page_microgrid_active_power_setpoint_p")
-					// TODO: secondaryText:
+					dataItem.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/P"
+					unit: VenusOS.Units_Percentage
+					precision: 0
 				}
 
-				ListText {
+				ListQuantity {
 					//% "Reactive power setpoint (Q)"
 					text: qsTrId("page_microgrid_reactive_power_setpoint_q")
-					// TODO: secondaryText:
+					dataItem.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/Q"
+					unit: VenusOS.Units_Percentage
+					precision: 0
 				}
 
-				ListText {
+				ListValueRange {
 					//% "Allowed frequency range"
 					text: qsTrId("page_microgrid_allowed_frequency_range")
-					// TODO: secondaryText:
+					unitType: VenusOS.Units_Hertz
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/Fmin"
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/Fmax"
 				}
 
-				ListText {
+				ListValueRange {
 					//% "Allowed voltage range"
 					text: qsTrId("page_microgrid_allowed_voltage_range")
-					// TODO: secondaryText:
+					unitType: VenusOS.Units_Volt_AC
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/Umin"
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DirectDrivePQ/Umax"
 				}
 			}
 		}
@@ -219,16 +227,20 @@ Page {
 					text: qsTrId("page_microgrid_v_f_direct_drive_settings")
 				}
 
-				ListText {
+				ListQuantity {
 					//% "Voltage setpoint (U)"
 					text: qsTrId("page_microgrid_voltage_setpoint")
-					// TODO: secondaryText:
+					dataItem.uid: root.bindPrefix + "/MicroGrid/DirectDriveVf/U"
+					unit: VenusOS.Units_Volt_AC
+					precision: 1
 				}
 
-				ListText {
+				ListQuantity {
 					//% "Frequency setpoint (f)"
 					text: qsTrId("page_microgrid_frequency_setpoint")
-					// TODO: secondaryText:
+					dataItem.uid: root.bindPrefix + "/MicroGrid/DirectDriveVf/F"
+					unit: VenusOS.Units_Hertz
+					precision: 1
 				}
 			}
 		}
