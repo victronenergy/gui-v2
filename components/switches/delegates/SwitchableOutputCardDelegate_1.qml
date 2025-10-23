@@ -21,7 +21,7 @@ Item {
 	Keys.onPressed: (event) => {
 		switch (event.key) {
 		case Qt.Key_Space:
-			toggleState.writeValue(toggleState.backendValue === 1 ? 0 : 1)
+			toggleState.writeValue(toggleState.dataItem.value === 1 ? 0 : 1)
 			event.accepted = true
 		}
 	}
@@ -57,8 +57,9 @@ Item {
 
 		SettingSync {
 			id: toggleState
-			backendValue: root.switchableOutput.state
-			onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/State"
+			}
 		}
 	}
 }

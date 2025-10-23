@@ -13,6 +13,7 @@
 #include <qqmlintegration.h>
 
 #include "basedevice.h"
+#include "enums.h"
 
 #include <veutil/qt/ve_qitem.hpp>
 
@@ -31,6 +32,18 @@ namespace VenusOS {
 
 	System relays configured with a "manual" function are also published as switchable outputs, at:
 		com.victronenergy.system/SwitchableOutput/<outputId>
+
+
+	Units
+	-----
+
+	The /Settings/Unit value may be one of these special strings:
+	  "\S" (speed - metres/sec)
+	  "\T" (temperature - celsius)
+	  "\V" (volume - m3)
+
+	If so, the unitType reflects the unit type according to Enums::Units_Type.
+	The raw /Settings/Unit value is provided by the unitText property.
 */
 class SwitchableOutput : public QObject
 {
@@ -46,6 +59,9 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(int type READ type NOTIFY typeChanged FINAL)
 	Q_PROPERTY(QString group READ group NOTIFY groupChanged FINAL)
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
+	Q_PROPERTY(QString unitText READ unitText NOTIFY unitTextChanged FINAL)
+	Q_PROPERTY(int unitType READ unitType NOTIFY unitTypeChanged FINAL)
+	Q_PROPERTY(int stepSizeDecimals READ stepSizeDecimals NOTIFY stepSizeDecimalsChanged FINAL)
 
 public:
 	// Construct without a uid.
@@ -81,6 +97,9 @@ public:
 	// Output/channel settings (under /Settings sub-path)
 	int type() const;
 	QString group() const;
+	QString unitText() const; // The raw /Unit value
+	int unitType() const; // The unit, converted to a Unit_Type value (if applicable)
+	int stepSizeDecimals() const; // The number of decimals in the stepSize
 
 	Q_INVOKABLE void setState(int state);
 	Q_INVOKABLE void setDimming(qreal dimming);
@@ -96,11 +115,16 @@ Q_SIGNALS:
 	void typeChanged();
 	void groupChanged();
 	void allowedInGroupModelChanged();
+	void unitTextChanged();
+	void unitTypeChanged();
+	void stepSizeDecimalsChanged();
 
 private:
 	void initialize(VeQItem *outputItem);
 	void reset();
 	void setType(const QVariant &typeValue);
+	void setUnit(const QVariant &unitValue);
+	void setStepSize(const QVariant &stepSizeVariant);
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
 
@@ -126,6 +150,9 @@ private:
 
 	QString m_serviceUid;
 	QString m_formattedName;
+	QString m_unitText;
+	int m_unitType = Enums::Units_None;
+	int m_stepSizeDecimals = 0;
 	bool m_allowedInGroupModel = false;
 };
 

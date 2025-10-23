@@ -277,6 +277,14 @@ QtObject {
 					  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						? VenusOS.Units_Volume_GallonImperial
 						: VenusOS.Units_Volume_CubicMetre)
+			Global.systemSettings.setSpeedUnit(
+					Global.systemSettings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
+					? VenusOS.Units_Speed_MetresPerSecond
+					: Global.systemSettings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
+					  ? VenusOS.Units_Speed_Knots
+					  : Global.systemSettings.speedUnit === VenusOS.Units_Speed_Knots
+						? VenusOS.Units_Speed_MilesPerHour
+						: VenusOS.Units_Speed_KilometresPerHour)
 
 			pageConfigTitle.text = "Units: "
 					+ (Global.systemSettings.electricalQuantity === VenusOS.Units_Watt
@@ -291,7 +299,14 @@ QtObject {
 						 ? "Litres"
 						 : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						   ? "Gallons (US)"
-						   : "Gallons (Imperial)")
+						   : "Gallons (Imperial)") + " | "
+					+ (Global.systemSettings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
+					   ? "km/h"
+					   : Global.systemSettings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
+						 ? "m/s"
+						 : Global.systemSettings.speedUnit === VenusOS.Units_Speed_Knots
+						   ? "kt"
+						   : "mph")
 			break
 		case Qt.Key_V:
 			pageConfigTitle.text = "Remove Levels page"

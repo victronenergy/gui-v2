@@ -49,7 +49,17 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
-		secondaryTitle: slider.value.toFixed(slider.stepSizeDecimalCount) + (unitItem.value || "")
+		secondaryTitle: "%1<font color=\"%3\">%4</font>"
+				.arg(quantityInfo.number)
+				.arg(Theme.color_font_secondary)
+				.arg(quantityInfo.unit || root.switchableOutput.unitText)
+
+		QuantityInfo {
+			id: quantityInfo
+			value: slider.value // already in the display unit
+			unitType: Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType)
+			precision: root.switchableOutput.stepSizeDecimals
+		}
 	}
 
 	SwitchableOutputSlider {
@@ -63,10 +73,7 @@ FocusScope {
 			top: header.bottom
 		}
 		switchableOutput: root.switchableOutput
-	}
-
-	VeQuickItem {
-		id: unitItem
-		uid: root.switchableOutput.uid + "/Settings/Unit"
+		sourceUnit: root.switchableOutput.unitType
+		displayUnit: Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType)
 	}
 }
