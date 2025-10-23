@@ -680,6 +680,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_devices_32.png
     images/icon_general_32.png
     images/icon_integration_32.png
+    images/icon_qr_code_scanner_phone.svg
     images/icon_smartswitch_off_32.svg
     images/icon_smartswitch_on_32.svg
     images/icon_system_32.png

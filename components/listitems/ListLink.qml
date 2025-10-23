@@ -53,9 +53,7 @@ ListItem {
 				onClicked: Global.dialogLayer.open(largeQrCodeComponent)
 				backgroundColor: Theme.color_white
 				contentItem: Image {
-					source: root.mode === VenusOS.ListLink_Mode_QRCode
-							? `image://QZXing/encode/${root.url}?correctionLevel=M&format=qrcode`
-							: ""
+					source: "qrc:/images/icon_qr_code_scanner_phone.svg"
 					sourceSize.width: Theme.geometry_listLink_qrCodeSize
 					sourceSize.height: Theme.geometry_listLink_qrCodeSize
 					fillMode: Image.PreserveAspectFit
@@ -66,7 +64,7 @@ ListItem {
 
 	caption: root.mode === VenusOS.ListLink_Mode_LinkButton ? ""
 															  //: %1 = url text
-															  //% "Scan the QR code with your portable device.<br />Or insert the link: %1"
+															  //% "Open the QR code to scan it with your portable device.<br />Or insert the link: %1"
 															: qsTrId("listlink_scan_qr_code").arg(formattedUrl)
 
 	onClicked: BackendConnection.openUrl(root.url)
