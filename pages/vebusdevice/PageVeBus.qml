@@ -197,7 +197,7 @@ DevicePage {
 
 			VeQuickItem {
 				id: mode
-				uid: root.bindPrefix + "/Mode"
+				uid: root.bindPrefix + "/MicroGrid/Mode"
 			}
 		}
 
