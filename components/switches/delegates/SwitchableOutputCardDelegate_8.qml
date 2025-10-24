@@ -109,7 +109,7 @@ FocusScope {
 		SpinBoxDecimalConverter {
 			id: decimalConverter
 
-			decimals: root.switchableOutput.stepSizeDecimals
+			decimals: root.switchableOutput.decimals
 			from: numericInputMin.valid ? numericInputMin.value : 0
 			to: numericInputMax.valid ? numericInputMax.value : 100
 			stepSize: numericInputStepSize.valid ? numericInputStepSize.value : 1

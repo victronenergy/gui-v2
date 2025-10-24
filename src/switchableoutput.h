@@ -61,7 +61,7 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
 	Q_PROPERTY(QString unitText READ unitText NOTIFY unitTextChanged FINAL)
 	Q_PROPERTY(int unitType READ unitType NOTIFY unitTypeChanged FINAL)
-	Q_PROPERTY(int stepSizeDecimals READ stepSizeDecimals NOTIFY stepSizeDecimalsChanged FINAL)
+	Q_PROPERTY(int decimals READ decimals NOTIFY decimalsChanged FINAL)
 
 public:
 	// Construct without a uid.
@@ -99,7 +99,7 @@ public:
 	QString group() const;
 	QString unitText() const; // The raw /Unit value
 	int unitType() const; // The unit, converted to a Unit_Type value (if applicable)
-	int stepSizeDecimals() const; // The number of decimals in the stepSize
+	int decimals() const; // The number of decimals from /Decimals or the /StepSize
 
 	Q_INVOKABLE void setState(int state);
 	Q_INVOKABLE void setDimming(qreal dimming);
@@ -117,14 +117,16 @@ Q_SIGNALS:
 	void allowedInGroupModelChanged();
 	void unitTextChanged();
 	void unitTypeChanged();
-	void stepSizeDecimalsChanged();
+	void decimalsChanged();
 
 private:
 	void initialize(VeQItem *outputItem);
 	void reset();
 	void setType(const QVariant &typeValue);
 	void setUnit(const QVariant &unitValue);
-	void setStepSize(const QVariant &stepSizeVariant);
+	void setDecimals(const QVariant &decimalsVariant);
+	void updateDecimalsFromStepSize(const QVariant &stepSizeVariant);
+	void updateDecimals();
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
 
@@ -151,8 +153,10 @@ private:
 	QString m_serviceUid;
 	QString m_formattedName;
 	QString m_unitText;
+	QString m_stepSizeString;
 	int m_unitType = Enums::Units_None;
-	int m_stepSizeDecimals = 0;
+	int m_rawDecimals = -1;
+	int m_decimals = 0;
 	bool m_allowedInGroupModel = false;
 };
 
