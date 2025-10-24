@@ -55,8 +55,10 @@ ListNavigation {
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
 	onClicked: {
-		// onClicked is not emitted if interactive: false
-		Global.pageManager.pushPage(optionsPageComponent, { title: Qt.binding(function() { return root.text }) })
+		// Open the options page if the user has write access; otherwise, show the toast error.
+		if (root.checkWriteAccessLevel()) {
+			Global.pageManager.pushPage(optionsPageComponent, { title: Qt.binding(function() { return root.text }) })
+		}
 	}
 
 	VeQuickItem {
