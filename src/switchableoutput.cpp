@@ -83,11 +83,17 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 	} else {
 		setUnit(QVariant());
 	}
-	if (VeQItem *stepSizeItem = m_outputItem->itemGet(QStringLiteral("Settings/StepSize"))) {
-		connect(stepSizeItem, &VeQItem::valueChanged, this, &SwitchableOutput::setStepSize);
-		setStepSize(stepSizeItem->getValue());
+	if (VeQItem *decimalsItem = m_outputItem->itemGet(QStringLiteral("Settings/Decimals"))) {
+		connect(decimalsItem, &VeQItem::valueChanged, this, &SwitchableOutput::setDecimals);
+		setDecimals(decimalsItem->getValue());
 	} else {
-		setStepSize(QVariant());
+		setDecimals(QVariant());
+	}
+	if (VeQItem *stepSizeItem = m_outputItem->itemGet(QStringLiteral("Settings/StepSize"))) {
+		connect(stepSizeItem, &VeQItem::valueChanged, this, &SwitchableOutput::updateDecimalsFromStepSize);
+		updateDecimalsFromStepSize(stepSizeItem->getValue());
+	} else {
+		updateDecimalsFromStepSize(QVariant());
 	}
 
 	// Update the formatted name when the device's product/custom name or device instance changes.
@@ -130,7 +136,8 @@ void SwitchableOutput::reset()
 
 	// Clear properties for which there are no VeQItem members.
 	setUnit(QVariant());
-	setStepSize(QVariant());
+	setDecimals(QVariant());
+	updateDecimalsFromStepSize(QVariant());
 
 	if (m_device) {
 		m_device->disconnect(this);
@@ -253,9 +260,9 @@ int SwitchableOutput::unitType() const
 	return m_unitType;
 }
 
-int SwitchableOutput::stepSizeDecimals() const
+int SwitchableOutput::decimals() const
 {
-	return m_stepSizeDecimals;
+	return m_decimals;
 }
 
 QString SwitchableOutput::unitText() const
@@ -308,18 +315,36 @@ void SwitchableOutput::setUnit(const QVariant &unitValue)
 	}
 }
 
-void SwitchableOutput::setStepSize(const QVariant &stepSizeVariant)
+void SwitchableOutput::setDecimals(const QVariant &decimalsVariant)
 {
-	// Returns the number of decimals in the /StepSize value (without any unit conversions).
-	const QString stepSizeText = stepSizeVariant.toString();
-	const int separatorIndex = stepSizeText.indexOf('.');
+	bool valid = false;
+	const int decimals = decimalsVariant.toInt(&valid);
+	m_rawDecimals = valid ? decimals : -1;
+	updateDecimals();
+}
+
+void SwitchableOutput::updateDecimalsFromStepSize(const QVariant &stepSizeVariant)
+{
+	m_stepSizeString = stepSizeVariant.toString();
+	updateDecimals();
+}
+
+void SwitchableOutput::updateDecimals()
+{
+	// If /Decimals is set, use that. Otherwise, use the number of decimals found in the /StepSize
+	// value (which may be zero).
 	int decimalCount = 0;
-	if (separatorIndex >= 0) {
-		decimalCount = stepSizeText.length() - separatorIndex - 1;
+	if (m_rawDecimals >= 0) {
+		decimalCount = m_rawDecimals;
+	} else {
+		const int separatorIndex = m_stepSizeString.indexOf('.');
+		if (separatorIndex >= 0) {
+			decimalCount = m_stepSizeString.length() - separatorIndex - 1;
+		}
 	}
-	if (decimalCount != m_stepSizeDecimals) {
-		m_stepSizeDecimals = decimalCount;
-		emit stepSizeDecimalsChanged();
+	if (decimalCount != m_decimals) {
+		m_decimals = decimalCount;
+		emit decimalsChanged();
 	}
 }
 

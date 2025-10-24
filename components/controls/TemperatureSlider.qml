@@ -123,7 +123,7 @@ SwitchableOutputSlider {
 				horizontalAlignment: Text.AlignHCenter
 				verticalAlignment: Text.AlignVCenter
 				font.pixelSize: Theme.font_size_h2
-				text: root.value.toFixed(root.switchableOutput.stepSizeDecimals) + Units.degreesSymbol
+				text: root.value.toFixed(root.switchableOutput.decimals) + Units.degreesSymbol
 				color: Theme.color_button_down_text
 
 				SeparatorBar {

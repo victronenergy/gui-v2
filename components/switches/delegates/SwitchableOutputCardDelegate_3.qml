@@ -51,12 +51,12 @@ FocusScope {
 		switchableOutput: root.switchableOutput
 		secondaryTitle: measurementItem.valid
 			? "%1%2/<font color=\"%3\">%4</font>%5"
-					.arg(slider.value.toFixed(root.switchableOutput.stepSizeDecimals))
+					.arg(slider.value.toFixed(root.switchableOutput.decimals))
 					.arg(Units.degreesSymbol)
 					.arg(Theme.color_font_secondary)
-					.arg(measurementItem.value.toFixed(root.switchableOutput.stepSizeDecimals))
+					.arg(measurementItem.value.toFixed(root.switchableOutput.decimals))
 					.arg(Global.systemSettings.temperatureUnitSuffix)
-			: slider.value.toFixed(root.switchableOutput.stepSizeDecimals) + Global.systemSettings.temperatureUnitSuffix
+			: slider.value.toFixed(root.switchableOutput.decimals) + Global.systemSettings.temperatureUnitSuffix
 	}
 
 	VeQuickItem {
@@ -77,6 +77,6 @@ FocusScope {
 			top: header.bottom
 		}
 		switchableOutput: root.switchableOutput
-		measurementText: measurementItem.valid ? measurementItem.value.toFixed(root.switchableOutput.stepSizeDecimals) + Units.degreesSymbol : ""
+		measurementText: measurementItem.valid ? measurementItem.value.toFixed(root.switchableOutput.decimals) + Units.degreesSymbol : ""
 	}
 }
