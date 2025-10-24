@@ -524,8 +524,8 @@ public:
 		SwitchableOutput_Status_On = 0x09,  //inputActive + active
 		SwitchableOutput_Status_Short_Fault = 0x10,
 		SwitchableOutput_Status_Disabled = 0x20,
-        SwitchableOutput_Status_TripLowVoltage = 0x22,
-        SwitchableOutput_Status_Bypassed = 0x40
+		SwitchableOutput_Status_TripLowVoltage = 0x22,
+		SwitchableOutput_Status_Bypassed = 0x40
 	};
 	Q_ENUM(SwitchableOutput_Status)
 
