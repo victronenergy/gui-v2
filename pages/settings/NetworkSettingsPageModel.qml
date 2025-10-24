@@ -125,6 +125,7 @@ VisibleItemModel {
 
 	ListIpAddressField {
 		interactive: networkServices.manual
+		writeAccessLevel: VenusOS.User_AccessType_User
 		textField.text: networkServices.ipAddress
 		saveInput: function() { networkServices.setServiceProperty("Address", textField.text) }
 	}
@@ -133,6 +134,7 @@ VisibleItemModel {
 		//% "Netmask"
 		text: qsTrId("settings_tcpip_netmask")
 		interactive: method.userHasWriteAccess && networkServices.manual
+		writeAccessLevel: VenusOS.User_AccessType_User
 		textField.text: networkServices.netmask
 		saveInput: function() { networkServices.setServiceProperty("Netmask", textField.text) }
 	}
@@ -141,6 +143,7 @@ VisibleItemModel {
 		//% "Gateway"
 		text: qsTrId("settings_tcpip_gateway")
 		interactive: method.userHasWriteAccess && networkServices.manual
+		writeAccessLevel: VenusOS.User_AccessType_User
 		textField.text: networkServices.gateway
 		saveInput: function() { networkServices.setServiceProperty("Gateway", textField.text) }
 	}
@@ -149,6 +152,7 @@ VisibleItemModel {
 		//% "DNS server"
 		text: qsTrId("settings_tcpip_dns_server")
 		interactive: method.userHasWriteAccess && networkServices.manual
+		writeAccessLevel: VenusOS.User_AccessType_User
 		textField.text: networkServices.nameserver
 		saveInput: function() { networkServices.setServiceProperty("Nameserver", textField.text) }
 	}

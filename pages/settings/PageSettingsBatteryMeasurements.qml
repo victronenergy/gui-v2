@@ -93,6 +93,7 @@ Page {
 								text: root._visibleText
 								preferredVisible: !batteryMenuItem.activeBattery
 								dataItem.uid: batteryEnabled.uid
+								writeAccessLevel: VenusOS.User_AccessType_User
 							}
 
 							ListTextField {
