@@ -114,6 +114,7 @@
         "/SwitchableOutput/temp_setpoint_1/Settings/DimmingMin": -1.5,
         "/SwitchableOutput/temp_setpoint_1/Settings/DimmingMax": 1.5,
         "/SwitchableOutput/temp_setpoint_1/Settings/StepSize": 0.5,
+        "/SwitchableOutput/temp_setpoint_1/Settings/Decimals": 2,
         "/SwitchableOutput/temp_setpoint_1/Settings/Type": 3,
         "/SwitchableOutput/temp_setpoint_1/Settings/ValidFunctions": 2,
         "/SwitchableOutput/temp_setpoint_1/Settings/ValidTypes": 8191,

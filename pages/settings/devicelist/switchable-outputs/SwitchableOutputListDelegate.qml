@@ -24,7 +24,7 @@ ListQuantityGroupNavigation {
 			object: output
 			key: !isNaN(output.dataNumber) ? "dataNumber" : "dataText"
 			unit: output.dataNumberUnit
-			precision: output.stepSizeDecimals
+			precision: output.decimals
 		}
 		QuantityObject { object: output; key: output.secondaryDataText ? "secondaryDataText" : ""; unit: VenusOS.Units_None }
 		QuantityObject { object: output; key: "typeText" }
