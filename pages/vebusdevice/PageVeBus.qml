@@ -44,6 +44,7 @@ DevicePage {
 			//% "Press to update"
 			secondaryText: qsTrId("vebus_device_press_to_update")
 			preferredVisible: mk3firmware.visible
+			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: {
 				//% "Updating the MK3, values will reappear after the update is complete"
 				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_updating_the_mk3"), 10000)
