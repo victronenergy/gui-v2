@@ -10,6 +10,7 @@ GradientListView {
 	id: root
 
 	property alias ipAddresses: ipAddresses
+	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 
 	signal ipAddressUpdated(index : int, ipAddress : string)
 
@@ -19,6 +20,7 @@ GradientListView {
 		id: ipAddressDelegate
 
 		property RemoveButton removalButton: RemoveButton {
+			visible: ipAddressDelegate.clickable
 			onClicked: {
 				Global.dialogLayer.open(removalDialogComponent, { description: modelData })
 			}
@@ -30,11 +32,13 @@ GradientListView {
 
 		content.children: [
 			defaultContent,
+			readonlyLabel,
 			removalButton
 		]
 
-		Keys.onSpacePressed: removalButton.clicked()
-		Keys.enabled: Global.keyNavigationEnabled
+		interactive: true
+		writeAccessLevel: root.writeAccessLevel
+		onClicked: removalButton.clicked()
 	}
 
 	VeQuickItem {

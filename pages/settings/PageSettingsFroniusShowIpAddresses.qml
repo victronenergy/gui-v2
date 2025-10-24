@@ -9,7 +9,9 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	topRightButton: VenusOS.StatusBar_RightButton_Refresh
+	topRightButton: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+			? VenusOS.StatusBar_RightButton_Refresh
+			: VenusOS.StatusBar_RightButton_None
 
 	IpAddressListView {
 		id: settingsListView
