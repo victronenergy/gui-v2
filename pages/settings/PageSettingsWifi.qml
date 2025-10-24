@@ -30,6 +30,7 @@ Page {
 				text: qsTrId("settings_wifi_create_ap")
 				checked: accessPoint.value === 1
 				preferredVisible: accessPoint.valid
+				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					if (checked) {
 						Global.dialogLayer.open(confirmApDialogComponent)

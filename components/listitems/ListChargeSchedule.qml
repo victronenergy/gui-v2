@@ -115,6 +115,7 @@ ListNavigation {
 						text: CommonWords.enabled
 						checked: itemDay.valid && itemDay.value >= 0
 						checkable: true
+						writeAccessLevel: VenusOS.User_AccessType_User
 						onCheckedChanged: {
 							if (checked ^ itemDay.value >= 0) {
 								itemDay.setValue(toggleDay(itemDay.value))
