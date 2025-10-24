@@ -11,7 +11,7 @@ ListItem {
 
 	readonly property alias dataItem: dataItem
 	property alias checked: switchItem.checked
-	property alias checkable: switchItem.checkable
+	property bool checkable
 	property alias secondaryText: secondaryLabel.text
 	property bool updateDataOnClick: true
 	property bool invertSourceValue
@@ -44,7 +44,7 @@ ListItem {
 			leftInset: Theme.geometry_listItem_content_spacing
 			rightInset: root.flat ? Theme.geometry_listItem_flat_content_horizontalMargin : Theme.geometry_listItem_content_horizontalMargin
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
-			checkable: false
+			checkable: root.checkable && root.clickable
 			focusPolicy: Qt.NoFocus
 			showEnabled: root.clickable
 
