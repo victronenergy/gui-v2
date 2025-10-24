@@ -46,6 +46,7 @@ ListItem {
 			checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 			checkable: false
 			focusPolicy: Qt.NoFocus
+			showEnabled: root.clickable
 
 			onClicked: {
 				if (!root.checkWriteAccessLevel() || !root.clickable) {

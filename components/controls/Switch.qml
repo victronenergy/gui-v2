@@ -10,6 +10,8 @@ import Victron.VenusOS
 T.Switch {
 	id: root
 
+	property bool showEnabled: enabled
+
 	checkable: false
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
@@ -37,7 +39,7 @@ T.Switch {
 			height: Theme.geometry_switch_groove_height
 			radius: Theme.geometry_switch_indicator_width
 
-			color: root.enabled
+			color: root.showEnabled
 				   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
 				   : Theme.color_switch_groove_disabled
 			border.color: root.checked ? Theme.color_switch_groove_border_on
