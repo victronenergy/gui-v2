@@ -76,6 +76,26 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 		connect(showUIControlItem, &VeQItem::valueChanged, this, &SwitchableOutput::updateAllowedInGroupModel);
 	}
 
+	// Optional values - call itemGet() instead of itemGetOrCreate().
+	if (VeQItem *unitItem = m_outputItem->itemGet(QStringLiteral("Settings/Unit"))) {
+		connect(unitItem, &VeQItem::valueChanged, this, &SwitchableOutput::setUnit);
+		setUnit(unitItem->getValue());
+	} else {
+		setUnit(QVariant());
+	}
+	if (VeQItem *decimalsItem = m_outputItem->itemGet(QStringLiteral("Settings/Decimals"))) {
+		connect(decimalsItem, &VeQItem::valueChanged, this, &SwitchableOutput::setDecimals);
+		setDecimals(decimalsItem->getValue());
+	} else {
+		setDecimals(QVariant());
+	}
+	if (VeQItem *stepSizeItem = m_outputItem->itemGet(QStringLiteral("Settings/StepSize"))) {
+		connect(stepSizeItem, &VeQItem::valueChanged, this, &SwitchableOutput::setStepSize);
+		setStepSize(stepSizeItem->getValue());
+	} else {
+		setStepSize(QVariant());
+	}
+
 	// Update the formatted name when the device's product/custom name or device instance changes.
 	if (BaseDevice::serviceTypeFromUid(m_serviceUid) != QStringLiteral("system")) {
 		m_device = AllDevicesModel::create()->findDevice(m_serviceUid);
@@ -100,6 +120,7 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 
 void SwitchableOutput::reset()
 {
+	// Clear properties provided by VeQItem members.
 	const QList<QPointer<VeQItem> *> items = {
 		&m_outputItem,
 		&m_stateItem, &m_statusItem, &m_nameItem, &m_dimmingItem,
@@ -112,6 +133,12 @@ void SwitchableOutput::reset()
 			item->clear();
 		}
 	}
+
+	// Clear properties for which there are no VeQItem members.
+	setUnit(QVariant());
+	setDecimals(QVariant());
+	setStepSize(QVariant());
+
 	if (m_device) {
 		m_device->disconnect(this);
 		m_device.clear();
@@ -142,9 +169,7 @@ void SwitchableOutput::setUid(const QString &uid)
 	const QString prevGroup = group();
 	const bool prevAllowedInGroupModel = allowedInGroupModel();
 
-	if (m_outputItem) {
-		reset();
-	}
+	reset();
 
 	if (!uid.isEmpty()) {
 		if (VeQItem *outputItem = VeQItems::getRoot()->itemGet(uid)) {
@@ -230,6 +255,21 @@ bool SwitchableOutput::allowedInGroupModel() const
 	return m_allowedInGroupModel;
 }
 
+int SwitchableOutput::unitType() const
+{
+	return m_unitType;
+}
+
+int SwitchableOutput::decimals() const
+{
+	return m_decimals;
+}
+
+QString SwitchableOutput::unitText() const
+{
+	return m_unitText;
+}
+
 void SwitchableOutput::setState(int state)
 {
 	if (m_stateItem) {
@@ -249,6 +289,63 @@ void SwitchableOutput::setType(const QVariant &typeValue)
 	Q_UNUSED(typeValue);
 	updateAllowedInGroupModel();
 	emit typeChanged();
+}
+
+void SwitchableOutput::setUnit(const QVariant &unitValue)
+{
+	const QString unitText = unitValue.toString();
+	int unitType = Enums::Units_None;
+
+	// get the base unit
+	if (unitText == QStringLiteral("\\S")) {
+		unitType = Enums::Units_Speed_MetresPerSecond;
+	} else if (unitText == QStringLiteral("\\T")) {
+		unitType = Enums::Units_Temperature_Celsius;
+	} else if (unitText == QStringLiteral("\\V")) {
+		unitType = Enums::Units_Volume_CubicMetre;
+	}
+
+	if (unitType != m_unitType) {
+		m_unitType = unitType;
+		emit unitTypeChanged();
+	}
+	if (unitText != m_unitText) {
+		m_unitText = unitText;
+		emit unitTextChanged();
+	}
+}
+
+void SwitchableOutput::setDecimals(const QVariant &decimalsVariant)
+{
+	bool valid = false;
+	const int decimals = decimalsVariant.toInt(&valid);
+	m_rawDecimals = valid ? decimals : -1;
+	updateDecimals();
+}
+
+void SwitchableOutput::setStepSize(const QVariant &stepSizeVariant)
+{
+	m_stepSizeString = stepSizeVariant.toString();
+	updateDecimals();
+}
+
+void SwitchableOutput::updateDecimals()
+{
+	// If /Decimals is set, use that. Otherwise, use the number of decimals found in the /StepSize
+	// value (which may be zero).
+	int decimalCount = 0;
+	if (m_rawDecimals >= 0) {
+		decimalCount = m_rawDecimals;
+	} else {
+		const int separatorIndex = m_stepSizeString.indexOf('.');
+		if (separatorIndex >= 0) {
+			decimalCount = m_stepSizeString.length() - separatorIndex - 1;
+		}
+	}
+	if (decimalCount != m_decimals) {
+		m_decimals = decimalCount;
+		emit decimalsChanged();
+	}
 }
 
 void SwitchableOutput::updateAllowedInGroupModel()

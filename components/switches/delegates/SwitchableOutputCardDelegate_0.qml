@@ -69,7 +69,7 @@ Item {
 			|| momentaryState.busy
 
 		// Only show the press effect when the backend has written the state succesfully.
-		pressEffectRunning: momentaryState.backendValue === 1
+		pressEffectRunning: momentaryState.dataItem.value === 1
 
 		onPressed: momentaryState.writeValue(1)
 		onReleased: momentaryState.writeValue(0)
@@ -77,8 +77,9 @@ Item {
 
 		SettingSync {
 			id: momentaryState
-			backendValue: root.switchableOutput.state
-			onUpdateToBackend: (value) => { root.switchableOutput.setState(value) }
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/State"
+			}
 		}
 	}
 }

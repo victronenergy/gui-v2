@@ -12,19 +12,18 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	// The value expected from the backend.
-	required property real backendValue
-
-	// True if a value has been written to the backend, and the backend is not yet in sync.
-	readonly property bool busy: _maxBusyTimer.running && backendValue !== _pendingValue
+	required property VeQuickItem dataItem
 
 	// If busy=true, this is the value that was written (but not yet present in the backend),
 	// otherwise this is the backend value.
-	readonly property real expectedValue: busy ? _pendingValue : backendValue
+	readonly property var expectedValue: busy ? _pendingValue : dataItem.value
 
-	property real _pendingValue: NaN
+	// True if a value has been written to the backend, and the backend is not yet in sync.
+	readonly property bool busy: _maxBusyTimer.running && dataItem.value !== _pendingValue
 
-	signal updateToBackend(real value)
+	property var _pendingValue
+	readonly property var _dataValue: dataItem.value
+
 	signal timeout()
 
 	// Note, it is valid to write a value that is the same as the pending or backend value:
@@ -34,11 +33,11 @@ QtObject {
 	function writeValue(v) {
 		_pendingValue = v
 		_maxBusyTimer.restart()
-		updateToBackend(v)
+		dataItem.setValue(v)
 	}
 
-	onBackendValueChanged: {
-		if (_pendingValue === backendValue) {
+	on_DataValueChanged: {
+		if (_pendingValue === dataItem.value) {
 			_maxBusyTimer.stop()
 		}
 	}

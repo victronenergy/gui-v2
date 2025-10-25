@@ -93,14 +93,15 @@ FocusScope {
 			id: dropdownSync
 
 			function syncValueToDropdown() {
-				if (backendValue >= 0 && backendValue < dropdown.count) {
-					dropdown.currentIndex = Math.floor(backendValue)
+				if (dataItem.value >= 0 && dataItem.value < dropdown.count) {
+					dropdown.currentIndex = Math.floor(dataItem.value)
 				}
 			}
 
-			backendValue: root.switchableOutput.dimming
-			onUpdateToBackend: (value) => { root.switchableOutput.setDimming(Math.floor(value)) }
-			onBackendValueChanged: syncValueToDropdown()
+			dataItem: VeQuickItem {
+				uid: root.switchableOutput.uid + "/Dimming"
+				onValueChanged: dropdownSync.syncValueToDropdown()
+			}
 			onTimeout: syncValueToDropdown()
 		}
 
@@ -115,7 +116,7 @@ FocusScope {
 						items.push({ text: text })
 					}
 					dropdown.model = items
-					dropdown.currentIndex = Math.floor(dropdownSync.backendValue)
+					dropdown.currentIndex = Math.floor(dropdownSync.dataItem.value)
 				}
 			}
 		}

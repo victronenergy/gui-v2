@@ -346,4 +346,123 @@ TestCase {
 			}
 		}
 	}
+
+	function test_unit_data() {
+		return [
+			{
+				tag: "no unit",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { State: 0 }, // add dummy value to ensure output has some properties
+				unitType: VenusOS.Units_None,
+				unitText: "",
+			},
+			{
+				tag: "custom unit",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "test test" },
+				unitType: VenusOS.Units_None,
+				unitText: "test test",
+			},
+			{
+				tag: "speed",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\S" },
+				unitType: VenusOS.Units_Speed_MetresPerSecond,
+				unitText: "\\S",
+			},
+			{
+				tag: "temperature",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\T" },
+				unitType: VenusOS.Units_Temperature_Celsius,
+				unitText: "\\T",
+			},
+			{
+				tag: "volume",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/Unit": "\\V" },
+				unitType: VenusOS.Units_Volume_CubicMetre,
+				unitText: "\\V",
+			},
+		]
+	}
+
+	function test_unit(data) {
+		compare(output.unitType, VenusOS.Units_None)
+		compare(output.unitText, "")
+
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.unitType, data.unitType)
+		compare(output.unitText, data.unitText)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+	}
+
+	function test_decimals_data() {
+		return [
+			{
+				tag: "no Decimals nor StepSize",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { State: 0 }, // add dummy value to ensure output has some properties
+				decimals: 0,
+			},
+			{
+				tag: "Decimals=0",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/Decimals": 0 },
+				decimals: 0,
+			},
+			{
+				tag: "StepSize=0",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/StepSize": 0 },
+				decimals: 0,
+			},
+			{
+				tag: "Decimals=1",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/Decimals": 1 },
+				decimals: 1,
+			},
+			{
+				tag: "StepSize=1",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/StepSize": 1 },
+				decimals: 1,
+			},
+			{
+				tag: "Decimals=0, StepSize=0",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/Decimals": 0, "/Settings/StepSize": 0 },
+				decimals: 0,
+			},
+			{
+				tag: "Decimals=0, StepSize=1",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/Decimals": 0, "/Settings/StepSize": 1 },
+				decimals: 0, // Decimals override
+			},
+			{
+				tag: "Decimals=1, StepSize=0",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "/Settings/Decimals": 1, "/Settings/StepSize": 0 },
+				decimals: 1, // Decimals override
+			},
+		]
+	}
+
+	function test_decimals(data) {
+		compare(output.decimals, 0)
+
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.decimals, output.decimals)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+	}
 }
