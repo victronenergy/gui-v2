@@ -11,7 +11,9 @@ Page {
 
 	property string settings: Global.systemSettings.serviceUid
 
-	topRightButton: VenusOS.StatusBar_RightButton_Add
+	topRightButton: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+		? VenusOS.StatusBar_RightButton_Add
+		: VenusOS.StatusBar_RightButton_None
 
 	Connections {
 		target: Global.mainView?.statusBar ?? null
@@ -46,6 +48,8 @@ Page {
 					id: modbusDeviceRepeater
 					model: _devices.value ? _devices.value.split(',') : []
 					delegate: ListItem {
+						id: modbusDeviceDelegate
+
 						property int deviceNumber: index + 1
 						property var deviceInfo: modelData.split(':')
 
@@ -83,6 +87,7 @@ Page {
 							},
 							RemoveButton {
 								id: removeButton
+								visible: modbusDeviceDelegate.clickable
 								onClicked: Global.dialogLayer.open(removeDeviceDialog,
 																   {
 																	   modbusDevice: modelData,
@@ -96,8 +101,9 @@ Page {
 							}
 						]
 
-						Keys.onSpacePressed: removeButton.clicked()
-						Keys.enabled: Global.keyNavigationEnabled
+						interactive: true
+						writeAccessLevel: VenusOS.User_AccessType_Installer
+						onClicked: removeButton.clicked()
 					}
 				}
 			}

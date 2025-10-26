@@ -213,10 +213,8 @@ ListItem {
 		readonlyLabel
 	]
 
-	SecondaryListLabel {
-		id: readonlyLabel
-
-		text: textField.text.length > 0 ? textField.text : "--"
+	readonly property SecondaryListLabel readonlyLabel: SecondaryListLabel {
+		text: textField.text.length > 0 ? textField.text + root.suffix : "--"
 		width: Math.min(implicitWidth, root.maximumContentWidth)
 		visible: !textField.visible && textField.echoMode !== TextInput.Password
 	}
