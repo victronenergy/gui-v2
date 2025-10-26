@@ -31,7 +31,6 @@ Page {
 		// eg: [[tcp,192.168.20.75,502,1],[tcp,192.168.21.234,502,1],[tcp,192.168.21.43,502,1]]
 	}
 
-
 	GradientListView {
 		header: PrimaryListLabel {
 			horizontalAlignment: Text.AlignHCenter
@@ -39,74 +38,64 @@ Page {
 			//% "No Modbus devices saved"
 			text: qsTrId("settings_modbus_no_devices_saved")
 		}
-		model: VisibleItemModel {
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: modbusDeviceRepeater.count > 0
+		model: _devices.value ? _devices.value.split(',') : []
+		delegate: ListItem {
+			id: modbusDeviceDelegate
 
-				Repeater {
-					id: modbusDeviceRepeater
-					model: _devices.value ? _devices.value.split(',') : []
-					delegate: ListItem {
-						id: modbusDeviceDelegate
+			property int deviceNumber: index + 1
+			property var deviceInfo: modelData.split(':')
 
-						property int deviceNumber: index + 1
-						property var deviceInfo: modelData.split(':')
+			//% "Device %1"
+			text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
+			content.spacing: 30
+			content.children: [
+				Label {
+					id: protocol
 
-						//% "Device %1"
-						text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
-						content.spacing: 30
-						content.children: [
-							Label {
-								id: protocol
+					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
+					text: deviceInfo[0].toUpperCase() // eg. 'TCP'
+					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
+				},
+				Label {
+					id: ipAddress
 
-								anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-								text: deviceInfo[0].toUpperCase() // eg. 'TCP'
-								width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-							},
-							Label {
-								id: ipAddress
+					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
+					text: deviceInfo[1] // IP address, eg. '192.168.21.234'
+					width: Math.max(implicitWidth, Theme.geometry_modbus_device_ip_address_width)
+				},
+				Label {
+					id: portNumber
 
-								anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-								text: deviceInfo[1] // IP address, eg. '192.168.21.234'
-								width: Math.max(implicitWidth, Theme.geometry_modbus_device_ip_address_width)
-							},
-							Label {
-								id: portNumber
+					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
+					text: deviceInfo[2] // port number, eg. 502
+					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
+				},
+				Label {
+					id: unitAddress
 
-								anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-								text: deviceInfo[2] // port number, eg. 502
-								width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-							},
-							Label {
-								id: unitAddress
-
-								anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
-								text: deviceInfo[3] // unit address
-								width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-							},
-							RemoveButton {
-								id: removeButton
-								visible: modbusDeviceDelegate.clickable
-								onClicked: Global.dialogLayer.open(removeDeviceDialog,
-																   {
-																	   modbusDevice: modelData,
-																	   description: protocol.text +" " +
-																					ipAddress.text + ":" +
-																					portNumber.text +
-																					" (Unit " +
-																					unitAddress.text +
-																					")"
-																   })
-							}
-						]
-
-						interactive: true
-						writeAccessLevel: VenusOS.User_AccessType_Installer
-						onClicked: removeButton.clicked()
-					}
+					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
+					text: deviceInfo[3] // unit address
+					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
+				},
+				RemoveButton {
+					id: removeButton
+					visible: modbusDeviceDelegate.clickable
+					onClicked: Global.dialogLayer.open(removeDeviceDialog,
+													   {
+														   modbusDevice: modelData,
+														   description: protocol.text +" " +
+																		ipAddress.text + ":" +
+																		portNumber.text +
+																		" (Unit " +
+																		unitAddress.text +
+																		")"
+													   })
 				}
-			}
+			]
+
+			interactive: true
+			writeAccessLevel: VenusOS.User_AccessType_Installer
+			onClicked: removeButton.clicked()
 		}
 	}
 
