@@ -82,7 +82,7 @@ FocusScope {
 		Rectangle {
 			anchors.fill: parent
 			radius: Theme.geometry_button_radius
-			color: Qt.hsva(currentColorDimmerData.color.hslHue,
+			color: Qt.hsva(currentColorDimmerData.color.hsvHue,
 						   currentColorDimmerData.color.hsvSaturation,
 						   1.0, 1.0)
 		}

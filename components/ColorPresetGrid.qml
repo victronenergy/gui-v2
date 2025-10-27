@@ -79,7 +79,7 @@ FocusScope {
 				border {
 					// Only display the hue and saturation for the stored color
 					color: parent.GridView.view.currentItem?.color.valid
-							? Qt.hsva(parent.GridView.view.currentItem.color.hslHue,
+							? Qt.hsva(parent.GridView.view.currentItem.color.hsvHue,
 								parent.GridView.view.currentItem.color.hsvSaturation,
 								1.0, 1.0)
 							: "transparent"
@@ -114,7 +114,7 @@ FocusScope {
 					// Only display the hue and saturation for the stored color
 					color: enabled
 						   ? (presetDelegate.color.valid
-								? Qt.hsva(presetDelegate.color.hslHue,
+								? Qt.hsva(presetDelegate.color.hsvHue,
 									presetDelegate.color.hsvSaturation,
 									1.0, 1.0)
 								: Theme.color_colorWheelDialog_preset_empty_button_border)
@@ -126,10 +126,10 @@ FocusScope {
 				radius: Theme.geometry_button_radius
 				// Only display the hue and saturation for the stored color
 				color: presetDelegate.color.valid
-						? Qt.hsva(presetDelegate.color.hslHue,
+						? Qt.hsva(presetDelegate.color.hsvHue,
 							presetDelegate.color.hsvSaturation,
 							1.0, 1.0)
-						: Theme.color_colorWheelDialog_preset_empty_button_border
+						: Theme.color_colorWheelDialog_preset_empty_button_background
 
 				PressArea {
 					id: presetPressArea

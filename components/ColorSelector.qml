@@ -344,12 +344,6 @@ Item {
 					: root.angleToColor(360 - mousearea.angle, 90 - colorGradient.angle, rightSlider.value)
 			border.width: Theme.geometry_colorWheel_selector_centre_borderWidth
 			border.color: Theme.color_background_secondary
-
-			onColorChanged: {
-				// Save the selected hue.
-				root.colorDimmerData.color.hsvHue = color.hsvHue
-				root.colorDimmerData.save()
-			}
 		}
 
 		MouseArea {
