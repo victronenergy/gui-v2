@@ -82,12 +82,19 @@ Page {
 				text: qsTrId("settings_shelly_refresh_devices")
 				//% "Press to refresh"
 				secondaryText: qsTrId("settings_shelly_press_to_refresh")
+				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: refreshItem.setValue(1)
 
 				VeQuickItem {
 					id: refreshItem
 					uid: root.serviceUid + "/Refresh"
 				}
+			}
+
+			ListNavigation {
+				//% "Add IP address manually"
+				text: qsTrId("page_settings_shelly_add_ip_address_manually")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShellySetIpAddresses.qml", {"title": text, bindPrefix: root.serviceUid})
 			}
 
 			SectionHeader {
@@ -99,6 +106,7 @@ Page {
 		delegate: ListSwitch {
 			text: sortValue
 			dataItem.uid: buddy.uid
+			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 	}
 }
