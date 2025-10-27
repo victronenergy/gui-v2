@@ -1794,8 +1794,8 @@ Use unless prohibited by the utility provider.</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="251"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="482"/>
       <source>Enabled (safe mode)</source>
@@ -3660,7 +3660,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Sensor batería</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="112"/>
       <source>Sensor battery</source>
       <translation>Sensor batería</translation>
     </message>
@@ -4051,8 +4051,33 @@ Use unless prohibited by the utility provider.</source>
       <source>Pressure</source>
       <translation>Presión</translation>
     </message>
+    <message id="temperature_pm25">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="70"/>
+      <source>PM2.5</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="temperature_co2">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
+      <source>CO₂</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="temperature_voc">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="86"/>
+      <source>VOC index</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="temperature_nox">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="94"/>
+      <source>NOx index</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="temperature_luminosity">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="102"/>
+      <source>Luminosity</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="133"/>
       <source>Low</source>
       <translation type="unfinished">Baja</translation>
     </message>
@@ -7216,47 +7241,47 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Dispositivos Modbus</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="62"/>
       <source>Bluetooth Sensors</source>
       <translation>Sensores de Bluetooth</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="74"/>
       <source>Physical I/O</source>
       <translation>I/O físico</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="84"/>
       <source>Tank and Temperature Sensors</source>
       <translation>Sensores del depósito y de temperatura</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="118"/>
       <source>Relays</source>
       <translation>Relés</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="139"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="132"/>
       <source>Digital I/O</source>
       <translation>I/O digital</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="201"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="194"/>
       <source>Server Applications</source>
       <translation>Aplicaciones del servidor</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_enable_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="219"/>
       <source>Enable the Venus OS Large firmware to use Node-RED or Signal-K</source>
       <translation type="unfinished"/>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="281"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="274"/>
       <source>Victron Community</source>
       <translation type="unfinished">Victron Community</translation>
     </message>
     <message id="pagesettingsintegrations_ui_plugins">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="283"/>
       <source>UI Plugins</source>
       <translation type="unfinished"/>
     </message>
@@ -7266,7 +7291,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Servidor Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="224"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="217"/>
       <source>Venus OS Large Features</source>
       <translation>Características de Venus OS Large</translation>
     </message>
@@ -8862,42 +8887,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Siguiente</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="491"/>
+      <location filename="../../src/units.cpp" line="500"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="493"/>
+      <location filename="../../src/units.cpp" line="502"/>
       <source>NE</source>
       <translation>No</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="495"/>
+      <location filename="../../src/units.cpp" line="504"/>
       <source>E</source>
       <translation>Email</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="497"/>
+      <location filename="../../src/units.cpp" line="506"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="499"/>
+      <location filename="../../src/units.cpp" line="508"/>
       <source>S</source>
       <translation>con</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="501"/>
+      <location filename="../../src/units.cpp" line="510"/>
       <source>SW</source>
       <translation>SW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="503"/>
+      <location filename="../../src/units.cpp" line="512"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="505"/>
+      <location filename="../../src/units.cpp" line="514"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -9655,24 +9680,24 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Integraciones de dispositivos</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="201"/>
       <source>Modbus TCP Server</source>
       <translation type="unfinished">Servidor Modbus TCP</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="233"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="226"/>
       <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
       <source>Signal K</source>
       <translation type="unfinished">Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="248"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="241"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation type="unfinished">Node-RED</translation>
     </message>
     <message id="settings_venusos_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="274"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="267"/>
       <source>Venus OS Large Documentation</source>
       <translation>Documentación de Venus OS Large</translation>
     </message>
@@ -10067,78 +10092,83 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <source>Basic slider</source>
       <translation>Control deslizante básico</translation>
     </message>
+    <message id="switchable_output_bypassed">
+      <location filename="../../src/enums.cpp" line="473"/>
+      <source>Bypassed</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="481"/>
+      <location filename="../../src/enums.cpp" line="484"/>
       <source>Fuel</source>
       <translation type="unfinished">Combustible</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="484"/>
+      <location filename="../../src/enums.cpp" line="487"/>
       <source>Fresh water</source>
       <translation type="unfinished">Agua potable</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="487"/>
+      <location filename="../../src/enums.cpp" line="490"/>
       <source>Waste water</source>
       <translation type="unfinished">Aguas grises</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="490"/>
+      <location filename="../../src/enums.cpp" line="493"/>
       <source>Live well</source>
       <translation type="unfinished">Vivero</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="493"/>
+      <location filename="../../src/enums.cpp" line="496"/>
       <source>Oil</source>
       <translation type="unfinished">Aceite</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="496"/>
+      <location filename="../../src/enums.cpp" line="499"/>
       <source>Black water</source>
       <translation type="unfinished">AGUAS NEGRAS</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="499"/>
+      <location filename="../../src/enums.cpp" line="502"/>
       <source>Gasoline</source>
       <translation type="unfinished">Gasolina</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="502"/>
+      <location filename="../../src/enums.cpp" line="505"/>
       <source>Diesel</source>
       <translation type="unfinished">Diésel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="505"/>
+      <location filename="../../src/enums.cpp" line="508"/>
       <source>LPG</source>
       <translation type="unfinished">GLP</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="508"/>
+      <location filename="../../src/enums.cpp" line="511"/>
       <source>LNG</source>
       <translation type="unfinished">GNL</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="511"/>
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Hydraulic oil</source>
       <translation type="unfinished">Aceite hidráulico</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="514"/>
+      <location filename="../../src/enums.cpp" line="517"/>
       <source>Raw water</source>
       <translation type="unfinished">Agua sin tratar</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="525"/>
+      <location filename="../../src/enums.cpp" line="528"/>
       <source>Hybrid droop</source>
       <translation type="unfinished"/>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="528"/>
+      <location filename="../../src/enums.cpp" line="531"/>
       <source>Grid-following</source>
       <translation type="unfinished"/>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="531"/>
+      <location filename="../../src/enums.cpp" line="534"/>
       <source>Grid-forming</source>
       <translation type="unfinished"/>
     </message>
@@ -10400,6 +10430,17 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relés del dispositivo GX</translation>
+    </message>
+    <message id="switchableoutput_list_delegate_auto_status">
+      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="87"/>
+      <source>Auto (%1)</source>
+      <extracomment>%1 = 'On' or 'Off'</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchableoutput_list_delegate_state_forced">
+      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="110"/>
+      <source>Forced</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
