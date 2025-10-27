@@ -90,6 +90,12 @@ Page {
 				}
 			}
 
+			ListNavigation {
+				//% "Add IP address manually"
+				text: qsTrId("page_settings_shelly_add_ip_address_manually")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShellySetIpAddresses.qml", {"title": text, bindPrefix: root.serviceUid})
+			}
+
 			SectionHeader {
 				text: CommonWords.discovered_devices
 				opacity: shellyListView.count > 0 ? 1 : 0 // set opacity instead of visible to avoid binding loop
