@@ -25,6 +25,8 @@
     "geometry_button_radius": 8,
     "geometry_button_border_width": 2,
 
+    "geometry_closeButton_margins": 4,
+
     "geometry_focus_highlight_corner_size": 14,
     "geometry_focus_highlight_border_size": 4,
 
@@ -402,8 +404,6 @@
 
     "geometry_solarDailyHistoryDialog_minimumHeight": 222,
     "geometry_solarDailyHistoryDialog_header_height": 50,
-    "geometry_solarDailyHistoryDialog_closeButton_icon_size": 24,
-    "geometry_solarDailyHistoryDialog_closeButton_icon_margins": 12,
     "geometry_solarDailyHistoryDialog_arrow_icon_size": 72,
     "geometry_solarDailyHistoryDialog_arrow_horizontalMargin": 18,
 

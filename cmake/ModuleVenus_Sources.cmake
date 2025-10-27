@@ -124,6 +124,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ClassAndVrmInstance.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
+    components/controls/CloseButton.qml
     components/controls/ComboBox.qml
     components/controls/EditFrame.qml
     components/controls/GlobalKeyNavigationHighlight.qml

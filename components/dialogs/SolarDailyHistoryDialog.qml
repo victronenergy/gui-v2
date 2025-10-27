@@ -145,17 +145,11 @@ T.Dialog {
 			font.pixelSize: Theme.font_size_body1
 		}
 
-		IconButton {
+		CloseButton {
 			anchors {
 				right: parent.right
 				top: parent.top
 			}
-			width: Theme.geometry_solarDailyHistoryDialog_closeButton_icon_size + (2 * Theme.geometry_solarDailyHistoryDialog_closeButton_icon_margins)
-			height: Theme.geometry_solarDailyHistoryDialog_closeButton_icon_size + (2 * Theme.geometry_solarDailyHistoryDialog_closeButton_icon_margins)
-			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_closeButton_icon_size
-			icon.color: Theme.color_ok
-			icon.source: "qrc:/images/icon_close_32.svg"
-
 			onClicked: root.close()
 		}
 
