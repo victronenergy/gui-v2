@@ -370,6 +370,38 @@ public:
 	};
 	Q_ENUM(VeBusDevice_Bms_Type)
 
+	enum USB_Transfer_Action {
+		USB_Transfer_Action_Idle = 0,
+		USB_Transfer_Action_Create_Drive,
+		USB_Transfer_Action_Export,
+		USB_Transfer_Action_Import,
+		USB_Transfer_Action_Delete,
+	};
+	Q_ENUM(USB_Transfer_Action)
+
+	enum USB_Transfer_Notification {
+		USB_Transfer_Notification_Export_Successful = 1,
+		USB_Transfer_Notification_Import_Successful = 2,
+		USB_Transfer_Notification_Delete_Successful = 3,
+		USB_Transfer_Notification_Export_Failed = 101,
+		USB_Transfer_Notification_Import_Failed = 102,
+		USB_Transfer_Notification_Delete_Failed = 103,
+		USB_Transfer_Notification_Create_Drive_Failed = 104,
+	};
+	Q_ENUM(USB_Transfer_Notification)
+
+	enum USB_Transfer_Error {
+		USB_Transfer_Error_None = 0,
+		USB_Transfer_Error_DriveNotMounted,
+		USB_Transfer_Error_CreateDriveException,
+		USB_Transfer_Error_ExportException,
+		USB_Transfer_Error_ImportException,
+		USB_Transfer_Error_ArchiveFileDeleteFailed,
+		USB_Transfer_Error_ExportFileDeleteFailed,
+		USB_Transfer_Error_ExportFileMissing,
+	};
+	Q_ENUM(USB_Transfer_Error)
+
 	enum Relays_State {
 		Relays_State_Inactive = 0,
 		Relays_State_Active

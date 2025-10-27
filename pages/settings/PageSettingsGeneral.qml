@@ -235,6 +235,13 @@ Page {
 			}
 
 			ListNavigation {
+				//% "USB Transfer for Tank Setups"
+				text: qsTrId("pagesettingsgeneral_usb_transfer_for_tank_setups")
+				preferredVisible: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsUsbTransfer.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Support status (modifications checks)"
 				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
 				secondaryText: supportStateText()
