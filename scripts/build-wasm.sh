@@ -217,7 +217,7 @@ if [[ -n "${HOST_LIST}" ]]; then
         echo "Uploading files to the GX device at ${HOST}:${PORT}..."
 
         # Copy the files to the GX device, only output errors
-        scp -P ${PORT} -r ../build-wasm_files_to_copy/wasm/* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
+        rsync -az --info=progress2 -e "ssh -p ${PORT}" ../build-wasm_files_to_copy/wasm/ root@${HOST}:/var/www/venus/gui-v2
         if [ $? -ne 0 ]; then
             echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
             echo

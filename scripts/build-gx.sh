@@ -189,7 +189,7 @@ if [[ -n "${HOST_LIST}" ]]; then
         echo "Uploading files to the GX device at ${HOST}..."
 
         # Copy the files to the GX device, only output errors
-        scp -P ${PORT} -r ../build-gx_files_to_copy/* root@${HOST}:/opt/victronenergy/gui-v2/ 1>/dev/null
+        rsync -az --info=progress2 -e "ssh -p ${PORT}" ../build-gx_files_to_copy/ root@${HOST}:/opt/victronenergy/gui-v2
         if [ $? -ne 0 ]; then
             echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
             echo
