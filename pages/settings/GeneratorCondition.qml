@@ -108,6 +108,8 @@ ListNavigation {
 						stepSize: root.stepSize
 						from: stopValue.dataItem.valid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
 						to: stopValue.dataItem.valid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
+						toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
+						fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
 					}
 
 					ListSpinBox {
@@ -121,6 +123,8 @@ ListNavigation {
 						stepSize: root.stepSize
 						from: quietHoursStopValue.dataItem.valid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : dataItem.defaultMin
 						to: quietHoursStopValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : dataItem.defaultMax
+						toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
+						fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
 					}
 
 					ListSpinBox {
@@ -143,6 +147,8 @@ ListNavigation {
 						stepSize: root.stepSize
 						to: startValue.dataItem.valid && root.startValueIsGreater ? startValue.value - stepSize : dataItem.defaultMax
 						from: startValue.dataItem.valid && !root.startValueIsGreater ? startValue.value + stepSize : dataItem.defaultMin
+						toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
+						fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
 					}
 
 					ListSpinBox {
@@ -156,6 +162,8 @@ ListNavigation {
 						stepSize: root.stepSize
 						to: quietHoursStartValue.dataItem.valid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : dataItem.defaultMax
 						from: quietHoursStartValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : dataItem.defaultMin
+						toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
+						fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
 					}
 
 					ListSpinBox {
