@@ -72,21 +72,25 @@ else
 fi
 
 # Install yq
-echo -e "\n\n*** Installing yq ***"
-# Check if snap is installed
-if ! command -v snap &> /dev/null; then
-    echo "Snap is not installed, installing snapd..."
-    sudo apt-get install -y snapd
-fi
+if ! command -v yq >/dev/null 2>&1; then
+    echo -e "\n\n*** Installing yq ***"
+    # Check if snap is installed
+    if ! command -v snap &> /dev/null; then
+        echo "Snap is not installed, installing snapd..."
+        sudo apt-get install -y snapd
+    fi
 
-# Install yq using snap
-sudo snap install yq
-# Check if yq was installed successfully
-if [ $? -ne 0 ]; then
-    echo "ERROR: Failed to install yq"
-    exit 1
+    # Install yq using snap
+    sudo snap install yq
+    # Check if yq was installed successfully
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to install yq"
+        exit 1
+    else
+        echo "✓ yq installed successfully"
+    fi
 else
-    echo "✓ yq installed successfully"
+    echo "✓ yq is already installed"
 fi
 
 # Set up Python 3.x
