@@ -61,6 +61,12 @@ Page {
 				text: CommonWords.automatic_scanning
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/AutoScan"
 			}
+
+			ListNavigation {
+				//% "Modbus port and unit ID settings"
+				text: qsTrId("page_settings_fronius_modbus_settings")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusModbus.qml", {"title": text})
+			}
 		}
 	}
 }
