@@ -39,6 +39,7 @@ while [[ $# -gt 0 ]]; do
             echo "                       -H 192.168.1.10"
             echo "                       -H 192.168.1.10,192.168.1.11"
             echo "                       -H einstein,ekrano"
+            echo "                       -H localhost:4000"
             echo "  -h, --help       Show this help message"
             exit 0
             ;;
@@ -48,7 +49,6 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
-
 
 # Go to the parent directory of the script
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
@@ -167,21 +167,26 @@ if [[ -n "${HOST_LIST}" ]]; then
     # Split the HOST_LIST variable by comma
     IFS=',' read -r -a HOSTS <<< "${HOST_LIST}"
     # Loop through each host
-    for HOST in "${HOSTS[@]}"; do
+    for H in "${HOSTS[@]}"; do
+        IFS=':' read -r -a PARTS <<< "${H}"
+        HOST=${PARTS[0]}
+        PORT=${PARTS[1]:-22}
 
-        # Test if port 22 is open
-        echo -n "Testing if port 22 is reachable on ${HOST}... "
-        if nc -z -w 5 "${HOST}" 22; then
+        echo "Processing host: ${HOST} on port ${PORT}"
+
+        # Test if port ${PORT} is open
+        echo -n "Testing if port ${PORT} is reachable on ${HOST}... "
+        if nc -z -w 5 "${HOST}" "${PORT}"; then
             echo -e "\e[32mOK.\e[0m"
         else
-            echo -e "\e[31mPort 22 is not reachable on ${HOST}. Please check the IP address and network connection.\e[0m"
+            echo -e "\e[31mPort ${PORT} is not reachable on ${HOST}. Please check the IP address and network connection.\e[0m"
             # Skip to the next host
             continue
         fi
 
         # Test SSH connection
         echo "Testing SSH connection to ${HOST}..."
-        ssh -o BatchMode=yes -o ConnectTimeout=5 root@${HOST} "exit"
+        ssh -o BatchMode=yes -o ConnectTimeout=5 -p ${PORT} root@${HOST} "exit"
 
         if [ $? -ne 0 ]; then
             echo
@@ -189,7 +194,7 @@ if [[ -n "${HOST_LIST}" ]]; then
             echo -e "\e[33mYou will be prompted for the password to upload the SSH key.\e[0m"
             echo "Make sure you set a password on the GX device else it won't work. See https://www.victronenergy.com/live/ccgx:root_access#root_access"
             echo
-            ssh-copy-id root@${HOST}
+            ssh-copy-id -p ${PORT} root@${HOST}
             if [ $? -ne 0 ]; then
                 echo -e "\e[31mFailed to upload SSH key. Please check your password and try again.\e[0m"
                 # Skip to the next host
@@ -204,20 +209,20 @@ if [[ -n "${HOST_LIST}" ]]; then
 
         # Make filesystem writable
         echo -n "Making GX device filesystem writable..."
-        ssh root@${HOST} "/opt/victronenergy/swupdate-scripts/remount-rw.sh"
+        ssh -p ${PORT} root@${HOST} "/opt/victronenergy/swupdate-scripts/remount-rw.sh"
         echo " done."
         echo
 
         # Upload the files to the GX device
-        echo "Uploading files to the GX device at ${HOST}..."
+        echo "Uploading files to the GX device at ${HOST}:${PORT}..."
 
         # Copy the files to the GX device, only output errors
-        scp -r ../build-wasm_files_to_copy/wasm/* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
+        scp -P ${PORT} -r ../build-wasm_files_to_copy/wasm/* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
         if [ $? -ne 0 ]; then
             echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
             echo
             echo "GX device disk space:"
-            ssh root@${HOST} "df -h | head -n 2"
+            ssh -p ${PORT} root@${HOST} "df -h | head -n 2"
             echo
             # Skip to the next host
             continue
@@ -227,7 +232,7 @@ if [[ -n "${HOST_LIST}" ]]; then
 
         # Restart vmrlogger to make GUIv2 changes visible in VRM portal
         echo -n "Restarting vmrlogger on GX device..."
-        ssh root@${HOST} "svc -t /service/vrmlogger"
+        ssh -p ${PORT} root@${HOST} "svc -t /service/vrmlogger"
         echo " done."
         echo
     done
