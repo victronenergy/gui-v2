@@ -16,6 +16,9 @@ TextInput {
 	property int initialValue
 	property bool arrowKeysEnabled
 
+	signal increaseFailed()
+	signal decreaseFailed()
+
 	function setTextFromValue(value) {
 		text = spinBox.textFromValue(value, spinBox.locale)
 	}
@@ -23,10 +26,18 @@ TextInput {
 	// These change the displayed value (which may not yet be accepted), rather than the actual
 	// spinBox value.
 	function increase() {
-		setTextFromValue(Math.min(spinBox.to, spinBox.valueFromText(text, spinBox.locale) + spinBox.stepSize))
+		const nextValue = spinBox.valueFromText(text, spinBox.locale) + spinBox.stepSize
+		if (nextValue > spinBox.to) {
+			root.increaseFailed()
+		}
+		setTextFromValue(Math.min(spinBox.to, nextValue))
 	}
 	function decrease() {
-		setTextFromValue(Math.max(spinBox.from, spinBox.valueFromText(text, spinBox.locale) - spinBox.stepSize))
+		const nextValue = spinBox.valueFromText(text, spinBox.locale) - spinBox.stepSize
+		if (nextValue < spinBox.from) {
+			root.decreaseFailed()
+		}
+		setTextFromValue(Math.max(spinBox.from, nextValue))
 	}
 
 	onActiveFocusChanged: {
@@ -43,8 +54,10 @@ TextInput {
 			// to/from range, so clamp it here.
 			let v = root.spinBox.valueFromText(text, root.spinBox.locale)
 			if (v < root.spinBox.from) {
+				root.decreaseFailed()
 				v = root.spinBox.from
 			} else if (v > root.spinBox.to) {
+				root.increaseFailed()
 				v = root.spinBox.to
 			}
 

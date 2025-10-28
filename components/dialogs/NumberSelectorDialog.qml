@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 ModalDialog {
@@ -18,8 +19,9 @@ ModalDialog {
 	property real stepSize
 	property var presets: []
 
-	signal maxValueReached()
-	signal minValueReached()
+	// Error text shown when user tries to set a value < from or > to.
+	property string fromErrorText
+	property string toErrorText
 
 	onAboutToShow: {
 		if (presets.length) {
@@ -41,19 +43,50 @@ ModalDialog {
 			root.value = decimalConverter.intToDecimal(spinBox.value)
 		}
 
-		Column {
+		// Show error label above the spinbox, as items below it may be obscured by the VKB.
+		Label {
+			id: errorLabel
+
 			anchors {
+				bottom: spinBoxColumn.top
+				bottomMargin: Theme.geometry_modalWarningDialog_description_spacing
+				horizontalCenter: parent.horizontalCenter
+			}
+			width: Math.min(implicitWidth, spinBoxColumn.width)
+			leftPadding: alarmIcon.width +  Theme.geometry_modalWarningDialog_description_spacing
+			opacity: errorLabel.text.length > 0 ? 1 : 0
+			wrapMode: Text.Wrap
+
+			Behavior on opacity {
+				NumberAnimation { easing.type: Easing.InOutQuad }
+			}
+
+			CP.IconImage {
+				id: alarmIcon
+				anchors.verticalCenter: parent.verticalCenter
+				source: "qrc:/images/icon_alarm_32.svg"
+				color: Theme.color_red
+			}
+		}
+
+		Column {
+			id: spinBoxColumn
+
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
 				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
 			}
 			width: parent.width
-			spacing: Theme.geometry_modalDialog_content_spacing
+			spacing: Theme.geometry_modalDialog_content_margins
 
 			SpinBox {
 				id: spinBox
 
-				anchors.horizontalCenter: parent.horizontalCenter
-				width: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
+				width: parent.width
 				height: Theme.geometry_timeSelector_spinBox_height
 				editable: true
 				indicatorImplicitWidth: root.decimals > 0
@@ -81,8 +114,26 @@ ModalDialog {
 					dialogContent.valueModified()
 					presetsRow.currentIndex = -1
 				}
-				onMinValueReached: root.minValueReached()
-				onMaxValueReached: root.maxValueReached()
+				onDecreaseFailed: {
+					if (root.fromErrorText) {
+						errorLabel.text = root.fromErrorText
+						errorLabel.opacity = 1
+						errorTimeout.restart()
+					}
+				}
+				onIncreaseFailed: {
+					if (root.toErrorText) {
+						errorLabel.text = root.toErrorText
+						errorLabel.opacity = 1
+						errorTimeout.restart()
+					}
+				}
+
+				Timer {
+					id: errorTimeout
+					interval: 3000
+					onTriggered: errorLabel.opacity = 0
+				}
 
 				SpinBoxDecimalConverter {
 					id: decimalConverter
@@ -97,8 +148,7 @@ ModalDialog {
 			SegmentedButtonRow {
 				id: presetsRow
 
-				width: spinBox.width
-				anchors.horizontalCenter: parent.horizontalCenter
+				width: parent.width
 				model: root.presets
 				visible: model.length > 0
 				enabled: visible
