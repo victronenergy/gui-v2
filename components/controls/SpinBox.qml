@@ -45,8 +45,8 @@ T.SpinBox {
 	property int _scalingFactor: 1
 	property int _originalStepSize
 
-	signal maxValueReached()
-	signal minValueReached()
+	signal increaseFailed()
+	signal decreaseFailed()
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 			implicitContentWidth + leftPadding + rightPadding)
@@ -59,14 +59,6 @@ T.SpinBox {
 	spacing: Theme.geometry_spinBox_spacing
 	validator: DoubleValidator {
 		locale: Units.numberFormattingLocaleName
-	}
-
-	onValueModified: {
-		if (value === to) {
-			root.maxValueReached()
-		} else if (value === from) {
-			root.minValueReached()
-		}
 	}
 
 	// Update the displayed text when the initial value is set or when the up/down buttons are
@@ -83,17 +75,17 @@ T.SpinBox {
 
 		focus: Global.keyNavigationEnabled
 
-		KeyNavigation.left: Global.keyNavigationEnabled && root.down.indicator.enabled && root.orientation === Qt.Horizontal
-				? root.down.indicator
+		KeyNavigation.left: Global.keyNavigationEnabled && root.orientation === Qt.Horizontal
+				? downIndicatorPressArea
 				: null
-		KeyNavigation.right: Global.keyNavigationEnabled && root.up.indicator.enabled && root.orientation === Qt.Horizontal
-				? root.up.indicator
+		KeyNavigation.right: Global.keyNavigationEnabled && root.orientation === Qt.Horizontal
+				? upIndicatorPressArea
 				: null
-		KeyNavigation.up: Global.keyNavigationEnabled && root.down.indicator.enabled && root.orientation === Qt.Vertical
-				? root.down.indicator
+		KeyNavigation.up: Global.keyNavigationEnabled && root.orientation === Qt.Vertical
+				? downIndicatorPressArea
 				: null
-		KeyNavigation.down: Global.keyNavigationEnabled && root.up.indicator.enabled && root.orientation === Qt.Vertical
-				? root.up.indicator
+		KeyNavigation.down: Global.keyNavigationEnabled && root.orientation === Qt.Vertical
+				? upIndicatorPressArea
 				: null
 
 		// Called when a key is pressed while contentItem is focused, or when a key is pressed
@@ -173,6 +165,8 @@ T.SpinBox {
 				fontPixelSize: root.fontPixelSize
 				arrowKeysEnabled: upDownHintFrame.visible
 				focus: false
+				onIncreaseFailed: root.increaseFailed()
+				onDecreaseFailed: root.decreaseFailed()
 			}
 
 			Label {
@@ -231,20 +225,6 @@ T.SpinBox {
 		// text input if it has not yet been accepted.
 		enabled: !inputArea.activeFocus && root.value < root.to
 
-		KeyNavigation.left: orientation === Qt.Horizontal ? root.contentItem : null
-		KeyNavigation.down: orientation === Qt.Vertical ? root.contentItem : null
-		Keys.onSpacePressed: {
-			root.increase()
-			root.valueModified()
-			if (!enabled) {
-				// Ensure focus is not in limbo if the button becomes disabled
-				root.contentItem.focus = true
-			}
-		}
-		Keys.enabled: Global.keyNavigationEnabled
-
-		KeyNavigationHighlight.active: activeFocus
-
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_plus.svg'
@@ -263,29 +243,72 @@ T.SpinBox {
 		implicitHeight: Theme.geometry_spinBox_indicator_height
 		radius: Theme.geometry_spinBox_indicator_radius
 		color: enabled
-			   ? (root.down.pressed ? Theme.color_button_down : Theme.color_button)
+			   ? (downIndicatorPressArea.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled
 		enabled: !inputArea.activeFocus && root.value > root.from
-
-		KeyNavigation.right: orientation === Qt.Horizontal ? root.contentItem : null
-		KeyNavigation.up: orientation === Qt.Vertical ? root.contentItem : null
-		Keys.onSpacePressed: {
-			root.decrease()
-			root.valueModified()
-			if (!enabled) {
-				// Ensure focus is not in limbo if the button becomes disabled
-				root.contentItem.focus = true
-			}
-		}
-		Keys.enabled: Global.keyNavigationEnabled
-
-		KeyNavigationHighlight.active: activeFocus
 
 		Image {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
 			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
 		}
+	}
+
+	// Add extra PressAreas above the up/down indicators that are always clickable, unlike the
+	// up/down indicators which are disabled by the SpinBox implementation when the upper/lower
+	// limits are reached. This allows increaseFailed() and decreaseFailed() to be emitted when the
+	// user tries to go beyond the limits.
+	PressArea {
+		id: upIndicatorPressArea
+
+		function activate() {
+			if (!root.up.indicator.enabled) {
+				root.increaseFailed()
+				return
+			}
+			root.increase()
+			root.valueModified()
+			root.up.pressed = true
+		}
+
+		anchors.fill: root.up.indicator
+		onPressed: activate()
+		onReleased: root.up.pressed = false
+		onCanceled: root.up.pressed = false
+
+		Keys.enabled: Global.keyNavigationEnabled
+		Keys.onSpacePressed: activate()
+		Keys.onReleased: root.up.pressed = false
+		KeyNavigation.left: orientation === Qt.Horizontal ? root.contentItem : null
+		KeyNavigation.down: orientation === Qt.Vertical ? root.contentItem : null
+		KeyNavigationHighlight.fill: root.up.indicator
+		KeyNavigationHighlight.active: activeFocus
+	}
+	PressArea {
+		id: downIndicatorPressArea
+
+		function activate() {
+			if (!root.down.indicator.enabled) {
+				root.decreaseFailed()
+				return
+			}
+			root.decrease()
+			root.valueModified()
+			root.down.pressed = true
+		}
+
+		anchors.fill: root.down.indicator
+		onPressed: activate()
+		onReleased: root.down.pressed = false
+		onCanceled: root.down.pressed = false
+
+		Keys.enabled: Global.keyNavigationEnabled
+		Keys.onSpacePressed: activate()
+		Keys.onReleased: root.down.pressed = false
+		KeyNavigation.right: orientation === Qt.Horizontal ? root.contentItem : null
+		KeyNavigation.up: orientation === Qt.Vertical ? root.contentItem : null
+		KeyNavigationHighlight.fill: root.down.indicator
+		KeyNavigationHighlight.active: activeFocus
 	}
 
 	textFromValue: function(value, locale) {
@@ -329,7 +352,21 @@ T.SpinBox {
 		onRunningChanged: if (!running) interval = 500
 		onTriggered: {
 			interval = 100
-			up.pressed ? root.increase() : root.decrease()
+			if (up.pressed) {
+				if (root.up.indicator.enabled) {
+					root.increase()
+					root.valueModified()
+				} else {
+					root.increaseFailed()
+				}
+			} else {
+				if (root.down.indicator.enabled) {
+					root.decrease()
+					root.valueModified()
+				} else {
+					root.decreaseFailed()
+				}
+			}
 		}
 	}
 }

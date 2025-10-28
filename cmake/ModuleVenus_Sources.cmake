@@ -721,6 +721,7 @@ set(VictronVenusOS_RESOURCES
     images/grid.svg
     images/icon_simlocked_32.svg
     images/icon_warning_24.svg
+    images/icon_alarm_32.svg
     images/icon_alarm_48.svg
     images/icon_alarm_snooze_24.svg
     images/icon_autostart_24.svg

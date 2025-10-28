@@ -550,6 +550,12 @@ QtObject {
 	//% "Unknown"
 	readonly property string unknown_status: qsTrId("common_words_unknown_status")
 
+	//% "Value must be greater than stop value"
+	readonly property string value_must_be_greater_than_stop_value: qsTrId("common_words_value_must_be_greater_than_stop_value")
+
+	//% "Value must be lower than start value"
+	readonly property string value_must_be_lower_than_start_value: qsTrId("common_words_value_must_be_lower_than_start_value")
+
 	//% "VE.Bus Error"
 	readonly property string vebus_error: qsTrId("common_words_vebus_error")
 

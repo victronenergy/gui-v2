@@ -17,11 +17,11 @@ ListButton {
 	property real to: !isNaN(dataItem.max) ? dataItem.max : Global.int32Max / Math.pow(10, decimals) // qml int is a signed 32 bit value
 	property real stepSize: 1
 	property var presets: []
+	property string fromErrorText
+	property string toErrorText
 
 	property var _numberSelector
 
-	signal maxValueReached()
-	signal minValueReached()
 	signal selectorAccepted(newValue: var)
 
 	secondaryText: value === undefined ? "--" : Units.formatNumber(value, decimals) + root.suffix
@@ -47,6 +47,8 @@ ListButton {
 			to: root.to
 			stepSize: root.stepSize
 			presets: root.presets
+			fromErrorText: root.fromErrorText
+			toErrorText: root.toErrorText
 
 			onAccepted: {
 				if (dataItem.uid.length > 0) {
@@ -56,8 +58,6 @@ ListButton {
 				}
 				root.selectorAccepted(value)
 			}
-			onMinValueReached: root.minValueReached()
-			onMaxValueReached: root.maxValueReached()
 		}
 	}
 

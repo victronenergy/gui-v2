@@ -11,20 +11,6 @@ Page {
 
 	property string bindPrefix
 
-	function minValueWarning()
-	{
-		//% "Value must be greater than stop value"
-		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("value_must_be_greater_than_stop_value"),
-												   Theme.animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration)
-	}
-
-	function maxValueWarning()
-	{
-		//% "Value must be lower than start value"
-		Global.showToastNotification(VenusOS.Notification_Info, qsTrId("value_must_be_lower_than_start_value"),
-												   Theme.animation_generator_settings_valueOutOfRange_toastNotification_autoClose_duration)
-	}
-
 	//% "AC output"
 	title: qsTrId("ac_output")
 
@@ -58,23 +44,23 @@ Page {
 				id: startValue
 				//% "Start when power is higher than"
 				text: qsTrId("start_when_power_is_higher_than")
-				onMinValueReached: minValueWarning()
 				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/StartValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: stopValue.value + stepSize
+				fromErrorText: CommonWords.value_must_be_greater_than_stop_value
 			}
 
 			ListSpinBox {
 				id: quietHoursStartValue
 				text: CommonWords.start_value_during_quiet_hours
-				onMinValueReached: minValueWarning()
 				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/QuietHoursStartValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: quietHoursStopValue.value + stepSize
+				fromErrorText: CommonWords.value_must_be_greater_than_stop_value
 			}
 
 			ListSpinBox {
@@ -90,24 +76,24 @@ Page {
 				id: stopValue
 				//% "Stop when power is lower than"
 				text: qsTrId("stop_when_power_is_lower_than")
-				onMaxValueReached: maxValueWarning()
 				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/StopValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				from: 0
 				to: startValue.dataItem.valid ? startValue.value - stepSize : 1000000
+				toErrorText: CommonWords.value_must_be_lower_than_start_value
 			}
 
 			ListSpinBox {
 				id: quietHoursStopValue
 				text: CommonWords.stop_value_during_quiet_hours
-				onMaxValueReached: maxValueWarning()
 				preferredVisible: dataItem.valid
 				dataItem.uid: bindPrefix + "/QuietHoursStopValue"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				stepSize: 5
 				to: quietHoursStartValue.dataItem.valid ? quietHoursStartValue.value - stepSize : 1000000
+				toErrorText: CommonWords.value_must_be_lower_than_start_value
 				from: 0
 			}
 
