@@ -373,8 +373,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsFirmwareOffline.qml
     pages/settings/PageSettingsFirmwareOnline.qml
     pages/settings/PageSettingsFronius.qml
+    pages/settings/PageSettingsFroniusAddLocation.qml
     pages/settings/PageSettingsFroniusInverter.qml
     pages/settings/PageSettingsFroniusInverters.qml
+    pages/settings/PageSettingsFroniusModbus.qml
     pages/settings/PageSettingsFroniusSetIpAddresses.qml
     pages/settings/PageSettingsFroniusShowIpAddresses.qml
     pages/settings/PageSettingsGeneral.qml
