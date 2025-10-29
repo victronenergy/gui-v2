@@ -299,14 +299,28 @@ Page {
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
 									if (integrations[i].type === GuiPluginLoader.PluginSettingsPage) {
-										return integrations[i];
+										return integrations[i]
 									}
 								}
 							}
 							return null
 						}
+						readonly property bool hasDeviceListIntegration: {
+							if (integrations !== null && integrations.length > 0) {
+								for (let i = 0; i < integrations.length; ++i) {
+									if (integrations[i].type === GuiPluginLoader.DeviceListSettingsPage) {
+										return true
+									}
+								}
+							}
+							return false
+						}
 
 						text: switchNavigationItem.name
+						secondaryText: hasDeviceListIntegration
+							   //% "Integrates with the device list"
+							? qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist")
+							: ""
 						indicatorColor: switchNavigationItem.color
 						pageSource: switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
 						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
