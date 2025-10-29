@@ -24,13 +24,11 @@ Page {
 		enabled: root._canEditPoints && root.isCurrentPage
 
 		function onRightButtonClicked() {
-			if (!root._editPointDialog) {
-				root._editPointDialog = editPointDialogComponent.createObject(root)
-			}
-			root._editPointDialog.sensorLevel = 1
-			root._editPointDialog.volume = 1
-			root._editPointDialog.modelIndex = -1
-			root._editPointDialog.open()
+			Global.dialogLayer.open(editPointDialogComponent, {
+					"sensorLevel": 1,
+					"volume": 1,
+					"modelIndex": -1
+				})
 		}
 	}
 
@@ -83,8 +81,8 @@ Page {
 
 			required property int index
 			required property var modelData
-			readonly property real sensorLevel: modelData[0]
-			readonly property real volume: modelData[1]
+			readonly property real sensorLevel: !!modelData ? modelData[0] : NaN
+			readonly property real volume: !!modelData ? modelData[1] : NaN
 
 			//: %1 = the point number
 			//% "Point %1"
@@ -104,16 +102,59 @@ Page {
 					visible: root._canEditPoints
 
 					MouseArea {
-						anchors.fill: parent
+						anchors.centerIn: parent
+						height: pointDelegate.height - 2*Theme.geometry_closeButton_margins
+						width: height
 						onClicked: {
 							let pointList = pointsListView.model
+							let pointsItem = points
 							pointList.splice(pointDelegate.index, 1)
-							points.savePoints(pointList)
-							pointsListView.model = pointList
+							pointsItem.savePoints(pointList)
 						}
 					}
 				}
 			]
+
+			interactive: root._canEditPoints
+			onClicked: {
+				let sensorLevelMax = 0
+				let sensorLevelMin = 0
+				let volumeMax = 0
+				let volumeMin = 0
+
+				// need to set max allowed values when editing a point
+				// if there is another point after it.
+				const pointCount = pointsListView.model.length
+				if (pointCount >= 2 && pointDelegate.index < (pointCount - 1)) {
+					let nextPoint = pointsListView.model[pointDelegate.index + 1]
+					sensorLevelMax = nextPoint[0]
+					volumeMax = nextPoint[1]
+				} else {
+					sensorLevelMax = 99
+					volumeMax = 99
+				}
+
+				// need to set min allowed values when editing a point
+				// if there is another point before it.
+				if (pointCount >= 2 && pointDelegate.index > 0) {
+					let prevPoint = pointsListView.model[pointDelegate.index - 1]
+					sensorLevelMin = prevPoint[0]
+					volumeMin = prevPoint[1]
+				} else {
+					sensorLevelMin = 1
+					volumeMin = 1
+				}
+
+				Global.dialogLayer.open(editPointDialogComponent, {
+						"sensorLevel": pointDelegate.sensorLevel,
+						"sensorLevelMax": sensorLevelMax,
+						"sensorLevelMin": sensorLevelMin,
+						"volume": pointDelegate.volume,
+						"volumeMax": volumeMax,
+						"volumeMin": volumeMin,
+						"modelIndex": pointDelegate.index
+					})
+			}
 		}
 	}
 
@@ -123,14 +164,22 @@ Page {
 		ModalDialog {
 			id: root
 
+			property alias sensorLevelMin: sensorLevelSpinBox.from
+			property alias sensorLevelMax: sensorLevelSpinBox.to
 			property alias sensorLevel: sensorLevelSpinBox.value
+			property alias volumeMin: volumeSpinBox.from
+			property alias volumeMax: volumeSpinBox.to
 			property alias volume: volumeSpinBox.value
 			property int modelIndex
 
 			property var _pointArrayToSave
 
-			//% "Add point"
-			title: qsTrId("devicelist_tankshape_add_point")
+			title: modelIndex < 0
+				  //% "Add point"
+				? qsTrId("devicelist_tankshape_add_point")
+				  //: %1 = which point is being edited, a number like "1" or "2"
+				  //% "Edit point %1"
+				: qsTrId("devicelist_tankshape_edit_point").arg(modelIndex+1)
 
 			contentItem: ModalDialog.FocusableContentItem {
 				Row {
@@ -241,16 +290,22 @@ Page {
 
 			tryAccept: function() {
 				_pointArrayToSave = ""
-				let pointList = pointsListView.model
+				let pointList = []
+				let point = []
+				let i = 0
+				for (i = 0; i < pointsListView.model.length; ++i) {
+					point = pointsListView.model[i]
+					pointList.push([ point[0], point[1] ])
+				}
 				const quantities = [ sensorLevelSpinBox.value, volumeSpinBox.value ]
 				if (modelIndex < 0) {
 					pointList.push(quantities)
 				} else {
 					pointList[modelIndex] = quantities
 				}
-				pointList.sort(function(a, b) { return a[0] - b[0] });
+				pointList.sort(function(a, b) { return a[0] - b[0] })
 
-				for (let i = 1; i < pointList.length; i++) {
+				for (i = 1; i < pointList.length; i++) {
 					if (pointList[i][0] <= pointList[i - 1][0]) {
 						//% "Duplicate sensor level values are not allowed."
 						errorLabel.text = qsTrId("devicelist_tankshape_duplicate_sensor_level")
