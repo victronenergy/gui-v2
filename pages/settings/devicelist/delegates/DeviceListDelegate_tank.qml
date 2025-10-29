@@ -9,10 +9,12 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: level.valid ? "" : (status.valid ? Global.tanks.statusToText(status.value) : "--")
+	readonly property string statusText: level.valid ? "" : (status.valid ? Global.tanks.statusToText(status.value) : "--")
+
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
+		QuantityObject { object: root; key: "statusText"; unit: VenusOS.Units_None }
 		QuantityObject { object: temperature; unit: Global.systemSettings.temperatureUnit }
 		QuantityObject { object: remaining; unit: Global.systemSettings.volumeUnit }
 		QuantityObject { object: level; unit: VenusOS.Units_Percentage }
