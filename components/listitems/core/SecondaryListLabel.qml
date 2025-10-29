@@ -12,6 +12,4 @@ Label {
 	wrapMode: Text.Wrap
 	horizontalAlignment: Text.AlignRight
 	verticalAlignment: Text.AlignVCenter
-	anchors.verticalCenter: parent.verticalCenter
-
 }

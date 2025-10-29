@@ -17,6 +17,7 @@ ListItem {
 
 	content.children: [
 		SecondaryListLabel {
+			anchors.verticalCenter: parent.verticalCenter
 			text: root.secondaryText
 			width: Math.min(implicitWidth, root.maximumContentWidth - radioButton.width - Theme.geometry_listItem_content_spacing)
 			visible: text.length > 0
