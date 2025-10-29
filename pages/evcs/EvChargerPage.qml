@@ -79,9 +79,9 @@ DevicePage {
 						// the summary and not the individual devices, so just add empty values
 						// here to pad out the remaining columns.
 						QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }
-						QuantityObject {}
-						QuantityObject {}
-						QuantityObject {}
+						QuantityObject { hidden: true }
+						QuantityObject { hidden: true }
+						QuantityObject { hidden: true }
 					}
 				}
 
