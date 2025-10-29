@@ -25,7 +25,7 @@ DevicePage {
 
 		ListText {
 			text: CommonWords.state
-			secondaryText: Global.system.systemStateToText(Global.system.state)
+			secondaryText: Global.system.systemStateToText(state.value)
 		}
 
 		PrimaryListLabel {
@@ -342,5 +342,10 @@ DevicePage {
 	VeQuickItem {
 		id: firmwareVersion
 		uid: root.bindPrefix + "/FirmwareVersion"
+	}
+
+	VeQuickItem {
+		id: state
+		uid: root.bindPrefix + "/State"
 	}
 }
