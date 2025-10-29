@@ -16,6 +16,7 @@ ListItem {
 	content.children: [
 		SecondaryListLabel {
 			id: secondaryLabel
+			anchors.verticalCenter: parent.verticalCenter
 			text: dataItem.valid ? dataItem.value : ""
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			visible: text.length > 0
