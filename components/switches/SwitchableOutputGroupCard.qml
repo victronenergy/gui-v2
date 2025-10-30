@@ -65,7 +65,7 @@ ControlCard {
 			onStatusChanged: {
 				if (status === Loader.Error) {
 					console.warn("Failed to load SwitchableOutputDelegate for type '%1' from file: %2"
-						.arg(VenusOS.switchableOutput_typeToText(output.type))
+						.arg(VenusOS.switchableOutput_typeToText(modelData.type))
 						.arg(source))
 				}
 			}
