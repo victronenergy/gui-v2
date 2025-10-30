@@ -36,7 +36,7 @@ MiniSlider {
 	}
 
 	onMoved: {
-		valueItem.setValue(value)
+		valueSync.writeValue(value)
 	}
 
 	Keys.onPressed: (event) => {
