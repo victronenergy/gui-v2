@@ -422,6 +422,17 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	case SwitchableOutput_Type_BilgePump:
 		//% "Bilge pump"
 		return qtTrId("switchable_output_bilge_pump");
+	case SwitchableOutput_Type_ColorDimmerRgb:
+		//% "RGB color wheel"
+		return qtTrId("switchable_output_rgb_color_wheel");
+	case SwitchableOutput_Type_ColorDimmerCct:
+		//: Correlated Color Temperature color wheel
+		//% "CCT color wheel"
+		return qtTrId("switchable_output_cct_color_wheel");
+	case SwitchableOutput_Type_ColorDimmerRgbW:
+		//: RGB + white color wheel
+		//% "RGB + W color wheel"
+		return qtTrId("switchable_output_rgbw_color_wheel");
 	default:
 		//% "Unsupported type: %1"
 		return qtTrId("switchable_output_unsupported").arg(value);

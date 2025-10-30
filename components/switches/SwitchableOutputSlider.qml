@@ -9,13 +9,19 @@ MiniSlider {
 	id: root
 
 	required property SwitchableOutput switchableOutput
-	property alias valueItem: valueItem.uid
 	property int sourceUnit
 	property int displayUnit
 
 	// True if the slider value is being changed by the user (either by touch or key press)
 	readonly property bool dragging: pressed || _valueChangeKeyPressed
 	property bool _valueChangeKeyPressed
+
+	property var valueDataItem: VeQuickItem {
+		uid: root.switchableOutput.uid + "/Dimming"
+		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
+		displayUnit: Units.unitToVeUnit(root.displayUnit)
+		onValueChanged: valueSync.syncBackendValueToSlider()
+	}
 
 	from: dimmingMinItem.valid ? dimmingMinItem.value : 0
 	to: dimmingMaxItem.valid ? dimmingMaxItem.value : 100
@@ -62,13 +68,6 @@ MiniSlider {
 	KeyNavigationHighlight.active: root.activeFocus
 
 	VeQuickItem {
-		id: valueItem
-		uid: root.switchableOutput.uid + "/Dimming"
-		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
-		displayUnit: Units.unitToVeUnit(root.displayUnit)
-		onValueChanged: valueSync.syncBackendValueToSlider()
-	}
-	VeQuickItem {
 		id: dimmingMaxItem
 		uid: root.switchableOutput.uid + "/Settings/DimmingMax"
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
@@ -102,7 +101,7 @@ MiniSlider {
 			}
 		}
 
-		dataItem: valueItem
+		dataItem: root.valueDataItem
 		onBusyChanged: if (!busy) syncBackendValueToSlider()
 	}
 

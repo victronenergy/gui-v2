@@ -56,7 +56,7 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(int state READ state NOTIFY stateChanged FINAL)
 	Q_PROPERTY(int status READ status NOTIFY statusChanged FINAL)
 	Q_PROPERTY(qreal dimming READ dimming NOTIFY dimmingChanged FINAL)
-	Q_PROPERTY(int type READ type NOTIFY typeChanged FINAL)
+	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
 	Q_PROPERTY(QString group READ group NOTIFY groupChanged FINAL)
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
 	Q_PROPERTY(QString unitText READ unitText NOTIFY unitTextChanged FINAL)
@@ -96,6 +96,7 @@ public:
 
 	// Output/channel settings (under /Settings sub-path)
 	int type() const;
+	void setType(int type);
 	QString group() const;
 	QString unitText() const; // The raw /Unit value
 	int unitType() const; // The unit, converted to a Unit_Type value (if applicable)
@@ -123,6 +124,7 @@ private:
 	void initialize(VeQItem *outputItem);
 	void reset();
 	void setType(const QVariant &typeValue);
+	void setTypeFromVariant(const QVariant &typeValue);
 	void setUnit(const QVariant &unitValue);
 	void setDecimals(const QVariant &decimalsVariant);
 	void updateDecimalsFromStepSize(const QVariant &stepSizeVariant);
