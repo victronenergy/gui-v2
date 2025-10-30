@@ -99,21 +99,6 @@ FocusScope {
 			uid: root.switchableOutput.uid + "/ValidTypes"
 		}
 
-		// TODO remove these /Preset/* items - these add dummy presets that will actually
-		// provided by the default settings on the system.
-		VeQuickItem {
-				uid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/RGB/0"
-				Component.onCompleted: setValue([96, 89, 82, 0, 0 ]) // green
-		}
-		VeQuickItem {
-				uid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/CCT/0"
-				Component.onCompleted: setValue([210, 29, 93, 0, 4700 ]) // light blue
-		}
-		VeQuickItem {
-				uid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/RGBW/0"
-				Component.onCompleted: setValue([57, 100, 100, 0, 0 ]) // yellow
-		}
-
 		Component {
 			id: colorDialogComponent
 

@@ -180,15 +180,15 @@ ModalDialog {
 
 			ColorPresetModel {
 				id: rgbPresetModel
-				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/RGB"
+				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/Switchpane/Preset/RGB"
 			}
 			ColorPresetModel {
 				id: rgbWPresetModel
-				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/RGBW"
+				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/Switchpane/Preset/RGBW"
 			}
 			ColorPresetModel {
 				id: cctPresetModel
-				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/SwitchPane/Preset/CCT"
+				settingUid: Global.systemSettings.serviceUid + "/Settings/Gui2/Switchpane/Preset/CCT"
 			}
 		}
 
