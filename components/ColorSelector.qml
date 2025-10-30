@@ -88,8 +88,7 @@ Item {
 
 		onMoved: {
 			// Save the selected brightness.
-			root.colorDimmerData.color.hsvValue = value
-			root.colorDimmerData.save()
+			hsvValueSync.writeValue(value)
 		}
 
 		handle: Halo {
@@ -170,11 +169,23 @@ Item {
 			}
 		}
 
+		SliderSettingSync {
+			id: hsvValueSync
+			dataItem: QtObject {
+				readonly property real value: root.colorDimmerData.color.hsvValue
+				function setValue(v) {
+					root.colorDimmerData.color.hsvValue = v
+					root.colorDimmerData.save()
+				}
+			}
+			dragging: leftSlider.pressed
+			onUpdateSliderValue: leftSlider.value = root.colorDimmerData.color.hsvValue
+		}
+
 		DropShadow {
 			source: leftSlider.handle
 			anchors.fill: leftSlider.handle
 		}
-
 	}
 
 	T.Slider {
@@ -186,7 +197,6 @@ Item {
 		anchors.verticalCenter: colorWheel.verticalCenter
 		width: Theme.geometry_colorWheel_slider_width
 		height: Theme.geometry_colorWheel_slider_height
-		value: root.colorDimmerData.color.hsvSaturation
 		orientation: Qt.Vertical
 		topPadding: root._halfStrokeWidth
 		bottomPadding: root._halfStrokeWidth
@@ -194,8 +204,7 @@ Item {
 
 		onMoved: {
 			// Save the selected saturation.
-			root.colorDimmerData.color.hsvSaturation = value
-			root.colorDimmerData.save()
+			hsvSaturationSync.writeValue(value)
 		}
 
 		handle: Halo {
@@ -258,6 +267,19 @@ Item {
 			}
 		}
 
+		SliderSettingSync {
+			id: hsvSaturationSync
+			dataItem: QtObject {
+				readonly property real value: root.colorDimmerData.color.hsvSaturation
+				function setValue(v) {
+					root.colorDimmerData.color.hsvSaturation = v
+					root.colorDimmerData.save()
+				}
+			}
+			dragging: rightSlider.pressed
+			onUpdateSliderValue: rightSlider.value = root.colorDimmerData.color.hsvSaturation
+		}
+
 		DropShadow {
 			source: rightSlider.handle
 			anchors.fill: rightSlider.handle
@@ -270,7 +292,6 @@ Item {
 		y: colorWheel.y + colorWheel.height + Theme.geometry_colorWheel_lowerSlider_padding
 		anchors.horizontalCenter: colorWheel.horizontalCenter
 		to: 100
-		value: root.colorDimmerData.white
 		width: Theme.geometry_colorWheel_lowerSlider_width
 		height: Theme.geometry_colorWheel_lowerSlider_height
 		orientation: Qt.Horizontal
@@ -280,8 +301,7 @@ Item {
 
 		onMoved: {
 			// Save the selected white channel.
-			root.colorDimmerData.white = value
-			root.colorDimmerData.save()
+			whiteSync.writeValue(value)
 		}
 
 		handle: Halo {
@@ -300,6 +320,19 @@ Item {
 			id: lowerSliderBackground
 			source: Theme.colorScheme === Theme.Light ? "qrc:/images/slider_background_light.svg" : "qrc:/images/slider_background_dark.svg"
 			color: Theme.colorScheme === Theme.Light ? "black" : "white"
+		}
+
+		SliderSettingSync {
+			id: whiteSync
+			dataItem: QtObject {
+				readonly property real value: root.colorDimmerData.white
+				function setValue(v) {
+					root.colorDimmerData.white = v
+					root.colorDimmerData.save()
+				}
+			}
+			dragging: lowerSlider.pressed
+			onUpdateSliderValue: lowerSlider.value = root.colorDimmerData.white
 		}
 	}
 
@@ -368,20 +401,33 @@ Item {
 						Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) < Theme.geometry_colorWheel_selector_width/2) {
 					angle = Math.round((Math.atan2(width/2 - mouseX, mouseY - height/2) / (Math.PI*2) + 0.5) * 360)
 				}
-
+				let hsvHue
 				if (root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct) {
 					const temperatureColor = root.angleToTemperatureColor(mouseArea.angle)
-					root.colorDimmerData.color.hsvHue = temperatureColor.hsvHue
 					root.colorDimmerData.color.hsvSaturation = temperatureColor.hsvSaturation
 					root.colorDimmerData.colorTemperature = root.angleToTemperature(mouseArea.angle)
+					hsvHue = temperatureColor.hsvHue
 				} else {
-					root.colorDimmerData.color.hsvHue = root.angleToColor(360 - mouseArea.angle, 90 - colorGradient.angle, rightSlider.value).hsvHue
+					hsvHue = root.angleToColor(360 - angle, 90 - colorGradient.angle, rightSlider.value).hsvHue
 				}
-				root.colorDimmerData.save()
+				centreWheelSync.writeValue(hsvHue)
 			}
 
 			onPressed: updateAngleAndColor()
 			onPositionChanged: updateAngleAndColor()
+		}
+
+		SliderSettingSync {
+			id: centreWheelSync
+			dataItem: QtObject {
+				readonly property real value: root.colorDimmerData.color.hsvHue
+				function setValue(value) {
+					root.colorDimmerData.color.hsvHue = value
+					root.colorDimmerData.save()
+				}
+			}
+			dragging: mouseArea.pressed
+			onUpdateSliderValue: root.updateWheelAngle()
 		}
 
 		DropShadow {

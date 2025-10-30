@@ -21,8 +21,8 @@ QtObject {
 	// True if a value has been written to the backend, and the backend is not yet in sync.
 	readonly property bool busy: _maxBusyTimer.running && dataItem.value !== _pendingValue
 
+	readonly property var dataValue: dataItem.value
 	property var _pendingValue
-	readonly property var _dataValue: dataItem.value
 
 	signal timeout()
 
@@ -36,7 +36,7 @@ QtObject {
 		dataItem.setValue(v)
 	}
 
-	on_DataValueChanged: {
+	onDataValueChanged: {
 		if (_pendingValue === dataItem.value) {
 			_maxBusyTimer.stop()
 		}
