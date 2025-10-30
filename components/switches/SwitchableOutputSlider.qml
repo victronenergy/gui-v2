@@ -20,26 +20,11 @@ MiniSlider {
 		uid: root.switchableOutput.uid + "/Dimming"
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
-		onValueChanged: valueSync.syncBackendValueToSlider()
 	}
 
 	from: dimmingMinItem.valid ? dimmingMinItem.value : 0
 	to: dimmingMaxItem.valid ? dimmingMaxItem.value : 100
 	stepSize: stepSizeItem.valid ? stepSizeItem.value : 1
-
-	onDraggingChanged: {
-		if (dragging) {
-			// While the user is controlling the handle, do not move the handle if any value updates
-			//  are received from the backend.
-			delayedSliderUpdate.stop()
-		} else {
-			// When the handle is released, pause while the slider value is written to the backend
-			// (via the onMoved handler) to wait for the backend to get the updated value, before
-			// syncing the backend value back to the slider, else the handle will briefly jump back
-			// to the old backend value before updating to the new one.
-			valueSync.syncBackendValueToSlider()
-		}
-	}
 
 	onMoved: {
 		valueSync.writeValue(value)
@@ -86,31 +71,10 @@ MiniSlider {
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 
-	SettingSync {
+	SliderSettingSync {
 		id: valueSync
-
-		// Update the slider value to the backend value.
-		function syncBackendValueToSlider() {
-			// If user has interacted with the slider to change the value, delay briefly
-			// before syncing the slider to the backend value, else this may be done while
-			// user changes are still being written.
-			if (busy || root.dragging || delayedSliderUpdate.running) {
-				delayedSliderUpdate.restart()
-			} else {
-				root.value = dataItem.value ?? 0
-			}
-		}
-
 		dataItem: root.valueDataItem
-		onBusyChanged: if (!busy) syncBackendValueToSlider()
-	}
-
-	// When the slider is released, wait a second for the user value to sync to the backend,
-	// else the user will release the slider and then immediately see it jump several times
-	// as the backend catches up to the last written value.
-	Timer {
-		id: delayedSliderUpdate
-		interval: 1000
-		onTriggered: valueSync.syncBackendValueToSlider()
+		dragging: root.dragging
+		onUpdateSliderValue: root.value = dataItem.value || 0
 	}
 }

@@ -60,7 +60,7 @@ FocusScope {
 		to: 1
 		stepSize: 0.01
 		valueDataItem: QtObject {
-			readonly property var value: currentColorDimmerData.color.hsvValue
+			readonly property real value: currentColorDimmerData.color.hsvValue
 			function setValue(v) {
 				currentColorDimmerData.color.hsvValue = v
 				currentColorDimmerData.save()
