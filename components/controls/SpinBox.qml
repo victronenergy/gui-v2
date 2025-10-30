@@ -69,6 +69,9 @@ T.SpinBox {
 	contentItem: FocusScope {
 		id: spinBoxContentItem
 
+		implicitWidth: contentArea.implicitWidth
+		implicitHeight: contentArea.implicitHeight
+
 		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
 		// so that it can call the valueFromText() function
 		readonly property alias text: inputArea.text
@@ -152,13 +155,15 @@ T.SpinBox {
 			id: contentArea
 
 			anchors.centerIn: parent
-			implicitWidth: Math.min(root.availableWidth, Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth))
-			height: secondaryLabel.y + secondaryLabel.height
+			implicitWidth: Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth) + 2*Theme.geometry_textField_horizontalMargin
+			implicitHeight: secondaryLabel.y + secondaryLabel.height
+			width: Math.min(implicitWidth, parent.width)
+			height: Math.min(implicitHeight, parent.height)
 
 			SpinBoxInputArea {
 				id: inputArea
 
-				width: contentArea.width
+				width: parent.width
 				clip: true
 				spinBox: root
 				suffix: root.suffix
@@ -176,6 +181,7 @@ T.SpinBox {
 					top: inputArea.bottom
 					horizontalCenter: parent.horizontalCenter
 				}
+				width: parent.width
 				height: text.length ? implicitHeight : 0
 				color: Theme.color_font_secondary
 				font.pixelSize: Theme.font_size_caption
