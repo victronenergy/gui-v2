@@ -12,7 +12,7 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	required property VeQuickItem dataItem
+	required property var dataItem
 
 	// If busy=true, this is the value that was written (but not yet present in the backend),
 	// otherwise this is the backend value.

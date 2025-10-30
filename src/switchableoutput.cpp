@@ -61,7 +61,7 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 	// Initialize the settings properties
 	if (VeQItem *typeItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Type"))) {
 		m_typeItem = typeItem;
-		connect(typeItem, &VeQItem::valueChanged, this, &SwitchableOutput::setType);
+		connect(typeItem, &VeQItem::valueChanged, this, &SwitchableOutput::setTypeFromVariant);
 	}
 	if (VeQItem *groupItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Group"))) {
 		m_groupItem = groupItem;
@@ -284,11 +284,18 @@ void SwitchableOutput::setDimming(qreal dimming)
 	}
 }
 
-void SwitchableOutput::setType(const QVariant &typeValue)
+void SwitchableOutput::setType(int type)
 {
-	Q_UNUSED(typeValue);
-	updateAllowedInGroupModel();
-	emit typeChanged();
+	if (m_typeItem) {
+		m_typeItem->setValue(type);
+		updateAllowedInGroupModel();
+		emit typeChanged();
+	}
+}
+
+void SwitchableOutput::setTypeFromVariant(const QVariant &typeValue)
+{
+	setType(typeValue.isValid() ? typeValue.toInt() : -1);
 }
 
 void SwitchableOutput::setUnit(const QVariant &unitValue)

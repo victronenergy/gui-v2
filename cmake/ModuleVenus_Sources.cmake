@@ -32,6 +32,9 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/CircularSingleGauge.qml
     components/CheapBarGauge.qml
     components/ClippingBarGauge.qml
+    components/ColorPresetGrid.qml
+    components/ColorSelector.qml
+    components/ColorWheelModeButton.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
@@ -152,6 +155,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
 
+    components/dialogs/ColorWheelDialog.qml
     components/dialogs/CurrentLimitDialog.qml
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogShadow.qml
@@ -235,6 +239,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 
     components/switches/SwitchableOutputCardDelegateHeader.qml
     components/switches/SwitchableOutputGroupCard.qml
+    components/switches/SwitchableOutputDimmableSlider.qml
     components/switches/SwitchableOutputSlider.qml
     components/switches/delegates/SwitchableOutputCardDelegate_0.qml
     components/switches/delegates/SwitchableOutputCardDelegate_1.qml
@@ -246,6 +251,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/switches/delegates/SwitchableOutputCardDelegate_8.qml
     components/switches/delegates/SwitchableOutputCardDelegate_9.qml
     components/switches/delegates/SwitchableOutputCardDelegate_10.qml
+    components/switches/delegates/SwitchableOutputCardDelegate_color.qml
 
     components/widgets/AcWidget.qml
     components/widgets/AcInputWidget.qml
@@ -580,6 +586,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/colordimmerdata.h
+    src/colordimmerdata.cpp
     src/dcmeterdevicemodel.h
     src/dcmeterdevicemodel.cpp
     src/device.h
@@ -686,6 +694,8 @@ set(VictronVenusOS_RESOURCES
     images/icon_vrm_32.png
     images/brief.svg
     images/cloud.svg
+    images/color_wheel_rgb.png
+    images/color_wheel_temperature.png
     images/consumption.svg
     images/dcloads.svg
     images/dot.svg
@@ -702,6 +712,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_charging_renewables.svg
     images/icon_charging_shore.svg
     images/icon_CL_24.svg
+    images/icon_edit_32.svg
     images/icon_fresh_water_24.svg
     images/icon_raw_water_24.svg
     images/icon_waste_water_24.svg
