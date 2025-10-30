@@ -525,5 +525,10 @@
         "/SwitchableOutput/color_dimmer_rgbw/Settings/ValidFunctions": 2,
         "/SwitchableOutput/color_dimmer_rgbw/State": 1,
         "/SwitchableOutput/color_dimmer_rgbw/Status": 9
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Gui2/Switchpane/Preset/RGB": [96,89,82,0,0,210,29,93,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "/Settings/Gui2/Switchpane/Preset/RGBW": [57,100,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "/Settings/Gui2/Switchpane/Preset/CCT": [210,29,93,0,4700,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }
 }

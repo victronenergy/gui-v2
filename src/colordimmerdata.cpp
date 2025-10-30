@@ -40,7 +40,11 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, qreal *wh
 		const qreal h = variantToReal(colorData.value(0));
 		const qreal s = variantToReal(colorData.value(1));
 		const qreal v = variantToReal(colorData.value(2));
-		color->setHsvF(FastUtils::create()->scaleNumber(h, 0, 359, 0, 1), s / 100, v / 100);
+		if (h == 0 && s == 0 && v == 0) {
+			*color = QColor();
+		} else {
+			color->setHsvF(FastUtils::create()->scaleNumber(h, 0, 359, 0, 1), s / 100, v / 100);
+		}
 	}
 	if (white) {
 		*white = variantToReal(colorData.value(3));
@@ -51,11 +55,17 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, qreal *wh
 }
 void addStorageColorData(QList<double> *colorData, const QColor color, qreal white, qreal colorTemperature)
 {
-	float h, s, v;
-	color.getHsvF(&h, &s, &v);
-	colorData->append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
-	colorData->append(s * 100);
-	colorData->append(v * 100);
+	if (color.isValid()) {
+		float h, s, v;
+		color.getHsvF(&h, &s, &v);
+		colorData->append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
+		colorData->append(s * 100);
+		colorData->append(v * 100);
+	} else {
+		colorData->append(0);
+		colorData->append(0);
+		colorData->append(0);
+	}
 	colorData->append(white);
 	colorData->append(colorTemperature);
 }
@@ -286,18 +296,12 @@ void ColorPresetModel::save()
 		return;
 	}
 
+	QList<double> colorData;
 	for (int i = 0; i < m_colors.count(); ++i) {
-		if (VeQItem *presetItem = m_settingItem->itemGetOrCreate(QString::number(i))) {
-			const ColorInfo &info = m_colors.at(i);
-			if (info.color.isValid()) {
-				QList<double> colorData;
-				::addStorageColorData(&colorData, info.color, info.white, info.colorTemperature);
-				presetItem->setValue(QVariant::fromValue(colorData));
-			} else {
-				presetItem->setValue(QVariant());
-			}
-		}
+		const ColorInfo &info = m_colors.at(i);
+		::addStorageColorData(&colorData, info.color, info.white, info.colorTemperature);
 	}
+	m_settingItem->setValue(QVariant::fromValue(colorData));
 }
 
 void ColorPresetModel::reload()
@@ -317,20 +321,20 @@ void ColorPresetModel::reload()
 		emit countChanged();
 	}
 
-	static const int presetCount = 9;
-	beginInsertRows(QModelIndex(), 0, presetCount - 1);
-	for (int i = 0; i < presetCount; ++i) {
+	// Expect 9 groups of presets, where each preset is made up of 5 values
+	static const int valuesPerPreset = 5;
+	static const int presetGroupCount = 9;
+	QVariantList colorData = m_settingItem->getValue().toList();
+	beginInsertRows(QModelIndex(), 0, presetGroupCount - 1);
+	for (int presetGroupIndex = 0; presetGroupIndex < presetGroupCount; ++presetGroupIndex) {
 		QColor color;
 		qreal white = 0;
 		qreal colorTemperature = 0;
-		if (VeQItem *presetItem = m_settingItem->itemGet(QString::number(i))) {
-			const QVariantList colorData = presetItem->getValue().toList();
-			if (!colorData.isEmpty()) {
-				::getStorageColorData(colorData, &color, &white, &colorTemperature);
-			}
-		}
+		::getStorageColorData(colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
+				&color, &white, &colorTemperature);
 		m_colors.append({ color, white, colorTemperature });
 	}
+
 	endInsertRows();
 	emit countChanged();
 }
