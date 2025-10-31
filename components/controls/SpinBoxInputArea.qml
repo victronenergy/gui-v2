@@ -99,8 +99,8 @@ TextInput {
 		event.accepted = false
 	}
 
-	leftPadding: Theme.geometry_textField_horizontalMargin
-	rightPadding: suffixLabel.width + Theme.geometry_quantityLabel_spacing + Theme.geometry_textField_horizontalMargin
+	leftPadding: 0
+	rightPadding: (suffixLabel.visible ? suffixLabel.width + Theme.geometry_quantityLabel_spacing : 0)
 	focus: root.spinBox.editable
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	font.family: Global.fontFamily
@@ -128,5 +128,6 @@ TextInput {
 		font: parent.font
 		horizontalAlignment: parent.horizontalAlignment
 		verticalAlignment: parent.verticalAlignment
+		topPadding: 0.5 // adjust for text input baseline difference
 	}
 }
