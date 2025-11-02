@@ -21,6 +21,7 @@ Item {
 			}
 		})
 		currentDialog.open()
+		return currentDialog
 	}
 
 	Connections {
