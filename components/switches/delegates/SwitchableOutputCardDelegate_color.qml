@@ -13,6 +13,7 @@ FocusScope {
 	id: root
 
 	required property SwitchableOutput switchableOutput
+	property QtObject _selectorDialog
 
 	enabled: root.switchableOutput.status !== VenusOS.SwitchableOutput_Status_Disabled
 	focus: true
@@ -79,7 +80,7 @@ FocusScope {
 		implicitWidth: Theme.geometry_switchableoutput_control_height
 		implicitHeight: Theme.geometry_switchableoutput_control_height
 
-		onClicked: Global.dialogLayer.open(colorDialogComponent)
+		onClicked: root._selectorDialog = Global.dialogLayer.open(colorDialogComponent)
 
 		Rectangle {
 			anchors.fill: parent
@@ -108,6 +109,15 @@ FocusScope {
 				switchableOutput: root.switchableOutput
 				supportedOutputTypes: validTypesItem.valid ? validTypesItem.value : 0
 			}
+		}
+	}
+
+	Component.onDestruction: {
+		// Delegate may be destroyed while dialog is open, if SwitchableOutput::allowedInGroupModel
+		// becomes false. If so, immediately close the dialog as the parent scope has disappeared.
+		if (_selectorDialog && _selectorDialog.opened) {
+			_selectorDialog.destroy()
+			_selectorDialog = null
 		}
 	}
 }
