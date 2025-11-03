@@ -218,65 +218,114 @@ TestCase {
 	function test_allowedInGroupModel_data() {
 		return [
 			{
-				tag: "Type invalid",
+				tag: "State valid, invalid type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": -1, },
+				outputProperties: { "State": 0, "Settings/Type": -1, },
+				hasValidType: false,
 				allowedInGroupModel: false,
 			},
 			{
-				tag: "Type valid",
+				tag: "State valid, ValidTypes matched",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": 0, },
+				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
 				allowedInGroupModel: true,
+			},
+			{
+				tag: "State valid, ValidTypes matched, but Type is out of bounds",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"State": 0,
+					"Settings/Type": VenusOS.SwitchableOutput_Type_MaxSupportedType + 1,
+					"Settings/ValidTypes": 1 << (VenusOS.SwitchableOutput_Type_MaxSupportedType + 1),
+				},
+				hasValidType: false,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "Dimming valid but no State, ValidTypes matched",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "Dimming": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "Neither State nor Dimming valid, ValidTypes matched",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: false,
 			},
 
 			{
-				// If ShowUIControl is not set, but Type is ok, then output is allowed.
-				tag: "ShowUIControl not set, type valid",
+				tag: "ValidTypes matches 1st type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": 0 },
+				outputProperties: { "State": 0, "Settings/Type": 1, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
-				tag: "ShowUIControl=1, type valid",
+				tag: "ValidTypes matches 2nd type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 1, "Settings/Type": 0 },
+				outputProperties: { "State": 0, "Settings/Type": 2, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
-				tag: "ShowUIControl=0, type valid",
+				tag: "ValidTypes not matched for either type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 0, "Settings/Type": 0 },
-				allowedInGroupModel: false,
-			},
-			{
-				tag: "ShowUIControl=1, type invalid",
-				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 1, "Settings/Type": -1 },
+				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				hasValidType: false,
 				allowedInGroupModel: false,
 			},
 
 			{
-				tag: "Relay function = manual",
-				uid: "mock/com.victronenergy.system/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": 0, "Settings/Function": 2 },
+				tag: "ShowUIControl=1, other params valid",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
-				tag: "Relay function = start/stop",
+				tag: "ShowUIControl=0, other params valid",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "Settings/ShowUIControl": 0, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIControl=1, ValidTypes not matched",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0 },
+				hasValidType: false,
+				allowedInGroupModel: false,
+			},
+
+			{
+				tag: "Relay function = manual, other params valid",
 				uid: "mock/com.victronenergy.system/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": 0, "Settings/Function": 1 },
+				outputProperties: { "Settings/Function": 2, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "Relay function = start/stop, other params valid",
+				uid: "mock/com.victronenergy.system/SwitchableOutput/1",
+				outputProperties: { "Settings/Function": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0},
+				hasValidType: true,
 				allowedInGroupModel: false,
 			},
 		]
 	}
 
 	function test_allowedInGroupModel(data) {
+		compare(output.hasValidType, false)
 		compare(output.allowedInGroupModel, false)
 
 		setOutputProperties(data.uid, data.outputProperties)
 		output.uid = data.uid
 		compare(output.uid, data.uid)
+		compare(output.hasValidType, data.hasValidType)
 		compare(output.allowedInGroupModel, data.allowedInGroupModel)
 
 		// Clean up

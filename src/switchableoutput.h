@@ -57,6 +57,8 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(int status READ status NOTIFY statusChanged FINAL)
 	Q_PROPERTY(qreal dimming READ dimming NOTIFY dimmingChanged FINAL)
 	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
+	Q_PROPERTY(int validTypes READ validTypes NOTIFY validTypesChanged FINAL)
+	Q_PROPERTY(bool hasValidType READ hasValidType NOTIFY hasValidTypeChanged FINAL)
 	Q_PROPERTY(QString group READ group NOTIFY groupChanged FINAL)
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
 	Q_PROPERTY(QString unitText READ unitText NOTIFY unitTextChanged FINAL)
@@ -86,6 +88,9 @@ public:
 	// name and instance.
 	QString formattedName() const;
 
+	// Whether the Type is a supported Type value, and matches the ValidTypes.
+	bool hasValidType() const;
+
 	// Whether the output should be included in a SwitchableOutputGroupModel.
 	bool allowedInGroupModel() const;
 
@@ -97,6 +102,7 @@ public:
 	// Output/channel settings (under /Settings sub-path)
 	int type() const;
 	void setType(int type);
+	int validTypes() const;
 	QString group() const;
 	QString unitText() const; // The raw /Unit value
 	int unitType() const; // The unit, converted to a Unit_Type value (if applicable)
@@ -114,6 +120,8 @@ Q_SIGNALS:
 	void statusChanged();
 	void dimmingChanged();
 	void typeChanged();
+	void validTypesChanged();
+	void hasValidTypeChanged();
 	void groupChanged();
 	void allowedInGroupModelChanged();
 	void unitTextChanged();
@@ -123,12 +131,13 @@ Q_SIGNALS:
 private:
 	void initialize(VeQItem *outputItem);
 	void reset();
-	void setType(const QVariant &typeValue);
 	void setTypeFromVariant(const QVariant &typeValue);
+	void setValidTypes(const QVariant &validTypesValue);
 	void setUnit(const QVariant &unitValue);
 	void setDecimals(const QVariant &decimalsVariant);
 	void updateDecimalsFromStepSize(const QVariant &stepSizeVariant);
 	void updateDecimals();
+	void updateHasValidType();
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
 
@@ -142,6 +151,7 @@ private:
 
 	// Settings properties (under /Settings path)
 	QPointer<VeQItem> m_typeItem;
+	QPointer<VeQItem> m_validTypesItem;
 	QPointer<VeQItem> m_groupItem;
 	QPointer<VeQItem> m_customNameItem;
 	QPointer<VeQItem> m_showUIControlItem;
@@ -159,6 +169,7 @@ private:
 	int m_unitType = Enums::Units_None;
 	int m_rawDecimals = -1;
 	int m_decimals = 0;
+	bool m_hasValidType = false;
 	bool m_allowedInGroupModel = false;
 };
 
