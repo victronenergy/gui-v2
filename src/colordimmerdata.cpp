@@ -156,11 +156,15 @@ void ColorDimmerData::reload()
 		return;
 	}
 
-	const QVariantList colorData = m_colorDataItem->getValue().toList();
 	QColor color;
 	qreal white = 0;
 	qreal colorTemperature = 0;
-	::getStorageColorData(colorData, &color, &white, &colorTemperature);
+	const QVariantList colorData = m_colorDataItem->getValue().toList();
+	if (colorData.isEmpty()) {
+		color = QColor::fromHsv(0, 0, 0);
+	} else {
+		::getStorageColorData(colorData, &color, &white, &colorTemperature);
+	}
 
 	setColor(color);
 	setWhite(white);
