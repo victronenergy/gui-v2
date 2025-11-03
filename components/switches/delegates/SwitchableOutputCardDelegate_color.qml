@@ -19,15 +19,26 @@ FocusScope {
 	focus: true
 	KeyNavigationHighlight.active: activeFocus && !slider.activeFocus
 
+	// When Space is pressed: focus the slider. From there, user can press Space again to enter
+	// edit mode on the slider and its On/Off button, or press Right to focus the color box.
 	Keys.onPressed: (event) => {
 		switch (event.key) {
 		case Qt.Key_Space:
-			if (slider.activeFocus) {
-				slider.toggleOutputState()
-			} else {
-				slider.focus = true
-			}
+			sliderContainer.focus = true
 			event.accepted = true
+			break
+		case Qt.Key_Escape:
+		case Qt.Key_Return:
+		case Qt.Key_Enter:
+			sliderContainer.focus = false
+			colorPickerButton.focus = false
+			event.accepted = true
+			break
+		case Qt.Key_Up:
+		case Qt.Key_Down:
+			if (sliderContainer.activeFocus || colorPickerButton.activeFocus) {
+				event.accepted = true
+			}
 			break
 		}
 	}
@@ -46,8 +57,8 @@ FocusScope {
 		switchableOutput: root.switchableOutput
 	}
 
-	SwitchableOutputDimmableSlider {
-		id: slider
+	FocusScope {
+		id: sliderContainer
 
 		anchors {
 			left: parent.left
@@ -56,15 +67,37 @@ FocusScope {
 			rightMargin: Theme.geometry_switchableoutput_spacing
 			top: header.bottom
 		}
-		switchableOutput: root.switchableOutput
-		from: 0
-		to: 1
-		stepSize: 0.01
-		valueDataItem: QtObject {
-			readonly property real value: currentColorDimmerData.color.hsvValue
-			function setValue(v) {
-				currentColorDimmerData.color.hsvValue = v
-				currentColorDimmerData.save()
+		height: slider.height
+		KeyNavigationHighlight.active: activeFocus
+
+		Keys.onPressed: (event) => {
+			switch (event.key) {
+			case Qt.Key_Space:
+				if (slider.activeFocus) {
+					slider.toggleOutputState()
+				} else {
+					slider.focus = true
+				}
+				event.accepted = true
+				break
+			}
+		}
+		KeyNavigation.right: colorPickerButton
+
+		SwitchableOutputDimmableSlider {
+			id: slider
+
+			width: parent.width
+			switchableOutput: root.switchableOutput
+			from: 0
+			to: 1
+			stepSize: 0.01
+			valueDataItem: QtObject {
+				readonly property real value: currentColorDimmerData.color.hsvValue
+				function setValue(v) {
+					currentColorDimmerData.color.hsvValue = v
+					currentColorDimmerData.save()
+				}
 			}
 		}
 	}
@@ -80,6 +113,8 @@ FocusScope {
 		implicitWidth: Theme.geometry_switchableoutput_control_height
 		implicitHeight: Theme.geometry_switchableoutput_control_height
 
+		KeyNavigationHighlight.active: activeFocus
+		Keys.onSpacePressed: root._selectorDialog = Global.dialogLayer.open(colorDialogComponent)
 		onClicked: root._selectorDialog = Global.dialogLayer.open(colorDialogComponent)
 
 		Rectangle {
