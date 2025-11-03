@@ -13,13 +13,13 @@ ControlCard {
 
 	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
 	icon.source: "qrc:/images/icon_switch_24.svg"
-	title.text: root.group.name
+	title.text: root.group?.name ?? ""
 
 	GridView {
 		id: outputGrid
 
 		readonly property int rowCount: Math.floor(height / cellHeight)
-		readonly property int columnCount: Math.ceil(root.group.outputs.length / Math.max(1, rowCount))
+		readonly property int columnCount: Math.ceil(count / Math.max(1, rowCount))
 
 		anchors {
 			top: root.title.bottom
@@ -33,7 +33,7 @@ ControlCard {
 		flow: GridView.FlowTopToBottom
 		focus: Global.keyNavigationEnabled
 		keyNavigationEnabled: Global.keyNavigationEnabled
-		model: root.group.outputs
+		model: root.group?.outputs ?? []
 
 		delegate: BaseListLoader {
 			id: delegateLoader
