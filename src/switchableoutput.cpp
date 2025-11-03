@@ -44,6 +44,7 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 	if (VeQItem *stateItem = m_outputItem->itemGetOrCreate(QStringLiteral("State"))) {
 		m_stateItem = stateItem;
 		connect(stateItem, &VeQItem::valueChanged, this, &SwitchableOutput::stateChanged);
+		connect(stateItem, &VeQItem::valueChanged, this, &SwitchableOutput::updateAllowedInGroupModel);
 	}
 	if (VeQItem *statusItem = m_outputItem->itemGetOrCreate(QStringLiteral("Status"))) {
 		m_statusItem = statusItem;
@@ -56,12 +57,17 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 	if (VeQItem *dimmingItem = m_outputItem->itemGetOrCreate(QStringLiteral("Dimming"))) {
 		m_dimmingItem = dimmingItem;
 		connect(dimmingItem, &VeQItem::valueChanged, this, &SwitchableOutput::dimmingChanged);
+		connect(dimmingItem, &VeQItem::valueChanged, this, &SwitchableOutput::updateAllowedInGroupModel);
 	}
 
 	// Initialize the settings properties
 	if (VeQItem *typeItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Type"))) {
 		m_typeItem = typeItem;
 		connect(typeItem, &VeQItem::valueChanged, this, &SwitchableOutput::setTypeFromVariant);
+	}
+	if (VeQItem *validTypesItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/ValidTypes"))) {
+		m_validTypesItem = validTypesItem;
+		connect(validTypesItem, &VeQItem::valueChanged, this, &SwitchableOutput::setValidTypes);
 	}
 	if (VeQItem *groupItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Group"))) {
 		m_groupItem = groupItem;
@@ -115,6 +121,7 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 	}
 
 	updateFormattedName();
+	updateHasValidType();
 	updateAllowedInGroupModel();
 }
 
@@ -124,7 +131,7 @@ void SwitchableOutput::reset()
 	const QList<QPointer<VeQItem> *> items = {
 		&m_outputItem,
 		&m_stateItem, &m_statusItem, &m_nameItem, &m_dimmingItem,
-		&m_typeItem,  &m_groupItem, &m_customNameItem, &m_showUIControlItem,
+		&m_typeItem, &m_validTypesItem, &m_groupItem, &m_customNameItem, &m_showUIControlItem,
 		&m_relayFunctionItem
 	};
 	for (QPointer<VeQItem> *item : items) {
@@ -134,18 +141,19 @@ void SwitchableOutput::reset()
 		}
 	}
 
-	// Clear properties for which there are no VeQItem members.
-	setUnit(QVariant());
-	setDecimals(QVariant());
-	updateDecimalsFromStepSize(QVariant());
-
 	if (m_device) {
 		m_device->disconnect(this);
 		m_device.clear();
 	}
 
 	m_serviceUid.clear();
+
+	// Clear properties for which there are no VeQItem members.
+	setUnit(QVariant());
+	setDecimals(QVariant());
+	updateDecimalsFromStepSize(QVariant());
 	updateFormattedName();
+	updateHasValidType();
 	updateAllowedInGroupModel();
 }
 
@@ -245,6 +253,16 @@ int SwitchableOutput::type() const
 	return ok ? t : -1;
 }
 
+int SwitchableOutput::validTypes() const
+{
+	return m_validTypesItem ? m_validTypesItem->getValue().toInt() : 0;
+}
+
+bool SwitchableOutput::hasValidType() const
+{
+	return m_hasValidType;
+}
+
 QString SwitchableOutput::group() const
 {
 	return m_groupItem ? m_groupItem->getValue().toString() : QString();
@@ -274,6 +292,7 @@ void SwitchableOutput::setState(int state)
 {
 	if (m_stateItem) {
 		m_stateItem->setValue(state);
+		updateAllowedInGroupModel();
 	}
 }
 
@@ -288,7 +307,7 @@ void SwitchableOutput::setType(int type)
 {
 	if (m_typeItem) {
 		m_typeItem->setValue(type);
-		updateAllowedInGroupModel();
+		updateHasValidType();
 		emit typeChanged();
 	}
 }
@@ -296,6 +315,13 @@ void SwitchableOutput::setType(int type)
 void SwitchableOutput::setTypeFromVariant(const QVariant &typeValue)
 {
 	setType(typeValue.isValid() ? typeValue.toInt() : -1);
+}
+
+void SwitchableOutput::setValidTypes(const QVariant &validTypesValue)
+{
+	Q_UNUSED(validTypesValue);
+	updateHasValidType();
+	emit validTypesChanged();
 }
 
 void SwitchableOutput::setUnit(const QVariant &unitValue)
@@ -355,16 +381,31 @@ void SwitchableOutput::updateDecimals()
 	}
 }
 
+void SwitchableOutput::updateHasValidType()
+{
+	const int typeInt = type();
+	const bool hasValidType = typeInt >= Enums::SwitchableOutput_Type_Momentary
+			&& typeInt <= Enums::SwitchableOutput_Type_MaxSupportedType
+			&& (validTypes() & (1 << typeInt));
+	if (hasValidType != m_hasValidType) {
+		m_hasValidType = hasValidType;
+		updateAllowedInGroupModel();
+		emit hasValidTypeChanged();
+	}
+}
+
 void SwitchableOutput::updateAllowedInGroupModel()
 {
 	// Output is allowed in the group model if all these conditions are true:
-	// - ShowUIControl is not set, or is set to 1
-	// - Type is a UI-controllable type
-	// - If this is a system relay, it is only allowed if it is set as a manual relay
+	// - /Type is valid and matches the /ValidTypes
+	// - /State or /Dimming are valid
+	// - /ShowUIControl is not set, or is set to 1
+	// - If this is a system relay, its function must also be set to 'manual'
 	const QVariant showUIControl = m_showUIControlItem ? m_showUIControlItem->getValue() : QVariant();
-	const int typeInt = type();
-	const bool allowed = (!showUIControl.isValid() || showUIControl.toInt() == 1)
-			&& (typeInt >= 0 && typeInt != Enums::SwitchableOutput_Type_Slave)
+	const bool allowed = hasValidType()
+			&& (m_stateItem && m_stateItem->getValue().isValid()
+				|| m_dimmingItem && m_dimmingItem->getValue().isValid())
+			&& (!showUIControl.isValid() || showUIControl.toInt() == 1)
 			&& (!m_relayFunctionItem || m_relayFunctionItem->getValue().toInt() == Enums::Relay_Function_Manual);
 	if (allowed != m_allowedInGroupModel) {
 		m_allowedInGroupModel = allowed;

@@ -49,6 +49,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					}
@@ -71,8 +73,12 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/1/Name": "a1",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 						},
 					}
@@ -96,6 +102,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_a_product",
 							"SwitchableOutput/0/Name": "a0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					},
@@ -105,6 +113,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_b_product",
 							"SwitchableOutput/0/Name": "b0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					}
@@ -133,8 +143,12 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_a_product",
 							"SwitchableOutput/0/Name": "a0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/1/Name": "a1",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 						},
 					},
@@ -144,8 +158,12 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_b_product",
 							"SwitchableOutput/0/Name": "b0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/1/Name": "b1",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 						},
 					}
@@ -174,12 +192,18 @@ TestCase {
 						uid: "mock/com.victronenergy.system",
 						children: {
 							"SwitchableOutput/0/Name": "manual1",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Function": 2, // Manual
 							"SwitchableOutput/1/Name": "startstop",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 							"SwitchableOutput/1/Settings/Function": 1, // Start/Stop (disallowed from model)
 							"SwitchableOutput/2/Name": "manual2",
+							"SwitchableOutput/2/State": 0,
+							"SwitchableOutput/2/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/2/Settings/Type": 0,
 							"SwitchableOutput/2/Settings/Function": 2, // Manual
 						},
@@ -203,6 +227,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "group1",
 						},
@@ -226,9 +252,13 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a0",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "abc",
 							"SwitchableOutput/1/Name": "a1",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 							"SwitchableOutput/1/Settings/Group": "abc",
 						},
@@ -261,6 +291,9 @@ TestCase {
 			compare(group.outputs.length, data.groups[i].outputs.length)
 			for (j = 0 ; j < data.groups[i].outputs.length; ++j) {
 				const outputData = data.groups[i].outputs[j]
+				console.log("output:", group.outputs[j].uid,
+						group.outputs[j].hasValidType,
+						group.outputs[j].allowedInGroupModel)
 				for (const outputPropertyName in outputData) {
 					compare(group.outputs[j][outputPropertyName], outputData[outputPropertyName], outputPropertyName)
 				}
@@ -282,6 +315,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					}
@@ -315,6 +350,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "some group",
 						},
@@ -347,6 +384,8 @@ TestCase {
 						uid: "mock/com.victronenergy.solarcharger.a",
 						children: {
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "",
 						},
@@ -382,6 +421,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					}
@@ -408,6 +449,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "group1",
 						},
@@ -435,6 +478,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "group1",
 							"SwitchableOutput/0/Settings/ShowUIControl": 0,
@@ -463,6 +508,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "",
 							"SwitchableOutput/0/Settings/ShowUIControl": 0,
@@ -491,9 +538,13 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Group": "group 1",
 							"SwitchableOutput/1/Name": "b",
+							"SwitchableOutput/1/State": 0,
+							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
 							"SwitchableOutput/1/Settings/Group": "", // in device group
 						},
@@ -502,6 +553,8 @@ TestCase {
 						uid: "mock/com.victronenergy.system",
 						children: {
 							"SwitchableOutput/0/Name": "manual1",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 							"SwitchableOutput/0/Settings/Function": 2, // Manual
 							"SwitchableOutput/0/Settings/Group": "group 2",
@@ -556,6 +609,8 @@ TestCase {
 							DeviceInstance: 0,
 							ProductName: "solarcharger_product",
 							"SwitchableOutput/0/Name": "a",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
 						},
 					}
