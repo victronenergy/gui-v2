@@ -7,8 +7,8 @@ import QtQuick
 import Victron.VenusOS
 
 IconButton {
-	width: icon.sourceSize.width + (2 * Theme.geometry_closeButton_margins)
-	height: icon.sourceSize.height + (2 * Theme.geometry_closeButton_margins)
+	width: Theme.geometry_button_touch_size
+	height: Theme.geometry_button_touch_size
 	icon.color: Theme.color_ok
 	icon.source: "qrc:/images/icon_close_32.svg"
 }

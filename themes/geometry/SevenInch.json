@@ -21,11 +21,12 @@
     "geometry_barGauge_phaseLabel_leftPadding": 3,
     "geometry_barGauge_phaseLabel_rightPadding": 3,
 
+    "geometry_button_touch_size": 48,
     "geometry_button_spacing": 7,
     "geometry_button_radius": 8,
     "geometry_button_border_width": 2,
 
-    "geometry_closeButton_margins": 4,
+    "geometry_closeButton_rightMargin": 8,
 
     "geometry_colorWheel_width": 333,
     "geometry_colorWheel_height": 260,
