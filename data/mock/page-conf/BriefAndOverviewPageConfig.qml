@@ -483,7 +483,7 @@ Item {
 					"/Ac/Power": Math.random() * 500,
 					"/Ac/Current": Math.random() * 10,
 					"/Session/Energy": Math.random() * 100,
-					"/ChargingTime": Math.floor(Math.random() * 60)
+					"/Session/Time": Math.floor(Math.random() * 60)
 				}
 				createDevice("evcharger", deviceInstanceNum, values)
 			}
