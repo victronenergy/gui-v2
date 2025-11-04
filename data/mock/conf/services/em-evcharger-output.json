@@ -18,7 +18,6 @@
         "/Ac/Power": 70,
         "/Ac/Voltage": 151.4,
         "/AllowedRoles": ["grid", "pvinverter", "genset", "acload", "evcharger", "heatpump"],
-        "/ChargingTime": null,
         "/Connected": 1,
         "/Current": null,
         "/CustomName": "Energy meter (evcharger, output)",
@@ -37,6 +36,7 @@
         "/ProductName": "EVSE",
         "/RefreshTime": 600,
         "/Role": "evcharger",
+        "/Session/Time": null,
         "/Status": 1
     }
 }

@@ -6,7 +6,6 @@
         "/Ac/L3/Power": 0.0,
         "/Ac/Power": 6927.0,
         "/AutoStart": 1.0,
-        "/ChargingTime": 8838.0,
         "/Connected": 1,
         "/Current": 22.0,
         "/CustomName": "EVCS",
@@ -25,6 +24,7 @@
         "/Role": "evcharger",
         "/Serial": "ABC123456",
         "/Session/Energy": 3.45,
+        "/Session/Time": 8838.0,
         "/SetCurrent": 22,
         "/StartStop": 1,
         "/Status": 2

@@ -29,7 +29,7 @@ Device {
 	}
 
 	readonly property VeQuickItem _chargingTime: VeQuickItem {
-		uid: evCharger.serviceUid + "/ChargingTime"
+		uid: evCharger.serviceUid + "/Session/Time"
 	}
 
 	readonly property VeQuickItem _connected: VeQuickItem {

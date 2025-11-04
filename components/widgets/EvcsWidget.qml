@@ -106,7 +106,7 @@ OverviewWidget {
 
 					VeQuickItem {
 						id: chargingTimeItem
-						uid: singleCharger.serviceUid + "/ChargingTime"
+						uid: singleCharger.serviceUid + "/Session/Time"
 					}
 				}
 			}
