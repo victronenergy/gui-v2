@@ -88,6 +88,7 @@ ModalDialog {
 
 		CloseButton {
 			anchors.right: parent.right
+			anchors.rightMargin: Theme.geometry_closeButton_rightMargin
 			onClicked: root.close()
 		}
 	}
