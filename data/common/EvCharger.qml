@@ -21,7 +21,7 @@ Device {
 	readonly property real maxCurrent: _maxCurrent.valid ? _maxCurrent.value : NaN
 
 	readonly property VeQuickItem _energy: VeQuickItem {
-		uid: evCharger.serviceUid + "/Ac/Energy/Forward"
+		uid: evCharger.serviceUid + "/Session/Energy"
 	}
 
 	readonly property VeQuickItem _power: VeQuickItem {

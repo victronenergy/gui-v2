@@ -28,6 +28,8 @@ Page {
 
 					width: parent.width
 					rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+					//% "Session"
+					summaryHeaderText: qsTrId("evcs_charger_list_session")
 					summaryModel: [
 						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
 						{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },

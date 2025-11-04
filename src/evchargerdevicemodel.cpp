@@ -274,7 +274,7 @@ void EvChargerDeviceModel::addEvChargerDevice(Device *device)
 			connect(info.currentItem, &VeQItem::valueChanged,
 					this, &EvChargerDeviceModel::scheduleUpdateTotals);
 		}
-		info.energyItem = serviceItem->itemGetOrCreate(QStringLiteral("Ac/Energy/Forward"));
+		info.energyItem = serviceItem->itemGetOrCreate(QStringLiteral("Session/Energy"));
 		if (info.energyItem) {
 			connect(info.energyItem, &VeQItem::valueChanged,
 					this, &EvChargerDeviceModel::scheduleUpdateTotals);
