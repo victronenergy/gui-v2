@@ -63,7 +63,7 @@ OverviewWidget {
 
 				VeQuickItem {
 					id: energyItem
-					uid: singleCharger.serviceUid + "/Ac/Energy/Forward"
+					uid: singleCharger.serviceUid + "/Session/Energy"
 				}
 			}
 
