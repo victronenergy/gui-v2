@@ -82,6 +82,7 @@ OverviewWidget {
 
 			Row {
 				width: parent.width
+				height: chargingTimeLabel.height
 				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
 
 				Label {
@@ -99,7 +100,7 @@ OverviewWidget {
 				FixedWidthLabel {
 					id: chargingTimeLabel
 
-					text: chargingTimeItem.value > 60 ? Utils.formatAsHHMM(chargingTimeItem.value, true) : Utils.formatAsHHMMSS(chargingTimeItem.value, true)
+					text: chargingTimeItem.value >= 60 ? Utils.formatAsHHMM(chargingTimeItem.value, true) : Utils.formatAsHHMMSS(chargingTimeItem.value, true)
 					color: Theme.color_font_secondary
 					// do not show value under a second
 					visible: chargingTimeItem.value > 0
