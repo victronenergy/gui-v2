@@ -98,7 +98,7 @@ function formatAsHHMM(seconds, showUnits) {
 	return pad(duration.h, 2)
 			+ (showUnits ? "h " : ":")
 			+ pad(duration.m, 2)
-			+ (showUnits ? "m " : "")
+			+ (showUnits ? "m" : "")
 }
 
 function formatAsHHMMSS(seconds, showUnits) {

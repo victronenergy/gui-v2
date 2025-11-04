@@ -13,12 +13,12 @@ import Victron.VenusOS
 Label {
 	id: root
 
-	width: textMetrics.width * text.length
+	width: (textMetrics.tightBoundingRect.x + textMetrics.tightBoundingRect.width) * text.length
 
 	TextMetrics {
 		id: textMetrics
 
 		font: root.font
-		text: "0"
+		text: "X"
 	}
 }
