@@ -51,7 +51,13 @@ Page {
 				readonly property string deviceUid: buddy.itemParent()?.itemParent()?.uid ?? ""
 				readonly property string name: nameItem.value || "%1 [%2]".arg(modelItem.value).arg(macItem.value)
 
-				sortValue: buddy.valid ? "" : (channelModel.rowCount === 1 ? name : "%1 - %2".arg(name).arg(channelId))
+				sortValue: buddy.valid ? "" : (channelTwoItem.valid ? "%1 - %2".arg(name).arg(channelId) : name)
+
+				// If there's a path for channel 2, it means there is more than one channel, so show the channel ID in the list.
+				VeQuickItem {
+					id: channelTwoItem
+					uid: channelSortDelegate.deviceUid + "/2/Enabled"
+				}
 
 				VeQuickItem {
 					id: macItem
