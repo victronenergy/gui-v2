@@ -97,7 +97,7 @@ FocusScope {
 
 		VeQuickItem {
 			id: validTypesItem
-			uid: root.switchableOutput.uid + "/ValidTypes"
+			uid: root.switchableOutput.uid + "/Settings/ValidTypes"
 		}
 
 		Component {
