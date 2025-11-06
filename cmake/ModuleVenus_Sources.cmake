@@ -57,6 +57,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
     components/GsmStatusIcon.qml
+    components/ColorButton.qml
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterAcOutSettings.qml
@@ -768,6 +769,7 @@ set(VictronVenusOS_RESOURCES
     images/overview.svg
     images/rain.svg
     images/scatteredcloud.svg
+    images/selection_dot.svg
     images/settings.svg
     images/shore.svg
     images/slider_background_light.svg

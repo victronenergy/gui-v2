@@ -143,8 +143,8 @@ ModalDialog {
 			anchors {
 				verticalCenter: parent.verticalCenter
 				verticalCenterOffset: colorModeButton.visible ? (colorModeButton.height / 2) : 0
-				horizontalCenter: parent.horizontalCenter
-				horizontalCenterOffset: -(presetGrid.width / 2) - (Theme.geometry_colorWheelDialog_content_spacing / 2)
+				left: parent.left
+				leftMargin: Theme.geometry_colorWheelDialog_horizontalMargin_left
 			}
 			colorDimmerData: root.colorDimmerData
 			outputType: root.switchableOutput.type
@@ -156,8 +156,8 @@ ModalDialog {
 			anchors {
 				verticalCenter: parent.verticalCenter
 				verticalCenterOffset: -(colorModeButton.height / 2)
-				left: colorSelector.right
-				leftMargin: Theme.geometry_colorWheelDialog_content_spacing
+				right: parent.right
+				rightMargin: Theme.geometry_colorWheelDialog_horizontalMargin_right
 			}
 			focus: true
 			onPresetActivated: (index) => {
@@ -197,7 +197,7 @@ ModalDialog {
 		Connections {
 			target: root.colorDimmerData
 			function onColorChanged() {
-				presetGrid.resetCurrentIndex()
+				presetGrid.resetSelection()
 			}
 		}
 	}
