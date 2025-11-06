@@ -11,6 +11,9 @@ DeviceListDelegate {
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
+
+		QuantityObject { object: estimatedPower; unit: VenusOS.Units_Watt }
+		QuantityObject { object: todaysYield; unit: VenusOS.Units_Energy_KiloWattHour }
 		QuantityObject { object: irradiance; unit: VenusOS.Units_WattsPerSquareMetre }
 	}
 
@@ -19,6 +22,14 @@ DeviceListDelegate {
 				{ bindPrefix : root.device.serviceUid })
 	}
 
+	VeQuickItem {
+		id: estimatedPower
+		uid: root.device.serviceUid + "/InstallationPower"
+	}
+	VeQuickItem {
+		id: todaysYield
+		uid: root.device.serviceUid + "/TodaysYield"
+	}
 	VeQuickItem {
 		id: irradiance
 		uid: root.device.serviceUid + "/Irradiance"
