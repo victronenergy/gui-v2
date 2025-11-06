@@ -11,6 +11,7 @@ VisibleItemModel {
 
 	property string bindPrefix
 	property int productId
+	property Page deviceSettingsPage
 
 	readonly property VeQuickItem nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
@@ -173,7 +174,7 @@ VisibleItemModel {
 		preferredVisible: allowedRoles.valid
 		onClicked: {
 			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix })
+					{ "title": text, "bindPrefix": root.bindPrefix, "deviceSettingsPage": root.deviceSettingsPage })
 		}
 
 		VeQuickItem {
