@@ -121,7 +121,7 @@ Page {
 
 				VeQuickItem {
 					id: relay0
-					uid: Global.system.serviceUid + "/Relay/0/State"
+					uid: Global.system.serviceUid + "/SwitchableOutput/0/Name"
 				}
 			}
 
