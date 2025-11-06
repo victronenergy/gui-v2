@@ -32,8 +32,8 @@ QtObject {
 			value: VenusOS.CanBusProfile_Disabled
 		},
 		{
-			//% "VE.Can & Lynx Ion BMS (250 kbit/s)"
-			display: qsTrId("settings_canbus_vecan_lynx_ion_bms"),
+			//% "VE.Can (250 kbit/s)"
+			display: qsTrId("settings_canbus_vecan"),
 			value: VenusOS.CanBusProfile_Vecan,
 			readOnly: isReadOnly(VenusOS.CanBusProfile_Vecan)
 		},
