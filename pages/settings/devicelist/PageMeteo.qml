@@ -76,8 +76,8 @@ DevicePage {
 
 		ListQuantity {
 			dataItem.uid: bindPrefix + "/InstallationPower"
-			//% "Installation Power"
-			text: qsTrId("page_meteo_installation_power")
+			//% "Estimated power"
+			text: qsTrId("page_meteo_estimated_power")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Watt
 			precision: 1
@@ -87,51 +87,9 @@ DevicePage {
 			dataItem.uid: bindPrefix + "/TodaysYield"
 			//% "Today's yield"
 			text: qsTrId("page_meteo_daily_yield")
-			preferredVisible: dataItem.alid
+			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
 			precision: 1
-		}
-
-		ListItem {
-			id: sensorBattery
-
-			//% "Sensor battery"
-			text: qsTrId("page_meteo_battery_voltage")
-			preferredVisible: batteryVoltage.valid
-
-			content.children: [
-				QuantityLabel {
-					id: batteryVoltageLabel
-					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font_size_body2
-					value: batteryVoltage.value === undefined ? NaN : batteryVoltage.value
-					unit: VenusOS.Units_Volt_DC
-					VeQuickItem {
-						id: batteryVoltage
-						uid: bindPrefix + "/BatteryVoltage"
-					}
-				},
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					text: {
-						if (lowBattery.valid) {
-							const low = lowBattery.value === 1
-							//% "Low"
-							return low ? qsTrId("meteo_sensor_battery_status_low") : CommonWords.ok
-						} else {
-							return ""
-						}
-					}
-					color: lowBattery.value === 1 ? Theme.color_red : Theme.color_green
-					font.pixelSize: Theme.font_size_body2
-					verticalAlignment: Text.AlignVCenter
-
-					VeQuickItem {
-						id: lowBattery
-						uid:  bindPrefix + "/Alarms/LowBattery"
-					}
-				}
-			]
 		}
 
 		ListNavigation {
