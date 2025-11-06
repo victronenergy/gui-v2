@@ -9,31 +9,14 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	required property string outputUid
-
-	VeQuickItem {
-		id: validTypesItem
-
-		property var options: []
-
-		uid: root.outputUid + "/Settings/ValidTypes"
-		onValueChanged:{
-			let op = []
-			for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
-				if (value & (1 << i)) {
-					op.push({ display: VenusOS.switchableOutput_typeToText(i), value: i })
-				}
-			}
-			options = op
-		}
-	}
+	required property SwitchableOutput switchableOutput
 
 	GradientListView {
 		model: VisibleItemModel {
 			ListTextField {
 				//% "Name"
 				text: qsTrId("page_switchable_output_name")
-				dataItem.uid: root.outputUid + "/Settings/CustomName"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/CustomName"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 32
@@ -44,7 +27,7 @@ Page {
 			ListTextField {
 				//% "Group"
 				text: qsTrId("page_switchable_output_group")
-				dataItem.uid: root.outputUid + "/Settings/Group"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/Group"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
 				textField.maximumLength: 32
@@ -55,7 +38,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Switch mode"
 				text: qsTrId("page_switchable_output_switch_mode")
-				dataItem.uid: root.outputUid + "/Settings/SwitchMode"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/SwitchMode"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					//% "Disabled"
@@ -70,7 +53,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Dim mode"
 				text: qsTrId("page_switchable_output_dim_mode")
-				dataItem.uid: root.outputUid + "/Settings/DimMode"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/DimMode"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					//% "Dimming disabled"
@@ -85,7 +68,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Fuse detection mode"
 				text: qsTrId("page_switchable_output_fuse_detection_mode")
-				dataItem.uid: root.outputUid + "/Settings/FuseDetection"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/FuseDetection"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
@@ -98,7 +81,7 @@ Page {
 			ListSpinBox {
 				//% "Fuse rating"
 				text:  qsTrId("page_switchable_output_fuse_rating")
-				dataItem.uid: root.outputUid + "/Settings/FuseRating"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/FuseRating"
 				decimals: 0 // backend does not allow for decimal precision
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				preferredVisible: dataItem.valid
@@ -107,24 +90,38 @@ Page {
 			ListRadioButtonGroup {
 				//% "Type"
 				text: qsTrId("page_switchable_output_type")
-				dataItem.uid: root.outputUid + "/Settings/Type"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/Type"
 				preferredVisible: dataItem.valid
-				optionModel: validTypesItem.options
-				interactive: validTypesItem.options.length > 1
+				secondaryLabel.color: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
+				optionModel: {
+					let options = []
+					for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
+						if (root.switchableOutput.validTypes & (1 << i)) {
+							options.push({ display: VenusOS.switchableOutput_typeToText(i, root.switchableOutput.outputId), value: i })
+						}
+					}
+					return options
+				}
+				interactive: optionModel.length > 1 || !root.switchableOutput.hasValidType
+
+				// Set the fallback text explicitly, in case the output Type is not supported by its
+				// ValidTypes, which means the current Type is not one of the listed options and
+				// thus cannot be displayed by ListRadioButtonGroup.
+				defaultSecondaryText: VenusOS.switchableOutput_typeToText(root.switchableOutput.type, root.switchableOutput.outputId)
 			}
 
 			ListSwitch {
 				//: Whether UI controls should be shown for this output
 				//% "Show controls"
 				text: qsTrId("page_switchable_show_controls")
-				dataItem.uid: root.outputUid + "/Settings/ShowUIControl"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/ShowUIControl"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
 			}
 
 			ListQuantity {
 				text: CommonWords.current_amps
-				dataItem.uid: root.outputUid + "/Current"
+				dataItem.uid: root.switchableOutput.uid + "/Current"
 				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Amp
 			}
@@ -132,7 +129,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Startup switch state"
 				text: qsTrId("page_switchable_output_startup_state")
-				dataItem.uid: root.outputUid + "/Settings/StartupState"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/StartupState"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.off, value: 0 },
@@ -151,7 +148,7 @@ Page {
 
 				VeQuickItem {
 					id: startupDimLevel
-					uid: root.outputUid + "/Settings/StartupDimming"
+					uid: root.switchableOutput.uid + "/Settings/StartupDimming"
 				}
 
 				Component {
@@ -190,7 +187,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Polarity"
 				text: qsTrId("page_switchable_output_polarity")
-				dataItem.uid: root.outputUid + "/Settings/Polarity"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/Polarity"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					//% "Active high / Normally open"
@@ -208,7 +205,7 @@ Page {
 				to: 100
 				decimals: 2
 				suffix: "%"
-				dataItem.uid: root.outputUid + "/Settings/OutputLimitMin"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/OutputLimitMin"
 			}
 
 			ListSpinBox {
@@ -219,7 +216,7 @@ Page {
 				to: 100
 				decimals: 2
 				suffix: "%"
-				dataItem.uid: root.outputUid + "/Settings/OutputLimitMax"
+				dataItem.uid: root.switchableOutput.uid + "/Settings/OutputLimitMax"
 			}
 		}
 	}
