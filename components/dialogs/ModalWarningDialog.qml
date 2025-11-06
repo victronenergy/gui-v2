@@ -36,9 +36,6 @@ ModalDialog {
 				topMargin: Theme.geometry_modalWarningDialog_alarmIcon_topMargin
 				horizontalCenter: parent.horizontalCenter
 			}
-
-			sourceSize.width: Theme.geometry_modalWarningDialog_alarmIcon_width
-			sourceSize.height: Theme.geometry_modalWarningDialog_alarmIcon_width
 			source: "qrc:/images/icon_alarm_48.svg"
 			color: Theme.color_red
 		}
@@ -47,7 +44,7 @@ ModalDialog {
 			id: titleLabel
 			anchors {
 				top: alarmIcon.bottom
-				topMargin: Theme.geometry_modalWarningDialog_title_spacing
+				topMargin: alarmIcon.status === Image.Null ? 0 : Theme.geometry_modalWarningDialog_title_spacing
 				left: parent.left
 				leftMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
 				right: parent.right

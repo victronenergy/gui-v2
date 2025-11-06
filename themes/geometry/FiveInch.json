@@ -189,7 +189,6 @@
     "geometry_modalDialog_content_horizontalMargin": 64,
 
     "geometry_modalWarningDialog_alarmIcon_topMargin": 44,
-    "geometry_modalWarningDialog_alarmIcon_width": 48,
     "geometry_modalWarningDialog_title_spacing": 16,
     "geometry_modalWarningDialog_title_horizontalMargin": "geometry_page_content_horizontalMargin",
     "geometry_modalWarningDialog_description_spacing": 12,
