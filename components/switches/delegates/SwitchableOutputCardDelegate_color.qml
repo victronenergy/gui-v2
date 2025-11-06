@@ -102,7 +102,7 @@ FocusScope {
 		}
 	}
 
-	PressArea {
+	ColorButton {
 		id: colorPickerButton
 
 		anchors {
@@ -110,20 +110,13 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
-		implicitWidth: Theme.geometry_switchableoutput_control_height
-		implicitHeight: Theme.geometry_switchableoutput_control_height
+		centerColor: Qt.hsva(currentColorDimmerData.color.hsvHue,
+					   currentColorDimmerData.color.hsvSaturation,
+					   1.0, 1.0)
 
 		KeyNavigationHighlight.active: activeFocus
 		Keys.onSpacePressed: root._selectorDialog = Global.dialogLayer.open(colorDialogComponent)
 		onClicked: root._selectorDialog = Global.dialogLayer.open(colorDialogComponent)
-
-		Rectangle {
-			anchors.fill: parent
-			radius: Theme.geometry_button_radius
-			color: Qt.hsva(currentColorDimmerData.color.hsvHue,
-						   currentColorDimmerData.color.hsvSaturation,
-						   1.0, 1.0)
-		}
 
 		ColorDimmerData {
 			id: currentColorDimmerData
