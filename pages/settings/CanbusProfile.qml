@@ -44,6 +44,12 @@ QtObject {
 			readOnly: isReadOnly(VenusOS.CanBusProfile_VecanAndCanBms)
 		},
 		{
+			//% "VE.Can & CANopen E-drive (250 kbit/s)"
+			display: qsTrId("settings_canopen_motordrive_250"),
+			value: VenusOS.CanBusProfile_CanOpenMotordrive250,
+			readOnly: isReadOnly(VenusOS.CanBusProfile_CanOpenMotordrive250)
+		},
+		{
 			//% "CAN-bus BMS LV (500 kbit/s)"
 			display: qsTrId("settings_canbus_bms"),
 			value: VenusOS.CanBusProfile_CanBms500,
@@ -80,13 +86,7 @@ QtObject {
 			readOnly: true
 		},
 		{
-			//% "CANopen Motor drive (250 kbit/s)"
-			display: qsTrId("settings_canopen_motordrive_250"),
-			value: VenusOS.CanBusProfile_CanOpenMotordrive250,
-			readOnly: isReadOnly(VenusOS.CanBusProfile_CanOpenMotordrive250)
-		},
-		{
-			//% "CANopen Motor drive (500 kbit/s)"
+			//% "CANopen E-drive (500 kbit/s)"
 			display: qsTrId("settings_canopen_motordrive_500"),
 			value: VenusOS.CanBusProfile_CanOpenMotordrive500,
 			readOnly: isReadOnly(VenusOS.CanBusProfile_CanOpenMotordrive500)
