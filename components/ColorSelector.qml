@@ -92,7 +92,7 @@ Item {
 		}
 
 		handle: Halo {
-			x: Theme.geometry_colorWheel_slider_arc_radius + (Theme.geometry_colorWheel_slider_strokeWidth - height)/1.5 + Math.cos((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
+			x: Theme.geometry_colorWheel_slider_arc_radius + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2 + Math.cos((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
 			y: leftSlider.availableHeight/2 + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 + Math.sin((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
 			width: Theme.geometry_colorWheel_slider_halo_diameter
 		}
@@ -208,7 +208,7 @@ Item {
 		}
 
 		handle: Halo {
-			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 - (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 - 1
+			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 + Theme.geometry_colorWheel_component_overlap - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 - 1
 			y: (rightSlider.availableHeight) * (1 - rightSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
 			width: Theme.geometry_colorWheel_slider_halo_diameter
 		}
@@ -306,7 +306,7 @@ Item {
 
 		handle: Halo {
 			x: (lowerSlider.availableWidth) * (lowerSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2
-			y: Math.cos((Math.asin(.5 - lowerSlider.position) * lowerSlider.availableWidth)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 - (Theme.geometry_colorWheel_slider_strokeWidth - height)/2 - height/2
+			y: Math.cos((Math.asin(.5 - lowerSlider.position) * lowerSlider.availableWidth)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.height/2 - Theme.geometry_colorWheel_lowerSlider_padding - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
 			color: Theme.color_blue
 			width: Theme.geometry_colorWheel_slider_halo_diameter
 		}
@@ -373,19 +373,30 @@ Item {
 			}
 		}
 
-		// Centre color swatch of the color wheel, shows currently selected color
+		// Centre background of the color wheel
 		Rectangle {
-			id: colorSwatch
+			id: colorSwatchBackground
 			anchors.centerIn: colorWheel
-			width: Theme.geometry_colorWheel_selector_centre_diameter + Theme.geometry_colorWheel_selector_centre_borderWidth
-			height: Theme.geometry_colorWheel_selector_centre_diameter + Theme.geometry_colorWheel_selector_centre_borderWidth
+			width: Theme.geometry_colorWheel_selector_centre_cutout_diameter
+			height: Theme.geometry_colorWheel_selector_centre_cutout_diameter
 			radius: width/2
 
-			color: root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
-					? root.angleToTemperatureColor(mouseArea.angle)
-					: root.angleToColor(360 - mouseArea.angle, 90 - colorGradient.angle, rightSlider.value)
-			border.width: Theme.geometry_colorWheel_selector_centre_borderWidth
-			border.color: Theme.color_background_secondary
+			color: Theme.color_background_secondary
+
+			// Centre color swatch of the color wheel, shows currently selected color
+			Rectangle {
+				id: colorSwatch
+				anchors.centerIn: colorSwatchBackground
+				width: Theme.geometry_colorWheel_selector_swatch_diameter
+				height: Theme.geometry_colorWheel_selector_swatch_diameter
+				radius: width/2
+
+				color: root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
+						? root.angleToTemperatureColor(mouseArea.angle)
+						: root.angleToColor(360 - mouseArea.angle, 90 - colorGradient.angle, rightSlider.value)
+				border.width: Theme.geometry_colorWheel_selector_swatch_borderWidth
+				border.color: color.darker(1.1)
+			}
 		}
 
 		MouseArea {
@@ -397,7 +408,7 @@ Item {
 			function updateAngleAndColor() {
 				// Determine if the position lies within a disc that represents the color selector.
 				// The angle is set that corresponds to the angle of the point measured from the 12 oclock position
-				if (Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) > (Theme.geometry_colorWheel_selector_centre_diameter/2 + Theme.geometry_colorWheel_selector_centre_borderWidth/2) &&
+				if (Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) > (Theme.geometry_colorWheel_selector_centre_cutout_diameter/2) &&
 						Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) < Theme.geometry_colorWheel_selector_width/2) {
 					angle = Math.round((Math.atan2(width/2 - mouseX, mouseY - height/2) / (Math.PI*2) + 0.5) * 360)
 				}
