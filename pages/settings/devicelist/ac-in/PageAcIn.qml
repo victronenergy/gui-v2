@@ -22,6 +22,7 @@ DevicePage {
 	settingsModel: PageAcInModel {
 		bindPrefix: root.bindPrefix
 		productId: root.device.productId
+		deviceSettingsPage: root
 	}
 	extraDeviceInfo: SettingsColumn {
 		width: parent?.width ?? 0

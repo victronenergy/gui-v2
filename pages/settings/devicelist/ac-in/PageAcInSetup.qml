@@ -10,6 +10,7 @@ Page {
 	id: root
 
 	property string bindPrefix
+	property Page deviceSettingsPage
 
 	/*
 	 * This is a bit weird, when changing the role in a cgwacs service, it will
@@ -77,13 +78,19 @@ Page {
 
 				text: CommonWords.ac_input_role
 				dataItem.uid: root.bindPrefix + "/Role"
-				popDestination: null
+				popDestination: undefined
+				updateDataOnClick: false
 				onOptionClicked: function(index) {
-					// Changing the role invalidates this whole page, so close the radio buttons
-					// page before updating the role.
-					secondaryText = optionModel[index].display
-					Global.pageManager.popPage()
-					root.updateServiceName(optionModel[index].value)
+					//% "%1 changed role, the devices list has been updated"
+					const msg = qsTrId("settings_ac-in-setup_changed_role").arg(device.name)
+					Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
+					role.dataItem.setValue(role.optionModel[index].value)
+					Global.pageManager.popToAbovePage(root.deviceSettingsPage)
+				}
+
+				Device {
+					id: device
+					serviceUid: root.bindPrefix
 				}
 			}
 

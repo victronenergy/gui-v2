@@ -55,6 +55,7 @@ DevicePage {
 		PageAcInModel {
 			bindPrefix: root.bindPrefix
 			productId: productIdDataItem.value
+			deviceSettingsPage: root
 		}
 	}
 }

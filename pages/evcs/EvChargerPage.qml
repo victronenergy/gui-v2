@@ -145,7 +145,7 @@ DevicePage {
 			onClicked: {
 				if (root.energyMeterMode) {
 					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-							{ "title": text, "bindPrefix": evCharger.serviceUid })
+							{ "title": text, "bindPrefix": evCharger.serviceUid, "deviceSettingsPage": root })
 				} else {
 					Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
 							{ "title": text, "bindPrefix": evCharger.serviceUid })
