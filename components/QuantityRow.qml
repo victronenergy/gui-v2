@@ -58,7 +58,7 @@ Row {
 			unit: quantityObject.unit
 			precision: quantityObject.precision
 			valueText: quantityObject.textValue || quantityInfo.number
-			valueColor: root.valueColor
+			valueColor: quantityObject.valueColor.valid ? quantityObject.valueColor : root.valueColor
 			unitColor: Theme.color_quantityTable_quantityUnit
 
 			Rectangle {

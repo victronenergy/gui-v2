@@ -3,10 +3,11 @@
 ** See LICENSE.txt for license information.
 */
 
-#ifndef QUANTITYMODEL_H
-#define QUANTITYMODEL_H
+#ifndef VICTRON_GUIV2_QUANTITYOBJECT_H
+#define VICTRON_GUIV2_QUANTITYOBJECT_H
 
 #include <qqmlintegration.h>
+#include <QColor>
 #include <QMetaObject>
 #include <QMetaProperty>
 
@@ -41,6 +42,7 @@ class QuantityObject : public QObject
 	Q_PROPERTY(qreal numberValue READ numberValue NOTIFY numberValueChanged FINAL)
 	Q_PROPERTY(QString textValue READ textValue NOTIFY textValueChanged FINAL)
 	Q_PROPERTY(bool hasValue READ hasValue NOTIFY hasValueChanged FINAL)
+	Q_PROPERTY(QColor valueColor READ valueColor WRITE setValueColor NOTIFY valueColorChanged RESET resetValueColor FINAL)
 
 	// If hidden=true, the UI should reserve the space for the quantity label in the layout, but
 	// hide the label using opacity=0.
@@ -71,6 +73,10 @@ public:
 	QString textValue() const;  // empty if the value is not a string type
 	bool hasValue() const;
 
+	QColor valueColor() const;
+	void setValueColor(const QColor &valueColor);
+	void resetValueColor();
+
 Q_SIGNALS:
 	void objectChanged();
 	void keyChanged();
@@ -81,6 +87,7 @@ Q_SIGNALS:
 	void textValueChanged();
 	void hasValueChanged();
 	bool hiddenChanged();
+	void valueColorChanged();
 
 private Q_SLOTS:
 	void updateValue();
@@ -89,6 +96,7 @@ private:
 	void connectNotifySignal();
 
 	QPointer<QObject> m_object;
+	QColor m_valueColor;
 	QString m_key;
 	QVariant m_value;
 	QVariant m_defaultValue;
@@ -103,4 +111,4 @@ private:
 } /* VenusOS */
 } /* Victron */
 
-#endif // QUANTITYMODEL_H
+#endif // VICTRON_GUIV2_QUANTITYOBJECT_H

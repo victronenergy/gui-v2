@@ -26,13 +26,22 @@ ListQuantityGroupNavigation {
 			unit: output.dataNumberUnit
 			precision: output.decimals
 		}
-		QuantityObject { object: output; key: output.secondaryDataText ? "secondaryDataText" : ""; unit: VenusOS.Units_None }
-		QuantityObject { object: output; key: "typeText" }
+		QuantityObject {
+			object: output
+			key: output.secondaryDataText ? "secondaryDataText" : ""
+			unit: VenusOS.Units_None
+		}
+		QuantityObject {
+			object: output
+			key: "typeText"
+			// If output is valid, set undefined to indicate the default color should be used.
+			valueColor: output.hasValidType ? undefined : Theme.color_critical
+		}
 	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml", {
-			outputUid: output.uid,
+			switchableOutput: output,
 			title: Qt.binding(function() { return root.text })
 		})
 	}
@@ -105,7 +114,7 @@ ListQuantityGroupNavigation {
 		}
 
 		readonly property string statusText: VenusOS.switchableOutput_statusToText(status, type)
-		readonly property string typeText: VenusOS.switchableOutput_typeToText(type, name)
+		readonly property string typeText: VenusOS.switchableOutput_typeToText(type, outputId)
 
 		uid: root.uid
 	}

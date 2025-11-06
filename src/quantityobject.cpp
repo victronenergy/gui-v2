@@ -119,6 +119,24 @@ bool QuantityObject::hasValue() const
 	return m_hasValue;
 }
 
+QColor QuantityObject::valueColor() const
+{
+	return m_valueColor;
+}
+
+void QuantityObject::setValueColor(const QColor &valueColor)
+{
+	if (m_valueColor != valueColor) {
+		m_valueColor = valueColor;
+		emit valueColorChanged();
+	}
+}
+
+void QuantityObject::resetValueColor()
+{
+	setValueColor(QColor());
+}
+
 void QuantityObject::connectNotifySignal()
 {
 	if (m_notifySignalConnection) {
