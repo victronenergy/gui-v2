@@ -55,19 +55,20 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, qreal *wh
 }
 void addStorageColorData(QList<double> *colorData, const QColor color, qreal white, qreal colorTemperature)
 {
+	// Round all values before writing to the backend, as double precision is not necessary.
 	if (color.isValid()) {
 		float h, s, v;
 		color.getHsvF(&h, &s, &v);
-		colorData->append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
-		colorData->append(s * 100);
-		colorData->append(v * 100);
+		colorData->append(std::round(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359)));
+		colorData->append(std::round(s * 100));
+		colorData->append(std::round(v * 100));
 	} else {
 		colorData->append(0);
 		colorData->append(0);
 		colorData->append(0);
 	}
-	colorData->append(white);
-	colorData->append(colorTemperature);
+	colorData->append(std::round(white));
+	colorData->append(std::round(colorTemperature));
 }
 
 }
