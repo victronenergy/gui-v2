@@ -25,6 +25,11 @@ ListItem {
 	interactive: (dataItem.uid === "" || dataItem.valid)
 	pressAreaEnabled: false
 
+	// Since pressAreaEnabled=false (to ensure only the internal Switch is clickable, rather than
+	// the whole item), the key events must be forwarded to the internal Switch so that the Space
+	// key activates the Switch onClicked() handler.
+	Keys.forwardTo: [switchItem, root]
+
 	content.spacing: 0
 	content.children: [
 		Label {
