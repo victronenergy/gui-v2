@@ -303,6 +303,8 @@ void SwitchableOutput::setDimming(qreal dimming)
 	}
 }
 
+// setType() is called when the user changes the type; setTypeFromVariant() is called when the
+// backend updates the /Type value.
 void SwitchableOutput::setType(int type)
 {
 	if (m_typeItem) {
@@ -311,10 +313,11 @@ void SwitchableOutput::setType(int type)
 		emit typeChanged();
 	}
 }
-
 void SwitchableOutput::setTypeFromVariant(const QVariant &typeValue)
 {
-	setType(typeValue.isValid() ? typeValue.toInt() : -1);
+	Q_UNUSED(typeValue);
+	updateHasValidType();
+	emit typeChanged();
 }
 
 void SwitchableOutput::setValidTypes(const QVariant &validTypesValue)
