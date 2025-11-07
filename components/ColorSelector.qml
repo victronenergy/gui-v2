@@ -338,8 +338,11 @@ Item {
 
 	Shape {
 		id: colorWheel
+		anchors {
+			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: -lowerSlider.height / 2
+		}
 		x: leftSlider.width - Theme.geometry_colorWheel_component_overlap // small overlap for sliders and color wheel
-		y: 0
 		width: Theme.geometry_colorWheel_selector_width
 		height: Theme.geometry_colorWheel_selector_height
 
