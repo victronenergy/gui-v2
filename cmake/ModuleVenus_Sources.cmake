@@ -416,6 +416,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsSystemStatus.qml
     pages/settings/PageSettingsTankPump.qml
     pages/settings/PageSettingsTcpIp.qml
+    pages/settings/PageSettingsUsbTransfer.qml
     pages/settings/PageSettingsVecanDevice.qml
     pages/settings/PageSettingsVecanDevices.qml
     pages/settings/PageSettingsWifi.qml
