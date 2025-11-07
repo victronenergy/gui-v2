@@ -42,9 +42,9 @@
     "geometry_colorWheel_slider_borderWidth": 2,
     "geometry_colorWheel_selector_halo_diameter": 34,
     "geometry_colorWheel_slider_halo_diameter": 26,
-    "geometry_colorWheel_lowerSlider_width": 177,
-    "geometry_colorWheel_lowerSlider_height": 51,
-    "geometry_colorWheel_lowerSlider_padding": 5,
+    "geometry_colorWheel_lowerSlider_width": 182,
+    "geometry_colorWheel_lowerSlider_height": 55,
+    "geometry_colorWheel_lowerSlider_padding": 3,
     "geometry_colorWheel_component_overlap": 7,
 
     "geometry_focus_highlight_corner_size": 14,
