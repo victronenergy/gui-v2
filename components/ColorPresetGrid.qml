@@ -112,7 +112,9 @@ FocusScope {
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
 				}
 				radius: Theme.geometry_colorWheelDialog_preset_button_radius
-				centerColor: presetDelegate.color
+				centerColor: Qt.hsva(presetDelegate.color.hsvHue,
+						presetDelegate.color.hsvSaturation,
+						1.0, 1.0)
 				color: presetDelegate.color.valid
 					   ? "transparent"
 					   : Theme.color_colorWheelDialog_preset_empty_button_background
