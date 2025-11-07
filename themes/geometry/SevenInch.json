@@ -27,8 +27,8 @@
 
     "geometry_closeButton_margins": 4,
 
-    "geometry_colorWheel_width": 333,
-    "geometry_colorWheel_height": 260,
+    "geometry_colorWheel_width": 340,
+    "geometry_colorWheel_height": 280,
     "geometry_colorWheel_selector_width": 216,
     "geometry_colorWheel_selector_height": 216,
     "geometry_colorWheel_selector_centre_cutout_diameter": 136,
