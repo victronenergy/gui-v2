@@ -24,8 +24,8 @@ class ColorDimmerData : public QObject, public QQmlParserStatus
 	Q_INTERFACES(QQmlParserStatus)
 	Q_PROPERTY(QString dataUid READ dataUid WRITE setDataUid NOTIFY dataUidChanged REQUIRED FINAL)
 	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
-	Q_PROPERTY(qreal white READ white WRITE setWhite NOTIFY whiteChanged FINAL)
-	Q_PROPERTY(qreal colorTemperature READ colorTemperature WRITE setColorTemperature NOTIFY colorTemperatureChanged FINAL)
+	Q_PROPERTY(int white READ white WRITE setWhite NOTIFY whiteChanged FINAL)
+	Q_PROPERTY(int colorTemperature READ colorTemperature WRITE setColorTemperature NOTIFY colorTemperatureChanged FINAL)
 
 public:
 	explicit ColorDimmerData(QObject *parent = nullptr);
@@ -36,11 +36,11 @@ public:
 	QColor color() const;
 	void setColor(const QColor &color);
 
-	qreal white() const;
-	void setWhite(qreal white);
+	int white() const;
+	void setWhite(int white);
 
-	qreal colorTemperature() const;
-	void setColorTemperature(qreal colorTemperature);
+	int colorTemperature() const;
+	void setColorTemperature(int colorTemperature);
 
 	void classBegin() override;
 	void componentComplete() override;
@@ -60,8 +60,8 @@ private:
 
 	QPointer<VeQItem> m_colorDataItem;
 	QColor m_color;
-	qreal m_white = 0;
-	qreal m_colorTemperature = 1.0;
+	int m_white = 0;
+	int m_colorTemperature = 1.0;
 	bool m_completed = false;
 };
 
@@ -100,7 +100,7 @@ public:
 	Q_INVOKABLE QVariantMap get(int index) const;
 
 	// Note: the model is saved to the settingUid when changes are made.
-	Q_INVOKABLE void setPreset(int index, const QColor &color, qreal white, qreal colorTemperature);
+	Q_INVOKABLE void setPreset(int index, const QColor &color, int white, int colorTemperature);
 	Q_INVOKABLE void clearPreset(int index);
 
 Q_SIGNALS:
@@ -113,8 +113,8 @@ protected:
 private:
 	struct ColorInfo {
 		QColor color;
-		qreal white = 0;
-		qreal colorTemperature = 0;
+		int white = 0;
+		int colorTemperature = 0;
 	};
 	void save();
 	void reload();
