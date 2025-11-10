@@ -50,9 +50,18 @@ QtObject {
 			value: _jsonStringForType(VenusOS.StartPage_Type_Levels_Environment),
 		},
 		{
+			display: CommonWords.notifications,
+			value: _jsonStringForType(VenusOS.StartPage_Type_Notifications),
+		},
+		{
 			//% "Battery list"
-			display: qsTrId("startpage_option_battery list"),
+			display: qsTrId("startpage_option_battery_list"),
 			value: _jsonStringForType(VenusOS.StartPage_Type_BatteryList),
+		},
+		{
+			//% "Device list"
+			display: qsTrId("startpage_option_device_list"),
+			value: _jsonStringForType(VenusOS.StartPage_Type_DeviceList),
 		},
 	]
 
@@ -105,10 +114,20 @@ QtObject {
 				main: { page: "LevelsPage.qml", properties: { currentTabIndex: 1 } },
 				stack: [],
 			})
+		case VenusOS.StartPage_Type_Notifications:
+			return JSON.stringify({
+				main: { page: "NotificationsPage.qml", properties: {} },
+				stack: [],
+			})
 		case VenusOS.StartPage_Type_BatteryList:
 			return JSON.stringify({
 				main: { page: "OverviewPage.qml", properties: {} },
 				stack: [{ page: "/pages/battery/BatteryListPage.qml" }],
+			})
+		case VenusOS.StartPage_Type_DeviceList:
+			return JSON.stringify({
+				main: { page: "SettingsPage.qml", properties: {} },
+				stack: [{ page: "/pages/settings/devicelist/DeviceListPage.qml" }],
 			})
 		default:
 			console.warn("Unsupported start page type:", startPageType)
@@ -147,6 +166,13 @@ QtObject {
 							? VenusOS.StartPage_Type_Levels_Tanks
 							: VenusOS.StartPage_Type_Levels_Environment
 				}
+			}
+			break
+		case "NotificationsPage.qml":
+			return VenusOS.StartPage_Type_Notifications
+		case "SettingsPage.qml":
+			if (topStackPageUrl && topStackPageUrl.endsWith("/DeviceListPage.qml")) {
+				return VenusOS.StartPage_Type_DeviceList
 			}
 			break
 		}

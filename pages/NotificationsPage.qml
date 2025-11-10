@@ -9,8 +9,7 @@ import Victron.VenusOS
 SwipeViewPage {
 	id: root
 
-	//% "Notifications"
-	navButtonText: qsTrId("nav_notifications")
+	navButtonText: CommonWords.notifications
 	navButtonIcon: Global.notifications?.navBarNotificationCounterVisible ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
