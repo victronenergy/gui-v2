@@ -7,7 +7,7 @@ list(APPEND TRANSLATION_SOURCES ${GUIV2_CPP_SOURCES})
 list(APPEND TRANSLATION_SOURCES ${GUIV2_QML_SOURCES})
 
 # Add targets to update the ts files from poeditor.
-foreach(code IN LISTS ${TS_CODES})
+foreach(code IN ITEMS ${TS_CODES})
     set(output_file ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${code}.ts)
     set(new_target ${PROJECT_NAME}_${code})
     add_custom_target( ${new_target}
