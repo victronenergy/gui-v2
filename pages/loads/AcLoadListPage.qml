@@ -13,8 +13,7 @@ Page {
 	required property ObjectAcConnection measurements
 
 	// The model of devices to be displayed
-	// TODO make this a FilteredDeviceModel when #2371 is fixed.
-	required property var model
+	required property FilteredDeviceModel model
 
 	GradientListView {
 		header: BaseListItem {
@@ -115,10 +114,9 @@ Page {
 			columnSpacing: ListView.view.headerItem?.columnSpacing ?? 0
 
 			// Status depends on the service:
-			// - acload, heatpump: /SwitchableOutput/Status
 			// - evcharger: /Status
+			// - other service types: no status
 			statusText: !statusItem.valid ? ""
-				: device.serviceType === "acload" || device.serviceType === "heatpump" ? VenusOS.switchableOutput_statusToText(statusItem.value, outputTypeItem.value)
 				: device.serviceType === "evcharger" ? Global.evChargers.chargerStatusToText(statusItem.value)
 				: ""
 
@@ -137,15 +135,7 @@ Page {
 
 			VeQuickItem {
 				id: statusItem
-				uid: device.serviceType === "acload" || device.serviceType === "heatpump" ? device.serviceUid + "/SwitchableOutput/Status"
-					: device.serviceType === "evcharger" ? device.serviceUid + "/Status"
-					: ""
-			}
-
-			VeQuickItem {
-				id: outputTypeItem
-				uid: device.serviceType === "acload" || device.serviceType === "heatpump" ? device.serviceUid + "/SwitchableOutput/Type"
-					: ""
+				uid: device.serviceType === "evcharger" ? device.serviceUid + "/Status" : ""
 			}
 
 			VeQuickItem {
