@@ -13,13 +13,8 @@ using namespace Victron::VenusOS;
 
 namespace {
 
-qreal variantToReal(const QVariant &value)
-{
-	return static_cast<qreal>(std::min(std::numeric_limits<qreal>::max(), value.toDouble()));
-}
-
 /*
-	Read/write color data from/to the given QVariantList, which is a list of doubles in this format:
+	Read/write color data from/to the given QVariantList, which is a list of ints in this format:
 
 	0: Hue 0-359 degrees
 	1: Saturation 0-100%
@@ -30,37 +25,41 @@ qreal variantToReal(const QVariant &value)
 	Note the H,S,V value ranges differ from the range expected for the QColor::setHsvF() and
 	QColor::getHsvF() parameters, which is 0.0-1.0 for all three values.
 */
-void getStorageColorData(const QVariantList &colorData, QColor *color, qreal *white, qreal *colorTemperature)
+void getStorageColorData(const QVariantList &colorData, QColor *color, int *white, int *colorTemperature)
 {
 	if (colorData.count() != 5) {
 		qWarning() << "getStorageColorData() failed: expected 5 items but list is:" << colorData;
 		return;
 	}
 	if (color) {
-		const qreal h = variantToReal(colorData.value(0));
-		const qreal s = variantToReal(colorData.value(1));
-		const qreal v = variantToReal(colorData.value(2));
+		const int h = colorData.value(0).toInt();
+		const int s = colorData.value(1).toInt();
+		const int v = colorData.value(2).toInt();
 		if (h == 0 && s == 0 && v == 0) {
 			*color = QColor();
 		} else {
-			color->setHsvF(FastUtils::create()->scaleNumber(h, 0, 359, 0, 1), s / 100, v / 100);
+			// Use setHsvF() which uses 0-1 range for S & V, instead of setHsv() which uses 0-255.
+			color->setHsvF(FastUtils::create()->scaleNumber(h, 0, 359, 0, 1),
+				   static_cast<float>(s) / 100,
+				   static_cast<float>(v) / 100);
 		}
 	}
 	if (white) {
-		*white = variantToReal(colorData.value(3));
+		*white = colorData.value(3).toInt();
 	}
 	if (colorTemperature) {
-		*colorTemperature = variantToReal(colorData.value(4));
+		*colorTemperature = colorData.value(4).toInt();
 	}
 }
-void addStorageColorData(QList<double> *colorData, const QColor color, qreal white, qreal colorTemperature)
+void addStorageColorData(QList<int> *colorData, const QColor color, int white, int colorTemperature)
 {
 	if (color.isValid()) {
+		// Use getHsvF() which uses 0-1 range for S & V, instead of getHsv() which uses 0-255.
 		float h, s, v;
 		color.getHsvF(&h, &s, &v);
-		colorData->append(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359));
-		colorData->append(s * 100);
-		colorData->append(v * 100);
+		colorData->append(std::round(FastUtils::create()->scaleNumber(h, 0, 1, 0, 359)));
+		colorData->append(std::round(s * 100));
+		colorData->append(std::round(v * 100));
 	} else {
 		colorData->append(0);
 		colorData->append(0);
@@ -109,12 +108,12 @@ void ColorDimmerData::setColor(const QColor &color)
 	}
 }
 
-qreal ColorDimmerData::white() const
+int ColorDimmerData::white() const
 {
 	return m_white;
 }
 
-void ColorDimmerData::setWhite(qreal white)
+void ColorDimmerData::setWhite(int white)
 {
 	if (m_white != white) {
 		m_white = white;
@@ -122,12 +121,12 @@ void ColorDimmerData::setWhite(qreal white)
 	}
 }
 
-qreal ColorDimmerData::colorTemperature() const
+int ColorDimmerData::colorTemperature() const
 {
 	return m_colorTemperature;
 }
 
-void ColorDimmerData::setColorTemperature(qreal colorTemperature)
+void ColorDimmerData::setColorTemperature(int colorTemperature)
 {
 	if (m_colorTemperature != colorTemperature) {
 		m_colorTemperature = colorTemperature;
@@ -157,8 +156,8 @@ void ColorDimmerData::reload()
 	}
 
 	QColor color;
-	qreal white = 0;
-	qreal colorTemperature = 0;
+	int white = 0;
+	int colorTemperature = 0;
 	const QVariantList colorData = m_colorDataItem->getValue().toList();
 	if (colorData.isEmpty()) {
 		color = QColor::fromHsv(0, 0, 0);
@@ -174,15 +173,15 @@ void ColorDimmerData::reload()
 void ColorDimmerData::loadFromPreset(const QVariantMap &values)
 {
 	setColor(values.value(QStringLiteral("color")).value<QColor>());
-	setWhite(values.value(QStringLiteral("white")).value<qreal>());
-	setColorTemperature(values.value(QStringLiteral("colorTemperature")).value<qreal>());
+	setWhite(values.value(QStringLiteral("white")).toInt());
+	setColorTemperature(values.value(QStringLiteral("colorTemperature")).toInt());
 	save();
 }
 
 void ColorDimmerData::save()
 {
 	if (m_colorDataItem) {
-		QList<double> dataList;
+		QList<int> dataList;
 		::addStorageColorData(&dataList, m_color, m_white, m_colorTemperature);
 		m_colorDataItem->setValue(QVariant::fromValue(dataList));
 	}
@@ -267,7 +266,7 @@ QHash<int, QByteArray> ColorPresetModel::roleNames() const
 	return roles;
 }
 
-void ColorPresetModel::setPreset(int index, const QColor &color, qreal white, qreal colorTemperature)
+void ColorPresetModel::setPreset(int index, const QColor &color, int white, int colorTemperature)
 {
 	if (index < 0 || index >= m_colors.count()) {
 		qmlWarning(this) << "setColor: invalid index!";
@@ -300,7 +299,7 @@ void ColorPresetModel::save()
 		return;
 	}
 
-	QList<double> colorData;
+	QList<int> colorData;
 	for (int i = 0; i < m_colors.count(); ++i) {
 		const ColorInfo &info = m_colors.at(i);
 		::addStorageColorData(&colorData, info.color, info.white, info.colorTemperature);
@@ -332,8 +331,8 @@ void ColorPresetModel::reload()
 	beginInsertRows(QModelIndex(), 0, presetGroupCount - 1);
 	for (int presetGroupIndex = 0; presetGroupIndex < presetGroupCount; ++presetGroupIndex) {
 		QColor color;
-		qreal white = 0;
-		qreal colorTemperature = 0;
+		int white = 0;
+		int colorTemperature = 0;
 		::getStorageColorData(colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
 				&color, &white, &colorTemperature);
 		m_colors.append({ color, white, colorTemperature });
