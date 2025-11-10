@@ -373,6 +373,10 @@ QtObject {
 	//% "Not connected"
 	readonly property string not_connected: qsTrId("common_words_not_connected")
 
+	//: The 'Notifications' page
+	//% "Notifications"
+	readonly property string notifications: qsTrId("common_words_notifications")
+
 	//% "Off"
 	readonly property string off: qsTrId("common_words_off");
 

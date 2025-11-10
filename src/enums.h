@@ -840,7 +840,9 @@ public:
 		StartPage_Type_Levels_Tanks,
 		StartPage_Type_Levels_Environment,
 		StartPage_Type_BatteryList,
-		StartPage_Type_Boat
+		StartPage_Type_Boat,
+		StartPage_Type_Notifications,
+		StartPage_Type_DeviceList,
 	};
 	Q_ENUM(StartPage_Type)
 
