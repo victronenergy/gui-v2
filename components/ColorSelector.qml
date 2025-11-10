@@ -163,8 +163,8 @@ Item {
 					moveToStart : true
 					radiusX : Theme.geometry_colorWheel_slider_arc_radius
 					radiusY : Theme.geometry_colorWheel_slider_arc_radius
-					startAngle : 180 - 39     // origin is 3pm, move to 9 oclock minus slider angle
-					sweepAngle : leftSlider.position === 0 ? .01 : 78 * leftSlider.position
+					startAngle : 180 - 38     // origin is 3pm, move to 9 oclock minus slider angle
+					sweepAngle : leftSlider.position === 0 ? .01 : 76 * leftSlider.position
 				}
 			}
 		}
@@ -208,7 +208,7 @@ Item {
 		}
 
 		handle: Halo {
-			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 + Theme.geometry_colorWheel_component_overlap - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 - 1
+			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * (Theme.geometry_colorWheel_slider_arc_radius + Theme.geometry_colorWheel_component_overlap) - Theme.geometry_colorWheel_slider_arc_radius + Theme.geometry_colorWheel_component_overlap + root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 + 1
 			y: (rightSlider.availableHeight) * (1 - rightSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
 			width: Theme.geometry_colorWheel_slider_halo_diameter
 		}
