@@ -59,8 +59,6 @@ Page {
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
-				//% "Auto"
-				{ display: qsTrId("settings_ess_auto_meter"), value: 2 },
 				//% "External meter"
 				{ display: qsTrId("settings_ess_external_meter"), value: 0 },
 				//% "Inverter/Charger"
