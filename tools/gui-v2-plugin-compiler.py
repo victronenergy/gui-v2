@@ -76,6 +76,7 @@ def run_rcc(name):
     rccFile = "" + name + ".rcc"
     cmd = [rccPath]
     cmd.extend(['-binary'])
+    cmd.extend(['-compress-algo', 'zlib'])
     cmd.extend(['-o', rccFile])
     cmd.extend([qrcFile])
     try:
