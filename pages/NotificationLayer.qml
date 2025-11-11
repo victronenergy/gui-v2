@@ -131,7 +131,7 @@ Item {
 				type: toastContainer.type
 
 				onDismissed: {
-					if (toastContainer.notificationModelId !== 0) {
+					if (toastContainer.notificationModelId !== 0 && type !== VenusOS.Notification_Info) {
 						NotificationModel.acknowledge(toastContainer.notificationModelId)
 					}
 					ToastModel.remove(toastContainer.modelId)
@@ -139,7 +139,7 @@ Item {
 
 				onClosed: {
 					view.animationEnabled = false
-					if (toastContainer.notificationModelId !== 0) {
+					if (toastContainer.notificationModelId !== 0 && type !== VenusOS.Notification_Info) {
 						NotificationModel.acknowledge(toastContainer.notificationModelId)
 					}
 					ToastModel.remove(toastContainer.modelId)
