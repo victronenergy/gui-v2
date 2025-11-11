@@ -804,7 +804,11 @@ SwipeViewPage {
 			parent: inverterChargerWidget
 			location: VenusOS.WidgetConnector_Location_Right
 			visible: inverterToEssentialLoadsConnector.visible
-			offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+
+			// Use a fixed offsetY, not a dynamic one that could change after the connector path is
+			// already drawn; otherwise, if the offsetY changes after _resetWidgets() has already
+			// laid out the paths, then the path may start/end in the wrong position.
+			offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
 		}
 
 		WidgetConnectorAnchor {
@@ -927,13 +931,13 @@ SwipeViewPage {
 				id: acLoadsToEvcsStartAnchor
 				parent: acLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
 				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
 			}
 			WidgetConnectorAnchor {
 				id: acLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
 				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
 			}
 			WidgetConnector {
@@ -963,13 +967,13 @@ SwipeViewPage {
 				id: essentialLoadsToEvcsStartAnchor
 				parent: essentialLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnectorAnchor {
 				id: essentialLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnector {
