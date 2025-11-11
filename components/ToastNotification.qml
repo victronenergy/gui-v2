@@ -81,7 +81,7 @@ Item {
 				margins: Theme.geometry_toastNotification_label_padding
 			}
 
-			horizontalAlignment: Text.AlignHCenter
+			horizontalAlignment: Text.AlignLeft
 			verticalAlignment: Text.AlignVCenter
 			wrapMode: Text.Wrap
 			maximumLineCount: 12
@@ -116,15 +116,11 @@ Item {
 						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
 					}
 				} else {
-					// for Info toasts, acknowledge the related notification when we dismiss it
-					// and remove from the toast model (but do NOT acknowledge) all other Info toasts.
+					// for Info toasts, remove from the toast model (but do NOT acknowledge) all Info toasts.
 					// This ensures that if something generates a hundred Info toasts in a row the user
 					// doesn't have to manually dismiss them all, but can still see the number of
 					// unacknowledged notifications in the Notifications navbar icon bubble number.
 					ToastModel.removeAllInfoExcept(root.toastModelId)
-					if (root.notificationModelId !== 0) {
-						NotificationModel.acknowledge(root.notificationModelId)
-					}
 				}
 				root.dismissed()
 			}
