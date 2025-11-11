@@ -701,7 +701,7 @@ SwipeViewPage {
 			id: inverterLeftConnectorAnchor
 			location: VenusOS.WidgetConnector_Location_Left
 			visible: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable
-					|| Global.solarInputs.pvInverterDevices.count > 0
+					|| !isNaN(Global.system.solar.acPower)
 		}
 		WidgetConnectorAnchor {
 			id: inverterToAcLoadsAnchor
