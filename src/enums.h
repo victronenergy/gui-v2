@@ -535,6 +535,14 @@ public:
 	};
 	Q_ENUM(SwitchableOutput_Status)
 
+	enum SwitchableOutput_ShowUiControl {
+		SwitchableOutput_ShowUiControl_Off = 0x0,
+		SwitchableOutput_ShowUiControl_Always = 0x1,
+		SwitchableOutput_ShowUiControl_Local = 0x2,
+		SwitchableOutput_ShowUiControl_Remote = 0x4,
+	};
+	Q_ENUM(SwitchableOutput_ShowUiControl)
+
 	enum Notification_Type {
 		Notification_Warning,
 		Notification_Alarm,
