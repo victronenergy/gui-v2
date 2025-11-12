@@ -19,9 +19,7 @@ FontMetrics {
 
 		// Give the unit symbol some extra space on the column.
 		// Due to QTBUG-124588, use tightBoundingRect() instead of advanceWidth().
-		const maxTextRect = unit === VenusOS.Units_Energy_KiloWattHour
-				? tightBoundingRect("99.99kWH")
-				: tightBoundingRect("99.99W")
+		const maxTextRect = tightBoundingRect("99.99" + Units.defaultUnitString(unit))
 		return maxTextRect.width + maxTextRect.x
 	}
 
