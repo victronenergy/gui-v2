@@ -333,6 +333,104 @@ TestCase {
 		MockManager.removeValue(data.uid)
 	}
 
+	function test_showUiControl_data() {
+		return [
+			{
+				tag: "ShowUIControl not set",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIControl=Off",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 0, // Off=0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIControl=Always",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 1, // Always=1
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIControl=Local",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 2, // Local=0x2
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIControl=Remote",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 4, // Remote=0x4
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIControl=Local+Remote, local connection",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 6, // Local+Remote = 0x2 | 0x4
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIControl=Local+Remote, remote connection",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 6, // Local+Remote = 0x2 | 0x4
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: true,
+			},
+			{
+				// If value is invalid, then show the control (just like if ShowUIControl is not set)
+				tag: "ShowUIControl=0x5 (invalid)",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: {
+					"Settings/ShowUIControl": 5,
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				allowedInGroupModel: true,
+			},
+		]
+	}
+
+	function test_showUiControl(data) {
+		compare(output.allowedInGroupModel, false)
+		if (data.vrm !== undefined) {
+			BackendConnection.vrm = data.vrm
+		}
+
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.uid, data.uid)
+		compare(output.allowedInGroupModel, data.allowedInGroupModel)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+		BackendConnection.vrm = false
+	}
+
 	function test_formattedName_data() {
 		return [
 			{

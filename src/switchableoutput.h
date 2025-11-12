@@ -140,6 +140,7 @@ private:
 	void updateHasValidType();
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
+	bool shouldShowUiControl() const;
 
 	QPointer<VeQItem> m_outputItem;
 

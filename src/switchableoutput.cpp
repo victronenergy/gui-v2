@@ -3,6 +3,7 @@
 ** See LICENSE.txt for license information.
 */
 
+#include "backendconnection.h"
 #include "switchableoutput.h"
 #include "alldevicesmodel.h"
 #include "allservicesmodel.h"
@@ -402,18 +403,49 @@ void SwitchableOutput::updateAllowedInGroupModel()
 	// Output is allowed in the group model if all these conditions are true:
 	// - /Type is valid and matches the /ValidTypes
 	// - /State or /Dimming are valid
-	// - /ShowUIControl is not set, or is set to 1
+	// - /ShowUIControl indicates that the control should be shown
 	// - If this is a system relay, its function must also be set to 'manual'
-	const QVariant showUIControl = m_showUIControlItem ? m_showUIControlItem->getValue() : QVariant();
 	const bool allowed = hasValidType()
 			&& (m_stateItem && m_stateItem->getValue().isValid()
 				|| m_dimmingItem && m_dimmingItem->getValue().isValid())
-			&& (!showUIControl.isValid() || showUIControl.toInt() == 1)
+			&& shouldShowUiControl()
 			&& (!m_relayFunctionItem || m_relayFunctionItem->getValue().toInt() == Enums::Relay_Function_Manual);
 	if (allowed != m_allowedInGroupModel) {
 		m_allowedInGroupModel = allowed;
 		emit allowedInGroupModelChanged();
 	}
+}
+
+bool SwitchableOutput::shouldShowUiControl() const
+{
+	const QVariant value = m_showUIControlItem ? m_showUIControlItem->getValue() : QVariant();
+	if (!value.isValid()) {
+		// If /ShowUIControl is not present, then allow the control to be shown.
+		return true;
+	}
+
+	const int intValue = value.toInt();
+	if (intValue == Enums::SwitchableOutput_ShowUiControl_Off) {
+		return false;
+	}
+
+	const bool local = intValue & Enums::SwitchableOutput_ShowUiControl_Local;
+	const bool remote = intValue & Enums::SwitchableOutput_ShowUiControl_Remote;
+	if ((intValue & Enums::SwitchableOutput_ShowUiControl_Always)
+			// Setting both local+remote flags is the same as setting the "always" flag, regardless
+			// of the VRM connection status. It's not possible to set both flags via the UI, but
+			// this might be set by a backend configuration.
+			|| (local && remote)) {
+		return true;
+	}
+
+	if ((local && !BackendConnection::create()->isVrm())
+			|| (remote && BackendConnection::create()->isVrm())) {
+		return true;
+	}
+
+	// The VRM connection status doesn't match the local/remote visibility preference.
+	return false;
 }
 
 void SwitchableOutput::updateFormattedName()
