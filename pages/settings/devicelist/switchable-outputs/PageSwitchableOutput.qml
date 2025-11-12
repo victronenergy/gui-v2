@@ -110,13 +110,22 @@ Page {
 				defaultSecondaryText: VenusOS.switchableOutput_typeToText(root.switchableOutput.type, root.switchableOutput.outputId)
 			}
 
-			ListSwitch {
+			ListRadioButtonGroup {
 				//: Whether UI controls should be shown for this output
 				//% "Show controls"
 				text: qsTrId("page_switchable_show_controls")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/ShowUIControl"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
+				optionModel: [
+					{ display: CommonWords.off, value: VenusOS.SwitchableOutput_ShowUiControl_Off },
+					//% "Always"
+					{ display: qsTrId("page_switchable_output_show_always"), value: VenusOS.SwitchableOutput_ShowUiControl_Always },
+					//% "Only local"
+					{ display: qsTrId("page_switchable_output_show_local"), value: VenusOS.SwitchableOutput_ShowUiControl_Local },
+					//% "Only on VRM"
+					{ display: qsTrId("page_switchable_output_show_vrm"), value: VenusOS.SwitchableOutput_ShowUiControl_Remote }
+				]
 			}
 
 			ListQuantity {
