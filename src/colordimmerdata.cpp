@@ -53,6 +53,7 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, int *whit
 }
 void addStorageColorData(QList<int> *colorData, const QColor color, int white, int colorTemperature)
 {
+	Q_ASSERT(colorData);
 	if (color.isValid()) {
 		// Use getHsvF() which uses 0-1 range for S & V, instead of getHsv() which uses 0-255.
 		float h, s, v;
@@ -67,6 +68,33 @@ void addStorageColorData(QList<int> *colorData, const QColor color, int white, i
 	}
 	colorData->append(white);
 	colorData->append(colorTemperature);
+}
+
+/*
+	For presets stored in the local settings, the color data is stored as a comma-separated string
+	rather than a list.
+*/
+void getPresetColorData(const QStringList &colorData, QColor *color, int *white, int *colorTemperature)
+{
+	QVariantList intList;
+	for (const QString &numberString : colorData) {
+		bool ok = false;
+		intList.append(numberString.toInt(&ok));
+		if (!ok) {
+			qWarning() << "getPresetColorData(): non-number found in color data:" << colorData;
+		}
+	}
+	getStorageColorData(intList, color, white, colorTemperature);
+}
+void addPresetColorData(QStringList *colorData, const QColor color, int white, int colorTemperature)
+{
+	Q_ASSERT(colorData);
+	QList<int> colorDataInts;
+	addStorageColorData(&colorDataInts, color, white, colorTemperature);
+
+	for (int number : std::as_const(colorDataInts)) {
+		colorData->append(QString::number(number));
+	}
 }
 
 }
@@ -299,12 +327,12 @@ void ColorPresetModel::save()
 		return;
 	}
 
-	QList<int> colorData;
+	QStringList colorData;
 	for (int i = 0; i < m_colors.count(); ++i) {
 		const ColorInfo &info = m_colors.at(i);
-		::addStorageColorData(&colorData, info.color, info.white, info.colorTemperature);
+		::addPresetColorData(&colorData, info.color, info.white, info.colorTemperature);
 	}
-	m_settingItem->setValue(QVariant::fromValue(colorData));
+	m_settingItem->setValue(QVariant::fromValue(colorData.join(',')));
 }
 
 void ColorPresetModel::reload()
@@ -324,16 +352,17 @@ void ColorPresetModel::reload()
 		emit countChanged();
 	}
 
-	// Expect 9 groups of presets, where each preset is made up of 5 values
+	// Expect a comma-separated string with 9*5 values: there are 9 groups of presets, where each
+	// preset is made up of 5 values.
 	static const int valuesPerPreset = 5;
 	static const int presetGroupCount = 9;
-	QVariantList colorData = m_settingItem->getValue().toList();
+	const QStringList colorData = m_settingItem->getValue().toString().split(',');
 	beginInsertRows(QModelIndex(), 0, presetGroupCount - 1);
 	for (int presetGroupIndex = 0; presetGroupIndex < presetGroupCount; ++presetGroupIndex) {
 		QColor color;
 		int white = 0;
 		int colorTemperature = 0;
-		::getStorageColorData(colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
+		::getPresetColorData(colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
 				&color, &white, &colorTemperature);
 		m_colors.append({ color, white, colorTemperature });
 	}
