@@ -5,6 +5,7 @@ import subprocess
 import argparse
 import base64
 import shutil
+import xml.etree.ElementTree as ET
 
 def collect_filenames(directory, suffix):
     files = []
@@ -116,6 +117,31 @@ def write_compiled_json(name, version, minRequiredVersion, maxRequiredVersion, t
         json.dump(dataDict, file, indent=4)
         file.write('\n')
 
+def strip_empty_sources(tsFiles):
+    """
+    Remove <message> entries with empty/whitespace <source> from .ts files.
+    """
+    for filename in tsFiles:
+        try:
+            tree = ET.parse(filename)
+            root = tree.getroot()
+            changed = False
+            for context in list(root.findall('context')):
+                for message in list(context.findall('message')):
+                    source = message.find('source')
+                    if source is None or (source.text is None) or (source.text.strip() == ''):
+                        context.remove(message)
+                        changed = True
+                # remove empty contexts
+                if len(context.findall('message')) == 0:
+                    root.remove(context)
+                    changed = True
+            if changed:
+                tree.write(filename, encoding='utf-8', xml_declaration=True)
+                print("    stripped empty translations from", filename)
+        except Exception as e:
+            print("    failed to process", filename, e, file=sys.stderr)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog='gui-v2-plugin-compiler',
@@ -131,6 +157,7 @@ if __name__ == '__main__':
     parser.add_argument('-g', '--navigation', default='')
     parser.add_argument('-q', '--quickaccess', default='')
     parser.add_argument('-c', '--card', default='')
+    parser.add_argument('-f', '--filter-empty-sources', action='store_true', help='Strip empty source entries from .ts files')
 
     args = parser.parse_args()
 
@@ -141,6 +168,9 @@ if __name__ == '__main__':
 
     print("--- running lupdate")
     run_lupdate(qmlFiles, tsFiles, args.name)
+
+    if args.filter_empty_sources and tsFiles:
+        strip_empty_sources(tsFiles)
 
     print("--- running lrelease")
     run_lrelease(tsFiles, args.name)
