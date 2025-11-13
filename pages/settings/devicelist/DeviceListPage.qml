@@ -23,24 +23,15 @@ Page {
 			required property BaseDevice device
 			required property string cachedDeviceName
 
-			readonly property bool _loadCustomDelegate: connected && !!device
-			property bool _usingCustomDelegate
-
 			function _resetSource() {
-				if (_loadCustomDelegate) {
-					if (source.toString().length === 0 || !_usingCustomDelegate) {
-						setSource("delegates/DeviceListDelegate_%1.qml".arg(device.serviceType), {
-							device: Qt.binding(function() { return delegateLoader.device }),
-						})
-						_usingCustomDelegate = true
-					}
+				if (connected && !!device) {
+					setSource("delegates/DeviceListDelegate_%1.qml".arg(device.serviceType), {
+						device: Qt.binding(function() { return delegateLoader.device }),
+					})
 				} else {
-					if (source.toString().length === 0 || _usingCustomDelegate) {
-						setSource("delegates/DisconnectedDeviceListDelegate.qml", {
-							cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
-						})
-						_usingCustomDelegate = false
-					}
+					setSource("delegates/DisconnectedDeviceListDelegate.qml", {
+						cachedDeviceName: Qt.binding(function() { return delegateLoader.cachedDeviceName }),
+					})
 				}
 			}
 
@@ -56,8 +47,9 @@ Page {
 				}
 			}
 
-			on_LoadCustomDelegateChanged: _resetSource()
-			Component.onCompleted: _resetSource()
+			onConnectedChanged: Qt.callLater(_resetSource)
+			onDeviceChanged: Qt.callLater(_resetSource)
+			Component.onCompleted: Qt.callLater(_resetSource)
 		}
 
 		footer: SettingsColumn {
