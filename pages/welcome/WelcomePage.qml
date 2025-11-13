@@ -94,6 +94,7 @@ Rectangle {
 				text: qsTrId("welcome_page_back")
 				color: enabled ? Theme.color_white : Theme.color_font_secondary
 				backgroundColor: enabled ? Theme.color_ok : Theme.color_radioButton_indicator_off
+				flat: false
 				enabled: root.backButtonEnabled
 				onClicked: root.backClicked()
 			}
@@ -104,6 +105,7 @@ Rectangle {
 				text: root.nextButtonText
 				color: Theme.color_white
 				backgroundColor: Theme.color_ok
+				flat: false
 				onClicked: root.nextClicked()
 			}
 		}

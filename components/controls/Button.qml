@@ -70,7 +70,6 @@ T.Button {
 	}
 
 	contentItem: CP.IconLabel {
-		anchors.fill: parent
 		spacing: root.spacing
 		display: root.display
 		icon: root.icon

@@ -95,8 +95,7 @@ Rectangle {
 		color: Theme.color_splash_logo_icon
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
-		sourceSize.width: width
-		sourceSize.height: height
+		sourceSize: Qt.size(width, height)
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
@@ -119,8 +118,7 @@ Rectangle {
 		color: Theme.color_splash_logo_text
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
-		sourceSize.width: width
-		sourceSize.height: height
+		sourceSize: Qt.size(width, height)
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim
