@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	title: CommonWords.devices
+
 	GradientListView {
 		id: deviceListView
 
