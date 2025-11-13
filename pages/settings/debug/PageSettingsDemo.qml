@@ -344,8 +344,7 @@ Page {
 						source: "image://QZXing/encode/" + "https://www.victronenergy.com/" +
 								"?correctionLevel=M" +
 								"&format=qrcode"
-						sourceSize.width: Theme.geometry_listItem_height
-						sourceSize.height: Theme.geometry_listItem_height
+						sourceSize: Qt.size(Theme.geometry_listItem_height, Theme.geometry_listItem_height)
 					}
 				]
 			}
