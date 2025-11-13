@@ -100,7 +100,20 @@ ModalDialog {
 			id: colorModeButton
 
 			function changeOutputType(type) {
+				if (root.switchableOutput.type === type) {
+					return
+				}
 				root.switchableOutput.type = type
+
+				// When switching between RGB(W) and CCT, clear the saved Hue and Saturation, as the
+				// colour from RGB(W) doesn't make sense for CCT, and vice-versa. Keep the Value
+				// component of the HSV, to maintain the dimming/brightness when switching types.
+				root.colorDimmerData.color = Qt.hsva(1, 1, root.colorDimmerData.color.hsvValue, 1)
+
+				// Update the selector to show the correct colour in the centre, and save this as
+				// the new colour.
+				colorSelector.updateWheelAngle()
+				root.colorDimmerData.color = colorSelector.currentColor
 				root.colorDimmerData.save()
 			}
 

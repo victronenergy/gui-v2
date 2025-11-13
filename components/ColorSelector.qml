@@ -16,6 +16,8 @@ Item {
 	required property ColorDimmerData colorDimmerData
 	required property int outputType
 
+	readonly property color currentColor: colorSwatch.color
+
 	readonly property real _halfStrokeWidth: Theme.geometry_colorWheel_slider_strokeWidth/2
 	readonly property real _temperatureCool: 6500
 	readonly property real _temperatureWarm: 2000
