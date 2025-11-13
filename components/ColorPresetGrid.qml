@@ -112,12 +112,13 @@ FocusScope {
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
 				}
 				radius: Theme.geometry_colorWheelDialog_preset_button_radius
-				centerColor: Qt.hsva(presetDelegate.color.hsvHue,
-						presetDelegate.color.hsvSaturation,
-						1.0, 1.0)
-				color: presetDelegate.color.valid
-					   ? "transparent"
-					   : Theme.color_colorWheelDialog_preset_empty_button_background
+				centerColor: presetDelegate.color.valid
+						? Qt.hsva(presetDelegate.color.hsvHue,
+							presetDelegate.color.hsvSaturation,
+							1.0, 1.0)
+						: Theme.color_colorWheelDialog_preset_empty_button_background
+				color: presetDelegate.color.valid ? "transparent"
+						: Theme.color_colorWheelDialog_preset_empty_button_background
 
 				onClicked: {
 					if (presetDelegate.canRemove) {
@@ -138,17 +139,16 @@ FocusScope {
 
 				// If a color is set, show "-" icon in editing mode.
 				// Otherwise, show "+" icon to indicate a color can be added.
+				Image {
+					anchors.centerIn: parent
+					source: presetDelegate.canRemove ? "qrc:/images/icon_minus_bordered.svg" : ""
+				}
 				CP.ColorImage {
 					anchors.centerIn: parent
-					source: presetDelegate.canRemove
-							? "qrc:/images/icon_minus.svg"
-							: "qrc:/images/icon_plus.svg"
-					visible: presetDelegate.canRemove || !presetDelegate.color.valid
-					color: presetDelegate.canRemove
-							  // Minus icon is shown, which is always white
-							? Theme.color_white
-							  // Plus icon is shown, which is the primary font color, or disabled color
-							: (editButton.checked ? Theme.color_colorWheelDialog_preset_empty_button_icon_disabled : Theme.color_font_primary)
+					source: presetDelegate.color.valid ? "" : "qrc:/images/icon_plus.svg"
+					color: editButton.checked
+						   ? Theme.color_colorWheelDialog_preset_empty_button_icon_disabled
+						   : Theme.color_font_primary
 				}
 			}
 		}
