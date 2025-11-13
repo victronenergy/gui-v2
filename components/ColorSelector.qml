@@ -27,10 +27,24 @@ Item {
 	function updateWheelAngle() {
 		if (root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct) {
 			// Convert temperature color -> angle
-			// TODO: how to determine if a saved temp is in the top or bottom half of the circle?
-			mouseArea.angle = (FastUtils.scaleNumber(root.colorDimmerData.colorTemperature,
+			// Note: this will always return an angle in the top half of the circle, as the top and
+			// bottom halves are symmetrical and we do not save any data to remember which half of
+			// the circle was used to select the temperature.
+			const newAngle = (FastUtils.scaleNumber(root.colorDimmerData.colorTemperature,
 					root._temperatureWarm, root._temperatureCool,
 					0, 180) + 270) % 360
+			if ((mouseArea.angle > 90 && mouseArea.angle < 270)
+					&& (newAngle < 90 || newAngle > 270)
+					&& angleToTemperature(mouseArea.angle) === angleToTemperature(newAngle)) {
+				// Ignore the change. Otherwise, when dragging in the bottom half of the circle, if
+				// the user drags along the bottom half and releases, then onUpdateSliderValue
+				// calls updateWheelAngle(), then the indicator jumps to the top half as angles
+				// always map to the top half of the circle. So if the old angle is in the bottom
+				// half and the new angle is in the top half, and the temperature would remain the
+				// same even with the new angle, then we know the new angle can be ignored.
+			} else {
+				mouseArea.angle = newAngle
+			}
 		} else {
 			// Convert rgb -> angle
 			mouseArea.angle = ((720 - (root.colorDimmerData.color.hsvHue * 360)) + (90 - colorGradient.angle)) % 360
