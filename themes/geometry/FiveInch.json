@@ -214,6 +214,8 @@
 
     "geometry_controlCardsPage_bottomMargin": 16,
     "geometry_controlCardsPage_spacing": 16,
+    "geometry_controlCardsPage_empty_spacing": 10,
+    "geometry_controlCardsPage_title_bottomMargin": 40,
     "geometry_controlCardsPage_horizontalMargin": "geometry_page_content_horizontalMargin",
 
     "geometry_briefPage_edgeGauge_initialize_margin": 10,

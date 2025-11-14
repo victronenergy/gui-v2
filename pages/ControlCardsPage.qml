@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import QtQuick.Window
 import Victron.VenusOS
 
@@ -120,6 +121,49 @@ Page {
 			} else {
 				return true
 			}
+		}
+	}
+
+	Column {
+		id: emptyControlCards
+		anchors.fill: parent
+		visible: cardsView.count === 0 && !cardsView.header.active
+		spacing: Theme.geometry_controlCardsPage_empty_spacing
+
+		Label {
+			anchors.horizontalCenter: parent.horizontalCenter
+			horizontalAlignment: Text.AlignHCenter
+			width: implicitWidth + Theme.geometry_settings_breadcrumb_horizontalMargin * 2
+			height: implicitHeight + Theme.geometry_controlCardsPage_title_bottomMargin
+			//% "Controls"
+			text: qsTrId("controlcards_empty_title")
+			font.pixelSize: Theme.font_size_body2
+		}
+
+		CP.ColorImage {
+			anchors.horizontalCenter: parent.horizontalCenter
+			source: "qrc:/images/controlcards-no-devices.svg"
+		}
+
+		Label {
+			anchors.horizontalCenter: parent.horizontalCenter
+			horizontalAlignment: Text.AlignHCenter
+			verticalAlignment: Text.AlignVCenter
+			width: implicitWidth + Theme.geometry_settings_breadcrumb_horizontalMargin * 2
+			//% "No compatible devices found"
+			text: qsTrId("controlcards_empty_desc1")
+			font.pixelSize: Theme.font_size_body2
+		}
+
+		Label {
+			anchors.horizontalCenter: parent.horizontalCenter
+			horizontalAlignment: Text.AlignHCenter
+			verticalAlignment: Text.AlignVCenter
+			width: implicitWidth + Theme.geometry_settings_breadcrumb_horizontalMargin * 2
+			//% "Connect devices that support this function"
+			text: qsTrId("controlcards_empty_desc2")
+			font.pixelSize: Theme.font_size_body1
+			color: Theme.color_font_secondary
 		}
 	}
 }
