@@ -43,6 +43,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/DevicePage.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
+    components/EmptyPageItem.qml
     components/EnvironmentGauge.qml
     components/EnvironmentGaugePanel.qml
     components/ExpandedTanksView.qml
@@ -701,6 +702,7 @@ set(VictronVenusOS_RESOURCES
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/consumption.svg
+    images/controlcards-no-devices.svg
     images/dcloads.svg
     images/dot.svg
     images/dropdown.svg
