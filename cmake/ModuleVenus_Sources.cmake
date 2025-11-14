@@ -701,6 +701,7 @@ set(VictronVenusOS_RESOURCES
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/consumption.svg
+    images/controlcards-no-devices.svg
     images/dcloads.svg
     images/dot.svg
     images/dropdown.svg
