@@ -126,7 +126,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
-    components/ClassAndVrmInstance.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CloseButton.qml
@@ -590,6 +589,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevice.cpp
     src/basetankdevicemodel.h
     src/basetankdevicemodel.cpp
+    src/classandvrminstancemodel.h
+    src/classandvrminstancemodel.cpp
     src/colordimmerdata.h
     src/colordimmerdata.cpp
     src/dcmeterdevicemodel.h
