@@ -33,40 +33,22 @@ Page {
 
 	function _changeVrmInstance(uid, deviceClass, newVrmInstance, errorFunc) {
 		// See if another device of this class already has this VRM instance.
-		const conflictingDeviceIndex = classAndVrmInstanceModel.findByClassAndVrmInstance(deviceClass, newVrmInstance)
-		if (conflictingDeviceIndex >= 0) {
+		const conflictingInstanceUid = classAndVrmInstanceModel.findInstanceUid(deviceClass, newVrmInstance)
+		if (conflictingInstanceUid) {
 			// Show a dialog to confirm whether to swap device instances with the conflicting one.
 			const maximumVrmInstance = classAndVrmInstanceModel.maximumVrmInstance(deviceClass)
 			const dialogParams = {
 				instanceAUid: uid,
-				instanceBUid: classAndVrmInstanceModel.get(conflictingDeviceIndex).uid,
-				temporaryVrmInstance: isNaN(maximumVrmInstance) ? 0 : maximumVrmInstance + 1,
+				instanceBUid: conflictingInstanceUid,
+				temporaryVrmInstance: maximumVrmInstance < 0 ? 0 : maximumVrmInstance + 1,
 				errorFunc: errorFunc,
 			}
 			Global.dialogLayer.open(swapDialogComponent, dialogParams)
 			return false
 		} else {
 			// No conflicts; just set the new VRM instance.
-			vrmInstanceItem.uid = uid
-			vrmInstanceItem.setValue(deviceClass + ":" + newVrmInstance)
-			return true
+			return classAndVrmInstanceModel.setVrmInstance(uid, newVrmInstance)
 		}
-	}
-
-	function _findDeviceObject(deviceClass, deviceInstance) {
-		if (deviceInstance < 0) {
-			return null
-		}
-
-		for (let i = 0; i < AllDevicesModel.count; ++i) {
-			const device = AllDevicesModel.deviceAt(i)
-			if (device
-					&& device.deviceInstance === deviceInstance
-					&& device.serviceType === deviceClass) {
-				return device
-			}
-		}
-		return null
 	}
 
 	// If user changes the VRM instance, ask whether reboot should be done when page is popped.
@@ -84,155 +66,11 @@ Page {
 		return false
 	}
 
-	VeQuickItem { id: vrmInstanceItem }
-
-	// Creates an object for each /Devices/.../ClassAndVrmInstance entry, and populates
-	// classAndVrmInstanceModel with the data for each object. This is better than creating the
-	// ListView directly from the /ClassAndVrmInstance entries, as that would create/destroy the
-	// VeQuickItem objects when delegates are created/destroyed, and then VRM instance values would not
-	// always be available for comparison.
-	Instantiator {
-		id: classAndVrmInstanceObjects
-
-		model: VeQItemTableModel {
-			uids: [ Global.systemSettings.serviceUid + "/Settings/Devices" ]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-
-		delegate: ClassAndVrmInstance {
-			uid: model.uid + "/ClassAndVrmInstance"
-			customNameUid: model.uid + "/CustomName"
-
-			onVrmInstanceChanged: {
-				const modelIndex = classAndVrmInstanceModel.findByUid(uid)
-				if (modelIndex >= 0) {
-					classAndVrmInstanceModel.set(modelIndex, { deviceClass: deviceClass, vrmInstance: vrmInstance })
-					classAndVrmInstanceModel.updateSortOrder(modelIndex)
-				}
-
-				// Try to find/create a Device in order to fetch the device name. Once initialized,
-				// it can remain the same, since the device is determined by the 'real' device
-				// instance, rather than the VRM instance.
-				if (vrmInstance < 0) {
-					device = null
-				} else if (!device) {
-					device = root._findDeviceObject(deviceClass, vrmInstance)
-					if (!device) {
-						console.warn("Failed to find service for device class", deviceClass, "with device instance:", vrmInstance)
-					}
-				}
-			}
-
-			onNameChanged: {
-				const modelIndex = classAndVrmInstanceModel.findByUid(uid)
-				if (modelIndex >= 0) {
-					classAndVrmInstanceModel.setProperty(modelIndex, "name", name)
-					classAndVrmInstanceModel.updateSortOrder(modelIndex)
-				}
-			}
-		}
-
-		onObjectAdded: function(index, object) {
-			const insertionIndex = classAndVrmInstanceModel.findInsertionIndex(object.deviceClass, object.name, object.vrmInstance)
-			classAndVrmInstanceModel.insert(insertionIndex, {
-				uid: object.uid,
-				deviceClass: object.deviceClass,
-				vrmInstance: object.vrmInstance,
-				initialVrmInstance: object.vrmInstance,
-				savedVrmInstance: object.vrmInstance,
-				name: object.name
-			})
-		}
-	}
-
-	// A model of the data to be shown in the main list view.
-	ListModel {
-		id: classAndVrmInstanceModel
-
-		function findByClassAndVrmInstance(deviceClass, vrmInstance) {
-			for (let i = 0; i < count; ++i) {
-				const data = get(i)
-				if (data.deviceClass === deviceClass && data.vrmInstance === vrmInstance) {
-					return i
-				}
-			}
-			return -1
-		}
-
-		function findByUid(uid) {
-			for (let i = 0; i < count; ++i) {
-				const data = get(i)
-				if (data.uid === uid) {
-					return i
-				}
-			}
-			return -1
-		}
-
-		function findInsertionIndex(deviceClass, name, vrmInstance) {
-			// Sort by connected devices first (i.e. those with a name), then by device class, then
-			// by name or VRM instance.
-			const deviceConnected = name.length > 0
-			for (let i = 0; i < count; ++i) {
-				const data = get(i)
-				const currentDeviceConnected = data.name.length > 0
-				if (deviceConnected) {
-					if (!currentDeviceConnected) {
-						return i
-					}
-					if (data.deviceClass > deviceClass) {
-						return i
-					} else if (data.deviceClass === deviceClass && data.name.localeCompare(name) > 0) {
-						return i
-					}
-				} else {
-					if (currentDeviceConnected) {
-						continue
-					}
-					if (data.deviceClass > deviceClass) {
-						return i
-					} else if (data.deviceClass === deviceClass && data.vrmInstance > vrmInstance) {
-						return i
-					}
-				}
-			}
-			return count
-		}
-
-		function updateSortOrder(modelIndex) {
-			const data = get(modelIndex)
-			const insertionIndex = findInsertionIndex(data.deviceClass, data.name, data.vrmInstance)
-			if (insertionIndex !== modelIndex) {
-				move(modelIndex, insertionIndex, 1)
-			}
-		}
-
-		function maximumVrmInstance(deviceClass) {
-			let maxValue = NaN
-			for (let i = 0; i < count; ++i) {
-				const data = get(i)
-				if (data.deviceClass === deviceClass && !isNaN(data.vrmInstance)) {
-					maxValue = isNaN(maxValue) ? data.vrmInstance : Math.max(maxValue, data.vrmInstance)
-				}
-			}
-			return maxValue
-		}
-
-		function hasVrmInstanceChanges() {
-			for (let i = 0; i < count; ++i) {
-				const modelData = get(i)
-				if (modelData.savedVrmInstance !== modelData.initialVrmInstance
-						|| modelData.vrmInstance !== modelData.initialVrmInstance) {
-					return true
-				}
-			}
-			return false
-		}
-	}
+	ClassAndVrmInstanceModel { id: classAndVrmInstanceModel }
 
 	GradientListView {
 		id: vrmInstancesListView
-		model: classAndVrmInstanceModel
+		model: SortedClassAndVrmInstanceModel { sourceModel: classAndVrmInstanceModel }
 
 		delegate: ListIntField {
 			id: deviceDelegate
@@ -262,12 +100,7 @@ Page {
 			saveInput: function() {
 				const newVrmInstance = parseInt(textField.text)
 				if (newVrmInstance !== model.vrmInstance) {
-					if (root._changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)) {
-						// Set a "savedVrmInstance" value so that hasVrmInstanceChanges() will
-						// detect a change even if the new value has not yet been saved to the
-						// backend.
-						classAndVrmInstanceModel.setProperty(model.index, "savedVrmInstance", newVrmInstance)
-					}
+					_changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)
 				}
 			}
 			on_ModelVrmInstanceChanged: {
