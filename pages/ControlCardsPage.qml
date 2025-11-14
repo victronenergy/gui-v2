@@ -122,4 +122,24 @@ Page {
 			}
 		}
 	}
+
+	Loader {
+		id: emptyPageLoader
+		anchors {
+			fill: parent
+			leftMargin: Theme.geometry_page_content_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
+		}
+		active: cardsView.count === 0 && !cardsView.headerItem.active
+		sourceComponent: EmptyPageItem {
+			//% "Controls"
+			titleText: qsTrId("controlcards_empty_title")
+			//% "No compatible devices found"
+			primaryText: qsTrId("controlcards_empty_desc1")
+			//% "Connect devices that support this function"
+			secondaryText: qsTrId("controlcards_empty_desc2")
+			imageSource: "qrc:/images/controlcards-no-devices.svg"
+			imageColor: Theme.color_emptyPageItem_logo
+		}
+	}
 }

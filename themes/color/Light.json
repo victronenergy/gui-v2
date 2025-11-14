@@ -115,6 +115,8 @@
     "color_quantityTable_row_background": "color_gray9",
     "color_quantityTable_row_alternateBackground": "color_gray7",
 
+    "color_emptyPageItem_logo": "color_lightBlue",
+
     "color_solarDetailBox_border": "color_gray3",
     "color_solarDetailBox_quantityTitle": "color_gray4",
     "color_solarDetailBox_columnTitle": "color_gray3",
