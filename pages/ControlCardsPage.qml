@@ -36,6 +36,15 @@ Page {
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: ListView.Horizontal
 
+		// When using key navigation to scroll through the control cards, use a velocity that
+		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
+		// through the Switch Pane.
+		// Note that the control cards do not need a scrollToControl() function, as these cards
+		// always fit within a single screen, so it can rely on the ListView auto-scroll behaviour
+		// that moves to the start of each card.
+		highlightMoveVelocity: Theme.animation_cards_highlightMoveVelocity
+		highlightMoveDuration: -1
+
 		header: BaseListLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
 			sourceComponent: BaseListItem {

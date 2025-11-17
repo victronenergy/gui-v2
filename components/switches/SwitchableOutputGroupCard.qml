@@ -10,6 +10,7 @@ ControlCard {
 	id: root
 
 	required property SwitchableOutputGroup group
+	readonly property Item currentItem: Global.keyNavigationEnabled && activeFocus ? outputGrid.currentItem : null
 
 	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
 	icon.source: "qrc:/images/icon_switch_24.svg"
