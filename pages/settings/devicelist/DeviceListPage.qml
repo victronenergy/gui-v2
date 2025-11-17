@@ -21,12 +21,12 @@ Page {
 		delegate: BaseListLoader {
 			id: delegateLoader
 
-			required property bool connected
 			required property BaseDevice device
 			required property string cachedDeviceName
+			property bool _completed
 
 			function _resetSource() {
-				if (connected && !!device) {
+				if (!!device) {
 					setSource("delegates/DeviceListDelegate_%1.qml".arg(device.serviceType), {
 						device: Qt.binding(function() { return delegateLoader.device }),
 					})
@@ -49,9 +49,16 @@ Page {
 				}
 			}
 
-			onConnectedChanged: Qt.callLater(_resetSource)
-			onDeviceChanged: Qt.callLater(_resetSource)
-			Component.onCompleted: Qt.callLater(_resetSource)
+			onDeviceChanged: {
+				// Reset the content when the device is disconnected/reconnected.
+				if (_completed) {
+					_resetSource()
+				}
+			}
+			Component.onCompleted: {
+				_resetSource()
+				_completed = true
+			}
 		}
 
 		footer: SettingsColumn {

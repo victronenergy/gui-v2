@@ -230,7 +230,7 @@ void RuntimeDeviceModel::sourceDeviceAboutToBeRemoved(const QModelIndex &parent,
 				m_devices[deviceIndex].device->disconnect(this);
 				m_devices[deviceIndex].device = nullptr;
 			}
-			emit dataChanged(createIndex(deviceIndex, 0), createIndex(deviceIndex, 0), { ConnectedRole });
+			emit dataChanged(createIndex(deviceIndex, 0), createIndex(deviceIndex, 0), { ConnectedRole, DeviceRole });
 		}
 	}
 
