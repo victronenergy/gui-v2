@@ -14,6 +14,7 @@
     "animation_controlCards_slide_duration": 150,
     "animation_toastNotification_fade_duration": 250,
     "animation_listView_highlightMoveDuration": 200,
+    "animation_cards_highlightMoveVelocity": 900,
     "animation_scrollbar_fade_duration": 250,
     "animation_generator_stopWhenAc1Available_toastNotification_autoClose_duration": 10000,
     "animation_generator_detectGeneratorNotSet_toastNotification_autoClose_duration": 10000,
