@@ -110,8 +110,8 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
-		centerColor: Qt.hsva(currentColorDimmerData.color.hsvHue,
-					   currentColorDimmerData.color.hsvSaturation,
+		centerColor: Qt.hsva(currentColorDimmerData.displayColor.hsvHue,
+					   currentColorDimmerData.displayColor.hsvSaturation,
 					   1.0, 1.0)
 
 		KeyNavigationHighlight.active: activeFocus
@@ -121,6 +121,7 @@ FocusScope {
 		ColorDimmerData {
 			id: currentColorDimmerData
 			dataUid: root.switchableOutput.uid + "/LightControls"
+			outputType: root.switchableOutput.type
 		}
 
 		VeQuickItem {

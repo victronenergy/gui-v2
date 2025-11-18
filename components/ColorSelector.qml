@@ -14,7 +14,7 @@ Item {
 	id: root
 
 	required property ColorDimmerData colorDimmerData
-	required property int outputType
+	readonly property int outputType: colorDimmerData.outputType
 
 	readonly property color currentColor: colorSwatch.color
 
@@ -431,16 +431,13 @@ Item {
 						Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) < Theme.geometry_colorWheel_selector_width/2) {
 					angle = Math.round((Math.atan2(width/2 - mouseX, mouseY - height/2) / (Math.PI*2) + 0.5) * 360)
 				}
-				let hsvHue
 				if (root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct) {
-					const temperatureColor = root.angleToTemperatureColor(mouseArea.angle)
-					root.colorDimmerData.color.hsvSaturation = temperatureColor.hsvSaturation
-					root.colorDimmerData.colorTemperature = root.angleToTemperature(mouseArea.angle)
-					hsvHue = temperatureColor.hsvHue
+					// Save the selected color temperature
+					centreWheelSync.writeValue(root.angleToTemperature(mouseArea.angle))
 				} else {
-					hsvHue = root.angleToColor(360 - angle, 90 - colorGradient.angle, rightSlider.value).hsvHue
+					// Save the selected hue
+					centreWheelSync.writeValue(root.angleToColor(360 - angle, 90 - colorGradient.angle, rightSlider.value).hsvHue)
 				}
-				centreWheelSync.writeValue(hsvHue)
 			}
 
 			onPressed: updateAngleAndColor()
@@ -450,9 +447,15 @@ Item {
 		SliderSettingSync {
 			id: centreWheelSync
 			dataItem: QtObject {
-				readonly property real value: root.colorDimmerData.color.hsvHue
-				function setValue(value) {
-					root.colorDimmerData.color.hsvHue = value
+				readonly property real value: root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
+					  ? root.colorDimmerData.colorTemperature
+					  : root.colorDimmerData.color.hsvHue
+				function setValue(v) {
+					if (root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct) {
+						root.colorDimmerData.colorTemperature = v
+					} else {
+						root.colorDimmerData.color.hsvHue = v
+					}
 					root.colorDimmerData.save()
 				}
 			}
