@@ -13,24 +13,54 @@ using namespace Victron::VenusOS;
 
 namespace {
 
+QColor findColorBetween(const QColor &color1, const QColor &color2, qreal pos)
+{
+	const int r = color1.red() + ((color2.red() - color1.red()) * pos);
+	const int g = color1.green() + ((color2.green() - color1.green()) * pos);
+	const int b = color1.blue() + ((color2.blue() - color1.blue()) * pos);
+	return QColor(r, g, b);
+}
+
+QColor colorTemperatureToDisplayColor(int colorTemperature, float hsvValueF)
+{
+	if (colorTemperature == 0) {
+		return QColor();
+	}
+
+	static const QColor warmColor = QColor::fromString(QLatin1String("#FFB055")); // orange
+	static const int warmTemperature = 2000;
+	static const QColor coolColor = QColor::fromString(QLatin1String("#51A6FF")); // light blue
+	static const int coolTemperature = 6500;
+	static const qreal temperatureRange = coolTemperature - warmTemperature;
+
+	const int clampedTemperature = std::min(coolTemperature, std::max(warmTemperature, colorTemperature));
+	const qreal pos = (clampedTemperature - warmTemperature) / temperatureRange;
+	const QColor result = pos < .5
+			? findColorBetween(warmColor, Qt::white, pos * 2).toHsv()
+			: findColorBetween(Qt::white, coolColor, (pos - 0.5) * 2).toHsv();
+	return QColor::fromHsvF(result.hsvHueF(), result.hsvSaturationF(), hsvValueF);
+}
+
 /*
 	Read/write color data from/to the given QVariantList, which is a list of ints in this format:
 
-	0: Hue 0-359 degrees
-	1: Saturation 0-100%
+	0: Hue 0-359 degrees - for RGB/RGBW types only
+	1: Saturation 0-100% - for RGB/RGBW types only
 	2: Brightness 0-100%
-	3: White 0-100%
-	4: ColorTemperature 0-65000K
+	3: White 0-100% - for RGBW type only
+	4: ColorTemperature 0-65000K - for CCT type only
 
 	Note the H,S,V value ranges differ from the range expected for the QColor::setHsvF() and
 	QColor::getHsvF() parameters, which is 0.0-1.0 for all three values.
 */
-void getStorageColorData(const QVariantList &colorData, QColor *color, int *white, int *colorTemperature)
+void getStorageColorData(int outputType, const QVariantList &colorData, QColor *color, int *white, int *colorTemperature)
 {
 	if (colorData.count() != 5) {
 		qWarning() << "getStorageColorData() failed: expected 5 items but list is:" << colorData;
 		return;
 	}
+
+	// Read the LightControl fields.
 	if (color) {
 		const int h = colorData.value(0).toInt();
 		const int s = colorData.value(1).toInt();
@@ -51,7 +81,7 @@ void getStorageColorData(const QVariantList &colorData, QColor *color, int *whit
 		*colorTemperature = colorData.value(4).toInt();
 	}
 }
-void addStorageColorData(QList<int> *colorData, const QColor color, int white, int colorTemperature)
+void addStorageColorData(int outputType, QList<int> *colorData, const QColor color, int white, int colorTemperature)
 {
 	Q_ASSERT(colorData);
 	if (color.isValid()) {
@@ -74,7 +104,7 @@ void addStorageColorData(QList<int> *colorData, const QColor color, int white, i
 	For presets stored in the local settings, the color data is stored as a comma-separated string
 	rather than a list.
 */
-void getPresetColorData(const QStringList &colorData, QColor *color, int *white, int *colorTemperature)
+void getPresetColorData(int outputType, const QStringList &colorData, QColor *color, int *white, int *colorTemperature)
 {
 	QVariantList intList;
 	for (const QString &numberString : colorData) {
@@ -84,13 +114,13 @@ void getPresetColorData(const QStringList &colorData, QColor *color, int *white,
 			qWarning() << "getPresetColorData(): non-number found in color data:" << colorData;
 		}
 	}
-	getStorageColorData(intList, color, white, colorTemperature);
+	getStorageColorData(outputType, intList, color, white, colorTemperature);
 }
-void addPresetColorData(QStringList *colorData, const QColor color, int white, int colorTemperature)
+void addPresetColorData(int outputType, QStringList *colorData, const QColor color, int white, int colorTemperature)
 {
 	Q_ASSERT(colorData);
 	QList<int> colorDataInts;
-	addStorageColorData(&colorDataInts, color, white, colorTemperature);
+	addStorageColorData(outputType, &colorDataInts, color, white, colorTemperature);
 
 	for (int number : std::as_const(colorDataInts)) {
 		colorData->append(QString::number(number));
@@ -123,6 +153,20 @@ void ColorDimmerData::setDataUid(const QString &dataUid)
 	}
 }
 
+int ColorDimmerData::outputType() const
+{
+	return m_outputType;
+}
+
+void ColorDimmerData::setOutputType(int outputType)
+{
+	if (m_outputType != outputType) {
+		m_outputType = outputType;
+		updateDisplayColor();
+		emit outputTypeChanged();
+	}
+}
+
 QColor ColorDimmerData::color() const
 {
 	return m_color;
@@ -132,8 +176,14 @@ void ColorDimmerData::setColor(const QColor &color)
 {
 	if (m_color != color) {
 		m_color = color;
+		updateDisplayColor();
 		emit colorChanged();
 	}
+}
+
+QColor ColorDimmerData::displayColor() const
+{
+	return m_displayColor;
 }
 
 int ColorDimmerData::white() const
@@ -158,6 +208,7 @@ void ColorDimmerData::setColorTemperature(int colorTemperature)
 {
 	if (m_colorTemperature != colorTemperature) {
 		m_colorTemperature = colorTemperature;
+		updateDisplayColor();
 		emit colorTemperatureChanged();
 	}
 }
@@ -190,12 +241,23 @@ void ColorDimmerData::reload()
 	if (colorData.isEmpty()) {
 		color = QColor::fromHsv(0, 0, 0);
 	} else {
-		::getStorageColorData(colorData, &color, &white, &colorTemperature);
+		::getStorageColorData(m_outputType, colorData, &color, &white, &colorTemperature);
 	}
 
 	setColor(color);
 	setWhite(white);
 	setColorTemperature(colorTemperature);
+}
+
+void ColorDimmerData::updateDisplayColor()
+{
+	const QColor displayColor = m_outputType == Enums::SwitchableOutput_Type_ColorDimmerCct
+			? colorTemperatureToDisplayColor(m_colorTemperature, m_color.valueF())
+			: m_color;
+	if (displayColor != m_displayColor) {
+		m_displayColor = displayColor;
+		emit displayColorChanged();
+	}
 }
 
 void ColorDimmerData::loadFromPreset(const QVariantMap &values)
@@ -210,7 +272,7 @@ void ColorDimmerData::save()
 {
 	if (m_colorDataItem) {
 		QList<int> dataList;
-		::addStorageColorData(&dataList, m_color, m_white, m_colorTemperature);
+		::addStorageColorData(m_outputType, &dataList, m_color, m_white, m_colorTemperature);
 		m_colorDataItem->setValue(QVariant::fromValue(dataList));
 	}
 }
@@ -234,6 +296,17 @@ void ColorPresetModel::setSettingUid(const QString &settingUid)
 			qmlWarning(this) << "settingUid: " << settingUid << " has no matching VeQItem, colors will not be saved";
 		}
 		m_settingItem = settingItem;
+		if (settingUid.endsWith(QStringLiteral("/RGB"))) {
+			m_outputType = Enums::SwitchableOutput_Type_ColorDimmerRgb;
+		} else if (settingUid.endsWith(QStringLiteral("/CCT"))) {
+			m_outputType = Enums::SwitchableOutput_Type_ColorDimmerCct;
+		} else if (settingUid.endsWith(QStringLiteral("/RGBW"))) {
+			m_outputType = Enums::SwitchableOutput_Type_ColorDimmerRgbW;
+		} else {
+			qWarning() << "Color presets failed: cannot determine output type from setting uid:"
+					   << settingUid << ", expected RGB/RGBW/CCT suffix!";
+			m_outputType = Enums::SwitchableOutput_Type_ColorDimmerRgb;
+		}
 		reload();
 		emit settingUidChanged();
 	}
@@ -251,10 +324,15 @@ QVariant ColorPresetModel::data(const QModelIndex &index, int role) const
 		return QVariant();
 	}
 
+	const ColorInfo &info = m_colors.at(row);
 	switch (role)
 	{
 	case ColorRole:
-		return m_colors.at(row).color;
+		return info.color;
+	case DisplayColorRole:
+		return m_outputType == Enums::SwitchableOutput_Type_ColorDimmerCct
+				? colorTemperatureToDisplayColor(info.colorTemperature, info.color.valueF())
+				: info.color;
 	}
 	return QVariant();
 }
@@ -290,6 +368,7 @@ QHash<int, QByteArray> ColorPresetModel::roleNames() const
 {
 	static const QHash<int, QByteArray> roles {
 		{ ColorRole, "color" },
+		{ DisplayColorRole, "displayColor" },
 	};
 	return roles;
 }
@@ -303,7 +382,7 @@ void ColorPresetModel::setPreset(int index, const QColor &color, int white, int 
 	m_colors[index].color = color;
 	m_colors[index].white = white;
 	m_colors[index].colorTemperature = colorTemperature;
-	emit dataChanged(createIndex(index, 0), createIndex(index, 0), { ColorRole });
+	emit dataChanged(createIndex(index, 0), createIndex(index, 0), { ColorRole, DisplayColorRole });
 	save();
 }
 
@@ -316,7 +395,7 @@ void ColorPresetModel::clearPreset(int index)
 	m_colors[index].color = QColor();
 	m_colors[index].white = 0;
 	m_colors[index].colorTemperature = 0;
-	emit dataChanged(createIndex(index, 0), createIndex(index, 0), { ColorRole });
+	emit dataChanged(createIndex(index, 0), createIndex(index, 0), { ColorRole, DisplayColorRole });
 	save();
 }
 
@@ -330,7 +409,7 @@ void ColorPresetModel::save()
 	QStringList colorData;
 	for (int i = 0; i < m_colors.count(); ++i) {
 		const ColorInfo &info = m_colors.at(i);
-		::addPresetColorData(&colorData, info.color, info.white, info.colorTemperature);
+		::addPresetColorData(m_outputType, &colorData, info.color, info.white, info.colorTemperature);
 	}
 	m_settingItem->setValue(QVariant::fromValue(colorData.join(',')));
 }
@@ -362,7 +441,7 @@ void ColorPresetModel::reload()
 		QColor color;
 		int white = 0;
 		int colorTemperature = 0;
-		::getPresetColorData(colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
+		::getPresetColorData(m_outputType, colorData.mid(presetGroupIndex * valuesPerPreset, valuesPerPreset),
 				&color, &white, &colorTemperature);
 		m_colors.append({ color, white, colorTemperature });
 	}

@@ -17,13 +17,21 @@
 namespace Victron {
 namespace VenusOS {
 
+/*
+	Provides read/write access to a /LightControls value.
+
+	The /LightControls value is a list of five integers:
+		[Hue, Saturation, Brightness, White (intensity), Color temperature].
+*/
 class ColorDimmerData : public QObject, public QQmlParserStatus
 {
 	Q_OBJECT
 	QML_ELEMENT
 	Q_INTERFACES(QQmlParserStatus)
 	Q_PROPERTY(QString dataUid READ dataUid WRITE setDataUid NOTIFY dataUidChanged REQUIRED FINAL)
+	Q_PROPERTY(int outputType READ outputType WRITE setOutputType NOTIFY outputTypeChanged FINAL)
 	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
+	Q_PROPERTY(QColor displayColor READ displayColor NOTIFY displayColorChanged FINAL)
 	Q_PROPERTY(int white READ white WRITE setWhite NOTIFY whiteChanged FINAL)
 	Q_PROPERTY(int colorTemperature READ colorTemperature WRITE setColorTemperature NOTIFY colorTemperatureChanged FINAL)
 
@@ -33,8 +41,16 @@ public:
 	QString dataUid() const;
 	void setDataUid(const QString &dataUid);
 
+	int outputType() const;
+	void setOutputType(int outputType);
+
+	// The color generated from the HSV fields in the LightControls value.
 	QColor color() const;
 	void setColor(const QColor &color);
+
+	// For CCT types, this is a colour representation of the color temperature.
+	// For RGB and RGBW types, this is the same as the color value.
+	QColor displayColor() const;
 
 	int white() const;
 	void setWhite(int white);
@@ -50,18 +66,23 @@ public:
 
 Q_SIGNALS:
 	void dataUidChanged();
+	void outputTypeChanged();
 	void colorChanged();
+	void displayColorChanged();
 	void whiteChanged();
 	void colorTemperatureChanged();
 
 private:
+	void updateDisplayColor();
 	void colorDataChanged(QVariant var);
 	void reload();
 
 	QPointer<VeQItem> m_colorDataItem;
 	QColor m_color;
+	QColor m_displayColor;
 	int m_white = 0;
 	int m_colorTemperature = 1.0;
+	int m_outputType = -1;
 	bool m_completed = false;
 };
 
@@ -80,7 +101,8 @@ class ColorPresetModel : public QAbstractListModel, public QQmlParserStatus
 
 public:
 	enum Role {
-		ColorRole = Qt::UserRole
+		ColorRole = Qt::UserRole,
+		DisplayColorRole, // For CCT presets, this is a colour representation of the temperature
 	};
 	Q_ENUM(Role)
 
@@ -121,6 +143,7 @@ private:
 
 	QList<ColorInfo> m_colors;
 	QPointer<VeQItem> m_settingItem;
+	int m_outputType = 0;
 	bool m_completed = false;
 };
 

@@ -482,7 +482,7 @@
         "/SwitchableOutput/color_dimmer_rgb/Status": 9,
 
         "/SwitchableOutput/color_dimmer_cct/Name": "12. CCT wheel",
-        "/SwitchableOutput/color_dimmer_cct/LightControls": [32,26,92,0,3380],
+        "/SwitchableOutput/color_dimmer_cct/LightControls": [0,0,92,0,3380],
         "/SwitchableOutput/color_dimmer_cct/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_cct/Settings/Function": 2,
         "/SwitchableOutput/color_dimmer_cct/Settings/Group": "",
@@ -520,6 +520,6 @@
     "com.victronenergy.settings": {
         "/Settings/Gui2/Switchpane/Preset/RGB": "96,89,82,0,0,210,29,93,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
         "/Settings/Gui2/Switchpane/Preset/RGBW": "57,100,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-        "/Settings/Gui2/Switchpane/Preset/CCT": "210,29,93,0,4700,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+        "/Settings/Gui2/Switchpane/Preset/CCT": "0,0,93,0,4700,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
     }
 }

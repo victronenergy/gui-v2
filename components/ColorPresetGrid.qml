@@ -89,12 +89,12 @@ FocusScope {
 			id: presetDelegate
 
 			required property int index
-			required property color color
-			readonly property bool canRemove: editButton.checked && color.valid
+			required property color displayColor
+			readonly property bool canRemove: editButton.checked && displayColor.valid
 
 			width: buttonGrid.cellWidth
 			height: buttonGrid.cellHeight
-			enabled: color.valid || !editButton.checked  // empty presets cannot be clicked in edit mode
+			enabled: displayColor.valid || !editButton.checked  // empty presets cannot be clicked in edit mode
 
 			Keys.onSpacePressed: colorButton.clicked(null)
 			KeyNavigationHighlight.active: activeFocus
@@ -107,17 +107,17 @@ FocusScope {
 				height: Theme.geometry_colorWheelDialog_preset_button_width
 				border {
 					width: Theme.geometry_button_border_width
-					color: presetDelegate.color.valid ? Theme.color_ok
+					color: presetDelegate.displayColor.valid ? Theme.color_ok
 							: enabled ? Theme.color_colorWheelDialog_preset_empty_button_border
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
 				}
 				radius: Theme.geometry_colorWheelDialog_preset_button_radius
-				centerColor: presetDelegate.color.valid
-						? Qt.hsva(presetDelegate.color.hsvHue,
-							presetDelegate.color.hsvSaturation,
+				centerColor: presetDelegate.displayColor.valid
+						? Qt.hsva(presetDelegate.displayColor.hsvHue,
+							presetDelegate.displayColor.hsvSaturation,
 							1.0, 1.0)
 						: Theme.color_colorWheelDialog_preset_empty_button_background
-				color: presetDelegate.color.valid ? "transparent"
+				color: presetDelegate.displayColor.valid ? "transparent"
 						: Theme.color_colorWheelDialog_preset_empty_button_background
 
 				onClicked: {
@@ -127,7 +127,7 @@ FocusScope {
 							selectionIndicator.reset()
 						}
 						root.presetRemoved(presetDelegate.index)
-					} else if (presetDelegate.color.valid) {
+					} else if (presetDelegate.displayColor.valid) {
 						// Clicked a button with a color
 						root.presetActivated(presetDelegate.index)
 						selectionIndicator.moveTo(colorButton)
@@ -145,7 +145,7 @@ FocusScope {
 				}
 				CP.ColorImage {
 					anchors.centerIn: parent
-					source: presetDelegate.color.valid ? "" : "qrc:/images/icon_plus.svg"
+					source: presetDelegate.displayColor.valid ? "" : "qrc:/images/icon_plus.svg"
 					color: editButton.checked
 						   ? Theme.color_colorWheelDialog_preset_empty_button_icon_disabled
 						   : Theme.color_font_primary
