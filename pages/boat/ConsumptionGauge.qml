@@ -29,6 +29,7 @@ Column {
 	QuantityLabelIconRow {
 		id: motorDriveLoad
 
+		sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		dataObject: root.motorDrive.dcConsumption.scalar
 		font.pixelSize: root._pixelSize
 		icon.source: "qrc:/images/icon_propeller.svg"
@@ -41,6 +42,7 @@ Column {
 		anchors.right: parent.right
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
+		sourceType: VenusOS.ElectricalQuantity_Source_Ac
 		dataObject: Global.system.load.ac
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
@@ -53,6 +55,7 @@ Column {
 		anchors.right: parent.right
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
+		sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		dataObject: Global.system.dc
 		icon.source: "qrc:/images/dcloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size

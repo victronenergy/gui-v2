@@ -76,6 +76,7 @@ Flow {
 				y: root.widgetSize <= VenusOS.OverviewWidget_Size_S
 						? phaseLabel.height + Theme.geometry_three_phase_column_spacing
 						: 0
+				sourceType: VenusOS.ElectricalQuantity_Source_Ac
 				dataObject: QtObject {
 					readonly property real power: phaseDelegate.power
 					readonly property real current: phaseDelegate.current
