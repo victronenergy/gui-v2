@@ -24,6 +24,7 @@ OverviewWidget {
 		}
 	}
 
+	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
 	quantityLabel.visible: !!quantityLabel.dataObject
 	preferredSize: phaseCount > 1 ? VenusOS.OverviewWidget_PreferredSize_PreferLarge : VenusOS.OverviewWidget_PreferredSize_Any
 

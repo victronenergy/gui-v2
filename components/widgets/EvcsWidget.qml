@@ -25,6 +25,7 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_Evcs
 	preferredSize: VenusOS.OverviewWidget_PreferredSize_LargeOnly
 	enabled: true
+	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
 	quantityLabel.dataObject: Global.evChargers
 
 	extraContentChildren: [
@@ -54,7 +55,7 @@ OverviewWidget {
 
 			width: parent.width
 
-			ElectricalQuantityLabel {
+			QuantityLabel {
 				height: chargingTimeLabel.height // use normal label height, instead of default baseline calculation
 				value: energyItem.value ?? NaN
 				valueColor: unitColor

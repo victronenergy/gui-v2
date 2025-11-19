@@ -15,6 +15,7 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_DcLoads
 	enabled: systemLoadDevices.count > 1 || nonSystemLoadDevices.count > 0
 
+	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 	quantityLabel.dataObject: Global.system.dc
 
 	onClicked: {

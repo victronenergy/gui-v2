@@ -928,6 +928,20 @@ public:
 	};
 	Q_ENUM(MicrogridMode)
 
+	enum ElectricalPowerDisplay {
+		ElectricalPowerDisplay_PreferWatts,
+		ElectricalPowerDisplay_PreferAmps,
+		ElectricalPowerDisplay_Mixed,
+	};
+	Q_ENUM(ElectricalPowerDisplay)
+
+	enum ElectricalQuantity_Source {
+		ElectricalQuantity_Source_Any,
+		ElectricalQuantity_Source_Ac,
+		ElectricalQuantity_Source_Dc,
+	};
+	Q_ENUM(ElectricalQuantity_Source)
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
