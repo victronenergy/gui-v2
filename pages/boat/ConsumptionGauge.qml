@@ -29,11 +29,10 @@ Column {
 	QuantityLabelIconRow {
 		id: motorDriveLoad
 
+		dataObject: root.motorDrive.dcConsumption.scalar
 		font.pixelSize: root._pixelSize
-		value: root.motorDrive.dcConsumption.scalar.valid ? root.motorDrive.dcConsumption.scalar.value : NaN
-		unit: root.motorDrive.dcConsumption.scalarUnit
 		icon.source: "qrc:/images/icon_propeller.svg"
-		visible: root.gps.valid && root.motorDrive.dcConsumption.scalar && root.motorDrive.dcConsumption.scalar.valid
+		visible: root.gps.valid && !isNaN(value)
 	}
 
 	QuantityLabelIconRow {
@@ -42,8 +41,7 @@ Column {
 		anchors.right: parent.right
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
-		value: Global.system.load.ac.preferredQuantity
-		unit: Global.system.load.ac.preferredUnit
+		dataObject: Global.system.load.ac
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
 		visible: !motorDriveLoad.visible && Global.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
@@ -55,8 +53,7 @@ Column {
 		anchors.right: parent.right
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
-		value: Global.system.dc.preferredQuantity
-		unit: Global.system.dc.preferredUnit
+		dataObject: Global.system.dc
 		icon.source: "qrc:/images/dcloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
 		visible: !motorDriveLoad.visible && !isNaN(value)
