@@ -41,19 +41,21 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Power (Watts)"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.Units_Watt },
+					{ display: qsTrId("settings_units_watts"), value: VenusOS.ElectricalPowerDisplay_PreferWatts },
 					{
 						//% "Current (Amps)"
 						display: qsTrId("settings_units_amps"),
-						value: VenusOS.Units_Amp,
+						value: VenusOS.ElectricalPowerDisplay_PreferAmps,
 						//% "Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
 						caption: qsTrId("settings_units_amps_exceptions"),
 					},
+					//% "Mixed (AC in Watts, DC in Amps)"
+					{ display: qsTrId("settings_units_mixed"), value: VenusOS.ElectricalPowerDisplay_Mixed },
 				]
-				currentIndex: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? 1 : 0
+				currentIndex: Global.systemSettings.electricalPowerDisplay
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setElectricalQuantity(optionModel[index].value)
+					Global.systemSettings.setElectricalPowerDisplay(optionModel[index].value)
 				}
 			}
 

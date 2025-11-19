@@ -278,10 +278,12 @@ QtObject {
 			}
 
 			// Change the system unit
-			Global.systemSettings.setElectricalQuantity(
-					Global.systemSettings.electricalQuantity === VenusOS.Units_Watt
-					? VenusOS.Units_Amp
-					: VenusOS.Units_Watt)
+			Global.systemSettings.setElectricalPowerDisplay(
+					Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts
+					? VenusOS.ElectricalPowerDisplay_PreferAmps
+					: Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+						? VenusOS.ElectricalPowerDisplay_Mixed
+						: VenusOS.ElectricalPowerDisplay_PreferWatts)
 			Global.systemSettings.setTemperatureUnit(
 					Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 					? VenusOS.Units_Temperature_Fahrenheit
@@ -304,9 +306,9 @@ QtObject {
 						: VenusOS.Units_Speed_KilometresPerHour)
 
 			pageConfigTitle.text = "Units: "
-					+ (Global.systemSettings.electricalQuantity === VenusOS.Units_Watt
-					   ? "Watts"
-					   : "Amps") + " | "
+					+ (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts ? "Watts"
+					   : Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps ? "Amps"
+					   : "Mixed") + " | "
 					+ (Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 					   ? "Celsius"
 					   : "Fahrenheit") + " | "
