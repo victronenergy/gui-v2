@@ -10,6 +10,7 @@ import QtQuick.Controls.impl as CP
 Row {
 	id: root
 
+	property alias sourceType: label.sourceType
 	property alias dataObject: label.dataObject
 	property alias value: label.value
 	property alias icon: icon
