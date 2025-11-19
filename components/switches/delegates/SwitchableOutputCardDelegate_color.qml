@@ -124,11 +124,6 @@ FocusScope {
 			outputType: root.switchableOutput.type
 		}
 
-		VeQuickItem {
-			id: validTypesItem
-			uid: root.switchableOutput.uid + "/Settings/ValidTypes"
-		}
-
 		Component {
 			id: colorDialogComponent
 
@@ -136,7 +131,6 @@ FocusScope {
 				title: root.switchableOutput.formattedName
 				colorDimmerData: currentColorDimmerData
 				switchableOutput: root.switchableOutput
-				supportedOutputTypes: validTypesItem.valid ? validTypesItem.value : 0
 			}
 		}
 	}
