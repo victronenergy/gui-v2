@@ -89,14 +89,11 @@ Column {
 					value: Global.system.battery.voltage
 				}
 
-				QuantityLabel {
-					readonly property bool unitAmps: (Global.systemSettings.electricalQuantity === VenusOS.Units_Amp && !isNaN(Global.system.battery.current))
-							|| (!isNaN(Global.system.battery.current) && isNaN(Global.system.battery.power))
+				ElectricalQuantityLabel {
+					dataObject: Global.system.battery
 					valueColor: Theme.color_briefPage_battery_value_text_color
 					unitColor: Theme.color_briefPage_battery_unit_text_color
 					font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
-					value: unitAmps ? Global.system.battery.current : Global.system.battery.power
-					unit: unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 				}
 			}
 
