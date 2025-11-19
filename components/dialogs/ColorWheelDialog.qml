@@ -12,7 +12,6 @@ ModalDialog {
 
 	required property ColorDimmerData colorDimmerData
 	required property SwitchableOutput switchableOutput
-	required property int supportedOutputTypes
 
 	readonly property StateGroup stateGroup: StateGroup {
 		states: [
@@ -123,11 +122,11 @@ ModalDialog {
 				// Show the mode toggle button if multiple types of color wheels are supported.
 				let supportsRgb = false
 				let supportsCct = false
-				if (root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgb)
-						|| root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {
+				if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgb)
+						|| root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {
 					supportsRgb = true
 				}
-				if (root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerCct)) {
+				if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerCct)) {
 					supportsCct = true
 				}
 				return supportsRgb && supportsCct
@@ -135,14 +134,14 @@ ModalDialog {
 			outputType: root.switchableOutput.type
 
 			onRgbClicked: {
-				if (root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {
+				if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {
 					changeOutputType(VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)
-				} else if (root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgb)) {
+				} else if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgb)) {
 					changeOutputType(VenusOS.SwitchableOutput_Type_ColorDimmerRgb)
 				}
 			}
 			onCctClicked: {
-				if (root.supportedOutputTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerCct)) {
+				if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerCct)) {
 					changeOutputType(VenusOS.SwitchableOutput_Type_ColorDimmerCct)
 				}
 			}
