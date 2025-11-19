@@ -10,14 +10,14 @@ import QtQuick.Controls.impl as CP
 Row {
 	id: root
 
+	property alias dataObject: label.dataObject
 	property alias value: label.value
-	property alias unit: label.unit
 	property alias icon: icon
 	property alias font: label.font
 
 	spacing: Theme.geometry_boatPage_row_spacing
 
-	QuantityLabel {
+	ElectricalQuantityLabel {
 		id: label
 
 		anchors.verticalCenter: parent.verticalCenter
