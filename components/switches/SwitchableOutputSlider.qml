@@ -9,6 +9,9 @@ MiniSlider {
 	id: root
 
 	required property SwitchableOutput switchableOutput
+	readonly property bool hasDimmingProperties: switchableOutput.type === VenusOS.SwitchableOutput_Type_Dimmable
+			|| switchableOutput.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
+			|| switchableOutput.type === VenusOS.SwitchableOutput_Type_BasicSlider
 	property int sourceUnit
 	property int displayUnit
 
@@ -17,7 +20,7 @@ MiniSlider {
 	property bool _valueChangeKeyPressed
 
 	property var valueDataItem: VeQuickItem {
-		uid: root.switchableOutput.uid + "/Dimming"
+		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Dimming" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
@@ -54,19 +57,19 @@ MiniSlider {
 
 	VeQuickItem {
 		id: dimmingMaxItem
-		uid: root.switchableOutput.uid + "/Settings/DimmingMax"
+		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/DimmingMax" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 	VeQuickItem {
 		id: dimmingMinItem
-		uid: root.switchableOutput.uid + "/Settings/DimmingMin"
+		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/DimmingMin" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 	VeQuickItem {
 		id: stepSizeItem
-		uid: root.switchableOutput.uid + "/Settings/StepSize"
+		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/StepSize" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
