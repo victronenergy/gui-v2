@@ -100,7 +100,8 @@ Item {
 				let phaseAcOutCurrent = NaN
 				for (let objectIndex = 0; objectIndex < count; ++objectIndex) {
 					const acService = objectAt(objectIndex)
-					if (!acService) {
+					const acServicePhaseCount = Math.max(acService.acIn.phaseCount, acService.acOut.phaseCount)
+					if (!acService || phaseIndex >= acServicePhaseCount) {
 						continue
 					}
 					phaseAcInPower = Units.sumRealNumbers(phaseAcInPower, acService.acIn["powerL" + (phaseIndex + 1)].value)
@@ -173,6 +174,12 @@ Item {
 						: _activeInput.value + 1
 			property bool completed
 
+			readonly property string phaseCountUid: (acService.serviceType === "vebus" || acService.serviceType === "acsystem")
+					? acService.uid + "/Ac/NumberOfPhases"
+					: (acService.serviceType === "grid" || acService.serviceType === "genset")
+						? acService.uid + "/NrOfPhases"
+						: ""
+
 			// For simplicity, attempt to fetch L1/L2/L3 in/out data, regardless of the actual
 			// number of phases on the device.
 			readonly property ObjectAcConnection acIn: ObjectAcConnection {
@@ -182,6 +189,12 @@ Item {
 					: acService.serviceType === "acsystem" ? acService.uid + "/Ac/In/%1".arg(activeInput.value + 1)
 					: acService.serviceType === "charger" ? acService.uid + "/Ac/In"
 					: "" // no AC-in for inverters
+				_phaseCount.uid: acService.phaseCountUid
+				onPhaseCountChanged: {
+					if (acService.completed) {
+						Qt.callLater(acServiceObjects.updateConsumption)
+					}
+				}
 				onPowerChanged: {
 					if (acService.completed) {
 						Qt.callLater(acServiceObjects.updateConsumption)
@@ -192,6 +205,12 @@ Item {
 				powerKey: "P"
 				currentKey: "I"
 				bindPrefix: acService.serviceType === "charger" ? "" : acService.uid + "/Ac/Out"
+				_phaseCount.uid: acService.phaseCountUid
+				onPhaseCountChanged: {
+					if (acService.completed) {
+						Qt.callLater(acServiceObjects.updateConsumption)
+					}
+				}
 				onPowerChanged: {
 					if (acService.completed) {
 						Qt.callLater(acServiceObjects.updateConsumption)
