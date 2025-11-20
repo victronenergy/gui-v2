@@ -216,6 +216,10 @@ QtObject {
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
 
+	//: %1 = name of the device
+	//% "If it was recently disconnected, go to Settings → Devices → %1 → Advanced, and select 'Redetect VE.Bus system'."
+	readonly property string go_to_redetect_system: qsTrId("common_words_go_to_redetect_system")
+
 	//% "Grid"
 	readonly property string grid: qsTrId("common_words_grid")
 
@@ -350,12 +354,6 @@ QtObject {
 
 	//% "No"
 	readonly property string no: qsTrId("common_words_no")
-
-	//% "This setting is disabled when a Digital Multi Control is connected."
-	readonly property string noAdjustableByDmc: qsTrId("common_words_setting_disabled_when_dmc_connected")
-
-	//% "This setting is disabled when a VE.Bus BMS is connected."
-	readonly property string noAdjustableByBms: qsTrId("common_words_setting_disabled_when_bms_connected")
 
 	//% "No error"
 	readonly property string no_error: qsTrId("common_words_no_error")
@@ -650,5 +648,27 @@ QtObject {
 			  //% "4th last error"
 			: errorIndex === 3 ? qsTrId("common_words_4th_last_error")
 			: ""
+	}
+
+	function notAdjustableDueToBms(serviceType, deviceName) {
+		//% "This setting is disabled when a VE.Bus BMS is connected."
+		const s = qsTrId("common_words_setting_disabled_when_bms_connected")
+		return serviceType === "vebus"
+			  //: %1 = the translated text of common_words_setting_disabled_when_bms_connected
+			  //: %2 = the translated text of common_words_go_to_redetect_system
+			  //% "%1 %2"
+			? qsTrId("common_words_bms_disabled_go_to_redetect").arg(s).arg(go_to_redetect_system.arg(deviceName))
+			: s
+	}
+
+	function notAdjustableDueToDmc(serviceType, deviceName) {
+		//% "This setting is disabled when a Digital Multi Control is connected."
+		const s = qsTrId("common_words_setting_disabled_when_dmc_connected")
+		return serviceType === "vebus"
+			  //: %1 = the translated text of common_words_setting_disabled_when_dmc_connected
+			  //: %2 = the translated text of common_words_go_to_redetect_system
+			  //% "%1 %2"
+			? qsTrId("common_words_dmc_disabled_go_to_redetect").arg(s).arg(go_to_redetect_system.arg(deviceName))
+			: s
 	}
 }

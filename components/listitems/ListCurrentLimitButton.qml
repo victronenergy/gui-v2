@@ -13,15 +13,14 @@ ListButton {
 	required property int inputNumber // note this is 1-based, i.e. first AC input has inputNumber=1, not 0
 	required property int inputType
 
-	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property bool limitAdjustable: currentLimitIsAdjustable.value !== 0
 
 	function _currentLimitNotAdjustableText() {
-		if (serviceType !== "acsystem") {
+		if (device.serviceType !== "acsystem") {
 			if (dmc.valid) {
-				return CommonWords.noAdjustableByDmc
+				return CommonWords.notAdjustableDueToDmc(device.serviceType, device.name)
 			} else if (bmsMode.valid) {
-				return CommonWords.noAdjustableByBms
+				return CommonWords.notAdjustableDueToBms(device.serviceType, device.name)
 			}
 		}
 		//% "This current limit is fixed in the system configuration. It cannot be adjusted."
@@ -35,11 +34,15 @@ ListButton {
 
 	onClicked: {
 		if (!limitAdjustable) {
-			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText(),
-										 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
+			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText())
 			return
 		}
 		Global.dialogLayer.open(currentLimitDialogComponent, { value: currentLimitItem.value })
+	}
+
+	Device {
+		id: device
+		serviceUid: root.serviceUid
 	}
 
 	VeQuickItem {
