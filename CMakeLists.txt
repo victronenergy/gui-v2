@@ -27,7 +27,7 @@ if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     message(FATAL_ERROR "In-source builds are not allowed. Build artifacts such as CMakeCache.txt created in ${CMAKE_SOURCE_DIR} will cause problems for future builds. Run 'git clean -fd' in ${CMAKE_SOURCE_DIR} to continue.")
 endif()
 
-project(venus-gui-v2 LANGUAGES CXX VERSION 1.2.21)
+project(venus-gui-v2 LANGUAGES CXX VERSION 1.2.22)
 add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR} -DPROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH} )
 
 option(NO_CACHEGEN "Enable bytecode compilation and lint processing for all qml files via cmake -NO_CACHEGEN=OFF" ON) # Enabled by default
