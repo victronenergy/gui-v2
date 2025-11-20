@@ -303,6 +303,7 @@ Item {
 	}
 
 	function setSystem(config) {
+		let i
 		if (config?.state !== undefined) {
 			MockManager.setValue(Global.system.serviceUid + "/SystemState/State", config.state)
 		}
@@ -314,15 +315,32 @@ Item {
 			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", config.hasAcOutSystem ? 1 : 0)
 		}
 		const phaseCount = config?.ac ? (config.ac.phaseCount ?? 3) : 0
-		Global.system.load.ac.phases.phaseCount = phaseCount
-		Global.system.load.acIn.phases.phaseCount = phaseCount
-		Global.system.load.acOut.phases.phaseCount = phaseCount
+
+		// Clear the Power/Current values for any phases beyond the requested phase count.
+		for (const path of ["/Ac/Consumption", "/Ac/ConsumptionOnInput", "/Ac/ConsumptionOnOutput"]) {
+			for (i = 0; i < 3; ++i) {
+				const phasePath = Global.system.serviceUid + path + "/L" + (i+1)
+				for (const phaseSubPath of ["/Power", "/Current"]) {
+					if (i >= phaseCount) {
+						MockManager.setValue(phasePath + phaseSubPath, undefined)
+					} else {
+						MockManager.setValue(phasePath + phaseSubPath, 0)
+					}
+				}
+			}
+		}
+
+		// Update the /NumberOfPhases for the system AC load totals.
+		for (const acObject of [Global.system.load.ac, Global.system.load.acIn, Global.system.load.acOut]) {
+			acObject._phaseCount.setValue(0) // trigger reset of PhaseModel
+			acObject._phaseCount.setValue(phaseCount)
+		}
 
 		while (dcLoadsModel.count > 0) {
 			removeDevice(dcLoadsModel.deviceAt(dcLoadsModel.count - 1).serviceUid)
 		}
 		const dcServiceTypes = config?.dc?.serviceTypes ?? []
-		for (let i = 0; i < dcServiceTypes.length; ++i) {
+		for (i = 0; i < dcServiceTypes.length; ++i) {
 			const values = {
 				"/Dc/0/Power": Math.random() * 500,
 				"/Dc/0/Voltage": Math.random() * 50,
@@ -372,8 +390,10 @@ Item {
 			// Set phase data
 			const objectAcConn = input._phaseMeasurements
 			const phaseCount = inputInfoConfig.phaseCount ?? 1
+			objectAcConn._phaseCount.setValue(0) // trigger reset of PhaseModel
 			objectAcConn._phaseCount.setValue(phaseCount)
-			for (let phaseIndex = 0; phaseIndex < phaseCount; phaseIndex++) {
+			let phaseIndex
+			for (phaseIndex = 0; phaseIndex < phaseCount; phaseIndex++) {
 				const current = Math.random() * 30
 				const voltage = current * 5
 				const powerItem = objectAcConn["powerL" + (phaseIndex + 1)]
@@ -388,6 +408,13 @@ Item {
 					const voltageKey = inputInfoConfig.serviceType === "vebus" || inputInfoConfig.serviceType === "acsystem" ? "V" : "Voltage"
 					MockManager.setValue(`${objectAcConn.bindPrefix}/L${phaseIndex + 1}/${voltageKey}`, voltage)
 				}
+			}
+
+			// Clear the Power/Current values for any phases beyond the requested phase count.
+			for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
+				const phasePath = `${objectAcConn.bindPrefix}/L${phaseIndex + 1}`
+				MockManager.setValue(phasePath + "/" + objectAcConn.powerKey, undefined)
+				MockManager.setValue(phasePath + "/" + objectAcConn.currentKey, undefined)
 			}
 		}
 	}
