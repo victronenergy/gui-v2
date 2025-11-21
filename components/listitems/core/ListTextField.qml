@@ -13,6 +13,7 @@ ListItem {
 	property alias textField: textField
 	property alias secondaryText: textField.text
 	property alias placeholderText: textField.placeholderText
+	property int echoMode: TextInput.Normal
 	property string suffix
 	property var flickable: root.ListView ? root.ListView.view : null
 
@@ -21,6 +22,8 @@ ListItem {
 	//   Utils.validationResult() to describe the validation result.
 	// - saveInput: saves the text field input. The default implementation saves the value to the
 	//   dataItem, if it has a valid uid.
+	// - validateOnFocusLost: whether the text should be validated when it loses active focus
+	//   (default is true).
 	//
 	// When the text field loses focus or is accepted, validateInput is called; if it returns a result
 	// of InputValidation_Result_OK or InputValidation_Result_Warning, then saveInput() is called.
@@ -32,6 +35,7 @@ ListItem {
 			dataItem.setValue(textField.text)
 		}
 	}
+	property bool validateOnFocusLost: true
 
 	signal accepted()
 
@@ -130,6 +134,7 @@ ListItem {
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
 		borderColor: _showErrorHighlight ? Theme.color_red : Theme.color_ok
 		focusPolicy: Qt.ClickFocus
+		echoMode: root.echoMode
 
 		onTextEdited: {
 			// When the input is marked as invalid, run the validation again each time the input is
@@ -161,8 +166,10 @@ ListItem {
 			if (activeFocus) {
 				_initialText = text
 			} else if (_validateBeforeSaving && !_inputCancelled) {
-				// When focus is lost and the text was changed, validate and save the text.
-				_showErrorHighlight = root.runValidation(VenusOS.InputValidation_ValidateAndSave) === VenusOS.InputValidation_Result_Error
+				if (validateOnFocusLost) {
+					// When focus is lost and the text was changed, validate and save the text.
+					_showErrorHighlight = root.runValidation(VenusOS.InputValidation_ValidateAndSave) === VenusOS.InputValidation_Result_Error
+				}
 				_validateBeforeSaving = false
 			}
 		}

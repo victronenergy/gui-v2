@@ -200,6 +200,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListMountStateButton.qml
     components/listitems/ListAcInPositionRadioButtonGroup.qml
     components/listitems/ListOutputBatteryRadioButtonGroup.qml
+    components/listitems/ListPasswordField.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml

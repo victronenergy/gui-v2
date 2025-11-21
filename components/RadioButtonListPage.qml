@@ -112,32 +112,13 @@ Page {
 						preferredVisible: bottomContentLoader.caption.length > 0
 					}
 
-					ListTextField {
+					ListPasswordField {
 						id: passwordField
 
-						readonly property ListItemButton confirmButton: ListItemButton {
-							//: Confirm password, and verify it if possible
-							//% "Confirm"
-							text: qsTrId("settings_radio_button_group_confirm")
-							onClicked: {
-								passwordField.validateOnConfirm = true
-								if (passwordField.textField.activeFocus) {
-									// Trigger the validation that occurs when focus is lost.
-									passwordField.textField.focus = false
-								} else {
-									passwordField.runValidation(VenusOS.InputValidation_ValidateAndSave)
-								}
-							}
-						}
-						property bool validateOnConfirm
 						property bool showField
 
-						//% "Enter password"
-						placeholderText: qsTrId("settings_radio_button_enter_password")
-						text: ""
 						flickable: optionsListView
 						primaryLabel.color: Theme.color_font_secondary
-						textField.echoMode: TextInput.Password
 						interactive: radioButton.interactive
 						background.color: "transparent"
 						showAccessLevel: root.showAccessLevel
@@ -145,16 +126,6 @@ Page {
 						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
 						KeyNavigationHighlight.fill: radioButton
 						validateInput: function() {
-							// Validate the password on Enter/Return, or when "Confirm" is
-							// clicked. Ignore validation requests when the field does not
-							// have focus: e.g. when the selected radio button changes, or
-							// when this page is popped, or when an external dialog opens
-							// and causes focus to be lost. We want to only validate the
-							// password when the user explicitly indicates it should be done.
-							if (!textField.activeFocus && !passwordField.validateOnConfirm) {
-								return Utils.validationResult(VenusOS.InputValidation_Result_Unknown)
-							}
-							passwordField.validateOnConfirm = false
 							return root.validatePassword(model.index, textField.text)
 						}
 						saveInput: function() {
@@ -162,10 +133,6 @@ Page {
 								radioButton.select()
 							}
 						}
-						content.children: [
-							defaultContent,
-							confirmButton
-						]
 					}
 				}
 			}
