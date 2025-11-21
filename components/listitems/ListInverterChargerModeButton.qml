@@ -10,12 +10,10 @@ ListButton {
 	id: root
 
 	required property string serviceUid
-
-	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property bool modeAdjustable: modeIsAdjustable.value !== 0
 
 	text: CommonWords.mode
-	secondaryText: serviceType !== "inverter" || isInverterChargerItem.value === 1
+	secondaryText: device.serviceType !== "inverter" || isInverterChargerItem.value === 1
 			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
 			: Global.inverterChargers.inverterModeToText(modeItem.value)
 
@@ -25,10 +23,10 @@ ListButton {
 	onClicked: {
 		if (!modeAdjustable) {
 			if (dmc.valid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc,
+				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByDmc(device.serviceType, device.name),
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			} else if (bmsMode.valid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms,
+				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.noAdjustableByBms(device.serviceType, device.name),
 											 Theme.animation_veBusDeviceModeNotAdjustable_toastNotication_duration)
 			} else {
 				//% "The mode is fixed in the system configuration. It cannot be adjusted."
@@ -39,6 +37,11 @@ ListButton {
 		}
 
 		Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
+	}
+
+	Device {
+		id: device
+		serviceUid: root.serviceUid
 	}
 
 	VeQuickItem {
