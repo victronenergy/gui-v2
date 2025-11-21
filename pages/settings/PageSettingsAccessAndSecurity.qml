@@ -270,7 +270,7 @@ Page {
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 				//% "Enter password"
 				placeholderText: qsTrId("settings_root_enter_password")
-				textField.echoMode: TextInput.Password
+				echoMode: TextInput.Password
 				saveInput: function() {
 					if (secondaryText.length < 8) {
 						//% "Password needs to be at least 8 characters long"

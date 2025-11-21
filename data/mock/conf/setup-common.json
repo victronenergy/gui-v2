@@ -29,6 +29,7 @@
         "/Settings/Services/Modbus": 0,
         "/Settings/Services/MqttLocal": 0,
         "/Settings/Services/MqttLocalInsecure": 0,
+        "/Settings/Services/AccessPointPassword": "bad password",
         "/Settings/System/AccessLevel": 3,
         "/Settings/System/SecurityProfile": 0,
         "/Settings/System/TimeZone": "Europe/Berlin",
