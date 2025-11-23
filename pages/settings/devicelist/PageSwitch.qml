@@ -9,6 +9,16 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
+	title: 	{
+		if (device.customName) {
+			return device.customName
+		} else if (device.deviceInstance >= 0 && device.productName) {
+			return `${device.productName} (${device.deviceInstance})`
+		} else {
+			return ""
+		}
+	}
+
 	settingsHeader: SettingsColumn {
 		width: parent?.width ?? 0
 		bottomPadding: spacing
