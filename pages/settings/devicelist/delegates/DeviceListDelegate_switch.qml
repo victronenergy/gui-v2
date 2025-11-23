@@ -23,8 +23,7 @@ DeviceListDelegate {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitch.qml", {
-			serviceUid: root.device.serviceUid,
-			title: Qt.binding(function() { return root.text })
+			serviceUid: root.device.serviceUid
 		})
 	}
 
