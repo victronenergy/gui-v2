@@ -98,7 +98,7 @@ Item {
 				margins: isSilenceButton ? Theme.geometry_toastNotification_label_padding : 0
 			}
 
-			readonly property bool isSilenceButton: root.type === VenusOS.Notification_Warning || root.type === VenusOS.Notification_Alarm
+			readonly property bool isSilenceButton: notificationModelId !== 0 && (root.type === VenusOS.Notification_Warning || root.type === VenusOS.Notification_Alarm)
 			width: isSilenceButton ? silenceLabel.x + silenceLabel.implicitWidth + silenceLabel.anchors.rightMargin
 				: Theme.geometry_toastNotification_minHeight
 			radius: isSilenceButton ? Theme.geometry_button_radius : Theme.geometry_button_border_width
@@ -115,13 +115,16 @@ Item {
 					} else {
 						NotificationModel.acknowledgeType(VenusOS.Notification_Warning)
 					}
-				} else {
+				}
+
+				if (root.type === VenusOS.Notification_Info) {
 					// for Info toasts, remove from the toast model (but do NOT acknowledge) all Info toasts.
 					// This ensures that if something generates a hundred Info toasts in a row the user
 					// doesn't have to manually dismiss them all, but can still see the number of
 					// unacknowledged notifications in the Notifications navbar icon bubble number.
 					ToastModel.removeAllInfoExcept(root.toastModelId)
 				}
+
 				root.dismissed()
 			}
 
