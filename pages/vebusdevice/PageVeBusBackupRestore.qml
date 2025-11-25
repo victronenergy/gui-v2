@@ -294,7 +294,7 @@ Page {
 				text: qsTrId("backup_name")
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup
 						&& !_backupButton.backupFileName
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				//% "Enter backup name"
 				placeholderText: qsTrId("vebus_backup_backup_name")
 				validateInput: function() {
@@ -326,7 +326,7 @@ Page {
 					//% "Backing up..."
 					: qsTrId("vebus_backup_backing_up") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				preferredVisible: !_backupNameInput.visible
 				onClicked: {
 					_backupRestoreFile.setValue(backupFileName)
@@ -345,7 +345,7 @@ Page {
 				popDestination: root
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore
 						&& !_restoreButton.fileToRestore
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				onOptionClicked: function(index) {
 					_restoreButton.fileNameToRestore = _availableBackupsModel.get(index).display
 					_restoreButton.fileToRestore = _availableBackupsModel.get(index).value
@@ -363,7 +363,7 @@ Page {
 					//% "Restoring..."
 					: qsTrId("vebus_backup_restoring") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				preferredVisible: !_restoreOptionsList.preferredVisible
 				onClicked: {
 					_backupRestoreFile.setValue(fileToRestore)
@@ -382,7 +382,7 @@ Page {
 				popDestination: root
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete
 						&& !_deleteButton.fileToDelete
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				onOptionClicked: function(index) {
 					_deleteButton.fileNameToDelete = _mergedBackupsModel.get(index).display
 					_deleteButton.fileToDelete = _mergedBackupsModel.get(index).value
@@ -400,7 +400,7 @@ Page {
 					//% "Deleting..."
 					: qsTrId("vebus_backup_deleting") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				preferredVisible: !_deleteOptionsList.preferredVisible
 				onClicked: {
 					_backupRestoreFile.setValue(fileToDelete)
@@ -413,7 +413,7 @@ Page {
 				text: CommonWords.cancel
 				//% "Press to cancel"
 				secondaryText: qsTrId("vebus_backup_press_to_cancel")
-				enabled: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None && (!_deleteOptionsList.preferredVisible  ||
 								  !_restoreOptionsList.preferredVisible || !_backupNameInput.preferredVisible)
 				onClicked: {

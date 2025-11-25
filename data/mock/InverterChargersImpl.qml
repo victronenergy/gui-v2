@@ -132,6 +132,8 @@ Item {
 	// When backup/restore features are triggered, mimic a successful action that is finished after
 	// a brief delay.
 	VeQuickItem {
+		id: _backupRestoreAction
+
 		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Action"
 		onValueChanged: {
 			if (valid && value !== VenusOS.VeBusDevice_Backup_Restore_Action_None) {
@@ -144,21 +146,37 @@ Item {
 			interval: 2000
 			onTriggered: {
 				let successCode = _backupRestoreAction.value
+				const backupName = backupRestoreFileItem.value || ""
+				let backupList = availableBackupsItem.value || ""
+				backupList = backupList ? JSON.parse(backupList) : []
+
 				switch (_backupRestoreAction.value) {
 				case VenusOS.VeBusDevice_Backup_Restore_Action_Backup:
+					backupList.push(backupName + "-ttyS2")
 					successCode = 1
 					break
 				case VenusOS.VeBusDevice_Backup_Restore_Action_Restore:
+					backupList.splice(backupList.indexOf(backupName + "-ttyS2"), 1)
 					successCode = 2
 					break
 				case VenusOS.VeBusDevice_Backup_Restore_Action_Delete:
+					backupList.splice(backupList.indexOf(backupName + "-ttyS2"), 1)
 					successCode = 3
 					break
 				}
+				availableBackupsItem.setValue(JSON.stringify(backupList))
 				_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_None)
 				MockManager.setValue(Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Notify", successCode)
 			}
 		}
+	}
+	VeQuickItem {
+		id: availableBackupsItem
+		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/AvailableBackups"
+	}
+	VeQuickItem {
+		id: backupRestoreFileItem
+		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/File"
 	}
 
 	// Animate AC-out values; AC-in values are already animated by SystemAcImpl.qml, and DC values
