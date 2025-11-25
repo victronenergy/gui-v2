@@ -91,7 +91,7 @@ Page {
 			ListLink {
 				preferredVisible: portalId.dataItem.valid && productId.valid
 
-				//% "VRM Device Registration"
+				//% "VRM device registration"
 				text: qsTrId("settings_vrm_device_registration")
 				url: "https://vrm.victronenergy.com/login?installationIdentifier=%1&productId=%2".arg(portalId.dataItem.value).arg(productId.value)
 
@@ -307,7 +307,7 @@ Page {
 				//% "Unknown error"
 				defaultSecondaryText: qsTrId("settings_vrm_unknown_error")
 				optionModel: [
-					//% "No Error"
+					//% "No error"
 					{ display: qsTrId("settings_vrm_no_error"), value: 0 },
 					//% "No space left on storage"
 					{ display: qsTrId("settings_vrm_no_space_error"), value: 1 },
