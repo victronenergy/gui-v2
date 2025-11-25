@@ -464,6 +464,9 @@
         "/VebusMainState": 9,
         "/VebusSetChargeState": 0
     },
+    "com.victronenergy.platform": {
+        "/Vebus/Interface/ttyS2/Action": 0
+    },
     "com.victronenergy.settings": {
         "/Settings/Alarm/Vebus/HighDcCurrent": 2,
         "/Settings/Alarm/Vebus/HighDcRipple": 2,
