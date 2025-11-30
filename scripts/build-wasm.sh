@@ -142,7 +142,11 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
 
     # Compress the wasm file
     gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
-    sha256sum ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.sha256
+    # Create checksum in the output directory
+    cd ../build-wasm_files_to_copy/wasm/
+    sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
+    cd ../../build-wasm/
+    # Remove the uncompressed wasm file
     rm ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
 else
     echo "Current directory is not build-wasm. Aborting to avoid unwanted deleting of files."
