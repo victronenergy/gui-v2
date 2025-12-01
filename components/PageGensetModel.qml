@@ -19,15 +19,23 @@ VisibleItemModel {
 															  : 3
 
 	// In case of multiple gensets, startstop will control the one with the lowest device instance.
-	// Check if this genset is controlled by startstop by checking if the instance is the same.
+	// Check if this genset is controlled by startstop by checking if the instance and service type
+	// are the same.
 	// When not controlled by startstop, the genset can only be monitored, so hide some controls.
-	readonly property bool isStartStopControlled: startStopGensetInstance.valid && gensetInstance.valid ?
-											startStopGensetInstance.value === gensetInstance.value : false
+	readonly property bool isStartStopControlled: startStopGensetInstance.valid
+			&& gensetInstance.valid
+			&& startStopGensetInstance.value === gensetInstance.value
+			&& startStopGensetServiceType.valid
+			&& startStopGensetServiceType.value === serviceType
 
 	readonly property bool isGensetEnabled: gensetEnabled.valid ? gensetEnabled.value === 1 : false
 
 	readonly property VeQuickItem startStopGensetInstance: VeQuickItem {
 		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/GensetInstance" : ""
+	}
+
+	readonly property VeQuickItem startStopGensetServiceType: VeQuickItem {
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/GensetServiceType" : ""
 	}
 
 	readonly property VeQuickItem gensetInstance: VeQuickItem {
