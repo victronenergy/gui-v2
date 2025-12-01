@@ -87,13 +87,13 @@
       <translation>SOC ขั้นต่ำ</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation type="unfinished">ยืนยัน</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
       <source>Enter password</source>
       <translation>ใส่รหัสผ่าน</translation>
     </message>
@@ -2254,7 +2254,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>[Hidden]</source>
       <translation>[ที่ซ่อนอยู่]</translation>
     </message>
@@ -2344,12 +2344,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>อุปกรณ์ VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
       <source>No access points</source>
       <translation>ไม่มีจุดเชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>ไม่มีอแด็ปเตอร์ Wi-Fi เชื่อมต่อ</translation>
     </message>
@@ -2358,13 +2358,8 @@ Use unless prohibited by the utility provider.</source>
       <source>Create access point</source>
       <translation>สร้างจุดเชื่อมต่อ</translation>
     </message>
-    <message id="settings_wifi_access_point_enter_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="68"/>
-      <source>Enter password</source>
-      <translation type="unfinished">ใส่รหัสผ่าน</translation>
-    </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
       <source>Wi-Fi networks</source>
       <translation>เครือข่าย Wi-Fi</translation>
     </message>
@@ -2429,28 +2424,28 @@ Use unless prohibited by the utility provider.</source>
       <translation>แปซิฟิก</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="250"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="88"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>ไม่ได้เชื่อมต่อ %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="303"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
       <source>Reboot now?</source>
       <translation>รีบูทเดี๋ยวนี้?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="306"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>การเปลี่ยนแปลงอินสแตนซ์ VRM จะไม่มีผลจนกว่าจะรีบูตอุปกรณ์</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="326"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
       <source>Device is rebooting...</source>
       <translation>อุปกรณ์กำลังรีบูต...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="329"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
       <source>Device has been rebooted.</source>
       <translation>อุปกรณ์ได้รับการรีบูตแล้ว</translation>
     </message>
@@ -5147,7 +5142,7 @@ Do you want to continue?</source>
       <translation>ยกเลิก</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="312"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
       <source>Close</source>
       <translation>ปิด</translation>
     </message>
@@ -8932,12 +8927,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อุณหภูมิน้ำหล่อเย็น</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
       <source>Module state</source>
       <translation>สถานะโมดูล</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>แรงดันไฟโมดูล</translation>
     </message>
@@ -10083,12 +10078,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว (รีเลย์ 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>ความยาวรหัสผ่านต้องเป็น 0 หรือระหว่าง 10 ถึง 63 ตัวอักษร</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
       <source>Password updated</source>
       <translation>อัปเดตรหัสผ่านแล้ว</translation>
     </message>

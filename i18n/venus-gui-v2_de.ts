@@ -87,13 +87,13 @@
       <translation>Mindest-SoC</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation type="unfinished">Bestätigen</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
       <source>Enter password</source>
       <translation>Passwort eingeben</translation>
     </message>
@@ -2254,7 +2254,7 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>[Hidden]</source>
       <translation>[Versteckt]</translation>
     </message>
@@ -2344,12 +2344,12 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation>VE.CAN-Geräte</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
       <source>No access points</source>
       <translation>Keine Access Points</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Kein WiFi-Adapter angeschlossen</translation>
     </message>
@@ -2358,13 +2358,8 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <source>Create access point</source>
       <translation>Access Point erstellen</translation>
     </message>
-    <message id="settings_wifi_access_point_enter_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="68"/>
-      <source>Enter password</source>
-      <translation type="unfinished">Passwort eingeben</translation>
-    </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
       <source>Wi-Fi networks</source>
       <translation>WiFi-Netzwerke</translation>
     </message>
@@ -2429,28 +2424,28 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation>Pazifik</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="250"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="88"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Unverbunden %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="303"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
       <source>Reboot now?</source>
       <translation>Jetzt neu starten?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="306"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Die Änderungen der VRM-Instanz werden erst nach einem Neustart des Geräts übernommen.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="326"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
       <source>Device is rebooting...</source>
       <translation>Gerät startet neu...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="329"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
       <source>Device has been rebooted.</source>
       <translation>Gerät wurde neu gestartet.</translation>
     </message>
@@ -5148,7 +5143,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Abbrechen</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="312"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
       <source>Close</source>
       <translation>Schließen</translation>
     </message>
@@ -8934,12 +8929,12 @@ Das GX-Gerät kann nur ein angeschlossenes Genset steuern und nimmt dasjenige mi
       <translation>Kühlmitteltemperatur</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
       <source>Module state</source>
       <translation>Modulstatus</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Modulspannung</translation>
     </message>
@@ -10085,12 +10080,12 @@ Das GX-Gerät kann nur ein angeschlossenes Genset steuern und nimmt dasjenige mi
       <translation>Polarität (Relais 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Die Passwortlänge muss entweder 0 oder zwischen 10 und 63 Zeichen betragen</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
       <source>Password updated</source>
       <translation>Passwort aktualisiert</translation>
     </message>
@@ -10554,7 +10549,7 @@ Hier können Sie zusätzliche Anschlüsse und Geräte-IDs hinzufügen, um nach P
     <message id="page_switchable_output_startup_state">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="140"/>
       <source>Startup switch state</source>
-      <translation>Startschalterzustand</translation>
+      <translation>Zustand des Startschalters</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="147"/>
@@ -10600,27 +10595,27 @@ Hier können Sie zusätzliche Anschlüsse und Geräte-IDs hinzufügen, um nach P
     <message id="ac-in-modeldefault_phase_setting">
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="174"/>
       <source>Phase Setting</source>
-      <translation/>
+      <translation>Phaseneinstellung</translation>
     </message>
     <message id="page_switchable_output_show_local">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="125"/>
       <source>Only local</source>
-      <translation/>
+      <translation>Nur lokal</translation>
     </message>
     <message id="page_switchable_output_show_vrm">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="127"/>
       <source>Only on VRM</source>
-      <translation/>
+      <translation>Nur auf VRM</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
       <source>No compatible devices found</source>
-      <translation/>
+      <translation>Kein kompatiblen Geräte gefunden</translation>
     </message>
     <message id="controlcards_empty_desc2">
       <location filename="../../pages/ControlCardsPage.qml" line="149"/>
       <source>Connect devices that support this function</source>
-      <translation/>
+      <translation>Geräte anschließen, die diese Funktion unterstützen</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>

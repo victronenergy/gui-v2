@@ -87,13 +87,13 @@
       <translation>Minimalny SOC</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation type="unfinished">Potwierdź</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
       <source>Enter password</source>
       <translation>Wprowadź hasło</translation>
     </message>
@@ -2254,7 +2254,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>[Hidden]</source>
       <translation>[Ukryte]</translation>
     </message>
@@ -2344,12 +2344,12 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Urządzenia VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
       <source>No access points</source>
       <translation>Brak punktów dostępu</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Brak podłączonego adaptera Wi-Fi</translation>
     </message>
@@ -2358,13 +2358,8 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <source>Create access point</source>
       <translation>Utwórz punkt dostępu</translation>
     </message>
-    <message id="settings_wifi_access_point_enter_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="68"/>
-      <source>Enter password</source>
-      <translation type="unfinished">Wprowadź hasło</translation>
-    </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
       <source>Wi-Fi networks</source>
       <translation>Sieci Wi-Fi</translation>
     </message>
@@ -2429,28 +2424,28 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Pacyfik</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="250"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="88"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Niepołączony %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="303"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
       <source>Reboot now?</source>
       <translation>Zrestartować teraz?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="306"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Zmiany instancji VRM nie zostaną zastosowane do czasu ponownego uruchomienia urządzenia.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="326"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
       <source>Device is rebooting...</source>
       <translation>Urządzenie jest restartowane...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="329"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
       <source>Device has been rebooted.</source>
       <translation>Urządzenie zostało ponownie uruchomione.</translation>
     </message>
@@ -5149,7 +5144,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Anuluj</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="312"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
       <source>Close</source>
       <translation>Zamknij</translation>
     </message>
@@ -8936,12 +8931,12 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Temperatura płynu chłodzącego</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
       <source>Module state</source>
       <translation>Stan modułu</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Napięcie Modułu</translation>
     </message>
@@ -10087,12 +10082,12 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Polaryzacja (Przekaźnik 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Długość hasła musi wynosić 0 lub od 10 do 63 znaków</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
       <source>Password updated</source>
       <translation>Hasło zaktualizowane</translation>
     </message>

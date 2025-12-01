@@ -87,13 +87,13 @@
       <translation>Minimální SOC</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation type="unfinished">Ano, odhlaste mě</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
       <source>Enter password</source>
       <translation>Zadejte heslo</translation>
     </message>
@@ -2254,7 +2254,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>[Hidden]</source>
       <translation>[Skryté]</translation>
     </message>
@@ -2344,12 +2344,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Zařízení VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
       <source>No access points</source>
       <translation>Žádné přístupové body</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Není připojen žádný Wi-Fi adaptér</translation>
     </message>
@@ -2358,13 +2358,8 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Create access point</source>
       <translation>Vytvořit přístupový bod</translation>
     </message>
-    <message id="settings_wifi_access_point_enter_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="68"/>
-      <source>Enter password</source>
-      <translation type="unfinished">Zadejte heslo</translation>
-    </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi sítě</translation>
     </message>
@@ -2429,28 +2424,28 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Pacifik</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="250"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="88"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Nepřipojeno %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="303"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
       <source>Reboot now?</source>
       <translation>Restartovat nyní?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="306"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Změny instance VRM se použijí až po restartování zařízení.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="326"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
       <source>Device is rebooting...</source>
       <translation>Zařízení se restartuje...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="329"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
       <source>Device has been rebooted.</source>
       <translation>Zařízení bylo restartováno.</translation>
     </message>
@@ -5149,7 +5144,7 @@ Chcete pokračovat?</translation>
       <translation>Zrušit</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="312"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
       <source>Close</source>
       <translation>Zavřít</translation>
     </message>
@@ -8936,12 +8931,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Teplota chladicí kapaliny</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
       <source>Module state</source>
       <translation>Stav modulu</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Napětí modulu</translation>
     </message>
@@ -10087,12 +10082,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Polarita (Relé 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Délka hesla musí být 0 nebo mezi 10 a 63 znaky</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
       <source>Password updated</source>
       <translation>Heslo bylo aktualizováno</translation>
     </message>
