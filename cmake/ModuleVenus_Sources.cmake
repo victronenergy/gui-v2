@@ -720,7 +720,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_charging_renewables.svg
     images/icon_charging_shore.svg
     images/icon_CL_24.svg
-    images/icon_edit_32.svg
+    images/icon_trash_32.svg
     images/icon_fresh_water_24.svg
     images/icon_raw_water_24.svg
     images/icon_waste_water_24.svg

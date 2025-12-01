@@ -27,7 +27,7 @@ FocusScope {
 		anchors {
 			left: buttonGrid.left
 			leftMargin: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
-			verticalCenter: editButton.verticalCenter
+			verticalCenter: trashButton.verticalCenter
 		}
 		//% "Preset"
 		text: qsTrId("color_preset")
@@ -35,14 +35,14 @@ FocusScope {
 	}
 
 	Button {
-		id: editButton
+		id: trashButton
 		anchors {
 			right: buttonGrid.right
 			rightMargin: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
 		}
-		width: Theme.geometry_colorWheelDialog_preset_edit_width
-		height: Theme.geometry_colorWheelDialog_preset_edit_width
-		icon.source: "qrc:/images/icon_edit_32.svg"
+		width: Theme.geometry_colorWheelDialog_preset_trash_width
+		height: Theme.geometry_colorWheelDialog_preset_trash_width
+		icon.source: "qrc:/images/icon_trash_32.svg"
 		flat: false
 		onClicked: checked = !checked
 	}
@@ -50,8 +50,8 @@ FocusScope {
 	SeparatorBar {
 		id: separator
 		anchors {
-			top: editButton.bottom
-			topMargin: Theme.geometry_colorWheelDialog_preset_edit_spacing
+			top: trashButton.bottom
+			topMargin: Theme.geometry_colorWheelDialog_preset_trash_spacing
 			horizontalCenter: buttonGrid.horizontalCenter
 		}
 		x: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
@@ -71,7 +71,7 @@ FocusScope {
 
 		anchors.centerIn: parent
 		source: "qrc:/images/selection_dot.svg"
-		visible: parent != root && !editButton.checked
+		visible: parent != root && !trashButton.checked
 	}
 
 	GridView {
@@ -90,11 +90,11 @@ FocusScope {
 
 			required property int index
 			required property color displayColor
-			readonly property bool canRemove: editButton.checked && displayColor.valid
+			readonly property bool canRemove: trashButton.checked && displayColor.valid
 
 			width: buttonGrid.cellWidth
 			height: buttonGrid.cellHeight
-			enabled: displayColor.valid || !editButton.checked  // empty presets cannot be clicked in edit mode
+			enabled: displayColor.valid || !trashButton.checked  // empty presets cannot be clicked in edit mode
 
 			Keys.onSpacePressed: colorButton.clicked(null)
 			KeyNavigationHighlight.active: activeFocus
@@ -146,7 +146,7 @@ FocusScope {
 				CP.ColorImage {
 					anchors.centerIn: parent
 					source: presetDelegate.displayColor.valid ? "" : "qrc:/images/icon_plus.svg"
-					color: editButton.checked
+					color: trashButton.checked
 						   ? Theme.color_colorWheelDialog_preset_empty_button_icon_disabled
 						   : Theme.color_font_primary
 				}
@@ -155,6 +155,6 @@ FocusScope {
 
 		focus: true
 		keyNavigationEnabled: true
-		KeyNavigation.up: editButton
+		KeyNavigation.up: trashButton
 	}
 }
