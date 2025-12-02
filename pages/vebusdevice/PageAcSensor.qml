@@ -13,22 +13,11 @@ Page {
 	property int index
 
 	GradientListView {
-		model: VisibleItemModel {
-
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: sensorModel.count > 0
-
-				Repeater {
-					model: VeBusAcSensorModel { id: sensorModel }
-
-					ListText {
-						//% "AC sensor %1 %2"
-						text: qsTrId("vebus_device_ac_sensor_x_y").arg(root.index).arg(displayText)
-						dataItem.uid: bindPrefix + pathSuffix
-					}
-				}
-			}
+		model: VeBusAcSensorModel {}
+		delegate: ListText {
+			//% "AC sensor %1 %2"
+			text: qsTrId("vebus_device_ac_sensor_x_y").arg(root.index).arg(displayText)
+			dataItem.uid: bindPrefix + pathSuffix
 		}
 	}
 }
