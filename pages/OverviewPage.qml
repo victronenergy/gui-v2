@@ -34,7 +34,12 @@ SwipeViewPage {
 		VenusOS.OverviewWidget_Type_DcGenerator,
 		VenusOS.OverviewWidget_Type_Alternator,
 		VenusOS.OverviewWidget_Type_FuelCell,
-		VenusOS.OverviewWidget_Type_Wind
+		VenusOS.OverviewWidget_Type_GenericDcSource,
+		VenusOS.OverviewWidget_Type_AcCharger,
+		VenusOS.OverviewWidget_Type_DcCharger,
+		VenusOS.OverviewWidget_Type_WaterGenerator,
+		VenusOS.OverviewWidget_Type_ShaftGenerator,
+		VenusOS.OverviewWidget_Type_WindCharger,
 		// End bottom widgets
 	]
 
@@ -246,10 +251,15 @@ SwipeViewPage {
 		case VenusOS.OverviewWidget_Type_AcInputOther:
 			widget = acInputComponent.createObject(root, args)
 			break
-		case VenusOS.OverviewWidget_Type_Alternator:
 		case VenusOS.OverviewWidget_Type_DcGenerator:
+		case VenusOS.OverviewWidget_Type_Alternator:
 		case VenusOS.OverviewWidget_Type_FuelCell:
-		case VenusOS.OverviewWidget_Type_Wind:
+		case VenusOS.OverviewWidget_Type_GenericDcSource:
+		case VenusOS.OverviewWidget_Type_AcCharger:
+		case VenusOS.OverviewWidget_Type_DcCharger:
+		case VenusOS.OverviewWidget_Type_WaterGenerator:
+		case VenusOS.OverviewWidget_Type_ShaftGenerator:
+		case VenusOS.OverviewWidget_Type_WindCharger:
 			widget = dcInputComponent.createObject(root, args)
 			break
 		case VenusOS.OverviewWidget_Type_DcLoads:
@@ -296,40 +306,67 @@ SwipeViewPage {
 			}
 		}
 
-		// Add DC widgets. Only one widget is added per DC type, regardless of the number of inputs
-		// for that type.
-		for (i = 0; i < Global.dcInputs.model.count; ++i) {
-			// Add the input to the DC widget
-			const dcInput = Global.dcInputs.model.deviceAt(i)
-			const dcInputType = Global.dcInputs.model.meterTypeAt(i)
-			widgetType = _dcWidgetTypeForInputType(dcInputType)
-			widget = _createWidget(widgetType, { serviceType: dcInput.serviceType, inputType: dcInputType })
-			if (widgetCandidates.indexOf(widget) < 0) {
-				// Only show one widget for each DC input type.
-				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
-			}
-		}
-
 		// Add solar widget
 		if (Global.solarInputs.inputCount > 0) {
 			widgetCandidates.splice(_leftWidgetInsertionIndex(VenusOS.OverviewWidget_Type_Solar, widgetCandidates),
 					0, _createWidget(VenusOS.OverviewWidget_Type_Solar))
 		}
 		_leftWidgets = widgetCandidates
+
+		// Add DC widgets. Do this last so more boxes can be added per input type, if there is
+		// enough space to do so.
+		for (i = 0; i < Global.dcInputs.model.count; ++i) {
+			const dcInput = Global.dcInputs.model.deviceAt(i)
+			let dcMeterType = -1
+			if (widgetCandidates.length + Global.dcInputs.model.meterTypeCount <= 5) {
+				// If we can create one widget per meter type and still fit them into the left hand
+				// side, then do that. Otherwise, group them into the same dcsource box. (This is
+				// only relevant for dcsource service types; alternator/fuelcell/dcgenset always
+				// have their own boxes.)
+				dcMeterType = Global.dcInputs.model.meterTypeAt(i)
+			}
+
+			widgetType = _findDcWidgetType(dcInput.serviceType, dcMeterType)
+			if (widgetType < 0) {
+				console.warn("Cannot find matching widget type for DC input:", dcInput.serviceUid)
+				continue
+			}
+			widget = _createWidget(widgetType, { serviceType: dcInput.serviceType, inputTypeFilter: dcMeterType })
+			if (widgetCandidates.indexOf(widget) < 0) {
+				widgetCandidates.splice(_leftWidgetInsertionIndex(widgetType, widgetCandidates), 0, widget)
+			}
+		}
 	}
 
-	function _dcWidgetTypeForInputType(dcInputType) {
-		switch (dcInputType) {
-		case VenusOS.DcMeter_Type_Alternator:
+	function _findDcWidgetType(serviceType, dcMeterType = -1) {
+		switch (serviceType) {
+		case "alternator":
 			return VenusOS.OverviewWidget_Type_Alternator
-		case VenusOS.DcMeter_Type_FuelCell:
-			return VenusOS.OverviewWidget_Type_FuelCell
-		case VenusOS.DcMeter_Type_WindCharger:
-			return VenusOS.OverviewWidget_Type_Wind
-		default:
-			// Use DC Generator as the catch-all type for any DC power source that isn't
-			// specifically handled.
+		case "dcgenset":
 			return VenusOS.OverviewWidget_Type_DcGenerator
+		case "fuelcell":
+			return VenusOS.OverviewWidget_Type_FuelCell
+		case "dcsource":
+			// If dcMeterType is set, return a specific widget for this meter type. Otherwise, group
+			// it together with other dcsource devices, into a "Generic source" box.
+			switch (dcMeterType) {
+			case VenusOS.DcMeter_Type_AcCharger:
+				return VenusOS.OverviewWidget_Type_AcCharger
+			case VenusOS.DcMeter_Type_DcCharger:
+				return VenusOS.OverviewWidget_Type_DcCharger
+			case VenusOS.DcMeter_Type_ShaftGenerator:
+				return VenusOS.OverviewWidget_Type_ShaftGenerator
+			case VenusOS.DcMeter_Type_WaterGenerator:
+				return VenusOS.OverviewWidget_Type_WaterGenerator
+			case VenusOS.DcMeter_Type_WindCharger:
+				return VenusOS.OverviewWidget_Type_WindCharger
+			default:
+				break
+			}
+			return VenusOS.OverviewWidget_Type_GenericDcSource
+		default:
+			console.warn("DC input service type was", serviceType, "which is not in Global.dcInputs.model!")
+			return -1
 		}
 	}
 
@@ -481,7 +518,7 @@ SwipeViewPage {
 		readonly property AcInput acInput2: Global.acInputs?.input2 ?? null
 		onAcInput2Changed: Qt.callLater(root._resetWidgets)
 
-		// Affects whether DcInputWidget is shown.
+		// Affects whether DcInputWidget(s) are shown.
 		readonly property bool showDcInputs: Global.dcInputs?.model.count ?? 0 > 0
 		onShowDcInputsChanged: Qt.callLater(root._resetWidgets)
 
