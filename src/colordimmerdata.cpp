@@ -262,7 +262,10 @@ void ColorDimmerData::updateDisplayColor()
 
 void ColorDimmerData::loadFromPreset(const QVariantMap &values)
 {
-	setColor(values.value(QStringLiteral("color")).value<QColor>());
+	const QColor newColor = values.value(QStringLiteral("color")).value<QColor>();
+	// When loading a preset do NOT change the current hsv "value" (or brightness) amount
+	// Presets are SAVED with brightness values
+	setColor(QColor::fromHsv(newColor.hsvHue(), newColor.hsvSaturation(), m_color.value()));
 	setWhite(values.value(QStringLiteral("white")).toInt());
 	setColorTemperature(values.value(QStringLiteral("colorTemperature")).toInt());
 	save();
