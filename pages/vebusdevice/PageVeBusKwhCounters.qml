@@ -13,7 +13,9 @@ Page {
 	property var service
 
 	GradientListView {
-		model: VisibleItemModel {
+		header: SettingsColumn {
+			width: parent?.width ?? 0
+			bottomPadding: spacing
 
 			ListText {
 				//% "VE.Bus Quirks"
@@ -33,24 +35,14 @@ Page {
 					{ display: "Real power, all devices, snapshot", value: 4 },
 				]
 			}
+		}
+		model: VeBusDeviceKwhCountersModel {}
+		delegate: ListText {
+			property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataItem.value)
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: countersModel.count > 0
-
-				Repeater {
-					model: VeBusDeviceKwhCountersModel { id: countersModel }
-
-					ListText {
-
-						property quantityInfo value: Units.getDisplayText(VenusOS.Units_Energy_KiloWattHour, dataItem.value)
-
-						text: displayText
-						secondaryText: value.number + value.unit
-						dataItem.uid: bindPrefix + pathSuffix
-					}
-				}
-			}
+			text: displayText
+			secondaryText: value.number + value.unit
+			dataItem.uid: bindPrefix + pathSuffix
 		}
 	}
 }

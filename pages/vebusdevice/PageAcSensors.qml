@@ -12,23 +12,14 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: VisibleItemModel {
-			SettingsColumn {
-				width: parent ? parent.width : 0
-
-				Repeater {
-					model: 4
-
-					ListNavigation {
-						text: CommonWords.ac_sensor_x.arg(index)
-						onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensor.qml", {
-									   "title": CommonWords.ac_sensor_x.arg(index),
-									   "bindPrefix": root.bindPrefix + "/" + index,
-									   "index": index
-						})
-					}
-				}
-			}
+		model: 4
+		delegate: ListNavigation {
+			text: CommonWords.ac_sensor_x.arg(index)
+			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensor.qml", {
+						   "title": CommonWords.ac_sensor_x.arg(index),
+						   "bindPrefix": root.bindPrefix + "/" + index,
+						   "index": index
+			})
 		}
 	}
 }
