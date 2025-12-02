@@ -176,7 +176,8 @@ Page {
 				value: preferredVisible ? root.history.chargedEnergy.value : NaN
 			}
 
-			ListResetHistory {
+			ListInfoLabel {
+				text: CommonWords.reset_history_on_the_monitor_itself
 				visible: !clearHistory.visible
 			}
 
