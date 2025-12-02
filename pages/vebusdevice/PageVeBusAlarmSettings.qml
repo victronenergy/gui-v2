@@ -27,7 +27,7 @@ Page {
 			dataItem.uid: root.bindPrefix + "/Settings/Alarm/Vebus" + model.pathSuffix
 			preferredVisible: model.multiPhaseOnly ? isMulti : true
 		}
-		footer: Column {
+		footer: SettingsColumn {
 			width: parent.width
 			topPadding: Theme.geometry_gradientList_spacing
 
