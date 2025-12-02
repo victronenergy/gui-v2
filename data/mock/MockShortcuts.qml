@@ -74,6 +74,7 @@ QtObject {
 	}
 
 	function keyPressed(key, modifiers) {
+		let i
 		if (Global.main.activeFocusItem?.hasOwnProperty("placeholderText")) {
 			// Very simplistic way of guessing whether the key was pressed inside a text input, to
 			// avoid triggering events in this case.
@@ -177,6 +178,18 @@ QtObject {
 			Language.setCurrentLanguage((Language.current === Language.English ? Language.French : Language.English))
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
 			break
+		case Qt.Key_M:
+			for (i = 0; i < Global.dcInputs.model.count; ++i) {
+				const dcMeter = Global.dcInputs.model.deviceAt(i)
+				const monitorMode = MockManager.value(dcMeter.serviceUid + "/Settings/MonitorMode")
+				if (monitorMode !== undefined) {
+					const newMonitorMode = monitorMode + ((modifiers & Qt.ShiftModifier) ? 1 : -1)
+					pageConfigTitle.text = "Monitor mode: " + newMonitorMode
+					MockManager.setValue(dcMeter.serviceUid + "/Settings/MonitorMode", newMonitorMode)
+					break
+				}
+			}
+			break
 		case Qt.Key_N:
 			if (modifiers & Qt.ShiftModifier) {
 				MockManager.addDummyNotification(true)
@@ -195,7 +208,7 @@ QtObject {
 		case Qt.Key_P:
 		{
 			const phases = Global.acInputs.highlightedInput.phases
-			for (let i = 0; i < phases.count; ++i) {
+			for (i = 0; i < phases.count; ++i) {
 				const phaseCurrent = phases.get(i).current
 				const phasePower = phases.get(i).power
 				if (modifiers & Qt.ControlModifier) {

@@ -41,6 +41,9 @@ void DcMeterDeviceModel::DcMeter::disconnect(DcMeterDeviceModel *model)
 	if (currentItem) {
 		currentItem->disconnect(model);
 	}
+	if (monitorModeItem) {
+		monitorModeItem->disconnect(model);
+	}
 }
 
 DcMeterDeviceModel::DcMeterDeviceModel(QObject *parent)
@@ -124,6 +127,8 @@ QVariant DcMeterDeviceModel::data(const QModelIndex &index, int role) const
 	{
 	case DeviceRole:
 		return QVariant::fromValue<Device *>(m_meters.at(row).device);
+	case MeterTypeRole:
+		return m_meters.at(row).type;
 	default:
 		return QVariant();
 	}
@@ -164,6 +169,7 @@ QHash<int, QByteArray> DcMeterDeviceModel::roleNames() const
 {
 	static const QHash<int, QByteArray> roles {
 		{ DeviceRole, "device" },
+		{ MeterTypeRole, "meterType" },
 	};
 	return roles;
 }
@@ -179,15 +185,8 @@ Device *DcMeterDeviceModel::deviceAt(int index) const
 int DcMeterDeviceModel::meterTypeAt(int index)
 {
 	if (index >= 0 && index < m_meters.count()) {
-		if (m_meters.at(index).type < 0) {
-			if (Device *device = m_meters.at(index).device) {
-				const int monitorMode = monitorModeForService(device->serviceItem());
-				m_meters[index].type = static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode));
-			}
-		}
 		return m_meters.at(index).type;
 	}
-
 	return -1;
 }
 
@@ -316,7 +315,39 @@ void DcMeterDeviceModel::addMeterDevice(Device *device)
 			connect(info.currentItem, &VeQItem::valueChanged,
 					this, &DcMeterDeviceModel::scheduleUpdateTotals);
 		}
+
+		// Use itemGet() for /MonitorMode as it may not be present.
+		info.monitorModeItem = serviceItem->itemGet(QStringLiteral("Settings/MonitorMode"));
+		if (info.monitorModeItem) {
+			connect(info.monitorModeItem, &VeQItem::valueChanged,
+					this, &DcMeterDeviceModel::monitorModeChanged);
+		}
+		const QVariant monitorMode = info.monitorModeItem ? info.monitorModeItem->getValue() : QVariant();
+		info.type = static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode.toInt()));
+
 		m_meters.append(info);
+	}
+}
+
+void DcMeterDeviceModel::monitorModeChanged()
+{
+	if (VeQItem *monitorModeItem = qobject_cast<VeQItem*>(sender())) {
+		for (int i = 0; i < m_meters.count(); ++i) {
+			if (m_meters.at(i).monitorModeItem == monitorModeItem) {
+				const QVariant monitorMode = monitorModeItem->getValue();
+				const int prevMeterType = m_meters.at(i).type;
+				if (m_meters.at(i).device) {
+					m_meters[i].type = static_cast<int>(Enums::create()->dcMeter_type(
+							m_meters.at(i).device->serviceType(), monitorMode.toInt()));
+				} else {
+					m_meters[i].type = -1;
+				}
+				if (m_meters.at(i).type != prevMeterType) {
+					emit dataChanged(createIndex(i, 0), createIndex(i, 0), { MeterTypeRole });
+				}
+				break;
+			}
+		}
 	}
 }
 
