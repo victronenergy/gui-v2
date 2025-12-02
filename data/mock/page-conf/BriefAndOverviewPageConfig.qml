@@ -88,7 +88,7 @@ Item {
 				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
 				emptyAcInput,
 			],
-			dcInputs: {  types: [ { serviceType: "dcsource", monitorMode: -1 }, { serviceType: "alternator", monitorMode: -1 } ] },
+			dcInputs: {  types: [ { serviceType: "dcgenset" }, { serviceType: "alternator", monitorMode: -1 } ] },
 			solar: { chargers: [ { power: 300 } ] },
 			system: { state: VenusOS.System_State_AbsorptionCharging, hasAcOutSystem: 0, ac: { phaseCount: 3 }, dc: { serviceTypes: ["dcdc"] } },
 		},
@@ -285,6 +285,41 @@ Item {
 				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "acsystem", phaseCount: 3, connected: 1 },
 				emptyAcInput,
 			]
+		},
+		{
+			name: "DC inputs: separate wind + water",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				emptyAcInput,
+			],
+			dcInputs: {
+				types: [
+					// Expect to see two boxes: one for wind, another for water generator
+					{ serviceType: "dcsource", monitorMode: -8 }, // wind
+					{ serviceType: "dcsource", monitorMode: -4 } // water generator
+				]
+			},
+			solar: { chargers: [ { power: 456 } ] },
+			system: { state: VenusOS.System_State_AbsorptionCharging },
+		},
+		{
+			name: "DC inputs: alternator, combined generic/wind/water",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				emptyAcInput,
+			],
+			dcInputs: {
+				types: [
+					// Expect the three dcsource services to be combined into a single box, as
+					// there isn't enough room to show one box per DC meter type.
+					{ serviceType: "dcsource", monitorMode: -1 }, // generic
+					{ serviceType: "alternator", monitorMode: -1 },
+					{ serviceType: "dcsource", monitorMode: -8 }, // wind
+					{ serviceType: "dcsource", monitorMode: -4 } // water generator
+				]
+			},
+			solar: { chargers: [ { power: 456 } ] },
+			system: { state: VenusOS.System_State_AbsorptionCharging },
 		},
 	]
 

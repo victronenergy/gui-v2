@@ -10,9 +10,13 @@ OverviewWidget {
 	id: root
 
 	required property string serviceType
-	required property int inputType
-	readonly property string detailUrl: inputType === VenusOS.DcMeter_Type_Alternator ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
-			: inputDeviceModel.firstObject?.serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
+	property int inputTypeFilter: -1
+
+	readonly property int inputType: inputDeviceModel.commonMeterType >= 0 ? inputDeviceModel.commonMeterType
+			: serviceType === "dcsource" ? VenusOS.DcMeter_Type_GenericSource
+			: VenusOS.DcMeter_Type_GenericMeter
+	readonly property string detailUrl: serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+			: serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
 	title: VenusOS.dcMeter_typeToText(inputType)
@@ -36,7 +40,7 @@ OverviewWidget {
 	DcMeterDeviceModel {
 		id: inputDeviceModel
 		serviceTypes: [ root.serviceType ]
-		meterType: root.inputType
+		meterTypeFilter: root.inputTypeFilter
 	}
 
 	Component {
