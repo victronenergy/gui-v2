@@ -131,29 +131,9 @@ Page {
 				}
 			}
 
-			PrimaryListLabel {
-				id: bmsControlInfoLabel
-
+			ListInfoLabel {
 				text: CommonWords.bms_control_info
-				font.pixelSize: Theme.font_size_caption
-				color: Theme.color_font_secondary
-				leftPadding: infoIcon.x + infoIcon.width + infoIcon.x/2
 				preferredVisible: bmsControlled.dataItem.value === 1
-
-				CP.IconImage {
-					id: infoIcon
-
-					x: Theme.geometry_listItem_content_horizontalMargin
-					y: bmsControlInfoLabel.topPadding + (infoFontMetrics.boundingRect("A").height - height)/2
-					source: "qrc:/images/information.svg"
-					color: Theme.color_font_secondary
-				}
-
-				FontMetrics {
-					id: infoFontMetrics
-
-					font: bmsControlInfoLabel.font
-				}
 			}
 		}
 	}

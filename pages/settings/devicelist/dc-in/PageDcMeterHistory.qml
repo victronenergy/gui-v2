@@ -110,7 +110,8 @@ Page {
 				unit: VenusOS.Units_Energy_KiloWattHour
 			}
 
-			ListResetHistory {
+			ListInfoLabel {
+				text: CommonWords.reset_history_on_the_monitor_itself
 				visible: !clearHistory.visible
 			}
 

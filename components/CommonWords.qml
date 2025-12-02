@@ -449,6 +449,9 @@ QtObject {
 	//% "Reset"
 	readonly property string reset: qsTrId("common_words_reset")
 
+	//% "Reset history on the monitor itself"
+	readonly property string reset_history_on_the_monitor_itself: qsTrId("common_words_batteryhistory_reset_history_on_the_monitor_itself")
+
 	//% "Reboot"
 	readonly property string reboot: qsTrId("common_words_reboot")
 
