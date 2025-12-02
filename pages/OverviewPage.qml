@@ -502,6 +502,15 @@ SwipeViewPage {
 		// Affects whether EvcsWidget is shown.
 		readonly property bool showEvChargers: Global.evChargers?.model.count ?? 0 > 0
 		onShowEvChargersChanged: Qt.callLater(root._resetWidgets)
+
+		readonly property Connections _dcMetersConn: Connections {
+			target: Global.dcInputs.model
+			function onDataChanged(topLeft, bottomRight, roles) {
+				if (roles.indexOf(DcMeterDeviceModel.MeterTypeRole) >= 0) {
+					Qt.callLater(root._resetWidgets)
+				}
+			}
+		}
 	}
 
 	Connections {

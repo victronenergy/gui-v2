@@ -43,6 +43,7 @@ class DcMeterDeviceModel : public QAbstractListModel, public QQmlParserStatus
 public:
 	enum Role {
 		DeviceRole = Qt::UserRole,
+		MeterTypeRole
 	};
 	Q_ENUM(Role)
 
@@ -91,6 +92,7 @@ private:
 		int type = -1;
 		QPointer<VeQItem> powerItem;
 		QPointer<VeQItem> currentItem;
+		QPointer<VeQItem> monitorModeItem;
 		Device *device = nullptr;
 	};
 
@@ -102,6 +104,7 @@ private:
 	void sourceDeviceAdded(const QModelIndex &parent, int first, int last);
 	void sourceDeviceAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 	void addMeterDevice(Device *device);
+	void monitorModeChanged();
 	void scheduleUpdateTotals();
 	void updateTotals();
 	void updateFirstMeter();
