@@ -170,7 +170,7 @@ QString Enums::dcMeter_iconForType(DcMeter_Type type) const
 	switch (type) {
 	case DcMeter_Type_Alternator:
 		return "qrc:/images/alternator.svg";
-	case DcMeter_Type_GenericSource:
+	case DcMeter_Type_Genset:
 		return "qrc:/images/generator.svg";
 	case DcMeter_Type_WindCharger:
 		return "qrc:/images/wind.svg";
