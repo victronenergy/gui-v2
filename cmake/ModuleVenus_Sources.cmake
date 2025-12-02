@@ -124,6 +124,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/Utils.js
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
+    components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
