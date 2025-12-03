@@ -28,6 +28,7 @@
         "/Ac/PENVoltage": 0.25999999046325684,
         "/Ac/Power": 167,
         "/Ac/PowerFactor": 0.8870000243186951,
+        "/AllowedRoles": [ "acload" ],
         "/Alarms/PhaseRotation": 0,
         "/Connected": 1,
         "/CustomName": "AC energy meter",
