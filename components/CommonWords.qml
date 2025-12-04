@@ -619,6 +619,10 @@ QtObject {
 		}
 	}
 
+	function onlineOrOffline(value) {
+		return value === 1 || value === true ? online : offline
+	}
+
 	function yesOrNo(value) {
 		return value === 1 || value === true ? yes : no
 	}

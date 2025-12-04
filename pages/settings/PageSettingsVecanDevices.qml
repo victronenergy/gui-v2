@@ -28,11 +28,18 @@ Page {
 
 			// Use JS string concatenation to avoid Qt string arg() from formatting as scientific notation.
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(""+uniqueNumber.value)
-			//% "VE.Can Instance# %1"
-			secondaryText: qsTrId("settings_vecan_device_number").arg(deviceInstance.value)
+
+			secondaryText: connected.valid && connected.value === 0 ? CommonWords.offline :
+				//% "VE.Can Instance# %1"
+				qsTrId("settings_vecan_device_number").arg(deviceInstance.value)
 
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",
 												   { bindPrefix: listDelegate.uid, title: text })
+
+			VeQuickItem {
+				id: connected
+				uid: listDelegate.uid + "/Connected"
+			}
 
 			VeQuickItem {
 				id: deviceInstance
