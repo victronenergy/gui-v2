@@ -15,6 +15,13 @@ Page {
 		model: VisibleItemModel {
 
 			ListText {
+				id: status
+				text: CommonWords.status
+				secondaryText: CommonWords.onlineOrOffline(dataItem.value)
+				dataItem.uid: root.bindPrefix + "/Connected"
+			}
+
+			ListText {
 				text: CommonWords.model_name
 				dataItem.uid: root.bindPrefix + "/ModelName"
 			}
@@ -33,6 +40,7 @@ Page {
 				//% "VE.Can Device Instance"
 				text: qsTrId("settings_vecan_device_instance")
 				dataItem.uid: root.bindPrefix + "/DeviceInstance"
+				enabled: status.dataItem.value === 1
 			}
 
 			ListText {
