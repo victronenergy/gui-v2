@@ -155,14 +155,14 @@ VisibleItemModel {
 		//% "Genset error codes"
 		text: qsTrId("ac-in-genset_error")
 		secondaryText: {
-			let errorCodes = ""
+			let errorStrings = ""
 			for (let i = 0; i < errorModel.count; ++i) {
 				const errorCode = errorModel.get(i).errorCode
 				if (errorCode) {
-					errorCodes += (errorCodes.length ? " " : "") + errorCode
+					errorStrings += (errorStrings.length ? " " : "") + GensetError.description(errorCode, root.nrOfPhases)
 				}
 			}
-			return errorCodes.length ? errorCodes : CommonWords.none_errors
+			return errorStrings.length ? errorStrings : CommonWords.none_errors
 		}
 
 		preferredVisible: _dataItem.valid
