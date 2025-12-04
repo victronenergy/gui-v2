@@ -12,15 +12,18 @@ QtObject {
 	readonly property string serviceUid: _motorDriveServices.firstUid
 
 	readonly property QtObject dcConsumption: QtObject {
-		// we no longer support max current, so any ArcGauges (such as the BoatPage center gauge) always shows power, regardless of Global.systemSettings.electricalQuantity
+		// we no longer support max current, so any ArcGauges (such as the BoatPage center gauge)
+		// always shows power, regardless of Global.systemSettings.electricalPowerDisplay
 		readonly property VeQuickItemsQuotient quotient: root.power
 
 		// we can show current in the consumption gauge
-		readonly property VeQuickItem scalar: Global.systemSettings.electricalQuantity === VenusOS.Units_Amp ? _scalarCurrent : root.power._numerator
-		readonly property int scalarUnit: Global.systemSettings.electricalQuantity
+		readonly property QtObject scalar: QtObject {
+			readonly property real power: root.power._numerator.value ?? NaN
+			readonly property real current: _scalarCurrent.value ?? NaN
 
-		readonly property VeQuickItem _scalarCurrent: VeQuickItem {
-			uid: root.serviceUid ? BackendConnection.serviceUidForType("system") + "/MotorDrive/Current" : ""
+			readonly property VeQuickItem _scalarCurrent: VeQuickItem {
+				uid: root.serviceUid ? BackendConnection.serviceUidForType("system") + "/MotorDrive/Current" : ""
+			}
 		}
 	}
 

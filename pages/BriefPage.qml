@@ -170,8 +170,8 @@ SwipeViewPage {
 					icon.source: Global.acInputs.sourceIcon(Global.acInputs.highlightedInput?.source ?? Global.acInputs.findValidSource())
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 					quantityLabel.dataObject: Global.acInputs.highlightedInput
-					quantityLabel.acInputMode: true
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
@@ -211,6 +211,7 @@ SwipeViewPage {
 							: VenusOS.dcMeter_iconForMultipleTypes()
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 					quantityLabel.dataObject: Global.dcInputs
 				}
 
@@ -250,6 +251,7 @@ SwipeViewPage {
 					icon.source: "qrc:/images/solaryield.svg"
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Any
 					quantityLabel.dataObject: Global.system.solar
 				}
 			}
@@ -297,6 +299,7 @@ SwipeViewPage {
 					icon.source: dcLoadGauge.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
 					quantityLabel.dataObject: Global.system.load.ac
 				}
 			}
@@ -330,6 +333,7 @@ SwipeViewPage {
 					icon.source: "qrc:/images/dcloads.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 					quantityLabel.dataObject: Global.system.dc
 				}
 

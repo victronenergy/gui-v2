@@ -16,9 +16,9 @@ AcWidget {
 	title: !!inputInfo ? Global.acInputs.sourceToText(inputInfo.source) : ""
 	icon.source: !!inputInfo ? Global.acInputs.sourceIcon(inputInfo.source) : ""
 	rightPadding: sideGaugeLoader.active ? Theme.geometry_overviewPage_widget_sideGauge_margins : 0
+	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 	quantityLabel.dataObject: inputOperational ? input : null
 	quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-	quantityLabel.acInputMode: true
 	phaseCount: inputOperational ? input.phases.count : 0
 	enabled: !!inputInfo
 	extraContentLoader.sourceComponent: ThreePhaseDisplay {
