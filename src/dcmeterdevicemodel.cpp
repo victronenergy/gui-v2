@@ -8,6 +8,7 @@
 #include "enums.h"
 #include "device.h"
 
+#include <QSet>
 #include <QQmlInfo>
 
 using namespace Victron::VenusOS;
@@ -40,6 +41,9 @@ void DcMeterDeviceModel::DcMeter::disconnect(DcMeterDeviceModel *model)
 	}
 	if (currentItem) {
 		currentItem->disconnect(model);
+	}
+	if (monitorModeItem) {
+		monitorModeItem->disconnect(model);
 	}
 }
 
@@ -81,6 +85,16 @@ qreal DcMeterDeviceModel::totalCurrent() const
 	return m_totalCurrent;
 }
 
+int DcMeterDeviceModel::meterTypeCount() const
+{
+	return m_meterTypeCount;
+}
+
+int DcMeterDeviceModel::commonMeterType() const
+{
+	return m_commonMeterType;
+}
+
 QStringList DcMeterDeviceModel::serviceTypes() const
 {
 	return m_serviceTypes;
@@ -97,19 +111,19 @@ void DcMeterDeviceModel::setServiceTypes(const QStringList &serviceTypes)
 	}
 }
 
-int DcMeterDeviceModel::meterType() const
+int DcMeterDeviceModel::meterTypeFilter() const
 {
-	return m_meterType;
+	return m_meterTypeFilter;
 }
 
-void DcMeterDeviceModel::setMeterType(int meterType)
+void DcMeterDeviceModel::setMeterTypeFilter(int meterTypeFilter)
 {
-	if (m_meterType != meterType) {
-		m_meterType = meterType;
+	if (m_meterTypeFilter != meterTypeFilter) {
+		m_meterTypeFilter = meterTypeFilter;
 		if (m_completed) {
 			resetMeters();
 		}
-		emit meterTypeChanged();
+		emit meterTypeFilterChanged();
 	}
 }
 
@@ -124,6 +138,8 @@ QVariant DcMeterDeviceModel::data(const QModelIndex &index, int role) const
 	{
 	case DeviceRole:
 		return QVariant::fromValue<Device *>(m_meters.at(row).device);
+	case MeterTypeRole:
+		return m_meters.at(row).type;
 	default:
 		return QVariant();
 	}
@@ -164,6 +180,7 @@ QHash<int, QByteArray> DcMeterDeviceModel::roleNames() const
 {
 	static const QHash<int, QByteArray> roles {
 		{ DeviceRole, "device" },
+		{ MeterTypeRole, "meterType" },
 	};
 	return roles;
 }
@@ -179,15 +196,8 @@ Device *DcMeterDeviceModel::deviceAt(int index) const
 int DcMeterDeviceModel::meterTypeAt(int index)
 {
 	if (index >= 0 && index < m_meters.count()) {
-		if (m_meters.at(index).type < 0) {
-			if (Device *device = m_meters.at(index).device) {
-				const int monitorMode = monitorModeForService(device->serviceItem());
-				m_meters[index].type = static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode));
-			}
-		}
 		return m_meters.at(index).type;
 	}
-
 	return -1;
 }
 
@@ -231,6 +241,8 @@ void DcMeterDeviceModel::addMatchingMeters()
 
 	updateTotals();
 	updateFirstMeter();
+	updateMeterTypeCount();
+	updateCommonMeterType();
 }
 
 bool DcMeterDeviceModel::includeDevice(Device *device)
@@ -241,9 +253,9 @@ bool DcMeterDeviceModel::includeDevice(Device *device)
 	if (!m_serviceTypes.isEmpty() && !m_serviceTypes.contains(device->serviceType())) {
 		return false;
 	}
-	if (m_meterType >= 0) {
+	if (m_meterTypeFilter >= 0) {
 		const int monitorMode = monitorModeForService(device->serviceItem());
-		if (m_meterType != static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode))) {
+		if (m_meterTypeFilter != static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode))) {
 			return false;
 		}
 	}
@@ -268,6 +280,8 @@ void DcMeterDeviceModel::sourceDeviceAdded(const QModelIndex &parent, int first,
 	if (prevCount != count()) {
 		updateTotals();
 		updateFirstMeter();
+		updateMeterTypeCount();
+		updateCommonMeterType();
 		emit countChanged();
 	}
 }
@@ -292,6 +306,8 @@ void DcMeterDeviceModel::sourceDeviceAboutToBeRemoved(const QModelIndex &parent,
 	if (prevCount != count()) {
 		updateTotals();
 		updateFirstMeter();
+		updateMeterTypeCount();
+		updateCommonMeterType();
 		emit countChanged();
 	}
 }
@@ -316,7 +332,41 @@ void DcMeterDeviceModel::addMeterDevice(Device *device)
 			connect(info.currentItem, &VeQItem::valueChanged,
 					this, &DcMeterDeviceModel::scheduleUpdateTotals);
 		}
+
+		// Use itemGet() for /MonitorMode as it may not be present.
+		info.monitorModeItem = serviceItem->itemGet(QStringLiteral("Settings/MonitorMode"));
+		if (info.monitorModeItem) {
+			connect(info.monitorModeItem, &VeQItem::valueChanged,
+					this, &DcMeterDeviceModel::monitorModeChanged);
+		}
+		const QVariant monitorMode = info.monitorModeItem ? info.monitorModeItem->getValue() : QVariant();
+		info.type = static_cast<int>(Enums::create()->dcMeter_type(device->serviceType(), monitorMode.toInt()));
+
 		m_meters.append(info);
+	}
+}
+
+void DcMeterDeviceModel::monitorModeChanged()
+{
+	if (VeQItem *monitorModeItem = qobject_cast<VeQItem*>(sender())) {
+		for (int i = 0; i < m_meters.count(); ++i) {
+			if (m_meters.at(i).monitorModeItem == monitorModeItem) {
+				const QVariant monitorMode = monitorModeItem->getValue();
+				const int prevMonitorMode = m_meters.at(i).type;
+				if (m_meters.at(i).device) {
+					m_meters[i].type = static_cast<int>(Enums::create()->dcMeter_type(
+							m_meters.at(i).device->serviceType(), monitorMode.toInt()));
+				} else {
+					m_meters[i].type = -1;
+				}
+				if (m_meters.at(i).type != prevMonitorMode) {
+					updateMeterTypeCount();
+					updateCommonMeterType();
+					emit dataChanged(createIndex(i, 0), createIndex(i, 0), { MeterTypeRole });
+				}
+				break;
+			}
+		}
 	}
 }
 
@@ -382,5 +432,37 @@ void DcMeterDeviceModel::updateFirstMeter()
 	}
 	if (prevFirstType != m_firstMeterType) {
 		emit firstMeterTypeChanged();
+	}
+}
+
+void DcMeterDeviceModel::updateMeterTypeCount()
+{
+	QSet<int> types;
+	for (const DcMeter &info : std::as_const(m_meters)) {
+		types.insert(info.type);
+	}
+	if (types.count() != m_meterTypeCount) {
+		m_meterTypeCount = types.count();
+		emit meterTypeCountChanged();
+	}
+}
+
+void DcMeterDeviceModel::updateCommonMeterType()
+{
+	int commonType = -1;
+	for (const DcMeter &info : std::as_const(m_meters)) {
+		if (info.type < 0) {
+			continue;
+		}
+		if (commonType < 0) {
+			commonType = info.type;
+		} else if (commonType != info.type) {
+			commonType = -1;
+			break;
+		}
+	}
+	if (commonType != m_commonMeterType) {
+		m_commonMeterType = commonType;
+		emit commonMeterTypeChanged();
 	}
 }

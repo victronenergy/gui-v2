@@ -24,7 +24,7 @@ namespace VenusOS {
 	A model of DC meter devices.
 
 	Set serviceTypes to the required DC meter types, such as "alternator" or "dcgenset".
-	The meterType can also be set to additionally restrict the model to devices of that type.
+	The meterTypeFilter can also be set to additionally restrict the model to devices of that type.
 
 	Note this model is not sorted.
 */
@@ -37,12 +37,15 @@ class DcMeterDeviceModel : public QAbstractListModel, public QQmlParserStatus
 	Q_PROPERTY(Device *firstObject READ firstObject NOTIFY firstObjectChanged FINAL)
 	Q_PROPERTY(int firstMeterType READ firstMeterType NOTIFY firstMeterTypeChanged FINAL)
 	Q_PROPERTY(QStringList serviceTypes READ serviceTypes WRITE setServiceTypes NOTIFY serviceTypesChanged FINAL)
-	Q_PROPERTY(int meterType READ meterType WRITE setMeterType NOTIFY meterTypeChanged FINAL)
+	Q_PROPERTY(int meterTypeFilter READ meterTypeFilter WRITE setMeterTypeFilter NOTIFY meterTypeFilterChanged FINAL)
+	Q_PROPERTY(int meterTypeCount READ meterTypeCount NOTIFY meterTypeCountChanged FINAL)
+	Q_PROPERTY(int commonMeterType READ commonMeterType NOTIFY commonMeterTypeChanged FINAL)
 	Q_PROPERTY(qreal totalPower READ totalPower NOTIFY totalPowerChanged FINAL)
 	Q_PROPERTY(qreal totalCurrent READ totalCurrent NOTIFY totalCurrentChanged FINAL)
 public:
 	enum Role {
 		DeviceRole = Qt::UserRole,
+		MeterTypeRole
 	};
 	Q_ENUM(Role)
 
@@ -55,12 +58,14 @@ public:
 
 	qreal totalPower() const;
 	qreal totalCurrent() const;
+	int meterTypeCount() const; // the number of different meter types in the model
+	int commonMeterType() const; // if all devices have the same meter type, this it the type, otherwise -1
 
 	QStringList serviceTypes() const;
 	void setServiceTypes(const QStringList &serviceTypes);
 
-	int meterType() const;
-	void setMeterType(int meterType);
+	int meterTypeFilter() const;
+	void setMeterTypeFilter(int meterTypeFilter);
 
 	QVariant data(const QModelIndex& index, int role) const override;
 	int rowCount(const QModelIndex &parent) const override;
@@ -75,10 +80,12 @@ Q_SIGNALS:
 	void countChanged();
 	void firstObjectChanged();
 	void serviceTypesChanged();
-	void meterTypeChanged();
 	void totalPowerChanged();
 	void totalCurrentChanged();
 	void firstMeterTypeChanged();
+	void meterTypeFilterChanged();
+	void meterTypeCountChanged();
+	void commonMeterTypeChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -91,6 +98,7 @@ private:
 		int type = -1;
 		QPointer<VeQItem> powerItem;
 		QPointer<VeQItem> currentItem;
+		QPointer<VeQItem> monitorModeItem;
 		Device *device = nullptr;
 	};
 
@@ -102,9 +110,12 @@ private:
 	void sourceDeviceAdded(const QModelIndex &parent, int first, int last);
 	void sourceDeviceAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 	void addMeterDevice(Device *device);
+	void monitorModeChanged();
 	void scheduleUpdateTotals();
 	void updateTotals();
 	void updateFirstMeter();
+	void updateMeterTypeCount();
+	void updateCommonMeterType();
 
 	QVector<DcMeter> m_meters;
 	QStringList m_serviceTypes;
@@ -113,7 +124,9 @@ private:
 	qreal m_totalCurrent = 0;
 	int m_timerId = 0;
 	int m_firstMeterType = -1;
-	int m_meterType = -1;
+	int m_meterTypeFilter = -1;
+	int m_meterTypeCount = 0;
+	int m_commonMeterType = -1;
 	bool m_completed = false;
 };
 

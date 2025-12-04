@@ -130,10 +130,18 @@ public:
 		OverviewWidget_Type_Unknown,
 		OverviewWidget_Type_AcInputPriority,
 		OverviewWidget_Type_AcInputOther,
-		OverviewWidget_Type_DcGenerator,
+
+		// DC inputs
 		OverviewWidget_Type_Alternator,
+		OverviewWidget_Type_DcGenerator,
 		OverviewWidget_Type_FuelCell,
-		OverviewWidget_Type_Wind,
+		OverviewWidget_Type_GenericDcSource,
+		OverviewWidget_Type_AcCharger,
+		OverviewWidget_Type_DcCharger,
+		OverviewWidget_Type_WaterGenerator,
+		OverviewWidget_Type_ShaftGenerator,
+		OverviewWidget_Type_WindCharger,
+
 		OverviewWidget_Type_Solar,
 		OverviewWidget_Type_VeBusDevice,
 		OverviewWidget_Type_Battery,
