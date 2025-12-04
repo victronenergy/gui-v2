@@ -34,6 +34,11 @@ Page {
 		onValueChanged: if (value === 1) timer.running = false
 	}
 
+	VeQuickItem {
+		id: n2kOutEnabled
+		uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListRadioButtonGroup {
@@ -60,8 +65,19 @@ Page {
 			ListSwitch {
 				//% "NMEA2000-out"
 				text: qsTrId("settings_canbus_nmea2000out")
-				dataItem.uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
-				preferredVisible: root._isVecan
+				valueTrue: 1
+				dataItem.value: n2kOutEnabled.value & valueTrue
+				preferredVisible: root._isVecan && n2kOutEnabled.valid
+				onClicked: n2kOutEnabled.setValue(checked ? (n2kOutEnabled.value & ~valueTrue) : (n2kOutEnabled.value | valueTrue))
+			}
+
+			ListSwitch {
+				//% "NMEA2000 outbound alerts"
+				text: qsTrId("settings_canbus_nmea2000out_alerts")
+				valueTrue: 2
+				dataItem.value: n2kOutEnabled.value & valueTrue
+				preferredVisible: root._isVecan && n2kOutEnabled.valid && n2kOutEnabled.value & 1
+				onClicked: n2kOutEnabled.setValue(checked ? (n2kOutEnabled.value & ~valueTrue) : (n2kOutEnabled.value | valueTrue))
 			}
 
 			ListSwitch {
