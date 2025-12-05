@@ -1,0 +1,25 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_cards.qml",
+        "tst_overview.qml",
+        "tst_settings.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false,
+        "UIAnimations": 0
+    },
+    "Steps": {
+        "CaptureAndCompare": {
+            "FailureThreshold": 0.1,
+            "MaximumStabilizationAttempts": 20,
+            "CaptureInterval": 16,
+            "ImageDir": "image-captures"
+        },
+        "WaitUntil": {
+            "DefaultTimeout": 5000
+        }
+    }
+}

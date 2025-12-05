@@ -24,6 +24,10 @@ Window {
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
+	readonly property bool runTests: UiTest.status === UiTest.Ready
+			&& Global.allPagesLoaded && !!Global.mainView && !Global.mainView.animating
+	onRunTestsChanged: if (runTests) UiTest.start()
+
 	// Uncomment for key navigation debugging
 	// onActiveFocusItemChanged: console.info("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
 

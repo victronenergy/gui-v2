@@ -32,6 +32,10 @@ FocusScope {
 									   && mainViewVisible
 									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
 
+	// True if any of the view animations are running.
+	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
+				|| navBarStartupAnim.running
+
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
 	property SwipeView swipeView: swipeViewLoader.item
@@ -256,6 +260,7 @@ FocusScope {
 	}
 
 	SequentialAnimation {
+		id: navBarStartupAnim
 		running: !Global.splashScreenVisible
 
 		// Force the final animation values in case the Animators are

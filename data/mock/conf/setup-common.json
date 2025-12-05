@@ -25,6 +25,7 @@
         "/Settings/Gui2/UIAnimations": 1,
         "/Settings/ModbusClient/tcp/AutoScan": 1,
         "/Settings/ModbusClient/tcp/Devices": "tcp:192.168.1.232:502:1,tcp:192.168.1.232:503:10",
+        "/Settings/Network/VrmPortal": 0,
         "/Settings/Services/Bol": 1,
         "/Settings/Services/Modbus": 0,
         "/Settings/Services/MqttLocal": 0,

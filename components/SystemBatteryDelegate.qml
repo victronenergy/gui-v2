@@ -16,6 +16,7 @@ BaseListItem {
 
 	width: parent?.width ?? 0
 	height: Theme.geometry_batteryListPage_item_height
+	hasSubMenu: pressArea.enabled
 
 	RowLayout {
 		width: parent.width

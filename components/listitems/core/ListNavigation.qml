@@ -14,8 +14,7 @@ ListItem {
 	property alias secondaryLabel: secondaryLabel
 	property alias icon: icon
 
-	readonly property bool __is_venus_gui_list_navigation__: true
-
+	hasSubMenu: interactive
 	interactive: true
 	Keys.onRightPressed: root.activate()
 

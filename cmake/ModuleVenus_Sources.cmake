@@ -656,6 +656,12 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/qrangemodel_p.h
     src/qrangemodel.h
     src/qrangemodel.cpp
+    src/uitest.h
+    src/uitest.cpp
+    src/uitestcase.h
+    src/uitestcase.cpp
+    src/uiteststep.h
+    src/uiteststep.cpp
     src/units.h
     src/units.cpp
     src/screenblanker.h
