@@ -11,6 +11,13 @@ ListItem {
 
 	readonly property alias button: button
 	property alias secondaryText: button.text
+	readonly property string __typename: "ListButton"
+	property alias siblings: button.siblings
+	property alias expandedClickableArea: button.expandedClickableArea
+	property alias topExtent: button.topExtent
+	property alias rightExtent: button.rightExtent
+	property alias bottomExtent: button.bottomExtent
+	property alias leftExtent: button.leftExtent
 
 	interactive: true
 	pressAreaEnabled: false
@@ -23,6 +30,7 @@ ListItem {
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			showEnabled: root.clickable
 			focusPolicy: Qt.NoFocus
+			objectName: root.objectName + ".button" // TODO: remove
 
 			onClicked: {
 				if (!root.checkWriteAccessLevel() || !root.clickable) {

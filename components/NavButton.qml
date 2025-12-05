@@ -14,6 +14,8 @@ Button {
 	spacing: Theme.geometry_navigationBar_button_spacing
 	display: Button.TextUnderIcon
 	radius: 0
+	extent: 0 // TODO: this shouldn't be necessary
+	objectName: text + "NavButton" // TODO: remove
 
 	color: down
 		   ? Theme.color_navigationBar_button_on

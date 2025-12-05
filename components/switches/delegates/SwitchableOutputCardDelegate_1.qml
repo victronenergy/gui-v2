@@ -14,6 +14,7 @@ Item {
 
 	required property SwitchableOutput switchableOutput
 
+	objectName: "SOCD_1"// TODO: remove
 	enabled: root.switchableOutput.status !== VenusOS.SwitchableOutput_Status_Disabled
 	focus: true
 	KeyNavigationHighlight.active: activeFocus
@@ -48,6 +49,7 @@ Item {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
+		objectName: root.objectName + ".ToggleButtonRow"// TODO: remove
 		height: Theme.geometry_switchableoutput_control_height
 		on: toggleState.expectedValue === 1
 		focusPolicy: Qt.NoFocus // do not focus when clicked, as this control has no edit mode

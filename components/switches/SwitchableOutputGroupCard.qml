@@ -68,6 +68,7 @@ ControlCard {
 							width: Qt.binding(function() { return outputGrid.cellWidth }),
 							height: Qt.binding(function() { return outputGrid.cellHeight }),
 							switchableOutput: modelData,
+							objectName: componentUrl // TODO: remove
 						})
 					} else {
 						source = ""

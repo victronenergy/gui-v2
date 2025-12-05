@@ -61,6 +61,7 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
+		objectName: root.objectName // TODO: remove
 		height: Theme.geometry_switchableoutput_control_height
 		checked: multiStepState.expectedValue === 1
 		onOnClicked: multiStepState.writeValue(1)

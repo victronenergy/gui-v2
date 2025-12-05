@@ -19,6 +19,7 @@ FocusScope {
 	signal onClicked
 	signal offClicked
 
+	objectName: "ToggleButtonRow"// TODO: remove
 	implicitWidth: Theme.geometry_controlCard_minimumWidth
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
 	focusPolicy: Qt.TabFocus
@@ -39,6 +40,7 @@ FocusScope {
 			leftMargin: Theme.geometry_button_border_width
 			verticalCenter: parent.verticalCenter
 		}
+		objectName: root.objectName + ".offButton"// TODO: remove
 		width: root._buttonWidth
 		height: root._buttonHeight
 		checked: !root.on
@@ -73,6 +75,7 @@ FocusScope {
 			rightMargin: Theme.geometry_button_border_width
 			verticalCenter: parent.verticalCenter
 		}
+		objectName: root.objectName + ".onButton"// TODO: remove
 		width: root._buttonWidth
 		height: root._buttonHeight
 		flat: false
