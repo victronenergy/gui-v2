@@ -47,6 +47,18 @@ SwitchableOutputSlider {
 			radius: Theme.geometry_miniSlider_separator_width / 2
 			color: enabled ? Theme.color_slider_separator : Theme.color_font_disabled
 		}
+
+		MouseAreaExtender {
+			id: extender
+
+			sendMouse: true
+			anchors {
+				fill: parent
+				topMargin: -root.height / 2
+				leftMargin: -root.anchors.leftMargin
+				bottomMargin: -root.height / 2
+			}
+		}
 	}
 
 	SettingSync {

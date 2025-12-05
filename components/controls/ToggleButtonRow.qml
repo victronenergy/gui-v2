@@ -15,6 +15,8 @@ FocusScope {
 
 	readonly property real _buttonWidth: (width / 2) - Theme.geometry_button_border_width
 	readonly property real _buttonHeight: height - (2 * Theme.geometry_button_border_width)
+	property alias onButton: onButton
+	property alias offButton: offButton
 
 	signal onClicked
 	signal offClicked
