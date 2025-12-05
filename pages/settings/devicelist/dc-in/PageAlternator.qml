@@ -37,7 +37,6 @@ DevicePage {
 
 	Loader {
 		id: modelLoader
-		asynchronous: true
 	}
 
 	Component {
