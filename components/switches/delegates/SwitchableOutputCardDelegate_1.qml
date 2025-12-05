@@ -41,6 +41,8 @@ Item {
 	}
 
 	ToggleButtonRow {
+		id: buttonRow
+
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
@@ -61,5 +63,25 @@ Item {
 				uid: root.switchableOutput.uid + "/State"
 			}
 		}
+	}
+
+	MouseAreaExtender {
+		anchors {
+			left: root.left
+			right: buttonRow.horizontalCenter
+			verticalCenter: buttonRow.verticalCenter
+		}
+		height: root.height
+		clickTarget: buttonRow.offButton
+	}
+
+	MouseAreaExtender {
+		anchors {
+			right: root.right
+			left: buttonRow.horizontalCenter
+			verticalCenter: buttonRow.verticalCenter
+		}
+		height: root.height
+		clickTarget: buttonRow.onButton
 	}
 }

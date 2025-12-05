@@ -32,4 +32,10 @@ ListItem {
 			}
 		}
 	]
+
+	MouseAreaExtender {
+		anchors {
+			fill: parent
+		}
+	}
 }

@@ -74,11 +74,24 @@ Item {
 		onPressed: momentaryState.writeValue(1)
 		onReleased: momentaryState.writeValue(0)
 		onCanceled: momentaryState.writeValue(0)
+		down: extender.pressed || checked
 
 		SettingSync {
 			id: momentaryState
 			dataItem: VeQuickItem {
 				uid: root.switchableOutput.uid + "/State"
+			}
+		}
+
+		MouseAreaExtender {
+			id: extender
+
+			anchors {
+				fill: parent
+				topMargin: -parent.height / 2
+				leftMargin: -parent.anchors.leftMargin
+				rightMargin: -parent.anchors.rightMargin
+				bottomMargin: -parent.height / 2
 			}
 		}
 	}

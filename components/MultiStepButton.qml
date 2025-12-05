@@ -11,6 +11,7 @@ BaseListView {
 
 	property int currentIndex
 	property bool checked
+	property int extendedHeight: parent.height
 	readonly property real _totalDelegateWidth: width - headerItem.width
 
 	signal indexClicked(index: int)
@@ -68,6 +69,12 @@ BaseListView {
 			focus: true
 
 			onClicked: root.indexClicked(index)
+
+			MouseAreaExtender {
+				anchors.verticalCenter: parent.verticalCenter
+				width: parent.width
+				height: root.extendedHeight
+			}
 		}
 	}
 
@@ -110,6 +117,12 @@ BaseListView {
 			focus: true
 
 			onClicked: root.checked ? root.offClicked() : root.onClicked()
+
+			MouseAreaExtender {
+				anchors.verticalCenter: parent.verticalCenter
+				width: parent.width
+				height: root.extendedHeight
+			}
 		}
 
 		Rectangle {
