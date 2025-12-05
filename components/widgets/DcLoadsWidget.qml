@@ -32,6 +32,6 @@ OverviewWidget {
 
 	FilteredDeviceModel {
 		id: nonSystemLoadDevices
-		serviceTypes: ["dcload", "dcdc"]
+		serviceTypes: ["dcload", "dcdc", "motordrive"]
 	}
 }
