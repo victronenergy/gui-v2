@@ -427,8 +427,7 @@ Item {
 			function updateAngleAndColor() {
 				// Determine if the position lies within a disc that represents the color selector.
 				// The angle is set that corresponds to the angle of the point measured from the 12 oclock position
-				if (Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) > (Theme.geometry_colorWheel_selector_centre_cutout_diameter/2) &&
-						Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) < Theme.geometry_colorWheel_selector_width/2) {
+				if (Math.sqrt(Math.pow(width/2 - mouseX, 2) + Math.pow(mouseY - height/2, 2)) > (Theme.geometry_colorWheel_selector_swatch_diameter/2)) {
 					angle = Math.round((Math.atan2(width/2 - mouseX, mouseY - height/2) / (Math.PI*2) + 0.5) * 360)
 				}
 				if (root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct) {
