@@ -9,12 +9,12 @@
       <translation>Disattivato</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="271"/>
+      <location filename="../../components/CommonWords.qml" line="275"/>
       <source>Inverter overload</source>
       <translation>Sovraccarico inverter</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="413"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>Potenza</translation>
@@ -30,7 +30,7 @@
       <translation>Automatico</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="229"/>
+      <location filename="../../components/CommonWords.qml" line="233"/>
       <source>High battery voltage</source>
       <translation>Alta tensione batteria</translation>
     </message>
@@ -40,12 +40,12 @@
       <translation>Inverter / Caricabatterie</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="280"/>
+      <location filename="../../components/CommonWords.qml" line="284"/>
       <source>Low battery voltage</source>
       <translation>Bassa tensione batteria</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="299"/>
+      <location filename="../../components/CommonWords.qml" line="303"/>
       <source>Manual</source>
       <translation>Manuale</translation>
     </message>
@@ -55,7 +55,7 @@
       <translation>Nessuno</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="420"/>
+      <location filename="../../components/CommonWords.qml" line="418"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>Posizione</translation>
@@ -66,7 +66,7 @@
       <translation>Velocità</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="506"/>
+      <location filename="../../components/CommonWords.qml" line="507"/>
       <source>State</source>
       <translation>Stato</translation>
     </message>
@@ -87,13 +87,13 @@
       <translation>SOC minimo</translation>
     </message>
     <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/RadioButtonListPage.qml" line="121"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
       <source>Confirm</source>
       <extracomment>Confirm password, and verify it if possible</extracomment>
       <translation type="unfinished">Conferma</translation>
     </message>
     <message id="settings_radio_button_enter_password">
-      <location filename="../../components/RadioButtonListPage.qml" line="136"/>
+      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
       <source>Enter password</source>
       <translation>Inserire password</translation>
     </message>
@@ -108,7 +108,7 @@
       <translation>Premere per verificare</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="220"/>
+      <location filename="../../components/CommonWords.qml" line="224"/>
       <source>Grid</source>
       <translation>Rete</translation>
     </message>
@@ -334,7 +334,7 @@
       <translation>In funzionamento</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="305"/>
+      <location filename="../../components/CommonWords.qml" line="309"/>
       <source>Manual start</source>
       <translation>Avvio manuale</translation>
     </message>
@@ -349,12 +349,12 @@
       <translation>Tempo di funzionamento giornaliero</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="564"/>
+      <location filename="../../components/CommonWords.qml" line="565"/>
       <source>Value must be greater than stop value</source>
       <translation>Il valore deve essere maggiore di quello di arresto</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="567"/>
+      <location filename="../../components/CommonWords.qml" line="568"/>
       <source>Value must be lower than start value</source>
       <translation>Il valore deve essere inferiore a quello di avvio</translation>
     </message>
@@ -763,7 +763,7 @@
       <translation>OK: Non ci sono altri dispositivi collegati con questo numero unico.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="349"/>
+      <location filename="../../components/CommonWords.qml" line="353"/>
       <source>Network status</source>
       <translation>Stato della rete</translation>
     </message>
@@ -1041,7 +1041,7 @@
       <translation>Feed di aggiornamento</translation>
     </message>
     <message id="common_words_image_type">
-      <location filename="../../components/CommonWords.qml" line="254"/>
+      <location filename="../../components/CommonWords.qml" line="258"/>
       <source>Image type</source>
       <translation>Tipo immagine</translation>
     </message>
@@ -1306,7 +1306,7 @@
       <translation>Fine ore di silenzio</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="325"/>
+      <location filename="../../components/PageGensetModel.qml" line="333"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
       <source>Run time and service</source>
       <translation>Tempo di funzionamento e servizio</translation>
@@ -1931,8 +1931,8 @@ Utilizzare se non è vietato dal gestore della rete</translation>
     </message>
     <message id="settings_vrm_no_error">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="311"/>
-      <source>No Error</source>
-      <translation>Nessun errore</translation>
+      <source>No error</source>
+      <translation type="unfinished">Nessun errore</translation>
     </message>
     <message id="settings_vrm_no_space_error">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="313"/>
@@ -2254,7 +2254,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>[Hidden]</source>
       <translation>[Nascosto]</translation>
     </message>
@@ -2344,12 +2344,12 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Dispositivi VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
       <source>No access points</source>
       <translation>Nessun punto di accesso</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Nessun adattatore Wi-Fi connesso</translation>
     </message>
@@ -2358,13 +2358,8 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <source>Create access point</source>
       <translation>Crea punto di accesso</translation>
     </message>
-    <message id="settings_wifi_access_point_enter_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="68"/>
-      <source>Enter password</source>
-      <translation type="unfinished">Inserire password</translation>
-    </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
       <source>Wi-Fi networks</source>
       <translation>Reti Wi-Fi</translation>
     </message>
@@ -2429,28 +2424,28 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Pacifico</translation>
     </message>
     <message id="settings_vrm_device_instances_unconnected">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="250"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="88"/>
       <source>Unconnected %1</source>
       <extracomment>Name for an unconnected device. %1 = type of device</extracomment>
       <translation>Non collegato %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="303"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
       <source>Reboot now?</source>
       <translation>Riavviare ora?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="306"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Le modifiche all'istanza VRM verranno applicate dopo il riavvio del dispositivo.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="326"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
       <source>Device is rebooting...</source>
       <translation>Il dispositivo si sta riavviando...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="329"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
       <source>Device has been rebooted.</source>
       <translation>Il dispositivo è stato riavviato.</translation>
     </message>
@@ -2465,25 +2460,25 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Allarme alta tensione batteria</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="642"/>
+      <location filename="../../components/CommonWords.qml" line="643"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Ultimo errore</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="645"/>
+      <location filename="../../components/CommonWords.qml" line="646"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Penultimo errore</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="648"/>
+      <location filename="../../components/CommonWords.qml" line="649"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Terzultimo errore</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="651"/>
+      <location filename="../../components/CommonWords.qml" line="652"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Quartultimo errore</translation>
@@ -2581,7 +2576,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Tensione di carica</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="452"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Reset</source>
       <translation>Ripristina</translation>
     </message>
@@ -2807,7 +2802,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation type="unfinished">Fusibile bruciato</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="302"/>
+      <location filename="../../components/CommonWords.qml" line="306"/>
       <source>Manual control</source>
       <translation>Controllo manuale</translation>
     </message>
@@ -2863,7 +2858,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Segnali Allarme</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="529"/>
+      <location filename="../../components/CommonWords.qml" line="530"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Interruttore</translation>
@@ -3776,42 +3771,42 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Trifase</translation>
     </message>
     <message id="ac-in-setup_devices">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="180"/>
       <source>Devices</source>
       <translation type="unfinished">Dispositivi</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="194"/>
+      <location filename="../../components/PageGensetModel.qml" line="202"/>
       <source>AC</source>
       <translation>CA</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="232"/>
+      <location filename="../../components/PageGensetModel.qml" line="240"/>
       <source>Engine</source>
       <translation>Motore</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="276"/>
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
       <source>Coolant temperature</source>
       <translation>Temperatura di raffreddamento</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <location filename="../../components/PageGensetModel.qml" line="292"/>
       <source>Exhaust temperature</source>
       <translation>Temperatura di scarico</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="291"/>
+      <location filename="../../components/PageGensetModel.qml" line="299"/>
       <source>Winding temperature</source>
       <translation>Temperatura di avvolgimento</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="305"/>
+      <location filename="../../components/PageGensetModel.qml" line="313"/>
       <source>Starter battery voltage</source>
       <translation>Tensione batteria di avviamento</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="313"/>
+      <location filename="../../components/PageGensetModel.qml" line="321"/>
       <source>Number of starts</source>
       <translation>Numero di avvii</translation>
     </message>
@@ -3889,12 +3884,12 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Dispositivi bus Smappee</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="355"/>
+      <location filename="../../components/CommonWords.qml" line="669"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Questa impostazione viene disattivata quando e collegato un Digital Multi Control.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="358"/>
+      <location filename="../../components/CommonWords.qml" line="658"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Questa impostazione viene disattivata quando è collegato un VE.Bus BMS.</translation>
     </message>
@@ -4025,12 +4020,12 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Potenza totale</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="435"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>Product page</source>
       <translation>Pagina prodotto</translation>
     </message>
     <message id="vebus_device_ac_sensor_x_y">
-      <location filename="../../pages/vebusdevice/PageAcSensor.qml" line="27"/>
+      <location filename="../../pages/vebusdevice/PageAcSensor.qml" line="19"/>
       <source>AC sensor %1 %2</source>
       <translation>Sensore CA %1 %2</translation>
     </message>
@@ -4250,7 +4245,7 @@ Si desidera continuare?</translation>
       <translation>Completo</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="406"/>
+      <location filename="../../components/CommonWords.qml" line="404"/>
       <source>Pending</source>
       <translation>In attesa</translation>
     </message>
@@ -4362,7 +4357,7 @@ Si desidera continuare?</translation>
       <translation>La segnalazione dell'Errore 11 del VE.Bus richiede almeno la versione 454 del firmware del VE.Bus.</translation>
     </message>
     <message id="vebus_quirks">
-      <location filename="../../pages/vebusdevice/PageVeBusKwhCounters.qml" line="20"/>
+      <location filename="../../pages/vebusdevice/PageVeBusKwhCounters.qml" line="22"/>
       <source>VE.Bus Quirks</source>
       <translation>VE.Bus Quirks</translation>
     </message>
@@ -4704,38 +4699,38 @@ Si desidera continuare?</translation>
       <translation>Generatore</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="226"/>
+      <location filename="../../components/CommonWords.qml" line="230"/>
       <source>High battery temperature</source>
       <translation>Alta temperatura batteria</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="233"/>
+      <location filename="../../components/CommonWords.qml" line="237"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Allarme livello alto</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="236"/>
+      <location filename="../../components/CommonWords.qml" line="240"/>
       <source>High starter battery voltage</source>
       <translation>Alta tensione batteria di avviamento</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="239"/>
+      <location filename="../../components/CommonWords.qml" line="243"/>
       <source>High temperature</source>
       <translation>Temperatura alta</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="242"/>
+      <location filename="../../components/CommonWords.qml" line="246"/>
       <source>High voltage alarms</source>
       <translation>Allarmi di alta tensione</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="245"/>
+      <location filename="../../components/CommonWords.qml" line="249"/>
       <source>History</source>
       <translation>Cronologia</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="248"/>
+      <location filename="../../components/CommonWords.qml" line="252"/>
       <source>%1 Hour(s)</source>
       <translation>%1 Ora/e</translation>
     </message>
@@ -4751,73 +4746,73 @@ Si desidera continuare?</translation>
       <translation>Inattivo</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="274"/>
+      <location filename="../../components/CommonWords.qml" line="278"/>
       <source>IP address</source>
       <translation>Indirizzo IP</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="277"/>
+      <location filename="../../components/CommonWords.qml" line="281"/>
       <source>Low battery temperature</source>
       <translation>Bassa temperatura batteria</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="284"/>
+      <location filename="../../components/CommonWords.qml" line="288"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Allarme livello basso</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="287"/>
+      <location filename="../../components/CommonWords.qml" line="291"/>
       <source>Low starter battery voltage</source>
       <translation>Bassa tensione batteria di avviamento</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="290"/>
+      <location filename="../../components/CommonWords.qml" line="294"/>
       <source>Low state-of-charge</source>
       <translation>Basso stato di carica</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="293"/>
+      <location filename="../../components/CommonWords.qml" line="297"/>
       <source>Low temperature</source>
       <translation>Bassa temperatura</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="296"/>
+      <location filename="../../components/CommonWords.qml" line="300"/>
       <source>Low voltage alarms</source>
       <translation>Allarmi di bassa tensione</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="311"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Manufacturer</source>
       <translation>Produttore</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="324"/>
+      <location filename="../../components/CommonWords.qml" line="328"/>
       <source>Maximum temperature</source>
       <translation>Temperatura massima</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="327"/>
+      <location filename="../../components/CommonWords.qml" line="331"/>
       <source>Maximum voltage</source>
       <translation>Tensione massima</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="337"/>
+      <location filename="../../components/CommonWords.qml" line="341"/>
       <source>Minimum temperature</source>
       <translation>Temperatura minima</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="340"/>
+      <location filename="../../components/CommonWords.qml" line="344"/>
       <source>Minimum voltage</source>
       <translation>Tensione minima</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="343"/>
+      <location filename="../../components/CommonWords.qml" line="347"/>
       <source>Mode</source>
       <translation>Modalità</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="346"/>
+      <location filename="../../components/CommonWords.qml" line="350"/>
       <source>Model name</source>
       <translation>Nome Modello</translation>
     </message>
@@ -4828,7 +4823,7 @@ Si desidera continuare?</translation>
       <translation>No</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="361"/>
+      <location filename="../../components/CommonWords.qml" line="359"/>
       <source>No error</source>
       <translation>Nessun errore</translation>
     </message>
@@ -4838,12 +4833,12 @@ Si desidera continuare?</translation>
       <translation>Non disponibile</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="374"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>Not connected</source>
       <translation>Non connesso</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="384"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Offline</source>
       <translation>Offline</translation>
     </message>
@@ -4859,7 +4854,7 @@ Si desidera continuare?</translation>
       <translation>Acceso</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="393"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <source>Online</source>
       <translation>Online</translation>
     </message>
@@ -4870,59 +4865,59 @@ Si desidera continuare?</translation>
       <translation>Aperto</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="409"/>
+      <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Password</source>
       <translation>Password</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="416"/>
+      <location filename="../../components/CommonWords.qml" line="414"/>
       <source>Phase</source>
       <translation>Fase</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="426"/>
+      <location filename="../../components/CommonWords.qml" line="424"/>
       <source>Press to clear</source>
       <translation>Premere per cancellare</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="429"/>
+      <location filename="../../components/CommonWords.qml" line="427"/>
       <source>Press to reset</source>
       <translation>Premere per ripristinare</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="432"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Press to scan</source>
       <translation>Premere per scansionare</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="438"/>
+      <location filename="../../components/CommonWords.qml" line="436"/>
       <source>PV Inverter</source>
       <translation>Inverter FV</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="442"/>
+      <location filename="../../components/CommonWords.qml" line="440"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>Potenza FV</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="445"/>
+      <location filename="../../components/CommonWords.qml" line="443"/>
       <source>Quiet hours</source>
       <translation>Ore di silenzio</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="449"/>
+      <location filename="../../components/CommonWords.qml" line="447"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Relè</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="455"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Reboot</source>
       <translation>Riavvio</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="458"/>
+      <location filename="../../components/CommonWords.qml" line="459"/>
       <source>Remove</source>
       <translation>Rimuovi</translation>
     </message>
@@ -4932,12 +4927,12 @@ Si desidera continuare?</translation>
       <translation>In funzionamento</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="465"/>
+      <location filename="../../components/CommonWords.qml" line="466"/>
       <source>Scanning %1%</source>
       <translation>Scansione %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="468"/>
+      <location filename="../../components/CommonWords.qml" line="469"/>
       <source>Serial number</source>
       <translation>Numero di serie</translation>
     </message>
@@ -4947,12 +4942,12 @@ Si desidera continuare?</translation>
       <translation>Impostazioni</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="474"/>
+      <location filename="../../components/CommonWords.qml" line="475"/>
       <source>Setup</source>
       <translation>Impostazione</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="477"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Signal strength</source>
       <translation>Forza del segnale</translation>
     </message>
@@ -4963,32 +4958,32 @@ Si desidera continuare?</translation>
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="494"/>
+      <location filename="../../components/CommonWords.qml" line="495"/>
       <source>Start after the condition is reached for</source>
       <translation>Avviare quando la condizione sia attiva per</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="497"/>
+      <location filename="../../components/CommonWords.qml" line="498"/>
       <source>Start time</source>
       <translation>Ora di avviamento</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="500"/>
+      <location filename="../../components/CommonWords.qml" line="501"/>
       <source>Start value during quiet hours</source>
       <translation>Valore di avvio durante ore di silenzio</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="504"/>
       <source>Start when warning is active for</source>
       <translation>Avvia quando l'avviso è attivo per</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="509"/>
+      <location filename="../../components/CommonWords.qml" line="510"/>
       <source>State of charge</source>
       <translation>Stato della carica</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="512"/>
+      <location filename="../../components/CommonWords.qml" line="513"/>
       <source>Status</source>
       <translation>Stato</translation>
     </message>
@@ -4999,12 +4994,12 @@ Si desidera continuare?</translation>
       <translation>Avvio (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="519"/>
+      <location filename="../../components/CommonWords.qml" line="520"/>
       <source>Stop value during quiet hours</source>
       <translation>Valore di arresto nelle ore di silenzio</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="522"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
       <source>Stop after the condition is reached for</source>
       <translation>Arrestare quando la condizione sia attiva per</translation>
     </message>
@@ -5015,27 +5010,27 @@ Si desidera continuare?</translation>
       <translation>Arrestato</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="532"/>
+      <location filename="../../components/CommonWords.qml" line="533"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="535"/>
+      <location filename="../../components/CommonWords.qml" line="536"/>
       <source>Temperature sensor</source>
       <translation>Sensore di temperatura</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="538"/>
+      <location filename="../../components/CommonWords.qml" line="539"/>
       <source>Today</source>
       <translation>Oggi</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="541"/>
+      <location filename="../../components/CommonWords.qml" line="542"/>
       <source>Total</source>
       <translation>Totale</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="548"/>
+      <location filename="../../components/CommonWords.qml" line="549"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Tracciatore</translation>
@@ -5046,7 +5041,7 @@ Si desidera continuare?</translation>
       <translation>Tipo</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="554"/>
+      <location filename="../../components/CommonWords.qml" line="555"/>
       <source>Unique Identity Number</source>
       <translation>Numero Identificativo Univoco</translation>
     </message>
@@ -5058,22 +5053,22 @@ Si desidera continuare?</translation>
       <translation>Sconosciuto</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="573"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>VE.Bus Error</source>
       <translation>Errore VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="576"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>Voltage</source>
       <translation>Tensione</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="579"/>
+      <location filename="../../components/CommonWords.qml" line="580"/>
       <source>VRM instance</source>
       <translation>Istanza VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="582"/>
+      <location filename="../../components/CommonWords.qml" line="583"/>
       <source>When warning is cleared stop after</source>
       <translation>Una volta cancellato l'avviso, arresta dopo</translation>
     </message>
@@ -5084,12 +5079,12 @@ Si desidera continuare?</translation>
       <translation>Sì</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="588"/>
+      <location filename="../../components/CommonWords.qml" line="589"/>
       <source>Yesterday</source>
       <translation>Ieri</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="592"/>
+      <location filename="../../components/CommonWords.qml" line="593"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Rendimento</translation>
@@ -5146,7 +5141,7 @@ Si desidera continuare?</translation>
       <translation>Cancella</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="312"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
       <source>Close</source>
       <translation>Chiudi</translation>
     </message>
@@ -5325,7 +5320,7 @@ Si desidera continuare?</translation>
       <translation>Livelli</translation>
     </message>
     <message id="common_words_notifications">
-      <location filename="../../components/CommonWords.qml" line="378"/>
+      <location filename="../../components/CommonWords.qml" line="376"/>
       <source>Notifications</source>
       <extracomment>The 'Notifications' page</extracomment>
       <translation>Notifiche</translation>
@@ -5489,8 +5484,8 @@ Si desidera continuare?</translation>
       <source>Relay state</source>
       <translation>Stato relè</translation>
     </message>
-    <message id="batteryhistory_reset_history_on_the_monitor_itself">
-      <location filename="../../components/listitems/ListResetHistory.qml" line="29"/>
+    <message id="common_words_batteryhistory_reset_history_on_the_monitor_itself">
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Reset history on the monitor itself</source>
       <translation>Ripristinare la cronologia sul monitor stesso</translation>
     </message>
@@ -5779,7 +5774,7 @@ Si desidera continuare?</translation>
       <translation>Errore di livello 5 del protocollo MQTT</translation>
     </message>
     <message id="common_words_silence_alarm">
-      <location filename="../../components/CommonWords.qml" line="480"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Silence alarm</source>
       <translation>Silenziamento allarme</translation>
     </message>
@@ -6252,7 +6247,7 @@ Si desidera continuare?</translation>
       <translation>Utilizzare quest’opzione nei sistemi che non eseguono la riduzione dei picchi.</translation>
     </message>
     <message id="ac-in-genset_auto_start_functionality">
-      <location filename="../../components/PageGensetModel.qml" line="66"/>
+      <location filename="../../components/PageGensetModel.qml" line="74"/>
       <source>Auto start functionality</source>
       <translation>Funzione avvio automatico</translation>
     </message>
@@ -6314,7 +6309,7 @@ Si desidera continuare?</translation>
       <translation>Esci dall’applicazione</translation>
     </message>
     <message id="genset_controller_requires_helper_relay">
-      <location filename="../../components/PageGensetModel.qml" line="53"/>
+      <location filename="../../components/PageGensetModel.qml" line="61"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
       <translation>Questo controllore del generatore deve essere controllato da un relè ausiliare, ma tale relè non è configurato. Configurare il Relè 1 in Impostazioni → Relè come "Relè ausiliare del generatore collegato".</translation>
     </message>
@@ -6324,77 +6319,77 @@ Si desidera continuare?</translation>
       <translation>Tempo di funzionamento attuale</translation>
     </message>
     <message id="settings_page_genset_generator_run_time">
-      <location filename="../../components/PageGensetModel.qml" line="102"/>
+      <location filename="../../components/PageGensetModel.qml" line="110"/>
       <source>Current run time</source>
       <translation type="unfinished">Tempo di funzionamento attuale</translation>
     </message>
     <message id="ac-in-genset_auto_control_status">
-      <location filename="../../components/PageGensetModel.qml" line="110"/>
+      <location filename="../../components/PageGensetModel.qml" line="118"/>
       <source>Control status</source>
       <translation>Stato del controllo</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="130"/>
+      <location filename="../../components/PageGensetModel.qml" line="138"/>
       <source>Control error code</source>
       <translation>Codice errore del controllo</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="137"/>
+      <location filename="../../components/PageGensetModel.qml" line="145"/>
       <source>Genset status</source>
       <translation>Stato del generatore</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="148"/>
+      <location filename="../../components/PageGensetModel.qml" line="156"/>
       <source>Genset error codes</source>
       <translation>Codici errore del generatore</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="220"/>
+      <location filename="../../components/PageGensetModel.qml" line="228"/>
       <source>Remote start mode</source>
       <translation>Modalità avvio remoto</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="245"/>
+      <location filename="../../components/PageGensetModel.qml" line="253"/>
       <source>Speed</source>
       <translation type="unfinished">Velocità</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="252"/>
+      <location filename="../../components/PageGensetModel.qml" line="260"/>
       <source>Load</source>
       <translation type="unfinished">Carico</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="260"/>
+      <location filename="../../components/PageGensetModel.qml" line="268"/>
       <source>Oil pressure</source>
       <translation>Pressione dell'olio</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="268"/>
+      <location filename="../../components/PageGensetModel.qml" line="276"/>
       <source>Oil temperature</source>
       <translation>Temperatura dell'olio</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="298"/>
+      <location filename="../../components/PageGensetModel.qml" line="306"/>
       <source>Heatsink temperature</source>
       <translation>Temperatura del dissipatore</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="338"/>
+      <location filename="../../components/PageGensetModel.qml" line="346"/>
       <source>DC genset settings</source>
       <translation>Impostazioni del generatore CC</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="365"/>
+      <location filename="../../components/PageGensetModel.qml" line="373"/>
       <source>Charge voltage</source>
       <translation type="unfinished">Tensione di carica</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="376"/>
+      <location filename="../../components/PageGensetModel.qml" line="384"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>La tensione di carica è attualmente controllata dal BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="382"/>
+      <location filename="../../components/PageGensetModel.qml" line="390"/>
       <source>Charge current limit</source>
       <translation>Limite corrente di carica</translation>
     </message>
@@ -7631,7 +7626,7 @@ Si desidera continuare?</translation>
       <translation>Il riavvio del sistema VE.Bus ripristinerà tutti gli inverter presenti sul bus, causando una perdita di potenza delle loro uscite.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="599"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Dynamic power limit</source>
       <translation>Limite di potenza dinamico</translation>
     </message>
@@ -7721,165 +7716,165 @@ Si desidera continuare?</translation>
       <translation type="unfinished">Generatore</translation>
     </message>
     <message id="common_words_gx_device_relays">
-      <location filename="../../components/CommonWords.qml" line="223"/>
+      <location filename="../../components/CommonWords.qml" line="227"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relè del dispositivo GX</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="251"/>
+      <location filename="../../components/CommonWords.qml" line="255"/>
       <source>Idle</source>
       <translation type="unfinished">Inattivo</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="258"/>
+      <location filename="../../components/CommonWords.qml" line="262"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">Inattivo</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="261"/>
+      <location filename="../../components/CommonWords.qml" line="265"/>
       <source>Input current limit</source>
       <translation>Limite corrente in ingresso</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="264"/>
+      <location filename="../../components/CommonWords.qml" line="268"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">Inverter / Caricabatterie</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="268"/>
+      <location filename="../../components/CommonWords.qml" line="272"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="308"/>
+      <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Manual stop</source>
       <translation>Arresto manuale</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="318"/>
+      <location filename="../../components/CommonWords.qml" line="322"/>
       <source>Maximum current</source>
       <translation>Corrente massima</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="321"/>
+      <location filename="../../components/CommonWords.qml" line="325"/>
       <source>Maximum power</source>
       <translation>Potenza massima</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="334"/>
+      <location filename="../../components/CommonWords.qml" line="338"/>
       <source>Minimum current</source>
       <translation>Corrente minima</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="352"/>
+      <location filename="../../components/CommonWords.qml" line="356"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">No</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="364"/>
+      <location filename="../../components/CommonWords.qml" line="362"/>
       <source>None</source>
       <translation type="unfinished">Nessuno</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="368"/>
+      <location filename="../../components/CommonWords.qml" line="366"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Nessuno</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="371"/>
+      <location filename="../../components/CommonWords.qml" line="369"/>
       <source>Not available</source>
       <translation type="unfinished">Non disponibile</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="381"/>
+      <location filename="../../components/CommonWords.qml" line="379"/>
       <source>Off</source>
       <translation type="unfinished">Spento</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="387"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="41"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="45"/>
       <source>OK</source>
       <translation type="unfinished">Ok</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="390"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>On</source>
       <translation type="unfinished">Acceso</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="397"/>
+      <location filename="../../components/CommonWords.qml" line="395"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Aperto</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="400"/>
+      <location filename="../../components/CommonWords.qml" line="398"/>
       <source>Open circuit</source>
       <translation>Circuito aperto</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="403"/>
+      <location filename="../../components/CommonWords.qml" line="401"/>
       <source>Overall history</source>
       <translation>Cronologia complessiva</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="462"/>
+      <location filename="../../components/CommonWords.qml" line="463"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">In funzionamento</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="471"/>
+      <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Settings</source>
       <translation type="unfinished">Impostazioni</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="484"/>
+      <location filename="../../components/CommonWords.qml" line="485"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SoC %1%</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="488"/>
+      <location filename="../../components/CommonWords.qml" line="489"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation type="unfinished">Velocità</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="491"/>
+      <location filename="../../components/CommonWords.qml" line="492"/>
       <source>Standby</source>
       <translation type="unfinished">Standby</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="516"/>
+      <location filename="../../components/CommonWords.qml" line="517"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Avvio (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="525"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Stopped</source>
       <translation type="unfinished">Arrestato</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="551"/>
+      <location filename="../../components/CommonWords.qml" line="552"/>
       <source>Type</source>
       <translation type="unfinished">Tipo</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="558"/>
+      <location filename="../../components/CommonWords.qml" line="559"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Sconosciuto</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="585"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7887,16 +7882,28 @@ Si desidera continuare?</translation>
       <translation type="unfinished">Sì</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="596"/>
+      <location filename="../../components/CommonWords.qml" line="597"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>Rendimento odierno</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="636"/>
+      <location filename="../../components/CommonWords.qml" line="637"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
+    </message>
+    <message id="common_words_bms_disabled_go_to_redetect">
+      <location filename="../../components/CommonWords.qml" line="663"/>
+      <source>%1 %2</source>
+      <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
+      <translation type="unfinished">%1 %2</translation>
+    </message>
+    <message id="common_words_dmc_disabled_go_to_redetect">
+      <location filename="../../components/CommonWords.qml" line="674"/>
+      <source>%1 %2</source>
+      <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
+      <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
       <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="79"/>
@@ -8208,7 +8215,7 @@ Se il generatore è in funzione in seguito a una condizione di avvio automatico,
       <translation>Servizi di temperatura</translation>
     </message>
     <message id="rs_current_limit_not_adjustable">
-      <location filename="../../components/listitems/ListCurrentLimitButton.qml" line="28"/>
+      <location filename="../../components/listitems/ListCurrentLimitButton.qml" line="27"/>
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Questo limite di corrente è stabilito nella configurazione del sistema. Non può essere regolato.</translation>
     </message>
@@ -8219,7 +8226,7 @@ Se il generatore è in funzione in seguito a una condizione di avvio automatico,
       <translation>Entrata</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="35"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="31"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>La modalità è stabilita nella configurazione del sistema. Non può essere regolata.</translation>
     </message>
@@ -8861,7 +8868,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>NW</translation>
     </message>
     <message id="genset_controller_multiple_genset_controllers">
-      <location filename="../../components/PageGensetModel.qml" line="60"/>
+      <location filename="../../components/PageGensetModel.qml" line="68"/>
       <source>Multiple genset controllers detected.
 The GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device.</source>
       <translation>Rilevati vari controllori del generatore.
@@ -8889,7 +8896,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Tipo non supportato: %1</translation>
     </message>
     <message id="common_words_press">
-      <location filename="../../components/CommonWords.qml" line="423"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>Press</source>
       <translation>Premere</translation>
     </message>
@@ -8929,12 +8936,12 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Temperatura del refrigerante</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
       <source>Module state</source>
       <translation>Stato del modulo</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="25"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Tensione del modulo</translation>
     </message>
@@ -9332,7 +9339,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Documentazione</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="608"/>
+      <location filename="../../components/CommonWords.qml" line="609"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>Entrata CA %1</translation>
@@ -9367,11 +9374,6 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="238"/>
       <source>Enable this setting when having a secondary MultiPlus or Quattro system powered by the same battery bank as the main inverter/charger system. When this setting is enabled, this secondary system will use the CVL and DCL parameters of the selected BMS.</source>
       <translation>Attivare questa impostazione se un sistema MultiPlus o Quattro secondario è alimentato dallo stesso banco batterie del sistema inverter/caricabatterie principale. Se è attiva questa impostazione, il sistema secondario utilizzerà i parametri CVL e DCL del BMS selezionato.</translation>
-    </message>
-    <message id="settings_vrm_device_registration">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
-      <source>VRM Device Registration</source>
-      <translation>Registrazione Dispositivo VRM</translation>
     </message>
     <message id="settings_access_control_display_firmware">
       <location filename="../../pages/SettingsPage.qml" line="43"/>
@@ -9762,7 +9764,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Relè del dispositivo GX</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="96"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="94"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLife regola dinamicamente lo stato di carica minimo della batteria per prevenire scariche profonde e garantire cariche complete regolari, contribuendo a prolungare la durata della batteria e a mantenere l'affidabilità del sistema.</translation>
     </message>
@@ -10048,7 +10050,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Premere per aggiornare</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="544"/>
+      <location filename="../../components/CommonWords.qml" line="545"/>
       <source>Total power</source>
       <translation>Potenza totale</translation>
     </message>
@@ -10080,23 +10082,23 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Polarità (Relè 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>La lunghezza della password deve essere 0 oppure compresa tra 10 e 63 caratteri</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
       <source>Password updated</source>
       <translation>Password aggiornata</translation>
     </message>
     <message id="common_words_max">
-      <location filename="../../components/CommonWords.qml" line="315"/>
+      <location filename="../../components/CommonWords.qml" line="319"/>
       <source>Max</source>
       <extracomment>Short for Maximum</extracomment>
       <translation>Max</translation>
     </message>
     <message id="common_words_min">
-      <location filename="../../components/CommonWords.qml" line="331"/>
+      <location filename="../../components/CommonWords.qml" line="335"/>
       <source>Min</source>
       <extracomment>Short for Minimum</extracomment>
       <translation>Min</translation>
@@ -10363,12 +10365,12 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Colore</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="561"/>
+      <location filename="../../components/CommonWords.qml" line="562"/>
       <source>Value must be greater than start value</source>
       <translation>Il valore deve essere maggiore del valore iniziale</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="570"/>
+      <location filename="../../components/CommonWords.qml" line="571"/>
       <source>Value must be lower than stop value</source>
       <translation>Il valore deve essere inferiore al valore di arresto</translation>
     </message>
@@ -10592,29 +10594,40 @@ Qui puoi aggiungere ulteriori porte e ID unità da scansionare per gli inverter 
       <source>Output limit max</source>
       <translation>Limite massimo di uscita</translation>
     </message>
-    <message id="ac-in-modeldefault_phase_setting">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="174"/>
+    <message id="ac-in-setup-default_phase_setting">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
       <source>Phase Setting</source>
-      <translation/>
+      <translation>Impostazione fase</translation>
     </message>
     <message id="page_switchable_output_show_local">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="125"/>
       <source>Only local</source>
-      <translation/>
+      <translation>Solo locale</translation>
     </message>
     <message id="page_switchable_output_show_vrm">
       <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="127"/>
       <source>Only on VRM</source>
-      <translation/>
+      <translation>Solo su VRM</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
       <source>No compatible devices found</source>
-      <translation/>
+      <translation>Nessun dispositivo compatibile trovato</translation>
     </message>
     <message id="controlcards_empty_desc2">
       <location filename="../../pages/ControlCardsPage.qml" line="149"/>
       <source>Connect devices that support this function</source>
+      <translation>Collega dispositivi che supportano questa funzione</translation>
+    </message>
+    <message id="settings_vrm_device_registration">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
+      <source>VRM device registration</source>
+      <translation/>
+    </message>
+    <message id="common_words_go_to_redetect_system">
+      <location filename="../../components/CommonWords.qml" line="221"/>
+      <source>If it was recently disconnected, go to Settings → Devices → %1 → Advanced, and select 'Redetect VE.Bus system'.</source>
+      <extracomment>%1 = name of the device</extracomment>
       <translation/>
     </message>
     <message id="settings_radio_button_group_unknown">
