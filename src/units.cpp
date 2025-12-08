@@ -275,15 +275,17 @@ quantityInfo Units::getDisplayText(
 	VenusOS::Enums::Units_Type unit,
 	qreal value,
 	int precision,
+	bool precisionAdjustmentAllowed,
 	qreal unitMatchValue) const
 {
-	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, precision, unitMatchValue);
+	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, precision, precisionAdjustmentAllowed, unitMatchValue);
 }
 
 quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit,
 	qreal value,
 	VenusOS::Enums::Units_Scale previousScale,
 	int precision,
+	bool precisionAdjustmentAllowed,
 	qreal unitMatchValue,
 	int formatHints) const
 {
@@ -391,7 +393,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	};
 
 	// If kilowatt-hours have not been scaled avoid decimals
-	if (quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+	if (precisionAdjustmentAllowed && quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
 		precision = 0;
 	}
 
@@ -399,8 +401,8 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	// Only apply this logic to scaled values with 2 non fractional digits if the units are not Units_Volt_DC.
 	// i.e. don't clip precision for values like 53.35 V DC.
 	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	int digits = numberOfDigits(static_cast<int>(scaledValue));
-	if (unit != VenusOS::Enums::Units_Volt_DC || digits > 2) {
+	const int digits = numberOfDigits(static_cast<int>(scaledValue));
+	if (precisionAdjustmentAllowed && (unit != VenusOS::Enums::Units_Volt_DC || digits > 2)) {
 		if (digits >= 4) {
 			precision = 0;
 		} else if (digits == 3) {
@@ -413,7 +415,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	}
 
 	const qreal vFixedMultiplier = std::pow(10, precision);
-	int vFixed = qRound(scaledValue * vFixedMultiplier);
+	const int vFixed = qRound(scaledValue * vFixedMultiplier);
 	scaledValue = (1.0*vFixed) / vFixedMultiplier;
 	quantity.number = formattingLocale()->toString(scaledValue, 'f', precision);
 
@@ -440,7 +442,7 @@ QString Units::getCapacityDisplayText(
 
 	const int precision = defaultUnitPrecision(unit);
 	const quantityInfo c = getDisplayText(unit, capacity, precision);
-	const quantityInfo r = getDisplayText(unit, remaining, precision, capacity);
+	const quantityInfo r = getDisplayText(unit, remaining, precision, true, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
 }
 
