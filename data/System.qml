@@ -14,6 +14,7 @@ QtObject {
 
 	readonly property bool hasGridMeter: _gridDeviceType.valid
 	readonly property bool hasAcOutSystem: _hasAcOutSystem.valid && _hasAcOutSystem.value === 1
+	readonly property bool hasAcLoads: !_hasAcLoads.valid || _hasAcLoads.value === 1 // show AC loads by default if the path isn't valid
 	readonly property bool hasVebusEss: _systemType.value === "ESS" || _systemType.value === "Hub-4"
 	readonly property bool hasEss: hasVebusEss || _systemType.value === "AC System"
 	readonly property bool showInputLoads: load.acIn.hasPower
@@ -102,6 +103,10 @@ QtObject {
 
 	readonly property VeQuickItem _gridDeviceType: VeQuickItem {
 		uid: root.serviceUid + "/Ac/Grid/DeviceType"
+	}
+
+	readonly property VeQuickItem _hasAcLoads: VeQuickItem {
+		uid: root.serviceUid + "/Ac/HasAcLoads"
 	}
 
 	readonly property VeQuickItem _hasAcOutSystem: VeQuickItem {

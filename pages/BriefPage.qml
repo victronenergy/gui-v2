@@ -16,7 +16,7 @@ SwipeViewPage {
 	property real _gaugeLabelOpacity: 0
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
-	readonly property int _rightGaugeCount: dcLoadGauge.active ? 2 : 1  // AC load gauge is always active
+	readonly property int _rightGaugeCount: (acLoadGauge.active ? 1 : 0) + (dcLoadGauge.active ? 1 : 0)
 	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
 
 	property bool _readyToInit: state === "" && !Global.splashScreenVisible
@@ -270,8 +270,8 @@ SwipeViewPage {
 			id: acLoadGauge
 
 			width: Theme.geometry_briefPage_edgeGauge_width
-			height: Gauges.gaugeHeight(root._rightGaugeCount)
-			active: root.state !== "panelOpened"
+			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
+			active: Global.system.hasAcLoads && root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)
@@ -309,10 +309,11 @@ SwipeViewPage {
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 			active: Global.system.dc.hasPower && root.state !== "panelOpened"
-			sourceComponent: SideGauge {
-				readonly property var gaugeParams: Gauges.rightGaugeParameters(1, _rightGaugeCount)
 
-				// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
+			sourceComponent: SideGauge {
+				readonly property var gaugeParams: Gauges.rightGaugeParameters(acLoadGauge.active ? 1 : 0, _rightGaugeCount)
+
+				// DC load gauge progresses in counter-clockwise direction (i.e. upwards)
 				direction: PathArc.Counterclockwise
 				startAngle: gaugeParams.end
 				endAngle: gaugeParams.start
