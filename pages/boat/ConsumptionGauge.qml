@@ -46,7 +46,7 @@ Column {
 		unit: Global.system.load.ac.preferredUnit
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
-		visible: !motorDriveLoad.visible // && !isNaN(value) once #2159 is resolved
+		visible: !motorDriveLoad.visible && Global.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
 	}
 
 	QuantityLabelIconRow {

@@ -10,17 +10,18 @@ Item {
 	id: root
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Global.system.serviceUid + path, value)
 	}
+
 	function systemValue(path) {
-		return MockManager.value("com.victronenergy.system" + path)
+		return MockManager.value(Global.system.serviceUid + path)
 	}
 
 	function setGaugesValue(path, value) {
 		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path, value)
 	}
 	function gaugesValue(path) {
-		return MockManager.value("com.victronenergy.settings/Settings/Gui/Gauges" + path)
+		return MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path)
 	}
 
 	VeQuickItem {
@@ -100,8 +101,11 @@ Item {
 				let phaseAcOutCurrent = NaN
 				for (let objectIndex = 0; objectIndex < count; ++objectIndex) {
 					const acService = objectAt(objectIndex)
+					if (!acService) {
+						continue
+					}
 					const acServicePhaseCount = Math.max(acService.acIn.phaseCount, acService.acOut.phaseCount)
-					if (!acService || phaseIndex >= acServicePhaseCount) {
+					if (phaseIndex >= acServicePhaseCount) {
 						continue
 					}
 					phaseAcInPower = Units.sumRealNumbers(phaseAcInPower, acService.acIn["powerL" + (phaseIndex + 1)].value)
@@ -304,6 +308,16 @@ Item {
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Voltage" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L3/Voltage" }
 			}
+		}
+	}
+
+	FilteredServiceModel {
+		id: hasAcLoadsModel
+		serviceTypes: ["inverter", "charger", "evcharger", "acload", "heatpump", "vebus", "acsystem"]
+		onCountChanged: Qt.callLater(updateHasAcLoads)
+		Component.onCompleted: Qt.callLater(updateHasAcLoads)
+		function updateHasAcLoads() {
+			root.setSystemValue("/Ac/HasAcLoads", count === 0 ? 0 : 1)
 		}
 	}
 }
