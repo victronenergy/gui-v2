@@ -381,7 +381,10 @@ SwipeViewPage {
 	}
 
 	function _resetRightWidgets() {
-		let widgets = [acLoadsWidget]
+		let widgets = []
+		if (layoutConditions.showAcLoads) {
+			widgets.push(acLoadsWidget)
+		}
 		if (Global.evChargers.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
@@ -527,6 +530,10 @@ SwipeViewPage {
 		onPvChargerCountChanged: Qt.callLater(root._resetWidgets)
 		readonly property int pvInverterCount: Global.solarInputs?.pvInverterDevices.count ?? 0
 		onPvInverterCountChanged: Qt.callLater(root._resetWidgets)
+
+		// Affects whether AcLoadsWidget is shown.
+		readonly property bool showAcLoads: Global.system?.hasAcLoads || Global.evChargers?.model.count > 0
+		onShowAcLoadsChanged: Qt.callLater(root._resetWidgets)
 
 		// Affects whether DcLoadsWidget is shown.
 		readonly property bool showDcLoads: Global.system?.dc.hasPower
@@ -827,6 +834,7 @@ SwipeViewPage {
 	AcLoadsWidget {
 		id: acLoadsWidget
 
+		visible: Global.system.hasAcLoads || Global.evChargers.model.count > 0 // the EVCS widget might connect to the AC Loads widget
 		expanded: root._expandLayout
 		animateGeometry: root._animateGeometry
 		animationEnabled: root.animationEnabled
@@ -978,18 +986,18 @@ SwipeViewPage {
 				parent: acLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
 				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
-				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
+				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnectorAnchor {
 				id: acLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
 				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
-				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
+				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnector {
 				id: acLoadsToEvcsConnector
 				parent: root
-				visible: evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads
+				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 				startWidget: acLoadsWidget
 				startLocation: VenusOS.WidgetConnector_Location_Left
 				startOffsetY: acLoadsToEvcsStartAnchor.offsetY
