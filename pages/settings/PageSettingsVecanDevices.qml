@@ -16,15 +16,24 @@ Page {
 	title: qsTrId("settings_vecan_devices")
 
 	GradientListView {
-		model: VeQItemTableModel {
-			uids: [ root.serviceUid + "/Devices" ]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		// Filter out any disconnected/offline devices, i.e. those with an invalid DeviceInstance.
+		model: VeQItemSortTableModel {
+			dynamicSortFilter: true
+			filterFlags: VeQItemSortTableModel.FilterInvalid
+			model: VeQItemChildModel {
+				model: VeQItemTableModel {
+					uids: [ root.serviceUid + "/Devices" ]
+					flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
+				childId: "DeviceInstance"
+			}
 		}
 
 		delegate: ListNavigation {
 			id: listDelegate
 
-			required property string uid
+			required property VeQItem item
+			readonly property string uid: item.itemParent().uid
 
 			// Use JS string concatenation to avoid Qt string arg() from formatting as scientific notation.
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(""+uniqueNumber.value)
