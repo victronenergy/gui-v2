@@ -110,13 +110,20 @@ StackView {
 	}
 
 	function popAllPages(operation) {
+		if (!_canPopTo(null)) {
+			return
+		}
 		fakePopAnimation.duration = _animationDuration(operation)
 		root.state = "closed"
 	}
 
 	function popPage(toPage, operation) {
-		if (root.animating
-				|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop())) {
+		if (!toPage) {
+			popAllPages(operation)
+			return
+		}
+
+		if (!_canPopTo(toPage)) {
 			return
 		}
 		root._pageUrls.pop()
@@ -170,6 +177,14 @@ StackView {
 		if (obj && !Theme.objectHasQObjectParent(obj)) {
 			obj.destroy()
 		}
+	}
+
+	function _canPopTo(toPage) {
+		if (root.animating
+				|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop(toPage))) {
+			return false
+		}
+		return true
 	}
 
 	function _animationDuration(operation) {

@@ -72,6 +72,7 @@ private:
 	VeQItem *m_item = nullptr;
 	BaseDevice *m_device = nullptr;
 	int m_vrmInstance = -1;
+	int m_pendingVrmInstance = -1;
 	int m_initialVrmInstance = -1;
 };
 
