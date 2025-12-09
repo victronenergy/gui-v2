@@ -40,10 +40,9 @@ ColumnLayout {
 		icon.source: "qrc:/images/generator.svg"
 		loadersActive: generatorInput && generatorInput.operational && Global.generators.model.firstObject
 		visible: loadersActive
-		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
 		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		quantityLabel.acInputMode: true
 		sideComponent: Item {
 			width: generatorLabel.width
 			height: generatorLabel.height
@@ -84,10 +83,9 @@ ColumnLayout {
 
 		title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
 		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
-		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: nonGeneratorInput
 		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		quantityLabel.acInputMode: true
 		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
 		visible: loadersActive
 

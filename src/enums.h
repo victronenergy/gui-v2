@@ -946,6 +946,7 @@ public:
 	enum ElectricalQuantity_Source {
 		ElectricalQuantity_Source_Any,
 		ElectricalQuantity_Source_Ac,
+		ElectricalQuantity_Source_AcInputOnly,
 		ElectricalQuantity_Source_Dc,
 	};
 	Q_ENUM(ElectricalQuantity_Source)

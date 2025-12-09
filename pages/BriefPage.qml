@@ -170,9 +170,8 @@ SwipeViewPage {
 					icon.source: Global.acInputs.sourceIcon(Global.acInputs.highlightedInput?.source ?? Global.acInputs.findValidSource())
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
-					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
+					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 					quantityLabel.dataObject: Global.acInputs.highlightedInput
-					quantityLabel.acInputMode: true
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
