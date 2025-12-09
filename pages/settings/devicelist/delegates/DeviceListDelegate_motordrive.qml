@@ -12,6 +12,7 @@ DeviceListDelegate {
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 		QuantityObject { object: motorRpm; unit: VenusOS.Units_RevolutionsPerMinute }
+		QuantityObject { object: dcPower; unit: VenusOS.Units_Watt }
 	}
 
 	onClicked: {
@@ -22,5 +23,10 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: motorRpm
 		uid: root.device.serviceUid + "/Motor/RPM"
+	}
+
+	VeQuickItem {
+		id: dcPower
+		uid: root.device.serviceUid + "/Dc/0/Power"
 	}
 }

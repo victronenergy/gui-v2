@@ -17,6 +17,33 @@ DevicePage {
 	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
+		ListQuantityGroup {
+			text: CommonWords.dc
+			model: QuantityObjectModel {
+				filterType: QuantityObjectModel.HasValue
+
+				QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC}
+				QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+				QuantityObject { object: dcPower; unit: VenusOS.Units_Watt }
+			}
+			preferredVisible: dcVoltage.valid || dcCurrent.valid || dcPower.valid
+
+			VeQuickItem {
+				id: dcVoltage
+				uid: root.bindPrefix + "/Dc/0/Voltage"
+			}
+
+			VeQuickItem {
+				id: dcCurrent
+				uid: root.bindPrefix + "/Dc/0/Current"
+			}
+
+			VeQuickItem {
+				id: dcPower
+				uid: root.bindPrefix + "/Dc/0/Power"
+			}
+		}
+
 		ListQuantity {
 			//% "Motor RPM"
 			text: qsTrId("devicelist_motordrive_motorrpm")
@@ -25,32 +52,25 @@ DevicePage {
 			preferredVisible: dataItem.valid
 		}
 
+		ListMotorDriveGear {
+			//% "Motor Direction"
+			text: qsTrId("devicelist_motordrive_motordirection")
+			dataItem.uid: root.bindPrefix + "/Motor/Direction"
+			preferredVisible: dataItem.valid
+		}
+
+		ListQuantity {
+			//% "Motor Torque"
+			text: qsTrId("devicelist_motordrive_motortorque")
+			dataItem.uid: root.bindPrefix + "/Motor/Torque"
+			unit: VenusOS.Units_NewtonMeter
+			preferredVisible: dataItem.valid
+		}
+
 		ListTemperature {
 			//% "Motor Temperature"
 			text: qsTrId("devicelist_motordrive_motortemperature")
 			dataItem.uid: root.bindPrefix + "/Motor/Temperature"
-			preferredVisible: dataItem.valid
-		}
-
-		ListQuantity {
-			text: CommonWords.power_watts
-			dataItem.uid: root.bindPrefix + "/Dc/0/Power"
-			unit: VenusOS.Units_Watt
-			preferredVisible: dataItem.valid
-		}
-
-		ListQuantity {
-			text: CommonWords.voltage
-			dataItem.uid: root.bindPrefix + "/Dc/0/Voltage"
-			unit: VenusOS.Units_Volt_DC
-			preferredVisible: dataItem.valid
-		}
-
-		ListQuantity {
-			text: CommonWords.current_amps
-			dataItem.uid: root.bindPrefix + "/Dc/0/Current"
-			unit: VenusOS.Units_Amp
-			precision: 2
 			preferredVisible: dataItem.valid
 		}
 

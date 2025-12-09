@@ -197,6 +197,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListInfoLabel.qml
     components/listitems/ListInverterChargerModeButton.qml
     components/listitems/ListLink.qml
+    components/listitems/ListMotorDriveGear.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
     components/listitems/ListAcInPositionRadioButtonGroup.qml

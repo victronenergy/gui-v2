@@ -17,6 +17,7 @@
         "/Motor/Direction": 2,
         "/Motor/RPM": 1411,
         "/Motor/Temperature": 23,
+        "/Motor/Torque": 85,
         "/N2kDeviceInstance": 0,
         "/N2kUniqueNumber": 655188,
         "/ProductId": 45155,

@@ -124,6 +124,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Altitude_Metre:         // fall through
 	case VenusOS::Enums::Units_Altitude_Foot:          // fall through
 	case VenusOS::Enums::Units_PartsPerMillion:        // fall through
+	case VenusOS::Enums::Units_NewtonMeter:            // fall through
 		return 0;
 	default:
 		// VoltAmpere
@@ -210,6 +211,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("µg/m³");
 	case VenusOS::Enums::Units_Lux:
 		return QStringLiteral("lux");
+	case VenusOS::Enums::Units_NewtonMeter:
+		return QStringLiteral("Nm");
 	default:
 		qWarning() << "No unit label known for unit:" << unit;
 		return QString();
