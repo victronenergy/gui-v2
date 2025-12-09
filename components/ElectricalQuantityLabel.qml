@@ -26,7 +26,6 @@ QuantityLabel {
 	// An object with 'power' and 'current' values. When showing in Amps, the current is displayed,
 	// otherwise the power is displayed.
 	property var dataObject
-	property bool acInputMode
 
 	readonly property bool _dataObjectValid: dataObject !== null && dataObject !== undefined
 	readonly property bool _unitAmps: (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
@@ -39,7 +38,8 @@ QuantityLabel {
 
 	// For AC inputs, the AcInputDirectionIcon should be present to indicate when power is negative,
 	// so just show the absolute value without a minus sign.
-	value: acInputMode ? Math.abs(_value) // will return NaN if _value is NaN.
+	value: sourceType === VenusOS.ElectricalQuantity_Source_AcInputOnly
+		? Math.abs(_value) // will return NaN if _value is NaN.
 		: _value
 
 	unit: _dataObjectValid ? (_unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt) : VenusOS.Units_None
