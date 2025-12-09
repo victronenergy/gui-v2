@@ -52,7 +52,7 @@ Page {
 	}
 
 	// If user changes the VRM instance, ask whether reboot should be done when page is popped.
-	tryPop: () => {
+	tryPop: (toPage) => {
 		// If a text field delegate in the list is currently focused, remove the focus so that it
 		// calls _changeVrmInstance() to save the new VRM instance value, before this checks
 		// whether any VRM instances have changed.
@@ -62,7 +62,7 @@ Page {
 			return true
 		}
 
-		Global.dialogLayer.open(rebootDialogComponent)
+		Global.dialogLayer.open(rebootDialogComponent, { toPage: toPage })
 		return false
 	}
 
@@ -132,6 +132,8 @@ Page {
 		id: rebootDialogComponent
 
 		ModalWarningDialog {
+			property Page toPage
+
 			//% "Reboot now?"
 			title: qsTrId("settings_vrm_device_instances_reboot_now")
 
@@ -177,7 +179,7 @@ Page {
 
 			onRejected: {
 				root.tryPop = undefined     // allow the next pop to proceed
-				Global.pageManager.popPage()
+				Global.pageManager.popPage(toPage)
 			}
 		}
 	}

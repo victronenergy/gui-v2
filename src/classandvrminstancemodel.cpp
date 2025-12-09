@@ -107,6 +107,7 @@ bool ClassAndVrmInstance::setVrmInstance(int newVrmInstance)
 		qWarning() << "Cannot set VRM instance for" << m_item->uniqueId() << "device class not set!";
 		return false;
 	}
+	m_pendingVrmInstance = newVrmInstance;
 	m_item->setValue(QStringLiteral("%1:%2").arg(m_deviceClass).arg(newVrmInstance));
 	return true;
 }
@@ -116,7 +117,10 @@ bool ClassAndVrmInstance::hasVrmInstanceChanges() const
 	// Returns true if vrmInstance has changed after initialization. This may be due to
 	// setVrmInstance() being called, or due to the /ClassAndVrmInstance being changed on the
 	// backend by some other source.
-	return m_vrmInstance != m_initialVrmInstance;
+	return m_vrmInstance != m_initialVrmInstance
+			// True if setVrmInstance() has been called but the new value has not yet been written
+			// to the backend.
+			|| m_pendingVrmInstance >= 0;
 }
 
 void ClassAndVrmInstance::classAndVrmInstanceChanged(QVariant variant)
@@ -127,6 +131,7 @@ void ClassAndVrmInstance::classAndVrmInstanceChanged(QVariant variant)
 
 	m_deviceClass.clear();
 	m_vrmInstance = -1;
+	m_pendingVrmInstance = -1;
 	if (variant.isValid()) {
 		const QStringList classAndInstance = variant.toString().split(':');
 		bool instanceOk = false;

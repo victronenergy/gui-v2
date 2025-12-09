@@ -21,7 +21,10 @@ FocusScope {
 	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
-	property var tryPop // optional function: returns whether the page can be poppped
+	// Optional function that is called when the stack is about to pop this page. Return true if
+	// the page can be popped, or false to deny it and remain on the page.
+	// Takes one argument: the page to which the stack will be popped (null if popping all pages)
+	property var tryPop
 
 	readonly property bool __is_venus_gui_page__: true
 
