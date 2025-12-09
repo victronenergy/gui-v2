@@ -62,6 +62,7 @@ Item {
 				VeQuickItem { uid: root.motorDriveUid + "/Motor/Temperature" }
 				VeQuickItem { uid: root.motorDriveUid + "/Coolant/Temperature" }
 				VeQuickItem { uid: root.motorDriveUid + "/Controller/Temperature" }
+				VeQuickItem { uid: root.motorDriveUid + "/Motor/Torque" }
 			}
 			MockDataRangeAnimator {
 				active: Global.mainView && Global.mainView.mainViewVisible

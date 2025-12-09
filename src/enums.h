@@ -96,7 +96,8 @@ public:
 		Units_Altitude_Foot,
 		Units_PartsPerMillion,
 		Units_MicrogramPerCubicMeter,
-		Units_Lux
+		Units_Lux,
+		Units_NewtonMeter,
 	};
 	Q_ENUM(Units_Type)
 
