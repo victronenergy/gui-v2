@@ -14,7 +14,7 @@ BaseListLoader {
 	width: parent ? parent.width : 0
 	sourceComponent: numberOfAcInputs.value === 0 ? null
 				   : numberOfPhases.value === 1 ? singlePhaseAcInOut
-				   : numberOfPhases.value === 3 ? threePhaseTables : null
+				   : numberOfPhases.valid ? multiPhaseTables : null
 
 	VeQuickItem {
 		id: numberOfPhases
@@ -43,7 +43,7 @@ BaseListLoader {
 	}
 
 	Component {
-		id: threePhaseTables
+		id: multiPhaseTables
 
 		ThreePhaseIOTable {
 			width: parent ? parent.width : 0

@@ -24,6 +24,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/barebones.json
     data/mock/conf/maximal.json
     data/mock/conf/multi-rs.json
+    data/mock/conf/split-phase.json
     data/mock/conf/switch-pane.json
     data/mock/conf/services/alternator.json
     data/mock/conf/services/dcgenset.json
@@ -54,6 +55,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/motordrive.json
     data/mock/conf/services/mppt1.json
     data/mock/conf/services/mppt2.json
+    data/mock/conf/services/multiplus-split-phase.json
     data/mock/conf/services/multirs-smart.json
     data/mock/conf/services/network-bluetooth.json
     data/mock/conf/services/network-wifi-and-ethernet.json

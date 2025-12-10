@@ -55,6 +55,10 @@ If --mock is set but no configuration is specified, the 'maximal' configuration 
         - Single EV charger
     - DC genset with startstop1 generator
 
+- split-phase (MultiPlus II with split-phase setup)
+    - Inverter/chargers: MultiPlus II with two phases, with /Ac/State/SplitPhaseL2Passthru=1
+    - Pylontech battery
+
 
 ## Future mock configurations
 
