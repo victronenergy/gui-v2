@@ -131,10 +131,18 @@ Page {
 			}
 
 			ListSwitch {
+				id: electricPropulsionUIEnabled
 				//% "Boat page"
 				text: qsTrId("settings_display_boat_page")
 				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
 				writeAccessLevel: VenusOS.User_AccessType_User
+			}
+
+			ListNavigation {
+				//% "Boat page settings"
+				text: qsTrId("pagesettingsgeneral_boat_page_settings")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBoatPage.qml", {"title": text})
+				preferredVisible: electricPropulsionUIEnabled.checked
 			}
 
 			ListNavigation {

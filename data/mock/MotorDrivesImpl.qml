@@ -42,6 +42,13 @@ Item {
 				}
 			}
 
+			VeQuickItem {
+				uid: root.motorDriveUid + "/DeviceInstance"
+				onValueChanged: {
+					root.setSystemValue("/MotorDrive/0/DeviceInstance", value ?? 0)
+				}
+			}
+
 			// Update the max value of the RPM gauge on the Boat page.
 			VeQuickItem {
 				uid: root.motorDriveUid + "/Motor/RPM"
@@ -55,7 +62,6 @@ Item {
 			// Animate motordrive values.
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
-				VeQuickItem { uid: root.motorDriveUid + "/Dc/0/Power" }
 				VeQuickItem { uid: root.motorDriveUid + "/Dc/0/Voltage" }
 				VeQuickItem { uid: root.motorDriveUid + "/Dc/0/Current" }
 				VeQuickItem { uid: root.motorDriveUid + "/Dc/0/Temperature" }
@@ -74,6 +80,13 @@ Item {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: VenusOS.MotorDriveGear_Forward
 				VeQuickItem { uid: root.motorDriveUid + "/Motor/Direction" }
+			}
+			MockDataRangeAnimator {
+				active: Global.mainView && Global.mainView.mainViewVisible
+				minimumValue: -1000
+				maximumValue: 2000
+				stepSize: 500
+				VeQuickItem { uid: root.motorDriveUid + "/Dc/0/Power" }
 			}
 		}
 	}

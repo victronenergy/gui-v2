@@ -10,11 +10,11 @@ Item {
 	id: root
 
 	required property VeQuickItemsQuotient gps
-	required property MotorDrive motorDrive
+	required property MotorDrives motorDrives
 
 	property bool animationEnabled: false
 
-	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrive ? root.motorDrive.dcConsumption.quotient : null
+	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrives.dcConsumption.quotient
 	readonly property VeQuickItemsQuotient activeDataSource: root.gps.valid ? root.gps
 			: root.motorDriveDcConsumption.valid ? root.motorDriveDcConsumption
 			: null
@@ -131,10 +131,10 @@ Item {
 			id: motorDriveGauges
 
 			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
-			motorDrive: root.motorDrive
+			motorDrives: root.motorDrives
 			showDcConsumption: !root.gps.valid
 			visible: root.activeDataSource === root.motorDriveDcConsumption ||
-					 (root.activeDataSource === null && root.motorDrive.rpm.valid)
+					 (root.activeDataSource === null && root.motorDrives.singleMotorDrive.rpm.valid)
 		}
 
 		Label {
@@ -144,8 +144,8 @@ Item {
 			verticalAlignment: Text.AlignVCenter
 			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
 			font.pixelSize: Theme.font_size_h1
-			text: Units.formatNumber(Math.abs(root.motorDrive.rpm._numerator.value))
-			visible: root.motorDrive && root.motorDrive.rpm.numeratorUid && !isNaN(root.motorDrive.rpm.numerator)
+			text: Units.formatNumber(Math.abs(root.motorDrives.singleMotorDrive.rpm._numerator.value))
+			visible: root.motorDrives.singleMotorDrive.rpm.valid
 		}
 
 		Label {
@@ -175,10 +175,10 @@ Item {
 		radius: width/2
 		startAngle: outerGauge.startAngle
 		endAngle: outerGauge.endAngle
-		value: root.motorDrive ? root.motorDrive.rpm.percentage : 0
+		value: root.motorDrives.singleMotorDrive.rpm.percentage
 		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
 		animationEnabled: root.animationEnabled
-		visible: root.motorDrive.rpm.valid
+		visible: root.motorDrives.singleMotorDrive.rpm.valid
 
 		layer.enabled: !BackendConnection.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)

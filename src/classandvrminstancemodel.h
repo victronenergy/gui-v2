@@ -151,8 +151,40 @@ public:
 	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 };
 
+/*
+	Provides a filtered ClassAndVrmInstanceModel based on device classes.
+*/
+class FilteredClassAndVrmInstanceModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+	Q_PROPERTY(int count READ count NOTIFY countChanged)
+	Q_PROPERTY(QStringList deviceClasses READ deviceClasses WRITE setDeviceClasses NOTIFY deviceClassesChanged)
+
+public:
+	explicit FilteredClassAndVrmInstanceModel(QObject *parent = nullptr);
+
+	QStringList deviceClasses() const;
+	void setDeviceClasses(const QStringList &deviceClasses);
+
+	int count() const;
+
+Q_SIGNALS:
+	void countChanged();
+	void deviceClassesChanged();
+
+protected:
+	bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+
+private:
+	void updateCount();
+
+	QStringList m_deviceClasses;
+	int m_count = 0;
+};
+
 
 } /* VenusOS */
 } /* Victron */
 
-#endif // VICTRON_GUIV2_SWITCHABLEOUTPUTMODEL_H
+#endif // VICTRON_GUIV2_CLASSANDVRMINSTANCEMODEL_H
