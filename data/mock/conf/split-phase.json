@@ -1,0 +1,21 @@
+{
+    "files": [
+        ":/data/mock/conf/services/pylontech.json",
+        ":/data/mock/conf/services/multiplus-split-phase.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.settings": {
+            "/Settings/SystemSetup/AcInput1": 1,
+            "/Settings/SystemSetup/AcInput2": 0
+        },
+        "com.victronenergy.system": {
+            "/Ac/In/0/Connected": 1,
+            "/Ac/In/0/DeviceInstance": 276,
+            "/Ac/In/0/ServiceType": "vebus",
+            "/Ac/In/0/ServiceName": "com.victronenergy.vebus.ttyS5",
+            "/Ac/In/0/Source": 1,
+            "/ActiveBatteryService": "com.victronenergy.battery/512"
+        }
+    }
+}
