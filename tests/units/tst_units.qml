@@ -13,7 +13,7 @@ TestCase {
 		id: info
 	}
 
-	function expect(type, value, number, unit, hysteresis = false) {
+	function expect(type, value, number, unit, hysteresis = false, precision = -1, precisionAdjustmentAllowed = true) {
 		var numberOut = ""
 		var unitOut = ""
 		if (hysteresis) {
@@ -22,12 +22,12 @@ TestCase {
 			numberOut = info.number
 			unitOut = info.unit
 		} else {
-			const quantity = Units.getDisplayText(type, value)
+			const quantity = Units.getDisplayText(type, value, precision, precisionAdjustmentAllowed)
 			numberOut = quantity.number
 			unitOut = quantity.unit
 		}
 
-		console.log("Testing value", value, "(" + Units.defaultUnitString(type) +") ->", numberOut + unitOut)
+		console.log("Testing value", value, "(" + Units.defaultUnitString(type) +") ->", numberOut + unitOut, "expecting:", number + unit)
 		compare(numberOut, number)
 		compare(unitOut, unit)
 	}
@@ -113,13 +113,13 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				if (unit === VenusOS.Units_Volume_Litre) {
-					expect(unit, 12345, "12", "k" + unitString)
+					expect(unit, 12345, "12.35", "k" + unitString)
 					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
-					expect(unit, 12345, "12", "k" + unitString)
-					expect(unit, 123456789, "123", "M" + unitString)
-					expect(unit, 123456789012, "123", "G" + unitString)
-					expect(unit, 123456789012345, "123", "T" + unitString)
+					expect(unit, 12345, "12.35", "k" + unitString)
+					expect(unit, 123456789, "123.5", "M" + unitString)
+					expect(unit, 123456789012, "123.5", "G" + unitString)
+					expect(unit, 123456789012345, "123.5", "T" + unitString)
 				}
 			} else {
 				expect(unit, 1234, "1234", unitString)
@@ -150,10 +150,10 @@ TestCase {
 			expect(unit, 1234, "1234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
-				expect(unit, 12345, "12.3", "k" + unitString)
-				expect(unit, 123456789, "123", "M" + unitString)
-				expect(unit, 123556789012, "124", "G" + unitString)
-				expect(unit, 123456789012345, "123", "T" + unitString)
+				expect(unit, 12345, "12.35", "k" + unitString)
+				expect(unit, 123456789, "123.5", "M" + unitString)
+				expect(unit, 123556789012, "123.6", "G" + unitString)
+				expect(unit, 123456789012345, "123.5", "T" + unitString)
 			} else {
 				expect(unit, 12345, "12345", unitString)
 				expect(unit, 123456789, "123456789", unitString)
@@ -176,14 +176,15 @@ TestCase {
 			expect(unit, 0.255, "0.26", unitString)
 			expect(unit, 14, "14.00", unitString)
 			expect(unit, 15.55, "15.55", unitString)
+			expect(unit, 53.35, "53.35", unitString)
 			expect(unit, 100, "100", unitString)
 			expect(unit, 1234, "1234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
 				expect(unit, 12345, "12.35", "k" + unitString)
-				expect(unit, 123456789, "123", "M" + unitString)
-				expect(unit, 123556789012, "124", "G" + unitString)
-				expect(unit, 123456789012345, "123", "T" + unitString)
+				expect(unit, 123456789, "123.5", "M" + unitString)
+				expect(unit, 123556789012, "123.6", "G" + unitString)
+				expect(unit, 123456789012345, "123.5", "T" + unitString)
 			} else {
 				expect(unit, 12345, "12345", unitString)
 				expect(unit, 123456789, "123456789", unitString)
@@ -260,6 +261,46 @@ TestCase {
 		// Keep the scale when going 10% below the threshold
 		expect(unit, 9.5675, "9.568", "kWh", true) // hysteresis = true
 		expect(unit, 8.967, "8967", "Wh", true) // hysteresis = true
+	}
+
+	function test_precisionAdjustmentAllowed() {
+		// no matter what the units are, or what the default precision
+		// is for that unit, if we disallow precision adjustment
+		// then the displayed value should match our precision specification.
+		var units = [
+			VenusOS.Units_Temperature_Celsius, // precision = 0
+			VenusOS.Units_Hertz,               // precision = 1
+			VenusOS.Units_Volt_DC,             // precision = 2
+			VenusOS.Units_PowerFactor          // precision = 3
+		]
+
+		for (const unit of units) {
+			const unitString = Units.defaultUnitString(unit)
+			const hysteresis = false
+			const precision = 2
+			const precisionAdjustmentAllowed = false
+
+			expect(unit, NaN, "--", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 0, "0.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 0.64, "0.64", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 0.254, "0.25", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 0.255, "0.26", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 14, "14.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 15.55, "15.55", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 53.35, "53.35", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 100, "100.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			expect(unit, 1234, "1234.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+
+			if (Units.isScalingSupported(unit)) {
+				expect(unit, 12345, "12.35", "k" + unitString, hysteresis, precision, precisionAdjustmentAllowed)
+				expect(unit, 123456789, "123.46", "M" + unitString, hysteresis, precision, precisionAdjustmentAllowed)
+				expect(unit, 123556789012, "123.56", "G" + unitString, hysteresis, precision, precisionAdjustmentAllowed)
+				expect(unit, 123456789012345, "123.46", "T" + unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			} else {
+				expect(unit, 12345, "12345.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+				expect(unit, 1234567, "1234567.00", unitString, hysteresis, precision, precisionAdjustmentAllowed)
+			}
+		}
 	}
 
 	function test_unitMatchValue() {
