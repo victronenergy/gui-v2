@@ -323,6 +323,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	}
 
 	qreal scaledValue = value;
+	bool scalingOccurred = false;
 
 	// scale value if the unit of measure is scalable
 	if (isScalingSupported(unit)) {
@@ -365,6 +366,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 				quantity.unit = QStringLiteral("k\u2113");
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
 				scaledValue = scaledValue / 1000.0;
+				scalingOccurred = true;
 			}
 		} else {
 			for (const auto scale : scales) {
@@ -372,6 +374,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 					quantity.unit = scaleToString(scale) + quantity.unit;
 					quantity.scale = scale;
 					scaledValue = scaledValue / qPow(10, 3*scale);
+					scalingOccurred = true;
 					break;
 				}
 			}
@@ -397,21 +400,36 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		precision = 0;
 	}
 
-	// If the scaled value is large then possibly clip the precision by 1 or 2 fractional digits depending on initial precision.
-	// Only apply this logic to scaled values with 2 non fractional digits if the units are not Units_Volt_DC.
-	// i.e. don't clip precision for values like 53.35 V DC.
 	precision = precision < 0 ? defaultUnitPrecision(unit) : precision;
+
+	// If the value is large then possibly clip the precision by 1 or 2 fractional digits (depending on initial precision),
+	// to avoid showing more than 4 total digits.
+	// Expand precision for values which are scaled up, if we have available total digits (e.g. 1234 W -> 1.234 kW)
+	// to avoid showing less than 4 total digits.
+	// Don't consider the decimal point character to "take up" a digit
+	// when making this determination; only consider how many
+	// non-decimal digits and how many decimal digits there are.
 	const int digits = numberOfDigits(static_cast<int>(scaledValue));
-	if (precisionAdjustmentAllowed && (unit != VenusOS::Enums::Units_Volt_DC || digits > 2)) {
+	if (precisionAdjustmentAllowed) {
 		if (digits >= 4) {
 			precision = 0;
 		} else if (digits == 3) {
-			precision = precision >= 3 ? 1 : 0;
+			// Condition below is >=3 rather than >=1 to maintain
+			// backward behaviour compatibility; we need to clip
+			// digits of precision off non-scaled numbers which are
+			// in the hundreds, as enforced by the unit tests.
+			// I think this is wrong (i.e. I don't think that a value
+			// like 100.5 should be clipped to just 100 if precision = 1)
+			// but this behaviour was added specifically, so I assume
+			// it is important for something, see:
+			// d14c85b83f0b23d1378202c7b5a04b28e980cd7a
+			precision = (precision >= 3 || scalingOccurred) ? 1 : 0;
 		} else if (digits == 2) {
-			precision = precision >= 3 ? 2
-				: precision >= 1 ? 1
-				: 0;
+			precision = (precision >= 2 || scalingOccurred) ? 2 : precision;
+		} else if (digits == 1) {
+			precision = (precision == 3 || scalingOccurred) ? 3 : precision;
 		}
+
 	}
 
 	const qreal vFixedMultiplier = std::pow(10, precision);
