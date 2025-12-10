@@ -10,16 +10,25 @@ Item {
 	id: root
 
 	required property VeQuickItemsQuotient gps
-	required property MotorDrive motorDrive
+	required property MotorDrives motorDrives
 
 	property bool animationEnabled: false
 
-	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrive ? root.motorDrive.dcConsumption.quotient : null
+	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrives.dcConsumption.quotient
 	readonly property VeQuickItemsQuotient activeDataSource: root.gps.valid ? root.gps
 			: root.motorDriveDcConsumption.valid ? root.motorDriveDcConsumption
 			: null
+	readonly property bool regenerating: root.activeDataSource === root.motorDriveDcConsumption &&
+			root.motorDriveDcConsumption.numerator < 0
 
 	objectName: "LargeCenterGauge"
+
+	readonly property VeQuickItemsQuotient rpm: VeQuickItemsQuotient {
+		numeratorUid: root.motorDrives.main ? root.motorDrives.main.serviceUid + "/Motor/RPM" : ""
+		denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/RPM/Max" : ""
+		sourceUnit: VenusOS.Units_RevolutionsPerMinute
+		displayUnit: VenusOS.Units_RevolutionsPerMinute
+	}
 
 	ProgressArc {
 		id: outerGauge
@@ -34,11 +43,14 @@ Item {
 		height: width
 		radius: width/2
 		endAngle: Theme.geometry_boatPage_centerGauge_angularRange
-		value: root.activeDataSource ? root.activeDataSource.percentage : 0
+		value: root.activeDataSource ? Math.abs(root.activeDataSource.percentage) : 0
 		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
 		animationEnabled: root.animationEnabled
 		objectName: "centerGauge"
 		visible: root.activeDataSource === root.gps || root.activeDataSource === root.motorDriveDcConsumption
+
+		progressColor: regenerating ? Theme.color_green : Theme.color_ok
+		remainderColor: regenerating ? Theme.color_darkGreen : Theme.color_darkOk
 
 		layer.enabled: !BackendConnection.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
@@ -131,10 +143,10 @@ Item {
 			id: motorDriveGauges
 
 			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
-			motorDrive: root.motorDrive
+			motorDrives: root.motorDrives
 			showDcConsumption: !root.gps.valid
 			visible: root.activeDataSource === root.motorDriveDcConsumption ||
-					 (root.activeDataSource === null && root.motorDrive.rpm.valid)
+					 (root.activeDataSource === null && root.rpm.valid)
 		}
 
 		Label {
@@ -144,8 +156,8 @@ Item {
 			verticalAlignment: Text.AlignVCenter
 			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
 			font.pixelSize: Theme.font_size_h1
-			text: Math.abs(root.motorDrive.rpm._numerator.value)
-			visible: root.motorDrive && root.motorDrive.rpm.numeratorUid && !isNaN(root.motorDrive.rpm.numerator)
+			text: Math.abs(root.rpm._numerator.value)
+			visible: root.rpm.valid && !isNaN(root.rpm.numerator)
 		}
 
 		Label {
@@ -175,10 +187,10 @@ Item {
 		radius: width/2
 		startAngle: outerGauge.startAngle
 		endAngle: outerGauge.endAngle
-		value: root.motorDrive ? root.motorDrive.rpm.percentage : 0
+		value: root.rpm.percentage
 		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
 		animationEnabled: root.animationEnabled
-		visible: root.motorDrive.rpm.valid
+		visible: root.rpm.valid
 
 		layer.enabled: !BackendConnection.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
