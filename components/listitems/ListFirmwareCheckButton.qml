@@ -16,7 +16,7 @@ ListButton {
 		   ? qsTrId("settings_firmware_checking")
 			 //% "Press to check"
 		   : qsTrId("settings_firmware_press_to_check")
-	interactive: !Global.firmwareUpdate.busy
+	interactive: !Global.firmwareUpdate.checkingForUpdate
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	onClicked: {

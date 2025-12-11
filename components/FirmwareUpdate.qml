@@ -21,7 +21,7 @@ QtObject {
 		id: updateCheckTimer
 		repeat: false
 		running: false
-		onTriggered: root._finishUpdateCheck()
+		onTriggered: root._timeoutUpdateCheck()
 	}
 
 	property VeQuickItem _stateItem: VeQuickItem {
@@ -51,8 +51,18 @@ QtObject {
 				}
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
+				// If the device has no internet connectivity, its state value
+				// may be set to this value, even if the user didn't explicitly
+				// request a check for update.
+				// The `checkingForUpdate` value should only be true if a check
+				// was triggered explicitly by the user via the ListFirmwareCheckButton.
 				//% "Error while checking for firmware updates"
-				msg = qsTrId("settings_firmware_error_during_checking_for_updates")
+				let checkErrorMsg = qsTrId("settings_firmware_error_during_checking_for_updates")
+				if (root.checkingForUpdate) {
+					msg = checkErrorMsg
+				} else {
+					console.warn("/Firmware/State value set to ErrorDuringChecking by venus platform")
+				}
 				break
 			case FirmwareUpdater.Checking:
 				break
@@ -190,5 +200,11 @@ QtObject {
 		if (msg) {
 			Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
 		}
+	}
+
+	function _timeoutUpdateCheck() {
+		//% "Firmware check timed out"
+		let msg = qsTrId("settings_firmware_check_timed_out")
+		Global.showToastNotification(VenusOS.Notification_Info, msg, 10000)
 	}
 }
