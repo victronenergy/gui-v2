@@ -68,6 +68,7 @@ public:
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
 		int precision = -1,
+		bool precisionAdjustmentAllowed = true,
 		qreal unitMatchValue = qQNaN()) const;
 
 	quantityInfo getDisplayTextWithHysteresis(
@@ -75,6 +76,7 @@ public:
 		qreal value,
 		VenusOS::Enums::Units_Scale previousScale,
 		int precision = -1,
+		bool precisionAdjustmentAllowed = true,
 		qreal unitMatchValue = qQNaN(),
 		int formatHints = 0) const;
 

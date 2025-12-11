@@ -269,7 +269,7 @@ TestCase {
 		compare(quantity.unit, "TWh")
 
 		// choose scale based on different anchor value
-		quantity = Units.getDisplayText(unit, 19567890123, -1, 123456789)
+		quantity = Units.getDisplayText(unit, 19567890123, -1, true, 123456789)
 		compare(quantity.number, "19568")
 		compare(quantity.unit, "GWh")
 	}
