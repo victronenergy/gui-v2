@@ -40,9 +40,9 @@ ColumnLayout {
 		icon.source: "qrc:/images/generator.svg"
 		loadersActive: generatorInput && generatorInput.operational && Global.generators.model.firstObject
 		visible: loadersActive
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
 		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		quantityLabel.acInputMode: true
 		sideComponent: Item {
 			width: generatorLabel.width
 			height: generatorLabel.height
@@ -83,9 +83,9 @@ ColumnLayout {
 
 		title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
 		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: nonGeneratorInput
 		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		quantityLabel.acInputMode: true
 		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
 		visible: loadersActive
 
@@ -217,6 +217,7 @@ exported power v  0.4 |   /
 				: VenusOS.dcMeter_iconForMultipleTypes()
 		loadersActive: Global.dcInputs.model.count > 0
 		visible: loadersActive
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		quantityLabel.dataObject: Global.dcInputs
 		sideComponent: LoadGraph {
 			animationEnabled: root.animationEnabled
@@ -256,6 +257,7 @@ exported power v  0.4 |   /
 		//% "AC Loads"
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
 		quantityLabel.dataObject: Global.system.load.ac
 		loadersActive: true
 		sideComponent: LoadGraph {
@@ -285,6 +287,7 @@ exported power v  0.4 |   /
 		icon.source: "qrc:/images/dcloads.svg"
 		loadersActive: Global.system.dc.hasPower
 		visible: loadersActive
+		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		quantityLabel.dataObject: Global.system.dc
 		sideComponent: LoadGraph {
 			animationEnabled: root.animationEnabled

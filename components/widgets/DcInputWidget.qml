@@ -20,6 +20,7 @@ OverviewWidget {
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
 	title: VenusOS.dcMeter_typeToText(inputType)
+	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 	quantityLabel.dataObject: QtObject {
 		readonly property real power: inputDeviceModel.totalPower
 		readonly property real current: inputDeviceModel.totalCurrent
