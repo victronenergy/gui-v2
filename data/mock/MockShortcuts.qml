@@ -174,6 +174,10 @@ QtObject {
 				MockManager.setValue("com.victronenergy.modem/Connected", oldValue === 1 ? 0 : 1)
 			}
 			break
+		case Qt.Key_H:
+			const hasAcLoads = MockManager.value(Global.system.serviceUid + "/Ac/HasAcLoads")
+			MockManager.setValue(Global.system.serviceUid + "/Ac/HasAcLoads", hasAcLoads === 1 ? 0 : 1)
+			break
 		case Qt.Key_L:
 			Language.setCurrentLanguage((Language.current === Language.English ? Language.French : Language.English))
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)

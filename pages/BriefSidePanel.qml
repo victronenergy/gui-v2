@@ -257,7 +257,8 @@ exported power v  0.4 |   /
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
 		quantityLabel.dataObject: Global.system.load.ac
-		loadersActive: true
+		loadersActive: Global.system.hasAcLoads
+		visible: loadersActive
 		sideComponent: LoadGraph {
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)

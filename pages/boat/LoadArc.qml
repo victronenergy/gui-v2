@@ -15,8 +15,9 @@ Column {
 	required property MotorDrive motorDrive
 
 	readonly property int _rightGaugeCount: root.gps.valid && root.motorDrive.dcConsumption.quotient.valid ? 1 // just the motor drive
-											: dcLoadGauge.active ? 2 // both AC & DC
-											: 1  // just AC. The AC load gauge is always active
+											: dcLoadGauge.active && acLoadGauge.active ? 2 // both AC & DC
+											: dcLoadGauge.active || acLoadGauge.active ? 1 // just one
+											: 0
 
 	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
 
@@ -47,7 +48,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: !motorDriveLoadGauge.active
+		active: Global.system?.hasAcLoads && !motorDriveLoadGauge.active
 
 		sourceComponent: SideMultiGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)
@@ -79,7 +80,7 @@ Column {
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 		active: !motorDriveLoadGauge.active && Global.system.dc.hasPower
 		sourceComponent: SideGauge {
-			readonly property var gaugeParams: Gauges.rightGaugeParameters(1, _rightGaugeCount,)
+			readonly property var gaugeParams: Gauges.rightGaugeParameters(acLoadGauge.active ? 1 : 0, _rightGaugeCount, false)
 			// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
 			direction: PathArc.Counterclockwise
 			startAngle: gaugeParams.end
