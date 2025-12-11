@@ -144,7 +144,7 @@ Item {
 			verticalAlignment: Text.AlignVCenter
 			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
 			font.pixelSize: Theme.font_size_h1
-			text: Math.abs(root.motorDrive.rpm._numerator.value)
+			text: Units.formatNumber(Math.abs(root.motorDrive.rpm._numerator.value))
 			visible: root.motorDrive && root.motorDrive.rpm.numeratorUid && !isNaN(root.motorDrive.rpm.numerator)
 		}
 
