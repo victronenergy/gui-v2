@@ -85,7 +85,7 @@ BaseListItem {
 	function activate() {
 		if (root.interactive) {
 			// Issue #1964: userHasWriteAccess is ignored for ListNavigation
-			if (root.__is_venus_gui_list_navigation__ === true || checkWriteAccessLevel()) {
+			if (root.hasSubMenu || checkWriteAccessLevel()) {
 				root.clicked()
 			}
 		}
