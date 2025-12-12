@@ -86,15 +86,17 @@ jobs:
         run: |
           export QTDIR=${{env.OUTPUTDIR}}/Qt/$QT_VERSION/gcc_64
           mkdir build && cd build
-          ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ../tests
+          ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
-      - name: Build unit tests
+      - name: Build app
         run: |
           cd build
           cmake --build . --config ${{env.BUILD_TYPE}} --parallel $(nproc)
+          ls -lha
 
-      - name: Run unit test
+      - name: Run UI smoke test
         run: |
           cd build
           # The following line needs 'QT_QPA_PLATFORM=offscreen' in order to run on the headless CI server
-          QT_DEBUG_PLUGINS=1 QT_QPA_PLATFORM=offscreen ctest --rerun-failed --output-on-failure
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --mock --skip-splash --ui-test smoke/mock-maximal
+

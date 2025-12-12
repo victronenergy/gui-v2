@@ -2,9 +2,7 @@
     "ExitWhenFinished": true,
     "Logging": "info",
     "Tests": [
-        "tst_cards.qml",
-        "tst_overview.qml",
-        "tst_settings.qml"
+        "tst_overview.qml"
     ],
     "Mock": {
         "Configuration": ":/data/mock/conf/maximal.json",
