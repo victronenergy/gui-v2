@@ -23,7 +23,7 @@ Shape {
 	property color fillColor: "transparent"
 	property real progressAnimatedEndAngle: progress.animatedEndAngle
 
-	property real transitionAngle: visible ? startAngle + ((endAngle - startAngle) * Math.min(Math.max((isNaN(control.value) ? 0 : control.value), 0.0), 100.0) / 100.0) : 0
+	property real transitionAngle: visible ? startAngle + ((endAngle - startAngle) * Math.min(Math.max((isNaN(control.value) ? 0 : control.value), 0.0), 100.0) / 100.0) : startAngle
 
 	Arc {
 		id: remainder
