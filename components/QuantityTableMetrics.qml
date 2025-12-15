@@ -19,7 +19,8 @@ FontMetrics {
 
 		// Give the unit symbol some extra space on the column.
 		// Due to QTBUG-124588, use tightBoundingRect() instead of advanceWidth().
-		const maxTextRect = tightBoundingRect("99.99" + Units.defaultUnitString(unit))
+		const maxTextRect = tightBoundingRect("99.99"
+			+ (unit === VenusOS.Units_PowerFactor ? "PF" : Units.defaultUnitString(unit)))
 		return maxTextRect.width + maxTextRect.x
 	}
 
