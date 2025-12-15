@@ -57,9 +57,14 @@ Row {
 			value: quantityObject.numberValue
 			unit: quantityObject.unit
 			precision: quantityObject.precision
-			valueText: quantityObject.textValue || quantityInfo.number
-			valueColor: quantityObject.valueColor.valid ? quantityObject.valueColor : root.valueColor
-			unitColor: Theme.color_quantityTable_quantityUnit
+			valueText: unit === VenusOS.Units_PowerFactor ? "PF" : (quantityObject.textValue || quantityInfo.number)
+			unitText: unit === VenusOS.Units_PowerFactor ? (quantityObject.textValue || quantityInfo.number) : quantityInfo.unit
+			valueColor: unit === VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
+				: quantityObject.valueColor.valid ? quantityObject.valueColor
+				: root.valueColor
+			unitColor: unit !== VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
+				: quantityObject.valueColor.valid ? quantityObject.valueColor
+				: root.valueColor
 
 			Rectangle {
 				id: verticalSeparator
