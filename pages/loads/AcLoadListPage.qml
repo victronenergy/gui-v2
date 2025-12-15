@@ -20,8 +20,9 @@ Page {
 			readonly property alias columnWidth: loadSummary.fixedColumnWidth
 			readonly property alias columnSpacing: loadSummary.columnSpacing
 
+			visible: root.measurements.phaseCount > 1
 			width: parent?.width ?? 0
-			height: phaseTable.y + phaseTable.height + bottomInset
+			height: visible ? phaseTable.y + phaseTable.height + bottomInset : 0
 			bottomInset: Theme.geometry_gradientList_spacing
 
 			QuantityTableSummary {
@@ -110,8 +111,16 @@ Page {
 
 			name: device.name
 			power: powerItem.value ?? NaN
+			current: root.measurements.singlePhaseCurrentValid ? root.measurements.current : NaN
 			columnWidth: ListView.view.headerItem?.columnWidth ?? NaN
 			columnSpacing: ListView.view.headerItem?.columnSpacing ?? 0
+
+			// this is an AC device, so only show amps in PreferAmps mode,
+			// and only if we are not displaying the multiple-phases table above
+			// (as we want to remain consistent with the units we show, and we
+			// always display power in watts in the table above).
+			unitAmps: root.measurements.phaseCount <= 1 && !isNaN(current)
+				&& Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
 
 			// Status depends on the service:
 			// - evcharger: /Status

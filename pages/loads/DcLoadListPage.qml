@@ -27,8 +27,9 @@ Page {
 			readonly property alias columnWidth: loadSummary.fixedColumnWidth
 			readonly property alias columnSpacing: loadSummary.columnSpacing
 
+			visible: root.systemModel.count > 1
 			width: parent?.width ?? 0
-			height: dcsystemTable.y + dcsystemTable.height + bottomInset
+			height: visible ? dcsystemTable.y + dcsystemTable.height + bottomInset : 0
 			bottomInset: Theme.geometry_gradientList_spacing
 
 			QuantityTableSummary {
@@ -91,9 +92,18 @@ Page {
 
 			name: device.name
 			power: dcDevice.power ?? NaN
+			current: dcDevice.current ?? NaN
 			temperature: temperatureItem.value ?? NaN
 			columnWidth: ListView.view.headerItem?.columnWidth ?? NaN
 			columnSpacing: ListView.view.headerItem?.columnSpacing ?? 0
+
+			// this is a DC device, so prefer Amps in Mixed display mode,
+			// but only if we are not displaying the multiple-dcsystems table above
+			// (as we want to remain consistent with the units we show, and we
+			// always display power in watts in the table above).
+			unitAmps: root.systemModel.count <= 1 && !isNaN(current)
+				&& (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+				 || Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed)
 
 			// Status depends on the service:
 			// - dcdc: /State

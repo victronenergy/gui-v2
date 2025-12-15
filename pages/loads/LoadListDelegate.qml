@@ -15,9 +15,12 @@ BaseListItem {
 	property string statusText
 	property real temperature: NaN
 	property real power: NaN
+	property real current: NaN
 
 	property real columnWidth: NaN
 	property real columnSpacing
+
+	property bool unitAmps: false
 
 	signal clicked
 
@@ -85,9 +88,9 @@ BaseListItem {
 		}
 
 		QuantityColumn {
-			title: CommonWords.total_power
-			value: root.power
-			unit: VenusOS.Units_Watt
+			title: root._unitAmps ? CommonWords.current_amps : CommonWords.total_power
+			value: root._unitAmps ? root.current : root.power
+			unit:  root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 		}
 
 		CP.ColorImage {
