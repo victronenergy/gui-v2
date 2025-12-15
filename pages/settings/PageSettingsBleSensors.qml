@@ -82,6 +82,14 @@ Page {
 				}
 			}
 
+			ListSwitch {
+				id: udpListen
+				//% "Listen on UDP socket"
+				text: qsTrId("settings_listen_udp_socket")
+				dataItem.uid: root.bleServiceUid + "/Socket/Enabled"
+				preferredVisible: enable.checked
+			}
+
 			SettingsColumn {
 				width: parent ? parent.width : 0
 				preferredVisible: sensorRepeater.count > 0
