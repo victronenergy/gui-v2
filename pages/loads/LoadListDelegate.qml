@@ -23,6 +23,7 @@ BaseListItem {
 
 	width: parent?.width ?? 0
 	height: Theme.geometry_loadListPage_item_height
+	hasSubMenu: pressArea.enabled
 
 	component QuantityColumn : Column {
 		property alias title: quantityTitle.text
