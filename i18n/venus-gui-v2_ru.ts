@@ -71,7 +71,7 @@
       <translation>Состояние</translation>
     </message>
     <message id="settings_firmware_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="67"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="77"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Устанавливается %1...</translation>
@@ -118,7 +118,7 @@
       <translation>Выход солнечной энергии</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="183"/>
+      <location filename="../../data/System.qml" line="188"/>
       <source>External control</source>
       <translation>Внешнее управление</translation>
     </message>
@@ -683,7 +683,7 @@
       <translation>PV инвертер в фазе 2, положение</translation>
     </message>
     <message id="settings_canbus_profile">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="46"/>
       <source>CAN-bus profile</source>
       <translation>Профиль CAN-шины</translation>
     </message>
@@ -718,47 +718,47 @@
       <translation>Устройства</translation>
     </message>
     <message id="settings_canbus_nmea2000out">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="67"/>
       <source>NMEA2000-out</source>
       <translation>Выход NMEA 2000</translation>
     </message>
     <message id="settings_canbus_unique_id_select">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="94"/>
       <source>Unique identity number selector</source>
       <translation>Селектор уникальных идентификационных номеров</translation>
     </message>
     <message id="settings_canbus_unique_id_wait">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="90"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="106"/>
       <source>Please wait, changing and checking the unique number takes a while</source>
       <translation>Пожалуйста, подождите: изменение и проверка уникального номера занимает определенное время</translation>
     </message>
     <message id="settings_canbus_unique_id_vecan_description">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="99"/>
       <source>Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network.</source>
       <translation>Вышеуказанный параметр задает, какой блок уникальных идентификационных номеров использовать для уникальных идентификационных номеров NAME в поле PGN 60928 NAME. Изменяется только при использовании нескольких устройств GX в одной сети VE.Can.</translation>
     </message>
     <message id="settings_canbus_unique_id_rvc_description">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="102"/>
       <source>Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network.</source>
       <translation>Вышеуказанный параметр задает, какой блок уникальных идентификационных номеров использовать для серийного номера в поле DGN 60928 ADDRESS_CLAIM. Изменяется только при использовании нескольких устройств GX в одной сети RV-C.</translation>
     </message>
     <message id="settings_canbus_unique_id_choose">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="123"/>
       <source>Check Unique id numbers</source>
       <translation>Проверка уникальных идентификационных номеров</translation>
     </message>
     <message id="settings_canbus_unique_id_press_to_check">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="128"/>
       <source>Press to check</source>
       <translation type="unfinished">Нажмите для проверки</translation>
     </message>
     <message id="settings_canbus_unique_id_conflict">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="141"/>
       <source>There is another device connected with this unique number, please select a new number.</source>
       <translation>К этому уникальному номеру подключено другое устройство, пожалуйста, выберите новый номер.</translation>
     </message>
     <message id="settings_canbus_unique_id_ok">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="149"/>
       <source>OK: No other device is connected with this unique number.</source>
       <translation>ОК: ни одно другое устройство не связано с этим уникальным номером.</translation>
     </message>
@@ -1654,12 +1654,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Медленный заряд</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="189"/>
+      <location filename="../../data/System.qml" line="194"/>
       <source>Sustain</source>
       <translation>Удержание</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="192"/>
+      <location filename="../../data/System.qml" line="197"/>
       <source>Recharge</source>
       <translation>Зарядка</translation>
     </message>
@@ -2329,12 +2329,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Локальный IP-адрес</translation>
     </message>
     <message id="settings_vecan_instance_zero_warning">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="36"/>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
       <translation>Осторожно, для систем ESS, а также систем с управляемой батареей экземпляр устройства CAN-bus должен оставаться настроенным на 0. Дополнительную информацию смотрите в руководстве GX.</translation>
     </message>
     <message id="settings_vecan_nad">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="53"/>
       <source>Network Address</source>
       <translation>Сетевой адрес</translation>
     </message>
@@ -2430,22 +2430,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>Неподключенный %1</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="136"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="138"/>
       <source>Reboot now?</source>
       <translation>Перезагрузиться?</translation>
     </message>
     <message id="settings_vrm_device_instances_reboot_now_description">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="139"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="141"/>
       <source>VRM instance changes will not be applied until the device is rebooted.</source>
       <translation>Изменения экземпляра VRM не будут применены до перезагрузки устройства.</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooting">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="159"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="161"/>
       <source>Device is rebooting...</source>
       <translation>Устройство перезагружается...</translation>
     </message>
     <message id="settings_vrm_device_instances_rebooted">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="162"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="164"/>
       <source>Device has been rebooted.</source>
       <translation>Устройство было перезагружено.</translation>
     </message>
@@ -2460,25 +2460,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>Сигнализация о высоком напряжении батареи</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="643"/>
+      <location filename="../../components/CommonWords.qml" line="647"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Последняя ошибка</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="646"/>
+      <location filename="../../components/CommonWords.qml" line="650"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Предпоследняя ошибка</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="649"/>
+      <location filename="../../components/CommonWords.qml" line="653"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Третья последняя ошибка</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="652"/>
+      <location filename="../../components/CommonWords.qml" line="656"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Четвертая последняя ошибка</translation>
@@ -3885,12 +3885,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Устройства Smappee bus</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="669"/>
+      <location filename="../../components/CommonWords.qml" line="673"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Эта настройка отключена, если подключен цифровой мультиконтроллер.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="658"/>
+      <location filename="../../components/CommonWords.qml" line="662"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Эта настройка отключена, если подключена система VE.Bus BMS.</translation>
     </message>
@@ -5144,7 +5144,7 @@ Do you want to continue?</source>
       <translation>Отмена</translation>
     </message>
     <message id="settings_vrm_device_instances_close">
-      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="145"/>
+      <location filename="../../pages/settings/PageVrmDeviceInstances.qml" line="147"/>
       <source>Close</source>
       <translation>Закрыть</translation>
     </message>
@@ -5207,33 +5207,33 @@ Do you want to continue?</source>
       <translation>Ошибка при проверке обновлений микропрограммы</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
-      <location filename="../../components/FirmwareUpdate.qml" line="55"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="60"/>
       <source>Error while checking for firmware updates</source>
       <translation type="unfinished">Ошибка при проверке обновлений микропрограммы</translation>
     </message>
     <message id="settings_firmware_downloading_and_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="63"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="73"/>
       <source>Downloading and installing firmware %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Загрузка и установка прошивки %1...</translation>
     </message>
     <message id="settings_firmware_installing_firmware">
-      <location filename="../../components/FirmwareUpdate.qml" line="70"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="80"/>
       <source>Installing firmware...</source>
       <translation>Устанавливается прошивка...</translation>
     </message>
     <message id="settings_firmware_error_during_installation">
-      <location filename="../../components/FirmwareUpdate.qml" line="75"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="85"/>
       <source>Error during firmware installation</source>
       <translation>Ошибка при установке микропрограммы</translation>
     </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="185"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="195"/>
       <source>No newer version available</source>
       <translation>Нет более свежей версии</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="188"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="198"/>
       <source>No firmware found</source>
       <translation>Прошивка не обнаружена</translation>
     </message>
@@ -6028,7 +6028,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Запланировано</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="195"/>
+      <location filename="../../data/System.qml" line="200"/>
       <source>Scheduled</source>
       <translation>Запланировано</translation>
     </message>
@@ -6096,102 +6096,102 @@ Do you want to continue?</source>
       <translation>Выравнивание</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="125"/>
+      <location filename="../../data/System.qml" line="130"/>
       <source>AES mode</source>
       <translation>Низкая мощность</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="128"/>
+      <location filename="../../data/System.qml" line="133"/>
       <source>Fault condition</source>
       <translation>Состояние неисправности</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="131"/>
+      <location filename="../../data/System.qml" line="136"/>
       <source>Bulk charging</source>
       <translation>Насыпная зарядка</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="134"/>
+      <location filename="../../data/System.qml" line="139"/>
       <source>Absorption charging</source>
       <translation>Абсорбционная зарядка</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="137"/>
+      <location filename="../../data/System.qml" line="142"/>
       <source>Float charging</source>
       <translation>Зарядка поплавка</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="140"/>
+      <location filename="../../data/System.qml" line="145"/>
       <source>Storage mode</source>
       <translation>Режим хранения</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="143"/>
+      <location filename="../../data/System.qml" line="148"/>
       <source>Equalization charging</source>
       <translation>Уравнительная зарядка</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="146"/>
+      <location filename="../../data/System.qml" line="151"/>
       <source>Pass-thru</source>
       <translation>Проходная</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="149"/>
+      <location filename="../../data/System.qml" line="154"/>
       <source>Inverting</source>
       <translation>Инвертирование</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="152"/>
+      <location filename="../../data/System.qml" line="157"/>
       <source>Assisting</source>
       <translation>Помощь</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="155"/>
+      <location filename="../../data/System.qml" line="160"/>
       <source>Power supply mode</source>
       <translation>Режим поддержки мощности</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="158"/>
+      <location filename="../../data/System.qml" line="163"/>
       <source>Sustain</source>
       <translation type="unfinished">Удержание</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="162"/>
+      <location filename="../../data/System.qml" line="167"/>
       <source>Wake up</source>
       <translation>Проснись</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="165"/>
+      <location filename="../../data/System.qml" line="170"/>
       <source>Repeated absorption</source>
       <translation>Повторная абсорбция</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="168"/>
+      <location filename="../../data/System.qml" line="173"/>
       <source>Auto equalize</source>
       <translation>Автоматическое выравнивание</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="171"/>
+      <location filename="../../data/System.qml" line="176"/>
       <source>Battery safe</source>
       <translation>Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="174"/>
+      <location filename="../../data/System.qml" line="179"/>
       <source>Load detect</source>
       <translation>Обнаружение нагрузки</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="177"/>
+      <location filename="../../data/System.qml" line="182"/>
       <source>Blocked</source>
       <translation>Заблокировано</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="180"/>
+      <location filename="../../data/System.qml" line="185"/>
       <source>Test</source>
       <translation>Тест</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="198"/>
+      <location filename="../../data/System.qml" line="203"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
@@ -7270,11 +7270,6 @@ Do you want to continue?</source>
       <source>Are you sure that you want to reset Node-RED to factory defaults? This will delete all of your flows.</source>
       <translation>Вы уверены, что хотите сбросить Node-RED к заводским настройкам? Это приведет к удалению всех ваших потоков.</translation>
     </message>
-    <message id="settings_logging_vrm_portal">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="45"/>
-      <source>VRM Portal</source>
-      <translation>Портал удаленного мониторинга Виктрон (VRM)</translation>
-    </message>
     <message id="settings_vrm_portal_readonly">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="53"/>
       <source>Read-only</source>
@@ -7456,12 +7451,12 @@ Do you want to continue?</source>
       <translation>Проводной</translation>
     </message>
     <message id="settings_vecan_device_instance">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="34"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="41"/>
       <source>VE.Can Device Instance</source>
       <translation>Экземпляр устройства VE.Can</translation>
     </message>
     <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="32"/>
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="43"/>
       <source>VE.Can Instance# %1</source>
       <translation>Экземпляр VE.Can# %1</translation>
     </message>
@@ -7892,19 +7887,19 @@ Do you want to continue?</source>
       <translation>Доходность сегодня</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="637"/>
+      <location filename="../../components/CommonWords.qml" line="641"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="663"/>
+      <location filename="../../components/CommonWords.qml" line="667"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="674"/>
+      <location filename="../../components/CommonWords.qml" line="678"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -7925,7 +7920,7 @@ Do you want to continue?</source>
       <translation>Инверторный режим</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="79"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="89"/>
       <source>Firmware installed, device rebooting</source>
       <translation>Прошивка установлена, устройство перезагружается</translation>
     </message>
@@ -7935,7 +7930,7 @@ Do you want to continue?</source>
       <translation>Да, отпишите меня</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="391"/>
+      <location filename="../../pages/BriefPage.qml" line="392"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Высокая загрузка системы, закрытие боковой панели для снижения нагрузки на процессор</translation>
     </message>
@@ -8618,17 +8613,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>AC ток</translation>
     </message>
     <message id="devicelist_motordrive_motorrpm">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="22"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="49"/>
       <source>Motor RPM</source>
       <translation>Обороты мотора</translation>
     </message>
     <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="30"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="72"/>
       <source>Motor Temperature</source>
       <translation>Температура мотора</translation>
     </message>
     <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="86"/>
       <source>Controller Temperature</source>
       <translation>Температура контроллера</translation>
     </message>
@@ -8835,42 +8830,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Следующий</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="500"/>
+      <location filename="../../src/units.cpp" line="505"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="502"/>
+      <location filename="../../src/units.cpp" line="507"/>
       <source>NE</source>
       <translation>Нет</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="504"/>
+      <location filename="../../src/units.cpp" line="509"/>
       <source>E</source>
       <translation>Эл. почта</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="506"/>
+      <location filename="../../src/units.cpp" line="511"/>
       <source>SE</source>
       <translation>Просмотреть</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="508"/>
+      <location filename="../../src/units.cpp" line="513"/>
       <source>S</source>
       <translation>часы_короткие</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="510"/>
+      <location filename="../../src/units.cpp" line="515"/>
       <source>SW</source>
       <translation>NE</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="512"/>
+      <location filename="../../src/units.cpp" line="517"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="514"/>
+      <location filename="../../src/units.cpp" line="519"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -8938,7 +8933,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Максимальное число оборотов в минуту</translation>
     </message>
     <message id="devicelist_motordrive_coolanttemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="79"/>
       <source>Coolant Temperature</source>
       <translation>Температура хладагента</translation>
     </message>
@@ -9776,12 +9771,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>BatteryLife динамически регулирует минимальное состояние заряда аккумулятора, чтобы предотвратить глубокие разряды и обеспечить регулярные полные заряды, что помогает продлить срок службы аккумулятора и поддерживать надежность системы.</translation>
     </message>
     <message id="settings_canbus_rvc_reverse_current_polarity">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="85"/>
       <source>Reverse current polarity</source>
       <translation>Обратная полярность тока</translation>
     </message>
     <message id="settings_canbus_rvc_reverse_current_polarity_description">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="89"/>
       <source>When enabled, the current polarity in the CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1, and SOLAR_CONTROLLER_BATTERY_STATUS DGNs is reversed.</source>
       <translation>При включении полярность тока в DGN CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1 и SOLAR_CONTROLLER_BATTERY_STATUS меняется на обратную.</translation>
     </message>
@@ -10186,97 +10181,97 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Активный режим</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="99"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="102"/>
       <source>Hybrid droop parameters</source>
       <translation>Параметры гибридного регулирования</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="105"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="108"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорная активная мощность (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="112"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="115"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорная частота (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="119"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="122"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Наклон характеристики частотной зависимости мощности (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="126"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="129"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорная реактивная мощность (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="136"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорное напряжение (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="140"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="143"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Наклон характеристики зависимости напряжения от реактивной мощности (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="146"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="149"/>
       <source>Minimum and maximum parameters</source>
       <translation>Минимальные и максимальные параметры</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="151"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="154"/>
       <source>Allowed active power range</source>
       <translation>Разрешенный диапазон активной мощности</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="159"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
       <source>Allowed reactive power range</source>
       <translation>Разрешенный диапазон реактивной мощности</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="176"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="179"/>
       <source>P-Q direct drive settings</source>
       <translation>Настройки прямого управления P-Q</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="181"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="184"/>
       <source>Active power setpoint (P)</source>
       <translation>Уставка активной мощности (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="191"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Уставка реактивной мощности (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="195"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="198"/>
       <source>Allowed frequency range</source>
       <translation>Разрешенный диапазон частот</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="203"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
       <source>Allowed voltage range</source>
       <translation>Разрешенный диапазон напряжений</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="220"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="223"/>
       <source>V-f direct drive settings</source>
       <translation>Настройки прямого управления V-f</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="225"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="228"/>
       <source>Voltage setpoint (U)</source>
       <translation>Уставка напряжения (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="232"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="235"/>
       <source>Frequency setpoint (f)</source>
       <translation>Уставка частоты (f)</translation>
     </message>
     <message id="pagesettingsintegrations_canopenmotordrive">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="189"/>
       <source>CANopen motor drives</source>
       <translation>Приводы CANopen Motor</translation>
     </message>
@@ -10286,7 +10281,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Плагины UI</translation>
     </message>
     <message id="devicelist_motordrive_motordirectioninverted">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="93"/>
       <source>Motor Direction Inverted</source>
       <translation>Инвертированное направление двигателя</translation>
     </message>
@@ -10490,7 +10485,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>CANopen E-drive (500 кбит/с)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="39"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="40"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 – %3%4</translation>
@@ -10637,6 +10632,31 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <extracomment>%1 = name of the device</extracomment>
       <translation/>
     </message>
+    <message id="settings_canbus_nmea2000out_alerts">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="76"/>
+      <source>NMEA2000 outbound alerts</source>
+      <translation/>
+    </message>
+    <message id="settings_logging_vrm_portal">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="45"/>
+      <source>VRM Portal access level</source>
+      <translation/>
+    </message>
+    <message id="settings_firmware_check_timed_out">
+      <location filename="../../components/FirmwareUpdate.qml" line="207"/>
+      <source>Firmware check timed out</source>
+      <translation/>
+    </message>
+    <message id="devicelist_motordrive_motordirection">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="57"/>
+      <source>Motor Direction</source>
+      <translation/>
+    </message>
+    <message id="devicelist_motordrive_motortorque">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="64"/>
+      <source>Motor Torque</source>
+      <translation/>
+    </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
       <source>Unknown</source>
@@ -10663,12 +10683,12 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation type="unfinished">AC нагрузки</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="284"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
       <source>DC Loads</source>
       <translation type="unfinished">dcLoads</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="450"/>
+      <location filename="../../pages/OverviewPage.qml" line="490"/>
       <source>Overview</source>
       <translation type="unfinished">Обзор</translation>
     </message>
@@ -10908,10 +10928,20 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>CRE</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="843"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="855"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="860"/>
       <source>Unknown error: </source>
       <translation>Неизвестная ошибка:</translation>
+    </message>
+  </context>
+  <context>
+    <name>CUMMINS</name>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="1034"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="1040"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="1046"/>
+      <source>Unknown error: </source>
+      <translation/>
     </message>
   </context>
   <context>
@@ -11291,8 +11321,8 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>DEIF</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="857"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="862"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="874"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="879"/>
       <source>Unknown error: </source>
       <translation>Неизвестная ошибка:</translation>
     </message>
@@ -11300,8 +11330,8 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>DSE</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="242"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="247"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="259"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="264"/>
       <source>Unknown error: </source>
       <translation>Неизвестная ошибка:</translation>
     </message>
@@ -11347,679 +11377,679 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>FischerPanda</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="87"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="92"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="109"/>
       <source>Unknown error: </source>
       <translation>Неизвестная ошибка:</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="98"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="115"/>
       <source>No error</source>
       <translation>Без ошибок</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="101"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="118"/>
       <source>AC voltage L1 too low</source>
       <translation>AC напряжение L1 слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="101"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="118"/>
       <source>AC voltage too low</source>
       <translation>AC напряжение слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="102"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
       <source>AC voltage L1 too high</source>
       <translation>Напряжение переменного тока L1 слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="102"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
       <source>AC voltage too high</source>
       <translation>Напряжение переменного тока слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
       <source>AC frequency L1 too low</source>
       <translation>Частота переменного тока L1 слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
       <source>AC frequency too low</source>
       <translation>Частота переменного тока слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
       <source>AC frequency L1 too high</source>
       <translation>Частота переменного тока L1 слишком высока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
       <source>AC frequency too high</source>
       <translation>Частота переменного тока слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="105"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
       <source>AC current L1 too high</source>
       <translation>AC ток L1 слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="105"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
       <source>AC current too high</source>
       <translation>AC ток слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="106"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
       <source>AC power L1 too high</source>
       <translation>Мощность переменного тока L1 слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="106"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
       <source>AC power too high</source>
       <translation>AC мощность слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="107"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="231"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="124"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="248"/>
       <source>Emergency stop</source>
       <translation>Аварийный выключатель</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="108"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="125"/>
       <source>Servo current too high</source>
       <translation>Ток системы автоматического регулирования слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="109"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="126"/>
       <source>Oil pressure too low</source>
       <translation>Давление масла слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="110"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="127"/>
       <source>Oil pressure too high</source>
       <translation>Давление масла слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="111"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="128"/>
       <source>Engine temperature too low</source>
       <translation>Температура двигателя слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="112"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="129"/>
       <source>Engine temperature too high</source>
       <translation>Температура двигателя слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="113"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="130"/>
       <source>Winding temperature too low</source>
       <translation>Температура обмотки слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="114"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="131"/>
       <source>Winding temperature too high</source>
       <translation>Температура обмотки слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="115"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="132"/>
       <source>Exhaust temperature too low</source>
       <translation>Температура выхлопа слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="116"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="133"/>
       <source>Exhaust temperature too high</source>
       <translation>Температура выхлопа слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="117"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="134"/>
       <source>Electronic temperature low</source>
       <translation>Низкая электронная температура</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="118"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="135"/>
       <source>Electronic temperature high</source>
       <translation>Высокая температура электроники</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="136"/>
       <source>Starter voltage too low</source>
       <translation>Слишком низкое напряжение стартера</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="137"/>
       <source>Starter current too high</source>
       <translation>Ток стартера слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="138"/>
       <source>Glow voltage too low</source>
       <translation>Слишком низкое напряжение накала</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="139"/>
       <source>Glow current too high</source>
       <translation>Ток накала слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="140"/>
       <source>Cold-Start-Aid voltage too high</source>
       <translation>Слишком высокое напряжение системы Cold-Start-Aid</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="124"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="141"/>
       <source>Cold-Start-Aid current too high</source>
       <translation>Слишком высокий ток холодного пуска-помощи</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="125"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="142"/>
       <source>Fuel holding magnet voltage too low</source>
       <translation>Слишком низкое напряжение магнита удержания топлива</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="126"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="143"/>
       <source>Fuel holding magnet current too high</source>
       <translation>Ток топливного удерживающего магнита слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="127"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="144"/>
       <source>Stop solenoid hold coil voltage too low</source>
       <translation>Слишком низкое напряжение удерживающей катушки электромагнита останова</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="128"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="145"/>
       <source>Stop solenoid hold coil current too high</source>
       <translation>Ток обмотки удержания электроклапана остановки слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="129"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="146"/>
       <source>Stop solenoid pull coil voltage too low </source>
       <translation>Слишком низкое напряжение тяговой катушки электромагнита останова</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="130"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="147"/>
       <source>Stop solenoid pull coil current too high</source>
       <translation>Ток обмотки притягивания электроклапана остановки слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="131"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="148"/>
       <source>Fan/water pump voltage too low</source>
       <translation>Слишком низкое напряжение вентилятора/водяного насоса</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="132"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="149"/>
       <source>Fan/water pump current too high</source>
       <translation>Слишком высокий ток вентилятора/водяного насоса</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="133"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="150"/>
       <source>Current sensor voltage low</source>
       <translation>Низкое напряжение датчика тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="134"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="151"/>
       <source>Current sensor current high</source>
       <translation>Высокий ток датчика тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="135"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="152"/>
       <source>Boost output voltage too low</source>
       <translation>Слишком низкое выходное напряжение буста</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="136"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="153"/>
       <source>Boost output current too high</source>
       <translation>Выходной ток наддува слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="137"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="154"/>
       <source>Bus supply voltage too low</source>
       <translation>Слишком низкое напряжение питания шины</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="138"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="155"/>
       <source>Bus supply current too high</source>
       <translation>Слишком высокий ток питания шины</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="139"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="156"/>
       <source>Starter battery voltage too low</source>
       <translation>Напряжение стартерной батареи слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="140"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="157"/>
       <source>Starter battery voltage too high</source>
       <translation>Напряжение стартерной батареи слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="141"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="158"/>
       <source>Rotation too low</source>
       <translation>Вращение слишком медленное</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="142"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="159"/>
       <source>Rotation too high</source>
       <translation>Вращение слишком быстрое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="143"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="160"/>
       <source>Unexpected stop/problem with fuel supply</source>
       <translation>Неожиданная остановка/проблема с подачей топлива</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="144"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="161"/>
       <source>Power contactor voltage too low</source>
       <translation>Слишком низкое напряжение силового контактора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="145"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="162"/>
       <source>Power contactor current too high</source>
       <translation>Ток контактора мощности слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="146"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="163"/>
       <source>AC voltage L2 too low</source>
       <translation>AC напряжение L2 слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="147"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="164"/>
       <source>AC voltage L2 too high</source>
       <translation>Напряжение переменного тока L2 слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="148"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="165"/>
       <source>AC frequency L2 too low</source>
       <translation>AC частота L2 слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="149"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="166"/>
       <source>AC frequency L2 too high</source>
       <translation>Частота переменного тока L2 слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="150"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="167"/>
       <source>AC current L2 too high</source>
       <translation>Переменный ток L2 слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="151"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="168"/>
       <source>AC power L2 too high</source>
       <translation>AC мощность L2 слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="152"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="169"/>
       <source>AC voltage L3 too low</source>
       <translation>Напряжение переменного тока L3 слишком низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="153"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="170"/>
       <source>AC voltage L3 too high</source>
       <translation>AC напряжение L3 слишком высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="154"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="171"/>
       <source>AC frequency L3 too low</source>
       <translation>Частота переменного тока L3 слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="155"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="172"/>
       <source>AC frequency L3 too high</source>
       <translation>Частота переменного тока L3 слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="156"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="173"/>
       <source>AC current L3 too high</source>
       <translation>AC ток L3 слишком высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="157"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="174"/>
       <source>AC power L3 too high</source>
       <translation>AC мощность L3 слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="158"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="175"/>
       <source>Output Inverter voltage too low</source>
       <translation>Слишком низкое выходное напряжение преобразователя частоты</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="159"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="176"/>
       <source>Output Inverter current too  high</source>
       <translation>Слишком большой выходной ток инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="160"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="177"/>
       <source>Universal output (1A) voltage too low</source>
       <translation>Слишком низкое напряжение универсального выхода (1A)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="161"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="178"/>
       <source>Universal output (1A) current too high</source>
       <translation>Слишком большой ток универсального выхода (1A)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="162"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="179"/>
       <source>Universal output (5A) voltage too low</source>
       <translation>Слишком низкое напряжение универсального выхода (5A)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="163"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="180"/>
       <source>Universal output (5A) current too high</source>
       <translation>Слишком высокий ток универсального выхода (5A)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="164"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="181"/>
       <source>AGT DC voltage 1 low</source>
       <translation>Напряжение постоянного тока AGT 1 низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="165"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="182"/>
       <source>AGT DC voltage 1 high</source>
       <translation>Напряжение постоянного тока AGT 1 высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="166"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="183"/>
       <source>AGT DC current 1 low</source>
       <translation>AGT Постоянный ток 1 низкий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="167"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="184"/>
       <source>AGT DC current 1 high</source>
       <translation>AGT Постоянный ток 1 высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="168"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="185"/>
       <source>AGT DC voltage 2 low</source>
       <translation>Напряжение постоянного тока AGT 2 низкое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="169"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="186"/>
       <source>AGT DC voltage 2 high</source>
       <translation>Напряжение постоянного тока AGT 2 высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="170"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="187"/>
       <source>AGT DC current 2 low</source>
       <translation>Постоянный ток AGT 2 низкий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="171"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="188"/>
       <source>AGT DC current 2 high</source>
       <translation>Постоянный ток AGT 2 высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="172"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="189"/>
       <source>AGT B6 cooler low</source>
       <translation>Низкий радиатор AGT B6</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="173"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="190"/>
       <source>AGT B6 cooler high</source>
       <translation>Кулер AGT B6 высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="174"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="191"/>
       <source>AGT B6 rail (-) low</source>
       <translation>AGT B6 рельс (-) низкий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="175"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="192"/>
       <source>AGT B6 rail (-) high</source>
       <translation>AGT B6 рельс (-) высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="176"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="193"/>
       <source>AGT B6 rail (+) low</source>
       <translation>AGT B6 рельс (+) низкий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="177"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="194"/>
       <source>AGT B6 rail (+) high</source>
       <translation>AGT B6 рельс (+) высокий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="178"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="195"/>
       <source>Fuel temperature too low</source>
       <translation>Температура топлива слишком низкая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="179"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="196"/>
       <source>Fuel temperature too high</source>
       <translation>Температура топлива слишком высокая</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="180"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="197"/>
       <source>Fuel level too low</source>
       <translation>Уровень топлива слишком низкий</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="183"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="200"/>
       <source>Lost control unit</source>
       <translation>Блок управления потерян</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="184"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="201"/>
       <source>Lost panel</source>
       <translation>Потерянная панель</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="185"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="202"/>
       <source>Service needed</source>
       <translation>Требуется обслуживание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="186"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="203"/>
       <source>Lost 3-phase module</source>
       <translation>Потерянный 3-фазный модуль</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="187"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="204"/>
       <source>Lost AGT module</source>
       <translation>AGT модуль потерян</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="188"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="205"/>
       <source>Synchronization failure</source>
       <translation>Сбой синхронизации</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="189"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="206"/>
       <source>Lost external ECU</source>
       <translation>Потерянный внешний ЭБУ</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="190"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="207"/>
       <source>Intake airfilter</source>
       <translation>Фильтр впускного воздуха</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="191"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="208"/>
       <source>Diagnostic message (ECU)</source>
       <translation>Диагностическое сообщение (ЭБУ)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="192"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="209"/>
       <source>Lost sync. module</source>
       <translation>Потерянный модуль синхронизации</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="193"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="210"/>
       <source>Load-balance failed</source>
       <translation>Сбой баланса нагрузки</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="194"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="211"/>
       <source>Sync-mode deactivated</source>
       <translation>Режим синхронизации отключен</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="195"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="212"/>
       <source>Red Stop Lamp (RSL)</source>
       <translation>Красный стоп-сигнал (RSL)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="196"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="213"/>
       <source>Amber Warning Lamp (AWL)</source>
       <translation>Янтарная предупреждающая лампа (AWL)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="197"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="214"/>
       <source>Malfunction Indicator Lamp (MIL)</source>
       <translation>Индикаторная лампа неисправности (MIL)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="198"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="215"/>
       <source>Protect Lamp (PL)</source>
       <translation>Защитная лампа (PL)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="199"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="216"/>
       <source>Rotating field wrong</source>
       <translation>Поле вращения неверное</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="200"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="217"/>
       <source>Fuel level sensor lost</source>
       <translation>Потерян датчик уровня топлива</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="201"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="218"/>
       <source>Starting without inverter</source>
       <translation>Запуск без инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="202"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="219"/>
       <source>Bus #1 dead</source>
       <translation>Автобус №1 погиб</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="203"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="220"/>
       <source>Start request denied</source>
       <translation>Запрос на запуск отклонен</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="204"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="221"/>
       <source>Remote start denied</source>
       <translation>Дистанционный запуск запрещен</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="205"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="222"/>
       <source>Forced switch off load relay</source>
       <translation>Принудительное отключение реле нагрузки</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="206"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="223"/>
       <source>Synchronization Module is offline</source>
       <translation>Модуль синхронизации отключен</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="207"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="224"/>
       <source>Lost BMS</source>
       <translation>Потерянный BMS</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="208"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="225"/>
       <source>Converter DC Link Voltage Low/Reverse</source>
       <translation>Преобразователь Напряжение звена постоянного тока низкое/обратное</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="209"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="226"/>
       <source>Converter DC Link Current Low</source>
       <translation>Низкий ток звена постоянного тока преобразователя</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="210"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="227"/>
       <source>Converter DC Precharge Voltage Low</source>
       <translation>Низкое напряжение предварительного заряда преобразователя постоянного тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="211"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="228"/>
       <source>Converter DC Precharge Voltage High</source>
       <translation>Преобразователь постоянного тока Напряжение предварительного заряда высокое</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="212"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="229"/>
       <source>Converter IGBT/MOSFET Driver Error</source>
       <translation>Ошибка драйвера преобразователя IGBT/MOSFET</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="213"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="230"/>
       <source>Converter Error Power Control Loop</source>
       <translation>Ошибка преобразователя Контур управления питанием</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="214"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="231"/>
       <source>Converter AC Frequency Detection</source>
       <translation>Определение частоты переменного тока преобразователя</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="215"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="232"/>
       <source>Converter Control Value Fail</source>
       <translation>Сбой управляющего значения преобразователя</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="216"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="233"/>
       <source>Factory setting changed</source>
       <translation>Заводская настройка изменена</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="217"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="234"/>
       <source>Parameter changed in admin mode</source>
       <translation>Изменение параметров в режиме администратора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="218"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="235"/>
       <source>Manual Intervention (ext. System)</source>
       <translation>Ручное вмешательство (внешняя система)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="221"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="238"/>
       <source>Init failed</source>
       <translation>Сбой инициализации</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="222"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="239"/>
       <source>Watchdog</source>
       <translation>Устройство защиты</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="223"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="240"/>
       <source>Inverter temperature high L1</source>
       <translation>Высокая температура преобразователя L1</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="224"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="241"/>
       <source>Inverter temperature high L2</source>
       <translation>Высокая температура преобразователя L2</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="225"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="242"/>
       <source>Inverter temperature high L3</source>
       <translation>Высокая температура преобразователя L3</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="226"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="243"/>
       <source>Inverter temperature high DC link</source>
       <translation>Высокая температура преобразователя Звено постоянного тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="227"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="244"/>
       <source>Inverter overload</source>
       <translation>Перегрузка инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="228"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="245"/>
       <source>Inverter communication lost</source>
       <translation>Потеря связи с инвертором</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="229"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="246"/>
       <source>DC overload</source>
       <translation>Перегрузка DC</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="230"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="247"/>
       <source>DC overvoltage</source>
       <translation>Перенапряжение постоянного тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="232"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="249"/>
       <source>No connection</source>
       <translation>Нет связи</translation>
     </message>
@@ -12027,12 +12057,12 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>GensetError</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="68"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="83"/>
       <source>No error</source>
       <translation>Без ошибок</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="79"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="96"/>
       <source>Unknown error: %1</source>
       <translation>Неизвестная ошибка: %1</translation>
     </message>
@@ -12040,149 +12070,149 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
   <context>
     <name>Hatz</name>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="778"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="784"/>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="790"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="795"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="801"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="807"/>
       <source>Unknown error: </source>
       <translation>Неизвестная ошибка:</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="797"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="814"/>
       <source>Oil pressure</source>
       <translation>Давление масла</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="798"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="815"/>
       <source>Cylinder head overtemperature</source>
       <translation>Перегрев головки блока цилиндров</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="799"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="816"/>
       <source>Charge control</source>
       <translation>Контроль заряда</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="800"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="817"/>
       <source>Speed higher than expected</source>
       <translation>Скорость выше ожидаемой</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="801"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="818"/>
       <source>Overspeed</source>
       <translation>Превышение скорости</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="803"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
       <source>Oiltemperature higher than expected</source>
       <translation>Температура воздуха выше, чем ожидалось</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="804"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
       <source>Oiltemperature open circuit / short to power</source>
       <translation>Обрыв цепи / короткое замыкание на питание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="805"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
       <source>Oiltemperature short to ground</source>
       <translation>Замыкание на землю при перегреве</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="806"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="823"/>
       <source>Analog setpoint high / short to power</source>
       <translation>Высокий уровень аналоговой уставки / короткое замыкание на питание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="807"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="824"/>
       <source>Analog setpoint low / short to ground</source>
       <translation>Низкий уровень аналоговой уставки / замыкание на землю</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="808"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="825"/>
       <source>TSC1 message receive timeout</source>
       <translation>Таймаут приема сообщений TSC1</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="809"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="826"/>
       <source>CM1 message receive timeout</source>
       <translation>Таймаут приема сообщений CM1</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="810"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="827"/>
       <source>Battery voltage high</source>
       <translation>Высокое напряжение аккумулятора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="811"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
       <source>Battery voltage low</source>
       <translation>Низкое напряжение аккумулятора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="812"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="829"/>
       <source>Speed signal distorted</source>
       <translation>Искажение сигнала скорости</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="813"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="830"/>
       <source>Internal 5V sensor supply high</source>
       <translation>Высокий уровень питания внутреннего датчика 5 В</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="814"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="831"/>
       <source>Internal 5V sensor supply low</source>
       <translation>Низкий уровень напряжения питания внутреннего датчика 5 В</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="815"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="832"/>
       <source>Barometric pressure high</source>
       <translation>Высокое барометрическое давление</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="816"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="833"/>
       <source>Barometric pressure low</source>
       <translation>Низкое барометрическое давление</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="817"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="834"/>
       <source>Output fuelpump short to power</source>
       <translation>Короткое замыкание выходного топливного насоса на питание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="818"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="835"/>
       <source>Output fuelpump short to ground</source>
       <translation>Короткое замыкание выходного топливного насоса на землю</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="819"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="836"/>
       <source>Output glow plug short to power</source>
       <translation>Короткое замыкание выходной свечи накаливания на питание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="837"/>
       <source>Output glow plug short to ground</source>
       <translation>Короткое замыкание свечи накаливания на землю</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="838"/>
       <source>Injector open circuit/low side short to ground</source>
       <translation>Обрыв цепи инжектора/короткое замыкание нижней стороны на землю</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="839"/>
       <source>Injector coil internal short circuit</source>
       <translation>Внутреннее короткое замыкание катушки инжектора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="823"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="840"/>
       <source>Injector low side short to power</source>
       <translation>Короткое замыкание низкой стороны инжектора на питание</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="824"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="841"/>
       <source>Service hours expired</source>
       <translation>Истекли часы обслуживания</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="828"/>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="845"/>
       <source>Processor failure</source>
       <translation>Сбой процессора</translation>
     </message>
