@@ -132,7 +132,7 @@ Page {
 		id: rebootDialogComponent
 
 		ModalWarningDialog {
-			property Page toPage
+			property var toPage
 
 			//% "Reboot now?"
 			title: qsTrId("settings_vrm_device_instances_reboot_now")
