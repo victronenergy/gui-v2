@@ -17,6 +17,8 @@ ListModel {
 		qsTrId("vebus_device_high_dc_voltage"),
 		//% "High DC current"
 		qsTrId("vebus_device_high_dc_current"),
+		//% Phase rotation
+		qsTrId("vebus_device_phase_rotation"),
 		//% "Temperature sense error"
 		qsTrId("vebus_device_temperature_sense_error"),
 		//% "Voltage sense error"
@@ -29,6 +31,7 @@ ListModel {
 	ListElement {pathSuffix: "/HighDcRipple";			multiPhaseOnly: false}
 	ListElement {pathSuffix: "/HighDcVoltage";			multiPhaseOnly: false}
 	ListElement {pathSuffix: "/HighDcCurrent";			multiPhaseOnly: false}
+	ListElement {pathSuffix: "/PhaseRotation";			multiPhaseOnly: true}
 	ListElement {pathSuffix: "/TemperatureSenseError";	multiPhaseOnly: true}
 	ListElement {pathSuffix: "/VoltageSenseError";		multiPhaseOnly: true}
 }
