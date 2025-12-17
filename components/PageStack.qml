@@ -118,7 +118,7 @@ StackView {
 	}
 
 	function popPage(toPage, operation) {
-		if (!toPage) {
+		if (toPage === null) {
 			popAllPages(operation)
 			return
 		}
