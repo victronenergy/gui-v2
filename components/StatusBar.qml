@@ -33,6 +33,7 @@ FocusScope {
 	height: Theme.geometry_statusBar_height
 	opacity: 0.0
 
+	objectName: "StatusBar"// TODO: remove
 	Component.onCompleted: if (!animationEnabled) { root.opacity = 1.0 }
 
 	Rectangle {
@@ -103,6 +104,7 @@ FocusScope {
 			leftMargin: Theme.geometry_statusBar_horizontalMargin
 			verticalCenter: parent.verticalCenter
 		}
+		objectName: "StatusBar.leftButton"// TODO: remove
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
 			: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
 			: root.leftButton === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
@@ -111,6 +113,7 @@ FocusScope {
 		KeyNavigation.right: auxButton
 
 		onClicked: root.leftButtonClicked()
+		expandedClickableAreaBackground.color: "green"// TODO: remove
 	}
 
 	StatusBarButton {
@@ -123,6 +126,7 @@ FocusScope {
 			left: leftButton.right
 			verticalCenter: parent.verticalCenter
 		}
+		objectName: "StatusBar.auxButton"// TODO: remove
 		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
 		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
@@ -132,6 +136,7 @@ FocusScope {
 		KeyNavigation.right: breadcrumbs
 
 		onClicked: root.auxButtonClicked()
+		expandedClickableAreaBackground.color: "blue"// TODO: remove
 	}
 
 	Breadcrumbs {
@@ -263,6 +268,7 @@ FocusScope {
 	StatusBarButton {
 		id: notificationButton
 
+		objectName: "StatusBar.notificationButton"// TODO: remove
 		anchors {
 			left: connectivityRow.right
 			leftMargin: Theme.geometry_statusBar_rightSideRow_horizontalMargin
@@ -296,6 +302,7 @@ FocusScope {
 	NotificationButton {
 		id: alarmButton
 
+		objectName: "StatusBar.alarmButton"// TODO: remove
 		anchors {
 			right: rightSideRow.right
 			verticalCenter: parent.verticalCenter
@@ -315,6 +322,7 @@ FocusScope {
 	Row {
 		id: rightButtonRow
 
+		objectName: "StatusBar.rightButtonRow"// TODO: remove
 		height: parent.height
 		anchors {
 			right: parent.right
@@ -323,6 +331,7 @@ FocusScope {
 
 		StatusBarButton {
 			id: rightButton
+			objectName: "StatusBar.rightButtonRow.rightButton"// TODO: remove
 			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
 			visible: enabled
 			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
@@ -342,6 +351,7 @@ FocusScope {
 
 		StatusBarButton {
 			id: sleepButton
+			objectName: "StatusBar.rightButtonRow.sleepButton"// TODO: remove
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: enabled
 			enabled: Global.screenBlanker?.supported

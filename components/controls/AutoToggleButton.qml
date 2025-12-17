@@ -55,6 +55,7 @@ BaseAutoToggleSwitch {
 				top: parent.top
 				bottom: parent.bottom
 			}
+			leftExtent: 0  // TODO: this shouldn't be necessary
 			width: root.buttonWidth
 			height: parent.height
 			radius: Theme.geometry_button_radius

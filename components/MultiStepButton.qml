@@ -12,6 +12,7 @@ BaseListView {
 	property int currentIndex
 	property bool checked
 	readonly property real _totalDelegateWidth: width - headerItem.width
+	readonly property var _buttons: []
 
 	signal indexClicked(index: int)
 	signal onClicked()
@@ -25,11 +26,11 @@ BaseListView {
 	interactive: false
 
 	delegate: BaseListItem {
-
 		readonly property bool lastListItem: index === root.model.length - 1
 
 		height: root.height
 		width: root._totalDelegateWidth / root.model.length
+		objectName: root.objectName + ".MultiStepButton_delegate." + (index + 1) // TODO: remove
 
 		// background border color
 		Rectangle {
@@ -48,7 +49,11 @@ BaseListView {
 				bottomMargin: Theme.geometry_button_border_width
 				rightMargin: lastListItem ? Theme.geometry_button_border_width : 0
 			}
-
+			leftExtent: 0 // TODO: this shouldn't be necessary
+			rightExtent: 0  // TODO: this shouldn't be necessary
+			objectName: parent.objectName // TODO: remove
+			siblings: _buttons
+			expandedClickableAreaBackground.color: "green" // TODO: remove
 			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: 0
 			bottomLeftRadius: 0
@@ -68,6 +73,9 @@ BaseListView {
 			focus: true
 
 			onClicked: root.indexClicked(index)
+			Component.onCompleted: {
+				_buttons[index + 1] = this
+			}
 		}
 	}
 
@@ -89,6 +97,8 @@ BaseListView {
 		}
 
 		Button {
+			id: onOffButton
+
 			anchors {
 				fill: parent
 				topMargin: Theme.geometry_button_border_width
@@ -96,6 +106,8 @@ BaseListView {
 				leftMargin: Theme.geometry_button_border_width
 			}
 
+			objectName: root.objectName + ".MultiStepButton_header" // TODO: remove
+			expandedClickableAreaBackground.color: "blue" // TODO: remove
 			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
 			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
@@ -110,6 +122,10 @@ BaseListView {
 			focus: true
 
 			onClicked: root.checked ? root.offClicked() : root.onClicked()
+			siblings: _buttons
+			Component.onCompleted: {
+				_buttons[0] = this
+			}
 		}
 
 		Rectangle {

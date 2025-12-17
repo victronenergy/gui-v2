@@ -91,6 +91,7 @@
     "geometry_listItem_slider_stepDivsion": 10,
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
+    "geometry_listItem_expanded_clickable_extent": 12,
 
     "geometry_listLink_qrCodeSize": 96,
 
