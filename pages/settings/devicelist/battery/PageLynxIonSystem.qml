@@ -47,8 +47,8 @@ Page {
 				//% "Min/max cell voltage"
 				text: qsTrId("lynxionsystem_min_max_cell_voltage")
 				model: QuantityObjectModel {
-					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
-					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC }
 				}
 				preferredVisible: minCellVoltage.valid && maxCellVoltage.valid
 
@@ -116,6 +116,21 @@ Page {
 						//% "Unknown"
 						return qsTrId("lynxionsystem_balancer_unknown")
 					}
+				}
+			}
+
+			ListNavigation {
+				//% "Individual Battery Info"
+				text: qsTrId("lynxionsystem_individual_battery_info")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+				preferredVisible: batteryRequestId.valid
+
+				VeQuickItem {
+					id: batteryRequestId
+					uid: root.bindPrefix + "/Battery/Request/Id"
 				}
 			}
 		}

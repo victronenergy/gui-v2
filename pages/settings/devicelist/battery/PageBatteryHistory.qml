@@ -80,7 +80,6 @@ Page {
 				preferredVisible: root.history.allowsMinimumCellVoltage
 				unit: VenusOS.Units_Volt_DC
 				value: preferredVisible ? root.history.minimumCellVoltage.value : NaN
-				precision: 3
 			}
 
 			ListQuantity {
@@ -89,7 +88,6 @@ Page {
 				preferredVisible: root.history.allowsMaximumCellVoltage
 				unit: VenusOS.Units_Volt_DC
 				value: preferredVisible ? root.history.maximumCellVoltage.value : NaN
-				precision: 3
 			}
 
 			ListText {
