@@ -372,7 +372,7 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 		return qtTrId("switch_state_channel_fault");
 	case Switch_DeviceState_Channel_Tripped:
 		//% "Channel Tripped"
-		return qtTrId("switch_state_channel_Trippped");
+		return qtTrId("switch_state_channel_tripped");
 	case Switch_DeviceState_Under_Voltage:
 		//% "Under voltage"
 		return qtTrId("switch_state_under_voltage");
@@ -456,10 +456,13 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 	case SwitchableOutput_Status_Tripped:
 		//% "Tripped"
 		return qtTrId("switchable_output_tripped");
-	case SwitchableOutput_Status_Over_Temperature:
+	case SwitchableOutput_Status_OverTemperature:
 		//% "Over temperature"
-		return qtTrId("switchable_output_over_temperature");
-	case SwitchableOutput_Status_Output_Fault:
+		return qtTrId("switchable_output_overtemperature");
+	case SwitchableOutput_Status_OverTemperature_Tripped:
+		//% "Over temp, tripped"
+		return qtTrId("switchable_output_overtemperature_tripped");
+	case SwitchableOutput_Status_OutputFault:
 		//% "Fault"
 		return qtTrId("switchable_output_fault");
 	case SwitchableOutput_Status_On:
@@ -470,18 +473,39 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 			//% "On"
 			return qtTrId("switchable_output_on");
 		}
-	case SwitchableOutput_Status_Short_Fault:
+	case SwitchableOutput_Status_ShortFault:
 		//% "Short"
 		return qtTrId("switchable_output_short");
 	case SwitchableOutput_Status_Disabled:
 		//% "Disabled"
 		return qtTrId("switchable_output_disabled");
-	case SwitchableOutput_Status_TripLowVoltage:
-		//% "Trip low voltage"
-		return qtTrId("switchable_output_trip_low_voltage");
+	case SwitchableOutput_Status_Disabled_Tripped:
+		//% "Disabled, tripped"
+		return qtTrId("switchable_output_disabled_tripped");
+	case SwitchableOutput_Status_Disabled_OverTemperature:
+		//% "Disabled, over temp"
+		return qtTrId("switchable_output_disabled_overtemperature");
+	case SwitchableOutput_Status_Disabled_On:
+		//% "Disabled but on"
+		return qtTrId("switchable_output_disabled_on");
 	case SwitchableOutput_Status_Bypassed:
 		//% "Bypassed"
 		return qtTrId("switchable_output_bypassed");
+	case SwitchableOutput_Status_Bypassed_Tripped:
+		//% "Bypassed, tripped"
+		return qtTrId("switchable_output_bypassed_tripped");
+	case SwitchableOutput_Status_Bypassed_OverTemperature:
+		//% "Bypassed, over temp"
+		return qtTrId("switchable_output_bypassed_overtemperature");
+	case SwitchableOutput_Status_ExternalControl:
+		//% "External control"
+		return qtTrId("switchable_output_externalcontrol");
+	case SwitchableOutput_Status_ExternalControl_Tripped:
+		//% "External control, tripped"
+		return qtTrId("switchable_output_externalcontrol_tripped");
+	case SwitchableOutput_Status_ExternalControl_OverTemperature:
+		//% "External control, over temp"
+		return qtTrId("switchable_output_externalcontrol_overtemperature");
 	default:
 		return QString::number(static_cast<int>(value));
 	}

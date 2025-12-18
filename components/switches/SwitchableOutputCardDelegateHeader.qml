@@ -62,6 +62,7 @@ RowLayout {
 			horizontalAlignment: Text.AlignHCenter
 			elide: Text.ElideRight
 			font.pixelSize: Theme.font_size_tiny
+
 			color: {
 				switch (root.switchableOutput.status) {
 				case VenusOS.SwitchableOutput_Status_Off:
@@ -75,14 +76,23 @@ RowLayout {
 					} else {
 						return Theme.color_green
 					}
-				case VenusOS.SwitchableOutput_Status_Output_Fault:
+				case VenusOS.SwitchableOutput_Status_ExternalControl:
+					return Theme.color_green
+				case VenusOS.SwitchableOutput_Status_OutputFault:
 				case VenusOS.SwitchableOutput_Status_Bypassed:
+				case VenusOS.SwitchableOutput_Status_Disabled_On:
 					return Theme.color_orange
-				case VenusOS.SwitchableOutput_Status_Disabled:
-				case VenusOS.SwitchableOutput_Status_TripLowVoltage:
-				case VenusOS.SwitchableOutput_Status_Over_Temperature:
-				case VenusOS.SwitchableOutput_Status_Short_Fault:
 				case VenusOS.SwitchableOutput_Status_Tripped:
+				case VenusOS.SwitchableOutput_Status_OverTemperature:
+				case VenusOS.SwitchableOutput_Status_OverTemperature_Tripped:
+				case VenusOS.SwitchableOutput_Status_ShortFault:
+				case VenusOS.SwitchableOutput_Status_Disabled:
+				case VenusOS.SwitchableOutput_Status_Disabled_Tripped:
+				case VenusOS.SwitchableOutput_Status_Disabled_OverTemperature:
+				case VenusOS.SwitchableOutput_Status_Bypassed_Tripped:
+				case VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature:
+				case VenusOS.SwitchableOutput_Status_ExternalControl_Tripped:
+				case VenusOS.SwitchableOutput_Status_ExternalControl_OverTemperature:
 					return Theme.color_red
 				default:
 					return Theme.color_red
