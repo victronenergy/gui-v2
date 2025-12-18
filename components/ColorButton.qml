@@ -27,7 +27,7 @@ Rectangle {
 			fill: parent
 			margins: 2 * Theme.geometry_button_border_width
 		}
-		radius: Theme.geometry_button_border_width
+		radius: root.radius - Theme.geometry_button_border_width
 		visible: root.centerColor.valid
 		color: root.centerColor
 	}
