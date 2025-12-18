@@ -32,7 +32,7 @@ QList<qreal> FastUtils::calculateLoadGraphYValues(const QList<qreal> &data, int 
 
 qreal FastUtils::degreesToRadians(const qreal degrees) const
 {
-	return degrees * 0.017453292519943295;  // Math.PI/180
+	return qIsNaN(degrees) ? 0 : degrees * 0.017453292519943295;  // Math.PI/180
 }
 
 // Find the largest pixel size for text which will fit in the specified maxWidth.
