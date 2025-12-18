@@ -531,16 +531,24 @@ public:
 	Q_ENUM(SwitchableOutput_Type)
 
 	enum SwitchableOutput_Status {
-		SwitchableOutput_Status_Off,
-		SwitchableOutput_Status_Powered,
-		SwitchableOutput_Status_Tripped,
-		SwitchableOutput_Status_Over_Temperature = 0x04,
-		SwitchableOutput_Status_Output_Fault =0x08,
-		SwitchableOutput_Status_On = 0x09,  //inputActive + active
-		SwitchableOutput_Status_Short_Fault = 0x10,
-		SwitchableOutput_Status_Disabled = 0x20,
-		SwitchableOutput_Status_TripLowVoltage = 0x22,
-		SwitchableOutput_Status_Bypassed = 0x40
+		SwitchableOutput_Status_Off                 = 0x00,
+		SwitchableOutput_Status_Powered             = 0x01,
+		SwitchableOutput_Status_Tripped             = 0x02,
+		SwitchableOutput_Status_OverTemperature     = 0x04,
+		SwitchableOutput_Status_OverTemperature_Tripped = 0x06,
+		SwitchableOutput_Status_OutputFault         = 0x08,
+		SwitchableOutput_Status_On                  = 0x09, // inputActive + active
+		SwitchableOutput_Status_ShortFault          = 0x10,
+		SwitchableOutput_Status_Disabled            = 0x20,
+		SwitchableOutput_Status_Disabled_Tripped    = 0x22, // TripLowVoltage
+		SwitchableOutput_Status_Disabled_OverTemperature = 0x24,
+		SwitchableOutput_Status_Disabled_On         = 0x29, // user control disallowed, but on
+		SwitchableOutput_Status_Bypassed            = 0x40,
+		SwitchableOutput_Status_Bypassed_Tripped    = 0x42,
+		SwitchableOutput_Status_Bypassed_OverTemperature = 0x44,
+		SwitchableOutput_Status_ExternalControl     = 0x80,
+		SwitchableOutput_Status_ExternalControl_Tripped = 0x82,
+		SwitchableOutput_Status_ExternalControl_OverTemperature = 0x84
 	};
 	Q_ENUM(SwitchableOutput_Status)
 
