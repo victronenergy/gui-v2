@@ -6,6 +6,9 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	Switch control for SwitchableOutput_Type_BilgePump type.
+*/
 Item {
 	id: root
 
