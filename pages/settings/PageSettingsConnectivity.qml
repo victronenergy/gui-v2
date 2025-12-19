@@ -16,8 +16,8 @@ Page {
 			ListNavigation {
 				//% "Ethernet"
 				text: qsTrId("pagesettingsconnectivity_ethernet")
-				secondaryText: networkServices.state !== "idle" && networkServices.state !== ""
-					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.state))
+				secondaryText: networkServices.networkState !== "idle" && networkServices.networkState !== ""
+					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
 					//% "Unplugged"
 					: qsTrId("settings_tcpip_connection_unplugged")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": text})
