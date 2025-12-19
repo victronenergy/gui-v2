@@ -83,7 +83,7 @@ VisibleItemModel {
 
 	ListText {
 		text: CommonWords.state
-		secondaryText: Utils.connmanServiceState(networkServices.state)
+		secondaryText: Utils.connmanServiceState(networkServices.networkState)
 	}
 
 	ListText {
