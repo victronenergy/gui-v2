@@ -10,7 +10,7 @@ VeQuickItem {
 	id: root
 
 	property string service
-	property string state
+	property string networkState // don't shadow VeQuickItem::state
 	property string method_
 	property string macAddress
 	property string ipAddress: ""
@@ -24,7 +24,7 @@ VeQuickItem {
 	property bool completed
 	readonly property bool hasBluetoothSupport: _hasBluetoothSupport.value
 	readonly property string mobileNetworkName: _networkName.valid ? _networkName.value + " " + Utils.simplifiedNetworkType(_networkType.value) : "--"
-	readonly property bool disconnected: state === "idle" || state === "failure"
+	readonly property bool disconnected: networkState === "idle" || networkState === "failure"
 
 	property VeQuickItem setValueItem: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Network/SetValue"
@@ -86,7 +86,7 @@ VeQuickItem {
 
 		if (details) {
 			root.service = details["Service"]
-			state = details["State"]
+			networkState = details["State"]
 			method_ = details["Method"]
 			ipAddress = details["Address"]
 			macAddress = details["Mac"]
