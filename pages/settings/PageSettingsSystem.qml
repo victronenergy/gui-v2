@@ -56,6 +56,16 @@ Page {
 			SettingsListHeader { }
 
 			SettingsListNavigation {
+				//% "Opportunity Loads"
+				text: qsTrId("pagesettingssystem_opportunity_loads")
+				//% "Automate controllable devices to maximize PV self-use"
+				secondaryText: qsTrId("pagesettingssystem_automate_controllable_devices")
+				pageSource: "/pages/settings/PageControllableLoads.qml"
+			}
+
+			SettingsListHeader { }
+
+			SettingsListNavigation {
 				//% "AC System"
 				text: qsTrId("pagesettingssystem_ac_system")
 				//% "Inputs and Monitoring"

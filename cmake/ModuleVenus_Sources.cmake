@@ -104,6 +104,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SolarHistoryTableView.qml
     components/SolarYieldGauge.qml
     components/SolarYieldGraph.qml
+    components/SortablePriorityList.qml
     components/SplashView.qml
     components/SpinBoxDecimalConverter.qml
     components/StatusBar.qml
@@ -352,6 +353,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/NetworkSettingsPageModel.qml
     pages/settings/PageCanbusStatus.qml
     pages/settings/PageChargeCurrentLimits.qml
+    pages/settings/PageControllableLoads.qml
     pages/settings/PageDeviceInfo.qml
     pages/settings/PageGenerator.qml
     pages/settings/PageGeneratorAcLoad.qml
@@ -690,6 +692,7 @@ set(VictronVenusOS_RESOURCES
     images/alternator.svg
     images/breadcrumb_lhs.svg
     images/breadcrumb_rhs.svg
+    images/icon_arrow.svg
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
