@@ -163,6 +163,7 @@ int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Time_Day:               // fall through
 	case VenusOS::Enums::Units_Time_Hour:              // fall through
 	case VenusOS::Enums::Units_Time_Minute:            // fall through
+	case VenusOS::Enums::Units_Time_Second:            // fall through
 	case VenusOS::Enums::Units_Altitude_Metre:         // fall through
 	case VenusOS::Enums::Units_Altitude_Foot:          // fall through
 	case VenusOS::Enums::Units_PartsPerMillion:        // fall through
@@ -243,6 +244,8 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHint
 		return QStringLiteral("h");
 	case VenusOS::Enums::Units_Time_Minute:
 		return QStringLiteral("m");
+	case VenusOS::Enums::Units_Time_Second:
+		return QStringLiteral("s");
 	case VenusOS::Enums::Units_Altitude_Metre:
 		return QStringLiteral("m");
 	case VenusOS::Enums::Units_Altitude_Foot:

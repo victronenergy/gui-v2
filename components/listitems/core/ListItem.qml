@@ -80,6 +80,8 @@ BaseListItem {
 
 	property color indicatorColor: Qt.rgba(0,0,0,0) // fully transparent by default.
 
+	property alias captionLabel: captionLabel
+
 	signal clicked()
 
 	function activate() {
@@ -196,6 +198,8 @@ BaseListItem {
 			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
 
 			Label {
+				id: captionLabel
+
 				width: parent.width
 				visible: text !== ""
 				topPadding: 0
