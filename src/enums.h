@@ -92,6 +92,7 @@ public:
 		Units_Time_Day,
 		Units_Time_Hour,
 		Units_Time_Minute,
+		Units_Time_Second,
 		Units_Altitude_Metre,
 		Units_Altitude_Foot,
 		Units_PartsPerMillion,
