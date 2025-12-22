@@ -53,7 +53,26 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListHeader { }
+			SettingsListHeader {
+				preferredVisible: opportunityLoadsMode.valid
+			}
+
+			SettingsListNavigation {
+				//% "Opportunity Loads"
+				text: qsTrId("pagesettingssystem_opportunity_loads")
+				//% "Automate controllable devices to maximize PV self-use"
+				secondaryText: qsTrId("pagesettingssystem_automate_controllable_devices")
+				secondaryLabel.text: opportunityLoadsMode.value ? CommonWords.enabled : CommonWords.disabled
+				pageSource: "/pages/settings/PageControllableLoads.qml"
+				preferredVisible: opportunityLoadsMode.valid
+
+				VeQuickItem {
+					id: opportunityLoadsMode
+					uid: BackendConnection.serviceUidForType("platform") + "/OpportunityLoads/Mode"
+				}
+			}
+
+			SettingsListHeader {}
 
 			SettingsListNavigation {
 				//% "AC System"

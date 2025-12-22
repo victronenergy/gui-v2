@@ -352,6 +352,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/NetworkSettingsPageModel.qml
     pages/settings/PageCanbusStatus.qml
     pages/settings/PageChargeCurrentLimits.qml
+    pages/settings/PageControllableLoads.qml
+    pages/settings/PageControllableLoadsAcLoad.qml
+    pages/settings/PageControllableLoadsBattery.qml
+    pages/settings/PageControllableLoadsEVCS.qml
     pages/settings/PageDeviceInfo.qml
     pages/settings/PageGenerator.qml
     pages/settings/PageGeneratorAcLoad.qml
@@ -693,6 +697,7 @@ set(VictronVenusOS_RESOURCES
     images/alternator.svg
     images/breadcrumb_lhs.svg
     images/breadcrumb_rhs.svg
+    images/icon_arrow.svg
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
