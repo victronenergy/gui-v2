@@ -118,7 +118,7 @@
       <translation>Güneş enerjisi verimi</translation>
     </message>
     <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="188"/>
+      <location filename="../../data/System.qml" line="186"/>
       <source>External control</source>
       <translation>Extern kontrol</translation>
     </message>
@@ -168,7 +168,7 @@
       <translation>Wi-Fi</translation>
     </message>
     <message id="settings_units_gps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="65"/>
       <source>GPS</source>
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
@@ -1342,42 +1342,42 @@
       <translation>Servis zamanlayıcısını sıfırla</translation>
     </message>
     <message id="settings_gps_format">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="71"/>
       <source>Format</source>
       <extracomment>Format of reported GPS data</extracomment>
       <translation>Biçim</translation>
     </message>
     <message id="settings_gps_format_dms_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="77"/>
       <source>52° 20' 41.6" N, 5° 13' 12.3" E</source>
       <extracomment>Example of GPS data in the 'Degrees, Minutes, Seconds' format</extracomment>
       <translation>52° 20' 41,6" K, 5° 13' 12,3" D</translation>
     </message>
     <message id="settings_gps_format_dd_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="80"/>
       <source>52.34489, 5.22008</source>
       <extracomment>Example of GPS data in the 'Decimal Degrees' format</extracomment>
       <translation>52,34489, 5,22008</translation>
     </message>
     <message id="settings_gps_format_dm_example">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="83"/>
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20,693 K, 5° 13,205 D</translation>
     </message>
     <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
       <source>Speed Unit</source>
       <extracomment>Speed unit for reported GPS data</extracomment>
       <translation>Hız Birimi</translation>
     </message>
     <message id="settings_gps_format_mph">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
       <source>Miles per hour</source>
       <translation>mil/s</translation>
     </message>
     <message id="settings_gps_format_kt">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="101"/>
       <source>Knots</source>
       <translation>Deniz mili</translation>
     </message>
@@ -1654,12 +1654,12 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Yavaş şarj</translation>
     </message>
     <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="194"/>
+      <location filename="../../data/System.qml" line="192"/>
       <source>Sustain</source>
       <translation>Sürdür</translation>
     </message>
     <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="197"/>
+      <location filename="../../data/System.qml" line="195"/>
       <source>Recharge</source>
       <translation>Re-Şarj</translation>
     </message>
@@ -2494,7 +2494,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>Mod ayarı</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone">
-      <location filename="../../data/SystemSettings.qml" line="164"/>
+      <location filename="../../data/SystemSettings.qml" line="167"/>
       <source>Standalone</source>
       <extracomment>Network status: Standalone</extracomment>
       <translation>Standalone</translation>
@@ -2550,7 +2550,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="systemsettings_networkstatus_slave">
-      <location filename="../../data/SystemSettings.qml" line="148"/>
+      <location filename="../../data/SystemSettings.qml" line="151"/>
       <source>Slave</source>
       <extracomment>Network status: Slave</extracomment>
       <translation>Slave</translation>
@@ -4413,13 +4413,19 @@ Devam etmek istiyor musunuz?</translation>
       <source>High DC current</source>
       <translation>Yüksek DC akımı</translation>
     </message>
-    <message id="vebus_device_temperature_sense_error">
+    <message id="vebus_device_phase_rotation">
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml" line="21"/>
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="19"/>
+      <source>Phase rotation</source>
+      <translation type="unfinished">Faz rotasyon</translation>
+    </message>
+    <message id="vebus_device_temperature_sense_error">
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml" line="23"/>
       <source>Temperature sense error</source>
       <translation>Sıcaklık algılama hatası</translation>
     </message>
     <message id="vebus_device_voltage_sense_error">
-      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml" line="23"/>
+      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml" line="25"/>
       <source>Voltage sense error</source>
       <translation>Voltaj algılama hatası</translation>
     </message>
@@ -4438,11 +4444,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="16"/>
       <source>Voltage Sensor</source>
       <translation>Voltaj Sensörü</translation>
-    </message>
-    <message id="vebus_device_phase_rotation">
-      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml" line="19"/>
-      <source>Phase rotation</source>
-      <translation type="unfinished">Faz rotasyon</translation>
     </message>
     <message id="rssystemalarms_phase_rotation">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="27"/>
@@ -4851,7 +4852,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>OK</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="471"/>
+      <location filename="../../src/enums.cpp" line="474"/>
       <source>On</source>
       <translation>Açık</translation>
     </message>
@@ -4924,7 +4925,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Çıkar</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="468"/>
+      <location filename="../../src/enums.cpp" line="471"/>
       <source>Running</source>
       <translation>Çalışıyor</translation>
     </message>
@@ -5237,62 +5238,62 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Firmware bulunamadı</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="495"/>
+      <location filename="../../src/enums.cpp" line="519"/>
       <source>Fuel</source>
       <translation>Yakıt</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="498"/>
+      <location filename="../../src/enums.cpp" line="522"/>
       <source>Fresh water</source>
       <translation>Temiz su</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="501"/>
+      <location filename="../../src/enums.cpp" line="525"/>
       <source>Waste water</source>
       <translation>Atık su</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="504"/>
+      <location filename="../../src/enums.cpp" line="528"/>
       <source>Live well</source>
       <translation>Faal kuyu</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="507"/>
+      <location filename="../../src/enums.cpp" line="531"/>
       <source>Oil</source>
       <translation>Yağ</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="510"/>
+      <location filename="../../src/enums.cpp" line="534"/>
       <source>Black water</source>
       <translation>Atık Su</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="513"/>
+      <location filename="../../src/enums.cpp" line="537"/>
       <source>Gasoline</source>
       <translation>Benzin</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="516"/>
+      <location filename="../../src/enums.cpp" line="540"/>
       <source>Diesel</source>
       <translation>Dizel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="519"/>
+      <location filename="../../src/enums.cpp" line="543"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="522"/>
+      <location filename="../../src/enums.cpp" line="546"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="525"/>
+      <location filename="../../src/enums.cpp" line="549"/>
       <source>Hydraulic oil</source>
       <translation>Hidrolik yağ</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="528"/>
+      <location filename="../../src/enums.cpp" line="552"/>
       <source>Raw water</source>
       <translation>Ham Su</translation>
     </message>
@@ -6027,7 +6028,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation type="unfinished">Planlanmış</translation>
     </message>
     <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="200"/>
+      <location filename="../../data/System.qml" line="198"/>
       <source>Scheduled</source>
       <translation>Planlanmış</translation>
     </message>
@@ -6095,102 +6096,102 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Equalize</translation>
     </message>
     <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="130"/>
+      <location filename="../../data/System.qml" line="128"/>
       <source>AES mode</source>
       <translation>Otomatik Enerji Tasaruf (AES) modu</translation>
     </message>
     <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="133"/>
+      <location filename="../../data/System.qml" line="131"/>
       <source>Fault condition</source>
       <translation>Arıza durumu</translation>
     </message>
     <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="136"/>
+      <location filename="../../data/System.qml" line="134"/>
       <source>Bulk charging</source>
       <translation>Bulk Şarj</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="139"/>
+      <location filename="../../data/System.qml" line="137"/>
       <source>Absorption charging</source>
       <translation>Absorption şarjı</translation>
     </message>
     <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="142"/>
+      <location filename="../../data/System.qml" line="140"/>
       <source>Float charging</source>
       <translation>Float şarjı</translation>
     </message>
     <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="145"/>
+      <location filename="../../data/System.qml" line="143"/>
       <source>Storage mode</source>
       <translation>Storage Mod</translation>
     </message>
     <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="148"/>
+      <location filename="../../data/System.qml" line="146"/>
       <source>Equalization charging</source>
       <translation>Equalization şarjı</translation>
     </message>
     <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="151"/>
+      <location filename="../../data/System.qml" line="149"/>
       <source>Pass-thru</source>
       <translation>Transfer</translation>
     </message>
     <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="154"/>
+      <location filename="../../data/System.qml" line="152"/>
       <source>Inverting</source>
       <translation>Çevriliyor</translation>
     </message>
     <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="157"/>
+      <location filename="../../data/System.qml" line="155"/>
       <source>Assisting</source>
       <translation>Assist</translation>
     </message>
     <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="160"/>
+      <location filename="../../data/System.qml" line="158"/>
       <source>Power supply mode</source>
       <translation>Güç Kaynağı Modu</translation>
     </message>
     <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="163"/>
+      <location filename="../../data/System.qml" line="161"/>
       <source>Sustain</source>
       <translation type="unfinished">Sürdür</translation>
     </message>
     <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="167"/>
+      <location filename="../../data/System.qml" line="165"/>
       <source>Wake up</source>
       <translation>Uyan</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="170"/>
+      <location filename="../../data/System.qml" line="168"/>
       <source>Repeated absorption</source>
       <translation>Tekrarlanan Absorption</translation>
     </message>
     <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="173"/>
+      <location filename="../../data/System.qml" line="171"/>
       <source>Auto equalize</source>
       <translation>Otomatik equalize</translation>
     </message>
     <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="176"/>
+      <location filename="../../data/System.qml" line="174"/>
       <source>Battery safe</source>
       <translation>Battery Safe</translation>
     </message>
     <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="179"/>
+      <location filename="../../data/System.qml" line="177"/>
       <source>Load detect</source>
       <translation>Yük algılama</translation>
     </message>
     <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="182"/>
+      <location filename="../../data/System.qml" line="180"/>
       <source>Blocked</source>
       <translation>Bloke</translation>
     </message>
     <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="185"/>
+      <location filename="../../data/System.qml" line="183"/>
       <source>Test</source>
       <translation>Test</translation>
     </message>
     <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="203"/>
+      <location filename="../../data/System.qml" line="201"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dinamik ESS</translation>
     </message>
@@ -6200,25 +6201,25 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Dinamik ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
-      <location filename="../../data/SystemSettings.qml" line="152"/>
+      <location filename="../../data/SystemSettings.qml" line="155"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
       <translation>Grup Ana Birimi</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="156"/>
+      <location filename="../../data/SystemSettings.qml" line="159"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
       <translation>Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
-      <location filename="../../data/SystemSettings.qml" line="160"/>
+      <location filename="../../data/SystemSettings.qml" line="163"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
       <translation>Group &amp; Instance Master</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
-      <location filename="../../data/SystemSettings.qml" line="168"/>
+      <location filename="../../data/SystemSettings.qml" line="171"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
       <translation>Bağımsız ve Grup Yöneticisi</translation>
@@ -7929,7 +7930,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Evet, aboneliğimi iptal et</translation>
     </message>
     <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="392"/>
+      <location filename="../../pages/BriefPage.qml" line="396"/>
       <source>System load high, closing the side panel to reduce CPU load</source>
       <translation>Sistem yükü yüksek, CPU yükünü azaltmak için yan panel kapatılıyor</translation>
     </message>
@@ -7983,7 +7984,7 @@ Devam etmek istiyor musunuz?</translation>
       <source>Touch input control</source>
       <translation>Touch input control</translation>
     </message>
-    <message id="switchable_output_over_temperature">
+    <message id="switchable_output_overtemperature">
       <location filename="../../src/enums.cpp" line="461"/>
       <source>Over temperature</source>
       <translation>Aşırı sıcaklık</translation>
@@ -8003,7 +8004,7 @@ Devam etmek istiyor musunuz?</translation>
       <source>Channel Fault</source>
       <translation>Kanal Arızası</translation>
     </message>
-    <message id="switch_state_channel_Trippped">
+    <message id="switch_state_channel_tripped">
       <location filename="../../src/enums.cpp" line="375"/>
       <source>Channel Tripped</source>
       <translation>Kanal Açıldı</translation>
@@ -8049,12 +8050,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Açıldı</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="464"/>
+      <location filename="../../src/enums.cpp" line="467"/>
       <source>Fault</source>
       <translation type="unfinished">Hata</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="475"/>
+      <location filename="../../src/enums.cpp" line="478"/>
       <source>Short</source>
       <translation>Kısa devre</translation>
     </message>
@@ -9723,12 +9724,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Bu, rootfs'yi en son resmi bellenimle indirip güncelleyecektir.&lt;br&gt;İnternet bağlantısı gereklidir.&lt;br&gt;Devam etmek için 'Tamam'a basın.</translation>
     </message>
     <message id="settings_gps_format_kmh">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="95"/>
       <source>Kilometres per hour</source>
       <translation>Kilometre/saat</translation>
     </message>
     <message id="settings_gps_format_ms">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="95"/>
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="97"/>
       <source>Metres per second</source>
       <translation>Metre/saniye</translation>
     </message>
@@ -10023,11 +10024,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Three-state switch</source>
       <translation>Üç konumlu anahtar</translation>
     </message>
-    <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="478"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Devre dışı</translation>
-    </message>
     <message id="settings_modbus_tcp_unit_id_note">
       <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="41"/>
       <source>See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs.</source>
@@ -10061,7 +10057,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <extra-Context>only shown on desktop systems</extra-Context>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="72"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="75"/>
       <source>Status: %1</source>
       <translation>Durum: %1</translation>
     </message>
@@ -10148,24 +10144,19 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Mikro şebeke parametreleri</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="539"/>
+      <location filename="../../src/enums.cpp" line="563"/>
       <source>Hybrid droop</source>
       <translation>Hibrit droop</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="542"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Grid-following</source>
       <translation>Şebeke takibi</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="545"/>
+      <location filename="../../src/enums.cpp" line="569"/>
       <source>Grid-forming</source>
       <translation>Şebeke oluşturma</translation>
-    </message>
-    <message id="switchable_output_trip_low_voltage">
-      <location filename="../../src/enums.cpp" line="481"/>
-      <source>Trip low voltage</source>
-      <translation>Düşük voltajda tetikleme</translation>
     </message>
     <message id="microgrid">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="15"/>
@@ -10333,7 +10324,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation type="unfinished">Düşük</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="484"/>
+      <location filename="../../src/enums.cpp" line="493"/>
       <source>Bypassed</source>
       <translation>Baypas Edildi</translation>
     </message>
@@ -10621,38 +10612,93 @@ Burada PV invertörlerini taramak için ek portlar ve birim ID'leri ekleyebilirs
     <message id="settings_vrm_device_registration">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="95"/>
       <source>VRM device registration</source>
-      <translation/>
+      <translation>VRM Cihaz Kaydı</translation>
     </message>
     <message id="common_words_go_to_redetect_system">
       <location filename="../../components/CommonWords.qml" line="221"/>
       <source>If it was recently disconnected, go to Settings → Devices → %1 → Advanced, and select 'Redetect VE.Bus system'.</source>
       <extracomment>%1 = name of the device</extracomment>
-      <translation/>
+      <translation>Yakın zamanda bağlantısı kesildiyse, Ayarlar → Cihazlar → %1 → Gelişmiş bölümüne gidin ve 'VE.Bus sistemini yeniden algıla'yı seçin.</translation>
     </message>
     <message id="settings_canbus_nmea2000out_alerts">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="76"/>
       <source>NMEA2000 outbound alerts</source>
-      <translation/>
+      <translation>NMEA2000 giden uyarılar</translation>
     </message>
     <message id="settings_logging_vrm_portal">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="45"/>
       <source>VRM Portal access level</source>
-      <translation/>
+      <translation>VRM Portalı erişim seviyesi</translation>
     </message>
     <message id="settings_firmware_check_timed_out">
       <location filename="../../components/FirmwareUpdate.qml" line="207"/>
       <source>Firmware check timed out</source>
-      <translation/>
+      <translation>Ürün yazılımı kontrolü zaman aşımına uğradı</translation>
     </message>
     <message id="devicelist_motordrive_motordirection">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="57"/>
       <source>Motor Direction</source>
-      <translation/>
+      <translation>Motor Yönü</translation>
     </message>
     <message id="devicelist_motordrive_motortorque">
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="64"/>
       <source>Motor Torque</source>
-      <translation/>
+      <translation>Motor Torku</translation>
+    </message>
+    <message id="settings_units_mixed">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
+      <source>Mixed (AC in Watts, DC in Amps)</source>
+      <translation>Karışık (AC Watt cinsinden, DC Amper cinsinden)</translation>
+    </message>
+    <message id="switchable_output_overtemperature_tripped">
+      <location filename="../../src/enums.cpp" line="464"/>
+      <source>Over temp, tripped</source>
+      <translation>Aşırı sıcaklık, devre dışı kaldı</translation>
+    </message>
+    <message id="switchable_output_disabled">
+      <location filename="../../src/enums.cpp" line="481"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Devre dışı</translation>
+    </message>
+    <message id="switchable_output_disabled_tripped">
+      <location filename="../../src/enums.cpp" line="484"/>
+      <source>Disabled, tripped</source>
+      <translation>Devre dışı, devre dışı kaldı</translation>
+    </message>
+    <message id="switchable_output_disabled_overtemperature">
+      <location filename="../../src/enums.cpp" line="487"/>
+      <source>Disabled, over temp</source>
+      <translation>Devre dışı, aşırı sıcaklık</translation>
+    </message>
+    <message id="switchable_output_disabled_on">
+      <location filename="../../src/enums.cpp" line="490"/>
+      <source>Disabled but on</source>
+      <translation>Devre dışı ama açık</translation>
+    </message>
+    <message id="switchable_output_bypassed_tripped">
+      <location filename="../../src/enums.cpp" line="496"/>
+      <source>Bypassed, tripped</source>
+      <translation>Baypas edildi, devre dışı kaldı</translation>
+    </message>
+    <message id="switchable_output_bypassed_overtemperature">
+      <location filename="../../src/enums.cpp" line="499"/>
+      <source>Bypassed, over temp</source>
+      <translation>Baypas edildi, aşırı sıcaklık</translation>
+    </message>
+    <message id="switchable_output_externalcontrol">
+      <location filename="../../src/enums.cpp" line="502"/>
+      <source>External control</source>
+      <translation type="unfinished">Extern kontrol</translation>
+    </message>
+    <message id="switchable_output_externalcontrol_tripped">
+      <location filename="../../src/enums.cpp" line="505"/>
+      <source>External control, tripped</source>
+      <translation>Harici kontrol, devre dışı kaldı</translation>
+    </message>
+    <message id="switchable_output_externalcontrol_overtemperature">
+      <location filename="../../src/enums.cpp" line="508"/>
+      <source>External control, over temp</source>
+      <translation>Harici kontrol, aşırı sıcaklık</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
@@ -10675,12 +10721,12 @@ Burada PV invertörlerini taramak için ek portlar ve birim ID'leri ekleyebilirs
       <translation type="unfinished">DC Giriş</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="257"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="258"/>
       <source>AC Loads</source>
       <translation type="unfinished">AC Yükleri</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="287"/>
       <source>DC Loads</source>
       <translation type="unfinished">dcLoads</translation>
     </message>
@@ -10938,7 +10984,7 @@ Burada PV invertörlerini taramak için ek portlar ve birim ID'leri ekleyebilirs
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="1040"/>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="1046"/>
       <source>Unknown error: </source>
-      <translation/>
+      <translation>Bilinmeyen hata:</translation>
     </message>
   </context>
   <context>
