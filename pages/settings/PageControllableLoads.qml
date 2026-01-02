@@ -10,46 +10,76 @@ Page {
     id: root
 
     property alias model : model
+    readonly property var backendValue: loads.valid ? loads.value : []
 
-    ListModel {
-        id: model
-        ListElement {
-            configModel:"battery"
-            deviceInstance:0
-            label:"Battery"
-            serviceType:"com.victronenergy.system"
-            uniqueIdentifier:"battery"
+    property var jsonArray: [{"controllable":true,"deviceInstance":0,"label":"Battery","serviceType":"system","uniqueIdentifier":"battery"},{"controllable":true,"deviceInstance":56,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat2_56"},{"controllable":true,"deviceInstance":54,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat1_54"},{"controllable":true,"deviceInstance":55,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat2_55"}]
+    property string jsonArray2: "{controllable:true,deviceInstance:0,label:Battery,serviceType:system,uniqueIdentifier:battery},{controllable:true,deviceInstance:56,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat2_56},{controllable:true,deviceInstance:54,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat1_54},{controllable:true,deviceInstance:55,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat2_55}"
+
+    function writeModel() {
+        var newValue = []
+        let changesPending = model.count !== backendValue.length
+        for (var i = 0; i < model.count && !changesPending; ++i) {
+            newValue.push(model.get(i))
+            changesPending |= (model.get(i) != backendValue[i])
         }
-        ListElement {
-            configModel:"shelly"
-            deviceInstance:56
-            serviceType:"com.victronenergy.acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat2_56"
-        }
-        ListElement {
-            configModel:"shelly"
-            deviceInstance:54
-            serviceType:"com.victronenergy.acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat1_54"
-        }
-        ListElement {
-            configModel:"shelly"
-            deviceInstance:55
-            serviceType:"com.victronenergy.acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat2_55"
+
+        if (changesPending) {
+            console.log("writing", JSON.stringify(newValue))
+            //loads.setValue(JSON.stringify(newValue))
         }
     }
 
     property VeQuickItem loads: VeQuickItem {
         uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
-        onUidChanged: console.log(uid, JSON.stringify(value))
-        onValueChanged: console.log(uid, JSON.stringify(value))
+        onValueChanged: {
+
+            console.log(uid, "onValueChanged:", value)
+            /*
+            for (var i = 0; i < data.count; ++i)
+            {
+                console.log("data.get(", i, "):", JSON.stringify(data.get(i)))
+            }
+
+            for (var key in data) {
+                console.log("data[", key, "]:", data[key])
+            }
+
+            const jsonData = JSON.parse(data);
+
+            for (var i = 0; i < jsonData.length; ++i) {
+                const newValue = jsonData[i]
+                const oldValue = model.count > i + 1 ? model.get(i) : {}
+                console.log(
+                    "deviceInstance:", newValue.deviceInstance,
+                    "serviceType:", newValue.serviceType,
+                    "uniqueIdentifier:", newValue.uniqueIdentifier
+                );
+                if (newValue !== oldValue) {
+                    console.log("calling model.set(", i, JSON.stringify(newValue), ")")
+                    model.set(i, newValue)
+                }
+            }
+
+            for (let item of value) {
+            }
+            */
+        }
+        Component.onCompleted: {
+            console.log("calling loads.setValue")
+            loads.setValue([])
+            /*
+            console.log("calling setValue:", (jsonArray2))
+            setValue([{"controllable":true,"deviceInstance":0,"label":"Battery","serviceType":"system","uniqueIdentifier":"battery"}])
+            setValue(jsonArray2)
+            loads.value = jsonArray2
+*/
+        }
     }
 
     component Arrow : ListItemButton {
         icon.source: "qrc:/images/icon_arrow.svg"
         flat: false
-        height: parent.height - 8
+        height: parent.height - 2*Theme.geometry_opportunityLoad_margin
     }
 
     component DevicePriorityListNavigation : ListNavigation {
@@ -64,20 +94,19 @@ Page {
         height: Theme.geometry_settingsListNavigation_height
         onClicked: Global.pageManager.pushPage(devicePriorityDelegate.pageSource, devicePriorityDelegate.pageProperties)
 
-        Behavior on y { NumberAnimation {} }
-
         Arrow {
             id: upArrow
 
             anchors {
                 left: parent.left
-                leftMargin: Theme.geometry_opportunityLoad_horizontalSpacing
+                leftMargin: Theme.geometry_opportunityLoad_margin
                 verticalCenter: parent.verticalCenter
             }
             enabled: index !== 0
             onClicked: {
                 console.log("up arrow clicked", index)
                 root.model.move(index, index - 1, 1)
+                writeModel()
             }
         }
 
@@ -86,14 +115,15 @@ Page {
 
             anchors {
                 left: upArrow.right
-                leftMargin: Theme.geometry_opportunityLoad_horizontalSpacing
+                leftMargin: Theme.geometry_opportunityLoad_margin
                 verticalCenter: parent.verticalCenter
             }
-            enabled: index !== (repeater.count - 1)
+            enabled: index !== (list.count - 1)
             rotation: 180
             onClicked: {
                 console.log("down arrow clicked", index)
                 root.model.move(index + 1, index, 1)
+                writeModel()
             }
         }
 
@@ -124,24 +154,72 @@ Page {
     }
 
     GradientListView {
+        interactive: false
+        clip: true
         model: VisibleItemModel {
             SettingsColumn {
                 width: parent ? parent.width : 0
 
                 SettingsListHeader {
-                    id: osLargeFeatures
                     text: "Device Priority"
                 }
 
-                Repeater {
-                    id: repeater
-
+                ListView {
+                    id: list
+                    width: parent.width
+                    implicitHeight: contentHeight
                     model: root.model
                     delegate: DevicePriorityListNavigation {
                         text: label || uniqueIdentifier || ""
                     }
+                    move: Transition {
+                        NumberAnimation {
+                            properties: "x,y"
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                    displaced: Transition {
+                        NumberAnimation {
+                            properties: "x,y"
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
                 }
             }
         }
+    }
+
+    ListModel {
+        id: model
+
+        objectName: "PageControllableLoads.model"
+        onCountChanged: console.log(objectName, "count:", count)
+        /*
+        ListElement {
+            controllable: true
+            deviceInstance: 0
+            label: "Battery"
+            serviceType: "system"
+            uniqueIdentifier:"battery"
+        }
+        ListElement {
+            controllable:true
+            deviceInstance:56
+            serviceType:"acload"
+            uniqueIdentifier:"shellyPro2PMPVHeat2_56"
+        }
+        ListElement {
+            controllable:true
+            deviceInstance:54
+            serviceType:"acload"
+            uniqueIdentifier:"shellyPro2PMPVHeat1_54"
+        }
+        ListElement {
+            controllable:true
+            deviceInstance:55
+            serviceType:"acload"
+            uniqueIdentifier:"shellyPro2PMPVHeat2_55"
+        }
+        */
     }
 }

@@ -535,5 +535,5 @@
     "geometry_boatPage_motorDriveColumn_spacing": 18,
     "geometry_boatPage_motordriveRow_image_width": 32,
 
-    "geometry_opportunityLoad_horizontalSpacing": 4
+    "geometry_opportunityLoad_margin": 4
 }
