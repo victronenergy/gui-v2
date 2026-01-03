@@ -9,80 +9,7 @@ import Victron.VenusOS
 Page {
     id: root
 
-    property alias model : model
-    readonly property var backendValue: loads.valid ? loads.value : []
-    property var _loads: ({})
-
-    property var jsonArray: [
-        {
-            "controllable":true,
-            "deviceInstance":0,
-            "label":"Battery",
-            "serviceType":"system",
-            "uniqueIdentifier":"battery"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":56,
-            "serviceType":"acload",
-            "uniqueIdentifier":
-            "shellyPro2PMPVHeat2_56"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":54,
-            "serviceType":"acload",
-            "uniqueIdentifier":"shellyPro2PMPVHeat1_54"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":55,
-            "serviceType":"acload",
-            "uniqueIdentifier":"shellyPro2PMPVHeat2_55"
-        }
-    ]
-
-    property var jsonArray2: [
-        {
-            controllable:true,
-            deviceInstance:0,
-            label:"Battery",
-            serviceType:"system",
-            uniqueIdentifier:"battery"
-        },
-        {
-            controllable:true,
-            deviceInstance:56,
-            serviceType:"acload",
-            uniqueIdentifier:"shellyPro2PMPVHeat2_56"
-        },
-        {
-            controllable:true,
-            deviceInstance:54,
-            serviceType:"acload",
-            uniqueIdentifier:"shellyPro2PMPVHeat1_54"
-        },
-        {
-            controllable:true,
-            deviceInstance:55,
-            serviceType:"acload",
-            uniqueIdentifier:"shellyPro2PMPVHeat2_55"
-        }
-    ]
-
-    function writeModel() {
-        var newValue = []
-        let changesPending = model.count !== backendValue.length
-        for (var i = 0; i < model.count && !changesPending; ++i) {
-            newValue.push(model.get(i))
-            changesPending |= (model.get(i) != backendValue[i])
-        }
-
-        if (changesPending) {
-            console.log("writing", JSON.stringify(newValue))
-            //loads.setValue(JSON.stringify(newValue))
-        }
-    }
+    property alias model : listModel
 
     property VeQuickItem loads: VeQuickItem {
         uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
@@ -102,18 +29,18 @@ Page {
                             console.warn("Unable to parse data from index", i)
                         }
                     }
+                    listModel.readFromBackEnd(value)
                 }
 
                 return
             }
-            _loads = jsonObject
-            listView.model = Object.keys(jsonObject)
         }
+        /*
         Component.onCompleted: {
             console.log("*** calling loads.setValue", JSON.stringify(jsonArray))
-            //loads.setValue("")
             loads.setValue(JSON.stringify(jsonArray))
         }
+        */
     }
 
     component Arrow : ListItemButton {
@@ -146,7 +73,7 @@ Page {
             onClicked: {
                 console.log("up arrow clicked", index)
                 root.model.move(index, index - 1, 1)
-                writeModel()
+                listModel.writeToBackEnd()
             }
         }
 
@@ -163,7 +90,7 @@ Page {
             onClicked: {
                 console.log("down arrow clicked", index)
                 root.model.move(index + 1, index, 1)
-                writeModel()
+                listModel.writeToBackEnd()
             }
         }
 
@@ -207,15 +134,11 @@ Page {
                 ListView {
                     id: listView
 
-                    onModelChanged: {
-                        console.log("********** onModelChanged:", JSON.stringify(model))
-                    }
-
+                    model: listModel
                     width: parent.width
                     implicitHeight: contentHeight
                     delegate: DevicePriorityListNavigation {
-
-                        text: _loads[modelData].label || _loads[modelData].uniqueIdentifier || ""
+                        text: model.label || model.uniqueIdentifier || ""
                     }
                     move: Transition {
                         NumberAnimation {
@@ -235,36 +158,56 @@ Page {
     }
 
     ListModel {
-        id: model
+        id: listModel
+
+        function readFromBackEnd(jsArray) {
+            for (var i = 0; i < jsArray.length; ++i) {
+                const oldElement = i < listModel.count ? listModel.get(i) : null
+                if (oldElement !== jsArray[i]) {
+                    listModel.set(i, jsArray[i])
+                }
+            }
+        }
+
+        function writeToBackEnd() {
+            var newValue = []
+            for (var i = 0; i < listModel.count; ++i) {
+                newValue.push(listModel.get(i))
+            }
+
+            console.log("*************************** writing", JSON.stringify(newValue))
+            loads.setValue(JSON.stringify(newValue))
+        }
 
         objectName: "PageControllableLoads.model"
         onCountChanged: console.log(objectName, "count:", count)
-        /*
-        ListElement {
-            controllable: true
-            deviceInstance: 0
-            label: "Battery"
-            serviceType: "system"
-            uniqueIdentifier:"battery"
-        }
-        ListElement {
-            controllable:true
-            deviceInstance:56
-            serviceType:"acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat2_56"
-        }
-        ListElement {
-            controllable:true
-            deviceInstance:54
-            serviceType:"acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat1_54"
-        }
-        ListElement {
-            controllable:true
-            deviceInstance:55
-            serviceType:"acload"
-            uniqueIdentifier:"shellyPro2PMPVHeat2_55"
-        }
-        */
     }
+    property var jsonArray: [
+        {
+            "controllable":true,
+            "deviceInstance":0,
+            "label":"Battery",
+            "serviceType":"system",
+            "uniqueIdentifier":"battery"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":56,
+            "serviceType":"acload",
+            "uniqueIdentifier":
+            "shellyPro2PMPVHeat2_56"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":54,
+            "serviceType":"acload",
+            "uniqueIdentifier":"shellyPro2PMPVHeat1_54"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":55,
+            "serviceType":"acload",
+            "uniqueIdentifier":"shellyPro2PMPVHeat2_55"
+        }
+    ]
 }
