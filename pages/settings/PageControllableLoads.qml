@@ -31,16 +31,8 @@ Page {
                     }
                     listModel.readFromBackEnd(value)
                 }
-
-                return
             }
         }
-        /*
-        Component.onCompleted: {
-            console.log("*** calling loads.setValue", JSON.stringify(jsonArray))
-            loads.setValue(JSON.stringify(jsonArray))
-        }
-        */
     }
 
     component Arrow : ListItemButton {
