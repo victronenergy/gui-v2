@@ -11,9 +11,64 @@ Page {
 
     property alias model : model
     readonly property var backendValue: loads.valid ? loads.value : []
+    property var _loads: ({})
 
-    property var jsonArray: [{"controllable":true,"deviceInstance":0,"label":"Battery","serviceType":"system","uniqueIdentifier":"battery"},{"controllable":true,"deviceInstance":56,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat2_56"},{"controllable":true,"deviceInstance":54,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat1_54"},{"controllable":true,"deviceInstance":55,"serviceType":"acload","uniqueIdentifier":"shellyPro2PMPVHeat2_55"}]
-    property string jsonArray2: "{controllable:true,deviceInstance:0,label:Battery,serviceType:system,uniqueIdentifier:battery},{controllable:true,deviceInstance:56,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat2_56},{controllable:true,deviceInstance:54,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat1_54},{controllable:true,deviceInstance:55,serviceType:acload,uniqueIdentifier:shellyPro2PMPVHeat2_55}"
+    property var jsonArray: [
+        {
+            "controllable":true,
+            "deviceInstance":0,
+            "label":"Battery",
+            "serviceType":"system",
+            "uniqueIdentifier":"battery"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":56,
+            "serviceType":"acload",
+            "uniqueIdentifier":
+            "shellyPro2PMPVHeat2_56"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":54,
+            "serviceType":"acload",
+            "uniqueIdentifier":"shellyPro2PMPVHeat1_54"
+        },
+        {
+            "controllable":true,
+            "deviceInstance":55,
+            "serviceType":"acload",
+            "uniqueIdentifier":"shellyPro2PMPVHeat2_55"
+        }
+    ]
+
+    property var jsonArray2: [
+        {
+            controllable:true,
+            deviceInstance:0,
+            label:"Battery",
+            serviceType:"system",
+            uniqueIdentifier:"battery"
+        },
+        {
+            controllable:true,
+            deviceInstance:56,
+            serviceType:"acload",
+            uniqueIdentifier:"shellyPro2PMPVHeat2_56"
+        },
+        {
+            controllable:true,
+            deviceInstance:54,
+            serviceType:"acload",
+            uniqueIdentifier:"shellyPro2PMPVHeat1_54"
+        },
+        {
+            controllable:true,
+            deviceInstance:55,
+            serviceType:"acload",
+            uniqueIdentifier:"shellyPro2PMPVHeat2_55"
+        }
+    ]
 
     function writeModel() {
         var newValue = []
@@ -31,48 +86,33 @@ Page {
 
     property VeQuickItem loads: VeQuickItem {
         uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
+        invalidate: true
         onValueChanged: {
-
-            console.log(uid, "onValueChanged:", value)
-            /*
-            for (var i = 0; i < data.count; ++i)
-            {
-                console.log("data.get(", i, "):", JSON.stringify(data.get(i)))
-            }
-
-            for (var key in data) {
-                console.log("data[", key, "]:", data[key])
-            }
-
-            const jsonData = JSON.parse(data);
-
-            for (var i = 0; i < jsonData.length; ++i) {
-                const newValue = jsonData[i]
-                const oldValue = model.count > i + 1 ? model.get(i) : {}
-                console.log(
-                    "deviceInstance:", newValue.deviceInstance,
-                    "serviceType:", newValue.serviceType,
-                    "uniqueIdentifier:", newValue.uniqueIdentifier
-                );
-                if (newValue !== oldValue) {
-                    console.log("calling model.set(", i, JSON.stringify(newValue), ")")
-                    model.set(i, newValue)
+            console.log(uid, "onValueChanged:", !!value ? value : "null", !!value && value.length ? value.length : "unknown length")
+            let jsonObject
+            try {
+                jsonObject = JSON.parse(value)
+            } catch (e) {
+                console.warn("Unable to parse data from", uid)
+                if (!!value && value.length) {
+                    for (var i = 0; i < value.length; ++i) {
+                        try {
+                            console.log(JSON.stringify(value[i]))
+                        } catch (e) {
+                            console.warn("Unable to parse data from index", i)
+                        }
+                    }
                 }
-            }
 
-            for (let item of value) {
+                return
             }
-            */
+            _loads = jsonObject
+            listView.model = Object.keys(jsonObject)
         }
         Component.onCompleted: {
-            console.log("calling loads.setValue")
-            loads.setValue([])
-            /*
-            console.log("calling setValue:", (jsonArray2))
-            setValue([{"controllable":true,"deviceInstance":0,"label":"Battery","serviceType":"system","uniqueIdentifier":"battery"}])
-            setValue(jsonArray2)
-            loads.value = jsonArray2
-*/
+            console.log("*** calling loads.setValue", JSON.stringify(jsonArray))
+            //loads.setValue("")
+            loads.setValue(JSON.stringify(jsonArray))
         }
     }
 
@@ -118,7 +158,7 @@ Page {
                 leftMargin: Theme.geometry_opportunityLoad_margin
                 verticalCenter: parent.verticalCenter
             }
-            enabled: index !== (list.count - 1)
+            enabled: index !== (listView.count - 1)
             rotation: 180
             onClicked: {
                 console.log("down arrow clicked", index)
@@ -165,12 +205,17 @@ Page {
                 }
 
                 ListView {
-                    id: list
+                    id: listView
+
+                    onModelChanged: {
+                        console.log("********** onModelChanged:", JSON.stringify(model))
+                    }
+
                     width: parent.width
                     implicitHeight: contentHeight
-                    model: root.model
                     delegate: DevicePriorityListNavigation {
-                        text: label || uniqueIdentifier || ""
+
+                        text: _loads[modelData].label || _loads[modelData].uniqueIdentifier || ""
                     }
                     move: Transition {
                         NumberAnimation {

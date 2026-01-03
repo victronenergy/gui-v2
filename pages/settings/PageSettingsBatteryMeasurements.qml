@@ -20,6 +20,7 @@ Page {
 		id: availableBatteries
 		uid: Global.system.serviceUid + "/AvailableBatteries"
 		onValueChanged: {
+			console.log("*****************", uid, value)
 			let jsonObject
 			try {
 				jsonObject = JSON.parse(value)
@@ -29,6 +30,34 @@ Page {
 			}
 			_batteries = jsonObject
 			batteryListView.model = Object.keys(jsonObject)
+		}
+		property var batteryMap: ({})
+		function addBattery() {
+			batteryMap["blah123"] = {
+				name: "name123",
+				channel: null,
+				type: "battery"
+			}
+
+			setValue(JSON.stringify(batteryMap))
+		}
+	}
+	property var _batteries2:
+		'{
+			"com.victronenergy.dcsource/289":{"name":"blah Wind charger ","channel":null,"type":"dcsource"},
+			"com.victronenergy.battery/289/1":{"name":"blah Service battery","channel":1,"type":"battery"},
+			"com.victronenergy.battery/289":{"name":"blah Service battery","channel":null,"type":"battery"},
+			"com.victronenergy.battery/512":{"name":"blah Pylontech Force L2","channel":null,"type":"battery"},
+			"com.victronenergy.battery/0":{"name":"blah Virtual battery","channel":null,"type":"battery"},
+			"com.victronenergy.battery/1":{"name":"blah Lynx Smart BMS NG","channel":null,"type":"battery"}
+		}'
+
+	Timer {
+		running: true
+		interval: 1000
+		onTriggered: {
+			console.log("****************** onTriggered")
+			availableBatteries.addBattery()
 		}
 	}
 

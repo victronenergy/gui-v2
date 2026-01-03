@@ -160,11 +160,13 @@ Item {
 		property var batteryMap: ({})
 
 		function addBattery(battery) {
+			console.log("battery.portableIdWithInstance():", battery.portableIdWithInstance(), "battery.name:", battery.name)
 			batteryMap[battery.portableIdWithInstance()] = {
 				name: battery.name,
 				channel: battery.channel > 0 ? battery.channel : null,
 				type: BackendConnection.serviceTypeFromUid(battery.serviceUid)
 			}
+
 			setValue(JSON.stringify(batteryMap))
 		}
 
@@ -174,6 +176,7 @@ Item {
 		}
 
 		uid: Global.system.serviceUid + "/AvailableBatteries"
+		onValueChanged: console.log("*****************", uid, value)
 	}
 
 	// Set system /AvailableBatteryServices (type is string). Example value:
