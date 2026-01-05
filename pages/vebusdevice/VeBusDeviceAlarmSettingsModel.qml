@@ -17,7 +17,7 @@ ListModel {
 		qsTrId("vebus_device_high_dc_voltage"),
 		//% "High DC current"
 		qsTrId("vebus_device_high_dc_current"),
-		//% Phase rotation
+		//% "Phase rotation"
 		qsTrId("vebus_device_phase_rotation"),
 		//% "Temperature sense error"
 		qsTrId("vebus_device_temperature_sense_error"),
