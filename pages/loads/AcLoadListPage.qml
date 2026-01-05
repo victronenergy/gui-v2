@@ -20,7 +20,7 @@ Page {
 			readonly property alias columnWidth: loadSummary.fixedColumnWidth
 			readonly property alias columnSpacing: loadSummary.columnSpacing
 
-			visible: root.measurements.phaseCount > 1
+			visible: root.model.count > 1 || root.measurements.phaseCount > 1
 			width: parent?.width ?? 0
 			height: visible ? phaseTable.y + phaseTable.height + bottomInset : 0
 			bottomInset: Theme.geometry_gradientList_spacing
