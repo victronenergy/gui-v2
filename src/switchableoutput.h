@@ -59,6 +59,9 @@ class SwitchableOutput : public QObject
 	Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged FINAL)
 	Q_PROPERTY(int validTypes READ validTypes NOTIFY validTypesChanged FINAL)
 	Q_PROPERTY(bool hasValidType READ hasValidType NOTIFY hasValidTypeChanged FINAL)
+	Q_PROPERTY(int function READ function WRITE setFunction NOTIFY functionChanged FINAL)
+	Q_PROPERTY(int validFunctions READ validFunctions NOTIFY validFunctionsChanged FINAL)
+	Q_PROPERTY(bool hasValidFunction READ hasValidFunction NOTIFY hasValidFunctionChanged FINAL)
 	Q_PROPERTY(QString group READ group NOTIFY groupChanged FINAL)
 	Q_PROPERTY(bool allowedInGroupModel READ allowedInGroupModel NOTIFY allowedInGroupModelChanged FINAL)
 	Q_PROPERTY(QString unitText READ unitText NOTIFY unitTextChanged FINAL)
@@ -91,6 +94,9 @@ public:
 	// Whether the Type is a supported Type value, and matches the ValidTypes.
 	bool hasValidType() const;
 
+	// Whether the Function is a supported Type value, and matches the ValidFunctions.
+	bool hasValidFunction() const;
+
 	// Whether the output should be included in a SwitchableOutputGroupModel.
 	bool allowedInGroupModel() const;
 
@@ -103,6 +109,9 @@ public:
 	int type() const;
 	void setType(int type);
 	int validTypes() const;
+	int function() const;
+	void setFunction(int function);
+	int validFunctions() const;
 	QString group() const;
 	QString unitText() const; // The raw /Unit value
 	int unitType() const; // The unit, converted to a Unit_Type value (if applicable)
@@ -122,6 +131,9 @@ Q_SIGNALS:
 	void typeChanged();
 	void validTypesChanged();
 	void hasValidTypeChanged();
+	void functionChanged();
+	void validFunctionsChanged();
+	void hasValidFunctionChanged();
 	void groupChanged();
 	void allowedInGroupModelChanged();
 	void unitTextChanged();
@@ -133,11 +145,14 @@ private:
 	void reset();
 	void setTypeFromVariant(const QVariant &typeValue);
 	void setValidTypes(const QVariant &validTypesValue);
+	void setFunctionFromVariant(const QVariant &typeValue);
+	void setValidFunctions(const QVariant &validTypesValue);
 	void setUnit(const QVariant &unitValue);
 	void setDecimals(const QVariant &decimalsVariant);
 	void updateDecimalsFromStepSize(const QVariant &stepSizeVariant);
 	void updateDecimals();
 	void updateHasValidType();
+	void updateHasValidFunction();
 	void updateAllowedInGroupModel();
 	void updateFormattedName();
 	bool shouldShowUiControl() const;
@@ -153,15 +168,14 @@ private:
 	// Settings properties (under /Settings path)
 	QPointer<VeQItem> m_typeItem;
 	QPointer<VeQItem> m_validTypesItem;
+	QPointer<VeQItem> m_functionItem;
+	QPointer<VeQItem> m_validFunctionsItem;
 	QPointer<VeQItem> m_groupItem;
 	QPointer<VeQItem> m_customNameItem;
 	QPointer<VeQItem> m_showUIControlItem;
 
 	// The device to which this output belongs (null if this is on the system service)
 	QPointer<BaseDevice> m_device;
-
-	// Value of /Relay/Function if this is on the system service
-	QPointer<VeQItem> m_relayFunctionItem;
 
 	QString m_serviceUid;
 	QString m_formattedName;
@@ -171,6 +185,7 @@ private:
 	int m_rawDecimals = -1;
 	int m_decimals = 0;
 	bool m_hasValidType = false;
+	bool m_hasValidFunction = false;
 	bool m_allowedInGroupModel = false;
 };
 

@@ -73,9 +73,9 @@ Page {
 				Page {
 					function _hasInvalidRelayTempConfig(relayNr) {
 						if (relayNr === 0) {
-							return relay0FunctionItem.value !== VenusOS.Relay_Function_Temperature
+							return relay0FunctionItem.value !== VenusOS.SwitchableOutput_Function_Temperature
 						} else if (relayNr === 1) {
-							return relay1FunctionItem.value !== VenusOS.Relay_Function_Temperature
+							return relay1FunctionItem.value !== VenusOS.SwitchableOutput_Function_Temperature
 						}
 						return false
 					}
@@ -93,7 +93,7 @@ Page {
 					}
 
 					GradientListView {
-						model: relay0FunctionItem.value === VenusOS.Relay_Function_Temperature || relay1FunctionItem.value === VenusOS.Relay_Function_Temperature
+						model: relay0FunctionItem.value === VenusOS.SwitchableOutput_Function_Temperature || relay1FunctionItem.value === VenusOS.SwitchableOutput_Function_Temperature
 							   ? tempRelayModel
 							   : disabledModel
 
