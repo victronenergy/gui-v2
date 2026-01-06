@@ -22,7 +22,7 @@ Page {
 
 		model: relayFunction.value === undefined
 			   ? startStopModel
-			   : relayFunction.value === VenusOS.Relay_Function_Tank_Pump ? startStopModel : disabledModel
+			   : relayFunction.value === VenusOS.SwitchableOutput_Function_Tank_Pump ? startStopModel : disabledModel
 
 		VeQuickItem {
 			id: relayFunction
