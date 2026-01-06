@@ -70,6 +70,14 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 		m_validTypesItem = validTypesItem;
 		connect(validTypesItem, &VeQItem::valueChanged, this, &SwitchableOutput::setValidTypes);
 	}
+	if (VeQItem *functionItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Function"))) {
+		m_relayFunctionItem = functionItem;
+		connect(functionItem, &VeQItem::valueChanged, this, &SwitchableOutput::setFunctionFromVariant);
+	}
+	if (VeQItem *validFunctionsItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/ValidFunctions"))) {
+		m_validFunctionsItem = validFunctionsItem;
+		connect(validFunctionsItem, &VeQItem::valueChanged, this, &SwitchableOutput::setValidFunctions);
+	}
 	if (VeQItem *groupItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Group"))) {
 		m_groupItem = groupItem;
 		connect(groupItem, &VeQItem::valueChanged, this, &SwitchableOutput::groupChanged);
@@ -113,16 +121,9 @@ void SwitchableOutput::initialize(VeQItem *outputItem)
 		}
 	}
 
-	// Fetch Settings/Function for system relays.
-	if (BaseDevice::serviceTypeFromUid(m_serviceUid) == QStringLiteral("system")) {
-		if (VeQItem *relayFunctionItem = m_outputItem->itemGetOrCreate(QStringLiteral("Settings/Function"))) {
-			m_relayFunctionItem = relayFunctionItem;
-			connect(relayFunctionItem, &VeQItem::valueChanged, this, &SwitchableOutput::updateAllowedInGroupModel);
-		}
-	}
-
 	updateFormattedName();
 	updateHasValidType();
+	updateHasValidFunction();
 	updateAllowedInGroupModel();
 }
 
@@ -264,6 +265,24 @@ bool SwitchableOutput::hasValidType() const
 	return m_hasValidType;
 }
 
+int SwitchableOutput::function() const
+{
+	// Default type is -1
+	bool ok = false;
+	const int t = m_relayFunctionItem ? m_relayFunctionItem->getValue().toInt(&ok) : -1;
+	return ok ? t : -1;
+}
+
+int SwitchableOutput::validFunctions() const
+{
+	return m_validFunctionsItem ? m_validFunctionsItem->getValue().toInt() : 0;
+}
+
+bool SwitchableOutput::hasValidFunction() const
+{
+	return m_hasValidFunction;
+}
+
 QString SwitchableOutput::group() const
 {
 	return m_groupItem ? m_groupItem->getValue().toString() : QString();
@@ -326,6 +345,28 @@ void SwitchableOutput::setValidTypes(const QVariant &validTypesValue)
 	Q_UNUSED(validTypesValue);
 	updateHasValidType();
 	emit validTypesChanged();
+}
+
+void SwitchableOutput::setFunction(int function)
+{
+	if (m_relayFunctionItem) {
+		m_relayFunctionItem->setValue(function);
+		updateHasValidFunction();
+		emit functionChanged();
+	}
+}
+void SwitchableOutput::setFunctionFromVariant(const QVariant &functionValue)
+{
+	Q_UNUSED(functionValue);
+	updateHasValidFunction();
+	emit functionChanged();
+}
+
+void SwitchableOutput::setValidFunctions(const QVariant &validFunctionsValue)
+{
+	Q_UNUSED(validFunctionsValue);
+	updateHasValidFunction();
+	emit validFunctionsChanged();
 }
 
 void SwitchableOutput::setUnit(const QVariant &unitValue)
@@ -395,6 +436,18 @@ void SwitchableOutput::updateHasValidType()
 		m_hasValidType = hasValidType;
 		updateAllowedInGroupModel();
 		emit hasValidTypeChanged();
+	}
+}
+
+void SwitchableOutput::updateHasValidFunction()
+{
+	const int functionInt = function();
+	const bool hasValidFunction = functionInt >= Enums::Relay_Function_Alarm
+				&& functionInt <= Enums::Relay_Function_MaxSupportedType
+				&& (validFunctions() & (1 << functionInt));
+	if (hasValidFunction != m_hasValidFunction) {
+		m_hasValidFunction = hasValidFunction;
+		emit hasValidFunctionChanged();
 	}
 }
 
