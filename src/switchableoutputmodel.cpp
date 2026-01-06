@@ -146,7 +146,7 @@ bool SwitchableOutputModel::filterAcceptsRow(int sourceRow, const QModelIndex &)
 
 	// If the model requires manual relays, only show this output if it is configured as one.
 	if (m_filterType == ManualFunction
-			&& (!entry.functionItem || entry.functionItem->getValue() != QVariant(VenusOS::Enums::Relay_Function_Manual))) {
+			&& (!entry.functionItem || entry.functionItem->getValue() != QVariant(VenusOS::Enums::SwitchableOutput_Function_Manual))) {
 		return false;
 	}
 

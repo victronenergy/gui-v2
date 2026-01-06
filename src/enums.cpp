@@ -539,6 +539,39 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 	}
 }
 
+QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value) const
+{
+	switch (value) {
+	case SwitchableOutput_Function_Disabled:
+		//% "Disabled"
+		return qtTrId("switchable_output_function_disabled");
+	case SwitchableOutput_Function_Alarm:
+		//% "Alarm"
+		return qtTrId("switchable_output_function_alarm");
+	case SwitchableOutput_Function_GeneratorStartStop:
+		//% "Generator start/stop"
+		return qtTrId("switchable_output_function_generator_startstop");
+	case SwitchableOutput_Function_Manual:
+		//% "Manual"
+		return qtTrId("switchable_output_function_manual");
+	case SwitchableOutput_Function_Tank_Pump:
+		//% "Tank pump"
+		return qtTrId("switchable_output_function_tankpump");
+	case SwitchableOutput_Function_Temperature:
+		//% "Temperature"
+		return qtTrId("switchable_output_function_temperature");
+	case SwitchableOutput_Function_GensetHelperRelay:
+		//% "Genset Helper"
+		return qtTrId("switchable_output_function_genset_helper");
+	case SwitchableOutput_Function_OpportunityLoad:
+		//% "Opportunity load"
+		return qtTrId("switchable_output_function_opportunity_load");
+	default:
+		//% "Unsupported type: %1"
+		return qtTrId("switchable_output_unsupported").arg(value);
+	}
+}
+
 QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const
 {
 	switch (value) {
