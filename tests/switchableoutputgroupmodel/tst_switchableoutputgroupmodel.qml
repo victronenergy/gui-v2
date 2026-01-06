@@ -195,16 +195,19 @@ TestCase {
 							"SwitchableOutput/0/State": 0,
 							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
+							"SwitchableOutput/0/Settings/ValidFunctions": 255,
 							"SwitchableOutput/0/Settings/Function": 2, // Manual
 							"SwitchableOutput/1/Name": "startstop",
 							"SwitchableOutput/1/State": 0,
 							"SwitchableOutput/1/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/1/Settings/Type": 0,
+							"SwitchableOutput/1/Settings/ValidFunctions": 255,
 							"SwitchableOutput/1/Settings/Function": 1, // Start/Stop (disallowed from model)
 							"SwitchableOutput/2/Name": "manual2",
 							"SwitchableOutput/2/State": 0,
 							"SwitchableOutput/2/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/2/Settings/Type": 0,
+							"SwitchableOutput/2/Settings/ValidFunctions": 255,
 							"SwitchableOutput/2/Settings/Function": 2, // Manual
 						},
 					}
@@ -556,6 +559,7 @@ TestCase {
 							"SwitchableOutput/0/State": 0,
 							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
 							"SwitchableOutput/0/Settings/Type": 0,
+							"SwitchableOutput/0/Settings/ValidFunctions": 255,
 							"SwitchableOutput/0/Settings/Function": 2, // Manual
 							"SwitchableOutput/0/Settings/Group": "group 2",
 						},
