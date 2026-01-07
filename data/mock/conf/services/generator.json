@@ -1,8 +1,6 @@
 {
     "com.victronenergy.generator.startstop0": {
-        "/AccumulatedDaily": "{\"1667347200\": 60: \"1667433600\": 120: \"1667520000\": 1800}",
         "/AccumulatedRuntime": 4413310,
-        "/AccumulatedTotal": 3780849,
         "/Alarms/AutoStartDisabled": 0,
         "/Alarms/NoGeneratorAtAcIn": 0,
         "/Alarms/NoGeneratorAtDcIn": null,
@@ -52,5 +50,9 @@
         "/TodayRuntime": 600,
         "/Type": 0,
         "/WarmUpTime": 40
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Generator0/AccumulatedDaily": "{\"1667347200\": 60: \"1667433600\": 120: \"1667520000\": 1800}",
+        "/Settings/Generator0/AccumulatedTotal": 3780849
     }
 }
