@@ -112,7 +112,8 @@ TestCase {
 			expect(unit, 1234, "1234", unitString)
 
 			if (Units.isScalingSupported(unit)) {
-				if (unit === VenusOS.Units_Volume_Litre) {
+				if (unit === VenusOS.Units_Volume_Litre
+						|| unit === VenusOS.Units_Altitude_Metre) {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
