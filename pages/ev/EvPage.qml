@@ -120,12 +120,11 @@ DevicePage {
 		ListText {
 			//% "Position"
 			text: qsTrId("ev_position")
-			secondaryText: {
-				if (latitude.valid && longitude.valid) {
-					return latitude.value.toFixed(4) + ", " + longitude.value.toFixed(4)
-				}
-				return "--"
-			}
+			secondaryText: latitude.valid && longitude.valid
+					? "%1, %2"
+						.arg(Global.systemSettings.formatLatitude(latitude.value))
+						.arg(Global.systemSettings.formatLongitude(longitude.value))
+					: "--"
 			preferredVisible: latitude.valid && longitude.valid
 		}
 

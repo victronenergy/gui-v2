@@ -60,6 +60,28 @@ QString Enums::battery_iconFromMode(Battery_Mode mode) const
 	}
 }
 
+QString Enums::cardinalDirectionToShortText(CardinalDirection direction) const
+{
+	switch (direction) {
+	case CardinalDirection_North:
+		//: Abbreviation of "North" direction
+		//% "N"
+		return qtTrId("cardinalDirection_short_north");
+	case CardinalDirection_South:
+		//: Abbreviation of "South" direction
+		//% "S"
+		return qtTrId("cardinalDirection_short_south");
+	case CardinalDirection_East:
+		//: Abbreviation of "East" direction
+		//% "E"
+		return qtTrId("cardinalDirection_short_east");
+	case CardinalDirection_West:
+		//: Abbreviation of "West" direction
+		//% "W"
+		return qtTrId("cardinalDirection_short_west");
+	}
+}
+
 Enums::DcMeter_Type Enums::dcMeter_type(const QString &serviceType, int monitorMode) const
 {
 	// These service types directly reflect the DC meter type, regardless of the /MonitorMode value.

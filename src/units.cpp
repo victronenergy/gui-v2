@@ -97,6 +97,47 @@ qreal Units::formattedNumberToReal(const QString &s) const
 	return ok ? d : qQNaN();
 }
 
+QString Units::formatLatitude(qreal latitude, VenusOS::Enums::GpsData_Format format) const
+{
+	return formatCoordinate(latitude, format,
+			latitude >= 0
+				? VenusOS::Enums::CardinalDirection_North
+				: VenusOS::Enums::CardinalDirection_South);
+}
+
+QString Units::formatLongitude(qreal longitude, VenusOS::Enums::GpsData_Format format) const
+{
+	return formatCoordinate(longitude, format,
+			longitude >= 0
+				? VenusOS::Enums::CardinalDirection_East
+				: VenusOS::Enums::CardinalDirection_West);
+}
+
+QString Units::formatCoordinate(qreal decimalDegrees, VenusOS::Enums::GpsData_Format format, VenusOS::Enums::CardinalDirection direction) const
+{
+	const double degrees = std::abs(decimalDegrees);
+	const double minutes = std::fmod(degrees, 1) * 60.0;
+	const double seconds = std::fmod(minutes, 1) * 60.0;
+
+	switch (format) {
+	case VenusOS::Enums::GpsData_Format_DegreesMinutesSeconds: // e.g. 52° 20' 41.6" N
+		return QString("%1%2 %3' %4\" %5")
+				.arg(formatNumber(std::floor(degrees)))
+				.arg(DegreesSymbol)
+				.arg(formatNumber(std::floor(minutes)))
+				.arg(formatNumber(seconds, 1))
+				.arg(VenusOS::Enums::create()->cardinalDirectionToShortText(direction));
+	case VenusOS::Enums::GpsData_Format_DecimalDegrees: // e.g. 52.34489
+		return formatNumber(decimalDegrees, 6);
+	case VenusOS::Enums::GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
+		return QString("%1%2 %3 %4")
+				.arg(formatNumber(std::floor(degrees)))
+				.arg(DegreesSymbol)
+				.arg(formatNumber(minutes, 4))
+				.arg(VenusOS::Enums::create()->cardinalDirectionToShortText(direction));
+	}
+}
+
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {

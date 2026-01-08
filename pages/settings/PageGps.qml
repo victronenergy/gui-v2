@@ -14,29 +14,6 @@ DevicePage {
 
 	property string bindPrefix
 
-	function formatCoord(val, dir, fmt) {
-		const degrees = Math.abs(val)
-		const minutes = (degrees % 1) * 60.0
-		const seconds = (minutes % 1) * 60.0
-		const direction = val >= 0 ? dir[0] : dir[1]
-
-		switch (fmt) {
-		case VenusOS.GpsData_Format_DecimalDegrees: // e.g. 52.34489
-			return Units.formatNumber(val, 6)
-		case VenusOS.GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
-			return "%1° %2 %3"
-				.arg(Units.formatNumber(Math.floor(degrees)))
-				.arg(Units.formatNumber(minutes, 4))
-				.arg(direction)
-		default: // VenusOS.GpsData_Format_DegreesMinutesSeconds e.g. 52° 20' 41.6" N
-			return "%1° %2' %3\" %4"
-					.arg(Units.formatNumber(Math.floor(degrees)))
-					.arg(Units.formatNumber(Math.floor(minutes)))
-					.arg(Units.formatNumber(seconds, 1))
-					.arg(direction)
-		}
-	}
-
 	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
@@ -60,14 +37,14 @@ DevicePage {
 			//% "Latitude"
 			text: qsTrId("settings_gps_latitude")
 			dataItem.uid: bindPrefix + "/Position/Latitude"
-			secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["N","S"], format.value) : "--"
+			secondaryText: dataItem.valid ? Global.systemSettings.formatLatitude(dataItem.value) : "--"
 		}
 
 		ListText {
 			//% "Longitude"
 			text: qsTrId("settings_gps_longitude")
 			dataItem.uid: bindPrefix + "/Position/Longitude"
-			secondaryText: dataItem.valid ? root.formatCoord(dataItem.value, ["E","W"], format.value) : "--"
+			secondaryText: dataItem.valid ? Global.systemSettings.formatLongitude(dataItem.value) : "--"
 		}
 
 		ListText {
@@ -129,11 +106,6 @@ DevicePage {
 	VeQuickItem {
 		id: fix
 		uid: bindPrefix + "/Fix"
-	}
-
-	VeQuickItem {
-		id: format
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
 	}
 
 	VeQuickItem {
