@@ -35,7 +35,7 @@ Page {
 						qsTrId("lynxiondiagnostics_4th_last_error"),
 					]
 
-					delegate: ListQuantityGroup {
+					delegate: ListText {
 						id: errorDelegate
 
 						required property int index
@@ -43,10 +43,8 @@ Page {
 						readonly property string bindPrefix: `${root.bindPrefix}/Diagnostics/LastErrors/${index + 1}`
 
 						text: modelData
-						model: QuantityObjectModel {
-							QuantityObject { object: error; key: "textValue" }
-							QuantityObject { object: errorTimestamp; key: "textValue" }
-						}
+						secondaryText: error.textValue
+						caption: errorTimestamp.textValue
 
 						VeQuickItem {
 							id: error
