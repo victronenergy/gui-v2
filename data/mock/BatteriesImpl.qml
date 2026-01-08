@@ -255,7 +255,7 @@ Item {
 	VeQuickItem {
 		uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
 		Component.onCompleted: {
-			setValue(JSON.stringify(jsonArray))
+			setValue(jsonArray)
 		}
 	}
 

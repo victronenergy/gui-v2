@@ -15,23 +15,10 @@ Page {
         uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
         invalidate: true
         onValueChanged: {
-            console.log(uid, "onValueChanged:", !!value ? value : "null", !!value && value.length ? value.length : "unknown length")
-            let jsonObject
-            try {
-                jsonObject = JSON.parse(value)
-            } catch (e) {
-                console.warn("Unable to parse data from", uid)
-                if (!!value && value.length) {
-                    for (var i = 0; i < value.length; ++i) {
-                        try {
-                            console.log(JSON.stringify(value[i]))
-                        } catch (e) {
-                            console.warn("Unable to parse data from index", i)
-                        }
-                    }
-                }
+            for (let i = 0; i < value.length; ++i) {
+                listModel.set(i, value[i])
             }
-            listModel.readFromBackEnd(jsonObject)
+            return
         }
     }
 
@@ -152,15 +139,6 @@ Page {
     ListModel {
         id: listModel
 
-        function readFromBackEnd(jsArray) {
-            for (var i = 0; i < jsArray.length; ++i) {
-                const oldElement = i < listModel.count ? listModel.get(i) : null
-                if (oldElement !== jsArray[i]) {
-                    listModel.set(i, jsArray[i])
-                }
-            }
-        }
-
         function writeToBackEnd() {
             var newValue = []
             for (var i = 0; i < listModel.count; ++i) {
@@ -168,39 +146,10 @@ Page {
             }
 
             console.log("*************************** writing", JSON.stringify(newValue))
-            loads.setValue(JSON.stringify(newValue))
+            loads.setValue(newValue)
         }
 
         objectName: "PageControllableLoads.model"
         onCountChanged: console.log(objectName, "count:", count)
     }
-
-    property var jsonArray: [
-        {
-            "controllable":true,
-            "deviceInstance":0,
-            "label":"Battery",
-            "serviceType":"system",
-            "uniqueIdentifier":"battery"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":56,
-            "serviceType":"acload",
-            "uniqueIdentifier":
-            "shellyPro2PMPVHeat2_56"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":54,
-            "serviceType":"acload",
-            "uniqueIdentifier":"shellyPro2PMPVHeat1_54"
-        },
-        {
-            "controllable":true,
-            "deviceInstance":55,
-            "serviceType":"acload",
-            "uniqueIdentifier":"shellyPro2PMPVHeat2_55"
-        }
-    ]
 }
