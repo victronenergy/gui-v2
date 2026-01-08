@@ -29,9 +29,9 @@ Page {
                             console.warn("Unable to parse data from index", i)
                         }
                     }
-                    listModel.readFromBackEnd(value)
                 }
             }
+            listModel.readFromBackEnd(jsonObject)
         }
     }
 
@@ -174,6 +174,7 @@ Page {
         objectName: "PageControllableLoads.model"
         onCountChanged: console.log(objectName, "count:", count)
     }
+
     property var jsonArray: [
         {
             "controllable":true,

@@ -224,6 +224,41 @@ Item {
 		uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
 	}
 
+	property var jsonArray: [
+		{
+			"controllable":true,
+			"deviceInstance":0,
+			"label":"Battery",
+			"serviceType":"system",
+			"uniqueIdentifier":"battery"
+		},
+		{
+			"controllable":true,
+			"deviceInstance":56,
+			"serviceType":"acload",
+			"uniqueIdentifier":
+			"shellyPro2PMPVHeat2_56"
+		},
+		{
+			"controllable":true,
+			"deviceInstance":54,
+			"serviceType":"acload",
+			"uniqueIdentifier":"shellyPro2PMPVHeat1_54"
+		},
+		{
+			"controllable":true,
+			"deviceInstance":55,
+			"serviceType":"acload",
+			"uniqueIdentifier":"shellyPro2PMPVHeat2_55"
+		}
+	]
+	VeQuickItem {
+		uid: BackendConnection.serviceUidForType("opportunityloads") + "/AvailableServices"
+		Component.onCompleted: {
+			setValue(JSON.stringify(jsonArray))
+		}
+	}
+
 	// Set settings /Settings/SystemSetup/Batteries/Configuration/*. Example values for a battery
 	// service with instance=1:
 	// "/Settings/SystemSetup/Batteries/Configuration/com_victronenergy_battery/1/Enabled": 1,
