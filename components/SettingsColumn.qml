@@ -16,6 +16,7 @@ BaseListItem {
 	property alias bottomPadding: contentColumn.bottomPadding
 
 	default property alias _data: contentColumn.data
+	readonly property KeyNavigationListHelper __navHelper: keyNavHelper
 
 	implicitWidth: contentColumn.implicitWidth
 	implicitHeight: contentColumn.implicitHeight
