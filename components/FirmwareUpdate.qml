@@ -13,15 +13,53 @@ QtObject {
 	readonly property string offlineAvailableVersion: _offlineVersion.value || ""
 	readonly property bool busy: state > FirmwareUpdater.Idle
 	readonly property var state: _stateItem.value
-	readonly property alias checkingForUpdate: updateCheckTimer.running
+	readonly property bool checkingForUpdate: updateCheckTimer.running || asyncValueTimer.running
+
+	// If the user performs a check using one feed, and gets a result,
+	// and then changes their feed and performs a check again,
+	// the result can be that the onlineAvailableVersion becomes invalid,
+	// which would bypass our handling of a change of valid value.
+	// We need to detect this case, and handle it appropriately,
+	// but only in the case where the system transitions from
+	// busy to !busy while checkingForUpdate is true.
+	property bool _availableVersionInvalidated: false
+
+	// Also, if busy goes from true to false, but the available version value
+	// stayed invalid (i.e. it never changed to invalid, but was always invalid)
+	// it may mean that no newer version was found (and the update check finished)
+	// OR it may mean that we received the state value update before the
+	// availableVersion value was deserialised.
+	// Thus, we cannot immediately assume that the update check has completed,
+	// but must do so asynchronously.
+	onBusyChanged: {
+		if (!busy && checkingForUpdate) {
+			if (_availableVersionInvalidated) {
+				updateCheckTimer.stop()
+				Qt.callLater(root._finishUpdateCheck)
+				_availableVersionInvalidated = false
+			} else if (!_onlineVersion.valid && !_offlineVersion.valid) {
+				asyncValueTimer.start()
+				updateCheckTimer.stop()
+			}
+		}
+	}
 
 	property int _updateType
 
-	property Timer _updateCheckTimeout: Timer {
+	property Timer _updateCheckTimer: Timer {
 		id: updateCheckTimer
 		repeat: false
 		running: false
+		interval: 15000 // give up after 15 seconds
 		onTriggered: root._timeoutUpdateCheck()
+	}
+
+	property Timer _asyncValueTimer: Timer {
+		id: asyncValueTimer
+		repeat: false
+		running: false
+		interval: 2000 // wait up to 2 seconds for value deserialisation
+		onTriggered: Qt.callLater(root._finishUpdateCheck)
 	}
 
 	property VeQuickItem _stateItem: VeQuickItem {
@@ -37,7 +75,8 @@ QtObject {
 
 			let msg = ""
 			switch (value) {
-			case FirmwareUpdater.Idle: // fall through
+			case FirmwareUpdater.Idle:
+				break
 			case FirmwareUpdater.UpdateFileNotFound:
 				// If a new version is available, the online/offline version value will be available
 				// together with the new state value, but the version may not be deserialized and
@@ -45,9 +84,8 @@ QtObject {
 				// set while waiting on the backend to supply the actual value.
 				// So, wait asynchronously for a valid value to be provided.
 				if (updateCheckTimer.running) {
+					asyncValueTimer.start()
 					updateCheckTimer.stop()
-					updateCheckTimer.interval = 500
-					updateCheckTimer.start()
 				}
 				break
 			case FirmwareUpdater.ErrorDuringChecking:
@@ -63,6 +101,7 @@ QtObject {
 				} else {
 					console.warn("/Firmware/State value set to ErrorDuringChecking by venus platform")
 				}
+				updateCheckTimer.stop()
 				break
 			case FirmwareUpdater.Checking:
 				break
@@ -79,10 +118,12 @@ QtObject {
 					//% "Installing firmware..."
 					msg = qsTrId("settings_firmware_installing_firmware")
 				}
+				updateCheckTimer.stop()
 				break
 			case FirmwareUpdater.ErrorDuringUpdating:
 				//% "Error during firmware installation"
 				msg = qsTrId("settings_firmware_error_during_installation")
+				updateCheckTimer.stop()
 				break
 			case FirmwareUpdater.Rebooting:
 				//% "Firmware installed, device rebooting"
@@ -92,6 +133,7 @@ QtObject {
 				// Instead, wait for the device to reboot (i.e. requires
 				// a full disconnect/reconnect cycle) then react to the
 				// updated build version we receive (reload the page).
+				updateCheckTimer.stop()
 				break
 			default:
 				break
@@ -111,9 +153,16 @@ QtObject {
 	property VeQuickItem _onlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
 		onValidChanged: {
-			if (valid && _updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
-				updateCheckTimer.stop()
-				Qt.callLater(root._finishUpdateCheck)
+			if (_updateType === VenusOS.Firmware_UpdateType_Online && updateCheckTimer.running) {
+				if (valid) {
+					updateCheckTimer.stop()
+					Qt.callLater(root._finishUpdateCheck)
+				} else {
+					// Don't immediately assume that the update check is finished,
+					// in case this invalid value is transient.
+					// Instead, handle this invalid value case in onBusyChanged.
+					root._availableVersionInvalidated = true
+				}
 			}
 		}
 	}
@@ -128,9 +177,16 @@ QtObject {
 	property VeQuickItem _offlineVersion: VeQuickItem {
 		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
 		onValidChanged: {
-			if (valid && _updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
-				updateCheckTimer.stop()
-				Qt.callLater(root._finishUpdateCheck)
+			if (_updateType === VenusOS.Firmware_UpdateType_Offline && updateCheckTimer.running) {
+				if (valid) {
+					updateCheckTimer.stop()
+					Qt.callLater(root._finishUpdateCheck)
+				} else {
+					// Don't immediately assume that the update check is finished,
+					// in case this invalid value is transient.
+					// Instead, handle this invalid value case in onBusyChanged.
+					root._availableVersionInvalidated = true
+				}
 			}
 		}
 	}
@@ -166,7 +222,8 @@ QtObject {
 
 	function checkForUpdate(updateType) {
 		_updateType = updateType
-		updateCheckTimer.interval = 8000 // give up after 8 seconds
+		root._availableVersionInvalidated = false
+		asyncValueTimer.stop()
 		updateCheckTimer.start()
 		if (updateType === VenusOS.Firmware_UpdateType_Online) {
 			_onlineCheckUpdate.setValue(1)
