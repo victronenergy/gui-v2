@@ -103,7 +103,7 @@ Page {
 
 					MouseArea {
 						anchors.centerIn: parent
-						height: pointDelegate.height - 2*Theme.geometry_closeButton_margins
+						height: pointDelegate.height
 						width: height
 						onClicked: {
 							let pointList = pointsListView.model
