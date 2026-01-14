@@ -611,7 +611,10 @@ public:
 		Relay_Function_Manual,
 		Relay_Function_Tank_Pump,
 		Relay_Function_Temperature,
-		Relay_Function_GensetHelperRelay
+		Relay_Function_GensetHelperRelay,
+		Relay_Function_OpportunityLoad,
+
+		Relay_Function_MaxSupportedType = Relay_Function_OpportunityLoad
 	};
 	Q_ENUM(Relay_Function)
 
@@ -969,6 +972,7 @@ public:
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
+	Q_INVOKABLE QString switchableOutput_functionToText(Relay_Function value) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
