@@ -18,6 +18,24 @@ DevicePage {
 	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
+		ListLink {
+			//% "Configuration required"
+			text: qsTrId("page_meteo_configuration_required")
+			url: "https://ve3.nl/solarsense"
+			// Check bits 26-27 of ErrorCode for Configuration Incomplete status
+			// 0=Unsupported, 1=OK, 2=Warning, 3=Alarm
+			property int configStatus: errorCode.valid ? ((errorCode.value >> 26) & 0x3) : 1
+			preferredVisible: errorCode.valid && (configStatus === 2 || configStatus === 3)
+			//: %1 = url text
+			//% "Setup is needed for power estimation. For instructions, open the QR code to scan it with your portable device.<br />Or insert the link: %1"
+			caption: qsTrId("page_meteo_config_caption").arg(formattedUrl)
+
+			VeQuickItem {
+				id: errorCode
+				uid: root.bindPrefix + "/ErrorCode"
+			}
+		}
+
 		ListQuantity {
 			property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1)
 			//% "Irradiance"
