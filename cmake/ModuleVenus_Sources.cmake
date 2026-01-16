@@ -368,6 +368,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsBatteryMeasurements.qml
     pages/settings/PageSettingsBleSensors.qml
     pages/settings/PageSettingsBluetooth.qml
+    pages/settings/PageSettingsBoatPage.qml
     pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsCanOpenMotordrive.qml
     pages/settings/PageSettingsCGwacs.qml

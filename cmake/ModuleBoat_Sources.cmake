@@ -20,6 +20,7 @@ set(VictronBoat_QML_MODULE_SOURCES
     pages/boat/LargeCenterGauge.qml
     pages/boat/LoadArc.qml
     pages/boat/MotorDrive.qml
+    pages/boat/MotorDrives.qml
     pages/boat/MotorDriveGauges.qml
     pages/boat/QuantityLabelIconRow.qml
     pages/boat/TemperatureGauge.qml
@@ -37,6 +38,7 @@ set_source_files_properties(pages/boat/Gps.qml PROPERTIES QT_RESOURCE_ALIAS Gps.
 set_source_files_properties(pages/boat/LargeCenterGauge.qml PROPERTIES QT_RESOURCE_ALIAS LargeCenterGauge.qml)
 set_source_files_properties(pages/boat/LoadArc.qml PROPERTIES QT_RESOURCE_ALIAS LoadArc.qml)
 set_source_files_properties(pages/boat/MotorDrive.qml PROPERTIES QT_RESOURCE_ALIAS MotorDrive.qml)
+set_source_files_properties(pages/boat/MotorDrives.qml PROPERTIES QT_RESOURCE_ALIAS MotorDrives.qml)
 set_source_files_properties(pages/boat/MotorDriveGauges.qml PROPERTIES QT_RESOURCE_ALIAS MotorDriveGauges.qml)
 set_source_files_properties(pages/boat/QuantityLabelIconRow.qml PROPERTIES QT_RESOURCE_ALIAS QuantityLabelIconRow.qml)
 set_source_files_properties(pages/boat/TemperatureGauge.qml PROPERTIES QT_RESOURCE_ALIAS TemperatureGauge.qml)

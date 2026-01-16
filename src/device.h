@@ -23,6 +23,7 @@ class Device : public BaseDevice
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_PROPERTY(VeQItem* serviceItem READ serviceItem NOTIFY serviceItemChanged)
 public:
 	// Initializes a Device with the specified service item, and sets the device properties
 	// according to the values from the item. The Device does not take ownership of the item.
@@ -33,6 +34,9 @@ public:
 
 	// The service that defines the device. The pointer is owned by the backend producer.
 	VeQItem *serviceItem() const;
+
+Q_SIGNALS:
+	void serviceItemChanged();
 
 private:
 	void setServiceItem(VeQItem *serviceItem);
