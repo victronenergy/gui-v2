@@ -43,6 +43,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/em-heatpump-output.json
     data/mock/conf/services/em-pvinverter.json
     data/mock/conf/services/ess.json
+    data/mock/conf/services/ev.json
     data/mock/conf/services/evcharger1.json
     data/mock/conf/services/fronius.json
     data/mock/conf/services/generator.json

@@ -272,7 +272,10 @@ function formatTimestamp(dateTime, currentDateTime) {
 	if (days < 7) {
 		return dateTime.toLocaleString(Qt.locale(), "ddd hh:mm") // eg. "Mon 09:06"
 	}
-	return dateTime.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
+	if (dateTime.getFullYear() === currentDateTime.getFullYear()) {
+		return dateTime.toLocaleString(Qt.locale(), "MMM dd hh:mm") // eg. "Mar 27 10:20"
+	}
+	return dateTime.toLocaleString(Qt.locale(), "MMM dd yyyy hh:mm") // eg. "Mar 27 2025 10:20"
 }
 
 function connmanServiceState(state) {

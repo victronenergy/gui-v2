@@ -57,6 +57,8 @@ public:
 
 	Q_INVOKABLE QString formatNumber(qreal number, int precision = 0) const;
 	Q_INVOKABLE qreal formattedNumberToReal(const QString &s) const;
+	Q_INVOKABLE QString formatLatitude(qreal latitude, VenusOS::Enums::GpsData_Format format) const;
+	Q_INVOKABLE QString formatLongitude(qreal longitude, VenusOS::Enums::GpsData_Format format) const;
 
 	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;
@@ -99,6 +101,7 @@ public:
 
 private:
 	QString formatWindDirection(int degrees) const;
+	QString formatCoordinate(qreal coordinate, VenusOS::Enums::GpsData_Format format, VenusOS::Enums::CardinalDirection direction) const;
 };
 
 }

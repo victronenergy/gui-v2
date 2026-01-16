@@ -97,6 +97,47 @@ qreal Units::formattedNumberToReal(const QString &s) const
 	return ok ? d : qQNaN();
 }
 
+QString Units::formatLatitude(qreal latitude, VenusOS::Enums::GpsData_Format format) const
+{
+	return formatCoordinate(latitude, format,
+			latitude >= 0
+				? VenusOS::Enums::CardinalDirection_North
+				: VenusOS::Enums::CardinalDirection_South);
+}
+
+QString Units::formatLongitude(qreal longitude, VenusOS::Enums::GpsData_Format format) const
+{
+	return formatCoordinate(longitude, format,
+			longitude >= 0
+				? VenusOS::Enums::CardinalDirection_East
+				: VenusOS::Enums::CardinalDirection_West);
+}
+
+QString Units::formatCoordinate(qreal decimalDegrees, VenusOS::Enums::GpsData_Format format, VenusOS::Enums::CardinalDirection direction) const
+{
+	const double degrees = std::abs(decimalDegrees);
+	const double minutes = std::fmod(degrees, 1) * 60.0;
+	const double seconds = std::fmod(minutes, 1) * 60.0;
+
+	switch (format) {
+	case VenusOS::Enums::GpsData_Format_DegreesMinutesSeconds: // e.g. 52° 20' 41.6" N
+		return QString("%1%2 %3' %4\" %5")
+				.arg(formatNumber(std::floor(degrees)))
+				.arg(DegreesSymbol)
+				.arg(formatNumber(std::floor(minutes)))
+				.arg(formatNumber(seconds, 1))
+				.arg(VenusOS::Enums::create()->cardinalDirectionToShortText(direction));
+	case VenusOS::Enums::GpsData_Format_DecimalDegrees: // e.g. 52.34489
+		return formatNumber(decimalDegrees, 6);
+	case VenusOS::Enums::GpsData_Format_DegreesMinutes: // e.g. 52° 20.693 N
+		return QString("%1%2 %3 %4")
+				.arg(formatNumber(std::floor(degrees)))
+				.arg(DegreesSymbol)
+				.arg(formatNumber(minutes, 4))
+				.arg(VenusOS::Enums::create()->cardinalDirectionToShortText(direction));
+	}
+}
+
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
 {
 	switch (unit) {
@@ -257,6 +298,7 @@ bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
 	case VenusOS::Enums::Units_Volume_Litre:
 	case VenusOS::Enums::Units_Volume_GallonUS:
 	case VenusOS::Enums::Units_Volume_GallonImperial:
+	case VenusOS::Enums::Units_Altitude_Metre:
 		return true;
 	case VenusOS::Enums::Units_Percentage:
 	case VenusOS::Enums::Units_Temperature_Celsius:
@@ -359,13 +401,12 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 			return qAbs(value) >= multiplier*qPow(10, 3*scale);
 		};
 
-		// Litre scaling is special, only kilo range scaling is supported
-		if (unit == VenusOS::Enums::Units_Volume_Litre) {
+		// For some units, do not scale beyond the kilo range, as we don't want to display them in
+		// mega/tera/giga format.
+		if (unit == VenusOS::Enums::Units_Volume_Litre
+				|| unit == VenusOS::Enums::Units_Altitude_Metre) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
-				// \u2113 = litres symbol.
-				// we don't use \u3398 (kilolitres symbol)
-				// as it isn't available in the required font.
-				quantity.unit = QStringLiteral("k\u2113");
+				quantity.unit = QStringLiteral("k%1").arg(defaultUnitString(unit));
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
 				scaledValue = scaledValue / 1000.0;
 			}

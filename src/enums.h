@@ -693,12 +693,21 @@ public:
 	};
 	Q_ENUM(DigitalInput_State)
 
+	// Latitude/Longitude string format, as saved to localsettings /Settings/Gps/Format.
 	enum GpsData_Format {
 		GpsData_Format_DegreesMinutesSeconds,
 		GpsData_Format_DecimalDegrees,
 		GpsData_Format_DegreesMinutes
 	};
 	Q_ENUM(GpsData_Format)
+
+	enum CardinalDirection {
+		CardinalDirection_North,
+		CardinalDirection_South,
+		CardinalDirection_East,
+		CardinalDirection_West,
+	};
+	Q_ENUM(CardinalDirection)
 
 	// These values are defined on the cerbo in /usr/sbin/resolv-watch script
 	// that monitors which connection is the one active from all the avaiable ones.
@@ -954,6 +963,8 @@ public:
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
+
+	Q_INVOKABLE QString cardinalDirectionToShortText(CardinalDirection direction) const;
 
 	Q_INVOKABLE DcMeter_Type dcMeter_type(const QString &serviceType, int monitorMode) const;
 	Q_INVOKABLE QString dcMeter_typeToText(DcMeter_Type type) const;

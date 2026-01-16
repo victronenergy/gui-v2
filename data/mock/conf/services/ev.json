@@ -1,0 +1,23 @@
+{
+    "com.victronenergy.ev.tesla_model3": {
+        "/Soc": 75,
+        "/TargetSoc": 80,
+        "/RangeToGo": 320,
+        "/ChargingState": 3,
+        "/AtSite": 1,
+        "/BatteryCapacity": 82,
+        "/Ac/Power": 7200,
+        "/Ac/NrOfPhases": 3,
+        "/VIN": "5YJ3E1EA8KF123456",
+        "/Odometer": 45000,
+        "/Position/Latitude": 52.0907,
+        "/Position/Longitude": 5.1214,
+        "/BatteryTemperature": 22,
+        "/LastEvContact": 1704067200,
+        "/CustomName": "Model 3",
+        "/DeviceInstance": 288,
+        "/ProductId": 0,
+        "/ProductName": "Electric Vehicle",
+        "/Connected": 1
+    }
+}

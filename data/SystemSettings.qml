@@ -143,6 +143,14 @@ QtObject {
 		}
 	}
 
+	function formatLatitude(latitude) {
+		return Units.formatLatitude(latitude, _gpsPositionFormat.value ?? 0)
+	}
+
+	function formatLongitude(longitude) {
+		return Units.formatLongitude(longitude, _gpsPositionFormat.value ?? 0)
+	}
+
 	function networkStatusToText(status) {
 		switch (status) {
 		case VenusOS.Link_NetworkStatus_Slave:
@@ -474,6 +482,10 @@ QtObject {
 	// 0 = disabled, 1 = enabled; value is 1 by default.
 	readonly property VeQuickItem _animationEnabled: VeQuickItem {
 		uid: root.serviceUid + "/Settings/Gui2/UIAnimations"
+	}
+
+	readonly property VeQuickItem _gpsPositionFormat: VeQuickItem {
+		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
 	}
 
 	function reset() {
