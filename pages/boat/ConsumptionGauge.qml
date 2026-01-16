@@ -18,7 +18,7 @@ Column {
 	id: root
 
 	required property Gps gps
-	required property MotorDrive motorDrive
+	required property MotorDrives motorDrives
 	readonly property int visibleCount: motorDriveLoad.visible + systemAcLoad.visible + systemDcLoad.visible
 	readonly property int _pixelSize: root.visibleCount > 1
 									 ? Theme.font_boatPage_consumptionGauge_smallPixelSize
@@ -30,7 +30,7 @@ Column {
 		id: motorDriveLoad
 
 		sourceType: VenusOS.ElectricalQuantity_Source_Dc
-		dataObject: root.motorDrive.dcConsumption.scalar
+		dataObject: root.motorDrives.dcConsumption.scalar
 		font.pixelSize: root._pixelSize
 		icon.source: "qrc:/images/icon_propeller.svg"
 		visible: root.gps.valid && !isNaN(value)
