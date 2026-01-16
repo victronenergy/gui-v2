@@ -419,3 +419,58 @@ bool SortedClassAndVrmInstanceModel::lessThan(const QModelIndex &sourceLeft, con
 	return model->data(leftIndex, ClassAndVrmInstanceModel::VrmInstanceRole).toInt()
 			< model->data(rightIndex, ClassAndVrmInstanceModel::VrmInstanceRole).toInt();
 }
+
+FilteredClassAndVrmInstanceModel::FilteredClassAndVrmInstanceModel(QObject *parent)
+	: QSortFilterProxyModel(parent)
+{
+	connect(this, &QSortFilterProxyModel::rowsInserted, this, &FilteredClassAndVrmInstanceModel::updateCount);
+	connect(this, &QSortFilterProxyModel::rowsRemoved, this, &FilteredClassAndVrmInstanceModel::updateCount);
+	connect(this, &QSortFilterProxyModel::modelReset, this, &FilteredClassAndVrmInstanceModel::updateCount);
+	connect(this, &QSortFilterProxyModel::layoutChanged, this, &FilteredClassAndVrmInstanceModel::updateCount);
+}
+
+int FilteredClassAndVrmInstanceModel::count() const
+{
+	return m_count;
+}
+
+QStringList FilteredClassAndVrmInstanceModel::deviceClasses() const
+{
+	return m_deviceClasses;
+}
+
+void FilteredClassAndVrmInstanceModel::setDeviceClasses(const QStringList &deviceClasses)
+{
+	if (m_deviceClasses != deviceClasses) {
+		m_deviceClasses = deviceClasses;
+		invalidateFilter();
+		emit deviceClassesChanged();
+	}
+}
+
+bool FilteredClassAndVrmInstanceModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+	ClassAndVrmInstanceModel *model = qobject_cast<ClassAndVrmInstanceModel*>(sourceModel());
+	if (!model) {
+		return QSortFilterProxyModel::filterAcceptsRow(sourceRow, sourceParent);
+	}
+
+	if (m_deviceClasses.isEmpty()) {
+		return true;
+	}
+
+	return m_deviceClasses.contains(model->data(model->index(sourceRow, 0),
+												ClassAndVrmInstanceModel::DeviceClassRole)
+										.toString()) &&
+		   model->data(model->index(sourceRow, 0), ClassAndVrmInstanceModel::ValidRole).toBool();
+}
+
+void FilteredClassAndVrmInstanceModel::updateCount()
+{
+	const int prevCount = m_count;
+	m_count = rowCount();
+
+	if (m_count != prevCount) {
+		emit countChanged();
+	}
+}

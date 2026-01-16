@@ -11,9 +11,8 @@ import Victron.Gauges
 Column {
 	id: root
 
-	required property var motorDrive
+	required property MotorDrives motorDrives
 	property bool showDcConsumption
-	readonly property string serviceUid: root.motorDrive?.serviceUid ?? ""
 
 	spacing: Theme.geometry_boatPage_motorDriveColumn_spacing
 
@@ -48,8 +47,8 @@ Column {
 		anchors.horizontalCenter: parent.horizontalCenter
 		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
-		visible: root.motorDrive && root.motorDrive.dcConsumption.quotient.valid && root.showDcConsumption
+		visible: root.motorDrives.dcConsumption.quotient.valid && root.showDcConsumption
 		sourceType: VenusOS.ElectricalQuantity_Source_Dc
-		dataObject: root.motorDrive.dcConsumption.scalar
+		dataObject: root.motorDrives.dcConsumption.scalar
 	}
 }

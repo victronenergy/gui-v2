@@ -66,6 +66,7 @@ void Device::setServiceItem(VeQItem *serviceItem)
 	refreshName();
 	connect(m_serviceItem, &VeQItem::childAdded, this, &Device::serviceChildAdded);
 	connect(m_serviceItem, &VeQItem::childAboutToBeRemoved, this, &Device::serviceChildAboutToBeRemoved);
+	emit serviceItemChanged();
 }
 
 void Device::serviceChildAdded(VeQItem *child)

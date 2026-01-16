@@ -89,7 +89,7 @@ SwipeViewPage {
 
 		anchors.fill: parent
 		gps: _gps // primary data source
-		motorDrive: _motorDrive // secondary data source
+		motorDrives: motorDrives // secondary data source
 		animationEnabled: root.animationEnabled
 	}
 
@@ -101,7 +101,7 @@ SwipeViewPage {
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
-		serviceUid: _motorDrive.serviceUid
+		motorDrive: motorDrives.singleMotorDrive
 	}
 
 	Boat.ConsumptionGauge { // vertical center right
@@ -113,7 +113,7 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
 
-		motorDrive: _motorDrive
+		motorDrives: motorDrives
 		gps: _gps
 	}
 
@@ -126,7 +126,7 @@ SwipeViewPage {
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
-		serviceUid: _motorDrive.serviceUid
+		motorDrive: motorDrives.singleMotorDrive
 	}
 	*/
 
@@ -139,12 +139,12 @@ SwipeViewPage {
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		animationEnabled: root.animationEnabled
-		motorDrive: _motorDrive
+		motorDrives: motorDrives
 		gps: _gps
 	}
 
-	Boat.MotorDrive {
-		id: _motorDrive
+	Boat.MotorDrives {
+		id: motorDrives
 	}
 
 	Boat.Gps {
