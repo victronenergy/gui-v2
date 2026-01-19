@@ -15,6 +15,10 @@ ListItem {
 
 	readonly property bool _clickable: root.device.deviceInstance >= 0
 			&& ["vebus","genset","battery"].indexOf(root.serviceType) >= 0
+		
+	width: parent?.width ?? 0
+	height: Theme.geometry_batteryListPage_item_height
+	hasSubMenu: pressArea.enabled
 
 	function click() {
 		if (!_clickable) {
