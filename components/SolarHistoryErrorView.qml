@@ -78,6 +78,7 @@ MouseArea {
 		height: root.expanded ? implicitHeight : Theme.geometry_solarHistoryErrorView_itemHeight
 
 		Behavior on height {
+			enabled: Global.animationEnabled
 			NumberAnimation {
 				duration: Theme.animation_solarHistoryErrorView_expand_duration
 			}

@@ -58,7 +58,14 @@ T.Dialog {
 	// In case height changes when dialog is opened, update the highlight bar position.
 	onHeightChanged: root._positionHighlightBar()
 
-	enter: Transition {
+	// Only provide transitions if animations are enabled. Ideally the transitions would always be
+	// set but with 'enabled' set to only run when needed, but due to QTBUG-142410 the enabled value
+	// is not respected.
+	enter: Global.animationEnabled ? enterTransition : null
+	exit: Global.animationEnabled ? exitTransition : null
+
+	Transition {
+		id: enterTransition
 		SequentialAnimation {
 			ScriptAction {
 				script: {
@@ -71,10 +78,13 @@ T.Dialog {
 			NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Theme.animation_page_fade_duration }
 		}
 	}
-	exit: Transition {
+
+	Transition {
+		id: exitTransition
 		NumberAnimation {
 			loops: Qt.platform.os == "wasm" ? 0 : 1 // workaround wasm crash, see https://bugreports.qt.io/browse/QTBUG-121382
-			property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration }
+			property: "opacity"; from: 1.0; to: 0.0; duration: Theme.animation_page_fade_duration
+		}
 	}
 
 	background: Rectangle {
