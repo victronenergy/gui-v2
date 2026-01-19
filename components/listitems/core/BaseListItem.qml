@@ -26,6 +26,9 @@ FocusScope {
 	property alias background: backgroundRect
 	property real bottomInset
 
+	// True if this item leads to a sub-page when clicked.
+	property bool hasSubMenu
+
 	// Allow item to receive focus within its focus scope.
 	focus: true
 
