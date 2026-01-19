@@ -513,23 +513,23 @@ TestCase {
 			{
 				tag: "speed",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "Settings/Unit": "\\S" },
+				outputProperties: { "Settings/Unit": "/Speed" },
 				unitType: VenusOS.Units_Speed_MetresPerSecond,
-				unitText: "\\S",
+				unitText: "/Speed",
 			},
 			{
 				tag: "temperature",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "Settings/Unit": "\\T" },
+				outputProperties: { "Settings/Unit": "/Temperature" },
 				unitType: VenusOS.Units_Temperature_Celsius,
-				unitText: "\\T",
+				unitText: "/Temperature",
 			},
 			{
 				tag: "volume",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "Settings/Unit": "\\V" },
+				outputProperties: { "Settings/Unit": "/Volume" },
 				unitType: VenusOS.Units_Volume_CubicMetre,
-				unitText: "\\V",
+				unitText: "/Volume",
 			},
 		]
 	}
