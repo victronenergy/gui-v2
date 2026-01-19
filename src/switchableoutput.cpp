@@ -334,11 +334,11 @@ void SwitchableOutput::setUnit(const QVariant &unitValue)
 	int unitType = Enums::Units_None;
 
 	// get the base unit
-	if (unitText == QStringLiteral("\\S")) {
+	if (unitText == QStringLiteral("/Speed")) {
 		unitType = Enums::Units_Speed_MetresPerSecond;
-	} else if (unitText == QStringLiteral("\\T")) {
+	} else if (unitText == QStringLiteral("/Temperature")) {
 		unitType = Enums::Units_Temperature_Celsius;
-	} else if (unitText == QStringLiteral("\\V")) {
+	} else if (unitText == QStringLiteral("/Volume")) {
 		unitType = Enums::Units_Volume_CubicMetre;
 	}
 
