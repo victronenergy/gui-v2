@@ -310,6 +310,9 @@ void ColorPresetModel::setSettingUid(const QString &settingUid)
 					   << settingUid << ", expected RGB/RGBW/CCT suffix!";
 			m_outputType = Enums::SwitchableOutput_Type_ColorDimmerRgb;
 		}
+		if (m_settingItem) {
+			connect(m_settingItem, &VeQItem::valueChanged, this, &ColorPresetModel::reload);
+		}
 		reload();
 		emit settingUidChanged();
 	}
