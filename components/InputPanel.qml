@@ -29,6 +29,8 @@ QtVirtualKeyboard.InputPanel {
 
 	readonly property string localeName: Language.currentLocaleName
 
+	readonly property bool requiresRotation: Global.main && Global.main.requiresRotation
+
 	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
 		if (!Qt.inputMethod.visible || !item || !focusedItem) {
 			return false
@@ -47,9 +49,23 @@ QtVirtualKeyboard.InputPanel {
 	}
 
 	visible: Qt.inputMethod.visible || yAnimator.running
-	y: Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height : Theme.geometry_screen_height
+
+	y: requiresRotation ? 312 // manually-found coordinate transform for rpi5, see #2702
+	 : Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height
+	 : Theme.geometry_screen_height
+
+	x: requiresRotation ? 480 // manually-found coordinate transform for rpi5, see #2702
+	 : 0
+
+	transformOrigin: Item.Center
+	transform: Rotation {
+		origin.x: width / 2
+		origin.y: height / 2
+		angle: requiresRotation ? 270 : 0
+	}
 
 	Behavior on y {
+		enabled: !root.requiresRotation
 		YAnimator {
 			id: yAnimator
 			duration: Theme.animation_inputPanel_slide_duration
