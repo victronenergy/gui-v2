@@ -20,6 +20,8 @@ Window {
 	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width/scaleFactor : Screen.width/scaleFactor
 	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height/scaleFactor : Screen.height/scaleFactor
 
+	// Automatically decide if rotation is required (portrait -> landscape)
+	readonly property bool requiresRotation: Global.isGxDevice && root.height > root.width
 	property bool isDesktop: false
 	property real scaleFactor: 1.0
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
@@ -92,25 +94,22 @@ Window {
 		// show the GUI always centered in the window
 		transformOrigin: Item.Center
 
-		// Automatically decide if rotation is required (portrait -> landscape)
-		readonly property bool requiresRotation: Global.isGxDevice && root.height > root.width
-
 		// Apply rotation
 		transform: Rotation {
 			origin.x: root.width / 2
 			origin.y: root.height / 2
-			angle: requiresRotation ? 90 : 0
+			angle: root.requiresRotation ? 90 : 0
 		}
 
 		// Adjust scale depending on the rotation
-		readonly property real rotatedScale: requiresRotation ?
-			Math.min(root.width / Theme.geometry_screen_height, root.height / Theme.geometry_screen_width) :
-			Math.min(root.width / Theme.geometry_screen_width, root.height / Theme.geometry_screen_height)
+		readonly property real rotatedScale: root.requiresRotation
+			? Math.min(root.width / Theme.geometry_screen_height, root.height / Theme.geometry_screen_width)
+			: Math.min(root.width / Theme.geometry_screen_width, root.height / Theme.geometry_screen_height)
 		scale: rotatedScale
 
 		// Center only if rotated
-		x: requiresRotation ? (root.width - Theme.geometry_screen_height * scale) / 2 : 0
-		y: requiresRotation ? (root.height - Theme.geometry_screen_width * scale) / 2 : 0
+		x: root.requiresRotation ? (root.width - Theme.geometry_screen_height * contentItem.scale) / 2 : 0
+		y: root.requiresRotation ? (root.height - Theme.geometry_screen_width * contentItem.scale) / 2 : 0
 
 		// In WebAssembly builds, if we are displaying on a low-dpi mobile
 		// device, it may not have enough pixels to display the UI natively.
