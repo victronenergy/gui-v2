@@ -14,7 +14,7 @@ Item {
 	id: root
 
 	required property ColorDimmerData colorDimmerData
-	readonly property int outputType: colorDimmerData.outputType
+	property int outputType
 
 	readonly property color currentColor: colorSwatch.color
 

@@ -17,7 +17,7 @@ ModalDialog {
 		states: [
 			State {
 				name: "rgb"
-				when: root.switchableOutput.type === VenusOS.SwitchableOutput_Type_ColorDimmerRgb
+				when: colorModeButton.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerRgb
 				PropertyChanges {
 					target: root
 					secondaryTitle: CommonWords.color
@@ -29,7 +29,7 @@ ModalDialog {
 			},
 			State {
 				name: "rgbw"
-				when: root.switchableOutput.type === VenusOS.SwitchableOutput_Type_ColorDimmerRgbW
+				when: colorModeButton.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerRgbW
 				PropertyChanges {
 					target: root
 					secondaryTitle: CommonWords.color
@@ -41,7 +41,7 @@ ModalDialog {
 			},
 			State {
 				name: "cct"
-				when: root.switchableOutput.type === VenusOS.SwitchableOutput_Type_ColorDimmerCct
+				when: colorModeButton.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
 				PropertyChanges {
 					target: root
 					secondaryTitle: CommonWords.temperature
@@ -99,10 +99,15 @@ ModalDialog {
 			id: colorModeButton
 
 			function changeOutputType(type) {
-				if (root.switchableOutput.type === type) {
+				if (outputType === type) {
 					return
 				}
-				root.switchableOutput.type = type
+
+				// Instead of changing SwitchableOutput::type, write the value with SettingsSync so
+				// the UI shows the type change immediately, even if the value is not yet written
+				// to the backend.
+				outputTypeSync.writeValue(type)
+
 				if (type === VenusOS.SwitchableOutput_Type_ColorDimmerCct
 						&& root.colorDimmerData.colorTemperature === 0) {
 					// Reset the LightControls value to the default (warm temperature).
@@ -131,7 +136,7 @@ ModalDialog {
 				}
 				return supportsRgb && supportsCct
 			}
-			outputType: root.switchableOutput.type
+			outputType: outputTypeSync.expectedValue
 
 			onRgbClicked: {
 				if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {
@@ -157,6 +162,7 @@ ModalDialog {
 				leftMargin: Theme.geometry_colorWheelDialog_horizontalMargin_left
 			}
 			colorDimmerData: root.colorDimmerData
+			outputType: colorModeButton.outputType
 		}
 
 		ColorPresetGrid {
@@ -209,5 +215,14 @@ ModalDialog {
 				presetGrid.resetSelection()
 			}
 		}
+	}
+
+	SettingSync {
+		id: outputTypeSync
+		dataItem: VeQuickItem {
+			uid: root.switchableOutput.uid + "/Settings/Type"
+		}
+		onBusyChanged: console.log("busy:", busy)
+		onExpectedValueChanged: console.log("expectedValue:", expectedValue)
 	}
 }

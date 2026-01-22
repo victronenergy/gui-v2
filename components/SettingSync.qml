@@ -8,6 +8,13 @@ import Victron.VenusOS
 
 /*
 	Writes a value to a setting, and indicates whether the new value has been written.
+
+	This allows the UI to show the value that has been saved to a VeQuickItem, even if the value
+	change is not reflected in the backend yet. To do this, bind to the 'expectedValue' property.
+
+	Ideally this type would not be required in future, as VeQuickItem already has some handling for
+	locally-written values and the state property that indicates whether a value has been
+	synchronized, but those features are not currently supported by the MQTT producer.
 */
 QtObject {
 	id: root
