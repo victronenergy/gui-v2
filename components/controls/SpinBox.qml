@@ -218,7 +218,7 @@ T.SpinBox {
 		   : contentItem.x + (contentItem.width / 2) - (width / 2)
 		y: orientation === Qt.Horizontal
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
-		   : contentItem.y + (height / 2) + spacing
+		   : contentItem.y + contentItem.height + root.spacing
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
 		radius: Theme.geometry_spinBox_indicator_radius
@@ -244,7 +244,7 @@ T.SpinBox {
 		   : contentItem.x + (contentItem.width / 2) - (width / 2)
 		y: orientation === Qt.Horizontal
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
-		   : -(height / 2)
+		   : contentItem.y - root.spacing - height
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
 		radius: Theme.geometry_spinBox_indicator_radius
