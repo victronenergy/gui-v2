@@ -199,4 +199,14 @@ T.Dialog {
 			visible: enabled
 		}
 	}
+
+	Component.onCompleted: {
+		if (Global.main && Global.main.requiresRotation) {
+			// we cannot manually position the header or footer.
+			// just reject the dialog for now.
+			// TODO: use eglfs and rotate the entire surface.
+			// See: issue #2702
+			Qt.callLater(reject)
+		}
+	}
 }
