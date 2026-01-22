@@ -13,15 +13,15 @@
     "geometry_flickable_maximumFlickVelocity": 2500,
     "geometry_flickable_flickDeceleration": 2500,
 
-    "geometry_autotoggle_button_spacing": 10,
-
     "geometry_barGauge_vertical_width_large": 8,
     "geometry_barGauge_vertical_width_small": 4,
     "geometry_barGauge_horizontal_height": 10,
     "geometry_barGauge_phaseLabel_leftPadding": 3,
     "geometry_barGauge_phaseLabel_rightPadding": 3,
 
+    "geometry_button_height": 40,
     "geometry_button_touch_size": 48,
+    "geometry_button_touch_verticalMargin": 14,
     "geometry_button_spacing": 7,
     "geometry_button_radius": 8,
     "geometry_button_border_width": 2,
@@ -58,7 +58,6 @@
     "geometry_silenceAlarmButton_horizontalPadding": 16,
 
     "geometry_listItemButton_horizontalPadding": 16,
-    "geometry_listItemButton_height": 40,
 
     "geometry_listSectionHeader_topPadding": 18,
     "geometry_listSectionHeader_bottomPadding": 8,
@@ -103,7 +102,7 @@
 
     "geometry_miniSlider_text_padding": 12,
     "geometry_miniSlider_handle_width": 12,
-    "geometry_miniSlider_indicator_width": 4,
+    "geometry_miniSlider_indicator_width": 64,
     "geometry_miniSlider_separator_width": 2,
     "geometry_miniSlider_decorator_vertical_padding": 6,
 
@@ -136,7 +135,7 @@
     "geometry_statusBar_button_height": 52,
     "geometry_statusBar_height": 56,
     "geometry_statusBar_horizontalMargin": 18,
-    "geometry_statusBar_rightSideRow_horizontalMargin" : 16,
+    "geometry_statusBar_spacing" : 16,
 
     "geometry_tabBar_width": 368,
     "geometry_tabBar_height": 40,
@@ -454,7 +453,6 @@
     "geometry_solarHistoryErrorView_textBackground_bottomMargin": 10,
 
     "geometry_comboBox_width": 172,
-    "geometry_comboBox_height": 40,
     "geometry_comboBox_leftPadding": 18,
     "geometry_comboBox_rightPadding": 10,
     "geometry_comboBox_verticalPadding": 10,

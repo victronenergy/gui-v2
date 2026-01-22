@@ -58,17 +58,20 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: colorButton.left
-			rightMargin: Theme.geometry_switchableoutput_spacing
 			top: header.bottom
+			topMargin: -slider.topInset
 		}
 
 		height: slider.height
-
 		focus: false
 
 		KeyNavigationHighlight.active: activeFocus
+		KeyNavigationHighlight.topMargin: slider.topInset
+		KeyNavigationHighlight.bottomMargin: slider.bottomInset
+		KeyNavigationHighlight.leftMargin: slider.leftInset
+		KeyNavigationHighlight.rightMargin: slider.rightInset
+
 		KeyNavigation.right: colorButton
 		Keys.onPressed: (event) => {
 			switch (event.key) {
@@ -107,7 +110,10 @@ FocusScope {
 		SwitchableOutputDimmableSlider {
 			id: slider
 
-			width: parent.width
+			anchors {
+				left: parent.left
+				right: parent.right
+			}
 			focus: false
 			activeFocusOnTab: false
 
@@ -123,7 +129,16 @@ FocusScope {
 				}
 			}
 
-			KeyNavigationHighlight.active: activeFocus
+			// Expand clickable area left (to delegate edge) and vertically. Adjust paddings
+			// by the same amount to fit the content within the background.
+			topInset: Theme.geometry_button_touch_verticalMargin
+			bottomInset: Theme.geometry_button_touch_verticalMargin
+			leftInset: Theme.geometry_controlCard_button_margins
+			rightInset: Theme.geometry_switchableoutput_spacing / 2
+			topPadding: topInset
+			bottomPadding: bottomInset
+			rightPadding: rightInset
+
 			KeyNavigation.right: colorButton
 			Keys.onPressed: (event) => {
 				switch (event.key) {
@@ -147,15 +162,19 @@ FocusScope {
 
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
 
 		focus: false
-
 		centerColor: Qt.hsva(currentColorDimmerData.displayColor.hsvHue,
 					   currentColorDimmerData.displayColor.hsvSaturation,
 					   1.0, 1.0)
+
+		topInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_switchableoutput_spacing / 2
+		rightInset: Theme.geometry_controlCard_button_margins
+		bottomInset: Theme.geometry_button_touch_verticalMargin
 
 		KeyNavigationHighlight.active: activeFocus
 		KeyNavigation.left: sliderScope

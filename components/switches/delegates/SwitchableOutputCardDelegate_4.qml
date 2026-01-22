@@ -56,12 +56,9 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
-		height: Theme.geometry_switchableoutput_control_height
 		checked: multiStepState.expectedValue === 1
 		onOnClicked: multiStepState.writeValue(1)
 		onOffClicked: multiStepState.writeValue(0)

@@ -12,18 +12,22 @@ SwitchableOutputSlider {
 	id: root
 
 	property string measurementText
+	readonly property real leftLabelWidth: leftPaddingText.implicitWidth
+	readonly property real rightLabelWidth: rightPaddingText.implicitWidth
 
 	// Determine the number of dots with padding will fit into the available space (Add one for the maximal dot)
 	readonly property real dotWithPadding: Theme.geometry_temperatureSlider_dot_size + Theme.geometry_temperatureSlider_dot_padding
 	readonly property int dotCount: Math.min(Math.floor(availableWidth / dotWithPadding) + 1, ((to - from) / stepSize) + 1)
 
-	leftPadding: leftPaddingText.implicitWidth
-	rightPadding: rightPaddingText.implicitWidth
+	leftPadding: leftLabelWidth
+	rightPadding: rightLabelWidth
 	indicatorBackgroundWidth: 0 // align handle exactly with the start/end dots
 	sourceUnit: VenusOS.Units_Temperature_Celsius
 	displayUnit: Global.systemSettings.temperatureUnit
 
 	background: Rectangle {
+		implicitWidth: Theme.geometry_controlCard_minimumWidth
+		implicitHeight: Theme.geometry_switchableoutput_control_height
 		radius: Theme.geometry_slider_groove_radius
 
 		// the background is the border with an additional rectangle for fill
@@ -177,13 +181,19 @@ SwitchableOutputSlider {
 
 	MinMaxLabel {
 		id: leftPaddingText
-		anchors.left: parent.left
+		anchors {
+			left: parent.left
+			leftMargin: root.leftInset
+		}
 		text: root.mirrored ? CommonWords.max : CommonWords.min
 	}
 
 	MinMaxLabel {
 		id: rightPaddingText
-		anchors.right: parent.right
+		anchors {
+			right: parent.right
+			rightMargin: root.rightInset
+		}
 		text: root.mirrored ? CommonWords.min : CommonWords.max
 	}
 }

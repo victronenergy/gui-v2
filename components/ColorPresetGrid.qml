@@ -105,19 +105,17 @@ FocusScope {
 				anchors.centerIn: parent
 				width: Theme.geometry_colorWheelDialog_preset_button_width
 				height: Theme.geometry_colorWheelDialog_preset_button_width
-				border {
-					width: Theme.geometry_button_border_width
-					color: presetDelegate.displayColor.valid ? Theme.color_ok
+				borderWidth: Theme.geometry_button_border_width
+				borderColor: presetDelegate.displayColor.valid ? Theme.color_ok
 							: enabled ? Theme.color_colorWheelDialog_preset_empty_button_border
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
-				}
 				radius: Theme.geometry_colorWheelDialog_preset_button_radius
 				centerColor: presetDelegate.displayColor.valid
 						? Qt.hsva(presetDelegate.displayColor.hsvHue,
 							presetDelegate.displayColor.hsvSaturation,
 							1.0, 1.0)
 						: Theme.color_colorWheelDialog_preset_empty_button_background
-				color: presetDelegate.displayColor.valid ? "transparent"
+				backgroundColor: presetDelegate.displayColor.valid ? "transparent"
 						: Theme.color_colorWheelDialog_preset_empty_button_background
 
 				onClicked: {

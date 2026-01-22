@@ -26,6 +26,10 @@ T.Button {
 	property real bottomRightRadius: NaN
 	property bool showEnabled: enabled
 
+	// The default implicit width/height of the background.
+	property real defaultBackgroundWidth
+	property real defaultBackgroundHeight: Theme.geometry_button_height
+
 	onPressed: pressEffect.start(pressX/width, pressY/height)
 	onReleased: pressEffect.stop()
 	onCanceled: pressEffect.stop()
@@ -37,8 +41,12 @@ T.Button {
 	leftPadding: 0
 	rightPadding: 0
 
-	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
-	implicitHeight: contentItem.implicitHeight + root.topPadding + root.bottomPadding
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding)
 
 	icon.color: root.color
 	font.family: Global.fontFamily
@@ -48,6 +56,8 @@ T.Button {
 	flat: true
 
 	background: Rectangle {
+		implicitWidth: root.defaultBackgroundWidth
+		implicitHeight: root.defaultBackgroundHeight
 		color: root.backgroundColor
 		border.width: root.borderWidth
 		border.color: root.borderColor
@@ -81,8 +91,18 @@ T.Button {
 	PressEffect {
 		id: pressEffect
 		radius: root.radius
-		anchors.fill: parent
+		anchors {
+			fill: parent
+			topMargin: root.topInset
+			bottomMargin: root.bottomInset
+			leftMargin: root.leftInset
+			rightMargin: root.rightInset
+		}
 	}
 
 	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.topMargin: root.topInset
+	KeyNavigationHighlight.bottomMargin: root.bottomInset
+	KeyNavigationHighlight.leftMargin: root.leftInset
+	KeyNavigationHighlight.rightMargin: root.rightInset
 }

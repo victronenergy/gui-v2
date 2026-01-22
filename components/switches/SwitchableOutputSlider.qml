@@ -54,6 +54,10 @@ MiniSlider {
 		event.accepted = false
 	}
 	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.topMargin: root.topInset
+	KeyNavigationHighlight.bottomMargin: root.bottomInset
+	KeyNavigationHighlight.leftMargin: root.leftInset
+	KeyNavigationHighlight.rightMargin: root.rightInset
 
 	VeQuickItem {
 		id: dimmingMaxItem

@@ -82,7 +82,6 @@ Page {
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 			verticalCenter: tabBar.verticalCenter
 		}
-		width: Theme.geometry_comboBox_width
 		model: tableModeOptions
 		displayText: model[currentIndex].text
 	}

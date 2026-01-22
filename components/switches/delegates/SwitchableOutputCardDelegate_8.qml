@@ -44,6 +44,8 @@ FocusScope {
 		switchableOutput: root.switchableOutput
 	}
 
+	// TODO use insets to increase the clickable area of the +/- indicator buttons (see #2768);
+	// ensure it works with the press-and-hold-for-rapid-increase/decrease feature.
 	MiniSpinBox {
 		id: spinBox
 

@@ -54,12 +54,22 @@ Item {
 	MomentaryButton {
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
-		height: Theme.geometry_switchableoutput_control_height
+
+		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
+		// by the same amount to fit the content within the background.
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
+		topPadding: topInset
+		bottomPadding: bottomInset
+		leftPadding: leftInset
+		rightPadding: rightInset
+
 		focusPolicy: Qt.NoFocus // do not focus when clicked, as this control has no edit mode
 
 		// Show as checked, when pressing or backend indicates it is pressed
@@ -74,24 +84,12 @@ Item {
 		onPressed: momentaryState.writeValue(1)
 		onReleased: momentaryState.writeValue(0)
 		onCanceled: momentaryState.writeValue(0)
-		down: extender.pressed || checked
+		down: pressed || checked
 
 		SettingSync {
 			id: momentaryState
 			dataItem: VeQuickItem {
 				uid: root.switchableOutput.uid + "/State"
-			}
-		}
-
-		MouseAreaExtender {
-			id: extender
-
-			anchors {
-				fill: parent
-				topMargin: -parent.height / 2
-				leftMargin: -parent.anchors.leftMargin
-				rightMargin: -parent.anchors.rightMargin
-				bottomMargin: -parent.height / 2
 			}
 		}
 	}

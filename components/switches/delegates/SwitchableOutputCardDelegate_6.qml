@@ -49,12 +49,24 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
-		height: Theme.geometry_switchableoutput_control_height
+
+		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
+		// by the same amount to fit the content within the background.
+		defaultBackgroundWidth: header.width
+		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
+		topPadding: topInset + Theme.geometry_comboBox_verticalPadding
+		bottomPadding: bottomInset + Theme.geometry_comboBox_verticalPadding
+		leftPadding: leftInset + Theme.geometry_comboBox_leftPadding
+		rightPadding: rightInset + Theme.geometry_comboBox_rightPadding
+
 		currentIndex: Math.floor(dropdownSync.dataItem.value || 0)
 
 		onActivated: (index) => dropdownSync.writeValue(index)

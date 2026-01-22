@@ -11,8 +11,15 @@ import Victron.VenusOS
 T.ComboBox {
 	id: root
 
-	implicitWidth: contentItem.implicitWidth + root.leftPadding + root.rightPadding
-	implicitHeight: Theme.geometry_comboBox_height
+	property real defaultBackgroundWidth: Theme.geometry_comboBox_width
+	property real defaultBackgroundHeight: Theme.geometry_button_height
+
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding)
 
 	leftPadding: Theme.geometry_comboBox_leftPadding
 	rightPadding: Theme.geometry_comboBox_rightPadding
@@ -23,8 +30,8 @@ T.ComboBox {
 	delegate: T.ItemDelegate {
 		id: optionDelegate
 
-		width: root.width
-		height: root.height
+		width: root.defaultBackgroundWidth
+		height: root.defaultBackgroundHeight
 		highlighted: root.highlightedIndex === index || pressed
 
 		contentItem: Rectangle {
@@ -37,8 +44,8 @@ T.ComboBox {
 
 			Label {
 				anchors.fill: parent
-				leftPadding: root.leftPadding
-				rightPadding: root.leftPadding  // no indicator here, use same padding as left side
+				leftPadding: Theme.geometry_comboBox_leftPadding
+				rightPadding: Theme.geometry_comboBox_leftPadding  // no indicator here, use same padding as left side
 				font.pixelSize: Theme.font_size_body1
 				verticalAlignment: Text.AlignVCenter
 				elide: Text.ElideRight
@@ -75,6 +82,8 @@ T.ComboBox {
 	}
 
 	background: Rectangle {
+		implicitWidth: root.defaultBackgroundWidth
+		implicitHeight: root.defaultBackgroundHeight
 		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
 		border.width: Theme.geometry_button_border_width
 		radius: Theme.geometry_button_radius
@@ -84,7 +93,8 @@ T.ComboBox {
 	}
 
 	popup: T.Popup {
-		width: root.width
+		x: root.leftInset
+		implicitWidth: root.defaultBackgroundWidth
 		implicitHeight: contentItem.implicitHeight
 
 		contentItem: ListView {
@@ -120,7 +130,7 @@ T.ComboBox {
 		onAboutToShow: {
 			// Prefer to show popup in a position where the current selection is shown over the top
 			// of the combo box.
-			y = -(root.currentIndex * root.height)
+			y = root.topInset - (root.currentIndex * root.defaultBackgroundHeight)
 
 			// If the popup would be shown with the top edge above the top of the main view, move
 			// it downwards.
@@ -133,4 +143,8 @@ T.ComboBox {
 
 	Keys.enabled: Global.keyNavigationEnabled
 	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.topMargin: root.topInset
+	KeyNavigationHighlight.bottomMargin: root.bottomInset
+	KeyNavigationHighlight.leftMargin: root.leftInset
+	KeyNavigationHighlight.rightMargin: root.rightInset
 }

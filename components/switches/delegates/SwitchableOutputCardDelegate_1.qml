@@ -45,14 +45,20 @@ Item {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
-		height: Theme.geometry_switchableoutput_control_height
 		on: toggleState.expectedValue === 1
 		focusPolicy: Qt.NoFocus // do not focus when clicked, as this control has no edit mode
+
+		// Expand clickable area horizontally (to delegate edges) and vertically.
+		defaultBackgroundWidth: header.width
+		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
 
 		onOnClicked: toggleState.writeValue(1)
 		onOffClicked: toggleState.writeValue(0)
@@ -63,25 +69,5 @@ Item {
 				uid: root.switchableOutput.uid + "/State"
 			}
 		}
-	}
-
-	MouseAreaExtender {
-		anchors {
-			left: root.left
-			right: buttonRow.horizontalCenter
-			verticalCenter: buttonRow.verticalCenter
-		}
-		height: root.height
-		clickTarget: buttonRow.offButton
-	}
-
-	MouseAreaExtender {
-		anchors {
-			right: root.right
-			left: buttonRow.horizontalCenter
-			verticalCenter: buttonRow.verticalCenter
-		}
-		height: root.height
-		clickTarget: buttonRow.onButton
 	}
 }

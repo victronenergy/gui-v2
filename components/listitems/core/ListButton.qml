@@ -19,6 +19,10 @@ ListItem {
 		ListItemButton {
 			id: button
 
+			// TODO increase the button press area (see #2768). Can do this more easily without
+			// affecting the content geometry, when ListItem is changed to be a Control, and this
+			// type can implement its own layout.
+
 			down: root.clickable && (pressed || checked || root.down)
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			showEnabled: root.clickable
@@ -32,10 +36,4 @@ ListItem {
 			}
 		}
 	]
-
-	MouseAreaExtender {
-		anchors {
-			fill: parent
-		}
-	}
 }

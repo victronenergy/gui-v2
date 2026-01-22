@@ -43,16 +43,22 @@ Item {
 	ToggleButtonRow {
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
-		height: Theme.geometry_switchableoutput_control_height
 		on: bilgePumpState.expectedValue === 1
 		offButtonText: CommonWords.auto
 		useOffButtonColors: false
 		focusPolicy: Qt.NoFocus // do not focus when clicked, as this control has no edit mode
+
+		// Expand clickable area horizontally (to delegate edges) and vertically.
+		defaultBackgroundWidth: header.width
+		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
 
 		onOnClicked: bilgePumpState.writeValue(1)
 		onOffClicked: bilgePumpState.writeValue(0)

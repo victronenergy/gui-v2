@@ -44,23 +44,33 @@ T.Slider {
 		}
 	}
 
-	implicitHeight: Theme.geometry_switchableoutput_control_height
+	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+							implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+							 implicitContentHeight + topPadding + bottomPadding)
+
 	background: Rectangle {
+		implicitWidth: Theme.geometry_controlCard_minimumWidth
+		implicitHeight: Theme.geometry_switchableoutput_control_height
 		radius: Theme.geometry_slider_groove_radius
 		color: root.backgroundColor
 
 		// Inner rectangle that fills the slider area up until the handle position, to display the
 		// progress value.
 		Rectangle {
+			// The progress bar is drawn outside of the availableWidth. This allows it to be drawn
+			// below the On/Off button in the SwitchableOutput_Type_Dimmable case.
+			readonly property real maximumWidth: root.availableWidth + root.leftPadding - root.leftInset
+
 			anchors {
 				top: parent.top
 				bottom: parent.bottom
 			}
 			topLeftRadius: Theme.geometry_slider_groove_radius
 			bottomLeftRadius: Theme.geometry_slider_groove_radius
-			topRightRadius: width > root.width - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (root.width - width) : 0
-			bottomRightRadius: width > root.width - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (root.width - width) : 0
-			width: Math.round(root.sliderX + root.indicatorBackgroundWidth) // round to avoid sub-pixel artifacts
+			topRightRadius: width > maximumWidth - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (maximumWidth - width) : 0
+			bottomRightRadius: width > maximumWidth - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (maximumWidth - width) : 0
+			width: Math.round(root.sliderX + root.indicatorBackgroundWidth - root.leftInset) // round to avoid sub-pixel artifacts
 			color: root.highlightColor
 		}
 
