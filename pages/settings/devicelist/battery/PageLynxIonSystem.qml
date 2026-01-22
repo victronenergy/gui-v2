@@ -47,8 +47,8 @@ Page {
 				//% "Min/max cell voltage"
 				text: qsTrId("lynxionsystem_min_max_cell_voltage")
 				model: QuantityObjectModel {
-					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
-					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+					QuantityObject { object: minCellVoltage; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: maxCellVoltage; unit: VenusOS.Units_Volt_DC }
 				}
 				preferredVisible: minCellVoltage.valid && maxCellVoltage.valid
 

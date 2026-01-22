@@ -279,6 +279,27 @@ public:
 	};
 	Q_ENUM(Battery_Balancer_Status)
 
+	enum Battery_Status {
+		Battery_Status_Balanced = (1ul << 0),
+		Battery_Status_Imbalance = (1ul << 1),
+		Battery_Status_Balancing = (1ul << 2),
+		Battery_Status_Overvoltage = (1ul << 3),
+		Battery_Status_Undervoltage = (1ul << 4),
+		Battery_Status_Low_Temperature_ATC = (1ul << 5),
+		Battery_Status_High_Temperature_ATC = (1ul << 6),
+		Battery_Status_Cell_Error = (1ul << 7),
+		Battery_Status_High_Temperature_ATD = (1ul << 8),
+		Battery_Status_High_Cell_Voltage = (1ul << 9),
+		Battery_Status_Update_Failure = (1ul << 10),
+		Battery_Status_Charge_Overcurrent_Warning = (1ul << 11),
+		Battery_Status_Charge_Overcurrent_Alarm = (1ul << 12),
+		Battery_Status_Discharge_Overcurrent_Warning = (1ul << 13),
+		Battery_Status_Discharge_Overcurrent_Alarm = (1ul << 14),
+		Battery_Status_Low_Cell_Voltage = (1ul << 15),
+		Battery_Status_Low_Temperature_ATD = (1ul << 16)
+	};
+	Q_ENUM(Battery_Status)
+
 	enum Ess_State {
 		Ess_State_OptimizedWithBatteryLife,
 		Ess_State_OptimizedWithoutBatteryLife,
@@ -963,6 +984,7 @@ public:
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
+	Q_INVOKABLE QString battery_statusToText(Battery_Status status) const;
 
 	Q_INVOKABLE QString cardinalDirectionToShortText(CardinalDirection direction) const;
 

@@ -4,6 +4,7 @@
 */
 
 #include "enums.h"
+#include <QLocale>
 
 namespace Victron {
 namespace VenusOS {
@@ -58,6 +59,82 @@ QString Enums::battery_iconFromMode(Battery_Mode mode) const
 	default:
 		return "qrc:/images/icon_battery_24.svg";
 	}
+}
+
+QString Enums::battery_statusToText(Battery_Status status) const
+{
+	QStringList result;
+
+	if (status & Battery_Status_Balanced) {
+		//% "Balanced"
+		result << qtTrId("battery_status_balanced");
+	}
+	if (status & Battery_Status_Imbalance) {
+		//% "Imbalance"
+		result << qtTrId("battery_status_imbalance");
+	}
+	if (status & Battery_Status_Balancing) {
+		//% "Balancing"
+		result << qtTrId("battery_status_balancing");
+	}
+	if (status & Battery_Status_Overvoltage) {
+		//% "Overvoltage"
+		result << qtTrId("battery_status_overvoltage");
+	}
+	if (status & Battery_Status_Undervoltage) {
+		//% "Undervoltage"
+		result << qtTrId("battery_status_undervoltage");
+	}
+	if (status & Battery_Status_Low_Temperature_ATC) {
+		//% "Low Temperature (ATC)"
+		result << qtTrId("battery_status_low_temperature_atc");
+	}
+	if (status & Battery_Status_High_Temperature_ATC) {
+		//% "High Temperature (ATC)"
+		result << qtTrId("battery_status_high_temperature_atc");
+	}
+	if (status & Battery_Status_Cell_Error) {
+		//% "Cell Error"
+		result << qtTrId("battery_status_cell_error");
+	}
+	if (status & Battery_Status_High_Temperature_ATD) {
+		//% "High Temperature (ATD)"
+		result << qtTrId("battery_status_high_temperature_atd");
+	}
+	if (status & Battery_Status_High_Cell_Voltage) {
+		//% "High Cell Voltage"
+		result << qtTrId("battery_status_high_cell_voltage");
+	}
+	if (status & Battery_Status_Update_Failure) {
+		//% "Update Failure"
+		result << qtTrId("battery_status_update_failure");
+	}
+	if (status & Battery_Status_Charge_Overcurrent_Warning) {
+		//% "Charge Overcurrent Warning"
+		result << qtTrId("battery_status_charge_overcurrent_warning");
+	}
+	if (status & Battery_Status_Charge_Overcurrent_Alarm) {
+		//% "Charge Overcurrent Alarm"
+		result << qtTrId("battery_status_charge_overcurrent_alarm");
+	}
+	if (status & Battery_Status_Discharge_Overcurrent_Warning) {
+		//% "Discharge Overcurrent Warning"
+		result << qtTrId("battery_status_discharge_overcurrent_warning");
+	}
+	if (status & Battery_Status_Discharge_Overcurrent_Alarm) {
+		//% "Discharge Overcurrent Alarm"
+		result << qtTrId("battery_status_discharge_overcurrent_alarm");
+	}
+	if (status & Battery_Status_Low_Cell_Voltage) {
+		//% "Low Cell Voltage"
+		result << qtTrId("battery_status_low_cell_voltage");
+	}
+	if (status & Battery_Status_Low_Temperature_ATD) {
+		//% "Low Temperature (ATD)"
+		result << qtTrId("battery_status_low_temperature_atd");
+	}
+
+	return QLocale().createSeparatedList(result);
 }
 
 QString Enums::cardinalDirectionToShortText(CardinalDirection direction) const
