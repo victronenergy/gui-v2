@@ -36,28 +36,22 @@ SwitchableOutputSlider {
 	MiniToggleButton {
 		id: dimmingToggleButton
 
+		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		leftInset: root.leftInset
+		leftPadding: root.leftInset
+		topInset: root.topInset
+		bottomInset: root.bottomInset
 		checked: dimmingState.expectedValue === 1
+
 		onClicked: root.toggleOutputState()
 
 		Rectangle {
 			anchors.right: parent.right
 			anchors.verticalCenter: parent.verticalCenter
 			width: Theme.geometry_miniSlider_separator_width
-			height: parent.height - (Theme.geometry_miniSlider_decorator_vertical_padding * 2)
+			height: parent.defaultBackgroundHeight - (Theme.geometry_miniSlider_decorator_vertical_padding * 2)
 			radius: Theme.geometry_miniSlider_separator_width / 2
 			color: enabled ? Theme.color_slider_separator : Theme.color_font_disabled
-		}
-
-		MouseAreaExtender {
-			id: extender
-
-			sendMouse: true
-			anchors {
-				fill: parent
-				topMargin: -root.height / 2
-				leftMargin: -root.anchors.leftMargin
-				bottomMargin: -root.height / 2
-			}
 		}
 	}
 

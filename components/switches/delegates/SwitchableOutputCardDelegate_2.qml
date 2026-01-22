@@ -50,11 +50,20 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
 		switchableOutput: root.switchableOutput
+
+		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
+		// by the same amount to fit the content within the background.
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
+		topPadding: topInset
+		bottomPadding: bottomInset
+		rightPadding: rightInset
 	}
 }

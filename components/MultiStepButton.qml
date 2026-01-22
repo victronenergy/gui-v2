@@ -11,7 +11,13 @@ BaseListView {
 
 	property int currentIndex
 	property bool checked
-	property int extendedHeight: parent.height
+
+	// Expand clickable area to the left of the On/Off button, and to the right of the last button.
+	readonly property real horizontalPressMargin: Theme.geometry_controlCard_button_margins
+
+	// Expand clickable area vertically for On/Off and delegate buttons.
+	readonly property real verticalPressMargin: Theme.geometry_button_touch_verticalMargin
+
 	readonly property real _totalDelegateWidth: width - headerItem.width
 
 	signal indexClicked(index: int)
@@ -26,11 +32,10 @@ BaseListView {
 	interactive: false
 
 	delegate: BaseListItem {
-
 		readonly property bool lastListItem: index === root.model.length - 1
 
-		height: root.height
-		width: root._totalDelegateWidth / root.model.length
+		width: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
+		height: Theme.geometry_switchableoutput_control_height
 
 		// background border color
 		Rectangle {
@@ -42,13 +47,21 @@ BaseListView {
 				: Theme.color_button_off_background
 		}
 
+		// Each button expands vertically beyond the delegate bounds, so that presses above and
+		// below the button still trigger the click action. The last button also expands its
+		// clickable area to the right.
 		Button {
-			anchors {
-				fill: parent
-				topMargin: Theme.geometry_button_border_width
-				bottomMargin: Theme.geometry_button_border_width
-				rightMargin: lastListItem ? Theme.geometry_button_border_width : 0
-			}
+			y: -root.verticalPressMargin
+			defaultBackgroundWidth: parent.width - Theme.geometry_button_border_width
+			defaultBackgroundHeight: parent.height - (Theme.geometry_button_border_width * 2)
+			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
+			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
+			rightInset: lastListItem ? root.horizontalPressMargin : 0
+
+			// Offset the content to fit within the background.
+			topPadding: topInset
+			bottomPadding: bottomInset
+			rightPadding: rightInset
 
 			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: 0
@@ -69,23 +82,22 @@ BaseListView {
 			focus: true
 
 			onClicked: root.indexClicked(index)
-
-			MouseAreaExtender {
-				anchors.verticalCenter: parent.verticalCenter
-				width: parent.width
-				height: root.extendedHeight
-			}
 		}
 	}
 
 	header: BaseListItem  {
 		width: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
 			   + Theme.geometry_miniSlider_separator_width + (Theme.geometry_miniSlider_text_padding * 2)
-		height: parent.height
+			   + root.horizontalPressMargin
+		height: Theme.geometry_switchableoutput_control_height
 
 		// background border color
 		Rectangle {
-			anchors.fill: parent
+			id: backgroundRect
+			anchors {
+				fill: parent
+				leftMargin: root.horizontalPressMargin
+			}
 			topLeftRadius: Theme.geometry_slider_groove_radius
 			bottomLeftRadius: Theme.geometry_slider_groove_radius
 			topRightRadius: 0
@@ -96,12 +108,17 @@ BaseListView {
 		}
 
 		Button {
-			anchors {
-				fill: parent
-				topMargin: Theme.geometry_button_border_width
-				bottomMargin: Theme.geometry_button_border_width
-				leftMargin: Theme.geometry_button_border_width
-			}
+			y: -root.verticalPressMargin
+			defaultBackgroundWidth: parent.width - root.horizontalPressMargin - Theme.geometry_button_border_width
+			defaultBackgroundHeight: parent.height - (Theme.geometry_button_border_width * 2)
+			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
+			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
+			leftInset: root.horizontalPressMargin + Theme.geometry_button_border_width
+
+			// Offset the content to fit within the background.
+			topPadding: topInset
+			bottomPadding: bottomInset
+			leftPadding: leftInset
 
 			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
@@ -117,12 +134,6 @@ BaseListView {
 			focus: true
 
 			onClicked: root.checked ? root.offClicked() : root.onClicked()
-
-			MouseAreaExtender {
-				anchors.verticalCenter: parent.verticalCenter
-				width: parent.width
-				height: root.extendedHeight
-			}
 		}
 
 		Rectangle {

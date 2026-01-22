@@ -71,12 +71,22 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
+			topMargin: -topInset
 		}
 		switchableOutput: root.switchableOutput
 		measurementText: measurementItem.valid ? measurementItem.value.toFixed(root.switchableOutput.decimals) + Units.degreesSymbol : ""
+
+		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
+		// by the same amount to fit the content within the background.
+		topInset: Theme.geometry_button_touch_verticalMargin
+		bottomInset: Theme.geometry_button_touch_verticalMargin
+		leftInset: Theme.geometry_controlCard_button_margins
+		rightInset: Theme.geometry_controlCard_button_margins
+		topPadding: topInset
+		bottomPadding: bottomInset
+		leftPadding: leftInset + leftLabelWidth
+		rightPadding: rightInset + rightLabelWidth
 	}
 }

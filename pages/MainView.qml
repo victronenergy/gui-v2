@@ -343,6 +343,50 @@ FocusScope {
 		}
 	}
 
+	CardViewLoader {
+		id: cardsLoader
+
+		function show(viewComponent) {
+			sourceComponent = viewComponent
+			viewActive = true
+		}
+
+		function hide() {
+			viewActive = false
+		}
+
+		anchors {
+			left: parent.left
+			right: parent.right
+		}
+		y: statusBar.y + statusBar.height
+		height: swipeViewAndNavBarContainer.height - statusBar.height
+		statusBarItem: statusBar
+		navBarItem: navBar
+		swipeViewItem : swipeView
+		backgroundColor: root.backgroundColor
+		animationEnabled: root.allowPageAnimations
+		focus: viewActive
+
+		// When the cards animates in/out, place the cards above the status bar z-order so that the
+		// cards do not animate from beneath the status bar. Once the cards have animated in, place
+		// them back below the status bar z-order so that status bar buttons (which have an
+		// expanded mouse area) can be clicked in the areas where they overlap with the cards view.
+		z: animationRunning ? 1 : 0
+
+		KeyNavigation.up: statusBar
+
+		Component {
+			id: controlCardsComponent
+			ControlCardsPage {}
+		}
+
+		Component {
+			id: auxCardsComponent
+			AuxCardsPage {}
+		}
+	}
+
 	StatusBar {
 		id: statusBar
 
@@ -398,46 +442,6 @@ FocusScope {
 		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
 				: pageStack.opened ? pageStack
 				: swipeViewAndNavBarContainer
-	}
-
-	// Put the CardsViewLoader z-order above the StatusBar, so that when the card view's y position
-	// changes, it is not obscured by the StatusBar.
-	CardViewLoader {
-		id: cardsLoader
-
-		function show(viewComponent) {
-			sourceComponent = viewComponent
-			viewActive = true
-		}
-
-		function hide() {
-			viewActive = false
-		}
-
-		anchors {
-			left: parent.left
-			right: parent.right
-		}
-		y: statusBar.y + statusBar.height
-		height: swipeViewAndNavBarContainer.height - statusBar.height
-		statusBarItem: statusBar
-		navBarItem: navBar
-		swipeViewItem : swipeView
-		backgroundColor: root.backgroundColor
-		animationEnabled: root.allowPageAnimations
-		focus: viewActive
-
-		KeyNavigation.up: statusBar
-
-		Component {
-			id: controlCardsComponent
-			ControlCardsPage {}
-		}
-
-		Component {
-			id: auxCardsComponent
-			AuxCardsPage {}
-		}
 	}
 
 	GlobalKeyNavigationHighlight {

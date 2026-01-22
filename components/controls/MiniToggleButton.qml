@@ -6,23 +6,15 @@
 import QtQuick
 import Victron.VenusOS
 
-PressArea {
+Button {
 	id: root
 
-	property bool checked
-
-	implicitWidth: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
+	defaultBackgroundWidth: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
 			+ (2 * Theme.geometry_miniSlider_text_padding)
-	implicitHeight: Theme.geometry_switchableoutput_control_height
-	radius: Theme.geometry_button_radius
-
-	Label {
-		anchors.centerIn: parent
-		color: enabled
-			? Theme.color_button_down_text
-			: (checked ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
-		text: root.checked ? CommonWords.on : CommonWords.off
-	}
+	text: root.checked ? CommonWords.on : CommonWords.off
+	color: enabled
+		? Theme.color_button_down_text
+		: (checked ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
 
 	TextMetrics {
 		id: labelTextMetrics

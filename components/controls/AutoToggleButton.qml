@@ -9,21 +9,10 @@ import Victron.VenusOS
 BaseAutoToggleSwitch {
 	id: root
 
-	property int buttonWidth: (root.width - (Theme.geometry_button_border_width * (root.buttonCount + 2)) - Theme.geometry_autotoggle_button_spacing) / root.buttonCount
+	property real defaultBackgroundWidth
+	property real defaultBackgroundHeight
+
 	property var _notif
-
-	implicitWidth: parent.width
-	implicitHeight: Theme.geometry_segmentedButtonRow_height
-
-	// background is the on/off buttons visual border
-	background: Rectangle {
-		anchors.left: parent.left
-		anchors.top: parent.top
-		anchors.bottom: parent.bottom
-		width: buttonWidth * 2 + Theme.geometry_button_border_width * 3
-		radius: Theme.geometry_button_radius
-		color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
-	}
 
 	function notification() {
 		if (ToastModel.count) {
@@ -38,10 +27,17 @@ BaseAutoToggleSwitch {
 		focus: true
 
 		ToggleButtonRow {
-			width: (2 * root.buttonWidth) + (3 * Theme.geometry_button_border_width)
-			height: parent.height
 			on: root.onChecked
 			KeyNavigation.right: autoButton
+
+			// Expand clickable area left (to delegate edge), right (halfway to auto button), and
+			// vertically. Paddings don't need adjustment as that is done internally by the control.
+			defaultBackgroundWidth: root.defaultBackgroundWidth - autoButton.defaultBackgroundWidth - Theme.geometry_switchableoutput_spacing
+			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+			topInset: Theme.geometry_button_touch_verticalMargin
+			bottomInset: Theme.geometry_button_touch_verticalMargin
+			leftInset: Theme.geometry_controlCard_button_margins
+			rightInset: Theme.geometry_switchableoutput_spacing / 2
 
 			onOnClicked: root.autoChecked ? root.notification() : root.onClicked()
 			onOffClicked: root.autoChecked ? root.notification() : root.offClicked()
@@ -50,13 +46,7 @@ BaseAutoToggleSwitch {
 		Button {
 			id: autoButton
 
-			anchors {
-				right: parent.right
-				top: parent.top
-				bottom: parent.bottom
-			}
-			width: root.buttonWidth
-			height: parent.height
+			anchors.right: parent.right
 			radius: Theme.geometry_button_radius
 			flat: false
 			borderWidth: Theme.geometry_button_border_width
@@ -64,6 +54,19 @@ BaseAutoToggleSwitch {
 			text: CommonWords.auto
 			checked: root.autoChecked
 			focus: true
+
+			// Expand clickable area left (halfway to toggle buttons), right (to delegate edge), and
+			// vertically. Paddings don't need adjustment as that is done internally by the control.
+			defaultBackgroundWidth: (root.defaultBackgroundWidth - Theme.geometry_switchableoutput_spacing) / root.buttonCount
+			defaultBackgroundHeight: root.defaultBackgroundHeight
+			topInset: Theme.geometry_button_touch_verticalMargin
+			bottomInset: Theme.geometry_button_touch_verticalMargin
+			leftInset: Theme.geometry_switchableoutput_spacing / 2
+			rightInset: Theme.geometry_controlCard_button_margins
+			topPadding: topInset
+			bottomPadding: bottomInset
+			leftPadding: leftInset
+			rightPadding: rightInset
 
 			onClicked: root.autoClicked()
 
