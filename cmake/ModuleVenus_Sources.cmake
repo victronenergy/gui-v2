@@ -457,6 +457,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/battery/PageBatterySettings.qml
     pages/settings/devicelist/battery/PageBatterySettingsBattery.qml
     pages/settings/devicelist/battery/PageLynxDistributorList.qml
+    pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml
     pages/settings/devicelist/battery/PageLynxIonDiagnostics.qml
     pages/settings/devicelist/battery/PageLynxIonIo.qml
     pages/settings/devicelist/battery/PageLynxIonSystem.qml

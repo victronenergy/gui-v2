@@ -272,6 +272,21 @@ DevicePage {
 		}
 
 		ListNavigation {
+			//% "Individual Battery Info"
+			text: qsTrId("battery_individual_info")
+			preferredVisible: batteryRequestId.valid
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml",
+						{ "title": text, "bindPrefix": root.bindPrefix })
+			}
+
+			VeQuickItem {
+				id: batteryRequestId
+				uid: root.bindPrefix + "/Battery/Request/Id"
+			}
+		}
+
+		ListNavigation {
 			//% "Details"
 			text: qsTrId("battery_details")
 			preferredVisible: batteryDetails.hasAllowedItem
