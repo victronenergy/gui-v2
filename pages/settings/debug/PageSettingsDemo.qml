@@ -248,6 +248,22 @@ Page {
 				to: 1.5
 			}
 
+			ListSpinBoxRange {
+				text: "Spin box range"
+
+				dataItemFrom.value: 0
+				rangeModelFrom.minimumValue: -5
+				rangeModelFrom.maximumValue: 20
+				rangeModelFrom.stepSize: 0.5
+
+				dataItemTo.value: 75
+				rangeModelTo.minimumValue: 50
+				rangeModelTo.maximumValue: 100
+				rangeModelTo.stepSize: 10
+
+				unit: VenusOS.Units_Volume_Litre
+			}
+
 			ListDateSelector {
 				text: "Date selection"
 				date: new Date()

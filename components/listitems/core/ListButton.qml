@@ -12,6 +12,9 @@ ListItem {
 	readonly property alias button: button
 	property alias secondaryText: button.text
 
+	// If true, displays a text label instead of a button.
+	property bool readOnly: false
+
 	interactive: true
 	pressAreaEnabled: false
 
@@ -27,6 +30,7 @@ ListItem {
 			width: Math.min(implicitWidth, root.maximumContentWidth)
 			showEnabled: root.clickable
 			focusPolicy: Qt.NoFocus
+			visible: !root.readOnly
 
 			onClicked: {
 				if (!root.checkWriteAccessLevel() || !root.clickable) {
@@ -34,6 +38,12 @@ ListItem {
 				}
 				root.clicked()
 			}
+		},
+
+		SecondaryListLabel {
+			text: button.text
+			width: Math.min(implicitWidth, root.maximumContentWidth)
+			visible: !button.visible
 		}
 	]
 }
