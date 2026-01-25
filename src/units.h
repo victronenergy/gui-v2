@@ -85,7 +85,8 @@ public:
 	Q_INVOKABLE QString getCombinedDisplayText(
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
-		int precision = -1) const;
+		int precision = -1,
+		bool precisionAdjustmentAllowed = true) const;
 
 	Q_INVOKABLE QString getCapacityDisplayText(VenusOS::Enums::Units_Type unit,
 		qreal capacity_m3,
