@@ -48,6 +48,16 @@
     "geometry_colorWheel_lowerSlider_padding": 5,
     "geometry_colorWheel_component_overlap": 7,
 
+    "geometry_droopGraph_width": 336,
+    "geometry_droopGraph_height": 199,
+    "geometry_droopGraph_axis_width": 3,
+    "geometry_droopGraph_arrow_size": 8,
+    "geometry_droopGraph_axis_label_width": 20,
+    "geometry_droopGraph_axis_label_height": 20,
+    "geometry_droopGraph_indicator_diameter": 16,
+    "geometry_droopGraph_indicator_border_width": 2,
+    "geometry_droopGraph_droopLine_half_width": 1.5,
+
     "geometry_emptyPageItem_column_spacing": 10,
     "geometry_emptyPageItem_title_bottomMargin": 40,
     "geometry_emptyPageItem_primaryLabel_topPadding": 10,

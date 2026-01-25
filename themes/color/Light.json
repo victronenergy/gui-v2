@@ -59,6 +59,11 @@
     "color_colorWheelDialog_mode_button_background": "color_gray8",
     "color_colorWheelDialog_mode_button_separator": "color_gray7",
 
+    "color_droop_graph_axis_line": "color_gray5",
+    "color_droop_graph_gradient_centre": "#387DC5",
+    "color_droop_graph_gradient_edge": "#F0962E",
+    "color_droop_graph_indicator_guidelines": "color_black",
+
     "color_radioButton_indicator_on": "color_ok",
     "color_radioButton_indicator_off": "color_gray3",
     "color_radioButton_indicator_disabled": "color_gray6",

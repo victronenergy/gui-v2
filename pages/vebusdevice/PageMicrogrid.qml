@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -97,12 +98,20 @@ Page {
 
 				MicrogridModeListText {}
 
+				ListDroopGraph {
+					voltagePercent: 55
+					frequencyPercent: 20
+
+					height: 260
+				}
+
 				SettingsListHeader {
 					//% "Hybrid droop parameters"
 					text: qsTrId("page_microgrid_hybrid_droop_parameters")
 				}
 
 				MicrogridListQuantity {
+					id: p0
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/P0/Value"
 					//% "Reference active power (P<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_active_power_p0")
@@ -110,6 +119,7 @@ Page {
 				}
 
 				MicrogridListQuantity {
+					id: f0
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Value"
 					//% "Reference frequency (f<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_frequency_f0")
@@ -117,6 +127,7 @@ Page {
 				}
 
 				MicrogridListQuantity {
+					id: fpDroop
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Value"
 					//% "Frequency droop slope (droop<sub>fP</sub>)"
 					text: qsTrId("page_microgrid_frequency_droop_slope")
@@ -124,6 +135,7 @@ Page {
 				}
 
 				MicrogridListQuantity {
+					id: q0
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Q0/Value"
 					//% "Reference reactive power (Q<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_reactive_power")
@@ -131,6 +143,7 @@ Page {
 				}
 
 				MicrogridListQuantity {
+					id: u0
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/U0/Value"
 					//% "Reference Voltage (U<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_voltage")
@@ -138,6 +151,7 @@ Page {
 				}
 
 				MicrogridListQuantity {
+					id: uqDroop
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Value"
 					//% "Voltage droop slope (droop<sub>UQ</sub>)"
 					text: qsTrId("page_microgrid_voltage_droop_slope")
@@ -153,16 +167,16 @@ Page {
 					//% "Allowed active power range"
 					text: qsTrId("page_microgrid_allowed_active_power_range")
 					unitType: VenusOS.Units_Percentage
-					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Value"
-					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMin/Value"
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMax/Value"
 				}
 
 				ListValueRange {
 					//% "Allowed reactive power range"
 					text: qsTrId("page_microgrid_allowed_reactive_power_range")
 					unitType: VenusOS.Units_Percentage
-					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
-					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmin/Value"
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmax/Value"
 				}
 			}
 		}

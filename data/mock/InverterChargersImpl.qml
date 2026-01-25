@@ -211,4 +211,23 @@ Item {
 			}
 		}
 	}
+
+	// Animate Microgrid Droop parameters. Used to provide visual feedback for droop graphs
+	// NB/ modified values are not animated
+	MockDataRandomizer {
+		active: true
+
+		minimumValue: 55
+		maximumValue: 68
+
+		VeQuickItem { uid: Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/F0/Value" }
+	}
+	MockDataRandomizer {
+		active: true
+
+		minimumValue: 225
+		maximumValue: 285
+
+		VeQuickItem { uid: Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/U0/Value" }
+	}
 }
