@@ -966,6 +966,13 @@ public:
 	};
 	Q_ENUM(MicrogridMode)
 
+
+	enum MicrogridExternalControl {
+		MicrogridExternalControl_Standalone = 0,
+		MicrogridExternalControl_EmsControl = 1,
+	};
+	Q_ENUM(MicrogridExternalControl)
+
 	enum ElectricalPowerDisplay {
 		ElectricalPowerDisplay_PreferWatts,
 		ElectricalPowerDisplay_PreferAmps,
@@ -1004,7 +1011,7 @@ public:
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
 
-	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
+	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const;
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 
