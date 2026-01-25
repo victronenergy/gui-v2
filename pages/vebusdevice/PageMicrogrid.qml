@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -123,18 +124,43 @@ Page {
 			id: hybridDroopModel
 
 			VisibleItemModel {
-				readonly property bool _parametersModified: parameterP0SpinBox.dataItemModified.value === 1
-									|| parameterF0SpinBox.dataItemModified.value === 1
-									|| parameterFPSpinBox.dataItemModified.value === 1
-									|| parameterQ0SpinBox.dataItemModified.value === 1
-									|| parameterU0SpinBox.dataItemModified.value === 1
-									|| parameterUQSpinBox.dataItemModified.value === 1
-									|| parameterP0SpinBoxRange.dataItemModifiedFrom.value === 1
-									|| parameterP0SpinBoxRange.dataItemModifiedTo.value === 1
-									|| parameterQ0SpinBoxRange.dataItemModifiedFrom.value === 1
-									|| parameterQ0SpinBoxRange.dataItemModifiedTo.value === 1
+				readonly property bool _showApplyAllParameters:  externalControl.valid && externalControl.value === VenusOS.MicrogridExternalControl_Standalone
+									&& (p0.dataItemModified.value === 1
+									|| f0.dataItemModified.value === 1
+									|| fpDroop.dataItemModified.value === 1
+									|| q0.dataItemModified.value === 1
+									|| u0.dataItemModified.value === 1
+									|| uqDroop.dataItemModified.value === 1
+									|| p0Range.dataItemModifiedFrom.value === 1
+									|| p0Range.dataItemModifiedTo.value === 1
+									|| q0Range.dataItemModifiedFrom.value === 1
+									|| q0Range.dataItemModifiedTo.value === 1)
 
 				MicrogridModeListText {}
+
+				ListDroopGraph {
+					p0Value: p0.value
+					p0LowerValue: p0.value + (p0Range.dataItemModifiedFrom.value * p0)
+					p0UpperValue: p0.value + (p0Range.dataItemModifiedTo.value * p0)
+					f0Value: f0.value
+
+					q0Value: q0.value
+					q0LowerValue: q0.value + (q0Range.dataItemModifiedFrom.value * q0)
+					q0UpperValue: q0.value + (q0Range.dataItemModifiedTo.value * q0)
+					u0Value: u0.value
+
+					voltage: activeVoltage.value
+					frequency: activeFrequency.value
+
+					VeQuickItem {
+						id: activeVoltage
+						uid: root.bindPrefix + "/Ac/ActiveIn/L1/V"
+					}
+					VeQuickItem {
+						id: activeFrequency
+						uid: root.bindPrefix + "/Ac/ActiveIn/L1/F"
+					}
+				}
 
 				SettingsListHeader {
 					//% "Hybrid droop parameters"
@@ -142,22 +168,20 @@ Page {
 				}
 
 				MicrogridListSpinBox {
-					id: parameterP0SpinBox
-
+					id: p0
 					//% "Reference active power (P<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_active_power_p0")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/P0/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/P0/Modified"
 
-					from: parameterP0SpinBoxRange.dataItemFrom.value
-					to: parameterP0SpinBoxRange.dataItemTo.value
+					from: p0Range.dataItemFrom.value
+					to: p0Range.dataItemTo.value
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 				}
 
 				MicrogridListSpinBox {
-					id: parameterF0SpinBox
-
+					id: f0
 					//% "Reference frequency (f<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_frequency_f0")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Value"
@@ -171,8 +195,7 @@ Page {
 				}
 
 				MicrogridListSpinBox {
-					id: parameterFPSpinBox
-
+					id: fpDroop
 					//% "Frequency droop slope (droop<sub>fP</sub>)"
 					text: qsTrId("page_microgrid_frequency_droop_slope")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Value"
@@ -186,22 +209,20 @@ Page {
 				}
 
 				MicrogridListSpinBox {
-					id: parameterQ0SpinBox
-
+					id: q0
 					//% "Reference reactive power (Q<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_reactive_power")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Q0/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Q0/Modified"
 
-					from: parameterQ0SpinBoxRange.dataItemFrom.value
-					to: parameterQ0SpinBoxRange.dataItemTo.value
+					from: q0Range.dataItemFrom.value
+					to: q0Range.dataItemTo.value
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 				}
 
 				MicrogridListSpinBox {
-					id: parameterU0SpinBox
-
+					id: u0
 					//% "Reference Voltage (U<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_voltage")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/U0/Value"
@@ -215,8 +236,7 @@ Page {
 				}
 
 				MicrogridListSpinBox {
-					id: parameterUQSpinBox
-
+					id: uqDroop
 					//% "Voltage droop slope (droop<sub>UQ</sub>)"
 					text: qsTrId("page_microgrid_voltage_droop_slope")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Value"
@@ -235,7 +255,7 @@ Page {
 				}
 
 				ListSpinBoxRange {
-					id: parameterP0SpinBoxRange
+					id: p0Range
 					//% "Allowed active power range"
 					text: qsTrId("page_microgrid_allowed_active_power_range")
 					readOnly: !externalControl.valid || externalControl.value !== VenusOS.MicrogridExternalControl_Standalone
@@ -257,7 +277,7 @@ Page {
 				}
 
 				ListSpinBoxRange {
-					id: parameterQ0SpinBoxRange
+					id: q0Range
 					//% "Allowed reactive power range"
 					text: qsTrId("page_microgrid_allowed_reactive_power_range")
 					readOnly: !externalControl.valid || externalControl.value !== VenusOS.MicrogridExternalControl_Standalone
@@ -280,7 +300,7 @@ Page {
 
 				SettingsListHeader {
 					text: "" // Blank section padding
-					preferredVisible: externalControl.valid && externalControl.value === VenusOS.MicrogridExternalControl_Standalone
+					preferredVisible: _showApplyAllParameters
 				}
 
 				ListButton {
@@ -288,8 +308,7 @@ Page {
 					text: qsTrId("page_microgrid_apply_all_parameters")
 					//% "Apply"
 					secondaryText: qsTrId("page_microgrid_apply")
-					preferredVisible: externalControl.valid && externalControl.value === VenusOS.MicrogridExternalControl_Standalone
-							&& _parametersModified
+					preferredVisible: _showApplyAllParameters
 
 					button.borderColor: Theme.color_button_on_border_modified
 					button.backgroundColor: Theme.color_button_on_background_modified

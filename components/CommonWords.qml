@@ -213,6 +213,9 @@ QtObject {
 	//% "Firmware version"
 	readonly property string firmware_version: qsTrId("common_words_firmware_version")
 
+	//% "Frequency"
+	readonly property string frequency: qsTrId("common_words_frequency")
+
 	//% "Generator"
 	readonly property string generator: qsTrId("common_words_generator")
 

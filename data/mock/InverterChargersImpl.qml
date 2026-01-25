@@ -243,4 +243,22 @@ Item {
 			}
 		}
 	}
+
+	// Animate ActiveIn parameters for Microgrid Droop parameters. Used to provide visual feedback for droop graphs
+	MockDataRandomizer {
+		active: true
+
+		minimumValue: 52
+		maximumValue: 68
+
+		VeQuickItem { uid: Global.system.veBus.serviceUid + "/Ac/ActiveIn/L1/F" }
+	}
+	MockDataRandomizer {
+		active: true
+
+		minimumValue: 225
+		maximumValue: 285
+
+		VeQuickItem { uid: Global.system.veBus.serviceUid + "/Ac/ActiveIn/L1/V" }
+	}
 }
