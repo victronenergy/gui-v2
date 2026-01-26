@@ -67,6 +67,28 @@ Page {
 		}
 
 		ListRadioButtonGroup {
+			//% "Grid meter required"
+			text: qsTrId("settings_ess_grid_meter_required")
+			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/GridMeterRequired"
+			preferredVisible: withoutGridMeter.currentIndex === 0
+				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			optionModel: [
+				{
+					display: CommonWords.yes,
+					value: 1,
+					//% "A grid meter must be present for ESS operation. If not available, the system will switch to pass-through."
+					caption: qsTrId("settings_ess_grid_meter_required_caption")
+				},
+				{
+					display: CommonWords.no,
+					value: 0,
+					//% "The system will use a grid meter when present, but fall back to internal measurements if the connection to the grid meter is lost."
+					caption: qsTrId("settings_ess_grid_meter_optional_caption")
+				},
+			]
+		}
+
+		ListRadioButtonGroup {
 			//% "Self-consumption from battery"
 			text: qsTrId("settings_ess_self_consumption_battery")
 			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryUse"
