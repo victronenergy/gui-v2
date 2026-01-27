@@ -77,6 +77,7 @@
 
     "geometry_switches_header_topMargin": 8,
 
+    "geometry_listItem_width": 944,
     "geometry_listItem_height": 64,
     "geometry_listItem_radius": 8,
     "geometry_listItem_content_horizontalMargin": 24,

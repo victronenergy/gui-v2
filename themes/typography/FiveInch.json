@@ -1,4 +1,6 @@
 {
+    "font_listItem_primary_size": "font_size_body2",
+    "font_listItem_flat_primary_size_flat": "font_size_body1",
     "font_briefPage_battery_percentage_minimumPixelSize": "font_size_body3",
     "font_briefPage_battery_percentage_maximumPixelSize": "font_size_h4",
     "font_briefPage_battery_timeToGo_pixelSize": "font_size_body1",
