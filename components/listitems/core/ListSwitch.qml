@@ -16,8 +16,8 @@ ListItem {
 	property bool updateDataOnClick: true
 	property bool invertSourceValue
 
-	property int valueTrue: 1
-	property int valueFalse: 0
+	property var valueTrue: 1
+	property var valueFalse: 0
 
 	// Override ListItem right padding to give Switch a larger touch area for users
 	rightPadding: 0
