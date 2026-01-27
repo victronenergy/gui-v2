@@ -211,6 +211,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 
     components/listitems/core/BaseListItem.qml
     components/listitems/core/BaseListLoader.qml
+    components/listitems/core/ListItemControl.qml
     components/listitems/core/ListAlarm.qml
     components/listitems/core/ListButton.qml
     components/listitems/core/ListDateSelector.qml
@@ -577,6 +578,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 )
 
 list(APPEND VictronVenusOS_CPP_SOURCES
+    src/abstractlistitem.h
+    src/abstractlistitem.cpp
     src/alldevicesmodel.h
     src/alldevicesmodel.cpp
     src/allservicesmodel.h
