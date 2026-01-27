@@ -25,6 +25,11 @@ Page {
 		header: SettingsColumn {
 			width: parent.width
 
+			SettingsListHeader {
+				//% "Access point"
+				text: qsTrId("settings_wifi_access_point")
+			}
+
 			ListSwitch {
 				//% "Create access point"
 				text: qsTrId("settings_wifi_create_ap")
@@ -77,6 +82,19 @@ Page {
 					//% "Password updated"
 					return Utils.validationResult(VenusOS.Notification_Info, qsTrId("page_settings_wifi_password_updated"))
 				}
+			}
+
+			SettingsListHeader {
+				text: CommonWords.settings
+			}
+
+			ListSwitch {
+				//% "Allow using WiFi for internet access"
+				text: qsTrId("settings_tcpip_wifi_gateway_enabled")
+				dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Wifi/GatewayEnabled"
+				writeAccessLevel: VenusOS.User_AccessType_User
+				valueTrue: true
+				valueFalse: false
 			}
 
 			SettingsListHeader {
