@@ -19,7 +19,7 @@ Page {
 				text: qsTrId("batterydetails_lowest_cell_voltage")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.minVoltageCellId; precision: details.minVoltageCellId.decimals }
-					QuantityObject { object: details.minCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+					QuantityObject { object: details.minCellVoltage; unit: VenusOS.Units_Volt_DC }
 				}
 				preferredVisible: details.allowsLowestCellVoltage
 			}
@@ -29,7 +29,7 @@ Page {
 				text: qsTrId("batterydetails_highest_cell_voltage")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.maxVoltageCellId; precision: details.maxVoltageCellId.decimals }
-					QuantityObject { object: details.maxCellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
+					QuantityObject { object: details.maxCellVoltage; unit: VenusOS.Units_Volt_DC }
 				}
 				preferredVisible: details.allowsHighestCellVoltage
 			}
