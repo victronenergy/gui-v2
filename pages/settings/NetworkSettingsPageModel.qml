@@ -123,6 +123,18 @@ VisibleItemModel {
 		}
 	}
 
+	ListSwitch {
+		id: ethernetGatewayEnabled
+
+		//% "Allow using ethernet for internet access"
+		text: qsTrId("settings_tcpip_ethernet_gateway_enabled")
+		dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/GatewayEnabled"
+		preferredVisible: !networkServices.wifi
+		writeAccessLevel: VenusOS.User_AccessType_User
+		valueTrue: true
+		valueFalse: false
+	}
+
 	ListIpAddressField {
 		interactive: networkServices.manual
 		writeAccessLevel: VenusOS.User_AccessType_User
@@ -143,6 +155,7 @@ VisibleItemModel {
 		//% "Gateway"
 		text: qsTrId("settings_tcpip_gateway")
 		interactive: method.userHasWriteAccess && networkServices.manual
+		preferredVisible: networkServices.wifi || ethernetGatewayEnabled.checked
 		writeAccessLevel: VenusOS.User_AccessType_User
 		textField.text: networkServices.gateway
 		saveInput: function() { networkServices.setServiceProperty("Gateway", textField.text) }
