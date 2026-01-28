@@ -84,6 +84,7 @@
     "geometry_listItem_flat_content_horizontalMargin": 16,
     "geometry_listItem_content_verticalMargin": 12,
     "geometry_listItem_content_spacing": 16,
+    "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
     "geometry_listItem_slider_width": 490,
     "geometry_listItem_slider_button_size": 24,

@@ -101,7 +101,7 @@ Page {
 			ListAcInError {
 				text: CommonWords.error
 				bindPrefix: pvInverter.serviceUid
-				secondaryLabel.color: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
+				secondaryTextColor: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
 			}
 
 			ListNavigation {
