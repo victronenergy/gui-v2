@@ -4,24 +4,51 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListItem {
+/*
+	A list setting item with additional secondary text.
+*/
+ListSetting {
 	id: root
 
 	readonly property alias dataItem: dataItem
-	property alias secondaryText: secondaryLabel.text
-	property alias secondaryLabel: secondaryLabel
+	property string secondaryText: dataItem.valid ? dataItem.value : ""
+	property color secondaryTextColor: Theme.color_listItem_secondaryText
 
-	content.children: [
-		SecondaryListLabel {
-			id: secondaryLabel
-			anchors.verticalCenter: parent.verticalCenter
-			text: dataItem.valid ? dataItem.value : ""
-			width: Math.min(implicitWidth, root.maximumContentWidth)
-			visible: text.length > 0
+	// Layout has 2 columns, 2 rows. The caption spans across both columns.
+	// | Primary label | Secondary label |
+	// | Caption                         |
+	contentItem: GridLayout {
+		columns: 2
+		columnSpacing: root.spacing
+		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+
+		Label {
+			text: root.text
+			font: root.font
+			wrapMode: Text.Wrap
+
+			Layout.fillWidth: true
 		}
-	]
+
+		SecondaryListLabel {
+			text: root.secondaryText
+
+			Layout.fillWidth: true
+		}
+
+		Label {
+			text: root.caption
+			color: Theme.color_font_secondary
+			wrapMode: Text.Wrap
+			visible: text.length > 0
+
+			Layout.columnSpan: 2
+			Layout.maximumWidth: root.availableWidth
+		}
+	}
 
 	VeQuickItem {
 		id: dataItem
