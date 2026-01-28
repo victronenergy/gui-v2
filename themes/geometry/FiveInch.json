@@ -123,10 +123,9 @@
     "geometry_spinBox_indicator_height": 64,
     "geometry_spinBox_indicator_radius": 6,
 
-    "geometry_switch_container_width": 48,
-    "geometry_switch_container_height": 24,
     "geometry_switch_groove_width": 44,
     "geometry_switch_groove_height": 20,
+    "geometry_switch_groove_radius": 24,
     "geometry_switch_groove_border_width": 2,
     "geometry_switch_indicator_width": 28,
     "geometry_switch_indicator_shadowOffset": 2,
