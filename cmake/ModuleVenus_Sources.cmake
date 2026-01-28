@@ -228,6 +228,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/ListRadioButton.qml
     components/listitems/core/ListRadioButtonGroup.qml
     components/listitems/core/ListRangeSlider.qml
+    components/listitems/core/ListSetting.qml
     components/listitems/core/ListSlider.qml
     components/listitems/core/ListSpinBox.qml
     components/listitems/core/ListSwitch.qml
@@ -239,6 +240,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/PrimaryListLabel.qml
     components/listitems/core/SecondaryListLabel.qml
     components/listitems/core/SectionHeader.qml
+    components/listitems/core/ListSettingBackground.qml
     components/listitems/core/SettingsListHeader.qml
     components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
