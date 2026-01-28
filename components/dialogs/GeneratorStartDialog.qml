@@ -40,20 +40,32 @@ GeneratorDialog {
 			width: parent.width
 			spacing: Theme.geometry_modalDialog_content_margins
 
-			Switch {
-				id: timedRunSwitch
-
+			Row {
 				anchors {
 					left: timeSelector.left
 					right: timeSelector.right
 				}
-				//% "Timed run"
-				text: qsTrId("controlcard_generator_startdialog_timed_run")
-				checked: root.generator.manualStartTimer > 0
-				checkable: true
-				focus: true
 
-				KeyNavigation.down: timeSelector
+				Label {
+					id: timedRunLabel
+					//% "Timed run"
+					text: qsTrId("controlcard_generator_startdialog_timed_run")
+					width: parent.width - timedRunSwitch.width
+					rightPadding: Theme.geometry_listItem_content_spacing
+					elide: Text.ElideRight
+				}
+
+				Switch {
+					id: timedRunSwitch
+
+					checked: root.generator.manualStartTimer > 0
+					checkable: true
+					focus: true
+
+					// Include label in the navigation highlight
+					KeyNavigationHighlight.leftMargin: -timedRunLabel.width - Theme.geometry_listItem_content_spacing
+					KeyNavigation.down: timeSelector
+				}
 			}
 
 			TimeSelector {
