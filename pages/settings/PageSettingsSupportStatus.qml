@@ -227,14 +227,14 @@ Page {
 				//% "Support status"
 				text: qsTrId("pagesettingssupportstate_support_status")
 				secondaryText: getSupportStateText()
-				secondaryLabel.color: getSupportStateColor()
+				secondaryTextColor: getSupportStateColor()
 			}
 
 			ListText {
 				//% "Device model"
 				text: qsTrId("pagesettingssupportstate_device_model")
 				secondaryText: modelItem.value || ""
-				secondaryLabel.color: isRaspberry ? Theme.color_red : Theme.color_green
+				secondaryTextColor: isRaspberry ? Theme.color_red : Theme.color_green
 			}
 
 			ListText {
@@ -249,7 +249,7 @@ Page {
 				//% "Data partition free space"
 				text: qsTrId("pagesettingssupportstate_data_free_space")
 				secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
-				secondaryLabel.color: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? Theme.color_red : Theme.color_green
+				secondaryTextColor: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? Theme.color_red : Theme.color_green
 			}
 
 			ListText {
@@ -267,7 +267,7 @@ Page {
 				//% "Custom startup scripts"
 				text: qsTrId("pagesettingssupportstate_custom_startup_scripts")
 				secondaryText: getSystemHooksState()
-				secondaryLabel.color: systemHooksState < 4 ? Theme.color_green : systemHooksState < 16 ? Theme.color_orange : Theme.color_red
+				secondaryTextColor: systemHooksState < 4 ? Theme.color_green : systemHooksState < 16 ? Theme.color_orange : Theme.color_red
 			}
 
 			ListButton {
@@ -344,7 +344,7 @@ Page {
 				//% "File system (rootfs) status"
 				text: qsTrId("pagesettingssupportstate_file_system_status")
 				secondaryText: getFsModifiedStateText()
-				secondaryLabel.color: getFsModifiedStateColor()
+				secondaryTextColor: getFsModifiedStateColor()
 			}
 
 			SettingsListHeader {
@@ -367,7 +367,7 @@ Page {
 				//% "Latest official firmware version installed?"
 				text: qsTrId("pagesettingssupportstate_latest_official_firmware_installed")
 				secondaryText: getLatestReleaseFirmwareInstalled()
-				secondaryLabel.color: isLatestReleaseFirmwareInstalled ? Theme.color_green : Theme.color_red
+				secondaryTextColor: isLatestReleaseFirmwareInstalled ? Theme.color_green : Theme.color_red
 			}
 
 			ListButton {
@@ -452,7 +452,7 @@ Page {
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingssupportstate_modbus_tcp_server")
 				secondaryText: modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
-				secondaryLabel.color: modbusTcpItem.value ? Theme.color_orange : Theme.color_font_secondary
+				secondaryTextColor: modbusTcpItem.value ? Theme.color_orange : Theme.color_font_secondary
 
 				VeQuickItem {
 					id: modbusTcpItem
@@ -464,7 +464,7 @@ Page {
 				//% "Signal K"
 				text: qsTrId("pagesettingssupportstate_signal_k")
 				secondaryText: signalKItem.valid && signalKItem.value ? CommonWords.enabled : CommonWords.disabled
-				secondaryLabel.color: signalKItem.valid && signalKItem.value ? Theme.color_orange : Theme.color_font_secondary
+				secondaryTextColor: signalKItem.valid && signalKItem.value ? Theme.color_orange : Theme.color_font_secondary
 				preferredVisible: signalKItem.valid
 
 				VeQuickItem {
@@ -480,7 +480,7 @@ Page {
 					? CommonWords.disabled : nodeRedItem.value === VenusOS.NodeRed_Mode_Enabled
 						//% "Enabled (safe mode)"
 						? CommonWords.enabled : qsTrId("settings_large_enabled_safe_mode")
-				secondaryLabel.color: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? Theme.color_orange : Theme.color_font_secondary
+				secondaryTextColor: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? Theme.color_orange : Theme.color_font_secondary
 				preferredVisible: nodeRedItem.valid
 
 				VeQuickItem {
