@@ -118,6 +118,7 @@ BaseListItem {
 		id: pressArea
 
 		anchors.fill: parent
+		z: -1
 		radius: parent.background.radius
 		enabled: root.device.deviceInstance >= 0
 				&& ["vebus","genset","battery"].indexOf(root.serviceType) >= 0

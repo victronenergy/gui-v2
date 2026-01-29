@@ -9,10 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: connected.value === 1 ? "" : CommonWords.not_connected
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 		QuantityObject { object: connected.value === 1 ? totalPower : null; unit: VenusOS.Units_Watt }
+		QuantityObject { object: connected.value === 1 ? null : CommonWords; key: "not_connected"; unit: VenusOS.Units_None }
 	}
 
 	onClicked: {
