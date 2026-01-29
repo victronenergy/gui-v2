@@ -10,7 +10,9 @@ DeviceListDelegate {
 	id: root
 
 	text: root.device.customName || VenusOS.digitalInput_typeToText(type.value)
-	secondaryText: VenusOS.digitalInput_stateToText(state.value)
+	quantityModel: QuantityObjectModel {
+		QuantityObject { object: state; key: "textValue"; unit: VenusOS.Units_None }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageDigitalInput.qml",
@@ -19,6 +21,9 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: state
+
+		readonly property string textValue: VenusOS.digitalInput_stateToText(value)
+
 		uid: root.device.serviceUid + "/State"
 	}
 
