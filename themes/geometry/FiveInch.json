@@ -475,7 +475,8 @@
     "geometry_settings_breadcrumb_topMargin": 9,
     "geometry_settingsListHeader_topPadding": 8,
     "geometry_settingsListHeader_bottomPadding": 2,
-    "geometry_settingsListNavigation_height": 64,
+    "geometry_settingsListNavigation_verticalPadding": 8,
+    "geometry_listNavigation_secondaryText_minimumWidth": 200,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,

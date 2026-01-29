@@ -196,7 +196,7 @@ Page {
 					return qsTrId("settings_briefview_not_configured")
 				}
 			}
-			secondaryLabel.color: (centerGaugeType === VenusOS.BriefView_CentralGauge_BatteryId && batteryName.length === 0)
+			secondaryTextColor: (centerGaugeType === VenusOS.BriefView_CentralGauge_BatteryId && batteryName.length === 0)
 					|| (centerGaugeType === VenusOS.BriefView_CentralGauge_TankId && !_device)
 				? Theme.color_red
 				: Theme.color_listItem_secondaryText

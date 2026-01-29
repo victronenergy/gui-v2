@@ -11,7 +11,11 @@ DeviceListDelegate {
 
 	//: Device is not supported
 	//% "Unsupported"
-	secondaryText: qsTrId("devicelist_unsupported")
+	readonly property string secondaryText: qsTrId("devicelist_unsupported")
+
+	quantityModel: QuantityObjectModel {
+		QuantityObject { object: root; key: "secondaryText"; unit: VenusOS.Units_None }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageUnsupportedDevice.qml",

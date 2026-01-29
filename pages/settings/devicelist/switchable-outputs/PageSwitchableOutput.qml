@@ -92,7 +92,7 @@ Page {
 				text: qsTrId("page_switchable_output_type")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Type"
 				preferredVisible: dataItem.valid
-				secondaryLabel.color: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
+				secondaryTextColor: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
 				optionModel: {
 					let options = []
 					for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
