@@ -36,7 +36,6 @@ BaseListItem {
 			}
 
 			QuantityRow {
-				height: nameLabel.height
 				showFirstSeparator: true    // otherwise this row does not align with the battery name
 				model: QuantityObjectModel {
 					filterType: QuantityObjectModel.HasValue

@@ -23,7 +23,6 @@ Row {
 
 	readonly property bool _showSeparators: !tableMode
 
-	height: Theme.geometry_listItem_height
 	spacing: Theme.geometry_quantityGroupRow_spacing
 
 	FontMetrics {
@@ -45,8 +44,6 @@ Row {
 			width: !isNaN(root.fixedColumnWidth) ? root.fixedColumnWidth
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
 				: quantityMetrics.columnWidth(quantityObject.unit) + horizontalPadding
-
-			height: root.height
 			leftPadding: horizontalPadding
 					+ (verticalSeparator.visible ? verticalSeparator.width : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
