@@ -10,6 +10,8 @@ import Victron.VenusOS
 T.RadioButton {
 	id: root
 
+	property color textColor: Theme.color_font_primary
+
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
 		implicitContentWidth + leftPadding + rightPadding,
@@ -18,6 +20,7 @@ T.RadioButton {
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding,
 		implicitIndicatorHeight + topPadding + bottomPadding)
+	spacing: Theme.geometry_listItem_content_spacing
 
 	indicator: Rectangle {
 		anchors {
@@ -41,5 +44,14 @@ T.RadioButton {
 			color: root.enabled || root.checked ? Theme.color_radioButton_indicator_on : Theme.color_radioButton_indicator_disabled
 			visible: root.down || root.checked
 		}
+	}
+
+	contentItem: Label {
+		rightPadding: root.indicator.width + root.spacing
+		text: root.text
+		font: root.font
+		color: root.textColor
+		verticalAlignment: Text.AlignVCenter
+		wrapMode: Text.Wrap
 	}
 }
