@@ -4,32 +4,78 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListItem {
+ListSetting {
 	id: root
 
-	property alias checked: radioButton.checked
-	property alias radioButton: radioButton
+	property bool checked
 	property string secondaryText
+
+	signal clicked()
+
+	function click() {
+		if (interactive && checkWriteAccessLevel()) {
+			clicked()
+		}
+	}
 
 	interactive: true
 
-	content.children: [
-		SecondaryListLabel {
-			anchors.verticalCenter: parent.verticalCenter
-			text: root.secondaryText
-			width: Math.min(implicitWidth, root.maximumContentWidth - radioButton.width - Theme.geometry_listItem_content_spacing)
-			visible: text.length > 0
-		},
+	// Layout has 3 columns, 2 rows. The caption spans across all columns.
+	// | Primary label | Secondary label | Radio button |
+	// | Caption                                        |
+	contentItem: GridLayout {
+		columns: 2
+		columnSpacing: root.spacing
+
+		Label {
+			text: root.text
+			textFormat: root.textFormat
+			font: root.font
+			wrapMode: Text.Wrap
+
+			Layout.fillWidth: true
+		}
+
 		RadioButton {
 			id: radioButton
 
 			checkable: false
+			checked: root.checked
 			enabled: root.clickable
 			focusPolicy: Qt.NoFocus
+			text: root.secondaryText
+			textColor: Theme.color_font_secondary
 
-			onClicked: root.clicked()
+			onClicked: root.click()
+
+			Layout.fillWidth: true
+			Layout.alignment: Qt.AlignRight
 		}
-	]
+
+		Label {
+			text: root.caption
+			color: Theme.color_font_secondary
+			wrapMode: Text.Wrap
+			visible: text.length > 0
+
+			Layout.columnSpan: 2
+			Layout.maximumWidth: root.availableWidth
+		}
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: root.click()
 }
