@@ -71,25 +71,34 @@ Page {
 
 			text: modelObject.display || ""
 			secondaryText: modelObject.secondaryText || ""
+			caption: modelObject.caption ?? ""
 			interactive: !modelObject.readOnly
 					// Prevent selection of already selected index
 					&& root.currentIndex !== model.index
-			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
+			font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: !modelObject.readOnly || root.currentIndex === model.index
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.selectedIndex === model.index
+			bottomPadding: bottomContentLoader.status === Loader.Ready
+					? bottomContentLoader.height
+						+ Theme.geometry_gradientList_spacing // margin above Loader
+						+ Theme.geometry_listItem_content_verticalMargin // margin below loader
+					: Theme.geometry_listItem_content_verticalMargin
+
 			ButtonGroup.group: radioButtonGroup
 
-			bottomContent.z: model.index === optionsListView.selectedIndex ? 1 : -1
-			bottomContentChildren: Loader {
+			Loader {
 				id: bottomContentLoader
 
-				readonly property string caption: modelObject.caption ?? ""
-				readonly property bool promptPassword: !!modelObject.promptPassword
-
-				width: parent.width
-				sourceComponent: promptPassword ? passwordComponent : (caption ? captionComponent : null)
+				anchors {
+					right: parent.right
+					bottom: parent.bottom
+					bottomMargin: Theme.geometry_listItem_content_verticalMargin
+				}
+				active: !!modelObject.promptPassword
+				width: radioButton.availableWidth
+				sourceComponent: passwordComponent
 			}
 
 			Component {
@@ -102,15 +111,7 @@ Page {
 						passwordField.forceActiveFocus()
 					}
 
-					width: parent.width
-
-					PrimaryListLabel {
-						topPadding: 0
-						color: Theme.color_font_secondary
-						text: bottomContentLoader.caption
-						font.pixelSize: Theme.font_size_caption
-						preferredVisible: bottomContentLoader.caption.length > 0
-					}
+					width: radioButton.availableWidth
 
 					ListPasswordField {
 						id: passwordField
@@ -137,25 +138,13 @@ Page {
 				}
 			}
 
-			Component {
-				id: captionComponent
-
-				PrimaryListLabel {
-					topPadding: 0
-					bottomPadding: 0
-					color: Theme.color_font_secondary
-					text: bottomContentLoader.caption
-					font.pixelSize: Theme.font_size_caption
-				}
-			}
-
 			onClicked: {
 				if (root.updateCurrentIndexOnClick) {
 					optionsListView.selectedIndex = model.index
 				} else {
 					optionsListView.selectionChanged = true
 				}
-				if (bottomContentLoader.sourceComponent === passwordComponent) {
+				if (bottomContentLoader.status === Loader.Ready) {
 					bottomContentLoader.item.focusPasswordInput()
 				} else {
 					radioButton.select()
