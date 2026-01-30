@@ -373,7 +373,7 @@ Page {
 			ListButton {
 				//% "Update the firmware to fix the modified state"
 				text: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state")
-				button.text: {
+				secondaryText: {
 					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
 						if (firmwareProgressItem.value) {
 							//: Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress

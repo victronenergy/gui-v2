@@ -24,6 +24,7 @@ Page {
 			ListSpinBox {
 				id: gridSetpoint
 
+				bottomPadding: gridSetpointSlider.height + Theme.geometry_listItem_content_verticalMargin
 				text: root.title
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
@@ -31,17 +32,19 @@ Page {
 				to: 15000
 				stepSize: 10
 
-				bottomContentChildren: [
-					SettingsSlider {
-						id: gridSetpointSlider
+				SettingsSlider {
+					id: gridSetpointSlider
 
-						width: parent.width
-						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
-						from: -15000
-						to: 15000
-						stepSize: 50
+					anchors {
+						bottom: parent.bottom
+						bottomMargin: Theme.geometry_listItem_content_verticalMargin
 					}
-				]
+					width: parent.width
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+					from: -15000
+					to: 15000
+					stepSize: 50
+				}
 			}
 
 			ListText {

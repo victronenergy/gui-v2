@@ -29,14 +29,30 @@ ListButton {
 
 	text: Global.acInputs.currentLimitTypeToText(inputType)
 	secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
-	button.showEnabled: limitAdjustable
+	interactive: limitAdjustable
 	writeAccessLevel: VenusOS.User_AccessType_User
 
-	onClicked: {
-		if (!limitAdjustable) {
-			Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText())
-			return
+	// When the button is not clickable, show a toast notification if the user clicks the item.
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+		focus: !root.limitAdjustable
+
+		KeyNavigationHighlight.active: root.activeFocus
+		Keys.onSpacePressed: limitFixedPressArea.clicked(null)
+
+		MouseArea {
+			id: limitFixedPressArea
+
+			anchors.fill: parent
+			enabled: !root.limitAdjustable
+			onClicked: {
+				Global.showToastNotification(VenusOS.Notification_Info, root._currentLimitNotAdjustableText())
+			}
 		}
+	}
+
+	onClicked: {
 		Global.dialogLayer.open(currentLimitDialogComponent, { value: currentLimitItem.value })
 	}
 
