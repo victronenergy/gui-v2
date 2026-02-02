@@ -191,8 +191,7 @@ Page {
 				optionModel: [
 					//% "Speed"
 					{ display: qsTrId("settings_minmax_speed"), value: 0 },
-					//% "Time to go"
-					{ display: qsTrId("settings_minmax_time_to_go"), value: 1 }
+					{ display: CommonWords.time_to_go, value: 1 }
 				]
 			}
 

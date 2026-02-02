@@ -8,10 +8,15 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Item {
+	id: root
+
+	required property MotorDrives motorDrives
+
 	component Shadow : CP.ColorImage {
 		width: Theme.geometry_boatPage_shadow_width
 		height: Theme.geometry_boatPage_shadow_height
 		source: "qrc:/images/boat_glow.png"
+		color: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : undefined
 	}
 
 	Shadow {

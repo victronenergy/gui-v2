@@ -20,6 +20,7 @@ SwipeViewPage {
 
 	Boat.Background { // the blue shadows
 		anchors.fill: parent
+		motorDrives: motorDrives
 	}
 
 	Boat.BatteryArc { // arc gauge on the far left
@@ -33,13 +34,13 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.TimeToGo { // top left
+	Boat.TimeToGo {
 		id: ttg
 
 		anchors {
-			bottom: batteryPercentage.top
-			bottomMargin: Theme.geometry_boatPage_verticalMargin
-			left: batteryTemperature.left
+			top: centerGauge.top
+			topMargin: Theme.geometry_boatPage_timeToGo_topMargin
+			horizontalCenter: centerGauge.horizontalCenter
 		}
 	}
 
@@ -51,6 +52,7 @@ SwipeViewPage {
 			verticalCenter: batteryGauge.verticalCenter
 			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
 		}
+		motorDrives: motorDrives
 	}
 
 	QuantityLabel { // bottom left
@@ -93,15 +95,28 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.Gear { // top right
-		id: gear
+	Boat.Gear { // top left
+		id: leftGear
 
 		anchors {
-			bottom: ttg.bottom
+			bottom: batteryPercentage.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
+			left: parent.left
+			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
+		}
+		motorDrive: motorDrives.leftMotorDrive
+	}
+
+	Boat.Gear { // top right
+		id: rightGear
+
+		anchors {
+			bottom: batteryPercentage.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
-		motorDrive: motorDrives.singleMotorDrive
+		motorDrive: motorDrives.right !== null ? motorDrives.rightMotorDrive : motorDrives.singleMotorDrive
 	}
 
 	Boat.ConsumptionGauge { // vertical center right

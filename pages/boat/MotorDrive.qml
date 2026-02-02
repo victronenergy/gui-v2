@@ -25,6 +25,8 @@ QtObject {
 		displayUnit: VenusOS.Units_Watt
 	}
 
+    readonly property bool isRegenerating: power._numerator.valid && power._numerator.value < 0
+
     readonly property QtObject dcConsumption: QtObject {
 		readonly property VeQuickItemsQuotient quotient: root.power
 		readonly property QtObject scalar: QtObject {
