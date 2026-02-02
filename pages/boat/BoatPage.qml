@@ -93,15 +93,27 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
+	Boat.Gear { // top left
+		id: leftGear
+
+		anchors {
+			bottom: batteryPercentage.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
+			left: parent.left
+			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
+		}
+		motorDrive: motorDrives.leftMotorDrive
+	}
+
 	Boat.Gear { // top right
-		id: gear
+		id: rightGear
 
 		anchors {
 			bottom: ttg.bottom
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
-		motorDrive: motorDrives.singleMotorDrive
+		motorDrive: motorDrives.right !== null ? motorDrives.rightMotorDrive : motorDrives.singleMotorDrive
 	}
 
 	Boat.ConsumptionGauge { // vertical center right
