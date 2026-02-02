@@ -20,6 +20,7 @@ SwipeViewPage {
 
 	Boat.Background { // the blue shadows
 		anchors.fill: parent
+		motorDrives: motorDrives
 	}
 
 	Boat.BatteryArc { // arc gauge on the far left
@@ -51,6 +52,7 @@ SwipeViewPage {
 			verticalCenter: batteryGauge.verticalCenter
 			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
 		}
+		motorDrives: motorDrives
 	}
 
 	QuantityLabel { // bottom left

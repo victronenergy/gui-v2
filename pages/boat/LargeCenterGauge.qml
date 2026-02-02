@@ -34,9 +34,11 @@ Item {
 		height: width
 		radius: width/2
 		endAngle: Theme.geometry_boatPage_centerGauge_angularRange
-		value: root.activeDataSource ? root.activeDataSource.percentage : 0
+		value: root.activeDataSource ? Math.abs(root.activeDataSource.percentage) : 0
 		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
 		animationEnabled: root.animationEnabled
+		progressColor: root.activeDataSource === root.motorDriveDcConsumption && root.motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_ok
+		remainderColor: root.activeDataSource === root.motorDriveDcConsumption && root.motorDrives.isRegenerating ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
 		objectName: "centerGauge"
 		visible: root.activeDataSource === root.gps || root.activeDataSource === root.motorDriveDcConsumption
 

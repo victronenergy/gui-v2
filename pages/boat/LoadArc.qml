@@ -39,7 +39,9 @@ Column {
 			horizontalAlignment: Qt.AlignRight
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			value: motorDrives.dcConsumption.quotient.percentage
+			value: Math.abs(motorDrives.dcConsumption.quotient.percentage)
+			progressColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_ok
+			remainderColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
 		}
 	}
 
