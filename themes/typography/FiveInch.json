@@ -20,5 +20,7 @@
     "font_boatPage_speed_pixelSize_large": 152,
     "font_boatPage_speed_pixelSize": 128,
     "font_boatPage_centerGauge_consumption_pixelSize": 60,
-    "font_boatPage_gear_pixelSize": 28
+    "font_boatPage_gear_pixelSize": 28,
+    "font_boatPage_timeToGo_label_pixelSize": "font_size_body1",
+    "font_boatPage_timeToGo_value_pixelSize": "font_size_body2"
 }
