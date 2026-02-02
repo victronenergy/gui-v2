@@ -8,13 +8,13 @@
 
 template <typename T> static QObject *singletonFactory(QQmlEngine *, QJSEngine *)
 {
-	return new T;
+	return new T(nullptr);
 }
 
-int main(int argc, char **argv) \
+int main(int argc, char *argv[])
 {
-	qmlRegisterType<Victron::VenusOS::ScreenBlanker>("Victron.VenusOS", 2, 0, "ScreenBlanker");
+	qmlRegisterSingletonType<Victron::VenusOS::ScreenBlanker>("Victron.VenusOS", 2, 0, "ScreenBlanker", singletonFactory<Victron::VenusOS::ScreenBlanker>);
 
 	QTEST_SET_MAIN_SOURCE_PATH
-	return quick_test_main(argc, argv, "tst_units", nullptr);
+	return quick_test_main(argc, argv, "tst_screenblanker", nullptr);
 }

@@ -362,10 +362,10 @@ FocusScope {
 
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: enabled
-			enabled: Global.screenBlanker?.supported
-					&& Global.screenBlanker?.enabled
+			enabled: ScreenBlanker.supported
+					&& ScreenBlanker.enabled
 					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			onClicked: Global.screenBlanker.setDisplayOff()
+			onClicked: ScreenBlanker.setDisplayOff()
 		}
 	}
 

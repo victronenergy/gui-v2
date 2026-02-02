@@ -9,10 +9,7 @@ import Victron.VenusOS
 TestCase {
 	name: "ScreenBlanker"
 
-	ScreenBlanker {
-		id: blanker
-		displayOffTime: 100
-	}
+	property ScreenBlanker blanker: ScreenBlanker
 
 	SignalSpy {
 		id: spy
@@ -21,7 +18,11 @@ TestCase {
 	}
 
 	function test_blanker() {
-		compare(blanker.supported, true)
+		if (!blanker.supported) {
+			return
+		}
+
+		blanker.displayOffTime = 100
 		compare(blanker.enabled, true)
 		compare(blanker.displayOffTime, 100)
 

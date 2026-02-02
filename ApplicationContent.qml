@@ -26,15 +26,18 @@ FocusScope {
 		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate
 	}
 
-	ScreenBlanker {
+	QtObject {
 		id: screenBlanker
-		enabled: !Global.splashScreenVisible && !mainView.statusBar.notificationButtonVisible
-		displayOffTime: displayOffItem.valid ? 1000*displayOffItem.value : 0.0
-		window: root.Window.window
+
 		property VeQuickItem displayOffItem: VeQuickItem {
 			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff" : ""
 		}
-		Component.onCompleted: Global.screenBlanker = screenBlanker
+
+		Component.onCompleted: {
+			ScreenBlanker.enabled = Qt.binding(function() { return !Global.splashScreenVisible && !mainView.statusBar.notificationButtonVisible })
+			ScreenBlanker.displayOffTime = Qt.binding(function() { return screenBlanker.displayOffItem.valid ? 1000*screenBlanker.displayOffItem.value : 0 })
+			ScreenBlanker.window = root.Window.window
+		}
 	}
 
 	MouseArea {

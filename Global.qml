@@ -24,7 +24,6 @@ QtObject {
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
 	property var notificationLayer
-	property ScreenBlanker screenBlanker
 	property bool displayCpuUsage
 	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && BackendConnection.applicationVisible
 
