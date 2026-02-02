@@ -164,5 +164,7 @@
 
     "color_boatPage_needle": "color_black",
     "color_boatPage_gearHighlighter": "#387DC5",
-    "color_boatPage_icon": "color_gray2"
+    "color_boatPage_icon": "color_gray2",
+    "color_boatPage_regenProgress": "#72B84C",
+    "color_boatPage_regenRemainder": "#D1E5C2"
 }

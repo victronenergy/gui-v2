@@ -535,6 +535,9 @@ QtObject {
 	//% "Temperature sensor"
 	readonly property string temperature_sensor: qsTrId("common_words_temperature_sensor")
 
+	//% "Time To Go"
+	readonly property string time_to_go: qsTrId("common_words_time_to_go")
+
 	//% "Today"
 	readonly property string today: qsTrId("common_words_today")
 
