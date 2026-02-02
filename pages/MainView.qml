@@ -36,8 +36,6 @@ FocusScope {
 	// and Settings).
 	property SwipeView swipeView: swipeViewLoader.item
 
-	readonly property bool screenIsBlanked: !!Global.screenBlanker && Global.screenBlanker.blanked
-
 	property int _loadedPages: 0
 
 	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload

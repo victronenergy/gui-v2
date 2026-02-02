@@ -10,6 +10,7 @@
 #include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
 #include "src/frameratemodel.h"
+#include "src/screenblanker.h"
 
 #if VENUS_GX_BUILD
 #include "src/urlinterceptor.h"
@@ -479,6 +480,10 @@ int main(int argc, char *argv[])
 
 	initBackend(&enableFpsCounter, &skipSplashScreen);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
+
+	/* Force construction of screen blanker */
+	Victron::VenusOS::ScreenBlanker *screenBlanker = Victron::VenusOS::ScreenBlanker::create(&engine);
+	app.installEventFilter(screenBlanker);
 
 	/* Force construction of translator */
 	Victron::VenusOS::Language *languageLoader = Victron::VenusOS::Language::create(&engine);

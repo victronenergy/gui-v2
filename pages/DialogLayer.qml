@@ -36,10 +36,14 @@ Item {
 				currentDialog = null
 			}
 		}
-		function onScreenIsBlankedChanged() {
+	}
+
+	Connections {
+		target: ScreenBlanker
+		function onBlankedChanged() {
 			// If the screen blanker blanks the screen, we should
 			// close the dialog.
-			if (Global.mainView.screenIsBlanked && currentDialog) {
+			if (ScreenBlanker.blanked && currentDialog) {
 				currentDialog.destroy()
 				currentDialog = null
 			}

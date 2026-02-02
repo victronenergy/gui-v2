@@ -19,6 +19,7 @@ class ScreenBlanker : public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
+	QML_SINGLETON
 
 	Q_PROPERTY(bool blanked READ blanked NOTIFY blankedChanged FINAL)
 	Q_PROPERTY(bool supported READ supported CONSTANT FINAL)
@@ -27,7 +28,8 @@ class ScreenBlanker : public QObject
 	Q_PROPERTY(QQuickWindow* window READ window WRITE setWindow NOTIFY windowChanged FINAL)
 
 public:
-	explicit ScreenBlanker(QObject *parent = nullptr);
+	explicit ScreenBlanker(QObject *parent);
+	static ScreenBlanker* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 	bool supported() const;
 

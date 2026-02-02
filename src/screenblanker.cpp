@@ -14,6 +14,12 @@
 
 using namespace Victron::VenusOS;
 
+ScreenBlanker* ScreenBlanker::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+	static ScreenBlanker* screenBlanker = new ScreenBlanker(nullptr);
+	return screenBlanker;
+}
+
 ScreenBlanker::ScreenBlanker(QObject *parent) : QObject(parent)
 {
 	qInfo() << "ScreenBlanker: determining support";
