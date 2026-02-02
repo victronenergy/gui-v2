@@ -15,13 +15,21 @@ Column {
 
 	visible: !!battery && battery.timeToGo > 60
 
+	Label {
+		anchors.horizontalCenter: parent.horizontalCenter
+		font.pixelSize: Theme.font_boatPage_timeToGo_label_pixelSize
+		color: Theme.color_font_secondary
+		//% "Time To Go"
+		text: qsTrId("boat_page_time_to_go")
+	}
+
 	Row {
 		id: timeToGo
 
 		spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
 
 		component TimeToGoQuantityLabel : QuantityLabel {
-			font.pixelSize: Theme.font_size_body3
+			font.pixelSize: Theme.font_boatPage_timeToGo_value_pixelSize
 			anchors.verticalCenter: parent.verticalCenter
 		}
 
@@ -46,12 +54,5 @@ Column {
 			visible: value || hoursLabel.visible
 			value: duration.minutes
 		}
-	}
-
-	Label {
-		font.pixelSize: Theme.font_size_body2
-		color: Theme.color_font_secondary
-		//% "Time To Go"
-		text: qsTrId("boat_page_time_to_go")
 	}
 }

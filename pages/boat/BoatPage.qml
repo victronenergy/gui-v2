@@ -33,13 +33,13 @@ SwipeViewPage {
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.TimeToGo { // top left
+	Boat.TimeToGo {
 		id: ttg
 
 		anchors {
-			bottom: batteryPercentage.top
-			bottomMargin: Theme.geometry_boatPage_verticalMargin
-			left: batteryTemperature.left
+			top: centerGauge.top
+			topMargin: Theme.geometry_boatPage_timeToGo_topMargin
+			horizontalCenter: centerGauge.horizontalCenter
 		}
 	}
 
@@ -109,7 +109,8 @@ SwipeViewPage {
 		id: rightGear
 
 		anchors {
-			bottom: ttg.bottom
+			bottom: batteryPercentage.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
