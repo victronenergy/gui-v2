@@ -61,7 +61,7 @@ Page {
 				preferredVisible: dataItem.valid && gensetBindPrefix === ""
 				maximumLength: 6
 				saveInput: function() {
-					dataItem.setValue(accumulatedTotalItem.value - parseInt(textField.text, 10) * 60 * 60)
+					dataItem.setValue(accumulatedTotalItem.value - parseInt(secondaryText, 10) * 60 * 60)
 				}
 			}
 
@@ -161,11 +161,11 @@ Page {
 				secondaryText: Math.round(dataItem.value / 60 / 60)
 				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
 				saveInput: function() {
-					var serviceInterval = parseInt(textField.text, 10) * 60 * 60
+					var serviceInterval = parseInt(secondaryText, 10) * 60 * 60
 					dataItem.setValue(serviceInterval)
 					if (serviceInterval > 0) {
 						//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_interval").arg(textField.text))
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_interval").arg(secondaryText))
 					}
 					else {
 						//% "Service timer disabled."

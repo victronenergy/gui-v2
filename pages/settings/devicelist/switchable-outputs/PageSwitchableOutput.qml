@@ -19,7 +19,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/CustomName"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
+				maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: CommonWords.custom_name
 			}
@@ -30,7 +30,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Group"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
+				maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: text
 			}

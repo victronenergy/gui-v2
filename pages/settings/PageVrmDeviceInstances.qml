@@ -78,7 +78,7 @@ Page {
 			readonly property int _modelVrmInstance: model.vrmInstance
 
 			function revertText() {
-				textField.text = model.vrmInstance
+				secondaryText = model.vrmInstance
 			}
 
 			text: model.name
@@ -87,25 +87,25 @@ Page {
 					  //% "Unconnected %1"
 					: qsTrId("settings_vrm_device_instances_unconnected").arg(model.deviceClass)
 
-			textField.inputMethodHints: Qt.ImhDigitsOnly
-			textField.text: model.vrmInstance
+			inputMethodHints: Qt.ImhDigitsOnly
+			secondaryText: model.vrmInstance
 			preferredVisible: model.deviceClass.length > 0 && model.vrmInstance >= 0
 			validateInput: function() {
-				const newVrmInstance = parseInt(textField.text)
+				const newVrmInstance = parseInt(secondaryText)
 				if (isNaN(newVrmInstance)) {
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(secondaryText))
 				}
 				return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
 			}
 			saveInput: function() {
-				const newVrmInstance = parseInt(textField.text)
+				const newVrmInstance = parseInt(secondaryText)
 				if (newVrmInstance !== model.vrmInstance) {
 					_changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)
 				}
 			}
 			on_ModelVrmInstanceChanged: {
 				// If VRM instance is changed in the backend, reset the text.
-				textField.text = _modelVrmInstance
+				secondaryText = _modelVrmInstance
 			}
 		}
 	}

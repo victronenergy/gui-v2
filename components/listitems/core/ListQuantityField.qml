@@ -14,12 +14,12 @@ ListTextField {
 	property int decimals: Units.defaultUnitPrecision(unit)
 
 	suffix: Units.defaultUnitString(unit)
-	textField.inputMethodHints: Qt.ImhFormattedNumbersOnly
-	textField.text: Units.formatNumber(root.value, root.decimals)
+	inputMethodHints: Qt.ImhFormattedNumbersOnly
+	secondaryText: Units.formatNumber(root.value, root.decimals)
 	validateInput: function() {
-		const numberValue = Units.formattedNumberToReal(textField.text)
+		const numberValue = Units.formattedNumberToReal(secondaryText)
 		if (isNaN(numberValue)) {
-		   return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+		   return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(secondaryText))
 		}
 
 		// In case the user has entered a number with a greater precision than what is supported,
@@ -29,7 +29,7 @@ ListTextField {
 	}
 	saveInput: function() {
 		if (dataItem.uid) {
-			dataItem.setValue(Units.formattedNumberToReal(textField.text))
+			dataItem.setValue(Units.formattedNumberToReal(secondaryText))
 		}
 	}
 }

@@ -74,7 +74,7 @@ Page {
 				echoMode: TextInput.Normal // password is shown on entry, but server will return it as obfuscated asterisks
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/AccessPointPassword"
 				validateInput: function() {
-					const length = textField.text.length
+					const length = secondaryText.length
 					if ((length > 0 && length < 10) || length > 63) {
 						//% "Password length must be either 0 or between 10 and 63 characters long"
 						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("page_settings_wifi_invalid_password"))

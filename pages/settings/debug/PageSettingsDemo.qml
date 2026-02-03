@@ -209,16 +209,16 @@ Page {
 				text: "Text input: forced capitalization, numbers disallowed"
 				placeholderText: "Enter text"
 				validateInput: function() {
-					if (textField.text.match(/[0-9]/)) {
+					if (secondaryText.match(/[0-9]/)) {
 						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
-					} else if (textField.text.match(/[a-z]/)) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", textField.text.toUpperCase())
+					} else if (secondaryText.match(/[a-z]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", secondaryText.toUpperCase())
 					} else {
 						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 					}
 				}
 				saveInput: function() {
-					console.log("Saving text: %1".arg(textField.text))
+					console.log("Saving text: %1".arg(secondaryText))
 				}
 			}
 
