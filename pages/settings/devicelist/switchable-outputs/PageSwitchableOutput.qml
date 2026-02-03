@@ -177,11 +177,21 @@ Page {
 									}
 								}
 
+								ListSwitch {
+									id: setDimLevelManuallySwitch
+									//% "Set startup dim level manually"
+									text: qsTrId("page_switchable_output_set_dim_level_manually")
+									checked: startupDimLevel.valid && startupDimLevel.value !== -1
+									onClicked: {
+										startupDimLevel.setValue(-2)
+									}
+								}
+
 								ListSpinBox {
 
 									//% "Startup dim level"
 									text: qsTrId("settings_dvcc_startup_dim_level")
-									preferredVisible: restoreDimLevelSwitch.visible && !restoreDimLevelSwitch.checked
+									preferredVisible: setDimLevelManuallySwitch.visible && !setDimLevelManuallySwitch.checked
 									from: 0
 									to: 100
 									suffix: "%"
