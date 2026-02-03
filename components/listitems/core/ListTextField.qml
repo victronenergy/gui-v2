@@ -10,10 +10,11 @@ ListItem {
 	id: root
 
 	readonly property alias dataItem: dataItem
-	property alias textField: textField
-	property alias secondaryText: textField.text
-	property alias placeholderText: textField.placeholderText
+	property int inputMethodHints: Qt.ImhNone
+	property string secondaryText: dataItem.valid ? dataItem.value : ""
+	property string placeholderText
 	property int echoMode: TextInput.Normal
+	property int maximumLength: 32767 // as per TextInput default
 	property string suffix
 	property var flickable: root.ListView ? root.ListView.view : null
 
@@ -32,7 +33,7 @@ ListItem {
 	property var validateInput
 	property var saveInput: function() {
 		if (dataItem.uid) {
-			dataItem.setValue(textField.text)
+			dataItem.setValue(secondaryText)
 		}
 	}
 	property bool validateOnFocusLost: true
@@ -84,7 +85,7 @@ ListItem {
 				root.toast = Global.showToastNotification(notificationType, result.notificationText, 5000)
 			}
 			if (result.adjustedText != null) {
-				textField.text = result.adjustedText
+				secondaryText = result.adjustedText
 			}
 		}
 
@@ -129,12 +130,15 @@ ListItem {
 		width: Math.max(Theme.geometry_listItem_textField_minimumWidth,
 						Math.min(Theme.geometry_listItem_textField_maximumWidth,
 								 implicitWidth + leftPadding + rightPadding))
-		text: dataItem.valid ? dataItem.value : ""
+		text: root.secondaryText
 		rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
 		horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
 		borderColor: _showErrorHighlight ? Theme.color_red : Theme.color_ok
 		focusPolicy: Qt.ClickFocus
 		echoMode: root.echoMode
+		inputMethodHints: root.inputMethodHints
+		placeholderText: root.placeholderText
+		maximumLength: root.maximumLength
 
 		onTextEdited: {
 			// When the input is marked as invalid, run the validation again each time the input is
@@ -177,7 +181,7 @@ ListItem {
 		// When the cursor is on the left/right edges, consume left/right key events so that they do
 		// not travel higher up the item hierarchy and activate key navigation.
 		Keys.onLeftPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === 0 }
-		Keys.onRightPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === textField.text.length }
+		Keys.onRightPressed: (event) => { event.accepted = textField.activeFocus && textField.cursorPosition === secondaryText.length }
 
 		// When the text field is focused, consume up/down key events so that the user does not
 		// activate key navigation and move the focus elsewhere if the text is not yet accepted.
@@ -221,7 +225,7 @@ ListItem {
 	]
 
 	readonly property SecondaryListLabel readonlyLabel: SecondaryListLabel {
-		text: textField.text.length > 0 ? textField.text + root.suffix : "--"
+		text: secondaryText.length > 0 ? secondaryText + root.suffix : "--"
 		width: Math.min(implicitWidth, root.maximumContentWidth)
 		visible: !textField.visible && textField.echoMode !== TextInput.Password
 	}

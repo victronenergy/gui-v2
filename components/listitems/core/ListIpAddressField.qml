@@ -26,9 +26,9 @@ ListTextField {
 
 	text: CommonWords.ip_address
 	placeholderText: "000.000.000.000"
-	textField.inputMethodHints: Qt.ImhDigitsOnly
+	inputMethodHints: Qt.ImhDigitsOnly
 	validateInput: function() {
-		const trimmed = textField.text.trim()
+		const trimmed = secondaryText.trim()
 		if (!_isValidIp(trimmed)) {
 			//% "'%1' is not a valid IP address."
 			return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("ip_address_input_not_valid").arg(trimmed))
@@ -37,7 +37,7 @@ ListTextField {
 	}
 	saveInput: function() {
 		if (dataItem.uid) {
-			dataItem.setValue(textField.text.trim())
+			dataItem.setValue(secondaryText.trim())
 		}
 	}
 }
