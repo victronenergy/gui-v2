@@ -90,8 +90,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/SettingsColumn.qml
-    components/SettingsRangeSlider.qml
-    components/SettingsSlider.qml
     components/SettingSync.qml
     components/SliderSettingSync.qml
     components/ShinyProgressArc.qml
