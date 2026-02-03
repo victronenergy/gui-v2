@@ -12,9 +12,9 @@ ListTextField {
 	property int maximumLength
 
 	readonly property var validateIntInput: function() {
-		const trimmed = textField.text.trim()
+		const trimmed = secondaryText.trim()
 		if (!trimmed.match(/^[0-9]+$/)) {
-			return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(textField.text))
+			return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(secondaryText))
 		}
 		if (maximumLength > 0 && trimmed.length > maximumLength) {
 			//% "Use a number with %1 digits or less."
@@ -23,11 +23,11 @@ ListTextField {
 		return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 	}
 
-	textField.inputMethodHints: Qt.ImhDigitsOnly
+	inputMethodHints: Qt.ImhDigitsOnly
 	validateInput: validateIntInput
 	saveInput: function() {
 		if (dataItem.uid) {
-			dataItem.setValue(parseInt(textField.text))
+			dataItem.setValue(parseInt(secondaryText))
 		}
 	}
 }

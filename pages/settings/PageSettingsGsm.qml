@@ -189,7 +189,7 @@ Page {
 			ListTextField {
 				//% "PIN"
 				text: qsTrId("page_settings_gsm_pin")
-				textField.maximumLength: 35
+				maximumLength: 35
 				dataItem.uid: settingsBindPrefix + "/PIN"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				// Show only when PIN required
@@ -235,7 +235,7 @@ Page {
 									text: qsTrId("page_settings_gsm_apn_name")
 									dataItem.uid: root.settingsBindPrefix + "/APN"
 									preferredVisible: !useDefaultApn.checked
-									textField.maximumLength: 50
+									maximumLength: 50
 								}
 							}
 						}
