@@ -27,6 +27,7 @@ ListSetting {
 
 		Label {
 			text: root.text
+			textFormat: root.textFormat
 			font: root.font
 			wrapMode: Text.Wrap
 

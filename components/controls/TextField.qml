@@ -19,7 +19,7 @@ T.TextField {
 	leftPadding: Theme.geometry_textField_horizontalMargin
 	rightPadding: Theme.geometry_textField_horizontalMargin
 
-	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth)
+	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth) + leftPadding + rightPadding
 	implicitHeight: Theme.geometry_textField_height
 
 	horizontalAlignment: Text.AlignHCenter
@@ -42,9 +42,7 @@ T.TextField {
 			id: placeholderText
 			anchors {
 				left: parent.left
-				leftMargin: root.leftPadding
 				right: parent.right
-				rightMargin: root.rightPadding
 				verticalCenter: parent.verticalCenter
 			}
 			horizontalAlignment: root.horizontalAlignment
