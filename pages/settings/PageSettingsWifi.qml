@@ -66,12 +66,17 @@ Page {
 				}
 			}
 
-			ListPasswordField {
+			ListTextField {
+				id: accessPointPassword
+
 				//% "Access Point password"
 				text: qsTrId("settings_wifi_access_point_password")
+				rightPadding: confirmButton.width + spacing + horizontalContentPadding
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: accessPoint.valid
 				echoMode: TextInput.Normal // password is shown on entry, but server will return it as obfuscated asterisks
+				validateOnFocusLost: false // don't validate until 'Confirm' is clicked
+				placeholderText: CommonWords.enter_password
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/AccessPointPassword"
 				validateInput: function() {
 					const length = secondaryText.length
@@ -81,6 +86,19 @@ Page {
 					}
 					//% "Password updated"
 					return Utils.validationResult(VenusOS.Notification_Info, qsTrId("page_settings_wifi_password_updated"))
+				}
+
+				ListItemButton {
+					id: confirmButton
+
+					anchors {
+						right: parent.right
+						rightMargin: accessPointPassword.horizontalContentPadding
+						verticalCenter: parent.verticalCenter
+					}
+					text: CommonWords.confirm
+					focusPolicy: Qt.NoFocus
+					onClicked: accessPointPassword.runValidation(VenusOS.InputValidation_ValidateAndSave)
 				}
 			}
 

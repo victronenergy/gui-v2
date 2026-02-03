@@ -155,6 +155,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/TemperatureSlider.qml
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
+    components/controls/TextValidationField.qml
 
     components/dialogs/ColorWheelDialog.qml
     components/dialogs/CurrentLimitDialog.qml
@@ -200,7 +201,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListMountStateButton.qml
     components/listitems/ListAcInPositionRadioButtonGroup.qml
     components/listitems/ListOutputBatteryRadioButtonGroup.qml
-    components/listitems/ListPasswordField.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml

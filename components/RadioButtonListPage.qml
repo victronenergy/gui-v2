@@ -80,10 +80,9 @@ Page {
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.selectedIndex === model.index
-			bottomPadding: bottomContentLoader.status === Loader.Ready
+			bottomPadding: bottomContentLoader.height > 0
 					? bottomContentLoader.height
-						+ Theme.geometry_gradientList_spacing // margin above Loader
-						+ Theme.geometry_listItem_content_verticalMargin // margin below loader
+						+ (2 * Theme.geometry_listItem_content_verticalMargin) // margin above and below Loader
 					: Theme.geometry_listItem_content_verticalMargin
 
 			ButtonGroup.group: radioButtonGroup
@@ -91,48 +90,57 @@ Page {
 			Loader {
 				id: bottomContentLoader
 
+				property bool showField
+
+				function focusPasswordInput() {
+					showField = true
+					item.forceInputFocus()
+				}
+
 				anchors {
 					right: parent.right
 					bottom: parent.bottom
 					bottomMargin: Theme.geometry_listItem_content_verticalMargin
 				}
 				active: !!modelObject.promptPassword
-				width: radioButton.availableWidth
-				sourceComponent: passwordComponent
-			}
-
-			Component {
-				id: passwordComponent
-
-				SettingsColumn {
-					function focusPasswordInput() {
-						passwordField.showField = true
-						passwordField.secondaryText = ""
-						passwordField.forceActiveFocus()
-					}
-
-					width: radioButton.availableWidth
-
-					ListPasswordField {
+						&& model.index === optionsListView.selectedIndex
+				visible: showField // don't show until an option is explicitly selected
+				height: active && visible ? implicitHeight : 0
+				sourceComponent: Component {
+					TextValidationField {
 						id: passwordField
 
-						property bool showField
-
+						width: Theme.geometry_textField_width + rightInset
+						rightPadding: rightInset
+						rightInset: confirmButton.width + radioButton.spacing + radioButton.horizontalContentPadding
 						flickable: optionsListView
-						primaryLabel.color: Theme.color_font_secondary
-						interactive: radioButton.interactive
-						background.color: "transparent"
-						showAccessLevel: root.showAccessLevel
-						writeAccessLevel: root.writeAccessLevel
-						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
-						KeyNavigationHighlight.fill: radioButton
+						echoMode: TextInput.Password
+						placeholderText: CommonWords.enter_password
+						validateOnFocusLost: false // don't validate until 'Confirm' is clicked
 						validateInput: function() {
-							return root.validatePassword(model.index, secondaryText)
-						}
-						saveInput: function() {
-							if (preferredVisible) {
-								radioButton.select()
+							if (!!root.validatePassword) {
+								return root.validatePassword(model.index, text)
+							} else {
+								console.warn("Password validation not supported!")
+								return VenusOS.InputValidation_Result_Error
 							}
+						}
+						onInputValidated: {
+							radioButton.select()
+						}
+
+						KeyNavigationHighlight.fill: radioButton
+
+						ListItemButton {
+							id: confirmButton
+
+							anchors {
+								right: parent.right
+								rightMargin: radioButton.horizontalContentPadding
+							}
+							text: CommonWords.confirm
+							focusPolicy: Qt.NoFocus
+							onClicked: passwordField.runValidation(VenusOS.InputValidation_ValidateAndSave)
 						}
 					}
 				}
@@ -145,7 +153,7 @@ Page {
 					optionsListView.selectionChanged = true
 				}
 				if (bottomContentLoader.status === Loader.Ready) {
-					bottomContentLoader.item.focusPasswordInput()
+					bottomContentLoader.focusPasswordInput()
 				} else {
 					radioButton.select()
 				}
