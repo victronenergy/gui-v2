@@ -11,31 +11,26 @@ import QtQuick.Effects as Effects
 T.Slider {
 	id: root
 
-	property alias grooveColor: backgroundRect.color
-	property alias highlightColor: highlightRect.color
-	property alias showHandle: handleImg.visible
+	property color grooveColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
+	property color highlightColor: enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
+	property bool showHandle: true
 	property bool animationEnabled
 	property Item maskSource: sourceItem
 
-	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight)
+	implicitWidth: Math.max(implicitBackgroundWidth, implicitHandleWidth) + leftInset + rightInset
+	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight) + topInset + bottomInset
 
 	background: Rectangle {
 		id: backgroundRect
 
-		anchors {
-			left: parent.left
-			leftMargin: parent.leftPadding
-			right: parent.right
-			rightMargin: parent.rightPadding
-			verticalCenter: parent.verticalCenter
-		}
-
-		implicitWidth: 4*Theme.geometry_switch_indicator_width // suitably small.
+		x: root.leftPadding
+		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
+		implicitWidth: Theme.geometry_slider_groove_width
 		implicitHeight: Theme.geometry_slider_groove_height
 		width: root.availableWidth
 		height: Theme.geometry_slider_groove_height
 		radius: Theme.geometry_slider_groove_radius
-		color: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
+		color: root.grooveColor
 
 		Rectangle {
 			id: maskRect
@@ -58,7 +53,7 @@ T.Slider {
 
 				width: parent.width
 				height: parent.height
-				color: root.enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
+				color: root.highlightColor
 				x: nextX
 
 				// don't use a behavior on x
@@ -96,13 +91,12 @@ T.Slider {
 	}
 
 	handle: Image {
-		id: handleImg
-
 		x: visible ? root.leftPadding + root.visualPosition * (root.availableWidth - width) : 0
 		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset : 0
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
+		visible: root.showHandle
 
 		SliderHandleHighlight {
 			handle: parent

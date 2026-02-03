@@ -86,18 +86,18 @@
     "geometry_listItem_content_spacing": 16,
     "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
-    "geometry_listItem_slider_width": 490,
-    "geometry_listItem_slider_button_size": 24,
-    "geometry_listItem_slider_spacing": 14,
-    "geometry_listItem_slider_stepDivsion": 10,
     "geometry_listItem_textField_minimumWidth": 200,
     "geometry_listItem_textField_maximumWidth": 376,
 
     "geometry_listLink_qrCodeSize": 96,
 
+    "geometry_slider_text_width": 250,
+    "geometry_slider_button_size": 32,
+    "geometry_slider_spacing": 6,
+    "geometry_slider_steps": 10,
+    "geometry_slider_groove_width": 368,
     "geometry_slider_groove_height": 8,
     "geometry_slider_groove_radius": 8,
-
     "geometry_slider_indicator_width": 4,
     "geometry_slider_indicator_height": 28,
     "geometry_Slider_indicator_radius": 2,
@@ -486,7 +486,7 @@
 
     "geometry_loadListPage_item_height": 68,
 
-    "geometry_settings_battery_rangeSlider_labelWidth": 70,
+    "geometry_rangeSlider_labelWidth": 70,
 
     "geometry_veBusAlarm_minimumDelegateWidth": 120,
 
