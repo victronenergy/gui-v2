@@ -53,14 +53,14 @@ DevicePage {
 		}
 
 		ListMotorDriveGear {
-			//% "Motor Direction"
+			//% "Motor direction"
 			text: qsTrId("devicelist_motordrive_motordirection")
 			dataItem.uid: root.bindPrefix + "/Motor/Direction"
 			preferredVisible: dataItem.valid
 		}
 
 		ListQuantity {
-			//% "Motor Torque"
+			//% "Motor torque"
 			text: qsTrId("devicelist_motordrive_motortorque")
 			dataItem.uid: root.bindPrefix + "/Motor/Torque"
 			unit: VenusOS.Units_NewtonMeter
@@ -68,28 +68,28 @@ DevicePage {
 		}
 
 		ListTemperature {
-			//% "Motor Temperature"
+			//% "Motor temperature"
 			text: qsTrId("devicelist_motordrive_motortemperature")
 			dataItem.uid: root.bindPrefix + "/Motor/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListTemperature {
-			//% "Coolant Temperature"
+			//% "Coolant temperature"
 			text: qsTrId("devicelist_motordrive_coolanttemperature")
 			dataItem.uid: root.bindPrefix + "/Coolant/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListTemperature {
-			//% "Controller Temperature"
+			//% "Controller temperature"
 			text: qsTrId("devicelist_motordrive_controllertemperature")
 			dataItem.uid: root.bindPrefix + "/Controller/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListSwitch {
-			//% "Motor Direction Inverted"
+			//% "Motor direction inverted"
 			text: qsTrId("devicelist_motordrive_motordirectioninverted")
 			dataItem.uid: root.bindPrefix + "/Settings/Motor/DirectionInverted"
 			dataItem.invalidate: false
