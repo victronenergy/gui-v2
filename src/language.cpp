@@ -81,6 +81,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	addLanguage("Italiano", "it", QLocale::Italian);
 	addLanguage("Nederlands", "nl", QLocale::Dutch);
 	addLanguage("Polski", "pl", QLocale::Polish);
+	addLanguage("Português", "pt", QLocale::Portuguese);
 	addLanguage("Русский", "ru", QLocale::Russian);
 	addLanguage("Română", "ro", QLocale::Romanian);
 	addLanguage("Svenska", "sv", QLocale::Swedish);
