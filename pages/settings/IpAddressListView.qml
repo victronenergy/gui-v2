@@ -32,6 +32,7 @@ GradientListView {
 			anchors {
 				right: parent.right
 				rightMargin: ipAddressDelegate.horizontalContentPadding
+				verticalCenter: parent.verticalCenter
 			}
 			visible: ipAddressDelegate.clickable
 			onClicked: {
