@@ -21,7 +21,7 @@ Page {
 		VisibleItemModel {
 			id: bluetoothUnavailable
 
-			ListItem {
+			PrimaryListLabel {
 				//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
 				text: qsTrId("settings_bluetooth_unavailable_message")
 			}
