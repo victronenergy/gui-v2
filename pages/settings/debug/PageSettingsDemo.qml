@@ -4,8 +4,8 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
-import QZXing
 
 Page {
 	id: root
@@ -257,69 +257,57 @@ Page {
 				text: "Time selection"
 			}
 
+			ListItemControl {
+				id: toastItem
 
-			ListItem {
-				text: "Toast"
-				content.children: [
+				topPadding: 0
+				bottomPadding: 0
+				contentItem: RowLayout {
+					spacing: toastItem.spacing
 
+					Label {
+						text: "Toast"
+						font: toastItem.font
+						Layout.fillWidth: true
+					}
 					ListItemButton {
 						text: "Warning"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
-					},
+					}
 					ListItemButton {
 						text: "Alarm"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
-					},
+					}
 					ListItemButton {
 						text: "Info"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
 					}
-				]
+				}
 			}
 
-			ListItem {
-				text: "Custom item"
+			ListItemControl {
+				id: customItem
 
-				content.children: [
+				contentItem: RowLayout {
+					spacing: customItem.spacing
+
+					Label {
+						text: "Custom item"
+						font: customItem.font
+						Layout.fillWidth: true
+					}
 					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
 						width: 30
 						height: 30
 						radius: 15
 						color: Theme.color_ok
-					},
+					}
 					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
 						width: 30
 						height: 30
 						color: Theme.color_warning
 					}
-				]
-			}
-
-			ListItem {
-				id: customListItem
-				text: "Custom bottom content item"
-
-				content.children: [
-					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
-						width: 100
-						height: 100
-						radius: width / 2
-						color: "orange"
-
-						MouseArea {
-							anchors.fill: parent
-							onClicked: {
-								customListItem.bottomContentSizeMode = customListItem.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Compact
-										? VenusOS.ListItem_BottomContentSizeMode_Stretch
-										: VenusOS.ListItem_BottomContentSizeMode_Compact
-							}
-						}
-					}
-				]
-				caption: "This can wrap next to the content item, or be placed below the content item and stretch to the full item size. Click the orange button to toggle this size mode."
+				}
 			}
 
 			ListText {
@@ -337,18 +325,6 @@ Page {
 				secondaryText: "Both primary and secondary text are quite long"
 			}
 
-			ListItem {
-				text: "Scan the QR code:"
-				content.children: [
-					Image {
-						source: "image://QZXing/encode/" + "https://www.victronenergy.com/" +
-								"?correctionLevel=M" +
-								"&format=qrcode"
-						sourceSize: Qt.size(Theme.geometry_listItem_height, Theme.geometry_listItem_height)
-					}
-				]
-			}
-
 			ListLink {
 				text: "Victron Energy"
 				url: "https://www.victronenergy.com"
@@ -362,7 +338,7 @@ Page {
 		Page {
 			GradientListView {
 				model: VisibleItemModel {
-					ListItem {
+					ListText {
 						text: "New page item"
 					}
 				}
@@ -436,14 +412,14 @@ Page {
 
 					Repeater {
 						model: 5
-						delegate: ListItem {
+						delegate: ListText {
 							text: "Header item " + model.index
 						}
 					}
 				}
 
 				model: 10
-				delegate: ListItem {
+				delegate: ListText {
 					text: "List item " + model.index
 				}
 

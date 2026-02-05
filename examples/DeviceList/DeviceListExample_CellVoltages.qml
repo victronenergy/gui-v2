@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -9,8 +10,6 @@ DeviceListPluginPage {
 	title: qsTrId("devicelistexample_cellvoltages_title_cell_voltages")
 
 	GradientListView {
-		id: settingsListView
-
 		model: VisibleItemModel {
 			ListSwitch {
 				property bool value
@@ -23,17 +22,21 @@ DeviceListPluginPage {
 				}
 			}
 
-			ListItem {
-				//% "Image"
-				text: qsTrId("devicelistexample_cellvoltages_text_image")
-				CP.IconImage {
-					anchors {
-						verticalCenter: parent.verticalCenter
-						right: parent.right
-						rightMargin: Theme.geometry_listItem_content_horizontalMargin
+			ListItemControl {
+				id: imageItem
+
+				contentItem: RowLayout {
+					Label {
+						//% "Image"
+						text: qsTrId("devicelistexample_cellvoltages_text_image")
+						font: imageItem.font
+						Layout.fillWidth: true
 					}
-					source: "qrc:/DeviceListExample/customimage.svg"
-					color: Theme.color_font_primary
+
+					CP.IconImage {
+						source: "qrc:/DeviceListExample/customimage.svg"
+						color: Theme.color_font_primary
+					}
 				}
 			}
 		}

@@ -48,10 +48,13 @@ ListItemControl {
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
 
-	// True if the user can interact with the control with the mouse or key presses.
+	// Set to true if the user can interact with the control with the mouse or key presses.
+	// This is provided as a convenience for determining whether an item can be activated,
+	// according to some condition.
 	property bool interactive
 
-	// True if the control can be clicked/triggered to provide write-type interactions.
+	// True if the control is currently interactive and able to provide write-type interactions.
+	// This is provided as a convenience for setting 'enabled' for child items.
 	readonly property bool clickable: enabled && interactive && userHasWriteAccess
 
 	property color indicatorColor: Qt.rgba(0,0,0,0) // fully transparent by default.

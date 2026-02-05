@@ -41,7 +41,7 @@ Page {
 			text: qsTrId("settings_modbus_tcp_unit_id_note")
 		}
 
-		delegate: ListItem {
+		delegate: ListText {
 			id: serviceDelegate
 
 			readonly property string servicePath: root.modbustcpServiceUid + "/Services/" + model.index
