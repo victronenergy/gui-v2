@@ -17,7 +17,6 @@ CP.ColorImage {
 
 	signal clicked()
 
-	anchors.verticalCenter: parent.verticalCenter
 	source: "qrc:/images/icon_minus.svg"
 	color: Theme.color_ok
 

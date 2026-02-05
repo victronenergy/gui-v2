@@ -4,9 +4,10 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListItem {
+ListSetting {
 	id: root
 
 	readonly property alias dataItem: dataItem
@@ -15,47 +16,39 @@ ListItem {
 		id: dataItem
 	}
 
-	content.children: [
-		Row {
-			id: gearRow
-
-			spacing: Theme.geometry_listItem_content_spacing
-			visible: dataItem.valid
-
-			GearIndicator {
-				gear: VenusOS.MotorDriveGear_Forward
-				text: "F" // intentionally not translated
-			}
-
-			GearIndicator {
-				gear: VenusOS.MotorDriveGear_Neutral
-				text: "N" // intentionally not translated
-			}
-
-			GearIndicator {
-				gear: VenusOS.MotorDriveGear_Reverse
-				text: "R" // intentionally not translated
-			}
-		}
-	]
-
-	component GearIndicator : Item {
-		required property int gear
-		property alias text: gearLabel.text
-
-		width: gearLabel.width
-		height: gearLabel.height
+	contentItem: RowLayout {
+		spacing: root.spacing
 
 		Label {
-			id: gearLabel
+			text: root.text
+			textFormat: root.textFormat
+			font: root.font
+			wrapMode: Text.Wrap
 
-			anchors {
-				horizontalCenter: parent.horizontalCenter
-				bottom: parent.bottom
-			}
-			color: dataItem.value === parent.gear ? Theme.color_font_primary : Theme.color_font_secondary
-			font.pixelSize: Theme.font_size_body2
-			horizontalAlignment: Text.AlignHCenter
+			Layout.fillWidth: true
 		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Forward
+			text: "F" // intentionally not translated
+		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Neutral
+			text: "N" // intentionally not translated
+		}
+
+		GearIndicator {
+			gear: VenusOS.MotorDriveGear_Reverse
+			text: "R" // intentionally not translated
+		}
+	}
+
+	component GearIndicator : Label {
+		required property int gear
+
+		color: dataItem.value === gear ? Theme.color_font_primary : Theme.color_font_secondary
+		font.pixelSize: Theme.font_size_body2
+		visible: dataItem.valid
 	}
 }

@@ -488,8 +488,6 @@
 
     "geometry_rangeSlider_labelWidth": 80,
 
-    "geometry_veBusAlarm_minimumDelegateWidth": 120,
-
     "geometry_modbus_device_protocol_width": 40,
     "geometry_modbus_device_ip_address_width": 150,
 

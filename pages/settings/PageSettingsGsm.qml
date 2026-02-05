@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -35,7 +36,7 @@ Page {
 		VisibleItemModel {
 			id: notConnected
 
-			ListItem {
+			PrimaryListLabel {
 				//% "Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity."
 				text: qsTrId("page_settings_connect_cellular_modem")
 			}
@@ -62,15 +63,21 @@ Page {
 				dataItem.uid: bindPrefix + "/NetworkName"
 			}
 
-			ListItem {
-				preferredVisible: gsmStatusIcon.valid
-				text: CommonWords.signal_strength
+			ListItemControl {
+				id: signalStrength
 
-				content.children: [
+				preferredVisible: gsmStatusIcon.valid
+				contentItem: RowLayout {
+					spacing: signalStrength.spacing
+
+					Label {
+						text: CommonWords.signal_strength
+						font: signalStrength.font
+						Layout.fillWidth: true
+					}
 					Item {
-						anchors.verticalCenter: parent.verticalCenter
-						width: Theme.geometry_settings_gsmModem_icon_container_width
-						height: Theme.geometry_settings_gsmModem_icon_container_height
+						Layout.preferredWidth: Theme.geometry_settings_gsmModem_icon_container_width
+						Layout.preferredHeight: Theme.geometry_settings_gsmModem_icon_container_height
 
 						GsmStatusIcon {
 							id: gsmStatusIcon
@@ -78,10 +85,10 @@ Page {
 							anchors.centerIn: parent
 						}
 					}
-				]
+				}
 			}
 
-			ListItem {
+			PrimaryListLabel {
 				//% "It may be necessary to configure the APN settings below in this page, contact your operator for details.\nIf that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data."
 				text: qsTrId("page_settings_gsm_error_message")
 				preferredVisible: status.dataItem.value === 0 && carrier.dataItem.valid && simStatus.value === 1000

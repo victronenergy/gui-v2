@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -88,20 +89,25 @@ Page {
 				secondaryText: ClockTime.currentDateTimeUtc
 			}
 
-			ListItem {
+			ListSetting {
 				id: timeZoneButton
 				// Qt for WebAssembly doesn't support timezones,
 				// so we can't display the device-local date/time,
 				// as we don't know what it is.  Just hide the setting.
 				preferredVisible: Qt.platform.os != "wasm"
 
-				//% "Date/Time local"
-				text: qsTrId("settings_tz_date_time_local")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				interactive: Global.systemSettings.time.valid
 
-				content.children: Row {
-					spacing: Theme.geometry_listItem_content_spacing
+				contentItem: RowLayout {
+					spacing: timeZoneButton.spacing
+
+					Label {
+						//% "Date/Time local"
+						text: qsTrId("settings_tz_date_time_local")
+						font: timeZoneButton.font
+						Layout.fillWidth: true
+					}
 					ListItemButton {
 						id: localDateButton
 						text: ClockTime.currentDate
