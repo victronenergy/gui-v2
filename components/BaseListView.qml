@@ -20,6 +20,46 @@ import Victron.VenusOS
 ListView {
 	id: root
 
+	readonly property KeyNavigationListHelper __navHelper: keyNavHelper
+
+	function pageDown() {
+		if ((orientation === Qt.Vertical && atYEnd) || (orientation === Qt.Horizontal && atXEnd)) {
+			return false
+		}
+
+		// Find the last item in the view and scroll so that it becomes the first item, unless it is
+		// already the first item (i.e. if the item spans the whole screen width/height).
+		const firstIndexInView = orientation === Qt.Vertical
+				? indexAt(width / 2, contentY)
+				: indexAt(contentX, height / 2)
+		const lastIndexInView = orientation === Qt.Vertical
+				? indexAt(width / 2, contentY + height)
+				: indexAt(contentX + width, height / 2)
+		const prevContentPos = _contentPos()
+		if (lastIndexInView >= 0 && firstIndexInView !== lastIndexInView) {
+			positionViewAtIndex(lastIndexInView, ListView.Beginning)
+		}
+
+		// If positionViewAtIndex() was not executed (e.g. if the item fills the whole list view,
+		// or if indexAt() returned -1 because there's no more normal list items but there is a
+		// footer and we need to scroll to it), or if positionViewAtIndex() didn't result in a
+		// content pos change, then try again by directly changing the content pos.
+		if (lastIndexInView < 0 || prevContentPos === _contentPos()) {
+			if (orientation === Qt.Vertical) {
+				contentY += height
+			} else {
+				contentX += width
+			}
+			returnToBounds()
+		}
+
+		return prevContentPos !== _contentPos()
+	}
+
+	function _contentPos() {
+		return orientation === Qt.Vertical ? contentY : contentX
+	}
+
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
 	boundsBehavior: Flickable.StopAtBounds

@@ -1,0 +1,30 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_boat.qml",
+        "tst_brief.qml",
+        "tst_cards.qml",
+        "tst_levels.qml",
+        "tst_notifications.qml",
+        "tst_overview.qml",
+        "tst_settings.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false,
+        "UIAnimations": 0
+    },
+    "Steps": {
+        "CaptureAndCompare": {
+            "ImageDir": "image-captures",
+            "StabilizationInterval": 16,
+            "MaximumStabilizationCaptures": 20,
+            "ComparisonThreshold": 0.05,
+            "FailIfComparisonFails": false
+        },
+        "WaitUntil": {
+            "DefaultTimeout": 5000
+        }
+    }
+}

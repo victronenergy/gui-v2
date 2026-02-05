@@ -9,5 +9,6 @@
 #include <QtCore/QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(venusGui)
+Q_DECLARE_LOGGING_CATEGORY(venusGuiTest)
 
 #endif // VICTRON_VENUSOS_GUI_V2_LOGGING_H
