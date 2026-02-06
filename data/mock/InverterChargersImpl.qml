@@ -211,4 +211,36 @@ Item {
 			}
 		}
 	}
+
+	// Provide UI interaction when updating values on the Microgrid Droop parameters page.
+	Instantiator {
+		id: microgridParameters
+		model: [
+			"/MicroGrid/DroopModeParameters/P0",
+			"/MicroGrid/DroopModeParameters/F0",
+			"/MicroGrid/DroopModeParameters/FPDroop",
+			"/MicroGrid/DroopModeParameters/Q0",
+			"/MicroGrid/DroopModeParameters/U0",
+			"/MicroGrid/DroopModeParameters/UQDroop",
+			"/MicroGrid/DroopModeParameters/PMin",
+			"/MicroGrid/DroopModeParameters/PMax",
+			"/MicroGrid/DroopModeParameters/Qmin",
+			"/MicroGrid/DroopModeParameters/Qmax",
+		]
+		delegate: VeQuickItem {
+			uid: Global.system.veBus.serviceUid + modelData + "/Value"
+			onValueChanged: MockManager.setValue(Global.system.veBus.serviceUid + modelData + "/Modified", 1)
+		}
+	}
+	VeQuickItem {
+		uid: Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore"
+		onValueChanged: {
+			if (valid && value === 1) {
+				for (let i = 0; i < microgridParameters.model.length; ++i) {
+					MockManager.setValue(Global.system.veBus.serviceUid + microgridParameters.model[i] + "/Modified", 0)
+				}
+				MockManager.setValue(Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore", 0)
+			}
+		}
+	}
 }
