@@ -36,6 +36,8 @@ Page {
 			case 33: return qsTrId("mk2vsc_state_write_vebus_configuration")
 			//% "Resetting VE.Bus products"
 			case 40: return qsTrId("mk2vsc_state_resetting_vebus_products")
+			//% "Waiting for VE.Bus setting access password"
+			case 41: return qsTrId("mk2vsc_state_waiting_for_vebus_setting_access_password")
 			//% "Unknown"
 			default: return qsTrId("Unknown")
 		}
@@ -263,6 +265,34 @@ Page {
 		}
 	}
 
+	VeQuickItem {
+		id: _backupRestorePasswordInput
+		uid: root.serviceUid + "/Password/Input"
+	}
+
+	VeQuickItem {
+		id: _backupRestorePasswordAccessLevel
+		uid: root.serviceUid + "/Password/AccessLevel"
+	}
+
+	VeQuickItem {
+		id: _backupRestoreCancelUserInput
+		uid: root.serviceUid + "/Password/CancelUserInput"
+	}
+
+	VeQuickItem {
+		id: _backupRestorePasswordUserInputPending
+		uid: root.serviceUid + "/Password/UserInputPending"
+		onValueChanged: {
+			if (valid && value > 0) {
+				Global.showToastNotification(VenusOS.Notification_Info,
+					//% "VE.Bus settings password required"
+					qsTrId("vebus_settings_password_required"),
+					10000)
+			}
+		}
+	}
+
 	function resetPageToInitialState()
 	{
 		_backupButton.backupFileName = ""
@@ -284,7 +314,6 @@ Page {
 			}
 		}
 	}
-
 
 	GradientListView {
 		model: VisibleItemModel {
@@ -420,6 +449,29 @@ Page {
 					resetPageToInitialState()
 				}
 			}
+			ListTextField {
+				//% "VE.Bus settings access password"
+				text: qsTrId("vebus_settings_access_password")
+				preferredVisible: _backupRestorePasswordUserInputPending.value === 1
+				//% "Enter VE.Bus password for access level %1"
+				placeholderText: qsTrId("vebus_settings_enter_password").arg(_backupRestorePasswordAccessLevel.value)
+				saveInput: function() {
+					_backupRestorePasswordInput.setValue(secondaryText)
+					secondaryText = ""
+				}
+			}
+			ListButton {
+				id: _passwordEntryCancelButton
+				text: CommonWords.cancel
+				//% "Press to cancel"
+				secondaryText: qsTrId("vebus_backup_press_to_cancel")
+				preferredVisible: _backupRestorePasswordUserInputPending.value === 1
+				onClicked: {
+					_backupRestoreCancelUserInput.setValue(1)
+				}
+			}
+
+
 			PrimaryListLabel {
 				//% "Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions"
 				text: qsTrId("vebus_backup_firmware_version_specific_message")
