@@ -14,6 +14,8 @@ qt_add_executable(tst_switchableoutput
     tst_switchableoutput.cpp
     ../../src/switchableoutput.h
     ../../src/switchableoutput.cpp
+    ../../src/iochannel.h
+    ../../src/iochannel.cpp
     ../../src/alldevicesmodel.h
     ../../src/alldevicesmodel.cpp
     ../../src/allservicesmodel.h

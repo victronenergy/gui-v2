@@ -291,9 +291,6 @@ TestCase {
 			compare(group.outputs.length, data.groups[i].outputs.length)
 			for (j = 0 ; j < data.groups[i].outputs.length; ++j) {
 				const outputData = data.groups[i].outputs[j]
-				console.log("output:", group.outputs[j].uid,
-						group.outputs[j].hasValidType,
-						group.outputs[j].allowedInGroupModel)
 				for (const outputPropertyName in outputData) {
 					compare(group.outputs[j][outputPropertyName], outputData[outputPropertyName], outputPropertyName)
 				}
