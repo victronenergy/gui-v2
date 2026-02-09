@@ -114,7 +114,7 @@ ListQuantityGroupNavigation {
 		}
 
 		readonly property string statusText: VenusOS.switchableOutput_statusToText(status, type)
-		readonly property string typeText: VenusOS.switchableOutput_typeToText(type, outputId)
+		readonly property string typeText: VenusOS.switchableOutput_typeToText(type, channelId)
 
 		uid: root.uid
 	}
