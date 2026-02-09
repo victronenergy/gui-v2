@@ -313,7 +313,7 @@ QtObject {
 			interval: 60000
 			repeat: true
 			triggeredOnStart: true
-			running: BackendConnection.applicationVisible
+			running: BackendConnection.applicationVisible // even if !Global.timersEnabled, in case screen blank duration is short
 			onTriggered: root.time.getValue(true)   // force value refresh
 		}
 	}

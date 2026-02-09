@@ -70,7 +70,7 @@ Page {
 
 	Timer {
 		interval: 1000
-		running: root.animationEnabled
+		running: Global.timersEnabled
 		repeat: true
 		triggeredOnStart: true
 

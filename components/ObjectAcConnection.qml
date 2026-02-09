@@ -65,7 +65,7 @@ QtObject {
 	// changes too often on system with more than one phase
 	readonly property Timer _totalPowerTimer: Timer {
 		interval: 1000
-		running: BackendConnection.applicationVisible && root.hasPower
+		running: root.hasPower && Global.timersEnabled
 		repeat: true
 		onTriggered: {
 			_power = (powerL1.value || 0) + (powerL2.value || 0) + (powerL3.value || 0)

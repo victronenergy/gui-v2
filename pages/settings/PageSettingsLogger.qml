@@ -158,7 +158,7 @@ Page {
 
 				Timer {
 					interval: 1000
-					running: parent.visible && root.animationEnabled
+					running: parent.visible && Global.timersEnabled
 					repeat: true
 					triggeredOnStart: true
 					onTriggered: parent.secondaryText = root.timeAgo(parent.dataItem.value)
@@ -356,7 +356,7 @@ Page {
 
 				Timer {
 					interval: 1000
-					running: !!parent.dataItem.value && root.animationEnabled
+					running: !!parent.dataItem.value && Global.timersEnabled
 					repeat: true
 					triggeredOnStart: true
 					onTriggered: parent.secondaryText = root.timeAgo(parent.dataItem.value)

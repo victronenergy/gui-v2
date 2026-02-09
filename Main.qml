@@ -177,7 +177,7 @@ Window {
 
 	Timer {
 		id: appIdleTimer
-		running: !Global.splashScreenVisible
+		running: !Global.splashScreenVisible && Global.timersEnabled
 		interval: 60000
 		onTriggered: {
 			Global.applicationActive = false

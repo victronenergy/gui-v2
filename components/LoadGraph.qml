@@ -37,7 +37,7 @@ Item {
 
 	Timer {
 		id: pausedAnimationTimer
-		running: !root.animationEnabled
+		running: !root.animationEnabled // even if !Global.timersEnabled, to avoid discontinuities
 		repeat: true
 		interval: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
 		onTriggered: {
