@@ -13,14 +13,13 @@
       <source>Inverter overload</source>
       <translation>Přetížení měniče</translation>
     </message>
-    <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+    <message id="ev_power">
+      <location filename="../../pages/ev/EvPage.qml" line="47"/>
       <source>Power</source>
-      <extracomment>Electric power, as measured in Watts</extracomment>
       <translation>Výkon</translation>
     </message>
     <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="353"/>
+      <location filename="../../src/enums.cpp" line="430"/>
       <source>Off</source>
       <translation>Vypnuto</translation>
     </message>
@@ -49,15 +48,14 @@
       <source>Manual</source>
       <translation>Manuální</translation>
     </message>
-    <message id="settings_startpage_none">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="53"/>
+    <message id="pagesettingsboatpage_none">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="35"/>
       <source>None</source>
       <translation>Žádný</translation>
     </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="122"/>
       <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
       <translation>Pozice</translation>
     </message>
     <message id="settings_minmax_speed">
@@ -71,7 +69,7 @@
       <translation>Stav</translation>
     </message>
     <message id="settings_firmware_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="77"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="114"/>
       <source>Installing %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Instaluji %1...</translation>
@@ -135,7 +133,7 @@
     <message id="settings_general">
       <location filename="../../pages/SettingsPage.qml" line="41"/>
       <source>General</source>
-      <translation>Všeobecný</translation>
+      <translation>Všeobecné</translation>
     </message>
     <message id="pagesettingssupportstate_firmware">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="352"/>
@@ -349,12 +347,12 @@
       <translation>Doba chodu za den</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="565"/>
+      <location filename="../../components/CommonWords.qml" line="568"/>
       <source>Value must be greater than stop value</source>
       <translation>Hodnota musí být vyšší než hodnota zastavení</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="568"/>
+      <location filename="../../components/CommonWords.qml" line="571"/>
       <source>Value must be lower than start value</source>
       <translation>Hodnota musí být nižší než spouštěcí hodnota</translation>
     </message>
@@ -1043,7 +1041,7 @@
     <message id="common_words_image_type">
       <location filename="../../components/CommonWords.qml" line="258"/>
       <source>Image type</source>
-      <translation>Typ zobrazení</translation>
+      <translation>Typ firmware</translation>
     </message>
     <message id="common_words_firmware_type_normal">
       <location filename="../../components/CommonWords.qml" line="207"/>
@@ -1055,7 +1053,7 @@
       <location filename="../../components/CommonWords.qml" line="211"/>
       <source>Large</source>
       <extracomment>The firmware type for large images</extracomment>
-      <translation>Velké</translation>
+      <translation>Velký</translation>
     </message>
     <message id="settings_firmware_check_for_updates">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="68"/>
@@ -1545,22 +1543,22 @@ Pokud to nefunguje, zkontrolujte kartu SIM v telefonu a ujistěte se, že na ní
       <translation>Měnič/nabíječ</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="106"/>
       <source>Multiphase regulation</source>
       <translation>Způsob měření fází</translation>
     </message>
     <message id="settings_ess_phase_compensation">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="91"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="113"/>
       <source>Total of all phases</source>
       <translation>Součtové měření všech fází</translation>
     </message>
     <message id="settings_ess_individual_phase">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
       <source>Individual phase</source>
       <translation>Individuální měření fází</translation>
     </message>
     <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="121"/>
       <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
 
 CAUTION: Use only if required by the utility provider.</source>
@@ -1569,7 +1567,7 @@ CAUTION: Use only if required by the utility provider.</source>
 UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektrické energie.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
       <source>The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).
 
 Use unless prohibited by the utility provider.</source>
@@ -1578,42 +1576,42 @@ Use unless prohibited by the utility provider.</source>
 Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</translation>
     </message>
     <message id="settings_ess_min_soc">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="133"/>
       <source>Minimum SOC (unless grid fails)</source>
       <translation type="unfinished">Minimální úroveň vybíjení baterie (síť přítomna)</translation>
     </message>
     <message id="settings_ess_active_soc_limit">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="151"/>
       <source>Active SOC limit</source>
       <translation type="unfinished">Aktuální úroveň vybíjení baterie (síť přítomna)</translation>
     </message>
     <message id="settings_ess_battery_life_sustain">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="177"/>
       <source>Sustain</source>
       <translation type="unfinished">Udržování</translation>
     </message>
     <message id="settings_ess_battery_life_recharge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="179"/>
       <source>Recharge</source>
       <translation type="unfinished">Nabíjení</translation>
     </message>
     <message id="settings_ess_scheduled_charge_levels">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="254"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="276"/>
       <source>Scheduled charge levels</source>
       <translation type="unfinished">Naplánované úrovně nabití</translation>
     </message>
     <message id="settings_ess_active">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="257"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="279"/>
       <source>Active (%1)</source>
       <translation type="unfinished">Aktivní (%1)</translation>
     </message>
     <message id="settings_ess_inactive">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="259"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="281"/>
       <source>Inactive</source>
       <translation type="unfinished">Neaktivní</translation>
     </message>
     <message id="settings_ess_dynamic">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="293"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="315"/>
       <source>Dynamic ESS</source>
       <translation type="unfinished">Dynamické ESS</translation>
     </message>
@@ -1628,7 +1626,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Aktuální úroveň vybíjení baterie (síť přítomna)</translation>
     </message>
     <message id="settings_ess_peak_shaving">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="245"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="267"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
       <translation>Peak shaving</translation>
@@ -1644,17 +1642,17 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Vždy</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="151"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="173"/>
       <source>Discharge disabled</source>
       <translation>Vybití deaktivováno</translation>
     </message>
     <message id="settings_ess_battery_life_slow_charge">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="175"/>
       <source>Slow charge</source>
       <translation>Pomalé nabíjení</translation>
     </message>
-    <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="192"/>
+    <message id="ev_charging_state_sustain">
+      <location filename="../../pages/ev/EvPage.qml" line="71"/>
       <source>Sustain</source>
       <translation>Udržování</translation>
     </message>
@@ -1664,32 +1662,32 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Nabíjení</translation>
     </message>
     <message id="settings_ess_limit_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="187"/>
       <source>Limit charge power</source>
       <translation>Limit nabíjecího výkonu</translation>
     </message>
     <message id="settings_ess_max_charge_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="205"/>
       <source>Maximum charge power</source>
       <translation>Maximální nabíjecí výkon</translation>
     </message>
     <message id="settings_ess_limit_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="196"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="218"/>
       <source>Limit inverter power</source>
       <translation>Omezení výkonu měniče</translation>
     </message>
     <message id="settings_ess_max_inverter_power">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="214"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="236"/>
       <source>Maximum inverter power</source>
       <translation>Maximální odběr z baterie</translation>
     </message>
     <message id="settings_ess_grid_setpoint">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="225"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="247"/>
       <source>Grid setpoint</source>
       <translation>Hodnota síťového odběru</translation>
     </message>
     <message id="settings_ess_grid_feed_in">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="234"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="256"/>
       <source>Grid feed-in</source>
       <translation>Dodávka solárních přebytků do sítě</translation>
     </message>
@@ -1719,42 +1717,42 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Omezení dodávky do sítě je aktivní</translation>
     </message>
     <message id="digitalinputs_type_pulsemeter">
-      <location filename="../../src/enums.cpp" line="217"/>
+      <location filename="../../src/enums.cpp" line="294"/>
       <source>Pulse meter</source>
       <translation>Pulzní měřič</translation>
     </message>
     <message id="digitalinputs_type_dooralarm">
-      <location filename="../../src/enums.cpp" line="220"/>
+      <location filename="../../src/enums.cpp" line="297"/>
       <source>Door alarm</source>
       <translation>Alarm dveří</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="446"/>
+      <location filename="../../src/enums.cpp" line="523"/>
       <source>Bilge pump</source>
       <translation>Bilge pumpa</translation>
     </message>
     <message id="digitalinputs_type_bilgealarm">
-      <location filename="../../src/enums.cpp" line="226"/>
+      <location filename="../../src/enums.cpp" line="303"/>
       <source>Bilge alarm</source>
       <translation>Bilge alarm</translation>
     </message>
     <message id="digitalinputs_type_burglaralarm">
-      <location filename="../../src/enums.cpp" line="229"/>
+      <location filename="../../src/enums.cpp" line="306"/>
       <source>Burglar alarm</source>
       <translation>Alarm proti vloupání</translation>
     </message>
     <message id="digitalinputs_type_smokealarm">
-      <location filename="../../src/enums.cpp" line="232"/>
+      <location filename="../../src/enums.cpp" line="309"/>
       <source>Smoke alarm</source>
       <translation>Alarm kouře</translation>
     </message>
     <message id="digitalinputs_type_firealarm">
-      <location filename="../../src/enums.cpp" line="235"/>
+      <location filename="../../src/enums.cpp" line="312"/>
       <source>Fire alarm</source>
       <translation>Požární alarm</translation>
     </message>
     <message id="digitalinputs_type_co2alarm">
-      <location filename="../../src/enums.cpp" line="238"/>
+      <location filename="../../src/enums.cpp" line="315"/>
       <source>CO2 alarm</source>
       <translation>CO2 alarm</translation>
     </message>
@@ -1837,8 +1835,8 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Use secure connection (HTTPS)</source>
       <translation>Použití bezpečnostního připojení (HTTPS)</translation>
     </message>
-    <message id="settings_last_contact">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="155"/>
+    <message id="ev_last_contact">
+      <location filename="../../pages/ev/EvPage.qml" line="98"/>
       <source>Last contact</source>
       <translation>Poslední kontakt</translation>
     </message>
@@ -2254,7 +2252,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="120"/>
       <source>[Hidden]</source>
       <translation>[Skryté]</translation>
     </message>
@@ -2309,22 +2307,22 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Fixní</translation>
     </message>
     <message id="settings_tcpip_netmask">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="135"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="147"/>
       <source>Netmask</source>
       <translation>Maska sítě</translation>
     </message>
     <message id="settings_tcpip_gateway">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="144"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="156"/>
       <source>Gateway</source>
       <translation>Brána</translation>
     </message>
     <message id="settings_tcpip_dns_server">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="166"/>
       <source>DNS server</source>
       <translation>DNS server</translation>
     </message>
     <message id="settings_tcpip_link_local">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="164"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="177"/>
       <source>Link-local IP address</source>
       <translation>Link-local IP adresa</translation>
     </message>
@@ -2344,27 +2342,27 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Zařízení VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
       <source>No access points</source>
       <translation>Žádné přístupové body</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="112"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Není připojen žádný Wi-Fi adaptér</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="35"/>
       <source>Create access point</source>
       <translation>Vytvořit přístupový bod</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="84"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi sítě</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="60"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Opravdu chcete deaktivovat přístupový bod?</translation>
     </message>
@@ -2460,25 +2458,25 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Alarm vysokého napětí baterie</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="647"/>
+      <location filename="../../components/CommonWords.qml" line="650"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Poslední chyba</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="650"/>
+      <location filename="../../components/CommonWords.qml" line="653"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Předposlední chyba</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="653"/>
+      <location filename="../../components/CommonWords.qml" line="656"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>3. poslední chyba</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="656"/>
+      <location filename="../../components/CommonWords.qml" line="659"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>4. poslední chyba</translation>
@@ -2619,7 +2617,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="292"/>
+      <location filename="../../src/enums.cpp" line="369"/>
       <source>Alarm</source>
       <extracomment>Digital input state</extracomment>
       <translation>Alarm</translation>
@@ -2964,37 +2962,37 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Zbývající čas</translation>
     </message>
     <message id="battery_details">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="291"/>
       <source>Details</source>
       <translation>Detaily</translation>
     </message>
     <message id="battery_module_level_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="300"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="315"/>
       <source>Module level alarms</source>
       <translation>Alarmy na úrovni modulu</translation>
     </message>
     <message id="battery_settings_diagnostics">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="335"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="350"/>
       <source>Diagnostics</source>
       <translation>Diagnostika</translation>
     </message>
     <message id="battery_settings_fuses">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="360"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="375"/>
       <source>Fuses</source>
       <translation>Pojistky</translation>
     </message>
     <message id="battery_settings_io">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="376"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="391"/>
       <source>IO</source>
       <translation>IO</translation>
     </message>
     <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="391"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
       <source>System</source>
       <translation type="unfinished">Systém</translation>
     </message>
     <message id="battery_press_to_redetect">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="433"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="448"/>
       <source>Press to redetect</source>
       <translation type="unfinished">Stisknout</translation>
     </message>
@@ -3004,12 +3002,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Systém</translation>
     </message>
     <message id="battery_settings_parameters">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="421"/>
       <source>Parameters</source>
       <translation>Parametry</translation>
     </message>
     <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="431"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="446"/>
       <source>Redetect Battery</source>
       <translation>Opakovat detekci baterie</translation>
     </message>
@@ -3019,7 +3017,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Stisknout</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="440"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="455"/>
       <source>Redetecting the battery may take up time 60 seconds. Meanwhile the name of the battery may be incorrect.</source>
       <translation>Detekce baterie může trvat až 60 sekund. Během tohoto procesu může být název baterie nesprávný.</translation>
     </message>
@@ -3191,42 +3189,42 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Minimální napětí článků</translation>
     </message>
     <message id="batteryhistory_maximum_cell_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="88"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="87"/>
       <source>Maximum cell voltage</source>
       <translation>Maximální napětí článků</translation>
     </message>
     <message id="batteryhistory_time_since_last_full_charge">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="97"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="95"/>
       <source>Time since last full charge</source>
       <translation>Doba od posledního plného nabití</translation>
     </message>
     <message id="batteryhistory_synchronisation_count">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="104"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="102"/>
       <source>Synchronisation count</source>
       <translation>Počet synchronizací</translation>
     </message>
     <message id="batteryhistory_low_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="123"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="121"/>
       <source>Low starter battery voltage alarms</source>
       <translation>Alarmy nízkého napětí startovací baterie</translation>
     </message>
     <message id="batteryhistory_minimum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="137"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="135"/>
       <source>Minimum starter battery voltage</source>
       <translation>Minimální napětí startovací baterie</translation>
     </message>
     <message id="batteryhistory_maximum_starter_bat_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="143"/>
       <source>Maximum starter battery voltage</source>
       <translation>Maximální napětí startovací baterie</translation>
     </message>
     <message id="batteryhistory_discharged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="165"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="163"/>
       <source>Discharged energy</source>
       <translation>Vybitá energie</translation>
     </message>
     <message id="batteryhistory_charged_energy">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="173"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="171"/>
       <source>Charged energy</source>
       <translation>Nabitá energie</translation>
     </message>
@@ -3471,11 +3469,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Batteries</source>
       <translation>Baterie</translation>
     </message>
-    <message id="lynxionsystem_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
-      <source>Capacity</source>
-      <translation type="unfinished">Kapacita</translation>
-    </message>
     <message id="lynxionsystem_parallel">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="30"/>
       <source>Parallel</source>
@@ -3496,20 +3489,30 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Min/max cell temperature</source>
       <translation>Min/max teplota článku</translation>
     </message>
-    <message id="lynxionsystem_balancing">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
-      <source>Balancing</source>
-      <translation type="unfinished">Vyrovnávání</translation>
+    <message id="lynxionsystem_balancer_balanced">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
+      <source>Balanced</source>
+      <translation type="unfinished">Vyvážený</translation>
     </message>
     <message id="lynxionsystem_balancer_balancing">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balancing</source>
-      <translation>Vyrovnávání</translation>
+      <translation type="unfinished">Vyrovnávání</translation>
+    </message>
+    <message id="lynxionsystem_balancer_imbalance">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
+      <source>Imbalance</source>
+      <translation type="unfinished">Nerovnováha</translation>
     </message>
     <message id="lynxionsystem_balancer_unknown">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="117"/>
       <source>Unknown</source>
       <translation type="unfinished">Neznámý</translation>
+    </message>
+    <message id="battery_status_balancing">
+      <location filename="../../src/enums.cpp" line="78"/>
+      <source>Balancing</source>
+      <translation>Vyrovnávání</translation>
     </message>
     <message id="dc_output">
       <location filename="../../components/listitems/ListDcOutputQuantityGroup.qml" line="16"/>
@@ -3786,8 +3789,8 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Engine</source>
       <translation>Motor</translation>
     </message>
-    <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="284"/>
+    <message id="devicelist_motordrive_coolanttemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="79"/>
       <source>Coolant temperature</source>
       <translation>Teplota chladicí kapaliny</translation>
     </message>
@@ -3885,12 +3888,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Smappee sběrnice zařízení</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="673"/>
+      <location filename="../../components/CommonWords.qml" line="676"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Toto nastavení je vypnuto, pokud je připojen digitální multifunkční ovladač.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="662"/>
+      <location filename="../../components/CommonWords.qml" line="665"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Toto nastavení je zakázáno, pokud je připojena sběrnicová jednotka BMS VE.Bus.</translation>
     </message>
@@ -3926,32 +3929,32 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Invert. logiku alarmu</translation>
     </message>
     <message id="page_meteo_irradiance">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="24"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="42"/>
       <source>Irradiance</source>
       <translation>Ozáření</translation>
     </message>
     <message id="page_meteo_cell_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="33"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
       <source>Cell temperature</source>
       <translation>Teplota článku</translation>
     </message>
     <message id="page_meteo_external_temperature_1">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="42"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="60"/>
       <source>External temperature (1)</source>
       <translation>Vnější teplota (1)</translation>
     </message>
     <message id="page_meteo_external_temperature">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="62"/>
       <source>External temperature</source>
       <translation>Vnější teplota</translation>
     </message>
     <message id="page_meteo_external_temperature_2">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="73"/>
       <source>External temperature (2)</source>
       <translation>Vnější teplota (2)</translation>
     </message>
     <message id="page_meteo_wind_speed">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="63"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="81"/>
       <source>Wind speed</source>
       <translation>Rychlost větru</translation>
     </message>
@@ -4598,10 +4601,9 @@ Chcete pokračovat?</translation>
       <source>Charge current</source>
       <translation>Nabíjecí proud</translation>
     </message>
-    <message id="battery_mode_charging">
-      <location filename="../../src/enums.cpp" line="30"/>
+    <message id="ev_charging_state_charging">
+      <location filename="../../pages/ev/EvPage.qml" line="68"/>
       <source>Charging</source>
-      <extracomment>Battery mode</extracomment>
       <translation>Nabíjení</translation>
     </message>
     <message id="common_words_clear_error_action">
@@ -4611,7 +4613,7 @@ Chcete pokračovat?</translation>
       <translation>Zrušení chyby</translation>
     </message>
     <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="284"/>
+      <location filename="../../src/enums.cpp" line="361"/>
       <source>Closed</source>
       <extracomment>Digital input state</extracomment>
       <translation>Sepnuto</translation>
@@ -4622,7 +4624,7 @@ Chcete pokračovat?</translation>
       <translation>Připojeno</translation>
     </message>
     <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="160"/>
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
       <source>Current</source>
       <extracomment>The current temperature measurement</extracomment>
       <translation>Proud</translation>
@@ -4649,10 +4651,9 @@ Chcete pokračovat?</translation>
       <extracomment>Title for device information</extracomment>
       <translation>Zařízení</translation>
     </message>
-    <message id="battery_mode_discharging">
-      <location filename="../../src/enums.cpp" line="34"/>
+    <message id="ev_charging_state_discharging">
+      <location filename="../../pages/ev/EvPage.qml" line="77"/>
       <source>Discharging</source>
-      <extracomment>Battery mode</extracomment>
       <translation>vybíjení</translation>
     </message>
     <message id="wifimodel_disconnected">
@@ -4677,7 +4678,7 @@ Chcete pokračovat?</translation>
       <translation>Energie</translation>
     </message>
     <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="334"/>
+      <location filename="../../src/enums.cpp" line="411"/>
       <source>Error</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Chyba</translation>
@@ -4698,7 +4699,7 @@ Chcete pokračovat?</translation>
       <translation>Verze firmwaru</translation>
     </message>
     <message id="digitalinputs_type_generator">
-      <location filename="../../src/enums.cpp" line="241"/>
+      <location filename="../../src/enums.cpp" line="318"/>
       <source>Generator</source>
       <translation>Generátor</translation>
     </message>
@@ -4739,7 +4740,7 @@ Chcete pokračovat?</translation>
       <translation>%1 Hodina(y)</translation>
     </message>
     <message id="battery_mode_idle">
-      <location filename="../../src/enums.cpp" line="26"/>
+      <location filename="../../src/enums.cpp" line="27"/>
       <source>Idle</source>
       <extracomment>Battery mode</extracomment>
       <translation>Nečinný</translation>
@@ -4821,7 +4822,7 @@ Chcete pokračovat?</translation>
       <translation>Název modelu</translation>
     </message>
     <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="272"/>
+      <location filename="../../src/enums.cpp" line="349"/>
       <source>No</source>
       <extracomment>Digital input state</extracomment>
       <translation>Ne</translation>
@@ -4847,13 +4848,13 @@ Chcete pokračovat?</translation>
       <translation>Offline</translation>
     </message>
     <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="288"/>
+      <location filename="../../src/enums.cpp" line="365"/>
       <source>OK</source>
       <extracomment>Digital input state</extracomment>
       <translation>Ok</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="496"/>
+      <location filename="../../src/enums.cpp" line="573"/>
       <source>On</source>
       <translation>Zapnuto</translation>
     </message>
@@ -4863,7 +4864,7 @@ Chcete pokračovat?</translation>
       <translation>Online</translation>
     </message>
     <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="280"/>
+      <location filename="../../src/enums.cpp" line="357"/>
       <source>Open</source>
       <extracomment>Digital input open</extracomment>
       <translation>Rozpojeno</translation>
@@ -4926,7 +4927,7 @@ Chcete pokračovat?</translation>
       <translation>Odstranit</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="493"/>
+      <location filename="../../src/enums.cpp" line="570"/>
       <source>Running</source>
       <translation>Chod</translation>
     </message>
@@ -4956,7 +4957,7 @@ Chcete pokračovat?</translation>
       <translation>Síla signálu</translation>
     </message>
     <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="326"/>
+      <location filename="../../src/enums.cpp" line="403"/>
       <source>Standby</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Standby</translation>
@@ -4992,7 +4993,7 @@ Chcete pokračovat?</translation>
       <translation>Stav</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="318"/>
+      <location filename="../../src/enums.cpp" line="395"/>
       <source>Startup (%1)</source>
       <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>Spuštění (%1)</translation>
@@ -5008,7 +5009,7 @@ Chcete pokračovat?</translation>
       <translation>Zastavit po dosažení podmínek pro</translation>
     </message>
     <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="300"/>
+      <location filename="../../src/enums.cpp" line="377"/>
       <source>Stopped</source>
       <extracomment>Digital input state</extracomment>
       <translation>Zastavený</translation>
@@ -5024,17 +5025,17 @@ Chcete pokračovat?</translation>
       <translation>Teplotní snímač</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="539"/>
+      <location filename="../../components/CommonWords.qml" line="542"/>
       <source>Today</source>
       <translation>Dnes</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="542"/>
+      <location filename="../../components/CommonWords.qml" line="545"/>
       <source>Total</source>
       <translation>Celkem</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="549"/>
+      <location filename="../../components/CommonWords.qml" line="552"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Monitorování</translation>
@@ -5045,50 +5046,48 @@ Chcete pokračovat?</translation>
       <translation>Typ</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="555"/>
+      <location filename="../../components/CommonWords.qml" line="558"/>
       <source>Unique Identity Number</source>
       <translation>Unikátní identifikační číslo</translation>
     </message>
-    <message id="Unknown">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+    <message id="ev_charging_state_unknown">
+      <location filename="../../pages/ev/EvPage.qml" line="83"/>
       <source>Unknown</source>
       <translation>Neznámý</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="574"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus chyba</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="580"/>
       <source>Voltage</source>
       <translation>Napětí</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="580"/>
+      <location filename="../../components/CommonWords.qml" line="583"/>
       <source>VRM instance</source>
       <translation>Připojení k VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="583"/>
+      <location filename="../../components/CommonWords.qml" line="586"/>
       <source>When warning is cleared stop after</source>
       <translation>Po vymazání varování, zastavit po</translation>
     </message>
     <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="276"/>
+      <location filename="../../src/enums.cpp" line="353"/>
       <source>Yes</source>
       <extracomment>Digital input state</extracomment>
       <translation>Ano</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="589"/>
+      <location filename="../../components/CommonWords.qml" line="592"/>
       <source>Yesterday</source>
       <translation>Včera</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="593"/>
+      <location filename="../../components/CommonWords.qml" line="596"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Výnos</translation>
@@ -5208,93 +5207,93 @@ Chcete pokračovat?</translation>
       <translation>Chyba při kontrole aktualizací firmwaru</translation>
     </message>
     <message id="settings_firmware_error_during_checking_for_updates">
-      <location filename="../../components/FirmwareUpdate.qml" line="60"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="96"/>
       <source>Error while checking for firmware updates</source>
       <translation type="unfinished">Chyba při kontrole aktualizací firmwaru</translation>
     </message>
     <message id="settings_firmware_downloading_and_installing">
-      <location filename="../../components/FirmwareUpdate.qml" line="73"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="110"/>
       <source>Downloading and installing firmware %1...</source>
       <extracomment>%1 = firmware version</extracomment>
       <translation>Stahuji a instaluji firmware %1...</translation>
     </message>
     <message id="settings_firmware_installing_firmware">
-      <location filename="../../components/FirmwareUpdate.qml" line="80"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="117"/>
       <source>Installing firmware...</source>
       <translation>Instaluji firmware...</translation>
     </message>
     <message id="settings_firmware_error_during_installation">
-      <location filename="../../components/FirmwareUpdate.qml" line="85"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="123"/>
       <source>Error during firmware installation</source>
       <translation>Chyba při instalaci firmwaru</translation>
     </message>
     <message id="settings_firmware_no_newer_version_available">
-      <location filename="../../components/FirmwareUpdate.qml" line="195"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="240"/>
       <source>No newer version available</source>
       <translation>Není k dispozici novější verze</translation>
     </message>
     <message id="settings_firmware_no_firmware_found">
-      <location filename="../../components/FirmwareUpdate.qml" line="198"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="243"/>
       <source>No firmware found</source>
       <translation>Žádný firmaware nenalezen</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="541"/>
+      <location filename="../../src/enums.cpp" line="618"/>
       <source>Fuel</source>
       <translation>Palivo</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="544"/>
+      <location filename="../../src/enums.cpp" line="621"/>
       <source>Fresh water</source>
       <translation>Čistá voda</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="547"/>
+      <location filename="../../src/enums.cpp" line="624"/>
       <source>Waste water</source>
       <translation>Odpadní voda</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="550"/>
+      <location filename="../../src/enums.cpp" line="627"/>
       <source>Live well</source>
       <translation>Nádrž na vodu</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="553"/>
+      <location filename="../../src/enums.cpp" line="630"/>
       <source>Oil</source>
       <translation>Olej</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="556"/>
+      <location filename="../../src/enums.cpp" line="633"/>
       <source>Black water</source>
       <translation>SPLAŠKY</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="559"/>
+      <location filename="../../src/enums.cpp" line="636"/>
       <source>Gasoline</source>
       <translation>Benzín</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="562"/>
+      <location filename="../../src/enums.cpp" line="639"/>
       <source>Diesel</source>
       <translation>Nafta</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="565"/>
+      <location filename="../../src/enums.cpp" line="642"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="568"/>
+      <location filename="../../src/enums.cpp" line="645"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="571"/>
+      <location filename="../../src/enums.cpp" line="648"/>
       <source>Hydraulic oil</source>
       <translation>Hydraulický olej</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="574"/>
+      <location filename="../../src/enums.cpp" line="651"/>
       <source>Raw water</source>
       <translation>Surová voda</translation>
     </message>
@@ -5648,7 +5647,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">hod</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="359"/>
+      <location filename="../../src/enums.cpp" line="436"/>
       <source>Bulk</source>
       <translation>Rychlé nabíjení (bulk)</translation>
     </message>
@@ -5659,7 +5658,7 @@ Chcete pokračovat?</translation>
       <translation>Abs</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="365"/>
+      <location filename="../../src/enums.cpp" line="442"/>
       <source>Float</source>
       <translation>Udržování</translation>
     </message>
@@ -5669,30 +5668,30 @@ Chcete pokračovat?</translation>
       <translation>hod</translation>
     </message>
     <message id="charger_history_errors_occurred">
-      <location filename="../../components/SolarHistoryErrorView.qml" line="96"/>
+      <location filename="../../components/SolarHistoryErrorView.qml" line="97"/>
       <source>%1 error(s) occurred</source>
       <translation>Vyskytly se chyby %1</translation>
     </message>
     <message id="charger_history_errors_last">
-      <location filename="../../components/SolarHistoryErrorView.qml" line="120"/>
+      <location filename="../../components/SolarHistoryErrorView.qml" line="121"/>
       <source>Last</source>
       <extracomment>Details of last error</extracomment>
       <translation>Zátěž</translation>
     </message>
     <message id="charger_history_errors_2nd_last">
-      <location filename="../../components/SolarHistoryErrorView.qml" line="123"/>
+      <location filename="../../components/SolarHistoryErrorView.qml" line="124"/>
       <source>2nd last</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>2. poslední</translation>
     </message>
     <message id="charger_history_errors_3rd_last">
-      <location filename="../../components/SolarHistoryErrorView.qml" line="126"/>
+      <location filename="../../components/SolarHistoryErrorView.qml" line="127"/>
       <source>3rd last</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>3. poslední</translation>
     </message>
     <message id="charger_history_errors_4th_last">
-      <location filename="../../components/SolarHistoryErrorView.qml" line="129"/>
+      <location filename="../../components/SolarHistoryErrorView.qml" line="130"/>
       <source>4th last</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>4. poslední</translation>
@@ -5901,49 +5900,49 @@ Chcete pokračovat?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="133"/>
+      <location filename="../../src/device.cpp" line="134"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>nádrž %1 (%2)</translation>
     </message>
     <message id="dcMeter_ac_charger">
-      <location filename="../../src/enums.cpp" line="131"/>
+      <location filename="../../src/enums.cpp" line="208"/>
       <source>AC charger</source>
       <translation>Nabíječka AC</translation>
     </message>
     <message id="dcMeter_alternator">
-      <location filename="../../src/enums.cpp" line="134"/>
+      <location filename="../../src/enums.cpp" line="211"/>
       <source>Alternator</source>
       <translation>Generátor</translation>
     </message>
     <message id="dcMeter_dc_system">
-      <location filename="../../src/enums.cpp" line="143"/>
+      <location filename="../../src/enums.cpp" line="220"/>
       <source>DC system</source>
       <translation>DC SYSTÉM</translation>
     </message>
     <message id="dcMeter_fuelcell">
-      <location filename="../../src/enums.cpp" line="152"/>
+      <location filename="../../src/enums.cpp" line="229"/>
       <source>Fuel cell</source>
       <translation>Palivový článek</translation>
     </message>
     <message id="dcMeter_shaft_generator">
-      <location filename="../../src/enums.cpp" line="170"/>
+      <location filename="../../src/enums.cpp" line="247"/>
       <source>Shaft generator</source>
       <translation>Hřídelový generátor</translation>
     </message>
     <message id="dcMeter_water_generator">
-      <location filename="../../src/enums.cpp" line="176"/>
+      <location filename="../../src/enums.cpp" line="253"/>
       <source>Water generator</source>
       <translation>Generátor vody</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="256"/>
+      <location filename="../../src/enums.cpp" line="333"/>
       <source>Low</source>
       <extracomment>Digital input state</extracomment>
       <translation>Nízko</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="260"/>
+      <location filename="../../src/enums.cpp" line="337"/>
       <source>High</source>
       <extracomment>Digital input state</extracomment>
       <translation>Vysoko</translation>
@@ -6059,40 +6058,40 @@ Chcete pokračovat?</translation>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="330"/>
+      <location filename="../../src/enums.cpp" line="407"/>
       <source>Boot loading</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Stahování pro zavedení systému</translation>
     </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="338"/>
+      <location filename="../../src/enums.cpp" line="415"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>V chodu (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="342"/>
+      <location filename="../../src/enums.cpp" line="419"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>V chodu (Ztlumené)</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="356"/>
+      <location filename="../../src/enums.cpp" line="433"/>
       <source>Fault</source>
       <translation>Závada</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="362"/>
+      <location filename="../../src/enums.cpp" line="439"/>
       <source>Absorption</source>
       <translation>Absorpce</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="368"/>
+      <location filename="../../src/enums.cpp" line="445"/>
       <source>Storage</source>
       <translation>Skladování</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="371"/>
+      <location filename="../../src/enums.cpp" line="448"/>
       <source>Equalize</source>
       <translation>Vyrovnávání</translation>
     </message>
@@ -6159,6 +6158,21 @@ Chcete pokračovat?</translation>
     <message id="inverters_state_wakeup">
       <location filename="../../data/System.qml" line="165"/>
       <source>Wake up</source>
+      <translation type="unfinished">Probuďte se</translation>
+    </message>
+    <message id="inverters_state_system_sustain">
+      <location filename="../../data/System.qml" line="192"/>
+      <source>Sustain</source>
+      <translation type="unfinished">Udržování</translation>
+    </message>
+    <message id="inverters_state_dynamic_ess">
+      <location filename="../../data/System.qml" line="201"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">Dynamické ESS</translation>
+    </message>
+    <message id="ev_charging_state_wake_up">
+      <location filename="../../pages/ev/EvPage.qml" line="74"/>
+      <source>Wake up</source>
       <translation>Probuďte se</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
@@ -6190,11 +6204,6 @@ Chcete pokračovat?</translation>
       <location filename="../../data/System.qml" line="183"/>
       <source>Test</source>
       <translation>Test</translation>
-    </message>
-    <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="201"/>
-      <source>Dynamic ESS</source>
-      <translation type="unfinished">Dynamické ESS</translation>
     </message>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="97"/>
@@ -6241,7 +6250,7 @@ Chcete pokračovat?</translation>
       <translation>Alarm zkratu</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="53"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="58"/>
       <source>Disable Access Point</source>
       <translation>Deaktivovat přístupový bod</translation>
     </message>
@@ -6372,6 +6381,11 @@ Chcete pokračovat?</translation>
       <source>Oil temperature</source>
       <translation>Teplota oleje</translation>
     </message>
+    <message id="ac-in-genset_coolant_temperature">
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <source>Coolant temperature</source>
+      <translation type="unfinished">Teplota chladicí kapaliny</translation>
+    </message>
     <message id="genset_heatsink_temperature">
       <location filename="../../components/PageGensetModel.qml" line="306"/>
       <source>Heatsink temperature</source>
@@ -6463,7 +6477,7 @@ Chcete pokračovat?</translation>
       <translation>Informace o připojení</translation>
     </message>
     <message id="batteryhistory_high_starter_bat_voltage_alarms">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="130"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="128"/>
       <source>High starter battery voltage alarms</source>
       <translation>Alarmy vysokého napětí startovací baterie</translation>
     </message>
@@ -6477,18 +6491,23 @@ Chcete pokračovat?</translation>
       <source>Cells per battery</source>
       <translation>Články na baterii</translation>
     </message>
+    <message id="lynxionsystem_balancing">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
+      <source>Balancing</source>
+      <translation type="unfinished">Vyrovnávání</translation>
+    </message>
     <message id="lynxionsystem_balancer_status">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="100"/>
       <source>Balancer status</source>
       <translation>Stav balancéru</translation>
     </message>
-    <message id="lynxionsystem_balancer_balanced">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="107"/>
+    <message id="battery_status_balanced">
+      <location filename="../../src/enums.cpp" line="70"/>
       <source>Balanced</source>
       <translation>Vyvážený</translation>
     </message>
-    <message id="lynxionsystem_balancer_imbalance">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
+    <message id="battery_status_imbalance">
+      <location filename="../../src/enums.cpp" line="74"/>
       <source>Imbalance</source>
       <translation>Nerovnováha</translation>
     </message>
@@ -6554,12 +6573,12 @@ Chcete pokračovat?</translation>
       <translation>Elektrocentrála</translation>
     </message>
     <message id="page_meteo_wind_direction">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="90"/>
       <source>Wind direction</source>
       <translation>Směr větru</translation>
     </message>
     <message id="page_meteo_daily_yield">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="107"/>
       <source>Today's yield</source>
       <translation>Dnešní výnos</translation>
     </message>
@@ -6665,7 +6684,7 @@ Chcete pokračovat?</translation>
       <translation>Nahoře, ale bez služeb (500 kbit/s)</translation>
     </message>
     <message id="pagesettingsgeneral_data_units">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="141"/>
       <source>Data units</source>
       <translation>Datové jednotky</translation>
     </message>
@@ -6704,13 +6723,13 @@ Chcete pokračovat?</translation>
       <source>Start page</source>
       <translation type="unfinished">Úvodní stránka</translation>
     </message>
-    <message id="settings_display_boat_page">
+    <message id="pagesettingsgeneral_boat_page">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="135"/>
       <source>Boat page</source>
       <translation type="unfinished">Stránka lodi</translation>
     </message>
     <message id="settings_display_minmax">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="147"/>
       <source>Minimum and maximum gauge ranges</source>
       <translation>Minimální a maximální rozsahy měřidla</translation>
     </message>
@@ -6720,44 +6739,44 @@ Chcete pokračovat?</translation>
       <translation>Úvodní stránka</translation>
     </message>
     <message id="settings_display_onscreen_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="170"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="169"/>
       <source>User interface</source>
       <translation>Uživatelské rozhraní</translation>
     </message>
     <message id="settings_display_remote_console_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="172"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>User interface (Remote Console)</source>
       <translation>Uživatelské rozhraní (vzdálená konzola)</translation>
     </message>
     <message id="settings_display_classic_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="179"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
       <source>Classic UI</source>
       <translation>Klasické uživatelské rozhraní</translation>
     </message>
     <message id="settings_display_new_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="183"/>
       <source>New UI</source>
       <translation>Nové uživatelské rozhraní</translation>
     </message>
     <message id="settings_restarting_app">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="215"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="214"/>
       <source>Restarting application...</source>
       <translation>Restartování aplikace...</translation>
     </message>
     <message id="settings_app_restarted">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="218"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="217"/>
       <source>%1 updated</source>
       <extracomment>%1 = The name of the setting being updated</extracomment>
       <translation>%1 aktualizováno</translation>
     </message>
     <message id="settings_switch_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="221"/>
       <source>User interface will switch to %1.</source>
       <extracomment>%1 = the UI version that the system is switching to</extracomment>
       <translation>Uživatelské rozhraní se přepne na %1.</translation>
     </message>
     <message id="settings_has_switched_ui">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="225"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 je nastaveno na %2</translation>
@@ -7176,17 +7195,17 @@ Chcete pokračovat?</translation>
       <translation>Maximální exportní proud systému (na fázi)</translation>
     </message>
     <message id="settings_ess_self_consumption_battery">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Self-consumption from battery</source>
       <translation>Vlastní spotřeba z baterie</translation>
     </message>
     <message id="settings_ess_all_system_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="98"/>
       <source>All system loads</source>
       <translation>Všechny systémové zátěže</translation>
     </message>
     <message id="settings_ess_only_critical_loads">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="100"/>
       <source>Only critical loads</source>
       <translation>Pouze kritická zatížení</translation>
     </message>
@@ -7290,6 +7309,11 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="77"/>
       <source>Changing this setting to Read-only or Off will lock you out.</source>
       <translation>Změnou tohoto nastavení na hodnotu Pouze pro čtení nebo Vypnuto dojde k zablokování.</translation>
+    </message>
+    <message id="settings_last_contact">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="155"/>
+      <source>Last contact</source>
+      <translation type="unfinished">Poslední kontakt</translation>
     </message>
     <message id="settings_connection_status">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="199"/>
@@ -7626,7 +7650,7 @@ Chcete pokračovat?</translation>
       <translation>Restartování systému VE.Bus vynuluje všechny střídače na sběrnici a způsobí ztrátu napájení jejich výstupů.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="600"/>
+      <location filename="../../components/CommonWords.qml" line="603"/>
       <source>Dynamic power limit</source>
       <translation>Dynamické omezení výkonu</translation>
     </message>
@@ -7823,6 +7847,18 @@ Chcete pokračovat?</translation>
       <source>Overall history</source>
       <translation>Celková historie</translation>
     </message>
+    <message id="common_words_power_watts">
+      <location filename="../../components/CommonWords.qml" line="411"/>
+      <source>Power</source>
+      <extracomment>Electric power, as measured in Watts</extracomment>
+      <translation type="unfinished">Výkon</translation>
+    </message>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="418"/>
+      <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
+      <translation type="unfinished">Pozice</translation>
+    </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="463"/>
       <source>Running</source>
@@ -7863,18 +7899,18 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Zastavený</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="552"/>
+      <location filename="../../components/CommonWords.qml" line="555"/>
       <source>Type</source>
       <translation type="unfinished">Typ</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="559"/>
+      <location filename="../../components/CommonWords.qml" line="562"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Neznámý</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="586"/>
+      <location filename="../../components/CommonWords.qml" line="589"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7882,25 +7918,25 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Ano</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="597"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>Výnos dnes</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="641"/>
+      <location filename="../../components/CommonWords.qml" line="644"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="667"/>
+      <location filename="../../components/CommonWords.qml" line="670"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="678"/>
+      <location filename="../../components/CommonWords.qml" line="681"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -7921,7 +7957,7 @@ Chcete pokračovat?</translation>
       <translation>Invertorový režim</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
-      <location filename="../../components/FirmwareUpdate.qml" line="89"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="128"/>
       <source>Firmware installed, device rebooting</source>
       <translation>Firmware nainstalován, zařízení se restartuje</translation>
     </message>
@@ -7981,106 +8017,172 @@ Chcete pokračovat?</translation>
       <translation>Tepelné čerpadlo</translation>
     </message>
     <message id="digitalinputs_touch_input_control">
-      <location filename="../../src/enums.cpp" line="244"/>
+      <location filename="../../src/enums.cpp" line="321"/>
       <source>Touch input control</source>
       <translation>Ovládání dotykového vstupu</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="483"/>
+      <location filename="../../src/enums.cpp" line="560"/>
       <source>Over temperature</source>
       <translation>Příliš vysoká teplota</translation>
     </message>
     <message id="switch_state_temperature_warning">
-      <location filename="../../src/enums.cpp" line="391"/>
+      <location filename="../../src/enums.cpp" line="468"/>
       <source>Temperature warning</source>
       <translation>Upozornění na teplotu</translation>
     </message>
+    <message id="battery_mode_charging">
+      <location filename="../../src/enums.cpp" line="31"/>
+      <source>Charging</source>
+      <extracomment>Battery mode</extracomment>
+      <translation type="unfinished">Nabíjení</translation>
+    </message>
+    <message id="battery_mode_discharging">
+      <location filename="../../src/enums.cpp" line="35"/>
+      <source>Discharging</source>
+      <extracomment>Battery mode</extracomment>
+      <translation type="unfinished">vybíjení</translation>
+    </message>
     <message id="cardinalDirection_short_north">
-      <location filename="../../src/enums.cpp" line="69"/>
+      <location filename="../../src/enums.cpp" line="146"/>
       <source>N</source>
       <extracomment>Abbreviation of "North" direction</extracomment>
       <translation type="unfinished">N</translation>
     </message>
     <message id="cardinalDirection_short_south">
-      <location filename="../../src/enums.cpp" line="73"/>
+      <location filename="../../src/enums.cpp" line="150"/>
       <source>S</source>
       <extracomment>Abbreviation of "South" direction</extracomment>
       <translation type="unfinished">s</translation>
     </message>
     <message id="cardinalDirection_short_east">
-      <location filename="../../src/enums.cpp" line="77"/>
+      <location filename="../../src/enums.cpp" line="154"/>
       <source>E</source>
       <extracomment>Abbreviation of "East" direction</extracomment>
       <translation type="unfinished">E-mail</translation>
     </message>
     <message id="cardinalDirection_short_west">
-      <location filename="../../src/enums.cpp" line="81"/>
+      <location filename="../../src/enums.cpp" line="158"/>
       <source>W</source>
       <extracomment>Abbreviation of "West" direction</extracomment>
       <translation type="unfinished">W</translation>
     </message>
     <message id="dcMeter_bilge_pump">
-      <location filename="../../src/enums.cpp" line="137"/>
+      <location filename="../../src/enums.cpp" line="214"/>
       <source>Bilge pump</source>
       <translation type="unfinished">Bilge pumpa</translation>
     </message>
+    <message id="digitalinputs_type_disabled">
+      <location filename="../../src/enums.cpp" line="291"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Deaktivováno</translation>
+    </message>
+    <message id="digitalinputs_type_bilgepump">
+      <location filename="../../src/enums.cpp" line="300"/>
+      <source>Bilge pump</source>
+      <translation type="unfinished">Bilge pumpa</translation>
+    </message>
+    <message id="digitalinputs_state_off">
+      <location filename="../../src/enums.cpp" line="341"/>
+      <source>Off</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Vypnuto</translation>
+    </message>
+    <message id="digitalinputs_state_on">
+      <location filename="../../src/enums.cpp" line="345"/>
+      <source>On</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Zapnuto</translation>
+    </message>
+    <message id="digitalinputs_state_running">
+      <location filename="../../src/enums.cpp" line="373"/>
+      <source>Running</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Chod</translation>
+    </message>
+    <message id="pvinverter_statusCode_running">
+      <location filename="../../src/enums.cpp" line="399"/>
+      <source>Running</source>
+      <extracomment>PV inverter status code</extracomment>
+      <translation type="unfinished">Chod</translation>
+    </message>
+    <message id="solarchargers_state_external control">
+      <location filename="../../src/enums.cpp" line="451"/>
+      <source>External control</source>
+      <translation type="unfinished">Externí ovládání</translation>
+    </message>
+    <message id="switch_state_running">
+      <location filename="../../src/enums.cpp" line="462"/>
+      <source>Running</source>
+      <translation type="unfinished">Chod</translation>
+    </message>
+    <message id="switch_state_over_temperature">
+      <location filename="../../src/enums.cpp" line="465"/>
+      <source>Over temperature</source>
+      <translation type="unfinished">Příliš vysoká teplota</translation>
+    </message>
     <message id="switch_state_channel_fault">
-      <location filename="../../src/enums.cpp" line="394"/>
+      <location filename="../../src/enums.cpp" line="471"/>
       <source>Channel Fault</source>
       <translation>Porucha kanálu</translation>
     </message>
     <message id="switch_state_channel_tripped">
-      <location filename="../../src/enums.cpp" line="397"/>
+      <location filename="../../src/enums.cpp" line="474"/>
       <source>Channel Tripped</source>
       <translation>Spuštěný kanál</translation>
     </message>
     <message id="switch_state_under_voltage">
-      <location filename="../../src/enums.cpp" line="400"/>
+      <location filename="../../src/enums.cpp" line="477"/>
       <source>Under voltage</source>
       <translation>Podpětí</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="411"/>
+      <location filename="../../src/enums.cpp" line="488"/>
       <source>Momentary</source>
       <translation>Momentální</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="417"/>
+      <location filename="../../src/enums.cpp" line="494"/>
       <source>Dimmable</source>
       <translation>Stmívatelné</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="427"/>
+      <location filename="../../src/enums.cpp" line="504"/>
       <source>Slave of %1</source>
       <translation>Podřízený %1</translation>
     </message>
+    <message id="switchable_output_slave">
+      <location filename="../../src/enums.cpp" line="507"/>
+      <source>Slave</source>
+      <translation type="unfinished">Podřízený</translation>
+    </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="470"/>
+      <location filename="../../src/enums.cpp" line="547"/>
       <source>Not running</source>
       <translation type="unfinished">Neprovádí se</translation>
     </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="473"/>
+      <location filename="../../src/enums.cpp" line="550"/>
       <source>Off</source>
       <translation type="unfinished">Vypnuto</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="477"/>
+      <location filename="../../src/enums.cpp" line="554"/>
       <source>Powered</source>
       <translation>Powered</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="480"/>
+      <location filename="../../src/enums.cpp" line="557"/>
       <source>Tripped</source>
       <translation>Spuštěný</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="489"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Fault</source>
       <translation type="unfinished">Závada</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="500"/>
+      <location filename="../../src/enums.cpp" line="577"/>
       <source>Short</source>
       <translation>Krátké</translation>
     </message>
@@ -8160,17 +8262,17 @@ Chcete pokračovat?</translation>
       <translation>Stav přetížení měniče</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="54"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input on</source>
       <translation>Dotykový vstup zapnut</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="56"/>
+      <location filename="../../ApplicationContent.qml" line="59"/>
       <source>Touch input off</source>
       <translation>Dotykový vstup vypnut</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="70"/>
+      <location filename="../../ApplicationContent.qml" line="73"/>
       <source>Touch input disabled</source>
       <translation>Dotykový vstup deaktivován</translation>
     </message>
@@ -8354,12 +8456,12 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <translation>Seznam baterií</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
-      <location filename="../../pages/DialogLayer.qml" line="56"/>
+      <location filename="../../pages/DialogLayer.qml" line="60"/>
       <source>GX device has been updated</source>
       <translation>Zařízení GX bylo aktualizováno</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="58"/>
+      <location filename="../../pages/DialogLayer.qml" line="62"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>Stránka se automaticky načte za deset sekund, aby se načetla nejnovější verze.</translation>
     </message>
@@ -8454,6 +8556,11 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
         <numerusform>Po %n minutách</numerusform>
         <numerusform>Po %n minutách</numerusform>
       </translation>
+    </message>
+    <message id="settings_startpage_none">
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="53"/>
+      <source>None</source>
+      <translation type="unfinished">Žádný</translation>
     </message>
     <message id="settings_startpage_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="58"/>
@@ -8599,7 +8706,7 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
     <message id="pagesettingssupportstate_installed_image_type">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="363"/>
       <source>Installed image type</source>
-      <translation>Typ nainstalované bitové kopie</translation>
+      <translation>Typ nainstalovaného firmware</translation>
     </message>
     <message id="pagesettingssupportstate_user_ssh_key_present">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="257"/>
@@ -8641,16 +8748,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="49"/>
       <source>Motor RPM</source>
       <translation>Otáčky motoru</translation>
-    </message>
-    <message id="devicelist_motordrive_motortemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="72"/>
-      <source>Motor Temperature</source>
-      <translation>Teplota motoru</translation>
-    </message>
-    <message id="devicelist_motordrive_controllertemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="86"/>
-      <source>Controller Temperature</source>
-      <translation>Teplota ovladače</translation>
     </message>
     <message id="cycle_history_active">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="18"/>
@@ -8918,7 +9015,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Stránka lodi</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="460"/>
+      <location filename="../../src/enums.cpp" line="537"/>
       <source>Unsupported type: %1</source>
       <translation>Nepodporovaný typ: %1</translation>
     </message>
@@ -8942,25 +9039,15 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Gauge Display</source>
       <translation>Zobrazení měřidel</translation>
     </message>
-    <message id="settings_minmax_time_to_go">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="195"/>
-      <source>Time to go</source>
-      <translation>Čas odejít</translation>
-    </message>
     <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="209"/>
       <source>Max Speed</source>
       <translation>Maximální rychlost</translation>
     </message>
     <message id="settings_minmax_max_rpm">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="221"/>
       <source>Max RPM</source>
       <translation>Maximální otáčky</translation>
-    </message>
-    <message id="devicelist_motordrive_coolanttemperature">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="79"/>
-      <source>Coolant Temperature</source>
-      <translation>Teplota chladicí kapaliny</translation>
     </message>
     <message id="settings_module_state">
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
@@ -8983,17 +9070,18 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Jmenovitá hodnota pojistky</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="159"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="161"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="301"/>
       <source>RPM</source>
       <translation>RPM</translation>
     </message>
     <message id="boat_page_motor_drive">
-      <location filename="../../pages/boat/MotorDriveGauges.qml" line="41"/>
+      <location filename="../../pages/boat/MotorDriveGauges.qml" line="40"/>
       <source>Motordrive</source>
       <translation>Motordrive</translation>
     </message>
-    <message id="boat_page_time_to_go">
-      <location filename="../../pages/boat/TimeToGo.qml" line="55"/>
+    <message id="common_words_time_to_go">
+      <location filename="../../components/CommonWords.qml" line="539"/>
       <source>Time To Go</source>
       <translation>Čas odejít</translation>
     </message>
@@ -9071,6 +9159,13 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="38"/>
       <source>Resetting VE.Bus products</source>
       <translation>Resetování produktů VE.Bus</translation>
+    </message>
+    <message id="Unknown">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Neznámý</translation>
     </message>
     <message id="mk2vsc_error_mk2_mk3_comm">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="47"/>
@@ -9366,7 +9461,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Dokumentace</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="609"/>
+      <location filename="../../components/CommonWords.qml" line="612"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>AC vstup %1</translation>
@@ -9621,7 +9716,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Pro aktivaci Bluetooth připojení připojte kompatibilní Bluetooth USB dongle.</translation>
     </message>
     <message id="settings_ess_batteryLife_state">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="140"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="162"/>
       <source>BatteryLife state</source>
       <translation>Stav BatteryLife</translation>
     </message>
@@ -9668,7 +9763,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Bluetooth není k dispozici</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="414"/>
+      <location filename="../../src/enums.cpp" line="491"/>
       <source>Toggle</source>
       <translation>Přepnout</translation>
     </message>
@@ -9771,12 +9866,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Litry</translation>
     </message>
     <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="157"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="156"/>
       <source>UI Animations</source>
       <translation>UI animace</translation>
     </message>
     <message id="settings_ui_animations_description">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
       <source>Disable to reduce CPU usage</source>
       <translation>Zakázáním snížíte využití CPU</translation>
     </message>
@@ -9908,146 +10003,92 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Přístup k Node-RED</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="71"/>
       <source>Access Point password</source>
       <translation>Heslo přístupového bodu</translation>
     </message>
     <message id="dcMeter_dccharger">
-      <location filename="../../src/enums.cpp" line="140"/>
+      <location filename="../../src/enums.cpp" line="217"/>
       <source>DC/DC charger</source>
       <translation>DC/DC nabíječka</translation>
     </message>
     <message id="dcMeter_electric_drive">
-      <location filename="../../src/enums.cpp" line="146"/>
+      <location filename="../../src/enums.cpp" line="223"/>
       <source>Electric drive</source>
       <translation>Elektrický pohon</translation>
     </message>
     <message id="dcMeter_fridge">
-      <location filename="../../src/enums.cpp" line="149"/>
+      <location filename="../../src/enums.cpp" line="226"/>
       <source>Fridge</source>
       <translation>Chladnička</translation>
     </message>
     <message id="dcMeter_generic_load">
-      <location filename="../../src/enums.cpp" line="155"/>
+      <location filename="../../src/enums.cpp" line="232"/>
       <source>Generic load</source>
       <translation>Obecná zátěž</translation>
     </message>
     <message id="dcMeter_generic_meter">
-      <location filename="../../src/enums.cpp" line="158"/>
+      <location filename="../../src/enums.cpp" line="235"/>
       <source>Generic meter</source>
       <translation>Obecný měřič</translation>
     </message>
     <message id="dcMeter_generic_source">
-      <location filename="../../src/enums.cpp" line="161"/>
+      <location filename="../../src/enums.cpp" line="238"/>
       <source>Generic source</source>
       <translation>Obecný zdroj</translation>
     </message>
     <message id="dcMeter_dc_genset">
-      <location filename="../../src/enums.cpp" line="164"/>
+      <location filename="../../src/enums.cpp" line="241"/>
       <source>DC genset</source>
       <translation>DC generátor</translation>
     </message>
     <message id="dcMeter_inverter">
-      <location filename="../../src/enums.cpp" line="167"/>
+      <location filename="../../src/enums.cpp" line="244"/>
       <source>Inverter</source>
       <translation>Měnič</translation>
     </message>
     <message id="dcMeter_solar_charger">
-      <location filename="../../src/enums.cpp" line="173"/>
+      <location filename="../../src/enums.cpp" line="250"/>
       <source>Solar charger</source>
       <translation>Solární nabíječka</translation>
     </message>
     <message id="dcMeter_water_heater">
-      <location filename="../../src/enums.cpp" line="179"/>
+      <location filename="../../src/enums.cpp" line="256"/>
       <source>Water heater</source>
       <translation>Ohřívač vody</translation>
     </message>
     <message id="dcMeter_water_pump">
-      <location filename="../../src/enums.cpp" line="182"/>
+      <location filename="../../src/enums.cpp" line="259"/>
       <source>Water pump</source>
       <translation>Vodní čerpadlo</translation>
     </message>
     <message id="dcMeter_wind_charger">
-      <location filename="../../src/enums.cpp" line="185"/>
+      <location filename="../../src/enums.cpp" line="262"/>
       <source>Wind charger</source>
       <translation>Větrná nabíječka</translation>
     </message>
-    <message id="digitalinputs_type_disabled">
-      <location filename="../../src/enums.cpp" line="214"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
-    </message>
-    <message id="digitalinputs_type_bilgepump">
-      <location filename="../../src/enums.cpp" line="223"/>
-      <source>Bilge pump</source>
-      <translation type="unfinished">Bilge pumpa</translation>
-    </message>
-    <message id="digitalinputs_state_off">
-      <location filename="../../src/enums.cpp" line="264"/>
-      <source>Off</source>
-      <extracomment>Digital input state</extracomment>
-      <translation type="unfinished">Vypnuto</translation>
-    </message>
-    <message id="digitalinputs_state_on">
-      <location filename="../../src/enums.cpp" line="268"/>
-      <source>On</source>
-      <extracomment>Digital input state</extracomment>
-      <translation type="unfinished">Zapnuto</translation>
-    </message>
-    <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="296"/>
-      <source>Running</source>
-      <extracomment>Digital input state</extracomment>
-      <translation type="unfinished">Chod</translation>
-    </message>
-    <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="322"/>
-      <source>Running</source>
-      <extracomment>PV inverter status code</extracomment>
-      <translation type="unfinished">Chod</translation>
-    </message>
-    <message id="solarchargers_state_external control">
-      <location filename="../../src/enums.cpp" line="374"/>
-      <source>External control</source>
-      <translation type="unfinished">Externí ovládání</translation>
-    </message>
-    <message id="switch_state_running">
-      <location filename="../../src/enums.cpp" line="385"/>
-      <source>Running</source>
-      <translation type="unfinished">Chod</translation>
-    </message>
-    <message id="switch_state_over_temperature">
-      <location filename="../../src/enums.cpp" line="388"/>
-      <source>Over temperature</source>
-      <translation type="unfinished">Příliš vysoká teplota</translation>
-    </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="420"/>
+      <location filename="../../src/enums.cpp" line="497"/>
       <source>Temperature setpoint</source>
       <translation>Nastavená teplota</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="423"/>
+      <location filename="../../src/enums.cpp" line="500"/>
       <source>Stepped switch</source>
       <translation>Krokový spínač</translation>
     </message>
-    <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="430"/>
-      <source>Slave</source>
-      <translation type="unfinished">Podřízený</translation>
-    </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="434"/>
+      <location filename="../../src/enums.cpp" line="511"/>
       <source>Dropdown</source>
       <translation>Rozbalovací nabídka</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="437"/>
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Basic slider</source>
       <translation>Základní posuvník</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="443"/>
+      <location filename="../../src/enums.cpp" line="520"/>
       <source>Three-state switch</source>
       <translation>Třípolohový přepínač</translation>
     </message>
@@ -10072,7 +10113,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Stiskněte pro obnovení</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="545"/>
+      <location filename="../../components/CommonWords.qml" line="548"/>
       <source>Total power</source>
       <translation>Celkový výkon</translation>
     </message>
@@ -10104,12 +10145,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Polarita (Relé 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="75"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Délka hesla musí být 0 nebo mezi 10 a 63 znaky</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="83"/>
       <source>Password updated</source>
       <translation>Heslo bylo aktualizováno</translation>
     </message>
@@ -10126,17 +10167,17 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Min.</translation>
     </message>
     <message id="settings_ess_deprecated">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="341"/>
       <source>Deprecated settings</source>
       <translation>Zastaralá nastavení</translation>
     </message>
     <message id="settings_ess_max_charge_percentage">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="326"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="348"/>
       <source>Battery charge limit (% of CCL)</source>
       <translation>Limit nabíjení baterie (% CCL)</translation>
     </message>
     <message id="settings_ess_max_discharge_percentage">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="337"/>
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="359"/>
       <source>Battery discharge limit (% of DCL)</source>
       <translation>Limit vybíjení baterie (% DCL)</translation>
     </message>
@@ -10146,12 +10187,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>VE.Bus BMS automaticky vypne systém, když je to nutné k ochraně baterie. Ovládání systému ze zařízení GX proto není možné.</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="440"/>
+      <location filename="../../src/enums.cpp" line="517"/>
       <source>Numeric input</source>
       <translation>Číselný vstup</translation>
     </message>
     <message id="autotoggleswitch_disable_auto_mode_info">
-      <location filename="../../components/controls/AutoToggleButton.qml" line="34"/>
+      <location filename="../../components/controls/AutoToggleButton.qml" line="23"/>
       <source>Disable Auto mode first</source>
       <translation>Nejprve vypněte automatický režim</translation>
     </message>
@@ -10171,17 +10212,17 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Parametry mikrogridu</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="585"/>
+      <location filename="../../src/enums.cpp" line="662"/>
       <source>Hybrid droop</source>
       <translation>Hybridní kompenzace poklesu</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="588"/>
+      <location filename="../../src/enums.cpp" line="665"/>
       <source>Grid-following</source>
       <translation>Sledování sítě</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="591"/>
+      <location filename="../../src/enums.cpp" line="668"/>
       <source>Grid-forming</source>
       <translation>Tvorba sítě</translation>
     </message>
@@ -10295,11 +10336,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>UI Plugins</source>
       <translation>Zásuvné moduly uživatelského rozhraní</translation>
     </message>
-    <message id="devicelist_motordrive_motordirectioninverted">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="93"/>
-      <source>Motor Direction Inverted</source>
-      <translation>Opačný směr otáčení motoru</translation>
-    </message>
     <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
       <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
       <source>Scan for motor drives</source>
@@ -10351,7 +10387,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation type="unfinished">Nízko</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="515"/>
+      <location filename="../../src/enums.cpp" line="592"/>
       <source>Bypassed</source>
       <translation>Přemostěno</translation>
     </message>
@@ -10382,12 +10418,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Barva</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../components/CommonWords.qml" line="565"/>
       <source>Value must be greater than start value</source>
       <translation>Hodnota musí být větší než počáteční hodnota</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="571"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>Value must be lower than stop value</source>
       <translation>Hodnota musí být menší než koncová hodnota</translation>
     </message>
@@ -10409,18 +10445,18 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Žádná aktivní upozornění</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="449"/>
+      <location filename="../../src/enums.cpp" line="526"/>
       <source>RGB color wheel</source>
       <translation>Barevné kolo RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="453"/>
+      <location filename="../../src/enums.cpp" line="530"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>Barevné kolo CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="457"/>
+      <location filename="../../src/enums.cpp" line="534"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>Barevné kolo RGB + W</translation>
@@ -10511,7 +10547,7 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
       <translation>Zařízení %1 změnilo roli, seznam zařízení byl aktualizován</translation>
     </message>
     <message id="page_meteo_estimated_power">
-      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="80"/>
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="98"/>
       <source>Estimated power</source>
       <translation>Odhadovaný výkon</translation>
     </message>
@@ -10658,19 +10694,9 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
       <translation>Úroveň přístupu k portálu VRM</translation>
     </message>
     <message id="settings_firmware_check_timed_out">
-      <location filename="../../components/FirmwareUpdate.qml" line="207"/>
+      <location filename="../../components/FirmwareUpdate.qml" line="252"/>
       <source>Firmware check timed out</source>
       <translation>Časový limit kontroly firmwaru vypršel</translation>
-    </message>
-    <message id="devicelist_motordrive_motordirection">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="57"/>
-      <source>Motor Direction</source>
-      <translation>Směr motoru</translation>
-    </message>
-    <message id="devicelist_motordrive_motortorque">
-      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="64"/>
-      <source>Motor Torque</source>
-      <translation>Krouticí moment motoru</translation>
     </message>
     <message id="settings_units_mixed">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
@@ -10678,54 +10704,308 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
       <translation>Smíšené (AC ve Wattech, DC v Ampérech)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="486"/>
+      <location filename="../../src/enums.cpp" line="563"/>
       <source>Over temp, tripped</source>
       <translation>Přehřátí, vypnuto</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="503"/>
+      <location filename="../../src/enums.cpp" line="580"/>
       <source>Disabled</source>
       <translation type="unfinished">Deaktivováno</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="506"/>
+      <location filename="../../src/enums.cpp" line="583"/>
       <source>Disabled, tripped</source>
       <translation>Zakázáno, vypnuto</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="509"/>
+      <location filename="../../src/enums.cpp" line="586"/>
       <source>Disabled, over temp</source>
       <translation>Zakázáno, přehřátí</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="512"/>
+      <location filename="../../src/enums.cpp" line="589"/>
       <source>Disabled but on</source>
       <translation>Zakázáno, ale zapnuto</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="518"/>
+      <location filename="../../src/enums.cpp" line="595"/>
       <source>Bypassed, tripped</source>
       <translation>Přemostěno, vypnuto</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="521"/>
+      <location filename="../../src/enums.cpp" line="598"/>
       <source>Bypassed, over temp</source>
       <translation>Přemostěno, přehřátí</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="524"/>
+      <location filename="../../src/enums.cpp" line="601"/>
       <source>External control</source>
       <translation type="unfinished">Externí ovládání</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="527"/>
+      <location filename="../../src/enums.cpp" line="604"/>
       <source>External control, tripped</source>
       <translation>Externí ovládání, vypnuto</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="530"/>
+      <location filename="../../src/enums.cpp" line="607"/>
       <source>External control, over temp</source>
       <translation>Externí ovládání, přehřátí</translation>
+    </message>
+    <message id="page_meteo_configuration_required">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="23"/>
+      <source>Configuration required</source>
+      <translation>Je vyžadována konfigurace</translation>
+    </message>
+    <message id="page_meteo_config_caption">
+      <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="31"/>
+      <source>Setup is needed for power estimation. For instructions, open the QR code to scan it with your portable device.&lt;br /&gt;Or insert the link: %1</source>
+      <extracomment>%1 = url text</extracomment>
+      <translation>Pro odhad spotřeby je nutné nastavení. Pro instrukce otevřete QR kód a naskenujte jej přenosným zařízením.&lt;br /&gt;Nebo vložte odkaz: %1</translation>
+    </message>
+    <message id="ev_target_soc">
+      <location filename="../../pages/ev/EvPage.qml" line="25"/>
+      <source>Target state of charge</source>
+      <translation>Cílový stav nabití</translation>
+    </message>
+    <message id="ev_range">
+      <location filename="../../pages/ev/EvPage.qml" line="32"/>
+      <source>Range</source>
+      <translation>dojezd</translation>
+    </message>
+    <message id="ev_battery_capacity">
+      <location filename="../../pages/ev/EvPage.qml" line="40"/>
+      <source>Battery capacity</source>
+      <translation>Kapacita baterie</translation>
+    </message>
+    <message id="ev_charging_state">
+      <location filename="../../pages/ev/EvPage.qml" line="56"/>
+      <source>Charging state</source>
+      <translation>Stav nabíjení</translation>
+    </message>
+    <message id="ev_charging_state_not_charging">
+      <location filename="../../pages/ev/EvPage.qml" line="62"/>
+      <source>Not charging</source>
+      <translation>Nenabíjí se</translation>
+    </message>
+    <message id="ev_charging_state_low_power">
+      <location filename="../../pages/ev/EvPage.qml" line="65"/>
+      <source>Low power mode</source>
+      <translation>Režim nízké spotřeby</translation>
+    </message>
+    <message id="ev_charging_state_scheduled_charging">
+      <location filename="../../pages/ev/EvPage.qml" line="80"/>
+      <source>Scheduled charging</source>
+      <translation>Nabití podle rozvrhu</translation>
+    </message>
+    <message id="ev_at_site">
+      <location filename="../../pages/ev/EvPage.qml" line="91"/>
+      <source>At site</source>
+      <translation>Na místě</translation>
+    </message>
+    <message id="ev_vin">
+      <location filename="../../pages/ev/EvPage.qml" line="106"/>
+      <source>VIN</source>
+      <translation>VIN</translation>
+    </message>
+    <message id="ev_odometer">
+      <location filename="../../pages/ev/EvPage.qml" line="113"/>
+      <source>Odometer</source>
+      <translation>Počítadlo kilometrů</translation>
+    </message>
+    <message id="ev_nr_phases">
+      <location filename="../../pages/ev/EvPage.qml" line="139"/>
+      <source>Number of phases</source>
+      <translation>Počet fází</translation>
+    </message>
+    <message id="battery_individual_info">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
+      <source>Individual Battery Info</source>
+      <translation>Informace o jednotlivých bateriích</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_number_with_serial">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="38"/>
+      <source>Battery #%1 [%2]</source>
+      <extracomment>%1 = battery number, %2 = battery name</extracomment>
+      <translation>Baterie č. %1 [%2]</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_number">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="41"/>
+      <source>Battery #%1</source>
+      <extracomment>%1 = battery number</extracomment>
+      <translation>Baterie č. %1</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_info_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="72"/>
+      <source>Battery Info</source>
+      <translation>Informace o baterii</translation>
+    </message>
+    <message id="lynxionsystem_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
+      <source>Capacity</source>
+      <translation type="unfinished">Kapacita</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_measurements_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="106"/>
+      <source>Battery Measurements</source>
+      <translation>Měření na baterii</translation>
+    </message>
+    <message id="lynxionbatteryinfo_cell_measurements_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="131"/>
+      <source>Cell Measurements</source>
+      <translation>Měření článků</translation>
+    </message>
+    <message id="lynxionbatteryinfo_cell_number">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="155"/>
+      <source>Cell #%1</source>
+      <translation>Článek č. %1</translation>
+    </message>
+    <message id="settings_ess_grid_meter_required">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
+      <source>Grid meter required</source>
+      <translation>Je vyžadován měřič sítě</translation>
+    </message>
+    <message id="settings_ess_grid_meter_required_caption">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="80"/>
+      <source>A grid meter must be present for ESS operation. If not available, the system will switch to pass-through.</source>
+      <translation>Pro provoz ESS je nutný měřič sítě. Pokud není k dispozici, systém se přepne do režimu průchodu.</translation>
+    </message>
+    <message id="settings_ess_grid_meter_optional_caption">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="86"/>
+      <source>The system will use a grid meter when present, but fall back to internal measurements if the connection to the grid meter is lost.</source>
+      <translation>Systém použije měřič sítě, pokud je k dispozici, ale v případě ztráty připojení k měřiči sítě se vrátí k interním měřením.</translation>
+    </message>
+    <message id="settings_tcpip_ethernet_gateway_enabled">
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="130"/>
+      <source>Allow using ethernet for internet access</source>
+      <translation>Povolit použití Ethernetu pro přístup k internetu</translation>
+    </message>
+    <message id="settings_wifi_access_point">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="30"/>
+      <source>Access point</source>
+      <translation>Přístupový bod</translation>
+    </message>
+    <message id="settings_tcpip_wifi_gateway_enabled">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
+      <source>Allow using WiFi for internet access</source>
+      <translation>Povolit použití WiFi pro přístup k internetu</translation>
+    </message>
+    <message id="battery_status_overvoltage">
+      <location filename="../../src/enums.cpp" line="82"/>
+      <source>Overvoltage</source>
+      <translation>Přepětí</translation>
+    </message>
+    <message id="battery_status_undervoltage">
+      <location filename="../../src/enums.cpp" line="86"/>
+      <source>Undervoltage</source>
+      <translation>Podpětí</translation>
+    </message>
+    <message id="battery_status_low_temperature_atc">
+      <location filename="../../src/enums.cpp" line="90"/>
+      <source>Low Temperature (ATC)</source>
+      <translation>Nízká teplota (ATC)</translation>
+    </message>
+    <message id="battery_status_high_temperature_atc">
+      <location filename="../../src/enums.cpp" line="94"/>
+      <source>High Temperature (ATC)</source>
+      <translation>Vysoká teplota (ATC)</translation>
+    </message>
+    <message id="battery_status_cell_error">
+      <location filename="../../src/enums.cpp" line="98"/>
+      <source>Cell Error</source>
+      <translation>Chyba článku</translation>
+    </message>
+    <message id="battery_status_high_temperature_atd">
+      <location filename="../../src/enums.cpp" line="102"/>
+      <source>High Temperature (ATD)</source>
+      <translation>Vysoká teplota (ATD)</translation>
+    </message>
+    <message id="battery_status_high_cell_voltage">
+      <location filename="../../src/enums.cpp" line="106"/>
+      <source>High Cell Voltage</source>
+      <translation>Vysoké napětí článků</translation>
+    </message>
+    <message id="battery_status_update_failure">
+      <location filename="../../src/enums.cpp" line="110"/>
+      <source>Update Failure</source>
+      <translation>Chyba aktualizace</translation>
+    </message>
+    <message id="battery_status_charge_overcurrent_warning">
+      <location filename="../../src/enums.cpp" line="114"/>
+      <source>Charge Overcurrent Warning</source>
+      <translation>Varování před nadproudem při nabíjení</translation>
+    </message>
+    <message id="battery_status_charge_overcurrent_alarm">
+      <location filename="../../src/enums.cpp" line="118"/>
+      <source>Charge Overcurrent Alarm</source>
+      <translation>Alarm nadproudu při nabíjení</translation>
+    </message>
+    <message id="battery_status_discharge_overcurrent_warning">
+      <location filename="../../src/enums.cpp" line="122"/>
+      <source>Discharge Overcurrent Warning</source>
+      <translation>Varování před nadproudem při vybíjení</translation>
+    </message>
+    <message id="battery_status_discharge_overcurrent_alarm">
+      <location filename="../../src/enums.cpp" line="126"/>
+      <source>Discharge Overcurrent Alarm</source>
+      <translation>Alarm nadproudu při vybíjení</translation>
+    </message>
+    <message id="battery_status_low_cell_voltage">
+      <location filename="../../src/enums.cpp" line="130"/>
+      <source>Low Cell Voltage</source>
+      <translation>Nízké napětí článku</translation>
+    </message>
+    <message id="battery_status_low_temperature_atd">
+      <location filename="../../src/enums.cpp" line="134"/>
+      <source>Low Temperature (ATD)</source>
+      <translation>Nízká teplota (ATD)</translation>
+    </message>
+    <message id="devicelist_motordrive_motordirection">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="57"/>
+      <source>Motor direction</source>
+      <translation>Směr motoru</translation>
+    </message>
+    <message id="devicelist_motordrive_motortorque">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="64"/>
+      <source>Motor torque</source>
+      <translation>Krouticí moment motoru</translation>
+    </message>
+    <message id="devicelist_motordrive_motortemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="72"/>
+      <source>Motor temperature</source>
+      <translation>Teplota motoru</translation>
+    </message>
+    <message id="devicelist_motordrive_controllertemperature">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="86"/>
+      <source>Controller temperature</source>
+      <translation>Teplota ovladače</translation>
+    </message>
+    <message id="devicelist_motordrive_motordirectioninverted">
+      <location filename="../../pages/settings/devicelist/PageMotorDrive.qml" line="93"/>
+      <source>Motor direction inverted</source>
+      <translation>Opačný směr otáčení motoru</translation>
+    </message>
+    <message id="pagesettingsboatpage_edrive_with_vrm_instance">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="48"/>
+      <source>E-drive with VRM instance #%1</source>
+      <translation>E-pohon s VRM instancí #%1</translation>
+    </message>
+    <message id="pagesettingsboatpage_dual_drive_configuration">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="79"/>
+      <source>Dual-Drive Configuration</source>
+      <translation>Konfigurace s dvojitým pohonem</translation>
+    </message>
+    <message id="pagesettingsboatpage_multi_drive_left">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="85"/>
+      <source>Left E-drive</source>
+      <translation>Levý E-pohon</translation>
+    </message>
+    <message id="pagesettingsboatpage_multi_drive_right">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="93"/>
+      <source>Right E-drive</source>
+      <translation>Pravý E-pohon</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
@@ -10761,101 +11041,6 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
       <location filename="../../pages/OverviewPage.qml" line="490"/>
       <source>Overview</source>
       <translation type="unfinished">Přehled</translation>
-    </message>
-    <message id="ev_target_soc">
-      <location filename="../../pages/ev/EvPage.qml" line="25"/>
-      <source>Target state of charge</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_range">
-      <location filename="../../pages/ev/EvPage.qml" line="32"/>
-      <source>Range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_battery_capacity">
-      <location filename="../../pages/ev/EvPage.qml" line="40"/>
-      <source>Battery capacity</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_power">
-      <location filename="../../pages/ev/EvPage.qml" line="47"/>
-      <source>Power</source>
-      <translation type="unfinished">Výkon</translation>
-    </message>
-    <message id="ev_charging_state">
-      <location filename="../../pages/ev/EvPage.qml" line="56"/>
-      <source>Charging state</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_charging_state_not_charging">
-      <location filename="../../pages/ev/EvPage.qml" line="62"/>
-      <source>Not charging</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_charging_state_low_power">
-      <location filename="../../pages/ev/EvPage.qml" line="65"/>
-      <source>Low power mode</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_charging_state_charging">
-      <location filename="../../pages/ev/EvPage.qml" line="68"/>
-      <source>Charging</source>
-      <translation type="unfinished">Nabíjení</translation>
-    </message>
-    <message id="ev_charging_state_sustain">
-      <location filename="../../pages/ev/EvPage.qml" line="71"/>
-      <source>Sustain</source>
-      <translation type="unfinished">Udržování</translation>
-    </message>
-    <message id="ev_charging_state_wake_up">
-      <location filename="../../pages/ev/EvPage.qml" line="74"/>
-      <source>Wake up</source>
-      <translation type="unfinished">Probuďte se</translation>
-    </message>
-    <message id="ev_charging_state_discharging">
-      <location filename="../../pages/ev/EvPage.qml" line="77"/>
-      <source>Discharging</source>
-      <translation type="unfinished">vybíjení</translation>
-    </message>
-    <message id="ev_charging_state_scheduled_charging">
-      <location filename="../../pages/ev/EvPage.qml" line="80"/>
-      <source>Scheduled charging</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_charging_state_unknown">
-      <location filename="../../pages/ev/EvPage.qml" line="83"/>
-      <source>Unknown</source>
-      <translation type="unfinished">Neznámý</translation>
-    </message>
-    <message id="ev_at_site">
-      <location filename="../../pages/ev/EvPage.qml" line="91"/>
-      <source>At site</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_last_contact">
-      <location filename="../../pages/ev/EvPage.qml" line="98"/>
-      <source>Last contact</source>
-      <translation type="unfinished">Poslední kontakt</translation>
-    </message>
-    <message id="ev_vin">
-      <location filename="../../pages/ev/EvPage.qml" line="106"/>
-      <source>VIN</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_odometer">
-      <location filename="../../pages/ev/EvPage.qml" line="113"/>
-      <source>Odometer</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="122"/>
-      <source>Position</source>
-      <translation type="unfinished">Pozice</translation>
-    </message>
-    <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="139"/>
-      <source>Number of phases</source>
-      <translation type="unfinished"/>
     </message>
     <message id="settings_state">
       <location filename="../../pages/settings/PageCanbusStatus.qml" line="116"/>
@@ -10898,7 +11083,7 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
       <translation type="unfinished">Upozornění</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/switchableoutput.cpp" line="464"/>
+      <location filename="../../src/switchableoutput.cpp" line="462"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relé zařízení GX</translation>
     </message>
@@ -12393,146 +12578,146 @@ Zde můžete přidat další porty a ID jednotek pro vyhledávání FV střída�
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="120"/>
+      <location filename="../../src/main.cpp" line="121"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Použít zdroj dat D-Bus: připojte se k zadané adrese D-Bus.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="121"/>
+      <location filename="../../src/main.cpp" line="122"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>adresa</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="126"/>
+      <location filename="../../src/main.cpp" line="127"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Použít zdroj dat D-Bus: připojte se k výchozí adrese D-Bus</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="133"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Použít zdroj dat MQTT: připojte se k zadané adrese zprostředkovatele MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="133"/>
+      <location filename="../../src/main.cpp" line="134"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>adresa</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="140"/>
       <source>MQTT data source device portal id.</source>
       <translation>ID portálu zařízení zdroje dat MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="140"/>
+      <location filename="../../src/main.cpp" line="141"/>
       <source>portalId</source>
       <translation>ID portálu</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="146"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Úlomek webhostingu MQTT VRM</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="147"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>střep</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="152"/>
       <source>MQTT data source username</source>
       <translation>Uživatelské jméno zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="152"/>
+      <location filename="../../src/main.cpp" line="153"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>Uživatel</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="158"/>
       <source>MQTT data source password</source>
       <translation>Heslo zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="158"/>
+      <location filename="../../src/main.cpp" line="159"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>složit</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="164"/>
       <source>MQTT data source token</source>
       <translation>Token zdroje dat MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="164"/>
+      <location filename="../../src/main.cpp" line="165"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>žeton</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="169"/>
+      <location filename="../../src/main.cpp" line="170"/>
       <source>Enable FPS counter</source>
       <translation>Povolit čítač FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="174"/>
+      <location filename="../../src/main.cpp" line="175"/>
       <source>Skip splash screen</source>
       <translation>Přeskočit úvodní obrazovku</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="179"/>
+      <location filename="../../src/main.cpp" line="180"/>
       <source>Use mock data source for testing.</source>
       <translation>Pro testování použijte simulovaný zdroj dat.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="184"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>Name of mock configuration</source>
       <translation>Název simulované konfigurace</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="185"/>
+      <location filename="../../src/main.cpp" line="186"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="191"/>
+      <location filename="../../src/main.cpp" line="192"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Nastaveno na vypnutí simulovaných časovačů při spuštění</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>Node-RED URL</source>
       <translation>Adresa URL Node-RED</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="197"/>
+      <location filename="../../src/main.cpp" line="198"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="203"/>
       <source>Signal K URL</source>
       <translation>Adresa URL Signal K</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="203"/>
+      <location filename="../../src/main.cpp" line="204"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="209"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Barevné schéma (tmavé, světlé, automatické, výchozí)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="209"/>
+      <location filename="../../src/main.cpp" line="210"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>
