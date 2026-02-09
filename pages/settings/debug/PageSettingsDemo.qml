@@ -165,7 +165,7 @@ Page {
 				}
 
 				Timer {
-					running: root.isCurrentPage
+					running: root.isCurrentPage && Global.timersEnabled
 					interval: 3000
 					repeat: true
 					onTriggered: customDataObject.voltage = Math.random()

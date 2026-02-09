@@ -53,7 +53,7 @@ Item {
 
 			Timer {
 				interval: 500
-				running: dataItem.value > 0
+				running: dataItem.value > 0 && Global.timersEnabled
 				repeat: true
 				onTriggered: root._pulse = !root._pulse
 			}

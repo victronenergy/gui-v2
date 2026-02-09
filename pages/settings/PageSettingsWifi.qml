@@ -150,7 +150,7 @@ Page {
 	Timer {
 		id: scanTimer
 		interval: 10000
-		running: root.animationEnabled
+		running: Global.timersEnabled
 		repeat: true
 		triggeredOnStart: true
 		onTriggered: scanItem.setValue(1)

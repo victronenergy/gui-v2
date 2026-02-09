@@ -107,7 +107,8 @@ FocusScope {
 	}
 
 	// Revert to the start page when the application has been inactive for the period of time
-	// specified by the startPageTimeout.
+	// specified by the startPageTimeout.  Note that the timer should be running
+	// even if !Global.timersEnabled as the screen blank duration might be very short.
 	Timer {
 		running: !!Global.systemSettings
 				 && Global.systemSettings.startPageConfiguration.hasStartPage

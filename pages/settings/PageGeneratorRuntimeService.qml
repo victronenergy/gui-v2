@@ -120,7 +120,7 @@ Page {
 				preferredVisible: dataItem.valid && dataItem.value > 0
 
 				Timer {
-					running: parent.preferredVisible && root.animationEnabled
+					running: parent.preferredVisible && Global.timersEnabled
 					repeat: true
 					interval: 1000
 					onTriggered: {
