@@ -31,16 +31,16 @@ TestCase {
 	function test_simple_properties_data() {
 		return [
 			{
-				tag: "outputId - numeric",
+				tag: "channelId - numeric",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: { "State": 0 },
-				expected: { outputId: "1" },
+				expected: { channelId: "1" },
 			},
 			{
-				tag: "outputId - letter",
+				tag: "channelId - letter",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/A",
 				outputProperties: { "State": 0 },
-				expected: { outputId: "A" },
+				expected: { channelId: "A" },
 			},
 
 			{
@@ -180,7 +180,7 @@ TestCase {
 	function test_simple_properties(data) {
 		// Test defaults
 		compare(output.uid, "")
-		compare(output.outputId, "")
+		compare(output.channelId, "")
 		compare(output.serviceUid, "")
 		compare(output.formattedName, "")
 		compare(output.state, 0)
@@ -204,7 +204,7 @@ TestCase {
 
 		// Test defaults again
 		compare(output.uid, "")
-		compare(output.outputId, "")
+		compare(output.channelId, "")
 		compare(output.serviceUid, "")
 		compare(output.formattedName, "")
 		compare(output.state, 0)

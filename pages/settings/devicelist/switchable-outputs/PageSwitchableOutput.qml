@@ -97,7 +97,7 @@ Page {
 					let options = []
 					for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
 						if (root.switchableOutput.validTypes & (1 << i)) {
-							options.push({ display: VenusOS.switchableOutput_typeToText(i, root.switchableOutput.outputId), value: i })
+							options.push({ display: VenusOS.switchableOutput_typeToText(i, root.switchableOutput.channelId), value: i })
 						}
 					}
 					return options
@@ -107,7 +107,7 @@ Page {
 				// Set the fallback text explicitly, in case the output Type is not supported by its
 				// ValidTypes, which means the current Type is not one of the listed options and
 				// thus cannot be displayed by ListRadioButtonGroup.
-				defaultSecondaryText: VenusOS.switchableOutput_typeToText(root.switchableOutput.type, root.switchableOutput.outputId)
+				defaultSecondaryText: VenusOS.switchableOutput_typeToText(root.switchableOutput.type, root.switchableOutput.channelId)
 			}
 
 			ListRadioButtonGroup {
@@ -142,13 +142,13 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
 				optionModel: [
-					{ display: CommonWords.off, value: VenusOS.SwitchableOutput_ShowUiControl_Off },
+					{ display: CommonWords.off, value: VenusOS.IOChannel_ShowUI_Off },
 					//% "Always"
-					{ display: qsTrId("page_switchable_output_show_always"), value: VenusOS.SwitchableOutput_ShowUiControl_Always },
+					{ display: qsTrId("page_switchable_output_show_always"), value: VenusOS.IOChannel_ShowUI_Always },
 					//% "Only local"
-					{ display: qsTrId("page_switchable_output_show_local"), value: VenusOS.SwitchableOutput_ShowUiControl_Local },
+					{ display: qsTrId("page_switchable_output_show_local"), value: VenusOS.IOChannel_ShowUI_Local },
 					//% "Only on VRM"
-					{ display: qsTrId("page_switchable_output_show_vrm"), value: VenusOS.SwitchableOutput_ShowUiControl_Remote }
+					{ display: qsTrId("page_switchable_output_show_vrm"), value: VenusOS.IOChannel_ShowUI_Remote }
 				]
 			}
 
