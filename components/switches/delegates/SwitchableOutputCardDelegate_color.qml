@@ -15,9 +15,7 @@ FocusScope {
 	required property SwitchableOutput switchableOutput
 	property QtObject _selectorDialog
 
-	enabled: root.switchableOutput.status !== VenusOS.SwitchableOutput_Status_Disabled
 	focus: true
-
 	KeyNavigationHighlight.active: activeFocus && !sliderScope.activeFocus && !slider.activeFocus && !colorButton.activeFocus
 
 	// When Space is pressed: focus the slider. From there, user can press Space again to enter

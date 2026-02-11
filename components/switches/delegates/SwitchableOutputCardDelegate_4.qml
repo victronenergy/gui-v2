@@ -14,7 +14,6 @@ FocusScope {
 
 	required property SwitchableOutput switchableOutput
 
-	enabled: root.switchableOutput.status !== VenusOS.SwitchableOutput_Status_Disabled
 	focus: true
 	KeyNavigationHighlight.active: activeFocus
 

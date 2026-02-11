@@ -68,6 +68,7 @@ ControlCard {
 							width: Qt.binding(function() { return outputGrid.cellWidth }),
 							height: Qt.binding(function() { return outputGrid.cellHeight }),
 							switchableOutput: modelData,
+							enabled: Qt.binding(function() { return !(modelData.status & VenusOS.SwitchableOutput_Status_Disabled) })
 						})
 					} else {
 						source = ""
