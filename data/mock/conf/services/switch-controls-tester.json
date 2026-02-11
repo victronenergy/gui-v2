@@ -55,7 +55,7 @@
         "/SwitchableOutput/toggle_2/Settings/ValidFunctions": 2,
         "/SwitchableOutput/toggle_2/Settings/ValidTypes": 16383,
         "/SwitchableOutput/toggle_2/State": 0,
-        "/SwitchableOutput/toggle_2/Status": 32,
+        "/SwitchableOutput/toggle_2/Status": 34,
 
         "/SwitchableOutput/toggle_3/Name": "01c. Toggle, on, disabled",
         "/SwitchableOutput/toggle_3/Settings/CustomName": "",
@@ -66,7 +66,7 @@
         "/SwitchableOutput/toggle_3/Settings/ValidFunctions": 2,
         "/SwitchableOutput/toggle_3/Settings/ValidTypes": 16383,
         "/SwitchableOutput/toggle_3/State": 1,
-        "/SwitchableOutput/toggle_3/Status": 32,
+        "/SwitchableOutput/toggle_3/Status": 41,
 
         "/SwitchableOutput/dimming_1/Dimming": 2,
         "/SwitchableOutput/dimming_1/Name": "02a. Dimming",
@@ -90,7 +90,7 @@
         "/SwitchableOutput/dimming_2/Settings/ValidFunctions": 2,
         "/SwitchableOutput/dimming_2/Settings/ValidTypes": 16383,
         "/SwitchableOutput/dimming_2/State": 1,
-        "/SwitchableOutput/dimming_2/Status": 32,
+        "/SwitchableOutput/dimming_2/Status": 36,
 
         "/SwitchableOutput/dimming_3/Dimming": 50,
         "/SwitchableOutput/dimming_3/Name": "02c. Dimming, off, disabled",
