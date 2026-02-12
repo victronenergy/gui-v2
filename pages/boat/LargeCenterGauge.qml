@@ -108,7 +108,7 @@ Item {
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color_font_primary
-			font.pixelSize: motorDriveGauges.visible || rpmLabel.visible
+			font.pixelSize: motorDriveGauges.visible || rpmLabel.visible || dualRpmLabels.visible
 							? Theme.font_boatPage_speed_pixelSize
 							: Theme.font_boatPage_speed_pixelSize_large
 			font.weight: Font.Medium
