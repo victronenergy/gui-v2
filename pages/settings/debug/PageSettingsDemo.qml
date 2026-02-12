@@ -427,15 +427,10 @@ Page {
 					width: parent ? parent.width : 0
 					topPadding: spacing
 
-					BaseListItem {
-						width: parent.width
-						height: footerRectangle.height + (2 * Theme.geometry_listItem_content_verticalMargin)
-
-						Rectangle {
-							id: footerRectangle
-							anchors.centerIn: parent
-							width: 120
-							height: 80
+					ListItemControl {
+						contentItem: Rectangle {
+							implicitWidth: 120
+							implicitHeight: 80
 							color: Theme.color_ok
 						}
 					}
