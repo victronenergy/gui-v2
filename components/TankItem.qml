@@ -8,7 +8,7 @@ import Victron.VenusOS
 import Victron.Gauges
 import QtQuick.Controls.impl as CP
 
-BaseListItem {
+Rectangle {
 	id: root
 
 	property int status
@@ -22,10 +22,15 @@ BaseListItem {
 	readonly property var tankProperties: Gauges.tankProperties(fluidType)
 	readonly property color backgroundColor: status === VenusOS.Tank_Status_Ok ? Theme.color_levelsPage_gauge_backgroundColor : Theme.color_levelsPage_panel_border_color
 
-	background.color: backgroundColor
-	background.radius: Theme.geometry_levelsPage_panel_radius
-	background.border.width: Theme.geometry_levelsPage_panel_border_width
-	background.border.color: Theme.color_levelsPage_panel_border_color
+	color: backgroundColor
+	radius: Theme.geometry_levelsPage_panel_radius
+	border.width: Theme.geometry_levelsPage_panel_border_width
+	border.color: Theme.color_levelsPage_panel_border_color
+
+	// Allow key navigation to this item.
+	focus: true
+	focusPolicy: Qt.TabFocus
+	KeyNavigationHighlight.active: root.activeFocus
 
 	GaugeHeader {
 		id: header

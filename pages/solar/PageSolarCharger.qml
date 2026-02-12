@@ -130,14 +130,14 @@ DevicePage {
 			unit: VenusOS.Units_Watt
 		}
 
-		BaseListItem {
-			width: parent ? parent.width : 0
-			height: trackerTable.y + trackerTable.height
+		ListItemControl {
+			topPadding: 0
+			bottomPadding: bottomInset
+			leftPadding: 0
+			rightPadding: 0
 			preferredVisible: root.trackerCount > 1
 
-			QuantityTable {
-				id: trackerTable
-				width: parent.width
+			contentItem: QuantityTable {
 				model: root.trackerCount > 1 ? root.trackerCount : 0
 				header: count > 0 ? tableHeaderComponent : null
 				delegate: QuantityTable.TableRow {

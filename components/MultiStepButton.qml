@@ -18,7 +18,7 @@ BaseListView {
 	// Expand clickable area vertically for On/Off and delegate buttons.
 	readonly property real verticalPressMargin: Theme.geometry_button_touch_verticalMargin
 
-	readonly property real _totalDelegateWidth: width - headerItem.width
+	readonly property real _totalDelegateWidth: width - (headerItem?.width ?? 0) - Theme.geometry_button_border_width
 
 	signal indexClicked(index: int)
 	signal onClicked()
@@ -31,29 +31,34 @@ BaseListView {
 	focus: false
 	interactive: false
 
-	delegate: BaseListItem {
+	// Background rectangle
+	Rectangle {
+		anchors.horizontalCenter: parent.horizontalCenter
+		width: parent.width - (2 * root.horizontalPressMargin)
+		height: Theme.geometry_switchableoutput_control_height
+		color: enabled ? Theme.color_ok : Theme.color_font_disabled
+		radius: Theme.geometry_button_radius
+		z: -1
+	}
+
+	// Each button expands vertically beyond the delegate bounds, so that presses above and
+	// below the button still trigger the click action. The last button also expands its
+	// clickable area to the right.
+	delegate: FocusScope {
 		readonly property bool lastListItem: index === root.model.length - 1
 
-		width: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
-		height: Theme.geometry_switchableoutput_control_height
+		implicitWidth: numberButton.width
+		implicitHeight: numberButton.height
 
-		// background border color
-		Rectangle {
-			anchors.fill: parent
-			topRightRadius: lastListItem ? Theme.geometry_button_radius : 0
-			bottomRightRadius: lastListItem ? Theme.geometry_button_radius : 0
-			color: !root.enabled ? Theme.color_gray4
-				: root.checked ? Theme.color_ok
-				: Theme.color_button_off_background
-		}
+		// Allow Utils.acceptsKeyNavigation() to accept moving focus to this item.
+		focusPolicy: root.checked ? Qt.TabFocus : Qt.NoFocus
 
-		// Each button expands vertically beyond the delegate bounds, so that presses above and
-		// below the button still trigger the click action. The last button also expands its
-		// clickable area to the right.
 		Button {
+			id: numberButton
+
 			y: -root.verticalPressMargin
-			defaultBackgroundWidth: parent.width - Theme.geometry_button_border_width
-			defaultBackgroundHeight: parent.height - (Theme.geometry_button_border_width * 2)
+			defaultBackgroundWidth: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
+			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height - (2 * Theme.geometry_button_border_width)
 			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			rightInset: lastListItem ? root.horizontalPressMargin : 0
@@ -63,17 +68,17 @@ BaseListView {
 			bottomPadding: bottomInset
 			rightPadding: rightInset
 
-			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: 0
-			bottomLeftRadius: 0
 			topRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
+			bottomLeftRadius: 0
 			bottomRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
 			borderWidth: 0
-
+			flat: false
 			text: modelData.text
 			font.pixelSize: Theme.font_size_body1
-			flat: false
-			color: root.enabled ? checked ? Theme.color_button_down_text : Theme.color_font_primary : Theme.color_font_disabled
+			color: root.enabled
+					? (checked ? Theme.color_button_down_text : Theme.color_font_primary)
+					: Theme.color_font_disabled
 			backgroundColor: !root.enabled ? (checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
 					: checked ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
 					: Theme.color_darkOk
@@ -85,32 +90,18 @@ BaseListView {
 		}
 	}
 
-	header: BaseListItem  {
-		width: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
-			   + Theme.geometry_miniSlider_separator_width + (Theme.geometry_miniSlider_text_padding * 2)
-			   + root.horizontalPressMargin
-		height: Theme.geometry_switchableoutput_control_height
+	header: FocusScope {
+		implicitWidth: stateToggleButton.width
+		implicitHeight: stateToggleButton.height
 
-		// background border color
-		Rectangle {
-			id: backgroundRect
-			anchors {
-				fill: parent
-				leftMargin: root.horizontalPressMargin
-			}
-			topLeftRadius: Theme.geometry_slider_groove_radius
-			bottomLeftRadius: Theme.geometry_slider_groove_radius
-			topRightRadius: 0
-			bottomRightRadius: 0
-			color: !root.enabled ? Theme.color_gray4
-				: root.checked ? Theme.color_ok
-				: Theme.color_button_off_background
-		}
+		// Allow Utils.acceptsKeyNavigation() to accept moving focus to this item.
+		focusPolicy: Qt.TabFocus
 
-		Button {
+		MiniToggleButton {
+			id: stateToggleButton
+
 			y: -root.verticalPressMargin
-			defaultBackgroundWidth: parent.width - root.horizontalPressMargin - Theme.geometry_button_border_width
-			defaultBackgroundHeight: parent.height - (Theme.geometry_button_border_width * 2)
+			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height - (2 * Theme.geometry_button_border_width)
 			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			leftInset: root.horizontalPressMargin + Theme.geometry_button_border_width
@@ -120,36 +111,20 @@ BaseListView {
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 
-			radius: 0 // Override property value intitialisation from base class to ensure PressEffect renders correctly
 			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
 			topRightRadius: 0
+			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
 			bottomRightRadius: 0
-
-			text: root.checked ? CommonWords.on : CommonWords.off
-			font.pixelSize: Theme.font_size_body1
 			borderWidth: 0
 			flat: false
+			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 			backgroundColor: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
+			checked: root.checked
 			focus: true
+			separatorColor: enabled ? Theme.color_multistepbutton_separator : Theme.color_font_disabled
+			separatorVisible: root.currentIndex !== 0
 
 			onClicked: root.checked ? root.offClicked() : root.onClicked()
-		}
-
-		Rectangle {
-			anchors.right: parent.right
-			anchors.verticalCenter: parent.verticalCenter
-			width: Theme.geometry_miniSlider_separator_width
-			height: parent.height - (Theme.geometry_miniSlider_decorator_vertical_padding * 2)
-			radius: Theme.geometry_miniSlider_separator_width / 2
-			visible: currentIndex > 0
-			color: root.enabled ? Theme.color_multistepbutton_separator : Theme.color_background_disabled
-		}
-
-		TextMetrics {
-			id: labelTextMetrics
-			font.pixelSize: Theme.font_size_body1
-			text: (CommonWords.on.length > CommonWords.off.length) ? CommonWords.on : CommonWords.off
 		}
 	}
 

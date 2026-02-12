@@ -7,14 +7,18 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-BaseListItem {
+FocusScope {
 	property alias icon: icon
 	property alias title: title
 	property alias status: status
 
 	implicitWidth: Theme.geometry_controlCard_maximumWidth
 	implicitHeight: parent ? parent.height : 0
-	KeyNavigationHighlight.active: false
+	focus: true
+
+	ListItemBackground {
+		anchors.fill: parent
+	}
 
 	CP.ColorImage {
 		id: icon
