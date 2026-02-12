@@ -41,7 +41,7 @@ CT.Button {
 	background: Rectangle {
 		id: backgroundRect
 
-		implicitHeight: Theme.geometry_switchableoutput_control_height
+		implicitHeight: Theme.geometry_iochannel_control_height
 		color: root.enabled ? (root.down ? Theme.color_ok : Theme.color_darkOk) : Theme.color_background_disabled
 		border.width: Theme.geometry_button_border_width
 		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
