@@ -18,8 +18,9 @@ DeviceListDelegate {
 			return ""
 		}
 	}
-
-	secondaryText: VenusOS.switch_deviceStateToText(state.value)
+	quantityModel: QuantityObjectModel {
+		QuantityObject { object: state; key: "textValue"; unit: VenusOS.Units_None }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitch.qml", {
@@ -29,6 +30,9 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: state
+
+		readonly property string textValue: VenusOS.switch_deviceStateToText(value)
+
 		uid: root.device.serviceUid + "/State"
 	}
 }

@@ -103,7 +103,7 @@ Page {
 								placeholderText: qsTrId("settings_batteries_enter_name")
 								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
 								preferredVisible: dataItem.valid
-								textField.maximumLength: 32
+								maximumLength: 32
 							}
 						}
 					}

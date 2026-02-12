@@ -64,17 +64,8 @@ ControlCard {
 		checked: generator.autoStart
 		writeAccessLevel: VenusOS.User_AccessType_User
 		flat: true
-		bottomContent.children: [
-			PrimaryListLabel {
-				//% "Start and stop the generator based on the configured autostart conditions."
-				text: qsTrId("controlcard_generator_autostart_conditions")
-				color: Theme.color_font_secondary
-				font.pixelSize: Theme.font_size_caption
-				topPadding: 0
-				leftPadding: autostartSwitch.leftPadding
-				rightPadding: autostartSwitch.rightPadding
-			}
-		]
+		//% "Start and stop the generator based on the configured autostart conditions."
+		caption: qsTrId("controlcard_generator_autostart_conditions")
 
 		onClicked: {
 			if (!checked) {

@@ -4,12 +4,14 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
 	id: root
 
 	property string gateway: "can0"
+	property bool _showStateGroup
 
 	function _percentage(count, total) {
 		if (!total) {
@@ -38,7 +40,7 @@ Page {
 			}
 			const stats = json[0]
 
-			stateGroup.preferredVisible = stats.linkinfo !== undefined
+			root._showStateGroup = stats.linkinfo !== undefined
 			if (stats.linkinfo) {
 				stateData.state = stats.linkinfo.info_data.state
 				if (stats.linkinfo.info_data.berr_counter !== undefined) {
@@ -109,73 +111,103 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItem {
+			ListItemControl {
 				id: stateGroup
 
-				//% "State"
-				text: qsTrId("settings_state")
-				content.children: [
-					Column {
-						QuantityRow {
-							model: QuantityObjectModel {
-								QuantityObject { object: stateData; key: "state" }
-								QuantityObject { object: stateData; key: "tec" }
-								QuantityObject { object: stateData; key: "rec" }
-							}
-						}
-						QuantityRow {
-							visible: busOffCountersData.hasData
-							model: QuantityObjectModel {
-								QuantityObject { object: busOffCountersData; key: "busOff" }
-								QuantityObject { object: busOffCountersData; key: "errPassive" }
-								QuantityObject { object: busOffCountersData; key: "busWarn" }
-							}
-						}
+				preferredVisible: root._showStateGroup
+				contentItem: GridLayout {
+					columns: 2
+					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					columnSpacing: Theme.geometry_listItem_content_spacing
+
+					Label {
+						text: CommonWords.state
+						font: stateGroup.font
+
+						Layout.alignment: Qt.AlignTop
+						Layout.rowSpan: 2
 					}
-				]
+					QuantityRow {
+						model: QuantityObjectModel {
+							QuantityObject { object: stateData; key: "state" }
+							QuantityObject { object: stateData; key: "tec" }
+							QuantityObject { object: stateData; key: "rec" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+					QuantityRow {
+						visible: busOffCountersData.hasData
+						model: QuantityObjectModel {
+							QuantityObject { object: busOffCountersData; key: "busOff" }
+							QuantityObject { object: busOffCountersData; key: "errPassive" }
+							QuantityObject { object: busOffCountersData; key: "busWarn" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+				}
 			}
 
 			ListQuantityGroup {
 				id: rxGroup
 
-				text: "RX"
-				content.children: [
-					Column {
-						QuantityRow {
-							model: QuantityObjectModel {
-								QuantityObject { object: rxGroupData; key: "packets" }
-								QuantityObject { object: rxGroupData; key: "dropped" }
-							}
-						}
-						QuantityRow {
-							model: QuantityObjectModel {
-								QuantityObject { object: rxGroupData; key: "overruns" }
-								QuantityObject { object: rxGroupData; key: "errors" }
-							}
-						}
+				contentItem: GridLayout {
+					columns: 2
+					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					columnSpacing: Theme.geometry_listItem_content_spacing
+
+					Label {
+						text: "RX"
+						font: rxGroup.font
+
+						Layout.alignment: Qt.AlignTop
+						Layout.rowSpan: 2
 					}
-				]
+					QuantityRow {
+						model: QuantityObjectModel {
+							QuantityObject { object: rxGroupData; key: "packets" }
+							QuantityObject { object: rxGroupData; key: "dropped" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+					QuantityRow {
+						model: QuantityObjectModel {
+							QuantityObject { object: rxGroupData; key: "overruns" }
+							QuantityObject { object: rxGroupData; key: "errors" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+				}
 			}
 
 			ListQuantityGroup {
 				id: txGroup
 
-				text: "TX"
-				content.children: [
-					Column {
-						QuantityRow {
-							model: QuantityObjectModel {
-								QuantityObject { object: txGroupData; key: "packets" }
-								QuantityObject { object: txGroupData; key: "dropped" }
-							}
-						}
-						QuantityRow {
-							model: QuantityObjectModel {
-								QuantityObject { object: txGroupData; key: "errors" }
-							}
-						}
+				contentItem: GridLayout {
+					columns: 2
+					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					columnSpacing: Theme.geometry_listItem_content_spacing
+
+					Label {
+						text: "TX"
+						font: txGroup.font
+
+						Layout.alignment: Qt.AlignTop
+						Layout.rowSpan: 2
 					}
-				]
+					QuantityRow {
+						model: QuantityObjectModel {
+							QuantityObject { object: txGroupData; key: "packets" }
+							QuantityObject { object: txGroupData; key: "dropped" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+					QuantityRow {
+						model: QuantityObjectModel {
+							QuantityObject { object: txGroupData; key: "errors" }
+						}
+						Layout.alignment: Qt.AlignRight
+					}
+				}
 			}
 		}
 	}

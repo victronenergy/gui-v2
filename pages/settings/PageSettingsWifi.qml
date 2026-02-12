@@ -66,21 +66,39 @@ Page {
 				}
 			}
 
-			ListPasswordField {
+			ListTextField {
+				id: accessPointPassword
+
 				//% "Access Point password"
 				text: qsTrId("settings_wifi_access_point_password")
+				rightPadding: confirmButton.width + spacing + horizontalContentPadding
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: accessPoint.valid
 				echoMode: TextInput.Normal // password is shown on entry, but server will return it as obfuscated asterisks
+				validateOnFocusLost: false // don't validate until 'Confirm' is clicked
+				placeholderText: CommonWords.enter_password
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/AccessPointPassword"
 				validateInput: function() {
-					const length = textField.text.length
+					const length = secondaryText.length
 					if ((length > 0 && length < 10) || length > 63) {
 						//% "Password length must be either 0 or between 10 and 63 characters long"
 						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("page_settings_wifi_invalid_password"))
 					}
 					//% "Password updated"
 					return Utils.validationResult(VenusOS.Notification_Info, qsTrId("page_settings_wifi_password_updated"))
+				}
+
+				ListItemButton {
+					id: confirmButton
+
+					anchors {
+						right: parent.right
+						rightMargin: accessPointPassword.horizontalContentPadding
+						verticalCenter: parent.verticalCenter
+					}
+					text: CommonWords.confirm
+					focusPolicy: Qt.NoFocus
+					onClicked: accessPointPassword.runValidation(VenusOS.InputValidation_ValidateAndSave)
 				}
 			}
 
@@ -119,12 +137,16 @@ Page {
 			//% "[Hidden]"
 			text: model.network ? model.network : qsTrId("settings_tcpip_hidden")
 			secondaryText: Utils.connmanServiceState(model.state)
-			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
+
+			// Move the text and arrow icon to the right of the checkmark icon space
+			leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				+ Theme.geometry_icon_size_medium
+				+ spacing
 
 			CP.ColorImage {
-				parent: accessPointDelegate.primaryLabel
 				anchors {
 					left: parent.left
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"

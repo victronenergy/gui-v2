@@ -14,26 +14,14 @@ T.RangeSlider {
 	property color firstColor: "transparent"
 	property color secondColor: "transparent"
 
-	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-							first.implicitHandleWidth + leftPadding + rightPadding,
-							second.implicitHandleWidth + leftPadding + rightPadding)
-	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-							 first.implicitHandleHeight + topPadding + bottomPadding,
-							 second.implicitHandleHeight + topPadding + bottomPadding)
-
-	padding: 6
+	implicitWidth: implicitBackgroundWidth + leftInset + rightInset
+	implicitHeight: implicitBackgroundHeight + topInset + bottomInset
 
 	background: Rectangle {
-		anchors {
-			left: parent.left
-			leftMargin: root.leftPadding
-			top: parent.top
-			topMargin: root.topPadding + root.availableHeight / 2 - height / 2
-		}
-		implicitWidth: 4 * Theme.geometry_switch_indicator_width
+		x: root.leftPadding
+		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
+		implicitWidth: Theme.geometry_slider_groove_width
 		implicitHeight: Theme.geometry_slider_groove_height
-		width: root.availableWidth
-		height: Theme.geometry_slider_groove_height
 		radius: Theme.geometry_slider_groove_radius
 		color: Theme.color_darkOk
 

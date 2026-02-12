@@ -8,7 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-BaseListItem {
+ListItemControl {
 	id: root
 
 	required property string name
@@ -23,9 +23,6 @@ BaseListItem {
 	property bool unitAmps: false
 
 	signal clicked
-
-	width: parent?.width ?? 0
-	height: Theme.geometry_loadListPage_item_height
 
 	component QuantityColumn : Column {
 		property alias title: quantityTitle.text
@@ -49,14 +46,11 @@ BaseListItem {
 		}
 	}
 
-	RowLayout {
-		width: parent.width
-		height: parent.height
+	contentItem: RowLayout {
 		spacing: 0
 
 		Column {
 			Layout.fillWidth: true
-			Layout.leftMargin: Theme.geometry_listItem_content_horizontalMargin
 			Layout.rightMargin: root.columnSpacing
 			spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
@@ -94,23 +88,19 @@ BaseListItem {
 		}
 
 		CP.ColorImage {
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
 			source: "qrc:/images/icon_arrow_32.svg"
 			rotation: 180
-			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			opacity: pressArea.enabled ? 1 : 0
+			color: Theme.color_listItem_forwardIcon
 		}
 	}
 
-	Keys.onSpacePressed: pressArea.clicked(null)
-	Keys.onRightPressed: pressArea.clicked(null)
-	Keys.enabled: Global.keyNavigationEnabled
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent
-		radius: parent.background.radius
-		onClicked: root.clicked()
+	background: ListItemBackground {
+		ListPressArea {
+			anchors.fill: parent
+			onClicked: root.clicked()
+		}
 	}
+
+	Keys.onSpacePressed: clicked()
+	Keys.onRightPressed: clicked()
 }

@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListItem {
+ListQuantityGroup {
 	id: root
 
 	property string bindPrefix
@@ -15,60 +15,68 @@ ListItem {
 	property bool errorItem: false
 	property string alarmSuffix
 
-	VeBusDeviceAlarmGroup {
-		id: alarmGroup
-
-		bindPrefix: root.bindPrefix
-		alarmSuffix: root.alarmSuffix
-		errorItem: root.errorItem
-		numOfPhases: root.numOfPhases
+	function getDisplayText(value) {
+		switch (value) {
+		case 0:
+			return CommonWords.ok
+		case 1:
+			//% "Warning"
+			return qsTrId("vebus_device_alarm_group_warning")
+		case 2:
+			return errorItem ? CommonWords.error : CommonWords.alarm
+		default:
+			return "--"
+		}
 	}
 
-	content.children: [
-		Repeater {
-			id: repeater
+	model: QuantityObjectModel {
+		filterType: QuantityObjectModel.HasValue
 
-			model: alarmGroup.alarms
-
-			delegate: Label {
-				id: label
-
-				visible: {
-					if (index === 0) {
-						// Note: multi's connected to the CAN-bus still report these and don't
-						// report per phase alarms, so hide it if per phase L1 is available.
-						return modelData.valid && !alarmGroup.phase1Alarm.valid
-					} else if (index === 1) {
-						return modelData.valid
-					} else {
-						return modelData.valid && root.multiPhase && numOfPhases >= index
-					}
-				}
-				anchors.verticalCenter: parent.verticalCenter
-				width: Math.max(
-						   (separator.visible
-							? implicitWidth + root.content.spacing
-							: implicitWidth),
-						   Theme.geometry_veBusAlarm_minimumDelegateWidth)
-				font.pixelSize: Theme.font_size_body2
-				color: Theme.color_listItem_secondaryText
-				text: modelData === undefined ? "--" : modelData.displayText
-				horizontalAlignment: separator.visible ? Text.AlignHCenter : Text.AlignRight
-				elide: Text.ElideRight
-
-				Rectangle {
-					id: separator
-
-					anchors {
-						right: parent.right
-						rightMargin: -root.content.spacing / 2
-					}
-					width: Theme.geometry_listItem_separator_width
-					height: parent.implicitHeight
-					color: Theme.color_listItem_separator
-					visible: model.index !== repeater.count - 1 && repeater.itemAt(index + 1).visible
-				}
-			}
+		QuantityObject {
+			// Note: multi's connected to the CAN-bus still report these and don't
+			// report per phase alarms, so hide it if per phase L1 is available.
+			object: mainAlarm.valid && !phase1Alarm.valid ? mainAlarm : null
+			key: "displayText"
+			unit: VenusOS.Units_None
 		}
-	]
+		QuantityObject {
+			object: phase1Alarm.valid ? phase1Alarm : null
+			key: "displayText"
+			unit: VenusOS.Units_None
+		}
+		QuantityObject {
+			object: phase2Alarm.valid && root.multiPhase && numOfPhases >= 2 ? phase2Alarm : null
+			key: "displayText"
+			unit: VenusOS.Units_None
+		}
+		QuantityObject {
+			object: phase3Alarm.valid && root.multiPhase && numOfPhases >= 3 ? phase3Alarm : null
+			key: "displayText"
+			unit: VenusOS.Units_None
+		}
+	}
+
+	VeQuickItem {
+		id: mainAlarm
+		readonly property string displayText: getDisplayText(value)
+		uid: bindPrefix + "/Alarms" + alarmSuffix
+	}
+
+	VeQuickItem {
+		id: phase1Alarm
+		readonly property string displayText: (numOfPhases === 1 ? "" : "L1: ") + getDisplayText(value)
+		uid: bindPrefix + "/Alarms/L1" + alarmSuffix
+	}
+
+	VeQuickItem {
+		id: phase2Alarm
+		readonly property string displayText: "L2: " + getDisplayText(value)
+		uid: bindPrefix + "/Alarms/L2" + alarmSuffix
+	}
+
+	VeQuickItem {
+		id: phase3Alarm
+		readonly property string displayText: "L3: " + getDisplayText(value)
+		uid: bindPrefix + "/Alarms/L3" + alarmSuffix
+	}
 }

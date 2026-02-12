@@ -19,15 +19,18 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			BaseListItem {
-				width: parent ? parent.width : 0
-				height: phaseTable.y + phaseTable.height
+		header: ListItemControl {
+			bottomInset: Theme.geometry_gradientList_spacing
+			topPadding: 0
+			bottomPadding: bottomInset
+			leftPadding: 0
+			contentItem: Item {
+				implicitWidth: phaseSummary.width
+				implicitHeight: phaseTable.y + phaseTable.height
 
 				QuantityTableSummary {
 					id: phaseSummary
 
-					width: parent.width
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 					summaryHeaderText: pvInverter.statusCode >= 0 ? CommonWords.status : ""
 					summaryModel: [
@@ -52,7 +55,6 @@ Page {
 						top: phaseSummary.bottom
 						topMargin: Theme.geometry_gradientList_spacing
 					}
-					width: phaseSummary.width
 					visible: pvInverter.phases.count > 1
 					metricsFontSize: phaseSummary.metricsFontSize
 					columnSpacing: phaseSummary.columnSpacing
@@ -77,7 +79,9 @@ Page {
 					}
 				}
 			}
+		}
 
+		model: VisibleItemModel {
 			ListPvInverterPositionRadioButtonGroup {
 				dataItem.uid: pvInverter.serviceUid + "/Position"
 				preferredVisible: (!positionIsAdjustable.valid || positionIsAdjustable.value === 1) ? dataItem.valid : false
@@ -101,7 +105,7 @@ Page {
 			ListAcInError {
 				text: CommonWords.error
 				bindPrefix: pvInverter.serviceUid
-				secondaryLabel.color: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
+				secondaryTextColor: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
 			}
 
 			ListNavigation {

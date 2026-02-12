@@ -17,10 +17,14 @@ DevicePage {
 
 	serviceUid: bindPrefix
 
-	settingsModel: VisibleItemModel {
-		BaseListItem {
-			width: parent ? parent.width : 0
-			height: phaseTable.y + phaseTable.height
+	settingsHeader: ListItemControl {
+		bottomInset: Theme.geometry_gradientList_spacing
+		topPadding: 0
+		bottomPadding: bottomInset
+		leftPadding: 0
+		contentItem: Item {
+			implicitWidth: chargerSummary.width
+			implicitHeight: phaseTable.y + phaseTable.height
 
 			QuantityTableSummary {
 				id: chargerSummary
@@ -37,7 +41,6 @@ DevicePage {
 				readonly property string chargingTimeText: root.energyMeterMode ? "--"
 						: Utils.formatAsHHMM(evCharger.chargingTime, true)
 
-				width: parent.width
 				columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 				equalWidthColumns: true
 				//% "Session"
@@ -63,7 +66,6 @@ DevicePage {
 				id: phaseTable
 
 				anchors.top: chargerSummary.bottom
-				width: chargerSummary.width
 				columnSpacing: chargerSummary.columnSpacing
 				equalWidthColumns: true
 				model: phaseModel.count > 1 ? phaseModel : null
@@ -114,7 +116,9 @@ DevicePage {
 				}
 			}
 		}
+	}
 
+	settingsModel: VisibleItemModel {
 		ListRadioButtonGroup {
 			id: chargeMode
 			//% "Charge mode"

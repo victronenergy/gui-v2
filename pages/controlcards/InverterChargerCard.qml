@@ -95,7 +95,7 @@ ControlCard {
 			writeAccessLevel: VenusOS.User_AccessType_User
 			secondaryText: Global.systemSettings.ess.essStateToButtonText(essModeItem.value)
 			// change the font size for the child button
-			button.font.pixelSize: Theme.font_size_body1
+			secondaryFontSize: Theme.font_size_body1
 			onClicked: {
 				Global.dialogLayer.open(essModeDialogComponent, { essMode: essModeItem.value })
 			}

@@ -19,26 +19,26 @@ GradientListView {
 	delegate: ListIpAddressField {
 		id: ipAddressDelegate
 
-		property RemoveButton removalButton: RemoveButton {
+		rightPadding: removalButton.width + spacing + horizontalContentPadding
+		text: CommonWords.ip_address + ' ' + (model.index + 1)
+		secondaryText: modelData
+		saveInput: function() { root.ipAddressUpdated(model.index, secondaryText) }
+		interactive: true
+		writeAccessLevel: root.writeAccessLevel
+
+		RemoveButton {
+			id: removalButton
+
+			anchors {
+				right: parent.right
+				rightMargin: ipAddressDelegate.horizontalContentPadding
+				verticalCenter: parent.verticalCenter
+			}
 			visible: ipAddressDelegate.clickable
 			onClicked: {
 				Global.dialogLayer.open(removalDialogComponent, { description: modelData })
 			}
 		}
-
-		text: CommonWords.ip_address + ' ' + (model.index + 1)
-		secondaryText: modelData
-		saveInput: function() { root.ipAddressUpdated(model.index, textField.text) }
-
-		content.children: [
-			defaultContent,
-			readonlyLabel,
-			removalButton
-		]
-
-		interactive: true
-		writeAccessLevel: root.writeAccessLevel
-		onClicked: removalButton.clicked()
 	}
 
 	VeQuickItem {

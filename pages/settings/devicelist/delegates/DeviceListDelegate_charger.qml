@@ -9,7 +9,9 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: Global.system.systemStateToText(state.value)
+	quantityModel: QuantityObjectModel {
+		QuantityObject { object: state; key: "textValue"; unit: VenusOS.Units_None }
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
@@ -18,6 +20,9 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: state
+
+		readonly property string textValue: Global.system.systemStateToText(value)
+
 		uid: root.device.serviceUid + "/State"
 	}
 }

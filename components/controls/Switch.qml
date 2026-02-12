@@ -11,6 +11,7 @@ T.Switch {
 	id: root
 
 	property bool showEnabled: enabled
+	property color textColor: Theme.color_font_primary
 
 	checkable: false
 	implicitWidth: Math.max(
@@ -18,41 +19,32 @@ T.Switch {
 		implicitContentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(
 		implicitBackgroundHeight + topInset + bottomInset,
-		implicitContentHeight + topPadding + bottomPadding,
-		implicitIndicatorHeight + topPadding + bottomPadding)
+		implicitContentHeight + topPadding + bottomPadding)
 
 	leftPadding: 0
 	rightPadding: 0
 	topPadding: 0
 	bottomPadding: 0
 
-	background: Item {
-		implicitWidth: Theme.geometry_switch_container_width
-		implicitHeight: Theme.geometry_switch_container_height
-		anchors.verticalCenter: parent.verticalCenter
-
-		Rectangle {
-			id: indicatorBackground
-
-			anchors.right: parent.right
-			width: Theme.geometry_switch_groove_width
-			height: Theme.geometry_switch_groove_height
-			radius: Theme.geometry_switch_indicator_width
-
-			color: root.showEnabled
-				   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
-				   : Theme.color_switch_groove_disabled
-			border.color: root.checked ? Theme.color_switch_groove_border_on
-				: Theme.color_switch_groove_border_off
-			border.width: Theme.geometry_switch_groove_border_width
-		}
+	background: Rectangle {
+		x: root.leftPadding
+		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
+		implicitWidth: Theme.geometry_switch_groove_width
+		implicitHeight: Theme.geometry_switch_groove_height
+		radius: Theme.geometry_switch_groove_radius
+		color: root.showEnabled
+			   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
+			   : Theme.color_switch_groove_disabled
+		border.color: root.checked ? Theme.color_switch_groove_border_on
+			: Theme.color_switch_groove_border_off
+		border.width: Theme.geometry_switch_groove_border_width
 	}
 
 	indicator: Image {
 		x: root.checked
-		   ? root.background.width - width + Theme.geometry_switch_indicator_shadowOffset + root.leftInset
-		   : root.background.width - indicatorBackground.width - Theme.geometry_switch_indicator_shadowOffset + root.leftInset
-		y: root.topInset + root.background.height/2 - height/2
+			? root.background.width - width + Theme.geometry_switch_indicator_shadowOffset + root.leftPadding
+			: -Theme.geometry_switch_indicator_shadowOffset + root.leftPadding
+		y: (parent.height / 2) - (height / 2) + Theme.geometry_switch_indicator_shadowOffset
 		width: Theme.geometry_switch_indicator_width
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
@@ -65,18 +57,6 @@ T.Switch {
 				duration: 200
 				easing.type: Easing.InOutQuad
 			}
-		}
-	}
-
-	contentItem: Item {
-		anchors.verticalCenter: parent.verticalCenter
-
-		Label {
-			anchors.verticalCenter: parent.verticalCenter
-			text: root.text
-			color: Theme.color_font_primary
-			width: parent.width - Theme.geometry_switch_groove_width
-			elide: Text.ElideRight
 		}
 	}
 

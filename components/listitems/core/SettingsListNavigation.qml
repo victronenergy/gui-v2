@@ -4,55 +4,37 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 ListNavigation {
 	id: root
 
-	property string pageSource: ""
-	property string iconSource: ""
-	property alias text: primary.text
-	property alias secondaryText: secondary.text
+	property string pageSource
+	property string iconSource
 	property var pageProperties: ({"title": Qt.binding(function() { return root.text }) })
 
-	height: Theme.geometry_settingsListNavigation_height
-	onClicked: Global.pageManager.pushPage(root.pageSource, root.pageProperties)
+	// TODO these padding/margin customisations are temporary, to align the text with the existing
+	// UI. These should be removed once the Control migration (#2789) is completed.
+	topPadding: Theme.geometry_settingsListNavigation_verticalPadding
+	bottomPadding: Theme.geometry_settingsListNavigation_verticalPadding
+	leftPadding: horizontalContentPadding + (iconSource.length ? icon.width + horizontalContentPadding : 0)
+	captionTopMargin: 0
+
+	onClicked: {
+		Global.pageManager.pushPage(root.pageSource, root.pageProperties)
+	}
 
 	CP.ColorImage {
 		id: icon
 
 		anchors {
-			left: parent.left
-			leftMargin: Theme.geometry_listItem_content_horizontalMargin
 			verticalCenter: parent.verticalCenter
+			left: parent.left
+			leftMargin: root.horizontalContentPadding
 		}
 		color: Theme.color_font_primary
 		source: root.iconSource
-	}
-
-	Column {
-		anchors {
-			left: iconSource ? icon.right : parent.left
-			leftMargin: Theme.geometry_listItem_content_horizontalMargin
-			verticalCenter: parent.verticalCenter
-		}
-
-		Label {
-			id: primary
-
-			font.pixelSize: Theme.font_size_body2
-			wrapMode: Text.Wrap
-			text: root.primaryText
-		}
-
-		Label {
-			id: secondary
-
-			font.pixelSize: Theme.font_size_body1
-			wrapMode: Text.Wrap
-			color: Theme.color_font_secondary
-			text: root.secondaryText
-		}
 	}
 }

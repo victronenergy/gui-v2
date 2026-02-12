@@ -21,7 +21,7 @@ Page {
 		VisibleItemModel {
 			id: bluetoothUnavailable
 
-			ListItem {
+			PrimaryListLabel {
 				//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
 				text: qsTrId("settings_bluetooth_unavailable_message")
 			}
@@ -43,10 +43,10 @@ Page {
 				preferredVisible: bluetoothEnabled.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Ble/Service/Pincode"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 6
-				textField.inputMethodHints: Qt.ImhDigitsOnly
+				maximumLength: 6
+				inputMethodHints: Qt.ImhDigitsOnly
 				saveInput: function() {
-					dataItem.setValue(textField.text)
+					dataItem.setValue(secondaryText)
 					Global.showToastNotification(VenusOS.Notification_Info,
 						   //% "It might be necessary to remove existing pairing information before connecting."
 						   qsTrId("settings_bluetooth_remove_existing_pairing_info"),

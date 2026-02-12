@@ -71,6 +71,7 @@ ControlCard {
 		}
 
 		ListSwitch {
+			width: parent.width
 			text: CommonWords.charging
 			flat: true
 			dataItem.uid: root.serviceUid + "/StartStop"

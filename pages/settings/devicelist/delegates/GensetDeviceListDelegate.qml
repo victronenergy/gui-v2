@@ -9,11 +9,10 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	secondaryText: statusCode.valid ? "" : CommonWords.not_connected
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
-		QuantityObject { object: statusCode.valid ? statusCode : null; key: "statusText" }
+		QuantityObject { object: statusCode; key: "statusText" }
 		QuantityObject { object: statusCode.valid ? power : null; unit: VenusOS.Units_Watt }
 	}
 
@@ -24,7 +23,9 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: statusCode
-		readonly property string statusText: Global.acInputs.gensetStatusCodeToText(value)
+		readonly property string statusText: valid
+				? Global.acInputs.gensetStatusCodeToText(value)
+				: CommonWords.not_connected
 		uid: root.device.serviceUid + "/StatusCode"
 	}
 

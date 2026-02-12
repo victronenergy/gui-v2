@@ -71,81 +71,78 @@ Page {
 
 			text: modelObject.display || ""
 			secondaryText: modelObject.secondaryText || ""
+			caption: modelObject.caption ?? ""
 			interactive: !modelObject.readOnly
 					// Prevent selection of already selected index
 					&& root.currentIndex !== model.index
-			primaryLabel.font.family: modelObject.fontFamily || Global.fontFamily
+			font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: !modelObject.readOnly || root.currentIndex === model.index
 			showAccessLevel: root.showAccessLevel
 			writeAccessLevel: root.writeAccessLevel
 			checked: optionsListView.selectedIndex === model.index
+			bottomPadding: bottomContentLoader.height > 0
+					? bottomContentLoader.height
+						+ (2 * Theme.geometry_listItem_content_verticalMargin) // margin above and below Loader
+					: Theme.geometry_listItem_content_verticalMargin
+
 			ButtonGroup.group: radioButtonGroup
 
-			bottomContent.z: model.index === optionsListView.selectedIndex ? 1 : -1
-			bottomContentChildren: Loader {
+			Loader {
 				id: bottomContentLoader
 
-				readonly property string caption: modelObject.caption ?? ""
-				readonly property bool promptPassword: !!modelObject.promptPassword
+				property bool showField
 
-				width: parent.width
-				sourceComponent: promptPassword ? passwordComponent : (caption ? captionComponent : null)
-			}
+				function focusPasswordInput() {
+					showField = true
+					item.forceInputFocus()
+				}
 
-			Component {
-				id: passwordComponent
-
-				SettingsColumn {
-					function focusPasswordInput() {
-						passwordField.showField = true
-						passwordField.secondaryText = ""
-						passwordField.forceActiveFocus()
-					}
-
-					width: parent.width
-
-					PrimaryListLabel {
-						topPadding: 0
-						color: Theme.color_font_secondary
-						text: bottomContentLoader.caption
-						font.pixelSize: Theme.font_size_caption
-						preferredVisible: bottomContentLoader.caption.length > 0
-					}
-
-					ListPasswordField {
+				anchors {
+					right: parent.right
+					bottom: parent.bottom
+					bottomMargin: Theme.geometry_listItem_content_verticalMargin
+				}
+				active: !!modelObject.promptPassword
+						&& model.index === optionsListView.selectedIndex
+				visible: showField // don't show until an option is explicitly selected
+				height: active && visible ? implicitHeight : 0
+				sourceComponent: Component {
+					TextValidationField {
 						id: passwordField
 
-						property bool showField
-
+						width: Theme.geometry_textField_width + rightInset
+						rightPadding: rightInset
+						rightInset: confirmButton.width + radioButton.spacing + radioButton.horizontalContentPadding
 						flickable: optionsListView
-						primaryLabel.color: Theme.color_font_secondary
-						interactive: radioButton.interactive
-						background.color: "transparent"
-						showAccessLevel: root.showAccessLevel
-						writeAccessLevel: root.writeAccessLevel
-						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
-						KeyNavigationHighlight.fill: radioButton
+						echoMode: TextInput.Password
+						placeholderText: CommonWords.enter_password
+						validateOnFocusLost: false // don't validate until 'Confirm' is clicked
 						validateInput: function() {
-							return root.validatePassword(model.index, textField.text)
-						}
-						saveInput: function() {
-							if (preferredVisible) {
-								radioButton.select()
+							if (!!root.validatePassword) {
+								return root.validatePassword(model.index, text)
+							} else {
+								console.warn("Password validation not supported!")
+								return VenusOS.InputValidation_Result_Error
 							}
 						}
+						onInputValidated: {
+							radioButton.select()
+						}
+
+						KeyNavigationHighlight.fill: radioButton
+
+						ListItemButton {
+							id: confirmButton
+
+							anchors {
+								right: parent.right
+								rightMargin: radioButton.horizontalContentPadding
+							}
+							text: CommonWords.confirm
+							focusPolicy: Qt.NoFocus
+							onClicked: passwordField.runValidation(VenusOS.InputValidation_ValidateAndSave)
+						}
 					}
-				}
-			}
-
-			Component {
-				id: captionComponent
-
-				PrimaryListLabel {
-					topPadding: 0
-					bottomPadding: 0
-					color: Theme.color_font_secondary
-					text: bottomContentLoader.caption
-					font.pixelSize: Theme.font_size_caption
 				}
 			}
 
@@ -155,8 +152,8 @@ Page {
 				} else {
 					optionsListView.selectionChanged = true
 				}
-				if (bottomContentLoader.sourceComponent === passwordComponent) {
-					bottomContentLoader.item.focusPasswordInput()
+				if (bottomContentLoader.status === Loader.Ready) {
+					bottomContentLoader.focusPasswordInput()
 				} else {
 					radioButton.select()
 				}

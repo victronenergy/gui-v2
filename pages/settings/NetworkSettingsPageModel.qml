@@ -24,7 +24,7 @@ VisibleItemModel {
 
 	ListTextField {
 		text: CommonWords.password
-		textField.maximumLength: 63
+		maximumLength: 63
 		preferredVisible: networkServices.ready && networkServices.wifi && networkServices.disconnected
 				 && !networkServices.favorite && networkServices.secured
 		writeAccessLevel: VenusOS.User_AccessType_User
@@ -32,7 +32,7 @@ VisibleItemModel {
 			var obj = {
 				Service: networkServices.service,
 				Action: "connect",
-				Passphrase: textField.text
+				Passphrase: secondaryText
 			}
 			var json = JSON.stringify(obj);
 			setValueItem.setValue(json)
@@ -138,8 +138,8 @@ VisibleItemModel {
 	ListIpAddressField {
 		interactive: networkServices.manual
 		writeAccessLevel: VenusOS.User_AccessType_User
-		textField.text: networkServices.ipAddress
-		saveInput: function() { networkServices.setServiceProperty("Address", textField.text) }
+		secondaryText: networkServices.ipAddress
+		saveInput: function() { networkServices.setServiceProperty("Address", secondaryText) }
 	}
 
 	ListIpAddressField {
@@ -147,8 +147,8 @@ VisibleItemModel {
 		text: qsTrId("settings_tcpip_netmask")
 		interactive: method.userHasWriteAccess && networkServices.manual
 		writeAccessLevel: VenusOS.User_AccessType_User
-		textField.text: networkServices.netmask
-		saveInput: function() { networkServices.setServiceProperty("Netmask", textField.text) }
+		secondaryText: networkServices.netmask
+		saveInput: function() { networkServices.setServiceProperty("Netmask", secondaryText) }
 	}
 
 	ListIpAddressField {
@@ -157,8 +157,8 @@ VisibleItemModel {
 		interactive: method.userHasWriteAccess && networkServices.manual
 		preferredVisible: networkServices.wifi || ethernetGatewayEnabled.checked
 		writeAccessLevel: VenusOS.User_AccessType_User
-		textField.text: networkServices.gateway
-		saveInput: function() { networkServices.setServiceProperty("Gateway", textField.text) }
+		secondaryText: networkServices.gateway
+		saveInput: function() { networkServices.setServiceProperty("Gateway", secondaryText) }
 	}
 
 	ListIpAddressField {
@@ -166,8 +166,8 @@ VisibleItemModel {
 		text: qsTrId("settings_tcpip_dns_server")
 		interactive: method.userHasWriteAccess && networkServices.manual
 		writeAccessLevel: VenusOS.User_AccessType_User
-		textField.text: networkServices.nameserver
-		saveInput: function() { networkServices.setServiceProperty("Nameserver", textField.text) }
+		secondaryText: networkServices.nameserver
+		saveInput: function() { networkServices.setServiceProperty("Nameserver", secondaryText) }
 	}
 
 	ListText {

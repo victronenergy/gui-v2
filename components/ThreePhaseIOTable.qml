@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-BaseListItem {
+ListItemControl {
 	id: root
 
 	property int phaseCount
@@ -16,11 +16,13 @@ BaseListItem {
 	property alias totalOutputPowerUid: outputTable.totalPowerUid
 	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
 
-	implicitWidth: contentRow.implicitWidth
-	implicitHeight: contentRow.implicitHeight
-	background.visible: false
+	leftPadding: 0
+	rightPadding: 0
+	topPadding: 0
+	bottomPadding: 0
+	background: null
 
-	Row {
+	contentItem: Row {
 		id: contentRow
 		width: parent.width
 		spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing

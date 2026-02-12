@@ -11,18 +11,6 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-
-			component SwitchItem : ListItem {
-				id: switchItem
-
-				property alias checked: childSwitch.checked
-
-				content.children: Switch {
-					id: childSwitch
-					onClicked: switchItem.clicked()
-				}
-			}
-
 			ListText {
 				//% "Application version"
 				text: qsTrId("settings_page_debug_application_version")
@@ -56,14 +44,14 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
 			}
 
-			SwitchItem {
+			ListSwitch {
 				//% "Enable frame-rate visualizer"
 				text: qsTrId("settings_page_debug_enable_fps_visualizer")
 				checked: FrameRateModel.enabled
 				onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
 			}
 
-			SwitchItem {
+			ListSwitch {
 				//% "Display CPU usage"
 				text: qsTrId("settings_page_debug_display_cpu_usage")
 				checked: Global.displayCpuUsage

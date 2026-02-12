@@ -105,47 +105,43 @@ DevicePage {
 			preferredVisible: dataItem.valid
 		}
 
-		ListItem {
+		ListQuantityGroup {
 			id: sensorBattery
 
 			//% "Sensor battery"
 			text: qsTrId("temperature_sensor_battery")
 			preferredVisible: batteryVoltage.valid
+			model: QuantityObjectModel {
+				filterType: QuantityObjectModel.HasValue
 
-			content.children: [
-				QuantityLabel {
-					id: batteryVoltageLabel
-					anchors.verticalCenter: parent.verticalCenter
-					font.pixelSize: Theme.font_size_body2
-					value: batteryVoltage.value == undefined ? NaN : batteryVoltage.value
-					unit: VenusOS.Units_Volt_DC
-					VeQuickItem {
-						id: batteryVoltage
-						uid: bindPrefix + "/BatteryVoltage"
-					}
-				},
-				Label {
-					anchors.verticalCenter: parent.verticalCenter
-					text: {
-						if (lowBattery.valid) {
-							const low = lowBattery.value === 1
-							//% "Low"
-							return low ? qsTrId("temperature_sensor_battery_status_low")
-									   : CommonWords.ok
-						} else {
-							return ""
-						}
-					}
-					color: lowBattery.value === 1 ? Theme.color_red : Theme.color_green
-					font.pixelSize: Theme.font_size_body2
-					verticalAlignment: Text.AlignVCenter
+				QuantityObject { object: batteryVoltage; unit: VenusOS.Units_Volt_DC }
+				QuantityObject {
+					object: lowBattery.valid ? lowBattery : null
+					key: "textValue"
+					unit: VenusOS.Units_None
+					valueColor: lowBattery.textColor
+				}
+			}
 
-					VeQuickItem {
-						id: lowBattery
-						uid:  bindPrefix + "/Alarms/LowBattery"
+			VeQuickItem {
+				id: batteryVoltage
+				uid: bindPrefix + "/BatteryVoltage"
+			}
+			VeQuickItem {
+				id: lowBattery
+
+				readonly property string textValue: {
+					if (valid) {
+						//% "Low"
+						return value === 1 ? qsTrId("temperature_sensor_battery_status_low") : CommonWords.ok
+					} else {
+						return ""
 					}
 				}
-			]
+				readonly property color textColor: value === 1 ? Theme.color_red : Theme.color_green
+
+				uid: bindPrefix + "/Alarms/LowBattery"
+			}
 		}
 
 		ListNavigation {

@@ -19,7 +19,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/CustomName"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
+				maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: CommonWords.custom_name
 			}
@@ -30,7 +30,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Group"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
+				maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: text
 			}
@@ -92,7 +92,7 @@ Page {
 				text: qsTrId("page_switchable_output_type")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Type"
 				preferredVisible: dataItem.valid
-				secondaryLabel.color: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
+				secondaryTextColor: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
 				optionModel: {
 					let options = []
 					for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {

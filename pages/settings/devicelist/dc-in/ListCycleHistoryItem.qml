@@ -83,7 +83,7 @@ SettingsColumn {
 	ListQuantityGroup {
 		//% "Battery (V<sub>start</sub>/V<sub>end</sub>)"
 		text: qsTrId("cycle_history_battery_voltage")
-		primaryLabel.textFormat: Text.RichText
+		textFormat: Text.RichText
 		model: QuantityObjectModel {
 			QuantityObject { object: startVoltage; unit: VenusOS.Units_Volt_DC }
 			QuantityObject { object: endVoltage; unit: VenusOS.Units_Volt_DC }

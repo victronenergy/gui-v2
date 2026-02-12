@@ -115,9 +115,9 @@ Page {
 						let noise = (toggle ? 0 : 1)
 
 						// FIXME: only do this if the paths are valid (but that is unknown yet)
-						remoteSetpointL1.setValue(sliderL1.slider.value + noise)
-						remoteSetpointL2.setValue(sliderL2.slider.value + noise)
-						remoteSetpointL3.setValue(sliderL3.slider.value + noise)
+						remoteSetpointL1.setValue(sliderL1.value + noise)
+						remoteSetpointL2.setValue(sliderL2.value + noise)
+						remoteSetpointL3.setValue(sliderL3.value + noise)
 					}
 				}
 
@@ -142,23 +142,23 @@ Page {
 
 			ListSlider {
 				id: sliderL1
-				slider.from: -5000
-				slider.to: 5000
-				slider.stepSize: 50
+				from: -5000
+				to: 5000
+				stepSize: 50
 			}
 
 			ListSlider {
 				id: sliderL2
-				slider.from: -5000
-				slider.to: 5000
-				slider.stepSize: 50
+				from: -5000
+				to: 5000
+				stepSize: 50
 			}
 
 			ListSlider {
 				id: sliderL3
-				slider.from: -5000
-				slider.to: 5000
-				slider.stepSize: 50
+				from: -5000
+				to: 5000
+				stepSize: 50
 			}
 
 			ListSwitch {
