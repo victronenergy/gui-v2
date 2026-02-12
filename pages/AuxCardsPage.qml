@@ -60,8 +60,8 @@ Page {
 		// ListView scroll behaviour.
 		highlightFollowsCurrentItem: false
 
-		model: SortedSwitchableOutputGroupModel { sourceModel: Global.switches.groups }
-		delegate: SwitchableOutputGroupCard {
+		model: SortedIOChannelGroupModel { sourceModel: Global.switches.groups }
+		delegate: IOChannelGroupCard {
 			height: cardsView.height
 			onCurrentItemChanged: {
 				if (currentItem) {

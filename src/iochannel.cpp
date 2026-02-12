@@ -325,7 +325,7 @@ void IOChannel::updateFormattedName()
 	if (m_customName.length() > 0) {
 		newFormattedName = m_customName;
 	} else if (m_group.length() > 0) {
-		// When the output is in a named group (where it might be in the same group as outputs
+		// When the channel is in a named group (where it might be in the same group as channels
 		// from other devices) then use a name that identifies the source device/service.
 		QString prefix;
 		if (!m_serviceUid.isEmpty()
@@ -339,7 +339,7 @@ void IOChannel::updateFormattedName()
 		}
 		newFormattedName = QStringLiteral("%1 | %2").arg(prefix).arg(m_name);
 	} else {
-		// When the output is in the default group for the device, instead of in a named group,
+		// When the channel is in the default group for the device, instead of in a named group,
 		// then the /Name can be used directly.
 		newFormattedName = m_name;
 	}
