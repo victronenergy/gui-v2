@@ -15,94 +15,101 @@ Page {
 	// The model of devices to be displayed
 	required property FilteredDeviceModel model
 
-	GradientListView {
-		header: BaseListItem {
-			readonly property alias columnWidth: loadSummary.fixedColumnWidth
-			readonly property alias columnSpacing: loadSummary.columnSpacing
+	Component {
+		id: headerComponent
 
-			visible: root.model.count > 1 || root.measurements.phaseCount > 1
-			width: parent?.width ?? 0
-			height: visible ? phaseTable.y + phaseTable.height + bottomInset : 0
+		ListItemControl {
 			bottomInset: Theme.geometry_gradientList_spacing
+			topPadding: 0
+			bottomPadding: bottomInset
+			leftPadding: 0
+			contentItem: Item {
+				readonly property real columnWidth: loadSummary.fixedColumnWidth
+				readonly property real columnSpacing: loadSummary.columnSpacing
 
-			QuantityTableSummary {
-				id: loadSummary
+				implicitWidth: loadSummary.width
+				implicitHeight: phaseTable.y + phaseTable.height
 
-				width: parent.width
-				equalWidthColumns: true
+				QuantityTableSummary {
+					id: loadSummary
 
-				// rightPadding = 32px width of the sub-menu arrow icon in each list delegate, plus
-				// margin, to align with the columns in the delegates.
-				rightPadding: 32 + Theme.geometry_listItem_content_horizontalMargin
-				summaryModel: [
-					{ text: "", unit: VenusOS.Units_None },
-					{ text: "", unit: VenusOS.Units_None },
-					{ text: "", unit: VenusOS.Units_None },
-					{ text: CommonWords.total_power, unit: VenusOS.Units_None },
-				]
-				bodyHeaderText: CommonWords.total
-				bodyModel: QuantityObjectModel {
-					// Add empty columns for volts/hertz/amps so that these columns align with those
-					// in the QuantityTable.
-					QuantityObject { unit: VenusOS.Units_Volt_AC; hidden: true }
-					QuantityObject { unit: VenusOS.Units_Hertz; hidden: true }
-					QuantityObject { unit: VenusOS.Units_Amp; hidden: true }
-					QuantityObject { object: root.measurements; key: "power"; unit: VenusOS.Units_Watt }
+					equalWidthColumns: true
+
+					// rightPadding = 32px width of the sub-menu arrow icon in each list delegate, plus
+					// margin, to align with the columns in the delegates.
+					rightPadding: 32 + Theme.geometry_listItem_content_horizontalMargin
+					summaryModel: [
+						{ text: "", unit: VenusOS.Units_None },
+						{ text: "", unit: VenusOS.Units_None },
+						{ text: "", unit: VenusOS.Units_None },
+						{ text: CommonWords.total_power, unit: VenusOS.Units_None },
+					]
+					bodyHeaderText: CommonWords.total
+					bodyModel: QuantityObjectModel {
+						// Add empty columns for volts/hertz/amps so that these columns align with those
+						// in the QuantityTable.
+						QuantityObject { unit: VenusOS.Units_Volt_AC; hidden: true }
+						QuantityObject { unit: VenusOS.Units_Hertz; hidden: true }
+						QuantityObject { unit: VenusOS.Units_Amp; hidden: true }
+						QuantityObject { object: root.measurements; key: "power"; unit: VenusOS.Units_Watt }
+					}
 				}
-			}
 
-			QuantityTable {
-				id: phaseTable
+				QuantityTable {
+					id: phaseTable
 
-				readonly property string acInMeasurementsUid: Global.acInputs.highlightedInput?.measurementsUid ?? ""
-				readonly property string acInServiceType: Global.acInputs.highlightedInput?.serviceType ?? ""
-				readonly property string voltageKey: acInServiceType === "vebus" || acInServiceType === "acsystem" ? "V" : "Voltage"
+					readonly property string acInMeasurementsUid: Global.acInputs.highlightedInput?.measurementsUid ?? ""
+					readonly property string acInServiceType: Global.acInputs.highlightedInput?.serviceType ?? ""
+					readonly property string voltageKey: acInServiceType === "vebus" || acInServiceType === "acsystem" ? "V" : "Voltage"
 
-				anchors.top: loadSummary.bottom
-				rightPadding: loadSummary.rightPadding
-				width: parent.width
-				equalWidthColumns: true
-				model: root.measurements.phaseCount > 1 ? root.measurements.phases : null
-				delegate: QuantityTable.TableRow {
-					id: tableRow
+					anchors.top: loadSummary.bottom
+					rightPadding: loadSummary.rightPadding
+					equalWidthColumns: true
+					model: root.measurements.phaseCount > 1 ? root.measurements.phases : null
+					delegate: QuantityTable.TableRow {
+						id: tableRow
 
-					required property string name
-					required property real power
-					required property real current
+						required property string name
+						required property real power
+						required property real current
 
-					headerText: name
-					model: QuantityObjectModel {
-						QuantityObject { object: voltageItem; unit: VenusOS.Units_Volt_AC }
-						QuantityObject { object: frequencyItem; unit: VenusOS.Units_Hertz }
-						QuantityObject { object: tableRow; key: "current"; unit: VenusOS.Units_Amp }
-						QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }
-					}
+						headerText: name
+						model: QuantityObjectModel {
+							QuantityObject { object: voltageItem; unit: VenusOS.Units_Volt_AC }
+							QuantityObject { object: frequencyItem; unit: VenusOS.Units_Hertz }
+							QuantityObject { object: tableRow; key: "current"; unit: VenusOS.Units_Amp }
+							QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }
+						}
 
-					// Get the active AC input phase voltage from /L<1-3>/V (for vebus/acsystem)
-					// or /L<1-3>/Voltage (for grid/genset).
-					VeQuickItem {
-						id: voltageItem
-						uid: phaseTable.acInMeasurementsUid ? "%1/%2/%3"
-							   .arg(phaseTable.acInMeasurementsUid)
-							   .arg(tableRow.name)
-							   .arg(phaseTable.voltageKey)
-							 : ""
-					}
+						// Get the active AC input phase voltage from /L<1-3>/V (for vebus/acsystem)
+						// or /L<1-3>/Voltage (for grid/genset).
+						VeQuickItem {
+							id: voltageItem
+							uid: phaseTable.acInMeasurementsUid ? "%1/%2/%3"
+								   .arg(phaseTable.acInMeasurementsUid)
+								   .arg(tableRow.name)
+								   .arg(phaseTable.voltageKey)
+								 : ""
+						}
 
-					// Get the active AC input phase frequency from /L<1-3>/F (for vebus/acsystem)
-					// or /Ac/Frequency (for grid/genset). The frequency is the same for all phases.
-					VeQuickItem {
-						id: frequencyItem
-						uid: phaseTable.acInMeasurementsUid
-							? phaseTable.acInServiceType === "vebus" || phaseTable.acInServiceType === "acsystem"
-							   ? "%1/%2/F".arg(phaseTable.acInMeasurementsUid).arg(tableRow.name)
-							   : "%1/Frequency".arg(phaseTable.acInMeasurementsUid)
-							: ""
+						// Get the active AC input phase frequency from /L<1-3>/F (for vebus/acsystem)
+						// or /Ac/Frequency (for grid/genset). The frequency is the same for all phases.
+						VeQuickItem {
+							id: frequencyItem
+							uid: phaseTable.acInMeasurementsUid
+								? phaseTable.acInServiceType === "vebus" || phaseTable.acInServiceType === "acsystem"
+								   ? "%1/%2/F".arg(phaseTable.acInMeasurementsUid).arg(tableRow.name)
+								   : "%1/Frequency".arg(phaseTable.acInMeasurementsUid)
+								: ""
+						}
 					}
 				}
 			}
 		}
+	}
 
+	GradientListView {
+		header: root.model.count > 1 || root.measurements.phaseCount > 1 ? headerComponent: null
 		model: root.model
 		delegate: LoadListDelegate {
 			id: loadDelegate
@@ -112,8 +119,8 @@ Page {
 			name: device.name
 			power: powerItem.value ?? NaN
 			current: root.measurements.singlePhaseCurrentValid ? root.measurements.current : NaN
-			columnWidth: ListView.view.headerItem?.columnWidth ?? NaN
-			columnSpacing: ListView.view.headerItem?.columnSpacing ?? 0
+			columnWidth: ListView.view.headerItem?.contentItem?.columnWidth ?? NaN
+			columnSpacing: ListView.view.headerItem?.contentItem?.columnSpacing ?? 0
 
 			// this is an AC device, so only show amps in PreferAmps mode,
 			// and only if we are not displaying the multiple-phases table above
