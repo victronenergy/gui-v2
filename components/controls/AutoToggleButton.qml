@@ -32,12 +32,12 @@ BaseAutoToggleSwitch {
 
 			// Expand clickable area left (to delegate edge), right (halfway to auto button), and
 			// vertically. Paddings don't need adjustment as that is done internally by the control.
-			defaultBackgroundWidth: root.defaultBackgroundWidth - autoButton.defaultBackgroundWidth - Theme.geometry_switchableoutput_spacing
-			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+			defaultBackgroundWidth: root.defaultBackgroundWidth - autoButton.defaultBackgroundWidth - Theme.geometry_iochannel_spacing
+			defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 			topInset: Theme.geometry_button_touch_verticalMargin
 			bottomInset: Theme.geometry_button_touch_verticalMargin
 			leftInset: Theme.geometry_controlCard_button_margins
-			rightInset: Theme.geometry_switchableoutput_spacing / 2
+			rightInset: Theme.geometry_iochannel_spacing / 2
 
 			onOnClicked: root.autoChecked ? root.notification() : root.onClicked()
 			onOffClicked: root.autoChecked ? root.notification() : root.offClicked()
@@ -57,11 +57,11 @@ BaseAutoToggleSwitch {
 
 			// Expand clickable area left (halfway to toggle buttons), right (to delegate edge), and
 			// vertically. Paddings don't need adjustment as that is done internally by the control.
-			defaultBackgroundWidth: (root.defaultBackgroundWidth - Theme.geometry_switchableoutput_spacing) / root.buttonCount
+			defaultBackgroundWidth: (root.defaultBackgroundWidth - Theme.geometry_iochannel_spacing) / root.buttonCount
 			defaultBackgroundHeight: root.defaultBackgroundHeight
 			topInset: Theme.geometry_button_touch_verticalMargin
 			bottomInset: Theme.geometry_button_touch_verticalMargin
-			leftInset: Theme.geometry_switchableoutput_spacing / 2
+			leftInset: Theme.geometry_iochannel_spacing / 2
 			rightInset: Theme.geometry_controlCard_button_margins
 			topPadding: topInset
 			bottomPadding: bottomInset

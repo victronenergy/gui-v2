@@ -59,7 +59,7 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
-		height: Theme.geometry_switchableoutput_control_height
+		height: Theme.geometry_iochannel_control_height
 		suffix: Units.defaultUnitString(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
 				|| root.switchableOutput.unitText
 		from: decimalConverter.intFrom
