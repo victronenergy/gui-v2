@@ -57,6 +57,11 @@ Page {
 	}
 
 	VeQuickItem {
+		id: numberOfMultis
+		uid: root.bindPrefix + "/Devices/NumberOfMultis"
+	}
+
+	VeQuickItem {
 		id: masterHasNetworkQuality
 
 		uid: root.bindPrefix + "/Devices/0/ExtendStatus/VeBusNetworkQualityCounter"
@@ -255,18 +260,46 @@ Page {
 				preferredVisible: dataItem.valid && isMulti
 			}
 
-			ListRadioButtonGroup {
+			ListNavigation {
 				//% "ESS Relay test"
 				text: qsTrId("vebus_device_ess_relay_test")
-				dataItem.uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
-				interactive: false
-				preferredVisible: dataItem.valid && isEssOrHub4 && isMulti
-				optionModel: [
-					//% "Completed"
-					{ display: qsTrId("vebus_device_ess_relay_test_completed"), value: 0 },
-					//% "Pending"
-					{ display: qsTrId("vebus_device_ess_relay_test_pending"), value: 1 }
-				]
+				preferredVisible: waitingForRelayTest.valid && isEssOrHub4 && isMulti
+				secondaryText: waitingForRelayTest.value === 0
+								//% "Completed"
+							 ? qsTrId("vebus_device_ess_relay_test_completed")
+								//% "Pending"
+							 : qsTrId("vebus_device_ess_relay_test_pending")
+				onClicked: Global.pageManager.pushPage(essRelayTestPage, {"title": text})
+
+				VeQuickItem {
+					id: waitingForRelayTest
+					uid: root.bindPrefix + "/Devices/0/ExtendStatus/WaitingForRelayTest"
+				}
+
+				Component {
+					id: essRelayTestPage
+
+					Page {
+						GradientListView {
+							model: VisibleItemModel {
+								SettingsColumn {
+									width: parent ? parent.width : 0
+
+									Repeater {
+										model: numberOfMultis.valid ? numberOfMultis.value : 0
+
+										ListText {
+											text: CommonWords.vebus_phase_device.arg((index % 3) + 1).arg(Math.floor(index / 3) + 1).arg(index)
+											secondaryText: dataItem.value === 1 ? CommonWords.ok : CommonWords.error
+											dataItem.uid: root.bindPrefix + "/Devices/" + index + "/ExtendStatus/RelayTestOk"
+											preferredVisible: dataItem.valid
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 
 			ListNavigation {
