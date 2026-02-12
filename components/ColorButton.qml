@@ -11,8 +11,8 @@ Button {
 
 	property color centerColor
 
-	defaultBackgroundWidth: Theme.geometry_switchableoutput_control_height
-	defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+	defaultBackgroundWidth: Theme.geometry_iochannel_control_height
+	defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 	backgroundColor: "transparent"
 	radius: Theme.geometry_colorWheelDialog_preset_button_radius
 	flat: false

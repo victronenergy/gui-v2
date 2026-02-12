@@ -25,11 +25,11 @@ ControlCard {
 		anchors {
 			top: root.title.bottom
 			bottom: parent.bottom
-			topMargin: Theme.geometry_switchableoutput_topMargin
+			topMargin: Theme.geometry_iochannel_topMargin
 		}
 		width: cellWidth * columnCount
 		cellWidth: Theme.geometry_controlCard_minimumWidth
-		cellHeight: (height - Theme.geometry_controlCard_contentMargins) / Theme.geometry_switchableoutput_row_count
+		cellHeight: (height - Theme.geometry_controlCard_contentMargins) / Theme.geometry_iochannel_row_count
 		interactive: false
 		flow: GridView.FlowTopToBottom
 		focus: Global.keyNavigationEnabled

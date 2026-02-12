@@ -27,7 +27,7 @@ SwitchableOutputSlider {
 
 	background: Rectangle {
 		implicitWidth: Theme.geometry_controlCard_minimumWidth
-		implicitHeight: Theme.geometry_switchableoutput_control_height
+		implicitHeight: Theme.geometry_iochannel_control_height
 		radius: Theme.geometry_slider_groove_radius
 
 		// the background is the border with an additional rectangle for fill

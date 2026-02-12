@@ -36,7 +36,7 @@ SwitchableOutputSlider {
 	MiniToggleButton {
 		id: dimmingToggleButton
 
-		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 		leftInset: root.leftInset
 		leftPadding: root.leftInset
 		topInset: root.topInset
