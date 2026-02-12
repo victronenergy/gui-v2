@@ -125,7 +125,7 @@ Item {
 				MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
 				MockManager.setValue(serviceUid + "/ProductName", config.motorDrives[i].productName ?? "Motor drive %1".arg(deviceInstance))
 				MockManager.setValue(serviceUid + "/Motor/Direction", Math.floor(Math.random() * 3))
-				MockManager.setValue(serviceUid + "/Motor/RPM", Math.round(Math.random() * MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max")))
+				MockManager.setValue(serviceUid + "/Motor/RPM", Math.random() * MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"))
 				MockManager.setValue(serviceUid + "/Motor/Temperature", Math.random() * 100)
 				MockManager.setValue(serviceUid + "/Coolant/Temperature", Math.random() * 100)
 				MockManager.setValue(serviceUid + "/Controller/Temperature", Math.random() * 100)
