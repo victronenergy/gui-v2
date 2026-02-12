@@ -576,6 +576,10 @@ QtObject {
 	//% "VE.Bus Error"
 	readonly property string vebus_error: qsTrId("common_words_vebus_error")
 
+	//: eg. 'Phase L1, device 3 (6)', where '(6)' is the index into the list of reported values
+	//% "Phase L%1, device %2 (%3)"
+	readonly property string vebus_phase_device: qsTrId("common_words_vebus_device_phase_x_device_x_index_x")
+
 	//% "Voltage"
 	readonly property string voltage: qsTrId("common_words_voltage")
 
