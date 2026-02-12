@@ -4,16 +4,16 @@
 #
 
 cmake_minimum_required(VERSION 3.16)
-project(tst_switchableoutputgroupmodel LANGUAGES CXX)
+project(tst_iochannelgroupmodel LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick DBus Mqtt)
 
-qt_add_executable(tst_switchableoutputgroupmodel
-    tst_switchableoutputgroupmodel.cpp
-    ../../src/switchableoutputgroupmodel.h
-    ../../src/switchableoutputgroupmodel.cpp
+qt_add_executable(tst_iochannelgroupmodel
+    tst_iochannelgroupmodel.cpp
+    ../../src/iochannelgroupmodel.h
+    ../../src/iochannelgroupmodel.cpp
     ../../src/switchableoutput.h
     ../../src/switchableoutput.cpp
     ../../src/iochannel.h
@@ -55,22 +55,22 @@ qt_add_qml_module( ${PROJECT_NAME}
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES
-        tst_switchableoutputgroupmodel.qml
+        tst_iochannelgroupmodel.qml
     OUTPUT_DIRECTORY Victron/VenusOS
 )
 
-set_target_properties(tst_switchableoutputgroupmodel PROPERTIES
+set_target_properties(tst_iochannelgroupmodel PROPERTIES
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE TRUE
 )
 
 option(VENUS_INSTALL_TESTS "enable test installation via cmake -DVENUS_INSTALL_TESTS=ON" OFF) # Disabled by default
 if (VENUS_INSTALL_TESTS)
-    install(FILES tst_switchableoutputgroupmodel.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/switchableoutputgroupmodel)
-    install(TARGETS tst_switchableoutputgroupmodel DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/switchableoutputgroupmodel)
+    install(FILES tst_iochannelgroupmodel.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/iochannelgroupmodel)
+    install(TARGETS tst_iochannelgroupmodel DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/iochannelgroupmodel)
 endif()
 
-target_link_libraries(tst_switchableoutputgroupmodel PRIVATE
+target_link_libraries(tst_iochannelgroupmodel PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::QuickPrivate
