@@ -9,17 +9,17 @@ import QtQuick
 TestCase {
 	id: root
 
-	name: "SwitchableOutputGroupModelTest"
+	name: "IOChannelGroupModelTest"
 
-	SwitchableOutputGroupModel {
+	IOChannelGroupModel {
 		id: model
 	}
 
 	function debugModel() {
 		console.log("* Model has", model.count, "groups:")
 		for (let i = 0 ; i < model.count; ++i) {
-			console.log("\t", model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupRole),
-					model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupNameRole))
+			console.log("\t", model.data(model.index(i, 0), IOChannelGroupModel.GroupRole),
+					model.data(model.index(i, 0), IOChannelGroupModel.GroupNameRole))
 		}
 	}
 
@@ -41,7 +41,7 @@ TestCase {
 	function test_added_groups_data() {
 		return [
 			{
-				tag: "1 device group with 1 output",
+				tag: "1 device group with 1 channel",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -58,14 +58,14 @@ TestCase {
 				groups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
 				],
 			},
 			{
-				tag: "1 device group with 2 outputs",
+				tag: "1 device group with 2 channels",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -86,7 +86,7 @@ TestCase {
 				groups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" },
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/1", type: 0, group: "" }
 						]
@@ -122,20 +122,20 @@ TestCase {
 				groups: [
 					{
 						name: "solarcharger_a_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					},
 					{
 						name: "solarcharger_b_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.b/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
 				],
 			},
 			{
-				tag: "2 device groups with 2 outputs each",
+				tag: "2 device groups with 2 channels each",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -171,14 +171,14 @@ TestCase {
 				groups: [
 					{
 						name: "solarcharger_a_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" },
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/1", type: 0, group: "" },
 						]
 					},
 					{
 						name: "solarcharger_b_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.b/SwitchableOutput/0", type: 0, group: "" },
 							{ uid: "mock/com.victronenergy.solarcharger.b/SwitchableOutput/1", type: 0, group: "" },
 						]
@@ -211,7 +211,7 @@ TestCase {
 				],
 				groups: [
 					{
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.system/SwitchableOutput/0", type: 0, group: "" },
 							{ uid: "mock/com.victronenergy.system/SwitchableOutput/2", type: 0, group: "" },
 						]
@@ -237,14 +237,14 @@ TestCase {
 				groups: [
 					{
 						name: "group1",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "group1" }
 						]
 					}
 				],
 			},
 			{
-				tag: "1 named group with 2 outputs",
+				tag: "1 named group with 2 channels",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -267,7 +267,7 @@ TestCase {
 				groups: [
 					{
 						name: "abc",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "abc" },
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/1", type: 0, group: "abc", }
 						]
@@ -284,15 +284,15 @@ TestCase {
 		compare(model.count, data.groups.length)
 		for (i = 0 ; i < data.groups.length; ++i) {
 			if (data.groups[i].name) {
-				compare(model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupNameRole), data.groups[i].name)
+				compare(model.data(model.index(i, 0), IOChannelGroupModel.GroupNameRole), data.groups[i].name)
 			}
-			const group = model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupRole)
+			const group = model.data(model.index(i, 0), IOChannelGroupModel.GroupRole)
 			verify(group)
-			compare(group.outputs.length, data.groups[i].outputs.length)
-			for (j = 0 ; j < data.groups[i].outputs.length; ++j) {
-				const outputData = data.groups[i].outputs[j]
-				for (const outputPropertyName in outputData) {
-					compare(group.outputs[j][outputPropertyName], outputData[outputPropertyName], outputPropertyName)
+			compare(group.channels.length, data.groups[i].channels.length)
+			for (j = 0 ; j < data.groups[i].channels.length; ++j) {
+				const channelData = data.groups[i].channels[j]
+				for (const channelPropertyName in channelData) {
+					compare(group.channels[j][channelPropertyName], channelData[channelPropertyName], channelPropertyName)
 				}
 			}
 		}
@@ -304,7 +304,7 @@ TestCase {
 	function test_group_changes_data() {
 		return [
 			{
-				tag: "Move output from device group to named group",
+				tag: "Move channel from device group to named group",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -321,7 +321,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
@@ -332,14 +332,14 @@ TestCase {
 				finalGroups: [
 					{
 						name: "named group",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "named group" }
 						]
 					}
 				],
 			},
 			{
-				tag: "Move output from named group to device group",
+				tag: "Move channel from named group to device group",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -357,7 +357,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "some group",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "some group" }
 						]
 					}
@@ -368,7 +368,7 @@ TestCase {
 				finalGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
@@ -391,7 +391,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
@@ -403,14 +403,14 @@ TestCase {
 				finalGroups: [
 					{
 						name: "new_product_name",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
 				],
 			},
 			{
-				tag: "Remove output from device group by setting invalid type",
+				tag: "Remove channel from device group by setting invalid type",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -427,7 +427,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "", allowedInGroupModel: true }
 						]
 					}
@@ -438,7 +438,7 @@ TestCase {
 				finalGroups: [],
 			},
 			{
-				tag: "Remove output from named group by setting invalid type",
+				tag: "Remove channel from named group by setting invalid type",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -456,7 +456,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "group1",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "group1", allowedInGroupModel: true }
 						]
 					}
@@ -467,7 +467,7 @@ TestCase {
 				finalGroups: [],
 			},
 			{
-				tag: "Add output to named group by changing ShowUIControl=1",
+				tag: "Add channel to named group by changing ShowUIControl=1",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -490,14 +490,14 @@ TestCase {
 				finalGroups: [
 					{
 						name: "group1",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "group1", allowedInGroupModel: true }
 						]
 					}
 				],
 			},
 			{
-				tag: "Add output to device group by changing ShowUIControl=1",
+				tag: "Add channel to device group by changing ShowUIControl=1",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -520,14 +520,14 @@ TestCase {
 				finalGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "", allowedInGroupModel: true }
 						]
 					}
 				],
 			},
 			{
-				tag: "3 groups, move 2 outputs to same group",
+				tag: "3 groups, move 2 channels to same group",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -561,19 +561,19 @@ TestCase {
 				initialGroups: [
 					{
 						name: "group 1",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "group 1" }
 						]
 					},
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/1", type: 0, group: "" }
 						]
 					},
 					{
 						name: "group 2",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.system/SwitchableOutput/0", type: 0, group: "group 2" }
 						]
 					}
@@ -584,13 +584,13 @@ TestCase {
 				finalGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/1", type: 0, group: "" }
 						]
 					},
 					{
 						name: "group 2",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "group 2" },
 							{ uid: "mock/com.victronenergy.system/SwitchableOutput/0", type: 0, group: "group 2" },
 						]
@@ -615,7 +615,7 @@ TestCase {
 				initialGroups: [
 					{
 						name: "solarcharger_product",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
@@ -626,7 +626,7 @@ TestCase {
 				finalGroups: [
 					{
 						name: "New solarcharger name",
-						outputs: [
+						channels: [
 							{ uid: "mock/com.victronenergy.solarcharger.a/SwitchableOutput/0", type: 0, group: "" }
 						]
 					}
@@ -636,21 +636,21 @@ TestCase {
 	}
 
 	function test_group_changes(data) {
-		let i, j, group, outputPropertyName, outputData
+		let i, j, group, channelPropertyName, channelData
 		setDeviceProperties(data.devices)
 
 		compare(model.count, data.initialGroups.length)
 		for (i = 0 ; i < data.initialGroups.length; ++i) {
 			if (data.initialGroups[i].name) {
-				compare(model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupNameRole), data.initialGroups[i].name)
+				compare(model.data(model.index(i, 0), IOChannelGroupModel.GroupNameRole), data.initialGroups[i].name)
 			}
-			group = model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupRole)
+			group = model.data(model.index(i, 0), IOChannelGroupModel.GroupRole)
 			verify(group)
-			compare(group.outputs.length, data.initialGroups[i].outputs.length)
-			for (j = 0 ; j < data.initialGroups[i].outputs.length; ++j) {
-				const outputData = data.initialGroups[i].outputs[j]
-				for (outputPropertyName in outputData) {
-					compare(group.outputs[j][outputPropertyName], outputData[outputPropertyName], outputPropertyName)
+			compare(group.channels.length, data.initialGroups[i].channels.length)
+			for (j = 0 ; j < data.initialGroups[i].channels.length; ++j) {
+				const channelData = data.initialGroups[i].channels[j]
+				for (channelPropertyName in channelData) {
+					compare(group.channels[j][channelPropertyName], channelData[channelPropertyName], channelPropertyName)
 				}
 			}
 		}
@@ -662,15 +662,15 @@ TestCase {
 		compare(model.count, data.finalGroups.length)
 		for (i = 0 ; i < data.finalGroups.length; ++i) {
 			if (data.finalGroups[i].name) {
-				compare(model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupNameRole), data.finalGroups[i].name)
+				compare(model.data(model.index(i, 0), IOChannelGroupModel.GroupNameRole), data.finalGroups[i].name)
 			}
-			group = model.data(model.index(i, 0), SwitchableOutputGroupModel.GroupRole)
+			group = model.data(model.index(i, 0), IOChannelGroupModel.GroupRole)
 			verify(group)
-			compare(group.outputs.length, data.finalGroups[i].outputs.length)
-			for (j = 0 ; j < data.finalGroups[i].outputs.length; ++j) {
-				outputData = data.finalGroups[i].outputs[j]
-				for (outputPropertyName in outputData) {
-					compare(group.outputs[j][outputPropertyName], outputData[outputPropertyName], outputPropertyName)
+			compare(group.channels.length, data.finalGroups[i].channels.length)
+			for (j = 0 ; j < data.finalGroups[i].channels.length; ++j) {
+				channelData = data.finalGroups[i].channels[j]
+				for (channelPropertyName in channelData) {
+					compare(group.channels[j][channelPropertyName], channelData[channelPropertyName], channelPropertyName)
 				}
 			}
 		}
