@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2025 Victron Energy B.V.
+** Copyright (C) 2026 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
@@ -9,15 +9,15 @@ import Victron.VenusOS
 ControlCard {
 	id: root
 
-	required property SwitchableOutputGroup group
-	readonly property Item currentItem: Global.keyNavigationEnabled && activeFocus ? outputGrid.currentItem : null
+	required property IOChannelGroup group
+	readonly property Item currentItem: Global.keyNavigationEnabled && activeFocus ? channelGrid.currentItem : null
 
-	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
+	implicitWidth: Math.max(channelGrid.width, Theme.geometry_controlCard_minimumWidth)
 	icon.source: "qrc:/images/icon_switch_24.svg"
 	title.text: root.group?.name ?? ""
 
 	GridView {
-		id: outputGrid
+		id: channelGrid
 
 		readonly property int rowCount: Math.floor(height / cellHeight)
 		readonly property int columnCount: Math.ceil(count / Math.max(1, rowCount))
@@ -34,12 +34,12 @@ ControlCard {
 		flow: GridView.FlowTopToBottom
 		focus: Global.keyNavigationEnabled
 		keyNavigationEnabled: Global.keyNavigationEnabled
-		model: root.group?.outputs ?? []
+		model: root.group?.channels ?? []
 
 		delegate: BaseListLoader {
 			id: delegateLoader
 
-			required property SwitchableOutput modelData
+			required property IOChannel modelData
 			readonly property int type: modelData.type
 			property string _lastLoadedUrl
 
@@ -65,8 +65,8 @@ ControlCard {
 				if (_lastLoadedUrl !== componentUrl) {
 					if (componentUrl) {
 						delegateLoader.setSource(componentUrl, {
-							width: Qt.binding(function() { return outputGrid.cellWidth }),
-							height: Qt.binding(function() { return outputGrid.cellHeight }),
+							width: Qt.binding(function() { return channelGrid.cellWidth }),
+							height: Qt.binding(function() { return channelGrid.cellHeight }),
 							switchableOutput: modelData,
 							enabled: Qt.binding(function() { return !(modelData.status & VenusOS.SwitchableOutput_Status_Disabled) })
 						})
