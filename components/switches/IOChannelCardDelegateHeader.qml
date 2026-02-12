@@ -19,8 +19,8 @@ RowLayout {
 	Label {
 		Layout.fillWidth: true
 		Layout.alignment: Qt.AlignBaseline
-		bottomPadding: Theme.geometry_switchableoutput_label_margin
-		rightPadding: Theme.geometry_switchableoutput_label_margin
+		bottomPadding: Theme.geometry_iochannel_label_margin
+		rightPadding: Theme.geometry_iochannel_label_margin
 		text: root.formattedName
 		elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
 	}
@@ -28,7 +28,7 @@ RowLayout {
 	Label {
 		id: secondaryTitleLabel
 		Layout.alignment: Qt.AlignBaseline
-		bottomPadding: Theme.geometry_switchableoutput_label_margin
+		bottomPadding: Theme.geometry_iochannel_label_margin
 		text: root.secondaryTitle
 		font.pixelSize: Theme.font_size_body2
 	}
@@ -36,7 +36,7 @@ RowLayout {
 	Rectangle {
 		id: statusRect
 
-		Layout.bottomMargin: Theme.geometry_switchableoutput_label_margin
+		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
 		Layout.maximumWidth: parent.width / 2
 		Layout.minimumWidth: statusLabel.implicitWidth
 		Layout.alignment: Qt.AlignRight
@@ -45,7 +45,7 @@ RowLayout {
 				: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
 				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
 				: Theme.color_switch_status_disabled
-		radius: Theme.geometry_switchableoutput_status_radius
+		radius: Theme.geometry_iochannel_status_radius
 		visible: root.statusVisible
 
 		Label {
@@ -54,10 +54,10 @@ RowLayout {
 			anchors.centerIn: parent
 			text: root.statusText
 			width: parent.width
-			topPadding: Theme.geometry_switchableoutput_status_verticalPadding
-			bottomPadding: Theme.geometry_switchableoutput_status_verticalPadding
-			leftPadding: Theme.geometry_switchableoutput_status_horizontalPadding
-			rightPadding: Theme.geometry_switchableoutput_status_horizontalPadding
+			topPadding: Theme.geometry_iochannel_status_verticalPadding
+			bottomPadding: Theme.geometry_iochannel_status_verticalPadding
+			leftPadding: Theme.geometry_iochannel_status_horizontalPadding
+			rightPadding: Theme.geometry_iochannel_status_horizontalPadding
 			horizontalAlignment: Text.AlignHCenter
 			elide: Text.ElideRight
 			font.pixelSize: Theme.font_size_tiny

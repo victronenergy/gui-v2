@@ -53,7 +53,7 @@ FocusScope {
 			topMargin: -(Theme.geometry_button_touch_verticalMargin)
 		}
 		defaultBackgroundWidth: header.width
-		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 
 		onChecked: toggleState.expectedValue === 1
 		autoChecked: autoToggleState.expectedValue === 1
