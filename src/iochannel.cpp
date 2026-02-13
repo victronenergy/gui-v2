@@ -12,8 +12,9 @@
 
 using namespace Victron::VenusOS;
 
-IOChannel::IOChannel(QObject *parent)
+IOChannel::IOChannel(Direction direction, QObject *parent)
 	: QObject(parent)
+	, m_direction(direction)
 {
 }
 
@@ -135,6 +136,11 @@ QString IOChannel::serviceUid() const
 QString IOChannel::channelId() const
 {
 	return m_item ? m_item->id() : QString();
+}
+
+IOChannel::Direction IOChannel::direction() const
+{
+	return m_direction;
 }
 
 QString IOChannel::formattedName() const

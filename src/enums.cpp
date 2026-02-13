@@ -481,6 +481,41 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 	}
 }
 
+QString Enums::genericInput_typeToText(GenericInput_Type value) const
+{
+	switch (value) {
+	case GenericInput_Type_Discrete:
+		//% "Discrete value indicator"
+		return qtTrId("generic_input_discrete");
+	case GenericInput_Type_UnrangedValue:
+		//% "Value indicator (without range)"
+		return qtTrId("generic_input_value_without_range");
+	case GenericInput_Type_RangedValue:
+		//% "Value indicator (with range)"
+		return qtTrId("generic_input_value_without_range");
+	case GenericInput_Type_Temperature:
+		//% "Temperature indicator"
+		return qtTrId("generic_input_temperature");
+	}
+	return QString();
+}
+
+QString Enums::genericInput_statusToText(GenericInput_Status value) const
+{
+	switch (value) {
+	case GenericInput_Status_On:
+		//% "On"
+		return qtTrId("generic_input_status_on");
+	case GenericInput_Status_Fault:
+		//% "Fault"
+		return qtTrId("generic_input_status_fault");
+	case GenericInput_Status_SensorBatteryLow:
+		//% "Sensor battery low"
+		return qtTrId("generic_input_status_sensor_battery_low");
+	}
+	return QString();
+}
+
 QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId) const
 {
 	switch (value) {

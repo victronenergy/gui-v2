@@ -9,10 +9,55 @@
         "/Mgmt/ProcessName": "/opt/victronenergy/dbus-switch/dbus-switch.py",
         "/Mgmt/ProcessVersion": "0.8",
         "/ProductId": 49178,
-        "/ProductName": "Fake device to test new switch output types",
+        "/ProductName": "Fake device to test input/output types",
         "/State": 256,
 
-        "/SwitchableOutput/momentary_1/Name": "00a. Momentary",
+        "/GenericInput/discrete_1/Name": "In-00a. Discrete",
+        "/GenericInput/discrete_1/Value": 1,
+        "/GenericInput/discrete_1/Settings/CustomName": "",
+        "/GenericInput/discrete_1/Settings/Group": "",
+        "/GenericInput/discrete_1/Settings/ShowUIInput": 1,
+        "/GenericInput/discrete_1/Settings/Type": 0,
+        "/GenericInput/discrete_1/Settings/ValidTypes": 1,
+        "/GenericInput/discrete_1/Settings/Labels": "/off-on",
+        "/GenericInput/discrete_1/Status": 0,
+
+        "/GenericInput/unranged_1/Name": "In-01a. Unranged",
+        "/GenericInput/unranged_1/Value": 10.234,
+        "/GenericInput/unranged_1/Settings/CustomName": "",
+        "/GenericInput/unranged_1/Settings/Group": "",
+        "/GenericInput/unranged_1/Settings/ShowUIInput": 1,
+        "/GenericInput/unranged_1/Settings/Type": 1,
+        "/GenericInput/unranged_1/Settings/ValidTypes": 2,
+        "/GenericInput/unranged_1/Settings/Decimals": 3,
+        "/GenericInput/unranged_1/Settings/Unit": "/Volume",
+        "/GenericInput/unranged_1/Status": 0,
+
+        "/GenericInput/ranged_1/Name": "In-02a. Ranged",
+        "/GenericInput/ranged_1/Value": 10.234,
+        "/GenericInput/ranged_1/Settings/CustomName": "",
+        "/GenericInput/ranged_1/Settings/Group": "",
+        "/GenericInput/ranged_1/Settings/ShowUIInput": 1,
+        "/GenericInput/ranged_1/Settings/Type": 2,
+        "/GenericInput/ranged_1/Settings/ValidTypes": 4,
+        "/GenericInput/ranged_1/Settings/Decimals": 2,
+        "/GenericInput/ranged_1/Settings/Unit": "/Speed",
+        "/GenericInput/ranged_1/Settings/RangeMin": -50,
+        "/GenericInput/ranged_1/Settings/RangeMax": 50,
+        "/GenericInput/ranged_1/Status": 0,
+
+        "/GenericInput/temp_1/Name": "In-03a. Temperature",
+        "/GenericInput/temp_1/Value": 54.321,
+        "/GenericInput/temp_1/Settings/CustomName": "",
+        "/GenericInput/temp_1/Settings/Group": "",
+        "/GenericInput/temp_1/Settings/ShowUIInput": 1,
+        "/GenericInput/temp_1/Settings/Type": 3,
+        "/GenericInput/temp_1/Settings/ValidTypes": 8,
+        "/GenericInput/temp_1/Settings/Decimals": 2,
+        "/GenericInput/temp_1/Settings/Unit": "/Speed",
+        "/GenericInput/temp_1/Status": 0,
+
+        "/SwitchableOutput/momentary_1/Name": "Out-00a. Momentary",
         "/SwitchableOutput/momentary_1/Settings/CustomName": "",
         "/SwitchableOutput/momentary_1/Settings/Function": 2,
         "/SwitchableOutput/momentary_1/Settings/Group": "",
@@ -24,7 +69,7 @@
         "/SwitchableOutput/momentary_1/Status": 9,
         "/SwitchableOutput/momentary_1/Current": 1.2,
 
-        "/SwitchableOutput/momentary_2/Name": "00b. Momentary, disabled",
+        "/SwitchableOutput/momentary_2/Name": "Out-00b. Momentary, disabled",
         "/SwitchableOutput/momentary_2/Settings/CustomName": "",
         "/SwitchableOutput/momentary_2/Settings/Function": 2,
         "/SwitchableOutput/momentary_2/Settings/Group": "",
@@ -35,7 +80,7 @@
         "/SwitchableOutput/momentary_2/State": 0,
         "/SwitchableOutput/momentary_2/Status": 32,
 
-        "/SwitchableOutput/toggle_1/Name": "01a. Toggle",
+        "/SwitchableOutput/toggle_1/Name": "Out-01a. Toggle",
         "/SwitchableOutput/toggle_1/Settings/CustomName": "",
         "/SwitchableOutput/toggle_1/Settings/Function": 2,
         "/SwitchableOutput/toggle_1/Settings/Group": "",
@@ -46,7 +91,7 @@
         "/SwitchableOutput/toggle_1/State": 0,
         "/SwitchableOutput/toggle_1/Status": 9,
 
-        "/SwitchableOutput/toggle_2/Name": "01b. Toggle, off, disabled",
+        "/SwitchableOutput/toggle_2/Name": "Out-01b. Toggle, off, disabled",
         "/SwitchableOutput/toggle_2/Settings/CustomName": "",
         "/SwitchableOutput/toggle_2/Settings/Function": 2,
         "/SwitchableOutput/toggle_2/Settings/Group": "",
@@ -57,7 +102,7 @@
         "/SwitchableOutput/toggle_2/State": 0,
         "/SwitchableOutput/toggle_2/Status": 34,
 
-        "/SwitchableOutput/toggle_3/Name": "01c. Toggle, on, disabled",
+        "/SwitchableOutput/toggle_3/Name": "Out-01c. Toggle, on, disabled",
         "/SwitchableOutput/toggle_3/Settings/CustomName": "",
         "/SwitchableOutput/toggle_3/Settings/Function": 2,
         "/SwitchableOutput/toggle_3/Settings/Group": "",
@@ -69,7 +114,7 @@
         "/SwitchableOutput/toggle_3/Status": 41,
 
         "/SwitchableOutput/dimming_1/Dimming": 2,
-        "/SwitchableOutput/dimming_1/Name": "02a. Dimming",
+        "/SwitchableOutput/dimming_1/Name": "Out-02a. Dimming",
         "/SwitchableOutput/dimming_1/Settings/CustomName": "",
         "/SwitchableOutput/dimming_1/Settings/Function": 2,
         "/SwitchableOutput/dimming_1/Settings/Group": "",
@@ -81,7 +126,7 @@
         "/SwitchableOutput/dimming_1/Status": 9,
 
         "/SwitchableOutput/dimming_2/Dimming": 50,
-        "/SwitchableOutput/dimming_2/Name": "02b. Dimming, on, disabled",
+        "/SwitchableOutput/dimming_2/Name": "Out-02b. Dimming, on, disabled",
         "/SwitchableOutput/dimming_2/Settings/CustomName": "",
         "/SwitchableOutput/dimming_2/Settings/Function": 2,
         "/SwitchableOutput/dimming_2/Settings/Group": "",
@@ -93,7 +138,7 @@
         "/SwitchableOutput/dimming_2/Status": 36,
 
         "/SwitchableOutput/dimming_3/Dimming": 50,
-        "/SwitchableOutput/dimming_3/Name": "02c. Dimming, off, disabled",
+        "/SwitchableOutput/dimming_3/Name": "Out-02c. Dimming, off, disabled",
         "/SwitchableOutput/dimming_3/Settings/CustomName": "",
         "/SwitchableOutput/dimming_3/Settings/Function": 2,
         "/SwitchableOutput/dimming_3/Settings/Group": "",
@@ -106,7 +151,7 @@
 
         "/SwitchableOutput/temp_setpoint_1/Dimming": 1.5,
         "/SwitchableOutput/temp_setpoint_1/Measurement": 1.2,
-        "/SwitchableOutput/temp_setpoint_1/Name": "03a. Temp setpoint",
+        "/SwitchableOutput/temp_setpoint_1/Name": "Out-03a. Temp setpoint",
         "/SwitchableOutput/temp_setpoint_1/Settings/CustomName": "",
         "/SwitchableOutput/temp_setpoint_1/Settings/Function": 2,
         "/SwitchableOutput/temp_setpoint_1/Settings/Group": "",
@@ -122,7 +167,7 @@
         "/SwitchableOutput/temp_setpoint_1/Status": 9,
 
         "/SwitchableOutput/temp_setpoint_2/Dimming": 1,
-        "/SwitchableOutput/temp_setpoint_2/Name": "03b. Temp setpoint, no min/max/step",
+        "/SwitchableOutput/temp_setpoint_2/Name": "Out-03b. Temp setpoint, no min/max/step",
         "/SwitchableOutput/temp_setpoint_2/Settings/CustomName": "",
         "/SwitchableOutput/temp_setpoint_2/Settings/Function": 2,
         "/SwitchableOutput/temp_setpoint_2/Settings/Group": "",
@@ -134,7 +179,7 @@
         "/SwitchableOutput/temp_setpoint_2/Status": 9,
 
         "/SwitchableOutput/temp_setpoint_3/Dimming": 1,
-        "/SwitchableOutput/temp_setpoint_3/Name": "03c. Temp setpoint, larger range",
+        "/SwitchableOutput/temp_setpoint_3/Name": "Out-03c. Temp setpoint, larger range",
         "/SwitchableOutput/temp_setpoint_3/Settings/CustomName": "",
         "/SwitchableOutput/temp_setpoint_3/Settings/Function": 2,
         "/SwitchableOutput/temp_setpoint_3/Settings/Group": "",
@@ -149,7 +194,7 @@
         "/SwitchableOutput/temp_setpoint_3/Status": 9,
 
         "/SwitchableOutput/temp_setpoint_4/Dimming": 1,
-        "/SwitchableOutput/temp_setpoint_4/Name": "03d. Temp setpoint, disabled, ValidTypes mismatch",
+        "/SwitchableOutput/temp_setpoint_4/Name": "Out-03d. Temp setpoint, disabled, ValidTypes mismatch",
         "/SwitchableOutput/temp_setpoint_4/Settings/CustomName": "",
         "/SwitchableOutput/temp_setpoint_4/Settings/Function": 2,
         "/SwitchableOutput/temp_setpoint_4/Settings/Group": "",
@@ -161,7 +206,7 @@
         "/SwitchableOutput/temp_setpoint_4/Status": 32,
 
         "/SwitchableOutput/stepped_switch_1/Dimming": 1,
-        "/SwitchableOutput/stepped_switch_1/Name": "04a. Stepped switch, 3 options, on",
+        "/SwitchableOutput/stepped_switch_1/Name": "Out-04a. Stepped switch, 3 options, on",
         "/SwitchableOutput/stepped_switch_1/Settings/CustomName": "",
         "/SwitchableOutput/stepped_switch_1/Settings/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_1/Settings/Function": 2,
@@ -174,7 +219,7 @@
         "/SwitchableOutput/stepped_switch_1/Status": 9,
 
         "/SwitchableOutput/stepped_switch_2/Dimming": 2,
-        "/SwitchableOutput/stepped_switch_2/Name": "04b. Stepped switch, 5 options, off",
+        "/SwitchableOutput/stepped_switch_2/Name": "Out-04b. Stepped switch, 5 options, off",
         "/SwitchableOutput/stepped_switch_2/Settings/CustomName": "",
         "/SwitchableOutput/stepped_switch_2/Settings/DimmingMax": 5,
         "/SwitchableOutput/stepped_switch_2/Settings/Function": 2,
@@ -187,7 +232,7 @@
         "/SwitchableOutput/stepped_switch_2/Status": 9,
 
         "/SwitchableOutput/stepped_switch_3/Dimming": 1,
-        "/SwitchableOutput/stepped_switch_3/Name": "04c. Stepped switch, disabled",
+        "/SwitchableOutput/stepped_switch_3/Name": "Out-04c. Stepped switch, disabled",
         "/SwitchableOutput/stepped_switch_3/Settings/CustomName": "",
         "/SwitchableOutput/stepped_switch_3/Settings/DimmingMax": 3,
         "/SwitchableOutput/stepped_switch_3/Settings/Function": 2,
@@ -200,7 +245,7 @@
         "/SwitchableOutput/stepped_switch_3/Status": 32,
 
         "/SwitchableOutput/dropdown_1/Dimming": 1,
-        "/SwitchableOutput/dropdown_1/Name": "06a. Dropdown, 5 options",
+        "/SwitchableOutput/dropdown_1/Name": "Out-06a. Dropdown, 5 options",
         "/SwitchableOutput/dropdown_1/Settings/CustomName": "",
         "/SwitchableOutput/dropdown_1/Settings/Function": 2,
         "/SwitchableOutput/dropdown_1/Settings/Group": "",
@@ -212,7 +257,7 @@
         "/SwitchableOutput/dropdown_1/Status": 9,
 
         "/SwitchableOutput/dropdown_2/Dimming": 4,
-        "/SwitchableOutput/dropdown_2/Name": "06b. Dropdown, disabled",
+        "/SwitchableOutput/dropdown_2/Name": "Out-06b. Dropdown, disabled",
         "/SwitchableOutput/dropdown_2/Settings/CustomName": "",
         "/SwitchableOutput/dropdown_2/Settings/Function": 2,
         "/SwitchableOutput/dropdown_2/Settings/Group": "",
@@ -224,7 +269,7 @@
         "/SwitchableOutput/dropdown_2/Status": 32,
 
         "/SwitchableOutput/dropdown_3/Dimming": 3,
-        "/SwitchableOutput/dropdown_3/Name": "06c. Dropdown, 15 options",
+        "/SwitchableOutput/dropdown_3/Name": "Out-06c. Dropdown, 15 options",
         "/SwitchableOutput/dropdown_3/Settings/CustomName": "",
         "/SwitchableOutput/dropdown_3/Settings/Function": 2,
         "/SwitchableOutput/dropdown_3/Settings/Group": "",
@@ -236,7 +281,7 @@
         "/SwitchableOutput/dropdown_3/Status": 9,
 
         "/SwitchableOutput/basic_slider_1/Dimming": 30.5,
-        "/SwitchableOutput/basic_slider_1/Name": "07a. Basic slider",
+        "/SwitchableOutput/basic_slider_1/Name": "Out-07a. Basic slider",
         "/SwitchableOutput/basic_slider_1/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_1/Settings/Function": 2,
         "/SwitchableOutput/basic_slider_1/Settings/Group": "",
@@ -251,7 +296,7 @@
         "/SwitchableOutput/basic_slider_1/Status": 9,
 
         "/SwitchableOutput/basic_slider_2/Dimming": 50,
-        "/SwitchableOutput/basic_slider_2/Name": "07b. Basic slider, no min/max/step, no unit",
+        "/SwitchableOutput/basic_slider_2/Name": "Out-07b. Basic slider, no min/max/step, no unit",
         "/SwitchableOutput/basic_slider_2/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_2/Settings/Function": 2,
         "/SwitchableOutput/basic_slider_2/Settings/Group": "",
@@ -262,7 +307,7 @@
         "/SwitchableOutput/basic_slider_2/Status": 9,
 
         "/SwitchableOutput/basic_slider_3/Dimming": 50,
-        "/SwitchableOutput/basic_slider_3/Name": "07c. Basic slider, disabled",
+        "/SwitchableOutput/basic_slider_3/Name": "Out-07c. Basic slider, disabled",
         "/SwitchableOutput/basic_slider_3/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_3/Settings/Function": 2,
         "/SwitchableOutput/basic_slider_3/Settings/Group": "",
@@ -273,7 +318,7 @@
         "/SwitchableOutput/basic_slider_3/Status": 32,
 
         "/SwitchableOutput/basic_slider_4/Dimming": 10,
-        "/SwitchableOutput/basic_slider_4/Name": "07d. Basic slider: speed",
+        "/SwitchableOutput/basic_slider_4/Name": "Out-07d. Basic slider: speed",
         "/SwitchableOutput/basic_slider_4/Settings/Unit": "/Speed",
         "/SwitchableOutput/basic_slider_4/Settings/DimmingMin": -100,
         "/SwitchableOutput/basic_slider_4/Settings/DimmingMax": 100,
@@ -287,7 +332,7 @@
         "/SwitchableOutput/basic_slider_4/Status": 9,
 
         "/SwitchableOutput/basic_slider_5/Dimming": 10,
-        "/SwitchableOutput/basic_slider_5/Name": "07e. Basic slider: temp",
+        "/SwitchableOutput/basic_slider_5/Name": "Out-07e. Basic slider: temp",
         "/SwitchableOutput/basic_slider_5/Settings/Unit": "/Temperature",
         "/SwitchableOutput/basic_slider_5/Settings/DimmingMin": -100,
         "/SwitchableOutput/basic_slider_5/Settings/DimmingMax": 100,
@@ -302,7 +347,7 @@
         "/SwitchableOutput/basic_slider_5/Status": 9,
 
         "/SwitchableOutput/basic_slider_6/Dimming": 50,
-        "/SwitchableOutput/basic_slider_6/Name": "07f. Basic slider: volume",
+        "/SwitchableOutput/basic_slider_6/Name": "Out-07f. Basic slider: volume",
         "/SwitchableOutput/basic_slider_6/Settings/Unit": "/Volume",
         "/SwitchableOutput/basic_slider_6/Settings/DimmingMin": -100,
         "/SwitchableOutput/basic_slider_6/Settings/DimmingMax": 100,
@@ -317,7 +362,7 @@
         "/SwitchableOutput/basic_slider_6/Status": 9,
 
         "/SwitchableOutput/numeric_input_1/Dimming": 10,
-        "/SwitchableOutput/numeric_input_1/Name": "08a. Numeric input: speed",
+        "/SwitchableOutput/numeric_input_1/Name": "Out-08a. Numeric input: speed",
         "/SwitchableOutput/numeric_input_1/Settings/CustomName": "",
         "/SwitchableOutput/numeric_input_1/Settings/Function": 2,
         "/SwitchableOutput/numeric_input_1/Settings/Group": "",
@@ -333,7 +378,7 @@
         "/SwitchableOutput/numeric_input_1/Status": 9,
 
         "/SwitchableOutput/numeric_input_2/Dimming": 0.5,
-        "/SwitchableOutput/numeric_input_2/Name": "08b. Numeric input: temp",
+        "/SwitchableOutput/numeric_input_2/Name": "Out-08b. Numeric input: temp",
         "/SwitchableOutput/numeric_input_2/Settings/CustomName": "",
         "/SwitchableOutput/numeric_input_2/Settings/Function": 2,
         "/SwitchableOutput/numeric_input_2/Settings/Group": "",
@@ -349,7 +394,7 @@
         "/SwitchableOutput/numeric_input_2/Status": 9,
 
         "/SwitchableOutput/numeric_input_3/Dimming": 10,
-        "/SwitchableOutput/numeric_input_3/Name": "08c. Numeric input: volume",
+        "/SwitchableOutput/numeric_input_3/Name": "Out-08c. Numeric input: volume",
         "/SwitchableOutput/numeric_input_3/Settings/CustomName": "",
         "/SwitchableOutput/numeric_input_3/Settings/Function": 2,
         "/SwitchableOutput/numeric_input_3/Settings/Group": "",
@@ -365,7 +410,7 @@
         "/SwitchableOutput/numeric_input_3/Status": 9,
 
         "/SwitchableOutput/numeric_input_4/Dimming": 50,
-        "/SwitchableOutput/numeric_input_4/Name": "08d. Numeric input, no min/max/step, no unit",
+        "/SwitchableOutput/numeric_input_4/Name": "Out-08d. Numeric input, no min/max/step, no unit",
         "/SwitchableOutput/numeric_input_4/Settings/CustomName": "",
         "/SwitchableOutput/numeric_input_4/Settings/Function": 2,
         "/SwitchableOutput/numeric_input_4/Settings/Group": "",
@@ -377,7 +422,7 @@
         "/SwitchableOutput/numeric_input_4/Status": 9,
 
         "/SwitchableOutput/numeric_input_5/Dimming": 0,
-        "/SwitchableOutput/numeric_input_5/Name": "08e. Numeric input, disabled",
+        "/SwitchableOutput/numeric_input_5/Name": "Out-08e. Numeric input, disabled",
         "/SwitchableOutput/numeric_input_5/Settings/CustomName": "",
         "/SwitchableOutput/numeric_input_5/Settings/Function": 2,
         "/SwitchableOutput/numeric_input_5/Settings/Group": "",
@@ -390,7 +435,7 @@
         "/SwitchableOutput/numeric_input_5/Status": 32,
 
         "/SwitchableOutput/three_state_1/Auto": 0,
-        "/SwitchableOutput/three_state_1/Name": "09a. Three-state switch, off",
+        "/SwitchableOutput/three_state_1/Name": "Out-09a. Three-state switch, off",
         "/SwitchableOutput/three_state_1/Settings/CustomName": "",
         "/SwitchableOutput/three_state_1/Settings/Function": 2,
         "/SwitchableOutput/three_state_1/Settings/Group": "",
@@ -402,7 +447,7 @@
         "/SwitchableOutput/three_state_1/Status": 9,
 
         "/SwitchableOutput/three_state_2/Auto": 0,
-        "/SwitchableOutput/three_state_2/Name": "09b. Three-state switch, on",
+        "/SwitchableOutput/three_state_2/Name": "Out-09b. Three-state switch, on",
         "/SwitchableOutput/three_state_2/Settings/CustomName": "",
         "/SwitchableOutput/three_state_2/Settings/Function": 2,
         "/SwitchableOutput/three_state_2/Settings/Group": "",
@@ -414,7 +459,7 @@
         "/SwitchableOutput/three_state_2/Status": 9,
 
         "/SwitchableOutput/three_state_3/Auto": 0,
-        "/SwitchableOutput/three_state_3/Name": "09c. Three-state switch, disabled",
+        "/SwitchableOutput/three_state_3/Name": "Out-09c. Three-state switch, disabled",
         "/SwitchableOutput/three_state_3/Settings/CustomName": "",
         "/SwitchableOutput/three_state_3/Settings/Function": 2,
         "/SwitchableOutput/three_state_3/Settings/Group": "",
@@ -425,7 +470,7 @@
         "/SwitchableOutput/three_state_3/State": 1,
         "/SwitchableOutput/three_state_3/Status": 32,
 
-        "/SwitchableOutput/bilge_pump_1/Name": "10a. Bilge pump, running",
+        "/SwitchableOutput/bilge_pump_1/Name": "Out-10a. Bilge pump, running",
         "/SwitchableOutput/bilge_pump_1/Settings/CustomName": "",
         "/SwitchableOutput/bilge_pump_1/Settings/Function": 2,
         "/SwitchableOutput/bilge_pump_1/Settings/Group": "",
@@ -436,7 +481,7 @@
         "/SwitchableOutput/bilge_pump_1/State": 0,
         "/SwitchableOutput/bilge_pump_1/Status": 9,
 
-        "/SwitchableOutput/bilge_pump_2/Name": "10b. Bilge pump, not running",
+        "/SwitchableOutput/bilge_pump_2/Name": "Out-10b. Bilge pump, not running",
         "/SwitchableOutput/bilge_pump_2/Settings/CustomName": "",
         "/SwitchableOutput/bilge_pump_2/Settings/Function": 2,
         "/SwitchableOutput/bilge_pump_2/Settings/Group": "",
@@ -447,7 +492,7 @@
         "/SwitchableOutput/bilge_pump_2/State": 1,
         "/SwitchableOutput/bilge_pump_2/Status": 0,
 
-        "/SwitchableOutput/bilge_pump_3/Name": "10c. Bilge pump, fault",
+        "/SwitchableOutput/bilge_pump_3/Name": "Out-10c. Bilge pump, fault",
         "/SwitchableOutput/bilge_pump_3/Settings/CustomName": "",
         "/SwitchableOutput/bilge_pump_3/Settings/Function": 2,
         "/SwitchableOutput/bilge_pump_3/Settings/Group": "",
@@ -458,7 +503,7 @@
         "/SwitchableOutput/bilge_pump_3/State": 1,
         "/SwitchableOutput/bilge_pump_3/Status": 8,
 
-        "/SwitchableOutput/bilge_pump_3/Name": "10d. Bilge pump, disabled",
+        "/SwitchableOutput/bilge_pump_3/Name": "Out-10d. Bilge pump, disabled",
         "/SwitchableOutput/bilge_pump_3/Settings/CustomName": "",
         "/SwitchableOutput/bilge_pump_3/Settings/Function": 2,
         "/SwitchableOutput/bilge_pump_3/Settings/Group": "",
@@ -469,7 +514,7 @@
         "/SwitchableOutput/bilge_pump_3/State": 0,
         "/SwitchableOutput/bilge_pump_3/Status": 32,
 
-        "/SwitchableOutput/color_dimmer_rgb/Name": "11. RGB wheel",
+        "/SwitchableOutput/color_dimmer_rgb/Name": "Out-11. RGB wheel",
         "/SwitchableOutput/color_dimmer_rgb/LightControls": [14,81,100,0,0],
         "/SwitchableOutput/color_dimmer_rgb/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_rgb/Settings/Function": 2,
@@ -481,7 +526,7 @@
         "/SwitchableOutput/color_dimmer_rgb/State": 0,
         "/SwitchableOutput/color_dimmer_rgb/Status": 9,
 
-        "/SwitchableOutput/color_dimmer_cct/Name": "12. CCT wheel",
+        "/SwitchableOutput/color_dimmer_cct/Name": "Out-12. CCT wheel",
         "/SwitchableOutput/color_dimmer_cct/LightControls": [0,0,92,0,3380],
         "/SwitchableOutput/color_dimmer_cct/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_cct/Settings/Function": 2,
@@ -493,7 +538,7 @@
         "/SwitchableOutput/color_dimmer_cct/State": 0,
         "/SwitchableOutput/color_dimmer_cct/Status": 9,
 
-        "/SwitchableOutput/color_dimmer_rgb_or_cct/Name": "12/13. RGB or CCT wheel",
+        "/SwitchableOutput/color_dimmer_rgb_or_cct/Name": "Out-12/13. RGB or CCT wheel",
         "/SwitchableOutput/color_dimmer_rgb_or_cct/LightControls": [307,100,46,0,0],
         "/SwitchableOutput/color_dimmer_rgb_or_cct/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_rgb_or_cct/Settings/Function": 2,
@@ -505,7 +550,7 @@
         "/SwitchableOutput/color_dimmer_rgb_or_cct/State": 1,
         "/SwitchableOutput/color_dimmer_rgb_or_cct/Status": 9,
 
-        "/SwitchableOutput/color_dimmer_rgbw/Name": "13. RGB+W wheel",
+        "/SwitchableOutput/color_dimmer_rgbw/Name": "Out-13. RGB+W wheel",
         "/SwitchableOutput/color_dimmer_rgbw/LightControls": [107,100,100,50,0],
         "/SwitchableOutput/color_dimmer_rgbw/Settings/CustomName": "",
         "/SwitchableOutput/color_dimmer_rgbw/Settings/Function": 2,

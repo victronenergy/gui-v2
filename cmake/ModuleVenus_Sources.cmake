@@ -639,6 +639,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/genericinput.h
+    src/genericinput.cpp
     src/iochannel.h
     src/iochannel.cpp
     src/iochannelgroupmodel.h

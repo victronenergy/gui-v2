@@ -530,6 +530,24 @@ public:
 	};
 	Q_ENUM(Switch_DeviceState)
 
+	enum GenericInput_Type {
+		GenericInput_Type_Discrete = 0,
+		GenericInput_Type_UnrangedValue = 1,
+		GenericInput_Type_RangedValue = 2,
+		GenericInput_Type_Temperature = 3,
+
+		// Update this value whenever new types are added.
+		GenericInput_Type_MaxSupportedType = GenericInput_Type_Temperature
+	};
+	Q_ENUM(GenericInput_Type)
+
+	enum GenericInput_Status {
+		GenericInput_Status_On = 0x00,
+		GenericInput_Status_Fault = 0x01,
+		GenericInput_Status_SensorBatteryLow = 0x02,
+	};
+	Q_ENUM(GenericInput_Status)
+
 	enum SwitchableOutput_Type {
 		SwitchableOutput_Type_Momentary,
 		SwitchableOutput_Type_Toggle,
@@ -1005,6 +1023,8 @@ public:
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
+	Q_INVOKABLE QString genericInput_typeToText(GenericInput_Type value) const;
+	Q_INVOKABLE QString genericInput_statusToText(GenericInput_Status value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;

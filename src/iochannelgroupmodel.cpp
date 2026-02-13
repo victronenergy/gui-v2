@@ -6,6 +6,7 @@
 #include "iochannelgroupmodel.h"
 #include "allservicesmodel.h"
 #include "alldevicesmodel.h"
+#include "genericinput.h"
 #include "switchableoutput.h"
 
 #include <QQmlInfo>
@@ -219,13 +220,18 @@ void IOChannelGroupModel::addAvailableServices()
 
 void IOChannelGroupModel::anyServiceAdded(VeQItem *serviceItem)
 {
-	// If the service has a /SwitchableOutput path, add the children of that path as channels.
-	if (VeQItem *channelParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
-		addChannelChildren(channelParentItem);
+	// If the service has a /GenericInput and/or /SwitchableOutput paths, add the children of those
+	// paths as channels.
+	if (VeQItem *inputParentItem = serviceItem->itemGet(QStringLiteral("GenericInput"))) {
+		addChannelChildren(inputParentItem);
+	}
+	if (VeQItem *outputParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
+		addChannelChildren(outputParentItem);
 	}
 
 	connect(serviceItem, &VeQItem::childAdded, this, [this](VeQItem *childItem) {
-		if (childItem->id() == QStringLiteral("SwitchableOutput")) {
+		if (childItem->id() == QStringLiteral("GenericInput")
+				|| childItem->id() == QStringLiteral("SwitchableOutput")) {
 			addChannelChildren(childItem);
 		}
 	});
@@ -238,8 +244,8 @@ void IOChannelGroupModel::addChannelChildren(VeQItem *channelParentItem)
 		 ++it) {
 		addChannelForItem(it.value());
 	}
-	// If any children of the /SwitchableOutput path are added/removed in the future, add/remove
-	// the children as channels.
+	// If any children of the /GenericInput or /SwitchableOutput path are added/removed in the
+	// future, add/remove the children as channels.
 	connect(channelParentItem, &VeQItem::childAdded,
 			this, &IOChannelGroupModel::addChannelForItem);
 	connect(channelParentItem, &VeQItem::childAboutToBeRemoved,
@@ -249,9 +255,16 @@ void IOChannelGroupModel::addChannelChildren(VeQItem *channelParentItem)
 void IOChannelGroupModel::anyServiceAboutToBeRemoved(VeQItem *serviceItem)
 {
 	// If the service has a /SwitchableOutput path, remove all children of that path as channels
-	if (VeQItem *channelParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
-		for (auto it = channelParentItem->itemChildren().begin();
-			 it != channelParentItem->itemChildren().end();
+	if (VeQItem *inputParentItem = serviceItem->itemGet(QStringLiteral("GenericInput"))) {
+		for (auto it = inputParentItem->itemChildren().begin();
+			 it != inputParentItem->itemChildren().end();
+			 ++it) {
+			removeChannelForItem(it.value());
+		}
+	}
+	if (VeQItem *outputParentItem = serviceItem->itemGet(QStringLiteral("SwitchableOutput"))) {
+		for (auto it = outputParentItem->itemChildren().begin();
+			 it != outputParentItem->itemChildren().end();
 			 ++it) {
 			removeChannelForItem(it.value());
 		}
@@ -260,7 +273,18 @@ void IOChannelGroupModel::anyServiceAboutToBeRemoved(VeQItem *serviceItem)
 
 void IOChannelGroupModel::addChannelForItem(VeQItem *channelItem)
 {
-	IOChannel *channel = new SwitchableOutput(this, channelItem);
+	if (!channelItem || !channelItem->itemParent()) {
+		return;
+	}
+
+	IOChannel *channel = nullptr;
+	if (channelItem->itemParent()->id() == QStringLiteral("GenericInput")) {
+		channel = new GenericInput(this, channelItem);
+	} else if (channelItem->itemParent()->id() == QStringLiteral("SwitchableOutput")) {
+		channel = new SwitchableOutput(this, channelItem);
+	} else {
+		return;
+	}
 	m_channels.insert(channel->uid(), ChannelInfo { channel, QString() });
 
 	// Add the channel to its group.

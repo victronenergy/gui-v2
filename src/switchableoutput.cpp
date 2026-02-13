@@ -13,12 +13,12 @@
 using namespace Victron::VenusOS;
 
 SwitchableOutput::SwitchableOutput(QObject *parent)
-	: IOChannel(parent)
+	: IOChannel(IOChannel::Output, parent)
 {
 }
 
 SwitchableOutput::SwitchableOutput(QObject *parent, VeQItem *outputItem)
-	: IOChannel(parent)
+	: IOChannel(IOChannel::Output, parent)
 {
 	initialize(outputItem);
 }
