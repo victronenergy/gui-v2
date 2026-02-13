@@ -48,6 +48,7 @@ class IOChannel : public QObject
 	Q_PROPERTY(QString uid READ uid WRITE setUid NOTIFY uidChanged FINAL)
 	Q_PROPERTY(QString serviceUid READ serviceUid NOTIFY serviceUidChanged FINAL)
 	Q_PROPERTY(QString channelId READ channelId NOTIFY channelIdChanged FINAL)
+	Q_PROPERTY(Direction direction READ direction CONSTANT FINAL)
 	Q_PROPERTY(QString formattedName READ formattedName NOTIFY formattedNameChanged FINAL)
 	Q_PROPERTY(int status READ status NOTIFY statusChanged FINAL)
 	Q_PROPERTY(int type READ type NOTIFY typeChanged FINAL)
@@ -60,7 +61,13 @@ class IOChannel : public QObject
 	Q_PROPERTY(int decimals READ decimals NOTIFY decimalsChanged FINAL)
 
 public:
-	explicit IOChannel(QObject *parent = nullptr);
+	enum Direction {
+		Output,
+		Input
+	};
+	Q_ENUM(Direction)
+
+	explicit IOChannel(Direction direction, QObject *parent = nullptr);
 
 	// The fully qualified uid for the output. For example, for an output on the 'switch' service
 	// on D-Bus, it is: com.victronenergy.switch[.suffix]/SwitchableOutput/<channelId>
@@ -72,6 +79,11 @@ public:
 
 	// The identifier for the channel on the service (not necessarily an integer).
 	QString channelId() const;
+
+	// Indicates whether this is a Generic Input or Switchable Output. This value never changes.
+	// If the /Channel/x/Direction value has changed in the backend, the object becomes invalid, as
+	// IOChannelGroupModel destroys it and creates a new one based on the new direction type.
+	Direction direction() const;
 
 	// A name for the channel, with additional details: if it has no custom name and is in a
 	// named group (rather than its default device group), the returned text includes the device
@@ -160,6 +172,7 @@ protected:
 	QString m_formattedName;
 	QString m_group;
 	QString m_unitText;
+	Direction m_direction = Input;
 	int m_status = 0; // Default status is 0 (off)
 	int m_type = -1;
 	int m_unitType = Enums::Units_None;
