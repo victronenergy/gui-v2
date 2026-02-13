@@ -136,6 +136,7 @@ QString Units::formatCoordinate(qreal decimalDegrees, VenusOS::Enums::GpsData_Fo
 				.arg(formatNumber(minutes, 4))
 				.arg(VenusOS::Enums::create()->cardinalDirectionToShortText(direction));
 	}
+	return QString();
 }
 
 int Units::defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const
