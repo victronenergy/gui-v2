@@ -157,6 +157,7 @@ QString Enums::cardinalDirectionToShortText(CardinalDirection direction) const
 		//% "W"
 		return qtTrId("cardinalDirection_short_west");
 	}
+	return QString();
 }
 
 Enums::DcMeter_Type Enums::dcMeter_type(const QString &serviceType, int monitorMode) const
