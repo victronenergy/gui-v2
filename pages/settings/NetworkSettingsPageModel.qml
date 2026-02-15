@@ -170,6 +170,14 @@ VisibleItemModel {
 		saveInput: function() { networkServices.setServiceProperty("Nameserver", textField.text) }
 	}
 
+	ListSwitch {
+		//% "Enable Link-local"
+		text: qsTrId("settings_tcpip_ethernet_linklocal_enabled")
+		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/EthernetLinkLocal"
+		preferredVisible: !networkServices.wifi
+		writeAccessLevel: VenusOS.User_AccessType_User
+	}
+
 	ListText {
 		id: linklocal
 
