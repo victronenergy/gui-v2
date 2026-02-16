@@ -19,7 +19,7 @@
       <translation>Potenza</translation>
     </message>
     <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="430"/>
+      <location filename="../../src/enums.cpp" line="431"/>
       <source>Off</source>
       <translation>Spento</translation>
     </message>
@@ -1717,42 +1717,42 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Limitazione immissione attiva</translation>
     </message>
     <message id="digitalinputs_type_pulsemeter">
-      <location filename="../../src/enums.cpp" line="294"/>
+      <location filename="../../src/enums.cpp" line="295"/>
       <source>Pulse meter</source>
       <translation>Contatore di impulsi</translation>
     </message>
     <message id="digitalinputs_type_dooralarm">
-      <location filename="../../src/enums.cpp" line="297"/>
+      <location filename="../../src/enums.cpp" line="298"/>
       <source>Door alarm</source>
       <translation>Allarme porta</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="523"/>
+      <location filename="../../src/enums.cpp" line="524"/>
       <source>Bilge pump</source>
       <translation>Pompa di sentina</translation>
     </message>
     <message id="digitalinputs_type_bilgealarm">
-      <location filename="../../src/enums.cpp" line="303"/>
+      <location filename="../../src/enums.cpp" line="304"/>
       <source>Bilge alarm</source>
       <translation>Allarme di sentina</translation>
     </message>
     <message id="digitalinputs_type_burglaralarm">
-      <location filename="../../src/enums.cpp" line="306"/>
+      <location filename="../../src/enums.cpp" line="307"/>
       <source>Burglar alarm</source>
       <translation>Allarme furti</translation>
     </message>
     <message id="digitalinputs_type_smokealarm">
-      <location filename="../../src/enums.cpp" line="309"/>
+      <location filename="../../src/enums.cpp" line="310"/>
       <source>Smoke alarm</source>
       <translation>Allarme fumo</translation>
     </message>
     <message id="digitalinputs_type_firealarm">
-      <location filename="../../src/enums.cpp" line="312"/>
+      <location filename="../../src/enums.cpp" line="313"/>
       <source>Fire alarm</source>
       <translation>Allarme fuoco</translation>
     </message>
     <message id="digitalinputs_type_co2alarm">
-      <location filename="../../src/enums.cpp" line="315"/>
+      <location filename="../../src/enums.cpp" line="316"/>
       <source>CO2 alarm</source>
       <translation>Allarme CO2</translation>
     </message>
@@ -2322,7 +2322,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Server DNS</translation>
     </message>
     <message id="settings_tcpip_link_local">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="177"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="185"/>
       <source>Link-local IP address</source>
       <translation>Link indirizzo IP locale</translation>
     </message>
@@ -2458,25 +2458,25 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Allarme alta tensione batteria</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="650"/>
+      <location filename="../../components/CommonWords.qml" line="654"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Ultimo errore</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="653"/>
+      <location filename="../../components/CommonWords.qml" line="657"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Penultimo errore</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="656"/>
+      <location filename="../../components/CommonWords.qml" line="660"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Terzultimo errore</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="659"/>
+      <location filename="../../components/CommonWords.qml" line="663"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Quartultimo errore</translation>
@@ -2617,7 +2617,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation type="unfinished">Allarme</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="369"/>
+      <location filename="../../src/enums.cpp" line="370"/>
       <source>Alarm</source>
       <extracomment>Digital input state</extracomment>
       <translation>Allarme</translation>
@@ -3012,7 +3012,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Rileva nuovamente la batteria</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="217"/>
       <source>Press to redetect</source>
       <translation>Premere per rilevare nuovamente</translation>
     </message>
@@ -3887,12 +3887,12 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Dispositivi bus Smappee</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="676"/>
+      <location filename="../../components/CommonWords.qml" line="680"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Questa impostazione viene disattivata quando e collegato un Digital Multi Control.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="665"/>
+      <location filename="../../components/CommonWords.qml" line="669"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Questa impostazione viene disattivata quando è collegato un VE.Bus BMS.</translation>
     </message>
@@ -4075,7 +4075,7 @@ NOTE: L'aggiornamento potrebbe arrestare temporaneamente il sistema.</translatio
       <translation>Premere per interrompere</translation>
     </message>
     <message id="vebus_device_press_to_start">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="127"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="90"/>
       <source>Press to start</source>
       <translation>Premere per avviare</translation>
@@ -4137,108 +4137,108 @@ Si desidera continuare?</translation>
       <translation>VE.Bus BMS</translation>
     </message>
     <message id="vebus_device_warning">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="97"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
       <source>Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current.</source>
       <translation>Avvertenza: L'attivazione dell'equalizzazione in un sistema ESS che comprende caricabatterie solari può portare a una carica della batteria ad alta tensione con una corrente troppo elevata.</translation>
     </message>
     <message id="vebus_device_switch_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="101"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="106"/>
       <source>The system will automatically switch over to float once the Equalization charge has been completed.</source>
       <translation>Il sistema passerà automaticamente a mantenimento quando l'equalizzazione si sia completamente caricata.</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="113"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="165"/>
       <source>Interrupt equalization</source>
       <translation>Interrompi equalizzazione</translation>
     </message>
     <message id="vebus_device_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="115"/>
       <source>Equalization</source>
       <translation>Compensazione</translation>
     </message>
     <message id="vebus_device_interrupting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
       <source>Interrupting...</source>
       <translation>Interruzione in corso...</translation>
     </message>
     <message id="vebus_device_starting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
       <source>Starting...</source>
       <translation>Avvio in corso...</translation>
     </message>
     <message id="vebus_device_press_to_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="120"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
       <source>Press to interrupt</source>
       <translation>Premere per interrompere</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="169"/>
       <source>Interrupt and restart absorption</source>
       <translation>Interrompi e riavvia assorbimento</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="175"/>
       <source>Interrupt and go to float</source>
       <translation>Interrompi e vai a mantenimento</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="181"/>
       <source>Interrupt</source>
       <translation>Interrompi</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="182"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="187"/>
       <source>Do not interrupt</source>
       <translation>Non interrompere</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="207"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
       <source>Redetect VE.Bus system</source>
       <translation>Rileva nuovamente sistema</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="215"/>
       <source>Redetecting...</source>
       <translation>Rilevazione in corso...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
       <source>Restart VE.Bus system</source>
       <translation>Riavvia sistema VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
       <source>Restarting...</source>
       <translation>Riavvio in corso...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
       <source>Press to restart</source>
       <translation>Premere per riavviare</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="249"/>
       <source>AC input 1 ignored</source>
       <translation>Entrata CA 1 ignorata</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="257"/>
       <source>AC input 2 ignored</source>
       <translation>Entrata CA 2 ignorata</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="265"/>
       <source>ESS Relay test</source>
       <translation>Test Relè ESS</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="266"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
       <source>Completed</source>
       <translation type="unfinished">Completo</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="268"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="271"/>
       <source>Pending</source>
       <translation type="unfinished">In attesa</translation>
     </message>
@@ -4253,12 +4253,12 @@ Si desidera continuare?</translation>
       <translation>In attesa</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="317"/>
       <source>VE.Bus diagnostics</source>
       <translation>Diagnosi VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="303"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="336"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>Contatore di qualità della rete Fase L%1, dispositivo %2 (%3)</translation>
     </message>
@@ -4348,8 +4348,8 @@ Si desidera continuare?</translation>
       <source>Failing step: %1</source>
       <translation>Errore passo: %1</translation>
     </message>
-    <message id="vebus_device_phase_x_device_x_index_x">
-      <location filename="../../pages/vebusdevice/PageVeBusError11Menu.qml" line="34"/>
+    <message id="common_words_vebus_device_phase_x_device_x_index_x">
+      <location filename="../../components/CommonWords.qml" line="581"/>
       <source>Phase L%1, device %2 (%3)</source>
       <extracomment>eg. 'Phase L1, device 3 (6)', where '(6)' is the index into the list of reported values</extracomment>
       <translation>Fase L%1, dispositivo %2 (%3)</translation>
@@ -4610,7 +4610,7 @@ Si desidera continuare?</translation>
       <translation>Errore di cancellazione</translation>
     </message>
     <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="361"/>
+      <location filename="../../src/enums.cpp" line="362"/>
       <source>Closed</source>
       <extracomment>Digital input state</extracomment>
       <translation>Chiuso</translation>
@@ -4675,7 +4675,7 @@ Si desidera continuare?</translation>
       <translation>Energia</translation>
     </message>
     <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="411"/>
+      <location filename="../../src/enums.cpp" line="412"/>
       <source>Error</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Errore</translation>
@@ -4696,7 +4696,7 @@ Si desidera continuare?</translation>
       <translation>Versione firmware</translation>
     </message>
     <message id="digitalinputs_type_generator">
-      <location filename="../../src/enums.cpp" line="318"/>
+      <location filename="../../src/enums.cpp" line="319"/>
       <source>Generator</source>
       <translation>Generatore</translation>
     </message>
@@ -4819,7 +4819,7 @@ Si desidera continuare?</translation>
       <translation>Nome Modello</translation>
     </message>
     <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="349"/>
+      <location filename="../../src/enums.cpp" line="350"/>
       <source>No</source>
       <extracomment>Digital input state</extracomment>
       <translation>No</translation>
@@ -4845,13 +4845,13 @@ Si desidera continuare?</translation>
       <translation>Offline</translation>
     </message>
     <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="365"/>
+      <location filename="../../src/enums.cpp" line="366"/>
       <source>OK</source>
       <extracomment>Digital input state</extracomment>
       <translation>Ok</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="573"/>
+      <location filename="../../src/enums.cpp" line="574"/>
       <source>On</source>
       <translation>Acceso</translation>
     </message>
@@ -4861,7 +4861,7 @@ Si desidera continuare?</translation>
       <translation>Online</translation>
     </message>
     <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="357"/>
+      <location filename="../../src/enums.cpp" line="358"/>
       <source>Open</source>
       <extracomment>Digital input open</extracomment>
       <translation>Aperto</translation>
@@ -4924,7 +4924,7 @@ Si desidera continuare?</translation>
       <translation>Rimuovi</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="570"/>
+      <location filename="../../src/enums.cpp" line="571"/>
       <source>Running</source>
       <translation>In funzionamento</translation>
     </message>
@@ -4954,7 +4954,7 @@ Si desidera continuare?</translation>
       <translation>Forza del segnale</translation>
     </message>
     <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="403"/>
+      <location filename="../../src/enums.cpp" line="404"/>
       <source>Standby</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Standby</translation>
@@ -4990,7 +4990,7 @@ Si desidera continuare?</translation>
       <translation>Stato</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="395"/>
+      <location filename="../../src/enums.cpp" line="396"/>
       <source>Startup (%1)</source>
       <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>Avvio (%1)</translation>
@@ -5006,7 +5006,7 @@ Si desidera continuare?</translation>
       <translation>Arrestare quando la condizione sia attiva per</translation>
     </message>
     <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="377"/>
+      <location filename="../../src/enums.cpp" line="378"/>
       <source>Stopped</source>
       <extracomment>Digital input state</extracomment>
       <translation>Arrestato</translation>
@@ -5058,33 +5058,33 @@ Si desidera continuare?</translation>
       <translation>Errore VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="580"/>
+      <location filename="../../components/CommonWords.qml" line="584"/>
       <source>Voltage</source>
       <translation>Tensione</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="583"/>
+      <location filename="../../components/CommonWords.qml" line="587"/>
       <source>VRM instance</source>
       <translation>Istanza VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="586"/>
+      <location filename="../../components/CommonWords.qml" line="590"/>
       <source>When warning is cleared stop after</source>
       <translation>Una volta cancellato l'avviso, arresta dopo</translation>
     </message>
     <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="353"/>
+      <location filename="../../src/enums.cpp" line="354"/>
       <source>Yes</source>
       <extracomment>Digital input state</extracomment>
       <translation>Sì</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="592"/>
+      <location filename="../../components/CommonWords.qml" line="596"/>
       <source>Yesterday</source>
       <translation>Ieri</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="596"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Rendimento</translation>
@@ -5235,62 +5235,62 @@ Si desidera continuare?</translation>
       <translation>Non sono stati trovati firmware</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="618"/>
+      <location filename="../../src/enums.cpp" line="619"/>
       <source>Fuel</source>
       <translation>Carburante</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="621"/>
+      <location filename="../../src/enums.cpp" line="622"/>
       <source>Fresh water</source>
       <translation>Acqua dolce</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="624"/>
+      <location filename="../../src/enums.cpp" line="625"/>
       <source>Waste water</source>
       <translation>Acque reflue</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="627"/>
+      <location filename="../../src/enums.cpp" line="628"/>
       <source>Live well</source>
       <translation>Serbatoio</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="630"/>
+      <location filename="../../src/enums.cpp" line="631"/>
       <source>Oil</source>
       <translation>Olio</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="633"/>
+      <location filename="../../src/enums.cpp" line="634"/>
       <source>Black water</source>
       <translation>ACQUE NERE</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="636"/>
+      <location filename="../../src/enums.cpp" line="637"/>
       <source>Gasoline</source>
       <translation>Benzina</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="639"/>
+      <location filename="../../src/enums.cpp" line="640"/>
       <source>Diesel</source>
       <translation>Diesel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="642"/>
+      <location filename="../../src/enums.cpp" line="643"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="645"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="648"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Hydraulic oil</source>
       <translation>Olio idraulico</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="651"/>
+      <location filename="../../src/enums.cpp" line="652"/>
       <source>Raw water</source>
       <translation>Acqua grezza</translation>
     </message>
@@ -5644,7 +5644,7 @@ Si desidera continuare?</translation>
       <translation type="unfinished">h</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="436"/>
+      <location filename="../../src/enums.cpp" line="437"/>
       <source>Bulk</source>
       <translation>Prima fase</translation>
     </message>
@@ -5655,7 +5655,7 @@ Si desidera continuare?</translation>
       <translation>Assorbimento</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="442"/>
+      <location filename="../../src/enums.cpp" line="443"/>
       <source>Float</source>
       <translation>Mantenimento</translation>
     </message>
@@ -5903,43 +5903,43 @@ Si desidera continuare?</translation>
       <translation>%1 Serbatoio (%2)</translation>
     </message>
     <message id="dcMeter_ac_charger">
-      <location filename="../../src/enums.cpp" line="208"/>
+      <location filename="../../src/enums.cpp" line="209"/>
       <source>AC charger</source>
       <translation>Caricabatterie CA</translation>
     </message>
     <message id="dcMeter_alternator">
-      <location filename="../../src/enums.cpp" line="211"/>
+      <location filename="../../src/enums.cpp" line="212"/>
       <source>Alternator</source>
       <translation>Alternatore</translation>
     </message>
     <message id="dcMeter_dc_system">
-      <location filename="../../src/enums.cpp" line="220"/>
+      <location filename="../../src/enums.cpp" line="221"/>
       <source>DC system</source>
       <translation>SISTEMA CC</translation>
     </message>
     <message id="dcMeter_fuelcell">
-      <location filename="../../src/enums.cpp" line="229"/>
+      <location filename="../../src/enums.cpp" line="230"/>
       <source>Fuel cell</source>
       <translation>Cella a combustibile</translation>
     </message>
     <message id="dcMeter_shaft_generator">
-      <location filename="../../src/enums.cpp" line="247"/>
+      <location filename="../../src/enums.cpp" line="248"/>
       <source>Shaft generator</source>
       <translation>Generatore Asse</translation>
     </message>
     <message id="dcMeter_water_generator">
-      <location filename="../../src/enums.cpp" line="253"/>
+      <location filename="../../src/enums.cpp" line="254"/>
       <source>Water generator</source>
       <translation>Generatore ad acqua</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="333"/>
+      <location filename="../../src/enums.cpp" line="334"/>
       <source>Low</source>
       <extracomment>Digital input state</extracomment>
       <translation>Basso</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="337"/>
+      <location filename="../../src/enums.cpp" line="338"/>
       <source>High</source>
       <extracomment>Digital input state</extracomment>
       <translation>Alto</translation>
@@ -6055,40 +6055,40 @@ Si desidera continuare?</translation>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="407"/>
+      <location filename="../../src/enums.cpp" line="408"/>
       <source>Boot loading</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Caricamento avvio</translation>
     </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="415"/>
+      <location filename="../../src/enums.cpp" line="416"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>In funzionamento (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="419"/>
+      <location filename="../../src/enums.cpp" line="420"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>In funzionamento (Throttled)</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="433"/>
+      <location filename="../../src/enums.cpp" line="434"/>
       <source>Fault</source>
       <translation>Errore</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="439"/>
+      <location filename="../../src/enums.cpp" line="440"/>
       <source>Absorption</source>
       <translation>Assorbimento</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="445"/>
+      <location filename="../../src/enums.cpp" line="446"/>
       <source>Storage</source>
       <translation>Accumulo</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="448"/>
+      <location filename="../../src/enums.cpp" line="449"/>
       <source>Equalize</source>
       <translation>Equalizza</translation>
     </message>
@@ -7297,7 +7297,7 @@ Si desidera continuare?</translation>
       <translation>Completo</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_title">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>Are you sure?</source>
       <translation>Siete sicuri?</translation>
     </message>
@@ -7626,27 +7626,27 @@ Si desidera continuare?</translation>
       <translation>Caricare la batteria</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="138"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <translation>Questa funzione richiede la versione 400 o successiva del firmware. Contattare l'installatore per aggiornare il Multi/Quattro.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="139"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="144"/>
       <source>Charger not ready, equalization cannot be started</source>
       <translation>Caricabatterie non pronto, l'equalizzazione non può iniziare</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="143"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="148"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <translation>Non si può attivare l'equalizzazione durante la fase di carica di massa.</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="240"/>
       <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
       <translation>Il riavvio del sistema VE.Bus ripristinerà tutti gli inverter presenti sul bus, causando una perdita di potenza delle loro uscite.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="603"/>
+      <location filename="../../components/CommonWords.qml" line="607"/>
       <source>Dynamic power limit</source>
       <translation>Limite di potenza dinamico</translation>
     </message>
@@ -7906,7 +7906,7 @@ Si desidera continuare?</translation>
       <translation type="unfinished">Sconosciuto</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="589"/>
+      <location filename="../../components/CommonWords.qml" line="593"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7914,25 +7914,25 @@ Si desidera continuare?</translation>
       <translation type="unfinished">Sì</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="600"/>
+      <location filename="../../components/CommonWords.qml" line="604"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>Rendimento odierno</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="644"/>
+      <location filename="../../components/CommonWords.qml" line="648"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="670"/>
+      <location filename="../../components/CommonWords.qml" line="674"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="681"/>
+      <location filename="../../components/CommonWords.qml" line="685"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -8013,17 +8013,17 @@ Si desidera continuare?</translation>
       <translation>Pompa di calore</translation>
     </message>
     <message id="digitalinputs_touch_input_control">
-      <location filename="../../src/enums.cpp" line="321"/>
+      <location filename="../../src/enums.cpp" line="322"/>
       <source>Touch input control</source>
       <translation>Controllo ingresso touch</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="560"/>
+      <location filename="../../src/enums.cpp" line="561"/>
       <source>Over temperature</source>
       <translation>Sovratemperatura</translation>
     </message>
     <message id="switch_state_temperature_warning">
-      <location filename="../../src/enums.cpp" line="468"/>
+      <location filename="../../src/enums.cpp" line="469"/>
       <source>Temperature warning</source>
       <translation>Avviso di temperatura</translation>
     </message>
@@ -8064,121 +8064,121 @@ Si desidera continuare?</translation>
       <translation type="unfinished">W</translation>
     </message>
     <message id="dcMeter_bilge_pump">
-      <location filename="../../src/enums.cpp" line="214"/>
+      <location filename="../../src/enums.cpp" line="215"/>
       <source>Bilge pump</source>
       <translation type="unfinished">Pompa di sentina</translation>
     </message>
     <message id="digitalinputs_type_disabled">
-      <location filename="../../src/enums.cpp" line="291"/>
+      <location filename="../../src/enums.cpp" line="292"/>
       <source>Disabled</source>
       <translation type="unfinished">Disattivato</translation>
     </message>
     <message id="digitalinputs_type_bilgepump">
-      <location filename="../../src/enums.cpp" line="300"/>
+      <location filename="../../src/enums.cpp" line="301"/>
       <source>Bilge pump</source>
       <translation type="unfinished">Pompa di sentina</translation>
     </message>
     <message id="digitalinputs_state_off">
-      <location filename="../../src/enums.cpp" line="341"/>
+      <location filename="../../src/enums.cpp" line="342"/>
       <source>Off</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Spento</translation>
     </message>
     <message id="digitalinputs_state_on">
-      <location filename="../../src/enums.cpp" line="345"/>
+      <location filename="../../src/enums.cpp" line="346"/>
       <source>On</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Acceso</translation>
     </message>
     <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="373"/>
+      <location filename="../../src/enums.cpp" line="374"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">In funzionamento</translation>
     </message>
     <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="399"/>
+      <location filename="../../src/enums.cpp" line="400"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">In funzionamento</translation>
     </message>
     <message id="solarchargers_state_external control">
-      <location filename="../../src/enums.cpp" line="451"/>
+      <location filename="../../src/enums.cpp" line="452"/>
       <source>External control</source>
       <translation type="unfinished">Controllo esterno</translation>
     </message>
     <message id="switch_state_running">
-      <location filename="../../src/enums.cpp" line="462"/>
+      <location filename="../../src/enums.cpp" line="463"/>
       <source>Running</source>
       <translation type="unfinished">In funzionamento</translation>
     </message>
     <message id="switch_state_over_temperature">
-      <location filename="../../src/enums.cpp" line="465"/>
+      <location filename="../../src/enums.cpp" line="466"/>
       <source>Over temperature</source>
       <translation type="unfinished">Sovratemperatura</translation>
     </message>
     <message id="switch_state_channel_fault">
-      <location filename="../../src/enums.cpp" line="471"/>
+      <location filename="../../src/enums.cpp" line="472"/>
       <source>Channel Fault</source>
       <translation>Guasto del canale</translation>
     </message>
     <message id="switch_state_channel_tripped">
-      <location filename="../../src/enums.cpp" line="474"/>
+      <location filename="../../src/enums.cpp" line="475"/>
       <source>Channel Tripped</source>
       <translation>Canale attivato</translation>
     </message>
     <message id="switch_state_under_voltage">
-      <location filename="../../src/enums.cpp" line="477"/>
+      <location filename="../../src/enums.cpp" line="478"/>
       <source>Under voltage</source>
       <translation>Sottotensione</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="488"/>
+      <location filename="../../src/enums.cpp" line="489"/>
       <source>Momentary</source>
       <translation>Momentaneo</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="494"/>
+      <location filename="../../src/enums.cpp" line="495"/>
       <source>Dimmable</source>
       <translation>Dimmerabile</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="504"/>
+      <location filename="../../src/enums.cpp" line="505"/>
       <source>Slave of %1</source>
       <translation>Slave di %1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="507"/>
+      <location filename="../../src/enums.cpp" line="508"/>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="547"/>
+      <location filename="../../src/enums.cpp" line="548"/>
       <source>Not running</source>
       <translation type="unfinished">Non in esecuzione</translation>
     </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="550"/>
+      <location filename="../../src/enums.cpp" line="551"/>
       <source>Off</source>
       <translation type="unfinished">Spento</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="554"/>
+      <location filename="../../src/enums.cpp" line="555"/>
       <source>Powered</source>
       <translation>Alimentato</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="557"/>
+      <location filename="../../src/enums.cpp" line="558"/>
       <source>Tripped</source>
       <translation>Attivato</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="567"/>
       <source>Fault</source>
       <translation type="unfinished">Errore</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="577"/>
+      <location filename="../../src/enums.cpp" line="578"/>
       <source>Short</source>
       <translation>Breve</translation>
     </message>
@@ -8945,42 +8945,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Successivo</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="546"/>
+      <location filename="../../src/units.cpp" line="547"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="548"/>
+      <location filename="../../src/units.cpp" line="549"/>
       <source>NE</source>
       <translation>No</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="550"/>
+      <location filename="../../src/units.cpp" line="551"/>
       <source>E</source>
       <translation>E-mail</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="552"/>
+      <location filename="../../src/units.cpp" line="553"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="554"/>
+      <location filename="../../src/units.cpp" line="555"/>
       <source>S</source>
       <translation>N</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="556"/>
+      <location filename="../../src/units.cpp" line="557"/>
       <source>SW</source>
       <translation>NE</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="558"/>
+      <location filename="../../src/units.cpp" line="559"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="560"/>
+      <location filename="../../src/units.cpp" line="561"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -9008,7 +9008,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Pagina della barca</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="537"/>
+      <location filename="../../src/enums.cpp" line="538"/>
       <source>Unsupported type: %1</source>
       <translation>Tipo non supportato: %1</translation>
     </message>
@@ -9063,13 +9063,13 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Portata del fusibile</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="161"/>
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="301"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="162"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="302"/>
       <source>RPM</source>
       <translation>RPM</translation>
     </message>
     <message id="boat_page_motor_drive">
-      <location filename="../../pages/boat/MotorDriveGauges.qml" line="40"/>
+      <location filename="../../pages/boat/MotorDriveGauges.qml" line="39"/>
       <source>Motordrive</source>
       <translation>Motordrive</translation>
     </message>
@@ -9079,7 +9079,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Tempo rimanente</translation>
     </message>
     <message id="backup_and_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="274"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="307"/>
       <source>Backup &amp; Restore</source>
       <translation>Backup e Ripristino</translation>
     </message>
@@ -9454,7 +9454,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Documentazione</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="612"/>
+      <location filename="../../components/CommonWords.qml" line="616"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>Entrata CA %1</translation>
@@ -9756,7 +9756,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Bluetooth non disponibile</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="491"/>
+      <location filename="../../src/enums.cpp" line="492"/>
       <source>Toggle</source>
       <translation>Attiva/disattiva</translation>
     </message>
@@ -10001,87 +10001,87 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Password del punto di accesso</translation>
     </message>
     <message id="dcMeter_dccharger">
-      <location filename="../../src/enums.cpp" line="217"/>
+      <location filename="../../src/enums.cpp" line="218"/>
       <source>DC/DC charger</source>
       <translation>Caricabatterie CC/CC</translation>
     </message>
     <message id="dcMeter_electric_drive">
-      <location filename="../../src/enums.cpp" line="223"/>
+      <location filename="../../src/enums.cpp" line="224"/>
       <source>Electric drive</source>
       <translation>Trasmissione elettrica</translation>
     </message>
     <message id="dcMeter_fridge">
-      <location filename="../../src/enums.cpp" line="226"/>
+      <location filename="../../src/enums.cpp" line="227"/>
       <source>Fridge</source>
       <translation>Frigorifero</translation>
     </message>
     <message id="dcMeter_generic_load">
-      <location filename="../../src/enums.cpp" line="232"/>
+      <location filename="../../src/enums.cpp" line="233"/>
       <source>Generic load</source>
       <translation>Carico generico</translation>
     </message>
     <message id="dcMeter_generic_meter">
-      <location filename="../../src/enums.cpp" line="235"/>
+      <location filename="../../src/enums.cpp" line="236"/>
       <source>Generic meter</source>
       <translation>Misuratore generico</translation>
     </message>
     <message id="dcMeter_generic_source">
-      <location filename="../../src/enums.cpp" line="238"/>
+      <location filename="../../src/enums.cpp" line="239"/>
       <source>Generic source</source>
       <translation>Fonte generica</translation>
     </message>
     <message id="dcMeter_dc_genset">
-      <location filename="../../src/enums.cpp" line="241"/>
+      <location filename="../../src/enums.cpp" line="242"/>
       <source>DC genset</source>
       <translation>Gruppo elettrogeno CC</translation>
     </message>
     <message id="dcMeter_inverter">
-      <location filename="../../src/enums.cpp" line="244"/>
+      <location filename="../../src/enums.cpp" line="245"/>
       <source>Inverter</source>
       <translation>Inverter</translation>
     </message>
     <message id="dcMeter_solar_charger">
-      <location filename="../../src/enums.cpp" line="250"/>
+      <location filename="../../src/enums.cpp" line="251"/>
       <source>Solar charger</source>
       <translation>Caricabatterie solare</translation>
     </message>
     <message id="dcMeter_water_heater">
-      <location filename="../../src/enums.cpp" line="256"/>
+      <location filename="../../src/enums.cpp" line="257"/>
       <source>Water heater</source>
       <translation>Scaldabagno</translation>
     </message>
     <message id="dcMeter_water_pump">
-      <location filename="../../src/enums.cpp" line="259"/>
+      <location filename="../../src/enums.cpp" line="260"/>
       <source>Water pump</source>
       <translation>Pompa dell'acqua</translation>
     </message>
     <message id="dcMeter_wind_charger">
-      <location filename="../../src/enums.cpp" line="262"/>
+      <location filename="../../src/enums.cpp" line="263"/>
       <source>Wind charger</source>
       <translation>Caricabatterie eolico</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="497"/>
+      <location filename="../../src/enums.cpp" line="498"/>
       <source>Temperature setpoint</source>
       <translation>Valore impostato della temperatura</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="500"/>
+      <location filename="../../src/enums.cpp" line="501"/>
       <source>Stepped switch</source>
       <translation>Interruttore a gradini</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="511"/>
+      <location filename="../../src/enums.cpp" line="512"/>
       <source>Dropdown</source>
       <translation>Elenco a tendina</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="514"/>
+      <location filename="../../src/enums.cpp" line="515"/>
       <source>Basic slider</source>
       <translation>Cursore base</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="520"/>
+      <location filename="../../src/enums.cpp" line="521"/>
       <source>Three-state switch</source>
       <translation>Interruttore a tre posizioni</translation>
     </message>
@@ -10180,7 +10180,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Un BMS VE.Bus spegne automaticamente il sistema quando necessario per proteggere la batteria. Pertanto, non è possibile controllare il sistema dal dispositivo GX.</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="517"/>
+      <location filename="../../src/enums.cpp" line="518"/>
       <source>Numeric input</source>
       <translation>Inserimento numerico</translation>
     </message>
@@ -10205,17 +10205,17 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Parametri della microrete</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="662"/>
+      <location filename="../../src/enums.cpp" line="663"/>
       <source>Hybrid droop</source>
       <translation>Droop ibrido</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="665"/>
+      <location filename="../../src/enums.cpp" line="666"/>
       <source>Grid-following</source>
       <translation>Grid-following</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="668"/>
+      <location filename="../../src/enums.cpp" line="669"/>
       <source>Grid-forming</source>
       <translation>Grid-forming</translation>
     </message>
@@ -10380,7 +10380,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation type="unfinished">Basso</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="592"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Bypassed</source>
       <translation>Escluso</translation>
     </message>
@@ -10438,18 +10438,18 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Nessuna notifica attiva</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="526"/>
+      <location filename="../../src/enums.cpp" line="527"/>
       <source>RGB color wheel</source>
       <translation>Ruota colori RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="530"/>
+      <location filename="../../src/enums.cpp" line="531"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>Ruota colori CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="534"/>
+      <location filename="../../src/enums.cpp" line="535"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>Ruota colori RGB + W</translation>
@@ -10697,52 +10697,52 @@ Qui puoi aggiungere ulteriori porte e ID unità da scansionare per gli inverter 
       <translation>Misto (CA in Watt, CC in Ampere)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="563"/>
+      <location filename="../../src/enums.cpp" line="564"/>
       <source>Over temp, tripped</source>
       <translation>Sovratemperatura, scattato</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="580"/>
+      <location filename="../../src/enums.cpp" line="581"/>
       <source>Disabled</source>
       <translation type="unfinished">Disattivato</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="583"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled, tripped</source>
       <translation>Disabilitato, scattato</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="586"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Disabled, over temp</source>
       <translation>Disabilitato, sovratemperatura</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="589"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Disabled but on</source>
       <translation>Disabilitato ma attivo</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="595"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Bypassed, tripped</source>
       <translation>By-passato, scattato</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="598"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Bypassed, over temp</source>
       <translation>By-passato, sovratemperatura</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="601"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>External control</source>
       <translation type="unfinished">Controllo esterno</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="604"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>External control, tripped</source>
       <translation>Controllo esterno, scattato</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="607"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>External control, over temp</source>
       <translation>Controllo esterno, sovratemperatura</translation>
     </message>
@@ -10999,6 +10999,11 @@ Qui puoi aggiungere ulteriori porte e ID unità da scansionare per gli inverter 
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="93"/>
       <source>Right E-drive</source>
       <translation>E-drive destro</translation>
+    </message>
+    <message id="settings_tcpip_ethernet_linklocal_enabled">
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="175"/>
+      <source>Enable Link-local</source>
+      <translation>Abilita Link-local</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>

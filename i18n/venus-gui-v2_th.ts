@@ -19,7 +19,7 @@
       <translation>พลังงาน</translation>
     </message>
     <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="430"/>
+      <location filename="../../src/enums.cpp" line="431"/>
       <source>Off</source>
       <translation>ปิด</translation>
     </message>
@@ -1717,42 +1717,42 @@ Use unless prohibited by the utility provider.</source>
       <translation>เปิดใช้งานการจำกัดการป้อนเข้า</translation>
     </message>
     <message id="digitalinputs_type_pulsemeter">
-      <location filename="../../src/enums.cpp" line="294"/>
+      <location filename="../../src/enums.cpp" line="295"/>
       <source>Pulse meter</source>
       <translation>เครื่องวัดชีพจร</translation>
     </message>
     <message id="digitalinputs_type_dooralarm">
-      <location filename="../../src/enums.cpp" line="297"/>
+      <location filename="../../src/enums.cpp" line="298"/>
       <source>Door alarm</source>
       <translation>สัญญาณเตือนประตู</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="523"/>
+      <location filename="../../src/enums.cpp" line="524"/>
       <source>Bilge pump</source>
       <translation>ปั๊มน้ำท้องเรือ</translation>
     </message>
     <message id="digitalinputs_type_bilgealarm">
-      <location filename="../../src/enums.cpp" line="303"/>
+      <location filename="../../src/enums.cpp" line="304"/>
       <source>Bilge alarm</source>
       <translation>สัญญาณเตือนท้องเรือ</translation>
     </message>
     <message id="digitalinputs_type_burglaralarm">
-      <location filename="../../src/enums.cpp" line="306"/>
+      <location filename="../../src/enums.cpp" line="307"/>
       <source>Burglar alarm</source>
       <translation>สัญญาณกันขโมย</translation>
     </message>
     <message id="digitalinputs_type_smokealarm">
-      <location filename="../../src/enums.cpp" line="309"/>
+      <location filename="../../src/enums.cpp" line="310"/>
       <source>Smoke alarm</source>
       <translation>เครื่องตรวจจับควัน</translation>
     </message>
     <message id="digitalinputs_type_firealarm">
-      <location filename="../../src/enums.cpp" line="312"/>
+      <location filename="../../src/enums.cpp" line="313"/>
       <source>Fire alarm</source>
       <translation>สัญญาณเตือนไฟไหม้</translation>
     </message>
     <message id="digitalinputs_type_co2alarm">
-      <location filename="../../src/enums.cpp" line="315"/>
+      <location filename="../../src/enums.cpp" line="316"/>
       <source>CO2 alarm</source>
       <translation>สัญญาณเตือน CO2</translation>
     </message>
@@ -2322,7 +2322,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>เซิร์ฟเวอร์ DNS</translation>
     </message>
     <message id="settings_tcpip_link_local">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="177"/>
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="185"/>
       <source>Link-local IP address</source>
       <translation>ที่อยู่ IP ของลิงก์ในเครื่อง</translation>
     </message>
@@ -2458,25 +2458,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>สัญญาณเตือนแรงดันแบตเตอรี่สูง</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="650"/>
+      <location filename="../../components/CommonWords.qml" line="654"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>ข้อผิดพลาดล่าสุด</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="653"/>
+      <location filename="../../components/CommonWords.qml" line="657"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 2</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="656"/>
+      <location filename="../../components/CommonWords.qml" line="660"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 3</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="659"/>
+      <location filename="../../components/CommonWords.qml" line="663"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>ผิดพลาดครั้งที่ 4</translation>
@@ -2617,7 +2617,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">เตือน</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="369"/>
+      <location filename="../../src/enums.cpp" line="370"/>
       <source>Alarm</source>
       <extracomment>Digital input state</extracomment>
       <translation>เตือน</translation>
@@ -3012,7 +3012,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ตรวจหาแบตเตอรี่อีกครั้ง</translation>
     </message>
     <message id="vebus_device_press_to_redetect">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="217"/>
       <source>Press to redetect</source>
       <translation>กดเพื่อตรวจหาอีกครั้ง</translation>
     </message>
@@ -3886,12 +3886,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>อุปกรณ์ Smappee bus</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="676"/>
+      <location filename="../../components/CommonWords.qml" line="680"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>การตั้งค่านี้จะถูกปิดใช้งานเมื่อเชื่อมต่อ Digital Multi Control</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="665"/>
+      <location filename="../../components/CommonWords.qml" line="669"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>การตั้งค่านี้ถูกปิดใช้งานเมื่อมีการเชื่อมต่อ VE.Bus BMS</translation>
     </message>
@@ -4074,7 +4074,7 @@ NOTE: The update might temporarily stop the system.</source>
       <translation>กดเพื่อหยุด</translation>
     </message>
     <message id="vebus_device_press_to_start">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="127"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="90"/>
       <source>Press to start</source>
       <translation>กดเพื่อเริ่ม</translation>
@@ -4138,108 +4138,108 @@ Do you want to continue?</source>
       <translation>VE.Bus BMS</translation>
     </message>
     <message id="vebus_device_warning">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="97"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
       <source>Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current.</source>
       <translation>คำเตือน: การเปิดใช้งานอีควอไลเซอร์ในระบบ ESS ด้วยเครื่องชาร์จพลังงานแสงอาทิตย์อาจทำให้การชาร์จแบตเตอรี่ด้วยไฟฟ้าแรงสูงร่วมกับกระแสไฟฟ้าที่สูงเกินไป</translation>
     </message>
     <message id="vebus_device_switch_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="101"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="106"/>
       <source>The system will automatically switch over to float once the Equalization charge has been completed.</source>
       <translation>ระบบจะสลับไปลอยตัวโดยอัตโนมัติเมื่อการชาร์จ Equalization เสร็จสิ้น</translation>
     </message>
     <message id="vebus_device_interrupt_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="108"/>
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="160"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="113"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="165"/>
       <source>Interrupt equalization</source>
       <translation>ขัดจังหวะอีควอไลเซอร์</translation>
     </message>
     <message id="vebus_device_equalization">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="110"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="115"/>
       <source>Equalization</source>
       <translation>อีควอไลเซอร์</translation>
     </message>
     <message id="vebus_device_interrupting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="114"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="119"/>
       <source>Interrupting...</source>
       <translation>รบกวน...</translation>
     </message>
     <message id="vebus_device_starting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="117"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="122"/>
       <source>Starting...</source>
       <translation>เริ่ม...</translation>
     </message>
     <message id="vebus_device_press_to_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="120"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="125"/>
       <source>Press to interrupt</source>
       <translation>กดเพื่อขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_interrupt_and_restart_absorption">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="164"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="169"/>
       <source>Interrupt and restart absorption</source>
       <translation>แทรกแซงและเริ่มการดูดซึมใหม่</translation>
     </message>
     <message id="vebus_device_interrupt_and_go_to_float">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="170"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="175"/>
       <source>Interrupt and go to float</source>
       <translation>แทรกแซงแล้วลอย</translation>
     </message>
     <message id="vebus_device_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="176"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="181"/>
       <source>Interrupt</source>
       <translation>ขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_do_not_interrupt">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="182"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="187"/>
       <source>Do not interrupt</source>
       <translation>อย่าขัดจังหวะ</translation>
     </message>
     <message id="vebus_device_redectect_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="207"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="212"/>
       <source>Redetect VE.Bus system</source>
       <translation>ตรวจสอบระบบ VE.Bus อีกครั้ง</translation>
     </message>
     <message id="vebus_device_redetecting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="210"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="215"/>
       <source>Redetecting...</source>
       <translation>กำลังตรวจหาซ้ำ...</translation>
     </message>
     <message id="vebus_device_restart_vebus_system">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="219"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
       <source>Restart VE.Bus system</source>
       <translation>รีสตาร์ทระบบ VE.Bus</translation>
     </message>
     <message id="vebus_device_restarting">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="222"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="227"/>
       <source>Restarting...</source>
       <translation>กำลังรีสตาร์ท...</translation>
     </message>
     <message id="vebus_device_press_to_restart">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="224"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="229"/>
       <source>Press to restart</source>
       <translation>กดเพื่อเริ่มต้นใหม่</translation>
     </message>
     <message id="vebus_device_ac_input_1_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="244"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="249"/>
       <source>AC input 1 ignored</source>
       <translation>อินพุต AC 1 ถูกละเว้น</translation>
     </message>
     <message id="vebus_device_ac_input_2_ignored">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="252"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="257"/>
       <source>AC input 2 ignored</source>
       <translation>อินพุต AC 2 ถูกละเว้น</translation>
     </message>
     <message id="vebus_device_ess_relay_test">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="265"/>
       <source>ESS Relay test</source>
       <translation>การทดสอบรีเลย์ ESS</translation>
     </message>
     <message id="vebus_device_ess_relay_test_completed">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="266"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="269"/>
       <source>Completed</source>
       <translation type="unfinished">สมบูรณ์</translation>
     </message>
     <message id="vebus_device_ess_relay_test_pending">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="268"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="271"/>
       <source>Pending</source>
       <translation type="unfinished">รอดำเนินการ</translation>
     </message>
@@ -4254,12 +4254,12 @@ Do you want to continue?</source>
       <translation>รอดำเนินการ</translation>
     </message>
     <message id="vebus_diagnostics">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="317"/>
       <source>VE.Bus diagnostics</source>
       <translation>การวินิจฉัย VE.Bus</translation>
     </message>
     <message id="vebus_veice_network_quality_counter">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="303"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="336"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
       <translation>ตัวนับคุณภาพเครือข่ายเฟส L%1 อุปกรณ์ %2 (%3)</translation>
     </message>
@@ -4349,8 +4349,8 @@ Do you want to continue?</source>
       <source>Failing step: %1</source>
       <translation>ขั้นตอนที่ล้มเหลว: %1</translation>
     </message>
-    <message id="vebus_device_phase_x_device_x_index_x">
-      <location filename="../../pages/vebusdevice/PageVeBusError11Menu.qml" line="34"/>
+    <message id="common_words_vebus_device_phase_x_device_x_index_x">
+      <location filename="../../components/CommonWords.qml" line="581"/>
       <source>Phase L%1, device %2 (%3)</source>
       <extracomment>eg. 'Phase L1, device 3 (6)', where '(6)' is the index into the list of reported values</extracomment>
       <translation>เฟส L%1 อุปกรณ์ %2 (%3)</translation>
@@ -4611,7 +4611,7 @@ Do you want to continue?</source>
       <translation>ล้างข้อผิดพลาด</translation>
     </message>
     <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="361"/>
+      <location filename="../../src/enums.cpp" line="362"/>
       <source>Closed</source>
       <extracomment>Digital input state</extracomment>
       <translation>ปิด</translation>
@@ -4676,7 +4676,7 @@ Do you want to continue?</source>
       <translation>พลังงาน</translation>
     </message>
     <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="411"/>
+      <location filename="../../src/enums.cpp" line="412"/>
       <source>Error</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>ข้อผิดพลาด</translation>
@@ -4697,7 +4697,7 @@ Do you want to continue?</source>
       <translation>เวอร์ชั่นเฟิร์มแวร์</translation>
     </message>
     <message id="digitalinputs_type_generator">
-      <location filename="../../src/enums.cpp" line="318"/>
+      <location filename="../../src/enums.cpp" line="319"/>
       <source>Generator</source>
       <translation>เครื่องกำเนิดไฟฟ้า</translation>
     </message>
@@ -4820,7 +4820,7 @@ Do you want to continue?</source>
       <translation>ชื่อรุ่น</translation>
     </message>
     <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="349"/>
+      <location filename="../../src/enums.cpp" line="350"/>
       <source>No</source>
       <extracomment>Digital input state</extracomment>
       <translation>ไม่</translation>
@@ -4846,13 +4846,13 @@ Do you want to continue?</source>
       <translation>ออฟไลน์</translation>
     </message>
     <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="365"/>
+      <location filename="../../src/enums.cpp" line="366"/>
       <source>OK</source>
       <extracomment>Digital input state</extracomment>
       <translation>ตกลง</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="573"/>
+      <location filename="../../src/enums.cpp" line="574"/>
       <source>On</source>
       <translation>เปิด</translation>
     </message>
@@ -4862,7 +4862,7 @@ Do you want to continue?</source>
       <translation>ออนไลน์</translation>
     </message>
     <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="357"/>
+      <location filename="../../src/enums.cpp" line="358"/>
       <source>Open</source>
       <extracomment>Digital input open</extracomment>
       <translation>เปิด</translation>
@@ -4925,7 +4925,7 @@ Do you want to continue?</source>
       <translation>ลบ</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="570"/>
+      <location filename="../../src/enums.cpp" line="571"/>
       <source>Running</source>
       <translation>ทำงาน</translation>
     </message>
@@ -4955,7 +4955,7 @@ Do you want to continue?</source>
       <translation>ความแรงของสัญญาณ</translation>
     </message>
     <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="403"/>
+      <location filename="../../src/enums.cpp" line="404"/>
       <source>Standby</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>สแตนด์บาย</translation>
@@ -4991,7 +4991,7 @@ Do you want to continue?</source>
       <translation>สถานะ</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="395"/>
+      <location filename="../../src/enums.cpp" line="396"/>
       <source>Startup (%1)</source>
       <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>การเริ่มต้น (%1)</translation>
@@ -5007,7 +5007,7 @@ Do you want to continue?</source>
       <translation>หยุดเมื่อถึงเงื่อนไขสำหรับ</translation>
     </message>
     <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="377"/>
+      <location filename="../../src/enums.cpp" line="378"/>
       <source>Stopped</source>
       <extracomment>Digital input state</extracomment>
       <translation>หยุด</translation>
@@ -5059,33 +5059,33 @@ Do you want to continue?</source>
       <translation>ข้อผิดพลาดของ VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="580"/>
+      <location filename="../../components/CommonWords.qml" line="584"/>
       <source>Voltage</source>
       <translation>แรงดันไฟฟ้า</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="583"/>
+      <location filename="../../components/CommonWords.qml" line="587"/>
       <source>VRM instance</source>
       <translation>อินสแตนซ์ VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="586"/>
+      <location filename="../../components/CommonWords.qml" line="590"/>
       <source>When warning is cleared stop after</source>
       <translation>ให้หยุดหลังจากคำเตือนถูกลบออก</translation>
     </message>
     <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="353"/>
+      <location filename="../../src/enums.cpp" line="354"/>
       <source>Yes</source>
       <extracomment>Digital input state</extracomment>
       <translation>ใช่</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="592"/>
+      <location filename="../../components/CommonWords.qml" line="596"/>
       <source>Yesterday</source>
       <translation>เมื่อวาน</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="596"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิต</translation>
@@ -5236,62 +5236,62 @@ Do you want to continue?</source>
       <translation>ไม่พบเฟิร์มแวร์</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="618"/>
+      <location filename="../../src/enums.cpp" line="619"/>
       <source>Fuel</source>
       <translation>เชื้อเพลิง</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="621"/>
+      <location filename="../../src/enums.cpp" line="622"/>
       <source>Fresh water</source>
       <translation>น้ำจืด</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="624"/>
+      <location filename="../../src/enums.cpp" line="625"/>
       <source>Waste water</source>
       <translation>น้ำเสีย</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="627"/>
+      <location filename="../../src/enums.cpp" line="628"/>
       <source>Live well</source>
       <translation>อยู่ดีมีสุข</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="630"/>
+      <location filename="../../src/enums.cpp" line="631"/>
       <source>Oil</source>
       <translation>น้ำมัน</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="633"/>
+      <location filename="../../src/enums.cpp" line="634"/>
       <source>Black water</source>
       <translation>น้ำดำ</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="636"/>
+      <location filename="../../src/enums.cpp" line="637"/>
       <source>Gasoline</source>
       <translation>น้ำมันเบนซิน</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="639"/>
+      <location filename="../../src/enums.cpp" line="640"/>
       <source>Diesel</source>
       <translation>ดีเซล</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="642"/>
+      <location filename="../../src/enums.cpp" line="643"/>
       <source>LPG</source>
       <translation>แอลพีจี</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="645"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="648"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Hydraulic oil</source>
       <translation>น้ำมันไฮดรอลิก</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="651"/>
+      <location filename="../../src/enums.cpp" line="652"/>
       <source>Raw water</source>
       <translation>น้ำดิบ</translation>
     </message>
@@ -5645,7 +5645,7 @@ Do you want to continue?</source>
       <translation type="unfinished">ชม</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="436"/>
+      <location filename="../../src/enums.cpp" line="437"/>
       <source>Bulk</source>
       <translation>จำนวนมาก</translation>
     </message>
@@ -5656,7 +5656,7 @@ Do you want to continue?</source>
       <translation>หน้าท้อง</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="442"/>
+      <location filename="../../src/enums.cpp" line="443"/>
       <source>Float</source>
       <translation>ลอย</translation>
     </message>
@@ -5904,43 +5904,43 @@ Do you want to continue?</source>
       <translation>%1 รถถัง (%2)</translation>
     </message>
     <message id="dcMeter_ac_charger">
-      <location filename="../../src/enums.cpp" line="208"/>
+      <location filename="../../src/enums.cpp" line="209"/>
       <source>AC charger</source>
       <translation>เครื่องชาร์จไฟฟ้ากระแสสลับ</translation>
     </message>
     <message id="dcMeter_alternator">
-      <location filename="../../src/enums.cpp" line="211"/>
+      <location filename="../../src/enums.cpp" line="212"/>
       <source>Alternator</source>
       <translation>เครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="dcMeter_dc_system">
-      <location filename="../../src/enums.cpp" line="220"/>
+      <location filename="../../src/enums.cpp" line="221"/>
       <source>DC system</source>
       <translation>ระบบ DC</translation>
     </message>
     <message id="dcMeter_fuelcell">
-      <location filename="../../src/enums.cpp" line="229"/>
+      <location filename="../../src/enums.cpp" line="230"/>
       <source>Fuel cell</source>
       <translation>เซลล์เชื้อเพลิง</translation>
     </message>
     <message id="dcMeter_shaft_generator">
-      <location filename="../../src/enums.cpp" line="247"/>
+      <location filename="../../src/enums.cpp" line="248"/>
       <source>Shaft generator</source>
       <translation>เครื่องกำเนิดเพลา</translation>
     </message>
     <message id="dcMeter_water_generator">
-      <location filename="../../src/enums.cpp" line="253"/>
+      <location filename="../../src/enums.cpp" line="254"/>
       <source>Water generator</source>
       <translation>เครื่องกำเนิดน้ำ</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="333"/>
+      <location filename="../../src/enums.cpp" line="334"/>
       <source>Low</source>
       <extracomment>Digital input state</extracomment>
       <translation>ต่ำ</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="337"/>
+      <location filename="../../src/enums.cpp" line="338"/>
       <source>High</source>
       <extracomment>Digital input state</extracomment>
       <translation>สูง</translation>
@@ -6056,40 +6056,40 @@ Do you want to continue?</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="407"/>
+      <location filename="../../src/enums.cpp" line="408"/>
       <source>Boot loading</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>กำลังโหลดบูต</translation>
     </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="415"/>
+      <location filename="../../src/enums.cpp" line="416"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>ทำงาน (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="419"/>
+      <location filename="../../src/enums.cpp" line="420"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>ทำงาน (จำกัด)</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="433"/>
+      <location filename="../../src/enums.cpp" line="434"/>
       <source>Fault</source>
       <translation>ความผิดพลาด</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="439"/>
+      <location filename="../../src/enums.cpp" line="440"/>
       <source>Absorption</source>
       <translation>การดูดซึม</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="445"/>
+      <location filename="../../src/enums.cpp" line="446"/>
       <source>Storage</source>
       <translation>พื้นที่จัดเก็บ</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="448"/>
+      <location filename="../../src/enums.cpp" line="449"/>
       <source>Equalize</source>
       <translation>Equalize</translation>
     </message>
@@ -7299,7 +7299,7 @@ Do you want to continue?</source>
       <translation>เต็ม</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_title">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="233"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="238"/>
       <source>Are you sure?</source>
       <translation>คุณแน่ใจมั้ย?</translation>
     </message>
@@ -7628,27 +7628,27 @@ Do you want to continue?</source>
       <translation>ชาร์จแบตเตอรี่</translation>
     </message>
     <message id="vebus_device_update_firmware">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="133"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="138"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
       <translation>คุณสมบัตินี้ต้องใช้เฟิร์มแวร์เวอร์ชัน 400 ขึ้นไป ติดต่อผู้ติดตั้งเพื่ออัปเดต Multi/Quattro ของคุณ</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="139"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="144"/>
       <source>Charger not ready, equalization cannot be started</source>
       <translation>ที่ชาร์จไม่พร้อม ไม่สามารถเริ่มการปรับสมดุลได้</translation>
     </message>
     <message id="vebus_device_no_equalisation_during_bulk">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="143"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="148"/>
       <source>Equalization cannot be triggered during bulk charge state</source>
       <translation>ไม่สามารถทริกเกอร์การปรับสมดุลระหว่างสถานะการชาร์จจำนวนมาก</translation>
     </message>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="240"/>
       <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
       <translation>การรีสตาร์ทระบบ VE.Bus จะรีเซ็ตอินเวอร์เตอร์ใดๆ บนบัส และส่งผลให้สูญเสียพลังงานไปยังเอาต์พุต</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="603"/>
+      <location filename="../../components/CommonWords.qml" line="607"/>
       <source>Dynamic power limit</source>
       <translation>ขีดจำกัดพลังงานแบบไดนามิก</translation>
     </message>
@@ -7908,7 +7908,7 @@ Do you want to continue?</source>
       <translation type="unfinished">ไม่รู้จัก</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="589"/>
+      <location filename="../../components/CommonWords.qml" line="593"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="159"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="258"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="431"/>
@@ -7916,25 +7916,25 @@ Do you want to continue?</source>
       <translation type="unfinished">ใช่</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="600"/>
+      <location filename="../../components/CommonWords.qml" line="604"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>ผลผลิตวันนี้</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="644"/>
+      <location filename="../../components/CommonWords.qml" line="648"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="670"/>
+      <location filename="../../components/CommonWords.qml" line="674"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="681"/>
+      <location filename="../../components/CommonWords.qml" line="685"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -8015,17 +8015,17 @@ Do you want to continue?</source>
       <translation>ปั๊มความร้อน</translation>
     </message>
     <message id="digitalinputs_touch_input_control">
-      <location filename="../../src/enums.cpp" line="321"/>
+      <location filename="../../src/enums.cpp" line="322"/>
       <source>Touch input control</source>
       <translation>การควบคุมแบบสัมผัส</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="560"/>
+      <location filename="../../src/enums.cpp" line="561"/>
       <source>Over temperature</source>
       <translation>อุณหภูมิสูง</translation>
     </message>
     <message id="switch_state_temperature_warning">
-      <location filename="../../src/enums.cpp" line="468"/>
+      <location filename="../../src/enums.cpp" line="469"/>
       <source>Temperature warning</source>
       <translation>การเตือนอุณหภูมิ</translation>
     </message>
@@ -8066,121 +8066,121 @@ Do you want to continue?</source>
       <translation type="unfinished">ว.</translation>
     </message>
     <message id="dcMeter_bilge_pump">
-      <location filename="../../src/enums.cpp" line="214"/>
+      <location filename="../../src/enums.cpp" line="215"/>
       <source>Bilge pump</source>
       <translation type="unfinished">ปั๊มน้ำท้องเรือ</translation>
     </message>
     <message id="digitalinputs_type_disabled">
-      <location filename="../../src/enums.cpp" line="291"/>
+      <location filename="../../src/enums.cpp" line="292"/>
       <source>Disabled</source>
       <translation type="unfinished">พิการ</translation>
     </message>
     <message id="digitalinputs_type_bilgepump">
-      <location filename="../../src/enums.cpp" line="300"/>
+      <location filename="../../src/enums.cpp" line="301"/>
       <source>Bilge pump</source>
       <translation type="unfinished">ปั๊มน้ำท้องเรือ</translation>
     </message>
     <message id="digitalinputs_state_off">
-      <location filename="../../src/enums.cpp" line="341"/>
+      <location filename="../../src/enums.cpp" line="342"/>
       <source>Off</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">ปิด</translation>
     </message>
     <message id="digitalinputs_state_on">
-      <location filename="../../src/enums.cpp" line="345"/>
+      <location filename="../../src/enums.cpp" line="346"/>
       <source>On</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">เปิด</translation>
     </message>
     <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="373"/>
+      <location filename="../../src/enums.cpp" line="374"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">ทำงาน</translation>
     </message>
     <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="399"/>
+      <location filename="../../src/enums.cpp" line="400"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">ทำงาน</translation>
     </message>
     <message id="solarchargers_state_external control">
-      <location filename="../../src/enums.cpp" line="451"/>
+      <location filename="../../src/enums.cpp" line="452"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="switch_state_running">
-      <location filename="../../src/enums.cpp" line="462"/>
+      <location filename="../../src/enums.cpp" line="463"/>
       <source>Running</source>
       <translation type="unfinished">ทำงาน</translation>
     </message>
     <message id="switch_state_over_temperature">
-      <location filename="../../src/enums.cpp" line="465"/>
+      <location filename="../../src/enums.cpp" line="466"/>
       <source>Over temperature</source>
       <translation type="unfinished">อุณหภูมิสูง</translation>
     </message>
     <message id="switch_state_channel_fault">
-      <location filename="../../src/enums.cpp" line="471"/>
+      <location filename="../../src/enums.cpp" line="472"/>
       <source>Channel Fault</source>
       <translation>ความผิดพลาดของช่องสัญญาณ</translation>
     </message>
     <message id="switch_state_channel_tripped">
-      <location filename="../../src/enums.cpp" line="474"/>
+      <location filename="../../src/enums.cpp" line="475"/>
       <source>Channel Tripped</source>
       <translation>ช่องสะดุด</translation>
     </message>
     <message id="switch_state_under_voltage">
-      <location filename="../../src/enums.cpp" line="477"/>
+      <location filename="../../src/enums.cpp" line="478"/>
       <source>Under voltage</source>
       <translation>ภายใต้แรงดันไฟฟ้า</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="488"/>
+      <location filename="../../src/enums.cpp" line="489"/>
       <source>Momentary</source>
       <translation>ชั่วขณะหนึ่ง</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="494"/>
+      <location filename="../../src/enums.cpp" line="495"/>
       <source>Dimmable</source>
       <translation>หรี่แสงได้</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="504"/>
+      <location filename="../../src/enums.cpp" line="505"/>
       <source>Slave of %1</source>
       <translation>ทาสของ %1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="507"/>
+      <location filename="../../src/enums.cpp" line="508"/>
       <source>Slave</source>
       <translation type="unfinished">ตัวรอง</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="547"/>
+      <location filename="../../src/enums.cpp" line="548"/>
       <source>Not running</source>
       <translation type="unfinished">ไม่ได้ทำงาน</translation>
     </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="550"/>
+      <location filename="../../src/enums.cpp" line="551"/>
       <source>Off</source>
       <translation type="unfinished">ปิด</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="554"/>
+      <location filename="../../src/enums.cpp" line="555"/>
       <source>Powered</source>
       <translation>ขับเคลื่อนด้วยพลังงาน</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="557"/>
+      <location filename="../../src/enums.cpp" line="558"/>
       <source>Tripped</source>
       <translation>สะดุดล้ม</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="567"/>
       <source>Fault</source>
       <translation type="unfinished">ความผิดพลาด</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="577"/>
+      <location filename="../../src/enums.cpp" line="578"/>
       <source>Short</source>
       <translation>สั้น</translation>
     </message>
@@ -8948,42 +8948,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>ต่อไป</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="546"/>
+      <location filename="../../src/units.cpp" line="547"/>
       <source>N</source>
       <translation>เอ็น</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="548"/>
+      <location filename="../../src/units.cpp" line="549"/>
       <source>NE</source>
       <translation>ไม่</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="550"/>
+      <location filename="../../src/units.cpp" line="551"/>
       <source>E</source>
       <translation>อี</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="552"/>
+      <location filename="../../src/units.cpp" line="553"/>
       <source>SE</source>
       <translation>เอสอี</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="554"/>
+      <location filename="../../src/units.cpp" line="555"/>
       <source>S</source>
       <translation>เอ็น</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="556"/>
+      <location filename="../../src/units.cpp" line="557"/>
       <source>SW</source>
       <translation>สว.</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="558"/>
+      <location filename="../../src/units.cpp" line="559"/>
       <source>W</source>
       <translation>ว.</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="560"/>
+      <location filename="../../src/units.cpp" line="561"/>
       <source>NW</source>
       <translation>ตะวันตกเฉียงเหนือ</translation>
     </message>
@@ -9011,7 +9011,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>หน้าเรือ</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="537"/>
+      <location filename="../../src/enums.cpp" line="538"/>
       <source>Unsupported type: %1</source>
       <translation>ประเภทที่ไม่รองรับ: %1</translation>
     </message>
@@ -9066,13 +9066,13 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ฟิวส์เรทติ้ง</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="161"/>
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="301"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="162"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="302"/>
       <source>RPM</source>
       <translation>รอบต่อนาที</translation>
     </message>
     <message id="boat_page_motor_drive">
-      <location filename="../../pages/boat/MotorDriveGauges.qml" line="40"/>
+      <location filename="../../pages/boat/MotorDriveGauges.qml" line="39"/>
       <source>Motordrive</source>
       <translation>มอเตอร์ไดรฟ์</translation>
     </message>
@@ -9082,7 +9082,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ถึงเวลาต้องไป</translation>
     </message>
     <message id="backup_and_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="274"/>
+      <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="307"/>
       <source>Backup &amp; Restore</source>
       <translation>สำรองและกู้คืน</translation>
     </message>
@@ -9457,7 +9457,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เอกสาร</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="612"/>
+      <location filename="../../components/CommonWords.qml" line="616"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>อินพุต AC %1</translation>
@@ -9759,7 +9759,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่มี Bluetooth</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="491"/>
+      <location filename="../../src/enums.cpp" line="492"/>
       <source>Toggle</source>
       <translation>สลับ</translation>
     </message>
@@ -10004,87 +10004,87 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>รหัสผ่าน Access Point</translation>
     </message>
     <message id="dcMeter_dccharger">
-      <location filename="../../src/enums.cpp" line="217"/>
+      <location filename="../../src/enums.cpp" line="218"/>
       <source>DC/DC charger</source>
       <translation>เครื่องชาร์จ DC/DC</translation>
     </message>
     <message id="dcMeter_electric_drive">
-      <location filename="../../src/enums.cpp" line="223"/>
+      <location filename="../../src/enums.cpp" line="224"/>
       <source>Electric drive</source>
       <translation>ระบบขับเคลื่อนไฟฟ้า</translation>
     </message>
     <message id="dcMeter_fridge">
-      <location filename="../../src/enums.cpp" line="226"/>
+      <location filename="../../src/enums.cpp" line="227"/>
       <source>Fridge</source>
       <translation>ตู้เย็น</translation>
     </message>
     <message id="dcMeter_generic_load">
-      <location filename="../../src/enums.cpp" line="232"/>
+      <location filename="../../src/enums.cpp" line="233"/>
       <source>Generic load</source>
       <translation>โหลดทั่วไป</translation>
     </message>
     <message id="dcMeter_generic_meter">
-      <location filename="../../src/enums.cpp" line="235"/>
+      <location filename="../../src/enums.cpp" line="236"/>
       <source>Generic meter</source>
       <translation>มิเตอร์ทั่วไป</translation>
     </message>
     <message id="dcMeter_generic_source">
-      <location filename="../../src/enums.cpp" line="238"/>
+      <location filename="../../src/enums.cpp" line="239"/>
       <source>Generic source</source>
       <translation>แหล่งพลังงานทั่วไป</translation>
     </message>
     <message id="dcMeter_dc_genset">
-      <location filename="../../src/enums.cpp" line="241"/>
+      <location filename="../../src/enums.cpp" line="242"/>
       <source>DC genset</source>
       <translation>เครื่องกำเนิดไฟฟ้า DC</translation>
     </message>
     <message id="dcMeter_inverter">
-      <location filename="../../src/enums.cpp" line="244"/>
+      <location filename="../../src/enums.cpp" line="245"/>
       <source>Inverter</source>
       <translation>อินเวอร์เตอร์</translation>
     </message>
     <message id="dcMeter_solar_charger">
-      <location filename="../../src/enums.cpp" line="250"/>
+      <location filename="../../src/enums.cpp" line="251"/>
       <source>Solar charger</source>
       <translation>เครื่องชาร์จพลังงานแสงอาทิตย์</translation>
     </message>
     <message id="dcMeter_water_heater">
-      <location filename="../../src/enums.cpp" line="256"/>
+      <location filename="../../src/enums.cpp" line="257"/>
       <source>Water heater</source>
       <translation>เครื่องทำน้ำอุ่น</translation>
     </message>
     <message id="dcMeter_water_pump">
-      <location filename="../../src/enums.cpp" line="259"/>
+      <location filename="../../src/enums.cpp" line="260"/>
       <source>Water pump</source>
       <translation>ปั๊มน้ำ</translation>
     </message>
     <message id="dcMeter_wind_charger">
-      <location filename="../../src/enums.cpp" line="262"/>
+      <location filename="../../src/enums.cpp" line="263"/>
       <source>Wind charger</source>
       <translation>เครื่องชาร์จพลังงานลม</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="497"/>
+      <location filename="../../src/enums.cpp" line="498"/>
       <source>Temperature setpoint</source>
       <translation>จุดตั้งอุณหภูมิ</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="500"/>
+      <location filename="../../src/enums.cpp" line="501"/>
       <source>Stepped switch</source>
       <translation>สวิตช์แบบขั้น</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="511"/>
+      <location filename="../../src/enums.cpp" line="512"/>
       <source>Dropdown</source>
       <translation>ดรอปดาวน์</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="514"/>
+      <location filename="../../src/enums.cpp" line="515"/>
       <source>Basic slider</source>
       <translation>แถบเลื่อนพื้นฐาน</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="520"/>
+      <location filename="../../src/enums.cpp" line="521"/>
       <source>Three-state switch</source>
       <translation>สวิตช์สามสถานะ</translation>
     </message>
@@ -10183,7 +10183,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>VE.Bus BMS จะปิดระบบโดยอัตโนมัติเมื่อจำเป็นเพื่อป้องกันแบตเตอรี่ ดังนั้นจึงไม่สามารถควบคุมระบบจากอุปกรณ์ GX ได้</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="517"/>
+      <location filename="../../src/enums.cpp" line="518"/>
       <source>Numeric input</source>
       <translation>ป้อนข้อมูลตัวเลข</translation>
     </message>
@@ -10208,17 +10208,17 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>พารามิเตอร์ Microgrid</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="662"/>
+      <location filename="../../src/enums.cpp" line="663"/>
       <source>Hybrid droop</source>
       <translation>Hybrid droop</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="665"/>
+      <location filename="../../src/enums.cpp" line="666"/>
       <source>Grid-following</source>
       <translation>Grid-following</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="668"/>
+      <location filename="../../src/enums.cpp" line="669"/>
       <source>Grid-forming</source>
       <translation>Grid-forming</translation>
     </message>
@@ -10383,7 +10383,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">ต่ำ</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="592"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Bypassed</source>
       <translation>ข้าม</translation>
     </message>
@@ -10441,18 +10441,18 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่มีการแจ้งเตือนที่เปิดใช้งาน</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="526"/>
+      <location filename="../../src/enums.cpp" line="527"/>
       <source>RGB color wheel</source>
       <translation>วงล้อสี RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="530"/>
+      <location filename="../../src/enums.cpp" line="531"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>วงล้อสี CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="534"/>
+      <location filename="../../src/enums.cpp" line="535"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>วงล้อสี RGB + W</translation>
@@ -10700,52 +10700,52 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>ผสม (AC เป็นวัตต์, DC เป็นแอมป์)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="563"/>
+      <location filename="../../src/enums.cpp" line="564"/>
       <source>Over temp, tripped</source>
       <translation>อุณหภูมิสูงเกิน, ตัด</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="580"/>
+      <location filename="../../src/enums.cpp" line="581"/>
       <source>Disabled</source>
       <translation type="unfinished">พิการ</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="583"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled, tripped</source>
       <translation>ปิดใช้งาน, ตัด</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="586"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Disabled, over temp</source>
       <translation>ปิดใช้งาน, อุณหภูมิสูงเกิน</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="589"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Disabled but on</source>
       <translation>ปิดใช้งานแต่เปิดอยู่</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="595"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Bypassed, tripped</source>
       <translation>บายพาส, ตัด</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="598"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Bypassed, over temp</source>
       <translation>บายพาส, อุณหภูมิสูงเกิน</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="601"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="604"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>External control, tripped</source>
       <translation>ควบคุมภายนอก, ตัด</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="607"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>External control, over temp</source>
       <translation>ควบคุมภายนอก, อุณหภูมิสูงเกิน</translation>
     </message>
@@ -11002,6 +11002,11 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="93"/>
       <source>Right E-drive</source>
       <translation>E-drive ขวา</translation>
+    </message>
+    <message id="settings_tcpip_ethernet_linklocal_enabled">
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="175"/>
+      <source>Enable Link-local</source>
+      <translation>เปิดใช้งาน Link-local</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
