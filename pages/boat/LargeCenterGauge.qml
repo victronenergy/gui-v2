@@ -132,6 +132,7 @@ Item {
 		MotorDriveGauges {
 			id: motorDriveGauges
 
+			width: rpmGauge.width - (2 * Theme.geometry_boatPage_motorDriveGauges_horizontalMargin)
 			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
 			motorDrives: root.motorDrives
 			showDcConsumption: !root.gps.valid

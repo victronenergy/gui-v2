@@ -535,6 +535,7 @@
     "geometry_boatPage_powerRow_rightMargin": 58,
     "geometry_boatPage_row_spacing": 4,
     "geometry_boatPage_motorDriveGauges_topPadding": 25,
+    "geometry_boatPage_motorDriveGauges_horizontalMargin": 32,
     "geometry_boatPage_motorDrive_temperaturesColumn_spacing": -5,
     "geometry_boatPage_motorDriveColumn_spacing": 5,
     "geometry_boatPage_motordriveRow_image_width": 32
