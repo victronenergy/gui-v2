@@ -17,25 +17,24 @@ Column {
 	spacing: Theme.geometry_boatPage_motorDriveColumn_spacing
 
 	Row {
-		id: motordriveRow
-
 		anchors.horizontalCenter: parent.horizontalCenter
 		spacing: Theme.geometry_boatPage_row_spacing
 
 		CP.ColorImage {
-			anchors {
-				right: undefined
-				verticalCenter: parent.verticalCenter
-			}
+			id: motorDriveIcon
 			width: Theme.geometry_boatPage_motordriveRow_image_width
-			height: width
+			height: Theme.geometry_boatPage_motordriveRow_image_width
 			color: Theme.color_boatPage_icon
 			source: "qrc:/images/icon_propeller_32.png"
 		}
 
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
+			width: Math.min(root.width - motorDriveIcon.width, implicitWidth)
+			verticalAlignment: Text.AlignVCenter
+			minimumPixelSize: Theme.font_size_tiny
 			font.pixelSize: Theme.font_size_body2
+			fontSizeMode: Text.HorizontalFit
 			//% "Motordrive"
 			text: qsTrId("boat_page_motor_drive")
 		}
