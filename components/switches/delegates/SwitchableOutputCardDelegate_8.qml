@@ -128,6 +128,7 @@ FocusScope {
 				uid: root.switchableOutput.uid + "/Dimming"
 				sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
 				displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+				onValueChanged: spinBox.reload()
 			}
 			onTimeout: spinBox.reload()
 		}
