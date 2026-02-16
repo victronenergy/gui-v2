@@ -25,6 +25,7 @@ Column {
 	Row {
 		id: timeToGo
 
+		anchors.horizontalCenter: parent.horizontalCenter
 		spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
 
 		component TimeToGoQuantityLabel : QuantityLabel {
