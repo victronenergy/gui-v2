@@ -39,5 +39,31 @@ Item {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
+
+		Label {
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_valueIndicator_horizontalMargin
+				right: stateLabel.left
+				rightMargin: Theme.geometry_valueIndicator_spacing
+				verticalCenter: parent.verticalCenter
+			}
+			text: CommonWords.state
+			color: Theme.color_listItem_secondaryText
+			font.pixelSize: Theme.font_size_body2
+			elide: Text.ElideRight
+		}
+
+		Label {
+			id: stateLabel
+
+			anchors {
+				right: parent.right
+				rightMargin: Theme.geometry_valueIndicator_horizontalMargin
+				verticalCenter: parent.verticalCenter
+			}
+			text: root.genericInput.textValue || root.genericInput.value
+			font.pixelSize: Theme.font_size_body2
+		}
 	}
 }
