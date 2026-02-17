@@ -27,9 +27,8 @@ Page {
 			readonly property alias columnWidth: loadSummary.fixedColumnWidth
 			readonly property alias columnSpacing: loadSummary.columnSpacing
 
-			visible: root.systemModel.count > 1
 			width: parent?.width ?? 0
-			height: visible ? dcsystemTable.y + dcsystemTable.height + bottomInset : 0
+			height: dcsystemTable.y + dcsystemTable.height + bottomInset
 			bottomInset: Theme.geometry_gradientList_spacing
 
 			QuantityTableSummary {
