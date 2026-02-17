@@ -44,19 +44,21 @@ ControlCard {
 			property string _lastLoadedUrl
 
 			function _reload() {
-				let componentUrl
+				let componentUrl = ""
 				if (type >= 0) {
-					if (type >= VenusOS.SwitchableOutput_Type_ColorDimmerRgb
-							&& type <= VenusOS.SwitchableOutput_Type_ColorDimmerRgbW) {
-						// For color wheel delegates, the output type can be changed from within the
-						// delegate, so load a type that encapsulates multiple types.
-						componentUrl = "delegates/SwitchableOutputCardDelegate_color.qml"
+					if (modelData.direction === IOChannel.Input) {
+						componentUrl = "delegates/GenericInputCardDelegate_%1.qml".arg(type)
 					} else {
-						// For other types, load a fixed filename according to the output type.
-						componentUrl = "delegates/SwitchableOutputCardDelegate_%1.qml".arg(type)
+						if (type >= VenusOS.SwitchableOutput_Type_ColorDimmerRgb
+								&& type <= VenusOS.SwitchableOutput_Type_ColorDimmerRgbW) {
+							// For color wheel delegates, the output type can be changed from within the
+							// delegate, so load a type that encapsulates multiple types.
+							componentUrl = "delegates/SwitchableOutputCardDelegate_color.qml"
+						} else {
+							// For other types, load a fixed filename according to the output type.
+							componentUrl = "delegates/SwitchableOutputCardDelegate_%1.qml".arg(type)
+						}
 					}
-				} else {
-					componentUrl = ""
 				}
 
 				// Only reload the source if the required file changes; otherwise, when a color
@@ -64,12 +66,20 @@ ControlCard {
 				// attempts to change the delegate source while its dialog is still open.
 				if (_lastLoadedUrl !== componentUrl) {
 					if (componentUrl) {
-						delegateLoader.setSource(componentUrl, {
-							width: Qt.binding(function() { return channelGrid.cellWidth }),
-							height: Qt.binding(function() { return channelGrid.cellHeight }),
-							switchableOutput: modelData,
-							enabled: Qt.binding(function() { return !(modelData.status & VenusOS.SwitchableOutput_Status_Disabled) })
-						})
+						if (modelData.direction === IOChannel.Input) {
+							delegateLoader.setSource(componentUrl, {
+								width: Qt.binding(function() { return channelGrid.cellWidth }),
+								height: Qt.binding(function() { return channelGrid.cellHeight }),
+								genericInput: modelData,
+							})
+						} else {
+							delegateLoader.setSource(componentUrl, {
+								width: Qt.binding(function() { return channelGrid.cellWidth }),
+								height: Qt.binding(function() { return channelGrid.cellHeight }),
+								switchableOutput: modelData,
+								enabled: Qt.binding(function() { return !(modelData.status & VenusOS.SwitchableOutput_Status_Disabled) })
+							})
+						}
 					} else {
 						source = ""
 					}
@@ -83,9 +93,15 @@ ControlCard {
 
 			onStatusChanged: {
 				if (status === Loader.Error) {
-					console.warn("Failed to load SwitchableOutputDelegate for type '%1' from file: %2"
-						.arg(VenusOS.switchableOutput_typeToText(modelData.type))
-						.arg(source))
+					if (modelData.direction === IOChannel.Input) {
+						console.warn("Failed to load GenericInputDelegate for type '%1' from file: %2"
+							.arg(VenusOS.genericInput_typeToText(modelData.type))
+							.arg(source))
+					} else {
+						console.warn("Failed to load SwitchableOutputDelegate for type '%1' from file: %2"
+							.arg(VenusOS.switchableOutput_typeToText(modelData.type))
+							.arg(source))
+					}
 				}
 			}
 
