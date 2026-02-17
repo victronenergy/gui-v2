@@ -242,11 +242,17 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
 
+    components/switches/GenericInputCardDelegateBackground.qml
+    components/switches/GenericInputCardDelegateHeader.qml
     components/switches/IOChannelCardDelegateHeader.qml
     components/switches/IOChannelGroupCard.qml
     components/switches/SwitchableOutputCardDelegateHeader.qml
     components/switches/SwitchableOutputDimmableSlider.qml
     components/switches/SwitchableOutputSlider.qml
+    components/switches/delegates/GenericInputCardDelegate_0.qml
+    components/switches/delegates/GenericInputCardDelegate_1.qml
+    components/switches/delegates/GenericInputCardDelegate_2.qml
+    components/switches/delegates/GenericInputCardDelegate_3.qml
     components/switches/delegates/SwitchableOutputCardDelegate_0.qml
     components/switches/delegates/SwitchableOutputCardDelegate_1.qml
     components/switches/delegates/SwitchableOutputCardDelegate_2.qml
