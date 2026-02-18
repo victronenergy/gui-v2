@@ -541,15 +541,20 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 
 QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const
 {
-	switch (value) {
+	// For all types except for Bilge Pump, mask out the 'output on' bit (0x09), because devices
+	// may have set a status even when the output is on. E.g. an output might be both 'on' and
+	// 'over temperature' set, so a combined status of (0x09 | 0x04) = 0x0D = 13. In this case we
+	// want to show 'over temperature' instead of just '13'.
+	// For Bilge Pump, do not mask, as 'Running' must be shown when status is 0x09.
+	const int maskedValue = type == SwitchableOutput_Type_BilgePump ? value : value &~ SwitchableOutput_Status_On;
+
+	switch (maskedValue) {
 	case SwitchableOutput_Status_Off:
 		if (type == SwitchableOutput_Type_BilgePump) {
-			//% "Not running"
-			return qtTrId("switchable_output_not_running");
-		} else {
-			//% "Off"
-			return qtTrId("switchable_output_off");
+			break;
 		}
+		//% "Off"
+		return qtTrId("switchable_output_off");
 	case SwitchableOutput_Status_Powered:
 		//% "Powered"
 		return qtTrId("switchable_output_powered");
@@ -567,12 +572,10 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 		return qtTrId("switchable_output_fault");
 	case SwitchableOutput_Status_On:
 		if (type == SwitchableOutput_Type_BilgePump) {
-			//% "Running"
-			return qtTrId("switchable_output_running");
-		} else {
-			//% "On"
-			return qtTrId("switchable_output_on");
+			break;
 		}
+		//% "On"
+		return qtTrId("switchable_output_on");
 	case SwitchableOutput_Status_ShortFault:
 		//% "Short"
 		return qtTrId("switchable_output_short");
@@ -607,8 +610,33 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 		//% "External control, over temp"
 		return qtTrId("switchable_output_externalcontrol_overtemperature");
 	default:
-		return QString::number(static_cast<int>(value));
+		break;
 	}
+
+	if (type == SwitchableOutput_Type_BilgePump) {
+		if (value & SwitchableOutput_Status_On) {
+			if (value & SwitchableOutput_Status_OverTemperature) {
+				//% "Running, over temperature"
+				return qtTrId("switchable_output_running_over_temperature");
+			} else if (value & SwitchableOutput_Status_Disabled) {
+				//% "Running, disabled"
+				return qtTrId("switchable_output_running_disabled");
+			} else {
+				//% "Running"
+				return qtTrId("switchable_output_running");
+			}
+		} else {
+			if (value & SwitchableOutput_Status_Disabled) {
+				//% "Not running, disabled"
+				return qtTrId("switchable_output_not_running_disabled");
+			} else {
+				//% "Not running"
+				return qtTrId("switchable_output_not_running");
+			}
+		}
+	}
+
+	return QString::number(static_cast<int>(value));
 }
 
 QString Enums::tank_fluidTypeToText(Tank_Type type) const
