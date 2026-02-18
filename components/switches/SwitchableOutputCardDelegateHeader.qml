@@ -64,18 +64,22 @@ RowLayout {
 			font.pixelSize: Theme.font_size_tiny
 
 			color: {
-				switch (root.switchableOutput.status) {
+				// Mask the 'output on' bit so that if any error bit is set (e.g. over temperature,
+				// disabled) the background will be red, even if the output is on.
+				// Don't do this for Bilge Pump as they have special status handling.
+				const maskedValue = root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump
+								  ? root.switchableOutput.status
+								  : root.switchableOutput.status &~ VenusOS.SwitchableOutput_Status_On
+				switch (maskedValue) {
 				case VenusOS.SwitchableOutput_Status_Off:
 					return Theme.color_font_secondary
 				case VenusOS.SwitchableOutput_Status_Powered:
 					return Theme.color_green
 				case VenusOS.SwitchableOutput_Status_On:
 					if (root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump) {
-						// A running Bilge Pump is not a normal state, so use a warning colour.
-						return Theme.color_orange
-					} else {
-						return Theme.color_green
+						break
 					}
+					return Theme.color_green
 				case VenusOS.SwitchableOutput_Status_ExternalControl:
 					return Theme.color_green
 				case VenusOS.SwitchableOutput_Status_OutputFault:
@@ -95,8 +99,21 @@ RowLayout {
 				case VenusOS.SwitchableOutput_Status_ExternalControl_OverTemperature:
 					return Theme.color_red
 				default:
-					return Theme.color_red
+					break
 				}
+
+				// For Bilge Pumps: a running Bilge Pump is not a normal state, so use a warning
+				// colour, unless it is a known error state, and in that case use red instead.
+				if (root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump
+						&& (root.switchableOutput.status & VenusOS.SwitchableOutput_Status_On)) {
+					if ((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_OverTemperature)
+						|| (root.switchableOutput.status & VenusOS.SwitchableOutput_Status_Disabled)) {
+						return Theme.color_red
+					} else {
+						return Theme.color_orange
+					}
+				}
+				return Theme.color_red
 			}
 		}
 	}
