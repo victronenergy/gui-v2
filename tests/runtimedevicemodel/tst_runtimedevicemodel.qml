@@ -42,7 +42,7 @@ TestCase {
 		// Disconnect them; the entries should still be there, but with connected=false.
 		for (i = 0 ; i < devices.length; ++i) {
 			MockManager.removeValue(devices[i].uid)
-			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.DeviceRole), undefined)
+			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.DeviceRole), null)
 			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.CachedDeviceNameRole), devices[i].productName)
 			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.ConnectedRole), false)
 			compare(RuntimeDeviceModel.deviceAt(i), null)
@@ -115,7 +115,7 @@ TestCase {
 		// Disconnect, and verify the custom name is still there as the cached name.
 		for (i = 0 ; i < devices.length; ++i) {
 			MockManager.removeValue(devices[i].uid)
-			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.DeviceRole), undefined)
+			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.DeviceRole), null)
 			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.CachedDeviceNameRole), devices[i].customName)
 			compare(RuntimeDeviceModel.data(RuntimeDeviceModel.index(i, 0), RuntimeDeviceModel.ConnectedRole), false)
 		}
