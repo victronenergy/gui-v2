@@ -111,6 +111,30 @@ Page {
 			}
 
 			ListRadioButtonGroup {
+				//% "Function"
+				text: qsTrId("page_switchable_output_function")
+				dataItem.uid: root.switchableOutput.uid + "/Settings/Function"
+				preferredVisible: dataItem.valid
+						&& (root.switchableOutput.validFunctions !== (1 << VenusOS.SwitchableOutput_Function_Manual))
+				secondaryLabel.color: root.switchableOutput.hasValidFunction ? Theme.color_listItem_secondaryText : Theme.color_critical
+				optionModel: {
+					let options = []
+					for (let i = 0; i <= VenusOS.SwitchableOutput_Function_MaxSupportedType; i++) {
+						if (root.switchableOutput.validFunctions & (1 << i)) {
+							options.push({ display: VenusOS.switchableOutput_functionToText(i), value: i })
+						}
+					}
+					return options
+				}
+				interactive: optionModel.length > 1 || !root.switchableOutput.hasValidFunction
+
+				// Set the fallback text explicitly, in case the output Function is not supported by its
+				// ValidFunctions, which means the current Function is not one of the listed options and
+				// thus cannot be displayed by ListRadioButtonGroup.
+				defaultSecondaryText: VenusOS.switchableOutput_functionToText(root.switchableOutput.function)
+			}
+
+			ListRadioButtonGroup {
 				//: Whether UI controls should be shown for this output
 				//% "Show controls"
 				text: qsTrId("page_switchable_show_controls")
