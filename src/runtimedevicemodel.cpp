@@ -62,7 +62,7 @@ QVariant RuntimeDeviceModel::data(const QModelIndex &index, int role) const
 	switch (role)
 	{
 	case DeviceRole:
-		return m_devices.at(row).device ? QVariant::fromValue<BaseDevice *>(m_devices.at(row).device) : QVariant();
+		return QVariant::fromValue<BaseDevice *>(m_devices.at(row).device);
 	case CachedDeviceNameRole:
 		return m_devices.at(row).cachedName;
 	case ConnectedRole:
