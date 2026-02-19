@@ -30,7 +30,7 @@ SwipeViewPage {
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		y: (root.Global.screenHeight - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
 		animationEnabled: root.animationEnabled
 	}
 

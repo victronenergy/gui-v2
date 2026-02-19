@@ -196,8 +196,8 @@ StackView {
 	}
 
 	// The stack is initially off-screen, and slides into view when the first page is pushed.
-	x: Theme.geometry_screen_width
-	width: Theme.geometry_screen_width
+	x: Global.screenWidth
+	width: Global.screenWidth
 	state: "closed"
 	enabled: opened
 

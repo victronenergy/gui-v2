@@ -43,7 +43,7 @@ ListView {
 		}
 	}
 
-	implicitWidth: Theme.geometry_screen_width
+	implicitWidth: Global.screenWidth
 	implicitHeight: contentItem.height + topMargin + bottomMargin
 	interactive: false
 

@@ -10,8 +10,8 @@ import Victron.Gauges
 LevelsTab {
 	id: root
 
-	readonly property int twoGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 4, Theme.geometry_screen_width)
-	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
+	readonly property int twoGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 4, Global.screenWidth)
+	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Global.screenWidth)
 
 	model: Global.environmentInputs.model
 	delegate: EnvironmentGaugePanel {

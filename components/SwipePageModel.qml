@@ -7,56 +7,92 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
+	readonly property list<Page> pages: showBoatPage && showLevelsPage ?
+			[ boatPageLoader.item, briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
+		: showBoatPage ?
+			[ boatPageLoader.item, briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
+		: showLevelsPage ?
+			[ briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
+		:	[ briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
 	readonly property bool showLevelsPage: tankCount > 0 || environmentInputCount > 0
-	readonly property bool tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
-	readonly property bool environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
+	readonly property bool showBoatPage: boatPageLoader.showBoatPageItem.value
+	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
+	readonly property int environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
 
-	readonly property Component boatPage: Component {
-		Boat.BoatPage {
-			view: root.view
-		}
-	}
-	readonly property VeQuickItem showBoatPage: VeQuickItem {
-		uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
-		onValueChanged: {
-			if (!completed) {
-				return
+	readonly property bool completed: _completed
+		&& Global.dataManagerLoaded
+		&& Global.systemSettings
+		&& Global.tanks
+		&& Global.environmentInputs
+		&& (showBoatPage && showLevelsPage) ? pages.length === 6 && boatPageLoader.item && levelsPageLoader.item
+		  : showBoatPage ? pages.length === 5 && boatPageLoader.item
+		  : showLevelsPage ? pages.length === 5 && levelsPageLoader.item
+	      : pages.length === 4
+	property bool _completed: false
+
+	Loader {
+		id: boatPageLoader
+
+		active: root.showBoatPage
+		sourceComponent: Global.portraitMode ? portraitBoatPage : landscapeBoatPage
+
+		readonly property Component landscapeBoatPage: Component {
+			Boat.BoatPage {
+				view: root.view
 			}
+		}
 
-			if (value) {
-				root.view.insertItem(0, boatPage.createObject(parent))
-			} else {
-				root.view.removeItem(view.itemAt(0))
+		readonly property Component portraitBoatPage: Component {
+			Boat.PortraitBoatPage {
+				view: root.view
 			}
 		}
-	}
 
-	readonly property Component levelsComponent: Component {
-		LevelsPage {
-			view: root.view
+		readonly property VeQuickItem showBoatPageItem: VeQuickItem {
+			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
 		}
 	}
-	property LevelsPage levelsPage
 
-	property bool completed: false
+	Loader {
+		id: briefPageLoader
 
-	BriefPage {
-		view: root.view
+		sourceComponent: Global.portraitMode ? portraitBriefPage : landscapeBriefPage
 
-		Image {
-			width: status === Image.Null ? 0 : Theme.geometry_screen_width
-			fillMode: Image.PreserveAspectFit
-			source: BackendConnection.demoImageFileName
-			onStatusChanged: {
-				if (status === Image.Ready) {
-					console.info("Loaded demo image:", source)
+		readonly property Component landscapeBriefPage: BriefPage {
+			view: root.view
+			Image {
+				width: status === Image.Null ? 0 : Global.screenWidth
+				fillMode: Image.PreserveAspectFit
+				source: BackendConnection.demoImageFileName
+				onStatusChanged: {
+					if (status === Image.Ready) {
+						console.info("Loaded demo image:", source)
+					}
 				}
 			}
+		}
+
+		readonly property Component portraitBriefPage: PortraitBriefPage {
+			view: root.view
 		}
 	}
 
 	OverviewPage {
+		id: overviewPage
 		view: root.view
+	}
+
+	Loader {
+		id: levelsPageLoader
+
+		active: root.showLevelsPage
+		sourceComponent: landscapeLevelsPage
+
+		readonly property Component landscapeLevelsPage: Component {
+			LevelsPage {
+				view: root.view
+			}
+		}
 	}
 
 	NotificationsPage {
@@ -65,37 +101,9 @@ ObjectModel {
 	}
 
 	SettingsPage {
+		id: settingsPage
 		view: root.view
 	}
 
-	Component.onCompleted: {
-		if (showLevelsPage) {
-			levelsPage = levelsComponent.createObject(parent)
-			insert(2, levelsPage) // ideally the index would not be hardcoded, but the view is not initialized yet
-		}
-
-		if (showBoatPage.value) {
-			insert(0, boatPage.createObject(parent))
-		}
-
-		completed = true
-	}
-
-	onShowLevelsPageChanged: {
-		if (!completed) {
-			return
-		}
-
-		if (showLevelsPage) {
-			for (let i = 0; i < root.view.count; ++i) {
-				if (root.view.itemAt(i) === notificationsPage) {
-					root.levelsPage = levelsComponent.createObject(parent)
-					root.view.insertItem(i, root.levelsPage)
-					break
-				}
-			}
-		} else {
-			root.view.removeItem(root.levelsPage)
-		}
-	}
+	Component.onCompleted: Qt.callLater(function() { root._completed = true })
 }

@@ -51,8 +51,8 @@ QtVirtualKeyboard.InputPanel {
 	visible: Qt.inputMethod.visible || yAnimator.running
 
 	y: requiresRotation ? 312 // manually-found coordinate transform for rpi5, see #2702
-	 : Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height
-	 : Theme.geometry_screen_height
+	 : Qt.inputMethod.visible ? Global.screenHeight - root.height
+	 : Global.screenHeight
 
 	x: requiresRotation ? 480 // manually-found coordinate transform for rpi5, see #2702
 	 : 0
@@ -73,7 +73,7 @@ QtVirtualKeyboard.InputPanel {
 		}
 	}
 
-	width: Theme.geometry_screen_width
+	width: Global.screenWidth
 
 	states: [
 		State {

@@ -8,8 +8,8 @@ import Victron.VenusOS
 
 Rectangle {
 	id: root
-	width: Theme.geometry_screen_width
-	height: Theme.geometry_screen_height
+	width: Global.screenWidth
+	height: Global.screenHeight
 	color: Theme.color_page_background
 
 	// Stop mouse events from getting through the view

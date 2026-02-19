@@ -15,6 +15,8 @@ Button {
 	display: Button.TextUnderIcon
 	radius: 0
 
+	font.pixelSize: Global.portraitMode ? Theme.font_size_tiny : Theme.font_size_body1
+
 	color: down
 		   ? Theme.color_navigationBar_button_on
 		   : Theme.color_navigationBar_button_off

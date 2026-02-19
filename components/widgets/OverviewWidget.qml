@@ -35,7 +35,7 @@ Rectangle {
 	property list<QtObject> extraContentChildren
 
 	function getCompactHeight(s) {
-		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+		const availableHeight = Global.screenHeight - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
 		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_compact_l_height
 			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3
@@ -45,7 +45,7 @@ Rectangle {
 	}
 
 	function getExpandedHeight(s) {
-		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_overviewPage_layout_expanded_bottomMargin
+		const availableHeight = Global.screenHeight - Theme.geometry_statusBar_height - Theme.geometry_overviewPage_layout_expanded_bottomMargin
 		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_expanded_l_height
 			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3

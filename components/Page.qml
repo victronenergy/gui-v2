@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Window
 import Victron.VenusOS
 
 FocusScope {
@@ -28,7 +29,7 @@ FocusScope {
 
 	readonly property bool __is_venus_gui_page__: true
 
-	implicitWidth: Theme.geometry_screen_width
-	implicitHeight: Theme.geometry_screen_height
+	implicitWidth: Screen.width
+	implicitHeight: Screen.height
 	focus: isCurrentPage
 }

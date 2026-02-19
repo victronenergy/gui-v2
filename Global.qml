@@ -54,6 +54,9 @@ QtObject {
 	property bool isDesktop
 	property bool isGxDevice: Qt.platform.os === "linux" && !isDesktop
 	property real scalingRatio: 1.0
+	property bool portraitMode: !isGxDevice && screenHeight > screenWidth
+	property real screenWidth: Theme.geometry_screen_width
+	property real screenHeight: Theme.geometry_screen_height
 
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom

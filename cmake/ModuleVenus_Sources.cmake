@@ -329,6 +329,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/NotificationsPage.qml
     pages/OverviewPage.qml
     pages/PageManager.qml
+    pages/PortraitBriefPage.qml
     pages/SettingsPage.qml
     pages/TanksTab.qml
     pages/controlcards/ESSCard.qml
