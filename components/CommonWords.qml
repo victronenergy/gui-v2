@@ -532,6 +532,9 @@ QtObject {
 	//% "Temperature"
 	readonly property string temperature: qsTrId("common_words_temperature")
 
+	//% "Temp"
+	readonly property string temperature_shortened: qsTrId("common_words_temperature_shortened")
+
 	//% "Temperature sensor"
 	readonly property string temperature_sensor: qsTrId("common_words_temperature_sensor")
 
