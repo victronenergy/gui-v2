@@ -16,7 +16,7 @@ FocusScope {
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
-			: pageStack.currentPage || swipeView?.currentItem
+			: pageStack.currentPage ?? swipeView?.currentItem ?? null
 	readonly property alias cardsLoader: cardsLoader
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
@@ -162,7 +162,6 @@ FocusScope {
 				right: parent.right
 			}
 			active: false
-			asynchronous: true
 			sourceComponent: swipeViewComponent
 			visible: swipeView && swipeView.ready && !pageStack.opened
 					 && !(root.cardsActive && !cardsLoader.animationRunning)
@@ -191,8 +190,9 @@ FocusScope {
 					onReadyChanged: if (ready) ready = true // remove binding
 
 					anchors.fill: parent
+					animationEnabled: root.allowPageAnimations
 					focus: true
-					contentChildren: swipePageModel.children
+					contentChildren: swipePageModel.pages
 
 					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
 					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
@@ -261,8 +261,8 @@ FocusScope {
 		// not run (skipping the splash screen causes the animations to
 		// start before the parent is visible).
 		onStopped: {
-			navBar.y = yAnimator.to
-			navBar.opacity = opacityAnimator.to
+			navBar.y = Qt.binding(function() { return yAnimator.to })
+			navBar.opacity = Qt.binding(function() { return opacityAnimator.to })
 		}
 
 		PauseAnimation {
@@ -291,6 +291,11 @@ FocusScope {
 
 		running: pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 				|| pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
+
+		onStopped: {
+			navBar.y = Qt.binding(function() { return yAnimator.to })
+			navBar.opacity = Qt.binding(function() { return opacityAnimator.to })
+		}
 
 		YAnimator {
 			target: navBar
