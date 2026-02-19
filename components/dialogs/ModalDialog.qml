@@ -22,6 +22,7 @@ T.Dialog {
 	property color backgroundColor: Theme.color_background_secondary
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property alias canAccept: doneButton.enabled
+	property alias titleTextFormat: headerLabel.textFormat
 	readonly property real centeredY: (parent.height - height) / 2
 
 	// Optional functions: called when accept/reject is attempted.

@@ -206,6 +206,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
+    components/listitems/ListSpinBoxRange.qml
     components/listitems/ListTemperatureRelay.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
