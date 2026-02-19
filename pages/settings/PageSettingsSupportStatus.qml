@@ -4,8 +4,9 @@
 */
 
 import QtQuick
-import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 import QtQuick.Templates as T
+import Victron.VenusOS
 
 Page {
 	id: root
@@ -24,15 +25,9 @@ Page {
 		|| (nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled)
 
 	function getSupportStateText() {
-		if (isModified && isIntegrationRunning) {
-			//% "Check below items in red and orange"
-			return qsTrId("pagesettingssupportstate_support_state_check_below_red_orange")
-		} else if (isModified) {
-			//% "Check below items in red"
-			return qsTrId("pagesettingssupportstate_support_state_check_below_red")
-		} else if (isIntegrationRunning) {
-			//% "Check below items in orange"
-			return qsTrId("pagesettingssupportstate_support_state_check_below_orange")
+		if (isModified || isIntegrationRunning) {
+			//% "Check items below"
+			return qsTrId("pagesettingssupportstate_support_state_check_items")
 		} else if (isRaspberry) {
 			//% "Unsupported GX device"
 			return qsTrId("pagesettingssupportstate_support_state_unsupported_gx_device")
@@ -46,25 +41,19 @@ Page {
 		}
 	}
 
-	function getSupportStateColor() {
-		if (isModified && isIntegrationRunning) {
-			// "Check below items in red and orange"
-			return Theme.color_red
-		} else if (isModified) {
-			// "Check below items in red"
-			return Theme.color_red
+	function getSupportState() {
+		if (isModified || isRaspberry) {
+			// "Check items below" || "Unsupported GX device"
+			return VenusOS.Alarm_Level_Alarm
 		} else if (isIntegrationRunning) {
-			// "Check below items in orange"
-			return Theme.color_orange
-		} else if (isRaspberry) {
-			// "Unsupported GX device"
-			return Theme.color_red
+			// "Check items below"
+			return VenusOS.Alarm_Level_Warning
 		} else if (isClean) {
 			// "OK"
-			return Theme.color_green
+			return VenusOS.Alarm_Level_OK
 		} else {
 			// "OK"
-			return Theme.color_font_secondary
+			return -1
 		}
 	}
 
@@ -93,16 +82,16 @@ Page {
 		}
 	}
 
-	function getFsModifiedStateColor() {
+	function getFsModifiedState() {
 		if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Clean) {
 			// "Clean"
-			return Theme.color_green
+			return VenusOS.Alarm_Level_OK
 		} else if (fsModifiedState === VenusOS.ModificationChecks_FsModifiedState_Modified) {
 			// "Modified"
-			return Theme.color_red
+			return VenusOS.Alarm_Level_Alarm
 		} else {
 			// "Not available on this device"
-			return Theme.color_font_secondary
+			return -1
 		}
 	}
 
@@ -223,18 +212,18 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 
-			ListText {
+			ListTextStatus {
 				//% "Support status"
 				text: qsTrId("pagesettingssupportstate_support_status")
 				secondaryText: getSupportStateText()
-				secondaryLabel.color: getSupportStateColor()
+				alarmStatus: getSupportState()
 			}
 
-			ListText {
+			ListTextStatus {
 				//% "Device model"
 				text: qsTrId("pagesettingssupportstate_device_model")
 				secondaryText: modelItem.value || ""
-				secondaryLabel.color: isRaspberry ? Theme.color_red : Theme.color_green
+				alarmStatus: isRaspberry ? VenusOS.Alarm_Level_Alarm : -1
 			}
 
 			ListText {
@@ -245,11 +234,12 @@ Page {
 				preferredVisible: dataItem.valid && dataItem.value != ""
 			}
 
-			ListText {
+			ListTextStatus {
+				id: dataPartitionFreeSpace
 				//% "Data partition free space"
 				text: qsTrId("pagesettingssupportstate_data_free_space")
 				secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
-				secondaryLabel.color: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? Theme.color_red : Theme.color_green
+				alarmStatus: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? VenusOS.Alarm_Level_Alarm : -1
 			}
 
 			ListText {
@@ -263,11 +253,11 @@ Page {
 				text: qsTrId("pagesettingssupportstate_modifications")
 			}
 
-			ListText {
+			ListTextStatus {
 				//% "Custom startup scripts"
 				text: qsTrId("pagesettingssupportstate_custom_startup_scripts")
 				secondaryText: getSystemHooksState()
-				secondaryLabel.color: systemHooksState < 4 ? Theme.color_green : systemHooksState < 16 ? Theme.color_orange : Theme.color_red
+				alarmStatus: systemHooksState < 4 ? -1 : systemHooksState < 16 ? VenusOS.Alarm_Level_Warning : VenusOS.Alarm_Level_Alarm
 			}
 
 			ListButton {
@@ -340,11 +330,11 @@ Page {
 				}
 			}
 
-			ListText {
-				//% "File system (rootfs) status"
-				text: qsTrId("pagesettingssupportstate_file_system_status")
+			ListTextStatus {
+				//% "Operating system partition status"
+				text: qsTrId("pagesettingssupportstate_operating_system_partition_status")
 				secondaryText: getFsModifiedStateText()
-				secondaryLabel.color: getFsModifiedStateColor()
+				alarmStatus: getFsModifiedState()
 			}
 
 			SettingsListHeader {
@@ -363,11 +353,11 @@ Page {
 				text: qsTrId("pagesettingssupportstate_installed_image_type")
 			}
 
-			ListText {
+			ListTextStatus {
 				//% "Latest official firmware version installed?"
 				text: qsTrId("pagesettingssupportstate_latest_official_firmware_installed")
 				secondaryText: getLatestReleaseFirmwareInstalled()
-				secondaryLabel.color: isLatestReleaseFirmwareInstalled ? Theme.color_green : Theme.color_red
+				alarmStatus: !isLatestReleaseFirmwareInstalled ? VenusOS.Alarm_Level_Alarm : -1
 			}
 
 			ListButton {
@@ -448,11 +438,12 @@ Page {
 				text: qsTrId("pagesettingssupportstate_integrations")
 			}
 
-			ListText {
+			ListTextStatus {
+				id: modbusTcp
 				//% "Modbus TCP Server"
 				text: qsTrId("pagesettingssupportstate_modbus_tcp_server")
 				secondaryText: modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
-				secondaryLabel.color: modbusTcpItem.value ? Theme.color_orange : Theme.color_font_secondary
+				alarmStatus: modbusTcpItem.value ? VenusOS.Alarm_Level_Warning : -1
 
 				VeQuickItem {
 					id: modbusTcpItem
@@ -460,11 +451,12 @@ Page {
 				}
 			}
 
-			ListText {
+			ListTextStatus {
+				id: signalK
 				//% "Signal K"
 				text: qsTrId("pagesettingssupportstate_signal_k")
 				secondaryText: signalKItem.valid && signalKItem.value ? CommonWords.enabled : CommonWords.disabled
-				secondaryLabel.color: signalKItem.valid && signalKItem.value ? Theme.color_orange : Theme.color_font_secondary
+				alarmStatus: signalKItem.valid && signalKItem.value ? VenusOS.Alarm_Level_Warning : -1
 				preferredVisible: signalKItem.valid
 
 				VeQuickItem {
@@ -473,14 +465,15 @@ Page {
 				}
 			}
 
-			ListText {
+			ListTextStatus {
+				id: nodeRed
 				//% "Node-RED"
 				text: qsTrId("pagesettingssupportstate_node_red")
 				secondaryText: nodeRedItem.valid && nodeRedItem.value === VenusOS.NodeRed_Mode_Disabled
 					? CommonWords.disabled : nodeRedItem.value === VenusOS.NodeRed_Mode_Enabled
 						//% "Enabled (safe mode)"
 						? CommonWords.enabled : qsTrId("settings_large_enabled_safe_mode")
-				secondaryLabel.color: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? Theme.color_orange : Theme.color_font_secondary
+				alarmStatus: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? VenusOS.Alarm_Level_Warning : -1
 				preferredVisible: nodeRedItem.valid
 
 				VeQuickItem {
@@ -490,9 +483,20 @@ Page {
 			}
 
 			PrimaryListLabel {
-				//% "Items colored orange are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first."
-				text: qsTrId("pagesettingssupportstate_orange_items_description")
+				id: warningDescriptionLabel
+				//% "Items with a warning icon are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first."
+				text: qsTrId("pagesettingssupportstate_items_with_warning_icon_description")
 				color: Theme.color_font_secondary
+				leftPadding: warningIcon.x + warningIcon.width + warningIcon.x/2
+
+				CP.IconImage {
+					id: warningIcon
+
+					x: Theme.geometry_listItem_content_horizontalMargin
+					y: warningDescriptionLabel.topPadding
+					source: "qrc:/images/icon_warning_32.svg"
+					color: Theme.color_warning
+				}
 			}
 		}
 	}
