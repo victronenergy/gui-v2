@@ -39,5 +39,51 @@ Item {
 			rightMargin: Theme.geometry_controlCard_button_margins
 			top: header.bottom
 		}
+
+		MiniSlider {
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_valueIndicator_horizontalMargin
+				right: quantityLabel.left
+				rightMargin: Theme.geometry_valueIndicator_spacing
+				verticalCenter: parent.verticalCenter
+			}
+			height: Theme.geometry_valueIndicator_slider_height
+			borderWidth: Theme.geometry_valueIndicator_slider_borderWidth
+			indicatorBackgroundWidth: 0
+
+			// Set to false so control is not interactive, change requires
+			// colors to overridden.
+			enabled: false
+			highlightColor: Theme.color_ok
+			backgroundColor: Theme.color_darkOk
+
+			value: root.genericInput.value
+			from: root.genericInput.rangeMin
+			to: root.genericInput.rangeMax
+			handle: null
+		}
+
+		QuantityLabel {
+			id: quantityLabel
+
+			anchors {
+				right: parent.right
+				rightMargin: Theme.geometry_valueIndicator_horizontalMargin
+				verticalCenter: parent.verticalCenter
+			}
+			value: valueItem.value
+			unit: Global.systemSettings.toPreferredUnit(root.genericInput.unitType)
+			precision: root.genericInput.decimals
+			font.pixelSize: Theme.font_size_body2
+			precisionAdjustmentAllowed: false // Always respect the decimals setting
+
+			VeQuickItem {
+				id: valueItem
+				uid: root.genericInput.uid + "/Value"
+				sourceUnit: Units.unitToVeUnit(root.genericInput.unitType)
+				displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.genericInput.unitType))
+			}
+		}
 	}
 }
