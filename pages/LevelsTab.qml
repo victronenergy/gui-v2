@@ -22,7 +22,7 @@ BaseListView {
 			? Theme.geometry_levelsPage_gaugesView_horizontalMargin
 			: 0
 
-	orientation: ListView.Horizontal
+	orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 	spacing: Gauges.spacing(count)
 	currentIndex: 0
 }

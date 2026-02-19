@@ -29,12 +29,16 @@ LevelsTab {
 		required property Tank tank // null if isGroup=true
 		required property TankModel tankModel
 
-		width: Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
-		height: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
+		width: Theme.screenSize === Theme.Portrait ? root.width
+			: Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
+		height: Theme.screenSize === Theme.Portrait ? Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.height)
+			: Gauges.height(!!Global.pageManager && Global.pageManager.expandLayout)
 		status: isGroup ? VenusOS.Tank_Status_Ok : (tank?.status ?? VenusOS.Tank_Status_Unknown)
 		fluidType: tankModel.type
 		name: tank?.name ?? ""
-		gauge: isGroup ? gaugeGroupComponent : singleGaugeComponent
+		gauge: Theme.screenSize === Theme.Portrait
+			? (isGroup ? portraitGroupComponent : portraitGaugeComponent)
+			: (isGroup ? gaugeGroupComponent : singleGaugeComponent)
 		level: isGroup ? tankModel.averageLevel : tank?.level ?? NaN
 		totalCapacity: isGroup ? tankModel.totalCapacity : tank?.capacity ?? NaN
 		totalRemaining: isGroup ? tankModel.totalRemaining : tank?.remaining ?? NaN
@@ -98,6 +102,53 @@ LevelsTab {
 
 						width: (gaugeRow.width - (gaugeRow.spacing * (tankOrGroupDelegate.tankModel.count - 1))) / tankOrGroupDelegate.tankModel.count
 						height: parent.height
+						expanded: !!Global.pageManager && Global.pageManager.expandLayout
+						animationEnabled: root.animationEnabled
+						valueType: tankOrGroupDelegate.tankProperties.valueType
+						value: device.level / 100
+						isGrouped: true
+						surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
+								? Theme.color_levelsPage_gauge_separatorBarColor
+								: tankOrGroupDelegate.backgroundColor
+					}
+				}
+			}
+		}
+
+		Component {
+			id: portraitGaugeComponent
+
+			TankGauge {
+				anchors.fill: parent
+				orientation: Qt.Horizontal
+				expanded: !!Global.pageManager && Global.pageManager.expandLayout
+				animationEnabled: root.animationEnabled
+				valueType: tankOrGroupDelegate.tankProperties.valueType
+				value: tankOrGroupDelegate.tank ? tankOrGroupDelegate.tank.level / 100 : NaN
+				isGrouped: false
+				surfaceColor: tankOrGroupDelegate.status === VenusOS.Tank_Status_Ok
+						? Theme.color_levelsPage_gauge_separatorBarColor
+						: tankOrGroupDelegate.backgroundColor
+			}
+		}
+
+		Component {
+			id: portraitGroupComponent
+
+			Column {
+				id: gaugeColumn
+
+				anchors.fill: parent
+				spacing: Theme.geometry_levelsPage_subgauges_spacing
+
+				Repeater {
+					model: tankOrGroupDelegate.tankModel
+					delegate: TankGauge {
+						required property BaseTankDevice device
+
+						orientation: Qt.Horizontal
+						height: (gaugeColumn.height - (gaugeColumn.spacing * (tankOrGroupDelegate.tankModel.count - 1))) / tankOrGroupDelegate.tankModel.count
+						width: parent.width
 						expanded: !!Global.pageManager && Global.pageManager.expandLayout
 						animationEnabled: root.animationEnabled
 						valueType: tankOrGroupDelegate.tankProperties.valueType
