@@ -1,0 +1,11 @@
+{
+    "com.victronenergy.opportunityloads": {
+        "/AvailableServices": "[{\"controllable\":true,\"deviceInstance\":0,\"label\":\"Battery\",\"serviceType\":\"battery\",\"uniqueIdentifier\":\"battery\"},{\"controllable\":true,\"deviceInstance\":56,\"serviceType\":\"acload\",\"uniqueIdentifier\":\"shellyPro2PMPVHeat2_56\"},{\"controllable\":true,\"deviceInstance\":54,\"serviceType\":\"acload\",\"uniqueIdentifier\":\"shellyPro2PMPVHeat1_54\"},{\"controllable\":true,\"deviceInstance\":55,\"serviceType\":\"acload\",\"uniqueIdentifier\":\"shellyPro2PMPVHeat2_55\"},{\"serviceType\":\"evcharger\",\"deviceInstance\":920,\"uniqueIdentifier\":\"EVCS_Mock_3_Phase_920\",\"controllable\":true}]",
+        "/ReservationBasePower": 4000,
+        "/ReservationDecrement": 40,
+        "/BatteryLifeSupport": 1
+    },
+    "com.victronenergy.platform": {
+        "/OpportunityLoads/Mode": 1
+    }
+}
