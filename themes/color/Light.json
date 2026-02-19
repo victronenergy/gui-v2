@@ -72,6 +72,8 @@
     "color_listItem_highAccessLevel": "color_darkOrange",
 
     "color_valueIndicator_background": "color_gray8",
+    "color_valueIndicator_slider_handle": "#F0EFEB",
+    "color_valueIndicator_slider_handle_border": "#1D1D1B",
 
     "color_scrollBar_bar": "color_gray5",
 
