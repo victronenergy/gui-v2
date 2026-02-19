@@ -213,6 +213,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListRelayState.qml
     components/listitems/ListSpinBoxRange.qml
     components/listitems/ListTemperatureRelay.qml
+    components/listitems/ListTextStatus.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
     components/listitems/core/BaseListItem.qml
