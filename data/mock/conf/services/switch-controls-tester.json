@@ -54,7 +54,9 @@
         "/GenericInput/temp_1/Settings/Type": 3,
         "/GenericInput/temp_1/Settings/ValidTypes": 8,
         "/GenericInput/temp_1/Settings/Decimals": 2,
-        "/GenericInput/temp_1/Settings/Unit": "/Speed",
+        "/GenericInput/temp_1/Settings/Unit": "/Temperature",
+        "/GenericInput/temp_1/Settings/RangeMin": 0,
+        "/GenericInput/temp_1/Settings/RangeMax": 100,
         "/GenericInput/temp_1/Status": 0,
 
         "/SwitchableOutput/momentary_1/Name": "Out-00a. Momentary",
