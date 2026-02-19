@@ -102,7 +102,7 @@ Page {
 				id: gensetMenu
 				//% "Genset"
 				text: qsTrId("devicelistpage_genset")
-				preferredVisible: relay0.valid && relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_GeneratorStartStop
+				preferredVisible: relay0.valid && relayFunction.valid && relayFunction.value === VenusOS.SwitchableOutput_Function_GeneratorStartStop
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageRelayGenerator.qml", {"title": text})
 
 				VeQuickItem {
@@ -113,7 +113,7 @@ Page {
 
 			ListNavigation {
 				id: tankPumpMenu
-				preferredVisible: relayFunction.valid && relayFunction.value === VenusOS.Relay_Function_Tank_Pump
+				preferredVisible: relayFunction.valid && relayFunction.value === VenusOS.SwitchableOutput_Function_Tank_Pump
 				//% "Tank pump"
 				text: qsTrId("settings_tank_pump")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTankPump.qml", {"title": text})

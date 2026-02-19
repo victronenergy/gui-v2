@@ -242,10 +242,17 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
 
+    components/switches/GenericInputCardDelegateBackground.qml
+    components/switches/GenericInputCardDelegateHeader.qml
+    components/switches/IOChannelCardDelegateHeader.qml
+    components/switches/IOChannelGroupCard.qml
     components/switches/SwitchableOutputCardDelegateHeader.qml
-    components/switches/SwitchableOutputGroupCard.qml
     components/switches/SwitchableOutputDimmableSlider.qml
     components/switches/SwitchableOutputSlider.qml
+    components/switches/delegates/GenericInputCardDelegate_0.qml
+    components/switches/delegates/GenericInputCardDelegate_1.qml
+    components/switches/delegates/GenericInputCardDelegate_2.qml
+    components/switches/delegates/GenericInputCardDelegate_3.qml
     components/switches/delegates/SwitchableOutputCardDelegate_0.qml
     components/switches/delegates/SwitchableOutputCardDelegate_1.qml
     components/switches/delegates/SwitchableOutputCardDelegate_2.qml
@@ -638,6 +645,12 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/cpuinfo.cpp
     src/frameratemodel.h
     src/frameratemodel.cpp
+    src/genericinput.h
+    src/genericinput.cpp
+    src/iochannel.h
+    src/iochannel.cpp
+    src/iochannelgroupmodel.h
+    src/iochannelgroupmodel.cpp
     src/keyeventfilter.h
     src/keyeventfilter.cpp
     src/keynavigationhighlight.cpp
@@ -675,8 +688,6 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/switchableoutput.cpp
     src/switchableoutputmodel.h
     src/switchableoutputmodel.cpp
-    src/switchableoutputgroupmodel.h
-    src/switchableoutputgroupmodel.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )

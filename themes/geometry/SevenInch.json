@@ -91,6 +91,10 @@
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
 
+    "geometry_valueIndicator_horizontalMargin": 12,
+    "geometry_valueIndicator_spacing": 28,
+    "geometry_valueIndicator_slider_height": 8,
+
     "geometry_listLink_qrCodeSize": 96,
 
     "geometry_slider_groove_height": 8,
@@ -278,15 +282,15 @@
 
     "geometry_card_button_height": 48,
 
-    "geometry_switchableoutput_topMargin": 24,
-    "geometry_switchableoutput_spacing": 16,
-    "geometry_switchableoutput_row_count": 5,
-    "geometry_switchableoutput_label_margin": 2,
-    "geometry_switchableoutput_control_height": 48,
-    "geometry_switchableoutput_status_verticalPadding": 2,
-    "geometry_switchableoutput_status_horizontalPadding": 8,
-    "geometry_switchableoutput_status_radius": 10,
-    "geometry_switchableoutput_status_minimum_width": 48,
+    "geometry_iochannel_topMargin": 24,
+    "geometry_iochannel_spacing": 16,
+    "geometry_iochannel_row_count": 5,
+    "geometry_iochannel_label_margin": 2,
+    "geometry_iochannel_control_height": 48,
+    "geometry_iochannel_status_verticalPadding": 2,
+    "geometry_iochannel_status_horizontalPadding": 8,
+    "geometry_iochannel_status_radius": 10,
+    "geometry_iochannel_status_minimum_width": 48,
 
     "geometry_colorWheelDialog_width": 754,
     "geometry_colorWheelDialog_height": 448,

@@ -481,6 +481,41 @@ QString Enums::switch_deviceStateToText(Switch_DeviceState value) const
 	}
 }
 
+QString Enums::genericInput_typeToText(GenericInput_Type value) const
+{
+	switch (value) {
+	case GenericInput_Type_Discrete:
+		//% "Discrete value indicator"
+		return qtTrId("generic_input_discrete");
+	case GenericInput_Type_UnrangedValue:
+		//% "Value indicator (without range)"
+		return qtTrId("generic_input_value_without_range");
+	case GenericInput_Type_RangedValue:
+		//% "Value indicator (with range)"
+		return qtTrId("generic_input_value_without_range");
+	case GenericInput_Type_Temperature:
+		//% "Temperature indicator"
+		return qtTrId("generic_input_temperature");
+	}
+	return QString();
+}
+
+QString Enums::genericInput_statusToText(GenericInput_Status value) const
+{
+	switch (value) {
+	case GenericInput_Status_On:
+		//% "On"
+		return qtTrId("generic_input_status_on");
+	case GenericInput_Status_Fault:
+		//% "Fault"
+		return qtTrId("generic_input_status_fault");
+	case GenericInput_Status_SensorBatteryLow:
+		//% "Sensor battery low"
+		return qtTrId("generic_input_status_sensor_battery_low");
+	}
+	return QString();
+}
+
 QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId) const
 {
 	switch (value) {
@@ -533,6 +568,39 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 		//: RGB + white color wheel
 		//% "RGB + W color wheel"
 		return qtTrId("switchable_output_rgbw_color_wheel");
+	default:
+		//% "Unsupported type: %1"
+		return qtTrId("switchable_output_unsupported").arg(value);
+	}
+}
+
+QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value) const
+{
+	switch (value) {
+	case SwitchableOutput_Function_Disabled:
+		//% "Disabled"
+		return qtTrId("switchable_output_function_disabled");
+	case SwitchableOutput_Function_Alarm:
+		//% "Alarm"
+		return qtTrId("switchable_output_function_alarm");
+	case SwitchableOutput_Function_GeneratorStartStop:
+		//% "Generator start/stop"
+		return qtTrId("switchable_output_function_generator_startstop");
+	case SwitchableOutput_Function_Manual:
+		//% "Manual"
+		return qtTrId("switchable_output_function_manual");
+	case SwitchableOutput_Function_Tank_Pump:
+		//% "Tank pump"
+		return qtTrId("switchable_output_function_tankpump");
+	case SwitchableOutput_Function_Temperature:
+		//% "Temperature"
+		return qtTrId("switchable_output_function_temperature");
+	case SwitchableOutput_Function_GensetHelperRelay:
+		//% "Genset Helper"
+		return qtTrId("switchable_output_function_genset_helper");
+	case SwitchableOutput_Function_OpportunityLoad:
+		//% "Opportunity load"
+		return qtTrId("switchable_output_function_opportunity_load");
 	default:
 		//% "Unsupported type: %1"
 		return qtTrId("switchable_output_unsupported").arg(value);

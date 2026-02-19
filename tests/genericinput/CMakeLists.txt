@@ -4,16 +4,16 @@
 #
 
 cmake_minimum_required(VERSION 3.16)
-project(tst_switchableoutput LANGUAGES CXX)
+project(tst_genericinput LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickTest Quick DBus Mqtt)
 
-qt_add_executable(tst_switchableoutput
-    tst_switchableoutput.cpp
-    ../../src/switchableoutput.h
-    ../../src/switchableoutput.cpp
+qt_add_executable(tst_genericinput
+    tst_genericinput.cpp
+    ../../src/genericinput.h
+    ../../src/genericinput.cpp
     ../../src/iochannel.h
     ../../src/iochannel.cpp
     ../../src/alldevicesmodel.h
@@ -53,22 +53,22 @@ qt_add_qml_module( ${PROJECT_NAME}
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES
-        tst_switchableoutput.qml
+        tst_genericinput.qml
     OUTPUT_DIRECTORY Victron/VenusOS
 )
 
-set_target_properties(tst_switchableoutput PROPERTIES
+set_target_properties(tst_genericinput PROPERTIES
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE TRUE
 )
 
 option(VENUS_INSTALL_TESTS "enable test installation via cmake -DVENUS_INSTALL_TESTS=ON" OFF) # Disabled by default
 if (VENUS_INSTALL_TESTS)
-    install(FILES tst_switchableoutput.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/switchableoutput)
-    install(TARGETS tst_switchableoutput DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/switchableoutput)
+    install(FILES tst_genericinput.qml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/genericinput)
+    install(TARGETS tst_genericinput DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../../install/tests/genericinput)
 endif()
 
-target_link_libraries(tst_switchableoutput PRIVATE
+target_link_libraries(tst_genericinput PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::QuickPrivate

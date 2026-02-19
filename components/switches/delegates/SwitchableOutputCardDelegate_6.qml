@@ -56,7 +56,7 @@ FocusScope {
 		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
 		// by the same amount to fit the content within the background.
 		defaultBackgroundWidth: header.width
-		defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height
+		defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 		topInset: Theme.geometry_button_touch_verticalMargin
 		bottomInset: Theme.geometry_button_touch_verticalMargin
 		leftInset: Theme.geometry_controlCard_button_margins

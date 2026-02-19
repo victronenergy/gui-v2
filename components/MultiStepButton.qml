@@ -25,7 +25,7 @@ BaseListView {
 	signal offClicked()
 
 	implicitWidth: parent.width
-	implicitHeight: Theme.geometry_switchableoutput_control_height
+	implicitHeight: Theme.geometry_iochannel_control_height
 
 	orientation: ListView.Horizontal
 	focus: false
@@ -35,7 +35,7 @@ BaseListView {
 		readonly property bool lastListItem: index === root.model.length - 1
 
 		width: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
-		height: Theme.geometry_switchableoutput_control_height
+		height: Theme.geometry_iochannel_control_height
 
 		// background border color
 		Rectangle {
@@ -89,7 +89,7 @@ BaseListView {
 		width: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
 			   + Theme.geometry_miniSlider_separator_width + (Theme.geometry_miniSlider_text_padding * 2)
 			   + root.horizontalPressMargin
-		height: Theme.geometry_switchableoutput_control_height
+		height: Theme.geometry_iochannel_control_height
 
 		// background border color
 		Rectangle {

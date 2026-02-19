@@ -530,6 +530,24 @@ public:
 	};
 	Q_ENUM(Switch_DeviceState)
 
+	enum GenericInput_Type {
+		GenericInput_Type_Discrete = 0,
+		GenericInput_Type_UnrangedValue = 1,
+		GenericInput_Type_RangedValue = 2,
+		GenericInput_Type_Temperature = 3,
+
+		// Update this value whenever new types are added.
+		GenericInput_Type_MaxSupportedType = GenericInput_Type_Temperature
+	};
+	Q_ENUM(GenericInput_Type)
+
+	enum GenericInput_Status {
+		GenericInput_Status_On = 0x00,
+		GenericInput_Status_Fault = 0x01,
+		GenericInput_Status_SensorBatteryLow = 0x02,
+	};
+	Q_ENUM(GenericInput_Status)
+
 	enum SwitchableOutput_Type {
 		SwitchableOutput_Type_Momentary,
 		SwitchableOutput_Type_Toggle,
@@ -550,6 +568,21 @@ public:
 		SwitchableOutput_Type_MaxSupportedType = SwitchableOutput_Type_ColorDimmerRgbW
 	};
 	Q_ENUM(SwitchableOutput_Type)
+
+	enum SwitchableOutput_Function {
+		SwitchableOutput_Function_Disabled = -1,
+		SwitchableOutput_Function_Alarm = 0,
+		SwitchableOutput_Function_GeneratorStartStop,
+		SwitchableOutput_Function_Manual,
+		SwitchableOutput_Function_Tank_Pump,
+		SwitchableOutput_Function_Temperature,
+		SwitchableOutput_Function_GensetHelperRelay,
+		SwitchableOutput_Function_OpportunityLoad,
+
+		SwitchableOutput_Function_MaxSupportedType = SwitchableOutput_Function_OpportunityLoad
+	};
+	Q_ENUM(SwitchableOutput_Function)
+
 
 	enum SwitchableOutput_Status {
 		SwitchableOutput_Status_Off                 = 0x00,
@@ -573,13 +606,13 @@ public:
 	};
 	Q_ENUM(SwitchableOutput_Status)
 
-	enum SwitchableOutput_ShowUiControl {
-		SwitchableOutput_ShowUiControl_Off = 0x0,
-		SwitchableOutput_ShowUiControl_Always = 0x1,
-		SwitchableOutput_ShowUiControl_Local = 0x2,
-		SwitchableOutput_ShowUiControl_Remote = 0x4,
+	enum IOChannel_ShowUI {
+		IOChannel_ShowUI_Off = 0x0,
+		IOChannel_ShowUI_Always = 0x1,
+		IOChannel_ShowUI_Local = 0x2,
+		IOChannel_ShowUI_Remote = 0x4,
 	};
-	Q_ENUM(SwitchableOutput_ShowUiControl)
+	Q_ENUM(IOChannel_ShowUI)
 
 	enum Notification_Type {
 		Notification_Warning,
@@ -624,17 +657,6 @@ public:
 		CanBusConfig_AnyBusAndHv
 	};
 	Q_ENUM(CanBusConfig_Type)
-
-	enum Relay_Function {
-		Relay_Function_Disabled = -1,
-		Relay_Function_Alarm = 0,
-		Relay_Function_GeneratorStartStop,
-		Relay_Function_Manual,
-		Relay_Function_Tank_Pump,
-		Relay_Function_Temperature,
-		Relay_Function_GensetHelperRelay
-	};
-	Q_ENUM(Relay_Function)
 
 	enum Temperature_DeviceType {
 		Temperature_DeviceType_Battery = 0,
@@ -1001,7 +1023,10 @@ public:
 	Q_INVOKABLE QString solarCharger_stateToText(SolarCharger_State state) const;
 
 	Q_INVOKABLE QString switch_deviceStateToText(Switch_DeviceState value) const;
+	Q_INVOKABLE QString genericInput_typeToText(GenericInput_Type value) const;
+	Q_INVOKABLE QString genericInput_statusToText(GenericInput_Status value) const;
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
+	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode) const;
