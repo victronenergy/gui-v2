@@ -8,16 +8,12 @@ import Victron.VenusOS
 
 ListText {
 	text: CommonWords.image_type
-	secondaryText: signalK.valid || nodeRed.valid ? CommonWords.firmware_type_large : CommonWords.firmware_type_normal
+	secondaryText: imageType.value === "large" ? CommonWords.firmware_type_large : CommonWords.firmware_type_normal
 	preferredVisible: largeImageSupport.valid && largeImageSupport.value === 1
 
 	VeQuickItem {
-		id: signalK
-		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
-	}
-	VeQuickItem {
-		id: nodeRed
-		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+		id: imageType
+		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/ImageType"
 	}
 	VeQuickItem {
 		id: largeImageSupport
