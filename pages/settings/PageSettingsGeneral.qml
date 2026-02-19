@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
@@ -235,10 +236,22 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Support status (modifications checks)"
-				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
+				id: supportStatus
+				//% "Support status"
+				text: qsTrId("pagesettingsgeneral_support_status")
 				secondaryText: supportStateText()
-				secondaryLabel.color: supportStateColor()
+				secondaryLabel.rightPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
+				CP.ColorImage {
+					parent: supportStatus.secondaryLabel
+					anchors {
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+					}
+					source: supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg" :
+						supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg" : "qrc:/images/icon_alarm_32.svg"
+					color: supportStateColor()
+				}
+
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
 
