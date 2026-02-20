@@ -426,6 +426,11 @@ FocusScope {
 			}
 		}
 
+		onWifiButtonClicked: {
+			Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml",
+					{"title": qsTrId("pagesettingsconnectivity_wifi")})
+		}
+
 		onPopToPage: function(toPage) {
 			pageManager.popPage(toPage)
 		}

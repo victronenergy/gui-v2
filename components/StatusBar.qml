@@ -24,6 +24,7 @@ FocusScope {
 	signal leftButtonClicked()
 	signal rightButtonClicked()
 	signal auxButtonClicked()
+	signal wifiButtonClicked()
 	// PageStack.get(...) returns an Item, so the arg for 'popToPage' needs to be 'Item'. If we make it a 'Page', it works fine on the desktop,
 	// but shows an unusual failure on the device. There is an error message about "passing incompatible arguments to signals is not supported",
 	// and the page stack pops 1 too many pages.
@@ -204,7 +205,7 @@ FocusScope {
 			}
 		}
 
-		KeyNavigation.right: notificationButton
+		KeyNavigation.right: wifiButton
 
 		Connections {
 			target: root.pageStack
@@ -235,24 +236,19 @@ FocusScope {
 		visible: !breadcrumbs.visible
 		spacing: Theme.geometry_statusBar_spacing
 
-		CP.IconImage {
-			anchors.verticalCenter: parent.verticalCenter
-			color: Theme.color_font_primary
-			source: {
-				if (!signalStrength.valid) {
-					return ""
-				} else if (signalStrength.value > 75) {
-					return "qrc:/images/icon_WiFi_4_32.svg"
-				} else if (signalStrength.value > 50) {
-					return "qrc:/images/icon_WiFi_3_32.svg"
-				} else if (signalStrength.value > 25) {
-					return "qrc:/images/icon_WiFi_2_32.svg"
-				} else if (signalStrength.value > 0) {
-					return "qrc:/images/icon_WiFi_1_32.svg"
-				} else {
-					return "qrc:/images/icon_WiFi_noconnection_32.svg"
-				}
-			}
+		StatusBarButton {
+			id: wifiButton
+
+			icon.source: !signalStrength.valid ? ""
+				: signalStrength.value > 75 ? "qrc:/images/icon_WiFi_4_32.svg"
+				: signalStrength.value > 75 ? "qrc:/images/icon_WiFi_3_32.svg"
+				: signalStrength.value > 75 ? "qrc:/images/icon_WiFi_2_32.svg"
+				: signalStrength.value > 75 ? "qrc:/images/icon_WiFi_1_32.svg"
+				: "qrc:/images/icon_WiFi_noconnection_32.svg"
+
+			KeyNavigation.right: notificationButton
+
+			onClicked: root.wifiButtonClicked()
 
 			VeQuickItem {
 				id: signalStrength
