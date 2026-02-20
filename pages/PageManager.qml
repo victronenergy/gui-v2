@@ -24,6 +24,7 @@ QtObject {
 
 	property Timer idleModeTimer: Timer {
 		running: !Global.splashScreenVisible
+			&& Theme.screenSize !== Theme.Portrait // Portrait mode does not have idle states
 			&& (currentMainPage?.fullScreenWhenIdle || Global.keyNavigationEnabled)
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& BackendConnection.applicationVisible
