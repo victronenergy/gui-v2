@@ -85,6 +85,7 @@
         "/GenericInput/temp_1/Status": 0,
 
         "/SwitchableOutput/momentary_1/Name": "Out-00a. Momentary",
+        "/SwitchableOutput/momentary_1/Settings/Adjustable": 0,
         "/SwitchableOutput/momentary_1/Settings/CustomName": "",
         "/SwitchableOutput/momentary_1/Settings/Function": 2,
         "/SwitchableOutput/momentary_1/Settings/Group": "",
