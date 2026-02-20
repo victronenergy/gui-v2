@@ -10,8 +10,10 @@ import Victron.VenusOS
 Row {
 	id: root
 
-	readonly property bool valid: strength.valid
+	readonly property bool valid: simStatus.valid
 	readonly property string modemServiceUid: BackendConnection.serviceUidForType("modem")
+
+	visible: root.valid
 
 	function getScaledStrength(strength) {
 		if (strength <= 3) {
@@ -31,8 +33,6 @@ Row {
 		}
 		return 0
 	}
-
-	visible: simStatus.valid
 
 	Label {
 		id: gsmStatusText
