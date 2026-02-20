@@ -11,6 +11,12 @@ Page {
 
 	required property SwitchableOutput switchableOutput
 
+	readonly property VeQuickItem _adjustable: VeQuickItem {
+		uid: root.switchableOutput.uid + "/Settings/Adjustable"
+	}
+
+	readonly property bool _readOnly: _adjustable.valid && _adjustable.value == 0 ? 1 : 0
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListTextField {
@@ -19,6 +25,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/CustomName"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
+				interactive: !_readOnly
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: CommonWords.custom_name
@@ -30,6 +37,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Group"
 				dataItem.invalidate: false
 				writeAccessLevel: VenusOS.User_AccessType_User
+				interactive: !_readOnly
 				textField.maximumLength: 32
 				preferredVisible: dataItem.valid
 				placeholderText: text
