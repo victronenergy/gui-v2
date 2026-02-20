@@ -69,6 +69,17 @@ Page {
 				}
 			}
 		}
+		WheelHandler {
+			enabled: Qt.platform.os === "wasm" || Global.isDesktop
+			onWheel: (wheel) => {
+				// each "click" of the wheel is 120 degrees
+				// each "click" of the wheel results in 2/3rds of a second of flick velocity
+				// accumulate that with the horizontalVelocity of the view
+				// note the sign of that view velocity is opposite to the flick velocity, hence minus.
+				cardsView.flick((cardsView.flickDeceleration * 2.0*wheel.angleDelta.y/360) - cardsView.horizontalVelocity, 0)
+				wheel.accepted = true
+			}
+		}
 	}
 
 }
