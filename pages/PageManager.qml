@@ -39,7 +39,7 @@ QtObject {
 	property string _hiddenStackMainPage
 
 	function pushPage(obj, properties, operation = PageStack.PushTransition) {
-		pageStack.pushPage(obj, properties, operation)
+		return pageStack.pushPage(obj, properties, operation)
 	}
 
 	function popPage(toPage, operation = PageStack.PopTransition) {

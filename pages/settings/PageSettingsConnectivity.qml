@@ -9,6 +9,17 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	function goToPage(pageId) {
+		switch (pageId) {
+		case "wifi":
+			wifiListItem.activate()
+			break
+		default:
+			console.warn("goToPage(): unknown pageId:", pageId)
+			break
+		}
+	}
+
 	GradientListView {
 		id: settingsListView
 
@@ -24,6 +35,8 @@ Page {
 			}
 
 			ListNavigation {
+				id: wifiListItem
+
 				//% "Wi-Fi"
 				text: qsTrId("pagesettingsconnectivity_wifi")
 				secondaryText: wifiModel.connectedNetworkName

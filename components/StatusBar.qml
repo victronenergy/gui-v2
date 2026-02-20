@@ -204,7 +204,7 @@ FocusScope {
 			}
 		}
 
-		KeyNavigation.right: notificationButton
+		KeyNavigation.right: wifiButton
 
 		Connections {
 			target: root.pageStack
@@ -233,26 +233,24 @@ FocusScope {
 			verticalCenter: parent.verticalCenter
 		}
 		visible: !breadcrumbs.visible
-		spacing: Theme.geometry_statusBar_spacing
 
-		CP.IconImage {
-			anchors.verticalCenter: parent.verticalCenter
-			color: Theme.color_font_primary
-			source: {
-				if (!signalStrength.valid) {
-					return ""
-				} else if (signalStrength.value > 75) {
-					return "qrc:/images/icon_WiFi_4_32.svg"
-				} else if (signalStrength.value > 50) {
-					return "qrc:/images/icon_WiFi_3_32.svg"
-				} else if (signalStrength.value > 25) {
-					return "qrc:/images/icon_WiFi_2_32.svg"
-				} else if (signalStrength.value > 0) {
-					return "qrc:/images/icon_WiFi_1_32.svg"
-				} else {
-					return "qrc:/images/icon_WiFi_noconnection_32.svg"
-				}
-			}
+		StatusBarButton {
+			id: wifiButton
+
+			opacity: enabled //  Override fading icon on unit inactivity
+			color: Theme.color_font_primary // Override base button color
+			enabled: signalStrength.valid
+
+			icon.source: !signalStrength.valid ? ""
+				: signalStrength.value > 75 ? "qrc:/images/icon_WiFi_4_32.svg"
+				: signalStrength.value > 50 ? "qrc:/images/icon_WiFi_3_32.svg"
+				: signalStrength.value > 25 ? "qrc:/images/icon_WiFi_2_32.svg"
+				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
+				: "qrc:/images/icon_WiFi_noconnection_32.svg"
+
+			KeyNavigation.right: notificationButton
+
+			onClicked: Global.mainView.goToWifiPage()
 
 			VeQuickItem {
 				id: signalStrength

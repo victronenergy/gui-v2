@@ -21,6 +21,11 @@ SwipeViewPage {
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: Qt.TabFocus
 
+	function goToConnectivityPage(pageId) {
+		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, connectivityListItem.pageProperties, PageStack.Immediate)
+		page.goToPage(pageId)
+	}
+
 	GradientListView {
 		id: settingsListView
 
@@ -46,6 +51,8 @@ SwipeViewPage {
 			}
 
 			SettingsListNavigation {
+				id: connectivityListItem
+
 				//% "Connectivity"
 				text: qsTrId("settings_connectivity")
 				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
