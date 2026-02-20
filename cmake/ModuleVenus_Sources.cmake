@@ -848,7 +848,9 @@ set(VictronVenusOS_RESOURCES
     themes/color/Light.json
     themes/geometry/FiveInch.json
     themes/geometry/SevenInch.json
+    themes/geometry/Portrait.json
     themes/typography/FiveInch.json
     themes/typography/SevenInch.json
+    themes/typography/Portrait.json
     themes/typography/TypographyDesign.json
 )
