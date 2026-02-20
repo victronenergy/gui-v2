@@ -30,7 +30,7 @@ Shape {
 		const newYValues = FastUtils.calculateLoadGraphYValues(model, n, height)
 
 		if (calculateMinYValue) {
-			let tempMin = Theme.geometry_screen_height
+			let tempMin = Global.screenHeight
 			for (let i = 0; i < n; ++i)  {
 				const currYV = newYValues[i]
 				if (currYV < tempMin) {

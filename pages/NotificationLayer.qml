@@ -70,7 +70,7 @@ Item {
 		spacing: Theme.geometry_toastNotification_horizontalMargin
 		orientation: Qt.Horizontal
 		interactive: false
-		cacheBuffer: Theme.geometry_screen_width - 2*Theme.geometry_toastNotification_horizontalMargin
+		cacheBuffer: Global.screenWidth - 2*Theme.geometry_toastNotification_horizontalMargin
 		model: ToastModel
 
 		property bool animationEnabled: true

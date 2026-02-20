@@ -17,8 +17,8 @@ Window {
 	title: qsTrId("venus_os_gui")
 	color: Global.allPagesLoaded && !!guiLoader.item ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
 
-	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width/scaleFactor : Screen.width/scaleFactor
-	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height/scaleFactor : Screen.height/scaleFactor
+	width: Qt.platform.os != "wasm" ? Global.screenWidth/scaleFactor : Screen.width/scaleFactor
+	height: Qt.platform.os != "wasm" ? Global.screenHeight/scaleFactor : Screen.height/scaleFactor
 
 	// Automatically decide if rotation is required (portrait -> landscape)
 	readonly property bool requiresRotation: Global.isGxDevice && root.height > root.width
@@ -103,13 +103,13 @@ Window {
 
 		// Adjust scale depending on the rotation
 		readonly property real rotatedScale: root.requiresRotation
-			? Math.min(root.width / Theme.geometry_screen_height, root.height / Theme.geometry_screen_width)
-			: Math.min(root.width / Theme.geometry_screen_width, root.height / Theme.geometry_screen_height)
+			? Math.min(root.width / Global.screenHeight, root.height / Global.screenWidth)
+			: Math.min(root.width / Global.screenWidth, root.height / Global.screenHeight)
 		scale: rotatedScale
 
 		// Center only if rotated
-		x: root.requiresRotation ? (root.width - Theme.geometry_screen_height * contentItem.scale) / 2 : 0
-		y: root.requiresRotation ? (root.height - Theme.geometry_screen_width * contentItem.scale) / 2 : 0
+		x: root.requiresRotation ? (root.width - Global.screenHeight * contentItem.scale) / 2 : 0
+		y: root.requiresRotation ? (root.height - Global.screenWidth * contentItem.scale) / 2 : 0
 
 		// In WebAssembly builds, if we are displaying on a low-dpi mobile
 		// device, it may not have enough pixels to display the UI natively.
@@ -148,8 +148,8 @@ Window {
 				&& !Global.dialogLayer?.currentDialog
 
 		clip: Qt.platform.os == "wasm" || Global.isDesktop
-		width: Theme.geometry_screen_width
-		height: Theme.geometry_screen_height
+		width: Global.screenWidth
+		height: Global.screenHeight
 		anchors.centerIn: parent
 
 		asynchronous: true
@@ -165,8 +165,8 @@ Window {
 		id: splashLoader
 
 		clip: Qt.platform.os == "wasm"
-		width: Theme.geometry_screen_width
-		height: Theme.geometry_screen_height
+		width: Global.screenWidth
+		height: Global.screenHeight
 		anchors.centerIn: parent
 
 		active: Global.splashScreenVisible

@@ -52,7 +52,7 @@ SwipeViewPage {
 	// calculations are also only done once; otherwise, the recalculation/repainting of the paths
 	//  and path animations is very expensive and creates jerky animations on device.
 	function _resetWidgets() {
-		width = Theme.geometry_screen_width
+		width = Global.screenWidth
 
 		// Reset the left/right widgets that should be shown
 		for (let widgetType in _createdWidgets) {
@@ -161,11 +161,11 @@ SwipeViewPage {
 			expandedWidgetHeights += widget.getExpandedHeight(widget.size)
 		}
 
-		const compactPageHeight = Theme.geometry_screen_height
+		const compactPageHeight = Global.screenHeight
 				- Theme.geometry_statusBar_height
 				- Theme.geometry_navigationBar_height
 		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
-		const expandedPageHeight = Theme.geometry_screen_height
+		const expandedPageHeight = Global.screenHeight
 				- Theme.geometry_statusBar_height
 				- Theme.geometry_overviewPage_layout_expanded_bottomMargin
 

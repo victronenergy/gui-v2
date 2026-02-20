@@ -17,7 +17,7 @@ SwipeViewPage {
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: (acLoadGauge.active ? 1 : 0) + (dcLoadGauge.active ? 1 : 0)
-	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+	readonly property real _unexpandedHeight: Global.screenHeight - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
 
 	property bool _readyToInit: state === "" && !Global.splashScreenVisible
 	on_ReadyToInitChanged: {

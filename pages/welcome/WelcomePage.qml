@@ -20,8 +20,8 @@ Rectangle {
 	signal backClicked
 	signal nextClicked
 
-	width: Theme.geometry_screen_width
-	height: Theme.geometry_screen_height - Theme.geometry_statusBar_height
+	width: Global.screenWidth
+	height: Global.screenHeight - Theme.geometry_statusBar_height
 	color: Theme.color_page_background    
 
 	Image {

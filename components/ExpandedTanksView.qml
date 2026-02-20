@@ -19,7 +19,7 @@ BaseListView {
 
 		required property Tank device
 
-		width: Gauges.width(root.model.count, Theme.geometry_levelsPage_max_tank_count, Theme.geometry_screen_width)
+		width: Gauges.width(root.model.count, Theme.geometry_levelsPage_max_tank_count, Global.screenWidth)
 		height: Theme.geometry_levelsPage_panel_expanded_height
 		status: device.status
 		fluidType: device.type

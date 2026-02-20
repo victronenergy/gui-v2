@@ -16,7 +16,7 @@ FocusScope {
 
 	property int leftButton: VenusOS.StatusBar_LeftButton_None
 	property int rightButton: VenusOS.StatusBar_RightButton_None
-	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
+	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && !Global.mainView.currentPage.url.endsWith("NotificationsPage.qml") && !Global.portraitMode
 	readonly property bool notificationButtonVisible: alarmButton.enabled || alarmButton.animating
 
 	property bool animationEnabled
@@ -102,6 +102,9 @@ FocusScope {
 	StatusBarButton {
 		id: leftButton
 
+		x: !Global.portraitMode || root.leftButton === VenusOS.StatusBar_LeftButton_Back ? 0
+		 : (parent.width - rightButtonRow.width - auxButton.width - width)
+
 		// Expand clickable area on left and bottom edges.
 		leftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
@@ -123,12 +126,11 @@ FocusScope {
 				&& root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
 
 		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-		anchors {
-			left: leftButton.right
-			leftMargin: -leftInset
-		}
+		x: !Global.portraitMode ? leftButton.width + -leftInset
+		 : (parent.width - rightButtonRow.width - width)
+
 		leftInset: leftButton.enabled ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: Theme.geometry_statusBar_spacing
+		rightInset: Global.portraitMode ? 0 : Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
 		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
@@ -140,6 +142,22 @@ FocusScope {
 		KeyNavigation.right: breadcrumbs
 
 		onClicked: root.auxButtonClicked()
+	}
+
+	Label {
+		id: portraitTitle
+
+		anchors.verticalCenter: parent.verticalCenter
+		x: Theme.geometry_settings_breadcrumb_horizontalMargin + (root.leftButton === VenusOS.StatusBar_LeftButton_Back ? leftButton.width : 0)
+		width: parent.width - x - rightButtonRow.width - auxButton.width - (root.leftButton === VenusOS.StatusBar_LeftButton_Back ? 0 : leftButton.width)
+
+		visible: Global.portraitMode
+		font.pixelSize: Theme.font_size_h1
+		fontSizeMode: Text.HorizontalFit
+		verticalAlignment: Text.AlignVCenter
+		text: root.title.length > 0 ? root.title
+			: breadcrumbs.currentIndex >= 0 ? breadcrumbs.getText(breadcrumbs.currentIndex)
+			: ""
 	}
 
 	Breadcrumbs {
@@ -169,7 +187,7 @@ FocusScope {
 		}
 		height: Theme.geometry_settings_breadcrumb_height
 		model: root.pageStack.opened ? root.pageStack.depth + 1 : null // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
-		visible: count >= 2
+		visible: !Global.portraitMode && count >= 2
 		enabled: visible // don't receive focus when invisble
 		focus: false // don't give status bar initial focus to the breadcrumbs
 
@@ -220,7 +238,7 @@ FocusScope {
 		id: clockLabel
 		anchors.centerIn: parent
 		font.pixelSize: 22
-		visible: !breadcrumbs.visible
+		visible: !Global.portraitMode && !breadcrumbs.visible
 		text: ClockTime.currentTime
 	}
 
@@ -232,7 +250,7 @@ FocusScope {
 			leftMargin: Theme.geometry_statusBar_spacing
 			verticalCenter: parent.verticalCenter
 		}
-		visible: !breadcrumbs.visible
+		visible: !Global.portraitMode && !breadcrumbs.visible
 		spacing: Theme.geometry_statusBar_spacing
 
 		CP.IconImage {
@@ -280,7 +298,7 @@ FocusScope {
 
 		// The notificationButton should always be shown, even when the page is not interactive
 		opacity: 1
-		visible: !breadcrumbs.visible && (Global.notifications?.statusBarNotificationIconVisible ?? false)
+		visible: !Global.portraitMode && !breadcrumbs.visible && (Global.notifications?.statusBarNotificationIconVisible ?? false)
 
 		color: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
 			   ? Theme.color_critical
@@ -308,7 +326,8 @@ FocusScope {
 		topInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
+		visible: !Global.portraitMode
+		enabled: visible && notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
 		flat: false
 		backgroundColor: down ? Theme.color_critical : Theme.color_critical_background
 		borderWidth: 0
@@ -365,6 +384,7 @@ FocusScope {
 			enabled: ScreenBlanker.supported
 					&& ScreenBlanker.enabled
 					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+					&& !Global.portraitMode
 			onClicked: ScreenBlanker.setDisplayOff()
 		}
 	}

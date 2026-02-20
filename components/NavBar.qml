@@ -56,8 +56,8 @@ FocusScope {
 
 	Row {
 		id: buttonRow
-		x: Theme.geometry_page_content_horizontalMargin
-		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
+		x: Global.portraitMode ? 0 : Theme.geometry_page_content_horizontalMargin
+		width: parent.width - (Global.portraitMode ? 0 : 2*Theme.geometry_page_content_horizontalMargin)
 		height: parent.height
 
 		Repeater {
