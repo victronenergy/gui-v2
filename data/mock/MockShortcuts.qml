@@ -354,7 +354,7 @@ QtObject {
 	}
 
 	property Rectangle _configLabel: Rectangle {
-		parent: Global.mainView?.statusBar ?? null
+		parent: Global.mainView
 		width: pageConfigTitle.width * 1.1
 		height: pageConfigTitle.implicitHeight * 1.1
 		color: "white"

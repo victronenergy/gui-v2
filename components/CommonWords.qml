@@ -531,6 +531,10 @@ QtObject {
 	//% "Stopped"
 	readonly property string stopped: qsTrId("common_words_stopped")
 
+	//: Name of the Switch Controls feature
+	//% "Switches"
+	readonly property string switches: qsTrId("common_words_switches")
+
 	//: Change the mode value
 	//% "Switch"
 	readonly property string switch_mode: qsTrId("common_words_switch")

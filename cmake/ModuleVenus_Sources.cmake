@@ -103,6 +103,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SolarYieldGraph.qml
     components/SplashView.qml
     components/SpinBoxDecimalConverter.qml
+    components/StatusBar_Portrait.qml
     components/StatusBar.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
@@ -150,6 +151,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/SliderIndicator.qml
     components/controls/SpinBox.qml
     components/controls/SpinBoxInputArea.qml
+    components/controls/StatusBarButton.qml
     components/controls/SwipeView.qml
     components/controls/Switch.qml
     components/controls/TemperatureSlider.qml

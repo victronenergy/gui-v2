@@ -16,6 +16,8 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
+	title: CommonWords.switches
+
 	BaseListView {
 		id: cardsView
 
