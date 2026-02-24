@@ -91,7 +91,6 @@ OverviewWidget {
 				anchors.horizontalCenter: parent.horizontalCenter
 				height: parent.height
 				width: parent.width - (2 * Theme.geometry_overviewPage_widget_solar_graph_margins)
-				maximumBarCount: Theme.geometry_overviewPage_widget_solar_graph_bar_count
 			}
 		}
 	}

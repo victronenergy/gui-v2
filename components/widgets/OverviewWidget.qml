@@ -14,8 +14,7 @@ Rectangle {
 	property int preferredSize: VenusOS.OverviewWidget_PreferredSize_Any
 
 	property alias icon: widgetHeader.icon
-	property alias title: widgetHeader.title
-	property alias secondaryTitle: widgetHeader.secondaryText
+	property string title
 	property alias quantityLabel: quantityLabel
 
 	signal clicked
@@ -121,6 +120,8 @@ Rectangle {
 
 		WidgetHeader {
 			id: widgetHeader
+			width: parent.width
+			text: root.title
 		}
 
 		ElectricalQuantityLabel {
