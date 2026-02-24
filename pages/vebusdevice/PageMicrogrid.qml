@@ -14,6 +14,53 @@ Page {
 	//% "Microgrid"
 	title: qsTrId("microgrid")
 
+	function get_microgrid_error(error) {
+		switch (error) {
+			//% "No error"
+			case 0: return qsTrId("vebus_microgrid_error_none")
+			//% "Different fallback hybrid droop values in phase masters"
+			case 1: return qsTrId("vebus_microgrid_error_hybrid_droop_values_out_of_sync")
+			//% "Hybrid droop parameter write failed"
+			case 2: return qsTrId("vebus_microgrid_error_write_failed")
+			//% "Parameter error Fmin > Fmax"
+			case 3: return qsTrId("vebus_microgrid_error_param_fmin_greater_than_fmax")
+			//% "Parameter error Pmin > Pmax"
+			case 4: return qsTrId("vebus_microgrid_error_param_pmin_greater_than_pmax")
+			//% "Parameter error Umin > Umax"
+			case 5: return qsTrId("vebus_microgrid_error_param_umin_greater_than_umax")
+			//% "Parameter error Qmin > Qmax"
+			case 6: return qsTrId("vebus_microgrid_error_param_qmin_greater_than_qmax")
+			//% "Parameter error Q0 out of range"
+			case 7: return qsTrId("vebus_microgrid_error_param_q0_out_of_range")
+			//% "Parameter error Qmin out of range"
+			case 8: return qsTrId("vebus_microgrid_error_param_qmin_out_of_range")
+			//% "Parameter error Qmax out of range"
+			case 9: return qsTrId("vebus_microgrid_error_param_qmax_out_of_range")
+			//% "Parameter error U0 out of range"
+			case 10: return qsTrId("vebus_microgrid_error_param_u0_out_of_range")
+			//% "Parameter error U droop out of range"
+			case 11: return qsTrId("vebus_microgrid_error_param_u_droop_out_of_range")
+			//% "Parameter error P0 out of range"
+			case 12: return qsTrId("vebus_microgrid_error_param_p0_out_of_range")
+			//% "Parameter error Pmin out of range"
+			case 13: return qsTrId("vebus_microgrid_error_param_pmin_out_of_range")
+			//% "Parameter error Pmax out of range"
+			case 14: return qsTrId("vebus_microgrid_error_param_pmax_out_of_range")
+			//% "Parameter error F0 out of range"
+			case 15: return qsTrId("vebus_microgrid_error_param_f0_out_of_range")
+			//% "Parameter error freq droop out of range"
+			case 16: return qsTrId("vebus_microgrid_error_param_freq_droop_out_of_range")
+			//% "Ve.Bus internal error PF vs FP data mismatch"
+			case 17: return qsTrId("vebus_microgrid_error_pf_fp_mismatch")
+			//% "Ve.Bus internal error QU vs UQ data mismatch"
+			case 18: return qsTrId("vebus_microgrid_error_qu_uq_mismatch")
+			//% "Unknown"
+			default: return qsTrId("Unknown")
+		}
+	}
+
+
+
 	component MicrogridModeListText: ListText {
 		//% "Active mode"
 		text: qsTrId("page_microgrid_active_mode")
@@ -379,5 +426,16 @@ Page {
 
 			uid: root.bindPrefix + "/MicroGrid/ExternalControl"
 		}
+
+		VeQuickItem {
+			id: microgridError
+			uid: root.bindPrefix + "/MicroGrid/Error"
+			onValueChanged: {
+				if (valid && value !== 0) {
+					Global.showToastNotification(VenusOS.Notification_Warning, get_microgrid_error(value), 10000)
+				}
+			}
+		}
+
 	}
 }
