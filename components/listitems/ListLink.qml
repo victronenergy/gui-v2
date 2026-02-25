@@ -45,40 +45,45 @@ ListSetting {
 	writeAccessLevel: VenusOS.User_AccessType_User
 
 	// Use an Item instead of a layout, so that the button doesn't stretch the height of the
-	// content. Layout is like this:
+	// content.
+	// Standard layout is:
 	// | Primary label | "Open link" or button (spans across both rows) |
 	// | Caption       |                                                |
+	//
+	// In Portrait layout, if there is a caption, then do this instead:
+	// | Primary label | "Open link" or button (spans across both rows) |
+	// | Caption                                                        |                                            |
 	contentItem: Item {
+		readonly property bool stretchCaption: Theme.screenSize === Theme.Portrait
+				&& root.caption.length > 0
+
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelsColumn.height
+		implicitHeight: captionLabel.y + (root.caption.length ? captionLabel.height : 0)
 
-		ColumnLayout {
-			id: labelsColumn
+		Label {
+			id: primaryLabel
 
-			width: parent.width
-				   - (linkLabel.visible ? linkLabel.width : button.width)
-				   - root.spacing
-			spacing: Theme.geometry_listItem_content_verticalSpacing
+			width: parent.width - (linkLabel.visible ? linkLabel.width : button.width) - root.spacing
+			text: root.text
+			textFormat: root.textFormat
+			font: root.font
+			wrapMode: Text.Wrap
+		}
 
-			Label {
-				width: parent.width
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
+		Label {
+			id: captionLabel
 
-				Layout.fillWidth: true
-			}
-
-			Label {
-				width: parent.width
-				text: root.caption
-				color: Theme.color_font_secondary
-				wrapMode: Text.Wrap
-				visible: text.length > 0
-
-				Layout.fillWidth: true
-			}
+			y: parent.stretchCaption
+			   ? Math.max(primaryLabel.y + primaryLabel.height,
+						linkLabel.visible ? linkLabel.y + linkLabel.height : button.y + button.height)
+			   : primaryLabel.y + primaryLabel.height
+			topPadding: Theme.geometry_listItem_content_verticalSpacing
+			width: parent.stretchCaption ? parent.width : primaryLabel.width
+			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
+			color: Theme.color_font_secondary
+			wrapMode: Text.Wrap
+			visible: text.length > 0
 		}
 
 		SecondaryListLabel {
@@ -86,7 +91,7 @@ ListSetting {
 
 			anchors {
 				right: parent.right
-				verticalCenter: parent.verticalCenter
+				verticalCenter: parent.stretchCaption ? primaryLabel.verticalCenter : parent.verticalCenter
 			}
 
 			//% "Open link"
@@ -111,7 +116,7 @@ ListSetting {
 
 			anchors {
 				right: parent.right
-				verticalCenter: parent.verticalCenter
+				verticalCenter: parent.stretchCaption ? primaryLabel.verticalCenter : parent.verticalCenter
 			}
 
 			//% "Show QR code"

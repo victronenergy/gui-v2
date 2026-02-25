@@ -91,7 +91,6 @@
 
     "geometry_listLink_qrCodeSize": 96,
 
-    "geometry_slider_text_width": 280,
     "geometry_slider_button_size": 32,
     "geometry_slider_spacing": 6,
     "geometry_slider_steps": 10,

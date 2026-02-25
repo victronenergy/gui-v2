@@ -20,6 +20,6 @@ Label {
 	bottomPadding: Theme.geometry_settingsListHeader_bottomPadding
 	width: Math.max(implicitWidth, 1)
 	font.pixelSize: Theme.font_size_body1
-	wrapMode: Text.Wrap
+	wrapMode: Text.WordWrap
 	color: Theme.color_font_secondary
 }

@@ -89,7 +89,7 @@ ListSetting {
 			text: root.text
 			textFormat: root.textFormat
 			font: root.font
-			wrapMode: Text.Wrap
+			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true
 		}
@@ -100,6 +100,7 @@ ListSetting {
 			// Since the root top/bottomPadding is 0, need to add some padding here.
 			topPadding: Theme.geometry_listItem_content_verticalMargin
 			bottomPadding: Theme.geometry_listItem_content_verticalMargin
+			leftPadding: Theme.geometry_listItem_content_spacing
 			text: root.secondaryText
 
 			Layout.fillWidth: true
@@ -135,6 +136,7 @@ ListSetting {
 
 		Label {
 			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			visible: text.length > 0

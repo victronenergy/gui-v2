@@ -7,9 +7,9 @@ import QtQuick
 import Victron.VenusOS
 
 Label {
-	font.pixelSize: Theme.font_size_body2
+	font.pixelSize: Theme.font_listItem_secondary_size
 	color: Theme.color_listItem_secondaryText
-	wrapMode: Text.Wrap
+	wrapMode: Text.WordWrap
 	horizontalAlignment: Text.AlignRight
 	verticalAlignment: Text.AlignVCenter
 }
