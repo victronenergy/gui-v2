@@ -40,6 +40,10 @@ SwipeViewPage {
 		}
 	}
 
+	function toggleSidePanel() {
+		root.showSidePanel = !root.showSidePanel
+	}
+
 	// Do not animate gauge progress changes while the left/right side gauge layouts are changing.
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
@@ -63,7 +67,7 @@ SwipeViewPage {
 
 		y: (root._unexpandedHeight - height) / 2
 		width: Theme.geometry_mainGauge_size
-		height: width
+		height: Theme.geometry_mainGauge_size
 		x: sidePanel.x/2 - width/2
 		sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
@@ -79,6 +83,11 @@ SwipeViewPage {
 			labelOpacity: root._gaugeLabelOpacity
 			labelMargin: root._gaugeLabelMargin
 			leftGaugeCount: root._leftGaugeCount
+
+			// Caption spans from the centre to the left quantity label.
+			// Longer captions span further, to the edge of the left gauge bars.
+			shortCaptionWidth: longCaptionWidth - (acInputGauge.item?.quantityWidth ?? 0)
+			longCaptionWidth: (root.width / 2) - (acInputGaugeColumn.x + acInputGaugeColumn.width + Theme.geometry_circularMultiGauge_spacing)
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
@@ -110,6 +119,8 @@ SwipeViewPage {
 
 	// Left gauge column
 	Column {
+		id: acInputGaugeColumn
+
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			left: parent.left
@@ -128,6 +139,7 @@ SwipeViewPage {
 			active: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable && root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
+				readonly property real quantityWidth: acInGaugeQuantity.width - acInputDirectionIcon.width
 				readonly property var gaugeParams: Gauges.leftGaugeParameters(
 													   (solarYieldGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0),
 													   _leftGaugeCount,
@@ -362,7 +374,7 @@ SwipeViewPage {
 		id: sidePanel
 		width: Theme.geometry_briefPage_sidePanel_width
 		sourceComponent: BriefSidePanel {
-			width: parent.width
+			width: Theme.geometry_briefPage_sidePanel_width
 			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled
 		}
@@ -375,15 +387,6 @@ SwipeViewPage {
 		active: false
 		x: root.width
 		opacity: 0.0
-	}
-
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root.isCurrentPage
-
-		function onRightButtonClicked() {
-			root.showSidePanel = !root.showSidePanel
-		}
 	}
 
 	CpuInfo {

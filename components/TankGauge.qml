@@ -17,32 +17,35 @@ ClippingBarGauge {
 	surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 
 	Rectangle {
-		width: parent.width
-		height: 2
+		width: root.orientation === Qt.Vertical ? parent.width : 2
+		height: root.orientation === Qt.Vertical ? 2 : parent.height
 		color: root.surfaceColor
-		y: parent.height/4
+		x: root.orientation === Qt.Vertical ? 0 : parent.width/4
+		y: root.orientation === Qt.Vertical ? parent.height/4 : 0
 		z: 5
 	}
 
 	Rectangle {
-		width: parent.width
-		height: 2
+		width: root.orientation === Qt.Vertical ? parent.width : 2
+		height: root.orientation === Qt.Vertical ? 2 : parent.height
 		color: root.surfaceColor
-		y: 2*parent.height/4
+		x: root.orientation === Qt.Vertical ? 0 : 2*parent.width/4
+		y: root.orientation === Qt.Vertical ? 2*parent.height/4 : 0
 		z: 5
 	}
 
 	Rectangle {
-		width: parent.width
-		height: 2
+		width: root.orientation === Qt.Vertical ? parent.width : 2
+		height: root.orientation === Qt.Vertical ? 2 : parent.height
 		color: root.surfaceColor
-		y: 3*parent.height/4
+		x: root.orientation === Qt.Vertical ? 0 : 3*parent.width/4
+		y: root.orientation === Qt.Vertical ? 3*parent.height/4 : 0
 		z: 5
 	}
 
 	CP.ColorImage {
-		anchors.horizontalCenter: parent.horizontalCenter
-		y: (root.height / 4 / 2) - (height / 2)
+		x: root.orientation === Qt.Vertical ? (parent.width - width)/2 : (root.width / 4 / 2) - (width / 2)
+		y: root.orientation === Qt.Vertical ? (root.height / 4 / 2) - (height / 2) : (parent.height - height)/2
 		z: 5
 
 		visible: !root.isGrouped

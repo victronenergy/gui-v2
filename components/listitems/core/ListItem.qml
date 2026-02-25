@@ -148,6 +148,7 @@ BaseListItem {
 	ListPressArea {
 		id: pressArea
 		anchors.fill: parent
+		z: -1
 		radius: root.background.radius
 		enabled: root.pressAreaEnabled
 		effectEnabled: root.interactive

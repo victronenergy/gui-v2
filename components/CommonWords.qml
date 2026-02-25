@@ -138,6 +138,9 @@ QtObject {
 	//% "Connected"
 	readonly property string connected: qsTrId("common_words_connected");
 
+	//% "Confirm"
+	readonly property string confirm: qsTrId("common_words_confirm");
+
 	//: Electric current, as measured in Amps
 	//% "Current"
 	readonly property string current_amps: qsTrId("common_words_current_amps")
@@ -186,6 +189,9 @@ QtObject {
 	//: Amount of charged energy
 	//% "Energy"
 	readonly property string energy: qsTrId("common_words_energy")
+
+	//% "Enter password"
+	readonly property string enter_password: qsTrId("common_words_enter_password")
 
 	//% "Error"
 	readonly property string error: qsTrId("common_words_error")
@@ -524,6 +530,10 @@ QtObject {
 
 	//% "Stopped"
 	readonly property string stopped: qsTrId("common_words_stopped")
+
+	//: Name of the Switch Controls feature
+	//% "Switches"
+	readonly property string switches: qsTrId("common_words_switches")
 
 	//: Change the mode value
 	//% "Switch"

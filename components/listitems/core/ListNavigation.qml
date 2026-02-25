@@ -4,44 +4,110 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-ListItem {
+/*
+	A list setting item with an arrow icon to go to a subpage, and optional secondary text.
+*/
+ListSetting {
 	id: root
 
-	property alias secondaryText: secondaryLabel.text
-	property alias secondaryLabel: secondaryLabel
-	property alias icon: icon
+	property string secondaryText
+	property string secondaryTextColor: Theme.color_listItem_secondaryText
+	property real captionTopMargin: Theme.geometry_listItem_content_verticalSpacing
 
-	readonly property bool __is_venus_gui_list_navigation__: true
+	signal clicked
+
+	function click() {
+		// Just check 'interactive', and ignore 'userHasWriteAccess'. The control can be clicked
+		// regardless of the write permission, since it opens a submenu instead of changing a value.
+		if (interactive) {
+			clicked()
+		}
+	}
 
 	interactive: true
-	Keys.onRightPressed: root.activate()
+	hasSubMenu: interactive
 
-	// Issue #1964: userHasWriteAccess is ignored for ListNavigation - see ListItem
+	// Standard layout is:
+	// | Primary label | Secondary label and icon (span across both rows) |
+	// | Caption       |                                                  |
+	//
+	// In Portrait layout, if the caption and secondary text are both set, stretch the caption to
+	// the right edge, else it looks odd if the caption text is bunched up (e.g. the 'Demo mode'
+	// setting in General setting).
+	// | Primary label | Secondary label and icon |
+	// | Caption                                  |
+	contentItem: GridLayout {
+		id: gridLayout
 
-	content.children: [
+		readonly property bool stretchCaption: Theme.screenSize === Theme.Portrait
+				&& root.caption.length > 0
+				&& root.secondaryText.length > 0
+
+		columnSpacing: root.spacing
+		rowSpacing: 0
+		columns: 2
+
 		Label {
-			id: secondaryLabel
+			text: root.text
+			textFormat: root.textFormat
+			font: root.font
+			wrapMode: Text.WordWrap
 
-			anchors.verticalCenter: parent.verticalCenter
-			visible: text.length > 0
-			font.pixelSize: Theme.font_size_body2
-			color: Theme.color_listItem_secondaryText
-			wrapMode: Text.Wrap
-			width: Math.min(implicitWidth, root.maximumContentWidth - icon.width - root.content.spacing)
-			horizontalAlignment: Text.AlignRight
-		},
-
-		CP.ColorImage {
-			id: icon
-
-			anchors.verticalCenter: parent.verticalCenter
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			visible: root.interactive
+			Layout.fillWidth: true
 		}
-	]
+
+		SecondaryListLabel {
+			rightPadding: icon.visible ? icon.width + root.spacing : 0
+			text: root.secondaryText
+			color: root.secondaryTextColor
+			wrapMode: Text.WordWrap
+
+			Layout.rowSpan: gridLayout.stretchCaption ? 1 : 2
+			Layout.alignment: Qt.AlignRight
+			Layout.maximumWidth: root.availableWidth * 2/3
+
+			CP.ColorImage {
+				id: icon
+
+				anchors {
+					right: parent.right
+					verticalCenter: parent.verticalCenter
+				}
+				source: "qrc:/images/icon_arrow_32.svg"
+				rotation: 180
+				color: Theme.color_listItem_forwardIcon
+				visible: root.interactive
+			}
+		}
+
+		Label {
+			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
+			color: Theme.color_font_secondary
+			wrapMode: Text.Wrap
+			visible: text.length > 0
+
+			Layout.fillWidth: true
+			Layout.topMargin: root.captionTopMargin
+			Layout.columnSpan: gridLayout.stretchCaption ? 2 : 1
+		}
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 }

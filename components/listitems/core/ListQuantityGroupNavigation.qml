@@ -4,23 +4,120 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
+import QtQuick.Controls.impl as CP
 
-ListNavigation {
+/*
+	A list item with main text, a row of QuantityLabels, and an arrow icon to go to a subpage.
+*/
+ListSetting {
 	id: root
 
-	property alias quantityModel: quantityRow.model
-	property alias tableMode: quantityRow.tableMode
+	property string text
+	property QuantityObjectModel quantityModel
+	property bool tableMode
 
-	primaryLabel.rightPadding: quantityRow.width
+	signal clicked
 
-	QuantityRow {
-		id: quantityRow
-
-		anchors {
-			right: parent.right
-			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+	function click() {
+		// Just check 'interactive', and ignore 'userHasWriteAccess'. The control can be clicked
+		// regardless of the write permission, since it opens a submenu instead of changing a value.
+		if (interactive) {
+			clicked()
 		}
-		height: parent.height
 	}
+
+	interactive: true
+	hasSubMenu: interactive
+
+	// The contentItem is a plain Item rather than a layout, so that the icon does not stretch the
+	// height of the overall item.
+	// Standard layout is:
+	// | Primary label | Quantity row | Icon (spans across both rows) |
+	// | Caption                      |                               |
+	//
+	// In portrait, if the label and quantity row do not fit side-by-side, use a compact layout:
+	// | Primary label | Icon (spans all rows) |
+	// | Quantity row  |                       |
+	// | Caption       |                       |
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentGrid.height
+
+		GridLayout {
+			id: contentGrid
+
+			readonly property bool compactLayout: Theme.screenSize === Theme.Portrait
+					&& root.quantityModel?.count > 1
+					&& primaryLabel.implicitWidth + quantityRow.implicitWidth + icon.width > parent.width
+
+			anchors.verticalCenter: parent.verticalCenter
+			columns: compactLayout ? 1 : 2
+			rows: compactLayout ? 3 : 2
+			columnSpacing: root.spacing
+			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+			width: parent.width - icon.width
+
+			Label {
+				id: primaryLabel
+
+				text: root.text
+				textFormat: root.textFormat
+				font: root.font
+				wrapMode: Text.WordWrap
+
+				Layout.fillWidth: true
+			}
+
+			QuantityRow {
+				id: quantityRow
+				model: root.quantityModel
+				tableMode: root.tableMode
+
+				Layout.alignment: parent.compactLayout ? Qt.AlignLeft : Qt.AlignRight
+			}
+
+			Label {
+				text: root.caption
+				font.pixelSize: Theme.font_listItem_caption_size
+				color: Theme.color_font_secondary
+				wrapMode: Text.Wrap
+				visible: text.length > 0
+
+				Layout.columnSpan: contentGrid.compactLayout ? 1 : 2
+				Layout.maximumWidth: parent.width
+			}
+		}
+
+		CP.ColorImage {
+			id: icon
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
+			source: "qrc:/images/icon_arrow_32.svg"
+			rotation: 180
+			color: Theme.color_listItem_forwardIcon
+
+			// Set opacity instead of visible, to maintain the quantity label vertical alignments
+			// even when list item is not clickable.
+			opacity: root.interactive ? 1 : 0
+		}
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 }

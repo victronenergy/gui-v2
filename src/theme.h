@@ -30,7 +30,8 @@ class Theme : public QObject
 public:
 	enum ScreenSize {
 		FiveInch = 0,
-		SevenInch
+		SevenInch,
+		Portrait
 	};
 	Q_ENUM(ScreenSize)
 

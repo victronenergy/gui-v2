@@ -9,7 +9,8 @@ import Victron.VenusOS
 StackView {
 	id: root
 
-	readonly property bool opened: state === "opened" && !fakePushTransition.running
+	property bool opened
+	// readonly property bool opened: state === "opened" && !fakePushTransition.running
 	readonly property Page currentPage: opened ? currentItem : null
 
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
@@ -217,10 +218,16 @@ StackView {
 
 			to: "opened"
 
-			NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
-				id: fakePushAnimation
-				property: "x"
-				easing.type: Easing.InOutQuad
+			SequentialAnimation {
+				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+					id: fakePushAnimation
+
+					property: "x"
+					easing.type: Easing.InOutQuad
+				}
+				ScriptAction {
+					script: root.opened = true
+				}
 			}
 		},
 		Transition {
@@ -236,6 +243,8 @@ StackView {
 				}
 				ScriptAction {
 					script: {
+						root.opened = false
+
 						if (root.state === "hidden") {
 							// The stack is just being hidden temporarily; do not pop all pages.
 							return

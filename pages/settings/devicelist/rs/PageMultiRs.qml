@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 /*
@@ -206,13 +207,25 @@ DevicePage {
 				unit: VenusOS.Units_Watt
 			}
 
-			ListItem {
-				//% "Trackers"
-				text: qsTrId("settings_multirs_trackers")
+			ListItemControl {
+				id: trackerTableItem
 
-				bottomContentChildren: [
+				// Remove horizontal padding to allow QuantityTable row background colours to
+				// stretch to the left/right edges of the view.
+				leftPadding: 0
+				rightPadding: 0
+				contentItem: ColumnLayout {
+					spacing: Theme.geometry_listItem_content_verticalMargin
+
+					Label {
+						//% "Trackers"
+						text: qsTrId("settings_multirs_trackers")
+						font: trackerTableItem.font
+						leftPadding: trackerTableItem.horizontalContentPadding
+						rightPadding: trackerTableItem.horizontalContentPadding
+					}
+
 					QuantityTable {
-						width: parent.width
 						model: root.trackerCount
 						delegate: QuantityTable.TableRow {
 							id: tableRow
@@ -231,8 +244,9 @@ DevicePage {
 								trackerCount: root.trackerCount
 							}
 						}
+						Layout.fillWidth: true
 					}
-				]
+				}
 			}
 		}
 	}

@@ -13,13 +13,13 @@ T.TextField {
 	property color borderColor: Theme.color_ok
 
 	font.family: Global.fontFamily
-	font.pixelSize: Theme.font_size_body2
+	font.pixelSize: Theme.font_listItem_primary_size
 	passwordCharacter: "\u2022"
 
 	leftPadding: Theme.geometry_textField_horizontalMargin
 	rightPadding: Theme.geometry_textField_horizontalMargin
 
-	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth)
+	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth) + leftPadding + rightPadding
 	implicitHeight: Theme.geometry_textField_height
 
 	horizontalAlignment: Text.AlignHCenter
@@ -42,9 +42,7 @@ T.TextField {
 			id: placeholderText
 			anchors {
 				left: parent.left
-				leftMargin: root.leftPadding
 				right: parent.right
-				rightMargin: root.rightPadding
 				verticalCenter: parent.verticalCenter
 			}
 			horizontalAlignment: root.horizontalAlignment

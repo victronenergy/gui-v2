@@ -4,8 +4,8 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
-import QZXing
 
 Page {
 	id: root
@@ -179,19 +179,19 @@ Page {
 
 			ListSlider {
 				text: "Slider"
-				slider.from: 1
-				slider.to: 100
-				slider.stepSize: 10
+				from: 1
+				to: 100
+				stepSize: 10
 			}
 
 			ListRangeSlider {
 				text: "Range slider"
-				slider.from: 0
-				slider.to: 100
-				slider.first.value: 25
-				slider.second.value: 75
-				slider.suffix: "%"
-				slider.decimals: 1
+				from: 0
+				to: 100
+				firstValue: 25
+				secondValue: 75
+				suffix: "%"
+				decimals: 1
 			}
 
 			ListButton {
@@ -209,16 +209,16 @@ Page {
 				text: "Text input: forced capitalization, numbers disallowed"
 				placeholderText: "Enter text"
 				validateInput: function() {
-					if (textField.text.match(/[0-9]/)) {
+					if (secondaryText.match(/[0-9]/)) {
 						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
-					} else if (textField.text.match(/[a-z]/)) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", textField.text.toUpperCase())
+					} else if (secondaryText.match(/[a-z]/)) {
+						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", secondaryText.toUpperCase())
 					} else {
 						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 					}
 				}
 				saveInput: function() {
-					console.log("Saving text: %1".arg(textField.text))
+					console.log("Saving text: %1".arg(secondaryText))
 				}
 			}
 
@@ -257,69 +257,57 @@ Page {
 				text: "Time selection"
 			}
 
+			ListItemControl {
+				id: toastItem
 
-			ListItem {
-				text: "Toast"
-				content.children: [
+				topPadding: 0
+				bottomPadding: 0
+				contentItem: RowLayout {
+					spacing: toastItem.spacing
 
+					Label {
+						text: "Toast"
+						font: toastItem.font
+						Layout.fillWidth: true
+					}
 					ListItemButton {
 						text: "Warning"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
-					},
+					}
 					ListItemButton {
 						text: "Alarm"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
-					},
+					}
 					ListItemButton {
 						text: "Info"
 						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
 					}
-				]
+				}
 			}
 
-			ListItem {
-				text: "Custom item"
+			ListItemControl {
+				id: customItem
 
-				content.children: [
+				contentItem: RowLayout {
+					spacing: customItem.spacing
+
+					Label {
+						text: "Custom item"
+						font: customItem.font
+						Layout.fillWidth: true
+					}
 					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
 						width: 30
 						height: 30
 						radius: 15
 						color: Theme.color_ok
-					},
+					}
 					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
 						width: 30
 						height: 30
 						color: Theme.color_warning
 					}
-				]
-			}
-
-			ListItem {
-				id: customListItem
-				text: "Custom bottom content item"
-
-				content.children: [
-					Rectangle {
-						anchors.verticalCenter: parent.verticalCenter
-						width: 100
-						height: 100
-						radius: width / 2
-						color: "orange"
-
-						MouseArea {
-							anchors.fill: parent
-							onClicked: {
-								customListItem.bottomContentSizeMode = customListItem.bottomContentSizeMode === VenusOS.ListItem_BottomContentSizeMode_Compact
-										? VenusOS.ListItem_BottomContentSizeMode_Stretch
-										: VenusOS.ListItem_BottomContentSizeMode_Compact
-							}
-						}
-					}
-				]
-				caption: "This can wrap next to the content item, or be placed below the content item and stretch to the full item size. Click the orange button to toggle this size mode."
+				}
 			}
 
 			ListText {
@@ -337,18 +325,6 @@ Page {
 				secondaryText: "Both primary and secondary text are quite long"
 			}
 
-			ListItem {
-				text: "Scan the QR code:"
-				content.children: [
-					Image {
-						source: "image://QZXing/encode/" + "https://www.victronenergy.com/" +
-								"?correctionLevel=M" +
-								"&format=qrcode"
-						sourceSize: Qt.size(Theme.geometry_listItem_height, Theme.geometry_listItem_height)
-					}
-				]
-			}
-
 			ListLink {
 				text: "Victron Energy"
 				url: "https://www.victronenergy.com"
@@ -362,7 +338,7 @@ Page {
 		Page {
 			GradientListView {
 				model: VisibleItemModel {
-					ListItem {
+					ListText {
 						text: "New page item"
 					}
 				}
@@ -436,14 +412,14 @@ Page {
 
 					Repeater {
 						model: 5
-						delegate: ListItem {
+						delegate: ListText {
 							text: "Header item " + model.index
 						}
 					}
 				}
 
 				model: 10
-				delegate: ListItem {
+				delegate: ListText {
 					text: "List item " + model.index
 				}
 
@@ -451,15 +427,10 @@ Page {
 					width: parent ? parent.width : 0
 					topPadding: spacing
 
-					BaseListItem {
-						width: parent.width
-						height: footerRectangle.height + (2 * Theme.geometry_listItem_content_verticalMargin)
-
-						Rectangle {
-							id: footerRectangle
-							anchors.centerIn: parent
-							width: 120
-							height: 80
+					ListItemControl {
+						contentItem: Rectangle {
+							implicitWidth: 120
+							implicitHeight: 80
 							color: Theme.color_ok
 						}
 					}

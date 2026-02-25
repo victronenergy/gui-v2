@@ -59,14 +59,14 @@ Page {
 				//% "AC System"
 				text: qsTrId("pagesettingssystem_ac_system")
 				//% "Inputs and Monitoring"
-				secondaryText: qsTrId("pagesettingssystem_inputs_and_monitoring")
+				caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
 				pageSource: "/pages/settings/PageSettingsAcSystem.qml"
 			}
 
 			SettingsListNavigation {
 				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess
 				//% "Energy Storage System"
-				secondaryText: qsTrId("pagesettingssystem_energy_storage_System")
+				caption: qsTrId("pagesettingssystem_energy_storage_System")
 				pageSource: "/pages/settings/PageSettingsHub4.qml"
 
 				VeQuickItem {
@@ -78,7 +78,7 @@ Page {
 			SettingsListNavigation {
 				text: CommonWords.batteries
 				//% "Batteries and Battery Management Systems (BMS)"
-				secondaryText: qsTrId("pagesettingssystem_batteries_and_bms")
+				caption: qsTrId("pagesettingssystem_batteries_and_bms")
 				pageSource: "/pages/settings/PageSettingsBatteries.qml"
 			}
 
@@ -86,13 +86,12 @@ Page {
 				//% "Charge Control"
 				text: qsTrId("settings_system_charge_control")
 				//% "Distributed Voltage and Current Control (DVCC)"
-				secondaryText: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
+				caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
 				pageSource: "/pages/settings/PageSettingsDvcc.qml"
 			}
 
 			ListSwitch {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
-				height: Theme.geometry_settingsListNavigation_height
 				//% "Display DC Loads"
 				text: qsTrId("settings_system_has_dc_system")
 			}

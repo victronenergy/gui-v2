@@ -195,19 +195,25 @@ QtObject {
 			}
 			break
 		case Qt.Key_N:
-			if (modifiers & Qt.ShiftModifier) {
-				MockManager.addDummyNotification(true)
-			} else {
+			if (modifiers & Qt.ShiftModifier && modifiers & Qt.ControlModifier) {
+				showToastNotification(VenusOS.Notification_Alarm)
+			} else if (modifiers & Qt.ShiftModifier && modifiers & Qt.AltModifier) {
+				showToastNotification(VenusOS.Notification_Warning)
+			} else if (modifiers & Qt.ShiftModifier) {
+				showToastNotification(VenusOS.Notification_Info)
+			} else if (modifiers & Qt.AltModifier) {
 				MockManager.addDummyNotification(false)
+			} else {
+				MockManager.addDummyNotification(true)
 			}
 			break
 		case Qt.Key_O:
-			const notifType = (modifiers & Qt.ShiftModifier)
-				? VenusOS.Notification_Warning
-				: (modifiers & Qt.ControlModifier)
-				  ? VenusOS.Notification_Alarm
-				  : VenusOS.Notification_Info
-			showToastNotification(notifType)
+			// change orientation
+			if (Theme.screenSize !== Theme.Portrait) {
+				Theme.screenSize = Theme.Portrait
+			} else {
+				Theme.screenSize = Theme.FiveInch
+			}
 			break
 		case Qt.Key_P:
 		{
@@ -348,7 +354,7 @@ QtObject {
 	}
 
 	property Rectangle _configLabel: Rectangle {
-		parent: Global.mainView?.statusBar ?? null
+		parent: Global.mainView
 		width: pageConfigTitle.width * 1.1
 		height: pageConfigTitle.implicitHeight * 1.1
 		color: "white"

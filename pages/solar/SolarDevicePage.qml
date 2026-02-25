@@ -37,17 +37,20 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			BaseListItem {
-				width: parent?.width ?? 0
-				height: trackerTable.y + trackerTable.height
+		header: ListItemControl {
+			bottomInset: Theme.geometry_gradientList_spacing
+			topPadding: 0
+			bottomPadding: bottomInset
+			leftPadding: 0
+			contentItem: Item {
+				implicitWidth: trackerSummary.width
+				implicitHeight: trackerTable.y + trackerTable.height
 
 				// When there is only one tracker, this table shows the overall voltage and current.
 				// Otherwise, the voltage and current are shown per-tracker in the tracker table.
 				QuantityTableSummary {
 					id: trackerSummary
 
-					width: parent.width
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 					summaryHeaderText: CommonWords.state
 					summaryModel: [
@@ -76,7 +79,6 @@ Page {
 					id: trackerTable
 
 					anchors.top: trackerSummary.bottom
-					width: parent.width
 					rightPadding: trackerSummary.rightPadding
 					columnSpacing: trackerSummary.columnSpacing
 					metricsFontSize: trackerSummary.metricsFontSize
@@ -118,7 +120,9 @@ Page {
 					}
 				}
 			}
+		}
 
+		model: VisibleItemModel {
 			ListQuantityGroup {
 				text: CommonWords.battery
 				model: QuantityObjectModel {

@@ -22,6 +22,9 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
+	//% "Controls"
+	title: qsTrId("control_cards_title")
+
 	// The cards list view is made up of:
 	// - Header - ESS card
 	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers
@@ -47,11 +50,10 @@ Page {
 
 		header: BaseListLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
-			sourceComponent: BaseListItem {
+			sourceComponent: FocusScope {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
-				background.visible: false
-				KeyNavigationHighlight.active: false
+				focus: true
 
 				ESSCard {
 					width: root.cardWidth
