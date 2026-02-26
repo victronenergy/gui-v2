@@ -35,17 +35,17 @@ TestCase {
 
 	function test_unitsLabel() {
 		expect(VenusOS.Units_None, 1, "1", "")
-		expect(VenusOS.Units_Altitude_Foot, 1, "1", "ft")
-		expect(VenusOS.Units_Altitude_Metre, 1, "1", "m")
 		expect(VenusOS.Units_Amp, 1, "1.0", "A")
 		expect(VenusOS.Units_AmpHour, 1, "1.0", "Ah")
 		expect(VenusOS.Units_CardinalDirection, 1, "1", Units.degreesSymbol + " direction_north")
 		expect(VenusOS.Units_Energy_KiloWattHour, 1, "1000", "Wh")
+		expect(VenusOS.Units_Foot, 1, "1", "ft")
 		expect(VenusOS.Units_Hectopascal, 1, "1.0", "hPa")
 		expect(VenusOS.Units_Hertz, 1, "1.0", "Hz")
 		expect(VenusOS.Units_Kilopascal, 1, "1", "kPa")
 		expect(VenusOS.Units_Lux, 1, "1", "lux")
 		expect(VenusOS.Units_MicrogramPerCubicMeter, 1, "1.0", "µg/m³")
+		expect(VenusOS.Units_Metre, 1, "1", "m")
 		expect(VenusOS.Units_NewtonMeter, 1, "1", "Nm")
 		expect(VenusOS.Units_PartsPerMillion, 1, "1", "ppm")
 		expect(VenusOS.Units_Percentage, 1, "1", "%")
@@ -131,8 +131,8 @@ TestCase {
 					 VenusOS.Units_Temperature_Celsius,
 					 VenusOS.Units_Temperature_Fahrenheit,
 					 VenusOS.Units_Temperature_Kelvin,
-					 VenusOS.Units_Altitude_Metre,
-					 VenusOS.Units_Altitude_Foot,
+					 VenusOS.Units_Metre,
+					 VenusOS.Units_Foot,
 					 VenusOS.Units_RevolutionsPerMinute]
 
 		for (const unit of units) {
@@ -155,7 +155,7 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				if (unit === VenusOS.Units_Volume_Litre
-						|| unit === VenusOS.Units_Altitude_Metre) {
+						|| unit === VenusOS.Units_Metre) {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
@@ -318,7 +318,7 @@ TestCase {
 	}
 
 	function test_unitFormatHints() {
-		const unit = VenusOS.Units_Altitude_Metre
+		const unit = VenusOS.Units_Metre
 		var quantity = Units.getDisplayText(unit, 19.5678)
 		compare(quantity.number, "20")
 		compare(quantity.unit, "m")
@@ -331,6 +331,28 @@ TestCase {
 		// force internal scaling algorithm to adhere to function parameters
 		quantity = Units.getDisplayText(unit, 19.5678, 4, Units.NoDecimalAdjustment)
 		compare(quantity.number, "19.5678")
+		compare(quantity.unit, "m")
+
+		// scaled value correctly rounded to default decimal places
+		quantity = Units.getDisplayText(unit, 195678)
+		compare(quantity.number, "196")
+		compare(quantity.unit, "km")
+
+		// scaled value correctly round to overridded decimal places
+		quantity = Units.getDisplayText(unit, 195678, 2, Units.NoDecimalAdjustment)
+		compare(quantity.number, "195.68")
+		compare(quantity.unit, "km")
+
+		// unscaled value correctly round to no decimal places
+		// (TODO: passing in decimal places does not result in displayed decimal places)
+		quantity = Units.getDisplayText(unit, 195678, 2, Units.UnscaledUnitFormat)
+		compare(quantity.number, "195678")
+		compare(quantity.unit, "m")
+
+		// unscaled value correctly round to no decimal places
+		// (TODO: passing in decimal places rounds to whole value instead of displaying decimals places)
+		quantity = Units.getDisplayText(unit, 195678.5, 2, Units.UnscaledUnitFormat)
+		compare(quantity.number, "195679")
 		compare(quantity.unit, "m")
 	}
 

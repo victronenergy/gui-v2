@@ -27,18 +27,18 @@ struct UnitMetaData {
 };
 
 static const std::vector<UnitMetaData> UnitTable {
-	//              label                 unit                                        veUnit               defaultPrec  scalable
+	//              label                 unit                                        veUnit           defaultDecimals  scalable
 	{         EmptyString,   Victron::VenusOS::Enums::Units_None,                     Unit::Default,                0,   false   },
-	{                "ft",   Victron::VenusOS::Enums::Units_Altitude_Foot,            Unit::Foot,                   0,   false   },
-	{                 "m",   Victron::VenusOS::Enums::Units_Altitude_Metre,           Unit::Metre,                  0,   true    },
 	{                 "A",   Victron::VenusOS::Enums::Units_Amp,                      Unit::Default,                1,   true    },
 	{                "Ah",   Victron::VenusOS::Enums::Units_AmpHour,                  Unit::Default,                1,   true    },
 	{       DegreesSymbol,   Victron::VenusOS::Enums::Units_CardinalDirection,        Unit::Default,                0,   false   },
 	{               "kWh",   Victron::VenusOS::Enums::Units_Energy_KiloWattHour,      Unit::Default,                3,   true    },
+	{                "ft",   Victron::VenusOS::Enums::Units_Foot,                     Unit::Foot,                   0,   false   },
 	{               "hPa",   Victron::VenusOS::Enums::Units_Hectopascal,              Unit::Default,                1,   false   },
 	{                "Hz",   Victron::VenusOS::Enums::Units_Hertz,                    Unit::Default,                1,   true    },
 	{               "kPa",   Victron::VenusOS::Enums::Units_Kilopascal,               Unit::Default,                0,   false   },
 	{               "lux",   Victron::VenusOS::Enums::Units_Lux,                      Unit::Default,                0,   false   },
+	{                 "m",   Victron::VenusOS::Enums::Units_Metre,                    Unit::Metre,                  0,   true    },
 	{  "µg/" + CubicMetre,   Victron::VenusOS::Enums::Units_MicrogramPerCubicMeter,   Unit::Default,                1,   false   },
 	{                "Nm",   Victron::VenusOS::Enums::Units_NewtonMeter,              Unit::Default,                0,   false   },
 	{               "ppm",   Victron::VenusOS::Enums::Units_PartsPerMillion,          Unit::Default,                0,   false   },
@@ -303,7 +303,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		// For some units, do not scale beyond the kilo range, as we don't want to display them in
 		// mega/tera/giga format.
 		if (unit == VenusOS::Enums::Units_Volume_Litre
-				|| unit == VenusOS::Enums::Units_Altitude_Metre) {
+				|| unit == VenusOS::Enums::Units_Metre) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
 				quantity.unit = QStringLiteral("k%1").arg(defaultUnitString(unit));
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
