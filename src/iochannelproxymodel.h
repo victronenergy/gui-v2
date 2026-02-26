@@ -1,10 +1,10 @@
 /*
-** Copyright (C) 2025 Victron Energy B.V.
+** Copyright (C) 2026 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
-#ifndef VICTRON_GUIV2_SWITCHABLEOUTPUTMODEL_H
-#define VICTRON_GUIV2_SWITCHABLEOUTPUTMODEL_H
+#ifndef VICTRON_GUIV2_IOCHANNELPROXYMODEL_H
+#define VICTRON_GUIV2_IOCHANNELPROXYMODEL_H
 
 #include <QSortFilterProxyModel>
 #include <QMap>
@@ -18,7 +18,7 @@ class VeQItem;
 namespace Victron {
 namespace VenusOS {
 
-class SwitchableOutputModel : public QSortFilterProxyModel
+class IOChannelProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
 	QML_ELEMENT
@@ -38,8 +38,8 @@ public:
 	};
 	Q_ENUM(FilterType)
 
-	explicit SwitchableOutputModel(QObject *parent = nullptr);
-	~SwitchableOutputModel();
+	explicit IOChannelProxyModel(QObject *parent = nullptr);
+	~IOChannelProxyModel();
 
 	int count() const;
 
@@ -83,4 +83,4 @@ private:
 } /* VenusOS */
 } /* Victron */
 
-#endif // VICTRON_GUIV2_SWITCHABLEOUTPUTMODEL_H
+#endif // VICTRON_GUIV2_IOCHANNELPROXYMODEL_H
