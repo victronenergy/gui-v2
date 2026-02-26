@@ -196,6 +196,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListGeneratorError.qml
     components/listitems/ListInfoLabel.qml
     components/listitems/ListInverterChargerModeButton.qml
+    components/listitems/ListIOChannelGroupField.qml
+    components/listitems/ListIOChannelNameField.qml
+    components/listitems/ListIOChannelShowRadioButtonGroup.qml
+    components/listitems/ListIOChannelTypeRadioButtonGroup.qml
     components/listitems/ListLink.qml
     components/listitems/ListMotorDriveGear.qml
     components/listitems/ListMqttAccessSwitch.qml
@@ -534,8 +538,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounter.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml
-    pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml
-    pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml
+    pages/settings/devicelist/iochannel/GenericInputListDelegate.qml
+    pages/settings/devicelist/iochannel/PageGenericInput.qml
+    pages/settings/devicelist/iochannel/PageSwitchableOutput.qml
+    pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml
     pages/settings/devicelist/temperature/PageTemperatureSensor.qml
     pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml
     pages/settings/tz/TzAfricaData.qml
