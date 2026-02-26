@@ -13,7 +13,7 @@ DeviceListDelegate {
 		filterType: QuantityObjectModel.HasValue
 
 		QuantityObject { object: soc; unit: VenusOS.Units_Percentage }
-		QuantityObject { object: range; key: "valueInMetres"; unit: VenusOS.Units_Altitude_Metre }
+		QuantityObject { object: range; key: "valueInMetres"; unit: VenusOS.Units_Metre }
 	}
 
 	onClicked: {

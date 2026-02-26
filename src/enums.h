@@ -62,16 +62,16 @@ public:
 
 	enum Units_Type {
 		Units_None = 0,
-		Units_Altitude_Foot,
-		Units_Altitude_Metre,
 		Units_Amp,
 		Units_AmpHour,
 		Units_CardinalDirection,
 		Units_Energy_KiloWattHour,
+		Units_Foot,
 		Units_Hectopascal,
 		Units_Hertz,
 		Units_Kilopascal,
 		Units_Lux,
+		Units_Metre,
 		Units_MicrogramPerCubicMeter,
 		Units_NewtonMeter,
 		Units_PartsPerMillion,
