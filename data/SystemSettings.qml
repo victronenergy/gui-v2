@@ -413,14 +413,14 @@ QtObject {
 		onValueChanged: {
 			switch (value) {
 			case ve_metre:
-				root.altitudeUnit = VenusOS.Units_Altitude_Metre
+				root.altitudeUnit = VenusOS.Units_Metre
 				break
 			case ve_foot:
-				root.altitudeUnit = VenusOS.Units_Altitude_Foot
+				root.altitudeUnit = VenusOS.Units_Foot
 				break
 			default:
 				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
-				root.altitudeUnit = VenusOS.Units_Altitude_Metre
+				root.altitudeUnit = VenusOS.Units_Metre
 				break
 			}
 		}

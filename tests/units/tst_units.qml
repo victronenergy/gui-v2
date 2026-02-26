@@ -89,8 +89,8 @@ TestCase {
 					 VenusOS.Units_Temperature_Celsius,
 					 VenusOS.Units_Temperature_Fahrenheit,
 					 VenusOS.Units_Temperature_Kelvin,
-					 VenusOS.Units_Altitude_Metre,
-					 VenusOS.Units_Altitude_Foot,
+					 VenusOS.Units_Metre,
+					 VenusOS.Units_Foot,
 					 VenusOS.Units_RevolutionsPerMinute]
 
 		for (const unit of units) {
@@ -113,7 +113,7 @@ TestCase {
 
 			if (Units.isScalingSupported(unit)) {
 				if (unit === VenusOS.Units_Volume_Litre
-						|| unit === VenusOS.Units_Altitude_Metre) {
+						|| unit === VenusOS.Units_Metre) {
 					expect(unit, 12345, "12", "k" + unitString)
 					expect(unit, 123456789, "123457", "k" + unitString)
 				} else {
