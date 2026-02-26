@@ -90,7 +90,10 @@ TestCase {
 					 VenusOS.Units_Temperature_Fahrenheit,
 					 VenusOS.Units_Temperature_Kelvin,
 					 VenusOS.Units_Metre,
+					 VenusOS.Units_Kilometre,
 					 VenusOS.Units_Foot,
+					 VenusOS.Units_Mile,
+					 VenusOS.Units_NauticalMile,
 					 VenusOS.Units_RevolutionsPerMinute]
 
 		for (const unit of units) {
