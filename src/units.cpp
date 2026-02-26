@@ -272,7 +272,8 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	qreal scaledValue = value;
 
 	// scale value if the unit of measure is scalable
-	if (isScalingSupported(unit)) {
+	// check format hints for display override value
+	if (isScalingSupported(unit) && !(formatHints & Units::FormatHint::NoScaling)) {
 		qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
 
 		// Kilowatthour is already in kilos, normalize to plain watthours before scaling
