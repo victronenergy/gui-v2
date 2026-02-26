@@ -32,7 +32,7 @@ DevicePage {
 			text: qsTrId("ev_range")
 			dataItem.uid: root.bindPrefix + "/RangeToGo"
 			value: dataItem.valid ? dataItem.value * 1000 : NaN // convert raw km -> m
-			unit: VenusOS.Units_Altitude_Metre
+			unit: VenusOS.Units_Metre
 		}
 
 		ListQuantity {
@@ -113,7 +113,7 @@ DevicePage {
 			text: qsTrId("ev_odometer")
 			dataItem.uid: root.bindPrefix + "/Odometer"
 			value: dataItem.valid ? dataItem.value * 1000 : NaN // convert raw km -> m
-			unit: VenusOS.Units_Altitude_Metre
+			unit: VenusOS.Units_Metre
 			preferredVisible: dataItem.valid
 		}
 
