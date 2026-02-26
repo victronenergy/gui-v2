@@ -13,26 +13,12 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListTextField {
-				//% "Name"
-				text: qsTrId("page_switchable_output_name")
+			ListIOChannelNameField {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/CustomName"
-				dataItem.invalidate: false
-				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
-				preferredVisible: dataItem.valid
-				placeholderText: CommonWords.custom_name
 			}
 
-			ListTextField {
-				//% "Group"
-				text: qsTrId("page_switchable_output_group")
+			ListIOChannelGroupField {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Group"
-				dataItem.invalidate: false
-				writeAccessLevel: VenusOS.User_AccessType_User
-				textField.maximumLength: 32
-				preferredVisible: dataItem.valid
-				placeholderText: text
 			}
 
 			ListRadioButtonGroup {
@@ -87,27 +73,8 @@ Page {
 				preferredVisible: dataItem.valid
 			}
 
-			ListRadioButtonGroup {
-				//% "Type"
-				text: qsTrId("page_switchable_output_type")
-				dataItem.uid: root.switchableOutput.uid + "/Settings/Type"
-				preferredVisible: dataItem.valid
-				secondaryLabel.color: root.switchableOutput.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
-				optionModel: {
-					let options = []
-					for (let i = 0; i <= VenusOS.SwitchableOutput_Type_MaxSupportedType; i++) {
-						if (root.switchableOutput.validTypes & (1 << i)) {
-							options.push({ display: VenusOS.switchableOutput_typeToText(i, root.switchableOutput.channelId), value: i })
-						}
-					}
-					return options
-				}
-				interactive: optionModel.length > 1 || !root.switchableOutput.hasValidType
-
-				// Set the fallback text explicitly, in case the output Type is not supported by its
-				// ValidTypes, which means the current Type is not one of the listed options and
-				// thus cannot be displayed by ListRadioButtonGroup.
-				defaultSecondaryText: VenusOS.switchableOutput_typeToText(root.switchableOutput.type, root.switchableOutput.channelId)
+			ListIOChannelTypeRadioButtonGroup {
+				ioChannel: root.switchableOutput
 			}
 
 			ListRadioButtonGroup {
@@ -134,22 +101,8 @@ Page {
 				defaultSecondaryText: VenusOS.switchableOutput_functionToText(root.switchableOutput.function)
 			}
 
-			ListRadioButtonGroup {
-				//: Whether UI controls should be shown for this output
-				//% "Show controls"
-				text: qsTrId("page_switchable_show_controls")
+			ListIOChannelShowRadioButtonGroup {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/ShowUIControl"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				preferredVisible: dataItem.valid
-				optionModel: [
-					{ display: CommonWords.off, value: VenusOS.IOChannel_ShowUI_Off },
-					//% "Always"
-					{ display: qsTrId("page_switchable_output_show_always"), value: VenusOS.IOChannel_ShowUI_Always },
-					//% "Only local"
-					{ display: qsTrId("page_switchable_output_show_local"), value: VenusOS.IOChannel_ShowUI_Local },
-					//% "Only on VRM"
-					{ display: qsTrId("page_switchable_output_show_vrm"), value: VenusOS.IOChannel_ShowUI_Remote }
-				]
 			}
 
 			ListQuantity {

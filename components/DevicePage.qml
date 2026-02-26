@@ -72,6 +72,33 @@ Page {
 			}
 
 			ListNavigation {
+				//% "Inputs"
+				text: qsTrId("device_page_inputs")
+				preferredVisible: genericInputModel.count > 0
+				onClicked: {
+					Global.pageManager.pushPage(genericInputPageComponent, { title: text })
+				}
+
+				IOChannelProxyModel {
+					id: genericInputModel
+					sourceModel: VeQItemTableModel {
+						uids: [ root.serviceUid + "/GenericInput" ]
+						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+					}
+				}
+
+				Component {
+					id: genericInputPageComponent
+					Page {
+						GradientListView {
+							model: genericInputModel
+							delegate: GenericInputListDelegate {}
+						}
+					}
+				}
+			}
+
+			ListNavigation {
 				text: CommonWords.device_info_title
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml", {
