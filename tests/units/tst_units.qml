@@ -348,13 +348,13 @@ TestCase {
 
 		// unscaled value correctly round to no decimal places
 		// (TODO: passing in decimal places does not result in displayed decimal places)
-		quantity = Units.getDisplayText(unit, 195678, 2, Units.UnscaledUnitFormat)
+		quantity = Units.getDisplayText(unit, 195678, 2, Units.NoScaling)
 		compare(quantity.number, "195678")
 		compare(quantity.unit, "m")
 
 		// unscaled value correctly round to no decimal places
 		// (TODO: passing in decimal places rounds to whole value instead of displaying decimals places)
-		quantity = Units.getDisplayText(unit, 195678.5, 2, Units.UnscaledUnitFormat)
+		quantity = Units.getDisplayText(unit, 195678.5, 2, Units.NoScaling)
 		compare(quantity.number, "195679")
 		compare(quantity.unit, "m")
 	}
