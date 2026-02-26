@@ -13,6 +13,21 @@ DevicePage {
 
 	serviceUid: bindPrefix
 
+	function _systemDistanceUnit() {
+		switch (Global.systemSettings.speedUnit) {
+		case VenusOS.Units_Speed_KilometresPerHour:
+			return VenusOS.Units_Kilometre
+		case VenusOS.Units_Speed_MetresPerSecond:
+			return VenusOS.Units_Metre
+		case VenusOS.Units_Speed_Knots:
+			return VenusOS.Units_Nautical_Mile
+		case VenusOS.Units_Speed_MilesPerHour:
+			return VenusOS.Units_Mile
+		default:
+			return VenusOS.Units_Metre
+		}
+	}
+
 	settingsModel: VisibleItemModel {
 		ListQuantity {
 			text: CommonWords.state_of_charge
@@ -31,8 +46,11 @@ DevicePage {
 			//% "Range"
 			text: qsTrId("ev_range")
 			dataItem.uid: root.bindPrefix + "/RangeToGo"
-			value: dataItem.valid ? dataItem.value * 1000 : NaN // convert raw km -> m
-			unit: VenusOS.Units_Metre
+			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Kilometre)
+			dataItem.displayUnit: Units.unitToVeUnit(root._systemDistanceUnit())
+			value: dataItem.valid ? dataItem.value : NaN
+			unit: root._systemDistanceUnit()
+			formatHints: Units.UnscaledUnitFormat
 		}
 
 		ListQuantity {
@@ -112,9 +130,12 @@ DevicePage {
 			//% "Odometer"
 			text: qsTrId("ev_odometer")
 			dataItem.uid: root.bindPrefix + "/Odometer"
-			value: dataItem.valid ? dataItem.value * 1000 : NaN // convert raw km -> m
-			unit: VenusOS.Units_Metre
+			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Kilometre)
+			dataItem.displayUnit: Units.unitToVeUnit(root._systemDistanceUnit())
+			value: dataItem.valid ? dataItem.value : NaN
+			unit: root._systemDistanceUnit()
 			preferredVisible: dataItem.valid
+			formatHints: Units.UnscaledUnitFormat
 		}
 
 		ListText {
