@@ -52,7 +52,7 @@ Page {
 					Global.pageManager.pushPage(switchableOutputPageComponent, { title: text })
 				}
 
-				SwitchableOutputModel {
+				IOChannelProxyModel {
 					id: switchableOutputModel
 					sourceModel: VeQItemTableModel {
 						uids: root.showSwitches ? [ root.serviceUid + "/SwitchableOutput" ] : []

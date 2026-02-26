@@ -18,7 +18,7 @@ class VeQItem;
 namespace Victron {
 namespace VenusOS {
 
-class SwitchableOutputModel : public QSortFilterProxyModel
+class IOChannelProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
 	QML_ELEMENT
@@ -38,8 +38,8 @@ public:
 	};
 	Q_ENUM(FilterType)
 
-	explicit SwitchableOutputModel(QObject *parent = nullptr);
-	~SwitchableOutputModel();
+	explicit IOChannelProxyModel(QObject *parent = nullptr);
+	~IOChannelProxyModel();
 
 	int count() const;
 

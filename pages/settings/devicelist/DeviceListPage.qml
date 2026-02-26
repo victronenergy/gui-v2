@@ -87,14 +87,14 @@ Page {
 					}
 				}
 
-				SwitchableOutputModel {
+				IOChannelProxyModel {
 					id: systemRelayModel
 
 					sourceModel: VeQItemTableModel {
 						uids: [ Global.system.serviceUid + "/SwitchableOutput" ]
 						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 					}
-					filterType: SwitchableOutputModel.ManualFunction
+					filterType: IOChannelProxyModel.ManualFunction
 				}
 			}
 

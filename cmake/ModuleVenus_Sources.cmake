@@ -651,6 +651,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/iochannel.cpp
     src/iochannelgroupmodel.h
     src/iochannelgroupmodel.cpp
+    src/iochannelproxymodel.h
+    src/iochannelproxymodel.cpp
     src/keyeventfilter.h
     src/keyeventfilter.cpp
     src/keynavigationhighlight.cpp
@@ -686,8 +688,6 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/solaryieldmodel.cpp
     src/switchableoutput.h
     src/switchableoutput.cpp
-    src/switchableoutputmodel.h
-    src/switchableoutputmodel.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )

@@ -3,7 +3,7 @@
 ** See LICENSE.txt for license information.
 */
 
-#include "switchableoutputmodel.h"
+#include "iochannelproxymodel.h"
 #include "enums.h"
 
 #include <veutil/qt/ve_qitem_table_model.hpp>
@@ -104,13 +104,13 @@ QVariant IOChannelProxyModel::data(const QModelIndex &index, int role) const
 		return QVariant();
 	}
 
-	const QString outputUid = sourceModel()->data(mapToSource(index), VeQItemTableModel::UniqueIdRole).toString();
+	const QString channelUid = sourceModel()->data(mapToSource(index), VeQItemTableModel::UniqueIdRole).toString();
 
 	switch (role) {
 	case UidRole:
-		return outputUid;
+		return channelUid;
 	case NameRole:
-		return m_entries.value(outputUid).name();
+		return m_entries.value(channelUid).name();
 	}
 	return QVariant();
 }
@@ -130,21 +130,21 @@ bool IOChannelProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &) c
 		return false;
 	}
 
-	const QString outputUid = sourceModel()->data(sourceModel()->index(sourceRow, 0), VeQItemTableModel::UniqueIdRole).toString();
-	auto it = m_entries.constFind(outputUid);
+	const QString channelUid = sourceModel()->data(sourceModel()->index(sourceRow, 0), VeQItemTableModel::UniqueIdRole).toString();
+	auto it = m_entries.constFind(channelUid);
 	if (it == m_entries.constEnd()) {
 		return false;
 	}
 
 	const Entry &entry = it.value();
 
-	// If the /Name is not present, this output is not valid (e.g. it may be a system relay
+	// If the /Name is not present, this channel is not valid (e.g. it may be a system relay
 	// configured as an input), so do not show it in the list.
 	if (!entry.nameItem || !entry.nameItem->getValue().isValid()) {
 		return false;
 	}
 
-	// If the model requires manual relays, only show this output if it is configured as one.
+	// If the model requires manual relays, only show the channel if it is configured as one.
 	if (m_filterType == ManualFunction
 			&& (!entry.functionItem || entry.functionItem->getValue() != QVariant(VenusOS::Enums::SwitchableOutput_Function_Manual))) {
 		return false;
@@ -159,10 +159,10 @@ bool IOChannelProxyModel::lessThan(const QModelIndex &sourceLeft, const QModelIn
 		return QSortFilterProxyModel::lessThan(sourceLeft, sourceRight);
 	}
 
-	const QString leftOutputUid = sourceModel()->data(sourceLeft, VeQItemTableModel::UniqueIdRole).toString();
-	const QString rightOutputUid = sourceModel()->data(sourceRight, VeQItemTableModel::UniqueIdRole).toString();
-	const Entry &leftEntry = m_entries.value(leftOutputUid);
-	const Entry &rightEntry = m_entries.value(rightOutputUid);
+	const QString leftchannelUid = sourceModel()->data(sourceLeft, VeQItemTableModel::UniqueIdRole).toString();
+	const QString rightchannelUid = sourceModel()->data(sourceRight, VeQItemTableModel::UniqueIdRole).toString();
+	const Entry &leftEntry = m_entries.value(leftchannelUid);
+	const Entry &rightEntry = m_entries.value(rightchannelUid);
 	return leftEntry.name().localeAwareCompare(rightEntry.name()) < 0;
 }
 
@@ -182,8 +182,8 @@ void IOChannelProxyModel::sourceModelRowsAboutToBeRemoved(const QModelIndex &par
 		return;
 	}
 	for (int i = first; i <= last; ++i) {
-		const QString outputUid = sourceModel()->data(sourceModel()->index(i, 0), VeQItemTableModel::UniqueIdRole).toString();
-		Entry entry = m_entries.take(outputUid);
+		const QString channelUid = sourceModel()->data(sourceModel()->index(i, 0), VeQItemTableModel::UniqueIdRole).toString();
+		Entry entry = m_entries.take(channelUid);
 		entry.disconnect(this);
 	}
 }
@@ -196,35 +196,35 @@ void IOChannelProxyModel::clearEntries()
 	m_entries.clear();
 }
 
-void IOChannelProxyModel::addEntry(const QString &outputUid)
+void IOChannelProxyModel::addEntry(const QString &channelUid)
 {
-	// outputUid is e.g. "dbus/com.victronenergy.system/SwitchableOutput/<output-id>" or
-	// "mqtt/system/0/SwitchableOutput/<output-id>"
-	if (m_entries.contains(outputUid)) {
+	// channelUid is e.g. "dbus/com.victronenergy.system/<GenericInput|SwitchableOutput>/<id>" or
+	// "mqtt/system/0/<GenericInput|SwitchableOutput>/<id>"
+	if (m_entries.contains(channelUid)) {
 		return;
 	}
 
-	VeQItem *outputItem = VeQItems::getRoot()->itemGet(outputUid);
-	if (!outputItem) {
-		qmlWarning(this) << "Cannot monitor output " << outputUid << ", cannot find matching VeQItem!";
+	VeQItem *channelItem = VeQItems::getRoot()->itemGet(channelUid);
+	if (!channelItem) {
+		qmlWarning(this) << "Cannot monitor " << channelUid << ", cannot find matching VeQItem!";
 		return;
 	}
 
 	Entry entry;
-	entry.nameItem = outputItem->itemGet(QStringLiteral("/Name"));
+	entry.nameItem = channelItem->itemGet(QStringLiteral("/Name"));
 	if (entry.nameItem) {
 		connect(entry.nameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.customNameItem = outputItem->itemGet(QStringLiteral("/Settings/CustomName"));
+	entry.customNameItem = channelItem->itemGet(QStringLiteral("/Settings/CustomName"));
 	if (entry.customNameItem) {
 		connect(entry.customNameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.functionItem = outputItem->itemGet(QStringLiteral("/Settings/Function"));
+	entry.functionItem = channelItem->itemGet(QStringLiteral("/Settings/Function"));
 	if (entry.functionItem) {
 		connect(entry.functionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidateFilter);
 	}
 
-	m_entries.insert(outputUid, entry);
+	m_entries.insert(channelUid, entry);
 
 }
 
