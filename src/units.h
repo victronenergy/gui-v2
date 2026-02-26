@@ -42,7 +42,8 @@ class Units : public QObject
 
 public:
 	enum FormatHint {
-		CompactUnitFormat = 0x1
+		CompactUnitFormat = 0x1,
+		UnscaledUnitFormat = 0x2,
 	};
 	Q_ENUM(FormatHint)
 	Q_DECLARE_FLAGS(FormatHints, FormatHint)

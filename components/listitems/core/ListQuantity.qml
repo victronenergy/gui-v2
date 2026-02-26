@@ -16,6 +16,7 @@ ListItem {
 	property alias unitColor: quantityLabel.unitColor
 	property alias precision: quantityLabel.precision
 	property alias precisionAdjustmentAllowed: quantityLabel.precisionAdjustmentAllowed
+	property alias formatHints: quantityLabel.formatHints
 
 	content.children: [
 		QuantityLabel {
