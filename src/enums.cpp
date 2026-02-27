@@ -705,6 +705,71 @@ QString Enums::microgridModeToText(MicrogridMode mode, MicrogridExternalControl 
 	}
 }
 
+QString Enums::microgrid_errorToText(MicrogridError error) const
+{
+	switch (error) {
+	case MicrogridError_NoError:
+		//% "No error"
+		return qtTrId("microgrid_error_none");
+	case MicrogridError_OutOfSync:
+		//% "Different fallback hybrid droop values in phase masters"
+		return qtTrId("microgrid_error_hybrid_droop_values_out_of_sync");
+	case MicrogridError_WriteFailed:
+		//% "Hybrid droop parameter write failed"
+		return qtTrId("microgrid_error_write_failed");
+	case MicrogridError_FminGreaterThanFmax:
+		//% "Parameter error Fmin > Fmax"
+		return qtTrId("microgrid_error_param_fmin_greater_than_fmax");
+	case MicrogridError_PminGreaterThanPmax:
+		//% "Parameter error Pmin > Pmax"
+		return qtTrId("microgrid_error_param_pmin_greater_than_pmaxv");
+	case MicrogridError_UminGreaterThanUmax:
+		//% "Parameter error Umin > Umax"
+		return qtTrId("microgrid_error_param_umin_greater_than_umax");
+	case MicrogridError_QminGreaterThanQmax:
+		//% "Parameter error Qmin > Qmax"
+		return qtTrId("microgrid_error_param_qmin_greater_than_qmax");
+	case MicrogridError_Q0OutOfRange:
+		//% "Parameter error Q0 out of range"
+		return qtTrId("microgrid_error_param_q0_out_of_range");
+	case MicrogridError_QMinOutOfRange:
+		//% "Parameter error Qmin out of range"
+		return qtTrId("microgrid_error_param_qmin_out_of_range");
+	case MicrogridError_QMaxOutOfRange:
+		//% "Parameter error Qmax out of range"
+		return qtTrId("microgrid_error_param_qmax_out_of_range");
+	case MicrogridError_UDroopOutOfRange:
+		//% "Parameter error U0 out of range"
+		return qtTrId("microgrid_error_param_u0_out_of_range");
+	case MicrogridError_U0OutOfRange:
+		//% "Parameter error U droop out of range"
+		return qtTrId("microgrid_error_param_u_droop_out_of_range");
+	case MicrogridError_P0OutOfRange:
+		//% "Parameter error P0 out of range"
+		return qtTrId("microgrid_error_param_p0_out_of_range");
+	case MicrogridError_PMinOutOfRange:
+		//% "Parameter error Pmin out of range"
+		return qtTrId("microgrid_error_param_pmin_out_of_range");
+	case MicrogridError_PMaxOutOfRange:
+		//% "Parameter error Pmax out of range"
+		return qtTrId("microgrid_error_param_pmax_out_of_range");
+	case MicrogridError_F0OutOfRange:
+		//% "Parameter error F0 out of range"
+		return qtTrId("microgrid_error_param_f0_out_of_range");
+	case MicrogridError_FDroopOutOfRange:
+		//% "Parameter error freq droop out of range"
+		return qtTrId("microgrid_error_param_freq_droop_out_of_range");
+	case MicrogridError_PfFpMismatch:
+		//% "Ve.Bus internal error PF vs FP data mismatch"
+		return qtTrId("microgrid_error_pf_fp_mismatch");
+	case MicrogridError_QuUqMismatch:
+		//% "Ve.Bus internal error QU vs UQ data mismatch"
+		return qtTrId("microgrid_error_qu_uq_mismatch");
+	default:
+		return qtTrId("common_words_unknown_status");
+}
+}
+
 Enums* Enums::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
 	Q_UNUSED(engine)
