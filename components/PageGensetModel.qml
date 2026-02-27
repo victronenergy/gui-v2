@@ -199,6 +199,27 @@ VisibleItemModel {
 		}
 	}
 
+	// Clear Error Button
+	ListButton {
+		//% "Clear generator error"
+		text: qsTrId("clear-generator-error")
+		//% "Press to clear"
+		secondaryText: qsTrId("press-to-clear")
+		preferredVisible: clearErrorItem.valid
+		interactive: _gensetErrorId.valid && _gensetErrorId.value !== ""
+		onClicked: {
+			clearErrorItem.setValue(1)
+		}
+		VeQuickItem {
+			id: clearErrorItem
+			uid: root.bindPrefix + "/ClearError"
+		}
+		VeQuickItem {
+			id: _gensetErrorId
+			uid: root.bindPrefix + "/Error/0/Id"
+		}
+	}
+
 	SettingsColumn {
 		width: parent ? parent.width : 0
 		preferredVisible: phaseRepeater.count > 0
