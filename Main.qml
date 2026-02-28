@@ -69,6 +69,17 @@ Window {
 		}
 	}
 
+	onWidthChanged: {
+		if (Theme.screenSize === Theme.Portrait) {
+			Theme.geometry_screen_width = root.width
+		}
+	}
+	onHeightChanged: {
+		if (Theme.screenSize === Theme.Portrait) {
+			Theme.geometry_screen_height = root.height
+		}
+	}
+
 	Component.onCompleted: Global.main = root
 
 	Loader {
