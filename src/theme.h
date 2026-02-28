@@ -26,6 +26,8 @@ class Theme : public QObject
 	Q_PROPERTY(SystemColorScheme systemColorScheme READ systemColorScheme WRITE setSystemColorScheme NOTIFY systemColorSchemeChanged)
 	Q_PROPERTY(ForcedColorScheme forcedColorScheme READ forcedColorScheme WRITE setForcedColorScheme NOTIFY forcedColorSchemeChanged)
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
+	Q_PROPERTY(int geometry_screen_width READ geometry_screen_width WRITE setGeometry_screen_width NOTIFY geometry_screen_widthChanged FINAL)
+	Q_PROPERTY(int geometry_screen_height READ geometry_screen_height WRITE setGeometry_screen_height NOTIFY geometry_screen_heightChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -78,6 +80,11 @@ public:
 	Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme() const;
 	void setForcedColorScheme(Victron::VenusOS::Theme::ForcedColorScheme forcedScheme);
 
+	int geometry_screen_width() const;
+	void setGeometry_screen_width(int width);
+	int geometry_screen_height() const;
+	void setGeometry_screen_height(int height);
+
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
 	Q_INVOKABLE bool windowIsLandscape() const;
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
@@ -92,12 +99,16 @@ Q_SIGNALS:
 	void systemColorSchemeChanged(Victron::VenusOS::Theme::SystemColorScheme systemColorScheme);
 	void systemColorSchemeChanged_parameterless();
 	void forcedColorSchemeChanged(Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme);
+	void geometry_screen_widthChanged();
+	void geometry_screen_heightChanged();
 
 protected:
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
 	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
+	int m_screenWidth = 0;
+	int m_screenHeight = 0;
 };
 
 }
