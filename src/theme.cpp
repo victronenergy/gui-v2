@@ -78,6 +78,22 @@ void Theme::setScreenSize(Victron::VenusOS::Theme::ScreenSize size)
 {
 	if (m_screenSize != size) {
 		m_screenSize = size;
+
+		switch (size) {
+		case FiveInch:
+			setGeometry_screen_width(800);
+			setGeometry_screen_height(480);
+			break;
+		case SevenInch:
+			setGeometry_screen_width(1024);
+			setGeometry_screen_height(600);
+			break;
+		case Portrait:
+			setGeometry_screen_width(383);
+			setGeometry_screen_height(793);
+			break;
+		}
+
 		Q_EMIT screenSizeChanged(size);
 		Q_EMIT screenSizeChanged_parameterless(); // work around moc limitation.
 	}
@@ -132,6 +148,32 @@ void Theme::setForcedColorScheme(Victron::VenusOS::Theme::ForcedColorScheme forc
 				? Victron::VenusOS::Theme::Dark
 				: Victron::VenusOS::Theme::Light);
 		}
+	}
+}
+
+int Theme::geometry_screen_width() const
+{
+	return m_screenWidth;
+}
+
+void Theme::setGeometry_screen_width(int width)
+{
+	if (m_screenWidth != width) {
+		m_screenWidth = width;
+		Q_EMIT geometry_screen_widthChanged();
+	}
+}
+
+int Theme::geometry_screen_height() const
+{
+	return m_screenHeight;
+}
+
+void Theme::setGeometry_screen_height(int height)
+{
+	if (m_screenHeight != height) {
+		m_screenHeight = height;
+		Q_EMIT geometry_screen_heightChanged();
 	}
 }
 
