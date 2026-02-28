@@ -25,6 +25,7 @@ FocusScope {
 	signal rightButtonClicked()
 	signal auxButtonClicked()
 	signal wifiButtonClicked()
+	signal gsmButtonClicked()
 	// PageStack.get(...) returns an Item, so the arg for 'popToPage' needs to be 'Item'. If we make it a 'Page', it works fine on the desktop,
 	// but shows an unusual failure on the device. There is an error message about "passing incompatible arguments to signals is not supported",
 	// and the page stack pops 1 too many pages.
@@ -246,7 +247,7 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
-			KeyNavigation.right: notificationButton
+			KeyNavigation.right: gsmButton
 
 			onClicked: root.wifiButtonClicked()
 
@@ -257,9 +258,20 @@ FocusScope {
 			}
 		}
 
-		GsmStatusIcon {
-			height: Theme.geometry_status_bar_gsmModem_icon_height
-			anchors.verticalCenter: parent.verticalCenter
+		StatusBarButton {
+			id: gsmButton
+
+			visible: gsmIcon.valid
+
+			KeyNavigation.right: notificationButton
+
+			onClicked: root.gsmButtonClicked()
+
+			GsmStatusIcon {
+				id: gsmIcon
+				height: Theme.geometry_status_bar_gsmModem_icon_height
+				anchors.centerIn: parent
+			}
 		}
 	}
 

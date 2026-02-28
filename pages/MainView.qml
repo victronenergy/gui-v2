@@ -431,6 +431,11 @@ FocusScope {
 					{"title": qsTrId("pagesettingsconnectivity_wifi")})
 		}
 
+		onGsmButtonClicked: {
+			Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml",
+					{"title": qsTrId("pagesettingsconnectivity_mobile_network")})
+		}
+
 		onPopToPage: function(toPage) {
 			pageManager.popPage(toPage)
 		}
