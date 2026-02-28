@@ -246,7 +246,7 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
-			KeyNavigation.right: notificationButton
+			KeyNavigation.right: gsmButton
 
 			onClicked: Global.mainView.goToWifiPage()
 
@@ -257,9 +257,20 @@ FocusScope {
 			}
 		}
 
-		GsmStatusIcon {
-			height: Theme.geometry_status_bar_gsmModem_icon_height
-			anchors.verticalCenter: parent.verticalCenter
+		StatusBarButton {
+			id: gsmButton
+
+			visible: gsmIcon.valid
+
+			KeyNavigation.right: notificationButton
+
+			onClicked: Global.mainView.goToGsmPage()
+
+			GsmStatusIcon {
+				id: gsmIcon
+				height: Theme.geometry_status_bar_gsmModem_icon_height
+				anchors.centerIn: parent
+			}
 		}
 	}
 
