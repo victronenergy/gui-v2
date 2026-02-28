@@ -248,9 +248,9 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
-			KeyNavigation.right: notificationButton
+			KeyNavigation.right: mobileButton
 
-			onClicked: Global.mainView.goToWifiPage()
+			onClicked: Global.mainView.goToConnectivityPage("wifi")
 
 			VeQuickItem {
 				id: signalStrength
@@ -259,9 +259,21 @@ FocusScope {
 			}
 		}
 
-		GsmStatusIcon {
-			height: Theme.geometry_status_bar_gsmModem_icon_height
-			anchors.verticalCenter: parent.verticalCenter
+		StatusBarButton {
+			id: mobileButton
+
+			opacity: enabled //  Override fading icon on unit inactivity
+			visible: mobileIcon.valid
+
+			KeyNavigation.right: notificationButton
+
+			onClicked: Global.mainView.goToConnectivityPage("mobile")
+
+			GsmStatusIcon {
+				id: mobileIcon
+				height: Theme.geometry_status_bar_gsmModem_icon_height
+				anchors.centerIn: parent
+			}
 		}
 	}
 

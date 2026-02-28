@@ -11,6 +11,9 @@ Page {
 
 	function goToPage(pageId) {
 		switch (pageId) {
+		case "mobile":
+			mobileListItem.activate()
+			break
 		case "wifi":
 			wifiListItem.activate()
 			break
@@ -62,6 +65,8 @@ Page {
 			}
 
 			ListNavigation {
+				id: mobileListItem
+
 				//% "Mobile Network"
 				text: qsTrId("pagesettingsconnectivity_mobile_network")
 				//% "No cellular modem connected"

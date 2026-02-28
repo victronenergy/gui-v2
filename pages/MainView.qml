@@ -53,11 +53,11 @@ FocusScope {
 		navBar.setCurrentPage("NotificationsPage.qml")
 	}
 
-	function goToWifiPage() {
+	function goToConnectivityPage(networkType) {
 		pageManager.popAllPages(StackView.Immediate)
 		cardsLoader.hide()
 		navBar.setCurrentPage("SettingsPage.qml")
-		root.currentPage.goToConnectivityPage("wifi")
+		root.currentPage.goToConnectivityPage(networkType)
 	}
 
 	function clearUi() {
