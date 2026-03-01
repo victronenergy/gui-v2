@@ -44,7 +44,7 @@ SettingsColumn {
 				text: qsTrId("alternator_wakespeed_charged_ah")
 				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
 				unit: VenusOS.Units_AmpHour
-				precision: 0
+				decimals: 0
 				preferredVisible: dataItem.valid
 			}
 

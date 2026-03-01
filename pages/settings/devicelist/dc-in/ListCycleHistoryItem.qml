@@ -69,8 +69,8 @@ SettingsColumn {
 		//% "Charge / maintain (Ah)"
 		text: qsTrId("cycle_history_charge_maintain_ah")
 		model: QuantityObjectModel {
-			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal1"; unit: VenusOS.Units_AmpHour; precision: 0 }
-			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal2"; unit: VenusOS.Units_AmpHour; precision: 0 }
+			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal1"; unit: VenusOS.Units_AmpHour; decimals: 0 }
+			QuantityObject { object: chargeMaintainGroup; key: "chargeTotal2"; unit: VenusOS.Units_AmpHour; decimals: 0 }
 		}
 
 		VeQuickItem { id: bulkCharge; uid: root.bindPrefix + "/BulkCharge" }
