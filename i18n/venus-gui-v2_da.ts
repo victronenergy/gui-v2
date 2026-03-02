@@ -4853,7 +4853,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>OK</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="574"/>
+      <location filename="../../src/enums.cpp" line="578"/>
       <source>On</source>
       <translation>On</translation>
     </message>
@@ -4926,7 +4926,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Fjerne</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="571"/>
+      <location filename="../../src/enums.cpp" line="626"/>
       <source>Running</source>
       <translation>Kører</translation>
     </message>
@@ -5237,62 +5237,62 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Ingen firmware fundet</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="619"/>
+      <location filename="../../src/enums.cpp" line="647"/>
       <source>Fuel</source>
       <translation>Brændstof (L)</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="622"/>
+      <location filename="../../src/enums.cpp" line="650"/>
       <source>Fresh water</source>
       <translation>Ferskvand</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="653"/>
       <source>Waste water</source>
       <translation>Affalds vand</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="628"/>
+      <location filename="../../src/enums.cpp" line="656"/>
       <source>Live well</source>
       <translation>Drikkevand</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="659"/>
       <source>Oil</source>
       <translation>Olie</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="662"/>
       <source>Black water</source>
       <translation>Sort vand</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="637"/>
+      <location filename="../../src/enums.cpp" line="665"/>
       <source>Gasoline</source>
       <translation>Benzin</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="640"/>
+      <location filename="../../src/enums.cpp" line="668"/>
       <source>Diesel</source>
       <translation>Diesel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="643"/>
+      <location filename="../../src/enums.cpp" line="671"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="646"/>
+      <location filename="../../src/enums.cpp" line="674"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="649"/>
+      <location filename="../../src/enums.cpp" line="677"/>
       <source>Hydraulic oil</source>
       <translation>Hydraulik olie</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="652"/>
+      <location filename="../../src/enums.cpp" line="680"/>
       <source>Raw water</source>
       <translation>Rå vand</translation>
     </message>
@@ -8022,7 +8022,7 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <translation>Touch input control</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="561"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Over temperature</source>
       <translation>Over temperatur</translation>
     </message>
@@ -8156,35 +8156,35 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
-    <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="548"/>
-      <source>Not running</source>
-      <translation type="unfinished">Kører ikke</translation>
-    </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="551"/>
+      <location filename="../../src/enums.cpp" line="557"/>
       <source>Off</source>
       <translation type="unfinished">Fra</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="555"/>
+      <location filename="../../src/enums.cpp" line="560"/>
       <source>Powered</source>
       <translation>Drivkraft</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="558"/>
+      <location filename="../../src/enums.cpp" line="563"/>
       <source>Tripped</source>
       <translation>Udløst</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="567"/>
+      <location filename="../../src/enums.cpp" line="572"/>
       <source>Fault</source>
       <translation type="unfinished">Fejl</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="578"/>
+      <location filename="../../src/enums.cpp" line="581"/>
       <source>Short</source>
       <translation>Kort</translation>
+    </message>
+    <message id="switchable_output_not_running">
+      <location filename="../../src/enums.cpp" line="634"/>
+      <source>Not running</source>
+      <translation type="unfinished">Kører ikke</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -10211,17 +10211,17 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <translation>Mikronet-parametre</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="663"/>
+      <location filename="../../src/enums.cpp" line="691"/>
       <source>Hybrid droop</source>
       <translation>Hybrid droop</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="666"/>
+      <location filename="../../src/enums.cpp" line="694"/>
       <source>Grid-following</source>
       <translation>Netfølgende</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="669"/>
+      <location filename="../../src/enums.cpp" line="697"/>
       <source>Grid-forming</source>
       <translation>Netdannende</translation>
     </message>
@@ -10386,7 +10386,7 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <translation type="unfinished">Lav</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Bypassed</source>
       <translation>Forbigået</translation>
     </message>
@@ -10703,52 +10703,52 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <translation>Blandet (AC i Watt, DC i Ampere)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="564"/>
+      <location filename="../../src/enums.cpp" line="569"/>
       <source>Over temp, tripped</source>
       <translation>Over temperatur, udløst</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="581"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled</source>
       <translation type="unfinished">Deaktiveret</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Disabled, tripped</source>
       <translation>Deaktiveret, udløst</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Disabled, over temp</source>
       <translation>Deaktiveret, over temperatur</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Disabled but on</source>
       <translation>Deaktiveret, men tændt</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Bypassed, tripped</source>
       <translation>Forbigået, udløst</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>Bypassed, over temp</source>
       <translation>Forbigået, over temperatur</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>External control</source>
       <translation type="unfinished">Ekstern styring</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>External control, tripped</source>
       <translation>Ekstern kontrol, udløst</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="611"/>
       <source>External control, over temp</source>
       <translation>Ekstern kontrol, over temperatur</translation>
     </message>
@@ -11010,6 +11010,21 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="175"/>
       <source>Enable Link-local</source>
       <translation>Aktiver Link-lokal</translation>
+    </message>
+    <message id="switchable_output_running_over_temperature">
+      <location filename="../../src/enums.cpp" line="620"/>
+      <source>Running, over temperature</source>
+      <translation>Kører, for høj temperatur</translation>
+    </message>
+    <message id="switchable_output_running_disabled">
+      <location filename="../../src/enums.cpp" line="623"/>
+      <source>Running, disabled</source>
+      <translation>Kører, deaktiveret</translation>
+    </message>
+    <message id="switchable_output_not_running_disabled">
+      <location filename="../../src/enums.cpp" line="631"/>
+      <source>Not running, disabled</source>
+      <translation>Kører ikke, deaktiveret</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
