@@ -207,6 +207,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
     components/listitems/ListTemperatureRelay.qml
+    components/listitems/ListTextStatus.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
     components/listitems/core/BaseListItem.qml
