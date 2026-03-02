@@ -4851,7 +4851,7 @@ Si desidera continuare?</translation>
       <translation>Ok</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="574"/>
+      <location filename="../../src/enums.cpp" line="578"/>
       <source>On</source>
       <translation>Acceso</translation>
     </message>
@@ -4924,7 +4924,7 @@ Si desidera continuare?</translation>
       <translation>Rimuovi</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="571"/>
+      <location filename="../../src/enums.cpp" line="626"/>
       <source>Running</source>
       <translation>In funzionamento</translation>
     </message>
@@ -5235,62 +5235,62 @@ Si desidera continuare?</translation>
       <translation>Non sono stati trovati firmware</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="619"/>
+      <location filename="../../src/enums.cpp" line="647"/>
       <source>Fuel</source>
       <translation>Carburante</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="622"/>
+      <location filename="../../src/enums.cpp" line="650"/>
       <source>Fresh water</source>
       <translation>Acqua dolce</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="653"/>
       <source>Waste water</source>
       <translation>Acque reflue</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="628"/>
+      <location filename="../../src/enums.cpp" line="656"/>
       <source>Live well</source>
       <translation>Serbatoio</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="659"/>
       <source>Oil</source>
       <translation>Olio</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="662"/>
       <source>Black water</source>
       <translation>ACQUE NERE</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="637"/>
+      <location filename="../../src/enums.cpp" line="665"/>
       <source>Gasoline</source>
       <translation>Benzina</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="640"/>
+      <location filename="../../src/enums.cpp" line="668"/>
       <source>Diesel</source>
       <translation>Diesel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="643"/>
+      <location filename="../../src/enums.cpp" line="671"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="646"/>
+      <location filename="../../src/enums.cpp" line="674"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="649"/>
+      <location filename="../../src/enums.cpp" line="677"/>
       <source>Hydraulic oil</source>
       <translation>Olio idraulico</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="652"/>
+      <location filename="../../src/enums.cpp" line="680"/>
       <source>Raw water</source>
       <translation>Acqua grezza</translation>
     </message>
@@ -8018,7 +8018,7 @@ Si desidera continuare?</translation>
       <translation>Controllo ingresso touch</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="561"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Over temperature</source>
       <translation>Sovratemperatura</translation>
     </message>
@@ -8152,35 +8152,35 @@ Si desidera continuare?</translation>
       <source>Slave</source>
       <translation type="unfinished">Slave</translation>
     </message>
-    <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="548"/>
-      <source>Not running</source>
-      <translation type="unfinished">Non in esecuzione</translation>
-    </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="551"/>
+      <location filename="../../src/enums.cpp" line="557"/>
       <source>Off</source>
       <translation type="unfinished">Spento</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="555"/>
+      <location filename="../../src/enums.cpp" line="560"/>
       <source>Powered</source>
       <translation>Alimentato</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="558"/>
+      <location filename="../../src/enums.cpp" line="563"/>
       <source>Tripped</source>
       <translation>Attivato</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="567"/>
+      <location filename="../../src/enums.cpp" line="572"/>
       <source>Fault</source>
       <translation type="unfinished">Errore</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="578"/>
+      <location filename="../../src/enums.cpp" line="581"/>
       <source>Short</source>
       <translation>Breve</translation>
+    </message>
+    <message id="switchable_output_not_running">
+      <location filename="../../src/enums.cpp" line="634"/>
+      <source>Not running</source>
+      <translation type="unfinished">Non in esecuzione</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -10205,17 +10205,17 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Parametri della microrete</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="663"/>
+      <location filename="../../src/enums.cpp" line="691"/>
       <source>Hybrid droop</source>
       <translation>Droop ibrido</translation>
     </message>
     <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="666"/>
+      <location filename="../../src/enums.cpp" line="694"/>
       <source>Grid-following</source>
       <translation>Grid-following</translation>
     </message>
     <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="669"/>
+      <location filename="../../src/enums.cpp" line="697"/>
       <source>Grid-forming</source>
       <translation>Grid-forming</translation>
     </message>
@@ -10380,7 +10380,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation type="unfinished">Basso</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Bypassed</source>
       <translation>Escluso</translation>
     </message>
@@ -10697,52 +10697,52 @@ Qui puoi aggiungere ulteriori porte e ID unità da scansionare per gli inverter 
       <translation>Misto (CA in Watt, CC in Ampere)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="564"/>
+      <location filename="../../src/enums.cpp" line="569"/>
       <source>Over temp, tripped</source>
       <translation>Sovratemperatura, scattato</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="581"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled</source>
       <translation type="unfinished">Disattivato</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Disabled, tripped</source>
       <translation>Disabilitato, scattato</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Disabled, over temp</source>
       <translation>Disabilitato, sovratemperatura</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Disabled but on</source>
       <translation>Disabilitato ma attivo</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Bypassed, tripped</source>
       <translation>By-passato, scattato</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>Bypassed, over temp</source>
       <translation>By-passato, sovratemperatura</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>External control</source>
       <translation type="unfinished">Controllo esterno</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>External control, tripped</source>
       <translation>Controllo esterno, scattato</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="611"/>
       <source>External control, over temp</source>
       <translation>Controllo esterno, sovratemperatura</translation>
     </message>
@@ -11004,6 +11004,21 @@ Qui puoi aggiungere ulteriori porte e ID unità da scansionare per gli inverter 
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="175"/>
       <source>Enable Link-local</source>
       <translation>Abilita Link-local</translation>
+    </message>
+    <message id="switchable_output_running_over_temperature">
+      <location filename="../../src/enums.cpp" line="620"/>
+      <source>Running, over temperature</source>
+      <translation>In funzione, sovratemperatura</translation>
+    </message>
+    <message id="switchable_output_running_disabled">
+      <location filename="../../src/enums.cpp" line="623"/>
+      <source>Running, disabled</source>
+      <translation>In funzione, disabilitato</translation>
+    </message>
+    <message id="switchable_output_not_running_disabled">
+      <location filename="../../src/enums.cpp" line="631"/>
+      <source>Not running, disabled</source>
+      <translation>Non in funzione, disabilitato</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
