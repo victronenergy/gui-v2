@@ -46,7 +46,6 @@ Page {
 			ListNavigation {
 				//% "Warm-up & cool-down"
 				text: qsTrId("settings_page_generator_warm_up_cool_down")
-				preferredVisible: capabilities.value & warmupCapability
 				onClicked: Global.pageManager.pushPage(warmupPageComponent, { title: text })
 
 				Component {
@@ -56,10 +55,18 @@ Page {
 							id: settingsListView
 
 							model: VisibleItemModel {
+								PrimaryListLabel {
+									//% "Warm-up & cool-down is unavailable with the current inverter/charger firmware. \nPlease update to the latest firmware to be able to adjust these settings."
+									text: qsTrId("page_settings_generator_warm_up_cool_down_unavailable_message")
+									preferredVisible: !(capabilities.value & warmupCapability)
+								}
+
 								ListSpinBox {
 									//% "Warm-up time"
 									text: qsTrId("page_settings_generator_warm_up_time")
 									dataItem.uid: settingsBindPrefix + "/WarmUpTime"
+									enabled: capabilities.value & warmupCapability
+									secondaryText: enabled ? dataItem.value : "--"
 									suffix: "s"
 									decimals: 0
 									stepSize: 10
@@ -69,6 +76,8 @@ Page {
 									//% "Cool-down time"
 									text: qsTrId("page_settings_generator_cool_down_time")
 									dataItem.uid: settingsBindPrefix + "/CoolDownTime"
+									enabled: capabilities.value & warmupCapability
+									secondaryText: enabled ? dataItem.value : "--"
 									suffix: "s"
 									decimals: 0
 									stepSize: 10
@@ -78,6 +87,8 @@ Page {
 									//% "Generator stop time"
 									text: qsTrId("page_settings_generator_stop_time")
 									dataItem.uid: settingsBindPrefix + "/GeneratorStopTime"
+									enabled: capabilities.value & warmupCapability
+									secondaryText: enabled ? dataItem.value : "--"
 									suffix: "s"
 									decimals: 0
 									stepSize: 1
