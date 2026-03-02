@@ -333,6 +333,6 @@ Item {
 		value: root.activeDataSource ? root.activeDataSource.denominator : 0
 		unit: root.activeDataSource ? root.activeDataSource.displayUnit : 0
 		unitText: ""
-		precision: 0
+		decimals: 0
 	}
 }

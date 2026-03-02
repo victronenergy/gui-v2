@@ -23,7 +23,7 @@ Page {
 				stepSize: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
 						  ? 0.005
 						  : 1   // Litres, Gallons
-				decimals: Units.defaultUnitPrecision(Global.systemSettings.volumeUnit)
+				decimals: Units.defaultUnitDecimalPlaces(Global.systemSettings.volumeUnit)
 			}
 
 			ListRadioButtonGroup {

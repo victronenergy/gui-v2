@@ -14,7 +14,7 @@ BaseListItem {
 	property alias outputPhaseUidPrefix: outputTable.phaseUidPrefix
 	property alias totalInputPowerUid: inputTable.totalPowerUid
 	property alias totalOutputPowerUid: outputTable.totalPowerUid
-	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
+	property int voltDecimals: Units.defaultUnitDecimalPlaces(VenusOS.Units_Volt_AC)
 
 	implicitWidth: contentRow.implicitWidth
 	implicitHeight: contentRow.implicitHeight
@@ -30,7 +30,7 @@ BaseListItem {
 			width: (parent.width - parent.spacing) / 2
 			labelText: CommonWords.ac_in
 			model: root.phaseCount
-			voltPrecision: root.voltPrecision
+			voltDecimals: root.voltPrecision
 		}
 
 		ThreePhaseQuantityTable {
@@ -38,7 +38,7 @@ BaseListItem {
 			width: (parent.width - parent.spacing) / 2
 			labelText: CommonWords.ac_out
 			model: root.phaseCount
-			voltPrecision: root.voltPrecision
+			voltDecimals: root.voltPrecision
 		}
 	}
 }
