@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -13,11 +14,19 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItem {
-				//% "Status LEDs"
-				text: qsTrId("batterydiagnostics_status_leds")
+			ListItemControl {
+				id: statusLeds
 
-				content.children: [
+				contentItem: RowLayout {
+					spacing: statusLeds.spacing
+
+					Label {
+						//% "Status LEDs"
+						text: qsTrId("batterydiagnostics_status_leds")
+						font: statusLeds.font
+						Layout.fillWidth: true
+					}
+
 					Repeater {
 						model: [
 							{ servicePath: "/Diagnostics/LedStatus/Green", color: "#00FF00" },
@@ -30,7 +39,7 @@ Page {
 							color: modelData.color
 						}
 					}
-				]
+				}
 			}
 
 			ListText {

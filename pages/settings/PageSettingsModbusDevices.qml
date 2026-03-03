@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -39,63 +40,70 @@ Page {
 			text: qsTrId("settings_modbus_no_devices_saved")
 		}
 		model: _devices.value ? _devices.value.split(',') : []
-		delegate: ListItem {
+		delegate: ListSetting {
 			id: modbusDeviceDelegate
 
 			property int deviceNumber: index + 1
 			property var deviceInfo: modelData.split(':')
 
-			//% "Device %1"
-			text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
-			content.spacing: 30
-			content.children: [
+			contentItem: RowLayout {
+				function showRemoveDialog() {
+					Global.dialogLayer.open(removeDeviceDialog, {
+						modbusDevice: modelData,
+						description: protocol.text +" " +
+									ipAddress.text + ":" +
+									portNumber.text +
+									" (Unit " +
+									unitAddress.text +
+									")"
+				   })
+				}
+
+				spacing: modbusDeviceDelegate.spacing
+
+				Label {
+					//% "Device %1"
+					text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
+					font: modbusDeviceDelegate.font
+					Layout.fillWidth: true
+				}
 				Label {
 					id: protocol
-
-					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 					text: deviceInfo[0].toUpperCase() // eg. 'TCP'
-					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-				},
+					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
+				}
 				Label {
 					id: ipAddress
-
-					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 					text: deviceInfo[1] // IP address, eg. '192.168.21.234'
-					width: Math.max(implicitWidth, Theme.geometry_modbus_device_ip_address_width)
-				},
+					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
+				}
 				Label {
 					id: portNumber
-
-					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 					text: deviceInfo[2] // port number, eg. 502
-					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-				},
+					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
+				}
 				Label {
 					id: unitAddress
-
-					anchors.verticalCenter: !!parent ? parent.verticalCenter : undefined
 					text: deviceInfo[3] // unit address
-					width: Math.max(implicitWidth, Theme.geometry_modbus_device_protocol_width)
-				},
-				RemoveButton {
-					id: removeButton
-					visible: modbusDeviceDelegate.clickable
-					onClicked: Global.dialogLayer.open(removeDeviceDialog,
-													   {
-														   modbusDevice: modelData,
-														   description: protocol.text +" " +
-																		ipAddress.text + ":" +
-																		portNumber.text +
-																		" (Unit " +
-																		unitAddress.text +
-																		")"
-													   })
+					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
 				}
-			]
+				RemoveButton {
+					visible: modbusDeviceDelegate.clickable
+					onClicked: parent.showRemoveDialog()
+				}
+			}
+
+			background: ListSettingBackground {
+				indicatorColor: modbusDeviceDelegate.backgroundIndicatorColor
+
+				ListPressArea {
+					anchors.fill: parent
+					onClicked: modbusDeviceDelegate.contentItem.showRemoveDialog()
+				}
+			}
 
 			interactive: true
-			writeAccessLevel: VenusOS.User_AccessType_Installer
-			onClicked: removeButton.clicked()
+			Keys.onSpacePressed: modbusDeviceDelegate.contentItem.showRemoveDialog()
 		}
 	}
 

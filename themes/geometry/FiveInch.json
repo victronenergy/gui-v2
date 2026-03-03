@@ -77,25 +77,27 @@
 
     "geometry_switches_header_topMargin": 8,
 
+    "geometry_listItem_width": 752,
     "geometry_listItem_height": 48,
     "geometry_listItem_radius": 8,
     "geometry_listItem_content_horizontalMargin": 24,
     "geometry_listItem_flat_content_horizontalMargin": 16,
     "geometry_listItem_content_verticalMargin": 12,
     "geometry_listItem_content_spacing": 16,
+    "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
-    "geometry_listItem_slider_width": 490,
-    "geometry_listItem_slider_button_size": 24,
-    "geometry_listItem_slider_spacing": 14,
-    "geometry_listItem_slider_stepDivsion": 10,
     "geometry_listItem_textField_minimumWidth": 200,
     "geometry_listItem_textField_maximumWidth": 376,
 
     "geometry_listLink_qrCodeSize": 96,
 
+    "geometry_slider_text_width": 250,
+    "geometry_slider_button_size": 32,
+    "geometry_slider_spacing": 6,
+    "geometry_slider_steps": 10,
+    "geometry_slider_groove_width": 368,
     "geometry_slider_groove_height": 8,
     "geometry_slider_groove_radius": 8,
-
     "geometry_slider_indicator_width": 4,
     "geometry_slider_indicator_height": 28,
     "geometry_Slider_indicator_radius": 2,
@@ -121,10 +123,9 @@
     "geometry_spinBox_indicator_height": 64,
     "geometry_spinBox_indicator_radius": 6,
 
-    "geometry_switch_container_width": 48,
-    "geometry_switch_container_height": 24,
     "geometry_switch_groove_width": 44,
     "geometry_switch_groove_height": 20,
+    "geometry_switch_groove_radius": 24,
     "geometry_switch_groove_border_width": 2,
     "geometry_switch_indicator_width": 28,
     "geometry_switch_indicator_shadowOffset": 2,
@@ -474,7 +475,8 @@
     "geometry_settings_breadcrumb_topMargin": 9,
     "geometry_settingsListHeader_topPadding": 8,
     "geometry_settingsListHeader_bottomPadding": 2,
-    "geometry_settingsListNavigation_height": 64,
+    "geometry_settingsListNavigation_verticalPadding": 8,
+    "geometry_listNavigation_secondaryText_minimumWidth": 200,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
@@ -484,9 +486,7 @@
 
     "geometry_loadListPage_item_height": 68,
 
-    "geometry_settings_battery_rangeSlider_labelWidth": 70,
-
-    "geometry_veBusAlarm_minimumDelegateWidth": 120,
+    "geometry_rangeSlider_labelWidth": 70,
 
     "geometry_modbus_device_protocol_width": 40,
     "geometry_modbus_device_ip_address_width": 150,

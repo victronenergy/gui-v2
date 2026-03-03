@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-BaseListItem {
+Rectangle {
 	id: root
 
 	property alias title: header.text
@@ -23,10 +23,15 @@ BaseListItem {
 			? (width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
 			: Theme.geometry_levelsPage_environment_gauge_width
 
-	background.color: Theme.color_levelsPage_environment_panel_background
-	background.radius: Theme.geometry_levelsPage_panel_radius
-	background.border.width: Theme.geometry_levelsPage_panel_border_width
-	background.border.color: Theme.color_levelsPage_panel_border_color
+	color: Theme.color_levelsPage_environment_panel_background
+	radius: Theme.geometry_levelsPage_panel_radius
+	border.width: Theme.geometry_levelsPage_panel_border_width
+	border.color: Theme.color_levelsPage_panel_border_color
+
+	// Allow key navigation to this item.
+	focus: true
+	focusPolicy: Qt.TabFocus
+	KeyNavigationHighlight.active: root.activeFocus
 
 	Behavior on height {
 		enabled: root.animationEnabled

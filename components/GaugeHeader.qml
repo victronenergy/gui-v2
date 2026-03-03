@@ -9,17 +9,11 @@ import Victron.VenusOS
 Rectangle {
 	property alias text: titleLabel.text
 	property alias textColor: titleLabel.color
+
 	width: parent.width
 	height: Theme.geometry_levelsPage_panel_header_height
-	radius: Theme.geometry_levelsPage_panel_radius
-
-	// Asymmetrical rounding: don't round rectangle on top-left and top-right corners
-	Rectangle {
-		anchors.bottom: parent.bottom
-		width: parent.width
-		height: parent.radius
-		color: parent.color
-	}
+	topLeftRadius: Theme.geometry_levelsPage_panel_radius
+	topRightRadius: Theme.geometry_levelsPage_panel_radius
 
 	Label {
 		id: titleLabel

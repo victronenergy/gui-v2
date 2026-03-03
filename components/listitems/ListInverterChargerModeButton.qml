@@ -16,23 +16,37 @@ ListButton {
 	secondaryText: device.serviceType !== "inverter" || isInverterChargerItem.value === 1
 			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
 			: Global.inverterChargers.inverterModeToText(modeItem.value)
-
-	button.showEnabled: modeAdjustable
+	interactive: modeAdjustable
 	writeAccessLevel: VenusOS.User_AccessType_User
 
-	onClicked: {
-		if (!modeAdjustable) {
-			if (dmc.valid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.notAdjustableDueToDmc(device.serviceType, device.name))
-			} else if (bmsMode.valid) {
-				Global.showToastNotification(VenusOS.Notification_Info, CommonWords.notAdjustableDueToBms(device.serviceType, device.name))
-			} else {
-				//% "The mode is fixed in the system configuration. It cannot be adjusted."
-				Global.showToastNotification(VenusOS.Notification_Info, qsTrId("inverter_mode_not_adjustable"))
-			}
-			return
-		}
+	// When the button is not clickable, show a toast notification if the user clicks the item.
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+		focus: !root.modeAdjustable
 
+		KeyNavigationHighlight.active: root.activeFocus
+		Keys.onSpacePressed: modeFixedPressArea.clicked(null)
+
+		MouseArea {
+			id: modeFixedPressArea
+
+			anchors.fill: parent
+			enabled: !root.modeAdjustable
+			onClicked: {
+				if (dmc.valid) {
+					Global.showToastNotification(VenusOS.Notification_Info, CommonWords.notAdjustableDueToDmc(device.serviceType, device.name))
+				} else if (bmsMode.valid) {
+					Global.showToastNotification(VenusOS.Notification_Info, CommonWords.notAdjustableDueToBms(device.serviceType, device.name))
+				} else {
+					//% "The mode is fixed in the system configuration. It cannot be adjusted."
+					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("inverter_mode_not_adjustable"))
+				}
+			}
+		}
+	}
+
+	onClicked: {
 		Global.dialogLayer.open(modeDialogComponent, { mode: modeItem.value })
 	}
 
