@@ -88,7 +88,7 @@ Item {
 			}
 		}
 
-		QuantityLabel {
+		IOChannelQuantityLabel {
 			id: quantityLabel
 
 			anchors {
@@ -96,10 +96,9 @@ Item {
 				rightMargin: Theme.geometry_valueIndicator_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
+			ioChannel: root.genericInput
 			unit: Global.systemSettings.temperatureUnit
 			value: Units.convert(root.genericInput.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-			precision: root.genericInput.decimals
-			font.pixelSize: Theme.font_size_body2
 		}
 	}
 }

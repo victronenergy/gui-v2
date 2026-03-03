@@ -62,6 +62,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/IconButton.qml
     components/InputPanel.qml
     components/InverterAcOutSettings.qml
+    components/IOChannelQuantityLabel.qml
     components/Led.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml

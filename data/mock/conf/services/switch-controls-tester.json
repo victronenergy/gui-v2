@@ -49,6 +49,17 @@
         "/GenericInput/ranged_1/Settings/RangeMax": 50,
         "/GenericInput/ranged_1/Status": 0,
 
+        "/GenericInput/ranged_2/Name": "In-02b. Ranged, custom unit",
+        "/GenericInput/ranged_2/Value": 10.234,
+        "/GenericInput/ranged_2/Settings/CustomName": "",
+        "/GenericInput/ranged_2/Settings/Group": "",
+        "/GenericInput/ranged_2/Settings/ShowUIInput": 1,
+        "/GenericInput/ranged_2/Settings/Type": 2,
+        "/GenericInput/ranged_2/Settings/ValidTypes": 15,
+        "/GenericInput/ranged_2/Settings/Decimals": 1,
+        "/GenericInput/ranged_2/Settings/Unit": "Foo",
+        "/GenericInput/ranged_2/Status": 0,
+
         "/GenericInput/temp_1/Name": "In-03a. Temperature",
         "/GenericInput/temp_1/Value": 54.321,
         "/GenericInput/temp_1/Settings/CustomName": "",
