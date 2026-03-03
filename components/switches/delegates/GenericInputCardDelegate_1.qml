@@ -57,7 +57,7 @@ Item {
 			elide: Text.ElideRight
 		}
 
-		QuantityLabel {
+		IOChannelQuantityLabel {
 			id: quantityLabel
 
 			anchors {
@@ -65,11 +65,8 @@ Item {
 				rightMargin: Theme.geometry_valueIndicator_horizontalMargin
 				verticalCenter: parent.verticalCenter
 			}
+			ioChannel: root.genericInput
 			value: valueItem.value
-			unit: Global.systemSettings.toPreferredUnit(root.genericInput.unitType)
-			precision: root.genericInput.decimals
-			font.pixelSize: Theme.font_size_body2
-			precisionAdjustmentAllowed: false // Always respect the decimals setting
 
 			VeQuickItem {
 				id: valueItem
