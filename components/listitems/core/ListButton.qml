@@ -14,7 +14,7 @@ ListSetting {
 	id: root
 
 	property string secondaryText
-	property int secondaryFontSize: Theme.font_size_body2
+	property int secondaryFontSize: Theme.font_listItem_secondary_size
 
 	signal clicked
 
@@ -45,13 +45,14 @@ ListSetting {
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
-				wrapMode: Text.Wrap
+				wrapMode: Text.WordWrap
 
 				Layout.fillWidth: true
 			}
 
 			Label {
 				text: root.caption
+				font.pixelSize: Theme.font_listItem_caption_size
 				color: Theme.color_font_secondary
 				wrapMode: Text.Wrap
 				visible: text.length > 0

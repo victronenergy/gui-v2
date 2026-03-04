@@ -20,5 +20,5 @@ Label {
 	leftPadding: Theme.geometry_listItem_content_horizontalMargin
 	rightPadding: Theme.geometry_listItem_content_horizontalMargin
 	font.pixelSize: Theme.font_size_body1
-	wrapMode: Text.Wrap
+	wrapMode: Text.WordWrap
 }

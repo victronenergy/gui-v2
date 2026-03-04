@@ -63,28 +63,36 @@ ListSetting {
 	interactive: (firstDataItem.uid === "" || firstDataItem.valid) &&
 				 (secondDataItem.uid === "" || secondDataItem.valid)
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Slider |
-	// | Caption                |
+	// Landscape layout is:
+	// | Primary label | Slider (fill width) |
+	// | Caption                             |
+	//
+	// Portrait layout is:
+	// | Primary label |
+	// | Slider        |
+	// | Caption       |
 	contentItem: FocusScope {
+		implicitHeight: gridLayout.height
+
 		GridLayout {
-			anchors.fill: parent
-			columns: 2
+			id: gridLayout
+
+			width: parent.width
+			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 			columnSpacing: 0
 			rowSpacing: 0 // not needed, as padding is added below the label
 
 			Label {
 				// Since the root top/bottomPadding is 0, need to add some padding here.
 				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.geometry_listItem_content_verticalMargin
+				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
 				wrapMode: Text.Wrap
 				verticalAlignment: Text.AlignVCenter
 
-				// Fix the label width; the slider fills the rest of the horizontal area.
-				Layout.preferredWidth: Theme.geometry_slider_text_width
+				Layout.fillWidth: true
 			}
 
 			RangeSlider {
@@ -109,6 +117,7 @@ ListSetting {
 				// Expand the vertical touch area, to make it easier to click.
 				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
 				Layout.fillWidth: true
+				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
 
 				// Update data value when mouse is released, to avoid spamming data changes.
 				// If the value is linked to the backend, then update the backend value; otherwise,

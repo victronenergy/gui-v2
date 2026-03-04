@@ -32,9 +32,15 @@ ListSetting {
 	hasSubMenu: interactive
 
 	// The contentItem is a plain Item rather than a layout, so that the icon does not stretch the
-	// height of the overall item. The layout is like this:
+	// height of the overall item.
+	// Standard layout is:
 	// | Primary label | Quantity row | Icon (spans across both rows) |
 	// | Caption                      |                               |
+	//
+	// In portrait, if the label and quantity row do not fit side-by-side, use a compact layout:
+	// | Primary label | Icon (spans all rows) |
+	// | Quantity row  |                       |
+	// | Caption       |                       |
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentGrid.height
@@ -42,34 +48,44 @@ ListSetting {
 		GridLayout {
 			id: contentGrid
 
-			columns: 2
+			readonly property bool compactLayout: Theme.screenSize === Theme.Portrait
+					&& root.quantityModel?.count > 1
+					&& primaryLabel.implicitWidth + quantityRow.implicitWidth + icon.width > parent.width
+
+			anchors.verticalCenter: parent.verticalCenter
+			columns: compactLayout ? 1 : 2
+			rows: compactLayout ? 3 : 2
 			columnSpacing: root.spacing
 			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 			width: parent.width - icon.width
 
 			Label {
+				id: primaryLabel
+
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
-				wrapMode: Text.Wrap
+				wrapMode: Text.WordWrap
 
 				Layout.fillWidth: true
 			}
 
 			QuantityRow {
+				id: quantityRow
 				model: root.quantityModel
 				tableMode: root.tableMode
 
-				Layout.alignment: Qt.AlignRight
+				Layout.alignment: parent.compactLayout ? Qt.AlignLeft : Qt.AlignRight
 			}
 
 			Label {
 				text: root.caption
+				font.pixelSize: Theme.font_listItem_caption_size
 				color: Theme.color_font_secondary
 				wrapMode: Text.Wrap
 				visible: text.length > 0
 
-				Layout.columnSpan: 2
+				Layout.columnSpan: contentGrid.compactLayout ? 1 : 2
 				Layout.maximumWidth: parent.width
 			}
 		}

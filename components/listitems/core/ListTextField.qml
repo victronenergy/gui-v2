@@ -77,7 +77,7 @@ ListSetting {
 			text: root.text
 			textFormat: root.textFormat
 			font: root.font
-			wrapMode: Text.Wrap
+			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true
 		}
@@ -122,7 +122,7 @@ ListSetting {
 
 		SecondaryListLabel {
 			text: secondaryText.length > 0 ? secondaryText + root.suffix : "--"
-			wrapMode: Text.Wrap
+			wrapMode: Text.WordWrap
 			visible: !textField.visible
 			opacity: textField.echoMode === TextInput.Password ? 0 : 1
 
@@ -131,6 +131,7 @@ ListSetting {
 
 		Label {
 			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			visible: text.length > 0

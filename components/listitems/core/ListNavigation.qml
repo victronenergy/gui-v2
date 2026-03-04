@@ -31,10 +31,22 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
-	// Layout is like this:
+	// Standard layout is:
 	// | Primary label | Secondary label and icon (span across both rows) |
 	// | Caption       |                                                  |
+	//
+	// In Portrait layout, if the caption and secondary text are both set, stretch the caption to
+	// the right edge, else it looks odd if the caption text is bunched up (e.g. the 'Demo mode'
+	// setting in General setting).
+	// | Primary label | Secondary label and icon |
+	// | Caption                                  |
 	contentItem: GridLayout {
+		id: gridLayout
+
+		readonly property bool stretchCaption: Theme.screenSize === Theme.Portrait
+				&& root.caption.length > 0
+				&& root.secondaryText.length > 0
+
 		columnSpacing: root.spacing
 		rowSpacing: 0
 		columns: 2
@@ -43,7 +55,7 @@ ListSetting {
 			text: root.text
 			textFormat: root.textFormat
 			font: root.font
-			wrapMode: Text.Wrap
+			wrapMode: Text.WordWrap
 
 			Layout.fillWidth: true
 		}
@@ -52,11 +64,11 @@ ListSetting {
 			rightPadding: icon.visible ? icon.width + root.spacing : 0
 			text: root.secondaryText
 			color: root.secondaryTextColor
-			wrapMode: Text.Wrap
+			wrapMode: Text.WordWrap
 
-			Layout.rowSpan: 2
-			Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
+			Layout.rowSpan: gridLayout.stretchCaption ? 1 : 2
 			Layout.alignment: Qt.AlignRight
+			Layout.maximumWidth: root.availableWidth * 2/3
 
 			CP.ColorImage {
 				id: icon
@@ -74,12 +86,14 @@ ListSetting {
 
 		Label {
 			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			visible: text.length > 0
 
 			Layout.fillWidth: true
 			Layout.topMargin: root.captionTopMargin
+			Layout.columnSpan: gridLayout.stretchCaption ? 2 : 1
 		}
 	}
 
