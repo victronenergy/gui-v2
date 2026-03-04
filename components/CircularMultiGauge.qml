@@ -17,6 +17,8 @@ Item {
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
 	property int leftGaugeCount
+	property real longCaptionWidth: width / 2
+	property real shortCaptionWidth: width / 2
 
 	// Step change in the size of the bounding boxes of successive gauges
 	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_circularMultiGauge_spacing)
@@ -82,7 +84,6 @@ Item {
 		anchors.topMargin: strokeWidth/2
 		anchors.bottom: parent.verticalCenter
 		anchors.left: parent.left
-		anchors.leftMargin: Theme.geometry_circularMultiGauge_label_leftMargin
 		anchors.right: parent.horizontalCenter
 		anchors.rightMargin: Theme.geometry_circularMultiGauge_icon_rightMargin + gauges.labelMargin
 
@@ -92,23 +93,24 @@ Item {
 				anchors.verticalCenter: textCol.top
 				anchors.verticalCenterOffset: index * _stepSize/2
 				anchors.right: parent.right
-				anchors.rightMargin: Math.max(0, Theme.geometry_circularMultiGauge_icons_maxWidth - iconImage.width)
+
+				// With three gauges on the left there is a risk that the last labels on
+				// on the multi-gauge overlap with the labels on the top-left gauge.
+				//
+				// Increase the space for the two top-most labels or if there are less left gauges.
+				width: (model.index < 2 || gauges.leftGaugeCount < 3 ? gauges.longCaptionWidth : gauges.shortCaptionWidth)
 				height: iconImage.height
 
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					rightPadding: Theme.geometry_circularMultiGauge_label_rightMargin
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: valueLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
+					font.pixelSize: valueLabel.visible
+							? valueLabel.font.pixelSize
+							: Theme.font_circularMultiGauge_label_largeSize
 					color: Theme.color_font_primary
 					text: model.name
-
-					// With three gauges on the left there is a risk that the last labels on
-					// on the multi-gauge overlap with the labels on the top-left gauge.
-					//
-					// Increase the space for the two top-most labels or if there are less left gauges.
-					width: textCol.width - valueLabel.width - iconImage.width
-						+ (model.index < 2 || gauges.leftGaugeCount < 3 ? Theme.geometry_circularMultiGauge_label_extraWidth : 0)
+					width: parent.width - valueLabel.width - iconImage.width
 					elide: Text.ElideRight
 				}
 
@@ -117,7 +119,7 @@ Item {
 					anchors.verticalCenter: parent.verticalCenter
 					rightPadding: Theme.geometry_circularMultiGauge_value_rightMargin
 					horizontalAlignment: Text.AlignRight
-					font.pixelSize: Theme.font_size_body1
+					font.pixelSize: Theme.font_circularMultiGauge_label_smallSize
 					color: Theme.color_font_primary
 					visible: false
 
