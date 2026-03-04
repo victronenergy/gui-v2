@@ -335,6 +335,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 
     pages/AuxCardsPage.qml
     pages/BriefSidePanel.qml
+    pages/BriefPage_Landscape.qml
+    pages/BriefPage_Portrait.qml
     pages/BriefPage.qml
     pages/ControlCardsPage.qml
     pages/DialogLayer.qml
