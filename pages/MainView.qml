@@ -10,8 +10,6 @@ FocusScope {
 	id: root
 
 	readonly property alias pageManager: pageManager
-	readonly property alias navBar: navBar
-
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
@@ -219,7 +217,7 @@ FocusScope {
 			y: root.height + 4  // nudge below the visible area for wasm
 			backgroundColor: root.backgroundColor
 			opacity: 0
-			model: swipeView ? swipeView.contentModel : null
+			pages: swipePageModel.pages
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
 			focus: true

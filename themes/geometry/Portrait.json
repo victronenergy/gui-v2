@@ -153,6 +153,7 @@
     "geometry_tankShapeSelector_spinBox_width": 262,
     "geometry_tankShapeSelector_spinBox_height": 72,
 
+    "geometry_navigationBar_horizontalMargin": 0,
     "geometry_navigationBar_initialize_margin": 12,
     "geometry_navigationBar_height": 72,
     "geometry_navigationBar_button_height": 64,
