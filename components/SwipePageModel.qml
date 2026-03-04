@@ -7,18 +7,15 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property list<SwipeViewPage> pages: showBoatPage && showLevelsPage
-					&& boatPageLoader.item && briefPageLoader.item && levelsPageLoader.item ?
-			[ boatPageLoader.item, briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: showBoatPage && boatPageLoader.item && briefPageLoader.item ?
-			[ boatPageLoader.item, briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
-		: showLevelsPage && boatPageLoader.item && briefPageLoader.item ?
-			[ briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: !!briefPageLoader.item ?
-			[ briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
-		: []
+	readonly property list<SwipeViewPage> pages: showBoatPage && showLevelsPage ?
+			[ boatPage, briefPage, overviewPage, levelsPage, notificationsPage, settingsPage ]
+		: showBoatPage && boatPage && briefPage ?
+			[ boatPage, briefPage, overviewPage, notificationsPage, settingsPage ]
+		: showLevelsPage && boatPage && briefPage ?
+			[ briefPage, overviewPage, levelsPage, notificationsPage, settingsPage ]
+		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
 	readonly property bool showLevelsPage: tankCount > 0 || environmentInputCount > 0
-	readonly property bool showBoatPage: boatPageLoader.showBoatPageItem.value
+	readonly property bool showBoatPage: showBoatPageItem.value ?? false
 	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
 	readonly property int environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
 
@@ -33,51 +30,19 @@ ObjectModel {
 		  : pages.length === 4
 	property bool _completed: false
 
-	Loader {
-		id: boatPageLoader
+	Boat.BoatPage {
+		id: boatPage
+		view: root.view
 
-		active: root.showBoatPage
-		sourceComponent: Theme.screenSize === Theme.Portrait ? boatPagePortrait : boatPageLandscape
-
-		readonly property Component boatPageLandscape: Component {
-			Boat.BoatPage {
-				view: root.view
-			}
-		}
-
-		readonly property Component boatPagePortrait: Component {
-			Boat.BoatPage_Portrait {
-				view: root.view
-			}
-		}
-
-		readonly property VeQuickItem showBoatPageItem: VeQuickItem {
+		VeQuickItem {
+			id: showBoatPageItem
 			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
 		}
 	}
 
-	Loader {
-		id: briefPageLoader
-
-		sourceComponent: Theme.screenSize === Theme.Portrait ? briefPagePortrait : briefPageLandscape
-
-		readonly property Component briefPageLandscape: BriefPage {
-			view: root.view
-			Image {
-				width: status === Image.Null ? 0 : Theme.geometry_screen_width
-				fillMode: Image.PreserveAspectFit
-				source: BackendConnection.demoImageFileName
-				onStatusChanged: {
-					if (status === Image.Ready) {
-						console.info("Loaded demo image:", source)
-					}
-				}
-			}
-		}
-
-		readonly property Component briefPagePortrait: BriefPage_Portrait {
-			view: root.view
-		}
+	BriefPage {
+		id: briefPage
+		view: root.view
 	}
 
 	OverviewPage {
@@ -85,17 +50,9 @@ ObjectModel {
 		view: root.view
 	}
 
-	Loader {
-		id: levelsPageLoader
-
-		active: root.showLevelsPage
-		sourceComponent: landscapeLevelsPage
-
-		readonly property Component landscapeLevelsPage: Component {
-			LevelsPage {
-				view: root.view
-			}
-		}
+	LevelsPage {
+		id: levelsPage
+		view: root.view
 	}
 
 	NotificationsPage {

@@ -28,9 +28,12 @@ FocusScope {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: Global.animationEnabled
-									   && mainViewVisible
-									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
+	readonly property bool allowPageAnimations: Global.animationEnabled
+			&& Global.allPagesLoaded
+			&& !Theme.adjustingGeometry
+			&& mainViewVisible
+			&& !pageStack.animating
+			&& (!swipeView || !swipeView.flicking)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -191,6 +194,7 @@ FocusScope {
 					onReadyChanged: if (ready) ready = true // remove binding
 
 					anchors.fill: parent
+					animationEnabled: root.allowPageAnimations
 					focus: true
 					contentChildren: swipePageModel.pages
 

@@ -28,6 +28,7 @@ class Theme : public QObject
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
 	Q_PROPERTY(int geometry_screen_width READ geometry_screen_width WRITE setGeometry_screen_width NOTIFY geometry_screen_widthChanged FINAL)
 	Q_PROPERTY(int geometry_screen_height READ geometry_screen_height WRITE setGeometry_screen_height NOTIFY geometry_screen_heightChanged FINAL)
+	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -89,6 +90,7 @@ public:
 	Q_INVOKABLE bool windowIsLandscape() const;
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
+	bool adjustingGeometry() const;
 	QString applicationVersion() const;
 
 Q_SIGNALS:
@@ -101,14 +103,18 @@ Q_SIGNALS:
 	void forcedColorSchemeChanged(Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme);
 	void geometry_screen_widthChanged();
 	void geometry_screen_heightChanged();
+	void adjustingGeometryChanged();
 
 protected:
+	void setAdjustingGeometry(bool adjusting);
+
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
 	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
 	int m_screenWidth = 0;
 	int m_screenHeight = 0;
+	bool m_adjustingGeometry = false;
 };
 
 }
