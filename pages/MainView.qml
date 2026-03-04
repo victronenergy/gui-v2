@@ -11,13 +11,15 @@ FocusScope {
 
 	readonly property alias pageManager: pageManager
 	readonly property alias navBar: navBar
-	readonly property alias statusBar: statusBar
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready ? cardsLoader.item
 			: pageStack.currentPage ?? swipeView?.currentItem ?? null
 	readonly property alias cardsLoader: cardsLoader
+
+	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
+			&& (Global.notifications?.silenceAlarmVisible ?? false)
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -37,6 +39,7 @@ FocusScope {
 	property SwipeView swipeView: swipeViewLoader.item
 
 	property int _loadedPages: 0
+	readonly property alias _pageStack: pageStack
 
 	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload
 			&& swipeViewLoader.readyToLoad
@@ -394,47 +397,40 @@ FocusScope {
 	StatusBar {
 		id: statusBar
 
-		pageStack: pageStack
-		title: !!root.currentPage ? root.currentPage.title || "" : ""
-		leftButton: {
-			const customButton = !!root.currentPage ? root.currentPage.topLeftButton : VenusOS.StatusBar_LeftButton_None
-			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
-				return VenusOS.StatusBar_LeftButton_Back
-			}
-			return customButton
-		}
-		rightButton: !!root.currentPage ? root.currentPage.topRightButton : VenusOS.StatusBar_RightButton_None
-		animationEnabled: Global.animationEnabled
-		backgroundColor: root.backgroundColor
+		width: parent.width
 
-		onLeftButtonClicked: {
-			switch (leftButton) {
-			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				cardsLoader.show(controlCardsComponent)
-				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				cardsLoader.hide()
-				break;
-			case VenusOS.StatusBar_LeftButton_Back:
-				pageManager.popPage()
-				break
-			default:
-				break
-			}
+		opacity: 0.0
+		pageStack: root._pageStack
+
+		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
+		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onCardsDeactivated: cardsLoader.hide()
+		onSidePanelToggled: root.currentPage.toggleSidePanel()
+
+		Component.onCompleted: if (!Global.animationEnabled) { root.opacity = 1.0 }
+
+		Rectangle {
+			anchors.fill: parent
+			color: cardsLoader.statusBarBackgroundColor
 		}
 
-		onAuxButtonClicked: {
-			if (root.cardsActive) {
-				cardsLoader.hide()
-			} else {
-				cardsLoader.show(auxCardsComponent)
+		SequentialAnimation {
+			running: !Global.splashScreenVisible && Global.animationEnabled
+
+			PauseAnimation {
+				duration: Theme.animation_statusBar_initialize_delayedStart_duration
+			}
+			OpacityAnimator {
+				target: statusBar
+				from: 0.0
+				to: 1.0
+				duration: Theme.animation_statusBar_initialize_fade_duration
 			}
 		}
 
-		onPopToPage: function(toPage) {
-			pageManager.popPage(toPage)
-		}
-
+		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
+				: pageStack.opened ? pageStack
+				: swipeViewAndNavBarContainer
 		onActiveFocusChanged: {
 			// If the key navigation moves downwards from the StatusBar to the SwipeView, suggest to
 			// the SwipeView that it should focus the top-most item in the page.
@@ -442,10 +438,6 @@ FocusScope {
 				root.swipeView.focusEdgeHint = Qt.TopEdge
 			}
 		}
-
-		KeyNavigation.down: cardsLoader.enabled ? cardsLoader
-				: pageStack.opened ? pageStack
-				: swipeViewAndNavBarContainer
 	}
 
 	GlobalKeyNavigationHighlight {
