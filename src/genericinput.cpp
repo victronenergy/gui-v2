@@ -15,11 +15,13 @@ using namespace Victron::VenusOS;
 GenericInput::GenericInput(QObject *parent)
 	: IOChannel(IOChannel::Input, parent)
 {
+	connect(this, &IOChannel::unitTypeChanged, this, &GenericInput::updatePrimaryLabel);
 }
 
 GenericInput::GenericInput(QObject *parent, VeQItem *inputItem)
 	: IOChannel(IOChannel::Input, parent)
 {
+	connect(this, &IOChannel::unitTypeChanged, this, &GenericInput::updatePrimaryLabel);
 	initialize(inputItem);
 }
 
@@ -65,6 +67,7 @@ void GenericInput::initialize(VeQItem *inputItem)
 
 		m_showUIInput.clear();
 		updateAllowedInGroupModel();
+		updatePrimaryLabel();
 	}
 }
 
@@ -147,8 +150,35 @@ QString GenericInput::primaryLabel() const
 
 void GenericInput::setPrimaryLabel(const QVariant &variant)
 {
-	m_primaryLabel = variant.toString();
-	emit primaryLabelChanged();
+	m_rawPrimaryLabel = variant.toString();
+	updatePrimaryLabel();
+}
+
+void GenericInput::updatePrimaryLabel()
+{
+	const QString prevLabel = m_primaryLabel;
+
+	switch (unitType()) {
+	case Enums::Units_Speed_MetresPerSecond:
+		//% "Speed"
+		m_primaryLabel = qtTrId("generic_input_primaryLabel_speed");
+		break;
+	case Enums::Units_Temperature_Celsius:
+		//% "Temperature"
+		m_primaryLabel = qtTrId("generic_input_primaryLabel_temperature");
+		break;
+	case Enums::Units_Volume_CubicMetre:
+		//% "Volume"
+		m_primaryLabel = qtTrId("generic_input_primaryLabel_volume");
+		break;
+	default:
+		m_primaryLabel = m_rawPrimaryLabel;
+		break;
+	}
+
+	if (prevLabel != m_primaryLabel) {
+		emit primaryLabelChanged();
+	}
 }
 
 qreal GenericInput::rangeMin() const

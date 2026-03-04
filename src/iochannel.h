@@ -32,7 +32,7 @@ namespace VenusOS {
 	Units
 	-----
 
-	The /Settings/Unit value may be one of these special strings:
+	The /Settings/Unit value may be one of these reserved keywords:
 	  "/Speed" (speed - metres/sec)
 	  "/Temperature" (temperature - celsius)
 	  "/Volume" (volume - m3)

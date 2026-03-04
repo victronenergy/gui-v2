@@ -36,6 +36,17 @@
         "/GenericInput/unranged_1/Settings/Unit": "/Volume",
         "/GenericInput/unranged_1/Status": 1,
 
+        "/GenericInput/unranged_2/Name": "In-01b. Unranged, reserved unit",
+        "/GenericInput/unranged_2/Value": 10.234,
+        "/GenericInput/unranged_2/Settings/CustomName": "",
+        "/GenericInput/unranged_2/Settings/Group": "",
+        "/GenericInput/unranged_2/Settings/ShowUIInput": 1,
+        "/GenericInput/unranged_2/Settings/Type": 1,
+        "/GenericInput/unranged_2/Settings/ValidTypes": 15,
+        "/GenericInput/unranged_2/Settings/Decimals": 3,
+        "/GenericInput/unranged_2/Settings/Unit": "/Speed",
+        "/GenericInput/unranged_2/Status": 1,
+
         "/GenericInput/ranged_1/Name": "In-02a. Ranged",
         "/GenericInput/ranged_1/Value": 10.234,
         "/GenericInput/ranged_1/Settings/CustomName": "",

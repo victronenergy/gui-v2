@@ -107,19 +107,6 @@ TestCase {
 			},
 
 			{
-				tag: "primaryLabel - invalid",
-				uid: "mock/com.victronenergy.test.a/GenericInput/0",
-				inputProperties: { "Name": "Foo" },
-				expected: { primaryLabel: "" },
-			},
-			{
-				tag: "primaryLabel - valid",
-				uid: "mock/com.victronenergy.test.a/GenericInput/0",
-				inputProperties: { "Settings/PrimaryLabel": "Temperature" },
-				expected: { primaryLabel: "Temperature" },
-			},
-
-			{
 				tag: "rangeMin - invalid",
 				uid: "mock/com.victronenergy.test.a/GenericInput/0",
 				inputProperties: { "Name": "Foo" }, // min not set
@@ -664,6 +651,53 @@ TestCase {
 		setInputProperties(data.uid, data.inputProperties)
 		input.uid = data.uid
 		compare(input.textValue, data.textValue)
+
+		// Clean up
+		input.uid = ""
+		MockManager.removeValue(data.uid)
+	}
+
+	function test_primaryLabel_data() {
+		return [
+			{
+				tag: "no primaryLabel",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Name": "Foo" },
+				primaryLabel: "",
+			},
+			{
+				tag: "custom",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Settings/PrimaryLabel": "A" },
+				primaryLabel: "A",
+			},
+			{
+				tag: "reserved - speed",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Settings/Unit": "/Speed" },
+				primaryLabel: qsTrId("generic_input_primaryLabel_speed"),
+			},
+			{
+				tag: "reserved - temp",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Settings/Unit": "/Temperature" },
+				primaryLabel: qsTrId("generic_input_primaryLabel_temperature"),
+			},
+			{
+				tag: "reserved - volume",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Settings/Unit": "/Volume" },
+				primaryLabel: qsTrId("generic_input_primaryLabel_volume"),
+			},
+		]
+	}
+
+	function test_primaryLabel(data) {
+		compare(input.primaryLabel, "")
+
+		setInputProperties(data.uid, data.inputProperties)
+		input.uid = data.uid
+		compare(input.primaryLabel, data.primaryLabel)
 
 		// Clean up
 		input.uid = ""

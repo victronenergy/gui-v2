@@ -37,6 +37,13 @@ namespace VenusOS {
 
 	If a label starts with a '/' character, this indicates it is a reserved keyboard for which
 	GenericInput will automatically provide a translated string.
+
+	PrimaryLabel
+	------------
+
+	The GenericInput::primaryLabel property returns the value of /Settings/PrimaryLabel. When
+	/Settings/Unit is set to a reserved keyword ("/Speed", "/Temperature" or "/Volume"), the
+	primaryLabel property returns a translated "Speed", "Temperature" or "Volume" string instead.
 */
 class GenericInput : public IOChannel
 {
@@ -84,10 +91,12 @@ private:
 	void setRangeMin(const QVariant &variant);
 	void setRangeMax(const QVariant &variant);
 	void updateTextValue();
+	void updatePrimaryLabel();
 
 	QVariant m_showUIInput;
 	QStringList m_labels;
 	QString m_textValue;
+	QString m_rawPrimaryLabel;
 	QString m_primaryLabel;
 	qreal m_value;
 	qreal m_rangeMin = 0;
