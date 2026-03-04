@@ -77,6 +77,7 @@ Victron::VenusOS::Theme::ScreenSize Theme::screenSize() const
 void Theme::setScreenSize(Victron::VenusOS::Theme::ScreenSize size)
 {
 	if (m_screenSize != size) {
+		setAdjustingGeometry(true);
 		m_screenSize = size;
 
 		switch (size) {
@@ -96,6 +97,7 @@ void Theme::setScreenSize(Victron::VenusOS::Theme::ScreenSize size)
 
 		Q_EMIT screenSizeChanged(size);
 		Q_EMIT screenSizeChanged_parameterless(); // work around moc limitation.
+		setAdjustingGeometry(false);
 	}
 }
 
@@ -159,8 +161,11 @@ int Theme::geometry_screen_width() const
 void Theme::setGeometry_screen_width(int width)
 {
 	if (m_screenWidth != width) {
+		const bool wasAdjusting = adjustingGeometry();
+		setAdjustingGeometry(true);
 		m_screenWidth = width;
 		Q_EMIT geometry_screen_widthChanged();
+		setAdjustingGeometry(wasAdjusting);
 	}
 }
 
@@ -172,8 +177,24 @@ int Theme::geometry_screen_height() const
 void Theme::setGeometry_screen_height(int height)
 {
 	if (m_screenHeight != height) {
+		const bool wasAdjusting = adjustingGeometry();
+		setAdjustingGeometry(true);
 		m_screenHeight = height;
 		Q_EMIT geometry_screen_heightChanged();
+		setAdjustingGeometry(wasAdjusting);
+	}
+}
+
+bool Theme::adjustingGeometry() const
+{
+	return m_adjustingGeometry;
+}
+
+void Theme::setAdjustingGeometry(bool adjusting)
+{
+	if (m_adjustingGeometry != adjusting) {
+		m_adjustingGeometry = adjusting;
+		Q_EMIT adjustingGeometryChanged();
 	}
 }
 
