@@ -137,7 +137,7 @@ QtObject {
 			}
 		} else {
 			// If a main page is currently shown, then cycle through the main pages in the nav bar.
-			navBar.setCurrentIndex(Utils.modulo(navBar.currentIndex + 1, navBar.model.count))
+			navBar.setCurrentIndex(Utils.modulo(navBar.currentIndex + 1, navBar.pages.length))
 		}
 	}
 

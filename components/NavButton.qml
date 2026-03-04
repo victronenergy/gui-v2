@@ -14,8 +14,8 @@ Button {
 	spacing: Theme.geometry_navigationBar_button_spacing
 	display: Button.TextUnderIcon
 	radius: 0
-
 	color: down
 		   ? Theme.color_navigationBar_button_on
 		   : Theme.color_navigationBar_button_off
+	font.pixelSize: Theme.font_navigationButton_size
 }
