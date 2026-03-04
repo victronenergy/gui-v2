@@ -52,12 +52,13 @@ Column {
 
 		Label {
 			// Keep the name bounding box inside the circle to avoid truncation
-			width: Math.min(implicitWidth, 0.8 * (root.width - icon.width))
+			width: Math.min(implicitWidth, 0.6 * (root.width - icon.width))
 			anchors.verticalCenter: icon.verticalCenter
-			font.pixelSize: Theme.font_size_body2
+			minimumPixelSize: Theme.font_briefPage_battery_title_minimumPixelSize
+			font.pixelSize: Theme.font_briefPage_battery_title_maximumPixelSize
 			color: Theme.color_font_primary
 			text: root._useTemperature ? CommonWords.temperature : CommonWords.battery
-			elide: Text.ElideRight
+			fontSizeMode: Text.HorizontalFit
 		}
 	}
 

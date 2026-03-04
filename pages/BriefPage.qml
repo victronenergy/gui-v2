@@ -16,7 +16,7 @@ SwipeViewPage {
 	title: CommonWords.brief_page
 	iconSource: "qrc:/images/brief.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
-	backgroundColor: Theme.color_briefPage_background
+	backgroundColor: Theme.screenSize === Theme.Portrait ? Theme.color_page_background : Theme.color_briefPage_background
 	fullScreenWhenIdle: true
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	topRightButton: pageLoader.item?.topRightButton ?? VenusOS.StatusBar_RightButton_None
@@ -29,6 +29,19 @@ SwipeViewPage {
 		id: centralGaugeModel
 	}
 
+	CpuInfo {
+		enabled: root.isCurrentPage && pageLoader.item?.graphsOpened
+		upperLimit: 90
+		lowerLimit: 50
+		onOverLimitChanged: {
+			if (overLimit) {
+				//% "System load high, hiding graphs to reduce CPU load"
+				Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("brief_close_graphs_high_cpu"))
+				pageLoader.item.closeGraphs()
+			}
+		}
+	}
+
 	Loader {
 		id: pageLoader
 		anchors.fill: parent
@@ -38,7 +51,6 @@ SwipeViewPage {
 			id: briefPageLandscape
 
 			BriefPage_Landscape {
-				isCurrentPage: root.isCurrentPage
 				animationEnabled: root.animationEnabled
 				showSidePanel: root.showSidePanel
 				gaugeModel: centralGaugeModel
@@ -61,6 +73,7 @@ SwipeViewPage {
 
 			BriefPage_Portrait {
 				animationEnabled: root.animationEnabled
+				gaugeModel: centralGaugeModel
 			}
 		}
 	}

@@ -132,8 +132,8 @@
     "color_boatPage_background": "color_gray9",
 
     "color_briefPage_background": "color_gray9",
-    "color_briefPage_battery_value_text_color": "color_gray2",
-    "color_briefPage_battery_unit_text_color": "color_gray3",
+    "color_briefPage_battery_value_text_color": "color_gray4",
+    "color_briefPage_battery_unit_text_color": "color_gray5",
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
 

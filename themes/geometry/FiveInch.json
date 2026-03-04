@@ -202,15 +202,13 @@
     "geometry_progressArc_strokeWidth": 8,
 
     "geometry_mainGauge_size": 320,
+    "geometry_mainGauge_padding": 30,
 
     "geometry_circularMultiGauge_strokeWidth": 16,
     "geometry_circularMultiGauge_spacing": 16,
-    "geometry_circularMultiGauge_label_leftMargin": -20,
     "geometry_circularMultiGauge_label_rightMargin": 4,
     "geometry_circularMultiGauge_value_rightMargin": 2,
     "geometry_circularMultiGauge_icon_rightMargin": 12,
-    "geometry_circularMultiGauge_icons_maxWidth": 18,
-    "geometry_circularMultiGauge_label_extraWidth": 112,
 
     "geometry_circularSingularGauge_strokeWidth": 16,
 
@@ -225,7 +223,7 @@
     "geometry_briefPage_centerGauge_centerText_horizontalSpacing": 8,
     "geometry_briefPage_edgeGauge_horizontalMargin": "geometry_page_content_horizontalMargin",
     "geometry_briefPage_edgeGauge_radius": 360,
-    "geometry_briefPage_edgeGauge_width": 60,
+    "geometry_briefPage_edgeGauge_width": 80,
     "geometry_briefPage_edgeGauge_spacing": 16,
     "geometry_briefPage_edgeGauge_spacingAngle": 3,
     "geometry_briefPage_edgeGauge_quantityLabel_spacing": 2,
@@ -253,11 +251,12 @@
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
     "geometry_sidePanel_sideWidget_width": 122,
+    "geometry_sidePanel_sideWidget_horizontalMargin": 0,
+    "geometry_sidePanel_sideWidget_verticalMargin": 0,
     "geometry_sidePanel_sideWidget_bottomMargin": 4,
-    "geometry_sidePanel_quantityLabel_bottomMargin": 2,
-    "geometry_sidePanel_verticalMargin": 8,
-    "geometry_sidePanel_solar_graph_bar_count": 7,
-    "geometry_sidePanel_solar_graph_bar_spacing": 8,
+    "geometry_sidePanel_sideWidget_spacing": 16,
+    "geometry_sidePanel_quantityLabel_bottomMargin": 4,
+    "geometry_sidePanel_spacing": 14,
 
     "geometry_acInputDirectionIcon_rightMargin": 2,
 
@@ -333,7 +332,7 @@
 
     "geometry_overviewPage_layout_expanded_bottomMargin": 24,
 
-    "geometry_overviewPage_widget_solar_graph_bar_count": 10,
+    "geometry_overviewPage_widget_solar_graph_bar_spacing": 4,
     "geometry_overviewPage_widget_solar_graph_bar_width": 10,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 12,

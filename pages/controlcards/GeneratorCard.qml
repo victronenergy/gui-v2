@@ -25,8 +25,7 @@ ControlCard {
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_contentMargins
-			top: parent.status.top
-			topMargin: parent.status.font.pixelSize - fontSize
+			baseline: parent.status.baseline
 		}
 		generator: generator
 	}
