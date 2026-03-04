@@ -11,78 +11,27 @@ FocusScope {
 	id: root
 
 	required property PageStack pageStack
-	property string title
-	property alias backgroundColor: backgroundRect.color
 
-	property int leftButton: VenusOS.StatusBar_LeftButton_None
-	property int rightButton: VenusOS.StatusBar_RightButton_None
-	readonly property bool notificationButtonsEnabled: Global.mainView.currentPage && !!Global.mainView.currentPage.url && Global.mainView.currentPage.url.endsWith("NotificationsPage.qml")
-	readonly property bool notificationButtonVisible: alarmButton.enabled || alarmButton.animating
+	signal controlCardsActivated()
+	signal auxCardsActivated()
+	signal cardsDeactivated()
+	signal sidePanelToggled()
 
-	property bool animationEnabled
-
-	signal leftButtonClicked()
-	signal rightButtonClicked()
-	signal auxButtonClicked()
-	// PageStack.get(...) returns an Item, so the arg for 'popToPage' needs to be 'Item'. If we make it a 'Page', it works fine on the desktop,
-	// but shows an unusual failure on the device. There is an error message about "passing incompatible arguments to signals is not supported",
-	// and the page stack pops 1 too many pages.
-	signal popToPage(toPage: Item)
-
-	width: parent.width
-	height: Theme.geometry_statusBar_height
-	opacity: 0.0
-
-	Component.onCompleted: if (!animationEnabled) { root.opacity = 1.0 }
-
-	Rectangle {
-		id: backgroundRect
-		anchors.fill: parent
-	}
-
-	SequentialAnimation {
-		running: !Global.splashScreenVisible && animationEnabled
-
-		PauseAnimation {
-			duration: Theme.animation_statusBar_initialize_delayedStart_duration
-		}
-		OpacityAnimator {
-			target: root
-			from: 0.0
-			to: 1.0
-			duration: Theme.animation_statusBar_initialize_fade_duration
+	function updateBreadcrumbsFocusHint() {
+		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
+		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
+		if (leftButton.activeFocus || auxButton.activeFocus) {
+			breadcrumbs.focusEdgeHint = Qt.LeftEdge
+		} else if (rightButton.activeFocus || sleepButton.activeFocus) {
+			breadcrumbs.focusEdgeHint = Qt.RightEdge
+		} else {
+			// Focus is coming elsewhere, so do not change the current index
+			breadcrumbs.focusEdgeHint = -1
 		}
 	}
 
-	component StatusBarButton : Button {
-		radius: 0
-		defaultBackgroundWidth: Theme.geometry_statusBar_button_height
-		defaultBackgroundHeight: Theme.geometry_statusBar_button_height
-		backgroundColor: "transparent"  // don't show background when disabled
-		display: Button.IconOnly
-		color: Theme.color_ok
-		opacity: enabled && Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive ? 1.0 : 0.0
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				breadcrumbs.updateFocusEdgeHint()
-			}
-		}
-
-		// For convenience, bind the paddings to the offsets that are used to expand the clickable
-		// area. If the button only contains an icon, no additional padding is required as the icon
-		// fits within the default defaultBackgroundWidth/Height.
-		leftPadding: leftInset
-		rightPadding: rightInset
-		topPadding: topInset
-		bottomPadding: bottomInset
-
-		Behavior on opacity {
-			enabled: root.animationEnabled
-			OpacityAnimator {
-				duration: Theme.animation_page_idleOpacity_duration
-			}
-		}
-	}
+	implicitWidth: Theme.geometry_screen_width
+	implicitHeight: Theme.geometry_statusBar_height
 
 	component NotificationButton : Button {
 		readonly property bool animating: animator.running
@@ -91,7 +40,7 @@ FocusScope {
 		font.family: Global.fontFamily
 		font.pixelSize: Theme.font_size_caption
 		Behavior on opacity {
-			enabled: root.animationEnabled
+			enabled: Global.animationEnabled
 			OpacityAnimator {
 				id: animator
 				duration: Theme.animation_toastNotification_fade_duration
@@ -102,25 +51,53 @@ FocusScope {
 	StatusBarButton {
 		id: leftButton
 
+		readonly property int buttonType: {
+			const customButton = Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
+			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
+				return VenusOS.StatusBar_LeftButton_Back
+			}
+			return customButton
+		}
+
 		// Expand clickable area on left and bottom edges.
 		leftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
-			: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
-			: root.leftButton === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
+		icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
+			: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
+			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
 			: ""
-		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_None
+		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
 		KeyNavigation.right: auxButton
 
-		onClicked: root.leftButtonClicked()
+		onClicked: {
+			switch (buttonType) {
+			case VenusOS.StatusBar_LeftButton_ControlsInactive:
+				root.controlCardsActivated()
+				break
+			case VenusOS.StatusBar_LeftButton_ControlsActive:
+				root.cardsDeactivated()
+				break;
+			case VenusOS.StatusBar_LeftButton_Back:
+				Global.pageManager.popPage()
+				break
+			default:
+				break
+			}
+		}
+
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				root.updateBreadcrumbsFocusHint()
+			}
+		}
 	}
 
 	StatusBarButton {
 		id: auxButton
 
 		readonly property bool auxCardsOpened: Global.mainView.cardsActive
-				&& root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
+				&& leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
 
 		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
 		anchors {
@@ -133,32 +110,29 @@ FocusScope {
 
 		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
-		icon.source: root.leftButton === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
+		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
 				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
 				: "qrc:/images/icon_smartswitch_off_32.svg"
-		enabled: root.leftButton !== VenusOS.StatusBar_LeftButton_ControlsActive
+		enabled: leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
 		KeyNavigation.right: breadcrumbs
 
-		onClicked: root.auxButtonClicked()
+		onClicked: {
+			if (auxCardsOpened) {
+				root.cardsDeactivated()
+			} else {
+				root.auxCardsActivated()
+			}
+		}
+
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				root.updateBreadcrumbsFocusHint()
+			}
+		}
 	}
 
 	Breadcrumbs {
 		id: breadcrumbs
-
-		property int focusEdgeHint: Qt.LeftEdge
-
-		function updateFocusEdgeHint() {
-			// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
-			// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
-			if (leftButton.activeFocus || auxButton.activeFocus) {
-				focusEdgeHint = Qt.LeftEdge
-			} else if (rightButton.activeFocus || sleepButton.activeFocus) {
-				focusEdgeHint = Qt.RightEdge
-			} else {
-				// Focus is coming from the main list view below, so do not change the current index
-				focusEdgeHint = -1
-			}
-		}
 
 		anchors {
 			top: parent.top
@@ -167,51 +141,30 @@ FocusScope {
 			leftMargin: Theme.geometry_settings_breadcrumb_horizontalMargin
 			right: rightButtonRow.left
 		}
-		height: Theme.geometry_settings_breadcrumb_height
-		model: root.pageStack.opened ? root.pageStack.depth + 1 : null // '+ 1' because we insert a dummy breadcrumb with the text "Settings"
-		visible: count >= 2
-		enabled: visible // don't receive focus when invisble
-		focus: false // don't give status bar initial focus to the breadcrumbs
-
-		getText: function(index) {
-			return index === 0
-					? Global.mainView.navBar.activeButtonText // eg: "Settings"
-					: pageStack.get(index - 1).title // eg: "Device list"
-		}
-
-		onClicked: function(index) {
-			const isTopBreadcrumb = index === breadcrumbs.count - 1
-			const isBottomBreadcrumb = index === 0
-
-			if (isBottomBreadcrumb) { // the bottom breadcrumb is a special case, we inserted a dummy breadcrumb with the text "Settings" which doesn't relate to anything in the pageStack
-				Global.pageManager.popAllPages()
-				return
-			}
-
-			if (isTopBreadcrumb) { // ignore clicks on the top of the breadcrumb trail. We don't need to navigate there, we are already there...
-				return
-			}
-
-			root.popToPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
-		}
-
-		onActiveFocusChanged: {
-			if (activeFocus && focusEdgeHint >= 0) {
-				// Focus the first (left-most) or last (right-most) breadcrumb, depending the side
-				// that the key navigation is arriving from.
-				currentIndex = focusEdgeHint === Qt.LeftEdge ? 0 : count - 1
-				focusEdgeHint = -1
-			}
-		}
+		pageStack: root.pageStack
 
 		KeyNavigation.right: notificationButton
 
-		Connections {
-			target: root.pageStack
-			enabled: root.pageStack.opened && Global.keyNavigationEnabled
-			function onDepthChanged() {
-				// When pages are pushed/popped, reset the focus to be on the last breadcrumb.
-				breadcrumbs.currentIndex = breadcrumbs.count - 1
+		Rectangle { // fade out the breadcrumbs RHS when overflowing
+			width: parent.width
+			height: Theme.geometry_settings_breadcrumb_height
+			visible: !parent.atXEnd
+
+			gradient: Gradient {
+				orientation: Gradient.Horizontal
+
+				GradientStop {
+					position: 1 - Theme.geometry_breadcrumbs_viewGradient_width
+					color: Theme.color_viewGradient_color1
+				}
+				GradientStop {
+					position: 1 - Theme.geometry_breadcrumbs_viewGradient_width / 2
+					color: Theme.color_viewGradient_color2
+				}
+				GradientStop {
+					position: 1
+					color: Theme.color_viewGradient_color3
+				}
 			}
 		}
 	}
@@ -219,7 +172,7 @@ FocusScope {
 	Label {
 		id: clockLabel
 		anchors.centerIn: parent
-		font.pixelSize: 22
+		font.pixelSize: Theme.font_size_body2
 		visible: !breadcrumbs.visible
 		text: ClockTime.currentTime
 	}
@@ -282,14 +235,16 @@ FocusScope {
 		opacity: 1
 		visible: !breadcrumbs.visible && (Global.notifications?.statusBarNotificationIconVisible ?? false)
 
-		color: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
-			   ? Theme.color_critical
-			   : Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
-				 ? Theme.color_warning :
-				   Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok : "transparent"
-		icon.source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info ?
-						 "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+		color: Global.notifications?.statusBarNotificationIconColor ?? "transparent"
+		icon.source: Global.notifications?.statusBarNotificationIconSource ?? ""
+
 		onClicked: Global.mainView.goToNotificationsPage()
+		onActiveFocusChanged: {
+			if (activeFocus) {
+				root.updateBreadcrumbsFocusHint()
+			}
+		}
+
 		KeyNavigation.right: alarmButton
 	}
 
@@ -308,7 +263,7 @@ FocusScope {
 		topInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		enabled: notificationButtonsEnabled && (Global.notifications?.silenceAlarmVisible ?? false)
+		enabled: Global.mainView?.notificationButtonsEnabled
 		flat: false
 		backgroundColor: down ? Theme.color_critical : Theme.color_critical_background
 		borderWidth: 0
@@ -318,6 +273,12 @@ FocusScope {
 		text: CommonWords.silence_alarm
 
 		onClicked: NotificationModel.acknowledgeAll()
+
+		Binding {
+			target: Global.notifications ?? null
+			property: "notificationButtonVisible"
+			value: alarmButton.enabled || alarmButton.animating
+		}
 	}
 
 	Row {
@@ -329,25 +290,32 @@ FocusScope {
 		StatusBarButton {
 			id: rightButton
 
+			readonly property int buttonType: Global.mainView?.currentPage?.topRightButton ?? VenusOS.StatusBar_RightButton_None
+
 			// Expand clickable area on left and bottom edges.
 			leftInset: Theme.geometry_statusBar_spacing
 			bottomInset: Theme.geometry_statusBar_spacing
 
-			enabled: root.rightButton != VenusOS.StatusBar_RightButton_None
+			enabled: buttonType != VenusOS.StatusBar_RightButton_None
 			visible: enabled
-			icon.source: root.rightButton === VenusOS.StatusBar_RightButton_SidePanelActive
+			icon.source: buttonType === VenusOS.StatusBar_RightButton_SidePanelActive
 						 ? "qrc:/images/icon_sidepanel_on_32.svg"
-						 : root.rightButton === VenusOS.StatusBar_RightButton_SidePanelInactive
+						 : buttonType === VenusOS.StatusBar_RightButton_SidePanelInactive
 						   ? "qrc:/images/icon_sidepanel_off_32.svg"
-						   : root.rightButton === VenusOS.StatusBar_RightButton_Add
+						   : buttonType === VenusOS.StatusBar_RightButton_Add
 							 ? "qrc:/images/icon_plus.svg"
-							 : root.rightButton === VenusOS.StatusBar_RightButton_Refresh
+							 : buttonType === VenusOS.StatusBar_RightButton_Refresh
 							   ? "qrc:/images/icon_refresh_32.svg"
 							   : ""
 			KeyNavigation.left: alarmButton
 			KeyNavigation.right: sleepButton
 
-			onClicked: root.rightButtonClicked()
+			onClicked: root.sidePanelToggled()
+			onActiveFocusChanged: {
+				if (activeFocus) {
+					root.updateBreadcrumbsFocusHint()
+				}
+			}
 		}
 
 		StatusBarButton {
@@ -361,11 +329,14 @@ FocusScope {
 			bottomInset: Theme.geometry_statusBar_spacing
 
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
-			visible: enabled
-			enabled: ScreenBlanker.supported
-					&& ScreenBlanker.enabled
-					&& Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			visible: ScreenBlanker.supported && ScreenBlanker.enabled
+
 			onClicked: ScreenBlanker.setDisplayOff()
+			onActiveFocusChanged: {
+				if (activeFocus) {
+					root.updateBreadcrumbsFocusHint()
+				}
+			}
 		}
 	}
 

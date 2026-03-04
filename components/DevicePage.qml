@@ -45,8 +45,7 @@ Page {
 			topPadding: ListView.view.count > 0 ? spacing : 0
 
 			ListNavigation {
-				//% "Switches"
-				text: qsTrId("device_page_switches")
+				text: CommonWords.switches
 				preferredVisible: root.showSwitches && switchableOutputModel.count > 0
 				onClicked: {
 					Global.pageManager.pushPage(switchableOutputPageComponent, { title: text })
