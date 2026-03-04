@@ -43,8 +43,7 @@ QtObject {
 	}
 
 	function currentNavBarUrl() {
-		const data = Global.mainView.navBar.model.get(Global.mainView.navBar.currentIndex)
-		return data.url
+		return Global.pageManager.navBar.pages[Global.pageManager.navBar.currentIndex].url
 	}
 
 	function setShowInputLoads(showInputLoads) {
@@ -89,7 +88,7 @@ QtObject {
 		case Qt.Key_6:
 			if (!!Global.pageManager) {
 				const newIndex = key - Qt.Key_1
-				Global.mainView.navBar.setCurrentIndex(newIndex)
+				Global.pageManager.navBar.setCurrentIndex(newIndex)
 			}
 			break
 		case Qt.Key_Comma:

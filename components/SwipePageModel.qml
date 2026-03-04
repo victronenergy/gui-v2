@@ -7,13 +7,16 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property list<Page> pages: showBoatPage && showLevelsPage ?
+	readonly property list<SwipeViewPage> pages: showBoatPage && showLevelsPage
+					&& boatPageLoader.item && briefPageLoader.item && levelsPageLoader.item ?
 			[ boatPageLoader.item, briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: showBoatPage ?
+		: showBoatPage && boatPageLoader.item && briefPageLoader.item ?
 			[ boatPageLoader.item, briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
-		: showLevelsPage ?
+		: showLevelsPage && boatPageLoader.item && briefPageLoader.item ?
 			[ briefPageLoader.item, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		:	[ briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
+		: !!briefPageLoader.item ?
+			[ briefPageLoader.item, overviewPage, notificationsPage, settingsPage ]
+		: []
 	readonly property bool showLevelsPage: tankCount > 0 || environmentInputCount > 0
 	readonly property bool showBoatPage: boatPageLoader.showBoatPageItem.value
 	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
@@ -24,9 +27,9 @@ ObjectModel {
 		&& Global.systemSettings
 		&& Global.tanks
 		&& Global.environmentInputs
-		&& (showBoatPage && showLevelsPage) ? pages.length === 6 && boatPageLoader.item && levelsPageLoader.item
-		  : showBoatPage ? pages.length === 5 && boatPageLoader.item
-		  : showLevelsPage ? pages.length === 5 && levelsPageLoader.item
+		&& (showBoatPage && showLevelsPage) ? pages.length === 6
+		  : showBoatPage ? pages.length === 5
+		  : showLevelsPage ? pages.length === 5
 		  : pages.length === 4
 	property bool _completed: false
 

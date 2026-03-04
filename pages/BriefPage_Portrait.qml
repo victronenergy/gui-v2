@@ -10,8 +10,8 @@ import Victron.Gauges
 SwipeViewPage {
 	id: root
 
-	navButtonText: CommonWords.brief_page
-	navButtonIcon: "qrc:/images/brief.svg"
+	title: CommonWords.brief_page
+	iconSource: "qrc:/images/brief.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
 	backgroundColor: Theme.color_briefPage_background
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
