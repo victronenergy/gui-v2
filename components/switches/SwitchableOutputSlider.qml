@@ -12,8 +12,8 @@ MiniSlider {
 	readonly property bool hasDimmingProperties: switchableOutput.type === VenusOS.SwitchableOutput_Type_Dimmable
 			|| switchableOutput.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint
 			|| switchableOutput.type === VenusOS.SwitchableOutput_Type_BasicSlider
-	property int sourceUnit
-	property int displayUnit
+	property int sourceUnit: VenusOS.Units_None
+	property int displayUnit: VenusOS.Units_None
 
 	// True if the slider value is being changed by the user (either by touch or key press)
 	readonly property bool dragging: pressed || _valueChangeKeyPressed
@@ -25,9 +25,9 @@ MiniSlider {
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}
 
-	from: dimmingMinItem.valid ? dimmingMinItem.value : 0
-	to: dimmingMaxItem.valid ? dimmingMaxItem.value : 100
-	stepSize: stepSizeItem.valid ? stepSizeItem.value : 1
+	from: dimmingMinItem.valid ? dimmingMinItem.value : Units.convert(0, root.sourceUnit, root.displayUnit)
+	to: dimmingMaxItem.valid ? dimmingMaxItem.value : Units.convert(100, root.sourceUnit, root.displayUnit)
+	stepSize: stepSizeItem.valid ? stepSizeItem.value : 1 // Unit conversion is not applied to step size.
 
 	onMoved: {
 		valueSync.writeValue(value)
@@ -74,8 +74,7 @@ MiniSlider {
 	VeQuickItem {
 		id: stepSizeItem
 		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/StepSize" : ""
-		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
-		displayUnit: Units.unitToVeUnit(root.displayUnit)
+		// Do not set sourceUnit and displayUnit, as unit conversion is not applied to stepSize.
 	}
 
 	SliderSettingSync {
