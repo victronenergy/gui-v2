@@ -18,8 +18,8 @@
       <source>Power</source>
       <translation>Putere</translation>
     </message>
-    <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="431"/>
+    <message id="generic_input_label_off">
+      <location filename="../../src/genericinput.cpp" line="112"/>
       <source>Off</source>
       <translation>Oprit</translation>
     </message>
@@ -43,8 +43,8 @@
       <source>Low battery voltage</source>
       <translation>Tensiune scazuta baterie</translation>
     </message>
-    <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="303"/>
+    <message id="switchable_output_function_manual">
+      <location filename="../../src/enums.cpp" line="591"/>
       <source>Manual</source>
       <translation>Manual</translation>
     </message>
@@ -58,8 +58,8 @@
       <source>Position</source>
       <translation>Pozitie</translation>
     </message>
-    <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
+    <message id="generic_input_primaryLabel_speed">
+      <location filename="../../src/genericinput.cpp" line="164"/>
       <source>Speed</source>
       <translation>Viteza</translation>
     </message>
@@ -171,8 +171,8 @@
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
     </message>
-    <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="118"/>
+    <message id="switchable_output_function_tankpump">
+      <location filename="../../src/enums.cpp" line="594"/>
       <source>Tank pump</source>
       <translation>Pompa de rezervor</translation>
     </message>
@@ -275,6 +275,11 @@
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>Produs</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation>Nume</translation>
     </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
@@ -1038,10 +1043,9 @@
       <source>Image type</source>
       <translation>Tip image</translation>
     </message>
-    <message id="common_words_firmware_type_normal">
-      <location filename="../../components/CommonWords.qml" line="207"/>
+    <message id="iochannel_invert_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
       <source>Normal</source>
-      <extracomment>The firmware type for normal images</extracomment>
       <translation>Normal</translation>
     </message>
     <message id="common_words_firmware_type_large">
@@ -1333,6 +1337,12 @@
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="179"/>
       <source>Reset service timer</source>
       <translation>Resetați cronometrul de service</translation>
+    </message>
+    <message id="components_volumeunit_volume">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
+      <source>Volume</source>
+      <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
+      <translation type="unfinished">Volum</translation>
     </message>
     <message id="settings_gps_format">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="71"/>
@@ -1630,6 +1640,11 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
       <source>Above minimum SOC only</source>
       <translation>Doar peste SOC minim</translation>
+    </message>
+    <message id="iochannel_showui_always">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
+      <source>Always</source>
+      <translation>Întotdeauna</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="173"/>
@@ -1997,10 +2012,15 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <source>Function (Relay 1)</source>
       <translation>Functie (Releu 1)</translation>
     </message>
+    <message id="page_switchable_output_function">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
+      <source>Function</source>
+      <translation>Functie</translation>
+    </message>
     <message id="settings_relay_function">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
       <source>Function</source>
-      <translation>Functie</translation>
+      <translation type="unfinished">Functie</translation>
     </message>
     <message id="settings_relay_disabled">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
@@ -2606,16 +2626,14 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <extracomment>Voltage alarm is at "Alarm" level</extracomment>
       <translation type="unfinished">Alarma</translation>
     </message>
-    <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="370"/>
+    <message id="generic_input_label_alarm">
+      <location filename="../../src/genericinput.cpp" line="126"/>
       <source>Alarm</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Alarma</translation>
     </message>
-    <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
+    <message id="generic_input_primaryLabel_volume">
+      <location filename="../../src/genericinput.cpp" line="172"/>
       <source>Volume</source>
-      <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation>Volum</translation>
     </message>
     <message id="tank_status_short_circuited">
@@ -2752,6 +2770,11 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <source>Unsupported</source>
       <extracomment>Device is not supported</extracomment>
       <translation>Incompatibil</translation>
+    </message>
+    <message id="settings_tank_pump">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="118"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">Pompa de rezervor</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="125"/>
@@ -3898,8 +3921,8 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <source>DC</source>
       <translation>DC</translation>
     </message>
-    <message id="pulsecounter_setup_inverted">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="21"/>
+    <message id="iochannel_invert_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
       <source>Inverted</source>
       <translation>Inversat</translation>
     </message>
@@ -3968,6 +3991,11 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <source>Aggregate</source>
       <translation>Agregat</translation>
     </message>
+    <message id="pulsecounter_setup_inverted">
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="21"/>
+      <source>Inverted</source>
+      <translation type="unfinished">Inversat</translation>
+    </message>
     <message id="pulsecounter_setup_multiplier">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="27"/>
       <source>Multiplier</source>
@@ -3978,8 +4006,8 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <source>Reset counter</source>
       <translation>Reseteaza contor</translation>
     </message>
-    <message id="temperature_sensor_battery_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+    <message id="generic_input_status_sensor_battery_low">
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Sensor battery low</source>
       <translation>Baterie senzor descărcată</translation>
     </message>
@@ -4602,10 +4630,9 @@ Doriți să continuați?</translation>
       <extracomment>Action to clear an error state</extracomment>
       <translation>Sterge eraorea</translation>
     </message>
-    <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="362"/>
+    <message id="generic_input_label_closed">
+      <location filename="../../src/genericinput.cpp" line="122"/>
       <source>Closed</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Inchis</translation>
     </message>
     <message id="evchargers_status_connected">
@@ -4811,14 +4838,13 @@ Doriți să continuați?</translation>
       <source>Model name</source>
       <translation>Nume model</translation>
     </message>
-    <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="350"/>
+    <message id="generic_input_label_no">
+      <location filename="../../src/genericinput.cpp" line="116"/>
       <source>No</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Nu</translation>
     </message>
-    <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="359"/>
+    <message id="microgrid_error_none">
+      <location filename="../../src/enums.cpp" line="781"/>
       <source>No error</source>
       <translation>Nicio eroare</translation>
     </message>
@@ -4837,14 +4863,13 @@ Doriți să continuați?</translation>
       <source>Offline</source>
       <translation>Deconectat</translation>
     </message>
-    <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="366"/>
+    <message id="generic_input_label_ok">
+      <location filename="../../src/genericinput.cpp" line="124"/>
       <source>OK</source>
-      <extracomment>Digital input state</extracomment>
       <translation>In regula</translation>
     </message>
-    <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="646"/>
+    <message id="generic_input_label_on">
+      <location filename="../../src/genericinput.cpp" line="114"/>
       <source>On</source>
       <translation>Pornit</translation>
     </message>
@@ -4853,10 +4878,9 @@ Doriți să continuați?</translation>
       <source>Online</source>
       <translation>Conectat</translation>
     </message>
-    <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="358"/>
+    <message id="generic_input_label_open">
+      <location filename="../../src/genericinput.cpp" line="120"/>
       <source>Open</source>
-      <extracomment>Digital input open</extracomment>
       <translation>Deschis</translation>
     </message>
     <message id="common_words_password">
@@ -4916,8 +4940,8 @@ Doriți să continuați?</translation>
       <source>Remove</source>
       <translation>Elimina</translation>
     </message>
-    <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="694"/>
+    <message id="generic_input_label_running">
+      <location filename="../../src/genericinput.cpp" line="130"/>
       <source>Running</source>
       <translation>Functioneaza</translation>
     </message>
@@ -4998,14 +5022,13 @@ Doriți să continuați?</translation>
       <source>Stop after the condition is reached for</source>
       <translation>Opreste cand conditia s-a indeplinit de</translation>
     </message>
-    <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="378"/>
+    <message id="generic_input_label_stopped">
+      <location filename="../../src/genericinput.cpp" line="128"/>
       <source>Stopped</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Oprit</translation>
     </message>
-    <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="533"/>
+    <message id="generic_input_primaryLabel_temperature">
+      <location filename="../../src/genericinput.cpp" line="168"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
@@ -5029,6 +5052,11 @@ Doriți să continuați?</translation>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Monitor</translation>
+    </message>
+    <message id="iochannel_type_buttongroup_type">
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <source>Type</source>
+      <translation>Tip</translation>
     </message>
     <message id="common_words_unique_id_number">
       <location filename="../../components/CommonWords.qml" line="558"/>
@@ -5060,10 +5088,9 @@ Doriți să continuați?</translation>
       <source>When warning is cleared stop after</source>
       <translation>Cand avertizarea este indepartata opreste dupa</translation>
     </message>
-    <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="354"/>
+    <message id="generic_input_label_yes">
+      <location filename="../../src/genericinput.cpp" line="118"/>
       <source>Yes</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Da</translation>
     </message>
     <message id="common_words_yesterday">
@@ -5920,16 +5947,14 @@ Doriți să continuați?</translation>
       <source>Water generator</source>
       <translation>Generator de apă</translation>
     </message>
-    <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="334"/>
+    <message id="generic_input_label_low">
+      <location filename="../../src/genericinput.cpp" line="108"/>
       <source>Low</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Scazut</translation>
     </message>
-    <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="338"/>
+    <message id="generic_input_label_high">
+      <location filename="../../src/genericinput.cpp" line="110"/>
       <source>High</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Ridicat</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
@@ -7370,16 +7395,6 @@ Doriți să continuați?</translation>
       <source>Automatic</source>
       <translation type="unfinished">Automa</translation>
     </message>
-    <message id="pagesettingssystem_opportunity_loads">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
-      <source>Opportunity Loads</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
-      <source>Automate controllable devices to maximize PV self-use</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="pagesettingssystem_ac_system">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
       <source>AC System</source>
@@ -7729,6 +7744,12 @@ Doriți să continuați?</translation>
       <source>'%1' is not a number.</source>
       <translation>"%1" nu este un număr.</translation>
     </message>
+    <message id="common_words_firmware_type_normal">
+      <location filename="../../components/CommonWords.qml" line="207"/>
+      <source>Normal</source>
+      <extracomment>The firmware type for normal images</extracomment>
+      <translation type="unfinished">Normal</translation>
+    </message>
     <message id="common_words_generator">
       <location filename="../../components/CommonWords.qml" line="217"/>
       <source>Generator</source>
@@ -7766,6 +7787,11 @@ Doriți să continuați?</translation>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
     </message>
+    <message id="common_words_manual">
+      <location filename="../../components/CommonWords.qml" line="303"/>
+      <source>Manual</source>
+      <translation type="unfinished">Manual</translation>
+    </message>
     <message id="common_words_manual_stop">
       <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Manual stop</source>
@@ -7792,6 +7818,11 @@ Doriți să continuați?</translation>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">Nu</translation>
+    </message>
+    <message id="common_words_no_error">
+      <location filename="../../components/CommonWords.qml" line="359"/>
+      <source>No error</source>
+      <translation type="unfinished">Nicio eroare</translation>
     </message>
     <message id="common_words_none_option">
       <location filename="../../components/CommonWords.qml" line="362"/>
@@ -7892,6 +7923,11 @@ Doriți să continuați?</translation>
       <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Stopped</source>
       <translation type="unfinished">Oprit</translation>
+    </message>
+    <message id="common_words_temperature">
+      <location filename="../../components/CommonWords.qml" line="533"/>
+      <source>Temperature</source>
+      <translation type="unfinished">Temperatura</translation>
     </message>
     <message id="common_words_type">
       <location filename="../../components/CommonWords.qml" line="555"/>
@@ -8078,6 +8114,18 @@ Doriți să continuați?</translation>
       <source>Bilge pump</source>
       <translation type="unfinished">Pompa de santina</translation>
     </message>
+    <message id="digitalinputs_state_low">
+      <location filename="../../src/enums.cpp" line="334"/>
+      <source>Low</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Scazut</translation>
+    </message>
+    <message id="digitalinputs_state_high">
+      <location filename="../../src/enums.cpp" line="338"/>
+      <source>High</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Ridicat</translation>
+    </message>
     <message id="digitalinputs_state_off">
       <location filename="../../src/enums.cpp" line="342"/>
       <source>Off</source>
@@ -8090,17 +8138,64 @@ Doriți să continuați?</translation>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Pornit</translation>
     </message>
+    <message id="digitalinputs_state_no">
+      <location filename="../../src/enums.cpp" line="350"/>
+      <source>No</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Nu</translation>
+    </message>
+    <message id="digitalinputs_state_yes">
+      <location filename="../../src/enums.cpp" line="354"/>
+      <source>Yes</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Da</translation>
+    </message>
+    <message id="digitalinputs_state_open">
+      <location filename="../../src/enums.cpp" line="358"/>
+      <source>Open</source>
+      <extracomment>Digital input open</extracomment>
+      <translation type="unfinished">Deschis</translation>
+    </message>
+    <message id="digitalinputs_state_closed">
+      <location filename="../../src/enums.cpp" line="362"/>
+      <source>Closed</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Inchis</translation>
+    </message>
+    <message id="digitalinputs_state_ok">
+      <location filename="../../src/enums.cpp" line="366"/>
+      <source>OK</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">In regula</translation>
+    </message>
+    <message id="digitalinputs_state_alarm">
+      <location filename="../../src/enums.cpp" line="370"/>
+      <source>Alarm</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Alarma</translation>
+    </message>
     <message id="digitalinputs_state_running">
       <location filename="../../src/enums.cpp" line="374"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Functioneaza</translation>
     </message>
+    <message id="digitalinputs_state_stopped">
+      <location filename="../../src/enums.cpp" line="378"/>
+      <source>Stopped</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Oprit</translation>
+    </message>
     <message id="pvinverter_statusCode_running">
       <location filename="../../src/enums.cpp" line="400"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">Functioneaza</translation>
+    </message>
+    <message id="solarchargers_state_off">
+      <location filename="../../src/enums.cpp" line="431"/>
+      <source>Off</source>
+      <translation type="unfinished">Oprit</translation>
     </message>
     <message id="solarchargers_state_external control">
       <location filename="../../src/enums.cpp" line="452"/>
@@ -8132,26 +8227,6 @@ Doriți să continuați?</translation>
       <source>Under voltage</source>
       <translation>Tensiune sub limita</translation>
     </message>
-    <message id="generic_input_discrete">
-      <location filename="../../src/enums.cpp" line="489"/>
-      <source>Discrete value indicator</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_value_unranged">
-      <location filename="../../src/enums.cpp" line="492"/>
-      <source>Value indicator (unranged)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_value_ranged">
-      <location filename="../../src/enums.cpp" line="495"/>
-      <source>Value indicator (ranged)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_temperature">
-      <location filename="../../src/enums.cpp" line="498"/>
-      <source>Temperature indicator</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="generic_input_status_on">
       <location filename="../../src/enums.cpp" line="508"/>
       <source>On</source>
@@ -8161,11 +8236,6 @@ Doriți să continuați?</translation>
       <location filename="../../src/enums.cpp" line="511"/>
       <source>Fault</source>
       <translation type="unfinished">Avarie</translation>
-    </message>
-    <message id="generic_input_status_sensor_battery_low">
-      <location filename="../../src/enums.cpp" line="514"/>
-      <source>Sensor battery low</source>
-      <translation type="unfinished">Baterie senzor descărcată</translation>
     </message>
     <message id="switchable_output_momentary">
       <location filename="../../src/enums.cpp" line="524"/>
@@ -8197,35 +8267,10 @@ Doriți să continuați?</translation>
       <source>Alarm</source>
       <translation type="unfinished">Alarma</translation>
     </message>
-    <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="588"/>
-      <source>Generator start/stop</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="591"/>
-      <source>Manual</source>
-      <translation type="unfinished">Manual</translation>
-    </message>
-    <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="594"/>
-      <source>Tank pump</source>
-      <translation type="unfinished">Pompa de rezervor</translation>
-    </message>
     <message id="switchable_output_function_temperature">
       <location filename="../../src/enums.cpp" line="597"/>
       <source>Temperature</source>
       <translation type="unfinished">Temperatura</translation>
-    </message>
-    <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="600"/>
-      <source>Genset Helper</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="603"/>
-      <source>Opportunity load</source>
-      <translation type="unfinished"/>
     </message>
     <message id="switchable_output_off">
       <location filename="../../src/enums.cpp" line="625"/>
@@ -8247,6 +8292,11 @@ Doriți să continuați?</translation>
       <source>Fault</source>
       <translation type="unfinished">Avarie</translation>
     </message>
+    <message id="switchable_output_on">
+      <location filename="../../src/enums.cpp" line="646"/>
+      <source>On</source>
+      <translation type="unfinished">Pornit</translation>
+    </message>
     <message id="switchable_output_short">
       <location filename="../../src/enums.cpp" line="649"/>
       <source>Short</source>
@@ -8256,116 +8306,6 @@ Doriți să continuați?</translation>
       <location filename="../../src/enums.cpp" line="702"/>
       <source>Not running</source>
       <translation type="unfinished">Nu funcționează</translation>
-    </message>
-    <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="763"/>
-      <source>EMS Control: Hybrid droop</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="767"/>
-      <source>EMS Control: Grid-following</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="770"/>
-      <source>EMS Control: Grid-forming</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="781"/>
-      <source>No error</source>
-      <translation type="unfinished">Nicio eroare</translation>
-    </message>
-    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="784"/>
-      <source>Different fallback hybrid droop values in phase masters</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="787"/>
-      <source>Hybrid droop parameter write failed</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="790"/>
-      <source>Parameter error Fmin &gt; Fmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="793"/>
-      <source>Parameter error Pmin &gt; Pmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="796"/>
-      <source>Parameter error Umin &gt; Umax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="799"/>
-      <source>Parameter error Qmin &gt; Qmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="802"/>
-      <source>Parameter error Q0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="805"/>
-      <source>Parameter error Qmin out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="808"/>
-      <source>Parameter error Qmax out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="811"/>
-      <source>Parameter error U0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="814"/>
-      <source>Parameter error U droop out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="817"/>
-      <source>Parameter error P0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="820"/>
-      <source>Parameter error Pmin out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="823"/>
-      <source>Parameter error Pmax out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="826"/>
-      <source>Parameter error F0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="829"/>
-      <source>Parameter error freq droop out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="832"/>
-      <source>Ve.Bus internal error PF vs FP data mismatch</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="835"/>
-      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
-      <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -9221,6 +9161,11 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <source>Gauge Display</source>
       <translation>Afișaj indicator</translation>
     </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
+      <source>Speed</source>
+      <translation type="unfinished">Viteza</translation>
+    </message>
     <message id="settings_minmax_max_speed">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="209"/>
       <source>Max Speed</source>
@@ -9240,6 +9185,11 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Tensiunea modulului</translation>
+    </message>
+    <message id="page_generic_input_group">
+      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
+      <source>Group</source>
+      <translation>Grup</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
@@ -9336,11 +9286,6 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="38"/>
       <source>Resetting VE.Bus products</source>
       <translation>Resetarea produselor VE.Bus</translation>
-    </message>
-    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
-      <source>Waiting for VE.Bus setting access password</source>
-      <translation type="unfinished"/>
     </message>
     <message id="Unknown">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="42"/>
@@ -9539,11 +9484,6 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <source>Incompatible</source>
       <translation>Incompatibil</translation>
     </message>
-    <message id="vebus_settings_password_required">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
-      <source>VE.Bus settings password required</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="backup_name">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="323"/>
       <source>Backup name</source>
@@ -9621,16 +9561,6 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="467"/>
       <source>Press to cancel</source>
       <translation>Apăsați pentru a anula.</translation>
-    </message>
-    <message id="vebus_settings_access_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
-      <source>VE.Bus settings access password</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="vebus_settings_enter_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
-      <source>Enter VE.Bus password for access level %1</source>
-      <translation type="unfinished"/>
     </message>
     <message id="vebus_backup_firmware_version_specific_message">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="477"/>
@@ -9714,6 +9644,12 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <location filename="../../components/listitems/ListOutputBatteryRadioButtonGroup.qml" line="21"/>
       <source>Charging another battery from the main battery</source>
       <translation>Încărcarea unei alte baterii de la bateria principală</translation>
+    </message>
+    <message id="iochannel_showui_controls">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
+      <source>Show controls</source>
+      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
+      <translation>Afișează comenzile</translation>
     </message>
     <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
@@ -10294,11 +10230,6 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <source>Switches</source>
       <translation>Comutatoare</translation>
     </message>
-    <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="76"/>
-      <source>Inputs</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="settings_shelly_refresh_devices">
       <location filename="../../pages/settings/PageSettingsShelly.qml" line="82"/>
       <source>Refresh devices</source>
@@ -10474,16 +10405,6 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <source>Allowed reactive power range</source>
       <translation>Interval de putere reactivă permis</translation>
     </message>
-    <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
-      <source>Apply all parameters</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
-      <source>Apply</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="316"/>
       <source>P-Q direct drive settings</source>
@@ -10553,6 +10474,11 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="35"/>
       <source>Reverse polarity</source>
       <translation type="unfinished">Polaritate inversata</translation>
+    </message>
+    <message id="temperature_sensor_battery_low">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <source>Sensor battery low</source>
+      <translation type="unfinished">Baterie senzor descărcată</translation>
     </message>
     <message id="temperature_pm25">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="70"/>
@@ -10799,11 +10725,6 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <source>Only when the output is off</source>
       <translation>Numai când ieșirea este oprită</translation>
     </message>
-    <message id="page_switchable_output_function">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
-      <source>Function</source>
-      <translation type="unfinished">Functie</translation>
-    </message>
     <message id="page_switchable_output_startup_state">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="117"/>
       <source>Startup switch state</source>
@@ -10854,6 +10775,16 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
       <source>Phase Setting</source>
       <translation>Setare fază</translation>
+    </message>
+    <message id="iochannel_showui_local">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
+      <source>Only local</source>
+      <translation>Numai local</translation>
+    </message>
+    <message id="iochannel_showui_vrm">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
+      <source>Only on VRM</source>
+      <translation>Numai pe VRM</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
@@ -11215,73 +11146,317 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <source>Running, disabled</source>
       <translation>În funcțiune, dezactivat</translation>
     </message>
+    <message id="switchable_output_running">
+      <location filename="../../src/enums.cpp" line="694"/>
+      <source>Running</source>
+      <translation type="unfinished">Functioneaza</translation>
+    </message>
     <message id="switchable_output_not_running_disabled">
       <location filename="../../src/enums.cpp" line="699"/>
       <source>Not running, disabled</source>
       <translation>Nu funcționează, dezactivat</translation>
     </message>
-    <message id="page_generic_input_group">
-      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
-      <source>Group</source>
-      <translation type="unfinished">Grup</translation>
+    <message id="pagesettingssystem_opportunity_loads">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <source>Opportunity Loads</source>
+      <translation>Consumatori oportuniști</translation>
     </message>
-    <message id="iochannel_name">
-      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
-      <source>Name</source>
-      <translation type="unfinished">Nume</translation>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <source>Automate controllable devices to maximize PV self-use</source>
+      <translation>Automatizați dispozitivele controlabile pentru a maximiza autoconsumul PV</translation>
     </message>
-    <message id="iochannel_showui_controls">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
-      <source>Show controls</source>
-      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
-      <translation type="unfinished">Afișează comenzile</translation>
+    <message id="microgrid_mode_ems_hybrid_droop">
+      <location filename="../../src/enums.cpp" line="763"/>
+      <source>EMS Control: Hybrid droop</source>
+      <translation>Control EMS: Panta hibridă</translation>
     </message>
-    <message id="iochannel_showui_always">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
-      <source>Always</source>
-      <translation type="unfinished">Întotdeauna</translation>
+    <message id="microgrid_mode_ems_grid_following">
+      <location filename="../../src/enums.cpp" line="767"/>
+      <source>EMS Control: Grid-following</source>
+      <translation>Control EMS: Urmărire rețea</translation>
     </message>
-    <message id="iochannel_showui_local">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
-      <source>Only local</source>
-      <translation type="unfinished">Numai local</translation>
+    <message id="microgrid_mode_ems_grid_forming">
+      <location filename="../../src/enums.cpp" line="770"/>
+      <source>EMS Control: Grid-forming</source>
+      <translation>Control EMS: Formare rețea</translation>
     </message>
-    <message id="iochannel_showui_vrm">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
-      <source>Only on VRM</source>
-      <translation type="unfinished">Numai pe VRM</translation>
+    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
+      <location filename="../../src/enums.cpp" line="784"/>
+      <source>Different fallback hybrid droop values in phase masters</source>
+      <translation>Valori diferite de panta hibridă de rezervă în masterele de fază</translation>
     </message>
-    <message id="iochannel_type_buttongroup_type">
-      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
-      <source>Type</source>
-      <translation type="unfinished">Tip</translation>
+    <message id="microgrid_error_write_failed">
+      <location filename="../../src/enums.cpp" line="787"/>
+      <source>Hybrid droop parameter write failed</source>
+      <translation>Scrierea parametrului pantei hibride a eșuat</translation>
+    </message>
+    <message id="microgrid_error_param_fmin_greater_than_fmax">
+      <location filename="../../src/enums.cpp" line="790"/>
+      <source>Parameter error Fmin &gt; Fmax</source>
+      <translation>Eroare parametru Fmin &gt; Fmax</translation>
+    </message>
+    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
+      <location filename="../../src/enums.cpp" line="793"/>
+      <source>Parameter error Pmin &gt; Pmax</source>
+      <translation>Eroare parametru Pmin &gt; Pmax</translation>
+    </message>
+    <message id="microgrid_error_param_umin_greater_than_umax">
+      <location filename="../../src/enums.cpp" line="796"/>
+      <source>Parameter error Umin &gt; Umax</source>
+      <translation>Eroare parametru Umin &gt; Umax</translation>
+    </message>
+    <message id="microgrid_error_param_qmin_greater_than_qmax">
+      <location filename="../../src/enums.cpp" line="799"/>
+      <source>Parameter error Qmin &gt; Qmax</source>
+      <translation>Eroare parametru Qmin &gt; Qmax</translation>
+    </message>
+    <message id="microgrid_error_param_q0_out_of_range">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Parameter error Q0 out of range</source>
+      <translation>Eroare parametru Q0 în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_qmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Parameter error Qmin out of range</source>
+      <translation>Eroare parametru Qmin în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_qmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="808"/>
+      <source>Parameter error Qmax out of range</source>
+      <translation>Eroare parametru Qmax în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_u0_out_of_range">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Parameter error U0 out of range</source>
+      <translation>Eroare parametru U0 în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_u_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Parameter error U droop out of range</source>
+      <translation>Eroare parametru cădere U în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_p0_out_of_range">
+      <location filename="../../src/enums.cpp" line="817"/>
+      <source>Parameter error P0 out of range</source>
+      <translation>Eroare parametru P0 în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_pmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="820"/>
+      <source>Parameter error Pmin out of range</source>
+      <translation>Eroare parametru Pmin în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_pmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="823"/>
+      <source>Parameter error Pmax out of range</source>
+      <translation>Eroare parametru Pmax în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_f0_out_of_range">
+      <location filename="../../src/enums.cpp" line="826"/>
+      <source>Parameter error F0 out of range</source>
+      <translation>Eroare parametru F0 în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_param_freq_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="829"/>
+      <source>Parameter error freq droop out of range</source>
+      <translation>Eroare parametru cădere frecvență în afara intervalului</translation>
+    </message>
+    <message id="microgrid_error_pf_fp_mismatch">
+      <location filename="../../src/enums.cpp" line="832"/>
+      <source>Ve.Bus internal error PF vs FP data mismatch</source>
+      <translation>Eroare internă Ve.Bus nepotrivire date PF vs FP</translation>
+    </message>
+    <message id="microgrid_error_qu_uq_mismatch">
+      <location filename="../../src/enums.cpp" line="835"/>
+      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
+      <translation>Eroare internă Ve.Bus nepotrivire date QU vs UQ</translation>
+    </message>
+    <message id="generic_input_discrete">
+      <location filename="../../src/enums.cpp" line="489"/>
+      <source>Discrete value indicator</source>
+      <translation>Indicator valoare discretă</translation>
+    </message>
+    <message id="generic_input_value_unranged">
+      <location filename="../../src/enums.cpp" line="492"/>
+      <source>Value indicator (unranged)</source>
+      <translation>Indicator valoare (neranjat)</translation>
+    </message>
+    <message id="generic_input_value_ranged">
+      <location filename="../../src/enums.cpp" line="495"/>
+      <source>Value indicator (ranged)</source>
+      <translation>Indicator valoare (ranjat)</translation>
+    </message>
+    <message id="generic_input_temperature">
+      <location filename="../../src/enums.cpp" line="498"/>
+      <source>Temperature indicator</source>
+      <translation>Indicator temperatură</translation>
+    </message>
+    <message id="switchable_output_function_generator_startstop">
+      <location filename="../../src/enums.cpp" line="588"/>
+      <source>Generator start/stop</source>
+      <translation>Start/stop generator</translation>
+    </message>
+    <message id="switchable_output_function_genset_helper">
+      <location filename="../../src/enums.cpp" line="600"/>
+      <source>Genset Helper</source>
+      <translation>Asistent Generator</translation>
+    </message>
+    <message id="switchable_output_function_opportunity_load">
+      <location filename="../../src/enums.cpp" line="603"/>
+      <source>Opportunity load</source>
+      <translation>Consumator oportunist</translation>
+    </message>
+    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
+      <source>Waiting for VE.Bus setting access password</source>
+      <translation>Se așteaptă parola de acces la setările VE.Bus</translation>
+    </message>
+    <message id="vebus_settings_password_required">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
+      <source>VE.Bus settings password required</source>
+      <translation>Este necesară parola pentru setările VE.Bus</translation>
+    </message>
+    <message id="vebus_settings_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
+      <source>VE.Bus settings access password</source>
+      <translation>Parola de acces la setările VE.Bus</translation>
+    </message>
+    <message id="vebus_settings_enter_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
+      <source>Enter VE.Bus password for access level %1</source>
+      <translation>Introduceți parola VE.Bus pentru nivelul de acces %1</translation>
+    </message>
+    <message id="device_page_inputs">
+      <location filename="../../components/DevicePage.qml" line="76"/>
+      <source>Inputs</source>
+      <translation>Intrări</translation>
     </message>
     <message id="list-spin-box-range_minimum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
       <source>Minimum value (%1)</source>
-      <translation type="unfinished"/>
+      <translation>Valoare minimă (%1)</translation>
     </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
-      <translation type="unfinished"/>
+      <translation>Până la</translation>
     </message>
     <message id="list-spin-box-range_maximum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
       <source>Maximum value (%1)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="settings_radio_button_group_unknown">
-      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
-      <source>Unknown</source>
-      <translation type="unfinished">Necunoscut</translation>
+      <translation>Valoare maximă (%1)</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
       <source>Value</source>
       <extracomment>Refers to the current value of the input.</extracomment>
-      <translation type="unfinished"/>
+      <translation>Valoare</translation>
+    </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
+      <source>Devices and Priorities</source>
+      <translation>Dispozitive și priorități</translation>
+    </message>
+    <message id="pagecontrollableloads_arrange">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
+      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
+      <translation>Aranjați dispozitivele controlabile în funcție de prioritatea lor; algoritmul de control le va controla în funcție de excesul de energie fotovoltaică disponibil în prezent.</translation>
+    </message>
+    <message id="pagecontrollableloads_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+      <source>Expected power consumption</source>
+      <translation>Consum estimat de energie</translation>
+    </message>
+    <message id="pagecontrollableloads_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+      <source>Minimum run duration when turned on</source>
+      <translation>Durată minimă de funcționare când este pornit</translation>
+    </message>
+    <message id="pagecontrollableloads_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+      <source>Minimum rest duration when turned off</source>
+      <translation>Durată minimă de repaus când este oprit</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_reserved_power_0">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
+      <source>Reserved power for battery charging at 0% SOC</source>
+      <translation>Putere rezervată pentru încărcarea bateriei la 0% SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_reduce_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Reduce power per percentage point of SOC by</source>
+      <translation>Reduce puterea pe punct procentual de SOC cu</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_batterylife_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+      <source>BatteryLife compatibility</source>
+      <translation>Compatibilitate BatteryLife</translation>
+    </message>
+    <message id="page_controllableloads_battery_pause_opportunity_loads">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
+      <translation>Întrerupeți consumatorii oportuniști când limita Active SOC depășește 85%</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
+      <translation>Acest lucru ajută algoritmul BatteryLife să reîncarce bateria la 100%.</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
+      <source>Maximum charging power limit</source>
+      <translation>Limită maximă de putere de încărcare</translation>
+    </message>
+    <message id="pagecontrollableloads_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
+      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
+      <translation>Limitarea puterii maxime de încărcare poate îmbunătăți simultaneitatea cu alte dispozitive controlabile.</translation>
+    </message>
+    <message id="page_generic_input_invert">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
+      <source>Invert</source>
+      <translation>Inversează</translation>
+    </message>
+    <message id="iochannel_digital_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
+      <source>Digital input mode</source>
+      <translation>Mod intrare digitală</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_input">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
+      <source>Digital input</source>
+      <translation>Intrare digitală</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>Toggle switch</source>
+      <translation>Comutator basculant</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
+      <source>Press button</source>
+      <translation>Buton de apăsat</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_press_and_hold">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Press and hold button</source>
+      <translation>Apăsați și mențineți apăsat butonul</translation>
+    </message>
+    <message id="page_microgrid_apply_all_parameters">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
+      <source>Apply all parameters</source>
+      <translation>Aplică toți parametrii</translation>
+    </message>
+    <message id="page_microgrid_apply">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
+      <source>Apply</source>
+      <translation>Aplică</translation>
+    </message>
+    <message id="settings_radio_button_group_unknown">
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Necunoscut</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="65"/>
@@ -11318,66 +11493,6 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <source>State</source>
       <translation type="unfinished">Stare</translation>
     </message>
-    <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
-      <source>Devices and Priorities</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
-      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_expected_power_consumption">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
-      <source>Expected power consumption</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
-      <source>Minimum run duration when turned on</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
-      <source>Minimum rest duration when turned off</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_reserved_power_0">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
-      <source>Reserved power for battery charging at 0% SOC</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_reduce_power">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
-      <source>Reduce power per percentage point of SOC by</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_batterylife_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
-      <source>BatteryLife compatibility</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="page_controllableloads_battery_pause_opportunity_loads">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
-      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
-      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
-      <source>Maximum charging power limit</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
-      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
       <source>PV</source>
@@ -11392,46 +11507,6 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
       <translation type="unfinished">Randament sistem</translation>
-    </message>
-    <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
-      <source>Invert</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
-      <source>Normal</source>
-      <translation type="unfinished">Normal</translation>
-    </message>
-    <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
-      <source>Inverted</source>
-      <translation type="unfinished">Inversat</translation>
-    </message>
-    <message id="iochannel_digital_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
-      <source>Digital input mode</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_input">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
-      <source>Digital input</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
-      <source>Toggle switch</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
-      <source>Press button</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_press_and_hold">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
-      <source>Press and hold button</source>
-      <translation type="unfinished"/>
     </message>
     <message id="charger_total_pv_power">
       <location filename="../../pages/solar/SolarDevicePage.qml" line="61"/>
@@ -11452,81 +11527,6 @@ Aici puteți adăuga porturi și ID-uri de unitate suplimentare pentru a căuta 
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
       <source>Warning</source>
       <translation type="unfinished">Avertisment</translation>
-    </message>
-    <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
-      <source>Low</source>
-      <translation type="unfinished">Scazut</translation>
-    </message>
-    <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
-      <source>High</source>
-      <translation type="unfinished">Ridicat</translation>
-    </message>
-    <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
-      <source>Off</source>
-      <translation type="unfinished">Oprit</translation>
-    </message>
-    <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
-      <source>On</source>
-      <translation type="unfinished">Pornit</translation>
-    </message>
-    <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
-      <source>No</source>
-      <translation type="unfinished">Nu</translation>
-    </message>
-    <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
-      <source>Yes</source>
-      <translation type="unfinished">Da</translation>
-    </message>
-    <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
-      <source>Open</source>
-      <translation type="unfinished">Deschis</translation>
-    </message>
-    <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
-      <source>Closed</source>
-      <translation type="unfinished">Inchis</translation>
-    </message>
-    <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
-      <source>OK</source>
-      <translation type="unfinished">In regula</translation>
-    </message>
-    <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
-      <source>Alarm</source>
-      <translation type="unfinished">Alarma</translation>
-    </message>
-    <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
-      <source>Stopped</source>
-      <translation type="unfinished">Oprit</translation>
-    </message>
-    <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
-      <source>Running</source>
-      <translation type="unfinished">Functioneaza</translation>
-    </message>
-    <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="164"/>
-      <source>Speed</source>
-      <translation type="unfinished">Viteza</translation>
-    </message>
-    <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="168"/>
-      <source>Temperature</source>
-      <translation type="unfinished">Temperatura</translation>
-    </message>
-    <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="172"/>
-      <source>Volume</source>
-      <translation type="unfinished">Volum</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
       <location filename="../../src/iochannel.cpp" line="340"/>

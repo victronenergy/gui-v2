@@ -18,8 +18,8 @@
       <source>Power</source>
       <translation>Strømforsyning</translation>
     </message>
-    <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="431"/>
+    <message id="generic_input_label_off">
+      <location filename="../../src/genericinput.cpp" line="112"/>
       <source>Off</source>
       <translation>Fra</translation>
     </message>
@@ -43,8 +43,8 @@
       <source>Low battery voltage</source>
       <translation>Lav batteri volt</translation>
     </message>
-    <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="303"/>
+    <message id="switchable_output_function_manual">
+      <location filename="../../src/enums.cpp" line="591"/>
       <source>Manual</source>
       <translation>Manual</translation>
     </message>
@@ -58,8 +58,8 @@
       <source>Position</source>
       <translation>Stilling</translation>
     </message>
-    <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
+    <message id="generic_input_primaryLabel_speed">
+      <location filename="../../src/genericinput.cpp" line="164"/>
       <source>Speed</source>
       <translation>Hastighed</translation>
     </message>
@@ -171,8 +171,8 @@
       <extracomment>GPS units</extracomment>
       <translation>GPS</translation>
     </message>
-    <message id="settings_tank_pump">
-      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="118"/>
+    <message id="switchable_output_function_tankpump">
+      <location filename="../../src/enums.cpp" line="594"/>
       <source>Tank pump</source>
       <translation>Tank pumpe</translation>
     </message>
@@ -275,6 +275,11 @@
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>Produkt</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation>Navn</translation>
     </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
@@ -1038,10 +1043,9 @@
       <source>Image type</source>
       <translation>Image type</translation>
     </message>
-    <message id="common_words_firmware_type_normal">
-      <location filename="../../components/CommonWords.qml" line="207"/>
+    <message id="iochannel_invert_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
       <source>Normal</source>
-      <extracomment>The firmware type for normal images</extracomment>
       <translation>Normal</translation>
     </message>
     <message id="common_words_firmware_type_large">
@@ -1333,6 +1337,12 @@
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="179"/>
       <source>Reset service timer</source>
       <translation>Nulstil servicetimer</translation>
+    </message>
+    <message id="components_volumeunit_volume">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
+      <source>Volume</source>
+      <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
+      <translation type="unfinished">Størrelse</translation>
     </message>
     <message id="settings_gps_format">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="71"/>
@@ -1630,6 +1640,11 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
       <source>Above minimum SOC only</source>
       <translation>Kun over minimum SoC</translation>
+    </message>
+    <message id="iochannel_showui_always">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
+      <source>Always</source>
+      <translation>Altid</translation>
     </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="173"/>
@@ -1997,10 +2012,15 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>Function (Relay 1)</source>
       <translation>Funktion (Relæ 1)</translation>
     </message>
+    <message id="page_switchable_output_function">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
+      <source>Function</source>
+      <translation>Funktion</translation>
+    </message>
     <message id="settings_relay_function">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
       <source>Function</source>
-      <translation>Funktion</translation>
+      <translation type="unfinished">Funktion</translation>
     </message>
     <message id="settings_relay_disabled">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
@@ -2606,16 +2626,14 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <extracomment>Voltage alarm is at "Alarm" level</extracomment>
       <translation type="unfinished">Alarm</translation>
     </message>
-    <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="370"/>
+    <message id="generic_input_label_alarm">
+      <location filename="../../src/genericinput.cpp" line="126"/>
       <source>Alarm</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Alarm</translation>
     </message>
-    <message id="components_volumeunit_volume">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
+    <message id="generic_input_primaryLabel_volume">
+      <location filename="../../src/genericinput.cpp" line="172"/>
       <source>Volume</source>
-      <extracomment>Title for a list of units of volume (e.g. cubic metres, litres, gallons)</extracomment>
       <translation>Størrelse</translation>
     </message>
     <message id="tank_status_short_circuited">
@@ -2752,6 +2770,11 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>Unsupported</source>
       <extracomment>Device is not supported</extracomment>
       <translation>Ikke understøttet</translation>
+    </message>
+    <message id="settings_tank_pump">
+      <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="118"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">Tank pumpe</translation>
     </message>
     <message id="devicelist_remove_disconnected_devices">
       <location filename="../../pages/settings/devicelist/DeviceListPage.qml" line="125"/>
@@ -3897,8 +3920,8 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>DC</source>
       <translation>DC</translation>
     </message>
-    <message id="pulsecounter_setup_inverted">
-      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="21"/>
+    <message id="iochannel_invert_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
       <source>Inverted</source>
       <translation>Omvendt</translation>
     </message>
@@ -3967,6 +3990,11 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>Aggregate</source>
       <translation>Sum</translation>
     </message>
+    <message id="pulsecounter_setup_inverted">
+      <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="21"/>
+      <source>Inverted</source>
+      <translation type="unfinished">Omvendt</translation>
+    </message>
     <message id="pulsecounter_setup_multiplier">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="27"/>
       <source>Multiplier</source>
@@ -3977,8 +4005,8 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <source>Reset counter</source>
       <translation>Nulstil tæller</translation>
     </message>
-    <message id="temperature_sensor_battery_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+    <message id="generic_input_status_sensor_battery_low">
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Sensor battery low</source>
       <translation>Lav sensor batteri</translation>
     </message>
@@ -4601,10 +4629,9 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <extracomment>Action to clear an error state</extracomment>
       <translation>Fjern fejl</translation>
     </message>
-    <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="362"/>
+    <message id="generic_input_label_closed">
+      <location filename="../../src/genericinput.cpp" line="122"/>
       <source>Closed</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Lukket</translation>
     </message>
     <message id="evchargers_status_connected">
@@ -4810,14 +4837,13 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Model name</source>
       <translation>Model navn</translation>
     </message>
-    <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="350"/>
+    <message id="generic_input_label_no">
+      <location filename="../../src/genericinput.cpp" line="116"/>
       <source>No</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Nej</translation>
     </message>
-    <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="359"/>
+    <message id="microgrid_error_none">
+      <location filename="../../src/enums.cpp" line="781"/>
       <source>No error</source>
       <translation>Ingen fejl</translation>
     </message>
@@ -4836,14 +4862,13 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Offline</source>
       <translation>Offline</translation>
     </message>
-    <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="366"/>
+    <message id="generic_input_label_ok">
+      <location filename="../../src/genericinput.cpp" line="124"/>
       <source>OK</source>
-      <extracomment>Digital input state</extracomment>
       <translation>OK</translation>
     </message>
-    <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="646"/>
+    <message id="generic_input_label_on">
+      <location filename="../../src/genericinput.cpp" line="114"/>
       <source>On</source>
       <translation>On</translation>
     </message>
@@ -4852,10 +4877,9 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Online</source>
       <translation>Online</translation>
     </message>
-    <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="358"/>
+    <message id="generic_input_label_open">
+      <location filename="../../src/genericinput.cpp" line="120"/>
       <source>Open</source>
-      <extracomment>Digital input open</extracomment>
       <translation>Åben</translation>
     </message>
     <message id="common_words_password">
@@ -4915,8 +4939,8 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Remove</source>
       <translation>Fjerne</translation>
     </message>
-    <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="694"/>
+    <message id="generic_input_label_running">
+      <location filename="../../src/genericinput.cpp" line="130"/>
       <source>Running</source>
       <translation>Kører</translation>
     </message>
@@ -4997,14 +5021,13 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Stop after the condition is reached for</source>
       <translation>Stop efter betingelsen er opnået for</translation>
     </message>
-    <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="378"/>
+    <message id="generic_input_label_stopped">
+      <location filename="../../src/genericinput.cpp" line="128"/>
       <source>Stopped</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Stoppet</translation>
     </message>
-    <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="533"/>
+    <message id="generic_input_primaryLabel_temperature">
+      <location filename="../../src/genericinput.cpp" line="168"/>
       <source>Temperature</source>
       <translation>Temperatur</translation>
     </message>
@@ -5028,6 +5051,11 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Overvåg</translation>
+    </message>
+    <message id="iochannel_type_buttongroup_type">
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <source>Type</source>
+      <translation>Type</translation>
     </message>
     <message id="common_words_unique_id_number">
       <location filename="../../components/CommonWords.qml" line="558"/>
@@ -5059,10 +5087,9 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>When warning is cleared stop after</source>
       <translation>Når advarsel er ryddet stop efter</translation>
     </message>
-    <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="354"/>
+    <message id="generic_input_label_yes">
+      <location filename="../../src/genericinput.cpp" line="118"/>
       <source>Yes</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Ja</translation>
     </message>
     <message id="common_words_yesterday">
@@ -5919,16 +5946,14 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <source>Water generator</source>
       <translation>Vandturbine</translation>
     </message>
-    <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="334"/>
+    <message id="generic_input_label_low">
+      <location filename="../../src/genericinput.cpp" line="108"/>
       <source>Low</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Lav</translation>
     </message>
-    <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="338"/>
+    <message id="generic_input_label_high">
+      <location filename="../../src/genericinput.cpp" line="110"/>
       <source>High</source>
-      <extracomment>Digital input state</extracomment>
       <translation>Høj</translation>
     </message>
     <message id="ess_state_keep_batteries_charged">
@@ -7370,16 +7395,6 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Automatic</source>
       <translation type="unfinished">Automatisk</translation>
     </message>
-    <message id="pagesettingssystem_opportunity_loads">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
-      <source>Opportunity Loads</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
-      <source>Automate controllable devices to maximize PV self-use</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="pagesettingssystem_ac_system">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
       <source>AC System</source>
@@ -7729,6 +7744,12 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>'%1' is not a number.</source>
       <translation>'%1' er ikke et tal.</translation>
     </message>
+    <message id="common_words_firmware_type_normal">
+      <location filename="../../components/CommonWords.qml" line="207"/>
+      <source>Normal</source>
+      <extracomment>The firmware type for normal images</extracomment>
+      <translation type="unfinished">Normal</translation>
+    </message>
     <message id="common_words_generator">
       <location filename="../../components/CommonWords.qml" line="217"/>
       <source>Generator</source>
@@ -7766,6 +7787,11 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
     </message>
+    <message id="common_words_manual">
+      <location filename="../../components/CommonWords.qml" line="303"/>
+      <source>Manual</source>
+      <translation type="unfinished">Manual</translation>
+    </message>
     <message id="common_words_manual_stop">
       <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Manual stop</source>
@@ -7792,6 +7818,11 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="433"/>
       <source>No</source>
       <translation type="unfinished">Nej</translation>
+    </message>
+    <message id="common_words_no_error">
+      <location filename="../../components/CommonWords.qml" line="359"/>
+      <source>No error</source>
+      <translation type="unfinished">Ingen fejl</translation>
     </message>
     <message id="common_words_none_option">
       <location filename="../../components/CommonWords.qml" line="362"/>
@@ -7892,6 +7923,11 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Stopped</source>
       <translation type="unfinished">Stoppet</translation>
+    </message>
+    <message id="common_words_temperature">
+      <location filename="../../components/CommonWords.qml" line="533"/>
+      <source>Temperature</source>
+      <translation type="unfinished">Temperatur</translation>
     </message>
     <message id="common_words_type">
       <location filename="../../components/CommonWords.qml" line="555"/>
@@ -8078,6 +8114,18 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Bilge pump</source>
       <translation type="unfinished">Sump pumpe</translation>
     </message>
+    <message id="digitalinputs_state_low">
+      <location filename="../../src/enums.cpp" line="334"/>
+      <source>Low</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Lav</translation>
+    </message>
+    <message id="digitalinputs_state_high">
+      <location filename="../../src/enums.cpp" line="338"/>
+      <source>High</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Høj</translation>
+    </message>
     <message id="digitalinputs_state_off">
       <location filename="../../src/enums.cpp" line="342"/>
       <source>Off</source>
@@ -8090,17 +8138,64 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">On</translation>
     </message>
+    <message id="digitalinputs_state_no">
+      <location filename="../../src/enums.cpp" line="350"/>
+      <source>No</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Nej</translation>
+    </message>
+    <message id="digitalinputs_state_yes">
+      <location filename="../../src/enums.cpp" line="354"/>
+      <source>Yes</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Ja</translation>
+    </message>
+    <message id="digitalinputs_state_open">
+      <location filename="../../src/enums.cpp" line="358"/>
+      <source>Open</source>
+      <extracomment>Digital input open</extracomment>
+      <translation type="unfinished">Åben</translation>
+    </message>
+    <message id="digitalinputs_state_closed">
+      <location filename="../../src/enums.cpp" line="362"/>
+      <source>Closed</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Lukket</translation>
+    </message>
+    <message id="digitalinputs_state_ok">
+      <location filename="../../src/enums.cpp" line="366"/>
+      <source>OK</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">OK</translation>
+    </message>
+    <message id="digitalinputs_state_alarm">
+      <location filename="../../src/enums.cpp" line="370"/>
+      <source>Alarm</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Alarm</translation>
+    </message>
     <message id="digitalinputs_state_running">
       <location filename="../../src/enums.cpp" line="374"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Kører</translation>
     </message>
+    <message id="digitalinputs_state_stopped">
+      <location filename="../../src/enums.cpp" line="378"/>
+      <source>Stopped</source>
+      <extracomment>Digital input state</extracomment>
+      <translation type="unfinished">Stoppet</translation>
+    </message>
     <message id="pvinverter_statusCode_running">
       <location filename="../../src/enums.cpp" line="400"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">Kører</translation>
+    </message>
+    <message id="solarchargers_state_off">
+      <location filename="../../src/enums.cpp" line="431"/>
+      <source>Off</source>
+      <translation type="unfinished">Fra</translation>
     </message>
     <message id="solarchargers_state_external control">
       <location filename="../../src/enums.cpp" line="452"/>
@@ -8132,26 +8227,6 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Under voltage</source>
       <translation>Under volt</translation>
     </message>
-    <message id="generic_input_discrete">
-      <location filename="../../src/enums.cpp" line="489"/>
-      <source>Discrete value indicator</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_value_unranged">
-      <location filename="../../src/enums.cpp" line="492"/>
-      <source>Value indicator (unranged)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_value_ranged">
-      <location filename="../../src/enums.cpp" line="495"/>
-      <source>Value indicator (ranged)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="generic_input_temperature">
-      <location filename="../../src/enums.cpp" line="498"/>
-      <source>Temperature indicator</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="generic_input_status_on">
       <location filename="../../src/enums.cpp" line="508"/>
       <source>On</source>
@@ -8161,11 +8236,6 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <location filename="../../src/enums.cpp" line="511"/>
       <source>Fault</source>
       <translation type="unfinished">Fejl</translation>
-    </message>
-    <message id="generic_input_status_sensor_battery_low">
-      <location filename="../../src/enums.cpp" line="514"/>
-      <source>Sensor battery low</source>
-      <translation type="unfinished">Lav sensor batteri</translation>
     </message>
     <message id="switchable_output_momentary">
       <location filename="../../src/enums.cpp" line="524"/>
@@ -8197,35 +8267,10 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Alarm</source>
       <translation type="unfinished">Alarm</translation>
     </message>
-    <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="588"/>
-      <source>Generator start/stop</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="591"/>
-      <source>Manual</source>
-      <translation type="unfinished">Manual</translation>
-    </message>
-    <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="594"/>
-      <source>Tank pump</source>
-      <translation type="unfinished">Tank pumpe</translation>
-    </message>
     <message id="switchable_output_function_temperature">
       <location filename="../../src/enums.cpp" line="597"/>
       <source>Temperature</source>
       <translation type="unfinished">Temperatur</translation>
-    </message>
-    <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="600"/>
-      <source>Genset Helper</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="603"/>
-      <source>Opportunity load</source>
-      <translation type="unfinished"/>
     </message>
     <message id="switchable_output_off">
       <location filename="../../src/enums.cpp" line="625"/>
@@ -8247,6 +8292,11 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <source>Fault</source>
       <translation type="unfinished">Fejl</translation>
     </message>
+    <message id="switchable_output_on">
+      <location filename="../../src/enums.cpp" line="646"/>
+      <source>On</source>
+      <translation type="unfinished">On</translation>
+    </message>
     <message id="switchable_output_short">
       <location filename="../../src/enums.cpp" line="649"/>
       <source>Short</source>
@@ -8256,116 +8306,6 @@ Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
       <location filename="../../src/enums.cpp" line="702"/>
       <source>Not running</source>
       <translation type="unfinished">Kører ikke</translation>
-    </message>
-    <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="763"/>
-      <source>EMS Control: Hybrid droop</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="767"/>
-      <source>EMS Control: Grid-following</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="770"/>
-      <source>EMS Control: Grid-forming</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="781"/>
-      <source>No error</source>
-      <translation type="unfinished">Ingen fejl</translation>
-    </message>
-    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="784"/>
-      <source>Different fallback hybrid droop values in phase masters</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="787"/>
-      <source>Hybrid droop parameter write failed</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="790"/>
-      <source>Parameter error Fmin &gt; Fmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="793"/>
-      <source>Parameter error Pmin &gt; Pmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="796"/>
-      <source>Parameter error Umin &gt; Umax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="799"/>
-      <source>Parameter error Qmin &gt; Qmax</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="802"/>
-      <source>Parameter error Q0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="805"/>
-      <source>Parameter error Qmin out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="808"/>
-      <source>Parameter error Qmax out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="811"/>
-      <source>Parameter error U0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="814"/>
-      <source>Parameter error U droop out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="817"/>
-      <source>Parameter error P0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="820"/>
-      <source>Parameter error Pmin out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="823"/>
-      <source>Parameter error Pmax out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="826"/>
-      <source>Parameter error F0 out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="829"/>
-      <source>Parameter error freq droop out of range</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="832"/>
-      <source>Ve.Bus internal error PF vs FP data mismatch</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="835"/>
-      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
-      <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -9220,6 +9160,11 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <source>Gauge Display</source>
       <translation>Målerens display</translation>
     </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="193"/>
+      <source>Speed</source>
+      <translation type="unfinished">Hastighed</translation>
+    </message>
     <message id="settings_minmax_max_speed">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="209"/>
       <source>Max Speed</source>
@@ -9239,6 +9184,11 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
       <source>Module Voltage</source>
       <translation>Modulspænding</translation>
+    </message>
+    <message id="page_generic_input_group">
+      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
+      <source>Group</source>
+      <translation>Gruppe</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
@@ -9335,11 +9285,6 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="38"/>
       <source>Resetting VE.Bus products</source>
       <translation>Nulstilling af VE.bus-produkter</translation>
-    </message>
-    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
-      <source>Waiting for VE.Bus setting access password</source>
-      <translation type="unfinished"/>
     </message>
     <message id="Unknown">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="42"/>
@@ -9538,11 +9483,6 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <source>Incompatible</source>
       <translation>Ikke understøttet</translation>
     </message>
-    <message id="vebus_settings_password_required">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
-      <source>VE.Bus settings password required</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="backup_name">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="323"/>
       <source>Backup name</source>
@@ -9620,16 +9560,6 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="467"/>
       <source>Press to cancel</source>
       <translation>Tryk for at annullere</translation>
-    </message>
-    <message id="vebus_settings_access_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
-      <source>VE.Bus settings access password</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="vebus_settings_enter_password">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
-      <source>Enter VE.Bus password for access level %1</source>
-      <translation type="unfinished"/>
     </message>
     <message id="vebus_backup_firmware_version_specific_message">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="477"/>
@@ -9713,6 +9643,12 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <location filename="../../components/listitems/ListOutputBatteryRadioButtonGroup.qml" line="21"/>
       <source>Charging another battery from the main battery</source>
       <translation>Opladning af et andet batteri fra hovedbatteriet</translation>
+    </message>
+    <message id="iochannel_showui_controls">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
+      <source>Show controls</source>
+      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
+      <translation>Vis kontrolelementer</translation>
     </message>
     <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
@@ -10293,11 +10229,6 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <source>Switches</source>
       <translation>Kontakter</translation>
     </message>
-    <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="76"/>
-      <source>Inputs</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="settings_shelly_refresh_devices">
       <location filename="../../pages/settings/PageSettingsShelly.qml" line="82"/>
       <source>Refresh devices</source>
@@ -10473,16 +10404,6 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <source>Allowed reactive power range</source>
       <translation>Tilladt reaktiv effektområde</translation>
     </message>
-    <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
-      <source>Apply all parameters</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
-      <source>Apply</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="316"/>
       <source>P-Q direct drive settings</source>
@@ -10552,6 +10473,11 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="35"/>
       <source>Reverse polarity</source>
       <translation type="unfinished">Omvendt polaritet</translation>
+    </message>
+    <message id="temperature_sensor_battery_low">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="38"/>
+      <source>Sensor battery low</source>
+      <translation type="unfinished">Lav sensor batteri</translation>
     </message>
     <message id="temperature_pm25">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="70"/>
@@ -10798,11 +10724,6 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <source>Only when the output is off</source>
       <translation>Kun når udgangen er slået fra</translation>
     </message>
-    <message id="page_switchable_output_function">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
-      <source>Function</source>
-      <translation type="unfinished">Funktion</translation>
-    </message>
     <message id="page_switchable_output_startup_state">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="117"/>
       <source>Startup switch state</source>
@@ -10853,6 +10774,16 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
       <source>Phase Setting</source>
       <translation>Faseindstilling</translation>
+    </message>
+    <message id="iochannel_showui_local">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
+      <source>Only local</source>
+      <translation>Kun lokal</translation>
+    </message>
+    <message id="iochannel_showui_vrm">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
+      <source>Only on VRM</source>
+      <translation>Kun på VRM</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
@@ -11214,73 +11145,317 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <source>Running, disabled</source>
       <translation>Kører, deaktiveret</translation>
     </message>
+    <message id="switchable_output_running">
+      <location filename="../../src/enums.cpp" line="694"/>
+      <source>Running</source>
+      <translation type="unfinished">Kører</translation>
+    </message>
     <message id="switchable_output_not_running_disabled">
       <location filename="../../src/enums.cpp" line="699"/>
       <source>Not running, disabled</source>
       <translation>Kører ikke, deaktiveret</translation>
     </message>
-    <message id="page_generic_input_group">
-      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
-      <source>Group</source>
-      <translation type="unfinished">Gruppe</translation>
+    <message id="pagesettingssystem_opportunity_loads">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <source>Opportunity Loads</source>
+      <translation>Mulighedsbelastninger</translation>
     </message>
-    <message id="iochannel_name">
-      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
-      <source>Name</source>
-      <translation type="unfinished">Navn</translation>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <source>Automate controllable devices to maximize PV self-use</source>
+      <translation>Automatiser kontrollerbare enheder for at maksimere PV-egenforbruget</translation>
     </message>
-    <message id="iochannel_showui_controls">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
-      <source>Show controls</source>
-      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
-      <translation type="unfinished">Vis kontrolelementer</translation>
+    <message id="microgrid_mode_ems_hybrid_droop">
+      <location filename="../../src/enums.cpp" line="763"/>
+      <source>EMS Control: Hybrid droop</source>
+      <translation>EMS-kontrol: Hybrid droop</translation>
     </message>
-    <message id="iochannel_showui_always">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
-      <source>Always</source>
-      <translation type="unfinished">Altid</translation>
+    <message id="microgrid_mode_ems_grid_following">
+      <location filename="../../src/enums.cpp" line="767"/>
+      <source>EMS Control: Grid-following</source>
+      <translation>EMS-kontrol: Netfølgende</translation>
     </message>
-    <message id="iochannel_showui_local">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
-      <source>Only local</source>
-      <translation type="unfinished">Kun lokal</translation>
+    <message id="microgrid_mode_ems_grid_forming">
+      <location filename="../../src/enums.cpp" line="770"/>
+      <source>EMS Control: Grid-forming</source>
+      <translation>EMS-kontrol: Netdannende</translation>
     </message>
-    <message id="iochannel_showui_vrm">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
-      <source>Only on VRM</source>
-      <translation type="unfinished">Kun på VRM</translation>
+    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
+      <location filename="../../src/enums.cpp" line="784"/>
+      <source>Different fallback hybrid droop values in phase masters</source>
+      <translation>Forskellige fallback hybrid droop-værdier i fasemastere</translation>
     </message>
-    <message id="iochannel_type_buttongroup_type">
-      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
-      <source>Type</source>
-      <translation type="unfinished">Type</translation>
+    <message id="microgrid_error_write_failed">
+      <location filename="../../src/enums.cpp" line="787"/>
+      <source>Hybrid droop parameter write failed</source>
+      <translation>Hybrid droop parameter skrivning mislykkedes</translation>
+    </message>
+    <message id="microgrid_error_param_fmin_greater_than_fmax">
+      <location filename="../../src/enums.cpp" line="790"/>
+      <source>Parameter error Fmin &gt; Fmax</source>
+      <translation>Parameterfejl Fmin &gt; Fmax</translation>
+    </message>
+    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
+      <location filename="../../src/enums.cpp" line="793"/>
+      <source>Parameter error Pmin &gt; Pmax</source>
+      <translation>Parameterfejl Pmin &gt; Pmax</translation>
+    </message>
+    <message id="microgrid_error_param_umin_greater_than_umax">
+      <location filename="../../src/enums.cpp" line="796"/>
+      <source>Parameter error Umin &gt; Umax</source>
+      <translation>Parameterfejl Umin &gt; Umax</translation>
+    </message>
+    <message id="microgrid_error_param_qmin_greater_than_qmax">
+      <location filename="../../src/enums.cpp" line="799"/>
+      <source>Parameter error Qmin &gt; Qmax</source>
+      <translation>Parameterfejl Qmin &gt; Qmax</translation>
+    </message>
+    <message id="microgrid_error_param_q0_out_of_range">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Parameter error Q0 out of range</source>
+      <translation>Parameterfejl Q0 er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_qmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Parameter error Qmin out of range</source>
+      <translation>Parameterfejl Qmin er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_qmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="808"/>
+      <source>Parameter error Qmax out of range</source>
+      <translation>Parameterfejl Qmax er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_u0_out_of_range">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Parameter error U0 out of range</source>
+      <translation>Parameterfejl U0 er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_u_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Parameter error U droop out of range</source>
+      <translation>Parameterfejl U droop er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_p0_out_of_range">
+      <location filename="../../src/enums.cpp" line="817"/>
+      <source>Parameter error P0 out of range</source>
+      <translation>Parameterfejl P0 er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_pmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="820"/>
+      <source>Parameter error Pmin out of range</source>
+      <translation>Parameterfejl Pmin er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_pmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="823"/>
+      <source>Parameter error Pmax out of range</source>
+      <translation>Parameterfejl Pmax er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_f0_out_of_range">
+      <location filename="../../src/enums.cpp" line="826"/>
+      <source>Parameter error F0 out of range</source>
+      <translation>Parameterfejl F0 er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_param_freq_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="829"/>
+      <source>Parameter error freq droop out of range</source>
+      <translation>Parameterfejl frekvens droop er ude af interval</translation>
+    </message>
+    <message id="microgrid_error_pf_fp_mismatch">
+      <location filename="../../src/enums.cpp" line="832"/>
+      <source>Ve.Bus internal error PF vs FP data mismatch</source>
+      <translation>Ve.Bus intern fejl PF vs FP data mismatch</translation>
+    </message>
+    <message id="microgrid_error_qu_uq_mismatch">
+      <location filename="../../src/enums.cpp" line="835"/>
+      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
+      <translation>Ve.Bus intern fejl QU vs UQ data mismatch</translation>
+    </message>
+    <message id="generic_input_discrete">
+      <location filename="../../src/enums.cpp" line="489"/>
+      <source>Discrete value indicator</source>
+      <translation>Diskret værdiindikator</translation>
+    </message>
+    <message id="generic_input_value_unranged">
+      <location filename="../../src/enums.cpp" line="492"/>
+      <source>Value indicator (unranged)</source>
+      <translation>Værdiindikator (uden interval)</translation>
+    </message>
+    <message id="generic_input_value_ranged">
+      <location filename="../../src/enums.cpp" line="495"/>
+      <source>Value indicator (ranged)</source>
+      <translation>Værdiindikator (med interval)</translation>
+    </message>
+    <message id="generic_input_temperature">
+      <location filename="../../src/enums.cpp" line="498"/>
+      <source>Temperature indicator</source>
+      <translation>Temperaturindikator</translation>
+    </message>
+    <message id="switchable_output_function_generator_startstop">
+      <location filename="../../src/enums.cpp" line="588"/>
+      <source>Generator start/stop</source>
+      <translation>Generator Start/stop</translation>
+    </message>
+    <message id="switchable_output_function_genset_helper">
+      <location filename="../../src/enums.cpp" line="600"/>
+      <source>Genset Helper</source>
+      <translation>Genset-hjælper</translation>
+    </message>
+    <message id="switchable_output_function_opportunity_load">
+      <location filename="../../src/enums.cpp" line="603"/>
+      <source>Opportunity load</source>
+      <translation>Mulighedsbelastning</translation>
+    </message>
+    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
+      <source>Waiting for VE.Bus setting access password</source>
+      <translation>Venter på adgangskode til VE.Bus-indstilling</translation>
+    </message>
+    <message id="vebus_settings_password_required">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
+      <source>VE.Bus settings password required</source>
+      <translation>VE.Bus-indstillingsadgangskode kræves</translation>
+    </message>
+    <message id="vebus_settings_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
+      <source>VE.Bus settings access password</source>
+      <translation>VE.Bus-indstillingsadgangskode</translation>
+    </message>
+    <message id="vebus_settings_enter_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
+      <source>Enter VE.Bus password for access level %1</source>
+      <translation>Indtast VE.Bus-adgangskode for adgangsniveau %1</translation>
+    </message>
+    <message id="device_page_inputs">
+      <location filename="../../components/DevicePage.qml" line="76"/>
+      <source>Inputs</source>
+      <translation>Indgange</translation>
     </message>
     <message id="list-spin-box-range_minimum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
       <source>Minimum value (%1)</source>
-      <translation type="unfinished"/>
+      <translation>Minimumsværdi (%1)</translation>
     </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
-      <translation type="unfinished"/>
+      <translation>Til</translation>
     </message>
     <message id="list-spin-box-range_maximum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
       <source>Maximum value (%1)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="settings_radio_button_group_unknown">
-      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
-      <source>Unknown</source>
-      <translation type="unfinished">Ukendt</translation>
+      <translation>Maksimumsværdi (%1)</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
       <source>Value</source>
       <extracomment>Refers to the current value of the input.</extracomment>
-      <translation type="unfinished"/>
+      <translation>Værdi</translation>
+    </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
+      <source>Devices and Priorities</source>
+      <translation>Enheder og prioriteter</translation>
+    </message>
+    <message id="pagecontrollableloads_arrange">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
+      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
+      <translation>Arranger de kontrollerbare enheder efter deres prioritet; kontrolalgoritmen styrer dem baseret på den tilgængelige PV-overskudsstrøm.</translation>
+    </message>
+    <message id="pagecontrollableloads_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+      <source>Expected power consumption</source>
+      <translation>Forventet strømforbrug</translation>
+    </message>
+    <message id="pagecontrollableloads_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+      <source>Minimum run duration when turned on</source>
+      <translation>Minimum driftstid, når den er tændt</translation>
+    </message>
+    <message id="pagecontrollableloads_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+      <source>Minimum rest duration when turned off</source>
+      <translation>Minimum hviletid, når den er slukket</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_reserved_power_0">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
+      <source>Reserved power for battery charging at 0% SOC</source>
+      <translation>Reserveret strøm til batteriopladning ved 0% SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_reduce_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Reduce power per percentage point of SOC by</source>
+      <translation>Reducer strøm pr. procentpoint af SOC med</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_batterylife_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+      <source>BatteryLife compatibility</source>
+      <translation>BatteryLife-kompatibilitet</translation>
+    </message>
+    <message id="page_controllableloads_battery_pause_opportunity_loads">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
+      <translation>Pause mulighedsbelastninger, når aktiv SOC-grænse overskrider 85%</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
+      <translation>Dette hjælper BatteryLife-algoritmen med at genoplade batteriet til 100 %.</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
+      <source>Maximum charging power limit</source>
+      <translation>Maksimal grænse for opladningseffekt</translation>
+    </message>
+    <message id="pagecontrollableloads_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
+      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
+      <translation>Begrænsning af den maksimale opladningseffekt kan forbedre samtidigheden med andre kontrollerbare enheder.</translation>
+    </message>
+    <message id="page_generic_input_invert">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
+      <source>Invert</source>
+      <translation>Inverter</translation>
+    </message>
+    <message id="iochannel_digital_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
+      <source>Digital input mode</source>
+      <translation>Digital inputtilstand</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_input">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
+      <source>Digital input</source>
+      <translation>Digital input</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>Toggle switch</source>
+      <translation>Vippekontakt</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
+      <source>Press button</source>
+      <translation>Trykknap</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_press_and_hold">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Press and hold button</source>
+      <translation>Tryk og hold knappen nede</translation>
+    </message>
+    <message id="page_microgrid_apply_all_parameters">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
+      <source>Apply all parameters</source>
+      <translation>Anvend alle parametre</translation>
+    </message>
+    <message id="page_microgrid_apply">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
+      <source>Apply</source>
+      <translation>TILFØJ</translation>
+    </message>
+    <message id="settings_radio_button_group_unknown">
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Ukendt</translation>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="65"/>
@@ -11317,66 +11492,6 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <source>State</source>
       <translation type="unfinished">Tilstand</translation>
     </message>
-    <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
-      <source>Devices and Priorities</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
-      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_expected_power_consumption">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
-      <source>Expected power consumption</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
-      <source>Minimum run duration when turned on</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
-      <source>Minimum rest duration when turned off</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_reserved_power_0">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
-      <source>Reserved power for battery charging at 0% SOC</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_reduce_power">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
-      <source>Reduce power per percentage point of SOC by</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_batterylife_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
-      <source>BatteryLife compatibility</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="page_controllableloads_battery_pause_opportunity_loads">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
-      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
-      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
-      <source>Maximum charging power limit</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="pagecontrollableloads_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
-      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
-      <translation type="unfinished"/>
-    </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
       <source>PV</source>
@@ -11391,46 +11506,6 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
       <translation type="unfinished">Systemets produktion</translation>
-    </message>
-    <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
-      <source>Invert</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
-      <source>Normal</source>
-      <translation type="unfinished">Normal</translation>
-    </message>
-    <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
-      <source>Inverted</source>
-      <translation type="unfinished">Omvendt</translation>
-    </message>
-    <message id="iochannel_digital_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
-      <source>Digital input mode</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_input">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
-      <source>Digital input</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
-      <source>Toggle switch</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
-      <source>Press button</source>
-      <translation type="unfinished"/>
-    </message>
-    <message id="iochannel_digital_input_mode_press_and_hold">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
-      <source>Press and hold button</source>
-      <translation type="unfinished"/>
     </message>
     <message id="charger_total_pv_power">
       <location filename="../../pages/solar/SolarDevicePage.qml" line="61"/>
@@ -11451,81 +11526,6 @@ Her kan du tilføje yderligere porte og enheds-ID'er til at scanne efter PV-inve
       <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
       <source>Warning</source>
       <translation type="unfinished">Advarsel</translation>
-    </message>
-    <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
-      <source>Low</source>
-      <translation type="unfinished">Lav</translation>
-    </message>
-    <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
-      <source>High</source>
-      <translation type="unfinished">Høj</translation>
-    </message>
-    <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
-      <source>Off</source>
-      <translation type="unfinished">Fra</translation>
-    </message>
-    <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
-      <source>On</source>
-      <translation type="unfinished">On</translation>
-    </message>
-    <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
-      <source>No</source>
-      <translation type="unfinished">Nej</translation>
-    </message>
-    <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
-      <source>Yes</source>
-      <translation type="unfinished">Ja</translation>
-    </message>
-    <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
-      <source>Open</source>
-      <translation type="unfinished">Åben</translation>
-    </message>
-    <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
-      <source>Closed</source>
-      <translation type="unfinished">Lukket</translation>
-    </message>
-    <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
-      <source>OK</source>
-      <translation type="unfinished">OK</translation>
-    </message>
-    <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
-      <source>Alarm</source>
-      <translation type="unfinished">Alarm</translation>
-    </message>
-    <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
-      <source>Stopped</source>
-      <translation type="unfinished">Stoppet</translation>
-    </message>
-    <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
-      <source>Running</source>
-      <translation type="unfinished">Kører</translation>
-    </message>
-    <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="164"/>
-      <source>Speed</source>
-      <translation type="unfinished">Hastighed</translation>
-    </message>
-    <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="168"/>
-      <source>Temperature</source>
-      <translation type="unfinished">Temperatur</translation>
-    </message>
-    <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="172"/>
-      <source>Volume</source>
-      <translation type="unfinished">Størrelse</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
       <location filename="../../src/iochannel.cpp" line="340"/>
