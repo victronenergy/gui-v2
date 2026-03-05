@@ -11338,7 +11338,7 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
-      <translation/>
+      <translation>Até</translation>
     </message>
     <message id="list-spin-box-range_maximum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
@@ -11349,7 +11349,7 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
       <source>Value</source>
       <extracomment>Refers to the current value of the input.</extracomment>
-      <translation/>
+      <translation>Valor</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
@@ -11449,7 +11449,7 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
     <message id="page_microgrid_apply">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
       <source>Apply</source>
-      <translation/>
+      <translation>Aplicar</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>

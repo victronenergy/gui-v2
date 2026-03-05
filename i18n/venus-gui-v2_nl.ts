@@ -10340,7 +10340,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="microgrid_mode_hybrid_droop">
       <location filename="../../src/enums.cpp" line="760"/>
       <source>Hybrid droop</source>
-      <translation>Hybride droop</translation>
+      <translation>Hybrid droop</translation>
     </message>
     <message id="microgrid">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="15"/>
@@ -10355,7 +10355,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="page_microgrid_hybrid_droop_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="141"/>
       <source>Hybrid droop parameters</source>
-      <translation>Hybride droop parameters</translation>
+      <translation>Hybrid droop parameters</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="148"/>
@@ -11166,7 +11166,7 @@ Hier kunt u extra poorten en unit ID's toevoegen om naar PV-omvormers te scannen
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="763"/>
       <source>EMS Control: Hybrid droop</source>
-      <translation>EMS-regeling: Hybride afval</translation>
+      <translation>EMS-regeling: Hybrid droop</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
       <location filename="../../src/enums.cpp" line="767"/>
@@ -11181,12 +11181,12 @@ Hier kunt u extra poorten en unit ID's toevoegen om naar PV-omvormers te scannen
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
       <location filename="../../src/enums.cpp" line="784"/>
       <source>Different fallback hybrid droop values in phase masters</source>
-      <translation>Verschillende fallback hybride afvalwaarden in fasemasters</translation>
+      <translation>Verschillende fallback hybrid droopwaarden in fasemasters</translation>
     </message>
     <message id="microgrid_error_write_failed">
       <location filename="../../src/enums.cpp" line="787"/>
       <source>Hybrid droop parameter write failed</source>
-      <translation>Het schrijven van hybride afvalparameters is mislukt</translation>
+      <translation>Het schrijven van hybrid droopparameters is mislukt</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
       <location filename="../../src/enums.cpp" line="790"/>
@@ -11231,7 +11231,7 @@ Hier kunt u extra poorten en unit ID's toevoegen om naar PV-omvormers te scannen
     <message id="microgrid_error_param_u_droop_out_of_range">
       <location filename="../../src/enums.cpp" line="814"/>
       <source>Parameter error U droop out of range</source>
-      <translation>Parameterfout U-afval buiten bereik</translation>
+      <translation>Parameterfout U droop buiten bereik</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
       <location filename="../../src/enums.cpp" line="817"/>
@@ -11256,7 +11256,7 @@ Hier kunt u extra poorten en unit ID's toevoegen om naar PV-omvormers te scannen
     <message id="microgrid_error_param_freq_droop_out_of_range">
       <location filename="../../src/enums.cpp" line="829"/>
       <source>Parameter error freq droop out of range</source>
-      <translation>Parameterfout frequentieafval buiten bereik</translation>
+      <translation>Parameterfout frequentie droop buiten bereik</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
       <location filename="../../src/enums.cpp" line="832"/>
