@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message id="page_switchable_output_switch_mode_disabled">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="31"/>
       <source>Disabled</source>
       <translation>معطل</translation>
     </message>
@@ -275,11 +275,6 @@
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>منتج</translation>
-    </message>
-    <message id="page_switchable_output_name">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="18"/>
-      <source>Name</source>
-      <translation>اسم</translation>
     </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
@@ -1636,11 +1631,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Above minimum SOC only</source>
       <translation>أعلى من الحد الأدنى لحالة الشحن فقط</translation>
     </message>
-    <message id="page_switchable_output_show_always">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="123"/>
-      <source>Always</source>
-      <translation>دائمًا</translation>
-    </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="173"/>
       <source>Discharge disabled</source>
@@ -1727,7 +1717,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>إنذار الباب</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="524"/>
+      <location filename="../../src/enums.cpp" line="559"/>
       <source>Bilge pump</source>
       <translation>مضخة الماء الآسن</translation>
     </message>
@@ -3269,7 +3259,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">اضغط للعودة إلى الضبط الأصلي</translation>
     </message>
     <message id="vebus_backup_press_to_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="362"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="391"/>
       <source>Press to restore</source>
       <translation>اضغط للعودة إلى الضبط الأصلي</translation>
     </message>
@@ -4857,7 +4847,7 @@ Do you want to continue?</source>
       <translation>صحيح</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="578"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>On</source>
       <translation>مشغل</translation>
     </message>
@@ -4930,7 +4920,7 @@ Do you want to continue?</source>
       <translation>إزالة</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="626"/>
+      <location filename="../../src/enums.cpp" line="694"/>
       <source>Running</source>
       <translation>مشغل</translation>
     </message>
@@ -5043,11 +5033,6 @@ Do you want to continue?</source>
       <extracomment>Solar tracker</extracomment>
       <translation>المتعقب</translation>
     </message>
-    <message id="page_switchable_output_type">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="92"/>
-      <source>Type</source>
-      <translation>النوع</translation>
-    </message>
     <message id="common_words_unique_id_number">
       <location filename="../../components/CommonWords.qml" line="558"/>
       <source>Unique Identity Number</source>
@@ -5137,7 +5122,7 @@ Do you want to continue?</source>
       <translation>وضع محول التردد/ الشاحن</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="35"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="36"/>
       <source>Set</source>
       <translation>تعيين</translation>
     </message>
@@ -5241,67 +5226,67 @@ Do you want to continue?</source>
       <translation>لم يتم إيجاد برنامج مبيت</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="647"/>
+      <location filename="../../src/enums.cpp" line="715"/>
       <source>Fuel</source>
       <translation>وقود</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="650"/>
+      <location filename="../../src/enums.cpp" line="718"/>
       <source>Fresh water</source>
       <translation>ماء نقي</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="653"/>
+      <location filename="../../src/enums.cpp" line="721"/>
       <source>Waste water</source>
       <translation>ماء فاسد</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="656"/>
+      <location filename="../../src/enums.cpp" line="724"/>
       <source>Live well</source>
       <translation>حيوية جيدة</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="659"/>
+      <location filename="../../src/enums.cpp" line="727"/>
       <source>Oil</source>
       <translation>زيت</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="662"/>
+      <location filename="../../src/enums.cpp" line="730"/>
       <source>Black water</source>
       <translation>مياه سوداء</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="665"/>
+      <location filename="../../src/enums.cpp" line="733"/>
       <source>Gasoline</source>
       <translation>البنزين</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="668"/>
+      <location filename="../../src/enums.cpp" line="736"/>
       <source>Diesel</source>
       <translation>الديزل</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="671"/>
+      <location filename="../../src/enums.cpp" line="739"/>
       <source>LPG</source>
       <translation>الغاز النفطي المسال</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="674"/>
+      <location filename="../../src/enums.cpp" line="742"/>
       <source>LNG</source>
       <translation>الغاز الطبيعي المسال</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="677"/>
+      <location filename="../../src/enums.cpp" line="745"/>
       <source>Hydraulic oil</source>
       <translation>زيت هيدروليكي</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="680"/>
+      <location filename="../../src/enums.cpp" line="748"/>
       <source>Raw water</source>
       <translation>ماء غير معالج</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="102"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="104"/>
       <source>Setting locked for access level</source>
       <translation>قفل الإعداد لمستوى الوصول</translation>
     </message>
@@ -7383,33 +7368,43 @@ Do you want to continue?</source>
       <source>Automatic</source>
       <translation type="unfinished">آلي</translation>
     </message>
+    <message id="pagesettingssystem_opportunity_loads">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <source>Opportunity Loads</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <source>Automate controllable devices to maximize PV self-use</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
       <source>AC System</source>
       <translation>نظام التيار المتردد</translation>
     </message>
     <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
       <source>Inputs and Monitoring</source>
       <translation>الإدخالات والمراقبة</translation>
     </message>
     <message id="pagesettingssystem_energy_storage_System">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
       <source>Energy Storage System</source>
       <translation>نظام تخزين الطاقة</translation>
     </message>
     <message id="pagesettingssystem_batteries_and_bms">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>البطاريات ونظم إدارة البطاريات</translation>
     </message>
     <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
       <source>Charge Control</source>
       <translation>التحكم في الشحن</translation>
     </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>نظام التحكم للجهد الكهربائي الموزع</translation>
     </message>
@@ -7454,7 +7449,7 @@ Do you want to continue?</source>
       <translation>سيقوم النظام بعرض الأحمال المتصلة بدخل العاكس/الشاحن تلقائيًا إذا كان عداد الشبكة موجودًا. الأحمال المتصلة بالمخرج تعرض دائما.</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
       <source>Display DC Loads</source>
       <translation>عرض أحمال التيار المتردد</translation>
     </message>
@@ -7464,7 +7459,7 @@ Do you want to continue?</source>
       <translation>قياسات البطارية</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
       <source>System status</source>
       <translation>حالة النظام</translation>
     </message>
@@ -7903,6 +7898,7 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../src/enums.cpp" line="837"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">مجهول</translation>
@@ -8020,7 +8016,7 @@ Do you want to continue?</source>
       <translation>التحكم في الإدخال باللمس</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="634"/>
       <source>Over temperature</source>
       <translation>درجة حرارة زائدة</translation>
     </message>
@@ -8134,55 +8130,240 @@ Do you want to continue?</source>
       <source>Under voltage</source>
       <translation>تيار منخفض</translation>
     </message>
-    <message id="switchable_output_momentary">
+    <message id="generic_input_discrete">
       <location filename="../../src/enums.cpp" line="489"/>
+      <source>Discrete value indicator</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_value_unranged">
+      <location filename="../../src/enums.cpp" line="492"/>
+      <source>Value indicator (unranged)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_value_ranged">
+      <location filename="../../src/enums.cpp" line="495"/>
+      <source>Value indicator (ranged)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_temperature">
+      <location filename="../../src/enums.cpp" line="498"/>
+      <source>Temperature indicator</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_status_on">
+      <location filename="../../src/enums.cpp" line="508"/>
+      <source>On</source>
+      <translation type="unfinished">مشغل</translation>
+    </message>
+    <message id="generic_input_status_fault">
+      <location filename="../../src/enums.cpp" line="511"/>
+      <source>Fault</source>
+      <translation type="unfinished">خلل</translation>
+    </message>
+    <message id="generic_input_status_sensor_battery_low">
+      <location filename="../../src/enums.cpp" line="514"/>
+      <source>Sensor battery low</source>
+      <translation type="unfinished">بطارية الحساس منخفضة</translation>
+    </message>
+    <message id="switchable_output_momentary">
+      <location filename="../../src/enums.cpp" line="524"/>
       <source>Momentary</source>
       <translation>لحظي</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="495"/>
+      <location filename="../../src/enums.cpp" line="530"/>
       <source>Dimmable</source>
       <translation>قابل للتعتيم</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="505"/>
+      <location filename="../../src/enums.cpp" line="540"/>
       <source>Slave of %1</source>
       <translation>تابع لـ%1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="508"/>
+      <location filename="../../src/enums.cpp" line="543"/>
       <source>Slave</source>
       <translation type="unfinished">تابع</translation>
     </message>
+    <message id="switchable_output_function_disabled">
+      <location filename="../../src/enums.cpp" line="582"/>
+      <source>Disabled</source>
+      <translation type="unfinished">معطل</translation>
+    </message>
+    <message id="switchable_output_function_alarm">
+      <location filename="../../src/enums.cpp" line="585"/>
+      <source>Alarm</source>
+      <translation type="unfinished">إنذار</translation>
+    </message>
+    <message id="switchable_output_function_generator_startstop">
+      <location filename="../../src/enums.cpp" line="588"/>
+      <source>Generator start/stop</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_function_manual">
+      <location filename="../../src/enums.cpp" line="591"/>
+      <source>Manual</source>
+      <translation type="unfinished">يدوي</translation>
+    </message>
+    <message id="switchable_output_function_tankpump">
+      <location filename="../../src/enums.cpp" line="594"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">مضخة الخزان</translation>
+    </message>
+    <message id="switchable_output_function_temperature">
+      <location filename="../../src/enums.cpp" line="597"/>
+      <source>Temperature</source>
+      <translation type="unfinished">الحرارة</translation>
+    </message>
+    <message id="switchable_output_function_genset_helper">
+      <location filename="../../src/enums.cpp" line="600"/>
+      <source>Genset Helper</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_function_opportunity_load">
+      <location filename="../../src/enums.cpp" line="603"/>
+      <source>Opportunity load</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="557"/>
+      <location filename="../../src/enums.cpp" line="625"/>
       <source>Off</source>
       <translation type="unfinished">مطفأ</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="560"/>
+      <location filename="../../src/enums.cpp" line="628"/>
       <source>Powered</source>
       <translation>مزود بالطاقة</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="563"/>
+      <location filename="../../src/enums.cpp" line="631"/>
       <source>Tripped</source>
       <translation>مفصول</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="572"/>
+      <location filename="../../src/enums.cpp" line="640"/>
       <source>Fault</source>
       <translation type="unfinished">خلل</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="581"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Short</source>
       <translation>قصير</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="702"/>
       <source>Not running</source>
       <translation type="unfinished">لا يعمل</translation>
+    </message>
+    <message id="microgrid_mode_ems_hybrid_droop">
+      <location filename="../../src/enums.cpp" line="763"/>
+      <source>EMS Control: Hybrid droop</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_mode_ems_grid_following">
+      <location filename="../../src/enums.cpp" line="767"/>
+      <source>EMS Control: Grid-following</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_mode_ems_grid_forming">
+      <location filename="../../src/enums.cpp" line="770"/>
+      <source>EMS Control: Grid-forming</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_none">
+      <location filename="../../src/enums.cpp" line="781"/>
+      <source>No error</source>
+      <translation type="unfinished">لا يوجد خطأ</translation>
+    </message>
+    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
+      <location filename="../../src/enums.cpp" line="784"/>
+      <source>Different fallback hybrid droop values in phase masters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_write_failed">
+      <location filename="../../src/enums.cpp" line="787"/>
+      <source>Hybrid droop parameter write failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_fmin_greater_than_fmax">
+      <location filename="../../src/enums.cpp" line="790"/>
+      <source>Parameter error Fmin &gt; Fmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
+      <location filename="../../src/enums.cpp" line="793"/>
+      <source>Parameter error Pmin &gt; Pmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_umin_greater_than_umax">
+      <location filename="../../src/enums.cpp" line="796"/>
+      <source>Parameter error Umin &gt; Umax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmin_greater_than_qmax">
+      <location filename="../../src/enums.cpp" line="799"/>
+      <source>Parameter error Qmin &gt; Qmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_q0_out_of_range">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Parameter error Q0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Parameter error Qmin out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="808"/>
+      <source>Parameter error Qmax out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_u0_out_of_range">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Parameter error U0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_u_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Parameter error U droop out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_p0_out_of_range">
+      <location filename="../../src/enums.cpp" line="817"/>
+      <source>Parameter error P0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="820"/>
+      <source>Parameter error Pmin out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="823"/>
+      <source>Parameter error Pmax out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_f0_out_of_range">
+      <location filename="../../src/enums.cpp" line="826"/>
+      <source>Parameter error F0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_freq_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="829"/>
+      <source>Parameter error freq droop out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_pf_fp_mismatch">
+      <location filename="../../src/enums.cpp" line="832"/>
+      <source>Ve.Bus internal error PF vs FP data mismatch</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_qu_uq_mismatch">
+      <location filename="../../src/enums.cpp" line="835"/>
+      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
+      <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8950,42 +9131,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>التالي</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="547"/>
+      <location filename="../../src/units.cpp" line="550"/>
       <source>N</source>
       <translation>ن</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="549"/>
+      <location filename="../../src/units.cpp" line="552"/>
       <source>NE</source>
       <translation>لا</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="551"/>
+      <location filename="../../src/units.cpp" line="554"/>
       <source>E</source>
       <translation>هـ</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="553"/>
+      <location filename="../../src/units.cpp" line="556"/>
       <source>SE</source>
       <translation>جنوب شرق</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="555"/>
+      <location filename="../../src/units.cpp" line="558"/>
       <source>S</source>
       <translation>س</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="557"/>
+      <location filename="../../src/units.cpp" line="560"/>
       <source>SW</source>
       <translation>جنوب غرب</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="559"/>
+      <location filename="../../src/units.cpp" line="562"/>
       <source>W</source>
       <translation>و</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="561"/>
+      <location filename="../../src/units.cpp" line="564"/>
       <source>NW</source>
       <translation>شمال غرب</translation>
     </message>
@@ -9012,7 +9193,8 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>صفحة البوت</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="538"/>
+      <location filename="../../src/enums.cpp" line="573"/>
+      <location filename="../../src/enums.cpp" line="606"/>
       <source>Unsupported type: %1</source>
       <translation>غنوع غير مدعوم:%1</translation>
     </message>
@@ -9056,13 +9238,8 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Module Voltage</source>
       <translation>جهد الوحدة</translation>
     </message>
-    <message id="page_switchable_output_group">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="29"/>
-      <source>Group</source>
-      <translation>المجموعة</translation>
-    </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="83"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
       <source>Fuse rating</source>
       <translation>تصنيف الفيوز</translation>
     </message>
@@ -9157,282 +9334,303 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Resetting VE.Bus products</source>
       <translation>إعادة ضبط أجهزة VE.Bus</translation>
     </message>
-    <message id="Unknown">
+    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+      <source>Waiting for VE.Bus setting access password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="Unknown">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="42"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="111"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="130"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
     </message>
     <message id="mk2vsc_error_mk2_mk3_comm">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="47"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
       <source>MK2/MK3 communication error</source>
       <translation>MK2/MK3 خطأ في الاتصال</translation>
     </message>
     <message id="mk2vsc_error_prod_addr_unreach">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
       <source>Product address not reachable</source>
       <translation>تعذر الوصول لعنوان المنتج</translation>
     </message>
     <message id="mk2vsc_error_incomp_mk2_fw">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
       <source>Incompatible MK2 firmware version</source>
       <translation>نسخة برنامج تثبيت غير متوافقة</translation>
     </message>
     <message id="mk2vsc_error_no_vebus_prod">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
       <source>No VE.Bus product was found</source>
       <translation>لم يتم العثور على جهاز VE.Bus</translation>
     </message>
     <message id="mk2vsc_error_too_many_devices">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
       <source>Too many devices on the VE.Bus</source>
       <translation>عدد كبير جدًا من الأجهزة على VE.Bus</translation>
     </message>
     <message id="mk2vsc_error_timed_out">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
       <source>Timed out</source>
       <translation>انتهت المدة</translation>
     </message>
     <message id="mk2vsc_error_wrong_pass">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
       <source>Wrong password. (Use VeConfigure to set gridcode to None)</source>
       <translation>كلمة المرور خاطئة. (استخدم VeConfigure لتعيين رمز الشبكة إلى "لا يوجد")</translation>
     </message>
     <message id="mk2vsc_error_malloc">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
       <source>Malloc error</source>
       <translation>خطأ في Malloc</translation>
     </message>
     <message id="mk2vsc_error_file_no_settings">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
       <source>Uploaded file does not contain settings data for the connected unit</source>
       <translation>الملف المرفوع لا يحتوي على بيانات الإعدادات للجهاز المتصل</translation>
     </message>
     <message id="mk2vsc_error_file_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
       <source>Uploaded file does not match model and/or installed firmware version</source>
       <translation>الملف المرفوع لا يتوافق مع الطراز و/أو إصدار البرنامج الثابت المثبت</translation>
     </message>
     <message id="mk2vsc_error_mult_unknown_units">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
       <source>More than one unknown unit detected</source>
       <translation>تم اكتشاف أكثر من وحدة غير معروفة</translation>
     </message>
     <message id="mk2vsc_error_update_single_unit">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
       <source>Updating a single unit with another unit's settings is not possible, even if they are of the same type</source>
       <translation>لا يمكن تحديث وحدة واحدة باستخدام إعدادات وحدة أخرى، حتى وإن كانتا من نفس النوع</translation>
     </message>
     <message id="mk2vsc_error_unit_count_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
       <source>The number of units in file does not match the number of units discovered</source>
       <translation>عدد الوحدات في الملف لا يتطابق مع عدد الوحدات المكتشفة</translation>
     </message>
     <message id="mk2vsc_error_file_open">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
       <source>File open error</source>
       <translation>خطأ في فتح الملف</translation>
     </message>
     <message id="mk2vsc_error_file_write">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
       <source>File write error</source>
       <translation>خطأ في كتابة الملف</translation>
     </message>
     <message id="mk2vsc_error_file_read">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
       <source>File read error</source>
       <translation>خطأ في قراءة الملف</translation>
     </message>
     <message id="mk2vsc_error_file_checksum">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
       <source>File checksum error</source>
       <translation>خطأ في التحقق من صحة الملف</translation>
     </message>
     <message id="mk2vsc_error_file_ver_incompat">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
       <source>File incompatible version number</source>
       <translation>الملف يحتوي على رقم إصدار غير متوافق</translation>
     </message>
     <message id="mk2vsc_error_file_section_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
       <source>File section not found</source>
       <translation>لم يتم العثور على قسم الملف</translation>
     </message>
     <message id="mk2vsc_error_file_format">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
       <source>File format error</source>
       <translation>خطأ في صيغة الملف</translation>
     </message>
     <message id="mk2vsc_error_prod_num_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
       <source>Product number does not match file</source>
       <translation>رقم المنتج لا يتطابق مع الملف</translation>
     </message>
     <message id="mk2vsc_error_file_expired">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
       <source>File expired</source>
       <translation>انتهت صلاحية الملف</translation>
     </message>
     <message id="mk2vsc_error_wrong_file_format">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
       <source>Wrong file format. First open the file with VE.Bus System Configurator, then save it to a new file by closing VE.Configure</source>
       <translation>خطأ في صيغة الملف افتح الملف أولاً باستخدام VE.Bus System Configurator، ثم قم بحفظه إلى ملف جديد بعد إغلاق VE.Configure</translation>
     </message>
     <message id="mk2vsc_error_vebus_write_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
       <source>VE.Bus write of assistant enable/disable setting failed</source>
       <translation>فشل في كتابة إعداد تمكين/تعطيل المساعد في VE.Bus</translation>
     </message>
     <message id="mk2vsc_error_vebus_config_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
       <source>Incompatible VE.Bus system configuration. Writing system configuration failed</source>
       <translation>تكوين نظام VE.Bus غير متوافق لم يتم كتابة تكوين النظام</translation>
     </message>
     <message id="mk2vsc_error_read_settings_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
       <source>Cannot read settings. VE.Bus system not configured</source>
       <translation>لا يمكن قراءة الإعدادات. نظام VE.Bus غير مهيأ</translation>
     </message>
     <message id="mk2vsc_error_assist_write_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
       <source>Assistants write failed</source>
       <translation>فشل في كتابة المساعدين</translation>
     </message>
     <message id="mk2vsc_error_assist_read_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
       <source>Assistants read failed</source>
       <translation>فشل في قراءة المساعدين</translation>
     </message>
     <message id="mk2vsc_error_grid_info_read_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
       <source>Grid info read failed</source>
       <translation>فشل في قراءة معلومات الشبكة</translation>
     </message>
     <message id="mk2vsc_error_os_unknown_app">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
       <source>OSerror, unknown application</source>
       <translation>OSerror، تطبيق غير معروف</translation>
     </message>
     <message id="mk2vsc_error_com_port_no_resp">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
       <source>Failed to open com port(no response)</source>
       <translation>فشل في فتح المنفذ (لا يوجد استجابة)</translation>
     </message>
     <message id="vebus_backup_result_backup_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="116"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
       <source>Backup successful</source>
       <translation>النسخ الاحتياطي ناجح</translation>
     </message>
     <message id="vebus_backup_result_restore_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
       <source>Restore successful</source>
       <translation>الاستعادة ناجحة</translation>
     </message>
     <message id="vebus_backup_result_file delete_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
       <source>File delete successful</source>
       <translation>مسح الملفات ناجحة</translation>
     </message>
     <message id="vebus_backup_result_backup_process_unexpedly_closed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
       <source>Backup process unexpectedly closed</source>
       <translation>تم إغلاق عملية النسخ الاحتياطي بشكل غير متوقع</translation>
     </message>
     <message id="vebus_backup_result_restore_process_unexpedly_closed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
       <source>Restore process unexpectedly closed</source>
       <translation>تم إغلاق عملية الاستعادة بشكل غير متوقع</translation>
     </message>
     <message id="vebus_backup_result_file_delete_failed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
       <source>File delete failed</source>
       <translation>فشل في حذف الملفات</translation>
     </message>
     <message id="incompatible">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="228"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="230"/>
       <source>Incompatible</source>
       <translation>غير مدعم</translation>
     </message>
+    <message id="vebus_settings_password_required">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
+      <source>VE.Bus settings password required</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="backup_name">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="294"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="323"/>
       <source>Backup name</source>
       <translation>اسم النسخ الاحتياطي</translation>
     </message>
     <message id="vebus_backup_backup_name">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="299"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="328"/>
       <source>Enter backup name</source>
       <translation>أدخل اسم للنسخ الاحتياطي</translation>
     </message>
     <message id="backup_name_empty">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="303"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="332"/>
       <source>File name cannot be empty</source>
       <translation>لا يمكن ترك اسم الملف فارغا</translation>
     </message>
     <message id="backup_name_invalid">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="308"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="337"/>
       <source>Invalid file name. Avoid using special characters</source>
       <translation>اسم ملف غير صالح تجنب استخدام الرموز الخاصة</translation>
     </message>
     <message id="vebus_backup_backup">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="322"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="351"/>
       <source>Backup</source>
       <translation>النسخ الاحتياطي</translation>
     </message>
     <message id="vebus_backup_press_to_backup">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="325"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="354"/>
       <source>Press to backup</source>
       <translation>اضغط للنسخ الاحتياطي</translation>
     </message>
     <message id="vebus_backup_backing_up">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="327"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="356"/>
       <source>Backing up...</source>
       <translation>جاري عملية النسخ الاحتياطي...</translation>
     </message>
     <message id="vebus_backup_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="340"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="359"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="369"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="388"/>
       <source>Restore</source>
       <translation>استعادة</translation>
     </message>
     <message id="vebus_backup_select_backup_file_to_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="343"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="372"/>
       <source>Select backup file to restore</source>
       <translation>حدد ملف النسخ الاحتياطي لاستعادته</translation>
     </message>
     <message id="vebus_backup_restoring">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="393"/>
       <source>Restoring...</source>
       <translation>جاري الاستعادة...</translation>
     </message>
     <message id="vebus_backup_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="377"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="396"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="406"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
       <source>Delete</source>
       <translation>حذف</translation>
     </message>
     <message id="vebus_backup_select_backup_file_to_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="380"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="409"/>
       <source>Select backup file to delete</source>
       <translation>حدد ملف النسخ الاحتياطي لحذفه</translation>
     </message>
     <message id="vebus_backup_press_to_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="399"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="428"/>
       <source>Press to delete</source>
       <translation>اضغط للحذف</translation>
     </message>
     <message id="vebus_backup_deleting">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="401"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="430"/>
       <source>Deleting...</source>
       <translation>جاري الحذف...</translation>
     </message>
     <message id="vebus_backup_press_to_cancel">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="415"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="444"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="467"/>
       <source>Press to cancel</source>
       <translation>اضغط لإلغاء الأمر</translation>
     </message>
+    <message id="vebus_settings_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
+      <source>VE.Bus settings access password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_settings_enter_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
+      <source>Enter VE.Bus password for access level %1</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="vebus_backup_firmware_version_specific_message">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="477"/>
       <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
       <translation>ملاحظة: ملفات النسخ الاحتياطي مخصصة لإصدارات برنامج VE.Bus الثابتة ولا يمكن استخدامها لاستعادة الإعدادات إلا على المنتجات التي تحمل نفس إصدار البرنامج الثابت</translation>
     </message>
@@ -9513,12 +9711,6 @@ The GX device can only control one connected genset and takes the one with the l
       <location filename="../../components/listitems/ListOutputBatteryRadioButtonGroup.qml" line="21"/>
       <source>Charging another battery from the main battery</source>
       <translation>شحن بطارية أخرى من البطارية الرئيسية</translation>
-    </message>
-    <message id="page_switchable_show_controls">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="116"/>
-      <source>Show controls</source>
-      <extracomment>Whether UI controls should be shown for this output</extracomment>
-      <translation>إطهار التحكمات</translation>
     </message>
     <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
@@ -9760,7 +9952,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>لا يوجد بلوتوث متاح</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="492"/>
+      <location filename="../../src/enums.cpp" line="527"/>
       <source>Toggle</source>
       <translation>تبديل</translation>
     </message>
@@ -9878,7 +10070,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>يمكن الآن العثور على المرحل في قائمة الأجهزة</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
       <source>GX device relays</source>
       <translation>مرحلات جهاز GX</translation>
     </message>
@@ -10065,27 +10257,27 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>شاحن رياح</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="498"/>
+      <location filename="../../src/enums.cpp" line="533"/>
       <source>Temperature setpoint</source>
       <translation>نقطة ضبط درجة الحرارة</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="501"/>
+      <location filename="../../src/enums.cpp" line="536"/>
       <source>Stepped switch</source>
       <translation>مفتاح متدرج</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="512"/>
+      <location filename="../../src/enums.cpp" line="547"/>
       <source>Dropdown</source>
       <translation>قائمة منسدلة</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="515"/>
+      <location filename="../../src/enums.cpp" line="550"/>
       <source>Basic slider</source>
       <translation>شريط تمرير أساسي</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="521"/>
+      <location filename="../../src/enums.cpp" line="556"/>
       <source>Three-state switch</source>
       <translation>مفتاح ثلاثي الأوضاع</translation>
     </message>
@@ -10098,6 +10290,11 @@ The GX device can only control one connected genset and takes the one with the l
       <location filename="../../components/DevicePage.qml" line="49"/>
       <source>Switches</source>
       <translation>مفاتيح</translation>
+    </message>
+    <message id="device_page_inputs">
+      <location filename="../../components/DevicePage.qml" line="76"/>
+      <source>Inputs</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_shelly_refresh_devices">
       <location filename="../../pages/settings/PageSettingsShelly.qml" line="82"/>
@@ -10132,7 +10329,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>القطبية (المرحل 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Polarity</source>
       <translation>القطبية</translation>
     </message>
@@ -10184,7 +10381,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>يقوم نظام إدارة البطارية VE.Bus بإيقاف تشغيل النظام تلقائيًا عند الحاجة لحماية البطارية. لذلك، لا يمكن التحكم في النظام من جهاز GX.</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="518"/>
+      <location filename="../../src/enums.cpp" line="553"/>
       <source>Numeric input</source>
       <translation>إدخال رقمي</translation>
     </message>
@@ -10204,24 +10401,15 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>المرحلات، وأجهزة الاستشعار، ومحولات الطاقة الشمسية الكهروضوئية، و Modbus، و Node-RED</translation>
     </message>
     <message id="vebus_device_page_microgrid_parameters">
+      <location filename="../../pages/invertercharger/OverviewInverterChargerPage.qml" line="146"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="194"/>
       <source>Microgrid parameters</source>
       <translation>معلمات الشبكة الدقيقة</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="691"/>
+      <location filename="../../src/enums.cpp" line="760"/>
       <source>Hybrid droop</source>
       <translation>ترهل هجين</translation>
-    </message>
-    <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="694"/>
-      <source>Grid-following</source>
-      <translation>تتبع الشبكة</translation>
-    </message>
-    <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="697"/>
-      <source>Grid-forming</source>
-      <translation>تكوين الشبكة</translation>
     </message>
     <message id="microgrid">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="15"/>
@@ -10229,97 +10417,107 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>شبكة دقيقة</translation>
     </message>
     <message id="page_microgrid_active_mode">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="19"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="29"/>
       <source>Active mode</source>
       <translation>الوضع النشط</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="102"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="141"/>
       <source>Hybrid droop parameters</source>
       <translation>معلمات الترهل الهجين</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="148"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>طاقة فعالة مرجعية (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="115"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>تردد مرجعي (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="177"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>ميل انحدار التردد (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="129"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="192"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>طاقة رد فعل مرجعية (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="136"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>جهد مرجعي (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="143"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="221"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>ميل انحدار الجهد (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="149"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="234"/>
       <source>Minimum and maximum parameters</source>
       <translation>المعلمات الدنيا والقصوى</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="240"/>
       <source>Allowed active power range</source>
       <translation>نطاق الطاقة الفعالة المسموح به</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
       <source>Allowed reactive power range</source>
       <translation>نطاق طاقة رد الفعل المسموح به</translation>
     </message>
+    <message id="page_microgrid_apply_all_parameters">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
+      <source>Apply all parameters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_microgrid_apply">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
+      <source>Apply</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="179"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="316"/>
       <source>P-Q direct drive settings</source>
       <translation>إعدادات القيادة المباشرة P-Q</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="184"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="321"/>
       <source>Active power setpoint (P)</source>
       <translation>نقطة ضبط الطاقة الفعالة (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="191"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="328"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>نقطة ضبط طاقة رد الفعل (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="198"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="335"/>
       <source>Allowed frequency range</source>
       <translation>نطاق التردد المسموح به</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="343"/>
       <source>Allowed voltage range</source>
       <translation>نطاق الجهد المسموح به</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="223"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="360"/>
       <source>V-f direct drive settings</source>
       <translation>إعدادات القيادة المباشرة V-f</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="228"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="365"/>
       <source>Voltage setpoint (U)</source>
       <translation>نقطة ضبط الجهد (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="372"/>
       <source>Frequency setpoint (f)</source>
       <translation>نقطة ضبط التردد (f)</translation>
     </message>
@@ -10384,18 +10582,18 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">منخفض</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="664"/>
       <source>Bypassed</source>
       <translation>تم تجاوز</translation>
     </message>
     <message id="switchableoutput_list_delegate_auto_status">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="93"/>
       <source>Auto (%1)</source>
       <extracomment>%1 = 'On' or 'Off'</extracomment>
       <translation>تلقائي (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="109"/>
       <source>Forced</source>
       <translation>إجباري</translation>
     </message>
@@ -10442,18 +10640,18 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>لا توجد إشعارات نشطة</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="527"/>
+      <location filename="../../src/enums.cpp" line="562"/>
       <source>RGB color wheel</source>
       <translation>عجلة ألوان RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="531"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>عجلة ألوان CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="535"/>
+      <location filename="../../src/enums.cpp" line="570"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>عجلة ألوان RGB + W</translation>
@@ -10533,7 +10731,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>CANopen E-drive (500 كيلو بت/ثانية)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="40"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="69"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 إلى %3%4</translation>
@@ -10554,93 +10752,98 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>قائمة الأجهزة</translation>
     </message>
     <message id="page_switchable_output_switch_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="40"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="26"/>
       <source>Switch mode</source>
       <translation>وضع التبديل</translation>
     </message>
     <message id="page_switchable_output_switch_mode_linear">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="47"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="33"/>
       <source>Permanent on</source>
       <translation>تشغيل دائم</translation>
     </message>
     <message id="page_switchable_output_switch_mode_optical">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="35"/>
       <source>Switching</source>
       <translation>تبديل</translation>
     </message>
     <message id="page_switchable_output_dim_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="41"/>
       <source>Dim mode</source>
       <translation>وضع التعتيم</translation>
     </message>
     <message id="page_switchable_output_dim_mode_disabled">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="46"/>
       <source>Dimming disabled</source>
       <translation>تعطيل التعتيم</translation>
     </message>
     <message id="page_switchable_output_dim_mode_linear">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
       <source>Linear</source>
       <translation>خطي</translation>
     </message>
     <message id="page_switchable_output_dim_mode_optical">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="64"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="50"/>
       <source>Optical curve</source>
       <translation>منحنى بصري</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="56"/>
       <source>Fuse detection mode</source>
       <translation>وضع اكتشاف المصهر</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode_only_when_off">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="77"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="63"/>
       <source>Only when the output is off</source>
       <translation>فقط عندما يكون الإخراج متوقفًا</translation>
     </message>
+    <message id="page_switchable_output_function">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
+      <source>Function</source>
+      <translation type="unfinished">وظيفة</translation>
+    </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="140"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="117"/>
       <source>Startup switch state</source>
       <translation>حالة مفتاح التشغيل</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="147"/>
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="154"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="131"/>
       <source>Restore from memory</source>
       <translation>الاستعادة من الذاكرة</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="153"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="130"/>
       <source>Startup dim level</source>
       <translation type="unfinished">مستوى التعتيم عند بدء التشغيل</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="183"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
       <source>Startup dim level</source>
       <translation>مستوى التعتيم عند بدء التشغيل</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="173"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="150"/>
       <source>Restore dim level from memory</source>
       <translation>استعادة مستوى التعتيم من الذاكرة</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="203"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="180"/>
       <source>Active high / Normally open</source>
       <translation>نشط مرتفع / مفتوح عادةً</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="205"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Active low / Normally closed</source>
       <translation>نشط منخفض / مغلق عادةً</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="211"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="188"/>
       <source>Output limit min</source>
       <translation>الحد الأدنى لإخراج الطاقة</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="199"/>
       <source>Output limit max</source>
       <translation>الحد الأقصى لإخراج الطاقة</translation>
     </message>
@@ -10648,16 +10851,6 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
       <source>Phase Setting</source>
       <translation>إعداد المرحلة</translation>
-    </message>
-    <message id="page_switchable_output_show_local">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="125"/>
-      <source>Only local</source>
-      <translation>محلي فقط</translation>
-    </message>
-    <message id="page_switchable_output_show_vrm">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="127"/>
-      <source>Only on VRM</source>
-      <translation>على VRM فقط</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
@@ -10701,52 +10894,52 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>مختلط (تيار متردد بالواط، تيار مستمر بالأمبير)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="569"/>
+      <location filename="../../src/enums.cpp" line="637"/>
       <source>Over temp, tripped</source>
       <translation>ارتفاع درجة الحرارة، تعطل</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="652"/>
       <source>Disabled</source>
       <translation type="unfinished">معطل</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="655"/>
       <source>Disabled, tripped</source>
       <translation>معطل، تعطل</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="658"/>
       <source>Disabled, over temp</source>
       <translation>معطل، ارتفاع درجة الحرارة</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="661"/>
       <source>Disabled but on</source>
       <translation>معطل ولكن قيد التشغيل</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="667"/>
       <source>Bypassed, tripped</source>
       <translation>تم تجاوزه، تعطل</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="670"/>
       <source>Bypassed, over temp</source>
       <translation>تم تجاوزه، ارتفاع درجة الحرارة</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="673"/>
       <source>External control</source>
       <translation type="unfinished">التحكم الخارجي</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="676"/>
       <source>External control, tripped</source>
       <translation>تحكم خارجي، تعطل</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="611"/>
+      <location filename="../../src/enums.cpp" line="679"/>
       <source>External control, over temp</source>
       <translation>تحكم خارجي، ارتفاع درجة الحرارة</translation>
     </message>
@@ -11010,24 +11203,82 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>تمكين الارتباط المحلي</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="620"/>
+      <location filename="../../src/enums.cpp" line="688"/>
       <source>Running, over temperature</source>
       <translation>يعمل، درجة الحرارة مرتفعة جدًا</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="623"/>
+      <location filename="../../src/enums.cpp" line="691"/>
       <source>Running, disabled</source>
       <translation>يعمل، مُعطَّل</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="699"/>
       <source>Not running, disabled</source>
       <translation>لا يعمل، مُعطَّل</translation>
+    </message>
+    <message id="page_generic_input_group">
+      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
+      <source>Group</source>
+      <translation type="unfinished">المجموعة</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation type="unfinished">اسم</translation>
+    </message>
+    <message id="iochannel_showui_controls">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
+      <source>Show controls</source>
+      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
+      <translation type="unfinished">إطهار التحكمات</translation>
+    </message>
+    <message id="iochannel_showui_always">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
+      <source>Always</source>
+      <translation type="unfinished">دائمًا</translation>
+    </message>
+    <message id="iochannel_showui_local">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
+      <source>Only local</source>
+      <translation type="unfinished">محلي فقط</translation>
+    </message>
+    <message id="iochannel_showui_vrm">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
+      <source>Only on VRM</source>
+      <translation type="unfinished">على VRM فقط</translation>
+    </message>
+    <message id="iochannel_type_buttongroup_type">
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <source>Type</source>
+      <translation type="unfinished">النوع</translation>
+    </message>
+    <message id="list-spin-box-range_minimum_value_with_arguments">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
+      <source>Minimum value (%1)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="list-spin-box-range_minimum_maximum_delimiter">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
+      <source>to</source>
+      <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="list-spin-box-range_maximum_value_with_arguments">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
+      <source>Maximum value (%1)</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
       <source>Unknown</source>
       <translation type="unfinished">مجهول</translation>
+    </message>
+    <message id="generic_input_value">
+      <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
+      <source>Value</source>
+      <extracomment>Refers to the current value of the input.</extracomment>
+      <translation type="unfinished"/>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="65"/>
@@ -11064,6 +11315,66 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <source>State</source>
       <translation type="unfinished">الحالة</translation>
     </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
+      <source>Devices and Priorities</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_arrange">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
+      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+      <source>Expected power consumption</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+      <source>Minimum run duration when turned on</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+      <source>Minimum rest duration when turned off</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_reserved_power_0">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
+      <source>Reserved power for battery charging at 0% SOC</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_reduce_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Reduce power per percentage point of SOC by</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_batterylife_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+      <source>BatteryLife compatibility</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_controllableloads_battery_pause_opportunity_loads">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
+      <source>Maximum charging power limit</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
+      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
       <source>PV</source>
@@ -11078,6 +11389,46 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
       <translation type="unfinished">إنتاجية النظام</translation>
+    </message>
+    <message id="page_generic_input_invert">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
+      <source>Invert</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_invert_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
+      <source>Normal</source>
+      <translation type="unfinished">عادي</translation>
+    </message>
+    <message id="iochannel_invert_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
+      <source>Inverted</source>
+      <translation type="unfinished">محول</translation>
+    </message>
+    <message id="iochannel_digital_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
+      <source>Digital input mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_input">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
+      <source>Digital input</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>Toggle switch</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
+      <source>Press button</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_press_and_hold">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Press and hold button</source>
+      <translation type="unfinished"/>
     </message>
     <message id="charger_total_pv_power">
       <location filename="../../pages/solar/SolarDevicePage.qml" line="61"/>
@@ -11099,8 +11450,83 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <source>Warning</source>
       <translation type="unfinished">تحذير</translation>
     </message>
+    <message id="generic_input_label_low">
+      <location filename="../../src/genericinput.cpp" line="108"/>
+      <source>Low</source>
+      <translation type="unfinished">منخفض</translation>
+    </message>
+    <message id="generic_input_label_high">
+      <location filename="../../src/genericinput.cpp" line="110"/>
+      <source>High</source>
+      <translation type="unfinished">مرتفع</translation>
+    </message>
+    <message id="generic_input_label_off">
+      <location filename="../../src/genericinput.cpp" line="112"/>
+      <source>Off</source>
+      <translation type="unfinished">مطفأ</translation>
+    </message>
+    <message id="generic_input_label_on">
+      <location filename="../../src/genericinput.cpp" line="114"/>
+      <source>On</source>
+      <translation type="unfinished">مشغل</translation>
+    </message>
+    <message id="generic_input_label_no">
+      <location filename="../../src/genericinput.cpp" line="116"/>
+      <source>No</source>
+      <translation type="unfinished">لا</translation>
+    </message>
+    <message id="generic_input_label_yes">
+      <location filename="../../src/genericinput.cpp" line="118"/>
+      <source>Yes</source>
+      <translation type="unfinished">نعم</translation>
+    </message>
+    <message id="generic_input_label_open">
+      <location filename="../../src/genericinput.cpp" line="120"/>
+      <source>Open</source>
+      <translation type="unfinished">مفتوح</translation>
+    </message>
+    <message id="generic_input_label_closed">
+      <location filename="../../src/genericinput.cpp" line="122"/>
+      <source>Closed</source>
+      <translation type="unfinished">مغلق</translation>
+    </message>
+    <message id="generic_input_label_ok">
+      <location filename="../../src/genericinput.cpp" line="124"/>
+      <source>OK</source>
+      <translation type="unfinished">صحيح</translation>
+    </message>
+    <message id="generic_input_label_alarm">
+      <location filename="../../src/genericinput.cpp" line="126"/>
+      <source>Alarm</source>
+      <translation type="unfinished">إنذار</translation>
+    </message>
+    <message id="generic_input_label_stopped">
+      <location filename="../../src/genericinput.cpp" line="128"/>
+      <source>Stopped</source>
+      <translation type="unfinished">متوقف</translation>
+    </message>
+    <message id="generic_input_label_running">
+      <location filename="../../src/genericinput.cpp" line="130"/>
+      <source>Running</source>
+      <translation type="unfinished">مشغل</translation>
+    </message>
+    <message id="generic_input_primaryLabel_speed">
+      <location filename="../../src/genericinput.cpp" line="164"/>
+      <source>Speed</source>
+      <translation type="unfinished">السرعة</translation>
+    </message>
+    <message id="generic_input_primaryLabel_temperature">
+      <location filename="../../src/genericinput.cpp" line="168"/>
+      <source>Temperature</source>
+      <translation type="unfinished">الحرارة</translation>
+    </message>
+    <message id="generic_input_primaryLabel_volume">
+      <location filename="../../src/genericinput.cpp" line="172"/>
+      <source>Volume</source>
+      <translation type="unfinished">الحجم</translation>
+    </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/switchableoutput.cpp" line="462"/>
+      <location filename="../../src/iochannel.cpp" line="340"/>
       <source>GX device relays</source>
       <translation type="unfinished">مرحلات جهاز GX</translation>
     </message>

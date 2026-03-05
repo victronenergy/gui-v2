@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message id="page_switchable_output_switch_mode_disabled">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="31"/>
       <source>Disabled</source>
       <translation>已禁用</translation>
     </message>
@@ -275,11 +275,6 @@
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="31"/>
       <source>Product</source>
       <translation>产品</translation>
-    </message>
-    <message id="page_switchable_output_name">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="18"/>
-      <source>Name</source>
-      <translation>名字</translation>
     </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
@@ -1636,11 +1631,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Above minimum SOC only</source>
       <translation>只在最小SOC以上</translation>
     </message>
-    <message id="page_switchable_output_show_always">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="123"/>
-      <source>Always</source>
-      <translation>总是</translation>
-    </message>
     <message id="settings_ess_battery_life_discharge_disabled">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="173"/>
       <source>Discharge disabled</source>
@@ -1727,7 +1717,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>门铃</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="524"/>
+      <location filename="../../src/enums.cpp" line="559"/>
       <source>Bilge pump</source>
       <translation>舱底泵</translation>
     </message>
@@ -3269,7 +3259,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">按下恢复</translation>
     </message>
     <message id="vebus_backup_press_to_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="362"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="391"/>
       <source>Press to restore</source>
       <translation>按下恢复</translation>
     </message>
@@ -4852,7 +4842,7 @@ Do you want to continue?</source>
       <translation>正常</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="578"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>On</source>
       <translation>开</translation>
     </message>
@@ -4925,7 +4915,7 @@ Do you want to continue?</source>
       <translation>删除</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="626"/>
+      <location filename="../../src/enums.cpp" line="694"/>
       <source>Running</source>
       <translation>运行</translation>
     </message>
@@ -5038,11 +5028,6 @@ Do you want to continue?</source>
       <extracomment>Solar tracker</extracomment>
       <translation>跟踪器</translation>
     </message>
-    <message id="page_switchable_output_type">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="92"/>
-      <source>Type</source>
-      <translation>类型</translation>
-    </message>
     <message id="common_words_unique_id_number">
       <location filename="../../components/CommonWords.qml" line="558"/>
       <source>Unique Identity Number</source>
@@ -5132,7 +5117,7 @@ Do you want to continue?</source>
       <translation>逆变/充电模式</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="35"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="36"/>
       <source>Set</source>
       <translation>设置</translation>
     </message>
@@ -5236,67 +5221,67 @@ Do you want to continue?</source>
       <translation>未找到固件</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="647"/>
+      <location filename="../../src/enums.cpp" line="715"/>
       <source>Fuel</source>
       <translation>燃料</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="650"/>
+      <location filename="../../src/enums.cpp" line="718"/>
       <source>Fresh water</source>
       <translation>清水</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="653"/>
+      <location filename="../../src/enums.cpp" line="721"/>
       <source>Waste water</source>
       <translation>废水</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="656"/>
+      <location filename="../../src/enums.cpp" line="724"/>
       <source>Live well</source>
       <translation>活鱼池</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="659"/>
+      <location filename="../../src/enums.cpp" line="727"/>
       <source>Oil</source>
       <translation>石油</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="662"/>
+      <location filename="../../src/enums.cpp" line="730"/>
       <source>Black water</source>
       <translation>黑水</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="665"/>
+      <location filename="../../src/enums.cpp" line="733"/>
       <source>Gasoline</source>
       <translation>汽油</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="668"/>
+      <location filename="../../src/enums.cpp" line="736"/>
       <source>Diesel</source>
       <translation>柴油</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="671"/>
+      <location filename="../../src/enums.cpp" line="739"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="674"/>
+      <location filename="../../src/enums.cpp" line="742"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="677"/>
+      <location filename="../../src/enums.cpp" line="745"/>
       <source>Hydraulic oil</source>
       <translation>液压油</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="680"/>
+      <location filename="../../src/enums.cpp" line="748"/>
       <source>Raw water</source>
       <translation>生水</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="102"/>
+      <location filename="../../components/listitems/core/ListItem.qml" line="104"/>
       <source>Setting locked for access level</source>
       <translation>设置锁定访问级别</translation>
     </message>
@@ -7383,33 +7368,43 @@ Do you want to continue?</source>
       <source>Automatic</source>
       <translation type="unfinished">自动</translation>
     </message>
+    <message id="pagesettingssystem_opportunity_loads">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <source>Opportunity Loads</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <source>Automate controllable devices to maximize PV self-use</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
       <source>AC System</source>
       <translation>空调系统</translation>
     </message>
     <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
       <source>Inputs and Monitoring</source>
       <translation>输入和监测</translation>
     </message>
     <message id="pagesettingssystem_energy_storage_System">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="69"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
       <source>Energy Storage System</source>
       <translation>储能系统</translation>
     </message>
     <message id="pagesettingssystem_batteries_and_bms">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>电池和电池管理系统 (BMS)</translation>
     </message>
     <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
       <source>Charge Control</source>
       <translation>充电控制</translation>
     </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>分布式电压和电流控制 (DVCC)</translation>
     </message>
@@ -7454,7 +7449,7 @@ Do you want to continue?</source>
       <translation>如果有电网表，系统将自动显示逆变器/充电器输入端的负载。输出端负载始终显示。</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
       <source>Display DC Loads</source>
       <translation>显示直流负载</translation>
     </message>
@@ -7464,7 +7459,7 @@ Do you want to continue?</source>
       <translation>电池测量</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
       <source>System status</source>
       <translation>系统状态</translation>
     </message>
@@ -7903,6 +7898,7 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../src/enums.cpp" line="837"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">未知</translation>
@@ -8020,7 +8016,7 @@ Do you want to continue?</source>
       <translation>触摸输入控制</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="634"/>
       <source>Over temperature</source>
       <translation>温度过高</translation>
     </message>
@@ -8134,55 +8130,240 @@ Do you want to continue?</source>
       <source>Under voltage</source>
       <translation>低电压</translation>
     </message>
-    <message id="switchable_output_momentary">
+    <message id="generic_input_discrete">
       <location filename="../../src/enums.cpp" line="489"/>
+      <source>Discrete value indicator</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_value_unranged">
+      <location filename="../../src/enums.cpp" line="492"/>
+      <source>Value indicator (unranged)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_value_ranged">
+      <location filename="../../src/enums.cpp" line="495"/>
+      <source>Value indicator (ranged)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_temperature">
+      <location filename="../../src/enums.cpp" line="498"/>
+      <source>Temperature indicator</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="generic_input_status_on">
+      <location filename="../../src/enums.cpp" line="508"/>
+      <source>On</source>
+      <translation type="unfinished">开</translation>
+    </message>
+    <message id="generic_input_status_fault">
+      <location filename="../../src/enums.cpp" line="511"/>
+      <source>Fault</source>
+      <translation type="unfinished">错误</translation>
+    </message>
+    <message id="generic_input_status_sensor_battery_low">
+      <location filename="../../src/enums.cpp" line="514"/>
+      <source>Sensor battery low</source>
+      <translation type="unfinished">感应器电量低</translation>
+    </message>
+    <message id="switchable_output_momentary">
+      <location filename="../../src/enums.cpp" line="524"/>
       <source>Momentary</source>
       <translation>瞬时</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="495"/>
+      <location filename="../../src/enums.cpp" line="530"/>
       <source>Dimmable</source>
       <translation>可调光</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="505"/>
+      <location filename="../../src/enums.cpp" line="540"/>
       <source>Slave of %1</source>
       <translation>%1 的从属设备</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="508"/>
+      <location filename="../../src/enums.cpp" line="543"/>
       <source>Slave</source>
       <translation type="unfinished">从机</translation>
     </message>
+    <message id="switchable_output_function_disabled">
+      <location filename="../../src/enums.cpp" line="582"/>
+      <source>Disabled</source>
+      <translation type="unfinished">已禁用</translation>
+    </message>
+    <message id="switchable_output_function_alarm">
+      <location filename="../../src/enums.cpp" line="585"/>
+      <source>Alarm</source>
+      <translation type="unfinished">报警</translation>
+    </message>
+    <message id="switchable_output_function_generator_startstop">
+      <location filename="../../src/enums.cpp" line="588"/>
+      <source>Generator start/stop</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_function_manual">
+      <location filename="../../src/enums.cpp" line="591"/>
+      <source>Manual</source>
+      <translation type="unfinished">手动</translation>
+    </message>
+    <message id="switchable_output_function_tankpump">
+      <location filename="../../src/enums.cpp" line="594"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">水箱泵</translation>
+    </message>
+    <message id="switchable_output_function_temperature">
+      <location filename="../../src/enums.cpp" line="597"/>
+      <source>Temperature</source>
+      <translation type="unfinished">温度</translation>
+    </message>
+    <message id="switchable_output_function_genset_helper">
+      <location filename="../../src/enums.cpp" line="600"/>
+      <source>Genset Helper</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="switchable_output_function_opportunity_load">
+      <location filename="../../src/enums.cpp" line="603"/>
+      <source>Opportunity load</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="557"/>
+      <location filename="../../src/enums.cpp" line="625"/>
       <source>Off</source>
       <translation type="unfinished">关</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="560"/>
+      <location filename="../../src/enums.cpp" line="628"/>
       <source>Powered</source>
       <translation>供电</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="563"/>
+      <location filename="../../src/enums.cpp" line="631"/>
       <source>Tripped</source>
       <translation>绊倒</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="572"/>
+      <location filename="../../src/enums.cpp" line="640"/>
       <source>Fault</source>
       <translation type="unfinished">错误</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="581"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Short</source>
       <translation>短</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="702"/>
       <source>Not running</source>
       <translation type="unfinished">不运行</translation>
+    </message>
+    <message id="microgrid_mode_ems_hybrid_droop">
+      <location filename="../../src/enums.cpp" line="763"/>
+      <source>EMS Control: Hybrid droop</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_mode_ems_grid_following">
+      <location filename="../../src/enums.cpp" line="767"/>
+      <source>EMS Control: Grid-following</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_mode_ems_grid_forming">
+      <location filename="../../src/enums.cpp" line="770"/>
+      <source>EMS Control: Grid-forming</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_none">
+      <location filename="../../src/enums.cpp" line="781"/>
+      <source>No error</source>
+      <translation type="unfinished">无错误</translation>
+    </message>
+    <message id="microgrid_error_hybrid_droop_values_out_of_sync">
+      <location filename="../../src/enums.cpp" line="784"/>
+      <source>Different fallback hybrid droop values in phase masters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_write_failed">
+      <location filename="../../src/enums.cpp" line="787"/>
+      <source>Hybrid droop parameter write failed</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_fmin_greater_than_fmax">
+      <location filename="../../src/enums.cpp" line="790"/>
+      <source>Parameter error Fmin &gt; Fmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmin_greater_than_pmaxv">
+      <location filename="../../src/enums.cpp" line="793"/>
+      <source>Parameter error Pmin &gt; Pmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_umin_greater_than_umax">
+      <location filename="../../src/enums.cpp" line="796"/>
+      <source>Parameter error Umin &gt; Umax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmin_greater_than_qmax">
+      <location filename="../../src/enums.cpp" line="799"/>
+      <source>Parameter error Qmin &gt; Qmax</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_q0_out_of_range">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Parameter error Q0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Parameter error Qmin out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_qmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="808"/>
+      <source>Parameter error Qmax out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_u0_out_of_range">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Parameter error U0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_u_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Parameter error U droop out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_p0_out_of_range">
+      <location filename="../../src/enums.cpp" line="817"/>
+      <source>Parameter error P0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmin_out_of_range">
+      <location filename="../../src/enums.cpp" line="820"/>
+      <source>Parameter error Pmin out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_pmax_out_of_range">
+      <location filename="../../src/enums.cpp" line="823"/>
+      <source>Parameter error Pmax out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_f0_out_of_range">
+      <location filename="../../src/enums.cpp" line="826"/>
+      <source>Parameter error F0 out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_param_freq_droop_out_of_range">
+      <location filename="../../src/enums.cpp" line="829"/>
+      <source>Parameter error freq droop out of range</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_pf_fp_mismatch">
+      <location filename="../../src/enums.cpp" line="832"/>
+      <source>Ve.Bus internal error PF vs FP data mismatch</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="microgrid_error_qu_uq_mismatch">
+      <location filename="../../src/enums.cpp" line="835"/>
+      <source>Ve.Bus internal error QU vs UQ data mismatch</source>
+      <translation type="unfinished"/>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8948,42 +9129,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>下一个</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="547"/>
+      <location filename="../../src/units.cpp" line="550"/>
       <source>N</source>
       <translation>北</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="549"/>
+      <location filename="../../src/units.cpp" line="552"/>
       <source>NE</source>
       <translation>不</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="551"/>
+      <location filename="../../src/units.cpp" line="554"/>
       <source>E</source>
       <translation>邮箱</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="553"/>
+      <location filename="../../src/units.cpp" line="556"/>
       <source>SE</source>
       <translation>东南</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="555"/>
+      <location filename="../../src/units.cpp" line="558"/>
       <source>S</source>
       <translation>用</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="557"/>
+      <location filename="../../src/units.cpp" line="560"/>
       <source>SW</source>
       <translation>东北</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="559"/>
+      <location filename="../../src/units.cpp" line="562"/>
       <source>W</source>
       <translation>西</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="561"/>
+      <location filename="../../src/units.cpp" line="564"/>
       <source>NW</source>
       <translation>西北</translation>
     </message>
@@ -9011,7 +9192,8 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>船只页面</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="538"/>
+      <location filename="../../src/enums.cpp" line="573"/>
+      <location filename="../../src/enums.cpp" line="606"/>
       <source>Unsupported type: %1</source>
       <translation>不支持的类型：%1</translation>
     </message>
@@ -9055,13 +9237,8 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Module Voltage</source>
       <translation>模块电压</translation>
     </message>
-    <message id="page_switchable_output_group">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="29"/>
-      <source>Group</source>
-      <translation>组</translation>
-    </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="83"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
       <source>Fuse rating</source>
       <translation>保险丝额定值</translation>
     </message>
@@ -9156,282 +9333,303 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Resetting VE.Bus products</source>
       <translation>重置 VE.Bus 产品</translation>
     </message>
-    <message id="Unknown">
+    <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
+      <source>Waiting for VE.Bus setting access password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="Unknown">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="42"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="111"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="130"/>
       <source>Unknown</source>
       <translation type="unfinished">未知</translation>
     </message>
     <message id="mk2vsc_error_mk2_mk3_comm">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="47"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
       <source>MK2/MK3 communication error</source>
       <translation>MK2/MK3 通信错误</translation>
     </message>
     <message id="mk2vsc_error_prod_addr_unreach">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="49"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
       <source>Product address not reachable</source>
       <translation>产品地址无法访问</translation>
     </message>
     <message id="mk2vsc_error_incomp_mk2_fw">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="51"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
       <source>Incompatible MK2 firmware version</source>
       <translation>不兼容的 MK2 固件版本</translation>
     </message>
     <message id="mk2vsc_error_no_vebus_prod">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="53"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
       <source>No VE.Bus product was found</source>
       <translation>未找到 VE.Bus 产品</translation>
     </message>
     <message id="mk2vsc_error_too_many_devices">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="55"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
       <source>Too many devices on the VE.Bus</source>
       <translation>VE.Bus 上有太多设备</translation>
     </message>
     <message id="mk2vsc_error_timed_out">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="57"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
       <source>Timed out</source>
       <translation>超时</translation>
     </message>
     <message id="mk2vsc_error_wrong_pass">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
       <source>Wrong password. (Use VeConfigure to set gridcode to None)</source>
       <translation>密码错误。(使用 VeConfigure 将网格代码设置为 "无"）。</translation>
     </message>
     <message id="mk2vsc_error_malloc">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
       <source>Malloc error</source>
       <translation>Malloc 错误</translation>
     </message>
     <message id="mk2vsc_error_file_no_settings">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="63"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
       <source>Uploaded file does not contain settings data for the connected unit</source>
       <translation>上传的文件不包含所连接设备的设置数据</translation>
     </message>
     <message id="mk2vsc_error_file_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="65"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
       <source>Uploaded file does not match model and/or installed firmware version</source>
       <translation>上传的文件与型号和/或安装的固件版本不匹配</translation>
     </message>
     <message id="mk2vsc_error_mult_unknown_units">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="67"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
       <source>More than one unknown unit detected</source>
       <translation>检测到一个以上未知设备</translation>
     </message>
     <message id="mk2vsc_error_update_single_unit">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="69"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
       <source>Updating a single unit with another unit's settings is not possible, even if they are of the same type</source>
       <translation>无法用其他设备的设置更新单个设备，即使它们属于同一类型</translation>
     </message>
     <message id="mk2vsc_error_unit_count_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="71"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
       <source>The number of units in file does not match the number of units discovered</source>
       <translation>文件中的单位数与发现的单位数不符</translation>
     </message>
     <message id="mk2vsc_error_file_open">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="73"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
       <source>File open error</source>
       <translation>文件打开错误</translation>
     </message>
     <message id="mk2vsc_error_file_write">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="75"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
       <source>File write error</source>
       <translation>文件写入错误</translation>
     </message>
     <message id="mk2vsc_error_file_read">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="77"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
       <source>File read error</source>
       <translation>文件读取错误</translation>
     </message>
     <message id="mk2vsc_error_file_checksum">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="79"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
       <source>File checksum error</source>
       <translation>文件校验和错误</translation>
     </message>
     <message id="mk2vsc_error_file_ver_incompat">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="81"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
       <source>File incompatible version number</source>
       <translation>文件版本号不兼容</translation>
     </message>
     <message id="mk2vsc_error_file_section_not_found">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="83"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
       <source>File section not found</source>
       <translation>未找到文件部分</translation>
     </message>
     <message id="mk2vsc_error_file_format">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="85"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
       <source>File format error</source>
       <translation>文件格式错误</translation>
     </message>
     <message id="mk2vsc_error_prod_num_mismatch">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="87"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
       <source>Product number does not match file</source>
       <translation>产品编号与文件不符</translation>
     </message>
     <message id="mk2vsc_error_file_expired">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="89"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
       <source>File expired</source>
       <translation>文件过期</translation>
     </message>
     <message id="mk2vsc_error_wrong_file_format">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="91"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
       <source>Wrong file format. First open the file with VE.Bus System Configurator, then save it to a new file by closing VE.Configure</source>
       <translation>文件格式错误。首先用 VE.Bus System Configurator 打开文件，然后关闭 VE.Configure 将其保存为新文件。</translation>
     </message>
     <message id="mk2vsc_error_vebus_write_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="93"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
       <source>VE.Bus write of assistant enable/disable setting failed</source>
       <translation>VE.总线写入助手启用/禁用设置失败</translation>
     </message>
     <message id="mk2vsc_error_vebus_config_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="95"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
       <source>Incompatible VE.Bus system configuration. Writing system configuration failed</source>
       <translation>VE.Bus 系统配置不兼容。写入系统配置失败</translation>
     </message>
     <message id="mk2vsc_error_read_settings_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="97"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
       <source>Cannot read settings. VE.Bus system not configured</source>
       <translation>无法读取设置。VE.Bus 系统未配置</translation>
     </message>
     <message id="mk2vsc_error_assist_write_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="99"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
       <source>Assistants write failed</source>
       <translation>助理写作失败</translation>
     </message>
     <message id="mk2vsc_error_assist_read_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="101"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
       <source>Assistants read failed</source>
       <translation>助理阅读失败</translation>
     </message>
     <message id="mk2vsc_error_grid_info_read_fail">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="103"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
       <source>Grid info read failed</source>
       <translation>网格信息读取失败</translation>
     </message>
     <message id="mk2vsc_error_os_unknown_app">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="105"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
       <source>OSerror, unknown application</source>
       <translation>操作系统错误，未知应用程序</translation>
     </message>
     <message id="mk2vsc_error_com_port_no_resp">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="107"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="109"/>
       <source>Failed to open com port(no response)</source>
       <translation>打开 COM 端口失败（无响应）</translation>
     </message>
     <message id="vebus_backup_result_backup_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="116"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
       <source>Backup successful</source>
       <translation>备份成功</translation>
     </message>
     <message id="vebus_backup_result_restore_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="118"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
       <source>Restore successful</source>
       <translation>恢复成功</translation>
     </message>
     <message id="vebus_backup_result_file delete_successful">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="120"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
       <source>File delete successful</source>
       <translation>文件删除成功</translation>
     </message>
     <message id="vebus_backup_result_backup_process_unexpedly_closed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
       <source>Backup process unexpectedly closed</source>
       <translation>备份进程意外关闭</translation>
     </message>
     <message id="vebus_backup_result_restore_process_unexpedly_closed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="124"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
       <source>Restore process unexpectedly closed</source>
       <translation>恢复程序意外关闭</translation>
     </message>
     <message id="vebus_backup_result_file_delete_failed">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="126"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="128"/>
       <source>File delete failed</source>
       <translation>文件删除失败</translation>
     </message>
     <message id="incompatible">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="228"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="230"/>
       <source>Incompatible</source>
       <translation>不支持</translation>
     </message>
+    <message id="vebus_settings_password_required">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
+      <source>VE.Bus settings password required</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="backup_name">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="294"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="323"/>
       <source>Backup name</source>
       <translation>备份名称</translation>
     </message>
     <message id="vebus_backup_backup_name">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="299"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="328"/>
       <source>Enter backup name</source>
       <translation>输入备份名称</translation>
     </message>
     <message id="backup_name_empty">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="303"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="332"/>
       <source>File name cannot be empty</source>
       <translation>文件名不能为空</translation>
     </message>
     <message id="backup_name_invalid">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="308"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="337"/>
       <source>Invalid file name. Avoid using special characters</source>
       <translation>文件名无效。避免使用特殊字符</translation>
     </message>
     <message id="vebus_backup_backup">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="322"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="351"/>
       <source>Backup</source>
       <translation>备份</translation>
     </message>
     <message id="vebus_backup_press_to_backup">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="325"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="354"/>
       <source>Press to backup</source>
       <translation>按下备份</translation>
     </message>
     <message id="vebus_backup_backing_up">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="327"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="356"/>
       <source>Backing up...</source>
       <translation>备份...</translation>
     </message>
     <message id="vebus_backup_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="340"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="359"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="369"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="388"/>
       <source>Restore</source>
       <translation>恢复</translation>
     </message>
     <message id="vebus_backup_select_backup_file_to_restore">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="343"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="372"/>
       <source>Select backup file to restore</source>
       <translation>选择要恢复的备份文件</translation>
     </message>
     <message id="vebus_backup_restoring">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="393"/>
       <source>Restoring...</source>
       <translation>恢复...</translation>
     </message>
     <message id="vebus_backup_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="377"/>
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="396"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="406"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
       <source>Delete</source>
       <translation>删除</translation>
     </message>
     <message id="vebus_backup_select_backup_file_to_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="380"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="409"/>
       <source>Select backup file to delete</source>
       <translation>选择要删除的备份文件</translation>
     </message>
     <message id="vebus_backup_press_to_delete">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="399"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="428"/>
       <source>Press to delete</source>
       <translation>按下删除</translation>
     </message>
     <message id="vebus_backup_deleting">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="401"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="430"/>
       <source>Deleting...</source>
       <translation>删除...</translation>
     </message>
     <message id="vebus_backup_press_to_cancel">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="415"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="444"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="467"/>
       <source>Press to cancel</source>
       <translation>按下 取消</translation>
     </message>
+    <message id="vebus_settings_access_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
+      <source>VE.Bus settings access password</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="vebus_settings_enter_password">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
+      <source>Enter VE.Bus password for access level %1</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="vebus_backup_firmware_version_specific_message">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="425"/>
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="477"/>
       <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
       <translation>注意：备份文件与 VE.Bus 固件版本有关，只能用于在固件版本相匹配的产品上恢复设置。</translation>
     </message>
@@ -9512,12 +9710,6 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <location filename="../../components/listitems/ListOutputBatteryRadioButtonGroup.qml" line="21"/>
       <source>Charging another battery from the main battery</source>
       <translation>从主电池为另一个电池充电</translation>
-    </message>
-    <message id="page_switchable_show_controls">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="116"/>
-      <source>Show controls</source>
-      <extracomment>Whether UI controls should be shown for this output</extracomment>
-      <translation>显示控制</translation>
     </message>
     <message id="page_settings_connect_cellular_modem">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
@@ -9759,7 +9951,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>无蓝牙可用</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="492"/>
+      <location filename="../../src/enums.cpp" line="527"/>
       <source>Toggle</source>
       <translation>切换</translation>
     </message>
@@ -9877,7 +10069,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>现在可以在设备列表中找到继电器</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/switchableoutputgroupmodel.cpp" line="103"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
       <source>GX device relays</source>
       <translation>GX 设备继电器</translation>
     </message>
@@ -10064,27 +10256,27 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>风力充电器</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="498"/>
+      <location filename="../../src/enums.cpp" line="533"/>
       <source>Temperature setpoint</source>
       <translation>温度设定点</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="501"/>
+      <location filename="../../src/enums.cpp" line="536"/>
       <source>Stepped switch</source>
       <translation>步进开关</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="512"/>
+      <location filename="../../src/enums.cpp" line="547"/>
       <source>Dropdown</source>
       <translation>下拉菜单</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="515"/>
+      <location filename="../../src/enums.cpp" line="550"/>
       <source>Basic slider</source>
       <translation>基础滑块</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="521"/>
+      <location filename="../../src/enums.cpp" line="556"/>
       <source>Three-state switch</source>
       <translation>三态开关</translation>
     </message>
@@ -10097,6 +10289,11 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <location filename="../../components/DevicePage.qml" line="49"/>
       <source>Switches</source>
       <translation>开关</translation>
+    </message>
+    <message id="device_page_inputs">
+      <location filename="../../components/DevicePage.qml" line="76"/>
+      <source>Inputs</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_shelly_refresh_devices">
       <location filename="../../pages/settings/PageSettingsShelly.qml" line="82"/>
@@ -10131,7 +10328,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>极性 (继电器 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Polarity</source>
       <translation>极性</translation>
     </message>
@@ -10183,7 +10380,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>VE.Bus BMS 会在需要时自动关闭系统以保护电池。因此，无法通过 GX 设备控制系统。</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="518"/>
+      <location filename="../../src/enums.cpp" line="553"/>
       <source>Numeric input</source>
       <translation>数值输入</translation>
     </message>
@@ -10203,24 +10400,15 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>继电器、传感器、光伏逆变器、Modbus、Node-RED</translation>
     </message>
     <message id="vebus_device_page_microgrid_parameters">
+      <location filename="../../pages/invertercharger/OverviewInverterChargerPage.qml" line="146"/>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="194"/>
       <source>Microgrid parameters</source>
       <translation>微电网参数</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="691"/>
+      <location filename="../../src/enums.cpp" line="760"/>
       <source>Hybrid droop</source>
       <translation>混合型下垂控制</translation>
-    </message>
-    <message id="microgrid_mode_grid_following">
-      <location filename="../../src/enums.cpp" line="694"/>
-      <source>Grid-following</source>
-      <translation>并网跟随</translation>
-    </message>
-    <message id="microgrid_mode_grid_forming">
-      <location filename="../../src/enums.cpp" line="697"/>
-      <source>Grid-forming</source>
-      <translation>并网形成</translation>
     </message>
     <message id="microgrid">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="15"/>
@@ -10228,97 +10416,107 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>微电网</translation>
     </message>
     <message id="page_microgrid_active_mode">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="19"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="29"/>
       <source>Active mode</source>
       <translation>激活模式</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="102"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="141"/>
       <source>Hybrid droop parameters</source>
       <translation>混合型下垂控制参数</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="108"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="148"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>参考有功功率 (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="115"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>参考频率 (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="122"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="177"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>频率下垂斜率 (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="129"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="192"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>参考无功功率 (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="136"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>参考电压 (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="143"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="221"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>电压下垂斜率 (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="149"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="234"/>
       <source>Minimum and maximum parameters</source>
       <translation>最小值和最大值参数</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="154"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="240"/>
       <source>Allowed active power range</source>
       <translation>允许的有功功率范围</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
       <source>Allowed reactive power range</source>
       <translation>允许的无功功率范围</translation>
     </message>
+    <message id="page_microgrid_apply_all_parameters">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
+      <source>Apply all parameters</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_microgrid_apply">
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
+      <source>Apply</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="179"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="316"/>
       <source>P-Q direct drive settings</source>
       <translation>P-Q 直接驱动设置</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="184"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="321"/>
       <source>Active power setpoint (P)</source>
       <translation>有功功率设定点 (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="191"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="328"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>无功功率设定点 (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="198"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="335"/>
       <source>Allowed frequency range</source>
       <translation>允许的频率范围</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="343"/>
       <source>Allowed voltage range</source>
       <translation>允许的电压范围</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="223"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="360"/>
       <source>V-f direct drive settings</source>
       <translation>V-f 直接驱动设置</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="228"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="365"/>
       <source>Voltage setpoint (U)</source>
       <translation>电压设定点 (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="235"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="372"/>
       <source>Frequency setpoint (f)</source>
       <translation>频率设定点 (f)</translation>
     </message>
@@ -10383,18 +10581,18 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation type="unfinished">低</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="664"/>
       <source>Bypassed</source>
       <translation>已旁路</translation>
     </message>
     <message id="switchableoutput_list_delegate_auto_status">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="93"/>
       <source>Auto (%1)</source>
       <extracomment>%1 = 'On' or 'Off'</extracomment>
       <translation>自动 (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/SwitchableOutputListDelegate.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="109"/>
       <source>Forced</source>
       <translation>强制</translation>
     </message>
@@ -10441,18 +10639,18 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>无激活的通知</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="527"/>
+      <location filename="../../src/enums.cpp" line="562"/>
       <source>RGB color wheel</source>
       <translation>RGB 色轮</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="531"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>CCT 色轮</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="535"/>
+      <location filename="../../src/enums.cpp" line="570"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>RGB + W 色轮</translation>
@@ -10532,7 +10730,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>CANopen E-drive (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="40"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="69"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 至 %3%4</translation>
@@ -10553,93 +10751,98 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>设备列表</translation>
     </message>
     <message id="page_switchable_output_switch_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="40"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="26"/>
       <source>Switch mode</source>
       <translation>开关模式</translation>
     </message>
     <message id="page_switchable_output_switch_mode_linear">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="47"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="33"/>
       <source>Permanent on</source>
       <translation>永久开启</translation>
     </message>
     <message id="page_switchable_output_switch_mode_optical">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="49"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="35"/>
       <source>Switching</source>
       <translation>切换</translation>
     </message>
     <message id="page_switchable_output_dim_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="41"/>
       <source>Dim mode</source>
       <translation>调光模式</translation>
     </message>
     <message id="page_switchable_output_dim_mode_disabled">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="46"/>
       <source>Dimming disabled</source>
       <translation>禁用调光</translation>
     </message>
     <message id="page_switchable_output_dim_mode_linear">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
       <source>Linear</source>
       <translation>线性</translation>
     </message>
     <message id="page_switchable_output_dim_mode_optical">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="64"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="50"/>
       <source>Optical curve</source>
       <translation>光曲线</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="56"/>
       <source>Fuse detection mode</source>
       <translation>熔断器检测模式</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode_only_when_off">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="77"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="63"/>
       <source>Only when the output is off</source>
       <translation>仅在输出关闭时</translation>
     </message>
+    <message id="page_switchable_output_function">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
+      <source>Function</source>
+      <translation type="unfinished">功能</translation>
+    </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="140"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="117"/>
       <source>Startup switch state</source>
       <translation>启动开关状态</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="147"/>
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="154"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="124"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="131"/>
       <source>Restore from memory</source>
       <translation>从内存恢复</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="153"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="130"/>
       <source>Startup dim level</source>
       <translation type="unfinished">启动调光级别</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="183"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
       <source>Startup dim level</source>
       <translation>启动调光级别</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="173"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="150"/>
       <source>Restore dim level from memory</source>
       <translation>从内存恢复调光级别</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="203"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="180"/>
       <source>Active high / Normally open</source>
       <translation>高电平有效/常开</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="205"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Active low / Normally closed</source>
       <translation>低电平有效/常闭</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="211"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="188"/>
       <source>Output limit min</source>
       <translation>输出限制最小值</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="199"/>
       <source>Output limit max</source>
       <translation>输出限制最大值</translation>
     </message>
@@ -10647,16 +10850,6 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
       <source>Phase Setting</source>
       <translation>相位设置</translation>
-    </message>
-    <message id="page_switchable_output_show_local">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="125"/>
-      <source>Only local</source>
-      <translation>仅本地</translation>
-    </message>
-    <message id="page_switchable_output_show_vrm">
-      <location filename="../../pages/settings/devicelist/switchable-outputs/PageSwitchableOutput.qml" line="127"/>
-      <source>Only on VRM</source>
-      <translation>仅在 VRM 上</translation>
     </message>
     <message id="controlcards_empty_desc1">
       <location filename="../../pages/ControlCardsPage.qml" line="147"/>
@@ -10700,52 +10893,52 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>混合 (交流电，单位：瓦特；直流电，单位：安培)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="569"/>
+      <location filename="../../src/enums.cpp" line="637"/>
       <source>Over temp, tripped</source>
       <translation>过温，跳闸</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="652"/>
       <source>Disabled</source>
       <translation type="unfinished">已禁用</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="655"/>
       <source>Disabled, tripped</source>
       <translation>已禁用，跳闸</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="658"/>
       <source>Disabled, over temp</source>
       <translation>已禁用，过温</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="661"/>
       <source>Disabled but on</source>
       <translation>已禁用，但已开启</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="667"/>
       <source>Bypassed, tripped</source>
       <translation>已旁路，跳闸</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="670"/>
       <source>Bypassed, over temp</source>
       <translation>已旁路，过温</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="673"/>
       <source>External control</source>
       <translation type="unfinished">外部控制</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="676"/>
       <source>External control, tripped</source>
       <translation>外部控制，跳闸</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="611"/>
+      <location filename="../../src/enums.cpp" line="679"/>
       <source>External control, over temp</source>
       <translation>外部控制，过温</translation>
     </message>
@@ -11009,24 +11202,82 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>启用链路本地</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="620"/>
+      <location filename="../../src/enums.cpp" line="688"/>
       <source>Running, over temperature</source>
       <translation>运行中，温度过高</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="623"/>
+      <location filename="../../src/enums.cpp" line="691"/>
       <source>Running, disabled</source>
       <translation>运行中，已禁用</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="699"/>
       <source>Not running, disabled</source>
       <translation>未运行，已禁用</translation>
+    </message>
+    <message id="page_generic_input_group">
+      <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
+      <source>Group</source>
+      <translation type="unfinished">组</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation type="unfinished">名字</translation>
+    </message>
+    <message id="iochannel_showui_controls">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
+      <source>Show controls</source>
+      <extracomment>Whether UI controls should be shown for this input/output</extracomment>
+      <translation type="unfinished">显示控制</translation>
+    </message>
+    <message id="iochannel_showui_always">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
+      <source>Always</source>
+      <translation type="unfinished">总是</translation>
+    </message>
+    <message id="iochannel_showui_local">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
+      <source>Only local</source>
+      <translation type="unfinished">仅本地</translation>
+    </message>
+    <message id="iochannel_showui_vrm">
+      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
+      <source>Only on VRM</source>
+      <translation type="unfinished">仅在 VRM 上</translation>
+    </message>
+    <message id="iochannel_type_buttongroup_type">
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <source>Type</source>
+      <translation type="unfinished">类型</translation>
+    </message>
+    <message id="list-spin-box-range_minimum_value_with_arguments">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
+      <source>Minimum value (%1)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="list-spin-box-range_minimum_maximum_delimiter">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
+      <source>to</source>
+      <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
+      <translation type="unfinished"/>
+    </message>
+    <message id="list-spin-box-range_maximum_value_with_arguments">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
+      <source>Maximum value (%1)</source>
+      <translation type="unfinished"/>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
       <source>Unknown</source>
       <translation type="unfinished">未知</translation>
+    </message>
+    <message id="generic_input_value">
+      <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
+      <source>Value</source>
+      <extracomment>Refers to the current value of the input.</extracomment>
+      <translation type="unfinished"/>
     </message>
     <message id="temperature_type_unknown">
       <location filename="../../data/EnvironmentInputs.qml" line="65"/>
@@ -11063,6 +11314,66 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <source>State</source>
       <translation type="unfinished">状态</translation>
     </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
+      <source>Devices and Priorities</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_arrange">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
+      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+      <source>Expected power consumption</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+      <source>Minimum run duration when turned on</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+      <source>Minimum rest duration when turned off</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_reserved_power_0">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
+      <source>Reserved power for battery charging at 0% SOC</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_reduce_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Reduce power per percentage point of SOC by</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_batterylife_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+      <source>BatteryLife compatibility</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="page_controllableloads_battery_pause_opportunity_loads">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
+      <source>Maximum charging power limit</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="pagecontrollableloads_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
+      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
+      <translation type="unfinished"/>
+    </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
       <source>PV</source>
@@ -11077,6 +11388,46 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
       <translation type="unfinished">系统发电</translation>
+    </message>
+    <message id="page_generic_input_invert">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
+      <source>Invert</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_invert_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="40"/>
+      <source>Normal</source>
+      <translation type="unfinished">正常</translation>
+    </message>
+    <message id="iochannel_invert_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="42"/>
+      <source>Inverted</source>
+      <translation type="unfinished">倒置</translation>
+    </message>
+    <message id="iochannel_digital_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
+      <source>Digital input mode</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_input">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
+      <source>Digital input</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>Toggle switch</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
+      <source>Press button</source>
+      <translation type="unfinished"/>
+    </message>
+    <message id="iochannel_digital_input_mode_press_and_hold">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Press and hold button</source>
+      <translation type="unfinished"/>
     </message>
     <message id="charger_total_pv_power">
       <location filename="../../pages/solar/SolarDevicePage.qml" line="61"/>
@@ -11098,8 +11449,83 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <source>Warning</source>
       <translation type="unfinished">警告</translation>
     </message>
+    <message id="generic_input_label_low">
+      <location filename="../../src/genericinput.cpp" line="108"/>
+      <source>Low</source>
+      <translation type="unfinished">低</translation>
+    </message>
+    <message id="generic_input_label_high">
+      <location filename="../../src/genericinput.cpp" line="110"/>
+      <source>High</source>
+      <translation type="unfinished">高</translation>
+    </message>
+    <message id="generic_input_label_off">
+      <location filename="../../src/genericinput.cpp" line="112"/>
+      <source>Off</source>
+      <translation type="unfinished">关</translation>
+    </message>
+    <message id="generic_input_label_on">
+      <location filename="../../src/genericinput.cpp" line="114"/>
+      <source>On</source>
+      <translation type="unfinished">开</translation>
+    </message>
+    <message id="generic_input_label_no">
+      <location filename="../../src/genericinput.cpp" line="116"/>
+      <source>No</source>
+      <translation type="unfinished">不</translation>
+    </message>
+    <message id="generic_input_label_yes">
+      <location filename="../../src/genericinput.cpp" line="118"/>
+      <source>Yes</source>
+      <translation type="unfinished">是</translation>
+    </message>
+    <message id="generic_input_label_open">
+      <location filename="../../src/genericinput.cpp" line="120"/>
+      <source>Open</source>
+      <translation type="unfinished">打开</translation>
+    </message>
+    <message id="generic_input_label_closed">
+      <location filename="../../src/genericinput.cpp" line="122"/>
+      <source>Closed</source>
+      <translation type="unfinished">已关闭</translation>
+    </message>
+    <message id="generic_input_label_ok">
+      <location filename="../../src/genericinput.cpp" line="124"/>
+      <source>OK</source>
+      <translation type="unfinished">正常</translation>
+    </message>
+    <message id="generic_input_label_alarm">
+      <location filename="../../src/genericinput.cpp" line="126"/>
+      <source>Alarm</source>
+      <translation type="unfinished">报警</translation>
+    </message>
+    <message id="generic_input_label_stopped">
+      <location filename="../../src/genericinput.cpp" line="128"/>
+      <source>Stopped</source>
+      <translation type="unfinished">已停止</translation>
+    </message>
+    <message id="generic_input_label_running">
+      <location filename="../../src/genericinput.cpp" line="130"/>
+      <source>Running</source>
+      <translation type="unfinished">运行</translation>
+    </message>
+    <message id="generic_input_primaryLabel_speed">
+      <location filename="../../src/genericinput.cpp" line="164"/>
+      <source>Speed</source>
+      <translation type="unfinished">速度</translation>
+    </message>
+    <message id="generic_input_primaryLabel_temperature">
+      <location filename="../../src/genericinput.cpp" line="168"/>
+      <source>Temperature</source>
+      <translation type="unfinished">温度</translation>
+    </message>
+    <message id="generic_input_primaryLabel_volume">
+      <location filename="../../src/genericinput.cpp" line="172"/>
+      <source>Volume</source>
+      <translation type="unfinished">容积</translation>
+    </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/switchableoutput.cpp" line="462"/>
+      <location filename="../../src/iochannel.cpp" line="340"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX 设备继电器</translation>
     </message>
