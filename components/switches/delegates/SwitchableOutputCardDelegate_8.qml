@@ -85,12 +85,14 @@ FocusScope {
 			uid: root.switchableOutput.uid + "/Settings/DimmingMin"
 			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
 			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			onValueChanged: spinBox.reload()
 		}
 		VeQuickItem {
 			id: numericInputMax
 			uid: root.switchableOutput.uid + "/Settings/DimmingMax"
 			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
 			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			onValueChanged: spinBox.reload()
 		}
 		VeQuickItem {
 			id: numericInputStepSize

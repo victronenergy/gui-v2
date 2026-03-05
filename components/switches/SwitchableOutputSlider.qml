@@ -64,12 +64,14 @@ MiniSlider {
 		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/DimmingMax" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
+		onValueChanged: valueSync.updateSliderValue()
 	}
 	VeQuickItem {
 		id: dimmingMinItem
 		uid: root.hasDimmingProperties ? root.switchableOutput.uid + "/Settings/DimmingMin" : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
+		onValueChanged: valueSync.updateSliderValue()
 	}
 	VeQuickItem {
 		id: stepSizeItem

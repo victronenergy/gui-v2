@@ -12,9 +12,9 @@ QtObject {
 	property real to
 	property real stepSize
 
-	readonly property int intFrom: Math.max(Global.int32Min, from * decimalFactor)
-	readonly property int intTo: Math.min(Global.int32Max, to * decimalFactor)
-	readonly property int intStepSize: stepSize * decimalFactor
+	readonly property int intFrom: Math.max(Global.int32Min, Math.round(from * decimalFactor))
+	readonly property int intTo: Math.min(Global.int32Max, Math.round(to * decimalFactor))
+	readonly property int intStepSize: Math.round(stepSize * decimalFactor)
 
 	readonly property int decimalFactor: Math.pow(10, decimals)
 
