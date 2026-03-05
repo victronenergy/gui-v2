@@ -10341,7 +10341,7 @@ Das GX-Gerät kann nur ein angeschlossenes Genset steuern und nimmt dasjenige mi
     <message id="microgrid_mode_hybrid_droop">
       <location filename="../../src/enums.cpp" line="760"/>
       <source>Hybrid droop</source>
-      <translation>Hybrider Droop</translation>
+      <translation>Hybrid Droop</translation>
     </message>
     <message id="microgrid">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="15"/>
@@ -10356,7 +10356,7 @@ Das GX-Gerät kann nur ein angeschlossenes Genset steuern und nimmt dasjenige mi
     <message id="page_microgrid_hybrid_droop_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="141"/>
       <source>Hybrid droop parameters</source>
-      <translation>Parameter für hybriden Droop</translation>
+      <translation>Parameter für Hybrid Droop</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="148"/>
@@ -11167,7 +11167,7 @@ Hier können Sie zusätzliche Anschlüsse und Geräte-IDs hinzufügen, um nach P
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="763"/>
       <source>EMS Control: Hybrid droop</source>
-      <translation>EMS-Steuerung: Hybrider Droop</translation>
+      <translation>EMS-Steuerung: Hybrid Droop</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
       <location filename="../../src/enums.cpp" line="767"/>
@@ -11182,12 +11182,12 @@ Hier können Sie zusätzliche Anschlüsse und Geräte-IDs hinzufügen, um nach P
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
       <location filename="../../src/enums.cpp" line="784"/>
       <source>Different fallback hybrid droop values in phase masters</source>
-      <translation>Unterschiedliche Fallback-Werte für hybriden Droop in Phasenmastern</translation>
+      <translation>Unterschiedliche Fallback-Werte für Hybrid Droop in Phasenmastern</translation>
     </message>
     <message id="microgrid_error_write_failed">
       <location filename="../../src/enums.cpp" line="787"/>
       <source>Hybrid droop parameter write failed</source>
-      <translation>Fehler beim Schreiben des Parameters für hybriden Droop</translation>
+      <translation>Fehler beim Schreiben des Parameters für Hybrid Droop</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
       <location filename="../../src/enums.cpp" line="790"/>
