@@ -23,10 +23,6 @@ Page {
 	property alias settingsModel: settingsListView.model
 	property alias settingsDelegate: settingsListView.delegate
 
-	// True if a "Switches" item should be shown in the footer (if /SwitchableOutput entries are
-	// present on the service).
-	property bool showSwitches: true
-
 	// Additional settings to be loaded by PageDeviceInfo.
 	property Component extraDeviceInfo
 
@@ -43,33 +39,6 @@ Page {
 		footer: SettingsColumn {
 			width: parent?.width ?? 0
 			topPadding: ListView.view.count > 0 ? spacing : 0
-
-			ListNavigation {
-				//% "Switches"
-				text: qsTrId("device_page_switches")
-				preferredVisible: root.showSwitches && switchableOutputModel.count > 0
-				onClicked: {
-					Global.pageManager.pushPage(switchableOutputPageComponent, { title: text })
-				}
-
-				IOChannelProxyModel {
-					id: switchableOutputModel
-					sourceModel: VeQItemTableModel {
-						uids: root.showSwitches ? [ root.serviceUid + "/SwitchableOutput" ] : []
-						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-					}
-				}
-
-				Component {
-					id: switchableOutputPageComponent
-					Page {
-						GradientListView {
-							model: switchableOutputModel
-							delegate: SwitchableOutputListDelegate {}
-						}
-					}
-				}
-			}
 
 			ListNavigation {
 				//% "Inputs"
@@ -93,6 +62,33 @@ Page {
 						GradientListView {
 							model: genericInputModel
 							delegate: GenericInputListDelegate {}
+						}
+					}
+				}
+			}
+
+			ListNavigation {
+				//% "Outputs"
+				text: qsTrId("device_page_outputs")
+				preferredVisible: switchableOutputModel.count > 0
+				onClicked: {
+					Global.pageManager.pushPage(switchableOutputPageComponent, { title: text })
+				}
+
+				IOChannelProxyModel {
+					id: switchableOutputModel
+					sourceModel: VeQItemTableModel {
+						uids: [ root.serviceUid + "/SwitchableOutput" ]
+						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+					}
+				}
+
+				Component {
+					id: switchableOutputPageComponent
+					Page {
+						GradientListView {
+							model: switchableOutputModel
+							delegate: SwitchableOutputListDelegate {}
 						}
 					}
 				}

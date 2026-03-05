@@ -39,12 +39,4 @@ DevicePage {
 			precision: 1
 		}
 	}
-	settingsModel: IOChannelProxyModel {
-		sourceModel: VeQItemTableModel {
-			uids: [ root.serviceUid + "/SwitchableOutput" ]
-			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-		}
-	}
-	settingsDelegate: SwitchableOutputListDelegate {}
-	showSwitches: false
 }
