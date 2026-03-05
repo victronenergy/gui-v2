@@ -27,12 +27,16 @@ Page {
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 			rightPadding: rightInset
-			contentItem: Item {
+			contentItem: Flickable {
 				implicitHeight: phaseTable.y + phaseTable.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
+				boundsBehavior: Flickable.StopAtBounds
+				clip: true
 
 				QuantityTableSummary {
 					id: phaseSummary
 
+					width: parent.width
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 					summaryHeaderText: pvInverter.statusCode >= 0 ? CommonWords.status : ""
 					summaryModel: [
@@ -57,6 +61,7 @@ Page {
 						top: phaseSummary.bottom
 						topMargin: Theme.geometry_gradientList_spacing
 					}
+					width: parent.width
 					visible: pvInverter.phases.count > 1
 					metricsFontSize: phaseSummary.metricsFontSize
 					columnSpacing: phaseSummary.columnSpacing

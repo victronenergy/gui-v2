@@ -46,7 +46,7 @@ ControlCard {
 			  : generator.runningByText
 		color: Theme.color_font_secondary
 		font.pixelSize: Theme.font_size_caption
-		wrapMode: Text.WordWrap
+		wrapMode: Text.Wrap
 		visible: generator.isRunning
 	}
 

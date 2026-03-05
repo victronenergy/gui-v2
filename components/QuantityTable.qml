@@ -16,7 +16,7 @@ ListView {
 	id: root
 
 	// Main font sizes in the table
-	property int headerFontSize: Theme.font_size_caption
+	property int headerFontSize: Theme.font_quantityTable_header_size
 	property int bodyFontSize: Theme.font_size_body1
 
 	// Parameters for sizing the columns in the table.

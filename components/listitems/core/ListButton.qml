@@ -14,7 +14,7 @@ ListSetting {
 	id: root
 
 	property string secondaryText
-	property int secondaryFontSize: Theme.font_size_body2
+	property int secondaryFontSize: Theme.font_listItem_secondary_size
 
 	signal clicked
 
@@ -38,6 +38,7 @@ ListSetting {
 		ColumnLayout {
 			id: labelsColumn
 
+			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width - button.width - root.spacing
 			spacing: Theme.geometry_listItem_content_verticalSpacing
 
@@ -52,6 +53,7 @@ ListSetting {
 
 			Label {
 				text: root.caption
+				font.pixelSize: Theme.font_listItem_caption_size
 				color: Theme.color_font_secondary
 				wrapMode: Text.Wrap
 				visible: text.length > 0

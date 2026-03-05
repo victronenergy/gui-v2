@@ -34,26 +34,37 @@ ListSetting {
 	property real value: to > from && dataItem.valid ? dataItem.value : 0
 
 	// Remove padding around the edges, so that the internal Slider can expand its touch area.
-	rightPadding: rightInset
-	topPadding: 0
-	bottomPadding: 0
+	leftPadding: Theme.screenSize === Theme.Portrait ? 0 : leftInset
+	rightPadding: Theme.screenSize === Theme.Portrait ? 0 : rightInset
+	topPadding: Theme.screenSize === Theme.Portrait ? 0 : topInset
+	bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : bottomInset
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Slider |
-	// | Caption                |
+	// Landscape layout is:
+	// | Primary label | Slider (fill width) |
+	// | Caption                             |
+	//
+	// Portrait layout is:
+	// | Primary label |
+	// | Slider        |
+	// | Caption       |
 	contentItem: FocusScope {
+		implicitHeight: gridLayout.height
+
 		GridLayout {
-			anchors.fill: parent
-			columns: 2
+			id: gridLayout
+
+			width: parent.width
+			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 			columnSpacing: 0
 			rowSpacing: 0 // not needed, as padding is added below the label
 
 			Label {
-				// Since the root top/bottomPadding is 0, need to add some padding here.
+				// Since the root padding is 0, need to add some padding here.
+				leftPadding: Theme.screenSize === Theme.Portrait ? horizontalContentPadding : 0
 				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.geometry_listItem_content_verticalMargin
+				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
 
 				text: root.text
 				textFormat: root.textFormat
@@ -61,8 +72,7 @@ ListSetting {
 				wrapMode: Text.Wrap
 				verticalAlignment: Text.AlignVCenter
 
-				// Fix the label width; the slider fills the rest of the horizontal area.
-				Layout.preferredWidth: Theme.geometry_slider_text_width
+				Layout.fillWidth: true
 			}
 
 			Slider {
@@ -98,6 +108,7 @@ ListSetting {
 				// Expand the vertical touch area, to make it easier to click.
 				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
 				Layout.fillWidth: true
+				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
 
 				// Minus button
 				Button {

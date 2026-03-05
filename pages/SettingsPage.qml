@@ -34,7 +34,7 @@ SwipeViewPage {
 				iconSource: "qrc:/images/icon_devices_32.png"
 			}
 
-			SettingsListHeader { } // blank spacer
+			ListSpacer { }
 
 			SettingsListNavigation {
 				//% "General"

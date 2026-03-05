@@ -49,7 +49,7 @@ OverviewWidget {
 			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 			fontSizeMode: Text.Fit
-			wrapMode: Text.WordWrap
+			wrapMode: Text.Wrap
 			maximumLineCount: 4
 			elide: Text.ElideRight
 		},
@@ -65,7 +65,7 @@ OverviewWidget {
 				bottomMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
 			}
 			text: systemReason.text
-			wrapMode: Text.WordWrap
+			wrapMode: Text.Wrap
 			color: Theme.color_font_secondary
 			SystemReason {
 				id: systemReason

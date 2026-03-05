@@ -25,7 +25,7 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", {"title": text})
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 			*/
 
 			SettingsListHeader {

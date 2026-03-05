@@ -53,7 +53,7 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			SettingsListNavigation {
 				//% "AC System"

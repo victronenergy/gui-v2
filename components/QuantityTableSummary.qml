@@ -19,7 +19,7 @@ QuantityTable {
 	property var summaryModel
 	property QuantityObjectModel bodyModel
 
-	bodyFontSize: Theme.font_size_body3
+	bodyFontSize: Theme.font_quantityTableSummary_body_size
 	model: 1
 	topMargin: Theme.geometry_quantityTableSummary_verticalMargin
 	bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin

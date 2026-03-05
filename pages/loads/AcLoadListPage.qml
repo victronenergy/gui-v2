@@ -27,15 +27,19 @@ Page {
 			leftPadding: leftInset
 			rightPadding: rightInset
 
-			contentItem: Item {
+			contentItem: Flickable {
 				readonly property real columnWidth: loadSummary.fixedColumnWidth
 				readonly property real columnSpacing: loadSummary.columnSpacing
 
 				implicitHeight: phaseTable.y + phaseTable.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
+				boundsBehavior: Flickable.StopAtBounds
+				clip: true
 
 				QuantityTableSummary {
 					id: loadSummary
 
+					width: parent.width
 					equalWidthColumns: true
 
 					// rightPadding = 32px width of the sub-menu arrow icon in each list delegate, plus
@@ -66,6 +70,7 @@ Page {
 					readonly property string voltageKey: acInServiceType === "vebus" || acInServiceType === "acsystem" ? "V" : "Voltage"
 
 					anchors.top: loadSummary.bottom
+					width: parent.width
 					rightPadding: loadSummary.rightPadding
 					equalWidthColumns: true
 					model: root.measurements.phaseCount > 1 ? root.measurements.phases : null

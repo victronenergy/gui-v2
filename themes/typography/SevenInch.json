@@ -1,6 +1,8 @@
 {
     "font_listItem_primary_size": "font_size_body2",
     "font_listItem_flat_primary_size_flat": "font_size_body1",
+    "font_listItem_secondary_size": "font_size_body1",
+    "font_listItem_caption_size": "font_size_body1",
     "font_breadcrumbs_pixelSize": "font_size_body1",
     "font_briefPage_battery_title_minimumPixelSize": "font_size_body1",
     "font_briefPage_battery_title_maximumPixelSize": "font_size_body2",
@@ -18,6 +20,8 @@
     "font_overviewPage_widget_quantityLabel_minimumSize": "font_size_body3",
     "font_overviewPage_widget_quantityLabel_maximumSize": "font_size_h2",
     "font_overviewPage_phase_pixelSize": "font_size_phase_medium",
+    "font_quantityTable_header_size": "font_size_caption",
+    "font_quantityTableSummary_body_size": "font_size_body3",
     "font_splashView_progressText_size": "font_size_body1",
     "font_boatPage_batterySoc_pixelSize": 44,
     "font_boatPage_consumptionGauge_columnSpacing": 7,
