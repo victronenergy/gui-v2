@@ -493,13 +493,13 @@ QString Units::getCapacityDisplayText(
 
 qreal Units::convert(qreal value, VenusOS::Enums::Units_Type fromUnit, VenusOS::Enums::Units_Type toUnit) const
 {
+	if (fromUnit == toUnit) {
+		return value;
+	}
 	if (qIsNaN(value)
 			|| fromUnit == VenusOS::Enums::Units_None
 			|| toUnit == VenusOS::Enums::Units_None) {
 		return qQNaN();
-	}
-	if (fromUnit == toUnit) {
-		return value;
 	}
 
 	Unit::Type fromVeUnit = ::unitToVeUnit(fromUnit);
