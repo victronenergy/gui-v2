@@ -10,38 +10,9 @@ Page {
 	id: root
 
 	required property string bindPrefix
-	property var _addDialog
-
-	function _addOrUpdateAddress(ipAddress, index = -1) {
-		let addresses = settingsListView.ipAddresses.value ? settingsListView.ipAddresses.value.split(',') : []
-		if (index >= addresses.length) {
-			console.warn("invalid index", index, "/IPAddresses length is:", addresses.length)
-			return
-		}
-		if (index < 0) {
-			addresses.push(ipAddress)
-		} else {
-			addresses[index] = ipAddress
-		}
-		settingsListView.ipAddresses.setValue(addresses.join(','))
-	}
-
-	topRightButton: VenusOS.StatusBar_RightButton_Add
 
 	IpAddressListView {
-		id: settingsListView
-
-		ipAddresses.uid: bindPrefix + "/IpAddresses"
+		addressesUid: root.bindPrefix + "/IpAddresses"
 		writeAccessLevel: VenusOS.User_AccessType_User
-		onIpAddressUpdated: (index, ipAddress) => { root._addOrUpdateAddress(ipAddress, index) }
-	}
-
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root.isCurrentPage
-
-		function onRightButtonClicked() {
-			root._addOrUpdateAddress("192.168.1.1", -1)
-		}
 	}
 }
