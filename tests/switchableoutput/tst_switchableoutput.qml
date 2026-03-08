@@ -559,43 +559,55 @@ TestCase {
 			{
 				tag: "Decimals=0",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/Decimals": 0 },
+				outputProperties: { "Settings/Decimals": 0 },
 				decimals: 0,
 			},
 			{
 				tag: "StepSize=0",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/StepSize": 0 },
+				outputProperties: { "Settings/StepSize": 0 },
 				decimals: 0,
 			},
 			{
 				tag: "Decimals=1",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/Decimals": 1 },
+				outputProperties: { "Settings/Decimals": 1 },
 				decimals: 1,
 			},
 			{
 				tag: "StepSize=1",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/StepSize": 1 },
+				outputProperties: { "Settings/StepSize": 1 },
+				decimals: 0,
+			},
+			{
+				tag: "StepSize=0.1",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/StepSize": 0.1 },
 				decimals: 1,
+			},
+			{
+				tag: "StepSize=1.23",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: { "Settings/StepSize": 1.23 },
+				decimals: 2,
 			},
 			{
 				tag: "Decimals=0, StepSize=0",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/Decimals": 0, "/Settings/StepSize": 0 },
+				outputProperties: { "Settings/Decimals": 0, "Settings/StepSize": 0 },
 				decimals: 0,
 			},
 			{
-				tag: "Decimals=0, StepSize=1",
+				tag: "Decimals=0, StepSize=1.23",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/Decimals": 0, "/Settings/StepSize": 1 },
-				decimals: 0, // Decimals override
+				outputProperties: { "Settings/Decimals": 1, "Settings/StepSize": 1.23 },
+				decimals: 1, // Decimals override
 			},
 			{
 				tag: "Decimals=1, StepSize=0",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
-				outputProperties: { "/Settings/Decimals": 1, "/Settings/StepSize": 0 },
+				outputProperties: { "Settings/Decimals": 1, "Settings/StepSize": 0 },
 				decimals: 1, // Decimals override
 			},
 		]
@@ -606,7 +618,7 @@ TestCase {
 
 		setOutputProperties(data.uid, data.outputProperties)
 		output.uid = data.uid
-		compare(output.decimals, output.decimals)
+		compare(output.decimals, data.decimals)
 
 		// Clean up
 		output.uid = ""
