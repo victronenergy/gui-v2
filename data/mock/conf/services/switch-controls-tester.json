@@ -345,10 +345,11 @@
         "/SwitchableOutput/basic_slider_3/Status": 32,
 
         "/SwitchableOutput/basic_slider_4/Dimming": 10,
-        "/SwitchableOutput/basic_slider_4/Name": "Out-07d. Basic slider: speed",
+        "/SwitchableOutput/basic_slider_4/Name": "Out-07d. Basic slider: speed, step=0.1",
         "/SwitchableOutput/basic_slider_4/Settings/Unit": "/Speed",
         "/SwitchableOutput/basic_slider_4/Settings/DimmingMin": -100,
         "/SwitchableOutput/basic_slider_4/Settings/DimmingMax": 100,
+        "/SwitchableOutput/basic_slider_4/Settings/StepSize": 0.1,
         "/SwitchableOutput/basic_slider_4/Settings/CustomName": "",
         "/SwitchableOutput/basic_slider_4/Settings/Function": 2,
         "/SwitchableOutput/basic_slider_4/Settings/Group": "",

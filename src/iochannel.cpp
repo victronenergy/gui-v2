@@ -258,7 +258,7 @@ int IOChannel::decimals() const
 
 void IOChannel::setDecimals(const QVariant &variant)
 {
-	m_decimalsVariant = variant.toInt();
+	m_decimalsVariant = variant;
 	updateDecimals();
 }
 
