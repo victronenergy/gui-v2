@@ -214,8 +214,8 @@ DevicePage {
 				// stretch to the left/right edges of the view.
 				topPadding: 0
 				bottomPadding: bottomInset
-				leftPadding: 0
-				rightPadding: 0
+				leftPadding: leftInset
+				rightPadding: rightInset
 				contentItem: QuantityTable {
 					header: QuantityTable.TableHeader {
 						headerText: CommonWords.tracker

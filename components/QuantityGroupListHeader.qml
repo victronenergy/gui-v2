@@ -19,8 +19,8 @@ Row {
 	property real fixedColumnWidth: NaN // if set, use this for column widths, instead of QuantityTableMetrics
 
 	height: Theme.geometry_quantityTable_row_height
-	leftPadding: Theme.geometry_listItem_content_horizontalMargin
-	rightPadding: Theme.geometry_listItem_content_horizontalMargin
+	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
+	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
 	spacing: Theme.geometry_quantityGroupRow_spacing
 
 	Label {

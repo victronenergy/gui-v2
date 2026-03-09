@@ -68,7 +68,7 @@ ListSetting {
 	}
 
 	// Remove padding around the edges, so that the internal Switch can expand its touch area.
-	rightPadding: 0
+	rightPadding: rightInset
 	topPadding: 0
 	bottomPadding: 0
 

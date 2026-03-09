@@ -29,12 +29,12 @@ Page {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
-			leftPadding: 0
+			leftPadding: leftInset
+			rightPadding: rightInset
 			contentItem: Item {
 				readonly property real columnWidth: loadSummary.fixedColumnWidth
 				readonly property real columnSpacing: loadSummary.columnSpacing
 
-				implicitWidth: loadSummary.width
 				implicitHeight: dcsystemTable.y + dcsystemTable.height
 
 				QuantityTableSummary {
