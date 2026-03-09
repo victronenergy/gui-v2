@@ -14,16 +14,6 @@ Page {
 	//% "Microgrid"
 	title: qsTrId("microgrid")
 
-	function _generatePreset(size, median, lowerBound, upperBound, stepSize, decimals) {
-		// Creates a set of values, close to the median value, within two stepSize to use as SpinBox presets.
-		// It defines the functions bounds, compensates for median values at boundary edges and uses these
-		// values to generate the specified neighbourhood values and outputs the values with decimal places.
-		const from = Math.min(Math.max(lowerBound, median - (stepSize * Math.floor(size/2))), upperBound - (stepSize * (size - 1)))
-		const to = Math.max(Math.min(upperBound, median + (stepSize * Math.floor(size/2))), lowerBound + (stepSize * (size - 1)))
-		const array = Array.from({ length: ((to - from) / stepSize) + 1 }, (_, i) => (from + i * stepSize) )
-		return array.map(function(v) { return { value: v.toFixed(decimals) } } )
-	}
-
 	component MicrogridModeListText: ListText {
 		//% "Active mode"
 		text: qsTrId("page_microgrid_active_mode")
@@ -38,7 +28,7 @@ Page {
 
 		decimals: 2
 		stepSize: 0.01
-		presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(decimals) } })
+		presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(2) } })
 
 		Binding on button.borderColor {
 			when: parameterModified.value === 1
@@ -123,6 +113,7 @@ Page {
 			id: hybridDroopModel
 
 			VisibleItemModel {
+
 				readonly property bool _parametersModified: parameterP0SpinBox.dataItemModified.value === 1
 									|| parameterF0SpinBox.dataItemModified.value === 1
 									|| parameterFPSpinBox.dataItemModified.value === 1
@@ -163,9 +154,9 @@ Page {
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Modified"
 
-					from: 45
-					to: 65
-					presets: root._generatePreset(5, value, from, to, stepSize * 10, decimals)
+					from: 40
+					to: 70
+					presets: [40, 45, 50, 55, 60, 65, 70].map(function(v) { return { value: v } })
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Hertz)
 				}
@@ -178,9 +169,9 @@ Page {
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Modified"
 
-					from: 1
-					to: 20
-					presets: root._generatePreset(5, value, from, to, stepSize * 50, decimals)
+					from: 0
+					to: 100
+					presets: [0, 3, 4, 5, 7, 10].map(function(v) { return { value: v } })
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 				}
@@ -209,7 +200,7 @@ Page {
 
 					from: 220
 					to: 270
-					presets: root._generatePreset(5, value, from, to, stepSize * 500, decimals)
+					presets: [230, 235, 240, 245, 250, 255, 260].map(function(v) { return { value: v } })
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Volt_AC)
 				}
@@ -222,9 +213,9 @@ Page {
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Modified"
 
-					from: 1
-					to: 20
-					presets: root._generatePreset(5, value, from, to, stepSize * 50, decimals)
+					from: 0
+					to: 100
+					presets: [0, 2, 4, 6, 8, 10].map(function(v) { return { value: v } })
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 				}
@@ -240,16 +231,16 @@ Page {
 					text: qsTrId("page_microgrid_allowed_active_power_range")
 					readOnly: !externalControl.valid || externalControl.value !== VenusOS.MicrogridExternalControl_Standalone
 
-					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Value"
-					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Modified"
-					rangeModelFrom.minimumValue: -200
-					rangeModelFrom.maximumValue: 200
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMin/Value"
+					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMin/Modified"
+					rangeModelFrom.minimumValue: -100
+					rangeModelFrom.maximumValue: 100
 					rangeModelFrom.stepSize: 0.01
 
-					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
-					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Modified"
-					rangeModelTo.minimumValue: -200
-					rangeModelTo.maximumValue: 200
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMax/Value"
+					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/PMax/Modified"
+					rangeModelTo.minimumValue: -100
+					rangeModelTo.maximumValue: 100
 					rangeModelTo.stepSize: 0.01
 
 					unit: VenusOS.Units_Percentage
@@ -262,16 +253,16 @@ Page {
 					text: qsTrId("page_microgrid_allowed_reactive_power_range")
 					readOnly: !externalControl.valid || externalControl.value !== VenusOS.MicrogridExternalControl_Standalone
 
-					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
-					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Modified"
-					rangeModelFrom.minimumValue: -70
-					rangeModelFrom.maximumValue: 70
+					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmin/Value"
+					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmin/Modified"
+					rangeModelFrom.minimumValue: -100
+					rangeModelFrom.maximumValue: 100
 					rangeModelFrom.stepSize: 0.01
 
-					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
-					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Modified"
-					rangeModelTo.minimumValue: -70
-					rangeModelTo.maximumValue: 70
+					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmax/Value"
+					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Qmax/Modified"
+					rangeModelTo.minimumValue: -100
+					rangeModelTo.maximumValue: 100
 					rangeModelTo.stepSize: 0.01
 
 					unit: VenusOS.Units_Percentage
