@@ -387,16 +387,5 @@ Page {
 
 			uid: root.bindPrefix + "/MicroGrid/ExternalControl"
 		}
-
-		VeQuickItem {
-			id: microgridError
-
-			uid: root.bindPrefix + "/MicroGrid/Error"
-			onValueChanged: {
-				if (valid && value !== 0) {
-					Global.showToastNotification(VenusOS.Notification_Warning, VenusOS.microgrid_errorToText(value), 10000)
-				}
-			}
-		}
 	}
 }

@@ -966,34 +966,12 @@ public:
 	};
 	Q_ENUM(MicrogridMode)
 
+
 	enum MicrogridExternalControl {
 		MicrogridExternalControl_Standalone = 0,
 		MicrogridExternalControl_EmsControl = 1,
 	};
 	Q_ENUM(MicrogridExternalControl)
-
-	enum MicrogridError {
-		MicrogridError_NoError = 0,
-		MicrogridError_OutOfSync = 1,
-		MicrogridError_WriteFailed = 2,
-		MicrogridError_FminGreaterThanFmax = 3,
-		MicrogridError_PminGreaterThanPmax = 4,
-		MicrogridError_UminGreaterThanUmax = 5,
-		MicrogridError_QminGreaterThanQmax = 6,
-		MicrogridError_Q0OutOfRange = 7,
-		MicrogridError_QMinOutOfRange = 8,
-		MicrogridError_QMaxOutOfRange = 9,
-		MicrogridError_UDroopOutOfRange = 10,
-		MicrogridError_U0OutOfRange = 11,
-		MicrogridError_P0OutOfRange = 12,
-		MicrogridError_PMinOutOfRange = 13,
-		MicrogridError_PMaxOutOfRange = 14,
-		MicrogridError_F0OutOfRange = 15,
-		MicrogridError_FDroopOutOfRange = 16,
-		MicrogridError_PfFpMismatch = 17,
-		MicrogridError_QuUqMismatch = 18,
-	};
-	Q_ENUM(MicrogridError)
 
 	enum ElectricalPowerDisplay {
 		ElectricalPowerDisplay_PreferWatts,
@@ -1034,7 +1012,6 @@ public:
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const;
-	Q_INVOKABLE QString microgrid_errorToText(MicrogridError error) const;
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 
