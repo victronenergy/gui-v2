@@ -19,7 +19,7 @@ ListNavigation {
 	// UI. These should be removed once the Control migration (#2789) is completed.
 	topPadding: Theme.geometry_settingsListNavigation_verticalPadding
 	bottomPadding: Theme.geometry_settingsListNavigation_verticalPadding
-	leftPadding: horizontalContentPadding + (iconSource.length ? icon.width + horizontalContentPadding : 0)
+	leftPadding: leftInset + horizontalContentPadding + (iconSource.length ? icon.width + horizontalContentPadding : 0)
 	captionTopMargin: 0
 
 	onClicked: {
@@ -32,7 +32,7 @@ ListNavigation {
 		anchors {
 			verticalCenter: parent.verticalCenter
 			left: parent.left
-			leftMargin: root.horizontalContentPadding
+			leftMargin: root.leftInset + root.horizontalContentPadding
 		}
 		color: Theme.color_font_primary
 		source: root.iconSource

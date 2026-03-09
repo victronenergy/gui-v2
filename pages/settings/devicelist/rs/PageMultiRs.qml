@@ -212,8 +212,8 @@ DevicePage {
 
 				// Remove horizontal padding to allow QuantityTable row background colours to
 				// stretch to the left/right edges of the view.
-				leftPadding: 0
-				rightPadding: 0
+				leftPadding: leftInset
+				rightPadding: rightInset
 				contentItem: ColumnLayout {
 					spacing: Theme.geometry_listItem_content_verticalMargin
 

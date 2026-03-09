@@ -60,7 +60,7 @@ Page {
 
 			width: parent.width
 			metricsFontSize: Theme.font_size_body2 // align columns with those in the delegate
-			rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+			rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
 			headerText: section === "pvinverter" ? CommonWords.pv_inverter : ""
 			model: [
 				{ text: section === "pvinverter" ? "" : CommonWords.yield_today, unit: VenusOS.Units_Energy_KiloWattHour },
