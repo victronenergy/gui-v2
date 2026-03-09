@@ -71,7 +71,7 @@ Page {
 
 				//% "Access Point password"
 				text: qsTrId("settings_wifi_access_point_password")
-				rightPadding: confirmButton.width + spacing + horizontalContentPadding
+				rightPadding: confirmButton.width + confirmButton.anchors.rightMargin + spacing
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: accessPoint.valid
 				echoMode: TextInput.Normal // password is shown on entry, but server will return it as obfuscated asterisks
@@ -93,7 +93,7 @@ Page {
 
 					anchors {
 						right: parent.right
-						rightMargin: accessPointPassword.horizontalContentPadding
+						rightMargin: accessPointPassword.horizontalContentPadding + accessPointPassword.rightInset
 						verticalCenter: parent.verticalCenter
 					}
 					text: CommonWords.confirm
@@ -139,14 +139,12 @@ Page {
 			secondaryText: Utils.connmanServiceState(model.state)
 
 			// Move the text and arrow icon to the right of the checkmark icon space
-			leftPadding: Theme.geometry_listItem_content_horizontalMargin
-				+ Theme.geometry_icon_size_medium
-				+ spacing
+			leftPadding: leftInset + 2*spacing + Theme.geometry_icon_size_medium
 
 			CP.ColorImage {
 				anchors {
 					left: parent.left
-					leftMargin: Theme.geometry_listItem_content_horizontalMargin
+					leftMargin: accessPointDelegate.leftInset + accessPointDelegate.spacing
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"
