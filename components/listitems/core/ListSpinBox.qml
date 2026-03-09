@@ -41,7 +41,6 @@ ListButton {
 
 		NumberSelectorDialog {
 			title: root.text
-			titleTextFormat: root.textFormat
 			suffix: root.suffix
 			decimals: root.decimals
 			from: root.from

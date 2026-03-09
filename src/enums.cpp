@@ -683,23 +683,18 @@ QString Enums::tank_fluidTypeToText(Tank_Type type) const
 	}
 }
 
-QString Enums::microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const
+QString Enums::microgridModeToText(MicrogridMode mode) const
 {
 	switch (mode) {
 	case MicrogridMode_HybridDroop:
-		if (control == MicrogridExternalControl_Standalone) {
-			//% "Hybrid droop"
-			return qtTrId("microgrid_mode_hybrid_droop");
-		} else {
-			//% "EMS Control: Hybrid droop"
-			return qtTrId("microgrid_mode_ems_hybrid_droop");
-		}
+		//% "Hybrid droop"
+		return qtTrId("microgrid_mode_hybrid_droop");
 	case MicrogridMode_GridFollowing:
-		//% "EMS Control: Grid-following"
-		return qtTrId("microgrid_mode_ems_grid_following");
+		//% "Grid-following"
+		return qtTrId("microgrid_mode_grid_following");
 	case MicrogridMode_GridForming:
-		//% "EMS Control: Grid-forming"
-		return qtTrId("microgrid_mode_ems_grid_forming");
+		//% "Grid-forming"
+		return qtTrId("microgrid_mode_grid_forming");
 	default:
 		return QString();
 	}

@@ -467,10 +467,10 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	return quantity;
 }
 
-QString Units::getCombinedDisplayText(VenusOS::Enums::Units_Type unit, qreal value, int precision, bool precisionAdjustmentAllowed) const
+QString Units::getCombinedDisplayText(VenusOS::Enums::Units_Type unit, qreal value, int precision) const
 {
 	const int p = precision < 0 ? defaultUnitPrecision(unit) : precision;
-	const quantityInfo qty = getDisplayText(unit, value, p, precisionAdjustmentAllowed);
+	const quantityInfo qty = getDisplayText(unit, value, p);
 	if (qty.number.compare(QStringLiteral("--")) == 0) {
 		return qty.number;
 	}
