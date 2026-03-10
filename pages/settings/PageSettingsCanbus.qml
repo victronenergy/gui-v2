@@ -126,30 +126,17 @@ Page {
 					? Utils.secondsToString(timer.remainingTime)
 					  //% "Press to check"
 					: qsTrId("settings_canbus_unique_id_press_to_check")
-				height: visible
-						? (implicitHeight
-							+ (uniqueIdConflictLabel.visible ? uniqueIdConflictLabel.height : 0)
-							+ (uniqueIdOkLabel.visible ? uniqueIdOkLabel.height : 0))
-						: 0
-
-				bottomContentChildren: [
-					PrimaryListLabel {
-						id: uniqueIdConflictLabel
-						topPadding: 0
-						bottomPadding: 0
+				caption: {
+					if (vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1) {
 						//% "There is another device connected with this unique number, please select a new number."
-						text: qsTrId("settings_canbus_unique_id_conflict")
-						preferredVisible: vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1
-					},
-					PrimaryListLabel {
-						id: uniqueIdOkLabel
-						topPadding: 0
-						bottomPadding: 0
+						return qsTrId("settings_canbus_unique_id_conflict")
+					} else if ((vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone) {
 						//% "OK: No other device is connected with this unique number."
-						text: qsTrId("settings_canbus_unique_id_ok")
-						preferredVisible: (vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone
+						return qsTrId("settings_canbus_unique_id_ok")
+					} else {
+						return ""
 					}
-				]
+				}
 
 				onClicked: {
 					if (root._isRvc) {

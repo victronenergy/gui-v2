@@ -83,7 +83,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Function"
 				preferredVisible: dataItem.valid
 						&& (root.switchableOutput.validFunctions !== (1 << VenusOS.SwitchableOutput_Function_Manual))
-				secondaryLabel.color: root.switchableOutput.hasValidFunction ? Theme.color_listItem_secondaryText : Theme.color_critical
+				secondaryTextColor: root.switchableOutput.hasValidFunction ? Theme.color_listItem_secondaryText : Theme.color_critical
 				optionModel: {
 					let options = []
 					for (let i = 0; i <= VenusOS.SwitchableOutput_Function_MaxSupportedType; i++) {

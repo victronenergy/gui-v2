@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -76,7 +77,7 @@ Page {
 			preferredVisible: pointsListView.count === 0
 		}
 
-		delegate: ListItem {
+		delegate: ListSetting {
 			id: pointDelegate
 
 			required property int index
@@ -84,39 +85,49 @@ Page {
 			readonly property real sensorLevel: !!modelData ? modelData[0] : NaN
 			readonly property real volume: !!modelData ? modelData[1] : NaN
 
-			//: %1 = the point number
-			//% "Point %1"
-			text: qsTrId("devicelist_tankshape_point").arg(index + 1)
-			content.children: [
+			contentItem: RowLayout {
+				spacing: pointDelegate.spacing
+
+				Label {
+					//: %1 = the point number
+					//% "Point %1"
+					text: qsTrId("devicelist_tankshape_point").arg(index + 1)
+					font: pointDelegate.font
+					Layout.fillWidth: true
+				}
+
 				QuantityRow {
 					model: QuantityObjectModel {
 						QuantityObject { object: pointDelegate; key: "sensorLevel"; unit: VenusOS.Units_Percentage }
 						QuantityObject { object: pointDelegate; key: "volume"; unit: VenusOS.Units_Percentage }
 					}
-				},
+				}
 
-				CP.ColorImage {
-					anchors.verticalCenter: parent.verticalCenter
-					source: "qrc:/images/icon_minus.svg"
-					color: Theme.color_ok
+				RemoveButton {
 					visible: root._canEditPoints
-
-					MouseArea {
-						anchors.centerIn: parent
-						height: pointDelegate.height
-						width: height
-						onClicked: {
-							let pointList = pointsListView.model
-							let pointsItem = points
-							pointList.splice(pointDelegate.index, 1)
-							pointsItem.savePoints(pointList)
-						}
+					onClicked: {
+						let pointList = pointsListView.model
+						let pointsItem = points
+						pointList.splice(pointDelegate.index, 1)
+						pointsItem.savePoints(pointList)
 					}
 				}
-			]
+			}
+
+			background: ListSettingBackground {
+				indicatorColor: pointDelegate.backgroundIndicatorColor
+
+				ListPressArea {
+					anchors.fill: parent
+					enabled: pointDelegate.interactive
+					onClicked: pointDelegate.editPoints()
+				}
+			}
 
 			interactive: root._canEditPoints
-			onClicked: {
+			Keys.onSpacePressed: editPoints()
+
+			function editPoints() {
 				let sensorLevelMax = 0
 				let sensorLevelMin = 0
 				let volumeMax = 0

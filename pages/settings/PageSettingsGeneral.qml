@@ -238,7 +238,7 @@ Page {
 				//% "Support status (modifications checks)"
 				text: qsTrId("pagesettingsgeneral_support_status_modification_checks")
 				secondaryText: supportStateText()
-				secondaryLabel.color: supportStateColor()
+				secondaryTextColor: supportStateColor()
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
 

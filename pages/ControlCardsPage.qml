@@ -47,11 +47,10 @@ Page {
 
 		header: BaseListLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
-			sourceComponent: BaseListItem {
+			sourceComponent: FocusScope {
 				width: root.cardWidth + cardsView.spacing
 				height: cardsView.height
-				background.visible: false
-				KeyNavigationHighlight.active: false
+				focus: true
 
 				ESSCard {
 					width: root.cardWidth
