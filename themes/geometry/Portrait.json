@@ -179,14 +179,15 @@
     "geometry_toastNotification_label_padding": 16,
 
     "geometry_controlCards_slide_distance": 32,
-    "geometry_controlCard_minimumWidth": 428,
-    "geometry_controlCard_maximumWidth": 448,
+    "geometry_controlCard_minimumWidth": 360,
+    "geometry_controlCard_maximumWidth": 360,
+    "geometry_controlCard_height": 420,
     "geometry_controlCard_contentMargins": 16,
-    "geometry_controlCard_title_spacing": 4,
+    "geometry_controlCard_title_spacing": 6,
     "geometry_controlCard_title_topMargin": 16,
     "geometry_controlCard_status_topMargin": 6,
     "geometry_controlCard_status_bottomMargin": 28,
-    "geometry_controlCard_button_margins": 24,
+    "geometry_controlCard_button_margins": 16,
 
     "geometry_modalDialog_width": 624,
     "geometry_modalDialog_height": 368,
@@ -220,7 +221,7 @@
     "geometry_circularSingularGauge_strokeWidth": 16,
 
     "geometry_controlCardsPage_bottomMargin": 24,
-    "geometry_controlCardsPage_spacing": 18,
+    "geometry_controlCardsPage_spacing": 8,
     "geometry_controlCardsPage_horizontalMargin": "geometry_page_content_horizontalMargin",
 
     "geometry_briefPage_edgeGauge_initialize_margin": 10,
@@ -281,9 +282,10 @@
     "geometry_splashView_progressText_spacing": 4,
     "geometry_splashView_progressIconContainer_size": 46,
 
-    "geometry_card_button_height": 48,
+    "geometry_card_button_height": 40,
 
-    "geometry_iochannel_topMargin": 24,
+    "geometry_iochannel_topMargin": 8,
+    "geometry_iochannel_height": 90,
     "geometry_iochannel_spacing": 16,
     "geometry_iochannel_row_count": 5,
     "geometry_iochannel_label_margin": 2,

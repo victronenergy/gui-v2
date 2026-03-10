@@ -13,7 +13,7 @@ FocusScope {
 	property alias status: status
 
 	implicitWidth: Theme.geometry_controlCard_maximumWidth
-	implicitHeight: parent ? parent.height : 0
+	implicitHeight: Theme.geometry_controlCard_height
 	focus: true
 	focusPolicy: Qt.TabFocus
 
