@@ -56,7 +56,7 @@ Row {
 			font.pixelSize: root.fontSize
 			value: quantityObject.numberValue
 			unit: quantityObject.unit
-			precision: quantityObject.precision
+			decimals: quantityObject.decimals
 			valueText: unit === VenusOS.Units_PowerFactor ? "PF" : (quantityObject.textValue || quantityInfo.number)
 			unitText: unit === VenusOS.Units_PowerFactor ? (quantityObject.textValue || quantityInfo.number) : quantityInfo.unit
 			valueColor: unit === VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit

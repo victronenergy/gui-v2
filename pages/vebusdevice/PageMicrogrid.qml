@@ -51,7 +51,7 @@ Page {
 
 	component MicrogridListQuantity: ListQuantity {
 		textFormat: Text.RichText
-		precision: 2
+		decimals: 2
 		precisionAdjustmentAllowed: false
 	}
 
@@ -73,7 +73,7 @@ Page {
 
 			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
 			value: dataItemFrom.valid ? dataItemFrom.value : NaN
-			precision: 2
+			decimals: 2
 			precisionAdjustmentAllowed: false
 		}
 
@@ -82,7 +82,7 @@ Page {
 
 			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
 			value: dataItemTo.valid ? dataItemTo.value : NaN
-			precision: 2
+			decimals: 2
 			precisionAdjustmentAllowed: false
 		}
 
