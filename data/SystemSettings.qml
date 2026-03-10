@@ -388,7 +388,9 @@ QtObject {
 				root.temperatureUnitSuffix = "°F"
 				break
 			default:
-				console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
+				if (Global.dataManagerLoaded) {
+					console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
+				}
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
 				root.temperatureUnitSuffix = "°C"
 				break
@@ -419,7 +421,9 @@ QtObject {
 				root.altitudeUnit = VenusOS.Units_Altitude_Foot
 				break
 			default:
-				console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
+				if (Global.dataManagerLoaded) {
+					console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
+				}
 				root.altitudeUnit = VenusOS.Units_Altitude_Metre
 				break
 			}

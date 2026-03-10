@@ -56,7 +56,7 @@ QVariant AllServicesModel::data(const QModelIndex &index, int role) const
 	}
 }
 
-int AllServicesModel::indexOf(const QString &uid)
+int AllServicesModel::indexOf(const QString &uid) const
 {
 	for (int i = 0; i < m_services.count(); ++i) {
 		if (m_services.at(i).item && m_services.at(i).item->uniqueId() == uid) {
@@ -64,6 +64,16 @@ int AllServicesModel::indexOf(const QString &uid)
 		}
 	}
 	return -1;
+}
+
+QString AllServicesModel::serviceTypeOf(const QString &uid) const
+{
+	for (int i = 0; i < m_services.count(); ++i) {
+		if (m_services.at(i).item && m_services.at(i).item->uniqueId() == uid) {
+			return m_services.at(i).serviceType;
+		}
+	}
+	return QString();
 }
 
 QHash<int, QByteArray> AllServicesModel::roleNames() const
@@ -120,7 +130,7 @@ void AllServicesModel::serviceItemDiscovered(VeQItem *serviceItem)
 	beginInsertRows(QModelIndex(), m_services.count(), m_services.count());
 	m_services.append({ BackendConnection::create()->serviceTypeFromUid(serviceItem->uniqueId()), serviceItem });
 	endInsertRows();
-	emit countChanged();    
+	emit countChanged();
 	emit serviceAdded(serviceItem);
 }
 
@@ -154,16 +164,6 @@ void AllServicesModel::addServicesFromChildrenOf(VeQItem *parentItem)
 	// When a child is added/removed, then add/remove the relevant service.
 	connect(parentItem, &VeQItem::childAdded, this, &AllServicesModel::serviceItemDiscovered);
 	connect(parentItem, &VeQItem::childAboutToBeRemoved, this, &AllServicesModel::removeServiceItem);
-}
-
-int AllServicesModel::indexOf(const QString &uid) const
-{
-	for (int i = 0; i < m_services.count(); ++i) {
-		if (m_services.at(i).item && m_services.at(i).item->uniqueId() == uid) {
-			return i;
-		}
-	}
-	return -1;
 }
 
 AllServicesModel* AllServicesModel::create(QQmlEngine *engine, QJSEngine *)
