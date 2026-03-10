@@ -62,16 +62,16 @@ void QuantityObject::setUnit(Victron::VenusOS::Enums::Units_Type unit)
 	}
 }
 
-int QuantityObject::precision() const
+int QuantityObject::decimals() const
 {
-	return m_precision;
+	return m_decimals;
 }
 
-void QuantityObject::setPrecision(int precision)
+void QuantityObject::setDecimals(int decimals)
 {
-	if (m_precision != precision) {
-		m_precision = precision;
-		emit precisionChanged();
+	if (m_decimals != decimals) {
+		m_decimals = decimals;
+		emit decimalsChanged();
 	}
 }
 

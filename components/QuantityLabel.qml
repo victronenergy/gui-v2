@@ -19,7 +19,7 @@ Item {
 	property alias valueText: valueLabel.text
 	property alias unitText: unitLabel.text
 	property int alignment: Qt.AlignHCenter
-	property alias precision: quantityInfo.precision
+	property alias decimals: quantityInfo.decimals
 	property alias precisionAdjustmentAllowed: quantityInfo.precisionAdjustmentAllowed
 	property alias formatHints: quantityInfo.formatHints
 	property alias leftPadding: digitRow.leftPadding
