@@ -10,11 +10,7 @@ Page {
 	id: root
 
 	width: parent.width
-	anchors {
-		top: parent.top
-		bottom: parent.bottom
-		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
-	}
+	height: Theme.geometry_controlCard_height
 
 	title: CommonWords.switches
 
@@ -26,27 +22,41 @@ Page {
 		// than a single screen, the focused control may remain off-screen, as the ListView auto-
 		// scroll behaviour simply scrolls to the beginning of each group card.
 		function scrollToControl(item) {
-			const itemContentX = contentItem.mapFromItem(item, 0, 0).x
-			let distance
-			if (itemContentX + item.width > contentX + width) {
-				// Scroll to the right (distance is positive)
-				distance = (itemContentX + item.width) - (contentX + width)
-			} else if (itemContentX < contentX) {
-				// Scroll to the left (distance is negative)
-				distance = (itemContentX - contentX)
-			} else {
+			const itemContentPos = contentItem.mapFromItem(item, 0, 0)
+			const distance = orientation === ListView.Horizontal
+					? _scrollDistance(itemContentPos.x, item.width, contentX, width)
+					: _scrollDistance(itemContentPos.y, item.height, contentY, height)
+			if (distance === 0) {
 				return
 			}
-			if (Math.abs(distance) > width * 2) {
-				// The item is far away, so jump to the new contentX, instead of flicking.
+
+			// If item is far away, jump to the new content pos, instead of flicking.
+			if (orientation === ListView.Horizontal && Math.abs(distance) > width * 2) {
 				contentX += distance
 				returnToBounds()
+			} else if (orientation === ListView.Vertical && Math.abs(distance) > height * 2) {
+				contentY += distance
+				returnToBounds()
 			} else {
+				// The item is close by, so just scroll to it.
 				let velocity = Math.sqrt(2 * Math.abs(distance) * flickDeceleration)
 				if (distance > 0) {
 					velocity = -velocity
 				}
-				flick(velocity, 0)
+				flick(orientation === ListView.Horizontal ? velocity : 0,
+					  orientation === ListView.Vertical ? velocity : 0)
+			}
+		}
+
+		function _scrollDistance(itemContentPos, itemSize, contentPos, viewSize) {
+			if (itemContentPos + itemSize > contentPos + viewSize) {
+				// Scroll right or scroll down (return a positive distance)
+				return (itemContentPos + itemSize) - (contentPos + viewSize)
+			} else if (itemContentPos < contentPos) {
+				// Scroll left or scroll up (return a negative distance)
+				return (itemContentPos - contentPos)
+			} else {
+				return 0
 			}
 		}
 
@@ -54,9 +64,10 @@ Page {
 			fill: parent
 			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
 			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
+			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
-		orientation: ListView.Horizontal
+		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
 		// Allow scrollToControl() to auto-scroll the view without interference from the built-in
 		// ListView scroll behaviour.
@@ -64,7 +75,6 @@ Page {
 
 		model: SortedSwitchableOutputGroupModel { sourceModel: Global.switches.groups }
 		delegate: SwitchableOutputGroupCard {
-			height: cardsView.height
 			onCurrentItemChanged: {
 				if (currentItem) {
 					cardsView.scrollToControl(currentItem)

@@ -12,24 +12,29 @@ ControlCard {
 	required property SwitchableOutputGroup group
 	readonly property Item currentItem: Global.keyNavigationEnabled && activeFocus ? outputGrid.currentItem : null
 
-	implicitWidth: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
+	implicitWidth: Theme.screenSize === Theme.Portrait
+			? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
+			: Math.max(outputGrid.width, Theme.geometry_controlCard_minimumWidth)
+	implicitHeight: Theme.screenSize === Theme.Portrait
+			? Math.max(outputGrid.y + outputGrid.height, Theme.geometry_controlCard_height)
+			: Theme.geometry_controlCard_height
 	icon.source: "qrc:/images/icon_switch_24.svg"
 	title.text: root.group?.name ?? ""
 
 	GridView {
 		id: outputGrid
 
-		readonly property int rowCount: Math.floor(height / cellHeight)
-		readonly property int columnCount: Math.ceil(count / Math.max(1, rowCount))
+		readonly property int landscapeRowCount: Math.floor(height / cellHeight)
+		readonly property int landscapeColumnCount: Math.ceil(count / Math.max(1, landscapeRowCount))
 
 		anchors {
 			top: root.title.bottom
-			bottom: parent.bottom
 			topMargin: Theme.geometry_switchableoutput_topMargin
 		}
-		width: cellWidth * columnCount
-		cellWidth: Theme.geometry_controlCard_minimumWidth
-		cellHeight: (height - Theme.geometry_controlCard_contentMargins) / Theme.geometry_switchableoutput_row_count
+		width: Theme.screenSize === Theme.Portrait ? root.width : cellWidth * landscapeColumnCount
+		height: Theme.screenSize === Theme.Portrait ? cellHeight * count : root.height - y
+		cellWidth: Theme.screenSize === Theme.Portrait ? width : Theme.geometry_controlCard_minimumWidth
+		cellHeight: Theme.geometry_switchableoutput_height
 		interactive: false
 		flow: GridView.FlowTopToBottom
 		focus: Global.keyNavigationEnabled

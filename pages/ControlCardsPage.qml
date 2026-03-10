@@ -10,17 +10,11 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property int cardWidth: cardsView.count > 2
-			? Theme.geometry_controlCard_minimumWidth
-			: Theme.geometry_controlCard_maximumWidth
+	readonly property int cardWidth: Theme.screenSize === Theme.Portrait
+		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
+		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
-	width: parent.width
-	anchors {
-		top: parent.top
-		bottom: parent.bottom
-		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
-	}
 
 	//% "Controls"
 	title: qsTrId("control_cards_title")
@@ -35,9 +29,10 @@ Page {
 			fill: parent
 			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
 			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
+			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
-		orientation: ListView.Horizontal
+		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
 		// When using key navigation to scroll through the control cards, use a velocity that
 		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
@@ -51,13 +46,13 @@ Page {
 		header: BaseListLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
 			sourceComponent: FocusScope {
-				width: root.cardWidth + cardsView.spacing
-				height: cardsView.height
+				width: essCard.width + cardsView.spacing
+				height: essCard.height + cardsView.spacing
 				focus: true
 
 				ESSCard {
+					id: essCard
 					width: root.cardWidth
-					height: cardsView.height
 				}
 			}
 
@@ -74,7 +69,6 @@ Page {
 			required property Device device
 
 			width: root.cardWidth
-			height: cardsView.height
 			sourceComponent: {
 				if (device.serviceType === "evcharger") {
 					return evcsComponent
