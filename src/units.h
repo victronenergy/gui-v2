@@ -42,7 +42,7 @@ class Units : public QObject
 
 public:
 	enum FormatHint {
-		CompactUnitFormat = 0x1
+		CompactUnitFormat = 0x1,
 	};
 	Q_ENUM(FormatHint)
 	Q_DECLARE_FLAGS(FormatHints, FormatHint)
@@ -60,7 +60,7 @@ public:
 	Q_INVOKABLE QString formatLatitude(qreal latitude, VenusOS::Enums::GpsData_Format format) const;
 	Q_INVOKABLE QString formatLongitude(qreal longitude, VenusOS::Enums::GpsData_Format format) const;
 
-	Q_INVOKABLE int defaultUnitPrecision(VenusOS::Enums::Units_Type unit) const;
+	Q_INVOKABLE int defaultUnitDecimals(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;
 
 	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
@@ -69,7 +69,7 @@ public:
 	Q_INVOKABLE quantityInfo getDisplayText(
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
-		int precision = -1,
+		int decimals = 0,
 		bool precisionAdjustmentAllowed = true,
 		qreal unitMatchValue = qQNaN()) const;
 
@@ -77,7 +77,7 @@ public:
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
 		VenusOS::Enums::Units_Scale previousScale,
-		int precision = -1,
+		int decimals = 0,
 		bool precisionAdjustmentAllowed = true,
 		qreal unitMatchValue = qQNaN(),
 		int formatHints = 0) const;
@@ -85,7 +85,7 @@ public:
 	Q_INVOKABLE QString getCombinedDisplayText(
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
-		int precision = -1,
+		int decimals = 0,
 		bool precisionAdjustmentAllowed = true) const;
 
 	Q_INVOKABLE QString getCapacityDisplayText(VenusOS::Enums::Units_Type unit,

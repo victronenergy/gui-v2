@@ -19,7 +19,7 @@ ListQuantityGroupNavigation {
 			object: input.status === VenusOS.GenericInput_Status_On ? valueItem : input
 			key: input.status === VenusOS.GenericInput_Status_On ? "value" : "statusText"
 			unit: input.status === VenusOS.GenericInput_Status_On ? input.unitType : VenusOS.Units_None
-			precision: input.decimals
+			decimals: input.decimals
 		}
 		QuantityObject {
 			object: input

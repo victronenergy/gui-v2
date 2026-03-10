@@ -168,7 +168,7 @@ DevicePage {
 			phaseCount: numberOfPhases.value || 0
 			inputPhaseUidPrefix: root.bindPrefix + "/Ac/In/1"
 			outputPhaseUidPrefix: root.bindPrefix + "/Ac/Out"
-			voltPrecision: 1
+			voltDecimals: 1
 		}
 	}
 

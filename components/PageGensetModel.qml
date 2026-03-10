@@ -276,7 +276,7 @@ VisibleItemModel {
 							text: qsTrId("ac-in-genset_oil_temperature")
 							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
-							precision: 0
+							decimals: 0
 						}
 
 						ListTemperature {
@@ -284,7 +284,7 @@ VisibleItemModel {
 							text: qsTrId("ac-in-genset_coolant_temperature")
 							preferredVisible: dataItem.valid
 							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
-							precision: 0
+							decimals: 0
 						}
 
 						ListTemperature {

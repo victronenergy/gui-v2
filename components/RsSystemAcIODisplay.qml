@@ -54,7 +54,7 @@ BaseListLoader {
 			outputPhaseUidPrefix: root.serviceUid + "/Ac/Out"
 			totalInputPowerUid: root.multiPhase ? root.serviceUid + "/Ac/In/1/P" : ""
 			totalOutputPowerUid: root.multiPhase ? root.serviceUid + "/Ac/Out/P" : ""
-			voltPrecision: 2
+			voltDecimals: 2
 		}
 	}
 }
