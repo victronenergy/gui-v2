@@ -698,6 +698,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/solarinputmodel.cpp
     src/solaryieldmodel.h
     src/solaryieldmodel.cpp
+    src/systemservicelistener.h
+    src/systemservicelistener.cpp
     src/switchableoutput.h
     src/switchableoutput.cpp
     src/widgetconnectorpathupdater.h

@@ -39,7 +39,8 @@ public:
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
 
-	Q_INVOKABLE int indexOf(const QString &uid);
+	Q_INVOKABLE int indexOf(const QString &uid) const;
+	Q_INVOKABLE QString serviceTypeOf(const QString &uid) const;
 
 	static AllServicesModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
@@ -66,7 +67,6 @@ private:
 	void serviceItemDiscovered(VeQItem *item);
 	void removeServiceItem(VeQItem *item);
 	void addServicesFromChildrenOf(VeQItem *parentItem);
-	int indexOf(const QString &uid) const;
 
 	QList<ServiceInfo> m_services;
 };
