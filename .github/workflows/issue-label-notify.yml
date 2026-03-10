@@ -11,4 +11,4 @@ jobs:
         - uses: jenschelkopf/issue-label-notification-action@1.3
           with:
              recipients: |
-                  require_docs=@venus-documentation
+                  require_docs=@victronenergy/venus-documentation
