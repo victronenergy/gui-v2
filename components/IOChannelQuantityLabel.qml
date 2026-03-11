@@ -14,5 +14,5 @@ QuantityLabel {
 	unitText: quantityInfo.unit === VenusOS.Units_None ? ioChannel.unitText : quantityInfo.unit
 	decimals: ioChannel.decimals
 	font.pixelSize: Theme.font_size_body2
-	precisionAdjustmentAllowed: false // Always respect the decimals setting
+	formatHints: Units.DecimalsAdjustmentDisallowed // Always respect the decimals setting
 }

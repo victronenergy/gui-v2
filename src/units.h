@@ -42,7 +42,9 @@ class Units : public QObject
 
 public:
 	enum FormatHint {
+		NoFormatHints = 0x0,
 		CompactUnitFormat = 0x1,
+		DecimalsAdjustmentDisallowed = 0x2,
 	};
 	Q_ENUM(FormatHint)
 	Q_DECLARE_FLAGS(FormatHints, FormatHint)
@@ -61,7 +63,7 @@ public:
 	Q_INVOKABLE QString formatLongitude(qreal longitude, VenusOS::Enums::GpsData_Format format) const;
 
 	Q_INVOKABLE int defaultUnitDecimals(VenusOS::Enums::Units_Type unit) const;
-	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints = 0) const;
+    Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, Victron::Units::Units::FormatHints formatHints = NoFormatHints) const;
 
 	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
 	Q_INVOKABLE bool isScalingSupported(VenusOS::Enums::Units_Type unit) const;
@@ -69,8 +71,8 @@ public:
 	Q_INVOKABLE quantityInfo getDisplayText(
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
-		int decimals = 0,
-		bool precisionAdjustmentAllowed = true,
+        int decimals = 0,
+        Victron::Units::Units::FormatHints formatHints = NoFormatHints,
 		qreal unitMatchValue = qQNaN()) const;
 
 	quantityInfo getDisplayTextWithHysteresis(
@@ -78,15 +80,13 @@ public:
 		qreal value,
 		VenusOS::Enums::Units_Scale previousScale,
 		int decimals = 0,
-		bool precisionAdjustmentAllowed = true,
-		qreal unitMatchValue = qQNaN(),
-		int formatHints = 0) const;
+		Victron::Units::Units::FormatHints formatHints = NoFormatHints,
+		qreal unitMatchValue = qQNaN()) const;
 
 	Q_INVOKABLE QString getCombinedDisplayText(
 		VenusOS::Enums::Units_Type unit,
 		qreal value,
-		int decimals = 0,
-		bool precisionAdjustmentAllowed = true) const;
+		int decimals = 0) const;
 
 	Q_INVOKABLE QString getCapacityDisplayText(VenusOS::Enums::Units_Type unit,
 		qreal capacity_m3,
