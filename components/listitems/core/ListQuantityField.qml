@@ -11,7 +11,7 @@ ListTextField {
 
 	property real value: dataItem.valid ? dataItem.value : NaN
 	property int unit: VenusOS.Units_None
-	property int decimals: Units.defaultUnitPrecision(unit)
+	property int decimals: Units.defaultUnitDecimals(unit)
 
 	suffix: Units.defaultUnitString(unit)
 	textField.inputMethodHints: Qt.ImhFormattedNumbersOnly

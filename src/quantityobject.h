@@ -37,7 +37,7 @@ class QuantityObject : public QObject
 	Q_PROPERTY(QObject* object READ object WRITE setObject NOTIFY objectChanged FINAL)
 	Q_PROPERTY(QString key READ key WRITE setKey NOTIFY keyChanged FINAL)
 	Q_PROPERTY(Victron::VenusOS::Enums::Units_Type unit READ unit WRITE setUnit NOTIFY unitChanged FINAL)
-	Q_PROPERTY(int precision READ precision WRITE setPrecision NOTIFY precisionChanged FINAL)
+	Q_PROPERTY(int decimals READ decimals WRITE setDecimals NOTIFY decimalsChanged FINAL)
 	Q_PROPERTY(QVariant defaultValue READ defaultValue WRITE setDefaultValue NOTIFY defaultValueChanged FINAL)
 	Q_PROPERTY(qreal numberValue READ numberValue NOTIFY numberValueChanged FINAL)
 	Q_PROPERTY(QString textValue READ textValue NOTIFY textValueChanged FINAL)
@@ -60,8 +60,8 @@ public:
 	Victron::VenusOS::Enums::Units_Type unit() const;
 	void setUnit(Victron::VenusOS::Enums::Units_Type unit);
 
-	int precision() const;
-	void setPrecision(int precision);
+	int decimals() const;
+	void setDecimals(int decimals);
 
 	QVariant defaultValue() const;
 	void setDefaultValue(const QVariant &value);
@@ -81,7 +81,7 @@ Q_SIGNALS:
 	void objectChanged();
 	void keyChanged();
 	void unitChanged();
-	void precisionChanged();
+	void decimalsChanged();
 	void defaultValueChanged();
 	void numberValueChanged();
 	void textValueChanged();
@@ -103,7 +103,7 @@ private:
 	QMetaProperty m_property;
 	QMetaObject::Connection m_notifySignalConnection;
 	Victron::VenusOS::Enums::Units_Type m_unit = Victron::VenusOS::Enums::Units_None;
-	int m_precision = Victron::VenusOS::Enums::Units_Precision_Default;
+	int m_decimals = Victron::VenusOS::Enums::Units_Precision_Default;
 	bool m_hasValue = false;
 	bool m_hidden = false;
 };

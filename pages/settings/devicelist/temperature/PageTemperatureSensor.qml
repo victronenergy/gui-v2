@@ -46,7 +46,7 @@ DevicePage {
 		ListTemperature {
 			text: CommonWords.temperature
 			dataItem.uid: bindPrefix + "/Temperature"
-			precision: 0
+			decimals: 0
 		}
 
 		ListQuantity {

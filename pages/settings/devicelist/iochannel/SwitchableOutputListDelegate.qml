@@ -24,7 +24,7 @@ ListQuantityGroupNavigation {
 			object: output
 			key: !isNaN(output.dataNumber) ? "dataNumber" : "dataText"
 			unit: output.dataNumberUnit
-			precision: output.decimals
+			decimals: output.decimals
 		}
 		QuantityObject {
 			object: output

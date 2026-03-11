@@ -12,7 +12,7 @@ QuantityTable {
 	property string phaseUidPrefix
 	property string totalPowerUid
 	property string labelText
-	property int voltPrecision: Units.defaultUnitPrecision(VenusOS.Units_Volt_AC)
+	property int voltDecimals: Units.defaultUnitDecimals(VenusOS.Units_Volt_AC)
 
 	columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 	header: AsymmetricRoundedRectangle {
@@ -62,7 +62,7 @@ QuantityTable {
 		labelAlignment: Qt.AlignRight
 		model: QuantityObjectModel {
 			QuantityObject { object: phase; key: "power"; unit: VenusOS.Units_Watt }
-			QuantityObject { object: phase; key: "voltage"; unit: VenusOS.Units_Volt_AC; precision: root.voltPrecision }
+			QuantityObject { object: phase; key: "voltage"; unit: VenusOS.Units_Volt_AC; decimals: root.voltDecimals }
 			QuantityObject { object: phase; key: "current"; unit: VenusOS.Units_Amp }
 			QuantityObject { object: phase; key: "frequency"; unit: VenusOS.Units_Hertz }
 		}
