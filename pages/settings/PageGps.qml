@@ -86,7 +86,7 @@ DevicePage {
 			//% "Altitude"
 			text: qsTrId("settings_gps_altitude")
 			dataItem.uid: root.bindPrefix + "/Altitude"
-			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Altitude_Metre)
+			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Metre)
 			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
 			unit: Global.systemSettings.altitudeUnit
 		}

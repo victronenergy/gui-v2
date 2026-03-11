@@ -45,6 +45,7 @@ public:
 		NoFormatHints = 0x0,
 		CompactUnitFormat = 0x1,
 		DecimalsAdjustmentDisallowed = 0x2,
+		UnscaledUnitFormat = 0x4,
 	};
 	Q_ENUM(FormatHint)
 	Q_DECLARE_FLAGS(FormatHints, FormatHint)
