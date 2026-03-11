@@ -35,7 +35,7 @@ ListItem {
 			spacing: Theme.geometry_listItem_content_spacing
 
 			ListItemButton {
-				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, false)
+				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
 				visible: !root.readOnly
 
 				onClicked: Global.dialogLayer.open(numberSelectorComponentFrom, { value: dataItemFrom.value })
@@ -62,7 +62,7 @@ ListItem {
 				}
 			}
 			SecondaryListLabel {
-				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, false)
+				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
 				visible: root.readOnly
 			}
 			SecondaryListLabel {
@@ -72,7 +72,7 @@ ListItem {
 				height: parent.height
 			}
 			ListItemButton {
-				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, false)
+				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
 				visible: !root.readOnly
 
 				onClicked: Global.dialogLayer.open(numberSelectorComponentTo, { value: dataItemTo.value })
@@ -99,7 +99,7 @@ ListItem {
 				}
 			}
 			SecondaryListLabel {
-				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, false)
+				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
 				visible: root.readOnly
 			}
 		}
