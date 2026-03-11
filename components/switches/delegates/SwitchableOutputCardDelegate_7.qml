@@ -55,7 +55,7 @@ FocusScope {
 			value: slider.value // already in the display unit
 			unitType: Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType)
 			decimals: root.switchableOutput.decimals
-			precisionAdjustmentAllowed: false // Always respect the decimals setting
+			formatHints: Units.NoDecimalAdjustment // Always respect the decimals setting
 		}
 	}
 
