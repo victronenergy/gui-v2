@@ -35,7 +35,7 @@ ListItem {
 			spacing: Theme.geometry_listItem_content_spacing
 
 			ListItemButton {
-				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, false)
+				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
 				visible: !root.readOnly
 
 				onClicked: Global.dialogLayer.open(numberSelectorComponentFrom, { value: dataItemFrom.value })

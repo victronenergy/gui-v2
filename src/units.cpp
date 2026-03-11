@@ -180,7 +180,7 @@ int Units::defaultUnitDecimals(VenusOS::Enums::Units_Type unit) const
 	return unitMeta(unit).decimals;
 }
 
-QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, int formatHints) const
+QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, Victron::Units::Units::FormatHints formatHints) const
 {
 	if ((formatHints & CompactUnitFormat)
 		&& (unit == VenusOS::Enums::Units_Type::Units_Temperature_Celsius
@@ -220,19 +220,18 @@ quantityInfo Units::getDisplayText(
 	VenusOS::Enums::Units_Type unit,
 	qreal value,
 	int decimals,
-	bool precisionAdjustmentAllowed,
+	Victron::Units::Units::FormatHints formatHints,
 	qreal unitMatchValue) const
 {
-	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, decimals, precisionAdjustmentAllowed, unitMatchValue);
+	return getDisplayTextWithHysteresis(unit, value, VenusOS::Enums::Units_Scale_None /* skip hysteresis */, decimals, formatHints, unitMatchValue);
 }
 
 quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit,
 	qreal value,
 	VenusOS::Enums::Units_Scale previousScale,
 	int decimals,
-	bool precisionAdjustmentAllowed,
-	qreal unitMatchValue,
-	int formatHints) const
+	Victron::Units::Units::FormatHints formatHints,
+	qreal unitMatchValue) const
 {
 	// value unknown
 	if (qIsNaN(value)) {
@@ -337,16 +336,16 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	};
 
 	// If kilowatt-hours have not been scaled avoid decimals
-	if (precisionAdjustmentAllowed && quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment) && quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
 		decimals = 0;
 	}
 
-	// If the scaled value is large then possibly clip the decimals by 1 or 2 fractional digits depending on initial decimal places.
+	// If the scaled value is large then possibly clip the decimals by 1 or 2 fractional digits depending on initial precision.
 	// Only apply this logic to scaled values with 2 non fractional digits if the units are not Units_Volt_DC.
 	// i.e. don't clip decimals for values like 53.35 V DC.
 	decimals = decimals < 0 ? defaultUnitDecimals(unit) : decimals;
 	const int digits = numberOfDigits(static_cast<int>(scaledValue));
-	if (precisionAdjustmentAllowed && (unit != VenusOS::Enums::Units_Volt_DC || digits > 2)) {
+	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment) && (unit != VenusOS::Enums::Units_Volt_DC || digits > 2)) {
 		if (digits >= 4) {
 			decimals = 0;
 		} else if (digits == 3) {
@@ -366,10 +365,10 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 	return quantity;
 }
 
-QString Units::getCombinedDisplayText(VenusOS::Enums::Units_Type unit, qreal value, int decimals, bool precisionAdjustmentAllowed) const
+QString Units::getCombinedDisplayText(VenusOS::Enums::Units_Type unit, qreal value, int decimals, Victron::Units::Units::FormatHints formatHints) const
 {
 	const int d = decimals < 0 ? defaultUnitDecimals(unit) : decimals;
-	const quantityInfo qty = getDisplayText(unit, value, d, precisionAdjustmentAllowed);
+	const quantityInfo qty = getDisplayText(unit, value, d, formatHints);
 	if (qty.number.compare(QStringLiteral("--")) == 0) {
 		return qty.number;
 	}
@@ -386,7 +385,7 @@ QString Units::getCapacityDisplayText(
 
 	const int decimals = defaultUnitDecimals(unit);
 	const quantityInfo c = getDisplayText(unit, capacity, decimals);
-	const quantityInfo r = getDisplayText(unit, remaining, decimals, capacity);
+	const quantityInfo r = getDisplayText(unit, remaining, decimals, Victron::Units::Units::FormatHint::NoFormatHints, capacity);
 	return QStringLiteral("%1/%2%3").arg(r.number, c.number, c.unit);
 }
 

@@ -25,7 +25,7 @@ QuantityInfo::~QuantityInfo()
 
 void QuantityInfo::update() {
 	// Pass the previous value to allow hysteresis
-	quantity = qobject_cast<Units*>(Units::instance(nullptr, nullptr))->getDisplayTextWithHysteresis(unitType, value, quantity.scale, decimals, precisionAdjustmentAllowed, unitMatchValue, formatHints);
+	quantity = qobject_cast<Units*>(Units::instance(nullptr, nullptr))->getDisplayTextWithHysteresis(unitType, value, quantity.scale, decimals, formatHints, unitMatchValue);
 	if (m_number != quantity.number) {
 		m_number = quantity.number;
 		emit numberChanged();
