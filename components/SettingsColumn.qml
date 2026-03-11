@@ -19,6 +19,7 @@ FocusScope {
 	property alias topPadding: contentColumn.topPadding
 	property alias bottomPadding: contentColumn.bottomPadding
 
+	readonly property KeyNavigationListHelper __keyNavHelper: keyNavHelper
 	default property alias _data: contentColumn.data
 
 	implicitWidth: contentColumn.implicitWidth

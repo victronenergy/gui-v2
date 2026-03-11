@@ -9,12 +9,42 @@ import Victron.VenusOS
 GradientListView {
 	id: root
 
-	property alias ipAddresses: ipAddresses
+	property string addressesUid
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 
-	signal ipAddressUpdated(index : int, ipAddress : string)
+	function clearAddresses() {
+		ipAddresses.setValue("")
+	}
+
+	function _addOrUpdateAddress(ipAddress, index = -1) {
+		let addresses = ipAddresses.value ? ipAddresses.value.split(',') : []
+		if (index >= addresses.length) {
+			console.warn("invalid index", index, "IPAddresses length is:", addresses.length)
+			return
+		}
+		if (index < 0) {
+			addresses.push(ipAddress)
+		} else {
+			addresses[index] = ipAddress
+		}
+		ipAddresses.setValue(addresses.join(','))
+	}
 
 	model: ipAddresses.value ? ipAddresses.value.split(',') : []
+
+	header: ListNavigation {
+		bottomInset: Theme.geometry_listItem_itemSeparator_height
+		bottomPadding: bottomInset + topPadding
+
+		//% "Add IP address"
+		text: qsTrId("settings_add_ip_addresses")
+		iconSource: "qrc:/images/icon_plus_32.svg"
+		iconColor: Theme.color_ok
+		showAccessLevel: root.writeAccessLevel
+		onClicked: {
+			root._addOrUpdateAddress("192.168.1.1")
+		}
+	}
 
 	delegate: ListIpAddressField {
 		id: ipAddressDelegate
@@ -22,7 +52,7 @@ GradientListView {
 		rightPadding: removalButton.width + spacing + horizontalContentPadding
 		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
-		saveInput: function() { root.ipAddressUpdated(model.index, secondaryText) }
+		saveInput: function() { root._addOrUpdateAddress(secondaryText, model.index) }
 		interactive: true
 		writeAccessLevel: root.writeAccessLevel
 
@@ -43,6 +73,7 @@ GradientListView {
 
 	VeQuickItem {
 		id: ipAddresses
+		uid: root.addressesUid
 	}
 
 	Component {

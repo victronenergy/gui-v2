@@ -18,6 +18,10 @@ ListSetting {
 	property string secondaryTextColor: Theme.color_listItem_secondaryText
 	property real captionTopMargin: Theme.geometry_listItem_content_verticalSpacing
 
+	property string iconSource: "qrc:/images/icon_arrow_32.svg"
+	property int iconRotation: iconSource === "qrc:/images/icon_arrow_32.svg" ? 180 : 0
+	property color iconColor: Theme.color_listItem_forwardIcon
+
 	signal clicked
 
 	function click() {
@@ -65,9 +69,9 @@ ListSetting {
 					right: parent.right
 					verticalCenter: parent.verticalCenter
 				}
-				source: "qrc:/images/icon_arrow_32.svg"
-				rotation: 180
-				color: Theme.color_listItem_forwardIcon
+				source: root.iconSource
+				rotation: root.iconRotation
+				color: root.iconColor
 				visible: root.interactive
 			}
 		}

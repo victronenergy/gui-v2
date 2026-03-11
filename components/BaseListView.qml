@@ -20,6 +20,8 @@ import Victron.VenusOS
 ListView {
 	id: root
 
+	readonly property KeyNavigationListHelper __keyNavHelper: keyNavHelper
+
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
 	boundsBehavior: Flickable.StopAtBounds

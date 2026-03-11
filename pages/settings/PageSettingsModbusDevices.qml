@@ -5,91 +5,128 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
 	id: root
 
-	property string settings: Global.systemSettings.serviceUid
-
-	topRightButton: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
-		? VenusOS.StatusBar_RightButton_Add
-		: VenusOS.StatusBar_RightButton_None
-
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root.isCurrentPage
-
-		function onRightButtonClicked() {
-			Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", { devices: _devices } )
-		}
+	function _showRemoveDialog(deviceData, protocol, ipAddress, portNumber, unitAddress) {
+		Global.dialogLayer.open(removeDeviceDialog, {
+			modbusDevice: deviceData,
+			//% "%1 %2:%3 (Unit %4)"
+			description: qsTrId("page_settings_modbus_remove_device_description")
+					.arg(protocol)
+					.arg(ipAddress)
+					.arg(portNumber)
+					.arg(unitAddress)
+		})
 	}
 
 	VeQuickItem {
 		id: _devices
 
-		uid: root.settings + "/Settings/ModbusClient/tcp/Devices"
+		uid: Global.systemSettings.serviceUid + "/Settings/ModbusClient/tcp/Devices"
 		// eg: [[tcp,192.168.20.75,502,1],[tcp,192.168.21.234,502,1],[tcp,192.168.21.43,502,1]]
 	}
 
 	GradientListView {
-		header: PrimaryListLabel {
-			horizontalAlignment: Text.AlignHCenter
-			preferredVisible: !_devices.value
-			//% "No Modbus devices saved"
-			text: qsTrId("settings_modbus_no_devices_saved")
+		header: SettingsColumn {
+			width: parent?.width ?? 0
+			bottomPadding: addDevice.visible ? spacing : 0
+
+			ListNavigation {
+				id: addDevice
+				text: CommonWords.add_modbus_device
+				iconSource: "qrc:/images/icon_plus_32.svg"
+				iconColor: Theme.color_ok
+				showAccessLevel: VenusOS.User_AccessType_Installer
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", { devices: _devices } )
+			}
+
+			SettingsListHeader {
+				visible: addDevice.visible
+			}
 		}
 		model: _devices.value ? _devices.value.split(',') : []
 		delegate: ListSetting {
 			id: modbusDeviceDelegate
 
-			property int deviceNumber: index + 1
-			property var deviceInfo: modelData.split(':')
+			readonly property int deviceNumber: index + 1
+			readonly property var deviceInfo: modelData.split(':')
+			readonly property string protocol: deviceInfo[0].toUpperCase()
+			readonly property string ipAddress: deviceInfo[1]
+			readonly property string portNumber: deviceInfo[2]
+			readonly property string unitAddress: deviceInfo[3]
 
-			contentItem: RowLayout {
-				function showRemoveDialog() {
-					Global.dialogLayer.open(removeDeviceDialog, {
-						modbusDevice: modelData,
-						description: protocol.text +" " +
-									ipAddress.text + ":" +
-									portNumber.text +
-									" (Unit " +
-									unitAddress.text +
-									")"
-				   })
+			function click() {
+				if (clickable) {
+					root._showRemoveDialog(modelData, protocol, ipAddress, portNumber, unitAddress)
 				}
+			}
 
-				spacing: modbusDeviceDelegate.spacing
-
+			contentItem: Item {
 				Label {
+					anchors {
+						left: parent.left
+						right: contentRow.left
+						rightMargin: modbusDeviceDelegate.spacing
+						verticalCenter: parent.verticalCenter
+					}
+
 					//% "Device %1"
 					text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
 					font: modbusDeviceDelegate.font
-					Layout.fillWidth: true
+					elide: Text.ElideRight
 				}
-				Label {
-					id: protocol
-					text: deviceInfo[0].toUpperCase() // eg. 'TCP'
-					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
-				}
-				Label {
-					id: ipAddress
-					text: deviceInfo[1] // IP address, eg. '192.168.21.234'
-					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
-				}
-				Label {
-					id: portNumber
-					text: deviceInfo[2] // port number, eg. 502
-					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
-				}
-				Label {
-					id: unitAddress
-					text: deviceInfo[3] // unit address
-					Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
-				}
-				RemoveButton {
-					visible: modbusDeviceDelegate.clickable
-					onClicked: parent.showRemoveDialog()
+
+				RowLayout {
+					id: contentRow
+
+					anchors {
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+					}
+					spacing: modbusDeviceDelegate.spacing
+
+					Label {
+						id: ipAddressLabel
+						text: "%1 %2".arg(modbusDeviceDelegate.protocol).arg(modbusDeviceDelegate.ipAddress) // eg. 'TCP 192.168.21.234'
+						font.pixelSize: Theme.font_size_body2
+						color: Theme.color_listItem_secondaryText
+					}
+
+					Rectangle {
+						width: Theme.geometry_listItem_separator_width
+						height: ipAddressLabel.height
+						color: Theme.color_listItem_separator
+					}
+
+					Label {
+						text: modbusDeviceDelegate.portNumber
+						font.pixelSize: Theme.font_size_body2
+						color: Theme.color_listItem_secondaryText
+						Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
+					}
+
+					Rectangle {
+						width: Theme.geometry_listItem_separator_width
+						height: ipAddressLabel.height
+						color: Theme.color_listItem_separator
+					}
+
+					Label {
+						text: modbusDeviceDelegate.unitAddress
+						font.pixelSize: Theme.font_size_body2
+						color: Theme.color_listItem_secondaryText
+						Layout.minimumWidth: Theme.geometry_modbus_device_protocol_width
+					}
+
+					CP.ColorImage {
+						source: "qrc:/images/icon_minus_32.svg"
+						color: Theme.color_ok
+						visible: modbusDeviceDelegate.clickable
+					}
 				}
 			}
 
@@ -98,12 +135,13 @@ Page {
 
 				ListPressArea {
 					anchors.fill: parent
-					onClicked: modbusDeviceDelegate.contentItem.showRemoveDialog()
+					enabled: modbusDeviceDelegate.clickable
+					onClicked: modbusDeviceDelegate.click()
 				}
 			}
 
-			interactive: true
-			Keys.onSpacePressed: modbusDeviceDelegate.contentItem.showRemoveDialog()
+			interactive: userHasWriteAccess
+			Keys.onSpacePressed: click()
 		}
 	}
 

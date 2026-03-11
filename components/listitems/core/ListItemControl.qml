@@ -52,6 +52,10 @@ AbstractListItem {
 
 	// Provide key navigation between list items.
 	KeyNavigationHighlight.active: root.activeFocus
+	KeyNavigationHighlight.topMargin: topInset
+	KeyNavigationHighlight.bottomMargin: bottomInset
+	KeyNavigationHighlight.leftMargin: leftInset
+	KeyNavigationHighlight.rightMargin: rightInset
 	Keys.enabled: Global.keyNavigationEnabled
 
 	background: ListItemBackground {
