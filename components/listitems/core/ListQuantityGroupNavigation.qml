@@ -18,6 +18,10 @@ ListSetting {
 	property QuantityObjectModel quantityModel
 	property bool tableMode
 
+	property url iconSource: "qrc:/images/icon_arrow_32.svg"
+	property string iconRotation: iconSource === "qrc:/images/icon_arrow_32.svg" ? 180 : 0
+	property color iconColor: Theme.color_listItem_forwardIcon
+
 	signal clicked
 
 	function click() {
@@ -81,9 +85,9 @@ ListSetting {
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: Theme.color_listItem_forwardIcon
+			source: root.iconSource
+			rotation: root.iconRotation
+			color: root.iconColor
 
 			// Set opacity instead of visible, to maintain the quantity label vertical alignments
 			// even when list item is not clickable.

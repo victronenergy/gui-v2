@@ -41,22 +41,25 @@ QtObject {
 
 		// If no items have been focused yet, or the previously focused item can no longer be
 		// focused, then find a new item to focus.
-		if (!currentItem || !Utils.acceptsKeyNavigation(currentItem)) {
+		if (!currentItem || !_focusContainerOrItem(currentItem)) {
 			if (_initialized && validCurrentIndex) {
 				// The current item is no longer focusable, so find a focusable item, working
 				// backwards from the current index.
 				if (focusPreviousItem(currentIndex)) {
-					return
+					return true
 				}
 			}
 			// Focus the first available item.
 			_initialized = true
-			if (Utils.acceptsKeyNavigation(headerItem)) {
+			if (_focusContainerOrItem(headerItem)) {
 				headerItem.focus = true
+				_currentIndex = -1
+				return true
 			} else {
-				focusNextItem(-1)
+				return focusNextItem(-1)
 			}
 		}
+		return _currentIndex >= 0 && _currentIndex < itemCount
 	}
 
 	// Moves the focus to the next item in the list.
@@ -67,6 +70,25 @@ QtObject {
 	// Moves the focus to the previous item in the list.
 	function focusPreviousItem(fromIndex) {
 		return _moveFocus(fromIndex, false)
+	}
+
+	// Moves focus to a view or item. If a view with a KeyNavigationListHelper is specified, returns
+	// the result of calling updateFocusedItem() on that view, so that the caller can determine
+	// whether the focus was moved sucessfully - e.g. it will fail if the view currently has no
+	// focusable items, and in that case the caller can try a different item.
+	// If a non-view is specified, this simply sets focus=true on the item.
+	function _focusContainerOrItem(containerOrItem) {
+		if (!Utils.acceptsKeyNavigation(containerOrItem)) {
+			return false
+		}
+		if (containerOrItem.__keyNavHelper) {
+			// Try to focus the first item in the container.
+			return containerOrItem.__keyNavHelper.updateFocusedItem()
+		} else {
+			// Focus the item.
+			containerOrItem.focus = true
+			return true
+		}
 	}
 
 	// Focuses the next item (fromIndex + 1) or previous item (fromIndex - 1).
@@ -98,27 +120,22 @@ QtObject {
 				// There are no more created delegates, so stop searching.
 				break
 			}
-			if (Utils.acceptsKeyNavigation(toItem)) {
-				_currentIndex = toIndex
 
-				// If moving away from a header/footer that is focused, remove the focus.
-				if (forward && headerItem?.activeFocus) {
-					headerItem.focus = false
-				} else if (!forward && footerItem?.activeFocus) {
-					footerItem.focus = false
-				}
-				toItem.focus = true
+			if (_focusContainerOrItem(toItem)) {
+				_currentIndex = toIndex
 				return true
 			}
 		}
 
 		// Allow key navigation to move to the footer (if moving forwards) or footer (if backwards).
-		if (forward && Utils.acceptsKeyNavigation(footerItem)) {
+		if (forward && _focusContainerOrItem(footerItem)) {
 			footerItem.focus = true
+			_currentIndex = -1
 			scrollToEndRequested() // ensure footer can be seen
 			return true
-		} else if (!forward && Utils.acceptsKeyNavigation(headerItem)) {
+		} else if (!forward && _focusContainerOrItem(headerItem)) {
 			headerItem.focus = true
+			_currentIndex = -1
 			scrollToStartRequested() // ensure header can be seen
 			return true
 		}
