@@ -23,8 +23,8 @@ ColumnLayout {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
 		icon.source: "qrc:/images/solaryield.svg"
-		loadersActive: Global.solarInputs.devices.count > 0 // pvinverters do not have history, so ignore them
-		visible: Global.solarInputs.devices.count > 0
+		loadersActive: Global.solarInputs.devices.count > 0 // only show graph if there are solar inputs with history (i.e. not PV inverters)
+		visible: Global.solarInputs.inputCount > 0 // show if there are any solar inputs (PV chargers, PV inverters, etc.)
 		quantityLabel.dataObject: Global.system.solar
 		sideComponent: SolarYieldGraph {
 			spacing: Theme.geometry_sidePanel_solar_graph_bar_spacing
