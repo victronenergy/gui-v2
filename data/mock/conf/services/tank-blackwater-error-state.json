@@ -16,7 +16,7 @@
         "/DeviceInstance": 30,
         "/FilterLength": 10,
         "/FluidType": 5,
-        "/Level": 89,
+        "/Level": null,
         "/Mgmt/Connection": "Tank Level input 2",
         "/Mgmt/ProcessName": "dbus-adc",
         "/Mgmt/ProcessVersion": "1.32",
