@@ -17,19 +17,19 @@ Page {
 				unit: VenusOS.Units_Watt
 				//% "Expected power consumption"
 				text: qsTrId("pagecontrollableloads_expected_power_consumption")
-				dataItem.uid: device?.serviceUid + "/S2/0/RmSettings/PowerSetting"
+				dataItem.uid: root.device ? root.device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
 			}
 			ListQuantityField {
 				unit: VenusOS.Units_Time_Second
 				//% "Minimum run duration when turned on"
 				text: qsTrId("pagecontrollableloads_minimum_run_duration")
-				dataItem.uid: device?.serviceUid + "/S2/0/RmSettings/OffHysteresis"
+				dataItem.uid: root.device? root.device.serviceUid + "/S2/0/RmSettings/OffHysteresis" : ""
 			}
 			ListQuantityField {
 				unit: VenusOS.Units_Time_Second
 				//% "Minimum rest duration when turned off"
 				text: qsTrId("pagecontrollableloads_minimum_rest_duration")
-				dataItem.uid: device?.serviceUid + "/S2/0/RmSettings/OnHysteresis"
+				dataItem.uid: root.device? root.device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
 			}
 		}
 	}
