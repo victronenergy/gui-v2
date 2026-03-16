@@ -39,9 +39,9 @@ Item {
 		anchors.fill: parent
 
 		radius: Theme.geometry_toastNotification_radius
-		color: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
-			 : root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
-			 : Theme.color_toastNotification_background_informative
+		color: root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
+			: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
+			: Theme.color_toastNotification_background_informative
 
 		Rectangle {
 			id: highlight
@@ -56,18 +56,18 @@ Item {
 			topLeftRadius: parent.radius
 			bottomLeftRadius: parent.radius
 
-			color: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
-				 : root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
-				 : Theme.color_toastNotification_highlight_informative
+			color: root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
+				: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
+				: Theme.color_toastNotification_highlight_informative
 
 			CP.IconImage {
 				id: icon
 				anchors.centerIn: parent
 
 				color: Theme.color_toastNotification_foreground
-				source: root.type === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
-					  : root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_warning_32.svg"
-					  : "qrc:/images/icon_info_32.svg"
+				source: root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_alarm_32.svg"
+					: root.type === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
+					: "qrc:/images/icon_info_32.svg"
 			}
 		}
 

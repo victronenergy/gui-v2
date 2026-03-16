@@ -45,7 +45,10 @@ BaseListItem {
 					? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
 					: (root.historical ? Theme.color_darkCritical : Theme.color_critical)
 			source: root.type === VenusOS.Notification_Info
-					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_warning_32.svg"
+				? "qrc:/images/icon_info_32.svg"
+				: root.type === VenusOS.Notification_Warning
+					? "qrc:/images/icon_warning_32.svg"
+					: "qrc:/images/icon_alarm_32.svg"
 		}
 	}
 
