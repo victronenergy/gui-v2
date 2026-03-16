@@ -17,7 +17,7 @@ Page {
 				unit: VenusOS.Units_Watt
 				//% "Maximum charging power limit"
 				text: qsTrId("pagecontrollableloads_evcs_maximum_charging_power_limit")
-				// dataItem.uid: TBD
+				dataItem.uid: root.device?.serviceUid + "/S2/0/RmSettings/MaxChargePower"
 				//% "Limiting the maximum charging power can improve simultaneity with other controllable devices."
 				caption: qsTrId("pagecontrollableloads_limiting_the_maximum")
 				bottomContentSizeMode: VenusOS.ListItem_BottomContentSizeMode_Compact
