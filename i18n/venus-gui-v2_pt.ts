@@ -11157,182 +11157,182 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
     <message id="pagesettingssystem_opportunity_loads">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
       <source>Opportunity Loads</source>
-      <translation/>
+      <translation>Cargas de Oportunidade</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
       <source>Automate controllable devices to maximize PV self-use</source>
-      <translation/>
+      <translation>Automatize dispositivos controláveis para maximizar o autoconsumo de FV</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="763"/>
       <source>EMS Control: Hybrid droop</source>
-      <translation/>
+      <translation>Controlo EMS: Droop Híbrido</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
       <location filename="../../src/enums.cpp" line="767"/>
       <source>EMS Control: Grid-following</source>
-      <translation/>
+      <translation>Controlo EMS: Seguidor de Rede</translation>
     </message>
     <message id="microgrid_mode_ems_grid_forming">
       <location filename="../../src/enums.cpp" line="770"/>
       <source>EMS Control: Grid-forming</source>
-      <translation/>
+      <translation>Controlo EMS: Formador de Rede</translation>
     </message>
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
       <location filename="../../src/enums.cpp" line="784"/>
       <source>Different fallback hybrid droop values in phase masters</source>
-      <translation/>
+      <translation>Valores de droop híbrido de fallback diferentes nos masters de fase</translation>
     </message>
     <message id="microgrid_error_write_failed">
       <location filename="../../src/enums.cpp" line="787"/>
       <source>Hybrid droop parameter write failed</source>
-      <translation/>
+      <translation>Falha ao escrever o parâmetro de droop híbrido</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
       <location filename="../../src/enums.cpp" line="790"/>
       <source>Parameter error Fmin &gt; Fmax</source>
-      <translation/>
+      <translation>Erro de parâmetro Fmin &gt; Fmax</translation>
     </message>
     <message id="microgrid_error_param_pmin_greater_than_pmaxv">
       <location filename="../../src/enums.cpp" line="793"/>
       <source>Parameter error Pmin &gt; Pmax</source>
-      <translation/>
+      <translation>Erro de parâmetro Pmin &gt; Pmax</translation>
     </message>
     <message id="microgrid_error_param_umin_greater_than_umax">
       <location filename="../../src/enums.cpp" line="796"/>
       <source>Parameter error Umin &gt; Umax</source>
-      <translation/>
+      <translation>Erro de parâmetro Umin &gt; Umax</translation>
     </message>
     <message id="microgrid_error_param_qmin_greater_than_qmax">
       <location filename="../../src/enums.cpp" line="799"/>
       <source>Parameter error Qmin &gt; Qmax</source>
-      <translation/>
+      <translation>Erro de parâmetro Qmin &gt; Qmax</translation>
     </message>
     <message id="microgrid_error_param_q0_out_of_range">
       <location filename="../../src/enums.cpp" line="802"/>
       <source>Parameter error Q0 out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro Q0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_qmin_out_of_range">
       <location filename="../../src/enums.cpp" line="805"/>
       <source>Parameter error Qmin out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro Qmin fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_qmax_out_of_range">
       <location filename="../../src/enums.cpp" line="808"/>
       <source>Parameter error Qmax out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro Qmax fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_u0_out_of_range">
       <location filename="../../src/enums.cpp" line="811"/>
       <source>Parameter error U0 out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro U0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_u_droop_out_of_range">
       <location filename="../../src/enums.cpp" line="814"/>
       <source>Parameter error U droop out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro U droop fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
       <location filename="../../src/enums.cpp" line="817"/>
       <source>Parameter error P0 out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro P0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_pmin_out_of_range">
       <location filename="../../src/enums.cpp" line="820"/>
       <source>Parameter error Pmin out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro Pmin fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_pmax_out_of_range">
       <location filename="../../src/enums.cpp" line="823"/>
       <source>Parameter error Pmax out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro Pmax fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_f0_out_of_range">
       <location filename="../../src/enums.cpp" line="826"/>
       <source>Parameter error F0 out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro F0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_freq_droop_out_of_range">
       <location filename="../../src/enums.cpp" line="829"/>
       <source>Parameter error freq droop out of range</source>
-      <translation/>
+      <translation>Erro de parâmetro freq droop fora do intervalo</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
       <location filename="../../src/enums.cpp" line="832"/>
       <source>Ve.Bus internal error PF vs FP data mismatch</source>
-      <translation/>
+      <translation>Erro interno Ve.Bus: Incompatibilidade de dados PF vs FP</translation>
     </message>
     <message id="microgrid_error_qu_uq_mismatch">
       <location filename="../../src/enums.cpp" line="835"/>
       <source>Ve.Bus internal error QU vs UQ data mismatch</source>
-      <translation/>
+      <translation>Erro interno Ve.Bus: Incompatibilidade de dados QU vs UQ</translation>
     </message>
     <message id="generic_input_discrete">
       <location filename="../../src/enums.cpp" line="489"/>
       <source>Discrete value indicator</source>
-      <translation/>
+      <translation>Indicador de valor discreto</translation>
     </message>
     <message id="generic_input_value_unranged">
       <location filename="../../src/enums.cpp" line="492"/>
       <source>Value indicator (unranged)</source>
-      <translation/>
+      <translation>Indicador de valor (sem intervalo)</translation>
     </message>
     <message id="generic_input_value_ranged">
       <location filename="../../src/enums.cpp" line="495"/>
       <source>Value indicator (ranged)</source>
-      <translation/>
+      <translation>Indicador de valor (com intervalo)</translation>
     </message>
     <message id="generic_input_temperature">
       <location filename="../../src/enums.cpp" line="498"/>
       <source>Temperature indicator</source>
-      <translation/>
+      <translation>Indicador de temperatura</translation>
     </message>
     <message id="switchable_output_function_generator_startstop">
       <location filename="../../src/enums.cpp" line="588"/>
       <source>Generator start/stop</source>
-      <translation/>
+      <translation>Arranque/paragem do gerador</translation>
     </message>
     <message id="switchable_output_function_genset_helper">
       <location filename="../../src/enums.cpp" line="600"/>
       <source>Genset Helper</source>
-      <translation/>
+      <translation>Assistente do Grupo Gerador</translation>
     </message>
     <message id="switchable_output_function_opportunity_load">
       <location filename="../../src/enums.cpp" line="603"/>
       <source>Opportunity load</source>
-      <translation/>
+      <translation>Carga de oportunidade</translation>
     </message>
     <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
       <source>Waiting for VE.Bus setting access password</source>
-      <translation/>
+      <translation>A aguardar a palavra-passe de acesso às definições VE.Bus</translation>
     </message>
     <message id="vebus_settings_password_required">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="290"/>
       <source>VE.Bus settings password required</source>
-      <translation/>
+      <translation>É necessária a palavra-passe das definições VE.Bus</translation>
     </message>
     <message id="vebus_settings_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="454"/>
       <source>VE.Bus settings access password</source>
-      <translation/>
+      <translation>Palavra-passe de acesso às definições VE.Bus</translation>
     </message>
     <message id="vebus_settings_enter_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="457"/>
       <source>Enter VE.Bus password for access level %1</source>
-      <translation/>
+      <translation>Introduza a palavra-passe VE.Bus para o nível de acesso %1</translation>
     </message>
     <message id="device_page_inputs">
       <location filename="../../components/DevicePage.qml" line="76"/>
       <source>Inputs</source>
-      <translation/>
+      <translation>Entradas</translation>
     </message>
     <message id="list-spin-box-range_minimum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
       <source>Minimum value (%1)</source>
-      <translation/>
+      <translation>Valor mínimo (%1)</translation>
     </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
@@ -11343,7 +11343,7 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
     <message id="list-spin-box-range_maximum_value_with_arguments">
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
       <source>Maximum value (%1)</source>
-      <translation/>
+      <translation>Valor máximo (%1)</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
@@ -11354,97 +11354,97 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
     <message id="pagecontrollableloads_devices_and_priorities">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
       <source>Devices and Priorities</source>
-      <translation/>
+      <translation>Dispositivos e Prioridades</translation>
     </message>
     <message id="pagecontrollableloads_arrange">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="170"/>
       <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation/>
+      <translation>Organize os dispositivos controláveis de acordo com a sua prioridade; o algoritmo de controlo irá controlá-los com base no excesso de FV atualmente disponível.</translation>
     </message>
     <message id="pagecontrollableloads_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
       <source>Expected power consumption</source>
-      <translation/>
+      <translation>Consumo de energia esperado</translation>
     </message>
     <message id="pagecontrollableloads_minimum_run_duration">
       <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
       <source>Minimum run duration when turned on</source>
-      <translation/>
+      <translation>Duração mínima de funcionamento quando ligado</translation>
     </message>
     <message id="pagecontrollableloads_minimum_rest_duration">
       <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
       <source>Minimum rest duration when turned off</source>
-      <translation/>
+      <translation>Duração mínima de repouso quando desligado</translation>
     </message>
     <message id="pagecontrollableloads_battery_reserved_power_0">
       <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
       <source>Reserved power for battery charging at 0% SOC</source>
-      <translation/>
+      <translation>Energia reservada para carregamento da bateria a 0% SOC</translation>
     </message>
     <message id="pagecontrollableloads_battery_reduce_power">
       <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
       <source>Reduce power per percentage point of SOC by</source>
-      <translation/>
+      <translation>Reduzir a potência por ponto percentual de SOC por</translation>
     </message>
     <message id="pagecontrollableloads_battery_batterylife_compatibility">
       <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
       <source>BatteryLife compatibility</source>
-      <translation/>
+      <translation>Compatibilidade BatteryLife</translation>
     </message>
     <message id="page_controllableloads_battery_pause_opportunity_loads">
       <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
       <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation/>
+      <translation>Pausar Cargas de Oportunidade quando o limite de SOC Ativo exceder 85%</translation>
     </message>
     <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
       <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
       <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation/>
+      <translation>Isto ajuda o algoritmo BatteryLife a recarregar a bateria a 100%.</translation>
     </message>
     <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
       <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
       <source>Maximum charging power limit</source>
-      <translation/>
+      <translation>Limite máximo de potência de carregamento</translation>
     </message>
     <message id="pagecontrollableloads_limiting_the_maximum">
       <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
       <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
-      <translation/>
+      <translation>Limitar a potência máxima de carregamento pode melhorar a simultaneidade com outros dispositivos controláveis.</translation>
     </message>
     <message id="page_generic_input_invert">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
       <source>Invert</source>
-      <translation/>
+      <translation>Inverter</translation>
     </message>
     <message id="iochannel_digital_input_mode">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="48"/>
       <source>Digital input mode</source>
-      <translation/>
+      <translation>Modo de entrada digital</translation>
     </message>
     <message id="iochannel_digital_input_mode_input">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="55"/>
       <source>Digital input</source>
-      <translation/>
+      <translation>Entrada digital</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
       <source>Toggle switch</source>
-      <translation/>
+      <translation>Interruptor de alternância</translation>
     </message>
     <message id="iochannel_digital_input_mode_press">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Press button</source>
-      <translation/>
+      <translation>Botão de pressão</translation>
     </message>
     <message id="iochannel_digital_input_mode_press_and_hold">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
       <source>Press and hold button</source>
-      <translation/>
+      <translation>Botão de pressionar e manter</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
       <source>Apply all parameters</source>
-      <translation/>
+      <translation>Aplicar todos os parâmetros</translation>
     </message>
     <message id="page_microgrid_apply">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
