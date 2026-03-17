@@ -66,22 +66,6 @@ Page {
 			}
 		}
 
-		Label {
-			id: priorityLabel
-
-			anchors {
-				verticalCenter: parent.verticalCenter
-				right: parent.left
-				rightMargin: 2
-			}
-
-			horizontalAlignment: Text.AlignHCenter
-			width: Theme.geometry_priorityLabel_width
-			color: Theme.color_font_disabled
-			font.pixelSize: Theme.font_size_body1
-			text: index + 1
-		}
-
 		Arrow {
 			id: upArrow
 
@@ -219,6 +203,27 @@ Page {
 			deviceInstance: model.deviceInstance
 			uniqueIdentifier: model.uniqueIdentifier
 		}
+
+		ListView {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
+					// which animate up & down by clicking the up & down arrows.
+			y: -parent.contentY
+			height: parent.height
+			spacing: parent.spacing
+			model: parent.model
+			delegate: ListItem {
+				Label {
+					anchors{
+						left: parent.left
+						leftMargin: Theme.geometry_listItem_content_horizontalMargin
+						verticalCenter: parent.verticalCenter
+					}
+					text: index + 1
+					color: Theme.color_font_disabled
+					font.pixelSize: Theme.font_size_body1
+				}
+			}
+		}
+
 		move: Transition {
 			enabled: Global.animationEnabled
 			NumberAnimation {
