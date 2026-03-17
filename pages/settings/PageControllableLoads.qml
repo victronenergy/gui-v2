@@ -10,167 +10,6 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	component Arrow: Button {
-		radius: Theme.geometry_opportunityLoad_button_radius
-		flat: false
-		icon.source: "qrc:/images/icon_arrow.svg"
-		width: Theme.geometry_opportunityLoad_button_height
-		height: Theme.geometry_opportunityLoad_button_height
-	}
-
-	component DevicePriorityListNavigation: ListNavigation {
-		id: devicePriorityDelegate
-
-		property string serviceType
-		property int deviceInstance: -1
-		property string uniqueIdentifier
-		readonly property FilteredDeviceModel devices: serviceType === "acload" ? acLoadDevices
-				: serviceType === "evcharger" ? evcsDevices
-				: null
-		readonly property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
-		readonly property string pageSource: pageData.item?.pageSource || ""
-		property alias text: primary.text
-
-		anchors {
-			left: parent.left
-			leftMargin: Theme.geometry_priorityLabel_width
-			right: parent.right
-		}
-
-		onClicked: Global.pageManager.pushPage(devicePriorityDelegate.pageSource,
-											   ({
-													"title": devicePriorityDelegate.text,
-													"device": devicePriorityDelegate._device
-												})
-											   )
-		interactive: pageData.item?.interactive
-		secondaryText: disabled.value === 0 ? CommonWords.disabled : ""
-
-		Loader {
-			id: pageData
-			sourceComponent: {
-				{
-					switch (devicePriorityDelegate.serviceType) {
-					case "battery":
-						return batteryData
-					case "acload":
-						return acLoadData
-					case "evcharger":
-						return evcsData
-					default:
-						console.warn("Controllable Loads: Invalid service type.")
-						return undefined
-					}
-				};
-				device: _device
-			}
-		}
-
-		Arrow {
-			id: upArrow
-
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_opportunityLoad_margin
-				verticalCenter: parent.verticalCenter
-			}
-			enabled: index !== 0
-			onClicked: {
-				opportunityLoadsModel.move(index, index - 1, 1)
-				opportunityLoadsModel.writeToBackEnd()
-			}
-		}
-
-		Arrow {
-			id: downArrow
-
-			anchors {
-				left: upArrow.right
-				leftMargin: Theme.geometry_opportunityLoad_margin
-				verticalCenter: parent.verticalCenter
-			}
-			enabled: index !== (opportunityLoadsModel.count - 1)
-			rotation: 180
-			onClicked: {
-				opportunityLoadsModel.move(index + 1, index, 1)
-				opportunityLoadsModel.writeToBackEnd()
-			}
-		}
-
-		Label {
-			id: primary
-
-			anchors {
-				left: downArrow.right
-				leftMargin: Theme.geometry_listItem_content_horizontalMargin
-				verticalCenter: parent.verticalCenter
-			}
-			font.pixelSize: Theme.font_size_body2
-			wrapMode: Text.Wrap
-			text: devicePriorityDelegate.serviceType === "battery" ? CommonWords.battery
-				: devicePriorityDelegate.device?.name ||devicePriorityDelegate.device?.productName || devicePriorityDelegate.uniqueIdentifier || ""
-		}
-
-		VeQuickItem {
-			id: disabled
-
-			uid: _device ? _device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
-		}
-	} // component DevicePriorityListNavigation
-
-	component PageData : QtObject {
-		required property bool interactive
-		required property string pageSource
-		property Device device
-	}
-
-	Component {
-		id: batteryData
-
-		PageData {
-			interactive: true
-			pageSource: "/pages/settings/PageControllableLoadsBattery.qml"
-		}
-	}
-
-	Component {
-		id: acLoadData
-
-		PageData {
-			id: acLoadData
-
-			property VeQuickItem powerSetting: VeQuickItem {
-				uid: acLoadData.device ? acLoadData.device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
-			}
-
-			property VeQuickItem offHysteresis: VeQuickItem {
-				uid: acLoadData.device? acLoadData.device.serviceUid + "/S2/0/RmSettings/OffHysteresis" : ""
-			}
-
-			property VeQuickItem onHysteresis: VeQuickItem {
-				uid: acLoadData.device? acLoadData.device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
-			}
-
-			interactive: powerSetting.valid || offHysteresis.valid || onHysteresis.valid
-			pageSource: "/pages/settings/PageControllableLoadsAcLoad.qml"
-		}
-	}
-
-	Component {
-		id: evcsData
-
-		PageData {
-			id: evcsData
-
-			property VeQuickItem maxChargePower: VeQuickItem {
-				uid: evcsData.device? evcsData.device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
-			}
-
-			interactive: maxChargePower.valid
-			pageSource: "/pages/settings/PageControllableLoadsEVCS.qml"
-		}
-	}
-
 	VeQuickItem {
 		id: mode
 
@@ -204,22 +43,28 @@ Page {
 			uniqueIdentifier: model.uniqueIdentifier
 		}
 
-		ListView {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
+		Column {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
 					// which animate up & down by clicking the up & down arrows.
 			y: -parent.contentY
-			height: parent.height
 			spacing: parent.spacing
-			model: parent.model
-			delegate: ListItem {
-				Label {
-					anchors{
-						left: parent.left
-						leftMargin: Theme.geometry_listItem_content_horizontalMargin
-						verticalCenter: parent.verticalCenter
+
+			Repeater {
+				model: parent.parent.model
+				delegate: ListItem {
+					width: label.width
+					background.color: "transparent"
+					Label {
+						id: label
+
+						anchors{
+							left: parent.left
+							leftMargin: Theme.geometry_listItem_content_horizontalMargin
+							verticalCenter: parent.verticalCenter
+						}
+						text: index + 1
+						color: Theme.color_font_disabled
+						font.pixelSize: Theme.font_size_body1
 					}
-					text: index + 1
-					color: Theme.color_font_disabled
-					font.pixelSize: Theme.font_size_body1
 				}
 			}
 		}
@@ -260,24 +105,14 @@ Page {
 				visible: mode.value
 			}
 
-			ListItem {
+			ListLink {
 				id: documentation
 
 				//% "Documentation"
 				text: qsTrId("pagecontrollableloads_documentation")
 				//% "Access the documentation by scanning the QR code with your portable device.\nOr insert the link: http://ve4.nl/ol"
 				captionLabel.text: qsTrId("pagecontrollableloads_access_the_documentation")
-				content.children: [
-					Image {
-						readonly property int qrCodeHeight: Math.max(Theme.geometry_listItem_height,
-																	 documentation.height - 2*Theme.geometry_listItem_content_verticalMargin)
-
-						source: "image://QZXing/encode/" + "http://ve4.nl/ol" +
-								"?correctionLevel=M" +
-								"&format=qrcode"
-						sourceSize: Qt.size(qrCodeHeight, qrCodeHeight)
-					}
-				]
+				url: "http://ve4.nl/ol"
 			}
 		}
 	}
@@ -337,15 +172,5 @@ Page {
 				opportunityLoadsModel.remove(jsv.length, opportunityLoadsModel.count - jsv.length)
 			}
 		}
-	}
-
-	FilteredDeviceModel {
-		id: acLoadDevices
-		serviceTypes: ["acload"]
-	}
-
-	FilteredDeviceModel {
-		id: evcsDevices
-		serviceTypes: ["evcharger"]
 	}
 }
