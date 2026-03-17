@@ -416,12 +416,8 @@ Item {
 		}
 		inputInfo.serviceInfoChanged() // force AcInputs.qml to update the acInput object now, so phases can be set
 
-		// Set the active input for vebus/acsystem inputs
 		const input = Global.acInputs["input" + (inputInfo.inputIndex + 1)]
 		if (input) {
-			if (!!inputInfoConfig.connected && input._activeInput.uid) {
-				input._activeInput.setValue(inputInfo.inputIndex)
-			}
 			// Set phase data
 			const objectAcConn = input._phaseMeasurements
 			const phaseCount = inputInfoConfig.phaseCount ?? 1
