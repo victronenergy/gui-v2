@@ -79,7 +79,7 @@ TestCase {
 				tag: "status - invalid",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
 				outputProperties: { "State": 0 }, // status not set
-				expected: { status: 0 },
+				expected: { status: -1 },
 			},
 			{
 				tag: "status - 0",
@@ -184,7 +184,7 @@ TestCase {
 		compare(output.serviceUid, "")
 		compare(output.formattedName, "")
 		compare(output.state, 0)
-		compare(output.status, 0)
+		compare(output.status, -1)
 		compare(output.dimming, 0)
 		compare(output.type, -1)
 		compare(output.group, "")
@@ -208,7 +208,7 @@ TestCase {
 		compare(output.serviceUid, "")
 		compare(output.formattedName, "")
 		compare(output.state, 0)
-		compare(output.status, 0)
+		compare(output.status, -1)
 		compare(output.dimming, 0)
 		compare(output.type, -1)
 		compare(output.group, "")

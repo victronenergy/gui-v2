@@ -54,7 +54,7 @@ TestCase {
 				tag: "status - invalid",
 				uid: "mock/com.victronenergy.test.a/GenericInput/0",
 				inputProperties: { "Name": "Foo" }, // status not set
-				expected: { status: 0 },
+				expected: { status: -1 },
 			},
 			{
 				tag: "status - 0",
@@ -203,7 +203,7 @@ TestCase {
 		compare(input.channelId, "")
 		compare(input.serviceUid, "")
 		compare(input.formattedName, "")
-		compare(input.status, 0)
+		compare(input.status, -1)
 		compare(input.value, 0)
 		compare(input.primaryLabel, "")
 		compare(input.rangeMin, 0)
@@ -230,7 +230,7 @@ TestCase {
 		compare(input.channelId, "")
 		compare(input.serviceUid, "")
 		compare(input.formattedName, "")
-		compare(input.status, 0)
+		compare(input.status, -1)
 		compare(input.value, 0)
 		compare(input.primaryLabel, "")
 		compare(input.rangeMin, 0)
