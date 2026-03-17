@@ -449,7 +449,7 @@ QString Enums::solarCharger_stateToText(SolarCharger_State state) const
 		return qtTrId("solarchargers_state_equalize");
 	case SolarCharger_State_ExternalControl:
 		//% "External control"
-		return qtTrId("solarchargers_state_external control");
+		return qtTrId("solarchargers_state_external_control");
 	default:
 		return QString();
 	}
