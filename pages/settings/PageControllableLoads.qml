@@ -269,7 +269,8 @@ Page {
 				captionLabel.text: qsTrId("pagecontrollableloads_access_the_documentation")
 				content.children: [
 					Image {
-						readonly property int qrCodeHeight: documentation.height - 2*Theme.geometry_listItem_content_verticalMargin
+						readonly property int qrCodeHeight: Math.max(Theme.geometry_listItem_height,
+																	 documentation.height - 2*Theme.geometry_listItem_content_verticalMargin)
 
 						source: "image://QZXing/encode/" + "http://ve4.nl/ol" +
 								"?correctionLevel=M" +
