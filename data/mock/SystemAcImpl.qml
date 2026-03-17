@@ -114,9 +114,9 @@ Item {
 					phaseAcOutCurrent = Units.sumRealNumbers(phaseAcOutCurrent, acService.acOut["currentL" + (phaseIndex + 1)].value)
 					if (updateGaugeRanges) {
 						const inputCurrent = (phaseAcInCurrent || 0) + (phaseAcOutCurrent || 0)
-						if (acService.activeInput === 1) {
+						if (acService.index === 0) {
 							acIn1MaxCurrent = Math.max(acIn1MaxCurrent, inputCurrent)
-						} else if (acService.activeInput === 2) {
+						} else if (acService.index === 1) {
 							acIn2MaxCurrent = Math.max(acIn2MaxCurrent, inputCurrent)
 						} else {
 							noAcInMaxCurrent = Math.max(noAcInMaxCurrent, inputCurrent)
@@ -171,11 +171,9 @@ Item {
 		delegate: QtObject {
 			id: acService
 
+			required property int index
 			required property string uid
 			readonly property string serviceType: BackendConnection.serviceTypeFromUid(uid)
-			readonly property int activeInput: _activeInput.value === VenusOS.AcInputs_InputSource_Inverting ? -1
-						: !_activeInput.valid ? 1
-						: _activeInput.value + 1
 			property bool completed
 
 			readonly property string phaseCountUid: (acService.serviceType === "vebus" || acService.serviceType === "acsystem")
@@ -190,7 +188,7 @@ Item {
 				powerKey: "P"
 				currentKey: "I"
 				bindPrefix: acService.serviceType === "vebus" ? acService.uid + "/Ac/ActiveIn"
-					: acService.serviceType === "acsystem" ? acService.uid + "/Ac/In/%1".arg(activeInput.value + 1)
+					: acService.serviceType === "acsystem" ? acService.uid + "/Ac/In/%1".arg(index + 1)
 					: acService.serviceType === "charger" ? acService.uid + "/Ac/In"
 					: "" // no AC-in for inverters
 				_phaseCount.uid: acService.phaseCountUid
@@ -220,11 +218,6 @@ Item {
 						Qt.callLater(acServiceObjects.updateConsumption)
 					}
 				}
-			}
-			readonly property VeQuickItem _activeInput: VeQuickItem {
-				uid: acService.serviceType === "vebus" || acService.serviceType === "acsystem"
-					 ? acService.uid + "/Ac/ActiveIn/ActiveInput"
-					 : ""
 			}
 		}
 		onObjectAdded: (index, acService) => {
@@ -271,8 +264,7 @@ Item {
 					if (acInput.serviceType === "vebus") {
 						MockManager.setValue(acInput.serviceUid + "/Ac/ActiveIn/P", totalPower)
 					} else if (acInput.serviceType === "acsystem") {
-						const activeInput = MockManager.value(acInput.serviceUid + "/Ac/ActiveIn/ActiveInput")
-						MockManager.setValue(acInput.serviceUid + "/Ac/%1/P".arg(activeInput + 1), totalPower)
+						MockManager.setValue(acInput.serviceUid + "/Ac/%1/P".arg(index + 1), totalPower)
 					}
 				}
 			}

@@ -37,21 +37,18 @@ Device {
 			}
 			switch (root.serviceType) {
 			case "vebus":
-				// Multi/Quattro can only measure its active input, i.e. when both:
-				// - system /Ac/In/<x>/Connected=1 for this input
-				// - this input matches the vebus /Ac/ActiveIn value
-				if (root.inputInfo.connected
-						&& _activeInput.valid
-						&& root.inputInfo.inputIndex === _activeInput.value) {
+				// Multi/Quattro can only measure its active input, so if connected=true, then we
+				// know this is the active input. Do not attempt to match inputInfo.inputIndex
+				// against the value of system /Ac/ActiveIn/ActiveInput, as those do not match if
+				// the first vebus input is disconnected.
+				if (root.inputInfo.connected) {
 					return root.serviceUid + "/Ac/ActiveIn"
 				}
 				break
 			case "acsystem":
 				// Multi RS is like the vebus case; it can only measure its active input.
-				if (root.inputInfo.connected
-						&& _activeInput.valid
-						&& root.inputInfo.inputIndex === _activeInput.value) {
-					return "%1/Ac/In/%2".arg(root.serviceUid).arg(_activeInput.value + 1)
+				if (root.inputInfo.connected) {
+					return "%1/Ac/In/%2".arg(root.serviceUid).arg(root.inputInfo.inputIndex + 1)
 				}
 				break
 			case "grid":
@@ -76,13 +73,6 @@ Device {
 			}
 			return ""
 		}
-	}
-
-	// The currently-active input on vebus or acsystem. 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
-	readonly property VeQuickItem _activeInput: VeQuickItem {
-		uid: root.inputInfo && root.inputInfo.valid && (root.serviceType === "vebus" || root.serviceType === "acsystem")
-			 ? root.serviceUid + "/Ac/ActiveIn/ActiveInput"
-			 : ""
 	}
 
 	// StatusCode is only valid for genset devices
