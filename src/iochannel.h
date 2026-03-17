@@ -173,7 +173,7 @@ protected:
 	QString m_group;
 	QString m_unitText;
 	Direction m_direction = Input;
-	int m_status = 0; // Default status is 0 (off)
+	int m_status = -1; // Default status is -1 (invalid)
 	int m_type = -1;
 	int m_unitType = Enums::Units_None;
 	int m_decimals = 0;

@@ -155,7 +155,7 @@ int IOChannel::status() const
 
 void IOChannel::setStatus(const QVariant &variant)
 {
-	m_status = variant.toInt();
+	m_status = variant.isValid() ? variant.toInt() : -1;
 	emit statusChanged();
 }
 

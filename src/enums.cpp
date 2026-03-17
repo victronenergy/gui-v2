@@ -513,7 +513,9 @@ QString Enums::genericInput_statusToText(GenericInput_Status value) const
 		//% "Sensor battery low"
 		return qtTrId("generic_input_status_sensor_battery_low");
 	}
-	return QString();
+
+	//% "Unknown status"
+	return qtTrId("generic_input_unknown_status");
 }
 
 QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId) const
@@ -697,14 +699,15 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 			if (value & SwitchableOutput_Status_Disabled) {
 				//% "Not running, disabled"
 				return qtTrId("switchable_output_not_running_disabled");
-			} else {
+			} else if (value == SwitchableOutput_Status_Off) {
 				//% "Not running"
 				return qtTrId("switchable_output_not_running");
 			}
 		}
 	}
 
-	return QString::number(static_cast<int>(value));
+	//% "Unknown status"
+	return qtTrId("switchable_output_unknown_status");
 }
 
 QString Enums::tank_fluidTypeToText(Tank_Type type) const
