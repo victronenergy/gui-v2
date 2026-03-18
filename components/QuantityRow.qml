@@ -20,6 +20,11 @@ Row {
 	property real fixedColumnWidth: NaN // if set, use this for column widths, instead of QuantityTableMetrics
 	property int labelAlignment: tableMode ? Qt.AlignLeft : Qt.AlignHCenter
 
+	// If true and not using fixed column widths, the spacing is added as padding after the last
+	// item, not just between items, to even out the header column sizes. Use this when this is
+	// part of a table with headers.
+	property bool padLastColumn
+
 	readonly property bool _showSeparators: !tableMode
 
 	spacing: Theme.geometry_quantityGroupRow_spacing
@@ -40,9 +45,11 @@ Row {
 			required property QuantityObject quantityObject
 			readonly property real horizontalPadding: root._showSeparators ? root.spacing / 2 : 0
 
-			width: !isNaN(root.fixedColumnWidth) ? root.fixedColumnWidth
+			width: root.fixedColumnWidth > 0 ? root.fixedColumnWidth
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
-				: quantityMetrics.columnWidth(quantityObject.unit) + horizontalPadding
+				: quantityMetrics.columnWidth(quantityObject.unit)
+						+ horizontalPadding
+						+ (root.padLastColumn && index === root.model.count - 1 ? root.spacing : 0)
 			leftPadding: horizontalPadding
 					+ (verticalSeparator.visible ? verticalSeparator.width : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item

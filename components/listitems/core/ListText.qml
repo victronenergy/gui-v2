@@ -32,7 +32,6 @@ ListSetting {
 			secondaryText: root.secondaryText
 			secondaryTextColor: root.secondaryTextColor
 			captionText: root.caption
-			stretchCaption: true
 		}
 	}
 
