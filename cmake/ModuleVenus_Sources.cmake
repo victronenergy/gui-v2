@@ -58,6 +58,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/GeneratorIconLabel.qml
     components/GradientListView.qml
     components/GsmStatusIcon.qml
+    components/HorizontalFlickable.qml
     components/ColorButton.qml
     components/IconButton.qml
     components/InputPanel.qml

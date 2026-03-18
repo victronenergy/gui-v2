@@ -421,6 +421,8 @@
     "geometry_breadcrumbs_viewGradient_width": 0.04,
 
     "geometry_quantityTable_row_height": 32,
+    "geometry_quantityTable_header_row_height": 32,
+    "geometry_quantityTable_maximumWidth": 0,
     "geometry_quantityTable_bottomMargin": 14,
     "geometry_quantityTable_horizontalSpacing_small": 48,
     "geometry_quantityTable_horizontalSpacing_large": 64,
@@ -431,11 +433,16 @@
 
     "geometry_solarHistoryPage_tabBar_width": 260,
 
-    "geometry_solarDetailBox_radius": 10,
-    "geometry_solarDetailBox_horizontalMargin": 8,
-    "geometry_solarDetailBox_verticalMargin": 8,
-    "geometry_solarDetailBox_content_spacing": 10,
-    "geometry_solarDetailBox_leftColumn_proportionateWidth": 0.55,
+    "geometry_solarDetailBox_border_width": 1,
+    "geometry_solarDetailBox_border_radius": 8,
+    "geometry_solarDetailBox_horizontalPadding": 16,
+    "geometry_solarDetailBox_verticalPadding": 8,
+    "geometry_solarDetailBox_margins": 8,
+    "geometry_solarDetailBox_column_spacing": 40,
+    "geometry_solarDetailBox_header_bottomPadding": 8,
+    "geometry_solarDetailBox_title_bottomPadding": 2,
+    "geometry_solarDetailBox_separator_horizontalMargin": 12,
+    "geometry_solarDetailBox_separator_verticalMargin": 8,
 
     "geometry_solarChart_bar_spacing_sevenDays": 8,
     "geometry_solarChart_bar_spacing_fourteenDays": 6,

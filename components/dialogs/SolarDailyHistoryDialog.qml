@@ -18,6 +18,11 @@ T.Dialog {
 	property int maximumDay
 	property var highlightBarForDay
 
+	// DialogLayer.qml expects dialogs to have this function.
+	function handleReject() {
+		close()
+	}
+
 	function _setDay(d) {
 		if (d >= minimumDay && d <= maximumDay) {
 			day = d
@@ -38,8 +43,6 @@ T.Dialog {
 			return
 		}
 
-		// forceLayout() to ensure geometry is correct before calling mapFromItem().
-		tableView.forceLayout()
 		const pos = background.mapFromItem(sourceBar.parent, sourceBar.x, sourceBar.y)
 		highlightBar.x = pos.x
 		highlightBar.y = pos.y
@@ -91,7 +94,7 @@ T.Dialog {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: Theme.geometry_solarDailyHistoryDialog_header_height
 					+ tableView.height
-					+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_verticalMargin : 0)
+					+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_margins : 0)
 		radius: Theme.geometry_modalDialog_radius
 		color: Theme.color_background_secondary
 
@@ -171,9 +174,8 @@ T.Dialog {
 				left: parent.left
 				right: parent.right
 			}
-			smallTextMode: true
-			minimumHeight: root.solarHistory.trackerCount > 1 ? NaN
-				: Theme.geometry_solarDailyHistoryDialog_minimumHeight - Theme.geometry_solarDailyHistoryDialog_header_height
+			summaryBodyFontSize: Theme.font_solarHistoryDialog_summaryBody_size
+			detailBoxFontSize: Theme.font_solarHistoryDialog_detailBox_size
 		}
 
 		PressArea {
@@ -188,9 +190,9 @@ T.Dialog {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_solarDetailBox_verticalMargin
+				bottomMargin: Theme.geometry_solarDetailBox_margins
 			}
-			width: parent.width - (2 * Theme.geometry_solarDetailBox_verticalMargin)
+			width: parent.width - (2 * Theme.geometry_solarDetailBox_margins)
 			model: {
 				const history = root.solarHistory.dailyHistory(root.day)
 				return history ? history.errorModel : null

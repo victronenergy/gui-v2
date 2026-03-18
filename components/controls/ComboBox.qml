@@ -14,6 +14,30 @@ T.ComboBox {
 	property real defaultBackgroundWidth: Theme.geometry_comboBox_width
 	property real defaultBackgroundHeight: Theme.geometry_button_height
 
+	// When the ComboBox is focused and the popup is closed, the user can scroll through the options
+	// by pressing:
+	// - left/right, if keyNavigationDirection=Qt.Vertical
+	// - up/down, if keyNavigationDirection=Qt.Horizontal
+	// When the popup is open, only the up/down keys will scroll through the popup options, as the
+	// list always has a vertical orientation.
+	property int keyNavigationDirection: Qt.Vertical
+
+	function _acceptEvent(event, direction, key) {
+		if (popup.opened) {
+			event.accepted = false
+			return
+		}
+		event.accepted = keyNavigationDirection === direction
+		if (event.accepted) {
+			if (key === Qt.Key_Forward) {
+				incrementCurrentIndex()
+			} else {
+				decrementCurrentIndex()
+			}
+		}
+		return event.accepted
+	}
+
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
 		implicitContentWidth + leftPadding + rightPadding)
@@ -30,7 +54,7 @@ T.ComboBox {
 	delegate: T.ItemDelegate {
 		id: optionDelegate
 
-		width: root.defaultBackgroundWidth
+		width: root.width
 		height: root.defaultBackgroundHeight
 		highlighted: root.highlightedIndex === index || pressed
 
@@ -63,7 +87,7 @@ T.ComboBox {
 		x: root.width - width - root.rightPadding
 		y: root.topPadding + (root.availableHeight - height) / 2
 		source: "qrc:/images/icon_arrow_32.svg"
-		rotation: 270
+		rotation: keyNavigationDirection === Qt.Horizontal ? 180 : 270
 		color: root.enabled
 			   ? (root.pressed ? Theme.color_primary : Theme.color_ok)
 			   : Theme.color_font_disabled
@@ -94,11 +118,12 @@ T.ComboBox {
 
 	popup: T.Popup {
 		x: root.leftInset
-		implicitWidth: root.defaultBackgroundWidth
+		implicitWidth: contentItem.implicitWidth
 		implicitHeight: contentItem.implicitHeight
 
 		contentItem: ListView {
 			clip: true
+			implicitWidth: root.width
 			implicitHeight: Math.min(contentHeight, Global.mainView.height - (2 * Theme.geometry_comboBox_verticalPadding))
 			boundsBehavior: Flickable.StopAtBounds
 			model: root.popup.visible ? root.delegateModel : null
@@ -142,6 +167,11 @@ T.ComboBox {
 	}
 
 	Keys.enabled: Global.keyNavigationEnabled
+	Keys.onUpPressed: (event) => _acceptEvent(event, Qt.Vertical, Qt.Key_Back)
+	Keys.onDownPressed: (event) => _acceptEvent(event, Qt.Vertical, Qt.Key_Forward)
+	Keys.onLeftPressed: (event) => _acceptEvent(event, Qt.Horizontal, Qt.Key_Back)
+	Keys.onRightPressed: (event) => _acceptEvent(event, Qt.Horizontal, Qt.Key_Forward)
+
 	KeyNavigationHighlight.active: root.activeFocus
 	KeyNavigationHighlight.topMargin: root.topInset
 	KeyNavigationHighlight.bottomMargin: root.bottomInset

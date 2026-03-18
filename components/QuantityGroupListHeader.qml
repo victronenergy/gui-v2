@@ -10,9 +10,10 @@ Row {
 	id: root
 
 	property alias headerText: firstTitleLabel.text
+	property alias headerVisible: firstTitleLabel.visible
 	property alias model: titleRepeater.model
 	property int fontSize: Theme.font_size_caption
-	readonly property int columnCount: titleRepeater.count + 1 // +1 for header column
+	readonly property int columnCount: titleRepeater.count + (headerVisible ? 1 : 0)
 
 	// Column sizing parameters
 	property int metricsFontSize: fontSize // the QuantityTableMetrics font size, for calculating column size
@@ -38,18 +39,21 @@ Row {
 		id: quantityRow
 
 		anchors.verticalCenter: parent.verticalCenter
-		spacing: root.spacing
 
 		Repeater {
 			id: titleRepeater
 
 			delegate: Label {
-				width: isNaN(root.fixedColumnWidth)
+				width: (isNaN(root.fixedColumnWidth)
 					   ? quantityMetrics.columnWidth(modelData.unit, implicitWidth)
-					   : root.fixedColumnWidth
+					   : root.fixedColumnWidth)
+					// Add spacing here instead of in Row::spacing, so that label width can be
+					// longer than width of the quantity in the table column below.
+					+ (model.index === titleRepeater.count - 1 ? 0 : root.spacing)
 				text: modelData.text
 				font.pixelSize: root.fontSize
 				color: Theme.color_solarListPage_header_text
+				wrapMode: Text.Wrap
 			}
 		}
 

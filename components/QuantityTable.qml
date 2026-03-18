@@ -16,13 +16,14 @@ ListView {
 	id: root
 
 	// Main font sizes in the table
-	property int headerFontSize: Theme.font_size_caption
+	property int headerFontSize: Theme.font_quantityTable_header_size
 	property int bodyFontSize: Theme.font_size_body1
 
 	// Parameters for sizing the columns in the table.
 	property int metricsFontSize: bodyFontSize
 	property int columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_large
 	property bool equalWidthColumns
+	property bool headersVisible: true
 
 	property real leftPadding: Theme.geometry_listItem_content_horizontalMargin
 	property real rightPadding: Theme.geometry_listItem_content_horizontalMargin
@@ -53,22 +54,24 @@ ListView {
 		property QuantityTable table: ListView.view
 		property alias model: groupHeader.model
 		property alias headerText: groupHeader.headerText
+		property real topPadding
 		readonly property alias fixedColumnWidth: groupHeader.fixedColumnWidth
 
 		implicitWidth: table.width
-		implicitHeight: Theme.geometry_quantityTable_row_height
+		implicitHeight: groupHeader.y + groupHeader.height
 		color: Theme.color_quantityTable_row_background
 
 		QuantityGroupListHeader {
 			id: groupHeader
+			y: tableHeader.topPadding
 			width: parent.width
-			height: Theme.geometry_quantityTable_row_height
 			leftPadding: table.leftPadding
 			rightPadding: table.rightPadding
 			fontSize: table.headerFontSize
 			metricsFontSize: table.metricsFontSize
 			spacing: table.columnSpacing
 			fixedColumnWidth: table.equalWidthColumns ? (table.availableWidth - (table.columnSpacing * (columnCount-1))) / columnCount : NaN
+			headerVisible: table.headersVisible
 		}
 	}
 
@@ -95,7 +98,7 @@ ListView {
 		property alias labelAlignment: quantityRow.labelAlignment
 
 		readonly property real fixedColumnWidth: table.equalWidthColumns ? (table.availableWidth - (table.columnSpacing * (columnCount-1))) / columnCount : NaN
-		readonly property int columnCount: quantityRow.count + 1 // +1 for header column
+		readonly property int columnCount: quantityRow.count + (headerColumnLabel.visible ? 1 : 0)
 
 		implicitWidth: table.width
 		implicitHeight: preferredVisible ? Theme.geometry_quantityTable_row_height : 0
@@ -116,6 +119,7 @@ ListView {
 			elide: Text.ElideRight
 			font.pixelSize: table.bodyFontSize
 			color: quantityRow.valueColor
+			visible: table.headersVisible
 		}
 
 		QuantityRow {

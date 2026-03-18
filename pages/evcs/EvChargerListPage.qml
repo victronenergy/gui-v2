@@ -14,23 +14,33 @@ Page {
 
 	GradientListView {
 		header: ListItemControl {
+			id: tableListItem
+
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 			rightPadding: rightInset
-			contentItem: QuantityTableSummary {
-				rightMargin: Theme.geometry_icon_size_medium
-				//% "Session"
-				summaryHeaderText: qsTrId("evcs_charger_list_session")
-				summaryModel: [
-					{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
-					{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
-				]
-				bodyHeaderText: CommonWords.total
-				bodyModel: QuantityObjectModel {
-					QuantityObject { object: Global.evChargers; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: Global.evChargers; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+
+			contentItem: HorizontalFlickable {
+				implicitHeight: sessionSummary.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
+
+				QuantityTableSummary {
+					id: sessionSummary
+
+					rightMargin: Theme.geometry_icon_size_medium
+					//% "Session"
+					summaryHeaderText: qsTrId("evcs_charger_list_session")
+					summaryModel: [
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt },
+						{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
+					]
+					bodyHeaderText: CommonWords.total
+					bodyModel: QuantityObjectModel {
+						QuantityObject { object: Global.evChargers; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: Global.evChargers; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+					}
 				}
 			}
 		}

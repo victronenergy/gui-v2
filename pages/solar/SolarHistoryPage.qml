@@ -23,7 +23,9 @@ Page {
 		id: tabBar
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		width: Theme.geometry_solarHistoryPage_tabBar_width
+		width: Theme.screenSize === Theme.Portrait
+			   ? parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
+			   : Theme.geometry_solarHistoryPage_tabBar_width
 		model: [
 			//% "Table view"
 			{ value: qsTrId("charger_history_table_view") },
@@ -44,8 +46,8 @@ Page {
 		}
 
 		focus: true
-		KeyNavigation.right: daysComboBox
-		KeyNavigation.down: chart.visible ? chart : null
+		KeyNavigation.right: Theme.screenSize === Theme.Portrait ? null : daysComboBox
+		KeyNavigation.down: Theme.screenSize === Theme.Portrait ? daysComboBox : chart
 	}
 
 	ComboBox {
@@ -80,10 +82,21 @@ Page {
 		anchors {
 			right: parent.right
 			rightMargin: Theme.geometry_page_content_horizontalMargin
-			verticalCenter: tabBar.verticalCenter
+			top: Theme.screenSize === Theme.Portrait ? tabBar.bottom : tabBar.top
+			topMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_listItem_content_verticalMargin : 0
 		}
+		width: Theme.screenSize === Theme.Portrait
+			   ? parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
+			   : implicitWidth
 		model: tableModeOptions
 		displayText: model[currentIndex].text
+		keyNavigationDirection: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
+
+		// Set the priority to allow the ComboBox key shortcuts to override the key navigation.
+		KeyNavigation.priority: popup.opened ? KeyNavigation.AfterItem : KeyNavigation.BeforeItem
+		KeyNavigation.down: Theme.screenSize === Theme.Portrait ? chart : null
+		KeyNavigation.up: Theme.screenSize === Theme.Portrait ? tabBar : null
+		KeyNavigation.left: Theme.screenSize === Theme.Portrait ? null : tabBar
 	}
 
 	ListItemBackground {
@@ -98,18 +111,16 @@ Page {
 	SolarHistoryTableView {
 		id: tableView
 
-		anchors {
-			top: tabBar.bottom
-			topMargin: Theme.geometry_listItem_content_verticalMargin
-			left: parent.left
-			leftMargin: Theme.geometry_page_content_horizontalMargin
-			right: parent.right
-			rightMargin: Theme.geometry_page_content_horizontalMargin
-		}
-		minimumHeight: chart.visible ? NaN
-			: root.height - tableView.y - Theme.geometry_page_content_verticalMargin - bottomPadding
+		// Use x/y positioning, as vertical anchor changes do not take effect as expected when
+		// stretchTableVertically changes value (when switching tabs).
+		x: Theme.geometry_page_content_horizontalMargin
+		width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
+		y: daysComboBox.y + daysComboBox.height + Theme.geometry_listItem_content_verticalMargin
+		height: stretchTableVertically ? parent.height - y - Theme.geometry_listItem_content_verticalMargin : implicitHeight
+
 		solarHistory: root.solarHistory
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange
+		stretchTableVertically: tabBar.currentIndex === 0
 
 		// Since the table view contains the "totals" summary, it is always shown even when "Charts"
 		// view is selected, but the tracker table and history box will be hidden in that case.
@@ -128,7 +139,8 @@ Page {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry_page_content_verticalMargin
 		}
-		visible: tabBar.currentIndex === 1
+		enabled: tabBar.currentIndex === 1
+		visible: enabled
 		solarHistory: root.solarHistory
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange
 	}
