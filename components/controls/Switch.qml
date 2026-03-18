@@ -11,7 +11,6 @@ T.Switch {
 	id: root
 
 	property bool showEnabled: enabled
-	property color textColor: Theme.color_font_primary
 
 	checkable: false
 	implicitWidth: Math.max(

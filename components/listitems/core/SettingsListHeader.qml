@@ -12,10 +12,8 @@ Label {
 	readonly property bool effectiveVisible: preferredVisible
 	property bool preferredVisible: true
 
-	anchors {
-		left: parent ? parent.left : undefined
-		leftMargin: Theme.geometry_listItem_content_horizontalMargin
-	}
+	leftPadding: Theme.geometry_listItem_content_horizontalMargin
+	rightPadding: Theme.geometry_listItem_content_horizontalMargin
 	topPadding: Theme.geometry_settingsListHeader_topPadding
 	bottomPadding: Theme.geometry_settingsListHeader_bottomPadding
 	width: Math.max(implicitWidth, 1)

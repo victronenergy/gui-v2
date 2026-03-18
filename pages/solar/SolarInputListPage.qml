@@ -37,7 +37,7 @@ Page {
 					// The Yield column is not shown for PV inverters.
 					object: solarInputDelegate.serviceType === "pvinverter" ? null : solarInputDelegate
 					key: "todaysYield"
-					unit: solarInputDelegate.serviceType === "pvinverter" ? VenusOS.Units_None : VenusOS.Units_Energy_KiloWattHour
+					unit: VenusOS.Units_Energy_KiloWattHour
 					hidden: solarInputDelegate.serviceType === "pvinverter"
 				}
 				QuantityObject { object: solarInputDelegate; key: "voltage"; unit: VenusOS.Units_Volt_DC }
@@ -59,8 +59,13 @@ Page {
 			required property string section
 
 			width: parent.width
-			metricsFontSize: Theme.font_size_body2 // align columns with those in the delegate
-			rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+			metricsFontSize: Theme.font_listItem_secondary_size // align columns with those in the delegate
+			headerVisible: Theme.screenSize !== Theme.Portrait
+			rightPadding: Theme.screenSize === Theme.Portrait ? 0
+				: (Theme.geometry_page_content_horizontalMargin // list item right inset
+					+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
+					+ Theme.geometry_icon_size_medium // arrow icon width
+					+ Theme.geometry_listItem_arrow_leftMargin) // space between arrow icon and quantity row
 			headerText: section === "pvinverter" ? CommonWords.pv_inverter : ""
 			model: [
 				{ text: section === "pvinverter" ? "" : CommonWords.yield_today, unit: VenusOS.Units_Energy_KiloWattHour },

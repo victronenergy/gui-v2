@@ -34,26 +34,37 @@ ListSetting {
 	property real value: to > from && dataItem.valid ? dataItem.value : 0
 
 	// Remove padding around the edges, so that the internal Slider can expand its touch area.
-	rightPadding: rightInset
+	leftPadding: 0
+	rightPadding: 0
 	topPadding: 0
 	bottomPadding: 0
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Slider |
-	// | Caption                |
+	// Landscape layout:
+	// | Primary label | Slider (fill width) |
+	// | Caption                             |
+	//
+	// Portrait layout:
+	// | Primary label |
+	// | Slider        |
+	// | Caption       |
 	contentItem: FocusScope {
+		implicitHeight: gridLayout.height
+
 		GridLayout {
-			anchors.fill: parent
-			columns: 2
+			id: gridLayout
+
+			width: parent.width
+			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 			columnSpacing: 0
 			rowSpacing: 0 // not needed, as padding is added below the label
 
 			Label {
-				// Since the root top/bottomPadding is 0, need to add some padding here.
+				// Since the root padding is 0, need to add some padding here.
+				leftPadding: root.leftInset + root.horizontalContentPadding
 				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.geometry_listItem_content_verticalMargin
+				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
 
 				text: root.text
 				textFormat: root.textFormat
@@ -61,16 +72,15 @@ ListSetting {
 				wrapMode: Text.Wrap
 				verticalAlignment: Text.AlignVCenter
 
-				// Fix the label width; the slider fills the rest of the horizontal area.
-				Layout.preferredWidth: Theme.geometry_slider_text_width
+				Layout.fillWidth: true
 			}
 
 			Slider {
 				id: sliderItem
 
 				// Make space for plus/minus buttons on either side.
-				leftInset: Theme.geometry_slider_button_size + Theme.geometry_slider_spacing + root.horizontalContentPadding
-				rightInset: Theme.geometry_slider_button_size + Theme.geometry_slider_spacing + root.horizontalContentPadding
+				leftInset: minusButton.width
+				rightInset: plusButton.width
 				leftPadding: leftInset
 				rightPadding: rightInset
 
@@ -98,16 +108,22 @@ ListSetting {
 				// Expand the vertical touch area, to make it easier to click.
 				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
 				Layout.fillWidth: true
+				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
 
-				// Minus button
 				Button {
+					id: minusButton
+
 					// Use insets to vertically expand the touch area, to make it easier to click.
-					width: Theme.geometry_slider_button_size + root.horizontalContentPadding
-					height: sliderItem.height
-					topInset: (sliderItem.height - Theme.geometry_slider_button_size) / 2
-					bottomInset: (sliderItem.height - Theme.geometry_slider_button_size) / 2
+					defaultBackgroundWidth: Theme.geometry_slider_button_size
+					defaultBackgroundHeight: Theme.geometry_slider_button_size
+					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
+					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					leftInset: root.horizontalContentPadding
-					leftPadding: root.horizontalContentPadding
+							// In portrait, this stretches to the left edge, so add the page edge inset.
+							+ (Theme.screenSize === Theme.Portrait ? root.leftInset : 0)
+					leftPadding: leftInset
+					rightInset: Theme.geometry_slider_spacing
+					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_minus.svg"
 					icon.color: root.clickable
@@ -122,16 +138,19 @@ ListSetting {
 					}
 				}
 
-				// Plus button
 				Button {
+					id: plusButton
+
 					// Use insets to expand the touch area, to make it easier to click.
 					anchors.right: parent.right
-					width: Theme.geometry_slider_button_size + root.horizontalContentPadding
-					height: sliderItem.height
-					topInset: (sliderItem.height - Theme.geometry_slider_button_size) / 2
-					bottomInset: (sliderItem.height - Theme.geometry_slider_button_size) / 2
-					rightInset: root.horizontalContentPadding
-					rightPadding: root.horizontalContentPadding
+					defaultBackgroundWidth: Theme.geometry_slider_button_size
+					defaultBackgroundHeight: Theme.geometry_slider_button_size
+					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
+					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
+					leftInset: Theme.geometry_slider_spacing
+					leftPadding: leftInset
+					rightInset: root.horizontalContentPadding + root.rightInset
+					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_plus.svg"
 					icon.color: sliderItem.enabled
@@ -147,10 +166,8 @@ ListSetting {
 				}
 			}
 
-			Label {
+			CaptionLabel {
 				text: root.caption
-				color: Theme.color_font_secondary
-				wrapMode: Text.Wrap
 				visible: text.length > 0
 
 				Layout.columnSpan: 2

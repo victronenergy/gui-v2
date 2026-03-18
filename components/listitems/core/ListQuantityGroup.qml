@@ -12,36 +12,40 @@ ListSetting {
 
 	property QuantityObjectModel model
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Quantity row |
-	// | Caption                      |
-	contentItem: GridLayout {
-		columns: 2
-		columnSpacing: root.spacing
-		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.height
 
-		Label {
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
+		Flow {
+			id: contentLayout
 
-			Layout.fillWidth: true
-		}
+			width: parent.width
 
-		QuantityRow {
-			model: root.model
-			Layout.alignment: Qt.AlignRight
-		}
+			Label {
+				// If the label and quantity row do not fit side-by-side, place the row below.
+				readonly property bool compactLayout: implicitWidth + root.spacing + quantityRow.width > parent.width
 
-		Label {
-			text: root.caption
-			color: Theme.color_font_secondary
-			wrapMode: Text.Wrap
-			visible: text.length > 0
+				bottomPadding: compactLayout ? Theme.geometry_listItem_content_verticalSpacing : 0
+				width: compactLayout ? parent.width : parent.width - quantityRow.width
+				text: root.text
+				textFormat: root.textFormat
+				font: root.font
+				wrapMode: Text.Wrap
+			}
 
-			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
+			QuantityRow {
+				id: quantityRow
+
+				model: root.model
+			}
+
+			CaptionLabel {
+				id: captionLabel
+
+				topPadding: Theme.geometry_listItem_content_verticalSpacing
+				width: parent.width
+				text: root.caption
+			}
 		}
 	}
 }

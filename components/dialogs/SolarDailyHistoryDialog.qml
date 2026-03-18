@@ -107,7 +107,7 @@ T.Dialog {
 		component ArrowButton : IconButton {
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
 			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_arrow_32.svg"
+			icon.source: "qrc:/images/icon_chevron_right_32.svg"
 			effectEnabled: false
 		}
 
@@ -118,6 +118,7 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 			}
 			visible: root.day > root.minimumDay
+			rotation: 180
 			onClicked: root._setDay(root.day - 1)
 		}
 
@@ -128,7 +129,6 @@ T.Dialog {
 				verticalCenter: parent.verticalCenter
 			}
 			visible: root.day < root.maximumDay
-			rotation: 180
 			onClicked: root._setDay(root.day + 1)
 		}
 	}

@@ -61,7 +61,7 @@ Page {
 				}
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			SettingsColumn {
 				width: parent ? parent.width : 0

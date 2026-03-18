@@ -99,14 +99,16 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				interactive: Global.systemSettings.time.valid
 
-				contentItem: RowLayout {
+				contentItem: Flow {
 					spacing: timeZoneButton.spacing
 
 					Label {
 						//% "Date/Time local"
 						text: qsTrId("settings_tz_date_time_local")
 						font: timeZoneButton.font
-						Layout.fillWidth: true
+						width: Theme.screenSize === Theme.Portrait
+						   ? timeZoneButton.availableWidth
+						   : timeZoneButton.availableWidth - localDateButton.width - localTimeButton.width - timeZoneButton.spacing*2
 					}
 					ListItemButton {
 						id: localDateButton

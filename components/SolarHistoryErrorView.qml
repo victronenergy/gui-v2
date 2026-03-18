@@ -53,15 +53,15 @@ MouseArea {
 	CP.ColorImage {
 		anchors {
 			top: parent.top
-			topMargin: root.expanded ? 0 : height / 5   // compensate for icon internal alignment
+			topMargin: (root.collapsedHeight - height) / 2
 			right: parent.right
 			rightMargin: Theme.geometry_solarHistoryErrorView_expandIcon_horizontalMargin
 		}
 		height: Theme.geometry_solarHistoryErrorView_expandIcon_size
 		fillMode: Image.PreserveAspectFit
 		color: Theme.color_solarHistoryErrorView_primaryText
-		source: "qrc:/images/icon_arrow_32.svg"
-		rotation: root.expanded ? 270 : 90
+		source: "qrc:/images/icon_chevron_up_32.svg"
+		rotation: root.expanded ? 180 : 0
 	}
 
 	Column {

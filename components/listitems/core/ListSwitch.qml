@@ -74,40 +74,34 @@ ListSetting {
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Layout has 3 columns, 2 rows. The caption spans across all columns.
-	// | Primary label | Secondary label | Switch |
-	// | Caption                                  |
-	contentItem: GridLayout {
-		columns: 3
-		rowSpacing: 0 // not needed, as padding is added below the labels.
-		columnSpacing: 0 // not needed, as the Switch adds left inset/padding that is equivalent.
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
 
-		Label {
-			// Since the root top/bottomPadding is 0, need to add some padding here.
+		ThreeLabelLayout {
+			id: labelLayout
+
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - switchItem.width - root.spacing
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			captionText: root.caption
+			stretchSecondaryText: true
+
+			// Since padding is cleared in the root item, add it back again here.
 			topPadding: Theme.geometry_listItem_content_verticalMargin
 			bottomPadding: Theme.geometry_listItem_content_verticalMargin
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
-
-			Layout.fillWidth: true
-		}
-
-		// Place the secondary text here, not in the Switch, otherwise clicking on the text would
-		// trigger the Switch.
-		SecondaryListLabel {
-			// Since the root top/bottomPadding is 0, need to add some padding here.
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			bottomPadding: Theme.geometry_listItem_content_verticalMargin
-			text: root.secondaryText
-
-			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignRight
 		}
 
 		Switch {
 			id: switchItem
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
 
 			// Expand the switch touch area to make it easier to click.
 			topInset: Theme.geometry_listItem_content_verticalMargin
@@ -123,25 +117,9 @@ ListSetting {
 			checkable: root.checkable && root.clickable
 			focusPolicy: Qt.NoFocus
 			showEnabled: root.clickable
-			text: root.secondaryText
-			textColor: Theme.color_listItem_secondaryText
-			font.pixelSize: Theme.font_size_body2
-
-			Layout.alignment: Qt.AlignRight
 
 			onClicked: root.click()
 			Component.onCompleted: root._switchItem = switchItem
-		}
-
-		Label {
-			text: root.caption
-			color: Theme.color_font_secondary
-			wrapMode: Text.Wrap
-			visible: text.length > 0
-
-			Layout.columnSpan: 3
-			Layout.preferredWidth: root.availableWidth - root.horizontalContentPadding
-			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
 		}
 	}
 

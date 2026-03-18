@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 /*
@@ -16,7 +15,6 @@ ListSetting {
 
 	property string secondaryText
 	property string secondaryTextColor: Theme.color_listItem_secondaryText
-	property real captionTopMargin: Theme.geometry_listItem_content_verticalSpacing
 
 	signal clicked
 
@@ -31,55 +29,32 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
-	// Layout is like this:
-	// | Primary label | Secondary label and icon (span across both rows) |
-	// | Caption       |                                                  |
-	contentItem: GridLayout {
-		columnSpacing: root.spacing
-		rowSpacing: 0
-		columns: 2
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
 
-		Label {
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
+		ThreeLabelLayout {
+			id: labelLayout
 
-			Layout.fillWidth: true
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - (arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0)
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			secondaryTextColor: root.secondaryTextColor
+			captionText: root.caption
+			stretchSecondaryText: true
 		}
 
-		SecondaryListLabel {
-			rightPadding: icon.visible ? icon.width + root.spacing : 0
-			text: root.secondaryText
-			color: root.secondaryTextColor
-			wrapMode: Text.Wrap
+		ForwardIcon {
+			id: arrowIcon
 
-			Layout.rowSpan: 2
-			Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
-			Layout.alignment: Qt.AlignRight
-
-			CP.ColorImage {
-				id: icon
-
-				anchors {
-					right: parent.right
-					verticalCenter: parent.verticalCenter
-				}
-				source: "qrc:/images/icon_arrow_32.svg"
-				rotation: 180
-				color: Theme.color_listItem_forwardIcon
-				visible: root.interactive
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
 			}
-		}
-
-		Label {
-			text: root.caption
-			color: Theme.color_font_secondary
-			wrapMode: Text.Wrap
-			visible: text.length > 0
-
-			Layout.fillWidth: true
-			Layout.topMargin: root.captionTopMargin
+			visible: root.interactive
 		}
 	}
 

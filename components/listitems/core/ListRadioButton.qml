@@ -23,46 +23,33 @@ ListSetting {
 
 	interactive: true
 
-	// Layout has 3 columns, 2 rows. The caption spans across all columns.
-	// | Primary label | Secondary label | Radio button |
-	// | Caption                                        |
-	contentItem: GridLayout {
-		columns: 2
-		columnSpacing: root.spacing
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
 
-		Label {
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
+		ThreeLabelLayout {
+			id: labelLayout
 
-			Layout.fillWidth: true
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - radioButton.width + root.spacing
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			captionText: root.caption
+			stretchSecondaryText: true
 		}
 
 		RadioButton {
 			id: radioButton
 
+			anchors.right: parent.right
 			checkable: false
 			checked: root.checked
 			enabled: root.clickable
 			focusPolicy: Qt.NoFocus
-			text: root.secondaryText
-			textColor: Theme.color_font_secondary
 
 			onClicked: root.click()
-
-			Layout.fillWidth: true
-			Layout.alignment: Qt.AlignRight
-		}
-
-		Label {
-			text: root.caption
-			color: Theme.color_font_secondary
-			wrapMode: Text.Wrap
-			visible: text.length > 0
-
-			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
 		}
 	}
 

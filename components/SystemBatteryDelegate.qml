@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 ListItemControl {
@@ -38,24 +37,60 @@ ListItemControl {
 		}
 	}
 
-	contentItem: RowLayout {
-		spacing: 0
+	// Landscape layout:
+	// | Primary label            SOC | Arrow |
+	// | Quantity row | Charging mode | icon |
+	//
+	// Portrait layout:
+	// | Primary label   SOC |            |
+	// | Quantity row        | Arrow icon |
+	// | Charging mode       |            |
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.height
 
-		Column {
-			id: leftColumn
-			Layout.fillWidth: true
-			spacing: Theme.geometry_listItem_content_verticalSpacing
+		GridLayout {
+			id: contentLayout
 
-			Label {
-				id: nameLabel
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
+			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
+			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+			columnSpacing: root.spacing
 
-				elide: Text.ElideRight
-				text: root.device.customName
-				font.pixelSize: Theme.font_size_body2
+			RowLayout {
+				Layout.columnSpan: Theme.screenSize === Theme.Portrait ? 1 : 2
+
+				Label {
+					elide: Text.ElideRight
+					text: root.device.customName
+					font: root.font
+					wrapMode: Text.Wrap
+
+					Layout.fillWidth: true
+				}
+
+				QuantityLabel {
+					readonly property int statusLevel: Theme.getValueStatus(value, VenusOS.Gauges_ValueType_FallingPercentage)
+
+					value: root.device.stateOfCharge
+					unit: VenusOS.Units_Percentage
+					font: root.font
+					visible: !isNaN(root.device.stateOfCharge)
+					valueColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
+							: statusLevel === Theme.Critical ? Theme.color_red
+							: statusLevel === Theme.Warning ? Theme.color_orange
+							: Theme.color_green
+					unitColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
+							: statusLevel === Theme.Critical ? Theme.color_red
+							: statusLevel === Theme.Warning ? Theme.color_orange
+							: Theme.color_green
+
+					Layout.alignment: Qt.AlignTop
+				}
 			}
 
 			QuantityRow {
-				showFirstSeparator: true    // otherwise this row does not align with the battery name
 				model: QuantityObjectModel {
 					filterType: QuantityObjectModel.HasValue
 
@@ -64,48 +99,12 @@ ListItemControl {
 					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
 					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
 				}
-
-				// Show additional separator at the end, to balance with the first separator.
-				Rectangle {
-					width: Theme.geometry_listItem_separator_width
-					height: nameLabel.height
-					color: Theme.color_listItem_separator
-				}
-			}
-		}
-
-		Column {
-			Layout.fillWidth: true
-			spacing: Theme.geometry_listItem_content_verticalSpacing
-
-			QuantityLabel {
-				id: socLabel
-
-				readonly property int statusLevel: Theme.getValueStatus(value, VenusOS.Gauges_ValueType_FallingPercentage)
-
-				width: parent.width
-				height: nameLabel.height
-				alignment: Text.AlignRight
-				value: root.device.stateOfCharge
-				unit: VenusOS.Units_Percentage
-				font.pixelSize: Theme.font_size_body2
-				visible: !isNaN(root.device.stateOfCharge)
-				valueColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
-						: statusLevel === Theme.Critical ? Theme.color_red
-						: statusLevel === Theme.Warning ? Theme.color_orange
-						: Theme.color_green
-				unitColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
-						: statusLevel === Theme.Critical ? Theme.color_red
-						: statusLevel === Theme.Warning ? Theme.color_orange
-						: Theme.color_green
+				Layout.fillWidth: true
 			}
 
 			Label {
-				id: modeLabel
-				width: parent.width
-				horizontalAlignment: Text.AlignRight
 				elide: Text.ElideRight
-				font.pixelSize: Theme.font_size_body2
+				font: root.font
 				color: Theme.color_listItem_secondaryText
 				visible: !isNaN(root.device.power)
 				text: {
@@ -120,10 +119,13 @@ ListItemControl {
 			}
 		}
 
-		CP.ColorImage {
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: Theme.color_listItem_forwardIcon
+		ForwardIcon {
+			id: arrowIcon
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
 			opacity: root._clickable ? 1 : 0
 		}
 	}

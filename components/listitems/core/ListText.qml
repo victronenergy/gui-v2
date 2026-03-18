@@ -17,37 +17,22 @@ ListSetting {
 	property string secondaryText: dataItem.valid ? dataItem.value : ""
 	property color secondaryTextColor: Theme.color_listItem_secondaryText
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Secondary label |
-	// | Caption                         |
-	contentItem: GridLayout {
-		columns: 2
-		columnSpacing: root.spacing
-		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
 
-		Label {
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
+		ThreeLabelLayout {
+			id: labelLayout
 
-			Layout.fillWidth: true
-		}
-
-		SecondaryListLabel {
-			text: root.secondaryText
-
-			Layout.fillWidth: true
-		}
-
-		Label {
-			text: root.caption
-			color: Theme.color_font_secondary
-			wrapMode: Text.Wrap
-			visible: text.length > 0
-
-			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			secondaryTextColor: root.secondaryTextColor
+			captionText: root.caption
+			stretchCaption: true
 		}
 	}
 

@@ -48,7 +48,7 @@ ListSetting {
 		required property int gear
 
 		color: dataItem.value === gear ? Theme.color_font_primary : Theme.color_font_secondary
-		font.pixelSize: Theme.font_size_body2
+		font.pixelSize: Theme.font_listItem_secondary_size
 		visible: dataItem.valid
 	}
 }

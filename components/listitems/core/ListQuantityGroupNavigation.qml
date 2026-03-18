@@ -6,7 +6,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
-import QtQuick.Controls.impl as CP
 
 /*
 	A list item with main text, a row of QuantityLabels, and an arrow icon to go to a subpage.
@@ -31,62 +30,67 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
-	// The contentItem is a plain Item rather than a layout, so that the icon does not stretch the
-	// height of the overall item. The layout is like this:
-	// | Primary label | Quantity row | Icon (spans across both rows) |
-	// | Caption                      |                               |
+	// Standard layout:
+	// | Primary label | Quantity row | Arrow |
+	// | Caption                      | icon |
+	//
+	// A compact layout is used if the text and quantity row would not fit together on one line, put
+	// the quantity row on the second line:
+	// | Primary label   |            |
+	// | Quantity row    | Arrow icon |
+	// | Caption         |            |
+	//
+	// If tableMode=true, then in order to vertically align quantities across multiple table rows:
+	// - In landscape, the compact layout is NEVER used
+	// - In portrait, the compact layout is ALWAYS used
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentGrid.height
+		implicitHeight: contentLayout.height + Theme.geometry_listItem_content_verticalSpacing + captionLabel.height
 
-		GridLayout {
-			id: contentGrid
+		Flow {
+			id: contentLayout
 
-			columns: 2
-			columnSpacing: root.spacing
-			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
-			width: parent.width - icon.width
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
 
 			Label {
+				readonly property bool compactLayout: !(root.tableMode && Theme.screenSize !== Theme.Portrait)
+					&& ((root.tableMode && Theme.screenSize === Theme.Portrait)
+						|| (implicitWidth + quantityRow.width > contentLayout.width))
+
+				bottomPadding: compactLayout ? Theme.geometry_listItem_content_verticalSpacing : 0
+				width: compactLayout ? parent.width : parent.width - quantityRow.width
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
 				wrapMode: Text.Wrap
-
-				Layout.fillWidth: true
 			}
 
 			QuantityRow {
+				id: quantityRow
+
 				model: root.quantityModel
 				tableMode: root.tableMode
-
-				Layout.alignment: Qt.AlignRight
 			}
 
-			Label {
-				text: root.caption
-				color: Theme.color_font_secondary
-				wrapMode: Text.Wrap
-				visible: text.length > 0
+			CaptionLabel {
+				id: captionLabel
 
-				Layout.columnSpan: 2
-				Layout.maximumWidth: parent.width
+				topPadding: Theme.geometry_listItem_content_verticalSpacing
+				width: contentLayout.width
+				text: root.caption
 			}
 		}
 
-		CP.ColorImage {
-			id: icon
+		ForwardIcon {
+			id: arrowIcon
 
 			anchors {
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: Theme.color_listItem_forwardIcon
-
-			// Set opacity instead of visible, to maintain the quantity label vertical alignments
-			// even when list item is not clickable.
+			// Set opacity instead of visible, to maintain vertical alignments across multiple
+			// quantity group list items even when list item is not clickable.
 			opacity: root.interactive ? 1 : 0
 		}
 	}

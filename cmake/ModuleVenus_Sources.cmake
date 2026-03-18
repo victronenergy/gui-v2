@@ -27,6 +27,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml
+    components/CaptionLabel.qml
     components/CardViewLoader.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -50,6 +51,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/FirmwareUpdate.qml
     components/FittedQuantityLabel.qml
     components/FixedWidthLabel.qml
+    components/ForwardIcon.qml
     components/GaugeModel.qml
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
@@ -122,6 +124,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ThreePhaseQuantityTable.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
+    components/ThreeLabelLayout.qml
     components/Utils.js
     components/ValueRange.qml
     components/VeBusAcIODisplay.qml
@@ -212,6 +215,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
+    components/listitems/ListSpacer.qml
     components/listitems/ListSpinBoxRange.qml
     components/listitems/ListTemperatureRelay.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
@@ -727,6 +731,8 @@ set(VictronVenusOS_RESOURCES
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
+    images/icon_chevron_right_32.svg
+    images/icon_chevron_up_32.svg
     images/icon_connectivity_32.png
     images/icon_debug_32.png
     images/icon_devices_32.png

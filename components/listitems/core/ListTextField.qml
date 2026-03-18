@@ -131,6 +131,7 @@ ListSetting {
 
 		Label {
 			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			visible: text.length > 0

@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 ListItemControl {
@@ -87,11 +86,7 @@ ListItemControl {
 			unit:  root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 		}
 
-		CP.ColorImage {
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: Theme.color_listItem_forwardIcon
-		}
+		ForwardIcon {}
 	}
 
 	background: ListItemBackground {
