@@ -217,15 +217,15 @@ DevicePage {
 				leftPadding: leftInset
 				rightPadding: rightInset
 				contentItem: QuantityTable {
+					model: root.trackerCount
 					header: QuantityTable.TableHeader {
 						headerText: CommonWords.tracker
 						model: [
-								{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
-								{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
-								{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+							{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
+							{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+							{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 						]
 					}
-					model: root.trackerCount
 					delegate: QuantityTable.TableRow {
 						id: tableRow
 						preferredVisible: tracker.enabled

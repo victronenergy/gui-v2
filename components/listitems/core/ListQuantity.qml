@@ -36,7 +36,7 @@ ListSetting {
 		}
 
 		QuantityLabel {
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: Theme.font_listItem_secondary_size
 			value: root.value
 			valueColor: root.valueColor
 			unit: root.unit
@@ -49,6 +49,7 @@ ListSetting {
 
 		Label {
 			text: root.caption
+			font.pixelSize: Theme.font_listItem_caption_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap
 			visible: text.length > 0
