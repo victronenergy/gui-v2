@@ -164,9 +164,24 @@ void ScreenBlanker::setDisplayOff()
 void ScreenBlanker::setBlanked(bool blanked)
 {
 	if (supported() && blanked != m_blanked) {
+#if defined(VENUS_DESKTOP_BUILD)
+		// for unit tests only
 		m_blanked = blanked;
-		writeToFile(m_blankDevice, blanked ? 1 : 0);
 		emit blankedChanged();
+#else
+		if (writeToFile(m_blankDevice, blanked ? 1 : 0)) {
+			m_blanked = blanked;
+			emit blankedChanged();
+			if (blanked) {
+				qInfo() << "ScreenBlanker: screen blanked";
+			} else {
+				qInfo() << "ScreenBlanker: screen unblanked";
+			}
+		} else {
+			// this might occur if the user has connected some other HDMI display to a CerboGX.
+			qWarning() << "ScreenBlanker: unable to change screen blank status to" << blanked;
+		}
+#endif
 	}
 }
 
