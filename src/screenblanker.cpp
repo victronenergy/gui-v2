@@ -20,14 +20,17 @@ ScreenBlanker* ScreenBlanker::create(QQmlEngine *engine, QJSEngine *jsEngine)
 	return screenBlanker;
 }
 
-ScreenBlanker::ScreenBlanker(QObject *parent) : QObject(parent)
+ScreenBlanker::ScreenBlanker(QObject *parent)
+	: QObject(parent)
+	, m_blankDevice(getFeature("blank_display_device"))
 {
-	qInfo() << "ScreenBlanker: determining support";
-	m_blankDevice = getFeature("blank_display_device");
 	m_blanked = supported() ? readFromFile(m_blankDevice) == 1 : false;
-
 	if (supported()) {
-		qInfo() << "ScreenBlanker: supported.  Currently, blanked = " << m_blanked;
+		if (QFile::exists(m_blankDevice)) {
+			qInfo() << "ScreenBlanker: supported.  Currently, blanked = " << m_blanked;
+		} else {
+			qInfo() << "ScreenBlanker: supported, but unsupported display connected";
+		}
 		m_enabled = true;
 		connect(&m_blankingTimer, &QTimer::timeout, this, &ScreenBlanker::setDisplayOff);
 	} else {
@@ -73,16 +76,13 @@ void ScreenBlanker::stopDisplayOffTimer()
 
 bool ScreenBlanker::supported() const
 {
+	static const bool supp =
 #if defined(VENUS_DESKTOP_BUILD)
-	return true; // For unit testing
+		true; // For unit testing
 #else
-	return m_blankDevice.length() > 0;
+		m_blankDevice.length() > 0;
 #endif
-}
-
-bool ScreenBlanker::blanked() const
-{
-	return m_blanked;
+	return supp;
 }
 
 int ScreenBlanker::displayOffTime() const
@@ -159,6 +159,11 @@ void ScreenBlanker::setDisplayOff()
 		m_blankingTimer.stop();
 		setBlanked(true);
 	}
+}
+
+bool ScreenBlanker::blanked() const
+{
+	return m_blanked;
 }
 
 void ScreenBlanker::setBlanked(bool blanked)

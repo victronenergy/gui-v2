@@ -217,7 +217,7 @@ SwipeViewPage {
 
 				ValueRange {
 					id: dcInputRange
-					value: root.visible ? Global.dcInputs.power || 0 : 0
+					value: root.visible && Global.timersEnabled ? Global.dcInputs.power || 0 : 0
 					maximumValue: Global.dcInputs.maximumPower
 				}
 			}
@@ -340,7 +340,7 @@ SwipeViewPage {
 
 				ValueRange {
 					id: dcLoadsRange
-					value: root.visible ? Global.system.dc.power || 0 : 0
+					value: root.visible && Global.timersEnabled ? Global.system.dc.power || 0 : 0
 					maximumValue: Global.system.dc.maximumPower
 				}
 			}
