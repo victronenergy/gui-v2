@@ -68,7 +68,7 @@ QtObject {
 		running: root.hasPower && Global.timersEnabled
 		repeat: true
 		onTriggered: {
-			_power = (powerL1.value || 0) + (powerL2.value || 0) + (powerL3.value || 0)
+			root._power = (root.powerL1.value || 0) + (root.powerL2.value || 0) + (root.powerL3.value || 0)
 		}
 	}
 

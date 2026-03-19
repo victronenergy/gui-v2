@@ -123,7 +123,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/TimeSelector.qml
     components/ToastNotification.qml
     components/Utils.js
-    components/ValueRange.qml
     components/VeBusAcIODisplay.qml
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml

@@ -68,7 +68,7 @@ private:
 	bool m_blanked = false;
 	bool m_enabled = false;
 
-	QQuickWindow *m_window;
+	QQuickWindow *m_window = nullptr;
 	QTimer m_blankingTimer;
 	QString m_blankDevice;
 };

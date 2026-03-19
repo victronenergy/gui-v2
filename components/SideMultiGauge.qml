@@ -89,7 +89,7 @@ Item {
 				// When feeding in to grid, use an absolute value for the gauge. This effectively
 				// reverses the gauge direction so that negative and positive values have the same
 				// value on the gauge, though negative values will be drawn in green.
-				value: root.visible
+				value: root.visible && Global.timersEnabled // update in sync with its ArcGaugeQuantityRow
 					   ? (gaugeDelegate.feedingToGrid ? Math.abs(gaugeDelegate.current) : gaugeDelegate.current)
 					   : root.minimumValue
 				minimumValue: 0
