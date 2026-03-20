@@ -91,8 +91,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
     components/SettingsColumn.qml
-    components/SettingsRangeSlider.qml
-    components/SettingsSlider.qml
     components/SettingSync.qml
     components/SliderSettingSync.qml
     components/ShinyProgressArc.qml
@@ -158,6 +156,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/TemperatureSlider.qml
     components/controls/TextField.qml
     components/controls/ToggleButtonRow.qml
+    components/controls/TextValidationField.qml
 
     components/dialogs/ColorWheelDialog.qml
     components/dialogs/CurrentLimitDialog.qml
@@ -207,7 +206,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListMountStateButton.qml
     components/listitems/ListAcInPositionRadioButtonGroup.qml
     components/listitems/ListOutputBatteryRadioButtonGroup.qml
-    components/listitems/ListPasswordField.qml
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
@@ -217,6 +215,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 
     components/listitems/core/BaseListItem.qml
     components/listitems/core/BaseListLoader.qml
+    components/listitems/core/ListItemControl.qml
     components/listitems/core/ListAlarm.qml
     components/listitems/core/ListButton.qml
     components/listitems/core/ListDateSelector.qml
@@ -233,6 +232,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/ListRadioButton.qml
     components/listitems/core/ListRadioButtonGroup.qml
     components/listitems/core/ListRangeSlider.qml
+    components/listitems/core/ListSetting.qml
     components/listitems/core/ListSlider.qml
     components/listitems/core/ListSpinBox.qml
     components/listitems/core/ListSwitch.qml
@@ -244,6 +244,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/PrimaryListLabel.qml
     components/listitems/core/SecondaryListLabel.qml
     components/listitems/core/SectionHeader.qml
+    components/listitems/core/ListSettingBackground.qml
     components/listitems/core/SettingsListHeader.qml
     components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
@@ -586,7 +587,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusAcSensorModel.qml
     pages/vebusdevice/PageVeBus.qml
     pages/vebusdevice/VeBusAlarm.qml
-    pages/vebusdevice/VeBusDeviceAlarmGroup.qml
     pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml
     pages/vebusdevice/VeBusDeviceInfoModel.qml
@@ -596,6 +596,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 )
 
 list(APPEND VictronVenusOS_CPP_SOURCES
+    src/abstractlistitem.h
+    src/abstractlistitem.cpp
     src/alldevicesmodel.h
     src/alldevicesmodel.cpp
     src/allservicesmodel.h

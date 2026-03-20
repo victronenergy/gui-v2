@@ -11,7 +11,7 @@ ListTextField {
 	text: qsTrId("page_generic_input_group")
 	dataItem.invalidate: false
 	writeAccessLevel: VenusOS.User_AccessType_User
-	textField.maximumLength: 32
+	maximumLength: 32
 	preferredVisible: dataItem.valid
 	placeholderText: text
 }

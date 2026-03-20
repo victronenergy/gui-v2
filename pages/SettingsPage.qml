@@ -29,7 +29,7 @@ SwipeViewPage {
 			SettingsListNavigation {
 				text: CommonWords.devices
 				//% "All connected devices"
-				secondaryText: qsTrId("settings_all_connected_devices")
+				caption: qsTrId("settings_all_connected_devices")
 				pageSource: "/pages/settings/devicelist/DeviceListPage.qml"
 				iconSource: "qrc:/images/icon_devices_32.png"
 			}
@@ -40,7 +40,7 @@ SwipeViewPage {
 				//% "General"
 				text: qsTrId("settings_general")
 				//% "Access control, Display, Firmware, Support"
-				secondaryText: qsTrId("settings_access_control_display_firmware")
+				caption: qsTrId("settings_access_control_display_firmware")
 				pageSource: "/pages/settings/PageSettingsGeneral.qml"
 				iconSource: "qrc:/images/icon_general_32.png"
 			}
@@ -49,7 +49,7 @@ SwipeViewPage {
 				//% "Connectivity"
 				text: qsTrId("settings_connectivity")
 				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
-				secondaryText: qsTrId("settings_ethernet_wifi_bluetooth_vecan")
+				caption: qsTrId("settings_ethernet_wifi_bluetooth_vecan")
 				pageSource: "/pages/settings/PageSettingsConnectivity.qml"
 				iconSource: "qrc:/images/icon_connectivity_32.png"
 			}
@@ -58,7 +58,7 @@ SwipeViewPage {
 				//% "VRM"
 				text: qsTrId("settings_vrm")
 				//% "Remote monitoring portal"
-				secondaryText: qsTrId("settings_remote_monitoring_portal")
+				caption: qsTrId("settings_remote_monitoring_portal")
 				pageSource: "/pages/settings/PageSettingsLogger.qml"
 				iconSource: "qrc:/images/icon_vrm_32.png"
 			}
@@ -72,7 +72,7 @@ SwipeViewPage {
 				//% "Integrations"
 				text: qsTrId("settings_integrations")
 				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
-				secondaryText: qsTrId("settings_relays_sensors_tanks")
+				caption: qsTrId("settings_relays_sensors_tanks")
 				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
 				iconSource: "qrc:/images/icon_integration_32.png"
 			}
@@ -81,7 +81,7 @@ SwipeViewPage {
 				//% "System Setup"
 				text: qsTrId("settings_system_setup")
 				//% "AC/DC system, ESS, DVCC, Battery..."
-				secondaryText: qsTrId("settings_acdcsystem_ess_dvcc_battery")
+				caption: qsTrId("settings_acdcsystem_ess_dvcc_battery")
 				pageSource: "/pages/settings/PageSettingsSystem.qml"
 				iconSource: "qrc:/images/icon_system_32.png"
 			}
@@ -90,7 +90,7 @@ SwipeViewPage {
 				//% "Debug & Develop"
 				text: qsTrId("settings_debug_and_develop")
 				//% "Profiling tools, debug statistics, app version..."
-				secondaryText: qsTrId("settings_profilingtools_debugstatistics_appversion")
+				caption: qsTrId("settings_profilingtools_debugstatistics_appversion")
 				pageSource: "/pages/settings/debug/PageDebug.qml"
 				iconSource: "qrc:/images/icon_debug_32.png"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
