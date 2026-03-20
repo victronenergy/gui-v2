@@ -317,6 +317,9 @@ QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 	case DigitalInput_Type_Generator:
 		//% "Generator"
 		return qtTrId("digitalinputs_type_generator");
+	case DigitalInput_Type_RemoteGeneratorEnable:
+		//% "Remote generator enable"
+		return qtTrId("digitalinputs_type_remote_generator_enable");
 	case DigitalInput_Type_TouchInputControl:
 		//% "Touch input control"
 		return qtTrId("digitalinputs_touch_input_control");

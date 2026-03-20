@@ -253,9 +253,14 @@ VisibleItemModel {
 	}
 
 	ListButton {
+		readonly property bool digitalInputBlocks: digitalInputControlInput.valid
+				&& digitalInputControlInput.value > 0
+				&& digitalInputControlEnabled.valid
+				&& digitalInputControlEnabled.value === 0
 		readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
 				&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
 				&& enableRemoteStartMode.valid
+				&& !digitalInputBlocks
 		readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
 				&& remoteStartStatusCode.valid
 				&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
@@ -286,6 +291,16 @@ VisibleItemModel {
 		VeQuickItem {
 			id: remoteStartStatusCode
 			uid: root.bindPrefix + "/StatusCode"
+		}
+
+		VeQuickItem {
+			id: digitalInputControlInput
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Input" : ""
+		}
+
+		VeQuickItem {
+			id: digitalInputControlEnabled
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Enabled" : ""
 		}
 	}
 

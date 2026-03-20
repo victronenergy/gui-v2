@@ -172,7 +172,8 @@ Page {
 							VenusOS.DigitalInput_Type_FireAlarm,
 							VenusOS.DigitalInput_Type_CO2Alarm,
 							VenusOS.DigitalInput_Type_Generator,
-							VenusOS.DigitalInput_Type_TouchInputControl
+							VenusOS.DigitalInput_Type_TouchInputControl,
+							VenusOS.DigitalInput_Type_RemoteGeneratorEnable
 						].map(function(v) { return { value: v, display: VenusOS.digitalInput_typeToText(v)} } )
 
 						GradientListView {
