@@ -296,7 +296,7 @@ SwipeViewPage {
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
-					icon.source: dcLoadGauge.active ? "qrc:/images/acloads.svg" : "qrc:/images/consumption.svg"
+					icon.source: "qrc:/images/acloads.svg"
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
