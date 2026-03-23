@@ -152,6 +152,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/RadioButton.qml
     components/controls/RangeSlider.qml
     components/controls/RemoveButton.qml
+    components/controls/RoundCloseButton.qml
     components/controls/ScrollBar.qml
     components/controls/Slider.qml
     components/controls/SliderIndicator.qml
@@ -835,6 +836,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_warning_32.svg
     images/icon_checkmark_32.svg
     images/icon_close_32.svg
+    images/icon_close_small.svg
     images/icon_info_32.svg
     images/icon_info_48.svg
     images/icon_WiFi_1_32.svg

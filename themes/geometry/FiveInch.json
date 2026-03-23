@@ -25,6 +25,10 @@
 
     "geometry_closeButton_rightMargin": 8,
 
+    "geometry_roundCloseButton_size": 44,
+    "geometry_roundCloseButton_radius": 22,
+    "geometry_roundCloseButton_iconSize": 36,
+
     "geometry_colorWheel_width": 340,
     "geometry_colorWheel_height": 280,
     "geometry_colorWheel_selector_width": 216,
@@ -70,7 +74,7 @@
     "geometry_scrollBar_bar_radius": 8,
     "geometry_scrollBar_horizontalMargin": 8,
 
-    "geometry_segmentedButtonRow_height": 48,
+    "geometry_segmentedButtonRow_height": 64,
 
     "geometry_switches_header_topMargin": 8,
 
@@ -124,7 +128,7 @@
     "geometry_temperatureSlider_popup_shadow_verticalOffset": 6,
 
     "geometry_spinBox_indicator_minimumWidth": 64,
-    "geometry_spinBox_indicator_maximumWidth": 136,
+    "geometry_spinBox_indicator_maximumWidth": 120,
     "geometry_spinBox_indicator_height": 64,
     "geometry_spinBox_indicator_radius": 6,
 
@@ -150,7 +154,7 @@
     "geometry_timeSelector_spinBox_width": 238,
     "geometry_timeSelector_spinBox_height": 72,
     "geometry_spinBox_wide_spacing": 10,
-    "geometry_timeSelector_horizontalMargin": 16,
+    "geometry_numberSelector_spinBox_bottomPadding": 32,
     "geometry_tankShapeSelector_spinBox_width": 262,
     "geometry_tankShapeSelector_spinBox_height": 72,
 
@@ -190,16 +194,20 @@
     "geometry_controlCard_status_bottomMargin": 28,
     "geometry_controlCard_button_margins": 24,
 
-    "geometry_modalDialog_width": 624,
     "geometry_modalDialog_height": 368,
-    "geometry_modalDialog_height_small": 320,
+    "geometry_modalDialog_horizontalMargin": 88,
     "geometry_modalDialog_radius": 8,
-    "geometry_modalDialog_header_height": 78,
+    "geometry_modalDialog_header_height": 64,
+    "geometry_modalDialog_header_verticalPadding": 12,
+    "geometry_modalDialog_header_spacing": 4,
     "geometry_modalDialog_footer_height": 64,
     "geometry_modalDialog_footer_midSeparator_width": 1,
-    "geometry_modalDialog_content_margins": 20,
-    "geometry_modalDialog_content_spacing": 40,
+    "geometry_modalDialog_content_spacing": 16,
     "geometry_modalDialog_content_horizontalMargin": 64,
+    "geometry_modalDialog_contentItem_defaultHeight": 240,
+    "geometry_modalDialog_acceptButton_horizontalInset": 0,
+    "geometry_modalDialog_acceptButton_topInset": 0,
+    "geometry_modalDialog_acceptButton_bottomInset": 0,
 
     "geometry_modalWarningDialog_alarmIcon_topMargin": 44,
     "geometry_modalWarningDialog_title_spacing": 16,
@@ -296,10 +304,10 @@
     "geometry_iochannel_status_radius": 10,
     "geometry_iochannel_status_minimum_width": 48,
 
-    "geometry_colorWheelDialog_width": 754,
-    "geometry_colorWheelDialog_height": 448,
-    "geometry_colorWheelDialog_horizontalMargin_left": 66,
-    "geometry_colorWheelDialog_horizontalMargin_right": 24,
+    "geometry_colorWheelDialog_horizontalMargin": 24,
+    "geometry_colorWheelDialog_leftPadding": 48,
+    "geometry_colorWheelDialog_rightPadding": 24,
+    "geometry_colorWheelDialog_spacing": 24,
     "geometry_colorWheelDialog_mode_button_verticalMargin": 18,
     "geometry_colorWheelDialog_mode_button_width": 90,
     "geometry_colorWheelDialog_mode_button_height": 40,
@@ -426,6 +434,7 @@
     "geometry_quantityTable_maximumWidth": 0,
     "geometry_quantityTable_bottomMargin": 14,
     "geometry_quantityTable_horizontalSpacing_small": 12,
+    "geometry_quantityTable_horizontalSpacing_medium": 36,
     "geometry_quantityTable_horizontalSpacing_large": 48,
 
     "geometry_quantityTableSummary_verticalMargin": 8,
@@ -454,7 +463,9 @@
     "geometry_solarChart_horizontalMargin": 18,
     "geometry_solarChart_bottomMargin": 28,
 
-    "geometry_solarDailyHistoryDialog_minimumHeight": 216,
+    "geometry_solarDailyHistoryDialog_background_height": 260,
+    "geometry_solarDailyHistoryDialog_background_radius": 8,
+    "geometry_solarDailyHistoryDialog_horizontalMargin": 88,
     "geometry_solarDailyHistoryDialog_header_height": 50,
     "geometry_solarDailyHistoryDialog_arrow_icon_size": 72,
     "geometry_solarDailyHistoryDialog_arrow_horizontalMargin": 2,

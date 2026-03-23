@@ -40,7 +40,6 @@ T.SpinBox {
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property string suffix
-	property int fontPixelSize: secondaryText.length > 0 ? Theme.font_size_h2 : Theme.font_size_h3
 
 	property int _scalingFactor: 1
 	property int _originalStepSize
@@ -60,6 +59,8 @@ T.SpinBox {
 	validator: DoubleValidator {
 		locale: Units.numberFormattingLocaleName
 	}
+
+	font.pixelSize: secondaryText.length > 0 ? Theme.font_dialog_control_smallSize : Theme.font_dialog_control_largeSize
 
 	// Update the displayed text when the initial value is set or when the up/down buttons are
 	// pressed.
@@ -167,7 +168,7 @@ T.SpinBox {
 				clip: true
 				spinBox: root
 				suffix: root.suffix
-				fontPixelSize: root.fontPixelSize
+				fontPixelSize: root.font.pixelSize
 				arrowKeysEnabled: upDownHintFrame.visible
 				focus: false
 				onIncreaseFailed: root.increaseFailed()
@@ -211,6 +212,8 @@ T.SpinBox {
 			}
 		}
 	}
+
+
 
 	up.indicator: Rectangle {
 		x: orientation === Qt.Horizontal

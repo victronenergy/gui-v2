@@ -50,6 +50,19 @@ Item {
 		}
 	}
 
+	Connections {
+		target: Theme
+		function onScreenSizeChanged() {
+			// If the orientation changes repeatedly between portrait and landscape, any open dialog
+			// will not update its geometry correctly as expected. So, force-close any opened
+			// dialogs when the screen size changes.
+			if (currentDialog) {
+				currentDialog.destroy()
+				currentDialog = null
+			}
+		}
+	}
+
 	// For WebAssembly, if the firmware changed on device, this might
 	// mean that the webassembly blob served by its webserver has changed.
 	// We need to trigger a page reload to ensure we are running the right one.

@@ -127,13 +127,18 @@ LevelsTab {
 			header: null
 			footer: null
 			backgroundColor: "transparent"
+			leftMargin: 0
+			rightMargin: 0
 
 			contentItem: Item {
 				focus: true
+				implicitHeight: expandedTanksView.height
 				Keys.onPressed: expandedDialog.accept()
 				Keys.enabled: Global.keyNavigationEnabled
 
 				ExpandedTanksView {
+					id: expandedTanksView
+
 					anchors.centerIn: parent
 					width: Theme.geometry_screen_width
 					height: Theme.geometry_levelsPage_panel_expanded_height

@@ -84,6 +84,7 @@ ControlCard {
 		id: modeDialogComponent
 
 		EvcsChargerModeDialog {
+			secondaryTitle: device.name
 			onAccepted: modeItem.setValue(mode)
 		}
 	}

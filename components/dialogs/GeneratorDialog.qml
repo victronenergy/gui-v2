@@ -36,11 +36,9 @@ ModalDialog {
 
 	title: CommonWords.generator
 
-	acceptButton.background: AcceptButtonBackground {
+	acceptButtonBackground: AcceptButtonBackground {
 		id: acceptButtonBackground
 
-		width: root.acceptButton.width
-		height: root.acceptButton.height
 		color: root.finalGeneratorState === VenusOS.Generators_State_Stopped ? Theme.color_dimRed : Theme.color_dimGreen
 		secondaryColor: root.finalGeneratorState === VenusOS.Generators_State_Stopped ? Theme.color_red : Theme.color_green
 
@@ -82,13 +80,14 @@ ModalDialog {
 				}
 				PropertyChanges {
 					target: root
-					canAccept: false
+					tryAccept: function() {
+						return false
+					}
 					tryReject: function() {
 						// If user clicks reject button, restore the default dialog state, instead
 						// of closing the dialog.
 						acceptButtonBackground.animating = false
 						acceptButtonBackground.state = "default"
-						root.rejectButton.focus = true // accept button is now disabled, so focus a different button.
 						return false
 					}
 				}
@@ -110,7 +109,9 @@ ModalDialog {
 				// should be almost immediate.)
 				PropertyChanges {
 					target: root
-					canAccept: false
+					tryAccept: function() {
+						return false
+					}
 					tryReject: function() {
 						return true
 					}

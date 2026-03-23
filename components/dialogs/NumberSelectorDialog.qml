@@ -78,10 +78,9 @@ ModalDialog {
 				right: parent.right
 				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+				verticalCenterOffset: -Theme.geometry_numberSelector_spinBox_bottomPadding / 2
 			}
-			width: parent.width
-			spacing: Theme.geometry_modalDialog_content_margins
+			spacing: Theme.geometry_numberSelector_spinBox_bottomPadding
 
 			SpinBox {
 				id: spinBox
@@ -89,7 +88,10 @@ ModalDialog {
 				width: parent.width
 				height: Theme.geometry_timeSelector_spinBox_height
 				editable: true
-				indicatorImplicitWidth: root.decimals > 0
+				indicatorImplicitWidth: implicitContentWidth
+						+ (2 * Theme.geometry_textField_horizontalMargin) + (2 * spinBox.spacing)
+						+ (2 * Theme.geometry_spinBox_indicator_maximumWidth)
+							> root.implicitBackgroundWidth
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				suffix: root.suffix

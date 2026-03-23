@@ -46,6 +46,9 @@
     "color_button_on_text_disabled": "color_gray6",
     "color_button_off_text_disabled": "color_gray4",
 
+    "color_roundCloseButton_background": "color_gray3",
+    "color_roundCloseButton_foreground": "color_gray7",
+
     "color_switch_status_disabled": "#333333",
 
     "color_multistepbutton_separator": "#5B6E80",

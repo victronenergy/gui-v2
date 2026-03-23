@@ -193,18 +193,20 @@ Page {
 				: qsTrId("devicelist_tankshape_edit_point").arg(modelIndex+1)
 
 			contentItem: ModalDialog.FocusableContentItem {
+				implicitHeight: spinBoxRow.height
+
 				Row {
 					id: spinBoxRow
 
 					anchors {
 						centerIn: parent
-						verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+						verticalCenterOffset: -Theme.geometry_modalDialog_content_spacing
 					}
 					spacing: Theme.geometry_modalDialog_content_spacing
 
 					Column {
 						width: sensorLevelSpinBox.width
-						spacing: Theme.geometry_modalDialog_content_margins
+						spacing: Theme.geometry_modalDialog_content_spacing
 
 						Label {
 							width: parent.width
@@ -238,7 +240,7 @@ Page {
 
 					Column {
 						width: volumeSpinBox.width
-						spacing: Theme.geometry_modalDialog_content_margins
+						spacing: Theme.geometry_modalDialog_content_spacing
 
 						Label {
 							width: parent.width
@@ -272,7 +274,7 @@ Page {
 				Row {
 					anchors {
 						top: spinBoxRow.bottom
-						topMargin: Theme.geometry_modalDialog_content_margins
+						topMargin: Theme.geometry_modalDialog_content_spacing
 						horizontalCenter: parent.horizontalCenter
 					}
 					spacing: Theme.geometry_listItem_content_spacing

@@ -18,9 +18,6 @@ Item {
 
 	signal animationFinished()
 
-	width: parent.width
-	height: parent.height
-
 	// Slowly expands a rectangle from the left edge to the right. It doesn't quite stretch to the
 	// right edge as the rounded bit makes it tricky, but it's close enough.
 	SequentialAnimation {

@@ -15,7 +15,7 @@ FocusScope {
 
 	property real availableWidth
 
-	implicitWidth: yearSpinbox.width + monthSpinbox.width + daySpinbox.width + (2 * Theme.geometry_timeSelector_horizontalMargin)
+	implicitWidth: yearSpinbox.width + monthSpinbox.width + daySpinbox.width + (2 * Theme.geometry_modalDialog_content_spacing)
 	implicitHeight: yearSpinbox.height
 
 	Row {
@@ -28,7 +28,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_size_h2
 			from: 1970
 			to: 2100
 
@@ -47,7 +47,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_size_h2
 			from: 1
 			to: 12
 			textFromValue: (value, locale) => Utils.pad(value, 2)
@@ -64,7 +64,7 @@ FocusScope {
 			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_size_h2
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
 			textFromValue: (value, locale) => Utils.pad(value, 2)

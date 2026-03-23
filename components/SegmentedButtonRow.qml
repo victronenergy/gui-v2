@@ -10,7 +10,7 @@ import Victron.VenusOS
 FocusScope {
 	id: root
 
-	property int fontPixelSize: Theme.font_size_body3
+	property int fontPixelSize: Theme.font_buttonRow_size
 	property alias model: buttonRepeater.model
 	property int currentIndex
 
@@ -73,7 +73,6 @@ FocusScope {
 
 				}
 				contentItem: Label {
-					anchors.centerIn: mouseArea
 					font.pixelSize: root.fontPixelSize
 					horizontalAlignment: Text.AlignHCenter
 					verticalAlignment: Text.AlignVCenter

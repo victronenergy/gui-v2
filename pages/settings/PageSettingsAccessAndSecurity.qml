@@ -257,9 +257,6 @@ Page {
 							securityProfile.setProfileAndPassword(profile, password, true)
 						}
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						height: securityProfile.pendingProfile === VenusOS.Security_Profile_Secured
-								? Theme.geometry_modalDialog_height
-								: Theme.geometry_modalDialog_height_small
 					}
 				}
 			}
@@ -338,7 +335,6 @@ Page {
 						//% "Log out"
 						acceptText: qsTrId("settings_logout_dialog_accept_text")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						height: Theme.geometry_modalDialog_height_small
 						onAccepted: BackendConnection.logout()
 					}
 				}
