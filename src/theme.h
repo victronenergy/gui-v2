@@ -112,8 +112,8 @@ protected:
 	ColorScheme m_colorScheme = Dark;
 	SystemColorScheme m_systemColorScheme = SystemColorSchemeDark;
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
-	int m_screenWidth = 0;
-	int m_screenHeight = 0;
+	int m_screenWidth = 1024;
+	int m_screenHeight = 600;
 	bool m_adjustingGeometry = false;
 };
 

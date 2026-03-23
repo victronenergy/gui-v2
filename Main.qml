@@ -70,13 +70,29 @@ Window {
 	}
 
 	onWidthChanged: {
-		if (Theme.screenSize === Theme.Portrait) {
-			Theme.geometry_screen_width = root.width
+		console.log("*** width:", width)
+		if (!Global.isGxDevice) {
+			if (width < height) {
+				Theme.screenSize = Theme.Portrait
+			} else {
+				Theme.screenSize = Qt.platform === "wasm" ? Theme.SevenInch : Theme.FiveInch
+			}
+			if (Theme.screenSize === Theme.Portrait) {
+				Theme.geometry_screen_width = root.width
+			}
 		}
 	}
 	onHeightChanged: {
-		if (Theme.screenSize === Theme.Portrait) {
-			Theme.geometry_screen_height = root.height
+		console.log("*** height:", height)
+		if (!Global.isGxDevice) {
+			if (width < height) {
+				Theme.screenSize = Theme.Portrait
+			} else {
+				Theme.screenSize = Qt.platform === "wasm" ? Theme.SevenInch : Theme.FiveInch
+			}
+			if (Theme.screenSize === Theme.Portrait) {
+				Theme.geometry_screen_height = root.height
+			}
 		}
 	}
 

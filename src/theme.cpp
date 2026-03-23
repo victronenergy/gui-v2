@@ -16,7 +16,11 @@ static Victron::VenusOS::Theme *g_themeInstance = nullptr;
 #include <emscripten/val.h>
 
 EM_JS(int, getScreenWidth, (), {
-	return Math.min(screen.width, screen.height);
+	return screen.width;
+});
+
+EM_JS(int, getScreenHeight, (), {
+	return screen.height;
 });
 
 EM_JS(int, getWindowWidth, (), {
@@ -33,9 +37,13 @@ Theme::Theme(QObject *parent) : QObject(parent)
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	// 5"-6" Smartphones have 320 - 480 CSS independent pixel wide screens.
-	setScreenSize(getScreenWidth() >= 480
-		? Victron::VenusOS::Theme::SevenInch
-		: Victron::VenusOS::Theme::FiveInch);
+	if (getScreenHeight() > getScreenWidth()) {
+		setScreenSize(Victron::VenusOS::Theme::Portrait);
+	} else {
+		setScreenSize(getScreenWidth() >= 480
+			? Victron::VenusOS::Theme::SevenInch
+			: Victron::VenusOS::Theme::FiveInch);
+	}
 
 	// Assign global instance for callbacks
 	g_themeInstance = this;
@@ -77,6 +85,7 @@ Victron::VenusOS::Theme::ScreenSize Theme::screenSize() const
 void Theme::setScreenSize(Victron::VenusOS::Theme::ScreenSize size)
 {
 	if (m_screenSize != size) {
+		qDebug() << "setScreenSize:" << size;
 		setAdjustingGeometry(true);
 		m_screenSize = size;
 
@@ -160,6 +169,7 @@ int Theme::geometry_screen_width() const
 
 void Theme::setGeometry_screen_width(int width)
 {
+	qDebug() << "setGeometry_screen_width():" << width;
 	if (m_screenWidth != width) {
 		const bool wasAdjusting = adjustingGeometry();
 		setAdjustingGeometry(true);
@@ -176,6 +186,7 @@ int Theme::geometry_screen_height() const
 
 void Theme::setGeometry_screen_height(int height)
 {
+	qDebug() << "setGeometry_screen_height():" << height;
 	if (m_screenHeight != height) {
 		const bool wasAdjusting = adjustingGeometry();
 		setAdjustingGeometry(true);
