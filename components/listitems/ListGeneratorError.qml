@@ -21,6 +21,8 @@ ListText {
 		case 3: return CommonWords.formatError(qsTrId("settings_generator_not_detected"), 3)
 		//% "Generator switch control disabled by digital input"
 		case 4: return CommonWords.formatError(qsTrId("settings_generator_switch_control_disabled_by_digital_input"), 4)
+		//% "Digital input control not available"
+		case 5: return CommonWords.formatError(qsTr("Digital input control not available"), 5)
 		default: return ""
 		}
 	}
