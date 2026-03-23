@@ -44,7 +44,7 @@
       <translation>Tensão baixa da bateria</translation>
     </message>
     <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="591"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Manual</source>
       <translation>Manual</translation>
     </message>
@@ -172,7 +172,7 @@
       <translation>GPS</translation>
     </message>
     <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="594"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Tank pump</source>
       <translation>Bomba do depósito</translation>
     </message>
@@ -1268,37 +1268,37 @@
       <translation>Tempo mínimo de funcionamento</translation>
     </message>
     <message id="page_settings_generator_warm_up_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="66"/>
       <source>Warm-up time</source>
       <translation>Tempo de aquecimento</translation>
     </message>
     <message id="page_settings_generator_cool_down_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="70"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="77"/>
       <source>Cool-down time</source>
       <translation>Tempo de arrefecimento</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_ac_input">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="105"/>
       <source>Detect generator at AC input</source>
       <translation>Detetar gerador na entrada CA</translation>
     </message>
     <message id="page_settings_generator_detect_generator_not_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="113"/>
       <source>None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality.</source>
       <translation>Nenhuma das entradas CA está definida para gerador. Vá para a página de configuração do sistema e defina a entrada CA correta para gerador para ativar esta funcionalidade.</translation>
     </message>
     <message id="page_settings_generator_detect_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="117"/>
       <source>An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page.</source>
       <translation>Um alarme será disparado quando nenhuma energia do gerador for detetada na entrada CA do inversor. Certifique-se de que a entrada CA correta está definida para gerador na página de configuração do sistema.</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="173"/>
       <source>Quiet hours start time</source>
       <translation>Hora de início do período de silêncio</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="170"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="181"/>
       <source>Quiet hours end time</source>
       <translation>Hora de término do período de silêncio</translation>
     </message>
@@ -1732,7 +1732,7 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation>Alarme de porta</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="559"/>
+      <location filename="../../src/enums.cpp" line="561"/>
       <source>Bilge pump</source>
       <translation>Bomba de esgoto</translation>
     </message>
@@ -4843,7 +4843,7 @@ Você quer continuar?</translation>
       <translation>Não</translation>
     </message>
     <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="781"/>
+      <location filename="../../src/enums.cpp" line="784"/>
       <source>No error</source>
       <translation>Sem erro</translation>
     </message>
@@ -5249,62 +5249,62 @@ Você quer continuar?</translation>
       <translation>Nenhum firmware encontrado</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="715"/>
+      <location filename="../../src/enums.cpp" line="718"/>
       <source>Fuel</source>
       <translation>Combustível</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="718"/>
+      <location filename="../../src/enums.cpp" line="721"/>
       <source>Fresh water</source>
       <translation>Água doce</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="721"/>
+      <location filename="../../src/enums.cpp" line="724"/>
       <source>Waste water</source>
       <translation>Água residual</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="724"/>
+      <location filename="../../src/enums.cpp" line="727"/>
       <source>Live well</source>
       <translation>Viveiro</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="727"/>
+      <location filename="../../src/enums.cpp" line="730"/>
       <source>Oil</source>
       <translation>Óleo</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="730"/>
+      <location filename="../../src/enums.cpp" line="733"/>
       <source>Black water</source>
       <translation>Águas negras</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="733"/>
+      <location filename="../../src/enums.cpp" line="736"/>
       <source>Gasoline</source>
       <translation>Gasolina</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="736"/>
+      <location filename="../../src/enums.cpp" line="739"/>
       <source>Diesel</source>
       <translation>Diesel</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="739"/>
+      <location filename="../../src/enums.cpp" line="742"/>
       <source>LPG</source>
       <translation>GPL</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="742"/>
+      <location filename="../../src/enums.cpp" line="745"/>
       <source>LNG</source>
       <translation>GNL</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="745"/>
+      <location filename="../../src/enums.cpp" line="748"/>
       <source>Hydraulic oil</source>
       <translation>Óleo hidráulico</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="748"/>
+      <location filename="../../src/enums.cpp" line="751"/>
       <source>Raw water</source>
       <translation>Água bruta</translation>
     </message>
@@ -7119,27 +7119,27 @@ Você quer continuar?</translation>
       <translation>Aquecimento e arrefecimento</translation>
     </message>
     <message id="page_settings_generator_stop_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="88"/>
       <source>Generator stop time</source>
       <translation>Tempo de paragem do gerador</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_dc">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="138"/>
       <source>Alarm if DC generator is not providing power</source>
       <translation>Alarme se o gerador CC não estiver a fornecer energia</translation>
     </message>
     <message id="page_settings_generator_detect_at_dc_in_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="144"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>Um alarme será acionado quando o grupo gerador CC não atingir pelo menos 5A nos primeiros 5 minutos após o arranque</translation>
     </message>
     <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="152"/>
       <source>Alarm when generator is not in autostart mode</source>
       <translation>Alarme quando o gerador não está em modo de arranque automático</translation>
     </message>
     <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
       <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
       <translation>Um alarme será acionado quando a função de arranque automático for deixada desativada por mais de 10 minutos</translation>
     </message>
@@ -7935,7 +7935,7 @@ Você quer continuar?</translation>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="562"/>
-      <location filename="../../src/enums.cpp" line="837"/>
+      <location filename="../../src/enums.cpp" line="840"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Desconhecido</translation>
@@ -8053,7 +8053,7 @@ Você quer continuar?</translation>
       <translation>Controle de entrada por toque</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="636"/>
       <source>Over temperature</source>
       <translation>Sobretemperatura</translation>
     </message>
@@ -8096,7 +8096,7 @@ Você quer continuar?</translation>
       <location filename="../../src/enums.cpp" line="158"/>
       <source>W</source>
       <extracomment>Abbreviation of "West" direction</extracomment>
-      <translation type="unfinished">W</translation>
+      <translation type="unfinished">O</translation>
     </message>
     <message id="dcMeter_bilge_pump">
       <location filename="../../src/enums.cpp" line="215"/>
@@ -8196,7 +8196,7 @@ Você quer continuar?</translation>
       <source>Off</source>
       <translation type="unfinished">Desligado</translation>
     </message>
-    <message id="solarchargers_state_external control">
+    <message id="solarchargers_state_external_control">
       <location filename="../../src/enums.cpp" line="452"/>
       <source>External control</source>
       <translation type="unfinished">Controlo externo</translation>
@@ -8237,74 +8237,79 @@ Você quer continuar?</translation>
       <translation type="unfinished">Avaria</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="524"/>
+      <location filename="../../src/enums.cpp" line="526"/>
       <source>Momentary</source>
       <translation>Momentâneo</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="530"/>
+      <location filename="../../src/enums.cpp" line="532"/>
       <source>Dimmable</source>
       <translation>Regulável</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="540"/>
+      <location filename="../../src/enums.cpp" line="542"/>
       <source>Slave of %1</source>
       <translation>Escravo de %1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="543"/>
+      <location filename="../../src/enums.cpp" line="545"/>
       <source>Slave</source>
       <translation type="unfinished">Escravo</translation>
     </message>
     <message id="switchable_output_function_disabled">
-      <location filename="../../src/enums.cpp" line="582"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled</source>
       <translation type="unfinished">Desativado</translation>
     </message>
     <message id="switchable_output_function_alarm">
-      <location filename="../../src/enums.cpp" line="585"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Alarm</source>
       <translation type="unfinished">Alarme</translation>
     </message>
     <message id="switchable_output_function_temperature">
-      <location filename="../../src/enums.cpp" line="597"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Temperature</source>
       <translation type="unfinished">Temperatura</translation>
     </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="627"/>
       <source>Off</source>
       <translation type="unfinished">Desligado</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="628"/>
+      <location filename="../../src/enums.cpp" line="630"/>
       <source>Powered</source>
       <translation>Alimentado</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="633"/>
       <source>Tripped</source>
       <translation>Desarmado</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="640"/>
+      <location filename="../../src/enums.cpp" line="642"/>
       <source>Fault</source>
       <translation type="unfinished">Avaria</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="646"/>
+      <location filename="../../src/enums.cpp" line="648"/>
       <source>On</source>
       <translation type="unfinished">Ligado</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="649"/>
+      <location filename="../../src/enums.cpp" line="651"/>
       <source>Short</source>
       <translation>Curto</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="702"/>
+      <location filename="../../src/enums.cpp" line="704"/>
       <source>Not running</source>
       <translation type="unfinished">Não está a funcionar</translation>
+    </message>
+    <message id="switchable_output_unknown_status">
+      <location filename="../../src/enums.cpp" line="710"/>
+      <source>Unknown status</source>
+      <translation type="unfinished">estado desconhecido</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -9098,17 +9103,17 @@ Com uma navegação simplificada e um visual renovado, tudo o que você adora ag
     <message id="direction_southwest">
       <location filename="../../src/units.cpp" line="560"/>
       <source>SW</source>
-      <translation>SW</translation>
+      <translation>SO</translation>
     </message>
     <message id="direction_west">
       <location filename="../../src/units.cpp" line="562"/>
       <source>W</source>
-      <translation>W</translation>
+      <translation>O</translation>
     </message>
     <message id="direction_northwest">
       <location filename="../../src/units.cpp" line="564"/>
       <source>NW</source>
-      <translation>NW</translation>
+      <translation>NO</translation>
     </message>
     <message id="genset_controller_multiple_genset_controllers">
       <location filename="../../components/PageGensetModel.qml" line="68"/>
@@ -9134,8 +9139,8 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Página do barco</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="573"/>
-      <location filename="../../src/enums.cpp" line="606"/>
+      <location filename="../../src/enums.cpp" line="575"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>Unsupported type: %1</source>
       <translation>Tipo não suportado: %1</translation>
     </message>
@@ -9889,7 +9894,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Bluetooth não disponível</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="527"/>
+      <location filename="../../src/enums.cpp" line="529"/>
       <source>Toggle</source>
       <translation>Alternar</translation>
     </message>
@@ -10194,27 +10199,27 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Carregador eólico</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="533"/>
+      <location filename="../../src/enums.cpp" line="535"/>
       <source>Temperature setpoint</source>
       <translation>Ponto de ajuste de temperatura</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="536"/>
+      <location filename="../../src/enums.cpp" line="538"/>
       <source>Stepped switch</source>
       <translation>Interruptor escalonado</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="547"/>
+      <location filename="../../src/enums.cpp" line="549"/>
       <source>Dropdown</source>
       <translation>Lista suspensa</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="550"/>
+      <location filename="../../src/enums.cpp" line="552"/>
       <source>Basic slider</source>
       <translation>Controle deslizante básico</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="556"/>
+      <location filename="../../src/enums.cpp" line="558"/>
       <source>Three-state switch</source>
       <translation>Interruptor de três estados</translation>
     </message>
@@ -10261,7 +10266,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Polaridade (Relé 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="185"/>
       <source>Polarity</source>
       <translation>Polaridade</translation>
     </message>
@@ -10313,7 +10318,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Um VE.Bus BMS desliga automaticamente o sistema quando necessário para proteger a bateria. Controlar o sistema a partir do dispositivo GX, portanto, não é possível.</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="553"/>
+      <location filename="../../src/enums.cpp" line="555"/>
       <source>Numeric input</source>
       <translation>Entrada numérica</translation>
     </message>
@@ -10339,7 +10344,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Parâmetros de microrrede</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="760"/>
+      <location filename="../../src/enums.cpp" line="763"/>
       <source>Hybrid droop</source>
       <translation>Droop híbrido</translation>
     </message>
@@ -10509,7 +10514,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation type="unfinished">Baixa</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="664"/>
+      <location filename="../../src/enums.cpp" line="666"/>
       <source>Bypassed</source>
       <translation>Ignorado</translation>
     </message>
@@ -10567,18 +10572,18 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Sem notificações ativas</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="562"/>
+      <location filename="../../src/enums.cpp" line="564"/>
       <source>RGB color wheel</source>
       <translation>Roda de cores RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="568"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>Roda de cores CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="570"/>
+      <location filename="../../src/enums.cpp" line="572"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>Roda de cores RGB + W</translation>
@@ -10740,7 +10745,7 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation type="unfinished">Nível de dimerização de inicialização</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="170"/>
       <source>Startup dim level</source>
       <translation>Nível de dimerização de inicialização</translation>
     </message>
@@ -10750,22 +10755,22 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation>Restaurar nível de dimerização da memória</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="180"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="190"/>
       <source>Active high / Normally open</source>
       <translation>Ativo alto/Normalmente aberto</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="192"/>
       <source>Active low / Normally closed</source>
       <translation>Ativo baixo/Normalmente fechado</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="188"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
       <source>Output limit min</source>
       <translation>Mínimo do limite de saída</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="199"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="209"/>
       <source>Output limit max</source>
       <translation>Máximo do limite de saída</translation>
     </message>
@@ -10826,52 +10831,52 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation>Misto (CA em Watts, CC em Amperes)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="637"/>
+      <location filename="../../src/enums.cpp" line="639"/>
       <source>Over temp, tripped</source>
       <translation>Sobretemperatura, disparado</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="652"/>
+      <location filename="../../src/enums.cpp" line="654"/>
       <source>Disabled</source>
       <translation type="unfinished">Desativado</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="655"/>
+      <location filename="../../src/enums.cpp" line="657"/>
       <source>Disabled, tripped</source>
       <translation>Desativado, disparado</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="658"/>
+      <location filename="../../src/enums.cpp" line="660"/>
       <source>Disabled, over temp</source>
       <translation>Desativado, sobretemperatura</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="661"/>
+      <location filename="../../src/enums.cpp" line="663"/>
       <source>Disabled but on</source>
       <translation>Desativado, mas ligado</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="667"/>
+      <location filename="../../src/enums.cpp" line="669"/>
       <source>Bypassed, tripped</source>
       <translation>Desviado, disparado</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="670"/>
+      <location filename="../../src/enums.cpp" line="672"/>
       <source>Bypassed, over temp</source>
       <translation>Desviado, sobretemperatura</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="673"/>
+      <location filename="../../src/enums.cpp" line="675"/>
       <source>External control</source>
       <translation type="unfinished">Controlo externo</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="676"/>
+      <location filename="../../src/enums.cpp" line="678"/>
       <source>External control, tripped</source>
       <translation>Controlo externo, disparado</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="679"/>
+      <location filename="../../src/enums.cpp" line="681"/>
       <source>External control, over temp</source>
       <translation>Controlo externo, sobretemperatura</translation>
     </message>
@@ -11135,22 +11140,22 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation>Ativar Link-local</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="688"/>
+      <location filename="../../src/enums.cpp" line="690"/>
       <source>Running, over temperature</source>
       <translation>Em execução, temperatura excessiva</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="691"/>
+      <location filename="../../src/enums.cpp" line="693"/>
       <source>Running, disabled</source>
       <translation>Em execução, desativado</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="694"/>
+      <location filename="../../src/enums.cpp" line="696"/>
       <source>Running</source>
       <translation type="unfinished">Em execução</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="699"/>
+      <location filename="../../src/enums.cpp" line="701"/>
       <source>Not running, disabled</source>
       <translation>Não está em execução, desativado</translation>
     </message>
@@ -11165,107 +11170,107 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation>Automatize dispositivos controláveis para maximizar o autoconsumo de FV</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="763"/>
+      <location filename="../../src/enums.cpp" line="766"/>
       <source>EMS Control: Hybrid droop</source>
       <translation>Controlo EMS: Droop Híbrido</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="767"/>
+      <location filename="../../src/enums.cpp" line="770"/>
       <source>EMS Control: Grid-following</source>
       <translation>Controlo EMS: Seguidor de Rede</translation>
     </message>
     <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="770"/>
+      <location filename="../../src/enums.cpp" line="773"/>
       <source>EMS Control: Grid-forming</source>
       <translation>Controlo EMS: Formador de Rede</translation>
     </message>
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="784"/>
+      <location filename="../../src/enums.cpp" line="787"/>
       <source>Different fallback hybrid droop values in phase masters</source>
       <translation>Valores de droop híbrido de fallback diferentes nos masters de fase</translation>
     </message>
     <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="787"/>
+      <location filename="../../src/enums.cpp" line="790"/>
       <source>Hybrid droop parameter write failed</source>
       <translation>Falha ao escrever o parâmetro de droop híbrido</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="790"/>
+      <location filename="../../src/enums.cpp" line="793"/>
       <source>Parameter error Fmin &gt; Fmax</source>
       <translation>Erro de parâmetro Fmin &gt; Fmax</translation>
     </message>
     <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="793"/>
+      <location filename="../../src/enums.cpp" line="796"/>
       <source>Parameter error Pmin &gt; Pmax</source>
       <translation>Erro de parâmetro Pmin &gt; Pmax</translation>
     </message>
     <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="796"/>
+      <location filename="../../src/enums.cpp" line="799"/>
       <source>Parameter error Umin &gt; Umax</source>
       <translation>Erro de parâmetro Umin &gt; Umax</translation>
     </message>
     <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="799"/>
+      <location filename="../../src/enums.cpp" line="802"/>
       <source>Parameter error Qmin &gt; Qmax</source>
       <translation>Erro de parâmetro Qmin &gt; Qmax</translation>
     </message>
     <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="802"/>
+      <location filename="../../src/enums.cpp" line="805"/>
       <source>Parameter error Q0 out of range</source>
       <translation>Erro de parâmetro Q0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="805"/>
+      <location filename="../../src/enums.cpp" line="808"/>
       <source>Parameter error Qmin out of range</source>
       <translation>Erro de parâmetro Qmin fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="808"/>
+      <location filename="../../src/enums.cpp" line="811"/>
       <source>Parameter error Qmax out of range</source>
       <translation>Erro de parâmetro Qmax fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="811"/>
+      <location filename="../../src/enums.cpp" line="814"/>
       <source>Parameter error U0 out of range</source>
       <translation>Erro de parâmetro U0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="814"/>
+      <location filename="../../src/enums.cpp" line="817"/>
       <source>Parameter error U droop out of range</source>
       <translation>Erro de parâmetro U droop fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="817"/>
+      <location filename="../../src/enums.cpp" line="820"/>
       <source>Parameter error P0 out of range</source>
       <translation>Erro de parâmetro P0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="820"/>
+      <location filename="../../src/enums.cpp" line="823"/>
       <source>Parameter error Pmin out of range</source>
       <translation>Erro de parâmetro Pmin fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="823"/>
+      <location filename="../../src/enums.cpp" line="826"/>
       <source>Parameter error Pmax out of range</source>
       <translation>Erro de parâmetro Pmax fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="826"/>
+      <location filename="../../src/enums.cpp" line="829"/>
       <source>Parameter error F0 out of range</source>
       <translation>Erro de parâmetro F0 fora do intervalo</translation>
     </message>
     <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="829"/>
+      <location filename="../../src/enums.cpp" line="832"/>
       <source>Parameter error freq droop out of range</source>
       <translation>Erro de parâmetro freq droop fora do intervalo</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="832"/>
+      <location filename="../../src/enums.cpp" line="835"/>
       <source>Ve.Bus internal error PF vs FP data mismatch</source>
       <translation>Erro interno Ve.Bus: Incompatibilidade de dados PF vs FP</translation>
     </message>
     <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="835"/>
+      <location filename="../../src/enums.cpp" line="838"/>
       <source>Ve.Bus internal error QU vs UQ data mismatch</source>
       <translation>Erro interno Ve.Bus: Incompatibilidade de dados QU vs UQ</translation>
     </message>
@@ -11290,17 +11295,17 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <translation>Indicador de temperatura</translation>
     </message>
     <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="588"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Generator start/stop</source>
       <translation>Arranque/paragem do gerador</translation>
     </message>
     <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="600"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>Genset Helper</source>
       <translation>Assistente do Grupo Gerador</translation>
     </message>
     <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="603"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>Opportunity load</source>
       <translation>Carga de oportunidade</translation>
     </message>
@@ -11450,6 +11455,33 @@ Aqui você pode adicionar portas e IDs de unidade adicionais para procurar inver
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
       <source>Apply</source>
       <translation>Aplicar</translation>
+    </message>
+    <message id="page_settings_generator_warm_up_cool_down_unavailable_message">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="60"/>
+      <source>Warm-up &amp; cool-down is unavailable with the current inverter/charger firmware. 
+Please update to the latest firmware to be able to adjust these settings.</source>
+      <translation>O aquecimento e arrefecimento não estão disponíveis com o firmware atual do inversor/carregador.
+Por favor, atualize para o firmware mais recente para poder ajustar estas configurações.</translation>
+    </message>
+    <message id="generic_input_unknown_status">
+      <location filename="../../src/enums.cpp" line="518"/>
+      <source>Unknown status</source>
+      <translation>estado desconhecido</translation>
+    </message>
+    <message id="page_switchable_output_set_dim_level_manually">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
+      <source>Set startup dim level manually</source>
+      <translation>Definir o nível de brilho de inicialização manualmente</translation>
+    </message>
+    <message id="main_system_service_settings_offline_warning">
+      <location filename="../../Main.qml" line="207"/>
+      <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
+      <translation>Aviso: foi detetado que o serviço localsettings está offline; a interface do utilizador será recarregada quando estiver novamente disponível...</translation>
+    </message>
+    <message id="main_system_service_platform_offline_warning">
+      <location filename="../../Main.qml" line="228"/>
+      <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
+      <translation>Aviso: foi detetado que o serviço venus-platform está offline; a interface do utilizador será recarregada quando estiver novamente disponível...</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>

@@ -44,7 +44,7 @@
       <translation>แรงดันแบตเตอรี่ต่ำ</translation>
     </message>
     <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="591"/>
+      <location filename="../../src/enums.cpp" line="593"/>
       <source>Manual</source>
       <translation>คู่มือ</translation>
     </message>
@@ -172,7 +172,7 @@
       <translation>จีพีเอส</translation>
     </message>
     <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="594"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>Tank pump</source>
       <translation>ปั๊มถัง</translation>
     </message>
@@ -1268,37 +1268,37 @@
       <translation>เวลาทำงานขั้นต่ำ</translation>
     </message>
     <message id="page_settings_generator_warm_up_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="66"/>
       <source>Warm-up time</source>
       <translation>เวลาอุ่นเครื่อง</translation>
     </message>
     <message id="page_settings_generator_cool_down_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="70"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="77"/>
       <source>Cool-down time</source>
       <translation>เวลาเย็นลง</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_ac_input">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="105"/>
       <source>Detect generator at AC input</source>
       <translation>ตรวจจับเครื่องกำเนิดไฟฟ้าที่อินพุต AC</translation>
     </message>
     <message id="page_settings_generator_detect_generator_not_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="113"/>
       <source>None of the AC inputs is set to generator. Go to the system setup page and set the correct AC input to generator in order to enable this functionality.</source>
       <translation>ไม่มีอินพุต AC ใดถูกตั้งค่าเป็นเครื่องกำเนิด ไปที่หน้าการตั้งค่าระบบและตั้งค่าอินพุต AC ที่ถูกต้องเป็นเครื่องกำเนิดเพื่อเปิดใช้งานฟังก์ชันนี้</translation>
     </message>
     <message id="page_settings_generator_detect_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="117"/>
       <source>An alarm will be triggered when no power from the generator is detected at the inverter AC input. Make sure that the correct AC input is set to generator on the system setup page.</source>
       <translation>สัญญาณเตือนจะทำงานเมื่อตรวจไม่พบพลังงานจากเครื่องกำเนิดไฟฟ้าที่อินพุต AC ของอินเวอร์เตอร์ ตรวจสอบให้แน่ใจว่าได้ตั้งค่าอินพุต AC ที่ถูกต้องเป็นเครื่องกำเนิดในหน้าการตั้งค่าระบบ</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_start_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="162"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="173"/>
       <source>Quiet hours start time</source>
       <translation>เวลาเริ่มต้นชั่วโมงเงียบ</translation>
     </message>
     <message id="page_settings_generator_quiet_hours_end_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="170"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="181"/>
       <source>Quiet hours end time</source>
       <translation>เวลาสิ้นสุดชั่วโมงเงียบ</translation>
     </message>
@@ -1732,7 +1732,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>สัญญาณเตือนประตู</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="559"/>
+      <location filename="../../src/enums.cpp" line="561"/>
       <source>Bilge pump</source>
       <translation>ปั๊มน้ำท้องเรือ</translation>
     </message>
@@ -4842,7 +4842,7 @@ Do you want to continue?</source>
       <translation>ไม่</translation>
     </message>
     <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="781"/>
+      <location filename="../../src/enums.cpp" line="784"/>
       <source>No error</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
@@ -5248,62 +5248,62 @@ Do you want to continue?</source>
       <translation>ไม่พบเฟิร์มแวร์</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="715"/>
+      <location filename="../../src/enums.cpp" line="718"/>
       <source>Fuel</source>
       <translation>เชื้อเพลิง</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="718"/>
+      <location filename="../../src/enums.cpp" line="721"/>
       <source>Fresh water</source>
       <translation>น้ำจืด</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="721"/>
+      <location filename="../../src/enums.cpp" line="724"/>
       <source>Waste water</source>
       <translation>น้ำเสีย</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="724"/>
+      <location filename="../../src/enums.cpp" line="727"/>
       <source>Live well</source>
       <translation>อยู่ดีมีสุข</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="727"/>
+      <location filename="../../src/enums.cpp" line="730"/>
       <source>Oil</source>
       <translation>น้ำมัน</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="730"/>
+      <location filename="../../src/enums.cpp" line="733"/>
       <source>Black water</source>
       <translation>น้ำดำ</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="733"/>
+      <location filename="../../src/enums.cpp" line="736"/>
       <source>Gasoline</source>
       <translation>น้ำมันเบนซิน</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="736"/>
+      <location filename="../../src/enums.cpp" line="739"/>
       <source>Diesel</source>
       <translation>ดีเซล</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="739"/>
+      <location filename="../../src/enums.cpp" line="742"/>
       <source>LPG</source>
       <translation>แอลพีจี</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="742"/>
+      <location filename="../../src/enums.cpp" line="745"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="745"/>
+      <location filename="../../src/enums.cpp" line="748"/>
       <source>Hydraulic oil</source>
       <translation>น้ำมันไฮดรอลิก</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="748"/>
+      <location filename="../../src/enums.cpp" line="751"/>
       <source>Raw water</source>
       <translation>น้ำดิบ</translation>
     </message>
@@ -7118,27 +7118,27 @@ Do you want to continue?</source>
       <translation>วอร์มอัพและคูลดาวน์</translation>
     </message>
     <message id="page_settings_generator_stop_time">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="88"/>
       <source>Generator stop time</source>
       <translation>เวลาหยุดเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="page_settings_generator_detect_generator_at_dc">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="127"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="138"/>
       <source>Alarm if DC generator is not providing power</source>
       <translation>สัญญาณเตือนหากเครื่องกำเนิดไฟฟ้ากระแสตรงไม่จ่ายไฟ</translation>
     </message>
     <message id="page_settings_generator_detect_at_dc_in_generator_set">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="144"/>
       <source>An alarm will be triggered when the DC genset does not reach at least 5A within the first 5 minutes after starting</source>
       <translation>สัญญาณเตือนจะถูกเรียกใช้งานเมื่อเครื่องกำเนิดไฟฟ้า DC ไม่ถึงอย่างน้อย 5A ภายใน 5 นาทีแรกหลังจากเริ่มต้น</translation>
     </message>
     <message id="page_settings_generator_alarm_when_not_in_auto_start">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="152"/>
       <source>Alarm when generator is not in autostart mode</source>
       <translation>แจ้งเตือนเมื่อเครื่องกำเนิดไฟฟ้าไม่อยู่ในโหมดสตาร์ทอัตโนมัติ</translation>
     </message>
     <message id="page_settings_generator_alarm_info">
-      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="158"/>
       <source>An alarm will be triggered when autostart function is left disabled for more than 10 minutes</source>
       <translation>สัญญาณเตือนจะถูกกระตุ้นเมื่อฟังก์ชันสตาร์ทอัตโนมัติถูกปิดใช้งานเป็นเวลานานกว่า 10 นาที</translation>
     </message>
@@ -7934,7 +7934,7 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="562"/>
-      <location filename="../../src/enums.cpp" line="837"/>
+      <location filename="../../src/enums.cpp" line="840"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">ไม่รู้จัก</translation>
@@ -8052,7 +8052,7 @@ Do you want to continue?</source>
       <translation>การควบคุมแบบสัมผัส</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="634"/>
+      <location filename="../../src/enums.cpp" line="636"/>
       <source>Over temperature</source>
       <translation>อุณหภูมิสูง</translation>
     </message>
@@ -8195,7 +8195,7 @@ Do you want to continue?</source>
       <source>Off</source>
       <translation type="unfinished">ปิด</translation>
     </message>
-    <message id="solarchargers_state_external control">
+    <message id="solarchargers_state_external_control">
       <location filename="../../src/enums.cpp" line="452"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
@@ -8236,74 +8236,79 @@ Do you want to continue?</source>
       <translation type="unfinished">ความผิดพลาด</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="524"/>
+      <location filename="../../src/enums.cpp" line="526"/>
       <source>Momentary</source>
       <translation>ชั่วขณะหนึ่ง</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="530"/>
+      <location filename="../../src/enums.cpp" line="532"/>
       <source>Dimmable</source>
       <translation>หรี่แสงได้</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="540"/>
+      <location filename="../../src/enums.cpp" line="542"/>
       <source>Slave of %1</source>
       <translation>ทาสของ %1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="543"/>
+      <location filename="../../src/enums.cpp" line="545"/>
       <source>Slave</source>
       <translation type="unfinished">ตัวรอง</translation>
     </message>
     <message id="switchable_output_function_disabled">
-      <location filename="../../src/enums.cpp" line="582"/>
+      <location filename="../../src/enums.cpp" line="584"/>
       <source>Disabled</source>
       <translation type="unfinished">พิการ</translation>
     </message>
     <message id="switchable_output_function_alarm">
-      <location filename="../../src/enums.cpp" line="585"/>
+      <location filename="../../src/enums.cpp" line="587"/>
       <source>Alarm</source>
       <translation type="unfinished">เตือน</translation>
     </message>
     <message id="switchable_output_function_temperature">
-      <location filename="../../src/enums.cpp" line="597"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Temperature</source>
       <translation type="unfinished">อุณหภูมิ</translation>
     </message>
     <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="627"/>
       <source>Off</source>
       <translation type="unfinished">ปิด</translation>
     </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="628"/>
+      <location filename="../../src/enums.cpp" line="630"/>
       <source>Powered</source>
       <translation>ขับเคลื่อนด้วยพลังงาน</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="631"/>
+      <location filename="../../src/enums.cpp" line="633"/>
       <source>Tripped</source>
       <translation>สะดุดล้ม</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="640"/>
+      <location filename="../../src/enums.cpp" line="642"/>
       <source>Fault</source>
       <translation type="unfinished">ความผิดพลาด</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="646"/>
+      <location filename="../../src/enums.cpp" line="648"/>
       <source>On</source>
       <translation type="unfinished">เปิด</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="649"/>
+      <location filename="../../src/enums.cpp" line="651"/>
       <source>Short</source>
       <translation>สั้น</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="702"/>
+      <location filename="../../src/enums.cpp" line="704"/>
       <source>Not running</source>
       <translation type="unfinished">ไม่ได้ทำงาน</translation>
+    </message>
+    <message id="switchable_output_unknown_status">
+      <location filename="../../src/enums.cpp" line="710"/>
+      <source>Unknown status</source>
+      <translation type="unfinished">สถานะไม่ทราบ</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -9132,8 +9137,8 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>หน้าเรือ</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="573"/>
-      <location filename="../../src/enums.cpp" line="606"/>
+      <location filename="../../src/enums.cpp" line="575"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>Unsupported type: %1</source>
       <translation>ประเภทที่ไม่รองรับ: %1</translation>
     </message>
@@ -9887,7 +9892,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่มี Bluetooth</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="527"/>
+      <location filename="../../src/enums.cpp" line="529"/>
       <source>Toggle</source>
       <translation>สลับ</translation>
     </message>
@@ -10192,27 +10197,27 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เครื่องชาร์จพลังงานลม</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="533"/>
+      <location filename="../../src/enums.cpp" line="535"/>
       <source>Temperature setpoint</source>
       <translation>จุดตั้งอุณหภูมิ</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="536"/>
+      <location filename="../../src/enums.cpp" line="538"/>
       <source>Stepped switch</source>
       <translation>สวิตช์แบบขั้น</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="547"/>
+      <location filename="../../src/enums.cpp" line="549"/>
       <source>Dropdown</source>
       <translation>ดรอปดาวน์</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="550"/>
+      <location filename="../../src/enums.cpp" line="552"/>
       <source>Basic slider</source>
       <translation>แถบเลื่อนพื้นฐาน</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="556"/>
+      <location filename="../../src/enums.cpp" line="558"/>
       <source>Three-state switch</source>
       <translation>สวิตช์สามสถานะ</translation>
     </message>
@@ -10259,7 +10264,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว (รีเลย์ 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="185"/>
       <source>Polarity</source>
       <translation>ขั้ว</translation>
     </message>
@@ -10311,7 +10316,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>VE.Bus BMS จะปิดระบบโดยอัตโนมัติเมื่อจำเป็นเพื่อป้องกันแบตเตอรี่ ดังนั้นจึงไม่สามารถควบคุมระบบจากอุปกรณ์ GX ได้</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="553"/>
+      <location filename="../../src/enums.cpp" line="555"/>
       <source>Numeric input</source>
       <translation>ป้อนข้อมูลตัวเลข</translation>
     </message>
@@ -10337,7 +10342,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>พารามิเตอร์ Microgrid</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="760"/>
+      <location filename="../../src/enums.cpp" line="763"/>
       <source>Hybrid droop</source>
       <translation>Hybrid droop</translation>
     </message>
@@ -10507,7 +10512,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">ต่ำ</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="664"/>
+      <location filename="../../src/enums.cpp" line="666"/>
       <source>Bypassed</source>
       <translation>ข้าม</translation>
     </message>
@@ -10565,18 +10570,18 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่มีการแจ้งเตือนที่เปิดใช้งาน</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="562"/>
+      <location filename="../../src/enums.cpp" line="564"/>
       <source>RGB color wheel</source>
       <translation>วงล้อสี RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="566"/>
+      <location filename="../../src/enums.cpp" line="568"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>วงล้อสี CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="570"/>
+      <location filename="../../src/enums.cpp" line="572"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>วงล้อสี RGB + W</translation>
@@ -10738,7 +10743,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation type="unfinished">ระดับหรี่แสงเริ่มต้น</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="170"/>
       <source>Startup dim level</source>
       <translation>ระดับหรี่แสงเริ่มต้น</translation>
     </message>
@@ -10748,22 +10753,22 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>คืนค่าระดับหรี่แสงจากหน่วยความจำ</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="180"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="190"/>
       <source>Active high / Normally open</source>
       <translation>Active high / ปกติเปิด</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="192"/>
       <source>Active low / Normally closed</source>
       <translation>Active low / ปกติปิด</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="188"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
       <source>Output limit min</source>
       <translation>ขีดจำกัดเอาต์พุตต่ำสุด</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="199"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="209"/>
       <source>Output limit max</source>
       <translation>ขีดจำกัดเอาต์พุตสูงสุด</translation>
     </message>
@@ -10824,52 +10829,52 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>ผสม (AC เป็นวัตต์, DC เป็นแอมป์)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="637"/>
+      <location filename="../../src/enums.cpp" line="639"/>
       <source>Over temp, tripped</source>
       <translation>อุณหภูมิสูงเกิน, ตัด</translation>
     </message>
     <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="652"/>
+      <location filename="../../src/enums.cpp" line="654"/>
       <source>Disabled</source>
       <translation type="unfinished">พิการ</translation>
     </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="655"/>
+      <location filename="../../src/enums.cpp" line="657"/>
       <source>Disabled, tripped</source>
       <translation>ปิดใช้งาน, ตัด</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="658"/>
+      <location filename="../../src/enums.cpp" line="660"/>
       <source>Disabled, over temp</source>
       <translation>ปิดใช้งาน, อุณหภูมิสูงเกิน</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="661"/>
+      <location filename="../../src/enums.cpp" line="663"/>
       <source>Disabled but on</source>
       <translation>ปิดใช้งานแต่เปิดอยู่</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="667"/>
+      <location filename="../../src/enums.cpp" line="669"/>
       <source>Bypassed, tripped</source>
       <translation>บายพาส, ตัด</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="670"/>
+      <location filename="../../src/enums.cpp" line="672"/>
       <source>Bypassed, over temp</source>
       <translation>บายพาส, อุณหภูมิสูงเกิน</translation>
     </message>
     <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="673"/>
+      <location filename="../../src/enums.cpp" line="675"/>
       <source>External control</source>
       <translation type="unfinished">การควบคุมภายนอก</translation>
     </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="676"/>
+      <location filename="../../src/enums.cpp" line="678"/>
       <source>External control, tripped</source>
       <translation>ควบคุมภายนอก, ตัด</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="679"/>
+      <location filename="../../src/enums.cpp" line="681"/>
       <source>External control, over temp</source>
       <translation>ควบคุมภายนอก, อุณหภูมิสูงเกิน</translation>
     </message>
@@ -11133,22 +11138,22 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>เปิดใช้งาน Link-local</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="688"/>
+      <location filename="../../src/enums.cpp" line="690"/>
       <source>Running, over temperature</source>
       <translation>กำลังทำงาน, อุณหภูมิสูงเกินไป</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="691"/>
+      <location filename="../../src/enums.cpp" line="693"/>
       <source>Running, disabled</source>
       <translation>กำลังทำงาน, ถูกปิดใช้งาน</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="694"/>
+      <location filename="../../src/enums.cpp" line="696"/>
       <source>Running</source>
       <translation type="unfinished">ทำงาน</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="699"/>
+      <location filename="../../src/enums.cpp" line="701"/>
       <source>Not running, disabled</source>
       <translation>ไม่ได้ทำงาน, ถูกปิดใช้งาน</translation>
     </message>
@@ -11163,107 +11168,107 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>ระบบอัตโนมัติสำหรับอุปกรณ์ที่ควบคุมได้เพื่อเพิ่มการใช้พลังงานแสงอาทิตย์ด้วยตนเองให้สูงสุด</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="763"/>
+      <location filename="../../src/enums.cpp" line="766"/>
       <source>EMS Control: Hybrid droop</source>
       <translation>การควบคุม EMS: Hybrid droop</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="767"/>
+      <location filename="../../src/enums.cpp" line="770"/>
       <source>EMS Control: Grid-following</source>
       <translation>การควบคุม EMS: Grid-following</translation>
     </message>
     <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="770"/>
+      <location filename="../../src/enums.cpp" line="773"/>
       <source>EMS Control: Grid-forming</source>
       <translation>การควบคุม EMS: Grid-forming</translation>
     </message>
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="784"/>
+      <location filename="../../src/enums.cpp" line="787"/>
       <source>Different fallback hybrid droop values in phase masters</source>
       <translation>ค่า Hybrid droop สำรองที่แตกต่างกันใน phase master</translation>
     </message>
     <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="787"/>
+      <location filename="../../src/enums.cpp" line="790"/>
       <source>Hybrid droop parameter write failed</source>
       <translation>เขียนพารามิเตอร์ Hybrid droop ล้มเหลว</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="790"/>
+      <location filename="../../src/enums.cpp" line="793"/>
       <source>Parameter error Fmin &gt; Fmax</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Fmin &gt; Fmax</translation>
     </message>
     <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="793"/>
+      <location filename="../../src/enums.cpp" line="796"/>
       <source>Parameter error Pmin &gt; Pmax</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Pmin &gt; Pmax</translation>
     </message>
     <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="796"/>
+      <location filename="../../src/enums.cpp" line="799"/>
       <source>Parameter error Umin &gt; Umax</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Umin &gt; Umax</translation>
     </message>
     <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="799"/>
+      <location filename="../../src/enums.cpp" line="802"/>
       <source>Parameter error Qmin &gt; Qmax</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Qmin &gt; Qmax</translation>
     </message>
     <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="802"/>
+      <location filename="../../src/enums.cpp" line="805"/>
       <source>Parameter error Q0 out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Q0 อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="805"/>
+      <location filename="../../src/enums.cpp" line="808"/>
       <source>Parameter error Qmin out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Qmin อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="808"/>
+      <location filename="../../src/enums.cpp" line="811"/>
       <source>Parameter error Qmax out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Qmax อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="811"/>
+      <location filename="../../src/enums.cpp" line="814"/>
       <source>Parameter error U0 out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ U0 อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="814"/>
+      <location filename="../../src/enums.cpp" line="817"/>
       <source>Parameter error U droop out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ U droop อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="817"/>
+      <location filename="../../src/enums.cpp" line="820"/>
       <source>Parameter error P0 out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ P0 อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="820"/>
+      <location filename="../../src/enums.cpp" line="823"/>
       <source>Parameter error Pmin out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Pmin อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="823"/>
+      <location filename="../../src/enums.cpp" line="826"/>
       <source>Parameter error Pmax out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ Pmax อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="826"/>
+      <location filename="../../src/enums.cpp" line="829"/>
       <source>Parameter error F0 out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ F0 อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="829"/>
+      <location filename="../../src/enums.cpp" line="832"/>
       <source>Parameter error freq droop out of range</source>
       <translation>ข้อผิดพลาดของพารามิเตอร์ freq droop อยู่นอกช่วง</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="832"/>
+      <location filename="../../src/enums.cpp" line="835"/>
       <source>Ve.Bus internal error PF vs FP data mismatch</source>
       <translation>ข้อผิดพลาดภายใน Ve.Bus ความไม่ตรงกันของข้อมูล PF vs FP</translation>
     </message>
     <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="835"/>
+      <location filename="../../src/enums.cpp" line="838"/>
       <source>Ve.Bus internal error QU vs UQ data mismatch</source>
       <translation>ข้อผิดพลาดภายใน Ve.Bus ความไม่ตรงกันของข้อมูล QU vs UQ</translation>
     </message>
@@ -11288,17 +11293,17 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>ตัวบ่งชี้อุณหภูมิ</translation>
     </message>
     <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="588"/>
+      <location filename="../../src/enums.cpp" line="590"/>
       <source>Generator start/stop</source>
       <translation>เครื่องกำเนิดไฟฟ้าเริ่มต้น/หยุด</translation>
     </message>
     <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="600"/>
+      <location filename="../../src/enums.cpp" line="602"/>
       <source>Genset Helper</source>
       <translation>Genset Helper</translation>
     </message>
     <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="603"/>
+      <location filename="../../src/enums.cpp" line="605"/>
       <source>Opportunity load</source>
       <translation>โหลดโอกาส</translation>
     </message>
@@ -11448,6 +11453,33 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
       <source>Apply</source>
       <translation>นำไปใช้</translation>
+    </message>
+    <message id="page_settings_generator_warm_up_cool_down_unavailable_message">
+      <location filename="../../pages/settings/PageSettingsGenerator.qml" line="60"/>
+      <source>Warm-up &amp; cool-down is unavailable with the current inverter/charger firmware. 
+Please update to the latest firmware to be able to adjust these settings.</source>
+      <translation>ไม่สามารถใช้งานฟังก์ชันอุ่นเครื่องและระบายความร้อนได้เนื่องจากเฟิร์มแวร์อินเวอร์เตอร์/ชาร์จเจอร์ปัจจุบัน 
+โปรดอัปเดตเป็นเฟิร์มแวร์ล่าสุดเพื่อปรับการตั้งค่าเหล่านี้</translation>
+    </message>
+    <message id="generic_input_unknown_status">
+      <location filename="../../src/enums.cpp" line="518"/>
+      <source>Unknown status</source>
+      <translation>สถานะไม่ทราบ</translation>
+    </message>
+    <message id="page_switchable_output_set_dim_level_manually">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
+      <source>Set startup dim level manually</source>
+      <translation>ตั้งค่าระดับความสว่างเริ่มต้นด้วยตนเอง</translation>
+    </message>
+    <message id="main_system_service_settings_offline_warning">
+      <location filename="../../Main.qml" line="207"/>
+      <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
+      <translation>คำเตือน: ตรวจพบว่าบริการ localsettings ออฟไลน์ กำลังโหลด UI ใหม่อีกครั้งเมื่อพร้อมใช้งาน...</translation>
+    </message>
+    <message id="main_system_service_platform_offline_warning">
+      <location filename="../../Main.qml" line="228"/>
+      <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
+      <translation>คำเตือน: ตรวจพบว่าบริการ venus-platform ออฟไลน์ กำลังโหลด UI ใหม่อีกครั้งเมื่อพร้อมใช้งาน...</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
