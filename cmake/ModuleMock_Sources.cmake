@@ -10,6 +10,7 @@ set(VictronMock_QML_MODULE_SOURCES
     data/mock/MotorDrivesImpl.qml
     data/mock/MockNotification.qml
     data/mock/NotificationsImpl.qml
+    data/mock/PlatformImpl.qml
     data/mock/SolarInputsImpl.qml
     data/mock/SystemAcImpl.qml
     data/mock/SystemDcImpl.qml
