@@ -48,8 +48,8 @@ ModalDialog {
 		passwordHint.text = ""
 	}
 
-	//% "Changing the GX Password"
-	title: qsTrId("settings_security_profile_change_password_title")
+	//% "Change the GX Password"
+	title: qsTrId("settings_security_profile_change_gx_password")
 
 	//% "Confirm"
 	acceptText: qsTrId("modaldialog_confirm")
