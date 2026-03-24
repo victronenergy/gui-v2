@@ -1,6 +1,6 @@
+qt_add_library(VictronMock STATIC)
 qt_add_qml_module(VictronMock
     URI Victron.Mock
-    STATIC
     OUTPUT_DIRECTORY Victron/Mock
     QML_FILES ${VictronMock_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}

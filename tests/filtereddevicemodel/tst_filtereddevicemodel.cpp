@@ -4,17 +4,11 @@
 */
 
 #include <QtQuickTest/quicktest.h>
-#include <QtQml/QQmlEngine>
-#include "filtereddevicemodel.h"
 #include "backendconnection.h"
-#include "mockmanager.h"
 
-int main(int argc, char **argv) \
+int main(int argc, char **argv)
 {
-    qmlRegisterType<Victron::VenusOS::FilteredDeviceModel>("Victron.VenusOS", 2, 0, "FilteredDeviceModel");
-    qmlRegisterType<Victron::VenusOS::MockManager>("Victron.VenusOS", 2, 0, "MockManager");
-
     QTEST_SET_MAIN_SOURCE_PATH
     Victron::VenusOS::BackendConnection::create()->setType(Victron::VenusOS::BackendConnection::MockSource);
-    return quick_test_main(argc, argv, "tst_filtereddevicemodel", nullptr);
+    return quick_test_main(argc, argv, "tst_filtereddevicemodel", "../tests/filtereddevicemodel/");
 }

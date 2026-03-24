@@ -643,6 +643,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/backendconnection.cpp
     src/language.h
     src/language.cpp
+    src/logging.h
+    src/logging.cpp
     src/enums.h
     src/enums.cpp
     src/fastutils.h
@@ -702,6 +704,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/systemservicelistener.cpp
     src/switchableoutput.h
     src/switchableoutput.cpp
+    src/veqitemmockproducer.h
+    src/veqitemmockproducer.cpp
     src/widgetconnectorpathupdater.h
     src/widgetconnectorpathupdater.cpp
 )

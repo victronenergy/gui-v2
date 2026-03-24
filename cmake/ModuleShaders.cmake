@@ -1,8 +1,8 @@
+qt_add_library(VictronVenusOSShaders STATIC)
 qt_add_qml_module(VictronVenusOSShaders
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS.Shaders
     VERSION 2.0
-    STATIC
     OUTPUT_DIRECTORY Victron/VenusOS/Shaders
     QML_FILES ${VictronVenusOSShaders_QML_MODULE_SOURCES}
 )
