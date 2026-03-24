@@ -3,6 +3,8 @@
  * See LICENSE.txt for license information.
 */
 
+import QtQuick
+import Victron.VenusOS
 import QtTest
 
 TestCase {

@@ -1,6 +1,6 @@
+qt_add_library(VictronGauges STATIC)
 qt_add_qml_module(VictronGauges
     URI Victron.Gauges
-    STATIC
     OUTPUT_DIRECTORY Victron/Gauges
     QML_FILES ${VictronGauges_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}

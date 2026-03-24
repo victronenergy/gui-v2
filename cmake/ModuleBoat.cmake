@@ -1,6 +1,6 @@
+qt_add_library(VictronBoat STATIC)
 qt_add_qml_module(VictronBoat
     URI Victron.Boat
-    STATIC
     OUTPUT_DIRECTORY Victron/Boat
     QML_FILES ${VictronBoat_QML_MODULE_SOURCES}
     ${QML_MODULE_OPTARGS}

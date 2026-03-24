@@ -4,13 +4,9 @@
 */
 
 #include <QtQuickTest/quicktest.h>
-#include <QtQml/QQmlEngine>
-#include "basetankdevice.h"
 
-int main(int argc, char **argv) \
+int main(int argc, char **argv)
 {
-    qmlRegisterType<Victron::VenusOS::BaseTankDevice>("Victron.VenusOS", 2, 0, "BaseTankDevice");
-
     QTEST_SET_MAIN_SOURCE_PATH
-    return quick_test_main(argc, argv, "tst_basetankdevice", nullptr);
+    return quick_test_main(argc, argv, "tst_basetankdevice", "../tests/basetankdevice/");
 }

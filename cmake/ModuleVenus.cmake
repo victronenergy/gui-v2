@@ -1,8 +1,8 @@
+qt_add_library(VictronVenusOS STATIC)
 qt_add_qml_module(VictronVenusOS
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
     VERSION 2.0
-    STATIC
     IMPORTS QtQuick.Controls.Basic
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VictronVenusOS_QML_MODULE_SOURCES}
@@ -15,6 +15,9 @@ qt_add_resources(VictronVenusOS "VictronVenusOS_large_resources"
 )
 
 target_include_directories(VictronVenusOS PRIVATE src/veutil/inc/veutil/qt)
+target_include_directories(VictronVenusOS PUBLIC ${PROJECT_SOURCE_DIR}/src
+                                                 ${PROJECT_SOURCE_DIR}/src/veutil/inc
+                                                 ${PROJECT_SOURCE_DIR}/src/veutil/inc/veutil/qt)
 
 target_link_libraries(VictronVenusOS PRIVATE
     Qt6::Core
