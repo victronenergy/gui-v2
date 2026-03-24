@@ -52,6 +52,12 @@ Page {
 			}
 
 			ListNavigation {
+				//% "MQTT Devices"
+				text: qsTrId("pagesettingsintegrations_mqtt_devices")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsMqttDevices.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Shelly Devices"
 				text: qsTrId("pagesettingsintegrations_shelly_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShelly.qml", {"title": text})
