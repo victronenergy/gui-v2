@@ -15,12 +15,15 @@ QtObject {
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
 
 	readonly property AcInput highlightedInput: {
-		if (_activeInSource.valid || _activeInServiceType.valid) {
+		const hasActiveInSource = _activeInSource.valid
+				&& _activeInSource.value !== VenusOS.AcInputs_InputSource_NotAvailable
+				&& _activeInSource.value !== VenusOS.AcInputs_InputSource_Inverting
+		if (hasActiveInSource || _activeInServiceType.valid) {
 			// Normally system /Ac/ActiveIn/Source provides the AC input source, and this is matched
 			// against /Ac/In/<0|1>/Source to see whether AC-in 0 or AC-in 1 is the active input.
 			// If that path is not set, then as a backup, try to match /Ac/ActiveIn/ServiceType
 			// against /Ac/In/<0|1>/ServiceType to determine the active input.
-			if (_activeInSource.valid) {
+			if (hasActiveInSource) {
 				return input1?.source === _activeInSource.value ? input1
 						: input2?.source === _activeInSource.value ? input2
 						: null
