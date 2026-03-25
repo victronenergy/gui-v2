@@ -10,113 +10,10 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	component Arrow: Button {
-		flat: false
-		icon.source: "qrc:/images/icon_arrow.svg"
-		width: Theme.geometry_button_height
-		height: Theme.geometry_button_height
-	}
+	VeQuickItem {
+		id: mode
 
-	component DevicePriorityListNavigation: ListNavigation {
-		id: devicePriorityDelegate
-
-		property string serviceType
-		property int deviceInstance: -1
-		property string uniqueIdentifier
-		readonly property FilteredDeviceModel devices: serviceType === "acload" ? acLoadDevices
-				: serviceType === "evcharger" ? evcsDevices
-				: null
-		readonly property Device device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
-		readonly property string pageSource: {
-			switch (serviceType) {
-			case "battery":
-				return "/pages/settings/PageControllableLoadsBattery.qml"
-			case "acload":
-				return "/pages/settings/PageControllableLoadsAcLoad.qml"
-			case "evcharger":
-				return "/pages/settings/PageControllableLoadsEVCS.qml"
-			default:
-				console.warn("Controllable Loads: Invalid service type.")
-				return ""
-			}
-		}
-
-		property alias text: primary.text
-
-		Label {
-			id: priorityLabel
-
-			anchors {
-				verticalCenter: parent.verticalCenter
-				right: parent.left
-				rightMargin: 2
-			}
-
-			horizontalAlignment: Text.AlignHCenter
-			width: Theme.geometry_priorityLabel_width
-			color: Theme.color_font_disabled
-			font.pixelSize: Theme.font_size_body1
-			text: index + 1
-		}
-
-		anchors {
-			left: parent.left
-			leftMargin: Theme.geometry_priorityLabel_width
-			right: parent.right
-		}
-
-		onClicked: Global.pageManager.pushPage(devicePriorityDelegate.pageSource,
-											   ({
-													"title": devicePriorityDelegate.text,
-													"device": devicePriorityDelegate.device
-												})
-											   )
-		interactive: serviceType !== "evcharger" // TODO: remove this once backend supports "evcs maximum charging power limit".
-
-		Arrow {
-			id: upArrow
-
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_opportunityLoad_margin
-				verticalCenter: parent.verticalCenter
-			}
-			enabled: index !== 0
-			onClicked: {
-				opportunityLoadsModel.move(index, index - 1, 1)
-				opportunityLoadsModel.writeToBackEnd()
-			}
-		}
-
-		Arrow {
-			id: downArrow
-
-			anchors {
-				left: upArrow.right
-				leftMargin: Theme.geometry_opportunityLoad_margin
-				verticalCenter: parent.verticalCenter
-			}
-			enabled: index !== (opportunityLoadsModel.count - 1)
-			rotation: 180
-			onClicked: {
-				opportunityLoadsModel.move(index + 1, index, 1)
-				opportunityLoadsModel.writeToBackEnd()
-			}
-		}
-
-		Label {
-			id: primary
-
-			anchors {
-				left: downArrow.right
-				leftMargin: Theme.geometry_listItem_content_horizontalMargin
-				verticalCenter: parent.verticalCenter
-			}
-			font.pixelSize: Theme.font_size_body2
-			wrapMode: Text.Wrap
-			text: devicePriorityDelegate?.serviceType === "battery" ? CommonWords.battery
-				: devicePriorityDelegate?.device?.name || devicePriorityDelegate?.uniqueIdentifier || ""
-		}
+		uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
 	}
 
 	GradientListView {
@@ -130,17 +27,48 @@ Page {
 			}
 
 			SettingsListHeader {
-				//% "Devices and Priorities"
-				text: qsTrId("pagecontrollableloads_devices_and_priorities")
+				text: mode.value && loads.valid ?
+						  //% "Devices and Priorities"
+						  qsTrId("pagecontrollableloads_devices_and_priorities") :
+						  //% "Starting, this may take a few seconds..."
+						  qsTrId("pagecontrollableloads_starting")
+				visible: mode.value
 			}
 		}
 
-		model: opportunityLoadsModel
+		model: mode.value && loads.valid ? opportunityLoadsModel : []
 		delegate: DevicePriorityListNavigation {
 			serviceType: model.serviceType
 			deviceInstance: model.deviceInstance
 			uniqueIdentifier: model.uniqueIdentifier
 		}
+
+		Column {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
+					// which animate up & down by clicking the up & down arrows.
+			y: -parent.contentY
+			spacing: parent.spacing
+
+			Repeater {
+				model: parent.parent.model
+				delegate: ListItem {
+					width: label.width
+					background.color: "transparent"
+					Label {
+						id: label
+
+						anchors{
+							left: parent.left
+							leftMargin: Theme.geometry_listItem_content_horizontalMargin
+							verticalCenter: parent.verticalCenter
+						}
+						text: index + 1
+						color: Theme.color_font_disabled
+						font.pixelSize: Theme.font_size_body1
+					}
+				}
+			}
+		}
+
 		move: Transition {
 			enabled: Global.animationEnabled
 			NumberAnimation {
@@ -158,19 +86,34 @@ Page {
 			}
 		}
 
-		footer: SettingsListHeader {
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_priorityLabel_width
-				right: parent.right
-				rightMargin: Theme.geometry_priorityLabel_width
+		footer: SettingsColumn {
+			width: parent?.width ?? 0
+
+			SettingsListHeader {
+				anchors {
+					left: parent.left
+					leftMargin: Theme.geometry_priorityLabel_width
+					right: parent.right
+					rightMargin: Theme.geometry_priorityLabel_width
+				}
+
+				//% "Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess."
+				text: qsTrId("pagecontrollableloads_arrange")
+				font.pixelSize: Theme.font_size_caption
+				width: parent?.width ?? 0
+				wrapMode: Text.Wrap
+				visible: mode.value
 			}
 
-			//% "Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess."
-			text: qsTrId("pagecontrollableloads_arrange")
-			font.pixelSize: Theme.font_size_caption
-			width: parent?.width ?? 0
-			wrapMode: Text.Wrap
+			ListLink {
+				id: documentation
+
+				//% "Documentation"
+				text: qsTrId("pagecontrollableloads_documentation")
+				//% "Access the documentation by scanning the QR code with your portable device.\nOr insert the link: http://ve4.nl/ol"
+				captionLabel.text: qsTrId("pagecontrollableloads_access_the_documentation")
+				url: "http://ve4.nl/ol"
+			}
 		}
 	}
 
@@ -229,15 +172,5 @@ Page {
 				opportunityLoadsModel.remove(jsv.length, opportunityLoadsModel.count - jsv.length)
 			}
 		}
-	}
-
-	FilteredDeviceModel {
-		id: acLoadDevices
-		serviceTypes: ["acload"]
-	}
-
-	FilteredDeviceModel {
-		id: evcsDevices
-		serviceTypes: ["evcharger"]
 	}
 }

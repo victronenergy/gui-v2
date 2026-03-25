@@ -41,6 +41,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/DeviceListDelegate.qml
     components/DeviceListPluginPage.qml
     components/DevicePage.qml
+    components/DevicePriorityListNavigation.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
     components/EmptyPageItem.qml
