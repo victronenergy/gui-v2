@@ -156,7 +156,7 @@ Page {
 								model: QuantityObjectModel {
 									filterType: QuantityObjectModel.HasValue
 
-									QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC }
+									QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; precision: 3 }
 									QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
 								}
 								preferredVisible: cellVoltage.valid
