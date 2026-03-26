@@ -422,14 +422,13 @@ int main(int argc, char *argv[])
 	QSurfaceFormat surfaceFormat;
 	surfaceFormat.setDepthBufferSize(24);
 	surfaceFormat.setStencilBufferSize(8);
-#if defined(VENUS_GX_BUILD_ARM) || defined(VENUS_WEBASSEMBLY_BUILD)
-	// CerboGX and WASM don't support multisample render buffers; other platforms do.
-	surfaceFormat.setSamples(-1);
-	Victron::VenusOS::BackendConnection::create()->setMsaaEnabled(false);
+#if defined(VENUS_GX_BUILD_ARM)
+	surfaceFormat.setSamples(1); // work around QTBUG-120474: CerboGX devices report supporting 4 samples, but do not.
 #else
 	surfaceFormat.setSamples(4);
 #endif
 	QSurfaceFormat::setDefaultFormat(surfaceFormat);
+
 #if defined(VENUS_GX_BUILD_AARCH64)
 	// Shader disk cache doesn't work properly on new hardware.
 	QCoreApplication::setAttribute(Qt::AA_DisableShaderDiskCache);
@@ -536,25 +535,24 @@ int main(int argc, char *argv[])
 
 	/* Write to window properties here to perform any additional initialization
 	   before initial binding evaluation. */
+	window->create(); // force resolving the surface format
+	Victron::VenusOS::BackendConnection::create(&engine)->setMsaaEnabled(window->requestedFormat().samples() > 1 && window->format().samples() > 1);
+
+	/* Trigger initial evaluation of bindings whose result may depend on e.g. whether msaa is enabled */
 	component.completeCreate();
 
 	if (skipSplashScreen) {
 		QMetaObject::invokeMethod(window, "skipSplashScreen");
 	}
 
-#if defined(VENUS_DESKTOP_BUILD)
-	const bool desktop(true);
-#else
-	const bool desktop(false);
-#endif
-
 	window->setProperty("scaleFactor", scaleFactor);
-	if (desktop) {
-		window->setProperty("isDesktop", true);
-		window->show();
-	} else {
-		window->showFullScreen();
-	}
+
+#if defined(VENUS_DESKTOP_BUILD)
+	window->setProperty("isDesktop", true);
+	window->show();
+#else
+	window->showFullScreen();
+#endif
 
 	return app.exec();
 }
