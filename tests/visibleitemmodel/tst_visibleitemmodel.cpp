@@ -4,13 +4,9 @@
 */
 
 #include <QtQuickTest/quicktest.h>
-#include <QtQml/QQmlEngine>
-#include "visibleitemmodel.h"
 
-int main(int argc, char **argv) \
+int main(int argc, char **argv)
 {
-    qmlRegisterType<Victron::VenusOS::VisibleItemModel>("Victron.VenusOS", 2, 0, "VisibleItemModel");
-
     QTEST_SET_MAIN_SOURCE_PATH
-    return quick_test_main(argc, argv, "tst_visibleitemmodel", nullptr);
+    return quick_test_main(argc, argv, "tst_visibleitemmodel", "../tests/visibleitemmodel/");
 }

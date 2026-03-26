@@ -32,6 +32,7 @@ add_definitions(-DPROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR} -DPROJECT_VERSI
 
 option(NO_CACHEGEN "Enable bytecode compilation and lint processing for all qml files via cmake -NO_CACHEGEN=OFF" ON) # Enabled by default
 option(RUN_UNIT_TESTS "only affects desktop builds. Enable via cmake -DRUN_UNIT_TESTS=ON" OFF) # Disabled by default
+option(GUI_V2_BUILD "Disable via cmake -DGUI_V2_BUILD=OFF for unit test only build (for CI/CD)" ON) # Enabled by default
 
 include(cmake/BuildDefines.cmake)
 include(cmake/BuildRequirements.cmake)
@@ -64,23 +65,32 @@ include(cmake/ModuleGauges.cmake)
 include(cmake/ModuleBoat.cmake)
 include(cmake/ModuleMock.cmake)
 
-include(cmake/QZXing.cmake)
-include(cmake/GuiV2.cmake)
+if(VENUS_GUI_V2_TESTS_ENABLED)
+    add_subdirectory(tests)
+endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    VictronVenusOSplugin
-    VictronVenusOSShadersplugin
-    VictronGaugesplugin
-    VictronBoatplugin
-    VictronMockplugin
-    qzxing
-)
-
-include(cmake/RunTests.cmake)
-
-add_dependencies(generate_translation_sources_file theme_parser)
-add_dependencies(${PROJECT_NAME} theme_parser)
-# Note: ${PROJECT_NAME} depends on ${BUILD_DIR_QM_FILES} via the qt_add_resources() in GuiV2.cmake
+if ("${GUI_V2_BUILD}" STREQUAL "ON")
+    include(cmake/QZXing.cmake)
+    include(cmake/GuiV2.cmake)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        VictronVenusOS
+        VictronVenusOSplugin
+        VictronVenusOSShaders
+        VictronVenusOSShadersplugin
+        VictronGauges
+        VictronGaugesplugin
+        VictronBoat
+        VictronBoatplugin
+        VictronMock
+        VictronMockplugin
+        qzxing
+    )
+    qt_import_qml_plugins(${PROJECT_NAME})
+    add_dependencies(generate_translation_sources_file theme_parser)
+    add_dependencies(${PROJECT_NAME} theme_parser)
+    # Note: ${PROJECT_NAME} depends on ${BUILD_DIR_QM_FILES} via the qt_add_resources() in GuiV2.cmake
+    include(cmake/RunTests.cmake)
+endif()
 
 # to visualise the dependency graph, do the following:
 # $ cmake --graphviz=dependencies.dot ../gui-v2/

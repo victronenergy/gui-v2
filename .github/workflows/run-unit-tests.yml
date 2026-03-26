@@ -86,7 +86,7 @@ jobs:
         run: |
           export QTDIR=${{env.OUTPUTDIR}}/Qt/$QT_VERSION/gcc_64
           mkdir build && cd build
-          ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ../tests
+          ${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGUI_V2_BUILD=OFF ..
 
       - name: Build unit tests
         run: |

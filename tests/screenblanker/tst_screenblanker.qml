@@ -3,8 +3,9 @@
  * See LICENSE.txt for license information.
 */
 
-import QtTest
+import QtQuick
 import Victron.VenusOS
+import QtTest
 
 TestCase {
 	name: "ScreenBlanker"
@@ -31,7 +32,7 @@ TestCase {
 
 		// Wait for the display off timeout to blank the screen
 		let startTime = new Date()
-		wait(90)
+		wait(80)
 		tryCompare(blanker, "blanked", false)
 
 		// Wait a bit more
@@ -39,7 +40,7 @@ TestCase {
 		let endTime = new Date();
 
 		// Check the timeout roughly follows the display off time
-		fuzzyCompare(blanker.displayOffTime, endTime - startTime, 50)
+		fuzzyCompare(endTime - startTime, blanker.displayOffTime, 50)
 		console.log("timeout", endTime - startTime)
 
 		// Manually turn the display on

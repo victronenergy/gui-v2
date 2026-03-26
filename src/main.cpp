@@ -38,7 +38,6 @@
 
 #include "themeobjects.h"
 #include "QZXing.h"
-Q_LOGGING_CATEGORY(venusGui, "venus.gui")
 
 namespace {
 
