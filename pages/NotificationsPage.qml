@@ -15,8 +15,25 @@ SwipeViewPage {
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: notificationsView.count > 0 ? Qt.TabFocus : Qt.NoFocus
 
+	SilenceAlarmButton {
+		id: portraitSilenceButton
+
+		anchors.top: notificationsView.bottom
+		width: notificationsView.width
+		leftInset: Theme.geometry_listItem_content_horizontalMargin
+		rightInset: Theme.geometry_listItem_content_horizontalMargin
+		topInset: Theme.geometry_listItem_content_verticalMargin
+		bottomInset: Theme.geometry_listItem_content_verticalMargin
+		visible: enabled && Theme.screenSize === Theme.Portrait
+		enabled: Global.mainView?.notificationButtonsEnabled
+
+		onClicked: NotificationModel.acknowledgeAll()
+	}
+
 	GradientListView {
 		id: notificationsView
+
+		height: parent.height - (portraitSilenceButton.visible ? portraitSilenceButton.height : 0)
 
 		// prevent the nav bar buttons from clicking the notifications when it is shown
 		// over the top of the notificationsView

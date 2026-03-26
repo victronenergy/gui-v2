@@ -62,10 +62,10 @@ Item {
 			leftMargin: Theme.geometry_toastNotification_horizontalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_toastNotification_horizontalMargin
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_toastNotification_bottomMargin
 		}
-
+		// Use y binding instead of anchors so that it adjusts for portrait/landscape changes.
+		y: Theme.screenSize === Theme.Portrait ? Theme.geometry_toastNotification_verticalMargin
+				: parent.height - height - Theme.geometry_toastNotification_verticalMargin
 		height: 2*Theme.geometry_toastNotification_minHeight
 		spacing: Theme.geometry_toastNotification_horizontalMargin
 		orientation: Qt.Horizontal
@@ -120,7 +120,7 @@ Item {
 			}
 
 			ToastNotification {
-				y: parent.height - height
+				y: Theme.screenSize === Theme.Portrait ? 0 : parent.height - height
 
 				height: implicitHeight
 				width: parent.width

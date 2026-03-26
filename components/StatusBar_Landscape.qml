@@ -248,37 +248,23 @@ FocusScope {
 		KeyNavigation.right: alarmButton
 	}
 
-	NotificationButton {
+	SilenceAlarmButton {
 		id: alarmButton
 
 		anchors {
 			left: notificationButton.right
+			right: rightButtonRow.left
 			verticalCenter: parent.verticalCenter
 		}
 		// Expand clickable area on horizontal and bottom edges.
 		leftInset: Theme.geometry_statusBar_spacing / 2
-		leftPadding: leftInset + Theme.geometry_silenceAlarmButton_horizontalPadding
 		rightInset: Theme.geometry_statusBar_spacing / 2
-		rightPadding: rightInset + Theme.geometry_silenceAlarmButton_horizontalPadding
 		topInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
-
 		enabled: Global.mainView?.notificationButtonsEnabled
-		flat: false
-		backgroundColor: down ? Theme.color_critical : Theme.color_critical_background
-		borderWidth: 0
-		// ensure highlight border can be seen against critical backgroundColor
-		KeyNavigationHighlight.margins: -(4 * Theme.geometry_button_border_width)
-		icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
-		text: CommonWords.silence_alarm
+		visible: enabled
 
 		onClicked: NotificationModel.acknowledgeAll()
-
-		Binding {
-			target: Global.notifications ?? null
-			property: "notificationButtonVisible"
-			value: alarmButton.enabled || alarmButton.animating
-		}
 	}
 
 	Row {
