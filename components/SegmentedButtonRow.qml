@@ -16,6 +16,10 @@ FocusScope {
 
 	signal buttonClicked(buttonIndex: int)
 
+	function clickButton(index) {
+		buttonRepeater.itemAt(index).click()
+	}
+
 	implicitWidth: parent.width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
 
