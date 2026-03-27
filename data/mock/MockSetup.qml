@@ -21,6 +21,7 @@ Item {
 	MiscServicesImpl {}
 	MotorDrivesImpl {}
 	NotificationsImpl {}
+	PlatformImpl {}
 	SolarInputsImpl {}
 	SystemAcImpl {}
 	SystemDcImpl {}

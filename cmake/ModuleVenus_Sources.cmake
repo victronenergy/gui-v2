@@ -425,6 +425,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsModbusDiscovered.qml
     pages/settings/PageSettingsModbusTcp.qml
     pages/settings/PageSettingsModbusTcpServices.qml
+    pages/settings/PageSettingsMqttDevices.qml
     pages/settings/PageSettingsNodeRed.qml
     pages/settings/PageSettingsRelay.qml
     pages/settings/PageSettingsRelayTempSensors.qml

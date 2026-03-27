@@ -36,6 +36,7 @@
         "/ProductName": "EVSE",
         "/RefreshTime": 600,
         "/Role": "evcharger",
+        "/Serial": "EVCS1002",
         "/Session/Time": null,
         "/Status": 1
     }
