@@ -317,6 +317,23 @@ TestCase {
 		compare(quantity.unit, "GWh")
 	}
 
+	function test_unitFormatHints() {
+		const unit = VenusOS.Units_Altitude_Metre
+		var quantity = Units.getDisplayText(unit, 19.5678)
+		compare(quantity.number, "20")
+		compare(quantity.unit, "m")
+
+		// default internal scaling algorithm ignores passed function parameters
+		quantity = Units.getDisplayText(unit, 19.5678, 2)
+		compare(quantity.number, "19.6")
+		compare(quantity.unit, "m")
+
+		// force internal scaling algorithm to adhere to function parameters
+		quantity = Units.getDisplayText(unit, 19.5678, 4, Units.NoDecimalAdjustment)
+		compare(quantity.number, "19.5678")
+		compare(quantity.unit, "m")
+	}
+
 	function test_precision() {
 		const unit = VenusOS.Units_Watt
 		var quantity = Units.getDisplayText(unit, 1.9612345)
