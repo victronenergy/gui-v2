@@ -311,9 +311,26 @@ TestCase {
 		compare(quantity.unit, "TWh")
 
 		// choose scale based on different anchor value
-		quantity = Units.getDisplayText(unit, 19567890123, -1, true, 123456789)
+		quantity = Units.getDisplayText(unit, 19567890123, -1, Units.NoFormatHints, 123456789)
 		compare(quantity.number, "19568")
 		compare(quantity.unit, "GWh")
+	}
+
+	function test_unitFormatHints() {
+		const unit = VenusOS.Units_Altitude_Metre
+		var quantity = Units.getDisplayText(unit, 19.5678)
+		compare(quantity.number, "20")
+		compare(quantity.unit, "m")
+
+		// default internal scaling algorythm ignores passed function parameters
+		quantity = Units.getDisplayText(unit, 19.5678, 2)
+		compare(quantity.number, "19.6")
+		compare(quantity.unit, "m")
+
+		// force internal scaling algorythm to adhere to function parameters
+		quantity = Units.getDisplayText(unit, 19.5678, 4, Units.NoDecimalAdjustment)
+		compare(quantity.number, "19.5678")
+		compare(quantity.unit, "m")
 	}
 
 	function test_precision() {

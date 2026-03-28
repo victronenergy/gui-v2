@@ -43,7 +43,7 @@ DevicePage {
 			dataItem.uid: bindPrefix + "/Irradiance"
 			value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1).number
 			unit: VenusOS.Units_WattsPerSquareMetre
-			precision: 1
+			decimals: 1
 		}
 
 		ListTemperature {
@@ -51,7 +51,7 @@ DevicePage {
 			text: qsTrId("page_meteo_cell_temperature")
 			preferredVisible: dataItem.valid
 			dataItem.uid: bindPrefix + "/CellTemperature"
-			precision: 1
+			decimals: 1
 		}
 
 		ListTemperature {
@@ -62,7 +62,7 @@ DevicePage {
 				: qsTrId("page_meteo_external_temperature")
 			preferredVisible: dataItem.valid
 			dataItem.uid: bindPrefix + "/ExternalTemperature"
-			precision: 1
+			decimals: 1
 		}
 
 		ListTemperature {
@@ -72,7 +72,7 @@ DevicePage {
 			//% "External temperature (2)"
 			text: qsTrId("page_meteo_external_temperature_2")
 			preferredVisible: dataItem.valid
-			precision: 1
+			decimals: 1
 		}
 
 		ListQuantity {
@@ -81,7 +81,7 @@ DevicePage {
 			text: qsTrId("page_meteo_wind_speed")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Speed_MetresPerSecond
-			precision: 1
+			decimals: 1
 		}
 
 		ListQuantity {
@@ -98,7 +98,7 @@ DevicePage {
 			text: qsTrId("page_meteo_estimated_power")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Watt
-			precision: 1
+			decimals: 1
 		}
 
 		ListQuantity {
@@ -107,7 +107,7 @@ DevicePage {
 			text: qsTrId("page_meteo_daily_yield")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
-			precision: 1
+			decimals: 1
 		}
 
 		ListNavigation {

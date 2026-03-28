@@ -36,7 +36,7 @@ DevicePage {
 			dataItem.uid: root.serviceUid + "/ModuleVoltage"
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Volt_DC
-			precision: 1
+			decimals: 1
 		}
 	}
 	settingsModel: IOChannelProxyModel {

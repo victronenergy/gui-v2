@@ -51,8 +51,8 @@ Page {
 
 	component MicrogridListQuantity: ListQuantity {
 		textFormat: Text.RichText
-		precision: 2
-		precisionAdjustmentAllowed: false
+		decimals: 2
+		formatHints: Units.NoDecimalAdjustment
 	}
 
 	component ListValueRange: ListText {
@@ -73,8 +73,8 @@ Page {
 
 			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
 			value: dataItemFrom.valid ? dataItemFrom.value : NaN
-			precision: 2
-			precisionAdjustmentAllowed: false
+			decimals: 2
+			formatHints: Units.NoDecimalAdjustment
 		}
 
 		QuantityInfo {
@@ -82,8 +82,8 @@ Page {
 
 			unitType: parent && parent.unitType ? parent.unitType : VenusOS.Units_None
 			value: dataItemTo.valid ? dataItemTo.value : NaN
-			precision: 2
-			precisionAdjustmentAllowed: false
+			decimals: 2
+			formatHints: Units.NoDecimalAdjustment
 		}
 
 		VeQuickItem {
