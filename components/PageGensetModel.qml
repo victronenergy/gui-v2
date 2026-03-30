@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 VisibleItemModel {
@@ -94,15 +95,30 @@ VisibleItemModel {
 		}
 	}
 
-	ListItem {
-		text: CommonWords.manual_control
+	ListItemControl {
+		id: manualControl
+
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
-		content.children: [
-			GeneratorManualControlButton {
-				generatorUid: root.startStopBindPrefix
-				gensetUid: root.bindPrefix
+		contentItem: Item {
+			implicitWidth: Theme.geometry_listItem_width
+
+			RowLayout {
+				anchors.verticalCenter: parent.verticalCenter
+				width: parent.width
+				spacing: manualControl.spacing
+
+				Label {
+					text: CommonWords.manual_control
+					font: manualControl.font
+					Layout.fillWidth: true
+				}
+
+				GeneratorManualControlButton {
+					generatorUid: root.startStopBindPrefix
+					gensetUid: root.bindPrefix
+				}
 			}
-		]
+		}
 	}
 
 	ListText {

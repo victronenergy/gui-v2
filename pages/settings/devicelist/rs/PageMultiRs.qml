@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 /*
@@ -206,33 +207,43 @@ DevicePage {
 				unit: VenusOS.Units_Watt
 			}
 
-			ListItem {
-				//% "Trackers"
-				text: qsTrId("settings_multirs_trackers")
+			ListItemControl {
+				id: trackerTableItem
 
-				bottomContentChildren: [
-					QuantityTable {
-						width: parent.width
-						model: root.trackerCount
-						delegate: QuantityTable.TableRow {
-							id: tableRow
-							preferredVisible: tracker.enabled
-							headerText: tracker.name
-							model: QuantityObjectModel {
-								QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
-								QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
-								QuantityObject { object: tracker; key: "power"; unit: VenusOS.Units_Watt }
-							}
+				// Remove horizontal padding to allow QuantityTable row background colours to
+				// stretch to the left/right edges of the view.
+				topPadding: 0
+				bottomPadding: bottomInset
+				leftPadding: 0
+				rightPadding: 0
+				contentItem: QuantityTable {
+					model: root.trackerCount
+					header: QuantityTable.TableHeader {
+						headerText: CommonWords.tracker
+						model: [
+							{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
+							{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
+							{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
+						]
+					}
+					delegate: QuantityTable.TableRow {
+						id: tableRow
+						preferredVisible: tracker.enabled
+						headerText: tracker.name
+						model: QuantityObjectModel {
+							QuantityObject { object: tracker; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+							QuantityObject { object: tracker; key: "current"; unit: VenusOS.Units_Amp }
+							QuantityObject { object: tracker; key: "power"; unit: VenusOS.Units_Watt }
+						}
 
-							SolarTracker {
-								id: tracker
-								serviceUid: root.bindPrefix
-								trackerIndex: tableRow.index
-								trackerCount: root.trackerCount
-							}
+						SolarTracker {
+							id: tracker
+							serviceUid: root.bindPrefix
+							trackerIndex: tableRow.index
+							trackerCount: root.trackerCount
 						}
 					}
-				]
+				}
 			}
 		}
 	}

@@ -20,7 +20,6 @@ Page {
 				dataItem.uid: root.device ? root.device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
 				//% "Limiting the maximum charging power can improve simultaneity with other controllable devices."
 				caption: qsTrId("pagecontrollableloads_limiting_the_maximum")
-				bottomContentSizeMode: VenusOS.ListItem_BottomContentSizeMode_Compact
 			}
 		}
 	}

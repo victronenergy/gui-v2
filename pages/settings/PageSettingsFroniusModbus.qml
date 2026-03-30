@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -40,46 +41,61 @@ Page {
 			text: qsTrId("page_settings_fronius_modbus_locations_note")
 		}
 		model: _locations.value ? _locations.value.split(',') : []
-		delegate: ListItem {
+		delegate: ListSetting {
 			id: locationDelegate
 
 			property int locationNumber: index + 1
 			property var modbusAlternates: modelData.split(':')
 
-			//% "Port/Unit ID %1"
-			text: qsTrId("page_settings_fronius_modbus_location_number").arg(locationNumber)
-			content.spacing: 30
-			content.children: [
+			function showRemoveDialog() {
+				Global.dialogLayer.open(removeLocationDialog, {
+					modbusLocation: modelData,
+					//% "Port: %1 (Unit %2)"
+					description: qsTrId("page_settings_fronius_modbus_remove_location_description")
+							.arg(portNumber.text)
+							.arg(unitAddress.text)
+				})
+			}
+
+			contentItem: RowLayout {
+				spacing: locationDelegate.spacing
+
+				Label {
+					//% "Port/Unit ID %1"
+					text: qsTrId("page_settings_fronius_modbus_location_number").arg(locationNumber)
+					font: locationDelegate.font
+					Layout.fillWidth: true
+				}
+
 				Label {
 					id: portNumber
-
-					anchors.verticalCenter: parent?.verticalCenter
 					text: modbusAlternates[0].toUpperCase() // eg. '1501'
-				},
+				}
+
 				Label {
 					id: unitAddress
-
-					anchors.verticalCenter: parent?.verticalCenter
 					text: modbusAlternates[1] // unit address
-				},
-				RemoveButton {
-					id: removeButton
-					visible: locationDelegate.clickable
-					onClicked: {
-						Global.dialogLayer.open(removeLocationDialog, {
-							modbusLocation: modelData,
-							//% "Port: %1 (Unit %2)"
-							description: qsTrId("page_settings_fronius_modbus_remove_location_description")
-									.arg(portNumber.text)
-									.arg(unitAddress.text)
-						})
-					}
 				}
-			]
 
-			interactive: true
-			writeAccessLevel: VenusOS.User_AccessType_Installer
-			onClicked: removeButton.clicked()
+				RemoveButton {
+					visible: locationDelegate.clickable
+					onClicked: locationDelegate.showRemoveDialog()
+				}
+			}
+
+			background: ListSettingBackground {
+				indicatorColor: locationDelegate.backgroundIndicatorColor
+
+				ListPressArea {
+					anchors.fill: parent
+					enabled: locationDelegate.clickable
+					onClicked: locationDelegate.showRemoveDialog()
+				}
+			}
+
+			interactive: userHasWriteAccess
+			Keys.enabled: Global.keyNavigationEnabled && interactive
+			Keys.onSpacePressed: locationDelegate.showRemoveDialog()
 		}
 	}
 

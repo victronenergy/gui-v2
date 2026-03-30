@@ -117,7 +117,7 @@ DevicePage {
 						}
 
 						model: VisibleItemModel {
-							ListItem {
+							ListText {
 								text: {
 									var message = ""
 									if (firmwareVersion.value < 0x506) { // Partial support S&W support
