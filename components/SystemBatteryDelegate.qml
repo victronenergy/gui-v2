@@ -7,24 +7,45 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-BaseListItem {
+ListItemControl {
 	id: root
 
 	required property SystemBatteryDeviceModel.Battery device
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(device.serviceUid)
 
-	width: parent?.width ?? 0
-	height: Theme.geometry_batteryListPage_item_height
+	readonly property bool _clickable: root.device.deviceInstance >= 0
+			&& ["vebus","genset","battery"].indexOf(root.serviceType) >= 0
 
-	RowLayout {
-		width: parent.width
-		height: Theme.geometry_batteryListPage_item_height
+	function click() {
+		if (!_clickable) {
+			return
+		}
+
+		// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
+		if (root.serviceType === "vebus") {
+			Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
+				"bindPrefix": root.device.serviceUid
+			})
+		} else if (root.serviceType === "genset") {
+			Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml", {
+				"bindPrefix": root.device.serviceUid
+			})
+		} else {
+			Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
+				"bindPrefix": root.device.serviceUid,
+			})
+		}
+	}
+
+	hasSubMenu: _clickable
+
+	contentItem: RowLayout {
+		spacing: 0
 
 		Column {
 			id: leftColumn
 			Layout.fillWidth: true
-			Layout.leftMargin: Theme.geometry_listItem_content_horizontalMargin
-			spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+			spacing: Theme.geometry_listItem_content_verticalSpacing
 
 			Label {
 				id: nameLabel
@@ -56,7 +77,7 @@ BaseListItem {
 
 		Column {
 			Layout.fillWidth: true
-			spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+			spacing: Theme.geometry_listItem_content_verticalSpacing
 
 			QuantityLabel {
 				id: socLabel
@@ -101,39 +122,19 @@ BaseListItem {
 		}
 
 		ForwardIcon {
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
-			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			opacity: pressArea.enabled ? 1 : 0
+			opacity: root._clickable ? 1 : 0
 		}
 	}
 
-	Keys.onSpacePressed: pressArea.clicked(null)
-	Keys.onRightPressed: pressArea.clicked(null)
-	Keys.enabled: Global.keyNavigationEnabled && pressArea.enabled
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent
-		z: -1
-		radius: parent.background.radius
-		enabled: root.device.deviceInstance >= 0
-				&& ["vebus","genset","battery"].indexOf(root.serviceType) >= 0
-		onClicked: {
-			// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
-			if (root.serviceType === "vebus") {
-				Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
-					"bindPrefix": root.device.serviceUid
-				})
-			} else if (root.serviceType === "genset") {
-				Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml", {
-					"bindPrefix": root.device.serviceUid
-				})
-			} else {
-				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
-					"bindPrefix": root.device.serviceUid,
-				})
-			}
+	background: ListItemBackground {
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root._clickable
+			onClicked: root.click()
 		}
 	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
+	Keys.enabled: Global.keyNavigationEnabled && _clickable
 }
