@@ -28,7 +28,7 @@ GradientListView {
 
 		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
-		saveInput: function() { root.ipAddressUpdated(model.index, textField.text) }
+		saveInput: function() { root.ipAddressUpdated(model.index, secondaryText) }
 
 		content.children: [
 			defaultContent,

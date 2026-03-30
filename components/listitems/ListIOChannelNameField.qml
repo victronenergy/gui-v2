@@ -11,7 +11,7 @@ ListTextField {
 	text: qsTrId("iochannel_name")
 	dataItem.invalidate: false
 	writeAccessLevel: VenusOS.User_AccessType_User
-	textField.maximumLength: 32
+	maximumLength: 32
 	preferredVisible: dataItem.valid
 	placeholderText: CommonWords.custom_name
 }
