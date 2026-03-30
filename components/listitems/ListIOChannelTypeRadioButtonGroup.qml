@@ -15,7 +15,7 @@ ListRadioButtonGroup {
 	text: qsTrId("iochannel_type_buttongroup_type")
 	dataItem.uid: root.ioChannel.uid + "/Settings/Type"
 	preferredVisible: dataItem.valid
-	secondaryLabel.color: root.ioChannel.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
+	secondaryTextColor: root.ioChannel.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
 	optionModel: {
 		let options = []
 		const maxType = root.ioChannel.direction === IOChannel.Input

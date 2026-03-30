@@ -7,6 +7,6 @@ import QtQuick
 import Victron.VenusOS
 
 PressArea {
-	z: -1
 	color: Theme.color_listItem_down_background
+	radius: Theme.geometry_listItem_radius
 }

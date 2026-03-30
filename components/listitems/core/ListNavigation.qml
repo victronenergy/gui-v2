@@ -7,41 +7,72 @@ import QtQuick
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-ListItem {
+/*
+	A list setting item with an arrow icon to go to a subpage, and optional secondary text.
+*/
+ListSetting {
 	id: root
 
-	property alias secondaryText: secondaryLabel.text
-	property alias secondaryLabel: secondaryLabel
-	property alias icon: icon
+	property string secondaryText
+	property color secondaryTextColor: Theme.color_listItem_secondaryText
+	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
+	property color iconColor: Theme.color_listItem_forwardIcon
 
-	readonly property bool __is_venus_gui_list_navigation__: true
+	signal clicked
+
+	function click() {
+		// Just check 'interactive', and ignore 'userHasWriteAccess'. The control can be clicked
+		// regardless of the write permission, since it opens a submenu instead of changing a value.
+		if (interactive) {
+			clicked()
+		}
+	}
 
 	interactive: true
-	Keys.onRightPressed: root.activate()
+	hasSubMenu: interactive
 
-	// Issue #1964: userHasWriteAccess is ignored for ListNavigation - see ListItem
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
 
-	content.children: [
-		Label {
-			id: secondaryLabel
+		ThreeLabelLayout {
+			id: labelLayout
 
 			anchors.verticalCenter: parent.verticalCenter
-			visible: text.length > 0
-			font.pixelSize: Theme.font_size_body2
-			color: Theme.color_listItem_secondaryText
-			wrapMode: Text.Wrap
-			width: Math.min(implicitWidth, root.maximumContentWidth - icon.width - root.content.spacing)
-			horizontalAlignment: Text.AlignRight
-		},
+			width: parent.width - (arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0)
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			secondaryTextColor: root.secondaryTextColor
+			captionText: root.caption
+			stretchSecondaryText: true
+		}
 
 		CP.ColorImage {
-			id: icon
+			id: arrowIcon
 
-			anchors.verticalCenter: parent.verticalCenter
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
-			color: root.down ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
+			source: root.iconSource
+			color: root.iconColor
 			visible: root.interactive
 		}
-	]
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 }

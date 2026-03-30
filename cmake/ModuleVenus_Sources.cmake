@@ -51,6 +51,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/FirmwareUpdate.qml
     components/FittedQuantityLabel.qml
     components/FixedWidthLabel.qml
+    components/ForwardIcon.qml
     components/GaugeModel.qml
     components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
@@ -734,6 +735,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
+    images/icon_chevron_right_32.svg
     images/icon_connectivity_32.png
     images/icon_debug_32.png
     images/icon_devices_32.png

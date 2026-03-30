@@ -7,8 +7,8 @@ import QtQuick
 import Victron.VenusOS
 
 SettingsColumn {
-	property alias dvccActive: dvccSwitch.checked
-	readonly property alias userHasWriteAccess: dvccSwitch.userHasWriteAccess
+	readonly property bool dvccActive: dvccSwitch.checked
+	readonly property bool userHasWriteAccess: dvccSwitch.userHasWriteAccess
 
 	ListSwitchForced {
 		id: dvccSwitch
