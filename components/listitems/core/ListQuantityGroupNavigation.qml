@@ -4,23 +4,99 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListNavigation {
+/*
+	A list item with main text, a row of QuantityLabels, and an arrow icon to go to a subpage.
+*/
+ListSetting {
 	id: root
 
-	property alias quantityModel: quantityRow.model
-	property alias tableMode: quantityRow.tableMode
+	property string text
+	property QuantityObjectModel quantityModel
+	property bool tableMode
 
-	primaryLabel.rightPadding: quantityRow.width
+	signal clicked
 
-	QuantityRow {
-		id: quantityRow
-
-		anchors {
-			right: parent.right
-			rightMargin: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+	function click() {
+		// Just check 'interactive', and ignore 'userHasWriteAccess'. The control can be clicked
+		// regardless of the write permission, since it opens a submenu instead of changing a value.
+		if (interactive) {
+			clicked()
 		}
-		height: parent.height
 	}
+
+	interactive: true
+	hasSubMenu: interactive
+
+	// Standard layout:
+	// | Primary label       | Quantity | Arrow |
+	// | Caption             |  row     | icon  |
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.height
+
+		GridLayout {
+			id: contentLayout
+
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
+			columns: 2
+
+			Label {
+				text: root.text
+				textFormat: root.textFormat
+				font: root.font
+				wrapMode: Text.Wrap
+
+				Layout.fillWidth: true
+			}
+
+			QuantityRow {
+				id: quantityRow
+
+				model: root.quantityModel
+				tableMode: root.tableMode
+
+				Layout.rowSpan: captionLabel.visible ? 2 : 1
+			}
+
+			CaptionLabel {
+				id: captionLabel
+
+				topPadding: Theme.geometry_listItem_content_verticalSpacing
+				text: root.caption
+				visible: text.length > 0
+
+				Layout.fillWidth: true
+			}
+		}
+
+		ForwardIcon {
+			id: arrowIcon
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
+			// Set opacity instead of visible, to maintain vertical alignments across multiple
+			// quantity group list items even when list item is not clickable.
+			opacity: root.interactive ? 1 : 0
+		}
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 }

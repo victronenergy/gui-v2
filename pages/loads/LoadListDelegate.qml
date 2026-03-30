@@ -5,7 +5,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 BaseListItem {
@@ -93,10 +92,8 @@ BaseListItem {
 			unit:  root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 		}
 
-		CP.ColorImage {
+		ForwardIcon {
 			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
-			source: "qrc:/images/icon_arrow_32.svg"
-			rotation: 180
 			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
 			opacity: pressArea.enabled ? 1 : 0
 		}
@@ -110,6 +107,7 @@ BaseListItem {
 		id: pressArea
 
 		anchors.fill: parent
+		z: -1
 		radius: parent.background.radius
 		onClicked: root.clicked()
 	}

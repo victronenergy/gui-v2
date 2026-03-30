@@ -119,12 +119,16 @@ Page {
 			//% "[Hidden]"
 			text: model.network ? model.network : qsTrId("settings_tcpip_hidden")
 			secondaryText: Utils.connmanServiceState(model.state)
-			primaryLabel.leftPadding: Theme.geometry_icon_size_medium + Theme.geometry_listItem_content_spacing
+
+			// Move the text and arrow icon to the right of the checkmark icon space
+			leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				+ Theme.geometry_icon_size_medium
+				+ spacing
 
 			CP.ColorImage {
-				parent: accessPointDelegate.primaryLabel
 				anchors {
 					left: parent.left
+					leftMargin: Theme.geometry_listItem_content_horizontalMargin
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"

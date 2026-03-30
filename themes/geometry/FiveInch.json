@@ -92,6 +92,7 @@
     "geometry_listItem_slider_stepDivsion": 10,
     "geometry_listItem_textField_minimumWidth": 200,
     "geometry_listItem_textField_maximumWidth": 376,
+    "geometry_listItem_arrow_leftMargin": 8,
 
     "geometry_valueIndicator_horizontalMargin": 12,
     "geometry_valueIndicator_spacing": 16,
@@ -482,7 +483,7 @@
     "geometry_settings_breadcrumb_topMargin": 9,
     "geometry_settingsListHeader_topPadding": 8,
     "geometry_settingsListHeader_bottomPadding": 2,
-    "geometry_settingsListNavigation_height": 64,
+    "geometry_settingsListNavigation_verticalPadding": 8,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
