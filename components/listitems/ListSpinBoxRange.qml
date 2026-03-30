@@ -4,9 +4,10 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListItem {
+ListSetting {
 	id: root
 
 	readonly property alias dataItemFrom: dataItemFrom
@@ -23,20 +24,71 @@ ListItem {
 	// If true, displays a text label instead of a button.
 	property bool readOnly: false
 
-	RangeModel {
-		id: rangeModelFrom
-	}
-	RangeModel {
-		id: rangeModelTo
-	}
+	interactive: true
 
-	content.children: [
+	contentItem: FocusScope {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelsColumn.height
+		focus: false
+
+		// If focus moves elsewhere, remove the focus on the contentItem so that the user must press
+		// space next time to refocus the buttons.
+		onActiveFocusChanged: {
+			if (!activeFocus) {
+				focus = false
+			}
+		}
+
+		ColumnLayout {
+			id: labelsColumn
+
+			anchors {
+				left: parent.left
+				right: buttonRow.left
+				rightMargin: root.spacing
+				verticalCenter: parent.verticalCenter
+			}
+			spacing: Theme.geometry_listItem_content_verticalSpacing
+
+			Label {
+				text: root.text
+				textFormat: root.textFormat
+				font: root.font
+				wrapMode: Text.Wrap
+
+				Layout.fillWidth: true
+			}
+
+			CaptionLabel {
+				width: parent.width
+				text: root.caption
+				visible: text.length > 0
+
+				Layout.fillWidth: true
+			}
+		}
+
 		Row {
+			id: buttonRow
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
 			spacing: Theme.geometry_listItem_content_spacing
 
 			ListItemButton {
 				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
-				visible: !root.readOnly
+				down: root.clickable && (pressed || checked)
+				enabled: root.clickable && !root.readOnly
+				flat: root.readOnly
+				focus: true
+
+				KeyNavigation.right: maximumValueButton
+				Keys.onLeftPressed: (e) => { e.accepted = true }
+				Keys.onEscapePressed: root.contentItem.focus = false
+				Keys.onEnterPressed: root.contentItem.focus = false
+				Keys.onReturnPressed: root.contentItem.focus = false
 
 				onClicked: Global.dialogLayer.open(numberSelectorComponentFrom, { value: dataItemFrom.value })
 
@@ -61,19 +113,26 @@ ListItem {
 					}
 				}
 			}
+
 			SecondaryListLabel {
-				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
-				visible: root.readOnly
-			}
-			SecondaryListLabel {
+				anchors.verticalCenter: parent.verticalCenter
 				//: Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')
 				//% "to"
 				text: qsTrId("list-spin-box-range_minimum_maximum_delimiter")
-				height: parent.height
 			}
+
 			ListItemButton {
+				id: maximumValueButton
+
 				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
-				visible: !root.readOnly
+				down: root.clickable && (pressed || checked)
+				enabled: root.clickable && !root.readOnly
+				flat: root.readOnly
+
+				Keys.onRightPressed: (e) => { e.accepted = true }
+				Keys.onEscapePressed: root.contentItem.focus = false
+				Keys.onEnterPressed: root.contentItem.focus = false
+				Keys.onReturnPressed: root.contentItem.focus = false
 
 				onClicked: Global.dialogLayer.open(numberSelectorComponentTo, { value: dataItemTo.value })
 
@@ -98,12 +157,22 @@ ListItem {
 					}
 				}
 			}
-			SecondaryListLabel {
-				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
-				visible: root.readOnly
-			}
 		}
-	]
+	}
+
+	Keys.onSpacePressed: {
+		if (readOnly || !root.checkWriteAccessLevel() || !root.clickable) {
+			return
+		}
+		contentItem.focus = true
+	}
+
+	RangeModel {
+		id: rangeModelFrom
+	}
+	RangeModel {
+		id: rangeModelTo
+	}
 
 	VeQuickItem {
 		id: dataItemFrom

@@ -9,6 +9,7 @@
 #include <QQmlEngine>
 #include <QObject>
 #include <QFont>
+#include <QColor>
 
 #include "themeobjects.h"
 
@@ -40,6 +41,7 @@ public:
 	Q_INVOKABLE qreal scaleNumber(qreal n, qreal fromMin, qreal fromMax, qreal toMin, qreal toMax) const {
 		return scale(n, fromMin, fromMax, toMin, toMax);
 	}
+	Q_INVOKABLE QColor invalidColor() const { return QColor(); }
 
 	static qreal scale(qreal n, qreal fromMin, qreal fromMax, qreal toMin, qreal toMax) {
 		const qreal fromRange = fromMax - fromMin;

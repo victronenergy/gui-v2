@@ -39,11 +39,8 @@ Page {
 		decimals: 2
 		stepSize: 0.01
 		presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(decimals) } })
+		buttonBorderColor: parameterModified.value === 1 ? Theme.color_button_on_border_modified : FastUtils.invalidColor()
 
-		Binding on button.borderColor {
-			when: parameterModified.value === 1
-			value: Theme.color_button_on_border_modified
-		}
 		VeQuickItem {
 			id: parameterModified
 		}
@@ -291,8 +288,8 @@ Page {
 					preferredVisible: externalControl.valid && externalControl.value === VenusOS.MicrogridExternalControl_Standalone
 							&& _parametersModified
 
-					button.borderColor: Theme.color_button_on_border_modified
-					button.backgroundColor: Theme.color_button_on_background_modified
+					buttonBorderColor: Theme.color_button_on_border_modified
+					buttonBackgroundColor: Theme.color_button_on_background_modified
 
 					onClicked: applyAll.setValue(1)
 
