@@ -15,6 +15,4 @@ ListQuantityGroup {
 		QuantityObject { object: data; key: "current"; unit: VenusOS.Units_Amp }
 		QuantityObject { object: data; key: "frequency"; unit: VenusOS.Units_Hertz }
 	}
-
-	maximumContentWidth: availableWidth
 }
