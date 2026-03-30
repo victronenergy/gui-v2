@@ -6,30 +6,69 @@
 import QtQuick
 import Victron.VenusOS
 
-ListItem {
+ListSetting {
 	id: root
 
-	property alias checked: radioButton.checked
-	property alias radioButton: radioButton
+	property bool checked
 	property string secondaryText
+
+	signal clicked()
+
+	function click() {
+		if (interactive && checkWriteAccessLevel()) {
+			clicked()
+		}
+	}
 
 	interactive: true
 
-	content.children: [
-		SecondaryListLabel {
-			anchors.verticalCenter: parent.verticalCenter
-			text: root.secondaryText
-			width: Math.min(implicitWidth, root.maximumContentWidth - radioButton.width - Theme.geometry_listItem_content_spacing)
-			visible: text.length > 0
-		},
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
+
+		ThreeLabelLayout {
+			id: labelLayout
+
+			anchors {
+				left: parent.left
+				right: radioButton.left
+				rightMargin: root.spacing
+				verticalCenter: parent.verticalCenter
+			}
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			captionText: root.caption
+			stretchSecondaryText: true
+		}
+
 		RadioButton {
 			id: radioButton
 
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
 			checkable: false
+			checked: root.checked
 			enabled: root.clickable
 			focusPolicy: Qt.NoFocus
 
-			onClicked: root.clicked()
+			onClicked: root.click()
 		}
-	]
+	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: root.click()
 }
