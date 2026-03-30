@@ -19,6 +19,10 @@ ListText {
 		case 2: return CommonWords.formatError(qsTrId("settings_generator_in_fault_condition"), 2)
 		//% "Generator not detected at AC input"
 		case 3: return CommonWords.formatError(qsTrId("settings_generator_not_detected"), 3)
+		//% "Generator control inhibited by digital input"
+		case 4: return CommonWords.formatError(qsTrId("settings_generator_control_inhibited_by_digital_input"), 4)
+		//% "Generator inhibit control not available"
+		case 5: return CommonWords.formatError(qsTrId("settings_generator_inhibit_control_not_available"), 5)
 		default: return ""
 		}
 	}

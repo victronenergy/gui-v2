@@ -271,25 +271,54 @@ VisibleItemModel {
 	}
 
 	ListButton {
+		readonly property bool hasDigitalInputControlNotAvailableError: controlError.valid
+				&& Number(controlError.value) === 5
+		readonly property bool canClearDigitalInputControl: hasDigitalInputControlNotAvailableError
+				&& digitalInputControlInput.valid
+		readonly property bool digitalInputBlocks: digitalInputControlInput.valid
+				&& digitalInputControlInput.value > 0
+				&& digitalInputControlEnabled.valid
+				&& digitalInputControlEnabled.value === 0
 		readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
 				&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
 				&& enableRemoteStartMode.valid
+				&& !digitalInputBlocks
 		readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
 				&& remoteStartStatusCode.valid
 				&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
+		readonly property string remoteStartSecondaryText: {
+			if (canClearDigitalInputControl) {
+				//% "Clear Digital Input Control"
+				return qsTrId("Clear_Digital_Input_Control")
+			}
+			if (canReenableRemoteStart) {
+				//% "Re-enable remote start mode"
+				return qsTrId("Re-enable_remote_start_mode")
+			}
+			if (showReenableRemoteStartButton) {
+				return CommonWords.disabled
+			}
+			return CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
+		}
 
 		//% "Remote start mode"
 		text: qsTrId("ac-in-genset_remote_start_mode")
-		//% "Re-enable remote start mode"
-		secondaryText: canReenableRemoteStart
-				? qsTrId("ac-in-genset_re_enable_remote_start_mode")
-				: showReenableRemoteStartButton
-				? CommonWords.disabled
-				: CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
-		readOnly: !canReenableRemoteStart
-		interactive: canReenableRemoteStart
+		secondaryText: remoteStartSecondaryText
+		readOnly: !canClearDigitalInputControl && !canReenableRemoteStart
+		interactive: canClearDigitalInputControl || canReenableRemoteStart
 		writeAccessLevel: VenusOS.User_AccessType_User
-		onClicked: enableRemoteStartMode.setValue(1)
+		onClicked: {
+			if (canClearDigitalInputControl) {
+				digitalInputControlInput.setValue(0)
+			} else {
+				enableRemoteStartMode.setValue(1)
+			}
+		}
+
+		VeQuickItem {
+			id: controlError
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+		}
 
 		VeQuickItem {
 			id: remoteStartModeEnabled
@@ -304,6 +333,16 @@ VisibleItemModel {
 		VeQuickItem {
 			id: remoteStartStatusCode
 			uid: root.bindPrefix + "/StatusCode"
+		}
+
+		VeQuickItem {
+			id: digitalInputControlInput
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Input" : ""
+		}
+
+		VeQuickItem {
+			id: digitalInputControlEnabled
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Enabled" : ""
 		}
 	}
 
