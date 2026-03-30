@@ -201,18 +201,28 @@ VisibleItemModel {
 
 	// Clear Error Button
 	ListButton {
+		readonly property bool hasGensetError: _gensetErrorId.valid && _gensetErrorId.value !== ""
+		readonly property bool canClearGeneratorError: clearControlError.valid
+				&& Number(clearControlError.value) === 2
+		readonly property bool remoteStartModeIsEnabled: remoteStartModeEnabled.valid
+				&& (remoteStartModeEnabled.value === 1 || remoteStartModeEnabled.value === true)
+
 		//% "Clear generator error"
 		text: qsTrId("clear-generator-error")
 		//% "Press to clear"
 		secondaryText: qsTrId("press-to-clear")
 		preferredVisible: clearErrorItem.valid
-		interactive: _gensetErrorId.valid && _gensetErrorId.value !== ""
+		interactive: hasGensetError && canClearGeneratorError && remoteStartModeIsEnabled
 		onClicked: {
 			clearErrorItem.setValue(1)
 		}
 		VeQuickItem {
 			id: clearErrorItem
 			uid: root.bindPrefix + "/ClearError"
+		}
+		VeQuickItem {
+			id: clearControlError
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 		}
 		VeQuickItem {
 			id: _gensetErrorId
@@ -260,11 +270,49 @@ VisibleItemModel {
 		}
 	}
 
-	ListText {
+	ListButton {
+		readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
+				&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
+				&& enableRemoteStartMode.valid
+		readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
+				&& remoteStartStatusCode.valid
+				&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
+
+		readonly property string remoteStartSecondaryText: {
+			if (canReenableRemoteStart) {
+				//% "Re-enable remote start mode"
+				return qsTrId("Re-enable_remote_start_mode")
+			}
+			if (showReenableRemoteStartButton) {
+				return CommonWords.disabled
+			}
+			return CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
+		}
 		//% "Remote start mode"
 		text: qsTrId("ac-in-genset_remote_start_mode")
-		dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
-		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
+		secondaryText: remoteStartSecondaryText
+		interactive: canReenableRemoteStart
+		writeAccessLevel: VenusOS.User_AccessType_User
+		onClicked: enableRemoteStartMode.setValue(1)
+
+		VeQuickItem {
+			id: remoteStartModeEnabled
+			uid: root.bindPrefix + "/RemoteStartModeEnabled"
+		}
+
+		VeQuickItem {
+			id: enableRemoteStartMode
+			uid: root.bindPrefix + "/EnableRemoteStartMode"
+		}
+
+		VeQuickItem {
+			id: remoteStartStatusCode
+			uid: root.bindPrefix + "/StatusCode"
+		}
+		VeQuickItem {
+			id: controlError
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+		}
 	}
 
 	ListDcOutputQuantityGroup {
