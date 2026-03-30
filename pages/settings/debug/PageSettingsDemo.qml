@@ -200,6 +200,13 @@ Page {
 				onClicked: console.log("Button was clicked")
 			}
 
+			ListButton {
+				text: "Read-only button"
+				readOnly: true
+				secondaryText: "Try to click this"
+				onClicked: console.log("Will not happen, button cannot be clicked")
+			}
+
 			ListTextField {
 				text: "Text input"
 				placeholderText: "Enter text"
