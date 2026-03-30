@@ -55,10 +55,10 @@ Page {
 				text: qsTrId("modbus_add_device_unit")
 				secondaryText: "1"
 				validateInput: function() {
-					const valueAsInt = parseInt(textField.text)
+					const valueAsInt = parseInt(secondaryText)
 					if (isNaN(valueAsInt) || valueAsInt <= 0 || valueAsInt > 247) {
 						//% "%1 is not a valid unit number. Use a number between 1-247."
-						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("modbus_add_unit_invalid").arg(textField.text))
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("modbus_add_unit_invalid").arg(secondaryText))
 					}
 					return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", valueAsInt)
 				}

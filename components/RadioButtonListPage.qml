@@ -127,7 +127,7 @@ Page {
 						preferredVisible: showField && model.index === optionsListView.selectedIndex && !!root.validatePassword
 						KeyNavigationHighlight.fill: radioButton
 						validateInput: function() {
-							return root.validatePassword(model.index, textField.text)
+							return root.validatePassword(model.index, secondaryText)
 						}
 						saveInput: function() {
 							if (preferredVisible) {
