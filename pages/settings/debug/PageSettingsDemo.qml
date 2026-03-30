@@ -179,19 +179,19 @@ Page {
 
 			ListSlider {
 				text: "Slider"
-				slider.from: 1
-				slider.to: 100
-				slider.stepSize: 10
+				from: 1
+				to: 100
+				stepSize: 10
 			}
 
 			ListRangeSlider {
 				text: "Range slider"
-				slider.from: 0
-				slider.to: 100
-				slider.first.value: 25
-				slider.second.value: 75
-				slider.suffix: "%"
-				slider.decimals: 1
+				from: 0
+				to: 100
+				firstValue: 25
+				secondValue: 75
+				suffix: "%"
+				decimals: 1
 			}
 
 			ListButton {
