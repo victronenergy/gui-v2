@@ -7,7 +7,7 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-BaseListItem {
+ListItemControl {
 	id: root
 
 	required property string name
@@ -22,9 +22,6 @@ BaseListItem {
 	property bool unitAmps: false
 
 	signal clicked
-
-	width: parent?.width ?? 0
-	height: Theme.geometry_loadListPage_item_height
 
 	component QuantityColumn : Column {
 		property alias title: quantityTitle.text
@@ -48,14 +45,13 @@ BaseListItem {
 		}
 	}
 
-	RowLayout {
-		width: parent.width
-		height: parent.height
+	hasSubMenu: true
+
+	contentItem: RowLayout {
 		spacing: 0
 
 		Column {
 			Layout.fillWidth: true
-			Layout.leftMargin: Theme.geometry_listItem_content_horizontalMargin
 			Layout.rightMargin: root.columnSpacing
 			spacing: Theme.geometry_batteryListPage_item_verticalSpacing
 
@@ -92,23 +88,16 @@ BaseListItem {
 			unit:  root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt
 		}
 
-		ForwardIcon {
-			Layout.rightMargin: Theme.geometry_listItem_content_horizontalMargin
-			color: pressArea.containsPress ? Theme.color_listItem_down_forwardIcon : Theme.color_listItem_forwardIcon
-			opacity: pressArea.enabled ? 1 : 0
+		ForwardIcon {}
+	}
+
+	background: ListItemBackground {
+		ListPressArea {
+			anchors.fill: parent
+			onClicked: root.clicked()
 		}
 	}
 
-	Keys.onSpacePressed: pressArea.clicked(null)
-	Keys.onRightPressed: pressArea.clicked(null)
-	Keys.enabled: Global.keyNavigationEnabled
-
-	ListPressArea {
-		id: pressArea
-
-		anchors.fill: parent
-		z: -1
-		radius: parent.background.radius
-		onClicked: root.clicked()
-	}
+	Keys.onSpacePressed: clicked()
+	Keys.onRightPressed: clicked()
 }
