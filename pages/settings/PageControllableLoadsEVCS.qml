@@ -21,7 +21,6 @@ Page {
 				//% "Limiting the maximum charging power can improve simultaneity with other controllable devices."
 				caption: qsTrId("pagecontrollableloads_limiting_the_maximum")
 				bottomContentSizeMode: VenusOS.ListItem_BottomContentSizeMode_Compact
-				captionLabel.font.pixelSize: Theme.font_size_caption
 			}
 		}
 	}

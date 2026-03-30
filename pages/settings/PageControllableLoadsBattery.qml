@@ -38,7 +38,6 @@ Page {
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
 				//% "This helps the BatteryLife algorithm recharge the battery to 100%."
 				caption: qsTrId("pagecontrollableloads_battery_this_supports_the_batterylife_algorithm")
-				captionLabel.font.pixelSize: Theme.font_size_caption
 			}
 		}
 	}
