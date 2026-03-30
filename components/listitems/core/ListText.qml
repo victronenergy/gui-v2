@@ -6,22 +6,36 @@
 import QtQuick
 import Victron.VenusOS
 
-ListItem {
+/*
+	A list setting item with additional secondary text.
+*/
+ListSetting {
 	id: root
 
 	readonly property alias dataItem: dataItem
-	property alias secondaryText: secondaryLabel.text
-	property alias secondaryLabel: secondaryLabel
+	property string secondaryText: dataItem.valid ? dataItem.value : ""
+	property color secondaryTextColor: Theme.color_listItem_secondaryText
 
-	content.children: [
-		SecondaryListLabel {
-			id: secondaryLabel
-			anchors.verticalCenter: parent.verticalCenter
-			text: dataItem.valid ? dataItem.value : ""
-			width: Math.min(implicitWidth, root.maximumContentWidth)
-			visible: text.length > 0
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: labelLayout.height
+
+		ThreeLabelLayout {
+			id: labelLayout
+
+			anchors {
+				left: parent.left
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
+			primaryText: root.text
+			primaryFont: root.font
+			primaryTextFormat: root.textFormat
+			secondaryText: root.secondaryText
+			secondaryTextColor: root.secondaryTextColor
+			captionText: root.caption
 		}
-	]
+	}
 
 	VeQuickItem {
 		id: dataItem
