@@ -39,7 +39,8 @@ Page {
 		}
 
 		model: mode.value && loads.valid ? opportunityLoadsModel : []
-		delegate: DevicePriorityListNavigation {
+		delegate: ListDevicePriority {
+			leftInset: Theme.geometry_priorityLabel_width
 			serviceType: model.serviceType
 			deviceInstance: model.deviceInstance
 			uniqueIdentifier: model.uniqueIdentifier
@@ -48,25 +49,19 @@ Page {
 		Column {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
 					// which animate up & down by clicking the up & down arrows.
 			y: -gradientListView.contentY
+			leftPadding: gradientListView.leftMargin
 			spacing: parent.spacing
 
 			Repeater {
-				model: gradientListView.model
-				delegate: ListItem {
-					width: label.width
-					background.color: "transparent"
-					Label {
-						id: label
-
-						anchors{
-							left: parent.left
-							leftMargin: Theme.geometry_listItem_content_horizontalMargin
-							verticalCenter: parent.verticalCenter
-						}
-						text: index + 1
-						color: Theme.color_font_disabled
-						font.pixelSize: Theme.font_size_body1
-					}
+				model: gradientListView.count
+				delegate: Label {
+					width: Theme.geometry_priorityLabel_width
+					height: Theme.geometry_listItem_height
+					horizontalAlignment: Text.AlignHCenter
+					verticalAlignment: Text.AlignVCenter
+					text: index + 1
+					color: Theme.color_font_disabled
+					font.pixelSize: Theme.font_size_body1
 				}
 			}
 		}

@@ -244,7 +244,7 @@ Page {
 				preferredVisible: !connectionStatus.preferredVisible
 			}
 
-			ListItem {
+			ListText {
 				//% "Error message: \n%1"
 				text: qsTrId("settings_vrm_error_message").arg(errorMessage.value)
 				preferredVisible: !!errorMessage.value

@@ -4,9 +4,10 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
-ListNavigation {
+ListSetting {
 	id: root
 
 	property string serviceType
@@ -14,15 +15,20 @@ ListNavigation {
 	property string uniqueIdentifier
 	readonly property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
 	readonly property string pageSource: pageData.item?.pageSource || ""
-	property alias text: primary.text
 	readonly property ListModel _model: ListView.view.model
+
+	function click() {
+		if (interactive) {
+			Global.pageManager.pushPage(root.pageSource, { "title": root.text, "device": root._device })
+		}
+	}
 
 	component Arrow: Button {
 		radius: Theme.geometry_opportunityLoad_button_radius
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		width: Theme.geometry_opportunityLoad_button_height
-		height: Theme.geometry_opportunityLoad_button_height
+		implicitWidth: Theme.geometry_opportunityLoad_button_height
+		implicitHeight: Theme.geometry_opportunityLoad_button_height
 	}
 
 	component PageData : QtObject {
@@ -78,20 +84,73 @@ ListNavigation {
 		}
 	}
 
-	anchors {
-		left: parent.left
-		leftMargin: Theme.geometry_priorityLabel_width
-		right: parent.right
+	text: root.serviceType === "battery" ? CommonWords.battery
+			: root._device?.name || root.uniqueIdentifier || ""
+	interactive: pageData.item?.interactive ?? false
+
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+
+		RowLayout {
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_opportunityLoad_margin - Theme.geometry_button_border_width
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
+
+			Arrow {
+				id: upArrow
+				enabled: root.index !== 0
+				onClicked: {
+					root._model.move(index, index - 1, 1)
+					root._model.writeToBackEnd()
+				}
+			}
+
+			Arrow {
+				enabled: index !== (root._model.count - 1)
+				rotation: 180
+				onClicked: {
+					root._model.move(index + 1, index, 1)
+					root._model.writeToBackEnd()
+				}
+			}
+
+			Label {
+				leftPadding: Theme.geometry_opportunityLoad_margin
+				text: root.text
+				textFormat: root.textFormat
+				font: root.font
+				elide: Text.ElideRight
+
+				Layout.fillWidth: true
+			}
+
+			SecondaryListLabel {
+				text: deviceActive.value === 0 ? CommonWords.disabled : ""
+			}
+
+			ForwardIcon {
+				enabled: root.interactive
+				opacity: enabled ? 1 : 0
+			}
+		}
 	}
 
-	onClicked: Global.pageManager.pushPage(root.pageSource,
-										   ({
-												"title": root.text,
-												"device": root._device
-											})
-										   )
-	interactive: pageData.item?.interactive
-	secondaryText: deviceActive.value === 0 ? CommonWords.disabled : ""
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 
 	Loader {
 		id: pageData
@@ -109,51 +168,6 @@ ListNavigation {
 			}
 		}
 		onLoaded: item.device = Qt.binding(function() { return root._device })
-	}
-
-	Arrow {
-		id: upArrow
-
-		anchors {
-			left: parent.left
-			leftMargin: Theme.geometry_opportunityLoad_margin
-			verticalCenter: parent.verticalCenter
-		}
-		enabled: index !== 0
-		onClicked: {
-			root._model.move(index, index - 1, 1)
-			root._model.writeToBackEnd()
-		}
-	}
-
-	Arrow {
-		id: downArrow
-
-		anchors {
-			left: upArrow.right
-			leftMargin: Theme.geometry_opportunityLoad_margin
-			verticalCenter: parent.verticalCenter
-		}
-		enabled: index !== (root._model.count - 1)
-		rotation: 180
-		onClicked: {
-			root._model.move(index + 1, index, 1)
-			root._model.writeToBackEnd()
-		}
-	}
-
-	Label {
-		id: primary
-
-		anchors {
-			left: downArrow.right
-			leftMargin: Theme.geometry_listItem_content_horizontalMargin
-			verticalCenter: parent.verticalCenter
-		}
-		font.pixelSize: Theme.font_size_body2
-		wrapMode: Text.Wrap
-		text: root.serviceType === "battery" ? CommonWords.battery
-											 : root._device?.name || root.uniqueIdentifier || ""
 	}
 
 	VeQuickItem {

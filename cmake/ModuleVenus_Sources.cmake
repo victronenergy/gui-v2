@@ -41,7 +41,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/DeviceListDelegate.qml
     components/DeviceListPluginPage.qml
     components/DevicePage.qml
-    components/DevicePriorityListNavigation.qml
     components/DynamicValueRange.qml
     components/ElectricalQuantityLabel.qml
     components/EmptyPageItem.qml
@@ -192,6 +191,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListCurrentLimitButton.qml
     components/listitems/ListDcInputQuantityGroup.qml
     components/listitems/ListDcOutputQuantityGroup.qml
+    components/listitems/ListDevicePriority.qml
     components/listitems/ListEvcsSetCurrentSpinBox.qml
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareImageTypeInstalled.qml
@@ -591,7 +591,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/vebusdevice/VeBusAcSensorModel.qml
     pages/vebusdevice/PageVeBus.qml
     pages/vebusdevice/VeBusAlarm.qml
-    pages/vebusdevice/VeBusDeviceAlarmGroup.qml
     pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml
     pages/vebusdevice/VeBusDeviceInfoModel.qml
