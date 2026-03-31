@@ -95,7 +95,7 @@ VisibleItemModel {
 		}
 	}
 
-	ListItemControl {
+	ListItem {
 		id: manualControl
 
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled

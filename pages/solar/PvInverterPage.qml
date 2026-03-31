@@ -19,7 +19,7 @@ Page {
 	}
 
 	GradientListView {
-		header: ListItemControl {
+		header: ListItem {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset

@@ -13,7 +13,7 @@ import Victron.VenusOS
 
 	- Implement your own contentItem that displays the specified text and caption, along with other
 	  items relevant to your custom type. The text should respect the font and textFormat, as
-	  provided by ListItemControl.
+	  provided by ListItem.
 	- If you need to override the background, you can use ListSettingBackground to ensure the
 	  backgroundIndicatorColor is still shown on the left edge as expected.
 
@@ -37,7 +37,7 @@ import Victron.VenusOS
 	If the entire item is clickable, you can use ListPressArea in the background to highlight the
 	whole item when clicked.
 */
-ListItemControl {
+ListItem {
 	id: root
 
 	property string text

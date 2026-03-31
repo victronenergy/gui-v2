@@ -130,7 +130,7 @@ DevicePage {
 			unit: VenusOS.Units_Watt
 		}
 
-		ListItemControl {
+		ListItem {
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: 0

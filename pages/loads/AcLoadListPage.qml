@@ -18,7 +18,7 @@ Page {
 	Component {
 		id: headerComponent
 
-		ListItemControl {
+		ListItem {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset

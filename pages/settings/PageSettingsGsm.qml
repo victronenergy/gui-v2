@@ -63,7 +63,7 @@ Page {
 				dataItem.uid: bindPrefix + "/NetworkName"
 			}
 
-			ListItemControl {
+			ListItem {
 				id: signalStrength
 
 				preferredVisible: gsmStatusIcon.valid

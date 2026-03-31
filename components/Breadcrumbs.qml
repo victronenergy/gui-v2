@@ -16,7 +16,7 @@ BaseListView {
 	currentIndex: count - 1
 	clip: true
 
-	delegate: ListItemControl {
+	delegate: ListItem {
 		id: breadcrumb
 
 		required property int index

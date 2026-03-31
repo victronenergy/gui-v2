@@ -218,12 +218,12 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
     components/listitems/core/BaseListLoader.qml
-    components/listitems/core/ListItemControl.qml
     components/listitems/core/ListAlarm.qml
     components/listitems/core/ListButton.qml
     components/listitems/core/ListDateSelector.qml
     components/listitems/core/ListIntField.qml
     components/listitems/core/ListIpAddressField.qml
+    components/listitems/core/ListItem.qml
     components/listitems/core/ListItemBackground.qml
     components/listitems/core/ListNavigation.qml
     components/listitems/core/ListPortField.qml

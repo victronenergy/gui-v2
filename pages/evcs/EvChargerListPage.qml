@@ -13,7 +13,7 @@ Page {
 	title: qsTrId("evcs_charging_stations")
 
 	GradientListView {
-		header: ListItemControl {
+		header: ListItem {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset

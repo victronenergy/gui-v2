@@ -55,7 +55,7 @@ Page {
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 		}
 
-		ListItemControl {
+		ListItem {
 			id: manualControl
 
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid

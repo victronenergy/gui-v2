@@ -7,7 +7,7 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-ListItemControl {
+ListItem {
 	id: root
 
 	required property string name
