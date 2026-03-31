@@ -14,7 +14,7 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItemControl {
+			ListItem {
 				id: statusLeds
 
 				contentItem: RowLayout {

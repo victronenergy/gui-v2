@@ -111,7 +111,7 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListItemControl {
+			ListItem {
 				id: stateGroup
 
 				preferredVisible: root._showStateGroup

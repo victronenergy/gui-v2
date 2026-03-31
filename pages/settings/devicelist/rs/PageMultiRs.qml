@@ -207,7 +207,7 @@ DevicePage {
 				unit: VenusOS.Units_Watt
 			}
 
-			ListItemControl {
+			ListItem {
 				id: trackerTableItem
 
 				// Remove horizontal padding to allow QuantityTable row background colours to

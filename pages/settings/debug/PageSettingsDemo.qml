@@ -280,7 +280,7 @@ Page {
 				text: "Time selection"
 			}
 
-			ListItemControl {
+			ListItem {
 				id: toastItem
 
 				topPadding: 0
@@ -308,7 +308,7 @@ Page {
 				}
 			}
 
-			ListItemControl {
+			ListItem {
 				id: customItem
 
 				contentItem: RowLayout {
@@ -450,7 +450,7 @@ Page {
 					width: parent ? parent.width : 0
 					topPadding: spacing
 
-					ListItemControl {
+					ListItem {
 						contentItem: Rectangle {
 							implicitWidth: 120
 							implicitHeight: 80

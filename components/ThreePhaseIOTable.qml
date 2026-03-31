@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListItemControl {
+ListItem {
 	id: root
 
 	property int phaseCount

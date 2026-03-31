@@ -22,7 +22,7 @@ DeviceListPluginPage {
 				}
 			}
 
-			ListItemControl {
+			ListItem {
 				id: imageItem
 
 				contentItem: RowLayout {
