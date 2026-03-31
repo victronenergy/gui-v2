@@ -45,7 +45,7 @@ Page {
 		highlightMoveVelocity: Theme.animation_cards_highlightMoveVelocity
 		highlightMoveDuration: -1
 
-		header: BaseListLoader {
+		header: ListItemLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
 			sourceComponent: FocusScope {
 				width: root.cardWidth + cardsView.spacing
@@ -65,7 +65,7 @@ Page {
 		}
 
 		model: controlCardModel
-		delegate: BaseListLoader {
+		delegate: ListItemLoader {
 			id: deviceDelegate
 
 			required property Device device

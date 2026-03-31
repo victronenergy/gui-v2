@@ -18,7 +18,7 @@ Page {
 			sourceModel: RuntimeDeviceModel
 		}
 
-		delegate: BaseListLoader {
+		delegate: ListItemLoader {
 			id: delegateLoader
 
 			required property BaseDevice device

@@ -36,7 +36,7 @@ ControlCard {
 		keyNavigationEnabled: Global.keyNavigationEnabled
 		model: root.group?.channels ?? []
 
-		delegate: BaseListLoader {
+		delegate: ListItemLoader {
 			id: delegateLoader
 
 			required property IOChannel modelData

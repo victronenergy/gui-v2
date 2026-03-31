@@ -52,7 +52,7 @@ DevicePage {
 			bindPrefix: root.bindPrefix
 		}
 
-		BaseListLoader {
+		ListItemLoader {
 			width: parent ? parent.width : 0
 			sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
 					: root.trackerCount > 1 ? multiTrackerComponent
