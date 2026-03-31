@@ -80,7 +80,7 @@ Page {
 				}
 			}
 
-			BaseListLoader {
+			ListItemLoader {
 				width: parent ? parent.width : 0
 				sourceComponent: root.serviceType === "inverter" ? inverterAcOutQuantityGroup
 						: root.serviceType === "vebus" ? veBusAcIODisplay
