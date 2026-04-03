@@ -28,6 +28,7 @@ Item {
 	readonly property bool _ready: _dataObjectsReady
 			&& Global.backendReady
 			&& (BackendConnection.type !== BackendConnection.MockSource || mockSetupLoader.mockLoaded)
+			&& !GuiPluginLoader.busy
 
 	on_DataObjectsReadyChanged: if (_dataObjectsReady) console.info("DataManager: data objects ready")
 	on_ReadyChanged: {
