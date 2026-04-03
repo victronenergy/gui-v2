@@ -6,8 +6,7 @@
 #include "guiplugins.h"
 #include "logging.h"
 #include "language.h"
-
-#include <veutil/qt/ve_qitem.hpp>
+#include "backendconnection.h"
 
 #include <QResource>
 #include <QTranslator>
@@ -15,6 +14,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileSystemWatcher>
+#include <QCryptographicHash>
 
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -115,14 +115,32 @@ GuiPluginLoader::GuiPluginLoader(QObject *parent)
 			}
 		});
 
+	const bool loadFromMqtt =
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+		true;  // always load from MQTT
+#elif defined(VENUS_GX_BUILD)
+		false; // always load from filesystem
+#else
+		// for desktop builds, load from filesystem unless --mqtt is specified
+		BackendConnection::create()->type() == BackendConnection::MqttSource;
+#endif
+	qCInfo(venusGui).noquote() << "Gui plugins will be loaded from" << (loadFromMqtt ? "MQTT" : "filesystem");
+
 	// Initialise a single-shot timer for invoke-once behaviour related to plugin loading.
 	// This ensures that even if multiple plugins are changed at the same time, we only
 	// reload and re-initialise the plugins once.
 	m_invokeOnceTimer.setSingleShot(true);
 	m_invokeOnceTimer.setInterval(100); // file operations are asynchronous, so give some leeway.
-	connect(&m_invokeOnceTimer, &QTimer::timeout, this, &GuiPluginLoader::initPlugins);
+	if (loadFromMqtt) {
+		// Set up MQTT watchers on the gui plugins path,
+		// and read plugin data from those MQTT paths (if they exist).
+		connect(&m_invokeOnceTimer, &QTimer::timeout, this, &GuiPluginLoader::watchMqttPluginPaths);
+		watchMqttPluginPaths();
+		return;
+	}
 
 	// Set up a filesystem watcher on the enabled applications dir (if it exists).
+	connect(&m_invokeOnceTimer, &QTimer::timeout, this, &GuiPluginLoader::initPlugins);
 	const QString appsDir = enabledAppsDir();
 	if (!appsDir.isEmpty()) {
 		m_enabledAppsDirWatcher = new QFileSystemWatcher(QStringList { appsDir }, this);
@@ -142,6 +160,11 @@ GuiPluginLoader::GuiPluginLoader(QObject *parent)
 
 GuiPluginLoader::~GuiPluginLoader()
 {
+}
+
+bool GuiPluginLoader::busy() const
+{
+	return m_busy;
 }
 
 QString GuiPluginLoader::pluginsJson() const
@@ -172,6 +195,250 @@ GuiPlugin GuiPluginLoader::plugin(const QString &name) const
 	}
 
 	return GuiPlugin();
+}
+
+void GuiPluginLoader::triggerWatchMqttPluginPaths()
+{
+	// coalesce signals in case multiple filesystem changes are recognised and published to MQTT in short succession.
+	m_invokeOnceTimer.start();
+}
+
+void GuiPluginLoader::watchMqttPluginPaths()
+{
+	if (BackendConnection::create()->type() == BackendConnection::UnknownSource) {
+		connect(BackendConnection::create(), &BackendConnection::typeChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		return;
+	}
+	disconnect(BackendConnection::create(), &BackendConnection::typeChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
+
+	if (BackendConnection::create()->type() != BackendConnection::MqttSource) {
+		// only load gui plugins from MQTT, not DBus (on CerboGX we load directly from filesystem).
+		// immediately initPlugins() to transition to busy=false.
+		initPlugins();
+		return;
+	}
+
+	VeQItemProducer *producer = BackendConnection::create()->producer();
+	if (!producer) {
+		connect(BackendConnection::create(), &BackendConnection::producerChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		return;
+	}
+	disconnect(BackendConnection::create(), &BackendConnection::producerChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
+
+	VeQItem *servicesRoot = producer->services();
+	Q_ASSERT(servicesRoot);
+	VeQItem *guiCustomizations = servicesRoot->itemChildren().value(QStringLiteral("GuiCustomizations"));
+	if (!guiCustomizations) {
+		connect(servicesRoot, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		return;
+	}
+	disconnect(servicesRoot, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
+
+	VeQItem *enabledCustomisationsItem = guiCustomizations->itemChildren().value(QStringLiteral("Applist"));
+	if (!enabledCustomisationsItem) {
+		connect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		return;
+	}
+	disconnect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
+
+	connect(enabledCustomisationsItem, &VeQItem::valueChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+	const QStringList enabledCustomisations = enabledCustomisationsItem->getValue().toStringList();
+	if (enabledCustomisations.isEmpty()) {
+		qCInfo(venusGui) << "No enabled gui plugins available from MQTT.";
+		initPlugins(); // no plugins to init, but transition to busy=false state.
+		return;
+	}
+
+	VeQItem *apps = guiCustomizations->itemChildren().value(QStringLiteral("Apps"));
+	if (!apps) {
+		connect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		return;
+	}
+	disconnect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
+
+	qDeleteAll(m_mqttFetchers);
+	m_mqttFetchers.clear();
+	m_pluginDirData.clear();
+	for (const QString &name : enabledCustomisations) {
+		VeQItem *currCustomisation = apps->itemChildren().value(name);
+		VeQItem *currInfo = currCustomisation ? currCustomisation->itemChildren().value(QStringLiteral("info")) : nullptr;
+		if (!currInfo) {
+			continue; // we could retry after some time, but for now just ignore the broken plugin tree.
+		}
+
+		qCInfo(venusGui) << "Loading gui plugin:" << name << "from MQTT";
+		GuiPluginMqttFetcher *currFetcher = new GuiPluginMqttFetcher(name, currCustomisation, currInfo, this);
+		m_mqttFetchers.append(currFetcher);
+		connect(currFetcher, &GuiPluginMqttFetcher::failed,
+				this, [this, currFetcher] {
+					qCWarning(venusGui) << "Failed to load plugin: " << currFetcher->name() << " from MQTT";
+					m_mqttFetchers.removeOne(currFetcher);
+					if (m_mqttFetchers.isEmpty()) {
+						qCInfo(venusGui) << "All plugin data loaded, attempting to initialise...";
+						initPlugins();
+					}
+					currFetcher->deleteLater();
+				});
+		connect(currFetcher, &GuiPluginMqttFetcher::succeeded,
+				this, [this, currFetcher] {
+					m_mqttFetchers.removeOne(currFetcher);
+					const QByteArray pluginData = currFetcher->data();
+					m_pluginDirData.insert(currFetcher->pluginPath(), QStringList() << QString::fromUtf8(pluginData));
+					if (m_mqttFetchers.isEmpty()) {
+						qCInfo(venusGui) << "All plugin data loaded, attempting to initialise...";
+						initPlugins();
+					}
+					currFetcher->deleteLater();
+				});
+		currFetcher->start();
+
+		// listen for changes to the plugin (the sha256 value in the info topic will change)
+		connect(currInfo, &VeQItem::valueChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+	}
+
+	if (m_mqttFetchers.isEmpty()) {
+		qCInfo(venusGui) << "No gui plugins available from MQTT.";
+		initPlugins(); // all plugins ignored; immediately transition to busy=false etc.
+	}
+}
+
+GuiPluginMqttFetcher::GuiPluginMqttFetcher(const QString &name, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent)
+	: QObject(parent), m_name(name), m_pluginBaseItem(pluginBaseItem), m_pluginInfoItem(pluginInfoItem), m_timeout(this)
+{
+	m_timeout.setInterval(15000);
+	m_timeout.setSingleShot(true);
+	connect(&m_timeout, &QTimer::timeout, this, &GuiPluginMqttFetcher::timeout);
+}
+
+void GuiPluginMqttFetcher::start()
+{
+	if (!m_pluginBaseItem || !m_pluginInfoItem) {
+		qCWarning(venusGui) << "Invalid info VeQItem specified, cannot fetch plugin data from MQTT:" << m_name;
+		m_finished = true;
+		Q_EMIT failed();
+		return;
+	}
+
+	const QVariantMap values = m_pluginInfoItem->getValue().toMap();
+	m_sha256 = values.value(QStringLiteral("sha256")).toString();
+	m_chunkCount = values.value(QStringLiteral("chunk_count")).toInt();
+	if (m_sha256.isEmpty() || m_chunkCount <= 0) {
+		qCWarning(venusGui) << "Info VeQItem does not contain required plugin data:" << m_name;
+		m_finished = true;
+		Q_EMIT failed();
+		return;
+	}
+
+	bool needFetch = false;
+	VeQItem *chunksItem = m_pluginBaseItem->itemGetOrCreate(QStringLiteral("Chunks"));
+	for (int i = 0; i < m_chunkCount; ++i) {
+		VeQItem *chunkItem = chunksItem->itemGetOrCreate(QStringLiteral("%1").arg(i));
+		const QByteArray base64Data = chunkItem->getValue().toMap().value(QStringLiteral("base64")).toString().toUtf8();
+		m_chunkItems.insert(i, qMakePair(chunkItem, base64Data));
+
+		if (base64Data.isEmpty()) {
+			needFetch = true;
+			connect(chunkItem, &VeQItem::valueChanged, this, &GuiPluginMqttFetcher::chunkValueChanged, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+			chunkItem->getValue(true); // force read of chunk data
+		}
+	}
+
+	if (!needFetch) {
+		checkFinished();
+	} else {
+		m_timeout.start();
+	}
+}
+
+void GuiPluginMqttFetcher::timeout()
+{
+	qCWarning(venusGui) << "Plugin fetch timed out: " << m_name;
+	m_timeout.stop();
+	m_finished = true;
+	Q_EMIT failed();
+	return;
+}
+
+void GuiPluginMqttFetcher::chunkValueChanged(const QVariant &value)
+{
+	VeQItem *chunkItem = qobject_cast<VeQItem*>(sender());
+	if (!chunkItem || m_finished) {
+		return;
+	}
+
+	const QByteArray base64Data = value.toMap().value(QStringLiteral("base64")).toString().toUtf8();
+	if (!base64Data.isEmpty()) {
+		int matchingChunkNbr = -1;
+		const QList<int> chunkNbrs = m_chunkItems.keys();
+		for (const int &chunkNbr : chunkNbrs) {
+			const QPair<VeQItem*, QByteArray> &chunk(m_chunkItems[chunkNbr]);
+			if (chunk.first == chunkItem) {
+				matchingChunkNbr = chunkNbr;
+				break;
+			}
+		}
+
+		if (matchingChunkNbr >= 0) {
+			m_chunkItems.insert(matchingChunkNbr, qMakePair(chunkItem, base64Data));
+			checkFinished();
+		} else {
+			qCWarning(venusGui) << "Received unknown chunk" << chunkItem->uniqueId();
+		}
+	} else {
+		qCWarning(venusGui) << "Received empty chunk" << chunkItem->uniqueId();
+	}
+}
+
+void GuiPluginMqttFetcher::checkFinished()
+{
+	// now check to see whether we have all chunks loaded.
+	// if so, we can assemble the complete plugin.
+	bool haveAllChunks = true;
+	const QList<int> chunkNbrs = m_chunkItems.keys();
+	for (const int &chunkNbr : chunkNbrs) {
+		const QPair<VeQItem*, QByteArray> &chunk(m_chunkItems[chunkNbr]);
+		if (chunk.second.isEmpty()) {
+			haveAllChunks = false;
+			break;
+		}
+	}
+
+	if (!haveAllChunks) {
+		return;
+	}
+
+	// Decode each chunk, and append to the final data.
+	// We rely on sorted nature of QMap, starting from the zeroth chunk...
+	QByteArray assembled;
+	for (const int &chunkNbr : chunkNbrs) {
+		const QPair<VeQItem*, QByteArray> &chunk(m_chunkItems[chunkNbr]);
+		const QByteArray chunkData = QByteArray::fromBase64(chunk.second);
+		if (chunkData.isEmpty()) {
+			qCWarning(venusGui) << "Unable to decode chunk: " << chunkNbr << "of plugin: " << m_name;
+			m_timeout.stop();
+			m_finished = true;
+			Q_EMIT failed();
+			return;
+		}
+
+		assembled += chunkData;
+	}
+
+	// Check that the sha256 sum matches our assembled data.
+	const QString hash = QString::fromUtf8(QCryptographicHash::hash(assembled, QCryptographicHash::Sha256).toHex());
+	if (m_sha256.compare(hash, Qt::CaseInsensitive) != 0) {
+		qCWarning(venusGui) << "Unable to assemble plugin: " << m_name << " - sha256 doesn't match: " << hash << "!=" << m_sha256;
+		m_timeout.stop();
+		m_finished = true;
+		Q_EMIT failed();
+		return;
+	}
+
+	// Success.
+	m_timeout.stop();
+	m_finished = true;
+	m_data = assembled;
+	Q_EMIT succeeded();
 }
 
 void GuiPluginLoader::watchPluginDirs(const QString &appsDir)
@@ -233,7 +500,7 @@ void GuiPluginLoader::readFromFilesystem(const QString &path)
 
 void GuiPluginLoader::initPlugins()
 {
-	qCInfo(venusGui) << "About to initialise plugins due to filesystem trigger";
+	qCInfo(venusGui) << "About to initialise plugins due to filesystem or MQTT trigger";
 	QStringList allPlugins;
 	for (const QStringList &pluginData : std::as_const(m_pluginDirData)) {
 		allPlugins.append(pluginData);
@@ -241,6 +508,12 @@ void GuiPluginLoader::initPlugins()
 
 	// This will result in populatePlugins() being called.
 	setPluginsJson(QStringLiteral("[ %1 ]").arg(allPlugins.join(QChar(','))));
+
+	// Set our first-time load busy state to false
+	if (m_busy) {
+		m_busy = false;
+		Q_EMIT busyChanged();
+	}
 }
 
 void GuiPluginLoader::populatePlugins()
@@ -475,7 +748,7 @@ bool GuiPluginLoader::installPluginTranslatorForLanguage(const QString &pluginNa
 				pluginName,
 				QLatin1String("_"),
 				QStringLiteral(":/%1").arg(pluginName))) {
-			qCDebug(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name() << "for plugin" << pluginName;
+			qCInfo(venusGui) << "Successfully loaded translations for locale" << QLocale(language).name() << "for plugin" << pluginName;
 			hash.insert(language, translator);
 		} else {
 			qCWarning(venusGui) << "Unable to load translations for locale" << QLocale(language).name() << "for plugin" << pluginName;

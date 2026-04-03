@@ -23,6 +23,11 @@ elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
     set(VENUS_WEBASSEMBLY_BUILD ON)
     add_compile_definitions(VENUS_WEBASSEMBLY_BUILD)
     add_compile_definitions(MQTT_WEBSOCKETS_ENABLED)
+
+    # For faster builds.  Don't enable this for release builds!
+    #add_link_options("-O0" "-sWASM_BIGINT" "-sERROR_ON_WASM_CHANGES_AFTER_LINK")
+    #set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
+
 else()
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
