@@ -35,7 +35,7 @@ BaseListView {
 	Rectangle {
 		anchors.horizontalCenter: parent.horizontalCenter
 		width: parent.width - (2 * root.horizontalPressMargin)
-		height: Theme.geometry_switchableoutput_control_height
+		height: Theme.geometry_iochannel_control_height
 		color: enabled ? Theme.color_ok : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 		z: -1
@@ -58,7 +58,7 @@ BaseListView {
 
 			y: -root.verticalPressMargin
 			defaultBackgroundWidth: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
-			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height - (2 * Theme.geometry_button_border_width)
+			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_button_border_width)
 			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			rightInset: lastListItem ? root.horizontalPressMargin : 0
@@ -101,7 +101,7 @@ BaseListView {
 			id: stateToggleButton
 
 			y: -root.verticalPressMargin
-			defaultBackgroundHeight: Theme.geometry_switchableoutput_control_height - (2 * Theme.geometry_button_border_width)
+			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_button_border_width)
 			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			leftInset: root.horizontalPressMargin + Theme.geometry_button_border_width
