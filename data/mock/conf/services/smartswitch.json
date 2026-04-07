@@ -11,6 +11,10 @@
         "/Settings/Vecan/vecan1/VenusUniqueId": 1
     },
     "com.victronenergy.switch.smartswitch_123": {
+        "/Channel/0/Direction": -1,
+        "/Channel/1/Direction": 0,
+        "/Channel/2/Direction": 0,
+        "/Channel/3/Direction": 0,
         "/Connected": 1,
         "/CustomName": "",
         "/DeviceInstance": 0,
