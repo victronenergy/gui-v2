@@ -24,7 +24,7 @@ Page {
 			ListSpinBox {
 				id: gridSetpoint
 
-				bottomPadding: gridSetpointSlider.height
+				bottomPadding: gridSetpointSlider.height + Theme.geometry_listItem_content_verticalMargin
 				text: root.title
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
