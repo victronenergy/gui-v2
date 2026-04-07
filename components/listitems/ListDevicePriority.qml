@@ -10,16 +10,31 @@ import Victron.VenusOS
 ListSetting {
 	id: root
 
-	property string serviceType
-	property int deviceInstance: -1
-	property string uniqueIdentifier
-	readonly property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
+	required property int index
+	required property string serviceType
+	required property int deviceInstance
+	required property string uniqueIdentifier
+	required property FilteredDeviceModel devices
+
+	property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
 	readonly property string pageSource: pageData.item?.pageSource || ""
 	readonly property ListModel _model: ListView.view.model
 
 	function click() {
 		if (interactive) {
 			Global.pageManager.pushPage(root.pageSource, { "title": root.text, "device": root._device })
+		}
+	}
+
+	Connections {
+		enabled: !root._device && root.deviceInstance >= 0
+		target: root.devices
+
+		function onCountChanged() {
+			const matchingDevice = root.devices.deviceForDeviceInstance(root.deviceInstance)
+			if (matchingDevice) {
+				root._device = matchingDevice
+			}
 		}
 	}
 
@@ -34,7 +49,6 @@ ListSetting {
 	component PageData : QtObject {
 		required property bool interactive
 		required property string pageSource
-		property Device device
 	}
 
 	Component {
@@ -50,18 +64,16 @@ ListSetting {
 		id: acLoadData
 
 		PageData {
-			id: acLoadData
-
 			property VeQuickItem powerSetting: VeQuickItem {
-				uid: acLoadData.device ? acLoadData.device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
+				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
 			}
 
 			property VeQuickItem offHysteresis: VeQuickItem {
-				uid: acLoadData.device? acLoadData.device.serviceUid + "/S2/0/RmSettings/OffHysteresis" : ""
+				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/OffHysteresis" : ""
 			}
 
 			property VeQuickItem onHysteresis: VeQuickItem {
-				uid: acLoadData.device? acLoadData.device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
+				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
 			}
 
 			interactive: powerSetting.valid || offHysteresis.valid || onHysteresis.valid
@@ -73,10 +85,8 @@ ListSetting {
 		id: evcsData
 
 		PageData {
-			id: evcsData
-
 			property VeQuickItem maxChargePower: VeQuickItem {
-				uid: evcsData.device? evcsData.device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
+				uid: root._device? root._device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
 			}
 
 			interactive: maxChargePower.valid
@@ -167,18 +177,11 @@ ListSetting {
 				return undefined
 			}
 		}
-		onLoaded: item.device = Qt.binding(function() { return root._device })
 	}
 
 	VeQuickItem {
 		id: deviceActive
 
 		uid: root._device ? root._device.serviceUid + "/S2/0/Active" : ""
-	}
-
-	FilteredDeviceModel {
-		id: devices
-
-		serviceTypes: [root.serviceType]
 	}
 }
