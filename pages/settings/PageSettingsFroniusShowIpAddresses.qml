@@ -9,39 +9,21 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	topRightButton: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
-			? VenusOS.StatusBar_RightButton_Refresh
-			: VenusOS.StatusBar_RightButton_None
-
 	IpAddressListView {
 		id: settingsListView
 
-		ipAddresses.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
-	}
+		addressesUid: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
+		header: ListNavigation {
+			bottomInset: Theme.geometry_listItem_itemSeparator_height
+			bottomPadding: bottomInset + topPadding
 
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root.isCurrentPage
-
-		function onRightButtonClicked() {
-			Global.dialogLayer.open(rescanDialogComponent)
-		}
-	}
-
-	Component {
-		id: rescanDialogComponent
-
-		ModalWarningDialog {
-			//% "Rescan for IP addresses?"
-			title: qsTrId("settings_fronius_rescan_title")
-			//% "Rescan"
-			acceptText: qsTrId("settings_fronius_rescan")
-			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color_ok
-			icon.source: "qrc:/images/icon_info_32.svg"
-
-			onAccepted: {
-				settingsListView.ipAddresses.setValue('')
+			//% "Rescan for IP addresses"
+			text: qsTrId("settings_fronius_rescan_for_ip_addresses")
+			iconSource: "qrc:/images/icon_refresh_32.svg"
+			iconColor: Theme.color_ok
+			showAccessLevel: VenusOS.User_AccessType_Installer
+			onClicked: {
+				settingsListView.clearAddresses()
 				scanItem.setValue(1)
 			}
 		}

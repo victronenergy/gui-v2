@@ -86,6 +86,7 @@
     "geometry_listItem_content_spacing": 16,
     "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
+    "geometry_listItem_itemSeparator_height": 48,
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
     "geometry_listItem_arrow_leftMargin": 8,
