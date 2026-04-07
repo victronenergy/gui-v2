@@ -10,6 +10,7 @@
         "/Devices/E465B8B6F444/Model": "ShellyPlusPlugS",
         "/Devices/E465B8B6F444/Name": "",
         "/Devices/E465B8B6F444/Server": "ShellyPlusPlugS-E465B8B6F444.local",
+        "/Devices/E465B8B6F444/Type": "switch",
         "/Devices/ABC/2/Enabled": 1,
         "/Devices/ABC/1/Enabled": 0,
         "/Devices/ABC/0/Enabled": 0,

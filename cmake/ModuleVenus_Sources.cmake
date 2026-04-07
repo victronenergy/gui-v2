@@ -734,10 +734,13 @@ set(VictronVenusOS_RESOURCES
     images/icon_connectivity_32.png
     images/icon_debug_32.png
     images/icon_devices_32.png
+    images/icon_energymeter_1f_32.svg
+    images/icon_energymeter_3f_32.svg
     images/icon_general_32.png
     images/icon_integration_32.png
     images/icon_smartswitch_off_32.svg
     images/icon_smartswitch_on_32.svg
+    images/icon_switchdev_32.svg
     images/icon_system_32.png
     images/icon_vrm_32.png
     images/brief.svg

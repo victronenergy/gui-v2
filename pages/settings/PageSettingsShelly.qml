@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
@@ -104,9 +105,40 @@ Page {
 		}
 		model: sortedChannelModel
 		delegate: ListSwitch {
+			leftPadding: horizontalContentPadding + typeIcon.width + spacing
 			text: sortValue
 			dataItem.uid: buddy.uid
 			writeAccessLevel: VenusOS.User_AccessType_User
+
+			CP.ColorImage {
+				id: typeIcon
+
+				anchors {
+					left: parent.left
+					leftMargin: parent.horizontalContentPadding
+					verticalCenter: parent.verticalCenter
+				}
+				width: Theme.geometry_icon_size_medium
+				height: Theme.geometry_icon_size_medium
+				color: Theme.color_font_primary
+				opacity: status === Image.Ready ? 1 : 0 // keep space even if no icon is available, to maintain vertical alignments
+				source: {
+					switch (typeItem.value) {
+					case "switch": return "qrc:/images/icon_switchdev_32.svg"
+					case "em1": return "qrc:/images/icon_energymeter_1f_32.svg"
+					case "em": return "qrc:/images/icon_energymeter_3f_32.svg"
+					default: return ""
+					}
+				}
+			}
+
+			VeQuickItem {
+				id: typeItem
+
+				readonly property string deviceUid: buddy.itemParent()?.itemParent()?.uid ?? ""
+
+				uid: deviceUid ? deviceUid + "/Type" : ""
+			}
 		}
 	}
 }
