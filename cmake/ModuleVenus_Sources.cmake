@@ -799,6 +799,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_manualstart_24.svg
     images/icon_manualstart_timer_24.svg
     images/icon_minus.svg
+    images/icon_minus_32.svg
     images/icon_minus_bordered.svg
     images/icon_plus.svg
     images/icon_plus_32.svg

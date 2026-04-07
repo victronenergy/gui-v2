@@ -19,6 +19,9 @@ QtObject {
 	//% "Add device"
 	readonly property string add_device: qsTrId("common_words_add_device")
 
+	//% "Add Modbus TCP/UDP device"
+	readonly property string add_modbus_device: qsTrId("common_words_add_modbus_device")
+
 	//: The role for an AC input (grid, genset, acload, etc.)
 	//% "Role"
 	readonly property string ac_input_role: qsTrId("common_words_ac_input_role")

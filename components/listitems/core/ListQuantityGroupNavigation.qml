@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import QtQuick.Layouts
 import Victron.VenusOS
 
@@ -16,6 +17,8 @@ ListSetting {
 	property string text
 	property QuantityObjectModel quantityModel
 	property bool tableMode
+	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
+	property color iconColor: Theme.color_listItem_forwardIcon
 
 	signal clicked
 
@@ -73,13 +76,16 @@ ListSetting {
 			}
 		}
 
-		ForwardIcon {
+		CP.ColorImage {
 			id: arrowIcon
 
 			anchors {
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
+			source: root.iconSource
+			color: root.iconColor
+
 			// Set opacity instead of visible, to maintain vertical alignments across multiple
 			// quantity group list items even when list item is not clickable.
 			opacity: root.interactive ? 1 : 0
