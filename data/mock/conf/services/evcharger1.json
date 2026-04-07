@@ -27,7 +27,9 @@
         "/Session/Time": 8838.0,
         "/SetCurrent": 22,
         "/StartStop": 1,
-        "/Status": 2
+        "/Status": 2,
+        "/S2/0/RmSettings/MaxChargePower": 99999,
+        "/S2/0/Active": 0
     },
     "com.victronenergy.modbusclient.tcp": {
         "/Devices/evc_ABC123456/Enabled": 1,
