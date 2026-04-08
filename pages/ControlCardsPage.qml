@@ -109,6 +109,10 @@ Page {
 				}
 			}
 		}
+		WheelHandler {
+			enabled: Qt.platform.os === "wasm" || Global.isDesktop
+			onWheel: (event) => { cardsView.flick(event.angleDelta.y * event.y, 0) }
+		}
 	}
 
 	FilteredDeviceModel {
