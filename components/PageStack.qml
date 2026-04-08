@@ -72,7 +72,7 @@ StackView {
 
 	function pushPage(obj, properties, operation) {
 		if (root.animating) {
-			return
+			return null
 		}
 		if (state === "hidden") {
 			// If the stack was hidden, it now contains pages that are no longer relevant. Clear all
@@ -89,7 +89,7 @@ StackView {
 			let checkComponent = Qt.createComponent(objectOrUrl)
 			if (checkComponent.status !== Component.Ready) {
 				console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
-				return
+				return null
 			}
 			objectOrUrl = checkComponent.createObject(null, properties)
 			root._pageUrls.push(obj)
@@ -101,11 +101,12 @@ StackView {
 
 		if (root.depth === 0) {
 			// When the first page is added to the stack, move the stack into view.
-			root.push(objectOrUrl, properties, StackView.Immediate)
+			const newPage = root.push(objectOrUrl, properties, StackView.Immediate)
 			fakePushAnimation.duration = _animationDuration(operation)
 			root.state = "opened"
+			return newPage
 		} else {
-			root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+			return root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 		}
 	}
 
