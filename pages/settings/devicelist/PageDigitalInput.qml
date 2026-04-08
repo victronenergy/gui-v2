@@ -53,6 +53,7 @@ DevicePage {
 								//% "Inverted"
 								text: qsTrId("digitalinput_inverted")
 								dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
+								preferredVisible: inputType.value !== VenusOS.DigitalInput_Type_GeneratorInhibitRun
 							}
 
 							ListSwitch {

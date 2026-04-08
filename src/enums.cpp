@@ -314,9 +314,12 @@ QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 	case DigitalInput_Type_CO2Alarm:
 		//% "CO2 alarm"
 		return qtTrId("digitalinputs_type_co2alarm");
-	case DigitalInput_Type_Generator:
-		//% "Generator"
+	case DigitalInput_Type_GeneratorStatus:
+		//% "Generator status"
 		return qtTrId("digitalinputs_type_generator");
+	case DigitalInput_Type_GeneratorInhibitRun:
+		//% "Generator inhibit run"
+		return qtTrId("digitalinputs_type_remote_generator_enable");
 	case DigitalInput_Type_TouchInputControl:
 		//% "Touch input control"
 		return qtTrId("digitalinputs_touch_input_control");
@@ -376,6 +379,15 @@ QString Enums::digitalInput_stateToText(DigitalInput_State state) const
 		//: Digital input state
 		//% "Stopped"
 		return qtTrId("digitalinputs_state_stopped");
+	case DigitalInput_State_Enabled:
+		//: Digital input state
+		//% "Enabled"
+		return qtTrId("digitalinputs_state_enabled");
+	case DigitalInput_State_Disabled:
+		//: Digital input state
+		//% "Disabled"
+		return qtTrId("digitalinputs_state_disabled");
+
 	default:
 		return QString();
 	}
