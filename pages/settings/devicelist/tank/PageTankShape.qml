@@ -16,23 +16,6 @@ Page {
 	property var _editPointDialog
 	readonly property bool _canEditPoints: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
 
-	topRightButton: _canEditPoints && pointsListView.count < 10
-			? VenusOS.StatusBar_RightButton_Add
-			: VenusOS.StatusBar_RightButton_None
-
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root._canEditPoints && root.isCurrentPage
-
-		function onRightButtonClicked() {
-			Global.dialogLayer.open(editPointDialogComponent, {
-					"sensorLevel": 1,
-					"volume": 1,
-					"modelIndex": -1
-				})
-		}
-	}
-
 	VeQuickItem {
 		id: points
 
@@ -71,10 +54,35 @@ Page {
 	GradientListView {
 		id: pointsListView
 
-		header: PrimaryListLabel {
-			//% "No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied."
-			text: qsTrId("devicelist_tankshape_empty")
-			preferredVisible: pointsListView.count === 0
+		header: SettingsColumn {
+			width: parent?.width ?? 0
+			bottomPadding: addPoint.effectiveVisible || placeholderLabel.effectiveVisible ? Theme.geometry_listItem_itemSeparator_height : 0
+
+			ListNavigation {
+				id: addPoint
+
+				//% "Add shape point"
+				text: qsTrId("devicelist_tankshape_add_shape_point")
+				iconSource: "qrc:/images/icon_plus_32.svg"
+				iconColor: Theme.color_ok
+				showAccessLevel: VenusOS.User_AccessType_Installer
+				preferredVisible: _canEditPoints && pointsListView.count < 10
+				onClicked: {
+					Global.dialogLayer.open(editPointDialogComponent, {
+						"sensorLevel": 1,
+						"volume": 1,
+						"modelIndex": -1
+					})
+				}
+			}
+
+			PrimaryListLabel {
+				id: placeholderLabel
+
+				//% "No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied."
+				text: qsTrId("devicelist_tankshape_empty")
+				preferredVisible: pointsListView.count === 0
+			}
 		}
 
 		delegate: ListSetting {
@@ -104,6 +112,7 @@ Page {
 				}
 
 				RemoveButton {
+					source: "qrc:/images/icon_minus_32.svg"
 					visible: root._canEditPoints
 					onClicked: {
 						let pointList = pointsListView.model
@@ -223,7 +232,7 @@ Page {
 							spacing: Theme.geometry_spinBox_wide_spacing
 							from: 1
 							to: 99
-							textFromValue: function(value, locale) { return value + "%" }
+							suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 							onValueModified: errorLabel.text = ""
 
 							// Use BeforeItem priority to override the default key Spinbox event handling, else
@@ -258,7 +267,7 @@ Page {
 							spacing: Theme.geometry_spinBox_wide_spacing
 							from: 1
 							to: 99
-							textFromValue: function(value, locale) { return value + "%" }
+							suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 							onValueModified: errorLabel.text = ""
 
 							KeyNavigation.priority: KeyNavigation.BeforeItem
