@@ -34,6 +34,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/dcsystem2.json
     data/mock/conf/services/dse-genset.json
     data/mock/conf/services/digitalinput-alarm.json
+    data/mock/conf/services/eebus.json
     data/mock/conf/services/em-acload.json
     data/mock/conf/services/em-evcharger-input.json
     data/mock/conf/services/em-evcharger-output.json

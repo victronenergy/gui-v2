@@ -1,0 +1,18 @@
+{
+    "com.victronenergy.settings": {
+        "/Settings/Services/Eebus": 1
+    },
+    "com.victronenergy.eebus": {
+        "/Devices/NIBE_123456789_4712/AutoAccept": 0,
+        "/Devices/NIBE_123456789_4712/Brand": "NIBE",
+        "/Devices/NIBE_123456789_4712/Host": "local.",
+        "/Devices/NIBE_123456789_4712/Model": "HeatPump",
+        "/Devices/NIBE_123456789_4712/Name": "NIBE-123456789-4712",
+        "/Devices/NIBE_123456789_4712/Ski": "42d98f9b82ef2f51799f379c5e82765e87685d8a",
+        "/Devices/NIBE_123456789_4712/Trusted": 1,
+        "/Devices/NIBE_123456789_4712/Type": "HeatGenerationSystem",
+        "/LocalSki": "efada28e50e86401fa9ef4790a14dcb0224a01ed",
+        "/PairingQrCode": "SHIP;SKI:efada28e50e86401fa9ef4790a14dcb0224a01ed;ID:VE-GX-f208hff3h02;BRAND:VictronEnergy;TYPE:EnergyManagementSystem;MODEL:VenusOS;SERIAL:12345678;ENDSHIP;",
+        "/TrustedSkis": "[\"42d98f9b82ef2f51799f379c5e82765e87685d8a\"]"
+    }
+}
