@@ -58,6 +58,13 @@ Page {
 			}
 
 			ListNavigation {
+				//% "EEBus Devices"
+				// text: qsTrId("pagesettingsintegrations_eebus_devices")
+				text: "EEBus Devices"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEebus.qml", {"title": text})
+			}
+
+			ListNavigation {
 				//% "Bluetooth Sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
