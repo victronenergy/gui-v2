@@ -6,6 +6,8 @@
 #ifndef VICTRON_GUIV2_GUIPLUGINS_H
 #define VICTRON_GUIV2_GUIPLUGINS_H
 
+#include <veutil/qt/ve_qitem.hpp>
+
 #include <QAbstractListModel>
 #include <QUrl>
 #include <QString>
@@ -30,6 +32,7 @@ namespace Victron {
 namespace VenusOS {
 
 class GuiPlugin;
+class GuiPluginMqttFetcher;
 
 // needs to be initialised before loading the UI.
 class GuiPluginLoader : public QObject
@@ -38,6 +41,7 @@ class GuiPluginLoader : public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 
+	Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
 	Q_PROPERTY(QString pluginsJson READ pluginsJson WRITE setPluginsJson NOTIFY pluginsJsonChanged)
 	Q_PROPERTY(QVector<GuiPlugin> plugins READ plugins NOTIFY pluginsChanged)
 
@@ -66,6 +70,8 @@ public:
 	GuiPluginLoader(QObject *parent);
 	~GuiPluginLoader() override;
 
+	bool busy() const;
+
 	QString pluginsJson() const;
 	void setPluginsJson(const QString &json);
 
@@ -73,10 +79,13 @@ public:
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
 
 Q_SIGNALS:
+	void busyChanged();
 	void pluginsJsonChanged();
 	void pluginsChanged();
 
 private:
+	void triggerWatchMqttPluginPaths();
+	void watchMqttPluginPaths();
 	void watchPluginDirs(const QString &appsDir);
 	void readFromFilesystem(const QString &path);
 	void initPlugins();
@@ -92,7 +101,9 @@ private:
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
 	QFileSystemWatcher *m_guiPluginDirsWatcher = nullptr;
 	QMap<QString, QStringList> m_pluginDirData;
+	QVector<GuiPluginMqttFetcher*> m_mqttFetchers;
 	QTimer m_invokeOnceTimer;
+	bool m_busy = true;
 };
 
 /*
@@ -305,6 +316,46 @@ private:
 	QString m_productId;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
 	bool m_complete = false;
+};
+
+// Helper class, not part of the public API.
+class GuiPluginMqttFetcher : public QObject
+{
+	Q_OBJECT
+
+public:
+	GuiPluginMqttFetcher(const QString &name, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent = nullptr);
+
+	void start();
+
+	QString name()    const { return m_name; }
+	bool finished()   const { return m_finished; }
+	QByteArray data() const { return m_data; }
+	QString sha256()  const { return m_sha256; }
+	int chunkCount()  const { return m_chunkCount; }
+
+	QString pluginPath() const { return m_pluginBaseItem ? m_pluginBaseItem->uniqueId() : QString(); }
+
+Q_SIGNALS:
+	void failed();
+	void succeeded();
+
+private:
+	void chunkValueChanged(const QVariant &value);
+	void checkFinished();
+	void timeout();
+
+	// All VeQItem instances are owned by the VeMqttItemProducer, NOT this class.
+	VeQItem *m_pluginBaseItem = nullptr;
+	VeQItem *m_pluginInfoItem = nullptr;
+	QMap<int, QPair<VeQItem*, QByteArray> > m_chunkItems;
+
+	QTimer m_timeout;
+	QString m_name;
+	QString m_sha256;
+	QByteArray m_data;
+	int m_chunkCount = 0;
+	bool m_finished = false;
 };
 
 } /* VenusOS */
