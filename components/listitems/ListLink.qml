@@ -25,12 +25,13 @@ import Victron.VenusOS
 ListSetting {
 	id: root
 
+	property int mode: Qt.platform.os === "wasm" ? VenusOS.ListLink_Mode_LinkButton : VenusOS.ListLink_Mode_QRCode
 	property string url
 	readonly property string formattedUrl: "<font color=\"%1\">%2</font>".arg(Theme.color_font_primary).arg(url)
 
 	function click() {
 		if (root.clickable) {
-			if (Qt.platform.os === "wasm") {
+			if (root.mode === VenusOS.ListLink_Mode_LinkButton) {
 				BackendConnection.openUrl(root.url)
 			} else {
 				Global.dialogLayer.open(largeQrCodeComponent)
@@ -90,7 +91,7 @@ ListSetting {
 
 			//% "Open link"
 			text: qsTrId("listlink_open_link")
-			visible: Qt.platform.os === "wasm"
+			visible: root.mode === VenusOS.ListLink_Mode_LinkButton
 			rightPadding: arrowIcon.width + root.spacing
 
 			CP.ColorImage {
@@ -115,7 +116,7 @@ ListSetting {
 
 			//% "Show QR code"
 			text: qsTrId("listlink_show_qr_code")
-			visible: Qt.platform.os !== "wasm"
+			visible: root.mode === VenusOS.ListLink_Mode_QRCode
 			down: root.clickable && (pressed || checked)
 			enabled: root.clickable
 			focusPolicy: Qt.NoFocus
@@ -130,12 +131,12 @@ ListSetting {
 
 		ListPressArea {
 			anchors.fill: parent
-			enabled: root.interactive && Qt.platform.os === "wasm"
+			enabled: root.interactive && root.mode === VenusOS.ListLink_Mode_LinkButton
 			onClicked: root.click()
 		}
 	}
 
-	caption: Qt.platform.os === "wasm" ? ""
+	caption: root.mode === VenusOS.ListLink_Mode_LinkButton ? ""
 		  //: %1 = url text
 		  //% "Open the QR code to scan it with your portable device.<br />Or insert the link: %1"
 		: qsTrId("listlink_scan_qr_code").arg(formattedUrl)

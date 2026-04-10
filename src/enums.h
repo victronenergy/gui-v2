@@ -930,6 +930,12 @@ public:
 	};
 	Q_ENUM(ListItem_BottomContentSizeMode)
 
+	enum ListLink_Mode {
+		ListLink_Mode_LinkButton,
+		ListLink_Mode_QRCode
+	};
+	Q_ENUM(ListLink_Mode)
+
 	enum ModificationChecks_Action {
 		ModificationChecks_Action_Idle,
 		ModificationChecks_Action_StartCheck,
