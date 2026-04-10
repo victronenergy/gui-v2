@@ -35,6 +35,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ColorPresetGrid.qml
     components/ColorSelector.qml
     components/ColorWheelModeButton.qml
+    components/ConsoleTerminal.qml
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
@@ -68,6 +69,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/KeyNavigationListHelper.qml
+    components/MockTerminal.qml
     components/MultiStepButton.qml
     components/NavBar.qml
     components/NavButton.qml
