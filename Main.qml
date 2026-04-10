@@ -123,6 +123,25 @@ Window {
 		onScaleChanged: Global.scalingRatio = contentItem.scale
 
 		Keys.onPressed: function(event) {
+			// Show or hide the console if necessary
+			if ((Global.isGxDevice || Global.isDesktop)
+					&& Global.systemSettings
+					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)) {
+				if (event.key === Qt.Key_F1
+						&& (event.modifiers & Qt.AltModifier
+							|| event.modifiers & Qt.MetaModifier)) {
+					consoleLoader.active = false
+					event.accepted = true
+					return
+				} else if (event.key === Qt.Key_F2
+						&& (event.modifiers & Qt.AltModifier
+							|| event.modifiers & Qt.MetaModifier)) {
+					consoleLoader.active = true
+					event.accepted = true
+					return
+				}
+			}
+
 			// If a key press is not handled by an item higher up in the hierarchy:
 			// Enable key navigation when an arrow or tab/backtab key is pressed.
 			if (!Global.keyNavigationEnabled) {
@@ -144,10 +163,27 @@ Window {
 	}
 
 	Loader {
+		id: consoleLoader
+		anchors.fill: parent
+		asynchronous: true
+		active: false
+		focus: active
+		source: Global.isGxDevice ? "qrc:/qt/qml/Victron/VenusOS/components/ConsoleTerminal.qml"
+			: "qrc:/qt/qml/Victron/VenusOS/components/MockTerminal.qml"
+		Connections {
+			target: consoleLoader.item
+			function onFinished(ret) {
+				consoleLoader.active = false
+			}
+		}
+	}
+
+	Loader {
 		id: guiLoader
 
 		// Receive key events if key navigation is enabled.
-		focus: Global.keyNavigationEnabled
+		focus: !consoleLoader.active
+				&& Global.keyNavigationEnabled
 				// Do not receive focus while a dialog is open, as the key events will cause the
 				// focus item to change in the main UI.
 				&& !Global.dialogLayer?.currentDialog
@@ -158,6 +194,7 @@ Window {
 		anchors.centerIn: parent
 
 		asynchronous: true
+		visible: !consoleLoader.active
 		active: Global.dataManagerLoaded
 		onActiveChanged: if (active) console.info("Main: data manager finished loading; now loading application content")
 		sourceComponent: ApplicationContent {
