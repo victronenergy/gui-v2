@@ -9,7 +9,7 @@
       <translation>Вимкнено</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="275"/>
+      <location filename="../../components/CommonWords.qml" line="281"/>
       <source>Inverter overload</source>
       <translation>Перевантаження інвертора</translation>
     </message>
@@ -29,17 +29,17 @@
       <translation>Авто</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="233"/>
+      <location filename="../../components/CommonWords.qml" line="239"/>
       <source>High battery voltage</source>
       <translation>Висока напруга батареї</translation>
     </message>
     <message id="overview_widget_inverter_title">
       <location filename="../../components/widgets/InverterChargerWidget.qml" line="32"/>
       <source>Inverter / Charger</source>
-      <translation>Інв. / Зарядний</translation>
+      <translation>Інвертор / Зарядний пристрій</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="284"/>
+      <location filename="../../components/CommonWords.qml" line="290"/>
       <source>Low battery voltage</source>
       <translation>Низька напруга батареї</translation>
     </message>
@@ -64,7 +64,7 @@
       <translation>Швидкість</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="507"/>
+      <location filename="../../components/CommonWords.qml" line="513"/>
       <source>State</source>
       <translation>Стан</translation>
     </message>
@@ -84,14 +84,8 @@
       <source>Minimum SOC</source>
       <translation>Мін. SOC:</translation>
     </message>
-    <message id="settings_radio_button_group_confirm">
-      <location filename="../../components/listitems/ListPasswordField.qml" line="20"/>
-      <source>Confirm</source>
-      <extracomment>Confirm password, and verify it if possible</extracomment>
-      <translation type="unfinished">Так, скасуйте підписку</translation>
-    </message>
-    <message id="settings_radio_button_enter_password">
-      <location filename="../../components/listitems/ListPasswordField.qml" line="27"/>
+    <message id="common_words_enter_password">
+      <location filename="../../components/CommonWords.qml" line="194"/>
       <source>Enter password</source>
       <translation>Введіть пароль</translation>
     </message>
@@ -106,7 +100,7 @@
       <translation>Натисніть, щоб перевірити</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="224"/>
+      <location filename="../../components/CommonWords.qml" line="230"/>
       <source>Grid</source>
       <translation>Мережа</translation>
     </message>
@@ -151,7 +145,7 @@
       <translation>DVCC (розподілене керування напругою і струмом)</translation>
     </message>
     <message id="common_words_ess">
-      <location filename="../../components/CommonWords.qml" line="203"/>
+      <location filename="../../components/CommonWords.qml" line="209"/>
       <source>ESS</source>
       <translation>ESS (система збереження енергії)</translation>
     </message>
@@ -332,7 +326,7 @@
       <translation>Зараз працює</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="309"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Manual start</source>
       <translation>Ручний запуск</translation>
     </message>
@@ -347,12 +341,12 @@
       <translation>Щоденна тривалість роботи</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="568"/>
+      <location filename="../../components/CommonWords.qml" line="574"/>
       <source>Value must be greater than stop value</source>
       <translation>Значення має бути більшим за кінцеве значення</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="571"/>
+      <location filename="../../components/CommonWords.qml" line="577"/>
       <source>Value must be lower than start value</source>
       <translation>Значення має бути нижчим за початкове значення</translation>
     </message>
@@ -394,12 +388,12 @@
     <message id="start_when_power_is_higher_than">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="46"/>
       <source>Start when power is higher than</source>
-      <translation>Почніть, коли потужність вище ніж</translation>
+      <translation>Запуск, коли потужність вище ніж</translation>
     </message>
     <message id="stop_when_power_is_lower_than">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="78"/>
       <source>Stop when power is lower than</source>
-      <translation>Зупиніться, коли потужність буде нижчою ніж</translation>
+      <translation>Зупинка, коли потужність нижче ніж</translation>
     </message>
     <message id="settings_system_battery_monitor">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="23"/>
@@ -434,12 +428,12 @@
     <message id="page_generator_conditions_keep_generator_running">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="76"/>
       <source>Keep generator running</source>
-      <translation>Продовжуйте працювати генератор</translation>
+      <translation>Підтримувати роботу генератора</translation>
     </message>
     <message id="page_generator_conditions_stop_generator_when_ac_input_available">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="82"/>
       <source>Stop generator when AC-input is available</source>
-      <translation>Зупиніть генератор, коли буде струм на вході AC</translation>
+      <translation>Зупинити генератор, коли є вхід AC</translation>
     </message>
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="105"/>
@@ -459,7 +453,7 @@
     <message id="page_generator_conditions_start_on_high_temperature_warning">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="141"/>
       <source>Start on high temperature warning</source>
-      <translation>Почніть із попередження про високу температуру</translation>
+      <translation>Запуск при попередженні про високу температуру</translation>
     </message>
     <message id="page_generator_conditions_start_on_overload_warning">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="150"/>
@@ -489,7 +483,7 @@
     <message id="page_generator_test_run_start_always">
       <location filename="../../pages/settings/PageGeneratorTestRun.qml" line="40"/>
       <source>Start always</source>
-      <translation>Починайте завжди</translation>
+      <translation>Запускати завжди</translation>
     </message>
     <message id="page_generator_test_run_run_interval_start_date">
       <location filename="../../pages/settings/PageGeneratorTestRun.qml" line="52"/>
@@ -576,17 +570,17 @@
       <translation>Точка обміну з мережею</translation>
     </message>
     <message id="settings_ess_debug_ac_in_setpoint">
-      <location filename="../../pages/settings/PageHub4Debug.qml" line="49"/>
+      <location filename="../../pages/settings/PageHub4Debug.qml" line="48"/>
       <source>AC-In setpoint</source>
       <translation>Точка AC in</translation>
     </message>
     <message id="settings_ess_debug_limits_i">
-      <location filename="../../pages/settings/PageHub4Debug.qml" line="77"/>
+      <location filename="../../pages/settings/PageHub4Debug.qml" line="76"/>
       <source>Limits (I)</source>
       <translation>Обмеження (I)</translation>
     </message>
     <message id="settings_ess_debug_limits_p">
-      <location filename="../../pages/settings/PageHub4Debug.qml" line="101"/>
+      <location filename="../../pages/settings/PageHub4Debug.qml" line="100"/>
       <source>Limits (P)</source>
       <translation>Ліміти (P)</translation>
     </message>
@@ -711,7 +705,7 @@
       <translation>Працює, але без служб (250 кбіт/с)</translation>
     </message>
     <message id="common_words_devices">
-      <location filename="../../components/CommonWords.qml" line="166"/>
+      <location filename="../../components/CommonWords.qml" line="169"/>
       <source>Devices</source>
       <translation>Пристрої</translation>
     </message>
@@ -751,17 +745,17 @@
       <translation type="unfinished">Натисніть, щоб перевірити</translation>
     </message>
     <message id="settings_canbus_unique_id_conflict">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="132"/>
       <source>There is another device connected with this unique number, please select a new number.</source>
       <translation>З цим унікальним номером підключено інший пристрій, будь ласка, виберіть новий номер.</translation>
     </message>
     <message id="settings_canbus_unique_id_ok">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="135"/>
       <source>OK: No other device is connected with this unique number.</source>
       <translation>OK: жоден інший пристрій не підключено до цього унікального номера.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="353"/>
+      <location filename="../../components/CommonWords.qml" line="359"/>
       <source>Network status</source>
       <translation>Стан мережі</translation>
     </message>
@@ -1039,7 +1033,7 @@
       <translation>Варіант прошивки</translation>
     </message>
     <message id="common_words_image_type">
-      <location filename="../../components/CommonWords.qml" line="258"/>
+      <location filename="../../components/CommonWords.qml" line="264"/>
       <source>Image type</source>
       <translation>Тип архіву</translation>
     </message>
@@ -1049,7 +1043,7 @@
       <translation>Звичайний</translation>
     </message>
     <message id="common_words_firmware_type_large">
-      <location filename="../../components/CommonWords.qml" line="211"/>
+      <location filename="../../components/CommonWords.qml" line="217"/>
       <source>Large</source>
       <extracomment>The firmware type for large images</extracomment>
       <translation>Великий</translation>
@@ -1233,27 +1227,27 @@
       <translation>Звукова тривога</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
       <source>Demo mode</source>
       <translation>Демонстраційний режим</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="280"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
       <source>ESS demo</source>
       <translation>Демо ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="282"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Демо човна/дома на колесах 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="284"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="275"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Демо човна/дома на колесах 2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="288"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="279"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>Запуск демо режиму призведе до зміни деяких налаштувань, а інтерфейс користувача на мить не відповідає.</translation>
     </message>
@@ -1303,8 +1297,8 @@
       <translation>Час закінчення тихих годин</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="333"/>
-      <location filename="../../pages/settings/PageGenerator.qml" line="110"/>
+      <location filename="../../components/PageGensetModel.qml" line="349"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="117"/>
       <source>Run time and service</source>
       <translation>Час роботи та обслуговування</translation>
     </message>
@@ -1385,140 +1379,140 @@
       <translation>Вузли</translation>
     </message>
     <message id="page_settings_gsm_internet">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="52"/>
       <source>Internet</source>
       <translation>Інтернет</translation>
     </message>
     <message id="page_settings_gsm_carrier">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="61"/>
       <source>Carrier</source>
       <translation>Оператор</translation>
     </message>
     <message id="page_settings_gsm_error_message">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="93"/>
       <source>It may be necessary to configure the APN settings below in this page, contact your operator for details.
 If that doesn't work, check sim-card in a phone to make sure that there is credit and/or it is registered to be used for data.</source>
       <translation>Може виникнути потреба налаштувати параметри APN, наведені нижче на цій сторінці. Зверніться до свого оператора для отримання докладної інформації.
 Якщо це не допомагає, переконайтеся, що на вашій SIM-картці є кошти і/або що вона зареєстрована для передачі даних.</translation>
     </message>
     <message id="page_settings_gsm_allow_roaming">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="99"/>
       <source>Allow roaming</source>
       <translation>Дозволити роумінг</translation>
     </message>
     <message id="page_settings_gsm_sim_status">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="106"/>
       <source>Sim status</source>
       <translation>Стан SIM-картки</translation>
     </message>
     <message id="page_settings_gsm_sim_not_inserted">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="104"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="111"/>
       <source>SIM not inserted</source>
       <translation>SIM-картка не вставлена</translation>
     </message>
     <message id="page_settings_gsm_pin_required">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="114"/>
       <source>PIN required</source>
       <translation>Потрібен PIN-код</translation>
     </message>
     <message id="page_settings_gsm_puk_required">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="117"/>
       <source>PUK required</source>
       <translation>Потрібен PUK-код</translation>
     </message>
     <message id="page_settings_gsm_sim_failure">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="120"/>
       <source>SIM failure</source>
       <translation>Збій SIM-картки</translation>
     </message>
     <message id="page_settings_gsm_sim_busy">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="116"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="123"/>
       <source>SIM busy</source>
       <translation>SIM-картка зайнята</translation>
     </message>
     <message id="page_settings_gsm_wrong_sim">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="119"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="126"/>
       <source>Wrong SIM</source>
       <translation>Неправильна SIM-картка</translation>
     </message>
     <message id="page_settings_gsm_wrong_pin">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="129"/>
       <source>Wrong PIN</source>
       <translation>Неправильний PIN-код</translation>
     </message>
     <message id="page_settings_gsm_ok">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="132"/>
       <source>OK</source>
       <translation type="unfinished">ОК</translation>
     </message>
     <message id="page_settings_gsm_unknown_error">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="135"/>
       <source>Unknown error</source>
       <translation type="unfinished">Невідома помилка</translation>
     </message>
     <message id="page_settings_gsm_unknown_state">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="160"/>
       <source>Unknown</source>
       <translation type="unfinished">Невідоме</translation>
     </message>
     <message id="page_settings_gsm_unknown_value">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="159"/>
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="182"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="166"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="189"/>
       <source>Unknown</source>
       <translation type="unfinished">Невідоме</translation>
     </message>
     <message id="page_settings_gsm_offline">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="180"/>
       <source>Offline</source>
       <translation type="unfinished">Офлайн</translation>
     </message>
     <message id="page_settings_gsm_connecting">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="176"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="183"/>
       <source>Connecting</source>
       <translation type="unfinished">Підключення...</translation>
     </message>
     <message id="page_settings_gsm_connected">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="179"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="186"/>
       <source>Connected</source>
       <translation type="unfinished">Підключено</translation>
     </message>
     <message id="page_settings_gsm_pin">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="198"/>
       <source>PIN</source>
       <translation>PIN-код</translation>
     </message>
     <message id="page_settings_gsm_apn">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="207"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="214"/>
       <source>APN</source>
       <translation>APN</translation>
     </message>
     <message id="page_settings_gsm_default">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="209"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="216"/>
       <source>Default</source>
       <translation>За замовчуванням</translation>
     </message>
     <message id="page_settings_gsm_use_default_apn">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="230"/>
       <source>Use default APN</source>
       <translation>Використовувати стандартний APN</translation>
     </message>
     <message id="page_settings_gsm_apn_name">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="235"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="242"/>
       <source>APN name</source>
       <translation>Назва APN</translation>
     </message>
     <message id="page_settings_gsm_use_authentication">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="249"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="256"/>
       <source>Use authentication</source>
       <translation>Використовуйте автентифікацію</translation>
     </message>
     <message id="page_settings_gsm_user_name">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="271"/>
       <source>User name</source>
       <translation>Ім’я користувача</translation>
     </message>
     <message id="page_settings_gsm_imei">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="286"/>
       <source>IMEI</source>
       <translation>IMEI</translation>
     </message>
@@ -1545,7 +1539,7 @@ If that doesn't work, check sim-card in a phone to make sure that there is credi
     <message id="settings_ess_inverter_charger">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
       <source>Inverter/Charger</source>
-      <translation>Інв./Зарядний</translation>
+      <translation>Інвертор/зарядний пристрій</translation>
     </message>
     <message id="settings_ess_multiphase_regulation">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="106"/>
@@ -2262,7 +2256,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="138"/>
       <source>[Hidden]</source>
       <translation>[Приховано]</translation>
     </message>
@@ -2352,12 +2346,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Пристрої VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="128"/>
       <source>No access points</source>
       <translation>Немає точок доступу</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="130"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Адаптер Wi-Fi не під’єднано</translation>
     </message>
@@ -2367,7 +2361,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Створити точку доступу</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="102"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="120"/>
       <source>Wi-Fi networks</source>
       <translation>Мережі Wi-Fi</translation>
     </message>
@@ -2377,57 +2371,57 @@ Use unless prohibited by the utility provider.</source>
       <translation>Вимкнути точку доступу?</translation>
     </message>
     <message id="settings_tz_date_time_utc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="87"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="88"/>
       <source>Date/Time UTC</source>
       <translation>Дата/час у форматі UTC</translation>
     </message>
     <message id="settings_tz_date_time_local">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="99"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="115"/>
       <source>Date/Time local</source>
       <translation>Дата/час місцевий</translation>
     </message>
     <message id="settings_tz_time_zone">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="125"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="140"/>
       <source>Time zone</source>
       <translation>Часовий пояс</translation>
     </message>
     <message id="settings_tz_africa">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="220"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="235"/>
       <source>Africa</source>
       <translation>Африка</translation>
     </message>
     <message id="settings_tz_america">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="226"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="241"/>
       <source>America</source>
       <translation>Америка</translation>
     </message>
     <message id="settings_tz_asia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="244"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="259"/>
       <source>Asia</source>
       <translation>Азія</translation>
     </message>
     <message id="settings_tz_atlantic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="250"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="265"/>
       <source>Atlantic</source>
       <translation>Атлантика</translation>
     </message>
     <message id="settings_tz_ustralia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="256"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="271"/>
       <source>Australia</source>
       <translation>Австралія</translation>
     </message>
     <message id="settings_tz_europe">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="262"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="277"/>
       <source>Europe</source>
       <translation>Європа</translation>
     </message>
     <message id="settings_tz_indian">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="268"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="283"/>
       <source>Indian</source>
       <translation>Індійський</translation>
     </message>
     <message id="settings_tz_pacific">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="274"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="289"/>
       <source>Pacific</source>
       <translation>Тихоокеанський</translation>
     </message>
@@ -2468,25 +2462,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>Тривога через високу напругу батареї</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="654"/>
+      <location filename="../../components/CommonWords.qml" line="660"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Остання помилка</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="657"/>
+      <location filename="../../components/CommonWords.qml" line="663"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>передостання помилка</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="660"/>
+      <location filename="../../components/CommonWords.qml" line="666"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>третя помилка</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="663"/>
+      <location filename="../../components/CommonWords.qml" line="669"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>четверта помилка</translation>
@@ -2584,14 +2578,14 @@ Use unless prohibited by the utility provider.</source>
       <translation>Напруга заряджання</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="450"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Reset</source>
       <translation>Скинути</translation>
     </message>
     <message id="solarcharger_load">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="233"/>
       <source>Load</source>
-      <translation>Спожив.</translation>
+      <translation>Навантаження</translation>
     </message>
     <message id="charger_networked_operation">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="288"/>
@@ -2652,23 +2646,23 @@ Use unless prohibited by the utility provider.</source>
       <translation>Зарядні для електромобілів</translation>
     </message>
     <message id="evcs_charger_list_session">
-      <location filename="../../pages/evcs/EvChargerListPage.qml" line="32"/>
+      <location filename="../../pages/evcs/EvChargerListPage.qml" line="24"/>
       <source>Session</source>
       <translation type="unfinished">Сесія</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="44"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="47"/>
       <source>Session</source>
       <translation>Сесія</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="51"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="54"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>Трив.</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="121"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="125"/>
       <source>Charge mode</source>
       <translation>Режим заряджання</translation>
     </message>
@@ -2688,7 +2682,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Нижчі тарифи на електроенергію в непікові години або якщо ви хочете бути впевненими, що ваш електромобіль повністю заряджений і готовий до поїздки в певний час.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="136"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="140"/>
       <source>Enable charging</source>
       <translation>Увімкнути заряджання</translation>
     </message>
@@ -2761,7 +2755,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Пристрої RV-C</translation>
     </message>
     <message id="settings_page_debug_enable_fps_visualizer">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="61"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="49"/>
       <source>Enable frame-rate visualizer</source>
       <translation>Увімкнути візуалізатор частоти кадрів</translation>
     </message>
@@ -2813,7 +2807,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Перегорів запобіжник</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="306"/>
+      <location filename="../../components/CommonWords.qml" line="312"/>
       <source>Manual control</source>
       <translation>Ручне управління</translation>
     </message>
@@ -2833,43 +2827,43 @@ Use unless prohibited by the utility provider.</source>
       <translation>Перегорів запобіжник</translation>
     </message>
     <message id="batterydiagnostics_status_leds">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="18"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="25"/>
       <source>Status LEDs</source>
       <translation>Світлодіоди стану</translation>
     </message>
     <message id="batterydiagnostics_none">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="42"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="51"/>
       <source>None</source>
       <extracomment>Indicates no alarm is set</extracomment>
       <translation type="unfinished">Жодного</translation>
     </message>
     <message id="batterydiagnostics_main_switch">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="57"/>
       <source>Main Switch</source>
       <translation>Головний перемикач</translation>
     </message>
     <message id="batterydiagnostics_heater">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="55"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="64"/>
       <source>Heater</source>
       <translation>Обігрівач</translation>
     </message>
     <message id="batterydiagnostics_internal_fan">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="71"/>
       <source>Internal Fan</source>
       <translation>Внутрішній вентилятор</translation>
     </message>
     <message id="batterydiagnostics_warning_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="78"/>
       <source>Warning Flags</source>
       <translation>Попереджувальні прапорці</translation>
     </message>
     <message id="batterydiagnostics_alarm_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="84"/>
       <source>Alarm Flags</source>
       <translation>Прапорці тривог</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="530"/>
+      <location filename="../../components/CommonWords.qml" line="536"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Перемикач</translation>
@@ -3527,10 +3521,10 @@ Use unless prohibited by the utility provider.</source>
       <source>Balancing</source>
       <translation>Балансування</translation>
     </message>
-    <message id="dc_output">
-      <location filename="../../components/listitems/ListDcOutputQuantityGroup.qml" line="16"/>
+    <message id="settings_switch_channel_output">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="82"/>
       <source>Output</source>
-      <extracomment>DC output measurement values</extracomment>
+      <extracomment>Configure channel to use "output" direction</extracomment>
       <translation>Вихід</translation>
     </message>
     <message id="alternator_wakespeed_field_drive">
@@ -3699,40 +3693,40 @@ Use unless prohibited by the utility provider.</source>
       <translation>Значення датчика</translation>
     </message>
     <message id="devicelist_tankshape_empty">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="76"/>
       <source>No custom shape defined. You may define one with up to ten points. Note that 0% and 100% are implied.</source>
       <translation>Власну форму не визначено. Ви можете визначити одну з десятьма точками. Зверніть увагу, що 0% і 100% маються на увазі.</translation>
     </message>
     <message id="devicelist_tankshape_point">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="94"/>
       <source>Point %1</source>
       <extracomment>%1 = the point number</extracomment>
       <translation>Точка %1</translation>
     </message>
     <message id="devicelist_tankshape_add_point">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="179"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="190"/>
       <source>Add point</source>
       <translation>Додати точку</translation>
     </message>
     <message id="devicelist_tankshape_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="205"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="216"/>
       <source>Sensor level</source>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>Рівень датчика</translation>
     </message>
     <message id="devicelist_tankshape_volume">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="239"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="250"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation type="unfinished">Об’єм</translation>
     </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="311"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="322"/>
       <source>Duplicate sensor level values are not allowed.</source>
       <translation>Повторення значень рівня датчика не допускається.</translation>
     </message>
     <message id="devicelist_tankshape_volume_not_increasing">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="317"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="328"/>
       <source>Volume values must be increasing.</source>
       <translation>Об'ємні значення повинні збільшуватися.</translation>
     </message>
@@ -3793,12 +3787,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Пристрої</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="202"/>
+      <location filename="../../components/PageGensetModel.qml" line="218"/>
       <source>AC</source>
       <translation>AC</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="240"/>
+      <location filename="../../components/PageGensetModel.qml" line="256"/>
       <source>Engine</source>
       <translation>Двигун</translation>
     </message>
@@ -3808,22 +3802,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>Температура теплоносія</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="292"/>
+      <location filename="../../components/PageGensetModel.qml" line="308"/>
       <source>Exhaust temperature</source>
       <translation>Температура вихлопу</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="299"/>
+      <location filename="../../components/PageGensetModel.qml" line="315"/>
       <source>Winding temperature</source>
       <translation>Температура обмотки</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="313"/>
+      <location filename="../../components/PageGensetModel.qml" line="329"/>
       <source>Starter battery voltage</source>
       <translation>Напруга стартерної батареї</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="321"/>
+      <location filename="../../components/PageGensetModel.qml" line="337"/>
       <source>Number of starts</source>
       <translation>Кількість стартів</translation>
     </message>
@@ -3901,23 +3895,23 @@ Use unless prohibited by the utility provider.</source>
       <translation>Шинні пристрої Smappee</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="680"/>
+      <location filename="../../components/CommonWords.qml" line="686"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Цей параметр вимкнено, якщо підключено цифровий мульти контроль ( DMC ).</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="669"/>
+      <location filename="../../components/CommonWords.qml" line="675"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Цей параметр вимкнено, якщо підключено VE.Bus BMS.</translation>
     </message>
     <message id="settings_multirs_ac_in_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="150"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="151"/>
       <source>AC in %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>AC вхід %1</translation>
     </message>
     <message id="common_words_dc">
-      <location filename="../../components/CommonWords.qml" line="155"/>
+      <location filename="../../components/CommonWords.qml" line="158"/>
       <source>DC</source>
       <translation>DC</translation>
     </message>
@@ -4037,12 +4031,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Напруга датчика</translation>
     </message>
     <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="204"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
       <source>Total PV Power</source>
       <translation>Загальна PV потужність</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="439"/>
       <source>Product page</source>
       <translation>Сторінка продукту</translation>
     </message>
@@ -4269,7 +4263,7 @@ Do you want to continue?</source>
       <translation>Завершено</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="404"/>
+      <location filename="../../components/CommonWords.qml" line="410"/>
       <source>Pending</source>
       <translation>Очікується...</translation>
     </message>
@@ -4370,7 +4364,7 @@ Do you want to continue?</source>
       <translation>Невдалий крок: %1</translation>
     </message>
     <message id="common_words_vebus_device_phase_x_device_x_index_x">
-      <location filename="../../components/CommonWords.qml" line="581"/>
+      <location filename="../../components/CommonWords.qml" line="587"/>
       <source>Phase L%1, device %2 (%3)</source>
       <extracomment>eg. 'Phase L1, device 3 (6)', where '(6)' is the index into the list of reported values</extracomment>
       <translation>Фаза L%1, пристрій %2 (%3)</translation>
@@ -4528,7 +4522,7 @@ Do you want to continue?</source>
     <message id="common_words_ac_load">
       <location filename="../../components/CommonWords.qml" line="27"/>
       <source>AC load</source>
-      <translation>AC спожив.</translation>
+      <translation>Навантаження AC</translation>
     </message>
     <message id="common_words_ac_out">
       <location filename="../../components/CommonWords.qml" line="30"/>
@@ -4647,23 +4641,23 @@ Do you want to continue?</source>
       <translation>Струм</translation>
     </message>
     <message id="common_words_current_transformers">
-      <location filename="../../components/CommonWords.qml" line="146"/>
+      <location filename="../../components/CommonWords.qml" line="149"/>
       <source>Current transformers</source>
       <translation>Трансформатори струму</translation>
     </message>
     <message id="common_words_custom_name">
-      <location filename="../../components/CommonWords.qml" line="149"/>
+      <location filename="../../components/CommonWords.qml" line="152"/>
       <source>Custom name</source>
       <translation>Користувацька назва</translation>
     </message>
     <message id="common_words_debug">
-      <location filename="../../components/CommonWords.qml" line="159"/>
+      <location filename="../../components/CommonWords.qml" line="162"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
       <translation>Відладка</translation>
     </message>
     <message id="common_words_device">
-      <location filename="../../components/CommonWords.qml" line="163"/>
+      <location filename="../../components/CommonWords.qml" line="166"/>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>Пристрій</translation>
@@ -4679,17 +4673,17 @@ Do you want to continue?</source>
       <translation>Відключено</translation>
     </message>
     <message id="common_words_enable">
-      <location filename="../../components/CommonWords.qml" line="181"/>
+      <location filename="../../components/CommonWords.qml" line="184"/>
       <source>Enable</source>
       <translation>Увімкнути</translation>
     </message>
     <message id="common_words_enabled">
-      <location filename="../../components/CommonWords.qml" line="184"/>
+      <location filename="../../components/CommonWords.qml" line="187"/>
       <source>Enabled</source>
       <translation>Увімкнено</translation>
     </message>
     <message id="common_words_energy">
-      <location filename="../../components/CommonWords.qml" line="188"/>
+      <location filename="../../components/CommonWords.qml" line="191"/>
       <source>Energy</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Енергія</translation>
@@ -4701,17 +4695,17 @@ Do you want to continue?</source>
       <translation>Помилка</translation>
     </message>
     <message id="common_words_error_colon">
-      <location filename="../../components/CommonWords.qml" line="194"/>
+      <location filename="../../components/CommonWords.qml" line="200"/>
       <source>Error:</source>
       <translation>Помилка:</translation>
     </message>
     <message id="common_words_error_code">
-      <location filename="../../components/CommonWords.qml" line="197"/>
+      <location filename="../../components/CommonWords.qml" line="203"/>
       <source>Error code</source>
       <translation>Код помилки</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="214"/>
+      <location filename="../../components/CommonWords.qml" line="220"/>
       <source>Firmware version</source>
       <translation>Версія прошивки</translation>
     </message>
@@ -4721,38 +4715,38 @@ Do you want to continue?</source>
       <translation>Генератор</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="230"/>
+      <location filename="../../components/CommonWords.qml" line="236"/>
       <source>High battery temperature</source>
       <translation>Висока температура батареї</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="237"/>
+      <location filename="../../components/CommonWords.qml" line="243"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Тривога через високий рівень</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="240"/>
+      <location filename="../../components/CommonWords.qml" line="246"/>
       <source>High starter battery voltage</source>
       <translation>Висока напруга батареї стартера</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="243"/>
+      <location filename="../../components/CommonWords.qml" line="249"/>
       <source>High temperature</source>
       <translation>Висока температура</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="246"/>
+      <location filename="../../components/CommonWords.qml" line="252"/>
       <source>High voltage alarms</source>
       <translation>Тривога високої напруги</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="249"/>
+      <location filename="../../components/CommonWords.qml" line="255"/>
       <source>History</source>
       <translation>Історія</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="252"/>
+      <location filename="../../components/CommonWords.qml" line="258"/>
       <source>%1 Hour(s)</source>
       <translation>%1 Година(и)</translation>
     </message>
@@ -4768,73 +4762,73 @@ Do you want to continue?</source>
       <translation>Неактивний</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="278"/>
+      <location filename="../../components/CommonWords.qml" line="284"/>
       <source>IP address</source>
       <translation>IP-адреса</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="281"/>
+      <location filename="../../components/CommonWords.qml" line="287"/>
       <source>Low battery temperature</source>
       <translation>Низька температура батареї</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="288"/>
+      <location filename="../../components/CommonWords.qml" line="294"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Тривога через низький рівень</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="291"/>
+      <location filename="../../components/CommonWords.qml" line="297"/>
       <source>Low starter battery voltage</source>
       <translation>Низька напруга батареї стартера</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="294"/>
+      <location filename="../../components/CommonWords.qml" line="300"/>
       <source>Low state-of-charge</source>
       <translation>Низький рівень заряду</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="297"/>
+      <location filename="../../components/CommonWords.qml" line="303"/>
       <source>Low temperature</source>
       <translation>Низька температура</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="300"/>
+      <location filename="../../components/CommonWords.qml" line="306"/>
       <source>Low voltage alarms</source>
       <translation>Тривога низької напруги</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="315"/>
+      <location filename="../../components/CommonWords.qml" line="321"/>
       <source>Manufacturer</source>
       <translation>Виробник</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="328"/>
+      <location filename="../../components/CommonWords.qml" line="334"/>
       <source>Maximum temperature</source>
       <translation>Максимальна температура</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="331"/>
+      <location filename="../../components/CommonWords.qml" line="337"/>
       <source>Maximum voltage</source>
       <translation>Максимальна напруга</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="341"/>
+      <location filename="../../components/CommonWords.qml" line="347"/>
       <source>Minimum temperature</source>
       <translation>Найнижча температура</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="344"/>
+      <location filename="../../components/CommonWords.qml" line="350"/>
       <source>Minimum voltage</source>
       <translation>Найнижча напруга</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="347"/>
+      <location filename="../../components/CommonWords.qml" line="353"/>
       <source>Mode</source>
       <translation>Режим</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="350"/>
+      <location filename="../../components/CommonWords.qml" line="356"/>
       <source>Model name</source>
       <translation>Назва моделі</translation>
     </message>
@@ -4854,12 +4848,12 @@ Do you want to continue?</source>
       <translation>Недоступний</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="372"/>
+      <location filename="../../components/CommonWords.qml" line="378"/>
       <source>Not connected</source>
       <translation>Не під'єднано</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="382"/>
+      <location filename="../../components/CommonWords.qml" line="388"/>
       <source>Offline</source>
       <translation>Офлайн</translation>
     </message>
@@ -4874,7 +4868,7 @@ Do you want to continue?</source>
       <translation>Увімкнено</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="391"/>
+      <location filename="../../components/CommonWords.qml" line="397"/>
       <source>Online</source>
       <translation>Онлайн</translation>
     </message>
@@ -4884,59 +4878,59 @@ Do you want to continue?</source>
       <translation>Відкрито</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="407"/>
+      <location filename="../../components/CommonWords.qml" line="413"/>
       <source>Password</source>
       <translation>Пароль</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="420"/>
       <source>Phase</source>
       <translation>Фаза</translation>
     </message>
     <message id="common_words_press_to_clear">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+      <location filename="../../components/CommonWords.qml" line="430"/>
       <source>Press to clear</source>
       <translation>Натисніть, щоб очистити</translation>
     </message>
     <message id="common_words_press_to_reset">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="433"/>
       <source>Press to reset</source>
       <translation>Натисніть, щоб скинути</translation>
     </message>
     <message id="common_words_press_to_scan">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="436"/>
       <source>Press to scan</source>
       <translation>Натисніть для сканування</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="436"/>
+      <location filename="../../components/CommonWords.qml" line="442"/>
       <source>PV Inverter</source>
       <translation>PV інвертор</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="440"/>
+      <location filename="../../components/CommonWords.qml" line="446"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>PV Потужність</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="443"/>
+      <location filename="../../components/CommonWords.qml" line="449"/>
       <source>Quiet hours</source>
       <translation>Тихі години</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="447"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Реле</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="462"/>
       <source>Reboot</source>
       <translation>Перезавантажити</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="459"/>
+      <location filename="../../components/CommonWords.qml" line="465"/>
       <source>Remove</source>
       <translation>Видалити</translation>
     </message>
@@ -4946,12 +4940,12 @@ Do you want to continue?</source>
       <translation>Працює</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="466"/>
+      <location filename="../../components/CommonWords.qml" line="472"/>
       <source>Scanning %1%</source>
       <translation>Сканування %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="469"/>
+      <location filename="../../components/CommonWords.qml" line="475"/>
       <source>Serial number</source>
       <translation>Серійний номер</translation>
     </message>
@@ -4961,12 +4955,12 @@ Do you want to continue?</source>
       <translation>Налаштування</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="475"/>
+      <location filename="../../components/CommonWords.qml" line="481"/>
       <source>Setup</source>
       <translation>Конфігурування</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="478"/>
+      <location filename="../../components/CommonWords.qml" line="484"/>
       <source>Signal strength</source>
       <translation>Рівень сигналу</translation>
     </message>
@@ -4977,32 +4971,32 @@ Do you want to continue?</source>
       <translation>Режим очікування</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="495"/>
+      <location filename="../../components/CommonWords.qml" line="501"/>
       <source>Start after the condition is reached for</source>
-      <translation>Почніть після досягнення умови</translation>
+      <translation>Запуск після досягнення умови протягом</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="498"/>
+      <location filename="../../components/CommonWords.qml" line="504"/>
       <source>Start time</source>
       <translation>Час початку</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="501"/>
+      <location filename="../../components/CommonWords.qml" line="507"/>
       <source>Start value during quiet hours</source>
       <translation>Початкове значення в тихий час</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="504"/>
+      <location filename="../../components/CommonWords.qml" line="510"/>
       <source>Start when warning is active for</source>
-      <translation>Почати, коли активне попередження для</translation>
+      <translation>Запуск, коли попередження активне протягом</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="510"/>
+      <location filename="../../components/CommonWords.qml" line="516"/>
       <source>State of charge</source>
       <translation>Стан заряду</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="513"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>Status</source>
       <translation>Стан</translation>
     </message>
@@ -5013,14 +5007,14 @@ Do you want to continue?</source>
       <translation>Запуск (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="520"/>
+      <location filename="../../components/CommonWords.qml" line="526"/>
       <source>Stop value during quiet hours</source>
       <translation>Кінцеве значення в тихий час</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="523"/>
+      <location filename="../../components/CommonWords.qml" line="529"/>
       <source>Stop after the condition is reached for</source>
-      <translation>Зупинка після досягнення умови для</translation>
+      <translation>Зупинка після досягнення умови протягом</translation>
     </message>
     <message id="generic_input_label_stopped">
       <location filename="../../src/genericinput.cpp" line="128"/>
@@ -5033,22 +5027,22 @@ Do you want to continue?</source>
       <translation>Температура</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="536"/>
+      <location filename="../../components/CommonWords.qml" line="542"/>
       <source>Temperature sensor</source>
       <translation>Температурний сенсор</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="542"/>
+      <location filename="../../components/CommonWords.qml" line="548"/>
       <source>Today</source>
       <translation>Сьогодні</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="545"/>
+      <location filename="../../components/CommonWords.qml" line="551"/>
       <source>Total</source>
       <translation>Всього</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="552"/>
+      <location filename="../../components/CommonWords.qml" line="558"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Трекер</translation>
@@ -5059,7 +5053,7 @@ Do you want to continue?</source>
       <translation>Тип</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="558"/>
+      <location filename="../../components/CommonWords.qml" line="564"/>
       <source>Unique Identity Number</source>
       <translation>Унікальний ідентифікаційний номер</translation>
     </message>
@@ -5069,22 +5063,22 @@ Do you want to continue?</source>
       <translation>Невідоме</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="583"/>
       <source>VE.Bus Error</source>
       <translation>Помилка VE.Bus</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="584"/>
+      <location filename="../../components/CommonWords.qml" line="590"/>
       <source>Voltage</source>
       <translation>Напруга</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="587"/>
+      <location filename="../../components/CommonWords.qml" line="593"/>
       <source>VRM instance</source>
       <translation>Екземпляр VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="590"/>
+      <location filename="../../components/CommonWords.qml" line="596"/>
       <source>When warning is cleared stop after</source>
       <translation>Після зникнення попередження зупинитися</translation>
     </message>
@@ -5094,12 +5088,12 @@ Do you want to continue?</source>
       <translation>Так</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="596"/>
+      <location filename="../../components/CommonWords.qml" line="602"/>
       <source>Yesterday</source>
       <translation>Вчора</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="600"/>
+      <location filename="../../components/CommonWords.qml" line="606"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Генерація</translation>
@@ -5112,17 +5106,17 @@ Do you want to continue?</source>
     <message id="controlcard_generator_startdialog_start_now">
       <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="13"/>
       <source>Start Now</source>
-      <translation>Почати зараз</translation>
+      <translation>Запустити зараз</translation>
     </message>
     <message id="controlcard_generator_startdialog_timed_run">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="51"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="52"/>
       <source>Timed run</source>
       <translation>Запуск за часом</translation>
     </message>
     <message id="controlcard_generator_stopdialog_stop_now">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="13"/>
       <source>Stop Now</source>
-      <translation>Зупинись зараз.</translation>
+      <translation>Зупинити зараз</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
       <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="62"/>
@@ -5310,7 +5304,7 @@ Do you want to continue?</source>
       <translation>Неочищена вода</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListItem.qml" line="104"/>
+      <location filename="../../components/listitems/core/ListSetting.qml" line="78"/>
       <source>Setting locked for access level</source>
       <translation>Налаштування заблоковано для рівня доступу</translation>
     </message>
@@ -5335,7 +5329,7 @@ Do you want to continue?</source>
       <translation>Рівні</translation>
     </message>
     <message id="common_words_notifications">
-      <location filename="../../components/CommonWords.qml" line="376"/>
+      <location filename="../../components/CommonWords.qml" line="382"/>
       <source>Notifications</source>
       <extracomment>The 'Notifications' page</extracomment>
       <translation>Сповіщення</translation>
@@ -5449,7 +5443,7 @@ Do you want to continue?</source>
       <translation type="unfinished">PV</translation>
     </message>
     <message id="settings_multirs_pv">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="185"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="186"/>
       <source>PV</source>
       <translation>PV</translation>
     </message>
@@ -5500,7 +5494,7 @@ Do you want to continue?</source>
       <translation>Стан реле</translation>
     </message>
     <message id="common_words_batteryhistory_reset_history_on_the_monitor_itself">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="459"/>
       <source>Reset history on the monitor itself</source>
       <translation>Скидання історії на самому моніторі</translation>
     </message>
@@ -5789,7 +5783,7 @@ Do you want to continue?</source>
       <translation>Помилка 5-го рівня протоколу MQTT</translation>
     </message>
     <message id="common_words_silence_alarm">
-      <location filename="../../components/CommonWords.qml" line="481"/>
+      <location filename="../../components/CommonWords.qml" line="487"/>
       <source>Silence alarm</source>
       <translation>Беззвучна тривога</translation>
     </message>
@@ -5861,12 +5855,12 @@ Do you want to continue?</source>
     <message id="overview_widget_acloads_title">
       <location filename="../../components/widgets/AcLoadsWidget.qml" line="17"/>
       <source>AC Loads</source>
-      <translation>AC Спож.</translation>
+      <translation>Навантаження AC</translation>
     </message>
     <message id="overview_widget_dcloads_title">
       <location filename="../../components/widgets/DcLoadsWidget.qml" line="13"/>
       <source>DC Loads</source>
-      <translation>DC спож.</translation>
+      <translation>Навантаження DC</translation>
     </message>
     <message id="overview_widget_evcs_title">
       <location filename="../../components/widgets/EvcsWidget.qml" line="23"/>
@@ -5908,7 +5902,7 @@ Do you want to continue?</source>
       <location filename="../../components/Utils.js" line="135"/>
       <source>%1 to go</source>
       <extracomment>%1 = time remaining, e.g. '3h 2m'</extracomment>
-      <translation>%1 залиш.</translation>
+      <translation>%1 залишилось</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
@@ -6118,7 +6112,7 @@ Do you want to continue?</source>
     <message id="inverters_state_bulkcharging">
       <location filename="../../data/System.qml" line="134"/>
       <source>Bulk charging</source>
-      <translation>Осн. зарядж.</translation>
+      <translation>Основне заряджання</translation>
     </message>
     <message id="inverters_state_absorptioncharging">
       <location filename="../../data/System.qml" line="137"/>
@@ -6143,7 +6137,7 @@ Do you want to continue?</source>
     <message id="inverters_state_passthru">
       <location filename="../../data/System.qml" line="149"/>
       <source>Pass-thru</source>
-      <translation>Прохідна.</translation>
+      <translation>Транзитний режим</translation>
     </message>
     <message id="inverters_state_inverting">
       <location filename="../../data/System.qml" line="152"/>
@@ -6168,7 +6162,7 @@ Do you want to continue?</source>
     <message id="inverters_state_wakeup">
       <location filename="../../data/System.qml" line="165"/>
       <source>Wake up</source>
-      <translation type="unfinished">Прокидайся.</translation>
+      <translation type="unfinished">Пробудження</translation>
     </message>
     <message id="inverters_state_system_sustain">
       <location filename="../../data/System.qml" line="192"/>
@@ -6183,7 +6177,7 @@ Do you want to continue?</source>
     <message id="ev_charging_state_wake_up">
       <location filename="../../pages/ev/EvPage.qml" line="74"/>
       <source>Wake up</source>
-      <translation>Прокидайся.</translation>
+      <translation>Пробудження</translation>
     </message>
     <message id="inverters_state_repeatedabsorption">
       <location filename="../../data/System.qml" line="168"/>
@@ -6203,7 +6197,7 @@ Do you want to continue?</source>
     <message id="inverters_state_loaddetect">
       <location filename="../../data/System.qml" line="177"/>
       <source>Load detect</source>
-      <translation>Виявл. Спож.</translation>
+      <translation>Виявлення навантаження</translation>
     </message>
     <message id="inverters_state_blocked">
       <location filename="../../data/System.qml" line="180"/>
@@ -6224,25 +6218,25 @@ Do you want to continue?</source>
       <location filename="../../data/SystemSettings.qml" line="163"/>
       <source>Group Master</source>
       <extracomment>Network status: Group Master</extracomment>
-      <translation>Майстер групи</translation>
+      <translation>Головний групи</translation>
     </message>
     <message id="systemsettings_networkstatus_instance_master">
       <location filename="../../data/SystemSettings.qml" line="167"/>
       <source>Instance Master</source>
       <extracomment>Network status: Instance Master</extracomment>
-      <translation>Майстер екземплярів</translation>
+      <translation>Головний екземплярів</translation>
     </message>
     <message id="systemsettings_networkstatus_group_and_instance_master">
       <location filename="../../data/SystemSettings.qml" line="171"/>
       <source>Group &amp; Instance Master</source>
       <extracomment>Network status: Group &amp; Instance Master</extracomment>
-      <translation>Майстер груп і екземплярів</translation>
+      <translation>Головний груп і екземплярів</translation>
     </message>
     <message id="systemsettings_networkstatus_standalone_and_group_master">
       <location filename="../../data/SystemSettings.qml" line="179"/>
       <source>Standalone &amp; Group Master</source>
       <extracomment>Network status: Standalone &amp; Group Master</extracomment>
-      <translation>Автономно і майстер груп</translation>
+      <translation>Автономно і головний груп</translation>
     </message>
     <message id="inverterCharger_mode_charger_only">
       <location filename="../../data/InverterChargers.qml" line="45"/>
@@ -6270,7 +6264,7 @@ Do you want to continue?</source>
       <translation>Використовуйте цю опцію в пристроях, які не підтримують пікові обмеження.</translation>
     </message>
     <message id="ac-in-genset_auto_start_functionality">
-      <location filename="../../components/PageGensetModel.qml" line="74"/>
+      <location filename="../../components/PageGensetModel.qml" line="75"/>
       <source>Auto start functionality</source>
       <translation>Функція автоматичного запуску</translation>
     </message>
@@ -6300,7 +6294,7 @@ Do you want to continue?</source>
       <translation type="unfinished">Автозапуск</translation>
     </message>
     <message id="controlcard_generator_autostart_conditions">
-      <location filename="../../pages/controlcards/GeneratorCard.qml" line="70"/>
+      <location filename="../../pages/controlcards/GeneratorCard.qml" line="68"/>
       <source>Start and stop the generator based on the configured autostart conditions.</source>
       <translation>Запуск і зупинка генератора на основі налаштованих умов автозапуску.</translation>
     </message>
@@ -6327,97 +6321,97 @@ Do you want to continue?</source>
       <translation>Інвертор/зарядний пристрій (%1)</translation>
     </message>
     <message id="settings_page_debug_quit_application">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="36"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="24"/>
       <source>Quit application</source>
       <translation>Вийти з програми</translation>
     </message>
     <message id="genset_controller_requires_helper_relay">
-      <location filename="../../components/PageGensetModel.qml" line="61"/>
+      <location filename="../../components/PageGensetModel.qml" line="62"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
       <translation>Для керування цим контролером генераторної установки потрібне допоміжне реле, але допоміжне реле не налаштоване. Будь ласка, налаштуйте реле 1 у розділі Налаштування → Реле на "Підключене допоміжне реле генераторної установки".</translation>
     </message>
     <message id="settings_page_relay_generator_run_time">
-      <location filename="../../pages/settings/PageGenerator.qml" line="71"/>
+      <location filename="../../pages/settings/PageGenerator.qml" line="78"/>
       <source>Current run time</source>
       <translation>Поточний час виконання</translation>
     </message>
     <message id="settings_page_genset_generator_run_time">
-      <location filename="../../components/PageGensetModel.qml" line="110"/>
+      <location filename="../../components/PageGensetModel.qml" line="126"/>
       <source>Current run time</source>
       <translation type="unfinished">Поточний час виконання</translation>
     </message>
     <message id="ac-in-genset_auto_control_status">
-      <location filename="../../components/PageGensetModel.qml" line="118"/>
+      <location filename="../../components/PageGensetModel.qml" line="134"/>
       <source>Control status</source>
       <translation>Стан керування</translation>
     </message>
     <message id="ac-in-genset_control_error_code">
-      <location filename="../../components/PageGensetModel.qml" line="138"/>
+      <location filename="../../components/PageGensetModel.qml" line="154"/>
       <source>Control error code</source>
       <translation>Код помилки керування</translation>
     </message>
     <message id="ac-in-genset_status">
-      <location filename="../../components/PageGensetModel.qml" line="145"/>
+      <location filename="../../components/PageGensetModel.qml" line="161"/>
       <source>Genset status</source>
       <translation>Стан генератора</translation>
     </message>
     <message id="ac-in-genset_error">
-      <location filename="../../components/PageGensetModel.qml" line="156"/>
+      <location filename="../../components/PageGensetModel.qml" line="172"/>
       <source>Genset error codes</source>
       <translation>Коди помилок генераторної установки</translation>
     </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="228"/>
+      <location filename="../../components/PageGensetModel.qml" line="244"/>
       <source>Remote start mode</source>
       <translation>Режим дистанційного запуску</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="253"/>
+      <location filename="../../components/PageGensetModel.qml" line="269"/>
       <source>Speed</source>
       <translation type="unfinished">Швидкість</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="260"/>
+      <location filename="../../components/PageGensetModel.qml" line="276"/>
       <source>Load</source>
-      <translation type="unfinished">Спожив.</translation>
+      <translation type="unfinished">Навантаження</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="268"/>
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
       <source>Oil pressure</source>
       <translation>Тиск мастила</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="276"/>
+      <location filename="../../components/PageGensetModel.qml" line="292"/>
       <source>Oil temperature</source>
       <translation>Температура масла</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <location filename="../../components/PageGensetModel.qml" line="300"/>
       <source>Coolant temperature</source>
       <translation type="unfinished">Температура теплоносія</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="306"/>
+      <location filename="../../components/PageGensetModel.qml" line="322"/>
       <source>Heatsink temperature</source>
       <translation>Температура радіатора</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="346"/>
+      <location filename="../../components/PageGensetModel.qml" line="362"/>
       <source>DC genset settings</source>
       <translation>Налаштування генераторної установки постійного струму</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="373"/>
+      <location filename="../../components/PageGensetModel.qml" line="389"/>
       <source>Charge voltage</source>
       <translation type="unfinished">Напруга заряджання</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="384"/>
+      <location filename="../../components/PageGensetModel.qml" line="400"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>Напруга заряду наразі контролюється системою BMS.</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="390"/>
+      <location filename="../../components/PageGensetModel.qml" line="406"/>
       <source>Charge current limit</source>
       <translation>Обмеження зарядного струму</translation>
     </message>
@@ -6590,7 +6584,7 @@ Do you want to continue?</source>
     <message id="page_meteo_daily_yield">
       <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="107"/>
       <source>Today's yield</source>
-      <translation>Сьогоднішня врожайність</translation>
+      <translation>Генерація за сьогодні</translation>
     </message>
     <message id="devicelist_tanksetup_sensor_value_when_full">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="69"/>
@@ -6606,12 +6600,12 @@ Do you want to continue?</source>
     <message id="page_generator_conditions_tank_service">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="77"/>
       <source>Tank service</source>
-      <translation>Обслуговування танків</translation>
+      <translation>Обслуговування ємності</translation>
     </message>
     <message id="page_generator_conditions_unavailable_tank_service_set_another">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="79"/>
       <source>Unavailable tank service, set another</source>
-      <translation>Недоступна послуга з обслуговування резервуарів, встановіть інший</translation>
+      <translation>Обслуговування ємності недоступне, виберіть інше</translation>
     </message>
     <message id="settings_generator_condition_skip_warmup">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="193"/>
@@ -6646,7 +6640,7 @@ Do you want to continue?</source>
     <message id="page_generator_conditions_stop_on_tank_level">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="162"/>
       <source>Stop on tank level</source>
-      <translation>Зупинка на рівні бака</translation>
+      <translation>Зупинка на рівні ємності</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="150"/>
@@ -6664,7 +6658,7 @@ Do you want to continue?</source>
       <translation>Сервісний таймер було скинуто</translation>
     </message>
     <message id="settings_generator_function_not_enabled">
-      <location filename="../../pages/settings/PageRelayGenerator.qml" line="25"/>
+      <location filename="../../pages/settings/PageRelayGenerator.qml" line="24"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <translation>Функція запуску/зупинки генератора не ввімкнена, перейдіть до налаштувань реле та встановіть функцію на "Запуск/зупинка генератора"</translation>
     </message>
@@ -6854,7 +6848,7 @@ Do you want to continue?</source>
     <message id="settings_briefview_totals">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="29"/>
       <source>Tank totals</source>
-      <translation>Загальна кількість танків</translation>
+      <translation>Підсумки по ємностях</translation>
     </message>
     <message id="settings_briefview_battery_not_connected">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="50"/>
@@ -6864,7 +6858,7 @@ Do you want to continue?</source>
     <message id="settings_briefview_tank_not_connected">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="71"/>
       <source>Tank is not connected.</source>
-      <translation>Цистерна не підключена.</translation>
+      <translation>Ємність не підʼєднано.</translation>
     </message>
     <message id="settings_briefview_active_battery_monitor">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="83"/>
@@ -6889,7 +6883,7 @@ Do you want to continue?</source>
     <message id="settings_briefview_unconnected_tank">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="192"/>
       <source>Tank not connected</source>
-      <translation>Бак не підключений</translation>
+      <translation>Ємність не підʼєднано</translation>
     </message>
     <message id="settings_briefview_not_configured">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="196"/>
@@ -6900,7 +6894,7 @@ Do you want to continue?</source>
     <message id="settings_briefview_tank_details">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="221"/>
       <source>Tank details</source>
-      <translation>Деталі танка</translation>
+      <translation>Деталі ємності</translation>
     </message>
     <message id="settings_briefview_unit_none">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="224"/>
@@ -6910,7 +6904,7 @@ Do you want to continue?</source>
     <message id="settings_briefview_unit_absolute">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="226"/>
       <source>Show tank volumes</source>
-      <translation>Показати об'єми резервуарів</translation>
+      <translation>Показати обʼєми ємностей</translation>
     </message>
     <message id="settings_briefview_unit_percentages">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="228"/>
@@ -6972,7 +6966,7 @@ Do you want to continue?</source>
     <message id="settings_security_profile_secured">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Secured</source>
-      <translation>Закріплено.</translation>
+      <translation>Закріплено</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
@@ -7110,17 +7104,17 @@ Do you want to continue?</source>
       <translation>Увімкнути індикатори стану</translation>
     </message>
     <message id="settings_page_debug_application_version">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="28"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="16"/>
       <source>Application version</source>
       <translation>Версія програми</translation>
     </message>
     <message id="settings_page_debug_quit">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="39"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="27"/>
       <source>Quit</source>
       <translation>Звільнися.</translation>
     </message>
     <message id="settings_page_debug_display_cpu_usage">
-      <location filename="../../pages/settings/debug/PageDebug.qml" line="68"/>
+      <location filename="../../pages/settings/debug/PageDebug.qml" line="56"/>
       <source>Display CPU usage</source>
       <translation>Відображати використання процесора</translation>
     </message>
@@ -7217,7 +7211,7 @@ Do you want to continue?</source>
     <message id="settings_ess_self_consumption_battery">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="93"/>
       <source>Self-consumption from battery</source>
-      <translation>Самоспоживання від акумулятора</translation>
+      <translation>Власне споживання від батареї</translation>
     </message>
     <message id="settings_ess_all_system_loads">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="98"/>
@@ -7378,7 +7372,7 @@ Do you want to continue?</source>
     <message id="settings_relay_tank_pump_can_now_be_found">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
       <source>The Tank Pump can now be found in the devices list</source>
-      <translation>Насос резервуара тепер можна знайти у списку пристроїв</translation>
+      <translation>Насос ємності тепер можна знайти у списку пристроїв</translation>
     </message>
     <message id="settings_relay_no_temperature_sensors">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="39"/>
@@ -7476,7 +7470,7 @@ Do you want to continue?</source>
       <translation>Система автоматично відображає навантаження на вході інвертора/зарядного пристрою за наявності мережевого лічильника. Навантаження на виході відображається завжди.</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
       <source>Display DC Loads</source>
       <translation>Відображення навантажень постійного струму</translation>
     </message>
@@ -7486,7 +7480,7 @@ Do you want to continue?</source>
       <translation>Вимірювання батареї</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="121"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="120"/>
       <source>System status</source>
       <translation>Стан системи</translation>
     </message>
@@ -7506,12 +7500,12 @@ Do you want to continue?</source>
       <translation>VE.Can Instance# %1</translation>
     </message>
     <message id="settings_tz_antarctica">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="232"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="247"/>
       <source>Antarctica</source>
       <translation>Антартика</translation>
     </message>
     <message id="settings_tz_arctic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="238"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="253"/>
       <source>Arctic</source>
       <translation>Арктика</translation>
     </message>
@@ -7610,23 +7604,23 @@ Do you want to continue?</source>
       <location filename="../../pages/solar/PageSolarCharger.qml" line="211"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
-      <translation type="unfinished">Загальний вихід</translation>
+      <translation type="unfinished">Загальна генерація</translation>
     </message>
     <message id="solarcharger_system_yield">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="220"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
-      <translation type="unfinished">Вихід системи</translation>
+      <translation type="unfinished">Генерація системи</translation>
     </message>
     <message id="settings_multirs_total_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="63"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="64"/>
       <source>Total yield</source>
-      <translation>Загальний вихід</translation>
+      <translation>Загальна генерація</translation>
     </message>
     <message id="settings_multirs_system_yield">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="71"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="72"/>
       <source>System yield</source>
-      <translation>Вихід системи</translation>
+      <translation>Генерація системи</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="309"/>
@@ -7670,7 +7664,7 @@ Do you want to continue?</source>
       <translation>Перезапуск системи VE.Bus призведе до скидання всіх інверторів на шині та втрати живлення на їхніх виходах.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="607"/>
+      <location filename="../../components/CommonWords.qml" line="613"/>
       <source>Dynamic power limit</source>
       <translation>Обмеження динамічної потужності</translation>
     </message>
@@ -7718,241 +7712,246 @@ Do you want to continue?</source>
       <source>Connected</source>
       <translation type="unfinished">Підключено</translation>
     </message>
+    <message id="common_words_confirm">
+      <location filename="../../components/CommonWords.qml" line="142"/>
+      <source>Confirm</source>
+      <translation type="unfinished">Так, скасуйте підписку</translation>
+    </message>
     <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="143"/>
+      <location filename="../../components/CommonWords.qml" line="146"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
       <translation type="unfinished">Струм</translation>
     </message>
     <message id="common_words_daily_history">
-      <location filename="../../components/CommonWords.qml" line="152"/>
+      <location filename="../../components/CommonWords.qml" line="155"/>
       <source>Daily history</source>
       <translation>Щоденна історія</translation>
     </message>
     <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="169"/>
+      <location filename="../../components/CommonWords.qml" line="172"/>
       <source>Disabled</source>
       <translation type="unfinished">Вимкнено</translation>
     </message>
     <message id="common_words_discharging">
-      <location filename="../../components/CommonWords.qml" line="172"/>
+      <location filename="../../components/CommonWords.qml" line="175"/>
       <source>Discharging</source>
       <translation type="unfinished">Розрядка</translation>
     </message>
     <message id="common_words_disconnected">
-      <location filename="../../components/CommonWords.qml" line="175"/>
+      <location filename="../../components/CommonWords.qml" line="178"/>
       <source>Disconnected</source>
       <translation type="unfinished">Відключено</translation>
     </message>
     <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="191"/>
+      <location filename="../../components/CommonWords.qml" line="197"/>
       <source>Error</source>
       <translation type="unfinished">Помилка</translation>
     </message>
     <message id="common_words_error_not_a_number">
-      <location filename="../../components/CommonWords.qml" line="200"/>
+      <location filename="../../components/CommonWords.qml" line="206"/>
       <source>'%1' is not a number.</source>
       <translation>'%1' не є числом.</translation>
     </message>
     <message id="common_words_firmware_type_normal">
-      <location filename="../../components/CommonWords.qml" line="207"/>
+      <location filename="../../components/CommonWords.qml" line="213"/>
       <source>Normal</source>
       <extracomment>The firmware type for normal images</extracomment>
       <translation type="unfinished">Звичайний</translation>
     </message>
     <message id="common_words_generator">
-      <location filename="../../components/CommonWords.qml" line="217"/>
+      <location filename="../../components/CommonWords.qml" line="223"/>
       <source>Generator</source>
       <translation type="unfinished">Генератор</translation>
     </message>
     <message id="common_words_gx_device_relays">
-      <location filename="../../components/CommonWords.qml" line="227"/>
+      <location filename="../../components/CommonWords.qml" line="233"/>
       <source>GX device relays</source>
       <translation type="unfinished">Реле пристрою GX</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="255"/>
+      <location filename="../../components/CommonWords.qml" line="261"/>
       <source>Idle</source>
       <translation type="unfinished">Релаксую</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="262"/>
+      <location filename="../../components/CommonWords.qml" line="268"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">Неактивний</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="265"/>
+      <location filename="../../components/CommonWords.qml" line="271"/>
       <source>Input current limit</source>
       <translation>Обмеження вхідного струму AC in 2</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="268"/>
+      <location filename="../../components/CommonWords.qml" line="274"/>
       <source>Inverter / Charger</source>
-      <translation type="unfinished">Інв. / Зарядний</translation>
+      <translation type="unfinished">Інвертор / Зарядний пристрій</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="272"/>
+      <location filename="../../components/CommonWords.qml" line="278"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Еко</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="303"/>
+      <location filename="../../components/CommonWords.qml" line="309"/>
       <source>Manual</source>
       <translation type="unfinished">Вручну</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="312"/>
+      <location filename="../../components/CommonWords.qml" line="318"/>
       <source>Manual stop</source>
       <translation>Ручна зупинка</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="322"/>
+      <location filename="../../components/CommonWords.qml" line="328"/>
       <source>Maximum current</source>
       <translation>Максимальний струм</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="325"/>
+      <location filename="../../components/CommonWords.qml" line="331"/>
       <source>Maximum power</source>
       <translation>Максимальна потужність</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="338"/>
+      <location filename="../../components/CommonWords.qml" line="344"/>
       <source>Minimum current</source>
       <translation>Мінімальний струм</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="356"/>
+      <location filename="../../components/CommonWords.qml" line="362"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="423"/>
       <source>No</source>
       <translation type="unfinished">Ні</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="359"/>
+      <location filename="../../components/CommonWords.qml" line="365"/>
       <source>No error</source>
       <translation type="unfinished">Помилки немає</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="362"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>None</source>
       <translation type="unfinished">Жодного</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="366"/>
+      <location filename="../../components/CommonWords.qml" line="372"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Жодного</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="369"/>
+      <location filename="../../components/CommonWords.qml" line="375"/>
       <source>Not available</source>
       <translation type="unfinished">Недоступний</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="379"/>
+      <location filename="../../components/CommonWords.qml" line="385"/>
       <source>Off</source>
       <translation type="unfinished">Вимкнено</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="385"/>
+      <location filename="../../components/CommonWords.qml" line="391"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="36"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="40"/>
       <source>OK</source>
       <translation type="unfinished">ОК</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="388"/>
+      <location filename="../../components/CommonWords.qml" line="394"/>
       <source>On</source>
       <translation type="unfinished">Увімкнено</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="395"/>
+      <location filename="../../components/CommonWords.qml" line="401"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Відкрито</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="398"/>
+      <location filename="../../components/CommonWords.qml" line="404"/>
       <source>Open circuit</source>
       <translation>Обрив ланцюга</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="401"/>
+      <location filename="../../components/CommonWords.qml" line="407"/>
       <source>Overall history</source>
       <translation>Загальна історія</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="417"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">Потужність</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+      <location filename="../../components/CommonWords.qml" line="424"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation type="unfinished">Позиція</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="463"/>
+      <location filename="../../components/CommonWords.qml" line="469"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">Працює</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="472"/>
+      <location filename="../../components/CommonWords.qml" line="478"/>
       <source>Settings</source>
       <translation type="unfinished">Налаштування</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="485"/>
+      <location filename="../../components/CommonWords.qml" line="491"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="489"/>
+      <location filename="../../components/CommonWords.qml" line="495"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation type="unfinished">Швидкість</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="492"/>
+      <location filename="../../components/CommonWords.qml" line="498"/>
       <source>Standby</source>
       <translation type="unfinished">Режим очікування</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="517"/>
+      <location filename="../../components/CommonWords.qml" line="523"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Запуск (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="526"/>
+      <location filename="../../components/CommonWords.qml" line="532"/>
       <source>Stopped</source>
       <translation type="unfinished">Зупинено</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="533"/>
+      <location filename="../../components/CommonWords.qml" line="539"/>
       <source>Temperature</source>
       <translation type="unfinished">Температура</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="555"/>
+      <location filename="../../components/CommonWords.qml" line="561"/>
       <source>Type</source>
       <translation type="unfinished">Тип</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="562"/>
+      <location filename="../../components/CommonWords.qml" line="568"/>
       <location filename="../../src/enums.cpp" line="840"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Невідоме</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="593"/>
+      <location filename="../../components/CommonWords.qml" line="599"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="148"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="421"/>
@@ -7960,36 +7959,36 @@ Do you want to continue?</source>
       <translation type="unfinished">Так</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="604"/>
+      <location filename="../../components/CommonWords.qml" line="610"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>Продуктивність сьогодні</translation>
+      <translation>Генерація за сьогодні</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="648"/>
+      <location filename="../../components/CommonWords.qml" line="654"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="674"/>
+      <location filename="../../components/CommonWords.qml" line="680"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="685"/>
+      <location filename="../../components/CommonWords.qml" line="691"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="79"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="91"/>
       <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
       <translation>Генератор зупиниться через %1, якщо не увімкнено умови автозапуску, які підтримують його роботу.</translation>
     </message>
     <message id="generator_start_dialog_will_run_until_manually_stopped">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="81"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="93"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
       <translation>Генератор працюватиме до тих пір, поки не буде зупинений вручну, якщо не будуть увімкнені умови автоматичного запуску, які підтримують його роботу.</translation>
     </message>
@@ -8230,7 +8229,7 @@ Do you want to continue?</source>
     <message id="switch_state_channel_tripped">
       <location filename="../../src/enums.cpp" line="475"/>
       <source>Channel Tripped</source>
-      <translation>Канал переключився.</translation>
+      <translation>Канал спрацював</translation>
     </message>
     <message id="switch_state_under_voltage">
       <location filename="../../src/enums.cpp" line="478"/>
@@ -8250,7 +8249,7 @@ Do you want to continue?</source>
     <message id="switchable_output_momentary">
       <location filename="../../src/enums.cpp" line="526"/>
       <source>Momentary</source>
-      <translation>Миттєво.</translation>
+      <translation>Миттєвий</translation>
     </message>
     <message id="switchable_output_dimmable">
       <location filename="../../src/enums.cpp" line="532"/>
@@ -8260,7 +8259,7 @@ Do you want to continue?</source>
     <message id="switchable_output_slave_of">
       <location filename="../../src/enums.cpp" line="542"/>
       <source>Slave of %1</source>
-      <translation>Раб %1</translation>
+      <translation>Підлеглий %1</translation>
     </message>
     <message id="switchable_output_slave">
       <location filename="../../src/enums.cpp" line="545"/>
@@ -8295,7 +8294,7 @@ Do you want to continue?</source>
     <message id="switchable_output_tripped">
       <location filename="../../src/enums.cpp" line="633"/>
       <source>Tripped</source>
-      <translation>Перечепився.</translation>
+      <translation>Спрацював</translation>
     </message>
     <message id="switchable_output_fault">
       <location filename="../../src/enums.cpp" line="642"/>
@@ -8330,7 +8329,7 @@ Do you want to continue?</source>
     <message id="ess_state_keep_batteries_charged_button">
       <location filename="../../data/Ess.qml" line="22"/>
       <source>Keep charged</source>
-      <translation>Тримай зарядку.</translation>
+      <translation>Підтримувати заряд</translation>
     </message>
     <message id="evchargers_status_welded_contacts_error">
       <location filename="../../data/EvChargers.qml" line="76"/>
@@ -8350,7 +8349,7 @@ Do you want to continue?</source>
     <message id="evchargers_status_stop_charging">
       <location filename="../../data/EvChargers.qml" line="106"/>
       <source>Stop charging</source>
-      <translation>Припинити заряджання</translation>
+      <translation>Зупинити заряджання</translation>
     </message>
     <message id="evchargers_status_reserved">
       <location filename="../../data/EvChargers.qml" line="110"/>
@@ -8360,7 +8359,7 @@ Do you want to continue?</source>
     <message id="page_generator_stopped_by_tank_level">
       <location filename="../../data/Generators.qml" line="49"/>
       <source>Stopped by tank level</source>
-      <translation>Зупинено за рівнем води в баку</translation>
+      <translation>Зупинено за рівнем ємності</translation>
     </message>
     <message id="generator_not_running">
       <location filename="../../data/Generators.qml" line="59"/>
@@ -8380,7 +8379,7 @@ Do you want to continue?</source>
     <message id="settings_ac_load_condition">
       <location filename="../../data/Generators.qml" line="74"/>
       <source>AC load condition</source>
-      <translation>Стан навантаження змінного струму</translation>
+      <translation>Стан навантаження AC</translation>
     </message>
     <message id="settings_battery_current_condition">
       <location filename="../../data/Generators.qml" line="77"/>
@@ -8419,7 +8418,7 @@ Do you want to continue?</source>
       <translation>AC Out L%1</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="79"/>
+      <location filename="../../components/NotificationDelegate.qml" line="76"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -8481,19 +8480,19 @@ If the generator is currently running due to a autostart condition, disabling au
       <source>This current limit is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Ця межа струму зафіксована в конфігурації системи. Він не може бути змінений.</translation>
     </message>
-    <message id="dc_input">
-      <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
+    <message id="settings_switch_channel_input">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="79"/>
       <source>Input</source>
-      <extracomment>DC input measurement values</extracomment>
+      <extracomment>Configure channel to use "input" direction</extracomment>
       <translation>Вхід</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
-      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="31"/>
+      <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="43"/>
       <source>The mode is fixed in the system configuration. It cannot be adjusted.</source>
       <translation>Режим зафіксовано в конфігурації системи. Він не може бути змінений.</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="25"/>
+      <location filename="../../components/listitems/ListLink.qml" line="92"/>
       <source>Open link</source>
       <translation>Відкрийте посилання</translation>
     </message>
@@ -8540,7 +8539,7 @@ If the generator is currently running due to a autostart condition, disabling au
     <message id="overview_widget_essential_loads_title">
       <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="13"/>
       <source>Essential Loads</source>
-      <translation>Важливі Спож.</translation>
+      <translation>Критичне навантаження</translation>
     </message>
     <message id="rs_alarm_low_ac_out_voltage">
       <location filename="../../data/InverterChargers.qml" line="30"/>
@@ -8578,7 +8577,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <location filename="../../data/StartPageConfiguration.qml" line="43"/>
       <source>Levels (Tanks)</source>
       <extracomment>The 'Levels' page, with the "Tanks" section opened</extracomment>
-      <translation>Рівні (Танки)</translation>
+      <translation>Рівні (Ємності)</translation>
     </message>
     <message id="startpage_option_levels_environment">
       <location filename="../../data/StartPageConfiguration.qml" line="49"/>
@@ -8706,7 +8705,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
     <message id="settings_startpage_timeout">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="68"/>
       <source>Timeout</source>
-      <translation>Тайм-аут.</translation>
+      <translation>Тайм-аут</translation>
     </message>
     <message id="settings_startpage_timeout_description">
       <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="73"/>
@@ -8744,7 +8743,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Збережені пристрої</translation>
     </message>
     <message id="common_words_discovered_devices">
-      <location filename="../../components/CommonWords.qml" line="178"/>
+      <location filename="../../components/CommonWords.qml" line="181"/>
       <source>Discovered devices</source>
       <translation>Виявлені пристрої</translation>
     </message>
@@ -8784,17 +8783,17 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>%1 не є допустимим номером одиниці виміру. Використовуйте номер в діапазоні 1-247.</translation>
     </message>
     <message id="settings_modbus_no_devices_saved">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="39"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="40"/>
       <source>No Modbus devices saved</source>
       <translation>Не збережено жодного пристрою Modbus</translation>
     </message>
     <message id="page_settings_modbus_device_number">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="67"/>
       <source>Device %1</source>
       <translation>Пристрій %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="121"/>
       <source>Remove Modbus device?</source>
       <translation>Видалити пристрій Modbus?</translation>
     </message>
@@ -8957,15 +8956,10 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Мінімальна напруга акумуляторної батареї</translation>
     </message>
     <message id="settings_multirs_ac_out_phase">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="157"/>
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="158"/>
       <source>AC out %1</source>
       <extracomment>%1 = phase name (e.g. L1, L2, L3)</extracomment>
       <translation>Вимкнення змінного струму %1</translation>
-    </message>
-    <message id="settings_multirs_trackers">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="211"/>
-      <source>Trackers</source>
-      <translation>Трекер</translation>
     </message>
     <message id="rs_alarm_no_alarms_to_be_configured">
       <location filename="../../pages/settings/devicelist/rs/PageRsAlarmSettings.qml" line="32"/>
@@ -9042,7 +9036,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">Управління:</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="145"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="144"/>
       <source>Controls</source>
       <translation>Управління:</translation>
     </message>
@@ -9088,54 +9082,54 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Далі</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="446"/>
+      <location filename="../../src/units.cpp" line="445"/>
       <source>N</source>
       <translation>Пн</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="448"/>
+      <location filename="../../src/units.cpp" line="447"/>
       <source>NE</source>
       <translation>ПнСх</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="450"/>
+      <location filename="../../src/units.cpp" line="449"/>
       <source>E</source>
       <translation>C</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="452"/>
+      <location filename="../../src/units.cpp" line="451"/>
       <source>SE</source>
       <translation>ПдСх</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="454"/>
+      <location filename="../../src/units.cpp" line="453"/>
       <source>S</source>
       <translation>Пд</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="456"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>SW</source>
       <translation>ПдЗх</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="458"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>W</source>
       <translation>Зх</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="460"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>NW</source>
       <translation>ПнЗх</translation>
     </message>
     <message id="genset_controller_multiple_genset_controllers">
-      <location filename="../../components/PageGensetModel.qml" line="68"/>
+      <location filename="../../components/PageGensetModel.qml" line="69"/>
       <source>Multiple genset controllers detected.
 The GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device.</source>
       <translation>Виявлено кілька контролерів генераторів.
 Пристрій GX може керувати лише однією підключеною генераторною установкою і вибирає ту, яка має найменший номер екземпляра VRM. Щоб уникнути несподіваної поведінки, переконайтеся, що пристрою GX доступний лише один пристрій.</translation>
     </message>
     <message id="settings_tz_etc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="280"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="295"/>
       <source>Other</source>
       <translation>Інше</translation>
     </message>
@@ -9157,7 +9151,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Непідтримуваний тип: %1</translation>
     </message>
     <message id="common_words_press">
-      <location filename="../../components/CommonWords.qml" line="421"/>
+      <location filename="../../components/CommonWords.qml" line="427"/>
       <source>Press</source>
       <translation>Преса</translation>
     </message>
@@ -9223,7 +9217,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Мотордрайв</translation>
     </message>
     <message id="common_words_time_to_go">
-      <location filename="../../components/CommonWords.qml" line="539"/>
+      <location filename="../../components/CommonWords.qml" line="545"/>
       <source>Time To Go</source>
       <translation>Час до вимкнення</translation>
     </message>
@@ -9337,7 +9331,7 @@ The GX device can only control one connected genset and takes the one with the l
     <message id="mk2vsc_error_timed_out">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="59"/>
       <source>Timed out</source>
-      <translation>Час вийшов.</translation>
+      <translation>Час вийшов</translation>
     </message>
     <message id="mk2vsc_error_wrong_pass">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="61"/>
@@ -9599,20 +9593,15 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Оновити</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="114"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="134"/>
       <source>Documentation</source>
       <translation>Документація</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="616"/>
+      <location filename="../../components/CommonWords.qml" line="622"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>Вхід змінного струму %1</translation>
-    </message>
-    <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
-      <source>Changing the GX Password</source>
-      <translation>Зміна пароля GX</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
       <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
@@ -9667,7 +9656,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Показати елементи керування</translation>
     </message>
     <message id="page_settings_connect_cellular_modem">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="40"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="41"/>
       <source>Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity.</source>
       <translation>Під’єднайте модем Victron Energy GX GSM або GX LTE 4G, щоб увімкнути підключення до мобільної мережі.</translation>
     </message>
@@ -10066,37 +10055,37 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Як на дисплеї GX</translation>
     </message>
     <message id="page_settings_gsm_registration_status">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="143"/>
       <source>Registration status</source>
       <translation>Статус реєстрації</translation>
     </message>
     <message id="page_settings_gsm_not_registered_not_searching">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="148"/>
       <source>Not registered, not searching for operator</source>
       <translation>Не зареєстровано, не шукає оператора</translation>
     </message>
     <message id="page_settings_gsm_registered_home_network">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="151"/>
       <source>Registered, home network</source>
       <translation>Зареєстровано, домашня мережа</translation>
     </message>
     <message id="page_settings_gsm_not_registered_searching">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="154"/>
       <source>Not registered, searching for operator</source>
       <translation>Не зареєстровано, пошук оператора</translation>
     </message>
     <message id="page_settings_gsm_registration_denied">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="150"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="157"/>
       <source>Registration denied</source>
       <translation>Реєстрацію відхилено</translation>
     </message>
     <message id="page_settings_gsm_registered_roaming">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="156"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="163"/>
       <source>Registered, roaming</source>
       <translation>Зареєстровано, в роумінгу</translation>
     </message>
     <message id="page_settings_gsm_data_link_status">
-      <location filename="../../pages/settings/PageSettingsGsm.qml" line="168"/>
+      <location filename="../../pages/settings/PageSettingsGsm.qml" line="175"/>
       <source>Data link (PPP) status</source>
       <translation>Статус каналу передачі даних (PPP)</translation>
     </message>
@@ -10116,7 +10105,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Доступ до Node-RED</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="73"/>
       <source>Access Point password</source>
       <translation>Пароль точки доступу</translation>
     </message>
@@ -10210,11 +10199,6 @@ The GX device can only control one connected genset and takes the one with the l
       <source>See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs.</source>
       <translation>Щоб змінити ідентифікатори пристроїв Modbus-TCP, перейдіть у меню Налаштування → VRM → VRM device instances.</translation>
     </message>
-    <message id="device_page_switches">
-      <location filename="../../components/DevicePage.qml" line="49"/>
-      <source>Switches</source>
-      <translation>Перемикачі</translation>
-    </message>
     <message id="settings_shelly_refresh_devices">
       <location filename="../../pages/settings/PageSettingsShelly.qml" line="82"/>
       <source>Refresh devices</source>
@@ -10226,7 +10210,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Натисніть для оновлення</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="548"/>
+      <location filename="../../components/CommonWords.qml" line="554"/>
       <source>Total power</source>
       <translation>Загальна потужність</translation>
     </message>
@@ -10238,7 +10222,7 @@ The GX device can only control one connected genset and takes the one with the l
       <extra-Context>only shown on desktop systems</extra-Context>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="75"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="70"/>
       <source>Status: %1</source>
       <translation>Статус: %1</translation>
     </message>
@@ -10258,23 +10242,23 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Полярність (Реле 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Довжина пароля має бути 0 або від 10 до 63 символів</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="83"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="88"/>
       <source>Password updated</source>
       <translation>Пароль оновлено</translation>
     </message>
     <message id="common_words_max">
-      <location filename="../../components/CommonWords.qml" line="319"/>
+      <location filename="../../components/CommonWords.qml" line="325"/>
       <source>Max</source>
       <extracomment>Short for Maximum</extracomment>
       <translation>Макс.</translation>
     </message>
     <message id="common_words_min">
-      <location filename="../../components/CommonWords.qml" line="335"/>
+      <location filename="../../components/CommonWords.qml" line="341"/>
       <source>Min</source>
       <extracomment>Short for Minimum</extracomment>
       <translation>Мін.</translation>
@@ -10341,97 +10325,97 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Активний режим</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="141"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="138"/>
       <source>Hybrid droop parameters</source>
       <translation>Параметри гібридного регулювання</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="148"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="145"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорна активна потужність (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="162"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="159"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорна частота (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="177"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="174"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Крутизна частотної характеристики (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="192"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="189"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорна реактивна потужність (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="206"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="203"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Опорна напруга (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="221"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="218"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Крутизна вольт-амперної характеристики (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="234"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="231"/>
       <source>Minimum and maximum parameters</source>
       <translation>Мінімальні та максимальні параметри</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="240"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="237"/>
       <source>Allowed active power range</source>
       <translation>Дозволений діапазон активної потужності</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="259"/>
       <source>Allowed reactive power range</source>
       <translation>Дозволений діапазон реактивної потужності</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="316"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="313"/>
       <source>P-Q direct drive settings</source>
       <translation>Налаштування прямого керування P-Q</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="321"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="318"/>
       <source>Active power setpoint (P)</source>
       <translation>Задане значення активної потужності (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="328"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="325"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Задане значення реактивної потужності (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="335"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="332"/>
       <source>Allowed frequency range</source>
       <translation>Дозволений діапазон частот</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="343"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="340"/>
       <source>Allowed voltage range</source>
       <translation>Дозволений діапазон напруг</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="360"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="357"/>
       <source>V-f direct drive settings</source>
       <translation>Налаштування прямого керування V-f</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="365"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="362"/>
       <source>Voltage setpoint (U)</source>
       <translation>Задане значення напруги (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="372"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="369"/>
       <source>Frequency setpoint (f)</source>
       <translation>Задане значення частоти (f)</translation>
     </message>
     <message id="pagesettingsintegrations_canopenmotordrive">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="176"/>
       <source>CANopen motor drives</source>
       <translation>Приводи двигунів CANopen</translation>
     </message>
@@ -10491,7 +10475,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Яскравість</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="133"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="136"/>
       <source>Low</source>
       <translation type="unfinished">Низький</translation>
     </message>
@@ -10527,12 +10511,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Колір</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="565"/>
+      <location filename="../../components/CommonWords.qml" line="571"/>
       <source>Value must be greater than start value</source>
       <translation>Значення має бути більшим за початкове</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="574"/>
+      <location filename="../../components/CommonWords.qml" line="580"/>
       <source>Value must be lower than stop value</source>
       <translation>Значення має бути меншим за кінцеве</translation>
     </message>
@@ -10571,12 +10555,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Колірне коло RGB + W</translation>
     </message>
     <message id="listlink_show_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="43"/>
+      <location filename="../../components/listitems/ListLink.qml" line="117"/>
       <source>Show QR code</source>
       <translation>Показати QR-код</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="52"/>
+      <location filename="../../components/listitems/ListLink.qml" line="141"/>
       <source>Open the QR code to scan it with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>Відкрийте QR-код, щоб відсканувати його за допомогою портативного пристрою.&lt;br /&gt;Або вставте посилання: %1</translation>
@@ -10602,29 +10586,29 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Додати</translation>
     </message>
     <message id="page_settings_fronius_modbus_locations_note">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="40"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="41"/>
       <source>The default modbus port is 502 and the default unit ID is 126.
 Here you can add additional ports and unit IDs to scan for PV inverters.</source>
       <translation>Порт Modbus за замовчуванням - 502, а ідентифікатор пристрою за замовчуванням - 126.
 Тут ви можете додати додаткові порти та ідентифікатори пристроїв для сканування PV інверторів.</translation>
     </message>
     <message id="page_settings_fronius_modbus_location_number">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="65"/>
       <source>Port/Unit ID %1</source>
       <translation>Порт/Ідентифікатор пристрою %1</translation>
     </message>
     <message id="page_settings_fronius_modbus_remove_location_description">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="54"/>
       <source>Port: %1 (Unit %2)</source>
       <translation>Порт: %1 (Пристрій %2)</translation>
     </message>
     <message id="page_settings_fronius_modbus_remove_location">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="110"/>
       <source>Remove Modbus port and unit ID?</source>
       <translation>Видалити порт Modbus та ідентифікатор пристрою?</translation>
     </message>
     <message id="devicelist_tankshape_edit_point">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="182"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="193"/>
       <source>Edit point %1</source>
       <extracomment>%1 = which point is being edited, a number like "1" or "2"</extracomment>
       <translation>Редагувати точку %1</translation>
@@ -10645,7 +10629,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>CANopen E-drive (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="69"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="66"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 до %3%4</translation>
@@ -10772,12 +10756,12 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Тільки на VRM</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="147"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="146"/>
       <source>No compatible devices found</source>
       <translation>Не знайдено сумісних пристроїв</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="149"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="148"/>
       <source>Connect devices that support this function</source>
       <translation>Підключіть пристрої, які підтримують цю функцію</translation>
     </message>
@@ -10787,7 +10771,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Реєстрація пристрою VRM</translation>
     </message>
     <message id="common_words_go_to_redetect_system">
-      <location filename="../../components/CommonWords.qml" line="221"/>
+      <location filename="../../components/CommonWords.qml" line="227"/>
       <source>If it was recently disconnected, go to Settings → Devices → %1 → Advanced, and select 'Redetect VE.Bus system'.</source>
       <extracomment>%1 = name of the device</extracomment>
       <translation>Якщо його було нещодавно від’єднано, перейдіть у Налаштування → Пристрої → %1 → Додатково та виберіть «Повторно виявити систему VE.Bus».</translation>
@@ -10997,7 +10981,7 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Точка доступу</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Дозволити використовувати WiFi для доступу до Інтернету</translation>
     </message>
@@ -11312,23 +11296,23 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Введіть пароль VE.Bus для рівня доступу %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="76"/>
+      <location filename="../../components/DevicePage.qml" line="73"/>
       <source>Inputs</source>
       <translation>Входи</translation>
     </message>
     <message id="list-spin-box-range_minimum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="53"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="105"/>
       <source>Minimum value (%1)</source>
       <translation>Мінімальне значення (%1)</translation>
     </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="71"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="121"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
       <translation>До</translation>
     </message>
     <message id="list-spin-box-range_maximum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="90"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="149"/>
       <source>Maximum value (%1)</source>
       <translation>Максимальне значення (%1)</translation>
     </message>
@@ -11339,12 +11323,12 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Значення</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="34"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="49"/>
       <source>Devices and Priorities</source>
       <translation>Пристрої та пріоритети</translation>
     </message>
     <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="103"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="123"/>
       <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
       <translation>Розташуйте керовані пристрої відповідно до їх пріоритету; алгоритм керування контролюватиме їх на основі наявного надлишку сонячної енергії.</translation>
     </message>
@@ -11429,12 +11413,12 @@ Here you can add additional ports and unit IDs to scan for PV inverters.</source
       <translation>Натиснути та утримувати кнопку</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="288"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="285"/>
       <source>Apply all parameters</source>
       <translation>Застосувати всі параметри</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="290"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="287"/>
       <source>Apply</source>
       <translation>Застосувати</translation>
     </message>
@@ -11481,9 +11465,48 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Елементи зі значком попередження підтримуються та надаються Victron Energy, але їх неправильне використання може вплинути на стабільність системи. У разі виникнення проблем спочатку вимкніть їх.</translation>
     </message>
     <message id="pagecontrollableloads_starting">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="36"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="51"/>
       <source>Starting, this may take a few seconds...</source>
       <translation>Запускається, це може зайняти кілька секунд...</translation>
+    </message>
+    <message id="settings_security_profile_change_password_title">
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <source>Change the GX Password</source>
+      <translation>Змінити пароль GX</translation>
+    </message>
+    <message id="settings_modbus_remove_description">
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="54"/>
+      <source>%1 %2:%3 (Unit %4)</source>
+      <extracomment>%1=protocol, %2=IP address, %3=port number, %4=unit number</extracomment>
+      <translation>%1 %2:%3 (Блок %4)</translation>
+    </message>
+    <message id="settings_switch_channel_configuration">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="44"/>
+      <source>Channel configuration</source>
+      <translation>Налаштування каналу</translation>
+    </message>
+    <message id="device_page_outputs">
+      <location filename="../../components/DevicePage.qml" line="46"/>
+      <source>Outputs</source>
+      <extracomment>Settings page for switchable outputs</extracomment>
+      <translation>Виходи</translation>
+    </message>
+    <message id="radiobutton_list_password_validation_not_supported">
+      <location filename="../../components/RadioButtonListPage.qml" line="126"/>
+      <source>Password validation not supported!</source>
+      <translation>Перевірка пароля не підтримується!</translation>
+    </message>
+    <message id="dc_input">
+      <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
+      <source>Input</source>
+      <extracomment>DC input measurement values</extracomment>
+      <translation type="unfinished">Вхід</translation>
+    </message>
+    <message id="dc_output">
+      <location filename="../../components/listitems/ListDcOutputQuantityGroup.qml" line="16"/>
+      <source>Output</source>
+      <extracomment>DC output measurement values</extracomment>
+      <translation type="unfinished">Вихід</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
@@ -11508,22 +11531,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="brief_ac_loads">
       <location filename="../../pages/BriefSidePanel.qml" line="258"/>
       <source>AC Loads</source>
-      <translation type="unfinished">AC Спож.</translation>
+      <translation type="unfinished">Навантаження AC</translation>
     </message>
     <message id="brief_dc_loads">
       <location filename="../../pages/BriefSidePanel.qml" line="287"/>
       <source>DC Loads</source>
-      <translation type="unfinished">DC спож.</translation>
+      <translation type="unfinished">Навантаження DC</translation>
     </message>
     <message id="nav_overview">
       <location filename="../../pages/OverviewPage.qml" line="490"/>
       <source>Overview</source>
       <translation type="unfinished">Огляд</translation>
-    </message>
-    <message id="settings_state">
-      <location filename="../../pages/settings/PageCanbusStatus.qml" line="116"/>
-      <source>State</source>
-      <translation type="unfinished">Стан</translation>
     </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
@@ -11533,15 +11551,15 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="inverter_total_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="76"/>
       <source>Total yield</source>
-      <translation type="unfinished">Загальний вихід</translation>
+      <translation type="unfinished">Загальна генерація</translation>
     </message>
     <message id="inverter_system_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
-      <translation type="unfinished">Вихід системи</translation>
+      <translation type="unfinished">Генерація системи</translation>
     </message>
     <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="61"/>
+      <location filename="../../pages/solar/SolarDevicePage.qml" line="64"/>
       <source>Total PV Power</source>
       <translation type="unfinished">Загальна PV потужність</translation>
     </message>
@@ -11556,7 +11574,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">Тривоги та попередження</translation>
     </message>
     <message id="vebus_device_alarm_group_warning">
-      <location filename="../../pages/vebusdevice/VeBusDeviceAlarmGroup.qml" line="44"/>
+      <location filename="../../pages/vebusdevice/VeBusAlarm.qml" line="24"/>
       <source>Warning</source>
       <translation type="unfinished">Попередження</translation>
     </message>
@@ -11841,7 +11859,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
       <source>Battery temperature too low</source>
-      <translation>Надто низька температура акумуляторної батареї</translation>
+      <translation>Занадто низька температура батареї</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
@@ -11970,7 +11988,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
       <source>Inverter temp too high</source>
-      <translation>Надто висока температура інвертора</translation>
+      <translation>Занадто висока температура інвертора</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
@@ -12055,7 +12073,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
       <source>CPU temperature too high</source>
-      <translation>Занадто висока температура ЦП</translation>
+      <translation>Занадто висока температура CPU</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
@@ -12223,7 +12241,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="118"/>
       <source>AC voltage too low</source>
-      <translation>Надто низька напруга змінного струму</translation>
+      <translation>Занадто низька напруга AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
@@ -12233,7 +12251,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="119"/>
       <source>AC voltage too high</source>
-      <translation>Напруга змінного струму занадто висока</translation>
+      <translation>Занадто висока напруга AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
@@ -12243,7 +12261,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="120"/>
       <source>AC frequency too low</source>
-      <translation>Занизька частота змінного струму</translation>
+      <translation>Занадто низька частота AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
@@ -12253,7 +12271,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="121"/>
       <source>AC frequency too high</source>
-      <translation>Частота змінного струму занадто висока</translation>
+      <translation>Занадто висока частота AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
@@ -12263,7 +12281,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="122"/>
       <source>AC current too high</source>
-      <translation>Занадто високий змінний струм</translation>
+      <translation>Занадто високий струм AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
@@ -12273,7 +12291,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="123"/>
       <source>AC power too high</source>
-      <translation>Потужність змінного струму занадто висока</translation>
+      <translation>Занадто висока потужність AC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="124"/>
@@ -12449,12 +12467,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="158"/>
       <source>Rotation too low</source>
-      <translation>Обертання надто низьке</translation>
+      <translation>Занадто низькі оберти</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="159"/>
       <source>Rotation too high</source>
-      <translation>Обертання занадто високе</translation>
+      <translation>Занадто високі оберти</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="160"/>
@@ -12744,7 +12762,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="219"/>
       <source>Bus #1 dead</source>
-      <translation>Автобус №1 загинув.</translation>
+      <translation>Шина №1 не відповідає</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="220"/>
@@ -14000,12 +14018,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="55"/>
       <source>Slave does not have AC input!</source>
-      <translation>Slave не має AC входу!</translation>
+      <translation>Підлеглий пристрій не має входу AC!</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="58"/>
       <source>Device can't be slave</source>
-      <translation>Пристрій не може бути slave</translation>
+      <translation>Пристрій не може бути підлеглим</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/vebus_error.cpp" line="61"/>
@@ -14184,32 +14202,32 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="238"/>
       <source>DC/DC high primary voltage</source>
-      <translation>Висока первинна напруга пост. ст./пост. ст.</translation>
+      <translation>Висока первинна напруга DC/DC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="241"/>
       <source>DC/DC low primary voltage</source>
-      <translation>Низька первинна напруга пост. ст./пост. ст.</translation>
+      <translation>Низька первинна напруга DC/DC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="244"/>
       <source>DC/DC high secondary voltage</source>
-      <translation>Висока вторинна напруга пост. ст./пост. ст.</translation>
+      <translation>Висока вторинна напруга DC/DC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="247"/>
       <source>DC/DC low secondary voltage</source>
-      <translation>Низька вторинна напруга пост. ст./пост. ст.</translation>
+      <translation>Низька вторинна напруга DC/DC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="250"/>
       <source>DC/DC high temperature</source>
-      <translation>Висока температура пост. ст./пост. ст.</translation>
+      <translation>Висока температура DC/DC</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="253"/>
       <source>DC/DC misconfiguration</source>
-      <translation>Неправильна конфігурація пост. ст./пост. ст.</translation>
+      <translation>Неправильна конфігурація DC/DC</translation>
     </message>
   </context>
 </TS>
