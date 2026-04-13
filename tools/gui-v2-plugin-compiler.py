@@ -148,7 +148,7 @@ if __name__ == '__main__':
         description='Compiles plugins for gui-v2 into json files')
 
     parser.add_argument('--rcc', nargs='?', default='') # debugging only...
-    parser.add_argument('-n', '--name', required=True, help='The name of your plugin')
+    parser.add_argument('-n', '--name', default=os.path.basename(os.getcwd()), help='The name of your plugin')
     parser.add_argument('-v', '--version', default='1.0', help='The version of your plugin')
     parser.add_argument('-z', '--min-required-version', default='', help='The minimum gui-v2 version required for the plugin')
     parser.add_argument('-x', '--max-required-version', default='', help='The maximum gui-v2 version compatible with this plugin')
@@ -160,6 +160,10 @@ if __name__ == '__main__':
     parser.add_argument('-f', '--filter-empty-sources', action='store_true', help='Strip empty source entries from .ts files')
 
     args = parser.parse_args()
+
+    if args.name != os.path.basename(os.getcwd()):
+        print("error: plugin name does not match working directory name!")
+        sys.exit(1)
 
     imageFiles = collect_filenames('.', '.svg')
     imageFiles += collect_filenames('.', '.png')
