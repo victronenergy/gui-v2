@@ -36,7 +36,7 @@ VisibleItemModel {
 	ListText {
 		text: CommonWords.status
 		dataItem.uid: root.bindPrefix + "/StatusCode"
-		preferredVisible: dataItem.valid
+		preferredVisible: dataItem.valid && !(role.value === "pvinverter" && dataItem.value === 99)  // hide status code when not supported (pvinverters only)
 		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
 	}
 
@@ -180,6 +180,11 @@ VisibleItemModel {
 		VeQuickItem {
 			id: allowedRoles
 			uid: root.bindPrefix + "/AllowedRoles"
+		}
+
+		VeQuickItem {
+			id: role
+			uid: root.bindPrefix + "/Role"
 		}
 	}
 }
