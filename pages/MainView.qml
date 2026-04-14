@@ -169,7 +169,6 @@ FocusScope {
 				right: parent.right
 			}
 			active: false
-			asynchronous: true
 			sourceComponent: swipeViewComponent
 			visible: swipeView && swipeView.ready && !pageStack.opened
 					 && !(root.cardsActive && !cardsLoader.animationRunning)
@@ -199,7 +198,7 @@ FocusScope {
 
 					anchors.fill: parent
 					focus: true
-					contentChildren: swipePageModel.children
+					contentChildren: swipePageModel.pages
 
 					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
 					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
@@ -268,8 +267,8 @@ FocusScope {
 		// not run (skipping the splash screen causes the animations to
 		// start before the parent is visible).
 		onStopped: {
-			navBar.y = yAnimator.to
-			navBar.opacity = opacityAnimator.to
+			navBar.y = Qt.binding(function() { return navBarInitialYAnimator.to })
+			navBar.opacity = Qt.binding(function() { return navBarInitialOpacityAnimator.to })
 		}
 
 		PauseAnimation {
@@ -277,14 +276,14 @@ FocusScope {
 		}
 		ParallelAnimation {
 			YAnimator {
-				id: yAnimator
+				id: navBarInitialYAnimator
 				target: navBar
 				from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
 				to: root.height - navBar.height
 				duration: Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}
 			OpacityAnimator {
-				id: opacityAnimator
+				id: navBarInitialOpacityAnimator
 				target: navBar
 				from: 0.0
 				to: 1.0
@@ -299,7 +298,13 @@ FocusScope {
 		running: pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 				|| pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 
+		onStopped: {
+			navBar.y = Qt.binding(function() { return navBarAnimateInYAnimator.to })
+			navBar.opacity = Qt.binding(function() { return navBarAnimateInOpacityAnimator.to })
+		}
+
 		YAnimator {
+			id: navBarAnimateInYAnimator
 			target: navBar
 			from: root.height
 			to: root.height - navBar.height
@@ -310,6 +315,7 @@ FocusScope {
 			script: pageManager.interactivity = VenusOS.PageManager_InteractionMode_ExitIdleMode
 		}
 		OpacityAnimator {
+			id: navBarAnimateInOpacityAnimator
 			target: navBar
 			from: 0.0
 			to: 1.0
