@@ -57,7 +57,7 @@ BaseListView {
 			color: breadcrumb.isTopBreadcrumb ? Theme.color_settings_breadcrumb_primaryText : Theme.color_settings_breadcrumb_secondaryText
 			font.pixelSize: Theme.font_breadcrumbs_pixelSize
 			text: breadcrumb.index === 0
-					? Global.mainView?.navBar?.activeButtonText ?? "" // eg: "Settings"
+					? Global.pageManager?.navBar?.currentTitle ?? "" // eg: "Settings"
 					: root.pageStack.get(breadcrumb.index - 1).title // eg: "Device list"
 		}
 		background: Rectangle {
