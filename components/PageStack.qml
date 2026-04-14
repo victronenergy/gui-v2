@@ -9,7 +9,8 @@ import Victron.VenusOS
 StackView {
 	id: root
 
-	readonly property bool opened: state === "opened" && !fakePushTransition.running
+	// True when fully opened (i.e. opened, and not animating in or out of the opened state).
+	readonly property bool opened: _fullyOpened
 	readonly property Page currentPage: opened ? currentItem : null
 
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
@@ -22,6 +23,7 @@ StackView {
 	property var _pageUrls: []
 	property Page _poppedPage
 	property var _topPageUrl
+	property bool _fullyOpened
 
 	// Slide new drill-down pages in from the right
 	pushEnter: Transition {
@@ -217,10 +219,16 @@ StackView {
 
 			to: "opened"
 
-			NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
-				id: fakePushAnimation
-				property: "x"
-				easing.type: Easing.InOutQuad
+			SequentialAnimation {
+				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
+					id: fakePushAnimation
+
+					property: "x"
+					easing.type: Easing.InOutQuad
+				}
+				ScriptAction {
+					script: root._fullyOpened = true
+				}
 			}
 		},
 		Transition {
@@ -229,6 +237,9 @@ StackView {
 			from: "opened"
 
 			SequentialAnimation {
+				ScriptAction {
+					script: root._fullyOpened = false
+				}
 				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
 					id: fakePopAnimation
 					property: "x"

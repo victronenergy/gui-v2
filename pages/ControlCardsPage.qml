@@ -22,6 +22,9 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
+	//% "Controls"
+	title: qsTrId("control_cards_title")
+
 	// The cards list view is made up of:
 	// - Header - ESS card
 	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers

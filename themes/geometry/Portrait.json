@@ -1,5 +1,5 @@
 {
-    "geometry_page_content_horizontalMargin": 40,
+    "geometry_page_content_horizontalMargin": 16,
     "geometry_page_content_verticalMargin": 40,
 
     "geometry_icon_size_medium": 32,
@@ -138,10 +138,10 @@
     "geometry_separatorBar_size": 1,
     "geometry_separatorBar_horizontalMargin": 8,
 
-    "geometry_statusBar_button_height": 52,
-    "geometry_statusBar_height": 56,
-    "geometry_statusBar_horizontalMargin": 32,
-    "geometry_statusBar_spacing": 16,
+    "geometry_statusBar_button_height": 44,
+    "geometry_statusBar_height": 54,
+    "geometry_statusBar_horizontalMargin": 16,
+    "geometry_statusBar_spacing": 8,
 
     "geometry_tabBar_width": 464,
     "geometry_tabBar_height": 40,
