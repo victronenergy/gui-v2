@@ -9,7 +9,7 @@
     },
     "com.victronenergy.settings": {
         "/Settings/Alarm/System/GridLost": 1,
-        "/Settings/DynamicEss/Mode": 1,
+        "/Settings/DynamicEss/Mode": 0,
         "/Settings/Gps/Format": 0,
         "/Settings/Gps/SpeedUnit": "km/h",
         "/Settings/Gui/ColorScheme": 1,
