@@ -163,7 +163,6 @@ FocusScope {
 				right: parent.right
 			}
 			active: false
-			asynchronous: true
 			sourceComponent: swipeViewComponent
 			visible: swipeView && swipeView.ready && !pageStack.opened
 					 && !(root.cardsActive && !cardsLoader.animationRunning)
@@ -194,7 +193,7 @@ FocusScope {
 					anchors.fill: parent
 					animationEnabled: root.allowPageAnimations
 					focus: true
-					contentChildren: swipePageModel.children
+					contentChildren: swipePageModel.pages
 
 					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
 					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
@@ -263,8 +262,8 @@ FocusScope {
 		// not run (skipping the splash screen causes the animations to
 		// start before the parent is visible).
 		onStopped: {
-			navBar.y = yAnimator.to
-			navBar.opacity = opacityAnimator.to
+			navBar.y = Qt.binding(function() { return yAnimator.to })
+			navBar.opacity = Qt.binding(function() { return opacityAnimator.to })
 		}
 
 		PauseAnimation {
@@ -293,6 +292,11 @@ FocusScope {
 
 		running: pageManager.interactivity === VenusOS.PageManager_InteractionMode_EndFullScreen
 				|| pageManager.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
+
+		onStopped: {
+			navBar.y = Qt.binding(function() { return yAnimator.to })
+			navBar.opacity = Qt.binding(function() { return opacityAnimator.to })
+		}
 
 		YAnimator {
 			target: navBar
