@@ -41,6 +41,14 @@ Page {
 			ListSwitch {
 				dataItem.uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
 				text: CommonWords.enabled
+				interactive: dEssModeItem.value === 0
+				//% "Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first."
+				caption: interactive ? "" : qsTrId("pagecontrollableloads_disable_dess_first")
+
+				VeQuickItem {
+					id: dEssModeItem
+					uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+				}
 			}
 
 			SettingsListHeader {

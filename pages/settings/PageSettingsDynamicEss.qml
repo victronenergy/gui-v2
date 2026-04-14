@@ -15,10 +15,18 @@ Page {
 				id: dEssMode
 				text: CommonWords.mode
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+				interactive: opportunityLoads.value === 0
+				//% "Dynamic ESS cannot be enabled while Opportunity Loads is enabled. Disable Dynamic ESS first."
+				caption: interactive ? "" : qsTrId("settings_ess_disable_ol_first")
 				optionModel: [
 					{ display: CommonWords.off, value: 0 },
 					{ display: CommonWords.auto, value: 1 }
 				]
+
+				VeQuickItem {
+					id: opportunityLoads
+					uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
+				}
 			}
 
 			ListText {
