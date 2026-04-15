@@ -436,6 +436,8 @@
 
     "geometry_breadcrumbs_viewGradient_width": 0.04,
 
+    "geometry_rotateDevicePrompt_spacing": 36,
+
     "geometry_quantityTable_row_height": 32,
     "geometry_quantityTable_header_row_height": 24,
     "geometry_quantityTable_maximumWidth": 500,

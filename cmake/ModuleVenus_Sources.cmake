@@ -91,6 +91,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/QuantityTableMetrics.qml
     components/QuantityTableSummary.qml
     components/RadioButtonListPage.qml
+    components/RotateDevicePrompt.qml
     components/RsSystemAcIODisplay.qml
     components/SegmentedButtonRow.qml
     components/SeparatorBar.qml
@@ -829,6 +830,7 @@ set(VictronVenusOS_RESOURCES
     images/notifications.svg
     images/notifications_subtract.svg
     images/overview.svg
+    images/prompt_device_rotation.svg
     images/rain.svg
     images/scatteredcloud.svg
     images/selection_dot.svg
