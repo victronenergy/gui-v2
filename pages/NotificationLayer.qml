@@ -59,18 +59,18 @@ Item {
 		id: view
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_toastNotification_horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
-			rightMargin: Theme.geometry_toastNotification_horizontalMargin
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_toastNotification_bottomMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-
-		height: 2*Theme.geometry_toastNotification_minHeight
-		spacing: Theme.geometry_toastNotification_horizontalMargin
+		// Use y binding instead of anchors so that it adjusts for portrait/landscape changes.
+		y: Theme.screenSize === Theme.Portrait ? Theme.geometry_toastNotification_verticalMargin
+				: parent.height - height - Theme.geometry_toastNotification_verticalMargin
+		height: 2*Theme.geometry_toastNotification_highlightWidth
+		spacing: Theme.geometry_page_content_verticalMargin
 		orientation: Qt.Horizontal
 		interactive: false
-		cacheBuffer: Theme.geometry_screen_width - 2*Theme.geometry_toastNotification_horizontalMargin
+		cacheBuffer: Theme.geometry_screen_width - 2*Theme.geometry_page_content_verticalMargin
 		model: ToastModel
 
 		property bool animationEnabled: true
@@ -120,7 +120,7 @@ Item {
 			}
 
 			ToastNotification {
-				y: parent.height - height
+				y: Theme.screenSize === Theme.Portrait ? 0 : parent.height - height
 
 				height: implicitHeight
 				width: parent.width

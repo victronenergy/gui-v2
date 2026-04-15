@@ -69,7 +69,7 @@ ListItem {
 				wrapMode: Text.Wrap
 				visible: root.description.length > 0 || root.value.length > 0
 				elide: Text.ElideRight
-				color: root.historical ? Theme.color_font_secondary : Theme.color_font_primary
+				color: root.historical ? Theme.color_listItem_secondaryText : Theme.color_font_primary
 				font: root.font
 				//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
 				//% "%1 %2"
@@ -79,15 +79,19 @@ ListItem {
 			}
 
 			Label {
-				color: Theme.color_listItem_secondaryText
-				font.pixelSize: Theme.font_size_body1
+				color: secondaryLabel.color
+				font.pixelSize: Theme.font_notification_timestamp_size
 				text: Utils.formatTimestamp(root.dateTime, ClockTime.dateTime)
+
+				Layout.alignment: Qt.AlignTop
 			}
 
 			Label {
+				id: secondaryLabel
+
 				wrapMode: Text.Wrap
 				visible: text.length > 0
-				color: root.historical ? Theme.color_font_disabled : Theme.color_font_secondary
+				color: root.historical ? Theme.color_font_disabled : Theme.color_listItem_secondaryText
 				font.pixelSize: descriptionLabel.visible ? Theme.font_size_body1 : Theme.font_size_body2
 				text: root.deviceName
 

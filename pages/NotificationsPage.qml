@@ -18,6 +18,8 @@ SwipeViewPage {
 	GradientListView {
 		id: notificationsView
 
+		height: parent.height - (portraitSilenceButton.visible ? portraitSilenceButton.height : 0)
+
 		// prevent the nav bar buttons from clicking the notifications when it is shown
 		// over the top of the notificationsView
 		clip: true
@@ -70,6 +72,8 @@ SwipeViewPage {
 			}
 		}
 
+		KeyNavigation.down: portraitSilenceButton.visible ? portraitSilenceButton : null
+
 		Component {
 			id: noAlertsHeader
 
@@ -106,6 +110,26 @@ SwipeViewPage {
 				}
 			}
 		}
+	}
+
+	SilenceAlarmButton {
+		id: portraitSilenceButton
+
+		anchors.top: notificationsView.bottom
+		width: notificationsView.width
+		leftInset: Theme.geometry_listItem_content_horizontalMargin
+		rightInset: Theme.geometry_listItem_content_horizontalMargin
+		topInset: Theme.geometry_listItem_content_verticalMargin
+		bottomInset: Theme.geometry_listItem_content_verticalMargin
+		enabled: Theme.screenSize === Theme.Portrait && Global.mainView?.notificationButtonsEnabled
+		visible: enabled
+
+		KeyNavigationHighlight.leftMargin: Theme.geometry_button_border_width
+		KeyNavigationHighlight.rightMargin: Theme.geometry_button_border_width
+		KeyNavigationHighlight.topMargin: Theme.geometry_button_border_width
+		KeyNavigationHighlight.bottomMargin: Theme.geometry_button_border_width
+
+		onClicked: NotificationModel.acknowledgeAll()
 	}
 
 	// automatically acknowledge all Info notifications,

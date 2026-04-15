@@ -155,6 +155,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/controls/RemoveButton.qml
     components/controls/RoundCloseButton.qml
     components/controls/ScrollBar.qml
+    components/controls/SilenceAlarmButton.qml
     components/controls/Slider.qml
     components/controls/SliderIndicator.qml
     components/controls/SpinBox.qml
