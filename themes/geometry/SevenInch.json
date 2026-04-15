@@ -83,6 +83,7 @@
     "geometry_listItem_content_spacing": 16,
     "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
+    "geometry_listItem_itemSeparator_height": 48,
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
     "geometry_listItem_arrow_leftMargin": 8,
@@ -96,9 +97,8 @@
 
     "geometry_listLink_qrCodeSize": 96,
 
-    "geometry_slider_text_width": 280,
     "geometry_slider_button_size": 32,
-    "geometry_slider_spacing": 6,
+    "geometry_slider_spacing": 12,
     "geometry_slider_steps": 10,
     "geometry_slider_groove_width": 560,
     "geometry_slider_groove_height": 8,

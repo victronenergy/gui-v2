@@ -53,8 +53,8 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListHeader {
-				preferredVisible: opportunityLoadsMode.valid
+			ListSpacer {
+				visible: opportunityLoadsMode.valid
 			}
 
 			SettingsListNavigation {
@@ -72,7 +72,7 @@ Page {
 				}
 			}
 
-			SettingsListHeader {}
+			ListSpacer { }
 
 			SettingsListNavigation {
 				//% "AC System"

@@ -13,4 +13,3 @@ CP.ColorImage {
 	source: "qrc:/images/icon_chevron_right_32.svg"
 	color: Theme.color_listItem_forwardIcon
 }
-

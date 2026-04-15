@@ -47,7 +47,7 @@ ListSetting {
 			}
 
 			QuantityLabel {
-				font.pixelSize: Theme.font_size_body2
+				font.pixelSize: Theme.font_listItem_secondary_size
 				value: root.value
 				valueColor: root.valueColor
 				unit: root.unit

@@ -14,14 +14,7 @@ ListSetting {
 	id: root
 
 	property string secondaryText
-	property int secondaryFontSize: Theme.font_size_body2
-
-	// If true, displays a text label instead of a button.
-	property bool readOnly: false
-
-	// If these are not set, the default values are used.
-	property color buttonBorderColor: FastUtils.invalidColor()
-	property color buttonBackgroundColor: FastUtils.invalidColor()
+	property int secondaryFontSize: Theme.font_listItem_secondary_size
 
 	signal clicked
 
@@ -31,6 +24,9 @@ ListSetting {
 		}
 		root.clicked()
 	}
+
+	// If true, displays a text label instead of a button.
+	property bool readOnly: false
 
 	interactive: true
 
@@ -45,12 +41,8 @@ ListSetting {
 		ColumnLayout {
 			id: labelsColumn
 
-			anchors {
-				left: parent.left
-				right: button.left
-				rightMargin: root.spacing
-				verticalCenter: parent.verticalCenter
-			}
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width - button.width - root.spacing
 			spacing: Theme.geometry_listItem_content_verticalSpacing
 
 			Label {
@@ -63,7 +55,6 @@ ListSetting {
 			}
 
 			CaptionLabel {
-				width: parent.width
 				text: root.caption
 				visible: text.length > 0
 
@@ -85,19 +76,6 @@ ListSetting {
 			flat: root.readOnly
 			focusPolicy: Qt.NoFocus
 			onClicked: root.click()
-
-			// TODO ideally Button.qml makes its color/backgroundColor/borderColor customisable in a
-			// way that doesn't require the normal binding to be duplicated. Once that is reworked,
-			// these Binding objects can be dropped in favour of just setting something like
-			// 'borderColor: root.borderColor'.
-			Binding on borderColor {
-				when: root.buttonBorderColor.valid
-				value: root.buttonBorderColor
-			}
-			Binding on backgroundColor {
-				when: root.buttonBackgroundColor.valid
-				value: root.buttonBackgroundColor
-			}
 		}
 	}
 

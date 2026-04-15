@@ -1,9 +1,9 @@
 {
-    "font_listItem_primary_size": "font_size_body2",
+    "font_listItem_primary_size": "font_size_body1",
     "font_listItem_flat_primary_size_flat": "font_size_body1",
     "font_listItem_secondary_size": "font_size_body1",
     "font_listItem_caption_size": "font_size_caption",
-    "font_breadcrumbs_pixelSize": "font_size_tiny",
+    "font_breadcrumbs_pixelSize": "font_size_caption",
     "font_briefPage_battery_title_minimumPixelSize": "font_size_tiny",
     "font_briefPage_battery_title_maximumPixelSize": "font_size_body1",
     "font_briefPage_battery_percentage_minimumPixelSize": "font_size_body2",

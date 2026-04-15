@@ -13,7 +13,7 @@ T.TextField {
 	property color borderColor: Theme.color_ok
 
 	font.family: Global.fontFamily
-	font.pixelSize: Theme.font_size_body2
+	font.pixelSize: Theme.font_listItem_primary_size
 	passwordCharacter: "\u2022"
 
 	leftPadding: Theme.geometry_textField_horizontalMargin

@@ -101,29 +101,36 @@ Page {
 
 				contentItem: Item {
 					implicitWidth: Theme.geometry_listItem_width
+					implicitHeight: Theme.screenSize === Theme.Portrait ? localTimeZoneLayout.height : 0
 
-					RowLayout {
+					GridLayout {
+						id: localTimeZoneLayout
 						anchors {
 							left: parent.left
 							right: parent.right
 							verticalCenter: parent.verticalCenter
 						}
-						spacing: timeZoneButton.spacing
+						columnSpacing: timeZoneButton.spacing
+						rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+						columns: Theme.screenSize === Theme.Portrait ? 2 : 3
 
 						Label {
 							//% "Date/Time local"
 							text: qsTrId("settings_tz_date_time_local")
 							font: timeZoneButton.font
+
 							Layout.fillWidth: true
+							Layout.columnSpan: Theme.screenSize === Theme.Portrait ? 2 : 1
 						}
+
 						ListItemButton {
-							id: localDateButton
 							text: ClockTime.currentDate
 							enabled: timeZoneButton.clickable
 							focus: enabled
 							KeyNavigation.right: localTimeButton
 							onClicked: root._openDateSelector()
 						}
+
 						ListItemButton {
 							id: localTimeButton
 							text: ClockTime.currentTime

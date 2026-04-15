@@ -143,7 +143,7 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			ListRadioButtonGroup {
 				//% "Language"
@@ -223,11 +223,11 @@ Page {
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			ListRebootButton { }
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			ListNavigation {
 				//% "Documentation"
@@ -257,7 +257,7 @@ Page {
 				}
 			}
 
-			SettingsListHeader { }
+			ListSpacer { }
 
 			ListRadioButtonGroup {
 				//% "Demo mode"

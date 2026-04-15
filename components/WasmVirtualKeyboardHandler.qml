@@ -123,10 +123,6 @@ Item {
 
 		// Called when a text field is pressed, before it receives focus.
 		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
-			if (!Theme.windowIsLandscape()) {
-				return
-			}
-
 			if (viewToScroll === Global.mainView.cardsLoader) {
 				// The text field is in the Control Cards or Switch Pane view. Find the position of
 				// the text field container within the view, and move the view by this amount.

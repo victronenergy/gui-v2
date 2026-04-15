@@ -83,37 +83,49 @@ Page {
 			id: validModel
 
 			ListItem {
+				id: tableListItem
+
 				leftPadding: leftInset
 				rightPadding: rightInset
-				contentItem: QuantityTable {
-					model: 3
-					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
-					equalWidthColumns: true
+				contentItem: Flickable {
+					implicitHeight: powerTable.height
+					contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
+					boundsBehavior: Flickable.StopAtBounds
+					clip: true
 
-					header: QuantityTable.TableHeader {
-						headerText: "Name"
-						model: [
-							{ text: "AC Out", unit: VenusOS.Units_Watt },
-							{ text: "AC Out", unit: VenusOS.Units_VoltAmpere },
-							{ text: "Qwacs", unit: VenusOS.Units_Watt },
-							{ text: "Qwacs", unit: VenusOS.Units_VoltAmpere },
-							{ text: "Sensors", unit: VenusOS.Units_Watt },
-							{ text: "Diff", unit: VenusOS.Units_Watt },
-						]
-					}
-					delegate: QuantityTable.TableRow {
-						id: tableRow
-						headerText: `L${index + 1}`
-						model: QuantityObjectModel {
-							id: rowModel
-							readonly property string phaseName: `L${tableRow.index + 1}`
+					QuantityTable {
+						id: powerTable
 
-							QuantityObject { object: acOut; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
-							QuantityObject { object: acOut; key: `apparent${rowModel.phaseName}`; unit: VenusOS.Units_VoltAmpere }
-							QuantityObject { object: qwacsPvInverter; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
-							QuantityObject { object: qwacsPvInverter; key: `apparent${rowModel.phaseName}`; unit: VenusOS.Units_VoltAmpere }
-							QuantityObject { object: sensorPvInverter; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
-							QuantityObject { object: diffs; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
+						width: parent.width
+						model: 3
+						columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
+						equalWidthColumns: true
+
+						header: QuantityTable.TableHeader {
+							headerText: "Name"
+							model: [
+								{ text: "AC Out", unit: VenusOS.Units_Watt },
+								{ text: "AC Out", unit: VenusOS.Units_VoltAmpere },
+								{ text: "Qwacs", unit: VenusOS.Units_Watt },
+								{ text: "Qwacs", unit: VenusOS.Units_VoltAmpere },
+								{ text: "Sensors", unit: VenusOS.Units_Watt },
+								{ text: "Diff", unit: VenusOS.Units_Watt },
+							]
+						}
+						delegate: QuantityTable.TableRow {
+							id: tableRow
+							headerText: `L${index + 1}`
+							model: QuantityObjectModel {
+								id: rowModel
+								readonly property string phaseName: `L${tableRow.index + 1}`
+
+								QuantityObject { object: acOut; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
+								QuantityObject { object: acOut; key: `apparent${rowModel.phaseName}`; unit: VenusOS.Units_VoltAmpere }
+								QuantityObject { object: qwacsPvInverter; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
+								QuantityObject { object: qwacsPvInverter; key: `apparent${rowModel.phaseName}`; unit: VenusOS.Units_VoltAmpere }
+								QuantityObject { object: sensorPvInverter; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
+								QuantityObject { object: diffs; key: `power${rowModel.phaseName}`; unit: VenusOS.Units_Watt }
+							}
 						}
 					}
 				}

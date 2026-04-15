@@ -33,6 +33,16 @@ ListSetting {
 	// Standard layout:
 	// | Primary label       | Quantity | Arrow |
 	// | Caption             |  row     | icon  |
+	//
+	// A compact layout is used in portrait, if the primary text (or caption text) and quantity row
+	// would not fit together on one line:
+	// | Primary label   |            |
+	// | Quantity row    | Arrow icon |
+	// | Caption         |            |
+	//
+	// If tableMode=true, then in order to vertically align quantities across multiple table rows:
+	// - In portrait, the compact layout is ALWAYS used
+	// - In landscape, the compact layout is NEVER used
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.height
@@ -40,11 +50,20 @@ ListSetting {
 		GridLayout {
 			id: contentLayout
 
+			readonly property bool compact: ((root.tableMode && Theme.screenSize === Theme.Portrait) || textWouldWrapInPortrait)
+					&& !(root.tableMode && Theme.screenSize !== Theme.Portrait)
+			readonly property bool textWouldWrapInPortrait: Theme.screenSize === Theme.Portrait
+					&& (primaryLabel.implicitWidth + quantityRow.width > width
+						|| captionLabel.implicitWidth + quantityRow.width > width)
+
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
-			columns: 2
+			columns: compact ? 1 : 2
 
 			Label {
+				id: primaryLabel
+
+				bottomPadding: contentLayout.compact ? Theme.geometry_listItem_content_verticalSpacing : 0
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
@@ -60,6 +79,7 @@ ListSetting {
 				tableMode: root.tableMode
 
 				Layout.rowSpan: captionLabel.visible ? 2 : 1
+				Layout.alignment: contentLayout.compact ? Qt.AlignLeft : Qt.AlignRight
 			}
 
 			CaptionLabel {
