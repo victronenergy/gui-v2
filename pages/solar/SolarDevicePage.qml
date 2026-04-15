@@ -38,20 +38,24 @@ Page {
 
 	GradientListView {
 		header: ListItem {
+			id: tableListItem
+
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 			rightPadding: rightInset
-			contentItem: Item {
-				implicitWidth: trackerSummary.width
+			contentItem: HorizontalFlickable {
 				implicitHeight: trackerTable.y + trackerTable.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
 
 				// When there is only one tracker, this table shows the overall voltage and current.
 				// Otherwise, the voltage and current are shown per-tracker in the tracker table.
 				QuantityTableSummary {
 					id: trackerSummary
 
+					width: parent.width
+					compactLayout: Theme.screenSize === Theme.Portrait && trackerTable.count === 0
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 					summaryHeaderText: CommonWords.state
 					summaryModel: [
@@ -59,10 +63,7 @@ Page {
 						{ text: root.singleTracker ? CommonWords.voltage : "", unit: VenusOS.Units_Volt_DC },
 						{ text: root.singleTracker ? CommonWords.current_amps : "", unit: VenusOS.Units_Amp },
 						{
-							text: root.singleTracker
-								   ? CommonWords.pv_power
-									 //% "Total PV Power"
-								   : qsTrId("charger_total_pv_power"),
+							text: root.singleTracker ? CommonWords.pv_power : CommonWords.total_power,
 							unit: VenusOS.Units_Watt
 						}
 					]
@@ -80,6 +81,7 @@ Page {
 					id: trackerTable
 
 					anchors.top: trackerSummary.bottom
+					width: parent.width
 					rightPadding: trackerSummary.rightPadding
 					columnSpacing: trackerSummary.columnSpacing
 					metricsFontSize: trackerSummary.metricsFontSize

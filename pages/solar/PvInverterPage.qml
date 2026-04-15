@@ -25,23 +25,24 @@ Page {
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 			rightPadding: rightInset
-			contentItem: Item {
+			contentItem: HorizontalFlickable {
 				implicitHeight: phaseTable.y + phaseTable.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
 
 				QuantityTableSummary {
 					id: phaseSummary
 
+					width: parent.width
+					compactLayout: Theme.screenSize === Theme.Portrait && phaseTable.count === 0
 					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
 					summaryHeaderText: pvInverter.statusCode >= 0 ? CommonWords.status : ""
 					summaryModel: [
-						{ text: CommonWords.energy, unit: VenusOS.Units_Energy_KiloWattHour },
 						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_AC },
 						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
 						{ text: CommonWords.power_watts, unit: VenusOS.Units_Watt }
 					]
 					bodyHeaderText: VenusOS.pvInverter_statusCodeToText(pvInverter.statusCode)
 					bodyModel: QuantityObjectModel {
-						QuantityObject { object: pvInverter; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
 						QuantityObject { object: pvInverter; key: "voltage"; unit: VenusOS.Units_Volt_AC }
 						QuantityObject { object: pvInverter; key: "current"; unit: VenusOS.Units_Amp }
 						QuantityObject { object: pvInverter; key: "power"; unit: VenusOS.Units_Watt }
@@ -55,6 +56,7 @@ Page {
 						top: phaseSummary.bottom
 						topMargin: Theme.geometry_gradientList_spacing
 					}
+					width: parent.width
 					visible: pvInverter.phases.count > 1
 					metricsFontSize: phaseSummary.metricsFontSize
 					columnSpacing: phaseSummary.columnSpacing
@@ -71,7 +73,6 @@ Page {
 
 						headerText: name
 						model: QuantityObjectModel {
-							QuantityObject { object: tableRow; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
 							QuantityObject { object: tableRow; key: "voltage"; unit: VenusOS.Units_Volt_AC }
 							QuantityObject { object: tableRow; key: "current"; unit: VenusOS.Units_Amp }
 							QuantityObject { object: tableRow; key: "power"; unit: VenusOS.Units_Watt }

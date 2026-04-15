@@ -60,6 +60,7 @@ Page {
 
 			width: parent.width
 			metricsFontSize: Theme.font_listItem_secondary_size // align columns with those in the delegate
+			headerVisible: Theme.screenSize !== Theme.Portrait
 			rightPadding: Theme.screenSize === Theme.Portrait ? 0
 				: (Theme.geometry_page_content_horizontalMargin // list item right inset
 					+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
