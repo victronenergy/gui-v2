@@ -296,6 +296,7 @@
     "geometry_iochannel_status_horizontalPadding": 8,
     "geometry_iochannel_status_radius": 10,
     "geometry_iochannel_status_minimum_width": 48,
+    "geometry_iochannel_statusBackground_bottomPadding": 4,
 
     "geometry_colorWheelDialog_width": 754,
     "geometry_colorWheelDialog_height": 448,

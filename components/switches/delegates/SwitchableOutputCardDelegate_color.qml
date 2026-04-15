@@ -49,6 +49,8 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
+		quantityValue: currentColorDimmerData.color.hsvValue * 100 // convert from 0-1 range to 0-100%
+		quantityUnit: VenusOS.Units_Percentage
 	}
 
 	FocusScope {

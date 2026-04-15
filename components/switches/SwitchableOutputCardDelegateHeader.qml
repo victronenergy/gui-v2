@@ -12,7 +12,11 @@ IOChannelCardDelegateHeader {
 
 	required property SwitchableOutput switchableOutput
 
-	formattedName: switchableOutput.formattedName
+	ioChannel: switchableOutput
+	quantityColor: (switchableOutput.hasValidState && switchableOutput.state === 0)
+				   || (switchableOutput.status & VenusOS.SwitchableOutput_Status_Disabled)
+			? Theme.color_font_secondary
+			: Theme.color_font_primary
 	statusText: VenusOS.switchableOutput_statusToText(switchableOutput.status, switchableOutput.type)
 	statusVisible: !(switchableOutput.status === VenusOS.SwitchableOutput_Status_Off
 			|| switchableOutput.status === VenusOS.SwitchableOutput_Status_On

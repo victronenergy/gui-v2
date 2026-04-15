@@ -48,15 +48,7 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
-		secondaryTitle: quantityInfo.number + (quantityInfo.unit || root.switchableOutput.unitText)
-
-		QuantityInfo {
-			id: quantityInfo
-			value: slider.value // already in the display unit
-			unitType: Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType)
-			decimals: root.switchableOutput.decimals
-			formatHints: Units.NoDecimalAdjustment // Always respect the decimals setting
-		}
+		quantityValue: slider.value // already in the display unit
 	}
 
 	SwitchableOutputSlider {

@@ -11,7 +11,7 @@ IOChannelCardDelegateHeader {
 
 	required property GenericInput genericInput
 
-	formattedName: genericInput.formattedName
+	ioChannel: genericInput
 	statusText: VenusOS.genericInput_statusToText(genericInput.status)
 	statusVisible: genericInput.status !== VenusOS.GenericInput_Status_On
 	statusColor: {
