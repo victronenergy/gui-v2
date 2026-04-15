@@ -16,7 +16,11 @@ static Victron::VenusOS::Theme *g_themeInstance = nullptr;
 #include <emscripten/val.h>
 
 EM_JS(int, getScreenWidth, (), {
-	return Math.min(screen.width, screen.height);
+	return screen.width;
+});
+
+EM_JS(int, getScreenHeight, (), {
+	return screen.height;
 });
 
 EM_JS(int, getWindowWidth, (), {
@@ -33,9 +37,13 @@ Theme::Theme(QObject *parent) : QObject(parent)
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	// 5"-6" Smartphones have 320 - 480 CSS independent pixel wide screens.
-	setScreenSize(getScreenWidth() >= 480
-		? Victron::VenusOS::Theme::SevenInch
-		: Victron::VenusOS::Theme::FiveInch);
+	if (getScreenHeight() > getScreenWidth()) {
+		setScreenSize(Victron::VenusOS::Theme::Portrait);
+	} else {
+		setScreenSize(getScreenWidth() >= 480
+			? Victron::VenusOS::Theme::SevenInch
+			: Victron::VenusOS::Theme::FiveInch);
+	}
 
 	// Assign global instance for callbacks
 	g_themeInstance = this;
