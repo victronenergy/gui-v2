@@ -33,6 +33,7 @@ class SwitchableOutput : public IOChannel
 	Q_OBJECT
 	QML_ELEMENT
 	Q_PROPERTY(int state READ state NOTIFY stateChanged FINAL)
+	Q_PROPERTY(bool hasValidState READ hasValidState NOTIFY hasStateChanged FINAL)
 	Q_PROPERTY(qreal dimming READ dimming NOTIFY dimmingChanged FINAL)
 	Q_PROPERTY(int function READ function NOTIFY functionChanged FINAL)
 	Q_PROPERTY(int validFunctions READ validFunctions NOTIFY validFunctionsChanged FINAL)
@@ -45,6 +46,9 @@ public:
 	// Whether the Function is a supported Type value, and matches the ValidFunctions.
 	bool hasValidFunction() const;
 
+	// True if /State is available.
+	bool hasValidState() const;
+
 	// Output/channel operational paths
 	int state() const;
 	qreal dimming() const;
@@ -55,6 +59,7 @@ public:
 
 Q_SIGNALS:
 	void stateChanged();
+	void hasStateChanged();
 	void dimmingChanged();
 	void functionChanged();
 	void validFunctionsChanged();
@@ -80,6 +85,7 @@ private:
 	QVariant m_function;
 	QString m_stepSizeString;
 	int m_validFunctions = 0;
+	bool m_hasValidState = false;
 	bool m_hasValidFunction = false;
 };
 

@@ -48,14 +48,13 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
-		secondaryTitle: measurementItem.valid
-			? "%1%2/<font color=\"%3\">%4</font>%5"
+		quantityText: measurementItem.valid
+			? "%1/<font color=\"%2\">%3</font>"
 					.arg(slider.value.toFixed(root.switchableOutput.decimals))
-					.arg(Units.degreesSymbol)
 					.arg(Theme.color_font_secondary)
 					.arg(measurementItem.value.toFixed(root.switchableOutput.decimals))
-					.arg(Global.systemSettings.temperatureUnitSuffix)
-			: slider.value.toFixed(root.switchableOutput.decimals) + Global.systemSettings.temperatureUnitSuffix
+			: slider.value.toFixed(root.switchableOutput.decimals)
+		quantityUnit: Global.systemSettings.toPreferredUnit(Global.systemSettings.temperatureUnit)
 	}
 
 	VeQuickItem {

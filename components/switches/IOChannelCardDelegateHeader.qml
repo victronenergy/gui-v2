@@ -10,33 +10,41 @@ import Victron.VenusOS
 RowLayout {
 	id: root
 
-	required property string formattedName
+	required property IOChannel ioChannel
 	required property string statusText
-	property string secondaryTitle
 	property bool statusVisible
 	property color statusColor: Theme.color_red
 
+	// If quantityValue or quantityText is set, the QuantityLabel is displayed.
+	property real quantityValue: NaN
+	property int quantityUnit: -1 // If -1, will use the IOChannel unit
+	property string quantityText // If set, this overrides the displayed quantityValue
+	property color quantityColor: Theme.color_font_primary
+
+	spacing: Theme.geometry_iochannel_label_margin
+
 	Label {
 		Layout.fillWidth: true
-		Layout.alignment: Qt.AlignBaseline
-		bottomPadding: Theme.geometry_iochannel_label_margin
-		rightPadding: Theme.geometry_iochannel_label_margin
-		text: root.formattedName
+		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		text: root.ioChannel.formattedName
 		elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
 	}
 
-	Label {
-		id: secondaryTitleLabel
-		Layout.alignment: Qt.AlignBaseline
-		bottomPadding: Theme.geometry_iochannel_label_margin
-		text: root.secondaryTitle
-		font.pixelSize: Theme.font_size_body2
+	IOChannelQuantityLabel {
+		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		ioChannel: root.ioChannel
+		value: root.quantityValue
+		valueColor: root.quantityColor
+		valueText: root.quantityText || quantityInfo.number
+		unit: root.quantityUnit >= 0 ? root.quantityUnit : Global.systemSettings.toPreferredUnit(ioChannel.unitType)
+		unitColor: root.quantityColor
+		visible: !root.statusVisible && (root.quantityText.length > 0 || !isNaN(root.quantityValue))
 	}
 
 	Rectangle {
 		id: statusRect
 
-		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		Layout.bottomMargin: Theme.geometry_iochannel_statusBackground_bottomPadding
 		Layout.maximumWidth: parent.width / 2
 		Layout.minimumWidth: statusLabel.implicitWidth
 		Layout.alignment: Qt.AlignRight

@@ -42,6 +42,8 @@ FocusScope {
 			rightMargin: Theme.geometry_controlCard_button_margins
 		}
 		switchableOutput: root.switchableOutput
+		quantityValue: slider.value
+		quantityUnit: VenusOS.Units_Percentage
 	}
 
 	SwitchableOutputDimmableSlider {

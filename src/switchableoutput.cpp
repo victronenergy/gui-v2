@@ -79,11 +79,21 @@ int SwitchableOutput::state() const
 	return m_state.toInt();
 }
 
+bool SwitchableOutput::hasValidState() const
+{
+	return m_hasValidState;
+}
+
 void SwitchableOutput::setState(const QVariant &variant)
 {
+	const bool prevHasState = m_hasValidState;
 	m_state = variant;
+	m_hasValidState = variant.isValid();
 	updateAllowedInGroupModel();
 	emit stateChanged();
+	if (prevHasState != hasValidState()) {
+		emit hasStateChanged();
+	}
 }
 
 qreal SwitchableOutput::dimming() const
