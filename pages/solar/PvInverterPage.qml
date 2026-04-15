@@ -23,9 +23,9 @@ Page {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
-			leftPadding: 0
+			leftPadding: leftInset
+			rightPadding: rightInset
 			contentItem: Item {
-				implicitWidth: phaseSummary.width
 				implicitHeight: phaseTable.y + phaseTable.height
 
 				QuantityTableSummary {

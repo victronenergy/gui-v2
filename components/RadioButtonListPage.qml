@@ -111,8 +111,8 @@ Page {
 						id: passwordField
 
 						width: Theme.geometry_listItem_textField_minimumWidth + rightInset
-						rightPadding: rightInset
-						rightInset: confirmButton.width + radioButton.spacing + radioButton.horizontalContentPadding
+						rightPadding: rightInset + Theme.geometry_textField_horizontalMargin
+						rightInset: confirmButton.width + confirmButton.anchors.rightMargin + radioButton.spacing
 						flickable: optionsListView
 						echoMode: TextInput.Password
 						placeholderText: CommonWords.enter_password
@@ -137,7 +137,7 @@ Page {
 
 							anchors {
 								right: parent.right
-								rightMargin: radioButton.horizontalContentPadding
+								rightMargin: radioButton.horizontalContentPadding + radioButton.rightInset
 							}
 							text: CommonWords.confirm
 							focusPolicy: Qt.NoFocus

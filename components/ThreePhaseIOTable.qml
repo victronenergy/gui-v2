@@ -16,15 +16,13 @@ ListItem {
 	property alias totalOutputPowerUid: outputTable.totalPowerUid
 	property int voltDecimals: Units.defaultUnitDecimals(VenusOS.Units_Volt_AC)
 
-	leftPadding: 0
-	rightPadding: 0
+	leftPadding: leftInset
+	rightPadding: rightInset
 	topPadding: 0
 	bottomPadding: 0
 	background: null
 
 	contentItem: Row {
-		id: contentRow
-		width: parent.width
 		spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
 
 		ThreePhaseQuantityTable {
