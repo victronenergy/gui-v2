@@ -90,7 +90,7 @@ CT.SpinBox {
 			clip: true
 			spinBox: root
 			suffix: root.suffix
-			fontPixelSize: Theme.font_size_body2
+			font.pixelSize: Theme.font_size_body2
 			arrowKeysEnabled: upDownHintFrame.visible
 			focus: Global.keyNavigationEnabled
 

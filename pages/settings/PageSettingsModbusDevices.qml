@@ -120,7 +120,6 @@ Page {
 			//% "Remove Modbus device?"
 			title: qsTrId("page_settings_modbus_device_remove_device")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			height: Theme.geometry_modalDialog_height_small
 			icon.color: Theme.color_orange
 			acceptText: CommonWords.remove
 

@@ -15,16 +15,22 @@ FocusScope {
 	property int maximumHour: 23
 	property int maximumMinute: 59
 
-	implicitWidth: hrSpinbox.width + colonLabel.width + minSpinbox.width + (2 * Theme.geometry_timeSelector_horizontalMargin)
-	implicitHeight: hrSpinbox.y + hrSpinbox.height
+	implicitWidth: Theme.screenSize === Theme.Portrait
+			? hrSpinbox.width
+			: hrSpinbox.width + colonLabel.width + minSpinbox.width + (2 * Theme.geometry_modalDialog_content_spacing)
+	implicitHeight: Theme.screenSize === Theme.Portrait
+			? hrSpinbox.height + minSpinbox.height + Theme.geometry_modalDialog_content_spacing
+			: hrSpinbox.y + hrSpinbox.height
 
 	SpinBox {
 		id: hrSpinbox
-		anchors {
-			right: colonLabel.left
-			rightMargin: Theme.geometry_timeSelector_horizontalMargin
-		}
 
+		anchors {
+			right: Theme.screenSize === Theme.Portrait ? undefined : colonLabel.left
+			rightMargin: Theme.geometry_modalDialog_content_spacing
+			verticalCenter: Theme.screenSize === Theme.Portrait ? parent.verticalCenter : undefined
+			verticalCenterOffset: -minSpinbox.height / 2
+		}
 		width: Theme.geometry_timeSelector_spinBox_width
 		height: Theme.geometry_timeSelector_spinBox_height
 		from: 0
@@ -51,16 +57,19 @@ FocusScope {
 
 		text: ":"
 		color: root.enabled ? Theme.color_font_secondary : Theme.color_background_disabled
-		font.pixelSize: Theme.font_size_h3
+		font.pixelSize: Theme.font_dialog_control_largeSize
+		visible: Theme.screenSize !== Theme.Portrait
 	}
 
 	SpinBox {
 		id: minSpinbox
-		anchors {
-			left: colonLabel.right
-			leftMargin: Theme.geometry_timeSelector_horizontalMargin
-		}
 
+		anchors {
+			left:  Theme.screenSize === Theme.Portrait ? undefined :colonLabel.right
+			leftMargin: Theme.geometry_modalDialog_content_spacing
+			top: Theme.screenSize === Theme.Portrait ? hrSpinbox.bottom : undefined
+			topMargin: Theme.geometry_modalDialog_content_spacing
+		}
 		width: Theme.geometry_timeSelector_spinBox_width
 		height: Theme.geometry_timeSelector_spinBox_height
 		from: 0

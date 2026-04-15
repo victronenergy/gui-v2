@@ -23,27 +23,17 @@ ModalDialog {
 			: root.serviceType === "vebus" ? numberOfAcInputs.value !== 0
 			: root.serviceType === "acsystem" ? true
 			: false     // unsupported service
-	readonly property bool vebusInverterOnlyModel: serviceType === "vebus" && numberOfAcInputs.value === 0 // for a vebus inverter-only model, such as a "Phoenix Inverter Compact 12/1200"
 
-	title: showInverterModesOnly || vebusInverterOnlyModel
-			//% "Inverter mode"
-		   ? qsTrId("controlcard_inverter_mode")
-			 //% "Inverter / Charger mode"
-		   : qsTrId("controlcard_inverter_charger_mode")
+	title: CommonWords.mode
 
 	contentItem: ModalDialog.FocusableContentItem {
-		anchors {
-			top: root.title.bottom
-			left: parent.left
-			right: parent.right
-			leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
-			rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
-		}
-		height: contentColumn.height
+		implicitHeight: contentColumn.height
 
 		SettingsColumn {
 			id: contentColumn
-			width: parent.width
+			x: Theme.geometry_modalDialog_content_horizontalMargin
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
+			bottomPadding: Theme.geometry_modalDialog_content_spacing
 
 			Repeater {
 				id: repeater

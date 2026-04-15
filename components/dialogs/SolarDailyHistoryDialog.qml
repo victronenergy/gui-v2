@@ -12,16 +12,13 @@ import Victron.VenusOS
 T.Dialog {
 	id: root
 
-	property alias solarHistory: tableView.solarHistory
-	property int day
-	property int minimumDay
-	property int maximumDay
-	property var highlightBarForDay
+	required property SolarHistory solarHistory
+	required property int minimumDay
+	required property int maximumDay
+	required property var highlightBarForDay
 
-	// DialogLayer.qml expects dialogs to have this function.
-	function handleReject() {
-		close()
-	}
+	// The currently displayed day (0=today, 1=yesterday, etc.)
+	property int day
 
 	function _setDay(d) {
 		if (d >= minimumDay && d <= maximumDay) {
@@ -31,8 +28,6 @@ T.Dialog {
 	}
 
 	function _refresh() {
-		dateLabel.text = ClockTime.formatDeltaDate(-1 * 86400 * day, "ddd d MMM")
-		tableView.dayRange = [day, day + 1]
 		_positionHighlightBar()
 	}
 
@@ -50,11 +45,17 @@ T.Dialog {
 		highlightBar.height = sourceBar.height
 	}
 
-	anchors.centerIn: parent
-	implicitWidth: background.implicitWidth
-	implicitHeight: background.implicitHeight
-	verticalPadding: 0
-	horizontalPadding: 0
+	// Use x/y positioning instead of anchors, so that the dialog can be moved by DialogDragger.
+	x: (Theme.geometry_screen_width - width) / 2
+	y: (Theme.geometry_screen_height - height) / 2
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding + (header?.height ?? 0) + (footer?.height ?? 0))
+	leftMargin: Theme.geometry_solarDailyHistoryDialog_horizontalMargin
+	rightMargin: Theme.geometry_solarDailyHistoryDialog_horizontalMargin
 	modal: true
 	focus: Global.keyNavigationEnabled
 
@@ -91,14 +92,19 @@ T.Dialog {
 	}
 
 	background: Rectangle {
-		implicitWidth: Theme.geometry_modalDialog_width
-		implicitHeight: Theme.geometry_solarDailyHistoryDialog_header_height
-					+ tableView.height
-					+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_margins : 0)
-		radius: Theme.geometry_modalDialog_radius
+		implicitWidth: Theme.geometry_screen_width - root.leftMargin - root.rightMargin
+		implicitHeight: 0
+		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
 		color: Theme.color_background_secondary
+		border.color: Theme.color_modalDialog_border
 
-		DialogShadow {}
+		DialogDragger {
+			anchors.fill: parent
+			dialog: root
+			shadow: dialogShadow
+		}
+
+		DialogShadow { id: dialogShadow }
 
 		Rectangle {
 			id: highlightBar
@@ -138,7 +144,11 @@ T.Dialog {
 
 	// This must be a Rectangle to ensure highlightBar does not appear through the content.
 	contentItem: Rectangle {
-		radius: Theme.geometry_modalDialog_radius
+		implicitWidth: Theme.geometry_screen_width - root.leftMargin - root.rightMargin
+		implicitHeight: historyListView.y + historyListView.height
+			+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_margins : 0)
+
+		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
 		color: Theme.color_background_secondary
 		focus: true
 
@@ -156,6 +166,7 @@ T.Dialog {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			font.pixelSize: Theme.font_size_body1
+			text: ClockTime.formatDeltaDate(-1 * 86400 * root.day, "ddd d MMM")
 		}
 
 		CloseButton {
@@ -166,27 +177,55 @@ T.Dialog {
 			onClicked: root.close()
 		}
 
-		SolarHistoryTableView {
-			id: tableView
+		// In portrait layout, this can be flicked horizontally to view different days.
+		ListView {
+			id: historyListView
 
-			anchors {
-				top: dateLabel.bottom
-				left: parent.left
-				right: parent.right
+			anchors.top: dateLabel.bottom
+			width: parent.width
+			height: currentItem?.height ?? 0
+			interactive: Theme.screenSize === Theme.Portrait
+			orientation: Qt.Horizontal
+			snapMode: ListView.SnapOneItem
+			boundsBehavior: Flickable.StopAtBounds
+			highlightRangeMode: ListView.StrictlyEnforceRange
+			preferredHighlightBegin: 0
+			preferredHighlightEnd: 0
+			highlightMoveDuration: 0 // when the left/right arrows are clicked, change the index instantly without animation
+			clip: true
+			model: root.solarHistory.daysAvailable
+			currentIndex: root.day
+
+			delegate: PressArea {
+				id: historyDelegate
+
+				required property int index
+
+				implicitWidth: historyListView.width
+				implicitHeight: tableView.height
+
+				enabled: errorView.expanded
+				onClicked: errorView.expanded = false
+
+				SolarHistoryTableView {
+					id: tableView
+
+					width: parent.width
+					columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_medium
+					summaryBodyFontSize: Theme.font_solarHistoryDialog_summaryBody_size
+					detailBoxFontSize: Theme.font_solarHistoryDialog_detailBox_size
+					solarHistory: root.solarHistory
+					dayRange: [historyDelegate.index, historyDelegate.index + 1]
+				}
 			}
-			summaryBodyFontSize: Theme.font_solarHistoryDialog_summaryBody_size
-			detailBoxFontSize: Theme.font_solarHistoryDialog_detailBox_size
-		}
 
-		PressArea {
-			anchors.fill: tableView
-			enabled: errorView.expanded
-			onClicked: errorView.expanded = false
+			onCurrentIndexChanged: root._setDay(currentIndex)
 		}
 
 		SolarHistoryErrorView {
 			id: errorView
 
+			// Anchor to parent bottom so that the list opens upwards.
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom

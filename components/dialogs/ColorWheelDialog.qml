@@ -54,12 +54,12 @@ ModalDialog {
 		]
 	}
 
-	width: Theme.geometry_colorWheelDialog_width
-	height: Theme.geometry_colorWheelDialog_height
+	leftMargin: Theme.geometry_colorWheelDialog_horizontalMargin
+	rightMargin: Theme.geometry_colorWheelDialog_horizontalMargin
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
 
 	header: Item {
-		height: Theme.geometry_modalDialog_header_height
+		implicitHeight: headerLabel.height + secondaryLabel.height + (2 * Theme.geometry_modalDialog_header_verticalPadding)
 
 		Label {
 			id: headerLabel
@@ -86,13 +86,30 @@ ModalDialog {
 		}
 
 		CloseButton {
-			anchors.right: parent.right
-			anchors.rightMargin: Theme.geometry_closeButton_rightMargin
+			anchors {
+				top: parent.top
+				topMargin: Theme.geometry_closeButton_rightMargin
+				right: parent.right
+				rightMargin: Theme.geometry_closeButton_rightMargin
+			}
 			onClicked: root.close()
 		}
 	}
 
 	contentItem: ModalDialog.FocusableContentItem {
+		implicitWidth: Theme.screenSize === Theme.Portrait
+			? Theme.geometry_screen_width - root.leftMargin - root.rightMargin
+			: colorSelector.anchors.leftMargin + colorSelector.width
+				+ Theme.geometry_colorWheelDialog_spacing
+				+ presetGrid.width + presetGrid.anchors.rightMargin
+		implicitHeight: Theme.screenSize === Theme.Portrait
+			? colorSelector.anchors.topMargin
+				+ colorSelector.height
+				+ Theme.geometry_colorWheelDialog_spacing
+				+ presetGrid.height
+			  + Theme.geometry_colorWheelDialog_spacing
+			: Math.max(colorSelector.y + colorSelector.height, presetGrid.height) + Theme.geometry_colorWheelDialog_spacing
+
 		// Button for switching between RGB(W) and CCT colour wheels. When clicked, the
 		// SwitchableOutput/<x>/Type value is updated.
 		ColorWheelModeButton {
@@ -156,10 +173,16 @@ ModalDialog {
 			id: colorSelector
 
 			anchors {
-				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: colorModeButton.visible ? (colorModeButton.height / 2) : 0
-				left: parent.left
-				leftMargin: Theme.geometry_colorWheelDialog_horizontalMargin_left
+				// Landscape: place on left side, vertically centred
+				left: Theme.screenSize === Theme.Portrait ? undefined : parent.left
+				leftMargin: Theme.geometry_colorWheelDialog_leftPadding
+				verticalCenter: Theme.screenSize === Theme.Portrait ? undefined : parent.verticalCenter
+				verticalCenterOffset: colorModeButton.height / 2
+
+				// Portrait: place at top, horizontally centred
+				top: Theme.screenSize === Theme.Portrait ? parent.top : undefined
+				topMargin: colorModeButton.height + Theme.geometry_colorWheelDialog_mode_button_verticalMargin
+				horizontalCenter: Theme.screenSize === Theme.Portrait ? parent.horizontalCenter : undefined
 			}
 			colorDimmerData: root.colorDimmerData
 			outputType: colorModeButton.outputType
@@ -169,10 +192,15 @@ ModalDialog {
 			id: presetGrid
 
 			anchors {
-				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -(colorModeButton.height / 2)
-				right: parent.right
-				rightMargin: Theme.geometry_colorWheelDialog_horizontalMargin_right
+				// Landscape: place on right side, vertically centred
+				right: Theme.screenSize === Theme.Portrait ? undefined : parent.right
+				rightMargin: Theme.geometry_colorWheelDialog_rightPadding
+				verticalCenter: Theme.screenSize === Theme.Portrait ? undefined : parent.verticalCenter
+
+				// Portrait: place at bottom, horizontally centred
+				top: Theme.screenSize === Theme.Portrait ? colorSelector.bottom : undefined
+				topMargin: Theme.geometry_colorWheelDialog_spacing
+				horizontalCenter: Theme.screenSize === Theme.Portrait ? parent.horizontalCenter : undefined
 			}
 			focus: true
 			onPresetActivated: (index) => {

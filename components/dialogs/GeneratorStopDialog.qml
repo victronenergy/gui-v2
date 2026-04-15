@@ -37,21 +37,15 @@ GeneratorDialog {
 	}
 
 	contentItem: ModalDialog.FocusableContentItem {
-		anchors {
-			top: root.header.bottom
-			topMargin: Theme.geometry_modalDialog_content_margins
-			left: parent.left
-			right: parent.right
-			bottom: parent.footer.top
-		}
-		height: contentColumn.height
+		implicitHeight: contentColumn.height
 
 		Column {
 			id: contentColumn
-			width: parent.width
+			x: Theme.geometry_modalDialog_content_horizontalMargin
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 
 			Label {
-				height: implicitHeight + Theme.geometry_modalDialog_content_margins/2
+				bottomPadding: Theme.geometry_modalDialog_content_spacing
 				wrapMode: Text.Wrap
 				horizontalAlignment: Text.AlignHCenter
 				x: Theme.geometry_page_content_horizontalMargin
@@ -65,7 +59,7 @@ GeneratorDialog {
 			FixedWidthLabel {
 				anchors.horizontalCenter: parent.horizontalCenter
 				text: Utils.formatGeneratorRuntime(root.generator.runtime)
-				font.pixelSize: Theme.font_size_h3
+				font.pixelSize: Theme.font_dialog_control_largeSize
 			}
 
 			Label {
@@ -80,21 +74,18 @@ GeneratorDialog {
 				//% "Set Time %1"
 				text: qsTrId("controlcard_generator_stopdialog_set_time").arg(Utils.secondsToString(root.generator.manualStartTimer))
 			}
-		}
 
-		Label {
-			anchors.top: contentColumn.bottom
-			width: parent.width
-			topPadding: Theme.geometry_modalDialog_content_margins
-			wrapMode: Text.Wrap
-			color: Theme.color_font_primary
-			horizontalAlignment: Text.AlignHCenter
-			visible: root.generator.autoStart
-			elide: Text.ElideRight
-			maximumLineCount: 2
+			Label {
+				width: parent.width
+				topPadding: Theme.geometry_modalDialog_content_spacing
+				wrapMode: Text.Wrap
+				color: Theme.color_font_primary
+				horizontalAlignment: Text.AlignHCenter
+				visible: root.generator.autoStart
 
-			//% "Generator will keep running if an autostart condition is met."
-			text: qsTrId("controlcard_generator_stopdialog_description")
+				//% "Generator will keep running if an autostart condition is met."
+				text: qsTrId("controlcard_generator_stopdialog_description")
+			}
 		}
 	}
 }

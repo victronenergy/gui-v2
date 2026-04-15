@@ -17,18 +17,13 @@ ModalDialog {
 	//% "ESS mode"
 	title: qsTrId("controlcard_inverter_charger_ess_mode")
 	contentItem: ModalDialog.FocusableContentItem {
-		anchors {
-			top: root.title.bottom
-			left: parent.left
-			right: parent.right
-			leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
-			rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
-		}
-		height: contentColumn.height
+		implicitHeight: contentColumn.height
 
 		SettingsColumn {
 			id: contentColumn
-			width: parent.width
+			x: Theme.geometry_modalDialog_content_horizontalMargin
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
+			bottomPadding: Theme.geometry_modalDialog_content_spacing
 
 			Repeater {
 				id: repeater

@@ -26,25 +26,21 @@ GeneratorDialog {
 	}
 
 	contentItem: ModalDialog.FocusableContentItem {
-		anchors {
-			top: root.header.bottom
-			topMargin: Theme.geometry_modalDialog_content_margins
-			left: parent.left
-			right: parent.right
-			bottom: parent.footer.top
-		}
-		height: contentColumn.height
+		implicitHeight: contentColumn.height
 
 		Column {
 			id: contentColumn
-			width: parent.width
-			spacing: Theme.geometry_modalDialog_content_margins
+			x: Theme.geometry_modalDialog_content_horizontalMargin
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
+			spacing: Theme.geometry_modalDialog_content_spacing
+			bottomPadding: Theme.geometry_modalDialog_content_spacing
 
 			Row {
 				anchors {
 					left: timeSelector.left
 					right: timeSelector.right
 				}
+				topPadding: Theme.geometry_modalDialog_content_spacing
 
 				Label {
 					id: timedRunLabel
@@ -80,12 +76,13 @@ GeneratorDialog {
 
 			Label {
 				anchors {
-					left: timeSelector.left
-					right: timeSelector.right
+					left: parent.left
+					right: parent.right
 				}
 				wrapMode: Text.Wrap
 				color: Theme.color_font_primary
 				horizontalAlignment: Text.AlignHCenter
+				font.pixelSize: Theme.font_dialog_body_size
 				text: timedRunSwitch.checked && (timeSelector.hour || timeSelector.minute)
 					  ? //% "Generator will stop in %1 unless autostart conditions are enabled that keep it running."
 						qsTrId("generator_start_dialog_will_stop_in_x").arg(Utils.formatHoursMinutes(timeSelector.hour, timeSelector.minute))

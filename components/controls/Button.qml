@@ -35,10 +35,10 @@ T.Button {
 
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
-	topPadding: 0
-	bottomPadding: 0
-	leftPadding: 0
-	rightPadding: 0
+	topPadding: topInset
+	bottomPadding: bottomInset
+	leftPadding: leftInset
+	rightPadding: rightInset
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,

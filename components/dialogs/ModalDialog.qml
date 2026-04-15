@@ -19,11 +19,13 @@ T.Dialog {
 	id: root
 
 	property string secondaryTitle
+	property int titleTextFormat: Text.AutoText
 	property color backgroundColor: Theme.color_background_secondary
+	property Item acceptButtonBackground
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
-	property alias canAccept: doneButton.enabled
-	property alias titleTextFormat: headerLabel.textFormat
-	readonly property real centeredY: (parent.height - height) / 2
+	property bool canAccept: true
+
+	readonly property real centeredY: (Theme.geometry_screen_height - height) / 2
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -36,12 +38,20 @@ T.Dialog {
 			? qsTrId("modaldialog_set")
 			: CommonWords.ok
 
-	readonly property alias rejectButton: rejectButton
 	property string rejectText: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly
 			? ""
 			: rejectTextCancel
 
 	readonly property string rejectTextCancel: CommonWords.cancel
+
+	readonly property Item focusedInputItem: root.visible
+		&& (Qt.inputMethod.visible || BackendConnection.needsWasmKeyboardHandler)
+			? (root.contentItem.Window.activeFocusItem as TextField ??
+				root.contentItem.Window.activeFocusItem as TextInput ??
+				// root.contentItem.Window.activeFocusItem as TextArea ?? // not used
+				root.contentItem.Window.activeFocusItem as TextEdit)
+			: null
+	onFocusedInputItemChanged: _stateManager.updateState()
 
 	function handleAccept() {
 		if (!root.canAccept || (!!root.tryAccept && !root.tryAccept())) {
@@ -62,25 +72,34 @@ T.Dialog {
 		// Give the initial focus to this content item so that child UI controls will receive focus.
 		focus: true
 
+		implicitWidth: Theme.geometry_screen_width - root.leftMargin - root.rightMargin
+		implicitHeight: Theme.geometry_modalDialog_contentItem_defaultHeight
+
 		KeyNavigation.down: Global.keyNavigationEnabled ? root.footer : null
 		Keys.onEscapePressed: root.handleReject()
 		Keys.enabled: Global.keyNavigationEnabled
+
+		// If a text field is focused and the Qt/native VKB is shown, and the user clicks outside of
+		// the focused item, then close the VKB (by removing the focus).
+		MouseArea {
+			anchors.fill: parent
+			enabled: !!root.focusedInputItem
+			onClicked: root.focusedInputItem.focus = false
+		}
 	}
 
-	// Use x/y positioning instead of anchors, so that the dialog can be moved upwards when needed.
-	x: (parent.width - width) / 2
-	y: centeredY
-
-	/*
-	If you specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
-	the dialog scales correctly with the rest of the app down to ~60%, and then scales down at a faster rate than the
-	rest of the app. Specifying 'width' and 'height' instead of 'implicitWidth' and 'implicitHeight' for ModalDialog
-	makes it scale properly when you shrink the window. See https://bugreports.qt.io/browse/QTBUG-127068
-	*/
-	width: Theme.geometry_modalDialog_width
-	height: Math.max(Theme.geometry_modalDialog_height, (header ? header.height : 0) + contentHeight + (footer ? footer.height : 0))
-	verticalPadding: 0
-	horizontalPadding: 0
+	// Use x/y positioning instead of anchors, so that the dialog can be moved for the VKB and by
+	// the DialogDragger.
+	x: (Theme.geometry_screen_width - width) / 2
+	y: root.centeredY
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding + (header?.height ?? 0) + (footer?.height ?? 0))
+	leftMargin: Theme.geometry_modalDialog_horizontalMargin
+	rightMargin: Theme.geometry_modalDialog_horizontalMargin
 	modal: true
 	closePolicy: T.Popup.NoAutoClose
 
@@ -108,50 +127,79 @@ T.Dialog {
 	}
 
 	background: Rectangle {
+		// Allow dialog to stretch to screen width in portrait.
+		implicitWidth: Theme.geometry_screen_width - root.leftMargin - root.rightMargin
+		implicitHeight: Theme.geometry_modalDialog_height
 		radius: Theme.geometry_modalDialog_radius
 		color: root.backgroundColor
 		border.color: Theme.color_modalDialog_border
 
-		DialogShadow {}
+		DialogDragger {
+			anchors.fill: parent
+			dialog: root
+			shadow: dialogShadow
+		}
+
+		DialogShadow { id: dialogShadow }
 	}
 
 	header: Item {
-		width: root.width
-		height: Theme.geometry_modalDialog_header_height
+		implicitHeight: Math.max(
+				labelColumn.height,
+				roundCloseButton.visible ? roundCloseButton.y + roundCloseButton.height + Theme.geometry_modalDialog_content_spacing : 0,
+				Theme.geometry_modalDialog_header_height)
 
-		Label {
-			id: headerLabel
-
-			anchors {
-				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: secondaryHeaderLabel.text.length ? -secondaryHeaderLabel.height / 2 : 0
-			}
+		RoundCloseButton {
+			id: roundCloseButton
 			x: Theme.geometry_page_content_horizontalMargin
-			width: parent.width - 2*x
-			horizontalAlignment: Text.AlignHCenter
-			color: Theme.color_font_primary
-			font.pixelSize: root.secondaryTitle.length ? Theme.font_size_body1 : Theme.font_size_body3
-			text: root.title
-			elide: Text.ElideRight
+			y: Theme.geometry_modalDialog_content_spacing
+			visible: Theme.screenSize === Theme.Portrait
+					&& root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			onClicked: root.handleReject()
 		}
 
-		Label {
-			id: secondaryHeaderLabel
+		Column {
+			id: labelColumn
 
-			anchors.top: headerLabel.bottom
-			x: Theme.geometry_page_content_horizontalMargin
-			width: parent.width - 2*x
-			horizontalAlignment: Text.AlignHCenter
-			color: Theme.color_font_primary
-			font.pixelSize: Theme.font_size_body2
-			text: root.secondaryTitle
-			elide: Text.ElideRight
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_page_content_horizontalMargin
+						+ (roundCloseButton.visible ? roundCloseButton.width : 0)
+				right: parent.right
+				rightMargin: Theme.geometry_page_content_horizontalMargin
+						+ (roundCloseButton.visible ? roundCloseButton.width : 0)
+				verticalCenter: parent.verticalCenter
+			}
+			topPadding: Theme.geometry_modalDialog_header_verticalPadding
+			bottomPadding: Theme.geometry_modalDialog_header_verticalPadding
+			spacing: Theme.geometry_modalDialog_header_spacing
+
+			Label {
+				width: parent.width
+				horizontalAlignment: Text.AlignHCenter
+				color: Theme.color_font_primary
+				font.pixelSize: Theme.font_dialog_secondaryTitle_size
+				text: root.secondaryTitle
+				textFormat: root.titleTextFormat
+				elide: Text.ElideRight
+				visible: text.length > 0
+			}
+
+			Label {
+				width: parent.width
+				horizontalAlignment: Text.AlignHCenter
+				color: Theme.color_font_primary
+				font.pixelSize: root.secondaryTitle.length ? Theme.font_dialog_header_smallSize : Theme.font_dialog_header_largeSize
+				text: root.title
+				textFormat: root.titleTextFormat
+				elide: Text.ElideRight
+			}
 		}
 	}
 
 	footer: FocusScope {
 		visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_NoOptions
-		height: visible ? Theme.geometry_modalDialog_footer_height : 0
+		implicitHeight: visible ? Theme.geometry_modalDialog_footer_height : 0
 		focus: false
 
 		// Do not allow enter/return to accept the dialog when the footer buttons are
@@ -169,10 +217,10 @@ T.Dialog {
 				right: parent.right
 				rightMargin: root.background.border.width
 			}
+			visible: Theme.screenSize !== Theme.Portrait
 		}
 		Button {
 			id: rejectButton
-			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 			anchors {
 				left: parent.left
 				right: footerMidSeparator.left
@@ -183,15 +231,18 @@ T.Dialog {
 			font.pixelSize: Theme.font_size_body2
 			color: Theme.color_font_primary
 			spacing: 0
-			enabled: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+					&& Theme.screenSize !== Theme.Portrait
+			enabled: visible
 			focus: enabled
 			text: root.rejectText
+
 			onClicked: root.handleReject()
 		}
 
 		SeparatorBar {
 			id: footerMidSeparator
-			visible: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
+			visible: rejectButton.visible
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
@@ -200,10 +251,11 @@ T.Dialog {
 			}
 			width: Theme.geometry_modalDialog_footer_midSeparator_width
 		}
+
 		Button {
 			id: doneButton
 			anchors {
-				left: root.dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkOnly ? parent.left : footerMidSeparator.right
+				left: rejectButton.visible ? footerMidSeparator.right : parent.left
 				right: parent.right
 				rightMargin: root.background.border.width
 				top: footerTopSeparator.bottom
@@ -211,49 +263,69 @@ T.Dialog {
 				bottomMargin: root.background.border.width
 			}
 			focus: enabled && !rejectButton.enabled
-			font.pixelSize: Theme.font_size_body2
-			color: Theme.color_font_primary
+			font.pixelSize: Theme.font_dialog_acceptButton_size
 			spacing: 0
 			text: root.acceptText
+			enabled: root.canAccept
+
+			// In portrait layout, the accept button fills the width of the dialog, and has a
+			// coloured background.
+			leftInset: Theme.geometry_modalDialog_acceptButton_horizontalInset
+			rightInset: Theme.geometry_modalDialog_acceptButton_horizontalInset
+			topInset: Theme.geometry_modalDialog_acceptButton_topInset
+			bottomInset: Theme.geometry_modalDialog_acceptButton_bottomInset
+			flat: Theme.screenSize !== Theme.Portrait
+			checked: !flat
+
 			KeyNavigation.left: rejectButton
 			onClicked: root.handleAccept()
+
+			Binding {
+				when: !!root.acceptButtonBackground
+				target: doneButton
+				property: "background"
+				value: root.acceptButtonBackground
+			}
 		}
 	}
 
 	property QtObject _stateManager: QtObject {
 		id: stateManager
 
-		readonly property Item inputItem: root.visible && Qt.inputMethod.visible ?
-											  (root.contentItem.Window.activeFocusItem as TextField ??
-											   root.contentItem.Window.activeFocusItem as TextInput ??
-											   // root.contentItem.Window.activeFocusItem as TextArea ?? // not used
-											   root.contentItem.Window.activeFocusItem as TextEdit) : null
-
 		property real targetDialogY: 0
 
-		onInputItemChanged: {
-			if (!inputItem) {
+		// To ensure the focused text field is not hidden behind the VKB, move the dialog when a
+		// text field is focused, and the Qt VKB (on GX) or the native mobile VKB (on Wasm) appears.
+		function updateState() {
+			if (!root.focusedInputItem) {
 				dialogStateGroup.state = "default"
 				return
 			}
 
-			const currentDialogOffset = root.y - root.centeredY // 0 or negative
-			const inputItemBottomPos = inputItem.mapToItem(Global.mainView, 0, inputItem.implicitHeight).y - currentDialogOffset
+			if (Qt.inputMethod.visible) {
+				// Move the dialog so that the text field is visible above the VKB.
+				const currentDialogOffset = root.y - root.centeredY // 0 or negative
+				const inputItemBottomPos = root.focusedInputItem.mapToItem(Global.mainView, 0, root.focusedInputItem.implicitHeight).y - currentDialogOffset
 
-			targetDialogY = root.centeredY
+				targetDialogY = root.centeredY
 
-			const vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
+				const vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
 
-			if (inputItemBottomPos > vkbTopPos) {
-				// Note: moving the Dialog while in "focused" state will change to
-				// the new location immediately without any animation.
-				targetDialogY += (vkbTopPos - inputItemBottomPos)
+				if (inputItemBottomPos > vkbTopPos) {
+					// Note: moving the Dialog while in "focused" state will change to
+					// the new location immediately without any animation.
+					targetDialogY += (vkbTopPos - inputItemBottomPos)
+				}
+			} else {
+				// We don't know how high the built-in keyboard is on Wasm, so just move the dialog
+				// to the top of the window, and hopefully that is enough to see the text field.
+				targetDialogY = 0
 			}
 
 			dialogStateGroup.state = "focused"
 		}
-		property StateGroup dialogStateGroup: StateGroup {
 
+		property StateGroup dialogStateGroup: StateGroup {
 			state: "default"
 
 			states: [
@@ -262,7 +334,9 @@ T.Dialog {
 					PropertyChanges {
 						// reset to the "default" binding explicitly
 						// so we can get the transition
-						root.y: root.centeredY
+						root.y: Theme.screenSize === Theme.Portrait
+								? Theme.geometry_screen_height - root.implicitHeight
+								: root.centeredY
 					}
 				},
 				State {
@@ -286,15 +360,6 @@ T.Dialog {
 				}
 			]
 		}
-	}
-
-	MouseArea {
-		// placed behind the background, contentItem, header and footer
-		parent: contentItem.parent
-		anchors.fill: parent
-		z: -1
-		enabled: !!stateManager.inputItem
-		onClicked: focus = true
 	}
 
 	Component.onCompleted: {
