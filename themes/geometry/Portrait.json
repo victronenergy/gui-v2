@@ -209,16 +209,14 @@
     "geometry_arc_strokeWidth": 8,
     "geometry_progressArc_strokeWidth": 8,
 
-    "geometry_mainGauge_size": 400,
+    "geometry_mainGauge_size": 240,
+    "geometry_mainGauge_padding": 30,
 
-    "geometry_circularMultiGauge_strokeWidth": 16,
-    "geometry_circularMultiGauge_spacing": 16,
-    "geometry_circularMultiGauge_label_leftMargin": 0,
-    "geometry_circularMultiGauge_label_rightMargin": 6,
+    "geometry_circularMultiGauge_strokeWidth": 12,
+    "geometry_circularMultiGauge_spacing": 12,
+    "geometry_circularMultiGauge_label_rightMargin": 4,
     "geometry_circularMultiGauge_value_rightMargin": 2,
-    "geometry_circularMultiGauge_icon_rightMargin": 14,
-    "geometry_circularMultiGauge_icons_maxWidth": 18,
-    "geometry_circularMultiGauge_label_extraWidth": 112,
+    "geometry_circularMultiGauge_icon_rightMargin": 8,
 
     "geometry_circularSingularGauge_strokeWidth": 16,
 
@@ -261,11 +259,12 @@
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
     "geometry_sidePanel_sideWidget_width": 144,
+    "geometry_sidePanel_sideWidget_horizontalMargin": "geometry_page_content_horizontalMargin",
+    "geometry_sidePanel_sideWidget_verticalMargin": 14,
     "geometry_sidePanel_sideWidget_bottomMargin": 4,
-    "geometry_sidePanel_quantityLabel_bottomMargin": 4,
-    "geometry_sidePanel_verticalMargin": 16,
-    "geometry_sidePanel_solar_graph_bar_count": 9,
-    "geometry_sidePanel_solar_graph_bar_spacing": 8,
+    "geometry_sidePanel_sideWidget_spacing": 16,
+    "geometry_sidePanel_quantityLabel_bottomMargin": 6,
+    "geometry_sidePanel_spacing": 8,
 
     "geometry_acInputDirectionIcon_rightMargin": 2,
 
@@ -341,7 +340,7 @@
 
     "geometry_overviewPage_layout_expanded_bottomMargin": 40,
 
-    "geometry_overviewPage_widget_solar_graph_bar_count": 13,
+    "geometry_overviewPage_widget_solar_graph_bar_spacing": 4,
     "geometry_overviewPage_widget_solar_graph_bar_width": 10,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 12,

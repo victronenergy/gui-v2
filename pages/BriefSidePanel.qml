@@ -19,6 +19,8 @@ ColumnLayout {
 			: Global.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
 			: null
 
+	spacing: Theme.geometry_sidePanel_spacing
+
 	BriefSidePanelWidget {
 		//% "Solar yield"
 		title: qsTrId("brief_solar_yield")
@@ -26,10 +28,7 @@ ColumnLayout {
 		loadersActive: Global.solarInputs.devices.count > 0 // only show graph if there are solar inputs with history (i.e. not PV inverters)
 		visible: Global.solarInputs.inputCount > 0 // show if there are any solar inputs (PV chargers, PV inverters, etc.)
 		quantityLabel.dataObject: Global.system.solar
-		sideComponent: SolarYieldGraph {
-			spacing: Theme.geometry_sidePanel_solar_graph_bar_spacing
-			maximumBarCount: Theme.geometry_sidePanel_solar_graph_bar_count
-		}
+		graph: SolarYieldGraph {}
 	}
 
 	// In most cases there is only 1 generator, so don't worry about other ones here.
@@ -43,23 +42,14 @@ ColumnLayout {
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
 		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
-		sideComponent: Item {
-			width: generatorLabel.width
-			height: generatorLabel.height
-
-			GeneratorIconLabel {
-				id: generatorLabel
-
-				anchors {
-					right: parent.right
-					bottom: parent.bottom
-				}
-				generator: Generator {
-					serviceUid: Global.generators.model.firstObject?.serviceUid ?? ""
-				}
+		stretchGraph: false
+		graph: GeneratorIconLabel {
+			height: generatorWidget.quantityLabel.height
+			generator: Generator {
+				serviceUid: Global.generators.model.firstObject?.serviceUid ?? ""
 			}
 		}
-		bottomComponent: ThreePhaseBarGauge {
+		footer: ThreePhaseBarGauge {
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
@@ -96,7 +86,7 @@ ColumnLayout {
 			input: nonGeneratorInput
 		}
 
-		sideComponent: LoadGraph {
+		graph: LoadGraph {
 			/*
 			This graph shows the current/amps that is imported/exported by the AC input. On a
 			multi-phase system, the graph shows the average current per phase.
@@ -195,7 +185,7 @@ exported power v  0.4 |   /
 			}
 		}
 
-		bottomComponent: ThreePhaseBarGauge {
+		footer: ThreePhaseBarGauge {
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
@@ -219,14 +209,14 @@ exported power v  0.4 |   /
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		quantityLabel.dataObject: Global.dcInputs
-		sideComponent: LoadGraph {
+		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			threshold: 0    // no threshold needed for inputs
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
 
-		bottomComponent: Global.isGxDevice ? cheapGaugeDcInput : prettyGaugeDcInput
+		footer: Global.isGxDevice ? cheapGaugeDcInput : prettyGaugeDcInput
 
 		ValueRange {
 			id: dcInputRange
@@ -261,7 +251,7 @@ exported power v  0.4 |   /
 		quantityLabel.dataObject: Global.system.load.ac
 		loadersActive: Global.system.hasAcLoads
 		visible: loadersActive
-		sideComponent: LoadGraph {
+		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)
 
@@ -271,7 +261,7 @@ exported power v  0.4 |   /
 				maximumCurrent: Global.system.load.maximumAcCurrent
 			}
 		}
-		bottomComponent: ThreePhaseBarGauge {
+		footer: ThreePhaseBarGauge {
 			width: parent.width
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
@@ -290,12 +280,12 @@ exported power v  0.4 |   /
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		quantityLabel.dataObject: Global.system.dc
-		sideComponent: LoadGraph {
+		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
 
-		bottomComponent: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad
+		footer: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad
 
 		ValueRange {
 			id: dcLoadRange
