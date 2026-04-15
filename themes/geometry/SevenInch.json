@@ -182,6 +182,7 @@
     "geometry_controlCards_slide_distance": 32,
     "geometry_controlCard_minimumWidth": 428,
     "geometry_controlCard_maximumWidth": 448,
+    "geometry_controlCard_height": 480,
     "geometry_controlCard_contentMargins": 16,
     "geometry_controlCard_title_spacing": 4,
     "geometry_controlCard_title_topMargin": 16,
@@ -285,6 +286,7 @@
     "geometry_card_button_height": 48,
 
     "geometry_iochannel_topMargin": 24,
+    "geometry_iochannel_height": 90,
     "geometry_iochannel_spacing": 16,
     "geometry_iochannel_row_count": 5,
     "geometry_iochannel_label_margin": 2,
