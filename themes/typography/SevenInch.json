@@ -23,6 +23,8 @@
     "font_dialog_header_largeSize": "font_size_body3",
     "font_dialog_secondaryTitle_size": "font_size_body1",
     "font_dialog_title_size": "font_size_h1",
+    "font_levelsGauge_secondary": "font_size_tiny",
+    "font_levelsGauge_quantity": "font_size_h1",
     "font_navigationButton_size": "font_size_body1",
     "font_notification_timestamp_size": "font_size_body1",
     "font_overviewPage_battery_timeToGo_pixelSize": "font_size_body2",

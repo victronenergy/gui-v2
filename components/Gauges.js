@@ -10,7 +10,7 @@ function tankProperties(type) {
 	switch (type) {
 	case V.VenusOS.Tank_Type_Battery:
 		return {
-			icon: "qrc:/images/icon_battery_24.svg",
+			icon: "qrc:/images/icon_battery_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_ok,
 			//% "Battery"
@@ -18,84 +18,84 @@ function tankProperties(type) {
 		}
 	case V.VenusOS.Tank_Type_Fuel:
 		return {
-			icon: "qrc:/images/icon_fuel_24.svg",
+			icon: "qrc:/images/icon_fuel_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_fuel,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_FreshWater:
 		return {
-			icon: "qrc:/images/icon_fresh_water_24.svg",
+			icon: "qrc:/images/icon_fresh_water_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_freshWater,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_WasteWater:
 		return {
-			icon: "qrc:/images/icon_waste_water_24.svg",
+			icon: "qrc:/images/icon_waste_water_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
 			color: V.Theme.color_wasteWater,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_LiveWell:
 		return {
-			icon: "qrc:/images/icon_livewell_24.svg",
+			icon: "qrc:/images/icon_livewell_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_liveWell,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_Oil:
 		return {
-			icon: "qrc:/images/icon_oil_24.svg",
+			icon: "qrc:/images/icon_oil_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_oil,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_BlackWater:
 		return {
-			icon: "qrc:/images/icon_black_water_24.svg",
+			icon: "qrc:/images/icon_black_water_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_RisingPercentage,
 			color: V.Theme.color_blackWater,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_Gasoline:
 		return {
-			icon: "qrc:/images/icon_fuel_24.svg", // same as "Fuel"
+			icon: "qrc:/images/icon_fuel_32.svg", // same as "Fuel"
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_gasoline,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_Diesel:
 		return {
-			icon: "qrc:/images/icon_fuel_24.svg", // same as "Fuel"
+			icon: "qrc:/images/icon_fuel_32.svg", // same as "Fuel"
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_diesel,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_LPG:
 		return {
-			icon: "qrc:/images/icon_lpg_24.svg",
+			icon: "qrc:/images/icon_lpg_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_lpg,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_LNG:
 		return {
-			icon: "qrc:/images/icon_lng_24.svg",
+			icon: "qrc:/images/icon_lng_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_lng,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_HydraulicOil:
 		return {
-			icon: "qrc:/images/icon_hydraulic_oil_24.svg",
+			icon: "qrc:/images/icon_hydraulic_oil_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_hydraulicOil,
 			name: V.VenusOS.tank_fluidTypeToText(type),
 		}
 	case V.VenusOS.Tank_Type_RawWater:
 		return {
-			icon: "qrc:/images/icon_raw_water_24.svg",
+			icon: "qrc:/images/icon_raw_water_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
 			color: V.Theme.color_rawWater,
 			name: V.VenusOS.tank_fluidTypeToText(type),
@@ -111,7 +111,7 @@ function width(count, maxCount, availableSpace){
 		return V.Theme.geometry_levelsPage_panel_max_width
 	} else {
 		const _spacing = spacing(_count)
-		const margin = V.Theme.geometry_levelsPage_environment_horizontalMargin
+		const margin = V.Theme.geometry_page_content_horizontalMargin
 		return Math.round((availableSpace - 2*margin + _spacing)/_count) - _spacing
 	}
 }

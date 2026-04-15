@@ -40,7 +40,8 @@ SwipeViewPage {
 			topMargin: Global.pageManager?.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
-
+		width: Theme.screenSize === Theme.Portrait ? parent.width - (2*Theme.geometry_page_content_horizontalMargin)
+				: implicitWidth
 		opacity: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				 || Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 				 ? 1.0
@@ -65,6 +66,7 @@ SwipeViewPage {
 
 		// Prefer a tab that is enabled.
 		currentIndex: tanksTab.enabled || !environmentTab.enabled ? 0 : 1
+
 		KeyNavigation.down: tabsFocusScope
 	}
 

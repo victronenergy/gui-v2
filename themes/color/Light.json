@@ -147,9 +147,12 @@
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
     "color_briefPage_sidePanel_loadGraph_dotColor": "color_gray3",
 
+    "color_environmentGaugePanel_header": "color_gray8",
+    "color_environmentGaugePanel_background": "color_gray9",
+
     "color_levelsPage_tankIcon": "color_gray2",
     "color_levelsPage_fallingGauge_alarmIcon": "color_red",
-    "color_levelsPage_tank_title": "color_black",
+    "color_levelsPage_tank_title": "color_gray1",
     "color_levelsPage_risingGauge_alarmIcon": "color_white",
     "color_levelsPage_gauge_backgroundColor": "color_white",
     "color_levelsPage_gauge_separatorBarColor": "color_background_secondary",
@@ -158,7 +161,7 @@
 
     "color_levelsPage_environment_panel_background": "color_white",
     "color_levelsPage_environment_gauge_tick": "color_gray5",
-    "color_levelsPage_environment_gauge_tickText": "color_gray3",
+    "color_levelsPage_environment_gauge_tickText": "#64635F",
     "color_levelsPage_environment_temperatureGauge_highlightValue": "color_font_primary",
 
     "color_solarHistoryErrorView_primaryText": "color_white",

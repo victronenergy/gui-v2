@@ -54,7 +54,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/FixedWidthLabel.qml
     components/ForwardIcon.qml
     components/GaugeModel.qml
-    components/GaugeHeader.qml
     components/GeneratorManualControlButton.qml
     components/GensetStartStop1Finder.qml
     components/FlatListItemSeparator.qml
@@ -68,6 +67,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/InverterAcOutSettings.qml
     components/IOChannelQuantityLabel.qml
     components/Led.qml
+    components/LevelsGaugeOutline.qml
     components/LoadGraph.qml
     components/LoadGraphShapePath.qml
     components/KeyNavigationListHelper.qml
@@ -117,8 +117,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SystemBatteryDeviceModel.qml
     components/SystemReason.qml
     components/TabBar.qml
-    components/TankItem.qml
     components/TankGauge.qml
+    components/TankGaugePanel.qml
     components/TemperatureRelaySettings.qml
     components/ThreeLabelLayout.qml
     components/ThreePhaseBarGauge.qml
@@ -769,23 +769,23 @@ set(VictronVenusOS_RESOURCES
     images/freshWater.svg
     images/key_navigation_highlight_dark.svg
     images/key_navigation_highlight_light.svg
-    images/icon_black_water_24.svg
+    images/icon_black_water_32.svg
     images/icon_charging_generator.svg
     images/icon_charging_grid.svg
     images/icon_charging_renewables.svg
     images/icon_charging_shore.svg
     images/icon_CL_24.svg
     images/icon_trash_32.svg
-    images/icon_fresh_water_24.svg
-    images/icon_raw_water_24.svg
-    images/icon_waste_water_24.svg
-    images/icon_livewell_24.svg
-    images/icon_fuel_24.svg
+    images/icon_fresh_water_32.svg
+    images/icon_raw_water_32.svg
+    images/icon_waste_water_32.svg
+    images/icon_livewell_32.svg
+    images/icon_fuel_32.svg
     images/icon_from_grid.svg
-    images/icon_oil_24.svg
-    images/icon_hydraulic_oil_24.svg
-    images/icon_lng_24.svg
-    images/icon_lpg_24.svg
+    images/icon_oil_32.svg
+    images/icon_hydraulic_oil_32.svg
+    images/icon_lng_32.svg
+    images/icon_lpg_32.svg
     images/icon_open_link_32.svg
     images/icon_to_grid.svg
     images/fueltank.svg
