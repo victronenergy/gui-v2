@@ -297,11 +297,15 @@ FocusScope {
 			: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
 				? Theme.color_warning
 				: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info
-					? Theme.color_ok : "transparent"
+					? Theme.color_ok
+					: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Success
+						? Theme.color_success : "transparent"
 		icon.source: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Alarm
 			? "qrc:/images/icon_alarm_32.svg"
 			: Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Warning
-				? "qrc:/images/icon_warning_32.svg" :  "qrc:/images/icon_info_32.svg"
+				? "qrc:/images/icon_warning_32.svg"
+				:  Global.notifications?.statusBarNotificationIconPriority === VenusOS.Notification_Info
+					? "qrc:/images/icon_info_32.svg" : "qrc:/images/icon_checkmark_32.svg"
 		onClicked: Global.mainView.goToNotificationsPage()
 		KeyNavigation.right: alarmButton
 	}

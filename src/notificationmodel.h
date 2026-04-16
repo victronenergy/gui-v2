@@ -148,9 +148,11 @@ public:
 	int activeAlarms() const { return m_activeAlarms; }
 	int activeWarnings() const { return m_activeWarnings; }
 	int activeInfos() const { return m_activeInfos; }
+	int activeSuccesses() const { return m_activeSuccesses; }
 	int unacknowledgedAlarms() const { return m_unacknowledgedAlarms; }
 	int unacknowledgedWarnings() const { return m_unacknowledgedWarnings; }
 	int unacknowledgedInfos() const { return m_unacknowledgedInfos; }
+	int unacknowledgedSuccesses() const { return m_unacknowledgedSuccesses; }
 
 	Q_INVOKABLE void acknowledge(quint32 modelId);
 	Q_INVOKABLE void acknowledgeRow(int row);
@@ -170,9 +172,11 @@ Q_SIGNALS:
 	void activeAlarmsChanged();
 	void activeWarningsChanged();
 	void activeInfosChanged();
+	void activeSuccessesChanged();
 	void unacknowledgedAlarmsChanged();
 	void unacknowledgedWarningsChanged();
 	void unacknowledgedInfosChanged();
+	void unacknowledgedSuccessesChanged();
 
 	// for toasts
 	void added(quint32 modelId);
@@ -202,9 +206,11 @@ private:
 	int m_activeAlarms = 0;
 	int m_activeWarnings = 0;
 	int m_activeInfos = 0;
+	int m_activeSuccesses = 0;
 	int m_unacknowledgedAlarms = 0;
 	int m_unacknowledgedWarnings = 0;
 	int m_unacknowledgedInfos = 0;
+	int m_unacknowledgedSuccesses = 0;
 	int const m_maximumRows = 200;
 };
 

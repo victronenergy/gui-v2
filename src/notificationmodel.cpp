@@ -107,9 +107,11 @@ void NotificationModel::init()
 		m_activeAlarms = 0;
 		m_activeWarnings = 0;
 		m_activeInfos = 0;
+		m_activeSuccesses = 0;
 		m_unacknowledgedAlarms = 0;
 		m_unacknowledgedWarnings = 0;
 		m_unacknowledgedInfos = 0;
+		m_unacknowledgedSuccesses = 0;
 		endResetModel();
 		Q_EMIT countChanged();
 		Q_EMIT activeAlarmsChanged();
@@ -118,6 +120,8 @@ void NotificationModel::init()
 		Q_EMIT unacknowledgedWarningsChanged();
 		Q_EMIT activeInfosChanged();
 		Q_EMIT unacknowledgedInfosChanged();
+		Q_EMIT activeSuccessesChanged();
+		Q_EMIT unacknowledgedSuccessesChanged();
 	}
 
 	m_notifications = notificationsItem();
@@ -233,7 +237,8 @@ void NotificationModel::addAssociatedEntry(NotificationSlot *slot, bool isNew)
 
 	if (entry.type != Enums::Notification_Alarm
 			&& entry.type != Enums::Notification_Warning
-			&& entry.type != Enums::Notification_Info) {
+			&& entry.type != Enums::Notification_Info
+			&& entry.type != Enums::Notification_Success) {
 		qWarning() << "Refusing to add unknown notification type:" << entry.type;
 		// early return; slot contains invalid notification.
 		return;
@@ -264,6 +269,10 @@ void NotificationModel::addAssociatedEntry(NotificationSlot *slot, bool isNew)
 						case Enums::Notification_Info:
 							m_unacknowledgedInfos -= 1;
 							Q_EMIT unacknowledgedInfosChanged();
+							break;
+						case Enums::Notification_Success:
+							m_unacknowledgedSuccesses -= 1;
+							Q_EMIT unacknowledgedSuccessesChanged();
 							break;
 						default: break;
 					}
@@ -308,6 +317,16 @@ void NotificationModel::addAssociatedEntry(NotificationSlot *slot, bool isNew)
 			if (!entry.acknowledged) {
 				m_unacknowledgedInfos += 1;
 				Q_EMIT unacknowledgedInfosChanged();
+			}
+			break;
+		case Enums::Notification_Success:
+			if (entry.active) {
+				m_activeSuccesses += 1;
+				Q_EMIT activeSuccessesChanged();
+			}
+			if (!entry.acknowledged) {
+				m_unacknowledgedSuccesses += 1;
+				Q_EMIT unacknowledgedSuccessesChanged();
 			}
 			break;
 		default:
@@ -400,6 +419,20 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 						case NotificationRoles::Acknowledged:
 							m_unacknowledgedInfos = data.acknowledged ? m_unacknowledgedInfos-1 : m_unacknowledgedInfos+1;
 							Q_EMIT unacknowledgedInfosChanged();
+							break;
+						default: break;
+					}
+					break;
+				}
+				case Enums::Notification_Success: {
+					switch (role) {
+						case NotificationRoles::Active:
+							m_activeSuccesses = data.active ? m_activeSuccesses+1 : m_activeSuccesses-1;
+							Q_EMIT activeSuccessesChanged();
+							break;
+						case NotificationRoles::Acknowledged:
+							m_unacknowledgedSuccesses = data.acknowledged ? m_unacknowledgedSuccesses-1 : m_unacknowledgedSuccesses+1;
+							Q_EMIT unacknowledgedSuccessesChanged();
 							break;
 						default: break;
 					}
@@ -563,6 +596,10 @@ bool NotificationModel::removeRow(int row)
 				m_unacknowledgedInfos -= 1;
 				Q_EMIT unacknowledgedInfosChanged();
 				break;
+			case static_cast<int>(Enums::Notification_Success):
+				m_unacknowledgedSuccesses -= 1;
+				Q_EMIT unacknowledgedSuccessesChanged();
+				break;
 			default: break;
 		}
 	}
@@ -690,9 +727,11 @@ quint32 ToastModel::addNotification(quint32 notificationModelId, int type, const
 
 	// insert in appropriate sort order, highest prio first.
 	for (qsizetype i = 0; i < m_data.size(); ++i) {
+		// TODO: Need to check from Chris
 		if (type == Enums::Notification_Alarm
 				|| m_data[i].type == type
-				|| m_data[i].type == Enums::Notification_Info) {
+				|| m_data[i].type == Enums::Notification_Info
+				|| m_data[i].type == Enums::Notification_Success) {
 			beginInsertRows(QModelIndex(), i, i);
 			m_data.insert(i, toast);
 			endInsertRows();
@@ -854,4 +893,3 @@ QHash<int, QByteArray> ToastModel::roleNames() const
 	};
 	return roles;
 }
-

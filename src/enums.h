@@ -621,7 +621,8 @@ public:
 	enum Notification_Type {
 		Notification_Warning,
 		Notification_Alarm,
-		Notification_Info
+		Notification_Info,
+		Notification_Success
 	};
 	Q_ENUM(Notification_Type)
 

@@ -85,6 +85,17 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, c
 	const notificationData left = model->at(sourceLeft.row());
 	const notificationData right = model->at(sourceRight.row());
 
+	// sort by type priority: ALARM < WARNING < INFO < SUCCESS
+	auto typePriority = [](int type) -> int {
+		switch (type) {
+			case Enums::Notification_Alarm:   return 0;
+			case Enums::Notification_Warning: return 1;
+			case Enums::Notification_Info:    return 2;
+			case Enums::Notification_Success: return 3;
+			default: return 4;
+		}
+	};
+
 	// sort active notifications before inactive notifications
 	if (left.active != right.active) {
 		return left.active;
@@ -92,15 +103,9 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, c
 
 	// for active notifications only, sort by type before considering acknowledged status
 	if (left.active && right.active) {
-		// sort by type: ALARM < WARNING < INFO
+		// sort by type: ALARM < WARNING < INFO < SUCCESS
 		if (left.type != right.type) {
-			if (left.type == Enums::Notification_Alarm) {
-				return true;
-			}
-			if (right.type == Enums::Notification_Info) {
-				return true;
-			}
-			return false;
+			return typePriority(left.type) < typePriority(right.type);
 		}
 	}
 
@@ -109,15 +114,9 @@ bool NotificationSortFilterProxyModel::lessThan(const QModelIndex &sourceLeft, c
 		return !left.acknowledged;
 	}
 
-	// sort by type: ALARM < WARNING < INFO
+	// sort by type: ALARM < WARNING < INFO < SUCCESS
 	if (left.type != right.type) {
-		if (left.type == Enums::Notification_Alarm) {
-			return true;
-		}
-		if (right.type == Enums::Notification_Info) {
-			return true;
-		}
-		return false;
+		return typePriority(left.type) < typePriority(right.type);
 	}
 
 	// sort more recent notifications before older notifications

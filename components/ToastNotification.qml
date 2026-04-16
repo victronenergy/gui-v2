@@ -41,7 +41,8 @@ Item {
 		radius: Theme.geometry_toastNotification_radius
 		color: root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
 			: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
-			: Theme.color_toastNotification_background_informative
+			: root.type === VenusOS.Notification_Info ? Theme.color_toastNotification_background_informative
+			: Theme.color_toastNotification_background_success
 
 		Rectangle {
 			id: highlight
@@ -58,7 +59,8 @@ Item {
 
 			color: root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_highlight_error
 				: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_highlight_warning
-				: Theme.color_toastNotification_highlight_informative
+				: root.type === VenusOS.Notification_Info ? Theme.color_toastNotification_highlight_informative
+				: Theme.color_toastNotification_highlight_success
 
 			CP.IconImage {
 				id: icon
@@ -67,7 +69,8 @@ Item {
 				color: Theme.color_toastNotification_foreground
 				source: root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_alarm_32.svg"
 					: root.type === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
-					: "qrc:/images/icon_info_32.svg"
+					: root.type === VenusOS.Notification_Info ? "qrc:/images/icon_info_32.svg"
+					: "qrc:/images/icon_checkmark_32.svg"
 			}
 		}
 

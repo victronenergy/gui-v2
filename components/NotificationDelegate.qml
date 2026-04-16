@@ -36,18 +36,21 @@ ListItem {
 
 		CP.ColorImage {
 			id: icon
-
-			anchors.verticalCenter: parent.verticalCenter
-			color: root.type === VenusOS.Notification_Info
-				? (root.historical ? Theme.color_darkOk : Theme.color_ok)
-				: root.type === VenusOS.Notification_Warning
-					? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
-					: (root.historical ? Theme.color_darkCritical : Theme.color_critical)
-			source: root.type === VenusOS.Notification_Info
-				? "qrc:/images/icon_info_32.svg"
-				: root.type === VenusOS.Notification_Warning
-					? "qrc:/images/icon_warning_32.svg"
-					: "qrc:/images/icon_alarm_32.svg"
+			anchors.centerIn: parent
+			color: root.type === VenusOS.Notification_Success
+				? (root.historical ? Theme.color_darkSuccess : Theme.color_success)
+				: root.type === VenusOS.Notification_Info
+					? (root.historical ? Theme.color_darkOk : Theme.color_ok)
+					: root.type === VenusOS.Notification_Warning
+						? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
+						: (root.historical ? Theme.color_darkCritical : Theme.color_critical)
+			source: root.type === VenusOS.Notification_Success
+				? "qrc:/images/icon_checkmark_32.svg"
+				: root.type === VenusOS.Notification_Info
+					? "qrc:/images/icon_info_32.svg"
+					: root.type === VenusOS.Notification_Warning
+						? "qrc:/images/icon_warning_32.svg"
+						: "qrc:/images/icon_alarm_32.svg"
 		}
 
 		GridLayout {

@@ -14,6 +14,8 @@
     "color_darkRed": "#F8CAC6",
     "color_darkGreen": "#D1E6C2",
 
+    "color_success": "color_green",
+    "color_darkSuccess": "color_darkGreen",
     "color_ok": "color_blue",
     "color_darkOk": "color_darkBlue",
     "color_warning": "color_orange",
@@ -100,10 +102,12 @@
     "color_navigationBar_button_off": "color_gray4",
 
     "color_toastNotification_foreground": "color_white",
+    "color_toastNotification_background_success": "#508135",
     "color_toastNotification_background_informative": "#295C91",
     "color_toastNotification_background_warning": "#BD7624",
     "color_toastNotification_background_error": "#BF4845",
-    "color_toastNotification_highlight_informative": "color_blue",
+    "color_toastNotification_highlight_success": "color_success",
+    "color_toastNotification_highlight_informative": "color_ok",
     "color_toastNotification_highlight_warning": "color_warning",
     "color_toastNotification_highlight_error": "color_critical",
 
