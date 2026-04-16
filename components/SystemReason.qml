@@ -29,6 +29,7 @@ QtObject {
 	readonly property alias slowCharge: _slowCharge
 	readonly property alias userChargeLimited: _userChargeLimited
 	readonly property alias userDischargeLimited: _userDischargeLimited
+	readonly property alias peakShaving: _peakShaving
 
 	// Flags to monitor
 	readonly property list<VeQuickItem> flagItems: [
@@ -38,7 +39,8 @@ QtObject {
 		VeQuickItem { id: _dischargeDisabled;		uid: serviceUid + "/SystemState/DischargeDisabled" },
 		VeQuickItem { id: _slowCharge;				uid: serviceUid + "/SystemState/SlowCharge" },
 		VeQuickItem { id: _userChargeLimited;		uid: serviceUid + "/SystemState/UserChargeLimited" },
-		VeQuickItem { id: _userDischargeLimited;	uid: serviceUid + "/SystemState/UserDischargeLimited" }
+		VeQuickItem { id: _userDischargeLimited;	uid: serviceUid + "/SystemState/UserDischargeLimited" },
+		VeQuickItem { id: _peakShaving;				uid: serviceUid + "/SystemState/PeakShaving" }
 	]
 
 	function descriptionText() { // not used yet, will be needed for the new battery charging/discharge design
