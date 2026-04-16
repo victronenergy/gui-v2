@@ -718,9 +718,10 @@ public:
 		DigitalInput_Type_SmokeAlarm,
 		DigitalInput_Type_FireAlarm,
 		DigitalInput_Type_CO2Alarm,
-		DigitalInput_Type_Generator,
+		DigitalInput_Type_GeneratorStatus,
 		// 10 is not used
-		DigitalInput_Type_TouchInputControl = 11
+		DigitalInput_Type_TouchInputControl = 11,
+		DigitalInput_Type_GeneratorInhibitRun,
 	};
 	Q_ENUM(DigitalInput_Type)
 
@@ -736,7 +737,9 @@ public:
 		DigitalInput_State_OK,
 		DigitalInput_State_Alarm,
 		DigitalInput_State_Running,
-		DigitalInput_State_Stopped
+		DigitalInput_State_Stopped,
+		DigitalInput_State_Enabled,
+		DigitalInput_State_Disabled,
 	};
 	Q_ENUM(DigitalInput_State)
 

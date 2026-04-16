@@ -199,6 +199,37 @@ VisibleItemModel {
 		}
 	}
 
+	// Clear Error Button
+	ListButton {
+		readonly property bool hasGensetError: _gensetErrorId.valid && _gensetErrorId.value !== ""
+		readonly property bool canClearGeneratorError: clearControlError.valid
+				&& Number(clearControlError.value) === 2
+		readonly property bool remoteStartModeIsEnabled: remoteStartModeEnabled.valid
+				&& (remoteStartModeEnabled.value === 1 || remoteStartModeEnabled.value === true)
+
+		//% "Clear generator error"
+		text: qsTrId("clear-generator-error")
+		//% "Press to clear"
+		secondaryText: qsTrId("press-to-clear")
+		preferredVisible: clearErrorItem.valid
+		interactive: hasGensetError && canClearGeneratorError && remoteStartModeIsEnabled
+		onClicked: {
+			clearErrorItem.setValue(1)
+		}
+		VeQuickItem {
+			id: clearErrorItem
+			uid: root.bindPrefix + "/ClearError"
+		}
+		VeQuickItem {
+			id: clearControlError
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+		}
+		VeQuickItem {
+			id: _gensetErrorId
+			uid: root.bindPrefix + "/Error/0/Id"
+		}
+	}
+
 	SettingsColumn {
 		width: parent ? parent.width : 0
 		preferredVisible: phaseRepeater.count > 0
@@ -239,11 +270,80 @@ VisibleItemModel {
 		}
 	}
 
-	ListText {
+	ListButton {
+		readonly property bool hasDigitalInputControlNotAvailableError: controlError.valid
+				&& Number(controlError.value) === 5
+		readonly property bool canClearDigitalInputControl: hasDigitalInputControlNotAvailableError
+				&& digitalInputControlInput.valid
+		readonly property bool digitalInputBlocks: digitalInputControlInput.valid
+				&& digitalInputControlInput.value > 0
+				&& digitalInputControlEnabled.valid
+				&& digitalInputControlEnabled.value === 0
+		readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
+				&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
+				&& enableRemoteStartMode.valid
+				&& !digitalInputBlocks
+		readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
+				&& remoteStartStatusCode.valid
+				&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
+		readonly property string remoteStartSecondaryText: {
+			if (canClearDigitalInputControl) {
+				//% "Clear Digital Input Control"
+				return qsTrId("Clear_Digital_Input_Control")
+			}
+			if (canReenableRemoteStart) {
+				//% "Re-enable remote start mode"
+				return qsTrId("Re-enable_remote_start_mode")
+			}
+			if (showReenableRemoteStartButton) {
+				return CommonWords.disabled
+			}
+			return CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
+		}
+
 		//% "Remote start mode"
 		text: qsTrId("ac-in-genset_remote_start_mode")
-		dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
-		secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
+		secondaryText: remoteStartSecondaryText
+		readOnly: !canClearDigitalInputControl && !canReenableRemoteStart
+		interactive: canClearDigitalInputControl || canReenableRemoteStart
+		writeAccessLevel: VenusOS.User_AccessType_User
+		onClicked: {
+			if (canClearDigitalInputControl) {
+				digitalInputControlInput.setValue(0)
+			} else {
+				enableRemoteStartMode.setValue(1)
+			}
+		}
+
+		VeQuickItem {
+			id: controlError
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+		}
+
+		VeQuickItem {
+			id: remoteStartModeEnabled
+			uid: root.bindPrefix + "/RemoteStartModeEnabled"
+		}
+
+		VeQuickItem {
+			id: enableRemoteStartMode
+			uid: root.bindPrefix + "/EnableRemoteStartMode"
+		}
+
+		VeQuickItem {
+			id: remoteStartStatusCode
+			uid: root.bindPrefix + "/StatusCode"
+		}
+
+		VeQuickItem {
+			id: digitalInputControlInput
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Input" : ""
+		}
+
+		VeQuickItem {
+			id: digitalInputControlEnabled
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/DigitalInputControl/Enabled" : ""
+		}
 	}
 
 	ListDcOutputQuantityGroup {
