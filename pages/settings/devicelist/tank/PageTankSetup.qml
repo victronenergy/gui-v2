@@ -162,9 +162,15 @@ Page {
 
 		// The possible values here are not well defined. The doco says: "can be V, and probably also mA and R or O."
 		// At least one installation uses "cm".
+		// Resistive tank sensors (European 0-180Ω, US 240-30Ω, Custom) publish "Ω" or
+		// its ASCII equivalent "O". 1 decimal place and 1 Ω step are appropriate for
+		// resistance values in the tens-to-hundreds-of-ohms range.
 		readonly property int displayDecimals: {
 			switch (value) {
 			case "cm":
+				return 1
+			case "Ω":
+			case "O":
 				return 1
 			default:
 				return 3
@@ -175,6 +181,9 @@ Page {
 			switch (value) {
 			case "cm":
 				return 0.1
+			case "Ω":
+			case "O":
+				return 1
 			default:
 				return 0.005
 			}
