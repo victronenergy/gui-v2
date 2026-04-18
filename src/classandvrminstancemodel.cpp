@@ -398,8 +398,8 @@ bool SortedClassAndVrmInstanceModel::lessThan(const QModelIndex &sourceLeft, con
 	const QModelIndex leftIndex = model->index(sourceLeft.row(), sourceLeft.column());
 	const QModelIndex rightIndex = model->index(sourceRight.row(), sourceRight.column());
 
-	const QString leftName = model->data(leftIndex, ClassAndVrmInstanceModel::NameRole).toString();
-	const QString rightName = model->data(rightIndex, ClassAndVrmInstanceModel::NameRole).toString();
+	const QString leftName = model->data(leftIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
+	const QString rightName = model->data(rightIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
 	if (leftName != rightName) {
 		if (leftName.isEmpty()) {
 			return false;
@@ -410,8 +410,8 @@ bool SortedClassAndVrmInstanceModel::lessThan(const QModelIndex &sourceLeft, con
 		}
 	}
 
-	const QString leftDeviceClass = model->data(leftIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
-	const QString rightDeviceClass = model->data(rightIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
+	const QString leftDeviceClass = model->data(leftIndex, ClassAndVrmInstanceModel::NameRole).toString();
+	const QString rightDeviceClass = model->data(rightIndex, ClassAndVrmInstanceModel::NameRole).toString();
 	if (leftDeviceClass != rightDeviceClass) {
 		return leftDeviceClass.localeAwareCompare(rightDeviceClass) < 0;
 	}
