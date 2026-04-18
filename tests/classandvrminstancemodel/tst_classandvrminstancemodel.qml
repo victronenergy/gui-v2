@@ -303,6 +303,41 @@ TestCase {
 				],
 			},
 			{
+				tag: "Compare by device class before name",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A",
+						children: {
+							"ClassAndVrmInstance": "tank:1",
+							"CustomName": "A",
+						},
+					},
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B",
+						children: {
+							"ClassAndVrmInstance": "acload:2",
+							"CustomName": "Z",
+						},
+					}
+				],
+				expectedData: [
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B/ClassAndVrmInstance",
+						deviceClass: "acload",
+						name: "Z",
+						vrmInstance: 2
+					},
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A/ClassAndVrmInstance",
+						deviceClass: "tank",
+						name: "A",
+						vrmInstance: 1
+					}
+				],
+			},
+			{
 				tag: "Compare by device class",
 				devices: [
 					{
