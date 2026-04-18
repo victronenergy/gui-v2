@@ -393,10 +393,18 @@ bool SortedClassAndVrmInstanceModel::lessThan(const QModelIndex &sourceLeft, con
 		return QSortFilterProxyModel::lessThan(sourceLeft, sourceRight);
 	}
 
-	// Sort by connected devices first (i.e. those with a name), then by device class, then by VRM
-	// instance.
+	// Sort by device class, connected devices first (i.e. those with a name),
+	// then by device name, then by VRM instance.
+	// This sorting along with section grouping will make it more visually apparent
+	// if there are VRM instance value conflicts.
 	const QModelIndex leftIndex = model->index(sourceLeft.row(), sourceLeft.column());
 	const QModelIndex rightIndex = model->index(sourceRight.row(), sourceRight.column());
+
+	const QString leftDeviceClass = model->data(leftIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
+	const QString rightDeviceClass = model->data(rightIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
+	if (leftDeviceClass != rightDeviceClass) {
+		return leftDeviceClass.localeAwareCompare(rightDeviceClass) < 0;
+	}
 
 	const QString leftName = model->data(leftIndex, ClassAndVrmInstanceModel::NameRole).toString();
 	const QString rightName = model->data(rightIndex, ClassAndVrmInstanceModel::NameRole).toString();
@@ -408,12 +416,6 @@ bool SortedClassAndVrmInstanceModel::lessThan(const QModelIndex &sourceLeft, con
 		} else {
 			return leftName.localeAwareCompare(rightName) < 0;
 		}
-	}
-
-	const QString leftDeviceClass = model->data(leftIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
-	const QString rightDeviceClass = model->data(rightIndex, ClassAndVrmInstanceModel::DeviceClassRole).toString();
-	if (leftDeviceClass != rightDeviceClass) {
-		return leftDeviceClass.localeAwareCompare(rightDeviceClass) < 0;
 	}
 
 	return model->data(leftIndex, ClassAndVrmInstanceModel::VrmInstanceRole).toInt()

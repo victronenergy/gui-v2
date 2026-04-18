@@ -108,6 +108,8 @@ Page {
 				secondaryText = _modelVrmInstance
 			}
 		}
+		section.property: "deviceClass"
+		section.delegate: SettingsListHeader { text: section }
 	}
 
 	Component {
