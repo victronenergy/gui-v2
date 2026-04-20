@@ -216,6 +216,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListFirmwareImageTypeInstalled.qml
     components/listitems/ListFirmwareVersion.qml
     components/listitems/ListGeneratorError.qml
+    components/listitems/ListGeneratorControlStatus.qml
+    components/listitems/ListGeneratorManualControlButton.qml
     components/listitems/ListInfoLabel.qml
     components/listitems/ListInverterChargerModeButton.qml
     components/listitems/ListIOChannelGroupField.qml
@@ -232,8 +234,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
     components/listitems/ListSpinBoxRange.qml
+    components/listitems/ListGeneratorAutoStartSwitch.qml
     components/listitems/ListTemperatureRelay.qml
     components/listitems/ListTextStatus.qml
+    components/listitems/ListVoltageCurrentPower.qml
     components/listitems/ListVolumeUnitRadioButtonGroup.qml
 
     components/listitems/core/ListAlarm.qml
@@ -398,12 +402,17 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageControllableLoadsEVCS.qml
     pages/settings/PageControllableLoadsS2Rm.qml
     pages/settings/PageControllableLoadsPreferences.qml
+    pages/settings/PageDcGenset.qml
+    pages/settings/PageDcGensets.qml
+    pages/settings/PageDcGensetsSettings.qml
     pages/settings/PageDeviceInfo.qml
+    pages/settings/PageEngine.qml
     pages/settings/PageGenerator.qml
     pages/settings/PageGeneratorAcLoad.qml
     pages/settings/PageGeneratorConditions.qml
     pages/settings/PageGeneratorRuntimeService.qml
     pages/settings/PageGeneratorTestRun.qml
+    pages/settings/PageGensets.qml
     pages/settings/PageGps.qml
     pages/settings/PageHub4Debug.qml
     pages/settings/PageRelayGenerator.qml

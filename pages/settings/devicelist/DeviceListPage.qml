@@ -16,6 +16,9 @@ Page {
 
 		model: SortedRuntimeDeviceModel {
 			sourceModel: RuntimeDeviceModel
+			// If there are 2 or more dc gensets, don't list them individually, group them in the dc gensets menu.
+			// Any disconnected dc gensets will not be excluded.
+			excludedServiceTypes: Global.generators.dcModel?.count > 1 ? ["dcgenset"] : []
 		}
 
 		delegate: ListItemLoader {
@@ -65,6 +68,7 @@ Page {
 			width: parent.width
 			topPadding: spacing
 			preferredVisible: relaysMenu.preferredVisible
+					|| multipleDcGensetsAvailable.preferredVisible
 					|| gensetMenu.preferredVisible
 					|| tankPumpMenu.preferredVisible
 					|| removeDisconnectedButton.preferredVisible
@@ -96,6 +100,13 @@ Page {
 					}
 					filterType: IOChannelProxyModel.ManualFunction
 				}
+			}
+
+			ListNavigation {
+				id: multipleDcGensetsAvailable
+				text: CommonWords.dcGensets
+				preferredVisible: Global.generators.multipleDcGensetsSupported
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageDcGensets.qml", {"title": text})
 			}
 
 			ListNavigation {

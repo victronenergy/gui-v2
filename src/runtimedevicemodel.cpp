@@ -280,5 +280,68 @@ SortedRuntimeDeviceModel::SortedRuntimeDeviceModel(QObject *parent)
 {
 	setSortLocaleAware(true);
 	setSortRole(RuntimeDeviceModel::CachedDeviceNameRole);
+
+	connect(this, &QAbstractItemModel::rowsInserted,
+			this, &SortedRuntimeDeviceModel::countChanged);
+	connect(this, &QAbstractItemModel::rowsRemoved,
+			this, &SortedRuntimeDeviceModel::countChanged);
+	connect(this, &QAbstractItemModel::modelReset,
+			this, &SortedRuntimeDeviceModel::countChanged);
+	connect(this, &QAbstractItemModel::layoutChanged,
+			this, &SortedRuntimeDeviceModel::countChanged);
+}
+
+QStringList SortedRuntimeDeviceModel::excludedServiceTypes() const
+{
+	return m_excludedServiceTypes;
+}
+
+void SortedRuntimeDeviceModel::setExcludedServiceTypes(const QStringList &excludedServiceTypes)
+{
+	if (m_excludedServiceTypes != excludedServiceTypes) {
+		m_excludedServiceTypes = excludedServiceTypes;
+		if (m_completed) {
+			invalidateFilter();
+		}
+		emit excludedServiceTypesChanged();
+	}
+}
+
+bool SortedRuntimeDeviceModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+	Q_UNUSED(sourceParent)
+
+	if (!m_completed) {
+		return false;
+	}
+
+	RuntimeDeviceModel* model = qobject_cast<RuntimeDeviceModel*>(sourceModel());
+	if (!model) {
+		return false;
+	}
+
+	BaseDevice *device = model->deviceAt(sourceModel()->index(sourceRow, 0).row());
+	if (!device) {
+		return true; // Disconnected devices remain in the model
+	}
+
+	if (!m_excludedServiceTypes.isEmpty() && m_excludedServiceTypes.contains(device->serviceType())) {
+		return false;
+	}
+
+	return true;
+}
+
+void SortedRuntimeDeviceModel::classBegin()
+{
+	m_completed = false;
+}
+
+void SortedRuntimeDeviceModel::componentComplete()
+{
+	// Delay initialization until the excludedServiceTypes property is set, to avoid
+	// unnecessary filtering.
+	m_completed = true;
+	invalidateFilter();
 	sort(0, Qt::AscendingOrder);
 }

@@ -6,7 +6,7 @@
         "/Dc/0/Voltage": 20.0,
         "/DeviceInstance": 30,
         "/Engine/CoolantTemperature": 45.0,
-        "/Engine/ExaustTemperature": 67.0,
+        "/Engine/ExhaustTemperature": 67.0,
         "/Engine/Load": 7.796875,
         "/Engine/OperatingHours": 21960,
         "/Engine/Speed": 0.0,

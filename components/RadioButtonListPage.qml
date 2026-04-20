@@ -20,6 +20,7 @@ Page {
 	property var popDestination: null
 	property var validatePassword
 
+	property alias header: optionsListView.header
 	property alias footer: optionsListView.footer
 
 	signal optionClicked(index: int, value : var)
@@ -73,8 +74,9 @@ Page {
 			secondaryText: modelObject.secondaryText || ""
 			caption: modelObject.caption ?? ""
 			interactive: !modelObject.readOnly
-					// Prevent selection of already selected index
-					&& root.currentIndex !== model.index
+						 // Prevent selection of already selected index
+						 && root.currentIndex !== model.index
+						 && modelObject.interactive !== false
 			font.family: modelObject.fontFamily || Global.fontFamily
 			preferredVisible: !modelObject.readOnly || root.currentIndex === model.index
 			showAccessLevel: root.showAccessLevel

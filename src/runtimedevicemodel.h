@@ -6,10 +6,12 @@
 #ifndef VICTRON_GUIV2_RUNTIMEDEVICEMODEL_H
 #define VICTRON_GUIV2_RUNTIMEDEVICEMODEL_H
 
-#include <QPointer>
 #include <QList>
-#include <QSortFilterProxyModel>
+#include <QPointer>
 #include <qqmlintegration.h>
+#include <QQmlParserStatus>
+#include <QSortFilterProxyModel>
+#include <QStringList>
 
 #include "basedevice.h"
 
@@ -94,12 +96,32 @@ private:
 
 	Devices are sorted by their cached device name.
 */
-class SortedRuntimeDeviceModel : public QSortFilterProxyModel
+class SortedRuntimeDeviceModel : public QSortFilterProxyModel, public QQmlParserStatus
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_INTERFACES(QQmlParserStatus)
+	Q_PROPERTY(int count READ count NOTIFY countChanged FINAL)
+	Q_PROPERTY(QStringList excludedServiceTypes READ excludedServiceTypes WRITE setExcludedServiceTypes NOTIFY excludedServiceTypesChanged FINAL)
 public:
 	explicit SortedRuntimeDeviceModel(QObject *parent = nullptr);
+
+	QStringList excludedServiceTypes() const;
+	void setExcludedServiceTypes(const QStringList &excludedServiceTypes);
+	void classBegin() override;
+	void componentComplete() override;
+	int count() const { return rowCount(); }
+
+Q_SIGNALS:
+	void countChanged();
+	void excludedServiceTypesChanged();
+
+protected:
+	bool filterAcceptsRow(int sourceRow, const QModelIndex & sourceParent) const override;
+
+private:
+	QStringList m_excludedServiceTypes;
+	bool m_completed = true;
 };
 
 } /* VenusOS */

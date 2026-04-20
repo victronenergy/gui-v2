@@ -56,22 +56,10 @@ Page {
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 		}
 
-		ListItem {
+		ListGeneratorManualControlButton {
 			id: manualControl
-
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
-			contentItem: RowLayout {
-				Label {
-					text: CommonWords.manual_control
-					font: manualControl.font
-					Layout.fillWidth: true
-				}
-
-				GeneratorManualControlButton {
-					generatorUid: root.startStopBindPrefix
-					gensetUid: ""
-				}
-			}
+			generatorUid: root.startStopBindPrefix
 		}
 
 		ListText {
