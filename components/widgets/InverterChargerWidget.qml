@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 OverviewWidget {
@@ -30,64 +31,66 @@ OverviewWidget {
 
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
-	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: !!Global.inverterChargers.firstObject
-	quantityLabel.visible: false
-	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
-	extraContentChildren: [
-		Label {
+
+	contentItem: Item {
+		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
+		implicitHeight: contentLayout.implicitHeight
+
+		ColumnLayout {
+			id: contentLayout
+
+			spacing: 0
+			width: parent.width - sideGaugeLoader.width - Theme.geometry_overviewPage_widget_sideGauge_margins
+			height: parent.height
+
+			WidgetHeader {
+				text: root.title
+				icon.source: "qrc:/images/inverter_charger.svg"
+				Layout.fillWidth: true
+			}
+
+			Label {
+				text: Global.system.systemStateToText(Global.system.state)
+				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
+				fontSizeMode: Text.Fit
+				wrapMode: Text.WordWrap
+				maximumLineCount: 4
+				elide: Text.ElideRight
+
+				Layout.fillWidth: true
+				Layout.fillHeight: true // push reason text to bottom of layout
+			}
+
+			Label {
+				text: systemReason.text
+				wrapMode: Text.WordWrap
+				color: Theme.color_font_secondary
+				font.pixelSize: Theme.font_overviewPage_secondary
+
+				SystemReason {
+					id: systemReason
+				}
+			}
+		}
+
+		Loader {
+			id: sideGaugeLoader
+
 			anchors {
 				top: parent.top
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: systemReasonText.top
-			}
-			text: Global.system.systemStateToText(Global.system.state)
-			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
-			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
-			fontSizeMode: Text.Fit
-			wrapMode: Text.WordWrap
-			maximumLineCount: 4
-			elide: Text.ElideRight
-		},
-		Label {
-			id: systemReasonText
-
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
+				right: parent.right
 			}
-			text: systemReason.text
-			wrapMode: Text.WordWrap
-			color: Theme.color_font_secondary
-			SystemReason {
-				id: systemReason
+			sourceComponent: ThreePhaseBarGauge {
+				valueType: VenusOS.Gauges_ValueType_RisingPercentage
+				phaseModel: Global.system.load.ac.phases
+				maximumValue: Global.system.load.maximumAcCurrent
+				animationEnabled: root.animationEnabled
+				inOverviewWidget: true
 			}
-		}
-	]
-
-	Loader {
-		id: sideGaugeLoader
-
-		anchors {
-			top: parent.top
-			bottom: parent.bottom
-			right: parent.right
-			margins: Theme.geometry_overviewPage_widget_sideGauge_margins
-		}
-		sourceComponent: ThreePhaseBarGauge {
-			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			phaseModel: Global.system.load.ac.phases
-			maximumValue: Global.system.load.maximumAcCurrent
-			animationEnabled: root.animationEnabled
-			inOverviewWidget: true
 		}
 	}
 

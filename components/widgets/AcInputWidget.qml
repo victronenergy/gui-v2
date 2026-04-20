@@ -4,28 +4,102 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 AcWidget {
 	id: root
 
 	readonly property AcInputSystemInfo inputInfo: input?.inputInfo ?? null
-	property AcInput input
 	readonly property bool inputOperational: input && input.operational
 
 	title: !!inputInfo ? Global.acInputs.sourceToText(inputInfo.source) : ""
-	icon.source: !!inputInfo ? Global.acInputs.sourceIcon(inputInfo.source) : ""
-	rightPadding: sideGaugeLoader.active ? Theme.geometry_overviewPage_widget_sideGauge_margins : 0
-	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
-	quantityLabel.dataObject: inputOperational ? input : null
-	quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
 	phaseCount: inputOperational ? input.phases.count : 0
 	enabled: !!inputInfo
-	extraContentLoader.sourceComponent: ThreePhaseDisplay {
-		width: parent.width
-		model: root.input.phases
-		widgetSize: root.size
-		inputMode: true
+
+	contentItem: Item {
+		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
+		implicitHeight: contentLayout.implicitHeight
+
+		ColumnLayout {
+			id: contentLayout
+
+			spacing: 0
+			width: parent.width - (sideGaugeLoader.active ? sideGaugeLoader.width + Theme.geometry_overviewPage_widget_sideGauge_margins : 0)
+			height: parent.height
+
+			WidgetHeader {
+				text: root.title
+				icon.source: !!root.inputInfo ? Global.acInputs.sourceIcon(root.inputInfo.source) : ""
+				Layout.fillWidth: true
+			}
+
+			Loader {
+				sourceComponent: root.inputOperational ? operationalComponent : nonOperationalComponent
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+
+				Component {
+					id: operationalComponent
+
+					ColumnLayout {
+						spacing: 0
+
+						OverviewAcElectricalQuantityLabel {
+							widget: root
+							dataObject: root.inputOperational ? root.input : null
+							sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
+							Layout.fillWidth: true
+							Layout.fillHeight: true
+						}
+
+						ThreePhaseDisplay {
+							model: root.phaseCount > 1 ? root.input.phases : null
+							widgetSize: root.size
+							inputMode: true
+							Layout.fillWidth: true
+						}
+					}
+				}
+
+				Component {
+					id: nonOperationalComponent
+
+					Label {
+						id: stateLabel
+
+						topPadding: Theme.geometry_overviewPage_widget_content_topMargin
+						elide: Text.ElideRight
+						text: root.inputInfo && root.inputInfo.source === VenusOS.AcInputs_InputSource_Generator
+								? CommonWords.stopped
+								: CommonWords.disconnected
+						font.pixelSize: Theme.font_overviewPage_secondary
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+					}
+				}
+			}
+		}
+
+		Loader {
+			id: sideGaugeLoader
+
+			anchors {
+				top: parent.top
+				bottom: parent.bottom
+				right: parent.right
+			}
+			active: root.inputOperational && root.size >= VenusOS.OverviewWidget_Size_M
+			sourceComponent: ThreePhaseBarGauge {
+				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
+				phaseModel: root.input.phases
+				minimumValue: root.inputInfo?.minimumCurrent ?? NaN
+				maximumValue: root.inputInfo?.maximumCurrent ?? NaN
+				inputMode: true
+				animationEnabled: root.animationEnabled
+				inOverviewWidget: true
+			}
+		}
 	}
 
 	onClicked: {
@@ -47,49 +121,5 @@ AcWidget {
 				"bindPrefix": inputServiceUid
 			})
 		}
-	}
-
-	Loader {
-		id: sideGaugeLoader
-
-		anchors {
-			top: parent.top
-			bottom: parent.bottom
-			right: parent.right
-			margins: Theme.geometry_overviewPage_widget_sideGauge_margins
-		}
-		active: root.inputOperational && root.size >= VenusOS.OverviewWidget_Size_M
-		sourceComponent: ThreePhaseBarGauge {
-			valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-			phaseModel: root.input.phases
-			minimumValue: root.inputInfo?.minimumCurrent ?? NaN
-			maximumValue: root.inputInfo?.maximumCurrent ?? NaN
-			inputMode: true
-			animationEnabled: root.animationEnabled
-			inOverviewWidget: true
-		}
-	}
-
-	Label {
-		anchors {
-			top: root.extraContent.top
-			topMargin: Theme.geometry_overviewPage_widget_extraContent_topMargin
-			left: root.extraContent.left
-			leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-			right: root.extraContent.right
-			rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-		}
-		elide: Text.ElideRight
-		text: root.inputInfo && root.inputInfo.source === VenusOS.AcInputs_InputSource_Generator
-				? CommonWords.stopped
-				: CommonWords.disconnected
-		visible: !root.inputOperational
-	}
-
-	AcInputDirectionIcon {
-		id: acInputDirectionIcon
-		parent: root.quantityLabel
-		anchors.verticalCenter: parent.verticalCenter
-		input: root.input
 	}
 }

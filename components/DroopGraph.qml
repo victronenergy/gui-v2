@@ -103,13 +103,11 @@ Item {
 		valueColor: Theme.color_droopGraph_axis_line
 		unitColor: Theme.color_droopGraph_axis_line
 		font.pixelSize: Theme.font_size_body1
-		verticalAlignment: Text.AlignVCenter
 	}
 	component OperationQuantityLabel: QuantityLabel {
 		valueColor: Theme.color_droopGraph_operationPoint_guidelines
 		unitColor: Theme.color_droopGraph_operationPoint_guidelines
 		font.pixelSize: Theme.font_size_body1
-		verticalAlignment: Text.AlignVCenter
 	}
 
 	Shape {

@@ -4,35 +4,27 @@
 */
 
 import QtQuick
+import QtQuick.Templates as T
 import Victron.VenusOS
 
-Rectangle {
+T.Control {
 	id: root
 
+	required property string title
 	required property int type
-	property int size: VenusOS.OverviewWidget_Size_M
+	property int size: VenusOS.OverviewWidget_Size_Zero
 	property int preferredSize: VenusOS.OverviewWidget_PreferredSize_Any
-
-	property alias icon: widgetHeader.icon
-	property alias title: widgetHeader.title
-	property alias secondaryTitle: widgetHeader.secondaryText
-	property alias quantityLabel: quantityLabel
-
-	signal clicked
-
-	property int rightPadding
-	property alias extraContent: extraContent
 	property var connectors: []
 
 	property real compactY
 	property real expandedY
 	readonly property int compactHeight: getCompactHeight(size)
 	readonly property int expandedHeight: getExpandedHeight(size)
-	property real verticalMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
 	property bool expanded
 	property bool animateGeometry
 	property bool animationEnabled
-	property list<QtObject> extraContentChildren
+
+	signal clicked
 
 	function getCompactHeight(s) {
 		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
@@ -76,14 +68,37 @@ Rectangle {
 	}
 
 	y: compactY
+	leftPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
+	rightPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
+	topPadding: Theme.geometry_overviewPage_widget_content_topMargin
+	bottomPadding: size >= VenusOS.OverviewWidget_Size_L
+			? Theme.geometry_overviewPage_widget_content_bottomMargin_large
+			: Theme.geometry_overviewPage_widget_content_bottomMargin_small
 	height: compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
-	radius: Theme.geometry_overviewPage_widget_radius
-	color: Theme.color_overviewPage_widget_background
-
-	border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
-	border.color: Theme.color_overviewPage_widget_border
 	enabled: false
+
+	implicitWidth: Math.max(
+		implicitBackgroundWidth + leftInset + rightInset,
+		implicitContentWidth + leftPadding + rightPadding)
+	implicitHeight: Math.max(
+		implicitBackgroundHeight + topInset + bottomInset,
+		implicitContentHeight + topPadding + bottomPadding)
+
+	background: Rectangle {
+		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
+		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
+		border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+		border.color: Theme.color_overviewPage_widget_border
+		color: Theme.color_overviewPage_widget_background
+		radius: Theme.geometry_overviewPage_widget_radius
+
+		PressArea {
+			radius: parent.radius
+			anchors.fill: parent
+			onClicked: root.clicked()
+		}
+	}
 
 	states: State {
 		name: "expanded"
@@ -93,7 +108,6 @@ Rectangle {
 			target: root
 			y: root.expandedY
 			height: root.expandedHeight
-			verticalMargin: Theme.geometry_overviewPage_widget_content_expanded_verticalMargin
 		}
 	}
 
@@ -101,7 +115,7 @@ Rectangle {
 		enabled: root.animationEnabled && root.animateGeometry
 
 		NumberAnimation {
-			properties: "y,height,verticalMargin"
+			properties: "y,height"
 			duration: Theme.animation_page_idleResize_duration
 			easing.type: Easing.InOutQuad
 		}
@@ -110,45 +124,4 @@ Rectangle {
 	Keys.onSpacePressed: clicked()
 	Keys.enabled: Global.keyNavigationEnabled
 	KeyNavigationHighlight.active: root.activeFocus
-
-	Item {
-		id: header
-
-		x: Theme.geometry_overviewPage_widget_content_horizontalMargin
-		y: root.verticalMargin
-		width: parent.width - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
-		height: widgetHeader.height + (quantityLabel.visible ? quantityLabel.height : 0)
-
-		WidgetHeader {
-			id: widgetHeader
-		}
-
-		ElectricalQuantityLabel {
-			id: quantityLabel
-
-			anchors.top: widgetHeader.bottom
-			font.pixelSize: root.size === VenusOS.OverviewWidget_Size_XS
-					  ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
-					  : Theme.font_overviewPage_widget_quantityLabel_maximumSize
-			alignment: Qt.AlignLeft
-		}
-	}
-
-	Item {
-		id: extraContent
-		anchors {
-			left: parent.left
-			right: parent.right
-			rightMargin: root.rightPadding
-			top: header.bottom
-			bottom: parent.bottom
-		}
-		children: root.extraContentChildren
-	}
-
-	PressArea {
-		radius: root.radius
-		anchors.fill: parent
-		onClicked: root.clicked()
-	}
 }

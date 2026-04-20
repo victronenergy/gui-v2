@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
@@ -36,33 +37,8 @@ OverviewWidget {
 		}
 	}
 
-	readonly property var batteryData: Global.system.battery
-
-	readonly property int _normalizedStateOfCharge: Math.round(batteryData.stateOfCharge || 0)
-	readonly property bool _animationReady: animationEnabled && !isNaN(batteryData.stateOfCharge)
-
-	// Calculate whether voltage, current and power quantities fit on the footer together, if not use smaller font.
-	// Discharging battery has negative amperes and its not unusual for the watts to be in the 1k+ range.
-	readonly property bool _useSmallFont: !quantityLabelFits(batteryVoltageDisplay) || !quantityLabelFits(batteryPowerDisplay)
-
-	function quantityLabelFits(label) {
-		return root.width/2 - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
-			> quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
-			+ quantityLabelWidth(label.valueText, label.unitText)
-	}
-
-	function quantityLabelWidth(valueText, unitText){
-		const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
-		return quantityLabelFont.font, (valueTextRect.x + valueTextRect.width
-										+ Theme.geometry_quantityLabel_spacing
-										+ quantityLabelFont.advanceWidth(unitText))
-	}
-
-	FontMetrics {
-		id: quantityLabelFont
-		font.pixelSize: Theme.font_size_body2
-		font.family: Global.quantityFontFamily
-	}
+	readonly property int _normalizedStateOfCharge: Math.round(Global.system.battery.stateOfCharge || 0)
+	readonly property bool _animationReady: animationEnabled && !isNaN(Global.system.battery.stateOfCharge)
 
 	VeQuickItem {
 		id: batteries
@@ -82,201 +58,227 @@ OverviewWidget {
 	}
 
 	title: CommonWords.battery
-	icon.source: batteryData.icon
 	type: VenusOS.OverviewWidget_Type_Battery
 	enabled: batteries.valid
 
-	quantityLabel.value: batteryData.stateOfCharge
-	quantityLabel.unit: VenusOS.Units_Percentage
-	quantityLabel.unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+	background: Rectangle {
+		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
+		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
+		border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+		border.color: Theme.color_overviewPage_widget_border
+		color: Theme.color_overviewPage_widget_background
+		radius: Theme.geometry_overviewPage_widget_radius
 
-	color: "transparent"
-
-	BarGauge {
-		id: animationRect
-		z: -1
-
-		anchors {
-			fill: parent
-			margins: root.border.width
+		PressArea {
+			radius: parent.radius
+			anchors.fill: parent
+			onClicked: root.clicked()
 		}
 
-		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
-		value: _normalizedStateOfCharge/100
-		backgroundColor: Theme.color_overviewPage_widget_background
-		foregroundColor: Theme.color_overviewPage_widget_battery_background
-		radius: Theme.geometry_overviewPage_widget_battery_background_radius
+		BarGauge {
+			id: animationRect
 
-		Item {
-			id: animationClip
-
-			width: parent.width
-			height: parent.height * (animationRect.value)
-			anchors.bottom: parent.bottom
-			visible: batteryData.mode === VenusOS.Battery_Mode_Charging && root._animationReady
-			clip: true
-			z: 6 // greater than the explicit z-order specified in BarGauge.
-
-			SequentialAnimation {
-				property bool startAnimation: root._animationReady
-				onStartAnimationChanged: if (startAnimation) start()
-				onStopped: if (startAnimation) start()
-
-				YAnimator {
-					target: gradient
-					from: animationClip.height
-					to: -gradient.height
-					duration: Theme.animation_overviewPage_widget_battery_animation_duration
-					easing.type: Easing.OutQuad
-				}
-
-				PauseAnimation {
-					duration: Theme.animation_overviewPage_widget_battery_animation_pause_duration
-				}
+			anchors {
+				fill: parent
+				margins: parent.border.width
 			}
 
-			Rectangle {
-				id: gradient
+			animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
+			value: _normalizedStateOfCharge/100
+			backgroundColor: Theme.color_overviewPage_widget_background
+			foregroundColor: Theme.color_overviewPage_widget_battery_background
+			radius: parent.radius - parent.border.width
+
+			Item {
+				id: animationClip
+
 				width: parent.width
-				height: Theme.geometry_overviewPage_widget_battery_gradient_height
-				gradient: Gradient {
-					GradientStop {
-						position: 0.0
-						color: Qt.rgba(1,1,1,0.3)
+				height: parent.height * (animationRect.value)
+				anchors.bottom: parent.bottom
+				visible: Global.system.battery.mode === VenusOS.Battery_Mode_Charging && root._animationReady
+				clip: true
+				z: 6 // greater than the explicit z-order specified in BarGauge.
+
+				SequentialAnimation {
+					property bool startAnimation: root._animationReady
+					onStartAnimationChanged: if (startAnimation) start()
+					onStopped: if (startAnimation) start()
+
+					YAnimator {
+						target: gradient
+						from: animationClip.height
+						to: -gradient.height
+						duration: Theme.animation_overviewPage_widget_battery_animation_duration
+						easing.type: Easing.OutQuad
 					}
-					GradientStop {
-						position: 0.3
-						color: Qt.rgba(1,1,1,0.15)
+
+					PauseAnimation {
+						duration: Theme.animation_overviewPage_widget_battery_animation_pause_duration
 					}
-					GradientStop {
-						position: 1.0
-						color: Qt.rgba(1,1,1,0.0)
+				}
+
+				Rectangle {
+					id: gradient
+					width: parent.width
+					height: Theme.geometry_overviewPage_widget_battery_gradient_height
+					gradient: Gradient {
+						GradientStop {
+							position: 0.0
+							color: Qt.rgba(1,1,1,0.3)
+						}
+						GradientStop {
+							position: 0.3
+							color: Qt.rgba(1,1,1,0.15)
+						}
+						GradientStop {
+							position: 1.0
+							color: Qt.rgba(1,1,1,0.0)
+						}
 					}
 				}
 			}
 		}
-	}
 
-	QuantityLabel {
-		id: batteryTempDisplay
-
-		anchors {
-			top: parent.top
-			topMargin: root.verticalMargin
-			right: parent.right
-			rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-		}
-
-		value: batteryData.temperature
-		unit: Global.systemSettings.temperatureUnit
-		unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-		font.pixelSize: Theme.font_size_body2
-		alignment: Qt.AlignRight
-		visible: !isNaN(batteryData.temperature)
-	}
-
-	extraContentChildren: [
-		Column {
+		QuantityLabel {
 			anchors {
 				top: parent.top
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				topMargin: Theme.geometry_overviewPage_widget_content_topMargin
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
-			Label {
-				text: VenusOS.battery_modeToText(batteryData.mode)
-				font.pixelSize: Theme.font_size_body1
-				width: parent.width
-				elide: Text.ElideRight
-				color: Theme.color_overviewPage_widget_battery_font_secondary
-			}
-			Label {
-				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
-				visible: Global.system.battery.timeToGo
-				color: Theme.color_font_primary
-				width: parent.width
-				elide: Text.ElideRight
-				font.pixelSize: Theme.font_overviewPage_battery_timeToGo_pixelSize
-			}
-		},
+			value: Global.system.battery.temperature
+			unit: Global.systemSettings.temperatureUnit
+			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+			font.pixelSize: Theme.font_overviewPage_battery_secondary
+			alignment: Qt.AlignRight
+			visible: !isNaN(Global.system.battery.temperature)
+		}
 
 		CP.ColorImage {
 			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: batteryVoltageDisplay.top
-				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
-			}
-			fillMode: Image.PreserveAspectFit
-			color: Theme.color_font_primary
-			visible: root.preferRenewableOverride
-			source: root.preferRenewableOverrideGenset
-					? "qrc:/images/icon_charging_generator.svg"
-					: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
-					  ? "qrc:/images/icon_charging_shore.svg"
-					  : "qrc:/images/icon_charging_grid.svg"
-		},
-
-		QuantityLabel {
-			id: batteryVoltageDisplay
-
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
-			}
-
-			value: batteryData.voltage
-			unit: VenusOS.Units_Volt_DC
-			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
-			alignment: Qt.AlignLeft
-		},
-
-		QuantityLabel {
-			id: batteryCurrentDisplay
-
-			anchors {
-				horizontalCenter: parent.horizontalCenter
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
-			}
-			value: batteryData.current
-			unit: VenusOS.Units_Amp
-			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
-		},
-
-		CP.ColorImage {
-			anchors {
-				bottom: batteryPowerDisplay.top
 				bottomMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_bottom_margin
 				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_right_margin
+				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
 			}
-
 			fillMode: Image.PreserveAspectFit
 			color: Theme.color_font_primary
 			visible: root.preferRenewable
 			source: "qrc:/images/icon_charging_renewables.svg"
-		},
-
-		QuantityLabel {
-			id: batteryPowerDisplay
-
-			anchors {
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_battery_bottomRow_bottomMargin
-			}
-			value: batteryData.power
-			unit: VenusOS.Units_Watt
-			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: root._useSmallFont ? Theme.font_size_body1 : Theme.font_size_body2
-			alignment: Qt.AlignRight
 		}
-	]
+	}
+
+	contentItem: ColumnLayout {
+		spacing: 0
+
+		WidgetHeader {
+			text: root.title
+			icon.source: Global.system.battery.icon
+			Layout.fillWidth: true
+		}
+
+		ElectricalQuantityLabel {
+			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			alignment: Qt.AlignLeft
+			value: Global.system.battery.stateOfCharge
+			unit: VenusOS.Units_Percentage
+			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+			Layout.fillWidth: true
+		}
+
+		Label {
+			text: VenusOS.battery_modeToText(Global.system.battery.mode)
+			elide: Text.ElideRight
+			color: Theme.color_overviewPage_widget_battery_font_secondary
+			Layout.fillWidth: true
+		}
+
+		RowLayout {
+			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			Layout.fillWidth: false
+
+			Label {
+				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
+				visible: Global.system.battery.timeToGo > 0
+				elide: Text.ElideRight
+				font.pixelSize: Theme.font_overviewPage_secondary
+				Layout.fillWidth: true
+			}
+
+			CP.ColorImage {
+				fillMode: Image.PreserveAspectFit
+				color: Theme.color_font_primary
+				visible: root.preferRenewableOverride
+				source: root.preferRenewableOverrideGenset
+						? "qrc:/images/icon_charging_generator.svg"
+						: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+						  ? "qrc:/images/icon_charging_shore.svg"
+						  : "qrc:/images/icon_charging_grid.svg"
+			}
+		}
+
+		Item {
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+
+		RowLayout {
+			// Calculate whether voltage, current and power quantities fit on the footer together, if not use smaller font.
+			// Discharging battery has negative amperes and its not unusual for the watts to be in the 1k+ range.
+			readonly property bool _useSmallFont: !quantityLabelFits(batteryVoltageDisplay) || !quantityLabelFits(batteryPowerDisplay)
+
+			function quantityLabelFits(label) {
+				return root.width/2 - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
+					> quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
+					+ quantityLabelWidth(label.valueText, label.unitText)
+			}
+
+			function quantityLabelWidth(valueText, unitText){
+				const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
+				return quantityLabelFont.font, (valueTextRect.x + valueTextRect.width
+												+ Theme.geometry_quantityLabel_spacing
+												+ quantityLabelFont.advanceWidth(unitText))
+			}
+
+			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
+
+			FontMetrics {
+				id: quantityLabelFont
+				font.pixelSize: Theme.font_overviewPage_battery_secondary
+				font.family: Global.quantityFontFamily
+			}
+
+			QuantityLabel {
+				id: batteryVoltageDisplay
+
+				value: Global.system.battery.voltage
+				unit: VenusOS.Units_Volt_DC
+				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				alignment: Qt.AlignLeft
+				Layout.fillWidth: true
+			}
+
+			QuantityLabel {
+				id: batteryCurrentDisplay
+
+				value: Global.system.battery.current
+				unit: VenusOS.Units_Amp
+				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				Layout.fillWidth: true
+			}
+
+			QuantityLabel {
+				id: batteryPowerDisplay
+
+				value: Global.system.battery.power
+				unit: VenusOS.Units_Watt
+				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				alignment: Qt.AlignRight
+				Layout.fillWidth: true
+			}
+		}
+	}
 }

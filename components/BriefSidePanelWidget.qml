@@ -9,7 +9,7 @@ import Victron.VenusOS
 Column {
 	id: root
 
-	property alias title: header.title
+	property alias title: header.text
 	property alias icon: header.icon
 	property alias quantityLabel: quantityLabel
 	property alias sideComponent: sideLoader.sourceComponent
@@ -22,6 +22,7 @@ Column {
 	WidgetHeader {
 		id: header
 		z: 1    // place the title above the side component if it overflows
+		width: parent.width
 	}
 
 	Row {

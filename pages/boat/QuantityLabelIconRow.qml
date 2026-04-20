@@ -22,7 +22,6 @@ Row {
 		id: label
 
 		anchors.verticalCenter: parent.verticalCenter
-		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_batterySoc_pixelSize
 	}
 
