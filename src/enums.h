@@ -873,6 +873,15 @@ public:
 	};
 	Q_ENUM(Genset_StatusCode)
 
+	enum Genset_ErrorCode {
+		Genset_ErrorCode_NoError,
+		Genset_ErrorCode_RemoteSwitchControlDisabled,
+		Genset_ErrorCode_GeneratorInFaultCondition,
+		Genset_ErrorCode_GeneratorNotDetectedAtAcInput,
+		Genset_ErrorCode_EmptyCustomEnabledGensetsGroup
+	};
+	Q_ENUM(Genset_ErrorCode)
+
 	enum Alarm_Level {
 		Alarm_Level_OK,
 		Alarm_Level_Warning,

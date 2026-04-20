@@ -55,6 +55,10 @@ VisibleItemModel {
 		gensetServiceUid: root.bindPrefix
 	}
 
+	readonly property VeQuickItem generatorState: VeQuickItem {
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
+	}
+
 	// Show when startstop controlled but not enabled (because the required helper relay is not configured) and only if the genset service is present.
 	PrimaryListLabel {
 		preferredVisible: gensetInstance.valid && root.isStartStopControlled && !root.isGensetEnabled
@@ -69,56 +73,16 @@ VisibleItemModel {
 		text: qsTrId("genset_controller_multiple_genset_controllers")
 	}
 
-	ListSwitch {
+	ListGeneratorAutoStartSwitch {
 		id: autostartSwitch
-		//% "Auto start functionality"
-		text: qsTrId("ac-in-genset_auto_start_functionality")
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
 		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
-		updateDataOnClick: false
-
-		onClicked: {
-			if (!checked) {
-				autostartSwitch.dataItem.setValue(1)
-			} else {
-				// check if they really want to disable
-				Global.dialogLayer.open(confirmationDialogComponent)
-			}
-		}
-
-		Component {
-			id: confirmationDialogComponent
-
-			GeneratorDisableAutoStartDialog {
-				onAccepted: autostartSwitch.dataItem.setValue(0)
-			}
-		}
 	}
 
-	ListItem {
-		id: manualControl
-
+	ListGeneratorManualControlButton {
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
-		contentItem: Item {
-			implicitWidth: Theme.geometry_listItem_width
-
-			RowLayout {
-				anchors.verticalCenter: parent.verticalCenter
-				width: parent.width
-				spacing: manualControl.spacing
-
-				Label {
-					text: CommonWords.manual_control
-					font: manualControl.font
-					Layout.fillWidth: true
-				}
-
-				GeneratorManualControlButton {
-					generatorUid: root.startStopBindPrefix
-					gensetUid: root.bindPrefix
-				}
-			}
-		}
+		generatorUid: root.startStopBindPrefix
+		gensetUid: root.bindPrefix
 	}
 
 	ListText {
@@ -129,24 +93,9 @@ VisibleItemModel {
 		preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
 	}
 
-	ListText {
-		//% "Control status"
-		text: qsTrId("ac-in-genset_auto_control_status")
-		secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
-						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
-						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+	ListGeneratorControlStatus {
 		preferredVisible: root.isStartStopControlled
-
-		VeQuickItem {
-			id: activeCondition
-			readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
-		}
-
-		VeQuickItem {
-			id: generatorState
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
-		}
+		startStopBindPrefix: root.startStopBindPrefix
 	}
 
 	ListGeneratorError {
@@ -238,34 +187,13 @@ VisibleItemModel {
 			id: phaseRepeater
 
 			model: root.nrOfPhases
-			delegate: ListQuantityGroup {
-				id: phaseDelegate
-
+			delegate: ListVoltageCurrentPower {
 				required property int index
-				readonly property string bindPrefix: `${root.bindPrefix}/Ac/L${index + 1}`
 
+				bindPrefix: `${root.bindPrefix}/Ac/L${index + 1}`
 				text: phaseRepeater.count === 1
-						//% "AC"
-					  ? qsTrId("ac-in-genset_ac")
-					  : CommonWords.ac_phase_x.arg(index + 1)
-				model: QuantityObjectModel {
-					QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC }
-					QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp }
-					QuantityObject { object: phasePower; unit: VenusOS.Units_Watt }
-				}
-
-				VeQuickItem {
-					id: phaseVoltage
-					uid: phaseDelegate.bindPrefix + "/Voltage"
-				}
-				VeQuickItem {
-					id: phaseCurrent
-					uid: phaseDelegate.bindPrefix + "/Current"
-				}
-				VeQuickItem {
-					id: phasePower
-					uid: phaseDelegate.bindPrefix + "/Power"
-				}
+									  ? CommonWords.ac
+									  : CommonWords.ac_phase_x.arg(index + 1)
 			}
 		}
 	}
@@ -321,95 +249,13 @@ VisibleItemModel {
 	}
 
 	ListNavigation {
-		//% "Engine"
-		text: qsTrId("ac-in-genset_engine")
+		text: CommonWords.engine
 		onClicked: {
-			Global.pageManager.pushPage(engineComponent, {"title": text})
-		}
-
-		Component {
-			id: engineComponent
-
-			Page {
-				GradientListView {
-					model: VisibleItemModel {
-						ListQuantity {
-							//% "Speed"
-							text: qsTrId("ac-in-genset_speed")
-							dataItem.uid: root.bindPrefix + "/Engine/Speed"
-							unit: VenusOS.Units_RevolutionsPerMinute
-						}
-
-						ListQuantity {
-							//% "Load"
-							text: qsTrId("ac-in-genset_load")
-							dataItem.uid: root.bindPrefix + "/Engine/Load"
-							preferredVisible: dataItem.valid
-							unit: VenusOS.Units_Percentage
-						}
-
-						ListQuantity {
-							//% "Oil pressure"
-							text: qsTrId("ac-in-genset_oil_pressure")
-							dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
-							preferredVisible: dataItem.valid
-							unit: VenusOS.Units_Kilopascal
-						}
-
-						ListTemperature {
-							//% "Oil temperature"
-							text: qsTrId("ac-in-genset_oil_temperature")
-							preferredVisible: dataItem.valid
-							dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
-							decimals: 0
-						}
-
-						ListTemperature {
-							//% "Coolant temperature"
-							text: qsTrId("ac-in-genset_coolant_temperature")
-							preferredVisible: dataItem.valid
-							dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
-							decimals: 0
-						}
-
-						ListTemperature {
-							//% "Exhaust temperature"
-							text: qsTrId("ac-in-genset_exhaust_temperature")
-							preferredVisible: dataItem.valid
-							dataItem.uid: root.bindPrefix + "/Engine/ExaustTemperature"
-						}
-
-						ListTemperature {
-							//% "Winding temperature"
-							text: qsTrId("ac-in-genset_winding_temperature")
-							preferredVisible: dataItem.valid
-							dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
-						}
-
-						ListTemperature {
-							//% "Heatsink temperature"
-							text: qsTrId("genset_heatsink_temperature")
-							dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
-							preferredVisible: dataItem.valid
-						}
-
-						ListQuantity {
-							//% "Starter battery voltage"
-							text: qsTrId("ac-in-genset_starter_battery_voltage")
-							dataItem.uid: root.bindPrefix + "/StarterVoltage"
-							preferredVisible: dataItem.valid
-							unit: VenusOS.Units_Volt_DC
-						}
-
-						ListText {
-							//% "Number of starts"
-							text: qsTrId("ac-in-genset_number_of_starts")
-							dataItem.uid: root.bindPrefix + "/Engine/Starts"
-							preferredVisible: dataItem.valid
-						}
-					}
-				}
-			}
+			Global.pageManager.pushPage("/pages/settings/PageEngine.qml",
+										{
+											title: text,
+											bindPrefix: root.bindPrefix
+										})
 		}
 	}
 

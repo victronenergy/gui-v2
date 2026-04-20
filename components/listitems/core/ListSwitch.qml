@@ -28,6 +28,7 @@ ListSetting {
 	id: root
 
 	readonly property alias dataItem: dataItem
+	readonly property bool defaultInteractive: (dataItem.uid === "" || dataItem.valid)
 	property bool checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 	property bool checkable
 	property string secondaryText
@@ -71,7 +72,7 @@ ListSetting {
 	topPadding: 0
 	bottomPadding: 0
 
-	interactive: (dataItem.uid === "" || dataItem.valid)
+	interactive: defaultInteractive
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width

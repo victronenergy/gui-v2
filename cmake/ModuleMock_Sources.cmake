@@ -59,6 +59,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/motordrive.json
     data/mock/conf/services/mppt1.json
     data/mock/conf/services/mppt2.json
+    data/mock/conf/services/multiple-dc-gensets.json
     data/mock/conf/services/multiplus-split-phase.json
     data/mock/conf/services/multirs-smart.json
     data/mock/conf/services/network-bluetooth.json

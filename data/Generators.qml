@@ -9,9 +9,37 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	property string generator1ServiceUid: BackendConnection.type === BackendConnection.MqttSource
+										  ? ""
+										  : BackendConnection.uidPrefix() + "/com.victronenergy.generator.startstop1"
+
 	readonly property FilteredDeviceModel model: FilteredDeviceModel {
 		serviceTypes: ["generator"]
 		sorting: FilteredDeviceModel.DeviceInstance
+	}
+
+	readonly property FilteredDeviceModel dcModel: FilteredDeviceModel {
+		serviceTypes: ["dcgenset"]
+		sorting: FilteredDeviceModel.DeviceInstance
+	}
+
+	readonly property bool multipleDcGensetsSupported: _multipleDcGensetsSupported.valid
+
+	readonly property VeQuickItem _multipleDcGensetsSupported: VeQuickItem {
+		uid: root.generator1ServiceUid ? root.generator1ServiceUid + "/MultipleGensets/GensetsEnabled" : ""
+	}
+
+	property Instantiator _generator1ServiceUidFinder: Instantiator {
+		model: BackendConnection.type === BackendConnection.MqttSource ? root.model : null
+		delegate: VeQuickItem {
+			uid: model.device?.serviceUid ? model.device.serviceUid + "/GensetServiceType" : ""
+			onValueChanged: {
+				if (value === "dcgenset") {
+					// This must be the startstop1 service, i.e. likely mqtt/generator/1.
+					root.generator1ServiceUid = model.device.serviceUid
+				}
+			}
+		}
 	}
 
 	function stateAndCondition(state, conditionCode) {

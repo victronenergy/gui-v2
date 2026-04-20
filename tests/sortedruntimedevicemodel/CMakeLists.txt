@@ -1,0 +1,1 @@
+add_single_file_unit_test(sortedruntimedevicemodel)

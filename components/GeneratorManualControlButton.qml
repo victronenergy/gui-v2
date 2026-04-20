@@ -11,11 +11,11 @@ ListItemButton {
 
 	required property string generatorUid
 	property string gensetUid: BackendConnection.serviceUidFromName(_gensetServiceName.value || "", _gensetInstance.value || 0)
-
 	property int _generatorStateBeforeDialogOpen: -1
+	readonly property bool defaultEnabled: _state.value !== VenusOS.Generators_State_Error && _state.value !== VenusOS.Generators_State_StoppedByTankLevel
+										   && Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
 
-	enabled: _state.value !== VenusOS.Generators_State_Error && _state.value !== VenusOS.Generators_State_StoppedByTankLevel
-			&& Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
+	enabled: defaultEnabled
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	flat: false
 	backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen

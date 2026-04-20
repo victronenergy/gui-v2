@@ -3,6 +3,7 @@
         ":/data/mock/conf/services/wind.json",
         ":/data/mock/conf/services/orionxs-dcdc.json",
         ":/data/mock/conf/services/pylontech.json",
+        ":/data/mock/conf/services/multiple-dc-gensets.json",
         ":/data/mock/conf/services/motordrive.json",
         ":/data/mock/conf/setup-common.json"
     ],

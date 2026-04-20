@@ -43,6 +43,7 @@ ListNavigation {
 	//% "Unknown"
 	property string defaultSecondaryText: qsTrId("settings_radio_button_group_unknown")
 
+	property Component optionHeader
 	property Component optionFooter
 
 	signal optionClicked(index: int)
@@ -69,6 +70,7 @@ ListNavigation {
 		id: optionsPageComponent
 
 		RadioButtonListPage {
+			header: root.optionHeader
 			footer: root.optionFooter
 			optionModel: root.optionModel
 			currentIndex: root.currentIndex

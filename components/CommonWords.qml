@@ -10,6 +10,10 @@ import QtQml
 QtObject {
 	id: root
 
+	//: Alternating current
+	//% "AC"
+	readonly property string ac: qsTrId("common_words_ac")
+
 	//% "AC In"
 	readonly property string ac_in: qsTrId("common_words_ac_in")
 
@@ -160,6 +164,9 @@ QtObject {
 	//% "DC"
 	readonly property string dc: qsTrId("common_words_dc")
 
+	//% "DC Gensets"
+	readonly property string dcGensets: qsTrId("common_words_dc_gensets")
+
 	//: Title for a menu item which displays debugging information
 	//% "Debug"
 	readonly property string debug: qsTrId("common_words_debug")
@@ -188,6 +195,9 @@ QtObject {
 
 	//% "Enabled"
 	readonly property string enabled: qsTrId("common_words_enabled")
+
+	//% "Engine"
+	readonly property string engine: qsTrId("common_words_engine")
 
 	//: Amount of charged energy
 	//% "Energy"
