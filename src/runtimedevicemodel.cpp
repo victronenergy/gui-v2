@@ -15,8 +15,13 @@ namespace {
 bool includeServiceType(const QString &serviceType)
 {
 	// These device types are not shown in the Device List:
-	return serviceType != QStringLiteral("generator") // found under separate 'Genset' menu
-			&& serviceType != QStringLiteral("multi"); // included as part of acsystem services
+	static const QStringList excludedServiceTypes{
+		QStringLiteral("generator"),		// found under separate 'Genset' menu
+		QStringLiteral("multi"),			// included as part of acsystem services
+		QStringLiteral("opportunityloads")	// these services represent loads, not devices
+	};
+
+	return !excludedServiceTypes.contains(serviceType);
 }
 }
 
