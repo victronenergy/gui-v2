@@ -97,6 +97,7 @@ SwipeViewPage {
 			console.warn("Warning: layout does not handle > 1 widget with OverviewWidget_PreferredSize_LargeOnly")
 		}
 
+		let foundFirstPreferredLarge = false
 		for (i = 0; i < widgets.length; ++i) {
 			widget = widgets[i]
 			switch (widgets.length) {
@@ -122,10 +123,13 @@ SwipeViewPage {
 								: smallWidgetSize
 					}
 				} else if (preferLargeWidgetCount === 2) {
-					// If two prefer L size, then use M for those, and X/XS otherwise.
-					widget.size = widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge
-							? VenusOS.OverviewWidget_Size_M
-							: (widgets.length === 3 ? VenusOS.OverviewWidget_Size_S : VenusOS.OverviewWidget_Size_XS)
+					// If two prefer L size, then use L for the first, and S/XS otherwise.
+					if (widget.preferredSize === VenusOS.OverviewWidget_PreferredSize_PreferLarge && !foundFirstPreferredLarge) {
+						foundFirstPreferredLarge = true
+						widget.size = VenusOS.OverviewWidget_Size_L
+					} else {
+						widget.size = (widgets.length === 3 ? VenusOS.OverviewWidget_Size_S : VenusOS.OverviewWidget_Size_XS)
+					}
 				} else {
 					// There are no size preferences, or all three prefer L size, so use the same
 					// size for all of them.

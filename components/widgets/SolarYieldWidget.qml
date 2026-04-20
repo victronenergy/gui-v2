@@ -59,7 +59,7 @@ OverviewWidget {
 			id: contentLoader
 
 			sourceComponent: {
-				if (root.size >= VenusOS.OverviewWidget_Size_L) {
+				if (root.size >= VenusOS.OverviewWidget_Size_M) {
 					if (root._showPhases) {
 						return phaseComponent
 					} else if (root._showGraph) {
