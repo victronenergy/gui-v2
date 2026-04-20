@@ -4,19 +4,31 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 OverviewWidget {
 	id: root
 
-	//% "DC Loads"
-	title: qsTrId("overview_widget_dcloads_title")
-	icon.source: "qrc:/images/dcloads.svg"
 	type: VenusOS.OverviewWidget_Type_DcLoads
 	enabled: systemLoadDevices.count > 1 || nonSystemLoadDevices.count > 0
 
-	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-	quantityLabel.dataObject: Global.system.dc
+	contentItem: ColumnLayout {
+		WidgetHeader {
+			//% "DC Loads"
+			text: qsTrId("overview_widget_dcloads_title")
+			icon.source: "qrc:/images/dcloads.svg"
+			Layout.fillWidth: true
+		}
+
+		OverviewElectricalQuantityLabel {
+			widgetSize: root.size
+			dataObject: Global.system.dc
+			sourceType: VenusOS.ElectricalQuantity_Source_Dc
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/loads/DcLoadListPage.qml", {

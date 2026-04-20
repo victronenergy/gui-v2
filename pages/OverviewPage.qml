@@ -408,14 +408,12 @@ SwipeViewPage {
 		return null
 	}
 
-	function _inputConnectorAnimationMode(connectorWidget) {
+	function _inputConnectorAnimationMode(connectorWidget, power) {
 		if (!isCurrentPage) {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 		// Assumes startWidget is the AC/DC input widget.
 		// Use the displayed power to calculate whether the connector should be animated.
-		const power = !connectorWidget.startWidget.quantityLabel.dataObject ? NaN
-				: connectorWidget.startWidget.quantityLabel.dataObject.power
 		if (isNaN(power) || Math.abs(power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold) {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
@@ -608,7 +606,7 @@ SwipeViewPage {
 				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(acInputWidgetConnector)
+				animationMode: root._inputConnectorAnimationMode(acInputWidgetConnector, acInputWidget.input?.power ?? NaN)
 			}
 		}
 	}
@@ -643,7 +641,7 @@ SwipeViewPage {
 				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
-				animationMode: root._inputConnectorAnimationMode(dcInputConnector)
+				animationMode: root._inputConnectorAnimationMode(dcInputConnector, dcInputWidget.totalPower)
 			}
 		}
 	}

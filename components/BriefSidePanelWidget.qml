@@ -9,7 +9,7 @@ import Victron.VenusOS
 Column {
 	id: root
 
-	property alias title: header.title
+	property alias title: header.text
 	property alias icon: header.icon
 	property alias quantityLabel: quantityLabel
 	property alias sideComponent: sideLoader.sourceComponent

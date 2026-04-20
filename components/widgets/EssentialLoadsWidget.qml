@@ -4,24 +4,40 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 AcWidget {
 	id: root
 
-	//% "Essential Loads"
-	title: qsTrId("overview_widget_essential_loads_title")
-	icon.source: "qrc:/images/icon_CL_24.svg"
 	type: VenusOS.OverviewWidget_Type_EssentialLoads
-	quantityLabel.dataObject: Global.system.load.acOut
 	phaseCount: Global.system.load.acOut.phases.count
-	extraContentLoader.sourceComponent: ThreePhaseDisplay {
-		model: Global.system.load.acOut.phases
-		widgetSize: root.size
-		valueType: VenusOS.Gauges_ValueType_RisingPercentage
-		maximumValue: Global.system.load.maximumAcCurrent
+
+	contentItem: ColumnLayout {
+		spacing: 0
+
+		WidgetHeader {
+			//% "Essential Loads"
+			text: qsTrId("overview_widget_essential_loads_title")
+			icon.source: "qrc:/images/icon_CL_24.svg"
+			Layout.fillWidth: true
+		}
+
+		OverviewAcElectricalQuantityLabel {
+			widget: root
+			dataObject: Global.system.load.acOut
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+
+		ThreePhaseDisplay {
+			model: root.phaseCount > 1 || Global.system.load.acOut.l2AndL1OutSummed ? Global.system.load.acOut.phases : null
+			widgetSize: root.size
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			maximumValue: Global.system.load.maximumAcCurrent
+			Layout.fillWidth: true
+		}
 	}
-	extraContentLoader.active: root.phaseCount > 1 || Global.system.load.acOut.l2AndL1OutSummed
 
 	// AC meters with Position=0 (AC output) are considered as "Essential Loads", so they are
 	// accessible from this AC Loads widget.

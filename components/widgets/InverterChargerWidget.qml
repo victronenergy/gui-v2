@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 OverviewWidget {
@@ -28,23 +29,22 @@ OverviewWidget {
 		}
 	}
 
-	//% "Inverter / Charger"
-	title: qsTrId("overview_widget_inverter_title")
-	icon.source: "qrc:/images/inverter_charger.svg"
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: !!Global.inverterChargers.firstObject
-	quantityLabel.visible: false
-	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
-	extraContentChildren: [
+	rightPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			+ Theme.geometry_overviewPage_widget_sideGauge_margins
+
+	contentItem: ColumnLayout {
+		spacing: 0
+
+		WidgetHeader {
+			//% "Inverter / Charger"
+			text: qsTrId("overview_widget_inverter_title")
+			icon.source: "qrc:/images/inverter_charger.svg"
+			Layout.fillWidth: true
+		}
+
 		Label {
-			anchors {
-				top: parent.top
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: systemReasonText.top
-			}
 			text: Global.system.systemStateToText(Global.system.state)
 			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
@@ -52,26 +52,22 @@ OverviewWidget {
 			wrapMode: Text.WordWrap
 			maximumLineCount: 4
 			elide: Text.ElideRight
-		},
-		Label {
-			id: systemReasonText
 
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_widget_content_verticalMargin
-			}
+			Layout.fillWidth: true
+			Layout.fillHeight: true // push reason text to bottom of layout
+		}
+
+		Label {
 			text: systemReason.text
 			wrapMode: Text.WordWrap
 			color: Theme.color_font_secondary
+			font.pixelSize: Theme.font_overviewPage_secondary
+
 			SystemReason {
 				id: systemReason
 			}
 		}
-	]
+	}
 
 	Loader {
 		id: sideGaugeLoader

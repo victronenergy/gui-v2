@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 OverviewWidget {
@@ -18,32 +19,37 @@ OverviewWidget {
 		}
 	}
 
-	//: Abbreviation of Electric Vehicle Charging Station
-	//% "EVCS"
-	title: qsTrId("overview_widget_evcs_title")
-	icon.source: "qrc:/images/icon_charging_station_24.svg"
 	type: VenusOS.OverviewWidget_Type_Evcs
 	preferredSize: VenusOS.OverviewWidget_PreferredSize_LargeOnly
 	enabled: true
-	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
-	quantityLabel.dataObject: Global.evChargers
 
-	extraContentChildren: [
+	contentItem: ColumnLayout {
+		spacing: 0
+
+		WidgetHeader {
+			//: Abbreviation of Electric Vehicle Charging Station
+			//% "EVCS"
+			text: qsTrId("overview_widget_evcs_title")
+			icon.source: "qrc:/images/icon_charging_station_24.svg"
+			Layout.fillWidth: true
+		}
+
+		OverviewElectricalQuantityLabel {
+			widgetSize: root.size
+			dataObject: Global.evChargers
+			sourceType: VenusOS.ElectricalQuantity_Source_Ac
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+
 		Loader {
-			anchors {
-				left: parent.left
-				leftMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin + root.rightPadding
-				bottom: parent.bottom
-				bottomMargin: root.verticalMargin
-			}
 			active: root.size >= VenusOS.OverviewWidget_Size_M
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
 					: Global.evChargers.model.count > 0 && Global.evChargers.model.firstObject ? singleEvChargerComponent
 					: null
+			Layout.fillWidth: true
 		}
-	]
+	}
 
 	Component {
 		id: singleEvChargerComponent
@@ -61,6 +67,7 @@ OverviewWidget {
 				valueColor: unitColor
 				alignment: Qt.AlignLeft
 				unit: VenusOS.Units_Energy_KiloWattHour
+				font.pixelSize: Theme.font_overviewPage_secondary
 
 				VeQuickItem {
 					id: energyItem
@@ -74,6 +81,7 @@ OverviewWidget {
 				text: Global.evChargers.chargerStatusToText(statusItem.value)
 				color: Theme.color_font_secondary
 				visible: statusItem.valid
+				font.pixelSize: Theme.font_overviewPage_secondary
 
 				VeQuickItem {
 					id: statusItem
@@ -91,6 +99,7 @@ OverviewWidget {
 					elide: Text.ElideRight
 					text: Global.evChargers.chargerModeToText(modeItem.value)
 					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_overviewPage_secondary
 
 					VeQuickItem {
 						id: modeItem
@@ -103,6 +112,7 @@ OverviewWidget {
 
 					text: chargingTimeItem.value >= 60 ? Utils.formatAsHHMM(chargingTimeItem.value, true) : Utils.formatAsHHMMSS(chargingTimeItem.value, true)
 					color: Theme.color_font_secondary
+					font.pixelSize: Theme.font_overviewPage_secondary
 					// do not show value under a second
 					visible: chargingTimeItem.value > 0
 

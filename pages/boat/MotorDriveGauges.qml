@@ -31,7 +31,6 @@ Column {
 		Label {
 			anchors.verticalCenter: parent.verticalCenter
 			width: Math.min(root.width - motorDriveIcon.width, implicitWidth)
-			verticalAlignment: Text.AlignVCenter
 			minimumPixelSize: Theme.font_size_tiny
 			font.pixelSize: Theme.font_size_body2
 			fontSizeMode: Text.HorizontalFit
@@ -44,7 +43,6 @@ Column {
 		id: label
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
 		visible: root.motorDrives.dcConsumption.quotient.valid && root.showDcConsumption
 		sourceType: VenusOS.ElectricalQuantity_Source_Dc

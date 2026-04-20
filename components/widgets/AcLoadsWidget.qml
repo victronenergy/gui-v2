@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 AcWidget {
@@ -13,19 +14,34 @@ AcWidget {
 			? Global.system.load.acIn
 			: Global.system.load.ac
 
-	//% "AC Loads"
-	title: qsTrId("overview_widget_acloads_title")
-	icon.source: "qrc:/images/acloads.svg"
 	type: VenusOS.OverviewWidget_Type_AcLoads
-	quantityLabel.dataObject: root.measurements
 	phaseCount: root.measurements.phases.count
-	extraContentLoader.sourceComponent: ThreePhaseDisplay {
-		model: root.measurements.phases
-		widgetSize: root.size
-		valueType: VenusOS.Gauges_ValueType_RisingPercentage
-		maximumValue: Global.system.load.maximumAcCurrent
+
+	contentItem: ColumnLayout {
+		spacing: 0
+
+		WidgetHeader {
+			//% "AC Loads"
+			text: qsTrId("overview_widget_acloads_title")
+			icon.source: "qrc:/images/acloads.svg"
+			Layout.fillWidth: true
+		}
+
+		OverviewAcElectricalQuantityLabel {
+			widget: root
+			dataObject: root.measurements
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+
+		ThreePhaseDisplay {
+			model: root.phaseCount > 1 || root.measurements.l2AndL1OutSummed ? root.measurements.phases : null
+			widgetSize: root.size
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			maximumValue: Global.system.load.maximumAcCurrent
+			Layout.fillWidth: true
+		}
 	}
-	extraContentLoader.active: root.phaseCount > 1 || root.measurements.l2AndL1OutSummed
 
 	// AC meters with Position=1 (AC input) are considered as "AC Loads", so they are
 	// accessible from this AC Loads widget.
