@@ -22,6 +22,7 @@ QUrl fontUrlForLanguage(QLocale::Language language, const QString &urlPrefix = Q
 	static const QHash<QLocale::Language, QString> fontFileNames = {
 		{ QLocale::Arabic, QStringLiteral("DejaVuSans.ttf") },
 		{ QLocale::Chinese, QStringLiteral("DroidSansFallback.ttf") },
+		{ QLocale::Japanese, QStringLiteral("DroidSansFallback.ttf") },
 		{ QLocale::Thai, QStringLiteral("NotoSansThai.ttf") },
 	};
 
@@ -79,6 +80,7 @@ LanguageModel::LanguageModel(QObject *parent)
 	addLanguage("Español", "es", QLocale::Spanish);
 	addLanguage("Français", "fr", QLocale::French);
 	addLanguage("Italiano", "it", QLocale::Italian);
+	addLanguage("日本語", "ja", QLocale::Japanese);
 	addLanguage("Nederlands", "nl", QLocale::Dutch);
 	addLanguage("Polski", "pl", QLocale::Polish);
 	addLanguage("Português", "pt", QLocale::Portuguese);
