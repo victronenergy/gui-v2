@@ -14,11 +14,10 @@ Item {
 	readonly property alias quantityInfo: quantityInfo
 	property alias font: unitLabel.font
 	property alias valueColor: valueLabel.color
-	property alias verticalAlignment: valueLabel.verticalAlignment
 	property alias unitColor: unitLabel.color
 	property alias valueText: valueLabel.text
 	property alias unitText: unitLabel.text
-	property int alignment: Qt.AlignHCenter
+	property int alignment: Qt.AlignHCenter | Qt.AlignVCenter
 	property alias decimals: quantityInfo.decimals
 	property alias formatHints: quantityInfo.formatHints
 	property alias leftPadding: digitRow.leftPadding
@@ -35,10 +34,11 @@ Item {
 		id: digitRow
 
 		anchors {
-			verticalCenter: parent.verticalCenter
+			verticalCenter: root.alignment & Qt.AlignVCenter ? parent.verticalCenter : undefined
 			horizontalCenter: root.alignment & Qt.AlignHCenter ? parent.horizontalCenter : undefined
 			left: root.alignment & Qt.AlignLeft ? parent.left : undefined
 			right: root.alignment & Qt.AlignRight ? parent.right : undefined
+			bottom: root.alignment & Qt.AlignBottom ? parent.bottom : undefined
 		}
 
 		spacing: Theme.geometry_quantityLabel_spacing
@@ -60,7 +60,6 @@ Item {
 			// else it is noticeably misaligned by less than 1 pixel.
 			anchors.baseline: valueLabel.baseline
 			anchors.alignWhenCentered: font.pixelSize >= Theme.font_size_body1
-			verticalAlignment: valueLabel.verticalAlignment
 			text: quantityInfo.unit
 			color: Theme.color_font_secondary
 		}

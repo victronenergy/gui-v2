@@ -17,7 +17,6 @@ Row {
 
 	QuantityLabel {
 		anchors.verticalCenter: parent.verticalCenter
-		verticalAlignment: Text.AlignVCenter
 		font.pixelSize: Theme.font_boatPage_batteryTemperature_pixelSize
 		value: dataItem && dataItem.valid ? dataItem.value : NaN
 		unit: Global.systemSettings.temperatureUnit

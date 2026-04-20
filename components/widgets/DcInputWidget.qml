@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 OverviewWidget {
@@ -11,6 +12,7 @@ OverviewWidget {
 
 	required property string serviceType
 	property int inputTypeFilter: -1
+	readonly property real totalPower: inputDeviceModel.totalPower
 
 	readonly property int inputType: inputDeviceModel.commonMeterType >= 0 ? inputDeviceModel.commonMeterType
 			: serviceType === "dcsource" ? VenusOS.DcMeter_Type_GenericSource
@@ -19,14 +21,26 @@ OverviewWidget {
 			: serviceType === "dcgenset" ? "/pages/settings/devicelist/PageGenset.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 
-	title: VenusOS.dcMeter_typeToText(inputType)
-	quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-	quantityLabel.dataObject: QtObject {
-		readonly property real power: inputDeviceModel.totalPower
-		readonly property real current: inputDeviceModel.totalCurrent
-	}
-	icon.source: VenusOS.dcMeter_iconForType(inputType)
 	enabled: true
+
+	contentItem: ColumnLayout {
+		WidgetHeader {
+			text: VenusOS.dcMeter_typeToText(root.inputType)
+			icon.source: VenusOS.dcMeter_iconForType(root.inputType)
+			Layout.fillWidth: true
+		}
+
+		OverviewElectricalQuantityLabel {
+			widgetSize: root.size
+			dataObject: QtObject {
+				readonly property real power: inputDeviceModel.totalPower
+				readonly property real current: inputDeviceModel.totalCurrent
+			}
+			sourceType: VenusOS.ElectricalQuantity_Source_Dc
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+	}
 
 	onClicked: {
 		if (inputDeviceModel.count === 1) {
