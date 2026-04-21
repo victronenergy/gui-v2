@@ -14,8 +14,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	required property string navButtonText
-	required property url navButtonIcon
+	required property url iconSource
 	required property string url
 	required property SwipeView view
 

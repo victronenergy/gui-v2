@@ -15,8 +15,8 @@ SwipeViewPage {
 	id: root
 
 	//% "Settings"
-	navButtonText: qsTrId("nav_settings")
-	navButtonIcon: "qrc:/images/settings.svg"
+	title: qsTrId("nav_settings")
+	iconSource: "qrc:/images/settings.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: Qt.TabFocus

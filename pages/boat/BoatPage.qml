@@ -11,8 +11,8 @@ SwipeViewPage {
 	id: root
 
 	//% "Boat"
-	navButtonText: qsTrId("nav_boat")
-	navButtonIcon: "qrc:/images/icon_boat_32.svg"
+	title: qsTrId("nav_boat")
+	iconSource: "qrc:/images/icon_boat_32.svg"
 	url: "qrc:/qt/qml/Victron/Boat/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true

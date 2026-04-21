@@ -222,7 +222,7 @@ FocusScope {
 			y: root.height + 4  // nudge below the visible area for wasm
 			backgroundColor: root.backgroundColor
 			opacity: 0
-			model: swipeView ? swipeView.contentModel : null
+			pages: swipePageModel.pages
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
 			focus: true

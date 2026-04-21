@@ -5,6 +5,7 @@ import Victron.VenusOS
 BaseListView {
 	id: root
 
+	required property PageStack pageStack
 	property color primaryBreadcrumbColor: Theme.color_settings_breadcrumb_background_top_page
 	property color secondaryBreadcrumbColor: Theme.color_settings_breadcrumb_background
 
@@ -36,7 +37,9 @@ BaseListView {
 			verticalAlignment: Text.AlignVCenter
 			height: parent.height
 			color: breadcrumb.isTopBreadcrumb ? Theme.color_settings_breadcrumb_primaryText : Theme.color_settings_breadcrumb_secondaryText
-			text: getText(breadcrumb.index)
+			text: breadcrumb.index === 0
+					? Global.pageManager?.navBar?.currentTitle ?? "" // eg: "Settings"
+					: root.pageStack.get(breadcrumb.index - 1).title // eg: "Device list"
 		}
 		background: Rectangle {
 			color: breadcrumb.iconColor

@@ -16,8 +16,8 @@ SwipeViewPage {
 	fullScreenWhenIdle: true
 	focusPolicy: Qt.TabFocus
 	//% "Levels"
-	navButtonText: qsTrId("nav_levels")
-	navButtonIcon: "qrc:/images/levels.svg"
+	title: qsTrId("nav_levels")
+	iconSource: "qrc:/images/levels.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml"
 
 	// Gauges may overflow into previous/next pages in the SwipeView, so clip the gauge ListView

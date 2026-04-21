@@ -9,17 +9,17 @@ import Victron.VenusOS
 FocusScope {
 	id: root
 
-	required property var model
+	property list<SwipeViewPage> pages
 	readonly property int currentIndex: _currentIndex
-	readonly property string activeButtonText: model ? model.get(currentIndex).navButtonText : ""
+	readonly property string currentTitle: pages[currentIndex].title ?? ""
 	property alias backgroundColor: backgroundRect.color
 
 	// External components should not write to these properties.
 	property int _currentIndex
 
 	function setCurrentPage(pageName) {
-		for (let i = 0; i < model.count; ++i) {
-			const url = model.get(i).url
+		for (let i = 0; i < pages.length; ++i) {
+			const url = pages[i].url
 			if (url.endsWith("/" + pageName)) {
 				_currentIndex = i
 				return true
@@ -33,15 +33,15 @@ FocusScope {
 		if (index === _currentIndex) {
 			return
 		}
-		if (index < 0 || index >= model.count) {
-			console.warn("setCurrentIndex(): invalid index", index, "nav bar count is:", model.count)
+		if (index < 0 || index >= pages.length) {
+			console.warn("setCurrentIndex(): invalid index", index, "nav bar count is:", pages.length)
 			return
 		}
 		_currentIndex = index
 	}
 
 	function getCurrentPage() {
-		const url = model.get(currentIndex).url
+		const url = pages[currentIndex]?.url ?? ""
 		return url.substring(url.lastIndexOf("/") + 1)
 	}
 
@@ -63,26 +63,22 @@ FocusScope {
 		Repeater {
 			id: buttonRepeater
 
-			// The model for this repeater is a 'visual' model (i.e. an ObjectModel), and is used as the model for the SwipeView in MainView.qml.
-			// If you use an ObjectModel as the model for more than 1 view, the Items in the ObjectModel only appear in 1 of the views.
-			// To work around this shortcoming, we have to use 'root.model.count' instead of 'root.model' as the Repeater model,
-			// and other awkward syntax to access model properties.
-			model: root.model ? root.model.count : null
+			model: root.pages.length
 			delegate: NavButton {
-				id: navButton
+				required property int index
+				readonly property SwipeViewPage pageData: root.pages[index]
 
-				readonly property var _modelData: root.model.get(index)
 				anchors.verticalCenter: parent.verticalCenter
 				height: Theme.geometry_navigationBar_button_height
 				width: buttonRow.width / buttonRepeater.count
-				text: _modelData.navButtonText
-				icon.source: _modelData.navButtonIcon
-				checked: root.currentIndex === model.index
+				text: pageData.title
+				icon.source: pageData.iconSource
+				checked: root.currentIndex === index
 				backgroundColor: "transparent"
-				focus: model.index === root.currentIndex
-				onClicked: root._currentIndex = model.index
+				focus: index === root.currentIndex
+				onClicked: root._currentIndex = index
 
-				KeyNavigation.right: buttonRepeater.itemAt((model.index + 1) % buttonRepeater.count)
+				KeyNavigation.right: buttonRepeater.itemAt((index + 1) % buttonRepeater.count)
 
 				Loader {
 					z: 1 // to get it on top of the IconLabel
@@ -95,7 +91,7 @@ FocusScope {
 					sourceComponent: NotificationCounter {
 						count: Global.notifications?.unacknowledgedCount ?? 0
 					}
-					active: navButton._modelData.url.endsWith("NotificationsPage.qml")
+					active: pageData.url.endsWith("NotificationsPage.qml")
 							&& (Global.notifications?.navBarNotificationCounterVisible ?? false)
 				}
 			}

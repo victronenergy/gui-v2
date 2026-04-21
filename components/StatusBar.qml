@@ -172,12 +172,7 @@ FocusScope {
 		visible: count >= 2
 		enabled: visible // don't receive focus when invisble
 		focus: false // don't give status bar initial focus to the breadcrumbs
-
-		getText: function(index) {
-			return index === 0
-					? Global.mainView.navBar.activeButtonText // eg: "Settings"
-					: pageStack.get(index - 1).title // eg: "Device list"
-		}
+		pageStack: root.pageStack
 
 		onClicked: function(index) {
 			const isTopBreadcrumb = index === breadcrumbs.count - 1
