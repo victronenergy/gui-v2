@@ -47,6 +47,7 @@ public:
 		ProductId_Genset_Cre = 0xB048,
 		ProductId_Genset_Deif = 0xB049,
 		ProductId_Genset_Cummins = 0xB04A,
+		ProductId_Genset_Datakom = 0xB04B,
 		ProductId_Genset_VirtualAc = 0xC06B,
 		ProductId_Genset_VirtualDc = 0xC06D,
 	};
@@ -74,6 +75,7 @@ public:
 		case ProductId_Genset_Cre:
 		case ProductId_Genset_Deif:
 		case ProductId_Genset_Cummins:
+		case ProductId_Genset_Datakom:
 		case ProductId_Genset_VirtualAc:
 		case ProductId_Genset_VirtualDc:
 			return true;
