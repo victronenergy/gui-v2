@@ -84,6 +84,7 @@ Q_SIGNALS:
 	void pluginsChanged();
 
 private:
+	void timeoutMqttPluginPaths();
 	void triggerWatchMqttPluginPaths();
 	void watchMqttPluginPaths();
 	void watchPluginDirs(const QString &appsDir);
@@ -103,6 +104,7 @@ private:
 	QMap<QString, QStringList> m_pluginDirData;
 	QVector<GuiPluginMqttFetcher*> m_mqttFetchers;
 	QTimer m_invokeOnceTimer;
+	QTimer m_timeoutTimer;
 	bool m_busy = true;
 };
 

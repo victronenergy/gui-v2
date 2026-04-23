@@ -105,7 +105,7 @@ GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *, QJSEngine *)
 }
 
 GuiPluginLoader::GuiPluginLoader(QObject *parent)
-	: QObject(parent), m_invokeOnceTimer(this)
+	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this)
 {
 	Language *languageSingleton = Language::create();
 	connect(languageSingleton, &Language::currentLanguageChanged,
@@ -132,9 +132,22 @@ GuiPluginLoader::GuiPluginLoader(QObject *parent)
 	m_invokeOnceTimer.setSingleShot(true);
 	m_invokeOnceTimer.setInterval(100); // file operations are asynchronous, so give some leeway.
 	if (loadFromMqtt) {
+		// Allow some time to receive plugin metadata from the broker.
+		// If the broker does not publish GuiCustomizations topics
+		// within that time, we assume that it is an older broker
+		// which does not support gui plugins on MQTT.
+		m_timeoutTimer.setSingleShot(true);
+		m_timeoutTimer.setInterval(15000);
+		connect(&m_timeoutTimer, &QTimer::timeout, this, &GuiPluginLoader::timeoutMqttPluginPaths);
+		m_timeoutTimer.start();
+
 		// Set up MQTT watchers on the gui plugins path,
 		// and read plugin data from those MQTT paths (if they exist).
 		connect(&m_invokeOnceTimer, &QTimer::timeout, this, &GuiPluginLoader::watchMqttPluginPaths);
+		BackendConnection *backend = BackendConnection::create();
+		connect(backend, &BackendConnection::stateChanged,
+				this, &GuiPluginLoader::triggerWatchMqttPluginPaths,
+				Qt::UniqueConnection);
 		watchMqttPluginPaths();
 		return;
 	}
@@ -197,6 +210,13 @@ GuiPlugin GuiPluginLoader::plugin(const QString &name) const
 	return GuiPlugin();
 }
 
+void GuiPluginLoader::timeoutMqttPluginPaths()
+{
+	qCInfo(venusGui) << "timeout: backend not ready, cannot load gui plugins";
+	m_invokeOnceTimer.stop();
+	initPlugins();
+}
+
 void GuiPluginLoader::triggerWatchMqttPluginPaths()
 {
 	// coalesce signals in case multiple filesystem changes are recognised and published to MQTT in short succession.
@@ -205,41 +225,37 @@ void GuiPluginLoader::triggerWatchMqttPluginPaths()
 
 void GuiPluginLoader::watchMqttPluginPaths()
 {
-	if (BackendConnection::create()->type() == BackendConnection::UnknownSource) {
-		connect(BackendConnection::create(), &BackendConnection::typeChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+	BackendConnection *backend = BackendConnection::create();
+	if (backend->state() != BackendConnection::Ready) {
 		return;
 	}
-	disconnect(BackendConnection::create(), &BackendConnection::typeChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
 
-	if (BackendConnection::create()->type() != BackendConnection::MqttSource) {
+	// If the backend is ready, it should have published the GuiCustomizations topic.
+	m_timeoutTimer.stop();
+
+	if (backend->type() != BackendConnection::MqttSource) {
 		// only load gui plugins from MQTT, not DBus (on CerboGX we load directly from filesystem).
 		// immediately initPlugins() to transition to busy=false.
+		qCInfo(venusGui) << "backend not connected to MQTT.";
 		initPlugins();
 		return;
 	}
 
-	VeQItemProducer *producer = BackendConnection::create()->producer();
-	if (!producer) {
-		connect(BackendConnection::create(), &BackendConnection::producerChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
-		return;
-	}
-	disconnect(BackendConnection::create(), &BackendConnection::producerChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
-
-	VeQItem *servicesRoot = producer->services();
-	Q_ASSERT(servicesRoot);
-	VeQItem *guiCustomizations = servicesRoot->itemChildren().value(QStringLiteral("GuiCustomizations"));
+	VeQItem *guiCustomizations = backend->producer() && backend->producer()->services()
+			? backend->producer()->services()->itemChildren().value(QStringLiteral("GuiCustomizations"))
+			: nullptr;
 	if (!guiCustomizations) {
-		connect(servicesRoot, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		qCInfo(venusGui) << "No gui plugins metadata available from MQTT.";
+		initPlugins(); // no plugins to init, but transition to busy=false state.
 		return;
 	}
-	disconnect(servicesRoot, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
 
 	VeQItem *enabledCustomisationsItem = guiCustomizations->itemChildren().value(QStringLiteral("Applist"));
 	if (!enabledCustomisationsItem) {
-		connect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		qCInfo(venusGui) << "No gui plugins list available from MQTT.";
+		initPlugins(); // no plugins to init, but transition to busy=false state.
 		return;
 	}
-	disconnect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
 
 	connect(enabledCustomisationsItem, &VeQItem::valueChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
 	const QStringList enabledCustomisations = enabledCustomisationsItem->getValue().toStringList();
@@ -251,11 +267,12 @@ void GuiPluginLoader::watchMqttPluginPaths()
 
 	VeQItem *apps = guiCustomizations->itemChildren().value(QStringLiteral("Apps"));
 	if (!apps) {
-		connect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		qCInfo(venusGui) << "No enabled gui plugin data available from MQTT.";
+		initPlugins(); // no plugins to init, but transition to busy=false state.
 		return;
 	}
-	disconnect(guiCustomizations, &VeQItem::childAdded, this, &GuiPluginLoader::triggerWatchMqttPluginPaths);
 
+	// fetch each individual plugin.
 	qDeleteAll(m_mqttFetchers);
 	m_mqttFetchers.clear();
 	m_pluginDirData.clear();
