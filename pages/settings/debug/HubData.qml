@@ -23,16 +23,19 @@ Page {
 	ObjectAcConnection {
 		id: _pvOnAcOut
 		bindPrefix: Global.system.serviceUid + "/Ac/PvOnOutput"
+		updateOnLoad: true
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn1
 		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGenset"
+		updateOnLoad: true
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn2
 		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGrid"
+		updateOnLoad: true
 	}
 
 	/*
@@ -55,5 +58,6 @@ Page {
 		splitPhaseL2PassthruDisabled: _splitPhaseL2Passthru.value === 0
 		isAcOutput: true
 		bindPrefix: Global.system.serviceUid + "/Ac/Consumption"
+		updateOnLoad: true
 	}
 }

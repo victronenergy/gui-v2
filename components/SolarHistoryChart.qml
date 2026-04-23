@@ -16,6 +16,13 @@ FocusScope {
 	property real _maxTickValue: 1
 	property int _tickCount: 5
 
+	function openHistoryForDay(dayIndex) {
+		const barItem = barRepeater.itemAt(dayIndex)
+		if (barItem) {
+			barItem.openHistoryDialog()
+		}
+	}
+
 	function _numberOfDigits(n) {
 		if (n < 1) {
 			return 0

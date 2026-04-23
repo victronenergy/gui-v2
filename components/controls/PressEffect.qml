@@ -6,11 +6,17 @@
 import QtQuick
 import Victron.VenusOS
 import Victron.VenusOS.Shaders
+import Victron.UiTest
 
 BasePressEffect {
 	id: shaderEffect
 
 	function start(x, y) {
+		if (UiTest.status === UiTest.Running) {
+			// Press effects interfere with UI test image capture comparisons, so disable them.
+			return
+		}
+
 		shaderEffect.touchPos = Qt.point(x, y)
 		releaseEffect.stop()
 		pressEffect.start()
@@ -18,6 +24,10 @@ BasePressEffect {
 	}
 
 	function stop() {
+		if (UiTest.status === UiTest.Running) {
+			return
+		}
+
 		if (!pressEffect.running) {
 			releaseEffect.start()
 		} else {

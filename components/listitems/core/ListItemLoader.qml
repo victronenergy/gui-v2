@@ -9,7 +9,7 @@ import Victron.VenusOS
 /*
 	A convenience base type for loaders of list items, with key navigation support.
 
-	See BaseListItem for information regarding preferredVisible and effectiveVisible.
+	See AbstractListItem for information regarding preferredVisible and effectiveVisible.
 */
 Loader {
 	property bool preferredVisible: active

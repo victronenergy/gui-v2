@@ -76,6 +76,8 @@ public:
 	QString currentTime() const;
 	QString currentDateTimeUtc() const;
 
+	void setUpdatesActive(bool active);
+
 	Q_INVOKABLE QString formatTime(int hour, int minute) const; // as hh:mm
 	Q_INVOKABLE QString formatDeltaDate(qint64 secondsDelta, const QString &format) const; // negative is in the past
 	Q_INVOKABLE qint64 otherClockTime(int year, int month, int day, int hour, int minute) const;
@@ -109,6 +111,7 @@ private:
 	QString m_systemTimeZone;
 	int m_timerInterval = 0;
 	int m_timerId = 0;
+	bool m_updatesActive = true;
 };
 
 } /* VenusOS */

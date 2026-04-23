@@ -67,6 +67,7 @@ Page {
 				iconColor: Theme.color_ok
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				preferredVisible: _canEditPoints && pointsListView.count < 10
+				hasSubMenu: false
 				onClicked: {
 					Global.dialogLayer.open(editPointDialogComponent, {
 						"sensorLevel": 1,

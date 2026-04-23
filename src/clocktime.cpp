@@ -132,6 +132,11 @@ QString ClockTime::currentDateTimeUtc() const
 	return m_dateTime.toUTC().toString("yyyy-MM-dd hh:mm");
 }
 
+void ClockTime::setUpdatesActive(bool active)
+{
+	m_updatesActive = active;
+}
+
 QString ClockTime::formatTime(int hour, int minute) const
 {
 	QTime t(hour, minute);
@@ -208,6 +213,9 @@ void ClockTime::scheduleNextTimeCheck(int interval)
 {
 	if (m_timerId > 0) {
 		killTimer(m_timerId);
+	}
+	if (!m_updatesActive) {
+		return;
 	}
 	m_timerInterval = interval;
 	m_timerId = startTimer(interval);

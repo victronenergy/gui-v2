@@ -62,6 +62,7 @@ Page {
 			text: qsTrId("page_settings_fronius_modbus_location_number").arg(locationNumber)
 			iconSource: "qrc:/images/icon_minus_32.svg"
 			iconColor: Theme.color_ok
+			hasSubMenu: false
 			quantityModel: QuantityObjectModel {
 				QuantityObject { object: locationDelegate; key: "portNumber"; unit: VenusOS.Units_None }
 				QuantityObject { object: locationDelegate; key: "unitAddress"; unit: VenusOS.Units_None }

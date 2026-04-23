@@ -41,6 +41,7 @@ GradientListView {
 		iconSource: "qrc:/images/icon_plus_32.svg"
 		iconColor: Theme.color_ok
 		showAccessLevel: root.writeAccessLevel
+		hasSubMenu: false
 		onClicked: {
 			root._addOrUpdateAddress("192.168.1.1")
 		}
