@@ -22,6 +22,7 @@ Page {
 			iconSource: "qrc:/images/icon_refresh_32.svg"
 			iconColor: Theme.color_ok
 			showAccessLevel: VenusOS.User_AccessType_Installer
+			hasSubMenu: false
 			onClicked: {
 				settingsListView.clearAddresses()
 				scanItem.setValue(1)

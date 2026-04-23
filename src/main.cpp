@@ -9,6 +9,7 @@
 #include "src/guiplugins.h"
 #include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
+#include "src/uitest.h"
 #include "src/frameratemodel.h"
 #include "src/screenblanker.h"
 
@@ -187,6 +188,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(mockConfig);
 	optionList << mockConfig;
 
+	QCommandLineOption uiTest({ "uit", "ui-test" },
+		QGuiApplication::tr("Name of UI test"),
+		QGuiApplication::tr("uiTest", "UI test name"));
+	parser.addOption(uiTest);
+	optionList << uiTest;
+
 	QCommandLineOption noMockTimers("no-mock-timers",
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
@@ -293,9 +300,11 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(parser.value(mqttPortalId)));
 	} else if (parser.isSet(mockMode)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
-		const QString configName = parser.value(mockConfig);
-		Victron::VenusOS::MockManager::create()->setTimersActive(!parser.isSet(noMockTimers));
-		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
+		if (parser.isSet(noMockTimers)) {
+			Victron::VenusOS::MockManager::create()->setTimersActive(false);
+		}
+		// Do not load the mock configuration until ui-test has been parsed, as the UI test config
+		// may specify a mock configuration.
 	} else {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 		backend->setUsername(queryMqttUser);
@@ -320,6 +329,20 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		const QString address = parser.isSet(dbusDefault) ? QStringLiteral("tcp:host=localhost,port=3000") : parser.value(dbusAddress);
 		backend->setType(Victron::VenusOS::BackendConnection::DBusSource, address);
 #endif
+	}
+
+	// Load the --ui-test option, if specified.
+	const QString uiTestConf = parser.value(uiTest);
+	if (!uiTestConf.isEmpty()) {
+		Victron::VenusOS::UiTest::create()->loadConfiguration(uiTestConf);
+	}
+
+	// Load a mock configuration for mock mode, if --ui-test option was not set (since tests will
+	// specify their own mock configurations, if running in mock mode).
+	if (Victron::VenusOS::BackendConnection::create()->type() == Victron::VenusOS::BackendConnection::MockSource
+			&& Victron::VenusOS::UiTest::create()->testCaseCount() == 0) {
+		const QString configName = parser.value(mockConfig);
+		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
 	}
 
 	if (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable"))) {

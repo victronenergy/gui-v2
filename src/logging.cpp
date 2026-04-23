@@ -6,4 +6,5 @@
 #include "logging.h"
 
 Q_LOGGING_CATEGORY(venusGui, "venus.gui")
+Q_LOGGING_CATEGORY(venusGuiTest, "venus.gui.test", QtInfoMsg)
 

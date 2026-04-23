@@ -27,6 +27,7 @@ Page {
 				iconSource: "qrc:/images/icon_plus_32.svg"
 				iconColor: Theme.color_ok
 				showAccessLevel: VenusOS.User_AccessType_Installer
+				hasSubMenu: false
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", { devices: _devices } )
 			}
 
@@ -64,6 +65,7 @@ Page {
 			text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
 			iconSource: "qrc:/images/icon_minus_32.svg"
 			iconColor: Theme.color_ok
+			hasSubMenu: false
 			quantityModel: QuantityObjectModel {
 				QuantityObject { object: modbusDeviceDelegate; key: "addressText"; unit: VenusOS.Units_None }
 				QuantityObject { object: modbusDeviceDelegate; key: "portNumber"; unit: VenusOS.Units_None }
