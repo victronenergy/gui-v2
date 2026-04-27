@@ -183,11 +183,11 @@ Rectangle {
 		id: loadingProgress
 
 		anchors {
-			bottom: parent.bottom
-			bottomMargin: Theme.geometry_splashView_progressBar_bottomMargin
+			verticalCenter: parent.verticalCenter
+			verticalCenterOffset: Theme.geometry_splashView_progressBar_verticalCenterOffset
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Theme.geometry_splashView_progressBar_width
+		width: Math.min(Theme.geometry_splashView_progressBar_width, parent.width - 2 * Theme.geometry_page_content_horizontalMargin)
 		indeterminate: visible && BackendConnection.state !== BackendConnection.Failed
 		opacity: 1.0
 		Behavior on opacity {
