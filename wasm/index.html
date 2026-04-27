@@ -198,10 +198,10 @@
       <div id="wrapper-inner">
         <figure id="qtspinner">
           <svg width="100%" height="100%" viewBox="0 0 1024 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <image id="logo-dark" xlink:href="victronenergy.svg" x="367" y="247" width="285.2" height="56"/>
-            <image id="logo-light" style="visibility: hidden" xlink:href="victronenergy-light.svg" x="367" y="247" width="285.2" height="56"/>
-            <text fill="#969591" xml:space="preserve" style="white-space: pre" font-family="'Roboto', sans-serif" font-size="18" letter-spacing="0em">
-              <tspan x="425.438" y="386.152" id="loading-bar-text">Downloading...</tspan>
+            <image id="logo-dark" xlink:href="victronenergy.svg" x="368" y="248" width="284" height="55"/>
+            <image id="logo-light" style="visibility: hidden" xlink:href="victronenergy-light.svg" x="368" y="248" width="284" height="55"/>
+            <text fill="#969591" xml:space="preserve" style="white-space: pre" font-family="'Roboto', sans-serif" font-size="18" letter-spacing="0em" text-anchor="middle">
+              <tspan x="512" y="385" id="loading-bar-text">Downloading...</tspan>
             </text>
             <rect id="loading-bar-container" x="280" y="348" width="464" height="8" rx="4" fill="#387DC5" fill-opacity="0.3"/>
             <rect id="loading-bar" x="280" y="348" width="0" height="8" rx="4" fill="#387DC5"/>
@@ -264,6 +264,44 @@
                 if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
             }
             return null;
+        }
+
+        class PreloadWasmError extends Error {
+            constructor(message) {
+                super(message);
+                this.name = "PreloadWasmError";
+            }
+        }
+
+        function showLoadError(e, title) {
+            const wrapper_inner = document.querySelector('#wrapper-inner');
+            wrapper_inner.innerHTML = `
+                <div style="color: red; font-size: 20px; margin: 20px 25px 0;">
+                  <b>${title}</b><br><br>
+                  <b>URL:</b> <i>${window.location.href}</i><br>
+                  <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
+                  <b>${e.name}:</b> <i>${e.message}</i><br>
+                  <b>Stack:</b> <i>${e.stack}</i>
+                </div>`;
+
+            if ((
+                e.message.toLowerCase().includes('network')
+                || e.message.toLowerCase().includes('error in input stream')
+            ) && !window.location.search.includes('download=vrm')) {
+                const params = new URLSearchParams(window.location.search);
+                params.set('download', 'vrm');
+                const link = `${window.location.pathname}?${params.toString()}`;
+                wrapper_inner.innerHTML += `
+                    <div style="margin: 20px 50px 0;">
+                      It looks like the network connection is too slow or unstable to download the UI.<br><br>
+                      <a href="${link}">Click here</a> to try downloading the UI web application from the VRM servers on the internet,
+                      instead from the GX device. The data connection will still be direct to the GX device: no connection between the VRM Portal
+                      and the GX device is required.<br>
+                      <br>
+                      This split-method (download UI from internet & direct data connection) is for systems with a limited network connection
+                      between the GX device and the internet. For example a GX device with a GSM connection and a client connected over VPN.
+                    </div>`;
+            }
         }
 
         async function preloadWasm(url, onProgress) {
@@ -332,52 +370,80 @@
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
-                // Show error message in wrapper_inner
-                const wrapper_inner = document.querySelector('#wrapper-inner');
-                wrapper_inner.innerHTML = `
-                    <div style="color: red; font-size: 20px; margin: 20px 25px 0;">
-                      <b>Error pre-loading application!</b><br><br>
-                      <b>URL:</b> <i>${window.location.href}</i><br>
-                      <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
-                      <b>${e.name}:</b> <i>${e.message}</i><br>
-                      <b>Stack:</b> <i>${e.stack}</i>
-                    </div>`;
-
-                // show button to reload the page and try downloading from VRM server
-                if ((
-                    e.message.toLowerCase().includes('network')
-                    || e.message.toLowerCase().includes('error in input stream')
-                ) && !window.location.search.includes('download=vrm')) {
-                    const params = new URLSearchParams(window.location.search);
-                    params.set('download', 'vrm');
-                    const link = `${window.location.pathname}?${params.toString()}`;
-                    wrapper_inner.innerHTML += `
-                        <div style="margin: 20px 50px 0;">
-                          It looks like the network connection is too slow or unstable to download the UI.<br><br>
-                          <a href="${link}">Click here</a> to try downloading the UI web application from the VRM servers on the internet,
-                          instead from the GX device. The data connection will still be direct to the GX device: no connection between the VRM Portal
-                          and the GX device is required.<br>
-                          <br>
-                          This split-method (download UI from internet & direct data connection) is for systems with a limited network connection
-                          between the GX device and the internet. For example a GX device with a GSM connection and a client connected over VPN.
-                        </div>`;
-                }
-
-                class PreloadWasmError extends Error {
-                    constructor(message) {
-                        super(message);
-                        this.name = "PreloadWasmError";
-                    }
-                }
+                showLoadError(e, 'Error pre-loading application!');
                 throw new PreloadWasmError(e);
             }
+        }
+
+        // Reposition the spinner SVG elements to match the QML SplashView layout.
+        // In portrait the elements are anchored to the screen centre with offsets
+        // (matching Portrait.json geometry values). In landscape the values match
+        // SevenInch.json geometry on a 1024x600 coordinate space.
+        function applySpinnerLayout() {
+            const wrapper = document.querySelector('#wrapper-inner');
+            const { width: w, height: h } = wrapper.getBoundingClientRect();
+            const svg = document.querySelector('#qtspinner svg');
+
+            if (h <= w) {
+                // Landscape: SevenInch.json geometry values (viewBox matches 1024x600 screen)
+                //   geometry_splashView_logo_verticalCenterOffset:       -25  → y = 300-25-55/2 = 248
+                //   geometry_splashView_logo_horizontalCenterOffset:      -2  → x = 512-2-284/2 = 368
+                //   geometry_splashView_progressBar_verticalCenterOffset: +52 → y = 300+52-8/2 = 348
+                svg.setAttribute('viewBox', '0 0 1024 600');
+                [['logo-dark', 368, 248, 284, 55],
+                 ['logo-light', 368, 248, 284, 55]].forEach(([id, x, y, lw, lh]) => {
+                    const el = document.getElementById(id);
+                    el.setAttribute('x', x); el.setAttribute('y', y);
+                    el.setAttribute('width', lw); el.setAttribute('height', lh);
+                });
+                ['loading-bar-container', 'loading-bar'].forEach(id => {
+                    const el = document.getElementById(id);
+                    el.setAttribute('x', 280); el.setAttribute('y', 348); el.setAttribute('height', 8);
+                });
+                document.getElementById('loading-bar-container').setAttribute('width', 464);
+                const textEl = document.querySelector('#qtspinner svg text');
+                textEl.setAttribute('text-anchor', 'middle');
+                const tspan = document.getElementById('loading-bar-text');
+                tspan.setAttribute('x', 512); tspan.setAttribute('y', 385);
+                return;
+            }
+
+            // Portrait: position elements matching QML Portrait.json geometry values:
+            //   geometry_splashView_logo_verticalCenterOffset:       -25
+            //   geometry_splashView_logo_horizontalCenterOffset:      -2
+            //   geometry_splashView_progressBar_verticalCenterOffset: +50
+            svg.setAttribute('viewBox', `0 0 ${Math.round(w)} ${Math.round(h)}`);
+            const cx = w / 2, cy = h / 2;
+            const logoW = 284, logoH = 55;
+            const barW = Math.min(464, w - 32), barH = 8;
+
+            ['logo-dark', 'logo-light'].forEach(id => {
+                const el = document.getElementById(id);
+                el.setAttribute('x', Math.round(cx - logoW / 2 - 2));
+                el.setAttribute('y', Math.round(cy - 25 - logoH / 2));
+                el.setAttribute('width', logoW); el.setAttribute('height', logoH);
+            });
+
+            const barX = Math.round(cx - barW / 2);
+            const barY = Math.round(cy + 50 - barH / 2);
+            ['loading-bar-container', 'loading-bar'].forEach(id => {
+                const el = document.getElementById(id);
+                el.setAttribute('x', barX); el.setAttribute('y', barY); el.setAttribute('height', barH);
+            });
+            document.getElementById('loading-bar-container').setAttribute('width', barW);
+
+            // Text: geometry_splashView_progressText_topMargin (12) + cap-height (~13)
+            const textEl = document.querySelector('#qtspinner svg text');
+            textEl.setAttribute('text-anchor', 'middle');
+            const tspan = document.getElementById('loading-bar-text');
+            tspan.setAttribute('x', Math.round(cx));
+            tspan.setAttribute('y', Math.round(barY + barH + 29));
         }
 
         async function init()
         {
             const spinner = document.querySelector('#qtspinner');
             const screen = document.querySelector('#screen');
-            const status = document.querySelector('#qtstatus');
             const mockup = document.querySelector('#mockup');
             const wrapper_inner = document.querySelector('#wrapper-inner');
             const loadingBarContainer = document.getElementById('loading-bar-container');
@@ -399,28 +465,44 @@
             const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
 
             // Options to change display size and border
-            // Force fullscreen
-            if (searchParams.has("fullscreen") || (!searchParams.has("default") && !searchParams.has("nomock") && !searchParams.has("mock") && getCookie('venus-gui-v2-css-display') === 'fullscreen')) {
-                wrapper_inner.style.maxWidth = '100%';
-                wrapper_inner.style.height = '100%';
-                mockup.style.visibility = 'hidden';
-                mockup.style.display = 'none';
-                // Save display mode in cookie
-                setCookie('venus-gui-v2-css-display', 'fullscreen', 365);
-            // Force mockup hide
-            } else if (searchParams.has("nomock") || (!searchParams.has("default") && !searchParams.has("mock") && getCookie('venus-gui-v2-css-display') === 'nomock')) {
-                mockup.style.visibility = 'hidden';
-                wrapper_inner.style.outline = 'none';
-                setCookie('venus-gui-v2-css-display', 'nomock', 365);
-            // Force mockup show
-            } else if (searchParams.has("mock") || (!searchParams.has("default") && getCookie('venus-gui-v2-css-display') === 'mock')) {
-                mockup.style.visibility = 'visible';
-                mockup.style.display = 'block';
-                setCookie('venus-gui-v2-css-display', 'mock', 365);
-            } else if (searchParams.has("default")) {
-                // Default display mode, do nothing
-                setCookie('venus-gui-v2-css-display', 'default', 0);
+            const displayModes = ['default', 'fullscreen', 'portrait', 'nomock', 'mock'];
+            const displayMode = displayModes.find(m => searchParams.has(m)) || getCookie('venus-gui-v2-css-display');
+
+            switch (displayMode) {
+                case 'default':
+                    setCookie('venus-gui-v2-css-display', 'default', 0);
+                    break;
+                case 'fullscreen':
+                    wrapper_inner.style.maxWidth = '100%';
+                    wrapper_inner.style.height = '100%';
+                    mockup.style.visibility = 'hidden';
+                    mockup.style.display = 'none';
+                    setCookie('venus-gui-v2-css-display', 'fullscreen', 365);
+                    break;
+                case 'portrait':
+                    wrapper_inner.style.width = '100%';
+                    wrapper_inner.style.height = '100%';
+                    wrapper_inner.style.maxWidth = '100%';
+                    wrapper_inner.style.maxHeight = '100%';
+                    wrapper_inner.style.aspectRatio = 'unset';
+                    mockup.style.visibility = 'hidden';
+                    mockup.style.display = 'none';
+                    setCookie('venus-gui-v2-css-display', 'portrait', 365);
+                    break;
+                case 'nomock':
+                    mockup.style.visibility = 'hidden';
+                    wrapper_inner.style.outline = 'none';
+                    setCookie('venus-gui-v2-css-display', 'nomock', 365);
+                    break;
+                case 'mock':
+                    mockup.style.visibility = 'visible';
+                    mockup.style.display = 'block';
+                    setCookie('venus-gui-v2-css-display', 'mock', 365);
+                    break;
             }
+
+            applySpinnerLayout();
+            window.addEventListener('resize', applySpinnerLayout);
 
             try {
                 showUi(spinner);
@@ -437,13 +519,13 @@
                         loadingBarText.textContent = `Downloading... ${percent}%`;
                     // If total is unknown, show the received size in MB
                     } else {
-                        loadingBar.width.baseVal.value = '100%';
+                        loadingBar.width.baseVal.value = loadingBarContainer.width.baseVal.value;
                         loadingBarText.textContent =
                             `Downloading... ${(received/(1024*1024)).toFixed(2)} MB`;
                     }
                 });
 
-                // loadingBar.style.width = '100%';
+                loadingBar.width.baseVal.value = loadingBarContainer.width.baseVal.value;
                 loadingBarText.textContent = 'Loading application...';
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
@@ -460,11 +542,10 @@
                         onLoaded: () => showUi(screen),
                         onExit: exitData =>
                         {
-                            status.innerHTML = 'Application exit';
-                            status.innerHTML +=
-                                exitData.code !== undefined ? ` with code ${exitData.code}` : '';
-                            status.innerHTML +=
-                                exitData.text !== undefined ? ` (${exitData.text})` : '';
+                            let exitMsg = 'Application exit';
+                            if (exitData.code !== undefined) exitMsg += ` with code ${exitData.code}`;
+                            if (exitData.text !== undefined) exitMsg += ` (${exitData.text})`;
+                            loadingBarText.textContent = exitMsg;
                             showUi(spinner);
                         },
                         entryFunction: window.venus_gui_v2_entry, // 'venus_gui_v2_entry' comes from CI, see https://github.com/victronenergy/gui-v2/blob/main/.github/workflows/build-wasm.yml#L113
@@ -474,39 +555,11 @@
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
-                // Show error message in wrapper_inner
                 if (e instanceof PreloadWasmError) {
-                    // If the error is from preloadWasm, we already showed the error
+                    // preloadWasm already showed the error
                     console.warn("PreloadWasmError caught, no need to show again");
                 } else {
-                    wrapper_inner.innerHTML = `
-                        <div style="color: red; font-size: 20px; margin: 20px 25px 0;">
-                          <b>Error loading application!</b><br><br>
-                          <b>URL:</b> <i>${window.location.href}</i><br>
-                          <b>User Agent:</b> <i>${navigator.userAgent}</i><br>
-                          <b>${e.name}:</b> <i>${e.message}</i><br>
-                          <b>Stack:</b> <i>${e.stack}</i>
-                        </div>`;
-
-                    // show button to reload the page and try downloading from VRM server
-                    if ((
-                        e.message.toLowerCase().includes('network')
-                        || e.message.toLowerCase().includes('error in input stream')
-                    ) && !window.location.search.includes('download=vrm')) {
-                        const params = new URLSearchParams(window.location.search);
-                        params.set('download', 'vrm');
-                        const link = `${window.location.pathname}?${params.toString()}`;
-                        wrapper_inner.innerHTML += `
-                            <div style="margin: 20px 50px 0;">
-                              It looks like the network connection is too slow or unstable to download the UI.<br><br>
-                              <a href="${link}">Click here</a> to try downloading the UI web application from the VRM servers on the internet,
-                              instead from the GX device. The data connection will still be direct to the GX device: no connection between the VRM Portal
-                              and the GX device is required.<br>
-                              <br>
-                              This split-method (download UI from internet & direct data connection) is for systems with a limited network connection
-                              between the GX device and the internet. For example a GX device with a GSM connection and a client connected over VPN.
-                            </div>`;
-                    }
+                    showLoadError(e, 'Error loading application!');
                 }
             }
         }
