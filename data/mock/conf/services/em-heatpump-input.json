@@ -33,6 +33,12 @@
         "/ProductId": 45058,
         "/ProductName": "Heat pump",
         "/RefreshTime": 600,
-        "/Role": "heatpump"
+        "/Role": "heatpump",
+        "/SwitchableOutput/output_0/Auto": 1,
+        "/SwitchableOutput/output_0/Name": "Heat pump 3-state switch",
+        "/SwitchableOutput/output_0/Settings/Type": 9,
+        "/SwitchableOutput/output_0/Settings/ValidTypes": 16383,
+        "/SwitchableOutput/output_0/State": 0,
+        "/SwitchableOutput/output_0/Status": 9
     }
 }
