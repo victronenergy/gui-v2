@@ -88,9 +88,7 @@ ListQuantityGroupNavigation {
 				if (output.status === VenusOS.SwitchableOutput_Status_On) {
 					const stateText = CommonWords.onOrOff(output.state)
 					if (autoItem.value === 1) {
-						//: %1 = 'On' or 'Off'
-						//% "Auto (%1)"
-						return qsTrId("switchableoutput_list_delegate_auto_status").arg(stateText)
+						return CommonWords.autoStatus(stateText)
 					} else {
 						return stateText
 					}

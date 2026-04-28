@@ -628,6 +628,12 @@ QtObject {
 		return qsTrId("common_words_ac_input_number").arg(number)
 	}
 
+	function autoStatus(stateText) {
+		//: %1 = status such as 'On' or 'Off'
+		//% "Auto (%1)"
+		return qsTrId("common_words_auto_status").arg(stateText)
+	}
+
 	function onOrOff(value) {
 		if (value === 0 || value === false) {
 			return off
