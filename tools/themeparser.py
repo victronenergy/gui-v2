@@ -141,13 +141,20 @@ class ThemeProperty:
         if self.json_info.enum_type == 'ScreenSize':
             try:
                 five_inch_value = self.values['FiveInch']
+            except KeyError:
+                raise ValueError('JSON missing 5" value for property "{}"'.format(self.name))
+            try:
                 seven_inch_value = self.values['SevenInch']
             except KeyError:
-                raise ValueError('JSON missing 5" or 7" value for property "{}"'.format(self.name))
-            if five_inch_value == seven_inch_value:
+                raise ValueError('JSON missing 7" value for property "{}"'.format(self.name))
+            try:
+                portrait_value = self.values['Portrait']
+            except KeyError:
+                raise ValueError('JSON missing portrait value for property "{}"'.format(self.name))
+            if five_inch_value == seven_inch_value and seven_inch_value == portrait_value:
                 return self.constant_property_accessor(five_inch_value)
             else:
-                return self.conditional_property_accessor('m_screenSize == Theme::FiveInch', five_inch_value, seven_inch_value)
+                return self.conditional_property_accessor_multi('m_screenSize == Theme::FiveInch', five_inch_value, 'm_screenSize == Theme::SevenInch', seven_inch_value, portrait_value)
         elif self.json_info.enum_type == 'ColorScheme':
             try:
                 dark_rgba = self.values['Dark']
@@ -169,6 +176,12 @@ class ThemeProperty:
         return {condition} ? {value1} : {value2};
     }}'''.format(type_name=self.type_name, name=self.name, condition=condition, value1=qt_value_string(self.type_name, value1), value2=qt_value_string(self.type_name, value2)))
 
+    def conditional_property_accessor_multi(self, condition1, value1, condition2, value2, value3):
+        return spaces_to_tabs('''
+    {type_name} {name}() const {{
+        return {condition1} ? {value1} : {condition2} ? {value2} : {value3};
+    }}'''.format(type_name=self.type_name, name=self.name, condition1=condition1, condition2=condition2, value1=qt_value_string(self.type_name, value1), value2=qt_value_string(self.type_name, value2), value3=qt_value_string(self.type_name, value3)))
+
     def constant_property_accessor(self, constant_value):
         return spaces_to_tabs('''
     {type_name} {name}() const {{
@@ -179,6 +192,7 @@ class JsonFileInfo:
     theme_enums = {
         'FiveInch': 'ScreenSize',
         'SevenInch': 'ScreenSize',
+        'Portrait': 'ScreenSize',
         'Light': 'ColorScheme',
         'Dark': 'ColorScheme',
     }
