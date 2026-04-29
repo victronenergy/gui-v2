@@ -64,12 +64,15 @@ RowLayout {
 			font.pixelSize: Theme.font_size_tiny
 
 			color: {
-				// Mask the 'output on' bit so that if any error bit is set (e.g. over temperature,
+				// Mask the 'output on' bits so that if any error bit is set (e.g. over temperature,
 				// disabled) the background will be red, even if the output is on.
 				// Don't do this for Bilge Pump as they have special status handling.
 				const maskedValue = root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump
-								  ? root.switchableOutput.status
-								  : root.switchableOutput.status &~ VenusOS.SwitchableOutput_Status_On
+						? root.switchableOutput.status
+					: (((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_On) === VenusOS.SwitchableOutput_Status_On)
+							&& root.switchableOutput.status !== VenusOS.SwitchableOutput_Status_On)
+						? root.switchableOutput.status & ~VenusOS.SwitchableOutput_Status_On
+					: root.switchableOutput.status
 				switch (maskedValue) {
 				case VenusOS.SwitchableOutput_Status_Off:
 					return Theme.color_font_secondary
@@ -82,10 +85,10 @@ RowLayout {
 					return Theme.color_green
 				case VenusOS.SwitchableOutput_Status_ExternalControl:
 					return Theme.color_green
-				case VenusOS.SwitchableOutput_Status_OutputFault:
 				case VenusOS.SwitchableOutput_Status_Bypassed:
 				case VenusOS.SwitchableOutput_Status_Disabled_On:
 					return Theme.color_orange
+				case VenusOS.SwitchableOutput_Status_OutputFault:
 				case VenusOS.SwitchableOutput_Status_Tripped:
 				case VenusOS.SwitchableOutput_Status_OverTemperature:
 				case VenusOS.SwitchableOutput_Status_OverTemperature_Tripped:
@@ -105,7 +108,7 @@ RowLayout {
 				// For Bilge Pumps: a running Bilge Pump is not a normal state, so use a warning
 				// colour, unless it is a known error state, and in that case use red instead.
 				if (root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump
-						&& (root.switchableOutput.status & VenusOS.SwitchableOutput_Status_On)) {
+						&& ((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_On) === VenusOS.SwitchableOutput_Status_On)) {
 					if ((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_OverTemperature)
 						|| (root.switchableOutput.status & VenusOS.SwitchableOutput_Status_Disabled)) {
 						return Theme.color_red
