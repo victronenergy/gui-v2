@@ -28,9 +28,10 @@ FocusScope {
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
 	// when the user drags slowly between pages.
-	property bool allowPageAnimations: Global.animationEnabled
+	readonly property bool allowPageAnimations: Global.animationEnabled
 									   && mainViewVisible
 									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
+									   && !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
@@ -198,9 +199,10 @@ FocusScope {
 					id: _swipeView
 
 					property bool ready: Global.allPagesLoaded && !moving // hide this view until all pages are loaded and we have scrolled back to the brief page
-					onReadyChanged: if (ready) ready = true // remove binding
+					onReadyChanged: if (ready) Qt.callLater(function() { ready = true }) // remove binding
 
 					anchors.fill: parent
+					animationEnabled: ready && root.allowPageAnimations
 					focus: true
 					contentChildren: swipePageModel.pages
 

@@ -10,6 +10,7 @@ import Victron.VenusOS
 T.SwipeView {
 	id: control
 
+	required property bool animationEnabled
 	readonly property alias flicking: listView.flicking
 	readonly property alias dragging: listView.dragging
 	readonly property bool moving: listView.moving || scrollingTimer.running
@@ -53,8 +54,8 @@ T.SwipeView {
 		highlightRangeMode: ListView.StrictlyEnforceRange
 		preferredHighlightBegin: 0
 		preferredHighlightEnd: 0
-		highlightMoveDuration: Global.allPagesLoaded && Global.mainView && Global.mainView.allowPageAnimations ? 250 : 0 // don't animate when loading initial page, or when animations are disabled.
-		highlightMoveVelocity: Global.allPagesLoaded && Global.mainView && Global.mainView.allowPageAnimations ? 400 : -1
+		highlightMoveDuration: control.animationEnabled ? 250 : 0
+		highlightMoveVelocity: control.animationEnabled ? 400 : -1
 		maximumFlickVelocity: 4 * (control.orientation === Qt.Horizontal ? width : height)
 
 		Timer {
