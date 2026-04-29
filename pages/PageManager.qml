@@ -30,7 +30,8 @@ QtObject {
 		interval: Theme.animation_page_idleResize_timeout
 		onTriggered: {
 			Global.main.keyNavigationTimeout()
-			if (currentMainPage?.fullScreenWhenIdle) {
+			if (currentMainPage?.fullScreenWhenIdle
+					&& Theme.screenSize !== Theme.Portrait) { // Portrait mode does not have idle states
 				root.interactivity = VenusOS.PageManager_InteractionMode_EnterIdleMode
 			}
 		}
