@@ -625,4 +625,147 @@ TestCase {
 		output.uid = ""
 		MockManager.removeValue(data.uid)
 	}
+
+	function test_status_masking_data() {
+		return [
+			{
+				tag: "toggle, off",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": VenusOS.SwitchableOutput_Status_Off
+				},
+				expected: qsTrId("switchable_output_off")
+			},
+			{
+				tag: "toggle, on",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": VenusOS.SwitchableOutput_Status_On
+				},
+				expected: qsTrId("switchable_output_on")
+			},
+			{
+				tag: "toggle, on + overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": (VenusOS.SwitchableOutput_Status_On | VenusOS.SwitchableOutput_Status_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_overtemperature")
+			},
+			{
+				tag: "toggle, fault",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": VenusOS.SwitchableOutput_Status_OutputFault
+				},
+				expected: qsTrId("switchable_output_fault")
+			},
+			{
+				tag: "toggle, bypassed overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature
+				},
+				expected: qsTrId("switchable_output_bypassed_overtemperature")
+			},
+			{
+				tag: "toggle, on + bypassed overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": (VenusOS.SwitchableOutput_Status_On | VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_bypassed_overtemperature")
+			},
+			{
+				tag: "toggle, disabled + overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
+					"Status": (VenusOS.SwitchableOutput_Status_Disabled | VenusOS.SwitchableOutput_Status_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_disabled_overtemperature")
+			},
+			{
+				tag: "bilgepump, off",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": VenusOS.SwitchableOutput_Status_Off
+				},
+				expected: qsTrId("switchable_output_not_running")
+			},
+			{
+				tag: "bilgepump, on",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": VenusOS.SwitchableOutput_Status_On
+				},
+				expected: qsTrId("switchable_output_running")
+			},
+			{
+				tag: "bilgepump, on + overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": (VenusOS.SwitchableOutput_Status_On | VenusOS.SwitchableOutput_Status_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_running_over_temperature")
+			},
+			{
+				tag: "bilgepump, fault",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": VenusOS.SwitchableOutput_Status_OutputFault
+				},
+				expected: qsTrId("switchable_output_fault")
+			},
+			{
+				tag: "bilgepump, bypassed overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature
+				},
+				expected: qsTrId("switchable_output_bypassed_overtemperature")
+			},
+			{
+				tag: "bilgepump, on + bypassed overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": (VenusOS.SwitchableOutput_Status_On | VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_running_over_temperature") // should this display "Bypassed" also?
+			},
+			{
+				tag: "bilgepump, disabled + overtemp",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/0",
+				outputProperties: {
+					"Settings/Type": VenusOS.SwitchableOutput_Type_BilgePump,
+					"Status": (VenusOS.SwitchableOutput_Status_Disabled | VenusOS.SwitchableOutput_Status_OverTemperature)
+				},
+				expected: qsTrId("switchable_output_disabled_overtemperature") // should this display "Not running" also?
+			}
+		]
+	}
+
+	function test_status_masking(data) {
+		// Set test values and verify the output of switchableOutput_statusToText() is correct.
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.uid, data.uid, data.tag + " UID")
+		compare(VenusOS.switchableOutput_statusToText(output.status, output.type), data.expected, data.tag)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+	}
 }
