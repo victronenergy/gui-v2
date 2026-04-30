@@ -15,6 +15,12 @@ else
     exit 1
 fi
 
+# Detect WSL (Windows Subsystem for Linux) - clock skew on DrvFs mounts causes build failures
+if grep -qi microsoft /proc/version 2>/dev/null || [ -n "${WSL_DISTRO_NAME}" ]; then
+    IS_WSL=1
+    echo -e "\033[1;33mWSL detected: using /tmp for build files to avoid clock skew issues on DrvFs mounts\033[0m"
+fi
+
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -62,6 +68,16 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 cd "${BASE_DIR}"
 echo "Changed to parent directory: $(pwd)"
 
+# Use /tmp for build/staging directories on WSL to avoid clock skew on DrvFs mounts
+if [[ -n "${IS_WSL}" ]]; then
+    BUILD_DIR="/tmp/victronenergy/$(basename "${BASE_DIR}")/build-gx"
+    FILES_DIR="${BASE_DIR}/build-gx_files_to_copy"
+    echo "WSL detected: using ${BUILD_DIR} to avoid clock skew"
+else
+    BUILD_DIR="${BASE_DIR}/build-gx"
+    FILES_DIR="${BASE_DIR}/build-gx_files_to_copy"
+fi
+
 # Source the SDK environment
 . /opt/venus/current/environment-setup-cortexa8hf-neon-ve-linux-gnueabi
 
@@ -72,24 +88,28 @@ echo "Changed to parent directory: $(pwd)"
 git submodule update --init
 
 # Clean build directory
-if [[ -d "build-gx" && -z ${PRESERVE} ]]; then
+if [[ -d "${BUILD_DIR}" && -z ${PRESERVE} ]]; then
     echo "Cleaning build directory..."
-    rm -rf "build-gx"
+    rm -rf "${BUILD_DIR}"
 fi
 
 # Create build directory
-if [[ ! -d "build-gx" ]]; then
+if [[ ! -d "${BUILD_DIR}" ]]; then
     echo "Creating build directory..."
-    mkdir "build-gx"
+    mkdir -p "${BUILD_DIR}"
 fi
 
-cd "build-gx"
+cd "${BUILD_DIR}"
 
 
 # Configure the project with CMake, setting the build type to MinSizeRel (minimum size release)
-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+echo -e "\n\n\e[33mConfiguring project with CMake...\e[0m\n\n"
+cmake -DCMAKE_BUILD_TYPE=MinSizeRel "${BASE_DIR}"
 
+echo -e "\n\n\e[33mBuilding project with CMake...\e[0m\n\n"
 cmake --build . --parallel $(nproc)
+
+echo -e "\n\n\e[33mInstalling project with CMake...\e[0m\n\n"
 cmake --install .
 
 if [ $? -ne 0 ]; then
@@ -102,19 +122,19 @@ else
 fi
 
 
-# Make sure, current path ends with build-gx
-if [ "${PWD##*/}" = "build-gx" ]; then
-    if [ -d "../build-gx_files_to_copy" ]; then
-        rm -rf ../build-gx_files_to_copy
+# Make sure, current path is the build directory
+if [ "${PWD}" = "${BUILD_DIR}" ]; then
+    if [ -d "${FILES_DIR}" ]; then
+        rm -rf "${FILES_DIR}"
     fi
 
     # Create output directory
-    mkdir ../build-gx_files_to_copy
+    mkdir "${FILES_DIR}"
 
     # Copy the files to the output directory
-    cp -r install/bin/* ../build-gx_files_to_copy
+    cp -r install/bin/* "${FILES_DIR}"
 else
-    echo "Current directory is not build-gx. Aborting to avoid unwanted deleting of files."
+    echo "Current directory is not the build directory. Aborting to avoid unwanted deleting of files."
 fi
 
 echo "Elapsed time: ${SECONDS} seconds"
@@ -185,7 +205,7 @@ if [[ -n "${HOST_LIST}" ]]; then
         echo "Uploading files to the GX device at ${HOST}..."
 
         # Copy the files to the GX device, only output errors
-        scp -r ../build-gx_files_to_copy/* root@${HOST}:/opt/victronenergy/gui-v2/ 1>/dev/null
+        scp -r "${FILES_DIR}/"* root@${HOST}:/opt/victronenergy/gui-v2/ 1>/dev/null
         if [ $? -ne 0 ]; then
             echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
             echo

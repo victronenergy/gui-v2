@@ -15,6 +15,12 @@ else
     exit 1
 fi
 
+# Detect WSL (Windows Subsystem for Linux) - clock skew on DrvFs mounts causes build failures
+if grep -qi microsoft /proc/version 2>/dev/null || [ -n "${WSL_DISTRO_NAME}" ]; then
+    IS_WSL=1
+    echo -e "\033[1;33mWSL detected: using /tmp for build files to avoid clock skew issues on DrvFs mounts\033[0m"
+fi
+
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -55,6 +61,16 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 cd "${BASE_DIR}"
 echo "Changed to parent directory: $(pwd)"
 
+# Use /tmp for build/staging directories on WSL to avoid clock skew on DrvFs mounts
+if [[ -n "${IS_WSL}" ]]; then
+    BUILD_DIR="/tmp/victronenergy/$(basename "${BASE_DIR}")/build-wasm"
+    FILES_DIR="${BASE_DIR}/build-wasm_files_to_copy"
+    echo "WSL detected: using ${BUILD_DIR} to avoid clock skew"
+else
+    BUILD_DIR="${BASE_DIR}/build-wasm"
+    FILES_DIR="${BASE_DIR}/build-wasm_files_to_copy"
+fi
+
 
 # Load environment variables from .env file
 if [ -f "${BASE_DIR}/scripts/.env" ]; then
@@ -78,23 +94,25 @@ source /opt/venus/python/bin/activate
 git submodule update --init
 
 # Clean build directory
-if [[ -d "build-wasm" && -z ${PRESERVE} ]]; then
+if [[ -d "${BUILD_DIR}" && -z ${PRESERVE} ]]; then
     echo "Cleaning build directory..."
-    rm -rf "build-wasm"
+    rm -rf "${BUILD_DIR}"
 fi
 
 # Create build directory
-if [[ ! -d "build-wasm" ]]; then
+if [[ ! -d "${BUILD_DIR}" ]]; then
     echo "Creating build directory..."
-    mkdir "build-wasm"
+    mkdir -p "${BUILD_DIR}"
 fi
 
-cd "build-wasm"
+cd "${BUILD_DIR}"
 
 
 # Configure the project with CMake, setting the build type to MinSizeRel (minimum size release)
-${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+echo -e "\n\n\e[33mConfiguring project with CMake...\e[0m\n\n"
+${QTDIR}/bin/qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel "${BASE_DIR}"
 
+echo -e "\n\n\e[33mBuilding project with CMake...\e[0m\n\n"
 cmake --build . --parallel $(nproc)
 
 if [ $? -ne 0 ]; then
@@ -107,28 +125,28 @@ else
 fi
 
 
-# Make sure, current path ends with build-wasm
-if [ "${PWD##*/}" = "build-wasm" ]; then
-    if [ -d "../build-wasm_files_to_copy" ]; then
-        rm -rf ../build-wasm_files_to_copy
+# Make sure, current path is the build directory
+if [ "${PWD}" = "${BUILD_DIR}" ]; then
+    if [ -d "${FILES_DIR}" ]; then
+        rm -rf "${FILES_DIR}"
     fi
 
     # Create output directory
-    mkdir -p ../build-wasm_files_to_copy/wasm
+    mkdir -p "${FILES_DIR}/wasm"
 
     # Copy the files to the output directory
     cp venus-gui-v2.{html,js,wasm} qtloader.js \
-        ../build-wasm_files_to_copy/wasm/
-    cp  ../images/victronenergy.svg ../images/victronenergy-light.svg ../images/mockup.svg ../LICENSE.txt ../.github/patches/Makefile \
-        ../build-wasm_files_to_copy/wasm/
-    cp -r ../wasm/icons ../build-wasm_files_to_copy/wasm/
-    mv ../build-wasm_files_to_copy/wasm/venus-gui-v2.html ../build-wasm_files_to_copy/wasm/index.html
+        "${FILES_DIR}/wasm/"
+    cp  "${BASE_DIR}/images/victronenergy.svg" "${BASE_DIR}/images/victronenergy-light.svg" "${BASE_DIR}/images/mockup.svg" "${BASE_DIR}/LICENSE.txt" "${BASE_DIR}/.github/patches/Makefile" \
+        "${FILES_DIR}/wasm/"
+    cp -r "${BASE_DIR}/wasm/icons" "${FILES_DIR}/wasm/"
+    mv "${FILES_DIR}/wasm/venus-gui-v2.html" "${FILES_DIR}/wasm/index.html"
 
     # Apply patches
-    venus_gui_v2_js_file="../build-wasm_files_to_copy/wasm/venus-gui-v2.js"
+    venus_gui_v2_js_file="${FILES_DIR}/wasm/venus-gui-v2.js"
 
     if grep -q -E '^var createQtAppInstance' "$venus_gui_v2_js_file"; then
-        sed -i "s%^var \(createQtAppInstance\)%window.\1%" ../build-wasm_files_to_copy/wasm/venus-gui-v2.js
+        sed -i "s%^var \(createQtAppInstance\)%window.\1%" "${FILES_DIR}/wasm/venus-gui-v2.js"
     fi
 
     # Fix for qt6.8.3 - append $line to the .js file if it's not already there
@@ -138,18 +156,18 @@ if [ "${PWD##*/}" = "build-wasm" ]; then
     # Save wasm file size to a file
     # this is needed, since the reported size is the compressed size
     # but the downloaded size is shown as uncompressed size, since the browser decompresses it
-    stat -c%s ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm > ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm.size
+    stat -c%s "${FILES_DIR}/wasm/venus-gui-v2.wasm" > "${FILES_DIR}/wasm/venus-gui-v2.wasm.size"
 
     # Compress the wasm file
-    gzip -k -9 ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
+    gzip -k -9 "${FILES_DIR}/wasm/venus-gui-v2.wasm"
     # Create checksum in the output directory
-    cd ../build-wasm_files_to_copy/wasm/
+    cd "${FILES_DIR}/wasm/"
     sha256sum venus-gui-v2.wasm > venus-gui-v2.wasm.sha256
-    cd ../../build-wasm/
+    cd "${BUILD_DIR}"
     # Remove the uncompressed wasm file
-    rm ../build-wasm_files_to_copy/wasm/venus-gui-v2.wasm
+    rm "${FILES_DIR}/wasm/venus-gui-v2.wasm"
 else
-    echo "Current directory is not build-wasm. Aborting to avoid unwanted deleting of files."
+    echo "Current directory is not the build directory. Aborting to avoid unwanted deleting of files."
 fi
 
 echo "Elapsed time: ${SECONDS} seconds"
@@ -216,7 +234,7 @@ if [[ -n "${HOST_LIST}" ]]; then
         echo "Uploading files to the GX device at ${HOST}..."
 
         # Copy the files to the GX device, only output errors
-        scp -r ../build-wasm_files_to_copy/wasm/* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
+        scp -r "${FILES_DIR}/wasm/"* root@${HOST}:/var/www/venus/gui-v2/ 1>/dev/null
         if [ $? -ne 0 ]; then
             echo -e "\e[31mFailed to upload files. Please check your connection and disk space on the GX device then try again.\e[0m"
             echo
