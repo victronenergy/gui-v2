@@ -84,6 +84,19 @@
           position: relative;
           text-align: center;
         }
+        /*
+         * remove aspect ratio on mobile devices in portrait mode
+         * this allows to display the WASM portrait layout in full screen
+        */
+        @media screen and (max-width: 576px) and (orientation: portrait) {
+          #wrapper-inner {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            aspect-ratio: unset;
+          }
+        }
       }
       #qtspinner {
         width: 100%;

@@ -78,13 +78,27 @@ Window {
 	}
 
 	onWidthChanged: {
-		if (Theme.screenSize === Theme.Portrait) {
-			Theme.geometry_screen_width = root.width
+		if (!Global.isGxDevice) {
+			if (width < height) {
+				Theme.screenSize = Theme.Portrait
+			} else if (Theme.screenSize === Theme.Portrait) {
+				Theme.screenSize = Qt.platform.os === "wasm" ? Theme.SevenInch : Theme.FiveInch
+			}
+			if (Theme.screenSize === Theme.Portrait) {
+				Theme.geometry_screen_width = root.width * root.scaleFactor
+			}
 		}
 	}
 	onHeightChanged: {
-		if (Theme.screenSize === Theme.Portrait) {
-			Theme.geometry_screen_height = root.height
+		if (!Global.isGxDevice) {
+			if (width < height) {
+				Theme.screenSize = Theme.Portrait
+			} else if (Theme.screenSize === Theme.Portrait) {
+				Theme.screenSize = Qt.platform.os === "wasm" ? Theme.SevenInch : Theme.FiveInch
+			}
+			if (Theme.screenSize === Theme.Portrait) {
+				Theme.geometry_screen_height = root.height * root.scaleFactor
+			}
 		}
 	}
 
