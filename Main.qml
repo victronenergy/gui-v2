@@ -47,6 +47,7 @@ Window {
 		if (requiresReloadData) {
 			// we haven't lost backend connection.
 			// we must be rebuilding UI due to demo mode change,
+			// gui plugin reload,
 			// or detected crash in localsettings/venus-platform.
 			// manually cycle the data manager loader.
 			console.info("Main: resetting data manager due to change requiring data reload")
@@ -318,6 +319,18 @@ Window {
 					systemServiceConnections.toastId = null
 					root.rebuildUi()
 				}
+			}
+		}
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		// When plugins reload, rebuild the entire UI so that plugin
+		// components will be freshly compiled from the new .rcc data.
+		function onBusyChanged() {
+			if (GuiPluginLoader.busy) {
+				console.info("Main: gui plugins unloading, reloading UI")
+				root.rebuildUi()
 			}
 		}
 	}

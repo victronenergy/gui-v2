@@ -122,7 +122,7 @@ FocusScope {
 		z: 1
 
 		asynchronous: true
-		active: Global.isGxDevice || BackendConnection.needsWasmKeyboardHandler
+		active: (Global.isGxDevice || BackendConnection.needsWasmKeyboardHandler) && !GuiPluginLoader.busy
 
 		// Note that for gx builds, all references to 'qrc:/.../Thing.qml' are intercepted by
 		// UrlInterceptor and changed to '.../Thing.qml', i.e. they are loaded from the file
