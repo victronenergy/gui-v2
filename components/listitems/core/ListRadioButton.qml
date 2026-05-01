@@ -36,8 +36,8 @@ ListSetting {
 				verticalCenter: parent.verticalCenter
 			}
 			primaryText: root.text
-			primaryFont: root.font
-			primaryTextFormat: root.textFormat
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
 			captionText: root.caption
 			stretchSecondaryText: true

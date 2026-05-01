@@ -24,15 +24,15 @@ GridLayout {
 	id: root
 
 	required property string primaryText
-	required property string secondaryText
-	required property string captionText
-
-	required property font primaryFont
-	required property int primaryTextFormat
-	property alias secondaryTextColor: secondaryLabel.color
+	property alias secondaryText: secondaryLabel.text
+	property alias captionText: captionLabel.text
 	property bool stretchSecondaryText
 	property real topPadding
 	property real bottomPadding
+
+	property alias primaryLabel: primaryLabel
+	property alias secondaryLabel: secondaryLabel
+	property alias captionLabel: captionLabel
 
 	columns: secondaryText.length === 0 ? 1 : 2
 	columnSpacing: 0
@@ -44,8 +44,6 @@ GridLayout {
 		topPadding: root.topPadding
 		bottomPadding: root.secondaryText.length === 0 && root.captionText.length === 0 ? root.bottomPadding : 0
 		text: root.primaryText
-		textFormat: root.primaryTextFormat
-		font: root.primaryFont
 		wrapMode: Text.Wrap
 
 		Layout.fillWidth: true
@@ -59,7 +57,6 @@ GridLayout {
 		bottomPadding: root.captionText.length === 0 ? root.bottomPadding : 0
 		horizontalAlignment: Text.AlignRight
 		visible: text.length > 0
-		text: root.secondaryText
 		wrapMode: Text.Wrap
 
 		Layout.fillWidth: true
@@ -70,9 +67,10 @@ GridLayout {
 	}
 
 	CaptionLabel {
+		id: captionLabel
+
 		topPadding: Theme.geometry_listItem_content_verticalSpacing
 		bottomPadding: root.bottomPadding
-		text: root.captionText
 		visible: text.length > 0
 
 		Layout.fillWidth: true

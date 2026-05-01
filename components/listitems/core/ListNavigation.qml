@@ -41,10 +41,10 @@ ListSetting {
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width - (arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0)
 			primaryText: root.text
-			primaryFont: root.font
-			primaryTextFormat: root.textFormat
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			secondaryTextColor: root.secondaryTextColor
+			secondaryLabel.color: root.secondaryTextColor
 			captionText: root.caption
 			stretchSecondaryText: true
 		}

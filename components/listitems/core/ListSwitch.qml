@@ -83,8 +83,8 @@ ListSetting {
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width - switchItem.width - root.spacing
 			primaryText: root.text
-			primaryFont: root.font
-			primaryTextFormat: root.textFormat
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
 			captionText: root.caption
 			stretchSecondaryText: true
