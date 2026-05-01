@@ -86,6 +86,7 @@ Q_SIGNALS:
 private:
 	void timeoutMqttPluginPaths();
 	void triggerWatchMqttPluginPaths();
+	void onEnabledCustomisationsSynchronized(VeQItem::State state);
 	void watchMqttPluginPaths();
 	void watchPluginDirs(const QString &appsDir);
 	void readFromFilesystem(const QString &path);
@@ -93,7 +94,7 @@ private:
 	void populatePlugins();
 	QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins) const;
 	bool loadPluginData(const GuiPlugin &plugin);
-	void unloadPluginData();
+	void unloadPluginData(bool clearCache);
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
@@ -106,6 +107,7 @@ private:
 	QTimer m_invokeOnceTimer;
 	QTimer m_timeoutTimer;
 	bool m_busy = true;
+	QQmlEngine *m_qmlEngine = nullptr;
 };
 
 /*
@@ -343,14 +345,14 @@ Q_SIGNALS:
 	void succeeded();
 
 private:
-	void chunkValueChanged(const QVariant &value);
+	void chunkValueChanged(VeQItem *chunkItem, int chunkNbr, const QVariant &value);
 	void checkFinished();
 	void timeout();
 
 	// All VeQItem instances are owned by the VeMqttItemProducer, NOT this class.
 	VeQItem *m_pluginBaseItem = nullptr;
 	VeQItem *m_pluginInfoItem = nullptr;
-	QMap<int, QPair<VeQItem*, QByteArray> > m_chunkItems;
+	QMap<int, QPair<QPointer<VeQItem>, QByteArray> > m_chunkItems;
 
 	QTimer m_timeout;
 	QString m_name;
