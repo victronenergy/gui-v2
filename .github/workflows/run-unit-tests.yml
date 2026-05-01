@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository and submodules
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -52,7 +52,10 @@ jobs:
           sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
                                     wget libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
                                     ninja-build dos2unix libegl1 libxcb-cursor0
-          sudo snap install yq
+          sudo snap install yq || \
+            (echo "snap store unreachable, falling back to direct binary download" && \
+            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && \
+            sudo chmod +x /usr/local/bin/yq)
 
       - name: Install Qt ${{env.QT_VERSION}} linux desktop
         if: steps.cached_qt_emscripten.outputs.cache-hit != 'true'
