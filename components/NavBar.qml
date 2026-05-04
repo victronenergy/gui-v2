@@ -4,18 +4,28 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
+import QtQuick.Layouts
 import Victron.VenusOS
 
 FocusScope {
 	id: root
 
-	property list<SwipeViewPage> pages
-	readonly property int currentIndex: _currentIndex
-	readonly property string currentTitle: pages[currentIndex].title ?? ""
+	required property list<SwipeViewPage> pages
 	property alias backgroundColor: backgroundRect.color
+	property Component moreButton
+	property bool moreDialogVisible
 
-	// External components should not write to these properties.
+	readonly property int currentIndex: _currentIndex
+	readonly property string currentTitle: pages[currentIndex]?.title ?? ""
+	readonly property real buttonWidth: buttonRow.width / visiblePageCount
+	readonly property int visiblePageCount: Math.min(pages.length,
+			buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
+
+	// Internal reference to the currently selected index.
 	property int _currentIndex
+
+	signal buttonClicked(pageIndex : int)
 
 	function setCurrentPage(pageName) {
 		for (let i = 0; i < pages.length; ++i) {
@@ -33,7 +43,7 @@ FocusScope {
 		if (index === _currentIndex) {
 			return
 		}
-		if (index < 0 || index >= pages.length) {
+		if (index >= pages.length) { // index < 0 is ok, if clearing the current index
 			console.warn("setCurrentIndex(): invalid index", index, "nav bar count is:", pages.length)
 			return
 		}
@@ -45,8 +55,8 @@ FocusScope {
 		return url.substring(url.lastIndexOf("/") + 1)
 	}
 
-	width: parent.width
-	height: Theme.geometry_navigationBar_height
+	implicitWidth: Theme.geometry_screen_width
+	implicitHeight: Theme.geometry_navigationBar_height
 
 	// Add an opaque background so that page disappears behind nav bar when scrolled
 	Rectangle {
@@ -56,45 +66,56 @@ FocusScope {
 
 	Row {
 		id: buttonRow
-		x: Theme.geometry_page_content_horizontalMargin
-		width: parent.width - 2*Theme.geometry_page_content_horizontalMargin
+
+		x: Theme.geometry_navigationBar_horizontalMargin
+		width: parent.width - 2*Theme.geometry_navigationBar_horizontalMargin
 		height: parent.height
 
 		Repeater {
 			id: buttonRepeater
 
-			model: root.pages.length
+			model: root.visiblePageCount < root.pages.length // If we cannot show all available pages...
+				   ? root.visiblePageCount - 1  // -1 to make space for the "More" button
+				   : root.visiblePageCount // show all available pages
 			delegate: NavButton {
 				required property int index
-				readonly property SwipeViewPage pageData: root.pages[index]
+				readonly property SwipeViewPage page: root.pages[index]
 
 				anchors.verticalCenter: parent.verticalCenter
-				height: Theme.geometry_navigationBar_button_height
-				width: buttonRow.width / buttonRepeater.count
-				text: pageData.title
-				icon.source: pageData.iconSource
-				checked: root.currentIndex === index
-				backgroundColor: "transparent"
-				focus: index === root.currentIndex
-				onClicked: root._currentIndex = index
+				width: root.buttonWidth
+				text: page.title
+				icon.source: page.iconSource
+				checked: root.currentIndex === index && !root.moreDialogVisible
+				focus: checked
 
-				KeyNavigation.right: buttonRepeater.itemAt((index + 1) % buttonRepeater.count)
+				onClicked: {
+					root._currentIndex = index
+					root.buttonClicked(index)
+				}
+
+				KeyNavigation.right: index >= 0 && index < buttonRepeater.count - 1
+						? buttonRepeater.itemAt(index + 1)
+						: moreButtonLoader
 
 				Loader {
 					z: 1 // to get it on top of the IconLabel
 					anchors {
 						left: parent.horizontalCenter
-						leftMargin: Theme.geometry_navigationBar_notifications_redDot_leftMargin
-						top: parent.top
-						topMargin: Theme.geometry_navigationBar_notifications_redDot_topMargin
+						topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
 					}
+					active: (Global.notifications?.navBarNotificationCounterVisible ?? false)
+							&& page.url.endsWith("NotificationsPage.qml")
 					sourceComponent: NotificationCounter {
 						count: Global.notifications?.unacknowledgedCount ?? 0
 					}
-					active: pageData.url.endsWith("NotificationsPage.qml")
-							&& (Global.notifications?.navBarNotificationCounterVisible ?? false)
 				}
 			}
+		}
+
+		Loader {
+			id: moreButtonLoader
+			anchors.verticalCenter: parent.verticalCenter
+			sourceComponent: root.moreButton
 		}
 	}
 }
