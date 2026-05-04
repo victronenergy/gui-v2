@@ -35,10 +35,10 @@ T.Button {
 
 	down: pressed || checked
 	spacing: Theme.geometry_button_spacing
-	topPadding: topInset
-	bottomPadding: bottomInset
-	leftPadding: leftInset
-	rightPadding: rightInset
+	topPadding: topInset + Theme.geometry_button_padding
+	bottomPadding: bottomInset + Theme.geometry_button_padding
+	leftPadding: leftInset + Theme.geometry_button_padding
+	rightPadding: rightInset + Theme.geometry_button_padding
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
@@ -50,6 +50,9 @@ T.Button {
 	icon.color: root.color
 	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_button_size
+	display: text.length && icon.source.toString().length ? T.AbstractButton.TextBesideIcon
+			: text.length ? T.AbstractButton.TextOnly
+			: T.AbstractButton.IconOnly
 
 	// flat=true means the background should not be visible.
 	flat: true
@@ -78,13 +81,41 @@ T.Button {
 		bottomRightRadius: isNaN(root.bottomRightRadius) ? undefined : root.bottomRightRadius
 	}
 
-	contentItem: CP.IconLabel {
-		spacing: root.spacing
-		display: root.display
-		icon: root.icon
-		text: root.text
-		font: root.font
-		color: root.color
+	contentItem: Item {
+		implicitWidth: root.display === T.AbstractButton.IconOnly ? contentIcon.implicitWidth
+				: root.display === T.AbstractButton.TextOnly ? contentLabel.implicitWidth
+				: root.display === T.AbstractButton.TextBesideIcon ? contentLabel.implicitWidth + contentIcon.implicitWidth
+				: Math.max(contentLabel.implicitWidth, contentIcon.implicitWidth)  // TextUnderIcon
+		implicitHeight: root.display === T.AbstractButton.IconOnly ? contentIcon.height
+				: root.display === T.AbstractButton.TextOnly ? contentLabel.implicitHeight
+				: root.display === T.AbstractButton.TextBesideIcon ? Math.max(contentLabel.implicitHeight, contentIcon.height)
+				: contentLabel.implicitHeight + contentIcon.height  // TextUnderIcon
+
+		Label {
+			id: contentLabel
+
+			y: root.display === T.AbstractButton.TextUnderIcon ? contentIcon.height + root.spacing : (parent.height - height) / 2
+			width: parent.width
+			leftPadding: root.display === T.AbstractButton.TextBesideIcon ? contentIcon.width + root.spacing : 0
+			horizontalAlignment: root.display === T.AbstractButton.TextBesideIcon ? Text.AlignLeft : Text.AlignHCenter
+			text: root.text
+			color: root.color
+			font: root.font
+			visible: root.display !== T.AbstractButton.IconOnly
+			elide: Text.ElideRight
+		}
+
+		CP.ColorImage {
+			id: contentIcon
+
+			x: root.display === T.AbstractButton.TextBesideIcon ? 0 : (parent.width - width) / 2
+			y: root.display === T.AbstractButton.TextUnderIcon ? 0 : (parent.height - height) / 2
+			width: root.icon.width || Theme.geometry_icon_size_medium
+			height: root.icon.height || Theme.geometry_icon_size_medium
+			source: root.icon.source
+			color: root.icon.color
+			visible: root.display !== T.AbstractButton.TextOnly
+		}
 	}
 
 	PressEffect {

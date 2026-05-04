@@ -14,9 +14,12 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: notificationsView.count > 0 ? Qt.TabFocus : Qt.NoFocus
+	showTopGradient: Theme.screenSize === Theme.Portrait && !notificationsView.atYBeginning
 
 	GradientListView {
 		id: notificationsView
+
+		height: parent.height - (silenceButtonLoader.active ? silenceButtonLoader.height : 0)
 
 		// prevent the nav bar buttons from clicking the notifications when it is shown
 		// over the top of the notificationsView
@@ -75,23 +78,21 @@ SwipeViewPage {
 
 			Row {
 				width: notificationsView.width
-				height: checkmarkIcon.height + (2 * Theme.geometry_listItem_content_horizontalMargin)
+				height: Theme.geometry_listItem_height + (2 * Theme.geometry_page_content_verticalMargin)
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				rightPadding: Theme.geometry_listItem_content_horizontalMargin
 
 				Item {
 					id: iconContainer
 
 					anchors.verticalCenter: parent.verticalCenter
-					width: checkmarkIcon.width + 2*checkmarkIcon.anchors.leftMargin
+					width: Theme.geometry_icon_size_medium + (2 * Theme.geometry_listItem_content_horizontalMargin)
 					height: parent.height
 
 					Image {
-						id: checkmarkIcon
-						anchors {
-							verticalCenter: parent.verticalCenter
-							left: parent.left
-							leftMargin: Theme.geometry_listItem_content_horizontalMargin - 8 // (48 - 32) / 2, to centre with delegate icons
-						}
-						source: "qrc:/images/icon_checkmark_48"
+						anchors.centerIn: parent
+						source: "qrc:/images/icon_checkmark_48.svg"
+						sourceSize: Qt.size(Theme.geometry_notificationsPage_placeholder_icon_size, Theme.geometry_notificationsPage_placeholder_icon_size)
 					}
 				}
 
@@ -99,12 +100,31 @@ SwipeViewPage {
 					anchors.verticalCenter: parent.verticalCenter
 					width: parent.width - iconContainer.width
 					color: Theme.color_font_primary
-					font.pixelSize: Theme.font_size_h1
+					font.pixelSize: Theme.font_notification_placeholder_size
+					wrapMode: Text.Wrap
 
 					//% "No active notifications"
 					text: qsTrId("notifications_no_active_notifications")
 				}
 			}
+		}
+	}
+
+	// In portrait, show the "Silence alarm" button at the bottom of this page, instead of in the
+	// status bar.
+	Loader {
+		id: silenceButtonLoader
+
+		anchors.bottom: root.bottom
+		active: Theme.screenSize === Theme.Portrait && Global.mainView?.notificationButtonsEnabled
+		sourceComponent: SilenceAlarmButton {
+			width: notificationsView.width
+			leftInset: Theme.geometry_listItem_content_horizontalMargin
+			rightInset: Theme.geometry_listItem_content_horizontalMargin
+			topInset: Theme.geometry_listItem_content_verticalMargin
+			bottomInset: Theme.geometry_listItem_content_verticalMargin
+
+			onClicked: NotificationModel.acknowledgeAll()
 		}
 	}
 
