@@ -406,7 +406,9 @@ FocusScope {
 		// cards do not animate from beneath the status bar. Once the cards have animated in, place
 		// them back below the status bar z-order so that status bar buttons (which have an
 		// expanded mouse area) can be clicked in the areas where they overlap with the cards view.
-		z: animationRunning ? 1 : 0
+		// Only do this in landscape; in portrait, the cards should slide beneath the status bar as
+		// the cards may be vertically scrolled, and it looks odd if it fades over the status bar.
+		z: animationRunning && Theme.screenSize !== Theme.Portrait ? 1 : 0
 
 		KeyNavigation.up: statusBar
 
