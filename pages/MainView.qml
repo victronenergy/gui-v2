@@ -241,9 +241,11 @@ FocusScope {
 			id: navBar
 
 			y: root.height + 4  // nudge below the visible area for wasm
+			width: parent.width
 			backgroundColor: root.backgroundColor
 			opacity: 0
 			pages: swipePageModel.pages
+			moreButton: visiblePageCount < pages.length ? moreButtonComponent : null
 
 			// Give the NavBar the initial focus within MainView, when key navigation is enabled.
 			focus: true
@@ -264,6 +266,49 @@ FocusScope {
 
 			// Only move focus to SwipeView if its current page allows key navigation.
 			KeyNavigation.up: (root.swipeView?.currentItem?.focusPolicy ?? 0) & Qt.TabFocus ? swipeViewLoader : statusBar
+
+			Component {
+				id: moreButtonComponent
+
+				NavButton {
+					id: moreButton
+
+					width: navBar.buttonWidth
+					//: Click to show more available items
+					//% "More"
+					text: qsTrId("navbar_more")
+					icon.source: "qrc:/images/icon_more_dots.svg"
+					onClicked: Global.dialogLayer.open(moreButtonDialogComponent)
+
+					Rectangle {
+						anchors {
+							left: parent.horizontalCenter
+							leftMargin: Theme.geometry_navigationBar_notifications_redDot_margin
+							topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
+						}
+						width: Theme.geometry_navigationBar_notifications_redDot_size
+						height: Theme.geometry_navigationBar_notifications_redDot_size
+						radius: Theme.geometry_navigationBar_notifications_redDot_size / 2
+						color: Theme.color_red
+						visible: (Global.notifications?.unacknowledgedCount ?? 0) > 0
+					}
+
+					Component {
+						id: moreButtonDialogComponent
+
+						NavBarMoreDialog {
+							title: moreButton.text
+							pages: navBar.pages
+							hiddenPageCount: navBar.pages.length - navBar.visiblePageCount + 1
+							currentNavBarIndex: navBar.currentIndex
+							onButtonClicked: (pageIndex) => {
+								navBar.setCurrentIndex(pageIndex)
+								close()
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 

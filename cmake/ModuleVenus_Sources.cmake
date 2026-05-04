@@ -190,6 +190,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalRebootingDialog.qml
     components/dialogs/ModalWarningDialog.qml
+    components/dialogs/NavBarMoreDialog.qml
     components/dialogs/NumberSelectorDialog.qml
     components/dialogs/SecurityProfilePasswordDialog.qml
     components/dialogs/SolarDailyHistoryDialog.qml
@@ -768,6 +769,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_energymeter_3f_32.svg
     images/icon_general_32.svg
     images/icon_integration_32.svg
+    images/icon_more_dots.svg
     images/icon_smartswitch_off_32.svg
     images/icon_smartswitch_on_32.svg
     images/icon_switchdev_32.svg

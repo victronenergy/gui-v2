@@ -32,6 +32,8 @@
     "font_levelsGauge_title": "font_size_tiny",
     "font_levelsGauge_secondary": "font_size_micro",
     "font_levelsGauge_quantity": "font_size_body1",
+    "font_navigationButton_size": "font_size_micro",
+    "font_notification_timestamp_size": "font_size_tiny",
     "font_overviewPage_battery_secondary": "font_size_body2",
     "font_overviewPage_secondary": "font_size_body1",
     "font_overviewPage_widget_quantityLabel_smallSizeWithExtraContent": "font_size_body3",
