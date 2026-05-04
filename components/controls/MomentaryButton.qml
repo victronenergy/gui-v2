@@ -89,6 +89,7 @@ CT.Button {
 		verticalAlignment: Text.AlignVCenter
 		text: root.text
 		color: enabled ? (root.down ? Theme.color_button_down_text : Theme.color_font_primary) : Theme.color_font_disabled
+		font.pixelSize: Theme.font_button_size
 	}
 
 	KeyNavigationHighlight.active: root.activeFocus

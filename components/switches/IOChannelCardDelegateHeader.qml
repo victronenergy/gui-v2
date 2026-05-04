@@ -28,6 +28,7 @@ RowLayout {
 		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
 		text: root.ioChannel.formattedName
 		elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
+		font.pixelSize: Theme.font_switches_header_title
 	}
 
 	IOChannelQuantityLabel {
@@ -38,6 +39,7 @@ RowLayout {
 		valueText: root.quantityText || quantityInfo.number
 		unit: root.quantityUnit >= 0 ? root.quantityUnit : Global.systemSettings.toPreferredUnit(ioChannel.unitType)
 		unitColor: root.quantityColor
+		font.pixelSize: Theme.font_switches_header_secondary
 		visible: !root.statusVisible && (root.quantityText.length > 0 || !isNaN(root.quantityValue))
 	}
 
@@ -68,7 +70,7 @@ RowLayout {
 			rightPadding: Theme.geometry_iochannel_status_horizontalPadding
 			horizontalAlignment: Text.AlignHCenter
 			elide: Text.ElideRight
-			font.pixelSize: Theme.font_size_tiny
+			font.pixelSize: Theme.font_switches_header_status
 			color: root.statusColor
 		}
 	}

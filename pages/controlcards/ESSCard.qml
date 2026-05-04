@@ -10,14 +10,18 @@ import QtQuick.Controls.impl as CP
 ControlCard {
 	id: root
 
+	implicitHeight: contentLayout.y + contentLayout.implicitHeight
 	icon.source: "qrc:/images/ess.svg"
 	title.text: CommonWords.ess
 
 	SettingsColumn {
+		id: contentLayout
+
 		anchors {
 			top: root.title.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
+		bottomPadding: Theme.geometry_controlCard_contentMargins
 		width: parent.width
 
 		ButtonGroup {

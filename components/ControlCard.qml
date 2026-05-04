@@ -13,7 +13,7 @@ FocusScope {
 	property alias status: status
 
 	implicitWidth: Theme.geometry_controlCard_maximumWidth
-	implicitHeight: parent ? parent.height : 0
+	implicitHeight: Theme.geometry_controlCard_height
 	focus: true
 	focusPolicy: Qt.TabFocus
 
@@ -25,8 +25,7 @@ FocusScope {
 		id: icon
 
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_controlCard_title_topMargin
+			verticalCenter: title.verticalCenter
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_contentMargins
 		}
@@ -60,7 +59,7 @@ FocusScope {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
-		font.pixelSize: Theme.font_size_body3
+		font.pixelSize: Theme.font_controlCard_status
 		wrapMode: Text.Wrap
 	}
 }
