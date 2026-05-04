@@ -15,6 +15,7 @@ Label {
 	leftPadding: icon.width + Theme.geometry_widgetHeader_spacing
 	elide: Text.ElideRight
 	verticalAlignment: Text.AlignVCenter
+	font.pixelSize: Theme.font_control_title
 
 	CP.ColorImage {
 		id: icon

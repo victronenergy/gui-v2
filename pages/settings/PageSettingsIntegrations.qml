@@ -13,21 +13,6 @@ Page {
 		id: settingsListView
 
 		model: VisibleItemModel {
-			/*
-			  The intention here was to provide a wizard helping to find the right setup process – As we are not there yet, let’s hide it for now
-
-			ListNavigation {
-				text: CommonWords.add_device
-				icon.source: "qrc:/images/icon_plus_32.svg"
-				icon.color: Theme.color_blue
-				icon.width: 32
-				icon.height: 32
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", {"title": text})
-			}
-
-			SettingsListHeader { }
-			*/
-
 			SettingsListHeader {
 				//% "Device Integrations"
 				text: qsTrId("pagesettingsintegrations_device_integrations")

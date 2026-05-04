@@ -19,7 +19,7 @@ ListSetting {
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.height
+		implicitHeight: labelLayout.implicitHeight
 
 		ThreeLabelLayout {
 			id: labelLayout

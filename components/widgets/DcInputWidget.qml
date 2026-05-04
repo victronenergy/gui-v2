@@ -68,8 +68,12 @@ OverviewWidget {
 			GradientListView {
 				header: QuantityGroupListHeader {
 					width: parent.width
-					metricsFontSize: Theme.font_size_body2 // align columns with those in the delegate
-					rightPadding: Theme.geometry_listItem_content_horizontalMargin + Theme.geometry_icon_size_medium
+					metricsFontSize: Theme.font_listItem_secondary_size // align columns with those in the delegate
+					rightPadding: Theme.geometry_page_content_horizontalMargin // list item right inset
+							+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
+							+ Theme.geometry_icon_size_medium // arrow icon width
+							+ Theme.geometry_listItem_arrow_leftMargin // arrow icon padding
+					textHorizontalAlignment: Text.AlignHCenter
 					model: [
 						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },
 						{ text: CommonWords.current_amps, unit: VenusOS.Units_Amp },
@@ -82,7 +86,6 @@ OverviewWidget {
 					required property BaseDevice device
 
 					text: device.name
-					tableMode: true
 					quantityModel: QuantityObjectModel {
 						QuantityObject { object: dcInput; key: "voltage"; unit: VenusOS.Units_Volt_DC }
 						QuantityObject { object: dcInput; key: "current"; unit: VenusOS.Units_Amp }

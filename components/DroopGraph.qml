@@ -95,19 +95,19 @@ Item {
 		width: Theme.geometry_droopGraph_axis_label_width
 		height: Theme.geometry_droopGraph_axis_label_height
 		color: Theme.color_droopGraph_axis_line
-		font.pixelSize: Theme.font_size_tiny
+		font.pixelSize: Theme.font_droopGraph_axis_label_size
 		verticalAlignment: Text.AlignVCenter
 		horizontalAlignment: Text.AlignHCenter
 	}
 	component ReferenceQuantityLabel: QuantityLabel {
 		valueColor: Theme.color_droopGraph_axis_line
 		unitColor: Theme.color_droopGraph_axis_line
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_droopGraph_figure_label_size
 	}
 	component OperationQuantityLabel: QuantityLabel {
 		valueColor: Theme.color_droopGraph_operationPoint_guidelines
 		unitColor: Theme.color_droopGraph_operationPoint_guidelines
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_droopGraph_figure_label_size
 	}
 
 	Shape {

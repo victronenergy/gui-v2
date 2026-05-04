@@ -67,7 +67,7 @@ Page {
 					verticalAlignment: Text.AlignVCenter
 					text: index + 1
 					color: Theme.color_font_disabled
-					font.pixelSize: Theme.font_size_body1
+					font.pixelSize: Theme.font_listItem_caption_size
 				}
 			}
 		}
@@ -92,20 +92,10 @@ Page {
 		footer: SettingsColumn {
 			width: parent?.width ?? 0
 
-			SettingsListHeader {
-				anchors {
-					left: parent.left
-					leftMargin: Theme.geometry_priorityLabel_width
-					right: parent.right
-					rightMargin: Theme.geometry_priorityLabel_width
-				}
-
+			PrimaryListLabel {
 				//% "Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess."
 				text: qsTrId("pagecontrollableloads_arrange")
-				font.pixelSize: Theme.font_size_caption
-				width: parent?.width ?? 0
-				wrapMode: Text.Wrap
-				visible: mode.value
+				preferredVisible: mode.value
 			}
 
 			ListNavigation {

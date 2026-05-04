@@ -33,7 +33,7 @@ ListItem {
 			left: parent.left
 			leftMargin: Theme.geometry_droopGraph_container_label_leftMargin
 		}
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_droopGraph_figure_label_size
 		color: Theme.color_font_primary
 		verticalAlignment: Text.AlignVCenter
 	}
@@ -43,7 +43,8 @@ ListItem {
 	topPadding: 0
 	bottomPadding: 0
 
-	contentItem: RowLayout {
+	contentItem: Flow {
+		readonly property real graphWidth: (Theme.screenSize === Theme.Portrait ? width : (width/2 - spacing))
 
 		spacing: Theme.geometry_droopGraph_container_spacing
 
@@ -51,6 +52,7 @@ ListItem {
 			id: frequencyBackground
 			implicitWidth: Theme.geometry_droopGraph_container_width
 			implicitHeight: Theme.geometry_droopGraph_container_height
+			width: parent.graphWidth
 
 			GraphLabel {
 				id: frequencyLabel
@@ -62,9 +64,9 @@ ListItem {
 				anchors {
 					top: frequencyLabel.bottom
 					topMargin: Theme.geometry_droopGraph_container_graph_topMargin
-					left: parent.left
-					leftMargin: Theme.geometry_droopGraph_container_graph_leftMargin
+					horizontalCenter: parent.horizontalCenter
 				}
+				width: parent.width - (2 * Theme.geometry_droopGraph_container_graph_leftMargin)
 
 				// Intentionally not translated
 				yAxisLabel: "P"
@@ -84,6 +86,7 @@ ListItem {
 			id: voltageBackground
 			implicitWidth: Theme.geometry_droopGraph_container_width
 			implicitHeight: Theme.geometry_droopGraph_container_height
+			width: parent.graphWidth
 
 			GraphLabel {
 				id: voltageLabel
@@ -95,9 +98,9 @@ ListItem {
 				anchors {
 					top: voltageLabel.bottom
 					topMargin: Theme.geometry_droopGraph_container_graph_topMargin
-					left: parent.left
-					leftMargin: Theme.geometry_droopGraph_container_graph_leftMargin
+					horizontalCenter: parent.horizontalCenter
 				}
+				width: parent.width - (2 * Theme.geometry_droopGraph_container_graph_leftMargin)
 
 				// Intentionally not translated
 				yAxisLabel: "Q"

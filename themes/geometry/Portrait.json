@@ -1,6 +1,6 @@
 {
     "geometry_page_content_horizontalMargin": 16,
-    "geometry_page_content_verticalMargin": 40,
+    "geometry_page_content_verticalMargin": 24,
 
     "geometry_icon_size_medium": 32,
 
@@ -16,7 +16,7 @@
     "geometry_barGauge_phaseLabel_leftPadding": 3,
     "geometry_barGauge_phaseLabel_rightPadding": 3,
 
-    "geometry_button_height": 40,
+    "geometry_button_height": 36,
     "geometry_button_touch_size": 48,
     "geometry_button_touch_verticalMargin": 14,
     "geometry_button_spacing": 7,
@@ -49,9 +49,9 @@
     "geometry_droopGraph_container_height": 217,
     "geometry_droopGraph_container_spacing": 4,
     "geometry_droopGraph_container_label_topMargin": 16,
-    "geometry_droopGraph_container_label_leftMargin": 24,
+    "geometry_droopGraph_container_label_leftMargin": "geometry_page_content_horizontalMargin",
     "geometry_droopGraph_container_graph_topMargin": 8,
-    "geometry_droopGraph_container_graph_leftMargin": 24,
+    "geometry_droopGraph_container_graph_leftMargin": "geometry_page_content_horizontalMargin",
     "geometry_droopGraph_leftMargin": 53,
     "geometry_droopGraph_bottomMargin": 27,
     "geometry_droopGraph_defaultAxisWidth": 283,
@@ -98,25 +98,26 @@
 
     "geometry_scrollBar_bar_width": 8,
     "geometry_scrollBar_bar_radius": 8,
-    "geometry_scrollBar_horizontalMargin": 16,
+    "geometry_scrollBar_horizontalMargin": 4,
 
-    "geometry_segmentedButtonRow_height": 48,
+    "geometry_segmentedButtonRow_height": 40,
 
     "geometry_switches_header_topMargin": 8,
 
-    "geometry_listItem_width": 944,
-    "geometry_listItem_height": 64,
+    "geometry_listItem_width": 360,
+    "geometry_listItem_height": 48,
     "geometry_listItem_radius": 8,
-    "geometry_listItem_content_horizontalMargin": 24,
-    "geometry_listItem_flat_content_horizontalMargin": 16,
-    "geometry_listItem_content_verticalMargin": 16,
-    "geometry_listItem_content_spacing": 16,
+    "geometry_listItem_content_horizontalMargin": 12,
+    "geometry_listItem_flat_content_horizontalMargin": 12,
+    "geometry_listItem_content_verticalMargin": 8,
+    "geometry_listItem_content_spacing": 8,
     "geometry_listItem_content_verticalSpacing": 4,
     "geometry_listItem_separator_width": 1,
-    "geometry_listItem_itemSeparator_height": 32,
-    "geometry_listItem_textField_minimumWidth": 236,
-    "geometry_listItem_textField_maximumWidth": 472,
-    "geometry_listItem_arrow_leftMargin": 8,
+    "geometry_listItem_itemSeparator_height": 24,
+    "geometry_listItem_textField_minimumWidth": 128,
+    "geometry_listItem_textField_maximumWidth": 128,
+    "geometry_listItem_accessIndicator_width": 6,
+    "geometry_listItem_arrow_leftMargin": 4,
 
     "geometry_valueIndicator_horizontalMargin": 12,
     "geometry_valueIndicator_spacing": 28,
@@ -127,9 +128,8 @@
 
     "geometry_listLink_qrCodeSize": 96,
 
-    "geometry_slider_text_width": 280,
     "geometry_slider_button_size": 32,
-    "geometry_slider_spacing": 6,
+    "geometry_slider_spacing": 12,
     "geometry_slider_steps": 10,
     "geometry_slider_groove_width": 560,
     "geometry_slider_groove_height": 8,
@@ -175,7 +175,7 @@
     "geometry_statusBar_spacing": 8,
 
     "geometry_tabBar_width": 464,
-    "geometry_tabBar_height": 40,
+    "geometry_tabBar_height": "geometry_button_height",
     "geometry_tabBar_horizontalMargin": 6,
 
     "geometry_timeSelector_spinBox_width": 238,
@@ -201,7 +201,7 @@
     "geometry_notificationsPage_snoozeButton_height": 36,
 
     "geometry_textField_height": 40,
-    "geometry_textField_horizontalMargin": 16,
+    "geometry_textField_horizontalMargin": 8,
 
     "geometry_toastNotification_horizontalMargin": 24,
     "geometry_toastNotification_bottomMargin": 8,
@@ -517,7 +517,7 @@
     "geometry_settingsListHeader_bottomPadding": 2,
     "geometry_settingsListNavigation_verticalPadding": 8,
 
-    "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
+    "geometry_vebusDeviceListPage_quantityTable_row_spacing": 0,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
 
     "geometry_batteryListPage_item_height": 84,
@@ -525,7 +525,7 @@
 
     "geometry_loadListPage_item_height": 68,
 
-    "geometry_rangeSlider_labelWidth": 80,
+    "geometry_rangeSlider_labelWidth": 60,
 
     "geometry_modbus_device_protocol_width": 40,
     "geometry_modbus_device_ip_address_width": 150,

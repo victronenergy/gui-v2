@@ -75,8 +75,6 @@ Item {
 			}
 
 			background: Rectangle {
-				implicitWidth: parent.width
-				implicitHeight: parent.height
 				radius: parent.height/2
 
 				// the background is the border with an additional rectangle for fill

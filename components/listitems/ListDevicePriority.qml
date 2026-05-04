@@ -29,8 +29,8 @@ ListSetting {
 		radius: Theme.geometry_opportunityLoad_button_radius
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		implicitWidth: root.height - Theme.geometry_button_border_width - 2*Theme.geometry_opportunityLoad_margin
-		implicitHeight: root.height - Theme.geometry_button_border_width - 2*Theme.geometry_opportunityLoad_margin
+		implicitWidth: root.height - 2*Theme.geometry_opportunityLoad_margin
+		implicitHeight: root.height - 2*Theme.geometry_opportunityLoad_margin
 	}
 
 	component PageData : QtObject {
@@ -103,10 +103,10 @@ ListSetting {
 		RowLayout {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_opportunityLoad_margin
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
+			spacing: 0
 
 			Arrow {
 				id: upArrow
@@ -115,6 +115,7 @@ ListSetting {
 					root._model.move(index, index - 1, 1)
 					root._model.writeToBackEnd()
 				}
+				Layout.rightMargin: Theme.geometry_opportunityLoad_margin
 			}
 
 			Arrow {
@@ -124,26 +125,24 @@ ListSetting {
 					root._model.move(index + 1, index, 1)
 					root._model.writeToBackEnd()
 				}
+				Layout.rightMargin: Theme.geometry_listItem_flat_content_horizontalMargin
 			}
 
-			Label {
-				leftPadding: Theme.geometry_opportunityLoad_margin
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				elide: Text.ElideRight
-
-				Layout.fillWidth: true
-			}
-
-			SecondaryListLabel {
+			ThreeLabelLayout {
+				primaryText: root.text
+				primaryLabel.font: root.font
+				primaryLabel.elide: Text.ElideRight
+				primaryLabel.maximumLineCount: 1
 				//% "No control"
-				text: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
+				secondaryText: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
+				secondaryLabel.elide: Text.ElideRight
+				secondaryLabel.maximumLineCount: 1
+				stretchSecondaryText: true
 			}
 
 			ForwardIcon {
-				enabled: root.interactive
-				opacity: enabled ? 1 : 0
+				visible: root.interactive
+				Layout.leftMargin: Theme.geometry_listItem_arrow_leftMargin
 			}
 		}
 	}

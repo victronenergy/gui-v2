@@ -51,7 +51,7 @@
     "geometry_droopGraph_container_label_topMargin": 16,
     "geometry_droopGraph_container_label_leftMargin": 24,
     "geometry_droopGraph_container_graph_topMargin": 8,
-    "geometry_droopGraph_container_graph_leftMargin": 24,
+    "geometry_droopGraph_container_graph_leftMargin": "geometry_page_content_horizontalMargin",
     "geometry_droopGraph_leftMargin": 53,
     "geometry_droopGraph_bottomMargin": 27,
     "geometry_droopGraph_defaultAxisWidth": 230,
@@ -116,6 +116,7 @@
     "geometry_listItem_itemSeparator_height": 48,
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
+    "geometry_listItem_accessIndicator_width": 8,
     "geometry_listItem_arrow_leftMargin": 8,
 
     "geometry_valueIndicator_horizontalMargin": 12,
@@ -127,9 +128,8 @@
 
     "geometry_listLink_qrCodeSize": 96,
 
-    "geometry_slider_text_width": 280,
     "geometry_slider_button_size": 32,
-    "geometry_slider_spacing": 6,
+    "geometry_slider_spacing": 12,
     "geometry_slider_steps": 10,
     "geometry_slider_groove_width": 560,
     "geometry_slider_groove_height": 8,
@@ -201,7 +201,7 @@
     "geometry_notificationsPage_snoozeButton_height": 36,
 
     "geometry_textField_height": 40,
-    "geometry_textField_horizontalMargin": 16,
+    "geometry_textField_horizontalMargin": "geometry_listItem_flat_content_horizontalMargin",
 
     "geometry_toastNotification_horizontalMargin": 24,
     "geometry_toastNotification_bottomMargin": 8,
@@ -581,5 +581,5 @@
 
     "geometry_opportunityLoad_button_radius": 6,
     "geometry_opportunityLoad_margin": 4,
-    "geometry_priorityLabel_width": 24
+    "geometry_priorityLabel_width": 28
 }
