@@ -20,14 +20,14 @@ Row {
 	property real fixedColumnWidth: NaN // if set, use this for column widths, instead of QuantityTableMetrics
 	property int labelAlignment: tableMode ? Qt.AlignLeft : Qt.AlignHCenter
 
+	// If true and not using fixed column widths, the spacing is added as padding after the last
+	// item, not just between items, to even out the header column sizes. Use this when this is
+	// part of a table with headers.
+	property bool padLastColumn
+
 	readonly property bool _showSeparators: !tableMode
 
 	spacing: Theme.geometry_quantityGroupRow_spacing
-
-	FontMetrics {
-		id: fontMetrics
-		font.pixelSize: root.fontSize
-	}
 
 	Repeater {
 		id: quantityRepeater
@@ -38,15 +38,13 @@ Row {
 
 			required property int index
 			required property QuantityObject quantityObject
-			readonly property real horizontalPadding: root._showSeparators ? root.spacing / 2 : 0
 
-			width: !isNaN(root.fixedColumnWidth) ? root.fixedColumnWidth
+			width: root.fixedColumnWidth > 0 ? root.fixedColumnWidth
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
-				: quantityMetrics.columnWidth(quantityObject.unit) + horizontalPadding
-			leftPadding: horizontalPadding
-					+ (verticalSeparator.visible ? verticalSeparator.width : 0)
+				: quantityMetrics.columnWidth(quantityObject.unit)
+						+ (root.padLastColumn && index === root.model.count - 1 ? root.spacing : 0)
+			leftPadding: (verticalSeparator.visible ? Theme.geometry_listItem_separator_width : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
-			rightPadding: index === root.model.count - 1 ? 0 : horizontalPadding
 			alignment: root.labelAlignment
 			opacity: quantityObject.hidden ? 0 : 1
 			font.pixelSize: root.fontSize
@@ -66,7 +64,7 @@ Row {
 				id: verticalSeparator
 				anchors.verticalCenter: parent.verticalCenter
 				width: Theme.geometry_listItem_separator_width
-				height: fontMetrics.height
+				height: quantityMetrics.height
 				visible: root._showSeparators && quantityDelegate.index > 0
 				color: Theme.color_listItem_separator
 			}

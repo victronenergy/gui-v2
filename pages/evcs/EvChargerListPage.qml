@@ -20,7 +20,6 @@ Page {
 			leftPadding: leftInset
 			rightPadding: rightInset
 			contentItem: QuantityTableSummary {
-				rightPadding: Theme.geometry_icon_size_medium
 				//% "Session"
 				summaryHeaderText: qsTrId("evcs_charger_list_session")
 				summaryModel: [

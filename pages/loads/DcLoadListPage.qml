@@ -26,20 +26,25 @@ Page {
 		id: headerComponent
 
 		ListItem {
+			id: tableListItem
+
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 			rightPadding: rightInset
-			contentItem: Item {
+
+			contentItem: HorizontalFlickable {
 				readonly property real columnWidth: loadSummary.fixedColumnWidth
 				readonly property real columnSpacing: loadSummary.columnSpacing
 
 				implicitHeight: dcsystemTable.y + dcsystemTable.height
+				contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth_small, tableListItem.availableWidth)
 
 				QuantityTableSummary {
 					id: loadSummary
 
+					width: parent.width
 					equalWidthColumns: true
 
 					// Set rightPadding to align with the columns in the delegates.
@@ -63,6 +68,7 @@ Page {
 					id: dcsystemTable
 
 					anchors.top: loadSummary.bottom
+					width: parent.width
 					rightPadding: loadSummary.rightPadding
 					equalWidthColumns: true
 					model: root.systemModel.count > 1 ? root.systemModel : null
