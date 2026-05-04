@@ -17,6 +17,7 @@
     "geometry_barGauge_phaseLabel_rightPadding": 3,
 
     "geometry_button_height": 40,
+    "geometry_button_padding": 4,
     "geometry_button_touch_size": 48,
     "geometry_button_touch_verticalMargin": 14,
     "geometry_button_spacing": 7,
@@ -204,16 +205,17 @@
     "geometry_navigationBar_notification_counter_width_two_digits": 30,
 
     "geometry_notificationsPage_delegate_unacknowledged_border_width": 2,
-    "geometry_notificationsPage_snoozeButton_height": 36,
+    "geometry_notificationsPage_snoozeButton_height": "geometry_button_height",
+    "geometry_notificationsPage_placeholder_icon_size": 48,
 
     "geometry_textField_height": 40,
     "geometry_textField_horizontalMargin": "geometry_listItem_flat_content_horizontalMargin",
 
     "geometry_toastNotification_horizontalMargin": 24,
-    "geometry_toastNotification_bottomMargin": 8,
+    "geometry_toastNotification_verticalMargin": 8,
     "geometry_toastNotification_radius": 8,
-    "geometry_toastNotification_minHeight": 64,
-    "geometry_toastNotification_label_padding": 16,
+    "geometry_toastNotification_highlightWidth": 64,
+    "geometry_toastNotification_padding": 16,
 
     "geometry_controlCards_slide_distance": 32,
     "geometry_controlCard_minimumWidth": 352,
