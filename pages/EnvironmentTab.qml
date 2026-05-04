@@ -15,38 +15,37 @@ LevelsTab {
 
 	model: Global.environmentInputs.model
 	delegate: EnvironmentGaugePanel {
-		id: panel
-
-		required property Device device
-
-		width: hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
-		height: Gauges.height(Global.pageManager?.expandLayout)
+		width: root.orientation === ListView.Vertical
+			   ? ListView.view.width
+			   : hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+		height: root.orientation === ListView.Vertical
+			   ? implicitHeight
+			   : Gauges.height(Global.pageManager?.expandLayout ?? false)
 		animationEnabled: root.animationEnabled
-		title: device?.name ?? ""
-		temperature: temperatureItem.valid ? temperatureItem.value : NaN
-		temperatureType: temperatureType.valid ? temperatureType.value : VenusOS.Temperature_DeviceType_Generic
-		humidity: humidity.valid ? humidity.value : NaN
+		// temperature: temperatureItem.valid ? temperatureItem.value : NaN
+		// temperatureType: temperatureType.valid ? temperatureType.value : VenusOS.Temperature_DeviceType_Generic
+		// humidity: humidity.valid ? humidity.value : NaN
 		temperatureGaugeGradient: temperatureGradient
 		humidityGaugeGradient: humidityGradient
+		focusPolicy: Qt.TabFocus
 
-		VeQuickItem {
-			id: temperatureItem
-			uid: panel.device ? panel.device.serviceUid + "/Temperature" : ""
-			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		Behavior on height {
+			enabled: root.animationEnabled && Global.pageManager?.animatingIdleResize
+			NumberAnimation {
+				duration: Theme.animation_page_idleResize_duration
+				easing.type: Easing.InOutQuad
+			}
 		}
-		VeQuickItem {
-			id: temperatureType
-			uid: panel.device ? panel.device.serviceUid + "/TemperatureType" : ""
-		}
-		VeQuickItem {
-			id: humidity
-			uid: panel.device ? panel.device.serviceUid + "/Humidity" : ""
-		}
+
+		KeyNavigationHighlight.active: activeFocus
+		KeyNavigationHighlight.leftMargin: leftInset
+		KeyNavigationHighlight.rightMargin: rightInset
 	}
 
 	Gradient {
 		id: temperatureGradient
+
+		orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
 
 		GradientStop {
 			position: Theme.geometry_levelsPage_environment_temperatureGauge_gradient_position1
@@ -64,6 +63,8 @@ LevelsTab {
 
 	Gradient {
 		id: humidityGradient
+
+		orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
 
 		GradientStop {
 			position: Theme.geometry_levelsPage_environment_humidityGauge_gradient_position1

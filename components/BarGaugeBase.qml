@@ -19,9 +19,9 @@ Rectangle {
 	property int orientation: Qt.Vertical
 	property bool animationEnabled
 
-	color: backgroundColor
 	width: orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
 	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_barGauge_horizontal_height
+	color: backgroundColor
 	radius: orientation === Qt.Vertical ? width / 2 : height / 2
 
 	readonly property real _value: isNaN(value) ? 0 : Math.min(1.0, Math.max(0, value))

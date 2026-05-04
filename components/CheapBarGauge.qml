@@ -33,8 +33,6 @@ Rectangle {
 	property bool animationEnabled
 
 	color: backgroundColor
-	width: _isVertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
-	height: _isVertical ? parent.height : Theme.geometry_barGauge_horizontal_height
 	radius: _isVertical ? width / 2 : height / 2
 
 	readonly property bool _isVertical: orientation === Qt.Vertical
