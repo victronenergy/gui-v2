@@ -97,7 +97,6 @@ OverviewWidget {
 		id: historyComponent
 
 		SolarYieldGraph {
-			maximumBarCount: Theme.geometry_overviewPage_widget_solar_graph_bar_count
 		}
 	}
 }

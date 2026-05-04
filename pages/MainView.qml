@@ -223,6 +223,18 @@ FocusScope {
 				id: swipePageModel
 				view: swipeView
 			}
+
+			// For portrait: show top/bottom gradients when user has scrolled the view.
+			ViewGradient {
+				z: 1
+				visible: swipeView.currentItem?.showTopGradient ?? false
+				rotation: 180
+			}
+			ViewGradient {
+				z: 1
+				visible: swipeView.currentItem?.showBottomGradient ?? false
+				anchors.bottom: parent.bottom
+			}
 		}
 
 		NavBar {

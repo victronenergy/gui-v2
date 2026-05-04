@@ -17,7 +17,7 @@ Item {
 	property int dotSize: Theme.geometry_briefPage_sidePanel_loadGraph_dotSize
 	property color aboveThresholdFillColor: Theme.color_orange
 	property color belowThresholdFillColor: Theme.color_blue
-	property color horizontalGradientColor1: Theme.color_briefPage_background
+	property color horizontalGradientColor1: Theme.screenSize === Theme.Portrait ? Theme.color_background_secondary : Theme.color_briefPage_background
 	property color horizontalGradientColor2: "transparent"
 	property bool zeroCentered
 	property alias animationEnabled: graphAnimation.running
@@ -67,7 +67,7 @@ Item {
 
 	Rectangle {
 		anchors.fill: parent
-		color: Theme.color_briefPage_background
+		color: root.horizontalGradientColor1
 
 		LoadGraphShapePath {
 			id: orangePath // .. or entire graph if no threshold is set.
@@ -94,7 +94,7 @@ Item {
 		width: parent.width
 		height: root.height * threshold
 		clip: true // we have to clip this, because we can't rely on setting minYValue of bluePath.
-		color: Theme.color_briefPage_background
+		color: root.horizontalGradientColor1
 
 		LoadGraphShapePath {
 			id: bluePath

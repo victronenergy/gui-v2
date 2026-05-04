@@ -17,6 +17,8 @@ Page {
 	required property url iconSource
 	required property string url
 	required property SwipeView view
+	property bool showTopGradient
+	property bool showBottomGradient
 
 	// Allow animations if this is the current page, or when dragging between pages
 	animationEnabled: defaultAnimationEnabled && visible
