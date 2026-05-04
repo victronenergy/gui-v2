@@ -49,7 +49,7 @@ T.Button {
 
 	icon.color: root.color
 	font.family: Global.fontFamily
-	font.pixelSize: Theme.font_size_body1
+	font.pixelSize: Theme.font_button_size
 
 	// flat=true means the background should not be visible.
 	flat: true

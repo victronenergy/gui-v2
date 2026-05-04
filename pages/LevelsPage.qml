@@ -12,6 +12,8 @@ SwipeViewPage {
 	// Used by StartPageConfiguration when this is the start page.
 	property alias currentTabIndex: tabBar.currentIndex
 
+	readonly property LevelsTab currentTabView: tabBar.currentIndex === 0 ? tanksTab : environmentTab
+
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 	focusPolicy: Qt.TabFocus
@@ -32,6 +34,17 @@ SwipeViewPage {
 		}
 	}
 
+	// Background behind tabs, to prevent tabs/environment flickables from showing under the tab
+	// bar when they are scrolled vertically.
+	Rectangle {
+		anchors {
+			fill: tabBar
+			bottomMargin: -tabsFocusScope.anchors.topMargin
+		}
+		color: root.backgroundColor
+		visible: Theme.screenSize === Theme.Portrait
+	}
+
 	TabBar {
 		id: tabBar
 
@@ -40,7 +53,8 @@ SwipeViewPage {
 			topMargin: Global.pageManager?.expandLayout ? -tabBar.height : 0
 			horizontalCenter: parent.horizontalCenter
 		}
-
+		width: Theme.screenSize === Theme.Portrait ? parent.width - (2*Theme.geometry_page_content_horizontalMargin)
+				: implicitWidth
 		opacity: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 				 || Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_ExitIdleMode
 				 ? 1.0
@@ -65,6 +79,7 @@ SwipeViewPage {
 
 		// Prefer a tab that is enabled.
 		currentIndex: tanksTab.enabled || !environmentTab.enabled ? 0 : 1
+
 		KeyNavigation.down: tabsFocusScope
 	}
 
@@ -79,6 +94,7 @@ SwipeViewPage {
 			left: parent.left
 			right: parent.right
 		}
+		z: -1 // allow tanks/env view to scroll beneath the tab bar
 
 		Behavior on anchors.topMargin {
 			enabled: root.animationEnabled
@@ -106,15 +122,17 @@ SwipeViewPage {
 		}
 	}
 
-	// Show gradients on the left/right edges to indicate the page bounds
+	// Show gradients on the left/right edges (or top/bottom in portrait) to indicate the page bounds.
 	ViewGradient {
-		x: -(width / 2) + (height / 2)
-		rotation: 90
-		visible: root.clip
+		x: Theme.screenSize === Theme.Portrait ? 0 : -(width / 2) + (height / 2)
+		y: Theme.screenSize === Theme.Portrait ? tabsFocusScope.y : 0
+		rotation: Theme.screenSize === Theme.Portrait ? 180 : 90
+		visible: Theme.screenSize === Theme.Portrait ? !root.currentTabView.atYBeginning : !root.currentTabView.atXBeginning
 	}
 	ViewGradient {
-		x: (width / 2) - (height / 2)
-		rotation: 270
-		visible: root.clip
+		x: Theme.screenSize === Theme.Portrait ? 0 : (width / 2) - (height / 2)
+		y: Theme.screenSize === Theme.Portrait ? parent.height - height : 0
+		rotation: Theme.screenSize === Theme.Portrait ? 0 : 270
+		visible: Theme.screenSize === Theme.Portrait ? !root.currentTabView.atYEnd : !root.currentTabView.atXEnd
 	}
 }
