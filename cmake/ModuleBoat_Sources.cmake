@@ -11,6 +11,7 @@ set(VictronBoat_QML_MODULE_RESOURCES
 
 set(VictronBoat_QML_MODULE_SOURCES
     pages/boat/BoatPage.qml
+    pages/boat/BoatPage_Landscape.qml
     pages/boat/Background.qml
     pages/boat/BatteryArc.qml
     pages/boat/BatteryPercentage.qml
@@ -29,6 +30,7 @@ set(VictronBoat_QML_MODULE_SOURCES
 )
 
 set_source_files_properties(pages/boat/BoatPage.qml PROPERTIES QT_RESOURCE_ALIAS BoatPage.qml)
+set_source_files_properties(pages/boat/BoatPage_Landscape.qml PROPERTIES QT_RESOURCE_ALIAS BoatPage_Landscape.qml)
 set_source_files_properties(pages/boat/Background.qml PROPERTIES QT_RESOURCE_ALIAS Background.qml)
 set_source_files_properties(pages/boat/BatteryArc.qml PROPERTIES QT_RESOURCE_ALIAS BatteryArc.qml)
 set_source_files_properties(pages/boat/BatteryPercentage.qml PROPERTIES QT_RESOURCE_ALIAS BatteryPercentage.qml)
