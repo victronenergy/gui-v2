@@ -14,6 +14,7 @@ Loader {
 	required property Item swipeViewItem
 	required property bool animationEnabled
 	property color backgroundColor: Theme.color_page_background
+	property color statusBarBackgroundColor: backgroundColor
 	readonly property bool animationRunning: inAnimation.running || outAnimation.running
 	property bool viewActive: false
 	property real yOffset
@@ -86,8 +87,8 @@ Loader {
 				easing.type: Easing.OutSine
 			}
 			ColorAnimation {
-				target: statusBarItem
-				property: "backgroundColor"
+				target: root
+				property: "statusBarBackgroundColor"
 				from: root.backgroundColor
 				to: Theme.color_page_background
 				duration: root._animationDuration
@@ -130,8 +131,8 @@ Loader {
 				easing.type: Easing.InSine
 			}
 			ColorAnimation {
-				target: root.statusBarItem
-				property: "backgroundColor"
+				target: root
+				property: "statusBarBackgroundColor"
 				from: Theme.color_page_background
 				to: root.backgroundColor
 				duration: root._animationDuration
