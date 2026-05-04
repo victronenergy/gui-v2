@@ -16,6 +16,10 @@ Page {
 		bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 	}
 
+	//: Name of the Switch Controls feature
+	//% "Switches"
+	title: qsTrId("aux_page_switches")
+
 	BaseListView {
 		id: cardsView
 

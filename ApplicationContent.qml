@@ -34,7 +34,7 @@ FocusScope {
 		}
 
 		Component.onCompleted: {
-			ScreenBlanker.enabled = Qt.binding(function() { return !Global.splashScreenVisible && !mainView.statusBar.notificationButtonVisible })
+			ScreenBlanker.enabled = Qt.binding(function() { return !Global.splashScreenVisible && !(Global.notifications?.notificationButtonVisible ?? false) })
 			ScreenBlanker.displayOffTime = Qt.binding(function() { return screenBlanker.displayOffItem.valid ? 1000*screenBlanker.displayOffItem.value : 0 })
 			ScreenBlanker.window = root.Window.window
 		}

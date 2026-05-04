@@ -40,6 +40,10 @@ SwipeViewPage {
 		}
 	}
 
+	function toggleSidePanel() {
+		root.showSidePanel = !root.showSidePanel
+	}
+
 	// Do not animate gauge progress changes while the left/right side gauge layouts are changing.
 	on_LeftGaugeCountChanged: pauseLeftGaugeAnimations.restart()
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
@@ -375,15 +379,6 @@ SwipeViewPage {
 		active: false
 		x: root.width
 		opacity: 0.0
-	}
-
-	Connections {
-		target: Global.mainView?.statusBar ?? null
-		enabled: root.isCurrentPage
-
-		function onRightButtonClicked() {
-			root.showSidePanel = !root.showSidePanel
-		}
 	}
 
 	CpuInfo {
