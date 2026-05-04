@@ -19,7 +19,7 @@ Label {
 	topPadding: Theme.geometry_settingsListHeader_topPadding
 	bottomPadding: Theme.geometry_settingsListHeader_bottomPadding
 	width: Math.max(implicitWidth, 1)
-	font.pixelSize: Theme.font_size_body1
+	font.pixelSize: Theme.font_listItem_flat_primary_size_flat
 	wrapMode: Text.Wrap
 	color: Theme.color_font_secondary
 }

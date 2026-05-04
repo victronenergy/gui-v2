@@ -133,8 +133,8 @@ DevicePage {
 		ListItem {
 			topPadding: 0
 			bottomPadding: bottomInset
-			leftPadding: 0
-			rightPadding: 0
+			leftPadding: leftInset
+			rightPadding: rightInset
 			preferredVisible: root.trackerCount > 1
 
 			contentItem: QuantityTable {
