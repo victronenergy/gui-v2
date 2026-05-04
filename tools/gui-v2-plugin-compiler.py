@@ -162,7 +162,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.name != os.path.basename(os.getcwd()):
-        print("error: plugin name does not match working directory name!")
+        print("\n\nERROR: plugin name does not match working directory name!")
         sys.exit(1)
 
     imageFiles = collect_filenames('.', '.svg')
@@ -199,7 +199,10 @@ if __name__ == '__main__':
     integrations = []
     if len(args.settings) > 0:
         if not args.settings.endswith('.qml'):
-            print("Invalid settings page specified, must be a .qml file")
+            print("\n\nERROR: Invalid settings page specified, must be a .qml file")
+            sys.exit(1)
+        if not os.path.exists(args.settings):
+            print(f"\n\nERROR: Settings page \"{args.settings}\" not found in current directory ({os.path.dirname(os.path.abspath(args.settings))})")
             sys.exit(1)
         settingsIntegration = {
             "type": 1,
@@ -210,13 +213,16 @@ if __name__ == '__main__':
         if len(args.devicelist) > 0:
             for integration in args.devicelist:
                 if len(integration) != 3:
-                    print("Invalid devicelist triplet!")
+                    print("\n\nERROR: Invalid devicelist triplet!")
                     sys.exit(1)
                 if not integration[0].startswith(('0x', '0X')):
-                    print("Invalid product id specified in devicelist triplet, must be a hex string starting with 0x")
+                    print("\n\nERROR: Invalid product id specified in devicelist triplet, must be a hex string starting with 0x")
                     sys.exit(1)
                 if not integration[1].endswith('.qml'):
-                    print("Invalid settings page specified in devicelist triplet, must be a .qml file")
+                    print("\n\nERROR: Invalid settings page specified in devicelist triplet, must be a .qml file")
+                    sys.exit(1)
+                if not os.path.exists(integration[1]):
+                    print(f"\n\nERROR: Settings page \"{integration[1]}\" not found in current directory ({os.path.dirname(os.path.abspath(integration[1]))})")
                     sys.exit(1)
                 devicelistIntegration = {
                     "type": 2,
@@ -237,4 +243,3 @@ if __name__ == '__main__':
 
     print("--- done!")
     sys.exit(0)
-
