@@ -17,7 +17,8 @@ Flow {
 	id: root
 
 	required property PhaseModel model
-	property int widgetSize: VenusOS.OverviewWidget_Size_S
+	required property int widgetSize
+	required property int fontPixelSize
 
 	// These properties are used to change the text color depending on the phase value.
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
@@ -60,9 +61,7 @@ Flow {
 
 				text: phaseDelegate.name + ":"
 				color: quantityLabel.unitColor
-				font.pixelSize: root.widgetSize >= VenusOS.OverviewWidget_Size_L ? Theme.font_overviewPage_widget_phase_maximumSize
-						: root.widgetSize >= VenusOS.OverviewWidget_Size_M ? Theme.font_overviewPage_widget_phase_intermediateSize
-						: Theme.font_overviewPage_widget_phase_minimumSize
+				font.pixelSize: root.fontPixelSize
 			}
 
 			ElectricalQuantityLabel {
@@ -81,7 +80,7 @@ Flow {
 					readonly property real power: phaseDelegate.power
 					readonly property real current: phaseDelegate.current
 				}
-				font.pixelSize: phaseLabel.font.pixelSize
+				font.pixelSize: root.fontPixelSize
 				valueColor: phaseDelegate.textColor
 				unitColor: valueColor == Theme.color_font_primary
 						   ? Theme.color_font_secondary

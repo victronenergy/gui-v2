@@ -10,6 +10,8 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
+	property bool stretchHorizontally
+
 	onClicked: {
 		if (Global.evChargers.model.count === 1) {
 			Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
@@ -26,8 +28,12 @@ OverviewWidget {
 	preferredSize: VenusOS.OverviewWidget_PreferredSize_LargeOnly
 	enabled: true
 
-	contentItem: ColumnLayout {
-		spacing: 0
+	contentItem: GridLayout {
+		columnSpacing: 0
+		rowSpacing: Theme.geometry_overviewPage_widget_content_spacing
+		columns: root.stretchHorizontally ? 2 : 1
+		rows: root.stretchHorizontally ? 2 : 3
+		flow: GridLayout.TopToBottom
 
 		WidgetHeader {
 			text: root.title
@@ -39,8 +45,14 @@ OverviewWidget {
 			widgetSize: root.size
 			dataObject: Global.evChargers
 			sourceType: VenusOS.ElectricalQuantity_Source_Ac
+			font.pixelSize: widgetSize <= VenusOS.OverviewWidget_Size_XS ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
+					: widgetSize <= VenusOS.OverviewWidget_Size_M ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
+					: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 			Layout.fillWidth: true
 			Layout.fillHeight: true
+			Layout.preferredWidth: root.stretchHorizontally
+					? (parent.width/2 + Theme.geometry_overviewPage_widget_spacing)  // push details to the right
+					: -1
 		}
 
 		Loader {
@@ -49,6 +61,8 @@ OverviewWidget {
 					: Global.evChargers.model.count > 0 && Global.evChargers.model.firstObject ? singleEvChargerComponent
 					: null
 			Layout.fillWidth: true
+			Layout.rowSpan: root.stretchHorizontally ? parent.rows : 1
+			Layout.alignment: Qt.AlignTop
 		}
 	}
 
@@ -68,7 +82,7 @@ OverviewWidget {
 				valueColor: unitColor
 				alignment: Qt.AlignLeft
 				unit: VenusOS.Units_Energy_KiloWattHour
-				font.pixelSize: Theme.font_overviewPage_secondary
+				font.pixelSize: root.tertiaryFontSize
 
 				VeQuickItem {
 					id: energyItem
@@ -82,7 +96,7 @@ OverviewWidget {
 				text: Global.evChargers.chargerStatusToText(statusItem.value)
 				color: Theme.color_font_secondary
 				visible: statusItem.valid
-				font.pixelSize: Theme.font_overviewPage_secondary
+				font.pixelSize: root.tertiaryFontSize
 
 				VeQuickItem {
 					id: statusItem
@@ -100,7 +114,7 @@ OverviewWidget {
 					elide: Text.ElideRight
 					text: Global.evChargers.chargerModeToText(modeItem.value)
 					color: Theme.color_font_secondary
-					font.pixelSize: Theme.font_overviewPage_secondary
+					font.pixelSize: root.tertiaryFontSize
 
 					VeQuickItem {
 						id: modeItem
@@ -113,7 +127,7 @@ OverviewWidget {
 
 					text: chargingTimeItem.value >= 60 ? Utils.formatAsHHMM(chargingTimeItem.value, true) : Utils.formatAsHHMMSS(chargingTimeItem.value, true)
 					color: Theme.color_font_secondary
-					font.pixelSize: Theme.font_overviewPage_secondary
+					font.pixelSize: root.tertiaryFontSize
 					// do not show value under a second
 					visible: chargingTimeItem.value > 0
 
@@ -142,6 +156,7 @@ OverviewWidget {
 						width: parent.width - chargerCountLabel.implicitWidth
 						elide: Text.ElideRight
 						text: Global.evChargers.chargerStatusToText(model.status)
+						font.pixelSize: root.tertiaryFontSize
 						color: Theme.color_font_secondary
 					}
 
@@ -150,6 +165,7 @@ OverviewWidget {
 
 						text: model.statusCount || "-"
 						color: Theme.color_font_secondary
+						font.pixelSize: root.tertiaryFontSize
 					}
 				}
 			}

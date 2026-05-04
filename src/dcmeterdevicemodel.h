@@ -99,7 +99,7 @@ private:
 		QPointer<VeQItem> powerItem;
 		QPointer<VeQItem> currentItem;
 		QPointer<VeQItem> monitorModeItem;
-		Device *device = nullptr;
+		QPointer<Device> device;
 	};
 
 	bool includeDevice(Device *device);

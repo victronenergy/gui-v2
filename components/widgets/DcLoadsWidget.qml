@@ -16,6 +16,8 @@ OverviewWidget {
 	enabled: systemLoadDevices.count > 1 || nonSystemLoadDevices.count > 0
 
 	contentItem: ColumnLayout {
+		spacing: Theme.geometry_overviewPage_widget_content_spacing
+
 		WidgetHeader {
 			text: root.title
 			icon.source: "qrc:/images/dcloads.svg"

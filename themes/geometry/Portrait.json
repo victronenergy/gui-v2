@@ -321,6 +321,7 @@
     "geometry_quantityLabel_spacing": 2,
 
     "geometry_widgetHeader_spacing": 4,
+    "geometry_widgetHeader_bottomPadding": 4,
     "geometry_widgetHeader_icon_size": 24,
 
     "geometry_splashView_logo_verticalCenterOffset": -25,
@@ -368,22 +369,27 @@
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,
-    "geometry_overviewPage_widget_content_horizontalMargin": 8,
-    "geometry_overviewPage_widget_content_topMargin": 8,
-    "geometry_overviewPage_widget_content_bottomMargin_small": 4,
+    "geometry_overviewPage_widget_content_horizontalMargin": 12,
+    "geometry_overviewPage_widget_content_topMargin": 10,
+    "geometry_overviewPage_widget_content_bottomMargin_small": 8,
     "geometry_overviewPage_widget_content_bottomMargin_large": 8,
+    "geometry_overviewPage_widget_content_spacing": 4,
     "geometry_overviewPage_widget_sideGauge_margins": 8,
     "geometry_overviewPage_widget_leftWidgetWidth": 224,
     "geometry_overviewPage_widget_centerWidgetWidth": 304,
     "geometry_overviewPage_widget_rightWidgetWidth": 224,
+    "geometry_overviewPage_widget_height_xs": 68,
+    "geometry_overviewPage_widget_height_s": 88,
+    "geometry_overviewPage_widget_height_m": 116,
+    "geometry_overviewPage_widget_height_l": 128,
 
     "geometry_overviewPage_widget_battery_background_radius": 4,
     "geometry_overviewPage_widget_battery_gradient_height": 48,
     "geometry_overviewPage_widget_battery_bottomRow_bottomMargin": 10,
 
     "geometry_overviewPage_widget_spacing": 8,
-    "geometry_overviewPage_widget_compact_l_height": 192,
-    "geometry_overviewPage_widget_expanded_l_height": 205,
+    "geometry_overviewPage_widget_compact_l_height": 120,
+    "geometry_overviewPage_widget_expanded_l_height": 120,
 
     "geometry_overviewPage_connector_line_width": 2,
     "geometry_overviewPage_connector_electron_velocity": 30,
@@ -400,7 +406,9 @@
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
     "geometry_overviewPage_widget_solar_graph_margins": 12,
     "geometry_overviewPage_batterywidget_renewable_icon_right_margin": 8,
-    "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 3,
+    "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 28,
+
+    "geometry_overviewPage_energyIndicator_height": 32,
 
     "geometry_three_phase_column_spacing": 0,
     "geometry_three_phase_gauge_spacing": 4,

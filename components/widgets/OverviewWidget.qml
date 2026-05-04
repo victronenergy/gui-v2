@@ -24,6 +24,15 @@ T.Control {
 	property bool animateGeometry
 	property bool animationEnabled
 
+	// Font size for secondary widget details, e.g. AC-in state, battery temp, ESS numbers.
+	readonly property int secondaryFontSize: size >= VenusOS.OverviewWidget_Size_M
+			? Theme.font_overviewPage_secondary_maximumSize
+			: Theme.font_overviewPage_secondary_minimumSize
+	// Font size for tertiary widget details, e.g. phase measurements.
+	readonly property int tertiaryFontSize: size >= VenusOS.OverviewWidget_Size_L ? Theme.font_overviewPage_widget_phase_maximumSize
+			: size >= VenusOS.OverviewWidget_Size_M ? Theme.font_overviewPage_widget_phase_intermediateSize
+			: Theme.font_overviewPage_widget_phase_minimumSize
+
 	signal clicked
 
 	function getCompactHeight(s) {
@@ -74,7 +83,7 @@ T.Control {
 	bottomPadding: size >= VenusOS.OverviewWidget_Size_L
 			? Theme.geometry_overviewPage_widget_content_bottomMargin_large
 			: Theme.geometry_overviewPage_widget_content_bottomMargin_small
-	height: compactHeight
+	height: Theme.screenSize === Theme.Portrait ? implicitHeight : compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
 	enabled: false
 

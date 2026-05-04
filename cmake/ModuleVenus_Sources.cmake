@@ -83,6 +83,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/NotificationDelegate.qml
     components/ObjectAcConnection.qml
     components/ObjectModelMonitor.qml
+    components/OverviewEnergyIndicator.qml
+    components/OverviewLayoutConditions.qml
     components/Page.qml
     components/PageGensetModel.qml
     components/PageStack.qml
@@ -291,6 +293,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/switches/delegates/SwitchableOutputCardDelegate_color.qml
 
     components/widgets/AcWidget.qml
+    components/widgets/AcWidgetContent.qml
     components/widgets/AcInputWidget.qml
     components/widgets/AcLoadsWidget.qml
     components/widgets/BatteryWidget.qml
@@ -300,7 +303,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/widgets/EvcsWidget.qml
     components/widgets/InverterChargerWidget.qml
     components/widgets/OverviewWidget.qml
-    components/widgets/OverviewAcElectricalQuantityLabel.qml
     components/widgets/OverviewElectricalQuantityLabel.qml
     components/widgets/SolarYieldWidget.qml
     components/widgets/WidgetConnector.qml
@@ -364,6 +366,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/NotificationLayer.qml
     pages/NotificationsPage.qml
     pages/OverviewPage.qml
+    pages/OverviewPage_Landscape.qml
+    pages/OverviewPage_Portrait.qml
     pages/PageManager.qml
     pages/SettingsPage.qml
     pages/TanksTab.qml
@@ -790,6 +794,7 @@ set(VictronVenusOS_RESOURCES
     images/freshWater.svg
     images/key_navigation_highlight_dark.svg
     images/key_navigation_highlight_light.svg
+    images/overview_lightning_bolts.svg
     images/icon_black_water_32.svg
     images/icon_charging_generator.svg
     images/icon_charging_grid.svg
