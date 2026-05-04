@@ -42,6 +42,8 @@ OverviewWidget {
 	// PV inverters. So, if there are only solar chargers, show the solar history; otherwise if
 	// there is a single PV inverter, show its phase data.
 	contentItem: ColumnLayout {
+		spacing: Theme.geometry_overviewPage_widget_content_spacing
+
 		WidgetHeader {
 			text: root.title
 			icon.source: "qrc:/images/solaryield.svg"
@@ -85,6 +87,7 @@ OverviewWidget {
 			model: pvInverter.phases
 			visible: model.count > 1
 			widgetSize: root.size
+			fontPixelSize: root.tertiaryFontSize
 
 			PvInverter {
 				id: pvInverter

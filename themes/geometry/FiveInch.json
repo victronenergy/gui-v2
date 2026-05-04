@@ -321,6 +321,7 @@
     "geometry_quantityLabel_spacing": 2,
 
     "geometry_widgetHeader_spacing": 4,
+    "geometry_widgetHeader_bottomPadding": 0,
     "geometry_widgetHeader_icon_size": 24,
 
     "geometry_splashView_logo_verticalCenterOffset": -13,
@@ -372,10 +373,15 @@
     "geometry_overviewPage_widget_content_topMargin": 8,
     "geometry_overviewPage_widget_content_bottomMargin_small": 4,
     "geometry_overviewPage_widget_content_bottomMargin_large": 8,
+    "geometry_overviewPage_widget_content_spacing": 2,
     "geometry_overviewPage_widget_sideGauge_margins": 8,
     "geometry_overviewPage_widget_leftWidgetWidth": 176,
     "geometry_overviewPage_widget_centerWidgetWidth": 240,
     "geometry_overviewPage_widget_rightWidgetWidth": 176,
+    "geometry_overviewPage_widget_height_xs": 68,
+    "geometry_overviewPage_widget_height_s": 96,
+    "geometry_overviewPage_widget_height_m": 116,
+    "geometry_overviewPage_widget_height_l": 132,
 
     "geometry_overviewPage_widget_battery_background_radius": 4,
     "geometry_overviewPage_widget_battery_gradient_height": 38,
@@ -401,6 +407,8 @@
     "geometry_overviewPage_widget_solar_graph_margins": 12,
     "geometry_overviewPage_batterywidget_renewable_icon_right_margin": 8,
     "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 40,
+
+    "geometry_overviewPage_energyIndicator_height": 32,
 
     "geometry_three_phase_column_spacing": -2,
     "geometry_three_phase_gauge_spacing": 4,

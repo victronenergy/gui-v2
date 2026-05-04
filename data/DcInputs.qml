@@ -21,5 +21,37 @@ QtObject {
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
 	}
 
+	function overviewWidgetTypeForService(serviceType, dcMeterType = -1) {
+		switch (serviceType) {
+		case "alternator":
+			return VenusOS.OverviewWidget_Type_Alternator
+		case "dcgenset":
+			return VenusOS.OverviewWidget_Type_DcGenerator
+		case "fuelcell":
+			return VenusOS.OverviewWidget_Type_FuelCell
+		case "dcsource":
+			// If dcMeterType is set, return a specific widget for this meter type. Otherwise, group
+			// it together with other dcsource devices, into a "Generic source" box.
+			switch (dcMeterType) {
+			case VenusOS.DcMeter_Type_AcCharger:
+				return VenusOS.OverviewWidget_Type_AcCharger
+			case VenusOS.DcMeter_Type_DcCharger:
+				return VenusOS.OverviewWidget_Type_DcCharger
+			case VenusOS.DcMeter_Type_ShaftGenerator:
+				return VenusOS.OverviewWidget_Type_ShaftGenerator
+			case VenusOS.DcMeter_Type_WaterGenerator:
+				return VenusOS.OverviewWidget_Type_WaterGenerator
+			case VenusOS.DcMeter_Type_WindCharger:
+				return VenusOS.OverviewWidget_Type_WindCharger
+			default:
+				break
+			}
+			return VenusOS.OverviewWidget_Type_GenericDcSource
+		default:
+			console.warn("DC input service type was", serviceType, "which is not in Global.dcInputs.model!")
+			return -1
+		}
+	}
+
 	Component.onCompleted: Global.dcInputs = root
 }

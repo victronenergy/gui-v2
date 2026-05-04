@@ -25,6 +25,8 @@ OverviewWidget {
 	enabled: true
 
 	contentItem: ColumnLayout {
+		spacing: Theme.geometry_overviewPage_widget_content_spacing
+
 		WidgetHeader {
 			text: root.title
 			icon.source: VenusOS.dcMeter_iconForType(root.inputType)

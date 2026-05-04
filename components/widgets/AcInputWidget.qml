@@ -13,72 +13,30 @@ AcWidget {
 	readonly property AcInputSystemInfo inputInfo: input?.inputInfo ?? null
 	readonly property bool inputOperational: input && input.operational
 
+	readonly property bool _showSideGauge: inputOperational && size >= VenusOS.OverviewWidget_Size_M
+
+	rightPadding: _showSideGauge ? Theme.geometry_overviewPage_widget_sideGauge_margins
+			: Theme.geometry_overviewPage_widget_content_horizontalMargin
 	title: !!inputInfo ? Global.acInputs.sourceToText(inputInfo.source) : ""
-	phaseCount: inputOperational ? input.phases.count : 0
+	quantitySourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
+	quantityDataObject: inputOperational ? input : null
+	phaseModel: inputOperational && input.phases.count > 1 ? input.phases : null
 	enabled: !!inputInfo
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
 		implicitHeight: contentLayout.implicitHeight
 
-		ColumnLayout {
+		AcWidgetContent {
 			id: contentLayout
 
-			spacing: 0
 			width: parent.width - (sideGaugeLoader.active ? sideGaugeLoader.width + Theme.geometry_overviewPage_widget_sideGauge_margins : 0)
 			height: parent.height
-
-			WidgetHeader {
-				text: root.title
-				icon.source: !!root.inputInfo ? Global.acInputs.sourceIcon(root.inputInfo.source) : ""
-				Layout.fillWidth: true
-			}
-
-			Loader {
-				sourceComponent: root.inputOperational ? operationalComponent : nonOperationalComponent
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-
-				Component {
-					id: operationalComponent
-
-					ColumnLayout {
-						spacing: 0
-
-						OverviewAcElectricalQuantityLabel {
-							widget: root
-							dataObject: root.inputOperational ? root.input : null
-							sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
-							Layout.fillWidth: true
-							Layout.fillHeight: true
-						}
-
-						ThreePhaseDisplay {
-							model: root.phaseCount > 1 ? root.input.phases : null
-							widgetSize: root.size
-							inputMode: true
-							Layout.fillWidth: true
-						}
-					}
-				}
-
-				Component {
-					id: nonOperationalComponent
-
-					Label {
-						id: stateLabel
-
-						topPadding: Theme.geometry_overviewPage_widget_content_topMargin
-						elide: Text.ElideRight
-						text: root.inputInfo && root.inputInfo.source === VenusOS.AcInputs_InputSource_Generator
-								? CommonWords.stopped
-								: CommonWords.disconnected
-						font.pixelSize: Theme.font_overviewPage_secondary
-						Layout.fillWidth: true
-						Layout.fillHeight: true
-					}
-				}
-			}
+			widget: root
+			iconSource: !!root.inputInfo ? Global.acInputs.sourceIcon(root.inputInfo.source) : ""
+			stateText: root.inputOperational ? ""
+					: root.inputInfo && root.inputInfo.source === VenusOS.AcInputs_InputSource_Generator ? CommonWords.stopped
+					: CommonWords.disconnected
 		}
 
 		Loader {
@@ -89,7 +47,7 @@ AcWidget {
 				bottom: parent.bottom
 				right: parent.right
 			}
-			active: root.inputOperational && root.size >= VenusOS.OverviewWidget_Size_M
+			active: root._showSideGauge
 			sourceComponent: ThreePhaseBarGauge {
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 				phaseModel: root.input.phases

@@ -24,6 +24,8 @@ Item {
 		delegate: Rectangle {
 			x: model.index * Theme.geometry_overviewPage_widget_solar_graph_bar_width
 				+ (Theme.geometry_overviewPage_widget_solar_graph_bar_spacing * model.index)
+				// Cancel out the spacing added for the last bar.
+				+ (Theme.geometry_overviewPage_widget_solar_graph_bar_spacing/yieldModel.count * model.index)
 			y: parent.height - height
 			height: yieldModel.maximumYield > 0
 					? root.height * (model.yieldKwh / yieldModel.maximumYield)

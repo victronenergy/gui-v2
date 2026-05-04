@@ -189,6 +189,11 @@ Item {
 		},
 		{
 			name: "AC Loads + Essential Loads; EVCS connected to AC Loads only",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", phaseCount: 3, connected: 0 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: { phaseCount: 1 }, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
@@ -198,6 +203,11 @@ Item {
 		},
 		{
 			name: "AC Loads + Essential Loads; EVCS connected to Essential Loads only",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", phaseCount: 3, connected: 0 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
@@ -207,6 +217,11 @@ Item {
 		},
 		{
 			name: "AC Loads + Essential Loads; EVCS connected to AC Loads + Essential Loads",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", phaseCount: 3, connected: 0 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			system: { showInputLoads: true, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
@@ -217,6 +232,11 @@ Item {
 		},
 		{
 			name: "AC Loads only because AC-Out disabled; EVCS connected to AC Loads only",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", phaseCount: 3, connected: 0 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			system: { showInputLoads: true, hasAcOutSystem: 0, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [
@@ -227,6 +247,11 @@ Item {
 		},
 		{
 			name: "AC Loads only because showInputLoads=false; EVCS connected to AC Loads only",
+			acInputs: [
+				{ source: VenusOS.AcInputs_InputSource_Shore, serviceType: "vebus", phaseCount: 3, connected: 1 },
+				{ source: VenusOS.AcInputs_InputSource_Generator, serviceType: "genset", phaseCount: 3, connected: 0 },
+			],
+			dcInputs: {  types: [ { serviceType: "alternator", monitorMode: -1 }, { serviceType: "dcsource", monitorMode: -8 } ] },
 			system: { showInputLoads: false, hasAcOutSystem: 1, ac: {}, dc: { serviceTypes: ["dcload"] } },
 			evcs: {
 				chargers: [

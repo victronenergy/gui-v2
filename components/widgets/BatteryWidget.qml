@@ -149,7 +149,7 @@ OverviewWidget {
 			value: Global.system.battery.temperature
 			unit: Global.systemSettings.temperatureUnit
 			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: Theme.font_overviewPage_battery_secondary
+			font.pixelSize: root.secondaryFontSize
 			alignment: Qt.AlignRight
 			visible: !isNaN(Global.system.battery.temperature)
 		}
@@ -175,6 +175,7 @@ OverviewWidget {
 			text: root.title
 			icon.source: Global.system.battery.icon
 			Layout.fillWidth: true
+			Layout.bottomMargin: Theme.geometry_overviewPage_widget_content_spacing
 		}
 
 		ElectricalQuantityLabel {
@@ -190,6 +191,7 @@ OverviewWidget {
 			text: VenusOS.battery_modeToText(Global.system.battery.mode)
 			elide: Text.ElideRight
 			color: Theme.color_overviewPage_widget_battery_font_secondary
+			font.pixelSize: Theme.font_overviewPage_battery_small
 			Layout.fillWidth: true
 		}
 
@@ -201,7 +203,7 @@ OverviewWidget {
 				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
 				visible: Global.system.battery.timeToGo > 0
 				elide: Text.ElideRight
-				font.pixelSize: Theme.font_overviewPage_secondary
+				font.pixelSize: Theme.font_overviewPage_battery_small
 				Layout.fillWidth: true
 			}
 
@@ -244,7 +246,7 @@ OverviewWidget {
 
 			FontMetrics {
 				id: quantityLabelFont
-				font.pixelSize: Theme.font_overviewPage_battery_secondary
+				font.pixelSize: Theme.font_overviewPage_battery_large
 				font.family: Global.quantityFontFamily
 			}
 
@@ -254,7 +256,7 @@ OverviewWidget {
 				value: Global.system.battery.voltage
 				unit: VenusOS.Units_Volt_DC
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
 				alignment: Qt.AlignLeft
 				Layout.fillWidth: true
 			}
@@ -265,7 +267,7 @@ OverviewWidget {
 				value: Global.system.battery.current
 				unit: VenusOS.Units_Amp
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
 				Layout.fillWidth: true
 			}
 
@@ -275,7 +277,7 @@ OverviewWidget {
 				value: Global.system.battery.power
 				unit: VenusOS.Units_Watt
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_secondary : Theme.font_overviewPage_battery_secondary
+				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
 				alignment: Qt.AlignRight
 				Layout.fillWidth: true
 			}
