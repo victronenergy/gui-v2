@@ -502,6 +502,7 @@ public:
 
 	enum ModalDialog_DoneOptions {
 		ModalDialog_DoneOptions_NoOptions,
+		ModalDialog_DoneOptions_CancelOnly,
 		ModalDialog_DoneOptions_OkOnly,
 		ModalDialog_DoneOptions_OkAndCancel,
 		ModalDialog_DoneOptions_SetAndCancel

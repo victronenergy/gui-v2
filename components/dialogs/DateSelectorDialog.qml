@@ -17,14 +17,16 @@ ModalDialog {
 	title: qsTrId("dateselectordialog_set_date")
 
 	contentItem: ModalDialog.FocusableContentItem {
+		implicitHeight: dateSelector.implicitHeight
+
 		DateSelector {
 			id: dateSelector
 
-			availableWidth: parent.width - 2*Theme.geometry_modalDialog_content_horizontalMargin
 			anchors {
 				centerIn: parent
-				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+				verticalCenterOffset: -Theme.geometry_modalDialog_content_spacing
 			}
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 			focus: true
 			KeyNavigation.up: dateSelector
 			KeyNavigation.down: root.footer

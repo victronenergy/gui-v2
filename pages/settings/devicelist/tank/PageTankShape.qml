@@ -203,27 +203,39 @@ Page {
 				: qsTrId("devicelist_tankshape_edit_point").arg(modelIndex+1)
 
 			contentItem: ModalDialog.FocusableContentItem {
-				Row {
-					id: spinBoxRow
+				implicitHeight: spinBoxLayout.implicitHeight
+
+				GridLayout {
+					id: spinBoxLayout
 
 					anchors {
-						centerIn: parent
-						verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+						left: parent.left
+						leftMargin: Theme.geometry_page_content_horizontalMargin
+						right: parent.right
+						rightMargin: Theme.geometry_page_content_horizontalMargin
+						verticalCenter: parent.verticalCenter
+						verticalCenterOffset: -(Theme.geometry_modalDialog_content_spacing / 2)
 					}
-					spacing: Theme.geometry_modalDialog_content_spacing
+					columnSpacing: Theme.geometry_modalDialog_content_spacing
+					rowSpacing: 0
+					columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 
-					Column {
-						width: sensorLevelSpinBox.width
-						spacing: Theme.geometry_modalDialog_content_margins
+					ColumnLayout {
+						spacing: Theme.geometry_modalDialog_content_spacing
+
+						Layout.preferredWidth: sensorLevelSpinBox.width
+						Layout.alignment: Qt.AlignHCenter
+						Layout.bottomMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_modalDialog_content_spacing : 0
 
 						Label {
-							width: parent.width
-							wrapMode: Text.Wrap
+							elide: Text.ElideRight
 							horizontalAlignment: Text.AlignHCenter
 							color: Theme.color_font_secondary
 							//: The sensor level (as a percentage) for this tank shape point
 							//% "Sensor level"
 							text: qsTrId("devicelist_tankshape_sensor_level")
+
+							Layout.fillWidth: true
 						}
 
 						SpinBox {
@@ -243,21 +255,26 @@ Page {
 							KeyNavigation.up: sensorLevelSpinBox
 							KeyNavigation.down: root.footer
 							KeyNavigation.right: volumeSpinBox
+
+							Layout.alignment: Qt.AlignHCenter
 						}
 					}
 
-					Column {
-						width: volumeSpinBox.width
-						spacing: Theme.geometry_modalDialog_content_margins
+					ColumnLayout {
+						spacing: Theme.geometry_modalDialog_content_spacing
+
+						Layout.preferredWidth: volumeSpinBox.width
+						Layout.alignment: Qt.AlignHCenter
 
 						Label {
-							width: parent.width
-							wrapMode: Text.Wrap
+							elide: Text.ElideRight
 							horizontalAlignment: Text.AlignHCenter
 							color: Theme.color_font_secondary
 							//: The volume (as a percentage) for this tank shape point
 							//% "Volume"
 							text: qsTrId("devicelist_tankshape_volume")
+
+							Layout.fillWidth: true
 						}
 
 						SpinBox {
@@ -275,32 +292,34 @@ Page {
 							KeyNavigation.up: volumeSpinBox
 							KeyNavigation.down: root.footer
 							KeyNavigation.left: sensorLevelSpinBox
+
+							Layout.alignment: Qt.AlignHCenter
 						}
 					}
-				}
 
-				Row {
-					anchors {
-						top: spinBoxRow.bottom
-						topMargin: Theme.geometry_modalDialog_content_margins
-						horizontalCenter: parent.horizontalCenter
-					}
-					spacing: Theme.geometry_listItem_content_spacing
-					visible: errorLabel.text.length > 0
+					RowLayout {
+						spacing: Theme.geometry_listItem_content_spacing
+						opacity: errorLabel.text.length > 0 ? 1 : 0
 
-					CP.ColorImage {
-						id: alarmIcon
+						Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+						Layout.maximumWidth: spinBoxLayout.parent.width
+						Layout.minimumHeight: Theme.geometry_spinBox_indicator_height // minimize resizing when error text is set
+						Layout.columnSpan: Theme.screenSize === Theme.Portrait ? 1 : 2
 
-						source: "qrc:/images/icon_warning_24.svg"
-						color: Theme.color_red
-					}
+						CP.ColorImage {
+							source: "qrc:/images/icon_warning_24.svg"
+							color: Theme.color_red
+						}
 
-					Label {
-						id: errorLabel
+						Label {
+							id: errorLabel
 
-						width: Math.min(implicitWidth, spinBoxRow.width - alarmIcon.width - parent.spacing)
-						wrapMode: Text.Wrap
-						color: Theme.color_font_secondary
+							wrapMode: Text.Wrap
+							color: Theme.color_font_secondary
+							font.pixelSize: Theme.font_dialog_body_secondary_size
+
+							Layout.fillWidth: true
+						}
 					}
 				}
 			}

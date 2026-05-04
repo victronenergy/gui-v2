@@ -76,8 +76,9 @@ ListSetting {
 						id: numberSelectorComponentFrom
 
 						NumberSelectorDialog {
-							//% "Minimum value (%1)"
-							title: qsTrId("list-spin-box-range_minimum_value_with_arguments").arg(root.text)
+							title: root.text
+							//% "Minimum value"
+							secondaryTitle: qsTrId("list-spin-box-range_minimum_value")
 							suffix: Units.defaultUnitString(root.unit)
 							stepSize: rangeModelFrom.stepSize
 							from: rangeModelFrom.minimumValue
@@ -119,8 +120,9 @@ ListSetting {
 						id: numberSelectorComponentTo
 
 						NumberSelectorDialog {
-							//% "Maximum value (%1)"
-							title: qsTrId("list-spin-box-range_maximum_value_with_arguments").arg(root.text)
+							title: root.text
+							//% "Maximum value"
+							secondaryTitle: qsTrId("list-spin-box-range_maximum_value")
 							suffix: Units.defaultUnitString(root.unit)
 							stepSize: rangeModelTo.stepSize
 							from: rangeModelTo.minimumValue

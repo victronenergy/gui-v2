@@ -107,7 +107,7 @@ Item {
 						target: shineBar
 						from: 0.0
 						to: 0.998
-						duration: 2*Theme.animation_page_fade_duration
+						duration: 2*Theme.animation_progressArc_fade_duration
 					}
 					OpacityAnimator {
 						id: brightPauseAnimator // effectively a pause animation, but need it to be an animator...
@@ -121,7 +121,7 @@ Item {
 						target: shineBar
 						from: 1.0
 						to: 0.002
-						duration: Theme.animation_page_fade_duration
+						duration: Theme.animation_progressArc_fade_duration
 					}
 					OpacityAnimator {
 						id: waitPauseAnimator // effectively a pause animation, but need it to be an animator...

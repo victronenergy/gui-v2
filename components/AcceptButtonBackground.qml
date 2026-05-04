@@ -18,9 +18,9 @@ Rectangle {
 	signal animationFinished()
 
 	color: Theme.color_dimGreen
-	topLeftRadius: 0
-	topRightRadius: 0
-	bottomLeftRadius: 0
+	topLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0
+	topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0
+	bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0
 	bottomRightRadius: Theme.geometry_button_radius
 
 	// Slowly expands a rectangle from the left edge to the right.

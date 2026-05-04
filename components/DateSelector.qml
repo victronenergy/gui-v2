@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 FocusScope {
@@ -13,22 +14,24 @@ FocusScope {
 	property alias month: monthSpinbox.value
 	property alias day: daySpinbox.value
 
-	property real availableWidth
+	readonly property real _columnWidth: (width / 3) - (2 * Theme.geometry_modalDialog_content_spacing)
 
-	implicitWidth: yearSpinbox.width + monthSpinbox.width + daySpinbox.width + (2 * Theme.geometry_timeSelector_horizontalMargin)
-	implicitHeight: yearSpinbox.height
+	implicitWidth: contentLayout.implicitWidth
+	implicitHeight: contentLayout.implicitHeight
 
 	Row {
-		height: yearSpinbox.height
+		id: contentLayout
+
 		anchors.centerIn: parent
+		spacing: Theme.geometry_modalDialog_content_spacing
 
 		SpinBox {
 			id: yearSpinbox
-			anchors.verticalCenter: parent.verticalCenter
-			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
+
+			width: root._columnWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1970
 			to: 2100
 
@@ -43,11 +46,11 @@ FocusScope {
 
 		SpinBox {
 			id: monthSpinbox
-			anchors.verticalCenter: parent.verticalCenter
-			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
+
+			width: root._columnWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1
 			to: 12
 			textFromValue: (value, locale) => Utils.pad(value, 2)
@@ -60,11 +63,11 @@ FocusScope {
 
 		SpinBox {
 			id: daySpinbox
-			anchors.verticalCenter: parent.verticalCenter
-			width: root.availableWidth > 0 ? (root.availableWidth - (Theme.geometry_modalDialog_content_horizontalMargin * 2)) / 3 : implicitWidth
+
+			width: root._columnWidth
 			orientation: Qt.Vertical
 			spacing: Theme.geometry_spinBox_wide_spacing
-			fontPixelSize: Theme.font_size_h2
+			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)
 			textFromValue: (value, locale) => Utils.pad(value, 2)
