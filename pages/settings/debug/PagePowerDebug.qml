@@ -87,11 +87,9 @@ Page {
 
 				leftPadding: leftInset
 				rightPadding: rightInset
-				contentItem: Flickable {
+				contentItem: HorizontalFlickable {
 					implicitHeight: powerTable.height
-					contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth, tableListItem.availableWidth)
-					boundsBehavior: Flickable.StopAtBounds
-					clip: true
+					contentWidth: Math.max(Theme.geometry_quantityTable_maximumWidth_large, tableListItem.availableWidth)
 
 					QuantityTable {
 						id: powerTable

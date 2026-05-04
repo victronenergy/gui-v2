@@ -27,15 +27,22 @@ Page {
 			leftPadding: leftInset
 			rightPadding: rightInset
 
-			contentItem: Item {
+			contentItem: HorizontalFlickable {
 				readonly property real columnWidth: loadSummary.fixedColumnWidth
 				readonly property real columnSpacing: loadSummary.columnSpacing
 
 				implicitHeight: phaseTable.y + phaseTable.height
 
+				// Only stretch the table width to geometry_quantityTable_maximumWidth_small if the
+				// phase table is shown, else this creates unnecessary horizontal scrolling in
+				// portrait mode as only the "power" header is shown.
+				contentWidth: (phaseTable.model?.count ?? 0) === 0 ? tableListItem.availableWidth
+					: Math.max(Theme.geometry_quantityTable_maximumWidth_small, tableListItem.availableWidth)
+
 				QuantityTableSummary {
 					id: loadSummary
 
+					width: parent.width
 					equalWidthColumns: true
 
 					// Set rightPadding to align with the columns in the delegates.
@@ -65,6 +72,7 @@ Page {
 					readonly property string voltageKey: acInServiceType === "vebus" || acInServiceType === "acsystem" ? "V" : "Voltage"
 
 					anchors.top: loadSummary.bottom
+					width: parent.width
 					rightPadding: loadSummary.rightPadding
 					equalWidthColumns: true
 					model: root.measurements.phaseCount > 1 ? root.measurements.phases : null
