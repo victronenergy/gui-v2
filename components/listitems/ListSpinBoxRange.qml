@@ -28,7 +28,7 @@ ListSetting {
 
 	contentItem: FocusScope {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelsColumn.height
+		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
 		focus: false
 
 		// If focus moves elsewhere, remove the focus on the contentItem so that the user must press
@@ -39,121 +39,96 @@ ListSetting {
 			}
 		}
 
-		ColumnLayout {
-			id: labelsColumn
+		TwoLabelItemLayout {
+			id: contentLayout
 
-			anchors {
-				left: parent.left
-				right: buttonRow.left
-				rightMargin: root.spacing
-				verticalCenter: parent.verticalCenter
-			}
-			spacing: Theme.geometry_listItem_content_verticalSpacing
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			captionText: root.caption
 
-			Label {
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
+			secondaryComponent: RowLayout {
+				spacing: Theme.geometry_listItem_content_spacing
 
-				Layout.fillWidth: true
-			}
+				ListItemButton {
+					text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
+					down: root.clickable && (pressed || checked)
+					enabled: root.clickable && !root.readOnly
+					flat: root.readOnly
+					focus: true
 
-			CaptionLabel {
-				width: parent.width
-				text: root.caption
-				visible: text.length > 0
+					KeyNavigation.right: maximumValueButton
+					Keys.onLeftPressed: (e) => { e.accepted = true }
+					Keys.onEscapePressed: root.contentItem.focus = false
+					Keys.onEnterPressed: root.contentItem.focus = false
+					Keys.onReturnPressed: root.contentItem.focus = false
 
-				Layout.fillWidth: true
-			}
-		}
+					onClicked: Global.dialogLayer.open(numberSelectorComponentFrom, { value: dataItemFrom.value })
 
-		Row {
-			id: buttonRow
+					Binding on borderColor {
+						when: dataItemModifiedFrom.value === 1
+						value: Theme.color_button_on_border_modified
+					}
 
-			anchors {
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
-			spacing: Theme.geometry_listItem_content_spacing
+					Component {
+						id: numberSelectorComponentFrom
 
-			ListItemButton {
-				text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)
-				down: root.clickable && (pressed || checked)
-				enabled: root.clickable && !root.readOnly
-				flat: root.readOnly
-				focus: true
-
-				KeyNavigation.right: maximumValueButton
-				Keys.onLeftPressed: (e) => { e.accepted = true }
-				Keys.onEscapePressed: root.contentItem.focus = false
-				Keys.onEnterPressed: root.contentItem.focus = false
-				Keys.onReturnPressed: root.contentItem.focus = false
-
-				onClicked: Global.dialogLayer.open(numberSelectorComponentFrom, { value: dataItemFrom.value })
-
-				Binding on borderColor {
-					when: dataItemModifiedFrom.value === 1
-					value: Theme.color_button_on_border_modified
-				}
-
-				Component {
-					id: numberSelectorComponentFrom
-
-					NumberSelectorDialog {
-						//% "Minimum value (%1)"
-						title: qsTrId("list-spin-box-range_minimum_value_with_arguments").arg(root.text)
-						suffix: Units.defaultUnitString(root.unit)
-						stepSize: rangeModelFrom.stepSize
-						from: rangeModelFrom.minimumValue
-						to: rangeModelFrom.maximumValue
-						decimals: root.decimals
-						presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
-						onAccepted: dataItemFrom.setValue(value)
+						NumberSelectorDialog {
+							//% "Minimum value (%1)"
+							title: qsTrId("list-spin-box-range_minimum_value_with_arguments").arg(root.text)
+							suffix: Units.defaultUnitString(root.unit)
+							stepSize: rangeModelFrom.stepSize
+							from: rangeModelFrom.minimumValue
+							to: rangeModelFrom.maximumValue
+							decimals: root.decimals
+							presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
+							onAccepted: dataItemFrom.setValue(value)
+						}
 					}
 				}
-			}
 
-			SecondaryListLabel {
-				anchors.verticalCenter: parent.verticalCenter
-				//: Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')
-				//% "to"
-				text: qsTrId("list-spin-box-range_minimum_maximum_delimiter")
-			}
-
-			ListItemButton {
-				id: maximumValueButton
-
-				text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
-				down: root.clickable && (pressed || checked)
-				enabled: root.clickable && !root.readOnly
-				flat: root.readOnly
-
-				Keys.onRightPressed: (e) => { e.accepted = true }
-				Keys.onEscapePressed: root.contentItem.focus = false
-				Keys.onEnterPressed: root.contentItem.focus = false
-				Keys.onReturnPressed: root.contentItem.focus = false
-
-				onClicked: Global.dialogLayer.open(numberSelectorComponentTo, { value: dataItemTo.value })
-
-				Binding on borderColor {
-					when: dataItemModifiedTo.value === 1
-					value: Theme.color_button_on_border_modified
+				SecondaryListLabel {
+					//: Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')
+					//% "to"
+					text: qsTrId("list-spin-box-range_minimum_maximum_delimiter")
 				}
 
-				Component {
-					id: numberSelectorComponentTo
+				ListItemButton {
+					id: maximumValueButton
 
-					NumberSelectorDialog {
-						//% "Maximum value (%1)"
-						title: qsTrId("list-spin-box-range_maximum_value_with_arguments").arg(root.text)
-						suffix: Units.defaultUnitString(root.unit)
-						stepSize: rangeModelTo.stepSize
-						from: rangeModelTo.minimumValue
-						to: rangeModelTo.maximumValue
-						decimals: root.decimals
-						presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
-						onAccepted: dataItemTo.setValue(value)
+					text: Units.getCombinedDisplayText(root.unit, dataItemTo.value, root.decimals, Units.NoDecimalAdjustment)
+					down: root.clickable && (pressed || checked)
+					enabled: root.clickable && !root.readOnly
+					flat: root.readOnly
+
+					Keys.onRightPressed: (e) => { e.accepted = true }
+					Keys.onEscapePressed: root.contentItem.focus = false
+					Keys.onEnterPressed: root.contentItem.focus = false
+					Keys.onReturnPressed: root.contentItem.focus = false
+
+					onClicked: Global.dialogLayer.open(numberSelectorComponentTo, { value: dataItemTo.value })
+
+					Binding on borderColor {
+						when: dataItemModifiedTo.value === 1
+						value: Theme.color_button_on_border_modified
+					}
+
+					Component {
+						id: numberSelectorComponentTo
+
+						NumberSelectorDialog {
+							//% "Maximum value (%1)"
+							title: qsTrId("list-spin-box-range_maximum_value_with_arguments").arg(root.text)
+							suffix: Units.defaultUnitString(root.unit)
+							stepSize: rangeModelTo.stepSize
+							from: rangeModelTo.minimumValue
+							to: rangeModelTo.maximumValue
+							decimals: root.decimals
+							presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
+							onAccepted: dataItemTo.setValue(value)
+						}
 					}
 				}
 			}

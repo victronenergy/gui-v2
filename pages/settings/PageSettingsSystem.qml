@@ -53,11 +53,8 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListHeader {
-				preferredVisible: opportunityLoadsMode.valid
-			}
-
 			SettingsListNavigation {
+				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "Opportunity Loads"
 				text: qsTrId("pagesettingssystem_opportunity_loads")
 				//% "Automate controllable devices to maximize PV self-use"
@@ -72,9 +69,8 @@ Page {
 				}
 			}
 
-			SettingsListHeader {}
-
 			SettingsListNavigation {
+				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "AC System"
 				text: qsTrId("pagesettingssystem_ac_system")
 				//% "Inputs and Monitoring"

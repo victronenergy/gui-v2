@@ -19,6 +19,7 @@ ListSetting {
 	property bool tableMode
 	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
 	property color iconColor: Theme.color_listItem_forwardIcon
+	property bool forceColumnLayout
 
 	signal clicked
 
@@ -33,47 +34,32 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
-	// Standard layout:
-	// | Primary label       | Quantity | Arrow |
-	// | Caption             |  row     | icon  |
+	// Layout is as per ListQuantityGroup (with either a wide or compact column layout depending on
+	// whether the primary text and quantities can fit on the same line) but with an arrow icon
+	// added on the right.
+	// Note: if tableMode=true (and forceColumnLayout=false), the column layout is not used, to
+	// ensure that quantities are aligned with one another across different rows.
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.height
+		implicitHeight: contentLayout.implicitHeight
 
-		GridLayout {
+		TwoLabelQuantityRowLayout {
 			id: contentLayout
 
-			anchors.verticalCenter: parent.verticalCenter
-			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
-			columns: 2
-
-			Label {
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
-
-				Layout.fillWidth: true
+			anchors {
+				left: parent.left
+				right: arrowIcon.left
+				rightMargin: Theme.geometry_listItem_arrow_leftMargin
+				verticalCenter: parent.verticalCenter
 			}
 
-			QuantityRow {
-				id: quantityRow
-
-				model: root.quantityModel
-				tableMode: root.tableMode
-
-				Layout.rowSpan: captionLabel.visible ? 2 : 1
-			}
-
-			CaptionLabel {
-				id: captionLabel
-
-				topPadding: Theme.geometry_listItem_content_verticalSpacing
-				text: root.caption
-				visible: text.length > 0
-
-				Layout.fillWidth: true
-			}
+			primaryText: root.text
+			model: root.quantityModel
+			primaryLabel.textFormat: root.textFormat
+			primaryLabel.font: root.font
+			captionLabel.text: root.caption
+			tableMode: root.tableMode
+			forceColumnLayout: root.forceColumnLayout
 		}
 
 		CP.ColorImage {

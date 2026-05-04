@@ -27,6 +27,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml
+    components/CaptionLabel.qml
     components/CardViewLoader.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
@@ -72,6 +73,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/KeyNavigationListHelper.qml
     components/MockTerminal.qml
     components/MultiStepButton.qml
+    components/TwoLabelQuantityRowLayout.qml
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
@@ -125,6 +127,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ThreePhaseDisplay.qml
     components/ThreePhaseIOTable.qml
     components/ThreePhaseQuantityTable.qml
+    components/TwoLabelItemLayout.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
     components/Utils.js
@@ -752,6 +755,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
     images/icon_chevron_right_32.svg
+    images/icon_chevron_up_32.svg
     images/icon_connectivity_32.svg
     images/icon_debug_32.svg
     images/icon_devices_32.svg

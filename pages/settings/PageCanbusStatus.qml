@@ -116,7 +116,7 @@ Page {
 
 				preferredVisible: root._showStateGroup
 				contentItem: GridLayout {
-					columns: 2
+					columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 					columnSpacing: Theme.geometry_listItem_content_spacing
 

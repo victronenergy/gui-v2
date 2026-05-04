@@ -47,7 +47,7 @@ Page {
 					summaryModel: [
 						{ text: "", unit: VenusOS.Units_None },
 						{ text: "", unit: VenusOS.Units_None },
-						{ text: CommonWords.total_power, unit: VenusOS.Units_None },
+						{ text: CommonWords.power_watts, unit: VenusOS.Units_None },
 					]
 					bodyHeaderText: CommonWords.total
 					bodyModel: QuantityObjectModel {

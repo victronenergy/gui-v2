@@ -45,83 +45,55 @@ ListSetting {
 	// page or the QR code dialog, so there is no destructive behaviour involved.
 	writeAccessLevel: VenusOS.User_AccessType_User
 
-	// Use an Item instead of a layout, so that the button doesn't stretch the height of the
-	// content. Layout is like this:
-	// | Primary label | "Open link" or button (spans across both rows) |
-	// | Caption       |                                                |
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelsColumn.height
+		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
 
-		ColumnLayout {
-			id: labelsColumn
+		TwoLabelItemLayout {
+			id: contentLayout
 
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-				   - (linkLabel.visible ? linkLabel.width : button.width)
-				   - root.spacing
-			spacing: Theme.geometry_listItem_content_verticalSpacing
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			captionText: root.caption
+			secondaryComponent: root.mode === VenusOS.ListLink_Mode_LinkButton ? linkButtonComponent : qrCodeComponent
 
-			Label {
-				width: parent.width
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
+			Component {
+				id: linkButtonComponent
 
-				Layout.fillWidth: true
-			}
+				SecondaryListLabel {
+					//% "Open link"
+					text: qsTrId("listlink_open_link")
+					rightPadding: arrowIcon.width + root.spacing
 
-			CaptionLabel {
-				width: parent.width
-				text: root.caption
-				visible: text.length > 0
+					CP.ColorImage {
+						id: arrowIcon
 
-				Layout.fillWidth: true
-			}
-		}
-
-		SecondaryListLabel {
-			id: linkLabel
-
-			anchors {
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
-
-			//% "Open link"
-			text: qsTrId("listlink_open_link")
-			visible: root.mode === VenusOS.ListLink_Mode_LinkButton
-			rightPadding: arrowIcon.width + root.spacing
-
-			CP.ColorImage {
-				id: arrowIcon
-
-				anchors {
-					right: parent.right
-					verticalCenter: parent.verticalCenter
+						anchors {
+							right: parent.right
+							verticalCenter: parent.verticalCenter
+						}
+						source: "qrc:/images/icon_open_link_32.svg"
+						color: Theme.color_listItem_forwardIcon
+					}
 				}
-				source: "qrc:/images/icon_open_link_32.svg"
-				color: Theme.color_listItem_forwardIcon
-			}
-		}
-
-		ListItemButton {
-			id: button
-
-			anchors {
-				right: parent.right
-				verticalCenter: parent.verticalCenter
 			}
 
-			//% "Show QR code"
-			text: qsTrId("listlink_show_qr_code")
-			visible: root.mode === VenusOS.ListLink_Mode_QRCode
-			down: root.clickable && (pressed || checked)
-			enabled: root.clickable
-			focusPolicy: Qt.NoFocus
+			Component {
+				id: qrCodeComponent
 
-			onClicked: root.click()
+				ListItemButton {
+					//% "Show QR code"
+					text: qsTrId("listlink_show_qr_code")
+					down: root.clickable && (pressed || checked)
+					enabled: root.clickable
+					focusPolicy: Qt.NoFocus
+
+					onClicked: root.click()
+				}
+			}
 		}
 	}
 

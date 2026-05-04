@@ -18,7 +18,7 @@ Rectangle {
 
 	Rectangle {
 		visible: color.a > 0.0
-		width: Theme.geometry_listItem_radius
+		width: Theme.geometry_listItem_accessIndicator_width
 		height: parent.height
 		topLeftRadius: Theme.geometry_listItem_radius
 		bottomLeftRadius: Theme.geometry_listItem_radius

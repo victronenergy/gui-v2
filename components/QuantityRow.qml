@@ -10,8 +10,7 @@ Row {
 	id: root
 
 	property QuantityObjectModel model
-	property bool showFirstSeparator
-	property int fontSize: Theme.font_size_body2
+	property int fontSize: Theme.font_listItem_secondary_size
 	property color valueColor: Theme.color_quantityTable_quantityValue
 	readonly property int count: quantityRepeater.count
 
@@ -39,7 +38,7 @@ Row {
 
 			required property int index
 			required property QuantityObject quantityObject
-			readonly property real horizontalPadding: root._showSeparators ? Theme.geometry_listItem_content_spacing : 0
+			readonly property real horizontalPadding: root._showSeparators ? root.spacing / 2 : 0
 
 			width: !isNaN(root.fixedColumnWidth) ? root.fixedColumnWidth
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
@@ -47,7 +46,7 @@ Row {
 			leftPadding: horizontalPadding
 					+ (verticalSeparator.visible ? verticalSeparator.width : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
-			rightPadding: horizontalPadding
+			rightPadding: index === root.model.count - 1 ? 0 : horizontalPadding
 			alignment: root.labelAlignment
 			opacity: quantityObject.hidden ? 0 : 1
 			font.pixelSize: root.fontSize
@@ -68,8 +67,7 @@ Row {
 				anchors.verticalCenter: parent.verticalCenter
 				width: Theme.geometry_listItem_separator_width
 				height: fontMetrics.height
-				visible: root._showSeparators
-						 && (quantityDelegate.index > 0 || root.showFirstSeparator)
+				visible: root._showSeparators && quantityDelegate.index > 0
 				color: Theme.color_listItem_separator
 			}
 		}

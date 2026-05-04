@@ -12,11 +12,20 @@ ListSetting {
 
 	property QuantityObjectModel model
 
+	// Standard layout:
+	// | Primary label       | Quantity row |
+	// | Caption                            |
+	//
+	// A column layout is used if the minimum primary text length would not fit together with the
+	// quantity row on one line:
+	// | Primary label   |
+	// | Quantity row    |
+	// | Caption         |
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.height
+		implicitHeight: contentLayout.implicitHeight
 
-		Flow {
+		TwoLabelQuantityRowLayout {
 			id: contentLayout
 
 			anchors {
@@ -25,30 +34,11 @@ ListSetting {
 				verticalCenter: parent.verticalCenter
 			}
 
-			Label {
-				// If the label and quantity row do not fit side-by-side, place the row below.
-				readonly property bool compactLayout: implicitWidth + root.spacing + quantityRow.width > parent.width
-
-				bottomPadding: compactLayout ? Theme.geometry_listItem_content_verticalSpacing : 0
-				width: compactLayout ? parent.width : parent.width - quantityRow.width
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
-			}
-
-			QuantityRow {
-				id: quantityRow
-
-				model: root.model
-			}
-
-			CaptionLabel {
-				topPadding: Theme.geometry_listItem_content_verticalSpacing
-				width: parent.width
-				text: root.caption
-				visible: text.length > 0
-			}
+			primaryText: root.text
+			model: root.model
+			primaryLabel.textFormat: root.textFormat
+			primaryLabel.font: root.font
+			captionLabel.text: root.caption
 		}
 	}
 }

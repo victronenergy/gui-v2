@@ -20,6 +20,7 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: Qt.TabFocus
+	showTopGradient: Theme.screenSize === Theme.Portrait && !settingsListView.atYBeginning
 
 	function goToConnectivityPage(pageId) {
 		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, connectivityListItem.pageProperties, PageStack.Immediate)
@@ -41,9 +42,8 @@ SwipeViewPage {
 				iconSource: "qrc:/images/icon_devices_32.svg"
 			}
 
-			SettingsListHeader { } // blank spacer
-
 			SettingsListNavigation {
+				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "General"
 				text: qsTrId("settings_general")
 				//% "Access control, Display, Firmware, Support"

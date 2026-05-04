@@ -98,7 +98,7 @@ ControlCard {
 		}
 		height: Theme.geometry_card_button_height
 		radius: Theme.geometry_button_radius
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_button_size
 		generatorUid: generator.serviceUid
 	}
 }

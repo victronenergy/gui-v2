@@ -12,7 +12,7 @@ Row {
 	property alias headerText: firstTitleLabel.text
 	property alias model: titleRepeater.model
 	property int fontSize: Theme.font_size_caption
-	readonly property int columnCount: titleRepeater.count + 1 // +1 for header column
+	property int textHorizontalAlignment: Text.AlignLeft
 
 	// Column sizing parameters
 	property int metricsFontSize: fontSize // the QuantityTableMetrics font size, for calculating column size
@@ -50,6 +50,8 @@ Row {
 				text: modelData.text
 				font.pixelSize: root.fontSize
 				color: Theme.color_solarListPage_header_text
+				elide: Text.ElideRight
+				horizontalAlignment: root.textHorizontalAlignment
 			}
 		}
 

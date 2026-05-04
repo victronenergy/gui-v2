@@ -46,7 +46,7 @@ T.ComboBox {
 				anchors.fill: parent
 				leftPadding: Theme.geometry_comboBox_leftPadding
 				rightPadding: Theme.geometry_comboBox_leftPadding  // no indicator here, use same padding as left side
-				font.pixelSize: Theme.font_size_body1
+				font.pixelSize: Theme.font_button_size
 				verticalAlignment: Text.AlignVCenter
 				elide: Text.ElideRight
 				text: modelData.text
@@ -72,7 +72,7 @@ T.ComboBox {
 	contentItem: Label {
 		leftPadding: 0
 		rightPadding: root.indicator.width + root.spacing
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_button_size
 		verticalAlignment: Text.AlignVCenter
 		elide: Text.ElideRight
 		text: root.displayText

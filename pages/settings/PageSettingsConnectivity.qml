@@ -79,11 +79,10 @@ Page {
 				}
 			}
 
-			SettingsListHeader { }
-
 			SettingsColumn {
 				width: parent ? parent.width : 0
 				preferredVisible: canInterfaceRepeater.count > 0
+				topPadding: Theme.geometry_listItem_itemSeparator_height
 
 				Repeater {
 					id: canInterfaceRepeater

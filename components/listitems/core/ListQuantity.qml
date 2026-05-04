@@ -23,7 +23,7 @@ ListSetting {
 	// | Caption                        |
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.height
+		implicitHeight: contentLayout.implicitHeight
 
 		GridLayout {
 			id: contentLayout
@@ -47,7 +47,7 @@ ListSetting {
 			}
 
 			QuantityLabel {
-				font.pixelSize: Theme.font_size_body2
+				font.pixelSize: Theme.font_listItem_secondary_size
 				value: root.value
 				valueColor: root.valueColor
 				unit: root.unit

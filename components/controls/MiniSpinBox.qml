@@ -108,8 +108,8 @@ CT.SpinBox {
 	}
 
 	down.indicator: Rectangle {
-		implicitWidth: root.indicatorWidth
-		implicitHeight: root.height
+		width: root.indicatorWidth
+		height: root.availableHeight
 		topLeftRadius: Theme.geometry_button_radius
 		bottomLeftRadius: Theme.geometry_button_radius
 		color: enabled
@@ -141,8 +141,8 @@ CT.SpinBox {
 
 	up.indicator: Rectangle {
 		x: parent.width - width
-		implicitWidth: root.indicatorWidth
-		implicitHeight: root.height
+		width: root.indicatorWidth
+		height: root.availableHeight
 		topRightRadius: Theme.geometry_button_radius
 		bottomRightRadius: Theme.geometry_button_radius
 		color: enabled

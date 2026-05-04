@@ -33,13 +33,17 @@ ListSetting {
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.height
+		implicitHeight: labelLayout.implicitHeight
 
 		ThreeLabelLayout {
 			id: labelLayout
 
-			anchors.verticalCenter: parent.verticalCenter
-			width: parent.width - (arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0)
+			anchors {
+				left: parent.left
+				right: parent.right
+				rightMargin: arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0
+				verticalCenter: parent.verticalCenter
+			}
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat

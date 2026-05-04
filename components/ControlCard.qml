@@ -43,7 +43,7 @@ FocusScope {
 			right: parent.right
 			rightMargin: Theme.geometry_controlCard_title_spacing
 		}
-		font.pixelSize: Theme.font_size_body1
+		font.pixelSize: Theme.font_control_title
 		color: Theme.color_font_primary
 		elide: Text.ElideRight
 	}

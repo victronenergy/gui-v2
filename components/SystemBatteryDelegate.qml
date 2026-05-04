@@ -39,77 +39,56 @@ ListItem {
 
 	hasSubMenu: _clickable
 
-	contentItem: RowLayout {
-		spacing: 0
+	// Landscape layout:
+	// | Primary label            SOC | Arrow |
+	// | Quantity row | Charging mode | icon |
+	//
+	// Portrait layout:
+	// | Primary label   SOC |            |
+	// | Quantity row        | Arrow icon |
+	// | Charging mode       |            |
+	contentItem: Item {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.implicitHeight
 
-		Column {
-			id: leftColumn
-			Layout.fillWidth: true
-			spacing: Theme.geometry_listItem_content_verticalSpacing
+		ColumnLayout {
+			id: contentLayout
 
-			Label {
-				id: nameLabel
+			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
 
-				elide: Text.ElideRight
-				text: root.device.customName
-				font.pixelSize: Theme.font_size_body2
-			}
+			RowLayout {
+				Layout.fillWidth: true
 
-			QuantityRow {
-				showFirstSeparator: true    // otherwise this row does not align with the battery name
-				model: QuantityObjectModel {
-					filterType: QuantityObjectModel.HasValue
+				Label {
+					text: root.device.customName
+					font: root.font
+					wrapMode: Text.Wrap
 
-					QuantityObject { object: root.device; key: "voltage"; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
-					QuantityObject { object: root.device; key: "current"; unit: VenusOS.Units_Amp }
-					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+					Layout.fillWidth: true
 				}
 
-				// Show additional separator at the end, to balance with the first separator.
-				Rectangle {
-					width: Theme.geometry_listItem_separator_width
-					height: nameLabel.height
-					color: Theme.color_listItem_separator
+				QuantityLabel {
+					readonly property int statusLevel: Theme.getValueStatus(value, VenusOS.Gauges_ValueType_FallingPercentage)
+
+					value: root.device.stateOfCharge
+					unit: VenusOS.Units_Percentage
+					font: root.font
+					visible: !isNaN(root.device.stateOfCharge)
+					valueColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
+							: statusLevel === Theme.Critical ? Theme.color_red
+							: statusLevel === Theme.Warning ? Theme.color_orange
+							: Theme.color_green
+					unitColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
+							: statusLevel === Theme.Critical ? Theme.color_red
+							: statusLevel === Theme.Warning ? Theme.color_orange
+							: Theme.color_green
+
+					Layout.alignment: Qt.AlignTop
 				}
 			}
-		}
 
-		Column {
-			Layout.fillWidth: true
-			spacing: Theme.geometry_listItem_content_verticalSpacing
-
-			QuantityLabel {
-				id: socLabel
-
-				readonly property int statusLevel: Theme.getValueStatus(value, VenusOS.Gauges_ValueType_FallingPercentage)
-
-				width: parent.width
-				height: nameLabel.height
-				alignment: Text.AlignRight
-				value: root.device.stateOfCharge
-				unit: VenusOS.Units_Percentage
-				font.pixelSize: Theme.font_size_body2
-				visible: !isNaN(root.device.stateOfCharge)
-				valueColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
-						: statusLevel === Theme.Critical ? Theme.color_red
-						: statusLevel === Theme.Warning ? Theme.color_orange
-						: Theme.color_green
-				unitColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
-						: statusLevel === Theme.Critical ? Theme.color_red
-						: statusLevel === Theme.Warning ? Theme.color_orange
-						: Theme.color_green
-			}
-
-			Label {
-				id: modeLabel
-				width: parent.width
-				horizontalAlignment: Text.AlignRight
-				elide: Text.ElideRight
-				font.pixelSize: Theme.font_size_body2
-				color: Theme.color_listItem_secondaryText
-				visible: !isNaN(root.device.power)
-				text: {
+			TwoLabelQuantityRowLayout {
+				primaryText: {
 					const modeText = VenusOS.battery_modeToText(root.device.mode)
 					if (root.device.mode === VenusOS.Battery_Mode_Discharging
 							&& root.device.timeToGo > 0) {
@@ -118,10 +97,28 @@ ListItem {
 						return modeText
 					}
 				}
+				model: QuantityObjectModel {
+					filterType: QuantityObjectModel.HasValue
+
+					QuantityObject { object: root.device; key: "voltage"; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
+					QuantityObject { object: root.device; key: "current"; unit: VenusOS.Units_Amp }
+					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+				}
+				primaryLabel.font: root.font
+				primaryLabel.color: Theme.color_listItem_secondaryText
+
+				Layout.fillWidth: true
 			}
 		}
 
 		ForwardIcon {
+			id: arrowIcon
+
+			anchors {
+				right: parent.right
+				verticalCenter: parent.verticalCenter
+			}
 			opacity: root._clickable ? 1 : 0
 		}
 	}
