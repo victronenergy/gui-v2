@@ -12,30 +12,23 @@ ModalDialog {
 
 	property string description
 	property alias icon: alarmIcon
-	property alias descriptionLabel: consequencesLabel
 
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-	header: null
+
+	// In ModalWarningDialog, the title is not rendered in the header, but in the contentItem
+	// instead.
+	headerShowsTitles: false
 
 	// Since there are no focusable UI controls in the contentItem, give the initial focus to the
 	// footer.
 	footer.focus: true
 
-	contentItem: Item {
-		anchors {
-			top: parent.top
-			left: parent.left
-			right: parent.right
-			bottom: parent.footer.top
-		}
+	contentItem: Column {
+		spacing: Theme.geometry_modalDialog_content_spacing
 
 		CP.IconImage {
 			id: alarmIcon
-			anchors {
-				top: parent.top
-				topMargin: Theme.geometry_modalWarningDialog_alarmIcon_topMargin
-				horizontalCenter: parent.horizontalCenter
-			}
+			anchors.horizontalCenter: parent.horizontalCenter
 			source: "qrc:/images/icon_alarm_48.svg"
 			color: Theme.color_red
 		}
@@ -43,16 +36,13 @@ ModalDialog {
 		Label {
 			id: titleLabel
 			anchors {
-				top: alarmIcon.bottom
-				topMargin: alarmIcon.status === Image.Null ? 0 : Theme.geometry_modalWarningDialog_title_spacing
 				left: parent.left
-				leftMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
+				leftMargin: Theme.geometry_page_content_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry_modalWarningDialog_title_horizontalMargin
+				rightMargin: Theme.geometry_page_content_horizontalMargin
 			}
-
 			text: root.title
-			font.pixelSize: Theme.font_size_h1
+			font.pixelSize: Theme.font_dialog_title_size
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			wrapMode: Text.Wrap
@@ -61,21 +51,15 @@ ModalDialog {
 		Label {
 			id: consequencesLabel
 			anchors {
-				top: titleLabel.bottom
-				topMargin: Theme.geometry_modalWarningDialog_description_spacing
 				left: parent.left
-				leftMargin: Theme.geometry_modalWarningDialog_description_horizontalMargin
+				leftMargin: Theme.geometry_page_content_horizontalMargin
 				right: parent.right
-				rightMargin: Theme.geometry_modalWarningDialog_description_horizontalMargin
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_modalWarningDialog_description_spacing
+				rightMargin: Theme.geometry_page_content_horizontalMargin
 			}
-
 			horizontalAlignment: Text.AlignHCenter
 			text: root.description
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: Theme.font_dialog_body_size
 			wrapMode: Text.Wrap
-			fontSizeMode: Text.Fit
 		}
 	}
 }

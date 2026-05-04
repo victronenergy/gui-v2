@@ -19,13 +19,16 @@ ModalDialog {
 	title: qsTrId("timeselectordialog_set_time")
 
 	contentItem: ModalDialog.FocusableContentItem {
+		implicitHeight: timeSelector.implicitHeight
+
 		TimeSelector {
 			id: timeSelector
 
 			anchors {
 				centerIn: parent
-				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+				verticalCenterOffset: -Theme.geometry_modalDialog_content_spacing
 			}
+			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 			focus: true
 			KeyNavigation.up: timeSelector
 			KeyNavigation.down: root.footer

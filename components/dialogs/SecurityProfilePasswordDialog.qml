@@ -63,16 +63,18 @@ ModalDialog {
 	Component.onCompleted: resetValidation()
 
 	contentItem: ModalDialog.FocusableContentItem {
-		id: passwordEntryItem
+		implicitHeight: contentColumn.implicitHeight
 
 		ColumnLayout {
-			anchors {
-				top: parent.top
-				topMargin: Theme.geometry_modalWarningDialog_title_spacing
-				horizontalCenter: parent.horizontalCenter
-			}
+			id: contentColumn
 
-			spacing: Theme.geometry_modalWarningDialog_title_spacing
+			anchors {
+				left: parent.left
+				leftMargin: Theme.geometry_modalDialog_content_horizontalMargin
+				right: parent.right
+				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
+			}
+			spacing: Theme.geometry_modalDialog_content_spacing
 
 			Label {
 				id: description

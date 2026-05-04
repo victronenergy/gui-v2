@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -43,34 +44,10 @@ ModalDialog {
 			root.value = decimalConverter.intToDecimal(spinBox.value)
 		}
 
-		// Show error label above the spinbox, as items below it may be obscured by the VKB.
-		Label {
-			id: errorLabel
+		implicitHeight: contentLayout.implicitHeight
 
-			anchors {
-				bottom: spinBoxColumn.top
-				bottomMargin: Theme.geometry_modalWarningDialog_description_spacing
-				horizontalCenter: parent.horizontalCenter
-			}
-			width: Math.min(implicitWidth, spinBoxColumn.width)
-			leftPadding: alarmIcon.width +  Theme.geometry_modalWarningDialog_description_spacing
-			opacity: errorLabel.text.length > 0 ? 1 : 0
-			wrapMode: Text.Wrap
-
-			Behavior on opacity {
-				NumberAnimation { easing.type: Easing.InOutQuad }
-			}
-
-			CP.IconImage {
-				id: alarmIcon
-				anchors.verticalCenter: parent.verticalCenter
-				source: "qrc:/images/icon_alarm_32.svg"
-				color: Theme.color_red
-			}
-		}
-
-		Column {
-			id: spinBoxColumn
+		ColumnLayout {
+			id: contentLayout
 
 			anchors {
 				left: parent.left
@@ -78,10 +55,28 @@ ModalDialog {
 				right: parent.right
 				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -Theme.geometry_modalDialog_content_margins
+				verticalCenterOffset: -Theme.geometry_numberSelector_spinBox_bottomPadding / 2
 			}
-			width: parent.width
-			spacing: Theme.geometry_modalDialog_content_margins
+			spacing: Theme.geometry_modalDialog_content_spacing
+
+			// Show error label above the spinbox, as items below it may be obscured by the VKB.
+			Label {
+				id: errorLabel
+
+				leftPadding: alarmIcon.width +  Theme.geometry_modalWarningDialog_description_spacing
+				visible: errorLabel.text.length > 0
+				font.pixelSize: Theme.font_dialog_body_secondary_size
+				wrapMode: Text.Wrap
+
+				Layout.fillWidth: true
+
+				CP.IconImage {
+					id: alarmIcon
+					anchors.verticalCenter: parent.verticalCenter
+					source: "qrc:/images/icon_alarm_32.svg"
+					color: Theme.color_red
+				}
+			}
 
 			SpinBox {
 				id: spinBox
@@ -89,7 +84,10 @@ ModalDialog {
 				width: parent.width
 				height: Theme.geometry_timeSelector_spinBox_height
 				editable: true
-				indicatorImplicitWidth: root.decimals > 0
+				indicatorImplicitWidth: implicitContentWidth
+						+ (2 * Theme.geometry_textField_horizontalMargin) + (2 * spinBox.spacing)
+						+ (2 * Theme.geometry_spinBox_indicator_maximumWidth)
+							> root.implicitBackgroundWidth
 						? Theme.geometry_spinBox_indicator_minimumWidth
 						: Theme.geometry_spinBox_indicator_maximumWidth
 				suffix: root.suffix
@@ -109,6 +107,8 @@ ModalDialog {
 				KeyNavigation.priority: KeyNavigation.BeforeItem
 				KeyNavigation.up: spinBox
 				KeyNavigation.down: presetsRow.enabled ? presetsRow : root.footer
+
+				Layout.fillWidth: true
 
 				onValueModified: {
 					dialogContent.valueModified()
@@ -148,7 +148,6 @@ ModalDialog {
 			SegmentedButtonRow {
 				id: presetsRow
 
-				width: parent.width
 				model: root.presets
 				visible: model.length > 0
 				enabled: visible
@@ -158,6 +157,7 @@ ModalDialog {
 				}
 
 				KeyNavigation.down: root.footer
+				Layout.fillWidth: true
 			}
 		}
 	}

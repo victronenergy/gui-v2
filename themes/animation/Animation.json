@@ -1,6 +1,7 @@
 {
     "animation_page_slide_duration": 250,
-    "animation_page_fade_duration": 250,
+    "animation_page_fade_duration": 150,
+    "animation_progressArc_fade_duration": 250,
     "animation_progressArc_duration": 200,
     "animation_progressBar_duration": 1000,
     "animation_briefPage_centerGauge_shine_pauseRatio": 2.0,

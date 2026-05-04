@@ -123,6 +123,12 @@ Item {
 
 		// Called when a text field is pressed, before it receives focus.
 		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
+			if (Global.currentDialog) {
+				// If the text field is in a dialog, do not auto-scroll, as this will automatically
+				// be done by the platform.
+				return
+			}
+
 			if (viewToScroll === Global.mainView.cardsLoader) {
 				// The text field is in the Control Cards or Switch Pane view. Find the position of
 				// the text field container within the view, and move the MainView cardsLoader by

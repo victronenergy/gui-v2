@@ -8,7 +8,6 @@ import Victron.VenusOS
 
 Rectangle {
 	z: -1
-	anchors.centerIn: parent
 	color: Qt.rgba(0.0, 0.0, 0.0, 0.7)
 	width: Screen.width / Global.scalingRatio
 	height: Screen.height / Global.scalingRatio

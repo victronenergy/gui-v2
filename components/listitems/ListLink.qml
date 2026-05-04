@@ -122,12 +122,11 @@ ListSetting {
 			id: dialog
 
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
-			closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 			header: null
-			contentItem: Rectangle {
+			footer: null
+			backgroundColor: Theme.color_white // provide start contrast to QR code image
+			contentItem: Item {
 				id: quietZone
-
-				anchors.fill: parent
 
 				Image {
 					// i.e. if a QR code (including quiet zone) is 100 px wide, the
@@ -145,6 +144,7 @@ ListSetting {
 					anchors {
 						right: parent.right
 						top: parent.top
+						rightMargin: Theme.geometry_modalDialog_content_spacing
 					}
 					onClicked: dialog.close()
 				}

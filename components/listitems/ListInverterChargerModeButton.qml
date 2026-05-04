@@ -84,6 +84,7 @@ ListButton {
 		id: modeDialogComponent
 
 		InverterChargerModeDialog {
+			secondaryTitle: device.name
 			serviceUid: root.serviceUid
 			onAccepted: modeItem.setValue(mode)
 		}

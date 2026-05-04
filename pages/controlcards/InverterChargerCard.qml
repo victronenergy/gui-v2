@@ -53,6 +53,11 @@ ControlCard {
 		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
+	Device {
+		id: device
+		serviceUid: root.serviceUid
+	}
+
 	SettingsColumn {
 		id: contentLayout
 
@@ -123,6 +128,7 @@ ControlCard {
 		id: essModeDialogComponent
 
 		InverterChargerEssModeDialog {
+			secondaryTitle: device.name
 			onAccepted: essModeItem.setValue(essMode)
 		}
 	}
@@ -131,6 +137,7 @@ ControlCard {
 		id: essMinSocDialogComponent
 
 		ESSMinimumSOCDialog {
+			secondaryTitle: device.name
 			minimumStateOfCharge: essMinSocItem.value
 			onAccepted: essMinSocItem.setValue(minimumStateOfCharge)
 		}

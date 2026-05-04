@@ -12,7 +12,7 @@ TextInput {
 
 	required property T.SpinBox spinBox
 	property alias suffix: suffixLabel.text
-	property int fontPixelSize: Theme.font_size_h3
+	property int fontPixelSize: Theme.font_dialog_control_largeSize
 	property int initialValue
 	property bool arrowKeysEnabled
 
