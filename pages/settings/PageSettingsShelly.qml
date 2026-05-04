@@ -113,13 +113,14 @@ Page {
 			}
 
 			SectionHeader {
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
 				text: CommonWords.discovered_devices
 				opacity: shellyListView.count > 0 ? 1 : 0 // set opacity instead of visible to avoid binding loop
 			}
 		}
 		model: sortedChannelModel
 		delegate: ListSwitch {
-			leftPadding: horizontalContentPadding + typeIcon.width + spacing
+			leftPadding: leftInset + spacing + typeIcon.width + spacing
 			text: sortValue
 			dataItem.uid: buddy.uid
 			writeAccessLevel: VenusOS.User_AccessType_User
@@ -129,7 +130,7 @@ Page {
 
 				anchors {
 					left: parent.left
-					leftMargin: parent.horizontalContentPadding
+					leftMargin: parent.leftInset + spacing
 					verticalCenter: parent.verticalCenter
 				}
 				width: Theme.geometry_icon_size_medium

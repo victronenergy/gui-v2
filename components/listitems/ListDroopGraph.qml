@@ -38,8 +38,8 @@ ListItem {
 		verticalAlignment: Text.AlignVCenter
 	}
 
-	leftPadding: 0
-	rightPadding: 0
+	leftPadding: Theme.geometry_page_content_horizontalMargin
+	rightPadding: Theme.geometry_page_content_horizontalMargin
 	topPadding: 0
 	bottomPadding: 0
 

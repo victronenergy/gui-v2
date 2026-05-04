@@ -50,7 +50,7 @@ GradientListView {
 	delegate: ListIpAddressField {
 		id: ipAddressDelegate
 
-		rightPadding: removalButton.width + spacing + horizontalContentPadding
+		rightPadding: rightInset + removalButton.width + spacing + horizontalContentPadding
 		text: CommonWords.ip_address + ' ' + (model.index + 1)
 		secondaryText: modelData
 		saveInput: function() { root._addOrUpdateAddress(secondaryText, model.index) }
@@ -62,7 +62,7 @@ GradientListView {
 
 			anchors {
 				right: parent.right
-				rightMargin: ipAddressDelegate.horizontalContentPadding
+				rightMargin: ipAddressDelegate.rightInset + ipAddressDelegate.horizontalContentPadding
 				verticalCenter: parent.verticalCenter
 			}
 			visible: ipAddressDelegate.clickable

@@ -17,8 +17,8 @@ Label {
 	visible: preferredVisible
 	topPadding: preferredVisible ? Theme.geometry_listItem_content_verticalMargin : 0
 	bottomPadding: preferredVisible ? Theme.geometry_listItem_content_verticalMargin : 0
-	leftPadding: Theme.geometry_listItem_content_horizontalMargin
-	rightPadding: Theme.geometry_listItem_content_horizontalMargin
+	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
+	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
 	font.pixelSize: Theme.font_size_body1
 	wrapMode: Text.Wrap
 }

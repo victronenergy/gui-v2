@@ -29,12 +29,12 @@ Page {
 			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
-			leftPadding: 0
+			leftPadding: leftInset
+			rightPadding: rightInset
 			contentItem: Item {
 				readonly property real columnWidth: loadSummary.fixedColumnWidth
 				readonly property real columnSpacing: loadSummary.columnSpacing
 
-				implicitWidth: loadSummary.width
 				implicitHeight: dcsystemTable.y + dcsystemTable.height
 
 				QuantityTableSummary {
@@ -42,9 +42,8 @@ Page {
 
 					equalWidthColumns: true
 
-					// rightPadding = 32px width of the sub-menu arrow icon in each list delegate, plus
-					// margin, to align with the columns in the delegates.
-					rightPadding: 32 + Theme.geometry_listItem_content_horizontalMargin
+					// Set rightPadding to align with the columns in the delegates.
+					rightPadding: Theme.geometry_icon_size_medium + tableListItem.rightPadding
 					summaryModel: [
 						{ text: "", unit: VenusOS.Units_None },
 						{ text: "", unit: VenusOS.Units_None },

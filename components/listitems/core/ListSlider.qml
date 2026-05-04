@@ -34,7 +34,7 @@ ListSetting {
 	property real value: to > from && dataItem.valid ? dataItem.value : 0
 
 	// Remove padding around the edges, so that the internal Slider can expand its touch area.
-	rightPadding: 0
+	rightPadding: rightInset
 	topPadding: 0
 	bottomPadding: 0
 
