@@ -172,7 +172,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "CANopen motor drives"
+				//% "CANopen E-drives"
 				text: qsTrId("pagesettingsintegrations_canopenmotordrive")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsCanOpenMotordrive.qml",

@@ -27,7 +27,7 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListButton {
-				//% "Scan for motor drives"
+				//% "Scan for E-drives"
 				text: qsTrId("page_settings_canopenmotordrive_scan_for_motor_drives")
 				secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.press_to_scan
 				onClicked: scanItem.setValue(!scanItem.value)
@@ -35,7 +35,7 @@ Page {
 			}
 
 			ListText {
-				//% "Discovered motor drive IDs"
+				//% "Discovered E-drive IDs"
 				text: qsTrId("page_settings_canopenmotordrive_discovered_motor_drive_ids")
 				dataItem.uid: root.service + "/DiscoveredNodes"
 				dataItem.invalidate: false
