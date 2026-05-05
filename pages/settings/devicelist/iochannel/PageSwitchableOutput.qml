@@ -116,6 +116,14 @@ Page {
 			}
 
 			ListQuantity {
+				text: CommonWords.voltage
+				dataItem.uid: root.switchableOutput.uid + "/Voltage"
+				preferredVisible: dataItem.valid
+				interactive: _writeable
+				unit: VenusOS.Units_Volt_DC
+			}
+
+			ListQuantity {
 				text: CommonWords.current_amps
 				dataItem.uid: root.switchableOutput.uid + "/Current"
 				preferredVisible: dataItem.valid
