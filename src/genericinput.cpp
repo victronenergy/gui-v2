@@ -128,6 +128,12 @@ void GenericInput::setLabels(const QVariant &variant)
 		{ "/stopped", qtTrId("generic_input_label_stopped") },
 		//% "Running"
 		{ "/running", qtTrId("generic_input_label_running") },
+		//% "Released"
+		{ "/released", qtTrId("generic_input_label_released") },
+		//% "Pressed"
+		{ "/pressed", qtTrId("generic_input_label_pressed") },
+		//% "Holding"
+		{ "/holding", qtTrId("generic_input_label_holding") },
 	};
 
 	QStringList labels;
