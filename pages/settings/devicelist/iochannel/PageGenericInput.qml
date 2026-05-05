@@ -53,12 +53,14 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					//% "Digital input"
 					{ display: qsTrId("iochannel_digital_input_mode_input"), value: 1 },
+					//% "On/off switch"
+					{ display: qsTrId("iochannel_digital_input_mode_on_off_switch"), value: 2 },
 					//% "Toggle switch"
-					{ display: qsTrId("iochannel_digital_input_mode_toggle"), value: 2 },
-					//% "Press button"
-					{ display: qsTrId("iochannel_digital_input_mode_press"), value: 3 },
-					//% "Press and hold button"
-					{ display: qsTrId("iochannel_digital_input_mode_press_and_hold"), value: 4 },
+					{ display: qsTrId("iochannel_digital_input_mode_toggle_switch"), value: 3 },
+					//% "Push button on/off"
+					{ display: qsTrId("iochannel_digital_input_mode_push_button_on_off"), value: 4 },
+					//% "Push button dimmer"
+					{ display: qsTrId("iochannel_digital_input_mode_push_button_dimmer"), value: 5 },
 				]
 			}
 		}
