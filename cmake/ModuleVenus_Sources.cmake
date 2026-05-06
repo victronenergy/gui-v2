@@ -746,18 +746,18 @@ set(VictronVenusOS_RESOURCES
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
     images/icon_chevron_right_32.svg
-    images/icon_connectivity_32.png
-    images/icon_debug_32.png
-    images/icon_devices_32.png
+    images/icon_connectivity_32.svg
+    images/icon_debug_32.svg
+    images/icon_devices_32.svg
     images/icon_energymeter_1f_32.svg
     images/icon_energymeter_3f_32.svg
-    images/icon_general_32.png
-    images/icon_integration_32.png
+    images/icon_general_32.svg
+    images/icon_integration_32.svg
     images/icon_smartswitch_off_32.svg
     images/icon_smartswitch_on_32.svg
     images/icon_switchdev_32.svg
-    images/icon_system_32.png
-    images/icon_vrm_32.png
+    images/icon_system_32.svg
+    images/icon_vrm_32.svg
     images/brief.svg
     images/cloud.svg
     images/color_wheel_rgb.png

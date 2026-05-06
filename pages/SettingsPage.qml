@@ -38,7 +38,7 @@ SwipeViewPage {
 				//% "All connected devices"
 				caption: qsTrId("settings_all_connected_devices")
 				pageSource: "/pages/settings/devicelist/DeviceListPage.qml"
-				iconSource: "qrc:/images/icon_devices_32.png"
+				iconSource: "qrc:/images/icon_devices_32.svg"
 			}
 
 			SettingsListHeader { } // blank spacer
@@ -49,7 +49,7 @@ SwipeViewPage {
 				//% "Access control, Display, Firmware, Support"
 				caption: qsTrId("settings_access_control_display_firmware")
 				pageSource: "/pages/settings/PageSettingsGeneral.qml"
-				iconSource: "qrc:/images/icon_general_32.png"
+				iconSource: "qrc:/images/icon_general_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -60,7 +60,7 @@ SwipeViewPage {
 				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
 				caption: qsTrId("settings_ethernet_wifi_bluetooth_vecan")
 				pageSource: "/pages/settings/PageSettingsConnectivity.qml"
-				iconSource: "qrc:/images/icon_connectivity_32.png"
+				iconSource: "qrc:/images/icon_connectivity_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -69,7 +69,7 @@ SwipeViewPage {
 				//% "Remote monitoring portal"
 				caption: qsTrId("settings_remote_monitoring_portal")
 				pageSource: "/pages/settings/PageSettingsLogger.qml"
-				iconSource: "qrc:/images/icon_vrm_32.png"
+				iconSource: "qrc:/images/icon_vrm_32.svg"
 			}
 
 			SettingsListHeader {
@@ -83,7 +83,7 @@ SwipeViewPage {
 				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
 				caption: qsTrId("settings_relays_sensors_tanks")
 				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
-				iconSource: "qrc:/images/icon_integration_32.png"
+				iconSource: "qrc:/images/icon_integration_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -92,7 +92,7 @@ SwipeViewPage {
 				//% "AC/DC system, ESS, DVCC, Battery..."
 				caption: qsTrId("settings_acdcsystem_ess_dvcc_battery")
 				pageSource: "/pages/settings/PageSettingsSystem.qml"
-				iconSource: "qrc:/images/icon_system_32.png"
+				iconSource: "qrc:/images/icon_system_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -101,7 +101,7 @@ SwipeViewPage {
 				//% "Profiling tools, debug statistics, app version..."
 				caption: qsTrId("settings_profilingtools_debugstatistics_appversion")
 				pageSource: "/pages/settings/debug/PageDebug.qml"
-				iconSource: "qrc:/images/icon_debug_32.png"
+				iconSource: "qrc:/images/icon_debug_32.svg"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 		}
