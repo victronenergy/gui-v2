@@ -184,6 +184,7 @@ Page {
 									from: 0
 									to: 100
 									suffix: "%"
+									decimals: 0
 									dataItem.uid: startupDimLevel.uid
 								}
 							}
