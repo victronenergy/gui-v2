@@ -129,14 +129,12 @@ Item {
 
 			if (viewToScroll === Global.mainView.cardsLoader) {
 				// The text field is in the Control Cards or Switch Pane view. Find the position of
-				// the text field container within the view, and move the view by this amount.
-				// (Ideally this would not be done until the onReleased event, but in that case, on
-				// the browser does not realise the text field is already in view, so when text is
-				// entered into the field, the browser auto-shrinks the window, causing the field to
-				// disappear from view.)
+				// the text field container within the view, and move the MainView cardsLoader by
+				// this amount, below the status bar. Delay the call to cardsLoader.setYOffset()
+				// until the item actually has active focus, otherwise the native VKB doesn't show.
 				const textContainerY = textFieldContainer.mapToItem(viewToScroll, 0, 0).y
+				focusListener.cardLoaderOffset = -textContainerY + Theme.geometry_statusBar_height + Theme.geometry_page_content_verticalMargin
 				focusedCardItem = textField
-				Global.mainView.cardsLoader.setYOffset(-textContainerY, false)
 			} else {
 				// The text field is in a flickable in some other view. Delay the call to
 				// updateFocusItem() until the onReleased event, to avoid confused scrolling
@@ -156,11 +154,17 @@ Item {
 		property Item textFieldContainer
 		property Flickable flickable
 
+		property real cardLoaderOffset
+
 		target: Global.main
 
 		function onActiveFocusItemChanged() {
-			if (Global.main.activeFocusItem && Global.main.activeFocusItem === textField) {
-				updateFocusItem(textField, textFieldContainer, flickable)
+			if (Global.main.activeFocusItem) {
+				if (Global.main.activeFocusItem === root.focusedCardItem) {
+					Global.mainView.cardsLoader.setYOffset(cardLoaderOffset, false)
+				} else if (Global.main.activeFocusItem === textField) {
+					updateFocusItem(textField, textFieldContainer, flickable)
+				}
 			}
 		}
 	}
