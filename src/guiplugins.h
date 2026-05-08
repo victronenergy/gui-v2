@@ -328,7 +328,7 @@ class GuiPluginMqttFetcher : public QObject
 	Q_OBJECT
 
 public:
-	GuiPluginMqttFetcher(const QString &name, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent = nullptr);
+	GuiPluginMqttFetcher(const QString &name, const QString &sha256, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent = nullptr);
 
 	void start();
 

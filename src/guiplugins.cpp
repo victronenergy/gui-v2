@@ -275,7 +275,27 @@ void GuiPluginLoader::watchMqttPluginPaths()
 	if (enabledCustomisationsItem->getState() != VeQItem::Synchronized) {
 		return; // onEnabledCustomisationsSynchronized -> triggerWatchMqttPluginPaths will retry
 	}
-	const QStringList enabledCustomisations = enabledCustomisationsItem->getValue().toStringList();
+
+	disconnect(enabledCustomisationsItem, &VeQItem::stateChanged, this, &GuiPluginLoader::onEnabledCustomisationsSynchronized);
+	bool oldApplistBehaviour = false;
+	QMap<QString, QString> enabledCustomisations;
+	const QVariantList applistValue = enabledCustomisationsItem->getValue().toList();
+	for (const QVariant &v : applistValue) {
+		if (v.typeId() == QMetaType::QString) {
+			// the old behaviour: the applist value is a list of names
+			oldApplistBehaviour = true;
+			enabledCustomisations.insert(v.toString(), QString()); // we don't know the sha256 yet.
+		} else {
+			// the new behaviour: the applist value is a list of string pairs (name + sha256)
+			const QVariantMap map = v.toMap();
+			const QString name = map.value(QStringLiteral("name")).toString();
+			const QString sha256 = map.value(QStringLiteral("sha256")).toString();
+			if (!name.isEmpty()) {
+				enabledCustomisations.insert(name, sha256);
+			}
+		}
+	}
+
 	if (enabledCustomisations.isEmpty()) {
 		qCInfo(venusGui) << "No enabled gui plugins available from MQTT.";
 		initPlugins(); // no plugins to init, but transition to busy=false state.
@@ -293,15 +313,22 @@ void GuiPluginLoader::watchMqttPluginPaths()
 	qDeleteAll(m_mqttFetchers);
 	m_mqttFetchers.clear();
 	m_pluginDirData.clear();
-	for (const QString &name : enabledCustomisations) {
+	for (const QString &name : enabledCustomisations.keys()) {
 		VeQItem *currCustomisation = apps->itemChildren().value(name);
 		VeQItem *currInfo = currCustomisation ? currCustomisation->itemChildren().value(QStringLiteral("info")) : nullptr;
 		if (!currInfo) {
 			continue; // we could retry after some time, but for now just ignore the broken plugin tree.
 		}
 
+		if (oldApplistBehaviour) {
+			// if the dbus-flashmq is old, it does not emit changes to the applist value,
+			// and instead will emit changes to the specific plugin info path
+			// (and only when explicitly prompted via a read request).
+			connect(currInfo, &VeQItem::valueChanged, this, &GuiPluginLoader::triggerWatchMqttPluginPaths, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection));
+		}
+
 		qCInfo(venusGui) << "Loading gui plugin:" << name << "from MQTT";
-		GuiPluginMqttFetcher *currFetcher = new GuiPluginMqttFetcher(name, currCustomisation, currInfo, this);
+		GuiPluginMqttFetcher *currFetcher = new GuiPluginMqttFetcher(name, enabledCustomisations.value(name), currCustomisation, currInfo, this);
 		m_mqttFetchers.append(currFetcher);
 		connect(currFetcher, &GuiPluginMqttFetcher::failed,
 				this, [this, currFetcher] {
@@ -345,8 +372,8 @@ void GuiPluginLoader::watchMqttPluginPaths()
 	}
 }
 
-GuiPluginMqttFetcher::GuiPluginMqttFetcher(const QString &name, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent)
-	: QObject(parent), m_name(name), m_pluginBaseItem(pluginBaseItem), m_pluginInfoItem(pluginInfoItem), m_timeout(this)
+GuiPluginMqttFetcher::GuiPluginMqttFetcher(const QString &name, const QString &sha256, VeQItem *pluginBaseItem, VeQItem *pluginInfoItem, QObject *parent)
+	: QObject(parent), m_name(name), m_sha256(sha256), m_pluginBaseItem(pluginBaseItem), m_pluginInfoItem(pluginInfoItem), m_timeout(this)
 {
 	m_timeout.setInterval(15000);
 	m_timeout.setSingleShot(true);
@@ -365,7 +392,9 @@ void GuiPluginMqttFetcher::start()
 	}
 
 	const QVariantMap values = m_pluginInfoItem->getValue().toMap();
-	m_sha256 = values.value(QStringLiteral("sha256")).toString();
+	if (m_sha256.isEmpty()) {
+		m_sha256 = values.value(QStringLiteral("sha256")).toString();
+	}
 	m_chunkCount = values.value(QStringLiteral("chunk_count")).toInt();
 	if (m_sha256.isEmpty() || m_chunkCount <= 0) {
 		qCWarning(venusGui) << "Plugin" << m_name << "info item is missing required fields:"
