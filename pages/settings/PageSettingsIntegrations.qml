@@ -64,7 +64,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "EEBus Devices"
+				//% "EEBUS Devices"
 				text: qsTrId("pagesettingsintegrations_eebus_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEebus.qml", {"title": text})
 			}
