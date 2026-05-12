@@ -51,6 +51,10 @@ Item {
 	}
 
 	MomentaryButton {
+		readonly property bool containsPress: pressed
+				&& pressX >= 0 && pressX <= width
+				&& pressY >= 0 && pressY <= height
+
 		anchors {
 			left: parent.left
 			right: parent.right
@@ -80,15 +84,39 @@ Item {
 		// Only show the press effect when the backend has written the state succesfully.
 		pressEffectRunning: momentaryState.dataItem.value === 1
 
-		onPressed: momentaryState.writeValue(1)
-		onReleased: momentaryState.writeValue(0)
-		onCanceled: momentaryState.writeValue(0)
 		down: pressed || checked
+
+		onContainsPressChanged: {
+			if (containsPress) {
+				momentaryState.setStateValue(1)
+			} else {
+				// Set State=0 as soon as the press moves outside of the button. Otherwise, if the
+				// user drags outside and triggers a drag in the Switch Pane flickable, the events
+				// move to the flickable and the touch release will not turn the button off.
+				momentaryState.setStateValue(0)
+			}
+		}
 
 		SettingSync {
 			id: momentaryState
+
+			property int _lastWrittenState: -1
+
+			function setStateValue(v) {
+				writeValue(v)
+				_lastWrittenState = v
+			}
+
 			dataItem: VeQuickItem {
 				uid: root.switchableOutput.uid + "/State"
+			}
+
+			Component.onDestruction: {
+				// If the button is destroyed before the mouse release, write 0 to force a return to
+				// the "off" state in the backend.
+				if (_lastWrittenState === 1) {
+					writeValue(0)
+				}
 			}
 		}
 	}
