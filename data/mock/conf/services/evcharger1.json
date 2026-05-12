@@ -29,6 +29,7 @@
         "/StartStop": 1,
         "/Status": 2,
         "/S2/0/RmSettings/MaxChargePower": 99999,
+        "/S2/0/RmSettings/RememberEvPhases": 0,
         "/S2/0/Active": 0
     },
     "com.victronenergy.modbusclient.tcp": {

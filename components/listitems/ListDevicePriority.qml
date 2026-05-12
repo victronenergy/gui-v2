@@ -26,24 +26,12 @@ ListSetting {
 		}
 	}
 
-	Connections {
-		enabled: !root._device && root.deviceInstance >= 0
-		target: root.devices
-
-		function onCountChanged() {
-			const matchingDevice = root.devices.deviceForDeviceInstance(root.deviceInstance)
-			if (matchingDevice) {
-				root._device = matchingDevice
-			}
-		}
-	}
-
 	component Arrow: Button {
 		radius: Theme.geometry_opportunityLoad_button_radius
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		implicitWidth: Theme.geometry_opportunityLoad_button_height
-		implicitHeight: Theme.geometry_opportunityLoad_button_height
+		implicitWidth: root.height - Theme.geometry_button_border_width - 2*Theme.geometry_opportunityLoad_margin
+		implicitHeight: root.height - Theme.geometry_button_border_width - 2*Theme.geometry_opportunityLoad_margin
 	}
 
 	component PageData : QtObject {
@@ -89,7 +77,11 @@ ListSetting {
 				uid: root._device? root._device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
 			}
 
-			interactive: maxChargePower.valid
+			property VeQuickItem rememberEvPhases: VeQuickItem {
+				uid: root._device? root._device.serviceUid + "/S2/0/RmSettings/RememberEvPhases" : ""
+			}
+
+			interactive: maxChargePower.valid || rememberEvPhases.valid
 			pageSource: "/pages/settings/PageControllableLoadsEVCS.qml"
 		}
 	}
@@ -104,7 +96,7 @@ ListSetting {
 		RowLayout {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_opportunityLoad_margin - Theme.geometry_button_border_width
+				leftMargin: Theme.geometry_opportunityLoad_margin
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
@@ -138,7 +130,8 @@ ListSetting {
 			}
 
 			SecondaryListLabel {
-				text: deviceActive.value === 0 ? CommonWords.disabled : ""
+				//% "No control"
+				text: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
 			}
 
 			ForwardIcon {
@@ -161,6 +154,18 @@ ListSetting {
 
 	Keys.onSpacePressed: click()
 	Keys.onRightPressed: click()
+
+	Connections {
+		enabled: !root._device && root.deviceInstance >= 0
+		target: root.devices
+
+		function onCountChanged() {
+			const matchingDevice = root.devices.deviceForDeviceInstance(root.deviceInstance)
+			if (matchingDevice) {
+				root._device = matchingDevice
+			}
+		}
+	}
 
 	Loader {
 		id: pageData

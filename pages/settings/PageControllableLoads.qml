@@ -135,6 +135,14 @@ Page {
 				visible: mode.value
 			}
 
+			ListNavigation {
+				//% "Preferences"
+				text: qsTrId("pagecontrollableloads_preferences")
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageControllableLoadsPreferences.qml", { title: text })
+				}
+			}
+
 			ListLink {
 				id: documentation
 

@@ -14,30 +14,38 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListQuantityField {
+				id: startingBatterySoc
+				unit: VenusOS.Units_Percentage
+				//% "Allow additional loads starting at a battery SOC of"
+				text: qsTrId("pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc")
+
+				//% "Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb."
+				caption: qsTrId("pagecontrollableloads_battery_below_this_soc")
+				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationStartSoc"
+			}
+
+			SettingsListHeader {
+				//% "Advanced"
+				text: qsTrId("pagecontrollableloads_battery_advanced")
+			}
+
+			ListQuantityField {
 				unit: VenusOS.Units_Watt
-				//% "Reserved power for battery charging at 0% SOC"
-				text: qsTrId("pagecontrollableloads_battery_reserved_power_0")
+				//% "At <font color=\"%1\">%2%</font> SOC, reserve for battery charging"
+				text: qsTrId("pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging")
+						.arg(Theme.color_font_secondary)
+						.arg(startingBatterySoc.dataItem.value)
+				textFormat: Text.RichText
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationBasePower"
 			}
 
 			ListQuantityField {
 				unit: VenusOS.Units_Watt
-				//% "Reduce power per percentage point of SOC by"
-				text: qsTrId("pagecontrollableloads_battery_reduce_power")
-				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationDecrement"
-			}
-
-			SettingsListHeader {
-				//% "BatteryLife compatibility"
-				text: qsTrId("pagecontrollableloads_battery_batterylife_compatibility")
-			}
-
-			ListSwitch {
-				//% "Pause Opportunity Loads when Active SOC limit exceeds 85%"
-				text: qsTrId("page_controllableloads_battery_pause_opportunity_loads")
-				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
-				//% "This helps the BatteryLife algorithm recharge the battery to 100%."
-				caption: qsTrId("pagecontrollableloads_battery_this_supports_the_batterylife_algorithm")
+				//% "At %1% SOC, reserve for battery charging"
+				text: qsTrId("pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging").arg(100)
+				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationEndPower"
+				//% "Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices."
+				caption: qsTrId("pagecontrollableloads_battery_between_the_soc")
 			}
 		}
 	}
