@@ -26,6 +26,23 @@ Page {
 	// Additional settings to be loaded by PageDeviceInfo.
 	property Component extraDeviceInfo
 
+	property bool showInputs: genericInputModel.count > 0
+	property bool showOutputs: switchableOutputModel.count > 0
+
+	readonly property IOChannelProxyModel switchableOutputModel: IOChannelProxyModel {
+		sourceModel: VeQItemTableModel {
+			uids: [ root.serviceUid + "/SwitchableOutput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+	}
+
+	readonly property IOChannelProxyModel genericInputModel: IOChannelProxyModel {
+		sourceModel: VeQItemTableModel {
+			uids: [ root.serviceUid + "/GenericInput" ]
+			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+		}
+	}
+
 	title: _device.name
 
 	Device {
@@ -44,17 +61,9 @@ Page {
 				//: Settings page for switchable outputs
 				//% "Outputs"
 				text: qsTrId("device_page_outputs")
-				preferredVisible: switchableOutputModel.count > 0
+				preferredVisible: root.showOutputs
 				onClicked: {
 					Global.pageManager.pushPage(switchableOutputPageComponent, { title: text })
-				}
-
-				IOChannelProxyModel {
-					id: switchableOutputModel
-					sourceModel: VeQItemTableModel {
-						uids: [ root.serviceUid + "/SwitchableOutput" ]
-						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-					}
 				}
 
 				Component {
@@ -71,17 +80,9 @@ Page {
 			ListNavigation {
 				//% "Inputs"
 				text: qsTrId("device_page_inputs")
-				preferredVisible: genericInputModel.count > 0
+				preferredVisible: root.showInputs
 				onClicked: {
 					Global.pageManager.pushPage(genericInputPageComponent, { title: text })
-				}
-
-				IOChannelProxyModel {
-					id: genericInputModel
-					sourceModel: VeQItemTableModel {
-						uids: [ root.serviceUid + "/GenericInput" ]
-						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-					}
 				}
 
 				Component {

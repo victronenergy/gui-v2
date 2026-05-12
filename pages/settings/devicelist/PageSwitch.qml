@@ -19,6 +19,12 @@ DevicePage {
 		}
 	}
 
+	// If there is more than one input or output, show them under the standard "Inputs" and
+	// "Outputs" menus in the DevicePage. If there is only one, show it directly in this page's
+	// list item view.
+	showInputs: root.genericInputModel.count > 1
+	showOutputs: root.switchableOutputModel.count > 1
+
 	settingsHeader: SettingsColumn {
 		width: parent?.width ?? 0
 		bottomPadding: spacing
@@ -94,6 +100,20 @@ DevicePage {
 						}
 					}
 				}
+			}
+		}
+
+		SettingsColumn {
+			width: parent.width
+
+			Repeater {
+				model: root.switchableOutputModel.count === 1 ? root.switchableOutputModel : null
+				delegate: SwitchableOutputListDelegate {}
+			}
+
+			Repeater {
+				model: root.genericInputModel.count === 1 ? root.genericInputModel : null
+				delegate: GenericInputListDelegate {}
 			}
 		}
 	}
