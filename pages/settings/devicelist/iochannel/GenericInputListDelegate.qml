@@ -14,11 +14,19 @@ ListQuantityGroupNavigation {
 
 	text: name
 	quantityModel: QuantityObjectModel {
-		// If Status=On, show the /Value. Otherwise, show the status text (On, Off, Fault, etc.)
+		// If Status=On, show the GenericInput::textValue or the /Value.
+		// Otherwise, show the status text (On, Off, Fault, etc.)
 		QuantityObject {
-			object: input.status === VenusOS.GenericInput_Status_On ? valueItem : input
-			key: input.status === VenusOS.GenericInput_Status_On ? "value" : "statusText"
-			unit: input.status === VenusOS.GenericInput_Status_On ? input.unitType : VenusOS.Units_None
+			object: input.status === VenusOS.GenericInput_Status_On
+					? (input.textValue.length > 0 ? input : valueItem) // show text version of /Value, or the raw /Value otherwise
+					: input // show status text
+			key: input.status === VenusOS.GenericInput_Status_On
+					? (input.textValue.length > 0 ? "textValue" : "value")
+					: "statusText"
+			// If showing text, use Units_None, otherwise use the preferred unit.
+			unit: input.status === VenusOS.GenericInput_Status_On && input.textValue.length === 0
+					? Global.systemSettings.toPreferredUnit(input.unitType)
+					: VenusOS.Units_None
 			decimals: input.decimals
 		}
 		QuantityObject {
