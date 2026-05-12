@@ -64,7 +64,7 @@ FocusScope {
 				|| root.switchableOutput.unitText
 		from: decimalConverter.intFrom
 		to: decimalConverter.intTo
-		stepSize: numericInputStepSize.valid ? numericInputStepSize.value : 1 // Unit conversion is not applied to stepSize.
+		stepSize: decimalConverter.intStepSize
 
 		// Note: the number is displayed as the raw unscaled value (e.g. as 10000l instead of 10kl).
 		// Scaling is not required, but also, showing it in a scaled format is not possible without
@@ -118,6 +118,9 @@ FocusScope {
 			to: numericInputMax.valid
 				? numericInputMax.value
 				: Units.convert(100, root.switchableOutput.unitType, Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			stepSize: numericInputStepSize.valid
+				? numericInputStepSize.value
+				: 1 // Unit conversion is not applied to stepSize.
 
 			// If the from/to is not available immediately from DimmingMin/Max, the SpinBox value is
 			// clamped to the default 0-100 range, so be sure to refresh the spinBox value when the
