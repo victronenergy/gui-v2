@@ -27,6 +27,7 @@
     },
     "com.victronenergy.settings": {
         "/Settings/Gui/ElectricPropulsionUI/Enabled": 1,
+        "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures": 0,
         "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type": 0,
         "/Settings/Gui/Gauges/MotorDrive/Power/Max": 2000,
         "/Settings/Gui/Gauges/MotorDrive/RPM/Max": 6000

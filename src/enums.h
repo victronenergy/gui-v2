@@ -102,6 +102,12 @@ public:
 		Units_Volume_Litre,
 		Units_Watt,
 		Units_WattsPerSquareMetre,
+		Units_WattHourPerKilometre,
+		Units_WattHourPerMile,
+		Units_WattHourPerNauticalMile,
+		Units_AmpHourPerKilometre,
+		Units_AmpHourPerMile,
+		Units_AmpHourPerNauticalMile,
 	};
 	Q_ENUM(Units_Type)
 

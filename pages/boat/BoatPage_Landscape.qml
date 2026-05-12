@@ -25,16 +25,6 @@ Boat.Background { // the blue shadows
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.TimeToGo {
-		id: ttg
-
-		anchors {
-			top: centerGauge.top
-			topMargin: Theme.geometry_boatPage_timeToGo_topMargin
-			horizontalCenter: centerGauge.horizontalCenter
-		}
-	}
-
 	Boat.BatteryPercentage { // vertical center left
 		id: batteryPercentage
 		anchors {
@@ -46,8 +36,8 @@ Boat.Background { // the blue shadows
 		motorDrives: motorDrives
 	}
 
-	QuantityLabel { // bottom left
-		id: batteryTemperature
+	Boat.TimeToGo { // bottom left
+		id: ttg
 
 		anchors {
 			top: batteryPercentage.bottom
@@ -55,11 +45,27 @@ Boat.Background { // the blue shadows
 			left: parent.left
 			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
+	}
 
-		font.pixelSize: Theme.font_boatPage_batteryTemperature_pixelSize
-		unit: Global.systemSettings.temperatureUnit
-		value: Global.system && Global.system.battery ? Global.system.battery.temperature : NaN
-		visible: !isNaN(value)
+	Boat.Range { // center
+		id: range
+
+		anchors {
+			top: centerGauge.top
+			topMargin: Theme.geometry_boatPage_range_topMargin
+			horizontalCenter: centerGauge.horizontalCenter
+		}
+	}
+
+	Boat.Consumption { // bottom right
+		id: consumption
+
+		anchors {
+			top: batteryPercentage.bottom
+			topMargin: Theme.geometry_boatPage_verticalMargin
+			right: parent.right
+			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
+		}
 	}
 
 	/*
@@ -86,32 +92,8 @@ Boat.Background { // the blue shadows
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.Gear { // top left
-		id: leftGear
-
-		anchors {
-			bottom: batteryPercentage.top
-			bottomMargin: Theme.geometry_boatPage_verticalMargin
-			left: parent.left
-			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
-		}
-		motorDrive: motorDrives.leftMotorDrive
-	}
-
-	Boat.Gear { // top right
-		id: rightGear
-
-		anchors {
-			bottom: batteryPercentage.top
-			bottomMargin: Theme.geometry_boatPage_verticalMargin
-			right: parent.right
-			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
-		}
-		motorDrive: motorDrives.right !== null ? motorDrives.rightMotorDrive : motorDrives.singleMotorDrive
-	}
-
 	Boat.ConsumptionGauge { // vertical center right
-		id: consumption
+		id: consumptionGauge
 
 		anchors {
 			verticalCenter: batteryPercentage.verticalCenter
@@ -147,6 +129,23 @@ Boat.Background { // the blue shadows
 		animationEnabled: root.animationEnabled
 		motorDrives: motorDrives
 		gps: _gps
+	}
+
+	VeQuickItem {
+		id: showTemperaturesItem
+		uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+	}
+
+	Boat.Temperatures {
+		id: temperatures
+
+		anchors {
+			horizontalCenter: parent.horizontalCenter
+		}
+		y: Theme.geometry_screen_height - Theme.geometry_statusBar_height - temperatures.height - Theme.geometry_boatPage_temperature_bottomMargin
+		visible: showTemperaturesItem.value ?? false
+
+		motorDrives: motorDrives
 	}
 
 	Boat.MotorDrives {

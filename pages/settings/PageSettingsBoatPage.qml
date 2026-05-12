@@ -74,6 +74,13 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
+			ListSwitch {
+				//% "Show temperatures"
+				text: qsTrId("pagesettingsboatpage_show_temperatures")
+				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+				writeAccessLevel: VenusOS.User_AccessType_User
+			}
+
 			SectionHeader {
 				//% "Dual-Drive Configuration"
 				text: qsTrId("pagesettingsboatpage_dual_drive_configuration")

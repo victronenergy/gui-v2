@@ -15,6 +15,7 @@ set(VictronBoat_QML_MODULE_SOURCES
     pages/boat/Background.qml
     pages/boat/BatteryArc.qml
     pages/boat/BatteryPercentage.qml
+    pages/boat/Consumption.qml
     pages/boat/ConsumptionGauge.qml
     pages/boat/Gear.qml
     pages/boat/Gps.qml
@@ -22,10 +23,11 @@ set(VictronBoat_QML_MODULE_SOURCES
     pages/boat/LoadArc.qml
     pages/boat/MotorDrive.qml
     pages/boat/MotorDrives.qml
-    pages/boat/MotorDriveGauges.qml
     pages/boat/QuantityLabelIconRow.qml
+    pages/boat/Range.qml
     pages/boat/TemperatureGauge.qml
     pages/boat/TemperatureGauges.qml
+    pages/boat/Temperatures.qml
     pages/boat/TimeToGo.qml
 )
 
@@ -34,6 +36,7 @@ set_source_files_properties(pages/boat/BoatPage_Landscape.qml PROPERTIES QT_RESO
 set_source_files_properties(pages/boat/Background.qml PROPERTIES QT_RESOURCE_ALIAS Background.qml)
 set_source_files_properties(pages/boat/BatteryArc.qml PROPERTIES QT_RESOURCE_ALIAS BatteryArc.qml)
 set_source_files_properties(pages/boat/BatteryPercentage.qml PROPERTIES QT_RESOURCE_ALIAS BatteryPercentage.qml)
+set_source_files_properties(pages/boat/Consumption.qml PROPERTIES QT_RESOURCE_ALIAS Consumption.qml)
 set_source_files_properties(pages/boat/ConsumptionGauge.qml PROPERTIES QT_RESOURCE_ALIAS ConsumptionGauge.qml)
 set_source_files_properties(pages/boat/Gear.qml PROPERTIES QT_RESOURCE_ALIAS Gear.qml)
 set_source_files_properties(pages/boat/Gps.qml PROPERTIES QT_RESOURCE_ALIAS Gps.qml)
@@ -41,9 +44,10 @@ set_source_files_properties(pages/boat/LargeCenterGauge.qml PROPERTIES QT_RESOUR
 set_source_files_properties(pages/boat/LoadArc.qml PROPERTIES QT_RESOURCE_ALIAS LoadArc.qml)
 set_source_files_properties(pages/boat/MotorDrive.qml PROPERTIES QT_RESOURCE_ALIAS MotorDrive.qml)
 set_source_files_properties(pages/boat/MotorDrives.qml PROPERTIES QT_RESOURCE_ALIAS MotorDrives.qml)
-set_source_files_properties(pages/boat/MotorDriveGauges.qml PROPERTIES QT_RESOURCE_ALIAS MotorDriveGauges.qml)
 set_source_files_properties(pages/boat/QuantityLabelIconRow.qml PROPERTIES QT_RESOURCE_ALIAS QuantityLabelIconRow.qml)
+set_source_files_properties(pages/boat/Range.qml PROPERTIES QT_RESOURCE_ALIAS Range.qml)
 set_source_files_properties(pages/boat/TemperatureGauge.qml PROPERTIES QT_RESOURCE_ALIAS TemperatureGauge.qml)
 set_source_files_properties(pages/boat/TemperatureGauges.qml PROPERTIES QT_RESOURCE_ALIAS TemperatureGauges.qml)
+set_source_files_properties(pages/boat/Temperatures.qml PROPERTIES QT_RESOURCE_ALIAS Temperatures.qml)
 set_source_files_properties(pages/boat/TimeToGo.qml PROPERTIES QT_RESOURCE_ALIAS TimeToGo.qml)
 
