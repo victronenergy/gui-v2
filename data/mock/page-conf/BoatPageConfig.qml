@@ -24,12 +24,15 @@ Item {
 			],
 		},
 		{
-			name: "GPS, single-drive, time to go",
+			name: "GPS, single-drive, time to go, range, consumption",
 			gps: {},
 			motorDrives: [
 				{ productName: "Motor drive A", power: 1000 },
 			],
-			timeToGo: 123456
+			timeToGo: 123456,
+			range: 58,
+			consumptionWhkm: 150,
+			consumptionAhkm: 3,
 		},
 		{
 			name: "GPS, single-drive, time to go, regeneration",
@@ -48,13 +51,16 @@ Item {
 			],
 		},
 		{
-			name: "GPS, dual-drive, time to go",
+			name: "GPS, dual-drive, time to go, range, consumption",
 			gps: {},
 			motorDrives: [
 				{ productName: "Motor drive A", power: 1000 },
 				{ productName: "Motor drive B", power: 1000 },
 			],
-			timeToGo: 123456
+			timeToGo: 123456,
+			range: 58,
+			consumptionWhkm: 150,
+			consumptionAhkm: 3,
 		},
 		{
 			name: "GPS, dual-drive, time to go, regeneration",
@@ -141,6 +147,9 @@ Item {
 			}
 		}
 		MockManager.setValue(Global.system.serviceUid + "/Dc/Battery/TimeToGo", config.timeToGo ?? undefined)
+		MockManager.setValue(Global.system.serviceUid + "/MotorDrive/Range", config.range ?? undefined)
+		MockManager.setValue(Global.system.serviceUid + "/MotorDrive/ConsumptionWhkm", config.consumptionWhkm ?? undefined)
+		MockManager.setValue(Global.system.serviceUid + "/MotorDrive/ConsumptionAhkm", config.consumptionAhkm ?? undefined)
 
 		return config.name
 	}

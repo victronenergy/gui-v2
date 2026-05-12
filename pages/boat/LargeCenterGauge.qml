@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Boat as Boat
 
 Item {
 	id: root
@@ -93,74 +94,74 @@ Item {
 		}
 	}
 
+	// Gear indicators
+	Item {
+		anchors {
+			top: outerGauge.top
+			topMargin: Theme.geometry_boatPage_gearIndicator_topMargin
+			horizontalCenter: outerGauge.horizontalCenter
+		}
+
+		Boat.Gear {
+			anchors.horizontalCenter: parent.horizontalCenter
+			motorDrive: motorDrives.singleMotorDrive
+		}
+
+		Row {
+			anchors.horizontalCenter: parent.horizontalCenter
+			spacing: Theme.geometry_boatPage_gearIndicator_spacing
+			visible: motorDrives.left !== null && motorDrives.right !== null
+
+			Boat.Gear {
+				motorDrive: motorDrives.leftMotorDrive
+			}
+
+			Boat.Gear {
+				motorDrive: motorDrives.rightMotorDrive
+			}
+		}
+	}
+
+	// GPS speed or DC consumption
 	Column {
 		anchors {
-			top: parent.top
-			topMargin: Theme.geometry_boatPage_speedLabel_topMargin
-			horizontalCenter: parent.horizontalCenter
+			verticalCenter: outerGauge.verticalCenter
+			horizontalCenter: outerGauge.horizontalCenter
 		}
 
 		Label {
 			id: gpsSpeed
 
+			visible: root.activeDataSource === root.gps
 			anchors.horizontalCenter: parent.horizontalCenter
 			width: rpmGauge.width - rpmGauge.radius/2
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
 			color: Theme.color_font_primary
-			font.pixelSize: motorDriveGauges.visible || rpmLabel.visible || dualRpmLabels.visible
-							? Theme.font_boatPage_speed_pixelSize
-							: Theme.font_boatPage_speed_pixelSize_large
+			font.pixelSize: Theme.font_boatPage_speed_pixelSize
 			font.weight: Font.Medium
-			fontSizeMode: Text.HorizontalFit
-			visible: root.activeDataSource === root.gps
 			text: Units.formatNumber(root.gps.numerator, Math.round(root.gps.numerator * 10) >= 100 ? 0 : 1)
 			height: font.pixelSize
 		}
 
 		Label {
+			visible: gpsSpeed.visible
 			anchors.horizontalCenter: parent.horizontalCenter
 			topPadding: Theme.geometry_boatPage_speedUnits_topPadding
 			verticalAlignment: Text.AlignVCenter
 			height: font.pixelSize
-			font.pixelSize: Theme.font_size_body2
+			font.pixelSize: Theme.font_boatPage_speedUnits_pixelSize
 			color: Theme.color_font_secondary
-			visible: gpsSpeed.visible
 			text: root.gps.units
 		}
 
-		MotorDriveGauges {
-			id: motorDriveGauges
-
-			width: rpmGauge.width - (2 * Theme.geometry_boatPage_motorDriveGauges_horizontalMargin)
-			topPadding: Theme.geometry_boatPage_motorDriveGauges_topPadding
-			motorDrives: root.motorDrives
-			showDcConsumption: !root.gps.valid
-			visible: root.activeDataSource === root.motorDriveDcConsumption ||
-					 (root.activeDataSource === null && root.motorDrives.singleMotorDrive.rpm.valid)
-		}
-
-		Label {
-			id: rpmLabel
-
+		ElectricalQuantityLabel {
 			anchors.horizontalCenter: parent.horizontalCenter
-			verticalAlignment: Text.AlignVCenter
-			topPadding: Theme.geometry_boatPage_rpmLabel_topPadding
-			font.pixelSize: Theme.font_size_h1
-			text: Units.formatNumber(Math.abs(root.motorDrives.singleMotorDrive.rpm._numerator.value))
-			visible: root.motorDrives.singleMotorDrive.rpm.valid
-		}
-
-		Label {
-			anchors.horizontalCenter: parent.horizontalCenter
-			topPadding: Theme.geometry_boatPage_rpmTitle_topPadding
-			verticalAlignment: Text.AlignVCenter
-			height: font.pixelSize
-			font.pixelSize: Theme.font_size_body2
-			color: Theme.color_font_secondary
-			//% "RPM"
-			text: qsTrId("boat_page_rpm")
-			visible: rpmLabel.visible
+			width: rpmGauge.width - rpmGauge.radius/2
+			font.pixelSize: Theme.font_boatPage_centerGauge_consumption_pixelSize
+			visible: root.activeDataSource === root.motorDriveDcConsumption
+			sourceType: VenusOS.ElectricalQuantity_Source_Dc
+			dataObject: motorDrives.dcConsumption.scalar
 		}
 	}
 
@@ -237,6 +238,40 @@ Item {
 		layer.smooth: true
 	}
 
+	Column {
+		id: singleRpmLabel
+
+		anchors {
+			horizontalCenter: rpmGauge.horizontalCenter
+			bottom: rpmGauge.bottom
+			bottomMargin: Theme.geometry_boatPage_singleRpmLabel_bottomMargin
+		}
+		width: 2 * rpmGauge.radius * Math.sin(((outerGauge.endAngle - outerGauge.startAngle) * Math.PI / 180) / 2)
+		visible: rpmGauge.visible
+
+		spacing: Theme.geometry_boatPage_singleRpmLabel_spacing
+
+		Label {
+			anchors.horizontalCenter: parent.horizontalCenter
+			verticalAlignment: Text.AlignVCenter
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_rpm_value_pixelSize
+			text: Units.formatNumber(Math.abs(root.motorDrives.singleMotorDrive.rpm._numerator.value))
+		}
+
+		Label {
+			id: singleRpmUnitLabel
+
+			anchors.horizontalCenter: parent.horizontalCenter
+			verticalAlignment: Text.AlignVCenter
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_rpm_label_pixelSize
+			color: Theme.color_font_secondary
+			//% "RPM"
+			text: qsTrId("boat_page_rpm")
+		}
+	}
+
 	Item {
 		id: dualRpmLabels
 
@@ -257,23 +292,25 @@ Item {
 				rightMargin: Theme.geometry_boatPage_dualRpmLabel_margin
 			}
 			verticalAlignment: Text.AlignVCenter
-			font.pixelSize: Theme.font_size_body3
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_rpm_value_pixelSize
 			text: Units.formatNumber(Math.abs(root.motorDrives.leftMotorDrive.rpm._numerator.value))
 		}
 
-		Rectangle {
-			id: separator
+		Label {
+			id: dualRpmLabel
 
 			anchors {
-				top: parent.top
-				topMargin: Theme.geometry_boatPage_dualRpmSeparator_margin
-				bottom: parent.bottom
-				bottomMargin:  Theme.geometry_boatPage_dualRpmSeparator_margin
 				horizontalCenter: parent.horizontalCenter
+				bottom: leftRpmLabel.bottom
 			}
-			width: Theme.geometry_boatPage_dualRpmSeparator_width
+
+			verticalAlignment: Text.AlignVCenter
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_rpm_label_pixelSize
 			color: Theme.color_font_secondary
-			visible: Theme.screenSize === Theme.FiveInch
+			text: singleRpmUnitLabel.text
+			visible: leftRpmGauge.visible && rightRpmGauge.visible
 		}
 
 		Label {
@@ -284,23 +321,10 @@ Item {
 				leftMargin: Theme.geometry_boatPage_dualRpmLabel_margin
 			}
 			verticalAlignment: Text.AlignVCenter
-			font.pixelSize: Theme.font_size_body3
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_rpm_value_pixelSize
 			text: Units.formatNumber(Math.abs(root.motorDrives.rightMotorDrive.rpm._numerator.value))
 		}
-	}
-
-	Label {
-		id: dualRpmLabel
-
-		anchors {
-			horizontalCenter: dualRpmLabels.horizontalCenter
-			bottom: Theme.screenSize === Theme.SevenInch ? dualRpmLabels.bottom : outerGaugeMin.bottom
-		}
-		verticalAlignment: Text.AlignVCenter
-		font.pixelSize: Theme.font_size_body2
-		color: Theme.color_font_secondary
-		text: qsTrId("boat_page_rpm")
-		visible: leftRpmGauge.visible && rightRpmGauge.visible
 	}
 
 	Label {

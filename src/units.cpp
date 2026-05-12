@@ -69,6 +69,12 @@ static const std::vector<UnitMetaData> UnitTable {
 	{         LitreSymbol,   Victron::VenusOS::Enums::Units_Volume_Litre,             Unit::Litre,                  0,   true    },
 	{                 "W",   Victron::VenusOS::Enums::Units_Watt,                     Unit::Default,                0,   true    },
 	{              "W/m2",   Victron::VenusOS::Enums::Units_WattsPerSquareMetre,      Unit::Default,                0,   true    },
+	{             "Wh/km",   Victron::VenusOS::Enums::Units_WattHourPerKilometre,     Unit::WattHourPerKilometre,   0,   false   },
+	{             "Wh/mi",   Victron::VenusOS::Enums::Units_WattHourPerMile,          Unit::WattHourPerMile,        0,   false   },
+	{             "Wh/NM",   Victron::VenusOS::Enums::Units_WattHourPerNauticalMile,  Unit::WattHourPerNauticalMile,0,   false   },
+	{             "Ah/km",   Victron::VenusOS::Enums::Units_AmpHourPerKilometre,      Unit::AmpHourPerKilometre,    0,   false   },
+	{             "Ah/mi",   Victron::VenusOS::Enums::Units_AmpHourPerMile,           Unit::AmpHourPerMile,         0,   false   },
+	{             "Ah/NM",   Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile,   Unit::AmpHourPerNauticalMile, 0,   false   },
 };
 
 inline const UnitMetaData &unitMeta(Victron::VenusOS::Enums::Units_Type unit)
@@ -76,8 +82,8 @@ inline const UnitMetaData &unitMeta(Victron::VenusOS::Enums::Units_Type unit)
 	const auto index = static_cast<std::size_t>(unit);
 	Q_ASSERT(index < UnitTable.size());
 	Q_ASSERT(UnitTable[index].unit == unit);
-	Q_ASSERT(unit >= Victron::VenusOS::Enums::Units_None && unit <= Victron::VenusOS::Enums::Units_WattsPerSquareMetre);
-	if (unit < Victron::VenusOS::Enums::Units_None || unit > Victron::VenusOS::Enums::Units_WattsPerSquareMetre) {
+	Q_ASSERT(unit >= Victron::VenusOS::Enums::Units_None && unit <= Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile);
+	if (unit < Victron::VenusOS::Enums::Units_None || unit > Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile) {
 		return UnitTable[Victron::VenusOS::Enums::Units_None];
 	}
 	return UnitTable[index];

@@ -16,7 +16,6 @@ Column {
 	visible: !!battery && battery.timeToGo > 60
 
 	Label {
-		anchors.horizontalCenter: parent.horizontalCenter
 		font.pixelSize: Theme.font_boatPage_timeToGo_label_pixelSize
 		color: Theme.color_font_secondary
 		text: CommonWords.time_to_go
@@ -25,7 +24,6 @@ Column {
 	Row {
 		id: timeToGo
 
-		anchors.horizontalCenter: parent.horizontalCenter
 		spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
 
 		component TimeToGoQuantityLabel : QuantityLabel {
