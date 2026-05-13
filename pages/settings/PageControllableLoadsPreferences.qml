@@ -21,7 +21,7 @@ Page {
 			ListSwitch {
 				preferredVisible: dataItem.valid
 				//% "Pause Opportunity Loads if no AC input is connected"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads")
+				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/PauseWhenOffgrid"
 			}
 
@@ -33,6 +33,7 @@ Page {
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/NominalInverterUtilizationLimit"
 				//% "Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads."
 				caption: qsTrId("pagecontrollableloads_preferences_limits_how_much")
+				maximumCaptionWidth: Theme.geometry_opportunityLoad_caption_maxWidth
 			}
 
 			SettingsListHeader {
@@ -43,10 +44,11 @@ Page {
 			ListSwitch {
 				preferredVisible: dataItem.valid
 				//% "Pause Opportunity Loads when Active SOC limit exceeds 85%"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads")
+				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
 				//% "This helps the BatteryLife algorithm recharge the battery to 100%."
 				caption: qsTrId("page_controllable_loads_preferences_this_helps")
+				maximumCaptionWidth: Theme.geometry_opportunityLoad_caption_maxWidth
 			}
 		}
 	}

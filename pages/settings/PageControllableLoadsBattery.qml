@@ -21,6 +21,7 @@ Page {
 
 				//% "Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb."
 				caption: qsTrId("pagecontrollableloads_battery_below_this_soc")
+				maximumCaptionWidth: Theme.geometry_opportunityLoad_caption_maxWidth
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationStartSoc"
 			}
 
@@ -46,6 +47,7 @@ Page {
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationEndPower"
 				//% "Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices."
 				caption: qsTrId("pagecontrollableloads_battery_between_the_soc")
+				maximumCaptionWidth: Theme.geometry_opportunityLoad_caption_maxWidth
 			}
 		}
 	}

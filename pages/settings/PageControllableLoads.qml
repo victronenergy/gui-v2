@@ -33,6 +33,7 @@ Page {
 				interactive: dEssModeItem.value === 0
 				//% "Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first."
 				caption: interactive ? "" : qsTrId("pagecontrollableloads_disable_dess_first")
+				maximumCaptionWidth: Theme.geometry_opportunityLoad_caption_maxWidth
 
 				VeQuickItem {
 					id: dEssModeItem

@@ -124,7 +124,7 @@ public:
 	Q_INVOKABLE Device *deviceForDeviceInstance(int deviceInstance) const;
 
 	// Returns the first device in the model found with this device instance and service type.
-	Q_INVOKABLE Device *deviceForDeviceInstanceAndServiceType(int deviceInstance, const QString& serviceType) const;
+	Q_INVOKABLE Device *deviceForDeviceInstanceAndServiceType(int deviceInstance, const QString &serviceType) const;
 
 Q_SIGNALS:
 	void countChanged();

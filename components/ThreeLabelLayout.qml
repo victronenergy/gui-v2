@@ -33,6 +33,7 @@ GridLayout {
 	property alias primaryLabel: primaryLabel
 	property alias secondaryLabel: secondaryLabel
 	property alias captionLabel: captionLabel
+	property int maximumCaptionWidth: -1 // Setting this value to -1 will reset the width back to its implicit maximum width
 
 	columns: secondaryText.length === 0 ? 1 : 2
 	columnSpacing: 0
@@ -74,6 +75,7 @@ GridLayout {
 		visible: text.length > 0
 
 		Layout.fillWidth: true
+		Layout.maximumWidth: root.maximumCaptionWidth
 		Layout.columnSpan: root.columns === 1 || root.stretchSecondaryText ? 1 : 2
 	}
 }

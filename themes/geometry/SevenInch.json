@@ -581,5 +581,6 @@
 
     "geometry_opportunityLoad_button_radius": 6,
     "geometry_opportunityLoad_margin": 4,
+    "geometry_opportunityLoad_caption_maxWidth": 675,
     "geometry_priorityLabel_width": 24
 }

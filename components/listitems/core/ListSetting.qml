@@ -42,6 +42,8 @@ ListItem {
 
 	property string text
 	property string caption
+	property int maximumCaptionWidth: availableWidth
+
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer

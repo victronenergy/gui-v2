@@ -61,10 +61,6 @@ ListSetting {
 				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
 			}
 
-			property VeQuickItem runningThreshold: VeQuickItem {
-				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/RunningThreshold" : ""
-			}
-
 			property VeQuickItem offHysteresis: VeQuickItem {
 				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/OffHysteresis" : ""
 			}
@@ -73,7 +69,7 @@ ListSetting {
 				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
 			}
 
-			interactive: powerSetting.valid || runningThreshold.valid || offHysteresis.valid || onHysteresis.valid
+			interactive: powerSetting.valid || offHysteresis.valid || onHysteresis.valid
 			pageSource: "/pages/settings/S2ResourceManagedLoad.qml"
 		}
 	}
@@ -169,7 +165,7 @@ ListSetting {
 		target: root.devices
 
 		function onCountChanged() {
-			const matchingDevice = root.devices.deviceForDeviceInstance(root.deviceInstance)
+			const matchingDevice = root.devices.deviceForDeviceInstanceAndServiceType(root.deviceInstance, root.serviceType)
 			if (matchingDevice) {
 				root._device = matchingDevice
 			}

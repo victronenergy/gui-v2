@@ -134,7 +134,7 @@ ListSetting {
 			visible: text.length > 0
 
 			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
+			Layout.maximumWidth: root.maximumCaptionWidth
 			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
 		}
 	}

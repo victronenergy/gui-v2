@@ -356,7 +356,7 @@ Device *FilteredDeviceModel::deviceForDeviceInstance(int deviceInstance) const
 	return nullptr;
 }
 
-Device *FilteredDeviceModel::deviceForDeviceInstanceAndServiceType(int deviceInstance, const QString& serviceType) const
+Device *FilteredDeviceModel::deviceForDeviceInstanceAndServiceType(int deviceInstance, const QString &serviceType) const
 {
 	for (int i = 0; i < count(); ++i) {
 		if (Device *device = deviceAt(i)) {

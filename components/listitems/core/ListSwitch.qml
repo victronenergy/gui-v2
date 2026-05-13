@@ -87,6 +87,7 @@ ListSetting {
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
 			captionText: root.caption
+			maximumCaptionWidth: root.maximumCaptionWidth
 			stretchSecondaryText: true
 
 			// Since padding is cleared in the root item, add it back again here.
