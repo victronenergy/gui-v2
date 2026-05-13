@@ -14,11 +14,10 @@ ListSetting {
 	required property string serviceType
 	required property int deviceInstance
 	required property string uniqueIdentifier
-	required property FilteredDeviceModel devices
 
-	property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
 	readonly property string pageSource: pageData.item?.pageSource || ""
 	readonly property ListModel _model: ListView.view.model
+	property Device _device: AllDevicesModel.findDeviceWithTypeAndInstance(serviceType, deviceInstance)
 
 	function click() {
 		if (interactive) {
@@ -49,7 +48,15 @@ ListSetting {
 	}
 
 	Component {
-		id: acLoadData
+		id: s2ResourceManagedData
+
+		// 'S2' is a communication standard for energy flexibility in homes and buildings, see
+		// https://s2standard.org. The /S2/... interface basically makes the service controllable as
+		// a flexible load through an energy management system.
+		// According to that standard, the service thereby exposes a "Resource Manager", short "RM",
+		// which is an abstract, high-level description and controller for that service. The
+		// "RMSettings" are custom settings the resource manager needs to understand how to control
+		// that service/device/resource.
 
 		PageData {
 			property VeQuickItem powerSetting: VeQuickItem {
@@ -65,7 +72,7 @@ ListSetting {
 			}
 
 			interactive: powerSetting.valid || offHysteresis.valid || onHysteresis.valid
-			pageSource: "/pages/settings/PageControllableLoadsAcLoad.qml"
+			pageSource: "/pages/settings/PageControllableLoadsS2Rm.qml"
 		}
 	}
 
@@ -157,12 +164,11 @@ ListSetting {
 
 	Connections {
 		enabled: !root._device && root.deviceInstance >= 0
-		target: root.devices
+		target: AllDevicesModel
 
-		function onCountChanged() {
-			const matchingDevice = root.devices.deviceForDeviceInstance(root.deviceInstance)
-			if (matchingDevice) {
-				root._device = matchingDevice
+		function onDeviceAdded(device) {
+			if (device.serviceType === root.serviceType && device.deviceInstance === root.deviceInstance) {
+				root._device = device
 			}
 		}
 	}
@@ -173,13 +179,10 @@ ListSetting {
 			switch (root.serviceType) {
 			case "battery":
 				return batteryData
-			case "acload":
-				return acLoadData
 			case "evcharger":
 				return evcsData
 			default:
-				console.warn("Controllable Loads: Invalid service type.")
-				return undefined
+				return s2ResourceManagedData
 			}
 		}
 	}

@@ -33,6 +33,7 @@
         "/ProductId": 45058,
         "/ProductName": "Heat pump",
         "/RefreshTime": 600,
-        "/Role": "heatpump"
+        "/Role": "heatpump",
+        "/S2/0/RmSettings/PowerSetting": 500
     }
 }

@@ -46,8 +46,11 @@ public:
 	int rowCount(const QModelIndex &parent) const override;
 
 	Q_INVOKABLE int indexOf(const QString &uid) const;
-	Q_INVOKABLE Device *findDevice(const QString &uid) const;  // Note: object has CppOwnership
-	Q_INVOKABLE Device *deviceAt(int index) const; // Note: object has CppOwnership
+
+	// Note: objects returned from these functions have CppOwnership.
+	Q_INVOKABLE Device *findDevice(const QString &uid) const;
+	Q_INVOKABLE Device *findDeviceWithTypeAndInstance(const QString &serviceType, int deviceInstance) const;
+	Q_INVOKABLE Device *deviceAt(int index) const;
 
 	static AllDevicesModel* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 

@@ -222,6 +222,19 @@ Device *AllDevicesModel::findDevice(const QString &uid) const
 	return nullptr;
 }
 
+Device *AllDevicesModel::findDeviceWithTypeAndInstance(const QString &serviceType, int deviceInstance) const
+{
+	for (int i = 0; i < m_devices.count(); ++i) {
+		Device *device = m_devices.at(i);
+		if (device
+				&& device->serviceType() == serviceType
+				&& device->deviceInstance() == deviceInstance) {
+			return device;
+		}
+	}
+	return nullptr;
+}
+
 Device *AllDevicesModel::deviceAt(int index) const
 {
 	if (index >= 0 && index < m_devices.count()) {

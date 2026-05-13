@@ -375,9 +375,9 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageCanbusStatus.qml
     pages/settings/PageChargeCurrentLimits.qml
     pages/settings/PageControllableLoads.qml
-    pages/settings/PageControllableLoadsAcLoad.qml
     pages/settings/PageControllableLoadsBattery.qml
     pages/settings/PageControllableLoadsEVCS.qml
+    pages/settings/PageControllableLoadsS2Rm.qml
     pages/settings/PageControllableLoadsPreferences.qml
     pages/settings/PageDeviceInfo.qml
     pages/settings/PageGenerator.qml

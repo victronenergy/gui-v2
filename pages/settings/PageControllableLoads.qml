@@ -16,21 +16,6 @@ Page {
 		uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
 	}
 
-	FilteredDeviceModel {
-		id: batteryDevices
-		serviceTypes: ["battery"]
-	}
-
-	FilteredDeviceModel {
-		id: acloadDevices
-		serviceTypes: ["acload"]
-	}
-
-	FilteredDeviceModel {
-		id: evchargerDevices
-		serviceTypes: ["evcharger"]
-	}
-
 	GradientListView {
 		id: gradientListView
 
@@ -64,19 +49,6 @@ Page {
 		model: mode.value && loads.valid ? opportunityLoadsModel : []
 		delegate: ListDevicePriority {
 			leftInset: Theme.geometry_priorityLabel_width
-			devices: {
-				switch (serviceType) {
-					case "battery":
-						return batteryDevices
-					case "acload":
-						return acloadDevices
-					case "evcharger":
-						return evchargerDevices
-					default:
-						console.warn("Controllable Loads: Invalid service type:", serviceType)
-						return null
-				}
-			}
 		}
 
 		Column {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
