@@ -57,6 +57,7 @@ Item {
 			const serviceName = device.serviceUid.substring(5)  // remove "mock/"
 			const identifier = deviceCount++
 			MockManager.setValue(settingPath(identifier) + "/ServiceName", serviceName)
+			MockManager.setValue(settingPath(identifier) + "/VrmInstanceId", device.deviceInstance)
 			MockManager.setValue(settingPath(identifier) + "/UnitId", device.deviceInstance)
 			MockManager.setValue(settingPath(identifier) + "/IsActive", 1)
 			return identifier
@@ -100,6 +101,9 @@ Item {
 		onObjectRemoved: (index, device) => {
 			settingsDevices.removeDevice(device)
 			modbusTcpServices.setInactive(device.modbusTcpId)
+		}
+		onCountChanged: {
+			MockManager.setValue("mock/com.victronenergy.modbustcp/Services/Count", count)
 		}
 	}
 }
