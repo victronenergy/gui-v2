@@ -247,16 +247,23 @@ TestCase {
 			{
 				tag: "Invalid type",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/Type": -1, },
+				inputProperties: { "Settings/Type": -1, "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
 			{
 				tag: "ValidTypes matched",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				inputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
+			},
+			{
+				tag: "ValidTypes matched, but no Name",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: false,
 			},
 			{
 				tag: "ValidTypes matched, but Type is out of bounds",
@@ -264,6 +271,7 @@ TestCase {
 				inputProperties: {
 					"Settings/Type": VenusOS.GenericInput_Type_MaxSupportedType + 1,
 					"Settings/ValidTypes": 1 << (VenusOS.GenericInput_Type_MaxSupportedType + 1),
+					"Name": "A",
 				},
 				hasValidType: false,
 				allowedInGroupModel: false,
@@ -271,21 +279,21 @@ TestCase {
 			{
 				tag: "ValidTypes matches 1st type",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/Type": 1, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				inputProperties: { "Settings/Type": 1, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ValidTypes matches 2nd type",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/Type": 2, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				inputProperties: { "Settings/Type": 2, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ValidTypes not matched for either type",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/Type": 0, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				inputProperties: { "Settings/Type": 0, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
@@ -293,21 +301,21 @@ TestCase {
 			{
 				tag: "ShowUIInput=1, other params valid",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/ShowUIInput": 1, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				inputProperties: { "Settings/ShowUIInput": 1, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ShowUIInput=0, other params valid",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/ShowUIInput": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				inputProperties: { "Settings/ShowUIInput": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: false,
 			},
 			{
 				tag: "ShowUIInput=1, ValidTypes not matched",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
-				inputProperties: { "Settings/ShowUIInput": 1, "Settings/Type": 0 },
+				inputProperties: { "Settings/ShowUIInput": 1, "Settings/Type": 0, "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
@@ -335,7 +343,9 @@ TestCase {
 				tag: "ShowUIInput not set",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
-					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"Name": "A",
+					"Settings/Type": 0,
+					"Settings/ValidTypes": 1 << 0,
 				},
 				allowedInGroupModel: true,
 			},
@@ -343,8 +353,9 @@ TestCase {
 				tag: "ShowUIInput=Off",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 0, // Off=0
-					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0,
 				},
 				allowedInGroupModel: false,
 			},
@@ -352,6 +363,7 @@ TestCase {
 				tag: "ShowUIInput=Always",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 1, // Always=1
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},
@@ -361,6 +373,7 @@ TestCase {
 				tag: "ShowUIInput=Local",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 2, // Local=0x2
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},
@@ -371,6 +384,7 @@ TestCase {
 				tag: "ShowUIInput=Remote",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 4, // Remote=0x4
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},
@@ -381,6 +395,7 @@ TestCase {
 				tag: "ShowUIInput=Local+Remote, local connection",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 6, // Local+Remote = 0x2 | 0x4
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},
@@ -391,6 +406,7 @@ TestCase {
 				tag: "ShowUIInput=Local+Remote, remote connection",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 6, // Local+Remote = 0x2 | 0x4
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},
@@ -402,6 +418,7 @@ TestCase {
 				tag: "ShowUIInput=0x5 (invalid)",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
 				inputProperties: {
+					"Name": "A",
 					"Settings/ShowUIInput": 5,
 					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
 				},

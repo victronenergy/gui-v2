@@ -47,9 +47,11 @@ void IOChannel::initialize(VeQItem *item)
 			connect(nameItem, &VeQItem::valueChanged, this, [this](QVariant variant) {
 				m_name = variant.toString();
 				updateFormattedName();
+				updateAllowedInGroupModel();
 			});
 			m_name = nameItem->getValue().toString();
 			updateFormattedName();
+			updateAllowedInGroupModel();
 		}
 		if (VeQItem *customNameItem = m_item->itemGetOrCreate(QStringLiteral("Settings/CustomName"))) {
 			connect(customNameItem, &VeQItem::valueChanged, this, [this](QVariant variant) {
@@ -278,7 +280,7 @@ void IOChannel::updateDecimals()
 
 bool IOChannel::getAllowedInGroupModel() const
 {
-	return hasValidType();
+	return hasValidType() && !m_name.isEmpty();
 }
 
 void IOChannel::updateAllowedInGroupModel()

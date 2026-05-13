@@ -221,16 +221,23 @@ TestCase {
 			{
 				tag: "State valid, invalid type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "State": 0, "Settings/Type": -1, },
+				outputProperties: { "State": 0, "Settings/Type": -1, "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
 			{
 				tag: "State valid, ValidTypes matched",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
+			},
+			{
+				tag: "State valid, ValidTypes matched, but no Name",
+				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
+				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				hasValidType: true,
+				allowedInGroupModel: false,
 			},
 			{
 				tag: "State valid, ValidTypes matched, but Type is out of bounds",
@@ -239,6 +246,7 @@ TestCase {
 					"State": 0,
 					"Settings/Type": VenusOS.SwitchableOutput_Type_MaxSupportedType + 1,
 					"Settings/ValidTypes": 1 << (VenusOS.SwitchableOutput_Type_MaxSupportedType + 1),
+					"Name": "A",
 				},
 				hasValidType: false,
 				allowedInGroupModel: false,
@@ -246,14 +254,14 @@ TestCase {
 			{
 				tag: "Dimming valid but no State, ValidTypes matched",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Dimming": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "Dimming": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "Neither State nor Dimming valid, ValidTypes matched",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: false,
 			},
@@ -261,21 +269,21 @@ TestCase {
 			{
 				tag: "ValidTypes matches 1st type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "State": 0, "Settings/Type": 1, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				outputProperties: { "State": 0, "Settings/Type": 1, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ValidTypes matches 2nd type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "State": 0, "Settings/Type": 2, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				outputProperties: { "State": 0, "Settings/Type": 2, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ValidTypes not matched for either type",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": ((1 << 1) | (1 << 2)) },
+				outputProperties: { "State": 0, "Settings/Type": 0, "Settings/ValidTypes": ((1 << 1) | (1 << 2)), "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
@@ -283,21 +291,21 @@ TestCase {
 			{
 				tag: "ShowUIControl=1, other params valid",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "ShowUIControl=0, other params valid",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 0, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "Settings/ShowUIControl": 0, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: false,
 			},
 			{
 				tag: "ShowUIControl=1, ValidTypes not matched",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
-				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0 },
+				outputProperties: { "Settings/ShowUIControl": 1, "State": 0, "Settings/Type": 0, "Name": "A" },
 				hasValidType: false,
 				allowedInGroupModel: false,
 			},
@@ -305,14 +313,14 @@ TestCase {
 			{
 				tag: "Relay function = manual, other params valid",
 				uid: "mock/com.victronenergy.system/SwitchableOutput/1",
-				outputProperties: { "Settings/Function": 2, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0 },
+				outputProperties: { "Settings/Function": 2, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: true,
 			},
 			{
 				tag: "Relay function = start/stop, other params valid",
 				uid: "mock/com.victronenergy.system/SwitchableOutput/1",
-				outputProperties: { "Settings/Function": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0},
+				outputProperties: { "Settings/Function": 1, "State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A" },
 				hasValidType: true,
 				allowedInGroupModel: false,
 			},
@@ -340,7 +348,7 @@ TestCase {
 				tag: "ShowUIControl not set",
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				allowedInGroupModel: true,
 			},
@@ -349,7 +357,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 0, // Off=0
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				allowedInGroupModel: false,
 			},
@@ -358,7 +366,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 1, // Always=1
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				allowedInGroupModel: true,
 			},
@@ -367,7 +375,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 2, // Local=0x2
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				vrm: false,
 				allowedInGroupModel: true,
@@ -377,7 +385,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 4, // Remote=0x4
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				vrm: true,
 				allowedInGroupModel: true,
@@ -387,7 +395,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 6, // Local+Remote = 0x2 | 0x4
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				vrm: false,
 				allowedInGroupModel: true,
@@ -397,7 +405,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 6, // Local+Remote = 0x2 | 0x4
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				vrm: true,
 				allowedInGroupModel: true,
@@ -408,7 +416,7 @@ TestCase {
 				uid: "mock/com.victronenergy.test.a/SwitchableOutput/1",
 				outputProperties: {
 					"Settings/ShowUIControl": 5,
-					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+					"State": 0, "Settings/Type": 0, "Settings/ValidTypes": 1 << 0, "Name": "A"
 				},
 				allowedInGroupModel: true,
 			},

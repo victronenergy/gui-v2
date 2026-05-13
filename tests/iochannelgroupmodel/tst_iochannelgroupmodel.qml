@@ -42,6 +42,22 @@ TestCase {
 	function test_added_groups_data() {
 		return [
 			{
+				tag: "0 groups, device has no /Name so it is not allowed in group model",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.solarcharger.a",
+						children: {
+							DeviceInstance: 0,
+							ProductName: "solarcharger_product",
+							"SwitchableOutput/0/State": 0,
+							"SwitchableOutput/0/Settings/ValidTypes": (1 << 0),
+							"SwitchableOutput/0/Settings/Type": 0,
+						},
+					}
+				],
+				groups: [],
+			},
+			{
 				tag: "1 device group with 1 channel",
 				devices: [
 					{
