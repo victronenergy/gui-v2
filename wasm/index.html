@@ -417,8 +417,9 @@
                 // Preload WASM with progress
                 const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
                     if (total) {
-                        const percent = (received / total * 100).toFixed(1);
-                        const barWidth = received / total * loadingBarContainer.width.baseVal.value;
+                        const ratio = Math.min(received / total, 1);
+                        const percent = (ratio * 100).toFixed(1);
+                        const barWidth = ratio * loadingBarContainer.width.baseVal.value;
                         loadingBar.width.baseVal.value = barWidth;
                         loadingBarText.textContent = `Downloading... ${percent}%`;
                     // If total is unknown, show the received size in MB
