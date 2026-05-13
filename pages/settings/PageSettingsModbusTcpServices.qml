@@ -18,16 +18,6 @@ Page {
 		return serviceName.split('.', 3).join('.')
 	}
 
-	function _formatName(productName, serviceName) {
-		if (productName !== undefined) {
-			return productName
-		}
-		if (serviceName !== undefined) {
-			return _shortServiceName(serviceName)
-		}
-		return "--"
-	}
-
 	VeQuickItem {
 		id: serviceCount
 		uid: root.modbustcpServiceUid + "/Services/Count"
@@ -46,23 +36,27 @@ Page {
 
 			readonly property string servicePath: root.modbustcpServiceUid + "/Services/" + model.index
 
-			text: root._formatName(productName.value, serviceName.value)
+			text: device.name || root._shortServiceName(serviceName.value) || "--"
 			//: Modbus TCP service details. %1 = service name or uid, %2 = unit id
 			//% "%1 | Unit ID: %2"
 			caption: qsTrId("settings_modbus_unit_name_and_id")
 					.arg(root._shortServiceName(serviceName.value))
 					.arg(unitId.value)
 
+			Device {
+				id: device
+				serviceUid: !serviceName.valid || !vrmInstanceId.valid ? ""
+					 : BackendConnection.serviceUidFromName(serviceName.value, vrmInstanceId.value)
+			}
+
 			VeQuickItem {
 				id: serviceName
 				uid: serviceDelegate.servicePath + "/ServiceName"
 			}
 
-			// TODO the uid is wrong on MQTT, need something like mqtt/<type>/ProductName
-			// but it is currently mqtt/com.victronenergy.<service>/ProductName
 			VeQuickItem {
-				id: productName
-				uid: serviceName.valid ? "%1/%2/ProductName".arg(BackendConnection.uidPrefix()).arg(serviceName.value) : ""
+				id: vrmInstanceId
+				uid: serviceDelegate.servicePath + "/VrmInstanceId"
 			}
 
 			VeQuickItem {
