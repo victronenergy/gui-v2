@@ -356,6 +356,18 @@ Device *FilteredDeviceModel::deviceForDeviceInstance(int deviceInstance) const
 	return nullptr;
 }
 
+Device *FilteredDeviceModel::deviceForDeviceInstanceAndServiceType(int deviceInstance, const QString& serviceType) const
+{
+	for (int i = 0; i < count(); ++i) {
+		if (Device *device = deviceAt(i)) {
+			if ((device->deviceInstance() == deviceInstance) && device->serviceType() == serviceType) {
+				return device;
+			}
+		}
+	}
+	return nullptr;
+}
+
 bool FilteredDeviceModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
 	Q_UNUSED(sourceParent)

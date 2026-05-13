@@ -16,7 +16,7 @@ ListSetting {
 	required property string uniqueIdentifier
 	required property FilteredDeviceModel devices
 
-	property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstance(deviceInstance) : null
+	property Device _device: devices && deviceInstance >= 0 ? devices.deviceForDeviceInstanceAndServiceType(deviceInstance, serviceType) : null
 	readonly property string pageSource: pageData.item?.pageSource || ""
 	readonly property ListModel _model: ListView.view.model
 
@@ -49,11 +49,20 @@ ListSetting {
 	}
 
 	Component {
-		id: acLoadData
+		id: s2ResourceManagedService
+
+		// 'S2' is a communication standard for energy flexibility in homes and buildings, see https://s2standard.org/
+		// The /S2/... interface basically makes the service controllable as a flexible load through an energy management system.
+		// According to that standard, the service thereby exposes a "Resource Manager", short "RM", which is an abstract, high-level description and
+		// controller for that service. The "RMSettings" are custom settings the resource manager needs to understand how to control that service/device/resource.
 
 		PageData {
 			property VeQuickItem powerSetting: VeQuickItem {
 				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
+			}
+
+			property VeQuickItem runningThreshold: VeQuickItem {
+				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/RunningThreshold" : ""
 			}
 
 			property VeQuickItem offHysteresis: VeQuickItem {
@@ -64,8 +73,8 @@ ListSetting {
 				uid: root._device ? root._device.serviceUid + "/S2/0/RmSettings/OnHysteresis" : ""
 			}
 
-			interactive: powerSetting.valid || offHysteresis.valid || onHysteresis.valid
-			pageSource: "/pages/settings/PageControllableLoadsAcLoad.qml"
+			interactive: powerSetting.valid || runningThreshold.valid || offHysteresis.valid || onHysteresis.valid
+			pageSource: "/pages/settings/S2ResourceManagedLoad.qml"
 		}
 	}
 
@@ -173,13 +182,10 @@ ListSetting {
 			switch (root.serviceType) {
 			case "battery":
 				return batteryData
-			case "acload":
-				return acLoadData
 			case "evcharger":
 				return evcsData
 			default:
-				console.warn("Controllable Loads: Invalid service type.")
-				return undefined
+				return s2ResourceManagedService
 			}
 		}
 	}

@@ -10,25 +10,14 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	property FilteredDeviceModel batteryDevices: FilteredDeviceModel { serviceTypes: ["battery"] }
+	property FilteredDeviceModel evchargerDevices: FilteredDeviceModel { serviceTypes: ["evcharger"] }
+	property FilteredDeviceModel allDevices: FilteredDeviceModel { }
+
 	VeQuickItem {
 		id: mode
 
 		uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
-	}
-
-	FilteredDeviceModel {
-		id: batteryDevices
-		serviceTypes: ["battery"]
-	}
-
-	FilteredDeviceModel {
-		id: acloadDevices
-		serviceTypes: ["acload"]
-	}
-
-	FilteredDeviceModel {
-		id: evchargerDevices
-		serviceTypes: ["evcharger"]
 	}
 
 	GradientListView {
@@ -67,14 +56,11 @@ Page {
 			devices: {
 				switch (serviceType) {
 					case "battery":
-						return batteryDevices
-					case "acload":
-						return acloadDevices
+						return root.batteryDevices
 					case "evcharger":
-						return evchargerDevices
+						return root.evchargerDevices
 					default:
-						console.warn("Controllable Loads: Invalid service type:", serviceType)
-						return null
+						return root.allDevices
 				}
 			}
 		}
