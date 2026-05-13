@@ -690,6 +690,12 @@ TestCase {
 				inputProperties: { "Settings/Unit": "/Volume" },
 				primaryLabel: qsTrId("generic_input_primaryLabel_volume"),
 			},
+			{
+				tag: "both custom and reserved unit, custom label wins",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Settings/PrimaryLabel": "A", "Settings/Unit": "/Volume" },
+				primaryLabel: "A",
+			},
 		]
 	}
 

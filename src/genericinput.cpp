@@ -164,22 +164,26 @@ void GenericInput::updatePrimaryLabel()
 {
 	const QString prevLabel = m_primaryLabel;
 
-	switch (unitType()) {
-	case Enums::Units_Speed_MetresPerSecond:
-		//% "Speed"
-		m_primaryLabel = qtTrId("generic_input_primaryLabel_speed");
-		break;
-	case Enums::Units_Temperature_Celsius:
-		//% "Temperature"
-		m_primaryLabel = qtTrId("generic_input_primaryLabel_temperature");
-		break;
-	case Enums::Units_Volume_CubicMetre:
-		//% "Volume"
-		m_primaryLabel = qtTrId("generic_input_primaryLabel_volume");
-		break;
-	default:
+	if (!m_rawPrimaryLabel.isEmpty()) {
 		m_primaryLabel = m_rawPrimaryLabel;
-		break;
+	} else {
+		switch (unitType()) {
+		case Enums::Units_Speed_MetresPerSecond:
+			//% "Speed"
+			m_primaryLabel = qtTrId("generic_input_primaryLabel_speed");
+			break;
+		case Enums::Units_Temperature_Celsius:
+			//% "Temperature"
+			m_primaryLabel = qtTrId("generic_input_primaryLabel_temperature");
+			break;
+		case Enums::Units_Volume_CubicMetre:
+			//% "Volume"
+			m_primaryLabel = qtTrId("generic_input_primaryLabel_volume");
+			break;
+		default:
+			m_primaryLabel.clear();
+			break;
+		}
 	}
 
 	if (prevLabel != m_primaryLabel) {
