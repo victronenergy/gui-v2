@@ -21,7 +21,7 @@ Page {
 			ListSwitch {
 				preferredVisible: dataItem.valid
 				//% "Pause Opportunity Loads if no AC input is connected"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads")
+				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/PauseWhenOffgrid"
 			}
 
@@ -43,7 +43,7 @@ Page {
 			ListSwitch {
 				preferredVisible: dataItem.valid
 				//% "Pause Opportunity Loads when Active SOC limit exceeds 85%"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads")
+				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
 				//% "This helps the BatteryLife algorithm recharge the battery to 100%."
 				caption: qsTrId("page_controllable_loads_preferences_this_helps")
