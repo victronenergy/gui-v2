@@ -12,6 +12,8 @@ ListQuantityGroupNavigation {
 	required property string uid
 	required property string name
 
+	readonly property bool _showDetail: output.hasValidType || output.validTypes > 0
+
 	text: name
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
@@ -21,18 +23,18 @@ ListQuantityGroupNavigation {
 		// Generally, if Status=On, then show some output-specific detail (e.g. the Dimming value)
 		// and otherwise, just show the status text (On, Off, Fault, etc.)
 		QuantityObject {
-			object: output
+			object: root._showDetail || output.status > VenusOS.SwitchableOutput_Status_Off ? output : null
 			key: !isNaN(output.dataNumber) ? "dataNumber" : "dataText"
 			unit: output.dataNumberUnit
 			decimals: output.decimals
 		}
 		QuantityObject {
-			object: output
+			object: root._showDetail ? output : null
 			key: output.secondaryDataText ? "secondaryDataText" : ""
 			unit: VenusOS.Units_None
 		}
 		QuantityObject {
-			object: output
+			object: root._showDetail ? output : null
 			key: "typeText"
 			// If output is valid, set undefined to indicate the default color should be used.
 			valueColor: output.hasValidType ? undefined : Theme.color_critical
