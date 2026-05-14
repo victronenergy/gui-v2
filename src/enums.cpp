@@ -604,7 +604,7 @@ QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value) 
 		//% "Opportunity load"
 		return qtTrId("switchable_output_function_opportunity_load");
 	default:
-		//% "Unsupported type: %1"
+		//% "Unsupported function: %1"
 		return qtTrId("switchable_output_unsupported").arg(value);
 	}
 }
