@@ -59,7 +59,7 @@
       <translation>ポジション</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="164"/>
+      <location filename="../../src/genericinput.cpp" line="173"/>
       <source>Speed</source>
       <translation>速度</translation>
     </message>
@@ -80,7 +80,7 @@
       <translation>不明なエラー:</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="106"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="116"/>
       <source>Minimum SOC</source>
       <translation>最小SOC</translation>
     </message>
@@ -115,17 +115,17 @@
       <translation>外部コントロール</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="61"/>
+      <location filename="../../pages/LevelsPage.qml" line="75"/>
       <source>Tanks</source>
       <translation>タンク</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="63"/>
+      <location filename="../../pages/LevelsPage.qml" line="77"/>
       <source>Environment</source>
       <translation>環境</translation>
     </message>
-    <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+    <message id="page_controllable_loads_preferences_general">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="18"/>
       <source>General</source>
       <translation>一般</translation>
     </message>
@@ -135,7 +135,7 @@
       <translation>ファームウェア</translation>
     </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="221"/>
       <source>Date &amp; Time</source>
       <translation>日時</translation>
     </message>
@@ -822,7 +822,7 @@
       <translation>言語</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="201"/>
       <source>Changing language</source>
       <translation>言語の変更</translation>
     </message>
@@ -1192,17 +1192,17 @@
       <translation>AC入力2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="296"/>
       <source>Remote support</source>
       <translation>リモートサポート</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="302"/>
       <source>Remote support tunnel</source>
       <translation>リモートサポートトンネル</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
       <source>Remote support IP and port</source>
       <translation>リモートサポートIPとポート</translation>
     </message>
@@ -1216,28 +1216,58 @@
       <source>Audible alarm</source>
       <translation>音声アラーム</translation>
     </message>
+    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="52"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">サポートされていないGXデバイス</translation>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_clean">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="57"/>
+      <source>Clean</source>
+      <translation type="unfinished">クリーン</translation>
+    </message>
+    <message id="pagesettingsgeneral_firmware">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="114"/>
+      <source>Firmware</source>
+      <translation type="unfinished">ファームウェア</translation>
+    </message>
+    <message id="pagesettingsgeneral_preferences">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="132"/>
+      <source>Preferences</source>
+      <translation type="unfinished">設定</translation>
+    </message>
+    <message id="pagesettingsgeneral_documentation">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="232"/>
+      <source>Documentation</source>
+      <translation type="unfinished">ドキュメント</translation>
+    </message>
+    <message id="pagesettingsgeneral_support_status">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <source>Support status</source>
+      <translation type="unfinished">サポートステータス</translation>
+    </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Demo mode</source>
       <translation>デモモード</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="306"/>
       <source>ESS demo</source>
       <translation>ESSデモ</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="308"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>ボート/モーターホームデモ1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="310"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>ボート/モーターホームデモ2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="314"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>デモモードを開始すると、設定が一部変更され、UIが一時的に応答しなくなります。</translation>
     </message>
@@ -1287,7 +1317,7 @@
       <translation>静音時間終了</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="349"/>
+      <location filename="../../components/PageGensetModel.qml" line="418"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="118"/>
       <source>Run time and service</source>
       <translation>稼働時間とサービス</translation>
@@ -1756,8 +1786,8 @@ Use unless prohibited by the utility provider.</source>
       <translation>Node-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="475"/>
       <source>Enabled (safe mode)</source>
@@ -2102,7 +2132,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>バックアップファームウェアが利用できません</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>TCP/IP経由のCANバス (デバッグ)</translation>
     </message>
@@ -2246,7 +2276,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="166"/>
       <source>[Hidden]</source>
       <translation>[非表示]</translation>
     </message>
@@ -2336,27 +2366,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>VE.CANデバイス</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="156"/>
       <source>No access points</source>
       <translation>アクセスポイントなし</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="158"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Wi-Fiアダプターが接続されていません</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="36"/>
       <source>Create access point</source>
       <translation>アクセスポイントを作成</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="148"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fiネットワーク</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>アクセスポイントを無効にしてもよろしいですか？</translation>
     </message>
@@ -2366,52 +2396,52 @@ Use unless prohibited by the utility provider.</source>
       <translation>日付/時刻 UTC</translation>
     </message>
     <message id="settings_tz_date_time_local">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="115"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="119"/>
       <source>Date/Time local</source>
       <translation>日付/時刻 ローカル</translation>
     </message>
     <message id="settings_tz_time_zone">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="140"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="147"/>
       <source>Time zone</source>
       <translation>タイムゾーン</translation>
     </message>
     <message id="settings_tz_africa">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="235"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="242"/>
       <source>Africa</source>
       <translation>アフリカ</translation>
     </message>
     <message id="settings_tz_america">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="241"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="248"/>
       <source>America</source>
       <translation>アメリカ</translation>
     </message>
     <message id="settings_tz_asia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="259"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="266"/>
       <source>Asia</source>
       <translation>アジア</translation>
     </message>
     <message id="settings_tz_atlantic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="265"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="272"/>
       <source>Atlantic</source>
       <translation>大西洋</translation>
     </message>
     <message id="settings_tz_ustralia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="271"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="278"/>
       <source>Australia</source>
       <translation>オーストラリア</translation>
     </message>
     <message id="settings_tz_europe">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="277"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="284"/>
       <source>Europe</source>
       <translation>ヨーロッパ</translation>
     </message>
     <message id="settings_tz_indian">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="283"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="290"/>
       <source>Indian</source>
       <translation>インド洋</translation>
     </message>
     <message id="settings_tz_pacific">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="289"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="296"/>
       <source>Pacific</source>
       <translation>太平洋</translation>
     </message>
@@ -2583,12 +2613,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>ネットワーク運用</translation>
     </message>
     <message id="charger_history_table_view">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="29"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="31"/>
       <source>Table view</source>
       <translation>テーブル表示</translation>
     </message>
     <message id="charger_history_chart">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="31"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="33"/>
       <source>Chart</source>
       <translation>チャート</translation>
     </message>
@@ -2616,7 +2646,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>アラーム</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="172"/>
+      <location filename="../../src/genericinput.cpp" line="181"/>
       <source>Volume</source>
       <translation>容量</translation>
     </message>
@@ -2641,18 +2671,18 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">セッション</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="47"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="51"/>
       <source>Session</source>
       <translation>セッション</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="54"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="58"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>時間</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="125"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="130"/>
       <source>Charge mode</source>
       <translation>充電モード</translation>
     </message>
@@ -2672,7 +2702,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>オフピーク時間帯の電気料金を節約したい場合や、特定の時間までにEVを完全に充電して準備を整えたい場合に利用します。</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="140"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="145"/>
       <source>Enable charging</source>
       <translation>充電を有効にする</translation>
     </message>
@@ -2994,7 +3024,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">押して再検出</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
       <source>System</source>
       <translation>システム</translation>
     </message>
@@ -3697,24 +3727,24 @@ Use unless prohibited by the utility provider.</source>
       <translation>ポイントを追加</translation>
     </message>
     <message id="devicelist_tankshape_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="226"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="236"/>
       <source>Sensor level</source>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>センサーレベル</translation>
     </message>
     <message id="devicelist_tankshape_volume">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="260"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="275"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation type="unfinished">容量</translation>
     </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="351"/>
       <source>Duplicate sensor level values are not allowed.</source>
       <translation>センサーレベル値の重複は許可されていません。</translation>
     </message>
     <message id="devicelist_tankshape_volume_not_increasing">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="338"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="357"/>
       <source>Volume values must be increasing.</source>
       <translation>容量値は増加させてください。</translation>
     </message>
@@ -3775,12 +3805,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">デバイス</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="218"/>
+      <location filename="../../components/PageGensetModel.qml" line="249"/>
       <source>AC</source>
       <translation>AC</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="256"/>
+      <location filename="../../components/PageGensetModel.qml" line="325"/>
       <source>Engine</source>
       <translation>エンジン</translation>
     </message>
@@ -3790,22 +3820,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>冷却水温度</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="308"/>
+      <location filename="../../components/PageGensetModel.qml" line="377"/>
       <source>Exhaust temperature</source>
       <translation>排気温度</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <location filename="../../components/PageGensetModel.qml" line="384"/>
       <source>Winding temperature</source>
       <translation>巻線温度</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <location filename="../../components/PageGensetModel.qml" line="398"/>
       <source>Starter battery voltage</source>
       <translation>スターターバッテリー電圧</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="337"/>
+      <location filename="../../components/PageGensetModel.qml" line="406"/>
       <source>Number of starts</source>
       <translation>始動回数</translation>
     </message>
@@ -4065,6 +4095,11 @@ NOTE: The update might temporarily stop the system.</source>
       <source>Charging the battery to 100%</source>
       <translation>バッテリーを100%まで充電中</translation>
     </message>
+    <message id="vebus_device_page_advanced">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="206"/>
+      <source>Advanced</source>
+      <translation type="unfinished">高度</translation>
+    </message>
     <message id="vebus_device_in_progress">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="80"/>
       <source>In progress</source>
@@ -4119,8 +4154,8 @@ Do you want to continue?</source>
       <source>DC Current</source>
       <translation>DC電流</translation>
     </message>
-    <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="206"/>
+    <message id="pagecontrollableloads_battery_advanced">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="29"/>
       <source>Advanced</source>
       <translation>高度</translation>
     </message>
@@ -4481,12 +4516,12 @@ Do you want to continue?</source>
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="56"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">最小SOC</translation>
     </message>
     <message id="ess_unless_grid_fails">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="32"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="37"/>
       <source>Unless grid fails</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>系統停電が発生しない限り</translation>
@@ -5015,7 +5050,7 @@ Do you want to continue?</source>
       <translation>停止</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="168"/>
+      <location filename="../../src/genericinput.cpp" line="177"/>
       <source>Temperature</source>
       <translation>温度</translation>
     </message>
@@ -5102,7 +5137,7 @@ Do you want to continue?</source>
       <translation>今すぐ起動</translation>
     </message>
     <message id="controlcard_generator_startdialog_timed_run">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="47"/>
       <source>Timed run</source>
       <translation>時間指定実行</translation>
     </message>
@@ -5112,28 +5147,23 @@ Do you want to continue?</source>
       <translation>今すぐ停止</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="62"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="56"/>
       <source>Total Run Time</source>
       <translation>総稼働時間</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="81"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="75"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>時間設定 %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="97"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="87"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>自動起動条件が満たされた場合、発電機は運転を継続します。</translation>
     </message>
-    <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="32"/>
-      <source>Inverter / Charger mode</source>
-      <translation>インバーター/充電器モード</translation>
-    </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="36"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
       <source>Set</source>
       <translation>設定済み</translation>
     </message>
@@ -5317,7 +5347,7 @@ Do you want to continue?</source>
       <translation>概要</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../pages/LevelsPage.qml" line="19"/>
+      <location filename="../../pages/LevelsPage.qml" line="21"/>
       <source>Levels</source>
       <translation>レベル</translation>
     </message>
@@ -5602,45 +5632,45 @@ Do you want to continue?</source>
       <translation>ガロン (英国)</translation>
     </message>
     <message id="charger_history_box_min_voltage">
-      <location filename="../../components/SolarDetailBox.qml" line="58"/>
+      <location filename="../../components/SolarDetailBox.qml" line="72"/>
       <source>Min Voltage</source>
       <translation>最小電圧</translation>
     </message>
     <message id="charger_history_max_voltage">
-      <location filename="../../components/SolarHistoryTableView.qml" line="84"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="96"/>
       <source>Max Voltage</source>
       <translation>最大電圧</translation>
     </message>
     <message id="charger_history_box_max_voltage">
-      <location filename="../../components/SolarDetailBox.qml" line="64"/>
+      <location filename="../../components/SolarDetailBox.qml" line="79"/>
       <source>Max Voltage</source>
       <translation type="unfinished">最大電圧</translation>
     </message>
     <message id="charger_history_box_max_current">
-      <location filename="../../components/SolarDetailBox.qml" line="70"/>
+      <location filename="../../components/SolarDetailBox.qml" line="86"/>
       <source>Max Current</source>
       <translation>最大電流</translation>
     </message>
     <message id="charger_history_charge_time">
-      <location filename="../../components/SolarDetailBox.qml" line="121"/>
+      <location filename="../../components/SolarDetailBox.qml" line="108"/>
       <source>Charge time</source>
       <extracomment>Statistics for battery charging time</extracomment>
       <translation>充電時間</translation>
     </message>
     <message id="charger_history_box_bulk">
-      <location filename="../../components/SolarDetailBox.qml" line="136"/>
+      <location filename="../../components/SolarDetailBox.qml" line="114"/>
       <source>Bulk</source>
       <extracomment>Battery: time spent in 'Bulk' mode</extracomment>
       <translation type="unfinished">バルク</translation>
     </message>
     <message id="charger_history_box_float">
-      <location filename="../../components/SolarDetailBox.qml" line="148"/>
+      <location filename="../../components/SolarDetailBox.qml" line="128"/>
       <source>Float</source>
       <extracomment>Battery: time spent in 'Float' mode</extracomment>
       <translation type="unfinished">フロート</translation>
     </message>
     <message id="charger_history_hr">
-      <location filename="../../components/SolarDetailBox.qml" line="174"/>
+      <location filename="../../components/SolarDetailBox.qml" line="194"/>
       <source>hr</source>
       <extracomment>Abbreviation of "hour"</extracomment>
       <translation type="unfinished">時間</translation>
@@ -5651,7 +5681,7 @@ Do you want to continue?</source>
       <translation>バルク</translation>
     </message>
     <message id="charger_history_box_abs">
-      <location filename="../../components/SolarDetailBox.qml" line="142"/>
+      <location filename="../../components/SolarDetailBox.qml" line="121"/>
       <source>Abs</source>
       <extracomment>Battery: time spent in 'Absorption' mode</extracomment>
       <translation>吸収</translation>
@@ -5662,7 +5692,7 @@ Do you want to continue?</source>
       <translation>フロート</translation>
     </message>
     <message id="timeselector_hr">
-      <location filename="../../components/TimeSelector.qml" line="33"/>
+      <location filename="../../components/TimeSelector.qml" line="46"/>
       <source>hr</source>
       <translation>時間</translation>
     </message>
@@ -5696,7 +5726,7 @@ Do you want to continue?</source>
       <translation>最後から4番目</translation>
     </message>
     <message id="charger_history_max_power">
-      <location filename="../../components/SolarHistoryTableView.qml" line="86"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="98"/>
       <source>Max Power</source>
       <translation>最大電力</translation>
     </message>
@@ -5781,12 +5811,12 @@ Do you want to continue?</source>
       <translation>アラーム消音</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="47"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="53"/>
       <source>Total Power</source>
       <translation>総合力</translation>
     </message>
     <message id="timeselector_min">
-      <location filename="../../components/TimeSelector.qml" line="69"/>
+      <location filename="../../components/TimeSelector.qml" line="72"/>
       <source>min</source>
       <translation>最小</translation>
     </message>
@@ -5856,7 +5886,7 @@ Do you want to continue?</source>
       <translation>直流負荷</translation>
     </message>
     <message id="overview_widget_evcs_title">
-      <location filename="../../components/widgets/EvcsWidget.qml" line="24"/>
+      <location filename="../../components/widgets/EvcsWidget.qml" line="26"/>
       <source>EVCS</source>
       <extracomment>Abbreviation of Electric Vehicle Charging Station</extracomment>
       <translation>EV充電器</translation>
@@ -6247,7 +6277,7 @@ Do you want to continue?</source>
       <translation>短絡アラーム</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="59"/>
       <source>Disable Access Point</source>
       <translation>アクセスポイントを無効にする</translation>
     </message>
@@ -6277,7 +6307,7 @@ Do you want to continue?</source>
       <translation>DC入力</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="73"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="69"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <translation>リチウムバッテリーの場合、充電量が10%未満になることは推奨されません。その他のバッテリータイプについては、メーカーが推奨する最低レベルをデータシートでご確認ください。</translation>
     </message>
@@ -6302,13 +6332,13 @@ Do you want to continue?</source>
       <translation>発電機のリモート起動機能が無効になっています。GXは現在、発電機を起動または停止できません。発電機制御パネルで有効にしてください。</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="24"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>インバーター (%1)</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="26"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="27"/>
       <source>Inverter / Charger (%1)</source>
       <extracomment>%1 = the inverter/charger name</extracomment>
       <translation>インバーター/充電器 (%1)</translation>
@@ -6353,58 +6383,63 @@ Do you want to continue?</source>
       <source>Genset error codes</source>
       <translation>発電機エラーコード</translation>
     </message>
+    <message id="press-to-clear">
+      <location filename="../../components/PageGensetModel.qml" line="213"/>
+      <source>Press to clear</source>
+      <translation type="unfinished">押してクリア</translation>
+    </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="244"/>
+      <location filename="../../components/PageGensetModel.qml" line="292"/>
       <source>Remote start mode</source>
       <translation>リモートスタートモード</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="269"/>
+      <location filename="../../components/PageGensetModel.qml" line="338"/>
       <source>Speed</source>
       <translation type="unfinished">速度</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="276"/>
+      <location filename="../../components/PageGensetModel.qml" line="345"/>
       <source>Load</source>
       <translation type="unfinished">負荷</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>Oil pressure</source>
       <translation>油圧</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="292"/>
+      <location filename="../../components/PageGensetModel.qml" line="361"/>
       <source>Oil temperature</source>
       <translation>油温</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="300"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>Coolant temperature</source>
       <translation type="unfinished">冷却水温度</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="322"/>
+      <location filename="../../components/PageGensetModel.qml" line="391"/>
       <source>Heatsink temperature</source>
       <translation>ヒートシンク温度</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="362"/>
+      <location filename="../../components/PageGensetModel.qml" line="431"/>
       <source>DC genset settings</source>
       <translation>DC発電機設定</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="389"/>
+      <location filename="../../components/PageGensetModel.qml" line="458"/>
       <source>Charge voltage</source>
       <translation type="unfinished">充電電圧</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="400"/>
+      <location filename="../../components/PageGensetModel.qml" line="469"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>充電電圧は現在BMSによって制御されています。</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="406"/>
+      <location filename="../../components/PageGensetModel.qml" line="475"/>
       <source>Charge current limit</source>
       <translation>充電電流限度</translation>
     </message>
@@ -6778,65 +6813,40 @@ Do you want to continue?</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 は %2 に設定されています</translation>
     </message>
-    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="51"/>
-      <source>Unsupported GX device</source>
-      <translation type="unfinished">サポートされていないGXデバイス</translation>
-    </message>
-    <message id="pagesettingsgeneral_modificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="56"/>
-      <source>Clean</source>
-      <translation type="unfinished">クリーン</translation>
-    </message>
-    <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="113"/>
-      <source>Firmware</source>
-      <translation type="unfinished">ファームウェア</translation>
-    </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
       <source>Access &amp; Security</source>
       <translation>アクセスとセキュリティ</translation>
     </message>
-    <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
+    <message id="pagecontrollableloads_preferences">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="103"/>
       <source>Preferences</source>
       <translation>設定</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="137"/>
       <source>Display &amp; Appearance</source>
       <translation>表示と外観</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="143"/>
       <source>Alarms &amp; Feedback</source>
       <translation>アラームとフィードバック</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
       <source>Failed to change language!</source>
       <translation>言語の変更に失敗しました！</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="207"/>
       <source>Successfully changed language!</source>
       <translation>言語の変更に成功しました！</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="209"/>
       <source>Please wait while the language is changed.</source>
       <translation>言語変更中です。しばらくお待ちください。</translation>
-    </message>
-    <message id="pagesettingsgeneral_documentation">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="234"/>
-      <source>Documentation</source>
-      <translation type="unfinished">ドキュメント</translation>
-    </message>
-    <message id="pagesettingsgeneral_support_status">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="241"/>
-      <source>Support status</source>
-      <translation type="unfinished">サポートステータス</translation>
     </message>
     <message id="settings_briefview_totals">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="29"/>
@@ -7042,52 +7052,52 @@ Do you want to continue?</source>
       <translation type="unfinished">パスワードは8文字以上である必要があります</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="266"/>
       <source>Root password</source>
       <translation>ルートパスワード</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Enter password</source>
       <translation type="unfinished">パスワードを入力</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">パスワードは8文字以上である必要があります</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
       <source>Root password changed to %1</source>
       <translation>ルートパスワードが %1 に変更されました</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="287"/>
       <source>Enable SSH on LAN</source>
       <translation>LAN上でSSHを有効にする</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="318"/>
       <source>Logout</source>
       <translation>ログアウト</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="320"/>
       <source>Log out now</source>
       <translation>今すぐログアウト</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="332"/>
       <source>Log out?</source>
       <translation>ログアウトしますか？</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="334"/>
       <source>This will disconnect all local network connections.</source>
       <translation>これにより、すべてのローカルネットワーク接続が切断されます。</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="336"/>
       <source>Log out</source>
       <translation>ログアウト</translation>
     </message>
@@ -7227,52 +7237,52 @@ Do you want to continue?</source>
       <translation>アクティブ (%1)</translation>
     </message>
     <message id="pagesettingsintegrations_pv_inverters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
       <source>PV Inverters</source>
       <translation>PVインバーター</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="29"/>
       <source>Energy meters via RS485</source>
       <translation>RS485経由の電力メーター</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
       <source>Modbus Devices</source>
       <translation>Modbusデバイス</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
       <source>Bluetooth Sensors</source>
       <translation>Bluetoothセンサー</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="71"/>
       <source>Physical I/O</source>
       <translation>物理I/O</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
       <source>Tank and Temperature Sensors</source>
       <translation>タンクおよび温度センサー</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="115"/>
       <source>Relays</source>
       <translation>リレー</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="129"/>
       <source>Digital I/O</source>
       <translation>デジタルI/O</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
       <source>Server Applications</source>
       <translation>サーバーアプリケーション</translation>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
       <source>Victron Community</source>
       <translation type="unfinished">Victronコミュニティ</translation>
     </message>
@@ -7282,7 +7292,7 @@ Do you want to continue?</source>
       <translation>Modbus TCPサーバー</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
       <source>Venus OS Large Features</source>
       <translation>Venus OS Large機能</translation>
     </message>
@@ -7393,32 +7403,32 @@ Do you want to continue?</source>
       <translation type="unfinished">自動</translation>
     </message>
     <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
       <source>AC System</source>
       <translation>ACシステム</translation>
     </message>
     <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
       <source>Inputs and Monitoring</source>
       <translation>入力と監視</translation>
     </message>
     <message id="pagesettingssystem_energy_storage_System">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>Energy Storage System</source>
       <translation>エネルギー貯蔵システム</translation>
     </message>
     <message id="pagesettingssystem_batteries_and_bms">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="96"/>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>バッテリーとバッテリー管理システム (BMS)</translation>
     </message>
     <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
       <source>Charge Control</source>
       <translation>充電制御</translation>
     </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="104"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>分散型電圧および電流制御 (DVCC)</translation>
     </message>
@@ -7463,7 +7473,7 @@ Do you want to continue?</source>
       <translation>グリッドメーターがある場合、システムはインバーター/チャージャーの入力側の負荷を自動的に表示します。出力側の負荷は常に表示されます。</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
       <source>Display DC Loads</source>
       <translation>DC負荷の表示</translation>
     </message>
@@ -7473,7 +7483,7 @@ Do you want to continue?</source>
       <translation>バッテリー測定</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
       <source>System status</source>
       <translation>システムステータス</translation>
     </message>
@@ -7493,19 +7503,24 @@ Do you want to continue?</source>
       <translation>VE.Canインスタンス# %1</translation>
     </message>
     <message id="settings_tz_antarctica">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="247"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="254"/>
       <source>Antarctica</source>
       <translation>南極</translation>
     </message>
     <message id="settings_tz_arctic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="253"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="260"/>
       <source>Arctic</source>
       <translation>北極</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="39"/>
+      <location filename="../../pages/SettingsPage.qml" line="40"/>
       <source>All connected devices</source>
       <translation>全ての接続済みデバイス</translation>
+    </message>
+    <message id="settings_general">
+      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <source>General</source>
+      <translation type="unfinished">一般</translation>
     </message>
     <message id="settings_connectivity">
       <location filename="../../pages/SettingsPage.qml" line="59"/>
@@ -7621,7 +7636,7 @@ Do you want to continue?</source>
       <translation>高温アラーム</translation>
     </message>
     <message id="charger_history_last_x_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="71"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="73"/>
       <source>Last %1 days</source>
       <extracomment>%1 = number of days of solar history that will be shown</extracomment>
       <translation>過去%1日間</translation>
@@ -7976,19 +7991,14 @@ Do you want to continue?</source>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="91"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="87"/>
       <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
       <translation>稼働を維持する自動起動条件が有効になっていない限り、発電機は%1で停止します。</translation>
     </message>
     <message id="generator_start_dialog_will_run_until_manually_stopped">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="93"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="89"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
       <translation>稼働を維持する自動起動条件が有効になっていない限り、発電機は手動で停止されるまで稼働します。</translation>
-    </message>
-    <message id="controlcard_inverter_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="30"/>
-      <source>Inverter mode</source>
-      <translation>インバーターモード</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
       <location filename="../../components/FirmwareUpdate.qml" line="128"/>
@@ -7999,11 +8009,6 @@ Do you want to continue?</source>
       <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
       <source>Confirm</source>
       <translation>確認</translation>
-    </message>
-    <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="396"/>
-      <source>System load high, closing the side panel to reduce CPU load</source>
-      <translation>システム負荷が高いため、CPU負荷を軽減するためにサイドパネルを閉じています。</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="23"/>
@@ -8490,7 +8495,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>このモードはシステム構成で固定されています。調整できません。</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="93"/>
+      <location filename="../../components/listitems/ListLink.qml" line="68"/>
       <source>Open link</source>
       <translation>リンクを開く</translation>
     </message>
@@ -8535,7 +8540,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>「%1」は有効なポート番号ではありません。0～65535の数値を入力してください。</translation>
     </message>
     <message id="overview_widget_essential_loads_title">
-      <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="14"/>
+      <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="16"/>
       <source>Essential Loads</source>
       <translation>必須負荷</translation>
     </message>
@@ -8589,17 +8594,17 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>バッテリーリスト</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
-      <location filename="../../pages/DialogLayer.qml" line="60"/>
+      <location filename="../../pages/DialogLayer.qml" line="73"/>
       <source>GX device has been updated</source>
       <translation>GXデバイスが更新されました</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="62"/>
+      <location filename="../../pages/DialogLayer.qml" line="75"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>最新バージョンを読み込むため、ページは10秒後に自動的に再読み込みされます。</translation>
     </message>
     <message id="controlcard_evcs_title">
-      <location filename="../../pages/controlcards/EVCSCard.qml" line="21"/>
+      <location filename="../../pages/controlcards/EVCSCard.qml" line="22"/>
       <source>EVCS (%1)</source>
       <extracomment>%1 = the EVCS name</extracomment>
       <translation>EVCS (%1)</translation>
@@ -9027,7 +9032,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">コントロール</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
       <source>Controls</source>
       <translation>コントロール</translation>
     </message>
@@ -9120,7 +9125,7 @@ The GX device can only control one connected genset and takes the one with the l
 GXデバイスは接続された発電機を1台のみ制御できます。最も低いVRMインスタンス番号を持つものが選択されます。予期せぬ動作を避けるため、GXデバイスには1台のユニットのみが利用可能であることを確認してください。</translation>
     </message>
     <message id="settings_tz_etc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="295"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="302"/>
       <source>Other</source>
       <translation>その他</translation>
     </message>
@@ -9584,7 +9589,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>更新</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="142"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="113"/>
       <source>Documentation</source>
       <translation>ドキュメント</translation>
     </message>
@@ -9595,12 +9600,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>AC入力 %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
       <source>Please enter a new GX password:</source>
       <translation>新しいGXパスワードを入力してください:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="98"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
       <source>Enter new password</source>
       <translation>新しいパスワードを入力</translation>
     </message>
@@ -9657,7 +9662,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>セルラーモデムが接続されていません</translation>
     </message>
     <message id="ess_active_soc_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="87"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="91"/>
       <source>Active SOC Limit: %1%</source>
       <translation>アクティブなSOC制限: %1%</translation>
     </message>
@@ -9677,27 +9682,27 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>読み取り専用</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="25"/>
       <source>Modifications installed</source>
       <translation>変更がインストールされました</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="30"/>
       <source>Modbus TCP Server</source>
       <translation type="unfinished">Modbus TCPサーバー</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="34"/>
       <source>Signal K</source>
       <translation type="unfinished">Signal K</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_nodered">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="38"/>
       <source>Node-RED</source>
       <translation type="unfinished">Node-RED</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_running_integrations">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="45"/>
       <source>%1 running integrations</source>
       <translation>%1件の実行中の統合</translation>
     </message>
@@ -9829,29 +9834,29 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>BatteryLife状態</translation>
     </message>
     <message id="pagesettingsintegrations_device_integrations">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
       <source>Device Integrations</source>
       <translation>デバイス統合</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="213"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
       <source>Modbus TCP Server</source>
       <translation type="unfinished">Modbus TCPサーバー</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
       <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
       <source>Signal K</source>
       <translation type="unfinished">Signal K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation type="unfinished">Node-RED</translation>
     </message>
     <message id="settings_venusos_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
       <source>Venus OS Large Documentation</source>
       <translation>Venus OS Large ドキュメント</translation>
     </message>
@@ -9979,7 +9984,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>GXデバイスリレー</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="94"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="98"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLifeは、バッテリーの過放電を防ぎ、定期的な満充電を確実にするために、バッテリーの最低充電状態を動的に調整し、バッテリー寿命の延長とシステム信頼性の維持に役立ちます。</translation>
     </message>
@@ -10086,7 +10091,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>Signal Kにアクセス</translation>
     </message>
     <message id="pagesettingsintegrations_shelly_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
       <source>Shelly Devices</source>
       <translation>Shellyデバイス</translation>
     </message>
@@ -10096,7 +10101,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>Node-REDにアクセス</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
       <source>Access Point password</source>
       <translation>アクセスポイントパスワード</translation>
     </message>
@@ -10213,7 +10218,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <extra-Context>only shown on desktop systems</extra-Context>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="70"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="26"/>
       <source>Status: %1</source>
       <translation>ステータス: %1</translation>
     </message>
@@ -10223,7 +10228,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>極性 (リレー1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
       <source>Polarity</source>
       <translation>極性</translation>
     </message>
@@ -10233,12 +10238,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>極性 (リレー2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="105"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>パスワードの長さは0文字、または10文字から63文字の間である必要があります</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="108"/>
       <source>Password updated</source>
       <translation>パスワードを更新しました</translation>
     </message>
@@ -10285,7 +10290,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>最初に自動モードを無効にしてください</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_enable_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
       <source>Enable the Venus OS Large firmware to use Node-RED or Signal-K</source>
       <translation>Node-REDまたはSignal-Kを使用するには、Venus OS Largeファームウェアを有効にしてください</translation>
     </message>
@@ -10405,25 +10410,10 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <source>Frequency setpoint (f)</source>
       <translation>周波数設定値 (f)</translation>
     </message>
-    <message id="pagesettingsintegrations_canopenmotordrive">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="176"/>
-      <source>CANopen motor drives</source>
-      <translation>CANopenモータドライブ</translation>
-    </message>
     <message id="pagesettingsintegrations_ui_plugins">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
       <source>UI Plugins</source>
       <translation>UIプラグイン</translation>
-    </message>
-    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
-      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
-      <source>Scan for motor drives</source>
-      <translation>モータドライブをスキャン</translation>
-    </message>
-    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
-      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
-      <source>Discovered motor drive IDs</source>
-      <translation>検出されたモータドライブID</translation>
     </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
@@ -10492,7 +10482,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>ModbusポートおよびユニットID設定</translation>
     </message>
     <message id="pagesettingsintegrations_uiplugin_integrates_with_devicelist">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="334"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="319"/>
       <source>Integrates with the device list</source>
       <translation>デバイスリストと統合</translation>
     </message>
@@ -10512,19 +10502,19 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>値は停止値よりも小さい必要があります</translation>
     </message>
     <message id="notifications_page_active_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="42"/>
+      <location filename="../../pages/NotificationsPage.qml" line="45"/>
       <source>Active Notifications</source>
       <extracomment>List section header, for the section which contains current/active notifications</extracomment>
       <translation>アクティブな通知</translation>
     </message>
     <message id="notifications_page_inactive_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="46"/>
+      <location filename="../../pages/NotificationsPage.qml" line="49"/>
       <source>Inactive Notifications</source>
       <extracomment>List section header, for the section which contains inactive (but unseen) notifications</extracomment>
       <translation>非アクティブな通知</translation>
     </message>
     <message id="notifications_no_active_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="105"/>
+      <location filename="../../pages/NotificationsPage.qml" line="107"/>
       <source>No active notifications</source>
       <translation>アクティブな通知はありません</translation>
     </message>
@@ -10546,12 +10536,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>RGB + Wカラーホイール</translation>
     </message>
     <message id="listlink_show_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="118"/>
+      <location filename="../../components/listitems/ListLink.qml" line="89"/>
       <source>Show QR code</source>
       <translation>QRコードを表示</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="142"/>
+      <location filename="../../components/listitems/ListLink.qml" line="114"/>
       <source>Open the QR code to scan it with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>ポータブルデバイスでスキャンするためにQRコードを開いてください。&lt;br /&gt;または、リンクを挿入してください: %1</translation>
@@ -10679,48 +10669,48 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>出力がオフの場合のみ</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="128"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="136"/>
       <source>Startup switch state</source>
       <translation>起動スイッチの状態</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="136"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="144"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="151"/>
       <source>Restore from memory</source>
       <translation>メモリから復元</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="142"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="150"/>
       <source>Startup dim level</source>
       <translation type="unfinished">起動時の輝度レベル</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="185"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="193"/>
       <source>Startup dim level</source>
       <translation>起動時の輝度レベル</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="171"/>
       <source>Restore dim level from memory</source>
       <translation>メモリから輝度レベルを復元</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="206"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
       <source>Active high / Normally open</source>
       <translation>アクティブハイ / 常時開</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
       <source>Active low / Normally closed</source>
       <translation>アクティブロー / 常時閉</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="222"/>
       <source>Output limit min</source>
       <translation>出力制限 (最小)</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="226"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="234"/>
       <source>Output limit max</source>
       <translation>出力制限 (最大)</translation>
     </message>
@@ -10739,13 +10729,18 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <source>Only on VRM</source>
       <translation>VRMのみ</translation>
     </message>
+    <message id="control_cards_title">
+      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <source>Controls</source>
+      <translation type="unfinished">コントロール</translation>
+    </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
       <source>No compatible devices found</source>
       <translation>互換性のあるデバイスが見つかりません</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
       <source>Connect devices that support this function</source>
       <translation>この機能をサポートするデバイスを接続してください</translation>
     </message>
@@ -10960,12 +10955,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>インターネットアクセスにイーサネットの使用を許可する</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="31"/>
       <source>Access point</source>
       <translation>アクセスポイント</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="139"/>
       <source>Allow using WiFi for internet access</source>
       <translation>インターネットアクセスにWiFiの使用を許可する</translation>
     </message>
@@ -11105,12 +11100,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>未稼働、無効</translation>
     </message>
     <message id="pagesettingssystem_opportunity_loads">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="59"/>
       <source>Opportunity Loads</source>
       <translation>オポチュニティロード</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
       <source>Automate controllable devices to maximize PV self-use</source>
       <translation>制御可能なデバイスを自動化し、PV自家消費を最大化する</translation>
     </message>
@@ -11279,21 +11274,11 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <source>Inputs</source>
       <translation>入力</translation>
     </message>
-    <message id="list-spin-box-range_minimum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="105"/>
-      <source>Minimum value (%1)</source>
-      <translation>最小値 (%1)</translation>
-    </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="121"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="96"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
       <translation>木</translation>
-    </message>
-    <message id="list-spin-box-range_maximum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="149"/>
-      <source>Maximum value (%1)</source>
-      <translation>最大値 (%1)</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
@@ -11302,64 +11287,44 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>値</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="57"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="42"/>
       <source>Devices and Priorities</source>
       <translation>デバイスと優先度</translation>
     </message>
     <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="131"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="97"/>
       <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
       <translation>制御可能なデバイスを優先度に従って配置してください。制御アルゴリズムは、現在利用可能なPV余剰に基づいてそれらを制御します。</translation>
     </message>
-    <message id="pagecontrollableloads_expected_power_consumption">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+    <message id="pagecontrollableloads_acload_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
       <translation>予想消費電力</translation>
     </message>
-    <message id="pagecontrollableloads_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+    <message id="pagecontrollableloads_acload_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="28"/>
       <source>Minimum run duration when turned on</source>
       <translation>オン時の最小稼働時間</translation>
     </message>
-    <message id="pagecontrollableloads_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+    <message id="pagecontrollableloads_acload_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="35"/>
       <source>Minimum rest duration when turned off</source>
       <translation>オフ時の最小停止時間</translation>
     </message>
-    <message id="pagecontrollableloads_battery_reserved_power_0">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
-      <source>Reserved power for battery charging at 0% SOC</source>
-      <translation>SOC 0%時のバッテリー充電用予約電力</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_reduce_power">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
-      <source>Reduce power per percentage point of SOC by</source>
-      <translation>SOCの1パーセントポイントあたりの電力削減量</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_batterylife_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+    <message id="page_controllable_loads_preferences_battery_life_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="40"/>
       <source>BatteryLife compatibility</source>
       <translation>BatteryLife互換性</translation>
     </message>
-    <message id="page_controllableloads_battery_pause_opportunity_loads">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+    <message id="page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="46"/>
       <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
       <translation>アクティブSOC制限が85%を超えた場合、オポチュニティロードを一時停止</translation>
     </message>
-    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+    <message id="page_controllable_loads_preferences_this_helps">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="49"/>
       <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
       <translation>これはBatteryLifeアルゴリズムがバッテリーを100%まで再充電するのに役立ちます。</translation>
-    </message>
-    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
-      <source>Maximum charging power limit</source>
-      <translation>最大充電電力制限</translation>
-    </message>
-    <message id="pagecontrollableloads_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
-      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
-      <translation>最大充電電力を制限することで、他の制御可能なデバイスとの同時実行性を向上させることができます。</translation>
     </message>
     <message id="page_generic_input_invert">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
@@ -11376,20 +11341,10 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <source>Digital input</source>
       <translation>デジタル入力</translation>
     </message>
-    <message id="iochannel_digital_input_mode_toggle">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+    <message id="iochannel_digital_input_mode_toggle_switch">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Toggle switch</source>
       <translation>トグルスイッチ</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
-      <source>Press button</source>
-      <translation>ボタンを押す</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_press_and_hold">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
-      <source>Press and hold button</source>
-      <translation>ボタンを長押し</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
@@ -11413,17 +11368,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>不明なステータス</translation>
     </message>
     <message id="page_switchable_output_set_dim_level_manually">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Set startup dim level manually</source>
       <translation>起動時の輝度レベルを手動で設定</translation>
     </message>
     <message id="main_system_service_settings_offline_warning">
-      <location filename="../../Main.qml" line="262"/>
+      <location filename="../../Main.qml" line="287"/>
       <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
       <translation>警告：localsettingsサービスがオフラインを検出しました。サービスが再度利用可能になったらUIを再読み込みします...</translation>
     </message>
     <message id="main_system_service_platform_offline_warning">
-      <location filename="../../Main.qml" line="283"/>
+      <location filename="../../Main.qml" line="308"/>
       <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
       <translation>警告：venus-platformサービスがオフラインを検出しました。サービスが再度利用可能になったらUIを再読み込みします...</translation>
     </message>
@@ -11443,7 +11398,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>警告アイコンが付いている項目はVictron Energyによってサポート・提供されていますが、誤って使用するとシステム安定性に影響を及ぼす可能性があります。トラブルシューティングの際は、まずそれらを無効にしてください。</translation>
     </message>
     <message id="pagecontrollableloads_starting">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="59"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="44"/>
       <source>Starting, this may take a few seconds...</source>
       <translation>起動中、数秒かかる場合があります...</translation>
     </message>
@@ -11485,14 +11440,9 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>IPアドレスを追加</translation>
     </message>
     <message id="pagesettingsintegrations_mqtt_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
       <source>MQTT Devices</source>
       <translation>MQTTデバイス</translation>
-    </message>
-    <message id="pagesettingsintegrations_eebus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="68"/>
-      <source>EEBus Devices</source>
-      <translation>EEBusデバイス</translation>
     </message>
     <message id="settings_ess_disable_ol_first">
       <location filename="../../pages/settings/PageSettingsDynamicEss.qml" line="20"/>
@@ -11500,7 +11450,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>オポチュニティロードが有効な間は、Dynamic ESSを有効にできません。まずDynamic ESSを無効にしてください。</translation>
     </message>
     <message id="pagecontrollableloads_disable_dess_first">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="46"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="31"/>
       <source>Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
       <translation>Dynamic ESSが実行中の間は、オポチュニティロードを有効にできません。まずDynamic ESSを無効にしてください。</translation>
     </message>
@@ -11615,6 +11565,179 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Frequency</source>
       <translation>周波数</translation>
     </message>
+    <message id="pagesettingsintegrations_canopenmotordrive">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="176"/>
+      <source>CANopen E-drives</source>
+      <translation>CANopen Eドライブ</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
+      <source>Scan for E-drives</source>
+      <translation>Eドライブをスキャン</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
+      <source>Discovered E-drive IDs</source>
+      <translation>検出されたEドライブID</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_on_off_switch">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>On/off switch</source>
+      <translation>オン/オフスイッチ</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_push_button_on_off">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Push button on/off</source>
+      <translation>プッシュボタン式オン/オフ</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_push_button_dimmer">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="63"/>
+      <source>Push button dimmer</source>
+      <translation>プッシュボタン式調光器</translation>
+    </message>
+    <message id="generic_input_label_released">
+      <location filename="../../src/genericinput.cpp" line="132"/>
+      <source>Released</source>
+      <translation>オフ（未押下）</translation>
+    </message>
+    <message id="generic_input_label_pressed">
+      <location filename="../../src/genericinput.cpp" line="134"/>
+      <source>Pressed</source>
+      <translation>オン（押下）</translation>
+    </message>
+    <message id="generic_input_label_holding">
+      <location filename="../../src/genericinput.cpp" line="136"/>
+      <source>Holding</source>
+      <translation>長押し</translation>
+    </message>
+    <message id="clear-generator-error">
+      <location filename="../../components/PageGensetModel.qml" line="211"/>
+      <source>Clear generator error</source>
+      <translation>発電機のエラーを消去</translation>
+    </message>
+    <message id="Re-enable_remote_start_mode">
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <source>Re-enable remote start mode</source>
+      <translation>リモートスタートモードを再有効化</translation>
+    </message>
+    <message id="pagesettingsintegrations_eebus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
+      <source>EEBUS Devices</source>
+      <translation>EEBusデバイス</translation>
+    </message>
+    <message id="rotate_device_prompt_text">
+      <location filename="../../components/RotateDevicePrompt.qml" line="40"/>
+      <source>Rotate device to view %1</source>
+      <extracomment>Prompts the user to rotate the device. %1 = the name of the current page.</extracomment>
+      <translation>デバイスを回転させて%1を表示</translation>
+    </message>
+    <message id="list_device_priority_no_control">
+      <location filename="../../components/listitems/ListDevicePriority.qml" line="137"/>
+      <source>No control</source>
+      <translation>制御なし</translation>
+    </message>
+    <message id="list-spin-box-range_minimum_value">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="81"/>
+      <source>Minimum value</source>
+      <translation>最小値</translation>
+    </message>
+    <message id="list-spin-box-range_maximum_value">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="125"/>
+      <source>Maximum value</source>
+      <translation>最大値</translation>
+    </message>
+    <message id="aux_page_switches">
+      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <source>Switches</source>
+      <extracomment>Name of the Switch Controls feature</extracomment>
+      <translation>スイッチ</translation>
+    </message>
+    <message id="brief_graphs_hidden">
+      <location filename="../../pages/BriefPage_Portrait.qml" line="83"/>
+      <source>Graphs and additional details have been hidden to reduce the CPU load.</source>
+      <translation>CPU負荷を軽減するため、グラフと詳細情報は非表示になっています。</translation>
+    </message>
+    <message id="brief_graphs_show">
+      <location filename="../../pages/BriefPage_Portrait.qml" line="90"/>
+      <source>Show graphs</source>
+      <translation>グラフを表示</translation>
+    </message>
+    <message id="brief_close_graphs_high_cpu">
+      <location filename="../../pages/BriefPage.qml" line="45"/>
+      <source>System load high, hiding graphs to reduce CPU load</source>
+      <translation>システム負荷が高いため、CPU負荷軽減のためにグラフを非表示にします</translation>
+    </message>
+    <message id="navbar_more">
+      <location filename="../../pages/MainView.qml" line="279"/>
+      <source>More</source>
+      <extracomment>Click to show more available items</extracomment>
+      <translation>詳細</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
+      <source>Allow additional loads starting at a battery SOC of</source>
+      <translation>バッテリーSOCが次の値から追加負荷を許可：</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_below_this_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="23"/>
+      <source>Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb.</source>
+      <translation>このSOCを下回る場合、余剰電力は可能な限りバッテリー充電に使用されます。このSOCを超えると、追加負荷にも余剰電力が使用されるようになります。PV発電量がバッテリーの受電能力を超えた場合は、それ以前でも動作する可能性があります。</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="35"/>
+      <source>At &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC, reserve for battery charging</source>
+      <translation>SOC &lt;font color="%1"&gt;%2%&lt;/font&gt; でバッテリー充電を予約</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="45"/>
+      <source>At %1% SOC, reserve for battery charging</source>
+      <translation>SOC %1% でバッテリー充電を予約</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_between_the_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
+      <source>Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices.</source>
+      <translation>「バッテリーSOCから追加負荷を許可」で設定したSOCから100% SOCの間で、予約電力は段階的に調整されます。これにより、SOCの上昇に伴ってバッテリー充電量を減らし、制御対象のデバイスにより多くの余剰電力を割り当てることができます。</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="20"/>
+      <source>Maximum charging power</source>
+      <translation>最大充電電力</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="23"/>
+      <source>Limiting the maximum charging power can leave room for lower-priority devices to run at the same time.</source>
+      <translation>最大充電電力を制限することで、優先度の低いデバイスを同時に動作させる余裕を確保できます。</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_remember_detected_ev_phases">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="29"/>
+      <source>Remember detected EV phases</source>
+      <translation>検出されたEVの相数を記憶</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_reuses_the_last_detected">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="32"/>
+      <source>Reuses the last detected phase configuration for new charging sessions. Recommended only for a single EV, or when all EVs using this station support the same 1-, 2-, or 3-phase configuration.</source>
+      <translation>新しい充電セッションで、最後に検出された相設定を再利用します。EVが1台のみの場合、またはこのステーションを使用するすべてのEVが同じ1相、2相、または3相構成をサポートしている場合にのみ推奨されます。</translation>
+    </message>
+    <message id="pagecontrollableloads_acload_this_should_reflect">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="21"/>
+      <source>This should reflect the device’s typical power consumption while turned on.</source>
+      <translation>デバイスの電源が入っている時の標準的な消費電力を設定してください。</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
+      <source>Pause Opportunity Loads if no AC input is connected</source>
+      <translation>AC入力が接続されていない場合はオポチュニティ負荷を一時停止</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
+      <source>Nominal inverter utilization limit</source>
+      <translation>インバーター利用率の制限（公称値）</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_limits_how_much">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="35"/>
+      <source>Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads.</source>
+      <translation>DC結合PVをベース負荷およびスケジュール負荷用のACに変換する際、インバーター/充電器の公称電力のどれだけをアルゴリズムが使用するかを制限します。</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -11638,27 +11761,27 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">不明</translation>
     </message>
     <message id="brief_solar_yield">
-      <location filename="../../pages/BriefSidePanel.qml" line="24"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="26"/>
       <source>Solar yield</source>
       <translation type="unfinished">太陽光発電量</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="214"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="210"/>
       <source>DC input</source>
       <translation type="unfinished">DC入力</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="258"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="255"/>
       <source>AC Loads</source>
       <translation type="unfinished">交流負荷</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="287"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="286"/>
       <source>DC Loads</source>
       <translation type="unfinished">直流負荷</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="492"/>
+      <location filename="../../pages/OverviewPage.qml" line="13"/>
       <source>Overview</source>
       <translation type="unfinished">概要</translation>
     </message>
@@ -11677,11 +11800,6 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>System yield</source>
       <translation type="unfinished">システム発電量</translation>
     </message>
-    <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="64"/>
-      <source>Total PV Power</source>
-      <translation type="unfinished">PV合計電力</translation>
-    </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
       <source>Alarm only</source>
@@ -11698,7 +11816,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">警告</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="340"/>
+      <location filename="../../src/iochannel.cpp" line="342"/>
       <source>GX device relays</source>
       <translation type="unfinished">GXデバイスリレー</translation>
     </message>

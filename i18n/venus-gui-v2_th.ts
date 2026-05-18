@@ -59,7 +59,7 @@
       <translation>ตำแหน่ง</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="164"/>
+      <location filename="../../src/genericinput.cpp" line="173"/>
       <source>Speed</source>
       <translation>ความเร็ว</translation>
     </message>
@@ -80,7 +80,7 @@
       <translation>ข้อผิดพลาดที่ไม่รู้จัก</translation>
     </message>
     <message id="controlcard_inverter_charger_ess_minimum_soc">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="106"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="116"/>
       <source>Minimum SOC</source>
       <translation>SOC ขั้นต่ำ</translation>
     </message>
@@ -115,17 +115,17 @@
       <translation>การควบคุมภายนอก</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="61"/>
+      <location filename="../../pages/LevelsPage.qml" line="75"/>
       <source>Tanks</source>
       <translation>ถัง</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="63"/>
+      <location filename="../../pages/LevelsPage.qml" line="77"/>
       <source>Environment</source>
       <translation>สิ่งแวดล้อม</translation>
     </message>
-    <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+    <message id="page_controllable_loads_preferences_general">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="18"/>
       <source>General</source>
       <translation>ทั่วไป</translation>
     </message>
@@ -135,7 +135,7 @@
       <translation>เฟิร์มแวร์</translation>
     </message>
     <message id="pagesettingsgeneral_date_and_time">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="222"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="221"/>
       <source>Date &amp; Time</source>
       <translation>วันเวลา</translation>
     </message>
@@ -822,7 +822,7 @@
       <translation>ภาษา</translation>
     </message>
     <message id="settings_language_changing_language">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="202"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="201"/>
       <source>Changing language</source>
       <translation>การเปลี่ยนภาษา</translation>
     </message>
@@ -1192,17 +1192,17 @@
       <translation>เอซี-อิน2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="296"/>
       <source>Remote support</source>
       <translation>การสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="302"/>
       <source>Remote support tunnel</source>
       <translation>ช่องทางการสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="311"/>
       <source>Remote support IP and port</source>
       <translation>รองรับ IP และพอร์ตระยะไกล</translation>
     </message>
@@ -1216,28 +1216,58 @@
       <source>Audible alarm</source>
       <translation>เสียงเตือน</translation>
     </message>
+    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="52"/>
+      <source>Unsupported GX device</source>
+      <translation type="unfinished">อุปกรณ์ GX ที่ไม่รองรับ</translation>
+    </message>
+    <message id="pagesettingsgeneral_modificationchecks_clean">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="57"/>
+      <source>Clean</source>
+      <translation type="unfinished">ล้าง</translation>
+    </message>
+    <message id="pagesettingsgeneral_firmware">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="114"/>
+      <source>Firmware</source>
+      <translation type="unfinished">เฟิร์มแวร์</translation>
+    </message>
+    <message id="pagesettingsgeneral_preferences">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="132"/>
+      <source>Preferences</source>
+      <translation type="unfinished">การตั้งค่า</translation>
+    </message>
+    <message id="pagesettingsgeneral_documentation">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="232"/>
+      <source>Documentation</source>
+      <translation type="unfinished">เอกสาร</translation>
+    </message>
+    <message id="pagesettingsgeneral_support_status">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="240"/>
+      <source>Support status</source>
+      <translation type="unfinished">สถานะการสนับสนุน</translation>
+    </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="264"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
       <source>Demo mode</source>
       <translation>โหมดสาธิต</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="271"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="306"/>
       <source>ESS demo</source>
       <translation>สาธิต ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="308"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>การสาธิตเรือ/รถบ้าน 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="275"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="310"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>เรือ/รถบ้านสาธิต2</translation>
     </message>
     <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="314"/>
       <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
       <translation>การเริ่มโหมดสาธิตจะเปลี่ยนการตั้งค่าบางอย่างและอินเทอร์เฟซผู้ใช้จะไม่ตอบสนองชั่วขณะหนึ่ง</translation>
     </message>
@@ -1287,7 +1317,7 @@
       <translation>เวลาสิ้นสุดชั่วโมงเงียบ</translation>
     </message>
     <message id="page_settings_generator_run_time_and_service">
-      <location filename="../../components/PageGensetModel.qml" line="349"/>
+      <location filename="../../components/PageGensetModel.qml" line="418"/>
       <location filename="../../pages/settings/PageGenerator.qml" line="118"/>
       <source>Run time and service</source>
       <translation>ระยะเวลาดำเนินการและบริการ</translation>
@@ -1756,8 +1786,8 @@ Use unless prohibited by the utility provider.</source>
       <translation>โหนด-RED</translation>
     </message>
     <message id="settings_large_enabled_safe_mode">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="258"/>
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="263"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="24"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="475"/>
       <source>Enabled (safe mode)</source>
@@ -2102,7 +2132,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>เฟิร์มแวร์สำรองไม่พร้อมใช้งาน</translation>
     </message>
     <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
       <source>CAN-bus over TCP/IP (Debug)</source>
       <translation>CAN บัสผ่าน TCP/IP (ดีบัก)</translation>
     </message>
@@ -2246,7 +2276,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="21"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="138"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="166"/>
       <source>[Hidden]</source>
       <translation>[ที่ซ่อนอยู่]</translation>
     </message>
@@ -2336,27 +2366,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>อุปกรณ์ VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="156"/>
       <source>No access points</source>
       <translation>ไม่มีจุดเชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="158"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>ไม่มีอแด็ปเตอร์ Wi-Fi เชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="35"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="36"/>
       <source>Create access point</source>
       <translation>สร้างจุดเชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="148"/>
       <source>Wi-Fi networks</source>
       <translation>เครือข่าย Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="60"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>คุณแน่ใจหรือไม่ว่าต้องการปิดใช้งานจุดเชื่อมต่อ</translation>
     </message>
@@ -2366,52 +2396,52 @@ Use unless prohibited by the utility provider.</source>
       <translation>วันที่/เวลาUTC</translation>
     </message>
     <message id="settings_tz_date_time_local">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="115"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="119"/>
       <source>Date/Time local</source>
       <translation>วันที่/เวลาท้องถิ่น</translation>
     </message>
     <message id="settings_tz_time_zone">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="140"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="147"/>
       <source>Time zone</source>
       <translation>เขตเวลา</translation>
     </message>
     <message id="settings_tz_africa">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="235"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="242"/>
       <source>Africa</source>
       <translation>แอฟริกา</translation>
     </message>
     <message id="settings_tz_america">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="241"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="248"/>
       <source>America</source>
       <translation>อเมริกา</translation>
     </message>
     <message id="settings_tz_asia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="259"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="266"/>
       <source>Asia</source>
       <translation>เอเชีย</translation>
     </message>
     <message id="settings_tz_atlantic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="265"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="272"/>
       <source>Atlantic</source>
       <translation>แอตแลนติก</translation>
     </message>
     <message id="settings_tz_ustralia">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="271"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="278"/>
       <source>Australia</source>
       <translation>ออสเตรเลีย</translation>
     </message>
     <message id="settings_tz_europe">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="277"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="284"/>
       <source>Europe</source>
       <translation>ยุโรป</translation>
     </message>
     <message id="settings_tz_indian">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="283"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="290"/>
       <source>Indian</source>
       <translation>ชาวอินเดีย</translation>
     </message>
     <message id="settings_tz_pacific">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="289"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="296"/>
       <source>Pacific</source>
       <translation>แปซิฟิก</translation>
     </message>
@@ -2583,12 +2613,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>การทำงานแบบเครือข่าย</translation>
     </message>
     <message id="charger_history_table_view">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="29"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="31"/>
       <source>Table view</source>
       <translation>มุมมองตาราง</translation>
     </message>
     <message id="charger_history_chart">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="31"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="33"/>
       <source>Chart</source>
       <translation>แผนภูมิ</translation>
     </message>
@@ -2616,7 +2646,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>เตือน</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="172"/>
+      <location filename="../../src/genericinput.cpp" line="181"/>
       <source>Volume</source>
       <translation>ปริมาณ</translation>
     </message>
@@ -2641,18 +2671,18 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">การประชุม</translation>
     </message>
     <message id="evcs_session">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="47"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="51"/>
       <source>Session</source>
       <translation>การประชุม</translation>
     </message>
     <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="54"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="58"/>
       <source>Time</source>
       <extracomment>Charging time for the EV charger</extracomment>
       <translation>เวลา</translation>
     </message>
     <message id="evcs_charge_mode">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="125"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="130"/>
       <source>Charge mode</source>
       <translation>โหมดการชาร์จ</translation>
     </message>
@@ -2672,7 +2702,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ลดอัตราค่าไฟฟ้าในช่วงนอกเวลาเร่งด่วน หรือหากคุณต้องการให้แน่ใจว่า EV ของคุณชาร์จเต็มและพร้อมใช้งานในเวลาที่กำหนด</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="140"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="145"/>
       <source>Enable charging</source>
       <translation>เปิดใช้งานการชาร์จ</translation>
     </message>
@@ -2994,7 +3024,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">กดเพื่อตรวจหาอีกครั้ง</translation>
     </message>
     <message id="pagesettingsgeneral_system">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
       <source>System</source>
       <translation>ระบบ</translation>
     </message>
@@ -3697,24 +3727,24 @@ Use unless prohibited by the utility provider.</source>
       <translation>เพิ่มจุด</translation>
     </message>
     <message id="devicelist_tankshape_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="226"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="236"/>
       <source>Sensor level</source>
       <extracomment>The sensor level (as a percentage) for this tank shape point</extracomment>
       <translation>ระดับเซนเซอร์</translation>
     </message>
     <message id="devicelist_tankshape_volume">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="260"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="275"/>
       <source>Volume</source>
       <extracomment>The volume (as a percentage) for this tank shape point</extracomment>
       <translation type="unfinished">ปริมาณ</translation>
     </message>
     <message id="devicelist_tankshape_duplicate_sensor_level">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="332"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="351"/>
       <source>Duplicate sensor level values are not allowed.</source>
       <translation>ไม่อนุญาตให้ใช้ค่าระดับเซ็นเซอร์ซ้ำกัน</translation>
     </message>
     <message id="devicelist_tankshape_volume_not_increasing">
-      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="338"/>
+      <location filename="../../pages/settings/devicelist/tank/PageTankShape.qml" line="357"/>
       <source>Volume values must be increasing.</source>
       <translation>ค่าปริมาณจะต้องเพิ่มขึ้น</translation>
     </message>
@@ -3775,12 +3805,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">อุปกรณ์</translation>
     </message>
     <message id="ac-in-genset_ac">
-      <location filename="../../components/PageGensetModel.qml" line="218"/>
+      <location filename="../../components/PageGensetModel.qml" line="249"/>
       <source>AC</source>
       <translation>AC</translation>
     </message>
     <message id="ac-in-genset_engine">
-      <location filename="../../components/PageGensetModel.qml" line="256"/>
+      <location filename="../../components/PageGensetModel.qml" line="325"/>
       <source>Engine</source>
       <translation>เครื่องยนต์</translation>
     </message>
@@ -3790,22 +3820,22 @@ Use unless prohibited by the utility provider.</source>
       <translation>อุณหภูมิน้ำหล่อเย็น</translation>
     </message>
     <message id="ac-in-genset_exhaust_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="308"/>
+      <location filename="../../components/PageGensetModel.qml" line="377"/>
       <source>Exhaust temperature</source>
       <translation>อุณหภูมิไอเสีย</translation>
     </message>
     <message id="ac-in-genset_winding_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="315"/>
+      <location filename="../../components/PageGensetModel.qml" line="384"/>
       <source>Winding temperature</source>
       <translation>อุณหภูมิคดเคี้ยว</translation>
     </message>
     <message id="ac-in-genset_starter_battery_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="329"/>
+      <location filename="../../components/PageGensetModel.qml" line="398"/>
       <source>Starter battery voltage</source>
       <translation>แรงดันแบตเตอรี่สตาร์ท</translation>
     </message>
     <message id="ac-in-genset_number_of_starts">
-      <location filename="../../components/PageGensetModel.qml" line="337"/>
+      <location filename="../../components/PageGensetModel.qml" line="406"/>
       <source>Number of starts</source>
       <translation>จำนวนการเริ่มต้น</translation>
     </message>
@@ -4065,6 +4095,11 @@ NOTE: The update might temporarily stop the system.</source>
       <source>Charging the battery to 100%</source>
       <translation>ชาร์จแบตเตอรี่ให้เต็ม 100%</translation>
     </message>
+    <message id="vebus_device_page_advanced">
+      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="206"/>
+      <source>Advanced</source>
+      <translation type="unfinished">ขั้นสูง</translation>
+    </message>
     <message id="vebus_device_in_progress">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="80"/>
       <source>In progress</source>
@@ -4119,8 +4154,8 @@ Do you want to continue?</source>
       <source>DC Current</source>
       <translation>กระแสตรง</translation>
     </message>
-    <message id="vebus_device_page_advanced">
-      <location filename="../../pages/vebusdevice/PageVeBus.qml" line="206"/>
+    <message id="pagecontrollableloads_battery_advanced">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="29"/>
       <source>Advanced</source>
       <translation>ขั้นสูง</translation>
     </message>
@@ -4481,12 +4516,12 @@ Do you want to continue?</source>
     </message>
     <message id="ess_card_minimum_soc">
       <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="15"/>
-      <location filename="../../pages/controlcards/ESSCard.qml" line="52"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="56"/>
       <source>Minimum SOC</source>
       <translation type="unfinished">SOC ขั้นต่ำ</translation>
     </message>
     <message id="ess_unless_grid_fails">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="32"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="37"/>
       <source>Unless grid fails</source>
       <extracomment>Shown below the minimum state of charge, as configured by the user</extracomment>
       <translation>เว้นแต่กริดจะล้มเหลว</translation>
@@ -5015,7 +5050,7 @@ Do you want to continue?</source>
       <translation>หยุด</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="168"/>
+      <location filename="../../src/genericinput.cpp" line="177"/>
       <source>Temperature</source>
       <translation>อุณหภูมิ</translation>
     </message>
@@ -5102,7 +5137,7 @@ Do you want to continue?</source>
       <translation>เริ่มเลย</translation>
     </message>
     <message id="controlcard_generator_startdialog_timed_run">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="47"/>
       <source>Timed run</source>
       <translation>วิ่งตามกำหนดเวลา</translation>
     </message>
@@ -5112,28 +5147,23 @@ Do you want to continue?</source>
       <translation>หยุดเดี๋ยวนี้</translation>
     </message>
     <message id="controlcard_generator_stopdialog_total_run_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="62"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="56"/>
       <source>Total Run Time</source>
       <translation>เวลาทำงานทั้งหมด</translation>
     </message>
     <message id="controlcard_generator_stopdialog_set_time">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="81"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="75"/>
       <source>Set Time %1</source>
       <extracomment>%1 = the total time (in hours, minutes, seconds) that the generator will run for, as set by the user</extracomment>
       <translation>ตั้งเวลา %1</translation>
     </message>
     <message id="controlcard_generator_stopdialog_description">
-      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="97"/>
+      <location filename="../../components/dialogs/GeneratorStopDialog.qml" line="87"/>
       <source>Generator will keep running if an autostart condition is met.</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานต่อไปหากตรงตามเงื่อนไขการสตาร์ทอัตโนมัติ</translation>
     </message>
-    <message id="controlcard_inverter_charger_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="32"/>
-      <source>Inverter / Charger mode</source>
-      <translation>โหมดอินเวอร์เตอร์/เครื่องชาร์จ</translation>
-    </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="36"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
       <source>Set</source>
       <translation>ชุด</translation>
     </message>
@@ -5317,7 +5347,7 @@ Do you want to continue?</source>
       <translation>ภาพรวม</translation>
     </message>
     <message id="nav_levels">
-      <location filename="../../pages/LevelsPage.qml" line="19"/>
+      <location filename="../../pages/LevelsPage.qml" line="21"/>
       <source>Levels</source>
       <translation>ระดับ</translation>
     </message>
@@ -5602,45 +5632,45 @@ Do you want to continue?</source>
       <translation>แกลลอน (อิมพีเรียล)</translation>
     </message>
     <message id="charger_history_box_min_voltage">
-      <location filename="../../components/SolarDetailBox.qml" line="58"/>
+      <location filename="../../components/SolarDetailBox.qml" line="72"/>
       <source>Min Voltage</source>
       <translation>แรงดันไฟฟ้าขั้นต่ำ</translation>
     </message>
     <message id="charger_history_max_voltage">
-      <location filename="../../components/SolarHistoryTableView.qml" line="84"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="96"/>
       <source>Max Voltage</source>
       <translation>แรงดันไฟฟ้าสูงสุด</translation>
     </message>
     <message id="charger_history_box_max_voltage">
-      <location filename="../../components/SolarDetailBox.qml" line="64"/>
+      <location filename="../../components/SolarDetailBox.qml" line="79"/>
       <source>Max Voltage</source>
       <translation type="unfinished">แรงดันไฟฟ้าสูงสุด</translation>
     </message>
     <message id="charger_history_box_max_current">
-      <location filename="../../components/SolarDetailBox.qml" line="70"/>
+      <location filename="../../components/SolarDetailBox.qml" line="86"/>
       <source>Max Current</source>
       <translation>กระแสสูงสุด</translation>
     </message>
     <message id="charger_history_charge_time">
-      <location filename="../../components/SolarDetailBox.qml" line="121"/>
+      <location filename="../../components/SolarDetailBox.qml" line="108"/>
       <source>Charge time</source>
       <extracomment>Statistics for battery charging time</extracomment>
       <translation>เวลาชาร์จ</translation>
     </message>
     <message id="charger_history_box_bulk">
-      <location filename="../../components/SolarDetailBox.qml" line="136"/>
+      <location filename="../../components/SolarDetailBox.qml" line="114"/>
       <source>Bulk</source>
       <extracomment>Battery: time spent in 'Bulk' mode</extracomment>
       <translation type="unfinished">จำนวนมาก</translation>
     </message>
     <message id="charger_history_box_float">
-      <location filename="../../components/SolarDetailBox.qml" line="148"/>
+      <location filename="../../components/SolarDetailBox.qml" line="128"/>
       <source>Float</source>
       <extracomment>Battery: time spent in 'Float' mode</extracomment>
       <translation type="unfinished">ลอย</translation>
     </message>
     <message id="charger_history_hr">
-      <location filename="../../components/SolarDetailBox.qml" line="174"/>
+      <location filename="../../components/SolarDetailBox.qml" line="194"/>
       <source>hr</source>
       <extracomment>Abbreviation of "hour"</extracomment>
       <translation type="unfinished">ชม</translation>
@@ -5651,7 +5681,7 @@ Do you want to continue?</source>
       <translation>จำนวนมาก</translation>
     </message>
     <message id="charger_history_box_abs">
-      <location filename="../../components/SolarDetailBox.qml" line="142"/>
+      <location filename="../../components/SolarDetailBox.qml" line="121"/>
       <source>Abs</source>
       <extracomment>Battery: time spent in 'Absorption' mode</extracomment>
       <translation>หน้าท้อง</translation>
@@ -5662,7 +5692,7 @@ Do you want to continue?</source>
       <translation>ลอย</translation>
     </message>
     <message id="timeselector_hr">
-      <location filename="../../components/TimeSelector.qml" line="33"/>
+      <location filename="../../components/TimeSelector.qml" line="46"/>
       <source>hr</source>
       <translation>ชม</translation>
     </message>
@@ -5696,7 +5726,7 @@ Do you want to continue?</source>
       <translation>ที่ 4 สุดท้าย</translation>
     </message>
     <message id="charger_history_max_power">
-      <location filename="../../components/SolarHistoryTableView.qml" line="86"/>
+      <location filename="../../components/SolarHistoryTableView.qml" line="98"/>
       <source>Max Power</source>
       <translation>พลังสูงสุด</translation>
     </message>
@@ -5781,12 +5811,12 @@ Do you want to continue?</source>
       <translation>ปลุกเงียบ</translation>
     </message>
     <message id="vebus_device_page_total_power">
-      <location filename="../../components/ThreePhaseQuantityTable.qml" line="47"/>
+      <location filename="../../components/ThreePhaseQuantityTable.qml" line="53"/>
       <source>Total Power</source>
       <translation>พลังทั้งหมด</translation>
     </message>
     <message id="timeselector_min">
-      <location filename="../../components/TimeSelector.qml" line="69"/>
+      <location filename="../../components/TimeSelector.qml" line="72"/>
       <source>min</source>
       <translation>นาที</translation>
     </message>
@@ -5856,7 +5886,7 @@ Do you want to continue?</source>
       <translation>โหลดไฟฟ้ากระแสตรง</translation>
     </message>
     <message id="overview_widget_evcs_title">
-      <location filename="../../components/widgets/EvcsWidget.qml" line="24"/>
+      <location filename="../../components/widgets/EvcsWidget.qml" line="26"/>
       <source>EVCS</source>
       <extracomment>Abbreviation of Electric Vehicle Charging Station</extracomment>
       <translation>อีวีซีเอส</translation>
@@ -6247,7 +6277,7 @@ Do you want to continue?</source>
       <translation>สัญญาณเตือนไฟฟ้าลัดวงจร</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="58"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="59"/>
       <source>Disable Access Point</source>
       <translation>ปิดการใช้งานจุดเข้าใช้งาน</translation>
     </message>
@@ -6277,7 +6307,7 @@ Do you want to continue?</source>
       <translation>อินพุตกระแสตรง</translation>
     </message>
     <message id="ess_recommended">
-      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="73"/>
+      <location filename="../../components/dialogs/ESSMinimumSOCDialog.qml" line="69"/>
       <source>For Lithium batteries, below 10% charge is not recommended. For other battery types, check the datasheet for the minimum level recommended by the manufacturer.</source>
       <translation>สำหรับแบตเตอรี่ลิเธียม ไม่แนะนำให้ชาร์จต่ำกว่า 10% สำหรับแบตเตอรี่ประเภทอื่นๆ ให้ตรวจสอบเอกสารข้อมูลเพื่อดูระดับขั้นต่ำที่แนะนำโดยผู้ผลิต</translation>
     </message>
@@ -6302,13 +6332,13 @@ Do you want to continue?</source>
       <translation>ฟังก์ชันการเริ่มต้นระยะไกลถูกปิดใช้งานบนเครื่องกำเนิดไฟฟ้า GX จะไม่สามารถเริ่มหรือหยุดเครื่องกำเนิดไฟฟ้าได้ในขณะนี้ เปิดใช้งานบนแผงควบคุมเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="controlcard_inverter">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="23"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="24"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
       <translation>อินเวอร์เตอร์ (%1)</translation>
     </message>
     <message id="controlcard_inverter_charger">
-      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="26"/>
+      <location filename="../../pages/controlcards/InverterChargerCard.qml" line="27"/>
       <source>Inverter / Charger (%1)</source>
       <extracomment>%1 = the inverter/charger name</extracomment>
       <translation>อินเวอร์เตอร์ / เครื่องชาร์จ (%1)</translation>
@@ -6353,58 +6383,63 @@ Do you want to continue?</source>
       <source>Genset error codes</source>
       <translation>รหัสข้อผิดพลาดของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
+    <message id="press-to-clear">
+      <location filename="../../components/PageGensetModel.qml" line="213"/>
+      <source>Press to clear</source>
+      <translation type="unfinished">กดเพื่อล้าง</translation>
+    </message>
     <message id="ac-in-genset_remote_start_mode">
-      <location filename="../../components/PageGensetModel.qml" line="244"/>
+      <location filename="../../components/PageGensetModel.qml" line="292"/>
       <source>Remote start mode</source>
       <translation>โหมดเริ่มต้นระยะไกล</translation>
     </message>
     <message id="ac-in-genset_speed">
-      <location filename="../../components/PageGensetModel.qml" line="269"/>
+      <location filename="../../components/PageGensetModel.qml" line="338"/>
       <source>Speed</source>
       <translation type="unfinished">ความเร็ว</translation>
     </message>
     <message id="ac-in-genset_load">
-      <location filename="../../components/PageGensetModel.qml" line="276"/>
+      <location filename="../../components/PageGensetModel.qml" line="345"/>
       <source>Load</source>
       <translation type="unfinished">โหลด</translation>
     </message>
     <message id="ac-in-genset_oil_pressure">
-      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <location filename="../../components/PageGensetModel.qml" line="353"/>
       <source>Oil pressure</source>
       <translation>แรงดันน้ำมัน</translation>
     </message>
     <message id="ac-in-genset_oil_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="292"/>
+      <location filename="../../components/PageGensetModel.qml" line="361"/>
       <source>Oil temperature</source>
       <translation>อุณหภูมิน้ำมัน</translation>
     </message>
     <message id="ac-in-genset_coolant_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="300"/>
+      <location filename="../../components/PageGensetModel.qml" line="369"/>
       <source>Coolant temperature</source>
       <translation type="unfinished">อุณหภูมิน้ำหล่อเย็น</translation>
     </message>
     <message id="genset_heatsink_temperature">
-      <location filename="../../components/PageGensetModel.qml" line="322"/>
+      <location filename="../../components/PageGensetModel.qml" line="391"/>
       <source>Heatsink temperature</source>
       <translation>อุณหภูมิของฮีทซิงค์</translation>
     </message>
     <message id="page_genset_model_dc_genset_settings">
-      <location filename="../../components/PageGensetModel.qml" line="362"/>
+      <location filename="../../components/PageGensetModel.qml" line="431"/>
       <source>DC genset settings</source>
       <translation>การตั้งค่าเครื่องกำเนิดไฟฟ้า DC</translation>
     </message>
     <message id="genset_charge_voltage">
-      <location filename="../../components/PageGensetModel.qml" line="389"/>
+      <location filename="../../components/PageGensetModel.qml" line="458"/>
       <source>Charge voltage</source>
       <translation type="unfinished">แรงดันไฟชาร์จ</translation>
     </message>
     <message id="genset_charge_voltage_controlled_by_bms">
-      <location filename="../../components/PageGensetModel.qml" line="400"/>
+      <location filename="../../components/PageGensetModel.qml" line="469"/>
       <source>The charge voltage is currently controlled by the BMS.</source>
       <translation>ขณะนี้แรงดันไฟชาร์จได้รับการควบคุมโดย BMS</translation>
     </message>
     <message id="genset_charge_current_limit">
-      <location filename="../../components/PageGensetModel.qml" line="406"/>
+      <location filename="../../components/PageGensetModel.qml" line="475"/>
       <source>Charge current limit</source>
       <translation>ขีดจำกัดกระแสไฟชาร์จ</translation>
     </message>
@@ -6778,65 +6813,40 @@ Do you want to continue?</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
       <translation>%1 ถูกตั้งค่าเป็น %2</translation>
     </message>
-    <message id="pagesettingsgeneral_modificationchecks_unsupported_device">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="51"/>
-      <source>Unsupported GX device</source>
-      <translation type="unfinished">อุปกรณ์ GX ที่ไม่รองรับ</translation>
-    </message>
-    <message id="pagesettingsgeneral_modificationchecks_clean">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="56"/>
-      <source>Clean</source>
-      <translation type="unfinished">ล้าง</translation>
-    </message>
-    <message id="pagesettingsgeneral_firmware">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="113"/>
-      <source>Firmware</source>
-      <translation type="unfinished">เฟิร์มแวร์</translation>
-    </message>
     <message id="pagesettingsgeneral_access_and_security">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="125"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
       <source>Access &amp; Security</source>
       <translation>การเข้าถึงและความปลอดภัย</translation>
     </message>
-    <message id="pagesettingsgeneral_preferences">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="131"/>
+    <message id="pagecontrollableloads_preferences">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="103"/>
       <source>Preferences</source>
       <translation>การตั้งค่า</translation>
     </message>
     <message id="pagesettingsgeneral_display_and_appearance">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="137"/>
       <source>Display &amp; Appearance</source>
       <translation>การแสดงผลและรูปลักษณ์</translation>
     </message>
     <message id="pagesettingsgeneral_alarms_and_feedback">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="143"/>
       <source>Alarms &amp; Feedback</source>
       <translation>สัญญาณเตือนและการตอบรับ</translation>
     </message>
     <message id="settings_language_change_failed">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="205"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="204"/>
       <source>Failed to change language!</source>
       <translation>ไม่สามารถเปลี่ยนภาษาได้!</translation>
     </message>
     <message id="settings_language_change_succeeded">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="208"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="207"/>
       <source>Successfully changed language!</source>
       <translation>เปลี่ยนภาษาสำเร็จแล้ว!</translation>
     </message>
     <message id="settings_language_please_wait">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="210"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="209"/>
       <source>Please wait while the language is changed.</source>
       <translation>กรุณารอสักครู่ในขณะที่ภาษามีการเปลี่ยนแปลง</translation>
-    </message>
-    <message id="pagesettingsgeneral_documentation">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="234"/>
-      <source>Documentation</source>
-      <translation type="unfinished">เอกสาร</translation>
-    </message>
-    <message id="pagesettingsgeneral_support_status">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="241"/>
-      <source>Support status</source>
-      <translation type="unfinished">สถานะการสนับสนุน</translation>
     </message>
     <message id="settings_briefview_totals">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="29"/>
@@ -7042,52 +7052,52 @@ Do you want to continue?</source>
       <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="266"/>
       <source>Root password</source>
       <translation>รหัสผ่านรูท</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Enter password</source>
       <translation type="unfinished">ใส่รหัสผ่าน</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="274"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="280"/>
       <source>Root password changed to %1</source>
       <translation>รหัสผ่านรูทเปลี่ยนเป็น %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="287"/>
       <source>Enable SSH on LAN</source>
       <translation>เปิดใช้งาน SSH บน LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="318"/>
       <source>Logout</source>
       <translation>ออกจากระบบ</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="320"/>
       <source>Log out now</source>
       <translation>ออกจากระบบตอนนี้</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="332"/>
       <source>Log out?</source>
       <translation>ออกจากระบบใช่ไหม?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="334"/>
       <source>This will disconnect all local network connections.</source>
       <translation>การกระทำนี้จะตัดการเชื่อมต่อเครือข่ายท้องถิ่นทั้งหมด</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="336"/>
       <source>Log out</source>
       <translation>ออกจากระบบ</translation>
     </message>
@@ -7227,52 +7237,52 @@ Do you want to continue?</source>
       <translation>ใช้งานอยู่ (%1)</translation>
     </message>
     <message id="pagesettingsintegrations_pv_inverters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
       <source>PV Inverters</source>
       <translation>อินเวอร์เตอร์ PV</translation>
     </message>
     <message id="pagesettingsintegrations_energy_meters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="29"/>
       <source>Energy meters via RS485</source>
       <translation>มิเตอร์วัดพลังงานผ่าน RS485</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="50"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
       <source>Modbus Devices</source>
       <translation>อุปกรณ์ Modbus</translation>
     </message>
     <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
       <source>Bluetooth Sensors</source>
       <translation>เซ็นเซอร์บลูทูธ</translation>
     </message>
     <message id="pagesettingsintegrations_physical_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="86"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="71"/>
       <source>Physical I/O</source>
       <translation>อินพุต/เอาต์พุตทางกายภาพ</translation>
     </message>
     <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="96"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
       <source>Tank and Temperature Sensors</source>
       <translation>เซ็นเซอร์ถังและอุณหภูมิ</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="130"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="115"/>
       <source>Relays</source>
       <translation>รีเลย์</translation>
     </message>
     <message id="pagesettingsintegrations_digital_io">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="129"/>
       <source>Digital I/O</source>
       <translation>ดิจิทัลไอโอ</translation>
     </message>
     <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="206"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
       <source>Server Applications</source>
       <translation>แอปพลิเคชันเซิร์ฟเวอร์</translation>
     </message>
     <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
       <source>Victron Community</source>
       <translation type="unfinished">ชุมชนวิคตรอน</translation>
     </message>
@@ -7282,7 +7292,7 @@ Do you want to continue?</source>
       <translation>เซิร์ฟเวอร์ Modbus TCP</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
       <source>Venus OS Large Features</source>
       <translation>Venus OS คุณสมบัติขนาดใหญ่</translation>
     </message>
@@ -7393,32 +7403,32 @@ Do you want to continue?</source>
       <translation type="unfinished">อัตโนมัติ</translation>
     </message>
     <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
       <source>AC System</source>
       <translation>ระบบปรับอากาศ</translation>
     </message>
     <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
       <source>Inputs and Monitoring</source>
       <translation>อินพุตและการติดตาม</translation>
     </message>
     <message id="pagesettingssystem_energy_storage_System">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>Energy Storage System</source>
       <translation>ระบบกักเก็บพลังงาน</translation>
     </message>
     <message id="pagesettingssystem_batteries_and_bms">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="96"/>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>แบตเตอรี่และระบบจัดการแบตเตอรี่ (BMS)</translation>
     </message>
     <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
       <source>Charge Control</source>
       <translation>การควบคุมการชาร์จ</translation>
     </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="108"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="104"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>การควบคุมแรงดันและกระแสไฟฟ้าแบบกระจาย (DVCC)</translation>
     </message>
@@ -7463,7 +7473,7 @@ Do you want to continue?</source>
       <translation>ระบบจะแสดงโหลดที่อินพุตของอินเวอร์เตอร์/เครื่องชาร์จโดยอัตโนมัติหากมีมิเตอร์กริด โหลดที่เอาต์พุตจะแสดงอยู่เสมอ</translation>
     </message>
     <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="115"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
       <source>Display DC Loads</source>
       <translation>แสดงโหลด DC</translation>
     </message>
@@ -7473,7 +7483,7 @@ Do you want to continue?</source>
       <translation>การวัดแบตเตอรี่</translation>
     </message>
     <message id="settings_system_system_status">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="120"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="116"/>
       <source>System status</source>
       <translation>สถานะของระบบ</translation>
     </message>
@@ -7493,19 +7503,24 @@ Do you want to continue?</source>
       <translation>VE.Can อินสแตนซ์# %1</translation>
     </message>
     <message id="settings_tz_antarctica">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="247"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="254"/>
       <source>Antarctica</source>
       <translation>แอนตาร์กติกา</translation>
     </message>
     <message id="settings_tz_arctic">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="253"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="260"/>
       <source>Arctic</source>
       <translation>อาร์กติก</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="39"/>
+      <location filename="../../pages/SettingsPage.qml" line="40"/>
       <source>All connected devices</source>
       <translation>อุปกรณ์ที่เชื่อมต่อทั้งหมด</translation>
+    </message>
+    <message id="settings_general">
+      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <source>General</source>
+      <translation type="unfinished">ทั่วไป</translation>
     </message>
     <message id="settings_connectivity">
       <location filename="../../pages/SettingsPage.qml" line="59"/>
@@ -7621,7 +7636,7 @@ Do you want to continue?</source>
       <translation>สัญญาณเตือนอุณหภูมิสูง</translation>
     </message>
     <message id="charger_history_last_x_days">
-      <location filename="../../pages/solar/SolarHistoryPage.qml" line="71"/>
+      <location filename="../../pages/solar/SolarHistoryPage.qml" line="73"/>
       <source>Last %1 days</source>
       <extracomment>%1 = number of days of solar history that will be shown</extracomment>
       <translation>%1 วันที่ผ่านมา</translation>
@@ -7976,19 +7991,14 @@ Do you want to continue?</source>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="generator_start_dialog_will_stop_in_x">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="91"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="87"/>
       <source>Generator will stop in %1 unless autostart conditions are enabled that keep it running.</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะหยุดทำงานที่ %1 เว้นแต่จะเปิดใช้งานเงื่อนไขการสตาร์ทอัตโนมัติเพื่อให้เครื่องทำงานได้ต่อไป</translation>
     </message>
     <message id="generator_start_dialog_will_run_until_manually_stopped">
-      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="93"/>
+      <location filename="../../components/dialogs/GeneratorStartDialog.qml" line="89"/>
       <source>Generator will run until manually stopped, unless autostart conditions are enabled that keep it running.</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานจนกว่าจะหยุดด้วยตนเอง เว้นแต่จะมีการเปิดใช้งานเงื่อนไขการสตาร์ทอัตโนมัติเพื่อให้เครื่องทำงานได้ต่อไป</translation>
-    </message>
-    <message id="controlcard_inverter_mode">
-      <location filename="../../components/dialogs/InverterChargerModeDialog.qml" line="30"/>
-      <source>Inverter mode</source>
-      <translation>โหมดอินเวอร์เตอร์</translation>
     </message>
     <message id="settings_firmware_installed_rebooting">
       <location filename="../../components/FirmwareUpdate.qml" line="128"/>
@@ -7999,11 +8009,6 @@ Do you want to continue?</source>
       <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
       <source>Confirm</source>
       <translation>ยืนยัน</translation>
-    </message>
-    <message id="nav_brief_close_side_panel_high_cpu">
-      <location filename="../../pages/BriefPage.qml" line="396"/>
-      <source>System load high, closing the side panel to reduce CPU load</source>
-      <translation>โหลดของระบบสูง ปิดแผงด้านข้างเพื่อลดภาระของ CPU</translation>
     </message>
     <message id="cgwacs_battery_schedule_monthly">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="23"/>
@@ -8490,7 +8495,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>โหมดนี้ถูกกำหนดไว้ในการกำหนดค่าระบบแล้ว ไม่สามารถปรับเปลี่ยนได้</translation>
     </message>
     <message id="listlink_open_link">
-      <location filename="../../components/listitems/ListLink.qml" line="93"/>
+      <location filename="../../components/listitems/ListLink.qml" line="68"/>
       <source>Open link</source>
       <translation>เปิดลิงค์</translation>
     </message>
@@ -8535,7 +8540,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>'%1' ไม่ใช่หมายเลขพอร์ตที่ถูกต้อง ใช้หมายเลขระหว่าง 0-65535</translation>
     </message>
     <message id="overview_widget_essential_loads_title">
-      <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="14"/>
+      <location filename="../../components/widgets/EssentialLoadsWidget.qml" line="16"/>
       <source>Essential Loads</source>
       <translation>โหลดที่จำเป็น</translation>
     </message>
@@ -8589,17 +8594,17 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>รายการแบตเตอรี่</translation>
     </message>
     <message id="firmware_installed_build_gx_device_updated">
-      <location filename="../../pages/DialogLayer.qml" line="60"/>
+      <location filename="../../pages/DialogLayer.qml" line="73"/>
       <source>GX device has been updated</source>
       <translation>อุปกรณ์ GX ได้รับการอัปเดตแล้ว</translation>
     </message>
     <message id="firmware_installed_build_page_will_reload">
-      <location filename="../../pages/DialogLayer.qml" line="62"/>
+      <location filename="../../pages/DialogLayer.qml" line="75"/>
       <source>Page will automatically reload in ten seconds to load the latest version.</source>
       <translation>หน้าจะโหลดซ้ำโดยอัตโนมัติในสิบวินาทีเพื่อโหลดเวอร์ชันล่าสุด</translation>
     </message>
     <message id="controlcard_evcs_title">
-      <location filename="../../pages/controlcards/EVCSCard.qml" line="21"/>
+      <location filename="../../pages/controlcards/EVCSCard.qml" line="22"/>
       <source>EVCS (%1)</source>
       <extracomment>%1 = the EVCS name</extracomment>
       <translation>อีซีเอส (%1)</translation>
@@ -9027,7 +9032,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">การควบคุม</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
       <source>Controls</source>
       <translation>การควบคุม</translation>
     </message>
@@ -9120,7 +9125,7 @@ The GX device can only control one connected genset and takes the one with the l
 อุปกรณ์ GX สามารถควบคุมเครื่องกำเนิดไฟฟ้าที่เชื่อมต่อได้เพียงเครื่องเดียวเท่านั้น และเลือกเครื่องที่มีหมายเลขอินสแตนซ์ VRM ต่ำที่สุด เพื่อหลีกเลี่ยงพฤติกรรมที่ไม่คาดคิด โปรดตรวจสอบให้แน่ใจว่ามีเพียงหน่วยเดียวเท่านั้นที่พร้อมใช้งานสำหรับอุปกรณ์ GX</translation>
     </message>
     <message id="settings_tz_etc">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="295"/>
+      <location filename="../../pages/settings/PageTzInfo.qml" line="302"/>
       <source>Other</source>
       <translation>อื่น</translation>
     </message>
@@ -9584,7 +9589,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อัปเดต</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="142"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="113"/>
       <source>Documentation</source>
       <translation>เอกสาร</translation>
     </message>
@@ -9595,12 +9600,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อินพุต AC %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="83"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
       <source>Please enter a new GX password:</source>
       <translation>โปรดป้อนรหัสผ่าน GX ใหม่:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="98"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
       <source>Enter new password</source>
       <translation>ป้อนรหัสผ่านใหม่</translation>
     </message>
@@ -9657,7 +9662,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่มีโมเด็มเซลลูลาร์เชื่อมต่ออยู่</translation>
     </message>
     <message id="ess_active_soc_limit">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="87"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="91"/>
       <source>Active SOC Limit: %1%</source>
       <translation>ขีดจำกัด SOC ที่ใช้งาน: %1%</translation>
     </message>
@@ -9677,27 +9682,27 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อ่านอย่างเดียว</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modified">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="24"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="25"/>
       <source>Modifications installed</source>
       <translation>การปรับปรุงที่ติดตั้ง</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="29"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="30"/>
       <source>Modbus TCP Server</source>
       <translation type="unfinished">เซิร์ฟเวอร์ Modbus TCP</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="34"/>
       <source>Signal K</source>
       <translation type="unfinished">สัญญาณ K</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_nodered">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="37"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="38"/>
       <source>Node-RED</source>
       <translation type="unfinished">โหนด-RED</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_running_integrations">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="44"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="45"/>
       <source>%1 running integrations</source>
       <translation>%1 การผสานรวมที่กำลังทำงาน</translation>
     </message>
@@ -9829,29 +9834,29 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>สถานะ BatteryLife</translation>
     </message>
     <message id="pagesettingsintegrations_device_integrations">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
       <source>Device Integrations</source>
       <translation>การรวมอุปกรณ์</translation>
     </message>
     <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="213"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
       <source>Modbus TCP Server</source>
       <translation type="unfinished">เซิร์ฟเวอร์ Modbus TCP</translation>
     </message>
     <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
       <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
       <source>Signal K</source>
       <translation type="unfinished">สัญญาณ K</translation>
     </message>
     <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="253"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
       <source>Node-RED</source>
       <translation type="unfinished">โหนด-RED</translation>
     </message>
     <message id="settings_venusos_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
       <source>Venus OS Large Documentation</source>
       <translation>เอกสาร Venus OS Large</translation>
     </message>
@@ -9979,7 +9984,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>รีเลย์ของอุปกรณ์ GX</translation>
     </message>
     <message id="ess_active_soc_limit_info">
-      <location filename="../../pages/controlcards/ESSCard.qml" line="94"/>
+      <location filename="../../pages/controlcards/ESSCard.qml" line="98"/>
       <source>BatteryLife dynamically adjusts the minimum battery state of charge to prevent deep discharges and ensure regular full charges, helping to prolong battery life and maintain system reliability.</source>
       <translation>BatteryLife ปรับสถานะการชาร์จแบตเตอรี่ขั้นต่ำแบบไดนามิก เพื่อป้องกันการคายประจุที่มากเกินไป และรับประกันการชาร์จเต็มเป็นประจำ ซึ่งจะช่วยยืดอายุการใช้งานแบตเตอรี่และรักษาระบบให้มีความน่าเชื่อถือ</translation>
     </message>
@@ -10086,7 +10091,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เข้าถึง Signal K</translation>
     </message>
     <message id="pagesettingsintegrations_shelly_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
       <source>Shelly Devices</source>
       <translation>อุปกรณ์ Shelly</translation>
     </message>
@@ -10096,7 +10101,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เข้าถึง Node-RED</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="73"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
       <source>Access Point password</source>
       <translation>รหัสผ่าน Access Point</translation>
     </message>
@@ -10213,7 +10218,7 @@ The GX device can only control one connected genset and takes the one with the l
       <extra-Context>only shown on desktop systems</extra-Context>
     </message>
     <message id="load_delegate_status">
-      <location filename="../../pages/loads/LoadListDelegate.qml" line="70"/>
+      <location filename="../../pages/loads/LoadListDelegate.qml" line="26"/>
       <source>Status: %1</source>
       <translation>สถานะ: %1</translation>
     </message>
@@ -10223,7 +10228,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว (รีเลย์ 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
       <source>Polarity</source>
       <translation>ขั้ว</translation>
     </message>
@@ -10233,12 +10238,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว (รีเลย์ 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="105"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>ความยาวรหัสผ่านต้องเป็น 0 หรือระหว่าง 10 ถึง 63 ตัวอักษร</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="108"/>
       <source>Password updated</source>
       <translation>อัปเดตรหัสผ่านแล้ว</translation>
     </message>
@@ -10285,7 +10290,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ปิดใช้งานโหมดอัตโนมัติก่อน</translation>
     </message>
     <message id="pagesettingsintegrations_venus_os_enable_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="231"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="216"/>
       <source>Enable the Venus OS Large firmware to use Node-RED or Signal-K</source>
       <translation>เปิดใช้งานเฟิร์มแวร์ Venus OS Large เพื่อใช้งาน Node-RED หรือ Signal-K</translation>
     </message>
@@ -10405,25 +10410,10 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Frequency setpoint (f)</source>
       <translation>จุดตั้งค่าความถี่ (f)</translation>
     </message>
-    <message id="pagesettingsintegrations_canopenmotordrive">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="176"/>
-      <source>CANopen motor drives</source>
-      <translation>CANopen motor drives</translation>
-    </message>
     <message id="pagesettingsintegrations_ui_plugins">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
       <source>UI Plugins</source>
       <translation>UI Plugins</translation>
-    </message>
-    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
-      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
-      <source>Scan for motor drives</source>
-      <translation>สแกนหา Motor drive</translation>
-    </message>
-    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
-      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
-      <source>Discovered motor drive IDs</source>
-      <translation>ค้นพบ ID Motor drive</translation>
     </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
@@ -10492,7 +10482,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>การตั้งค่าพอร์ต Modbus และ Unit ID</translation>
     </message>
     <message id="pagesettingsintegrations_uiplugin_integrates_with_devicelist">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="334"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="319"/>
       <source>Integrates with the device list</source>
       <translation>รวมเข้ากับรายการอุปกรณ์</translation>
     </message>
@@ -10512,19 +10502,19 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ค่าต้องน้อยกว่าค่าสิ้นสุด</translation>
     </message>
     <message id="notifications_page_active_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="42"/>
+      <location filename="../../pages/NotificationsPage.qml" line="45"/>
       <source>Active Notifications</source>
       <extracomment>List section header, for the section which contains current/active notifications</extracomment>
       <translation>การแจ้งเตือนที่เปิดใช้งาน</translation>
     </message>
     <message id="notifications_page_inactive_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="46"/>
+      <location filename="../../pages/NotificationsPage.qml" line="49"/>
       <source>Inactive Notifications</source>
       <extracomment>List section header, for the section which contains inactive (but unseen) notifications</extracomment>
       <translation>การแจ้งเตือนที่ไม่ได้เปิดใช้งาน</translation>
     </message>
     <message id="notifications_no_active_notifications">
-      <location filename="../../pages/NotificationsPage.qml" line="105"/>
+      <location filename="../../pages/NotificationsPage.qml" line="107"/>
       <source>No active notifications</source>
       <translation>ไม่มีการแจ้งเตือนที่เปิดใช้งาน</translation>
     </message>
@@ -10546,12 +10536,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>วงล้อสี RGB + W</translation>
     </message>
     <message id="listlink_show_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="118"/>
+      <location filename="../../components/listitems/ListLink.qml" line="89"/>
       <source>Show QR code</source>
       <translation>แสดงรหัส QR</translation>
     </message>
     <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="142"/>
+      <location filename="../../components/listitems/ListLink.qml" line="114"/>
       <source>Open the QR code to scan it with your portable device.&lt;br /&gt;Or insert the link: %1</source>
       <extracomment>%1 = url text</extracomment>
       <translation>เปิดรหัส QR เพื่อสแกนด้วยอุปกรณ์พกพาของคุณ&lt;br /&gt;หรือใส่ลิงก์: %1</translation>
@@ -10679,48 +10669,48 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เมื่อปิดเอาต์พุตเท่านั้น</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="128"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="136"/>
       <source>Startup switch state</source>
       <translation>สถานะสวิตช์เริ่มต้น</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="136"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="143"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="144"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="151"/>
       <source>Restore from memory</source>
       <translation>คืนค่าจากหน่วยความจำ</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="142"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="150"/>
       <source>Startup dim level</source>
       <translation type="unfinished">ระดับหรี่แสงเริ่มต้น</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="185"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="193"/>
       <source>Startup dim level</source>
       <translation>ระดับหรี่แสงเริ่มต้น</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="171"/>
       <source>Restore dim level from memory</source>
       <translation>คืนค่าระดับหรี่แสงจากหน่วยความจำ</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="206"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
       <source>Active high / Normally open</source>
       <translation>Active high / ปกติเปิด</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
       <source>Active low / Normally closed</source>
       <translation>Active low / ปกติปิด</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="222"/>
       <source>Output limit min</source>
       <translation>ขีดจำกัดเอาต์พุตต่ำสุด</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="226"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="234"/>
       <source>Output limit max</source>
       <translation>ขีดจำกัดเอาต์พุตสูงสุด</translation>
     </message>
@@ -10739,13 +10729,18 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Only on VRM</source>
       <translation>เฉพาะบน VRM</translation>
     </message>
+    <message id="control_cards_title">
+      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <source>Controls</source>
+      <translation type="unfinished">การควบคุม</translation>
+    </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
       <source>No compatible devices found</source>
       <translation>ไม่พบอุปกรณ์ที่รองรับ</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
       <source>Connect devices that support this function</source>
       <translation>เชื่อมต่ออุปกรณ์ที่รองรับฟังก์ชันนี้</translation>
     </message>
@@ -10960,12 +10955,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อนุญาตให้ใช้ Ethernet เพื่อเชื่อมต่ออินเทอร์เน็ต</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="30"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="31"/>
       <source>Access point</source>
       <translation>จุดเข้าใช้งาน</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="139"/>
       <source>Allow using WiFi for internet access</source>
       <translation>อนุญาตให้ใช้ WiFi เพื่อเชื่อมต่ออินเทอร์เน็ต</translation>
     </message>
@@ -11105,12 +11100,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ไม่ได้ทำงาน, ถูกปิดใช้งาน</translation>
     </message>
     <message id="pagesettingssystem_opportunity_loads">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="62"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="59"/>
       <source>Opportunity Loads</source>
       <translation>โหลดโอกาส</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
       <source>Automate controllable devices to maximize PV self-use</source>
       <translation>ระบบอัตโนมัติสำหรับอุปกรณ์ที่ควบคุมได้เพื่อเพิ่มการใช้พลังงานแสงอาทิตย์ด้วยตนเองให้สูงสุด</translation>
     </message>
@@ -11279,21 +11274,11 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Inputs</source>
       <translation>อินพุต</translation>
     </message>
-    <message id="list-spin-box-range_minimum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="105"/>
-      <source>Minimum value (%1)</source>
-      <translation>ค่าต่ำสุด (%1)</translation>
-    </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="121"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="96"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
       <translation>ถึง</translation>
-    </message>
-    <message id="list-spin-box-range_maximum_value_with_arguments">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="149"/>
-      <source>Maximum value (%1)</source>
-      <translation>ค่าสูงสุด (%1)</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
@@ -11302,64 +11287,44 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ค่า</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="57"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="42"/>
       <source>Devices and Priorities</source>
       <translation>อุปกรณ์และลำดับความสำคัญ</translation>
     </message>
     <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="131"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="97"/>
       <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
       <translation>จัดเรียงอุปกรณ์ที่ควบคุมได้ตามลำดับความสำคัญ อัลกอริทึมการควบคุมจะควบคุมอุปกรณ์เหล่านี้ตามพลังงานแสงอาทิตย์ส่วนเกินที่มีอยู่ในปัจจุบัน</translation>
     </message>
-    <message id="pagecontrollableloads_expected_power_consumption">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="19"/>
+    <message id="pagecontrollableloads_acload_expected_power_consumption">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
       <translation>การใช้พลังงานที่คาดหวัง</translation>
     </message>
-    <message id="pagecontrollableloads_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="25"/>
+    <message id="pagecontrollableloads_acload_minimum_run_duration">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="28"/>
       <source>Minimum run duration when turned on</source>
       <translation>ระยะเวลาการทำงานขั้นต่ำเมื่อเปิด</translation>
     </message>
-    <message id="pagecontrollableloads_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsAcLoad.qml" line="31"/>
+    <message id="pagecontrollableloads_acload_minimum_rest_duration">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="35"/>
       <source>Minimum rest duration when turned off</source>
       <translation>ระยะเวลาพักขั้นต่ำเมื่อปิด</translation>
     </message>
-    <message id="pagecontrollableloads_battery_reserved_power_0">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="19"/>
-      <source>Reserved power for battery charging at 0% SOC</source>
-      <translation>พลังงานสำรองสำหรับการชาร์จแบตเตอรี่ที่ SOC 0%</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_reduce_power">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
-      <source>Reduce power per percentage point of SOC by</source>
-      <translation>ลดพลังงานต่อจุดเปอร์เซ็นต์ของ SOC ลง</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_batterylife_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
+    <message id="page_controllable_loads_preferences_battery_life_compatibility">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="40"/>
       <source>BatteryLife compatibility</source>
       <translation>ความเข้ากันได้ของ BatteryLife</translation>
     </message>
-    <message id="page_controllableloads_battery_pause_opportunity_loads">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="37"/>
+    <message id="page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="46"/>
       <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
       <translation>หยุดโหลดโอกาสชั่วคราวเมื่อขีดจำกัด Active SOC เกิน 85%</translation>
     </message>
-    <message id="pagecontrollableloads_battery_this_supports_the_batterylife_algorithm">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="40"/>
+    <message id="page_controllable_loads_preferences_this_helps">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="49"/>
       <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
       <translation>วิธีนี้ช่วยให้อัลกอริทึม BatteryLife ชาร์จแบตเตอรี่จนเต็ม 100%</translation>
-    </message>
-    <message id="pagecontrollableloads_evcs_maximum_charging_power_limit">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="19"/>
-      <source>Maximum charging power limit</source>
-      <translation>ขีดจำกัดกำลังชาร์จสูงสุด</translation>
-    </message>
-    <message id="pagecontrollableloads_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="22"/>
-      <source>Limiting the maximum charging power can improve simultaneity with other controllable devices.</source>
-      <translation>การจำกัดกำลังชาร์จสูงสุดสามารถปรับปรุงการทำงานพร้อมกันกับอุปกรณ์ที่ควบคุมได้อื่นๆ</translation>
     </message>
     <message id="page_generic_input_invert">
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="34"/>
@@ -11376,20 +11341,10 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Digital input</source>
       <translation>อินพุตดิจิตอล</translation>
     </message>
-    <message id="iochannel_digital_input_mode_toggle">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+    <message id="iochannel_digital_input_mode_toggle_switch">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Toggle switch</source>
       <translation>สวิตช์สลับ</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
-      <source>Press button</source>
-      <translation>กดปุ่ม</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_press_and_hold">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
-      <source>Press and hold button</source>
-      <translation>กดปุ่มค้าง</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
@@ -11414,17 +11369,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>สถานะไม่ทราบ</translation>
     </message>
     <message id="page_switchable_output_set_dim_level_manually">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Set startup dim level manually</source>
       <translation>ตั้งค่าระดับความสว่างเริ่มต้นด้วยตนเอง</translation>
     </message>
     <message id="main_system_service_settings_offline_warning">
-      <location filename="../../Main.qml" line="262"/>
+      <location filename="../../Main.qml" line="287"/>
       <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
       <translation>คำเตือน: ตรวจพบว่าบริการ localsettings ออฟไลน์ กำลังโหลด UI ใหม่อีกครั้งเมื่อพร้อมใช้งาน...</translation>
     </message>
     <message id="main_system_service_platform_offline_warning">
-      <location filename="../../Main.qml" line="283"/>
+      <location filename="../../Main.qml" line="308"/>
       <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
       <translation>คำเตือน: ตรวจพบว่าบริการ venus-platform ออฟไลน์ กำลังโหลด UI ใหม่อีกครั้งเมื่อพร้อมใช้งาน...</translation>
     </message>
@@ -11444,7 +11399,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>รายการที่มีไอคอนเตือนได้รับการสนับสนุนและจัดหาโดย Victron Energy แต่การใช้งานอย่างไม่ถูกต้องอาจส่งผลต่อความเสถียรของระบบ ในกรณีที่แก้ไขปัญหา ให้ปิดใช้งานรายการเหล่านั้นก่อน</translation>
     </message>
     <message id="pagecontrollableloads_starting">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="59"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="44"/>
       <source>Starting, this may take a few seconds...</source>
       <translation>กำลังเริ่มต้น อาจใช้เวลาไม่กี่วินาที...</translation>
     </message>
@@ -11486,14 +11441,9 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>เพิ่มที่อยู่ IP</translation>
     </message>
     <message id="pagesettingsintegrations_mqtt_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
       <source>MQTT Devices</source>
       <translation>อุปกรณ์ MQTT</translation>
-    </message>
-    <message id="pagesettingsintegrations_eebus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="68"/>
-      <source>EEBus Devices</source>
-      <translation>อุปกรณ์ EEBus</translation>
     </message>
     <message id="settings_ess_disable_ol_first">
       <location filename="../../pages/settings/PageSettingsDynamicEss.qml" line="20"/>
@@ -11501,7 +11451,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Dynamic ESS ไม่สามารถเปิดใช้งานได้ขณะที่ Opportunity Loads เปิดอยู่ กรุณาปิดใช้งาน Dynamic ESS ก่อน</translation>
     </message>
     <message id="pagecontrollableloads_disable_dess_first">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="46"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="31"/>
       <source>Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
       <translation>Opportunity loads ไม่สามารถเปิดใช้งานได้ขณะที่ Dynamic ESS กำลังทำงานอยู่ กรุณาปิดใช้งาน Dynamic ESS ก่อน</translation>
     </message>
@@ -11616,6 +11566,179 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Frequency</source>
       <translation>ความถี่</translation>
     </message>
+    <message id="pagesettingsintegrations_canopenmotordrive">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="176"/>
+      <source>CANopen E-drives</source>
+      <translation>CANopen E-drives</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_scan_for_motor_drives">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="31"/>
+      <source>Scan for E-drives</source>
+      <translation>ค้นหา E-drives</translation>
+    </message>
+    <message id="page_settings_canopenmotordrive_discovered_motor_drive_ids">
+      <location filename="../../pages/settings/PageSettingsCanOpenMotordrive.qml" line="39"/>
+      <source>Discovered E-drive IDs</source>
+      <translation>ID ของ E-drive ที่พบ</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_on_off_switch">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <source>On/off switch</source>
+      <translation>สวิตช์เปิด/ปิด</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_push_button_on_off">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="61"/>
+      <source>Push button on/off</source>
+      <translation>ปุ่มกดเปิด/ปิด</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_push_button_dimmer">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="63"/>
+      <source>Push button dimmer</source>
+      <translation>ปุ่มกดหรี่ไฟ</translation>
+    </message>
+    <message id="generic_input_label_released">
+      <location filename="../../src/genericinput.cpp" line="132"/>
+      <source>Released</source>
+      <translation>ปล่อยแล้ว</translation>
+    </message>
+    <message id="generic_input_label_pressed">
+      <location filename="../../src/genericinput.cpp" line="134"/>
+      <source>Pressed</source>
+      <translation>กดอยู่</translation>
+    </message>
+    <message id="generic_input_label_holding">
+      <location filename="../../src/genericinput.cpp" line="136"/>
+      <source>Holding</source>
+      <translation>กดค้างไว้</translation>
+    </message>
+    <message id="clear-generator-error">
+      <location filename="../../components/PageGensetModel.qml" line="211"/>
+      <source>Clear generator error</source>
+      <translation>ล้างข้อผิดพลาดเครื่องกำเนิดไฟฟ้า</translation>
+    </message>
+    <message id="Re-enable_remote_start_mode">
+      <location filename="../../components/PageGensetModel.qml" line="284"/>
+      <source>Re-enable remote start mode</source>
+      <translation>เปิดใช้งานโหมดสตาร์ทระยะไกลอีกครั้ง</translation>
+    </message>
+    <message id="pagesettingsintegrations_eebus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
+      <source>EEBUS Devices</source>
+      <translation>อุปกรณ์ EEBus</translation>
+    </message>
+    <message id="rotate_device_prompt_text">
+      <location filename="../../components/RotateDevicePrompt.qml" line="40"/>
+      <source>Rotate device to view %1</source>
+      <extracomment>Prompts the user to rotate the device. %1 = the name of the current page.</extracomment>
+      <translation>หมุนอุปกรณ์เพื่อดู %1</translation>
+    </message>
+    <message id="list_device_priority_no_control">
+      <location filename="../../components/listitems/ListDevicePriority.qml" line="137"/>
+      <source>No control</source>
+      <translation>ไม่มีการควบคุม</translation>
+    </message>
+    <message id="list-spin-box-range_minimum_value">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="81"/>
+      <source>Minimum value</source>
+      <translation>ค่าต่ำสุด</translation>
+    </message>
+    <message id="list-spin-box-range_maximum_value">
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="125"/>
+      <source>Maximum value</source>
+      <translation>ค่าสูงสุด</translation>
+    </message>
+    <message id="aux_page_switches">
+      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <source>Switches</source>
+      <extracomment>Name of the Switch Controls feature</extracomment>
+      <translation>สวิตช์</translation>
+    </message>
+    <message id="brief_graphs_hidden">
+      <location filename="../../pages/BriefPage_Portrait.qml" line="83"/>
+      <source>Graphs and additional details have been hidden to reduce the CPU load.</source>
+      <translation>กราฟและรายละเอียดเพิ่มเติมถูกซ่อนไว้เพื่อลดภาระของ CPU</translation>
+    </message>
+    <message id="brief_graphs_show">
+      <location filename="../../pages/BriefPage_Portrait.qml" line="90"/>
+      <source>Show graphs</source>
+      <translation>แสดงกราฟ</translation>
+    </message>
+    <message id="brief_close_graphs_high_cpu">
+      <location filename="../../pages/BriefPage.qml" line="45"/>
+      <source>System load high, hiding graphs to reduce CPU load</source>
+      <translation>ภาระของระบบสูง กำลังซ่อนกราฟเพื่อลดภาระของ CPU</translation>
+    </message>
+    <message id="navbar_more">
+      <location filename="../../pages/MainView.qml" line="279"/>
+      <source>More</source>
+      <extracomment>Click to show more available items</extracomment>
+      <translation>เพิ่มเติม</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
+      <source>Allow additional loads starting at a battery SOC of</source>
+      <translation>อนุญาตให้ใช้โหลดเพิ่มเติมเริ่มที่ SOC แบตเตอรี่ระดับ</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_below_this_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="23"/>
+      <source>Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb.</source>
+      <translation>ต่ำกว่าค่า SOC นี้ พลังงานส่วนเกินจะถูกนำไปใช้ชาร์จแบตเตอรี่ให้มากที่สุดเท่าที่จะทำได้ ตั้งแต่ค่า SOC นี้เป็นต้นไป โหลดเพิ่มเติมอาจใช้พลังงานส่วนเกินได้เช่นกัน โดยอาจทำงานก่อนหน้านั้นได้หากการผลิตจาก PV เกินกว่าที่แบตเตอรี่จะรองรับได้</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="35"/>
+      <source>At &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC, reserve for battery charging</source>
+      <translation>ที่ SOC &lt;font color="%1"&gt;%2%&lt;/font&gt; สำรองไว้สำหรับการชาร์จแบตเตอรี่</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="45"/>
+      <source>At %1% SOC, reserve for battery charging</source>
+      <translation>ที่ SOC %1% สำรองไว้สำหรับการชาร์จแบตเตอรี่</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_between_the_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
+      <source>Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices.</source>
+      <translation>ระหว่างค่า SOC ที่ตั้งไว้ใน “อนุญาตให้ใช้โหลดเพิ่มเติมจาก SOC แบตเตอรี่” และ SOC 100% พลังงานที่สำรองไว้จะถูกปรับเปลี่ยนไปเรื่อยๆ ระหว่างค่าเหล่านี้ สิ่งนี้ช่วยให้การชาร์จแบตเตอรี่ลดลงเมื่อ SOC เพิ่มขึ้น ทำให้มีพลังงานส่วนเกินเหลือมากขึ้นสำหรับอุปกรณ์ที่ควบคุมไว้</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_maximum_charging_power">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="20"/>
+      <source>Maximum charging power</source>
+      <translation>กำลังการชาร์จสูงสุด</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_limiting_the_maximum">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="23"/>
+      <source>Limiting the maximum charging power can leave room for lower-priority devices to run at the same time.</source>
+      <translation>การจำกัดกำลังการชาร์จสูงสุดสามารถช่วยให้อุปกรณ์ที่มีความสำคัญต่ำกว่าทำงานได้ในเวลาเดียวกัน</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_remember_detected_ev_phases">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="29"/>
+      <source>Remember detected EV phases</source>
+      <translation>จดจำเฟส EV ที่ตรวจพบ</translation>
+    </message>
+    <message id="pagecontrollableloads_evcs_reuses_the_last_detected">
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="32"/>
+      <source>Reuses the last detected phase configuration for new charging sessions. Recommended only for a single EV, or when all EVs using this station support the same 1-, 2-, or 3-phase configuration.</source>
+      <translation>ใช้การตั้งค่าเฟสที่ตรวจพบครั้งล่าสุดสำหรับการเริ่มชาร์จครั้งใหม่ แนะนำให้ใช้เฉพาะสำหรับ EV คันเดียว หรือเมื่อ EV ทั้งหมดที่ใช้สถานีนี้รองรับการตั้งค่า 1, 2 หรือ 3 เฟสแบบเดียวกัน</translation>
+    </message>
+    <message id="pagecontrollableloads_acload_this_should_reflect">
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="21"/>
+      <source>This should reflect the device’s typical power consumption while turned on.</source>
+      <translation>ค่านี้ควรสะท้อนถึงการใช้พลังงานปกติของอุปกรณ์ขณะเปิดเครื่อง</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
+      <source>Pause Opportunity Loads if no AC input is connected</source>
+      <translation>หยุดการใช้โหลดตามโอกาส (Opportunity Loads) หากไม่มีการเชื่อมต่อ AC อินพุต</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
+      <source>Nominal inverter utilization limit</source>
+      <translation>ขีดจำกัดการใช้งานอินเวอร์เตอร์สูงสุด</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_limits_how_much">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="35"/>
+      <source>Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads.</source>
+      <translation>จำกัดปริมาณพลังงานปกติของอินเวอร์เตอร์/เครื่องชาร์จที่อัลกอริทึมวางแผนจะใช้เพื่อแปลง PV แบบ DC-coupled เป็น AC สำหรับโหลดพื้นฐานและโหลดที่ตั้งเวลาไว้</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -11639,27 +11762,27 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">ไม่รู้จัก</translation>
     </message>
     <message id="brief_solar_yield">
-      <location filename="../../pages/BriefSidePanel.qml" line="24"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="26"/>
       <source>Solar yield</source>
       <translation type="unfinished">ผลผลิตพลังงานแสงอาทิตย์</translation>
     </message>
     <message id="brief_dc_input">
-      <location filename="../../pages/BriefSidePanel.qml" line="214"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="210"/>
       <source>DC input</source>
       <translation type="unfinished">อินพุตกระแสตรง</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="258"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="255"/>
       <source>AC Loads</source>
       <translation type="unfinished">โหลด AC</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="287"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="286"/>
       <source>DC Loads</source>
       <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
     </message>
     <message id="nav_overview">
-      <location filename="../../pages/OverviewPage.qml" line="492"/>
+      <location filename="../../pages/OverviewPage.qml" line="13"/>
       <source>Overview</source>
       <translation type="unfinished">ภาพรวม</translation>
     </message>
@@ -11678,11 +11801,6 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>System yield</source>
       <translation type="unfinished">ผลตอบแทนของระบบ</translation>
     </message>
-    <message id="charger_total_pv_power">
-      <location filename="../../pages/solar/SolarDevicePage.qml" line="64"/>
-      <source>Total PV Power</source>
-      <translation type="unfinished">พลัง PV ทั้งหมด</translation>
-    </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
       <source>Alarm only</source>
@@ -11699,7 +11817,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">คำเตือน</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="340"/>
+      <location filename="../../src/iochannel.cpp" line="342"/>
       <source>GX device relays</source>
       <translation type="unfinished">รีเลย์ของอุปกรณ์ GX</translation>
     </message>
