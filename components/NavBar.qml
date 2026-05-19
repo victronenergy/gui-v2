@@ -116,6 +116,7 @@ FocusScope {
 			id: moreButtonLoader
 			anchors.verticalCenter: parent.verticalCenter
 			sourceComponent: root.moreButton
+			enabled: status === Loader.Ready
 		}
 	}
 }
