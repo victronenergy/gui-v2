@@ -24,7 +24,7 @@ BaseListView {
 	signal onClicked()
 	signal offClicked()
 
-	implicitWidth: parent.width
+	implicitWidth: Theme.geometry_control_width
 	implicitHeight: Theme.geometry_iochannel_control_height
 
 	orientation: ListView.Horizontal

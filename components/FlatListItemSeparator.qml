@@ -7,7 +7,7 @@ import QtQuick
 import Victron.VenusOS
 
 Item {
-	implicitWidth: parent ? parent.width : 0
+	width: parent?.width ?? 0
 	implicitHeight: bar.height
 
 	SeparatorBar {

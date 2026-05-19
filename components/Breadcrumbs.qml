@@ -36,7 +36,7 @@ BaseListView {
 	enabled: visible // don't receive focus when invisble
 	focus: false // don't give status bar initial focus to the breadcrumbs
 
-	delegate: ListItem {
+	delegate: AbstractListItem {
 		id: breadcrumb
 
 		required property int index
@@ -50,7 +50,8 @@ BaseListView {
 		rightInset: rightEdgeIcon.width
 		leftPadding: Theme.geometry_settings_breadcrumb_horizontalMargin + leftEdgeIcon.width
 		rightPadding: Theme.geometry_settings_breadcrumb_horizontalMargin + rightEdgeIcon.width
-
+		focus: true
+		focusPolicy: Qt.TabFocus
 		contentItem: Label {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
@@ -65,6 +66,8 @@ BaseListView {
 			color: breadcrumb.iconColor
 		}
 
+		KeyNavigationHighlight.active: activeFocus
+		Keys.enabled: Global.keyNavigationEnabled
 		Keys.onSpacePressed: root.activate(breadcrumb.index)
 
 		CP.ColorImage {

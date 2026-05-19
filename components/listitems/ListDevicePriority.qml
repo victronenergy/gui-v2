@@ -29,8 +29,8 @@ ListSetting {
 		radius: Theme.geometry_opportunityLoad_button_radius
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		implicitWidth: root.height - 2*Theme.geometry_opportunityLoad_margin
-		implicitHeight: root.height - 2*Theme.geometry_opportunityLoad_margin
+		defaultBackgroundWidth: Theme.geometry_listItem_height - 2*Theme.geometry_opportunityLoad_margin
+		defaultBackgroundHeight: Theme.geometry_listItem_height - 2*Theme.geometry_opportunityLoad_margin
 	}
 
 	component PageData : QtObject {

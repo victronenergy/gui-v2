@@ -57,8 +57,8 @@ ListView {
 		property real topPadding
 		readonly property alias fixedColumnWidth: groupHeader.fixedColumnWidth
 
-		implicitWidth: table.width
-		implicitHeight: groupHeader.y + groupHeader.height
+		width: table.width
+		height: groupHeader.y + groupHeader.height
 		color: Theme.color_quantityTable_row_background
 
 		QuantityGroupListHeader {
@@ -101,8 +101,8 @@ ListView {
 		readonly property real fixedColumnWidth: table.equalWidthColumns ? (table.availableWidth - (table.columnSpacing * (columnCount-1))) / columnCount : NaN
 		readonly property int columnCount: quantityRow.count + (headerColumnLabel.visible ? 1 : 0)
 
-		implicitWidth: table.width
-		implicitHeight: preferredVisible ? Theme.geometry_quantityTable_row_height : 0
+		width: table.width
+		height: preferredVisible ? Theme.geometry_quantityTable_row_height : 0
 		color: index % 2 === 0
 			   ? Theme.color_quantityTable_row_alternateBackground
 			   : Theme.color_quantityTable_row_background

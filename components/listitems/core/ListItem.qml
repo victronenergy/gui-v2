@@ -37,10 +37,13 @@ AbstractListItem {
 	topPadding: topInset + Theme.geometry_listItem_content_verticalMargin
 	bottomPadding: bottomInset + Theme.geometry_listItem_content_verticalMargin
 
-	implicitWidth: parent?.width ?? Theme.geometry_listItem_width
+	implicitWidth: effectiveVisible ? Math.max(
+			implicitBackgroundWidth + leftInset + rightInset,
+			implicitContentWidth + leftPadding + rightPadding) : 0
 	implicitHeight: effectiveVisible ? Math.max(
 			implicitBackgroundHeight + topInset + bottomInset,
 			implicitContentHeight + topPadding + bottomPadding) : 0
+	width: parent?.width ?? Theme.geometry_listItem_width
 	spacing: Theme.geometry_listItem_content_spacing
 
 	// By default, the item is visible if preferredVisible=true.
@@ -66,8 +69,6 @@ AbstractListItem {
 	Keys.enabled: Global.keyNavigationEnabled
 
 	background: ListItemBackground {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: Theme.geometry_listItem_height
 		visible: !root.flat
 	}
 }

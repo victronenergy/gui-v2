@@ -7,7 +7,8 @@ import QtQuick
 import Victron.VenusOS
 
 Rectangle {
-	implicitWidth: parent ? parent.width : 0
+	implicitWidth: Theme.geometry_listItem_width
+	implicitHeight: Theme.geometry_listItem_height
 	color: Theme.color_listItem_background
 	radius: Theme.geometry_listItem_radius
 }

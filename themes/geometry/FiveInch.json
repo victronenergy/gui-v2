@@ -2,6 +2,7 @@
     "geometry_page_content_horizontalMargin": 24,
     "geometry_page_content_verticalMargin": 24,
 
+    "geometry_control_width": 80,
     "geometry_icon_size_medium": 32,
 
     "geometry_splashScreen_logo_width": 224,
