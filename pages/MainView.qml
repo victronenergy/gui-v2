@@ -278,6 +278,7 @@ FocusScope {
 					//% "More"
 					text: qsTrId("navbar_more")
 					icon.source: "qrc:/images/icon_more_dots.svg"
+					focus: true
 					onClicked: Global.dialogLayer.open(moreButtonDialogComponent)
 
 					Rectangle {
