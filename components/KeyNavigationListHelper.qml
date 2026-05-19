@@ -83,7 +83,12 @@ QtObject {
 		}
 		if (containerOrItem.__keyNavHelper) {
 			// Try to focus the first item in the container.
-			return containerOrItem.__keyNavHelper.updateFocusedItem()
+			const result = containerOrItem.__keyNavHelper.updateFocusedItem()
+			if (result) {
+				// Since the container is a FocusScope, we must give it focus as well.
+				containerOrItem.focus = true
+			}
+			return result
 		} else {
 			// Focus the item.
 			containerOrItem.focus = true
