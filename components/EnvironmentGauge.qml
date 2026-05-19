@@ -47,8 +47,8 @@ Item {
 
 		x: root.orientation === Qt.Horizontal ? 0
 			: parent.width/2 - valueMarker.width + Theme.geometry_environmentGauge_tick_size/2
-		implicitWidth: root.orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
-		implicitHeight: root.orientation === Qt.Vertical
+		width: root.orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
+		height: root.orientation === Qt.Vertical
 				? parent.height - bottomSeparator.height - 2*Theme.geometry_levelsGauge_verticalPadding
 				: Theme.geometry_barGauge_horizontal_height
 		radius: root.orientation === Qt.Vertical ? width / 2 : height / 2

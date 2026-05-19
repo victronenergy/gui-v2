@@ -198,9 +198,8 @@ T.Dialog {
 
 				required property int index
 
-				implicitWidth: historyListView.width
-				implicitHeight: tableView.height
-
+				width: historyListView.width
+				height: tableView.height
 				enabled: errorView.expanded
 				onClicked: errorView.expanded = false
 

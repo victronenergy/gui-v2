@@ -23,7 +23,7 @@ FocusScope {
 		}
 	}
 
-	implicitWidth: parent.width
+	implicitWidth: Theme.geometry_control_width
 	implicitHeight: Theme.geometry_segmentedButtonRow_height
 
 	// Set a default focus policy that will be used by each delegate in the row.

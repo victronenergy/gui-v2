@@ -58,7 +58,7 @@ Item {
 	signal dismissed()
 	signal closed()
 
-	implicitWidth: parent ? parent.width : 0
+	implicitWidth: Theme.geometry_control_width
 	implicitHeight: contentLayout.y + contentLayout.implicitHeight
 
 	// Block mouse events beneath the toast notification area.
