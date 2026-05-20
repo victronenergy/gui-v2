@@ -52,6 +52,5 @@ FocusScope {
 		id: contentColumn
 		width: parent.width
 		height: parent.height
-		spacing: Theme.geometry_gradientList_spacing
 	}
 }

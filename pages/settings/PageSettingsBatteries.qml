@@ -14,7 +14,6 @@ Page {
 	GradientListView {
 		header: SettingsColumn {
 			width: parent ? parent.width : 0
-			bottomPadding: spacing
 
 			ListRadioButtonGroup {
 				id: batteryMonitorRadioButtons
@@ -58,7 +57,6 @@ Page {
 
 		footer: SettingsColumn {
 			width: parent ? parent.width : 0
-			topPadding: spacing
 
 			ListNavigation {
 				//% "Battery measurements"

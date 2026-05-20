@@ -29,7 +29,6 @@ Page {
 		}
 		footer: SettingsColumn {
 			width: parent.width
-			topPadding: Theme.geometry_gradientList_spacing
 
 			ListRadioButtonGroup {
 				text: CommonWords.vebus_error

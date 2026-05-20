@@ -38,7 +38,7 @@ SwipeViewPage {
 		section.delegate: SettingsListHeader {
 			id: sectionDelegate
 			required property int section
-			bottomPadding: Theme.geometry_gradientList_spacing
+
 			text: sectionDelegate.section === 0 ?
 					//: List section header, for the section which contains current/active notifications
 					//% "Active Notifications"

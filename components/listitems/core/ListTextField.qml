@@ -49,8 +49,8 @@ ListSetting {
 	}
 
 	// Remove vertical padding, so that the text field does not stretch the height of the item.
-	topPadding: 0
-	bottomPadding: 0
+	topPadding: topInset
+	bottomPadding: bottomInset
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 

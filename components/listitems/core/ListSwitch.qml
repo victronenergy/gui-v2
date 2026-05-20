@@ -68,8 +68,8 @@ ListSetting {
 
 	// Remove padding around the edges, so that the internal Switch can expand its touch area.
 	rightPadding: rightInset
-	topPadding: 0
-	bottomPadding: 0
+	topPadding: topInset
+	bottomPadding: bottomInset
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 

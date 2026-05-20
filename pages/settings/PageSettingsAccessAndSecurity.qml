@@ -179,7 +179,6 @@ Page {
 					visible: securityProfile.currentIndex === VenusOS.Security_Profile_Secured
 							|| securityProfile.currentIndex === VenusOS.Security_Profile_Weak
 					width: parent.width
-					topPadding: spacing
 
 					ListButton {
 						//% "Change password"

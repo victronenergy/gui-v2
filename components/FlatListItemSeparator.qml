@@ -14,6 +14,7 @@ Item {
 		id: bar
 
 		x: Theme.geometry_separatorBar_horizontalMargin
+		y: -(Theme.geometry_gradientList_spacing / 2)
 		width: parent.width - (2 * Theme.geometry_separatorBar_horizontalMargin)
 		height: Theme.geometry_separatorBar_size
 		color: Theme.color_card_separator

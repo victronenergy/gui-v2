@@ -14,7 +14,6 @@ Page {
 
 	GradientListView {
 		header: ListItem {
-			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset

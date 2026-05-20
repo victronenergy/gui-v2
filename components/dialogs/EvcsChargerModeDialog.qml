@@ -37,7 +37,7 @@ ModalDialog {
 						onClicked: root.mode = modelData.value
 					}
 
-					SeparatorBar {
+					FlatListItemSeparator {
 						width: parent.width
 						visible: model.index !== repeater.count - 1
 					}

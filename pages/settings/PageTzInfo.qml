@@ -183,7 +183,6 @@ Page {
 
 							header: SettingsColumn {
 								width: parent.width
-								bottomPadding: Theme.geometry_gradientList_spacing
 
 								ListSwitch {
 									text: "UTC"

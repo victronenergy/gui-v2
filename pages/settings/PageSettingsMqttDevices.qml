@@ -45,7 +45,6 @@ Page {
 
 		header: SettingsColumn {
 			width: parent?.width ?? 0
-			bottomPadding: spacing
 
 			ListButton {
 				//% "Pairing mode"

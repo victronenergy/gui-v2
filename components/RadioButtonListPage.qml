@@ -65,10 +65,6 @@ Page {
 				}
 			}
 
-			// TODO this is a hack to cancel out the GradientListView spacing, to avoid
-			// showing extra spacing between items if an item is not visible. See #1907.
-			height: effectiveVisible ? implicitHeight : -Theme.geometry_gradientList_spacing
-
 			text: modelObject.display || ""
 			secondaryText: modelObject.secondaryText || ""
 			caption: modelObject.caption ?? ""

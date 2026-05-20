@@ -68,8 +68,6 @@ ListNavigation {
 			optionView.section.property: "section"
 			optionView.section.delegate: SettingsListHeader {
 				required property string section
-
-				bottomPadding: Theme.geometry_gradientList_spacing
 				text: section
 			}
 

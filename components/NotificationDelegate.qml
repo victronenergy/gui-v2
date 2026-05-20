@@ -59,7 +59,7 @@ ListItem {
 				right: parent.right
 				verticalCenter: parent.verticalCenter
 			}
-			columnSpacing: Theme.geometry_gradientList_spacing
+			columnSpacing: Theme.geometry_listItem_content_verticalSpacing
 			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 			columns: 2
 

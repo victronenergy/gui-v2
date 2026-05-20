@@ -63,7 +63,6 @@ Page {
 
 		footer: SettingsColumn {
 			width: parent.width
-			topPadding: spacing
 			preferredVisible: relaysMenu.preferredVisible
 					|| gensetMenu.preferredVisible
 					|| tankPumpMenu.preferredVisible

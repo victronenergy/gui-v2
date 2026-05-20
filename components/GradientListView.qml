@@ -10,7 +10,6 @@ BaseListView {
 	id: root
 
 	bottomMargin: Theme.geometry_gradientList_bottomMargin
-	spacing: Theme.geometry_gradientList_spacing
 
 	ScrollBar.vertical: ScrollBar {
 		topPadding: Theme.geometry_gradientList_topMargin
