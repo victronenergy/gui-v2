@@ -26,7 +26,7 @@ ControlCard {
 		  //% "Inverter / Charger (%1)"
 		: qsTrId("controlcard_inverter_charger").arg(name)
 
-	status.text: Global.system.systemStateToText(stateItem.value)
+	status.text: VenusOS.system_stateToText(stateItem.value)
 
 	VeQuickItem {
 		id: stateItem

@@ -18,7 +18,7 @@ Page {
 		}
 		delegate: ListNavigation {
 			text: model.device.name
-			secondaryText: Global.system.systemStateToText(stateItem.value)
+			secondaryText: VenusOS.system_stateToText(stateItem.value)
 
 			onClicked: {
 				// Show page for chargers

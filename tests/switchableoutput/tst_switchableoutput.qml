@@ -643,7 +643,7 @@ TestCase {
 					"Settings/Type": VenusOS.SwitchableOutput_Type_Toggle,
 					"Status": VenusOS.SwitchableOutput_Status_Off
 				},
-				expected: qsTrId("switchable_output_off")
+				expected: qsTrId("status_text_off")
 			},
 			{
 				tag: "toggle, on",

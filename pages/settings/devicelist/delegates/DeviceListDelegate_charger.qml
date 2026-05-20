@@ -21,7 +21,7 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: state
 
-		readonly property string textValue: Global.system.systemStateToText(value)
+		readonly property string textValue: VenusOS.system_stateToText(value)
 
 		uid: root.device.serviceUid + "/State"
 	}

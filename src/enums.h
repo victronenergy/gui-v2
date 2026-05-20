@@ -1037,6 +1037,9 @@ public:
 	};
 	Q_ENUM(ElectricalQuantity_Source)
 
+	Q_INVOKABLE QString statusText_off() const;
+	Q_INVOKABLE QString statusText_unknown() const;
+
 	Q_INVOKABLE QString battery_modeToText(Battery_Mode mode) const;
 	Q_INVOKABLE Battery_Mode battery_modeFromPower(qreal power) const;
 	Q_INVOKABLE QString battery_iconFromMode(Battery_Mode mode) const;
@@ -1065,6 +1068,8 @@ public:
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const;
 	Q_INVOKABLE QString microgrid_errorToText(MicrogridError error) const;
+
+	Q_INVOKABLE QString system_stateToText(System_State state) const;
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 

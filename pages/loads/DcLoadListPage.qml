@@ -120,7 +120,7 @@ Page {
 			// Status depends on the service:
 			// - dcdc: /State
 			statusText: !statusItem.valid ? ""
-				: device.serviceType === "dcdc" ? Global.system.systemStateToText(statusItem.value)
+				: device.serviceType === "dcdc" ? VenusOS.system_stateToText(statusItem.value)
 				: ""
 
 			onClicked: root._showSettingsPage(device)

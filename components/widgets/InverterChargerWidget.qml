@@ -53,7 +53,7 @@ OverviewWidget {
 			}
 
 			Label {
-				text: Global.system.systemStateToText(Global.system.state)
+				text: VenusOS.system_stateToText(Global.system.state)
 				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 				fontSizeMode: Text.Fit

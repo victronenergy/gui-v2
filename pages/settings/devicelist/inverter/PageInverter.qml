@@ -25,7 +25,7 @@ DevicePage {
 
 		ListText {
 			text: CommonWords.state
-			secondaryText: Global.system.systemStateToText(dataItem.value)
+			secondaryText: VenusOS.system_stateToText(dataItem.value)
 			dataItem.uid: root.bindPrefix + "/State"
 		}
 
