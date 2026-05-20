@@ -392,6 +392,21 @@ QString Enums::digitalInput_stateToText(DigitalInput_State state) const
 	}
 }
 
+QString Enums::inverter_stateToText(System_State state) const
+{
+	// For inverter services (vedirect inverters & Inverter RS), a subset of the generic system
+	// state enum values is supported.
+	switch (state) {
+	case System_State_Off:
+	case System_State_LowPower:
+	case System_State_FaultCondition:
+	case System_State_Inverting:
+		return system_stateToText(state);
+	default:
+		return QString();
+	}
+}
+
 QString Enums::pvInverter_statusCodeToText(PvInverter_StatusCode statusCode) const
 {
 	switch (statusCode) {
