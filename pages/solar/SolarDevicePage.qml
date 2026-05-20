@@ -67,7 +67,9 @@ Page {
 						}
 					]
 
-					bodyHeaderText: VenusOS.solarCharger_stateToText(stateItem.value)
+					bodyHeaderText: solarDevice.serviceType === "inverter"
+							? VenusOS.inverter_stateToText(stateItem.value)
+							: VenusOS.solarCharger_stateToText(stateItem.value)
 					bodyModel: QuantityObjectModel {
 						QuantityObject { object: overallYieldToday; unit: VenusOS.Units_Energy_KiloWattHour }
 						QuantityObject { object: root.singleTracker; key: "voltage"; unit: VenusOS.Units_Volt_DC; hidden: !root.singleTracker }
