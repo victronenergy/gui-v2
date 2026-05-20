@@ -53,7 +53,7 @@ Page {
 			readonly property VeQuickItem _state: VeQuickItem { uid: device.serviceUid + "/State" }
 
 			text: device.name
-			secondaryText: Global.system.systemStateToText(_state.value)
+			secondaryText: VenusOS.system_stateToText(_state.value)
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageMultiRs.qml",

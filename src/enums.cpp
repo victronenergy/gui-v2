@@ -18,6 +18,19 @@ Enums::~Enums()
 {
 }
 
+QString Enums::statusText_off() const
+{
+	//: An "off" state
+	//% "Off"
+	return qtTrId("status_text_off");
+}
+
+QString Enums::statusText_unknown() const
+{
+	//% "Unknown status"
+	return qtTrId("status_text_unknown");
+}
+
 QString Enums::battery_modeToText(Battery_Mode mode) const
 {
 	switch (mode) {
@@ -337,9 +350,7 @@ QString Enums::digitalInput_stateToText(DigitalInput_State state) const
 		//% "High"
 		return qtTrId("digitalinputs_state_high");
 	case DigitalInput_State_Off:
-		//: Digital input state
-		//% "Off"
-		return qtTrId("digitalinputs_state_off");
+		return statusText_off();
 	case DigitalInput_State_On:
 		//: Digital input state
 		//% "On"
@@ -427,8 +438,7 @@ QString Enums::solarCharger_stateToText(SolarCharger_State state) const
 {
 	switch (state) {
 	case SolarCharger_State_Off:
-		//% "Off"
-		return qtTrId("solarchargers_state_off");
+		return statusText_off();
 	case SolarCharger_State_Fault:
 		//% "Fault"
 		return qtTrId("solarchargers_state_fault");
@@ -514,8 +524,7 @@ QString Enums::genericInput_statusToText(GenericInput_Status value) const
 		return qtTrId("generic_input_status_sensor_battery_low");
 	}
 
-	//% "Unknown status"
-	return qtTrId("generic_input_unknown_status");
+	return statusText_unknown();
 }
 
 QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId) const
@@ -644,8 +653,7 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 
 	switch (maskedValue) {
 	case SwitchableOutput_Status_Off:
-		//% "Off"
-		return qtTrId("switchable_output_off");
+		return statusText_off();
 	case SwitchableOutput_Status_Powered:
 		//% "Powered"
 		return qtTrId("switchable_output_powered");
@@ -704,8 +712,94 @@ QString Enums::switchableOutput_statusToText(SwitchableOutput_Status value, Swit
 		break;
 	}
 
-	//% "Unknown status"
-	return qtTrId("switchable_output_unknown_status");
+	return statusText_unknown();
+}
+
+QString Enums::system_stateToText(System_State state) const
+{
+	switch (state) {
+	case System_State_Off:
+		return statusText_off();
+	case System_State_LowPower:
+		//% "AES mode"
+		return qtTrId("system_state_aes_mode");
+	case System_State_FaultCondition:
+		//% "Fault condition"
+		return qtTrId("system_state_faultcondition");
+	case System_State_BulkCharging:
+		//% "Bulk charging"
+		return qtTrId("system_state_bulkcharging");
+	case System_State_AbsorptionCharging:
+		//% "Absorption charging"
+		return qtTrId("system_state_absorptioncharging");
+	case System_State_FloatCharging:
+		//% "Float charging"
+		return qtTrId("system_state_floatcharging");
+	case System_State_StorageMode:
+		//% "Storage mode"
+		return qtTrId("system_state_storagemode");
+	case System_State_EqualizationCharging:
+		//% "Equalization charging"
+		return qtTrId("system_state_equalisationcharging");
+	case System_State_PassThrough:
+		//% "Pass-thru"
+		return qtTrId("system_state_passthru");
+	case System_State_Inverting:
+		//% "Inverting"
+		return qtTrId("system_state_inverting");
+	case System_State_Assisting:
+		//% "Assisting"
+		return qtTrId("system_state_assisting");
+	case System_State_PowerSupplyMode:
+		//% "Power supply mode"
+		return qtTrId("system_state_powersupplymode");
+	case System_State_Sustain:
+		//% "Sustain"
+		return qtTrId("system_state_sustain");
+
+	case System_State_Wakeup:
+		//% "Wake up"
+		return qtTrId("system_state_wakeup");
+	case System_State_RepeatedAbsorption:
+		//% "Repeated absorption"
+		return qtTrId("system_state_repeatedabsorption");
+	case System_State_AutoEqualize:
+		//% "Auto equalize"
+		return qtTrId("system_state_autoequalize");
+	case System_State_BatterySafe:
+		//% "Battery safe"
+		return qtTrId("system_state_battery_safe");
+	case System_State_LoadDetect:
+		//% "Load detect"
+		return qtTrId("system_state_loaddetect");
+	case System_State_Blocked:
+		//% "Blocked"
+		return qtTrId("system_state_blocked");
+	case System_State_Test:
+		//% "Test"
+		return qtTrId("system_state_test");
+	case System_State_ExternalControl:
+		//% "External control"
+		return qtTrId("system_state_externalccontrol");
+
+	case System_State_Discharging:
+		//% "Discharging"
+		return qtTrId("system_state_discharging");
+	case System_State_SystemSustain:
+		//% "Sustain"
+		return qtTrId("system_state_system_sustain");
+	case System_State_Recharge:
+		//% "Recharge"
+		return qtTrId("system_state_recharge");
+	case System_State_ScheduledCharge:
+		//% "Scheduled"
+		return qtTrId("system_state_scheduledcharge");
+	case System_State_DynamicESS:
+		//% "Dynamic ESS"
+		return qtTrId("system_state_dynamic_ess");
+	default:
+		return statusText_unknown();
+	}
 }
 
 QString Enums::tank_fluidTypeToText(Tank_Type type) const

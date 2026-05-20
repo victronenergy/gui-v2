@@ -25,7 +25,7 @@ DevicePage {
 
 		ListText {
 			text: CommonWords.state
-			secondaryText: Global.system.systemStateToText(state.value)
+			secondaryText: VenusOS.system_stateToText(state.value)
 		}
 
 		PrimaryListLabel {
