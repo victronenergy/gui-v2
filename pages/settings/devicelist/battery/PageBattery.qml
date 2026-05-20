@@ -481,7 +481,8 @@ DevicePage {
 		id: moduleAlarmModel
 
 		filterRegExp: "\/Module[0-9]\/Id$"
-		filterFlags: VeQItemSortTableModel.FilterInvalid
+		filterFlags: VeQItemSortTableModel.FilterExcludesValue
+		filterExcludedValue: ""
 		model: VeQItemTableModel {
 			uids: [root.bindPrefix + "/Diagnostics"]
 		}

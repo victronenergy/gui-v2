@@ -40,7 +40,7 @@
         "/Diagnostics/Module0/Alarms/LowChargeTemperature": null,
         "/Diagnostics/Module0/Alarms/LowTemperature": null,
         "/Diagnostics/Module0/Alarms/LowVoltage": null,
-        "/Diagnostics/Module0/Id": null,
+        "/Diagnostics/Module0/Id": "",
         "/Diagnostics/Module1/Alarms/CellImbalance": null,
         "/Diagnostics/Module1/Alarms/HighCellVoltage": null,
         "/Diagnostics/Module1/Alarms/HighChargeCurrent": null,
