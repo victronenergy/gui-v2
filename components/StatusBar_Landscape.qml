@@ -278,6 +278,29 @@ FocusScope {
 		onClicked: NotificationModel.acknowledgeAll()
 	}
 
+	StatusBarButton {
+		id: levelingButton
+
+		anchors {
+			left: auxButton.right
+			leftMargin: -Theme.geometry_statusBar_spacing
+		}
+		leftInset: auxButton.visible ? 0 : Theme.geometry_statusBar_spacing
+		rightInset: Theme.geometry_statusBar_spacing
+		bottomInset: Theme.geometry_statusBar_spacing
+
+		visible: !root.pageStack.opened && (Global.leveling?.available ?? false)
+		icon.source: "qrc:/images/icon_leveling.svg"
+		KeyNavigation.right: breadcrumbs
+
+		onClicked: Global.dialogLayer.open(levelingDialogComponent)
+
+		Component {
+			id: levelingDialogComponent
+			LevelingDialog {}
+		}
+	}
+
 	Row {
 		id: rightButtonRow
 

@@ -42,6 +42,7 @@ QtObject {
 	property var systemSettings
 	property var tanks
 
+	property var leveling
 	property var venusPlatform
 	property bool splashScreenVisible: true
 	property bool dataManagerLoaded

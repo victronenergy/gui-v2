@@ -190,6 +190,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/dialogs/GeneratorDisableAutoStartDialog.qml
     components/dialogs/InverterChargerModeDialog.qml
     components/dialogs/InverterChargerEssModeDialog.qml
+    components/dialogs/LevelingDialog.qml
     components/dialogs/ModalDialog.qml
     components/dialogs/ModalRebootingDialog.qml
     components/dialogs/ModalWarningDialog.qml
@@ -319,6 +320,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/EvChargers.qml
     data/Generators.qml
     data/InverterChargers.qml
+    data/Leveling.qml
     data/Notifications.qml
     data/SolarInputs.qml
     data/StartPageConfiguration.qml
@@ -845,6 +847,20 @@ set(VictronVenusOS_RESOURCES
     images/icon_plus.svg
     images/icon_plus_32.svg
     images/icon_refresh_32.svg
+    images/icon_leveling.svg
+    images/icon_leveling_calibrate.svg
+    images/icon_leveling_ok.svg
+    images/icon_leveling_ok_light.svg
+    images/icon_leveling_pitch_level.svg
+    images/icon_leveling_pitch_level_light.svg
+    images/icon_leveling_pitch_tilted.svg
+    images/icon_leveling_pitch_tilted_light.svg
+    images/icon_leveling_roll_level.svg
+    images/icon_leveling_roll_level_light.svg
+    images/icon_leveling_roll_tilted.svg
+    images/icon_leveling_roll_tilted_light.svg
+    images/icon_leveling_warning.svg
+    images/icon_leveling_warning_light.svg
     images/icon_sidepanel_off_32.svg
     images/icon_sidepanel_on_32.svg
     images/icon_screen_sleep_32.svg

@@ -41,6 +41,7 @@ Item {
 	// Global data types
 	AcInputs {}
 	DcInputs {}
+	Leveling {}
 	EnvironmentInputs {}
 	EvChargers {}
 	Generators {}

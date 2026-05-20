@@ -124,7 +124,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 			// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
 			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_horizontalMargin
+			rightInset: levelingButton.visible ? Theme.geometry_statusBar_spacing / 2 : Theme.geometry_statusBar_horizontalMargin
 			bottomInset: Theme.geometry_statusBar_spacing
 
 			visible: ((!root.pageStack.opened && Global.switches.groups.count > 0)
@@ -142,6 +142,26 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 				} else {
 					root.auxCardsActivated()
 				}
+			}
+		}
+
+		StatusBarButton {
+			id: levelingButton
+
+			leftInset: Theme.geometry_statusBar_spacing / 2
+			rightInset: Theme.geometry_statusBar_horizontalMargin
+			bottomInset: Theme.geometry_statusBar_spacing
+
+			visible: !root.pageStack.opened && (Global.leveling?.available ?? false)
+			icon.source: "qrc:/images/icon_leveling.svg"
+
+			Layout.alignment: Qt.AlignTop
+
+			onClicked: Global.dialogLayer.open(levelingDialogComponent)
+
+			Component {
+				id: levelingDialogComponent
+				LevelingDialog {}
 			}
 		}
 	}
