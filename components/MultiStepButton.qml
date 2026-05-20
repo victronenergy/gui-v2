@@ -82,7 +82,6 @@ BaseListView {
 			backgroundColor: !root.enabled ? (checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
 					: checked ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
 					: Theme.color_darkOk
-			enabled: root.checked
 			checked: index === root.currentIndex
 			focus: true
 
