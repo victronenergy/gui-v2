@@ -213,7 +213,6 @@ Page {
 		}
 
 		footer: SettingsColumn {
-			topPadding: Theme.geometry_gradientList_spacing
 			width: parent.width
 
 			ListRadioButtonGroup {
@@ -251,7 +250,6 @@ Page {
 			optionView.section.delegate: SettingsListHeader {
 				required property string section
 
-				bottomPadding: Theme.geometry_gradientList_spacing
 				text: section
 			}
 

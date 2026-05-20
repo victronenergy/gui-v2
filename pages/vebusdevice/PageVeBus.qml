@@ -270,7 +270,6 @@ DevicePage {
 
 	extraDeviceInfo: SettingsColumn {
 		width: parent?.width ?? 0
-		topPadding: spacing
 		preferredVisible: deviceInfoModel.count > 0
 
 		Repeater {

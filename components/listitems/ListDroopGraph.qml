@@ -38,13 +38,13 @@ ListItem {
 		verticalAlignment: Text.AlignVCenter
 	}
 
-	leftPadding: Theme.geometry_page_content_horizontalMargin
-	rightPadding: Theme.geometry_page_content_horizontalMargin
-	topPadding: 0
-	bottomPadding: 0
+	leftPadding: leftInset
+	rightPadding: rightInset
+	topPadding: topInset
+	bottomPadding: bottomInset
 
 	contentItem: Flow {
-		readonly property real graphWidth: (Theme.screenSize === Theme.Portrait ? width : (width/2 - spacing))
+		readonly property real graphWidth: (Theme.screenSize === Theme.Portrait ? width : (width - spacing) / 2)
 
 		spacing: Theme.geometry_droopGraph_container_spacing
 

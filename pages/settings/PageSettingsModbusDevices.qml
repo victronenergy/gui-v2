@@ -19,7 +19,6 @@ Page {
 	GradientListView {
 		header: SettingsColumn {
 			width: parent?.width ?? 0
-			bottomPadding: addDevice.visible ? spacing : 0
 
 			ListNavigation {
 				id: addDevice

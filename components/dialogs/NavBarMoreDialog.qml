@@ -28,7 +28,7 @@ ModalDialog {
 	exit: null
 
 	contentItem: ColumnLayout {
-		spacing: Theme.geometry_gradientList_spacing
+		spacing: 0
 
 		Repeater {
 			id: moreButtonsRepeater

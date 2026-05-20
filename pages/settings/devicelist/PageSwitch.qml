@@ -27,7 +27,6 @@ DevicePage {
 
 	settingsHeader: SettingsColumn {
 		width: parent?.width ?? 0
-		bottomPadding: spacing
 
 		ListText {
 			//% "Module state"

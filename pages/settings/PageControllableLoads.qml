@@ -21,7 +21,6 @@ Page {
 
 		header: SettingsColumn {
 			width: parent?.width ?? 0
-			bottomPadding: spacing
 
 			ListSwitch {
 				dataItem.uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"

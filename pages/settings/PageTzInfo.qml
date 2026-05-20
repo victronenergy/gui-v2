@@ -148,7 +148,6 @@ Page {
 
 							header: SettingsColumn {
 								width: parent.width
-								bottomPadding: Theme.geometry_gradientList_spacing
 
 								ListSwitch {
 									text: CommonWords.locale_utc

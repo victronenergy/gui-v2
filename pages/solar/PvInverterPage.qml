@@ -22,7 +22,6 @@ Page {
 		header: ListItem {
 			id: tableListItem
 
-			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset
@@ -53,10 +52,7 @@ Page {
 				QuantityTable {
 					id: phaseTable
 
-					anchors {
-						top: phaseSummary.bottom
-						topMargin: Theme.geometry_gradientList_spacing
-					}
+					anchors.top: phaseSummary.bottom
 					width: parent.width
 					visible: pvInverter.phases.count > 1
 					metricsFontSize: phaseSummary.metricsFontSize

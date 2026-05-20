@@ -28,7 +28,6 @@ Page {
 		ListItem {
 			id: tableListItem
 
-			bottomInset: Theme.geometry_gradientList_spacing
 			topPadding: 0
 			bottomPadding: bottomInset
 			leftPadding: leftInset

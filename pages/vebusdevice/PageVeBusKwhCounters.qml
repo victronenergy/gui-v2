@@ -15,7 +15,6 @@ Page {
 	GradientListView {
 		header: SettingsColumn {
 			width: parent?.width ?? 0
-			bottomPadding: spacing
 
 			ListText {
 				//% "VE.Bus Quirks"

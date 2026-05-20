@@ -283,8 +283,8 @@ Page {
 			ListItem {
 				id: toastItem
 
-				topPadding: 0
-				bottomPadding: 0
+				topPadding: topInset
+				bottomPadding: bottomInset
 				contentItem: RowLayout {
 					spacing: toastItem.spacing
 
@@ -431,7 +431,6 @@ Page {
 			GradientListView {
 				header: SettingsColumn {
 					width: parent ? parent.width : 0
-					bottomPadding: spacing
 
 					Repeater {
 						model: 5
@@ -448,7 +447,6 @@ Page {
 
 				footer: SettingsColumn {
 					width: parent ? parent.width : 0
-					topPadding: spacing
 
 					ListItem {
 						contentItem: Rectangle {

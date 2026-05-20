@@ -48,6 +48,7 @@ BaseListView {
 		implicitHeight: Theme.geometry_settings_breadcrumb_height
 		leftInset: leftEdgeIcon.width
 		rightInset: rightEdgeIcon.width
+		bottomInset: 0
 		leftPadding: Theme.geometry_settings_breadcrumb_horizontalMargin + leftEdgeIcon.width
 		rightPadding: Theme.geometry_settings_breadcrumb_horizontalMargin + rightEdgeIcon.width
 

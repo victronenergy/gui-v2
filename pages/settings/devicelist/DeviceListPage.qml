@@ -66,7 +66,6 @@ Page {
 
 		footer: SettingsColumn {
 			width: parent.width
-			topPadding: spacing
 			preferredVisible: relaysMenu.preferredVisible
 					|| multipleDcGensetsAvailable.preferredVisible
 					|| gensetMenu.preferredVisible

@@ -55,7 +55,6 @@ Page {
 
 		footer: SettingsColumn {
 			width: parent?.width ?? 0
-			topPadding: ListView.view.count > 0 ? spacing : 0
 
 			ListNavigation {
 				//: Settings page for switchable outputs
