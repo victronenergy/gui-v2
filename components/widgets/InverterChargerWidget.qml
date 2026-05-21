@@ -53,7 +53,9 @@ OverviewWidget {
 			}
 
 			Label {
-				text: VenusOS.system_stateToText(Global.system.state)
+				text: systemState.valid ? VenusOS.system_stateToText(systemState.value)
+					: systemVeBusState.valid ? VenusOS.system_stateToText(systemVeBusState.value)
+					: ""
 				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
 				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
 				fontSizeMode: Text.Fit
@@ -63,6 +65,16 @@ OverviewWidget {
 
 				Layout.fillWidth: true
 				Layout.fillHeight: true // push reason text to bottom of layout
+
+				VeQuickItem {
+					id: systemState
+					uid: Global.system.serviceUid + "/SystemState/State"
+				}
+
+				VeQuickItem {
+					id: systemVeBusState
+					uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/SystemState/State" : ""
+				}
 			}
 
 			Label {

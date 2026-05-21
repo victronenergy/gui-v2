@@ -10,7 +10,6 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
-	readonly property int state: _systemState.valid ? _systemState.value : VenusOS.System_State_Off
 
 	readonly property bool hasGridMeter: _gridDeviceType.valid
 	readonly property bool hasAcOutSystem: _hasAcOutSystem.valid && _hasAcOutSystem.value === 1
@@ -89,10 +88,6 @@ QtObject {
 
 		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
 		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }
-	}
-
-	readonly property VeQuickItem _systemState: VeQuickItem {
-		uid: root.serviceUid + "/SystemState/State"
 	}
 
 	readonly property VeQuickItem _systemType: VeQuickItem {
