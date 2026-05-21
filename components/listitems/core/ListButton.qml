@@ -49,7 +49,6 @@ ListSetting {
 			captionText: root.caption
 
 			secondaryComponent: ListItemButton {
-				width: Math.min(implicitWidth, (Theme.screenSize === Theme.Portrait ? contentLayout.width : contentLayout.width / 2))
 				text: root.secondaryText
 				font.pixelSize: root.secondaryFontSize
 				down: root.clickable && (pressed || checked)
