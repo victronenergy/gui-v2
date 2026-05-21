@@ -45,9 +45,9 @@ UiTestCase {
 				baseImageName: "overview_generator",
 			},
 			{
-				tag: "Solar yield",
-				widgetValues: { title: "Solar yield" },
-				baseImageName: "overview_solar_yield",
+				tag: "Solar",
+				widgetValues: { title: "Solar" },
+				baseImageName: "overview_solar",
 			},
 			{
 				tag: "Alternator",
@@ -132,7 +132,7 @@ UiTestCase {
 	function test_solar_history() {
 		// Open the "History" page of a solar tracker with history details.
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(
-				findItem(Global.mainView.currentPage, { title: "Solar yield" }))) } })
+				findItem(Global.mainView.currentPage, { title: "Solar" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
 		addStep(UiTestStep.Invoke, { callable: ()=> {
 			// Click list item named "MPPT - multi-tracker-Tracker 1"
