@@ -10,23 +10,20 @@ import Victron.VenusOS
 /*
 	Displays primary and caption labels, and a secondary item.
 
-	In landscape, the primary text and caption are on the left, and the secondary item vertically
-	stretched on the right:
-
-	| Primary label   | Secondary |
-	| Caption         |   item   |
-
-	In portrait, if the primary text and secondary item fit together on a single line, the caption
-	is stretched below:
+	Normally the primary text and caption are on the left, and the secondary item on the right:
 
 	| Primary label   | Secondary item |
 	| Caption                          |
 
-	Otherwise, a column layout is used instead:
+	If the primary text and secondary item do not fit on a single line, the primary text width is
+	reduced (with wrapping) down to a minimum width. After a certain point when the primary text
+	cannot be reduced any further, the item is placed on a new line instead:
 
 	| Primary label   |
 	| Secondary label |
 	| Caption         |
+
+	Note: the item width is limited to that of the layout, so that it does not spill over the edge.
 */
 GridLayout {
 	id: root
@@ -39,10 +36,8 @@ GridLayout {
 	property alias primaryLabel: primaryLabel
 	property alias captionLabel: captionLabel
 
-	readonly property bool _useStretchedCaptionLayout: Theme.screenSize === Theme.Portrait && !_needsWrap
-	readonly property bool _useColumnLayout: Theme.screenSize === Theme.Portrait && _needsWrap
-	readonly property bool _needsWrap: Math.ceil(primaryLabel.implicitWidth)
-			+ Math.ceil(secondaryItemLoader.implicitWidth) >= width - Theme.geometry_listItem_content_spacing
+	readonly property bool _useStretchedCaptionLayout: Theme.screenSize === Theme.Portrait && !_useColumnLayout
+	readonly property bool _useColumnLayout: Theme.geometry_listItem_primaryText_minimumWidth + Theme.geometry_listItem_content_spacing + secondaryItemLoader.implicitWidth > width
 
 	columns: _useColumnLayout ? 1 : 2
 	columnSpacing: Theme.geometry_listItem_content_spacing
@@ -55,9 +50,10 @@ GridLayout {
 		wrapMode: Text.WordWrap
 		verticalAlignment: Text.AlignVCenter
 
-		Layout.fillWidth: true
 		Layout.fillHeight: true
-		Layout.preferredWidth: root._useColumnLayout ? -1 : Math.min(implicitWidth, parent.width / 2)
+		Layout.fillWidth: true
+		Layout.minimumWidth: Theme.geometry_listItem_primaryText_minimumWidth
+		Layout.maximumWidth: root.width
 	}
 
 	Loader {
@@ -67,7 +63,7 @@ GridLayout {
 
 		Layout.alignment: root._useColumnLayout ? Qt.AlignLeft : Qt.AlignRight
 		Layout.rowSpan: captionLabel.text.length > 0 && (!root._useColumnLayout && !root._useStretchedCaptionLayout) ? 2 : 1
-		Layout.maximumWidth: root._useColumnLayout ? root.width : root.width / 2
+		Layout.preferredWidth: root._useColumnLayout ? Math.min(implicitWidth, parent.width) : implicitWidth
 		Layout.topMargin: root._useColumnLayout ? Theme.geometry_listItem_content_verticalSpacing : 0
 	}
 

@@ -26,9 +26,8 @@ Flow {
 	property alias tableMode: quantityRow.tableMode
 	property bool forceColumnLayout
 
-	readonly property real _primaryLabelMinimumWidth: Theme.geometry_screen_width / 4.5
 	readonly property bool _useColumnLayout: forceColumnLayout
-			|| (_primaryLabelMinimumWidth + quantityRow.implicitWidth > width)
+			|| (Theme.geometry_listItem_primaryText_minimumWidth + quantityRow.implicitWidth > width)
 
 	Label {
 		id: primaryLabel
