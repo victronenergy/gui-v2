@@ -82,64 +82,29 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-
-			ListText {
-				//% "Date/Time UTC"
-				text: qsTrId("settings_tz_date_time_utc")
-				secondaryText: ClockTime.currentDateTimeUtc
+			SettingsListHeader {
+				//: Local date and time settings
+				//% "Local"
+				text: qsTrId("settings_tz_local")
 			}
 
-			ListSetting {
-				id: timeZoneButton
-				// Qt for WebAssembly doesn't support timezones,
-				// so we can't display the device-local date/time,
-				// as we don't know what it is.  Just hide the setting.
+			// Qt for WebAssembly doesn't support timezones, so we can't display the device-local
+			// date/time there, as we don't know what they are.
+			ListButton {
+				text: CommonWords.locale_date
+				secondaryText: ClockTime.currentDate
 				preferredVisible: Qt.platform.os != "wasm"
-
 				writeAccessLevel: VenusOS.User_AccessType_User
-				interactive: Global.systemSettings.time.valid
-
-				contentItem: Item {
-					implicitWidth: Theme.geometry_listItem_width
-					implicitHeight: Theme.screenSize === Theme.Portrait ? localTimeZoneLayout.implicitHeight : 0
-
-					GridLayout {
-						id: localTimeZoneLayout
-						anchors {
-							left: parent.left
-							right: parent.right
-							verticalCenter: parent.verticalCenter
-						}
-						columnSpacing: timeZoneButton.spacing
-						rowSpacing: Theme.geometry_listItem_content_verticalSpacing
-						columns: Theme.screenSize === Theme.Portrait ? 2 : 3
-
-						Label {
-							//% "Date/Time local"
-							text: qsTrId("settings_tz_date_time_local")
-							font: timeZoneButton.font
-
-							Layout.fillWidth: true
-							Layout.columnSpan: Theme.screenSize === Theme.Portrait ? 2 : 1
-						}
-
-						ListItemButton {
-							text: ClockTime.currentDate
-							enabled: timeZoneButton.clickable
-							focus: enabled
-							KeyNavigation.right: localTimeButton
-							onClicked: root._openDateSelector()
-						}
-
-						ListItemButton {
-							id: localTimeButton
-							text: ClockTime.currentTime
-							enabled: timeZoneButton.clickable
-							focus: enabled
-							onClicked: root._openTimeSelector()
-						}
-					}
-				}
+				readOnly: !Global.systemSettings.time.valid
+				onClicked: root._openDateSelector()
+			}
+			ListButton {
+				text: CommonWords.locale_time
+				secondaryText: ClockTime.currentTime
+				preferredVisible: Qt.platform.os != "wasm"
+				writeAccessLevel: VenusOS.User_AccessType_User
+				readOnly: !Global.systemSettings.time.valid
+				onClicked: root._openTimeSelector()
 			}
 
 			ListNavigation {
@@ -186,7 +151,7 @@ Page {
 								bottomPadding: Theme.geometry_gradientList_spacing
 
 								ListSwitch {
-									text: "UTC"
+									text: CommonWords.locale_utc
 									writeAccessLevel: VenusOS.User_AccessType_User
 									checked: tzData.city === text
 									onClicked: {
@@ -232,6 +197,20 @@ Page {
 						}
 					}
 				}
+			}
+
+			SettingsListHeader {
+				text: CommonWords.locale_utc
+			}
+
+			ListText {
+				text: CommonWords.locale_date
+				secondaryText: ClockTime.currentDateToUtc
+			}
+
+			ListText {
+				text: CommonWords.locale_time
+				secondaryText: ClockTime.currentTimeToUtc
 			}
 		}
 	}

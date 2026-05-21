@@ -43,10 +43,15 @@ void ClockTime::setDateTime(const QDateTime &dt)
 		if (old.time().msec() != dt.time().msec()) emit msecChanged();
 		if (old.date().year() != dt.date().year()
 				|| old.date().month() != dt.date().month()
-				|| old.date().day() != dt.date().day()) emit currentDateChanged();
+				|| old.date().day() != dt.date().day()) {
+			emit currentDateChanged();
+			emit currentDateToUtcChanged();
+		}
 		if (old.time().hour() != dt.time().hour()
-				|| old.time().minute() != dt.time().minute()) emit currentTimeChanged();
-		emit currentDateTimeUtcChanged();
+				|| old.time().minute() != dt.time().minute()) {
+			emit currentTimeChanged();
+			emit currentTimeToUtcChanged();
+		}
 	}
 }
 
@@ -127,9 +132,14 @@ QString ClockTime::currentTime() const
 	return m_dateTime.toString("hh:mm");
 }
 
-QString ClockTime::currentDateTimeUtc() const
+QString ClockTime::currentDateToUtc() const
 {
-	return m_dateTime.toUTC().toString("yyyy-MM-dd hh:mm");
+	return m_dateTime.toUTC().toString("yyyy-MM-dd");
+}
+
+QString ClockTime::currentTimeToUtc() const
+{
+	return m_dateTime.toUTC().toString("hh:mm");
 }
 
 void ClockTime::setUpdatesActive(bool active)
