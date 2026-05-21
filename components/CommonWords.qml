@@ -496,6 +496,9 @@ QtObject {
 	//% "SOC %1"
 	readonly property string soc_with_prefix: qsTrId("common_words_soc")
 
+	//% "Solar"
+	readonly property string solar: qsTrId("common_words_solar")
+
 	//: A speed measurement value
 	//% "Speed"
 	readonly property string speed: qsTrId("common_words_speed")

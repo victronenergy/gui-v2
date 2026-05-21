@@ -165,8 +165,7 @@ Page {
 			}
 
 			SettingsListHeader {
-				//% "Solar"
-				text: qsTrId("settings_minmax_solar")
+				text: CommonWords.solar
 			}
 
 			ListQuantityField {

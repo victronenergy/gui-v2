@@ -27,8 +27,7 @@ OverviewWidget {
 		}
 	}
 
-	//% "Solar yield"
-	title: qsTrId("overview_widget_solaryield_title")
+	title: CommonWords.solar
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true
 	preferredSize: _showPhases || _showGraph
