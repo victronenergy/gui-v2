@@ -50,7 +50,8 @@ class ClockTime : public QObject
 
 	Q_PROPERTY(QString currentDate READ currentDate NOTIFY currentDateChanged FINAL)
 	Q_PROPERTY(QString currentTime READ currentTime NOTIFY currentTimeChanged FINAL)
-	Q_PROPERTY(QString currentDateTimeUtc READ currentDateTimeUtc NOTIFY currentDateTimeUtcChanged FINAL)
+	Q_PROPERTY(QString currentDateToUtc READ currentDateToUtc NOTIFY currentDateToUtcChanged FINAL)
+	Q_PROPERTY(QString currentTimeToUtc READ currentTimeToUtc NOTIFY currentTimeToUtcChanged FINAL)
 
 public:
 	static ClockTime* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
@@ -74,7 +75,11 @@ public:
 
 	QString currentDate() const;
 	QString currentTime() const;
-	QString currentDateTimeUtc() const;
+
+	// The currently-set clock time, in UTC. This may not match the actual current UTC date/time,
+	// depending on the clock time that has been set.
+	QString currentDateToUtc() const;
+	QString currentTimeToUtc() const;
 
 	void setUpdatesActive(bool active);
 
@@ -97,7 +102,8 @@ Q_SIGNALS:
 	void systemTimeZoneChanged();
 	void currentDateChanged();
 	void currentTimeChanged();
-	void currentDateTimeUtcChanged();
+	void currentDateToUtcChanged();
+	void currentTimeToUtcChanged();
 
 protected:
 	void timerEvent(QTimerEvent *) override;

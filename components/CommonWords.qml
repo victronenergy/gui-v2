@@ -289,6 +289,18 @@ QtObject {
 	//% "IP address"
 	readonly property string ip_address: qsTrId("common_words_ip_address")
 
+	//: The date setting for the locale
+	//% "Date"
+	readonly property string locale_date: qsTrId("common_words_locale_date")
+
+	//: The time setting for the locale
+	//% "Time"
+	readonly property string locale_time: qsTrId("common_words_locale_time")
+
+	//: UTC date/time
+	//% "UTC"
+	readonly property string locale_utc: qsTrId("common_words_locale_utc")
+
 	//% "Low battery temperature"
 	readonly property string low_battery_temperature: qsTrId("common_words_low_battery_temperature")
 
