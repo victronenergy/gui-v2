@@ -40,6 +40,18 @@ int SolarInputModel::count() const
 	return m_enabledInputs.count();
 }
 
+int SolarInputModel::trackerIndex(int row) const
+{
+	if (row < 0 || row >= m_enabledInputs.count()) {
+		return -1;
+	}
+	if (TrackerSolarInput *input = qobject_cast<TrackerSolarInput *>(m_enabledInputs.at(row))) {
+		return input->trackerIndex();
+	} else {
+		return -1;
+	}
+}
+
 QVariant SolarInputModel::data(const QModelIndex &index, int role) const
 {
 	const int row = index.row();
@@ -296,17 +308,35 @@ SortedSolarInputModel::SortedSolarInputModel(QObject *parent)
 
 bool SortedSolarInputModel::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const
 {
-	const QString leftGroup = sourceModel()->data(
-			sourceModel()->index(sourceLeft.row(), sourceLeft.column()), SolarInputModel::GroupRole).toString();
-	const QString rightGroup = sourceModel()->data(
-			sourceModel()->index(sourceRight.row(), sourceRight.column()), SolarInputModel::GroupRole).toString();
+	// Sort by:
+	// 1. Group: show "generic" first, then "pvinverters"
+	// 2. Device name
+	// 3. Tracker number (if the input is a tracker)
+
+	const QModelIndex leftIndex = sourceModel()->index(sourceLeft.row(), sourceLeft.column());
+	const QModelIndex rightIndex = sourceModel()->index(sourceRight.row(), sourceRight.column());
+
+	const QString leftGroup = sourceModel()->data(leftIndex, SolarInputModel::GroupRole).toString();
+	const QString rightGroup = sourceModel()->data(rightIndex, SolarInputModel::GroupRole).toString();
 
 	if (leftGroup == rightGroup) {
-		const QString leftName = sourceModel()->data(
-				sourceModel()->index(sourceLeft.row(), sourceLeft.column()), SolarInputModel::NameRole).toString();
-		const QString rightName = sourceModel()->data(
-				sourceModel()->index(sourceRight.row(), sourceRight.column()), SolarInputModel::NameRole).toString();
-		return leftName.localeAwareCompare(rightName) < 0;
+		if (sourceModel()->data(leftIndex, SolarInputModel::ServiceUidRole) == sourceModel()->data(leftIndex, SolarInputModel::ServiceUidRole)) {
+			// If the two inputs belong to the same service, then these must be both trackers from
+			// the same device, so sort them by tracker index.
+
+			if (SolarInputModel *inputModel = qobject_cast<SolarInputModel *>(sourceModel())) {
+				// Note: this check is only used for PV chargers, as PV inverters do not have any
+				// individual trackers, so for them the trackerIndex is always -1.
+				const int leftTrackerIndex = inputModel->trackerIndex(leftIndex.row());
+				const int rightTrackerIndex = inputModel->trackerIndex(rightIndex.row());
+				if (leftTrackerIndex >= 0 && rightTrackerIndex >= 0) {
+					return leftTrackerIndex < rightTrackerIndex;
+				}
+			}
+		}
+		// Sort by name.
+		return sourceModel()->data(leftIndex, SolarInputModel::NameRole).toString()
+				.localeAwareCompare(sourceModel()->data(rightIndex, SolarInputModel::NameRole).toString()) < 0;
 	} else {
 		return leftGroup.localeAwareCompare(rightGroup) < 0;
 	}
