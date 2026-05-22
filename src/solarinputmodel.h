@@ -46,6 +46,7 @@ public:
 	explicit SolarInputModel(QObject *parent = nullptr);
 
 	int count() const;
+	int trackerIndex(int row) const;
 
 	int rowCount(const QModelIndex &parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;

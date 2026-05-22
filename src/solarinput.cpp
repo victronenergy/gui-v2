@@ -164,6 +164,11 @@ TrackerSolarInput::TrackerSolarInput(Device *device, bool isSingleTrackerDevice,
 	}
 }
 
+int TrackerSolarInput::trackerIndex() const
+{
+	return m_trackerIndex;
+}
+
 bool TrackerSolarInput::isEnabledTracker(VeQItem *serviceItem, int trackerIndex)
 {
 	if (!serviceItem) {

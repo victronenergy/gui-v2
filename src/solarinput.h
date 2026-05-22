@@ -87,6 +87,7 @@ class TrackerSolarInput : public SolarInput
 	Q_OBJECT
 public:
 	explicit TrackerSolarInput(Device *device, bool isSingleTrackerDevice, int trackerIndex, QObject *parent = nullptr);
+	int trackerIndex() const;
 
 	static bool isEnabledTracker(VeQItem *serviceItem, int trackerIndex);
 

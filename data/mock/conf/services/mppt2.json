@@ -929,7 +929,7 @@
         "/Pv/2/V": 151.72999572753906,
         "/Pv/3/Enabled": 1,
         "/Pv/3/MppOperationMode": 0,
-        "/Pv/3/Name": "Tracker 4 with long name",
+        "/Pv/3/Name": "This is tracker 4 with a long name",
         "/Pv/3/P": 4234,
         "/Pv/3/V": 45.970001220703125,
         "/Relay/0/State": 1,

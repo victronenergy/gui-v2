@@ -32,9 +32,7 @@ Page {
 	// since PV inverters do not have multiple trackers.
 	GradientListView {
 		model: SortedSolarInputModel {
-			sourceModel: SolarInputModel {
-				id: solarInputModel
-			}
+			sourceModel: SolarInputModel {}
 		}
 		delegate: ListQuantityGroupNavigation {
 			id: solarInputDelegate
