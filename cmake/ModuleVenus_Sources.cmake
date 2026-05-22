@@ -40,6 +40,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ControlCard.qml
     components/CpuMonitor.qml
     components/DateSelector.qml
+    components/DemoModeIndicator.qml
     components/DeviceListDelegate.qml
     components/DeviceListPluginPage.qml
     components/DevicePage.qml

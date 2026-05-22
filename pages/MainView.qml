@@ -520,6 +520,19 @@ FocusScope {
 	}
 
 	Loader {
+		y: -height + statusBar.height
+		active: demoMode.valid && demoMode.value > 0
+		transformOrigin: Item.BottomLeft
+		rotation: 90
+		sourceComponent: DemoModeIndicator {}
+
+		VeQuickItem {
+			id: demoMode
+			uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+		}
+	}
+
+	Loader {
 		active: Global.displayCpuUsage
 		anchors {
 			bottom: parent.bottom

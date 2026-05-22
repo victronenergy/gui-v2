@@ -65,6 +65,9 @@
     "color_colorWheelDialog_mode_button_background": "#1D1D1B",
     "color_colorWheelDialog_mode_button_separator": "color_gray2",
 
+    "color_demoModeIndicator_foreground": "color_orange",
+    "color_demoModeIndicator_background": "#593912",
+
     "color_droopGraph_axis_line": "color_gray5",
     "color_droopGraph_gradient_centre": "color_blue",
     "color_droopGraph_gradient_edge": "color_orange",
