@@ -44,7 +44,7 @@
       <translation>电池电压低</translation>
     </message>
     <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="617"/>
       <source>Manual</source>
       <translation>手动</translation>
     </message>
@@ -109,8 +109,8 @@
       <source>Solar yield</source>
       <translation>太阳能发电量</translation>
     </message>
-    <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="186"/>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="41"/>
       <source>External control</source>
       <translation>外部控制</translation>
     </message>
@@ -166,7 +166,7 @@
       <translation>GPS</translation>
     </message>
     <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="620"/>
       <source>Tank pump</source>
       <translation>水箱泵</translation>
     </message>
@@ -1675,8 +1675,8 @@ Use unless prohibited by the utility provider.</source>
       <source>Sustain</source>
       <translation>维持</translation>
     </message>
-    <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="195"/>
+    <message id="system_state_recharge">
+      <location filename="../../src/enums.cpp" line="808"/>
       <source>Recharge</source>
       <translation>重新充电</translation>
     </message>
@@ -1736,42 +1736,42 @@ Use unless prohibited by the utility provider.</source>
       <translation>上网电量限制已激活</translation>
     </message>
     <message id="digitalinputs_type_pulsemeter">
-      <location filename="../../src/enums.cpp" line="295"/>
+      <location filename="../../src/enums.cpp" line="308"/>
       <source>Pulse meter</source>
       <translation>脉冲计</translation>
     </message>
     <message id="digitalinputs_type_dooralarm">
-      <location filename="../../src/enums.cpp" line="298"/>
+      <location filename="../../src/enums.cpp" line="311"/>
       <source>Door alarm</source>
       <translation>门铃</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="561"/>
+      <location filename="../../src/enums.cpp" line="585"/>
       <source>Bilge pump</source>
       <translation>舱底泵</translation>
     </message>
     <message id="digitalinputs_type_bilgealarm">
-      <location filename="../../src/enums.cpp" line="304"/>
+      <location filename="../../src/enums.cpp" line="317"/>
       <source>Bilge alarm</source>
       <translation>舱底报警</translation>
     </message>
     <message id="digitalinputs_type_burglaralarm">
-      <location filename="../../src/enums.cpp" line="307"/>
+      <location filename="../../src/enums.cpp" line="320"/>
       <source>Burglar alarm</source>
       <translation>防盗报警</translation>
     </message>
     <message id="digitalinputs_type_smokealarm">
-      <location filename="../../src/enums.cpp" line="310"/>
+      <location filename="../../src/enums.cpp" line="323"/>
       <source>Smoke alarm</source>
       <translation>烟雾报警</translation>
     </message>
     <message id="digitalinputs_type_firealarm">
-      <location filename="../../src/enums.cpp" line="313"/>
+      <location filename="../../src/enums.cpp" line="326"/>
       <source>Fire alarm</source>
       <translation>火警</translation>
     </message>
     <message id="digitalinputs_type_co2alarm">
-      <location filename="../../src/enums.cpp" line="316"/>
+      <location filename="../../src/enums.cpp" line="329"/>
       <source>CO2 alarm</source>
       <translation>二氧化碳报警</translation>
     </message>
@@ -2482,25 +2482,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>高电池电压报警</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="666"/>
+      <location filename="../../components/CommonWords.qml" line="672"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>上次出错</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="669"/>
+      <location filename="../../components/CommonWords.qml" line="675"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>第二次出错</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="672"/>
+      <location filename="../../components/CommonWords.qml" line="678"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>第三次出错</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="675"/>
+      <location filename="../../components/CommonWords.qml" line="681"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>第四次出错</translation>
@@ -3535,12 +3535,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">未知</translation>
     </message>
     <message id="battery_status_balancing">
-      <location filename="../../src/enums.cpp" line="78"/>
+      <location filename="../../src/enums.cpp" line="91"/>
       <source>Balancing</source>
       <translation>均衡中</translation>
     </message>
     <message id="settings_switch_channel_output">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="88"/>
       <source>Output</source>
       <extracomment>Configure channel to use "output" direction</extracomment>
       <translation>输出</translation>
@@ -3913,12 +3913,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Smappee总线设备</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="692"/>
+      <location filename="../../components/CommonWords.qml" line="698"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>连接数字多功能控制器时，此设置将被禁用。</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="681"/>
+      <location filename="../../components/CommonWords.qml" line="687"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>连接 VE.Bus BMS 时，此设置将被禁用。</translation>
     </message>
@@ -4019,7 +4019,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>复位计数器</translation>
     </message>
     <message id="generic_input_status_sensor_battery_low">
-      <location filename="../../src/enums.cpp" line="514"/>
+      <location filename="../../src/enums.cpp" line="539"/>
       <source>Sensor battery low</source>
       <translation>感应器电量低</translation>
     </message>
@@ -4717,7 +4717,7 @@ Do you want to continue?</source>
       <translation>能源</translation>
     </message>
     <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="412"/>
+      <location filename="../../src/enums.cpp" line="438"/>
       <source>Error</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>错误</translation>
@@ -4738,7 +4738,7 @@ Do you want to continue?</source>
       <translation>固件版本</translation>
     </message>
     <message id="digitalinputs_type_generator">
-      <location filename="../../src/enums.cpp" line="319"/>
+      <location filename="../../src/enums.cpp" line="332"/>
       <source>Generator</source>
       <translation>发电机</translation>
     </message>
@@ -4779,7 +4779,7 @@ Do you want to continue?</source>
       <translation>%1 小时</translation>
     </message>
     <message id="battery_mode_idle">
-      <location filename="../../src/enums.cpp" line="27"/>
+      <location filename="../../src/enums.cpp" line="40"/>
       <source>Idle</source>
       <extracomment>Battery mode</extracomment>
       <translation>空闲</translation>
@@ -4866,7 +4866,7 @@ Do you want to continue?</source>
       <translation>不</translation>
     </message>
     <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="782"/>
+      <location filename="../../src/enums.cpp" line="891"/>
       <source>No error</source>
       <translation>无错误</translation>
     </message>
@@ -4993,7 +4993,7 @@ Do you want to continue?</source>
       <translation>信号强度</translation>
     </message>
     <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="404"/>
+      <location filename="../../src/enums.cpp" line="430"/>
       <source>Standby</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>待机</translation>
@@ -5029,7 +5029,7 @@ Do you want to continue?</source>
       <translation>状态</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="396"/>
+      <location filename="../../src/enums.cpp" line="422"/>
       <source>Startup (%1)</source>
       <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>启动（%1）</translation>
@@ -5267,62 +5267,62 @@ Do you want to continue?</source>
       <translation>未找到固件</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="716"/>
+      <location filename="../../src/enums.cpp" line="825"/>
       <source>Fuel</source>
       <translation>燃料</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="719"/>
+      <location filename="../../src/enums.cpp" line="828"/>
       <source>Fresh water</source>
       <translation>清水</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="722"/>
+      <location filename="../../src/enums.cpp" line="831"/>
       <source>Waste water</source>
       <translation>废水</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="725"/>
+      <location filename="../../src/enums.cpp" line="834"/>
       <source>Live well</source>
       <translation>活鱼池</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="728"/>
+      <location filename="../../src/enums.cpp" line="837"/>
       <source>Oil</source>
       <translation>石油</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="731"/>
+      <location filename="../../src/enums.cpp" line="840"/>
       <source>Black water</source>
       <translation>黑水</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="734"/>
+      <location filename="../../src/enums.cpp" line="843"/>
       <source>Gasoline</source>
       <translation>汽油</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="737"/>
+      <location filename="../../src/enums.cpp" line="846"/>
       <source>Diesel</source>
       <translation>柴油</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="740"/>
+      <location filename="../../src/enums.cpp" line="849"/>
       <source>LPG</source>
       <translation>LPG</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="743"/>
+      <location filename="../../src/enums.cpp" line="852"/>
       <source>LNG</source>
       <translation>LNG</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="746"/>
+      <location filename="../../src/enums.cpp" line="855"/>
       <source>Hydraulic oil</source>
       <translation>液压油</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="749"/>
+      <location filename="../../src/enums.cpp" line="858"/>
       <source>Raw water</source>
       <translation>生水</translation>
     </message>
@@ -5676,7 +5676,7 @@ Do you want to continue?</source>
       <translation type="unfinished">小时</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="437"/>
+      <location filename="../../src/enums.cpp" line="462"/>
       <source>Bulk</source>
       <translation>快充</translation>
     </message>
@@ -5687,7 +5687,7 @@ Do you want to continue?</source>
       <translation>均充</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="443"/>
+      <location filename="../../src/enums.cpp" line="468"/>
       <source>Float</source>
       <translation>浮充</translation>
     </message>
@@ -5935,32 +5935,32 @@ Do you want to continue?</source>
       <translation>%1 箱 (%2)</translation>
     </message>
     <message id="dcMeter_ac_charger">
-      <location filename="../../src/enums.cpp" line="209"/>
+      <location filename="../../src/enums.cpp" line="222"/>
       <source>AC charger</source>
       <translation>交流充电器</translation>
     </message>
     <message id="dcMeter_alternator">
-      <location filename="../../src/enums.cpp" line="212"/>
+      <location filename="../../src/enums.cpp" line="225"/>
       <source>Alternator</source>
       <translation>底盘发电机</translation>
     </message>
     <message id="dcMeter_dc_system">
-      <location filename="../../src/enums.cpp" line="221"/>
+      <location filename="../../src/enums.cpp" line="234"/>
       <source>DC system</source>
       <translation>直流系统</translation>
     </message>
     <message id="dcMeter_fuelcell">
-      <location filename="../../src/enums.cpp" line="230"/>
+      <location filename="../../src/enums.cpp" line="243"/>
       <source>Fuel cell</source>
       <translation>燃料电池</translation>
     </message>
     <message id="dcMeter_shaft_generator">
-      <location filename="../../src/enums.cpp" line="248"/>
+      <location filename="../../src/enums.cpp" line="261"/>
       <source>Shaft generator</source>
       <translation>轴发电机</translation>
     </message>
     <message id="dcMeter_water_generator">
-      <location filename="../../src/enums.cpp" line="254"/>
+      <location filename="../../src/enums.cpp" line="267"/>
       <source>Water generator</source>
       <translation>水力发电机</translation>
     </message>
@@ -6052,11 +6052,6 @@ Do you want to continue?</source>
     <message id="evchargers_mode_scheduled">
       <location filename="../../data/EvChargers.qml" line="126"/>
       <source>Scheduled</source>
-      <translation type="unfinished">已定时</translation>
-    </message>
-    <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="198"/>
-      <source>Scheduled</source>
       <translation>已定时</translation>
     </message>
     <message id="page_generator_warm_up">
@@ -6085,150 +6080,140 @@ Do you want to continue?</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi。 Voluptatem qui quia et consequuntur。</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="408"/>
+      <location filename="../../src/enums.cpp" line="434"/>
       <source>Boot loading</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>启动加载</translation>
     </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="416"/>
+      <location filename="../../src/enums.cpp" line="442"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>运行中(MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="420"/>
+      <location filename="../../src/enums.cpp" line="446"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>运行中（限制）</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="434"/>
+      <location filename="../../src/enums.cpp" line="459"/>
       <source>Fault</source>
       <translation>错误</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="440"/>
+      <location filename="../../src/enums.cpp" line="465"/>
       <source>Absorption</source>
       <translation>均充</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="446"/>
+      <location filename="../../src/enums.cpp" line="471"/>
       <source>Storage</source>
       <translation>存储</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="449"/>
+      <location filename="../../src/enums.cpp" line="474"/>
       <source>Equalize</source>
       <translation>均衡</translation>
     </message>
-    <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="128"/>
+    <message id="switchable_output_disabled">
+      <location filename="../../src/enums.cpp" line="695"/>
+      <source>Disabled</source>
+      <translation type="unfinished">已禁用</translation>
+    </message>
+    <message id="switchable_output_externalcontrol">
+      <location filename="../../src/enums.cpp" line="716"/>
+      <source>External control</source>
+      <translation type="unfinished">外部控制</translation>
+    </message>
+    <message id="system_state_aes_mode">
+      <location filename="../../src/enums.cpp" line="740"/>
       <source>AES mode</source>
       <translation>节能模式</translation>
     </message>
-    <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="131"/>
+    <message id="system_state_faultcondition">
+      <location filename="../../src/enums.cpp" line="743"/>
       <source>Fault condition</source>
       <translation>故障情况</translation>
     </message>
-    <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="134"/>
+    <message id="system_state_bulkcharging">
+      <location filename="../../src/enums.cpp" line="746"/>
       <source>Bulk charging</source>
       <translation>快充</translation>
     </message>
-    <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="137"/>
+    <message id="system_state_absorptioncharging">
+      <location filename="../../src/enums.cpp" line="749"/>
       <source>Absorption charging</source>
       <translation>均充</translation>
     </message>
-    <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="140"/>
+    <message id="system_state_floatcharging">
+      <location filename="../../src/enums.cpp" line="752"/>
       <source>Float charging</source>
       <translation>浮充</translation>
     </message>
-    <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="143"/>
+    <message id="system_state_storagemode">
+      <location filename="../../src/enums.cpp" line="755"/>
       <source>Storage mode</source>
       <translation>存储模式</translation>
     </message>
-    <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="146"/>
+    <message id="system_state_equalisationcharging">
+      <location filename="../../src/enums.cpp" line="758"/>
       <source>Equalization charging</source>
       <translation>均衡充电</translation>
     </message>
-    <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="149"/>
+    <message id="system_state_passthru">
+      <location filename="../../src/enums.cpp" line="761"/>
       <source>Pass-thru</source>
       <translation>直通</translation>
     </message>
-    <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="152"/>
+    <message id="system_state_inverting">
+      <location filename="../../src/enums.cpp" line="764"/>
       <source>Inverting</source>
       <translation>逆变</translation>
     </message>
-    <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="155"/>
+    <message id="system_state_assisting">
+      <location filename="../../src/enums.cpp" line="767"/>
       <source>Assisting</source>
       <translation>辅助供电</translation>
     </message>
-    <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="158"/>
+    <message id="system_state_powersupplymode">
+      <location filename="../../src/enums.cpp" line="770"/>
       <source>Power supply mode</source>
       <translation>电源模式</translation>
-    </message>
-    <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="161"/>
-      <source>Sustain</source>
-      <translation type="unfinished">维持</translation>
-    </message>
-    <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="165"/>
-      <source>Wake up</source>
-      <translation type="unfinished">唤醒</translation>
-    </message>
-    <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="192"/>
-      <source>Sustain</source>
-      <translation type="unfinished">维持</translation>
-    </message>
-    <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="201"/>
-      <source>Dynamic ESS</source>
-      <translation type="unfinished">动态ESS</translation>
     </message>
     <message id="ev_charging_state_wake_up">
       <location filename="../../pages/ev/EvPage.qml" line="91"/>
       <source>Wake up</source>
       <translation>唤醒</translation>
     </message>
-    <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="168"/>
+    <message id="system_state_repeatedabsorption">
+      <location filename="../../src/enums.cpp" line="780"/>
       <source>Repeated absorption</source>
       <translation>重复均充</translation>
     </message>
-    <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="171"/>
+    <message id="system_state_autoequalize">
+      <location filename="../../src/enums.cpp" line="783"/>
       <source>Auto equalize</source>
       <translation>自动均衡</translation>
     </message>
-    <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="174"/>
+    <message id="system_state_battery_safe">
+      <location filename="../../src/enums.cpp" line="786"/>
       <source>Battery safe</source>
       <translation>电池保护模式</translation>
     </message>
-    <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="177"/>
+    <message id="system_state_loaddetect">
+      <location filename="../../src/enums.cpp" line="789"/>
       <source>Load detect</source>
       <translation>负载检测</translation>
     </message>
-    <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="180"/>
+    <message id="system_state_blocked">
+      <location filename="../../src/enums.cpp" line="792"/>
       <source>Blocked</source>
       <translation>锁定</translation>
     </message>
-    <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="183"/>
+    <message id="system_state_test">
+      <location filename="../../src/enums.cpp" line="795"/>
       <source>Test</source>
       <translation>测试</translation>
     </message>
@@ -6534,12 +6519,12 @@ Do you want to continue?</source>
       <translation>均衡器状态</translation>
     </message>
     <message id="battery_status_balanced">
-      <location filename="../../src/enums.cpp" line="70"/>
+      <location filename="../../src/enums.cpp" line="83"/>
       <source>Balanced</source>
       <translation>已均衡</translation>
     </message>
     <message id="battery_status_imbalance">
-      <location filename="../../src/enums.cpp" line="74"/>
+      <location filename="../../src/enums.cpp" line="87"/>
       <source>Imbalance</source>
       <translation>不均衡</translation>
     </message>
@@ -7953,7 +7938,7 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="574"/>
-      <location filename="../../src/enums.cpp" line="838"/>
+      <location filename="../../src/enums.cpp" line="947"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">未知</translation>
@@ -7973,19 +7958,19 @@ Do you want to continue?</source>
       <translation>今日发电量</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="660"/>
+      <location filename="../../components/CommonWords.qml" line="666"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="686"/>
+      <location filename="../../components/CommonWords.qml" line="692"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="697"/>
+      <location filename="../../components/CommonWords.qml" line="703"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -8056,273 +8041,293 @@ Do you want to continue?</source>
       <translation>热泵</translation>
     </message>
     <message id="digitalinputs_touch_input_control">
-      <location filename="../../src/enums.cpp" line="322"/>
+      <location filename="../../src/enums.cpp" line="335"/>
       <source>Touch input control</source>
       <translation>触摸输入控制</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="657"/>
+      <location filename="../../src/enums.cpp" line="680"/>
       <source>Over temperature</source>
       <translation>温度过高</translation>
     </message>
     <message id="switch_state_temperature_warning">
-      <location filename="../../src/enums.cpp" line="469"/>
+      <location filename="../../src/enums.cpp" line="494"/>
       <source>Temperature warning</source>
       <translation>温度警告</translation>
     </message>
+    <message id="status_text_off">
+      <location filename="../../src/enums.cpp" line="25"/>
+      <source>Off</source>
+      <extracomment>An "off" state</extracomment>
+      <translation type="unfinished">关</translation>
+    </message>
     <message id="battery_mode_charging">
-      <location filename="../../src/enums.cpp" line="31"/>
+      <location filename="../../src/enums.cpp" line="44"/>
       <source>Charging</source>
       <extracomment>Battery mode</extracomment>
       <translation type="unfinished">充电</translation>
     </message>
     <message id="battery_mode_discharging">
-      <location filename="../../src/enums.cpp" line="35"/>
+      <location filename="../../src/enums.cpp" line="48"/>
       <source>Discharging</source>
       <extracomment>Battery mode</extracomment>
       <translation type="unfinished">放电</translation>
     </message>
     <message id="cardinalDirection_short_north">
-      <location filename="../../src/enums.cpp" line="146"/>
+      <location filename="../../src/enums.cpp" line="159"/>
       <source>N</source>
       <extracomment>Abbreviation of "North" direction</extracomment>
       <translation type="unfinished">北</translation>
     </message>
     <message id="cardinalDirection_short_south">
-      <location filename="../../src/enums.cpp" line="150"/>
+      <location filename="../../src/enums.cpp" line="163"/>
       <source>S</source>
       <extracomment>Abbreviation of "South" direction</extracomment>
       <translation type="unfinished">南</translation>
     </message>
     <message id="cardinalDirection_short_east">
-      <location filename="../../src/enums.cpp" line="154"/>
+      <location filename="../../src/enums.cpp" line="167"/>
       <source>E</source>
       <extracomment>Abbreviation of "East" direction</extracomment>
       <translation type="unfinished">东</translation>
     </message>
     <message id="cardinalDirection_short_west">
-      <location filename="../../src/enums.cpp" line="158"/>
+      <location filename="../../src/enums.cpp" line="171"/>
       <source>W</source>
       <extracomment>Abbreviation of "West" direction</extracomment>
       <translation type="unfinished">西</translation>
     </message>
     <message id="dcMeter_bilge_pump">
-      <location filename="../../src/enums.cpp" line="215"/>
+      <location filename="../../src/enums.cpp" line="228"/>
       <source>Bilge pump</source>
       <translation type="unfinished">舱底泵</translation>
     </message>
     <message id="digitalinputs_type_disabled">
-      <location filename="../../src/enums.cpp" line="292"/>
+      <location filename="../../src/enums.cpp" line="305"/>
       <source>Disabled</source>
       <translation type="unfinished">已禁用</translation>
     </message>
     <message id="digitalinputs_type_bilgepump">
-      <location filename="../../src/enums.cpp" line="301"/>
+      <location filename="../../src/enums.cpp" line="314"/>
       <source>Bilge pump</source>
       <translation type="unfinished">舱底泵</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="334"/>
+      <location filename="../../src/enums.cpp" line="347"/>
       <source>Low</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">低</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="338"/>
+      <location filename="../../src/enums.cpp" line="351"/>
       <source>High</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">高</translation>
     </message>
-    <message id="digitalinputs_state_off">
-      <location filename="../../src/enums.cpp" line="342"/>
-      <source>Off</source>
-      <extracomment>Digital input state</extracomment>
-      <translation type="unfinished">关</translation>
-    </message>
     <message id="digitalinputs_state_on">
-      <location filename="../../src/enums.cpp" line="346"/>
+      <location filename="../../src/enums.cpp" line="357"/>
       <source>On</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">开</translation>
     </message>
     <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="350"/>
+      <location filename="../../src/enums.cpp" line="361"/>
       <source>No</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">不</translation>
     </message>
     <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="354"/>
+      <location filename="../../src/enums.cpp" line="365"/>
       <source>Yes</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">是</translation>
     </message>
     <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="358"/>
+      <location filename="../../src/enums.cpp" line="369"/>
       <source>Open</source>
       <extracomment>Digital input open</extracomment>
       <translation type="unfinished">打开</translation>
     </message>
     <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="362"/>
+      <location filename="../../src/enums.cpp" line="373"/>
       <source>Closed</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">已关闭</translation>
     </message>
     <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="366"/>
+      <location filename="../../src/enums.cpp" line="377"/>
       <source>OK</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">正常</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="370"/>
+      <location filename="../../src/enums.cpp" line="381"/>
       <source>Alarm</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">报警</translation>
     </message>
     <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="374"/>
+      <location filename="../../src/enums.cpp" line="385"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">运行</translation>
     </message>
     <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="378"/>
+      <location filename="../../src/enums.cpp" line="389"/>
       <source>Stopped</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">已停止</translation>
     </message>
     <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="400"/>
+      <location filename="../../src/enums.cpp" line="426"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">运行</translation>
     </message>
-    <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="431"/>
-      <source>Off</source>
-      <translation type="unfinished">关</translation>
-    </message>
     <message id="solarchargers_state_external_control">
-      <location filename="../../src/enums.cpp" line="452"/>
+      <location filename="../../src/enums.cpp" line="477"/>
       <source>External control</source>
       <translation type="unfinished">外部控制</translation>
     </message>
     <message id="switch_state_running">
-      <location filename="../../src/enums.cpp" line="463"/>
+      <location filename="../../src/enums.cpp" line="488"/>
       <source>Running</source>
       <translation type="unfinished">运行</translation>
     </message>
     <message id="switch_state_over_temperature">
-      <location filename="../../src/enums.cpp" line="466"/>
+      <location filename="../../src/enums.cpp" line="491"/>
       <source>Over temperature</source>
       <translation type="unfinished">温度过高</translation>
     </message>
     <message id="switch_state_channel_fault">
-      <location filename="../../src/enums.cpp" line="472"/>
+      <location filename="../../src/enums.cpp" line="497"/>
       <source>Channel Fault</source>
       <translation>通道故障</translation>
     </message>
     <message id="switch_state_channel_tripped">
-      <location filename="../../src/enums.cpp" line="475"/>
+      <location filename="../../src/enums.cpp" line="500"/>
       <source>Channel Tripped</source>
       <translation>通道跳闸</translation>
     </message>
     <message id="switch_state_under_voltage">
-      <location filename="../../src/enums.cpp" line="478"/>
+      <location filename="../../src/enums.cpp" line="503"/>
       <source>Under voltage</source>
       <translation>低电压</translation>
     </message>
     <message id="generic_input_status_on">
-      <location filename="../../src/enums.cpp" line="508"/>
+      <location filename="../../src/enums.cpp" line="533"/>
       <source>On</source>
       <translation type="unfinished">开</translation>
     </message>
     <message id="generic_input_status_fault">
-      <location filename="../../src/enums.cpp" line="511"/>
+      <location filename="../../src/enums.cpp" line="536"/>
       <source>Fault</source>
       <translation type="unfinished">错误</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="526"/>
+      <location filename="../../src/enums.cpp" line="550"/>
       <source>Momentary</source>
       <translation>瞬时</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="532"/>
+      <location filename="../../src/enums.cpp" line="556"/>
       <source>Dimmable</source>
       <translation>可调光</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="542"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Slave of %1</source>
       <translation>%1 的从属设备</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="545"/>
+      <location filename="../../src/enums.cpp" line="569"/>
       <source>Slave</source>
       <translation type="unfinished">从机</translation>
     </message>
     <message id="switchable_output_function_disabled">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>Disabled</source>
       <translation type="unfinished">已禁用</translation>
     </message>
     <message id="switchable_output_function_alarm">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="611"/>
       <source>Alarm</source>
       <translation type="unfinished">报警</translation>
     </message>
     <message id="switchable_output_function_temperature">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="623"/>
       <source>Temperature</source>
       <translation type="unfinished">温度</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Running</source>
       <translation type="unfinished">运行</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="632"/>
+      <location filename="../../src/enums.cpp" line="656"/>
       <source>Not running</source>
       <translation type="unfinished">不运行</translation>
     </message>
-    <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="648"/>
-      <source>Off</source>
-      <translation type="unfinished">关</translation>
-    </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="651"/>
+      <location filename="../../src/enums.cpp" line="674"/>
       <source>Powered</source>
       <translation>供电</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="654"/>
+      <location filename="../../src/enums.cpp" line="677"/>
       <source>Tripped</source>
       <translation>绊倒</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="663"/>
+      <location filename="../../src/enums.cpp" line="686"/>
       <source>Fault</source>
       <translation type="unfinished">错误</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="666"/>
+      <location filename="../../src/enums.cpp" line="689"/>
       <source>On</source>
       <translation type="unfinished">开</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="669"/>
+      <location filename="../../src/enums.cpp" line="692"/>
       <source>Short</source>
       <translation>短</translation>
     </message>
-    <message id="switchable_output_unknown_status">
-      <location filename="../../src/enums.cpp" line="708"/>
-      <source>Unknown status</source>
-      <translation type="unfinished">未知状态</translation>
+    <message id="system_state_sustain">
+      <location filename="../../src/enums.cpp" line="773"/>
+      <source>Sustain</source>
+      <translation type="unfinished">维持</translation>
+    </message>
+    <message id="system_state_wakeup">
+      <location filename="../../src/enums.cpp" line="777"/>
+      <source>Wake up</source>
+      <translation type="unfinished">唤醒</translation>
+    </message>
+    <message id="system_state_externalccontrol">
+      <location filename="../../src/enums.cpp" line="798"/>
+      <source>External control</source>
+      <translation type="unfinished">外部控制</translation>
+    </message>
+    <message id="system_state_discharging">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Discharging</source>
+      <translation type="unfinished">放电</translation>
+    </message>
+    <message id="system_state_system_sustain">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Sustain</source>
+      <translation type="unfinished">维持</translation>
+    </message>
+    <message id="system_state_scheduledcharge">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Scheduled</source>
+      <translation type="unfinished">已定时</translation>
+    </message>
+    <message id="system_state_dynamic_ess">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">动态ESS</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8484,7 +8489,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>该电流限制在系统配置中是固定的，无法调整。</translation>
     </message>
     <message id="settings_switch_channel_input">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="85"/>
       <source>Input</source>
       <extracomment>Configure channel to use "input" direction</extracomment>
       <translation>输入</translation>
@@ -9141,8 +9146,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>船只页面</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="575"/>
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Unsupported type: %1</source>
       <translation>不支持的类型：%1</translation>
     </message>
@@ -9182,12 +9186,12 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>最大转速</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="34"/>
       <source>Module state</source>
       <translation>模块状态</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="41"/>
       <source>Module Voltage</source>
       <translation>模块电压</translation>
     </message>
@@ -9610,7 +9614,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>输入新密码</translation>
     </message>
     <message id="settings_modbus_unit_name_and_id">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
       <source>%1 | Unit ID: %2</source>
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation>%1 | 单元 ID： %2</translation>
@@ -9876,7 +9880,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>无蓝牙可用</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="529"/>
+      <location filename="../../src/enums.cpp" line="553"/>
       <source>Toggle</source>
       <translation>切换</translation>
     </message>
@@ -9894,11 +9898,6 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <location filename="../../data/Ess.qml" line="34"/>
       <source>Optimized without BatteryLife</source>
       <translation>已优化，未使用 BatteryLife</translation>
-    </message>
-    <message id="ess_state_external_control">
-      <location filename="../../data/Ess.qml" line="41"/>
-      <source>External control</source>
-      <translation type="unfinished">外部控制</translation>
     </message>
     <message id="pagesettingssupportstate_modifiedstate_modified">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="78"/>
@@ -10106,92 +10105,92 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>接入点密码</translation>
     </message>
     <message id="dcMeter_dccharger">
-      <location filename="../../src/enums.cpp" line="218"/>
+      <location filename="../../src/enums.cpp" line="231"/>
       <source>DC/DC charger</source>
       <translation>DC/DC 充电器</translation>
     </message>
     <message id="dcMeter_electric_drive">
-      <location filename="../../src/enums.cpp" line="224"/>
+      <location filename="../../src/enums.cpp" line="237"/>
       <source>Electric drive</source>
       <translation>电力驱动</translation>
     </message>
     <message id="dcMeter_fridge">
-      <location filename="../../src/enums.cpp" line="227"/>
+      <location filename="../../src/enums.cpp" line="240"/>
       <source>Fridge</source>
       <translation>冰箱</translation>
     </message>
     <message id="dcMeter_generic_load">
-      <location filename="../../src/enums.cpp" line="233"/>
+      <location filename="../../src/enums.cpp" line="246"/>
       <source>Generic load</source>
       <translation>通用负载</translation>
     </message>
     <message id="dcMeter_generic_meter">
-      <location filename="../../src/enums.cpp" line="236"/>
+      <location filename="../../src/enums.cpp" line="249"/>
       <source>Generic meter</source>
       <translation>通用电表</translation>
     </message>
     <message id="dcMeter_generic_source">
-      <location filename="../../src/enums.cpp" line="239"/>
+      <location filename="../../src/enums.cpp" line="252"/>
       <source>Generic source</source>
       <translation>通用电源</translation>
     </message>
     <message id="dcMeter_dc_genset">
-      <location filename="../../src/enums.cpp" line="242"/>
+      <location filename="../../src/enums.cpp" line="255"/>
       <source>DC genset</source>
       <translation>直流发电机组</translation>
     </message>
     <message id="dcMeter_inverter">
-      <location filename="../../src/enums.cpp" line="245"/>
+      <location filename="../../src/enums.cpp" line="258"/>
       <source>Inverter</source>
       <translation>逆变器</translation>
     </message>
     <message id="dcMeter_solar_charger">
-      <location filename="../../src/enums.cpp" line="251"/>
+      <location filename="../../src/enums.cpp" line="264"/>
       <source>Solar charger</source>
       <translation>太阳能充电器</translation>
     </message>
     <message id="dcMeter_water_heater">
-      <location filename="../../src/enums.cpp" line="257"/>
+      <location filename="../../src/enums.cpp" line="270"/>
       <source>Water heater</source>
       <translation>热水器</translation>
     </message>
     <message id="dcMeter_water_pump">
-      <location filename="../../src/enums.cpp" line="260"/>
+      <location filename="../../src/enums.cpp" line="273"/>
       <source>Water pump</source>
       <translation>水泵</translation>
     </message>
     <message id="dcMeter_wind_charger">
-      <location filename="../../src/enums.cpp" line="263"/>
+      <location filename="../../src/enums.cpp" line="276"/>
       <source>Wind charger</source>
       <translation>风力充电器</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="535"/>
+      <location filename="../../src/enums.cpp" line="559"/>
       <source>Temperature setpoint</source>
       <translation>温度设定点</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="538"/>
+      <location filename="../../src/enums.cpp" line="562"/>
       <source>Stepped switch</source>
       <translation>步进开关</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="549"/>
+      <location filename="../../src/enums.cpp" line="573"/>
       <source>Dropdown</source>
       <translation>下拉菜单</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="552"/>
+      <location filename="../../src/enums.cpp" line="576"/>
       <source>Basic slider</source>
       <translation>基础滑块</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="558"/>
+      <location filename="../../src/enums.cpp" line="582"/>
       <source>Three-state switch</source>
       <translation>三态开关</translation>
     </message>
     <message id="settings_modbus_tcp_unit_id_note">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="31"/>
       <source>See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs.</source>
       <translation>请查看设置 → VRM → VRM 设备实例菜单来更改 Modbus-TCP 单元 ID。</translation>
     </message>
@@ -10228,7 +10227,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>极性 (继电器 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
       <source>Polarity</source>
       <translation>极性</translation>
     </message>
@@ -10280,7 +10279,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>VE.Bus BMS 会在需要时自动关闭系统以保护电池。因此，无法通过 GX 设备控制系统。</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="555"/>
+      <location filename="../../src/enums.cpp" line="579"/>
       <source>Numeric input</source>
       <translation>数值输入</translation>
     </message>
@@ -10306,7 +10305,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>微电网参数</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="761"/>
+      <location filename="../../src/enums.cpp" line="870"/>
       <source>Hybrid droop</source>
       <translation>混合型下垂控制</translation>
     </message>
@@ -10461,14 +10460,14 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation type="unfinished">低</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="684"/>
+      <location filename="../../src/enums.cpp" line="707"/>
       <source>Bypassed</source>
       <translation>已旁路</translation>
     </message>
-    <message id="switchableoutput_list_delegate_auto_status">
-      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="93"/>
+    <message id="common_words_auto_status">
+      <location filename="../../components/CommonWords.qml" line="634"/>
       <source>Auto (%1)</source>
-      <extracomment>%1 = 'On' or 'Off'</extracomment>
+      <extracomment>%1 = status such as 'On' or 'Off'</extracomment>
       <translation>自动 (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
@@ -10519,18 +10518,18 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>无激活的通知</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="564"/>
+      <location filename="../../src/enums.cpp" line="588"/>
       <source>RGB color wheel</source>
       <translation>RGB 色轮</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="568"/>
+      <location filename="../../src/enums.cpp" line="592"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>CCT 色轮</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="572"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>RGB + W 色轮</translation>
@@ -10685,7 +10684,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation type="unfinished">启动调光级别</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="193"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Startup dim level</source>
       <translation>启动调光级别</translation>
     </message>
@@ -10695,22 +10694,22 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>从内存恢复调光级别</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="204"/>
       <source>Active high / Normally open</source>
       <translation>高电平有效/常开</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="206"/>
       <source>Active low / Normally closed</source>
       <translation>低电平有效/常闭</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="212"/>
       <source>Output limit min</source>
       <translation>输出限制最小值</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="234"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="224"/>
       <source>Output limit max</source>
       <translation>输出限制最大值</translation>
     </message>
@@ -10776,52 +10775,42 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>混合 (交流电，单位：瓦特；直流电，单位：安培)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="660"/>
+      <location filename="../../src/enums.cpp" line="683"/>
       <source>Over temp, tripped</source>
       <translation>过温，跳闸</translation>
     </message>
-    <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="672"/>
-      <source>Disabled</source>
-      <translation type="unfinished">已禁用</translation>
-    </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="675"/>
+      <location filename="../../src/enums.cpp" line="698"/>
       <source>Disabled, tripped</source>
       <translation>已禁用，跳闸</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="678"/>
+      <location filename="../../src/enums.cpp" line="701"/>
       <source>Disabled, over temp</source>
       <translation>已禁用，过温</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="681"/>
+      <location filename="../../src/enums.cpp" line="704"/>
       <source>Disabled but on</source>
       <translation>已禁用，但已开启</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="687"/>
+      <location filename="../../src/enums.cpp" line="710"/>
       <source>Bypassed, tripped</source>
       <translation>已旁路，跳闸</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="690"/>
+      <location filename="../../src/enums.cpp" line="713"/>
       <source>Bypassed, over temp</source>
       <translation>已旁路，过温</translation>
     </message>
-    <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="693"/>
-      <source>External control</source>
-      <translation type="unfinished">外部控制</translation>
-    </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="696"/>
+      <location filename="../../src/enums.cpp" line="719"/>
       <source>External control, tripped</source>
       <translation>外部控制，跳闸</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="699"/>
+      <location filename="../../src/enums.cpp" line="722"/>
       <source>External control, over temp</source>
       <translation>外部控制，过温</translation>
     </message>
@@ -10965,72 +10954,72 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>允许使用 WiFi 进行互联网访问</translation>
     </message>
     <message id="battery_status_overvoltage">
-      <location filename="../../src/enums.cpp" line="82"/>
+      <location filename="../../src/enums.cpp" line="95"/>
       <source>Overvoltage</source>
       <translation>过压</translation>
     </message>
     <message id="battery_status_undervoltage">
-      <location filename="../../src/enums.cpp" line="86"/>
+      <location filename="../../src/enums.cpp" line="99"/>
       <source>Undervoltage</source>
       <translation>欠压</translation>
     </message>
     <message id="battery_status_low_temperature_atc">
-      <location filename="../../src/enums.cpp" line="90"/>
+      <location filename="../../src/enums.cpp" line="103"/>
       <source>Low Temperature (ATC)</source>
       <translation>低温 (ATC)</translation>
     </message>
     <message id="battery_status_high_temperature_atc">
-      <location filename="../../src/enums.cpp" line="94"/>
+      <location filename="../../src/enums.cpp" line="107"/>
       <source>High Temperature (ATC)</source>
       <translation>高温 (ATC)</translation>
     </message>
     <message id="battery_status_cell_error">
-      <location filename="../../src/enums.cpp" line="98"/>
+      <location filename="../../src/enums.cpp" line="111"/>
       <source>Cell Error</source>
       <translation>单体错误</translation>
     </message>
     <message id="battery_status_high_temperature_atd">
-      <location filename="../../src/enums.cpp" line="102"/>
+      <location filename="../../src/enums.cpp" line="115"/>
       <source>High Temperature (ATD)</source>
       <translation>高温 (ATD)</translation>
     </message>
     <message id="battery_status_high_cell_voltage">
-      <location filename="../../src/enums.cpp" line="106"/>
+      <location filename="../../src/enums.cpp" line="119"/>
       <source>High Cell Voltage</source>
       <translation>电芯电压高</translation>
     </message>
     <message id="battery_status_update_failure">
-      <location filename="../../src/enums.cpp" line="110"/>
+      <location filename="../../src/enums.cpp" line="123"/>
       <source>Update Failure</source>
       <translation>更新失败</translation>
     </message>
     <message id="battery_status_charge_overcurrent_warning">
-      <location filename="../../src/enums.cpp" line="114"/>
+      <location filename="../../src/enums.cpp" line="127"/>
       <source>Charge Overcurrent Warning</source>
       <translation>充电过流警告</translation>
     </message>
     <message id="battery_status_charge_overcurrent_alarm">
-      <location filename="../../src/enums.cpp" line="118"/>
+      <location filename="../../src/enums.cpp" line="131"/>
       <source>Charge Overcurrent Alarm</source>
       <translation>充电过流警报</translation>
     </message>
     <message id="battery_status_discharge_overcurrent_warning">
-      <location filename="../../src/enums.cpp" line="122"/>
+      <location filename="../../src/enums.cpp" line="135"/>
       <source>Discharge Overcurrent Warning</source>
       <translation>放电过流警告</translation>
     </message>
     <message id="battery_status_discharge_overcurrent_alarm">
-      <location filename="../../src/enums.cpp" line="126"/>
+      <location filename="../../src/enums.cpp" line="139"/>
       <source>Discharge Overcurrent Alarm</source>
       <translation>放电过流警报</translation>
     </message>
     <message id="battery_status_low_cell_voltage">
-      <location filename="../../src/enums.cpp" line="130"/>
+      <location filename="../../src/enums.cpp" line="143"/>
       <source>Low Cell Voltage</source>
       <translation>电池电压低</translation>
     </message>
     <message id="battery_status_low_temperature_atd">
-      <location filename="../../src/enums.cpp" line="134"/>
+      <location filename="../../src/enums.cpp" line="147"/>
       <source>Low Temperature (ATD)</source>
       <translation>低温 (ATD)</translation>
     </message>
@@ -11085,17 +11074,17 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>启用链路本地</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="619"/>
+      <location filename="../../src/enums.cpp" line="643"/>
       <source>Running, over temperature</source>
       <translation>运行中，温度过高</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="622"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>Running, disabled</source>
       <translation>运行中，已禁用</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="629"/>
+      <location filename="../../src/enums.cpp" line="653"/>
       <source>Not running, disabled</source>
       <translation>未运行，已禁用</translation>
     </message>
@@ -11110,142 +11099,142 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>自动化可控设备，以最大限度地利用光伏自用</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="764"/>
+      <location filename="../../src/enums.cpp" line="873"/>
       <source>EMS Control: Hybrid droop</source>
       <translation>EMS 控制：混合下垂</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="768"/>
+      <location filename="../../src/enums.cpp" line="877"/>
       <source>EMS Control: Grid-following</source>
       <translation>EMS 控制：电网跟随</translation>
     </message>
     <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="771"/>
+      <location filename="../../src/enums.cpp" line="880"/>
       <source>EMS Control: Grid-forming</source>
       <translation>EMS 控制：电网形成</translation>
     </message>
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="785"/>
+      <location filename="../../src/enums.cpp" line="894"/>
       <source>Different fallback hybrid droop values in phase masters</source>
       <translation>相位主控中不同的回退混合下垂值</translation>
     </message>
     <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="788"/>
+      <location filename="../../src/enums.cpp" line="897"/>
       <source>Hybrid droop parameter write failed</source>
       <translation>混合下垂参数写入失败</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="791"/>
+      <location filename="../../src/enums.cpp" line="900"/>
       <source>Parameter error Fmin &gt; Fmax</source>
       <translation>参数错误：Fmin &gt; Fmax</translation>
     </message>
     <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="794"/>
+      <location filename="../../src/enums.cpp" line="903"/>
       <source>Parameter error Pmin &gt; Pmax</source>
       <translation>参数错误：Pmin &gt; Pmax</translation>
     </message>
     <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="797"/>
+      <location filename="../../src/enums.cpp" line="906"/>
       <source>Parameter error Umin &gt; Umax</source>
       <translation>参数错误：Umin &gt; Umax</translation>
     </message>
     <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="800"/>
+      <location filename="../../src/enums.cpp" line="909"/>
       <source>Parameter error Qmin &gt; Qmax</source>
       <translation>参数错误：Qmin &gt; Qmax</translation>
     </message>
     <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="803"/>
+      <location filename="../../src/enums.cpp" line="912"/>
       <source>Parameter error Q0 out of range</source>
       <translation>参数错误：Q0 超出范围</translation>
     </message>
     <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="806"/>
+      <location filename="../../src/enums.cpp" line="915"/>
       <source>Parameter error Qmin out of range</source>
       <translation>参数错误：Qmin 超出范围</translation>
     </message>
     <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="809"/>
+      <location filename="../../src/enums.cpp" line="918"/>
       <source>Parameter error Qmax out of range</source>
       <translation>参数错误：Qmax 超出范围</translation>
     </message>
     <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="812"/>
+      <location filename="../../src/enums.cpp" line="921"/>
       <source>Parameter error U0 out of range</source>
       <translation>参数错误：U0 超出范围</translation>
     </message>
     <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="815"/>
+      <location filename="../../src/enums.cpp" line="924"/>
       <source>Parameter error U droop out of range</source>
       <translation>参数错误：U 下垂超出范围</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="818"/>
+      <location filename="../../src/enums.cpp" line="927"/>
       <source>Parameter error P0 out of range</source>
       <translation>参数错误：P0 超出范围</translation>
     </message>
     <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="821"/>
+      <location filename="../../src/enums.cpp" line="930"/>
       <source>Parameter error Pmin out of range</source>
       <translation>参数错误：Pmin 超出范围</translation>
     </message>
     <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="824"/>
+      <location filename="../../src/enums.cpp" line="933"/>
       <source>Parameter error Pmax out of range</source>
       <translation>参数错误：Pmax 超出范围</translation>
     </message>
     <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="827"/>
+      <location filename="../../src/enums.cpp" line="936"/>
       <source>Parameter error F0 out of range</source>
       <translation>参数错误：F0 超出范围</translation>
     </message>
     <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="830"/>
+      <location filename="../../src/enums.cpp" line="939"/>
       <source>Parameter error freq droop out of range</source>
       <translation>参数错误：频率下垂超出范围</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="833"/>
+      <location filename="../../src/enums.cpp" line="942"/>
       <source>Ve.Bus internal error PF vs FP data mismatch</source>
       <translation>Ve.Bus 内部错误：PF 与 FP 数据不匹配</translation>
     </message>
     <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="836"/>
+      <location filename="../../src/enums.cpp" line="945"/>
       <source>Ve.Bus internal error QU vs UQ data mismatch</source>
       <translation>Ve.Bus 内部错误：QU 与 UQ 数据不匹配</translation>
     </message>
     <message id="generic_input_discrete">
-      <location filename="../../src/enums.cpp" line="489"/>
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Discrete value indicator</source>
       <translation>离散值指示器</translation>
     </message>
     <message id="generic_input_value_unranged">
-      <location filename="../../src/enums.cpp" line="492"/>
+      <location filename="../../src/enums.cpp" line="517"/>
       <source>Value indicator (unranged)</source>
       <translation>值指示器（无范围）</translation>
     </message>
     <message id="generic_input_value_ranged">
-      <location filename="../../src/enums.cpp" line="495"/>
+      <location filename="../../src/enums.cpp" line="520"/>
       <source>Value indicator (ranged)</source>
       <translation>值指示器（有范围）</translation>
     </message>
     <message id="generic_input_temperature">
-      <location filename="../../src/enums.cpp" line="498"/>
+      <location filename="../../src/enums.cpp" line="523"/>
       <source>Temperature indicator</source>
       <translation>温度指示器</translation>
     </message>
     <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="614"/>
       <source>Generator start/stop</source>
       <translation>发电机启/停</translation>
     </message>
     <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="626"/>
       <source>Genset Helper</source>
       <translation>发电机助手</translation>
     </message>
     <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="629"/>
       <source>Opportunity load</source>
       <translation>机会负载</translation>
     </message>
@@ -11270,7 +11259,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>输入 VE.Bus 密码以访问级别 %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="73"/>
+      <location filename="../../components/DevicePage.qml" line="82"/>
       <source>Inputs</source>
       <translation>输入</translation>
     </message>
@@ -11363,23 +11352,18 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>当前逆变器/充电器固件不支持预热和冷却功能。
 请更新到最新固件以调整这些设置。</translation>
     </message>
-    <message id="generic_input_unknown_status">
-      <location filename="../../src/enums.cpp" line="518"/>
+    <message id="status_text_unknown">
+      <location filename="../../src/enums.cpp" line="31"/>
       <source>Unknown status</source>
       <translation>未知状态</translation>
     </message>
-    <message id="page_switchable_output_set_dim_level_manually">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
-      <source>Set startup dim level manually</source>
-      <translation>手动设置启动亮度级别</translation>
-    </message>
     <message id="main_system_service_settings_offline_warning">
-      <location filename="../../Main.qml" line="287"/>
+      <location filename="../../Main.qml" line="288"/>
       <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
       <translation>警告：检测到本地设置服务离线；当服务恢复可用时，将重新加载UI...</translation>
     </message>
     <message id="main_system_service_platform_offline_warning">
-      <location filename="../../Main.qml" line="308"/>
+      <location filename="../../Main.qml" line="309"/>
       <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
       <translation>警告：检测到venus-platform服务离线；当服务恢复可用时，将重新加载UI...</translation>
     </message>
@@ -11415,12 +11399,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>%1 %2:%3 (单位 %4)</translation>
     </message>
     <message id="settings_switch_channel_configuration">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="50"/>
       <source>Channel configuration</source>
       <translation>通道配置</translation>
     </message>
     <message id="device_page_outputs">
-      <location filename="../../components/DevicePage.qml" line="46"/>
+      <location filename="../../components/DevicePage.qml" line="63"/>
       <source>Outputs</source>
       <extracomment>Settings page for switchable outputs</extracomment>
       <translation>输出</translation>
@@ -12037,7 +12021,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
       <source>Battery high temperature</source>
       <translation>电池温度高</translation>
     </message>
@@ -12095,311 +12079,352 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="109"/>
       <source>Battery temperature too low</source>
       <translation>电池温度过低</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="111"/>
       <source>Charger high temperature</source>
       <translation>充电器温度高</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
       <source>Charger excessive current</source>
       <translation>充电器过流</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
       <source>Charger negative current</source>
       <translation>充电器反向电流</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
       <source>Charger bulk time expired</source>
       <translation>充电器快充时间超时</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
       <source>Charger current sensor issue</source>
       <translation>充电器电流感应问题</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
       <source>Internal Tsensor miswired</source>
       <translation>内部温度传感接线错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
       <source>Internal Tsensor missing</source>
       <translation>内部温度传感丢失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
       <source>Charger fan not detected</source>
       <translation>未检测到充电器风扇</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
       <source>Charger fan over-current</source>
       <translation>充电器风扇过流</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
       <source>Charger terminal overheat</source>
       <translation>充电器端子过热</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="107"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="112"/>
       <source>Charger short circuit</source>
       <translation>充电器短路</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="37"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="113"/>
       <source>Charger power stage issue</source>
       <translation>充电器功率级问题</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
       <source>Over-charge protection</source>
       <translation>过充保护</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
       <source>Input high voltage</source>
       <translation>输入电压高</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
       <source>Input excessive current</source>
       <translation>输入电流过大</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
       <source>Input excessive power</source>
       <translation>输入功率过高</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
       <source>Input polarity issue</source>
       <translation>输入极性问题</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
       <source>Input voltage absent</source>
       <translation>输入电压缺失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
       <source>Input shutdown (no retries)</source>
       <translation>输入关闭（无重试）</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="46"/>
       <source>Input shutdown (retry)</source>
       <translation>输入中断（重试）</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
       <source>Input internal failure</source>
       <translation>输入内部故障</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="48"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="50"/>
       <source>PV isolation failure</source>
       <translation>光伏隔离失效</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
       <source>Ground fault detected</source>
       <translation>检测到接地故障</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
       <source>Inverter overload</source>
       <translation>逆变器过载</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
       <source>Inverter temp too high</source>
       <translation>逆变器温度过高</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
       <source>Inverter peak current</source>
       <translation>逆变器峰值电流</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
       <source>Inverter internal DC level</source>
       <translation>逆变器内部直流电平</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
       <source>Inverter wrong ACout level</source>
       <translation>逆变器交流电平错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
       <source>Inverter powerstage fault</source>
       <translation>逆变器功率级故障</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
       <source>Inverter connected to AC</source>
       <translation>逆变器连接到交流</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="62"/>
       <source>ACIN1 relay test fault</source>
       <translation>ACIN1继电器测试故障</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
       <source>ACIN2 relay test fault</source>
       <translation>ACIN2继电器测试故障</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
       <source>Device disappeared</source>
       <translation>设备消失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="64"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
       <source>Incompatible device</source>
       <translation>不兼容设备</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
       <source>BMS connection lost</source>
       <translation>BMS连接丢失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="68"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="69"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
       <source>Network misconfigured</source>
       <translation>网络配置错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
       <source>Phase rotation</source>
       <translation>相位旋转</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="73"/>
       <source>Multiple AC inputs</source>
       <translation>多路交流输入</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
-      <source>Phase overload</source>
-      <translation>相位过载</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
       <source>Memory write error</source>
       <translation>内存写入错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
       <source>CPU temperature too high</source>
       <translation>CPU温度太高</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
       <source>Communication lost</source>
       <translation>通讯丢失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
       <source>Calibration data lost</source>
       <translation>校准数据丢失</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="78"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
       <source>Incompatible firmware</source>
       <translation>固件不兼容</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
       <source>Incompatible hardware</source>
       <translation>硬件不兼容</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="85"/>
       <source>Settings invalid</source>
       <translation>设置无效</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
       <source>Reference voltage failed</source>
       <translation>参考电压异常</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
       <source>Tester fail</source>
       <translation>检测失败</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
       <source>History invalid</source>
       <translation>历史记录无效</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
       <source>kWh counters invalid</source>
       <translation>千瓦时计数器无效</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
       <source>DC voltage error</source>
       <translation>直流电压错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="93"/>
       <source>GFCI sensor error</source>
       <translation>GFCI 传感器错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
       <source>3V3 supply error</source>
       <translation>3V3电源错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="90"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
       <source>5V supply error</source>
       <translation>5V电源错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
       <source>12V supply error</source>
       <translation>12V电源错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
       <source>15V supply error</source>
       <translation>15V电源错误</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="98"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="99"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="100"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="101"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="102"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="105"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
       <source>PV Input shutdown</source>
       <translation>PV输入关断</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="23"/>
+      <source>Battery relay fault</source>
+      <translation>电池继电器故障</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
+      <source>Battery not found</source>
+      <translation>未找到电池</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <source>Too many units in parallel</source>
+      <translation>并联单元过多</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <source>Network incomplete</source>
+      <translation>网络不完整</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <source>Settings sync disabled</source>
+      <translation>设置同步已禁用</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="115"/>
+      <source>Charger pre-charge failed</source>
+      <translation>充电器预充电失败</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="116"/>
+      <source>Charger solar relay failed</source>
+      <translation>充电器太阳能继电器故障</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="117"/>
+      <source>Charger solar short</source>
+      <translation>充电器太阳能短路</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="118"/>
+      <source>Charger solar connect failed</source>
+      <translation>充电器太阳能连接失败</translation>
     </message>
   </context>
   <context>
@@ -13186,21 +13211,6 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>超速</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
-      <source>Oiltemperature higher than expected</source>
-      <translation>温度高于预期</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
-      <source>Oiltemperature open circuit / short to power</source>
-      <translation>过热断路/电源短路</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
-      <source>Oiltemperature short to ground</source>
-      <translation>温度过高对地短路</translation>
-    </message>
-    <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="823"/>
       <source>Analog setpoint high / short to power</source>
       <translation>模拟设定点高/电源短路</translation>
@@ -13299,6 +13309,21 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="845"/>
       <source>Processor failure</source>
       <translation>处理器故障</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
+      <source>Oil temperature higher than expected</source>
+      <translation>油温高于预期</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
+      <source>Oil temperature open circuit / short to power</source>
+      <translation>油温电路开路/对电源短路</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
+      <source>Oil temperature short to ground</source>
+      <translation>油温对地短路</translation>
     </message>
   </context>
   <context>

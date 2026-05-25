@@ -44,7 +44,7 @@
       <translation>Низкое напряжение батареи</translation>
     </message>
     <message id="switchable_output_function_manual">
-      <location filename="../../src/enums.cpp" line="593"/>
+      <location filename="../../src/enums.cpp" line="617"/>
       <source>Manual</source>
       <translation>Вручную</translation>
     </message>
@@ -109,8 +109,8 @@
       <source>Solar yield</source>
       <translation>Выход солнечной энергии</translation>
     </message>
-    <message id="inverters_state_externalccontrol">
-      <location filename="../../data/System.qml" line="186"/>
+    <message id="ess_state_external_control">
+      <location filename="../../data/Ess.qml" line="41"/>
       <source>External control</source>
       <translation>Внешнее управление</translation>
     </message>
@@ -166,7 +166,7 @@
       <translation>GPS</translation>
     </message>
     <message id="switchable_output_function_tankpump">
-      <location filename="../../src/enums.cpp" line="596"/>
+      <location filename="../../src/enums.cpp" line="620"/>
       <source>Tank pump</source>
       <translation>Насос резервуара</translation>
     </message>
@@ -1675,8 +1675,8 @@ Use unless prohibited by the utility provider.</source>
       <source>Sustain</source>
       <translation>Удержание</translation>
     </message>
-    <message id="inverters_state_recharge">
-      <location filename="../../data/System.qml" line="195"/>
+    <message id="system_state_recharge">
+      <location filename="../../src/enums.cpp" line="808"/>
       <source>Recharge</source>
       <translation>Зарядка</translation>
     </message>
@@ -1736,42 +1736,42 @@ Use unless prohibited by the utility provider.</source>
       <translation>Ограничение  подачи активно</translation>
     </message>
     <message id="digitalinputs_type_pulsemeter">
-      <location filename="../../src/enums.cpp" line="295"/>
+      <location filename="../../src/enums.cpp" line="308"/>
       <source>Pulse meter</source>
       <translation>Измеритель импульсов</translation>
     </message>
     <message id="digitalinputs_type_dooralarm">
-      <location filename="../../src/enums.cpp" line="298"/>
+      <location filename="../../src/enums.cpp" line="311"/>
       <source>Door alarm</source>
       <translation>Дверная сигнализация</translation>
     </message>
     <message id="switchable_output_bilge_pump">
-      <location filename="../../src/enums.cpp" line="561"/>
+      <location filename="../../src/enums.cpp" line="585"/>
       <source>Bilge pump</source>
       <translation>Трюмный насос</translation>
     </message>
     <message id="digitalinputs_type_bilgealarm">
-      <location filename="../../src/enums.cpp" line="304"/>
+      <location filename="../../src/enums.cpp" line="317"/>
       <source>Bilge alarm</source>
       <translation>Трюмная сигнализация</translation>
     </message>
     <message id="digitalinputs_type_burglaralarm">
-      <location filename="../../src/enums.cpp" line="307"/>
+      <location filename="../../src/enums.cpp" line="320"/>
       <source>Burglar alarm</source>
       <translation>Охранная сигнализация</translation>
     </message>
     <message id="digitalinputs_type_smokealarm">
-      <location filename="../../src/enums.cpp" line="310"/>
+      <location filename="../../src/enums.cpp" line="323"/>
       <source>Smoke alarm</source>
       <translation>Сигнализация задымления</translation>
     </message>
     <message id="digitalinputs_type_firealarm">
-      <location filename="../../src/enums.cpp" line="313"/>
+      <location filename="../../src/enums.cpp" line="326"/>
       <source>Fire alarm</source>
       <translation>Противопожарная сигнализация</translation>
     </message>
     <message id="digitalinputs_type_co2alarm">
-      <location filename="../../src/enums.cpp" line="316"/>
+      <location filename="../../src/enums.cpp" line="329"/>
       <source>CO2 alarm</source>
       <translation>Сигнализация CO2</translation>
     </message>
@@ -2482,25 +2482,25 @@ Use unless prohibited by the utility provider.</source>
       <translation>Сигнализация о высоком напряжении батареи</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="666"/>
+      <location filename="../../components/CommonWords.qml" line="672"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Последняя ошибка</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="669"/>
+      <location filename="../../components/CommonWords.qml" line="675"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Предпоследняя ошибка</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="672"/>
+      <location filename="../../components/CommonWords.qml" line="678"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>Третья последняя ошибка</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="675"/>
+      <location filename="../../components/CommonWords.qml" line="681"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>Четвертая последняя ошибка</translation>
@@ -3537,12 +3537,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Неизвестно</translation>
     </message>
     <message id="battery_status_balancing">
-      <location filename="../../src/enums.cpp" line="78"/>
+      <location filename="../../src/enums.cpp" line="91"/>
       <source>Balancing</source>
       <translation>Балансировка</translation>
     </message>
     <message id="settings_switch_channel_output">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="82"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="88"/>
       <source>Output</source>
       <extracomment>Configure channel to use "output" direction</extracomment>
       <translation>Выход</translation>
@@ -3915,12 +3915,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>Устройства Smappee bus</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="692"/>
+      <location filename="../../components/CommonWords.qml" line="698"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Эта настройка отключена, если подключен цифровой мультиконтроллер.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="681"/>
+      <location filename="../../components/CommonWords.qml" line="687"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Эта настройка отключена, если подключена система VE.Bus BMS.</translation>
     </message>
@@ -4021,7 +4021,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Сброс счетчика</translation>
     </message>
     <message id="generic_input_status_sensor_battery_low">
-      <location filename="../../src/enums.cpp" line="514"/>
+      <location filename="../../src/enums.cpp" line="539"/>
       <source>Sensor battery low</source>
       <translation>Низкий уровень заряда батареи датчика</translation>
     </message>
@@ -4719,7 +4719,7 @@ Do you want to continue?</source>
       <translation>Энергия</translation>
     </message>
     <message id="pvinverter_statusCode_error">
-      <location filename="../../src/enums.cpp" line="412"/>
+      <location filename="../../src/enums.cpp" line="438"/>
       <source>Error</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Ошибка</translation>
@@ -4740,7 +4740,7 @@ Do you want to continue?</source>
       <translation>Версия прошивки</translation>
     </message>
     <message id="digitalinputs_type_generator">
-      <location filename="../../src/enums.cpp" line="319"/>
+      <location filename="../../src/enums.cpp" line="332"/>
       <source>Generator</source>
       <translation>Генератор</translation>
     </message>
@@ -4781,7 +4781,7 @@ Do you want to continue?</source>
       <translation>%1 Час(ы)</translation>
     </message>
     <message id="battery_mode_idle">
-      <location filename="../../src/enums.cpp" line="27"/>
+      <location filename="../../src/enums.cpp" line="40"/>
       <source>Idle</source>
       <extracomment>Battery mode</extracomment>
       <translation>без нагрузки</translation>
@@ -4868,7 +4868,7 @@ Do you want to continue?</source>
       <translation>Нет</translation>
     </message>
     <message id="microgrid_error_none">
-      <location filename="../../src/enums.cpp" line="782"/>
+      <location filename="../../src/enums.cpp" line="891"/>
       <source>No error</source>
       <translation>Без ошибок</translation>
     </message>
@@ -4995,7 +4995,7 @@ Do you want to continue?</source>
       <translation>Уровень сигнала</translation>
     </message>
     <message id="pvinverter_statusCode_standby">
-      <location filename="../../src/enums.cpp" line="404"/>
+      <location filename="../../src/enums.cpp" line="430"/>
       <source>Standby</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Ожидание</translation>
@@ -5031,7 +5031,7 @@ Do you want to continue?</source>
       <translation>Состояние</translation>
     </message>
     <message id="pvinverter_statusCode_startup">
-      <location filename="../../src/enums.cpp" line="396"/>
+      <location filename="../../src/enums.cpp" line="422"/>
       <source>Startup (%1)</source>
       <extracomment>PV inverter status code. %1 = the startup status number</extracomment>
       <translation>Запуск (%1)</translation>
@@ -5269,62 +5269,62 @@ Do you want to continue?</source>
       <translation>Прошивка не обнаружена</translation>
     </message>
     <message id="tank_type_fuel">
-      <location filename="../../src/enums.cpp" line="716"/>
+      <location filename="../../src/enums.cpp" line="825"/>
       <source>Fuel</source>
       <translation>Топливо</translation>
     </message>
     <message id="tank_type_fresh_water">
-      <location filename="../../src/enums.cpp" line="719"/>
+      <location filename="../../src/enums.cpp" line="828"/>
       <source>Fresh water</source>
       <translation>Свежая вода</translation>
     </message>
     <message id="tank_type_waste_water">
-      <location filename="../../src/enums.cpp" line="722"/>
+      <location filename="../../src/enums.cpp" line="831"/>
       <source>Waste water</source>
       <translation>Грязная вода</translation>
     </message>
     <message id="tank_type_live_well">
-      <location filename="../../src/enums.cpp" line="725"/>
+      <location filename="../../src/enums.cpp" line="834"/>
       <source>Live well</source>
       <translation>Рабочая скважина</translation>
     </message>
     <message id="tank_type_oil">
-      <location filename="../../src/enums.cpp" line="728"/>
+      <location filename="../../src/enums.cpp" line="837"/>
       <source>Oil</source>
       <translation>Нефть</translation>
     </message>
     <message id="tank_type_black_water">
-      <location filename="../../src/enums.cpp" line="731"/>
+      <location filename="../../src/enums.cpp" line="840"/>
       <source>Black water</source>
       <translation>Темная вода</translation>
     </message>
     <message id="tank_type_gasoline">
-      <location filename="../../src/enums.cpp" line="734"/>
+      <location filename="../../src/enums.cpp" line="843"/>
       <source>Gasoline</source>
       <translation>Бензин</translation>
     </message>
     <message id="tank_type_diesel">
-      <location filename="../../src/enums.cpp" line="737"/>
+      <location filename="../../src/enums.cpp" line="846"/>
       <source>Diesel</source>
       <translation>Дизельное топливо</translation>
     </message>
     <message id="tank_type_lpg">
-      <location filename="../../src/enums.cpp" line="740"/>
+      <location filename="../../src/enums.cpp" line="849"/>
       <source>LPG</source>
       <translation>Сжиженный углеводородный газ</translation>
     </message>
     <message id="tank_type_lng">
-      <location filename="../../src/enums.cpp" line="743"/>
+      <location filename="../../src/enums.cpp" line="852"/>
       <source>LNG</source>
       <translation>Сжиженный природный газ</translation>
     </message>
     <message id="tank_type_hydraulic_oil">
-      <location filename="../../src/enums.cpp" line="746"/>
+      <location filename="../../src/enums.cpp" line="855"/>
       <source>Hydraulic oil</source>
       <translation>Гидравлическое масло</translation>
     </message>
     <message id="tank_type_raw_water">
-      <location filename="../../src/enums.cpp" line="749"/>
+      <location filename="../../src/enums.cpp" line="858"/>
       <source>Raw water</source>
       <translation>Сырая вода</translation>
     </message>
@@ -5678,7 +5678,7 @@ Do you want to continue?</source>
       <translation type="unfinished">hr</translation>
     </message>
     <message id="solarchargers_state_bulk">
-      <location filename="../../src/enums.cpp" line="437"/>
+      <location filename="../../src/enums.cpp" line="462"/>
       <source>Bulk</source>
       <translation>Зарядка</translation>
     </message>
@@ -5689,7 +5689,7 @@ Do you want to continue?</source>
       <translation>Поглощение</translation>
     </message>
     <message id="solarchargers_state_float">
-      <location filename="../../src/enums.cpp" line="443"/>
+      <location filename="../../src/enums.cpp" line="468"/>
       <source>Float</source>
       <translation>Плавающий</translation>
     </message>
@@ -5937,32 +5937,32 @@ Do you want to continue?</source>
       <translation>%1 танк (%2)</translation>
     </message>
     <message id="dcMeter_ac_charger">
-      <location filename="../../src/enums.cpp" line="209"/>
+      <location filename="../../src/enums.cpp" line="222"/>
       <source>AC charger</source>
       <translation>Зарядное устройство переменного тока</translation>
     </message>
     <message id="dcMeter_alternator">
-      <location filename="../../src/enums.cpp" line="212"/>
+      <location filename="../../src/enums.cpp" line="225"/>
       <source>Alternator</source>
       <translation>альтернатор</translation>
     </message>
     <message id="dcMeter_dc_system">
-      <location filename="../../src/enums.cpp" line="221"/>
+      <location filename="../../src/enums.cpp" line="234"/>
       <source>DC system</source>
       <translation>DC СИСТЕМА</translation>
     </message>
     <message id="dcMeter_fuelcell">
-      <location filename="../../src/enums.cpp" line="230"/>
+      <location filename="../../src/enums.cpp" line="243"/>
       <source>Fuel cell</source>
       <translation>Топливный элемент</translation>
     </message>
     <message id="dcMeter_shaft_generator">
-      <location filename="../../src/enums.cpp" line="248"/>
+      <location filename="../../src/enums.cpp" line="261"/>
       <source>Shaft generator</source>
       <translation>Вал-генератор</translation>
     </message>
     <message id="dcMeter_water_generator">
-      <location filename="../../src/enums.cpp" line="254"/>
+      <location filename="../../src/enums.cpp" line="267"/>
       <source>Water generator</source>
       <translation>Генератор воды</translation>
     </message>
@@ -6054,11 +6054,6 @@ Do you want to continue?</source>
     <message id="evchargers_mode_scheduled">
       <location filename="../../data/EvChargers.qml" line="126"/>
       <source>Scheduled</source>
-      <translation type="unfinished">Запланировано</translation>
-    </message>
-    <message id="inverters_state_scheduledcharge">
-      <location filename="../../data/System.qml" line="198"/>
-      <source>Scheduled</source>
       <translation>Запланировано</translation>
     </message>
     <message id="page_generator_warm_up">
@@ -6087,150 +6082,140 @@ Do you want to continue?</source>
       <translation>Mollitia quis est quas deleniti quibusdam explicabo quasi. Voluptatem qui quia et consequuntur.</translation>
     </message>
     <message id="pvinverters_statusCode_boot_loading">
-      <location filename="../../src/enums.cpp" line="408"/>
+      <location filename="../../src/enums.cpp" line="434"/>
       <source>Boot loading</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Загрузка</translation>
     </message>
     <message id="pvinverter_statusCode_running_mppt">
-      <location filename="../../src/enums.cpp" line="416"/>
+      <location filename="../../src/enums.cpp" line="442"/>
       <source>Running (MPPT)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Работает (MPPT)</translation>
     </message>
     <message id="pvinverter_running_throttled">
-      <location filename="../../src/enums.cpp" line="420"/>
+      <location filename="../../src/enums.cpp" line="446"/>
       <source>Running (Throttled)</source>
       <extracomment>PV inverter status code</extracomment>
       <translation>Запущено (ускорено)</translation>
     </message>
     <message id="solarchargers_state_fault">
-      <location filename="../../src/enums.cpp" line="434"/>
+      <location filename="../../src/enums.cpp" line="459"/>
       <source>Fault</source>
       <translation>Неисправность</translation>
     </message>
     <message id="solarchargers_state_absorption">
-      <location filename="../../src/enums.cpp" line="440"/>
+      <location filename="../../src/enums.cpp" line="465"/>
       <source>Absorption</source>
       <translation>Поглощение</translation>
     </message>
     <message id="solarchargers_state_storage">
-      <location filename="../../src/enums.cpp" line="446"/>
+      <location filename="../../src/enums.cpp" line="471"/>
       <source>Storage</source>
       <translation>Сохранение</translation>
     </message>
     <message id="solarchargers_state_equalize">
-      <location filename="../../src/enums.cpp" line="449"/>
+      <location filename="../../src/enums.cpp" line="474"/>
       <source>Equalize</source>
       <translation>Выравнивание</translation>
     </message>
-    <message id="inverters_state_aes_mode">
-      <location filename="../../data/System.qml" line="128"/>
+    <message id="switchable_output_disabled">
+      <location filename="../../src/enums.cpp" line="695"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Отключено</translation>
+    </message>
+    <message id="switchable_output_externalcontrol">
+      <location filename="../../src/enums.cpp" line="716"/>
+      <source>External control</source>
+      <translation type="unfinished">Внешнее управление</translation>
+    </message>
+    <message id="system_state_aes_mode">
+      <location filename="../../src/enums.cpp" line="740"/>
       <source>AES mode</source>
       <translation>Низкая мощность</translation>
     </message>
-    <message id="inverters_state_faultcondition">
-      <location filename="../../data/System.qml" line="131"/>
+    <message id="system_state_faultcondition">
+      <location filename="../../src/enums.cpp" line="743"/>
       <source>Fault condition</source>
       <translation>Состояние неисправности</translation>
     </message>
-    <message id="inverters_state_bulkcharging">
-      <location filename="../../data/System.qml" line="134"/>
+    <message id="system_state_bulkcharging">
+      <location filename="../../src/enums.cpp" line="746"/>
       <source>Bulk charging</source>
       <translation>Насыпная зарядка</translation>
     </message>
-    <message id="inverters_state_absorptioncharging">
-      <location filename="../../data/System.qml" line="137"/>
+    <message id="system_state_absorptioncharging">
+      <location filename="../../src/enums.cpp" line="749"/>
       <source>Absorption charging</source>
       <translation>Абсорбционная зарядка</translation>
     </message>
-    <message id="inverters_state_floatcharging">
-      <location filename="../../data/System.qml" line="140"/>
+    <message id="system_state_floatcharging">
+      <location filename="../../src/enums.cpp" line="752"/>
       <source>Float charging</source>
       <translation>Зарядка поплавка</translation>
     </message>
-    <message id="inverters_state_storagemode">
-      <location filename="../../data/System.qml" line="143"/>
+    <message id="system_state_storagemode">
+      <location filename="../../src/enums.cpp" line="755"/>
       <source>Storage mode</source>
       <translation>Режим хранения</translation>
     </message>
-    <message id="inverters_state_equalisationcharging">
-      <location filename="../../data/System.qml" line="146"/>
+    <message id="system_state_equalisationcharging">
+      <location filename="../../src/enums.cpp" line="758"/>
       <source>Equalization charging</source>
       <translation>Уравнительная зарядка</translation>
     </message>
-    <message id="inverters_state_passthru">
-      <location filename="../../data/System.qml" line="149"/>
+    <message id="system_state_passthru">
+      <location filename="../../src/enums.cpp" line="761"/>
       <source>Pass-thru</source>
       <translation>Проходная</translation>
     </message>
-    <message id="inverters_state_inverting">
-      <location filename="../../data/System.qml" line="152"/>
+    <message id="system_state_inverting">
+      <location filename="../../src/enums.cpp" line="764"/>
       <source>Inverting</source>
       <translation>Инвертирование</translation>
     </message>
-    <message id="inverters_state_assisting">
-      <location filename="../../data/System.qml" line="155"/>
+    <message id="system_state_assisting">
+      <location filename="../../src/enums.cpp" line="767"/>
       <source>Assisting</source>
       <translation>Помощь</translation>
     </message>
-    <message id="inverters_state_powersupplymode">
-      <location filename="../../data/System.qml" line="158"/>
+    <message id="system_state_powersupplymode">
+      <location filename="../../src/enums.cpp" line="770"/>
       <source>Power supply mode</source>
       <translation>Режим поддержки мощности</translation>
-    </message>
-    <message id="inverters_state_sustain">
-      <location filename="../../data/System.qml" line="161"/>
-      <source>Sustain</source>
-      <translation type="unfinished">Удержание</translation>
-    </message>
-    <message id="inverters_state_wakeup">
-      <location filename="../../data/System.qml" line="165"/>
-      <source>Wake up</source>
-      <translation type="unfinished">Проснись</translation>
-    </message>
-    <message id="inverters_state_system_sustain">
-      <location filename="../../data/System.qml" line="192"/>
-      <source>Sustain</source>
-      <translation type="unfinished">Удержание</translation>
-    </message>
-    <message id="inverters_state_dynamic_ess">
-      <location filename="../../data/System.qml" line="201"/>
-      <source>Dynamic ESS</source>
-      <translation type="unfinished">Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
     <message id="ev_charging_state_wake_up">
       <location filename="../../pages/ev/EvPage.qml" line="91"/>
       <source>Wake up</source>
       <translation>Проснись</translation>
     </message>
-    <message id="inverters_state_repeatedabsorption">
-      <location filename="../../data/System.qml" line="168"/>
+    <message id="system_state_repeatedabsorption">
+      <location filename="../../src/enums.cpp" line="780"/>
       <source>Repeated absorption</source>
       <translation>Повторная абсорбция</translation>
     </message>
-    <message id="inverters_state_autoequalize">
-      <location filename="../../data/System.qml" line="171"/>
+    <message id="system_state_autoequalize">
+      <location filename="../../src/enums.cpp" line="783"/>
       <source>Auto equalize</source>
       <translation>Автоматическое выравнивание</translation>
     </message>
-    <message id="inverters_state_battery_safe">
-      <location filename="../../data/System.qml" line="174"/>
+    <message id="system_state_battery_safe">
+      <location filename="../../src/enums.cpp" line="786"/>
       <source>Battery safe</source>
       <translation>Battery Safe</translation>
     </message>
-    <message id="inverters_state_loaddetect">
-      <location filename="../../data/System.qml" line="177"/>
+    <message id="system_state_loaddetect">
+      <location filename="../../src/enums.cpp" line="789"/>
       <source>Load detect</source>
       <translation>Обнаружение нагрузки</translation>
     </message>
-    <message id="inverters_state_blocked">
-      <location filename="../../data/System.qml" line="180"/>
+    <message id="system_state_blocked">
+      <location filename="../../src/enums.cpp" line="792"/>
       <source>Blocked</source>
       <translation>Заблокировано</translation>
     </message>
-    <message id="inverters_state_test">
-      <location filename="../../data/System.qml" line="183"/>
+    <message id="system_state_test">
+      <location filename="../../src/enums.cpp" line="795"/>
       <source>Test</source>
       <translation>Тест</translation>
     </message>
@@ -6536,12 +6521,12 @@ Do you want to continue?</source>
       <translation>Состояние балансировщика</translation>
     </message>
     <message id="battery_status_balanced">
-      <location filename="../../src/enums.cpp" line="70"/>
+      <location filename="../../src/enums.cpp" line="83"/>
       <source>Balanced</source>
       <translation>Сбалансированный</translation>
     </message>
     <message id="battery_status_imbalance">
-      <location filename="../../src/enums.cpp" line="74"/>
+      <location filename="../../src/enums.cpp" line="87"/>
       <source>Imbalance</source>
       <translation>Дисбаланс</translation>
     </message>
@@ -7955,7 +7940,7 @@ Do you want to continue?</source>
     </message>
     <message id="common_words_unknown_status">
       <location filename="../../components/CommonWords.qml" line="574"/>
-      <location filename="../../src/enums.cpp" line="838"/>
+      <location filename="../../src/enums.cpp" line="947"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Неизвестно</translation>
@@ -7975,19 +7960,19 @@ Do you want to continue?</source>
       <translation>Доходность сегодня</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="660"/>
+      <location filename="../../components/CommonWords.qml" line="666"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="686"/>
+      <location filename="../../components/CommonWords.qml" line="692"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="697"/>
+      <location filename="../../components/CommonWords.qml" line="703"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -8058,273 +8043,293 @@ Do you want to continue?</source>
       <translation>Тепловой насос</translation>
     </message>
     <message id="digitalinputs_touch_input_control">
-      <location filename="../../src/enums.cpp" line="322"/>
+      <location filename="../../src/enums.cpp" line="335"/>
       <source>Touch input control</source>
       <translation>Управление сенсорным входом</translation>
     </message>
     <message id="switchable_output_overtemperature">
-      <location filename="../../src/enums.cpp" line="657"/>
+      <location filename="../../src/enums.cpp" line="680"/>
       <source>Over temperature</source>
       <translation>Перегрев</translation>
     </message>
     <message id="switch_state_temperature_warning">
-      <location filename="../../src/enums.cpp" line="469"/>
+      <location filename="../../src/enums.cpp" line="494"/>
       <source>Temperature warning</source>
       <translation>Предупреждение о температуре</translation>
     </message>
+    <message id="status_text_off">
+      <location filename="../../src/enums.cpp" line="25"/>
+      <source>Off</source>
+      <extracomment>An "off" state</extracomment>
+      <translation type="unfinished">Выкл</translation>
+    </message>
     <message id="battery_mode_charging">
-      <location filename="../../src/enums.cpp" line="31"/>
+      <location filename="../../src/enums.cpp" line="44"/>
       <source>Charging</source>
       <extracomment>Battery mode</extracomment>
       <translation type="unfinished">заряжается</translation>
     </message>
     <message id="battery_mode_discharging">
-      <location filename="../../src/enums.cpp" line="35"/>
+      <location filename="../../src/enums.cpp" line="48"/>
       <source>Discharging</source>
       <extracomment>Battery mode</extracomment>
       <translation type="unfinished">разряжается</translation>
     </message>
     <message id="cardinalDirection_short_north">
-      <location filename="../../src/enums.cpp" line="146"/>
+      <location filename="../../src/enums.cpp" line="159"/>
       <source>N</source>
       <extracomment>Abbreviation of "North" direction</extracomment>
       <translation type="unfinished">C</translation>
     </message>
     <message id="cardinalDirection_short_south">
-      <location filename="../../src/enums.cpp" line="150"/>
+      <location filename="../../src/enums.cpp" line="163"/>
       <source>S</source>
       <extracomment>Abbreviation of "South" direction</extracomment>
       <translation type="unfinished">Ю</translation>
     </message>
     <message id="cardinalDirection_short_east">
-      <location filename="../../src/enums.cpp" line="154"/>
+      <location filename="../../src/enums.cpp" line="167"/>
       <source>E</source>
       <extracomment>Abbreviation of "East" direction</extracomment>
       <translation type="unfinished">B</translation>
     </message>
     <message id="cardinalDirection_short_west">
-      <location filename="../../src/enums.cpp" line="158"/>
+      <location filename="../../src/enums.cpp" line="171"/>
       <source>W</source>
       <extracomment>Abbreviation of "West" direction</extracomment>
       <translation type="unfinished">З</translation>
     </message>
     <message id="dcMeter_bilge_pump">
-      <location filename="../../src/enums.cpp" line="215"/>
+      <location filename="../../src/enums.cpp" line="228"/>
       <source>Bilge pump</source>
       <translation type="unfinished">Трюмный насос</translation>
     </message>
     <message id="digitalinputs_type_disabled">
-      <location filename="../../src/enums.cpp" line="292"/>
+      <location filename="../../src/enums.cpp" line="305"/>
       <source>Disabled</source>
       <translation type="unfinished">Отключено</translation>
     </message>
     <message id="digitalinputs_type_bilgepump">
-      <location filename="../../src/enums.cpp" line="301"/>
+      <location filename="../../src/enums.cpp" line="314"/>
       <source>Bilge pump</source>
       <translation type="unfinished">Трюмный насос</translation>
     </message>
     <message id="digitalinputs_state_low">
-      <location filename="../../src/enums.cpp" line="334"/>
+      <location filename="../../src/enums.cpp" line="347"/>
       <source>Low</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Низкий</translation>
     </message>
     <message id="digitalinputs_state_high">
-      <location filename="../../src/enums.cpp" line="338"/>
+      <location filename="../../src/enums.cpp" line="351"/>
       <source>High</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Высокий</translation>
     </message>
-    <message id="digitalinputs_state_off">
-      <location filename="../../src/enums.cpp" line="342"/>
-      <source>Off</source>
-      <extracomment>Digital input state</extracomment>
-      <translation type="unfinished">Выкл</translation>
-    </message>
     <message id="digitalinputs_state_on">
-      <location filename="../../src/enums.cpp" line="346"/>
+      <location filename="../../src/enums.cpp" line="357"/>
       <source>On</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Вкл</translation>
     </message>
     <message id="digitalinputs_state_no">
-      <location filename="../../src/enums.cpp" line="350"/>
+      <location filename="../../src/enums.cpp" line="361"/>
       <source>No</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Нет</translation>
     </message>
     <message id="digitalinputs_state_yes">
-      <location filename="../../src/enums.cpp" line="354"/>
+      <location filename="../../src/enums.cpp" line="365"/>
       <source>Yes</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Да</translation>
     </message>
     <message id="digitalinputs_state_open">
-      <location filename="../../src/enums.cpp" line="358"/>
+      <location filename="../../src/enums.cpp" line="369"/>
       <source>Open</source>
       <extracomment>Digital input open</extracomment>
       <translation type="unfinished">Открыто</translation>
     </message>
     <message id="digitalinputs_state_closed">
-      <location filename="../../src/enums.cpp" line="362"/>
+      <location filename="../../src/enums.cpp" line="373"/>
       <source>Closed</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Закрыто</translation>
     </message>
     <message id="digitalinputs_state_ok">
-      <location filename="../../src/enums.cpp" line="366"/>
+      <location filename="../../src/enums.cpp" line="377"/>
       <source>OK</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Ok</translation>
     </message>
     <message id="digitalinputs_state_alarm">
-      <location filename="../../src/enums.cpp" line="370"/>
+      <location filename="../../src/enums.cpp" line="381"/>
       <source>Alarm</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Тревога</translation>
     </message>
     <message id="digitalinputs_state_running">
-      <location filename="../../src/enums.cpp" line="374"/>
+      <location filename="../../src/enums.cpp" line="385"/>
       <source>Running</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Работает</translation>
     </message>
     <message id="digitalinputs_state_stopped">
-      <location filename="../../src/enums.cpp" line="378"/>
+      <location filename="../../src/enums.cpp" line="389"/>
       <source>Stopped</source>
       <extracomment>Digital input state</extracomment>
       <translation type="unfinished">Остановлено</translation>
     </message>
     <message id="pvinverter_statusCode_running">
-      <location filename="../../src/enums.cpp" line="400"/>
+      <location filename="../../src/enums.cpp" line="426"/>
       <source>Running</source>
       <extracomment>PV inverter status code</extracomment>
       <translation type="unfinished">Работает</translation>
     </message>
-    <message id="solarchargers_state_off">
-      <location filename="../../src/enums.cpp" line="431"/>
-      <source>Off</source>
-      <translation type="unfinished">Выкл</translation>
-    </message>
     <message id="solarchargers_state_external_control">
-      <location filename="../../src/enums.cpp" line="452"/>
+      <location filename="../../src/enums.cpp" line="477"/>
       <source>External control</source>
       <translation type="unfinished">Внешнее управление</translation>
     </message>
     <message id="switch_state_running">
-      <location filename="../../src/enums.cpp" line="463"/>
+      <location filename="../../src/enums.cpp" line="488"/>
       <source>Running</source>
       <translation type="unfinished">Работает</translation>
     </message>
     <message id="switch_state_over_temperature">
-      <location filename="../../src/enums.cpp" line="466"/>
+      <location filename="../../src/enums.cpp" line="491"/>
       <source>Over temperature</source>
       <translation type="unfinished">Перегрев</translation>
     </message>
     <message id="switch_state_channel_fault">
-      <location filename="../../src/enums.cpp" line="472"/>
+      <location filename="../../src/enums.cpp" line="497"/>
       <source>Channel Fault</source>
       <translation>Неисправность канала</translation>
     </message>
     <message id="switch_state_channel_tripped">
-      <location filename="../../src/enums.cpp" line="475"/>
+      <location filename="../../src/enums.cpp" line="500"/>
       <source>Channel Tripped</source>
       <translation>Канал отключен</translation>
     </message>
     <message id="switch_state_under_voltage">
-      <location filename="../../src/enums.cpp" line="478"/>
+      <location filename="../../src/enums.cpp" line="503"/>
       <source>Under voltage</source>
       <translation>Недостаточное напряжение</translation>
     </message>
     <message id="generic_input_status_on">
-      <location filename="../../src/enums.cpp" line="508"/>
+      <location filename="../../src/enums.cpp" line="533"/>
       <source>On</source>
       <translation type="unfinished">Вкл</translation>
     </message>
     <message id="generic_input_status_fault">
-      <location filename="../../src/enums.cpp" line="511"/>
+      <location filename="../../src/enums.cpp" line="536"/>
       <source>Fault</source>
       <translation type="unfinished">Неисправность</translation>
     </message>
     <message id="switchable_output_momentary">
-      <location filename="../../src/enums.cpp" line="526"/>
+      <location filename="../../src/enums.cpp" line="550"/>
       <source>Momentary</source>
       <translation>Мгновенный</translation>
     </message>
     <message id="switchable_output_dimmable">
-      <location filename="../../src/enums.cpp" line="532"/>
+      <location filename="../../src/enums.cpp" line="556"/>
       <source>Dimmable</source>
       <translation>Диммируемый</translation>
     </message>
     <message id="switchable_output_slave_of">
-      <location filename="../../src/enums.cpp" line="542"/>
+      <location filename="../../src/enums.cpp" line="566"/>
       <source>Slave of %1</source>
       <translation>Ведомый %1</translation>
     </message>
     <message id="switchable_output_slave">
-      <location filename="../../src/enums.cpp" line="545"/>
+      <location filename="../../src/enums.cpp" line="569"/>
       <source>Slave</source>
       <translation type="unfinished">Ведомый</translation>
     </message>
     <message id="switchable_output_function_disabled">
-      <location filename="../../src/enums.cpp" line="584"/>
+      <location filename="../../src/enums.cpp" line="608"/>
       <source>Disabled</source>
       <translation type="unfinished">Отключено</translation>
     </message>
     <message id="switchable_output_function_alarm">
-      <location filename="../../src/enums.cpp" line="587"/>
+      <location filename="../../src/enums.cpp" line="611"/>
       <source>Alarm</source>
       <translation type="unfinished">Тревога</translation>
     </message>
     <message id="switchable_output_function_temperature">
-      <location filename="../../src/enums.cpp" line="599"/>
+      <location filename="../../src/enums.cpp" line="623"/>
       <source>Temperature</source>
       <translation type="unfinished">Температура</translation>
     </message>
     <message id="switchable_output_running">
-      <location filename="../../src/enums.cpp" line="625"/>
+      <location filename="../../src/enums.cpp" line="649"/>
       <source>Running</source>
       <translation type="unfinished">Работает</translation>
     </message>
     <message id="switchable_output_not_running">
-      <location filename="../../src/enums.cpp" line="632"/>
+      <location filename="../../src/enums.cpp" line="656"/>
       <source>Not running</source>
       <translation type="unfinished">Не работает</translation>
     </message>
-    <message id="switchable_output_off">
-      <location filename="../../src/enums.cpp" line="648"/>
-      <source>Off</source>
-      <translation type="unfinished">Выкл</translation>
-    </message>
     <message id="switchable_output_powered">
-      <location filename="../../src/enums.cpp" line="651"/>
+      <location filename="../../src/enums.cpp" line="674"/>
       <source>Powered</source>
       <translation>Powered</translation>
     </message>
     <message id="switchable_output_tripped">
-      <location filename="../../src/enums.cpp" line="654"/>
+      <location filename="../../src/enums.cpp" line="677"/>
       <source>Tripped</source>
       <translation>Сработал</translation>
     </message>
     <message id="switchable_output_fault">
-      <location filename="../../src/enums.cpp" line="663"/>
+      <location filename="../../src/enums.cpp" line="686"/>
       <source>Fault</source>
       <translation type="unfinished">Неисправность</translation>
     </message>
     <message id="switchable_output_on">
-      <location filename="../../src/enums.cpp" line="666"/>
+      <location filename="../../src/enums.cpp" line="689"/>
       <source>On</source>
       <translation type="unfinished">Вкл</translation>
     </message>
     <message id="switchable_output_short">
-      <location filename="../../src/enums.cpp" line="669"/>
+      <location filename="../../src/enums.cpp" line="692"/>
       <source>Short</source>
       <translation>Короткие</translation>
     </message>
-    <message id="switchable_output_unknown_status">
-      <location filename="../../src/enums.cpp" line="708"/>
-      <source>Unknown status</source>
-      <translation type="unfinished">неизвестный статус</translation>
+    <message id="system_state_sustain">
+      <location filename="../../src/enums.cpp" line="773"/>
+      <source>Sustain</source>
+      <translation type="unfinished">Удержание</translation>
+    </message>
+    <message id="system_state_wakeup">
+      <location filename="../../src/enums.cpp" line="777"/>
+      <source>Wake up</source>
+      <translation type="unfinished">Проснись</translation>
+    </message>
+    <message id="system_state_externalccontrol">
+      <location filename="../../src/enums.cpp" line="798"/>
+      <source>External control</source>
+      <translation type="unfinished">Внешнее управление</translation>
+    </message>
+    <message id="system_state_discharging">
+      <location filename="../../src/enums.cpp" line="802"/>
+      <source>Discharging</source>
+      <translation type="unfinished">разряжается</translation>
+    </message>
+    <message id="system_state_system_sustain">
+      <location filename="../../src/enums.cpp" line="805"/>
+      <source>Sustain</source>
+      <translation type="unfinished">Удержание</translation>
+    </message>
+    <message id="system_state_scheduledcharge">
+      <location filename="../../src/enums.cpp" line="811"/>
+      <source>Scheduled</source>
+      <translation type="unfinished">Запланировано</translation>
+    </message>
+    <message id="system_state_dynamic_ess">
+      <location filename="../../src/enums.cpp" line="814"/>
+      <source>Dynamic ESS</source>
+      <translation type="unfinished">Динамическая ESS (система включения аварийного сигнала)</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8486,7 +8491,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Этот предел тока зафиксирован в конфигурации системы. Его нельзя отрегулировать.</translation>
     </message>
     <message id="settings_switch_channel_input">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="85"/>
       <source>Input</source>
       <extracomment>Configure channel to use "input" direction</extracomment>
       <translation>Вход</translation>
@@ -9145,8 +9150,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Страница лодки</translation>
     </message>
     <message id="switchable_output_unsupported">
-      <location filename="../../src/enums.cpp" line="575"/>
-      <location filename="../../src/enums.cpp" line="608"/>
+      <location filename="../../src/enums.cpp" line="599"/>
       <source>Unsupported type: %1</source>
       <translation>Неподдерживаемый тип: %1</translation>
     </message>
@@ -9186,12 +9190,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Максимальное число оборотов в минуту</translation>
     </message>
     <message id="settings_module_state">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="28"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="34"/>
       <source>Module state</source>
       <translation>Состояние модуля</translation>
     </message>
     <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="35"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="41"/>
       <source>Module Voltage</source>
       <translation>Напряжение модуля</translation>
     </message>
@@ -9614,7 +9618,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Введите новый пароль</translation>
     </message>
     <message id="settings_modbus_unit_name_and_id">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
       <source>%1 | Unit ID: %2</source>
       <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
       <translation>%1 | ID устройства: %2</translation>
@@ -9880,7 +9884,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Bluetooth недоступен</translation>
     </message>
     <message id="switchable_output_toggle">
-      <location filename="../../src/enums.cpp" line="529"/>
+      <location filename="../../src/enums.cpp" line="553"/>
       <source>Toggle</source>
       <translation>Переключить</translation>
     </message>
@@ -9898,11 +9902,6 @@ The GX device can only control one connected genset and takes the one with the l
       <location filename="../../data/Ess.qml" line="34"/>
       <source>Optimized without BatteryLife</source>
       <translation>Оптимизировано без BatteryLife</translation>
-    </message>
-    <message id="ess_state_external_control">
-      <location filename="../../data/Ess.qml" line="41"/>
-      <source>External control</source>
-      <translation type="unfinished">Внешнее управление</translation>
     </message>
     <message id="pagesettingssupportstate_modifiedstate_modified">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="78"/>
@@ -10110,92 +10109,92 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Пароль точки доступа</translation>
     </message>
     <message id="dcMeter_dccharger">
-      <location filename="../../src/enums.cpp" line="218"/>
+      <location filename="../../src/enums.cpp" line="231"/>
       <source>DC/DC charger</source>
       <translation>DC/DC зарядное устройство</translation>
     </message>
     <message id="dcMeter_electric_drive">
-      <location filename="../../src/enums.cpp" line="224"/>
+      <location filename="../../src/enums.cpp" line="237"/>
       <source>Electric drive</source>
       <translation>Электрический привод</translation>
     </message>
     <message id="dcMeter_fridge">
-      <location filename="../../src/enums.cpp" line="227"/>
+      <location filename="../../src/enums.cpp" line="240"/>
       <source>Fridge</source>
       <translation>Холодильник</translation>
     </message>
     <message id="dcMeter_generic_load">
-      <location filename="../../src/enums.cpp" line="233"/>
+      <location filename="../../src/enums.cpp" line="246"/>
       <source>Generic load</source>
       <translation>Общая нагрузка</translation>
     </message>
     <message id="dcMeter_generic_meter">
-      <location filename="../../src/enums.cpp" line="236"/>
+      <location filename="../../src/enums.cpp" line="249"/>
       <source>Generic meter</source>
       <translation>Общий измеритель</translation>
     </message>
     <message id="dcMeter_generic_source">
-      <location filename="../../src/enums.cpp" line="239"/>
+      <location filename="../../src/enums.cpp" line="252"/>
       <source>Generic source</source>
       <translation>Общий источник</translation>
     </message>
     <message id="dcMeter_dc_genset">
-      <location filename="../../src/enums.cpp" line="242"/>
+      <location filename="../../src/enums.cpp" line="255"/>
       <source>DC genset</source>
       <translation>Генератор постоянного тока</translation>
     </message>
     <message id="dcMeter_inverter">
-      <location filename="../../src/enums.cpp" line="245"/>
+      <location filename="../../src/enums.cpp" line="258"/>
       <source>Inverter</source>
       <translation>Инвертор</translation>
     </message>
     <message id="dcMeter_solar_charger">
-      <location filename="../../src/enums.cpp" line="251"/>
+      <location filename="../../src/enums.cpp" line="264"/>
       <source>Solar charger</source>
       <translation>Солнечное зарядное устройство</translation>
     </message>
     <message id="dcMeter_water_heater">
-      <location filename="../../src/enums.cpp" line="257"/>
+      <location filename="../../src/enums.cpp" line="270"/>
       <source>Water heater</source>
       <translation>Водонагреватель</translation>
     </message>
     <message id="dcMeter_water_pump">
-      <location filename="../../src/enums.cpp" line="260"/>
+      <location filename="../../src/enums.cpp" line="273"/>
       <source>Water pump</source>
       <translation>Водяной насос</translation>
     </message>
     <message id="dcMeter_wind_charger">
-      <location filename="../../src/enums.cpp" line="263"/>
+      <location filename="../../src/enums.cpp" line="276"/>
       <source>Wind charger</source>
       <translation>Ветрогенератор</translation>
     </message>
     <message id="switchable_output_temperature_setpoint">
-      <location filename="../../src/enums.cpp" line="535"/>
+      <location filename="../../src/enums.cpp" line="559"/>
       <source>Temperature setpoint</source>
       <translation>Уставка температуры</translation>
     </message>
     <message id="switchable_output_Stepped_Switch">
-      <location filename="../../src/enums.cpp" line="538"/>
+      <location filename="../../src/enums.cpp" line="562"/>
       <source>Stepped switch</source>
       <translation>Многопозиционный переключатель</translation>
     </message>
     <message id="switchable_output_dropdown">
-      <location filename="../../src/enums.cpp" line="549"/>
+      <location filename="../../src/enums.cpp" line="573"/>
       <source>Dropdown</source>
       <translation>Выпадающий список</translation>
     </message>
     <message id="switchable_output_basic_slider">
-      <location filename="../../src/enums.cpp" line="552"/>
+      <location filename="../../src/enums.cpp" line="576"/>
       <source>Basic slider</source>
       <translation>Базовый слайдер</translation>
     </message>
     <message id="switchable_output_three_state_switch">
-      <location filename="../../src/enums.cpp" line="558"/>
+      <location filename="../../src/enums.cpp" line="582"/>
       <source>Three-state switch</source>
       <translation>Трехпозиционный переключатель</translation>
     </message>
     <message id="settings_modbus_tcp_unit_id_note">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="31"/>
       <source>See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs.</source>
       <translation>Чтобы изменить ID устройств Modbus-TCP, см. меню «Настройки → VRM → VRM device instances».</translation>
     </message>
@@ -10232,7 +10231,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Полярность (Реле 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
       <source>Polarity</source>
       <translation>Полярность</translation>
     </message>
@@ -10284,7 +10283,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>VE.Bus BMS автоматически отключает систему при необходимости для защиты аккумулятора. Управление системой с устройства GX поэтому невозможно.</translation>
     </message>
     <message id="switchable_output_numeric_input">
-      <location filename="../../src/enums.cpp" line="555"/>
+      <location filename="../../src/enums.cpp" line="579"/>
       <source>Numeric input</source>
       <translation>Числовой ввод</translation>
     </message>
@@ -10310,7 +10309,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Параметры микросети</translation>
     </message>
     <message id="microgrid_mode_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="761"/>
+      <location filename="../../src/enums.cpp" line="870"/>
       <source>Hybrid droop</source>
       <translation>Гибридное регулирование</translation>
     </message>
@@ -10465,14 +10464,14 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">Низкий</translation>
     </message>
     <message id="switchable_output_bypassed">
-      <location filename="../../src/enums.cpp" line="684"/>
+      <location filename="../../src/enums.cpp" line="707"/>
       <source>Bypassed</source>
       <translation>В обход</translation>
     </message>
-    <message id="switchableoutput_list_delegate_auto_status">
-      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="93"/>
+    <message id="common_words_auto_status">
+      <location filename="../../components/CommonWords.qml" line="634"/>
       <source>Auto (%1)</source>
-      <extracomment>%1 = 'On' or 'Off'</extracomment>
+      <extracomment>%1 = status such as 'On' or 'Off'</extracomment>
       <translation>Авто (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
@@ -10523,18 +10522,18 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Нет активных уведомлений</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
-      <location filename="../../src/enums.cpp" line="564"/>
+      <location filename="../../src/enums.cpp" line="588"/>
       <source>RGB color wheel</source>
       <translation>Цветовой круг RGB</translation>
     </message>
     <message id="switchable_output_cct_color_wheel">
-      <location filename="../../src/enums.cpp" line="568"/>
+      <location filename="../../src/enums.cpp" line="592"/>
       <source>CCT color wheel</source>
       <extracomment>Correlated Color Temperature color wheel</extracomment>
       <translation>Цветовой круг CCT</translation>
     </message>
     <message id="switchable_output_rgbw_color_wheel">
-      <location filename="../../src/enums.cpp" line="572"/>
+      <location filename="../../src/enums.cpp" line="596"/>
       <source>RGB + W color wheel</source>
       <extracomment>RGB + white color wheel</extracomment>
       <translation>Цветовой круг RGB + W</translation>
@@ -10689,7 +10688,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation type="unfinished">Уровень диммирования при запуске</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="193"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
       <source>Startup dim level</source>
       <translation>Уровень диммирования при запуске</translation>
     </message>
@@ -10699,22 +10698,22 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Восстановить уровень диммирования из памяти</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="204"/>
       <source>Active high / Normally open</source>
       <translation>Активный высокий / Нормально открытый</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="206"/>
       <source>Active low / Normally closed</source>
       <translation>Активный низкий / Нормально закрытый</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="222"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="212"/>
       <source>Output limit min</source>
       <translation>Минимальный предел выходного сигнала</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="234"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="224"/>
       <source>Output limit max</source>
       <translation>Максимальный предел выходного сигнала</translation>
     </message>
@@ -10780,52 +10779,42 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Смешанный (AC в Ваттах, DC в Амперах)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
-      <location filename="../../src/enums.cpp" line="660"/>
+      <location filename="../../src/enums.cpp" line="683"/>
       <source>Over temp, tripped</source>
       <translation>Перегрев, отключено</translation>
     </message>
-    <message id="switchable_output_disabled">
-      <location filename="../../src/enums.cpp" line="672"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Отключено</translation>
-    </message>
     <message id="switchable_output_disabled_tripped">
-      <location filename="../../src/enums.cpp" line="675"/>
+      <location filename="../../src/enums.cpp" line="698"/>
       <source>Disabled, tripped</source>
       <translation>Отключено, отключено</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
-      <location filename="../../src/enums.cpp" line="678"/>
+      <location filename="../../src/enums.cpp" line="701"/>
       <source>Disabled, over temp</source>
       <translation>Отключено, перегрев</translation>
     </message>
     <message id="switchable_output_disabled_on">
-      <location filename="../../src/enums.cpp" line="681"/>
+      <location filename="../../src/enums.cpp" line="704"/>
       <source>Disabled but on</source>
       <translation>Отключено, но включено</translation>
     </message>
     <message id="switchable_output_bypassed_tripped">
-      <location filename="../../src/enums.cpp" line="687"/>
+      <location filename="../../src/enums.cpp" line="710"/>
       <source>Bypassed, tripped</source>
       <translation>В обход, отключено</translation>
     </message>
     <message id="switchable_output_bypassed_overtemperature">
-      <location filename="../../src/enums.cpp" line="690"/>
+      <location filename="../../src/enums.cpp" line="713"/>
       <source>Bypassed, over temp</source>
       <translation>В обход, перегрев</translation>
     </message>
-    <message id="switchable_output_externalcontrol">
-      <location filename="../../src/enums.cpp" line="693"/>
-      <source>External control</source>
-      <translation type="unfinished">Внешнее управление</translation>
-    </message>
     <message id="switchable_output_externalcontrol_tripped">
-      <location filename="../../src/enums.cpp" line="696"/>
+      <location filename="../../src/enums.cpp" line="719"/>
       <source>External control, tripped</source>
       <translation>Внешнее управление, отключено</translation>
     </message>
     <message id="switchable_output_externalcontrol_overtemperature">
-      <location filename="../../src/enums.cpp" line="699"/>
+      <location filename="../../src/enums.cpp" line="722"/>
       <source>External control, over temp</source>
       <translation>Внешнее управление, перегрев</translation>
     </message>
@@ -10969,72 +10958,72 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Разрешить использование WiFi для доступа в Интернет</translation>
     </message>
     <message id="battery_status_overvoltage">
-      <location filename="../../src/enums.cpp" line="82"/>
+      <location filename="../../src/enums.cpp" line="95"/>
       <source>Overvoltage</source>
       <translation>Перенапряжение</translation>
     </message>
     <message id="battery_status_undervoltage">
-      <location filename="../../src/enums.cpp" line="86"/>
+      <location filename="../../src/enums.cpp" line="99"/>
       <source>Undervoltage</source>
       <translation>Пониженное напряжение</translation>
     </message>
     <message id="battery_status_low_temperature_atc">
-      <location filename="../../src/enums.cpp" line="90"/>
+      <location filename="../../src/enums.cpp" line="103"/>
       <source>Low Temperature (ATC)</source>
       <translation>Низкая температура (ATC)</translation>
     </message>
     <message id="battery_status_high_temperature_atc">
-      <location filename="../../src/enums.cpp" line="94"/>
+      <location filename="../../src/enums.cpp" line="107"/>
       <source>High Temperature (ATC)</source>
       <translation>Высокая температура (ATC)</translation>
     </message>
     <message id="battery_status_cell_error">
-      <location filename="../../src/enums.cpp" line="98"/>
+      <location filename="../../src/enums.cpp" line="111"/>
       <source>Cell Error</source>
       <translation>Ошибка ячейки</translation>
     </message>
     <message id="battery_status_high_temperature_atd">
-      <location filename="../../src/enums.cpp" line="102"/>
+      <location filename="../../src/enums.cpp" line="115"/>
       <source>High Temperature (ATD)</source>
       <translation>Высокая температура (ATD)</translation>
     </message>
     <message id="battery_status_high_cell_voltage">
-      <location filename="../../src/enums.cpp" line="106"/>
+      <location filename="../../src/enums.cpp" line="119"/>
       <source>High Cell Voltage</source>
       <translation>Высокое напряжение ячейки</translation>
     </message>
     <message id="battery_status_update_failure">
-      <location filename="../../src/enums.cpp" line="110"/>
+      <location filename="../../src/enums.cpp" line="123"/>
       <source>Update Failure</source>
       <translation>Ошибка обновления</translation>
     </message>
     <message id="battery_status_charge_overcurrent_warning">
-      <location filename="../../src/enums.cpp" line="114"/>
+      <location filename="../../src/enums.cpp" line="127"/>
       <source>Charge Overcurrent Warning</source>
       <translation>Предупреждение о перегрузке по току заряда</translation>
     </message>
     <message id="battery_status_charge_overcurrent_alarm">
-      <location filename="../../src/enums.cpp" line="118"/>
+      <location filename="../../src/enums.cpp" line="131"/>
       <source>Charge Overcurrent Alarm</source>
       <translation>Сигнал тревоги о перегрузке по току заряда</translation>
     </message>
     <message id="battery_status_discharge_overcurrent_warning">
-      <location filename="../../src/enums.cpp" line="122"/>
+      <location filename="../../src/enums.cpp" line="135"/>
       <source>Discharge Overcurrent Warning</source>
       <translation>Предупреждение о перегрузке по току разряда</translation>
     </message>
     <message id="battery_status_discharge_overcurrent_alarm">
-      <location filename="../../src/enums.cpp" line="126"/>
+      <location filename="../../src/enums.cpp" line="139"/>
       <source>Discharge Overcurrent Alarm</source>
       <translation>Сигнал тревоги о перегрузке по току разряда</translation>
     </message>
     <message id="battery_status_low_cell_voltage">
-      <location filename="../../src/enums.cpp" line="130"/>
+      <location filename="../../src/enums.cpp" line="143"/>
       <source>Low Cell Voltage</source>
       <translation>Низкое напряжение ячейки</translation>
     </message>
     <message id="battery_status_low_temperature_atd">
-      <location filename="../../src/enums.cpp" line="134"/>
+      <location filename="../../src/enums.cpp" line="147"/>
       <source>Low Temperature (ATD)</source>
       <translation>Низкая температура (ATD)</translation>
     </message>
@@ -11089,17 +11078,17 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Включить Link-local</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
-      <location filename="../../src/enums.cpp" line="619"/>
+      <location filename="../../src/enums.cpp" line="643"/>
       <source>Running, over temperature</source>
       <translation>Работает, перегрев</translation>
     </message>
     <message id="switchable_output_running_disabled">
-      <location filename="../../src/enums.cpp" line="622"/>
+      <location filename="../../src/enums.cpp" line="646"/>
       <source>Running, disabled</source>
       <translation>Работает, отключено</translation>
     </message>
     <message id="switchable_output_not_running_disabled">
-      <location filename="../../src/enums.cpp" line="629"/>
+      <location filename="../../src/enums.cpp" line="653"/>
       <source>Not running, disabled</source>
       <translation>Не работает, отключено</translation>
     </message>
@@ -11114,142 +11103,142 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Автоматизируйте управление устройствами для максимального использования собственной солнечной энергии</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
-      <location filename="../../src/enums.cpp" line="764"/>
+      <location filename="../../src/enums.cpp" line="873"/>
       <source>EMS Control: Hybrid droop</source>
       <translation>Управление EMS: Гибридный спад</translation>
     </message>
     <message id="microgrid_mode_ems_grid_following">
-      <location filename="../../src/enums.cpp" line="768"/>
+      <location filename="../../src/enums.cpp" line="877"/>
       <source>EMS Control: Grid-following</source>
       <translation>Управление EMS: Отслеживание сети</translation>
     </message>
     <message id="microgrid_mode_ems_grid_forming">
-      <location filename="../../src/enums.cpp" line="771"/>
+      <location filename="../../src/enums.cpp" line="880"/>
       <source>EMS Control: Grid-forming</source>
       <translation>Управление EMS: Формирование сети</translation>
     </message>
     <message id="microgrid_error_hybrid_droop_values_out_of_sync">
-      <location filename="../../src/enums.cpp" line="785"/>
+      <location filename="../../src/enums.cpp" line="894"/>
       <source>Different fallback hybrid droop values in phase masters</source>
       <translation>Различные значения гибридного спада в главных устройствах фазы</translation>
     </message>
     <message id="microgrid_error_write_failed">
-      <location filename="../../src/enums.cpp" line="788"/>
+      <location filename="../../src/enums.cpp" line="897"/>
       <source>Hybrid droop parameter write failed</source>
       <translation>Ошибка записи параметров гибридного спада</translation>
     </message>
     <message id="microgrid_error_param_fmin_greater_than_fmax">
-      <location filename="../../src/enums.cpp" line="791"/>
+      <location filename="../../src/enums.cpp" line="900"/>
       <source>Parameter error Fmin &gt; Fmax</source>
       <translation>Ошибка параметра Fmin &gt; Fmax</translation>
     </message>
     <message id="microgrid_error_param_pmin_greater_than_pmaxv">
-      <location filename="../../src/enums.cpp" line="794"/>
+      <location filename="../../src/enums.cpp" line="903"/>
       <source>Parameter error Pmin &gt; Pmax</source>
       <translation>Ошибка параметра Pmin &gt; Pmax</translation>
     </message>
     <message id="microgrid_error_param_umin_greater_than_umax">
-      <location filename="../../src/enums.cpp" line="797"/>
+      <location filename="../../src/enums.cpp" line="906"/>
       <source>Parameter error Umin &gt; Umax</source>
       <translation>Ошибка параметра Umin &gt; Umax</translation>
     </message>
     <message id="microgrid_error_param_qmin_greater_than_qmax">
-      <location filename="../../src/enums.cpp" line="800"/>
+      <location filename="../../src/enums.cpp" line="909"/>
       <source>Parameter error Qmin &gt; Qmax</source>
       <translation>Ошибка параметра Qmin &gt; Qmax</translation>
     </message>
     <message id="microgrid_error_param_q0_out_of_range">
-      <location filename="../../src/enums.cpp" line="803"/>
+      <location filename="../../src/enums.cpp" line="912"/>
       <source>Parameter error Q0 out of range</source>
       <translation>Ошибка параметра Q0 вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_qmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="806"/>
+      <location filename="../../src/enums.cpp" line="915"/>
       <source>Parameter error Qmin out of range</source>
       <translation>Ошибка параметра Qmin вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_qmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="809"/>
+      <location filename="../../src/enums.cpp" line="918"/>
       <source>Parameter error Qmax out of range</source>
       <translation>Ошибка параметра Qmax вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_u0_out_of_range">
-      <location filename="../../src/enums.cpp" line="812"/>
+      <location filename="../../src/enums.cpp" line="921"/>
       <source>Parameter error U0 out of range</source>
       <translation>Ошибка параметра U0 вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_u_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="815"/>
+      <location filename="../../src/enums.cpp" line="924"/>
       <source>Parameter error U droop out of range</source>
       <translation>Ошибка параметра U спада вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_p0_out_of_range">
-      <location filename="../../src/enums.cpp" line="818"/>
+      <location filename="../../src/enums.cpp" line="927"/>
       <source>Parameter error P0 out of range</source>
       <translation>Ошибка параметра P0 вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_pmin_out_of_range">
-      <location filename="../../src/enums.cpp" line="821"/>
+      <location filename="../../src/enums.cpp" line="930"/>
       <source>Parameter error Pmin out of range</source>
       <translation>Ошибка параметра Pmin вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_pmax_out_of_range">
-      <location filename="../../src/enums.cpp" line="824"/>
+      <location filename="../../src/enums.cpp" line="933"/>
       <source>Parameter error Pmax out of range</source>
       <translation>Ошибка параметра Pmax вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_f0_out_of_range">
-      <location filename="../../src/enums.cpp" line="827"/>
+      <location filename="../../src/enums.cpp" line="936"/>
       <source>Parameter error F0 out of range</source>
       <translation>Ошибка параметра F0 вне диапазона</translation>
     </message>
     <message id="microgrid_error_param_freq_droop_out_of_range">
-      <location filename="../../src/enums.cpp" line="830"/>
+      <location filename="../../src/enums.cpp" line="939"/>
       <source>Parameter error freq droop out of range</source>
       <translation>Ошибка параметра спада частоты вне диапазона</translation>
     </message>
     <message id="microgrid_error_pf_fp_mismatch">
-      <location filename="../../src/enums.cpp" line="833"/>
+      <location filename="../../src/enums.cpp" line="942"/>
       <source>Ve.Bus internal error PF vs FP data mismatch</source>
       <translation>Внутренняя ошибка Ve.Bus: несоответствие данных PF и FP</translation>
     </message>
     <message id="microgrid_error_qu_uq_mismatch">
-      <location filename="../../src/enums.cpp" line="836"/>
+      <location filename="../../src/enums.cpp" line="945"/>
       <source>Ve.Bus internal error QU vs UQ data mismatch</source>
       <translation>Внутренняя ошибка Ve.Bus: несоответствие данных QU и UQ</translation>
     </message>
     <message id="generic_input_discrete">
-      <location filename="../../src/enums.cpp" line="489"/>
+      <location filename="../../src/enums.cpp" line="514"/>
       <source>Discrete value indicator</source>
       <translation>Индикатор дискретного значения</translation>
     </message>
     <message id="generic_input_value_unranged">
-      <location filename="../../src/enums.cpp" line="492"/>
+      <location filename="../../src/enums.cpp" line="517"/>
       <source>Value indicator (unranged)</source>
       <translation>Индикатор значения (без диапазона)</translation>
     </message>
     <message id="generic_input_value_ranged">
-      <location filename="../../src/enums.cpp" line="495"/>
+      <location filename="../../src/enums.cpp" line="520"/>
       <source>Value indicator (ranged)</source>
       <translation>Индикатор значения (с диапазоном)</translation>
     </message>
     <message id="generic_input_temperature">
-      <location filename="../../src/enums.cpp" line="498"/>
+      <location filename="../../src/enums.cpp" line="523"/>
       <source>Temperature indicator</source>
       <translation>Индикатор температуры</translation>
     </message>
     <message id="switchable_output_function_generator_startstop">
-      <location filename="../../src/enums.cpp" line="590"/>
+      <location filename="../../src/enums.cpp" line="614"/>
       <source>Generator start/stop</source>
       <translation>Запуск/остановка генератора</translation>
     </message>
     <message id="switchable_output_function_genset_helper">
-      <location filename="../../src/enums.cpp" line="602"/>
+      <location filename="../../src/enums.cpp" line="626"/>
       <source>Genset Helper</source>
       <translation>Помощник генератора</translation>
     </message>
     <message id="switchable_output_function_opportunity_load">
-      <location filename="../../src/enums.cpp" line="605"/>
+      <location filename="../../src/enums.cpp" line="629"/>
       <source>Opportunity load</source>
       <translation>Потребитель избыточной энергии</translation>
     </message>
@@ -11274,7 +11263,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Введите пароль VE.Bus для уровня доступа %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="73"/>
+      <location filename="../../components/DevicePage.qml" line="82"/>
       <source>Inputs</source>
       <translation>Входы</translation>
     </message>
@@ -11367,23 +11356,18 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Функции разогрева и охлаждения недоступны с текущей версией прошивки инвертора/зарядного устройства.
 Пожалуйста, обновите прошивку до последней версии, чтобы получить возможность регулировать эти настройки.</translation>
     </message>
-    <message id="generic_input_unknown_status">
-      <location filename="../../src/enums.cpp" line="518"/>
+    <message id="status_text_unknown">
+      <location filename="../../src/enums.cpp" line="31"/>
       <source>Unknown status</source>
       <translation>неизвестный статус</translation>
     </message>
-    <message id="page_switchable_output_set_dim_level_manually">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="182"/>
-      <source>Set startup dim level manually</source>
-      <translation>Установить уровень яркости при запуске вручную</translation>
-    </message>
     <message id="main_system_service_settings_offline_warning">
-      <location filename="../../Main.qml" line="287"/>
+      <location filename="../../Main.qml" line="288"/>
       <source>Warning: detected localsettings service offline; reloading UI when it becomes available again...</source>
       <translation>Предупреждение: обнаружена автономная служба localsettings; перезагрузка интерфейса пользователя при повторном подключении...</translation>
     </message>
     <message id="main_system_service_platform_offline_warning">
-      <location filename="../../Main.qml" line="308"/>
+      <location filename="../../Main.qml" line="309"/>
       <source>Warning: detected venus-platform service offline; reloading UI when it becomes available again...</source>
       <translation>Предупреждение: обнаружена автономная служба venus-platform; перезагрузка интерфейса пользователя при повторном подключении...</translation>
     </message>
@@ -11419,12 +11403,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>%1 %2:%3 (Единица %4)</translation>
     </message>
     <message id="settings_switch_channel_configuration">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="44"/>
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="50"/>
       <source>Channel configuration</source>
       <translation>Настройка канала</translation>
     </message>
     <message id="device_page_outputs">
-      <location filename="../../components/DevicePage.qml" line="46"/>
+      <location filename="../../components/DevicePage.qml" line="63"/>
       <source>Outputs</source>
       <extracomment>Settings page for switchable outputs</extracomment>
       <translation>Выходы</translation>
@@ -12041,7 +12025,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="9"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
       <source>Battery high temperature</source>
       <translation>Высокая температура батареи</translation>
     </message>
@@ -12099,311 +12083,352 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="22"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="109"/>
       <source>Battery temperature too low</source>
       <translation>Слишком низкая температура батареи</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="111"/>
       <source>Charger high temperature</source>
       <translation>Высокая температура зарядного устройства</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="25"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
       <source>Charger excessive current</source>
       <translation>Чрезмерный ток в зарядном устройстве</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="26"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
       <source>Charger negative current</source>
       <translation>Отрицательный ток в зарядном устройстве</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="27"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
       <source>Charger bulk time expired</source>
       <translation>Время основной зарядки истекло</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="28"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
       <source>Charger current sensor issue</source>
       <translation>Проблема с датчиком тока зарядного устройства</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="29"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
       <source>Internal Tsensor miswired</source>
       <translation>Не подключен внутренний датчик температуры</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="30"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
       <source>Internal Tsensor missing</source>
       <translation>Отсутствует внутренний датчик температуры</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="31"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
       <source>Charger fan not detected</source>
       <translation>Вентилятор зарядного устройства не обнаружен</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="32"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
       <source>Charger fan over-current</source>
       <translation>Превышен ток вентилятора зарядного устройства</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="33"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
       <source>Charger terminal overheat</source>
       <translation>Перегрев клемм зарядного устройства</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="34"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="107"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="112"/>
       <source>Charger short circuit</source>
       <translation>Короткое замыкание в зарядном устройстве</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="35"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="108"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="37"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="113"/>
       <source>Charger power stage issue</source>
       <translation>Проблема стадии заряда устройства</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="36"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
       <source>Over-charge protection</source>
       <translation>Защита от перезарядки</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="38"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
       <source>Input high voltage</source>
       <translation>Высокое входящее напряжение</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="39"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
       <source>Input excessive current</source>
       <translation>Превышена входная сила тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="40"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
       <source>Input excessive power</source>
       <translation>Превышена входная мощность</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="41"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
       <source>Input polarity issue</source>
       <translation>Проблема с полярностью на входе</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="42"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
       <source>Input voltage absent</source>
       <translation>Отсутствует напряжение на входе</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="43"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
       <source>Input shutdown (no retries)</source>
       <translation>Вход отключен (без повтора)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="44"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="46"/>
       <source>Input shutdown (retry)</source>
       <translation>Вход отключен (повтор)</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="45"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
       <source>Input internal failure</source>
       <translation>Внутренний сбой входа</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="47"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="48"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="50"/>
       <source>PV isolation failure</source>
       <translation>Сбой изоляции фотоэлектрической панели</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="49"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
       <source>Ground fault detected</source>
       <translation>Зафиксирована неисправность заземления</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="51"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
       <source>Inverter overload</source>
       <translation>Перегрузка инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="52"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
       <source>Inverter temp too high</source>
       <translation>Слишком высокая темп. инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="53"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
       <source>Inverter peak current</source>
       <translation>Пиковый ток инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="54"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
       <source>Inverter internal DC level</source>
       <translation>Внутренний уровень постоянного тока инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="55"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
       <source>Inverter wrong ACout level</source>
       <translation>Неправильный уровень выхода переменного тока инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="56"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="57"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="59"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
       <source>Inverter powerstage fault</source>
       <translation>Неисправность ступени питания инвертора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="58"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
       <source>Inverter connected to AC</source>
       <translation>Инвертор подключен к сети переменного тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="60"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="62"/>
       <source>ACIN1 relay test fault</source>
       <translation>Сбой при тестировании реле ACIN1</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="61"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
       <source>ACIN2 relay test fault</source>
       <translation>Сбой при тестировании реле ACIN2</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="63"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
       <source>Device disappeared</source>
       <translation>Устройство потеряно</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="64"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
       <source>Incompatible device</source>
       <translation>Несовместимое устройство</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="65"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
       <source>BMS connection lost</source>
       <translation>Соединение с BMS потеряно</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="66"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="67"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="68"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="69"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
       <source>Network misconfigured</source>
       <translation>Сеть неправильно настроена</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="70"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
       <source>Phase rotation</source>
       <translation>Изменение фазы</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="71"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="73"/>
       <source>Multiple AC inputs</source>
       <translation>Несколько входов переменного тока</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="72"/>
-      <source>Phase overload</source>
-      <translation>Перегрузка фазы</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
       <source>Memory write error</source>
       <translation>Ошибка записи в память</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="75"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
       <source>CPU temperature too high</source>
       <translation>Очень высокая температура процессора</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
       <source>Communication lost</source>
       <translation>Соединение потеряно</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
       <source>Calibration data lost</source>
       <translation>Данные калибровки потеряны</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="78"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
       <source>Incompatible firmware</source>
       <translation>Несовместимая прошивка</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="79"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
       <source>Incompatible hardware</source>
       <translation>Устройство несовместимо</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="80"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="85"/>
       <source>Settings invalid</source>
       <translation>Неверные настройки</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="81"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
       <source>Reference voltage failed</source>
       <translation>Ошибка номинального напряжения</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="82"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
       <source>Tester fail</source>
       <translation>Неисправность тестера</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="83"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
       <source>History invalid</source>
       <translation>История недействительна</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="84"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
       <source>kWh counters invalid</source>
       <translation>Счетчики кВт/ч недействительны</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="86"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="87"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
       <source>DC voltage error</source>
       <translation>Ошибка напряжения DC</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="88"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="93"/>
       <source>GFCI sensor error</source>
       <translation>Ошибка датчика GFCI</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="89"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
       <source>3V3 supply error</source>
       <translation>Ошибка питания 3В3</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="90"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
       <source>5V supply error</source>
       <translation>Ошибка питания 5В</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="91"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
       <source>12V supply error</source>
       <translation>Ошибка питания 12 В</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="92"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
       <source>15V supply error</source>
       <translation>Ошибка питания 15В</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="94"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="95"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="96"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="97"/>
-      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="98"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="99"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="100"/>
       <location filename="../../src/veutil/src/qt/charger_error.cpp" line="101"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="102"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="103"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="104"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="105"/>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="106"/>
       <source>PV Input shutdown</source>
       <translation>Отключение входа PV</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="23"/>
+      <source>Battery relay fault</source>
+      <translation>Ошибка реле аккумулятора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="24"/>
+      <source>Battery not found</source>
+      <translation>Аккумулятор не найден</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="74"/>
+      <source>Too many units in parallel</source>
+      <translation>Слишком много устройств в параллели</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="76"/>
+      <source>Network incomplete</source>
+      <translation>Сеть неполная</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="77"/>
+      <source>Settings sync disabled</source>
+      <translation>Синхронизация настроек отключена</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="115"/>
+      <source>Charger pre-charge failed</source>
+      <translation>Ошибка предварительного заряда зарядного устройства</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="116"/>
+      <source>Charger solar relay failed</source>
+      <translation>Ошибка солнечного реле зарядного устройства</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="117"/>
+      <source>Charger solar short</source>
+      <translation>Короткое замыкание солнечного входа</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/charger_error.cpp" line="118"/>
+      <source>Charger solar connect failed</source>
+      <translation>Ошибка подключения солнечного входа</translation>
     </message>
   </context>
   <context>
@@ -13190,21 +13215,6 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Превышение скорости</translation>
     </message>
     <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
-      <source>Oiltemperature higher than expected</source>
-      <translation>Температура воздуха выше, чем ожидалось</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
-      <source>Oiltemperature open circuit / short to power</source>
-      <translation>Обрыв цепи / короткое замыкание на питание</translation>
-    </message>
-    <message>
-      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
-      <source>Oiltemperature short to ground</source>
-      <translation>Замыкание на землю при перегреве</translation>
-    </message>
-    <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="823"/>
       <source>Analog setpoint high / short to power</source>
       <translation>Высокий уровень аналоговой уставки / короткое замыкание на питание</translation>
@@ -13303,6 +13313,21 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="845"/>
       <source>Processor failure</source>
       <translation>Сбой процессора</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="820"/>
+      <source>Oil temperature higher than expected</source>
+      <translation>Температура масла выше ожидаемой</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="821"/>
+      <source>Oil temperature open circuit / short to power</source>
+      <translation>Температура масла: обрыв цепи / замыкание на питание</translation>
+    </message>
+    <message>
+      <location filename="../../src/veutil/src/qt/genset_error.cpp" line="822"/>
+      <source>Oil temperature short to ground</source>
+      <translation>Температура масла: замыкание на массу</translation>
     </message>
   </context>
   <context>
