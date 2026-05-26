@@ -115,7 +115,7 @@ ListSetting {
 			checked: root.checked
 			checkable: root.checkable && root.clickable
 			focusPolicy: Qt.NoFocus
-			showEnabled: root.clickable
+			enabled: root.clickable
 
 			onClicked: root.click()
 			Component.onCompleted: root._switchItem = switchItem
