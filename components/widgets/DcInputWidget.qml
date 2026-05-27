@@ -48,12 +48,7 @@ OverviewWidget {
 
 	onClicked: {
 		if (inputDeviceModel.count === 1) {
-			Global.pageManager.pushPage(
-						root.detailUrl,
-						root._widgetOnlyPresentsDcGensets
-						? { "bindPrefix": inputDeviceModel.firstObject.serviceUid, "title": inputDeviceModel.firstObject.name }
-						: { "bindPrefix": inputDeviceModel.firstObject.serviceUid }
-						)
+			Global.pageManager.pushPage( root.detailUrl, { "device": inputDeviceModel.firstObject } )
 		} else {
 			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets ? "/pages/settings/PageDcGensets.qml" : listPageComponent)
 		}

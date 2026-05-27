@@ -11,7 +11,9 @@ Page {
 
 	required property string settingsBindPrefix // must be non-empty
 	required property string startStopBindPrefix // must be non-empty
-	readonly property bool locked: activeCondition.value === VenusOS.Generators_RunningBy_Manual || dcGensetAutoStartEnabled.value === 1
+	// the following property 'changesAllowed' is safety related. Do not change with discussing with Rein.
+	readonly property bool changesAllowed: dcGensetAutoStartEnabled.value === 0 &&
+										   (_state.value === VenusOS.Generators_State_Error || _state.value === VenusOS.Generators_State_Stopped)
 
 	VeQuickItem {
 		id: noGeneratorAtDcInAlarm
@@ -27,6 +29,11 @@ Page {
 	VeQuickItem {
 		id: dcGensetAutoStartEnabled
 		uid: root.startStopBindPrefix + "/AutoStartEnabled"
+	}
+
+	VeQuickItem {
+		id: _state
+		uid: root.startStopBindPrefix + "/State"
 	}
 
 	GradientListView {
@@ -59,18 +66,18 @@ Page {
 
 				optionModel: [
 					//% "Always control all available gensets"
-					{ display: qsTrId("dc_gensets_all_gensets"), value: "all", interactive: !root.locked },
+					{ display: qsTrId("dc_gensets_all_gensets"), value: "all", interactive: root.changesAllowed },
 					//% "Rotate over available gensets"
-					{ display: qsTrId("dc_gensets_rotate"), value: "rotate", interactive: !root.locked },
+					{ display: qsTrId("dc_gensets_rotate"), value: "rotate", interactive: root.changesAllowed },
 					//% "Custom selection"
-					{ display: qsTrId("dc_gensets_custom_selection"), value: "", interactive: !root.locked },
+					{ display: qsTrId("dc_gensets_custom_selection"), value: "", interactive: root.changesAllowed },
 				]
 
 				onOptionClicked: (index) => {
 					 dataItem.setValue(optionModel[index].value)
 				}
 
-				optionHeader: root.locked ? settingsLockedComponent : null
+				optionHeader: root.changesAllowed ? null : settingsLockedComponent
 
 				Component {
 					id: settingsLockedComponent
@@ -132,7 +139,7 @@ Page {
 							required property Device device
 
 							checked: device ? mode.isGeneratorSelected(device.deviceInstance) : false
-							checkable: !root.locked
+							checkable: root.changesAllowed
 							interactive: defaultInteractive && checkable
 							onClicked: {
 								switches.updateSelectedGenerators()
