@@ -18,7 +18,7 @@ Page {
 			sourceModel: RuntimeDeviceModel
 			// If there are 2 or more dc gensets, don't list them individually, group them in the dc gensets menu.
 			// Any disconnected dc gensets will not be excluded.
-			excludedServiceTypes: Global.generators.dcModel?.count > 1 ? ["dcgenset"] : []
+			excludedServiceTypes: Global.generators.multipleDcGensetsSupported ? ["dcgenset"] : []
 		}
 
 		delegate: ListItemLoader {

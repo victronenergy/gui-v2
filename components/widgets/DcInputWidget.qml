@@ -18,7 +18,7 @@ OverviewWidget {
 			: serviceType === "dcsource" ? VenusOS.DcMeter_Type_GenericSource
 			: VenusOS.DcMeter_Type_GenericMeter
 	readonly property string detailUrl: serviceType === "alternator" ? "/pages/settings/devicelist/dc-in/PageAlternator.qml"
-			: serviceType === "dcgenset" ? "/pages/settings/PageDcGenset.qml"
+			: _widgetOnlyPresentsDcGensets ? "/pages/settings/PageDcGenset.qml"
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 	readonly property bool _widgetOnlyPresentsDcGensets: root.serviceType === "dcgenset" && inputDeviceModel.commonMeterType !== -1
 
@@ -48,9 +48,12 @@ OverviewWidget {
 
 	onClicked: {
 		if (inputDeviceModel.count === 1) {
-			Global.pageManager.pushPage( root.detailUrl, { "device": inputDeviceModel.firstObject } )
+			Global.pageManager.pushPage(
+						root.detailUrl,
+						root._widgetOnlyPresentsDcGensets ? { "device": inputDeviceModel.firstObject } : { "bindPrefix": inputDeviceModel.firstObject.serviceUid })
 		} else {
-			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets ? "/pages/settings/PageDcGensets.qml" : listPageComponent)
+			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Global.generators.multipleDcGensetsSupported
+										? "/pages/settings/PageDcGensets.qml" : listPageComponent)
 		}
 	}
 

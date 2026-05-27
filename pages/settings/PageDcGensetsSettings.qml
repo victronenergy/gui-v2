@@ -11,7 +11,7 @@ Page {
 
 	required property string settingsBindPrefix // must be non-empty
 	required property string startStopBindPrefix // must be non-empty
-	// the following property 'changesAllowed' is safety related. Do not change with discussing with Rein.
+	// the following property 'changesAllowed' is safety related. Do not change without discussing with Rein.
 	readonly property bool changesAllowed: dcGensetAutoStartEnabled.value === 0 &&
 										   (_state.value === VenusOS.Generators_State_Error || _state.value === VenusOS.Generators_State_Stopped)
 
