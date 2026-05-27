@@ -25,7 +25,7 @@ QtObject {
 
 	readonly property bool multipleDcGensetsSupported: _multipleDcGensetsSupported.valid
 
-	readonly property VeQuickItem _multipleDcGensetsSupported: VeQuickItem {
+	readonly property VeQuickItem _multipleDcGensetsSupported: VeQuickItem { // the backend sets this to true whenever there are 2 or more dc gensets
 		uid: root.generator1ServiceUid ? root.generator1ServiceUid + "/MultipleGensets/GensetsEnabled" : ""
 	}
 
