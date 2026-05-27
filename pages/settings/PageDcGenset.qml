@@ -9,7 +9,10 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	required property string bindPrefix
+	required property Device device
+	readonly property string bindPrefix: device?.serviceUid || ""
+
+	title: device?.name || ""
 
 	GradientListView {
 		model: VisibleItemModel {
@@ -51,10 +54,7 @@ Page {
 			}
 
 			ListNavigation {
-				readonly property bool isFirstDcGenset: root.bindPrefix === Global.generators.dcModel.firstObject?.serviceUid
-
 				text: CommonWords.device_info_title
-				preferredVisible: isFirstDcGenset // only show a Device Page for the first DC generator
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml", {
 						serviceUid: root.bindPrefix

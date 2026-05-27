@@ -22,14 +22,7 @@ Page {
 				uid: device.serviceUid + "/StatusCode"
 			}
 
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageDcGenset.qml",
-					{
-						title: text,
-						bindPrefix: device.serviceUid
-					}
-				)
-			}
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageDcGenset.qml", { device: device } )
 		}
 	}
 }
