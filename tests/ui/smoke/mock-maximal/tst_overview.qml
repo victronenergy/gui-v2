@@ -99,19 +99,19 @@ UiTestCase {
 		// Grid (AC input) page
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, { title: "Grid" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_grid" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "gridDialogs_drilldown" })
 
 		// Mode dialog
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, { text: "On" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return Global.dialogLayer.currentDialog?.opened } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_grid_mode" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "gridDialogs_mode" })
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.dialogLayer.currentDialog.footer, { text: "Cancel" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.dialogLayer.currentDialog } })
 
 		// Current limit dialog
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, { text: "25.0A" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return Global.dialogLayer.currentDialog?.opened } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_grid_current_limit" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "gridDialogs_current_limit" })
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.dialogLayer.currentDialog.footer, { text: "Cancel" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.dialogLayer.currentDialog } })
 
@@ -132,7 +132,7 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(
 				findItem(Global.mainView.currentPage, { text: "History" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_today" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_today" })
 
 		// Go to each next combo box option, and do a capture.
 		let optionCapture
@@ -140,21 +140,21 @@ UiTestCase {
 			addStep(UiTestStep.Invoke, { callable: ()=> {
 				return findItem(Global.mainView.currentPage, {}, "ComboBox").incrementCurrentIndex() && true
 			} })
-			addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_table_%1".arg(optionCapture) })
+			addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_table_%1".arg(optionCapture) })
 		}
 
 		// Open "Chart" tab (for 31 days)
 		addStep(UiTestStep.Invoke, { callable: ()=> {
 			return findItem(Global.mainView.currentPage, {}, "TabBar").clickButton(1) && true
 		} })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_chart_31days" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_chart_31days" })
 
 		// Open chart for 14 days and 7 days
 		for (optionCapture of ["14days", "7days"]) {
 			addStep(UiTestStep.Invoke, { callable: ()=> {
 				return findItem(Global.mainView.currentPage, {}, "ComboBox").decrementCurrentIndex() && true
 			} })
-			addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_chart_%1".arg(optionCapture) })
+			addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_chart_%1".arg(optionCapture) })
 		}
 
 		// In "7 days" chart, open the history details dialog for the last day (day 6), then click
@@ -163,12 +163,12 @@ UiTestCase {
 			return findItem(Global.mainView.currentPage, {}, "SolarHistoryChart").openHistoryForDay(6)
 		} })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return Global.dialogLayer.currentDialog?.opened } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_chart_7days_day6" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_chart_7days_day6" })
 		for (let day = 5; day >= 0; day--) {
 			addStep(UiTestStep.Invoke, { callable: ()=> {
 				return mouseClick(findItem(Global.dialogLayer.currentDialog.background, {}, "ArrowButton"))
 			} })
-			addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_chart_7days_day%1".arg(day) })
+			addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_chart_7days_day%1".arg(day) })
 		}
 
 		// Open the error view for day 0.
@@ -177,13 +177,13 @@ UiTestCase {
 			errorView.expanded = true
 			return true
 		} })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_chart_7days_day0_errors" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_chart_7days_day0_errors" })
 
 		// Close the history details dialog.
 		addStep(UiTestStep.Invoke, { callable: ()=> {
 			return mouseClick(findItem(Global.dialogLayer.currentDialog.contentItem, {}, "CloseButton"))
 		} })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "overview_solar_history_dialog_closed" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "solarHistory_dialog_closed" })
 
 		runSteps()
 	}

@@ -34,13 +34,13 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_off_32.svg") }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return root.findObject(Global.mainView.currentPage, {}, "BriefPage_Landscape")?.state === "panelOpened" } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "brief_sidePanel_opened" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "sidePanel_opened" })
 
 		// Close side panel
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_on_32.svg") }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return root.findObject(Global.mainView.currentPage, {}, "BriefPage_Landscape")?.state === "initialized" } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "brief_sidePanel_closed" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "sidePanel_closed" })
 
 		runSteps()
 	}
