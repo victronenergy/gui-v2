@@ -19,10 +19,6 @@ QtObject {
 	// each view (which may be a nested view).
 	property var lastClickedViewItems: ({})
 
-	// A map of { viewObject: imageId } containing the last image id (int) used to capture an image
-	// in each view.
-	property var viewImageIds: ({})
-
 	// A map of { viewObject: int } containing a count of the screens captured within this view.
 	// E.g. if this view can be scrolled down, the number will be > 1.
 	property var pageCaptureCounts: ({})
@@ -35,10 +31,15 @@ QtObject {
 	// The stack view urls that should not be captured.
 	property var excludedPageUrls: []
 
-	function start(baseImageName, doneCallback) {
-		root.viewImageIds = {}
+	// If set, each capture file name is prefixed with this string.
+	property string capturePrefix
+
+	/*
+		Starts the recursive capture process and calls 'doneCallback' when done.
+	*/
+	function start(doneCallback) {
 		root.doneCallback = doneCallback
-		_captureNext([baseImageName])
+		_captureNext([])
 	}
 
 	/*
@@ -46,7 +47,7 @@ QtObject {
 		clickable item on the page; recursively repeat this until all child screens have been
 		captured.
 	*/
-	function _captureNext(imageNameSequence) {
+	function _captureNext(imageNameSequence, imageNameCandidate) {
 		// console.log("_captureNext():", imageNameSequence)
 
 		// First, capture all screens within this list view.
@@ -54,6 +55,8 @@ QtObject {
 			// No screens have been captured yet for this page. Call _captureNextScreen() to grab
 			// all screens for this page, and that function will call _captureNext() again when the
 			// screen captures are completed.
+			const imageName = testCase.sanitizedImageName(imageNameCandidate?.length > 0 ? imageNameCandidate : Global.mainView.currentPage.title)
+			imageNameSequence.push(imageName)
 			_captureNextScreen(imageNameSequence)
 			return
 		}
@@ -68,19 +71,23 @@ QtObject {
 
 		if (nextClickableItem) {
 			// There's a clickable in the list, so click it and call _captureNext() again.
-			const nextImageId = viewImageIds[listView] ?? 1
-			viewImageIds[listView] = nextImageId + 1
-			imageNameSequence.push(nextImageId)
+			// Use the submenu text to identify the image when generating the file name. Do not use
+			// the page title as the page may already have been captured from another submenu (for
+			// example, in the solar list where multiple trackers lead to the same device page).
+			// If the submenu item does not have a 'text' property, it may be a Loader, so look for
+			// the loaded item's text instead.
+			const subMenuText = nextClickableItem?.text ?? nextClickableItem.item?.text ?? ""
 			testCase.addStep(UiTestStep.Invoke, {
 				callable: ()=> { return testCase.mouseClick(testCase.findClickableChild(nextClickableItem)) },
-				message: "Click menu: %1".arg(nextClickableItem.text ?? ""),
+				message: "Click menu: %1".arg(subMenuText),
 			})
 			testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating && Global.mainView.currentPage !== listView.parent } })
-			testCase.runSteps(_captureNext, [imageNameSequence])
+			testCase.runSteps(_captureNext, [imageNameSequence, subMenuText])
 		} else {
 			// There is no ListView in this page, or there are no more items to be clicked in the
-			// ListView.
-			const isInitialPage = imageNameSequence.length === 1
+			// ListView. If we have returned to the initial page, finish the tests; otherwise,
+			// return to the previous page and continue the tests.
+			const isInitialPage = imageNameSequence.length <= 1 // zero if initial page was not captured
 			if (isInitialPage) {
 				// All child pages have been opened; end the tests without further captures.
 				testCase.runSteps(root.doneCallback)
@@ -119,14 +126,19 @@ QtObject {
 		const listView = testCase.findObject(Global.mainView.currentPage, {}, "BaseListView")
 		const isFirstCapture = pageCaptureCounts[Global.mainView.currentPage] === undefined
 		if (isFirstCapture) {
-			pageCaptureCounts[Global.mainView.currentPage] = 1
+			pageCaptureCounts[Global.mainView.currentPage] = 0
 		}
+
+		pageCaptureCounts[Global.mainView.currentPage] += 1
+		const captureImageName = "%1%2_%3"
+				.arg(root.capturePrefix)
+				.arg(imageNameSequence.join('_'))
+				.arg(pageCaptureCounts[Global.mainView.currentPage])
+
 		if (listView) {
 			// Capture the current screen of the ListView.
-			const currentCaptureCount = pageCaptureCounts[Global.mainView.currentPage]
-			pageCaptureCounts[Global.mainView.currentPage] += 1
 			testCase.addStep(UiTestStep.CaptureAndCompare, {
-				imageName: "%1-screen%2".arg(imageNameSequence.join('_')).arg(currentCaptureCount),
+				imageName: captureImageName,
 				message: Global.mainView.currentPage.title,
 			})
 			testCase.addStep(UiTestStep.Invoke, {
@@ -146,7 +158,7 @@ QtObject {
 		} else {
 			// There is no ListView on this page. Capture the screen and return to _captureNext().
 			testCase.addStep(UiTestStep.CaptureAndCompare, {
-				imageName: "%1-screen1".arg(imageNameSequence.join('_')),
+				imageName: captureImageName,
 				message: Global.mainView.currentPage.title + "(no sub-pages found here)",
 			})
 			runSteps(_captureNext, [imageNameSequence])

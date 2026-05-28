@@ -16,7 +16,7 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_controls_off_32.svg") }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		runSteps(recursivePageCapture.start, ["control_cards", closeControlCards])
+		runSteps(recursivePageCapture.start, [closeControlCards])
 	}
 
 	function closeControlCards() {
@@ -30,7 +30,7 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_smartswitch_off_32.svg") }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		runSteps(recursivePageCapture.start, ["switch_pane", closeSwitchPane])
+		runSteps(recursivePageCapture.start, [closeSwitchPane])
 	}
 
 	function closeSwitchPane() {

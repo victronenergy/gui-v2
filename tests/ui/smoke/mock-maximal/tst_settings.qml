@@ -15,7 +15,7 @@ UiTestCase {
 	function test_settings() {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView, { text: "Settings" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		runSteps(recursivePageCapture.start, ["settings"])
+		runSteps(recursivePageCapture.start)
 	}
 
 	RecursivePageCapture {
