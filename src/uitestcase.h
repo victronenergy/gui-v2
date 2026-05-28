@@ -97,6 +97,9 @@ public:
 
 	// TODO add keyPress(QQuickItem *item);
 
+	// Sanitizes a string so that it can be used as part of the file name for an image.
+	Q_INVOKABLE QString sanitizedImageName(const QString &imageName) const;
+
 Q_SIGNALS:
 	void nameChanged();
 	void windowChanged();

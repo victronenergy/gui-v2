@@ -266,6 +266,13 @@ void CaptureAndCompareStep::finalize()
 		return;
 	}
 
+	static QSet<QString> capturedFileNames;
+	if (capturedFileNames.contains(captureFileName)) {
+		finish(false, QStringLiteral("Another file has already been captured with this name: '%1'").arg(captureFileName));
+		return;
+	}
+	capturedFileNames.insert(captureFileName);
+
 	if (QFile::exists(captureFileName)) {
 		// There is a previous capture for this image.
 		QImage previousCapture(captureFileName);
