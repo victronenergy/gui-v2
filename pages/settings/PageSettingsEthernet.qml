@@ -31,6 +31,7 @@ Page {
 		id: connectedModel
 
 		networkServices: networkServices
+		ethernetNetworkServices: networkServices
 	}
 
 	NetworkServices {
