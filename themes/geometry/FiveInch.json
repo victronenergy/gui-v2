@@ -498,6 +498,7 @@
     "geometry_quantityTable_maximumWidth_small": 0,
     "geometry_quantityTable_maximumWidth_large": 0,
     "geometry_quantityTable_bottomMargin": 14,
+    "geometry_quantityTable_horizontalSpacing_tiny": 4,
     "geometry_quantityTable_horizontalSpacing_small": 12,
     "geometry_quantityTable_horizontalSpacing_medium": 36,
     "geometry_quantityTable_horizontalSpacing_large": 48,

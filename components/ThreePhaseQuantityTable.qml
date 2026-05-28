@@ -15,7 +15,7 @@ QuantityTable {
 	property real labelFontSize: Theme.font_size_body2
 	property int voltDecimals: Units.defaultUnitDecimals(VenusOS.Units_Volt_AC)
 
-	columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_small
+	columnSpacing: Theme.geometry_quantityTable_horizontalSpacing_tiny
 	header: Rectangle {
 		width: root.width
 		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
