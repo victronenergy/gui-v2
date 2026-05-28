@@ -11,6 +11,7 @@ FocusScope {
 
 	readonly property alias pageManager: pageManager
 	readonly property alias navBar: navBar
+	readonly property alias statusBar: statusBar
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
