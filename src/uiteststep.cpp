@@ -11,6 +11,7 @@
 #include <QDir>
 #include <QFile>
 #include <QColorSpace>
+#include <QtEnvironmentVariables>
 
 #include <QQuickWindow>
 #include <QQmlInfo>
@@ -316,7 +317,12 @@ QString CaptureAndCompareStep::absoluteImagePath(const QString &fileName)
 {
 	static QString dirPath;
 	if (dirPath.isEmpty()) {
-		dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir")).toString();
+		static const QString imageDirOverride = qEnvironmentVariable("VENUS_GUI_TEST_CAPTURE_DIR");
+		if (imageDirOverride.isEmpty()) {
+			dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir")).toString();
+		} else {
+			dirPath = imageDirOverride;
+		}
 		if (!QDir().mkpath(dirPath)) {
 			qWarning() << "mkpath() failed for image directory!" << dirPath;
 			return QString();
