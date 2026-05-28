@@ -34,7 +34,7 @@ Page {
 					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
 					//% "Unplugged"
 					: qsTrId("settings_tcpip_connection_unplugged")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEthernet.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTcpIp.qml", {"title": text})
 			}
 
 			ListNavigation {

@@ -440,7 +440,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsDynamicEss.qml
     pages/settings/PageSettingsEebus.qml
     pages/settings/PageSettingsEebusDevice.qml
-    pages/settings/PageSettingsEthernet.qml
     pages/settings/PageSettingsFirmware.qml
     pages/settings/PageSettingsFirmwareOffline.qml
     pages/settings/PageSettingsFirmwareOnline.qml
