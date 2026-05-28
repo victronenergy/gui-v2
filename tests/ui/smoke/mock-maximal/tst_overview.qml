@@ -37,61 +37,50 @@ UiTestCase {
 			{
 				tag: "Grid",
 				widgetValues: { title: "Grid" },
-				baseImageName: "overview_grid",
 			},
 			{
 				tag: "Generator",
 				widgetValues: { title: "Generator" },
-				baseImageName: "overview_generator",
 			},
 			{
 				tag: "Solar",
 				widgetValues: { title: "Solar" },
-				baseImageName: "overview_solar",
 			},
 			{
 				tag: "Alternator",
 				widgetValues: { title: "Alternator" },
-				baseImageName: "overview_alternator",
 			},
 			{
 				tag: "Wind charger",
 				widgetValues: { title: "Wind charger" },
-				baseImageName: "overview_wind_charger",
 			},
 
 			// Centre widgets
 			{
 				tag: "Inverter/Charger",
 				widgetValues: { title: "Inverter / Charger" },
-				baseImageName: "overview_inverter_charger",
 			},
 			{
 				tag: "Battery",
 				widgetValues: { title: "Battery" },
-				baseImageName: "overview_battery",
 			},
 
 			// Right widgets
 			{
 				tag: "AC Loads",
 				widgetValues: { title: "AC Loads" },
-				baseImageName: "overview_ac_loads",
 			},
 			{
 				tag: "EVCS",
 				widgetValues: { title: "EVCS" },
-				baseImageName: "overview_evcs",
 			},
 			{
 				tag: "Essential Loads",
 				widgetValues: { title: "Essential Loads" },
-				baseImageName: "overview_essential_loads",
 			},
 			{
 				tag: "DC Loads",
 				widgetValues: { title: "DC Loads" },
-				baseImageName: "overview_dc_loads",
 			},
 		]
 	}
@@ -99,7 +88,7 @@ UiTestCase {
 	function test_drilldown(data) {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, data.widgetValues))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-		runSteps(recursivePageCapture.start, [data.baseImageName])
+		runSteps(recursivePageCapture.start)
 	}
 
 	// Ideally RecursivePageCapture would handle clicking list buttons as well, so that this kind of
