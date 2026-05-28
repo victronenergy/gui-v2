@@ -10,6 +10,7 @@ VisibleItemModel {
 	id: root
 
 	required property NetworkServices networkServices
+	required property NetworkServices ethernetNetworkServices
 
 	ListText {
 		//% "Name"
@@ -35,7 +36,7 @@ VisibleItemModel {
 				Passphrase: secondaryText
 			}
 			var json = JSON.stringify(obj);
-			setValueItem.setValue(json)
+			networkServices.setValueItem.setValue(json)
 		}
 	}
 
@@ -155,10 +156,22 @@ VisibleItemModel {
 		//% "Gateway"
 		text: qsTrId("settings_tcpip_gateway")
 		interactive: method.userHasWriteAccess && networkServices.manual
-		preferredVisible: networkServices.wifi || ethernetGatewayEnabled.checked
+		// if we are connected to both wifi and ethernet,
+		// if we are currently showing a wifi settings page
+		// we should hide the gateway field if the ethernet gateway is also enabled,
+		// because the system will override the wifi gateway address to null
+		// in order to prefer routing traffic via the ethernet gateway.
+		preferredVisible: (wifiGatewayEnabled.valid && wifiGatewayEnabled.value === true
+				&& (ethernetNetworkServices.ipAddress.length === 0 || !ethernetGatewayEnabled.checked))
+			|| (!networkServices.wifi && ethernetGatewayEnabled.checked)
 		writeAccessLevel: VenusOS.User_AccessType_User
 		secondaryText: networkServices.gateway
 		saveInput: function() { networkServices.setServiceProperty("Gateway", secondaryText) }
+
+		VeQuickItem {
+			id: wifiGatewayEnabled
+			uid: networkServices.wifi ? Global.venusPlatform.serviceUid + "/Network/Wifi/GatewayEnabled" : ""
+		}
 	}
 
 	ListIpAddressField {

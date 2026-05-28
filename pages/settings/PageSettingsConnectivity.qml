@@ -43,7 +43,7 @@ Page {
 				//% "Wi-Fi"
 				text: qsTrId("pagesettingsconnectivity_wifi")
 				secondaryText: wifiModel.connectedNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text})
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text, "ethernetNetworkServices": networkServices})
 				WifiModel {
 					id: wifiModel
 				}

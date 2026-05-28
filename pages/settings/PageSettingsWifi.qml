@@ -11,6 +11,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	required property NetworkServices ethernetNetworkServices
+
 	VeQuickItem {
 		id: scanItem
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
@@ -188,8 +190,8 @@ Page {
 				PageSettingsTcpIp {
 					title: accessPointDelegate.text
 					service: model.service
-					network: model.network
 					tech: "wifi"
+					ethernetNetworkServices: root.ethernetNetworkServices
 				}
 			}
 		}

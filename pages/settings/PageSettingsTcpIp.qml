@@ -12,6 +12,7 @@ Page {
 	property string network: "Wired"
 	property string tech: "ethernet"
 	property alias service: networkServices.service
+	required property NetworkServices ethernetNetworkServices
 
 	VeQuickItem {
 		id: setValueItem
@@ -40,6 +41,7 @@ Page {
 		id: connectedModel
 
 		networkServices: networkServices
+		ethernetNetworkServices: root.ethernetNetworkServices
 	}
 
 	NetworkServices {
