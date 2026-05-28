@@ -8,6 +8,15 @@ For example, this runs the `mock-maximal` test when gui-v2 is loaded:
 ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
 ```
 
+Image captures are stored in the directory specified by the test JSON configuration; for the `mock-maximal` test, this is `<working-directory>/image-captures`.
+
+Note: you may set VENUS_GUI_TEST_CAPTURE_DIR to override the configured image capture directory:
+
+```
+VENUS_GUI_TEST_CAPTURE_DIR=~/tests/ui/image-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
+
+```
+
 ## Tests directory structure
 
 UI tests are stored under `gui-v2/tests/ui`:
