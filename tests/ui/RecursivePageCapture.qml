@@ -85,13 +85,16 @@ QtObject {
 				// All child pages have been opened; end the tests without further captures.
 				testCase.runSteps(root.doneCallback)
 			} else {
-				// Pop to the previous page.
+				// Pop to the previous page, in both the page stack and image sequence.
+				// Also clear the page counter, as a future page may have the same pageCaptureCounts
+				// key if it is of the same QML type and is loaded into the same memory location.
+				delete pageCaptureCounts[Global.mainView.currentPage]
+				imageNameSequence.pop()
 				testCase.addStep(UiTestStep.Invoke, {
 					callable: ()=> { Global.pageManager.popPage() },
 					message: "Finished page: %1".arg(listView?.parent?.title ?? ""),
 				})
 				testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
-				imageNameSequence.pop()
 				testCase.runSteps(_captureNext, [imageNameSequence])
 			}
 		}
