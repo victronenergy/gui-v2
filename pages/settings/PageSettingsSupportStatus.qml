@@ -368,15 +368,20 @@ Page {
 						if (firmwareProgressItem.value) {
 							//: Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress
 							//% "Updating %1 %2%"
-							qsTrId("pagesettingssupportstate_updating_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(firmwareProgressItem.value)
+							return qsTrId("pagesettingssupportstate_updating_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(firmwareProgressItem.value)
 						} else {
 							//: %1 = firmware version
 							//% "Updating %1..."
-							qsTrId("pagesettingssupportstate_updating").arg(Global.firmwareUpdate.onlineAvailableVersion)
+							return qsTrId("pagesettingssupportstate_updating").arg(Global.firmwareUpdate.onlineAvailableVersion)
 						}
 					} else {
-						//% "Press to update to"
-						qsTrId("pagesettingssupportstate_press_to_update") + (firmwareReleaseAvailableVersionItem.valid ? " " + firmwareReleaseAvailableVersionItem.value : "")
+						if (firmwareReleaseAvailableVersionItem.valid) {
+							return CommonWords.update_to_version.arg(firmwareReleaseAvailableVersionItem.value)
+						} else {
+							//: Update the firmware version
+							//% "Update"
+							return qsTrId("pagesettingssupportstate_update")
+						}
 					}
 				}
 

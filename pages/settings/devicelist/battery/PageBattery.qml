@@ -444,8 +444,7 @@ DevicePage {
 		ListButton {
 			//% "Redetect Battery"
 			text: qsTrId("battery_redetect_battery")
-			//% "Press to redetect"
-			secondaryText: qsTrId("battery_press_to_redetect")
+			secondaryText: CommonWords.redetect
 			interactive: redetect.value === 0
 			preferredVisible: redetect.valid
 			writeAccessLevel: VenusOS.User_AccessType_User

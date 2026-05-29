@@ -124,8 +124,7 @@ Page {
 				preferredVisible: root._isVecan || root._isRvc
 				secondaryText: timer.running
 					? Utils.secondsToString(timer.remainingTime)
-					  //% "Press to check"
-					: qsTrId("settings_canbus_unique_id_press_to_check")
+					: CommonWords.check_now
 				caption: {
 					if (vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1) {
 						//% "There is another device connected with this unique number, please select a new number."

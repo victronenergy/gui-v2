@@ -85,9 +85,7 @@ Page {
 						//% "Installing %1..."
 						return qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
 					} else {
-						//: %1 = firmware version
-						//% "Press to update to %1"
-						return qsTrId("settings_firmware_online_press_to_update_to").arg(Global.firmwareUpdate.onlineAvailableVersion)
+						return CommonWords.update_to_version.arg(Global.firmwareUpdate.onlineAvailableVersion)
 					}
 				}
 

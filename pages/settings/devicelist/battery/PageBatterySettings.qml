@@ -64,8 +64,8 @@ Page {
 			ListButton {
 				//% "Restore factory defaults"
 				text: qsTrId("batterysettings_restore_factory_defaults")
-				//% "Press to restore"
-				secondaryText: qsTrId("batterysettings_press_to_restore")
+				//% "Restore"
+				secondaryText: qsTrId("batterysettings_restore")
 				preferredVisible: restoreDefaults.valid
 				onClicked: Global.dialogLayer.open(confirmationDialogComponent)
 

@@ -29,7 +29,7 @@ Page {
 				id: resetButton
 				//% "Node-RED factory reset"
 				text: qsTrId("page_settings_nodered_factory_reset")
-				secondaryText: CommonWords.press_to_reset
+				secondaryText: CommonWords.reset
 				preferredVisible: true
 				onClicked: Global.dialogLayer.open(factoryResetConfirmationDialogComponent)
 

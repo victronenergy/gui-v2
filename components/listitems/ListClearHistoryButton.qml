@@ -14,7 +14,7 @@ ListButton {
 	//% "Clear History"
 	text: qsTrId("clear_history_button_clear_history")
 	secondaryText: enabled
-		   ? CommonWords.press_to_clear
+		   ? CommonWords.clear_action
 			 //% "Clearing"
 		   : qsTrId("clear_history_button_clearing")
 

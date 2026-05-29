@@ -347,11 +347,10 @@ Page {
 			ListButton {
 				id: _backupButton
 				property string backupFileName
-				//% "Backup"
-				text: qsTrId("vebus_backup_backup") + " - " + (backupFileName || _backupRestoreFile.value || "")
+				//% "Backup - %1"
+				text: qsTrId("vebus_backup_with_name").arg(backupFileName || _backupRestoreFile.value || "")
 				secondaryText: (
-					//% "Press to backup"
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup)? qsTrId("vebus_backup_press_to_backup")
+					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup) ? CommonWords.start_action
 					//% "Backing up..."
 					: qsTrId("vebus_backup_backing_up") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
@@ -384,11 +383,10 @@ Page {
 				id: _restoreButton
 				property string fileToRestore
 				property string fileNameToRestore
-				//% "Restore"
-				text: qsTrId("vebus_backup_restore") + " - " + (fileNameToRestore || _backupRestoreFile.value || "")
+				//% "Restore - %1"
+				text: qsTrId("vebus_backup_restore_name").arg(fileNameToRestore || _backupRestoreFile.value || "")
 				secondaryText: (
-					//% "Press to restore"
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore)? (qsTrId("vebus_backup_press_to_restore"))
+					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore) ? CommonWords.start_action
 					//% "Restoring..."
 					: qsTrId("vebus_backup_restoring") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
@@ -402,8 +400,8 @@ Page {
 			}
 			ListRadioButtonGroup {
 				id: _deleteOptionsList
-				//% "Delete"
-				text: qsTrId("vebus_backup_delete")
+				//% "Delete backup"
+				text: qsTrId("vebus_backup_delete_backup")
 				optionModel: _mergedBackupsModel
 				//% "Select backup file to delete"
 				secondaryText: qsTrId("vebus_backup_select_backup_file_to_delete")
@@ -421,11 +419,11 @@ Page {
 				id: _deleteButton
 				property string fileToDelete
 				property string fileNameToDelete
-				//% "Delete"
-				text: qsTrId("vebus_backup_delete") + " - " + (fileNameToDelete || _backupRestoreFile.value || "")
+				//% "Delete - %1"
+				text: qsTrId("vebus_backup_delete_named_backup").arg(fileNameToDelete || _backupRestoreFile.value || "")
 				secondaryText: (
-					//% "Press to delete"
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete)? (qsTrId("vebus_backup_press_to_delete"))
+					//% "Delete"
+					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete)? qsTrId("vebus_backup_delete")
 					//% "Deleting..."
 					: qsTrId("vebus_backup_deleting") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
 				)
@@ -439,9 +437,9 @@ Page {
 			}
 			ListButton {
 				id: _cancelButton
-				text: CommonWords.cancel
-				//% "Press to cancel"
-				secondaryText: qsTrId("vebus_backup_press_to_cancel")
+				//% "Cancel actions"
+				text: qsTrId("vebus_backup_cancel_actions")
+				secondaryText: CommonWords.cancel
 				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None && (!_deleteOptionsList.preferredVisible  ||
 								  !_restoreOptionsList.preferredVisible || !_backupNameInput.preferredVisible)
@@ -462,9 +460,9 @@ Page {
 			}
 			ListButton {
 				id: _passwordEntryCancelButton
-				text: CommonWords.cancel
-				//% "Press to cancel"
-				secondaryText: qsTrId("vebus_backup_press_to_cancel")
+				//% "Cancel password entry"
+				text: qsTrId("vebus_backup_cancel_password_entry")
+				secondaryText: CommonWords.cancel
 				preferredVisible: _backupRestorePasswordUserInputPending.value === 1
 				onClicked: {
 					_backupRestoreCancelUserInput.setValue(1)
