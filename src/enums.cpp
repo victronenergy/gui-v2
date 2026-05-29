@@ -596,7 +596,7 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 		return qtTrId("switchable_output_rgbw_color_wheel");
 	default:
 		//% "Unsupported type: %1"
-		return qtTrId("switchable_output_unsupported").arg(value);
+		return qtTrId("switchable_output_unsupported_type").arg(value);
 	}
 }
 
@@ -629,7 +629,7 @@ QString Enums::switchableOutput_functionToText(SwitchableOutput_Function value) 
 		return qtTrId("switchable_output_function_opportunity_load");
 	default:
 		//% "Unsupported function: %1"
-		return qtTrId("switchable_output_unsupported").arg(value);
+		return qtTrId("switchable_output_unsupported_function").arg(value);
 	}
 }
 
