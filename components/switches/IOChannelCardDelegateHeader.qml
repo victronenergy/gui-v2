@@ -24,6 +24,8 @@ RowLayout {
 	spacing: Theme.geometry_iochannel_label_margin
 
 	Label {
+		id: nameLabel
+
 		Layout.fillWidth: true
 		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
 		text: root.ioChannel.formattedName
@@ -33,6 +35,7 @@ RowLayout {
 
 	IOChannelQuantityLabel {
 		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		Layout.preferredHeight: nameLabel.height
 		ioChannel: root.ioChannel
 		value: root.quantityValue
 		valueColor: root.quantityColor
@@ -46,11 +49,11 @@ RowLayout {
 	Rectangle {
 		id: statusRect
 
-		Layout.bottomMargin: Theme.geometry_iochannel_statusBackground_bottomPadding
+		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
 		Layout.maximumWidth: parent.width / 2
 		Layout.minimumWidth: statusLabel.implicitWidth
-		Layout.alignment: Qt.AlignRight
-		height: statusLabel.height
+		Layout.alignment: Qt.AlignRight | Qt.AlignTop
+		Layout.preferredHeight: statusLabel.height
 		color: statusLabel.color === Theme.color_green ? Theme.color_darkGreen
 				: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
 				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
