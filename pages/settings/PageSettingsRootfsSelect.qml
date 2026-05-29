@@ -58,8 +58,9 @@ Page {
 				//% "Firmware %1 (%2)"
 				text: qsTrId("settings_firmware_backup_version").arg(backupVersionItem.value).arg(backupBuildItem.value)
 				secondaryText: root._autoUpdateDisabled
-					 //% "Press to boot"
-				   ? qsTrId("settings_firmware_press_to_boot")
+					 //: Boot the system to a particular firmware version
+					 //% "Boot"
+				   ? qsTrId("settings_firmware_boot_to_version")
 				   : CommonWords.disabled
 				preferredVisible: root._switchingEnabled
 

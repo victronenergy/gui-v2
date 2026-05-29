@@ -41,8 +41,9 @@ DevicePage {
 		ListButton {
 			//% "Update the MK3"
 			text: qsTrId("vebus_device_update_the_mk3")
-			//% "Press to update"
-			secondaryText: qsTrId("vebus_device_press_to_update")
+			//: Trigger an update action
+			//% "Update"
+			secondaryText: qsTrId("vebus_device_press_update")
 			preferredVisible: mk3firmware.visible
 			writeAccessLevel: VenusOS.User_AccessType_User
 			onClicked: {
@@ -82,12 +83,7 @@ DevicePage {
 		}
 
 		ListNavigation {
-			text: chargeInProcess ?
-					  //% "Press to stop"
-					  qsTrId("vebus_device_press_to_stop")
-					:
-					  //% "Press to start"
-					  qsTrId("vebus_device_press_to_start")
+			text: chargeInProcess ? CommonWords.stop_action : CommonWords.start_action
 			secondaryText: chargeInProcess ?
 							   //% "Charging the battery to 100%"
 							   qsTrId("vebus_device_charging_the_battery_to_100")

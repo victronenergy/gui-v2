@@ -67,7 +67,7 @@ Page {
 
 			ListButton {
 				text: CommonWords.clear_error_action
-				secondaryText: CommonWords.press_to_clear
+				secondaryText: CommonWords.clear_action
 				preferredVisible: enableModbusTcp.checked && lastError.valid
 				onClicked: {
 					lastError.setValue(undefined)

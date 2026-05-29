@@ -29,7 +29,7 @@ Page {
 			ListButton {
 				//% "Scan for E-drives"
 				text: qsTrId("page_settings_canopenmotordrive_scan_for_motor_drives")
-				secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.press_to_scan
+				secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.scan_action
 				onClicked: scanItem.setValue(!scanItem.value)
 				preferredVisible: userHasWriteAccess
 			}

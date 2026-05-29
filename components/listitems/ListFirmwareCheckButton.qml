@@ -14,8 +14,7 @@ ListButton {
 	secondaryText: Global.firmwareUpdate.checkingForUpdate
 			 //% "Checking..."
 		   ? qsTrId("settings_firmware_checking")
-			 //% "Press to check"
-		   : qsTrId("settings_firmware_press_to_check")
+		   : CommonWords.check_now
 	interactive: !Global.firmwareUpdate.checkingForUpdate
 	writeAccessLevel: VenusOS.User_AccessType_User
 

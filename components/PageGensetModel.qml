@@ -158,8 +158,7 @@ VisibleItemModel {
 
 		//% "Clear generator error"
 		text: qsTrId("clear-generator-error")
-		//% "Press to clear"
-		secondaryText: qsTrId("press-to-clear")
+		secondaryText: CommonWords.clear_action
 		preferredVisible: clearErrorItem.valid
 		interactive: hasGensetError && canClearGeneratorError && remoteStartModeIsEnabled
 		onClicked: {
@@ -336,7 +335,7 @@ VisibleItemModel {
 
 						ListButton {
 							text: CommonWords.bms_control
-							secondaryText: CommonWords.press_to_reset
+							secondaryText: CommonWords.reset
 							preferredVisible: bmsControlled.dataItem.value === 1
 							onClicked: bmsControlled.dataItem.setValue(0)
 						}

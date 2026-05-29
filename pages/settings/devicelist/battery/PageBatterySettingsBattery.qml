@@ -143,8 +143,9 @@ Page {
 			ListButton {
 				//% "Synchronise state-of-charge to 100%"
 				text: qsTrId("batterysettingsbattery_synchronise_state_of_charge_to_100%")
-				//% "Press to sync"
-				secondaryText: qsTrId("batterysettingsbattery_press_to_sync")
+				//: Trigger a synchronisation of the battery SOC
+				//% "Sync"
+				secondaryText: qsTrId("batterysettingsbattery_sync")
 				interactive: !root.locked
 				onClicked: sync.setValue(1)
 				preferredVisible: sync.valid
@@ -158,8 +159,8 @@ Page {
 			ListButton {
 				//% "Calibrate zero current"
 				text: qsTrId("batterysettingsbattery_calibrate_zero_current")
-				//% "Press to set to 0"
-				secondaryText: qsTrId("batterysettingsbattery_press_to_set_to_0")
+				//% "Set to 0"
+				secondaryText: qsTrId("batterysettingsbattery_set_to_0")
 				onClicked: zero.setValue(1)
 				preferredVisible: zero.valid
 

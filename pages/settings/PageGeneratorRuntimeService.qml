@@ -88,7 +88,7 @@ Page {
 			ListButton {
 				//% "Reset daily run time counters"
 				text: qsTrId("page_settings_run_time_and_service_reset_daily_run_time_counters")
-				secondaryText: CommonWords.press_to_reset
+				secondaryText: CommonWords.reset
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					if (state.value === 0) {
@@ -177,7 +177,7 @@ Page {
 			ListButton {
 				//% "Reset service timer"
 				text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
-				secondaryText: CommonWords.press_to_reset
+				secondaryText: CommonWords.reset
 				preferredVisible: serviceReset.valid
 				onClicked: {
 					serviceReset.setValue(1)

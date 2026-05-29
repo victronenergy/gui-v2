@@ -13,8 +13,8 @@ ListButton {
 	function _mountStateToText(s) {
 		switch (s) {
 		case VenusOS.Storage_Mounted:
-			//% "Press to eject"
-			return qsTrId("components_mount_state_press_to_eject")
+			//% "Eject"
+			return qsTrId("components_mount_state_eject")
 		case VenusOS.Storage_UnmountRequested:
 		case VenusOS.Storage_UnmountBusy:
 			//% "Ejecting, please wait"

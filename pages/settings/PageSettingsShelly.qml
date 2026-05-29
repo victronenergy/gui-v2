@@ -95,8 +95,8 @@ Page {
 			ListButton {
 				//% "Refresh devices"
 				text: qsTrId("settings_shelly_refresh_devices")
-				//% "Press to refresh"
-				secondaryText: qsTrId("settings_shelly_press_to_refresh")
+				//% "Refresh"
+				secondaryText: qsTrId("settings_shelly_refresh")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: refreshItem.setValue(1)
 

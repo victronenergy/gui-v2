@@ -121,10 +121,10 @@ Page {
 						//% "Starting..."
 						return qsTrId("vebus_device_starting")
 					if (interrupt)
-						//% "Press to interrupt"
-						return qsTrId("vebus_device_press_to_interrupt")
-					//% "Press to start"
-					return qsTrId("vebus_device_press_to_start")
+						//: Interrupt the equalization process
+						//% "Interrupt"
+						return qsTrId("vebus_device_interrupt")
+					return CommonWords.start_action
 				}
 				interactive: !isNaN(setChargerState.value) &&
 							 !isNaN(vebusSubState.value) &&
@@ -213,8 +213,7 @@ Page {
 				secondaryText: redetectSystem.value === 1
 								//% "Redetecting..."
 							 ? qsTrId("vebus_device_redetecting")
-								//% "Press to redetect"
-							 : qsTrId("vebus_device_press_to_redetect")
+							 : CommonWords.redetect
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: redetectSystem.setValue(1)
 			}
@@ -225,8 +224,8 @@ Page {
 				secondaryText: systemReset.value === 1
 								//% "Restarting..."
 							 ? qsTrId("vebus_device_restarting")
-								//% "Press to restart"
-							 : qsTrId("vebus_device_press_to_restart")
+								//% "Restart"
+							 : qsTrId("vebus_device_restart")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: Global.dialogLayer.open(restartVEBusComponent)
 
