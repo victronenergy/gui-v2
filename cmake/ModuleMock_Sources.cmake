@@ -29,6 +29,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/split-phase.json
     data/mock/conf/switch-pane.json
     data/mock/conf/services/alternator.json
+    data/mock/conf/services/dcdb-aurelia.json
     data/mock/conf/services/dcgenset.json
     data/mock/conf/services/dcload-fridge.json
     data/mock/conf/services/dcsystem1.json
