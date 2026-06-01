@@ -134,6 +134,28 @@ VisibleItemModel {
 		writeAccessLevel: VenusOS.User_AccessType_User
 		valueTrue: true
 		valueFalse: false
+		updateDataOnClick: false
+
+		onClicked: {
+			if (!ethernetGatewayEnabled.checked) {
+				ethernetGatewayEnabled.toggleDataValue()
+			} else {
+				Global.dialogLayer.open(disableEthernetGatewayComponent)
+			}
+		}
+
+		Component {
+			id: disableEthernetGatewayComponent
+
+			ModalWarningDialog {
+				dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+				//% "Disable internet access over ethernet?"
+				title: qsTrId("settings_tcpip_disable_ethernet_gateway")
+				//% "This will disconnect the device from VRM, unless it can connect to VRM over WiFi. Are you sure that you want to disable internet access over ethernet?"
+				description: qsTrId("settings_tcpip_disable_ethernet_gateway_confirm")
+				onAccepted: ethernetGatewayEnabled.toggleDataValue()
+			}
+		}
 	}
 
 	ListIpAddressField {
