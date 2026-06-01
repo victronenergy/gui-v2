@@ -64,6 +64,12 @@ ListButton {
 	VeQuickItem {
 		id: currentLimitItem
 		uid: root.serviceUid + "/Ac/In/" + root.inputNumber + "/CurrentLimit"
+		property real maxCurrentLimit: currentLimitItem.valid
+				&& currentLimitItem.max != null
+				&& currentLimitItem.max > 0
+				&& currentLimitItem.max < Global.int32Max
+			? currentLimitItem.max
+			: -1 // -1 = unknown / no max current limit
 	}
 
 	VeQuickItem {
@@ -81,16 +87,11 @@ ListButton {
 		uid: root.serviceUid + "/Devices/Dmc/Version"
 	}
 
-	VeQuickItem {
-		id: productIdItem
-		uid: root.serviceUid + "/ProductId"
-	}
-
 	Component {
 		id: currentLimitDialogComponent
 
 		CurrentLimitDialog {
-			productId: productIdItem.valid ? productIdItem.value : 0
+			maxCurrentLimit: currentLimitItem.maxCurrentLimit
 			title: Global.acInputs.currentLimitTypeToText(root.inputType)
 			secondaryTitle: CommonWords.acInputFromNumber(root.inputNumber)
 			onAccepted: currentLimitItem.setValue(value)

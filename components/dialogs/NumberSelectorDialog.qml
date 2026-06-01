@@ -18,22 +18,34 @@ ModalDialog {
 	property real from
 	property real to
 	property real stepSize
+	property var stepSizeForValue: null
 	property var presets: []
 
 	// Error text shown when user tries to set a value < from or > to.
 	property string fromErrorText
 	property string toErrorText
 
+	property var customIncrease: null
+
+	function _presetIndexForValue(v) {
+		const epsilon = 0.0001
+		const valueAsNumber = Number(v)
+		for (let i = 0; i < presets.length; ++i) {
+			const presetValue = Number(presets[i].value)
+			if (!isNaN(presetValue) && !isNaN(valueAsNumber)) {
+				if (Math.abs(presetValue - valueAsNumber) <= epsilon * Math.max(1, Math.abs(presetValue), Math.abs(valueAsNumber))) {
+					return i
+				}
+			} else if (presets[i].value === v) {
+				return i
+			}
+		}
+		return -1
+	}
+
 	onAboutToShow: {
 		if (presets.length) {
-			let presetsIndex = -1
-			for (let i = 0; i < presets.length; ++i) {
-				if (presets[i].value === value) {
-					presetsIndex = i
-					break
-				}
-			}
-			presetsRow.currentIndex = presetsIndex
+			presetsRow.currentIndex = root._presetIndexForValue(value)
 		}
 	}
 
@@ -94,12 +106,45 @@ ModalDialog {
 				from: decimalConverter.intFrom
 				to: decimalConverter.intTo
 				stepSize: decimalConverter.intStepSize
+				stepSizeForValue: (v, increasing) => {
+					if (!root.stepSizeForValue) {
+						return spinBox.stepSize
+					}
+					// At this point, the value we receive will be "decimal converter scaled"
+					// whereas the CurrentLimitDialog does pure value comparison in its
+					// stepSizeForValue implementation.  So, we need to convert the
+					// scaled value into a raw value, ask the root implementation what
+					// the step size should be, and then scale that step size up appropriately.
+					const decimalValue = decimalConverter.intToDecimal(v)
+					const decimalStepSize = root.stepSizeForValue(decimalValue, increasing)
+					return decimalConverter.decimalToInt(decimalStepSize)
+				}
 				value: decimalConverter.decimalToInt(root.value)
 				textFromValue: (value, locale) => decimalConverter.textFromValue(value)
 				valueFromText: (text, locale) => {
 					const v = decimalConverter.valueFromText(text)
 					return isNaN(v) ? decimalConverter.decimalToInt(root.value) : v // if invalid, use the previous value
 				}
+				updateValueTo: (v, text) => {
+					// Manually set the root value from the text,
+					// rather than attempting to determine the appropriate next
+					// spinbox value for the given text (as SpinBoxInputArea does),
+					// because the text value might be associated with
+					// a different number of decimals than the current spinbox value.
+					let value = Units.formattedNumberToReal(text)
+					if (isNaN(value)) {
+						// don't change the current value
+						value = root.value
+					} else if (value < root.from) {
+						spinBox.decreaseFailed()
+						value = root.from
+					} else if (value > root.to) {
+						spinBox.increaseFailed()
+						value = root.to
+					}
+					root.value = value
+				}
+				customIncrease: root.customIncrease
 
 				// Use BeforeItem priority to override the default key Spinbox event handling, else
 				// up/down keys will modify the number even when SpinBox is not in "edit" mode.
@@ -112,7 +157,6 @@ ModalDialog {
 
 				onValueModified: {
 					dialogContent.valueModified()
-					presetsRow.currentIndex = -1
 				}
 				onDecreaseFailed: {
 					if (root.fromErrorText) {
@@ -148,12 +192,17 @@ ModalDialog {
 			SegmentedButtonRow {
 				id: presetsRow
 
+				showBorderWhenDisabled: true
 				model: root.presets
 				visible: model.length > 0
 				enabled: visible
 				onButtonClicked: function (buttonIndex) {
-					spinBox.value = decimalConverter.decimalToInt(model[buttonIndex].value)
-					dialogContent.valueModified()
+					root.value = model[buttonIndex].value
+				}
+
+				property real rootValue: root.value
+				onRootValueChanged: {
+					presetsRow.currentIndex = root._presetIndexForValue(rootValue)
 				}
 
 				KeyNavigation.down: root.footer

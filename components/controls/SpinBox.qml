@@ -44,6 +44,10 @@ T.SpinBox {
 	property int _scalingFactor: 1
 	property int _originalStepSize
 
+	property var customIncrease: null
+	property var customDecrease: null
+	property var stepSizeForValue: null
+
 	signal increaseFailed()
 	signal decreaseFailed()
 
@@ -273,7 +277,11 @@ T.SpinBox {
 				root.increaseFailed()
 				return
 			}
-			root.increase()
+			if (root.customIncrease) {
+				root.customIncrease(root)
+			} else {
+				root.increase()
+			}
 			root.valueModified()
 			root.up.pressed = true
 		}
@@ -299,7 +307,11 @@ T.SpinBox {
 				root.decreaseFailed()
 				return
 			}
-			root.decrease()
+			if (root.customDecrease) {
+				root.customDecrease(root)
+			} else {
+				root.decrease()
+			}
 			root.valueModified()
 			root.down.pressed = true
 		}
@@ -329,6 +341,13 @@ T.SpinBox {
 		}
 
 		return value
+	}
+	property var updateValueTo: function(v, text) {
+		const previousValue = root.value
+		root.value = v
+		if (root.value !== previousValue) {
+			root.valueModified()
+		}
 	}
 
 	Timer {
@@ -361,14 +380,22 @@ T.SpinBox {
 			interval = 100
 			if (up.pressed) {
 				if (root.up.indicator.enabled) {
-					root.increase()
+					if (root.customIncrease) {
+						root.customIncrease(root)
+					} else {
+						root.increase()
+					}
 					root.valueModified()
 				} else {
 					root.increaseFailed()
 				}
 			} else {
 				if (root.down.indicator.enabled) {
-					root.decrease()
+					if (root.customDecrease) {
+						root.customDecrease(root)
+					} else {
+						root.decrease()
+					}
 					root.valueModified()
 				} else {
 					root.decreaseFailed()
