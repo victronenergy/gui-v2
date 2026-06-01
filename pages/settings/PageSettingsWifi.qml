@@ -137,12 +137,35 @@ Page {
 			}
 
 			ListSwitch {
+				id: wifiGatewayEnabled
 				//% "Allow using WiFi for internet access"
 				text: qsTrId("settings_tcpip_wifi_gateway_enabled")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Wifi/GatewayEnabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				valueTrue: true
 				valueFalse: false
+				updateDataOnClick: false
+
+				onClicked: {
+					if (!wifiGatewayEnabled.checked) {
+						wifiGatewayEnabled.toggleDataValue()
+					} else {
+						Global.dialogLayer.open(disableWiFiGatewayComponent)
+					}
+				}
+
+				Component {
+					id: disableWiFiGatewayComponent
+
+					ModalWarningDialog {
+						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+						//% "Disable internet access over WiFi?"
+						title: qsTrId("settings_tcpip_disable_wifi_gateway")
+						//% "This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?"
+						description: qsTrId("settings_tcpip_disable_wifi_gateway_confirm")
+						onAccepted: wifiGatewayEnabled.toggleDataValue()
+					}
+				}
 			}
 
 			SettingsListHeader {

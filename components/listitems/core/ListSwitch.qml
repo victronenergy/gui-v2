@@ -47,24 +47,28 @@ ListSetting {
 			return
 		}
 		if (root.updateDataOnClick) {
-			if (root.dataItem.uid.length > 0) {
-				// Note: this logic only holds so long as checkable is false so we can use
-				// the current unmodified checked state at the point of onClicked.
-				// (dataItem might not be valid until the first write so we can't simply use
-				// the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
-				// Note that an malformed uid will result in it being empty when inspected.
-				if (root.invertSourceValue) {
-					root.dataItem.setValue(checked ? valueTrue : valueFalse)
-				} else {
-					root.dataItem.setValue(checked ? valueFalse : valueTrue)
-				}
-			}
+			root.toggleDataValue()
 		}
 		// If checkable, update 'checked' value so that onCheckedChanged signal is fired.
 		if (checkable && !!_switchItem) {
 			checked = _switchItem.checked
 		}
 		root.clicked()
+	}
+
+	function toggleDataValue() {
+		if (root.dataItem.uid.length > 0) {
+			// Note: this logic only holds so long as checkable is false so we can use
+			// the current unmodified checked state at the point of onClicked.
+			// (dataItem might not be valid until the first write so we can't simply use
+			// the comparison of dataItem.value === valueFalse) and forget invertSourceValue).
+			// Note that a malformed uid will result in it being empty when inspected.
+			if (root.invertSourceValue) {
+				root.dataItem.setValue(checked ? valueTrue : valueFalse)
+			} else {
+				root.dataItem.setValue(checked ? valueFalse : valueTrue)
+			}
+		}
 	}
 
 	// Remove padding around the edges, so that the internal Switch can expand its touch area.
