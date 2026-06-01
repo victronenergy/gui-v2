@@ -40,6 +40,14 @@ CT.SpinBox {
 	onValueChanged: inputArea.setTextFromValue(value)
 	Component.onCompleted: inputArea.setTextFromValue(value)
 
+	property var updateValueTo: function(v, text) {
+		const previousValue = root.value
+		root.value = v
+		if (root.value !== previousValue) {
+			root.valueModified()
+		}
+	}
+
 	contentItem: FocusScope {
 		// needed for QQuickSpinBoxPrivate to read the "text" property of the contentItem
 		// so that it can call the valueFromText() function

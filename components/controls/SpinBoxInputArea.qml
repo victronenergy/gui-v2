@@ -26,14 +26,18 @@ TextInput {
 	// These change the displayed value (which may not yet be accepted), rather than the actual
 	// spinBox value.
 	function increase() {
-		const nextValue = spinBox.valueFromText(text, spinBox.locale) + spinBox.stepSize
+		const currentValue = spinBox.valueFromText(text, spinBox.locale)
+		const stepSize = spinBox.stepSizeForValue ? spinBox.stepSizeForValue(currentValue, true) : spinBox.stepSize
+		const nextValue = currentValue + stepSize
 		if (nextValue > spinBox.to) {
 			root.increaseFailed()
 		}
 		setTextFromValue(Math.min(spinBox.to, nextValue))
 	}
 	function decrease() {
-		const nextValue = spinBox.valueFromText(text, spinBox.locale) - spinBox.stepSize
+		const currentValue = spinBox.valueFromText(text, spinBox.locale)
+		const stepSize = spinBox.stepSizeForValue ? spinBox.stepSizeForValue(currentValue, false) : spinBox.stepSize
+		const nextValue = currentValue - stepSize
 		if (nextValue < spinBox.from) {
 			root.decreaseFailed()
 		}
@@ -50,25 +54,12 @@ TextInput {
 		switch (event.key) {
 		case Qt.Key_Return:
 		case Qt.Key_Enter:
-			// Save the entered text. The text may at this time represent a value outside of the
-			// to/from range, so clamp it here.
-			let v = root.spinBox.valueFromText(text, root.spinBox.locale)
-			if (v < root.spinBox.from) {
-				root.decreaseFailed()
-				v = root.spinBox.from
-			} else if (v > root.spinBox.to) {
-				root.increaseFailed()
-				v = root.spinBox.to
-			}
-
-			// Force-update the displayed text, to guarantee the text is in sync
-			// with the numeric value, even if the value has not changed due to the
-			// user entering an out-of-range value on consecutive attempts.
-			text = root.spinBox.textFromValue(v, root.spinBox.locale)
-			if (v !== spinBox.value) {
-				root.spinBox.value = v
-				root.spinBox.valueModified()
-			}
+			// Save the entered text.
+			let origText = text
+			root.spinBox.updateValueTo(
+				root.spinBox.valueFromText(origText, root.spinBox.locale),
+				origText)
+			text = root.spinBox.textFromValue(root.spinBox.value, root.spinBox.locale)
 			break
 		case Qt.Key_Escape:
 			// Restore the initial value.
@@ -95,6 +86,8 @@ TextInput {
 			// Don't allow left/right keys to move focus away from the text input.
 			event.accepted = cursorPosition >= length
 			return
+		default:
+			break
 		}
 		event.accepted = false
 	}
