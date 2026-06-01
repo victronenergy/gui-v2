@@ -15,7 +15,9 @@ ListText {
 	text: qsTrId("list_generator_control_status")
 	secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
 					   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
-					   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+					   : generatorState.valid && activeCondition.valid
+						 ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+						 : ""
 
 	VeQuickItem {
 		id: activeCondition

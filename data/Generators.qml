@@ -113,7 +113,7 @@ QtObject {
 			//% "Inverter overload condition"
 			return qsTrId("settings_inverter_overload_condition")
 		default:
-			console.warn("Invalid RunningByConditionCode")
+			console.warn("Invalid RunningByConditionCode:", runningBy)
 			return "--"
 		}
 	}
