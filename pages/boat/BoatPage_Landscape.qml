@@ -13,34 +13,42 @@ Boat.Background { // the blue shadows
 	required property bool animationEnabled
 
 	motorDrives: motorDrives
+	gps: _gps
+	isShoreConnected: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+	isBatteryCharging: Global.system.battery.mode === VenusOS.Battery_Mode_Charging
 
-	Boat.BatteryArc { // arc gauge on the far left
-		id: batteryGauge
-
+	Boat.SlotLeftArc {
+		id: slotLeftArc
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		motorDrives: motorDrives
+		gps: _gps
 		animationEnabled: root.animationEnabled
+		isShoreConnected: root.isShoreConnected
 	}
 
-	Boat.BatteryPercentage { // vertical center left
-		id: batteryPercentage
+	Boat.SlotVerticalCenterLeft {
+		id: slotVerticalCenterLeft
 		anchors {
-			left: batteryGauge.left
+			left: slotLeftArc.left
 			leftMargin: Theme.geometry_boatPage_batteryGauge_leftMargin
-			verticalCenter: batteryGauge.verticalCenter
+			verticalCenter: slotLeftArc.verticalCenter
 			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
 		}
 		motorDrives: motorDrives
+		gps: _gps
+		isShoreConnected: root.isShoreConnected
+		isBatteryCharging: root.isBatteryCharging
 	}
 
 	Boat.TimeToGo { // bottom left
 		id: ttg
 
 		anchors {
-			top: batteryPercentage.bottom
+			top: slotVerticalCenterLeft.bottom
 			topMargin: Theme.geometry_boatPage_verticalMargin
 			left: parent.left
 			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
@@ -61,7 +69,7 @@ Boat.Background { // the blue shadows
 		id: consumption
 
 		anchors {
-			top: batteryPercentage.bottom
+			top: slotVerticalCenterLeft.bottom
 			topMargin: Theme.geometry_boatPage_verticalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
@@ -90,39 +98,25 @@ Boat.Background { // the blue shadows
 		gps: _gps // primary data source
 		motorDrives: motorDrives // secondary data source
 		animationEnabled: root.animationEnabled
+		isBatteryCharging: root.isBatteryCharging
 	}
 
-	Boat.ConsumptionGauge { // vertical center right
-		id: consumptionGauge
-
+	Boat.SlotVerticalCenterRight {
+		id: slotVerticalCenterRight
 		anchors {
-			verticalCenter: batteryPercentage.verticalCenter
+			verticalCenter: slotVerticalCenterLeft.verticalCenter
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
-
 		motorDrives: motorDrives
 		gps: _gps
 	}
-
-	/*	Don't display motordrive temperatures for v1. TBD whether we want them for v2.
-	Boat.TemperatureGauges { // bottom right
-		id: temperatureGauges
-
-		anchors {
-			top: batteryTemperature.top
-			right: parent.right
-			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
-		}
-		motorDrive: motorDrives.singleMotorDrive
-	}
-	*/
 
 	Boat.LoadArc { // arc gauge on the far right
 		id: loadArc
 
 		anchors {
-			verticalCenter: batteryGauge.verticalCenter
+			verticalCenter: slotLeftArc.verticalCenter
 			right: parent.right
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
@@ -156,11 +150,25 @@ Boat.Background { // the blue shadows
 		id: _gps
 	}
 
+	Binding {
+		/**
+		 * boatPageActive is true when the boat page is visible and there is a valid GPS or E-Drive.
+		 * This will prevent the screen from going to sleep, allowing the user to continously see the boat page while underway.
+		 */
+		target: Global
+		property: "boatPageActive"
+		value: parent.visible && (_gps.valid || motorDrives.dcConsumption.quotient.valid)
+	}
+
+	Component.onDestruction: {
+		Global.boatPageActive = false
+	}
+
 	states: State {
 		name: "showing3Phases"
 		when: loadArc.showing3Phases
 		PropertyChanges {
-			batteryGauge.anchors.leftMargin: Theme.geometry_page_content_horizontalMargin / 2
+			slotLeftArc.anchors.leftMargin: Theme.geometry_page_content_horizontalMargin / 2
 			loadArc.anchors.rightMargin: Theme.geometry_page_content_horizontalMargin / 2
 		}
 	}
